@@ -4,7 +4,7 @@
 #pragma section-numbers off
 = seL4 Wiki =
 
-This WIKI is for copoeratively developng and sharing documentation on [http://sel4.systems|seL4]
+This WIKI is for copoeratively developng and sharing documentation on [[http://sel4.systems|seL4]]
 
 Interesting starting points:
  * RecentChanges: see where people are currently working
