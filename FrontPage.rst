@@ -7,9 +7,9 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
 
 Useful information about seL4
 
- * FAQ: Frequently Asked Questions
- * seL4Documentation: collaboratively maintained documentation for seL4 and its Libraries
- * Recipes (How do I do X?)
+ * FrequentlyAskedQuestions: editable list of FAQs
+ * SeL4Documentation: collaboratively maintained documentation for seL4 and its Libraries
+ * SeL4Recipes: How to do X with seL4
 
 Interesting starting points:
 
