@@ -168,18 +168,19 @@ The verification sees the entire C code for one particular combination of config
 
 You can see the exact verification config options in [[https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile|l4v/spec/cspec/c/Makefile]]. The machine interface are the functions that correspond to the ones in the Haskell file [[https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs|Hardware.lhs]].
 
-You can further inspect the gory details by looking at the preprocessor output in the file kernel_all.c_pp in the proof build - this is what the prover, the proof engineer, and the compiler see after configuration is done. So a quick way of figuring out if something is in the proof input or not is checking if the contents of that file change if you make a change to the source you're wondering about. You don't need the prover for this, and only parts of the seL4 build environment setup.
+You can further inspect the gory details by looking at the preprocessor output in the file `kernel_all.c_pp` in the proof build - this is what the prover, the proof engineer, and the compiler see after configuration is done. So a quick way of figuring out if something is in the proof input or not is checking if the contents of that file change if you make a change to the source you're wondering about. You don't need the prover for this, and only parts of the seL4 build environment setup.
 
 The top-level proof makes statements about the behaviour of all of the kernel entry points, which we enumerate once manually in the proof. The prover reads in these entry points, and anything that they call must either have a proof or an assumption for it to complete its proof. If anything is missing, the proof fails.
 
-That means all of the C code that is in this kernel_all.c_pp file either:
+That means all of the C code that is in this `kernel_all.c_pp` file either:
 
-has a proof,
-or has an explicit assumption about it,
-or is not part of the kernel (i.e. is never called)
+ * has a proof,
+ * or has an explicit assumption about it,
+ * or is not part of the kernel (i.e. is never called)
+
 The functions with explicit assumptions are the machine interface functions mentioned above (they're usually inline asm) and the functions that are only called by the boot process (usually marked with the BOOT_CODE macro in the source so they're easy to spot).
 
-As an example, the CPU and architecture options mean that everything under src/arch/ia32 is not covered by the proof, but that the files in src/kernel/object are.
+As an example, the CPU and architecture options mean that everything under `src/arch/ia32` is not covered by the proof, but that the files in `src/kernel/object` are.
 
 == What is the seL4 fastpath? ==
 
@@ -187,40 +188,43 @@ The fastpath is an add-on frontend to the kernel which performs the simple cases
 
 Enabling or disabling the fastpath should not have any impact on the kernel behaviour except for performance.
 
-There is a section on the fastpath and its verification in this article. The fastpath discussion starts on page 23.
+There is a section on the fastpath and its verification in [[http://www.ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml|this article]]. The fastpath discussion starts on page 23.
 
 == What can I do with seL4? ==
 
-You can use seL4 for research, education or commerce. Details are specified in the standard open-source licenses that come with the code. Different licenses apply to different parts of the code, but the conditions are designed to ease uptake.
+You can use seL4 for research, education or commerce. Details are specified in the standard open-source [[#lic|licenses]] that come with the code. Different licenses apply to different parts of the code, but the conditions are designed to ease uptake.
 
 == What are the licensing conditions? ==
+<<Anchor(lic)>>
 
-The seL4 kernel is released under GPL Version 2. Userland tools and libraries are mostly under BSD. See the license page for more details.
+The seL4 kernel is released under GPL Version 2. Userland tools and libraries are mostly under BSD. See the [[http://sel4.systems/Info/GettingStarted/license.pml|license page]] for more details.
 
 == How do I contribute to seL4? == 
-See How to Contribute. In brief, seL4 was released under a complicated agreement between the partners who owned the code. A condition of the release is that we track all contributions, and get a signed licence agreement from all contributors.
+See [[http://sel4.systems/Community/Contributing|How to Contribute]]. In brief, seL4 was released under a complicated agreement between the partners who owned the code. A condition of the release is that we track all contributions, and get a signed licence agreement from all contributors.
 
 == How can I build a system with seL4? ==
 Much more is required to build a system on seL4 compared to building on, say Linux. Having decomposed your system into modules, you will need to work out what access each module needs to hardware resources, you will need to build device drivers for the platform you are on (there are a few provided in libplatsupport for supported platforms), and you will have to integrate it into something that can be run.
 
 There are two recommended ways to do this.
 
-CAmKES is the Component Architecture for Micro-Kernel-based Embedded Systems. It provides a language for describing the distribution of resources to components, and the assignment of components to address spaces.
-Build on libsel4utils, which provides useful abstractions like processes, but is generally more low-level.
-For build instructions, and how to get started, see the Download page. Also, UNSW's Advanced Operating Systems course has an extensive project component that builds an OS on top of seL4. If you have access to a Sabre Lite board, you should be able to do the project work yourself as a way of familiarising yourself with seL4.
+ * [[http://sel4.systems/Info/CAmkES|CAmKES]] is the Component Architecture for Micro-Kernel-based Embedded Systems. It provides a language for describing the distribution of resources to components, and the assignment of components to address spaces.
+ * Build on `libsel4utils`, which provides useful abstractions like processes, but is generally more low-level.
+
+For build instructions, and how to get started, see the [[http://sel4.systems/Info/GettingStarted/|Download]] page. Also, UNSW's [[http://cs9242.web.cse.unsw.edu.au/|Advanced Operating Systems course]] has an extensive project component that builds an OS on top of seL4. If you have access to a Sabre Lite board, you should be able to do the project work yourself as a way of familiarising yourself with seL4.
 
 == Where can I learn more? ==
-NICTA's seL4 project and Trustworthy Systems pages contain more technical information about seL4, including links to all peer-reviewed publications. Good starting points are:
+NICTA's [[http://ssrg.nicta.com.au/projects/seL4/|seL4 project]] and [[http://ssrg.nicta.com.au/projects/TS/|Trustworthy Systems]] pages contain more technical information about seL4, including links to all peer-reviewed publications. Good starting points are:
 
-from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?, a 20-year retrospective of L4 microkernels;
-the original 2009 paper describing seL4 and its formal verification;
-a much longer paper detailing the complete verification story of seL4, including the high-level security proofs, binary verification and timeliness analysis. It also contains an analysis of the cost of verification, and how it compares to that of traditionally-engineered systems.
-What's coming up next?
+ * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml|from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?]], a 20-year retrospective of L4 microkernels;
+ * [[http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract|the original 2009 paper]] describing seL4 and its formal verification;
+ * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml|a much longer paper detailing the complete verification story of seL4]], including the high-level security proofs, binary verification and timeliness analysis. It also contains an analysis of the cost of verification, and how it compares to that of traditionally-engineered systems.
+
+== What's coming up next? ==
 We're currently working on a number of things. As we're in a research environment (not a product development environment) we cannot commit to dates, or the order in which any of these will be delivered (or even if they will be released at all).
 
 That being said, we are currently working on and should be able to release soon:
 
-Arm virtualisation support, on the Arndale and Odroid
-A port to the Odroid XU3
-WCET guarantees for the current kernel
-An SMP version of seL4
+ * Arm virtualisation support, on the Arndale and Odroid
+ * A port to the Odroid XU3
+ * WCET guarantees for the current kernel
+ * An SMP version of seL4
