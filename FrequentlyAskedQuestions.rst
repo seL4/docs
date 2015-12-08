@@ -18,7 +18,7 @@ In the model used by L4 microkernels (and seL4 is no exception), an initial user
 
 L4 is a family of very small, high-performance microkernels evolved from the first L4 microkernel developed by Jochen Liedtke in the early '90s. See the [[http://en.wikipedia.org/wiki/L4_microkernel_family|L4 microkernel family]] entry on Wikipedia and the website [[http://l4hq.org/|L4HQ]] for more details.
 
-{{http://sel4.systems/images/familytree.png}}
+{{http://sel4.systems/images/familytree.png||width=500}}
 
 L4 microkenrel family tree. Black arrows indicate code, green arrows ABI inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
 
@@ -31,7 +31,7 @@ Note, however, that the IPC times recorded at L4HQ are the result of micro-optim
 == On what hardware does seL4 run? ==
 
 === What processor architectures are supported? ===
-Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8, A9, A15) and x86 cores. Supported ARM platforms for these are the Freescale i.MX31, OMAP3 BeagleBoard, Exynos Arndale 5250, Odroid-X, Odroid-XU, Inforce IFC6410 and Freescale i.MX6 Sabre Lite. All modern x86 machines are supported.
+Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8, A9, A15) and x86 cores. Supported ARM platforms for these are the Freescale i.MX31, OMAP3 !BeagleBoard, Exynos Arndale 5250, Odroid-X, Odroid-XU, Inforce IFC6410 and Freescale i.MX6 Sabre Lite. All modern x86 machines are supported.
 
 Talk to us if you have funds to support a port to further architectures.
 
