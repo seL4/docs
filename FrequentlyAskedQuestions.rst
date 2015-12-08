@@ -16,14 +16,15 @@ In the model used by L4 microkernels (and seL4 is no exception), an initial user
 
 === What is the L4 microkernel family? ===
 
-L4 is a family of very small, high-performance microkernels evolved from the first L4 microkernel developed by Jochen Liedtke in the early '90s. See the L4 microkernel family entry on Wikipedia and the website L4HQ for more details.
+L4 is a family of very small, high-performance microkernels evolved from the first L4 microkernel developed by Jochen Liedtke in the early '90s. See the [[http://en.wikipedia.org/wiki/L4_microkernel_family|L4 microkernel family]] entry on Wikipedia and the website [[http://l4hq.org/|L4HQ]] for more details.
 
-L4 microkernel family tree
+{{http://sel4.systems/images/familytree.png}}
+
 L4 microkenrel family tree. Black arrows indicate code, green arrows ABI inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
 
 === How does seL4's performance compare to other microkernels? ===
 
-To the best of our knowledge, seL4 is the world's fastest microkernel on the supported processors, in terms of the usual ping-pong metric: the cost of a cross-address-space message-passing (IPC) operation. For more information, check the performance page on L4HQ.
+To the best of our knowledge, seL4 is the world's fastest microkernel on the supported processors, in terms of the usual ping-pong metric: the cost of a cross-address-space message-passing (IPC) operation. For more information, check the [[http://l4hq.org/docs/performance.php|performance page on L4HQ]].
 
 Note, however, that the IPC times recorded at L4HQ are the result of micro-optimisations which are not yet in the public version. The released kernel is about 10–20% slower (which still makes it faster than any other performance figures we're aware of). We are planning to push those optimisations once they mature.
 
@@ -54,7 +55,7 @@ On x86, seL4 can be configured to support multiple CPUs. Current multicore suppo
 
 === Can I run seL4 on an MMU-less microcontroller? ===
 
-Using seL4 without a full memory-management unit (MMU) makes little sense, as its resource management is fundamentally based on virtual memory. For lower-end processors that only have a memory-protection unit (MPU) or no memory protection at all, you should look at NICTA's eChronos real-time operating system (RTOS), which is designed for such processors and is also undergoing formal verification.
+Using seL4 without a full memory-management unit (MMU) makes little sense, as its resource management is fundamentally based on virtual memory. For lower-end processors that only have a memory-protection unit (MPU) or no memory protection at all, you should look at NICTA's [[http://ssrg.nicta.com.au/projects/TS/echronos/|eChronos real-time operating system]] (RTOS), which is designed for such processors and is also undergoing formal verification.
 
 === What are the intended applications of seL4? ===
 
@@ -87,7 +88,7 @@ seL4 is the world’s only hypervisor with a sound worst-case execution-time (WC
 
 That said, the analysis was performed on an earlier version of the kernel, not the presently released one. We are currently re-doing that analysis. This will require some updates to the kernel to reduce interrupt latencies where they have crept up due to recent changes.
 
-More importantly, we’re working on improvements for enabling the kind of temporal isolation that’s required for supporting mixed-criticality scheduling. That will take 6-12 months to make it into the release, by which time it’ll have been comprehensively tested and evaluated, among others in the SMACCM project
+More importantly, we’re working on improvements for enabling the kind of temporal isolation that’s required for supporting mixed-criticality scheduling. That will take 6-12 months to make it into the release, by which time it’ll have been comprehensively tested and evaluated, among others in the [[http://ssrg.nicta.com.au/projects/TS/SMACCM/|SMACCM]] project
 
 I'm actually not convinced that running an RTOS in a VM is necessarily the way to go, although that somewhat depends on your circumstances. In general you’re better off running RT apps in a native seL4 environment.
 
@@ -97,7 +98,7 @@ Formal software verification is the activity of using mathematical proof to show
 
 There are two broad approached to formal verification: fully automated methods such as model checking that work on limited systems and properties, and interactive mathematical proof which requires manual effort.
 
-The seL4 verification uses formal mathematical proof in the theorem prover Isabelle/HOL. This theorem prover is interactive, but offers a comparatively high degree of automation. It also offers a very high degree of assurance that the resulting proof is correct.
+The seL4 verification uses formal mathematical proof in the theorem prover [[http://isabelle.in.tum.de/|Isabelle/HOL]]. This theorem prover is interactive, but offers a comparatively high degree of automation. It also offers a very high degree of assurance that the resulting proof is correct.
 
 === What does seL4's formal verification mean? ===
 
@@ -133,7 +134,7 @@ However, if used correctly, seL4 provides the system architect and user with str
 
 The brief version is: we assume that in-kernel assembly code is correct, hardware behaves correctly, in-kernel hardware management (TLB and caches) is correct, and boot code is correct. The hardware model assumes DMA to be off or to be trusted. The security proofs additionally give a list of conditions how the system is configured.
 
-For a more in-depth description, see the proof and assumptions page.
+For a more in-depth description, see the [[http://sel4.systems/Info/FAQ/proof.pml|proof and assumptions page]].
 
 === How do I leverage seL4's formal proofs? ===
 
@@ -145,7 +146,7 @@ If you are interested in connecting to the seL4 proofs, let us know, we may be a
 
 === Have OS kernels not been verified before? ===
 
-OS verification goes back at least 40 years to the mid 1970s, so there is plenty of previous work on verified OS kernels. See also a comprehensive overview paper on OS verification from 2008 as well as the related work section of the seL4 overview paper from 2014.
+OS verification goes back at least 40 years to the mid 1970s, so there is plenty of previous work on verified OS kernels. See also a [[http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract|comprehensive overview]] paper on OS verification from 2008 as well as the related work section of the [[http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract|seL4 overview paper]] from 2014.
 
 The new and exciting thing about seL4 is that is has a) strong properties such as functional correctness, integrity, and confidentiality, and b) has these properties formally verified directly to the code — initially to C, now also to binary. In addition, the seL4 proofs are machine-checked, not just based on pen and paper.
 
@@ -155,16 +156,17 @@ Some of these previous verifications were impressive achievements that laid much
 
 === When and how often does seL4 get updated and re-proved? ===
 
-We update the seL4 proofs semi-continously, usually whenever something is pulled into the master branch in the seL4 github repository. You can see the proof updates coming through on https://github.com/seL4/l4v/commits/master and you can see the kernel revision the proof currently refers to in https://github.com/seL4/verification-manifest/blob/master/default.xml. This is usually the head of the master branch.
+We update the seL4 proofs semi-continously, usually whenever something is pulled into the master branch in the seL4 github repository. You can see the proof updates coming through on [[https://github.com/seL4/l4v/commits/master]] and you can see the kernel revision the proof currently refers to in [[https://github.com/seL4/verification-manifest/blob/master/default.xml]]. This is usually the head of the master branch.
 
 The rough protocol for updates in the seL4 master branch is that, together with the kernel team, the verification team picks the next feature(s), isolates them on a separate small internal feature branch, starts verifying that, and when done, merges both into the proof repository and seL4 master. Occasionally, something new gets directly into master, is verified there and then pulled through to experimental.
 
 The frequency depends on what it is and who has time. Larger features take longer to write and prove, get pushed when they are done, and get selected by importance for the projects we're running. Not many of these happen per year unless there is specific funding for a specific feature. Small updates take a day to a few weeks and we often do them on the side. There's no specific schedule at the moment.
 
-How do I tell which code in github is covered by the proof an which isn't?
+=== How do I tell which code in github is covered by the proof an which isn't? ===
+
 The verification sees the entire C code for one particular combination of configuration options. Currently this is the imx31 platform, arm1136jf-s CPU, ARMv6 architecture, all other config options unset (in particular DEBUG, PROFILING, etc). Excluded from this C code is the machine interface and boot code, their behavior is an explicit assumption to the proof.
 
-You can see the exact verification config options in l4v/spec/cspec/c/Makefile. The machine interface are the functions that correspond to the ones in the Haskell file Hardware.lhs.
+You can see the exact verification config options in [[https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile|l4v/spec/cspec/c/Makefile]]. The machine interface are the functions that correspond to the ones in the Haskell file [[https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs|Hardware.lhs]].
 
 You can further inspect the gory details by looking at the preprocessor output in the file kernel_all.c_pp in the proof build - this is what the prover, the proof engineer, and the compiler see after configuration is done. So a quick way of figuring out if something is in the proof input or not is checking if the contents of that file change if you make a change to the source you're wondering about. You don't need the prover for this, and only parts of the seL4 build environment setup.
 
