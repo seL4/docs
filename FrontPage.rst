@@ -6,10 +6,20 @@
 This WIKI is for cooperatively developing and sharing documentation on [[http://sel4.systems|seL4]]
 
 Useful information about seL4
-
  * FrequentlyAskedQuestions: editable list of FAQs
- * SeL4Documentation: collaboratively maintained documentation for seL4 and its Libraries
  * SeL4Recipes: How to do X with seL4
+
+seL4 Documentation
+ * PreRequisites
+ * DownloadingAndRunning
+ * ApiDocumentation 
+ * SeL4Libraries
+
+seL4 Releases
+ * CurrentRelease
+ * ReleaseNotes
+ * ReleaseProcess
+
 
 Interesting starting points:
 
