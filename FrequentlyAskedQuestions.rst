@@ -1,10 +1,12 @@
 = Frequently Asked Questions =
 
+<<TableOfContents()>>
+
 == What is seL4? ==
 
 seL4 is the most advanced member of the L4 microkernel family, notable for its comprehensive formal verification, which sets it apart from any other operating system. seL4 achieves this without compromising performance.
 
-== What is a microkernel? ==
+=== What is a microkernel? ===
 
 A microkernel is the minimal core of an operating system (OS). It presents a very small subset of what is generally considered an operating system today. The definition of what makes up a microkernel is given by Liedtke [SOSP'95]: A concept is tolerated inside the microkernel only if moving it outside the kernel, i.e., permitting competing implementations, would prevent the implementation of the system's required functionality.
 
@@ -12,14 +14,14 @@ A microkernel therefore does not provide high-level abstractions over the hardwa
 
 In the model used by L4 microkernels (and seL4 is no exception), an initial user-level task (the root task) is given full rights to all resources left over once the kernel has booted up (this typically includes physical memory, IO ports on x86, and interrupts). It is up to this root task to set up other tasks, and to grant rights to those other tasks in order to build a complete system. In seL4, like other third-generation microkernels, such access rights are conferred by capabilities (unforgeable tokens representing privileges) and are fully delegatable.
 
-== What is the L4 microkernel family? ==
+=== What is the L4 microkernel family? ===
 
 L4 is a family of very small, high-performance microkernels evolved from the first L4 microkernel developed by Jochen Liedtke in the early '90s. See the L4 microkernel family entry on Wikipedia and the website L4HQ for more details.
 
 L4 microkernel family tree
 L4 microkenrel family tree. Black arrows indicate code, green arrows ABI inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
 
-== How does seL4's performance compare to other microkernels? ==
+=== How does seL4's performance compare to other microkernels? ===
 
 To the best of our knowledge, seL4 is the world's fastest microkernel on the supported processors, in terms of the usual ping-pong metric: the cost of a cross-address-space message-passing (IPC) operation. For more information, check the performance page on L4HQ.
 
@@ -27,18 +29,18 @@ Note, however, that the IPC times recorded at L4HQ are the result of micro-optim
 
 == On what hardware does seL4 run? ==
 
-== What processor architectures are supported? ==
+=== What processor architectures are supported? ===
 Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8, A9, A15) and x86 cores. Supported ARM platforms for these are the Freescale i.MX31, OMAP3 BeagleBoard, Exynos Arndale 5250, Odroid-X, Odroid-XU, Inforce IFC6410 and Freescale i.MX6 Sabre Lite. All modern x86 machines are supported.
 
 Talk to us if you have funds to support a port to further architectures.
 
-== What devices does seL4 support? ==
+=== What devices does seL4 support? ===
 
 seL4, like any real microkernel, runs all device drivers in user mode, device support is therefore not the kernel's problem. The exceptions are a timer driver, which seL4 needs to enforce time-slice preemption, and the interrupt controller access to which seL4 mediates. When compiled with debugging enabled, the kernel also contains a serial driver.
 
 Other than that, device support is the user's problem. seL4 provides the mechanisms for user-mode device drivers, especially the ability to map device memory to drivers and forward IRQs as (asynchronous) messages.
 
-== What about DMA? ==
+=== What about DMA? ===
 
 The formal verification of seL4 on the ARM platform assumes that the MMU has complete control over memory, which means the proof assumes that DMA is off. DMA devices can in theory overwrite any memory on the machine, including kernel data and code.
 
@@ -46,40 +48,40 @@ You can still use DMA devices safely, but you have to separately assure that the
 
 The unverified x86 version of seL4 supports VT-d extensions on the experimental branch. The VT-d extensions allow the kernel to restrict DMA and thereby enable DMA devices with untrusted user-level drivers. We are currently working on providing similar verified support for A15 ARM boards with SystemMMU.
 
-== Does seL4 support multicore? ==
+=== Does seL4 support multicore? ===
 
 On x86, seL4 can be configured to support multiple CPUs. Current multicore support is through a multikernel configuration where each booted CPU is given a portion of available memory. Cores can then communicate via limited shared memory and kernel supported IPIs. This configuration is highly experimental at the moment.
 
-== Can I run seL4 on an MMU-less microcontroller? ==
+=== Can I run seL4 on an MMU-less microcontroller? ===
 
 Using seL4 without a full memory-management unit (MMU) makes little sense, as its resource management is fundamentally based on virtual memory. For lower-end processors that only have a memory-protection unit (MPU) or no memory protection at all, you should look at NICTA's eChronos real-time operating system (RTOS), which is designed for such processors and is also undergoing formal verification.
 
-== What are the intended applications of seL4? ==
+=== What are the intended applications of seL4? ===
 
 seL4 is a general-purpose microkernel, so the answer is all of them. The main target are embedded systems with security or reliability requirements, but that is not exclusive. Using a microkernel like seL4 makes sense on platforms that provide virtual memory protection and for application areas that need isolation between different parts of the software. Immediate application areas are in the financial, medical, automotive, avionics and defence sectors.
 
 == How good is seL4 at supporting virtual machines? ==
 
-== Can I run Linux on top of seL4? ==
+=== Can I run Linux on top of seL4? ===
 
 Yes, seL4 can run Linux in a virtual machine. At present this is supported on x86 processors only and seL4 requires a machine that supports Intel VT-x with EPT. Additionally the current VMM requires a HPET that supports MSI delivery. We are working on supporting virtualised Linux on ARM processors with virtualisation extensions (presently A15/A7 cores), a release should not be far off.
 
 To support virtual machines, seL4 itself runs as a hypervisor (x86 Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to a virtual machine monitor (VMM) which performs the necessary emulations. The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).
 
-== How does seL4+VMM compare with OKL4 or Codezero? ==
+=== How does seL4+VMM compare with OKL4 or Codezero? ===
 That’s a bit difficult to answer, given that of the three, only seL4 is open-source.
 
 Codezero (when it was still open source) was a clone of the then OKL4 microkernel, without any of the optimisations that make L4 microkernels fast.
 
 The OKL4 Microvisor has a different API, especially designed to support efficient para-virtualisation. It has fairly mature userland, especially a driver framework.
 
-== Does seL4 support multiple virtual machines at once? ==
+=== Does seL4 support multiple virtual machines at once? ===
 
 seL4 supports (hardware-supported) full virtualisation. The userland VMM required to support VMs hasn’t yet been released for ARM, but it works pretty well internally and will be released soon. We have no plans to support para-virtualised VMs.
 
 Yes, multiple VMs are supported, including heterogeneous ones.
 
-== Can I run a real-time OS in a virtual machine on seL4? ==
+=== Can I run a real-time OS in a virtual machine on seL4? ===
 
 seL4 is the world’s only hypervisor with a sound worst-case execution-time (WCET) analysis, and as such the only one that can give you actual real-time guarantees, no matter what others may be claiming. (If someone else tells you they can make such guarantees, ask them to make them in public so I can call out their bullshit.)
 
@@ -97,7 +99,7 @@ There are two broad approached to formal verification: fully automated methods s
 
 The seL4 verification uses formal mathematical proof in the theorem prover Isabelle/HOL. This theorem prover is interactive, but offers a comparatively high degree of automation. It also offers a very high degree of assurance that the resulting proof is correct.
 
-== What does seL4's formal verification mean? ==
+=== What does seL4's formal verification mean? ===
 
 Unique about seL4 is its unprecedented degree of assurance, achieved through formal verification. Specifically, the ARM version of seL4 is the first (and still only) general-purpose OS kernel with a full code-level functional correctness proof, meaning a mathematical proof that the implementation (written in C) adheres to its specification. In short, the implementation is proved to be bug-free (see below). This also implies a number of other properties, such as freedom from buffer overflows, null pointer exceptions, use-after-free, etc.
 
@@ -107,7 +109,7 @@ Furthermore, there are proofs that seL4's specification, if used properly, will 
 
 Finally, seL4 is the first (and still only) protected-mode OS kernel with a sound and complete timeliness analysis. Among others this means that it has provable upper bounds on interrupt latencies (as well as latencies of any other kernel operations). It is therefore the only kernel with memory protection that can give you hard real-time guarantees.
 
-== Does seL4 have zero bugs? ==
+=== Does seL4 have zero bugs? ===
 
 The functional correctness proof states that, if the proof assumptions are met, the seL4 kernel implementation has no deviations from its specification. The security proofs state that if the kernel is configured according to the proof assumptions and further hardware assumptions are met, this specification (and with it the seL4 kernel implementation) enforces a number of strong security properties: integrity, confidentiality, and availability.
 
@@ -115,25 +117,25 @@ There may still be unexpected features in the specification and one or more of t
 
 So the answer to the question depends on what you understand a bug to be. In the understanding of formal software verification (code implements specification), the answer is yes. In the understanding of a general software user, the answer is potentially, because there may still be hardware bugs or proof assumptions unmet. For high assurance systems, this is not a problem, because analysing hardware and proof assumptions is much easier than analysing a large software system, the same hardware, and test assumptions.
 
-== Is seL4 proven secure? ==
+=== Is seL4 proven secure? ===
 
 This depends on what you mean by secure. In the interpretation of classic operating system security, the answer is yes. In particular, seL4 has been proved to enforce specific security properties, namely integrity and confidentiality, under certain assumptions. These proofs are very strong evidence about seL4's utility for building secure systems.
 
 Some of the proof assumptions may appear restrictive, for instance use of DMA is excluded, or only allowed for trusted drivers that have to be formally verified by the user. While these restrictions are common for high-assurance systems, we are working to reduce them, for instance through the use of IOMMUs on x86 or System MMUs on ARM.
 
-== If I run seL4, is my system secure? ==
+=== If I run seL4, is my system secure? ===
 
 Not automatically, no. Security is a question that spans the whole system, including its human parts. An OS kernel, verified or not, does not automatically make a system secure. In fact, any system, no matter how secure, can be used in insecure ways.
 
 However, if used correctly, seL4 provides the system architect and user with strong mechanisms to implement security policies, backed by specific security theorems.
 
-== What are the proof assumptions? ==
+=== What are the proof assumptions? ===
 
 The brief version is: we assume that in-kernel assembly code is correct, hardware behaves correctly, in-kernel hardware management (TLB and caches) is correct, and boot code is correct. The hardware model assumes DMA to be off or to be trusted. The security proofs additionally give a list of conditions how the system is configured.
 
 For a more in-depth description, see the proof and assumptions page.
 
-== How do I leverage seL4's formal proofs? ==
+=== How do I leverage seL4's formal proofs? ===
 
 The seL4 proofs are just the first step in building secure systems. They provide the tools that application and system developers need for providing evidence that their systems are secure.
 
@@ -141,7 +143,7 @@ For instance, one can use the functional correctness proof to show that an appli
 
 If you are interested in connecting to the seL4 proofs, let us know, we may be able to offer assistance.
 
-== Have OS kernels not been verified before? ==
+=== Have OS kernels not been verified before? ===
 
 OS verification goes back at least 40 years to the mid 1970s, so there is plenty of previous work on verified OS kernels. See also a comprehensive overview paper on OS verification from 2008 as well as the related work section of the seL4 overview paper from 2014.
 
@@ -151,7 +153,7 @@ Previous verifications have either not completed their proofs, have targeted mor
 
 Some of these previous verifications were impressive achievements that laid much of the groundwork without which the seL4 proofs would not have been achieved. It is only in the last 5-10 years that code verification and theorem proving technology has advanced enough to make large code-level proofs feasible.
 
-== When and how often does seL4 get updated and re-proved? ==
+=== When and how often does seL4 get updated and re-proved? ===
 
 We update the seL4 proofs semi-continously, usually whenever something is pulled into the master branch in the seL4 github repository. You can see the proof updates coming through on https://github.com/seL4/l4v/commits/master and you can see the kernel revision the proof currently refers to in https://github.com/seL4/verification-manifest/blob/master/default.xml. This is usually the head of the master branch.
 
