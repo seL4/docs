@@ -18,7 +18,6 @@ Questions and Recipes
 seL4 Releases
  * CurrentRelease
  * ReleaseNotes
+ * ReleaseProcess
 
 OrigFrontPage
-
- * ReleaseProcess
