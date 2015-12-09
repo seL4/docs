@@ -38,3 +38,7 @@ Supported projects are:
 == Upgrading ==
 
 We recommend you develop on a specific version of the kernel, rather than the bleeding edge which is the tip of master. Each MAJOR.MINOR release has release notes which describe changes and specific upgrade notes, posted under [[ReleaseNotes|here]].
+
+== Legacy support ==
+
+We only currently provide bug fixes and support for the latest version of the kernel and latest version of libraries.
