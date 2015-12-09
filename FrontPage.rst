@@ -7,7 +7,7 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
 
 seL4 Documentation
  * PreRequisites
- * [[Getting started|GettingStarted]]
+ * [[GettingStarted|Getting started]]
  * [[Testing]]
  * ApiDocumentation 
  * SeL4Libraries
