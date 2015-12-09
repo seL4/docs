@@ -32,8 +32,8 @@ For example, for the 2.0.0 release a 2.0.x.xml was added to the seL4 test reposi
 
 Supported projects are:
 
-* [[https://github.com/seL4/sel4test-manifest|sel4test]]
-* [[https://github.com/seL4/verification-manifest|verification]]
+ * [[https://github.com/seL4/sel4test-manifest|sel4test]]
+ * [[https://github.com/seL4/verification-manifest|verification]]
 
 == Upgrading ==
 
