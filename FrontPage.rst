@@ -16,8 +16,8 @@ Questions and Recipes
  * SeL4Recipes: How to do X with seL4
 
 seL4 Releases
- * CurrentRelease
- * ReleaseNotes
- * ReleaseProcess
+ * [[https://github.com/seL4/seL4/tree/2.0.0|Current release]]
+ * [[ReleaseNotes|Release notes]]
+ * [[ReleaseProcess|Release process]]
 
 OrigFrontPage
