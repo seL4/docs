@@ -13,8 +13,8 @@ seL4 Documentation
  * SeL4Libraries
 
 Questions and Recipes
- * FrequentlyAskedQuestions: editable list of FAQs
- * SeL4Recipes: How to do X with seL4
+ * [[FrequentlyAskedQuestions|FAQ]]: editable list of FAQs
+ * [[seL4 Recipes]]: How to do X with seL4
 
 seL4 Releases
  * [[https://github.com/seL4/seL4/tree/2.0.0|Current release]]
