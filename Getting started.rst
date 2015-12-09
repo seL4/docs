@@ -1,6 +1,6 @@
 = Getting started =
 
-== Setting up your machine == 
+== Setting up your machine ==
 
 TODO
 
