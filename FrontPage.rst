@@ -7,12 +7,12 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
 
 seL4 Documentation
 
- * PreRequisites
  * [[Getting started]]
  * [[Testing]]
  * ApiDocumentation
- * SeL4Libraries
+ * [[SeL4Libraries|seL4 libraries]]
  * [[Hardware|Hardware Support]]
+ * [[Debugging guide]]
 
 Questions and Recipes
 
