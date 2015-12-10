@@ -1,5 +1,5 @@
 = Supported Hardware Platforms =
-General info on ARM platforms
+[[Hardware/General-ARM|General info on ARM platforms]]
 
 Board-specific notes:
 
