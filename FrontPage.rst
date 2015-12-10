@@ -6,17 +6,21 @@
 This WIKI is for cooperatively developing and sharing documentation on [[http://sel4.systems|seL4]]
 
 seL4 Documentation
+
  * PreRequisites
  * [[Getting started]]
  * [[Testing]]
- * ApiDocumentation 
+ * ApiDocumentation
  * SeL4Libraries
+ * [[Hardware|Hardware Support]]
 
 Questions and Recipes
+
  * [[FrequentlyAskedQuestions|FAQ]]: editable list of FAQs
  * [[seL4 Recipes]]: How to do X with seL4
 
 seL4 Releases
+
  * [[https://github.com/seL4/seL4/tree/2.0.0|Current release]]
  * [[ReleaseNotes|Release notes]]
  * [[ReleaseProcess|Release process]]
