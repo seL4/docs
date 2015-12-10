@@ -62,25 +62,18 @@ sudo usermod -G dialout -a your_login_name
 Now Minicom should connect to what it thinks is a 'modem', and then give you a good old console to work with. You are now in the bootloader, U-boot, of the BeagleBoard. You can type commands here and it'll display the results.
 
 Some quick useful commands:
+||<tablewidth="600px">'''Command'''||'''Description'''||
+||help ||display list of commands ||
+||printenv ||lists defined environment variables ||
+||mmc init ||initialise mmc (to read the the SD card) ||
+||mmcinfo ||display current SD card info ||
+||fatls mmc 0 ||display list of files on SD card 0 ||
+||fatload ||load script/image into some RAM address to be run ||
+||run ||run scripts ||
+||bootelf ||boot into en ELF image ||
 
-||<tablewidth="200px"> || ||
-|| || ||
-|| || ||
-|| || ||
-|| || ||
-|| || ||
-|| || ||
-|| || ||
 
 
- help::  display list of commands
- printenv::  lists defined environment variables
- mmc init::  initialise mmc (to read the the SD card)
- mmcinfo::  display current SD card info
- fatls mmc 0::  display list of files on SD card 0
- fatload:: load script/image into some RAM address to be     run
- run:: run scripts
- bootelf:: boot into en ELF image
 
 == Running seL4test ==
 Get the sel4test-manifest repo using the instructions at [[https://sel4.systems/Info/Hardware/home.pml|Download]]
