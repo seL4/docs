@@ -63,6 +63,16 @@ Now Minicom should connect to what it thinks is a 'modem', and then give you a g
 
 Some quick useful commands:
 
+||<tablewidth="200px"> || ||
+|| || ||
+|| || ||
+|| || ||
+|| || ||
+|| || ||
+|| || ||
+|| || ||
+
+
  help::  display list of commands
  printenv::  lists defined environment variables
  mmc init::  initialise mmc (to read the the SD card)
