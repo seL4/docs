@@ -5,6 +5,6 @@
 == Board-specific notes: ==
  * [[Hardware/sabreLite|Sabre Lite (i.mx6)]]
  * [[Hardware/odriod-XU|Odriod-XU (Exynos5)]]
- * !BeagleBoard (OMAP 3)
- * Beaglebone Black (AM335x Cortex A8)
- * Inforce IFC6410 (krait)
+ * [[Hardware/BeagleBoard|BeagleBoard (OMAP 3)]]
+ * [[Hardware/Beaglebone|Beaglebone Black (AM335x Cortex A8)]]
+ * [[IF6410|Inforce IFC6410 (krait)]]
