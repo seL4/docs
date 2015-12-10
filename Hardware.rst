@@ -3,7 +3,7 @@
 
 Board-specific notes:
 
- * Sabre Lite (i.mx6)
+ * [[Hardware/sabreLite|Sabre Lite (i.mx6)]]
  * Odriod-XU (Exynos5)
  * !BeagleBoard (OMAP 3)
  * Beaglebone Black (AM335x Cortex A8)
