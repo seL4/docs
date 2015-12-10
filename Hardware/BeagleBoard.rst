@@ -93,8 +93,7 @@ Now, the ELF image we boot into is the sel4test-image-arm file. Pull out the SD 
 
 Reset the BeagleBoard by pressing the '''S2''' (reset) button.
 
-To run the image:
-
+=== To run the image: ===
 {{{
 mmc init
 mmcinfo
