@@ -1,6 +1,7 @@
 = Supported Hardware Platforms =
 [[Hardware/General-ARM|General info on ARM platforms]]
 
+
 == Board-specific notes: ==
  * [[Hardware/sabreLite|Sabre Lite (i.mx6)]]
  * Odriod-XU (Exynos5)
