@@ -36,7 +36,7 @@ In either case, this will take you to a configuration menu.
  1. Save setup as ttyUSB0 or ttyS0
  1. Exit Minicom
 
-You can now connect to the BeagleBoard using Minicom:
+You can now connect to the !BeagleBoard using Minicom:
 
 {{{
 minicom ttyUSB0
@@ -62,7 +62,7 @@ sudo usermod -G dialout -a your_login_name
 Now Minicom should connect to what it thinks is a 'modem', and then give you a good old console to work with. You are now in the bootloader, U-boot, of the BeagleBoard. You can type commands here and it'll display the results.
 
 Some quick useful commands:
-||<tablewidth="600px">'''Command'''||'''Description'''||
+||<tablewidth="600px">'''Command''' ||'''Description''' ||
 ||help ||display list of commands ||
 ||printenv ||lists defined environment variables ||
 ||mmc init ||initialise mmc (to read the the SD card) ||
