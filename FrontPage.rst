@@ -13,6 +13,7 @@ seL4 Documentation
  * [[SeL4Libraries|seL4 libraries]]
  * [[Hardware|Hardware Support]]
  * [[Debugging guide]]
+ * [[Benchmarking guide]]
 
 Questions and Recipes
 
