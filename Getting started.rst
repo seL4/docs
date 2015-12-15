@@ -15,13 +15,15 @@
   1. [[#Using_repo|Using repo]]
 
  1. [[#Build_and_run_seL4_test|Build and run seL4 test]]
-  1. [[#Project Layout|Project Layout]]
+  1. [[#Project_Layout|Project Layout]]
 
-  1. [[#Build ia32|Build ia32]]
+  1. [[#Build_ia32|Build ia32]]
 
-  1. [[#Simulate ia32|Simulate ia32]]
+  1. [[#Simulate_ia32|Simulate ia32]]
 
-  1. [[#Useful configuration options|Useful configuration options]]
+  1. [[#Useful_configuration_options|Useful configuration options]]
+
+ 1. [[#Try_the_seL4_tutorials|Try the seL4 tutorials]]
 
 = Getting Started =
 == Code ==
