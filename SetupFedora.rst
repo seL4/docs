@@ -7,14 +7,10 @@ Follow the instructions in All [[#allrpm|RPM-Based]] Variants then the ones for 
  * [[#centos|CentOS]]
 
 
-
-== All RPM-Based Systems ==
-
 <<Anchor(allrpm)>>
-
-
+== All RPM-Based Systems ==
 === The Basics ===
-To get a usable build system, install the Development Tools group, which, ncurses-devel and the python-tempita templating library. You can also install ccache to speed second and subsequent compialtions.
+To get a usable build system, install the Development Tools group, '''which, ncurses-devel''' and the '''python-tempita''' templating library. You can also install '''ccache''' to speed second and subsequent compialtions.
 
 {{{
   sudo yum groupinstall 'Development Tools'
@@ -36,21 +32,17 @@ You can get most of them from the repositories; some Haskell and python librarie
   sudo pip install pyelftools jinja2 ply
 }}}
 
-== Fedora ==
-
 <<Anchor(fedora)>>
-
-To build for any of the ARM targets you need an arm cross compiler; to run on the simulator you need qemu
+== Fedora ==
+To build for any of the ARM targets you need an arm cross compiler; to run on the simulator you need '''qemu'''
 
 {{{
   yum install 'arm-none-*' qemu
 }}}
 
-== CentOS ==
-
 <<Anchor(centos)>>
-
-CentOS has no pre-built arm toolchain or qemu. You will have to get cross compilers from Mentor Graphics. Look for arm-none-eabi-gcc.
+== CentOS ==
+CentOS has no pre-built arm toolchain or qemu. You will have to get cross compilers from [[https://www.mentor.com/embedded-software/sourcery-tools/sourcery-codebench/editions/lite-edition/|Mentor Graphics]]. Look for arm-none-eabi-gcc.
 
 CentOS also does not prepackage qemu. You will have to build it from source.
 
