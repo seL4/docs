@@ -6,6 +6,7 @@ Make sure that you already have the tools to build seL4 ([[Getting started#Setti
 Install GHC and packages MissingH, data-ordlist and split (installable from cabal):
 
 {{{
+test
 }}}
 Cabal packages get installed under the current user, so each user that wants to build the VM must run the cabal steps
 
