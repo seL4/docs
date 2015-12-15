@@ -1,11 +1,20 @@
+ 1.  [[#Lnk]]
+ 1.  [[#Lnk]]
+  1.  [[#Lnk]]
+  1.  [[#Lnk]]
+
 = Getting Started =
 == Code ==
 All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
 
 There are several repositories; the most interesting ones are the project repositories (whose names end in -manifest) and these two:
 
- * [[https://github.com/seL4/l4v|l4v]] the seL4 proofs
- * [[https://github.com/seL4/seL4|seL4]] the seL4 kernel
+ *
+ [[https://github.com/seL4/l4v|l4v]] the seL4 proofs
+
+ *
+ [[https://github.com/seL4/seL4|seL4]] the seL4 kernel
+
 
 === seL4 projects ===
 The seL4 kernel is usually built as part of project. Each project has a wiki entry associated with it that gives more information. The information on this page is common to all of them.
@@ -14,11 +23,21 @@ We modelled the seL4 development process on the [[https://source.android.com/sou
 
 The available projects so far are:
 
- * [[https://github.com/seL4/verification-manifest|verification]], the seL4 proofs.
- * [[https://github.com/seL4/sel4test-manifest|seL4test]], a test suite for seL4, including a Library OS layer.
- * [[https://github.com/seL4/camkes-manifest|CAmkES]], a component architecture for embedded systems based on seL4. See the CAmkES pages for more documentation about CAmkES.
- * [[https://github.com/seL4/camkes-vm-manifest|VMM]] a componentised virtual machine monitor for ia32 platforms using Intel VT-X and VT-D extensions.
- * [[https://github.com/seL4/refos-manifest|RefOS]], a reference example of how one might build a multi-server operating system on top of seL4. It was built as a student project.
+ *
+ [[https://github.com/seL4/verification-manifest|verification]], the seL4 proofs.
+
+ *
+ [[https://github.com/seL4/sel4test-manifest|seL4test]], a test suite for seL4, including a Library OS layer.
+
+ *
+ [[https://github.com/seL4/camkes-manifest|CAmkES]], a component architecture for embedded systems based on seL4. See the CAmkES pages for more documentation about CAmkES.
+
+ *
+ [[https://github.com/seL4/camkes-vm-manifest|VMM]] a componentised virtual machine monitor for ia32 platforms using Intel VT-X and VT-D extensions.
+
+ *
+ [[https://github.com/seL4/refos-manifest|RefOS]], a reference example of how one might build a multi-server operating system on top of seL4. It was built as a student project.
+
 
 Other projects may be added later.
 
@@ -30,15 +49,33 @@ Read the [[Hardware]]  pages for special instructions for particular hardware pl
  * Intel platforms
   * A PC99-style Intel Architecture 32-bit x86 (ia32)
   * There is also experimental support for the 64-bit Intel x86_64 architecture.
+
  * ARM platforms
-  * The [[http://www.arndaleboard.org/wiki/index.php/Main_Page|Arndale]] dual core A15 ARM development board
-  * The [[http://beagleboard.org/beagleboard|Beagleboard]], Omap 3530
-  * The [[http://www.inforcelive.com/index.php?route=product/product&product_id=53|Inforce IFC6410]] development board, running a Qualcomm Krait processor that is like an A15.
-  * The [[http://www.kmckk.com/eng/kzm.html|KZM-ARM11-01]]. The kernel for this board is the one that is formally verified.
-  * The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947|Odroid-X]] Exynos4412 board
-  * The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620|Odroid-XU]] Exynos 5 board
-  * The [[https://boundarydevices.com/product/sabre-lite-imx6-sbc/|Sabre Lite]] i.mx6 board.
-  * The [[http://beagleboard.org/black|Beaglebone Black]] is a community-supported port.
+  *
+  The [[http://www.arndaleboard.org/wiki/index.php/Main_Page|Arndale]] dual core A15 ARM development board
+
+  *
+  The [[http://beagleboard.org/beagleboard|Beagleboard]], Omap 3530
+
+  *
+  The [[http://www.inforcelive.com/index.php?route=product/product&product_id=53|Inforce IFC6410]] development board, running a Qualcomm Krait processor that is like an A15.
+
+  *
+  The [[http://www.kmckk.com/eng/kzm.html|KZM-ARM11-01]]. The kernel for this board is the one that is formally verified.
+
+  *
+  The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947|Odroid-X]] Exynos4412 board
+
+  *
+  The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620|Odroid-XU]] Exynos 5 board
+
+  *
+  The [[https://boundarydevices.com/product/sabre-lite-imx6-sbc/|Sabre Lite]] i.mx6 board.
+
+  *
+  The [[http://beagleboard.org/black|Beaglebone Black]] is a community-supported port.
+
+
 
 To build for the ARM targets you will need a cross-development toolchain.
 
