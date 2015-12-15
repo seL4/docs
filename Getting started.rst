@@ -3,6 +3,17 @@
 
   1. [[#seL4_projects|seL4 Projects]]
 
+  1. [[#Supported_Target_Platforms|Supported Target Platforms]]
+
+ 1. [[#Setting_up_your_machine|Setting up your machine]]
+  1. [[#Code|Code]]
+
+  1. [[#Toolchains_And_Prerequisites|Toolchains And Prerequisites]]
+
+  1. [[#Get_repo|Get repo]]
+
+  1. [[#Using_repo|Using repo]]
+
 = Getting Started =
 == Code ==
 All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
@@ -80,7 +91,7 @@ sudo apt-get update
 sudo apt-get install gcc-arm-linux-gnueabi
 sudo apt-get install qemu-system-arm qemu-system-x86
 }}}
-=== Get Repo ===
+=== Get repo ===
 Repo is a tool by Google used for managing multiple git repositories.
 
 The latest repo is available at https://storage.googleapis.com/git-repo-downloads/repo.   Download it, and put it somewhere in your PATH.
@@ -91,7 +102,7 @@ export PATH=~/bin:$PATH
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 }}}
-=== Using Repo ===
+=== Using repo ===
 Choose a project to start with. As an example, we'll use   sel4test. First create a directory to work in, and initialise it   using repo:
 
 {{{
