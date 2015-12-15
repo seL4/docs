@@ -14,6 +14,15 @@
 
   1. [[#Using_repo|Using repo]]
 
+ 1. [[#Build_and_run_seL4_test|Build and run seL4 test]]
+  1. [[#Project Layout|Project Layout]]
+
+  1. [[#Build ia32|Build ia32]]
+
+  1. [[#Simulate ia32|Simulate ia32]]
+
+  1. [[#Useful configuration options|Useful configuration options]]
+
 = Getting Started =
 == Code ==
 All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
