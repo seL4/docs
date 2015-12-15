@@ -26,8 +26,10 @@ pip install jinja2
 If building on a 64bit system ensure 32bit compiler tools are installed, mainly:
 
 {{{
+apt-get install lib32gcc1
 }}}
 And the correct version of multilib for your gcc, for example:
 
 {{{
+apt-get install gcc-multilib
 }}}
