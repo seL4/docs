@@ -1,3 +1,4 @@
+=== Contents ===
  1. [[Getting started|Getting Started]]
   1. [[#Code|Code]]
 
