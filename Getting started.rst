@@ -1,6 +1,6 @@
 = Getting Started =
 == Code ==
-All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
+All seL4 code and proofs are available on github, at [[https://github.com/seL4]], under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
 
 There are several repositories; the most interesting ones are the project repositories (whose names end in -manifest) and these two:
 
