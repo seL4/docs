@@ -1,13 +1,8 @@
 = Getting started =
-----
-/!\ '''Edit conflict - other version:'''
-
-----
 == Setting up your machine ==
 These instructions are for Ubuntu. They assume you   already know the   basics of using the command line, compilers, and   GNU Make.
 
 === Toolchains and Prerequisites ===
-
 Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
 [[SetupFedora|Instructions for Fedora and CentOS (RHEL should work as well)]]
