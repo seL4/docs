@@ -156,9 +156,3 @@ Fiddling with most of the other configuration options will lead   to systems tha
 
 == Try the seL4 tutorials ==
 TODO
-
-== Build and run seL4 test ==
-TODO
-
-== Try the seL4 tutorials ==
-TODO
