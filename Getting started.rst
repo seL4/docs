@@ -1,11 +1,11 @@
 = Getting Started =
 == Code ==
-All seL4 code and proofs are available on github, at [[https://github.com/seL4]], under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
+All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
 
 There are several repositories; the most interesting ones are the project repositories (whose names end in -manifest) and these two:
 
- *[[https://github.com/seL4/l4v|l4v]] the seL4 proofs
- *[[https://github.com/seL4/seL4|seL4]] the seL4 kernel
+ * [[https://github.com/seL4/l4v|l4v]] the seL4 proofs
+ * [[https://github.com/seL4/seL4|seL4]] the seL4 kernel
 
 === seL4 projects ===
 The seL4 kernel is usually built as part of project. Each project has a wiki entry associated with it that gives more information. The information on this page is common to all of them.
@@ -14,11 +14,11 @@ We modelled the seL4 development process on the [[https://source.android.com/sou
 
 The available projects so far are:
 
- *[[https://github.com/seL4/verification-manifest|verification]], the seL4 proofs.
- *[[https://github.com/seL4/sel4test-manifest|seL4test]], a test suite for seL4, including a Library OS layer.
- *[[https://github.com/seL4/camkes-manifest|CAmkES]], a component architecture for embedded systems based on seL4. See the CAmkES pages for more documentation about CAmkES.
- *[[https://github.com/seL4/camkes-vm-manifest|VMM]] a componentised virtual machine monitor for ia32 platforms using Intel VT-X and VT-D extensions.
- *[[https://github.com/seL4/refos-manifest|RefOS]], a reference example of how one might build a multi-server operating system on top of seL4. It was built as a student project.
+ * [[https://github.com/seL4/verification-manifest|verification]], the seL4 proofs.
+ * [[https://github.com/seL4/sel4test-manifest|seL4test]], a test suite for seL4, including a Library OS layer.
+ * [[https://github.com/seL4/camkes-manifest|CAmkES]], a component architecture for embedded systems based on seL4. See the CAmkES pages for more documentation about CAmkES.
+ * [[https://github.com/seL4/camkes-vm-manifest|VMM]] a componentised virtual machine monitor for ia32 platforms using Intel VT-X and VT-D extensions.
+ * [[https://github.com/seL4/refos-manifest|RefOS]], a reference example of how one might build a multi-server operating system on top of seL4. It was built as a student project.
 
 Other projects may be added later.
 
@@ -42,7 +42,6 @@ Read the Hardware specific pages for special instructions for particular hardwar
 
 To build for the ARM targets you will need a cross-development toolchain.
 
-
 == Setting up your machine ==
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
@@ -53,8 +52,16 @@ Instructions should be similar for other distros, links to toolchains for other 
 
 [[SetupUbuntu|Instructions for Debian and Ubuntu]]
 
-Use Ubuntu's package manager to install the necessary packages. You will also need to add the universe repository (if you haven't already) to access the cross compiler.
+Use Ubuntu's package manager to install the necessary packages. You will also need to add the universe repository (if you haven't already) to access the cross compile
 
+{{{
+sudo apt-get install python-software-properties
+sudo apt-get install g++-multilib
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt-get install gcc-arm-linux-gnueabi
+sudo apt-get install qemu-system-arm qemu-system-x86
+}}}
 === Get Repo ===
 Repo is a tool by Google used for managing multiple git repositories.
 
@@ -66,8 +73,7 @@ export PATH=~/bin:$PATH
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 }}}
-
-=== Using repo ===
+=== Using Repo ===
 Choose a project to start with. As an example, we'll use   sel4test. First create a directory to work in, and initialise it   using repo:
 
 {{{
@@ -75,12 +81,12 @@ mkdir seL4test
 cd seL4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 }}}
-
+----
 To get the actual source,   you'll then need to use repo sync:
+
 {{{
 repo sync
 }}}
-
 repo will churn through for around ten minutes fetching all the   repositories needed.
 
 == Build and run seL4 test ==
@@ -139,9 +145,15 @@ The makefile provides a target to simulate ia32. Running the following command w
 {{{
 make simulate-ia32
 }}}
-To exit qemu after the All is well in the universe   message that indicates the test suite has passed, type control-a   c q
+To exit qemu after the All is well in the universe   message that indicates the test suite has passed, type control-a   c q.
 
-=== Build ARM ===
+=== Useful configuration options ===
+For cross compilation (targetting ARM), you can set the cross   compiler triple. This will typically be   arm-linux-gnueabi- or arm-none-eabi-.   Do make menuconfig and look for   toolchain-options
+
+Some of the default configurations specify a particular x86   compiler. It is usually safe to set the triple to the empty   string when building for x86, if you have a multilib gcc   installed.
+
+Fiddling with most of the other configuration options will lead   to systems that will either not compile, or not run.
+
 == Try the seL4 tutorials ==
 TODO
 
