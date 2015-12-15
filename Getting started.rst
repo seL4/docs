@@ -25,7 +25,7 @@ Other projects may be added later.
 === Supported Target Platforms ===
 Platforms that are supported in general are in the following list. Not all projects support all these platforms.
 
-Read the Hardware specific pages for special instructions for particular hardware platforms.
+Read the [[Hardware]]  pages for special instructions for particular hardware platforms.
 
  * Intel platforms
   * A PC99-style Intel Architecture 32-bit x86 (ia32)
