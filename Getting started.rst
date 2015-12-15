@@ -52,7 +52,7 @@ Instructions should be similar for other distros, links to toolchains for other 
 
 [[SetupUbuntu|Instructions for Debian and Ubuntu]]
 
-Use Ubuntu's package manager to install the necessary packages. You will also need to add the universe repository (if you haven't already) to access the cross compile
+Use Ubuntu's package manager to install the necessary packages. You will also need to add the universe repository (if you haven't already) to access the cross compiler.
 
 {{{
 sudo apt-get install python-software-properties
