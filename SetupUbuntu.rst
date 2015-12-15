@@ -77,6 +77,7 @@ Linaro maintains cross compilers that run on Ubuntu. With current releases, the 
 
 {{{
 sudo apt-get install python-software-properties
+sudo apt-get install g++-multilib
 sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get install gcc-arm-linux-gnueabi
