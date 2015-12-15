@@ -153,16 +153,16 @@ We will now build seL4test for ia32, to run on the QEMU simulator.
 {{{
 make ia32_simulation_release_xml_defconfig
 }}}
-This copies   configs/ia32_simulation_release_xml_defconfig to   ./.config, and sets up various header files.
+This copies {{{configs/ia32_simulation_release_xml_defconfig}}} to {{{./.config}}}, and sets up various header files.
 
 You can look at the configuration options using
 
 {{{
 make menuconfig
 }}}
-Alternatively you can use any text editor to change   ./.config; if you change anything you need to   rebuild header files with make oldconfig. It's   advisable also to make clean to clear out anything   already built — the build system does not track as many   dependencies as it ought to.
+Alternatively you can use any text editor to change   {{{./.config}}}; if you change anything you need to   rebuild header files with {{{make oldconfig}}}. It's   advisable also to make clean to clear out anything   already built — the build system does not track as many dependencies as it ought to.
 
-For the ia32 target you should not have to change anything. For   ARM targets you may need to change the cross-compiler prefix in   the menuconfig under toolchain options
+For the ia32 target you should not have to change anything. For   ARM targets you may need to change the {{{cross-compiler prefix}}} in the menuconfig under toolchain options
 
 When you've configured the system, you can build by doing
 
