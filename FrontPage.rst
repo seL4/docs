@@ -14,6 +14,7 @@ seL4 Documentation
  * [[Hardware|Hardware Support]]
  * [[Debugging guide]]
  * [[Benchmarking guide]]
+ * [[CAmkES]]
 
 Questions and Recipes
 
