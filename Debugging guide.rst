@@ -36,9 +36,9 @@ Or the tests themselves:
 
 == GDB ==
 
-= User level debugging = 
+= User level debugging =
 
-== Fault handlers == 
+== Fault handlers ==
 
 TODO how to use sel4utils_start_fault_handler to find a threads registers when it crashes
 
