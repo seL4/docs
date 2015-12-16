@@ -48,3 +48,5 @@ TODO how to debug in the kernel
 
 __builtin_ret_address__
 printf
+
+seL4 does not currently have a kernel debugger.
