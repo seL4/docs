@@ -1,4 +1,4 @@
-= Benchmarking seL4 ==
+= Benchmarking seL4 =
 
 == In kernel log buffer ==
 
