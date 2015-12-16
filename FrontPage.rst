@@ -5,7 +5,7 @@
 = seL4 Wiki =
 This WIKI is for cooperatively developing and sharing documentation on [[http://sel4.systems|seL4]]
 
-seL4 Documentation
+== seL4 Documentation ==
 
  * [[Getting started]]
  * [[Testing]]
@@ -16,12 +16,12 @@ seL4 Documentation
  * [[Benchmarking guide]]
  * [[CAmkES]]
 
-Questions and Recipes
+== Questions and Recipes ==
 
  * [[FrequentlyAskedQuestions|FAQ]]: editable list of FAQs
  * [[seL4 Recipes]]: How to do X with seL4
 
-seL4 Releases
+== seL4 Releases ==
 
  * [[https://github.com/seL4/seL4/tree/2.0.0|Current release]]
  * [[ReleaseNotes|Release notes]]
