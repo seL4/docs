@@ -9,8 +9,11 @@
 ----
 == Data Structures ==
 === seL4_CPtr ===
+x
 === seL4_MessageInfo_t ===
+x
 === seL4_IPCBuffer ===
+x
 == System Calls ==
 The seL4 kernel provides a message-passing service for communication between threads and kernel-provided services. Logically, the kernel provides set of system calls ???
 
