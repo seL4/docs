@@ -1,4 +1,6 @@
 = System Calls =
+The seL4 kernel provides a message-passing service for communication between threads and kernel-provided services. Logically, the kernel provides set of system calls ???
+== seL4_Send ==
 ''seL4_Send()'' delivers a message through the named capability. If the invoked capability is an endpoint, and no receiver is ready to receive the message immediately, the sending thread will block until the message can be delivered. No error code or response will be returned by the receiving object.
 ||Type ||Name ||Description ||
 ||seL4_CPtr ||dest ||The capability to be invoked. ||
@@ -9,13 +11,16 @@
 
 Return value: This method does not return anything.
 
+== seL4_Recv ==
 ''seL4_Recv()'' is used by a thread to receive messages through endpoints or notifications. If no sender or notification is pending, the caller will block until a message or notification can be delivered. This system call works only on Endpoint or Notification capabilities, raising a fault when attempted with other capability types.
-||<tablewidth="200px">Type ||Name ||Description ||
-|| || || ||
-|| || || ||
+||Type ||Name ||Description ||
+||seL4_CPtr ||src ||The capability to be invoked. ||
+||seL4_Word* ||sender ||The address to write sender information to. The sender information is the badge of the endpoint capability that was invoked by the sender, or the notification word of the notification object that was signalled. This parameter is ignored if NULL. ||
 
 
 
+
+Return value: A seL4 MessageInfo t structure.
 
 ''seL4_Call()'' combines ''seL4_Send()'' and ''seL4_Recv()''. The ''seL4 Call()'' operation exists not only for efficiency reasons. It differs from seL4_Send() immediately followed by seL4_Recv() in two ways:  1. the single-use reply capability is created to establish a reply channel with minimal trust;  2. the transition from send to recv phase is atomic, meaning it cannot be preempted, and the receiver can reply without any risk of blocking.  When invoking capabilities to kernel services, using seL4_Call() allows the kernel to return an error code or other response through the reply message.
 ||<tablewidth="200px">Type ||Name ||Description ||
