@@ -32,20 +32,19 @@ And the correct version of multilib for your gcc, for example:
 
 {{{
 apt-get install gcc-multilib
-
 }}}
-
 == Download CAmkES ==
 Download CAmkES source code from github:
+
 {{{
 mkdir camkes-project
 cd camkes-project
 repo init -u https://github.com/seL4/camkes-manifest.git
 repo sync
 }}}
-
 == Build and run simple application ==
 The following will configure, build, and run a simple example CAmkES system:
+
 {{{
 make arm_simple_defconfig
 make silentoldconfig
@@ -53,8 +52,9 @@ make
 qemu-system-arm -M kzm -nographic -kernel images/capdl-loader-experimental-image-arm-imx31
 }}}
 In order to clean up after building (for example because you’ve set up a new configuration and you want to make sure that everything gets rebuilt correctly) do:
+
 {{{
 make clean
 }}}
 == Read Tutorial ==
-To learn about developing your own CAmkES application, read the [[https://sel4.systems/Info/CAmkES/GettingStarted.pml|tutorial]].
+To learn about developing your own CAmkES application, read the [[https://sel4.systems/Info/CAmkES/Tutorial.pml|tutorial]].
