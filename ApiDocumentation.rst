@@ -93,3 +93,5 @@ seL4_Yield() forfeits the remainder of the calling thread’s timeslice and caus
 Return value: This method does not return anything.
 
 ----
+
+==== Architecture-Independent Object Invocations ====
