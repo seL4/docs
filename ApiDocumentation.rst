@@ -13,3 +13,6 @@ seL4_NBSend() performs a polling send on an endpoint. It is similar to seL4_Send
 seL4_NBRecv() is used by a thread to check for signals pending on a notification object or messages pending on an endpoint without blocking.
 
 seL4_Yield() forfeits the remainder of the calling thread’s timeslice and causes invocation of the kernel’s scheduler. If there are no other runnable threads with the same priority as the caller, the calling thread will immediately be scheduled with a fresh timeslice.
+
+----
+xxxxxx
