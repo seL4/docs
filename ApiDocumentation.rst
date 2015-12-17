@@ -1,12 +1,13 @@
- * Data Structures and Error Codes
+ * Data Structures
  * Kernel System Calls
   * Architecture-Independent Object Invocations
    * ARM
    * IA32
   * Architecture-dependent Object Invocations
+ * Error Codes
 
 ----
-== Data Structures and Error Codes ==
+== Data Structures ==
 
 === seL4_MessageInfo_t ===
 
