@@ -1,9 +1,9 @@
  * Data Structures and Error Codes
  * Kernel System Calls
-  * Architecture-Independent Calls
+  * Architecture-Independent Object Invocations
    * ARM
    * IA32
-  * Architecture-dependent Calls
+  * Architecture-dependent Object Invocations
 
 
 
