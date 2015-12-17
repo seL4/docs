@@ -15,4 +15,4 @@ seL4_NBRecv() is used by a thread to check for signals pending on a notification
 seL4_Yield() forfeits the remainder of the calling thread’s timeslice and causes invocation of the kernel’s scheduler. If there are no other runnable threads with the same priority as the caller, the calling thread will immediately be scheduled with a fresh timeslice.
 
 ----
-xxxxxx
+xx
