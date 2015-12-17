@@ -1,4 +1,12 @@
 = CAmkES =
+CAmkES (component architectures for microkernel-based embedded systems) is a software development and runtime framework for quickly and reliably building microkernel-based multiserver (operating) systems. It follows a component-based software engineering approach to software design, resulting in a system that is modelled as a set of interacting software components. These software components have explicit interaction interfaces and a system design that explicitly details the connections between the components.
+
+The development framework provides:
+
+ * a language to describe component interfaces, components, and whole component-based systems
+ * a tool that processes these descriptions to combine programmer-provided component code with generated scaffolding and glue code to build a complete, bootable, system image
+ * full integration in the OKL4 environment and build system
+
 == Setting up your machine ==
 Make sure that you already have the tools to build seL4 ([[Getting started#Setting_up_your_machine|seL4: Setting up your machine]])
 
