@@ -56,3 +56,5 @@ In order to clean up after building (for example because you’ve set up a new c
 {{{
 make clean
 }}}
+== Read Tutorial ==
+To learn about developing your own CAmkES application, read the [[https://sel4.systems/Info/CAmkES/GettingStarted.pml|tutorial]].
