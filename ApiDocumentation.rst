@@ -8,6 +8,7 @@
 
 ----
 == Data Structures ==
+=== seL4_CPtr ===
 === seL4_MessageInfo_t ===
 === seL4_IPCBuffer ===
 == System Calls ==
