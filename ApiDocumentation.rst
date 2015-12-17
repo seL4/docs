@@ -8,17 +8,15 @@
 
 ----
 == Data Structures ==
-
 === seL4_MessageInfo_t ===
-
-=== seL4_IPCBuffer structure ===
-
+=== seL4_IPCBuffer ===
 == System Calls ==
 The seL4 kernel provides a message-passing service for communication between threads and kernel-provided services. Logically, the kernel provides set of system calls ???
 
 === seL4_Send ===
 ''seL4_Send()'' delivers a message through the named capability. If the invoked capability is an endpoint, and no receiver is ready to receive the message immediately, the sending thread will block until the message can be delivered. No error code or response will be returned by the receiving object.
 ||Type ||Name ||Description ||
+
 
 ||seL4_CPtr ||dest ||The capability to be invoked. ||
 ||seL4_MessageInfo_t ||msgInfo ||The messageinfo structure for the IPC. ||
