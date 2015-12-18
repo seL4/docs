@@ -1,8 +1,9 @@
-== seL4Test ==
+= seL4Test =
 
 [[https://github.com/seL4/sel4test-manifest|sel4test]] is a test suite for seL4.
 
-=== Getting the Code ===
+== Getting the Code ==
+
 {{{
 $ mkdir sel4test
 $ cd sel4test
@@ -67,7 +68,7 @@ Test BIND0001 passed
 
 The test suite prints out JUnit-style xml which can be parsed by various tools.
 
-=== Testing a Customized Kernel ===
+== Testing a Customized Kernel ==
 Suppose you've got seL4 checked out in {{{~/projects/seL4}}}, and sel4test in {{{~/tests/sel4test}}}, and you have been making changes on a feature branch of seL4 named {{{awesome-new-feature}}}. You want to test if your modified kernel still passes all the tests in sel4test.
 
 {{{
@@ -79,3 +80,7 @@ $ cd ..
 }}}
 
 Now the kernel in sel4test has been changed to your custom kernel. Now just build and run the test suite as above.
+
+== Running a subset of the tests ==
+
+You can use a regular expression to select a subset of tests. This can be set using Kconfig, or the build shortcut {{{make select-test TEST=SCHED.*}}}. By default the test suite runs all tests.
