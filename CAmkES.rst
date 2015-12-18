@@ -56,11 +56,8 @@ The following will configure, build, and run a simple example CAmkES system:
 {{{
 make arm_simple_defconfig
 make silentoldconfig
-
 }}}
-
-If you haven't done so already, change the toolchain to the one for your system.
-You can do this by running '''make menuconfig''', Then going to '''Toolchain Options -> Cross compiler prefix'''. You will most likely be compiling with '''arm-linux-gnueabi-'''.
+If you haven't done so already, change the toolchain to the one for your system. You can do this by running '''make menuconfig''', then going to '''Toolchain Options -> Cross compiler prefix'''. You will most likely be compiling with '''arm-linux-gnueabi-'''.
 
 {{{
 make
