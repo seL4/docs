@@ -38,9 +38,9 @@ For more details, please see the manual. Most of the updates are in the threads 
 
 == API deletions ==
 
-* `seL4_Yield` (replaced by seL4_SchedContext_Yield)
-* `seL4_DomainSet`
-* Domain scheduler removed.
+ * `seL4_Yield` (replaced by `seL4_SchedContext_Yield`)
+ * `seL4_DomainSet`
+ * Domain scheduler removed.
 
 == Library & test compatability ==
 
