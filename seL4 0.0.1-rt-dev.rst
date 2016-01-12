@@ -1,3 +1,3 @@
-I am Deanna and was born on 5 December 1986. My hobbies are Home Movies and Nordic skating.<<BR>><<BR>>
+I am 39 years old and my name is Donny Bannister. I life in Wayne (United States).<<BR>><<BR>>
 <<BR>><<BR>>
-my website [[https://platinrom.wordpress.com/|Pokemon weiß 2 rom]]
+my homepage ... [[https://dutchemulator.wordpress.com/|3DS emulator]]
