@@ -1,3 +1,4 @@
-I am 39 years old and my name is Donny Bannister. I life in Wayne (United States).<<BR>><<BR>>
+Hi! <<BR>><<BR>>
+My name is Christi and I'm a 22 years old boy from Lievelde.<<BR>><<BR>>
 <<BR>><<BR>>
-my homepage ... [[https://dutchemulator.wordpress.com/|3DS emulator]]
+Also visit my weblog :: [[https://fallpokeheart.wordpress.com/|Pokemon soul silver rom]]
