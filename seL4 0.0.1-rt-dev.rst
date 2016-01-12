@@ -1,5 +1,3 @@
-Got nothing to say about me I think.<<BR>><<BR>>
-Yes! Im a part of this site.<<BR>><<BR>>
-I really hope I'm useful at all<<BR>><<BR>>
+I am Deanna and was born on 5 December 1986. My hobbies are Home Movies and Nordic skating.<<BR>><<BR>>
 <<BR>><<BR>>
-Also visit my site; [[https://makemulaotr.wordpress.com/|3DS emulator]]
+my website [[https://platinrom.wordpress.com/|Pokemon weiß 2 rom]]
