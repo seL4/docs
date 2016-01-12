@@ -1,4 +1,4 @@
-Hi! <<BR>><<BR>>
-My name is Christi and I'm a 22 years old boy from Lievelde.<<BR>><<BR>>
+Hello, I'm Yasmin, a 28 year old from Talsano, Italy.<<BR>><<BR>>
+My hobbies include (but are not limited to) Mountain biking, Bus spotting and watching The Vampire Diaries.<<BR>><<BR>>
 <<BR>><<BR>>
-Also visit my weblog :: [[https://fallpokeheart.wordpress.com/|Pokemon soul silver rom]]
+My website: [[http://playpokehe.tumblr.com/|Pokemon schwarz 2 rom]]
