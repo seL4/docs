@@ -159,5 +159,3 @@ Congratulations, you've just made your first CAmkES application.
 
 === Under the Hood ===
 We basically just wrote a verbose and roundabout Hello World example, so what benefit is CAmkES providing here? Note how the function call between the two components looks just like a normal function invocation in C, even though the two components are actually in different address spaces. During compilation so-called glue code is generated to connect the two components via a seL4 endpoint and transparently pass the function invocation and return over this channel. The communication itself is abstracted in the ADL description in apps/helloworld/helloworld.camkes. The connection type we used was seL4RPC, but it is possible to use another connection type here without modifying the code of the components themselves.
-
-CAmkES provides some interface types for other modes of interaction than function calls. Events can be used for asynchronous communication and dataports for shared memory.
