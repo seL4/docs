@@ -1,3 +1,4 @@
-I'm Liliana and was born on 24 August 1989. My hobbies are Rugby league football and Disc golf.<<BR>><<BR>>
+Im addicted to my hobby Woodworking. Sounds boring? Not at all!<<BR>><<BR>>
+I  to learn Turkish in my spare time.<<BR>><<BR>>
 <<BR>><<BR>>
-Take a look at my blog post - [[https://downloadrubyrom.wordpress.com/|Pokemon z download]]
+Feel free to visit my website; Hay Day hack ([[https://spahackhay.wordpress.com/|spahackhay.wordpress.com]])
