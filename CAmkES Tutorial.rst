@@ -3,7 +3,6 @@
 #format wiki
 #language en
 
-= Content =
 <<TableOfContents(3)>>
 
 = CAmkES Tutorial =
