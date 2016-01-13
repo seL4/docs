@@ -238,13 +238,13 @@ static void handler(void) {
   printf("Callback fired!\n");
   if (!fired) {
     fired = 1;
-    s_reg_callback(&handler);
+    s_reg_callback(&handler, NULL);
   }
 }
 
 int run(void) {
   printf("Registering callback...\n");
-  s_reg_callback(&handler);
+  s_reg_callback(&handler, NULL);
 
   printf("Polling...\n");
   if (s_poll()) {
@@ -268,7 +268,7 @@ We now have everything we need to run this system. Add the appropriate informati
 # apps/helloevent/Kconfig
 
 config APP_HELLOEVENT
-bool "Example event CAmkES application"
+bool "Hello Event CAmkES application"
 default n
     help
         Hello event tutorial exercise.
