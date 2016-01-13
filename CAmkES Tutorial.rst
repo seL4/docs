@@ -8,10 +8,10 @@
 = CAmkES Tutorial =
 This tutorial will help you walk-through building application with procedure, event and dataport connectors.
 
-== RPC Application ==
+== Procedure Application ==
 Let's create some simple hello world applications using the different interface types available in CAmkES. Create a new application directory with two component types:
 
-=== Setup Directories ===
+=== Setup Directory ===
 {{{
 mkdir -p apps/helloworld/components/Hello
 mkdir -p apps/helloworld/components/Client
@@ -37,7 +37,8 @@ import "../../interfaces/MyInterface.idl4";
 component Hello {
   provides MyInterface inf;
 }
-
+}}}
+{{{
 /* apps/helloworld/components/Client/Client.camkes */
 
 import "../../interfaces/MyInterface.idl4";
@@ -99,7 +100,7 @@ int run(void) {
 }}}
 The entry point of a CAmkES component is run.
 
-=== Merge your application to build system ===
+=== Merge Application to Build System ===
 The final thing is to add some build system boiler plate to be able to build the system. Create apps/helloworld/Kconfig for the build system menu:
 {{{#!highlight makefile
 # apps/helloworld/Kconfig
@@ -158,3 +159,124 @@ Congratulations, you've just made your first CAmkES application.
 
 === Under the Hood ===
 We basically just wrote a verbose and roundabout Hello World example, so what benefit is CAmkES providing here? Note how the function call between the two components looks just like a normal function invocation in C, even though the two components are actually in different address spaces. During compilation so-called glue code is generated to connect the two components via a seL4 endpoint and transparently pass the function invocation and return over this channel. The communication itself is abstracted in the ADL description in apps/helloworld/helloworld.camkes. The connection type we used was seL4RPC, but it is possible to use another connection type here without modifying the code of the components themselves.
+
+== Event Application ==
+Events are the CAmkES interface type for modelling asynchronous communication between components. Like procedures, events connect a single component to another single component, but the receiver of an event (called consumer in CAmkES parlance) has several ways of receiving the event. The following walks through an example demonstrating these.
+
+=== Setup Directory ===
+Create a new application directory with two components:
+{{{
+mkdir -p apps/helloevent/components/Emitter
+mkdir -p apps/helloevent/components/Consumer
+}}}
+
+=== Setup Components' CAmkES Files ===
+Events, unlike procedures, do not need to be defined in a separate IDL file. You can simply refer to the event type in your component ADL files and CAmkES will infer an event type. Create the following description for Emitter:
+{{{
+/* apps/helloevent/components/Emitter/Emitter.camkes */
+
+component Emitter {
+  control;
+  emits MyEvent e;
+}
+}}}
+This description says Emitter is an active component (the control keyword) and it emits a single event called e of type MyEvent. Create some basic source code for the component that does nothing except emit the event itself.
+
+Now let's create a description of the Consumer that will handle this event:
+{{{
+/* apps/helloevent/components/Consumer/Consumer.camkes */
+
+component Consumer {
+  control;
+  consumes MyEvent s;
+}
+}}}
+
+=== Setup Composition CAmkES File ===
+Note that this component consumes (handles) an event of the same type. Let's instantiate and connect these components together using another ADL file:
+{{{
+/* apps/helloevent/helloevent.camkes */
+
+import <std_connector.camkes>;
+import "components/Emitter/Emitter.camkes";
+import "components/Consumer/Consumer.camkes";
+
+assembly {
+  composition {
+    component Emitter source;
+    component Consumer sink;
+    connection seL4Notification channel(from source.e, to sink.s);
+  }
+}
+}}}
+In this file, seL4Notification is a seL4 specific connector for transmitting asynchronous signals. The two instantiated components, source and sink are connected over the connection channel.
+
+=== Implement Components ===
+{{{#!highlight c
+/* apps/helloevent/components/Emitter/src/main.c */
+
+#include <camkes.h>
+
+int run(void) {
+  while (1) {
+    e_emit();
+  }
+  return 0;
+}
+}}}
+CAmkES provides an emit function to send the event.
+
+As mentioned above, there are several ways for a component to receive an event. The consumer can register a callback function to be invoked when the event is received, they can call a blocking function that will return when the event is received or they can call a polling function that returns whether an event has arrived or not. Let's add some source code that uses all three:
+{{{#!highlight c
+#include <camkes.h>
+#include <stdio.h>
+
+static void handler(void) {
+  static int fired = 0;
+  printf("Callback fired!\n");
+  if (!fired) {
+    fired = 1;
+    s_reg_callback(&handler);
+  }
+}
+
+int run(void) {
+  printf("Registering callback...\n");
+  s_reg_callback(&handler);
+
+  printf("Polling...\n");
+  if (s_poll()) {
+    printf("We found an event!\n");
+  } else {
+    printf("We didn't find an event\n");
+  }
+
+  printf("Waiting...\n");
+  s_wait();
+  printf("Unblocked by an event!\n");
+
+  return 0;
+}
+}}}
+Note that we re-register the callback during the first execution of the handler. Callbacks are deregistered when invoked, so if you want the callback to fire again when another event arrives you need to explicitly re-register it.
+
+=== Merge Application to Build System ===
+The final thing is to add some build system boiler plate to be able to build the system. Create apps/helloevent/Kconfig for the build system menu:
+{{{#!highlight makefile
+# apps/helloevent/Kconfig
+
+config APP_HELLOEVENT
+bool "Example event CAmkES application"
+default n
+    help
+        Hello event tutorial exercise.
+}}}
+
+Create a dependency entry in apps/helloworld/Kbuild for your application:
+{{{#!highlight makefile
+# apps/helloevent/Kbuild
+
+apps-$(CONFIG_APP_HELLOEVENT) += helloevent
+helloevent: libsel4 libmuslc libsel4platsupport \
+  libsel4muslccamkes libsel4sync libsel4debug libsel4bench
+}}}
