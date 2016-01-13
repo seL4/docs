@@ -6,9 +6,9 @@
 <<TableOfContents(3)>>
 
 = CAmkES Tutorial =
-This tutorial will help you walk-through building application with procedure, event and dataport connectors.
+This tutorial will help you walk-through building application with remote procedure, event and dataport connectors.
 
-== Procedure Application ==
+== Remote Procedure Application ==
 Let's create some simple hello world applications using the different interface types available in CAmkES. Create a new application directory with two component types:
 
 === Setup Directory ===
@@ -100,7 +100,7 @@ int run(void) {
 }}}
 The entry point of a CAmkES component is run.
 
-=== Merge Application to Build System ===
+=== Setup Build System ===
 The final thing is to add some build system boiler plate to be able to build the system. Create apps/helloworld/Kconfig for the build system menu:
 {{{#!highlight makefile
 # apps/helloworld/Kconfig
@@ -262,7 +262,7 @@ int run(void) {
 }}}
 Note that we re-register the callback during the first execution of the handler. Callbacks are deregistered when invoked, so if you want the callback to fire again when another event arrives you need to explicitly re-register it.
 
-=== Merge Application to Build System ===
+=== Setup Build System ===
 We now have everything we need to run this system. Add the appropriate information to Kconfig, apps/helloevent/Kbuild, apps/helloevent/Kconfig and apps/helloevent/Makefile as for the previous example. Create apps/helloevent/Kconfig for the build system menu:
 {{{#!highlight makefile
 # apps/helloevent/Kconfig
@@ -325,3 +325,199 @@ Callback fired!
 
 === Under the Hood ===
 Whether you find an event during polling will be a matter of the schedule that seL4 uses to run the components. This covers all the functionality available when using events. One final point that may not be obvious from the example is that callbacks will always be fired in preference to polling/waiting. That is, if a component registers a callback and then waits on an event to arrive, the callback will be fired when the first instance of the event arrives and the wait will return when/if the second instance of the event arrives.
+
+== Dataport Application ==
+Dataports are CAmkES' abstraction of shared memory. Dataports, like other interfaces, connect a single component to a single other component. Both components get read/write access to the dataport. The default dataport type is Buf, which is implemented as a byte array in C of size PAGE_SIZE. Alternatively you can specify a user-defined type for the shared memory region. This example will demonstrate both.
+
+=== Setup Directory ===
+Create two components that will use a pair of dataports for communication:
+{{{
+mkdir -p apps/hellodataport/components/Ping
+mkdir -p apps/hellodataport/components/Pong
+}}}
+
+=== Setup Dataport Type ===
+Let's define a struct that will be used as one of the dataports:
+{{{#!highlight c
+/* apps/hellodataport/include/porttype.h */
+
+#ifndef _PORTTYPE_H_
+#define _PORTTYPE_H_
+
+typedef struct MyData {
+  char data[10];
+} MyData_t;
+
+#endif
+}}}
+
+The build system puts some constraints on where included headers can reside so we need to symlink this header into the place the build system will be expecting it:
+{{{
+mkdir -p apps/hellodataport/components/Ping/include
+ln -s apps/hellodataport/include/porttype.h \
+  apps/hellodataport/components/Ping/include/porttype.h
+mkdir -p apps/hellodataport/components/Pong/include
+ln -s apps/hellodataport/include/porttype.h \
+  apps/hellodataport/components/Pong/include/porttype.h
+}}}
+
+=== Setup Components' CAmkES Files ===
+Note that we need to include the C header in the ADL. CAmkES does not actually parse this header, but it needs to know to #include it whenever it references the MyData_t type.
+Now let's create an ADL description of the Ping component:
+{{{
+/* apps/hellodataport/components/Ping/Ping.camkes */
+
+component Ping {
+  include "porttype.h";
+  control;
+  dataport Buf d1;
+  dataport MyData_t d2;
+}
+}}}
+
+Add a similar description for Pong:
+{{{
+/* apps/hellodataport/components/Pong/Pong.camkes */
+
+import "Porttype.idl4";
+
+component Pong {
+  include "porttype.h";
+  control;
+  dataport Buf s1;
+  dataport MyData_t s2;
+}
+}}}
+
+=== Setup Composition CAmkES File ===
+A real system would have a more complete communication protocol between the two components, but for the purposes of this example spinning until a byte changes is good enough. We're ready to connect all these sources together with a top-level ADL file:
+{{{
+/* apps/hellodataport/hellodataport.camkes */
+
+import <std_connector.camkes>;
+import "components/Ping/Ping.camkes";
+import "components/Pong/Pong.camkes";
+
+assembly {
+  composition {
+    component Ping ping;
+    component Pong pong;
+
+    connection seL4SharedData channel1(from ping.d1, to pong.s1);
+    connection seL4SharedData channel2(from ping.d2, to pong.s2);
+  }
+}
+}}}
+
+=== Implement Components ===
+Now we'll create some basic code for each component to use the dataports.
+Note that components generally need to use volatile variables when referring to shared memory to prevent the compiler eliminating repeated reads and writes.
+{{{#!highlight c
+/* apps/components/Ping/src/main.c */
+
+#include <camkes.h>
+#include <porttype.h>
+#include <stdio.h>
+#include <string.h>
+
+int run(void) {
+  char *hello = "hello";
+
+  printf("Ping: sending %s...\n", hello);
+  strcpy((void*)d1->content, hello);
+
+  /* Wait for Pong to reply. We can assume dataport d2 is
+   * zeroed on startup by seL4.
+   */
+  while (!d2->data[0]);
+  printf("Ping: received %s.\n", d2->data);
+
+  return 0;
+}
+}}}
+{{{#!highlight c
+/* apps/components/Pong/src/main.c */
+
+#include <camkes.h>
+#include <porttype.h>
+#include <stdio.h>
+#include <string.h>
+
+int run(void) {
+  char *world = "world";
+
+  /* Wait for Ping to message us. We can assume dataport s1 is
+   * zeroed on startup by seL4.
+   */
+  while (!*(volatile char*)s1->content);
+  printf("Pong: received %s\n", (volatile char*)s1->content);
+
+  printf("Pong: sending %s...\n", world);
+  strcpy((void*)s2->data, world);
+
+  return 0;
+}
+}}}
+
+=== Setup Build System ===
+We now have everything we need to run this system. Add the appropriate information to Kconfig, apps/hellodataport/Kbuild, apps/hellodataport/Kconfig and apps/hellodataport/Makefile as for the previous example. Create apps/hellodataport/Kconfig for the build system menu:
+{{{#!highlight makefile
+# apps/hellodataport/Kconfig
+
+config APP_HELLODATAPORT
+bool "Hello Dataport CAmkES application"
+default n
+    help
+        Hello dataport tutorial exercise.
+}}}
+
+Create a dependency entry in apps/hellodataport/Kbuild for your application:
+{{{#!highlight makefile
+# apps/hellodataport/Kbuild
+
+apps-$(CONFIG_APP_HELLODATAPORT) += hellodataport
+helloevent: libsel4 libmuslc libsel4platsupport \
+  libsel4muslccamkes libsel4sync libsel4debug libsel4bench
+}}}
+
+Copy one of the Makefiles from another application or create apps/helloevent/Makefile from scratch:
+{{{#!highlight makefile
+# apps/hellodataport/Makefile
+
+TARGETS := hellodataport.cdl
+ADL := hellodataport.camkes
+
+Ping_CFILES = components/Ping/src/main.c
+Ping_HFILES = components/Ping/include/porttype.h
+Pong_CFILES = components/Pong/src/main.c
+Pong_HFILES = components/Pong/include/porttype.h
+
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+}}}
+
+Add a source line to the top-level Kconfig under the applications menu that references this file:
+{{{
+source "apps/hellodataport/Kconfig"
+}}}
+
+You can now run '''make menuconfig''' from the top-level directory and select your application from the Applications menu. Make sure you '''deselect the helloevent application''' while you're here.
+
+=== Build and Run ===
+Compile the system and run it with similar qemu commands to the previous example:
+{{{
+make clean
+make
+qemu-system-arm -M kzm -nographic -kernel \
+  images/capdl-loader-experimental-image-arm-imx31
+}}}
+
+If all goes well you should see something like the following
+{{{
+Ping: sending hello...
+Pong: received hello
+Pong: sending world...
+Ping: received world.
+}}}
+
+= Tutorial Summary =
+You should now have a reasonably comprehensive understanding of the basic connector functionality available in CAmkES. The other apps in the CAmkES project repository provide some more diverse system examples.
