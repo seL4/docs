@@ -354,10 +354,10 @@ typedef struct MyData {
 The build system puts some constraints on where included headers can reside so we need to symlink this header into the place the build system will be expecting it:
 {{{
 mkdir -p apps/hellodataport/components/Ping/include
-ln -s apps/hellodataport/include/porttype.h \
+ln -s ../../../include/porttype.h \
   apps/hellodataport/components/Ping/include/porttype.h
 mkdir -p apps/hellodataport/components/Pong/include
-ln -s apps/hellodataport/include/porttype.h \
+ln -s ../../../include/porttype.h \
   apps/hellodataport/components/Pong/include/porttype.h
 }}}
 
