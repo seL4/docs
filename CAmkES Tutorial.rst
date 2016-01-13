@@ -517,5 +517,41 @@ Pong: sending world...
 Ping: received world.
 }}}
 
+== Better Makefile ==
+There is a better way to write the Makefile for your application.
+Take apps/hellodataport/Makefile as an example
+
+{{{#!highlight makefile
+# apps/hellodataport/Makefile
+
+TARGETS := $(notdir ${SOURCE_DIR}).cdl
+ADL := hellodataport.camkes
+
+Ping_CFILES = \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Ping/src/*.c)) \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Ping/src/plat/${PLAT}/*.c)) \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Ping/src/arch/${ARCH}/*.c))
+
+Ping_HFILES = \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Ping/include/*.h)) \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Ping/include/plat/${PLAT}/*.h)) \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Ping/include/arch/${ARCH}/*.h))
+
+Pong_CFILES = \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Pong/include/*.h)) \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Pong/include/plat/${PLAT}/*.h)) \
+   $(patsubst ${SOURCE_DIR}/%,%,$(wildcard ${SOURCE_DIR}/components/Pong/include/arch/${ARCH}/*.h))
+
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+}}}
+
+Variable SOURCE_DIR will always point to application folder.
+In this case, SOURCE_DIR = camkes-project/apps/hellodataport
+
+$(wildcard) function will expands *.c in src/ and *.h in include/ directory
+$(patsubst) function will substitute all .c .h files with their absolute path
+
+You can also specify platform and architecture building path if you need.
+
 = Tutorial Summary =
 You should now have a reasonably comprehensive understanding of the basic connector functionality available in CAmkES. The other apps in the CAmkES project repository provide some more diverse system examples.
