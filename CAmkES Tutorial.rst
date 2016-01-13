@@ -422,7 +422,7 @@ int run(void) {
   char *hello = "hello";
 
   printf("Ping: sending %s...\n", hello);
-  strcpy((void*)d1->content, hello);
+  strcpy((void*)d1, hello);
 
   /* Wait for Pong to reply. We can assume dataport d2 is
    * zeroed on startup by seL4.
@@ -447,8 +447,8 @@ int run(void) {
   /* Wait for Ping to message us. We can assume dataport s1 is
    * zeroed on startup by seL4.
    */
-  while (!*(volatile char*)s1->content);
-  printf("Pong: received %s\n", (volatile char*)s1->content);
+  while (!*(volatile char*)s1);
+  printf("Pong: received %s\n", (volatile char*)s1);
 
   printf("Pong: sending %s...\n", world);
   strcpy((void*)s2->data, world);
