@@ -379,8 +379,6 @@ Add a similar description for Pong:
 {{{
 /* apps/hellodataport/components/Pong/Pong.camkes */
 
-import "Porttype.idl4";
-
 component Pong {
   include "porttype.h";
   control;
@@ -413,7 +411,7 @@ assembly {
 Now we'll create some basic code for each component to use the dataports.
 Note that components generally need to use volatile variables when referring to shared memory to prevent the compiler eliminating repeated reads and writes.
 {{{#!highlight c
-/* apps/components/Ping/src/main.c */
+/* apps/hellodataport/components/Ping/src/main.c */
 
 #include <camkes.h>
 #include <porttype.h>
@@ -436,7 +434,7 @@ int run(void) {
 }
 }}}
 {{{#!highlight c
-/* apps/components/Pong/src/main.c */
+/* apps/hellodataport/components/Pong/src/main.c */
 
 #include <camkes.h>
 #include <porttype.h>
