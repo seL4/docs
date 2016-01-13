@@ -9,6 +9,8 @@
 This tutorial will help you walk-through building application with remote procedure, event and dataport connectors.
 
 == Remote Procedure Application ==
+{{attachment:echo.png}}
+
 Let's create some simple hello world applications using the different interface types available in CAmkES. Create a new application directory with two component types:
 
 === Setup Directory ===
