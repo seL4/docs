@@ -139,7 +139,7 @@ Add a source line to the top-level Kconfig under the applications menu that refe
 source "apps/helloworld/Kconfig"
 }}}
 
-You can now run {{{make menuconfig}}} from the top-level directory and select your application from the Applications menu. Make sure you deselect the simple application while you're here.
+You can now run '''make menuconfig''' from the top-level directory and select your application from the Applications menu. Make sure you '''deselect the simple application''' while you're here.
 
 === Build and Run ===
 You're now ready to compile and run this application:
@@ -228,6 +228,8 @@ CAmkES provides an emit function to send the event.
 
 As mentioned above, there are several ways for a component to receive an event. The consumer can register a callback function to be invoked when the event is received, they can call a blocking function that will return when the event is received or they can call a polling function that returns whether an event has arrived or not. Let's add some source code that uses all three:
 {{{#!highlight c
+/* apps/helloevent/components/Consumer/src/main.c */
+
 #include <camkes.h>
 #include <stdio.h>
 
@@ -261,7 +263,7 @@ int run(void) {
 Note that we re-register the callback during the first execution of the handler. Callbacks are deregistered when invoked, so if you want the callback to fire again when another event arrives you need to explicitly re-register it.
 
 === Merge Application to Build System ===
-The final thing is to add some build system boiler plate to be able to build the system. Create apps/helloevent/Kconfig for the build system menu:
+We now have everything we need to run this system. Add the appropriate information to Kconfig, apps/helloevent/Kbuild, apps/helloevent/Kconfig and apps/helloevent/Makefile as for the previous example. Create apps/helloevent/Kconfig for the build system menu:
 {{{#!highlight makefile
 # apps/helloevent/Kconfig
 
@@ -272,7 +274,7 @@ default n
         Hello event tutorial exercise.
 }}}
 
-Create a dependency entry in apps/helloworld/Kbuild for your application:
+Create a dependency entry in apps/helloevent/Kbuild for your application:
 {{{#!highlight makefile
 # apps/helloevent/Kbuild
 
@@ -280,3 +282,46 @@ apps-$(CONFIG_APP_HELLOEVENT) += helloevent
 helloevent: libsel4 libmuslc libsel4platsupport \
   libsel4muslccamkes libsel4sync libsel4debug libsel4bench
 }}}
+
+Copy one of the Makefiles from another application or create apps/helloevent/Makefile from scratch:
+{{{#!highlight makefile
+# apps/helloevent/Makefile
+
+TARGETS := helloevent.cdl
+ADL := helloevent.camkes
+
+Consumer_CFILES = components/Consumer/src/main.c
+Emitter_CFILES = components/Emitter/src/main.c
+
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+}}}
+
+Add a source line to the top-level Kconfig under the applications menu that references this file:
+{{{
+source "apps/helloevent/Kconfig"
+}}}
+
+You can now run '''make menuconfig''' from the top-level directory and select your application from the Applications menu. Make sure you '''deselect the helloworld application''' while you're here.
+
+=== Build and Run ===
+Compile the system and run it with similar qemu commands to the previous example:
+{{{
+make clean
+make
+qemu-system-arm -M kzm -nographic -kernel \
+  images/capdl-loader-experimental-image-arm-imx31
+}}}
+
+If all goes well you should see something like the following
+{{{
+Registering callback...
+Callback fired!
+Polling...
+We didn't find an event
+Waiting...
+Unblocked by an event!
+Callback fired!
+}}}
+
+=== Under the Hood ===
+Whether you find an event during polling will be a matter of the schedule that seL4 uses to run the components. This covers all the functionality available when using events. One final point that may not be obvious from the example is that callbacks will always be fired in preference to polling/waiting. That is, if a component registers a callback and then waits on an event to arrive, the callback will be fired when the first instance of the event arrives and the wait will return when/if the second instance of the event arrives.
