@@ -1,3 +1,4 @@
+
  * Data Structures
  * Kernel System Calls
   * Architecture-Independent Object Invocations
@@ -7,6 +8,22 @@
  * Error Codes
 
 ----
+= Official Manual =
+
+To get the latest version of the manual, checkout the seL4 source code then:
+
+{{{
+cd manual && make
+}}}
+
+You need LaTeX installed, and if all suceeds a fresh manual will be produced in manual.pdf. 
+
+Otherwise you can get the latest API manuals here: https://wiki.sel4.systems/ReleaseNotes 
+
+= Unofficial Docs =
+
+For more detailed and verbose developer docs, which are editable by members of the community.
+
 == Data Structures ==
 === seL4_CPtr ===
 x
