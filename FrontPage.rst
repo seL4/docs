@@ -24,7 +24,7 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
 == seL4 Releases ==
 
  * [[https://github.com/seL4/seL4/tree/2.0.0|Current release]]
- * [[http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf|Current manual]
+ * [[http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf|Current manual]]
  * [[ReleaseNotes|Release notes]]
  * [[ReleaseProcess|Release process]]
 
