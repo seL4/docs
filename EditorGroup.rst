@@ -10,3 +10,4 @@ List of known good editors (for anti-spam)
  * KalanaGamlath
  * HanzhangZeng
  * JaphethLim
+ * JamesHasner
