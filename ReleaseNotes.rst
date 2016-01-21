@@ -7,4 +7,4 @@ Master (verified kernel)
 
 Experimental branches
 
- * [[seL4 0.0.1-rt-dev]] ([[http://sel4.systems/Info/Docs/seL4-manual-0.0.1.-rt-dev.pdf|manual]])
+ * [[seL4 0.0.1-rt-dev]] ([[http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf|manual]])
