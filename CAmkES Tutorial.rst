@@ -476,11 +476,11 @@ Create a dependency entry in apps/hellodataport/Kbuild for your application:
 # apps/hellodataport/Kbuild
 
 apps-$(CONFIG_APP_HELLODATAPORT) += hellodataport
-helloevent: libsel4 libmuslc libsel4platsupport \
+hellodataport: libsel4 libmuslc libsel4platsupport \
   libsel4muslccamkes libsel4sync libsel4debug libsel4bench
 }}}
 
-Copy one of the Makefiles from another application or create apps/helloevent/Makefile from scratch:
+Copy one of the Makefiles from another application or create apps/hellodataport/Makefile from scratch:
 {{{#!highlight makefile
 # apps/hellodataport/Makefile
 
