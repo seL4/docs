@@ -22,7 +22,7 @@ This release is a minor release that brings structural improvements to the kerne
 
 == API Removals ==
 
-* `seL4_IRQ_SetMode` removed
+* `seL4_IRQ_SetMode` removed (This only effects users who use the IOAPIC on x86, which is turned off by default).
 
 == API deprecations ==
 
