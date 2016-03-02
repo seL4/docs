@@ -74,7 +74,7 @@ This release is a minor release that brings structural improvements to the kerne
 
 This change is not source or binary compatible.
 
-Users will need to remove calls to `seL4_IRQ_SetMode`, and upgrade and manual parsing of `seL4_BootInfo`. 
+Users will need to remove calls to `seL4_IRQ_SetMode`, and upgrade any manual parsing of `seL4_BootInfo`. 
 
 == Full changelog ==
 
