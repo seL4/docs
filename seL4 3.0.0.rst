@@ -16,7 +16,7 @@ This release is a minor release that brings structural improvements to the kerne
 
 == API Changes ==
 
- * Total number of ASIDs for x86 reduced from 2^16 to 2^12 (max ASID 2^12).
+ * Total number of ASIDs for x86 reduced from 2^16^ to 2^12^ (max ASID 2^12^).
  * `seL4_BootInfo` struct: `userImagePDs` and `userImagePTs` combined into `userImagePaging` in preparation for multilevel paging structures for 64 bit kernel support.
  * Diminish rights removed from IPC
 
