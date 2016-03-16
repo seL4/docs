@@ -1,31 +1,27 @@
 = seL4 3.0.0 Release Notes =
-
-This release is a minor release that brings structural improvements to the kernel in preparation for 64bit architecture support. Although changes do break the API, the breakages are small (see API Changes and API Removals below) and should not effect most users.    
+This release is a minor release that brings structural improvements to the kernel in preparation for 64bit architecture support. Although changes do break the API, the breakages are small (see API Changes and API Removals below) and should not effect most users.
 
 == Implementation improvements ==
-
  * python3 compatability for our python scripts.
  * more source code restructuring in preparation for 64-bit ports of seL4
  * idle thread is run in system mode for all ARM platforms except for the KZM11.
  * more work to remove duplication between libsel4 and kernel.
 
 == API Additions ==
- 
  * `seL4_IRQControl_GetIOAPIC` for x86.
  * `seL4_IRQControl_GetMSI` for x86.
 
 == API Changes ==
-
  * Total number of ASIDs for x86 reduced from 2^16^ to 2^12^ (max ASID 2^12^).
  * `seL4_BootInfo` struct: `userImagePDs` and `userImagePTs` combined into `userImagePaging` in preparation for multilevel paging structures for 64 bit kernel support.
  * Diminish rights removed from IPC
 
 == API Removals ==
+ * `seL4_IRQ_SetMode` removed (This only effects users who use the IOAPIC on x86, which is turned off by default).
 
-* `seL4_IRQ_SetMode` removed (This only effects users who use the IOAPIC on x86, which is turned off by default).
+
 
 == API deprecations ==
-
  * `seL4_IA32_PageDirectory_Map` deprecated for `seL4_X86_PageDirectory_Map`
  * `seL4_IA32_PageDirectory_Unmap` deprecated for `seL4_X86_PageDirectory_Unmap`
  * `seL4_IA32_PageTable_Map` deprecated for `seL4_X86_PageTable_Map`
@@ -69,13 +65,10 @@ This release is a minor release that brings structural improvements to the kerne
  * `seL4_IA32_WriteCombining` deprecated for `seL4_X86_WriteCombining`
  * `seL4_IA32_VMAttributes` deprecated for `seL4_X86_VMAttributes`
 
-
 == Upgrade notes ==
-
 This change is not source or binary compatible.
 
-Users will need to remove calls to `seL4_IRQ_SetMode`, and upgrade any manual parsing of `seL4_BootInfo`. 
+Users will need to remove calls to `seL4_IRQ_SetMode`, and upgrade any manual parsing of `seL4_BootInfo`.
 
 == Full changelog ==
-
 Use `git log 2.1.0..3.0.0`
