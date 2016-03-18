@@ -1,4 +1,4 @@
-= Kernel = 
+= Kernel =
 
  * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml||Technical overview paper]]
  * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml|from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?]], a 20-year retrospective of L4 microkernels;
@@ -17,9 +17,9 @@ cd manual && make
 
 You need LaTeX installed, and if all suceeds a fresh manual will be produced in manual.pdf. 
 
-= Camkes = 
+= Camkes =
 
-[[Camkes]]
+ * [[Camkes]]
 
 == Proofs ==
 
