@@ -8,6 +8,7 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
 == seL4 Documentation ==
 
  * [[Getting started]]
+ * [[Suggested projects]]
  * [[Testing]]
  * ApiDocumentation
  * [[SeL4Libraries|seL4 libraries]]
