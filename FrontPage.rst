@@ -5,12 +5,12 @@
 = seL4 Wiki =
 This WIKI is for cooperatively developing and sharing documentation on [[http://sel4.systems|seL4]]
 
-== seL4 Documentation ==
+== seL4 Basics ==
 
  * [[Getting started]]
  * [[Suggested projects]]
  * [[Testing]]
- * ApiDocumentation
+ * [[Documentation]]
  * [[SeL4Libraries|seL4 libraries]]
  * [[Hardware|Hardware Support]]
  * [[Debugging guide]]
