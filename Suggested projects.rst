@@ -14,10 +14,10 @@ seL4 currently runs on only a small set of platforms. Porting seL4 itself is usu
 
 Some interesting platforms that could support seL4 include:
 
-* Any of the Tegra SoCs from NVIDIA.
-* The RK3188, maybe using the [http://radxa.com/Home|Radxa Rock Pro] development board
-* Any of the Allwinner SoCs, such as on the [http://cubieboard.org/|Cubie] Boards
-* Any of the Arm V8 64-bit processors that are beginning to become available.
+ * Any of the Tegra SoCs from NVIDIA.
+ * The RK3188, maybe using the [http://radxa.com/Home|Radxa Rock Pro] development board
+ * Any of the Allwinner SoCs, such as on the [http://cubieboard.org/|Cubie] Boards
+ * Any of the Arm V8 64-bit processors that are beginning to become available.
 
 == Qubes ==
 
