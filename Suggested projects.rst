@@ -1,6 +1,6 @@
 = Suggested Projects =
 
-After trying the existing projects (especially [Getting started|seL4 test suite]) a good way to learn the intricacies of programming on top of seL4 is to do the exercise in the UNSW Advanced Operating Systems course.
+After trying the existing projects (especially [[Getting started|seL4 test suite]]) a good way to learn the intricacies of programming on top of seL4 is to do the exercise in the UNSW Advanced Operating Systems course.
 
 = Possible Projects =
 
@@ -15,13 +15,13 @@ seL4 currently runs on only a small set of platforms. Porting seL4 itself is usu
 Some interesting platforms that could support seL4 include:
 
  * Any of the Tegra SoCs from NVIDIA.
- * The RK3188, maybe using the [http://radxa.com/Home|Radxa Rock Pro] development board
- * Any of the Allwinner SoCs, such as on the [http://cubieboard.org/|Cubie] Boards
+ * The RK3188, maybe using the [[http://radxa.com/Home|Radxa Rock Pro]] development board
+ * Any of the Allwinner SoCs, such as on the [[http://cubieboard.org/|Cubie]] Boards
  * Any of the Arm V8 64-bit processors that are beginning to become available.
 
 == Qubes ==
 
-[https://qubes-os.org/|Qubes] is an open source operating system designed to provide strong security for desktop computing using virtualisation to provide isolation. Qubes is based on Xen. seL4 is a much better fit for Qubes. The project is to port Qubes to seL4 (or develop an alternative Qubes-like system for seL4).
+[[https://qubes-os.org/|Qubes]] is an open source operating system designed to provide strong security for desktop computing using virtualisation to provide isolation. Qubes is based on Xen. seL4 is a much better fit for Qubes. The project is to port Qubes to seL4 (or develop an alternative Qubes-like system for seL4).
 
 == Bug fixes and enhancements ==
 
@@ -53,4 +53,4 @@ Userspace currently needs to be written in C (or assembler). An interesting chal
 
 == Stuff we're working on ==
 
-Kernel develoment will continue to happen primarily at NICTA for the foreseeable future, as this not only requires a good understanding of the kernel design and implementation, but also a good understanding of what is feasible to verify. Several of these internal projects are reasonably mature and will be pushed into the public tree soon, see our [http://sel4.systems/Info/Roadmap/|Roadmap]
+Kernel develoment will continue to happen primarily at NICTA for the foreseeable future, as this not only requires a good understanding of the kernel design and implementation, but also a good understanding of what is feasible to verify. Several of these internal projects are reasonably mature and will be pushed into the public tree soon, see our [[http://sel4.systems/Info/Roadmap/|Roadmap]]
