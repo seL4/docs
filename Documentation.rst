@@ -1,4 +1,5 @@
-= Kernel =
+= Documentation =
+== Kernel ==
 
  * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml||Technical overview paper]]
  * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml|from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?]], a 20-year retrospective of L4 microkernels;
@@ -7,7 +8,7 @@
  * [[https://www.cse.unsw.edu.au/~cs9242/14/lectures/|UNSW Andvanced OS lecture slides]], especialy the Introduction and Microkernel Design lectures
  * [[Manual|http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf]] for the current release.
 
-== Building the manual for a specific version ==
+=== Building the manual for a specific version ===
 
 To get the latest version of the manual, checkout the seL4 source code then:
 
@@ -17,7 +18,7 @@ cd manual && make
 
 You need LaTeX installed, and if all suceeds a fresh manual will be produced in manual.pdf. 
 
-= Camkes =
+== Camkes ==
 
  * [[Camkes]]
 
