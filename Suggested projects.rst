@@ -1,4 +1,4 @@
-= Suggested Projects -
+= Suggested Projects =
 
 After trying the existing projects (especially [Getting started|seL4 test suite]) a good way to learn the intricacies of programming on top of seL4 is to do the exercise in the UNSW Advanced Operating Systems course.
 
