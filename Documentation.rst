@@ -6,7 +6,7 @@
  * [[Getting started]]
  * [[http://ssrg.nicta.com.au/projects/seL4/|NICTA seL4 research project pages]]
  * [[https://www.cse.unsw.edu.au/~cs9242/14/lectures/|UNSW Advanced OS lecture slides]], especialy the Introduction and Microkernel Design lectures
- * [[Manual|http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf]] for the current release.
+ * [[http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf|Manual]] for the current release.
 
 === Building the manual for a specific version ===
 
