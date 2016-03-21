@@ -13,3 +13,4 @@ List of known good editors (for anti-spam)
  * JamesHasner
  * LukeMondy
  * StephenSherratt
+ * JulienDelange
