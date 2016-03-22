@@ -29,5 +29,10 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
  * [[ReleaseNotes|Release notes]]
  * [[ReleaseProcess|Release process]]
 
+== CAmkES Releases ==
+
+ * [[https://github.com/seL4/camkes-tool/tree/camkes-2.1.0|Current release]]
+ * [[CAmkESReleaseNotes|Release notes]]
+
 == Editing the Wiki ==
-Because too many people are adding spam to the wiki, editing is by invitation only.  Create an account, and if we recognise your name you'll be added to the list of editors.  If we don't recognise you (e.g., because you've never posted anything to the [[https://sel4.systems/lists/listinfo/devel|devel mailing list]]) drop us a line if yu want ot be able to edit.
+Because too many people are adding spam to the wiki, editing is by invitation only.  Create an account, and if we recognise your name you'll be added to the list of editors.  If we don't recognise you (e.g., because you've never posted anything to the [[https://sel4.systems/lists/listinfo/devel|devel mailing list]]) drop us a line if you want ot be able to edit.
