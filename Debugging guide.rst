@@ -20,7 +20,7 @@ For x86
 }}}
 The file {{{dump.s}}} has the human-readable assembly instructions.
 
-The sel4test project has make targets which perform call {{objdump}} with the correct arguments generated from the .config.
+The sel4test project has make targets which perform call objdump with the correct arguments generated from the .config.
 
 You can objdump the kernel:
 
