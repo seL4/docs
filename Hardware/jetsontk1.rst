@@ -21,3 +21,19 @@ Then, use the default config for the tegra and build the system.
 $ make tk1_debug_xml_defconfig
 $ make
 }}}
+
+Once the system is compiled, you will have a new file creates in the ''images'' directory
+
+{{{
+$ ls images/
+sel4test-driver-image-arm-tk1
+$ 
+}}}
+
+To create the binary that will ultimately be executed, you can follow the same instructions as for the [[Beaglebone]]: 
+
+{{{
+arm-linux-gnueabi-objcopy --output-target binary images/sel4test-driver-image-arm-tk1 sel4test.bin
+}}}
+
+= Loading the binary =
