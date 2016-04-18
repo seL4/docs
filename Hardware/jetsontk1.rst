@@ -5,7 +5,7 @@ The [[http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html|Jetson TK1]]
  * The development environment fully working. See [[Getting started]]
 
 = Getting Started =
-To get started, check out
+To get started, check out the [[https://developer.nvidia.com/embedded-computing|NVIDIA developer page]], make sure your board is correctly configured and plugged.
 
 
 = Build your first seL4 system =
@@ -36,4 +36,7 @@ To create the binary that will ultimately be executed, you can follow the same i
 arm-linux-gnueabi-objcopy --output-target binary images/sel4test-driver-image-arm-tk1 sel4test.bin
 }}}
 
-= Loading the binary =
+= Load the binary =
+To load the binary you need to interact with u-boot. 
+
+= Flash u-boot =
