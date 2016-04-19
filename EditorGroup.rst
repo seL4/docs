@@ -4,7 +4,7 @@ List of known good editors (for anti-spam)
  * PeterChubb
  * AnnaLyons
  * IhorKuz
- * YanyanShen
+ * Yanyan Shen
  * AddoWondo
  * azarrabi
  * KalanaGamlath
