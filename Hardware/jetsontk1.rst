@@ -37,6 +37,27 @@ arm-linux-gnueabi-objcopy --output-target binary images/sel4test-driver-image-ar
 }}}
 
 = Load the binary =
-To load the binary you need to interact with u-boot. 
+First of all, you should connect on the console of the tegra. To do so, you need a COM port to connect on the console port of the Tegra. I am using a USB/serial cable with a null modem.
+
+Once you have the wires in place, you can connect to the console via screen. In the following, we assume that your COM port is /dev/ttyUSB0.
+
+{{{
+screen /dev/ttyUSB0 115200
+}}}
+
+When you start the board, you have the u-boot prompt. To load the binary you need to interact with u-boot. I personally uses a dhcp/tftp server to upload the binary directly on the board. I have the tegra connected on my computer. The tegra gets an IP address via the DHCP server and gets the binary.
+
+The following command will then ask to get an address via the DHCP and get the sel4.img file on the tftp server at 192.168.1.1.
+
+{{{
+dhcp ${loadaddr} 192.168.1.1:sel4.img
+}}}
+
+Then, let's start the program.
+
+{{{
+go ${loadaddr}
+}}}
+
 
 = Flash u-boot =
