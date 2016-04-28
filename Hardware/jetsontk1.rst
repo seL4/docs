@@ -61,3 +61,70 @@ go ${loadaddr}
 
 
 = Flash u-boot =
+
+The initial version of u-boot does not provides all necessary functionalities. You might need to update uboot.
+
+== Getting the sources ==
+
+{{{
+mkdir new-uboot
+cd tegra-u-boot-flasher
+repo init -u git@github.com:NVIDIA/tegra-uboot-flasher-manifests.git
+repo sync
+}}}
+
+If you have some difficulties with the `git://` protocol, edit the file `.repo/manifests/default.xml` and replace the repository URL. Issue a sync once you made the changes.
+
+== Patching the sources ==
+
+Edit the `u-boot/configs/jetson-tk1_defconfig` file and add the following lines at the bottom
+{{{
+CONFIG_CPU_V7_HAS_NONSEC=y
+CONFIG_CPU_V7_HAS_VIRT=y
+CONFIG_ARMV7_NONSEC=y
+CONFIG_ARMV7_VIRT=y
+CONFIG_SUPPORT_SPL=y
+CONFIG_SPL=y
+}}}
+
+Also, apply the following patch
+{{{
+diff --git a/include/configs/tegra-common.h b/include/configs/tegra-common.h
+index 1c469d0..234023d 100644
+--- a/include/configs/tegra-common.h
++++ b/include/configs/tegra-common.h
+@@ -77,7 +77,7 @@
+* Increasing the size of the IO buffer as default nfsargs size is more
+* than 256 and so it is not possible to edit it
+*/
+-#define CONFIG_SYS_CBSIZE (256 * 2) /* Console I/O Buffer Size */
++#define CONFIG_SYS_CBSIZE (256 * 3) /* Console I/O Buffer Size */
+/* Print Buffer Size */
+#define CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE + \
+sizeof(CONFIG_SYS_PROMPT) + 16)
+}}}
+
+
+== Building ==
+To build the sources, build the necessary tools first.
+
+{{{
+cd scripts
+./build-tools build
+}}}
+
+Then, in the script directory, build everything.
+
+{{{
+./build --socs tegra124 --boards jetson-tk1 build
+}}}
+
+== Flashing ==
+To flash, attach the jetson board's OTG usb port to a usb port on your machine. Hold down the FORCE RECOVERY button while pressing the RESET button next to it; release FORCE RECOVERY a second or two after releasing the reset button
+
+Then issue:
+{{{
+./tegra-uboot-flasher flash jetson-tk1
+}}}
+
+The board should be updated by now.
