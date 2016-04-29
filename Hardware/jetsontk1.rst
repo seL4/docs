@@ -30,12 +30,6 @@ sel4test-driver-image-arm-tk1
 $ 
 }}}
 
-To create the binary that will ultimately be executed, you can follow the same instructions as for the [[Beaglebone]]: 
-
-{{{
-arm-linux-gnueabi-objcopy --output-target binary images/sel4test-driver-image-arm-tk1 sel4test.bin
-}}}
-
 = Load the binary =
 First of all, you should connect on the console of the tegra. To do so, you need a COM port to connect on the console port of the Tegra. I am using a USB/serial cable with a null modem.
 
@@ -56,7 +50,7 @@ dhcp ${loadaddr} 192.168.1.1:sel4.img
 Then, let's start the program.
 
 {{{
-go ${loadaddr}
+bootelf ${loadaddr}
 }}}
 
 
