@@ -5,7 +5,7 @@
 = Summary: =
 This tutorial is a fairly simple introduction to debugging, and doesn't really focus on seL4 itself, but rather on the idea and practice of tracing errors and debugging in a [[http://www.embedded.com/electronics-blogs/programming-pointers/4027541/Freestanding-vs-hosted-implementations|freestanding]] environment.
 
-= ToC =
+= Table of Contents =
 <<TableOfContents()>>
 
 === Learning outcomes: ===
