@@ -31,7 +31,9 @@ https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/bootinfo.h#L72
 The "Simple" library is one of those you were introduced to in the slides: you need to initialize it with some default state before using it. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple-default/include/simple-default/simple-default.h#L18
 
 ==== TODO 3: ====
-Just a simple debugging print-out function. Allows you to examine the layout of the BootInfo. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L199 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L343
+Just a simple debugging print-out function. Allows you to examine the layout of the BootInfo.
+ * https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L199
+ * https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L343
 
 ==== TODO 4: ====
 In seL4, memory management is delegated in large part to userspace, and each process manages its own page faults with a custom pager. Without the use of the "allocman" library and the "VKA" library, you would have to manually allocate a frame, then map the frame into a page-table, before you could use new memory in your address space. In this tutorial you don't go through that procedure, but you'll encounter it later. For now, use the allocman and VKA allocation system. The allocman library requires some initial memory to bootstrap its metadata. Complete this step.
