@@ -89,7 +89,7 @@ For the sake of confirmation that our new thread was executed by the kernel succ
 
 == Globals links: ==
 
-sel4_BootInfo: https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/bootinfo.h#L51
-simple_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L201
-vka_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/vka.h#L95
-allocman_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4allocman/include/allocman/allocman.h#L105
+ * sel4_BootInfo: https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/bootinfo.h#L51
+ * simple_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L201
+ * vka_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/vka.h#L95
+ * allocman_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4allocman/include/allocman/allocman.h#L105
