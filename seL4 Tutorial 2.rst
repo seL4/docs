@@ -93,3 +93,4 @@ For the sake of confirmation that our new thread was executed by the kernel succ
  * simple_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L201
  * vka_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/vka.h#L95
  * allocman_t: https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4allocman/include/allocman/allocman.h#L105
+ * name_thread(): https://github.com/sel4-projects/sel4-tutorials/blob/master/apps/hello-2/src/util.c#L33
