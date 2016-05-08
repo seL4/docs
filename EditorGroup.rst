@@ -15,3 +15,4 @@ List of known good editors (for anti-spam)
  * StephenSherratt
  * JulienDelange
  * eduardn
+ * KofiDokuAtuah
