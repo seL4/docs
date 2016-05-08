@@ -9,6 +9,9 @@ Don't gloss over the globals declared before main() -- they're declared for your
 
 You'll observe that the things you've already covered in the second tutorial are filled out and you don't have to repeat them: in much the same way, we won't be repeating conceptual explanations on this page, if they were covered by a previous tutorial in the series.
 
+= Table of Contents =
+<<TableOfContents()>>
+
 === Learning outcomes: ===
  * Once again, repeat the spawning of a thread: however, this time the two threads will only share the same vspace, but have different CSpaces. This is an automatic side effect of the way that sel4utils creates new "processes".
  * Learn how the init thread in an seL4 system performs some types of initialization that aren't traditionally left to userspace.
