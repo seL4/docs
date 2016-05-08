@@ -37,8 +37,7 @@ https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/interfaces/sel4
 ==== TODO 3: ====
 So just as you previously had to manually retype a new frame to use for your IPC buffer, you're also going to have to manually retype a new page-table object to use as a leaf page-table in your VSpace.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vspace/arch_include/x86/vspace/arch/page.h#L27
-http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf
+https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L137
 
 ==== TODO 4: ====
 If you successfully retyped a new page table from an untyped memory object, you can now map that new page table into your VSpace, and then try again to finally map the IPC-buffer's frame object into the VSpace.
