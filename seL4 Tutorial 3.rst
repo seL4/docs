@@ -82,7 +82,6 @@ Notice also that the fact that both the sender and the receiver share the same r
 Notice however also, that while the sending thread has a capability that grants it full rights to send data across the endpoint since it was the one that created that capability, the receiver's capability may not necessarily grant it sending powers (write capability) to the endpoint. It's entirely possible that the receiver may not be able to send a response message, if the sender doesn't want it to.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L237
-build/x86/pc99/libsel4/include/sel4/types_gen.h
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
 
 ==== TODO 10: ====
@@ -96,7 +95,6 @@ We're now in the receiving thread. The seL4_Recv() syscall performs a blocking l
 Notice how the seL4_Recv() operation explicitly makes allowance for reading the badge value on the incoming message? The receiver is explicitly interested in distinguishing the sender.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h#L207 
-build/x86/pc99/libsel4/include/sel4/types_gen.h
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
 
 ==== TODO 12: ====
