@@ -20,18 +20,15 @@ Don't gloss over the globals declared before main() -- they're declared for your
 
 == Walkthrough of TODOs: ==
 ==== TODO 1: ====
-After bootstrap, the kernel hands over control to to an init thread. This thread receives a structure from the kernel that describes all the resources available on the machine. This structure is called the BootInfo structure. It includes information on all IRQs, memory, and IO-Ports (x86). This structure also tells the init thread where certain important capability references are. This step is teaching you how to obtain that structure.
+After bootstrap, the kernel hands over control to to an init thread. This thread receives a structure from the kernel that describes all the resources available on the machine. This structure is called the  BootInfo structure. It includes information on all IRQs, memory, and IO-Ports (x86). This structure also tells the init thread where certain important capability references are. This step is teaching you how to obtain that structure.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/bootinfo.h#L72
 
 ==== TODO 2: ====
-The "Simple" library is one of those you were introduced to in the slides: you need to initialize it with some default state before using it.
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple-default/include/simple-default/simple-default.h#L18
+The "Simple" library is one of those you were introduced to in the slides: you need to initialize it with some default state before using it. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple-default/include/simple-default/simple-default.h#L18
 
 ==== TODO 3: ====
-Just a simple debugging print-out function. Allows you to examine the layout of the BootInfo.
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L199
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L343
+Just a simple debugging print-out function. Allows you to examine the layout of the BootInfo. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L199 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L343
 
 ==== TODO 4: ====
 In seL4, memory management is delegated in large part to userspace, and each process manages its own page faults with a custom pager. Without the use of the "allocman" library and the "VKA" library, you would have to manually allocate a frame, then map the frame into a page-table, before you could use new memory in your address space. In this tutorial you don't go through that procedure, but you'll encounter it later. For now, use the allocman and VKA allocation system. The allocman library requires some initial memory to bootstrap its metadata. Complete this step.
@@ -56,14 +53,12 @@ Just as in the previous step, you were made to grab a reference to the root of y
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L293
 
 ==== TODO 8: ====
-In order to manage the threads that are created in seL4, the seL4 kernel keeps track of TCB (Thread Control Block) objects. Each of these represents a schedulable executable resource. Unlike other contemporary kernels, seL4 '''doesn't''' allocate a stack, virtual-address space (VSpace) and other metadata on your behalf. This step creates a TCB, which is a very bare-bones, primitive resource, which requires you to still manually fill it out.
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L101
+In order to manage the threads that are created in seL4, the seL4 kernel keeps track of TCB (Thread Control Block) objects. Each of these represents a schedulable executable resource. Unlike other contemporary kernels, seL4 '''doesn't''' allocate a stack, virtual-address space (VSpace) and other metadata on your behalf. This step creates a TCB, which is a very bare-bones, primitive resource, which requires you to still manually fill it out. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L101
 
 ==== TODO 9: ====
 You must create a new VSpace for your new thread if you need it to execute in its own isolated address space, and tell the kernel which VSpace you plan for the new thread to execute in. This opens up the option for threads to share VSpaces. In similar fashion, you must also tell the kernel which CSpace your new thread will use -- whether it will share a currently existing one, or whether you've created a new one for it. That's what you're doing now.
 
-In this particular example, you're allowing the new thread to share your main thread's CSpace and VSpace.
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L44
+In this particular example, you're allowing the new thread to share your main thread's CSpace and VSpace. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L44
 
 ==== TODO 10: ====
 This is a convenience function -- sets a name string for the TCB object.
@@ -84,8 +79,7 @@ As explained above, we've been filling out our new thread's TCB for the last few
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L30
 
 ==== TODO 14: ====
-Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy.
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L69
+Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L69
 
 ==== TODO 15: ====
 For the sake of confirmation that our new thread was executed by the kernel successfully, we cause it to print something to the screen.
