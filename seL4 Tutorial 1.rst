@@ -5,6 +5,9 @@
 = Summary: =
 This tutorial is a fairly simple introduction to debugging, and doesn't really focus on seL4 itself, but rather on the idea and practice of tracing errors and debugging in a [[http://www.embedded.com/electronics-blogs/programming-pointers/4027541/Freestanding-vs-hosted-implementations|freestanding]] environment.
 
+= ToC =
+<<TableOfContents()>>
+
 === Learning outcomes: ===
  * Reader should become accustomed to the idea of having to debug not only from the perspective of his/her own code, but also with an understanding that there are lower layers beneath him that have a say in whether or not his/her abstractions will work as intended.
  * Reader should become accustomed to the idea that the compiler and language runtime are now part of his responsibility, and s/he should become at least trivially acquainted with the C runtime which he can usually ignore, and debug with it in mind.
