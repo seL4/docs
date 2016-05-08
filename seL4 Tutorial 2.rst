@@ -10,6 +10,9 @@ The second tutorial is useful in that it addresses conceptual problems for two d
 
 Don't gloss over the globals declared before main() -- they're declared for your benefit so you can grasp some of the basic data structures. Uncomment them one by one as needed when going through the TODOs.
 
+= Table of Contents =
+<<TableOfContents()>>
+
 === Learning outcomes: ===
  * Understand the kernel's startup procedure.
  * Understand that the kernel centers around certain objects and capabilities to those objects.
