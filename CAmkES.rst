@@ -13,17 +13,31 @@ The development framework provides:
 Make sure that you already have the tools to build seL4 ([[Getting started#Setting_up_your_machine|seL4: Setting up your machine]])
 
 == Build dependencies ==
-Install GHC and packages MissingH, data-ordlist and split (installable from cabal):
+Install GHC and packages MissingH, data-ordlist, split, mtl, and base-compat (installable from cabal):
 
 {{{
-apt-get install ghc
-apt-get install cabal-install
+sudo add-apt-repository -y ppa:hvr/ghc         
+sudo apt-get update
+sudo apt-get install -y ghc-7.8.4 cabal-install-1.22 
+
+export PATH=/opt/ghc/7.8.4/bin:/opt/cabal/1.22/bin:$PATH
+
 cabal update
 cabal install MissingH
 cabal install data-ordlist
 cabal install split
+cabal install mtl
+cabal-install base-compat
 }}}
-Cabal packages get installed under the current user, so each user that wants to build the VM must run the cabal steps
+
+Cabal packages get installed under the current user, so each user that wants to build CAmkES must run the cabal steps
+
+Note also that this step adds the directories where ghc and cabal are installed to the PATH.  If ghc and/or cabal can't be found later on, it's probably because the PATH isn't set correctly.  Consider adding this to your startup files, e.g.:
+
+{{{
+echo export PATH=/opt/ghc/7.8.4/bin:/opt/cabal/1.22/bin:\$PATH >> ~/.bashrc
+}}}
+
 
 Install python packages jinja2, ply, pyelftools (via pip):
 
