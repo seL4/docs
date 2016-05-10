@@ -25,7 +25,7 @@ To get a usable build system, install '''build-essential, realpath, libxml2-util
 === Extras for CAmkES ===
 Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
 
-Please see the instructions on [[CAmkES]]
+Please see the instructions on [[CAmkES]] (but do this after finishing all the instructions here first).
 
 <<Anchor(wheezy)>>
 
