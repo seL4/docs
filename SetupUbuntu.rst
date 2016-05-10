@@ -25,16 +25,8 @@ To get a usable build system, install '''build-essential, realpath, libxml2-util
 === Extras for CAmkES ===
 Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
 
-You can get most of them from the repositories; some Haskell and python libraries have to be installed manually.
+Please see the instructions on [[CAmkES]]
 
-{{{
-sudo apt-get install cabal-install ghc libghc-missingh-dev libghc-split-dev
-cabal update
-cabal install data-ordlist
-sudo apt-get install python-pip python-jinja2 python-ply
-sudo pip install --upgrade pip
-sudo pip install pyelftools
-}}}
 <<Anchor(wheezy)>>
 
 == Debian Wheezy ==
