@@ -4,9 +4,7 @@
 == Cross compiler toolchain summary ==
 This page doesn't detail the build dependencies for SEL4. It details how to go about getting '''cross compilers''', and assumes you're trying to build SEL4 on an x86 machine.
 
-Both SEL4 and CAmkES require these steps. After completing the steps on this page, go to the respective build instructions page for the project you're trying to build (SEL4, [[CAmkES]]...).
-
-Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
+Both SEL4 and CAmkES require these steps. After completing the steps on this page, go to the respective build instructions page for the project you're trying to build (SEL4, [[CAmkES]]...). Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
 
 === Debian machines ===
 Unfortunately, Debian is in a state of flux between the old Emdebian approach and the new MultiArch approach to cross-compilation.
