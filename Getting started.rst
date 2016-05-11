@@ -107,8 +107,8 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
  * The half-written sample applications are in the subfolder: {{{projects/sel4-tutorials/apps/}}}. Your job is to fill these out.
  * The completed sample applications showing the solutions to the tutorial challenges are in the subfolder: {{{projects/sel4-tutorials/solutions/}}}.
  * The slide presentations to guide you through the tutorials are in the following files:
- ** {{{projects/sel4-tutorials/docs/seL4-Overview.pdf}}}: This is an overview of the design and thoughts behind SEL4, and we strongly recommend you read it before starting the tutorials.
- ** {{{projects/sel4-tutorials/docs/seL4Tutorial.pdf}}}: This is the actual tutorial.
+  * {{{projects/sel4-tutorials/docs/seL4-Overview.pdf}}}: This is an overview of the design and thoughts behind SEL4, and we strongly recommend you read it before starting the tutorials.
+  * {{{projects/sel4-tutorials/docs/seL4Tutorial.pdf}}}: This is the actual tutorial.
  * Detailed explanations of each "TODO" challenge:
   * [[seL4 Tutorial 1]] wiki page.
   * [[seL4 Tutorial 2]] wiki page. 
