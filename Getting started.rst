@@ -88,41 +88,33 @@ To build for the ARM targets you will need a cross-development toolchain.
 == Setting up your machine ==
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
-=== Toolchains and Prerequisites ===
-Instructions should be similar for other distros, links to toolchains for other distros are provided.
+=== Getting the source code ===
 
-[[SetupFedora|Instructions for Fedora and CentOS (RHEL should work as well)]]
+==== Get Google's "Repo" tool ====
+Repo is a tool by Google used for managing multiple git repositories. All the SEL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
 
-[[SetupUbuntu|Instructions for Debian and Ubuntu]]
+==== Using Repo to fetch an SEL4 project and its subprojects ====
 
-=== Get repo ===
-Repo is a tool by Google used for managing multiple git repositories.
-
-The latest repo is available at https://storage.googleapis.com/git-repo-downloads/repo.   Download it, and put it somewhere in your PATH.
-
-{{{
-mkdir -p ~/bin
-export PATH=~/bin:$PATH
-curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-chmod a+x ~/bin/repo
-}}}
-=== Using repo ===
-Choose a project to start with. As an example, we'll use   sel4test. First create a directory to work in, and initialise it   using repo:
-
+Choose a project to start with. As an example, we'll use sel4test. First create a directory for Repo to work in, then enter it and initialise it using Repo:
 {{{
 mkdir seL4test
 cd seL4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 }}}
-To get the actual source,   you'll then need to use repo sync:
+
+To get the actual project and subproject source, you'll then need to use repo sync, which will then clone and checkout the project and all the required subprojects.
 
 {{{
 repo sync
 }}}
-repo will churn through for around ten minutes fetching all the   repositories needed.
 
-== Build and run seL4 test ==
-=== Project Layout ===
+=== Getting the build dependencies ===
+ * [[SetupFedora|Instructions for Fedora and CentOS (RHEL should work as well)]]
+ * [[SetupUbuntu|Instructions for Debian and Ubuntu]]
+
+Instructions should be similar for other distros, links to toolchains for other distros are provided.
+
+== Project Layout ==
 Each project has an associated wiki, accessible via github, that   has up-to-date dependencies and instructions. The general   instructions here apply to all projects.
 
 The top level layout of all projects is similar. After a build it   looks something like this:
