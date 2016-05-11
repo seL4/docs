@@ -90,6 +90,7 @@ repo sync
 Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
 == Start with the SEL4 tutorials ==
+The SEL4 tutorials are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
 
 === Getting the SEL4 Tutorial source [Repo tool] ===
 If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page.
