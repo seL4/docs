@@ -85,11 +85,16 @@ To get the actual project and subproject source, you'll then need to use repo sy
 repo sync
 }}}
 
+
+
 === Getting cross compilers ===
 There are instructions on how to get cross compilers for building ARM. We only have direct instructions for Debian/Ubuntu/Fedora, but we imagine it you should be able to substitute where necessary for your distro. Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
  * [[SetupFedora|Cross compiler and general instructions for Fedora and CentOS (RHEL should work as well)]]
  * [[SetupUbuntu|Cross compilers for Debian and Ubuntu]]
+
+=== Build Dependencies ===
+The build dependencies for SEL4 can be found in the {{{Prerequisites.md}}} ([[https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md|Click!]]) file in the root of the SEL4-tutorials GIT repository.
 
 == Start with the SEL4 tutorials ==
 The SEL4 tutorials are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
