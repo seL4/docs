@@ -32,7 +32,7 @@ https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel
 ==== TODO 2: ====
 sel4utils_configure_process took a large amount of the work out of creating a new "processs". We skipped a number of steps. Take a look at the source for sel4utils_configure_process() and notice how it spawns the new thread with its own CSpace by automatically. This will have an effect on our tutorial! It means that the new thread we're creating will not share a CSpace with our main thread.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L165
+https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L202
 
 ==== TODO 3: ====
 This should be a fairly easy step to complete!
@@ -49,13 +49,13 @@ https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/v
 ==== TODO 5: ====
 As discussed above, we now just mint a badged copy of a capability to the endpoint we're listening on, into the new thread's CSpace, in the free slot that the VKA library found for us.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L227
+https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L254
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/types_32.bf#L30
 
 ==== TODO 6: ====
 So now that we've given the new thread everything it needs to communicate with us, we can let it run. Complete this step and proceed.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L161
+https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L150
  
 ==== TODO 7: ====
 We now wait for the new thread to send us data using seL4_Recv()...
@@ -76,4 +76,4 @@ https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#
 ==== TODO 9: ====
 In the new thread, we initiate communications by using seL4_Call(). As outlined above, the receiving thread replies to us using sel4_ReplyRecv(). The new thread then checks the fidelity of the data that was sent, and that's the end.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L237
+https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L277
