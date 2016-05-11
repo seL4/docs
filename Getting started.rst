@@ -138,30 +138,17 @@ There are however no detailed explanations of each TODO challenge for the CAmkES
  * The solutions can be found in this subfolder: {{{projects/sel4-tutorials/solutions/}}}.
  * The slide presentations to guide you through the tutorials are in this file: {{{projects/sel4-tutorials/docs/CAmkESTutorial.pdf}}}.
 
-== Project Layout ==
-Each project has an associated wiki, accessible via github, that   has up-to-date dependencies and instructions. The general   instructions here apply to all projects.
+== Get acquainted with SEL4Test ==
+Any changes you make to SEL4 should pass the tests in SEL4 Test, and pull requests to SEL4 which are non-trivial or related only to documentation, should come with a matching pull request and new test (if applicable) to the SEL4Test repository as well.
 
-The top level layout of all projects is similar. After a build it   looks something like this:
-
+=== Getting the SEL4 Test source code ===
+If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page.
 {{{
-$ ls -F
-Kbuild@   Makefile@  build/    images/   kernel/  projects/  tools/
-Kconfig@  apps@      configs@  include/  libs/    stage/
+mkdir seL4test
+cd seL4test
+repo init -u https://github.com/seL4/sel4test-manifest.git
+repo sync
 }}}
- build   ::      contains built files.
- apps   ::      is a symlink to a subdirectory of projects     containing the source for applications.
- configs   ::      is a symlink to a subdirectory of projects     containing default configurations
- images   ::      contains the final linked ready-to-run artefacts after a build
- include   ::      is where header files from libraries and the kernel are staged
- kernel   ::      contains the seL4 kernel
- libs   ::      contains the source to libraries
- projects   ::      is a placeholder for project-specific parts
- stage   ::      is where built libraries are put
- tools   ::      contains parts of the build system, and other tools needed to     build a project
-
-Configuration files in configs are named by target   machine, then something about what they do. Most have either   `release' or `debug' in their names. Debug kernels are built with   debug symbols (so one can use gdb), enable   assertions, and provide the sel4debug interfaces to allow debug   printout on a serial port.
-
-Some configurations are intended to run under qemu. Because qemu   does not produce a completely faithful emulation of the hardware,   sometimes features have to be disabled or worked around. These   configurations have ‘simulation’ in their names.
 
 === Build ia32 ===
 We will now build seL4test for ia32, to run on the QEMU simulator.
@@ -219,7 +206,32 @@ To fix, do {{{make menuconfig}}} visit {{{seL4 Libraries→Build musl C Library}
 
 The default configuration on newer compilers from Debian and Ubuntu use hardware floating point. Binaries built with these compilers are incompatible with the prebuilt musl C library. You can either tweak the flags (in {{{tools/common/Makefile.flags}}}: add {{{-mfloat-abi=soft}}} to '''NK_CFLAGS''') or disable the use of the prebuilt libraries as above.
 
-=== Running on real hardware ===
+== Project Layout ==
+Each project has an associated wiki, accessible via github, that   has up-to-date dependencies and instructions. The general   instructions here apply to all projects.
+
+The top level layout of all projects is similar. After a build it   looks something like this:
+
+{{{
+$ ls -F
+Kbuild@   Makefile@  build/    images/   kernel/  projects/  tools/
+Kconfig@  apps@      configs@  include/  libs/    stage/
+}}}
+ build   ::      contains built files.
+ apps   ::      is a symlink to a subdirectory of projects     containing the source for applications.
+ configs   ::      is a symlink to a subdirectory of projects     containing default configurations
+ images   ::      contains the final linked ready-to-run artefacts after a build
+ include   ::      is where header files from libraries and the kernel are staged
+ kernel   ::      contains the seL4 kernel
+ libs   ::      contains the source to libraries
+ projects   ::      is a placeholder for project-specific parts
+ stage   ::      is where built libraries are put
+ tools   ::      contains parts of the build system, and other tools needed to     build a project
+
+Configuration files in configs are named by target   machine, then something about what they do. Most have either   `release' or `debug' in their names. Debug kernels are built with   debug symbols (so one can use gdb), enable   assertions, and provide the sel4debug interfaces to allow debug   printout on a serial port.
+
+Some configurations are intended to run under qemu. Because qemu   does not produce a completely faithful emulation of the hardware,   sometimes features have to be disabled or worked around. These   configurations have ‘simulation’ in their names.
+
+== Running on real hardware ==
 
 Details of how to boot seL4 on hardware vary from system to system.
 
