@@ -14,7 +14,8 @@ The development framework provides:
  * Make sure that you already have the tools to build seL4 ([[Getting started#Setting_up_your_machine|seL4: Setting up your machine]])
 
 == Build dependencies ==
-Install GHC and packages MissingH, data-ordlist, split, mtl, and base-compat (installable from cabal):
+ * You must first install [[https://wiki.sel4.systems/Getting%20started#Build_Dependencies|the SEL4 dependencies]], and then you should move on to the instructions in this section.
+ * Install GHC and packages MissingH, data-ordlist, split, mtl, and base-compat (installable from cabal):
 
 {{{
 sudo add-apt-repository -y ppa:hvr/ghc         
