@@ -10,7 +10,7 @@ The development framework provides:
  * full integration in the OKL4 environment and build system
 
 == Setting up your machine ==
- * Before you can use any of the SEL4 related repositories, you must [[get the "repo" tool by Google|https://code.google.com/p/git-repo/]]. SEL4 projects have multiple subproject dependencies, and repo will fetch all of them and place them in the correct subdirectories for you.
+ * Before you can use any of the SEL4 related repositories, you must [[http://source.android.com/source/downloading.html#installing-repo|get the "repo" tool by Google]]. SEL4 projects have multiple subproject dependencies, and repo will fetch all of them and place them in the correct subdirectories for you.
  * Make sure that you already have the tools to build seL4 ([[Getting started#Setting_up_your_machine|seL4: Setting up your machine]])
 
 == Build dependencies ==
