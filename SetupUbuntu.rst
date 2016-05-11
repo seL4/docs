@@ -1,3 +1,6 @@
+= Table of Contents =
+<<TableOfContents()>>
+
 = Toolchains on Debian and Ubuntu =
 Unfortunately, Debian is in a state of flux between the old Emdebian approach and the new MultiArch approach to cross-compilation.
 
