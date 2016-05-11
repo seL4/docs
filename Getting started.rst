@@ -95,7 +95,9 @@ Repo is a tool by Google used for managing multiple git repositories. All the SE
 
 ==== Using Repo to fetch an SEL4 project and its subprojects ====
 
-Choose a project to start with. As an example, we'll use sel4test. First create a directory for Repo to work in, then enter it and initialise it using Repo:
+Choose a project to start with. As an example, we'll use sel4test.
+ * When fetching a project, look for the GIT repository from Github, whose title has "-manifest" appended to it. So instead of fetching the "sel4-tutorials" GIT repository on Github, we'll fetch the "sel4-tutorials-manifest" repository. The difference is that the "-manifest" repository is meant to tell Repo how to fetch the subprojects and set up the source tree.
+ * First create a directory for Repo to work in, then enter it and initialise it using Repo:
 {{{
 mkdir seL4test
 cd seL4test
@@ -113,6 +115,31 @@ repo sync
  * [[SetupUbuntu|Instructions for Debian and Ubuntu]]
 
 Instructions should be similar for other distros, links to toolchains for other distros are provided.
+
+== Start with the SEL4 tutorials ==
+
+=== Getting the SEL4 Tutorial source [Repo tool] ===
+If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page.
+{{{
+mkdir sel4-tutorials
+cd sel4-tutorials
+repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -m sel4-tutorials.xml
+repo sync
+}}}
+
+=== Using the tutorial ===
+The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "'''projects/sel4-tutorials'''". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with the SEL4 thought and design paradigm. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference. In addition, for each of the "TODO" challenges in the tutorial, there is a Wiki page section that covers it (not this page: the pages are linked below).
+
+ * The half-written sample applications are in the subfolder: '''projects/sel4-tutorials/apps/'''.
+ * The completed sample applications showing the solutions to the tutorial challenges are in the subfolder: '''projects/sel4-tutorials/solutions/'''.
+ * The slide presentations to guide you through the tutorials are in the following files:
+ ** '''projects/sel4-tutorials/docs/seL4-Overview.pdf''': This is an overview of the design and thoughts behind SEL4, and we strongly recommend you read it before starting the tutorials.
+ ** '''projects/sel4-tutorials/docs/seL4Tutorial.pdf''': This is the actual tutorial.
+ * Detailed explanations of each "TODO" challenge:
+ ** [[seL4 Tutorial 1]] 
+ ** [[seL4 Tutorial 2]] 
+ ** [[seL4 Tutorial 3]] 
+ ** [[seL4 Tutorial 4]] 
 
 == Project Layout ==
 Each project has an associated wiki, accessible via github, that   has up-to-date dependencies and instructions. The general   instructions here apply to all projects.
@@ -218,7 +245,3 @@ menuentry "Load seL4 VM"  --class os {
 Load from u-boot, from SD card or flash, or using fastboot or tftp. Most applications have two parts: treat the `kernel' part as a kernel, and the `application' part like an initrd. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.
 
 Detailed instructions differ from board to board. See The [[Hardware|General Hardware Page]] for general instructions; it has links to board specific instructions as well.
-
-== Try the seL4 tutorials ==
-
-https://github.com/sel4-projects/sel4-tutorials
