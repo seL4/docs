@@ -1,32 +1,5 @@
 === Contents ===
- 1. [[Getting started|Getting Started]]
-  1. [[#Code|Code]]
-
-  1. [[#seL4_projects|seL4 Projects]]
-
-  1. [[#Supported_Target_Platforms|Supported Target Platforms]]
-
- 1. [[#Setting_up_your_machine|Setting up your machine]]
-  1. [[#Code|Code]]
-
-  1. [[#Toolchains_And_Prerequisites|Toolchains And Prerequisites]]
-
-  1. [[#Get_repo|Get repo]]
-
-  1. [[#Using_repo|Using repo]]
-
- 1. [[#Build_and_run_seL4_test|Build and run seL4 test]]
-  1. [[#Project_Layout|Project Layout]]
-
-  1. [[#Build_ia32|Build ia32]]
-
-  1. [[#Simulate_ia32|Simulate ia32]]
-
-  1. [[#Useful_configuration_options|Useful configuration options]]
-  
-  1. [[#Caveats|Caveats]]
-
- 1. [[#Try_the_seL4_tutorials|Try the seL4 tutorials]]
+<<TableOfContents()>>
 
 = Getting Started =
 == Code ==
