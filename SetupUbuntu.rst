@@ -1,29 +1,32 @@
 = Table of Contents =
 <<TableOfContents()>>
 
-== Cross compiler toolchains ==
+== Cross compiler toolchain summary ==
+This page doesn't detail the build dependencies for SEL4. It details how to go about getting '''cross compilers''', and assumes you're trying to build SEL4 on an x86 machine.
+
+Both SEL4 and CAmkES require these steps. After completing the steps on this page, go to the respective build instructions page for the project you're trying to build (SEL4, [[CAmkES]]...).
+
+Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
+
+=== Debian machines ===
 Unfortunately, Debian is in a state of flux between the old Emdebian approach and the new MultiArch approach to cross-compilation.
 
 On Wheezy and before, you need to use the Emdebian toolchains. Library support is now available on Jessie and later, but not a full complement of cross compilers.
 
-Ubuntu is relatively straightforward, as [[http://www.linaro.org/|Linaro]] maintain cross compilers for it — see https://wiki.ubuntu.com/ToolChain. You will however have to have enabled the Universe repository.
-
-Follow the instructions in [[#all|All Debian and Ubuntu Variants]] then the ones for your system:
-
+For Debian, first follow the instructions that are common to all Debian-based distros ([[#all|All Debian and Ubuntu Variants]]) then the ones for your system:
  * [[#wheezy|Debian Wheezy (stable)]]
  * [[#jessie|Debian Jessie or sid (testing or unstable)]]
+
+=== Ubuntu machines ===
+
+Ubuntu is relatively straightforward, as [[http://www.linaro.org/|Linaro]] maintain cross compilers for it — see https://wiki.ubuntu.com/ToolChain. You will however have to have enabled the Universe repository.
+
+For Ubuntu, first follow the instructions that are common to all Debian-based distros ([[#all|All Debian and Ubuntu Variants]]) then the ones for your system:
  * [[#ubuntu|Ubuntu later than Precise Pangolin (tested on 14.04LTS — Trusty Tahr)]]
 
+== Instructions ==
+=== Instructions common to Debian and all Debian derivatives [Ubuntu, etc] ===
 <<Anchor(all)>>
-
-== Packages required to build CAmkES ==
-Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
-
-Please see the instructions on [[CAmkES]] (but you must do this after finishing all the instructions here first).
-
-== Packages required to build SEL4 ==
-
-=== Packages common to Debian and all Debian derivatives [Ubuntu, etc] ===
 
 To get a usable build system, install '''build-essential, realpath, libxml2-utils''' and '''python-tempita'''. For cross compiling on a 64-bit host, you also need '''gcc-multilib'''; to run things on a simulator you need '''qemu; ccache''' speeds up builds after the first; and '''ncurses-dev''' is needed to run the configurator.
 
@@ -36,6 +39,8 @@ To get a usable build system, install '''build-essential, realpath, libxml2-util
 === Instructions for Debian ===
 
 ==== Debian Wheezy ====
+<<Anchor(wheezy)>>
+
 To build for any of the ARM targets you need an arm cross compiler. The simplest way to do this on Wheezy is to use the emdebian pre-built compilers.
 
 {{{
@@ -56,6 +61,8 @@ The version of qemu in Debian Wheezy does not have KZM support. Either install i
 The resulting qemu binary is in '''arm-softmmu/qemu-system-arm'''
 
 ==== Debian Jessie ====
+<<Anchor(jessie)>>
+
 Jessie has multiarch support. To cross-build for ARM, add '''armhf''' as an architecture, and install the cross compiler:
 
 {{{
@@ -68,6 +75,7 @@ The resulting cross compilers generate code that is incompatible with the prebui
 <<Anchor(ubuntu)>>
 
 === Instructions for Ubuntu ===
+<<Anchor(ubuntu)>>
 
 ==== Trusty Tahr (14.04LTS) ====
 Linaro maintains cross compilers that run on Ubuntu. With current releases, the method for adding a foreign architecture is slightly more complicated than for Debian. Please note — this works on Ubuntu 14 and later.
