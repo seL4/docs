@@ -1,7 +1,7 @@
 = Table of Contents =
 <<TableOfContents()>>
 
-= Toolchains on Debian and Ubuntu =
+== Cross compiler toolchains ==
 Unfortunately, Debian is in a state of flux between the old Emdebian approach and the new MultiArch approach to cross-compilation.
 
 On Wheezy and before, you need to use the Emdebian toolchains. Library support is now available on Jessie and later, but not a full complement of cross compilers.
@@ -16,8 +16,15 @@ Follow the instructions in [[#all|All Debian and Ubuntu Variants]] then the ones
 
 <<Anchor(all)>>
 
-== All Debian And Ubuntu Variants ==
-=== The basics ===
+== Packages required to build CAmkES ==
+Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
+
+Please see the instructions on [[CAmkES]] (but you must do this after finishing all the instructions here first).
+
+== Packages required to build SEL4 ==
+
+=== Packages common to Debian and all Debian derivatives [Ubuntu, etc] ===
+
 To get a usable build system, install '''build-essential, realpath, libxml2-utils''' and '''python-tempita'''. For cross compiling on a 64-bit host, you also need '''gcc-multilib'''; to run things on a simulator you need '''qemu; ccache''' speeds up builds after the first; and '''ncurses-dev''' is needed to run the configurator.
 
 {{{
@@ -25,14 +32,10 @@ To get a usable build system, install '''build-essential, realpath, libxml2-util
   sudo apt-get install build-essential realpath libxml2-utils python-tempita
   sudo apt-get install gcc-multilib ccache ncurses-dev
 }}}
-=== Extras for CAmkES ===
-Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
 
-Please see the instructions on [[CAmkES]] (but do this after finishing all the instructions here first).
+=== Instructions for Debian ===
 
-<<Anchor(wheezy)>>
-
-== Debian Wheezy ==
+==== Debian Wheezy ====
 To build for any of the ARM targets you need an arm cross compiler. The simplest way to do this on Wheezy is to use the emdebian pre-built compilers.
 
 {{{
@@ -52,9 +55,7 @@ The version of qemu in Debian Wheezy does not have KZM support. Either install i
 }}}
 The resulting qemu binary is in '''arm-softmmu/qemu-system-arm'''
 
-<<Anchor(jessie)>>
-
-== Debian Jessie ==
+==== Debian Jessie ====
 Jessie has multiarch support. To cross-build for ARM, add '''armhf''' as an architecture, and install the cross compiler:
 
 {{{
@@ -66,8 +67,9 @@ The resulting cross compilers generate code that is incompatible with the prebui
 
 <<Anchor(ubuntu)>>
 
-== Ubuntu ==
-=== Trusty Tahr (14.04LTS) ===
+=== Instructions for Ubuntu ===
+
+==== Trusty Tahr (14.04LTS) ====
 Linaro maintains cross compilers that run on Ubuntu. With current releases, the method for adding a foreign architecture is slightly more complicated than for Debian. Please note — this works on Ubuntu 14 and later.
 
 {{{
@@ -78,5 +80,6 @@ sudo apt-get update
 sudo apt-get install gcc-arm-linux-gnueabi
 sudo apt-get install qemu-system-arm qemu-system-x86
 }}}
-=== Precise Pangolin (12.10) ===
+
+==== Precise Pangolin (12.10) ====
 The compilers available in Precise do not compile seL4 correctly. Either upgrade to Trusty, or install compilers from [[https://www.mentor.com/embedded-software/codesourcery|CodeSourcery]].
