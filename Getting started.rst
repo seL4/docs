@@ -109,10 +109,10 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
  ** '''projects/sel4-tutorials/docs/seL4-Overview.pdf''': This is an overview of the design and thoughts behind SEL4, and we strongly recommend you read it before starting the tutorials.
  ** '''projects/sel4-tutorials/docs/seL4Tutorial.pdf''': This is the actual tutorial.
  * Detailed explanations of each "TODO" challenge:
- ** [[seL4 Tutorial 1]] 
- ** [[seL4 Tutorial 2]] 
- ** [[seL4 Tutorial 3]] 
- ** [[seL4 Tutorial 4]] 
+  * [[seL4 Tutorial 1]] wiki page.
+  * [[seL4 Tutorial 2]] wiki page. 
+  * [[seL4 Tutorial 3]] wiki page.
+  * [[seL4 Tutorial 4]] wiki page.
 
 == Project Layout ==
 Each project has an associated wiki, accessible via github, that   has up-to-date dependencies and instructions. The general   instructions here apply to all projects.
