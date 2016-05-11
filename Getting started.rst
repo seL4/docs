@@ -2,6 +2,8 @@
 <<TableOfContents()>>
 
 = Getting Started =
+In general, if you're just getting started, you want to dive into the SEL4 tutorials, then the CAmkES tutorials, then the SEL4 Test suite. There's a section on this page for each.
+
 == Code ==
 All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
 
@@ -83,11 +85,11 @@ To get the actual project and subproject source, you'll then need to use repo sy
 repo sync
 }}}
 
-=== Getting the build dependencies ===
- * [[SetupFedora|Instructions for Fedora and CentOS (RHEL should work as well)]]
- * [[SetupUbuntu|Instructions for Debian and Ubuntu]]
+=== Getting cross compilers ===
+There are instructions on how to get cross compilers for building ARM. We only have direct instructions for Debian/Ubuntu/Fedora, but we imagine it you should be able to substitute where necessary for your distro. Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
-Instructions should be similar for other distros, links to toolchains for other distros are provided.
+ * [[SetupFedora|Cross compiler and general instructions for Fedora and CentOS (RHEL should work as well)]]
+ * [[SetupUbuntu|Cross compilers for Debian and Ubuntu]]
 
 == Start with the SEL4 tutorials ==
 The SEL4 tutorials are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
@@ -95,16 +97,16 @@ The SEL4 tutorials are an excellent, holistic introduction to the design of SEL4
 === Getting the SEL4 Tutorial source [Repo tool] ===
 If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page.
 {{{
-mkdir sel4-tutorials
-cd sel4-tutorials
+mkdir sel4-tutorials-manifest
+cd sel4-tutorials-manifest
 repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -m sel4-tutorials.xml
 repo sync
 }}}
 
-=== Using the tutorial ===
+=== Using the SEL4 tutorial ===
 The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "{{{projects/sel4-tutorials}}}". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with the SEL4 thought and design paradigm. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference. In addition, for each of the "TODO" challenges in the tutorial, there is a Wiki page section that covers it (not this page: the pages are linked below).
 
- * The half-written sample applications are in the subfolder: {{{projects/sel4-tutorials/apps/}}}. Your job is to fill these out.
+ * The half-written sample applications are in the subfolder: {{{apps/}}}. Your job is to fill these out.
  * The completed sample applications showing the solutions to the tutorial challenges are in the subfolder: {{{projects/sel4-tutorials/solutions/}}}.
  * The slide presentations to guide you through the tutorials are in the following files:
   * {{{projects/sel4-tutorials/docs/seL4-Overview.pdf}}}: This is an overview of the design and thoughts behind SEL4, and we strongly recommend you read it before starting the tutorials.
@@ -114,6 +116,27 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
   * [[seL4 Tutorial 2]] wiki page. 
   * [[seL4 Tutorial 3]] wiki page.
   * [[seL4 Tutorial 4]] wiki page.
+
+== Move on to the CAmkES tutorial ==
+
+=== Getting the CAmkES Tutorial source [Repo tool] ===
+If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page. Both the SEL4 tutorials and the CAmkES tutorials are synched from the same manifest repository, but they use different manifest .xml files and are separate projects.
+
+{{{
+mkdir camkes-tutorials-manifest
+cd camkes-tutorials-manifest
+repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -m camkes-tutorials.xml
+repo sync
+}}}
+
+=== Using the CAmkES tutorial ===
+These tutorials work similarly to the SEL4 tutorials in that they are guided by a slide presentation. There are half-completed sample applications, with a set of slides giving instructions, with TODO challenges once again. There are also completed sample solutions.
+
+There are however no detailed explanations of each TODO challenge for the CAmkES tutorials, as yet.
+
+ * The half-written sample applications are in this folder: {{{apps/}}}.
+ * The solutions can be found in this subfolder: {{projects/sel4-tutorials/solutions/}}}.
+ * The slide presentations to guide you through the tutorials are in this file: {{{projects/sel4-tutorials/docs/CAmkESTutorial.pdf}}}.
 
 == Project Layout ==
 Each project has an associated wiki, accessible via github, that   has up-to-date dependencies and instructions. The general   instructions here apply to all projects.
