@@ -4,6 +4,11 @@
 = Getting Started =
 In general, if you're just getting started, you want to dive into the SEL4 tutorials, then the CAmkES tutorials, then the SEL4 Test suite. There's a section on this page for each.
 
+== Aims ==
+This page seeks to comprehensively assist new SEL4 developers or interested parties to easily obtain the correct tools to duplicate the internal SEL4 development environment, successfully build the SEL4 tutorials, and successfully follow the SEL4 tutorials.
+
+It's introductory – after you've followed these steps, you'll be at the crest point where you can confidently begin reading the SEL4 API kernel manual with a '''functional''' copy of the kernel on your own machine. From that point, the guidance for what you should do with the functional source copy that you have will come from your own intuition, interest and hopefully, inspiration that SEL4 gives you.
+
 == Code ==
 All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
 
@@ -64,29 +69,25 @@ To build for the ARM targets you will need a cross-development toolchain.
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
 === Getting the source code ===
-
 ==== Get Google's "Repo" tool ====
 Repo is a tool by Google used for managing multiple git repositories. All the SEL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
 
 ==== Using Repo to fetch an SEL4 project and its subprojects ====
-
 Choose a project to start with. As an example, we'll use sel4test.
+
  * When fetching a project, look for the GIT repository from Github, whose title has "-manifest" appended to it. So instead of fetching the "sel4-tutorials" GIT repository on Github, we'll fetch the "sel4-tutorials-manifest" repository. The difference is that the "-manifest" repository is meant to tell Repo how to fetch the subprojects and set up the source tree.
  * First create a directory for Repo to work in, then enter it and initialise it using Repo:
+
 {{{
 mkdir seL4test
 cd seL4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 }}}
-
 To get the actual project and subproject source, you'll then need to use repo sync, which will then clone and checkout the project and all the required subprojects.
 
 {{{
 repo sync
 }}}
-
-
-
 === Getting cross compilers ===
 There are instructions on how to get cross compilers for building ARM. We only have direct instructions for Debian/Ubuntu/Fedora, but we imagine it you should be able to substitute where necessary for your distro. Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
@@ -101,13 +102,13 @@ The SEL4 tutorials are an excellent, holistic introduction to the design of SEL4
 
 === Getting the SEL4 Tutorial source [Repo tool] ===
 If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page.
+
 {{{
 mkdir sel4-tutorials-manifest
 cd sel4-tutorials-manifest
 repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -m sel4-tutorials.xml
 repo sync
 }}}
-
 === Using the SEL4 tutorial ===
 The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "{{{projects/sel4-tutorials}}}". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with the SEL4 thought and design paradigm. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference. In addition, for each of the "TODO" challenges in the tutorial, there is a Wiki page section that covers it (not this page: the pages are linked below).
 
@@ -118,12 +119,11 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
   * {{{projects/sel4-tutorials/docs/seL4Tutorial.pdf}}}: This is the actual tutorial.
  * Detailed explanations of each "TODO" challenge:
   * [[seL4 Tutorial 1]] wiki page.
-  * [[seL4 Tutorial 2]] wiki page. 
+  * [[seL4 Tutorial 2]] wiki page.
   * [[seL4 Tutorial 3]] wiki page.
   * [[seL4 Tutorial 4]] wiki page.
 
 == Move on to the CAmkES tutorial ==
-
 === Getting the CAmkES Tutorial source [Repo tool] ===
 If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page. Both the SEL4 tutorials and the CAmkES tutorials are synched from the same manifest repository, but they use different manifest .xml files and are separate projects.
 
@@ -133,7 +133,6 @@ cd camkes-tutorials-manifest
 repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -m camkes-tutorials.xml
 repo sync
 }}}
-
 === Using the CAmkES tutorial ===
 These tutorials work similarly to the SEL4 tutorials in that they are guided by a slide presentation. There are half-completed sample applications, with a set of slides giving instructions, with TODO challenges once again. There are also completed sample solutions.
 
@@ -148,13 +147,13 @@ Any changes you make to SEL4 should pass the tests in SEL4 Test, and pull reques
 
 === Getting the SEL4 Test source code ===
 If you don't have Repo, scroll up and read the earlier sections on Repo, on this very page.
+
 {{{
 mkdir seL4test
 cd seL4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 }}}
-
 === Build ia32 ===
 We will now build seL4test for ia32, to run on the QEMU simulator.
 
@@ -196,19 +195,17 @@ Fiddling with most of the other configuration options will lead to systems that 
 
 === Caveats ===
 ==== kzm simulation hangs ====
-
 qemu does not simulate all the timers needed for a full sel4 test run. Use the '''kzm_simulation_configurations''' to avoid tests that rely on unimplemented timers.
 
 ==== arm-none-eabi ====
-
 If you use '''arm-none-eabi''' compilers, the prebuilt libraries will fail to link, with a message something like
+
 {{{
 /usr/lib64/gcc/arm-none-eabi/4.8.1/../../../../arm-none-eabi/bin/ld: warning: /usr/src/seL4test/stage/arm/imx31/lib/libmuslc.a(internal.o) uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail
 }}}
 To fix, do {{{make menuconfig}}} visit {{{seL4 Libraries→Build musl C Library}}} and untick {{{libmuslc use precompiled archive}}} then do {{{make clean}}} and attempt to rebuild.
 
 === hard float compilers ===
-
 The default configuration on newer compilers from Debian and Ubuntu use hardware floating point. Binaries built with these compilers are incompatible with the prebuilt musl C library. You can either tweak the flags (in {{{tools/common/Makefile.flags}}}: add {{{-mfloat-abi=soft}}} to '''NK_CFLAGS''') or disable the use of the prebuilt libraries as above.
 
 == Project Layout ==
@@ -237,12 +234,11 @@ Configuration files in configs are named by target   machine, then something abo
 Some configurations are intended to run under qemu. Because qemu   does not produce a completely faithful emulation of the hardware,   sometimes features have to be disabled or worked around. These   configurations have ‘simulation’ in their names.
 
 == Running on real hardware ==
-
 Details of how to boot seL4 on hardware vary from system to system.
 
 ==== x86 ====
-
 The build system produces a multiboot compliant image for x86; a grub2 stanza is here, but we usually boot via PXE for convenience.
+
 {{{
 menuentry "Load seL4 VM"  --class os {
    load_video
@@ -254,8 +250,13 @@ menuentry "Load seL4 VM"  --class os {
    module /boot/sel4rootserver
 }
 }}}
-
 ==== ARM platforms ====
 Load from u-boot, from SD card or flash, or using fastboot or tftp. Most applications have two parts: treat the `kernel' part as a kernel, and the `application' part like an initrd. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.
 
 Detailed instructions differ from board to board. See The [[Hardware|General Hardware Page]] for general instructions; it has links to board specific instructions as well.
+
+= Contributing to SEL4 =
+Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|SEL4 is free: What does this mean for you? (2015)]]" outlines areas where the kernel could use some contributions – other than that, gauging what you can do externally is for the time being, difficult. If you have ideas, please feel free to visit the NICTA mailing lists and chime in:
+
+ * [[https://sel4.systems/lists/listinfo/announce|SEL4 Announce]].
+ * [[https://sel4.systems/lists/listinfo/devel|SEL4 Devel]].
