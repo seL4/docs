@@ -260,3 +260,15 @@ Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|SEL4 is fr
 
  * [[https://sel4.systems/lists/listinfo/announce|SEL4 Announce]].
  * [[https://sel4.systems/lists/listinfo/devel|SEL4 Devel]].
+
+= Learn more about SEL4 =
+For someone just getting to know about SEL4 and wanting to first at least understand how to build it, so that you can get comfortable with editing the source code, the following pre-init steps might help you get more context, before you try building, so you have at least a conceptual understanding of exactly what sort of creature you're about to step into the arena with. These are '''not''' pre-requisites for building the kernel, but they will help you a lot in understanding what you're dealing with.
+
+== SSRG/NICTA publications ==
+The SSRG group at NICTA has published a long list of papers on the SEL4 kernel, documenting every design decision and the justifications for each one. Consider trying to read some of them, or at least scrolling through the list, and picking out the most eye-catching titles and skimming them. You can find a long list of SEL4 publications here:
+
+[[http://ssrg.nicta.com.au/projects/seL4/|The SEL4 project page at NICTA]].
+
+== Youtube videos ==
+ * Gernot Heiser outlines several areas where the kernel is looking for good Samaritans toward the end of this presentation, "[[https://www.youtube.com/watch?v=lRndE7rSXiI|SEL4 is free: What does this mean for you? (2015)]]". If you were looking for externally available information on the status of SEL4, you probably ran across that presentation yourself.
+ * In addition, this youtube video shows Gernot giving a presentation on SEL4's context and position in the timeline of L4 microkernel research: "[[https://www.youtube.com/watch?v=RdoaFc5-1Rk|From L3 to SEL4: What have we learned in 20 years of L4 microkernels? (2014)]]".
