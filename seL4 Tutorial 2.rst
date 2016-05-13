@@ -115,6 +115,8 @@ https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L30
 Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L69
 
 ==== TODO 15: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L66)
+
 For the sake of confirmation that our new thread was executed by the kernel successfully, we cause it to print something to the screen.
 
 == Globals links: ==
