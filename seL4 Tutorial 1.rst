@@ -15,7 +15,7 @@ This tutorial is a fairly simple introduction to debugging, and doesn't really f
 
 == Walkthrough of TODOs: ==
 ==== TODO 1: ====
-(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-1/src/main.c#L18)
+''Corresponding line in tutorial:'' (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-1/src/main.c#L18)
 
 Regardless of the programming language used, every binary that is created must have an entry point, which is the first instruction in the program. In the C Runtime, this is usually "_start()", which then calls some other compiler-specific and platform specific functions to initialize the program's environment, before calling the "main()" function. What you see here is the linker complaining that when _start() tried to call main(), it couldn't find a main() function, because one doesn't exist. Create a main() function, and proceed to the next step in the slides.
 
