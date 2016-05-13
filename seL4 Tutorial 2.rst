@@ -23,29 +23,41 @@ Don't gloss over the globals declared before main() -- they're declared for your
 
 == Walkthrough of TODOs: ==
 ==== TODO 1: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L84)
+
 After bootstrap, the kernel hands over control to to an init thread. This thread receives a structure from the kernel that describes all the resources available on the machine. This structure is called the  BootInfo structure. It includes information on all IRQs, memory, and IO-Ports (x86). This structure also tells the init thread where certain important capability references are. This step is teaching you how to obtain that structure.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/bootinfo.h#L72
 
 ==== TODO 2: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L91)
+
 The "Simple" library is one of those you were introduced to in the slides: you need to initialize it with some default state before using it. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple-default/include/simple-default/simple-default.h#L18
 
 ==== TODO 3: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L99)
+
 Just a simple debugging print-out function. Allows you to examine the layout of the BootInfo.
  * https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L199
  * https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L343
 
 ==== TODO 4: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L107)
+
 In seL4, memory management is delegated in large part to userspace, and each process manages its own page faults with a custom pager. Without the use of the "allocman" library and the "VKA" library, you would have to manually allocate a frame, then map the frame into a page-table, before you could use new memory in your address space. In this tutorial you don't go through that procedure, but you'll encounter it later. For now, use the allocman and VKA allocation system. The allocman library requires some initial memory to bootstrap its metadata. Complete this step.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4allocman/include/allocman/bootstrap.h#L172
 
 ==== TODO 5: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L117)
+
 The VKA library is an seL4 type-aware object allocator that will allocate new kernel objects for you. The term "allocate new kernel objects" in seL4 is a more detailed process of "retyping" previously un-typed memory. seL4 considers all memory that hasn't been explicitly earmarked for a purpose to be "untyped", and in order to repurpose any memory into a useful object, you must give it an seL4-specific type. This is retyping, and the VKA library simplifies this for you, among other things.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4allocman/include/allocman/vka.h#L24
 
 ==== TODO 6: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L125)
+
 This is where the differences between seL4 and contemporary kernels begin to start playing out. Every kernel-object that you "retype" will be handed to you using a capability reference. The seL4 kernel keeps multiple trees of these capabilities. Each separate tree of capabilities is called a "CSpace". Each thread can have its own CSpace, or a CSpace can be shared among multiple threads. The delineations between "Processes" aren't well-defined, since seL4 doesn't have any real concept of "processes". It deals with threads. Sharing and isolation is based on CSpaces (shared vs not-shared) and VSpaces (shared vs not-shared). The "process" idea goes as far as perhaps the fact that at the hardware level, threads sharing the same VSpace are in a traditional sense, siblings, but logically in seL4, there is no concept of "Processes" really.
 
 So you're being made to grab a reference to your thread's CSpace's root "CNode". A CNode is one of the many blocks of capabilities that make up a CSpace.
@@ -53,37 +65,53 @@ So you're being made to grab a reference to your thread's CSpace's root "CNode".
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L275
 
 ==== TODO 7: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L133)
+
 Just as in the previous step, you were made to grab a reference to the root of your thread's CSpace, now you're being made to grab a reference to the root of your thread's VSpace.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4simple/include/simple/simple.h#L293
 
 ==== TODO 8: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L141)
+
 In order to manage the threads that are created in seL4, the seL4 kernel keeps track of TCB (Thread Control Block) objects. Each of these represents a schedulable executable resource. Unlike other contemporary kernels, seL4 '''doesn't''' allocate a stack, virtual-address space (VSpace) and other metadata on your behalf. This step creates a TCB, which is a very bare-bones, primitive resource, which requires you to still manually fill it out. https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L101
 
 ==== TODO 9: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L150)
+
 You must create a new VSpace for your new thread if you need it to execute in its own isolated address space, and tell the kernel which VSpace you plan for the new thread to execute in. This opens up the option for threads to share VSpaces. In similar fashion, you must also tell the kernel which CSpace your new thread will use -- whether it will share a currently existing one, or whether you've created a new one for it. That's what you're doing now.
 
 In this particular example, you're allowing the new thread to share your main thread's CSpace and VSpace. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L44
 
 ==== TODO 10: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L172)
+
 This is a convenience function -- sets a name string for the TCB object.
 
 ==== TODO 11: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L181)
+
 Pay attention to the line that precedes this particular TODO -- the line that zeroes out a new "seL4_UserContext" object. As we previously explained, seL4 requires you to fill out the Thread Control Block manually. That includes the new thread's initial register contents. You can set the value of the stack pointer, the instruction pointer, and if you want to get a little creative, you can pass some initial data to your new thread through its registers.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/arch_include/x86_64/sel4utils/arch/util.h#L28
 
 ==== TODO 12: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L195)
+
 This TODO is just some pointer arithmetic. The cautionary note that the stack grows down is meant to make you think about the arithmetic. Processor stacks push new values toward decreasing addresses, so give it some thought.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/arch_include/x86_64/sel4utils/arch/util.h#L40
 
 ==== TODO 13: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L205)
+
 As explained above, we've been filling out our new thread's TCB for the last few operations, so now we're writing the values we've chosen, to the TCB object in the kernel.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L30
 
 ==== TODO 14: ====
+(https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/main.c#L221)
+
 Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L69
 
 ==== TODO 15: ====
