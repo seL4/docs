@@ -16,3 +16,4 @@ List of known good editors (for anti-spam)
  * JulienDelange
  * eduardn
  * KofiDokuAtuah
+ * GerwinKlein
