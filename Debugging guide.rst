@@ -31,15 +31,21 @@ The sel4test project has make targets which perform call objdump with the correc
 
 You can objdump the kernel:
 
-{{{make objdump-kernel | less}}}
+{{{
+make objdump-kernel | less
+}}}
 
 The test driver:
 
-{{{make objdump-driver | less}}}
+{{{
+make objdump-driver | less
+}}}
 
 Or the tests themselves:
 
-{{{make objdump-tests | less}}}
+{{{
+make objdump-tests | less
+}}}
 
 == GDB ==
 
