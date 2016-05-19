@@ -20,6 +20,13 @@ For x86
 }}}
 The file {{{dump.s}}} has the human-readable assembly instructions.
 
+If you have symbols and want (C) source information in your disassembly (and who doesn't!) then use the -S flag.  for example:
+{{{
+  objdump -DS binary_file_name
+}}}
+
+=== Debugging seL4test ===
+
 The sel4test project has make targets which perform call objdump with the correct arguments generated from the .config.
 
 You can objdump the kernel:
