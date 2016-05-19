@@ -138,7 +138,7 @@ The rough protocol for updates in the seL4 master branch is that, together with 
 
 The frequency depends on what it is and who has time. Larger features take longer to write and prove, get pushed when they are done, and get selected by importance for the projects we're running. Not many of these happen per year unless there is specific funding for a specific feature. Small updates take a day to a few weeks and we often do them on the side. There's no specific schedule at the moment.
 
-=== How do I tell which code in github is covered by the proof an which isn't? ===
+=== How do I tell which code in github is covered by the proof and which isn't? ===
 The verification sees the entire C code for one particular combination of configuration options. Currently this is the imx6 platform, Cortex A9 processor, ARMv7-a architecture, all other config options unset (in particular DEBUG, PROFILING, etc). Excluded from this C code is the machine interface and boot code, their behavior is an explicit assumption to the proof.
 
 You can see the exact verification config options in [[https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile|l4v/spec/cspec/c/Makefile]]. The machine interface are the functions that correspond to the ones in the Haskell file [[https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs|Hardware.lhs]].
