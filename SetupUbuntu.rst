@@ -85,6 +85,7 @@ sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get install gcc-arm-linux-gnueabi
 sudo apt-get install qemu-system-arm qemu-system-x86
+sudo apt-get install g++-arm-linux-gnueabi
 }}}
 
 ==== Precise Pangolin (12.10) ====
