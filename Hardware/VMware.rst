@@ -1,8 +1,8 @@
 = seL4 on VMware =
 
-This is a quick guide on how to run seL4 x86 on VMWare Workstation / Player. Written based on decently up-to-date versions WorkStation 9 & 10 Player 5 & 6 and for a Linux host machine. May work on Mac host machine, won't work for Windows host (although general idea should be similar).
+This is a quick guide on how to run seL4 x86 on VMWare Workstation / Player. Written based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6 and for a Linux host machine. May work on Mac host machine, won't work for Windows host (although general idea should be similar).
 
-This guide assumes that your project is all set up and configured to build for x86. Read Building seL4 otherwise.
+This guide assumes that your project is all set up and configured to build for x86. Read [[Building seL4|Building seL4]] otherwise.
 
 == Setting up a VM ==
 
@@ -19,9 +19,9 @@ Make sure this is the only serial port, and it is serial port 0. If you selected
 {{attachment:vmware-serial.png|Virtual Machine Settings}}
 
 There are three options for the serial port
- 1. Output to a text file (easiest but output only). The VM will dump its serial output to a text file when it runs, and you can simply go less -F <file>.
- 1. Use physical serial port (best but requires serial cable + another machine to minicom/picocom off it). Set it to /dev/ttyS0 or something.
- 1. Output to a socket (allows input/output but annoying to set up). You'll want to apt-get install socat and then run something like:
+ 1. '''Output to a text file''' (easiest but output only). The VM will dump its serial output to a text file when it runs, and you can simply go less -F <file>.
+ 1. '''Use physical serial port''' (best but requires serial cable + another machine to minicom/picocom off it). Set it to /dev/ttyS0 or something.
+ 1. '''Output to a socket''' (allows input/output but annoying to set up). You'll want to ''apt-get install socat'' and then run something like:
  {{{#!highlight bash
  #!/bin/bash
  while true; do
@@ -34,16 +34,18 @@ Choose depending on whether you can get a serial cable from your machine, whethe
 
 === Install GRUB2 ===
 
-Once you have a VM, you'll want to set up the Hd partitions and get GRUB2 on the virtual HD and its MBR somehow. Easiest way to do this is simple install some Linux distro that has GRUB2 (Ubuntu Debian Fedora...etc). If you want to save some HD space you can try Ubuntu Minimal. Choose to install GRUB to the MBR when installing your OS.
+Once you have a VM, you'll want to set up the Hd partitions and get GRUB2 on the virtual HD and its MBR somehow. Easiest way to do this is simple install some Linux distro that has GRUB2 (Ubuntu Debian Fedora...etc). If you want to save some HD space you can try [[https://help.ubuntu.com/community/Installation/MinimalCD|Ubuntu Minimal]]. Choose to install GRUB to the MBR when installing your OS.
+
 Alternatively if you feel like extra headaches to save space and time you can try install GRUB2 manually with grub-install from some Linux Live CD image.
 
 === Add GRUB2 Option To Run seL4 ===
 
-Now we want to edit its grub.cfg (usually in /grub2 or /boot/grub or something like that) somehow and modify it to boot our seL4 kernel + userland binary.
+Now we want to edit its '''grub.cfg''' (usually in /grub2 or /boot/grub or something like that) somehow and modify it to boot our seL4 kernel + userland binary.
 
 Simplest method is to simply use VMWare player to boot into the guest OS you just installed, and then edit the grub.cfg from the guest OS itself.
 
-Another method is to use vmware-mount:
+Another method is to use '''vmware-mount''':
+
 {{{#!highlight bash
 # Usage: vmware-mount diskPath [partition num] mountPoint
 mkdir /tmp/vmount
@@ -68,8 +70,10 @@ menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
     module  /sel4-image-ia32-pc99
 }
 }}}
-Of course, change the --set=root <DeviceID> line to your DeviceID (set the DeviceID from other entries already in your grub.cfg), and also change the sel4-image-ia32-pc99 to match the name of your binary image that your Make produces (look in your build logs or in images/ folder).
-Also may be a good idea to add set default=<seL4 menu index> to the grub.cfg, so grub is configured to boot seL4.
+
+Of course, change the '''--set=root <DeviceID>''' line to your DeviceID (set the DeviceID from other entries already in your grub.cfg), and also change the '''sel4-image-ia32-pc99''' to match the name of your binary image that your Make produces (look in your build logs or in images/ folder).
+
+Also may be a good idea to add '''set default=<seL4 menu index>''' to the grub.cfg, so grub is configured to boot seL4.
 
 == Using The VM to run seL4 ==
 
