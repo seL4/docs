@@ -2,7 +2,7 @@
 
 This is a quick guide on how to run seL4 x86 on VMWare Workstation / Player. Written based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6 and for a Linux host machine. May work on Mac host machine, won't work for Windows host (although general idea should be similar).
 
-This guide assumes that your project is all set up and configured to build for x86. Read [[Building seL4|Building seL4]] otherwise.
+This guide assumes that your project is all set up and configured to build for x86. Read [[GettingStarted]] otherwise.
 
 == Setting up a VM ==
 
