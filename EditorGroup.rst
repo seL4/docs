@@ -17,3 +17,4 @@ List of known good editors (for anti-spam)
  * eduardn
  * KofiDokuAtuah
  * GerwinKlein
+ * MatthewBrecknell
