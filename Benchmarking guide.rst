@@ -50,6 +50,7 @@ if (c) {
    TRACE_POINT_STOP(0);
 }
 }}}
+
 The cycles consumed by functions f and g is logged with the key 1, only when the condition c is true:
 
 {{{
@@ -60,6 +61,7 @@ if (c) {
 g();
 TRACE_POINT_STOP(1);
 }}}
+
 These two techniques can be combined to record cycle counts only when a particular path between 2 points is followed. In the following example, cycles consumed by functions f, g and h is logged, only when the condition c is true. Cycle counts are stored with 2 keys (2 and 3) which can be combined after extracting the data to user level.
 
 {{{
@@ -73,6 +75,33 @@ if (c) {
 g();
 TRACE_POINT_STOP(3);
 }}}
+
+==== Interleaving/Nesting ====
+
+It's possible to interleave tracepoints:
+
+{{{
+TRACE_POINT_START(0);
+...
+TRACE_POINT_START(1);
+...
+TRACE_POINT_STOP(0);
+...
+TRACE_POINT_STOP(1);
+}}}
+
+and to nest tracepoints:
+
+{{{
+TRACE_POINT_START(0);
+...
+TRACE_POINT_START(1);
+...
+TRACE_POINT_STOP(1);
+...
+TRACE_POINT_STOP(0);
+}}}
+
 When interleaving or nesting tracepoints, be sure to account for the overhead that will be introduced.
 
 === Hints ===
