@@ -13,5 +13,5 @@ Please see the specific readmes of each library collection for more detail.
 
 We keep external libraries in non-condensed repos so that it is trivial to pull in upstream changes.
 
-* [[https://github.com/seL4/libmuslc|libmuslc]] - the c library we use.
+ * '''[[https://github.com/seL4/libmuslc|libmuslc]]''' - the c library we use.
  * ...
