@@ -221,6 +221,8 @@ Some configurations are intended to run under qemu. Because qemu   does not prod
 === Build configuration ===
 Prior to building a project you need to specify a configuration (settings, components, etc.) that you want to build. Kconfig is a tool for simplifying and automating this process. In a seL4 project you can enter make menuconfig in the top level directory to be presented with a terminal menu for choosing which components to build. Note that you will need the package libncurses5-dev installed to display terminal menus. It is possible to select a configuration without using the terminal menus, but techniques for doing this are not discussed on this page.
 
+{{attachment:menuconfig.png|The menu config interface|width=600}}
+
 Use arrow keys and Enter to navigate the menu, Space bar to select/deselect items and Esc-Esc to return to the parent level in the menu hierarchy. On exiting the menu system you will be asked whether you wish to save your configuration. If you choose to do so it will be written to the file .config in the top level directory.
 
 Many projects will have a default list of configurations for building common scenarios. These are located in the configs/ directory. You can load one of these by running make config_file where config_file is the filename of the configuration you want to load. Whenever you load one of these pre-made configurations it is usually wise to run make silentoldconfig. This scans your project for configuration settings that have changed since the pre-made configuration was created and updates the configuration with the defaults of these changed settings. This is not always what you want, but it generally works.
