@@ -1,6 +1,7 @@
 = Supported Hardware Platforms =
 [[Hardware/General-ARM|General info on ARM platforms]]
 
+[[Hardware/VMware|Running seL4 on VMware]]
 
 == Board-specific notes: ==
 All boards are Arm v7 unless otherwise stated.
