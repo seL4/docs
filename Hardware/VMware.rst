@@ -16,6 +16,8 @@ After you have a VM, we want to add a serial port so we can see the stuff we pri
 
 Make sure this is the only serial port, and it is serial port 0. If you selected Guest OS type "Ubuntu" or something VMWare may set up a secret hidden serial port which you can't edit from the GUI. Choose "Other" for guest type.
 
+{{attachment:vmware-serial.png|Virtual Machine Settings}}
+
 There are three options for the serial port
  1. Output to a text file (easiest but output only). The VM will dump its serial output to a text file when it runs, and you can simply go less -F <file>.
  1. Use physical serial port (best but requires serial cable + another machine to minicom/picocom off it). Set it to /dev/ttyS0 or something.
@@ -75,9 +77,9 @@ Now you have a VM ready, you'll want to copy your built kernel + userland binary
 You will need to repeat this entire above process every time you build & run seL4.
 Fortunately I have a script does all of the above in one go (may need editing of paths here and there to fit where you put things).
 
-[[Download seL4vmw|]]
+[[attachment:seL4vmw|Download seL4vmw]]
 
-== Do It Manually ==
+=== Do It Manually ===
 
 First, use vmware-mount to mount the vmdk disk image. Then copy your newly build kernel and user binaries over. Then, unmount using vmware -d.
 
