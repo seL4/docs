@@ -76,11 +76,12 @@ thread yielded to executes.
 
 == Performance improvements ==
 
-* The RT kernel has various experimental performance improvements including:
-  * Interrupt fastpath
-  * Signal fastpath (when signals are not delivered immediately - i.e to a lower prio thread)
-  * Slowpath avoids IPC lookup if message fits in registers
-  * Fault enpoints are looked up when registered and installed in the TCB's CNode, saving lookups on each fault.
+The RT kernel has various experimental performance improvements including:
+
+ * Interrupt fastpath
+ * Signal fastpath (when signals are not delivered immediately - i.e to a lower prio thread)
+ * Slowpath avoids IPC lookup if message fits in registers
+ * Fault enpoints are looked up when registered and installed in the TCB's CNode, saving lookups on each fault.
 
 == Library & test compatability ==
 
