@@ -1,0 +1,59 @@
+= seL4 1.0.0-rt-dev =
+
+The development branch of the for the seL4 realtime extensions. This branch is not verified and is under active development. 
+
+== Highlights ==
+
+ * Maximum priorities
+  * Previously seL4 would not allow threads to set any other thread's priority to higher than its own. This has been extracted into a separate field for the RT kernel, a maximum priority, which limits what thread cans set their own or other threads priorities to. 
+ * Criticality & Max Criticality
+  * Criticality is a new field for threads. The kernel has a system criticality level which can be set by the user. When the criticality level is raised, threads with criticality >= the criticality level have their priorities boosted such that they are chosen by the scheduler over low criticality threads.
+ * Scheduling contexts
+  * This branch adds scheduling contexts to seL4, which represent CPU time. Scheduling contexts are separate to threads (although threads required one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
+  * Scheduling contexts allow developers to create periodic threads, temporally isolation threads and have variable timeslices for round robin threads.
+
+For more details, please see the manual. Most of the updates are in the threads chapter.
+
+== API Changes ==
+
+ * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap and max priority added).
+
+== API Additions ==
+
+ * `seL4_CapSchedControl` - initial cap for control of CPU time
+ * `seL4_SchedContextObject` - new object for that allows threads access to CPU time
+ * `seL4_SchedContextBits` - size in bits of a scheduling context object
+ * `seL4_SignalRecv` - new system call which allows once kernel invocation to perform a non-blocking send on one capability, and wait on another. 
+ * `seL4_SignalRecvWithMRs` - uses above new system call without touching the IPC buffer, passing only data in registers
+ * `seL4_Time` - type for specifying temporal units to the kernel 
+ * `seL4_TCB_SetMaxPriority` - set the max priority for a tcb, threads can only start / set priorities threads up to and including their max priority
+ * `seL4_TCB_SetCriticality` - set the criticality for a tcb.
+ * `seL4_TCB_SetMaxCriticality` - set the max criticality for a tcb, threads can only set criticalities of threads threads up to and including their max criticality 
+ * `seL4_Prio_t` - type for priority and max priority, criticality and max criticality, used in TCB_Configure
+ * `seL4_CNode_SwapCaller` - swap the reply cap in the tcb's reply slot with the reply cap or null cap in the slot in the specified slot. 
+ * `seL4_CNode_SwapTCBCaller` - as above, but operates on the reply cap slot of the target tcb. This allows another thread to reply on behalf of the owner of the reply cap.
+ * `seL4_SchedControl_Configure` - invokes the scheduling control cap to populate a scheduling context with parameters
+ * `seL4_SchedContext_Yield` - end the timeslice of the thread bound to the sched context invoked.
+ * `seL4_SchedContext_YieldTo` - If a thread is bound to the scheduling context that this call is invoked on, place it at the head of the scheduling queue for that threads priority.
+ * `seL4_SchedContext_BindTCB` - bind a tcb to a scheduling context, if the TCB is runnable and scheduling context has budget, this will start the tcb running
+ * `seL4_SchedContext_UnbindTCB` - remove binding of a scheduling context from a tcb, tcb will no longer run but state will be preserved
+ * `seL4_CapInitThreadSC` - capability to the initial threads scheduling context
+ * `seL4_CapSchedControl` - scheduling control capability, which is given to the root thread
+ * `seL4_SchedContext_BindNotification` - Bind a notification to a scheduling context. Passive threads waiting on this notification will borrow the scheduling context.
+ * `seL4_SchedContext_UnbindNotification` - unbind the notification.
+
+== API deletions ==
+
+ * `seL4_Yield` (replaced by `seL4_SchedContext_Yield`)
+ * `seL4_DomainSet`
+ * Domain scheduler removed.
+ * `seL4_CNode_SaveCaller` (replaced by `seL4_CNode_SwapCaller`). 
+
+== Library & test compatability ==
+
+The 'rt' branch of seL4_libs has been adapted to the rt branch of seL4, and the rt branch of sel4test has been ported to the seL4_rt-dev-1.0.0 kernel, along with many more tests written suited to the rt kernel. To run it, checkout the default.xml manifest on the rt branch of sel4test-manifest.
+
+The `rt` branch is in no way compatible with the master branch of seL4.
+
+More details
+See the 1.0.0-rt-dev manual included in the release. 
