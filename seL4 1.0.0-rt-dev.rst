@@ -14,13 +14,14 @@ The development branch of the for the seL4 realtime extensions. This branch is n
  * IPC & Signal ordering
      * Signal and IPC delivery is now priority ordered, instead of FIFO. 
  * Temporal exceptions
-    * Threads can register a temporal exception handler that will be called if a threads budgt 
+    * Threads can register a temporal exception handler that will be called if a threads budget expires before its period has passed. This is optional. 
 
 For more details, please see the manual. Most of the updates are in the threads chapter.
 
 == API Changes ==
 
  * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added).
+ * `seL4_TCB_SetSpace` temporal exeception handler added.
 
 == API Additions ==
 
