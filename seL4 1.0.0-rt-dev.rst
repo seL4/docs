@@ -28,7 +28,7 @@ Threads can register a temporal exception handler that will be called if a threa
 
 For more details, please see the manual. Most of the updates are in the threads chapter.
 
-=== User level scheduling support === 
+=== User level scheduling support ===
 
 The new API makes it much easier to build high performing user level schedulers.
 
