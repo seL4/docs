@@ -9,14 +9,18 @@ The development branch of the for the seL4 realtime extensions. This branch is n
  * Criticality & Max Criticality
   * Criticality is a new field for threads. The kernel has a system criticality level which can be set by the user. When the criticality level is raised, threads with criticality >= the criticality level have their priorities boosted such that they are chosen by the scheduler over low criticality threads.
  * Scheduling contexts
-  * This branch adds scheduling contexts to seL4, which represent CPU time. Scheduling contexts are separate to threads (although threads required one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
-  * Scheduling contexts allow developers to create periodic threads, temporally isolation threads and have variable timeslices for round robin threads.
+  * This branch adds scheduling contexts to seL4, which represent CPU time (as budget/period). Scheduling contexts are separate to threads (although threads required one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
+  * Scheduling contexts allow developers to create periodic threads, temporally isolation threads and have variable timeslices for round robin threads. If budget == period, the scheduling context acts as timeslice.
+ * IPC & Signal ordering
+     * Signal and IPC delivery is now priority ordered, instead of FIFO. 
+ * Temporal exceptions
+    * Threads can register a temporal exception handler that will be called if a threads budgt 
 
 For more details, please see the manual. Most of the updates are in the threads chapter.
 
 == API Changes ==
 
- * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap and max priority added).
+ * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added).
 
 == API Additions ==
 
@@ -48,6 +52,14 @@ For more details, please see the manual. Most of the updates are in the threads 
  * `seL4_DomainSet`
  * Domain scheduler removed.
  * `seL4_CNode_SaveCaller` (replaced by `seL4_CNode_SwapCaller`). 
+
+== Performance improvements ==
+
+* The RT kernel has various experimental performance improvements including:
+  * Interrupt fastpath
+  * Signal fastpath (when signals are not delivered immediately - i.e to a lower prio thread)
+  * Slowpath avoids IPC lookup if message fits in registers
+  * Fault enpoints are looked up when registered and installed in the TCB's CNode, saving lookups on each fault.
 
 == Library & test compatability ==
 
