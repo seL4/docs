@@ -59,7 +59,7 @@ This section documents kernel API changes as compared with the current master of
  * `seL4_SchedContext_Yield` - end the timeslice of the thread bound to the sched context invoked. The thread will not run again until its period passes.
  * `seL4_SchedContext_YieldTo` - If a thread is bound to the scheduling context that this call is invoked on, place it at the head of the scheduling queue for that threads priority. Returns the amount of time the
 thread yielded to executes.
-* `seL4_SchedContext_Consumed` - returns the amount of time this scheduling context has executed since the last call to this function or `YieldTo`. 
+ * `seL4_SchedContext_Consumed` - returns the amount of time this scheduling context has executed since the last call to this function or `YieldTo`.
  * `seL4_SchedContext_BindTCB` - bind a tcb to a scheduling context, if the TCB is runnable and scheduling context has budget, this will start the tcb running
  * `seL4_SchedContext_UnbindTCB` - remove binding of a scheduling context from a tcb, tcb will no longer run but state will be preserved
  * `seL4_CapInitThreadSC` - capability to the initial threads scheduling context
