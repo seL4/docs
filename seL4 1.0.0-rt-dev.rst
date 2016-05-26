@@ -4,26 +4,44 @@ The development branch of the for the seL4 realtime extensions. This branch is n
 
 == Highlights ==
 
- * Maximum priorities
-  * Previously seL4 would not allow threads to set any other thread's priority to higher than its own. This has been extracted into a separate field for the RT kernel, a maximum priority, which limits what thread cans set their own or other threads priorities to. 
- * Criticality & Max Criticality
-  * Criticality is a new field for threads. The kernel has a system criticality level which can be set by the user. When the criticality level is raised, threads with criticality >= the criticality level have their priorities boosted such that they are chosen by the scheduler over low criticality threads.
- * Scheduling contexts
-  * This branch adds scheduling contexts to seL4, which represent CPU time (as budget/period). Scheduling contexts are separate to threads (although threads required one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
-  * Scheduling contexts allow developers to create periodic threads, temporally isolation threads and have variable timeslices for round robin threads. If budget == period, the scheduling context acts as timeslice.
- * IPC & Signal ordering
-     * Signal and IPC delivery is now priority ordered, instead of FIFO. 
- * Temporal exceptions
-    * Threads can register a temporal exception handler that will be called if a threads budget expires before its period has passed. This is optional. 
+=== Maximum priorities ===
+
+Previously seL4 would not allow threads to set any other thread's priority to higher than its own. This has been extracted into a separate field for the RT kernel, a maximum priority, which limits what thread cans set their own or other threads priorities to. 
+
+=== Criticality & Max Criticality ===
+
+Criticality is a new field for threads. The kernel has a system criticality level which can be set by the user. When the criticality level is raised, threads with criticality >= the criticality level have their priorities boosted such that they are chosen by the scheduler over low criticality threads.
+
+=== Scheduling contexts === 
+
+This branch adds scheduling contexts to seL4, which represent CPU time (as budget/period). Scheduling contexts are separate to threads (although threads required one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
+
+Scheduling contexts allow developers to create periodic threads, temporally isolation threads and have variable timeslices for round robin threads. If budget == period, the scheduling context acts as timeslice.
+
+=== IPC & Signal ordering ===
+ 
+Signal and IPC delivery is now priority ordered, instead of FIFO. 
+
+=== Temporal exceptions ===
+
+Threads can register a temporal exception handler that will be called if a threads budget expires before its period has passed. This is optional. 
 
 For more details, please see the manual. Most of the updates are in the threads chapter.
 
-== API Changes ==
+=== User level scheduling support === 
+
+The new API makes it much easier to build high performing user level schedulers.
+
+== RT API ==
+
+This section documents kernel API changes as compared with the current master of seL4.
+
+=== API Changes ===
 
  * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added).
  * `seL4_TCB_SetSpace` temporal exeception handler added.
 
-== API Additions ==
+=== API Additions ===
 
  * `seL4_CapSchedControl` - initial cap for control of CPU time
  * `seL4_SchedContextObject` - new object for that allows threads access to CPU time
@@ -47,7 +65,7 @@ For more details, please see the manual. Most of the updates are in the threads 
  * `seL4_SchedContext_BindNotification` - Bind a notification to a scheduling context. Passive threads waiting on this notification will borrow the scheduling context.
  * `seL4_SchedContext_UnbindNotification` - unbind the notification.
 
-== API deletions ==
+=== API deletions ===
 
  * `seL4_Yield` (replaced by `seL4_SchedContext_Yield`)
  * `seL4_DomainSet`
