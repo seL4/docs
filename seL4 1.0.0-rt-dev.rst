@@ -88,5 +88,14 @@ The 'rt' branch of seL4_libs has been adapted to the rt branch of seL4, and the 
 
 The `rt` branch is in no way compatible with the master branch of seL4.
 
-More details
+== Hardware support ==
+
+The RT kernel supports:
+
+ * Beagle board
+ * Sabre
+ * x86 (processors that support `TSC_DEADLINE` mode)
+
+== More details ==
+
 See the 1.0.0-rt-dev manual included in the release. 
