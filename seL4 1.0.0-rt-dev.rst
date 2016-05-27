@@ -90,11 +90,14 @@ The `rt` branch is in no way compatible with the master branch of seL4.
 
 == Hardware support ==
 
-The RT kernel supports:
+The RT kernel currently supports:
 
  * Beagle board
  * Sabre
  * x86 (processors that support `TSC_DEADLINE` mode)
+ * odroid-xu
+
+Other hardware platforms will be added as required (the ports require updated kernel and user-level timer drivers)
 
 == More details ==
 
