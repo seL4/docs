@@ -84,7 +84,7 @@ The RT kernel has various experimental performance improvements including:
 
 == Library & test compatability ==
 
-The 'rt' branch of seL4_libs has been adapted to the rt branch of seL4, and the rt branch of sel4test has been ported to the seL4_rt-dev-1.0.0 kernel, along with many more tests written suited to the rt kernel. To run it, checkout the default.xml manifest on the rt branch of sel4test-manifest.
+The 'rt' branch of seL4_libs has been adapted to the rt branch of seL4, and the rt branch of sel4test has been ported to the seL4_rt-dev-1.0.0 kernel, along with many more tests written suited to the rt kernel. To run it, checkout the default.xml manifest on the rt branch of [[https://github.com/seL4/sel4test-manifest/tree/rt|sel4test-manifest]].
 
 The `rt` branch is in no way compatible with the master branch of seL4.
 
