@@ -1,3 +1,4 @@
+## page was renamed from seL4 3.0.2
 /!\ Draft /!\
 
 = Introducing seL4 3.1.0 =
