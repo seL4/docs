@@ -31,7 +31,7 @@ This WIKI is for cooperatively developing and sharing documentation on [[http://
 
 == CAmkES Releases ==
 
- * [[https://github.com/seL4/camkes-tool/tree/camkes-2.1.0|Current release]]
+ * [[https://github.com/seL4/camkes/releases/latest|Current release]]
  * [[CAmkESReleaseNotes|Release notes]]
 
 == Editing the Wiki ==
