@@ -1,4 +1,7 @@
 = seL4 and RefOS on the Beaglebone Black =
+
+This page contains info about building seL4 on [[http://beagleboard.org/black|Beaglebone Black]].
+
 == Building for the Beaglebone Black ==
 These instructions were written by Tim Newsham.  The Beaglebone is a   community-supported port.
 
