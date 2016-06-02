@@ -1,9 +1,29 @@
 = Benchmarking seL4 =
-== In kernel log buffer ==
+== Benchmarking project == 
+
+There is a set of microbenchmarks for seL4 available, see the [[https://github.com/seL4/sel4bench-manifest|sel4bench-manifest]].
+
+
+= Benchmarking Tools =
+
+== In kernel log-buffer ==
+
+We provide a 1MB buffer in the kernel when `CONFIG_TRACEPOINTS > 0`. This can be used to place information while the kernel is running. The buffer is write-through to optimise performance, so if using the buffer make sure you do not read data back. Ideally, benchmarks that use the buffer should log one line at a time, sequentially, into the buffer for minimal performance impact while benchmarking. 
+
+Buffer data can be extracted via special benchmarking system calls to the kernel that copy the data out via the IPC buffer. 
+
+We provide several benchmarking tools that use the log buffer. 
+
 === Caveats ===
-Only works on Sabre, Odroid-XU and the Haswells at the moment.
+
+On Sabre, Odroid-XU and Haswell platforms we
+
+== Tracepoints == 
+
+We allow the user to specify tracepoints in the kernel to track the time between points. 
 
 === How to use ===
+
 Set "Maximum number of tracepoints" in Kconfig (seL4 > seL4 System Parameters) to a non-zero value.
 
 Wrap the regions you wish to time with TRACE_POINT_START(i) and TRACE_POINT_STOP(i) where i is an integer from 0 to 1 less than the value of "Maximum number of tracepoints".
