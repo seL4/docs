@@ -29,7 +29,7 @@ Then, use ''menuconfig > Tools > Build elfloader > Boot image type'' and choose 
 $ make menuconfig
 $ make
 }}}
-Once the system is compiled, you will have a new file creates in the images directory
+Once the system is compiled, you will have a new image file created in the images directory
 
 {{{
 $ ls images/sel4test-driver-image-arm-hikey.bin $
