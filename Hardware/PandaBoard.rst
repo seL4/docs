@@ -29,9 +29,6 @@ The reason to patch the u-boot is because the fastboot jumps to the kernel entry
  1. The kernel should boot and application gets executed.
 
 
-== TODO ==
- 1. To pass the seL4 test suite
-
 = References =
 ==== SD setup ====
 http://omappedia.org/wiki/4AI.1.4_OMAP4_Icecream_Sandwich_Panda_Notes#Patching_X-LOADER
