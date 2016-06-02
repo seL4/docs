@@ -10,7 +10,7 @@ This page archives all of the release notes for seL4.
 
 = Experimental branches =
 
-== Realtime == 
+== Realtime ==
 
  * [[seL4 0.0.1-rt-dev]] ([[http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf|manual]])
  * [[seL4 1.0.0-rt-dev]] ([[http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf|manual]])
