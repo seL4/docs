@@ -1,6 +1,6 @@
 = Loading onto ARM Hardware =
 
-Load from u-boot, from SD card or flash, or using fastboot or tftp. Most applications have two parts: treat the `kernel' part as a kernel, and the `application' part like an initrd. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.
+Load from u-boot, from SD card or flash, or using fastboot or tftp. Most applications have two parts: treat the "kernel" part as a kernel, and the "application" part like an initrd. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.
 
 Detailed instructions differ from board to board. See The [[Hardware|General Hardware Page]] for general instructions; it has links to board specific instructions as well.
 
