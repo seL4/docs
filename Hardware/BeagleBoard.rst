@@ -1,5 +1,8 @@
 = seL4 on the BeagleBoard =
-See [[http://sel4.systems/pipermail/devel/2014-August/000030.html|Tim   Newsham's post]] on the mailing list for one user's experience.
+
+This page documents booting seL4 on the [[http://beagleboard.org/beagleboard|Beagleboard]], Omap 3530See.
+
+[[http://sel4.systems/pipermail/devel/2014-August/000030.html|Tim   Newsham's post]] on the mailing list for one user's experience.
 
 == Preparing your SD card ==
 === Prologue ===
