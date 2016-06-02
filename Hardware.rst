@@ -11,3 +11,4 @@ All boards are Arm v7 unless otherwise stated.
  * [[Hardware/Beaglebone|Beaglebone Black (AM335x Cortex A8)]] -- arm v7
  * [[IF6410|Inforce IFC6410 (krait)]] --- Qualcomm reimplementation of Armv7, Cortex A15-like.
  * [[Hardware/jetsontk1|NVIDIA Tegra K1]] -- Cortex a15
+ * [[Hardware/HiKey]] -- armv8-a, Cortex a53
