@@ -23,8 +23,7 @@ You may also like to set up a udev rule for fastboot:
 
 == SD card setup ==
 An image file can be found here:
-
-||`scp hg.ertos.nicta.com.au:/data/sd_images/ODROID.img`||
+TODO Add sd image
 
 
 This image contains both uboot and Android. This should set up SD card partitions properly. seL4 image can be uploaded via fastboot.
@@ -55,7 +54,7 @@ The reason we choose qnx is because we exploit the fact that, like seL4, qnx exp
 == Booting ==
 Fastboot will be used to upload images to the device. The tool can be found here:  or here: you can clone and build the tool from source
 
-||`hg clone ssh://hg.ertos.nicta.com.au//data/hg_root/tools/fastboot`||
+<TODO> add fastboot link
 
 
 Follow these steps to boot your program:
