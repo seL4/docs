@@ -32,12 +32,12 @@ Note — u-boot understands DOS filesystems (and ext2) so uImage, uInitrd and th
 
 These offsets are designed for a u-boot enviroment like this:
 
-||`bootargs=root=/dev/mmcblk1p1   rw rootwait console=ttySAC2,115200n8 init --no-logbootcmd=mmc read 40007000 451 2000;mmc read 42000000 2451 20;bootm 40007000 - 42000000`||
+||`bootargs=root=/dev/mmcblk1p1   rw rootwait console=ttySAC2,115200n8 init --no-log`<<BR>>`bootcmd=mmc read 40007000 451 2000;mmc read 42000000 2451 20;bootm 40007000 - 42000000`||
 
 
 If you have a separate boot partition on your card you could instead use: (untested as yet)
 
-||`kernel=0x40007000dtb=42000000bootcmd=mmc init; fatload mmc 0:1 ${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} - ${dtb}`||
+||`kernel=0x40007000`<<BR>>`dtb=42000000`<<BR>>`bootcmd=mmc init; fatload mmc 0:1 ${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} - ${dtb}`||
 
 
 === u-boot ===
@@ -50,13 +50,13 @@ Uboot
 
 Inside the Android environment do:
 
-||`make ARCH=arm CROSS_COMPILE=arm-eabi- arndale sudo dd iflag=dsync oflag=dsync if=u-boot.bin of=/dev/sdb seek=63`||
+||`make ARCH=arm CROSS_COMPILE=arm-eabi- arndale`<<BR>>`sudo dd iflag=dsync oflag=dsync if=u-boot.bin of=/dev/sdb seek=63`||
 
 
 == seL4 Image file preparation ==
 In most cases it is okay to simply load the elf file into memory and run ''bootelf''. However, ''fastboot'' may require that the elf file be packed into a u-boot application image file. Follow the below instructions to create this image.
 
-||`sudo apt-get install uboot-mkimageINPUT_FILE=images/sel4test-image-arm-exynos4OUTPUT_FILE=sel4-uImagemkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d $INPUT_FILE $OUTPUT_FILE`||
+||`sudo apt-get install uboot-mkimage`<<BR>>`INPUT_FILE=images/sel4test-image-arm-exynos4`<<BR>>`OUTPUT_FILE=sel4-uImage`<<BR>>`mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d $INPUT_FILE $OUTPUT_FILE`||
 
 
 The reason we choose qnx is because we exploit the fact that, like seL4, qnx expects to be elf-loaded. The alternative is to convert our elf file into a binary file using objcopy.
@@ -71,7 +71,7 @@ The reason we choose qnx is because we exploit the fact that, like seL4, qnx exp
 === tftpboot ===
 At the uboot prompt, type ''print '' to see the list of environment variables and their values. Use the following commands to set any variables that are missing from the list
 
-||`setenv bootfile filenamesetenv ethaddr 00:40:5c:26:0a:FFsetenv usbethaddr 00:40:5c:26:0a:FFsetenv pxefile_addr_r 0x50000000`||
+||`setenv bootfile filename`<<BR>>`setenv ethaddr 00:40:5c:26:0a:FF`<<BR>>`setenv usbethaddr 00:40:5c:26:0a:FF`<<BR>>`setenv pxefile_addr_r 0x50000000`||
 
 
 Now run:
