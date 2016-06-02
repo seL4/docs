@@ -1,0 +1,1 @@
+Describe Hardware/HiKey here.
