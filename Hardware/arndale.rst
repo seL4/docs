@@ -15,7 +15,7 @@ For BL1 from the Android tree:
 ||BL1 ||1 || ||
 ||BL2 (uboot-module) ||31 (8k) || ||
 ||u-boot ||63 ||(24k) ||
-||TrustZone ||719 || ||
+||!TrustZone ||719 || ||
 
 
 For BL1 from https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&do=view&target=arndale-bl1.img
