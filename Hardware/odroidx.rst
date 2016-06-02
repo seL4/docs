@@ -37,20 +37,17 @@ To prepare the sd card, run
 Where sdx is the device that is associated with your sd card.
 
 ===== Uboot =====
-For those who are interested, the u-boot source can be obtained here:
-
-||`hg clone ssh://hg.ertos.nicta.com.au//data/bsp/odroid-x/u-boot_4412cd u-boot_4412make smdk4412_configmake CROSS_COMPILE=arm-none-eabi- smdk4412`||
-
+<TODO> Uboot source?
 
 u-boot must reside at a magical offset in a special partition of the SD card. To copy u-boot and the other boot loaders to the sd card:
 
-||`cd sd_fusesudo ./sd_fusing_4412.sh /dev/sdx`||
+||`cd sd_fusesudo`<<BR>> `./sd_fusing_4412.sh /dev/sdx`||
 
 
 == seL4 Image file preparation ==
 The seL4 image file must be converted into a u-boot application file. The first step is to strip the elf file into a binary file. Next we use mkimage to create the image.
 
-||`sudo apt-get install uboot-mkimageINPUT_FILE=images/sel4test-image-arm-exynos4OUTPUT_FILE=sel4-uImagemkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d $INPUT_FILE $OUTPUT_FILE`||
+||`sudo apt-get install uboot-mkimage`<<BR>>`INPUT_FILE=images/sel4test-image-arm-exynos4`<<BR>>`OUTPUT_FILE=sel4-uImage`<<BR>>`mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d $INPUT_FILE $OUTPUT_FILE`||
 
 
 The reason we choose qnx is because we exploit the fact that, like seL4, qnx expects to be elf-loaded. The alternative is to convert our elf file into a binary file using objcopy.
