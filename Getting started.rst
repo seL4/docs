@@ -38,32 +38,8 @@ The available projects so far are:
 Other projects may be added later.
 
 === Supported Target Platforms ===
-Platforms that are supported in general are in the following list. Not all projects support all these platforms.
 
-Read the [[Hardware]]  pages for special instructions for particular hardware platforms.
-
- * Intel platforms
-  * A PC99-style Intel Architecture 32-bit x86 (ia32)
-  * There is also experimental support for the 64-bit Intel x86_64 architecture.
-
- * ARM platforms
-  * The [[http://www.arndaleboard.org/wiki/index.php/Main_Page|Arndale]] dual core A15 ARM development board
-
-  * The [[http://beagleboard.org/beagleboard|Beagleboard]], Omap 3530
-
-  * The [[http://www.inforcelive.com/index.php?route=product/product&product_id=53|Inforce IFC6410]] development board, running a Qualcomm Krait processor that is like an A15.
-
-  * The [[http://www.kmckk.com/eng/kzm.html|KZM-ARM11-01]]. The kernel for this board is the one that is formally verified.
-
-  * The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947|Odroid-X]] Exynos4412 board
-
-  * The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620|Odroid-XU]] Exynos 5 board
-
-  * The [[https://boundarydevices.com/product/sabre-lite-imx6-sbc/|Sabre Lite]] i.mx6 board.
-
-  * The [[http://beagleboard.org/black|Beaglebone Black]] is a community-supported port.
-
-To build for the ARM targets you will need a cross-development toolchain.
+Read the [[Hardware]] pages to see a list of supported platforms, and special instructions for particular hardware platforms.
 
 == Setting up your machine ==
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
