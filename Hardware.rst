@@ -5,7 +5,7 @@
 
 == Intel ==
 
-* A PC99-style Intel Architecture 32-bit x86 (ia32)
+ * [[Hardware/IA32]] A PC99-style Intel Architecture 32-bit x86 (ia32)
 
 == ARM ==
 
@@ -20,10 +20,3 @@ All boards are Arm v7 unless otherwise stated.
  * [[Hardware/arndale]] -- dual core A15 ARM development board
  * [[Hardware/Kzm]] 
  * [[Hardware/odroidx]]
- 
-  * The [[http://www.arndaleboard.org/wiki/index.php/Main_Page|Arndale]] dual core A15 ARM development board
-
-
-    * The [[http://www.kmckk.com/eng/kzm.html|KZM-ARM11-01]]. The kernel for this board is the one that is formally verified.
-
-  * The [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947|Odroid-X]] Exynos4412 board
