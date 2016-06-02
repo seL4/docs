@@ -18,3 +18,4 @@ List of known good editors (for anti-spam)
  * KofiDokuAtuah
  * GerwinKlein
  * MatthewBrecknell
+ * kentmcleod
