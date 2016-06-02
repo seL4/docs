@@ -35,7 +35,7 @@ Once the system is compiled, you will have a new file creates in the images dire
 $ ls images/sel4test-driver-image-arm-hikey.bin $
 }}}
 = Load the binary =
-First of all, you should connect to the console of the hikey. To do so, you need a COM port to connect on the console port of the HIkey. I am using a USB/serial cable with a null modem. Once you have the wires in place, you can connect to the console via ''minicom''. When you start the board, interrupt the default boot process to start the fastboot or use that jumper of pin5-pin6 on J15 to select fastboot as default, [[https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi|see this]].
+First of all, you should connect to the console of the hikey. To do so, you need a COM port to connect on the console port of the Hikey. I am using a USB/serial cable with a null modem. Once you have the wires in place, you can connect to the console via ''minicom''. When you start the board, interrupt the default boot process to start the fastboot or use that jumper of pin5-pin6 on J15 to select fastboot as default, [[https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi|see this]].
 
 use ''fastboot'' to start the image
 {{{
