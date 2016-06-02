@@ -10,10 +10,10 @@ Hikey board is based around the [[https://github.com/96boards/documentation/blob
  * Copy the file '''noboot.efi''' to '''boot-fat.uefi.img''' partition.
  * Use UART0 instead of UART3 as the console by uncomment the appropriate line(s) in '''LinaroPkg/platforms.config''' before compiling the '''linaro-edk2'''.
 
-Build your first seL4 system
+= Build your first seL4 system =
 
+First, check out the seL4 project.
 {{{
-$ First, check out the seL4 project.
 $ mkdir hikey-test
 $ repo init -u https://github.com/seL4/sel4test-manifest.git
 $ repo sync
