@@ -1,0 +1,21 @@
+seL4 runs on 32-bit ia32 machines, on qemu and on hardware.
+
+= Simulation =
+
+See [[Getting Started]], which steps through building and running seL4 test on qemu.
+
+= Real Hardware =
+
+The build system produces a multiboot compliant image for x86; a grub2 stanza is here, but we usually boot via PXE for convenience.
+
+{{{
+menuentry "Load seL4 VM"  --class os {
+   load_video
+   insmod gzio
+   insmod part_msdos
+   insmod ext2
+   set root='(hd0,msdos2)'
+   multiboot /boot/sel4kernel
+   module /boot/sel4rootserver
+}
+}}}
