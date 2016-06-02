@@ -7,6 +7,6 @@ Hikey board is based around the [[https://github.com/96boards/documentation/blob
 
 Check out the [[https://github.com/96boards/documentation/wiki/HiKeyUEFI|HiKeyUEFI]] page, make sure your board is correctly configured and plugged.
 
- * Befor compileing the linaro-edk2, make sure to appy this patch.
- * When creating the boot-fat.uefi.img partition, replace the default fastboot with newly generated one.
- * Copy the file noboot.efi to boot-fat.uefi.img partition.
+ * Before compiling the '''linaro-edk2''', make sure to appy this patch.
+ * When creating the '''boot-fat.uefi.img''' partition, replace the default fastboot with newly generated one.
+ * Copy the file '''noboot.efi''' to '''boot-fat.uefi.img''' partition.
