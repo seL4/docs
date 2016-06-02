@@ -1,5 +1,13 @@
 = Loading onto ARM Hardware =
 
+The ARM platform has too many ways to boot into an operating system.  Typically there is some low-level ROM code (very specific to each device) that turns on RAM, and turns on enough clocks to 
+be able to load a 2nd-level bootloader which does the work.  Some do this in several stages, to enable TrustZone, HYP-mode etc., etc.
+ 
+The main bootloaders after the ROM are U-Boot, UEFI, Loki (for Samsung devices) and simpleboot.  Most of these provice FAstBoot over USB to allow software loading.
+ 
+On UEFI for arm: http://blog.hansenpartnership.com/efitools-for-arm-released/
+On U-Boot for arm: http://www.denx.de/wiki/U-Boot
+
 Load from u-boot, from SD card or flash, or using fastboot or tftp. Most applications have two parts: treat the "kernel" part as a kernel, and the "application" part like an initrd. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.
 
 Detailed instructions differ from board to board. See The [[Hardware|General Hardware Page]] for general instructions; it has links to board specific instructions as well.
