@@ -1,6 +1,6 @@
 = Sabre Lite =
 
-For details see [https://boundarydevices.com/product/sabre-lite-imx6-sbc/|Sabre Lite]
+For board details see [[https://boundarydevices.com/product/sabre-lite-imx6-sbc/|Sabre Lite]]
 
 = Building for the Sabre Lite =
 For preset build config, use defconfigs called ''sabre_'' or'' imx6 ''
