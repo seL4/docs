@@ -38,7 +38,7 @@ This section documents kernel API changes as compared with the current master of
 
 === API Changes ===
 
- * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added).
+ * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added). Fault endpoints are also now specified in the callers cspace, as they are installed the the tcb cspace and looked up once rather than every fault. 
  * `seL4_TCB_SetSpace` temporal exeception handler added.
 
 === API Additions ===
