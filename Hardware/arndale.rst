@@ -38,7 +38,7 @@ These offsets are designed for a u-boot enviroment like this:
 
 If you have a separate boot partition on your card you could instead use: (untested as yet)
 
-||`kernel=0x40007000dtb=42000000bootcmd=mmc init; fatload mmc 0:1 ${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} - ${dtb}``||
+||`kernel=0x40007000dtb=42000000bootcmd=mmc init; fatload mmc 0:1 ${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} - ${dtb}`||
 
 
 === u-boot ===
