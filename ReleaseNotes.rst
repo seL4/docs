@@ -1,4 +1,4 @@
-= seL4 Releases = 
+= seL4 Releases =
 
 This page archives all of the release notes for seL4.
 
