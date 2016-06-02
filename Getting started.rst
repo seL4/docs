@@ -210,28 +210,11 @@ Pre-made configurations are stored in configs/. To make a new configuration, pic
 The other file(s) you will want to care about is Kconfig. These files tell Kconfig how to construct the menu hierarchy. A formal description of the Kconfig options and syntax can be found at http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt. Symbols are defined by using the 'config' statement. These symbols are given the prefix 'CONFIG_' when the configuration is written to the .config file.
 
 == Running on real hardware ==
-Details of how to boot seL4 on hardware vary from system to system.
 
-==== x86 ====
-The build system produces a multiboot compliant image for x86; a grub2 stanza is here, but we usually boot via PXE for convenience.
-
-{{{
-menuentry "Load seL4 VM"  --class os {
-   load_video
-   insmod gzio
-   insmod part_msdos
-   insmod ext2
-   set root='(hd0,msdos2)'
-   multiboot /boot/sel4kernel
-   module /boot/sel4rootserver
-}
-}}}
-==== ARM platforms ====
-Load from u-boot, from SD card or flash, or using fastboot or tftp. Most applications have two parts: treat the `kernel' part as a kernel, and the `application' part like an initrd. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.
-
-Detailed instructions differ from board to board. See The [[Hardware|General Hardware Page]] for general instructions; it has links to board specific instructions as well.
+See [[Hardware]].
 
 = Contributing to SEL4 =
+
 Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|SEL4 is free: What does this mean for you? (2015)]]" outlines areas where the kernel could use some contributions – other than that, gauging what you can do externally is for the time being, difficult. If you have ideas, please feel free to visit the NICTA mailing lists and chime in:
 
  * [[https://sel4.systems/lists/listinfo/announce|SEL4 Announce]].
