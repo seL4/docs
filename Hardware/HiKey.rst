@@ -13,9 +13,9 @@ Hikey board is based around the [[https://github.com/96boards/documentation/blob
 Build your first seL4 system
 
 {{{
-$First, check out the seL4 project.
+$ First, check out the seL4 project.
 $ mkdir hikey-test
-$repo init -u https://github.com/seL4/sel4test-manifest.git
+$ repo init -u https://github.com/seL4/sel4test-manifest.git
 $ repo sync
 }}}
 Then, use the default config for the hikey and build the system.
