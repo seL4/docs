@@ -20,3 +20,4 @@ All boards are Arm v7 unless otherwise stated.
  * [[Hardware/arndale]] -- dual core A15 ARM development board
  * [[Hardware/Kzm]] 
  * [[Hardware/odroidx]]
+ * [[Hardware/PandaBoard]]
