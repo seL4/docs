@@ -1,4 +1,7 @@
 = seL4 on the Odroid XU =
+
+This page provides info on the [[http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620|Odroid-XU]] Exynos 5 board
+
 seL4 assumes that one boots in HYP mode. To do this, one needs a new signed bootloader.
 
 Follow the instructions [[http://forum.odroid.com/viewtopic.php?f=64&t=2778&sid=be659cc75c16e1ecf436075e3c548003&start=60#p33805|on     the HardKernel Forum]] to get and flash the firmware
