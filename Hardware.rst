@@ -3,7 +3,7 @@
 
 [[Hardware/VMware|Running seL4 on VMware]]
 
-== Intel ==
+== x86 ==
 
  * [[Hardware/IA32|IA32]] A PC99-style Intel Architecture 32-bit x86 (ia32)
 
