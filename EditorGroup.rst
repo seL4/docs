@@ -19,3 +19,4 @@ List of known good editors (for anti-spam)
  * GerwinKlein
  * MatthewBrecknell
  * kentmcleod
+ * CoreyRichardson
