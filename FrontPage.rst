@@ -5,7 +5,7 @@
 = seL4 Wiki =
 This WIKI is for cooperatively developing and sharing documentation on [[http://sel4.systems|seL4]]
 
-== Editing the Wiki ==
+=== Editing the Wiki ===
 
 To avoid spam and increase quality, editing is by invitation only.  Create an account, and if we recognise your name you'll be added to the list of editors.  If we don't recognise you (e.g., because you've never posted anything to the [[https://sel4.systems/lists/listinfo/devel|devel mailing list]]) drop us a line if you want to be able to edit.
 
