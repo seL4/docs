@@ -1,4 +1,4 @@
-= Supported Hardware Platforms =
+= Hardware seL4 runs on =
 [[Hardware/General-ARM|General info on ARM platforms]]
 
 [[Hardware/VMware|Running seL4 on VMware]]
