@@ -6,7 +6,7 @@ The development branch of the for the seL4 realtime extensions. This branch is n
 
 === Maximum priorities ===
 
-Previously seL4 would not allow threads to set any other thread's priority to higher than its own. This has been extracted into a separate field for the RT kernel, a maximum priority, which limits what thread cans set their own or other threads priorities to. 
+Previously seL4 would not allow threads to set any other thread's priority to higher than its own. This has been extracted into a separate field for the RT kernel, a maximum priority, which limits what threads can set their own or other threads priorities to. 
 
 === Criticality & Max Criticality ===
 
@@ -14,9 +14,9 @@ Criticality is a new field for threads. The kernel has a system criticality leve
 
 === Scheduling contexts ===
 
-This branch adds scheduling contexts to seL4, which represent CPU time (as budget/period). Scheduling contexts are separate to threads (although threads required one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
+This branch adds scheduling contexts to seL4, which represent CPU time (as budget/period). Scheduling contexts are separate from threads (although threads require one to run) and can be passed around over IPC, if the target of an IPC does not have its own scheduling context.
 
-Scheduling contexts allow developers to create periodic threads, temporally isolation threads and have variable timeslices for round robin threads. If budget == period, the scheduling context acts as timeslice.
+Scheduling contexts allow developers to create periodic threads, temporally isolate threads and have variable timeslices for round robin threads. If budget == period, the scheduling context acts as timeslice.
 
 === IPC & Signal ordering ===
  
@@ -38,7 +38,7 @@ This section documents kernel API changes as compared with the current master of
 
 === API Changes ===
 
- * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added). Fault endpoints are also now specified in the callers cspace, as they are installed the the tcb cspace and looked up once rather than every fault. 
+ * `seL4_TCB_Configure` arguments changed (domain removed, scheduling context cap, max priority, criticality, max criticality, temporal exception handler added). Fault endpoints are also now specified in the caller's cspace, as they are installed the the TCB cspace and looked up once rather than every fault. 
  * `seL4_TCB_SetSpace` temporal exeception handler added.
 
 === API Additions ===
@@ -46,21 +46,21 @@ This section documents kernel API changes as compared with the current master of
  * `seL4_CapSchedControl` - initial cap for control of CPU time
  * `seL4_SchedContextObject` - new object for that allows threads access to CPU time
  * `seL4_SchedContextBits` - size in bits of a scheduling context object
- * `seL4_SignalRecv` - new system call which allows once kernel invocation to perform a non-blocking send on one capability, and wait on another. 
+ * `seL4_SignalRecv` - new system call which allows a single kernel invocation to perform a non-blocking send on one capability, and wait on another. 
  * `seL4_SignalRecvWithMRs` - uses above new system call without touching the IPC buffer, passing only data in registers
  * `seL4_Time` - type for specifying temporal units to the kernel 
- * `seL4_TCB_SetMaxPriority` - set the max priority for a tcb, threads can only start / set priorities threads up to and including their max priority
- * `seL4_TCB_SetCriticality` - set the criticality for a tcb.
- * `seL4_TCB_SetMaxCriticality` - set the max criticality for a tcb, threads can only set criticalities of threads threads up to and including their max criticality 
+ * `seL4_TCB_SetMaxPriority` - set the max priority for a TCB, threads can only start / set priorities threads up to and including their max priority
+ * `seL4_TCB_SetCriticality` - set the criticality for a TCB.
+ * `seL4_TCB_SetMaxCriticality` - set the max criticality for a TCB, threads can only set criticalities of threads threads up to and including their max criticality 
  * `seL4_Prio_t` - type for priority and max priority, criticality and max criticality, used in TCB_Configure
- * `seL4_CNode_SwapCaller` - swap the reply cap in the tcb's reply slot with the reply cap or null cap in the slot in the specified slot. 
- * `seL4_CNode_SwapTCBCaller` - as above, but operates on the reply cap slot of the target tcb. This allows another thread to reply on behalf of the owner of the reply cap.
+ * `seL4_CNode_SwapCaller` - swap the reply cap in the TCB's reply slot with the reply cap or null cap in the slot in the specified slot. 
+ * `seL4_CNode_SwapTCBCaller` - as above, but operates on the reply cap slot of the target TCB. This allows another thread to reply on behalf of the owner of the reply cap.
  * `seL4_SchedControl_Configure` - invokes the scheduling control cap to populate a scheduling context with parameters
  * `seL4_SchedContext_Yield` - end the timeslice of the thread bound to the sched context invoked. The thread will not run again until its period passes.
  * `seL4_SchedContext_YieldTo` - If a thread is bound to the scheduling context that this call is invoked on, place it at the head of the scheduling queue for that threads priority. Returns the amount of time the thread yielded to executes.
  * `seL4_SchedContext_Consumed` - returns the amount of time this scheduling context has executed since the last call to this function or `YieldTo`.
- * `seL4_SchedContext_BindTCB` - bind a tcb to a scheduling context, if the TCB is runnable and scheduling context has budget, this will start the tcb running
- * `seL4_SchedContext_UnbindTCB` - remove binding of a scheduling context from a tcb, tcb will no longer run but state will be preserved
+ * `seL4_SchedContext_BindTCB` - bind a TCB to a scheduling context, if the TCB is runnable and scheduling context has budget, this will start the TCB running
+ * `seL4_SchedContext_UnbindTCB` - remove binding of a scheduling context from a TCB, TCB will no longer run but state will be preserved
  * `seL4_CapInitThreadSC` - capability to the initial threads scheduling context
  * `seL4_CapSchedControl` - scheduling control capability, which is given to the root thread
  * `seL4_SchedContext_BindNotification` - Bind a notification to a scheduling context. Passive threads waiting on this notification will borrow the scheduling context.
@@ -80,7 +80,7 @@ The RT kernel has various experimental performance improvements including:
  * Interrupt fastpath
  * Signal fastpath (when signals are not delivered immediately - i.e to a lower prio thread)
  * Slowpath avoids IPC lookup if message fits in registers
- * Fault enpoints are looked up when registered and installed in the TCB's CNode, saving lookups on each fault.
+ * Fault endpoints are looked up when registered and installed in the TCB's CNode, saving lookups on each fault.
 
 == Library & test compatability ==
 
@@ -94,8 +94,8 @@ The RT kernel currently supports:
 
  * Beagle board
  * Sabre
- * x86 (processors that support `TSC_DEADLINE` mode)
- * odroid-xu
+ * x86 (only processors that support `TSC_DEADLINE` mode)
+ * Odroid-XU
 
 Other hardware platforms will be added as required (the ports require updated kernel and user-level timer drivers)
 
