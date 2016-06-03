@@ -7,6 +7,7 @@ List of known good editors (for anti-spam)
  * Yanyan Shen
  * AddoWondo
  * azarrabi
+ * Gernot
  * KalanaGamlath
  * HanzhangZeng
  * JaphethLim
