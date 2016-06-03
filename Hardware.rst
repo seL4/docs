@@ -18,6 +18,6 @@ All boards are Arm v7 unless otherwise stated.
  * [[Hardware/jetsontk1|NVIDIA Tegra K1]] -- Cortex a15
  * [[Hardware/HiKey|HiKey]] -- armv8-a, Cortex a53
  * [[Hardware/arndale|Arndale]] -- dual core A15 ARM development board
- * [[Hardware/Kzm|KZM]] 
- * [[Hardware/odroidx|Odroid-X]]
- * [[Hardware/PandaBoard|Panda Board]]
+ * [[Hardware/Kzm|KZM]] -- armv6
+ * [[Hardware/odroidx|Odroid-X]] -- armv7-a, Cortex a15
+ * [[Hardware/PandaBoard|Panda Board]] -- armv7-a, omap4460, Cortex-a9
