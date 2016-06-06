@@ -47,7 +47,7 @@ Now when it comes to invoking the functions that were defined in the Interface s
 
 The reason for this is because it is possible for one component to expose an interface multiple times, with each instance of that interface referring to a different function altogether. For example, if a composite device, such as a network card with with a serial interface integrated into it, exposes two instances of a procedural interface that has a particular procedure named "send()" -- how will the caller of "send()" know whether his "send()" is the one that is exposed over the NIC connection, or the serial connection?
 
-The same component provides both. Therefore, CAmkES prefixes the instances of functions in an Interface with the Interface-instance's name.
+The same component provides both. Therefore, CAmkES prefixes the instances of functions in an Interface with the Interface-instance's name. In the dual-function NIC device's case, it might have a "provides <INTERFACE_NAME> serial" and a "provides <INTERFACE_NAME> nic". When a caller wants to call for the NIC-send, it would call, nic_send(), and when a caller wants to invoke the Serial-send, it would call, "serial_send()".
 
 So if the "Hello" interface is provided once by "Echo" as "a", you would call for the "a" instance of Echo's "Hello" by calling for "a_hello()". But what if Echo had provided 2 instances of the "Hello" interface, and the second one was named "a2"? Then in order to call on that second "Hello" interface instance on Echo, you would call "a2_hello()".
 
