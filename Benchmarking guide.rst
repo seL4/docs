@@ -1,4 +1,6 @@
+
 = Benchmarking seL4 =
+<<TableOfContents(2)>>
 == Benchmarking project ==
 
 There is a set of microbenchmarks for seL4 available, see the [[https://github.com/seL4/sel4bench-manifest|sel4bench-manifest]].
