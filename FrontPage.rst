@@ -35,5 +35,5 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
 
 == CAmkES Releases ==
 
- * [[https://github.com/seL4/camkes/releases/latest|Current release]]
+ * [[https://github.com/seL4/camkes-tool/releases/latest|Current release]]
  * [[CAmkESReleaseNotes|Release notes]]
