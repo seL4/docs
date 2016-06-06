@@ -6,7 +6,7 @@
 This tutorial is an introduction to CAmkES: bootstrapping a basic static CAmkES application, describing its components, and linking them together.
 
 == Required Reading ==
-While it's possible to successfully complete the CAmkES tutorials without having read the CAmkES manuals, the manuals really explain everything in plain English, and any aspiring CAmkES dev should read the CAmkES manuals before attempting to complete the tutorials.
+While it's possible to successfully complete the CAmkES tutorials without having read the '''[[https://github.com/seL4/camkes-tool/blob/master/docs/index.md|CAmkES manuals]]''', the manuals really explain everything in plain English, and any aspiring CAmkES dev should read the '''[[https://github.com/seL4/camkes-tool/blob/master/docs/index.md|CAmkES manuals]]''' before attempting to complete the tutorials.
 
 = Table of Contents =
 <<TableOfContents()>>
