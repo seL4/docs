@@ -1,7 +1,7 @@
 = Loading onto ARM Hardware =
 
 The ARM platform has too many ways to boot into an operating system.  Typically there is some low-level ROM code (very specific to each device) that turns on RAM, and turns on enough clocks to 
-be able to load a 2nd-level bootloader which does the work.  Some do this in several stages, to enable TrustZone, HYP-mode etc., etc.
+be able to load a 2nd-level bootloader which does the work.  Some do this in several stages, to enable Trust``Zone, HYP-mode etc., etc.
  
 The main bootloaders after the ROM are U-Boot, UEFI, Loki (for Samsung devices) and simpleboot.  Most of these provice FAstBoot over USB to allow software loading.
  
