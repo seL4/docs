@@ -65,7 +65,7 @@ To get the actual project and subproject source, you'll then need to use repo sy
 repo sync
 }}}
 === Getting cross compilers ===
-There are instructions on how to get cross compilers for building ARM. We only have direct instructions for Debian/Ubuntu/Fedora, but we imagine it you should be able to substitute where necessary for your distro. Instructions should be similar for other distros, links to toolchains for other distros are provided.
+There are instructions on how to get cross compilers for building ARM. We only have direct instructions for Debian/Ubuntu/Fedora, but we imagine you should be able to substitute where necessary for your distro. Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
  * [[SetupFedora|Cross compiler and general instructions for Fedora and CentOS (RHEL should work as well)]]
  * [[SetupUbuntu|Cross compilers for Debian and Ubuntu]]
@@ -160,7 +160,7 @@ The makefile provides a target to simulate ia32. Running the following command w
 {{{
 make simulate-ia32
 }}}
-To exit qemu after the All is well in the universe   message that indicates the test suite has passed, type {{{control-a c q}}}.
+To exit qemu after the All is well in the universe   message that indicates the test suite has passed, type {{{control-a x}}}.
 
 === Useful configuration options ===
 For cross compilation (targetting ARM), you can set the cross compiler triple. This will typically be '''arm-linux-gnueabi-''' or '''arm-none-eabi-'''.   Do {{{make menuconfig}}} and look for '''toolchain-options'''
