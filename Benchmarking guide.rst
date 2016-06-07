@@ -9,11 +9,11 @@ There is a set of microbenchmarks for seL4 available, see the [[https://github.c
 
 == In kernel log-buffer ==
 
-We provide a 1MB buffer in the kernel when `CONFIG_TRACEPOINTS > 0`. This can be used to place information while the kernel is running. The buffer is write-through to optimise performance, so if using the buffer make sure you do not read data back. Ideally, benchmarks that use the buffer should log one line at a time, sequentially, into the buffer for minimal performance impact while benchmarking. 
+We provide a 1MB buffer in the kernel when `CONFIG_TRACEPOINTS > 0`. This can be used to place information while the kernel is running. The buffer is write-through to optimise performance, so if using the buffer make sure you do not read data back. Ideally, benchmarks that use the buffer should log one line at a time, sequentially, into the buffer for minimal performance impact while benchmarking.
 
-Buffer data can be extracted via special benchmarking system calls to the kernel that copy the data out via the IPC buffer. 
+Buffer data can be extracted via special benchmarking system calls to the kernel that copy the data out via the IPC buffer.
 
-We provide several benchmarking tools that use the log buffer. 
+We provide several benchmarking tools that use the log buffer.
 
 === Caveats ===
 
@@ -21,7 +21,7 @@ On Sabre, Odroid-XU and Haswell platforms we
 
 == Tracepoints ==
 
-We allow the user to specify tracepoints in the kernel to track the time between points. 
+We allow the user to specify tracepoints in the kernel to track the time between points.
 
 === How to use ===
 
@@ -127,6 +127,3 @@ When interleaving or nesting tracepoints, be sure to account for the overhead th
 
 === Hints ===
 If you want only entry or exit times instead of function call durations, modify line 56 of kernel/include/benchmark.h. This might be useful if you wish to time hardware events. For example, should you wish to time how long it takes for hardware to generate a fault to the kernel, perhaps record the cycle counter before causing the fault in userspace, then store the ksEntry as soon as you enter somewhere relevant in the kernel, and then compare the difference of these two once you return to userspace, by reading out the value and taking the difference.
-
-== Running seL4 bench ==
-TODO release sel4 bench, describe how to run
