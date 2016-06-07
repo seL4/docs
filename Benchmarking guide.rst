@@ -1,4 +1,3 @@
-
 = Benchmarking seL4 =
 <<TableOfContents(2)>>
 == Benchmarking project ==
@@ -20,7 +19,7 @@ We provide several benchmarking tools that use the log buffer.
 
 On Sabre, Odroid-XU and Haswell platforms we
 
-== Tracepoints == 
+== Tracepoints ==
 
 We allow the user to specify tracepoints in the kernel to track the time between points. 
 
