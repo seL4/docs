@@ -15,51 +15,38 @@ The development framework provides:
 
 == Build dependencies ==
  * You must first install [[https://wiki.sel4.systems/Getting%20started#Build_Dependencies|the SEL4 dependencies]], and then you should move on to the instructions in this section.
- * Install GHC and packages MissingH, data-ordlist, split, mtl, and base-compat (installable from cabal):
+ * Install GHC and some Haskell packages (installable from cabal):
 
 {{{
-sudo add-apt-repository -y ppa:hvr/ghc         
-sudo apt-get update
-sudo apt-get install -y ghc-7.8.4 cabal-install-1.22 
-
-export PATH=/opt/ghc/7.8.4/bin:/opt/cabal/1.22/bin:$PATH
+sudo apt-get install ghc=7.10.3-7 cabal-install=1.22.6.0-2
 
 cabal update
-cabal install MissingH
-cabal install data-ordlist
-cabal install split
-cabal install mtl
-cabal-install base-compat
+cabal install --user MissingH data-ordlist split mtl base-compat
 }}}
 
 Cabal packages get installed under the current user, so each user that wants to build CAmkES must run the cabal steps
-
-Note also that this step adds the directories where ghc and cabal are installed to the PATH.  If ghc and/or cabal can't be found later on, it's probably because the PATH isn't set correctly.  Consider adding this to your startup files, e.g.:
-
-{{{
-echo export PATH=/opt/ghc/7.8.4/bin:/opt/cabal/1.22/bin:\$PATH >> ~/.bashrc
-}}}
-
 
 Install python packages jinja2, ply, pyelftools (via pip):
 
 {{{
 apt-get install python-pip
-pip install pyelftools
-pip install ply
-pip install jinja2
+pip install --user pyelftools ply jinja2
 }}}
+
 If building on a 64bit system ensure 32bit compiler tools are installed, mainly:
 
 {{{
 apt-get install lib32gcc1
 }}}
+
 And the correct version of multilib for your gcc, for example:
 
 {{{
 apt-get install gcc-multilib
 }}}
+
 == Download CAmkES ==
+
 Download CAmkES source code from github:
 
 {{{
@@ -68,28 +55,33 @@ cd camkes-project
 repo init -u https://github.com/seL4/camkes-manifest.git
 repo sync
 }}}
+
 == Build and run simple application ==
+
 The following will configure, build, and run a simple example CAmkES system:
 
 {{{
 make arm_simple_defconfig
 make silentoldconfig
 }}}
+
 If you haven't done so already, change the toolchain to the one for your system. You can do this by running '''make menuconfig''', then going to '''Toolchain Options -> Cross compiler prefix'''. You will most likely be compiling with '''arm-linux-gnueabi-'''.
 
 {{{
 make
 qemu-system-arm -M kzm -nographic -kernel images/capdl-loader-experimental-image-arm-imx31
 }}}
+
 In order to clean up after building (for example because you’ve set up a new configuration and you want to make sure that everything gets rebuilt correctly) do:
 
 {{{
 make clean
 }}}
+
 == Read Tutorial ==
+
 To learn about developing your own CAmkES application, read the [[https://sel4.systems/Info/CAmkES/Tutorial.pml|tutorial]].
 
-[[CAmkES Tutorial]]
-
 == Camkes Terminology/Glossary ==
+
 Can be found [[CAmkES/Terminology|here]].
