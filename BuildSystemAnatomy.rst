@@ -223,28 +223,6 @@ This is partly related to their origins from Kbuild and Kconfig and partly a lim
 I have no idea. As near as I can tell it has something to do with the starting character, but if you manage to get to the bottom of this please fix.
 
 ----
-'''Why do I get errors about not being able to find stdint.h when compiling libsel4?'''
-
-'''NOTE:''' ''The answer to this question is deprecated as we now use the Musl C library. It has been left here to help with troubleshooting in legacy projects.''
-
-libsel4c (our homebrew implementation of the C library) used to depend on libsel4. An effort was made to reverse this dependency and now a C-library is at the bottom of the dependency stack. Some project KBuild files have not yet been updated to reflect this. The key here is to ensure that stdint.h, and others, are in the include path before compiling anything that depends on the C library. You most probably need to make a change like the following to libs/Kbuild:
-
-{{{
--libsel4: common
-+libsel4: libsel4c common
-...
--libsel4c: libsel4 common
-+libsel4c: common
-}}}
-When using libmuslc, the following should be found in your libs/Kbuild:
-{{{
--libsel4: common
-+libsel4: libmuslc common...
--libmuslc: libsel4 common
-+libmuslc: common
-}}}
-
-----
 '''When trying to compile libsel4muslcsys, why do I get errors like fatal error: stdio.h: No such file or directory?'''
 
 You likely have a configuration line in your libs/Kbuild that causes one of libmuslc or libsel4muslcsys to depend on the other. In this file neither should depend on the other.
