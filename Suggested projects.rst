@@ -16,7 +16,6 @@ Some interesting platforms that could support seL4 include:
 
  * Any of the Tegra SoCs from NVIDIA.
  * The RK3188, maybe using the [[http://radxa.com/Home|Radxa Rock Pro]] development board
- * Any of the Allwinner SoCs, such as on the [[http://cubieboard.org/|Cubie]] Boards
  * Any of the Arm V8 64-bit processors that are beginning to become available.
 
 == Qubes ==
@@ -27,7 +26,7 @@ Some interesting platforms that could support seL4 include:
 
 The build system needs work. A typical project comprises the kernel, libraries and apps; dependencies between these are not properly tracked, which means things are rebuilt even if up-to-date; also sometimes things are not rebuilt when they should be.
 
-There are other problems with the system as a whole that need addressing. In particular the drivers in libsel4platsupport need extension and impromvement.
+There are other problems with the system as a whole that need addressing. In particular the drivers in libsel4platsupport need extension and improvement.
 
 == Useful Components ==
 
@@ -47,9 +46,10 @@ The project is to port Minix 3 to run on seL4.
 
 Userspace currently needs to be written in C (or assembler). An interesting challeng is to provide run-time support for higher level languages, such as C++, Java, Go, Haskell, Python. Some of that exists internally:
 
-* reasonably mature support for a subset of C++ (no template library), we'll probably release that soon for others to build on
-* we have Haskell sort-of running on seL4 (thanks or friends from Galois for their help), should be released in the near future
-* there is a student-level port of Go, which is bitrotted but could be made available if someone wants to revive it
+ * reasonably mature support for a subset of C++ (no template library), we'll probably release that soon for others to build on
+ * we have Haskell sort-of running on seL4 (thanks or friends from Galois for their help), should be released in the near future
+ * there is a student-level port of Go, which is bitrotted but could be made available if someone wants to revive it
+ * limited support of Rust applications
 
 == Stuff we're working on ==
 
