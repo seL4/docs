@@ -1,4 +1,31 @@
-= Whole system debugging =
+= Debugging guide =
+
+<<TableOfContents>>
+
+== Compiler Settings ==
+
+=== Kernel ===
+
+When debugging the kernel, make sure `CONFIG_DEBUG` and `CONFIG_PRINTING` are enabled. 
+This can be done by `make menuconfig` and enabling the following options:
+
+ * seL4 Kernel -> Build Options -> Enable debug facilities 
+ * seL4 Kernel -> Build Options -> Enable kernel printing.
+
+This will turn on some helpful features for debugging the kernel including:
+
+ * `printf` + a serial driver,
+ * `-g` is passed to the compiler,
+ * compile- and run-time asserts,
+ * the kernel will print out error messages when invocations fail. 
+
+=== User ===
+
+To make sure similar settings are passed to the user, make sure `CONFIG_USER_DEBUG
+
+Similarly, enable this setting by using `make menuconfig` and setting:
+
+ * Toolchain options -> build user level with assertions, -g and debugging messages 
 
 == Qemu ==
 
@@ -144,7 +171,8 @@ If you examine the terminal window running Qemu at this point, you will note tha
 From here, the experience is essentially identical to debugging the kernel. One small complication to be aware of is that debugging across a context switch may be confusing. If you are single-stepping in GDB and find execution suddenly diverted to an address where code is unknown, check the address itself. It is usually easy to identify from the address alone when execution is in kernel code or the exception vector table. Unfortunately there is no easy way to continue until you're back in userspace, particularly if the kernel schedules a different thread than the one you were debugging. Depending on the scenario you are debugging, it may be simpler to modify your system setup to ensure only one thread is running.
 
 == Objdump ==
-Objdump can be used to disassemble an ELF file, be it a kernel or an application.
+
+Objdump can be used to disassemble an ELF file, be it a kernel or an application. This can be used to lookup the instruction where a fault occurred. Make sure `-g` is passed to the compiler so that debug information is included in the image. 
 
 For ARM, supposing that '''arm-none-eabi-''' is used as the cross-compiler prefix.
 
@@ -164,6 +192,7 @@ If you have symbols and want (C) source information in your disassembly (and who
   objdump -DS binary_file_name
 }}}
 === Debugging seL4test ===
+
 The sel4test project has make targets which perform call objdump with the correct arguments generated from the .config.
 
 You can objdump the kernel:
@@ -181,14 +210,13 @@ Or the tests themselves:
 {{{
 make objdump-tests | less
 }}}
-== GDB ==
-= User level debugging =
-== Fault handlers ==
-TODO how to use sel4utils_start_fault_handler to find a threads registers when it crashes
 
-= In kernel debugging =
-TODO how to debug in the kernel
+== In kernel debugging ==
 
-__builtin_ret_address__ printf
+seL4 does not currently have a kernel debugger. As a result, most of our debugging is done with:
 
-seL4 does not currently have a kernel debugger.
+ *  `objdump` as described above,
+ *  `printf`, 
+ *  `__builtin_ret_address__`  (to figure out stack traces).
+
+In the kernel, we provide `debug_printKernelEntryReason` found in [debug.h|https://github.com/seL4/seL4/blob/master/include/api/debug.h] which can be used at any point in the kernel to output the current operation that the kernel is doing. 
