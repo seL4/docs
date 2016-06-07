@@ -9,7 +9,7 @@ There is a set of microbenchmarks for seL4 available, see the [[https://github.c
 
 == In kernel log-buffer ==
 
-We provide a 1MB buffer in the kernel when `CONFIG_TRACEPOINTS > 0`. This can be used to place information while the kernel is running. The buffer is write-through to optimise performance, so if using the buffer make sure you do not read data back. Ideally, benchmarks that use the buffer should log one line at a time, sequentially, into the buffer for minimal performance impact while benchmarking.
+We provide a 1MB buffer in the kernel when `CONFIG_TRACEPOINTS > 0`. This can be used to place information while the kernel is running. The buffer is write-through to optimise performance by minimising cache pollution, so if using the buffer make sure you do not read data back. Ideally, benchmarks that use the buffer should log one line at a time, sequentially, into the buffer for minimal performance impact while benchmarking.
 
 Buffer data can be extracted via special benchmarking system calls to the kernel that copy the data out via the IPC buffer.
 
