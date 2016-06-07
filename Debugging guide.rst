@@ -21,7 +21,7 @@ This will turn on some helpful features for debugging the kernel including:
 
 === User ===
 
-To make sure similar settings are passed to the user, make sure `CONFIG_USER_DEBUG
+To make sure similar settings are passed to the user, make sure `CONFIG_USER_DEBUG`
 
 Similarly, enable this setting by using `make menuconfig` and setting:
 
