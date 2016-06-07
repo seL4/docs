@@ -1,13 +1,13 @@
 <<TableOfContents()>>
 
 = CAmkES =
-CAmkES (component architectures for microkernel-based embedded systems) is a software development and runtime framework for quickly and reliably building microkernel-based multiserver (operating) systems. It follows a component-based software engineering approach to software design, resulting in a system that is modelled as a set of interacting software components. These software components have explicit interaction interfaces and a system design that explicitly details the connections between the components.
+CAmkES (component architecture for microkernel-based embedded systems) is a software development and runtime framework for quickly and reliably building microkernel-based multiserver (operating) systems. It follows a component-based software engineering approach to software design, resulting in a system that is modelled as a set of interacting software components. These software components have explicit interaction interfaces and a system design that explicitly details the connections between the components.
 
 The development framework provides:
 
  * a language to describe component interfaces, components, and whole component-based systems
  * a tool that processes these descriptions to combine programmer-provided component code with generated scaffolding and glue code to build a complete, bootable, system image
- * full integration in the OKL4 environment and build system
+ * full integration in the seL4 environment and build system
 
 == Setting up your machine ==
  * Before you can use any of the SEL4 related repositories, you must [[http://source.android.com/source/downloading.html#installing-repo|get the "repo" tool by Google]]. SEL4 projects have multiple subproject dependencies, and repo will fetch all of them and place them in the correct subdirectories for you.
