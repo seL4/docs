@@ -18,10 +18,6 @@ cd manual && make
 
 You need LaTeX installed, and if all succeeds a fresh manual will be produced in manual.pdf. 
 
-== Camkes ==
-
- * [[Camkes]]
-
 == Proofs ==
 
  * [[http://sel4.systems/Info/Docs/seL4-spec.pdf|Formal specification]
