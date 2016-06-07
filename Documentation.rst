@@ -20,8 +20,8 @@ You need LaTeX installed, and if all succeeds a fresh manual will be produced in
 
 == Proofs ==
 
- * [[http://sel4.systems/Info/Docs/seL4-spec.pdf|Formal specification]
- * [[http://github.com/seL4/l4v/|Git Repository and Build instructions]
+ * [[http://sel4.systems/Info/Docs/seL4-spec.pdf|Formal specification]]
+ * [[http://github.com/seL4/l4v/|Git Repository and Build instructions]]
  * [[http://ssrg.nicta.com.au/projects/TS/|NICTA Trustworthy Systems research project pages]]
  * Isabelle Proof Assistant:
   * [[http://concrete-semantics.org/|Concrete Semantics Isabelle textbook]]
