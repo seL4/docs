@@ -39,7 +39,7 @@ An example of this feature in use can be found in the irq path benchmark in the 
 ==== Measuring Overhead ====
 Using tracepoints adds a small amount of overhead to the kernel. To measure this overhead, use a pair of nested tracepoints:
 
-{{{
+{{{#!cplusplus numbers=off
 TRACE_POINT_START(0);
 TRACE_POINT_START(1);
 TRACE_POINT_STOP(1);
@@ -63,7 +63,7 @@ A log is stored when TRACE_POINT_STOP(i) is called, only if a corresponding TRAC
 
 The cycles consumed by functions f and g is logged with the key 0, only when the condition c is true:
 
-{{{
+{{{#!cplusplus numbers=off
 TRACE_POINT_START(0);
 f();
 if (c) {
@@ -74,7 +74,7 @@ if (c) {
 
 The cycles consumed by functions f and g is logged with the key 1, only when the condition c is true:
 
-{{{
+{{{#!cplusplus numbers=off
 if (c) {
    f();
    TRACE_POINT_START(1);
@@ -85,7 +85,7 @@ TRACE_POINT_STOP(1);
 
 These two techniques can be combined to record cycle counts only when a particular path between 2 points is followed. In the following example, cycles consumed by functions f, g and h is logged, only when the condition c is true. Cycle counts are stored with 2 keys (2 and 3) which can be combined after extracting the data to user level.
 
-{{{
+{{{#!cplusplus numbers=off
 TRACE_POINT_START(2);
 f();
 if (c) {
@@ -101,7 +101,7 @@ TRACE_POINT_STOP(3);
 
 It's possible to interleave tracepoints:
 
-{{{
+{{{#!cplusplus numbers=off
 TRACE_POINT_START(0);
 ...
 TRACE_POINT_START(1);
@@ -113,7 +113,7 @@ TRACE_POINT_STOP(1);
 
 and to nest tracepoints:
 
-{{{
+{{{#!cplusplus numbers=off
 TRACE_POINT_START(0);
 ...
 TRACE_POINT_START(1);
@@ -126,4 +126,4 @@ TRACE_POINT_STOP(0);
 When interleaving or nesting tracepoints, be sure to account for the overhead that will be introduced.
 
 === Hints ===
-If you want only entry or exit times instead of function call durations, modify line 56 of kernel/include/benchmark.h. This might be useful if you wish to time hardware events. For example, should you wish to time how long it takes for hardware to generate a fault to the kernel, perhaps record the cycle counter before causing the fault in userspace, then store the ksEntry as soon as you enter somewhere relevant in the kernel, and then compare the difference of these two once you return to userspace, by reading out the value and taking the difference.
+If you want only entry or exit times instead of function call durations, modify line 56 of kernel/include/benchmark.h. This might be useful if you wish to time hardware events. For example, should you wish to time how long it takes for hardware to generate a fault to the kernel, perhaps record the cycle counter before causing the fault in userspace, then store the `ksEntry` as soon as you enter somewhere relevant in the kernel, and then compare the difference of these two once you return to userspace, by reading out the value and taking the difference.
