@@ -219,4 +219,4 @@ seL4 does not currently have a kernel debugger. As a result, most of our debuggi
  *  `printf`, 
  *  `__builtin_ret_address__`  (to figure out stack traces).
 
-In the kernel, we provide `debug_printKernelEntryReason` found in [debug.h](https://github.com/seL4/seL4/blob/master/include/api/debug.h) which can be used at any point in the kernel to output the current operation that the kernel is doing. 
+In the kernel, we provide `debug_printKernelEntryReason` found in [https://github.com/seL4/seL4/blob/master/include/api/debug.h|debug.h] which can be used at any point in the kernel to output the current operation that the kernel is doing. 
