@@ -16,7 +16,7 @@ L4 is a family of very small, high-performance microkernels evolved from the fir
 
 {{http://sel4.systems/images/familytree.png||width="500"}}
 
-L4 microkenrel family tree. Black arrows indicate code, green arrows ABI inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
+L4 microkernel family tree. Black arrows indicate code, green arrows ABI inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
 
 === How does seL4's performance compare to other microkernels? ===
 To the best of our knowledge, seL4 is the world's fastest microkernel on the supported processors, in terms of the usual ping-pong metric: the cost of a cross-address-space message-passing (IPC) operation. For more information, check the [[http://l4hq.org/docs/performance.php|performance page on L4HQ]].
@@ -132,7 +132,7 @@ Previous verifications have either not completed their proofs, have targeted mor
 Some of these previous verifications were impressive achievements that laid much of the groundwork without which the seL4 proofs would not have been achieved. It is only in the last 5-10 years that code verification and theorem proving technology has advanced enough to make large code-level proofs feasible.
 
 === When and how often does seL4 get updated and re-proved? ===
-We update the seL4 proofs semi-continously, usually whenever something is pulled into the master branch in the seL4 github repository. You can see the proof updates coming through on https://github.com/seL4/l4v/commits/master and you can see the kernel revision the proof currently refers to in https://github.com/seL4/verification-manifest/blob/master/default.xml. This is usually the head of the master branch.
+We update the seL4 proofs semi-continuously, usually whenever something is pulled into the master branch in the seL4 github repository. You can see the proof updates coming through on https://github.com/seL4/l4v/commits/master and you can see the kernel revision the proof currently refers to in https://github.com/seL4/verification-manifest/blob/master/default.xml. This is usually the head of the master branch.
 
 The rough protocol for updates in the seL4 master branch is that, together with the kernel team, the verification team picks the next feature(s), isolates them on a separate small internal feature branch, starts verifying that, and when done, merges both into the proof repository and seL4 master. Occasionally, something new gets directly into master, is verified there and then pulled through to experimental.
 
