@@ -163,7 +163,7 @@ make simulate-ia32
 To exit qemu after the All is well in the universe   message that indicates the test suite has passed, type {{{control-a x}}}.
 
 === Useful configuration options ===
-For cross compilation (targetting ARM), you can set the cross compiler triple. This will typically be '''arm-linux-gnueabi-''' or '''arm-none-eabi-'''.   Do {{{make menuconfig}}} and look for '''toolchain-options'''
+For cross compilation (targeting ARM), you can set the cross compiler triple. This will typically be '''arm-linux-gnueabi-''' or '''arm-none-eabi-'''.   Do {{{make menuconfig}}} and look for '''toolchain-options'''
 
 Some of the default configurations specify a particular x86 compiler. It is usually safe to set the triple to the empty string when building for x86, if you have a multilib gcc installed.
 
