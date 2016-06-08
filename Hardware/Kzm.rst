@@ -4,7 +4,7 @@ seL4 supports the the [[http://www.kmckk.com/eng/kzm.html|KZM-ARM11-01]], which 
 
 Checkout the sel4test project using repo as per [[https://wiki.sel4.systems/Getting%20started#Getting_the_SEL4_Test_source_code|Getting started]]
 
-{{{
+{{{#!highlight bash numbers=off
 make kzm_simulation_release_xml_defconfig
 make
 make simulate-kzm
