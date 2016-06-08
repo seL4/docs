@@ -6,13 +6,13 @@ This page contains info about building seL4 on [[http://beagleboard.org/black|Be
 These instructions were written by Tim Newsham.  The Beaglebone is a   community-supported port.
 
 === Requirements ===
-We suggest using the ''arm-linux-gnueabi-''   cross-compilers.  Use  [[https://sel4.systems/Info/GettingStarted/#toolchains|the instructions on   getting a toolchain]].
+We suggest using the "arm-linux-gnueabi-"   cross-compilers.  Use  [[https://sel4.systems/Info/GettingStarted/#toolchains|the instructions on   getting a toolchain]].
 
 === Building ===
 ==== seL4test ====
-Use one of the following configuration files: '' bbone_debug_xml_defconfig'' or ''bbone_release_xml_defconfig''.
+Use one of the following configuration files: "bbone_debug_xml_defconfig" or "bbone_release_xml_defconfig".
 
-{{{
+{{{#!highlight bash numbers=off
   mkdir sel4test
   cd sel4test
   repo init -u https://github.com/seL4/sel4test-manifest.git
@@ -23,9 +23,9 @@ Use one of the following configuration files: '' bbone_debug_xml_defconfig'' or 
       images/sel4test-driver-image-arm-am335x sel4test.bin
 }}}
 ==== RefOS ====
-For RefOS, use ''bbone_defconfig'' or ''bbone_debug_defconfig'':
+For RefOS, use "bbone_defconfig" or "bbone_debug_defconfig":
 
-{{{
+{{{#!highlight bash numbers=off
   mkdir refos
   cd refos
   repo init -u https://github.com/seL4/refos-manifest.git
@@ -41,20 +41,20 @@ For RefOS, use ''bbone_defconfig'' or ''bbone_debug_defconfig'':
  * SDCard for file booting or Ethernet cable for network boot
 
 === Interacting with U-Boot ===
-Connect a serial adapter between` your development box and the   Beaglebone Black.  Use a serial program such as ''minicom''   or ''screen'' to connect to the serial port at 115200 bps
+Connect a serial adapter between` your development box and the   Beaglebone Black.  Use a serial program such as `minicom`   or `screen` to connect to the serial port at 115200 bps
 
-{{{
+{{{#!highlight bash numbers=off
   screen /dev/ttyUSB0 115200
 }}}
-Power on the device and hit enter a few times to interrupt   the normal boot process and get a u-boot prompt.
+Power on the device and hit enter a few times to interrupt   the normal boot process and get a U-Boot prompt.
 
-To boot from SDcard, copy the sel4test.bin binary to a FAT32   partition on an SDCard and place the card in the Beaglebone Black.   Connect the serial device, power up the Beaglebone Black, and hit   ENTER to interrupt the normal boot process. Finally, enter the   following commands at the u-boot prompt to load and run the image:
+To boot from SDcard, copy the sel4test.bin binary to a FAT32   partition on an SDCard and place the card in the Beaglebone Black.   Connect the serial device, power up the Beaglebone Black, and hit   ENTER to interrupt the normal boot process. Finally, enter the   following commands at the U-Boot prompt to load and run the image:
 
 {{{
   fatload mmc 0 ${loadaddr} sel4test.bin
   go ${loadaddr}
 }}}
-To boot over Ethernet, configure your DHCP server to provide a DHCP   lease and to specify the sel4test.bin (or refos.bin) as the boot   file. Configure a TFTP server to serve sel4test.bin file.  Plug the   Ethernet cable and connect the serial dervice to the Beaglebone   black. Power the device up and hit ENTER to interrupt the normal   boot process. Then, at the u-boot prompt enter:
+To boot over Ethernet, configure your DHCP server to provide a DHCP   lease and to specify the sel4test.bin (or refos.bin) as the boot   file. Configure a TFTP server to serve sel4test.bin file.  Plug the   Ethernet cable and connect the serial device to the Beaglebone   black. Power the device up and hit ENTER to interrupt the normal   boot process. Then, at the U-Boot prompt enter:
 
 {{{
    dhcp
