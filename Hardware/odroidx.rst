@@ -6,7 +6,7 @@ seL4 supports the [[http://www.hardkernel.com/main/products/prdt_info.php?g_code
  1. RS232 or USB to UART converter
  1. USB OTG cable
 
-Note: The USB-UART converter that is shipped with the board requires a linux kernel version > 3.2
+Note: The USB-UART converter that is shipped with the board requires a Linux kernel version > 3.2
 
 ===== Serial port setup =====
 Open minicom on /dev/ttyUSB* and set the serial port settings to: 115200N1
@@ -16,9 +16,11 @@ Open minicom on /dev/ttyUSB* and set the serial port settings to: 115200N1
  * 1 stop bit
 
 ===== udev =====
-You may also like to set up a udev rule for fastboot:
+You may also like to set up a udev rule for Fastboot:
 
-||`SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002", MODE="660", GROUP="dialout"`||
+{{{
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002", MODE="660", GROUP="dialout"
+}}}
 
 
 == SD card setup ==
@@ -26,30 +28,40 @@ An image file can be found here:
 TODO Add sd image
 
 
-This image contains both uboot and Android. This should set up SD card partitions properly. seL4 image can be uploaded via fastboot.
+This image contains both U-Boot and Android. This should set up SD card partitions properly. seL4 image can be uploaded via Fastboot.
 
-To prepare the sd card, run
+To prepare the SD card, run
 
-||`$ sudo dd if=<image file> of=</dev/sdx>`||
+{{{#!highlight bash numbers=off
+$ sudo dd if=<image file> of=</dev/sdx>
+}}}
 
 
-Where sdx is the device that is associated with your sd card.
+Where "sdx" is the device that is associated with your SD card.
 
-===== Uboot =====
+===== U-Boot =====
 <TODO> Uboot source?
 
-u-boot must reside at a magical offset in a special partition of the SD card. To copy u-boot and the other boot loaders to the sd card:
+U-Boot must reside at a magical offset in a special partition of the SD card. To copy U-Boot and the other boot loaders to the SD card:
 
-||`cd sd_fusesudo`<<BR>> `./sd_fusing_4412.sh /dev/sdx`||
+{{{#!highlight bash numbers=off
+cd sd_fusesudo
+./sd_fusing_4412.sh /dev/sdx
+}}}
 
 
 == seL4 Image file preparation ==
-The seL4 image file must be converted into a u-boot application file. The first step is to strip the elf file into a binary file. Next we use mkimage to create the image.
+The seL4 image file must be converted into a U-Boot application file. The first step is to strip the elf file into a binary file. Next we use `mkimage` to create the image.
 
-||`sudo apt-get install uboot-mkimage`<<BR>>`INPUT_FILE=images/sel4test-image-arm-exynos4`<<BR>>`OUTPUT_FILE=sel4-uImage`<<BR>>`mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d $INPUT_FILE $OUTPUT_FILE`||
+{{{#!highlight bash numbers=off
+sudo apt-get install uboot-mkimage
+INPUT_FILE=images/sel4test-image-arm-exynos4
+OUTPUT_FILE=sel4-uImage
+mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d $INPUT_FILE $OUTPUT_FILE
+}}}
 
 
-The reason we choose qnx is because we exploit the fact that, like seL4, qnx expects to be elf-loaded. The alternative is to convert our elf file into a binary file using objcopy.
+The reason we choose QNX is because we exploit the fact that, like seL4, QNX expects to be ELF-loaded. The alternative is to convert our ELF file into a binary file using `objcopy`.
 
 == Booting ==
 Fastboot will be used to upload images to the device. The tool can be found here:  or here: you can clone and build the tool from source
@@ -76,7 +88,7 @@ To boot using fastboot:
 
 To boot from mmc:
 
- 1. At the u-boot prompt type `fatload mmc 0:2 0x42000000 <filename>; bootm 0x42000000`
+ 1. At the U-Boot prompt type `fatload mmc 0:2 0x42000000 <filename>; bootm 0x42000000`
 
 == References ==
 http://www.hardkernel.com/renewal_2011/products/prdt_info.php
