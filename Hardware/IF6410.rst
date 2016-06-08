@@ -1,19 +1,18 @@
-## page was renamed from IF6410
 = Inforce =
 
 This page contains info on building seL4 for the [[http://www.inforcelive.com/index.php?route=product/product&product_id=53|Inforce IFC6410]] development board, running a Qualcomm Krait processor that is like an A15.
 
 = Building for the Inforce IFC6410 =
-To use default build config, use ''inforce_'' configurations.
+To use default build config, use "inforce_" configurations.
 
-To make a bootable image you will need the Android bootimg tool.   On Debian, do
+To make a bootable image you will need the Android `bootimg` tool.   On Debian, do
 
-{{{
+{{{#!highlight bash numbers=off
 apt-get install android-mkbootimg
 }}}
-Then when you have built your app, you can create a boot image   with these commands (substituting the name of your output file   for ''sel4test-driver-image-arm-apq8064''):
+Then when you have built your app, you can create a boot image   with these commands (substituting the name of your output file   for "sel4test-driver-image-arm-apq8064"):
 
-{{{
+{{{#!highlight bash numbers=off
 > ramdisk
 objcopy -O binary sel4test-driver-image-arm-apq8064 sel4test-driver-image-arm-apq8064.bin
 mkbootimg --kernel sel4test-driver-image-arm-apq8064.bin --ramdisk ramdisk --base "0x82000000" --output boot.img
@@ -22,7 +21,7 @@ mkbootimg --kernel sel4test-driver-image-arm-apq8064.bin --ramdisk ramdisk --bas
 The serial port on the Inforce is at RS232 voltage levels.   Connect to a normal serial port, then use minicom or screen to   talk to it, at 115200 baud, no parity, eight bits.
 
 = Booting seL4 =
-Force the board to boot into fastboot mode by shorting pins 26   and 30 on the large header — see [[https://web.archive.org/web/20150526213626/http://mydragonboard.org/2013/forcing-ifc6410-into-fastboot|This   blog post]] for details.
+Force the board to boot into Fastboot mode by shorting pins 26   and 30 on the large header — see [[https://web.archive.org/web/20150526213626/http://mydragonboard.org/2013/forcing-ifc6410-into-fastboot|This   blog post]] for details.
 
 You will see something like this on the serial port:
 
