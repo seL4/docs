@@ -1,7 +1,7 @@
 = Toolchains on CentOS and Fedora =
 These instructions are for information only — at NICTA we usually use Debian-derived build systems
 
-Follow the instructions in All [[#allrpm|RPM-Based]] Variants then the ones for your system.
+Follow the instructions in [[#allrpm|All RPM-Based]] Variants then the ones for your system.
 
  * [[#fedora|Fedora]]
  * [[#centos|CentOS]]
@@ -10,7 +10,7 @@ Follow the instructions in All [[#allrpm|RPM-Based]] Variants then the ones for 
 <<Anchor(allrpm)>>
 == All RPM-Based Systems ==
 === The Basics ===
-To get a usable build system, install the Development Tools group, '''which, ncurses-devel''' and the '''python-tempita''' templating library. You can also install '''ccache''' to speed second and subsequent compialtions.
+To get a usable build system, install the Development Tools group, '''which, ncurses-devel''' and the '''python-tempita''' templating library. You can also install '''ccache''' to speed second and subsequent compilations.
 
 {{{
   sudo yum groupinstall 'Development Tools'
@@ -26,10 +26,10 @@ You can get most of them from the repositories; some Haskell and python librarie
   sudo yum groupinstall haskell
   sudo yum install cabal-install
   cabal update
-  cabal install data-ordlist missingh split
+  cabal install --user data-ordlist missingH split
   sudo yum install python-pip
   sudo pip install --upgrade pip
-  sudo pip install pyelftools jinja2 ply
+  pip install --user pyelftools jinja2 ply
 }}}
 
 <<Anchor(fedora)>>
