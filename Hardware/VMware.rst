@@ -1,6 +1,6 @@
 = seL4 on VMware =
 
-This is a quick guide on how to run seL4 x86 on VMWare Workstation / Player. Written based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6 and for a Linux host machine. May work on Mac host machine, won't work for Windows host (although general idea should be similar).
+This is a quick guide on how to run seL4 x86 on VMWare [[http://www.vmware.com/au/products/workstation|Workstation]] / [[https://www.vmware.com/go/downloadplayer|Player]]. Written based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6 and for a Linux host machine. May work on Mac host machine, won't work for Windows host (although general idea should be similar).
 
 This guide assumes that your project is all set up and configured to build for x86. Read [[Getting started]] otherwise.
 
@@ -19,22 +19,22 @@ Make sure this is the only serial port, and it is serial port 0. If you selected
 {{attachment:vmware-serial.png|Virtual Machine Settings}}
 
 There are three options for the serial port
- 1. '''Output to a text file''' (easiest but output only). The VM will dump its serial output to a text file when it runs, and you can simply go less -F <file>.
- 1. '''Use physical serial port''' (best but requires serial cable + another machine to minicom/picocom off it). Set it to /dev/ttyS0 or something.
- 1. '''Output to a socket''' (allows input/output but annoying to set up). You'll want to ''apt-get install socat'' and then run something like:
- {{{#!highlight bash
+ 1. '''Output to a text file''' (easiest but output only). The VM will dump its serial output to a text file when it runs, and you can simply go `less -F <file>`.
+ 1. '''Use physical serial port''' (best but requires serial cable + another machine to minicom/picocom off it). Set it to `/dev/ttyS0` or something.
+ 1. '''Output to a socket''' (allows input/output but annoying to set up). You'll want to `apt-get install socat` and then run something like:
+ {{{#!highlight bash numbers=off
  #!/bin/bash
  while true; do
      socat -d -d UNIX-CONNECT:/tmp/vsock,forever PTY:link=/dev/tty99
  done
  }}}
- and then minicom to /dev/tty99 or to /dev/pts/<whatever socat decides to use>.
+ and then minicom to `/dev/tty99` or to `/dev/pts/<whatever socat decides to use>`.
 
 Choose depending on whether you can get a serial cable from your machine, whether you need output...etc. Easiest is to just use a text file.
 
 === Install GRUB2 ===
 
-Once you have a VM, you'll want to set up the Hd partitions and get GRUB2 on the virtual HD and its MBR somehow. Easiest way to do this is simple install some Linux distro that has GRUB2 (Ubuntu Debian Fedora...etc). If you want to save some HD space you can try [[https://help.ubuntu.com/community/Installation/MinimalCD|Ubuntu Minimal]]. Choose to install GRUB to the MBR when installing your OS.
+Once you have a VM, you'll want to set up the hard disk partitions and get GRUB2 on the virtual hard disk and its MBR somehow. Easiest way to do this is simple install some Linux distro that has GRUB2 (Ubuntu Debian Fedora...etc). If you want to save some hard disk space you can try [[https://help.ubuntu.com/community/Installation/MinimalCD|Ubuntu Minimal]]. Choose to install GRUB to the MBR when installing your OS.
 
 Alternatively if you feel like extra headaches to save space and time you can try install GRUB2 manually with grub-install from some Linux Live CD image.
 
@@ -46,7 +46,7 @@ Simplest method is to simply use VMWare player to boot into the guest OS you jus
 
 Another method is to use '''vmware-mount''':
 
-{{{#!highlight bash
+{{{#!highlight bash numbers=off
 # Usage: vmware-mount diskPath [partition num] mountPoint
 mkdir /tmp/vmount
 vmware-mount /path/to/your/HD.vmdk /tmp/vmount
@@ -85,8 +85,8 @@ Fortunately I have a script does all of the above in one go (may need editing of
 
 === Do It Manually ===
 
-First, use vmware-mount to mount the vmdk disk image. Then copy your newly build kernel and user binaries over. Then, unmount using vmware -d.
+First, use vmware-mount to mount the vmdk disk image. Then copy your newly built kernel and user binaries over. Then, unmount using `vmware -d`.
 
-Then start your VM (either from VMWare Player GUI or using the vmrun script from VIX API), and choose seL4 boot option. Monitor serial output. If you've set up the seL4 option as the grub default then you just need to wait for the grub timeout.
+Then start your VM (either from VMWare Player GUI or using the vmrun script from VIX API), and choose seL4 boot option. Monitor serial output. If you've set up the seL4 option as the grub default then you just need to wait for the grub time out.
 
 If your kernel fails an assert during startup, make sure your kernel repo is up to date.
