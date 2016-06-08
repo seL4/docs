@@ -38,19 +38,19 @@ There are two main Qemu binaries that are relevant for seL4 development:
 
 After compiling a seL4 project, you can use one of these to simulate execution of the resulting binaries. For example, after compiling sel4test for the KZM (IMX31) board:
 
-{{{
+{{{#!highlight bash numbers=off
 $ qemu-system-arm -M kzm -nographic -kernel images/sel4test-driver-image-arm-imx31
 }}}
 
 On x86, kernel and userspace are provided as separate images:
 
-{{{
+{{{#!highlight bash numbers=off
 $ qemu-system-i386 -m 512 -nographic -kernel images/kernel-ia32-pc99 -initrd images/sel4test-driver-image-ia32-pc99
 }}}
 
 Some seL4 projects will define Makefile targets as shorthand for these commands, so you can simply run:
 
-{{{
+{{{#!highlight bash numbers=off
 $ make simulate-kzm   # Simulate KZM execution
 $ make simulate-ia32  # Simulate x86 execution
 }}}
@@ -90,13 +90,13 @@ When debugging a seL4 project, the Qemu debugger is inherently limited. It has n
 
 Start Qemu with the extra options "-S" (pause execution on start) and "-s" (start a GDB server on TCP port 1234):
 
-{{{
+{{{#!highlight bash numbers=off
 $ qemu-system-arm -M kzm -nographic -kernel images/sel4test-driver-image-arm-imx31 -S -s
 }}}
 
 In a separate terminal window, start your target platform's version of GDB. You should either pass a binary of the seL4 kernel if you intend on debugging seL4 itself or the userspace application if you intend on debugging an application on seL4. Note that your binary needs to include debugging information ("-g" flag to GCC; "Toolchain Options" -> "Emit debugging information" in the seL4 build configuration) if you want GDB to show you C source code while debugging. In this example we're going to debug the seL4 kernel that has been built in debug mode:
 
-{{{
+{{{#!highlight bash numbers=off
 $ arm-none-eabi-gdb build/kernel/kernel.elf
 }}}
 
@@ -110,7 +110,7 @@ Remote debugging using :1234
 (gdb)
 }}}
 
-Suppose we want to halt when {{{kprintf}}} is called. Enter "break kprintf" at the GDB prompt:
+Suppose we want to halt when `kprintf` is called. Enter "break kprintf" at the GDB prompt:
 
 {{{
 (gdb) break kprintf
@@ -133,13 +133,13 @@ Now that we are stopped at a breakpoint, all the standard GDB operations are pos
 
 Be warned that if you are debugging the kernel's early boot steps, something that may not be immediately obvious is that debugging across a context in which page mappings change (e.g. switching page directories or turning the MMU on/off) will confuse GDB and you may find breakpoints triggering unexpectedly or being missed.
 
-The process we have described is similar for x86, though if you are on an x86 or x86_64 host you can simply use your platform's native GDB, {{{gdb}}}.
+The process we have described is similar for x86, though if you are on an x86 or x86_64 host you can simply use your platform's native GDB, `gdb`.
 
 ==== Userspace debugging ====
 
 The steps for debugging a userspace application on seL4 are identical to the ones we have just seen, except that we pass GDB a symbol table for userspace rather than the kernel. For example, using the same sel4test environment we start Qemu in the same way but start GDB with sel4test's binary:
 
-{{{
+{{{#!highlight bash numbers=off
 $ arm-none-eabi-gdb build/arm/imx31/sel4test-driver/sel4test-driver.bin
 }}}
 
@@ -155,7 +155,7 @@ Breakpoint 1 at 0x30870: file libs/libmuslc/src/stdio/printf.c, line 9.
 (gdb)
 }}}
 
-Note that GDB has correctly identified the {{{printf}}} function in Musl C. We now continue as before:
+Note that GDB has correctly identified the `printf` function in Musl C. We now continue as before:
 
 {{{
 (gdb) cont
@@ -176,19 +176,19 @@ Objdump can be used to disassemble an ELF file, be it a kernel or an application
 
 For ARM, supposing that '''arm-none-eabi-''' is used as the cross-compiler prefix.
 
-{{{
+{{{#!highlight bash numbers=off
   arm-none-eabi-objdump -D binary_file_name > dump.s
 }}}
 For x86
 
-{{{
+{{{#!highlight bash numbers=off
   objdump -D binary_file_name > dump.s
 }}}
 The file {{{dump.s}}} has the human-readable assembly instructions.
 
 If you have symbols and want (C) source information in your disassembly (and who doesn't!) then use the -S flag.  for example:
 
-{{{
+{{{#!highlight bash numbers=off
   objdump -DS binary_file_name
 }}}
 === Debugging seL4test ===
@@ -197,17 +197,17 @@ The sel4test project has make targets which perform call objdump with the correc
 
 You can objdump the kernel:
 
-{{{
+{{{#!highlight bash numbers=off
 make objdump-kernel | less
 }}}
 The test driver:
 
-{{{
+{{{#!highlight bash numbers=off
 make objdump-driver | less
 }}}
 Or the tests themselves:
 
-{{{
+{{{#!highlight bash numbers=off
 make objdump-tests | less
 }}}
 
