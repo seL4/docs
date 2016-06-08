@@ -1,4 +1,8 @@
-PandaBoard is based on TI OMAP4 dual-core ARM CPU. The fastboot is used to upload and boot the kernel.
+{{{#!wiki warning
+The following information is very out of date. Please update if you know the current procedure.
+}}}
+
+!PandaBoard is based on TI OMAP4 dual-core ARM CPU. The Fastboot is used to upload and boot the kernel.
 
 == Where to get the seL4 kernel for Pandaboard? ==
 The code now lives in c-kernel-experimental arm-mpcore branch. The second core could be activated or not according to your configuration. To build the kernel, you need to use the Kbuild file under the top-level source tree instead of Makefile.
