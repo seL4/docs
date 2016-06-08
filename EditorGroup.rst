@@ -9,6 +9,7 @@ List of known good editors (for anti-spam)
  * azarrabi
  * Gernot
  * KalanaGamlath
+ * Hesham
  * HanzhangZeng
  * JaphethLim
  * JamesHasner
