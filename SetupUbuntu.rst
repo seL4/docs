@@ -7,7 +7,7 @@ This page doesn't detail the build dependencies for SEL4. It details how to go a
 Both SEL4 and CAmkES require these steps. After completing the steps on this page, go to the respective build instructions page for the project you're trying to build (SEL4, [[CAmkES]]...). Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
 
 === Debian machines ===
-Unfortunately, Debian is in a state of flux between the old Emdebian approach and the new MultiArch approach to cross-compilation.
+Unfortunately, Debian is in a state of flux between the old Emdebian approach and the new Multi``Arch approach to cross-compilation.
 
 On Wheezy and before, you need to use the Emdebian toolchains. Library support is now available on Jessie and later, but not a full complement of cross compilers.
 
@@ -30,8 +30,7 @@ To get a usable build system, install '''build-essential, realpath, libxml2-util
 
 {{{
   sudo apt-get update
-  sudo apt-get install build-essential realpath libxml2-utils python-tempita
-  sudo apt-get install gcc-multilib ccache ncurses-dev
+  sudo apt-get install build-essential realpath libxml2-utils python-tempita gcc-multilib ccache ncurses-dev
 }}}
 
 === Instructions for Debian ===
@@ -83,9 +82,7 @@ sudo apt-get install python-software-properties
 sudo apt-get install g++-multilib
 sudo add-apt-repository universe
 sudo apt-get update
-sudo apt-get install gcc-arm-linux-gnueabi
-sudo apt-get install qemu-system-arm qemu-system-x86
-sudo apt-get install g++-arm-linux-gnueabi
+sudo apt-get install gcc-arm-linux-gnueabi qemu-system-arm qemu-system-x86 g++-arm-linux-gnueabi
 }}}
 
 ==== Precise Pangolin (12.10) ====
