@@ -1,5 +1,4 @@
 = seL4 and RefOS on the Beaglebone Black =
-
 This page contains info about building seL4 on [[http://beagleboard.org/black|Beaglebone Black]].
 
 == Building for the Beaglebone Black ==
@@ -66,3 +65,5 @@ To load an alternate image from the TFTP server at 1.2.3.4, use:
    dhcp ${loadaddr} 1.2.3.4:refos.bin
    go ${loadaddr}
 }}}
+== Other resources ==
+ * [[http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/|Supporting the UART1 interface with CAmkES]]
