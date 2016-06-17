@@ -46,7 +46,6 @@ The following commands get a sample camkes hello world app written in rust and r
 
 == Known issues: ==
  * Currently rely on a modified libmuslc with a hacked in global tls struct in order for rust printf functionality to work.
- * Currently depending on cargo-sysroot tool (http://bitbucket/users/kmcleod/repos/cargo-sysroot) forked from (https://github.com/japaric/cargo-sysroot ) which was recently deprecated in favor of https://github.com/japaric/xargo. At this stage, the xargo tool doesn't seem to be configurable enough to specify sysroot configuration override (disabling default features in libc) and specifying a fixed location to put the sysroot so that make clean works and don't have to recompile all the libraries each time.
  * Camkes apps are really bloated when they use rust. ~8 Mb of binary per app that uses rust it seems.  This is likely related to a camkes linking issue.
  * Most libstd functionality doesn't actually work due to lack of syscall implementation in muslc on sel4.  If concerned about this it may be better to use #![no_std] and explicitly use libcore, libcollections, liballoc, etc because they are more likely to work.
  * No way of knowing at compile time which libstd functions don't have underlying muslc implementations.
