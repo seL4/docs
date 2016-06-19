@@ -1,7 +1,7 @@
 === Description: ===
 This page relates to using cargo based rust modules in userspace on seL4 utilizing the existing build system.  It focuses on Interoperability between existing c based libraries and applications and working with CAmkES.  For rust only projects on seL4 see [[https://robigalia.org/|the robigalia project]].
 
-Sample projects:
+=== Sample projects: ===
 
 There is currently a sample project [[https://github.com/SEL4PROJ/rust-camkes-samples|rust-camkes-samples]] that demonstrates this functionality.
 
