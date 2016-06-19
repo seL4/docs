@@ -14,7 +14,7 @@ In addition to the existing [[SetupUbuntu|seL4]] dependencies and [[CAmkES|CAmkE
 The following features also require extra dependencies, however the particular features are not required to build applications that don't use the features:
 
  * libclang: A dependency of rust-bindgen to generate rust bindings from C header files.
-
+ * linux-libc-dev:i386: Provides glibc headers for building libstd on x86. 
 
 
 === Build overview: ===
