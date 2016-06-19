@@ -20,6 +20,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Debugging guide]]
  * [[Benchmarking guide]]
  * [[CAmkES]]
+ * [[Rust]]
 
 == Questions and Recipes ==
 
