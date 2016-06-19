@@ -9,7 +9,7 @@ There is currently a sample project [[https://github.com/SEL4PROJ/rust-camkes-sa
 In addition to the existing [[SetupUbuntu|seL4]] dependencies and [[CAmkES|CAmkES]] dependencies, the following dependencies are required:
 
  * cargo and rustc: These are the rust build tool and compiler, they should be installed with [[https://github.com/brson/multirust|multirust]] ([[https://www.rustup.rs/|rustup.rs]] is still in beta, and the build system has only been tested with multirust but rustup.sh should still be fine as long as rustc and cargo work)
- * Cmake
+ * Cmake >= 3.5.2
 
 The following features also require extra dependencies, however the particular features are not required to build applications that don't use the features:
 
