@@ -39,6 +39,8 @@ In addition to the typical sel4 build prerequisites you also need to have rust i
 
 Additionally, if you want to use rust-bindgen (a helpful tool that generates rust bindings from c header files, such as bindings to camkes generated functions) you need to have libclang installed.
 
+=== Sample apps ===
+
 The following commands get a sample camkes hello world app written in rust and runs it on qemu.  It assumes that rust is installed correctly.
 
 ||`# This just gets all of the sources`<<BR>>`repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git `<<BR>>`repo sync  `<<BR>>`# Configuration for arm kzm (so we can use qemu)`<<BR>>`# helloworld app: make rust-helloworld-kzm_defconfig`<<BR>>`# keyvalue app: make rust-keyvalue-kzm_defconfig`<<BR>>`make rust-helloworld-kzm_defconfig`<<BR>>`# Build and run on qemu`<<BR>>`make qemu-arm`||
