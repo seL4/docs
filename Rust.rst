@@ -1,9 +1,22 @@
 === Description: ===
 This page relates to using cargo based rust modules in userspace on seL4 utilizing the existing build system.  It focuses on Interoperability between existing c based libraries and applications and working with CAmkES.  For rust only projects on seL4 see [[https://robigalia.org/|the robigalia project]].
 
+=== Setup: ===
+In addition to the typical sel4 build prerequisites you also need to have rust installed.  This is achieved by the following: (On bob multirust is installed, only the second two commands are required)
+
+||`# This installs multirust from here: https://github.com/brson/multirust`<<BR>>`curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh  `<<BR>><<BR>>`# This will install cargo and rustc using the current nightly version`<<BR>>`multirust update nightly`<<BR>>`# This will set the default cargo and rustc paths to the nightly version`<<BR>>`multirust default nightly`||
+
+
+Additionally, if you want to use rust-bindgen (a helpful tool that generates rust bindings from c header files, such as bindings to camkes generated functions) you need to have libclang installed.
+
 === Sample projects: ===
 
 There is currently a sample project [[https://github.com/SEL4PROJ/rust-camkes-samples|rust-camkes-samples]] that demonstrates this functionality.
+
+The following commands get a sample camkes hello world app written in rust and runs it on qemu.  It assumes that rust is installed correctly.
+
+||`# This just gets all of the sources`<<BR>>`repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git `<<BR>>`repo sync  `<<BR>>`# Configuration for arm kzm (so we can use qemu)`<<BR>>`# helloworld app: make rust-helloworld-kzm_defconfig`<<BR>>`# keyvalue app: make rust-keyvalue-kzm_defconfig`<<BR>>`make rust-helloworld-kzm_defconfig`<<BR>>`# Build and run on qemu`<<BR>>`make qemu-arm`||
+
 
 === Build Dependencies: ===
 In addition to the existing [[SetupUbuntu|seL4]] dependencies and [[CAmkES|CAmkES]] dependencies, the following dependencies are required:
@@ -30,20 +43,6 @@ To use a cargo project as part of a camkes app component, in the application's M
 For a non camkes application, to use a cargo project in an app then the settings are the same as for a library: RUST_TARGET := libcratename.a.
 
  * The second feature of the build system, is that it cross compiles the core rust libraries for the the target architecture.  Currently it builds std and all required libraries.  Most of std won't work (things that rely on muslc syscalls that are not supported on seL4).  using #![no_std] should allow the project to just use core libraries and use extra libraries (such as collections, alloc) explicitly as needed.  rust_sysroot is a make rule that needs to be added to the Kbuild file of any module that uses rust.  Additionally, libcompiler-rt needs to be added to any applications that use cargo projects directly or indirectly.
-
-=== Setup: ===
-In addition to the typical sel4 build prerequisites you also need to have rust installed.  This is achieved by the following: (On bob multirust is installed, only the second two commands are required)
-
-||`# This installs multirust from here: https://github.com/brson/multirust`<<BR>>`curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh  `<<BR>><<BR>>`# This will install cargo and rustc using the current nightly version`<<BR>>`multirust update nightly`<<BR>>`# This will set the default cargo and rustc paths to the nightly version`<<BR>>`multirust default nightly`||
-
-
-Additionally, if you want to use rust-bindgen (a helpful tool that generates rust bindings from c header files, such as bindings to camkes generated functions) you need to have libclang installed.
-
-=== Sample apps ===
-
-The following commands get a sample camkes hello world app written in rust and runs it on qemu.  It assumes that rust is installed correctly.
-
-||`# This just gets all of the sources`<<BR>>`repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git `<<BR>>`repo sync  `<<BR>>`# Configuration for arm kzm (so we can use qemu)`<<BR>>`# helloworld app: make rust-helloworld-kzm_defconfig`<<BR>>`# keyvalue app: make rust-keyvalue-kzm_defconfig`<<BR>>`make rust-helloworld-kzm_defconfig`<<BR>>`# Build and run on qemu`<<BR>>`make qemu-arm`||
 
 
 == Known issues: ==
