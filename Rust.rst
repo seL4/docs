@@ -2,7 +2,7 @@
 This page relates to using cargo based rust modules in userspace on seL4 utilizing the existing build system.  It focuses on Interoperability between existing c based libraries and applications and working with CAmkES.  For rust only projects on seL4 see [[https://robigalia.org/|the robigalia project]].
 
 === Setup: ===
-In addition to the typical sel4 build prerequisites you also need to have rust installed.  This is achieved by the following: (On bob multirust is installed, only the second two commands are required)
+In addition to the typical sel4 build prerequisites you also need to have rust installed.  This is achieved by the following: 
 
 ||`# This installs multirust from here: https://github.com/brson/multirust`<<BR>>`curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh  `<<BR>><<BR>>`# This will install cargo and rustc using the current nightly version`<<BR>>`multirust update nightly`<<BR>>`# This will set the default cargo and rustc paths to the nightly version`<<BR>>`multirust default nightly`||
 
