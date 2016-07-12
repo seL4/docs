@@ -23,3 +23,4 @@ List of known good editors (for anti-spam)
  * kentmcleod
  * CoreyRichardson
  * Matthew Fernandez
+ * ParthaSusarla
