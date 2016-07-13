@@ -1,4 +1,3 @@
-
 = Introducing seL4 3.1.0 =
 
  * Adds single-core support for HiKey cortex-a53 board, in 32 bit mode (non-verified). This is the first armv8 platform seL4 supports.
@@ -24,5 +23,5 @@ Use {{{git log 3.0.1..3.1.0}}} in https://github.com/seL4/seL4
 
 = More details =
 
-See the [[3.1.0 manual|http://sel4.systems/Info/Docs/seL4-manual-3.1.0.pdf]] included in the release for detailed descriptions
+See the [[http://sel4.systems/Info/Docs/seL4-manual-3.1.0.pdf|3.1.0 manual]] included in the release for detailed descriptions
 of the new features. Or ask on the mailing list!
