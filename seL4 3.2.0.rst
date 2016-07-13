@@ -9,9 +9,11 @@
 
 = Implementation improvements =
 
+* Several bug-fixes for both {{{x86}}} and {{{ARM}}} have been made. Please see the commit log for details.
+
 = API Changes =
 
- * No API changes in this release
+ * No API changes in this release.
 
 = ABI Changes =
  
