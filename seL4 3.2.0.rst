@@ -1,7 +1,7 @@
 = Introducing seL4 3.2.0 =
 
  * ARM Hypervisor support.
- * ARM Jetson-TK1: Cleanups and fixes.
+ * ARM Jetson-TK1: Cleanup.
  * Benchmarking now supports tracking of syscalls.
  * Support for XSAVE feature set for x86 CPUs.
  * Simplified ARM platform selection during configuration.
@@ -9,7 +9,7 @@
 
 = Implementation improvements =
 
-* Several bug-fixes for both {{{x86}}} and {{{ARM}}} have been made. Please see the commit log for details.
+* Several enhancements for both {{{x86}}} and {{{ARM}}} have been made. Please see the commit log for details.
 
 = API Changes =
 
