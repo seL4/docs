@@ -1,26 +1,23 @@
 #acl Admin/AdminGroup: read,write,revert EditorGroup: read,write all:None
 
-List of known good editors (for anti-spam)
- * PeterChubb
- * AnnaLyons
- * IhorKuz
- * Yanyan Shen
+List of known good editors (for anti-spam)  Please try to keep these in alphabetical order.
  * AddoWondo
+ * AnnaLyons
  * azarrabi
- * Gernot
- * KalanaGamlath
- * Hesham
- * HanzhangZeng
- * JaphethLim
- * JamesHasner
- * LukeMondy
- * StephenSherratt
- * JulienDelange
  * eduardn
- * KofiDokuAtuah
+ * Gernot
  * GerwinKlein
+ * HanzhangZeng
+ * Hesham
+ * HoraceBlanc
+ * IhorKuz
+ * JamesHasner
+ * JaphethLim
+ * JulienDelange
+ * KalanaGamlath
+ * KofiDokuAtuah
+ * LukeMondy
  * MatthewBrecknell
- * kentmcleod
- * CoreyRichardson
- * Matthew Fernandez
- * ParthaSusarla
+ * PeterChubb
+ * StephenSherratt
+ * Yanyan Shen
