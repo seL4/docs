@@ -5,7 +5,7 @@
 = Getting Started =
 Hikey board is based around the [[https://github.com/96boards/documentation/blob/master/hikey/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf|HiSilicon Kirin 620]] eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz. However, before start using 32-bit seL4 some changes should be made to the firmware. Check out the [[https://github.com/96boards/documentation/wiki/HiKeyUEFI|HiKeyUEFI]] page, make sure your board is correctly configured and plugged.
 
- * Before compiling the '''linaro-edk2''', make sure to appy [[https://stage.sel4.systems/hikey.patch|this patch]].
+ * Before compiling the '''linaro-edk2''', make sure to appy [[https://sel4.systems/hikey.patch|this patch]].
  * When creating the '''boot-fat.uefi.img''' partition, replace the default Fastboot with newly generated one.
  * Copy the file '''noboot.efi''' to '''boot-fat.uefi.img''' partition.
  * Use UART0 instead of UART3 as the console by uncomment the appropriate line(s) in '''LinaroPkg/platforms.config''' before compiling the '''linaro-edk2'''.
