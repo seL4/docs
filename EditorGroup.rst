@@ -4,6 +4,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * AddoWondo
  * AnnaLyons
  * azarrabi
+ * ChrisRothrock
  * eduardn
  * Gernot
  * GerwinKlein
