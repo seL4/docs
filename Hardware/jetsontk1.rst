@@ -31,7 +31,7 @@ $
 }}}
 
 = Load the binary =
-First of all, you should connect on the console of the Tegra. To do so, you need an RS232 port to connect on the console port of the Tegra. I am using a USB/serial cable with a null modem.
+You need to be able to see output from the serial console on the Tegra.  Connect the serial port to your computer with a serial cable, either a USB->RS232 converter, or if your computer has a serial port, connect to it.
 
 Once you have the wires in place, you can connect to the console via `screen` (or you can use minicom or another serial console program). In the following, we assume that the Tegra is connected to `/dev/ttyUSB0`.
 
@@ -39,9 +39,10 @@ Once you have the wires in place, you can connect to the console via `screen` (o
 screen /dev/ttyUSB0 115200
 }}}
 
-When you start the board, you have the U-Boot prompt. To load the binary you need to interact with U-Boot. I personally use a DHCP/TFTP server to upload the binary directly on the board. I have the Tegra connected on my computer. The Tegra gets an IP address via the DHCP server and gets the binary.
-
-The following command will then ask to get an address via the DHCP and get the sel4.img file from the TFTP server at 192.168.1.1.
+When you start the board, you will see the U-Boot prompt. To load the binary you need to interact with U-Boot. I personally use a DHCP/TFTP server to get the binary onto the board.
+Copy  `sel4.img` onto the tftp server; if you've set up DHCP properly it will pass the server IP to the board.
+Otherwise you can specify the IOP address on the command.
+The following command will then ask to get an address via the DHCP and get `sel4.img` file from the TFTP server at 192.168.1.1.
 
 {{{
 dhcp ${loadaddr} 192.168.1.1:sel4.img
@@ -59,7 +60,20 @@ bootelf ${loadaddr}
 = Flash U-Boot =
 
 The initial version of U-Boot does not provides all necessary functionality. In particular, it boots the system in secure mode.  To run a virtual machine monitor, the Tegra needs to be booted in nonsecure or HYP mode.
+After installing a new u-boot (instructions below) you can boot in either secure on non-secure mode based on a u-boot environment variable.
 
+Do
+{{{
+setenv bootm_boot_mode nonsec
+saveenv
+}}}
+to boot in nonsecure (HYP) mode.  This also enables kvm if you boot Linux.
+
+To go back to secure mode booting do
+{{{
+setenv bootm_boot_mode sec
+saveenv
+}}}
 == Getting the sources ==
 
 {{{#!highlight bash numbers=off
@@ -76,6 +90,14 @@ cd tegra-u-boot-flasher
 repo init -u https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git
 repo sync
 }}}
+Not every version of u-boot will work; in particular recent versions will not enable the ethernet.  A known good version is f861f51c4673d35908e4e330a86c81d7d909b51c
+Do:
+{{{#!highlight bash numbers=off
+cd u-boot
+git checkout f861f51c4673d35908e4e330a86c81d7d909b51c
+cd ..
+}}}
+
 
 
 == Patching the sources ==
@@ -92,7 +114,7 @@ CONFIG_SPL=y
 
 This enables HYP mode booting.
 
-Also, apply the following patch
+Also, apply the following patch to increase the console buffer size.
 {{{#!highlight diff numbers=off
 diff --git a/include/configs/tegra-common.h b/include/configs/tegra-common.h
 index 1c469d0..234023d 100644
@@ -133,3 +155,6 @@ Then issue:
 }}}
 
 The board should now be updated.
+
+== Running Linux with the new U-Boot ==
+To boot Linux in non-secure mode, build the kernel with the Power-State Coordination Interface (PSCI) enabled (`CONFIG_ARM_PSCI=y`, in Kernel Features menu)and CPU-Idle PM support disabled (`CONFIG_CPU_IDLE is not set` in CPU Power Management->CPU Idle).  Without these changes the kernel will hang.
