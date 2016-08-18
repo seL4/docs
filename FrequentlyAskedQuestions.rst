@@ -21,7 +21,7 @@ L4 microkernel family tree. Black arrows indicate code, green arrows ABI inherit
 === How does seL4's performance compare to other microkernels? ===
 To the best of our knowledge, seL4 is the world's fastest microkernel on the supported processors, in terms of the usual ping-pong metric: the cost of a cross-address-space message-passing (IPC) operation. For more information, check the [[http://l4hq.org/docs/performance.php|performance page on L4HQ]].
 
-Note, however, that the IPC times recorded at L4HQ are the result of micro-optimisations which are not yet in the public version. The released kernel is about 10–20% slower (which still makes it faster than any other performance figures we're aware of). We are planning to push those optimisations once they mature.
+Note that the x86 IPC times recorded at L4HQ are the result of micro-optimisations which are not yet in the public version, and may never make it there, as we expect the soon-to-be-released x64 version to be significantly faster, making 32-bit x86 obsolete. On ARM the verified master branch version is actually faster than the figures on L4HQ, one-way IPC on the A9 is now well below 300 cycles. Actual numbers fluctuate up and down by 5–10 cycles, but there is no longer a performance difference between verified and unverified branches on ARMv7. ARMv8 is not yet fully optimised.
 
 == On what hardware does seL4 run? ==
 === What processor architectures are supported? ===
