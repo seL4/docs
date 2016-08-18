@@ -44,6 +44,8 @@ The unverified x86 version of seL4 supports VT-d extensions on the experimental 
 === Does seL4 support multicore? ===
 On x86, seL4 can be configured to support multiple CPUs. Current multicore support is through a multikernel configuration where each booted CPU is given a portion of available memory. Cores can then communicate via limited shared memory and kernel supported IPIs. This configuration is highly experimental at the moment.
 
+A principled, high-performance multicore version is under active development, please refer to the [[https://sel4.systems/Info/Roadmap/|roadmap]] for anticipated release dates.
+
 === Can I run seL4 on an MMU-less microcontroller? ===
 Using seL4 without a full memory-management unit (MMU) makes little sense, as its resource management is fundamentally based on virtual memory. For lower-end processors that only have a memory-protection unit (MPU) or no memory protection at all, you should look at NICTA's [[http://ssrg.nicta.com.au/projects/TS/echronos/|eChronos real-time operating system]] (RTOS), which is designed for such processors and is also undergoing formal verification.
 
@@ -52,7 +54,7 @@ seL4 is a general-purpose microkernel, so the answer is all of them. The main ta
 
 == How good is seL4 at supporting virtual machines? ==
 === Can I run Linux on top of seL4? ===
-Yes, seL4 can run Linux in a virtual machine. At present this is supported on x86 processors only and seL4 requires a machine that supports Intel VT-x with EPT. Additionally the current VMM requires a HPET that supports MSI delivery. We are working on supporting virtualised Linux on ARM processors with virtualisation extensions (presently A15/A7 cores), a release should not be far off.
+Yes, seL4 can run Linux in a virtual machine. At present the master branch supports this on ARMv8 processors (presently A15/A7 cores). For x86 there is experimental virtualisation support (requiring Intel VT-x, ETP and a HPET that supports MSI delivery). Please see the [[https://sel4.systems/Info/Roadmap/|roadmap]] for anticipated release of a mature version.
 
 To support virtual machines, seL4 itself runs as a hypervisor (x86 Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to a virtual machine monitor (VMM) which performs the necessary emulations. The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).
 
@@ -64,18 +66,16 @@ Codezero (when it was still open source) was a clone of the then OKL4 microkerne
 The OKL4 Microvisor has a different API, especially designed to support efficient para-virtualisation. It has fairly mature userland, especially a driver framework.
 
 === Does seL4 support multiple virtual machines at once? ===
-seL4 supports (hardware-supported) full virtualisation. The userland VMM required to support VMs hasn’t yet been released for ARM, but it works pretty well internally and will be released soon. We have no plans to support para-virtualised VMs.
-
 Yes, multiple VMs are supported, including heterogeneous ones.
 
 === Can I run a real-time OS in a virtual machine on seL4? ===
-seL4 is the world’s only hypervisor with a sound worst-case execution-time (WCET) analysis, and as such the only one that can give you actual real-time guarantees, no matter what others may be claiming. (If someone else tells you they can make such guarantees, ask them to make them in public so I can call out their bullshit.)
+seL4 is the world’s only hypervisor with a sound worst-case execution-time (WCET) analysis, and as such the only one that can give you actual real-time guarantees, no matter what others may be claiming. (If someone else tells you they can make such guarantees, ask them to make them in public so Gernot can call out their bullshit.)
 
-That said, the analysis was performed on an earlier version of the kernel, not the presently released one. We are currently re-doing that analysis. This will require some updates to the kernel to reduce interrupt latencies where they have crept up due to recent changes.
+The originally published analysis was performed on an earlier version of the kernel, and contained unverified improvements. We have recently improved our WCET analysis to make the determination of loop bounds and infeasible paths high-assurance. We now also apply it to the verified kernel, so this now also has sound execution-time bounds. Unfortunately, we can only do a sound analysis on relatively dated processor cores (ARM11, which is an ARMv6 core) as ARM no longer publishes latency bounds for instructions.
 
-More importantly, we’re working on improvements for enabling the kind of temporal isolation that’s required for supporting mixed-criticality scheduling. That will take 6-12 months to make it into the release, by which time it’ll have been comprehensively tested and evaluated, among others in the [[http://ssrg.nicta.com.au/projects/TS/SMACCM/|SMACCM]] project
+More importantly, we have developed a new scheduling model that supports the kind of temporal isolation that is required for supporting mixed-criticality systems. This is presently in a separate branch (the RT branch), which is the recommended starting point for any project that requires real-time properties.
 
-I'm actually not convinced that running an RTOS in a VM is necessarily the way to go, although that somewhat depends on your circumstances. In general you’re better off running RT apps in a native seL4 environment.
+We are actually not convinced that running an RTOS in a VM is necessarily the way to go, although that somewhat depends on your circumstances. In general you’ll better off running RT apps in a native seL4 environment.
 
 == What is formal verification? ==
 Formal software verification is the activity of using mathematical proof to show that a piece of software satisfies specific properties. Traditionally, formal verification has been widely used to show that the design or a specification of a piece of software has certain properties, or that a design implements a specification correctly. In recent years, it has become possible to apply formal verification directly to the code that implements the software and to show that this code has specific properties.
