@@ -6,6 +6,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * azarrabi
  * ChrisRothrock
  * eduardn
+ * Gang Wang
  * Gernot
  * GerwinKlein
  * HanzhangZeng
