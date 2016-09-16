@@ -54,7 +54,7 @@ seL4 is a general-purpose microkernel, so the answer is all of them. The main ta
 
 == How good is seL4 at supporting virtual machines? ==
 === Can I run Linux on top of seL4? ===
-Yes, seL4 can run Linux in a virtual machine. At present the master branch supports this on ARMv8 processors (presently A15/A7 cores). For x86 there is experimental virtualisation support (requiring Intel VT-x, ETP and a HPET that supports MSI delivery). Please see the [[https://sel4.systems/Info/Roadmap/|roadmap]] for anticipated release of a mature version.
+Yes, seL4 can run Linux in a virtual machine. At present the master branch supports this on ARMv7 processors (presently A15/A7 cores). For x86 there is experimental virtualisation support (requiring Intel VT-x, ETP and a HPET that supports MSI delivery). Please see the [[https://sel4.systems/Info/Roadmap/|roadmap]] for anticipated release of a mature version.
 
 To support virtual machines, seL4 itself runs as a hypervisor (x86 Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to a virtual machine monitor (VMM) which performs the necessary emulations. The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).
 
