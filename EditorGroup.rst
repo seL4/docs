@@ -18,7 +18,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * JulienDelange
  * KalanaGamlath
  * KofiDokuAtuah
- * KentMcleod
+ * kentmcleod
  * LukeMondy
  * MatthewBrecknell
  * PeterChubb
