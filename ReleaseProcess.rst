@@ -17,14 +17,14 @@ seL4 versions are tagged in git.
 We aim to follow a monthly release cycle, with fresh code pushed to github daily. This means that master
 is quite volatile, so unless you want to live on the bleeding edge we suggest you should work on a specific tag and choose when to upgrade.  
  
-== Library Compatability ==
+== Library Compatibility ==
 
 seL4 libraries have branches that track all MAJOR.MINOR versions, with branch names in the format MAJOR.MINOR-compatible.
 A MAJOR.MINOR-compatible branch will build with any MAJOR.MINOR.* version of the kernel, and all MAJOR.MINOR-compatible branches across our libraries are compatible with each other.
 
 To avoid too much dependency management we do not currently version our libraries themselves. 
 
-== Project compatability ==
+== Project Compatibility ==
 
 Each MAJOR.MINOR release we add updated project manifest to each of our supported projects. 
 
