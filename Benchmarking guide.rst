@@ -122,8 +122,9 @@ By enabling CPU utilisation tracking, the kernel is instrumented with some varia
 
 After enabling this feature, some few system calls can be used to start, stop, and retrieve data.
 
-'''seL4_BenchmarkResetLog() ''' This system call resets all in-kernel counters that hold utilisation values, and starts CPU utilisation tracking.
+'''seL4_BenchmarkResetLog() ''' This system call resets global counters (since the previous call to the same function) and idleThread counters that hold utilisation values, and starts CPU utilisation tracking.
 
+'''seL4_BenchmarkResetThreadUtilisation(seL4_CPtr thread_cptr)''' resets the utilisation counters for the requested thread. It's the resposibility of the user to reset the thread's counters using this system call before calling seL4_BenchmarkResetLog(), especially if seL4_BenchmarkResetLog() is called multiple times to track the same thread(s).
 
 '''seL4_BenchmarkFinalizeLog()''' Stops the CPU tracking feature but doesn't reset the counters. Calling this system call without a previous seL4_BenchmarkResetLog() call has no effect.
 
@@ -136,6 +137,9 @@ Example code of using this feature:
 #include <sel4/benchmark_utilisation_types.h>
 
 uint64_t *ipcbuffer = (uint64_t *) &(seL4_GetIPCBuffer()->msg[0]);
+
+seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
+
 seL4_BenchmarkResetLog();
 ...
 seL4_BenchmarkFinalizeLog();
