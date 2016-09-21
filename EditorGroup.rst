@@ -3,6 +3,7 @@
 List of known good editors (for anti-spam)  Please try to keep these in alphabetical order.
  * AddoWondo
  * AnnaLyons
+ * AlexanderLegg
  * azarrabi
  * ChrisRothrock
  * eduardn
