@@ -2,7 +2,7 @@
 == Kernel ==
 
  * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml||Technical overview paper]]
- * [[http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml|from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?]], a 20-year retrospective of L4 microkernels;
+ * [[https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml|L4 Microkernels: The Lessons from 20 Years of Research and Deployment]], r retrospective explaining how we got to where we are;
  * [[Getting started]]
  * [[http://ssrg.nicta.com.au/projects/seL4/|NICTA seL4 research project pages]]
  * [[https://www.cse.unsw.edu.au/~cs9242/14/lectures/|UNSW Advanced OS lecture slides]], especialy the Introduction and Microkernel Design lectures
