@@ -158,12 +158,63 @@ The functions with explicit assumptions are the machine interface functions ment
 
 As an example, the CPU and architecture options mean that everything under `src/arch/ia32` is not covered by the proof, but that the files in `src/kernel/object` are.
 
-= What is the seL4 fastpath? =
-The fastpath is an add-on frontend to the kernel which performs the simple cases of some common operations quickly.
+= How are resources managed and protected in seL4? =
+
+The key idea in seL4 is that all resource management is done in userland. Access to and control over resources is controlled by capabilities. The kernel after boot hands control over all free resources to userland, and after that will never do any memory management itself. It has no heap, just a few global variables, a strictly bounded stack, and memory explicitly provided to it by userland.
+
+== What are capabilities ==
+
+Capabilities are an OS abstraction for managing access rights. A capability represents ''prima facie'' evidence of the right to perform a certain operation. A capability encapsulates an object reference plus access rights.
+
+In a capability system, such as seL4, any operation is authorised by a capability. When performing an operation on an object (such as sending a message to an IPC endpoint or stopping a thread) the capability to the object is passed to the kernel, which then checks whether the capability conveys sufficient rights to perform the operation, and if yes, performs it with no further questions asked.
+
+For security, the capabilities themselves are stored in kernel memory (in Cnodes), usermode references them via references to locations Cspace references.
+
+See the wikipedia article on [[https://en.wikipedia.org/wiki/Capability-based_security|capability-based security]] for more details on caps.
+
+== How can usermode manage kernel memory safely? ==
+
+The kernel puts userland in control of system resources by handing all free memory (called ''Untyped'') after booting to the first user process (called the ''root task'') by depositing the respective caps in the root tasks's Cspace. The root task can then implement its resource management policies, e.g. by partitioning the system into security domains and handing each domain a disjoint subset of Untyped memory.
+
+If a system call requires memory for the kernel's metadata, such as the thread control block when creating a thread, userland must provide this memory explicitly to the kernel. This is done by ''retyping'' some Untyped memory into the corresponding kernel object type. Eg. for thread creation, userland must retype some Untyped into ''TCB Objects''. This memory then becomes kernel memory, in the sense that only the kernel can read or write it. Userland can still revoke it, which implicitly destroys the objects (eg threads) represented by the object.
+
+The only objects directly accessible by userland are ''Frame Objects'': These can be mapped into an ''Address Space Object'' (essentially a page table), after which userland can write to the physical memory represented by the Frame Objects.
+
+== How can threads communicate? ==
+
+Communication can happen via message-passing IPC or shared memory. IPC only makes sense for short messages; there is an implementation-defined, architecture-dependent limit on the message size of a few hundred bytes, but generally messages should be kept to a few dozen bytes. For longer messages, a shared buffer should be used.
+
+Depending on the trust relationship, such a buffer may be shared directly between a pair of threads or groups of threads (some of which may only have write access, others may only have read access to the buffer). Or the buffer could be encapsulated in a shared server. Or a trusted server could be given read access to a sender's buffer and write access to a receiver's buffer and copies the data directly from the sender's to the receiver's address space.
+
+Shared-buffer access can be synchronised via ''Notifications''.
+
+== How does message-passing work? ==
+
+As is characteristic to members of the L4 microkernel family, seL4 uses ''synchronous IPC''. This means a rendez-vous communication model, where the message is exchanged when both sender and receiver are ready. If both are running on the same core, this means that one partner will block until the other invokes the IPC operation.
+
+In seL4, IPC is via ''Endpoint Objects''. An Endpoint can be considered a mailbox through which the sender and receiver exchange the message through a handshake. Anyone holding a Send capability can send a message through an Endpoint, and anyone holding a Receive cap can receive a message. This means that there can be any number of sender and receivers for each Endpoint. In particular, a specific message is only delivered to one sender (the first in the queue), no matter how many threads are trying to receive from the Endpoint.
+
+Message broadcast is a higher-level abstraction that can be implemented on top of seL4's primitive mechanisms.
+
+== What are Notifications? ==
+
+A ''Notification Object'' is logically a small array of binary semaphores. It has the same operations: ''Signal'' and ''Wait''. Due to the binary nature, multiple Signals may be lost if they are not interleaved with Waits.
+
+Signalling a Notification requires a Send cap on the Notification Object. The cap has a ''Badge'', which is a bit pattern set by the creator of the cap (typically the owner of the Notification Object). The Signal operation bitwise ORs the badge on the Notification's bit array. The Wait operation blocks until the array is non-zero, and then returns the bit string and zeros out the array.
+
+Notifications can also be ''Polled'', which is like Wait, except the operation does not block, and instead returns zero immediately, even if the Notification bit string is zero.
+
+== What is the seL4 fastpath? ==
+
+The fastpath is an add-on frontend to the kernel which performs the simple cases of some common operations quickly. It is key to the high IPC performance seL4 achieves -- we know of now kernel that does IPC faster.
 
 Enabling or disabling the fastpath should not have any impact on the kernel behaviour except for performance.
 
 There is a section on the fastpath and its verification in [[http://www.ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml|this article]]. The fastpath discussion starts on page 23.
+
+== I want to know more about seL4 functionality/design/implementation/philosophy ==
+
+There are plenty of references on the [[https://wiki.sel4.systems/Documentation||documentation page]].
 
 = What can I do with seL4? =
 You can use seL4 for research, education or commerce. Details are specified in the standard open-source [[#lic|licenses]] that come with the code. Different licenses apply to different parts of the code, but the conditions are designed to ease uptake.
