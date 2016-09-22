@@ -1,3 +1,5 @@
+= Frequently Asked Questions on seL4 =
+
 <<TableOfContents()>>
 
 = What is seL4? =
