@@ -196,6 +196,12 @@ In seL4, IPC is via ''Endpoint Objects''. An Endpoint can be considered a mailbo
 
 Message broadcast is a higher-level abstraction that can be implemented on top of seL4's primitive mechanisms.
 
+== Why do send-only operations not return a success indication? ==
+
+The send-only IPC system calls ''seL4_Send()'' and ''seL4_NBSend()'' can be invoked with a send-only capability, enabling one-way data transfer. By definition, a send-ony cap cannot be used to receive any information. A result status, indicating whether or not the message has been delivered, would constitute a back channel: the receiver could use the result status to signal information to the sender. This would violate the seL4's information-flow guarantees, by allowing information flow that is not explicitly authorised by a capability.
+
+In short, it's a feature, not a bug (painful as it may be).
+
 == What are Notifications? ==
 
 A ''Notification Object'' is logically a small array of binary semaphores. It has the same operations: ''Signal'' and ''Wait''. Due to the binary nature, multiple Signals may be lost if they are not interleaved with Waits.
