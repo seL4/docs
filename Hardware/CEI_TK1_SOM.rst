@@ -12,7 +12,7 @@ As with the [[Hardware/jetsontk1|Jetson]] with this u-boot, set the environment 
 
 The serial port is at 1V8 levels on J8, as follows: (pin one is farthest from  the ground hole)
 || '''Pin''' || '''Function''' ||  '''Direction''' ||
-||1	||Rx||	||In||
+||1	||Rx||	In||
 ||2	||Tx	||Out||
 ||3	||CTS	||In||
 ||4	||RTS	||Out||
