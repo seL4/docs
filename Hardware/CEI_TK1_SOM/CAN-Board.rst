@@ -8,7 +8,7 @@ The  board attaches to the bottom of a TK1-SOM via the expansion connector. No f
 
 == Using Linux with this daughterboard for CAN ==
 
-(hello world example & testing) See [[L4TCan|Using CAN on L4T through an MCP251X]]
+(hello world example & testing) See [[../L4TCan|Using CAN on L4T through an MCP251X]]
 
 == Pinout detail ==
 The font on the silkscreen indicating pins is difficult to see once the tower is assembled (wasn't enough space on the top) - See this picture (view taken from bottom): {{attachment:silk.png|Silk Screen|width=30%}}
