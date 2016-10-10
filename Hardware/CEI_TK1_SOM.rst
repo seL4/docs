@@ -24,7 +24,7 @@ If you need 1V8 as a reference (VDIO on some FTDI connectors), it's available on
 Speed 115200 8bits no parity; the default Linux image has login `ubuntu`, password `ubuntu`.
 
 == Peripherals ==
-WE have an open-hardware CAN and I2C board available, see [[./CAN-Board]]
+WE have an open-hardware CAN and I2C board available, see [[/CAN-Board]]
 == DFU: Loading kernels over USB ==
 You can load seL4 kernels over USB using `dfu-util`. (you can also use fastboot, but to boot a kernel over fastboot means making the ELF file produced from the buld system look like an ANDROID Linux kernel).
 
