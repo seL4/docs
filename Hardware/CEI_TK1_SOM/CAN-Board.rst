@@ -4,7 +4,11 @@ The CAN Daughterboard is an open-hardware CAN/SPI/I2C/Serial board designed by t
 {{attachment:top.jpg|Top of board|width="20%"}} {{attachment:bottom.jpg|Bottom of board|width="20%"}} {{attachment:side.jpg|Side view of mounted stack|width="20%"}}
 
 == Mounting ==
-The  board attaches to the bottom of a TK1-SOM via the expansion connector. No further work should be needed to enumerate the device given a kernel supporting GPIO chipselects. Note the unpopulated standoff holes on the rightmost image above --- it is possible to fit a standoff of the same type already installed in the TK1-SOM to stabilize the 'tower' making it easier to work with. == Using Linux with this daughterboard for CAN==  (hello world example & testing) See [L4TCan|Using CAN on L4T through an MCP251X]
+The  board attaches to the bottom of a TK1-SOM via the expansion connector. No further work should be needed to enumerate the device given a kernel supporting GPIO chipselects. Note the unpopulated standoff holes on the rightmost image above --- it is possible to fit a standoff of the same type already installed in the TK1-SOM to stabilize the 'tower' making it easier to work with. 
+
+== Using Linux with this daughterboard for CAN== 
+
+(hello world example & testing) See [L4TCan|Using CAN on L4T through an MCP251X]
 
 == Pinout detail ==
 The font on the silkscreen indicating pins is difficult to see once the tower is assembled (wasn't enough space on the top) - See this picture (view taken from bottom): {{attachment:silk.png|Silk Screen|width=30%}}
