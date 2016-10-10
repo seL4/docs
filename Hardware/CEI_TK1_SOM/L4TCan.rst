@@ -1,3 +1,4 @@
+## page was renamed from L4TCan
 = Using CAN on L4T through an MCP251X =
 
 {{attachment:front.jpg|Front view of TK1-Tower|width=25%}}{{attachment:bottom.jpg|Bootom view of TK1-Tower|width=25%}}
