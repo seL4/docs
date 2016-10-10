@@ -1,22 +1,19 @@
-Describe L4TCan here.
-
 = Using CAN on L4T through an MCP251X =
-[[https://confluence.csiro.au/display/RGPSST/Using+CAN+on+L4T+through+an+MCP251X#page-metadata-end|Skip to end of metadata]] * Created by [[https://confluence.csiro.au/display/~hol416|Holzapfel, Seb (Data61, Kensington NSW)]], last modified on [[https://confluence.csiro.au/pages/diffpagesbyversion.action?pageId=353603175&selectedPageVersions=4&selectedPageVersions=5|Aug 25, 2016]]
 
-[[https://confluence.csiro.au/display/RGPSST/Using+CAN+on+L4T+through+an+MCP251X#page-metadata-start|Go to start of metadata]] {{https://confluence.csiro.au/download/attachments/353603175/front.jpg?version=1&modificationDate=1472086074213&api=v2||data-linked-resource-version="1",data-image-src="/download/attachments/353603175/front.jpg?version=1&modificationDate=1472086074213&api=v2",data-linked-resource-content-type="image/jpeg",data-linked-resource-default-alias="front.jpg",data-linked-resource-type="attachment",data-linked-resource-container-id="353603175",class="confluence-embedded-image",height="400",padding="0px",cursor="pointer",data-linked-resource-id="353604564",data-linked-resource-container-version="5",max-width="none",data-unresolved-comment-count="0",margin="0px 2px",display="block",data-base-url="https://confluence.csiro.au"}} {{https://confluence.csiro.au/download/attachments/353603175/bottom.jpg?version=1&modificationDate=1472086090027&api=v2||data-linked-resource-version="1",data-image-src="/download/attachments/353603175/bottom.jpg?version=1&modificationDate=1472086090027&api=v2",data-linked-resource-content-type="image/jpeg",data-linked-resource-default-alias="bottom.jpg",data-linked-resource-type="attachment",data-linked-resource-container-id="353603175",class="confluence-embedded-image",height="400",padding="0px",cursor="pointer",data-linked-resource-id="353604566",data-linked-resource-container-version="5",max-width="none",data-unresolved-comment-count="0",margin="0px 2px",display="block",data-base-url="https://confluence.csiro.au"}}
+{{attachment:front.jpg|Front view of TK1-Tower|width=25%}}{{attachment:bottom.jpg|Bootom view of TK1-Tower|width=25%}}
 
-Getting native linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here:
+Getting native Linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here:
 
-Before going ahead with this, follow the TK1-SOM custom kernel procedure (found on this wiki as well), make sure you can build it and flash to the board
+Before going ahead with this, follow the TK1-SOM custom kernel procedure, make sure you can build it and flash to the board
 
 == Add device tree support for MCP251X to L4T & perform driver hacks ==
 The kernel that is included in L4T does not support device tree binding for the mcp251X, so you have to modify the kernel driver.
 
 Easiest way to do that is to just use mine: (Works with latest L4T from colorado)
 
-Get it here: [[https://confluence.csiro.au/download/attachments/353603175/mcp251x.c?version=1&modificationDate=1472004475490&api=v2|mcp251x.c]]
+Get it here: [[attachment:mcp251x.c]]
 
-You want to replace the file in drivers/net/can/mcp251x.c
+You want to replace the file in `drivers/net/can/mcp251x.c`
 
 NOTE: this is NOT the same as the file in mainline kernel, it has a hack that fixes a problem I had with the device tree not recognising clock nodes.
 
@@ -29,109 +26,53 @@ Device tree documentation does not exist in the source code as mcp support has b
 
  {{{
 * Microchip MCP251X stand-alone CAN controller device tree bindings
-}}}
- {{{
-}}}
- {{{
+
 Required properties:
-}}}
- {{{
+
  - compatible: Should be one of the following:
-}}}
- {{{
    - "microchip,mcp2510" for MCP2510.
-}}}
- {{{
    - "microchip,mcp2515" for MCP2515.
-}}}
- {{{
  - reg: SPI chip select.
-}}}
- {{{
  - clocks: The clock feeding the CAN controller.
-}}}
- {{{
  - interrupt-parent: The parent interrupt controller.
-}}}
- {{{
  - interrupts: Should contain IRQ line for the CAN controller.
-}}}
- {{{
-}}}
- {{{
+
 Optional properties:
-}}}
- {{{
+
  - vdd-supply: Regulator that powers the CAN controller.
-}}}
- {{{
  - xceiver-supply: Regulator that powers the CAN transceiver.
-}}}
- {{{
-}}}
- {{{
+
 Example:
-}}}
- {{{
+
     can0: can@1 {
-}}}
- {{{
         compatible = "microchip,mcp2515";
-}}}
- {{{
         reg = <1>;
-}}}
- {{{
         clocks = <&clk24m>;
-}}}
- {{{
         interrupt-parent = <&gpio4>;
-}}}
- {{{
         interrupts = <13 0x2>;
-}}}
- {{{
         vdd-supply = <&reg5v0>;
-}}}
- {{{
         xceiver-supply = <&reg5v0>;
-}}}
- {{{
     };
 }}}
 == Modify the device tree ==
-Replace the existing .dts files with [[https://confluence.csiro.au/download/attachments/353603175/tegra124-tk1-som-pm375-000-c00-00.dts?version=2&modificationDate=1472087460627&api=v2|tegra124-tk1-som-pm375-000-c00-00.dts]]
+Replace the existing .dts files with [[attachment:tegra124-tk1-som-pm375-000-c00-00.dts]]
 
-You also need to remap some GPIOs, swap out the GPIO device tree with [[https://confluence.csiro.au/download/attachments/353603175/tegra124-tk1-som-gpio-default.dtsi?version=1&modificationDate=1472004475277&api=v2|tegra124-tk1-som-gpio-default.dtsi]]
+You also need to remap some GPIOs, swap out the GPIO device tree with [[attachment:tegra124-tk1-som-gpio-default.dtsi]]
 
 == Kernel Build Configuration ==
-Using make menuconfig, enable CAN and MCP251X modules. Make sure your .config contains:
+Using `make menuconfig`, enable CAN and MCP251X modules. Make sure your `.config` contains:
 
 {{{
 CONFIG_CAN=m
-}}}
-{{{
 CONFIG_CAN_RAW=m
-}}}
-{{{
 CONFIG_CAN_BCM=m
-}}}
-{{{
 CONFIG_CAN_GW=m
-}}}
-{{{
 CONFIG_CAN_VCAN=m
-}}}
-{{{
 CONFIG_CAN_DEV=m
-}}}
-{{{
 CONFIG_CAN_CALC_BITTIMING=y
-}}}
-{{{
 CONFIG_CAN_MCP251X=m
 }}}
-In addition to the 'normal' tk1-som kernel build settings given by colorado in their readme.
+In addition to the 'normal' tk1-som kernel build settings given by Colorado in their readme.
 
 It is up to you whether you would like to leave user-mode SPI drivers in there or not, they simply won't load as the CAN dts removes the user-space SPI device.
 
@@ -142,8 +83,7 @@ There is a strange old touch-driver hanging around that needs to be disabled for
 
 Originally I pulled it out of the TK1-SOM's SPI driver, but it turns out you can disable it in extlinux.conf, which is much simpler.
 
-in /boot/extlinux/extlinux.conf on your rootfs, find the touch_id=0@0 line, and change it to touch_id=3@3
-
+in `/boot/extlinux/extlinux.conf` on your rootfs, find the `touch_id=0@0` line, and change it to `touch_id=3@3`
 == Jumper HW-based chipselect to the GPIO chipselect ==
 Because I haven't figured out how to get this driver to use GPIO chipselect (yet), it's necessary to connect the hardware CSN line to the GPIO used for chipselect.
 
@@ -151,7 +91,7 @@ Note that the GPIO dts sets the GPIO used for chipselect to high impedance so ba
 
 CSN is indicated on the SPI expansion header. Can node #1 on the CAN daughterboard uses TK1_GPIO2, so it's necessary to connect these 2 pins:
 
-{{https://confluence.csiro.au/download/attachments/353603175/jumper.jpg?version=1&modificationDate=1472086033567&api=v2||data-linked-resource-version="1",data-image-src="/download/attachments/353603175/jumper.jpg?version=1&modificationDate=1472086033567&api=v2",data-linked-resource-content-type="image/jpeg",data-linked-resource-default-alias="jumper.jpg",data-linked-resource-type="attachment",data-linked-resource-container-id="353603175",class="confluence-embedded-image",height="250",padding="0px",cursor="pointer",data-linked-resource-id="353604563",data-linked-resource-container-version="5",max-width="none",data-unresolved-comment-count="0",margin="0px 2px",display="block",data-base-url="https://confluence.csiro.au"}}
+{{attachment:jumper.jpg}}
 
 NOTE: On the seL4 side, this may not be necessary as it will be able to use GPIO-based chipselects.
 
@@ -161,7 +101,7 @@ NOTE2: Justification for GPIO chipselects is that we have 2 CAN nodes and only 1
 You could do something like this:
 
 update_kernel.sh
-
+{{{
  #!/bin/bash
 
  L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
@@ -171,9 +111,10 @@ update_kernel.sh
  sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage $SOM_DIR/boot/zImage
 
  sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
+}}}
 
 rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
-
+{{{
      make
 
      make modules
@@ -185,136 +126,55 @@ rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
      make modules_install INSTALL_MOD_PATH=/mnt/TK1SOM
 
      umount /dev/sdb1
-
+}}}
 = Hello, world =
 {{{
 dmesg | grep mcp     # See if the driver loaded properly
-}}}
-{{{
+
 [  618.718288] mcp251x spi0.0: entered mcp251x_can_probe
-}}}
-{{{
 [  618.718296] mcp251x spi0.0: v2
-}}}
-{{{
 [  618.718332] mcp251x spi0.0: got clock
-}}}
-{{{
 [  618.718336] mcp251x spi0.0: finished clock configuration, freq: 20000000
-}}}
-{{{
 [  618.718353] mcp251x spi0.0: allocated CAN device
-}}}
-{{{
 [  618.718358] mcp251x spi0.0: clock prepared for enable
-}}}
-{{{
 [  618.729737] mcp251x spi0.0: configured can netdev
-}}}
-{{{
 [  618.729741] mcp251x spi0.0: power & transceiver regulator pointers OK
-}}}
-{{{
 [  618.729745] mcp251x spi0.0: enabled power
-}}}
-{{{
 [  618.729749] mcp251x spi0.0: about to enable DMA (if required)
-}}}
-{{{
 [  618.729754] mcp251x spi0.0: finished allocating DMA & non-DMA buffers
-}}}
-{{{
 [  618.729757] mcp251x spi0.0: netdev set
-}}}
-{{{
 [  618.729799] mcp251x spi0.0: configured SPI bus
-}}}
-{{{
 [  618.740194] mcp251x spi0.0: CANSTAT 0x80 CANCTRL 0x07
-}}}
-{{{
 [  618.740198] mcp251x spi0.0: successful hardware probe
-}}}
-{{{
 [  618.740795] mcp251x spi0.0: probed
-}}}
-{{{
 [  628.973815] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
-}}}
-{{{
-}}}
-{{{
+
 ls /sys/class/net      # See if the can device is available and what it's called
-}}}
-{{{
 can0  dummy0  eth0  ip6tnl0  lo  rmnetctl  sit0
-}}}
-{{{
-}}}
-{{{
+
 sudo ip link set can0 up type can bitrate 500000    # Bring it up
-}}}
-{{{
 ifconfig                                            # Take a look...
-}}}
-{{{
-}}}
-{{{
 can0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
-}}}
-{{{
           UP RUNNING NOARP  MTU:16  Metric:1
-}}}
-{{{
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-}}}
-{{{
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-}}}
-{{{
-          collisions:0 txqueuelen:10
-}}}
-{{{
+          collisions:0 txqueuelen:10{
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
-}}}
-{{{
-}}}
-{{{
+
 eth0      Link encap:Ethernet  HWaddr 00:50:c2:72:00:59
-}}}
-{{{
           inet addr:10.13.1.223  Bcast:10.13.1.255  Mask:255.255.254.0
-}}}
-{{{
           inet6 addr: 2402:1800:4000:1:250:c2ff:fe72:59/64 Scope:Global
-}}}
-{{{
           inet6 addr: fe80::250:c2ff:fe72:59/64 Scope:Link
-}}}
-{{{
 ............
-}}}
-{{{
-}}}
-{{{
+
 sudo apt-get install can-utils                     # (make sure to enable universe repository & update)
-}}}
-{{{
 cansend can0 5A1#11.22.33.44.55.66.77.88           # Send a packet
-}}}
-{{{
 candump can0                                       # Dump packets
-}}}
-{{{
 }}}
 = Loopback mode test =
 {{{
 ip link set can0 type can bitrate 500000 loopback on
-}}}
-{{{
 ifconfig can0 up
-}}}
-{{{
 candump any,0:0,#FFFFFFFF               #In terminal 1
 
 
