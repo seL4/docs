@@ -29,10 +29,10 @@ WE have an open-hardware CAN and I2C board available, see [[/CAN-Board]]
 You can load seL4 kernels over USB using `dfu-util`. (you can also use fastboot, but to boot a kernel over fastboot means making the ELF file produced from the buld system look like an ANDROID Linux kernel).
 
 On the u-boot console do:
-
- `setenv dfu_alt_info "kernel ram $loadaddr 0x1000000"`
- `saveenv`
-
+{{{
+ setenv dfu_alt_info "kernel ram $loadaddr 0x1000000"
+ saveenv
+}}}
 once.
 
 Then to boot, on the u-boot console do:
