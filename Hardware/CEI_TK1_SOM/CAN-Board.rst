@@ -1,25 +1,33 @@
 = The CAN Daughterboard =
-The CAN Daughterboard is an open-hardware CAN/SPI/I2C/Serial board designed by teh Trustworthy Systems group at Data61/CSIRO, that can be mounted below the power supply module of the TK1-SOM. It provides two CAN buses implemented with  MCP2515 onthe TK1_+SOM's SPI bus) and voltage conversion for the two serial ports.
+The CAN Daughterboard is an open-hardware CAN/SPI/I2C/Serial board designed by the Trustworthy Systems group at Data61/CSIRO, that can be mounted below the power supply module of the TK1-SOM. It provides two CAN buses implemented with MCP2515 (on the TK1-SOM's SPI bus) and voltage conversion for the two serial ports.
 
 {{attachment:top.jpg|Top of board|width="20%"}} {{attachment:bottom.jpg|Bottom of board|width="20%"}} {{attachment:side.jpg|Side view of mounted stack|width="20%"}}
 
 == Mounting ==
-The  board attaches to the bottom of a TK1-SOM via the expansion connector. No further work should be needed to enumerate the device given a kernel supporting GPIO chipselects. Note the unpopulated standoff holes on the rightmost image above --- it is possible to fit a standoff of the same type already installed in the TK1-SOM to stabilize the 'tower' making it easier to work with. 
+The  board attaches to the bottom of a TK1-SOM via the expansion connector. No further work should be needed to enumerate the device given a kernel supporting GPIO chipselects.
+
+Note the unpopulated standoff holes on the rightmost image above --- it is possible to fit a standoff of the same type already installed in the TK1-SOM to stabilize the 'tower' making it easier to work with.
+
+The part numbers of the standoffs between the CAN daughterboard and TK1 is the same as is already used between the CPU & GPU board. Order codes:
+
+ * STANDOFF - HEX M2.5 x 16MM ALUMINUM M-F (M2111-2545-AL) between pcb standoff
+ * SCREW - M2.5 x 5 MM SS PAN HEAD PHILIPS (92000A103) bottom pcb screw
 
 == Using Linux with this daughterboard for CAN ==
 
 (hello world example & testing) See [[../L4TCan|Using CAN on L4T through an MCP251X]]
 
 == Pinout detail ==
-The font on the silkscreen indicating pins is difficult to see once the tower is assembled (wasn't enough space on the top) - See this picture (view taken from bottom): {{attachment:silk.png|Silk Screen|width=30%}}
+The font on the silkscreen indicating pins is difficult to see once the tower is assembled (wasn't enough space on the top) - See this picture (view taken from bottom):
+{{attachment:silk.png|Silk Screen|width=40%}}
 
 === UART LEVEL CONVERTER WARNING: ===
- If using the level converter on the board, and if you are getting junk from your 3V3 serial cable, read this:
- *
- Unfortunately there is an issue with these level converter chips, in some impedance situations the rise time is much worse than indicated on the datasheet. Basically, with some serial cables the converter will garble signals at a high baud rate (> 57600). This can be circumvented by changing your u-boot and extlinux to use a slower baud rate. 9600 is very safe, anything up to about 57600 should be fine --- start slow and work up.
+ * If using the level converter on the board, and if you are getting junk from your 3V3 serial cable, read this:
+ * Unfortunately there is an issue with these level converter chips, in some impedance situations the rise time is much worse than indicated on the datasheet. Basically, with some serial cables the converter will garble signals at a high baud rate (> 57600).
+ * This can be circumvented by changing your u-boot and extlinux to use a slower baud rate. 9600 is very safe, anything up to about 57600 should be fine --- start slow and work up.
 
 
-If you need the faster baud rates, use a 1V8 USB-TTL cable and plug it straight into the TK1 as usual. This will be fixed in a future revision.
+If you need the faster baud rates (or don't want to change the default settings), use a 1V8 USB-TTL cable and plug it straight into the TK1 as usual. This will be fixed in a future revision.
 
 == TK1 SOC Connections ==
 Useful for writing drivers - this is a list of which pins on the board correspond to which SOC pins:
@@ -37,7 +45,7 @@ Note: All I2C signals operate at 3V3 on their 0.1" headers, except I2C_CAM which
 
 
 
-All SPI signals out of the TK1 are at 1V8, but are translated to 3V3 by the board,and the 0.1" header operates at 3V3.
+All SPI signals out of the TK1 are at 1V8, but are translated to 3V3 by the board (the 0.1" header operates at 3V3)
 ||||||<style="text-align:center">'''SPI''' ||
 ||'''PIN''' ||'''BALL''' ||'''PERIPHERAL ID''' ||
 ||SPI_CLK ||AG15 ||SPI1A_SCK ||
@@ -65,7 +73,7 @@ All UART signals out of the TK1 are at 1V8, but are translated to 3V3 by the boa
 
 Note that TXD (1V8) is translated to TXD (3V3). NOT TXD (1V8) <-> RXD (1V8). This means that the jumper from the TK1-SOM should go from it's TX to RX on the daughterboard for a standard ftdi pinout to work.
 
-Note that GPIOs aren't actually brought out by the board but they are used by the CAN controller (diagram below). 
+Note that GPIOs aren't actually brought out by the board but they are used by the CAN controller (diagram below).
 ||||||'''GPIOs'''||
 ||'''PIN''' ||'''BALL''' ||'''PERIPHERAL ID''' ||
 ||TK1_GPIO0 ||       AF29  ||  GPIO3_PS.05 ||
