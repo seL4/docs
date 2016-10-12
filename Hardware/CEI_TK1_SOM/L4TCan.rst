@@ -1,7 +1,6 @@
 ## page was renamed from L4TCan
 = Using CAN on L4T through an MCP251X =
-
-{{attachment:front.jpg|Front view of TK1-Tower|width=25%}}{{attachment:bottom.jpg|Bootom view of TK1-Tower|width=25%}}
+{{attachment:front.jpg|Front view of TK1-Tower|width="25%"}} {{attachment:bottom.jpg|Bootom view of TK1-Tower|width="25%"}}
 
 Getting native Linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here:
 
@@ -25,7 +24,7 @@ I've also added a lot of debugging information to the driver so that dmesg is a 
 == Look at device tree documentation ==
 Device tree documentation does not exist in the source code as mcp support has been hacked in. Here's the docs from mainline:
 
- {{{
+ . {{{
 * Microchip MCP251X stand-alone CAN controller device tree bindings
 
 Required properties:
@@ -55,6 +54,7 @@ Example:
         xceiver-supply = <&reg5v0>;
     };
 }}}
+
 == Modify the device tree ==
 Replace the existing .dts files with [[attachment:tegra124-tk1-som-pm375-000-c00-00.dts]]
 
@@ -85,6 +85,7 @@ There is a strange old touch-driver hanging around that needs to be disabled for
 Originally I pulled it out of the TK1-SOM's SPI driver, but it turns out you can disable it in extlinux.conf, which is much simpler.
 
 in `/boot/extlinux/extlinux.conf` on your rootfs, find the `touch_id=0@0` line, and change it to `touch_id=3@3`
+
 == Jumper HW-based chipselect to the GPIO chipselect ==
 Because I haven't figured out how to get this driver to use GPIO chipselect (yet), it's necessary to connect the hardware CSN line to the GPIO used for chipselect.
 
@@ -92,7 +93,7 @@ Note that the GPIO dts sets the GPIO used for chipselect to high impedance so ba
 
 CSN is indicated on the SPI expansion header. Can node #1 on the CAN daughterboard uses TK1_GPIO2, so it's necessary to connect these 2 pins:
 
-{{attachment:jumper.jpg}}
+{{attachment:jumper.jpg||height="219",width="375"}}
 
 NOTE: On the seL4 side, this may not be necessary as it will be able to use GPIO-based chipselects.
 
@@ -102,8 +103,8 @@ NOTE2: Justification for GPIO chipselects is that we have 2 CAN nodes and only 1
 You could do something like this:
 
 update_kernel.sh
-{{{
- #!/bin/bash
+
+{{{#!/bin/bash
 
  L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
 
@@ -113,8 +114,8 @@ update_kernel.sh
 
  sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 }}}
-
 rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
+
 {{{
      make
 
