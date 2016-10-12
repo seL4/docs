@@ -23,6 +23,6 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * LukeMondy
  * MatthewBrecknell
  * PeterChubb
- * SebastianHolzapfel
+ * Sebastian Holzapfel
  * StephenSherratt
  * Yanyan Shen
