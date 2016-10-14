@@ -6,6 +6,8 @@ Upstream U-Boot now supports this board.
 
 The Pinmux spreadsheet, for use with https://github.com/NVIDIA/tegra-pinmux-scripts is [[attachment:CEI_TK1_SOM_customer_pinmux_v11.xlsm|here.]]
 
+The original pinmux spreadsheet from Colorado is [[attachment:tk1-som_pinmux_V2.4.xlsm|here]]
+
 As with the [[Hardware/jetsontk1|Jetson]] with this u-boot, set the environment variable `bootm_boot_mode` to `nonsec` In this boot mode, the standard Linux kernel will not boot: recompile with `CONFIG_ARM_PSCI` on and `CONFIG_CPU_IDLE` off.
 == Serial Connection ==
 
