@@ -15,6 +15,7 @@ There is currently a sample project [[https://github.com/SEL4PROJ/rust-camkes-sa
 
 The following commands get a sample camkes hello world app written in rust and runs it on qemu.  It assumes that rust is installed correctly.
 
+Note: the last rust nightly version this was specifically tested on is: nightly-2016-06-01
 ||`# This just gets all of the sources`<<BR>>`repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git `<<BR>>`repo sync  `<<BR>>`# Configuration for arm kzm (so we can use qemu)`<<BR>>`# helloworld app: make rust-helloworld-kzm_defconfig`<<BR>>`# keyvalue app: make rust-keyvalue-kzm_defconfig`<<BR>>`make rust-helloworld-kzm_defconfig`<<BR>>`# Build and run on qemu`<<BR>>`make qemu-arm`||
 
 
