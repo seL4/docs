@@ -15,7 +15,7 @@ Not all platforms support this feature for two main reasons:
  * The feature is gated behind certain hardware signals, such as #DBGEN, being active. If the hardware isn't asserting these signals, the kernel will be unable to use them.
  * Your processor supports only the "Baseline" set of Coprocessor 14 registers, and doesn't reliably expose the debug features through the debug coprocessor.
 
-Caveat lector: If you compile the kernel with support for the debug API, and your ARM platform doesn't support it, your kernel will abort at boot, with a message (or without a message if you are compiling the kernel in release mode (CONFIG_DEBUG_BUILD=n)).
+Caveat lector: If you compile the kernel with support for the debug API, and your ARM platform doesn't support it, '''your kernel will abort at boot''', with a message (or without a message if you are compiling the kernel in release mode (CONFIG_DEBUG_BUILD=n)).
 
 == Summary of the invocations ==
 The invocations are documented in detail in the seL4 manual. This article will cover how to practically call them and use them in a prospective debugger.
