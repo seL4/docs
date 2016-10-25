@@ -23,8 +23,8 @@ The invocations are documented in detail in the seL4 manual. This article will c
 To view a current version of the seL4 manuals, please download the kernel source code and then `cd manual` and execute  `make`.
 
 Additionally, there is available source code that demonstrates how the invocations can be used practically: the seL4-Test repository holds code tests the debug APIs, and shows how to use them to set breakpoints, watchpoints and single-stepping, on both x86 and ARM:
- * http://bitbucket.keg.ertos.in.nicta.com.au/projects/SEL4/repos/sel4test/browse/apps/sel4test-tests/src/tests/breakpoints.c
- * http://bitbucket.keg.ertos.in.nicta.com.au/projects/SEL4/repos/sel4test/browse/apps/sel4test-tests/src/arch/x86/tests/breakpoints.c
+ * https://github.com/seL4/sel4test/blob/master/apps/sel4test-tests/src/tests/breakpoints.c
+ * https://github.com/seL4/sel4test/blob/master/apps/sel4test-tests/src/arch/x86/tests/breakpoints.c
 
 The invocations take capabilities to TCBs, and perform operations on the TCB register context to virtualize the hardware debug feature for each thread.
  * `seL4_TCB_SetBreakpoint`: Takes a capability to a TCB, and a hardware breakpoint register ID, and sets a breakpoint on a specified virtual address, for a range of addresses, for a certain access type (Read, Write, or both).
