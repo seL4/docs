@@ -12,3 +12,5 @@ The power supply is on the right.  All is mounted on a cheap polyethylene breadb
 
 Software for the launchpad is available at https://github.com/data61/echronos-lwip
 Use the master branch, and the project is at packages/machine-tm4c1294-launchpad/projects/embedded_pc_testbed_src
+
+The relays are connected to pins PK6 and PK7 on the launchpad; the UART to pin PA0 (Rx) and PA1 (Tx).  You'll need to swap the wires to the level converter (so Rx from teh launcpad connects to Tx on the level converter, and vice versa); and make sure jumpers J4 and J5 are set to `UART'.
