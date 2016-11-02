@@ -10,4 +10,5 @@ The exact parts don't matter, although I've given links to eBay stores where the
 In the picture, the CMA34D is at the left, with the TTL-to-RS232 converter above it.  The Launchpad is in the middle, with the relay board above it, partially obscured by the wiring harness.
 The power supply is on the right.  All is mounted on a cheap polyethylene breadboard that has been covered in aluminium tape to provide a ground plane; all the boards and cables are mounted on 20mm standoffs.
 
-Software for the board will be available soon.
+Software for the launchpad is available at https://github.com/data61/echronos-lwip
+Use the master branch, and the project is at packages/machine-tm4c1294-launchpad/projects/embedded_pc_testbed_src
