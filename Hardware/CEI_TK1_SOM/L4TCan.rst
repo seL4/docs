@@ -2,14 +2,14 @@
 = Using CAN on L4T through an MCP251X =
 {{attachment:front.jpg|Front view of TK1-Tower|width="25%"}} {{attachment:bottom.jpg|Bootom view of TK1-Tower|width="25%"}}
 
-Getting native Linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here:
+Getting native Linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here.
 
 Before going ahead with this, follow the TK1-SOM custom kernel procedure, make sure you can build it and flash to the board
 
 == Add device tree support for MCP251X to L4T & perform driver hacks ==
 The kernel that is included in L4T does not support device tree binding for the mcp251X, so you have to modify the kernel driver.
 
-Easiest way to do that is to just use mine: (Works with latest L4T from colorado)
+Easiest way to do that is to just use mine: (Works with latest L4T from colorado.  Don't use the upstream NVIDIA L4T)
 
 Get it here: [[attachment:mcp251x.c]]
 
