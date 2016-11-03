@@ -21,7 +21,7 @@ The serial port is at 1V8 levels on J8, as follows: (pin one is farthest from  t
 
 There is no ground connection.  There is however an unpopulated hole next to J8 that is connected to Ground.  Alternatively one can use pin 1 of J5 on the bottom (PSU) board as a ground connection.  The pins are unlabelled; pin 1 is the one in the middle of the board, under the gap between J5 and J7 on the GPU/processor board.  It's easiest to connect to this if you unscrew and take the thing apart.  Please do this at a static-controlled workstation!
 
-If you need 1V8 as a reference (VDIO on some FTDI connectors), it's available on the JTAG connector at pin 1.
+If you need 1V8 as a reference (VDIO on some FTDI connectors), it's available on the JTAG connector at pin 1.  Pin one is the top right pin if the ethernet port is to your left.  It is marked with a dot on the silk-screen.
 
 Speed 115200 8bits no parity; the default Linux image has login `ubuntu`, password `ubuntu`.
 
