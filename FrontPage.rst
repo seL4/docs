@@ -21,6 +21,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Benchmarking guide]]
  * [[CAmkES]]
  * [[Rust]]
+ * [[Virtualisation on seL4]]
 
 == Questions and Recipes ==
 
