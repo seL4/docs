@@ -2,6 +2,40 @@
 = Using CAN on L4T through an MCP251X =
 {{attachment:front.jpg|Front view of TK1-Tower|width="25%"}} {{attachment:bottom.jpg|Bootom view of TK1-Tower|width="25%"}}
 
+== Easier way: use our image ==
+Grab the image (tk1_can.img.gz) available at http://ts.data61.csiro.au/Downloads/tk1_can/. Make sure to verify against the md5sum in the same folder once you've got it.
+
+Set up the TK1 as usual - connect the UART as well as the recovery USB port next to the ethernet jack. Stop u-boot from booting and issue the command:
+
+{{{
+ums 0 mmc 0
+}}}
+This will allow you to see the TK1's filesystem on your host pc. On your host PC, list your devices:
+
+{{{
+$ lsblk
+}}}
+You should see a 14.7GB-ish device with a few partitions - this is the TK1. (Make sure it is by mounting the largest partition and looking at the rootfs [making sure to unmount again before next step!])
+
+We're ready to image the TK1. Issue the following command, making ABSOLUTELY sure that your of=/dev/sdX line is correct so you don't accidentally destroy data on your machine. Also, you want /dev/sdX (the device), NOT /dev/sdX3 (partitions) etc.
+
+{{{
+gunzip -c tk1_can.img.gz | sudo dd of=/dev/<your TK1 device> conv=sync bs=4K status=progress
+}}}
+This takes ~1.5Hr on my machine to complete. If dd throws a strange error to do with the 'status=progress' command, you may be using an old version of dd, it's fine to omit this command however you will not see a progress bar.
+
+Once this is complete, exit the ums command in u-boot and attempt to boot. As long as the can board CS is jumpered to GPIO2, everything should work.
+
+You may see some lines after boot like:
+
+{{{
+rt5639 0-001c: Failed to set private addr: -121
+}}}
+This is normal, and everything should work regardless (internet connectivity works fine on our system). We'll be looking into the reason for these errors in the future.
+
+== Harder way: compile your own ==
+The instructions from here on go from a vanilla TK1-SOM L4T configuration to one which can support CAN using the daughterboard.
+
 Getting native Linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here.
 
 Before going ahead with this, follow the TK1-SOM custom kernel procedure, make sure you can build it and flash to the board
@@ -93,7 +127,7 @@ Note that the GPIO dts sets the GPIO used for chipselect to high impedance so ba
 
 CSN is indicated on the SPI expansion header. Can node #1 on the CAN daughterboard uses TK1_GPIO2, so it's necessary to connect these 2 pins:
 
-{{attachment:jumper.jpg||height="219",width="375"}}
+{{attachment:jumper.jpg||width="375",height="219"}}
 
 NOTE: On the seL4 side, this may not be necessary as it will be able to use GPIO-based chipselects.
 
@@ -104,19 +138,11 @@ You could do something like this:
 
 update_kernel.sh
 
-{{{
-    #!/bin/bash
+{{{#!/bin/bash
 
-    L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
+ . L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra SOM_DIR=/mnt/TK1SOM sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage $SOM_DIR/boot/zImage sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 
-    SOM_DIR=/mnt/TK1SOM
-
-    sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage $SOM_DIR/boot/zImage
-
-    sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
-}}}
-
-rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
+}}} rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
 
 {{{
      make
