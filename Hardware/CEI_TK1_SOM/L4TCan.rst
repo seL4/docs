@@ -2,7 +2,7 @@
 = Using CAN on L4T through an MCP251X =
 {{attachment:front.jpg|Front view of TK1-Tower|width="25%"}} {{attachment:bottom.jpg|Bootom view of TK1-Tower|width="25%"}}
 
-== Easier way: use our image ==
+== Use our image ==
 Grab the image (tk1_can.img.gz) available at http://ts.data61.csiro.au/Downloads/tk1_can/. Make sure to verify against the md5sum in the same folder once you've got it.
 
 Set up the TK1 as usual - connect the UART as well as the recovery USB port next to the ethernet jack. Stop u-boot from booting and issue the command:
@@ -33,7 +33,9 @@ rt5639 0-001c: Failed to set private addr: -121
 }}}
 This is normal, and everything should work regardless (internet connectivity works fine on our system). We'll be looking into the reason for these errors in the future.
 
-== Harder way: compile your own ==
+See bottom of this page for 'hello-world'-type examples.
+
+== Alternatively: compile your own ==
 The instructions from here on go from a vanilla TK1-SOM L4T configuration to one which can support CAN using the daughterboard.
 
 Getting native Linux CAN drivers to work on the TK1-SOM requires a bit of hackery, procedure outlined here.
