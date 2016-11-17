@@ -15,31 +15,26 @@ The development framework provides:
 
 == Build dependencies ==
  * You must first install [[https://wiki.sel4.systems/Getting%20started#Build_Dependencies|the SEL4 dependencies]], and then you should move on to the instructions in this section.
- * Install GHC and some Haskell packages (installable from cabal):
+ * Install [[https://haskellstack.org | haskell stack]] (haskell version and package manager)
 
 {{{#!highlight bash numbers=off
-sudo apt-get install ghc=7.10.3-7 cabal-install=1.22.6.0-2
-
-cabal update
-cabal install --user MissingH data-ordlist split mtl base-compat
+curl -sSL https://get.haskellstack.org/ | sh
 }}}
 
-Cabal packages get installed under the current user, so each user that wants to build CAmkES must run the cabal steps
-
-Install python packages jinja2, ply, pyelftools (via pip):
+ * Install python packages jinja2, ply, pyelftools (via pip):
 
 {{{#!highlight bash numbers=off
 apt-get install python-pip
 pip install --user pyelftools ply jinja2
 }}}
 
-If building on a 64-bit system ensure 32-bit compiler tools are installed, mainly:
+ * If building on a 64-bit system ensure 32-bit compiler tools are installed, mainly:
 
 {{{#!highlight bash numbers=off
 apt-get install lib32gcc1
 }}}
 
-And the correct version of multilib for your gcc, for example:
+ * And the correct version of multilib for your gcc, for example:
 
 {{{#!highlight bash numbers=off
 apt-get install gcc-multilib
