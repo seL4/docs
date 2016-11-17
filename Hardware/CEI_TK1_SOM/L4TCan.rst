@@ -135,7 +135,7 @@ Originally I pulled it out of the TK1-SOM's SPI driver, but it turns out you can
 
 in `/boot/extlinux/extlinux.conf` on your rootfs, find the `touch_id=0@0` line, and change it to `touch_id=3@3`
 
-== Load everything onto the board ==
+=== Load everything onto the board ===
 You could do something like this:
 
 update_kernel.sh
