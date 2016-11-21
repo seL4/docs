@@ -1,15 +1,17 @@
 ## page was renamed from L4TCan
 = Using CAN on L4T through an MCP251X =
-{{attachment:front.jpg|Front view of TK1-Tower|width="25%"}} {{attachment:bottom.jpg|Bootom view of TK1-Tower|width="25%"}}
+{{attachment:front.jpg|Front view of TK1-Tower|width="25%"}} {{attachment:bottom.jpg|Bottom view of TK1-Tower|width="25%"}}
 
-== Before runnng L4TCAN: Jumper HW-based chipselect to the GPIO chipselect ==
-Because I haven't figured out how to get this driver to use GPIO chipselect (yet), it's necessary to connect the hardware CSN line to the GPIO used for chipselect.
+== Before running L4TCAN: Jumper HW-based chipselect to the GPIO chipselect ==
+Because L4T with CAN doesn't use GPIO chipselect (yet), it's necessary to connect the hardware CSN line to the GPIO used for chipselect.
 
 Note that the GPIO dts sets the GPIO used for chipselect to high impedance so bad things don't happen.
 
 CSN is indicated on the SPI expansion header. Can node #1 on the CAN daughterboard uses TK1_GPIO2, so it's necessary to connect these 2 pins:
 
 {{attachment:jumper.jpg||width="375",height="219"}}
+
+(From right-to-left on the TK1 GPIO header we have GPIO0, GPIO1, GPIO2)
 
 NOTE: On the seL4 side, this may not be necessary as it will be able to use GPIO-based chipselects.
 
