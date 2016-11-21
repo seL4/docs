@@ -145,7 +145,11 @@ update_kernel.sh
 {{{
  #!/bin/bash
 
- . L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra SOM_DIR=/mnt/TK1SOM sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage $SOM_DIR/boot/zImage sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
+   L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
+   SOM_DIR=/mnt/TK1SOM
+
+   sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage $SOM_DIR/boot/zImage
+   sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 
 }}} 
 
