@@ -22,6 +22,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[CAmkES]]
  * [[Rust]]
  * [[Virtualisation on seL4]]
+ * CommunityProjects
 
 == Questions and Recipes ==
 
