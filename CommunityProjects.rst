@@ -10,7 +10,7 @@ The seL4 kernel is currently used in projects in the following application areas
 The following platforms and language runtimes have been or are in the process of being ported to seL4:
 
  * [[http://ts.data61.csiro.au/projects/TS/trustcomp.pml|CamkES]]
- * [[http://genode.org/about/index|GeNODE]]
+ * [[http://genode.org/about/index|Genode]]
  * [[http://ts.data61.csiro.au/projects/TS/virtualisation/about.pml|Linux (virtualised)]]
  * C
  * [[http://ivorylang.org/ivory-introduction.html|Ivory]]
