@@ -10,6 +10,12 @@ The original pinmux spreadsheet from Colorado is [[attachment:tk1-som_pinmux_V2.
 
 As with the [[Hardware/jetsontk1|Jetson]] with this u-boot, set the environment variable `bootm_boot_mode` to `nonsec` In this boot mode, the standard Linux kernel will not boot: recompile with `CONFIG_ARM_PSCI` on and `CONFIG_CPU_IDLE` off.
 
+== Accessing the MMC ==
+Attach a USB cable between the TK1-SOM's OTG port and your host, then on the U-Boot console type `ums mmc 0`
+
+A spinning wheel will appear on the console, and the entire MMC will be presented as a USB storage device to your host.
+In the default partitioning (as it comes from Colorado Engineering).  `/dev/sdb1` is the UBUNTU root partition.
+
 == Serial Connection ==
 The serial port is at 1V8 levels on J8, as follows: (pin one is farthest from  the ground hole)
 ||'''Pin''' ||'''Function''' ||'''Direction''' ||
@@ -20,7 +26,6 @@ The serial port is at 1V8 levels on J8, as follows: (pin one is farthest from  t
 
 
 
-
 There is no ground connection.  There is however an unpopulated hole next to J8 that is connected to Ground.  Alternatively one can use pin 1 of J5 on the bottom (PSU) board as a ground connection.  The pins are unlabelled; pin 1 is the one in the middle of the board, under the gap between J5 and J7 on the GPU/processor board.  It's easiest to connect to this if you unscrew and take the thing apart.  Please do this at a static-controlled workstation!
 
 If you need 1V8 as a reference (VDIO on some FTDI connectors), it's available on the JTAG connector at pin 1.  Pin one is the top right pin if the ethernet port is to your left.  It is marked with a dot on the silk-screen.
@@ -28,7 +33,7 @@ If you need 1V8 as a reference (VDIO on some FTDI connectors), it's available on
 Speed 115200 8bits no parity; the default Linux image has login `ubuntu`, password `ubuntu`.
 
 == Peripherals ==
-WE have an open-hardware CAN and I2C board available, see [[/CAN-Board]]
+We have an open-hardware CAN and I2C board available, see [[/CAN-Board]]
 
 == DFU: Loading kernels over USB ==
 You can load seL4 kernels over USB using `dfu-util`. (you can also use fastboot, but to boot a kernel over fastboot means making the ELF file produced from the buld system look like an ANDROID Linux kernel).
