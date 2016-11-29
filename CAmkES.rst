@@ -83,4 +83,4 @@ Can be found [[CAmkES/Terminology|here]].
 
 == Camkes Next ==
 
-Information about the active development branch of Camkes can be found here: https://wiki.sel4.systems/CAmkESNext
+Information about the active development branch of Camkes can be found [[CAmkESNext|here]].
