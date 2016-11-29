@@ -17,7 +17,7 @@ pip install six tempita plyplus pyelftools orderedset jinja2
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
 
-== Download and build example CAmkES apps ==
+== Download and build example CAmkES app ==
 
 Create and enter an empty working directory before running the commands below.
 {{{#!highlight bash numbers=off
@@ -25,7 +25,7 @@ Create and enter an empty working directory before running the commands below.
 repo init -u https://github.com/seL4/camkes-manifest.git -m next.xml
 repo sync
 
-# Select an app to build
+# Select an app to build (build configs can be found in the "configs" directory)
 make arm_simple_defconfig
 
 # Compile it
