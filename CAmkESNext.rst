@@ -25,7 +25,7 @@ Create and enter an empty working directory before running the commands below.
 repo init -u https://github.com/seL4/camkes-manifest.git -m next.xml
 repo sync
 
-# Select an app to build (build configs can be found in the "configs" directory)
+# Select an app to build (build configs for example apps can be found in the "configs" directory)
 make arm_simple_defconfig
 
 # Compile it
