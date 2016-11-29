@@ -80,3 +80,7 @@ To learn about developing your own CAmkES application, read the [[https://sel4.s
 == Camkes Terminology/Glossary ==
 
 Can be found [[CAmkES/Terminology|here]].
+
+== Camkes Next ==
+
+Information about the active development branch of Camkes can be found here: https://wiki.sel4.systems/CAmkESNext
