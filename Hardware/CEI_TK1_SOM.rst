@@ -2,7 +2,9 @@ The TK1-SOM from Colorado engineering is a small form-factor system based on the
 
 We are in the process of porting seL4 to this board.
 
-Upstream U-Boot now supports this board.
+Upstream U-Boot now supports this board.  
+
+If you use https://github.com/wom-bat/tegra-uboot-flasher-manifests as the manifest for repo, and cei-tk1-som as the board ID the instructions for the Jetson TK1 will work. 
 
 The Pinmux spreadsheet, for use with https://github.com/NVIDIA/tegra-pinmux-scripts is [[attachment:CEI_TK1_SOM_customer_pinmux_v11.xlsm|here.]]
 
