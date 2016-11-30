@@ -95,19 +95,7 @@ repo sync
 
 == Patching the sources ==
 
-Edit `u-boot/configs/jetson-tk1_defconfig` file and add the following lines at the bottom
-{{{
-CONFIG_CPU_V7_HAS_NONSEC=y
-CONFIG_CPU_V7_HAS_VIRT=y
-CONFIG_ARMV7_NONSEC=y
-CONFIG_ARMV7_VIRT=y
-CONFIG_SUPPORT_SPL=y
-CONFIG_SPL=y
-}}}
-
-This enables HYP mode booting.
-
-Also, apply the following patch to increase the console buffer size.
+Apply the following patch to increase the console buffer size.
 {{{#!highlight diff numbers=off
 diff --git a/include/configs/tegra-common.h b/include/configs/tegra-common.h
 index 1c469d0..234023d 100644
@@ -128,6 +116,14 @@ sizeof(CONFIG_SYS_PROMPT) + 16)
 == Building ==
 To build the sources, build the necessary tools first.
 
+Install autoconf, pkg-config, flex, bison, libcrypto++-dev and libusb-1.0.0-dev for your distribution.
+On Debian or Ubuntu you can do:
+{{{
+sudo apt-get update
+sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev
+}}}
+
+Then do:
 {{{#!highlight bash numbers=off
 cd scripts
 ./build-tools build
