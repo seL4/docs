@@ -204,5 +204,3 @@ component Serial {
   }
 }
 }}}
-
-== Connection Definitions ==
