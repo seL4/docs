@@ -6,7 +6,9 @@ CAmkES Next refers to the "next" branch of camkes-tools. It is the active develo
 
 Github: https://github.com/seL4/camkes-tool/tree/next
 
-Main CAmkES page: https://wiki.sel4.systems/CAmkES
+Main CAmkES page: [[CAmkES]]
+
+Summary of differences between CAmkES next and CAmkES master: [[CAmkESDifferences]]
 
 == Setting up your machine ==
 
