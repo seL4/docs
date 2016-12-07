@@ -8,6 +8,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * azarrabi
  * ChrisRothrock
  * eduardn
+ * FrankLi
  * Gang Wang
  * Gernot
  * GerwinKlein
