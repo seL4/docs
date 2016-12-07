@@ -7,7 +7,7 @@ The Hikey board is based around the [[https://github.com/96boards/documentation/
 
 == 1. Creating a directory ==
 {{{#!highlight bash numbers=off
-mkdir hikey-test
+mkdir hikey-flash
 cd hikey-flash
 }}}
 
@@ -55,6 +55,7 @@ Obtain the patch from https://sel4.systems/hikey.patch.
 {{{#!highlight bash numbers=off
 cd linaro-edk2
 patch -p1 < ~/Downloads/hikey.patch
+# Then return to the main directory hikey-flash
 }}}
 == 6.Modifying the firmware ==
 If settings are required to be changed while in EL3 then the file in arm-trusted-firmware/bl1/bl1_main.c can be modified. To disable the prefetcher obtain the patch file from [[attachment:bl1_main.patch]] and follow the below steps.
@@ -62,7 +63,7 @@ If settings are required to be changed while in EL3 then the file in arm-trusted
 {{{#!highlight bash numbers=off
 cd arm-trusted-firmware/bl1
 patch -p5 < ~/Downloads/bl1_main.patch
-# Then return to the main directory
+# Then return to the main directory hikey-flash
 }}}
 == 7. Modifying the UEFI ==
 If settings are required to be changed while in EL2 then the file in linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S can be modified. To disable the prefetcher obtain the patch file from [[attachment:efi-stub.patch]] follow the below steps.
@@ -70,7 +71,7 @@ If settings are required to be changed while in EL2 then the file in linaro-edk2
 {{{#!highlight bash numbers=off
 cd linaro-edk2/MdeModulePkg/Application/noboot
 patch -p7 < ~/Downloads/efi-stub.patch
-# Then return to the main directory
+# Then return to the main directory hikey-flash
 }}}
 
 == 8. Building the UEFI for the Hikey ==
