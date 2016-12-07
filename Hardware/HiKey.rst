@@ -155,7 +155,7 @@ ls
 # Note the next ttyUSBY that is observed, in addition to the current ttyUSBX
  
 # In the third terminal
-sudo python hisi-idt.py --img1=l-loader.bin -d /dev/ttyUSBY
+sudo python ~/Downloads/hisi-idt.py --img1=l-loader.bin -d /dev/ttyUSBY
 wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/nvme.img
 sudo fastboot flash ptable ptable-linux.img
 sudo fastboot flash fastboot fip.bin
@@ -188,7 +188,7 @@ repo sync
 Then, use the default config for the !HiKey and build the system.
 
 {{{#!highlight bash numbers=off
-$ make hikey_aarch32_debug_xml_defconfig
+make hikey_aarch32_debug_xml_defconfig
 }}}
 Then, use "menuconfig > Tools > Build elfloader > Boot image type" and choose "Binary Boot Image"
 
