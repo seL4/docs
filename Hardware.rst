@@ -14,9 +14,10 @@
 ||'''platform'''||'''core'''||'''arch'''||'''status'''||'''contributed'''||'''maintained'''||'''description'''||
 ||[[Hardware/Kzm|KZM (i.MX31)]] || ARM11 ||v6||unverified||Data61||Data61|| original verified version - proof no longer maintained ||
 ||[[Hardware/sabreLite|Sabre Lite (i.MX6)]] ||A9||v7A||verified||Data61||Data61|| current verified version ||
-||[[Hardware/PandaBoard|Panda Board (OMAP4460)]] ||A9||v7A||unverified||Data61?||Data61?||  ||
+||[[Hardware/zynq7000|Zynq 7000]] ||A9||v7A||unverified||Data61||Data61||  ||
+||[[Hardware/PandaBoard|Panda Board (OMAP4460)]] ||A9||v7A||unverified||Data61||not regression tested||  ||
 ||[[Hardware/BeagleBoard|BeagleBoard (OMAP3)]] ||A8||v7||unverified||Data61||Data61|| ||
-||[[Hardware/Beaglebone|Beaglebone Black (AM335x)]] ||A8||v7||unverified||external||external?|| ||
+||[[Hardware/Beaglebone|Beaglebone Black (AM335x)]] ||A8||v7||unverified||external||Data61 regression tested|| ||
 ||[[Hardware/odriod-XU|Odroid-XU (Exynos5)]] ||A15||v7A||unverified||Data61||Data61|| Has virtualisation extensions ||
 ||[[Hardware/jetsontk1|NVIDIA Tegra K1]] ||A15||v7-1||unverified||Data61||Data61|| Has virtualisation extensions ||
 ||[[Hardware/CEI_TK1_SOM|Colorado Engineering TK1 SOM]] ||A15||v7-1||unverified||Data61||Data61||Small form-factor, similar to the Tegra K1||
@@ -25,4 +26,3 @@
 ||[[Hardware/IF6410|Inforce IFC6410]] || krait (A15-like) ||v7||unverified||Data61||Data61|| Qualcomm reimplementation of Armv7||
 ||[[Hardware/HiKey|HiKey]] ||A53||v8A||unverified||Data61||Data61||  ||
 ||[[Hardware/RPi3|Raspberry Pi 3-b]] ||A53||v8A||unverified||Data61||Data61||  ||
-||[[Hardware/zynq7000|Zynq 7000]] ||A9||v7A||unverified||Data61||Data61||  ||
