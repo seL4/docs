@@ -22,6 +22,19 @@ pip install six tempita plyplus pyelftools orderedset jinja2
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
 
+If you are using Ubuntu 14.04, then you will need to install some extra packages and update your compiler. Instead of the above do the following (the main changes are: replace repo with phablet-tools, add python-dev, and install gcc-5 and gcc-5-multilib from the PPA and set it as the default gcc):
+{{{#!highlight bash numbers=off
+add-apt-repository ppa:ubuntu-toolchain-r/test
+apt-get update
+apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev \
+gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi gcc-5 gcc-5-multilib
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
+
+pip install six tempita plyplus pyelftools orderedset jinja2
+
+curl -sSL https://get.haskellstack.org/ | sh
+}}}
+
 == Download and build example CAmkES app ==
 
 Create and enter an empty working directory before running the commands below.
