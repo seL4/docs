@@ -14,8 +14,8 @@ Summary of differences between CAmkES next and CAmkES master: [[CAmkESDifference
 
 The following commands were tested on a fresh installation of Ubuntu 16.04. This will install the tools and libraries required to build seL4 and CAmkES Next. Note that the dependencies are different from those of the "master" branch of CAmkES.
 {{{#!highlight bash numbers=off
-apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev \
-gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
+apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev \
+libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
 
 pip install six tempita plyplus pyelftools orderedset jinja2
 
@@ -26,8 +26,9 @@ If you are using Ubuntu 14.04, then you will need to install some extra packages
 {{{#!highlight bash numbers=off
 add-apt-repository ppa:ubuntu-toolchain-r/test
 apt-get update
-apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev \
-gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi gcc-5 gcc-5-multilib
+apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev \
+libsqlite3-dev libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi \
+gcc-5 gcc-5-multilib
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
 
 pip install six tempita plyplus pyelftools orderedset jinja2
