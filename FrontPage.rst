@@ -44,3 +44,4 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
 == Community ==
 
  * [[https://research.csiro.au/tsblog|Trustworthy Systems Blog]]
+ * [[IRCChannel|IRC Channel]]
