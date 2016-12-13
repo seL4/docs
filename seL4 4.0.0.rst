@@ -56,17 +56,11 @@ Announcing the release of {{{seL4 4.0.0}}} with the following changes:
 
 * Several enhancements for both {{{x86}}} and {{{ARM}}} have been made. Please see the commit log for details.
 
-= API Changes =
-
- * 
-
-= ABI Changes =
- 
- * 
-
 = Upgrade notes =
 
- * 
+ * This release breaks both API and ABI and is not source compatible with the earlier versions. 
+   Read more here: https://research.csiro.au/tsblog/introducing-device-untyped-memory-sel4/
+
 
 = Full changelog =
 
