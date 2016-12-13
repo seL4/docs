@@ -1,4 +1,5 @@
 = Introducing seL4 4.0.0 =
+Announcing the release of {{{seL4 4.0.0}}} with the following changes:
 
  * Reorder bootinfo structure.
  * Add missing seL4_AllRights macro in libsel4.
