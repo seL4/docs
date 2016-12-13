@@ -18,20 +18,20 @@
  * Update VCPU fault definitions.
  * Add userspace invocations for hardware debugging.
  * Enable PMU export for V8.
- * Support ARM MPCore registers
+ * Support ARM MPCore registers.
  * Fix config dependency for 'IPC Buffer location'.
  * Use new cap rights structures in iospace.
- * Move initial setting of TPIDRURW register
- * Add seL4_BenchmarkFlushCaches() for arm and ia32
- * Support for prefetcher on Cortex-A9
+ * Move initial setting of TPIDRURW register.
+ * Add seL4_BenchmarkFlushCaches() for arm and ia32.
+ * Support for prefetcher on Cortex-A9.
  * Fix fastpath_restore on ARM Hyp and implement slowpath and restore in C.
- * am335x: Prevent out of bounds array access
+ * am335x: Prevent out of bounds array access.
  * TK1
-   + tk1: Remove temporary SMMU memory mapping support
-   + tk1: Correct SMMU PD and PT indexing
-   + TK1: Split the mux controller from the misc region
+   * Remove temporary SMMU memory mapping support.
+   * Correct SMMU PD and PT indexing.
+   * Split the mux controller from the misc region.
  * OMAP:
-   + Fix issues with OMAP IRQ Code
+   * Fix issues with OMAP IRQ Code.
 
  X86 specific changes:
  * Add userspace invocations for hardware debugging.
