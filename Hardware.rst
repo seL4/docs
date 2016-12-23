@@ -25,4 +25,4 @@
 ||[[Hardware/odroidx|Odroid-X]] ||A15||v7A||unverified||Data61||Data61||  ||
 ||[[Hardware/IF6410|Inforce IFC6410]] || krait (A15-like) ||v7||unverified||Data61||Data61|| Qualcomm reimplementation of Armv7||
 ||[[Hardware/HiKey|HiKey]] ||A53||v8A||unverified||Data61||Data61||  ||
-||[[Hardware/RPi3|Raspberry Pi 3-b]] ||A53||v8A||unverified||Data61||Data61||  ||
+||[[Hardware/Rpi3|Raspberry Pi 3-b]] ||A53||v8A||unverified||Data61||Data61||  ||
