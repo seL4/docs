@@ -2,15 +2,17 @@ The TK1-SOM from Colorado engineering is a small form-factor system based on the
 
 We have ported seL4 to this board.
 
+== U-Boot ==
+
 Upstream U-Boot now supports this board.  
 
 If you use https://github.com/wom-bat/tegra-uboot-flasher-manifests as the manifest for repo, and cei-tk1-som as the board ID the instructions for the Jetson TK1 will work. 
 
+As with the [[Hardware/jetsontk1|Jetson]] with this u-boot, set the environment variable `bootm_boot_mode` to `nonsec` In this boot mode, the standard Linux kernel will not boot: recompile with `CONFIG_ARM_PSCI` on and `CONFIG_CPU_IDLE` off.
+
 The Pinmux spreadsheet, for use with https://github.com/NVIDIA/tegra-pinmux-scripts is [[attachment:CEI_TK1_SOM_customer_pinmux_v11.xlsm|here.]]
 
 The original pinmux spreadsheet from Colorado is [[attachment:tk1-som_pinmux_V2.4.xlsm|here]]
-
-As with the [[Hardware/jetsontk1|Jetson]] with this u-boot, set the environment variable `bootm_boot_mode` to `nonsec` In this boot mode, the standard Linux kernel will not boot: recompile with `CONFIG_ARM_PSCI` on and `CONFIG_CPU_IDLE` off.
 
 == Accessing the MMC ==
 Attach a USB cable between the TK1-SOM's OTG port and your host, then on the U-Boot console type `ums mmc 0`
