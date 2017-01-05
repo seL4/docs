@@ -75,10 +75,18 @@ If you ''always'' want to do this you can do
  . `setenv bootcmd "run bootcmd_dfu"`
 
 = Using L4T from CEI =
+
+CEI provides modifications to L4T and instructions for getting it running on the TK1-SOM.  Unfortunately these seem to only be available on a private FTP site, so you'll have to contact CEI for access to those.
+
+Once you have access, follow the instructions in the README.txt.
+
 If you have a recent distribution and use the instructions from Colorado, you will end up with an unbootable system --- the format of the ext4 filesystem, created by the `flash.sh` script has features that the u-boot and kernel cannot understand.  The simple change is to build an ext3 filesystem instead.
+
 
 Do:
 {{{
   sudo env ROOTFS_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin tk1-som mmcblk0p1
 }}}
 instead of using the instructions in the Colorado-provided README.txt
+
+Alternatively we have a customised image that we use: more information at [[Hardware/CEI_TK1_SOM/L4TCan]].
