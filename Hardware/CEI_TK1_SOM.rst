@@ -1,6 +1,6 @@
 The TK1-SOM from Colorado engineering is a small form-factor system based on the Nvidia Tegra K1. Details and ordering are at https://tk1som.com/products/tk1-som
 
-We are in the process of porting seL4 to this board.
+We have ported seL4 to this board.
 
 Upstream U-Boot now supports this board.  
 
