@@ -15,7 +15,6 @@
 ||[[Hardware/Kzm|KZM (i.MX31)]] || ARM11 ||v6||unverified||Data61||Data61|| original verified version - proof no longer maintained ||
 ||[[Hardware/sabreLite|Sabre Lite (i.MX6)]] ||A9||v7A||verified||Data61||Data61|| current verified version ||
 ||[[Hardware/zynq7000|Zynq 7000]] ||A9||v7A||unverified||Data61||Data61||  ||
-||[[Hardware/PandaBoard|Panda Board (OMAP4460)]] ||A9||v7A||unverified||Data61||not regression tested||  ||
 ||[[Hardware/BeagleBoard|BeagleBoard (OMAP3)]] ||A8||v7||unverified||Data61||Data61|| ||
 ||[[Hardware/Beaglebone|Beaglebone Black (AM335x)]] ||A8||v7||unverified||external||Data61 regression tested|| ||
 ||[[Hardware/odriod-XU|Odroid-XU (Exynos5)]] ||A15||v7A||unverified||Data61||Data61|| Has virtualisation extensions ||
