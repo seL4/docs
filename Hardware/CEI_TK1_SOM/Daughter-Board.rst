@@ -9,8 +9,9 @@ The TK1-SOM Daughterboard is an open-hardware daughterboard designed by the Trus
 === Rough overview (bottom) ===
 {{attachment:daughterboard_bottom.jpg|Bottom of board|width="100%"}}
 
+<<Anchor(with_tk1)>>
 === With TK1 ===
-{{attachment:assembly_cropped.jpg|Bottom of board|width="100%"}}
+{{attachment:assembly_cropped.jpg|Daughterboard with TK1|width="100%"}}
 
 == Technical documentation ==
  * [[attachment:daughterboard_r3a_schematic.pdf|Schematic PDF]] (See '[[#errata|Technical errata for R3A]]' for changes)
@@ -29,32 +30,52 @@ Going from a TK1-SOM, a pixhawk/IRIS and a daughterboard to a functioning system
  * [[#connect_power|Connecting the power harness]]
  * [[#connect_battery_psu|Connecting the battery '''OR''' Connecting the external PSU]]
 
-=== Mounting the TK1 to the daughterboard ===
 <<Anchor(mount_tk1)>>
+=== Mounting the TK1 to the daughterboard ===
+Before mounting the TK1-SOM to the daughterboard, you will have to disassemble the TK1-SOM. This will involve:
 
-=== Jumpering the UART level translators ===
+ * Removing the fan screw
+ * Unscrewing the standoffs
+ * Separating the 2 module 'halves'
+ * Removing the fan connector
+
+This must be done with care as it is easy to damage the TK1. Your goal is this:
+
+{{attachment:tk1_disassemble.jpg|TK1 disassembled|width="50%"}}
+
+Now you can start attaching the TK1 to the daughterboard. It's easy to identify which half goes where by looking at the connectors on the bottom, or the overview at the top of this page.
+
+Firmly press both of the TK1 halves into their sockets. Try to use unpopulated parts of the PCB as 'finger positions' to avoid damaging components or connectors.
+
+Note: Standoffs can optionally be added in this step for extra support (the friction fit supplied by the TK1 connectors should be more than sufficient in most cases). Each module has a single standoff point for an M2.5 screw, bolt, and standoff:
+
+{{attachment:standoff.jpg|Bottom of board|width="50%"}}
+
+The end result should look like the image under [[#with_tk1|'With TK1']] near the top of this page
+
 <<Anchor(jumper_uart)>>
+=== Jumpering the UART level translators ===
 
-=== Jumpering the RESET button ===
 <<Anchor(jumper_reset)>>
+=== Jumpering the RESET button ===
 
-=== Attaching the pixhawk power cable ===
 <<Anchor(attach_pix_pwr)>>
+=== Attaching the pixhawk power cable ===
 
-=== Attaching the CAN bus cable ===
 <<Anchor(attach_can)>>
+=== Attaching the CAN bus cable ===
 
-=== Attaching the telemetry cable ===
 <<Anchor(attach_telem)>>
+=== Attaching the telemetry cable ===
 
-=== Connecting the power harness ===
 <<Anchor(connect_power)>>
+=== Connecting the power harness ===
 
-=== Connecting the battery OR external PSU ===
 <<Anchor(connect_battery_psu)>>
+=== Connecting the battery OR external PSU ===
 
-=== Technical errata for R3A, to be fixed next revision ===
 <<Anchor(errata)>>
+=== Technical errata for R3A, to be fixed next revision ===
 
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
