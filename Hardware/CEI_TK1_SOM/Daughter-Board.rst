@@ -84,6 +84,18 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 <<Anchor(attach_pix_pwr)>>
 === Attaching the pixhawk power cable ===
 
+The pixhawk power cable is how the daughterboard delivers power to the pixhawk. Note that this is very different to the previous daughterboards - we do not use the IRIS' power output (that would normally go into the pixhawk) for anything.
+
+Basically, connect this:
+
+{{attachment:pix_power.jpg|Pixhawk power input|width="30%"}}
+
+To this:
+
+{{attachment:pix_power_in.jpg|Pixhawk power daughterboard output|width="60%"}}
+
+Noting again that you will have a single connector of that same type left from the IRIS power supply - this should NOT be connected to anything.
+
 <<Anchor(attach_can)>>
 === Attaching the CAN bus cable ===
 
@@ -111,7 +123,7 @@ The power harness is how the daughterboard supplies power to the TK1-SOM, and al
 
 {{attachment:harness1.jpg|The power harness|width="60%"}}
 
-To connect it, plug in the molex connector under the daughterboard, and then plug into the TK1-SOM's barrel jack. Do NOT plug this into the '+12V IN' barrel jack on the side of the daughterboard.
+To connect it, plug in the molex connector under the daughterboard, and then plug into the TK1-SOM's barrel jack. Do NOT plug this into the '+12V IN' barrel jack on the side of the daughterboard. This is what you want:
 
 {{attachment:harness2.jpg|The power harness plugged in|width="60%"}}
 
