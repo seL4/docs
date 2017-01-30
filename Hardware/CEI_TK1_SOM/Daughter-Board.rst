@@ -79,21 +79,33 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 '''Note''': On this board, UART1 is connected to the RADIO output, the FTDI port, and the activity LEDs. UART2 is connected to the GPS output. It is possible to swap these at the TK1 input side without consequence. Additionally, one can disconnect these jumpers and use an 'ordinary' 1V8 converter for debugging.
 
 <<Anchor(jumper_reset)>>
-
 === Jumpering the RESET button ===
+
 <<Anchor(attach_pix_pwr)>>
-
 === Attaching the pixhawk power cable ===
+
 <<Anchor(attach_can)>>
-
 === Attaching the CAN bus cable ===
+
+The CAN1 connector we are using (labelled 'PRIMARY CAN CONNECTOR' on 'Rough overview - Top' at the top of this page) is directly connected to the CAN port on the pixhawk. Connect one end of the 4-pin DF13 connector to the pixhawk, and the other to the daughterboard:
+
+{{attachment:can2.jpg|CAN connector on daughterboard|width="60%"}}
+
+The left arrow points to the connector. The right arrow points to the endpoint selection jumper. If the endpoint selection jumper is closed, CAN1 will be terminated as an endpoint. In our situation, the pixhawk and the daughterboard are endpoints, so the jumper should be closed for CAN1.
+
+Note that the connectors on the bottom and the top of the board are connected in parallel so that the board can be used in more complex network topologies, i.e the 2 left connectors are CAN1, and the 2 right connectors are CAN2.
+
 <<Anchor(attach_telem)>>
-
 === Attaching the telemetry cable ===
-<<Anchor(connect_power)>>
 
+The telemetry connector to be connected to the 3DR RADIO has a 'RADIO' label, and it is next to the GPS connector - see 'Rough Overview - Bottom', above.
+
+To connect it, find the 3DR RADIO cable inside the IRIS and just plug it in:
+
+{{attachment:radio.jpg|3DR Radio connected to daughterboard|width="60%"}}
+
+<<Anchor(connect_power)>>
 === Connecting the power harness ===
-<<Anchor(connect_battery_psu)>>
 
 The power harness is how the daughterboard supplies power to the TK1-SOM, and also how it intercepts power from the IRIS' batteries (if it is running on batteries). This is the power harness:
 
@@ -103,9 +115,10 @@ To connect it, plug in the molex connector under the daughterboard, and then plu
 
 {{attachment:harness2.jpg|The power harness plugged in|width="60%"}}
 
+<<Anchor(connect_battery_psu)>>
 === Connecting the battery OR external PSU ===
-<<Anchor(errata)>>
 
+<<Anchor(errata)>>
 === Technical errata for R3A, to be fixed next revision ===
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
