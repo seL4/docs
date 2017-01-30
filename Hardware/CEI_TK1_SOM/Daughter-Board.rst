@@ -142,7 +142,13 @@ In any case, for option 1: simply plug in the TK1 power supply to the '+12V IN' 
 
 The pixhawk, TK1 and daughterboard will all turn on. (If they are actually connected unlike the above picture!)
 
-For option 2: Connect one end of the power harness to the main IRIS power input, and the other end to the battery. Similarly, everything should turn on.
+For option 2: Connect one end of the power harness to the main IRIS power input:
+
+{{attachment:battery_power.jpg|Connecting to IRIS internal main power connector|width="30%"}}
+
+and the other end to the battery. Similarly, everything should turn on.
+
+
 
 <<Anchor(errata)>>
 === Technical errata for R3A, to be fixed next revision ===
