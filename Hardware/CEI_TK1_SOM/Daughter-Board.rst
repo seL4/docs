@@ -130,6 +130,16 @@ To connect it, plug in the molex connector under the daughterboard, and then plu
 <<Anchor(connect_battery_psu)>>
 === Connecting the battery OR external PSU ===
 
+There are 2 ways of powering up the daughterboard and pixhawk:
+ * 1: Using the TK1-SOM's ordinary power supply (for testing)
+ * 2: Using the LIPO battery on the quadcopter (for demoing)
+
+The only difference from a functional point of view is that option 1 will only power the pixhawk, daughterboard, and TK1-SOM; not the rest of the quadcopter. The LIPO will do the same, but also provide power for the rotors etc.
+
+In any case, for option 1: simply plug in the TK1 power supply to the '+12V IN' jack (See 'Rough overview' - Top). The pixhawk, TK1 and daughterboard will all turn on.
+
+For option 2: Connect one end of the power harness to the main IRIS power input, and the other end to the battery. Similarly, everything should turn on.
+
 <<Anchor(errata)>>
 === Technical errata for R3A, to be fixed next revision ===
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
