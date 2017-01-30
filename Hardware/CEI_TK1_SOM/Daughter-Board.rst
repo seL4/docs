@@ -7,7 +7,7 @@ The TK1-SOM Daughterboard is an open-hardware daughterboard designed by the Trus
 
 == Technical documentation ==
  * [[attachment:daughterboard_r3a_schematic.pdf|Schematic PDF]] (See '[[#errata|Technical errata for R3A]]' for changes)
- * Bill of Materials:
+ * Bill of Materials:  [[attachment:tegra_daughterboard_bom3.xls]]
  * Project repository: [[https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard|Altium files]]
 
 == Connecting the Daughterboard ==
@@ -48,6 +48,7 @@ Going from a TK1-SOM, a pixhawk/IRIS and a daughterboard to a functioning system
 
 === Technical errata for R3A, to be fixed next revision ===
 <<Anchor(errata)>>
+
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
  * R35 & R45 to supply power through the CAN ports ARE mounted. This was to make testing easier as only one cable was required to the pixhawk. The pixhawk may draw too much power in full operation for this to be enough, hence the primary pixhawk power cable which should be used.
