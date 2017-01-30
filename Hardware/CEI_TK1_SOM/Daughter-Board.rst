@@ -9,6 +9,9 @@ The TK1-SOM Daughterboard is an open-hardware daughterboard designed by the Trus
 === Rough overview (bottom) ===
 {{attachment:daughterboard_bottom.jpg|Bottom of board|width="100%"}}
 
+=== With TK1 ===
+{{attachment:assembly_cropped.jpg|Bottom of board|width="100%"}}
+
 == Technical documentation ==
  * [[attachment:daughterboard_r3a_schematic.pdf|Schematic PDF]] (See '[[#errata|Technical errata for R3A]]' for changes)
  * Bill of Materials:  [[attachment:tegra_daughterboard_bom3.xls]]
