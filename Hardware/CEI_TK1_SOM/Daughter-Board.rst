@@ -95,6 +95,14 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 === Connecting the power harness ===
 <<Anchor(connect_battery_psu)>>
 
+The power harness is how the daughterboard supplies power to the TK1-SOM, and also how it intercepts power from the IRIS' batteries (if it is running on batteries). This is the power harness:
+
+{{attachment:harness1.jpg|The power harness|width="60%"}}
+
+To connect it, plug in the molex connector under the daughterboard, and then plug into the TK1-SOM's barrel jack. Do NOT plug this into the '+12V IN' barrel jack on the side of the daughterboard.
+
+{{attachment:harness2.jpg|The power harness plugged in|width="60%"}}
+
 === Connecting the battery OR external PSU ===
 <<Anchor(errata)>>
 
