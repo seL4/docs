@@ -10,6 +10,7 @@ The TK1-SOM Daughterboard is an open-hardware daughterboard designed by the Trus
 {{attachment:daughterboard_bottom.jpg|Bottom of board|width="100%"}}
 
 <<Anchor(with_tk1)>>
+
 === With TK1 ===
 {{attachment:assembly_cropped.jpg|Daughterboard with TK1|width="100%"}}
 
@@ -31,6 +32,7 @@ Going from a TK1-SOM, a pixhawk/IRIS and a daughterboard to a functioning system
  * [[#connect_battery_psu|Connecting the battery '''OR''' Connecting the external PSU]]
 
 <<Anchor(mount_tk1)>>
+
 === Mounting the TK1 to the daughterboard ===
 Before mounting the TK1-SOM to the daughterboard, you will have to disassemble the TK1-SOM. This will involve:
 
@@ -54,29 +56,48 @@ Note: Standoffs can optionally be added in this step for extra support (the fric
 The end result should look like the image under [[#with_tk1|'With TK1']] near the top of this page
 
 <<Anchor(jumper_uart)>>
+
 === Jumpering the UART level translators ===
+For the daughterboard to do any level translation, it needs to be connected to the TK1's UARTs. We achieve this by jumpering the TK1's UARTs to the 'UART TK1' connector on the daughterboard. (See 'rough overview', top view)
+
+The pinout of the TK1's UARTS is the same as the pinout of the daughterboard's UART inputs. Observe:
+
+{{attachment:UART1.jpg|UART 1 on TK1|width="40%"}} {{attachment:uart2.jpg|UART 2 on TK1|width="40%"}} {{attachment:UARTS_board.jpg|UARTs on daughterboard|width="40%"}}
+
+The pinout of the TK1 UARTS is:
+
+||<tablewidth="200px">PIN 1||RX||
+||PIN 2||TX||
+||PIN 3||CTS-L||
+||PIN 4||RTS-L||
+
+
+Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 1 (daughterboard), and pin 2 - pin 2 for both UARTS. You should end up with:
+
+{{attachment:jumpered.jpg|UARTs jumpered|width="50%"}}
+
 
 <<Anchor(jumper_reset)>>
+
 === Jumpering the RESET button ===
-
 <<Anchor(attach_pix_pwr)>>
+
 === Attaching the pixhawk power cable ===
-
 <<Anchor(attach_can)>>
+
 === Attaching the CAN bus cable ===
-
 <<Anchor(attach_telem)>>
+
 === Attaching the telemetry cable ===
-
 <<Anchor(connect_power)>>
+
 === Connecting the power harness ===
-
 <<Anchor(connect_battery_psu)>>
+
 === Connecting the battery OR external PSU ===
-
 <<Anchor(errata)>>
-=== Technical errata for R3A, to be fixed next revision ===
 
+=== Technical errata for R3A, to be fixed next revision ===
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
  * R35 & R45 to supply power through the CAN ports ARE mounted. This was to make testing easier as only one cable was required to the pixhawk. The pixhawk may draw too much power in full operation for this to be enough, hence the primary pixhawk power cable which should be used.
