@@ -81,6 +81,20 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 <<Anchor(jumper_reset)>>
 === Jumpering the RESET button ===
 
+It's difficult to access the TK1's reset button when it is mounted, so there is a secondary reset button on the daughterboard that can optionally be used. First, you must solder a pin to the hole next to the reset switch on the TK1 (as RESET isn't brought out on any of its connectors):
+
+{{attachment:reset_pin_tk1.jpg|UARTs jumpered|width="50%"}}
+
+From here, you want to jumper this pin to the 'RESET' pin on the daughterboard (This is the pin just to the right of the grey switch):
+
+{{attachment:reset_pin_daughterboard.jpg|UARTs jumpered|width="50%"}}
+
+Your end result is:
+
+{{attachment:reset_jumpered.jpg|UARTs jumpered|width="50%"}}
+
+Note: As this reset switch is just a momentary short to ground, it is very easy to make your own reset switch that may be larger or more conveniently mounted elsewhere on the quadcopter. Essentially you just need a momentary switch between the TK1 pin and ground - the signal is debounced etc on the TK1.
+
 <<Anchor(attach_pix_pwr)>>
 === Attaching the pixhawk power cable ===
 
