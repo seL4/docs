@@ -76,6 +76,7 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 
 {{attachment:jumpered.jpg|UARTs jumpered|width="50%"}}
 
+'''Note''': On this board, UART1 is connected to the RADIO output, the FTDI port, and the activity LEDs. UART2 is connected to the GPS output. It is possible to swap these at the TK1 input side without consequence. Additionally, one can disconnect these jumpers and use an 'ordinary' 1V8 converter for debugging.
 
 <<Anchor(jumper_reset)>>
 
