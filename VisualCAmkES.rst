@@ -73,5 +73,29 @@ python [path/to/camkes-tool/camkes]/visualCAmkES
 To open a file, click File->Open. Then select a '''top-level camkes file'''. Your graph will load.
 
 === Manipulating the graph ===
-In the right, you have a few buttons:
-{{attachment:VisualCAmkES_userButtons.jpg|VisualCAmkES Corner UI buttons|align="middle"}}
+In the right, you have a few buttons: <<BR>>
+{{attachment:VisualCAmkES_userButtons.png|VisualCAmkES Corner UI buttons|align="left"}} The button's name should be self-explanatory. Autolayout will use graphviz to reposition the nodes into a "nice" format. In my experience, graphviz never gives a nice layout, but it does give a good starting point for you.
+
+You can move the instances around by click & dragging each box. The connections will continually redraw as you move the box. There is a minimum distance to see the symbol for each connection.
+
+=== Exporting and Saving ===
+As you change the graph, '''the program automatically saves a .layout file''', which contains the current position of each box. This means that you can close the python application, and when you reopen it, your latest layout will appear.
+
+You can export an image, into either PNG or SVG.
+ 1. Clicking Save Image or File->Export Image. 
+ 1. Choose either PNG or SVG from the combo-box (first input). 
+   a. For PNG, resolutions is mandatory. 
+   a. For SVG, no input is mandatory. 
+ 1. Click OK.
+ 1. Choose a place to save your file, and name your picture. 
+
+The key-mappings are as follows:
+||'''Task'''||'''Linux/Windows'''||'''Mac'''||
+||Open      ||`Ctrl` + `O`||`Cmd` + `O`||
+||Autolayout||`Ctrl` + `L`||`Cmd` + `L`||
+||Export (Save) Image ||`Ctrl` + `E`||`Cmd` + `E`||
+||Zoom In||`Ctrl` + `=`||`Cmd` + `=`||
+||Zoom Out||`Ctrl` + `-`||`Cmd` + `-`||
+
+== How it works ==
+=== High level overview ===
