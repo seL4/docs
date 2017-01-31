@@ -99,3 +99,25 @@ The key-mappings are as follows:
 
 == How it works ==
 === High level overview ===
+{{attachment:VisualCAmkES_UML.png|UML Diagram of VisualCAmkES|width=900px}} <<BR>>
+The above is quick UML class diagram. A few other classes isn't shown like `SaveOptionDialog` - but these are helper classes. 
+
+The program is written in object-oriented style, Model-View-Controller (MVC) paradigm. If you don't know what MVC is, its pretty much: Model represents the data, the backend; View represents the front-end, what the user sees; Controller keeps the Model and View in sync. Qt works on a Model-View paradigm, which is very similar - except the Controller and View are the same thing. 
+
+ 1. `GraphController` is the `QMainWindow` - and starts of the program. It takes the chosen file from the user, gets an AST presentation from the `ASTModel`, and passes it on to the `GraphWidget` (the view).
+ 1. `GraphWidget` will traverse the AST, creating `InstanceWidget` for Instances and `ConnectionWidget` for Connections.
+ 1. `GraphWidget` is a `QGraphicsView` - containing `QGraphicsScene`. `InstanceWidget` and `ConnectionWidget` are `QGraphicWidget` and `QGraphicItem` respectively. `QGraphicScene` handles the placements of `QGraphicItems`, and has functions for scaling (i.e. zoom), panning, moving of nodes etc.
+ 1. The program primary works by events. Events are like mouse clicks, button presses etc.
+
+Throughout my code, I use lazy instantiation. Most (if not all) global variables are declared as properties. Lazy instantiation is when properties are created only when they are first called. Lazy instantiation is done because subclasses might have different expectation of properties's class.
+
+The getters and settings may trigger other events such as updating the screen. Furthermore - it seems that when a property is passed down the different classes, say from `GraphWidget` to `ConnectionWidget`, the getter from `GraphWidget` is invoked. Hence, events can be triggered in `GraphWidget` when `ConnectionWidget` access the properties.
+
+=== Layout ===
+In order to save the layout information - the program saves a `.visualCAmkES.layout` file. It starts with a . because it is purposefully hidden (which won't work on windows ...). This file is a json file containing dictionaries. The key is the instance name, the value is another dictionary. The latter dictionary contains the position and whether it was hidden. Feel free to view the `.layout` file, but changing it can risk losing the layout.
+
+=== Additional implementation details ===
+ * When connection widgets are deleted, ConnectionWidget.delete() must be called on the object. This is because connection widget is tracked by the from and to instance widgets, so it needs to delete itself from them.
+ * Context menu is a bit weirdly implemented. This is what I mean by weird: normally you would just create the menu and it all works - including closing of the menu. However this doesn't work with QGraphicScenes. So the solution is to add the context menu to the scene, and manually close it if the mouse was clicked anywhere outside the context menu.
+
+Traversing the code using PyCharm IDE is highly recommended.
