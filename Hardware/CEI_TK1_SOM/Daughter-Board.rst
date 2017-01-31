@@ -150,11 +150,13 @@ There are 2 ways of powering up the daughterboard and pixhawk:
 
 The only difference from a functional point of view is that option 1 will only power the pixhawk, daughterboard, and TK1-SOM; not the rest of the quadcopter. The LIPO will do the same, but also provide power for the rotors etc.
 
+Note that in both cases the power harness must be connected to supply the TK1-SOM with power. If the TK1 power supply is used, the yellow battery connectors should be unplugged.
+
 In any case, for option 1: simply plug in the TK1 power supply to the '+12V IN' jack (See 'Rough overview' - Top):
 
 {{attachment:external_power.jpg|Powered with ordinary TK1 PSU|width="60%"}}
 
-The pixhawk, TK1 and daughterboard will all turn on. (If they are actually connected unlike the above picture!)
+The TK1 and daughterboard will all turn on. (And the pixhawk if it is connected unlike the above picture)
 
 For option 2: Connect one end of the power harness to the main IRIS power input:
 
