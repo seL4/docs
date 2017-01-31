@@ -170,7 +170,7 @@ Similarly, everything should turn on as pictured.
 
 === Everything connected ===
 Slightly more close-up photo of everything connected and turned on:
-{{attachment:everything_connected.jpg|Connecting the battery|width="70%"}}
+{{attachment:everything_connected.jpg|Everything connected|width="70%"}}
 
 <<Anchor(errata)>>
 === Technical errata for R3A, to be fixed next revision ===
