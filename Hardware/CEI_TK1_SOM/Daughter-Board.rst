@@ -51,7 +51,7 @@ Firmly press both of the TK1 halves into their sockets. Try to use unpopulated p
 
 Note: Standoffs can optionally be added in this step for extra support (the friction fit supplied by the TK1 connectors should be more than sufficient in most cases). Each module has a single standoff point for an M2.5 screw, bolt, and standoff:
 
-{{attachment:standoff.jpg|Bottom of board|width="50%"}}
+{{attachment:standoff.jpg|Standoff fitted|width="50%"}}
 
 The end result should look like the image under [[#with_tk1|'With TK1']] near the top of this page
 
@@ -83,15 +83,15 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 
 It's difficult to access the TK1's reset button when it is mounted, so there is a secondary reset button on the daughterboard that can optionally be used. First, you must solder a pin to the hole next to the reset switch on the TK1 (as RESET isn't brought out on any of its connectors):
 
-{{attachment:reset_pin_tk1.jpg|UARTs jumpered|width="50%"}}
+{{attachment:reset_pin_tk1.jpg|Reset pin soldered to the TK1|width="50%"}}
 
 From here, you want to jumper this pin to the 'RESET' pin on the daughterboard (This is the pin just to the right of the grey switch):
 
-{{attachment:reset_pin_daughterboard.jpg|UARTs jumpered|width="50%"}}
+{{attachment:reset_pin_daughterboard.jpg|Reset button and pin on daughterboard|width="50%"}}
 
 Your end result is:
 
-{{attachment:reset_jumpered.jpg|UARTs jumpered|width="50%"}}
+{{attachment:reset_jumpered.jpg|Reset pin jumpered|width="50%"}}
 
 Note: As this reset switch is just a momentary short to ground, it is very easy to make your own reset switch that may be larger or more conveniently mounted elsewhere on the quadcopter. Essentially you just need a momentary switch between the TK1 pin and ground - the signal is debounced etc on the TK1.
 
@@ -162,9 +162,15 @@ For option 2: Connect one end of the power harness to the main IRIS power input:
 
 {{attachment:battery_power.jpg|Connecting to IRIS internal main power connector|width="30%"}}
 
-and the other end to the battery. Similarly, everything should turn on.
+and the other end to the battery: (Follow ordinary 3DR procedures before doing this as it will turn everything on)
 
+{{attachment:quadcopter_on.jpg|Connecting the battery|width="70%"}}
 
+Similarly, everything should turn on as pictured.
+
+=== Everything connected ===
+Slightly more close-up photo of everything connected and turned on:
+{{attachment:everything_connected.jpg|Connecting the battery|width="70%"}}
 
 <<Anchor(errata)>>
 === Technical errata for R3A, to be fixed next revision ===
