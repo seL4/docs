@@ -28,5 +28,6 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * PeterChubb
  * Richard Habeeb
  * Sebastian Holzapfel
+ * ShanushPremathasarathan
  * StephenSherratt
  * Yanyan Shen
