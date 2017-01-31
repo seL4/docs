@@ -10,6 +10,8 @@ Main CAmkES page: [[CAmkES]]
 
 Summary of differences between CAmkES next and CAmkES master: [[CAmkESDifferences]]
 
+VisualCAmkes, a GUI tool to view a CAmkES system: [[VisualCAmkES]]
+
 == Setting up your machine ==
 
 The following commands were tested on a fresh installation of Ubuntu 16.04. This will install the tools and libraries required to build seL4 and CAmkES Next. Note that the dependencies are different from those of the "master" branch of CAmkES.
