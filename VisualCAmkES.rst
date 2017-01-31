@@ -74,3 +74,4 @@ To open a file, click File->Open. Then select a '''top-level camkes file'''. You
 
 === Manipulating the graph ===
 In the right, you have a few buttons:
+{{attachment:VisualCAmkES_userButtons.jpg|VisualCAmkES Corner UI buttons|align="middle"}}
