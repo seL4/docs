@@ -76,7 +76,7 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 
 {{attachment:jumpered.jpg|UARTs jumpered|width="50%"}}
 
-'''Note''': On this board, UART1 is connected to the RADIO output, the FTDI port, and the activity LEDs. UART2 is connected to the GPS output. It is possible to swap these at the TK1 input side without consequence (this would put the kernel dump through the GPS output, and UART2 through telemetry). Additionally, one can disconnect these jumpers and use an 'ordinary' 1V8 converter for debugging (See 'Debugging outputs & finding grounds' below).
+'''Note''': On this board, UART1 is connected to the RADIO output, the FTDI port, and the activity LEDs. UART2 is connected to the GPS output. It is possible to swap these at the TK1 input side without consequence (this would put the kernel dump through the GPS output, and UART2 through telemetry). Additionally, one can disconnect these jumpers and use an 'ordinary' 1V8 converter for debugging (See [[#debug_ground|debugging & grounds]] below).
 
 <<Anchor(jumper_reset)>>
 === Jumpering the RESET button ===
@@ -172,6 +172,7 @@ Similarly, everything should turn on as pictured.
 Slightly more close-up photo of everything connected and turned on:
 {{attachment:everything_connected.jpg|Everything connected|width="70%"}}
 
+<<Anchor(debug_ground)>>
 === Debugging output & finding grounds ===
 To use an 'ordinary' 1V8 converter and debug things, you will likely want to:
  * Connect the 1V8 converter to the primary UART on the TK1 (on the top) for kernel messages
