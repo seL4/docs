@@ -175,7 +175,7 @@ Slightly more close-up photo of everything connected and turned on:
 === Debugging output & finding grounds ===
 To use an 'ordinary' 1V8 converter and debug things, you will likely want to:
  * Connect the 1V8 converter to the primary UART on the TK1 (on the top) for kernel messages
- * Swap UART1 with UART2 into the daughterboard, making the secondary UART go through telemetry.
+ * Swap UART1 with UART2 into the daughterboard, making the secondary UART go through telemetry. (i.e connect UART2 (TK1) to UART1 (Daughterboard) to get the secondary UART through telem)
 Our 1V8 converters have the following pinout:
 
 {{attachment:uart_converter.jpg|Everything connected|width="70%"}}
