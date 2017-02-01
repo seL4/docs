@@ -172,6 +172,20 @@ Similarly, everything should turn on as pictured.
 Slightly more close-up photo of everything connected and turned on:
 {{attachment:everything_connected.jpg|Everything connected|width="70%"}}
 
+=== Debugging output & finding grounds ===
+To use an 'ordinary' 1V8 converter and debug things, you will likely want to:
+ * Connect the 1V8 converter to the primary UART on the TK1 (on the top) for kernel messages
+ * Swap UART1 with UART2 into the daughterboard, making the secondary UART go through telemetry.
+Our 1V8 converters have the following pinout:
+
+{{attachment:uart_converter.jpg|Everything connected|width="70%"}}
+
+You want to connect TX (converter) to RX on the TK1, and RX (converter) to TX on the TK1. You also need to connect a ground, which you can find all along the bottom row of the servo connector:
+
+{{attachment:grounds.jpg|Everything connected|width="70%"}}
+
+(The entire bottom row is connected to ground)
+
 <<Anchor(errata)>>
 === Technical errata for R3A, to be fixed next revision ===
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
