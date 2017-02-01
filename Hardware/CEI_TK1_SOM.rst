@@ -18,7 +18,7 @@ The original pinmux spreadsheet from Colorado is [[attachment:tk1-som_pinmux_V2.
 Attach a USB cable between the TK1-SOM's OTG port and your host, then on the U-Boot console type `ums mmc 0`
 
 A spinning wheel will appear on the console, and the entire MMC will be presented as a USB storage device to your host.
-In the default partitioning (as it comes from Colorado Engineering).  `/dev/sdb1` is the UBUNTU root partition.
+In the default partitioning (as it comes from Colorado Engineering)  partition 1 on the device is the UBUNTU root partition.
 
 == Serial Connection ==
 The serial port is at 1V8 levels on J8, as follows: (pin one is farthest from  the ground hole)
