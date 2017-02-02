@@ -6,7 +6,7 @@ We have ported seL4 to this board.
 
 Upstream U-Boot now supports this board.  
 
-Follow the instructions for the [[Hardware/jetsontk1#Building|Jetson TK1]], however:
+Follow the instructions for the [[Hardware/jetsontk1##Flash_U-Boot|Jetson TK1]], however:
  * use https://github.com/wom-bat/tegra-uboot-flasher-manifests as the URL for repo
  * don't apply the patch to increase the console buffer size
  * use `cei-tk1-som` (instead of `jetson-tk1`) as the board ID
