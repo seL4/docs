@@ -120,7 +120,7 @@ Install autoconf, pkg-config, flex, bison, libcrypto++-dev and libusb-1.0.0-dev 
 On Debian or Ubuntu you can do:
 {{{
 sudo apt-get update
-sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev
+sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev gcc-arm-linux-gnueabi
 }}}
 
 Then do:
