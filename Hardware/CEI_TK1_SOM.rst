@@ -6,7 +6,11 @@ We have ported seL4 to this board.
 
 Upstream U-Boot now supports this board.  
 
-If you use https://github.com/wom-bat/tegra-uboot-flasher-manifests as the manifest for repo, and cei-tk1-som as the board ID the instructions for the [[Hardware/jetsontk1#Building|Jetson TK1]]  will work. 
+Follow the instructions for the [[Hardware/jetsontk1#Building|Jetson TK1]], however:
+ * use https://github.com/wom-bat/tegra-uboot-flasher-manifests as the URL for repo
+ * don't apply the patch to increase the console buffer size
+ * use `cei-tk1-som` (instead of `jetson-tk1`) as the board ID
+
 
 As with the [[Hardware/jetsontk1|Jetson]] with this u-boot, set the environment variable `bootm_boot_mode` to `nonsec` In this boot mode, the standard Linux kernel will not boot: recompile with `CONFIG_ARM_PSCI` on and `CONFIG_CPU_IDLE` off.
 
