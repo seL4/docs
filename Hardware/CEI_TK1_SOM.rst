@@ -59,8 +59,9 @@ Then to boot, on the u-boot console do:
  . `dfu 0 ram 0`
 
 and on your host:
- * install dfu-utils (one time only: `apt-get install dfu-utils`)
+ * install dfu-util (one time only: `apt-get install dfu-util`)
  * connect to the TK1-SOM using a USB connector to the on-the-go port
+ * run dfu-util (you may need to run this with sudo)
  . `dfu-util --device 0955:701a -a kernel -D sel4test-driver-image-arm-tk1`
  . `dfu-util --device 0955:701a -e`
 
