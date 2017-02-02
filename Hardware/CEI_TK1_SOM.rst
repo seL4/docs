@@ -63,7 +63,7 @@ and on your host:
  * connect to the TK1-SOM using a USB connector to the on-the-go port
  * run dfu-util (you may need to run this with sudo)
  . `dfu-util --device 0955:701a -a kernel -D sel4test-driver-image-arm-tk1`
- . `dfu-util --device 0955:701a -e`
+ . `dfu-util --device 0955:701a -e` (if the `-e` option isn't supported you can add `-R` to the above command or ignore it and manually Ctrl-C out of dfu in u-boot on the TK1-SOM)
 
 This will load the `sel4test-driver-image-arm-tk1` file onto the TK1-SOM at address `$loadaddr`. You can then run it in uboot with
 
