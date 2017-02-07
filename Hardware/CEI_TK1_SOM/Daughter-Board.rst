@@ -36,6 +36,8 @@ Going from a TK1-SOM, a pixhawk/IRIS and a daughterboard to a functioning system
 === Mounting the TK1 to the daughterboard ===
 Before mounting the TK1-SOM to the daughterboard, you will have to disassemble the TK1-SOM. This will involve:
 
+<<Anchor(disassemble_tk1)>>
+
  * Removing the fan screw
  * Unscrewing the standoffs
  * Separating the 2 module 'halves'
@@ -44,6 +46,8 @@ Before mounting the TK1-SOM to the daughterboard, you will have to disassemble t
 This must be done with care as it is easy to damage the TK1. Your goal is this:
 
 {{attachment:tk1_disassemble.jpg|TK1 disassembled|width="50%"}}
+
+<<Anchor(attach_daughterboard)>>
 
 Now you can start attaching the TK1 to the daughterboard. It's easy to identify which half goes where by looking at the connectors on the bottom, or the overview at the top of this page.
 
