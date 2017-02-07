@@ -2,6 +2,14 @@ The TK1-SOM from Colorado engineering is a small form-factor system based on the
 
 We have ported seL4 to this board.
 
+== Hardware modifications and Daughterboards ==
+
+[[Tk1SomMods|Adding some missing connectors]] makes this board a bit easier to use.
+
+We have also developed 2 daughterboards for the TK1-SOM
+ * a [[/CAN-Board|CAN daughterboard]], that adds two CAN controllers on the SPI bus
+ * an [[/Daughter-Board|I/O daughterboard]] that adds CAN controllers, UART level converters, and various sensors
+
 == U-Boot ==
 
 Upstream U-Boot now supports this board.  
