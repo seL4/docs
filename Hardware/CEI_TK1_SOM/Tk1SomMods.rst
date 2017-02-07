@@ -1,3 +1,4 @@
+## page was renamed from Tk1SomMods
 = TK1-SOM Hardware Modifications =
 
 == Adding a second UART connector ==
