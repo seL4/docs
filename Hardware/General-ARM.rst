@@ -44,6 +44,8 @@ The address that the file downloads to is controlled by the `loadaddr` environme
 {{{
   dfu-util -D sel4test-image-arm
 }}}
+
+<<Anchor(sd)>>
 == Booting from SD card ==
 Pull out the SD card from your board, and put it into an SD card reader attached to your build host. Mount the (MS-DOS) filesystem on the first partition on the SD card and copy your image to it. Unmount the filesystem, and put the card back into your board. Reset the board (by power cycling, or pressing the reset button). To run the image:
 
