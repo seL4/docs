@@ -53,6 +53,8 @@ Speed 115200 8bits no parity; the default Linux image has login `ubuntu`, passwo
 == Peripherals ==
 We have an open-hardware CAN and I2C board available, see [[/CAN-Board]]
 
+
+<<Anchor(dfu)>>
 == DFU: Loading kernels over USB ==
 You can load seL4 kernels over USB using `dfu-util`. (you can also use fastboot, but to boot a kernel over fastboot means making the ELF file produced from the buld system look like an ANDROID Linux kernel).
 
