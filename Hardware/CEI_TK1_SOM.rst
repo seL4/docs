@@ -12,6 +12,8 @@ We have also developed 2 daughterboards for the TK1-SOM
 
 == U-Boot ==
 
+<<Anchor(uboot)>>
+
 Upstream U-Boot now supports this board.  
 
 Follow the instructions for the [[Hardware/jetsontk1#Flash_U-Boot|Jetson TK1]], however:
