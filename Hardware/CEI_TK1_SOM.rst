@@ -8,7 +8,7 @@ We have ported seL4 to this board.
 
 We have also developed 2 daughterboards for the TK1-SOM
  * a [[/CAN-Board|CAN daughterboard]], that adds two CAN controllers on the SPI bus
- * an [[/Daughter-Board|I/O daughterboard]] that adds CAN controllers, various sensors and power conversion
+ * an [[/Daughter-Board|I/O daughterboard]] that adds CAN controllers, various sensors and power management
 
 == U-Boot ==
 
