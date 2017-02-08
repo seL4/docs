@@ -4,7 +4,7 @@
 == Adding a second UART connector ==
 
 === The issue: ===
-Note: if you are using our [[../Daughter-Board|IO-Daughterboard]] , this is uneccessary; instead a straight-line passthrough jumper is used to hook up to level converters on the daughterboard.
+## Note: if you are using our [[../Daughter-Board|IO-Daughterboard]] , this is uneccessary; instead a straight-line passthrough jumper is used to hook up to level converters on the daughterboard.
  
 The TK1-SOM has a secondary UART connection, however it's a bit of a pain to get to as a normal jumper won't fit sandwiched between the boards (below left), and you can't get to the connection from the top because of the fan & heatsink (below right).  
 
