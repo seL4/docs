@@ -59,7 +59,7 @@ We have an open-hardware CAN and I2C board available, see [[/CAN-Board]]
 
 <<Anchor(dfu)>>
 == DFU: Loading kernels over USB ==
-You can load seL4 kernels over USB using `dfu-util`. (you can also use fastboot, but to boot a kernel over fastboot means making the ELF file produced from the buld system look like an ANDROID Linux kernel).
+You can load seL4 kernels over USB using `dfu-util`. (you can also use fastboot, but to boot a kernel over fastboot means making the ELF file produced from the build system look like an ANDROID Linux kernel).
 
 On the u-boot console do:
 
@@ -95,6 +95,17 @@ then just
 If you ''always'' want to do this you can do
 
  . `setenv bootcmd "run bootcmd_dfu"`
+
+= Booting from a USB storage device =
+
+You can boot from a USB storage device, by plugging it into the blue port (on the power supply board).  Patches are pending upstream to enable the other port too.
+Use a FAT32 or ext2 partition on the storage; put your image on it.  You can either use a syslinux-style menu, or can boot directly.
+
+{{{
+usb start
+fatload usb 0:1 ${loadaddr} sel4test-image-arm
+bootelf ${loadaddr}
+}}}
 
 = Using L4T from CEI =
 
