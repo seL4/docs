@@ -4,7 +4,7 @@ We have ported seL4 to this board.
 
 == Hardware modifications and Daughterboards ==
 
-[[Tk1SomMods|Adding some missing connectors]] makes this board a bit easier to use.
+[[/Tk1SomMods|Adding some missing connectors]] makes this board a bit easier to use.
 
 We have also developed 2 daughterboards for the TK1-SOM
  * a [[/CAN-Board|CAN daughterboard]], that adds two CAN controllers on the SPI bus
