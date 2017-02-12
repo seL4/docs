@@ -5,7 +5,9 @@
 ||SoC ||BCM2837 || ||
 
 
+== Running seL4 on the Raspberry Pi 3 ==
 
+Please also find a step by step guide to running seL4 on your Raspberry Pi 3 [[https://research.csiro.au/tsblog/sel4-raspberry-pi-3/|on our blog]] (and check out the rest of the blog too!)
 
 == Serial connection ==
 Serial TX and RX are located at GPIO pins 14 and 15 respectively (See Hardware schematic above) 
