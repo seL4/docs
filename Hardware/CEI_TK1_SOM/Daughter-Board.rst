@@ -69,11 +69,12 @@ The pinout of the TK1's UARTS is the same as the pinout of the daughterboard's U
 {{attachment:UART1.jpg|UART 1 on TK1|width="40%"}} {{attachment:uart2.jpg|UART 2 on TK1|width="40%"}} {{attachment:UARTS_board.jpg|UARTs on daughterboard|width="40%"}}
 
 The pinout of the TK1 UARTS is:
+||<tablewidth="200px">PIN 1 ||RX ||
+||PIN 2 ||TX ||
+||PIN 3 ||CTS-L ||
+||PIN 4 ||RTS-L ||
 
-||<tablewidth="200px">PIN 1||RX||
-||PIN 2||TX||
-||PIN 3||CTS-L||
-||PIN 4||RTS-L||
+
 
 
 Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 1 (daughterboard), and pin 2 - pin 2 for both UARTS. You should end up with:
@@ -83,8 +84,8 @@ Since we aren't using flow control, you only need to connect pin 1 (TK1) to pin 
 '''Note''': On this board, UART1 is connected to the RADIO output, the FTDI port, and the activity LEDs. UART2 is connected to the GPS output. It is possible to swap these at the TK1 input side without consequence (this would put the kernel dump through the GPS output, and UART2 through telemetry). Additionally, one can disconnect these jumpers and use an 'ordinary' 1V8 converter for debugging (See [[#debug_ground|debugging & grounds]] below).
 
 <<Anchor(jumper_reset)>>
-=== Jumpering the RESET button ===
 
+=== Jumpering the RESET button ===
 It's difficult to access the TK1's reset button when it is mounted, so there is a secondary reset button on the daughterboard that can optionally be used. First, you must solder a pin to the hole next to the reset switch on the TK1 (as RESET isn't brought out on any of its connectors):
 
 {{attachment:reset_pin_tk1.jpg|Reset pin soldered to the TK1|width="50%"}}
@@ -100,23 +101,15 @@ Your end result is:
 Note: As this reset switch is just a momentary short to ground, it is very easy to make your own reset switch that may be larger or more conveniently mounted elsewhere on the quadcopter. Essentially you just need a momentary switch between the TK1 pin and ground - the signal is debounced etc on the TK1.
 
 <<Anchor(attach_pix_pwr)>>
+
 === Attaching the pixhawk power cable ===
+--(The pixhawk power cable is how the daughterboard delivers power to the pixhawk. Note that this is very different to the previous daughterboards - we do not use the IRIS' power output (that would normally go into the pixhawk) for anything.)--OUTDATED DUE TO POSSIBLE RAIL INTERACTION
 
-The pixhawk power cable is how the daughterboard delivers power to the pixhawk. Note that this is very different to the previous daughterboards - we do not use the IRIS' power output (that would normally go into the pixhawk) for anything.
-
-Basically, connect this:
-
-{{attachment:pix_power.jpg|Pixhawk power input|width="30%"}}
-
-To this:
-
-{{attachment:pix_power_in.jpg|Pixhawk power daughterboard output|width="60%"}}
-
-Noting again that you will have a single connector of that same type left from the IRIS power supply - this should NOT be connected to anything.
+The pixhawk should be connected to the IRIS power supply as it would be in a vanilla configuration, to avoid any interaction with the daughterboard's rails. Do NOT connect anything to the daughterboard's 'Power out to Pixhawk' connector.
 
 <<Anchor(attach_can)>>
-=== Attaching the CAN bus cable ===
 
+=== Attaching the CAN bus cable ===
 The CAN1 connector we are using (labelled 'PRIMARY CAN CONNECTOR' on 'Rough overview - Top' at the top of this page) is directly connected to the CAN port on the pixhawk. Connect one end of the 4-pin DF13 connector to the pixhawk, and the other to the daughterboard:
 
 {{attachment:can2.jpg|CAN connector on daughterboard|width="60%"}}
@@ -126,8 +119,8 @@ The left arrow points to the connector. The right arrow points to the endpoint s
 Note that the connectors on the bottom and the top of the board are connected in parallel so that the board can be used in more complex network topologies, i.e the 2 left connectors are CAN1, and the 2 right connectors are CAN2.
 
 <<Anchor(attach_telem)>>
-=== Attaching the telemetry cable ===
 
+=== Attaching the telemetry cable ===
 The telemetry connector to be connected to the 3DR RADIO has a 'RADIO' label, and it is next to the GPS connector - see 'Rough Overview - Bottom', above.
 
 To connect it, find the 3DR RADIO cable inside the IRIS and just plug it in:
@@ -135,8 +128,8 @@ To connect it, find the 3DR RADIO cable inside the IRIS and just plug it in:
 {{attachment:radio.jpg|3DR Radio connected to daughterboard|width="60%"}}
 
 <<Anchor(connect_power)>>
-=== Connecting the power harness ===
 
+=== Connecting the power harness ===
 The power harness is how the daughterboard supplies power to the TK1-SOM, and also how it intercepts power from the IRIS' batteries (if it is running on batteries). This is the power harness:
 
 {{attachment:harness1.jpg|The power harness|width="60%"}}
@@ -146,9 +139,10 @@ To connect it, plug in the molex connector under the daughterboard, and then plu
 {{attachment:harness2.jpg|The power harness plugged in|width="60%"}}
 
 <<Anchor(connect_battery_psu)>>
-=== Connecting the battery OR external PSU ===
 
+=== Connecting the battery OR external PSU ===
 There are 2 ways of powering up the daughterboard and pixhawk:
+
  * 1: Using the TK1-SOM's ordinary power supply (for testing)
  * 2: Using the LIPO battery on the quadcopter (for demoing)
 
@@ -173,14 +167,16 @@ and the other end to the battery: (Follow ordinary 3DR procedures before doing t
 Similarly, everything should turn on as pictured.
 
 === Everything connected ===
-Slightly more close-up photo of everything connected and turned on:
-{{attachment:everything_connected.jpg|Everything connected|width="70%"}}
+Slightly more close-up photo of everything connected and turned on: {{attachment:everything_connected.jpg|Everything connected|width="70%"}}
 
 <<Anchor(debug_ground)>>
+
 === Debugging output & finding grounds ===
 To use an 'ordinary' 1V8 converter and debug things, you will likely want to:
+
  * Connect the 1V8 converter to the primary UART on the TK1 (on the top) for kernel messages
  * Swap UART1 with UART2 into the daughterboard, making the secondary UART go through telemetry. (i.e connect UART2 (TK1) to UART1 (Daughterboard) to get the secondary UART through telem)
+
 Our 1V8 converters have the following pinout:
 
 {{attachment:uart_converter.jpg|Everything connected|width="70%"}}
@@ -192,6 +188,7 @@ You want to connect TX (converter) to RX on the TK1, and RX (converter) to TX on
 (The entire bottom row is connected to ground)
 
 <<Anchor(errata)>>
+
 === Technical errata for R3A, to be fixed next revision ===
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
