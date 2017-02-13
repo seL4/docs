@@ -192,8 +192,8 @@ You want to connect TX (converter) to RX on the TK1, and RX (converter) to TX on
 === Technical errata for R3A, to be fixed next revision ===
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
- * R35 & R45 to supply power through the CAN ports ARE mounted. This was to make testing easier as only one cable was required to the pixhawk. The pixhawk may draw too much power in full operation for this to be enough, hence the primary pixhawk power cable which should be used.
+ * R35 & R45 to supply power through the CAN ports --(ARE)-- ARE NOT mounted.
  * The LV cutout circuitry does not seem to work reliably. Since the IRIS battery is disconnected when not in use anyway, this should not be a huge issue.
- * On schematic sheet 5, the 'Do not populate' remarks indicate the wrong designators. They should indicate R35 & R45, however these are actually mounted (see note above)
+ * On schematic sheet 5, the 'Do not populate' remarks indicate the wrong designators. They should indicate R35 & R45.
  * R40 & R49 pull-ups on the SPI CSN line are not mounted. These were found to cause signal integrity issues. Additionally, the silkscreen for R51 and R49 is swapped on the PCB.
  * R57 - R72 (Current limiting resistors for D12-D27), a value of 560 ohm was used instead of 10K ohm to increase their brightness.
