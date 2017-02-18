@@ -89,6 +89,18 @@ You can export an image, into either PNG or SVG.
  1. Click OK.
  1. Choose a place to save your file, and name your picture. 
 
+=== Import Paths ===
+
+n some cases, users may have external import paths which is usually a parameter to the camkes parser. In order to visualise these camkes projects, the user can add import paths by doing the following:
+
+ 1. Click Edit -> Add import paths
+ 1. In the dialog box, type (or paste) your import paths. These need to be absolute paths. To add many paths, have spaces between your paths.
+  a. E.g "/home/someUser/camkes-next/projects/FileExtender /home/someUser/camkes-next/projects/common"
+
+A keyboard shortcut is also implemented, `Cmd` + `I` or `Cmd` + `I` .
+
+=== Key-mappings ===
+
 The key-mappings are as follows:
 ||'''Task'''||'''Linux/Windows'''||'''Mac'''||
 ||Open      ||`Ctrl` + `O`||`Cmd` + `O`||
@@ -96,6 +108,7 @@ The key-mappings are as follows:
 ||Export (Save) Image ||`Ctrl` + `E`||`Cmd` + `E`||
 ||Zoom In||`Ctrl` + `=`||`Cmd` + `=`||
 ||Zoom Out||`Ctrl` + `-`||`Cmd` + `-`||
+||Add Import Paths||`Ctrl` + `I`||`Cmd` + `I`||
 
 == How it works ==
 === High level overview ===
