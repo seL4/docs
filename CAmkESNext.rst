@@ -38,6 +38,18 @@ pip install six tempita plyplus pyelftools orderedset jinja2
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
 
+On Archlinux:
+{{{#!highlight bash numbers=off
+pacman -S binutils gcc arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
+cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl
+
+yaourt -S cunit spin
+
+pip install six tempita plyplus pyelftools orderedset jinja2
+
+curl -sSL https://get.haskellstack.org/ | sh
+}}}
+
 If you are using Debian, or Ubuntu 16.10 or higher, you'll need to modify the compiler/linker flags for building ghc. Modify `~/.stack/programs/x86_64-linux/ghc-8.0.1/lib/ghc-8.0.1/settings`. Replace the lines:
 {{{
  ("C compiler flags", " -fno-stack-protector"),
