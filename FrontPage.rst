@@ -12,16 +12,17 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
 == seL4 Basics ==
 
  * [[Getting started]]
- * [[Suggested projects]]
- * [[Testing]]
  * [[Documentation]]
- * [[SeL4Libraries|seL4 libraries]]
  * [[Hardware|Hardware Support]]
+ * [[SeL4Libraries|seL4 libraries]]
+ * [[CAmkES]]
+ * [[Testing]]
  * [[Debugging guide]]
  * [[Benchmarking guide]]
- * [[CAmkES]]
- * [[Rust]]
  * [[Virtualisation on seL4]]
+ * [[Rust]]
+ * [[Userland Components and Drivers]]
+ * [[Suggested projects]]
  * CommunityProjects
 
 == Questions and Recipes ==
