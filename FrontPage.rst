@@ -21,7 +21,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Benchmarking guide]]
  * [[Virtualisation on seL4]]
  * [[Rust]]
- * eUserland Components and Drivers
+ * Userland Components and Drivers
  * [[Suggested projects]]
  * CommunityProjects
 
