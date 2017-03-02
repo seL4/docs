@@ -20,6 +20,13 @@ menuentry "Load seL4 VM"  --class os {
 }
 }}}
 
+
+Booting using [[http://www.syslinux.org/wiki/index.php?title=PXELINUX|syslinux PXEBOOT]] requires setting up a tftp and dhcp server on the network that the machine you want to boot is connected to.  This [[https://debian-administration.org/article/478/Setting_up_a_server_for_PXE_network_booting|debian page]] explains how to setup a tftp and dhcp server, and the [[http://www.syslinux.org/wiki/index.php?title=Download| syslinux]] site has a download for pxelinux which we load over PXEBOOT that then can load seL4.  The configuration for `pxelinux.cfg/default` is provided below.
+{{{
+label seL4
+	kernel 	mboot.c32
+	append kernel-ia32-pc99 --- apps-ia32-pc99
+}}}
 == Booting off USB with syslinux ==
 
 Use syslinux to create a bootable USB stick as follows.
