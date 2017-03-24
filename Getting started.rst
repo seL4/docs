@@ -44,6 +44,8 @@ Read the [[Hardware]] pages to see a list of supported platforms, and special in
 == Setting up your machine ==
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
+You can also use Docker to isolate the dependencies from your machine. Instructions for using Docker for building seL4, CAmkES, and L4v can be found [[https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles|here]].
+
 === Getting the source code ===
 ==== Get Google's "Repo" tool ====
 Repo is a tool by Google used for managing multiple git repositories. All the SEL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
