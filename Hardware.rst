@@ -17,9 +17,9 @@
 ||[[Hardware/zynq7000|Zynq 7000]] ||A9||v7A||-||-||unverified||Data61||Data61||  ||
 ||[[Hardware/BeagleBoard|BeagleBoard (OMAP3)]] ||A8||v7||-||-||unverified||Data61||Data61|| ||
 ||[[Hardware/Beaglebone|Beaglebone Black (AM335x)]] ||A8||v7||-||-||unverified||external||Data61 regression tested|| ||
-||[[Hardware/odriod-XU|Odroid-XU (Exynos5)]] ||A15||v7A||ARM HYP||limited System MMU||unverified||Data61||Data61|| Has virtualisation extensions ||
+||[[Hardware/odriod-XU|Odroid-XU (Exynos5)]] ||A15||v7A||ARM HYP||limited System MMU||unverified||Data61||Data61||  ||
 ||[[Hardware/arndale|Arndale (Exynos5)]] ||A15||v7A||-||-||unverified||Data61||not regression tested but same SoC as Odroid-XU|| ||
-||[[Hardware/jetsontk1|NVIDIA Tegra K1]] ||A15||v7-1||ARM HYP||System MMU||unverified||Data61||Data61|| Has virtualisation extensions ||
+||[[Hardware/jetsontk1|NVIDIA Tegra K1]] ||A15||v7-1||ARM HYP||System MMU||unverified||Data61||Data61|| ||
 ||[[Hardware/CEI_TK1_SOM|Colorado Engineering TK1 SOM]] ||A15||v7-1||ARM HYP||System MMU||unverified||Data61||Data61||Small form-factor, similar to the Tegra K1||
 ||[[Hardware/odroidx|Odroid-X]] ||A15||v7A||-||-||unverified||Data61||Data61||  ||
 ||[[Hardware/IF6410|Inforce IFC6410]] || krait (A15-like) ||v7||-||-||unverified||Data61||Data61|| Qualcomm reimplementation of Armv7||
