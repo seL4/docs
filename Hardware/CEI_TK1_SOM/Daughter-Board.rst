@@ -190,9 +190,11 @@ You want to connect TX (converter) to RX on the TK1, and RX (converter) to TX on
 <<Anchor(errata)>>
 
 === Technical errata for R3A, to be fixed next revision ===
+ * The 'power out to pixhawk' connection on the daughterboard should not be used as it may cause a rail collision.
+ * All I2C lines CLK and DAT lines are reversed due to an error in the schematic supplied to us by CEI; this has been modwired to the correct connection on some boards.
  * U8 (LSM303D, one of the many inertial sensors) is not mounted due to a footprint error.
  * D10 & D11 CAN Reset diodes are not mounted on some boards. This has been tested OK, the diodes are just to improve CAN chip reset times - but we aren't actually using the CAN reset line.
- * R35 & R45 to supply power through the CAN ports --(ARE)-- ARE NOT mounted.
+ * R35 & R45 to supply power through the CAN ports --(ARE)-- ARE NOT mounted, and should never be to avoid rail collisions.
  * The LV cutout circuitry does not seem to work reliably. Since the IRIS battery is disconnected when not in use anyway, this should not be a huge issue.
  * On schematic sheet 5, the 'Do not populate' remarks indicate the wrong designators. They should indicate R35 & R45.
  * R40 & R49 pull-ups on the SPI CSN line are not mounted. These were found to cause signal integrity issues. Additionally, the silkscreen for R51 and R49 is swapped on the PCB.
