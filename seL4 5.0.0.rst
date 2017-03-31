@@ -12,13 +12,14 @@ Generic changes:
 x86 specific changes:
     Pass VBE information from multiboot through bootinfo
     Remove PAE support
+
 x86-64 specific changes:
-    VT-x related cap and object definitions
-    seL4_VMEnter syscall
+    VT-x related cap and object definitions added
+    seL4_VMEnter syscall added
 
 arm specific changes:
-    ARM-HYP: VCPU interface for manipulating banked registers
-    plat: add tx1 support
+    ARM-HYP: VCPU interface for manipulating banked registers added
+    plat: added nvidia tx1 support
     ARM-HYP: Add support for save/restore of debug registers
     Add aarch64 implementation
    
