@@ -3,25 +3,25 @@ Announcing the release of {{{seL4 5.0.0}}} with the following changes:
 
 Below are the changes to the seL4 ABI and API: 
 Generic changes:
-    Add missing case to seL4_getFault (seL4_Fault_DebugException)
-    Explicitly pack bootinfo data structures
-    Modify FinalizeLog syscall - Now returns a number of entries in the log
-    Extend bootinfo to support potentially arbitrary additional structures
-    Deprecate bootinfo management in libsel4 - a replacement, platsupport_get_bootinfo can be found in libsel4platsupport
+ * Add missing case to seL4_getFault (seL4_Fault_DebugException)
+ * Explicitly pack bootinfo data structures
+ * Modify FinalizeLog syscall - Now returns a number of entries in the log
+ * Extend bootinfo to support potentially arbitrary additional structures
+ * Deprecate bootinfo management in libsel4 - a replacement, platsupport_get_bootinfo can be found in libsel4platsupport
 
 x86 specific changes:
-    Pass VBE information from multiboot through bootinfo
-    Remove PAE support
+ * Pass VBE information from multiboot through bootinfo
+ * Remove PAE support
 
 x86-64 specific changes:
-    VT-x related cap and object definitions added
-    seL4_VMEnter syscall added
+ * VT-x related cap and object definitions added
+ * seL4_VMEnter syscall added
 
 arm specific changes:
-    ARM-HYP: VCPU interface for manipulating banked registers added
-    plat: added nvidia tx1 support
-    ARM-HYP: Add support for save/restore of debug registers
-    Add aarch64 implementation
+ * ARM-HYP: VCPU interface for manipulating banked registers added
+ * plat: added nvidia tx1 support
+ * ARM-HYP: Add support for save/restore of debug registers
+ * Add aarch64 implementation
    
 = Upgrade notes =
 
