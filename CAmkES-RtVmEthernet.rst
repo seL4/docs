@@ -1,6 +1,6 @@
 = Case Study: Building an app with a vm, a native ethernet driver, on the RT kernel, with CAmkES =
 
-This is a log of what I had to do to implement a CAmkES application with a vm and a native ethernet driver on the RT kernel. It should serve as a guide to others on how to approach the task of making a new CAmkES app, and how to debug and resolve problems that come up when working with CAmkES.
+This is a log of what I had to do to implement a CAmkES application with a vm and a native ethernet driver on the RT kernel. It should serve as a guide to others on how to approach the task of making a new CAmkES app, and how to debug and resolve problems that come up when working with CAmkES. This isn't a tutorial. Things will break and I'll show how I fix them, but as I'm working off the tip of repos, some of which are internal forks that aren't publicly accessible, readers probably won't be able to reproduce what I show here. That said, it should serve to demonstrate a realistic workflow of building an app on seL4.
 
 == Starting Out ==
 
