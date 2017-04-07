@@ -58,6 +58,33 @@ make x64_optiplex9020_onevm_defconfig
 
 And try building...
 {{{
+$ make                                                                                                                                               12:12:45
+[KERNEL]
+ [BF_GEN] arch/object/structures_gen.h
+ [BF_GEN] plat/64/plat_mode/machine/hardware_gen.h
+ [BF_GEN] 64/mode/api/shared_types_gen.h
+ [CPP] src/arch/x86/64/machine_asm.s_pp
+ [AS] src/arch/x86/64/machine_asm.o
+ [CPP] src/arch/x86/64/traps.s_pp
+ [AS] src/arch/x86/64/traps.o
+ [CPP] src/arch/x86/64/head.s_pp
+ [AS] src/arch/x86/64/head.o
+ [CPP] src/arch/x86/multiboot.s_pp
+ [AS] src/arch/x86/multiboot.o
+ [CPP_GEN] kernel_all.c
+ [CPP] kernel_all.c_pp
+ [Circular includes] kernel_all.c_pp
+ [CP] kernel_final.c
+ [CC] kernel_final.s
+/home/ssteve/src/camkes-rt-vm-ethernet/kernel/src/object/notification.c: In function ‘sendSignal’:
+/home/ssteve/src/camkes-rt-vm-ethernet/kernel/src/object/notification.c:94:45: error: ‘thread’ undeclared (first use in this function)
+                     maybeDonateSchedContext(thread, ntfnPtr);
+}}}
+
+Easy fix. The "thread" variable was renamed to "tcb" and this instance wasn't updated.
+
+Try building again...
+{{{
 make
 ...
 [apps/capdl-loader-experimental] building...
