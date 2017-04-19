@@ -20,6 +20,10 @@ The development framework provides:
 {{{#!highlight bash numbers=off
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
+OR
+{{{#!highlight bash numbers=off
+sudo apt-get install haskell-stack
+}}}
 
  * Install python packages jinja2, ply, pyelftools (via pip):
 
