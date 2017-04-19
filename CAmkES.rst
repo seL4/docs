@@ -31,7 +31,10 @@ sudo apt-get install haskell-stack
 apt-get install python-pip
 pip install --user pyelftools ply jinja2
 }}}
-
+OR
+{{{#!highlight bash numbers=off
+sudo apt-get install python-ply python-jinja2 python-pyelftools
+}}}
  * If building on a 64-bit system ensure 32-bit compiler tools are installed, mainly:
 
 {{{#!highlight bash numbers=off
