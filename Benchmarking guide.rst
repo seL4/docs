@@ -150,5 +150,39 @@ printf("Idle thread utilisation = %llu\n", ipcbuffer[BENCHMARK_IDLE_UTILISATION]
 printf("Overall utilisation = %llu\n", ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
 }}}
 
+== Track Kernel Entries ==
+Kernel entries can be tracked, registering info about interrupts, syscall, timestamp, invocations and capability types. The number of kernel entries is restricted by the log buffer size. The kernel 
+provides a reserved area within its address space to map the log buffer. It's the responsibility of the user to allocate a user-level log buffer (currently can be only of seL4_LargePageBits size)
+and pass it to the kernel to use before doing any operations that involve the log buffer, otherwise an error will be triggered having incorrect user-level log buffer. To enable this feature, select
+CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES from menuconfig.
+
+An example how to create a user-level log buffer (using sel4 libraries) and tell the kernel about it is as follows:
+
+{{{#!cplusplus numbers=off
+
+#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
+
+#include <sel4/benchmark_track_types.h>
+
+    /* Create large page to use for benchmarking and give to kernel */
+    void *log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1, seL4_LargePageBits);
+    if (log_buffer == NULL) {
+        ZF_LOGF("Could not map log_buffer page");
+    }
+    seL4_CPtr buffer_cap = vspace_get_cap(&env.vspace, log_buffer);
+    if (buffer_cap == NULL) {
+        ZF_LOGF("Could not get cap for log buffer");
+    }
+    int res_buf = seL4_BenchmarkSetLogBuffer(buffer_cap);
+    if (res_buf) {
+        ZF_LOGF("Could not set log buffer");
+    }
+#endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
+}}}
+
+seL4_BenchmarkResetLog() can be used then to reset the log buffer index and start tracking. To stop tracking, call seL4_BenchmarkFinalizeLog() which returns the log buffer index. Note, if the buffer is full/saturated,
+it will return the last entry index of the log buffer. Finally, the log buffer can be analyzed to extract desired info. For reference, there are utility functions to extract such information in [[https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/benchmark_track.h|sel4utils/benchmark_track.h]].
+
+
 === Hints ===
 If you want only entry or exit times instead of function call durations, modify line 56 of kernel/include/benchmark.h. This might be useful if you wish to time hardware events. For example, should you wish to time how long it takes for hardware to generate a fault to the kernel, perhaps record the cycle counter before causing the fault in userspace, then store the `ksEntry` as soon as you enter somewhere relevant in the kernel, and then compare the difference of these two once you return to userspace, by reading out the value and taking the difference.
