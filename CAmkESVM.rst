@@ -23,6 +23,8 @@ Welcome to Buildroot
 buildroot login:
 }}}
 
+The linux running here was built using [[https://buildroot.org/|buildroot]]. This tool creates a compatible kernel and root filesystem with busybox and not much else, and runs on a ramdisk (the actual hard drive isn't mounted). Login with the username "root" and the password "root".
+
 == Quick walk through the source code ==
 
 The top level CAmkES spec is in apps/cma34cr_minimal/vm.camkes:
@@ -89,4 +91,141 @@ ${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/linux/${ROOTFS_FILENAME}
 ...
 }}}
 
-Both these rules refer to the "linux" directory, located at projects/vm/linux. It contains some tools for building new linux kernel and root filesystem images, as well as the images that these tools produce. A fresh checkout of this project will contain some pre-build images (bzimage and rootfs.cpio), to speed up build times. We'll get much more familiar with this directory later on.
+Both these rules refer to the "linux" directory, located at projects/vm/linux. It contains some tools for building new linux kernel and root filesystem images, as well as the images that these tools produce. A fresh checkout of this project will contain some pre-build images (bzimage and rootfs.cpio), to speed up build times.
+
+== Adding to the guest ==
+
+In the simple buildroot guest image, the initrd (rootfs.cpio) is also the filesystem you get access to after logging in. To make new programs available to the guest, add them to the rootfs.cpio archive. Similarly, to make new kernel modules available to the guest, they must be added to the rootfs.cpio archive also. The "linux" directory contains a tool called "build-rootfs", which is unrelated to the unfortunately similarly-named buildroot, which generates a new rootfs.cpio archive based on a starting point (rootfs-bare.cpio), and a collection of programs and modules. It also allows you to specify what happens when the system starts, and install some camkes-specific initialization code.
+
+Here's a summary of what the build-rootfs tool does:
+1. Download the linux source (unless it's already been downloaded). This is required for compiling kernel modules. The version of linux must match the one used to build bzimage.
+2. Copy some config files into the linux source so it builds the modules the way we like.
+3. Prepare the linux source for building modules (make prepare; make modules_prepare).
+4. Extract the starting-point root filesystem (rootfs-bare.cpio).
+5. Build all kernel modules in the "modules" directory, placing the output in the extracted root filesystem.
+6. Create an init script by instantiating the "init_template" file with information about the linux version we're using.
+7. Add camkes-specific initialization from the "camkes_init" file to the init.d directory in the extracted root filesystem.
+8. Build custom libraries that programs will use, located in the "lib_src" directory.
+9. Build each program in the "pkg" directory, statically linked, placing the output in the extracted root filesystem.
+10. Copy all the files in the "text" directory to the "opt" directory in the extracted root filesystem.
+11. Create a CPIO archive from the extracted root filesystem, creating the rootfs.cpio file.
+
+=== Adding a program ===
+
+Let's add a simple program!
+
+Make a new directory at projects/vm/linux/pkg/hello.
+{{{
+mkdir projects/vm/linux/pkg/hello
+}}}
+
+Make a simple C program in projects/vm/linux/pkg/hello/hello.c
+{{{
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    printf("Hello, World!\n");
+    return 0;
+}
+}}}
+
+And a Makefile in projects/vm/linux/pkg/hello/Makefile:
+{{{
+TARGET = hello
+
+include ../../common.mk
+include ../../common_app.mk
+}}}
+
+Basic rules like turning .c files into .o files and statically linking all .o files into TARGET are stored in the common makefile stubs included by this file.
+
+Run the "build-rootfs" script to update the rootfs.cpio file to include our new "hello" program.
+
+Rebuild the app:
+{{{
+make
+}}}
+
+Running the app:
+{{{
+buildroot login: root
+Password:
+# hello
+Hello, World!
+}}}
+
+=== Adding a kernel module ===
+
+We're going to add a new kernel module that lets us poke the vmm.
+
+Make a new directory in projects/vm/linux/modules/poke:
+{{{
+mkdir projects/vm/linux/modules/poke
+}}}
+
+Implement the module in projects/vm/linux/modules/poke/poke.c. Initially we'll just get the module building and running, and then take care of communicating between the module and the vmm. For simplicity, we'll make it so when a special file associated with this module is opened, the attempt to open fails, and the vmm gets poked.
+{{{
+#include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/init.h>
+#include <linux/fs.h>
+
+#include <asm/uaccess.h>
+#include <asm/kvm_para.h>
+#include <asm/io.h>
+#include <poke.h>
+
+#define DEVICE_NAME "poke"
+
+static int major_number;
+
+static int poke_open(struct inode *inode, struct file *file) {
+    printk("poke\n"); // TODO: change to hypercall
+    return ENODEV;
+}
+
+struct file_operations fops = { 
+    .open = poke_open,
+};
+
+static int __init poke_init(void) {
+    major_number = register_chrdev(0, DEVICE_NAME, &fops);
+    printk(KERN_INFO "%s initialized with major number %d\n", DEVICE_NAME, major_number);
+    return 0;
+}
+
+static void __exit poke_exit(void) {
+    unregister_chrdev(major_number, DEVICE_NAME);
+    printk(KERN_INFO "%s exit\n", DEVICE_NAME);
+}
+
+module_init(poke_init);
+module_exit(poke_exit);
+}}}
+
+And a makefile in projects/vm/linux/modules/poke/Makefile:
+{{{
+obj-m += poke.o
+CFLAGS_poke.o = -I../../include -I../../../common/shared_include
+
+all:
+    make -C $(KHEAD) M=$(PWD) modules
+
+clean:
+    make -C $(KHEAD) M=$(PWD) clean
+}}}
+
+And to make our module get loaded during initialization, edit projects/vm/linux/init_template:
+{{{
+...
+insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/dataport.ko
+insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/consumes_event.ko
+insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/emits_event.ko
+insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko            # <-- add this line
+...
+}}}
+
+Run the build-rootfs tool, then make and run the app:
+{{{
+
+}}}
