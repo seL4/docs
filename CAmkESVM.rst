@@ -175,7 +175,7 @@ Implement the module in projects/vm/linux/modules/poke/poke.c. Initially we'll j
 static int major_number;
 
 static ssize_t poke_write(struct file *f, const char __user *b, size_t s, loff_t *o) {
-    printk("hi\n");
+    printk("hi\n");  // TODO replace with hypercall
     return s;
 }
 
