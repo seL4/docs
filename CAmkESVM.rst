@@ -33,7 +33,8 @@ assembly {
         component VM vm;
     }
 }
-}}}struct file *, const char __user *, size_t, loff_t *
+}}}
+
 This is a very simple app, with a single vm, and nothing else. Each different vm app will have its own implementation of the `VM` component, where the guest environment is configured. For this app, the `VM` component is defined in apps/cma34cr_minimal/cma34cr.camkes:
 
 {{{
