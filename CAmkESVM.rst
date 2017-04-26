@@ -73,6 +73,20 @@ Most of the work here is done by five C preprocessor macros: VM_INIT_DEF, VM_COM
 
 These are all defined in projects/vm/components/VM/configurations/vm.h, and are concerned with specifying and configuring components that all VM(M)s need.
 
-The `Init0` component corresponds to a single guest. Because of some rules in the cpp macros, the Ith guest in your system must be defined as a component named InitI.
+The `Init0` component corresponds to a single guest. Because of some rules in the cpp macros, the Ith guest in your system must be defined as a component named InitI. InitI components will be instantiated in the composition section by the VM_PER_VM_COMP_DEF macro with instance names vmI. The vm0 component instance being configured above is an instance of Init0. The C source code for InitI components is in projects/vm/components/Init/src. This source will be used for components named InitI for I in 0..VM_NUM_VM - 1, where VM_NUM_VM is defined in the app's Makefile (apps/cma34cr_minimal/Makefile).
 
 The values of VM_GUEST_CMDLINE, KERNEL_IMAGE and ROOTFS are in apps/cma34cr_minimal/configurations/cma34cr_minimal.h. They are all strings, specifying the guest linux boot arguments, the name of the guest linux kernel image file, and the name of the guest linux initrd file (root filesystem to use during system initialization). KERNEL_IMAGE and ROOTFS refer to file names. These are the names of files in a CPIO archive that gets created by the build system, and linked into the VMM. The VMM uses the the KERNEL_IMAGE and ROOTFS names to find the appropriate files in this archive when preparing to boot the guest.
+
+The local files used to construct the CPIO archive are specified in the app's Makefile, located at apps/cma34cr_minimal/Makefile:
+{{{
+...
+KERNEL_FILENAME := bzimage
+ROOTFS_FILENAME := rootfs.cpio
+...
+${STAGE_DIR}/${KERNEL_FILENAME}: $(SOURCE_DIR)/linux/${KERNEL_FILENAME}
+...
+${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/linux/${ROOTFS_FILENAME}
+...
+}}}
+
+Both these rules refer to the "linux" directory, located at projects/vm/linux. It contains some tools for building new linux kernel and root filesystem images, as well as the images that these tools produce. A fresh checkout of this project will contain some pre-build images (bzimage and rootfs.cpio), to speed up build times. We'll get much more familiar with this directory later on.
