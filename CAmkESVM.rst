@@ -34,7 +34,6 @@ assembly {
     }
 }
 }}}
-
 This is a very simple app, with a single vm, and nothing else. Each different vm app will have its own implementation of the `VM` component, where the guest environment is configured. For this app, the `VM` component is defined in apps/cma34cr_minimal/cma34cr.camkes:
 
 {{{
@@ -92,7 +91,19 @@ Both these rules refer to the "linux" directory, located at projects/vm/linux. I
 == Adding to the guest ==
 In the simple buildroot guest image, the initrd (rootfs.cpio) is also the filesystem you get access to after logging in. To make new programs available to the guest, add them to the rootfs.cpio archive. Similarly, to make new kernel modules available to the guest, they must be added to the rootfs.cpio archive also. The "linux" directory contains a tool called "build-rootfs", which is unrelated to the unfortunately similarly-named buildroot, which generates a new rootfs.cpio archive based on a starting point (rootfs-bare.cpio), and a collection of programs and modules. It also allows you to specify what happens when the system starts, and install some camkes-specific initialization code.
 
-Here's a summary of what the build-rootfs tool does: 1. Download the linux source (unless it's already been downloaded). This is required for compiling kernel modules. The version of linux must match the one used to build bzimage. 2. Copy some config files into the linux source so it builds the modules the way we like. 3. Prepare the linux source for building modules (make prepare; make modules_prepare). 4. Extract the starting-point root filesystem (rootfs-bare.cpio). 5. Build all kernel modules in the "modules" directory, placing the output in the extracted root filesystem. 6. Create an init script by instantiating the "init_template" file with information about the linux version we're using. 7. Add camkes-specific initialization from the "camkes_init" file to the init.d directory in the extracted root filesystem. 8. Build custom libraries that programs will use, located in the "lib_src" directory. 9. Build each program in the "pkg" directory, statically linked, placing the output in the extracted root filesystem. 10. Copy all the files in the "text" directory to the "opt" directory in the extracted root filesystem. 11. Create a CPIO archive from the extracted root filesystem, creating the rootfs.cpio file.
+Here's a summary of what the build-rootfs tool does:
+
+ 1. Download the linux source (unless it's already been downloaded). This is required for compiling kernel modules. The version of linux must match the one used to build bzimage.
+ 1. Copy some config files into the linux source so it builds the modules the way we like.
+ 1. Prepare the linux source for building modules (make prepare; make modules_prepare).
+ 1. Extract the starting-point root filesystem (rootfs-bare.cpio).
+ 1. Build all kernel modules in the "modules" directory, placing the output in the extracted root filesystem.
+ 1. Create an init script by instantiating the "init_template" file with information about the linux version we're using.
+ 1. Add camkes-specific initialization from the "camkes_init" file to the init.d directory in the extracted root filesystem.
+ 1. Build custom libraries that programs will use, located in the "lib_src" directory.
+ 1. Build each program in the "pkg" directory, statically linked, placing the output in the extracted root filesystem.
+ 1. Copy all the files in the "text" directory to the "opt" directory in the extracted root filesystem.
+ 1. Create a CPIO archive from the extracted root filesystem, creating the rootfs.cpio file.
 
 === Adding a program ===
 Let's add a simple program!
@@ -166,8 +177,8 @@ static int major_number;
 static ssize_t poke_write(struct file *f, const char __user *b, size_t s, loff_t *o) {
     printk("hi\n");
     return s;
-}     
-          
+}
+
 struct file_operations fops = {
     .write = poke_write,
 };
@@ -221,41 +232,41 @@ Password:
 [   57.389643] hi
 -sh: write error: Bad address     # the shell complains, but our module is being invoked!
 }}}
-
 Now let's make it talk to the vmm. In poke.c, replace
+
 {{{
     printk("hi\n");
 }}}
 with
+
 {{{
     kvm_hypercall1(4, 0);
 }}}
-
 The choice of 4 is because 0..3 are taken by other hypercalls.
 
-Now we need to register a handler for this hypercall. Open the file projects/vm/components/Init/src/main.c:
-Add a new function at the top of the file:
+Now we need to register a handler for this hypercall. Open the file projects/vm/components/Init/src/main.c: Add a new function at the top of the file:
+
 {{{
 static int poke_handler(vmm_vcpu_t *vcpu) {
     printf("POKE!!!\n");
     return 0;
 }
 }}}
-
 Now, in the function "main_continued", right before the call to "vmm_run", register the poke_handler:
+
 {{{
-    reg_new_handler(&vmm, poke_handler, 4); 
+    reg_new_handler(&vmm, poke_handler, 4);
 
     /* Now go run the event loop */
     vmm_run(&vmm);
 }}}
-
 Now re-run build-rootfs, make, and run:
+
 {{{
 Welcome to Buildroot
 buildroot login: root
 Password:
-# mknod /dev/poke c 244 0 
-# echo > /dev/poke 
+# mknod /dev/poke c 244 0
+# echo > /dev/poke
 POKE!!!
 }}}
