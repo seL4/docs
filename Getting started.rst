@@ -42,11 +42,16 @@ Other projects may be added later.
 Read the [[Hardware]] pages to see a list of supported platforms, and special instructions for particular hardware platforms.
 
 == Setting up your machine ==
-These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
+You can setup all the dependencies on your local OS, or you may choose to use Docker.
+
+=== Using Docker ===
 You can also use Docker to isolate the dependencies from your machine. Instructions for using Docker for building seL4, CAmkES, and L4v can be found [[https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles|here]].
 
-=== Getting the source code ===
+
+=== Using your local OS ===
+These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
+
 ==== Get Google's "Repo" tool ====
 Repo is a tool by Google used for managing multiple git repositories. All the SEL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
 
@@ -66,13 +71,13 @@ To get the actual project and subproject source, you'll then need to use repo sy
 {{{
 repo sync
 }}}
-=== Getting cross compilers ===
+==== Getting cross compilers ====
 There are instructions on how to get cross compilers for building ARM. We only have direct instructions for Debian/Ubuntu/Fedora, but we imagine you should be able to substitute where necessary for your distro. Instructions should be similar for other distros, links to toolchains for other distros are provided.
 
  * [[SetupFedora|Cross compiler and general instructions for Fedora and CentOS (RHEL should work as well)]]
  * [[SetupUbuntu|Cross compilers for Debian and Ubuntu]]
 
-=== Build Dependencies ===
+==== Build Dependencies ====
 The build dependencies for SEL4 can be found in the {{{Prerequisites.md}}} ([[https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md|Click!]]) file in the root of the SEL4-tutorials GIT repository.
 
 == Start with the SEL4 tutorials ==
