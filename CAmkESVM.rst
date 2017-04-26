@@ -148,6 +148,7 @@ make
 
 Running the app:
 {{{
+Welcome to Buildroot
 buildroot login: root
 Password:
 # hello
@@ -227,5 +228,12 @@ insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko            # <-
 
 Run the build-rootfs tool, then make and run the app:
 {{{
-
+Welcome to Buildroot
+buildroot login: root
+Password: 
+# cat /proc/devices | grep poke   # figure out the major number of our driver
+244 poke
+# mknod /dev/poke c 244 0         # create the special file
+# cat /dev/poke                   # do something that will open the file
+[  119.873330] hi
 }}}
