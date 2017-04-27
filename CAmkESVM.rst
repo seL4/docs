@@ -295,3 +295,72 @@ A guest process emits an event by making `ioctl` call on the file associated wit
 ==== Consuming Events ====
 
 Consuming events is complicated because we'd like for a process in the guest to be able to block, waiting for an event, without blocking the entire VM. A linux process can wait or poll for an event by calling poll on the file associated with that event, using the timeout argument to specify whether or not it should block. The event it polls for is POLLIN. When the VMM receives an event destined for the guest, it places the event id in some memory shared between the VMM and the consumes_event kernel module, and then injects an interrupt into the guest. The consumes_event kernel module is registered to handle this interrupt, which reads the event id from shared memory, and wakes a thread blocked on the corresponding event file. If no threads are blocked on the file, some state is set in the module such that the next time a process waits on that file, it returns immediately and clears the state, mimicking the behaviour of notifications.
+
+=== Using Cross VM Events ===
+
+We'll create a program that runs in the guest, and prints a string by sending it to a CAmkES component. The guest program will write a string to a shared buffer between itself and a CAmkES component. When its ready for the string to be printed, it will emit an event, received by the CAmkES component. The CAmkES component will print the string, then send an event to the guest process so the guest knows it's safe to send a new string.
+
+We'll start on the CAmkES side. Edit apps/cma34cr_minimal/cma34cr.camkes, adding the following interfaces to the Init0 component definition:
+{{{
+component Init0 {
+    VM_INIT_DEF()
+
+    // Add the following three lines:
+    dataport Buf(4096) print_data;
+    emits DoPrint do_print;
+    consumes DonePrinting done_printing;
+}
+}}}
+
+These interfaces will eventually be made visible to processes running in the guest linux. Now, we'll define the print server component. Add the following to apps/cma34cr_minimal/cma34cr.camkes:
+{{{                     
+component PrintServer {
+    dataport Buf(4096) data;
+    consumes DoPrint do_print;
+    emits DonePrinting done_printing;
+}
+}}}
+
+We'll get around to actually implementing this soon. First, let's instantiate the print server and connect it to the VMM. Add the following to the composition section in apps/cma34cr_minimal/cma34cr.camkes:
+{{{
+component VM {
+
+    composition {
+        VM_COMPOSITION_DEF()
+        VM_PER_VM_COMP_DEF(0)
+
+        // Add the following component and connections:
+        component PrintServer print_server;
+        connection seL4Notification conn_do_print(from vm0.do_print,
+                                                 to print_server.do_print);
+        connection seL4Notification conn_done_printing(from print_server.done_printing,
+                                                      to vm0.done_printing);
+
+        connection seL4SharedDataWithCaps conn_data(from print_server.data,
+                                                    to vm0.data);
+    }
+...
+}}}
+
+The only thing unusual about that was the seL4SharedDataWithCaps connector. This is a dataport connector much like seL4SharedData. The only difference is that the "to" side of the connection gets access to the caps to the frames backing the dataport. This is necessary from cross vm dataports, as the VMM must be able to establish shared memory at runtime, by inserting new mappings into the guest's address space, which requires caps to the physical memory being mapped in.
+
+Interfaces connected with seL4SharedDataWithCaps must be configured with an integer specifying the id of the dataport, and the size of the dataport. Add the following to the configuration section in apps/cma34cr_minimal/cma34cr.camkes:
+{{{
+    configuration {
+        VM_CONFIGURATION_DEF()
+        VM_PER_VM_CONFIG_DEF(0, 2)
+
+        vm0.simple_untyped24_pool = 12;
+        vm0.heap_size = 0x10000;
+        vm0.guest_ram_mb = 128;
+        vm0.kernel_cmdline = VM_GUEST_CMDLINE;
+        vm0.kernel_image = KERNEL_IMAGE;
+        vm0.kernel_relocs = KERNEL_IMAGE;
+        vm0.initrd_image = ROOTFS;
+        vm0.iospace_domain = 0x0f;
+
+        // Add the following 2 lines:
+        vm0.data_id = 1; // ids must be contiguous, starting from 1
+        vm0.data_size = 4096;
+    }
+}}}
