@@ -21,8 +21,10 @@ To get a usable build system, install the Development Tools group, '''which, ncu
 Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools.
 
 You can get most of them from the repositories; some Haskell and python libraries have to be installed manually.
+On CentOS you'll need to enable the EPEL repository to be able to install Haskell.
 
 {{{
+  sudo yum install epel-release
   sudo yum groupinstall haskell
   sudo yum install cabal-install
   cabal update
@@ -47,6 +49,7 @@ CentOS has no pre-built arm toolchain or qemu. You will have to get cross compil
 CentOS also does not prepackage qemu. You will have to build it from source.
 
 {{{
+  sudo yum install glib2-devel
   git clone git://git.qemu.org/qemu.git
   cd qemu
   ./configure --target-list=arm-softmmu
