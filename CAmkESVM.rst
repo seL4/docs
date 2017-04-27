@@ -298,7 +298,7 @@ A guest process emits an event by making `ioctl` call on the file associated wit
 
 Consuming events is complicated because we'd like for a process in the guest to be able to block, waiting for an event, without blocking the entire VM. A linux process can wait or poll for an event by calling poll on the file associated with that event, using the timeout argument to specify whether or not it should block. The event it polls for is POLLIN. When the VMM receives an event destined for the guest, it places the event id in some memory shared between the VMM and the consumes_event kernel module, and then injects an interrupt into the guest. The consumes_event kernel module is registered to handle this interrupt, which reads the event id from shared memory, and wakes a thread blocked on the corresponding event file. If no threads are blocked on the file, some state is set in the module such that the next time a process waits on that file, it returns immediately and clears the state, mimicking the behaviour of notifications.
 
-=== Using Cross VM Events ===
+=== Using Cross VM Connections ===
 
 We'll create a program that runs in the guest, and prints a string by sending it to a CAmkES component. The guest program will write a string to a shared buffer between itself and a CAmkES component. When its ready for the string to be printed, it will emit an event, received by the CAmkES component. The CAmkES component will print the string, then send an event to the guest process so the guest knows it's safe to send a new string.
 
