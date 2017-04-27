@@ -45,7 +45,7 @@ To build for any of the ARM targets you need an arm cross compiler; to run on th
 <<Anchor(centos)>>
 == CentOS ==
 
-Cross compilers are available from the EPEL repository in CentOS 6 or earlier.  For CentOS 7 use the Fedora instructions.
+Cross compilers are available from the EPEL repository.
 Do
 {{{
   sudo yum install gcc-arm-linux-gnu
