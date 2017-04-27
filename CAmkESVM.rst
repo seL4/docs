@@ -270,3 +270,28 @@ Password:
 # echo > /dev/poke
 POKE!!!
 }}}
+
+== Cross VM Connectors ==
+
+It's possible to connect processes in the guest linux to regular CAmkES components. This is done with the addition of 3 kernel modules to the guest linux, that allow device files to be created that correspond to CAmkES connections. Depending on the type of connection, there are some file operations defined for these files that can be used to communicate with the other end of the connection.
+
+The kernel modules are included in the root filesystem by default:
+ * dataport: facilitates setting up shared memory between the guest and CAmkES components
+ * consumes_event: allows a process in the guest to wait or poll for an event sent by a CAmkES component
+ * emits_event: allows a process to emit an event to a CAmkES component
+
+There is a library in projects/vm/linux/lib_src/camkes containing some linux syscall wrappers, and some utility programs in projects/vm/linux/pkg/{dataport,consumes_event,emits_event} which initialize and interact with cross vm connections.
+
+=== Implementation Details ===
+
+==== Dataports ====
+
+In order for linux to use a dataport, it must first be initialized. To initialize a dataport, a linux process makes a particular `ioctl` call on the file associated with the dataport, specifying the page-aligned size of the dataport. The dataport kernel module then allocates a page-aligned buffer of the appropriate size, and makes a hypercall to the VMM, passing it the guest physical address of this buffer, along with the id of the dataport, determined by the file on which ioctl was called. The VMM then modifies the guest's address space, updating the mappings from the specified gpaddr to point to the physical memory backing the dataport seen by the other end of the connection. This results in a region of shared memory existing between a camkes component and the guest. Linux processes can then map this memory into their own address space by calling `mmap` on the file associated with the dataport.
+
+==== Emitting Events ====
+
+A guest process emits an event by making `ioctl` call on the file associated with the event interface. This results in the emits_event kernel module making a hypercall to the VMM, passing it the id of the event interface determined by the file being ioctl'd. The VMM then emits the real event (which doesn't block - events are notifications), and then immediately resumes the guest running.
+
+==== Consuming Events ====
+
+Consuming events is complicated because we'd like for a process in the guest to be able to block, waiting for an event, without blocking the entire VM. A linux process can wait or poll for an event by calling poll on the file associated with that event, using the timeout argument to specify whether or not it should block. The event it polls for is POLLIN. When the VMM receives an event destined for the guest, it places the event id in some memory shared between the VMM and the consumes_event kernel module, and then injects an interrupt into the guest. The consumes_event kernel module is registered to handle this interrupt, which reads the event id from shared memory, and wakes a thread blocked on the corresponding event file. If no threads are blocked on the file, some state is set in the module such that the next time a process waits on that file, it returns immediately and clears the state, mimicking the behaviour of notifications.
