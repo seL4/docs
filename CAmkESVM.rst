@@ -130,8 +130,10 @@ TARGET = hello
 
 include ../../common.mk
 include ../../common_app.mk
+
+hello: hello.o
+    $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 }}}
-Basic rules like turning .c files into .o files and statically linking all .o files into TARGET are stored in the common makefile stubs included by this file.
 
 Run the "build-rootfs" script to update the rootfs.cpio file to include our new "hello" program.
 
@@ -305,16 +307,20 @@ We'll start on the CAmkES side. Edit apps/cma34cr_minimal/cma34cr.camkes, adding
 component Init0 {
     VM_INIT_DEF()
 
-    // Add the following three lines:
+    // Add the following four lines:
     dataport Buf(4096) print_data;
     emits DoPrint do_print;
     consumes DonePrinting done_printing;
+    has mutex cross_vm_event_mutex;
 }
 }}}
 
-These interfaces will eventually be made visible to processes running in the guest linux. Now, we'll define the print server component. Add the following to apps/cma34cr_minimal/cma34cr.camkes:
+These interfaces will eventually be made visible to processes running in the guest linux. The mutex is used to protect access to shared state between the VMM and guest.
+
+Now, we'll define the print server component. Add the following to apps/cma34cr_minimal/cma34cr.camkes:
 {{{                     
 component PrintServer {
+    control;
     dataport Buf(4096) data;
     consumes DoPrint do_print;
     emits DonePrinting done_printing;
@@ -363,4 +369,223 @@ Interfaces connected with seL4SharedDataWithCaps must be configured with an inte
         vm0.data_id = 1; // ids must be contiguous, starting from 1
         vm0.data_size = 4096;
     }
+}}}
+
+Now let's implement our print server. Create a file apps/cma34cr_minimal/print_server.c:
+{{{
+#include <camkes.h>
+#include <stdio.h>
+
+int run(void) {
+
+    while (1) {
+        do_print_wait();
+
+        printf("%s\n", (char*)data);
+
+        done_printing_emit();
+    }
+
+    return 0;
+}
+}}}
+
+This component loops forever, waiting for an event, printing a string from shared memory, then emitting an event. It assumes that the shared buffer will contain a valid, null-terminated c string. Obviously this is risky, but will serve for our example here.
+
+We need to create another c file that tells the VMM about our cross vm connections. This file must define 3 functions which initialize each type of cross vm interface:
+ * cross_vm_dataports_init
+ * cross_vm_emits_events_init
+ * cross_vm_consumes_events_init
+
+Create a file apps/cma34cr_minimal/cross_vm.c:
+{{{
+#include <sel4/sel4.h>
+#include <camkes.h>
+#include <camkes_mutex.h>
+#include <camkes_consumes_event.h>
+#include <camkes_emits_event.h>
+#include <dataport_caps.h>
+#include <cross_vm_consumes_event.h>
+#include <cross_vm_emits_event.h>
+#include <cross_vm_dataport.h>
+#include <vmm/vmm.h>
+#include <vspace/vspace.h>
+
+// this is defined in the dataport's glue code
+extern dataport_caps_handle_t data_handle;
+
+// Array of dataport handles at positions corresponding to handle ids from spec
+static dataport_caps_handle_t *dataports[] = {
+    NULL, // entry 0 is NULL so ids correspond with indices
+    &data_handle,
+};
+    
+// Array of consumed event callbacks and ids
+static camkes_consumes_event_t consumed_events[] = {
+    { .id = 1, .reg_callback = done_printing_reg_callback },
+};
+    
+// Array of emitted event emit functions
+static camkes_emit_fn emitted_events[] = {
+    NULL,   // entry 0 is NULL so ids correspond with indices
+    do_print_emit,
+};
+    
+// mutex to protect shared event context
+static camkes_mutex_t cross_vm_event_mutex = (camkes_mutex_t) {
+    .lock = cross_vm_event_mutex_lock,
+    .unlock = cross_vm_event_mutex_unlock,
+};  
+
+int cross_vm_dataports_init(vmm_t *vmm) {
+    return cross_vm_dataports_init_common(vmm, dataports, sizeof(dataports)/sizeof(dataports[0]));
+}   
+            
+int cross_vm_emits_events_init(vmm_t *vmm) {
+    return cross_vm_emits_events_init_common(vmm, emitted_events,
+            sizeof(emitted_events)/sizeof(emitted_events[0]));
+}   
+            
+int cross_vm_consumes_events_init(vmm_t *vmm, vspace_t *vspace, seL4_Word irq_badge) {
+    return cross_vm_consumes_events_init_common(vmm, vspace, &cross_vm_event_mutex,
+            consumed_events, sizeof(consumed_events)/sizeof(consumed_events[0]), irq_badge);
+}
+}}}
+
+To make this build, we need to symlink the common source directory for the camkes vm into the app's directory:
+{{{
+ln -s ../../common apps/cma34cr_minimal
+}}}
+
+And make the following change to apps/cma34cr_minimal/Makefile:
+{{{
+...
+include PCIConfigIO/PCIConfigIO.mk
+include FileServer/FileServer.mk
+include Init/Init.mk
+
+# Add the following:
+Init0_CFILES += $(wildcard $(SOURCE_DIR)/cross_vm.c) \
+                $(wildcard $(SOURCE_DIR)/common/src/*.c)
+Init0_HFILES += $(wildcard $(SOURCE_DIR)/common/include/*.h) \
+                $(wildcard $(SOURCE_DIR)/common/shared_include/cross_vm_shared/*.h)
+
+PrintServer_CFILES += $(SOURCE_DIR)/print_server.c
+...
+}}}
+
+The app should now build when you run "make", but we're not done yet. No we'll make these interfaces available to the guest linux. Edit projects/vm/linux/camkes_init. It's a shell script that is executed as linux is initialized. Currently it should look like:
+{{{
+#!/bin/sh
+# Initialises linux-side of cross vm connections.
+
+# Dataport sizes must match those in the camkes spec.
+# For each argument to dataport_init, the nth pair
+# corresponds to the dataport with id n.
+dataport_init /dev/camkes_reverse_src 8192 /dev/camkes_reverse_dest 8192
+
+# The nth argument to event_init corresponds to the
+# event with id n according to the camkes vmm.
+consumes_event_init /dev/camkes_reverse_done
+emits_event_init /dev/camkes_reverse_ready
+}}}
+
+This sets up some interfaces used for a simple demo. Delete all that, and add the following:
+{{{
+#!/bin/sh
+# Initialises linux-side of cross vm connections.
+
+# Dataport sizes must match those in the camkes spec.
+# For each argument to dataport_init, the nth pair
+# corresponds to the dataport with id n.
+dataport_init /dev/camkes_data 4096
+                  
+# The nth argument to event_init corresponds to the
+# event with id n according to the camkes vmm.
+consumes_event_init /dev/camkes_done_printing
+emits_event_init /dev/camkes_do_print
+}}}
+
+Each of these commands creates device nodes associated with a particular linux kernel module supporting cross vm communication. Each command takes a list of device nodes to create, which must correpond to the ids assigned to interfaces in the cma34cr.camkes and cross_vm.c. The dataport_init command must also be passed the size of each dataport.
+
+These changes will cause device nodes to be created which correspond to the interfaces we added to the VMM component.
+
+Now let's make an app that uses these nodes to communicate with the print server. As before, create a new directory in pkg:
+{{{
+mkdir projects/vm/linux/pkg/print_client
+}}}
+
+Create projects/vm/linux/pkg/print_client/print_client.c:
+{{{
+#include <string.h>
+#include <assert.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+
+#include "dataport.h"
+#include "consumes_event.h"
+#include "emits_event.h"
+
+int main(int argc, char *argv[]) {
+
+    int data_fd = open("/dev/camkes_data", O_RDWR);
+    assert(data_fd >= 0); 
+
+    int do_print_fd = open("/dev/camkes_do_print", O_RDWR);
+    assert(do_print_fd >= 0); 
+
+    int done_printing_fd = open("/dev/camkes_done_printing", O_RDWR);
+    assert(done_printing_fd >= 0); 
+
+    char *data = (char*)dataport_mmap(data_fd);
+    assert(data != MAP_FAILED);
+
+    ssize_t dataport_size = dataport_get_size(data_fd);
+    assert(dataport_size > 0); 
+
+    for (int i = 1; i < argc; i++) {
+        strncpy(data, argv[i], dataport_size);
+        emits_event_emit(do_print_fd);
+        consumes_event_wait(done_printing_fd);
+    }   
+
+    close(data_fd);
+    close(do_print_fd);
+    close(done_printing_fd);
+
+    return 0;
+}
+}}}
+
+This program prints each of its arguments on a separate line, by sending each argument to the print server one at a time.
+
+Create projects/vm/linux/pkg/print_client/Makefile:
+{{{
+TARGET = print_client
+
+include ../../common.mk
+include ../../common_app.mk
+
+print_client: print_client.o
+    $(CC) $(CFLAGS) $(LDFLAGS) $^ -lcamkes -o $@
+}}}
+
+Now, run build-rootfs, and make, and run!
+{{{
+...
+Creating dataport node /dev/camkes_data
+Allocating 4096 bytes for /dev/camkes_data
+Creating consuming event node /dev/camkes_done_printing
+Creating emitting event node /dev/camkes_do_print
+
+Welcome to Buildroot
+buildroot login: root
+Password:
+# print_client hello world
+[   12.730073] dataport received mmap for minor 1
+hello
+world
 }}}
