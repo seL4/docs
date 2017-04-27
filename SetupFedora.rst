@@ -45,7 +45,7 @@ To build for any of the ARM targets you need an arm cross compiler; to run on th
 <<Anchor(centos)>>
 == CentOS ==
 
-Cross compilers are available fromt eh EPEL repository.
+Cross compilers are available from the EPEL repository in CentOS 6 or earlier.  For CentOS 7 use the Fedora instructions.
 Do
 {{{
   sudo yum install gcc-arm-linux-gnu
@@ -53,7 +53,7 @@ Do
 
 The resulting `CROSS_COMPILE_PREFIX` should be `arm-linux-gnu` in the toolchain menus
 
-CentOS also does not prepackage qemu. You will have to build it from source.
+CentOS 6 and earlier also do not prepackage qemu. You will have to build it from source.
 
 {{{
   sudo yum install glib2-devel
