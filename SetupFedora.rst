@@ -44,7 +44,14 @@ To build for any of the ARM targets you need an arm cross compiler; to run on th
 
 <<Anchor(centos)>>
 == CentOS ==
-CentOS has no pre-built arm toolchain or qemu. You will have to get cross compilers from [[https://www.mentor.com/embedded-software/sourcery-tools/sourcery-codebench/editions/lite-edition/|Mentor Graphics]]. Look for arm-none-eabi-gcc.
+
+Cross compilers are available fromt eh EPEL repository.
+Do
+{{{
+  sudo yum install gcc-arm-linux-gnu
+}}}
+
+The resulting `CROSS_COMPILE_PREFIX` should be `arm-linux-gnu` in the toolchain menus
 
 CentOS also does not prepackage qemu. You will have to build it from source.
 
