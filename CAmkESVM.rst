@@ -589,3 +589,7 @@ Password:
 hello
 world
 }}}
+
+== Booting from hard drive ==
+
+So far we've only run a tiny linux on a ram disk. What if we want to run Ubuntu booting of a hard drive? This section will explain the changes we need to make to our VM app to allow it to boot into a Ubuntu environment installed on the hard drive. Thus far these examples should have been compatible with most modern x86 machines. The rest of this tutorial will focus on a particular machine: [[https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm|the cma34cr single board computer]]
