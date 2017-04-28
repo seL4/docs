@@ -4,6 +4,7 @@ This page archives all of the release notes for seL4.
 
 == Master (verified kernel) ==
 
+ * [[seL4 5.1.0]] ([[http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf|manual]])
  * [[seL4 5.0.0]] ([[http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf|manual]])
  * [[seL4 4.0.0]] ([[http://sel4.systems/Info/Docs/seL4-manual-4.0.0.pdf|manual]])
  * [[seL4 3.2.0]] ([[http://sel4.systems/Info/Docs/seL4-manual-3.2.0.pdf|manual]])
