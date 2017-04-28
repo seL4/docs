@@ -55,8 +55,8 @@ component VM {
         VM_CONFIGURATION_DEF()
         VM_PER_VM_CONFIG_DEF(0, 2)
 
-        vm0.simple_untyped24_pool = 12;
-        vm0.heap_size = 0x10000;
+        vm0.simple_untyped23_pool = 20; 
+        vm0.heap_size = 0x2000000;
         vm0.guest_ram_mb = 128;
         vm0.kernel_cmdline = VM_GUEST_CMDLINE;
         vm0.kernel_image = KERNEL_IMAGE;
@@ -649,15 +649,45 @@ We're going to give the guest passthrough access to the sata controller. The sat
 For AHCI:
 
 {{{
+    configuration {
+        ...
 
+        vm0_config.pci_devices_iospace = 1;
+
+
+        vm0_config.ioports = [
+            {"start":0x4088, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x4094, "end":0x4098, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x4080, "end":0x4088, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x4060, "end":0x4080, "pci_device":0x1f, "name":"SATA"},
+        ];
+        
+        vm0_config.pci_devices = [ 
+            {   
+                "name":"SATA",
+                "bus":0,
+                "dev":0x1f,
+                "fun":2,
+                "irq":"SATA",
+                "memory":[
+                    {"paddr":0xc0713000, "size":0x800, "page_bits":12},
+                ],
+            },  
+        ];
+
+        vm0_config.irqs = [ 
+            {"name":"SATA", "source":19, "level_trig":1, "active_low":1, "dest":11},
+        ];
+    }
 }}}
 
 For IDE:
 
-
 {{{
     configuration {
         ...
+
+        vm0_config.pci_devices_iospace = 1
 
         vm0_config.ioports = [ 
             {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
@@ -683,4 +713,100 @@ For IDE:
             {"name":"SATA", "source":19, "level_trig":1, "active_low":1, "dest":11},
         ];
     }
+}}}
+
+
+Now rebuild and run:
+{{{
+Ubuntu 16.04.1 LTS ertos-CMA34CR ttyS0
+
+ertos-CMA34CR login: 
+}}}
+
+You should be able to log in and use the system largely as normal.
+
+== Passthrough Ethernet ==
+
+The ethernet device is not accessible to the guest:
+{{{
+$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1
+    link/sit 0.0.0.0 brd 0.0.0.0
+}}}
+
+An easy way to give the guest network access is to give it passthrough access to the ethernet controller. This is done much in the same way as enabling passthrough access to the sata controller. In the configuration section in apps/cma34cr_minimal/cma34cr.camkes, add to the list of io ports, pci devices and irqs to pass through:
+{{{
+        vm0_config.ioports = [
+            {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x4090, "end":0x40a0, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40b0, "end":0x40b8, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40b8, "end":0x40c0, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40c8, "end":0x40cc, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40cc, "end":0x40d0, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x3000, "end":0x3020, "pci_device":0, "name":"Ethernet5"}, // <--- Add this entry
+        ];
+
+        vm0_config.pci_devices = [
+            {   
+                "name":"SATA",
+                "bus":0,
+                "dev":0x1f,
+                "fun":2,
+                "irq":"SATA",
+                "memory":[],
+            },
+
+            // Add this entry:
+            {
+                "name":"Ethernet5",
+                "bus":5,
+                "dev":0,
+                "fun":0,
+                "irq":"Ethernet5",
+                "memory":[
+                    {"paddr":0xc0500000, "size":0x20000, "page_bits":12},
+                    {"paddr":0xc0520000, "size":0x4000, "page_bits":12},
+                ],
+            },
+        ];
+
+        vm0_config.irqs = [
+            {"name":"SATA", "source":19, "level_trig":1, "active_low":1, "dest":11},
+            {"name":"Ethernet5", "source":0x11, "level_trig":1, "active_low":1, "dest":10}, // <--- Add this entry
+        ];
+}}}
+
+You should have added a new entry to each of the three lists that describe passthrough devices. Building and running:
+{{{
+$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:d0:81:09:0c:7d brd ff:ff:ff:ff:ff:ff
+    inet 10.13.1.87/23 brd 10.13.1.255 scope global dynamic enp0s2
+       valid_lft 14378sec preferred_lft 14378sec
+    inet6 2402:1800:4000:1:90b3:f9d:ae22:33b7/64 scope global temporary dynamic 
+       valid_lft 86390sec preferred_lft 14390sec
+    inet6 2402:1800:4000:1:aa67:5925:2cbc:928f/64 scope global mngtmpaddr noprefixroute dynamic 
+       valid_lft 86390sec preferred_lft 14390sec
+    inet6 fe80::cc47:129d:bdff:a2da/64 scope link 
+       valid_lft forever preferred_lft forever
+3: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1
+    link/sit 0.0.0.0 brd 0.0.0.0
+$ ping google.com
+PING google.com (172.217.25.142) 56(84) bytes of data.
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=1 ttl=51 time=2.17 ms
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=2 ttl=51 time=1.95 ms
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=3 ttl=51 time=1.99 ms
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=4 ttl=51 time=2.20 ms
 }}}
