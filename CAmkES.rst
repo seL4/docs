@@ -91,3 +91,7 @@ Can be found [[CAmkES/Terminology|here]].
 == Camkes Next ==
 
 Information about the active development branch of Camkes can be found [[CAmkESNext|here]].
+
+== CAmkES VM ==
+
+Information about the x86 camkes vm can be found [[CAmkESVM|here]].
