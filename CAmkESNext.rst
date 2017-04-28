@@ -40,10 +40,10 @@ curl -sSL https://get.haskellstack.org/ | sh
 
 On Archlinux:
 {{{#!highlight bash numbers=off
-pacman -S binutils gcc arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
-cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl
+pacman -S binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
+cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
 
-yaourt -S cunit spin
+yaourt -S spin
 
 pip install six tempita plyplus pyelftools orderedset jinja2
 
