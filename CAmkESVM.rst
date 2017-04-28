@@ -810,3 +810,7 @@ PING google.com (172.217.25.142) 56(84) bytes of data.
 64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=3 ttl=51 time=1.99 ms
 64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=4 ttl=51 time=2.20 ms
 }}}
+
+== Figuring out information about PCI devices ==
+
+To add a new passthrough device, or access a pci device in general, we need to know which io ports it uses, which interrupts it's associated with, and the physical addresses of any memory-mapped io regions it uses. The easiest way to find this information is to boot linux natively, and run the command `lspci -vv`.
