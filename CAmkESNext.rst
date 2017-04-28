@@ -43,7 +43,7 @@ On Archlinux:
 pacman -S binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
 cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
 
-yaourt -S spin
+yaourt -S bcunit-cunit-compat spin
 
 pip install six tempita plyplus pyelftools orderedset jinja2
 
