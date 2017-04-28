@@ -592,4 +592,95 @@ world
 
 == Booting from hard drive ==
 
-So far we've only run a tiny linux on a ram disk. What if we want to run Ubuntu booting of a hard drive? This section will explain the changes we need to make to our VM app to allow it to boot into a Ubuntu environment installed on the hard drive. Thus far these examples should have been compatible with most modern x86 machines. The rest of this tutorial will focus on a particular machine: [[https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm|the cma34cr single board computer]]
+So far we've only run a tiny linux on a ram disk. What if we want to run Ubuntu booting off a hard drive? This section will explain the changes we need to make to our VM app to allow it to boot into a Ubuntu environment installed on the hard drive. Thus far these examples should have been compatible with most modern x86 machines. The rest of this tutorial will focus on a particular machine: [[https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm|the cma34cr single board computer]]
+
+The first step is to install ubuntu natively on the cma34cr. It's currently required that guests of the camkes vm run in 32-bit mode, so install 32-bit ubuntu. These examples will use ubuntu-16.04.
+
+The plan will be to give the guest passthrough access to the hard drive, and use a ubuntu initrd as our initial root filesystem, replacing the buildroot one used thus far. We'll use the same kernel image as before, as our vm requires that PAE be turned off, and it's on by default in the ubuntu kernel.
+
+=== Getting the initrd image ===
+
+We need to generate a root filesystem image suitable for ubuntu. Ubuntu ships with a tool called mkinitramfs which generates root filesystem images. Let's use it to generate a root filesystem image compatible with the linux kernel we'll be using. Boot ubuntu natively on the cma34cr and run the following command:
+{{{
+$ mkinitramfs -o rootfs.cpio 4.8.16
+WARNING: missing /lib/modules/4.8.16
+Ensure all necessary drivers are built into the linux image!
+depmod: ERROR: could not open directory /lib/modules/4.8.16: No such file or directory
+depmod: FATAL: could not search modules: No such file or directory
+depmod: WARNING: could not open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/modules.order: No such file or directory
+depmod: WARNING: could not open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/modules.builtin: No such file or directory
+}}}
+
+The kernel we'll be using has all the necessary drivers built in, so feel free to ignore those warnings and errors. You should now have a file called rootfs.cpio on the cma34cr. Transfer that file to your dev machine, and put it in apps/cma34cr_minimal. Now we need to tell the build system to take that rootfs image rather than the default buildroot one. Edit apps/cma34cr_minimal/Makefile. Change this line:
+{{{
+${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/linux/${ROOTFS_FILENAME}
+}}}
+to
+{{{
+${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/${ROOTFS_FILENAME}
+}}}
+
+Since we'll be using a real hard drive, we need to change the boot command line we give to the guest linux. Open apps/cma34cr_minimal/configurations/cma34cr_minimal.h, and change the definition of `VM_GUEST_CMDLINE` to:
+{{{
+#define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/sda1 rdinit=/init 2"
+}}}
+
+Try building and running after this change:
+{{{
+BusyBox v1.22.1 (Ubuntu 1:1.22.0-15ubuntu1) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+(initramfs)
+}}}
+
+You should get dropped into a shell inside the root filesystem. You can run commands from here:
+{{{
+(initramfs) pwd
+/
+(initramfs) ls
+dev      run      init     scripts  var      usr      sys      tmp
+root     sbin     etc      bin      lib      conf     proc
+}}}
+
+If you look inside /dev, you'll notice the lack of sda device. Linux can't find the hard drive because we haven't passed it through yet. Let's do that now!
+
+We're going to give the guest passthrough access to the sata controller. The sata controller will be in one of two modes: AHCI or IDE. The mode can be set when configuring BIOS. By default it should be AHCI. The next part has some minor differences depending on the mode. I'll show both. Open apps/cma34cr_minimal/cma34cr.camkes and add the following to the configuration section:
+
+For AHCI:
+
+{{{
+
+}}}
+
+For IDE:
+
+
+{{{
+    configuration {
+        ...
+
+        vm0_config.ioports = [ 
+            {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x4090, "end":0x40a0, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40b0, "end":0x40b8, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40b8, "end":0x40c0, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40c8, "end":0x40cc, "pci_device":0x1f, "name":"SATA"},
+            {"start":0x40cc, "end":0x40d0, "pci_device":0x1f, "name":"SATA"},
+        ];  
+
+        vm0_config.pci_devices = [ 
+            {   
+                "name":"SATA",
+                "bus":0,
+                "dev":0x1f,
+                "fun":2,
+                "irq":"SATA",
+                "memory":[],
+            },  
+        ];  
+
+        vm0_config.irqs = [ 
+            {"name":"SATA", "source":19, "level_trig":1, "active_low":1, "dest":11},
+        ];
+    }
+}}}
