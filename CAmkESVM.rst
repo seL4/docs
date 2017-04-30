@@ -140,6 +140,8 @@ hello: hello.o
     $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 }}}
 
+Make sure there is a TAB character in the makefile, rather than spaces
+
 4. Run the "build-rootfs" script to update the rootfs.cpio file to include our new "hello" program.
 
 {{{
