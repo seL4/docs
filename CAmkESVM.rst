@@ -111,13 +111,13 @@ Here's a summary of what the build-rootfs tool does:
 === Adding a program ===
 Let's add a simple program!
 
-Make a new directory:
+1. Make a new directory:
 
 {{{
 mkdir projects/vm/linux/pkg/hello
 }}}
 
-Make a simple C program in `projects/vm/linux/pkg/hello/hello.c`
+2. Make a simple C program in `projects/vm/linux/pkg/hello/hello.c`
 
 {{{
 #include <stdio.h>
@@ -127,7 +127,8 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 }}}
-And a `Makefile` in `projects/vm/linux/pkg/hello/Makefile`:
+
+3. Add a `Makefile` in `projects/vm/linux/pkg/hello/Makefile`:
 
 {{{
 TARGET = hello
@@ -139,14 +140,14 @@ hello: hello.o
     $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 }}}
 
-Run the "build-rootfs" script to update the rootfs.cpio file to include our new "hello" program.
+4. Run the "build-rootfs" script to update the rootfs.cpio file to include our new "hello" program.
 
-Rebuild the app:
+5. Rebuild the app:
 
 {{{
 make
 }}}
-Running the app:
+6. Run the app (use `root` as username and password):
 
 {{{
 Welcome to Buildroot
