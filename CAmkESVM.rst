@@ -187,7 +187,6 @@ Initially we'll just get the module building and running, and then take care of 
 #include <asm/uaccess.h>
 #include <asm/kvm_para.h>
 #include <asm/io.h>
-#include <poke.h>
 
 #define DEVICE_NAME "poke"
 
