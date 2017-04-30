@@ -167,12 +167,16 @@ Hello, World!
 === Adding a kernel module ===
 We're going to add a new kernel module that lets us poke the vmm.
 
-Make a new directory in projects/vm/linux/modules/poke:
+1. Make a new directory:
 
 {{{
 mkdir projects/vm/linux/modules/poke
 }}}
-Implement the module in projects/vm/linux/modules/poke/poke.c. Initially we'll just get the module building and running, and then take care of communicating between the module and the vmm. For simplicity, we'll make it so when a special file associated with this module is written to, the vmm gets poked.
+
+
+2. Implement the module in `projects/vm/linux/modules/poke/poke.c`. 
+
+Initially we'll just get the module building and running, and then take care of communicating between the module and the vmm. For simplicity, we'll make it so when a special file associated with this module is written to, the vmm gets poked.
 
 {{{
 #include <linux/module.h>
@@ -212,7 +216,8 @@ static void __exit poke_exit(void) {
 module_init(poke_init);
 module_exit(poke_exit);
 }}}
-And a makefile in projects/vm/linux/modules/poke/Makefile:
+
+3. And a makefile in `projects/vm/linux/modules/poke/Makefile`:
 
 {{{
 obj-m += poke.o
@@ -224,7 +229,8 @@ all:
 clean:
     make -C $(KHEAD) M=$(PWD) clean
 }}}
-And to make our module get loaded during initialization, edit projects/vm/linux/init_template:
+
+4. Add the new module to so it is loaded during initialization, edit projects/vm/linux/init_template:
 
 {{{
 ...
@@ -234,7 +240,17 @@ insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/emits_event.ko
 insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko            # <-- add this line
 ...
 }}}
-Run the build-rootfs tool, then make and run the app:
+
+5. Run the build-rootfs tool, then make 
+
+{{{
+cd projects/vm/linux/
+./build-rootfs
+cd ../../..
+make 
+}}}
+
+6. Run the app:
 
 {{{
 Welcome to Buildroot
@@ -247,7 +263,10 @@ Password:
 [   57.389643] hi
 -sh: write error: Bad address     # the shell complains, but our module is being invoked!
 }}}
-Now let's make it talk to the vmm. In poke.c, replace
+
+'''Now let's make it talk to the vmm'''.
+
+7. In poke.c, replace
 
 {{{
     printk("hi\n");
