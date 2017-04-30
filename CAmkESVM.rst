@@ -142,6 +142,10 @@ hello: hello.o
 
 4. Run the "build-rootfs" script to update the rootfs.cpio file to include our new "hello" program.
 
+{{{
+./projects/vm/linux/build-rootfs
+}}}
+
 5. Rebuild the app:
 
 {{{
