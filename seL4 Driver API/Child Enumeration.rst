@@ -1,13 +1,13 @@
 = Child enumeration model for the seL4 Driver API: =
 
 == Constants ==
+
+== Functions ==
 {{{
 seL4drv_mgmt_enumerate_get_num_children():
 seL4drv_mgmt_enumerate_children();
 seL4drv_mgmt_enumerate_hotplug_subscribe();
 }}}
-
-== Functions ==
 
 == Child IDs ==
 Each driver whose device is capable of enumerating child devices must generate a unique child ID for each such child. The child ID is not required to be globally unique, but it must be unique with respect to all of of that device's children (i.e, with respect to its siblings).
