@@ -19,7 +19,7 @@
 
 == Functions ==
 {{{
-void seL4drv_mgmt_critical_event_req();
+void seL4drv_mgmt_critical_event_subscription_ind();
 void seL4drv_mgmt_power();
 void seL4drv_mgmt_power_features(uint32_t *features_bitmap);
 void seL4drv_mgmt_enumerate_children();
@@ -40,7 +40,7 @@ void seL4drv_mgmt_enumerate_children();
 
 == API ==
 
-=== seL4drv_mgmt_critical_event_req(): Async ===
+=== seL4drv_mgmt_critical_event_subscription_ind(): Async ===
 This function enables the environment to call into the driver, and give it an asynchronous context block which it should hold on to. If at any point the driver encounters a situation which requires it to ask the environment to shut it down, it can asynchronously callback into the environment to make such a request.
 
 The reason for this function is to enable the driver to report to the environment when it has found itself in an invalid operational state which it cannot recover from. This is not a necessary function to implement, and it is likely to be a blank function for most implementations.
