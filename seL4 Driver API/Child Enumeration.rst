@@ -1,5 +1,8 @@
 = Child enumeration model for the seL4 Driver API: =
 
+== Contents ==
+<<TableOfContents()>>
+
 == Constants ==
 
 == Functions ==
