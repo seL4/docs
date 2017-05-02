@@ -265,19 +265,23 @@ Password:
 
 '''Now let's make it talk to the vmm'''.
 
-7. In poke.c, replace
+7. In `projects/vm/linux/modules/poke/poke.c`, replace
 
 {{{
-    printk("hi\n");
+    -printk("hi\n");
 }}}
+
 with
 
 {{{
     kvm_hypercall1(4, 0);
 }}}
+
 The choice of 4 is because 0..3 are taken by other hypercalls.
 
-Now we need to register a handler for this hypercall. Open the file projects/vm/components/Init/src/main.c: Add a new function at the top of the file:
+8. Now register a handler for this hypercall in `projects/vm/components/Init/src/main.c`: 
+
+Add a new function at the top of the file:
 
 {{{
 static int poke_handler(vmm_vcpu_t *vcpu) {
@@ -285,15 +289,17 @@ static int poke_handler(vmm_vcpu_t *vcpu) {
     return 0;
 }
 }}}
-Now, in the function "main_continued", right before the call to "vmm_run", register the poke_handler:
+
+In the function `main_continued` register `poke_handler`:
 
 {{{
-    reg_new_handler(&vmm, poke_handler, 4);
+    reg_new_handler(&vmm, poke_handler, 4); // <--- added
 
     /* Now go run the event loop */
     vmm_run(&vmm);
 }}}
-Now re-run build-rootfs, make, and run:
+
+9. Finally re-run build-rootfs, make, and run:
 
 {{{
 Welcome to Buildroot
