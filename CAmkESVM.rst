@@ -274,7 +274,7 @@ The choice of 4 is because 0..3 are taken by other hypercalls.
 Add a new function at the top of the file:
 
 {{{
-static int poke_handler(vmm_t *vmm) {
+static int poke_handler(vmm_vcpu_t *vmm_vcpu) {
     printf("POKE!!!\n");
     return 0;
 }
