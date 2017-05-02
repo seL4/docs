@@ -265,17 +265,7 @@ Password:
 
 '''Now let's make it talk to the vmm'''.
 
-7. In `projects/vm/linux/modules/poke/poke.c`, replace
-
-{{{
-    -printk("hi\n");
-}}}
-
-with
-
-{{{
-    kvm_hypercall1(4, 0);
-}}}
+7. In `projects/vm/linux/modules/poke/poke.c`, replace ' printk("hi\n");' with 'kvm_hypercall1(4, 0);'
 
 The choice of 4 is because 0..3 are taken by other hypercalls.
 
