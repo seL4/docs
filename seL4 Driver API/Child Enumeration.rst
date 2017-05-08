@@ -46,6 +46,6 @@ This function shall transfer to the driver a block of memory which shall be kept
 === seL4drv_mgmt_identify_device(): Sync ===
 This function shall take a list of attributes that describe a device, and return an unsigned integer which states whether or not the driver can handle the device that is described by those attributes.
 
-If the driver determines that the passed attributes do not describe a device that it can manage, the driver '''shall''' return integer `0` (zero). If the driver determines that the passed attributes describe a device that it is equipped to handle, it shall return a positive integer `1`.
+If the driver determines that the passed attributes do not describe a device that it can manage, the driver '''shall''' return integer `0` (zero). If the driver determines that the passed attributes describe a device that it is equipped to handle, it '''shall''' return a positive integer `1`.
 
 ''It is recommended that drivers which return a value greater than `0` should return `1` for now, since in the future, significance will be ascribed to the values returned. At present, there is no significance attached to the particular value returned, but for future compatibility since values above `1` will carry significance, drivers must return `1` for now.''
