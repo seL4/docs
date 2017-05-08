@@ -10,6 +10,7 @@
 seL4drv_mgmt_enumerate_get_num_children():
 seL4drv_mgmt_enumerate_children();
 seL4drv_mgmt_enumerate_hotplug_subscribe();
+uint16_t seL4drv_mgmt_query_device_match();
 }}}
 
 == Child IDs ==
@@ -41,3 +42,8 @@ This function shall cause the driver to return a list of child devices and their
 
 === seL4drv_mgmt_enumerate_hotplug_subscribe(): Async ===
 This function shall transfer to the driver a block of memory which shall be kept by the driver until a hotplug event occurs. When such an event occurs, the driver shall complete the asynchronous roundtrip by calling back to the environment, returning the memory to the environment in so doing.
+
+=== seL4drv_mgmt_identify_device(): Sync ===
+This function shall take a list of attributes that describe a device, and return an unsigned integer which states whether or not the driver can handle the device that is described by those attributes.
+
+If the driver determines that the passed attributes do not describe a device that it can manage, the driver '''shall''' return integer `0` (zero). If the driver determines that the passed attributes describe a device that it is equipped to handle, it shall return a positive integer greater than `0`.
