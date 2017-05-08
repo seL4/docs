@@ -15,10 +15,12 @@ uint16_t seL4drv_mgmt_query_device_match();
 }}}
 
 == Structures ==
+{{{
 typedef struct seL4drv_child_attribute_ {
    char attr_name[SEL4DRV_DEVATTR_NAME_MAXLEN];
    uint32_t attr_value;
 } seL4drv_child_attribute_t;
+}}}
 
 == Child IDs ==
 Each driver whose device is capable of enumerating child devices must generate a unique child ID for each such child. The child ID is not required to be globally unique, but it must be unique with respect to all of of that device's children (i.e, with respect to its siblings).
