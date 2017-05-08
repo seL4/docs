@@ -4,7 +4,9 @@
 <<TableOfContents()>>
 
 == Constants ==
+{{{
 #define SEL4DRV_DEVATTR_NAME_MAXLEN (32)
+}}}
 
 == Functions ==
 {{{
