@@ -12,7 +12,9 @@ Recommended prior reading for this page is the seL4 Driver API's [[seL4 Driver A
 seL4drv_connection_t *seL4drv_external_connect();
 }}}
 == Data structures ==
+{{{
 typedef void seL4drv_connection_t;
+}}}
 
 == Description ==
 
