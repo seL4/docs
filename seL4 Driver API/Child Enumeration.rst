@@ -25,9 +25,22 @@ typedef struct seL4drv_child_attribute_ {
 }}}
 
 == Child IDs ==
-Each driver whose device is capable of enumerating child devices must generate a unique child ID for each such child. The child ID is not required to be globally unique, but it must be unique with respect to all of of that device's children (i.e, with respect to its siblings).
+Each driver whose device is capable of enumerating child devices must generate a unique child ID for each such child. The child ID is not required to be globally unique, but it must be unique with respect to all of of that child's sibling devices.
+
+The Child-ID need not be persistently unique across executions of the driver either. The same child device may be assigned a different child-ID if the driver is killed and then re-initialized. The purpose of the child-ID is to form a "relational key" (to borrow a database software term) between the driver and the environment. The same physical child device may be given different child-IDs by its parent even within the same execution of that parent if, for example, that child is unplugged from the computer, and then plugged back in as a hot-plug event; the parent driver may assign that child device a different child-ID when it is plugged back in.
 
 The Environment and the host OS may choose to use some other internal representation of such child IDs that best suits its device tree, but this child ID shall be passed back to the driver exactly as originally given by the driver, for any API call into the driver that requires a child ID.
+
+== Peristent Names ==
+Each driver whose device is capable of enumerating child devices must also generate a unique persistent name for each of the children. This name does not need to be globally unique, but it is expected to be unique with respect to all of that child device's siblings.
+
+This persistent name must always uniquely identify the same device microcontroller relative to its parent's bus technology. For example, if on an ISA bus, there are 4 ATA/IDE disks, and the parent ISA bus driver wishes to generate a persistent name for each of the disks, it should name them by their persistent locations on the ATA wire. Perhaps, "ATA0-master", "ATA0-slave", "ATA1-master" and "ATA1-slave".
+
+NB: the intention is not to uniquely identify the attached, removable DISK that is attached to the ATA/IDE microcontroller, but to identify the ATA/IDE microcontroller itself, which is wired onto the silicon. The swappable disk that happens to be attached to the interfacing microcontroller will be persistently named by the Operating System according to that OS's own convention. That is beyond the scope of this specification.
+
+In the case of a PCI device, the persistent name might be the location-based <Bus+Device+Function> combination which would uniquely, and persistently identify a particular PCI unit across executions. Again, the recognition of a particular PCI card such as a specific graphics card, should be left up to the higher layer Operating System which will name that device according to its own convention.
+
+In the case of a USB device, the persistent name might be a location-based hub-relative identifier for the USB port, starting from the root hub down the tree of hubs to that USB port. The actual port's persistent name might be a simple integer that identifies that port relative to its sibling ports. The parent hub would have been named by its parent hub, and so on up the tree. Once again, the generation of a persistent name for a specific USB flash disk that happens to be plugged into any particular USB port will be handled by the host Operating System, and is not the focus of this naming scheme. The naming scheme is attempting to persistently name the bus-relative location, and not the particular peripheral that is attached to that location/port.
 
 == Procedural flow ==
 The intention of the enumeration API is to enable the environment to both build and maintain its "device tree", which it uses to track the status and availability of hardware. The enumeration API enables initial discovery of hardware devices, as well as dynamic discovery and removal of devices from the tree as they appear and disappear.
