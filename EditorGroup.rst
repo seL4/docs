@@ -24,6 +24,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * kentmcleod
  * LukeMondy
  * MatthewBrecknell
+ * Michael Podhradsky
  * ParthaSusarla
  * PeterChubb
  * Richard Habeeb
