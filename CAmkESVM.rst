@@ -335,7 +335,7 @@ component Init0 {
     VM_INIT_DEF()
 
     // Add the following four lines:
-    dataport Buf(4096) print_data;
+    dataport Buf(4096) data;
     emits DoPrint do_print;
     consumes DonePrinting done_printing;
     has mutex cross_vm_event_mutex;
