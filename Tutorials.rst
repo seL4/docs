@@ -4,7 +4,7 @@ First make sure you have [[https://wiki.sel4.systems/Getting%20started#Setting_u
 
 <<TableOfContents()>>
 
-== Prerequisites == 
+== Prerequisites ==
 
 The build dependencies for seL4 can be found in the {{{Prerequisites.md}}} ([[https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md|Click!]]) file in the root of the SEL4-tutorials GIT repository.
 
