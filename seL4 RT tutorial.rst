@@ -41,8 +41,33 @@ The output should not change after finishing TASK 1.
 
 Find the scheduling control capability. There is one per node in the system. This allows you to populate scheduling contexts with parameters.
 
+The output will now look like this:
+
 {{{
-TODO output
+=== Round robin ===
+Ping
+Ping
+Ping
+Ping
+Ping
+=== Just Ping ===
+Ping
+Ping
+Ping
+Ping
+Ping
+=== Periodic ===
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Waiting for server
 }}}
 
 === TASK 3 === 
@@ -52,26 +77,114 @@ Configure the scheduling context as a round robin thread using the sched_control
 Once you have reached this point, the tutorial output should change:
 
 {{{
+=== Round robin ===
 Ping
 Pong
 Ping
 Pong
 Ping
 Pong
+=== Just Ping ===
+Ping
+Pong
+Ping
+Pong
+Ping
+Pong
+=== Periodic ===
+Pong
+Pong
+Pong
+Pong
+mcs yielding_thread@main.c:84 [Cond failed: i > NUM_YIELDS * 3]
+        Too many yeilds!
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Waiting for server
+echo: hello server
+Done
 }}}
 
 == TASK 4 == 
 
 Convert the round robin thread to passive by unbinding the scheduling context. Passive threads do not have their own time. This will stop the round robin thread from running. 
 
+Expected output:
+{{{
+=== Round robin ===
+Ping
+Pong
+Ping
+Pong
+Ping
+Pong
+=== Just Ping ===
+Ping
+Ping
+Ping
+=== Periodic ===
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Waiting for server
+}}}
 == TASK 5 == 
 
-Reconfigure the scheduling context to be periodic. 
+Reconfigure the scheduling context to be periodic. Output should not change.
 
 == TASK 6 ==
 
 Rebind the scheduling context to the thread. Altering scheduling context state has no impact on the 
 state of the TCB, so it will start where it left off. 
+
+Expected output:
+
+{{{
+=== Round robin ===
+Ping
+Pong
+Ping
+Pong
+Ping
+Pong
+=== Just Ping ===
+Ping
+Ping
+Ping
+=== Periodic ===
+Pong
+Tick
+Tick
+Pong
+Tick
+Tick
+Tick
+Tick
+Tick
+Tick
+Pong
+Tick
+Tick
+Pong
+Waiting for server
+echo: hello server!
+Done
+}}}
 
 == TASK 7 ==
 
