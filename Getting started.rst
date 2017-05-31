@@ -2,12 +2,12 @@
 <<TableOfContents()>>
 
 = Getting Started =
-In general, if you're just getting started, you want to dive into the SEL4 tutorials, then the CAmkES tutorials, then the SEL4 Test suite. There's a section on this page for each.
+In general, if you're just getting started, you want to dive into the seL4 tutorials, then the CAmkES tutorials, then the seL4 Test suite. There's a section on this page for each.
 
 == Aims ==
-This page seeks to comprehensively assist new SEL4 developers or interested parties to easily obtain the correct tools to duplicate the internal SEL4 development environment, successfully build the SEL4 tutorials, and successfully follow the SEL4 tutorials.
+This page seeks to comprehensively assist new seL4 developers or interested parties to easily obtain the correct tools to duplicate the internal seL4 development environment, successfully build the seL4 tutorials, and successfully follow the seL4 tutorials.
 
-It's introductory – after you've followed these steps, you'll be at the crest point where you can confidently begin reading the SEL4 API kernel manual with a '''functional''' copy of the kernel on your own machine. From that point, the guidance for what you should do with the functional source copy that you have will come from your own intuition, interest and hopefully, inspiration that SEL4 gives you.
+It's introductory – after you've followed these steps, you'll be at the crest point where you can confidently begin reading the seL4 API kernel manual with a '''functional''' copy of the kernel on your own machine. From that point, the guidance for what you should do with the functional source copy that you have will come from your own intuition, interest and hopefully, inspiration that seL4 gives you.
 
 == Code ==
 All seL4 code and proofs are available on github, at https://github.com/seL4, under standard [[http://sel4.systems/Info/GettingStarted/license.pml|open-source licenses]].
@@ -53,9 +53,9 @@ You can also use Docker to isolate the dependencies from your machine. Instructi
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
 ==== Get Google's "Repo" tool ====
-Repo is a tool by Google used for managing multiple git repositories. All the SEL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
+Repo is a tool by Google used for managing multiple git repositories. All the seL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
 
-==== Using Repo to fetch an SEL4 project and its subprojects ====
+==== Using Repo to fetch an seL4 project and its subprojects ====
 Choose a project to start with. As an example, we'll use sel4test.
 
  * When fetching a project, look for the GIT repository from Github, whose title has "-manifest" appended to it. So instead of fetching the "sel4-tutorials" GIT repository on Github, we'll fetch the "sel4-tutorials-manifest" repository. The difference is that the "-manifest" repository is meant to tell Repo how to fetch the subprojects and set up the source tree.
@@ -78,16 +78,12 @@ There are instructions on how to get cross compilers for building ARM. We only h
  * [[SetupFedora|Cross compiler and general instructions for Fedora and CentOS (RHEL should work as well)]]
  * [[SetupUbuntu|Cross compilers for Debian and Ubuntu]]
 
-==== Build Dependencies ====
-The build dependencies for SEL4 can be found in the {{{Prerequisites.md}}} ([[https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md|Click!]]) file in the root of the SEL4-tutorials GIT repository.
-
 == Start with the tutorials ==
 
 The seL4 and CAmkES [[Tutorials]] are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
-== Get acquainted with SEL4Test ==
-Any changes you make to SEL4 should pass the tests in SEL4 Test, and pull requests to SEL4 which are non-trivial or related only to documentation, should come with a matching pull request and new test (if applicable) to the SEL4Test repository as well.
 
-=== Build and run seL4test ===
+== Get acquainted with seL4Test ==
+Any changes you make to seL4 should pass the tests in seL4 Test, and pull requests to seL4 which are non-trivial or related only to documentation, should come with a matching pull request and new test (if applicable) to the seL4Test repository as well.
 
 [[Testing|seL4test]] is a comprehensive unit and functional testing suite for seL4 and can be useful when porting to new platforms or adding new features. 
 
@@ -105,21 +101,21 @@ Some configurations are intended to run under qemu. Because qemu   does not prod
 
 See [[Hardware]].
 
-= Contributing to SEL4 =
+= Contributing to seL4 =
 
-Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|SEL4 is free: What does this mean for you? (2015)]]" outlines areas where the kernel could use some contributions – other than that, gauging what you can do externally is for the time being, difficult. If you have ideas, please feel free to visit the NICTA mailing lists and chime in:
+Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|seL4 is free: What does this mean for you? (2015)]]" outlines areas where the kernel could use some contributions – other than that, gauging what you can do externally is for the time being, difficult. If you have ideas, please feel free to visit the NICTA mailing lists and chime in:
 
- * [[https://sel4.systems/lists/listinfo/announce|SEL4 Announce]].
- * [[https://sel4.systems/lists/listinfo/devel|SEL4 Devel]].
+ * [[https://sel4.systems/lists/listinfo/announce|seL4 Announce]].
+ * [[https://sel4.systems/lists/listinfo/devel|seL4 Devel]].
 
-= Learn more about SEL4 =
-For someone just getting to know about SEL4 and wanting to first at least understand how to build it, so that you can get comfortable with editing the source code, the following pre-init steps might help you get more context, before you try building, so you have at least a conceptual understanding of exactly what sort of creature you're about to step into the arena with. These are '''not''' pre-requisites for building the kernel, but they will help you a lot in understanding what you're dealing with.
+= Learn more about seL4 =
+For someone just getting to know about seL4 and wanting to first at least understand how to build it, so that you can get comfortable with editing the source code, the following pre-init steps might help you get more context, before you try building, so you have at least a conceptual understanding of exactly what sort of creature you're about to step into the arena with. These are '''not''' pre-requisites for building the kernel, but they will help you a lot in understanding what you're dealing with.
 
 == SSRG/NICTA publications ==
 The SSRG group at NICTA has published a long list of papers on the SEL4 kernel, documenting every design decision and the justifications for each one. Consider trying to read some of them, or at least scrolling through the list, and picking out the most eye-catching titles and skimming them. You can find a long list of SEL4 publications here:
 
-[[http://ssrg.nicta.com.au/projects/seL4/|The SEL4 project page at NICTA]].
+[[http://ts.data61.csiro.au/projects/seL4/|The seL4 project page at Data61]].
 
 == Youtube videos ==
- * Gernot Heiser outlines several areas where the kernel is looking for good Samaritans toward the end of this presentation, "[[https://www.youtube.com/watch?v=lRndE7rSXiI|SEL4 is free: What does this mean for you? (2015)]]". If you were looking for externally available information on the status of SEL4, you probably ran across that presentation yourself.
- * In addition, this youtube video shows Gernot giving a presentation on SEL4's context and position in the timeline of L4 microkernel research: "[[https://www.youtube.com/watch?v=RdoaFc5-1Rk|From L3 to SEL4: What have we learned in 20 years of L4 microkernels? (2014)]]".
+ * Gernot Heiser outlines several areas where the kernel is looking for good Samaritans toward the end of this presentation, "[[https://www.youtube.com/watch?v=lRndE7rSXiI|seL4 is free: What does this mean for you? (2015)]]". If you were looking for externally available information on the status of seL4, you probably ran across that presentation yourself.
+ * In addition, this youtube video shows Gernot giving a presentation on seL4's context and position in the timeline of L4 microkernel research: "[[https://www.youtube.com/watch?v=RdoaFc5-1Rk|From L3 to seL4: What have we learned in 20 years of L4 microkernels? (2014)]]".
