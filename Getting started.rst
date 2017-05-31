@@ -82,7 +82,7 @@ The build dependencies for SEL4 can be found in the {{{Prerequisites.md}}} ([[ht
 
 == Start with the tutorials ==
 
-The seL4 and CAmkES [Tutorials] are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
+The seL4 and CAmkES [[Tutorials]] are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
 == Get acquainted with SEL4Test ==
 Any changes you make to SEL4 should pass the tests in SEL4 Test, and pull requests to SEL4 which are non-trivial or related only to documentation, should come with a matching pull request and new test (if applicable) to the SEL4Test repository as well.
 
