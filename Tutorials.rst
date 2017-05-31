@@ -56,3 +56,7 @@ There are however no detailed explanations of each TODO challenge for the CAmkES
  * The half-written sample applications are in this folder: {{{apps/}}}.
  * The solutions can be found in this subfolder: {{{projects/sel4-tutorials/solutions/}}}.
  * The slide presentations to guide you through the tutorials are in this file: {{{projects/sel4-tutorials/docs/CAmkESTutorial.pdf}}}.
+
+== What next? ==
+
+You can try building and running [[Testing|seL4test]]
