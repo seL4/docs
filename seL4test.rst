@@ -70,3 +70,7 @@ To fix, do {{{make menuconfig}}} visit {{{seL4 Libraries→Build musl C Library}
 
 === hard float compilers ===
 The default configuration on newer compilers from Debian and Ubuntu use hardware floating point. Binaries built with these compilers are incompatible with the prebuilt musl C library. You can either tweak the flags (in {{{tools/common/Makefile.flags}}}: add {{{-mfloat-abi=soft}}} to '''NK_CFLAGS''') or disable the use of the prebuilt libraries as above.
+
+== Run on Real Hardware ==
+
+See the instructions per platform [[Hardware|here]]
