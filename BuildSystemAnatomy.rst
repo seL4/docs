@@ -1,7 +1,7 @@
 = Contents =
 <<TableOfContents()>>
 
-= Anatomy of the Build System =
+== Anatomy of the Build System ==
 The following files are the components of a project repository that are part of the build system (as opposed to code and tools related to the project):
 
  * '''[[#config|.config]]''' - Your current configuration (auto-generated)
@@ -30,8 +30,6 @@ The following files are the components of a project repository that are part of 
   * '''[[#projectmk|project.mk]]''' - Architecture-independent boiler plate for a  top-level build
   * '''[[#makefileflags|Makefile.flags]]''' - Shared build system tuning
   * '''kbuild/*''' - Kbuild from the Linux source tree. For documentation, refer to the Kbuild mailing list.
-
-== Configuration == 
 
 === Build configuration ===
 Prior to building a project you need to specify a configuration (settings, components, etc.) that you want to build. Kconfig is a tool for simplifying and automating this process. In a seL4 project you can enter make menuconfig in the top level directory to be presented with a terminal menu for choosing which components to build. Note that you will need the package libncurses5-dev installed to display terminal menus. It is possible to select a configuration without using the terminal menus, but techniques for doing this are not discussed on this page.
