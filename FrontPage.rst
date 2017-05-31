@@ -12,6 +12,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
 == seL4 Basics ==
 
  * [[Getting started]]
+ * [[Tutorials]]
  * [[Documentation]]
  * [[Hardware|Hardware Support]]
  * [[SeL4Libraries|seL4 libraries]]
