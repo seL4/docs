@@ -67,9 +67,10 @@ make -j libmuslc && make
 
 Currently parallel builds do not work for the whole build, but it is worth using for the C library. The build system does however   support ccache if you have it installed.
 
-A more comprehensive overview of the build system is available at [[Build System Anatomy]]
+A more comprehensive overview of the build system is available at [[BuildSystemAnatomy]]
 
 == Running it ==
+
 === IA32 ===
 We will now build seL4test for ia32, to run on the QEMU simulator.
 
