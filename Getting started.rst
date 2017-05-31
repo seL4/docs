@@ -18,10 +18,11 @@ There are several repositories; the most interesting ones are the project reposi
 
  * [[https://github.com/seL4/seL4|seL4]] the seL4 kernel
 
-=== seL4 projects ===
+=== Projects ===
+
 The seL4 kernel is usually built as part of project. Each project has a wiki entry associated with it that gives more information. The information on this page is common to all of them.
 
-We modelled the seL4 development process on the [[https://source.android.com/source/developing.html|Android development process]]. Each project consist of an XML file that describes which repositories to use, and how to lay them out to make a buildable system.
+We modeled the seL4 development process on the [[https://source.android.com/source/developing.html|Android development process]]. Each project consist of an XML file that describes which repositories to use, and how to lay them out to make a buildable system.
 
 The available projects so far are:
 
@@ -31,7 +32,7 @@ The available projects so far are:
 
  * [[https://github.com/seL4/camkes-manifest|CAmkES]], a component architecture for embedded systems based on seL4. See the CAmkES pages for more documentation about CAmkES.
 
- * [[https://github.com/seL4/camkes-vm-manifest|VMM]] a componentised virtual machine monitor for ia32 platforms using Intel VT-X and VT-D extensions.
+ * [[https://github.com/seL4/camkes-vm-manifest|VMM]] a component-based virtual machine monitor for ia32 platforms using Intel VT-X and VT-D extensions.
 
  * [[https://github.com/seL4/refos-manifest|RefOS]], a reference example of how one might build a multi-server operating system on top of seL4. It was built as a student project.
 
@@ -80,9 +81,10 @@ There are instructions on how to get cross compilers for building ARM. We only h
 
 == Start with the tutorials ==
 
-The seL4 and CAmkES [[Tutorials]] are an excellent, holistic introduction to the design of SEL4, and also to preparing to develop for SEL4, and they are also used internally to train new SEL4 interns. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
+The seL4 and CAmkES [[Tutorials]] are an excellent, holistic introduction to the design of seL4, and also to preparing to develop for SEL4, and they are also used internally to train new seL4 developers. You are strongly encouraged to complete the tutorials if you are new to SEL4: they will quickly bring you up to speed and ready to practically contribute.
 
 == Get acquainted with seL4Test ==
+
 Any changes you make to seL4 should pass the tests in seL4 Test, and pull requests to seL4 which are non-trivial or related only to documentation, should come with a matching pull request and new test (if applicable) to the seL4Test repository as well.
 
 [[Testing|seL4test]] is a comprehensive unit and functional testing suite for seL4 and can be useful when porting to new platforms or adding new features. 
@@ -101,7 +103,7 @@ Some configurations are intended to run under qemu. Because qemu   does not prod
 
 See [[Hardware]].
 
-= Contributing to seL4 =
+= Contributing =
 
 Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|seL4 is free: What does this mean for you? (2015)]]" outlines areas where the kernel could use some contributions – other than that, gauging what you can do externally is for the time being, difficult. If you have ideas, please feel free to visit the NICTA mailing lists and chime in:
 
@@ -111,11 +113,12 @@ Gernot's presentation: "[[https://www.youtube.com/watch?v=lRndE7rSXiI|seL4 is fr
 = Learn more about seL4 =
 For someone just getting to know about seL4 and wanting to first at least understand how to build it, so that you can get comfortable with editing the source code, the following pre-init steps might help you get more context, before you try building, so you have at least a conceptual understanding of exactly what sort of creature you're about to step into the arena with. These are '''not''' pre-requisites for building the kernel, but they will help you a lot in understanding what you're dealing with.
 
-== SSRG/NICTA publications ==
-The SSRG group at NICTA has published a long list of papers on the SEL4 kernel, documenting every design decision and the justifications for each one. Consider trying to read some of them, or at least scrolling through the list, and picking out the most eye-catching titles and skimming them. You can find a long list of SEL4 publications here:
+== Publications ==
+
+There are many publications available on the design of the seL4 kernel, documenting every design decision and the justifications for each one. Consider trying to read some of them, or at least scrolling through the list, and picking out the most eye-catching titles and skimming them. You can find a long list of seL4 publications here:
 
 [[http://ts.data61.csiro.au/projects/seL4/|The seL4 project page at Data61]].
 
-== Youtube videos ==
+== Youtube ==
  * Gernot Heiser outlines several areas where the kernel is looking for good Samaritans toward the end of this presentation, "[[https://www.youtube.com/watch?v=lRndE7rSXiI|seL4 is free: What does this mean for you? (2015)]]". If you were looking for externally available information on the status of seL4, you probably ran across that presentation yourself.
  * In addition, this youtube video shows Gernot giving a presentation on seL4's context and position in the timeline of L4 microkernel research: "[[https://www.youtube.com/watch?v=RdoaFc5-1Rk|From L3 to seL4: What have we learned in 20 years of L4 microkernels? (2014)]]".
