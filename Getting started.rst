@@ -89,7 +89,7 @@ Any changes you make to SEL4 should pass the tests in SEL4 Test, and pull reques
 
 === Build and run seL4test ===
 
-[[seL4test]] is a comprehensive unit and functional testing suite for seL4 and can be useful when porting to new platforms or adding new features. 
+[[Testing|seL4test]] is a comprehensive unit and functional testing suite for seL4 and can be useful when porting to new platforms or adding new features. 
 
 == Project Layout ==
 
@@ -100,21 +100,6 @@ See [[BuildSystemAnatomy|Build System Anatomy]] for details of project layouts a
 Configuration files in the configs directory are named by target machine, then something about what they do. Most have either   `release` or `debug` in their names. Debug kernels are built with   debug symbols (so one can use gdb), enable   assertions, and provide the sel4debug interfaces to allow debug   printout on a serial port.
 
 Some configurations are intended to run under qemu. Because qemu   does not produce a completely faithful emulation of the hardware,   sometimes features have to be disabled or worked around. These   configurations have ‘simulation’ in their names.
-
-=== Build configuration ===
-Prior to building a project you need to specify a configuration (settings, components, etc.) that you want to build. Kconfig is a tool for simplifying and automating this process. In a seL4 project you can enter make menuconfig in the top level directory to be presented with a terminal menu for choosing which components to build. Note that you will need the package libncurses5-dev installed to display terminal menus. It is possible to select a configuration without using the terminal menus, but techniques for doing this are not discussed on this page.
-
-{{attachment:menuconfig.png|The menu config interface|width=600}}
-
-Use arrow keys and Enter to navigate the menu, Space bar to select/deselect items and Esc-Esc to return to the parent level in the menu hierarchy. On exiting the menu system you will be asked whether you wish to save your configuration. If you choose to do so it will be written to the file .config in the top level directory.
-
-Many projects will have a default list of configurations for building common scenarios. These are located in the configs/ directory. You can load one of these by running make config_file where config_file is the filename of the configuration you want to load. Whenever you load one of these pre-made configurations it is usually wise to run make silentoldconfig. This scans your project for configuration settings that have changed since the pre-made configuration was created and updates the configuration with the defaults of these changed settings. This is not always what you want, but it generally works.
-
-Your current configuration is stored in the file .config. This file looks like a Makefile fragment and that is actually exactly how it is used by build system when it comes time to build your project. One gotcha to be aware of is that the comments in this file aren't completely comments, which you will find out if you try to edit them. Kconfig parses these comments and will throw all manner of strange errors if it thinks one is malformed.
-
-Pre-made configurations are stored in configs/. To make a new configuration, pick the settings you want in the menus then copy your .config to configs/. Note that all the configurations in this directory must end in _defconfig for the build system to identify them correctly.
-
-The other file(s) you will want to care about is Kconfig. These files tell Kconfig how to construct the menu hierarchy. A formal description of the Kconfig options and syntax can be found at http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt. Symbols are defined by using the 'config' statement. These symbols are given the prefix 'CONFIG_' when the configuration is written to the .config file.
 
 == Running on real hardware ==
 
