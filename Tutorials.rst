@@ -1,6 +1,6 @@
 = seL4 and CAmkES tutorials =
 
-First make sure you have [[https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine|Set up your machine]].
+First make sure you have [[https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine|set up your machine]].
 
 <<TableOfContents()>>
 
