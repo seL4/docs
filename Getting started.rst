@@ -18,7 +18,7 @@ There are several repositories; the most interesting ones are the project reposi
 
  * [[https://github.com/seL4/seL4|seL4]] the seL4 kernel
 
-=== Projects ===
+== Projects ==
 
 The seL4 kernel is usually built as part of project. Each project has a wiki entry associated with it that gives more information. The information on this page is common to all of them.
 
@@ -38,7 +38,7 @@ The available projects so far are:
 
 Other projects may be added later.
 
-=== Supported Target Platforms ===
+== Supported Target Platforms ==
 
 Read the [[Hardware]] pages to see a list of supported platforms, and special instructions for particular hardware platforms.
 
