@@ -25,11 +25,11 @@ OR
 sudo apt-get install haskell-stack
 }}}
 
- * Install python packages jinja2, ply, pyelftools (via pip):
+ * Install python dependencies (via pip):
 
 {{{#!highlight bash numbers=off
 apt-get install python-pip
-pip install --user pyelftools ply jinja2
+pip install --user camkes-deps
 }}}
 OR
 {{{#!highlight bash numbers=off
