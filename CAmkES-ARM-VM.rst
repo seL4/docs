@@ -1,5 +1,5 @@
 = CAmkES ARM VMM =
-This page describes the ARM virtual machine monitor.  `Out-of-the-box' it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the *original* XU, not the current XU4)
+This page describes the ARM virtual machine monitor.  `Out-of-the-box' it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the ''original'' XU, not the current XU4)
 
 == Getting and Building ==
 
@@ -17,3 +17,6 @@ dhcp
 tftpboot $loadaddr /capdl-loader-experimental-image-arm-tk1
 bootelf
 }}}
+
+== Notes ==
+The default setup does not pass though many devices to the Linux kernel.  If you `make menuconfig` you can set `insecure` mode in the `Applications` submenu; this is meant to pass through all devices, but not everything has been tested and confirmed to work yet.  In particular, the SMMU needs to have extra entries added for any DMA-capable devices such as SATA.
