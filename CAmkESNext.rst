@@ -33,7 +33,7 @@ libsqlite3-dev libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm
 gcc-5 gcc-5-multilib
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
 
-pip install six tempita plyplus pyelftools orderedset jinja2
+pip install camkes-deps
 
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
@@ -45,7 +45,7 @@ cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu
 
 yaourt -S bcunit-cunit-compat spin
 
-pip install six tempita plyplus pyelftools orderedset jinja2
+pip install camkes-deps
 
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
