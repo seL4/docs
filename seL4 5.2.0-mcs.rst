@@ -2,7 +2,7 @@
 
 = seL4 5.2.0-mcs =
 
-This is a pre-release of the seL4 mixed-criticality systems (RT) extensions. This branch is not verified and is under active verification. This is a subset of the previously released RT extensions, which still exist and can be provided in request.
+This is a pre-release of the seL4 mixed-criticality systems (RT) extensions. This branch is not verified and is under active verification. This is a subset of the previously released RT extensions, which still exist and can be provided on request.
 
 == Highlights ==
 
@@ -19,6 +19,8 @@ Signal and IPC delivery is now priority ordered and FIFO within a priority, rath
 === Periodic scheduling ===
 
 TODO 
+
+=== Isolation through sporadic servers ===
 
 === Passive Servers ===
 
@@ -39,9 +41,16 @@ This section documents kernel API changes as compared with the current master of
 
 === API Additions ===
 
- * `seL4_CapSchedControl` - initial cap for control of CPU time
+==== Constants ====
+
  * `seL4_SchedContextObject` - new object for that allows threads access to CPU time
  * `seL4_MinSchedContextBits` - minimum size n (2^n) of a scheduling context object
+ * `seL4_ReplyObject` - new object to track scheduling context donation over IPC and store reply capabilities.
+ * `seL4_ReplyObjectBits` - size of a reply object (2^n).
+ * `seL4_CapInitThreadSC` - capability to the initial threads scheduling context
+
+==== System calls ====
+
  * `seL4_Wait`
  * `seL4_NBWait`
  * `seL4_NBSendRecv` - new system call which allows a single kernel invocation to perform a non-blocking send on one capability, and wait on another. 
@@ -50,8 +59,10 @@ This section documents kernel API changes as compared with the current master of
  * `seL4_SchedContext_Bind` - bind a TCB to a scheduling context, if the TCB is runnable and scheduling context has budget, this will start the TCB running
  * `seL4_SchedContext_Unbind` - remove binding of a scheduling context from a TCB, TCB will no longer run but state will be preserved
  * `seL4_SchedContext_Unbind Object` - remove binding of a scheduling context from a TCB, TCB will no longer run but state will be preserved
- * `seL4_CapInitThreadSC` - capability to the initial threads scheduling context
- * `seL4_CapSchedControl` - scheduling control capability, which is given to the root thread
+
+==== Structures ==== 
+
+ * A sched control capability is provided to the root task per node via the `seL4_BootInfo` structure. 
 
 === API deletions ===
 
@@ -84,3 +95,8 @@ Other hardware platforms will be added as required (the ports require updated ke
 == More details ==
 
 See the 5.2.0-mcs manual included in the release. 
+
+We have developed a branch of the seL4 and CAmkES tutorials for the MCS kernel.
+
+ * [[seL4 RT tutorial]] a new tutorial which covers all of the API changes and features is available here.
+ * [[Tutorials]]  Otherwise it's worth going through all of the tutorials, as all have been ported to the MCS kernel on the 'mcs' branch.
