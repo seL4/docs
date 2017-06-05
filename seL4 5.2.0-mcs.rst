@@ -1,6 +1,6 @@
 /!\ Draft /!\
 
-= seL4 5.2.0-mcs =
+= seL4 MCS pre-release (5.2.0-mcs) =
 
 This is a pre-release of the seL4 mixed-criticality systems (RT) extensions. This branch is not verified and is under active verification. This is a subset of the previously released RT extensions, which still exist and can be provided on request.
 
@@ -37,7 +37,10 @@ This section documents kernel API changes as compared with the current master of
 === API Changes ===
 
  * `seL4_TCB_Configure` arguments changed (scheduling context cap added). Fault endpoints are also now specified in the caller's cspace, as they are installed the the TCB cspace and looked up once rather than every fault. 
- * `seL4_Wait` vs `seL4_Recv`
+ * `seL4_Recv`, `seL4_ReplyRecv`, `seL4_NBRecv` now take a reply object such that the caller can receive a call. The reply capability is generated in the reply object, rather than being saved into the TCB CNode internally. `seL4_Call` must be paired with `seL4_Recv` - and `seL4_CNode_SaveCaller` is no longer required.
+ * `seL4_Wait`, `seL4_NBWait` and variants do not require a reply object and can be paired with `seL4_Send` on endpoints and notifications. Instead of being an API wrapper, this is now a real system call.
+ * `seL4_SetReserved`, `seL4_GetReserved`: set a reserved word in the IPC buffer that may be used by the kernel ABI for arguments that do not fit into registers.
+ *  the x86 kernel ABI now only has 1 message register, due to the need to store the reply object. 
 
 === API Additions ===
 
@@ -53,8 +56,10 @@ This section documents kernel API changes as compared with the current master of
 
  * `seL4_Wait`
  * `seL4_NBWait`
- * `seL4_NBSendRecv` - new system call which allows a single kernel invocation to perform a non-blocking send on one capability, and wait on another. 
+ * `seL4_NBSendRecv` - new system call which allows a single kernel invocation to perform a non-blocking send on one capability, and recieve on another. 
  * `seL4_NBSendRecvWithMRs` - uses above new system call without touching the IPC buffer, passing only data in registers
+* `seL4_NBSendWait` - new system call which allows a single kernel invocation to perform a non-blocking send on one capability, and wait on another (no reply object). 
+ * `seL4_NBSendWaitWithMRs` - uses above new system call without touching the IPC buffer, passing only data in registers
  * `seL4_SchedControl_Configure` - invokes the scheduling control cap to populate a scheduling context with parameters
  * `seL4_SchedContext_Bind` - bind a TCB to a scheduling context, if the TCB is runnable and scheduling context has budget, this will start the TCB running
  * `seL4_SchedContext_Unbind` - remove binding of a scheduling context from a TCB, TCB will no longer run but state will be preserved
@@ -68,6 +73,8 @@ This section documents kernel API changes as compared with the current master of
 
  * `seL4_CNode_SaveCaller` (deprecated by reply objects)
  * `seL4_Reply` (replaced by invoking a reply object)
+ * `seL4_ReplyWithMRs`
+ * 
 
 == Performance improvements ==
 
