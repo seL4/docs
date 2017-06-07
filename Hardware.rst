@@ -3,6 +3,8 @@
 
 [[Hardware/VMware|Running seL4 on VMware]]
 
+[[Hardware/Qemu|Running seL4 on Qemu]]
+
 == x86 ==
 ||'''platform''' ||'''core''' ||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed by''' ||'''maintained by''' ||'''description''' ||
 ||[[Hardware/IA32|PC99]] ||various ||x86 ||VT-X ||VT-D ||unverified ||Data61 ||Data61 ||PC99-style Intel Architecture 32-bit ||
