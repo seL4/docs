@@ -1,6 +1,6 @@
-= seL4 on Qemu =
-
 <<TableOfContents>>
+
+= seL4 on Qemu =
 
 This is a quick guide on how to run seL4 x86/x64 in [[http://www.qemu.org/|Qemu]]. QEMU is a generic and open source machine emulator and virtualizer, and can emulate different architectures on different systems.
 
