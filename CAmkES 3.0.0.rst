@@ -63,7 +63,7 @@ CAmkES dependencies have changed. For a definitive (maintained) list, see: [[CAm
 === Visualization Tool ===
 
 CAmkES comes with a graphical tool for visualising the components and connections in a CAmkES application. For installation and usage instructions,
-[[https://github.com/seL4/camkes-tool/tree/next/camkes/visualCAmkES|see its README]].
+[[https://github.com/seL4/camkes-tool/tree/camkes-3.0.0/camkes/visualCAmkES|see its README]].
 
 === Typed Settings ===
 
@@ -82,12 +82,12 @@ This was to maintain consistency with the rest of our APIs.
 === Non Volatile Dataports ===
 
 Previously, the standard dataport connector, seL4SharedData, use volatile pointers for accessing shared memory. This is no longer the case, and components with dataport interfaces connected with seL4SharedData must explicitly insert barriers around dataport access to ensure the desired memory access ordering.
-[[https://github.com/seL4/camkes-tool/blob/next/docs/index.md#an-example-of-dataports|Read more in the manual.]]
+[[https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-dataports|Read more in the manual.]]
 
 === Custom Attribute Types ===
 
 You can now define custom types for attributes in CAmkES ADL. Custom types resemble structs and arrays in C.
-[[https://github.com/seL4/camkes-tool/blob/next/docs/index.md#an-example-of-structs-and-arrays-for-collections|Read more in the manual.]]
+[[https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-structs-and-arrays-for-collections|Read more in the manual.]]
 
 === Hierarchical Component Syntax Change ===
 
@@ -97,12 +97,12 @@ The syntax for declaring that a component exports an interface from one of it su
 === Binary Semaphores ===
 
 Binary Semaphores have been added as a new synchronization primitive. This is in addition to the existing primitives: semaphores and mutexes.
-[[https://github.com/seL4/camkes-tool/blob/next/docs/index.md#synchronization-primitives|Read more in the manual.]]
+[[https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#synchronization-primitives|Read more in the manual.]]
 
 === Cache Accelerator ===
 
 CAmkES now comes with a small tool for caching compilation results based on source files. This should greatly reduce compilation times by not unnecessarily recompiling code. It is enabled by default. Control it with the `CONFIG_CAMKES_ACCELERATOR` config variable.
-[[https://github.com/seL4/camkes-tool/blob/next/docs/index.md#cache-accelerator|Read more in the manual.]]
+[[https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator|Read more in the manual.]]
 
 === Python 3 Support ===
 
@@ -111,4 +111,4 @@ Previously, CAmkES only worked with python2. It's now compatible with python2 an
 === Refactored Parser ===
 
 The internals of the CAmkES parser have been rewritten to be easier to read and maintain. The parser is structured as a pipeline of transformations.
-[[https://github.com/seL4/camkes-tool/blob/next/docs/index.md#parser-internals|Read more in the manual.]]
+[[https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#parser-internals|Read more in the manual.]]
