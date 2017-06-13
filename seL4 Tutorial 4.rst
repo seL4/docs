@@ -21,7 +21,7 @@ You'll observe that the things you've already covered in the second tutorial are
 
 === hello-4/src/main.c ===
 
-==== TODO 1: ====
+==== TASK 1: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L94)
 
 Aside from receiving information about IRQs in the IRQControl object capability, and information about available IO-Ports, and ASID availability, and several other privileged bits of information, the init thread is also responsible, surprisingly, for reserving certain critical ranges of memory as being used, and unavailable for applications.
@@ -31,19 +31,19 @@ This call to sel4utils_bootstrap_vspace_with_bootinfo_leaky() does that. For an 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/vspace.h#L214
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/vspace.h#L172
 
-==== TODO 2: ====
+==== TASK 2: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L116)
 
 sel4utils_configure_process took a large amount of the work out of creating a new "processs". We skipped a number of steps. Take a look at the source for sel4utils_configure_process() and notice how it spawns the new thread with its own CSpace by automatically. This will have an effect on our tutorial! It means that the new thread we're creating will not share a CSpace with our main thread.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L202
 
-==== TODO 3: ====
+==== TASK 3: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L131)
 
 This should be a fairly easy step to complete!
 
-==== TODO 4: ====
+==== TASK 4: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L143)
 
 Now, in this particular case, we are making the new thread be the sender. Recall that the sender must have a capability to the endpoint that the receiver is listening on, in order to send to that listener. But in this scenario, our threads do '''not''' share the same CSpace! The only way the new thread will know which endpoint it needs a capability to, is if we tell it. Furthermore, even if the new thread knows which endpoint object we are listening on, if it doesn't have a capability to that endpoint, it still can't send data to us. So we must provide our new thread with both a capability to the endpoint we're listening on, and also make sure, that that capability we give it has sufficient privileges to send across the endpoint.
@@ -54,7 +54,7 @@ So we use vka_cspace_make_path(), which locates one free capability slot in the 
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/vka.h#L122
 
-==== TODO 5: ====
+==== TASK 5: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L154)
 
 As discussed above, we now just mint a badged copy of a capability to the endpoint we're listening on, into the new thread's CSpace, in the free slot that the VKA library found for us.
@@ -62,14 +62,14 @@ As discussed above, we now just mint a badged copy of a capability to the endpoi
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L254
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/types_32.bf#L30
 
-==== TODO 6: ====
+==== TASK 6: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L180)
 
 So now that we've given the new thread everything it needs to communicate with us, we can let it run. Complete this step and proceed.
 
 https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L150
  
-==== TODO 7: ====
+==== TASK 7: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L204)
 
 We now wait for the new thread to send us data using seL4_Recv()...
@@ -79,7 +79,7 @@ Then we verify the fidelity of the data that was transmitted.
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L164
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
 
-==== TODO 8: ====
+==== TASK 8: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4/src/main.c#L234)
 
 Another demonstration of the sel4_Reply() facility: we reply to the message sent by the new thread.
@@ -89,7 +89,7 @@ https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#
 
 === hello-4-app/src/main.c ===
 
-==== TODO 9: ====
+==== TASK 9: ====
 Corresponding line in tutorial: (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-4-app/src/main.c#L38)
 
 In the new thread, we initiate communications by using seL4_Call(). As outlined above, the receiving thread replies to us using sel4_ReplyRecv(). The new thread then checks the fidelity of the data that was sent, and that's the end.
