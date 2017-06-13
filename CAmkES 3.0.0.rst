@@ -72,6 +72,8 @@ The "Buf" type for dataports can now be optionally parametrised with the datapor
 
 === The seL4Asynch connector has been renamed to seL4Notification ===
 
+This was to maintain consistency with the rest of our APIs.
+
 === Non Volatile Dataports ===
 
 Previously, the standard dataport connector, seL4SharedData, use volatile pointers for accessing shared memory. This is no longer the case, and components with dataport interfaces connected with seL4SharedData must explicitly insert barriers around dataport access to ensure the desired memory access ordering.
@@ -81,6 +83,11 @@ Previously, the standard dataport connector, seL4SharedData, use volatile pointe
 
 You can now define custom types for attributes in CAmkES ADL. Custom types resemble structs and arrays in C.
 [[https://github.com/seL4/camkes-tool/blob/next/docs/index.md#an-example-of-structs-and-arrays-for-collections|Read more in the manual.]]
+
+=== Hierarchical Component Syntax Change ===
+
+The syntax for declaring that a component exports an interface from one of it sub-components has changed.
+[[CAmkESDifferences#Hierarchical_Components|See an example.]]
 
 === Binary Semaphores ===
 
