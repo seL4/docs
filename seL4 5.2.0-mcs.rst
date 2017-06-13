@@ -1,5 +1,3 @@
-/!\ Draft /!\
-
 = seL4 MCS pre-release (5.2.0-mcs) =
 
 This is a pre-release of the seL4 mixed-criticality systems (RT) extensions. This branch is not verified and is under active verification. This is a subset of the previously released RT extensions, which still exist and can be provided on request. 
@@ -101,11 +99,19 @@ This section documents kernel ABI and libsel4 changes as compared with seL4 5.2.
 
 == Library & test compatability ==
 
-TODO update
+ * CAmkES and CapDL both support seL4 5.2.0-mcs on their master branches. 
+ * seL4_libs and sel4test both have `5.2.0-mcs-compatible` branches that work with the forked API
+ * You can obtain and run sel4test for seL4 5.2.0-mcs by doing the following:
 
-The 'rt' branch of seL4_libs has been adapted to the rt branch of seL4, and the rt branch of sel4test has been ported to the seL4_rt-dev-1.0.0 kernel, along with many more tests written suited to the rt kernel. To run it, checkout the default.xml manifest on the rt branch of [[https://github.com/seL4/sel4test-manifest/tree/rt|sel4test-manifest]].
+{{{
+$ mkdir sel4test-mcs
+$ cd sel4test-mcs
+$ repo init -u https://github.com/seL4/sel4test-manifest.git -m 5.2.x-mcs.xml
+$ repo sync
+}}}
 
-The `rt` branch is in no way compatible with the master branch of seL4.
+ * A [[https://wiki.sel4.systems/seL4%20RT%20tutorial|new tutorial]] covers the difference in the APIs
+ 
 
 == Hardware support ==
 
