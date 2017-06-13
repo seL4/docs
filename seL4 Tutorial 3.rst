@@ -19,6 +19,7 @@ You'll observe that the things you've already covered in the second tutorial are
  * IPC Message format, and Message Registers. seL4 binds some of the first Message Registers to hardware registers, and the rest are transferred in the IPC buffer.
  * Understand that each thread has only one IPC buffer, which is pointed to by its TCB. It's possible to make a thread wait on both an Endpoint and a Notification using "Bound Notifications".
  * Understand CSpace pointers, which are really just integers with multiple indexes concatenated into one. Understanding them well however, is important to understanding how capabilities work. Be sure you understand the diagram on the "'''CSpace example and addressing'''" slide.
+=== Tasks ===
 
 ==== TASK 1: ====
 ''Corresponding line in tutorial:'' (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-3/src/main.c#L188)
