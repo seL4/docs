@@ -13,8 +13,8 @@ This tutorial is a fairly simple introduction to debugging, and doesn't really f
  * Reader should become accustomed to the idea that the compiler and language runtime are now part of his responsibility, and s/he should become at least trivially acquainted with the C runtime which he can usually ignore, and debug with it in mind.
  * Offhandedly hints to the reader that s/he should become acquainted with the Kconfig/Kbuild build utilities.
 
-== Walkthrough of TODOs: ==
-==== TODO 1: ====
+== Walkthrough of Tasks: ==
+==== TASK 1: ====
 ''Corresponding line in tutorial:'' (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-1/src/main.c#L18)
 
 Regardless of the programming language used, every binary that is created must have an entry point, which is the first instruction in the program. In the C Runtime, this is usually "_start()", which then calls some other compiler-specific and platform specific functions to initialize the program's environment, before calling the "main()" function. What you see here is the linker complaining that when _start() tried to call main(), it couldn't find a main() function, because one doesn't exist. Create a main() function, and proceed to the next step in the slides.
