@@ -16,7 +16,7 @@ This page archives all of the release notes for seL4.
 
 == Experimental branches ==
 
-=== Realtime ===
+=== Mixed Criticality Support (MCS) / Realtime ===
 
  * [[seL4 5.2.0-mcs]]([[http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf|manual]]) 
  * [[seL4 1.0.0-rt-dev]] ([[http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf|manual]])
