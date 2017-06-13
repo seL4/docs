@@ -3,9 +3,7 @@
 #format wiki
 #language en
 
-/!\ DRAFT /!\
-
-= seL4 MCS Tutorial =
+= seL4 5.2.0-MCS Tutorial =
 
 This tutorial demonstrates how to use the real-time features of the MCS kernel API, it covers enough such that if you have already done the seL4 tutorials for master and are familiar with the API, you do not need to redo the previous ones. As a result is does duplicate some of the work from the other tutorials, but not all. 
 
