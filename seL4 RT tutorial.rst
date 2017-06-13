@@ -462,7 +462,7 @@ echo: 2nd message processed
 echo: mcs tutorial finished!
 }}}
 
-== Finished! == 
+== Finished! ==
 
 You're done. Please enjoy experimenting with the pre-release MCS version of seL4. Recall that this version is currently undergoing verification, but is not yet verified - meaning it can crash. If it does please let us know by raising an issue on the [[https://github.com/seL4/seL4/issues|seL4 Github]]. 
 
