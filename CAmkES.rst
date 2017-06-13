@@ -14,37 +14,37 @@ The development framework provides:
  * Make sure that you already have the tools to build seL4 ([[Getting started#Setting_up_your_machine|seL4: Setting up your machine]])
 
 == Build dependencies ==
- * You must first install [[https://wiki.sel4.systems/Getting%20started#Build_Dependencies|the SEL4 dependencies]], and then you should move on to the instructions in this section.
- * Install [[https://haskellstack.org | haskell stack]] (haskell version and package manager)
+ * Getting dependencies differs across systems. Here's how to install dependencies for several systems:
+  * Ubuntu 16.04
+    {{{#!highlight bash numbers=off
+apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang \
+libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect \
+qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
+}}}
+  * Ubuntu 14.04
+    {{{#!highlight bash numbers=off
+apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils \
+cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect \
+qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi \
+gcc-5 gcc-5-multilib
 
-{{{#!highlight bash numbers=off
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
+}}}
+  * Archlinux
+    {{{#!highlight bash numbers=off
+pacman -S binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
+cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
+
+yaourt -S bcunit-cunit-compat spin
+}}}
+ * Regardless of you system, you will need to install haskell, and some python dependencies
+  * Install [[https://haskellstack.org | haskell stack]] (haskell version and package manager)
+    {{{#!highlight bash numbers=off
 curl -sSL https://get.haskellstack.org/ | sh
 }}}
-OR
-{{{#!highlight bash numbers=off
-sudo apt-get install haskell-stack
-}}}
-
- * Install python dependencies (via pip):
-
-{{{#!highlight bash numbers=off
-apt-get install python-pip
+  * Install python dependencies (via pip):
+    {{{#!highlight bash numbers=off
 pip install --user camkes-deps
-}}}
-OR
-{{{#!highlight bash numbers=off
-sudo apt-get install python-ply python-jinja2 python-pyelftools
-}}}
- * If building on a 64-bit system ensure 32-bit compiler tools are installed, mainly:
-
-{{{#!highlight bash numbers=off
-apt-get install lib32gcc1
-}}}
-
- * And the correct version of multilib for your gcc, for example:
-
-{{{#!highlight bash numbers=off
-apt-get install gcc-multilib
 }}}
 
 == Download CAmkES ==
@@ -87,10 +87,6 @@ To learn about developing your own CAmkES application, read the [[https://sel4.s
 == Camkes Terminology/Glossary ==
 
 Can be found [[CAmkES/Terminology|here]].
-
-== Camkes Next ==
-
-Information about the active development branch of Camkes can be found [[CAmkESNext|here]].
 
 == CAmkES VM ==
 
