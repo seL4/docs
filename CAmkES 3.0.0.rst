@@ -60,6 +60,11 @@ CAmkES dependencies have changed. For a definitive (maintained) list, see: [[CAm
 
 == New Features ==
 
+=== Visualization Tool ===
+
+CAmkES comes with a graphical tool for visualising the components and connections in a CAmkES application. For installation and usage instructions,
+[[https://github.com/seL4/camkes-tool/tree/next/camkes/visualCAmkES|see its README]].
+
 === Typed Settings ===
 
 Previously, the values of settings (in "configuration" blocks) were strings under the hood. Now they are stored as a value of the appropriate (python) type, determined during parsing.
