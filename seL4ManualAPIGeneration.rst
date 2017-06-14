@@ -24,9 +24,16 @@ Documentation for each seL4 API is written in the form of doxygen comments in C 
 
 Rather than using doxygen's LaTeX output directly, we use doxygen to generate XML files. A custom script then parses the XML and produces the final LaTeX output. This is because we already have an established style for API documentation in our manual, and it was easier to generate LaTeX in this style ourselves from some simple (ie. easy to parse) intermediate format (ie. XML) rather than try to coerce doxygen into generating perfectly-styled LaTeX.
 
-=== Referencing Existing Documentation ===
+=== Custom Notation in Doxygen Comments ===
 
-Some parts of the API documentation reference other parts of the manual.
+Some parts of the API documentation reference other parts of the manual. Additionally, there are some custom formatting rules we'd like to apply to the API docs in the manual that aren't understood by doxygen. To achieve both these goals, we introduce some additional XML tags which we explicitly add to doxygen comments inside `@xmnonly ... @endxmlonly` blocks.
+
+Here's a description of all the custom tags:
+||`<manual name="NAME" label="LABEL"/>`||Introduces documentation for a new function. The title of the section documenting the function will be `NAME`. Other parts of the manual can refer to this function's documentation with `\autoref{sec:LABEL}`||
+||`<autoref sec="SEC"/>`||Translated to the latex `\autoref{sec:SEC}`||
+||`<shortref sec="SEC"/>`||Translated to the latex `\ref{sec:SEC}`||
+||`<errorenumdesc/>`||Translated to the latex `\errorenumdesc`, a custom command defined in [[https://github.com/seL4/seL4/blob/master/manual/parts/api.tex|manual/parts/api.tex]]||
+
 
 == System Calls ==
 
