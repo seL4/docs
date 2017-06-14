@@ -92,3 +92,7 @@ Can be found [[CAmkES/Terminology|here]].
 == CAmkES VM ==
 
 Information about the x86 camkes vm can be found [[CAmkESVM|here]].
+
+== Visual CAmkES ==
+
+CAmkES comes with a tool for visualising the components and connections making up an application. For more info, see [[VisualCAmkES|here]].
