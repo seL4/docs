@@ -1,4 +1,4 @@
-= Differences between CAmkES master and next branches =
+= Differences between CAmkES 2 and 3 =
 
 == Rich Types for Settings ==
 
@@ -86,13 +86,13 @@ connection seL4RPCCall bar(from b.y, to c.z);
 connection seL4RPCCall foobar(from a.x, from b.y, to c.z);
 }}}
 
-Both syntaxes are supported by CAmkES next.
+Both syntaxes are supported by CAmkES 3.
 
 == Hardware Component Configuration Attributes ==
 
-The attributes for configuring hardware components have changed. Below is CAmkES master spec, followed by the equivalent CAmkES next spec. These changes are not backwards compatible.
+The attributes for configuring hardware components have changed. Below is a CAmkES 2 spec, followed by the equivalent CAmkES 3 spec. These changes are not backwards compatible.
 
-These component definitions are the same for the master and next versions:
+These component definitions are the same in CAmkES 2 and 3:
 {{{
 component Device {
   hardware;
@@ -108,7 +108,7 @@ component Driver {
 }
 }}}
 
-The composition section of the spec is the same for the master and next versions:
+The composition section of the spec is the same for CAmkES 2 and 3:
 {{{
 assembly {
   composition {
@@ -125,7 +125,7 @@ assembly {
 }
 }}}
 
-Master configuration:
+CAmkES 2 configuration:
 {{{
 configuration {
   device.registers_attributes = "0x12345000:0x1000"; // string in format "paddr:size"
@@ -134,7 +134,7 @@ configuration {
 }
 }}}
 
-Next configuration:
+CAmkES 3 configuration:
 {{{
 configuration {
   device.registers_paddr = 0x12345000;               // separate attribute for paddr and size
@@ -146,10 +146,10 @@ configuration {
 
 == Interrupt API ==
 
-In CAmkES master, interrupts were abstracted as CAmkES events, emitted from a hardware component.
+In CAmkES 2, interrupts were abstracted as CAmkES events, emitted from a hardware component.
 For a component with an interface {{{foo}}} connected to an interrupt, components could call {{{foo_wait()}}}, {{{foo_poll()}}}, and {{{foo_reg_callback()}}}, as with a regular event.
 
-In CAmkES next, interrupts are still abstracted as events in the ADL (CAmkES spec).
+In CAmkES 3, interrupts are still abstracted as events in the ADL (CAmkES spec).
 Component implementations however, use a different interface for interacting with interrupts than with regular event interfaces.
 More specifically, a component with an interface {{{foo}}} connected with the {{{seL4HardwareInterrupt}}} connection has access to {{{foo_acknowledge()}}} which acknowledges the associated interrupt to the kernel.
 In addition, the component implementation must provide a definition of a function {{{void foo_handler(void)}}}.
@@ -160,7 +160,7 @@ Unlike callbacks registered with {{{*_reg_callback}}}, interrupt handlers do not
 
 == Hierarchical Components ==
 
-The syntax for defining hierarchical components has changed in CAmkES next. CAmkES master had special connectors used to export an interface of a sub-component:
+The syntax for defining hierarchical components has changed in CAmkES 3. CAmkES 2 had special connectors used to export an interface of a sub-component:
 
 {{{
 component Serial {
@@ -183,7 +183,7 @@ component Serial {
 }
 }}}
 
-CAmkES next introduces special syntax for exposing interfaces of sub-components:
+CAmkES 3 introduces special syntax for exposing interfaces of sub-components:
 {{{
 component Serial {
 
