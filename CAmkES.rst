@@ -96,3 +96,7 @@ Information about the x86 camkes vm can be found [[CAmkESVM|here]].
 == Visual CAmkES ==
 
 CAmkES comes with a tool for visualising the components and connections making up an application. For more info, see [[VisualCAmkES|here]].
+
+== Changes in CAmkES 3 ==
+
+The current version of CAmkES introduces a number of syntactic and functional changes. For details about what's changed, see [[CAmkESDifferences|here]].
