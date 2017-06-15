@@ -45,7 +45,7 @@ The script that translates doxygen-generated xml into LaTeX is in: [[https://git
 
 === Custom Notation in Doxygen Comments ===
 
-Some parts of the API documentation reference other parts of the manual. Additionally, there are some custom formatting rules we'd like to apply to the API docs in the manual that aren't understood by doxygen. To achieve both these goals, we introduce some additional XML tags which we explicitly add to doxygen comments inside `@xmnonly ... @endxmlonly` blocks.
+Some parts of the API documentation reference other parts of the manual. Additionally, there are some custom formatting rules we'd like to apply to the API docs in the manual that aren't understood by doxygen. To achieve both these goals, we introduce some additional XML tags which we explicitly add to doxygen comments inside `@xmlonly ... @endxmlonly` blocks.
 
 Here's a description of all the custom tags:
 ||`<manual name="NAME" label="LABEL"/>`||Introduces documentation for a new function. The title of the section documenting the function will be `NAME`. Other parts of the manual can refer to this function's documentation with `\autoref{sec:LABEL}`||
