@@ -55,6 +55,10 @@ Each function in the API must have the following documentation:
 
 If a required part of a function's documentation is empty, the translation script will insert the LaTeX command `\todo`, defined in [[https://github.com/seL4/seL4/blob/master/manual/parts/api.tex|manual/parts/api.tex]]. It generates the text "TODO" to help readers of the manual identify which parts of the API are undocumented.
 
+=== Generated LaTeX Files ===
+
+
+
 == System Calls ==
 
-A prototype for each system call is declared in [[https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/syscalls.h|libsel4/include/sel4/syscalls.h]]. Each prototype is accompanied by a doxygen comment
+A prototype for each system call is declared in [[https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/syscalls.h|libsel4/include/sel4/syscalls.h]]. Each function is documented with a comment of the form described above.
