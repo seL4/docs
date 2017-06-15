@@ -24,6 +24,8 @@ Documentation for each seL4 API is written in the form of doxygen comments in C 
 
 Rather than using doxygen's LaTeX output directly, we use doxygen to generate XML files. A custom script then parses the XML and produces the final LaTeX output. This is because we already have an established style for API documentation in our manual, and it was easier to generate LaTeX in this style ourselves from some simple (ie. easy to parse) intermediate format (ie. XML) rather than try to coerce doxygen into generating perfectly-styled LaTeX.
 
+The script that translates doxygen-generated xml into LaTeX is in: [[https://github.com/seL4/seL4/blob/master/manual/tools/parse_doxygen_xml.py|manual/tools/parse_doxygen_xml.py]].
+
 === Custom Notation in Doxygen Comments ===
 
 Some parts of the API documentation reference other parts of the manual. Additionally, there are some custom formatting rules we'd like to apply to the API docs in the manual that aren't understood by doxygen. To achieve both these goals, we introduce some additional XML tags which we explicitly add to doxygen comments inside `@xmnonly ... @endxmlonly` blocks.
@@ -33,7 +35,23 @@ Here's a description of all the custom tags:
 ||`<autoref sec="SEC"/>`||Translated to the latex `\autoref{sec:SEC}`||
 ||`<shortref sec="SEC"/>`||Translated to the latex `\ref{sec:SEC}`||
 ||`<errorenumdesc/>`||Translated to the latex `\errorenumdesc`, a custom command defined in [[https://github.com/seL4/seL4/blob/master/manual/parts/api.tex|manual/parts/api.tex]]||
+||`<obj name="NAME"/>||Translated to the latex `\obj{NAME}`, a custom command defined in [[https://github.com/seL4/seL4/blob/master/manual/manual.tex|manual/manual.tex]]||
+||`<texttt text="TEXT"/>||Translated to the latex `\texttt{TEXT}||
 
+Note that these must appear within `@xmlonly ... @endxmlonly` blocks in order to function.
+
+=== Required Documentation ===
+
+Each function in the API must have the following documentation:
+ * a `@xmlonly <manual name="..." label=".../> @endxmlonly` tag with the `name` for use in the manual's text, and a `label` for creating references within the manual
+ * a `@brief` description
+ * a detailed description
+ * a `@param` description of each argument
+ * a `@return` description of the return value, unless the function is `void`
+
+=== Detecting Missing Documentation ===
+
+If a required part of a function's documentation is empty, the translation script will insert the LaTeX command `\todo`, defined in [[https://github.com/seL4/seL4/blob/master/manual/parts/api.tex|manual/parts/api.tex]]. It generates the text "TODO" to help readers of the manual identify which parts of the API are undocumented.
 
 == System Calls ==
 
