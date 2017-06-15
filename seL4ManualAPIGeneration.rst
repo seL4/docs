@@ -2,6 +2,8 @@
 
 The documentation of the seL4 API in the [[http://sel4.systems/Info/Docs/seL4-manual-latest.pdf|seL4 manual]] is automatically generated from comments in [[https://github.com/seL4/seL4/tree/master/libsel4|libsel4]]'s source code. This page documents this process.
 
+<<TableOfContents()>>
+
 == File Paths ==
 
 This page will use file paths relative to the root of the [[https://github.com/seL4/seL4|seL4 repository]]. In projects cloned using a repo manifest, this will correspond to the `kernel` subdirectory of the top-level directory.
@@ -35,8 +37,8 @@ Here's a description of all the custom tags:
 ||`<autoref sec="SEC"/>`||Translated to the latex `\autoref{sec:SEC}`||
 ||`<shortref sec="SEC"/>`||Translated to the latex `\ref{sec:SEC}`||
 ||`<errorenumdesc/>`||Translated to the latex `\errorenumdesc`, a custom command defined in [[https://github.com/seL4/seL4/blob/master/manual/parts/api.tex|manual/parts/api.tex]]||
-||`<obj name="NAME"/>||Translated to the latex `\obj{NAME}`, a custom command defined in [[https://github.com/seL4/seL4/blob/master/manual/manual.tex|manual/manual.tex]]||
-||`<texttt text="TEXT"/>||Translated to the latex `\texttt{TEXT}||
+||`<obj name="NAME"/>`||Translated to the latex `\obj{NAME}`, a custom command defined in [[https://github.com/seL4/seL4/blob/master/manual/manual.tex|manual/manual.tex]]||
+||`<texttt text="TEXT"/>`||Translated to the latex `\texttt{TEXT}`||
 
 Note that these must appear within `@xmlonly ... @endxmlonly` blocks in order to function.
 
