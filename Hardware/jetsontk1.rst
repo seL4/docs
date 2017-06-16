@@ -60,6 +60,8 @@ bootelf ${loadaddr}
 
 = Flash U-Boot =
 
+This flashing procedure is for the Jetson TK1 by NVIDIA. There is another TK1 board called the TK1-SOM by Colorado Engineering which requires a different flashing procedure. If you are trying to flash a TK1-SOM, please [[https://wiki.sel4.systems/Hardware/CEI_TK1_SOM#U-Boot|use the procedure described here instead]].
+
 The initial version of U-Boot does not provides all necessary functionality. In particular, it boots the system in secure mode.  To run a virtual machine monitor, the Tegra needs to be booted in nonsecure or HYP mode.
 After installing a new u-boot (instructions below) you can boot in either secure on non-secure mode based on a u-boot environment variable.
 
