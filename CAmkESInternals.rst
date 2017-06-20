@@ -82,3 +82,20 @@ Updates the CapDL database, adding a named cap to a given object to the current 
 /*- set ep_cap = alloc_cap("my_ep_cap", ep) -*/
 seL4_Wait(/*? ep_cap ?*/);
 }}}
+
+==== alloc(name, type) ====
+
+Effectively equivalent to `alloc_cap(name, alloc_obj(name, type))`
+
+== Template Instantiation Order ==
+
+CAmkES makes no guarantees about the order in which templates will be instantiated. An implication of this, is that if multiple components want a cap to the same object (e.g. an endpoint which two components use to communicate), each template that needs to talk about a cap to the object must first allocate it unless it's already allocated. This is because you can't talk about a cap to an object until that object has been allocated. Typically in such a situation, you'll see the following template code on both sides of the connection:
+
+{{{
+/*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
+/*- set ep_cap = alloc_cap('this_components_ep_cap', ep) -*/
+
+// do something with ep_cap
+}}}
+
+Looking at the code, it appears the endpoint will be allocated twice, as both sides of the connection will call `alloc_obj`. Digging deeper into the implementation of `alloc_obj`, we see it calls a function called `guard`. `guard` is a bit of a misnomer. A more appropriate name might be `allocate_unless_already_allocated`. It checks whether there's already an object by the given name, returns the object if it exists, otherwise allocates and returns it.
