@@ -17,6 +17,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Hardware|Hardware Support]]
  * [[SeL4Libraries|seL4 libraries]]
  * [[CAmkES]]
+ * [[CapDL]]
  * [[Testing]]
  * [[Debugging guide]]
  * [[Benchmarking guide]]
