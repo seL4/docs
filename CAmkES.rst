@@ -100,3 +100,7 @@ CAmkES comes with a tool for visualising the components and connections making u
 == Changes in CAmkES 3 ==
 
 The current version of CAmkES introduces a number of syntactic and functional changes. For details about what's changed, see [[CAmkESDifferences|here]].
+
+== Internals ==
+
+Here's some information about the internals of the CAmkES tool: [[CAmkESInternals]]
