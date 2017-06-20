@@ -2,6 +2,8 @@
 
 CapDL is the "Capability Distribution Language". It's used to describe the kernel objects a seL4 application needs, and how capabilities to those objects will be distributed.
 
+All CapDL-related projects are in this repo: https://github.com/sel4/capdl
+
 == Example Spec ==
 
 {{{
@@ -43,8 +45,6 @@ caps {
 }
 }}}
 
-All CapDL-related projects are in this repo: https://github.com/sel4/capdl. Each will be described below.
-
 == CapDL Translator (capDL-tool) ==
 
 This program transforms a CapDL spec into several formats:
@@ -60,3 +60,5 @@ The CapDL Loader is a program that initializes the seL4 user-level environment t
 The CapDL Loader must be linked against a CapDL spec - the C output of the CapDL Translator. It must also be linked against a cpio archive containing ELF images. It creates objects and distributes caps as per the spec (if enough resources are available), and then loads programs into memory at locations specified by the spec. Finally, it starts all the threads it created and sleeps forever.
 
 == Python CapDL Library (python-capdl-tool) ==
+
+This library allows one to build up an in-memory database storing the same information as a capdl spec. This is useful as it allows capdl specs to be generated programmatically, and allows the programmer to incrementally add information about kernel objects and capability distribution. This library is used by [[CAmkES]] to build up a spec describing the entire system (all components and connections).
