@@ -89,7 +89,7 @@ Effectively equivalent to `alloc_cap(name, alloc_obj(name, type))`
 
 == Template Instantiation Order ==
 
-CAmkES makes no guarantees about the order in which templates will be instantiated. An implication of this, is that if multiple components want a cap to the same object (e.g. an endpoint which two components use to communicate), each template that needs to talk about a cap to the object must first allocate it unless it's already allocated. This is because you can't talk about a cap to an object until that object has been allocated. Typically in such a situation, you'll see the following template code on both sides of the connection:
+CAmkES makes no guarantees about the order in which templates will be instantiated (except that the makefile will be first, and the capdl spec will be last). An implication of this, is that if multiple components want a cap to the same object (e.g. an endpoint which two components use to communicate), each template that needs to talk about a cap to the object must first allocate it unless it's already allocated. This is because you can't talk about a cap to an object until that object has been allocated. Typically in such a situation, you'll see the following template code on both sides of the connection:
 
 {{{
 /*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
@@ -99,3 +99,17 @@ CAmkES makes no guarantees about the order in which templates will be instantiat
 }}}
 
 Looking at the code, it appears the endpoint will be allocated twice, as both sides of the connection will call `alloc_obj`. Digging deeper into the implementation of `alloc_obj`, we see it calls a function called `guard`. `guard` is a bit of a misnomer. A more appropriate name might be `allocate_unless_already_allocated`. It checks whether there's already an object by the given name, returns the object if it exists, otherwise allocates and returns it.
+
+== Perspectives ==
+
+In the CAmkES internals, a Perspective is collection of names of '''some''' entities (components, kernel objects, caps, etc) in some context, from which '''all''' (or at least more) names can be derived using some name mangling rules. It's implemented here: https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py
+
+Typical usage of a Perspective is adding names until it has enough information to derive the names you need, then querying it for the names you need. Here's an example of this:
+{{{
+p = Perspective(instance='foo', control=True)
+print(p['ipc_buffer_symbol']) # prints "_camkes_ipc_buffer_foo_0_control"
+}}}
+
+Here we tell the perspective that we want names in the context of a component instance name "foo". This implies that the name of the ipc buffer symbol of the control thread will be "_camkes_ipc_buffer_foo_0_control".
+
+Whenever you add an attribute that has some meaning for all components (e.g. thread priority, scheduling context budget), or symbols to generated c code (e.g. stack, ipc buffer, dma pool), or any other time where you want to name a thing based on its context, it might be worth adding name mangling rules to simplify programmatically determining the names of those things. There are many examples of rule definitions in https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py
