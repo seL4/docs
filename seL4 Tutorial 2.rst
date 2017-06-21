@@ -22,6 +22,15 @@ Don't gloss over the globals declared before `main()` -- they're declared for yo
 
 == Walkthrough ==
 
+{{{
+# select the config for the first tutorial 
+make ia32_hello-1_defconfig
+# build it
+make -j8
+# run it in qemu
+make simulate
+}}}
+
 Look for `TASK` in the `apps/hello-2` directory for each task.
 
 === TASK 1 ===
