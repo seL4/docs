@@ -2,7 +2,7 @@
 ##master-date:Unknown-Date
 #format wiki
 #language en
-= Summary: =
+= seL4 Tutorial 2 =
 The second tutorial is useful in that it addresses conceptual problems for two different types of developers:
 
  * Experienced kernel developers whose minds are pre-programmed to think in terms of "One address space equals one process", and begins to introduce the seL4 CSpace vs VSpace model.
