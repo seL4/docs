@@ -42,7 +42,7 @@ Here's the first step in a conventional memory manager's process of allocating m
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
 
-=== TASK 3 ===
+=== TASK 2 ===
 
 Take note of the line of code that precedes this: the one where a virtual address is randomly chosen for use. This is because, as we explained before, the process is responsible for its own Virtual Memory Management. As such, if it chooses, it can map any page in its VSpace to physical frame. It can technically choose to do unconventional things, like not unmap PFN #0. The control of how the address space is managed is up to the threads that have write-capabilities to that address space. There is both flexibility and responsibility implied here. Granted, seL4 itself provides strong guarantees of isolation even if a thread decides to go rogue.
 
@@ -57,7 +57,7 @@ So just as you previously had to manually retype a new frame to use for your IPC
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
 
-=== TASK 3 ===
+=== TASK 4 ===
 
 If you successfully retyped a new page table from an untyped memory object, you can now map that new page table into your VSpace, and then try again to finally map the IPC-buffer's frame object into the VSpace.
 
@@ -71,7 +71,7 @@ If everything was done correctly, there is no reason why this step should fail. 
 
 === TASK 6 ===
 
-Now we have a (fully mapped) IPC buffer -- but no Endpoint object to send our IPC data across. We must retype an untyped object into a kernel Endpoint object, and then proceed. This could be done via a more low-levelled approach using seL4_Untyped_Retype(), but instead, the tutorial makes use of the VKA allocator. Remember that the VKA allocator is an seL4 type-aware object allocator? So we can simply ask it for a new object of a particular type, and it will do the low-level retyping for us, and return a capability to a new object as requested.
+Now we have a (fully mapped) IPC buffer -- but no Endpoint object to send our IPC data across. We must retype an untyped object into a kernel Endpoint object, and then proceed. This could be done via a more low-level approach using `seL4_Untyped_Retype()`, but instead, the tutorial makes use of the VKA allocator. Remember that the VKA allocator is an seL4 type-aware object allocator? So we can simply ask it for a new object of a particular type, and it will do the low-level retyping for us, and return a capability to a new object as requested.
 
 In this case, we want a new Endpoint so we can do IPC. Complete the step and proceed.
 https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
@@ -82,25 +82,25 @@ Badges are used to uniquely identify a message queued on an endpoint as having c
 
 Note the distinction: the badge is not applied to the target endpoint, but to the sender's '''capability''' to the target endpoint. This enables the listening thread to mint off copies of a capability to an Endpoint to multiple senders. Each sender is responsible for applying a unique badge value to the capability that the listener gave it so that the listener can identify it.
 
-In this step, you are badging the endpoint that you will use when sending data to the thread you will be creating later on. The vka_mint_object() call will return a new, badged copy of the capability to the endpoint that your new thread will listen on. When you send data to your new thread, it will receive the badge value with the data, and know which sender you are. Complete the step and proceed.
+In this step, you are badging the endpoint that you will use when sending data to the thread you will be creating later on. The `vka_mint_object()` call will return a new, badged copy of the capability to the endpoint that your new thread will listen on. When you send data to your new thread, it will receive the badge value with the data, and know which sender you are. Complete the step and proceed.
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h
 https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/types_32.bf
 
 === TASK 8 ===
 
-Here we get a formal introduction to message registers. At first glance, you might wonder why the "sel4_SetMR()" calls don't specify a message buffer, and seem to know which buffer to fill out -- and that would be correct, because they do. They are operating directly on the sending thread's IPC buffer. Recall that each thread has only one IPC buffer. Go back and look at your call to seL4_TCB_Configure() in step 7 again: you set the IPC buffer for the new thread in the last 2 arguments to this function. Likewise, the thread that created '''your''' main thread also set an IPC buffer up for you.
+Here we get a formal introduction to message registers. At first glance, you might wonder why the `sel4_SetMR()` calls don't specify a message buffer, and seem to know which buffer to fill out -- and that would be correct, because they do. They are operating directly on the sending thread's IPC buffer. Recall that each thread has only one IPC buffer. Go back and look at your call to `seL4_TCB_Configure()` in step 7 again: you set the IPC buffer for the new thread in the last 2 arguments to this function. Likewise, the thread that created '''your''' main thread also set an IPC buffer up for you.
 
-So seL4_SetMR() and seL4_GetMR() simply write to and read from the IPC buffer you designated for your thread. MSG_DATA is uninteresting -- can be any value. You'll find the seL4_MessageInfo_t type explained in the manuals. In short, it's a header that is embedded in each message that specifies, among other things, the number of Message Registers that hold meaningful data, and the number of capabilities that are going to be transmitted in the message.
+So `seL4_SetMR()` and `seL4_GetMR()` simply write to and read from the IPC buffer you designated for your thread. `MSG_DATA` is uninteresting -- can be any value. You'll find the `seL4_MessageInfo_t` type explained in the manuals. In short, it's a header that is embedded in each message that specifies, among other things, the number of Message Registers that hold meaningful data, and the number of capabilities that are going to be transmitted in the message.
 
 https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
 https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h
 
 === TASK 9 ===
 
-Now that you've constructed your message and badged the endpoint that you'll use to send it, it's time to send it. The "seL4_Call()" syscall will send a message across an endpoint synchronously. If there is no thread waiting at the other end of the target endpoint, the sender will block until there is a waiter. The reason for this is because the seL4 kernel would prefer not to buffer IPC data in the kernel address space, so it just sleeps the sender until a receiver is ready, and then directly copies the data. It simplifies the IPC logic. There are also polling send operations, as well as polling receive operations in case you don't want to be forced to block if there is no receiver on the other end of an IPC Endpoint.
+Now that you've constructed your message and badged the endpoint that you'll use to send it, it's time to send it. The `seL4_Call()` syscall will send a message across an endpoint synchronously. If there is no thread waiting at the other end of the target endpoint, the sender will block until there is a waiter. The reason for this is because the seL4 kernel would prefer not to buffer IPC data in the kernel address space, so it just sleeps the sender until a receiver is ready, and then directly copies the data. It simplifies the IPC logic. There are also polling send operations, as well as polling receive operations in case you don't want to be forced to block if there is no receiver on the other end of an IPC Endpoint.
 
-When you send your badged data using seL4_Call(), our receiving thread (which we created earlier) will pick up the data, see the badge, and know that it was us who sent the data. Notice how the sending thread uses the '''badged''' capability to the endpoint object, and the receiving thread uses the unmodified original capability to the same endpoint? The sender must identify itself.
+When you send your badged data using `seL4_Call()`, our receiving thread (which we created earlier) will pick up the data, see the badge, and know that it was us who sent the data. Notice how the sending thread uses the '''badged''' capability to the endpoint object, and the receiving thread uses the unmodified original capability to the same endpoint? The sender must identify itself.
 
 Notice also that the fact that both the sender and the receiver share the same root CSpace, enables the receiving thread to just casually use the original, unbadged capability without any extra work needed to make it accessible.
 
@@ -111,15 +111,15 @@ https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.b
 
 === TASK 10 ===
 
-While this TODO is out of order, since we haven't yet examined the receive-side of the operation here, it's fairly simple anyway: this TODO occurs after the receiver has sent a reply, and it shows the sender now reading the reply from the receiver. As mentioned before, the seL4_GetMR() calls are simply reading from the calling thread's designated, single IPC buffer.
+While this task is out of order, since we haven't yet examined the receive-side of the operation here, it's fairly simple anyway: this task occurs after the receiver has sent a reply, and it shows the sender now reading the reply from the receiver. As mentioned before, the `seL4_GetMR()` calls are simply reading from the calling thread's designated, single IPC buffer.
 
 https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h
 
 === TASK 11 ===
 
-We're now in the receiving thread. The seL4_Recv() syscall performs a blocking listen on an Endpoint or Notification capability. When new data is queued (or when the Notification is signalled), the seL4_Recv operation will unqueue the data and resume execution.
+We're now in the receiving thread. The `seL4_Recv()` syscall performs a blocking listen on an Endpoint or Notification capability. When new data is queued (or when the Notification is signalled), the `seL4_Recv` operation will unqueue the data and resume execution.
 
-Notice how the seL4_Recv() operation explicitly makes allowance for reading the badge value on the incoming message? The receiver is explicitly interested in distinguishing the sender.
+Notice how the `seL4_Recv()` operation explicitly makes allowance for reading the badge value on the incoming message? The receiver is explicitly interested in distinguishing the sender.
 
 https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h
 https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
@@ -144,9 +144,9 @@ https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/fun
 
 === TASK 15 ===
 
-This is a formal introduction to the "Reply" capability which is automatically generated by the seL4 kernel, whenever an IPC message is sent using the seL4_Call() syscall. This is unique to the seL4_Call() syscall, and if you send data instead with the seL4_Send() syscall, the seL4 kernel will not generate a Reply capability.
+This is a formal introduction to the `Reply` capability which is automatically generated by the seL4 kernel, whenever an IPC message is sent using the `seL4_Call()` syscall. This is unique to the `seL4_Call()` syscall, and if you send data instead with the `seL4_Send()` syscall, the seL4 kernel will not generate a Reply capability.
 
-The Reply capability solves the issue of a receiver getting a message from a sender, but not having a sufficiently permissive capability to respond to that sender. The "Reply" capability is a one-time capability to respond to a particular sender. If a sender doesn't want to grant the target the ability to send to it repeatedly, but would like to allow the receiver to respond to a specific message once, it can use seL4_Call(), and the seL4 kernel will facilitate this one-time permissive response. Complete the step and pat yourself on the back.
+The Reply capability solves the issue of a receiver getting a message from a sender, but not having a sufficiently permissive capability to respond to that sender. The "Reply" capability is a one-time capability to respond to a particular sender. If a sender doesn't want to grant the target the ability to send to it repeatedly, but would like to allow the receiver to respond to a specific message once, it can use `seL4_Call()`, and the seL4 kernel will facilitate this one-time permissive response. Complete the step and pat yourself on the back.
 
 https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h 
 https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
