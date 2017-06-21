@@ -52,9 +52,9 @@ repo sync
 
 === Do the tutorials ===
 
-These tutorials work similarly to the SEL4 tutorials in that they are guided by a slide presentation. There are half-completed sample applications, with a set of slides giving instructions, with TODO challenges once again. There are also completed sample solutions.
+These tutorials work similarly to the SEL4 tutorials in that they are guided by a slide presentation. There are half-completed sample applications, with a set of slides giving instructions, with TASK challenges once again. There are also completed sample solutions.
 
-There are however no detailed explanations of each TODO challenge for the CAmkES tutorials, as yet.
+There are however no detailed explanations of each TASK challenge for the CAmkES tutorials, as yet.
 
  * The half-written sample applications are in this folder: {{{apps/}}}.
  * The solutions can be found in this subfolder: {{{projects/sel4-tutorials/solutions/}}}.
