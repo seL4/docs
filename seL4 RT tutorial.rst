@@ -11,7 +11,7 @@ You'll observe that the things you've already covered in the other tutorials are
 
 <<TableOfContents()>>
 
-== Learning outcomes: ==
+== Learning outcomes ==
 
  * obtain scheduling control capabilities.
  * create and configure scheduling contexts.
@@ -19,7 +19,18 @@ You'll observe that the things you've already covered in the other tutorials are
  * set up a passive server.
  * set up clients to call the passive server using the immediate priority ceiling protocol.
 
-== Tasks ==
+== Walkthrough ==
+
+First, build and run the tutorial:
+
+{{{
+# select the config for the first tutorial 
+make ia32_hello-mcs_defconfig
+# build it
+make -j8
+# run it in qemu
+make simulate
+}}}
 
 Before you have done any tasks, when running the tutorial should produce the following before halting:
 
@@ -27,6 +38,8 @@ Before you have done any tasks, when running the tutorial should produce the fol
 mcs main@main.c:179 [Cond failed: sched_control == seL4_CapNull]
         Failed to find sched_control.
 }}}
+
+Look for `TASK` in the `apps/hello-mcs` directory for each task.
 
 === TASK 1 ===
 Find the scheduling control capability. There is one per node in the system. This allows you to populate scheduling contexts with parameters.
