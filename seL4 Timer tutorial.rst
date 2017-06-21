@@ -13,11 +13,9 @@ You'll observe that the things you've already covered in the other tutorials are
 
 == Learning outcomes ==
 
- * obtain scheduling control capabilities.
- * create and configure scheduling contexts.
- * spawn round-robin and periodic threads.
- * set up a passive server.
- * set up clients to call the passive server using the immediate priority ceiling protocol.
+ * allocate a notification object.
+ * set up a timer provided by seL4 libs.
+ * use seL4_libs functions to manipulate timer and handle interrupts.
 
 == Walkthrough ==
 
