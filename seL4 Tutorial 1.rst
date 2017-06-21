@@ -2,10 +2,10 @@
 ##master-date:Unknown-Date
 #format wiki
 #language en
-= Summary: =
+= seL4 Tutorial 1 =
 This tutorial is a fairly simple introduction to debugging, and doesn't really focus on seL4 itself, but rather on the idea and practice of tracing errors and debugging in a [[http://www.embedded.com/electronics-blogs/programming-pointers/4027541/Freestanding-vs-hosted-implementations|freestanding]] environment.
 
-== Learning outcomes: ==
+== Learning outcomes ==
 
  * Reader should become accustomed to the idea of having to debug not only from the perspective of their own code, but also with an understanding that there are lower layers beneath them that have a say in whether or their abstractions will work as intended.
  * Reader should become accustomed to the idea that the compiler and language runtime are now part of their responsibility, and they should become at least trivially acquainted with the C runtime which they can usually ignore, and debug with it in mind.
@@ -33,7 +33,7 @@ tools/common/project.mk:332: recipe for target 'hello-1' failed
 make: *** [hello-1] Error 2
 }}}
 
-=== TASK 1: ===
+=== TASK 1 ===
 
 Your task is to fix the above error. Look for `TASK` in `apps/hello1` to find the code to modify.
 
