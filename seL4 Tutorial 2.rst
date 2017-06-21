@@ -24,7 +24,7 @@ Don't gloss over the globals declared before `main()` -- they're declared for yo
 
 {{{
 # select the config for the first tutorial 
-make ia32_hello-1_defconfig
+make ia32_hello-2_defconfig
 # build it
 make -j8
 # run it in qemu
