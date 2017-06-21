@@ -96,7 +96,7 @@ https://github.com/seL4/seL4_libs/blob/master/libsel4utils/arch_include/x86_64/s
 
 This TASK is just some pointer arithmetic. The cautionary note that the stack grows down is meant to make you think about the arithmetic. Processor stacks push new values toward decreasing addresses, so give it some thought.
 
-https://github.com/seL4/seL4_libs/blob/master/libsel4utils/arch_include/x86_64/sel4utils/arch/util.h#L40
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/arch_include/x86_64/sel4utils/arch/util.h
 
 === TASK 13 ===
 
@@ -106,13 +106,20 @@ https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml
 
 === TASK 14 ===
 
-Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml#L69
+Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml
 
 === TASK 15 ===
 
 For the sake of confirmation that our new thread was executed by the kernel successfully, we cause it to print something to the screen.
 
+
+---- /!\ '''Edit conflict - other version:''' ----
 == Globals links ==
+
+---- /!\ '''Edit conflict - your version:''' ----
+== Globals links ==
+
+---- /!\ '''End of edit conflict''' ----
 
  * `sel4_BootInfo`: https://github.com/seL4/seL4/blob/master/include/sel4/bootinfo.h
  * `simple_t`: https://github.com/seL4/seL4_libs/blob/master/libsel4smple/include/simple/simple.h
