@@ -5,7 +5,7 @@
 = seL4 Tutorial 4 =
 The fourth tutorial is largely trying to show how a separate ELF file can be loaded and expanded into a VSpace, and subsequently executed, while facilitating IPC between the two modules. It also shows how threads with different CSpaces have to maneuver in order to pass capabilities to one another.
 
-Don't gloss over the globals declared before main() -- they're declared for your benefit so you can grasp some of the basic data structures. Uncomment them one by one as needed when going through the TODOs.
+Don't gloss over the globals declared before `main()` -- they're declared for your benefit so you can grasp some of the basic data structures. Uncomment them one by one as needed when going through the tasks.
 
 You'll observe that the things you've already covered in the second tutorial are filled out and you don't have to repeat them: in much the same way, we won't be repeating conceptual explanations on this page, if they were covered by a previous tutorial in the series.
 
