@@ -11,7 +11,7 @@ You'll observe that the things you've already covered in the second tutorial are
 
 <<TableOfContents()>>
 
-== Learning outcomes: ==
+== Learning outcomes ==
  * Once again, repeat the spawning of a thread: however, this time the two threads will only share the same vspace, but have different CSpaces. This is an automatic side effect of the way that sel4utils creates new "processes".
  * Learn how the init thread in an seL4 system performs some types of initialization that aren't traditionally left to userspace.
  * Observe and understand the effects of creating thread that do not share the same CSpace.
@@ -34,16 +34,16 @@ Look for `TASK` in the `apps/hello-4` and `apps/hello-4-app` directory for each 
 
 Aside from receiving information about IRQs in the IRQControl object capability, and information about available IO-Ports, and ASID availability, and several other privileged bits of information, the init thread is also responsible, surprisingly, for reserving certain critical ranges of memory as being used, and unavailable for applications.
 
-This call to sel4utils_bootstrap_vspace_with_bootinfo_leaky() does that. For an interesting look at what sorts of things the init thread does, see: static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[]), which is eventually called on by sel4utils_bootstrap_vspace_with_bootinfo_leaky(). So while this function may seem tedious, it's doing some important things.
+This call to `sel4utils_bootstrap_vspace_with_bootinfo_leaky()` does that. For an interesting look at what sorts of things the init thread does, see: `static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])`, which is eventually called on by `sel4utils_bootstrap_vspace_with_bootinfo_leaky()`. So while this function may seem tedious, it's doing some important things.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/vspace.h#L214
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/vspace.h#L172
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h
 
 === TASK 2 ===
 
-sel4utils_configure_process took a large amount of the work out of creating a new "processs". We skipped a number of steps. Take a look at the source for sel4utils_configure_process() and notice how it spawns the new thread with its own CSpace by automatically. This will have an effect on our tutorial! It means that the new thread we're creating will not share a CSpace with our main thread.
+sel4utils_configure_process took a large amount of the work out of creating a new "processs". We skipped a number of steps. Take a look at the source for `sel4utils_configure_process()` and notice how it spawns the new thread with its own CSpace by automatically. This will have an effect on our tutorial! It means that the new thread we're creating will not share a CSpace with our main thread.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L202
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h
 
 === TASK 3 ===
 
@@ -55,41 +55,41 @@ Now, in this particular case, we are making the new thread be the sender. Recall
 
 There is a number of ways we could approach this, but in this tutorial we decided to just pre-initialize the sender's CSpace with a sufficient capability to enable it to send to us right from the start of its execution. We could also have spawned the new thread as a listener instead, and made it wait for us to send it a message with a sufficient capability.
 
-So we use vka_cspace_make_path(), which locates one free capability slot in the selected CSpace, and returns a handle to it, to us. We then filled that free slot in the new thread's CSpace with a '''badged''' capability to the endpoint we are listening on, so as so allow it to send to us immediately. We could have filled the slot with an unbadged capability, but then if we were listening for multiple senders, we wouldn't know who was whom.
+So we use `vka_cspace_make_path()`, which locates one free capability slot in the selected CSpace, and returns a handle to it, to us. We then filled that free slot in the new thread's CSpace with a '''badged''' capability to the endpoint we are listening on, so as so allow it to send to us immediately. We could have filled the slot with an unbadged capability, but then if we were listening for multiple senders, we wouldn't know who was whom.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/vka.h#L122
+https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h
 
 === TASK 5 ===
 
 As discussed above, we now just mint a badged copy of a capability to the endpoint we're listening on, into the new thread's CSpace, in the free slot that the VKA library found for us.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L254
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/types_32.bf#L30
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h
+https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf
 
 === TASK 6 ===
 
 So now that we've given the new thread everything it needs to communicate with us, we can let it run. Complete this step and proceed.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4utils/include/sel4utils/process.h#L150
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h
  
 === TASK 7 ===
 
-We now wait for the new thread to send us data using seL4_Recv()...
+We now wait for the new thread to send us data using `seL4_Recv()`...
 
 Then we verify the fidelity of the data that was transmitted.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L164
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
+https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h
+https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf
 
 === TASK 8 ===
 
-Another demonstration of the sel4_Reply() facility: we reply to the message sent by the new thread.
+Another demonstration of the `sel4_Reply()` facility: we reply to the message sent by the new thread.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
 
 === TASK 9 ===
 
-In the new thread, we initiate communications by using seL4_Call(). As outlined above, the receiving thread replies to us using sel4_ReplyRecv(). The new thread then checks the fidelity of the data that was sent, and that's the end.
+In the new thread, we initiate communications by using `seL4_Call()`. As outlined above, the receiving thread replies to us using `sel4_ReplyRecv()`. The new thread then checks the fidelity of the data that was sent, and that's the end.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L277
+https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h
