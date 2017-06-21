@@ -112,7 +112,7 @@ Finally, we tell the kernel that our new thread is runnable. From here, the kern
 
 For the sake of confirmation that our new thread was executed by the kernel successfully, we cause it to print something to the screen.
 
-== Globals links: ==
+== Globals links ==
 
  * `sel4_BootInfo`: https://github.com/seL4/seL4/blob/master/include/sel4/bootinfo.h
  * `simple_t`: https://github.com/seL4/seL4_libs/blob/master/libsel4smple/include/simple/simple.h
