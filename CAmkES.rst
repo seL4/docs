@@ -104,3 +104,7 @@ The current version of CAmkES introduces a number of syntactic and functional ch
 == Internals ==
 
 Here's some information about the internals of the CAmkES tool: [[CAmkESInternals]]
+
+== Command Line Interface ==
+
+There is an experimental command line interface for managing CAmkES projects. Read more: [[CAmkESCLI]]
