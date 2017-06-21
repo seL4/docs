@@ -40,7 +40,7 @@ As we mentioned in passing before, threads in seL4 do their own memory managemen
 
 Here's the first step in a conventional memory manager's process of allocating memory: first allocate a physical frame. As you would expect, you cannot directly write to or read from this frame object since it is not mapped into any virtual address space as yet. Standard restrictions of a MMU-utilizing kernel apply.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L127
+https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
 
 === TASK 3 ===
 
@@ -48,21 +48,21 @@ Take note of the line of code that precedes this: the one where a virtual addres
 
 Attempt to map the frame you allocated earlier, into your VSpace. A keen reader will pick up on the fact that it's unlikely that this will work, since you'd need a new page table to contain the new page-table-entry. The tutorial deliberately walks you through both the mapping of a frame into a VSpace, and the mapping of a new page-table into a VSpace.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vspace/arch_include/x86/vspace/arch/page.h#L27
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/interfaces/sel4arch.xml#L42
+https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h
+https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml
 
 === TASK 3 ===
 
 So just as you previously had to manually retype a new frame to use for your IPC buffer, you're also going to have to manually retype a new page-table object to use as a leaf page-table in your VSpace.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L137
+https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
 
 === TASK 3 ===
 
 If you successfully retyped a new page table from an untyped memory object, you can now map that new page table into your VSpace, and then try again to finally map the IPC-buffer's frame object into the VSpace.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vspace/arch_include/x86/vspace/arch/page.h#L31
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/interfaces/sel4arch.xml#L33
+https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h
+https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml
 
 === TASK 5 ===
 ''Corresponding line in tutorial:'' (https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-3/src/main.c#L265)
@@ -74,7 +74,7 @@ If everything was done correctly, there is no reason why this step should fail. 
 Now we have a (fully mapped) IPC buffer -- but no Endpoint object to send our IPC data across. We must retype an untyped object into a kernel Endpoint object, and then proceed. This could be done via a more low-levelled approach using seL4_Untyped_Retype(), but instead, the tutorial makes use of the VKA allocator. Remember that the VKA allocator is an seL4 type-aware object allocator? So we can simply ask it for a new object of a particular type, and it will do the low-level retyping for us, and return a capability to a new object as requested.
 
 In this case, we want a new Endpoint so we can do IPC. Complete the step and proceed.
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object.h#L105
+https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
  
 === TASK 7 ===
 
@@ -84,8 +84,8 @@ Note the distinction: the badge is not applied to the target endpoint, but to th
 
 In this step, you are badging the endpoint that you will use when sending data to the thread you will be creating later on. The vka_mint_object() call will return a new, badged copy of the capability to the endpoint that your new thread will listen on. When you send data to your new thread, it will receive the badge value with the data, and know which sender you are. Complete the step and proceed.
 
-https://github.com/seL4/seL4_libs/blob/3.0.x-compatible/libsel4vka/include/vka/object_capops.h#L41
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/types_32.bf#L30
+https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h
+https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/types_32.bf
 
 === TASK 8 ===
 
@@ -93,8 +93,8 @@ Here we get a formal introduction to message registers. At first glance, you mig
 
 So seL4_SetMR() and seL4_GetMR() simply write to and read from the IPC buffer you designated for your thread. MSG_DATA is uninteresting -- can be any value. You'll find the seL4_MessageInfo_t type explained in the manuals. In short, it's a header that is embedded in each message that specifies, among other things, the number of Message Registers that hold meaningful data, and the number of capabilities that are going to be transmitted in the message.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/sel4/arch/functions.h#L40
+https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
+https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h
 
 === TASK 9 ===
 
@@ -106,14 +106,14 @@ Notice also that the fact that both the sender and the receiver share the same r
 
 Notice however also, that while the sending thread has a capability that grants it full rights to send data across the endpoint since it was the one that created that capability, the receiver's capability may not necessarily grant it sending powers (write capability) to the endpoint. It's entirely possible that the receiver may not be able to send a response message, if the sender doesn't want it to.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L277
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
+https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h
+https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
 
 === TASK 10 ===
 
 While this TODO is out of order, since we haven't yet examined the receive-side of the operation here, it's fairly simple anyway: this TODO occurs after the receiver has sent a reply, and it shows the sender now reading the reply from the receiver. As mentioned before, the seL4_GetMR() calls are simply reading from the calling thread's designated, single IPC buffer.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/sel4/arch/functions.h#L32
+https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h
 
 === TASK 11 ===
 
@@ -121,26 +121,26 @@ We're now in the receiving thread. The seL4_Recv() syscall performs a blocking l
 
 Notice how the seL4_Recv() operation explicitly makes allowance for reading the badge value on the incoming message? The receiver is explicitly interested in distinguishing the sender.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h#L207 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
+https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h
+https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
 
 === TASK 12 ===
 
 These two calls here are just verification of the fidelity of the transmitted message. It's very unlikely you'll encounter an error here. Complete them and proceed to the next step.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15 
+https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
 
 === TASK 13 ===
 
 Again, just reading the data from the Message Registers.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/sel4/arch/functions.h#L32
+https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h
 
 === TASK 14 ===
 
 And writing Message Registers again.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/arch_include/x86/sel4/arch/functions.h#L40
+https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h
 
 === TASK 15 ===
 
@@ -148,5 +148,5 @@ This is a formal introduction to the "Reply" capability which is automatically g
 
 The Reply capability solves the issue of a receiver getting a message from a sender, but not having a sufficiently permissive capability to respond to that sender. The "Reply" capability is a one-time capability to respond to a particular sender. If a sender doesn't want to grant the target the ability to send to it repeatedly, but would like to allow the receiver to respond to a specific message once, it can use seL4_Call(), and the seL4 kernel will facilitate this one-time permissive response. Complete the step and pat yourself on the back.
 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359 
-https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
+https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h 
+https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf
