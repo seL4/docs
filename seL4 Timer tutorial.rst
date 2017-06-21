@@ -3,7 +3,7 @@
 #format wiki
 #language en
 
-= seL4 Time tutorial =
+= seL4 Timer tutorial =
 
 This tutorial demonstrates how to set up and use a basic timer driver.
 
