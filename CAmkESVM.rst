@@ -1,5 +1,5 @@
 = CAmkES x86 VM =
-The CAmkES x86 VM uses CAmkES Next. Get the dependencies for building CAmkES next by following the instructions [[CAmkESNext|here]].
+Get the dependencies for building CAmkES by following the instructions [[CAmkES#Build_dependencies|here]].
 
 <<TableOfContents>>
 
