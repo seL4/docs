@@ -108,3 +108,7 @@ Here's some information about the internals of the CAmkES tool: [[CAmkESInternal
 == Command Line Interface ==
 
 There is an experimental command line interface for managing CAmkES projects. Read more: [[CAmkESCLI]]
+
+== Python Dependencies ==
+
+The '''Build Dependencies''' section covers how to install the python dependencies. The python metapackage, [[https://pypi.python.org/pypi/camkes-deps|camkes-deps]], is implemented in the CAmkES repo [[https://github.com/seL4/camkes-tool/blob/master/tools/python-deps/setup.py|here]].
