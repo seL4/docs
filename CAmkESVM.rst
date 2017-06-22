@@ -619,6 +619,8 @@ world
 
 == Booting from hard drive ==
 
+These instructions are for ubuntu. For CentOS instructions, see [[CAmkESVMCentOS]].
+
 So far we've only run a tiny linux on a ram disk. What if we want to run Ubuntu booting off a hard drive? This section will explain the changes we need to make to our VM app to allow it to boot into a Ubuntu environment installed on the hard drive. Thus far these examples should have been compatible with most modern x86 machines. The rest of this tutorial will focus on a particular machine: [[https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm|the cma34cr single board computer]]
 
 The first step is to install ubuntu natively on the cma34cr. It's currently required that guests of the camkes vm run in 32-bit mode, so install 32-bit ubuntu. These examples will use ubuntu-16.04.
