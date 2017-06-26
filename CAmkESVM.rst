@@ -375,9 +375,9 @@ component VM {
 ...
 }}}
 
-The only thing unusual about that was the seL4SharedDataWithCaps connector. This is a dataport connector much like seL4SharedData. The only difference is that the "to" side of the connection gets access to the caps to the frames backing the dataport. This is necessary from cross vm dataports, as the VMM must be able to establish shared memory at runtime, by inserting new mappings into the guest's address space, which requires caps to the physical memory being mapped in.
+The only thing unusual about that was the [[seL4SharedDataWithCaps]] connector. This is a dataport connector much like seL4SharedData. The only difference is that the "to" side of the connection gets access to the caps to the frames backing the dataport. This is necessary from cross vm dataports, as the VMM must be able to establish shared memory at runtime, by inserting new mappings into the guest's address space, which requires caps to the physical memory being mapped in.
 
-Interfaces connected with seL4SharedDataWithCaps must be configured with an integer specifying the id of the dataport, and the size of the dataport. Add the following to the configuration section in apps/cma34cr_minimal/cma34cr.camkes:
+Interfaces connected with [[seL4SharedDataWithCaps]] must be configured with an integer specifying the id of the dataport, and the size of the dataport. Add the following to the configuration section in apps/cma34cr_minimal/cma34cr.camkes:
 {{{
     configuration {
         VM_CONFIGURATION_DEF()
