@@ -16,4 +16,4 @@ The interface on the "to" side of each `seL4SharedDataWithCaps` connection must 
 <instance>.<interface>_size = <integer size>;
 }}}
 
-Specifying a non-unique or non-positive id is an error. Specifying a size other than the size of the type of the dataport is an error.
+Specifying a non-unique or non-positive id is an error. Specifying a size other than the size of the type of the dataport is an error. Omitting this configuration for an interface connected with `seL4SharedDataWithCaps` is an error.
