@@ -8,16 +8,15 @@ This tutorial is an introduction to CAmkES: bootstrapping a basic static CAmkES 
 == Required Reading ==
 While it's possible to successfully complete the CAmkES tutorials without having read the '''[[https://github.com/seL4/camkes-tool/blob/master/docs/index.md|CAmkES manuals]]''', the manuals really explain everything in plain English, and any aspiring CAmkES dev should read the '''[[https://github.com/seL4/camkes-tool/blob/master/docs/index.md|CAmkES manuals]]''' before attempting to complete the tutorials.
 
-= Table of Contents =
 <<TableOfContents()>>
 
-=== Learning outcomes: ===
+== Learning outcomes: ==
  * Understand the structure of a CAmkES application, as a described, well-defined, static system.
  * Understand the file-layout of a CAmkES ADL project.
  * Become acquainted with the basics of creating a practical CAmkES application.
 
-== Walkthrough of Tasks: ==
-==== TASK 1: ====
+== Walkthrough ==
+=== TASK 1 ===
 The fundamentals of CAmkES are the component, the interface and the connection. Components are logical groupings of code and resources. They communicate with other component instances via well-defined interfaces which must be statically defined, over communication channels. This tutorial will lead you through the construction of a CAmkES application with two components: an Echo server, and its Client that makes calls to it. These components are defined here:
 
  * https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes
@@ -25,19 +24,19 @@ The fundamentals of CAmkES are the component, the interface and the connection. 
 
 Find the Component manual section here: https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component
 
-==== TASK 2: ====
+=== TASK 2 ===
 The second fundamental component of CAmkES applications is the Connection: a connection is the representation of a method of communication between two software components in CAmkES. The underlying implementation may be shared memory, synchronous IPC, notifications or some other implementation-provided means. In this particular tutorial, we are using synchronous IPC. In implementation terms, this boils down to the seL4_Call() syscall on seL4.
 
 Find the "Connection" keyword manual section here: https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection
 
-==== TASK 3: ====
+=== TASK 3 ===
 All communications over a CAmkES connection must be well defined: static systems' communications should be able to be reasoned about at build time. All the function calls which will be delivered over a communication channel then, also are well defined, and logically grouped so as to provide clear directional understanding of all transmissions over a connection. Components are connected together in CAmkES, yes -- but the interfaces that are exposed over each connection for calling by other components, are also described. There are different kinds of interfaces: Dataports, Procedural interfaces and Notifications.
 
 This tutorial will lead you through the construction of a Procedural interface, which is an interface over which function calls are made according to a well-defined pre-determined API. The keyword for this kind of interface in CAmkES is "procedure". The definition of this Procedure interface may be found here: https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4
 
 Find the "Procedure" keyword definition here: https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure
 
-==== TASK 4: ====
+=== TASK 4 ===
 Based on the ADL, CAmkES generates boilerplate which conforms to your system's architecture, and enables you to fill in the spaces with your program's logic. The two generated files in this tutorial application are, in accordance with the Components we have defined:
 
  * https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c
@@ -53,8 +52,8 @@ So if the "Hello" interface is provided once by "Echo" as "a", you would call fo
 
 Fill in the function calls in the generated C files!
 
-==== TASK 5: ====
+=== TASK 5 ===
 Here you define the callee-side invocation functions for the Hello interface exposed by Echo.
 
-== End of tutorial: ==
+== Done ==
 Congratulations: be sure to read up on the keywords and structure of ADL: it's key to understanding CAmkES. And well done on writing your first CAmkES application.
