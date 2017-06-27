@@ -83,7 +83,7 @@ make clean
 
 == Read Tutorial ==
 
-To learn about developing your own CAmkES application, read the [[https://sel4.systems/Info/CAmkES/Tutorial.pml|tutorial]].
+To learn about developing your own CAmkES application, read the [[Tutorials#CAmkES_tutorials]].
 
 == Camkes Terminology/Glossary ==
 
