@@ -5,12 +5,13 @@
 = Summary: =
 This tutorial is an introduction to CAmkES: bootstrapping a basic static CAmkES application, describing its components, and linking them together.
 
+<<TableOfContents()>>
+
 == Required Reading ==
 While it's possible to successfully complete the CAmkES tutorials without having read the '''[[https://github.com/seL4/camkes-tool/blob/master/docs/index.md|CAmkES manuals]]''', the manuals really explain everything in plain English, and any aspiring CAmkES dev should read the '''[[https://github.com/seL4/camkes-tool/blob/master/docs/index.md|CAmkES manuals]]''' before attempting to complete the tutorials.
 
-<<TableOfContents()>>
 
-== Learning outcomes: ==
+== Learning outcomes ==
  * Understand the structure of a CAmkES application, as a described, well-defined, static system.
  * Understand the file-layout of a CAmkES ADL project.
  * Become acquainted with the basics of creating a practical CAmkES application.
