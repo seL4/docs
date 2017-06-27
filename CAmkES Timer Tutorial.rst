@@ -67,14 +67,14 @@ Note the existing code in `hello_sleep`. It waits on a binary semaphore. `irq_ha
 == Output ==
 
 Build and run with:
-```
+{{{
 make simulate
-```
+}}}
 
 Expect the following output with a 2 second delay between the last 2 lines:
-```
+{{{
 Starting the client
 ------Sleep for 2 seconds------
 After the client: wakeup
 
-```
+}}}
