@@ -2,7 +2,7 @@
 ##master-date:Unknown-Date
 #format wiki
 #language en
-= seL4 Tutorial 2 =
+= seL4 Tutorial 3 =
 The third tutorial is designed to teach the basics of seL4 IPC using Endpoint objects, and userspace paging management. You'll be led through the process of creating a new thread (retyping an untyped object into a TCB object), and also made to manually do your own memory management to allocate some virtual memory for use as the shared memory buffer between your two threads.
 
 Don't gloss over the globals declared before `main()` -- they're declared for your benefit so you can grasp some of the basic data structures. Uncomment them one by one as needed when going through the tasks.
