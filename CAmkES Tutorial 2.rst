@@ -2,7 +2,7 @@
 ##master-date:Unknown-Date
 #format wiki
 #language en
-= Summary: =
+= CAmkES Tutorial 2  =
 This tutorial is an introduction to CAmkES: bootstrapping a basic static CAmkES application, describing its components, and linking them together.
 
 <<TableOfContents()>>
