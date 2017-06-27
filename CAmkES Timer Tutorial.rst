@@ -4,6 +4,10 @@
 
 We'll be working within `apps/hello-camkes-timer` for this tutorial.
 
+```
+make arm_hello-camkes-timer_defconfig
+```
+
 == Summary ==
 
 This exercise is to set up a timer driver in CAmkES and use it to delay for 2 seconds.
@@ -59,3 +63,18 @@ Implement the `timer_inf` RPC interface. This interface is defined in `interface
 Tell the timer to interrupt after the given number of seconds. The `timer_oneshot_relative` function from `libplatsupport` will help. Note that it expects its time argument to be given in nanoseconds.
 
 Note the existing code in `hello_sleep`. It waits on a binary semaphore. `irq_handle` will be called on another thread when the timer interrupt occurs, and that function will post to the binary semaphore, unblocking us and allowing the function to return after the delay.
+
+== Output ==
+
+Build and run with:
+```
+make simulate
+```
+
+Expect the following output with a 2 second delay between the last 2 lines:
+```
+Starting the client
+------Sleep for 2 seconds------
+After the client: wakeup
+
+```
