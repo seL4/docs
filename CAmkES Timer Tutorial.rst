@@ -1,5 +1,9 @@
 = CAmkES Timer Tutorial =
 
+== Summary ==
+
+This exercise is to set up a timer driver in CAmkES and use it to delay for 2 seconds.
+
 == Setup ==
 
 We'll be working within `apps/hello-camkes-timer` for this tutorial.
@@ -7,10 +11,6 @@ We'll be working within `apps/hello-camkes-timer` for this tutorial.
 {{{
 make arm_hello-camkes-timer_defconfig
 }}}
-
-== Summary ==
-
-This exercise is to set up a timer driver in CAmkES and use it to delay for 2 seconds.
 
 == Walkthrough ==
 
