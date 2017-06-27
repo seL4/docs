@@ -4,9 +4,9 @@
 
 We'll be working within `apps/hello-camkes-timer` for this tutorial.
 
-```
+{{{
 make arm_hello-camkes-timer_defconfig
-```
+}}}
 
 == Summary ==
 
