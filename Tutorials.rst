@@ -54,8 +54,12 @@ repo sync
 
 These tutorials work similarly to the SEL4 tutorials in that they are guided by a slide presentation. There are half-completed sample applications, with a set of slides giving instructions, with TASK challenges once again. There are also completed sample solutions.
 
-There are however no detailed explanations of each TASK challenge for the CAmkES tutorials, as yet.
+ * [[CAmkES Tutorial 0]]
+ * [[CAmkES Tutorial 1]]
+ * [[CAmkES Tutorial 2]]
+ * [[CAmkES Timer Tutorial]]
 
+More info:
  * The half-written sample applications are in this folder: {{{apps/}}}.
  * The solutions can be found in this subfolder: {{{projects/sel4-tutorials/solutions/}}}.
  * The slide presentations to guide you through the tutorials are in this file: {{{projects/sel4-tutorials/docs/CAmkESTutorial.pdf}}}.
