@@ -27,6 +27,7 @@ ARMv7 32-bit support is added to do lazy FP save/restore mechanism, required for
  * Disable the FPU by default if users are not using it to avoid channels.
  * FPU support is not verified yet.
  * Will not work properly if using a VM that's running alongside other VMs/threads that are using the FPU.
+ * Any trapped FPU instruction (e.g. traps that need support code or deprecated vectored VFP operations) are forwarded to the user as a fault.
 
 == Changes ==
 *
