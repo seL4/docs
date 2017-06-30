@@ -30,7 +30,12 @@ ARMv7 32-bit support is added to do lazy FP save/restore mechanism, required for
  * Any trapped FPU instruction (e.g. traps that need support code or deprecated vectored VFP operations) are forwarded to the user as a fault.
 
 == Changes ==
-*
+* aarch32 - Implement lazy FP save/restore
+* ARM SMP support
+* Reschedule when changing own registers: 
+* add seL4_DebugDumpScheduler
+* x86: Split large structs into portions
+* Licences fixups
 
 = Upgrade notes =
  * This release is not source compatible with previous releases.
