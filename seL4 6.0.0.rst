@@ -12,7 +12,7 @@ Announcing the release of {{{seL4 6.0.0}}} with the following changes:
 
 - ARM IPI caveats:
 
- * Reserving first two per-core SGIs for seL4's IPI operations: 0 to do a remote call, 1 to reschedule.
+ * Reserving the first two per-core SGIs for seL4's IPI operations: 0 to do a remote call, 1 to reschedule.
  * Relying on GIC.
  * Reschedule IPIs are sent when migrating a thread.
  * Remote call IPIs are sent if TLB and/or cache maintenance operations are required.
