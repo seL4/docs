@@ -24,8 +24,8 @@ For control threads, specify the size bits of bound scheduling contexts with `<c
 
 === Documentation Fixes ===
 
- - Removed outdated information about dependencies
+ * Removed outdated information about dependencies
 
 === Bug Fixes ===
 
- - Fixed bug in parser preventing empty lists of the form `[]` from parsing correctly
+ * Fixed bug in parser preventing empty lists of the form `[]` from parsing correctly
