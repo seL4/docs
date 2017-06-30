@@ -19,7 +19,7 @@ Announcing the release of {{{seL4 6.0.0}}} with the following changes:
  * Remote FPU operations (when migrating threads that use HW FPU).
 
 === ARM FPU ===
-ARMv7 32-bit support is added to do lazy FP save/restore mechanism, required for user threads when they use the FPU. The following caveats take place:
+ARMv7 32-bit support is added to do lazy FP save/restore mechanism, required for user threads when they use the FPU. The following caveats exist:
 
  * Only support synchronous exceptions. No support for asynchronous ones.
  * VFP opcodes are used instead of normal instructions to discard compiler warnings/errors.
