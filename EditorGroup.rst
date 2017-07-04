@@ -7,6 +7,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * AlexanderLegg
  * azarrabi
  * ChrisRothrock
+ * ClaudiaTu
  * eduardn
  * FrankLi
  * Gang Wang
