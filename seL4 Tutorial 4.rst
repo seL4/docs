@@ -41,7 +41,7 @@ https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vsp
 
 === TASK 2 ===
 
-sel4utils_configure_process took a large amount of the work out of creating a new "processs". We skipped a number of steps. Take a look at the source for `sel4utils_configure_process()` and notice how it spawns the new thread with its own CSpace by automatically. This will have an effect on our tutorial! It means that the new thread we're creating will not share a CSpace with our main thread.
+`sel4utils_configure_process_custom` took a large amount of the work out of creating a new "processs". We skipped a number of steps. Take a look at the source for `sel4utils_configure_process_custom()` and notice how it spawns the new thread with its own CSpace by automatically. This will have an effect on our tutorial! It means that the new thread we're creating will not share a CSpace with our main thread.
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h
 
