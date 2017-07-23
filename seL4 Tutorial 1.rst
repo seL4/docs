@@ -18,6 +18,8 @@ The following instructions are for ia32/pc99/x86, but should be similar for zynq
 First try to build the code:
 
 {{{
+# go to the top level directory
+cd seL4test
 # select the config for the first tutorial
 make ia32_hello-1_defconfig
 # build it
