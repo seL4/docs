@@ -54,7 +54,7 @@ You can also use Docker to isolate the dependencies from your machine. Instructi
 These instructions are for Ubuntu. They assume you already know the basics of using the command line, compilers and GNU Make.
 
 ==== Get Google's "Repo" tool ====
-Repo is a tool by Google used for managing multiple git repositories. All the seL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. [[http://source.android.com/source/downloading.html#installing-repo|Get repo here]].
+Repo is a tool by Google used for managing multiple git repositories. All the seL4 related projects use multiple subprojects, and Repo will fetch all of them and place them in the correct subdirectories for you. To get repo, [[http://source.android.com/source/downloading.html#installing-repo|follow the instructions in the section "Installing Repo" here]]. (You don't need to initialise a repo client yet.)
 
 ==== Using Repo to fetch an seL4 project and its subprojects ====
 Choose a project to start with. As an example, we'll use sel4test.
