@@ -15,6 +15,11 @@ For Debian, first follow the instructions that are common to all Debian-based di
  * [[#wheezy|Debian Wheezy (stable)]]
  * [[#jessie|Debian Jessie or sid (testing or unstable)]]
 
+To find out what distro you're using:
+{{{
+lsb_release -a
+}}}
+
 === Ubuntu machines ===
 
 Ubuntu is relatively straightforward, as [[http://www.linaro.org/|Linaro]] maintain cross compilers for it — see https://wiki.ubuntu.com/ToolChain. You will however have to have enabled the Universe repository.
