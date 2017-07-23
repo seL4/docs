@@ -23,7 +23,7 @@ Don't gloss over the globals declared before `main()` -- they're declared for yo
 == Walkthrough ==
 
 {{{
-# select the config for the first tutorial 
+# select the config for the first tutorial
 make ia32_hello-2_defconfig
 # build it
 make -j8
@@ -37,11 +37,21 @@ Look for `TASK` in the `apps/hello-2` directory for each task.
 
 After bootstrap, the kernel hands over control to to an init thread. This thread receives a structure from the kernel that describes all the resources available on the machine. This structure is called the  BootInfo structure. It includes information on all IRQs, memory, and IO-Ports (x86). This structure also tells the init thread where certain important capability references are. This step is teaching you how to obtain that structure.
 
+Note that when you run the example, you should get a message similar to:
+{{{
+6 untypeds of size 29
+hello-2: main@main.c:132 [Cond failed: allocman == NULL]
+Failed to initialize alloc manager.
+Memory pool sufficiently sized?
+Memory pool pointer valid?
+}}}
+until Task 4, where you set up memory management.
+
 https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h
 
 === TASK 2 ===
 
-The "Simple" library is one of those you were introduced to in the slides: you need to initialize it with some default state before using it. 
+The "Simple" library is one of those you were introduced to in the slides: you need to initialize it with some default state before using it.
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h
 
@@ -49,8 +59,8 @@ https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simp
 
 Just a simple debugging print-out function. Allows you to examine the layout of the BootInfo.
 
- * https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple/simple.h
- 
+https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h
+
 === TASK 4 ===
 
 In seL4, memory management is delegated in large part to userspace, and each process manages its own page faults with a custom pager. Without the use of the `allocman` library and the `VKA` library, you would have to manually allocate a frame, then map the frame into a page-table, before you could use new memory in your address space. In this tutorial you don't go through that procedure, but you'll encounter it later. For now, use the allocman and VKA allocation system. The allocman library requires some initial memory to bootstrap its metadata. Complete this step.
@@ -69,17 +79,17 @@ This is where the differences between seL4 and contemporary kernels begin to sta
 
 So you're being made to grab a reference to your thread's CSpace's root "CNode". A CNode is one of the many blocks of capabilities that make up a CSpace.
 
-https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple/simple.h
+https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h
 
 === TASK 7 ===
 
 Just as in the previous step, you were made to grab a reference to the root of your thread's CSpace, now you're being made to grab a reference to the root of your thread's VSpace.
 
-https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple/simple.h
+https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h
 
 === TASK 8 ===
 
-In order to manage the threads that are created in seL4, the seL4 kernel keeps track of TCB (Thread Control Block) objects. Each of these represents a schedulable executable resource. Unlike other contemporary kernels, seL4 '''doesn't''' allocate a stack, virtual-address space (VSpace) and other metadata on your behalf. This step creates a TCB, which is a very bare-bones, primitive resource, which requires you to still manually fill it out. 
+In order to manage the threads that are created in seL4, the seL4 kernel keeps track of TCB (Thread Control Block) objects. Each of these represents a schedulable executable resource. Unlike other contemporary kernels, seL4 '''doesn't''' allocate a stack, virtual-address space (VSpace) and other metadata on your behalf. This step creates a TCB, which is a very bare-bones, primitive resource, which requires you to still manually fill it out.
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
 
@@ -87,7 +97,7 @@ https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h
 
 You must create a new VSpace for your new thread if you need it to execute in its own isolated address space, and tell the kernel which VSpace you plan for the new thread to execute in. This opens up the option for threads to share VSpaces. In similar fashion, you must also tell the kernel which CSpace your new thread will use -- whether it will share a currently existing one, or whether you've created a new one for it. That's what you're doing now.
 
-In this particular example, you're allowing the new thread to share your main thread's CSpace and VSpace. 
+In this particular example, you're allowing the new thread to share your main thread's CSpace and VSpace.
 
 https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml
 
@@ -99,13 +109,13 @@ This is a convenience function -- sets a name string for the TCB object.
 
 Pay attention to the line that precedes this particular task -- the line that zeroes out a new "seL4_UserContext" object. As we previously explained, seL4 requires you to fill out the Thread Control Block manually. That includes the new thread's initial register contents. You can set the value of the stack pointer, the instruction pointer, and if you want to get a little creative, you can pass some initial data to your new thread through its registers.
 
-https://github.com/seL4/seL4_libs/blob/master/libsel4utils/arch_include/x86_64/sel4utils/arch/util.h
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h
 
 === TASK 12 ===
 
 This TASK is just some pointer arithmetic. The cautionary note that the stack grows down is meant to make you think about the arithmetic. Processor stacks push new values toward decreasing addresses, so give it some thought.
 
-https://github.com/seL4/seL4_libs/blob/master/libsel4utils/arch_include/x86_64/sel4utils/arch/util.h
+https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h
 
 === TASK 13 ===
 
@@ -115,7 +125,9 @@ https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml
 
 === TASK 14 ===
 
-Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy. https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml
+Finally, we tell the kernel that our new thread is runnable. From here, the kernel itself will choose when to run the thread based on the priority we gave it, and according to the kernel's configured scheduling policy.
+
+https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml
 
 === TASK 15 ===
 
@@ -123,8 +135,8 @@ For the sake of confirmation that our new thread was executed by the kernel succ
 
 == Globals links ==
 
- * `sel4_BootInfo`: https://github.com/seL4/seL4/blob/master/include/sel4/bootinfo.h
- * `simple_t`: https://github.com/seL4/seL4_libs/blob/master/libsel4smple/include/simple/simple.h
+ * `sel4_BootInfo`: https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h
+ * `simple_t`: https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h
  * `vka_t`: https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h
  * `allocman_t`: https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h
- * `name_thread()`: https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-2/src/util.c
+ * `name_thread()`: https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-2/src/util.c
