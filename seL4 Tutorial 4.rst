@@ -37,6 +37,7 @@ Aside from receiving information about IRQs in the IRQControl object capability,
 This call to `sel4utils_bootstrap_vspace_with_bootinfo_leaky()` does that. For an interesting look at what sorts of things the init thread does, see: `static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])`, which is eventually called on by `sel4utils_bootstrap_vspace_with_bootinfo_leaky()`. So while this function may seem tedious, it's doing some important things.
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h
+
 https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h
 
 === TASK 2 ===
@@ -64,6 +65,7 @@ https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h
 As discussed above, we now just mint a badged copy of a capability to the endpoint we're listening on, into the new thread's CSpace, in the free slot that the VKA library found for us.
 
 https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h
+
 https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf
 
 === TASK 6 ===
@@ -79,6 +81,7 @@ We now wait for the new thread to send us data using `seL4_Recv()`...
 Then we verify the fidelity of the data that was transmitted.
 
 https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h
+
 https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf
 
 === TASK 8 ===
@@ -86,6 +89,7 @@ https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf
 Another demonstration of the `sel4_Reply()` facility: we reply to the message sent by the new thread.
 
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359
+
 https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15
 
 === TASK 9 ===
