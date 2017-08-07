@@ -13,15 +13,23 @@ You'll observe that the things you've already covered in the other tutorials are
 
 == Learning outcomes ==
 
- * obtain scheduling control capabilities.
- * create and configure scheduling contexts.
- * spawn round-robin and periodic threads.
- * set up a passive server.
- * set up clients to call the passive server using the immediate priority ceiling protocol.
+ * Obtain scheduling control capabilities.
+ * Create and configure scheduling contexts.
+ * Spawn round-robin and periodic threads.
+ * Set up a passive server.
+ * Set up clients to call the passive server using the immediate priority ceiling protocol.
 
 == Walkthrough ==
 
-First, build and run the tutorial:
+This tutorial is currently stored separately from the other tutorials. To get the code:
+{{{
+mkdir sel4-mcs-tutorials
+cd sel4-mcs-tutorials
+repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -m sel4-mcs-tutorials.xml
+repo sync
+}}}
+
+Then, build and run the tutorial:
 
 {{{
 # select the config for the first tutorial 
