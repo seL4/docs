@@ -13,9 +13,9 @@ You'll observe that the things you've already covered in the other tutorials are
 
 == Learning outcomes ==
 
- * allocate a notification object.
- * set up a timer provided by seL4 libs.
- * use seL4_libs functions to manipulate timer and handle interrupts.
+ * Allocate a notification object.
+ * Set up a timer provided by seL4 libs.
+ * Use `seL4_libs` functions to manipulate timer and handle interrupts.
 
 == Walkthrough ==
 
@@ -60,7 +60,7 @@ With stack:
 QEMU: Terminated
 }}}
 
-Look for `TASK` in the `apps/hello-timer` and `apps/hello-timer directory for each task.
+Look for `TASK` in the `apps/hello-timer` and `apps/hello-timer` directory for each task.
 
 === TASK 1 ===
 
