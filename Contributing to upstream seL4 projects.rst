@@ -26,7 +26,7 @@ You want to pass the name of the manifest to your “repo init” command, simil
 
 ''“repo init -u <MANIFEST_REPO_CLONE_URL> -m <VERSIONED_MANIFEST_FILENAME>”''
 
-Code being on the master branch '''does not imply''' that it has been formally verified. The verified build of the kernel is currently I.MX7 Sabre platform on ARM.
+Code being on the master branch '''does not imply''' that it has been formally verified. The verified build of the kernel is currently I.MX7 Sabre platform on ARM. To see which code is verified, please have a look at [[https://wiki.sel4.systems/Hardware|our verified platforms]].
 
 == User-level code: ==
 
