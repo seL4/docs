@@ -11,6 +11,7 @@ The Licence agreement certifies:
 Please sign the [[https://sel4.systems/Community/Contributing/seL4-CLA.pdf|Contributor License Agreement]], scan it and send it to us at ''licensing AT sel4.systems.''
 
 {{ http://i.imgur.com/kuAok5A.png }}
+==== Figure 1 ====
 
 We have two main groups of publicly hosted projects: the first group is the set of repositories found at https://github.com/sel4. The second group is that found at https://github.com/sel4proj.
 
