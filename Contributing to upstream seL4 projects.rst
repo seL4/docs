@@ -10,6 +10,8 @@ The Licence agreement certifies:
 
 Please sign the [[https://sel4.systems/Community/Contributing/seL4-CLA.pdf|Contributor License Agreement]], scan it and send it to us at ''licensing AT sel4.systems.''
 
+{{ http://imgur.com/a/7in34 }}
+
 We have two main groups of publicly hosted projects: the first group is the set of repositories found at https://github.com/sel4. The second group is that found at https://github.com/sel4proj.
 
 All submissions to repositories under https://github.com/sel4 require a CLA. All submissions to repositories under https://github.com/sel4proj do not require a CLA.
