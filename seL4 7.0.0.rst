@@ -1,0 +1,25 @@
+= seL4 Version 7.0.0 Release =
+Announcing the release of {{{seL4 7.0.0}}} with the following changes:
+
+== Changes ==
+ * Support for building standalone ia32 kernel added in e7327fa6df3
+ * ia32: Set sensible defaults for FS and GS selectors in c2f6d48bcf2
+ * aarch64: Use tpidrro_el0 for IPC buffer instead of tpidr_el0 in ae9fe9b5d18
+ * More seL4 manual documentation added for aarch64 object invocations
+ * Default NUM_DOMAINS set to 16 for x86-64 standalone builds in baa9798f793
+ * libsel4: Return seL4_Error in invocation stubs in 8fb06eecff9 ''' This is a source code level breaking change '''
+ * Add a CMake based build system in 0b73072016e
+ * x86: Increase TCB size for debug builds in 4c8be8f4f91
+
+= Notable changes =
+ * CMake based build system added: Initial support has been added for using CMake for building the kernel and some user level libraries.  Currently the only supported project that takes advantage of this is seL4test when using the cmake.xml manifest in sel4test-manifest.  Documentation can be found at: https://github.com/seL4/seL4_tools/tree/master/cmake-tool
+
+= Upgrade notes =
+ * This release is not source compatible with previous releases.
+ * seL4 invocations that previously returned long now return seL4_Error which is an enum. Our libraries have already been updated to reflect this change, but in other places where seL4 invocations are used directly, the return types will need to be updated to reflect this change.
+
+= Full changelog =
+Use {{{git log 6.0.0..7.0.0}}} in https://github.com/seL4/seL4
+
+= More details =
+See the [[http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf|7.0.0 manual]] included in the release or ask on the mailing list!
