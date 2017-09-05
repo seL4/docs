@@ -21,6 +21,9 @@ Announcing the release of {{{seL4 7.0.0}}} with the following changes:
  * seL4 invocations that previously returned long now return seL4_Error which is an enum. Our libraries have already been updated to reflect this change, but in other places where seL4 invocations are used directly, the return types will need to be updated to reflect this change.
  * On x86 some structs in the Bootinfo have been rearranged. This only affects seL4_VBEModeInfoBlock_t which is used if VESA BIOS Extensions (VBE) information is being used.
 
+= Known issues =
+ * One of our tests is non-deterministicly becoming unresponsive on the SMP release build on the Sabre IMX.6 platform, which is a non verified configuration of the kernel.  We are working on fixing this problem, and will likely do a point release once it is fixed.
+
 = Full changelog =
 Use {{{git log 6.0.0..7.0.0}}} in https://github.com/seL4/seL4
 
