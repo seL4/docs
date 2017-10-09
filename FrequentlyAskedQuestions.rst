@@ -212,7 +212,7 @@ Notifications can also be ''Polled'', which is like Wait, except the operation d
 
 == What is the seL4 fastpath? ==
 
-The fastpath is an add-on frontend to the kernel which performs the simple cases of some common operations quickly. It is key to the high IPC performance seL4 achieves -- we know of now kernel that does IPC faster.
+The fastpath is an add-on frontend to the kernel which performs the simple cases of some common operations quickly. It is key to the high IPC performance seL4 achieves -- we know of no kernel that does IPC faster.
 
 Enabling or disabling the fastpath should not have any impact on the kernel behaviour except for performance.
 
