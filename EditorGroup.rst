@@ -29,6 +29,7 @@ List of known good editors (for anti-spam)  Please try to keep these in alphabet
  * ParthaSusarla
  * PeterChubb
  * Richard Habeeb
+ * RobertVanVossen
  * Sebastian Holzapfel
  * ShanushPremathasarathan
  * StephenSherratt
