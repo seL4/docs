@@ -5,15 +5,51 @@
 There is a set of microbenchmarks for seL4 available, see the [[https://github.com/seL4/sel4bench-manifest|sel4bench-manifest]].
 
 = Benchmarking Tools =
+
+We have developed a set of tools which can be used to analyse kernel and workload performance.
+
+== CPU Utilisation ==
+Threads (including the idle thread) and the overall system time (in cycles) can be tracked by enabling the "track CPU utilisation feature". This feature can be enabled from the menuconfig list (seL4 Kernel > Enable benchmarks > Track threads and kernel CPU utilisation time).
+
+By enabling CPU utilisation tracking, the kernel is instrumented with some variables and functions to log the utilisation time for each thread (thus TCBs have additional variables for this purpose); the in-kernel buffer is not used. During each context switch, the kernel adds how long this heir thread has run before being switched, and resets the start time of the next thread.
+
+=== How to use ===
+
+After enabling this feature, some few system calls can be used to start, stop, and retrieve data.
+
+'''seL4_BenchmarkResetLog() ''' This system call resets global counters (since the previous call to the same function) and idleThread counters that hold utilisation values, and starts CPU utilisation tracking.
+
+'''seL4_BenchmarkResetThreadUtilisation(seL4_CPtr thread_cptr)''' resets the utilisation counters for the requested thread. It's the resposibility of the user to reset the thread's counters using this system call before calling seL4_BenchmarkResetLog(), especially if seL4_BenchmarkResetLog() is called multiple times to track the same thread(s).
+
+'''seL4_BenchmarkFinalizeLog()''' Stops the CPU tracking feature but doesn't reset the counters. Calling this system call without a previous seL4_BenchmarkResetLog() call has no effect.
+
+
+'''seL4_BenchmarkGetThreadUtilisation(seL4_CPtr thread_cptr)''' Gets the utilisation time of the thread that '''thread_cptr '''capability points to between calls to seL4_BenchmarkResetLog() and seL4_BenchmarkFinalizeLog(). The utilisation time is dumped to the IPCBuffer (first 64-bit word) of the calling thread into a fixed position. Additionally idle thread and overall CPU utilisation times are dumped to subsequent 64-bit words in the IPCBuffer.
+
+Example code of using this feature:
+
+{{{#!cplusplus numbers=off
+#include <sel4/benchmark_utilisation_types.h>
+
+uint64_t *ipcbuffer = (uint64_t *) &(seL4_GetIPCBuffer()->msg[0]);
+
+seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
+
+seL4_BenchmarkResetLog();
+...
+seL4_BenchmarkFinalizeLog();
+
+seL4_BenchmarkGetThreadUtilisation(seL4_CapInitThreadTCB);
+printf("Init thread utilisation = %llu\n", ipcbuffer[BENCHMARK_TCB_UTILISATION]);
+printf("Idle thread utilisation = %llu\n", ipcbuffer[BENCHMARK_IDLE_UTILISATION]);
+printf("Overall utilisation = %llu\n", ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
+}}}
+
 == In kernel log-buffer ==
-We provide a 1MB buffer in the kernel when `CONFIG_TRACEPOINTS > 0`. This can be used to place information while the kernel is running. The buffer is write-through to optimise performance by minimising cache pollution, so if using the buffer make sure you do not read data back. Ideally, benchmarks that use the buffer should log one line at a time, sequentially, into the buffer for minimal performance impact while benchmarking.
 
-Buffer data can be extracted via special benchmarking system calls to the kernel that copy the data out via the IPC buffer.
+An in-kernel log buffer can be provided by the user when `CONFIG_ENABLE_BENCHARMKS` is set with the system call `seL4_BenchmarkSetLogBuffer`. Users must provide a large frame capability for the kernel to use as a log buffer. This is mapped write-through to avoid impacting the caches, assuming that the kernel only writes to the log buffer and doesn't read to it during benchmarking. Once a benchmark is complete, data can be read out at user level.  
 
-We provide several benchmarking tools that use the log buffer.
-
-=== Caveats ===
-On Sabre, Odroid-XU and Haswell platforms we
+We provide several benchmarking tools that use the log buffer (trace points and kernel entry tracking).
 
 == Tracepoints ==
 We allow the user to specify tracepoints in the kernel to track the time between points.
@@ -113,44 +149,9 @@ TRACE_POINT_STOP(0);
 }}}
 When interleaving or nesting tracepoints, be sure to account for the overhead that will be introduced.
 
-== CPU Utilisation ==
-Threads (including the idle thread) and the overall system time (in cycles) can be tracked by enabling the "track CPU utilisation feature". This feature can be enabled from the menuconfig list (seL4 Kernel > Enable benchmarks > Track threads and kernel CPU utilisation time).
-
-By enabling CPU utilisation tracking, the kernel is instrumented with some variables and functions to log the utilisation time for each thread (thus TCBs have additional variables for this purpose); the in-kernel buffer is not used. During each context switch, the kernel adds how long this heir thread has run before being switched, and resets the start time of the next thread.
-
-==== How to use ====
-
-After enabling this feature, some few system calls can be used to start, stop, and retrieve data.
-
-'''seL4_BenchmarkResetLog() ''' This system call resets global counters (since the previous call to the same function) and idleThread counters that hold utilisation values, and starts CPU utilisation tracking.
-
-'''seL4_BenchmarkResetThreadUtilisation(seL4_CPtr thread_cptr)''' resets the utilisation counters for the requested thread. It's the resposibility of the user to reset the thread's counters using this system call before calling seL4_BenchmarkResetLog(), especially if seL4_BenchmarkResetLog() is called multiple times to track the same thread(s).
-
-'''seL4_BenchmarkFinalizeLog()''' Stops the CPU tracking feature but doesn't reset the counters. Calling this system call without a previous seL4_BenchmarkResetLog() call has no effect.
 
 
-'''seL4_BenchmarkGetThreadUtilisation(seL4_CPtr thread_cptr)''' Gets the utilisation time of the thread that '''thread_cptr '''capability points to between calls to seL4_BenchmarkResetLog() and seL4_BenchmarkFinalizeLog(). The utilisation time is dumped to the IPCBuffer (first 64-bit word) of the calling thread into a fixed position. Additionally idle thread and overall CPU utilisation times are dumped to subsequent 64-bit words in the IPCBuffer.
-
-Example code of using this feature:
-
-{{{#!cplusplus numbers=off
-#include <sel4/benchmark_utilisation_types.h>
-
-uint64_t *ipcbuffer = (uint64_t *) &(seL4_GetIPCBuffer()->msg[0]);
-
-seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
-
-seL4_BenchmarkResetLog();
-...
-seL4_BenchmarkFinalizeLog();
-
-seL4_BenchmarkGetThreadUtilisation(seL4_CapInitThreadTCB);
-printf("Init thread utilisation = %llu\n", ipcbuffer[BENCHMARK_TCB_UTILISATION]);
-printf("Idle thread utilisation = %llu\n", ipcbuffer[BENCHMARK_IDLE_UTILISATION]);
-printf("Overall utilisation = %llu\n", ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
-}}}
-
-== Track Kernel Entries ==
+== Kernel entry tracking ==
 Kernel entries can be tracked, registering info about interrupts, syscall, timestamp, invocations and capability types. The number of kernel entries is restricted by the log buffer size. The kernel 
 provides a reserved area within its address space to map the log buffer. It's the responsibility of the user to allocate a user-level log buffer (currently can be only of seL4_LargePageBits size)
 and pass it to the kernel to use before doing any operations that involve the log buffer, otherwise an error will be triggered having incorrect user-level log buffer. To enable this feature, select
