@@ -38,3 +38,24 @@ To make U-boot enter its DFU server mode now, just type: `run bootcmd_dfu`. U-bo
 You may need to give dfu-util root privileges. If `dfu-util` is unable to find the TX1 device, try unplugging and replugging in the USB mini-cable that connects your PC to the TX1.
 
 == Booting via SD Card ==
+Get an SD card and format it with either FAT32, EXT2 or EXT4. Then build seL4test, or any of the other seL4 projects. The resulting image file should be placed inside of `/images` within the build directory. Take that image file, and copy it to the root folder of the SD card you intend to use with your TX1.
+
+Insert this SD card into your TX1 and then power on the TX1, and drop into the U-boot command prompt. When you're at the prompt, please type the following:
+
+For FAT32:
+{{{
+fatload mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+go 0x82000000
+}}}
+
+For EXT2:
+{{{
+ext2load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+go 0x82000000
+}}}
+
+For EXT4:
+{{{
+ext4load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+go 0x82000000
+}}}
