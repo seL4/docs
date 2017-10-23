@@ -9,9 +9,12 @@ The stock TX1 comes with support for booting using DFU, using an SD-card or by c
 
 Unfortunately the stock U-boot that comes with the TX1 does not support TFTP-boot over the Ethernet port. You can get U-boot to support the TX1's Ethernet driver and enable TFTP-boot, but this is beyond the scope of this article since it entails compiling a custom U-boot and then flashing it onto the board.
 
-== Internal USB mass storage ==
+== Booting via TFTP ==
+Unfortunately the stock U-boot that comes with the TX1 does not support TFTP because [[https://devtalk.nvidia.com/default/topic/962946/tx1-pxe-boot/|it does not come with an ethernet driver]], but if you so choose, it seems that it is possible to recomplile u-boot with support for the ethernet driver, and then flash your custom U-boot onto your TX1. Instructions on how to do this are not included here.
 
-== DFU ==
+== Booting via Internal USB mass storage ==
+
+== Booting via DFU ==
 
 Before attempting to boot over DFU on the TX1, be sure to double check that the seL4 build process is outputting a raw binary and not an ELF. You can ascertain this by doing a `make menuconfig` and then proceeding through:
 `Tools` => `Build elfloader` => `Boot image type`
@@ -33,3 +36,5 @@ To make U-boot enter its DFU server mode now, just type: `run bootcmd_dfu`. U-bo
 }}}
 
 You may need to give dfu-util root privileges. If `dfu-util` is unable to find the TX1 device, try unplugging and replugging in the USB mini-cable that connects your PC to the TX1.
+
+== Booting via SD Card ==
