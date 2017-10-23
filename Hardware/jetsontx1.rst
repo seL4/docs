@@ -28,8 +28,8 @@ To boot via DFU, attach the usb-mini end of a USB cable to the USB-mini port on 
 
 To make U-boot enter its DFU server mode now, just type: `run bootcmd_dfu`. U-boot should sit still waiting for a kernel image to be uploaded. Now you should open up a new terminal on your PC, and type the following:
 
-{{
+{{{
  dfu-util --device 0955:701a -a kernel -D <PATH_TO_YOUR_SEL4_IMAGE>/sel4test-driver-image-arm-tx1.bin
-}}
+}}}
 
 You may need to give dfu-util root privileges. If `dfu-util` is unable to find the TX1 device, try unplugging and replugging in the USB mini-cable that connects your PC to the TX1.
