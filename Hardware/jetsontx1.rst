@@ -12,8 +12,6 @@ Unfortunately the stock U-boot that comes with the TX1 does not support TFTP-boo
 == Booting via TFTP ==
 Unfortunately the stock U-boot that comes with the TX1 does not support TFTP because [[https://devtalk.nvidia.com/default/topic/962946/tx1-pxe-boot/|it does not come with an ethernet driver]], but if you so choose, it seems that it is possible to recomplile u-boot with support for the ethernet driver, and then flash your custom U-boot onto your TX1. Instructions on how to do this are not included here.
 
-== Booting via Internal USB mass storage ==
-
 == Booting via DFU ==
 
 Before attempting to boot over DFU on the TX1, be sure to double check that the seL4 build process is outputting a raw binary and not an ELF. You can ascertain this by doing a `make menuconfig` and then proceeding through:
@@ -41,6 +39,36 @@ You may need to give dfu-util root privileges. If `dfu-util` is unable to find t
 Get an SD card and format it with either FAT32, EXT2 or EXT4. Then build seL4test, or any of the other seL4 projects. The resulting image file should be placed inside of `/images` within the build directory. Take that image file, and copy it to the root folder of the SD card you intend to use with your TX1.
 
 Insert this SD card into your TX1 and then power on the TX1, and drop into the U-boot command prompt. When you're at the prompt, please type the following:
+
+For FAT32:
+{{{
+fatload mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+go 0x82000000
+}}}
+
+For EXT2:
+{{{
+ext2load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+go 0x82000000
+}}}
+
+For EXT4:
+{{{
+ext4load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+go 0x82000000
+}}}
+
+== Internal 15 GiB USB mass storage ==
+
+Booting off the internal USB mass storage is almost the same as booting off the SD card, but in particular, you should do something along the lines of:
+
+Attach a USB mini cable to the mini-USB port on the TX1, and the other end of the cable to your PC. Then power on the TX1 and drop into the U-boot command line, and do the following:
+
+{{{
+ums mmc 0
+}}}
+
+Your PC should now show that a new USB mass storage device has been connected. Copy the seL4 image into the root directory of this mass storage device, then unmount it and remove it safely. Then go back to the U-boot command line and press `Ctrl+C` to exit the mass-storage server. Then, type the following, depending on the filesystem type that you formatted the internal mass storage device to (or if you didn't personally format it, then whatever filesystem already existed on the internal mass storage):
 
 For FAT32:
 {{{
