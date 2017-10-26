@@ -36,6 +36,8 @@ To make U-boot enter its DFU server mode now, just type: `run bootcmd_dfu`. U-bo
 You may need to give dfu-util root privileges. If `dfu-util` is unable to find the TX1 device, try unplugging and replugging in the USB mini-cable that connects your PC to the TX1.
 
 == Booting via SD Card ==
+Please be sure that your build process is producing a raw binary image and not an ELF image. You can do this by executing `make menuconfig` and then proceeding through: `Tools` => `Build elfloader` => `Boot image type`. Be sure that `Binary Boot Image` is selected.
+
 Get an SD card and format it with either FAT32, EXT2 or EXT4. Then build seL4test, or any of the other seL4 projects. The resulting image file should be placed inside of `/images` within the build directory. Take that image file, and copy it to the root folder of the SD card you intend to use with your TX1.
 
 Insert this SD card into your TX1 and then power on the TX1, and drop into the U-boot command prompt. When you're at the prompt, please type the following:
@@ -60,6 +62,8 @@ go 0x82000000
 
 == Internal 15 GiB USB mass storage ==
 
+Please be sure that your build process is producing a raw binary image and not an ELF image. You can do this by executing `make menuconfig` and then proceeding through: `Tools` => `Build elfloader` => `Boot image type`. Be sure that `Binary Boot Image` is selected.
+
 Booting off the internal USB mass storage is almost the same as booting off the SD card, but in particular, you should do something along the lines of:
 
 Attach a USB mini cable to the mini-USB port on the TX1, and the other end of the cable to your PC. Then power on the TX1 and drop into the U-boot command line, and do the following:
@@ -72,18 +76,18 @@ Your PC should now show that a new USB mass storage device has been connected. C
 
 For FAT32:
 {{{
-fatload mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+fatload mmc 0 0x82000000 sel4test-driver-image-arm-tx1.bin
 go 0x82000000
 }}}
 
 For EXT2:
 {{{
-ext2load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+ext2load mmc 0 0x82000000 sel4test-driver-image-arm-tx1.bin
 go 0x82000000
 }}}
 
 For EXT4:
 {{{
-ext4load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+ext4load mmc 0 0x82000000 sel4test-driver-image-arm-tx1.bin
 go 0x82000000
 }}}
