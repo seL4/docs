@@ -47,7 +47,7 @@ In this section you should find the two most convenient methods of getting a ker
 
 The two methods described here are using the SD card and TFTP.
 
-Both methods require you to use an SD card to provide the RPi3 firmware with a U-boot bootloader it can load. The RPi3 doesn't store its bootloader in flash memory, so it looks for the bootloader on the SD card. Please see the section above for how to prepare your SD Card for the base set of requirements.
+Both methods require you to use an SD card to provide the RPi3 firmware with a U-boot bootloader it can load. The RPi3 doesn't store its bootloader in flash memory, so it looks for the bootloader on the SD card. Please see the section above for how to prepare your SD Card for the base set of requirements; you can glance at the table above to see the files you'll need and how to obtain them.
 
 === SD Card ===
 Get a micro-SD card ready by getting the base files copied onto it (See the previous section).
