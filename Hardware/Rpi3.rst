@@ -57,8 +57,8 @@ Following this, copy your seL4 image (such as an seL4test image), onto the SD ca
 When the RPi3 boots up, be sure to interrupt the boot process and drop into the U-boot command prompt. From the U-boot command prompt, type something the following: `fatls mmc 0`. If you don't see your seL4 image file's name printed out, then you might need to double-check your steps so far to make sure you didn't forget something along the way. If you see your file listed, then do something like:
 
 {{{
-fatload mmc 0 0x20000000 sel4test-driver-image-arm-bcm2837
-bootelf 0x20000000
+fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2837
+bootelf 0x10000000
 }}}
 
 === TFTP ===
