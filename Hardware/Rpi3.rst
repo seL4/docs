@@ -62,3 +62,10 @@ bootelf 0x10000000
 }}}
 
 === TFTP ===
+
+{{{
+usb start
+dhcp
+tftp 0x10000000 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-bcm2837
+bootelf 0x10000000
+}}}
