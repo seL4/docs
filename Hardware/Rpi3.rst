@@ -63,6 +63,8 @@ bootelf 0x10000000
 
 === TFTP ===
 
+Be sure you've set up the internal SD card with the required files for U-Boot and the RPi3 firmware (consult the table above). Then make certain that you've started up a TFTP server with your seL4 image being served by that TFTP server. From there:
+
 {{{
 usb start
 dhcp
