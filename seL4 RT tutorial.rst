@@ -260,7 +260,7 @@ With stack:
 
 Now we reconfigure the scheduling context to change the extra_refills parameter. Extra_refills controls how many times the scheduling context can change for a non-round robin thread without using up all of its budget. The current scheduling context is changed when a thread is preempted, blocks, or makes an RPC to an active thread (a thread that has its own scheduling context).
 
-For further detail, please see [[this paper|https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf]] which explains in detail the sporadic server algorithm the MCS version of seL4 uses to implement temporal isolation. Note that in code, we use the term `refill` to talk about sporadic replenishments for brevity. 
+For further detail, please see [[https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf|this paper]] which explains in detail the sporadic server algorithm the MCS version of seL4 uses to implement temporal isolation. Note that in code, we use the term `refill` to talk about sporadic replenishments for brevity. 
 
 The `sender_thread` used in this task simply sends a message and prints out the number of times it has sent one. The main thread keeps sending messages, and prints out the current time (in seconds -- although on qemu these values are not reliable so may not match your output). This causes the current scheduling context to change every time we switch threads.
 
