@@ -1,7 +1,8 @@
 = The TK1-SOM Daughterboard =
 The TK1-SOM Daughterboard is an open-hardware daughterboard designed by the Trustworthy Systems group at Data61/CSIRO, that can be mounted to the TK1-SOM. It provides '''CAN buses''', '''serial''','''sensors''', '''power management''', '''PWM outputs''' and other features that allow the TK1-SOM to be used as a flight controller for a quadcopter.
 
-'''Note: this wiki page is a work-in-progress'''
+=== Warning ===
+ * Don't plug in or unplug things from the daughterboard while it is turned on, especially the radio. The current transient will sometimes kill U13 (TPS563200 5V regulator). If only 1 of the LEDs above the white molex connector is lit, it is because U13 is dead.
 
 === Rough overview (top) ===
 {{attachment:daughterboard_top_strike.jpg|Top of board|width="100%"}}
