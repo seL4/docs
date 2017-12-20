@@ -23,7 +23,7 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Benchmarking guide]]
  * [[Virtualisation on seL4]]
  * [[Rust]]
- * Userland Components and Drivers
+ * [[Userland Components and Drivers]]
  * [[Status]]
  
 == Questions and Recipes ==
