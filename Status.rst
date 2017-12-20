@@ -1,19 +1,21 @@
-Status of (new) seL4 features and projects
+= Status of new and future seL4 features and projects =
 
-Kernel Features
+== Kernel Features ==
 
 ||'''Feature'''||'''Status'''||'''Owner'''||'''Repo'''||'''Comment'''||
 || AArch64 kernel || released || D61 || https://github.com/seL4/seL4 || Nvidia TX1, see [[Hardware]] ||
 || AArch64 hyp || in development (unreleased) || D61 || || Nvidia TX1, see [[Hardware]] ||
+|| MCS kernel || in development || D61 || || ||
+|| SMP kernel || released || D61 || https://github.com/seL4/seL4 || x32 and AArch32||
 
-CAmkES Features
+== CAmkES Features ==
 
 ||'''Feature'''||'''Status'''||'''Owner'''||'''Repo'''||'''Comment'''||
 || CAmkES AArch64 || planned || D61 || || ||
 || CAmkES AArch64 & hyp || planned || D61 || || ||
 
 
-Other Projects
+== Other Projects ==
 
 ||'''Feature'''||'''Status'''||'''Owner'''||'''Repo'''||'''Comment'''||
 || camkes-arm-vmm for aarch64 || planned || D61 || || ||
