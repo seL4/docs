@@ -20,3 +20,4 @@
 ||'''Feature'''||'''Status'''||'''Owner'''||'''Repo'''||'''Comment'''||
 || camkes-arm-vmm for aarch64 || planned || D61 || || ||
 || camkes-arm-vmm for Nvidia Tx1 || planned || D61 || || ||
+|| multiple ARM VMs || planned || || || ||
