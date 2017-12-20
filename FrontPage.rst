@@ -24,9 +24,8 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Virtualisation on seL4]]
  * [[Rust]]
  * Userland Components and Drivers
- * [[Suggested projects]]
- * CommunityProjects
-
+ * [[Status]]
+ 
 == Questions and Recipes ==
 
  * [[FrequentlyAskedQuestions|FAQ]]: editable list of FAQs
@@ -48,3 +47,5 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
 
  * [[https://research.csiro.au/tsblog|Trustworthy Systems Blog]]
  * [[IRCChannel|IRC Channel]]
+ * [[Suggested projects]]
+ * CommunityProjects
