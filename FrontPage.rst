@@ -14,7 +14,6 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Getting started]]
  * [[Tutorials]]
  * [[Documentation]]
- * [[Hardware|Hardware Support]]
  * [[SeL4Libraries|seL4 libraries]]
  * [[CAmkES]]
  * [[CapDL]]
@@ -23,9 +22,15 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  * [[Benchmarking guide]]
  * [[Virtualisation on seL4]]
  * [[Rust]]
- * Userland Components and Drivers
- * Status
  
+== seL4 Status ==
+
+ * [[Hardware|Hardware Support]]
+ * Kernel Features
+ * Userland Components and Drivers
+ * New Features
+
+
 == Questions and Recipes ==
 
  * [[FrequentlyAskedQuestions|FAQ]]: editable list of FAQs
