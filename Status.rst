@@ -19,6 +19,6 @@
 == Other Projects ==
 
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
-|| camkes-arm-vmm for aarch64 || planned || [[mailto:devel@sel4.systems|D61]] || || ||
+|| camkes-arm-vmm for AArch64 || planned || [[mailto:devel@sel4.systems|D61]] || || Including libsel4arm-vmm fo AArch64 ||
 || camkes-arm-vmm for Nvidia Tx1 || planned || [[mailto:devel@sel4.systems|D61]] || || Including Linux running in a VM ||
 || multiple ARM VMs || planned || || || ||
