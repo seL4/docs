@@ -11,16 +11,16 @@ For status of existing kernel ports, features, drivers, and other userland compo
 == Kernel Features ==
 
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
-|| AArch64 kernel || in development (released) || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 || being developed on NVIDIA TX1 ||
-|| AArch64 hyp || in development (unreleased) || [[mailto:devel@sel4.systems|D61]] || || being developed on NVIDIA TX1 ||
-|| MCS kernel || in development || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 branch? || being developed for x32 and AArch32 on all supported platforms (?)||
-|| SMP kernel || in development (released) || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 || being developed for x32 and AArch32 on all supported platforms (?)||
+
+|| AArch64 hyp || in development (unreleased) || [[mailto:devel@sel4.systems|D61]] || || being developed on NVIDIA TX1, HiKey ||
+|| AArch64 SMP || planned || [[mailto:devel@sel4.systems|D61]] ||  || to be developed on NVIDIA TX1, HiKey ||
+|| MCS kernel || in development (unreleased) || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4/tree/new-rt || being developed for x32, x64, AArch32, AArch64 on all supported platforms.  Note, development branch is not released publicly, but github branch is updated from it occasionally ||
+
 
 == Kernel hardware platform ports ==
 
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
-|| NVIDIA TX1 || in development (released) || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 || AArch64 only ? ||
-|| NVIDIA TX1 SMMU || planned || [[mailto:devel@sel4.systems|D61]] || || AArch64 only ? ||
+|| NVIDIA TX1 SMMU || planned || [[mailto:devel@sel4.systems|D61]] || || AArch32 and AArch64 ||
 
 == CAmkES Features ==
 
