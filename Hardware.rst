@@ -15,13 +15,13 @@
 
 === ARMv6 ===
 
-||'''platform (board)''' ||'''chip''' ||'''core''' ||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed''' ||'''maintained''' ||'''description''' ||
+||'''platform (board)''' ||'''chip''' ||'''core''' ||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed by''' ||'''maintained by''' ||'''description''' ||
 ||[[Hardware/Kzm|KZM]] ||i.MX31 ||ARM11 ||v6 ||No ||No ||unverified ||Data61 ||Data61 ||original verified version - proof no longer maintained ||
 
 
 === ARMv7A ===
 
-||'''platform (board)'''||'''chip'''||'''core'''||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed''' ||'''maintained''' ||'''description''' ||
+||'''platform (board)'''||'''chip'''||'''core'''||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed by''' ||'''maintained by''' ||'''description''' ||
 ||[[Hardware/arndale|Arndale]] ||Exynos5 ||A15 ||v7A ||ARM HYP ||- ||unverified ||Data61 ||not regression tested but same SoC as Odroid-XU || ||
 ||[[Hardware/BeagleBoard|BeagleBoard]] ||OMAP3 ||A8 ||v7A ||No ||No ||unverified ||Data61 ||Data61 || ||
 ||[[Hardware/Beaglebone|Beaglebone Black]] ||AM335x ||A8 ||v7A ||No ||No ||unverified ||external ||Data61 regression tested || ||
@@ -36,7 +36,7 @@
 
 === ARMv8A ===
 
-||'''platform (board)''' ||'''chip''' ||'''core''' ||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed''' ||'''maintained''' ||'''description''' ||
+||'''platform (board)''' ||'''chip''' ||'''core''' ||'''arch''' ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed by''' ||'''maintained by''' ||'''description''' ||
 ||[[Hardware/zynqmp|??Zynq UltraScale+ MPSoC ZCU102 Evaluation Kit??]] ||Zynq !UltraScale+ MPSoC ||A53 ||v8A ||ARM HYP ||System MMU ||unverified ||[[http://dornerworks.com/|DornerWorks]] ||Data61 || ||
 ||[[Hardware/jetsontx1|Jetson TX1 (NVIDIA) ]] || Tegra X1 ||Quad A57 ||v8A  ||ARM HYP ||System MMU ||unverified ||Data61 ||Data61 || A57 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
 ||[[Hardware/HiKey|HiKey]] ||Kirin 620 ||A53 ||v8A ||ARM HYP ||- ||unverified ||Data61 ||Data61 || A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
