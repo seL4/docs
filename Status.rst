@@ -8,7 +8,7 @@ For status of existing kernel ports, features, drivers, and other userland compo
  * [[Userland Components and Drivers]]: for device driver and userland components
 
 
-== Kernel Features and hardware platform ports==
+== Kernel Features and hardware platform ports ==
 
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
 || MCS kernel || in development || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4/tree/new-rt || being developed for x32, x64, AArch32, AArch64 on most supported platforms.  Note, development branch is not released publicly, but github branch is updated from it occasionally ||
