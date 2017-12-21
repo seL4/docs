@@ -20,6 +20,8 @@ For status of existing kernel ports, features, drivers, and other userland compo
 
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
 || NVIDIA TX1 SMMU || planned || [[mailto:devel@sel4.systems|D61]] || || AArch32 and AArch64 ||
+|| RISC-V || planned || [[mailto:devel@sel4.systems|D61]] || ||  ||
+
 
 == CAmkES Features ==
 
