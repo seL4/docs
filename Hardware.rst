@@ -22,9 +22,9 @@
 ||[[Hardware/odriod-XU|Odroid-XU (Exynos5)]] ||A15 ||v7A ||ARM HYP ||limited System MMU ||unverified ||Data61 ||Data61 || ||
 ||[[Hardware/arndale|Arndale (Exynos5)]] ||A15 ||v7A ||- ||- ||unverified ||Data61 ||not regression tested but same SoC as Odroid-XU || ||
 ||[[Hardware/jetsontk1|NVIDIA Tegra K1]] ||A15 ||v7-1A ||ARM HYP ||System MMU ||unverified ||Data61 ||Data61 || ||
-||[[Hardware/jetsontx1|NVIDIA Tegra X1]] ||Quad A57 ||v8A [Hardware support for AArch32 and AArch64] || || ||unverified ||Data61 ||Data61 || The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
+||[[Hardware/jetsontx1|NVIDIA Tegra X1]] ||Quad A57 ||v8A  || || ||unverified ||Data61 ||Data61 || A57 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
 ||[[Hardware/CEI_TK1_SOM|Colorado Engineering TK1 SOM]] ||A15 ||v7-1A ||ARM HYP ||System MMU ||unverified ||Data61 ||Data61 ||Small form-factor, similar to the Tegra K1 ||
 ||[[Hardware/odroidx|Odroid-X]] ||A15 ||v7A ||No ||No ||unverified ||Data61 ||Data61 || ||
 ||[[Hardware/IF6410|Inforce IFC6410]] ||krait (A15-like) ||v7A ||- ||- ||unverified ||Data61 ||Data61 ||Qualcomm reimplementation of Armv7A ||
-||[[Hardware/HiKey|HiKey]] ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || ||
-||[[Hardware/Rpi3|Raspberry Pi 3-b]] ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || ||
+||[[Hardware/HiKey|HiKey]] ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
+||[[Hardware/Rpi3|Raspberry Pi 3-b]] ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''.||
