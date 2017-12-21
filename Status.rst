@@ -13,7 +13,7 @@ For status of existing kernel ports, features, drivers, and other userland compo
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
 || AArch64 kernel || in development (released) || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 || being developed on NVIDIA TX1 ||
 || AArch64 hyp || in development (unreleased) || [[mailto:devel@sel4.systems|D61]] || || being developed on NVIDIA TX1 ||
-|| MCS kernel || in development || [[mailto:devel@sel4.systems|D61]] || || being developed for x32 and AArch32 on all supported platforms (?)||
+|| MCS kernel || in development || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 branch? || being developed for x32 and AArch32 on all supported platforms (?)||
 || SMP kernel || in development (released) || [[mailto:devel@sel4.systems|D61]] || https://github.com/seL4/seL4 || being developed for x32 and AArch32 on all supported platforms (?)||
 
 == Kernel hardware platform ports ==
