@@ -40,4 +40,4 @@
 ||[[Hardware/zynqmp|??]] ||Zynq UltraScale+ MPSoC ||A53 ||v8A ||- ||- ||unverified ||[[http://dornerworks.com/|DornerWorks]] ||Data61 || ||
 ||[[Hardware/jetsontx1|Jetson TX1 (NVIDIA) ]] || Tegra X1 ||Quad A57 ||v8A  || || ||unverified ||Data61 ||Data61 || A57 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
 ||[[Hardware/HiKey|HiKey]] ||Kirin 620 ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. ||
-||[[Hardware/Rpi3|Raspberry Pi 3-b]] || ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''.||
+||[[Hardware/Rpi3|Raspberry Pi 3-b]] ||BCM2837 ||A53 ||v8A ||- ||- ||unverified ||Data61 ||Data61 || A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''.||
