@@ -25,10 +25,10 @@ To avoid spam and increase quality, editing is by invitation only.  Create an ac
  
 == seL4 Status ==
 
- * [[Hardware|Hardware Support]]
- * Kernel Features
- * Userland Components and Drivers
- * New Features
+ * New Features: new features in development
+ * [[Hardware|Hardware Support]]: information about hardware platform ports
+ * Kernel Features: information about available kernel features
+ * Userland Components and Drivers: available device drivers and userland components
 
 
 == Questions and Recipes ==
