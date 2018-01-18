@@ -1,5 +1,6 @@
 = CAmkES Version camkes-3.2.0 Release =
 camkes-3.2.0 2018-01-17
+
 Using seL4 version 8.0.0
 
 Announcing the release of {{{camkes-3.2.0}}} with the following changes:
