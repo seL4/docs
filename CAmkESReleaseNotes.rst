@@ -1,5 +1,6 @@
 This page archives all of the release notes for CAmkES.
 
+ * [[camkes-3.2.0|CAmkES 3.2.0]]
  * [[CAmkES 3.1.0]]
  * [[CAmkES 3.0.0]]
  * [[CAmkES 2.3.1]]
