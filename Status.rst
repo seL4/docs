@@ -32,6 +32,6 @@ For status of existing kernel ports, features, drivers, and other userland compo
 || camkes-arm-vmm for NVIDIA TX1 || planned || [[mailto:devel@sel4.systems|D61]] || || Including Linux running in a VM ||
 || multiple ARM VMs || planned || || || be able to run multiple VMMs, one VM per VMM. AArch32? AArch64? ||
 
-== Userland Component and Drivers ==
+== Userland Components and Drivers ==
 
 ||'''Feature'''||'''Status'''||'''Driven by'''||'''Repo'''||'''Comment'''||
