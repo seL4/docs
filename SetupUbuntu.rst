@@ -62,10 +62,10 @@ The version of qemu in Debian Wheezy does not have KZM support. Either install i
 }}}
 The resulting qemu binary is in '''arm-softmmu/qemu-system-arm'''
 
-==== Debian Jessie ====
+==== Debian Jessie or later ====
 <<Anchor(jessie)>>
 
-Jessie has multiarch support. To cross-build for ARM, add '''armhf''' as an architecture, and install the cross compiler:
+Jessie and following have multiarch support. To cross-build for ARM, add '''armhf''' as an architecture, and install the cross compiler:
 
 {{{
   sudo dpkg --add-architecture armhf
