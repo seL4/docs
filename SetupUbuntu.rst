@@ -12,8 +12,8 @@ Unfortunately, Debian is in a state of flux between the old Emdebian approach an
 On Wheezy and before, you need to use the Emdebian toolchains. Library support is now available on Jessie and later, but not a full complement of cross compilers.
 
 For Debian, first follow the instructions that are common to all Debian-based distros ([[#all|All Debian and Ubuntu Variants]]) then the ones for your system:
- * [[#wheezy|Debian Wheezy (stable)]]
- * [[#jessie|Debian Jessie or sid (testing or unstable)]]
+ * [[#wheezy|Debian Wheezy (oldstable)]]
+ * [[#jessie|Debian Jessie or later(testing or unstable)]]
 
 To find out what distro you're using:
 {{{
