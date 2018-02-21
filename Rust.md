@@ -1,53 +1,98 @@
-=== Description: ===
-This page relates to using cargo based rust modules in userspace on seL4 utilizing the existing build system.  It focuses on Interoperability between existing c based libraries and applications and working with CAmkES.  For rust only projects on seL4 see [[https://robigalia.org/|the robigalia project]].
+=== Description: === This page relates to using cargo based rust modules
+in userspace on seL4 utilizing the existing build system. It focuses on
+Interoperability between existing c based libraries and applications and
+working with CAmkES. For rust only projects on seL4 see
+\[\[<https://robigalia.org/%7Cthe> robigalia project\]\].
 
-=== Setup: ===
-In addition to the typical sel4 build prerequisites you also need to have rust installed.  This is achieved by the following: 
+=== Setup: === In addition to the typical sel4 build prerequisites you
+also need to have rust installed. This is achieved by the following:
 
-||`# This installs multirust from here: https://github.com/brson/multirust`<<BR>>`curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh  `<<BR>><<BR>>`# This will install cargo and rustc using the current nightly version`<<BR>>`multirust update nightly`<<BR>>`# This will set the default cargo and rustc paths to the nightly version`<<BR>>`multirust default nightly`||
+||\# This installs multirust from here: https://github.com/brson/multirust&lt;&lt;BR&gt;&gt;curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh  &lt;&lt;BR&gt;&gt;&lt;&lt;BR&gt;&gt;\# This will install cargo and rustc using the current nightly version&lt;&lt;BR&gt;&gt;multirust update nightly&lt;&lt;BR&gt;&gt;\# This will set the default cargo and rustc paths to the nightly version&lt;&lt;BR&gt;&gt;multirust default nightly||
 
-
-Additionally, if you want to use rust-bindgen (a helpful tool that generates rust bindings from c header files, such as bindings to camkes generated functions) you need to have libclang installed.
+Additionally, if you want to use rust-bindgen (a helpful tool that
+generates rust bindings from c header files, such as bindings to camkes
+generated functions) you need to have libclang installed.
 
 === Sample projects: ===
 
-There is currently a sample project [[https://github.com/SEL4PROJ/rust-camkes-samples|rust-camkes-samples]] that demonstrates this functionality.
+There is currently a sample project
+\[\[<https://github.com/SEL4PROJ/rust-camkes-samples%7Crust-camkes-samples>\]\]
+that demonstrates this functionality.
 
-The following commands get a sample camkes hello world app written in rust and runs it on qemu.  It assumes that rust is installed correctly.
+The following commands get a sample camkes hello world app written in
+rust and runs it on qemu. It assumes that rust is installed correctly.
 
-Note: the last rust nightly version this was specifically tested on is: nightly-2016-06-01. Since then, the build-system and structure of the upstream Rust compiler has changed, and '''is no longer compatible with our Rust infrastructure'''. Please continue to use this older nightly version until the project has been updated on our end, in the near future.
-||`# This just gets all of the sources`<<BR>>`repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git `<<BR>>`repo sync  `<<BR>>`# Configuration for arm kzm (so we can use qemu)`<<BR>>`# helloworld app: make rust-helloworld-kzm_defconfig`<<BR>>`# keyvalue app: make rust-keyvalue-kzm_defconfig`<<BR>>`make rust-helloworld-kzm_defconfig`<<BR>>`# Build and run on qemu`<<BR>>`make qemu-arm`||
+Note: the last rust nightly version this was specifically tested on is:
+nightly-2016-06-01. Since then, the build-system and structure of the
+upstream Rust compiler has changed, and '''is no longer compatible with
+our Rust infrastructure'''. Please continue to use this older nightly
+version until the project has been updated on our end, in the near
+future.
+||\# This just gets all of the sources&lt;&lt;BR&gt;&gt;repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git &lt;&lt;BR&gt;&gt;repo sync  &lt;&lt;BR&gt;&gt;\# Configuration for arm kzm (so we can use qemu)&lt;&lt;BR&gt;&gt;\# helloworld app: make rust-helloworld-kzm\_defconfig&lt;&lt;BR&gt;&gt;\# keyvalue app: make rust-keyvalue-kzm\_defconfig&lt;&lt;BR&gt;&gt;make rust-helloworld-kzm\_defconfig&lt;&lt;BR&gt;&gt;\# Build and run on qemu&lt;&lt;BR&gt;&gt;make qemu-arm||
 
+=== Build Dependencies: === In addition to the existing
+\[\[SetupUbuntu|seL4\]\] dependencies and \[\[CAmkES|CAmkES\]\]
+dependencies, the following dependencies are required:
 
-=== Build Dependencies: ===
-In addition to the existing [[SetupUbuntu|seL4]] dependencies and [[CAmkES|CAmkES]] dependencies, the following dependencies are required:
+> -   cargo and rustc: These are the rust build tool and compiler, they
+>     should be installed with
+>     \[\[<https://github.com/brson/multirust%7Cmultirust>\]\]
+>     (\[\[<https://www.rustup.rs/%7Crustup.rs>\]\] is still in beta,
+>     and the build system has only been tested with multirust but
+>     rustup.sh should still be fine as long as rustc and cargo work)
+> -   Cmake &gt;= 3.5.2
 
- * cargo and rustc: These are the rust build tool and compiler, they should be installed with [[https://github.com/brson/multirust|multirust]] ([[https://www.rustup.rs/|rustup.rs]] is still in beta, and the build system has only been tested with multirust but rustup.sh should still be fine as long as rustc and cargo work)
- * Cmake >= 3.5.2
+The following features also require extra dependencies, however the
+particular features are not required to build applications that don't
+use the features:
 
-The following features also require extra dependencies, however the particular features are not required to build applications that don't use the features:
+> -   libclang: A dependency of rust-bindgen to generate rust bindings
+>     from C header files.
+> -   linux-libc-dev:i386: Provides glibc headers for building libstd
+>     on x86.
 
- * libclang: A dependency of rust-bindgen to generate rust bindings from C header files.
- * linux-libc-dev:i386: Provides glibc headers for building libstd on x86. 
+=== Build overview: === Two features have been added to the seL4 build
+system (seL4\_tools):
 
+> -   The ability to use cargo projects as libraries or apps with other
+>     C based libraries or apps on seL4. The cargo project just needs to
+>     have a staticlib crate-type. To use rust projects as libraries
+>     that can be used by other C libraries or apps, the make file just
+>     needs to be
 
-=== Build overview: ===
-Two features have been added to the seL4 build system (seL4_tools):
+||\#This library uses a rust cargo project to generate it's lib\*.a file&lt;&lt;BR&gt;&gt;RUST\_TARGET := libbtreemap.a&lt;&lt;BR&gt;&gt;\# Header files/directories this library provides&lt;&lt;BR&gt;&gt;\# The file is specified directly, as btreemap.h is generated by the rust task&lt;&lt;BR&gt;&gt;HDRFILES := \${SOURCE\_DIR}/include/generated/btreemap.h&lt;&lt;BR&gt;&gt;include \$(SEL4\_COMMON)/common.mk||
 
- * The ability to use cargo projects as libraries or apps with other C based libraries or apps on seL4. The cargo project just needs to have a staticlib crate-type.  To use rust projects as libraries that can be used by other C libraries or apps, the make file just needs to be
+To use a cargo project as part of a camkes app component, in the
+application's Makefile, COMPONENTNAME\_RUST needs to be set to the cargo
+lib name.
 
-||`#This library uses a rust cargo project to generate it's lib*.a file`<<BR>>`RUST_TARGET := libbtreemap.a`<<BR>>`# Header files/directories this library provides`<<BR>>`# The file is specified directly, as btreemap.h is generated by the rust task`<<BR>>`HDRFILES := ${SOURCE_DIR}/include/generated/btreemap.h`<<BR>>`include $(SEL4_COMMON)/common.mk`||
+For a non camkes application, to use a cargo project in an app then the
+settings are the same as for a library: RUST\_TARGET := libcratename.a.
 
-
-To use a cargo project as part of a camkes app component, in the application's Makefile, COMPONENTNAME_RUST needs to be set to the cargo lib name.
-
-For a non camkes application, to use a cargo project in an app then the settings are the same as for a library: RUST_TARGET := libcratename.a.
-
- * The second feature of the build system, is that it cross compiles the core rust libraries for the the target architecture.  Currently it builds std and all required libraries.  Most of std won't work (things that rely on muslc syscalls that are not supported on seL4).  using #![no_std] should allow the project to just use core libraries and use extra libraries (such as collections, alloc) explicitly as needed.  rust_sysroot is a make rule that needs to be added to the Kbuild file of any module that uses rust.  Additionally, libcompiler-rt needs to be added to any applications that use cargo projects directly or indirectly.
-
+> -   The second feature of the build system, is that it cross compiles
+>     the core rust libraries for the the target architecture. Currently
+>     it builds std and all required libraries. Most of std won't work
+>     (things that rely on muslc syscalls that are not supported
+>     on seL4). using \#!\[no\_std\] should allow the project to just
+>     use core libraries and use extra libraries (such as
+>     collections, alloc) explicitly as needed. rust\_sysroot is a make
+>     rule that needs to be added to the Kbuild file of any module that
+>     uses rust. Additionally, libcompiler-rt needs to be added to any
+>     applications that use cargo projects directly or indirectly.
 
 == Known issues: ==
- * Currently rely on a modified libmuslc with a hacked in global tls struct in order for rust printf functionality to work.
- * Camkes apps are really bloated when they use rust. ~8 Mb of binary per app that uses rust it seems.  This is likely related to a camkes linking issue.
- * Most libstd functionality doesn't actually work due to lack of syscall implementation in muslc on sel4.  If concerned about this it may be better to use #![no_std] and explicitly use libcore, libcollections, liballoc, etc because they are more likely to work.
- * No way of knowing at compile time which libstd functions don't have underlying muslc implementations.
+
+:   -   Currently rely on a modified libmuslc with a hacked in global
+        tls struct in order for rust printf functionality to work.
+    -   Camkes apps are really bloated when they use rust. \~8 Mb of
+        binary per app that uses rust it seems. This is likely related
+        to a camkes linking issue.
+    -   Most libstd functionality doesn't actually work due to lack of
+        syscall implementation in muslc on sel4. If concerned about this
+        it may be better to use \#!\[no\_std\] and explicitly use
+        libcore, libcollections, liballoc, etc because they are more
+        likely to work.
+    -   No way of knowing at compile time which libstd functions don't
+        have underlying muslc implementations.
+
+

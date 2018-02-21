@@ -1,24 +1,24 @@
-= Introducing seL4 5.1.0 =
-Announcing the release of {{{seL4 5.1.0}}} with the following changes:
+= Introducing seL4 5.1.0 = Announcing the release of {{{seL4 5.1.0}}}
+with the following changes:
 
-Below are the changes to the seL4 ABI: 
-x86-64 specific changes:
- * implement seL4_BenchmarkFlushCaches debug syscall.
+Below are the changes to the seL4 ABI: x86-64 specific changes: \*
+implement seL4\_BenchmarkFlushCaches debug syscall.
 
-Below are other changes that do not affect the seL4 ABI:
-arm specific changes:
- * ARM-HYP: internal changes to support ARM-HYP verification work.
- * kzm: fix timer reload overflow calculations
-   
+Below are other changes that do not affect the seL4 ABI: arm specific
+changes: \* ARM-HYP: internal changes to support ARM-HYP verification
+work. \* kzm: fix timer reload overflow calculations
+
 = Upgrade notes =
 
- * This release potentially breaks ABI with the earlier versions if using benchmarking kernel configurations.
-
+> -   This release potentially breaks ABI with the earlier versions if
+>     using benchmarking kernel configurations.
 
 = Full changelog =
 
-Use {{{git log 5.0.0..5.1.0}}} in https://github.com/seL4/seL4
+Use {{{git log 5.0.0..5.1.0}}} in <https://github.com/seL4/seL4>
 
 = More details =
 
-See the [[http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf|5.1.0 manual]] included in the release or ask on the mailing list!
+See the
+\[\[<http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf%7C5.1.0>
+manual\]\] included in the release or ask on the mailing list!

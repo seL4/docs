@@ -1,255 +1,301 @@
 = Debugging guide =
 
-<<TableOfContents>>
+&lt;&lt;TableOfContents&gt;&gt;
 
 == Compiler Settings ==
 
 === Kernel ===
 
-When debugging the kernel, make sure `CONFIG_DEBUG` and `CONFIG_PRINTING` are enabled. 
-This can be done by `make menuconfig` and enabling the following options:
+When debugging the kernel, make sure CONFIG\_DEBUG and CONFIG\_PRINTING
+are enabled. This can be done by make menuconfig and enabling the
+following options:
 
- * seL4 Kernel -> Build Options -> Enable debug facilities 
- * seL4 Kernel -> Build Options -> Enable kernel printing.
+> -   seL4 Kernel -&gt; Build Options -&gt; Enable debug facilities
+> -   seL4 Kernel -&gt; Build Options -&gt; Enable kernel printing.
 
-This will turn on some helpful features for debugging the kernel including:
+This will turn on some helpful features for debugging the kernel
+including:
 
- * `printf` + a serial driver,
- * `-g` is passed to the compiler,
- * compile- and run-time asserts,
- * the kernel will print out error messages when invocations fail. 
+> -   printf + a serial driver,
+> -   -g is passed to the compiler,
+> -   compile- and run-time asserts,
+> -   the kernel will print out error messages when invocations fail.
 
 === User ===
 
-To make sure similar settings are passed to the user, make sure `CONFIG_USER_DEBUG`
+To make sure similar settings are passed to the user, make sure
+CONFIG\_USER\_DEBUG
 
-Similarly, enable this setting by using `make menuconfig` and setting:
+Similarly, enable this setting by using make menuconfig and setting:
 
- * Toolchain options -> build user level with assertions, -g and debugging messages 
+> -   Toolchain options -&gt; build user level with assertions, -g and
+>     debugging messages
 
 == Qemu ==
 
-[[http://www.qemu.org/|Qemu]] is a simulator that provides software emulation of a hardware platform. It is useful for developing and debugging embedded software when you do not have access to the target platform. Even if you do have the target hardware, Qemu can shorten your edit-compile-debug cycle. Be aware that it is not cycle-accurate and cannot emulate every device, so sometimes you have no alternative than to debug on real hardware.
+\[\[<http://www.qemu.org/%7CQemu>\]\] is a simulator that provides
+software emulation of a hardware platform. It is useful for developing
+and debugging embedded software when you do not have access to the
+target platform. Even if you do have the target hardware, Qemu can
+shorten your edit-compile-debug cycle. Be aware that it is not
+cycle-accurate and cannot emulate every device, so sometimes you have no
+alternative than to debug on real hardware.
 
 There are two main Qemu binaries that are relevant for seL4 development:
 
- * qemu-system-arm - qemu for ARM
- * qemu-system-i386 - qemu for x86
+> -   qemu-system-arm - qemu for ARM
+> -   qemu-system-i386 - qemu for x86
 
-After compiling a seL4 project, you can use one of these to simulate execution of the resulting binaries. For example, after compiling sel4test for the KZM (IMX31) board:
+After compiling a seL4 project, you can use one of these to simulate
+execution of the resulting binaries. For example, after compiling
+sel4test for the KZM (IMX31) board:
 
-{{{#!highlight bash numbers=off
-$ qemu-system-arm -M kzm -nographic -kernel images/sel4test-driver-image-arm-imx31
-}}}
+{{{\#!highlight bash numbers=off \$ qemu-system-arm -M kzm -nographic
+-kernel images/sel4test-driver-image-arm-imx31 }}}
 
 On x86, kernel and userspace are provided as separate images:
 
-{{{#!highlight bash numbers=off
-$ qemu-system-i386 -m 512 -nographic -kernel images/kernel-ia32-pc99 -initrd images/sel4test-driver-image-ia32-pc99
-}}}
+{{{\#!highlight bash numbers=off \$ qemu-system-i386 -m 512 -nographic
+-kernel images/kernel-ia32-pc99 -initrd
+images/sel4test-driver-image-ia32-pc99 }}}
 
-Some seL4 projects will define Makefile targets as shorthand for these commands, so you can simply run:
+Some seL4 projects will define Makefile targets as shorthand for these
+commands, so you can simply run:
 
-{{{#!highlight bash numbers=off
-$ make simulate-kzm   # Simulate KZM execution
-$ make simulate-ia32  # Simulate x86 execution
-}}}
+{{{\#!highlight bash numbers=off \$ make simulate-kzm \# Simulate KZM
+execution \$ make simulate-ia32 \# Simulate x86 execution }}}
 
-When simulating a seL4 system in Qemu, you should see output that is directed to the (emulated) UART device on your terminal:
+When simulating a seL4 system in Qemu, you should see output that is
+directed to the (emulated) UART device on your terminal:
 
-{{{
-ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
-  paddr=[82000000..8225001f]
-ELF-loading image 'kernel'
-  paddr=[80000000..80033fff]
-  vaddr=[f0000000..f0033fff]
-  virt_entry=f0000000
-ELF-loading image 'sel4test-driver'
-  paddr=[80034000..8036efff]
-  vaddr=[10000..34afff]
-  virt_entry=1c880
-Enabling MMU and paging
-Jumping to kernel-image entry point...
+{{{ ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
+paddr=\[82000000..8225001f\] ELF-loading image 'kernel'
+paddr=\[80000000..80033fff\] vaddr=\[f0000000..f0033fff\]
+virt\_entry=f0000000 ELF-loading image 'sel4test-driver'
+paddr=\[80034000..8036efff\] vaddr=\[10000..34afff\] virt\_entry=1c880
+Enabling MMU and paging Jumping to kernel-image entry point...
 
-Bootstrapping kernel
-Switching to a safer, bigger stack...
-seL4 Test
-=========
-...
-}}}
+Bootstrapping kernel Switching to a safer, bigger stack... seL4 Test
+========= ... }}}
 
-To exit from Qemu, type the sequence Ctrl+"a", then "x". Note that you can exit at any point; you do not need to wait for the system to finish or reach some stable state. If you exit Qemu while a system is running, it will simply be terminated.
+To exit from Qemu, type the sequence Ctrl+"a", then "x". Note that you
+can exit at any point; you do not need to wait for the system to finish
+or reach some stable state. If you exit Qemu while a system is running,
+it will simply be terminated.
 
-Qemu has some powerful debugging features built in. You can type Ctrl+"a", then "c" to switch to the Qemu monitor. From here you can inspect CPU or device state, read and write memory, and single-step execution. More information about this functionality is available in the [[http://qemu.weilnetz.de/qemu-doc.html#pcsys_005fmonitor|Qemu documentation]].
+Qemu has some powerful debugging features built in. You can type
+Ctrl+"a", then "c" to switch to the Qemu monitor. From here you can
+inspect CPU or device state, read and write memory, and single-step
+execution. More information about this functionality is available in the
+\[\[<http://qemu.weilnetz.de/qemu-doc.html#pcsys_005fmonitor%7CQemu>
+documentation\]\].
 
-When debugging a seL4 project, the Qemu debugger is inherently limited. It has no understanding of your source code, so it is difficult to relate what you are seeing back to the C code you compiled. It is possible to get a richer debugging environment by connecting GDB to Qemu.
+When debugging a seL4 project, the Qemu debugger is inherently limited.
+It has no understanding of your source code, so it is difficult to
+relate what you are seeing back to the C code you compiled. It is
+possible to get a richer debugging environment by connecting GDB to
+Qemu.
 
 === Using GDB with Qemu ===
 
-[[https://www.gnu.org/s/gdb/|GDB]] is a debugger commonly used in C application development. Though not as seamless as debugging a native Linux application, it is possible to use GDB to debug within Qemu's emulated environment.
+\[\[<https://www.gnu.org/s/gdb/%7CGDB>\]\] is a debugger commonly used
+in C application development. Though not as seamless as debugging a
+native Linux application, it is possible to use GDB to debug within
+Qemu's emulated environment.
 
-Start Qemu with the extra options "-S" (pause execution on start) and "-s" (start a GDB server on TCP port 1234):
+Start Qemu with the extra options "-S" (pause execution on start) and
+"-s" (start a GDB server on TCP port 1234):
 
-{{{#!highlight bash numbers=off
-$ qemu-system-arm -M kzm -nographic -kernel images/sel4test-driver-image-arm-imx31 -S -s
-}}}
+{{{\#!highlight bash numbers=off \$ qemu-system-arm -M kzm -nographic
+-kernel images/sel4test-driver-image-arm-imx31 -S -s }}}
 
-In a separate terminal window, start your target platform's version of GDB. You should either pass a binary of the seL4 kernel if you intend on debugging seL4 itself or the userspace application if you intend on debugging an application on seL4. Note that your binary needs to include debugging information ("-g" flag to GCC; "Toolchain Options" -> "Emit debugging information" in the seL4 build configuration) if you want GDB to show you C source code while debugging. In this example we're going to debug the seL4 kernel that has been built in debug mode:
+In a separate terminal window, start your target platform's version of
+GDB. You should either pass a binary of the seL4 kernel if you intend on
+debugging seL4 itself or the userspace application if you intend on
+debugging an application on seL4. Note that your binary needs to include
+debugging information ("-g" flag to GCC; "Toolchain Options" -&gt; "Emit
+debugging information" in the seL4 build configuration) if you want GDB
+to show you C source code while debugging. In this example we're going
+to debug the seL4 kernel that has been built in debug mode:
 
-{{{#!highlight bash numbers=off
-$ arm-none-eabi-gdb build/kernel/kernel.elf
-}}}
+{{{\#!highlight bash numbers=off \$ arm-none-eabi-gdb
+build/kernel/kernel.elf }}}
 
-At the GDB prompt, enter "target remote :1234" to connect to the server Qemu is hosting:
+At the GDB prompt, enter "target remote :1234" to connect to the server
+Qemu is hosting:
 
-{{{
-Reading symbols from build/kernel/kernel.elf...done.
-(gdb) target remote :1234
-Remote debugging using :1234
-0x82000000 in ?? ()
-(gdb)
-}}}
+{{{ Reading symbols from build/kernel/kernel.elf...done. (gdb) target
+remote :1234 Remote debugging using :1234 0x82000000 in ?? () (gdb) }}}
 
-Suppose we want to halt when `kprintf` is called. Enter "break kprintf" at the GDB prompt:
+Suppose we want to halt when kprintf is called. Enter "break kprintf" at
+the GDB prompt:
 
-{{{
-(gdb) break kprintf
-Breakpoint 1 at 0xf0011248: file kernel/src/machine/io.c, line 269.
-}}}
+{{{ (gdb) break kprintf Breakpoint 1 at 0xf0011248: file
+kernel/src/machine/io.c, line 269. }}}
 
-We can now start Qemu running and wait until we hit the breakpoint. To do this, type "cont" at the GDB prompt:
+We can now start Qemu running and wait until we hit the breakpoint. To
+do this, type "cont" at the GDB prompt:
 
-{{{
-(gdb) cont
-Continuing.
+{{{ (gdb) cont Continuing.
 
-Breakpoint 1, kprintf (format=0xf0428000 "") at kernel/src/machine/io.c:269
-269     {
-}}}
+Breakpoint 1, kprintf (format=0xf0428000 "") at
+kernel/src/machine/io.c:269 269 { }}}
 
-Note that some output has appeared in the other terminal window running Qemu as it has partially executed. It may be surprising to see that some printing somehow happened without our breakpoint triggering. The reason for this is that output we're seeing is from the ELF loader that runs prior to the kernel. GDB does not know the address of its print function (as we only gave GDB the kernel's symbol table) and it is not looking to break on its address. The breakpoint we have just hit is the first time the ''kernel'' tried to print. Similarly, the breakpoint we have configured will have no effect on userspace calls to {{{printf}}}.
+Note that some output has appeared in the other terminal window running
+Qemu as it has partially executed. It may be surprising to see that some
+printing somehow happened without our breakpoint triggering. The reason
+for this is that output we're seeing is from the ELF loader that runs
+prior to the kernel. GDB does not know the address of its print function
+(as we only gave GDB the kernel's symbol table) and it is not looking to
+break on its address. The breakpoint we have just hit is the first time
+the ''kernel'' tried to print. Similarly, the breakpoint we have
+configured will have no effect on userspace calls to {{{printf}}}.
 
-Now that we are stopped at a breakpoint, all the standard GDB operations are possible (inspect registers or the stack, single-step, continue until function exit, ...). More information is available in the [[http://www.gnu.org/software/gdb/documentation/|GDB manual]].
+Now that we are stopped at a breakpoint, all the standard GDB operations
+are possible (inspect registers or the stack, single-step, continue
+until function exit, ...). More information is available in the
+\[\[<http://www.gnu.org/software/gdb/documentation/%7CGDB> manual\]\].
 
-Be warned that if you are debugging the kernel's early boot steps, something that may not be immediately obvious is that debugging across a context in which page mappings change (e.g. switching page directories or turning the MMU on/off) will confuse GDB and you may find breakpoints triggering unexpectedly or being missed.
+Be warned that if you are debugging the kernel's early boot steps,
+something that may not be immediately obvious is that debugging across a
+context in which page mappings change (e.g. switching page directories
+or turning the MMU on/off) will confuse GDB and you may find breakpoints
+triggering unexpectedly or being missed.
 
-The process we have described is similar for x86, though if you are on an x86 or x86_64 host you can simply use your platform's native GDB, `gdb`.
+The process we have described is similar for x86, though if you are on
+an x86 or x86\_64 host you can simply use your platform's native GDB,
+gdb.
 
 Below is another example for debugging userspace sel4test on ia32:
 
-{{{
-# Apply a sel4test config for simulating using qemu.
-make ia32_release_xml_defconfig
+{{{ \# Apply a sel4test config for simulating using qemu. make
+ia32\_release\_xml\_defconfig
 
-# After building, check that all of the tests run and pass.
-make simulate-ia32​
+\# After building, check that all of the tests run and pass. make
+simulate-ia32​
 
-# Invoke qemu with the flags -s -S.  It should block until you attach a gdb instance.
-#  -s              shorthand for -gdb tcp::1234
-#  -S              freeze CPU at startup (use 'c' to start execution)
-qemu-system-i386 -m 512 -nographic -kernel images/kernel-ia32-pc99 -initrd images/sel4test-driver-image-ia32-pc99 -s -S
+\# Invoke qemu with the flags -s -S. It should block until you attach a
+gdb instance. \# -s shorthand for -gdb tcp::1234 \# -S freeze CPU at
+startup (use 'c' to start execution) qemu-system-i386 -m 512 -nographic
+-kernel images/kernel-ia32-pc99 -initrd
+images/sel4test-driver-image-ia32-pc99 -s -S
 
-# Start a gdb instance in another window.
-gdb stage/x86/pc99/bin/sel4test-driver # (Or gdb stage/x86/pc99/bin/sel4test-tests)
+\# Start a gdb instance in another window. gdb
+stage/x86/pc99/bin/sel4test-driver \# (Or gdb
+stage/x86/pc99/bin/sel4test-tests)
 
-# Attach to the qemu instance using remote gdb serial server protocol.
-(gdb) target remote :1234
-# Remote debugging using :1234
-# 0x0000fff0 in ?? ()
+\# Attach to the qemu instance using remote gdb serial server protocol.
+(gdb) target remote :1234 \# Remote debugging using :1234 \# 0x0000fff0
+in ?? ()
 
-# Set a breakpoint at main.
-(gdb) break main
-# Breakpoint 1 at 0x8048460: file /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c, line 459.
+\# Set a breakpoint at main. (gdb) break main \# Breakpoint 1 at
+0x8048460: file /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c,
+line 459.
 
-# Resume the qemu cpu.
-(gdb) continue
-# Continuing.
-# # It should hit the first breakpoint.
-# Breakpoint 1, main () at /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459
-}}}
+\# Resume the qemu cpu. (gdb) continue \# Continuing. \# \# It should
+hit the first breakpoint. \# Breakpoint 1, main () at
+/tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459 }}}
 
 ==== Userspace debugging ====
 
-The steps for debugging a userspace application on seL4 are identical to the ones we have just seen, except that we pass GDB a symbol table for userspace rather than the kernel. For example, using the same sel4test environment we start Qemu in the same way but start GDB with sel4test's binary:
+The steps for debugging a userspace application on seL4 are identical to
+the ones we have just seen, except that we pass GDB a symbol table for
+userspace rather than the kernel. For example, using the same sel4test
+environment we start Qemu in the same way but start GDB with sel4test's
+binary:
 
-{{{#!highlight bash numbers=off
-$ arm-none-eabi-gdb build/arm/imx31/sel4test-driver/sel4test-driver.bin
-}}}
+{{{\#!highlight bash numbers=off \$ arm-none-eabi-gdb
+build/arm/imx31/sel4test-driver/sel4test-driver.bin }}}
 
-After connecting to Qemu, we can instruct GDB to break on the userspace {{{printf}}} function:
+After connecting to Qemu, we can instruct GDB to break on the userspace
+{{{printf}}} function:
 
-{{{
-Reading symbols from build/arm/imx31/sel4test-driver/sel4test-driver.bin...done.
-(gdb) target remote :1234
-Remote debugging using :1234
-0x82000000 in ?? ()
-(gdb) break printf
-Breakpoint 1 at 0x30870: file libs/libmuslc/src/stdio/printf.c, line 9.
-(gdb)
-}}}
+{{{ Reading symbols from
+build/arm/imx31/sel4test-driver/sel4test-driver.bin...done. (gdb) target
+remote :1234 Remote debugging using :1234 0x82000000 in ?? () (gdb)
+break printf Breakpoint 1 at 0x30870: file
+libs/libmuslc/src/stdio/printf.c, line 9. (gdb) }}}
 
-Note that GDB has correctly identified the `printf` function in Musl C. We now continue as before:
+Note that GDB has correctly identified the printf function in Musl C. We
+now continue as before:
 
-{{{
-(gdb) cont
-Continuing.
+{{{ (gdb) cont Continuing.
 
-Breakpoint 1, printf (fmt=0x363e8 "%s") at libs/libmuslc/src/stdio/printf.c:9
-9               ret = vfprintf(stdout, fmt, ap);
-(gdb)
-}}}
+Breakpoint 1, printf (fmt=0x363e8 "%s") at
+libs/libmuslc/src/stdio/printf.c:9 9 ret = vfprintf(stdout, fmt, ap);
+(gdb) }}}
 
-If you examine the terminal window running Qemu at this point, you will note that we see an extra bit of output from the kernel. The kernel's print functionality is unaffected, but GDB has stopped execution the first time userspace called {{{printf}}}.
+If you examine the terminal window running Qemu at this point, you will
+note that we see an extra bit of output from the kernel. The kernel's
+print functionality is unaffected, but GDB has stopped execution the
+first time userspace called {{{printf}}}.
 
-From here, the experience is essentially identical to debugging the kernel. One small complication to be aware of is that debugging across a context switch may be confusing. If you are single-stepping in GDB and find execution suddenly diverted to an address where code is unknown, check the address itself. It is usually easy to identify from the address alone when execution is in kernel code or the exception vector table. Unfortunately there is no easy way to continue until you're back in userspace, particularly if the kernel schedules a different thread than the one you were debugging. Depending on the scenario you are debugging, it may be simpler to modify your system setup to ensure only one thread is running.
+From here, the experience is essentially identical to debugging the
+kernel. One small complication to be aware of is that debugging across a
+context switch may be confusing. If you are single-stepping in GDB and
+find execution suddenly diverted to an address where code is unknown,
+check the address itself. It is usually easy to identify from the
+address alone when execution is in kernel code or the exception vector
+table. Unfortunately there is no easy way to continue until you're back
+in userspace, particularly if the kernel schedules a different thread
+than the one you were debugging. Depending on the scenario you are
+debugging, it may be simpler to modify your system setup to ensure only
+one thread is running.
 
 == Objdump ==
 
-Objdump can be used to disassemble an ELF file, be it a kernel or an application. This can be used to lookup the instruction where a fault occurred. Make sure `-g` is passed to the compiler so that debug information is included in the image. 
+Objdump can be used to disassemble an ELF file, be it a kernel or an
+application. This can be used to lookup the instruction where a fault
+occurred. Make sure -g is passed to the compiler so that debug
+information is included in the image.
 
-For ARM, supposing that '''arm-none-eabi-''' is used as the cross-compiler prefix.
+For ARM, supposing that '''arm-none-eabi-''' is used as the
+cross-compiler prefix.
 
-{{{#!highlight bash numbers=off
-  arm-none-eabi-objdump -D binary_file_name > dump.s
-}}}
-For x86
+{{{\#!highlight bash numbers=off
 
-{{{#!highlight bash numbers=off
-  objdump -D binary_file_name > dump.s
-}}}
-The file {{{dump.s}}} has the human-readable assembly instructions.
+:   arm-none-eabi-objdump -D binary\_file\_name &gt; dump.s
 
-If you have symbols and want (C) source information in your disassembly (and who doesn't!) then use the -S flag.  for example:
+}}} For x86
 
-{{{#!highlight bash numbers=off
-  objdump -DS binary_file_name
-}}}
-=== Debugging seL4test ===
+{{{\#!highlight bash numbers=off
 
-The sel4test project has make targets which perform call objdump with the correct arguments generated from the .config.
+:   objdump -D binary\_file\_name &gt; dump.s
+
+}}} The file {{{dump.s}}} has the human-readable assembly instructions.
+
+If you have symbols and want (C) source information in your disassembly
+(and who doesn't!) then use the -S flag. for example:
+
+{{{\#!highlight bash numbers=off
+
+:   objdump -DS binary\_file\_name
+
+}}} === Debugging seL4test ===
+
+The sel4test project has make targets which perform call objdump with
+the correct arguments generated from the .config.
 
 You can objdump the kernel:
 
-{{{#!highlight bash numbers=off
-make objdump-kernel | less
-}}}
-The test driver:
+{{{\#!highlight bash numbers=off make objdump-kernel | less }}} The test
+driver:
 
-{{{#!highlight bash numbers=off
-make objdump-driver | less
-}}}
-Or the tests themselves:
+{{{\#!highlight bash numbers=off make objdump-driver | less }}} Or the
+tests themselves:
 
-{{{#!highlight bash numbers=off
-make objdump-tests | less
-}}}
+{{{\#!highlight bash numbers=off make objdump-tests | less }}}
 
 == In kernel debugging ==
 
-seL4 does not currently have a kernel debugger. As a result, most of our debugging is done with:
+seL4 does not currently have a kernel debugger. As a result, most of our
+debugging is done with:
 
- *  `objdump` as described above,
- *  `printf`, 
- *  `__builtin_return_address`  (to figure out stack traces).
+> -   objdump as described above,
+> -   printf,
+> -   \_\_builtin\_return\_address (to figure out stack traces).
 
-In the kernel, we provide `debug_printKernelEntryReason` found in [[https://github.com/seL4/seL4/blob/master/include/api/debug.h|debug.h]] which can be used at any point in the kernel to output the current operation that the kernel is doing. 
+In the kernel, we provide debug\_printKernelEntryReason found in
+\[\[<https://github.com/seL4/seL4/blob/master/include/api/debug.h%7Cdebug.h>\]\]
+which can be used at any point in the kernel to output the current
+operation that the kernel is doing.

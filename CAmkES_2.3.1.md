@@ -1,4 +1,7 @@
 = CAmkES 2.3.1 Release Notes =
 
 == New Features ==
- * support for seL4 5.2.0
+
+:   -   support for seL4 5.2.0
+
+
