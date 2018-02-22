@@ -19,7 +19,7 @@ list\]\]) drop us a line if you want to be able to edit.
 > -   \[\[Getting started\]\]
 > -   \[\[Tutorials\]\]
 > -   \[\[Documentation\]\]
-> -   \[\[SeL4Libraries|seL4 libraries\]\]
+> -   [seL4 libraries](SeL4Libraries)
 > -   \[\[CAmkES\]\]
 > -   \[\[CapDL\]\]
 > -   \[\[Testing\]\]
@@ -32,7 +32,7 @@ list\]\]) drop us a line if you want to be able to edit.
 
 
 > -   New Features: new features in development
-> -   \[\[Hardware|Hardware Support\]\]: information about hardware
+> -   [Hardware Support](Hardware): information about hardware
 >     platform ports
 > -   Kernel Features: information about available kernel features
 > -   Userland Components and Drivers: available device drivers and
@@ -41,7 +41,7 @@ list\]\]) drop us a line if you want to be able to edit.
 ## Questions and Recipes
 
 
-> -   \[\[FrequentlyAskedQuestions|FAQ\]\]: editable list of FAQs
+> -   [FAQ](FrequentlyAskedQuestions): editable list of FAQs
 > -   \[\[seL4 Recipes\]\]: How to do X with seL4
 
 ## seL4 Releases
@@ -51,22 +51,22 @@ list\]\]) drop us a line if you want to be able to edit.
 >     release\]\]
 > -   \[\[<http://sel4.systems/Info/Docs/seL4-manual-latest.pdf%7CCurrent>
 >     manual\]\]
-> -   \[\[ReleaseNotes|Release notes\]\]
-> -   \[\[ReleaseProcess|Release process\]\]
+> -   [Release notes](ReleaseNotes)
+> -   [Release process](ReleaseProcess)
 
 ## CAmkES Releases
 
 
 > -   \[\[<https://github.com/seL4/camkes-tool/releases/latest%7CCurrent>
 >     release\]\]
-> -   \[\[CAmkESReleaseNotes|Release notes\]\]
+> -   [Release notes](CAmkESReleaseNotes)
 
 ## Community
 
 
 > -   \[\[<https://research.csiro.au/tsblog%7CTrustworthy> Systems
 >     Blog\]\]
-> -   \[\[IRCChannel|IRC Channel\]\]
+> -   [IRC Channel](IRCChannel)
 > -   \[\[Suggested projects\]\]
 > -   CommunityProjects
 

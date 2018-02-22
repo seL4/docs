@@ -95,4 +95,4 @@ library. You can either tweak the flags (in
 ## Run on Real Hardware
 
 
-See the instructions per platform \[\[Hardware|here\]\]
+See the instructions per platform [here](Hardware)

@@ -34,7 +34,7 @@ with TK1|width="100%"}}
 
 
 :   -   \[\[<attachment:daughterboard_r3a_schematic.pdf%7CSchematic>
-        PDF\]\] (See '\[\[\#errata|Technical errata for R3A\]\]'
+        PDF\]\] (See '[Technical errata for R3A](\#errata)'
         for changes)
     -   Bill of Materials:
         \[\[<attachment:tegra_daughterboard_bom3.xls>\]\]
@@ -46,13 +46,13 @@ with TK1|width="100%"}}
  Going from a TK1-SOM, a pixhawk/IRIS
 and a daughterboard to a functioning system requires:
 
-> -   \[\[\#mount\_tk1|Mounting the TK1 to the daughterboard\]\]
-> -   \[\[\#jumper\_uart|Jumpering the UART level translators\]\]
-> -   \[\[\#jumper\_reset|Jumpering the RESET button\]\]
-> -   \[\[\#attach\_pix\_pwr|Attaching the pixhawk power cable\]\]
-> -   \[\[\#attach\_can|Attaching the CAN bus cable\]\]
-> -   \[\[\#attach\_telem|Attaching the telemetry cable\]\]
-> -   \[\[\#connect\_power|Connecting the power harness\]\]
+> -   [Mounting the TK1 to the daughterboard](\#mount\_tk1)
+> -   [Jumpering the UART level translators](\#jumper\_uart)
+> -   [Jumpering the RESET button](\#jumper\_reset)
+> -   [Attaching the pixhawk power cable](\#attach\_pix\_pwr)
+> -   [Attaching the CAN bus cable](\#attach\_can)
+> -   [Attaching the telemetry cable](\#attach\_telem)
+> -   [Connecting the power harness](\#connect\_power)
 > -   \[\[\#connect\_battery\_psu|Connecting the battery '''OR'''
 >     Connecting the external PSU\]\]
 
@@ -125,7 +125,7 @@ It is possible to swap these at the TK1 input side without consequence
 (this would put the kernel dump through the GPS output, and UART2
 through telemetry). Additionally, one can disconnect these jumpers and
 use an 'ordinary' 1V8 converter for debugging (See
-\[\[\#debug\_ground|debugging & grounds\]\] below).
+[debugging & grounds](\#debug\_ground) below).
 
 &lt;&lt;Anchor(jumper\_reset)&gt;&gt;
 

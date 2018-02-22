@@ -209,11 +209,11 @@ sync }}}
 
 The RT kernel currently supports:
 
-> -   \[\[Hardware/BeagleBoard|BeagleBoard\]\]
-> -   \[\[Hardware/sabreLite|SabreLite\]\]
+> -   [BeagleBoard](Hardware/BeagleBoard)
+> -   [SabreLite](Hardware/sabreLite)
 > -   \[\[<https://wiki.sel4.systems/Hardware/IA32%7Cx86> (ia32, x64),
 >     multicore\]\]
-> -   \[\[Hardware/jetsontk1|Tegra TK1\]\]
+> -   [Tegra TK1](Hardware/jetsontk1)
 
 Other hardware platforms will be added as required (the ports require
 updated kernel and user-level timer drivers)

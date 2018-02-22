@@ -14,7 +14,7 @@ Supply\]\].
 The exact parts don't matter, although I've given links to eBay stores
 where the ones we used can be seen.
 
-\[\[<attachment:CMA34CRD-jig.jpg>|{{<attachment:CMA34CRD-thumb.jpg>}}|target="\_blank"\]\]
+[target="\_blank"](<attachment:CMA34CRD-jig.jpg>|{{<attachment:CMA34CRD-thumb.jpg>}})
 
 In the picture, the CMA34D is at the left, with the TTL-to-RS232
 converter above it. The Launchpad is in the middle, with the relay board

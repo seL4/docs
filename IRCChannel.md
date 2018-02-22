@@ -4,7 +4,7 @@
 seL4 developers and other community members can be reached on the
 [IRC](https://en.wikipedia.org/wiki/Internet_Relay_Chat)
 channel
-\[\[[http://webchat.freenode.net/?channels=\#sel4|\#sel4](http://webchat.freenode.net/?channels=#sel4%7C#sel4)\]\],
+[\#sel4](http://webchat.freenode.net/?channels=#sel4%7C#sel4)]([http://webchat.freenode.net/?channels=\#sel4),
 available on the [Freenode](http://www.freenode.net/) irc
 network, chat.freenode.net.
 

@@ -7,28 +7,28 @@ We have ported seL4 to this board.
 ## Hardware modifications and Daughterboards
 
 
-\[\[/Tk1SomMods|Adding some missing connectors\]\] makes this board a
+[Adding some missing connectors](/Tk1SomMods) makes this board a
 bit easier to use.
 
 We have also developed 2 daughterboards for the TK1-SOM
 
-:   -   a \[\[/CAN-Board|CAN daughterboard\]\], that adds two CAN
+:   -   a [CAN daughterboard](/CAN-Board), that adds two CAN
         controllers on the SPI bus
-    -   an \[\[/Daughter-Board|I/O daughterboard\]\] that adds CAN
+    -   an [I/O daughterboard](/Daughter-Board) that adds CAN
         controllers, various sensors and power management
 
 &lt;&lt;Anchor(uboot)&gt;&gt; == U-Boot ==
 
 Upstream U-Boot now supports this board.
 
-Follow the instructions for the \[\[Hardware/jetsontk1\#Flash\_U-Boot|Jetson TK1\]\], however:
+Follow the instructions for the [Jetson TK1](Hardware/jetsontk1\#Flash\_U-Boot), however:
 
 :   -   use <https://github.com/wom-bat/tegra-uboot-flasher-manifests>
         as the URL for repo
     -   don't apply the patch to increase the console buffer size
     -   use cei-tk1-som (instead of jetson-tk1) as the board ID
 
-As with the \[\[Hardware/jetsontk1|Jetson\]\] with this u-boot, set the
+As with the [Jetson](Hardware/jetsontk1) with this u-boot, set the
 environment variable bootm\_boot\_mode to nonsec In this boot mode, the
 standard Linux kernel will not boot: recompile with CONFIG\_ARM\_PSCI on
 and CONFIG\_CPU\_IDLE off.
@@ -49,7 +49,7 @@ presented as a USB storage device to your host. In the default
 partitioning (as it comes from Colorado Engineering) partition 1 on the
 device is the UBUNTU root partition.
 
-The \[\[Hardware/General-ARM\#sd|instructions for booting from SD\]\]
+The [instructions for booting from SD](Hardware/General-ARM\#sd)
 are also valid for booting from MMC.
 
 ## Serial Connection

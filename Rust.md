@@ -35,7 +35,7 @@ future.
 
 ### Build Dependencies:
  In addition to the existing
-\[\[SetupUbuntu|seL4\]\] dependencies and \[\[CAmkES|CAmkES\]\]
+[CAmkES](SetupUbuntu|seL4\]\] dependencies and \[\[CAmkES)
 dependencies, the following dependencies are required:
 
 > -   cargo and rustc: These are the rust build tool and compiler, they

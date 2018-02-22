@@ -6,54 +6,54 @@
 of a project repository that are part of the build system (as opposed to
 code and tools related to the project):
 
-> -   '''\[\[\#config|.config\]\]''' - Your current
+> -   '''[.config](\#config)''' - Your current
 >     configuration (auto-generated)
 >
 > \* '''apps/'''
 >
-> :   -   '''\[\[\#appskbuild|Kbuild\]\]''' - Application targets and
+> :   -   '''[Kbuild](\#appskbuild)''' - Application targets and
 >         dependencies
->     -   '''\[\[\#kconfig|Kconfig\]\]''' - Applications menu
+>     -   '''[Kconfig](\#kconfig)''' - Applications menu
 >
 >     \* '''myapp/'''
 >
->     :   -   '''\[\[\#kconfig|Kconfig\]\]''' - Myapp-specific settings
->         -   '''\[\[\#appsmyappmakefile|Makefile\]\]''' - How to build
+>     :   -   '''[Kconfig](\#kconfig)''' - Myapp-specific settings
+>         -   '''[Makefile](\#appsmyappmakefile)''' - How to build
 >             Myapp
 >
 > -   '''configs/\*''' - Pre-made configurations for the project
-> -   '''\[\[\#kconfig|Kconfig\]\]''' - Top-level menu
+> -   '''[Kconfig](\#kconfig)''' - Top-level menu
 > -   '''kernel/Makefile''' - How to build seL4
 >
 > \* libs/
 >
-> :   -   '''\[\[\#libskbuild|Kbuild\]\]''' - Library targets and
+> :   -   '''[Kbuild](\#libskbuild)''' - Library targets and
 >         dependencies
->     -   '''\[\[\#kconfig|Kconfig\]\]''' - Libraries menu
+>     -   '''[Kconfig](\#kconfig)''' - Libraries menu
 >
 >     \* libfoo/
 >
->     :   -   '''\[\[\#kconfig|Kconfig\]\]''' - Libfoo-specific settings
->         -   '''\[\[\#libfoomakefile|Makefile\]\]''' - How to build
+>     :   -   '''[Kconfig](\#kconfig)''' - Libfoo-specific settings
+>         -   '''[Makefile](\#libfoomakefile)''' - How to build
 >             Libfoo
 >
-> -   '''\[\[\#makefile|Makefile\]\]''' - Top-level build specialisation
-> -   '''\[\[\#makefileflags|Makefile.flags\]\]''' - Top-level build
+> -   '''[Makefile](\#makefile)''' - Top-level build specialisation
+> -   '''[Makefile.flags](\#makefileflags)''' - Top-level build
 >     tuning
 >
 > \* tools/common/
 >
-> :   -   '''\[\[\#commonmk|common.mk\]\]''' - Boiler plate for building
+> :   -   '''[common.mk](\#commonmk)''' - Boiler plate for building
 >         applications/libraries
->     -   '''\[\[\#kconfig|Kconfig\]\]''' - Menu options for toolchains
+>     -   '''[Kconfig](\#kconfig)''' - Menu options for toolchains
 >         and other common settings
->     -   '''\[\[\#projectmk|project-arm.mk\]\]''' - ARM-specific boiler
+>     -   '''[project-arm.mk](\#projectmk)''' - ARM-specific boiler
 >         plate for a top-level build
->     -   '''\[\[\#projectmk|project-ia32.mk\]\]''' - IA32-specific
+>     -   '''[project-ia32.mk](\#projectmk)''' - IA32-specific
 >         boiler plate for a top-level build
->     -   '''\[\[\#projectmk|project.mk\]\]''' -
+>     -   '''[project.mk](\#projectmk)''' -
 >         Architecture-independent boiler plate for a top-level build
->     -   '''\[\[\#makefileflags|Makefile.flags\]\]''' - Shared build
+>     -   '''[Makefile.flags](\#makefileflags)''' - Shared build
 >         system tuning
 >     -   '''kbuild/\*''' - Kbuild from the Linux source tree. For
 >         documentation, refer to the Kbuild mailing list.

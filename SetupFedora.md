@@ -2,11 +2,11 @@
  These instructions are for
 information only — at NICTA we usually use Debian-derived build systems
 
-Follow the instructions in \[\[\#allrpm|All RPM-Based\]\] Variants then
+Follow the instructions in [All RPM-Based](\#allrpm) Variants then
 the ones for your system.
 
-> -   \[\[\#fedora|Fedora\]\]
-> -   \[\[\#centos|CentOS\]\]
+> -   [Fedora](\#fedora)
+> -   [CentOS](\#centos)
 
 &lt;&lt;Anchor(allrpm)&gt;&gt; == All RPM-Based Systems == === The
 Basics === To get a usable build system, install the Development Tools

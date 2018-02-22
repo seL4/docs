@@ -88,14 +88,14 @@ its README\]\].
 Previously, the values of settings (in "configuration" blocks) were
 strings under the hood. Now they are stored as a value of the
 appropriate (python) type, determined during parsing.
-\[\[CAmkESDifferences\#Rich\_Types\_for\_Settings|Read more.\]\]
+[Read more.](CAmkESDifferences\#Rich\_Types\_for\_Settings)
 
 ### Parametrised Buf Type
 
 
 The "Buf" type for dataports can now be optionally parametrised with the
 dataport's size in bytes.
-\[\[CAmkESDifferences\#Parametrised\_Buf\_Type|Read more.\]\]
+[Read more.](CAmkESDifferences\#Parametrised\_Buf\_Type)
 
 ### The seL4Asynch connector has been renamed to seL4Notification
 
@@ -126,7 +126,7 @@ more in the manual.\]\]
 
 The syntax for declaring that a component exports an interface from one
 of it sub-components has changed.
-\[\[CAmkESDifferences\#Hierarchical\_Components|See an example.\]\]
+[See an example.](CAmkESDifferences\#Hierarchical\_Components)
 
 ### Binary Semaphores
 

@@ -124,7 +124,7 @@ other distros, links to toolchains for other distros are provided.
 
 > -   \[\[SetupFedora|Cross compiler and general instructions for Fedora
 >     and CentOS (RHEL should work as well)\]\]
-> -   \[\[SetupUbuntu|Cross compilers for Debian and Ubuntu\]\]
+> -   [Cross compilers for Debian and Ubuntu](SetupUbuntu)
 
 ## Start with the tutorials
 
@@ -144,7 +144,7 @@ pull requests to seL4 which are non-trivial or related only to
 documentation, should come with a matching pull request and new test (if
 applicable) to the seL4Test repository as well.
 
-\[\[Testing|seL4test\]\] is a comprehensive unit and functional testing
+[seL4test](Testing) is a comprehensive unit and functional testing
 suite for seL4 and can be useful when porting to new platforms or adding
 new features.
 
@@ -155,7 +155,7 @@ Each project has an associated wiki, accessible via github, that has
 up-to-date dependencies and instructions. The general instructions here
 apply to all projects.
 
-See \[\[BuildSystemAnatomy|Build System Anatomy\]\] for details of
+See [Build System Anatomy](BuildSystemAnatomy) for details of
 project layouts and the seL4 build system.
 
 Configuration files in the configs directory are named by target

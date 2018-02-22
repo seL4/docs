@@ -55,7 +55,7 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
         -   \[\[seL4 Tutorial 3\]\]
         -   \[\[seL4 Tutorial 4\]\]
         -   \[\[seL4 Timer tutorial\]\]
-        -   \[\[seL4 RT tutorial|seL4 MCS tutorial\]\]
+        -   [seL4 MCS tutorial](seL4 RT tutorial)
 
 ## CAmkES tutorials
 
@@ -97,4 +97,4 @@ More info:
 ## What next?
 
 
-You can try building and running \[\[Testing|seL4test\]\]
+You can try building and running [seL4test](Testing)

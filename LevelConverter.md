@@ -9,7 +9,7 @@ We used the suggested circuit in the
 \[\[<http://datasheets.maximintegrated.com/en/ds/MAX218.pdf%7CManufacturer's>
 Datasheet\]\], laid out on a piece of perfboard.
 
-\[\[<attachment:levelconverter.jpg>|{{<attachment:levelconverter-small.jpg>}}\]\]
+[{{<attachment:levelconverter-small.jpg>}}](<attachment:levelconverter.jpg>)
 
 This picture shows one wired to convert a single channel; because most
 of our gadgets need only a three-wire interface, you can convert two

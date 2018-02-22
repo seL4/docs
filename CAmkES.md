@@ -61,7 +61,7 @@ valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
 
 yaourt -S bcunit-cunit-compat spin }}} \* Regardless of you system, you
 will need to install haskell, and some python dependencies \* Install
-\[\[<https://haskellstack.org> | haskell stack\]\] (haskell version and
+[ haskell stack](<https://haskellstack.org> ) (haskell version and
 package manager) {{{\#!highlight bash numbers=off curl -sSL
 <https://get.haskellstack.org/> | sh }}} \* Install python dependencies
 (via pip): {{{\#!highlight bash numbers=off pip install --user
@@ -107,25 +107,25 @@ To learn about developing your own CAmkES application, read the
 ## Camkes Terminology/Glossary
 
 
-Can be found \[\[CAmkES/Terminology|here\]\].
+Can be found [here](CAmkES/Terminology).
 
 ## CAmkES VM
 
 
-Information about the x86 camkes vm can be found \[\[CAmkESVM|here\]\].
+Information about the x86 camkes vm can be found [here](CAmkESVM).
 
 ## Visual CAmkES
 
 
 CAmkES comes with a tool for visualising the components and connections
-making up an application. For more info, see \[\[VisualCAmkES|here\]\].
+making up an application. For more info, see [here](VisualCAmkES).
 
 ## Changes in CAmkES 3
 
 
 The current version of CAmkES introduces a number of syntactic and
 functional changes. For details about what's changed, see
-\[\[CAmkESDifferences|here\]\].
+[here](CAmkESDifferences).
 
 ## Internals
 

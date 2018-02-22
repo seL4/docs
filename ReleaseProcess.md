@@ -58,7 +58,7 @@ Supported projects are:
 We recommend you develop on a specific version of the kernel, rather
 than the bleeding edge which is the tip of master. Each MAJOR.MINOR
 release has release notes which describe changes and specific upgrade
-notes, posted \[\[ReleaseNotes|here\]\].
+notes, posted [here](ReleaseNotes).
 
 ## Legacy support
 

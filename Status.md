@@ -16,21 +16,21 @@ For status of existing kernel ports, features, drivers, and other userland compo
 
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''|| || MCS kernel || in development ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || <https://github.com/seL4/seL4/tree/new-rt> || being developed for
 x32, x64, AArch32, AArch64 on most supported platforms. Note,
 development branch is not released publicly, but github branch is
 updated from it occasionally || || AArch64 hyp || in development
 (unreleased) ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || being developed on NVIDIA TX1, !HiKey || || AArch64 SMP || planned
 ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || to be developed on NVIDIA TX1, !HiKey || || NVIDIA TX1 SMMU ||
 planned ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || AArch32 and AArch64 || || RISC-V || planned ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || ||
 
 ## CAmkES Features
@@ -38,9 +38,9 @@ planned ||
 
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''|| || CAmkES AArch64 || planned ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || || || CAmkES AArch64 & hyp || planned ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || ||
 
 ## Virtualisation
@@ -49,10 +49,10 @@ by'''||'''Repo'''||'''Comment'''|| || CAmkES AArch64 || planned ||
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''|| || camkes-arm-vmm for AArch64 ||
 planned ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || Including libsel4arm-vmm for AArch64 || || camkes-arm-vmm for
 NVIDIA TX1 || planned ||
-\[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
+[D61](mailto:devel@sel4.systems%7CD61)]([mailto:devel@sel4.systems)
 || || Including Linux running in a VM || || multiple ARM VMs || planned
 || || || be able to run multiple VMMs, one VM per VMM. AArch32? AArch64?
 ||
