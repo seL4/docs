@@ -2,7 +2,7 @@
 
 
 ## Contents
- &lt;&lt;TableOfContents()&gt;&gt;
+ <<TableOfContents()>>
 
 ## Constants
  ` \#define SEL4DRV_DEVATTR_NAME_MAXLEN (32) `
@@ -65,10 +65,10 @@ System according to that OS's own convention. That is beyond the scope
 of this specification.
 
 In the case of a PCI device, the persistent name might be the
-location-based &lt;Bus+Device+Function&gt; combination which would
+location-based <Bus+Device+Function> combination which would
 uniquely, and persistently identify a particular PCI unit across
 executions. Again, the intention is not to identify the particular
-peripheral that is connected on that PCI &lt;bus+device+function&gt;.
+peripheral that is connected on that PCI <bus+device+function>.
 The recognition of a particular PCI peripheral card such as a specific
 graphics card, should be left up to the higher layer Operating System
 which will name that peripheral according to its own convention.

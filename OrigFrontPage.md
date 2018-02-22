@@ -10,7 +10,7 @@ Interesting starting points:
  A Wiki is a collaborative site, anyone can
 contribute and share:
 
-  -   Edit any page by pressing '''&lt;&lt;GetText(Edit)&gt;&gt;''' at
+  -   Edit any page by pressing '''<<GetText(Edit)>>''' at
       the top or the bottom of the page
   -   Create a link to another page with joined capitalised words
       (like WikiSandBox) or with `[words in brackets](../words in brackets)`

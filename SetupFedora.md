@@ -8,7 +8,7 @@ the ones for your system.
   -   [Fedora](\#fedora)
   -   [CentOS](\#centos)
 
-&lt;&lt;Anchor(allrpm)&gt;&gt; == All RPM-Based Systems == === The
+<<Anchor(allrpm)>> == All RPM-Based Systems == === The
 Basics === To get a usable build system, install the Development Tools
 group, '''which, ncurses-devel''' and the '''python-tempita'''
 templating library. You can also install '''ccache''' to speed second
@@ -39,7 +39,7 @@ the EPEL repository to be able to install Haskell.
 
 }}}
 
-&lt;&lt;Anchor(fedora)&gt;&gt; == Fedora == To build for any of the ARM
+<<Anchor(fedora)>> == Fedora == To build for any of the ARM
 targets you need an arm cross compiler; to run on the simulator you need
 '''qemu'''
 
@@ -49,7 +49,7 @@ targets you need an arm cross compiler; to run on the simulator you need
 
 }}}
 
-&lt;&lt;Anchor(centos)&gt;&gt; == CentOS ==
+<<Anchor(centos)>> == CentOS ==
 
 Cross compilers are available from the EPEL repository. Do {{{ sudo yum
 install gcc-arm-linux-gnu }}}

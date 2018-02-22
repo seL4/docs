@@ -26,8 +26,8 @@ interface, which provides access to the caps mapping the dataport:
 
 The interface on the "to" side of each seL4SharedDataWithCaps connection
 must be configured with a unique id and size: {{{
-&lt;instance&gt;.&lt;interface&gt;_id = &lt;unique integer &gt;= 1&gt;;
-&lt;instance&gt;.&lt;interface&gt;_size = &lt;integer size&gt;; }}}
+<instance>.<interface>_id = <unique integer >= 1>;
+<instance>.<interface>_size = <integer size>; }}}
 
 Specifying a non-unique or non-positive id is an error. Specifying a
 size other than the size of the type of the dataport is an error.

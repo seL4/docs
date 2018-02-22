@@ -10,7 +10,7 @@ VisualCAmkES}}
 
 Currently this program loads in a top-level camkes file and generates a
 graph from it. It also lets the user interact with the graph (zoom, pan
-and move nodes). &lt;&lt;BR&gt;&gt; The tool is a foundation for a
+and move nodes). <<BR>> The tool is a foundation for a
 CAmkES IDE. To create a CAmkES IDE, one must first be able to display a
 current CAmkES system and allow interaction. And that is what this
 project does. Since it was clear that this project should become an IDE
@@ -23,7 +23,7 @@ this was written in python, this tool was also written in python.
 
 VisualCAmkES is currently on the [CAmkESNext](../CAmkESNext) branch only
 
-'''Table of Contents''' &lt;&lt;TableOfContents()&gt;&gt;
+'''Table of Contents''' <<TableOfContents()>>
 
 ## How to Install
  Follow the instructions in [CAmkESNext](../CAmkESNext) to
@@ -31,14 +31,14 @@ obtain a copy of the CAmkES next repo. This tool should be found in
 [path/to/camkes-tool]/camkes/visualCAmkES.
 
 Running the tool requires a few added dependencies: Graphviz and
-Qt.&lt;&lt;BR&gt;&gt; QT is a framework, which includes GUI, Network,
-Concurrency and other things. &lt;&lt;BR&gt;&gt; This install procedure
+Qt.<<BR>> QT is a framework, which includes GUI, Network,
+Concurrency and other things. <<BR>> This install procedure
 assumes you have the rest of CAmkES working.
 
 ### Installing Qt
  For Debian/Ubuntu users, there are two ways to
 install this. The easy way is to apt-get the items. The "long" way is to
-build from source. &lt;&lt;BR&gt;&gt; For Mac (and presumably Windows,
+build from source. <<BR>> For Mac (and presumably Windows,
 although this is untested for windows): the only way (other than
 macports/brew) is to build from source.
 
@@ -78,12 +78,12 @@ will work on the mac.
 To start the application, it would be:
 
 ` python [path/to/camkes-tool/camkes]/visualCAmkES ` === Opening a
-File === To open a file, click File-&gt;Open. Then select a '''top-level
+File === To open a file, click File->Open. Then select a '''top-level
 camkes file'''. Your graph will load.
 
 ### Manipulating the graph
  In the right, you have a few buttons:
-&lt;&lt;BR&gt;&gt;
+<<BR>>
 {{<attachment:VisualCAmkES_userButtons.png%7CVisualCAmkES> Corner UI
 buttons|align="left"}} The button's name should be self-explanatory.
 Autolayout will use graphviz to reposition the nodes into a "nice"
@@ -102,7 +102,7 @@ application, and when you reopen it, your latest layout will appear.
 
 You can export an image, into either PNG or SVG.
 
-:   1.  Clicking Save Image or File-&gt;Export Image.
+:   1.  Clicking Save Image or File->Export Image.
 
     1. Choose either PNG or SVG from the combo-box (first input).
 
@@ -119,7 +119,7 @@ n some cases, users may have external import paths which is usually a
 parameter to the camkes parser. In order to visualise these camkes
 projects, the user can add import paths by doing the following:
 
-  1.  Click Edit -&gt; Add import paths
+  1.  Click Edit -> Add import paths
  
   1. In the dialog box, type (or paste) your import paths. These need to be absolute paths. To add many paths, have spaces between your paths.
  
@@ -140,7 +140,7 @@ E||Cmd + E|| ||Zoom In||Ctrl + =||Cmd + =|| ||Zoom Out||Ctrl + -||Cmd +
 ## How it works
  === High level overview ===
 {{<attachment:VisualCAmkES_UML.png%7CUML> Diagram of
-VisualCAmkES|width=900px}} &lt;&lt;BR&gt;&gt; The above is quick UML
+VisualCAmkES|width=900px}} <<BR>> The above is quick UML
 class diagram. A few other classes isn't shown like SaveOptionDialog -
 but these are helper classes.
 

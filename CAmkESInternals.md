@@ -1,7 +1,7 @@
 # CAmkES Internals
 
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 ## Overview
 

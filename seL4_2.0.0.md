@@ -75,8 +75,8 @@ release build
 
   -   `seL4_Recv}}} replaces {{{seL4_Wait` on endpoints
   -   `seL4_Wait` is now only used on notification objects
-  -   Async endpoint -&gt; notification object
-  -   sync endpoint -&gt; endpoint
+  -   Async endpoint -> notification object
+  -   sync endpoint -> endpoint
   -   `seL4_Recv` on an endpoint may now return signals sent to a
       thread's
 

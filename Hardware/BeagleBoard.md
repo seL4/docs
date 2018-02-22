@@ -63,7 +63,7 @@ it thinks is a "modem", and then give you a good old console to work
 with. You are now in the bootloader, U-Boot, of the \~BeagleBoard. You
 can type commands here and it'll display the results.
 
-Some quick useful commands: ||&lt;tablewidth="600px"&gt;'''Command'''
+Some quick useful commands: ||<tablewidth="600px">'''Command'''
 ||'''Description''' || ||help ||display list of commands || ||printenv
 ||lists defined environment variables || ||mmc init ||initialise MMC (to
 read the the SD card) || ||mmcinfo ||display current SD card info ||

@@ -33,7 +33,7 @@ build with make with arm-linux-gnueabi-objcopy.
 }}}
 
 In the menuconfig dialog, make sure that the correct BeagleBone platform
-is selected for your model. This will be under Kernel -&gt; seL4 System.
+is selected for your model. This will be under Kernel -> seL4 System.
 
 #### RefOS
  For RefOS, first clone the repository.

@@ -24,7 +24,7 @@ board|width="100%"}}
 
 {{<attachment:daughterboard_bottom.jpg%7CBottom> of board|width="100%"}}
 
-&lt;&lt;Anchor(with_tk1)&gt;&gt;
+<<Anchor(with_tk1)>>
 
 ### With TK1
  {{<attachment:assembly_cropped.jpg%7CDaughterboard>
@@ -54,14 +54,14 @@ and a daughterboard to a functioning system requires:
   -   [[\#connect_battery_psu|Connecting the battery '''OR'''
       Connecting the external PSU]]
 
-&lt;&lt;Anchor(mount_tk1)&gt;&gt;
+<<Anchor(mount_tk1)>>
 
 ### Mounting the TK1 to the daughterboard
  Before mounting the
 TK1-SOM to the daughterboard, you will have to disassemble the TK1-SOM.
 This will involve:
 
-&lt;&lt;Anchor(disassemble_tk1)&gt;&gt;
+<<Anchor(disassemble_tk1)>>
 
   -   Removing the fan screw
   -   Unscrewing the standoffs
@@ -73,7 +73,7 @@ is this:
 
 {{<attachment:tk1_disassemble.jpg%7CTK1> disassembled|width="50%"}}
 
-&lt;&lt;Anchor(attach_daughterboard)&gt;&gt;
+<<Anchor(attach_daughterboard)>>
 
 Now you can start attaching the TK1 to the daughterboard. It's easy to
 identify which half goes where by looking at the connectors on the
@@ -93,7 +93,7 @@ an M2.5 screw, bolt, and standoff:
 The end result should look like the image under [[\#with_tk1|'With
 TK1']] near the top of this page
 
-&lt;&lt;Anchor(jumper_uart)&gt;&gt;
+<<Anchor(jumper_uart)>>
 
 ### Jumpering the UART level translators
  For the daughterboard to do
@@ -108,7 +108,7 @@ daughterboard's UART inputs. Observe:
 {{<attachment:uart2.jpg%7CUART> 2 on TK1|width="40%"}}
 {{<attachment:UARTS_board.jpg%7CUARTs> on daughterboard|width="40%"}}
 
-The pinout of the TK1 UARTS is: ||&lt;tablewidth="200px"&gt;PIN 1 ||RX
+The pinout of the TK1 UARTS is: ||<tablewidth="200px">PIN 1 ||RX
 || ||PIN 2 ||TX || ||PIN 3 ||CTS-L || ||PIN 4 ||RTS-L ||
 
 Since we aren't using flow control, you only need to connect pin 1 (TK1)
@@ -125,7 +125,7 @@ through telemetry). Additionally, one can disconnect these jumpers and
 use an 'ordinary' 1V8 converter for debugging (See
 [debugging & grounds](\#debug_ground) below).
 
-&lt;&lt;Anchor(jumper_reset)&gt;&gt;
+<<Anchor(jumper_reset)>>
 
 ### Jumpering the RESET button
  It's difficult to access the TK1's
@@ -153,7 +153,7 @@ conveniently mounted elsewhere on the quadcopter. Essentially you just
 need a momentary switch between the TK1 pin and ground - the signal is
 debounced etc on the TK1.
 
-&lt;&lt;Anchor(attach_pix_pwr)&gt;&gt;
+<<Anchor(attach_pix_pwr)>>
 
 ### Attaching the pixhawk power cable
  --(The pixhawk power cable is
@@ -167,7 +167,7 @@ in a vanilla configuration, to avoid any interaction with the
 daughterboard's rails. Do NOT connect anything to the daughterboard's
 'Power out to Pixhawk' connector.
 
-&lt;&lt;Anchor(attach_can)&gt;&gt;
+<<Anchor(attach_can)>>
 
 ### Attaching the CAN bus cable
  The CAN1 connector we are using
@@ -189,7 +189,7 @@ connected in parallel so that the board can be used in more complex
 network topologies, i.e the 2 left connectors are CAN1, and the 2 right
 connectors are CAN2.
 
-&lt;&lt;Anchor(attach_telem)&gt;&gt;
+<<Anchor(attach_telem)>>
 
 ### Attaching the telemetry cable
  The telemetry connector to be
@@ -202,7 +202,7 @@ in:
 {{<attachment:radio.jpg%7C3DR> Radio connected to
 daughterboard|width="60%"}}
 
-&lt;&lt;Anchor(connect_power)&gt;&gt;
+<<Anchor(connect_power)>>
 
 ### Connecting the power harness
  The power harness is how the
@@ -219,7 +219,7 @@ want:
 
 {{<attachment:harness2.jpg%7CThe> power harness plugged in|width="60%"}}
 
-&lt;&lt;Anchor(connect_battery_psu)&gt;&gt;
+<<Anchor(connect_battery_psu)>>
 
 ### Connecting the battery OR external PSU
  There are 2 ways of
@@ -265,7 +265,7 @@ connected and turned on:
 {{<attachment:everything_connected.jpg%7CEverything>
 connected|width="70%"}}
 
-&lt;&lt;Anchor(debug_ground)&gt;&gt;
+<<Anchor(debug_ground)>>
 
 ### Debugging output & finding grounds
  To use an 'ordinary' 1V8
@@ -289,7 +289,7 @@ all along the bottom row of the servo connector:
 
 (The entire bottom row is connected to ground)
 
-&lt;&lt;Anchor(errata)&gt;&gt;
+<<Anchor(errata)>>
 
 ### Technical errata for R3A, to be fixed next revision
 

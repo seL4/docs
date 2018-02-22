@@ -56,10 +56,10 @@ Now open components/Timer/src/timer.c.
 
 We'll start by completing the irq_handle function, which is called in
 response to each timer interrupt. Note the name of this function. It
-follows the naming convention &lt;interface&gt;_handle, where
-&lt;interface&gt; is the name of an IRQ interface connected with
+follows the naming convention <interface>_handle, where
+<interface> is the name of an IRQ interface connected with
 seL4HardwareInterrupt. When an interrupt is received on the interface
-&lt;interface&gt;, the function &lt;interface&gt;_handle will be
+<interface>, the function <interface>_handle will be
 called.
 
 The implementation of the timer driver itself isn't directly in this
@@ -74,7 +74,7 @@ libplatsupport, to inform the driver that an interrupt has occurred.
 
 Acknowledge the interrupt. CAmkES generates the seL4-specific code for
 ack-ing an interrupt and provides a function
-&lt;interface&gt;_acknowldege for IRQ interfaces (specifically those
+<interface>_acknowldege for IRQ interfaces (specifically those
 connected with seL4HardwareInterrupt).
 
 ### TASK 6

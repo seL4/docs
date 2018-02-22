@@ -20,7 +20,7 @@ can set their own or other threads priorities to.
 
 Criticality is a new field for threads. The kernel has a system
 criticality level which can be set by the user. When the criticality
-level is raised, threads with criticality &gt;= the criticality level
+level is raised, threads with criticality >= the criticality level
 have their priorities boosted such that they are chosen by the scheduler
 over low criticality threads.
 

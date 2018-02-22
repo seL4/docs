@@ -1,7 +1,7 @@
 The
 [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) is a affordable embedded system developed by NVIDIA. It runs
 seL4. We will explain how to run seL4 on the Tegra.
-&lt;&lt;TableOfContents&gt;&gt; = Pre-Requisites = \* One Tegra Board.
+<<TableOfContents>> = Pre-Requisites = \* One Tegra Board.
 See
 [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) \* The development environment fully working. See [[Getting
 started]]
@@ -29,7 +29,7 @@ sel4test-driver-image-arm-tk1 $ }}}
 # Load the binary
  You need to be able to see output from the serial
 console on the Tegra. Connect the serial port to your computer with a
-serial cable, either a USB-&gt;RS232 converter, or if your computer has
+serial cable, either a USB->RS232 converter, or if your computer has
 a serial port, connect to it.
 
 Once you have the wires in place, you can connect to the console via
@@ -140,4 +140,4 @@ The board should now be updated.
 mode, build the kernel with the Power-State Coordination Interface
 (PSCI) enabled (CONFIG_ARM_PSCI=y, in Kernel Features menu)and
 CPU-Idle PM support disabled (CONFIG_CPU_IDLE is not set in CPU Power
-Management-&gt;CPU Idle). Without these changes the kernel will hang.
+Management->CPU Idle). Without these changes the kernel will hang.

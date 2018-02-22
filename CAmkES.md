@@ -1,4 +1,4 @@
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 # CAmkES
  CAmkES (component architecture for microkernel-based embedded
@@ -85,7 +85,7 @@ silentoldconfig }}}
 
 If you haven't done so already, change the toolchain to the one for your
 system. You can do this by running make menuconfig, then going to
-'''Toolchain Options -&gt; Cross compiler prefix'''. You will most
+'''Toolchain Options -> Cross compiler prefix'''. You will most
 likely be compiling with '''arm-linux-gnueabi-'''.
 
 {{{\#!highlight bash numbers=off make qemu-system-arm -M kzm -nographic

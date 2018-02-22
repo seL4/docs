@@ -11,7 +11,7 @@ as the GNU Debugger.
 ## Enabling this feature
  You can enable and disable the hardware
 debugging API by going through the kernel's configuration system:
-make menuconfig -&gt; seL4 Kernel -&gt; Build Options -&gt;
+make menuconfig -> seL4 Kernel -> Build Options ->
 Enable hardware breakpoint and single-stepping API.
 
 Not all platforms support this feature for two main reasons:

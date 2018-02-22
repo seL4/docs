@@ -1,5 +1,5 @@
 # Contents
- &lt;&lt;TableOfContents()&gt;&gt;
+ <<TableOfContents()>>
 
 # Getting Started
  In general, if you're just getting started, you want

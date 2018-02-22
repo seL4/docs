@@ -6,7 +6,7 @@ The documentation of the seL4 API in the
 [libsel4](https://github.com/seL4/seL4/tree/master/libsel4)'s
 source code. This page documents this process.
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 ## File Paths
 
@@ -89,19 +89,19 @@ explicitly add to doxygen comments inside @xmlonly ... @endxmlonly
 blocks.
 
 Here's a description of all the custom tags:
-||&lt;manual name="NAME" label="LABEL"/&gt;||Introduces documentation
+||<manual name="NAME" label="LABEL"/>||Introduces documentation
 for a new function. The title of the section documenting the function
 will be NAME. Other parts of the manual can refer to this function's
 documentation with \\autoref{sec:LABEL}||
-||&lt;autoref sec="SEC"/&gt;||Translated to the latex
-\\autoref{sec:SEC}|| ||&lt;shortref sec="SEC"/&gt;||Translated to the
-latex \\ref{sec:SEC}|| ||&lt;errorenumdesc/&gt;||Translated to the latex
+||<autoref sec="SEC"/>||Translated to the latex
+\\autoref{sec:SEC}|| ||<shortref sec="SEC"/>||Translated to the
+latex \\ref{sec:SEC}|| ||<errorenumdesc/>||Translated to the latex
 \\errorenumdesc, a custom command defined in
 [manual/parts/api.tex](https://github.com/seL4/seL4/blob/master/manual/parts/api.tex)||
-||&lt;obj name="NAME"/&gt;||Translated to the latex \\obj{NAME}, a
+||<obj name="NAME"/>||Translated to the latex \\obj{NAME}, a
 custom command defined in
 [manual/manual.tex](https://github.com/seL4/seL4/blob/master/manual/manual.tex)||
-||&lt;texttt text="TEXT"/&gt;||Translated to the latex \\texttt{TEXT}||
+||<texttt text="TEXT"/>||Translated to the latex \\texttt{TEXT}||
 
 Note that these must appear within @xmlonly ... @endxmlonly blocks in
 order to function.
@@ -111,7 +111,7 @@ order to function.
 
 Each function in the API must have the following documentation:
 
-:   -   a @xmlonly &lt;manual name="..." label=".../&gt; @endxmlonly tag
+:   -   a @xmlonly <manual name="..." label=".../> @endxmlonly tag
         with the name for use in the manual's text, and a label for
         creating references within the manual
     -   a @brief description

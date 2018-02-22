@@ -7,7 +7,7 @@ Exynos4412 board.
 1. RS232 or USB to UART converter 1. USB OTG cable
 
 Note: The USB-UART converter that is shipped with the board requires a
-Linux kernel version &gt; 3.2
+Linux kernel version > 3.2
 
 ##### Serial port setup
  Open minicom on /dev/ttyUSB\* and set the
@@ -31,13 +31,13 @@ partitions properly. seL4 image can be uploaded via Fastboot.
 
 To prepare the SD card, run
 
-{{{\#!highlight bash numbers=off $ sudo dd if=&lt;image file&gt;
-of=&lt;/dev/sdx&gt; }}}
+{{{\#!highlight bash numbers=off $ sudo dd if=<image file>
+of=</dev/sdx> }}}
 
 Where "sdx" is the device that is associated with your SD card.
 
 ##### U-Boot
- &lt;TODO&gt; Uboot source?
+ <TODO> Uboot source?
 
 U-Boot must reside at a magical offset in a special partition of the SD
 card. To copy U-Boot and the other boot loaders to the SD card:
@@ -64,7 +64,7 @@ into a binary file using objcopy.
 tool can be found here: or here: you can clone and build the tool from
 source
 
-&lt;TODO&gt; add fastboot link
+<TODO> add fastboot link
 
 Follow these steps to boot your program:
 
@@ -91,13 +91,13 @@ To boot using fastboot:
 To boot from mmc:
 
   1.  At the U-Boot prompt type
-      fatload mmc 0:2 0x42000000 &lt;filename&gt;; bootm 0x42000000
+      fatload mmc 0:2 0x42000000 <filename>; bootm 0x42000000
 
 ## References
 
 <http://www.hardkernel.com/renewal_2011/products/prdt_info.php>
 
-<http://dev.odroid.com/projects/odroid-xq/#s-2.2.1> &lt;- This should be
+<http://dev.odroid.com/projects/odroid-xq/#s-2.2.1> <- This should be
 replaced with the official Samsung exynos4412 "User manual"
 
 [[<http://dev.odroid.com/projects/ics/#s-6.2%7CAndroid> - uboot

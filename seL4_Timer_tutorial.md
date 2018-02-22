@@ -9,7 +9,7 @@ tutorials are already filled out and you don't have to repeat them: in
 much the same way, we won't be repeating conceptual explanations on this
 page, if they were covered by a previous tutorial in the series.
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 ## Learning outcomes
 

@@ -29,21 +29,21 @@ be renamed to MLO and u-boot.bin respectively.
 The reason to patch the u-boot is because the fastboot jumps to the
 kernel entry point directly but seL4 image needs a elf-loader to parse
 and load correctly, so in the lib_arm/armlinux.c file, insert
-do_bootelf(0, 0, 1, 0) before theKernel(0, bd-&gt;bi_arch_number,
-bd-&gt;bi_boot_params)
+do_bootelf(0, 0, 1, 0) before theKernel(0, bd->bi_arch_number,
+bd->bi_boot_params)
 
 ## Steps to boot seL4 kernel
 
 
 :   1.  Download the tool. Alternatively, clone and build the tool from
-        source &lt;TODO Fastboot link&gt;
+        source <TODO Fastboot link>
     2.  Connect the serial cable for communication
     3.  Connect the usb cable to allow the flashing of your image via
         fastboot
     4.  Open minicom at 115200bps -- 8bit data -- No parity -- 1 stop
         bit
 
-    1. after you power on the board, you should be able see the "Fastboot entered ..." in minicom. You can check that the device is ready by using "$&gt; fastboot devices".
+    1. after you power on the board, you should be able see the "Fastboot entered ..." in minicom. You can check that the device is ready by using "$> fastboot devices".
 
     :   1.  NOTE! The panda ES seems to be particular about which
             tty-USB converter it will communicate with. Avoid using the
@@ -52,7 +52,7 @@ bd-&gt;bi_boot_params)
             to access the device. Try running with sudo.
 
     1.  Execute
-        $&gt; fastboot -b 0x80000000 boot the_kernel_image_file_boundled_with_application
+        $> fastboot -b 0x80000000 boot the_kernel_image_file_boundled_with_application
     2.  The kernel should boot and application gets executed.
 
 # References

@@ -1,7 +1,7 @@
 # Frequently Asked Questions on seL4
 
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 # What is seL4?
  seL4 is the most advanced member of the L4 microkernel
@@ -580,7 +580,7 @@ to different parts of the code, but the conditions are designed to ease
 uptake.
 
 # What are the licensing conditions?
- &lt;&lt;Anchor(lic)&gt;&gt;
+ <<Anchor(lic)>>
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the

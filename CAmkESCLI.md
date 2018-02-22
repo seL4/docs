@@ -4,7 +4,7 @@
 The CAmkES CLI is a command line tool for initialising and managing
 CAmkES projects. It's loosely based on the rust build tool "cargo". It's
 structured as a command line tool with numerous subcommands. Usage for
-each can be viewed with camkes-cli &lt;subcommand&gt; --help.
+each can be viewed with camkes-cli <subcommand> --help.
 
 For an example project that can be managed by the CLI, see:
 <https://github.com/SEL4PROJ/camkes-cli-example>

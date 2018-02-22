@@ -3,7 +3,7 @@ This tutorial is an introduction to
 CAmkES: bootstrapping a basic static CAmkES application, describing its
 components, and linking them together.
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 ## Required Reading
  While it's possible to successfully complete the
@@ -98,7 +98,7 @@ NIC connection, or the serial connection?
 The same component provides both. Therefore, CAmkES prefixes the
 instances of functions in an Interface with the Interface-instance's
 name. In the dual-function NIC device's case, it might have a "provides
-&lt;INTERFACE_NAME&gt; serial" and a "provides &lt;INTERFACE_NAME&gt;
+<INTERFACE_NAME> serial" and a "provides <INTERFACE_NAME>
 nic". When a caller wants to call for the NIC-send, it would call,
 nic_send(), and when a caller wants to invoke the Serial-send, it would
 call, "serial_send()".

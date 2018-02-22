@@ -37,7 +37,7 @@ Instructions on how to do this are not included here.
 Before attempting to boot over DFU on the TX1, be sure to double check
 that the seL4 build process is outputting a raw binary and not an ELF.
 You can ascertain this by doing a make menuconfig and then proceeding
-through: Tools =&gt; Build elfloader =&gt; Boot image type
+through: Tools => Build elfloader => Boot image type
 
 Be sure that Binary Boot Image is selected.
 
@@ -63,7 +63,7 @@ the following:
 {{{
 
 :   dfu-util --device 0955:701a -a kernel -D
-    &lt;PATH_TO_YOUR_SEL4_IMAGE&gt;/sel4test-driver-image-arm-tx1.bin
+    <PATH_TO_YOUR_SEL4_IMAGE>/sel4test-driver-image-arm-tx1.bin
 
 }}}
 
@@ -74,8 +74,8 @@ that connects your PC to the TX1.
 ## Booting via SD Card
  Please be sure that your build process is
 producing a raw binary image and not an ELF image. You can do this by
-executing make menuconfig and then proceeding through: Tools =&gt;
-Build elfloader =&gt; Boot image type. Be sure that Binary Boot Image is
+executing make menuconfig and then proceeding through: Tools =>
+Build elfloader => Boot image type. Be sure that Binary Boot Image is
 selected.
 
 Get an SD card and format it with either FAT32, EXT2 or EXT4. Then build
@@ -102,7 +102,7 @@ sel4test-driver-image-arm-tx1.bin go 0x82000000 }}}
 
 Please be sure that your build process is producing a raw binary image
 and not an ELF image. You can do this by executing make menuconfig and
-then proceeding through: Tools =&gt; Build elfloader =&gt;
+then proceeding through: Tools => Build elfloader =>
 Boot image type. Be sure that Binary Boot Image is selected.
 
 Booting off the internal USB mass storage is almost the same as booting

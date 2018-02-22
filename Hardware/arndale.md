@@ -78,10 +78,10 @@ QNX expects to be ELF-loaded. The alternative is to convert our ELF file
 into a binary file using objcopy.
 
 ## Booting
- === From SD card === &lt;TODO&gt;
+ === From SD card === <TODO>
 
 ### Fastboot
- &lt;TODO&gt; Currently not working...
+ <TODO> Currently not working...
 
 ### tftpboot
  At the U-Boot prompt, type print to see the list of

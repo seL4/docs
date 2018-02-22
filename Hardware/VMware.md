@@ -27,7 +27,7 @@ seL4 (choose install OS later, and choose "Other" for guest OS type).
 
 
 After you have a VM, we want to add a serial port so we can see the
-stuff we print out. Go machine configuration -&gt; Add device -&gt;
+stuff we print out. Go machine configuration -> Add device ->
 Serial port.
 
 Make sure this is the only serial port, and it is serial port 0. If you
@@ -41,7 +41,7 @@ There are three options for the serial port
 
 :   1.  '''Output to a text file''' (easiest but output only). The VM
         will dump its serial output to a text file when it runs, and you
-        can simply go less -F &lt;file&gt;.
+        can simply go less -F <file>.
     2.  '''Use physical serial port''' (best but requires serial cable +
         another machine to minicom/picocom off it). Set it to /dev/ttyS0
         or something.
@@ -51,7 +51,7 @@ There are three options for the serial port
     like: {{{\#!highlight bash numbers=off \#!/bin/bash while true; do socat
     -d -d UNIX-CONNECT:/tmp/vsock,forever PTY:link=/dev/tty99 done }}} and
     then minicom to /dev/tty99 or
-    to /dev/pts/&lt;whatever socat decides to use&gt;.
+    to /dev/pts/<whatever socat decides to use>.
 
 Choose depending on whether you can get a serial cable from your
 machine, whether you need output...etc. Easiest is to just use a text
@@ -94,17 +94,17 @@ option to it:
 {{{ menuentry 'seL4' --class fedora --class gnu-linux --class gnu
 --class os { load_video insmod gzio insmod part_msdos insmod ext2 set
 root='(hd0,msdos1)' search --no-floppy --fs-uuid --set=root
-&lt;deviceID&gt; echo 'Loading seL4 kernel' multiboot
+<deviceID> echo 'Loading seL4 kernel' multiboot
 /kernel-image-ia32-pc99 echo 'Loading initial module ...' module
 /sel4-image-ia32-pc99 } }}}
 
-Of course, change the '''--set=root &lt;DeviceID&gt;''' line to your
+Of course, change the '''--set=root <DeviceID>''' line to your
 DeviceID (set the DeviceID from other entries already in your grub.cfg),
 and also change the '''sel4-image-ia32-pc99''' to match the name of your
 binary image that your Make produces (look in your build logs or in
 images/ folder).
 
-Also may be a good idea to add '''set default=&lt;seL4 menu index&gt;'''
+Also may be a good idea to add '''set default=<seL4 menu index>'''
 to the grub.cfg, so grub is configured to boot seL4.
 
 ## Using The VM to run seL4

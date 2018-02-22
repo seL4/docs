@@ -17,7 +17,7 @@ We have also developed 2 daughterboards for the TK1-SOM
     -   an [I/O daughterboard](/Daughter-Board) that adds CAN
         controllers, various sensors and power management
 
-&lt;&lt;Anchor(uboot)&gt;&gt; == U-Boot ==
+<<Anchor(uboot)>> == U-Boot ==
 
 Upstream U-Boot now supports this board.
 
@@ -40,7 +40,7 @@ The Pinmux spreadsheet, for use with
 The original pinmux spreadsheet from Colorado is
 [here](attachment:tk1-som_pinmux_V2.4.xlsm)
 
-&lt;&lt;Anchor(mmc)&gt;&gt; == Accessing the MMC == Attach a USB cable
+<<Anchor(mmc)>> == Accessing the MMC == Attach a USB cable
 between the TK1-SOM's OTG port and your host, then on the U-Boot console
 type ums mmc 0
 
@@ -78,7 +78,7 @@ password ubuntu.
  We have an open-hardware CAN and I2C board available,
 see [/CAN-Board](..//CAN-Board)
 
-&lt;&lt;Anchor(dfu)&gt;&gt; == DFU: Loading kernels over USB == You can
+<<Anchor(dfu)>> == DFU: Loading kernels over USB == You can
 load seL4 kernels over USB using dfu-util. (you can also use fastboot,
 but to boot a kernel over fastboot means making the ELF file produced
 from the build system look like an ANDROID Linux kernel).

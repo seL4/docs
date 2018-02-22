@@ -48,7 +48,7 @@ ABSOLUTELY sure that your of=/dev/sdX line is correct so you don't
 accidentally destroy data on your machine. Also, you want /dev/sdX (the
 device), NOT /dev/sdX3 (partitions) etc.
 
-{{{ gunzip -c tk1_can.img.gz | sudo dd of=/dev/&lt;your TK1 device&gt;
+{{{ gunzip -c tk1_can.img.gz | sudo dd of=/dev/<your TK1 device>
 conv=sync bs=4K status=progress }}} This takes \~1.5Hr on my machine to
 complete. If dd throws a strange error to do with the 'status=progress'
 command, you may be using an old version of dd, it's fine to omit this
@@ -128,10 +128,10 @@ Example:
 
   can0: <can@1> {
  
-  :   compatible = "microchip,mcp2515"; reg = &lt;1&gt;; clocks =
-      &lt;&clk24m&gt;; interrupt-parent = &lt;&gpio4&gt;; interrupts =
-      &lt;13 0x2&gt;; vdd-supply = &lt;&reg5v0&gt;; xceiver-supply =
-      &lt;&reg5v0&gt;;
+  :   compatible = "microchip,mcp2515"; reg = <1>; clocks =
+      <&clk24m>; interrupt-parent = <&gpio4>; interrupts =
+      <13 0x2>; vdd-supply = <&reg5v0>; xceiver-supply =
+      <&reg5v0>;
  
   };
 
@@ -192,7 +192,7 @@ update_kernel.sh
 
 }}}
 
-rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at &lt;tk1&gt;
+rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
 
 {{{
 
@@ -200,7 +200,7 @@ rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at &lt;tk1&gt;
 
     make modules
 
-    mount /dev/&lt;tk1&gt; /mnt/TK1SOM
+    mount /dev/<tk1> /mnt/TK1SOM
 
     ./update_kernel.sh
 

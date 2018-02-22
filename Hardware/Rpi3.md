@@ -54,7 +54,7 @@ directory of this partition. ||Stage ||Filename ||Description ||Source
 ||<https://github.com/raspberrypi/firmware/tree/master/boot> || ||GPU
 firmware ||start.elf or recovery.elf ||Loads CPU bootloader and boots
 CPU ||<https://github.com/raspberrypi/firmware/tree/master/boot> ||
-||&lt;style="text-align:center;vertical-align:top" |3&gt;User code
+||<style="text-align:center;vertical-align:top" |3>User code
 Usually the Linux kernel, but could also be u-boot ||u-boot.bin ||u-boot
 || You can either
 [use our prebuilt U-boot which works](https://sel4.systems/Info/Docs/u-boot-working-rpi3-32bit-v2017.11.bin), or compile your own using the
@@ -107,5 +107,5 @@ certain that you've started up a TFTP server with your seL4 image being
 served by that TFTP server. From there:
 
 {{{ usb start dhcp tftp 0x10000000
-&lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-arm-bcm2837
+<YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-bcm2837
 bootelf 0x10000000 }}}

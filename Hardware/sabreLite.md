@@ -99,7 +99,7 @@ Lite. The ones for Android support Fastboot; the mainline ones do not.
 
 We use the one from
 <git://github.com/boundarydevices/u-boot-2009-08.git> with these patches
-applied: ||&lt;tableclass="table table-condensed"&gt;Name ||Purpose ||
+applied: ||<tableclass="table table-condensed">Name ||Purpose ||
 ||[01_android-imx6-uboot-enable_bootelf.patch](https://sel4.systems/Info/Hardware/sabreLite/01_android-imx6-uboot-enable_bootelf.patch)
 ||Enable bootelf command ||
 ||[02_android-imx6-uboot-fastbootfix.patch](https://sel4.systems/Info/Hardware/sabreLite/02_android-imx6-uboot-fastbootfix.patch)
@@ -145,7 +145,7 @@ the file was loaded into RAM sf write 0x12000000 0 ${filesize}
 \# Ensure that the boot select switches are set appropriately, then
 reboot the Sabrelite }}} = Booting seL4 applications = This assumes that
 the U-Boot version above is installed in SPI flash.
-||&lt;tablewidth="822px" tableheight="105px"&gt;'''Command'''
+||<tablewidth="822px" tableheight="105px">'''Command'''
 ||'''Operation''' || ||run bootsel4_mmc ||Scans through the SD card and
 their partitions looking for an elf file named "sel4-image" in the root
 directory. This file will be loaded and executed. || ||run bootsel4_net

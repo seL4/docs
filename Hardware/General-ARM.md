@@ -19,8 +19,8 @@ ELF-loaded. The alternative is to convert our ELF file into a binary
 file using objcopy.
 
 The address to use varies from board to board. Unless you change the
-load address, use these: ||&lt;tablewidth="534px"
-tableheight="105px"&gt;'''Platform''' ||'''Address''' || ||Arndale,
+load address, use these: ||<tablewidth="534px"
+tableheight="105px">'''Platform''' ||'''Address''' || ||Arndale,
 Odroid-X, Odroid-XU ||0x48000000 || ||Sabre Lite ||0x30000000 ||
 ||Panda, Panda ES ||0x80000000 ||
 
@@ -41,7 +41,7 @@ since there's no RAM there).
 
 }}}
 
-&lt;&lt;Anchor(sd)&gt;&gt; == Booting from SD card == Pull out the SD
+<<Anchor(sd)>> == Booting from SD card == Pull out the SD
 card from your board, and put it into an SD card reader attached to your
 build host. Mount the (MS-DOS) filesystem on the first partition on the
 SD card and copy your image to it. Unmount the filesystem, and put the

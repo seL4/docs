@@ -48,7 +48,7 @@ top) - See this picture (view taken from '''bottom'''):
         chips, in some impedance situations the rise time is much worse
         than indicated on the datasheet. Basically, with some serial
         cables the converter will garble signals at a high baud rate
-        (&gt; 57600).
+        (> 57600).
     -   This can be circumvented by changing your u-boot and extlinux to
         use a slower baud rate. 9600 is very safe, anything up to about
         57600 should be fine --- start slow and work up.
@@ -62,8 +62,8 @@ TK1 as usual. This will be fixed in a future revision.
 which pins on the board correspond to which SOC pins:
 
 Note: All I2C signals operate at 3V3 on their 0.1" headers, except
-I2C_CAM which is selectable from 1V8&lt;-&gt;3V3 in software.
-||||||&lt;style="text-align:center"&gt;'''I2C''' || ||'''PIN'''
+I2C_CAM which is selectable from 1V8<->3V3 in software.
+||||||<style="text-align:center">'''I2C''' || ||'''PIN'''
 ||'''BALL''' ||'''PERIPHERAL ID''' || ||I2C_CAM_SCL ||AF8 ||I2C3_CLK
 || ||I2C_CAM_SDA ||AG8 ||I2C3_DAT || ||I2C_TK1_SCL ||Y2 ||I2C2_CLK
 || ||I2C_TK1_SDA ||AA2 ||I2C2_DAT || ||I2C_LOCAL_SCL ||P6
@@ -71,7 +71,7 @@ I2C_CAM which is selectable from 1V8&lt;-&gt;3V3 in software.
 
 All SPI signals out of the TK1 are at 1V8, but are translated to 3V3 by
 the board (the 0.1" header operates at 3V3)
-||||||&lt;style="text-align:center"&gt;'''SPI''' || ||'''PIN'''
+||||||<style="text-align:center">'''SPI''' || ||'''PIN'''
 ||'''BALL''' ||'''PERIPHERAL ID''' || ||SPI_CLK ||AG15 ||SPI1A_SCK ||
 ||SPI_MISO ||AL18 ||SPI1A_DIN || ||SPI_CSN ||AL16 ||SPI1A_CS0 ||
 ||SPI_MOSI ||AK17 ||SPI1A_DOUT ||
@@ -79,20 +79,20 @@ the board (the 0.1" header operates at 3V3)
 All UART signals out of the TK1 are at 1V8, but are translated to 3V3 by
 the board. Note that UART signals will only be present on the board
 outputs if the uart is actually jumpered to the converter!
-||||||&lt;style="text-align:center"&gt;'''UART''' || ||'''PIN'''
+||||||<style="text-align:center">'''UART''' || ||'''PIN'''
 ||'''BALL''' ||'''PERIPHERAL ID''' || ||J8_RTSn ||V5 ||UD3_RTS ||
 ||J8_CTSn ||V9 ||UD3_CTS || ||J8_TXD ||V4 ||UD3_TXD || ||J8_RXD
 ||U4 ||UD3_RXD || ||J2000_RXD ||L0 ||UART2_RTS_N || ||J2000_TXD
 ||M8 ||UART2_CTS_N || ||J2000_CTSn ||M1 ||UART2_TXD || ||J2000_RTSn
 ||P4 ||UART2_RXD ||
 
-Note that TXD (1V8) is translated to TXD (3V3). NOT TXD (1V8) &lt;-&gt;
+Note that TXD (1V8) is translated to TXD (3V3). NOT TXD (1V8) <->
 RXD (1V8). This means that the jumper from the TK1-SOM should go from
 it's TX to RX on the daughterboard for a standard ftdi pinout to work.
 
 Note that GPIOs aren't actually brought out by the board but they are
 used by the CAN controller (diagram below).
-||||||&lt;style="text-align:center"&gt;'''GPIOs''' || ||'''PIN'''
+||||||<style="text-align:center">'''GPIOs''' || ||'''PIN'''
 ||'''BALL''' ||'''PERIPHERAL ID''' || ||TK1_GPIO0 ||AF29 ||GPIO3_PS.05
 || ||TK1_GPIO1 ||AA26 ||GPIO3_PT.00 || ||TK1_GPIO2 ||AC30
 ||GPIO3_PS.06 || ||TK1_GPIO3 ||AA31 ||GPIO3_PS.02 || ||TK1_GPIO4

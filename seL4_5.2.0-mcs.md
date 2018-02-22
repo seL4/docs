@@ -35,7 +35,7 @@ and the thread it is bound to is treated as round-robin.
 
 
 Periodic threads can be created by binding them to scheduling contexts
-with a budget &lt; period. seL4_Yield for these threads will sacrifice
+with a budget < period. seL4_Yield for these threads will sacrifice
 the remaining budget until the next period.
 
 ### Isolation through sporadic servers

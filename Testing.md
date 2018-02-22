@@ -4,7 +4,7 @@
 suite for seL4.
 
 First make sure you have
-[set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine). &lt;&lt;TableOfContents()&gt;&gt; == Getting the
+[set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine). <<TableOfContents()>> == Getting the
 Code == {{{ $ mkdir sel4test $ cd sel4test $ repo init -u
 <https://github.com/seL4/sel4test-manifest.git> $ repo sync $ ls
 kernel/ libs/ projects/ tools/ apps configs Kbuild Kconfig Makefile }}}
@@ -100,11 +100,11 @@ images/sel4test-driver-image-arm-imx31 ELF-loader started on CPU: ARM
 Ltd. ARMv6 Part: 0xb36 r1p3 paddr=[82000000..8223001f] ELF-loading
 image 'kernel' paddr=[80000000..80035fff] vaddr=[f0000000..f0035fff]
 virt_entry=f0000000 ELF-loading image 'sel4test-driver' ...
-&lt;testsuite&gt; &lt;testcase classname="sel4test"
-name="TEST_BIND0001"&gt; Running test BIND0001 (Test that a bound tcb
+<testsuite> <testcase classname="sel4test"
+name="TEST_BIND0001"> Running test BIND0001 (Test that a bound tcb
 waiting on a sync endpoint receives normal sync ipc and notification
-notifications.) Test BIND0001 passed &lt;system-out&gt; TEST_BIND0001
-&lt;/system-out&gt; &lt;/testcase&gt; ... }}} The test suite prints out
+notifications.) Test BIND0001 passed <system-out> TEST_BIND0001
+</system-out> </testcase> ... }}} The test suite prints out
 JUnit-style XML which can be parsed by various tools. == Testing a
 Customised Kernel == Suppose you've got seL4 checked out in
 `\~/projects/seL4}}}, and sel4test in {{{\~/tests/sel4test`, and you

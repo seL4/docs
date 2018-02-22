@@ -4,7 +4,7 @@
 First make sure you have
 [set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine).
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 ## Prerequisites
 

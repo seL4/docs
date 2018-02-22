@@ -6,7 +6,7 @@ Recommended prior reading for this page is the seL4 Driver API's
 device addressing scheme]].
 
 ## Contents
- &lt;&lt;TableOfContents()&gt;&gt;
+ <<TableOfContents()>>
 
 ## Constants
 

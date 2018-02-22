@@ -1,5 +1,5 @@
 # Benchmarking seL4
- &lt;&lt;TableOfContents(2)&gt;&gt;
+ <<TableOfContents(2)>>
 
 ## Benchmarking project
  There is a set of microbenchmarks for seL4
@@ -16,7 +16,7 @@ workload performance.
  Threads (including the idle thread) and the
 overall system time (in cycles) can be tracked by enabling the "track
 CPU utilisation feature". This feature can be enabled from the
-menuconfig list (seL4 Kernel &gt; Enable benchmarks &gt; Track threads
+menuconfig list (seL4 Kernel > Enable benchmarks > Track threads
 and kernel CPU utilisation time).
 
 By enabling CPU utilisation tracking, the kernel is instrumented with
@@ -58,10 +58,10 @@ dumped to subsequent 64-bit words in the IPCBuffer.
 Example code of using this feature:
 
 {{{\#!cplusplus numbers=off \#include
-&lt;sel4/benchmark_utilisation_types.h&gt;
+<sel4/benchmark_utilisation_types.h>
 
 uint64_t *ipcbuffer = (uint64_t*)
-&(seL4_GetIPCBuffer()-&gt;msg[0]);
+&(seL4_GetIPCBuffer()->msg[0]);
 
 seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
 
@@ -94,7 +94,7 @@ to track the time between points.
 
 ### How to use
  Set "Maximum number of tracepoints" in Kconfig (seL4
-&gt; seL4 System Parameters) to a non-zero value.
+> seL4 System Parameters) to a non-zero value.
 
 Wrap the regions you wish to time with TRACE_POINT_START(i) and
 TRACE_POINT_STOP(i) where i is an integer from 0 to 1 less than the
@@ -136,140 +136,140 @@ added to execution per tracepoint start/stop pair (inner pair result
 subtracted from outer pair result). The effective overhead is the number
 of cycles added to a measurement by the tracepoint instrumentation
 (inner pair result).
-||&lt;tablestyle="margin-top:10px;margin-left:0px;overflow-x:auto;color:rgb(51,
+||<tablestyle="margin-top:10px;margin-left:0px;overflow-x:auto;color:rgb(51,
 51, 51);font-family:Arial, sans-serif;font-size:14px;line-height:20px;"
 tableclass="confluenceTable"\#F0F0F0 class="confluenceTh"
 style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
 10px;vertical-align:top;white-space:pre-wrap; ;text-align:center"
-|2&gt;Machine ||&lt;\#F0F0F0 class="confluenceTh"
+|2>Machine ||<\#F0F0F0 class="confluenceTh"
 style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
 10px;vertical-align:top;white-space:pre-wrap; ;text-align:center"
-|2&gt;\# Samples ||||||||||||&lt;\#F0F0F0 class="confluenceTh"
+|2>\# Samples ||||||||||||<\#F0F0F0 class="confluenceTh"
 style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
 10px;vertical-align:top;white-space:pre-wrap;
-;text-align:center"&gt;Total Overhead ||||||||||||&lt;\#F0F0F0
+;text-align:center">Total Overhead ||||||||||||<\#F0F0F0
 class="confluenceTh" style="border-style:solid;border-color:rgb(221,
 221, 221);padding:7px 10px;vertical-align:top;white-space:pre-wrap;
-;text-align:center"&gt;Effective Overhead || ||&lt;class="confluenceTd"
+;text-align:center">Effective Overhead || ||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Min
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Min
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Max
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Max
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Mean
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Mean
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Variance
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Variance
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Std Dev
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Std Dev
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Std Dev %
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Std Dev %
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Min
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Min
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Max
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Max
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Mean
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Mean
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Variance
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Variance
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Std Dev
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Std Dev
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Std Dev % ||
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Std Dev % ||
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Sabre
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Sabre
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;740
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">740
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;18
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">18
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;18
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">18
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;18
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">18
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;0
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">0
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;0
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">0
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;0%
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">0%
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;4
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">4
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;4
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">4
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;4
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">4
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;0
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">0
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;0
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">0
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;0 ||
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">0 ||
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;Haswell2
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">Haswell2
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;740
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">740
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;532
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">532
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;852
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">852
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;550.33
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">550.33
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;295.16
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">295.16
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;17.19
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">17.19
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;3%
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">3%
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;208
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">208
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;212
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">212
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;208.69
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">208.69
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;2.75
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">2.75
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;1.66
-||&lt;class="confluenceTd"
+221, 221);padding:7px 10px;vertical-align:top;">1.66
+||<class="confluenceTd"
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;"&gt;1% ||
+221, 221);padding:7px 10px;vertical-align:top;">1% ||
 
 ### Advanced Use
  ==== Conditional Logging ==== A log is stored when
@@ -326,7 +326,7 @@ and tell the kernel about it is as follows:
 
 \#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 
-\#include &lt;sel4/benchmark_track_types.h&gt;
+\#include <sel4/benchmark_track_types.h>
 
   /\* Create large page to use for benchmarking and give to kernel */
   void*log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1,

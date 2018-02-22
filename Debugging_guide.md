@@ -1,7 +1,7 @@
 # Debugging guide
 
 
-&lt;&lt;TableOfContents&gt;&gt;
+<<TableOfContents>>
 
 ## Compiler Settings
 
@@ -13,8 +13,8 @@ When debugging the kernel, make sure CONFIG_DEBUG and CONFIG_PRINTING
 are enabled. This can be done by make menuconfig and enabling the
 following options:
 
-  -   seL4 Kernel -&gt; Build Options -&gt; Enable debug facilities
-  -   seL4 Kernel -&gt; Build Options -&gt; Enable kernel printing.
+  -   seL4 Kernel -> Build Options -> Enable debug facilities
+  -   seL4 Kernel -> Build Options -> Enable kernel printing.
 
 This will turn on some helpful features for debugging the kernel
 including:
@@ -32,7 +32,7 @@ CONFIG_USER_DEBUG
 
 Similarly, enable this setting by using make menuconfig and setting:
 
-  -   Toolchain options -&gt; build user level with assertions, -g and
+  -   Toolchain options -> build user level with assertions, -g and
       debugging messages
 
 ## Qemu
@@ -118,7 +118,7 @@ In a separate terminal window, start your target platform's version of
 GDB. You should either pass a binary of the seL4 kernel if you intend on
 debugging seL4 itself or the userspace application if you intend on
 debugging an application on seL4. Note that your binary needs to include
-debugging information ("-g" flag to GCC; "Toolchain Options" -&gt; "Emit
+debugging information ("-g" flag to GCC; "Toolchain Options" -> "Emit
 debugging information" in the seL4 build configuration) if you want GDB
 to show you C source code while debugging. In this example we're going
 to debug the seL4 kernel that has been built in debug mode:
@@ -261,13 +261,13 @@ cross-compiler prefix.
 
 {{{\#!highlight bash numbers=off
 
-:   arm-none-eabi-objdump -D binary_file_name &gt; dump.s
+:   arm-none-eabi-objdump -D binary_file_name > dump.s
 
 }}} For x86
 
 {{{\#!highlight bash numbers=off
 
-:   objdump -D binary_file_name &gt; dump.s
+:   objdump -D binary_file_name > dump.s
 
 }}} The file `dump.s` has the human-readable assembly instructions.
 

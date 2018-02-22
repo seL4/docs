@@ -18,11 +18,11 @@ Hopefully most people will be in this category. Now that we've
 (finally!) done an official release of CAmkES 3, you can switch to a
 stable tag with all the features of "CAmkES Next", without the risk of
 api breaking changes. If you use repo, your manifest probably has a line
-resembling: {{{ &lt;project name="camkes-tool.git" path="tools/camkes"
-revision="next"&gt; }}}
+resembling: {{{ <project name="camkes-tool.git" path="tools/camkes"
+revision="next"> }}}
 
-Change it to: {{{ &lt;project name="camkes-tool.git" path="tools/camkes"
-revision="refs/tags/camkes-3.0.0"&gt; }}}
+Change it to: {{{ <project name="camkes-tool.git" path="tools/camkes"
+revision="refs/tags/camkes-3.0.0"> }}}
 
 Watch the mailing list for new releases, and update your version of
 CAmkES when '''you''' want to.
@@ -32,11 +32,11 @@ CAmkES when '''you''' want to.
 You need to switch to the "master" branch. The "next" branch will
 continue to exist for a time for compatibility, but will no longer
 receive updates. If you use repo, your manifest probably has a line
-resembling: {{{ &lt;project name="camkes-tool.git" path="tools/camkes"
-revision="next"&gt; }}}
+resembling: {{{ <project name="camkes-tool.git" path="tools/camkes"
+revision="next"> }}}
 
-Change it to: {{{ &lt;project name="camkes-tool.git"
-path="tools/camkes"&gt; }}}
+Change it to: {{{ <project name="camkes-tool.git"
+path="tools/camkes"> }}}
 
 Note that tracking the tip of the "master" branch is risky. There's no
 guarantee that it won't change in breaking ways in the future.
@@ -54,10 +54,10 @@ That's fine! All the old versions of CAmkES will continue to be
 available. The latest release of this branch is
 [camkes-2.3.1](https://github.com/seL4/camkes-tool/releases/tag/camkes-2.3.1).
 If you use repo, your manifest probably had a line resembling: {{{
-&lt;project name="camkes-tool.git" path="tools/camkes"&gt; }}}
+<project name="camkes-tool.git" path="tools/camkes"> }}}
 
-Change it to: {{{ &lt;project name="camkes-tool.git" path="tools/camkes"
-revision="refs/tags/camkes-2.3.1"&gt; }}}
+Change it to: {{{ <project name="camkes-tool.git" path="tools/camkes"
+revision="refs/tags/camkes-2.3.1"> }}}
 
 ### I was using a released version of CAmkES
 

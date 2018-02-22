@@ -1,5 +1,5 @@
 
-&lt;&lt;TableOfContents(3)&gt;&gt;
+<<TableOfContents(3)>>
 
 # CAmkES Tutorial
  This tutorial will help you walk-through building
@@ -80,7 +80,7 @@ instantiation and structure of the system at
 apps/helloworld/helloworld.camkes. {{{ /\*
 apps/helloworld/helloworld.camkes \*/
 
-import &lt;std_connector.camkes&gt;; import
+import <std_connector.camkes>; import
 "components/Hello/Hello.camkes"; import
 "components/Client/Client.camkes";
 
@@ -112,7 +112,7 @@ components. Create a single source file for Hello as
 apps/helloworld/components/Hello/src/hello.c: {{{\#!highlight c /\*
 apps/helloworld/components/Hello/src/hello.c \*/
 
-\#include &lt;camkes.h&gt; \#include &lt;stdio.h&gt;
+\#include <camkes.h> \#include <stdio.h>
 
 void inf__init(void) { }
 
@@ -137,7 +137,7 @@ apps/helloworld/components/Client/src/client.c that calls these
 functions as if they are directly available to it: {{{\#!highlight c /\*
 apps/helloworld/components/Client/src/client.c \*/
 
-\#include &lt;camkes.h&gt;
+\#include <camkes.h>
 
 int run(void) {
 
@@ -253,7 +253,7 @@ component Consumer {
 components together using another ADL file: {{{ /\*
 apps/helloevent/helloevent.camkes \*/
 
-import &lt;std_connector.camkes&gt;; import
+import <std_connector.camkes>; import
 "components/Emitter/Emitter.camkes"; import
 "components/Consumer/Consumer.camkes";
 
@@ -279,7 +279,7 @@ source and sink are connected over the connection channel.
  {{{\#!highlight c /\*
 apps/helloevent/components/Emitter/src/main.c \*/
 
-\#include &lt;camkes.h&gt;
+\#include <camkes.h>
 
 int run(void) {
 
@@ -304,7 +304,7 @@ that returns whether an event has arrived or not. Let's add some source
 code that uses all three: {{{\#!highlight c /\*
 apps/helloevent/components/Consumer/src/main.c \*/
 
-\#include &lt;camkes.h&gt; \#include &lt;stdio.h&gt;
+\#include <camkes.h> \#include <stdio.h>
 
 static void handler(void) {
 
@@ -462,7 +462,7 @@ purposes of this example spinning until a byte changes is good enough.
 We're ready to connect all these sources together with a top-level ADL
 file: {{{ /\* apps/hellodataport/hellodataport.camkes \*/
 
-import &lt;std_connector.camkes&gt;; import
+import <std_connector.camkes>; import
 "components/Ping/Ping.camkes"; import "components/Pong/Pong.camkes";
 
 assembly {
@@ -488,8 +488,8 @@ use volatile variables when referring to shared memory to prevent the
 compiler eliminating repeated reads and writes. {{{\#!highlight c /\*
 apps/hellodataport/components/Ping/src/main.c \*/
 
-\#include &lt;camkes.h&gt; \#include &lt;porttype.h&gt; \#include
-&lt;stdio.h&gt; \#include &lt;string.h&gt;
+\#include <camkes.h> \#include <porttype.h> \#include
+<stdio.h> \#include <string.h>
 
 int run(void) {
 
@@ -501,8 +501,8 @@ int run(void) {
 
     :   \* zeroed on startup by seL4. \*/
 
-    while (!d2-&gt;data[0]); printf("Ping: received %s.n",
-    d2-&gt;data);
+    while (!d2->data[0]); printf("Ping: received %s.n",
+    d2->data);
 
     return 0;
 
@@ -511,8 +511,8 @@ int run(void) {
 
 {{{\#!highlight c /\* apps/hellodataport/components/Pong/src/main.c \*/
 
-\#include &lt;camkes.h&gt; \#include &lt;porttype.h&gt; \#include
-&lt;stdio.h&gt; \#include &lt;string.h&gt;
+\#include <camkes.h> \#include <porttype.h> \#include
+<stdio.h> \#include <string.h>
 
 int run(void) {
 
@@ -525,7 +525,7 @@ int run(void) {
     while (!\*(volatile char\*)s1); printf("Pong: received %sn",
     (volatile char\*)s1);
 
-    printf("Pong: sending %s...n", world); strcpy((void\*)s2-&gt;data,
+    printf("Pong: sending %s...n", world); strcpy((void\*)s2->data,
     world);
 
     return 0;

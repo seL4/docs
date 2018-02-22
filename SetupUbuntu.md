@@ -1,5 +1,5 @@
 # Table of Contents
- &lt;&lt;TableOfContents()&gt;&gt;
+ <<TableOfContents()>>
 
 ## Cross compiler toolchain summary
  This page doesn't detail the
@@ -43,7 +43,7 @@ For Ubuntu, first follow the instructions that are common to all Debian-based di
 
 ## Instructions
  === Instructions common to Debian and all Debian
-derivatives [Ubuntu, etc] === &lt;&lt;Anchor(all)&gt;&gt;
+derivatives [Ubuntu, etc] === <<Anchor(all)>>
 
 To get a usable build system, install '''build-essential, realpath,
 libxml2-utils''' and '''python-tempita'''. For cross compiling on a
@@ -62,7 +62,7 @@ and '''ncurses-dev''' is needed to run the configurator.
 
 
 #### Debian Wheezy
- &lt;&lt;Anchor(wheezy)&gt;&gt;
+ <<Anchor(wheezy)>>
 
 To build for any of the ARM targets you need an arm cross compiler. The
 simplest way to do this on Wheezy is to use the emdebian pre-built
@@ -71,8 +71,8 @@ compilers.
 {{{
 
 :   sudo /bin/sh -c 'echo "deb <http://www.emdebian.org/debian/> squeeze
-    main" &gt; /etc/apt/sources.list.d/emdebian.list' sudo /bin/sh -c
-    'echo "deb <http://ftp.us.debian.org/debian/> squeeze main" &gt;&gt;
+    main" > /etc/apt/sources.list.d/emdebian.list' sudo /bin/sh -c
+    'echo "deb <http://ftp.us.debian.org/debian/> squeeze main" >>
     /etc/apt/sources.list.d/emdebian.list' sudo apt-get update sudo
     apt-get install gcc-4.4-arm-linux-gnueabi
 
@@ -88,7 +88,7 @@ source:
 }}} The resulting qemu binary is in '''arm-softmmu/qemu-system-arm'''
 
 #### Debian Jessie or later
- &lt;&lt;Anchor(jessie)&gt;&gt;
+ <<Anchor(jessie)>>
 
 Jessie and following have multiarch support. To cross-build for ARM, add
 '''armhf''' as an architecture, and install the cross compiler:
@@ -103,10 +103,10 @@ with the prebuilt libraries in the libmuslc repository. You will need to
 disable use of the prebuilt libraries in configurations that use musl C,
 as well as change the compiler prefix in the configuration.
 
-&lt;&lt;Anchor(ubuntu)&gt;&gt;
+<<Anchor(ubuntu)>>
 
 ### Instructions for Ubuntu
- &lt;&lt;Anchor(ubuntu)&gt;&gt;
+ <<Anchor(ubuntu)>>
 
 #### Trusty Tahr (14.04LTS)
  Linaro maintains cross compilers that

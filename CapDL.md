@@ -1,7 +1,7 @@
 # CapDL
 
 
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 CapDL is the "Capability Distribution Language". It's used to describe
 the kernel objects a seL4 application needs, and how capabilities to

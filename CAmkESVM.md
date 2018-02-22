@@ -2,7 +2,7 @@
  Get the dependencies for building CAmkES by following
 the instructions [here](CAmkES\#Build_dependencies).
 
-&lt;&lt;TableOfContents&gt;&gt;
+<<TableOfContents>>
 
 ## Getting the Code
  {{{ repo init -u
@@ -23,7 +23,7 @@ Login with the username "root" and the password "root".
  The top level CAmkES spec is in
 apps/cma34cr_minimal/vm.camkes:
 
-{{{ import &lt;VM/vm.camkes&gt;; import "cma34cr.camkes";
+{{{ import <VM/vm.camkes>; import "cma34cr.camkes";
 
 assembly {
 
@@ -43,7 +43,7 @@ different vm app will have its own implementation of the VM component,
 where the guest environment is configured. For this app, the VM
 component is defined in apps/cma34cr_minimal/cma34cr.camkes:
 
-{{{ \#include &lt;autoconf.h&gt; \#include &lt;configurations/vm.h&gt;
+{{{ \#include <autoconf.h> \#include <configurations/vm.h>
 
 component Init0 {
 
@@ -168,7 +168,7 @@ Here's a summary of what the build-rootfs tool does:
 
 2.  Make a simple C program in projects/vm/linux/pkg/hello/hello.c
 
-{{{ \#include &lt;stdio.h&gt;
+{{{ \#include <stdio.h>
 
 int main(int argc, char \*argv[]) {
 
@@ -215,11 +215,11 @@ care of communicating between the module and the vmm. For simplicity,
 we'll make it so when a special file associated with this module is
 written to, the vmm gets poked.
 
-{{{ \#include &lt;linux/module.h&gt; \#include &lt;linux/kernel.h&gt;
-\#include &lt;linux/init.h&gt; \#include &lt;linux/fs.h&gt;
+{{{ \#include <linux/module.h> \#include <linux/kernel.h>
+\#include <linux/init.h> \#include <linux/fs.h>
 
-\#include &lt;asm/uaccess.h&gt; \#include &lt;asm/kvm_para.h&gt;
-\#include &lt;asm/io.h&gt;
+\#include <asm/uaccess.h> \#include <asm/kvm_para.h>
+\#include <asm/io.h>
 
 \#define DEVICE_NAME "poke"
 
@@ -282,7 +282,7 @@ insmod
 insmod
 /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/emits_event.ko
 insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
-&lt;-- add this line ... }}}
+<-- add this line ... }}}
 
 5.  Run the build-rootfs tool, then make
 
@@ -292,7 +292,7 @@ insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
 
 {{{ Welcome to Buildroot buildroot login: root Password: \# grep poke
 /proc/devices \# figure out the major number of our driver 244 poke \#
-mknod /dev/poke c 244 0 \# create the special file \# echo &gt;
+mknod /dev/poke c 244 0 \# create the special file \# echo >
 /dev/poke \# write to the file [ 57.389643] hi -sh: write error: Bad
 address \# the shell complains, but our module is being invoked! }}}
 
@@ -315,7 +315,7 @@ In the function main_continued register \`poke_handler\`:
 
 {{{
 
-:   reg_new_handler(&vmm, poke_handler, 4); // &lt;--- added
+:   reg_new_handler(&vmm, poke_handler, 4); // <--- added
 
     /\* Now go run the event loop \*/ vmm_run(&vmm);
 
@@ -324,7 +324,7 @@ In the function main_continued register \`poke_handler\`:
 9.  Finally re-run build-rootfs, make, and run:
 
 {{{ Welcome to Buildroot buildroot login: root Password: \# mknod
-/dev/poke c 244 0 \# echo &gt; /dev/poke POKE!!! }}}
+/dev/poke c 244 0 \# echo > /dev/poke POKE!!! }}}
 
 ## Cross VM Connectors
 
@@ -480,8 +480,8 @@ VM_CONFIGURATION_DEF() VM_PER_VM_CONFIG_DEF(0, 2)
 }}}
 
 Now let's implement our print server. Create a file
-apps/cma34cr_minimal/print_server.c: {{{ \#include &lt;camkes.h&gt;
-\#include &lt;stdio.h&gt;
+apps/cma34cr_minimal/print_server.c: {{{ \#include <camkes.h>
+\#include <stdio.h>
 
 int run(void) {
 
@@ -512,13 +512,13 @@ We need to create another c file that tells the VMM about our cross vm connectio
     -   cross_vm_consumes_events_init
 
 Create a file apps/cma34cr_minimal/cross_vm.c: {{{ \#include
-&lt;sel4/sel4.h&gt; \#include &lt;camkes.h&gt; \#include
-&lt;camkes_mutex.h&gt; \#include &lt;camkes_consumes_event.h&gt;
-\#include &lt;camkes_emits_event.h&gt; \#include
-&lt;dataport_caps.h&gt; \#include &lt;cross_vm_consumes_event.h&gt;
-\#include &lt;cross_vm_emits_event.h&gt; \#include
-&lt;cross_vm_dataport.h&gt; \#include &lt;vmm/vmm.h&gt; \#include
-&lt;vspace/vspace.h&gt;
+<sel4/sel4.h> \#include <camkes.h> \#include
+<camkes_mutex.h> \#include <camkes_consumes_event.h>
+\#include <camkes_emits_event.h> \#include
+<dataport_caps.h> \#include <cross_vm_consumes_event.h>
+\#include <cross_vm_emits_event.h> \#include
+<cross_vm_dataport.h> \#include <vmm/vmm.h> \#include
+<vspace/vspace.h>
 
 // this is defined in the dataport's glue code extern
 dataport_caps_handle_t data_handle;
@@ -630,10 +630,10 @@ print server. As before, create a new directory in pkg: {{{ mkdir
 projects/vm/linux/pkg/print_client }}}
 
 Create projects/vm/linux/pkg/print_client/print_client.c: {{{
-\#include &lt;string.h&gt; \#include &lt;assert.h&gt;
+\#include <string.h> \#include <assert.h>
 
-\#include &lt;sys/types.h&gt; \#include &lt;sys/stat.h&gt; \#include
-&lt;sys/mman.h&gt; \#include &lt;fcntl.h&gt;
+\#include <sys/types.h> \#include <sys/stat.h> \#include
+<sys/mman.h> \#include <fcntl.h>
 
 \#include "dataport.h" \#include "consumes_event.h" \#include
 "emits_event.h"
@@ -641,21 +641,21 @@ Create projects/vm/linux/pkg/print_client/print_client.c: {{{
 int main(int argc, char \*argv[]) {
 
   int data_fd = open("/dev/camkes_data", O_RDWR); assert(data_fd
-  &gt;= 0);
+  >= 0);
  
   int do_print_fd = open("/dev/camkes_do_print", O_RDWR);
-  assert(do_print_fd &gt;= 0);
+  assert(do_print_fd >= 0);
  
   int done_printing_fd = open("/dev/camkes_done_printing", O_RDWR);
-  assert(done_printing_fd &gt;= 0);
+  assert(done_printing_fd >= 0);
  
   char *data = (char*)dataport_mmap(data_fd); assert(data !=
   MAP_FAILED);
  
   ssize_t dataport_size = dataport_get_size(data_fd);
-  assert(dataport_size &gt; 0);
+  assert(dataport_size > 0);
  
-  for (int i = 1; i &lt; argc; i++) {
+  for (int i = 1; i < argc; i++) {
  
   :   strncpy(data, argv[i], dataport_size);
       emits_event_emit(do_print_fd);
@@ -882,11 +882,11 @@ You should be able to log in and use the system largely as normal.
 
 
 The ethernet device is not accessible to the guest: {{{ $ ip addr 1:
-lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
+lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
 group default qlen 1 link/loopback 00:00:00:00:00:00 brd
 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever
 preferred_lft forever inet6 ::1/128 scope host valid_lft forever
-preferred_lft forever 2: <sit0@NONE>: &lt;NOARP&gt; mtu 1480 qdisc noop
+preferred_lft forever 2: <sit0@NONE>: <NOARP> mtu 1480 qdisc noop
 state DOWN group default qlen 1 link/sit 0.0.0.0 brd 0.0.0.0 }}}
 
 An easy way to give the guest network access is to give it passthrough
@@ -901,7 +901,7 @@ ports, pci devices and irqs to pass through: {{{ vm0_config.ioports =
 {"start":0x40c8, "end":0x40cc, "pci_device":0x1f, "name":"SATA"},
 {"start":0x40cc, "end":0x40d0, "pci_device":0x1f, "name":"SATA"},
 {"start":0x3000, "end":0x3020, "pci_device":0, "name":"Ethernet5"}, //
-&lt;--- Add this entry ];
+<--- Add this entry ];
 
   vm0_config.pci_devices = [
  
@@ -925,7 +925,7 @@ ports, pci devices and irqs to pass through: {{{ vm0_config.ioports =
  
   :   {"name":"SATA", "source":19, "level_trig":1, "active_low":1,
       "dest":11}, {"name":"Ethernet5", "source":0x11, "level_trig":1,
-      "active_low":1, "dest":10}, // &lt;--- Add this entry
+      "active_low":1, "dest":10}, // <--- Add this entry
  
   ];
 
@@ -933,12 +933,12 @@ ports, pci devices and irqs to pass through: {{{ vm0_config.ioports =
 
 You should have added a new entry to each of the three lists that
 describe passthrough devices. Building and running: {{{ $ ip addr 1:
-lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
+lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
 group default qlen 1 link/loopback 00:00:00:00:00:00 brd
 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever
 preferred_lft forever inet6 ::1/128 scope host valid_lft forever
 preferred_lft forever 2: enp0s2:
-&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast
+<BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast
 state UP group default qlen 1000 link/ether 00:d0:81:09:0c:7d brd
 ff:ff:ff:ff:ff:ff inet 10.13.1.87/23 brd 10.13.1.255 scope global
 dynamic enp0s2 valid_lft 14378sec preferred_lft 14378sec inet6
@@ -947,7 +947,7 @@ valid_lft 86390sec preferred_lft 14390sec inet6
 2402:1800:4000:1:aa67:5925:2cbc:928f/64 scope global mngtmpaddr
 noprefixroute dynamic valid_lft 86390sec preferred_lft 14390sec inet6
 fe80::cc47:129d:bdff:a2da/64 scope link valid_lft forever
-preferred_lft forever 3: <sit0@NONE>: &lt;NOARP&gt; mtu 1480 qdisc noop
+preferred_lft forever 3: <sit0@NONE>: <NOARP> mtu 1480 qdisc noop
 state DOWN group default qlen 1 link/sit 0.0.0.0 brd 0.0.0.0 $ ping
 google.com PING google.com (172.217.25.142) 56(84) bytes of data. 64
 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=1

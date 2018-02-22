@@ -1,4 +1,4 @@
-&lt;&lt;TableOfContents()&gt;&gt;
+<<TableOfContents()>>
 
 # CAmkES Next
 

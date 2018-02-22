@@ -16,7 +16,7 @@ Settings are now interpreted as an appropriate python type.
 // dict crazy.stuff = { "key" : ["polymorphic", 42, "list",
 {"hello":true} ] };
 
-// appropriate numeric type arithmetic.expressions = 1 &lt;&lt; (2 \*\*
+// appropriate numeric type arithmetic.expressions = 1 << (2 \*\*
 2) == 3 ? -2 : 0x9; }}}
 
 Arbitrary ids are no longer allowed as setting values: {{{ a.b = c; //
@@ -224,7 +224,7 @@ sub-components: {{{ component Serial {
   > uart_device.regs, to uart_driver.regs);
   >
   > // export interface of driver component as interface of this
-  > component export uart_driver.uart -&gt; serial;
+  > component export uart_driver.uart -> serial;
  
   }
 

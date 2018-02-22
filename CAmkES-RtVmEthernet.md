@@ -94,8 +94,8 @@ vm.pci_config_group_bin [CC] src/main.o
 In function ‘init_sc’:
 /home/ssteve/src/camkes-rt-vm-ethernet/apps/capdl-loader-experimental/src/main.c:1002:17:
 error: too few arguments to function ‘seL4_SchedControl_Configure’ int
-error = seL4_SchedControl_Configure(bi-&gt;schedcontrol.start +
-bi-&gt;nodeID, \^\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ In
+error = seL4_SchedControl_Configure(bi->schedcontrol.start +
+bi->nodeID, \^\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ In
 file included from
 /home/ssteve/src/camkes-rt-vm-ethernet/stage/x86/pc99/include/sel4/sel4.h:22:0,
 from

@@ -57,7 +57,7 @@ ATF_BUILDFLAGS=CONSOLE_BASE=PL011_UART0_BASE
 CRASH_CONSOLE_BASE=PL011_UART0_BASE }}} == 5. Patching the UEFI for
 the Hikey == Obtain the patch from <https://sel4.systems/hikey.patch>.
 
-{{{\#!highlight bash numbers=off cd linaro-edk2 patch -p1 &lt;
+{{{\#!highlight bash numbers=off cd linaro-edk2 patch -p1 <
 \~/Downloads/hikey.patch \# Then return to the main directory
 hikey-flash }}} == 6.Modifying the firmware == If settings are required
 to be changed while in EL3 then the file in
@@ -66,7 +66,7 @@ prefetcher obtain the patch file from
 [<attachment:bl1_main.patch>](../<attachment:bl1_main.patch>) and follow the below steps.
 
 {{{\#!highlight bash numbers=off cd arm-trusted-firmware/bl1 patch -p5
-&lt; \~/Downloads/bl1_main.patch \# Then return to the main directory
+< \~/Downloads/bl1_main.patch \# Then return to the main directory
 hikey-flash }}} == 7. Modifying the UEFI == If settings are required to
 be changed while in EL2 then the file in
 linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S can be modified.
@@ -74,7 +74,7 @@ To disable the prefetcher obtain the patch file from
 [<attachment:efi-stub.patch>](../<attachment:efi-stub.patch>) follow the below steps.
 
 {{{\#!highlight bash numbers=off cd
-linaro-edk2/MdeModulePkg/Application/noboot patch -p7 &lt;
+linaro-edk2/MdeModulePkg/Application/noboot patch -p7 <
 \~/Downloads/efi-stub.patch \# Then return to the main directory
 hikey-flash }}}
 
@@ -189,8 +189,8 @@ by the following instructions. First, check out the seL4 project.
 Then, use the default config for the !HiKey and build the system.
 
 {{{\#!highlight bash numbers=off make
-hikey_aarch32_debug_xml_defconfig }}} Then, use "menuconfig &gt;
-Tools &gt; Build elfloader &gt; Boot image type" and choose "Binary Boot
+hikey_aarch32_debug_xml_defconfig }}} Then, use "menuconfig >
+Tools > Build elfloader > Boot image type" and choose "Binary Boot
 Image"
 
 `\#!highlight bash numbers=off make menuconfig make ` Once the

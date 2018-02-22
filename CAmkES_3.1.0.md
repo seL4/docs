@@ -21,8 +21,8 @@ Specific details from manual:
 In seL4 threads can be named. A thread's name appears in the kernel's
 debugging printouts when the thread faults. Names of threads created by
 CAmkES are now named
-&lt;component_instance_name&gt;:&lt;interface_name&gt; for interface
-threads, and &lt;component_instance_name&gt;:control for control
+<component_instance_name>:<interface_name> for interface
+threads, and <component_instance_name>:control for control
 threads.
 
 ### Scheduling Context Size Bits Attribute
@@ -31,9 +31,9 @@ threads.
 When using CAmkES realtime extensions, the size_bits field of a
 scheduling context can be set in CAmkES ADL. For interface threads,
 specify the size bits of bound scheduling contexts with
-&lt;component_instance_name&gt;.&lt;interface_name&gt;_sc_size_bits = ...;.
+<component_instance_name>.<interface_name>_sc_size_bits = ...;.
 For control threads, specify the size bits of bound scheduling contexts
-with &lt;component_instance_name&gt;._sc_size_bits = ...;.
+with <component_instance_name>._sc_size_bits = ...;.
 
 ### Documentation Fixes
 
