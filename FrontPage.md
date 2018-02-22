@@ -9,9 +9,8 @@ developing and sharing documentation on
 To avoid spam and increase quality, editing is by invitation only.
 Create an account, and if we recognise your name you'll be added to the
 list of editors. If we don't recognise you (e.g., because you've never
-posted anything to the
-\[\[<https://sel4.systems/lists/listinfo/devel%7Cdevel> mailing
-list\]\]) drop us a line if you want to be able to edit.
+posted anything to the [devel mailing list](https://sel4.systems/lists/listinfo/devel)) 
+drop us a line if you want to be able to edit.
 
 ## seL4 Basics
 
@@ -61,9 +60,8 @@ list\]\]) drop us a line if you want to be able to edit.
 ## Community
 
 
-  -   \[\[<https://research.csiro.au/tsblog%7CTrustworthy> Systems
-      Blog\]\]
+  -   [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
   -   [IRC Channel](IRCChannel)
   -   [Suggested projects](../Suggested projects)
-  -   CommunityProjects
+  -   [CommunityProjects](../CommunityProjects)
 
