@@ -156,7 +156,7 @@ The 'rt' branch of seL4\_libs has been adapted to the rt branch of seL4,
 and the rt branch of sel4test has been ported to the seL4\_rt-dev-1.0.0
 kernel, along with many more tests written suited to the rt kernel. To
 run it, checkout the default.xml manifest on the rt branch of
-\[\[<https://github.com/seL4/sel4test-manifest/tree/rt%7Csel4test-manifest>\]\].
+[sel4test-manifest](https://github.com/seL4/sel4test-manifest/tree/rt).
 
 The rt branch is in no way compatible with the master branch of seL4.
 

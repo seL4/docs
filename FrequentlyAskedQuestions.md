@@ -43,7 +43,7 @@ high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
 \[\[<http://en.wikipedia.org/wiki/L4_microkernel_family%7CL4>
 microkernel family\]\] entry on Wikipedia and the website
-\[\[<http://l4hq.org/%7CL4HQ>\]\] for more details.
+[L4HQ](http://l4hq.org/) for more details.
 
 {{<http://sel4.systems/images/familytree.png>||width="500"}}
 
@@ -119,7 +119,7 @@ the moment.
 
 A principled, high-performance multicore version is under active
 development, please refer to the
-\[\[<https://sel4.systems/Info/Roadmap/%7Croadmap>\]\] for anticipated
+[roadmap](https://sel4.systems/Info/Roadmap/) for anticipated
 release dates.
 
 ## Can I run seL4 on an MMU-less microcontroller?
@@ -148,7 +148,7 @@ on top of seL4? == Yes, seL4 can run Linux in a virtual machine. At
 present the master branch supports this on ARMv7 processors (presently
 A15/A7 cores). For x86 there is experimental virtualisation support
 (requiring Intel VT-x, ETP and a HPET that supports MSI delivery).
-Please see the \[\[<https://sel4.systems/Info/Roadmap/%7Croadmap>\]\]
+Please see the [roadmap](https://sel4.systems/Info/Roadmap/)
 for anticipated release of a mature version.
 
 To support virtual machines, seL4 itself runs as a hypervisor (x86
@@ -216,7 +216,7 @@ properties, and interactive mathematical proof which requires manual
 effort.
 
 The seL4 verification uses formal mathematical proof in the theorem
-prover \[\[<http://isabelle.in.tum.de/%7CIsabelle/HOL>\]\]. This theorem
+prover [Isabelle/HOL](http://isabelle.in.tum.de/). This theorem
 prover is interactive, but offers a comparatively high degree of
 automation. It also offers a very high degree of assurance that the
 resulting proof is correct.
@@ -391,10 +391,10 @@ C code is the machine interface and boot code, their behavior is an
 explicit assumption to the proof.
 
 You can see the exact verification config options in
-\[\[<https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile%7Cl4v/spec/cspec/c/Makefile>\]\].
+[l4v/spec/cspec/c/Makefile](https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile).
 The machine interface are the functions that correspond to the ones in
 the Haskell file
-\[\[<https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs%7CHardware.lhs>\]\].
+[Hardware.lhs](https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs).
 
 You can further inspect the gory details by looking at the preprocessor
 output in the file kernel\_all.c\_pp in the proof build - this is what
@@ -613,7 +613,7 @@ it into something that can be run.
 
 There are two recommended ways to do this.
 
-> -   \[\[<http://sel4.systems/Info/CAmkES%7CCAmKES>\]\] is the
+> -   [CAmKES](http://sel4.systems/Info/CAmkES) is the
 >     Component Architecture for Micro-Kernel-based Embedded Systems. It
 >     provides a language for describing the distribution of resources
 >     to components, and the assignment of components to address spaces.
@@ -621,7 +621,7 @@ There are two recommended ways to do this.
 >     processes, but is generally more low-level.
 
 For build instructions, and how to get started, see the
-\[\[<http://sel4.systems/Info/GettingStarted/%7CDownload>\]\] page.
+[Download](http://sel4.systems/Info/GettingStarted/) page.
 Also, UNSW's \[\[<http://cs9242.web.cse.unsw.edu.au/%7CAdvanced>
 Operating Systems course\]\] has an extensive project component that
 builds an OS on top of seL4. If you have access to a Sabre Lite board,

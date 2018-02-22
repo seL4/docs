@@ -9,10 +9,10 @@ correctly receive and reply to individual CAN frames, when frames were
 being received at the maximum rate of the bus the CAmkES application
 would only print out the first, last and occasionally a frame in the
 middle. Read more about CAN
-\[\[<https://en.wikipedia.org/wiki/CAN_bus%7Chere>\]\], and
-\[\[<https://www.saleae.com/index%7Chere>\]\] is the Saleae Logic Pro 8
+[here](https://en.wikipedia.org/wiki/CAN_bus), and
+[here](https://www.saleae.com/index) is the Saleae Logic Pro 8
 site. Information about the TK1-SOM daughter board that we use is
-\[\[<https://bitbucket.csiro.au/projects/OH/repos/tk1som-can-daughterboard/browse%7Chere>\]\].
+[here](https://bitbucket.csiro.au/projects/OH/repos/tk1som-can-daughterboard/browse).
 
 {{<attachment:setup.JPG>||width=50%}}
 

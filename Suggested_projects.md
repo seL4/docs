@@ -40,7 +40,7 @@ Some interesting platforms that could support seL4 include:
 ## Qubes
 
 
-\[\[<https://qubes-os.org/%7CQubes>\]\] is an open source operating
+[Qubes](https://qubes-os.org/) is an open source operating
 system designed to provide strong security for desktop computing using
 virtualisation to provide isolation. Qubes is based on Xen. seL4 is a
 much better fit for Qubes. The project is to port Qubes to seL4 (or
@@ -68,7 +68,7 @@ environment would be useful.
 
 
 Port the PC game
-\[\[<https://en.wikipedia.org/wiki/Doom_(1993_video_game)%7CDoom>\]\] to
+[Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game)) to
 run on seL4.
 
 ## Minix 3 on seL4
@@ -92,7 +92,7 @@ internally:
 > -   reasonably mature support for a subset of C++ (no template
 >     library), we'll probably release that soon for others to build on
 > -   we have Haskell sort-of running on seL4 (thanks or friends from
->     \[\[<https://galois.com/%7CGalois>\]\] for their help), should be
+>     [Galois](https://galois.com/) for their help), should be
 >     released in the near future
 > -   there is a student-level port of Go, which is bitrotted but could
 >     be made available if someone wants to revive it
@@ -106,4 +106,4 @@ foreseeable future, as this not only requires a good understanding of
 the kernel design and implementation, but also a good understanding of
 what is feasible to verify. Several of these internal projects are
 reasonably mature and will be pushed into the public tree soon, see our
-\[\[<http://sel4.systems/Info/Roadmap/%7CRoadmap>\]\]
+[Roadmap](http://sel4.systems/Info/Roadmap/)

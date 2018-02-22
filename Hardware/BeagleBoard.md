@@ -2,7 +2,7 @@
 
 
 This page documents booting seL4 on the
-\[\[<http://beagleboard.org/beagleboard%7CBeagleboard>\]\], Omap
+[Beagleboard](http://beagleboard.org/beagleboard), Omap
 3530See.
 
 \[\[<http://sel4.systems/pipermail/devel/2014-August/000030.html%7CTim>
@@ -75,7 +75,7 @@ script/image into some RAM address to be run || ||run ||run scripts ||
 ## Running seL4test
  Get the sel4test-manifest repo using the
 instructions at
-\[\[<https://sel4.systems/Info/Hardware/home.pml%7CDownload>\]\]
+[Download](https://sel4.systems/Info/Hardware/home.pml)
 
 Then run:
 

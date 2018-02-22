@@ -2,7 +2,7 @@
 
 
 This page provides info on the
-\[\[<http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620%7COdroid-XU>\]\]
+[Odroid-XU](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620)
 Exynos 5 board
 
 seL4 assumes that one boots in HYP mode. To do this, one needs a new

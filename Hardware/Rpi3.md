@@ -1,8 +1,8 @@
 ## Hardware
 
-\[\[<https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf%7CRPI-3B-V1_2-SCHEMATIC-REDUCED.pdf>\]\]
+[RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf](https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf)
 ||Feature ||Part ||Datasheet || ||USB+ETH ||SMSC LAN9514
-||\[\[<http://ww1.microchip.com/downloads/en/DeviceDoc/9514.pdf%7C9514.pdf>\]\]
+||[9514.pdf](http://ww1.microchip.com/downloads/en/DeviceDoc/9514.pdf)
 || ||SoC ||BCM2837 || ||
 
 ## Running seL4 on the Raspberry Pi 3

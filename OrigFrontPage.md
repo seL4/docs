@@ -22,4 +22,4 @@ contribute and share:
 To learn more about what a WikiWikiWeb is, read about
 MoinMoin:WhyWikiWorks and the MoinMoin:WikiNature.
 
-This wiki is powered by \[\[<http://moinmo.in/%7CMoinMoin>\]\].
+This wiki is powered by [MoinMoin](http://moinmo.in/).

@@ -49,8 +49,8 @@ tip of each repository and may break when you pull in changes.
 
 Supported projects are:
 
-> -   \[\[<https://github.com/seL4/sel4test-manifest%7Csel4test>\]\]
-> -   \[\[<https://github.com/seL4/verification-manifest%7Cverification>\]\]
+> -   [sel4test](https://github.com/seL4/sel4test-manifest)
+> -   [verification](https://github.com/seL4/verification-manifest)
 
 ## Upgrading
 

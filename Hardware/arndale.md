@@ -1,5 +1,5 @@
 > . seL4 supports the the
-> \[\[<http://www.arndaleboard.org/wiki/index.php/Main_Page%7CArndale>\]\]
+> [Arndale](http://www.arndaleboard.org/wiki/index.php/Main_Page)
 > dual core A15 ARM development board.
 
 # Client setup
@@ -97,7 +97,7 @@ Now run:
 
 ## References
 
-\[\[<http://www.arndaleboard.org/%7Chttp://www.arndaleboard.org>\]\]
+[http://www.arndaleboard.org](http://www.arndaleboard.org/)
 
 \[\[<https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot%7CPXE> boot
 setup\]\]

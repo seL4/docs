@@ -2,10 +2,10 @@
 
 
 seL4 developers and other community members can be reached on the
-\[\[<https://en.wikipedia.org/wiki/Internet_Relay_Chat%7CIRC>\]\]
+[IRC](https://en.wikipedia.org/wiki/Internet_Relay_Chat)
 channel
 \[\[[http://webchat.freenode.net/?channels=\#sel4|\#sel4](http://webchat.freenode.net/?channels=#sel4%7C#sel4)\]\],
-available on the \[\[<http://www.freenode.net/%7CFreenode>\]\] irc
+available on the [Freenode](http://www.freenode.net/) irc
 network, chat.freenode.net.
 
 To join the discussion, you'll need an irc client. See

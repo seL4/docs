@@ -4,7 +4,7 @@
 ## Benchmarking project
  There is a set of microbenchmarks for seL4
 available, see the
-\[\[<https://github.com/seL4/sel4bench-manifest%7Csel4bench-manifest>\]\].
+[sel4bench-manifest](https://github.com/seL4/sel4bench-manifest).
 
 # Benchmarking Tools
 
@@ -345,7 +345,7 @@ which returns the log buffer index. Note, if the buffer is
 full/saturated, it will return the last entry index of the log buffer.
 Finally, the log buffer can be analyzed to extract desired info. For
 reference, there are utility functions to extract such information in
-\[\[<https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/benchmark_track.h%7Csel4utils/benchmark_track.h>\]\].
+[sel4utils/benchmark_track.h](https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/benchmark_track.h).
 
 ### Hints
  If you want only entry or exit times instead of function

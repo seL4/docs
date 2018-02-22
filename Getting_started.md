@@ -28,8 +28,8 @@ licenses\]\].
 There are several repositories; the most interesting ones are the
 project repositories (whose names end in -manifest) and these two:
 
-> -   \[\[<https://github.com/seL4/l4v%7Cl4v>\]\] the seL4 proofs
-> -   \[\[<https://github.com/seL4/seL4%7CseL4>\]\] the seL4 kernel
+> -   [l4v](https://github.com/seL4/l4v) the seL4 proofs
+> -   [seL4](https://github.com/seL4/seL4) the seL4 kernel
 
 ## Projects
 
@@ -46,17 +46,17 @@ buildable system.
 
 The available projects so far are:
 
-> -   \[\[<https://github.com/seL4/verification-manifest%7Cverification>\]\],
+> -   [verification](https://github.com/seL4/verification-manifest),
 >     the seL4 proofs.
-> -   \[\[<https://github.com/seL4/sel4test-manifest%7CseL4test>\]\], a
+> -   [seL4test](https://github.com/seL4/sel4test-manifest), a
 >     test suite for seL4, including a Library OS layer.
-> -   \[\[<https://github.com/seL4/camkes-manifest%7CCAmkES>\]\], a
+> -   [CAmkES](https://github.com/seL4/camkes-manifest), a
 >     component architecture for embedded systems based on seL4. See the
 >     CAmkES pages for more documentation about CAmkES.
-> -   \[\[<https://github.com/seL4/camkes-vm-manifest%7CVMM>\]\] a
+> -   [VMM](https://github.com/seL4/camkes-vm-manifest) a
 >     component-based virtual machine monitor for ia32 platforms using
 >     Intel VT-X and VT-D extensions.
-> -   \[\[<https://github.com/seL4/refos-manifest%7CRefOS>\]\], a
+> -   [RefOS](https://github.com/seL4/refos-manifest), a
 >     reference example of how one might build a multi-server operating
 >     system on top of seL4. It was built as a student project.
 
@@ -78,7 +78,7 @@ to use Docker.
  You can also use Docker to isolate the dependencies
 from your machine. Instructions for using Docker for building seL4,
 CAmkES, and L4v can be found
-\[\[<https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles%7Chere>\]\].
+[here](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles).
 
 ### Using your local OS
  These instructions are for Ubuntu. They

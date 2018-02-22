@@ -9,7 +9,7 @@ explicit below.
 
 :   . An internal representation of the results of parsing a
     generalised grammar. More thorough definitions of ASTs are provided
-    \[\[<https://en.wikipedia.org/wiki/Abstract_syntax_tree%7Celsewhere>\]\],
+    [elsewhere](https://en.wikipedia.org/wiki/Abstract_syntax_tree),
     but this is noted here because the abbreviation 'AST' is used
     heavily in this documentation.
 

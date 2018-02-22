@@ -1,5 +1,5 @@
 seL4 supports the the
-\[\[<http://www.kmckk.com/eng/kzm.html%7CKZM-ARM11-01>\]\], which can
+[KZM-ARM11-01](http://www.kmckk.com/eng/kzm.html), which can
 also be simulated in qemu.
 
 # Simulation
@@ -13,7 +13,7 @@ started\]\]
 kzm\_simulation\_release\_xml\_defconfig make make simulate-kzm }}}
 
 See the sel4test
-\[\[<https://github.com/seL4/sel4test/blob/master/Makefile#L51%7CMakefile>\]\]
+[Makefile](https://github.com/seL4/sel4test/blob/master/Makefile#L51)
 for details on the targest. = Booting =
 
 TODO

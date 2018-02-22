@@ -1,6 +1,6 @@
 # seL4Test
 
-\[\[<https://github.com/seL4/sel4test-manifest%7Csel4test>\]\] is a test
+[sel4test](https://github.com/seL4/sel4test-manifest) is a test
 suite for seL4.
 
 First make sure you have

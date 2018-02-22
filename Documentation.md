@@ -15,7 +15,7 @@
 >     Microkernel Design lectures
 > -   \[\[<https://github.com/seL4/seL4/releases/latest%7CRelease>
 >     download page\]\] for the current release.
-> -   \[\[<http://sel4.systems/Info/Docs/seL4-manual-latest.pdf%7CManual>\]\]
+> -   [Manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
 >     for the current release.
 > -   \[\[seL4ManualAPIGeneration|Explanation of how the API docs in the
 >     manual are generated\]\]

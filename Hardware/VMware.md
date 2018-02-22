@@ -2,8 +2,8 @@
 
 
 This is a quick guide on how to run seL4 x86 on VMWare
-\[\[<http://www.vmware.com/au/products/workstation%7CWorkstation>\]\] /
-\[\[<https://www.vmware.com/go/downloadplayer%7CPlayer>\]\]. Written
+[Workstation](http://www.vmware.com/au/products/workstation) /
+[Player](https://www.vmware.com/go/downloadplayer). Written
 based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6
 and for a Linux host machine. May work on Mac host machine, won't work
 for Windows host (although general idea should be similar).

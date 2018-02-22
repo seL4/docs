@@ -65,7 +65,7 @@ Evaluation Kit\]\] ||Zynq 7000 ||A9 ||v7A ||No ||No ||unverified
 by''' ||'''maintained by''' ||'''description''' ||
 ||\[\[Hardware/zynqmp|??Zynq UltraScale+ MPSoC ZCU102 Evaluation
 Kit??\]\] ||Zynq !UltraScale+ MPSoC ||A53 ||v8A ||ARM HYP ||System MMU
-||unverified ||\[\[<http://dornerworks.com/%7CDornerWorks>\]\] ||Data61
+||unverified ||[DornerWorks](http://dornerworks.com/) ||Data61
 || || ||\[\[Hardware/jetsontx1|Jetson TX1 (NVIDIA) \]\] || Tegra X1
 ||Quad A57 ||v8A ||ARM HYP ||System MMU ||unverified ||Data61 ||Data61
 || A57 has hardware support for AArch32 and AArch64. The 64-bit seL4

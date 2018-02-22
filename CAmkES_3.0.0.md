@@ -27,8 +27,7 @@ revision="refs/tags/camkes-3.0.0"&gt; }}}
 Watch the mailing list for new releases, and update your version of
 CAmkES when '''you''' want to.
 
-=== I was using the "next" branch, and want to stay on the bleeding edge
-===
+### I was using the "next" branch, and want to stay on the bleeding edge
 
 You need to switch to the "master" branch. The "next" branch will
 continue to exist for a time for compatibility, but will no longer
@@ -53,7 +52,7 @@ There's a guide on the changes introduces by this version here:
 
 That's fine! All the old versions of CAmkES will continue to be
 available. The latest release of this branch is
-\[\[<https://github.com/seL4/camkes-tool/releases/tag/camkes-2.3.1%7Ccamkes-2.3.1>\]\].
+[camkes-2.3.1](https://github.com/seL4/camkes-tool/releases/tag/camkes-2.3.1).
 If you use repo, your manifest probably had a line resembling: {{{
 &lt;project name="camkes-tool.git" path="tools/camkes"&gt; }}}
 

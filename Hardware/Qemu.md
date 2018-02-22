@@ -4,7 +4,7 @@
 
 
 This is a quick guide on how to run seL4 x86/x64 in
-\[\[<http://www.qemu.org/%7CQemu>\]\]. QEMU is a generic and open source
+[Qemu](http://www.qemu.org/). QEMU is a generic and open source
 machine emulator and virtualizer, and can emulate different
 architectures on different systems.
 
@@ -15,7 +15,7 @@ Guide\]\].
 We used Ubuntu 16.04 for our tests, but in theory qemu ''should'' work
 the same under Windows/MacOS.
 
-Note that \[\[<https://wiki.sel4.systems/Hardware/VMware%7CVMWare>\]\]
+Note that [VMWare](https://wiki.sel4.systems/Hardware/VMware)
 can be used to run seL4 too, but it requires a licensed version of
 VMWare workstation (although the free VMWare player can be used too -
 but it doesn't offer a lot of features, making its use even more
@@ -43,10 +43,10 @@ and look for '''vmx''' flag.
 ## Compilation
 
 
-We are using \[\[<https://github.com/seL4/camkes-vm%7Ccamkes-vm>\]\]
+We are using [camkes-vm](https://github.com/seL4/camkes-vm)
 Github repository. It contains Virtual Machine build as a CAmkES
 component. More information about the VM on seL4 can be found on
-\[\[<https://wiki.sel4.systems/CAmkESVM%7CCAmkESVM>\]\] page.
+[CAmkESVM](https://wiki.sel4.systems/CAmkESVM) page.
 
 I replicate some of the steps described there to make it easier to
 follow. First pull the code from the repository using ''repo'' tool.
@@ -56,7 +56,7 @@ follow. First pull the code from the repository using ''repo'' tool.
 
 We use ''optiplex9020'' configuration, because it is the most generic
 one. The other configurations for
-\[\[<https://wiki.sel4.systems/CMA34DBMC%7CCMA34DBMC>\]\] can be
+[CMA34DBMC](https://wiki.sel4.systems/CMA34DBMC) can be
 compiled too, but you can't run them properly in qemu because they
 require a very specific hardware.
 
@@ -83,7 +83,7 @@ And you should be able to see the login prompt after a while:
 
 Login with the username "root" and the password "root". Again, for more
 details about the VM, go to
-\[\[<https://wiki.sel4.systems/CAmkESVM%7CCAmkESVM>\]\] page.
+[CAmkESVM](https://wiki.sel4.systems/CAmkESVM) page.
 
 The qemu arguments are:
 
@@ -118,11 +118,11 @@ support VBE with loading a kernel with --kernel. You need to use GRUB to
 load the kernel for the results you want, as that initializes VBE. Qemu
 with -vga std DOES support VBE, it just wont initialize it for you (like
 grub).'' (more
-\[\[<http://f.osdev.org/viewtopic.php?f=1&t=27927%7Chere>\]\])
+[here](http://f.osdev.org/viewtopic.php?f=1&t=27927))
 
 The most convenient way to get a hdd set up, was to first set up a
 VMWare virtual hard drive as described in
-\[\[<https://wiki.sel4.systems/Hardware/VMware%7CVMWare>\]\] (i.e.
+[VMWare](https://wiki.sel4.systems/Hardware/VMware) (i.e.
 install linux, modify grub, save images on the hdd). The second step is
 to convert the VMDK image to qcow2 (qemu) image. Use ''qemu-img'':
 

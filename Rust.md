@@ -19,7 +19,7 @@ generated functions) you need to have libclang installed.
 
 
 There is currently a sample project
-\[\[<https://github.com/SEL4PROJ/rust-camkes-samples%7Crust-camkes-samples>\]\]
+[rust-camkes-samples](https://github.com/SEL4PROJ/rust-camkes-samples)
 that demonstrates this functionality.
 
 The following commands get a sample camkes hello world app written in
@@ -40,8 +40,8 @@ dependencies, the following dependencies are required:
 
 > -   cargo and rustc: These are the rust build tool and compiler, they
 >     should be installed with
->     \[\[<https://github.com/brson/multirust%7Cmultirust>\]\]
->     (\[\[<https://www.rustup.rs/%7Crustup.rs>\]\] is still in beta,
+>     [multirust](https://github.com/brson/multirust)
+>     ([rustup.rs](https://www.rustup.rs/) is still in beta,
 >     and the build system has only been tested with multirust but
 >     rustup.sh should still be fine as long as rustc and cargo work)
 > -   Cmake &gt;= 3.5.2

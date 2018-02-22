@@ -101,18 +101,18 @@ Lite. The ones for Android support Fastboot; the mainline ones do not.
 We use the one from
 <git://github.com/boundarydevices/u-boot-2009-08.git> with these patches
 applied: ||&lt;tableclass="table table-condensed"&gt;Name ||Purpose ||
-||\[\[<https://sel4.systems/Info/Hardware/sabreLite/01_android-imx6-uboot-enable_bootelf.patch%7C01_android-imx6-uboot-enable_bootelf.patch>\]\]
+||[01_android-imx6-uboot-enable_bootelf.patch](https://sel4.systems/Info/Hardware/sabreLite/01_android-imx6-uboot-enable_bootelf.patch)
 ||Enable bootelf command ||
-||\[\[<https://sel4.systems/Info/Hardware/sabreLite/02_android-imx6-uboot-fastbootfix.patch%7C02_android-imx6-uboot-fastbootfix.patch>\]\]
+||[02_android-imx6-uboot-fastbootfix.patch](https://sel4.systems/Info/Hardware/sabreLite/02_android-imx6-uboot-fastbootfix.patch)
 ||Fix fastboot to allow the booting of elf and u-boot images ||
-||\[\[<https://sel4.systems/Info/Hardware/sabreLite/03_android-imx6-uboot-extra_fs_features.patch%7C03_android-imx6-uboot-extra_fs_features.patch>\]\]
+||[03_android-imx6-uboot-extra_fs_features.patch](https://sel4.systems/Info/Hardware/sabreLite/03_android-imx6-uboot-extra_fs_features.patch)
 ||Add some extra file systems and associated features ||
-||\[\[<https://sel4.systems/Info/Hardware/sabreLite/04_android-imx6-uboot-update_env.patch%7C04_android-imx6-uboot-update_env.patch>\]\]
+||[04_android-imx6-uboot-update_env.patch](https://sel4.systems/Info/Hardware/sabreLite/04_android-imx6-uboot-update_env.patch)
 ||Setup default environment. In particular, bootsel4\_mmc and
 bootsel4\_net ||
 
 Prebuilt:
-\[\[<https://sel4.systems/Info/Hardware/sabreLite/u-boot.bin%7Cu-boot.bin>\]\]
+[u-boot.bin](https://sel4.systems/Info/Hardware/sabreLite/u-boot.bin)
 
 The prebuilt version is for booting from SPI.
 

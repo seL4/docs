@@ -84,5 +84,5 @@ which is the same as the old behaviour.
 
 # More details
  See the
-\[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.2.0/docs/index.md%7Cdocumentation>\]\]
+[documentation](https://github.com/seL4/camkes-tool/blob/camkes-3.2.0/docs/index.md)
 or ask on the mailing list!

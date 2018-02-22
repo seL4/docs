@@ -1,7 +1,7 @@
 \#\#master-page:FrontPage \#format wiki \#language en \#pragma
 section-numbers off = seL4 Wiki = This WIKI is for cooperatively
 developing and sharing documentation on
-\[\[<http://sel4.systems%7CseL4>\]\]
+[seL4](http://sel4.systems)
 
 ### Editing the Wiki
 

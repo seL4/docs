@@ -38,7 +38,7 @@ Similarly, enable this setting by using make menuconfig and setting:
 ## Qemu
 
 
-\[\[<http://www.qemu.org/%7CQemu>\]\] is a simulator that provides
+[Qemu](http://www.qemu.org/) is a simulator that provides
 software emulation of a hardware platform. It is useful for developing
 and debugging embedded software when you do not have access to the
 target platform. Even if you do have the target hardware, Qemu can
@@ -104,7 +104,7 @@ Qemu.
 ### Using GDB with Qemu
 
 
-\[\[<https://www.gnu.org/s/gdb/%7CGDB>\]\] is a debugger commonly used
+[GDB](https://www.gnu.org/s/gdb/) is a debugger commonly used
 in C application development. Though not as seamless as debugging a
 native Linux application, it is possible to use GDB to debug within
 Qemu's emulated environment.
@@ -305,6 +305,6 @@ debugging is done with:
 > -   \_\_builtin\_return\_address (to figure out stack traces).
 
 In the kernel, we provide debug\_printKernelEntryReason found in
-\[\[<https://github.com/seL4/seL4/blob/master/include/api/debug.h%7Cdebug.h>\]\]
+[debug.h](https://github.com/seL4/seL4/blob/master/include/api/debug.h)
 which can be used at any point in the kernel to output the current
 operation that the kernel is doing.

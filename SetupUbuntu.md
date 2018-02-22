@@ -32,7 +32,7 @@ To find out what distro you're using: {{{ lsb\_release -a }}}
 
 
 Ubuntu is relatively straightforward, as
-\[\[<http://www.linaro.org/%7CLinaro>\]\] maintain cross compilers for
+[Linaro](http://www.linaro.org/) maintain cross compilers for
 it — see <https://wiki.ubuntu.com/ToolChain>. You will however have to
 have enabled the Universe repository.
 
@@ -123,4 +123,4 @@ g++-arm-linux-gnueabi }}}
  The compilers available in Precise do
 not compile seL4 correctly. Either upgrade to Trusty, or install
 compilers from
-\[\[<https://www.mentor.com/embedded-software/codesourcery%7CCodeSourcery>\]\].
+[CodeSourcery](https://www.mentor.com/embedded-software/codesourcery).

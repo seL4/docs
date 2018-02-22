@@ -144,6 +144,6 @@ projects. Read more: \[\[CAmkESCLI\]\]
 
 The '''Build Dependencies''' section covers how to install the python
 dependencies. The python metapackage,
-\[\[<https://pypi.python.org/pypi/camkes-deps%7Ccamkes-deps>\]\], is
+[camkes-deps](https://pypi.python.org/pypi/camkes-deps), is
 implemented in the CAmkES repo
-\[\[<https://github.com/seL4/camkes-tool/blob/master/tools/python-deps/setup.py%7Chere>\]\].
+[here](https://github.com/seL4/camkes-tool/blob/master/tools/python-deps/setup.py).

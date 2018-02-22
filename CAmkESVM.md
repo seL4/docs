@@ -14,7 +14,7 @@ something basic, and add to it:
 single, very basic linux as a guest in the vm:
 
 {{{ Welcome to Buildroot buildroot login: }}} The linux running here was
-built using \[\[<https://buildroot.org/%7Cbuildroot>\]\]. This tool
+built using [buildroot](https://buildroot.org/). This tool
 creates a compatible kernel and root filesystem with busybox and not
 much else, and runs on a ramdisk (the actual hard drive isn't mounted).
 Login with the username "root" and the password "root".

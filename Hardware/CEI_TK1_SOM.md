@@ -38,7 +38,7 @@ The Pinmux spreadsheet, for use with
 \[\[<attachment:CEI_TK1_SOM_customer_pinmux_v11.xlsm%7Chere>.\]\]
 
 The original pinmux spreadsheet from Colorado is
-\[\[<attachment:tk1-som_pinmux_V2.4.xlsm%7Chere>\]\]
+[here](attachment:tk1-som_pinmux_V2.4.xlsm)
 
 &lt;&lt;Anchor(mmc)&gt;&gt; == Accessing the MMC == Attach a USB cable
 between the TK1-SOM's OTG port and your host, then on the U-Boot console

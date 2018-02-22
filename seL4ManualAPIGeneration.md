@@ -4,7 +4,7 @@
 The documentation of the seL4 API in the
 \[\[<http://sel4.systems/Info/Docs/seL4-manual-latest.pdf%7CseL4>
 manual\]\] is automatically generated from comments in
-\[\[<https://github.com/seL4/seL4/tree/master/libsel4%7Clibsel4>\]\]'s
+[libsel4](https://github.com/seL4/seL4/tree/master/libsel4)'s
 source code. This page documents this process.
 
 &lt;&lt;TableOfContents()&gt;&gt;
@@ -77,7 +77,7 @@ intermediate format (ie. XML) rather than try to coerce doxygen into
 generating perfectly-styled LaTeX.
 
 The script that translates doxygen-generated xml into LaTeX is in:
-\[\[<https://github.com/seL4/seL4/blob/master/manual/tools/parse_doxygen_xml.py%7Cmanual/tools/parse_doxygen_xml.py>\]\].
+[manual/tools/parse_doxygen_xml.py](https://github.com/seL4/seL4/blob/master/manual/tools/parse_doxygen_xml.py).
 
 ### Custom Notation in Doxygen Comments
 
@@ -98,10 +98,10 @@ documentation with \\autoref{sec:LABEL}||
 \\autoref{sec:SEC}|| ||&lt;shortref sec="SEC"/&gt;||Translated to the
 latex \\ref{sec:SEC}|| ||&lt;errorenumdesc/&gt;||Translated to the latex
 \\errorenumdesc, a custom command defined in
-\[\[<https://github.com/seL4/seL4/blob/master/manual/parts/api.tex%7Cmanual/parts/api.tex>\]\]||
+[manual/parts/api.tex](https://github.com/seL4/seL4/blob/master/manual/parts/api.tex)||
 ||&lt;obj name="NAME"/&gt;||Translated to the latex \\obj{NAME}, a
 custom command defined in
-\[\[<https://github.com/seL4/seL4/blob/master/manual/manual.tex%7Cmanual/manual.tex>\]\]||
+[manual/manual.tex](https://github.com/seL4/seL4/blob/master/manual/manual.tex)||
 ||&lt;texttt text="TEXT"/&gt;||Translated to the latex \\texttt{TEXT}||
 
 Note that these must appear within @xmlonly ... @endxmlonly blocks in
@@ -126,7 +126,7 @@ Each function in the API must have the following documentation:
 
 If a required part of a function's documentation is empty, the
 translation script will insert the LaTeX command \\todo, defined in
-\[\[<https://github.com/seL4/seL4/blob/master/manual/parts/api.tex%7Cmanual/parts/api.tex>\]\].
+[manual/parts/api.tex](https://github.com/seL4/seL4/blob/master/manual/parts/api.tex).
 It generates the text "TODO" to help readers of the manual identify
 which parts of the API are undocumented.
 
@@ -150,13 +150,13 @@ file.
 The correct behaviour of the manual build system depends on a specific
 doxygen configuration. A Doxyfile containing this configuration is
 checked into the kernel repo at
-\[\[<https://github.com/seL4/seL4/blob/master/manual/Doxyfile%7Cmanual/Doxyfile>\]\]
+[manual/Doxyfile](https://github.com/seL4/seL4/blob/master/manual/Doxyfile)
 
 ## System Calls
 
 
 A prototype for each system call is declared in
-\[\[<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/syscalls.h%7Clibsel4/include/sel4/syscalls.h>\]\].
+[libsel4/include/sel4/syscalls.h](https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/syscalls.h).
 Each function is documented with a comment of the form described above.
 
 ## Object Invocations
@@ -167,17 +167,17 @@ Each function is documented with a comment of the form described above.
 
 These are more complicated, as the C source code implementing the user-level object invocations functions is generated from some interface descriptions in XML. The following XML files contain object invocation interface descriptions:
 
-:   -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml%7Clibsel4/include/interfaces/sel4.xml>\]\]
-    -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml%7Clibsel4/arch_include/x86/interfaces/sel4arch.xml>\]\]
-    -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/arm/interfaces/sel4arch.xml%7Clibsel4/arch_include/arm/interfaces/sel4arch.xml>\]\]
-    -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml%7Clibsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml>\]\]
-    -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml%7Clibsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml>\]\]
-    -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml%7Clibsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml>\]\]
-    -   \[\[<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml%7Clibsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml>\]\]
+:   -   [libsel4/include/interfaces/sel4.xml](https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml)
+    -   [libsel4/arch_include/x86/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml)
+    -   [libsel4/arch_include/arm/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/arch_include/arm/interfaces/sel4arch.xml)
+    -   [libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml)
+    -   [libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml)
+    -   [libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml)
+    -   [libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml)
 
 There is a script in the sel4 repo for generating C header files from a
 given interface description:
-\[\[<https://github.com/seL4/seL4/blob/master/libsel4/tools/syscall_stub_gen.py%7Clibsel4/tools/syscall_stub_gen.py>\]\].
+[libsel4/tools/syscall_stub_gen.py](https://github.com/seL4/seL4/blob/master/libsel4/tools/syscall_stub_gen.py).
 Note that despite its name, the script generates object invocation stubs
 - not syscall stubs.
 
@@ -189,7 +189,7 @@ descriptions in the XML files listed above. The XML language with which
 the interfaces are described contains tags for documenting functions.
 For the purpose of validation, the XML schema defining this language is
 in:
-\[\[<https://github.com/seL4/seL4/blob/master/libsel4/tools/sel4_idl.dtd%7Clibsel4/tools/sel4_idl.dtd>\]\].
+[libsel4/tools/sel4_idl.dtd](https://github.com/seL4/seL4/blob/master/libsel4/tools/sel4_idl.dtd).
 This is a superset of the XML tags used in doxygen comments. The doxygen
 comment tags described above have the same meaning in the interface
 description files. Additional tags are used for the description and

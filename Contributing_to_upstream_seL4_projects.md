@@ -39,7 +39,7 @@ combinations of various repositories and libraries are guaranteed to be
 in sync at the tip of “master”. If you want to use a known, stable build
 of a project, then you might want to consider checking out a named
 version tag of that repository’s manifest. For example, in the
-“\[\[<https://github.com/seL4/camkes-manifest%7Ccamkes-manifest>\]\]”
+“[camkes-manifest](https://github.com/seL4/camkes-manifest)”
 repository, there are several versioned manifests such as
 “default-2.0.x.xml”, “default2.1.x.xml” and so on.
 
