@@ -75,7 +75,7 @@ run on seL4.
 
 
 Minix is the original multi-server OS by Tannenbaum.
-\[\[<http://www.minix3.org/%7CMinix> 3\]\] is the latest shiny version
+[Minix 3](http://www.minix3.org/) is the latest shiny version
 of it, and is based on a more limited microkernel than seL4. So far x86
 is supported.
 

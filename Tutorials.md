@@ -12,7 +12,7 @@ up your machine\]\].
 
 The build dependencies for seL4 can be found in the
 {{{Prerequisites.md}}}
-(\[\[<https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md%7CClick>!\]\])
+([Click!](https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md))
 file in the root of the SEL4-tutorials GIT repository.
 
 ## seL4 tutorials

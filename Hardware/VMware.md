@@ -118,7 +118,7 @@ will need to repeat this entire above process every time you build & run
 seL4. Fortunately I have a script does all of the above in one go (may
 need editing of paths here and there to fit where you put things).
 
-\[\[<attachment:seL4vmw%7CDownload> seL4vmw\]\]
+[Download seL4vmw](attachment:seL4vmw)
 
 ### Do It Manually
 

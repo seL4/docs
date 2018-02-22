@@ -172,7 +172,7 @@ explicit below.
     Previously this was considered distinct from ADL, but now the term
     'ADL' is intended to encompass both syntaxes. The CAmkES IDL subset
     is heavily inspired by
-    \[\[<http://www.omg.org/gettingstarted/omg_idl.htm%7COMG> IDL\]\].
+    [OMG IDL](http://www.omg.org/gettingstarted/omg_idl.htm).
 
 ### Internal Instance
 

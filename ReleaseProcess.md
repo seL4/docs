@@ -4,7 +4,7 @@
 ## Version Policy
 
 
-seL4 follows \[\[<http://semver.org/%7Csemantic> versioning\]\]. In
+seL4 follows [semantic versioning](http://semver.org/). In
 short:
 
 "Given a version number MAJOR.MINOR.PATCH, increment the:

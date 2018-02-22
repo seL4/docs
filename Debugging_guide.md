@@ -160,7 +160,7 @@ configured will have no effect on userspace calls to {{{printf}}}.
 Now that we are stopped at a breakpoint, all the standard GDB operations
 are possible (inspect registers or the stack, single-step, continue
 until function exit, ...). More information is available in the
-\[\[<http://www.gnu.org/software/gdb/documentation/%7CGDB> manual\]\].
+[GDB manual](http://www.gnu.org/software/gdb/documentation/).
 
 Be warned that if you are debugging the kernel's early boot steps,
 something that may not be immediately obvious is that debugging across a

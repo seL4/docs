@@ -630,8 +630,8 @@ familiarising yourself with seL4.
 
 # Where can I learn more?
  NICTA's
-\[\[<http://ssrg.nicta.com.au/projects/seL4/%7CseL4> project\]\] and
-\[\[<http://ssrg.nicta.com.au/projects/TS/%7CTrustworthy> Systems\]\]
+[seL4 project](http://ssrg.nicta.com.au/projects/seL4/) and
+[Trustworthy Systems](http://ssrg.nicta.com.au/projects/TS/)
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 

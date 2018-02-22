@@ -13,7 +13,7 @@ source code. This page documents this process.
 
 
 This page will use file paths relative to the root of the
-\[\[<https://github.com/seL4/seL4%7CseL4> repository\]\]. In projects
+[seL4 repository](https://github.com/seL4/seL4). In projects
 cloned using a repo manifest, this will correspond to the kernel
 subdirectory of the top-level directory.
 

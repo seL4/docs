@@ -184,8 +184,8 @@ could use some contributions – other than that, gauging what you can do
 externally is for the time being, difficult. If you have ideas, please
 feel free to visit the NICTA mailing lists and chime in:
 
-  -   \[\[<https://sel4.systems/lists/listinfo/announce%7CseL4> Announce\]\].
-  -   \[\[<https://sel4.systems/lists/listinfo/devel%7CseL4> Devel\]\].
+  -   [seL4 Announce](https://sel4.systems/lists/listinfo/announce).
+  -   [seL4 Devel](https://sel4.systems/lists/listinfo/devel).
 
 # Learn more about seL4
  For someone just getting to know about seL4

@@ -47,7 +47,7 @@ will be produced in manual.pdf.
           Isabelle textbook\]\]
       -   \[\[<http://isabelle.in.tum.de/website-Isabelle2013-2/dist/Isabelle2013-2/doc/tutorial.pdf>|
           Isabelle 2013-2 tutorial\]\]
-      -   \[\[<http://isabelle.in.tum.de/%7CIsabelle> website\]\]
+      -   [Isabelle website](http://isabelle.in.tum.de/)
       -   \[\[<http://stackoverflow.com/questions/tagged/isabelle%7CIsabelle>
           on Stack Overflow\]\]
  

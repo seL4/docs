@@ -67,5 +67,5 @@ be happy to hand control to a suitable external maintainer for many of
 those. Our priority is on building an ecosystem and easing deployment of
 and with the system.
 
-See \[\[<https://sel4.systems/Info/Projects/%7CSuggested> Projects\]\]
+See [Suggested Projects](https://sel4.systems/Info/Projects/)
 for suggestions on where to contribute.

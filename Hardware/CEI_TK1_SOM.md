@@ -35,7 +35,7 @@ and CONFIG\_CPU\_IDLE off.
 
 The Pinmux spreadsheet, for use with
 <https://github.com/NVIDIA/tegra-pinmux-scripts> is
-\[\[<attachment:CEI_TK1_SOM_customer_pinmux_v11.xlsm%7Chere>.\]\]
+[here.](attachment:CEI_TK1_SOM_customer_pinmux_v11.xlsm)
 
 The original pinmux spreadsheet from Colorado is
 [here](attachment:tk1-som_pinmux_V2.4.xlsm)

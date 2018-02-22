@@ -147,7 +147,7 @@ preempted, blocks, or makes an RPC to an active thread (a thread that
 has its own scheduling context).
 
 For further detail, please see
-\[\[<https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf%7Cthis> paper\]\]
+[this paper](https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf)
 which explains in detail the sporadic server algorithm the MCS version
 of seL4 uses to implement temporal isolation. Note that in code, we use
 the term refill to talk about sporadic replenishments for brevity.
@@ -236,7 +236,7 @@ You're done. Please enjoy experimenting with the pre-release MCS version
 of seL4. Recall that this version is currently undergoing verification,
 but is not yet verified - meaning it can crash. If it does please let us
 know by raising an issue on the
-\[\[<https://github.com/seL4/seL4/issues%7CseL4> Github\]\].
+[seL4 Github](https://github.com/seL4/seL4/issues).
 
 We welcome your feedback and comments, hit us up on the developers
 mailing list: <https://sel4.systems/lists/listinfo/devel>.

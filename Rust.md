@@ -3,7 +3,7 @@
 in userspace on seL4 utilizing the existing build system. It focuses on
 Interoperability between existing c based libraries and applications and
 working with CAmkES. For rust only projects on seL4 see
-\[\[<https://robigalia.org/%7Cthe> robigalia project\]\].
+[the robigalia project](https://robigalia.org/).
 
 ### Setup:
  In addition to the typical sel4 build prerequisites you
