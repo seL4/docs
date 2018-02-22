@@ -168,21 +168,21 @@ you run the seL4 images from before, seL4 scans the pci bus too. Here is
 the output:
 
 {{{ PCI :: 00.02.00 : Unknown vendor ID. Unknown device ID. (vid 0x1234
-did 0x1111) line0 pin0 BAR0 : \[ mem 0xfd000000 sz 0x1000000 szmask
-0xff000000 prefetch \] BAR2 : \[ mem 0xfebf0000 sz 0x1000 szmask
-0xfffff000 \] lib_pci_scan_dev found pci device 0 3 BASE_ADDR\[0\]
----- base_addr_space\[0\]: 0x0 \[PCI_BASE_ADDRESS_SPACE_MEMORY\]
-base_addr_type\[0\]: 0x0 \[ 32bit \] base_addr_prefetchable\[0\]: no
-base_addr\[0\]: 0xfebc0000 base_addr_size_mask\[0\]: 0xfffe0000
-BASE_ADDR\[1\] ---- base_addr_space\[1\]: 0x1
-\[PCI_BASE_ADDRESS_SPACE_IO\] base_addr_type\[1\]: 0x0 \[ 32bit \]
-base_addr_prefetchable\[1\]: no base_addr\[1\]: 0xc000
-base_addr_size_mask\[1\]: 0xffffffc0
+did 0x1111) line0 pin0 BAR0 : [ mem 0xfd000000 sz 0x1000000 szmask
+0xff000000 prefetch ] BAR2 : [ mem 0xfebf0000 sz 0x1000 szmask
+0xfffff000 ] lib_pci_scan_dev found pci device 0 3 BASE_ADDR[0]
+---- base_addr_space[0]: 0x0 [PCI_BASE_ADDRESS_SPACE_MEMORY]
+base_addr_type[0]: 0x0 [ 32bit ] base_addr_prefetchable[0]: no
+base_addr[0]: 0xfebc0000 base_addr_size_mask[0]: 0xfffe0000
+BASE_ADDR[1] ---- base_addr_space[1]: 0x1
+[PCI_BASE_ADDRESS_SPACE_IO] base_addr_type[1]: 0x0 [ 32bit ]
+base_addr_prefetchable[1]: no base_addr[1]: 0xc000
+base_addr_size_mask[1]: 0xffffffc0
 
 PCI :: 00.03.00 : intel Unknown device ID. (vid 0x8086 did 0x100e) line11 pin1
 
-:   BAR0 : \[ mem 0xfebc0000 sz 0x20000 szmask 0xfffe0000 \] BAR1 : \[
-    io 0xc000 sz 0x40 szmask 0xffffffc0 \]
+:   BAR0 : [ mem 0xfebc0000 sz 0x20000 szmask 0xfffe0000 ] BAR1 : [
+    io 0xc000 sz 0x40 szmask 0xffffffc0 ]
 
 }}}
 

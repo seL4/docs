@@ -7,14 +7,14 @@
 Previously all attribute settings were treated as strings by templates.
 Settings are now interpreted as an appropriate python type.
 
-{{{ // list foo.bar = \[0x60, 0x64\];
+{{{ // list foo.bar = [0x60, 0x64];
 
 // boolean moo.cow = true;
 
 // string baz.qux = "hello";
 
-// dict crazy.stuff = { "key" : \["polymorphic", 42, "list",
-{"hello":true} \] };
+// dict crazy.stuff = { "key" : ["polymorphic", 42, "list",
+{"hello":true} ] };
 
 // appropriate numeric type arithmetic.expressions = 1 &lt;&lt; (2 \*\*
 2) == 3 ? -2 : 0x9; }}}

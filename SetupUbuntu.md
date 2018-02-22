@@ -38,12 +38,12 @@ have enabled the Universe repository.
 
 For Ubuntu, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](\#all)) then the ones for your system:
 
-:   -   \[\[\#ubuntu|Ubuntu later than Precise Pangolin (tested on
-        14.04LTS — Trusty Tahr)\]\]
+:   -   [[\#ubuntu|Ubuntu later than Precise Pangolin (tested on
+        14.04LTS — Trusty Tahr)]]
 
 ## Instructions
  === Instructions common to Debian and all Debian
-derivatives \[Ubuntu, etc\] === &lt;&lt;Anchor(all)&gt;&gt;
+derivatives [Ubuntu, etc] === &lt;&lt;Anchor(all)&gt;&gt;
 
 To get a usable build system, install '''build-essential, realpath,
 libxml2-utils''' and '''python-tempita'''. For cross compiling on a

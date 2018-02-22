@@ -43,6 +43,6 @@ with &lt;component_instance_name&gt;._sc_size_bits = ...;.
 ### Bug Fixes
 
 
-  -   Fixed bug in parser preventing empty lists of the form \[\] from
+  -   Fixed bug in parser preventing empty lists of the form [] from
       parsing correctly
 

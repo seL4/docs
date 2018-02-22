@@ -78,7 +78,7 @@ U-Boot prompt to load and run the image:
 
 {{{
 
-:   fatload mmc 0 \${loadaddr} sel4test.bin go \${loadaddr}
+:   fatload mmc 0 ${loadaddr} sel4test.bin go ${loadaddr}
 
 }}} To boot over Ethernet, configure your DHCP server to provide a DHCP
 lease and to specify the sel4test.bin (or refos.bin) as the boot file.
@@ -89,13 +89,13 @@ the U-Boot prompt enter:
 
 {{{
 
-:   dhcp go \${loadaddr}
+:   dhcp go ${loadaddr}
 
 }}} To load an alternate image from the TFTP server at 1.2.3.4, use:
 
 {{{
 
-:   dhcp \${loadaddr} 1.2.3.4:refos.bin go \${loadaddr}
+:   dhcp ${loadaddr} 1.2.3.4:refos.bin go ${loadaddr}
 
 }}} == Other resources == \*
 [Supporting the UART1 interface with CAmkES](http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/)

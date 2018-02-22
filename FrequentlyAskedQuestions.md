@@ -13,7 +13,7 @@ compromising performance.
  A microkernel is the minimal core of an
 operating system (OS). It presents a very small subset of what is
 generally considered an operating system today. The definition of what
-makes up a microkernel is given by Liedtke \[SOSP'95\]: A concept is
+makes up a microkernel is given by Liedtke [SOSP'95]: A concept is
 tolerated inside the microkernel only if moving it outside the kernel,
 i.e., permitting competing implementations, would prevent the
 implementation of the system's required functionality.
@@ -47,7 +47,7 @@ developed by Jochen Liedtke in the early '90s. See the
 {{<http://sel4.systems/images/familytree.png>||width="500"}}
 
 L4 microkernel family tree. Black arrows indicate code, green arrows ABI
-inheritance. Source: \[Elphinstone & Heiser, SOSP 2013\]
+inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
 
 ## How does seL4's performance compare to other microkernels?
  To the
@@ -55,8 +55,8 @@ best of our knowledge, seL4 is the world's fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
 of a cross-address-space message-passing (IPC) operation. For more
 information, check the
-\[\[<http://l4hq.org/docs/performance.php%7Cperformance> page on
-L4HQ\]\].
+[[<http://l4hq.org/docs/performance.php%7Cperformance> page on
+L4HQ]].
 
 Note that the x86 IPC times recorded at L4HQ are the result of
 micro-optimisations which are not yet in the public version, and may
@@ -308,8 +308,8 @@ The security proofs additionally give a list of conditions how the
 system is configured.
 
 For a more in-depth description, see the
-\[\[<http://sel4.systems/Info/FAQ/proof.pml%7Cproof> and assumptions
-page\]\].
+[[<http://sel4.systems/Info/FAQ/proof.pml%7Cproof> and assumptions
+page]].
 
 ## How do I leverage seL4's formal proofs?
  The seL4 proofs are just
@@ -588,8 +588,8 @@ libraries are mostly under BSD. See the
 
 # How do I contribute to seL4?
  See
-\[\[<http://sel4.systems/Community/Contributing%7CHow> to
-Contribute\]\]. In brief, seL4 was released under a complicated
+[[<http://sel4.systems/Community/Contributing%7CHow> to
+Contribute]]. In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.
@@ -626,14 +626,14 @@ familiarising yourself with seL4.
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-  -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml%7Cfrom>
+  -   [[<http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml%7Cfrom>
       L3 to seL4 – what have we learnt in 20 years of L4
-      microkernels?\]\], a 20-year retrospective of L4 microkernels;
+      microkernels?]], a 20-year retrospective of L4 microkernels;
   -   [the original 2009 paper](http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
       verification;
-  -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Ca>
+  -   [[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Ca>
       much longer paper detailing the complete verification story of
-      seL4\]\], including the high-level security proofs, binary
+      seL4]], including the high-level security proofs, binary
       verification and timeliness analysis. It also contains an analysis
       of the cost of verification, and how it compares to that of
       traditionally-engineered systems.

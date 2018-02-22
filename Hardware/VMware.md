@@ -84,7 +84,7 @@ you just installed, and then edit the grub.cfg from the guest OS itself.
 Another method is to use '''vmware-mount''':
 
 {{{\#!highlight bash numbers=off \# Usage: vmware-mount diskPath
-\[partition num\] mountPoint mkdir /tmp/vmount vmware-mount
+[partition num] mountPoint mkdir /tmp/vmount vmware-mount
 /path/to/your/HD.vmdk /tmp/vmount \# Now do your editing in /tmp/vmount.
 vmware-mount -d /tmp/vmount }}}
 

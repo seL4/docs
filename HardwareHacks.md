@@ -13,7 +13,7 @@ The general approach we take is:
         TFTP
     2.  Connect a debug serial port via a LevelConverter to a Lantronix
         serial concentrator. An ETS16P for example provides 16
-        RS422/RS232 ports, and can be obtained for less than \$100
+        RS422/RS232 ports, and can be obtained for less than $100
         on eBay.
     3.  Connect power for each device via a network-controllable switch.
         For most of our gadgets we're using a cubieTruck and an pair of

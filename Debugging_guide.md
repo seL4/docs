@@ -55,29 +55,29 @@ After compiling a seL4 project, you can use one of these to simulate
 execution of the resulting binaries. For example, after compiling
 sel4test for the KZM (IMX31) board:
 
-{{{\#!highlight bash numbers=off \$ qemu-system-arm -M kzm -nographic
+{{{\#!highlight bash numbers=off $ qemu-system-arm -M kzm -nographic
 -kernel images/sel4test-driver-image-arm-imx31 }}}
 
 On x86, kernel and userspace are provided as separate images:
 
-{{{\#!highlight bash numbers=off \$ qemu-system-i386 -m 512 -nographic
+{{{\#!highlight bash numbers=off $ qemu-system-i386 -m 512 -nographic
 -kernel images/kernel-ia32-pc99 -initrd
 images/sel4test-driver-image-ia32-pc99 }}}
 
 Some seL4 projects will define Makefile targets as shorthand for these
 commands, so you can simply run:
 
-{{{\#!highlight bash numbers=off \$ make simulate-kzm \# Simulate KZM
-execution \$ make simulate-ia32 \# Simulate x86 execution }}}
+{{{\#!highlight bash numbers=off $ make simulate-kzm \# Simulate KZM
+execution $ make simulate-ia32 \# Simulate x86 execution }}}
 
 When simulating a seL4 system in Qemu, you should see output that is
 directed to the (emulated) UART device on your terminal:
 
 {{{ ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
-paddr=\[82000000..8225001f\] ELF-loading image 'kernel'
-paddr=\[80000000..80033fff\] vaddr=\[f0000000..f0033fff\]
+paddr=[82000000..8225001f] ELF-loading image 'kernel'
+paddr=[80000000..80033fff] vaddr=[f0000000..f0033fff]
 virt_entry=f0000000 ELF-loading image 'sel4test-driver'
-paddr=\[80034000..8036efff\] vaddr=\[10000..34afff\] virt_entry=1c880
+paddr=[80034000..8036efff] vaddr=[10000..34afff] virt_entry=1c880
 Enabling MMU and paging Jumping to kernel-image entry point...
 
 Bootstrapping kernel Switching to a safer, bigger stack... seL4 Test
@@ -111,7 +111,7 @@ Qemu's emulated environment.
 Start Qemu with the extra options "-S" (pause execution on start) and
 "-s" (start a GDB server on TCP port 1234):
 
-{{{\#!highlight bash numbers=off \$ qemu-system-arm -M kzm -nographic
+{{{\#!highlight bash numbers=off $ qemu-system-arm -M kzm -nographic
 -kernel images/sel4test-driver-image-arm-imx31 -S -s }}}
 
 In a separate terminal window, start your target platform's version of
@@ -123,7 +123,7 @@ debugging information" in the seL4 build configuration) if you want GDB
 to show you C source code while debugging. In this example we're going
 to debug the seL4 kernel that has been built in debug mode:
 
-{{{\#!highlight bash numbers=off \$ arm-none-eabi-gdb
+{{{\#!highlight bash numbers=off $ arm-none-eabi-gdb
 build/kernel/kernel.elf }}}
 
 At the GDB prompt, enter "target remote :1234" to connect to the server
@@ -210,7 +210,7 @@ userspace rather than the kernel. For example, using the same sel4test
 environment we start Qemu in the same way but start GDB with sel4test's
 binary:
 
-{{{\#!highlight bash numbers=off \$ arm-none-eabi-gdb
+{{{\#!highlight bash numbers=off $ arm-none-eabi-gdb
 build/arm/imx31/sel4test-driver/sel4test-driver.bin }}}
 
 After connecting to Qemu, we can instruct GDB to break on the userspace

@@ -1,11 +1,11 @@
 # Suggested Projects
 
 
-After trying the existing projects (especially \[\[Getting started|seL4
-test suite\]\]) a good way to learn the intricacies of programming on
+After trying the existing projects (especially [[Getting started|seL4
+test suite]]) a good way to learn the intricacies of programming on
 top of seL4 is to do the exercise in the
-\[\[<http://www.cse.unsw.edu.au/~cs9242/current/%7CUNSW> Advanced
-Operating Systems course\]\].
+[[<http://www.cse.unsw.edu.au/~cs9242/current/%7CUNSW> Advanced
+Operating Systems course]].
 
 # Possible Projects
 

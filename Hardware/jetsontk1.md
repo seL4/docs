@@ -3,28 +3,28 @@ The
 seL4. We will explain how to run seL4 on the Tegra.
 &lt;&lt;TableOfContents&gt;&gt; = Pre-Requisites = \* One Tegra Board.
 See
-[Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) \* The development environment fully working. See \[\[Getting
-started\]\]
+[Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) \* The development environment fully working. See [[Getting
+started]]
 
 # Getting Started
  To get started, check out the
-\[\[<https://developer.nvidia.com/embedded-computing%7CNVIDIA> developer
-page\]\], make sure your board is correctly configured and plugged.
+[[<https://developer.nvidia.com/embedded-computing%7CNVIDIA> developer
+page]], make sure your board is correctly configured and plugged.
 
 # Build your first seL4 system
  First, check out the seL4 project.
-{{{\#!highlight bash numbers=off \$ mkdir tegra-test \$ repo init -u
-<https://github.com/seL4/sel4test-manifest.git> \$ repo sync }}}
+{{{\#!highlight bash numbers=off $ mkdir tegra-test $ repo init -u
+<https://github.com/seL4/sel4test-manifest.git> $ repo sync }}}
 
 Then, use the default config for the tegra and build the system.
-{{{\#!highlight bash numbers=off \$ make tk1_debug_xml_defconfig \$
+{{{\#!highlight bash numbers=off $ make tk1_debug_xml_defconfig $
 make }}}
 
 Once the system is compiled, you will have a new file creates in the
 "images" directory
 
-{{{\#!highlight bash numbers=off \$ ls images/
-sel4test-driver-image-arm-tk1 \$ }}}
+{{{\#!highlight bash numbers=off $ ls images/
+sel4test-driver-image-arm-tk1 $ }}}
 
 # Load the binary
  You need to be able to see output from the serial
@@ -47,11 +47,11 @@ following command will then scan the PCI bus and enable the ethernet,
 and then ask to get an address via the DHCP and get sel4.img file from
 the TFTP server at 192.168.1.1.
 
-` pci enum dhcp \${loadaddr} 192.168.1.1:sel4.img `
+` pci enum dhcp ${loadaddr} 192.168.1.1:sel4.img `
 
 Then, let's start the program.
 
-` bootelf \${loadaddr} `
+` bootelf ${loadaddr} `
 
 # Flash U-Boot
 
@@ -61,8 +61,8 @@ is another TK1 board called the TK1-SOM by Colorado Engineering which
 requires a different flashing procedure. Please be sure you're following
 these instructions if you are truly trying to flash a '''Jetson''' and
 not the '''TK1-SOM'''. If you are trying to flash a TK1-SOM, please
-\[\[<https://wiki.sel4.systems/Hardware/CEI_TK1_SOM#U-Boot%7Cuse> the
-procedure described here instead\]\].
+[[<https://wiki.sel4.systems/Hardware/CEI_TK1_SOM#U-Boot%7Cuse> the
+procedure described here instead]].
 
 The initial version of U-Boot does not provides all necessary
 functionality. In particular, it boots the system in secure mode. To run

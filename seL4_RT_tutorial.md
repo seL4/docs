@@ -41,8 +41,8 @@ simulate }}}
 Before you have done any tasks, when running the tutorial should produce
 the following before halting:
 
-{{{ mcs <main@main.c>:179 \[Cond failed: sched_control ==
-seL4_CapNull\] Failed to find sched_control. }}}
+{{{ mcs <main@main.c>:179 [Cond failed: sched_control ==
+seL4_CapNull] Failed to find sched_control. }}}
 
 Look for TASK in the apps/hello-mcs directory for each task.
 
@@ -82,8 +82,8 @@ in between our own messages, as both threads yield to each other.
 {{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Pong 5 Ping Pong 6 Ping Pong
 7 Ping Pong 8 Ping Pong 9 === Periodic === Pong 10 Pong 11 Pong 12 Pong
-13 Pong 14 Pong 15 mcs <yielding_thread@main.c>:87 \[Cond failed: i &gt;
-NUM_YIELDS \* 3\] Too many yeilds! }}}
+13 Pong 14 Pong 15 mcs <yielding_thread@main.c>:87 [Cond failed: i &gt;
+NUM_YIELDS \* 3] Too many yeilds! }}}
 
 ### TASK 4
 
@@ -121,9 +121,9 @@ Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 49 1 56 2 63 3 70
 4 76 5 83 6 90 7 97 8 104 Waiting for server echo: &lt;&lt;seL4(CPU 0)
-\[decodeInvocation/578 T0xe0295500 "helper_thread" @8049746\]:
+[decodeInvocation/578 T0xe0295500 "helper_thread" @8049746]:
 Attempted to invoke a null cap \#0.&gt;&gt; &lt;&lt;seL4(CPU 0)
-\[lookupReply/318 T0xe0295500 "helper_thread" @8049746\]: Cap in reply
+[lookupReply/318 T0xe0295500 "helper_thread" @8049746]: Cap in reply
 slot is not a reply&gt;&gt; Caught cap fault in send phase at address
 0x0 while trying to handle: cap fault in receive phase at address 0x0 in
 thread 0xe0295500 "helper_thread" at address 0x8049746 With stack:
@@ -169,9 +169,9 @@ Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
 4 49 5 56 6 56 7 56 8 63 Waiting for server echo: &lt;&lt;seL4(CPU 0)
-\[decodeInvocation/578 T0xe0295500 "helper_thread" @80497a6\]:
+[decodeInvocation/578 T0xe0295500 "helper_thread" @80497a6]:
 Attempted to invoke a null cap \#0.&gt;&gt; &lt;&lt;seL4(CPU 0)
-\[lookupReply/318 T0xe0295500 "helper_thread" @80497a6\]: Cap in reply
+[lookupReply/318 T0xe0295500 "helper_thread" @80497a6]: Cap in reply
 slot is not a reply&gt;&gt; Caught cap fault in send phase at address
 0x0 while trying to handle: cap fault in receive phase at address 0x0 in
 thread 0xe0295500 "helper_thread" at address 0x80497a6 With stack:

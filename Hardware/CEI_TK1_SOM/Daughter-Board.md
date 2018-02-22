@@ -51,8 +51,8 @@ and a daughterboard to a functioning system requires:
   -   [Attaching the CAN bus cable](\#attach_can)
   -   [Attaching the telemetry cable](\#attach_telem)
   -   [Connecting the power harness](\#connect_power)
-  -   \[\[\#connect_battery_psu|Connecting the battery '''OR'''
-      Connecting the external PSU\]\]
+  -   [[\#connect_battery_psu|Connecting the battery '''OR'''
+      Connecting the external PSU]]
 
 &lt;&lt;Anchor(mount_tk1)&gt;&gt;
 
@@ -90,8 +90,8 @@ an M2.5 screw, bolt, and standoff:
 
 {{<attachment:standoff.jpg%7CStandoff> fitted|width="50%"}}
 
-The end result should look like the image under \[\[\#with_tk1|'With
-TK1'\]\] near the top of this page
+The end result should look like the image under [[\#with_tk1|'With
+TK1']] near the top of this page
 
 &lt;&lt;Anchor(jumper_uart)&gt;&gt;
 

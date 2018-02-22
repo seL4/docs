@@ -31,7 +31,7 @@ partitions properly. seL4 image can be uploaded via Fastboot.
 
 To prepare the SD card, run
 
-{{{\#!highlight bash numbers=off \$ sudo dd if=&lt;image file&gt;
+{{{\#!highlight bash numbers=off $ sudo dd if=&lt;image file&gt;
 of=&lt;/dev/sdx&gt; }}}
 
 Where "sdx" is the device that is associated with your SD card.
@@ -53,7 +53,7 @@ into a binary file. Next we use mkimage to create the image.
 {{{\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
 INPUT_FILE=images/sel4test-image-arm-exynos4 OUTPUT_FILE=sel4-uImage
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d
-\$INPUT_FILE \$OUTPUT_FILE }}}
+$INPUT_FILE $OUTPUT_FILE }}}
 
 The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file
@@ -100,5 +100,5 @@ To boot from mmc:
 <http://dev.odroid.com/projects/odroid-xq/#s-2.2.1> &lt;- This should be
 replaced with the official Samsung exynos4412 "User manual"
 
-\[\[<http://dev.odroid.com/projects/ics/#s-6.2%7CAndroid> - uboot
-sources and instructions\]\]
+[[<http://dev.odroid.com/projects/ics/#s-6.2%7CAndroid> - uboot
+sources and instructions]]

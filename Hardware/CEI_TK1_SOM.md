@@ -87,7 +87,7 @@ On the u-boot console do:
 
 {{{
 
-:   setenv dfu_alt_info "kernel ram \$loadaddr 0x1000000" saveenv
+:   setenv dfu_alt_info "kernel ram $loadaddr 0x1000000" saveenv
 
 }}} once.
 
@@ -108,13 +108,13 @@ and on your host:
     of dfu in u-boot on the TK1-SOM)
 
 This will load the sel4test-driver-image-arm-tk1 file onto the TK1-SOM
-at address \$loadaddr. You can then run it in uboot with
+at address $loadaddr. You can then run it in uboot with
 
-  . bootelf \$loadaddr
+  . bootelf $loadaddr
 
 If you want, you can automate all this with:
 
-  . setenv bootcmd_dfu "dfu 0 ram 0; bootelf \$loadaddr" saveenv
+  . setenv bootcmd_dfu "dfu 0 ram 0; bootelf $loadaddr" saveenv
 
 then just
 
@@ -133,8 +133,8 @@ the other port too. Use a FAT32 or ext2 partition on the storage; put
 your image on it. You can either use a syslinux-style menu, or can boot
 directly.
 
-{{{ usb start fatload usb 0:1 \${loadaddr} sel4test-image-arm bootelf
-\${loadaddr} }}}
+{{{ usb start fatload usb 0:1 ${loadaddr} sel4test-image-arm bootelf
+${loadaddr} }}}
 
 # Using L4T from CEI
 

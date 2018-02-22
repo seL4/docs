@@ -119,8 +119,8 @@ Debian/Ubuntu/Fedora, but we imagine you should be able to substitute
 where necessary for your distro. Instructions should be similar for
 other distros, links to toolchains for other distros are provided.
 
-  -   \[\[SetupFedora|Cross compiler and general instructions for Fedora
-      and CentOS (RHEL should work as well)\]\]
+  -   [[SetupFedora|Cross compiler and general instructions for Fedora
+      and CentOS (RHEL should work as well)]]
   -   [Cross compilers for Debian and Ubuntu](SetupUbuntu)
 
 ## Start with the tutorials
@@ -175,8 +175,8 @@ See [Hardware](../Hardware).
 
 
 Gernot's presentation:
-"\[\[<https://www.youtube.com/watch?v=lRndE7rSXiI%7CseL4> is free: What
-does this mean for you? (2015)\]\]" outlines areas where the kernel
+"[[<https://www.youtube.com/watch?v=lRndE7rSXiI%7CseL4> is free: What
+does this mean for you? (2015)]]" outlines areas where the kernel
 could use some contributions – other than that, gauging what you can do
 externally is for the time being, difficult. If you have ideas, please
 feel free to visit the NICTA mailing lists and chime in:
@@ -203,23 +203,23 @@ Consider trying to read some of them, or at least scrolling through the
 list, and picking out the most eye-catching titles and skimming them.
 You can find a long list of seL4 publications here:
 
-\[\[<http://ts.data61.csiro.au/projects/seL4/%7CThe> seL4 project page
-at Data61\]\].
+[[<http://ts.data61.csiro.au/projects/seL4/%7CThe> seL4 project page
+at Data61]].
 
 ## Youtube
 
 
 :   -   Gernot Heiser outlines several areas where the kernel is looking
         for good Samaritans toward the end of this presentation,
-        "\[\[<https://www.youtube.com/watch?v=lRndE7rSXiI%7CseL4> is
-        free: What does this mean for you? (2015)\]\]". If you were
+        "[[<https://www.youtube.com/watch?v=lRndE7rSXiI%7CseL4> is
+        free: What does this mean for you? (2015)]]". If you were
         looking for externally available information on the status of
         seL4, you probably ran across that presentation yourself.
     -   In addition, this youtube video shows Gernot giving a
         presentation on seL4's context and position in the timeline of
         L4 microkernel research:
-        "\[\[<https://www.youtube.com/watch?v=RdoaFc5-1Rk%7CFrom> L3 to
+        "[[<https://www.youtube.com/watch?v=RdoaFc5-1Rk%7CFrom> L3 to
         seL4: What have we learned in 20 years of L4
-        microkernels? (2014)\]\]".
+        microkernels? (2014)]]".
 
 

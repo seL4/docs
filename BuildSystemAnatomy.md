@@ -119,15 +119,15 @@ cause strange and mysterious errors.
 apps-y variable with the targets of the applications to be built. To do
 this you can reference the CONFIG_-prefixed variables from Kconfig. A
 typical apps/Kbuild will look something like the following: {{{
-apps-\$(CONFIG_MY_APP) += myapp
+apps-$(CONFIG_MY_APP) += myapp
 
 hello: libfoo }}} If your application has more complicated dependencies,
 for example if it depends on libbar only when the
 MYAPP_EXTRA_FUNCTIONALITY variable is selected, you can use the
-following pattern: {{{ apps-\$(CONFIG_MY_APP) += myapp
+following pattern: {{{ apps-$(CONFIG_MY_APP) += myapp
 
-hello-y = libfoo hello-\$(CONFIG_MYAPP_EXTRA_FUNCTIONALITY) += libbar
-hello: \$(hello-y) }}}
+hello-y = libfoo hello-$(CONFIG_MYAPP_EXTRA_FUNCTIONALITY) += libbar
+hello: $(hello-y) }}}
 
 &lt;&lt;Anchor(kconfig)&gt;&gt;The Kconfig files ('''Kconfig,
 apps/Kconfig, apps/myapp/Kconfig, libs/Kconfig, libs/libfoo/Kconfig,
@@ -144,16 +144,16 @@ detail below.
 &lt;&lt;Anchor(appsmyappmakefile)&gt;&gt;Your application Makefile,
 '''apps/myapp/Makefile''', should populate a set of variables and then
 include common.mk. It will typically look something like the following:
-{{{ TARGETS := \$(notdir \$(SOURCE_DIR)).bin
+{{{ TARGETS := $(notdir $(SOURCE_DIR)).bin
 
-CFILES := \$(patsubst \$(SOURCE_DIR)/%,%,\$(wildcard
-\$(SOURCE_DIR)/src/\*.c)) ASMFILES := \$(patsubst
-\$(SOURCE_DIR)/%,%,\$(wildcard
-\$(SOURCE_DIR)/crt/arch-\$(ARCH)/crt0.S))
+CFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard
+$(SOURCE_DIR)/src/\*.c)) ASMFILES := $(patsubst
+$(SOURCE_DIR)/%,%,$(wildcard
+$(SOURCE_DIR)/crt/arch-$(ARCH)/crt0.S))
 
 LIBS := sel4c sel4 sel4rootserver sel4platsupport
 
-include \$(SEL4_COMMON)/common.mk }}} TARGETS should contain the list
+include $(SEL4_COMMON)/common.mk }}} TARGETS should contain the list
 of output files that this application needs built. CFILES and ASMFILES
 list the C and assembly sources of your application, respectively. LIBS
 lists the libraries this application will be linked against (without
@@ -162,7 +162,7 @@ that are passed to the compiler or the linker when building your
 application. To do this, modify the variables CFLAGS and LDFLAGS,
 respectively. For example, you can use "LDFLAGS += -T
 path/to/linker.lds" to use a custom linker script for your application
-or "CFLAGS := \$(filter-out -Wall,\$(CFLAGS))" to turn off compiler
+or "CFLAGS := $(filter-out -Wall,$(CFLAGS))" to turn off compiler
 warnings for your application. Note that these modifications should be
 added '''after''' including common.mk.
 
@@ -170,7 +170,7 @@ added '''after''' including common.mk.
 application dependencies, '''libs/Kbuild''' describes top-level library
 dependencies. Similarly, it fills the variable libs-y with the libraries
 to be built. A typical libs/Kbuild would look like: {{{
-libs-\$(CONFIG_LIB_FOO) += libfoo libs-\$(CONFIG_LIB_BAR) += libbar
+libs-$(CONFIG_LIB_FOO) += libfoo libs-$(CONFIG_LIB_BAR) += libbar
 
 libfoo: common libbar: common libfoo }}}
 
@@ -179,16 +179,16 @@ library, '''libs/libfoo/Makefile''', should just contain some variable
 configuration and then include common.mk. Note that by using generic
 environment variables you can often use the following template with no
 modification for your library: {{{ \# Library archive(s) that will be
-built. TARGETS := \$(notdir \${SOURCE_DIR}).a
+built. TARGETS := $(notdir ${SOURCE_DIR}).a
 
-\# Source files required to build the target. CFILES := \$(patsubst
-\$(SOURCE_DIR)/%,%,\$(wildcard \${SOURCE_DIR}/src/*.c)) ASMFILES :=
-\$(patsubst \$(SOURCE_DIR)/%,%,\$(wildcard \${SOURCE_DIR}/src/*.S))
+\# Source files required to build the target. CFILES := $(patsubst
+$(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.c)) ASMFILES :=
+$(patsubst $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.S))
 
 \# Header files/directories this library provides. HDRFILES :=
-\$(wildcard \${SOURCE_DIR}/include/\*)
+$(wildcard ${SOURCE_DIR}/include/\*)
 
-include \$(SEL4_COMMON)/common.mk }}}
+include $(SEL4_COMMON)/common.mk }}}
 
 You can modify the compiler or linker flags applied when building your
 library by modifying the NK_CFLAGS or NK_LDFLAGS variable
@@ -274,12 +274,12 @@ when necessary.
 
 If this really is a serious irritation to you and your dependencies
 really are the same in all three places, you can replace your dependency
-line in apps/Kbuild with: {{{ myapp: \$(shell grep "depends on"
-\$(APPS_ROOT)/myapp/Kconfig | sed -e 's/depends on//g' -e
-'s/\[&_\]//g' | tr A-Z a-z) }}} and your LIBS line in
-apps/myapp/Makefile with: {{{ LIBS := \$(patsubst lib%,%,\$(shell grep
-"depends on" \$(SOURCE_DIR)/Kconfig | sed -e 's/depends on//g' -e
-'s/\[&_\]//g' | tr A-Z a-z)) }}} This will make apps/myapp/Kconfig the
+line in apps/Kbuild with: {{{ myapp: $(shell grep "depends on"
+$(APPS_ROOT)/myapp/Kconfig | sed -e 's/depends on//g' -e
+'s/[&_]//g' | tr A-Z a-z) }}} and your LIBS line in
+apps/myapp/Makefile with: {{{ LIBS := $(patsubst lib%,%,$(shell grep
+"depends on" $(SOURCE_DIR)/Kconfig | sed -e 's/depends on//g' -e
+'s/[&_]//g' | tr A-Z a-z)) }}} This will make apps/myapp/Kconfig the
 canonical source of your dependency information.
 
 ----'''Why do I need to pick which libraries get built when this is
@@ -328,11 +328,11 @@ actual dependency inferred by Kconfig.
 
 Use make V=2 or make V=3. Be aware that V=3 generates a lot of output.
 
-----'''What is this \$(call cc-option... business?'''
+----'''What is this $(call cc-option... business?'''
 
 cc-option is defined in tools/kbuild/Kbuild.include. It is used as
-\$(call cc-option, flags1, flags2). It passes flags1 to your compiler
-(\$(CC), not \$(HOST_CC)) and returns flags1 if they are accepted. If
+$(call cc-option, flags1, flags2). It passes flags1 to your compiler
+($(CC), not $(HOST_CC)) and returns flags1 if they are accepted. If
 your compiler returns an error it returns flags2. It is basically a way
 of probing what flags your compiler supports.
 
@@ -355,21 +355,21 @@ effect.
 ----'''How do I dump the contents of Makefile variables? How do I
 determine what context my rules are executed in?'''
 
-` \$(foreach var,\$(.VARIABLES),\$(warning \$(var)=\$(\$(var)))) `
+` $(foreach var,$(.VARIABLES),$(warning $(var)=$($(var)))) `
 
 ----'''Why do some projects' libs/Kbuild use a sel4libs-y variable?'''
 
 This is hangover from a previous abstraction for portability. This extra
 level of indirection serves no purpose in the current build system. If
 you encounter a libs/Kbuild that looks like the following: {{{
-sel4libs-\$(CONFIG_LIB_FOO) += libfoo sel4libs-\$(CONFIG_LIB_BAR) +=
+sel4libs-$(CONFIG_LIB_FOO) += libfoo sel4libs-$(CONFIG_LIB_BAR) +=
 libbar ...
 
-libs-y += \$(sel4libs-y) ... }}} please update it to remove sel4libs-y:
-{{{ libs-\$(CONFIG_LIB_FOO) += libfoo libs-\$(CONFIG_LIB_BAR) +=
+libs-y += $(sel4libs-y) ... }}} please update it to remove sel4libs-y:
+{{{ libs-$(CONFIG_LIB_FOO) += libfoo libs-$(CONFIG_LIB_BAR) +=
 libbar ... }}}
 
-----'''What does it mean when I get errors like make\[1\]: *\** No rule
+----'''What does it mean when I get errors like make[1]: *\** No rule
 to make target '-lfoo', needed by \`bar'. Stop.? Why is "-lfoo" a
 target?'''
 

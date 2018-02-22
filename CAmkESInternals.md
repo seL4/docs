@@ -240,7 +240,7 @@ using some name mangling rules. It's implemented here:
 Typical usage of a Perspective is adding names until it has enough
 information to derive the names you need, then querying it for the names
 you need. Here's an example of this: {{{ p = Perspective(instance='foo',
-control=True) print(p\['ipc_buffer_symbol'\]) \# prints
+control=True) print(p['ipc_buffer_symbol']) \# prints
 "_camkes_ipc_buffer_foo_0_control" }}}
 
 Here we tell the perspective that we want names in the context of a

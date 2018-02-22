@@ -110,10 +110,10 @@ app's Makefile, located at \`apps/cma34cr_minimal/Makefile\`:
 ---
 
 KERNEL_FILENAME := bzimage ROOTFS_FILENAME := rootfs.cpio ...
-\${STAGE_DIR}/\${KERNEL_FILENAME}:
-\$(SOURCE_DIR)/linux/\${KERNEL_FILENAME} ...
-\${STAGE_DIR}/\${ROOTFS_FILENAME}:
-\${SOURCE_DIR}/linux/\${ROOTFS_FILENAME} ... }}}
+${STAGE_DIR}/${KERNEL_FILENAME}:
+$(SOURCE_DIR)/linux/${KERNEL_FILENAME} ...
+${STAGE_DIR}/${ROOTFS_FILENAME}:
+${SOURCE_DIR}/linux/${ROOTFS_FILENAME} ... }}}
 
 Both these rules refer to the "linux" directory, located at
 projects/vm/linux. It contains some tools for building new linux kernel
@@ -170,7 +170,7 @@ Here's a summary of what the build-rootfs tool does:
 
 {{{ \#include &lt;stdio.h&gt;
 
-int main(int argc, char \*argv\[\]) {
+int main(int argc, char \*argv[]) {
 
 :   printf("Hello, World!n"); return 0;
 
@@ -185,7 +185,7 @@ include ../../common.mk include ../../common_app.mk
 
 hello: hello.o
 
-:   \$(CC) \$(CFLAGS) \$(LDFLAGS) \$\^ -o \$@
+:   $(CC) $(CFLAGS) $(LDFLAGS) $\^ -o $@
 
 }}}
 
@@ -261,11 +261,11 @@ module_init(poke_init); module_exit(poke_exit); }}}
 
 all:
 
-:   make -C \$(KHEAD) M=\$(PWD) modules
+:   make -C $(KHEAD) M=$(PWD) modules
 
 clean:
 
-:   make -C \$(KHEAD) M=\$(PWD) clean
+:   make -C $(KHEAD) M=$(PWD) clean
 
 }}}
 
@@ -293,7 +293,7 @@ insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
 {{{ Welcome to Buildroot buildroot login: root Password: \# grep poke
 /proc/devices \# figure out the major number of our driver 244 poke \#
 mknod /dev/poke c 244 0 \# create the special file \# echo &gt;
-/dev/poke \# write to the file \[ 57.389643\] hi -sh: write error: Bad
+/dev/poke \# write to the file [ 57.389643] hi -sh: write error: Bad
 address \# the shell complains, but our module is being invoked! }}}
 
 '''Now let's make it talk to the vmm'''.
@@ -524,15 +524,15 @@ Create a file apps/cma34cr_minimal/cross_vm.c: {{{ \#include
 dataport_caps_handle_t data_handle;
 
 // Array of dataport handles at positions corresponding to handle ids
-from spec static dataport_caps_handle_t \*dataports\[\] = { NULL, //
+from spec static dataport_caps_handle_t \*dataports[] = { NULL, //
 entry 0 is NULL so ids correspond with indices &data_handle, };
 
 // Array of consumed event callbacks and ids static
-camkes_consumes_event_t consumed_events\[\] = { { .id = 1,
+camkes_consumes_event_t consumed_events[] = { { .id = 1,
 .reg_callback = done_printing_reg_callback }, };
 
 // Array of emitted event emit functions static camkes_emit_fn
-emitted_events\[\] = { NULL, // entry 0 is NULL so ids correspond with
+emitted_events[] = { NULL, // entry 0 is NULL so ids correspond with
 indices do_print_emit, };
 
 // mutex to protect shared event context static camkes_mutex_t
@@ -543,7 +543,7 @@ cross_vm_event_mutex_unlock, };
 int cross_vm_dataports_init(vmm_t \*vmm) {
 
 :   return cross_vm_dataports_init_common(vmm, dataports,
-    sizeof(dataports)/sizeof(dataports\[0\]));
+    sizeof(dataports)/sizeof(dataports[0]));
 
 }
 
@@ -553,7 +553,7 @@ int cross_vm_emits_events_init(vmm_t \*vmm) {
 
     return cross_vm_emits_events_init_common(vmm, emitted_events,
 
-    :   sizeof(emitted_events)/sizeof(emitted_events\[0\]));
+    :   sizeof(emitted_events)/sizeof(emitted_events[0]));
 
 }
 
@@ -564,7 +564,7 @@ int cross_vm_consumes_events_init(vmm_t *vmm, vspace_t*vspace, seL4_Word irq_bad
     return cross_vm_consumes_events_init_common(vmm, vspace, &cross_vm_event_mutex,
 
     :   consumed_events,
-        sizeof(consumed_events)/sizeof(consumed_events\[0\]),
+        sizeof(consumed_events)/sizeof(consumed_events[0]),
         irq_badge);
 
 }
@@ -578,14 +578,14 @@ And make the following change to apps/cma34cr_minimal/Makefile: {{{ ...
 include PCIConfigIO/PCIConfigIO.mk include FileServer/FileServer.mk
 include Init/Init.mk
 
-\# Add the following: Init0_CFILES += \$(wildcard
-\$(SOURCE_DIR)/cross_vm.c)
- \$(wildcard \$(SOURCE_DIR)/common/src/*.c) Init0_HFILES +=
-\$(wildcard \$(SOURCE_DIR)/common/include/*.h)
- \$(wildcard
-\$(SOURCE_DIR)/common/shared_include/cross_vm_shared/\*.h)
+\# Add the following: Init0_CFILES += $(wildcard
+$(SOURCE_DIR)/cross_vm.c)
+ $(wildcard $(SOURCE_DIR)/common/src/*.c) Init0_HFILES +=
+$(wildcard $(SOURCE_DIR)/common/include/*.h)
+ $(wildcard
+$(SOURCE_DIR)/common/shared_include/cross_vm_shared/\*.h)
 
-PrintServer_CFILES += \$(SOURCE_DIR)/print_server.c ... }}}
+PrintServer_CFILES += $(SOURCE_DIR)/print_server.c ... }}}
 
 The app should now build when you run "make", but we're not done yet. No
 we'll make these interfaces available to the guest linux. Edit
@@ -638,7 +638,7 @@ Create projects/vm/linux/pkg/print_client/print_client.c: {{{
 \#include "dataport.h" \#include "consumes_event.h" \#include
 "emits_event.h"
 
-int main(int argc, char \*argv\[\]) {
+int main(int argc, char \*argv[]) {
 
   int data_fd = open("/dev/camkes_data", O_RDWR); assert(data_fd
   &gt;= 0);
@@ -657,7 +657,7 @@ int main(int argc, char \*argv\[\]) {
  
   for (int i = 1; i &lt; argc; i++) {
  
-  :   strncpy(data, argv\[i\], dataport_size);
+  :   strncpy(data, argv[i], dataport_size);
       emits_event_emit(do_print_fd);
       consumes_event_wait(done_printing_fd);
  
@@ -680,7 +680,7 @@ include ../../common.mk include ../../common_app.mk
 
 print_client: print_client.o
 
-:   \$(CC) \$(CFLAGS) \$(LDFLAGS) \$\^ -lcamkes -o \$@
+:   $(CC) $(CFLAGS) $(LDFLAGS) $\^ -lcamkes -o $@
 
 }}}
 
@@ -690,7 +690,7 @@ consuming event node /dev/camkes_done_printing Creating emitting event
 node /dev/camkes_do_print
 
 Welcome to Buildroot buildroot login: root Password: \# print_client
-hello world \[ 12.730073\] dataport received mmap for minor 1 hello
+hello world [ 12.730073] dataport received mmap for minor 1 hello
 world }}}
 
 ## Booting from hard drive
@@ -705,8 +705,8 @@ we need to make to our VM app to allow it to boot into a Ubuntu
 environment installed on the hard drive. Thus far these examples should
 have been compatible with most modern x86 machines. The rest of this
 tutorial will focus on a particular machine:
-\[\[<https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm%7Cthe> cma34cr
-single board computer\]\]
+[[<https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm%7Cthe> cma34cr
+single board computer]]
 
 The first step is to install ubuntu natively on the cma34cr. It's
 currently required that guests of the camkes vm run in 32-bit mode, so
@@ -725,7 +725,7 @@ We need to generate a root filesystem image suitable for ubuntu. Ubuntu
 ships with a tool called mkinitramfs which generates root filesystem
 images. Let's use it to generate a root filesystem image compatible with
 the linux kernel we'll be using. Boot ubuntu natively on the cma34cr and
-run the following command: {{{ \$ mkinitramfs -o rootfs.cpio 4.8.16
+run the following command: {{{ $ mkinitramfs -o rootfs.cpio 4.8.16
 WARNING: missing /lib/modules/4.8.16 Ensure all necessary drivers are
 built into the linux image! depmod: ERROR: could not open directory
 /lib/modules/4.8.16: No such file or directory depmod: FATAL: could not
@@ -741,10 +741,10 @@ file called rootfs.cpio on the cma34cr. Transfer that file to your dev
 machine, and put it in apps/cma34cr_minimal. Now we need to tell the
 build system to take that rootfs image rather than the default buildroot
 one. Edit apps/cma34cr_minimal/Makefile. Change this line: {{{
-\${STAGE_DIR}/\${ROOTFS_FILENAME}:
-\${SOURCE_DIR}/linux/\${ROOTFS_FILENAME} }}} to {{{
-\${STAGE_DIR}/\${ROOTFS_FILENAME}:
-\${SOURCE_DIR}/\${ROOTFS_FILENAME} }}}
+${STAGE_DIR}/${ROOTFS_FILENAME}:
+${SOURCE_DIR}/linux/${ROOTFS_FILENAME} }}} to {{{
+${STAGE_DIR}/${ROOTFS_FILENAME}:
+${SOURCE_DIR}/${ROOTFS_FILENAME} }}}
 
 Since we'll be using a real hard drive, we need to change the boot
 command line we give to the guest linux. Open
@@ -787,7 +787,7 @@ For AHCI:
 
         vm0_config.pci_devices_iospace = 1;
 
-        vm0_config.ioports = \[
+        vm0_config.ioports = [
 
         :   {"start":0x4088, "end":0x4090, "pci_device":0x1f,
             "name":"SATA"}, {"start":0x4094, "end":0x4098,
@@ -796,28 +796,28 @@ For AHCI:
             {"start":0x4060, "end":0x4080, "pci_device":0x1f,
             "name":"SATA"},
 
-        \];
+        ];
 
-        vm0_config.pci_devices = \[
+        vm0_config.pci_devices = [
 
         :   
 
             {
 
             :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2,
-                "irq":"SATA", "memory":\[ {"paddr":0xc0713000,
-                "size":0x800, "page_bits":12}, \],
+                "irq":"SATA", "memory":[ {"paddr":0xc0713000,
+                "size":0x800, "page_bits":12}, ],
 
             },
 
-        \];
+        ];
 
-        vm0_config.irqs = \[
+        vm0_config.irqs = [
 
         :   {"name":"SATA", "source":19, "level_trig":1,
             "active_low":1, "dest":11},
 
-        \];
+        ];
 
     }
 
@@ -835,7 +835,7 @@ For IDE:
 
         vm0_config.pci_devices_iospace = 1
 
-        vm0_config.ioports = \[
+        vm0_config.ioports = [
 
         :   {"start":0x4080, "end":0x4090, "pci_device":0x1f,
             "name":"SATA"}, {"start":0x4090, "end":0x40a0,
@@ -846,27 +846,27 @@ For IDE:
             "pci_device":0x1f, "name":"SATA"}, {"start":0x40cc,
             "end":0x40d0, "pci_device":0x1f, "name":"SATA"},
 
-        \];
+        ];
 
-        vm0_config.pci_devices = \[
+        vm0_config.pci_devices = [
 
         :   
 
             {
 
             :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2,
-                "irq":"SATA", "memory":\[\],
+                "irq":"SATA", "memory":[],
 
             },
 
-        \];
+        ];
 
-        vm0_config.irqs = \[
+        vm0_config.irqs = [
 
         :   {"name":"SATA", "source":19, "level_trig":1,
             "active_low":1, "dest":11},
 
-        \];
+        ];
 
     }
 
@@ -881,7 +881,7 @@ You should be able to log in and use the system largely as normal.
 ## Passthrough Ethernet
 
 
-The ethernet device is not accessible to the guest: {{{ \$ ip addr 1:
+The ethernet device is not accessible to the guest: {{{ $ ip addr 1:
 lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
 group default qlen 1 link/loopback 00:00:00:00:00:00 brd
 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever
@@ -894,45 +894,45 @@ access to the ethernet controller. This is done much in the same way as
 enabling passthrough access to the sata controller. In the configuration
 section in apps/cma34cr_minimal/cma34cr.camkes, add to the list of io
 ports, pci devices and irqs to pass through: {{{ vm0_config.ioports =
-\[ {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
+[ {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
 {"start":0x4090, "end":0x40a0, "pci_device":0x1f, "name":"SATA"},
 {"start":0x40b0, "end":0x40b8, "pci_device":0x1f, "name":"SATA"},
 {"start":0x40b8, "end":0x40c0, "pci_device":0x1f, "name":"SATA"},
 {"start":0x40c8, "end":0x40cc, "pci_device":0x1f, "name":"SATA"},
 {"start":0x40cc, "end":0x40d0, "pci_device":0x1f, "name":"SATA"},
 {"start":0x3000, "end":0x3020, "pci_device":0, "name":"Ethernet5"}, //
-&lt;--- Add this entry \];
+&lt;--- Add this entry ];
 
-  vm0_config.pci_devices = \[
+  vm0_config.pci_devices = [
  
   :   
  
       {
  
       :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2, "irq":"SATA",
-          "memory":\[\],
+          "memory":[],
  
       },
  
       // Add this entry: { "name":"Ethernet5", "bus":5, "dev":0,
-      "fun":0, "irq":"Ethernet5", "memory":\[ {"paddr":0xc0500000,
+      "fun":0, "irq":"Ethernet5", "memory":[ {"paddr":0xc0500000,
       "size":0x20000, "page_bits":12}, {"paddr":0xc0520000,
-      "size":0x4000, "page_bits":12}, \], },
+      "size":0x4000, "page_bits":12}, ], },
  
-  \];
+  ];
  
-  vm0_config.irqs = \[
+  vm0_config.irqs = [
  
   :   {"name":"SATA", "source":19, "level_trig":1, "active_low":1,
       "dest":11}, {"name":"Ethernet5", "source":0x11, "level_trig":1,
       "active_low":1, "dest":10}, // &lt;--- Add this entry
  
-  \];
+  ];
 
 }}}
 
 You should have added a new entry to each of the three lists that
-describe passthrough devices. Building and running: {{{ \$ ip addr 1:
+describe passthrough devices. Building and running: {{{ $ ip addr 1:
 lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
 group default qlen 1 link/loopback 00:00:00:00:00:00 brd
 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever
@@ -948,7 +948,7 @@ valid_lft 86390sec preferred_lft 14390sec inet6
 noprefixroute dynamic valid_lft 86390sec preferred_lft 14390sec inet6
 fe80::cc47:129d:bdff:a2da/64 scope link valid_lft forever
 preferred_lft forever 3: <sit0@NONE>: &lt;NOARP&gt; mtu 1480 qdisc noop
-state DOWN group default qlen 1 link/sit 0.0.0.0 brd 0.0.0.0 \$ ping
+state DOWN group default qlen 1 link/sit 0.0.0.0 brd 0.0.0.0 $ ping
 google.com PING google.com (172.217.25.142) 56(84) bytes of data. 64
 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=1
 ttl=51 time=2.17 ms 64 bytes from syd15s03-in-f14.1e100.net

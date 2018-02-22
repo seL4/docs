@@ -51,8 +51,8 @@ important capability references are. This step is teaching you how to
 obtain that structure.
 
 Note that when you run the example, you should get a message similar to:
-{{{ 6 untypeds of size 29 hello-2: <main@main.c>:132 \[Cond failed:
-allocman == NULL\] Failed to initialize alloc manager. Memory pool
+{{{ 6 untypeds of size 29 hello-2: <main@main.c>:132 [Cond failed:
+allocman == NULL] Failed to initialize alloc manager. Memory pool
 sufficiently sized? Memory pool pointer valid? }}} until Task 4, where
 you set up memory management.
 

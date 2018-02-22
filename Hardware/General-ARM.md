@@ -50,8 +50,8 @@ pressing the reset button). To run the image:
 
 {{{
 
-:   mmc init mmcinfo fatload mmc 0 \${loadaddr} sel4test-image-arm
-    bootelf \${loadaddr}
+:   mmc init mmcinfo fatload mmc 0 ${loadaddr} sel4test-image-arm
+    bootelf ${loadaddr}
 
 }}}
 

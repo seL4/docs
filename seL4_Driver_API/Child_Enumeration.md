@@ -15,7 +15,7 @@ seL4drv_mgmt_query_device_match(); }}}
 
 ## Structures
  {{{ typedef struct seL4drv_child_attribute_ { char
-attr_name\[SEL4DRV_DEVATTR_NAME_MAXLEN\]; uint32_t attr_value; }
+attr_name[SEL4DRV_DEVATTR_NAME_MAXLEN]; uint32_t attr_value; }
 seL4drv_child_attribute_t; }}}
 
 ## Child IDs

@@ -29,8 +29,8 @@ is the same as is already used between the CPU & GPU board. Order codes:
 
 ## Using Linux with this daughterboard for CAN
  ('''hello world &
-testing''') See \[\[Hardware/CEI_TK1_SOM/L4TCan|Using CAN on L4T
-through an MCP251X\]\]
+testing''') See [[Hardware/CEI_TK1_SOM/L4TCan|Using CAN on L4T
+through an MCP251X]]
 
 ## Pinout detail
  The font on the silkscreen indicating pins is

@@ -38,10 +38,10 @@ command:
 ` ums 0 mmc 0 ` This will allow you to see the TK1's filesystem on
 your host pc. On your host PC, list your devices:
 
-` \$ lsblk ` You should see a 14.7GB-ish device with a few
+` $ lsblk ` You should see a 14.7GB-ish device with a few
 partitions - this is the TK1. (Make sure it is by mounting the largest
-partition and looking at the rootfs \[making sure to unmount again
-before next step!\])
+partition and looking at the rootfs [making sure to unmount again
+before next step!])
 
 We're ready to image the TK1. Issue the following command, making
 ABSOLUTELY sure that your of=/dev/sdX line is correct so you don't
@@ -185,10 +185,10 @@ update_kernel.sh
     > L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
     > SOM_DIR=/mnt/TK1SOM
     >
-    > sudo cp \$L4T_DIR/sources/kernel/arch/arm/boot/zImage
-    > \$SOM_DIR/boot/zImage sudo cp
-    > \$L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
-    > \$SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
+    > sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage
+    > $SOM_DIR/boot/zImage sudo cp
+    > $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
+    > $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 
 }}}
 
@@ -219,20 +219,20 @@ Then:
 
 {{{ dmesg | grep mcp \# See if the driver loaded properly
 
-\[ 618.718288\] mcp251x spi0.0: entered mcp251x_can_probe \[
-618.718296\] mcp251x spi0.0: v2 \[ 618.718332\] mcp251x spi0.0: got
-clock \[ 618.718336\] mcp251x spi0.0: finished clock configuration,
-freq: 20000000 \[ 618.718353\] mcp251x spi0.0: allocated CAN device \[
-618.718358\] mcp251x spi0.0: clock prepared for enable \[ 618.729737\]
-mcp251x spi0.0: configured can netdev \[ 618.729741\] mcp251x spi0.0:
-power & transceiver regulator pointers OK \[ 618.729745\] mcp251x
-spi0.0: enabled power \[ 618.729749\] mcp251x spi0.0: about to enable
-DMA (if required) \[ 618.729754\] mcp251x spi0.0: finished allocating
-DMA & non-DMA buffers \[ 618.729757\] mcp251x spi0.0: netdev set \[
-618.729799\] mcp251x spi0.0: configured SPI bus \[ 618.740194\] mcp251x
-spi0.0: CANSTAT 0x80 CANCTRL 0x07 \[ 618.740198\] mcp251x spi0.0:
-successful hardware probe \[ 618.740795\] mcp251x spi0.0: probed \[
-628.973815\] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
+[ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe [
+618.718296] mcp251x spi0.0: v2 [ 618.718332] mcp251x spi0.0: got
+clock [ 618.718336] mcp251x spi0.0: finished clock configuration,
+freq: 20000000 [ 618.718353] mcp251x spi0.0: allocated CAN device [
+618.718358] mcp251x spi0.0: clock prepared for enable [ 618.729737]
+mcp251x spi0.0: configured can netdev [ 618.729741] mcp251x spi0.0:
+power & transceiver regulator pointers OK [ 618.729745] mcp251x
+spi0.0: enabled power [ 618.729749] mcp251x spi0.0: about to enable
+DMA (if required) [ 618.729754] mcp251x spi0.0: finished allocating
+DMA & non-DMA buffers [ 618.729757] mcp251x spi0.0: netdev set [
+618.729799] mcp251x spi0.0: configured SPI bus [ 618.740194] mcp251x
+spi0.0: CANSTAT 0x80 CANCTRL 0x07 [ 618.740198] mcp251x spi0.0:
+successful hardware probe [ 618.740795] mcp251x spi0.0: probed [
+628.973815] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
 
 ls /sys/class/net \# See if the can device is available and what it's
 called can0 dummy0 eth0 ip6tnl0 lo rmnetctl sit0

@@ -43,7 +43,7 @@ the remaining budget until the next period.
 
 Temporal isolation is provided with scheduling context by an
 implementation of
-[sporadic servers\]\]. Please see the \[\[manual](https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf) or tutorial for further
+[sporadic servers]]. Please see the [[manual](https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf) or tutorial for further
 explanation.
 
 However, in seL4, threads without budget left in their sporadic server
@@ -196,8 +196,8 @@ seL4 5.2.0.
   -   You can obtain and run sel4test for seL4 5.2.0-mcs by doing the
       following:
 
-{{{ \$ mkdir sel4test-mcs \$ cd sel4test-mcs \$ repo init -u
-<https://github.com/seL4/sel4test-manifest.git> -m 5.2.x-mcs.xml \$ repo
+{{{ $ mkdir sel4test-mcs $ cd sel4test-mcs $ repo init -u
+<https://github.com/seL4/sel4test-manifest.git> -m 5.2.x-mcs.xml $ repo
 sync }}}
 
   -   A [new tutorial](https://wiki.sel4.systems/seL4%20RT%20tutorial) covers the difference in the APIs
@@ -209,8 +209,8 @@ The RT kernel currently supports:
 
   -   [BeagleBoard](Hardware/BeagleBoard)
   -   [SabreLite](Hardware/sabreLite)
-  -   \[\[<https://wiki.sel4.systems/Hardware/IA32%7Cx86> (ia32, x64),
-      multicore\]\]
+  -   [[<https://wiki.sel4.systems/Hardware/IA32%7Cx86> (ia32, x64),
+      multicore]]
   -   [Tegra TK1](Hardware/jetsontk1)
 
 Other hardware platforms will be added as required (the ports require

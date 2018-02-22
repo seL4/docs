@@ -43,7 +43,7 @@ bd-&gt;bi_boot_params)
     4.  Open minicom at 115200bps -- 8bit data -- No parity -- 1 stop
         bit
 
-    1. after you power on the board, you should be able see the "Fastboot entered ..." in minicom. You can check that the device is ready by using "\$&gt; fastboot devices".
+    1. after you power on the board, you should be able see the "Fastboot entered ..." in minicom. You can check that the device is ready by using "$&gt; fastboot devices".
 
     :   1.  NOTE! The panda ES seems to be particular about which
             tty-USB converter it will communicate with. Avoid using the
@@ -52,7 +52,7 @@ bd-&gt;bi_boot_params)
             to access the device. Try running with sudo.
 
     1.  Execute
-        \$&gt; fastboot -b 0x80000000 boot the_kernel_image_file_boundled_with_application
+        $&gt; fastboot -b 0x80000000 boot the_kernel_image_file_boundled_with_application
     2.  The kernel should boot and application gets executed.
 
 # References

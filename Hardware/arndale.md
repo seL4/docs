@@ -43,8 +43,8 @@ If you have a separate boot partition on your card you could instead
 use: (untested as yet)
 
 {{{ kernel=0x40007000 dtb=42000000 bootcmd=mmc init; fatload mmc 0:1
-\${kernel} uImage; fatload mmc 0:1 \${dtb} dtb; bootm \${kernel} -
-\${dtb} }}}
+${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} -
+${dtb} }}}
 
 ### U-Boot
  There are at least three versions available, the one in
@@ -71,7 +71,7 @@ file. Follow the below instructions to create this image.
 {{{\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
 INPUT_FILE=images/sel4test-image-arm-exynos4 OUTPUT_FILE=sel4-uImage
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d
-\$INPUT_FILE \$OUTPUT_FILE }}}
+$INPUT_FILE $OUTPUT_FILE }}}
 
 The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file
@@ -99,8 +99,8 @@ Now run:
 
 [http://www.arndaleboard.org](http://www.arndaleboard.org/)
 
-\[\[<https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot%7CPXE> boot
-setup\]\]
+[[<https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot%7CPXE> boot
+setup]]
 
-\[\[<https://wiki.kubuntu.org/ARM/QA/ArndaleBoard%7CBetter> PXE
-instructions\]\]
+[[<https://wiki.kubuntu.org/ARM/QA/ArndaleBoard%7CBetter> PXE
+instructions]]

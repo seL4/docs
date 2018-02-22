@@ -160,7 +160,7 @@ help Hello world tutorial exercise. }}}
 Create a dependency entry in apps/helloworld/Kbuild for your
 application: {{{\#!highlight makefile \# apps/helloworld/Kbuild
 
-apps-\$(CONFIG_APP_HELLOWORLD) += helloworld helloworld: libsel4
+apps-$(CONFIG_APP_HELLOWORLD) += helloworld helloworld: libsel4
 libmuslc libsel4platsupport
  libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
 
@@ -173,7 +173,7 @@ TARGETS := helloworld.cdl ADL := helloworld.camkes
 Client_CFILES = components/Client/src/client.c Hello_CFILES =
 components/Hello/src/hello.c
 
-include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/helloworld/Kconfig" `
@@ -347,7 +347,7 @@ help Hello event tutorial exercise. }}}
 Create a dependency entry in apps/helloevent/Kbuild for your
 application: {{{\#!highlight makefile \# apps/helloevent/Kbuild
 
-apps-\$(CONFIG_APP_HELLOEVENT) += helloevent helloevent: libsel4
+apps-$(CONFIG_APP_HELLOEVENT) += helloevent helloevent: libsel4
 libmuslc libsel4platsupport
  libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
 
@@ -360,7 +360,7 @@ TARGETS := helloevent.cdl ADL := helloevent.camkes
 Consumer_CFILES = components/Consumer/src/main.c Emitter_CFILES =
 components/Emitter/src/main.c
 
-include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/helloevent/Kconfig" `
@@ -413,7 +413,7 @@ apps/hellodataport/include/porttype.h \*/
 
 typedef struct MyData {
 
-:   char data\[10\];
+:   char data[10];
 
 } MyData_t;
 
@@ -501,7 +501,7 @@ int run(void) {
 
     :   \* zeroed on startup by seL4. \*/
 
-    while (!d2-&gt;data\[0\]); printf("Ping: received %s.n",
+    while (!d2-&gt;data[0]); printf("Ping: received %s.n",
     d2-&gt;data);
 
     return 0;
@@ -547,7 +547,7 @@ default n help Hello dataport tutorial exercise. }}}
 Create a dependency entry in apps/hellodataport/Kbuild for your
 application: {{{\#!highlight makefile \# apps/hellodataport/Kbuild
 
-apps-\$(CONFIG_APP_HELLODATAPORT) += hellodataport hellodataport:
+apps-$(CONFIG_APP_HELLODATAPORT) += hellodataport hellodataport:
 libsel4 libmuslc libsel4platsupport
  libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
 
@@ -562,7 +562,7 @@ components/Ping/include/porttype.h Pong_CFILES =
 components/Pong/src/main.c Pong_HFILES =
 components/Pong/include/porttype.h
 
-include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/hellodataport/Kconfig" `
@@ -587,47 +587,47 @@ your application. Take apps/hellodataport/Makefile as an example
 
 {{{\#!highlight makefile \# apps/hellodataport/Makefile
 
-TARGETS := \$(notdir \${SOURCE_DIR}).cdl ADL := hellodataport.camkes
+TARGETS := $(notdir ${SOURCE_DIR}).cdl ADL := hellodataport.camkes
 
 Ping_CFILES =
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Ping/src/*.c))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Ping/src/plat/\${PLAT}/*.c))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Ping/src/arch/\${ARCH}/\*.c))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Ping/src/*.c))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Ping/src/plat/${PLAT}/*.c))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Ping/src/arch/${ARCH}/\*.c))
 
 Ping_HFILES =
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Ping/include/*.h))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Ping/include/plat/\${PLAT}/*.h))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Ping/include/arch/\${ARCH}/\*.h))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Ping/include/*.h))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Ping/include/plat/${PLAT}/*.h))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Ping/include/arch/${ARCH}/\*.h))
 
 Pong_CFILES =
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Pong/src/*.c))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Pong/src/plat/\${PLAT}/*.c))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Pong/src/arch/\${ARCH}/\*.c))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Pong/src/*.c))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Pong/src/plat/${PLAT}/*.c))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Pong/src/arch/${ARCH}/\*.c))
 
 Pong_HFILES =
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Pong/include/*.h))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Pong/include/plat/\${PLAT}/*.h))
- \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
-\${SOURCE_DIR}/components/Pong/include/arch/\${ARCH}/\*.h))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Pong/include/*.h))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Pong/include/plat/${PLAT}/*.h))
+ $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
+${SOURCE_DIR}/components/Pong/include/arch/${ARCH}/\*.h))
 
-include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Variable SOURCE_DIR will always point to application folder. In this
 case, SOURCE_DIR = camkes-project/apps/hellodataport
 
-\$(wildcard) function will expands *.c in src/ and*.h in include/
-directory \$(patsubst) function will substitute all .c .h files with
+$(wildcard) function will expands *.c in src/ and*.h in include/
+directory $(patsubst) function will substitute all .c .h files with
 their absolute path
 
 You can also specify platform and architecture building path if you

@@ -62,16 +62,16 @@ git fetch alyons git checkout phd cd ../.. }}}
 That changed lots of stuff, so let's remove everything we've built so
 far: ` make mrproper make x64_optiplex9020_onevm_defconfig `
 
-And try building... {{{ \$ make 12:12:45 \[KERNEL\] \[BF_GEN\]
-arch/object/structures_gen.h \[BF_GEN\]
-plat/64/plat_mode/machine/hardware_gen.h \[BF_GEN\]
-64/mode/api/shared_types_gen.h \[CPP\]
-src/arch/x86/64/machine_asm.s_pp \[AS\] src/arch/x86/64/machine_asm.o
-\[CPP\] src/arch/x86/64/traps.s_pp \[AS\] src/arch/x86/64/traps.o
-\[CPP\] src/arch/x86/64/head.s_pp \[AS\] src/arch/x86/64/head.o \[CPP\]
-src/arch/x86/multiboot.s_pp \[AS\] src/arch/x86/multiboot.o
-\[CPP_GEN\] kernel_all.c \[CPP\] kernel_all.c_pp \[Circular
-includes\] kernel_all.c_pp \[CP\] kernel_final.c \[CC\]
+And try building... {{{ $ make 12:12:45 [KERNEL] [BF_GEN]
+arch/object/structures_gen.h [BF_GEN]
+plat/64/plat_mode/machine/hardware_gen.h [BF_GEN]
+64/mode/api/shared_types_gen.h [CPP]
+src/arch/x86/64/machine_asm.s_pp [AS] src/arch/x86/64/machine_asm.o
+[CPP] src/arch/x86/64/traps.s_pp [AS] src/arch/x86/64/traps.o
+[CPP] src/arch/x86/64/head.s_pp [AS] src/arch/x86/64/head.o [CPP]
+src/arch/x86/multiboot.s_pp [AS] src/arch/x86/multiboot.o
+[CPP_GEN] kernel_all.c [CPP] kernel_all.c_pp [Circular
+includes] kernel_all.c_pp [CP] kernel_final.c [CC]
 kernel_final.s
 /home/ssteve/src/camkes-rt-vm-ethernet/kernel/src/object/notification.c:
 In function ‘sendSignal’:
@@ -82,14 +82,14 @@ maybeDonateSchedContext(thread, ntfnPtr); }}}
 Easy fix. The "thread" variable was renamed to "tcb" and this instance
 wasn't updated.
 
-Try building again... {{{ make ... \[apps/capdl-loader-experimental\]
-building... \[HEADERS\] \[STAGE\] debug.h \[STAGE\] capdl_spec.h
-\[STAGE\] capdl.h \[STAGE\] autoconf.h \[GEN\] capdl_spec.c \[CPIO\]
-archive.o \[CPIO\] vm.fserv_group_bin \[CPIO\] vm_group_bin \[CPIO\]
-vm.rtc_group_bin \[CPIO\] vm.vm0_group_bin \[CPIO\]
-vm.vm1_group_bin \[CPIO\] vm.time_server_group_bin \[CPIO\]
-vm.serial_group_bin \[CPIO\] vm.string_reverse_group_bin \[CPIO\]
-vm.pci_config_group_bin \[CC\] src/main.o
+Try building again... {{{ make ... [apps/capdl-loader-experimental]
+building... [HEADERS] [STAGE] debug.h [STAGE] capdl_spec.h
+[STAGE] capdl.h [STAGE] autoconf.h [GEN] capdl_spec.c [CPIO]
+archive.o [CPIO] vm.fserv_group_bin [CPIO] vm_group_bin [CPIO]
+vm.rtc_group_bin [CPIO] vm.vm0_group_bin [CPIO]
+vm.vm1_group_bin [CPIO] vm.time_server_group_bin [CPIO]
+vm.serial_group_bin [CPIO] vm.string_reverse_group_bin [CPIO]
+vm.pci_config_group_bin [CC] src/main.o
 /home/ssteve/src/camkes-rt-vm-ethernet/apps/capdl-loader-experimental/src/main.c:
 In function ‘init_sc’:
 /home/ssteve/src/camkes-rt-vm-ethernet/apps/capdl-loader-experimental/src/main.c:1002:17:

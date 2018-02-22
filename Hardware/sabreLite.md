@@ -50,8 +50,8 @@ USB-TTY converter has locked up.
 
 Now you are ready to load your image into memory and execute:
 
-{{{\#!highlight bash numbers=off \$ lsusb .... Bus 001 Device 019: ID
-15a2:0054 Freescale Semiconductor, Inc. .... \$ sudo ./imx_usb
+{{{\#!highlight bash numbers=off $ lsusb .... Bus 001 Device 019: ID
+15a2:0054 Freescale Semiconductor, Inc. .... $ sudo ./imx_usb
 image_file }}} The image file that is used will typically be named
 u-boot.bin
 
@@ -68,8 +68,8 @@ u-boot.bin
 
 Now you are ready to load your image into memory and execute:
 
-{{{\#!highlight bash numbers=off \$ lsusb .... Bus 001 Device 019: ID
-15a2:0054 Freescale Semiconductor, Inc. .... \$ sudo ./imx_usb
+{{{\#!highlight bash numbers=off $ lsusb .... Bus 001 Device 019: ID
+15a2:0054 Freescale Semiconductor, Inc. .... $ sudo ./imx_usb
 image_file }}} The image file that is used will typically be named
 u-boot.bin
 
@@ -138,9 +138,9 @@ card to RAM at address 0x12000000 ext2load mmc 1:1 12000000 u-boot.bin
 0x00000000 \# This covers both U-Boot and its saved environment. sf
 erase 0 0x100000
 
-\# Copy \${filesize} bytes from RAM at address 0x12000000 to SPI flash
+\# Copy ${filesize} bytes from RAM at address 0x12000000 to SPI flash
 at address 0x00000000 \# Note that the filesize variable was set when
-the file was loaded into RAM sf write 0x12000000 0 \${filesize}
+the file was loaded into RAM sf write 0x12000000 0 ${filesize}
 
 \# Ensure that the boot select switches are set appropriately, then
 reboot the Sabrelite }}} = Booting seL4 applications = This assumes that

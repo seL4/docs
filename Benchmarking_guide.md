@@ -61,7 +61,7 @@ Example code of using this feature:
 &lt;sel4/benchmark_utilisation_types.h&gt;
 
 uint64_t *ipcbuffer = (uint64_t*)
-&(seL4_GetIPCBuffer()-&gt;msg\[0\]);
+&(seL4_GetIPCBuffer()-&gt;msg[0]);
 
 seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
 
@@ -69,10 +69,10 @@ seL4_BenchmarkResetLog(); ... seL4_BenchmarkFinalizeLog();
 
 seL4_BenchmarkGetThreadUtilisation(seL4_CapInitThreadTCB);
 printf("Init thread utilisation = %llun",
-ipcbuffer\[BENCHMARK_TCB_UTILISATION\]); printf("Idle thread
-utilisation = %llun", ipcbuffer\[BENCHMARK_IDLE_UTILISATION\]);
+ipcbuffer[BENCHMARK_TCB_UTILISATION]); printf("Idle thread
+utilisation = %llun", ipcbuffer[BENCHMARK_IDLE_UTILISATION]);
 printf("Overall utilisation = %llun",
-ipcbuffer\[BENCHMARK_TOTAL_UTILISATION\]); }}}
+ipcbuffer[BENCHMARK_TOTAL_UTILISATION]); }}}
 
 ## In kernel log-buffer
 

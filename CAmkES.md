@@ -28,8 +28,8 @@ The development framework provides:
         subproject dependencies, and repo will fetch all of them and
         place them in the correct subdirectories for you.
     -   Make sure that you already have the tools to build seL4
-        (\[\[Getting started\#Setting_up_your_machine|seL4: Setting
-        up your machine\]\])
+        ([[Getting started\#Setting_up_your_machine|seL4: Setting
+        up your machine]])
 
 ## Build dependencies
 

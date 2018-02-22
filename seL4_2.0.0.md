@@ -151,7 +151,7 @@ Use git log 1.0.4..2.0.0 in <https://github.com/seL4/seL4>
 # More details
 
 
-See the \[\[2.0.0
-manual|<http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf>\]\]
+See the [[2.0.0
+manual|<http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf>]]
 included in the release for detailed descriptions of the new features.
 Or ask on this mailing list!

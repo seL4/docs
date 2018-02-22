@@ -51,8 +51,8 @@ similar to:
 Code being on the master branch '''does not imply''' that it has been
 formally verified. The verified build of the kernel is currently I.MX7
 Sabre platform on ARM. To see which code is verified, please have a look
-at \[\[<https://wiki.sel4.systems/Hardware%7Cour> verified
-platforms\]\].
+at [[<https://wiki.sel4.systems/Hardware%7Cour> verified
+platforms]].
 
 ## User-level code:
 

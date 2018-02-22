@@ -28,7 +28,7 @@ VisualCAmkES is currently on the [CAmkESNext](../CAmkESNext) branch only
 ## How to Install
  Follow the instructions in [CAmkESNext](../CAmkESNext) to
 obtain a copy of the CAmkES next repo. This tool should be found in
-\[path/to/camkes-tool\]/camkes/visualCAmkES.
+[path/to/camkes-tool]/camkes/visualCAmkES.
 
 Running the tool requires a few added dependencies: Graphviz and
 Qt.&lt;&lt;BR&gt;&gt; QT is a framework, which includes GUI, Network,
@@ -77,7 +77,7 @@ will work on the mac.
  This program is quite easy to use, yet quite powerful.
 To start the application, it would be:
 
-` python \[path/to/camkes-tool/camkes\]/visualCAmkES ` === Opening a
+` python [path/to/camkes-tool/camkes]/visualCAmkES ` === Opening a
 File === To open a file, click File-&gt;Open. Then select a '''top-level
 camkes file'''. Your graph will load.
 

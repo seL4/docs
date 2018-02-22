@@ -35,11 +35,11 @@ following links
 <http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/aarch64-linux-gnu/>
 <http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/>
 \#Run the following commands to use GCC 4.9 only in this directory mkdir
-arm-tc arm64-tc tar --strip-components=1 -C \${PWD}/arm-tc -xf
+arm-tc arm64-tc tar --strip-components=1 -C ${PWD}/arm-tc -xf
 \~/Downloads/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz
-tar --strip-components=1 -C \${PWD}/arm64-tc -xf
+tar --strip-components=1 -C ${PWD}/arm64-tc -xf
 \~/Downloads/gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz
-export PATH="\${PWD}/arm-tc/bin:\${PWD}/arm64-tc/bin:\$PATH"
+export PATH="${PWD}/arm-tc/bin:${PWD}/arm64-tc/bin:$PATH"
 
 \# To check that GCC 4.9 is used aarch64-linux-gnu-gcc --version
 arm-linux-gnueabihf-gcc --version }}} == 3. Obtaining the source files
@@ -81,21 +81,21 @@ hikey-flash }}}
 ## 8. Building the UEFI for the Hikey
  {{{\#!highlight bash
 numbers=off export AARCH64_TOOLCHAIN=GCC49 export
-EDK2_DIR=\${PWD}/linaro-edk2 export UEFI_TOOLS_DIR=\${PWD}/uefi-tools
+EDK2_DIR=${PWD}/linaro-edk2 export UEFI_TOOLS_DIR=${PWD}/uefi-tools
 
-cd \${EDK2_DIR} \${UEFI_TOOLS_DIR}/uefi-build.sh -c
+cd ${EDK2_DIR} ${UEFI_TOOLS_DIR}/uefi-build.sh -c
 ../LinaroPkg/platforms.config -b RELEASE -a ../arm-trusted-firmware
 hikey
 
-cd ../l-loader ln -s \${EDK2_DIR}/Build/HiKey/RELEASE_GCC49/FV/bl1.bin
-ln -s \${EDK2_DIR}/Build/HiKey/RELEASE_GCC49/FV/fip.bin
+cd ../l-loader ln -s ${EDK2_DIR}/Build/HiKey/RELEASE_GCC49/FV/bl1.bin
+ln -s ${EDK2_DIR}/Build/HiKey/RELEASE_GCC49/FV/fip.bin
 
 \# If the DEBUG version of the build is require run the below commands
-instead cd \${EDK2_DIR} \${UEFI_TOOLS_DIR}/uefi-build.sh -c
+instead cd ${EDK2_DIR} ${UEFI_TOOLS_DIR}/uefi-build.sh -c
 ../LinaroPkg/platforms.config -b DEBUG -a ../arm-trusted-firmware hikey
 
-cd ../l-loader ln -s \${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/bl1.bin
-ln -s \${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/fip.bin \# End
+cd ../l-loader ln -s ${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/bl1.bin
+ln -s ${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/fip.bin \# End
 
 arm-linux-gnueabihf-gcc -c -o start.o start.S arm-linux-gnueabihf-gcc -c
 -o debug.o debug.S arm-linux-gnueabihf-ld -Bstatic -Tl-loader.lds -Ttext

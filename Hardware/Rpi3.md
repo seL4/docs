@@ -9,8 +9,8 @@
 
 
 Please also find a feature article going on seL4 the Raspberry Pi 3
-\[\[<https://research.csiro.au/tsblog/sel4-raspberry-pi-3/%7Con> our
-blog\]\] (and check out the rest of the blog too!)
+[[<https://research.csiro.au/tsblog/sel4-raspberry-pi-3/%7Con> our
+blog]] (and check out the rest of the blog too!)
 
 ## Serial connection
  Serial TX and RX are located at GPIO pins 14 and

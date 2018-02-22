@@ -15,7 +15,7 @@ make
 An ELF file will be left in images/capdl-loader-experimental-image-arm-tk1\`
 We normally boot using TFTP, by first copying
 capdl-loader-experimental-image-arm-tk1 to a tftpserver then on the
-U-Boot serial console doing: {{{ dhcp tftpboot \$loadaddr
+U-Boot serial console doing: {{{ dhcp tftpboot $loadaddr
 /capdl-loader-experimental-image-arm-tk1 bootelf }}}
 
 ## Notes

@@ -52,7 +52,7 @@ If you get permissions errors you need to add yourself to the
 appropriate group. Find out which group on your machine has access to
 the serial ports (on Debian, it's usually dialout):
 
-{{{\#!highlight bash numbers=off \$ ls -l /dev/ttyUSB0 crw-rw---- 1 root
+{{{\#!highlight bash numbers=off $ ls -l /dev/ttyUSB0 crw-rw---- 1 root
 dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0 }}}
 
 Then add yourself to the right group:
@@ -81,7 +81,7 @@ Then run:
 {{{\#!highlight bash numbers=off make beagle_debug_xml_defconfig make
 }}} Which after a few minutes should give you:
 
-` \[GEN_IMAGE\] sel4test-image-arm-omap3 ` Now, the ELF image we
+` [GEN_IMAGE] sel4test-image-arm-omap3 ` Now, the ELF image we
 boot into is the sel4test-image-arm file. Pull out the SD card, put it
 into the SD card reader and plug into your computer, then copy that file
 into the boot sector, then sync and remove, then plug the SD card back
@@ -91,7 +91,7 @@ Reset the !BeagleBoard by pressing the "S2" (reset) button.
 
 ### To run the image:
  {{{ mmc init mmcinfo fatload mmc 0
-\${loadaddr} sel4test-image-arm bootelf \${loadaddr} }}} where loadaddr
+${loadaddr} sel4test-image-arm bootelf ${loadaddr} }}} where loadaddr
 is some address, in this example defined as an environment variable.
 After this you should start seeing output from seL4test.
 
