@@ -13,18 +13,23 @@ page]], make sure your board is correctly configured and plugged.
 
 # Build your first seL4 system
  First, check out the seL4 project.
-{{{\#!highlight bash numbers=off $ mkdir tegra-test $ repo init -u
-<https://github.com/seL4/sel4test-manifest.git> $ repo sync }}}
+```
+\#!highlight bash numbers=off $ mkdir tegra-test $ repo init -u
+<https://github.com/seL4/sel4test-manifest.git> $ repo sync
+```
 
 Then, use the default config for the tegra and build the system.
-{{{\#!highlight bash numbers=off $ make tk1_debug_xml_defconfig $
-make }}}
+```
+\#!highlight bash numbers=off $ make tk1_debug_xml_defconfig $
+make
+```
 
 Once the system is compiled, you will have a new file creates in the
 "images" directory
-
-{{{\#!highlight bash numbers=off $ ls images/
-sel4test-driver-image-arm-tk1 $ }}}
+```
+\#!highlight bash numbers=off $ ls images/
+sel4test-driver-image-arm-tk1 $
+```
 
 # Load the binary
  You need to be able to see output from the serial
@@ -74,29 +79,37 @@ variable.
 Do
 ==
 
-setenv bootm_boot_mode nonsec saveenv }}} to boot in nonsecure (HYP)
+setenv bootm_boot_mode nonsec saveenv
+```
+to boot in nonsecure (HYP)
 mode. This also enables kvm if you boot Linux.
 
-To go back to secure mode booting do {{{ setenv bootm_boot_mode sec
-saveenv }}} == Getting the sources ==
-
-{{{\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
+To go back to secure mode booting do
+``` setenv bootm_boot_mode sec
+saveenv
+```
+== Getting the sources ==
+```
+\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
 tegra-u-boot-flasher repo init -u
-<git@github.com>:NVIDIA/tegra-uboot-flasher-manifests.git repo sync }}}
+<git@github.com>:NVIDIA/tegra-uboot-flasher-manifests.git repo sync
+```
 
 If you have some difficulties with the git:// protocol, (which will work
 only if you have a github account, and have installed an SSH key there),
 remove the new-u-boot-flasher directory, and start again thus:
-{{{\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
+```
+\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
 tegra-u-boot-flasher repo init -u
 <https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git> repo sync
-}}}
+```
 
 ## Patching the sources
 
 
 Apply the following patch to increase the console buffer size.
-{{{\#!highlight diff numbers=off diff --git
+```
+\#!highlight diff numbers=off diff --git
 a/include/configs/tegra-common.h b/include/configs/tegra-common.h index
 1c469d0..234023d 100644 --- a/include/configs/tegra-common.h +++
 b/include/configs/tegra-common.h @@ -77,7 +77,7 @@ \* Increasing the
@@ -105,24 +118,29 @@ it is not possible to edit it */ -\#define CONFIG_SYS_CBSIZE (256* 2)
 /\* Console I/O Buffer Size */ +\#define CONFIG_SYS_CBSIZE (256* 3)
 /\* Console I/O Buffer Size */ /* Print Buffer Size \*/ \#define
 CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE +
-sizeof(CONFIG_SYS_PROMPT) + 16) }}}
+sizeof(CONFIG_SYS_PROMPT) + 16)
+```
 
 ## Building
  To build the sources, build the necessary tools first.
 
 Install autoconf, pkg-config, flex, bison, libcrypto++-dev and
 libusb-1.0.0-dev for your distribution. On Debian or Ubuntu you can do:
-{{{ sudo apt-get update sudo apt-get install build-essential autoconf
+```
+sudo apt-get update sudo apt-get install build-essential autoconf
 pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev
-gcc-arm-linux-gnueabi }}}
+gcc-arm-linux-gnueabi
+```
 
-Then do: {{{\#!highlight bash numbers=off cd scripts ./build-tools build
-}}}
+Then do:
+```\#!highlight bash numbers=off cd scripts ./build-tools build
+```
 
 Then, in the script directory, build everything.
-
-{{{\#!highlight bash numbers=off ./build --socs tegra124 --boards
-jetson-tk1 build }}}
+```
+\#!highlight bash numbers=off ./build --socs tegra124 --boards
+jetson-tk1 build
+```
 
 ## Flashing
  To flash, attach the Jetson board's OTG USB port to a USB
@@ -130,8 +148,10 @@ port on your machine. Hold down the FORCE RECOVERY button while pressing
 the RESET button next to it; release FORCE RECOVERY a second or two
 after releasing the reset button
 
-Then issue: {{{\#!highlight bash numbers=off ./tegra-uboot-flasher flash
-jetson-tk1 }}}
+Then issue:
+```\#!highlight bash numbers=off ./tegra-uboot-flasher flash
+jetson-tk1
+```
 
 The board should now be updated.
 

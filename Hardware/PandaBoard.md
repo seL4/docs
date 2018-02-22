@@ -1,5 +1,7 @@
-{{{\#!wiki warning The following information is very out of date. Please
-update if you know the current procedure. }}}
+```
+\#!wiki warning The following information is very out of date. Please
+update if you know the current procedure.
+```
 
 !PandaBoard is based on TI OMAP4 dual-core ARM CPU. The Fastboot is used
 to upload and boot the kernel.

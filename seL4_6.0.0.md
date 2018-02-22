@@ -1,6 +1,9 @@
 # seL4 Version 6.0.0 Release
- Announcing the release of {{{seL4
-6.0.0}}} with the following changes:
+ Announcing the release of
+```seL4
+6.0.0
+```
+with the following changes:
 
 ## Highlights
  === ARM 32-bit SMP === \* Works (and tested) only on

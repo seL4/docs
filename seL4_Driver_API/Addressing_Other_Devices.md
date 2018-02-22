@@ -12,9 +12,13 @@ device addressing scheme]].
 
 
 ## Functions
- {{{ seL4drv_connection_t
-\*seL4drv_external_connect(); }}} == Data structures == {{{ typedef
-void seL4drv_connection_t; }}}
+``` seL4drv_connection_t
+\*seL4drv_external_connect();
+```
+== Data structures ==
+``` typedef
+void seL4drv_connection_t;
+```
 
 ## Description
 

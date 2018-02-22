@@ -48,8 +48,11 @@ There are three options for the serial port
 
     1\. '''Output to a socket''' (allows input/output but annoying to
     set up). You'll want to apt-get install socat and then run something
-    like: {{{\#!highlight bash numbers=off \#!/bin/bash while true; do socat
-    -d -d UNIX-CONNECT:/tmp/vsock,forever PTY:link=/dev/tty99 done }}} and
+    like:
+```\#!highlight bash numbers=off \#!/bin/bash while true; do socat
+    -d -d UNIX-CONNECT:/tmp/vsock,forever PTY:link=/dev/tty99 done
+```
+and
     then minicom to /dev/tty99 or
     to /dev/pts/<whatever socat decides to use>.
 
@@ -82,21 +85,23 @@ Simplest method is to simply use VMWare player to boot into the guest OS
 you just installed, and then edit the grub.cfg from the guest OS itself.
 
 Another method is to use '''vmware-mount''':
-
-{{{\#!highlight bash numbers=off \# Usage: vmware-mount diskPath
+```
+\#!highlight bash numbers=off \# Usage: vmware-mount diskPath
 [partition num] mountPoint mkdir /tmp/vmount vmware-mount
 /path/to/your/HD.vmdk /tmp/vmount \# Now do your editing in /tmp/vmount.
-vmware-mount -d /tmp/vmount }}}
+vmware-mount -d /tmp/vmount
+```
 
 Once you have grub.cfg open in your favourite editor, Add an extra
 option to it:
-
-{{{ menuentry 'seL4' --class fedora --class gnu-linux --class gnu
+```
+menuentry 'seL4' --class fedora --class gnu-linux --class gnu
 --class os { load_video insmod gzio insmod part_msdos insmod ext2 set
 root='(hd0,msdos1)' search --no-floppy --fs-uuid --set=root
 <deviceID> echo 'Loading seL4 kernel' multiboot
 /kernel-image-ia32-pc99 echo 'Loading initial module ...' module
-/sel4-image-ia32-pc99 } }}}
+/sel4-image-ia32-pc99 }
+```
 
 Of course, change the '''--set=root <DeviceID>''' line to your
 DeviceID (set the DeviceID from other entries already in your grub.cfg),

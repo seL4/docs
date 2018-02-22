@@ -31,11 +31,11 @@ Uncomment them one by one as needed when going through the tasks.
         must fill these out.
 
 ## Walkthrough
-
-
-{{{ \# select the config for the first tutorial make
+```
+\# select the config for the first tutorial make
 ia32_hello-2_defconfig \# build it make -j8 \# run it in qemu make
-simulate }}}
+simulate
+```
 
 Look for TASK in the apps/hello-2 directory for each task.
 
@@ -51,9 +51,12 @@ important capability references are. This step is teaching you how to
 obtain that structure.
 
 Note that when you run the example, you should get a message similar to:
-{{{ 6 untypeds of size 29 hello-2: <main@main.c>:132 [Cond failed:
+```
+6 untypeds of size 29 hello-2: <main@main.c>:132 [Cond failed:
 allocman == NULL] Failed to initialize alloc manager. Memory pool
-sufficiently sized? Memory pool pointer valid? }}} until Task 4, where
+sufficiently sized? Memory pool pointer valid?
+```
+until Task 4, where
 you set up memory management.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>

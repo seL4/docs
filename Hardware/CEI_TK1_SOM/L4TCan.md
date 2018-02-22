@@ -47,9 +47,11 @@ We're ready to image the TK1. Issue the following command, making
 ABSOLUTELY sure that your of=/dev/sdX line is correct so you don't
 accidentally destroy data on your machine. Also, you want /dev/sdX (the
 device), NOT /dev/sdX3 (partitions) etc.
-
-{{{ gunzip -c tk1_can.img.gz | sudo dd of=/dev/<your TK1 device>
-conv=sync bs=4K status=progress }}} This takes \~1.5Hr on my machine to
+```
+gunzip -c tk1_can.img.gz | sudo dd of=/dev/<your TK1 device>
+conv=sync bs=4K status=progress
+```
+This takes \~1.5Hr on my machine to
 complete. If dd throws a strange error to do with the 'status=progress'
 command, you may be using an old version of dd, it's fine to omit this
 command however you will not see a progress bar.
@@ -104,7 +106,8 @@ dmesg is a bit more helpful.
 not exist in the source code as mcp support has been hacked in. Here's
 the docs from mainline:
 
-  . {{{
+  .
+```
 
 -   Microchip MCP251X stand-alone CAN controller device tree bindings
 
@@ -134,8 +137,7 @@ Example:
       <&reg5v0>;
  
   };
-
-}}}
+```
 
 ### Modify the device tree
  Replace the existing .dts files with
@@ -147,10 +149,12 @@ You also need to remap some GPIOs, swap out the GPIO device tree with
 ### Kernel Build Configuration
  Using make menuconfig, enable CAN and
 MCP251X modules. Make sure your .config contains:
-
-{{{ CONFIG_CAN=m CONFIG_CAN_RAW=m CONFIG_CAN_BCM=m
+```
+CONFIG_CAN=m CONFIG_CAN_RAW=m CONFIG_CAN_BCM=m
 CONFIG_CAN_GW=m CONFIG_CAN_VCAN=m CONFIG_CAN_DEV=m
-CONFIG_CAN_CALC_BITTIMING=y CONFIG_CAN_MCP251X=m }}} In addition to
+CONFIG_CAN_CALC_BITTIMING=y CONFIG_CAN_MCP251X=m
+```
+In addition to
 the 'normal' tk1-som kernel build settings given by Colorado in their
 readme.
 
@@ -177,8 +181,7 @@ line, and change it to touch_id=3@3
  You could do something like this:
 
 update_kernel.sh
-
-{{{
+```
 
 :   \#!/bin/bash
 
@@ -189,12 +192,10 @@ update_kernel.sh
     > $SOM_DIR/boot/zImage sudo cp
     > $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
     > $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
-
-}}}
+```
 
 rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
-
-{{{
+```
 
 :   make
 
@@ -207,8 +208,7 @@ rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
     make modules_install INSTALL_MOD_PATH=/mnt/TK1SOM
 
     umount /dev/sdb1
-
-}}}
+```
 
 # Hello, world
 
@@ -216,8 +216,8 @@ rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
 When you boot up Linux login as: ubuntu password ubuntu.
 
 Then:
-
-{{{ dmesg | grep mcp \# See if the driver loaded properly
+```
+dmesg | grep mcp \# See if the driver loaded properly
 
 [ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe [
 618.718296] mcp251x spi0.0: v2 [ 618.718332] mcp251x spi0.0: got
@@ -254,10 +254,12 @@ eth0 Link encap:Ethernet HWaddr 00:50:c2:72:00:59
 
 sudo apt-get install can-utils \# (make sure to enable universe
 repository & update) cansend can0 5A1\#11.22.33.44.55.66.77.88 \# Send a
-packet candump can0 \# Dump packets }}}
+packet candump can0 \# Dump packets
+```
 
 # Loopback mode test
- {{{ ip link set can0 type can bitrate 500000
+``` ip link set can0 type can bitrate 500000
 loopback on ifconfig can0 up candump any,0:0,\#FFFFFFFF \#In terminal 1
 
-cansend can0 123\#dead \#In terminal 2 }}}
+cansend can0 123\#dead \#In terminal 2
+```

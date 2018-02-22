@@ -17,18 +17,21 @@ demonstrate a realistic workflow of building an app on seL4.
 
 When possible, I don't start apps from scratch. The most similar project
 to what I want to make is the CAmkES x86 VM, so let's start with that:
-
-{{{ repo init -u
+```
+repo init -u
 <ssh://bitbucket.keg.ertos.in.nicta.com.au:7999/seL4/camkes-vm-manifest>
-&& repo sync -j8 }}}
+&& repo sync -j8
+```
 
 The camkes vm actually contains several apps and build configs. The
 simplest one is x64_optiplex9020_onevm_defconfig. Since we just
 grabbed the tip of the master branches of all the projects that make up
 camkes, there's a chance that something is currently broken. Let's make
-sure it all works before changing anything. {{{ make
+sure it all works before changing anything.
+``` make
 x64_optiplex9020_onevm_defconfig make mq-run ... Welcome to Buildroot
-buildroot login: }}}
+buildroot login:
+```
 
 Note that despite the config's name, it actually starts 2 vms.
 
@@ -48,21 +51,24 @@ doesn't break.
 
 Oh, and we won't be using the '''actual''' rt branch, but a bleeding
 edge variant of Anna's fork of seL4.
-
-{{{ cd kernel git remote add alyons
+```
+cd kernel git remote add alyons
 <ssh://git@bitbucket.keg.ertos.in.nicta.com.au:7999/~alyons/seL4.git>
-git fetch alyons git checkout phd cd .. }}}
+git fetch alyons git checkout phd cd ..
+```
 
 We also need to update seL4_libs.
-
-{{{ cd projects/seL4_libs git remote add alyons
+```
+cd projects/seL4_libs git remote add alyons
 <ssh://git@bitbucket.keg.ertos.in.nicta.com.au:7999/~alyons/seL4_libs.git>
-git fetch alyons git checkout phd cd ../.. }}}
+git fetch alyons git checkout phd cd ../..
+```
 
 That changed lots of stuff, so let's remove everything we've built so
 far: ` make mrproper make x64_optiplex9020_onevm_defconfig `
 
-And try building... {{{ $ make 12:12:45 [KERNEL] [BF_GEN]
+And try building...
+``` $ make 12:12:45 [KERNEL] [BF_GEN]
 arch/object/structures_gen.h [BF_GEN]
 plat/64/plat_mode/machine/hardware_gen.h [BF_GEN]
 64/mode/api/shared_types_gen.h [CPP]
@@ -77,12 +83,14 @@ kernel_final.s
 In function ‘sendSignal’:
 /home/ssteve/src/camkes-rt-vm-ethernet/kernel/src/object/notification.c:94:45:
 error: ‘thread’ undeclared (first use in this function)
-maybeDonateSchedContext(thread, ntfnPtr); }}}
+maybeDonateSchedContext(thread, ntfnPtr);
+```
 
 Easy fix. The "thread" variable was renamed to "tcb" and this instance
 wasn't updated.
 
-Try building again... {{{ make ... [apps/capdl-loader-experimental]
+Try building again...
+``` make ... [apps/capdl-loader-experimental]
 building... [HEADERS] [STAGE] debug.h [STAGE] capdl_spec.h
 [STAGE] capdl.h [STAGE] autoconf.h [GEN] capdl_spec.c [CPIO]
 archive.o [CPIO] vm.fserv_group_bin [CPIO] vm_group_bin [CPIO]
@@ -113,7 +121,8 @@ note: declared here seL4_SchedControl_Configure(seL4_SchedControl
 \_service, seL4_SchedContext schedcontext, seL4_Time budget,
 seL4_Time period, seL4_Word max_refills, seL4_Word badge)
 \^\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ ... \# more lines
-of errors }}}
+of errors
+```
 
 Lots of errors. What went wrong?
 

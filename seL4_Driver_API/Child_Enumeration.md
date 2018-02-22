@@ -8,15 +8,17 @@
  ` \#define SEL4DRV_DEVATTR_NAME_MAXLEN (32) `
 
 ## Functions
- {{{ seL4drv_mgmt_enumerate_get_num_children():
+``` seL4drv_mgmt_enumerate_get_num_children():
 seL4drv_mgmt_enumerate_children();
 seL4drv_mgmt_enumerate_hotplug_subscribe(); uint16_t
-seL4drv_mgmt_query_device_match(); }}}
+seL4drv_mgmt_query_device_match();
+```
 
 ## Structures
- {{{ typedef struct seL4drv_child_attribute_ { char
+``` typedef struct seL4drv_child_attribute_ { char
 attr_name[SEL4DRV_DEVATTR_NAME_MAXLEN]; uint32_t attr_value; }
-seL4drv_child_attribute_t; }}}
+seL4drv_child_attribute_t;
+```
 
 ## Child IDs
  Each driver whose device is capable of enumerating child

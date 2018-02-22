@@ -118,7 +118,7 @@ us and allowing the function to return after the delay.
 Build and run with: ` make simulate `
 
 Expect the following output with a 2 second delay between the last 2
-lines: {{{ Starting the client ------Sleep for 2 seconds------After the
+lines:
+``` Starting the client ------Sleep for 2 seconds------After the
 client: wakeup
-
-}}}
+```

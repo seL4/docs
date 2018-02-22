@@ -21,11 +21,11 @@ These tutorials get you started with writing dynamic systems and
 interacting directly with seL4 and our libraries.
 
 ### Get the code
-
-
-{{{ mkdir sel4-tutorials-manifest cd sel4-tutorials-manifest repo init
+```
+mkdir sel4-tutorials-manifest cd sel4-tutorials-manifest repo init
 -u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m
-sel4-tutorials.xml repo sync }}}
+sel4-tutorials.xml repo sync
+```
 
 ### Do the tutorials
 
@@ -64,11 +64,11 @@ is allows you to configure static systems through components. CAmkES
 generates the glue code for interacting with seL4.
 
 ### Get the code
-
-
-{{{ mkdir camkes-tutorials-manifest cd camkes-tutorials-manifest repo
+```
+mkdir camkes-tutorials-manifest cd camkes-tutorials-manifest repo
 init -u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m
-camkes-tutorials.xml repo sync }}}
+camkes-tutorials.xml repo sync
+```
 
 ### Do the tutorials
 

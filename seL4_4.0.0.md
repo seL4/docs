@@ -42,7 +42,10 @@ with the following changes:
 # Implementation improvements
 
 
--   Several enhancements for both `x86}}} and {{{ARM` have
+-   Several enhancements for both `x86
+```
+and
+```ARM` have
     been made. Please see the commit log for details.
 
 # Upgrade notes

@@ -32,11 +32,12 @@ they were covered by a previous tutorial in the series.
         CSpace works.
 
 ## Walkthrough
-
-
-{{{ \# select the config for the first tutorial make
+```
+\# select the config for the first tutorial make
 ia32_hello-4_defconfig \# build it make -j8 \# run it in qemu make
-simulate }}} Look for TASK in the apps/hello-4 and apps/hello-4-app
+simulate
+```
+Look for TASK in the apps/hello-4 and apps/hello-4-app
 directory for each task. The first set of tasks are in
 apps/hello-4/src/main.c and the rest are in apps/hello-4-app/src/main.c
 

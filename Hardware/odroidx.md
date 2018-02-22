@@ -19,9 +19,10 @@ serial port settings to: 115200N1
 
 ##### udev
  You may also like to set up a udev rule for Fastboot:
-
-{{{ SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002",
-MODE="660", GROUP="dialout" }}}
+```
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002",
+MODE="660", GROUP="dialout"
+```
 
 ## SD card setup
  An image file can be found here: TODO Add sd image
@@ -30,9 +31,10 @@ This image contains both U-Boot and Android. This should set up SD card
 partitions properly. seL4 image can be uploaded via Fastboot.
 
 To prepare the SD card, run
-
-{{{\#!highlight bash numbers=off $ sudo dd if=<image file>
-of=</dev/sdx> }}}
+```
+\#!highlight bash numbers=off $ sudo dd if=<image file>
+of=</dev/sdx>
+```
 
 Where "sdx" is the device that is associated with your SD card.
 
@@ -41,19 +43,21 @@ Where "sdx" is the device that is associated with your SD card.
 
 U-Boot must reside at a magical offset in a special partition of the SD
 card. To copy U-Boot and the other boot loaders to the SD card:
-
-{{{\#!highlight bash numbers=off cd sd_fusesudo ./sd_fusing_4412.sh
-/dev/sdx }}}
+```
+\#!highlight bash numbers=off cd sd_fusesudo ./sd_fusing_4412.sh
+/dev/sdx
+```
 
 ## seL4 Image file preparation
  The seL4 image file must be converted
 into a U-Boot application file. The first step is to strip the elf file
 into a binary file. Next we use mkimage to create the image.
-
-{{{\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
+```
+\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
 INPUT_FILE=images/sel4test-image-arm-exynos4 OUTPUT_FILE=sel4-uImage
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d
-$INPUT_FILE $OUTPUT_FILE }}}
+$INPUT_FILE $OUTPUT_FILE
+```
 
 The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file

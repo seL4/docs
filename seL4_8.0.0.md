@@ -1,6 +1,9 @@
 # seL4 Version 8.0.0 Release
- Announcing the release of {{{seL4
-8.0.0}}} with the following changes:
+ Announcing the release of
+```seL4
+8.0.0
+```
+with the following changes:
 
 # Changes
 

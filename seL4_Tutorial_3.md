@@ -45,10 +45,11 @@ they were covered by a previous tutorial in the series.
 
 
 First, build the tutorial:
-
-{{{ \# select the config for the first tutorial make
+```
+\# select the config for the first tutorial make
 ia32_hello-3_defconfig \# build it make -j8 \# run it in qemu make
-simulate }}}
+simulate
+```
 
 Look for TASK in the apps/hello-3 directory for each task.
 

@@ -195,10 +195,11 @@ seL4 5.2.0.
       that work with the forked API
   -   You can obtain and run sel4test for seL4 5.2.0-mcs by doing the
       following:
-
-{{{ $ mkdir sel4test-mcs $ cd sel4test-mcs $ repo init -u
+```
+$ mkdir sel4test-mcs $ cd sel4test-mcs $ repo init -u
 <https://github.com/seL4/sel4test-manifest.git> -m 5.2.x-mcs.xml $ repo
-sync }}}
+sync
+```
 
   -   A [new tutorial](https://wiki.sel4.systems/seL4%20RT%20tutorial) covers the difference in the APIs
 

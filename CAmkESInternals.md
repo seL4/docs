@@ -169,9 +169,10 @@ caps.
 
 Updates the CapDL database, adding a named cap to a given object to the
 current component's cap space, returning the CPtr of the cap.
-
-{{{ // continues from above /*- set ep_cap = alloc_cap("my_ep_cap",
-ep) -*/ seL4_Wait(/*? ep_cap ?*/); }}}
+```
+// continues from above /*- set ep_cap = alloc_cap("my_ep_cap",
+ep) -*/ seL4_Wait(/*? ep_cap ?*/);
+```
 
 #### alloc(name, type)
 
@@ -188,8 +189,10 @@ use to access (some of) its caps. It's implemented as a jinja template:
 <https://github.com/seL4/camkes-tool/blob/master/camkes/templates/component.simple.c>
 
 A component instance can be built with this simple implementation by
-adding the following to the assembly: {{{ configuration {
-instance_name.simple = true; } }}}
+adding the following to the assembly:
+``` configuration {
+instance_name.simple = true; }
+```
 
 ## Template Instantiation Order
 
@@ -214,11 +217,12 @@ cap to the object must first allocate it unless it's already allocated.
 This is because you can't talk about a cap to an object until that
 object has been allocated. Typically in such a situation, you'll see the
 following template code on both sides of the connection:
-
-{{{ /*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
+```
+/*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
 /*- set ep_cap = alloc_cap('this_components_ep_cap', ep) -*/
 
-// do something with ep_cap }}}
+// do something with ep_cap
+```
 
 Looking at the code, it appears the endpoint will be allocated twice, as
 both sides of the connection will call alloc_obj. Digging deeper into
@@ -239,9 +243,11 @@ using some name mangling rules. It's implemented here:
 
 Typical usage of a Perspective is adding names until it has enough
 information to derive the names you need, then querying it for the names
-you need. Here's an example of this: {{{ p = Perspective(instance='foo',
+you need. Here's an example of this:
+``` p = Perspective(instance='foo',
 control=True) print(p['ipc_buffer_symbol']) \# prints
-"_camkes_ipc_buffer_foo_0_control" }}}
+"_camkes_ipc_buffer_foo_0_control"
+```
 
 Here we tell the perspective that we want names in the context of a
 component instance name "foo". This implies that the name of the ipc

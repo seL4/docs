@@ -51,14 +51,17 @@ You can now connect to the !BeagleBoard using Minicom:
 If you get permissions errors you need to add yourself to the
 appropriate group. Find out which group on your machine has access to
 the serial ports (on Debian, it's usually dialout):
-
-{{{\#!highlight bash numbers=off $ ls -l /dev/ttyUSB0 crw-rw---- 1 root
-dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0 }}}
+```
+\#!highlight bash numbers=off $ ls -l /dev/ttyUSB0 crw-rw---- 1 root
+dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0
+```
 
 Then add yourself to the right group:
-
-{{{\#!highlight bash numbers=off sudo usermod -G dialout -a
-your_login_name }}} === U-Boot === Now minicom should connect to what
+```
+\#!highlight bash numbers=off sudo usermod -G dialout -a
+your_login_name
+```
+=== U-Boot === Now minicom should connect to what
 it thinks is a "modem", and then give you a good old console to work
 with. You are now in the bootloader, U-Boot, of the \~BeagleBoard. You
 can type commands here and it'll display the results.
@@ -77,9 +80,10 @@ instructions at
 [Download](https://sel4.systems/Info/Hardware/home.pml)
 
 Then run:
-
-{{{\#!highlight bash numbers=off make beagle_debug_xml_defconfig make
-}}} Which after a few minutes should give you:
+```
+\#!highlight bash numbers=off make beagle_debug_xml_defconfig make
+```
+Which after a few minutes should give you:
 
 ` [GEN_IMAGE] sel4test-image-arm-omap3 ` Now, the ELF image we
 boot into is the sel4test-image-arm file. Pull out the SD card, put it
@@ -90,8 +94,10 @@ into the !BeagleBoard. Pretty self-explanatory.
 Reset the !BeagleBoard by pressing the "S2" (reset) button.
 
 ### To run the image:
- {{{ mmc init mmcinfo fatload mmc 0
-${loadaddr} sel4test-image-arm bootelf ${loadaddr} }}} where loadaddr
+``` mmc init mmcinfo fatload mmc 0
+${loadaddr} sel4test-image-arm bootelf ${loadaddr}
+```
+where loadaddr
 is some address, in this example defined as an environment variable.
 After this you should start seeing output from seL4test.
 

@@ -36,11 +36,12 @@ compile U-Boot from source yourself, or you can
 If you choose to build your own U-boot, then clone U-boot from upstream,
 then revert commit 995eab8b5b580b67394312b1621c60a71042cd18, and then
 build it:
-
-{{{ git clone <https://github.com/u-boot/u-boot.git> u-boot cd u-boot
+```
+git clone <https://github.com/u-boot/u-boot.git> u-boot cd u-boot
 git revert 995eab8b5b580b67394312b1621c60a71042cd18 make
 CROSS_COMPILE=arm-linux-gnueabi- rpi_3_32b_defconfig make
-CROSS_COMPILE=arm-linux-gnueabi-}}}
+CROSS_COMPILE=arm-linux-gnueabi-
+```
 
 This will enable you to get the most up-to-date U-boot which will boot
 seL4 on the RPi3 successfully.
@@ -94,9 +95,10 @@ something the following: fatls mmc 0. If you don't see your seL4 image
 file's name printed out, then you might need to double-check your steps
 so far to make sure you didn't forget something along the way. If you
 see your file listed, then do something like:
-
-{{{ fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2837 bootelf
-0x10000000 }}}
+```
+fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2837 bootelf
+0x10000000
+```
 
 ### TFTP
 
@@ -105,7 +107,8 @@ Be sure you've set up the internal SD card with the required files for
 U-Boot and the RPi3 firmware (consult the table above). Then make
 certain that you've started up a TFTP server with your seL4 image being
 served by that TFTP server. From there:
-
-{{{ usb start dhcp tftp 0x10000000
+```
+usb start dhcp tftp 0x10000000
 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-bcm2837
-bootelf 0x10000000 }}}
+bootelf 0x10000000
+```

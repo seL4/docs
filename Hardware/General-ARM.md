@@ -11,9 +11,11 @@ that seL4 can use support booting via Fastboot.
 
 To boot via Fastboot, you need to convert the image file produced by the
 seL4 build system into a U-Boot image.
-
-{{{ mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel
--O qnx -d INPUT_FILE OUTPUT_FILE }}} The reason we choose QNX is
+```
+mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel
+-O qnx -d INPUT_FILE OUTPUT_FILE
+```
+The reason we choose QNX is
 because we exploit the fact that, like seL4, QNX expects to be
 ELF-loaded. The alternative is to convert our ELF file into a binary
 file using objcopy.
@@ -26,20 +28,17 @@ Odroid-X, Odroid-XU ||0x48000000 || ||Sabre Lite ||0x30000000 ||
 
 When you have your image, put the board into Fastboot mode (interrupt
 U-Boot, and type "fastboot"), then do:
-
-{{{
+```
 
 :   fastboot boot OUTPUT_FILE
-
-}}} == Beagle Board == You can compile a U-boot for
+```
+== Beagle Board == You can compile a U-boot for
 Beagle`` Board that supports Fastboot, or you can use `dfu-util` with the standard U-Boot to transfer the image to the board.  The address that the file downloads to is controlled by the `loadaddr` environment variable in U-Boot. You can either download an  ELF file, and then run `bootelf` on the U-Boot command-line, or download a U-Boot image file (created with `mkimage`) and use `bootm` to run it. You may need to take care that the ELF sections or image regions do not overlap with the location of the ELF/image itself, or loaded to non-existent memory address (0x81000000 works fine, but 0x90000000 won't work on the original Beagle ``Board
 since there's no RAM there).
-
-{{{
+```
 
 :   dfu-util -D sel4test-image-arm
-
-}}}
+```
 
 <<Anchor(sd)>> == Booting from SD card == Pull out the SD
 card from your board, and put it into an SD card reader attached to your
@@ -47,21 +46,17 @@ build host. Mount the (MS-DOS) filesystem on the first partition on the
 SD card and copy your image to it. Unmount the filesystem, and put the
 card back into your board. Reset the board (by power cycling, or
 pressing the reset button). To run the image:
-
-{{{
+```
 
 :   mmc init mmcinfo fatload mmc 0 ${loadaddr} sel4test-image-arm
     bootelf ${loadaddr}
-
-}}}
+```
 
 You can use
-
-{{{
+```
 
 :   fatls mmc 0
-
-}}}
+```
 
 to see what is there. Most U-Boot implementations define a suitable
 loadaddr in their environment.
@@ -73,9 +68,7 @@ TFTP-enabled U-Boot on your board if it doesn't already have one.
 
 You can then power up the device and stop U-Boot's auto boot feature if
 enabled by pressing a key, and do:
-
-{{{
+```
 
 :   dhcp file address bootelf address
-
-}}}
+```

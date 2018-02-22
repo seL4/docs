@@ -11,9 +11,8 @@ All CapDL-related projects are in this repo:
 <https://github.com/sel4/capdl>
 
 ## Example Spec
-
-
-{{{ arch ia32
+```
+arch ia32
 
 objects {
 

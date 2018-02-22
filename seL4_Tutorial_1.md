@@ -35,20 +35,24 @@ for zynq7000/ARM with just changing the config selection (e.g. make
 zynq7000_hello-1_defconfig)
 
 First try to build the code:
-
-{{{ \# go to the top level directory cd sel4-tutorials-manifest/ \#
+```
+\# go to the top level directory cd sel4-tutorials-manifest/ \#
 select the config for the first tutorial make ia32_hello-1_defconfig
-\# build it make -j8 }}} This will fail to build with the following
+\# build it make -j8
+```
+This will fail to build with the following
 error:
-
-{{{ /home/alyons/sel4-tutorials-source/stage/x86/pc99/lib/crt1.o: In
+```
+/home/alyons/sel4-tutorials-source/stage/x86/pc99/lib/crt1.o: In
 function \_start_c':
 /home/alyons/sel4-tutorials-source/libs/libmuslc/crt/crt1.c:17: undefined reference to main'
 collect2: error: ld returned 1 exit status
 /home/alyons/sel4-tutorials-source/stage/x86/pc99/common/common.mk:301:
 recipe for target 'hello-1.elf' failed make[1]: **\* [hello-1.elf]
 Error 1 tools/common/project.mk:332: recipe for target 'hello-1' failed
-make:**\* [hello-1] Error 2 }}} === TASK 1 === Your task is to fix the
+make:**\* [hello-1] Error 2
+```
+=== TASK 1 === Your task is to fix the
 above error. Look for TASK in apps/hello1 to find the code to modify.
 
 Regardless of the programming language used, every binary that is
@@ -75,6 +79,7 @@ run the example as follows:
 
 ` $ make -j8 $ make simulate ` If you've succeeded, qemu should
 output:
-
-{{{ Starting node \#0 with APIC ID 0 Booting all finished, dropped to
-user space hello world }}}
+```
+Starting node \#0 with APIC ID 0 Booting all finished, dropped to
+user space hello world
+```

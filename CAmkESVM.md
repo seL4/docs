@@ -5,8 +5,10 @@ the instructions [here](CAmkES\#Build_dependencies).
 <<TableOfContents>>
 
 ## Getting the Code
- {{{ repo init -u
-<https://github.com/seL4/camkes-vm-manifest.git> repo sync }}} ==
+``` repo init -u
+<https://github.com/seL4/camkes-vm-manifest.git> repo sync
+```
+==
 Starting Point == This repo contains many vm apps. We'll start from
 something basic, and add to it:
 
@@ -22,8 +24,8 @@ Login with the username "root" and the password "root".
 ## Quick walk through the source code
  The top level CAmkES spec is in
 apps/cma34cr_minimal/vm.camkes:
-
-{{{ import <VM/vm.camkes>; import "cma34cr.camkes";
+```
+import <VM/vm.camkes>; import "cma34cr.camkes";
 
 assembly {
 
@@ -42,8 +44,8 @@ This is a very simple app, with a single vm, and nothing else. Each
 different vm app will have its own implementation of the VM component,
 where the guest environment is configured. For this app, the VM
 component is defined in apps/cma34cr_minimal/cma34cr.camkes:
-
-{{{ \#include <autoconf.h> \#include <configurations/vm.h>
+```
+\#include <autoconf.h> \#include <configurations/vm.h>
 
 component Init0 {
 
@@ -105,15 +107,15 @@ guest.
 
 The local files used to construct the CPIO archive are specified in the
 app's Makefile, located at \`apps/cma34cr_minimal/Makefile\`:
-
-{{{
+```
 ---
 
 KERNEL_FILENAME := bzimage ROOTFS_FILENAME := rootfs.cpio ...
 ${STAGE_DIR}/${KERNEL_FILENAME}:
 $(SOURCE_DIR)/linux/${KERNEL_FILENAME} ...
 ${STAGE_DIR}/${ROOTFS_FILENAME}:
-${SOURCE_DIR}/linux/${ROOTFS_FILENAME} ... }}}
+${SOURCE_DIR}/linux/${ROOTFS_FILENAME} ...
+```
 
 Both these rules refer to the "linux" directory, located at
 projects/vm/linux. It contains some tools for building new linux kernel
@@ -167,8 +169,8 @@ Here's a summary of what the build-rootfs tool does:
 ` mkdir projects/vm/linux/pkg/hello `
 
 2.  Make a simple C program in projects/vm/linux/pkg/hello/hello.c
-
-{{{ \#include <stdio.h>
+```
+\#include <stdio.h>
 
 int main(int argc, char \*argv[]) {
 
@@ -178,16 +180,15 @@ int main(int argc, char \*argv[]) {
 =
 
 3.  Add a Makefile in \`projects/vm/linux/pkg/hello/Makefile\`:
-
-{{{ TARGET = hello
+```
+TARGET = hello
 
 include ../../common.mk include ../../common_app.mk
 
 hello: hello.o
 
 :   $(CC) $(CFLAGS) $(LDFLAGS) $\^ -o $@
-
-}}}
+```
 
 Make sure there is a TAB character in the makefile, rather than spaces
 
@@ -199,9 +200,11 @@ Make sure there is a TAB character in the makefile, rather than spaces
 5.  Rebuild the app:
 
 ` make ` 6. Run the app (use root as username and password):
-
-{{{ Welcome to Buildroot buildroot login: root Password: \# hello Hello,
-World! }}} === Adding a kernel module === We're going to add a new
+```
+Welcome to Buildroot buildroot login: root Password: \# hello Hello,
+World!
+```
+=== Adding a kernel module === We're going to add a new
 kernel module that lets us poke the vmm.
 
 1.  Make a new directory:
@@ -214,8 +217,8 @@ Initially we'll just get the module building and running, and then take
 care of communicating between the module and the vmm. For simplicity,
 we'll make it so when a special file associated with this module is
 written to, the vmm gets poked.
-
-{{{ \#include <linux/module.h> \#include <linux/kernel.h>
+```
+\#include <linux/module.h> \#include <linux/kernel.h>
 \#include <linux/init.h> \#include <linux/fs.h>
 
 \#include <asm/uaccess.h> \#include <asm/kvm_para.h>
@@ -252,11 +255,12 @@ static void \__exit poke_exit(void) {
 
 }
 
-module_init(poke_init); module_exit(poke_exit); }}}
+module_init(poke_init); module_exit(poke_exit);
+```
 
 3.  And a makefile in \`projects/vm/linux/modules/poke/Makefile\`:
-
-{{{ obj-m += poke.o CFLAGS_poke.o = -I../../include
+```
+obj-m += poke.o CFLAGS_poke.o = -I../../include
 -I../../../common/shared_include
 
 all:
@@ -266,13 +270,11 @@ all:
 clean:
 
 :   make -C $(KHEAD) M=$(PWD) clean
-
-}}}
+```
 
 4.  Add the new module to so it is loaded during initialization, edit
     projects/vm/linux/init_template:
-
-{{{
+```
 ---
 
 insmod
@@ -282,19 +284,21 @@ insmod
 insmod
 /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/emits_event.ko
 insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
-<-- add this line ... }}}
+<-- add this line ...
+```
 
 5.  Run the build-rootfs tool, then make
 
 ` cd projects/vm/linux/ ./build-rootfs cd ../../.. make `
 
 6.  Run the app:
-
-{{{ Welcome to Buildroot buildroot login: root Password: \# grep poke
+```
+Welcome to Buildroot buildroot login: root Password: \# grep poke
 /proc/devices \# figure out the major number of our driver 244 poke \#
 mknod /dev/poke c 244 0 \# create the special file \# echo >
 /dev/poke \# write to the file [ 57.389643] hi -sh: write error: Bad
-address \# the shell complains, but our module is being invoked! }}}
+address \# the shell complains, but our module is being invoked!
+```
 
 '''Now let's make it talk to the vmm'''.
 
@@ -307,24 +311,24 @@ The choice of 4 is because 0..3 are taken by other hypercalls.
     \`projects/vm/components/Init/src/main.c\`:
 
 Add a new function at the top of the file:
-
-{{{ static int poke_handler(vmm_vcpu_t \*vmm_vcpu) {
-printf("POKE!!!n"); return 0; } }}}
+```
+static int poke_handler(vmm_vcpu_t \*vmm_vcpu) {
+printf("POKE!!!n"); return 0; }
+```
 
 In the function main_continued register \`poke_handler\`:
-
-{{{
+```
 
 :   reg_new_handler(&vmm, poke_handler, 4); // <--- added
 
     /\* Now go run the event loop \*/ vmm_run(&vmm);
-
-}}}
+```
 
 9.  Finally re-run build-rootfs, make, and run:
-
-{{{ Welcome to Buildroot buildroot login: root Password: \# mknod
-/dev/poke c 244 0 \# echo > /dev/poke POKE!!! }}}
+```
+Welcome to Buildroot buildroot login: root Password: \# mknod
+/dev/poke c 244 0 \# echo > /dev/poke POKE!!!
+```
 
 ## Cross VM Connectors
 
@@ -411,7 +415,8 @@ string.
 
 We'll start on the CAmkES side. Edit
 apps/cma34cr_minimal/cma34cr.camkes, adding the following interfaces to
-the Init0 component definition: {{{ component Init0 { VM_INIT_DEF()
+the Init0 component definition:
+``` component Init0 { VM_INIT_DEF()
 
   // Add the following four lines: dataport Buf(4096) data; emits
   DoPrint do_print; consumes DonePrinting done_printing; has mutex
@@ -425,14 +430,17 @@ the guest linux. The mutex is used to protect access to shared state
 between the VMM and guest.
 
 Now, we'll define the print server component. Add the following to
-apps/cma34cr_minimal/cma34cr.camkes: {{{ component PrintServer {
+apps/cma34cr_minimal/cma34cr.camkes:
+``` component PrintServer {
 control; dataport Buf(4096) data; consumes DoPrint do_print; emits
-DonePrinting done_printing; } }}}
+DonePrinting done_printing; }
+```
 
 We'll get around to actually implementing this soon. First, let's
 instantiate the print server and connect it to the VMM. Add the
 following to the composition section in
-apps/cma34cr_minimal/cma34cr.camkes: {{{ component VM {
+apps/cma34cr_minimal/cma34cr.camkes:
+``` component VM {
 
   composition {
  
@@ -464,7 +472,8 @@ which requires caps to the physical memory being mapped in.
 Interfaces connected with [seL4SharedDataWithCaps](../seL4SharedDataWithCaps) must be
 configured with an integer specifying the id of the dataport, and the
 size of the dataport. Add the following to the configuration section in
-apps/cma34cr_minimal/cma34cr.camkes: {{{ configuration {
+apps/cma34cr_minimal/cma34cr.camkes:
+``` configuration {
 VM_CONFIGURATION_DEF() VM_PER_VM_CONFIG_DEF(0, 2)
 
   vm0.simple_untyped24_pool = 12; vm0.heap_size = 0x10000;
@@ -476,11 +485,11 @@ VM_CONFIGURATION_DEF() VM_PER_VM_CONFIG_DEF(0, 2)
   contiguous, starting from 1 vm0.data_size = 4096;
 
   }
-
-}}}
+```
 
 Now let's implement our print server. Create a file
-apps/cma34cr_minimal/print_server.c: {{{ \#include <camkes.h>
+apps/cma34cr_minimal/print_server.c:
+``` \#include <camkes.h>
 \#include <stdio.h>
 
 int run(void) {
@@ -511,7 +520,8 @@ We need to create another c file that tells the VMM about our cross vm connectio
     -   cross_vm_emits_events_init
     -   cross_vm_consumes_events_init
 
-Create a file apps/cma34cr_minimal/cross_vm.c: {{{ \#include
+Create a file apps/cma34cr_minimal/cross_vm.c:
+``` \#include
 <sel4/sel4.h> \#include <camkes.h> \#include
 <camkes_mutex.h> \#include <camkes_consumes_event.h>
 \#include <camkes_emits_event.h> \#include
@@ -571,10 +581,13 @@ int cross_vm_consumes_events_init(vmm_t *vmm, vspace_t*vspace, seL4_Word irq_bad
 =
 
 To make this build, we need to symlink the common source directory for
-the camkes vm into the app's directory: {{{ ln -s ../../common
-apps/cma34cr_minimal }}}
+the camkes vm into the app's directory:
+``` ln -s ../../common
+apps/cma34cr_minimal
+```
 
-And make the following change to apps/cma34cr_minimal/Makefile: {{{ ...
+And make the following change to apps/cma34cr_minimal/Makefile:
+``` ...
 include PCIConfigIO/PCIConfigIO.mk include FileServer/FileServer.mk
 include Init/Init.mk
 
@@ -585,12 +598,14 @@ $(wildcard $(SOURCE_DIR)/common/include/*.h)
  $(wildcard
 $(SOURCE_DIR)/common/shared_include/cross_vm_shared/\*.h)
 
-PrintServer_CFILES += $(SOURCE_DIR)/print_server.c ... }}}
+PrintServer_CFILES += $(SOURCE_DIR)/print_server.c ...
+```
 
 The app should now build when you run "make", but we're not done yet. No
 we'll make these interfaces available to the guest linux. Edit
 projects/vm/linux/camkes_init. It's a shell script that is executed as
-linux is initialized. Currently it should look like: {{{ \#!/bin/sh \#
+linux is initialized. Currently it should look like:
+``` \#!/bin/sh \#
 Initialises linux-side of cross vm connections.
 
 \# Dataport sizes must match those in the camkes spec. \# For each
@@ -601,10 +616,12 @@ with id n. dataport_init /dev/camkes_reverse_src 8192
 \# The nth argument to event_init corresponds to the \# event with id n
 according to the camkes vmm. consumes_event_init
 /dev/camkes_reverse_done emits_event_init
-/dev/camkes_reverse_ready }}}
+/dev/camkes_reverse_ready
+```
 
 This sets up some interfaces used for a simple demo. Delete all that,
-and add the following: {{{ \#!/bin/sh \# Initialises linux-side of cross
+and add the following:
+``` \#!/bin/sh \# Initialises linux-side of cross
 vm connections.
 
 \# Dataport sizes must match those in the camkes spec. \# For each
@@ -614,7 +631,7 @@ with id n. dataport_init /dev/camkes_data 4096
 \# The nth argument to event_init corresponds to the \# event with id n
 according to the camkes vmm. consumes_event_init
 /dev/camkes_done_printing emits_event_init /dev/camkes_do_print
-}}}
+```
 
 Each of these commands creates device nodes associated with a particular
 linux kernel module supporting cross vm communication. Each command
@@ -626,10 +643,13 @@ These changes will cause device nodes to be created which correspond to
 the interfaces we added to the VMM component.
 
 Now let's make an app that uses these nodes to communicate with the
-print server. As before, create a new directory in pkg: {{{ mkdir
-projects/vm/linux/pkg/print_client }}}
+print server. As before, create a new directory in pkg:
+``` mkdir
+projects/vm/linux/pkg/print_client
+```
 
-Create projects/vm/linux/pkg/print_client/print_client.c: {{{
+Create projects/vm/linux/pkg/print_client/print_client.c:
+```
 \#include <string.h> \#include <assert.h>
 
 \#include <sys/types.h> \#include <sys/stat.h> \#include
@@ -673,7 +693,8 @@ int main(int argc, char \*argv[]) {
 This program prints each of its arguments on a separate line, by sending
 each argument to the print server one at a time.
 
-Create projects/vm/linux/pkg/print_client/Makefile: {{{ TARGET =
+Create projects/vm/linux/pkg/print_client/Makefile:
+``` TARGET =
 print_client
 
 include ../../common.mk include ../../common_app.mk
@@ -681,17 +702,18 @@ include ../../common.mk include ../../common_app.mk
 print_client: print_client.o
 
 :   $(CC) $(CFLAGS) $(LDFLAGS) $\^ -lcamkes -o $@
+```
 
-}}}
-
-Now, run build-rootfs, and make, and run! {{{ ... Creating dataport node
+Now, run build-rootfs, and make, and run!
+``` ... Creating dataport node
 /dev/camkes_data Allocating 4096 bytes for /dev/camkes_data Creating
 consuming event node /dev/camkes_done_printing Creating emitting event
 node /dev/camkes_do_print
 
 Welcome to Buildroot buildroot login: root Password: \# print_client
 hello world [ 12.730073] dataport received mmap for minor 1 hello
-world }}}
+world
+```
 
 ## Booting from hard drive
 
@@ -725,7 +747,8 @@ We need to generate a root filesystem image suitable for ubuntu. Ubuntu
 ships with a tool called mkinitramfs which generates root filesystem
 images. Let's use it to generate a root filesystem image compatible with
 the linux kernel we'll be using. Boot ubuntu natively on the cma34cr and
-run the following command: {{{ $ mkinitramfs -o rootfs.cpio 4.8.16
+run the following command:
+``` $ mkinitramfs -o rootfs.cpio 4.8.16
 WARNING: missing /lib/modules/4.8.16 Ensure all necessary drivers are
 built into the linux image! depmod: ERROR: could not open directory
 /lib/modules/4.8.16: No such file or directory depmod: FATAL: could not
@@ -733,36 +756,48 @@ search modules: No such file or directory depmod: WARNING: could not
 open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/modules.order: No
 such file or directory depmod: WARNING: could not open
 /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/modules.builtin: No such
-file or directory }}}
+file or directory
+```
 
 The kernel we'll be using has all the necessary drivers built in, so
 feel free to ignore those warnings and errors. You should now have a
 file called rootfs.cpio on the cma34cr. Transfer that file to your dev
 machine, and put it in apps/cma34cr_minimal. Now we need to tell the
 build system to take that rootfs image rather than the default buildroot
-one. Edit apps/cma34cr_minimal/Makefile. Change this line: {{{
+one. Edit apps/cma34cr_minimal/Makefile. Change this line:
+```
 ${STAGE_DIR}/${ROOTFS_FILENAME}:
-${SOURCE_DIR}/linux/${ROOTFS_FILENAME} }}} to {{{
+${SOURCE_DIR}/linux/${ROOTFS_FILENAME}
+```
+to
+```
 ${STAGE_DIR}/${ROOTFS_FILENAME}:
-${SOURCE_DIR}/${ROOTFS_FILENAME} }}}
+${SOURCE_DIR}/${ROOTFS_FILENAME}
+```
 
 Since we'll be using a real hard drive, we need to change the boot
 command line we give to the guest linux. Open
 apps/cma34cr_minimal/configurations/cma34cr_minimal.h, and change the
-definition of VM_GUEST_CMDLINE to: {{{ \#define VM_GUEST_CMDLINE
+definition of VM_GUEST_CMDLINE to:
+``` \#define VM_GUEST_CMDLINE
 "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y
 i8042.nomux=y i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug
-root=/dev/sda1 rdinit=/init 2" }}}
+root=/dev/sda1 rdinit=/init 2"
+```
 
-Try building and running after this change: {{{ BusyBox v1.22.1 (Ubuntu
+Try building and running after this change:
+``` BusyBox v1.22.1 (Ubuntu
 1:1.22.0-15ubuntu1) built-in shell (ash) Enter 'help' for a list of
 built-in commands.
 
-(initramfs) }}}
+(initramfs)
+```
 
 You should get dropped into a shell inside the root filesystem. You can
-run commands from here: {{{ (initramfs) pwd / (initramfs) ls dev run
-init scripts var usr sys tmp root sbin etc bin lib conf proc }}}
+run commands from here:
+``` (initramfs) pwd / (initramfs) ls dev run
+init scripts var usr sys tmp root sbin etc bin lib conf proc
+```
 
 If you look inside /dev, you'll notice the lack of sda device. Linux
 can't find the hard drive because we haven't passed it through yet.
@@ -776,8 +811,7 @@ Open apps/cma34cr_minimal/cma34cr.camkes and add the following to the
 configuration section:
 
 For AHCI:
-
-{{{
+```
 
 :   
 
@@ -820,12 +854,10 @@ For AHCI:
         ];
 
     }
-
-}}}
+```
 
 For IDE:
-
-{{{
+```
 
 :   
 
@@ -869,31 +901,35 @@ For IDE:
         ];
 
     }
+```
 
-}}}
+Now rebuild and run:
+``` Ubuntu 16.04.1 LTS ertos-CMA34CR ttyS0
 
-Now rebuild and run: {{{ Ubuntu 16.04.1 LTS ertos-CMA34CR ttyS0
-
-ertos-CMA34CR login: }}}
+ertos-CMA34CR login:
+```
 
 You should be able to log in and use the system largely as normal.
 
 ## Passthrough Ethernet
 
 
-The ethernet device is not accessible to the guest: {{{ $ ip addr 1:
+The ethernet device is not accessible to the guest:
+``` $ ip addr 1:
 lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
 group default qlen 1 link/loopback 00:00:00:00:00:00 brd
 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever
 preferred_lft forever inet6 ::1/128 scope host valid_lft forever
 preferred_lft forever 2: <sit0@NONE>: <NOARP> mtu 1480 qdisc noop
-state DOWN group default qlen 1 link/sit 0.0.0.0 brd 0.0.0.0 }}}
+state DOWN group default qlen 1 link/sit 0.0.0.0 brd 0.0.0.0
+```
 
 An easy way to give the guest network access is to give it passthrough
 access to the ethernet controller. This is done much in the same way as
 enabling passthrough access to the sata controller. In the configuration
 section in apps/cma34cr_minimal/cma34cr.camkes, add to the list of io
-ports, pci devices and irqs to pass through: {{{ vm0_config.ioports =
+ports, pci devices and irqs to pass through:
+``` vm0_config.ioports =
 [ {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
 {"start":0x4090, "end":0x40a0, "pci_device":0x1f, "name":"SATA"},
 {"start":0x40b0, "end":0x40b8, "pci_device":0x1f, "name":"SATA"},
@@ -928,11 +964,11 @@ ports, pci devices and irqs to pass through: {{{ vm0_config.ioports =
       "active_low":1, "dest":10}, // <--- Add this entry
  
   ];
-
-}}}
+```
 
 You should have added a new entry to each of the three lists that
-describe passthrough devices. Building and running: {{{ $ ip addr 1:
+describe passthrough devices. Building and running:
+``` $ ip addr 1:
 lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
 group default qlen 1 link/loopback 00:00:00:00:00:00 brd
 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever
@@ -955,7 +991,8 @@ ttl=51 time=2.17 ms 64 bytes from syd15s03-in-f14.1e100.net
 (172.217.25.142): icmp_seq=2 ttl=51 time=1.95 ms 64 bytes from
 syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=3 ttl=51 time=1.99
 ms 64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=4
-ttl=51 time=2.20 ms }}}
+ttl=51 time=2.20 ms
+```
 
 ## Figuring out information about PCI devices
 

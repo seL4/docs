@@ -56,8 +56,8 @@ position. Additionally idle thread and overall CPU utilisation times are
 dumped to subsequent 64-bit words in the IPCBuffer.
 
 Example code of using this feature:
-
-{{{\#!cplusplus numbers=off \#include
+```cpp
+ \#include
 <sel4/benchmark_utilisation_types.h>
 
 uint64_t *ipcbuffer = (uint64_t*)
@@ -72,7 +72,8 @@ printf("Init thread utilisation = %llun",
 ipcbuffer[BENCHMARK_TCB_UTILISATION]); printf("Idle thread
 utilisation = %llun", ipcbuffer[BENCHMARK_IDLE_UTILISATION]);
 printf("Overall utilisation = %llun",
-ipcbuffer[BENCHMARK_TOTAL_UTILISATION]); }}}
+ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
+```
 
 ## In kernel log-buffer
 
@@ -116,10 +117,11 @@ in the sel4bench app(<https://github.com/seL4/libsel4bench>).
  ==== Measuring Overhead ==== Using
 tracepoints adds a small amount of overhead to the kernel. To measure
 this overhead, use a pair of nested tracepoints:
-
-{{{\#!cplusplus numbers=off TRACE_POINT_START(0);
+```cpp
+ TRACE_POINT_START(0);
 TRACE_POINT_START(1); TRACE_POINT_STOP(1); TRACE_POINT_STOP(0);
-}}} The outer tracepoints will measure the time taken to start and stop
+```
+The outer tracepoints will measure the time taken to start and stop
 the inner tracepoints. The cycle count recorded by the outer tracepoints
 will be slightly skewed, as starting and stopping itself (the outer
 tracepoints) takes some number of cycles. To determine how many, we look
@@ -280,31 +282,41 @@ a particular path through some region of code. Here are some examples:
 
 The cycles consumed by functions f and g is logged with the key 0, only
 when the condition c is true:
-
-{{{\#!cplusplus numbers=off TRACE_POINT_START(0); f(); if (c) { g();
-TRACE_POINT_STOP(0); } }}} The cycles consumed by functions f and g is
+```cpp
+ TRACE_POINT_START(0); f(); if (c) { g();
+TRACE_POINT_STOP(0); }
+```
+The cycles consumed by functions f and g is
 logged with the key 1, only when the condition c is true:
-
-{{{\#!cplusplus numbers=off if (c) { f(); TRACE_POINT_START(1); } g();
-TRACE_POINT_STOP(1); }}} These two techniques can be combined to
+```cpp
+ if (c) { f(); TRACE_POINT_START(1); } g();
+TRACE_POINT_STOP(1);
+```
+These two techniques can be combined to
 record cycle counts only when a particular path between 2 points is
 followed. In the following example, cycles consumed by functions f, g
 and h is logged, only when the condition c is true. Cycle counts are
 stored with 2 keys (2 and 3) which can be combined after extracting the
 data to user level.
-
-{{{\#!cplusplus numbers=off TRACE_POINT_START(2); f(); if (c) { h();
+```cpp
+ TRACE_POINT_START(2); f(); if (c) { h();
 TRACE_POINT_STOP(2); TRACE_POINT_START(3); } g();
-TRACE_POINT_STOP(3); }}} ==== Interleaving/Nesting ==== It's possible
+TRACE_POINT_STOP(3);
+```
+==== Interleaving/Nesting ==== It's possible
 to interleave tracepoints:
-
-{{{\#!cplusplus numbers=off TRACE_POINT_START(0); ...
+```cpp
+ TRACE_POINT_START(0); ...
 TRACE_POINT_START(1); ... TRACE_POINT_STOP(0); ...
-TRACE_POINT_STOP(1); }}} and to nest tracepoints:
-
-{{{\#!cplusplus numbers=off TRACE_POINT_START(0); ...
+TRACE_POINT_STOP(1);
+```
+and to nest tracepoints:
+```cpp
+ TRACE_POINT_START(0); ...
 TRACE_POINT_START(1); ... TRACE_POINT_STOP(1); ...
-TRACE_POINT_STOP(0); }}} When interleaving or nesting tracepoints, be
+TRACE_POINT_STOP(0);
+```
+When interleaving or nesting tracepoints, be
 sure to account for the overhead that will be introduced.
 
 ## Kernel entry tracking
@@ -321,8 +333,8 @@ CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES from menuconfig.
 
 An example how to create a user-level log buffer (using sel4 libraries)
 and tell the kernel about it is as follows:
+```cpp
 
-{{{\#!cplusplus numbers=off
 
 \#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 
@@ -337,7 +349,8 @@ and tell the kernel about it is as follows:
   seL4_BenchmarkSetLogBuffer(buffer_cap); if (res_buf) {
   ZF_LOGF("Could not set log buffer"); }
 
-\#endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES }}}
+\#endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
+```
 
 seL4_BenchmarkResetLog() can be used then to reset the log buffer index
 and start tracking. To stop tracking, call seL4_BenchmarkFinalizeLog()

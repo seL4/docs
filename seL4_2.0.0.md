@@ -66,14 +66,21 @@ number of runnable threads, now log n)
 :   -   improved benchmarking macros: can now specify multiple
         benchmarking
 
-tracepoints at once added {{{CONFIG_RELEASE_PRINTF}} in addition to
-`CONFIG_DEBUG}}} and {{{CONFIG_RELEASE`, which enables printf in a
+tracepoints at once added
+```CONFIG_RELEASE_PRINTF}} in addition to
+`CONFIG_DEBUG
+```
+and
+```CONFIG_RELEASE`, which enables printf in a
 release build
 
 # API Changes
 
 
-  -   `seL4_Recv}}} replaces {{{seL4_Wait` on endpoints
+  -   `seL4_Recv
+```
+replaces
+```seL4_Wait` on endpoints
   -   `seL4_Wait` is now only used on notification objects
   -   Async endpoint -> notification object
   -   sync endpoint -> endpoint
@@ -90,7 +97,10 @@ bound notification object.
   -   `seL4_NotificationBits` size in bits of a notification object
   -   `seL4_IRQHandler_SetNotification` replaces deprecated
       `seL4_IRQHandler_SetEndpoint`
-  -   `seL4_Recv}}} replaces {{{seL4_Wait` for endpoints
+  -   `seL4_Recv
+```
+replaces
+```seL4_Wait` for endpoints
   -   `seL4_Wait` used on notifications
   -   `seL4_NBRecv` non-blocking (polling) receive on an endpoint,
       which fails
@@ -130,7 +140,10 @@ library repositories. To see the changes please compare 1.0.4.xml and
 # Upgrade notes
 
 
-Calls to `seL4_Wait}}} no longer return a {{{seL4_MessageInfo_t`
+Calls to `seL4_Wait
+```
+no longer return a
+```seL4_MessageInfo_t`
 as `seL4_Wait` is intended to be used on notification objects.
 Calls to the prior version of `seL4_Wait` need to be replaced with
 `seL4_Recv`.

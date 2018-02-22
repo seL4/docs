@@ -25,9 +25,11 @@ interface, which provides access to the caps mapping the dataport:
 [dataport_caps.h](https://github.com/seL4/camkes-vm/blob/3883770209ba2bfb4f85ed2b7d387731e2601b7d/common/include/dataport_caps.h).
 
 The interface on the "to" side of each seL4SharedDataWithCaps connection
-must be configured with a unique id and size: {{{
+must be configured with a unique id and size:
+```
 <instance>.<interface>_id = <unique integer >= 1>;
-<instance>.<interface>_size = <integer size>; }}}
+<instance>.<interface>_size = <integer size>;
+```
 
 Specifying a non-unique or non-positive id is an error. Specifying a
 size other than the size of the type of the dataport is an error.

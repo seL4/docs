@@ -49,9 +49,10 @@ component. More information about the VM on seL4 can be found on
 
 I replicate some of the steps described there to make it easier to
 follow. First pull the code from the repository using ''repo'' tool.
-
-{{{ mkdir test_default cd test_default repo init -u
-<https://github.com/seL4/camkes-vm-manifest.git> repo sync }}}
+```
+mkdir test_default cd test_default repo init -u
+<https://github.com/seL4/camkes-vm-manifest.git> repo sync
+```
 
 We use ''optiplex9020'' configuration, because it is the most generic
 one. The other configurations for
@@ -59,8 +60,10 @@ one. The other configurations for
 compiled too, but you can't run them properly in qemu because they
 require a very specific hardware.
 
-Type: {{{ make clean make optiplex9020_defconfig make silentoldconfig
-make }}}
+Type:
+``` make clean make optiplex9020_defconfig make silentoldconfig
+make
+```
 
 If everything goes fine, you should end up with two binaries in
 ''images'' directory: '' capdl-loader-experimental-image-ia32-pc99''
@@ -71,10 +74,11 @@ which is the seL4 kernel.
 
 
 To run the images we just compiled, do:
-
-{{{ cd images qemu-system-x86_64 -m 512 -kernel kernel-ia32-pc99
+```
+cd images qemu-system-x86_64 -m 512 -kernel kernel-ia32-pc99
 -initrd capdl-loader-experimental-image-ia32-pc99 --enable-kvm -smp 2
--cpu Nehalem,+vmx -nographic }}}
+-cpu Nehalem,+vmx -nographic
+```
 
 And you should be able to see the login prompt after a while:
 
@@ -132,9 +136,10 @@ conversion step, but we din't test it.
 
 Once you have the qemu image, you can run qemu with the following
 command:
-
-{{{ qemu-system-x86_64 -m 512 -hda sel4_test.img --enable-kvm -smp 2
--cpu Nehalem,+vmx -serial /dev/pts/3 -vga std }}}
+```
+qemu-system-x86_64 -m 512 -hda sel4_test.img --enable-kvm -smp 2
+-cpu Nehalem,+vmx -serial /dev/pts/3 -vga std
+```
 
 Where the '''-vga std''' option ''should'' pass the frame buffer to the
 qemu VM. Having Linux in seL4 VM print something on the screen (like a
@@ -149,9 +154,10 @@ Linux on a virtual hard drive and then probe what is available.
 
 [Qemu wiki](https://en.wikibooks.org/wiki/QEMU/Images#Creating_an_image) provides a good description how to create a new image, and how
 to boot from an iso file:
-
-{{{ qemu-img create -f qcow2 linux.img 3G qemu-system-x86_64 -m 256
--hda linux.img -cdrom minimal.iso -enable-kvm }}}
+```
+qemu-img create -f qcow2 linux.img 3G qemu-system-x86_64 -m 256
+-hda linux.img -cdrom minimal.iso -enable-kvm
+```
 
 We used
 [Ubuntu Minimal](https://help.ubuntu.com/community/Installation/MinimalCD) as the ISO.
@@ -166,8 +172,8 @@ The first device is the VGA controller, the second one is the Ethernet
 controller. You can verify that seL4 can see these devices, because when
 you run the seL4 images from before, seL4 scans the pci bus too. Here is
 the output:
-
-{{{ PCI :: 00.02.00 : Unknown vendor ID. Unknown device ID. (vid 0x1234
+```
+PCI :: 00.02.00 : Unknown vendor ID. Unknown device ID. (vid 0x1234
 did 0x1111) line0 pin0 BAR0 : [ mem 0xfd000000 sz 0x1000000 szmask
 0xff000000 prefetch ] BAR2 : [ mem 0xfebf0000 sz 0x1000 szmask
 0xfffff000 ] lib_pci_scan_dev found pci device 0 3 BASE_ADDR[0]
@@ -183,8 +189,7 @@ PCI :: 00.03.00 : intel Unknown device ID. (vid 0x8086 did 0x100e) line11 pin1
 
 :   BAR0 : [ mem 0xfebc0000 sz 0x20000 szmask 0xfffe0000 ] BAR1 : [
     io 0xc000 sz 0x40 szmask 0xffffffc0 ]
-
-}}}
+```
 
 where the first device is the VGA controller, and the second one is the
 Ethernet controller. Qemu also passes USB Host controller and PCI

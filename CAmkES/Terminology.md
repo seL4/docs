@@ -248,7 +248,7 @@ explicit below.
     instance's interface using an export connector.
 
 ## A concrete example:
- {{{ procedure thing { int func(in int x); }
+``` procedure thing { int func(in int x); }
 
 event sig = 42;
 

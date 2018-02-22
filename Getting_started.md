@@ -103,9 +103,11 @@ a project to start with. As an example, we'll use sel4test.
       subprojects and set up the source tree.
   -   First create a directory for Repo to work in, then enter it and
       initialise it using Repo:
-
-{{{ mkdir seL4test cd seL4test repo init -u
-<https://github.com/seL4/sel4test-manifest.git> }}} To get the actual
+```
+mkdir seL4test cd seL4test repo init -u
+<https://github.com/seL4/sel4test-manifest.git>
+```
+To get the actual
 project and subproject source, you'll then need to use repo sync, which
 will then clone and checkout the project and all the required
 subprojects.

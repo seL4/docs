@@ -28,21 +28,25 @@ page, if they were covered by a previous tutorial in the series.
 
 
 This tutorial is currently stored separately from the other tutorials.
-To get the code: {{{ mkdir sel4-mcs-tutorials cd sel4-mcs-tutorials repo
+To get the code:
+``` mkdir sel4-mcs-tutorials cd sel4-mcs-tutorials repo
 init -u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m
-sel4-mcs-tutorials.xml repo sync }}}
+sel4-mcs-tutorials.xml repo sync
+```
 
 Then, build and run the tutorial:
-
-{{{ \# select the config for the first tutorial make
+```
+\# select the config for the first tutorial make
 ia32_hello-mcs_defconfig \# build it make -j8 \# run it in qemu make
-simulate }}}
+simulate
+```
 
 Before you have done any tasks, when running the tutorial should produce
 the following before halting:
-
-{{{ mcs <main@main.c>:179 [Cond failed: sched_control ==
-seL4_CapNull] Failed to find sched_control. }}}
+```
+mcs <main@main.c>:179 [Cond failed: sched_control ==
+seL4_CapNull] Failed to find sched_control.
+```
 
 Look for TASK in the apps/hello-mcs directory for each task.
 
@@ -51,10 +55,12 @@ Look for TASK in the apps/hello-mcs directory for each task.
 node in the system. This allows you to populate scheduling contexts with
 parameters.
 
-The output will now look like this: {{{ === Round robin === Ping 0 Ping
+The output will now look like this:
+``` === Round robin === Ping 0 Ping
 1 Ping 2 Ping 3 Ping 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Tick Tick Tick Tick Tick Tick Tick Tick Tick Tick ==
-Sporadic == }}}
+Sporadic ==
+```
 
 ### TASK 2
  Create a scheduling context. The simplest way is to use
@@ -78,12 +84,13 @@ created in TASK 1.
 Once you have reached this point, the tutorial output should change. You
 should now see the yielding_thread that we created outputting messages
 in between our own messages, as both threads yield to each other.
-
-{{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
+```
+=== Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Pong 5 Ping Pong 6 Ping Pong
 7 Ping Pong 8 Ping Pong 9 === Periodic === Pong 10 Pong 11 Pong 12 Pong
 13 Pong 14 Pong 15 mcs <yielding_thread@main.c>:87 [Cond failed: i >
-NUM_YIELDS \* 3] Too many yeilds! }}}
+NUM_YIELDS \* 3] Too many yeilds!
+```
 
 ### TASK 4
 
@@ -96,11 +103,12 @@ To fix this, convert the round robin thread to passive by unbinding the
 scheduling context. Passive threads do not have their own time. This
 will stop the round robin thread from running and the output will be as
 follows:
-
-{{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
+```
+=== Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Tick Tick Tick Tick Tick Tick Tick Tick Tick Tick ==
-Sporadic == }}}
+Sporadic ==
+```
 
 ### TASK 5
 
@@ -115,8 +123,8 @@ Rebind the scheduling context to the thread. Altering scheduling context
 state has no impact on the state of the TCB, so it will start where it
 left off. No you should see the periodic thread waking every 2 seconds
 and printing:
-
-{{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
+```
+=== Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 49 1 56 2 63 3 70
@@ -131,7 +139,8 @@ thread 0xe0295500 "helper_thread" at address 0x8049746 With stack:
 0x10075f38: 0x0 0x10075f3c: 0x0 0x10075f40: 0x0 0x10075f44: 0x0
 0x10075f48: 0x0 0x10075f4c: 0x0 0x10075f50: 0x0 0x10075f54: 0x0
 0x10075f58: 0x0 0x10075f5c: 0x0 0x10075f60: 0x0 0x10075f64: 0x0
-0x10075f68: 0x0 }}}
+0x10075f68: 0x0
+```
 
 ### TASK 7
 
@@ -163,8 +172,8 @@ next period. Prior to this change, there should be a gap between each
 number printed by the task, and the timestamp should change. Now there
 should only be a noticeable wait after every 3 numbers, and no gaps in
 the timestamps for each set of three numbers.
-
-{{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
+```
+=== Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
@@ -179,7 +188,8 @@ thread 0xe0295500 "helper_thread" at address 0x80497a6 With stack:
 0x10075f38: 0x0 0x10075f3c: 0x0 0x10075f40: 0x0 0x10075f44: 0x0
 0x10075f48: 0x0 0x10075f4c: 0x0 0x10075f50: 0x0 0x10075f54: 0x0
 0x10075f58: 0x0 0x10075f5c: 0x0 0x10075f60: 0x0 0x10075f64: 0x0
-0x10075f68: 0x0 }}}
+0x10075f68: 0x0
+```
 
 ### TASK 8
 
@@ -197,12 +207,14 @@ specific call to save the reply capability.
 
 This task is to create a reply object, which will stop the echo server
 from faulting.
-
-{{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
+```
+=== Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
-4 49 5 56 6 56 7 56 8 63 Waiting for server echo: }}} === TASK 9 ===
+4 49 5 56 6 56 7 56 8 63 Waiting for server echo:
+```
+=== TASK 9 ===
 
 The echo server no longer crashes, instead it runs a very inefficient
 way IPC echo server as an example passive server for this tutorial.
@@ -218,13 +230,14 @@ only if they are blocked on and IPC endpoint.
 
 The main thread calls the server 3 times with different messages, so you
 should see the passive server output 3 messages:
-
-{{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
+```
+=== Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
 4 49 5 56 6 56 7 56 8 63 Waiting for server echo: echo: 2nd message
-processed echo: mcs tutorial finished! }}}
+processed echo: mcs tutorial finished!
+```
 
 ## Finished!
 

@@ -13,14 +13,16 @@ interface types available in CAmkES. Create a new application directory
 with two component types:
 
 ### Setup Directory
- {{{ mkdir -p apps/helloworld/components/Hello
-mkdir -p apps/helloworld/components/Client }}}
+``` mkdir -p apps/helloworld/components/Hello
+mkdir -p apps/helloworld/components/Client
+```
 
 ### Setup Interface
  Functional interfaces, referred to as
 procedures, are made up of a set of methods. Define an interface that
 the components will communicate over and save this under
-apps/helloworld/interfaces/MyInterface.idl4: {{{ /\*
+apps/helloworld/interfaces/MyInterface.idl4:
+``` /\*
 apps/helloworld/interfaces/MyInterface.idl4 \*/
 
 procedure MyInterface {
@@ -40,7 +42,7 @@ Language. Create these in apps/helloworld/components/Hello/Hello.camkes
 and apps/helloworld/components/Client/Client.camkes.
 
 ### Setup Components' CAmkES Files
- {{{ /\*
+``` /\*
 apps/helloworld/components/Hello/Hello.camkes \*/
 
 import "../../interfaces/MyInterface.idl4";
@@ -51,8 +53,8 @@ component Hello {
 
 }
 =
-
-{{{ /\* apps/helloworld/components/Client/Client.camkes \*/
+```
+/\* apps/helloworld/components/Client/Client.camkes \*/
 
 import "../../interfaces/MyInterface.idl4";
 
@@ -77,7 +79,8 @@ thread of control.
 ### Setup Composition CAmkES File
  Create a file to describe the
 instantiation and structure of the system at
-apps/helloworld/helloworld.camkes. {{{ /\*
+apps/helloworld/helloworld.camkes.
+``` /\*
 apps/helloworld/helloworld.camkes \*/
 
 import <std_connector.camkes>; import
@@ -109,7 +112,8 @@ seL4RPC.
 ### Implement Components
  Now for the implementation of the
 components. Create a single source file for Hello as
-apps/helloworld/components/Hello/src/hello.c: {{{\#!highlight c /\*
+apps/helloworld/components/Hello/src/hello.c:
+```\#!highlight c /\*
 apps/helloworld/components/Hello/src/hello.c \*/
 
 \#include <camkes.h> \#include <stdio.h>
@@ -134,7 +138,8 @@ perform.
 
 Create a source file for Client as
 apps/helloworld/components/Client/src/client.c that calls these
-functions as if they are directly available to it: {{{\#!highlight c /\*
+functions as if they are directly available to it:
+```\#!highlight c /\*
 apps/helloworld/components/Client/src/client.c \*/
 
 \#include <camkes.h>
@@ -151,21 +156,26 @@ The entry point of a CAmkES component is run.
 ### Setup Build System
  The final thing is to add some build system
 boiler plate to be able to build the system. Create
-apps/helloworld/Kconfig for the build system menu: {{{\#!highlight
+apps/helloworld/Kconfig for the build system menu:
+```\#!highlight
 makefile \# apps/helloworld/Kconfig
 
 config APP_HELLOWORLD bool "Hello world CAmkES application" default n
-help Hello world tutorial exercise. }}}
+help Hello world tutorial exercise.
+```
 
 Create a dependency entry in apps/helloworld/Kbuild for your
-application: {{{\#!highlight makefile \# apps/helloworld/Kbuild
+application:
+```\#!highlight makefile \# apps/helloworld/Kbuild
 
 apps-$(CONFIG_APP_HELLOWORLD) += helloworld helloworld: libsel4
 libmuslc libsel4platsupport
- libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
+ libsel4muslccamkes libsel4sync libsel4debug libsel4bench
+```
 
 Copy one of the Makefiles from another application or create
-apps/helloworld/Makefile from scratch: {{{\#!highlight makefile \#
+apps/helloworld/Makefile from scratch:
+```\#!highlight makefile \#
 apps/helloworld/Makefile
 
 TARGETS := helloworld.cdl ADL := helloworld.camkes
@@ -173,7 +183,8 @@ TARGETS := helloworld.cdl ADL := helloworld.camkes
 Client_CFILES = components/Client/src/client.c Hello_CFILES =
 components/Hello/src/hello.c
 
-include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+```
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/helloworld/Kconfig" `
@@ -184,9 +195,11 @@ select your application from the Applications menu. Make sure you
 
 ### Build and Run
  You're now ready to compile and run this
-application: {{{ make clean make qemu-system-arm -M kzm -nographic
+application:
+``` make clean make qemu-system-arm -M kzm -nographic
 -kernel
- images/capdl-loader-experimental-image-arm-imx31 }}}
+ images/capdl-loader-experimental-image-arm-imx31
+```
 
 If all goes well you should see: ` Client says: hello world `
 
@@ -215,14 +228,17 @@ through an example demonstrating these.
 
 ### Setup Directory
  Create a new application directory with two
-components: {{{ mkdir -p apps/helloevent/components/Emitter mkdir -p
-apps/helloevent/components/Consumer }}}
+components:
+``` mkdir -p apps/helloevent/components/Emitter mkdir -p
+apps/helloevent/components/Consumer
+```
 
 ### Setup Components' CAmkES Files
  Events, unlike procedures, do not
 need to be defined in a separate IDL file. You can simply refer to the
 event type in your component ADL files and CAmkES will infer an event
-type. Create the following description for Emitter: {{{ /\*
+type. Create the following description for Emitter:
+``` /\*
 apps/helloevent/components/Emitter/Emitter.camkes \*/
 
 component Emitter {
@@ -238,7 +254,8 @@ some basic source code for the component that does nothing except emit
 the event itself.
 
 Now let's create a description of the Consumer that will handle this
-event: {{{ /\* apps/helloevent/components/Consumer/Consumer.camkes \*/
+event:
+``` /\* apps/helloevent/components/Consumer/Consumer.camkes \*/
 
 component Consumer {
 
@@ -250,7 +267,8 @@ component Consumer {
 ### Setup Composition CAmkES File
  Note that this component consumes
 (handles) an event of the same type. Let's instantiate and connect these
-components together using another ADL file: {{{ /\*
+components together using another ADL file:
+``` /\*
 apps/helloevent/helloevent.camkes \*/
 
 import <std_connector.camkes>; import
@@ -276,7 +294,7 @@ transmitting asynchronous signals. The two instantiated components,
 source and sink are connected over the connection channel.
 
 ### Implement Components
- {{{\#!highlight c /\*
+```\#!highlight c /\*
 apps/helloevent/components/Emitter/src/main.c \*/
 
 \#include <camkes.h>
@@ -301,7 +319,8 @@ event. The consumer can register a callback function to be invoked when
 the event is received, they can call a blocking function that will
 return when the event is received or they can call a polling function
 that returns whether an event has arrived or not. Let's add some source
-code that uses all three: {{{\#!highlight c /\*
+code that uses all three:
+```\#!highlight c /\*
 apps/helloevent/components/Consumer/src/main.c \*/
 
 \#include <camkes.h> \#include <stdio.h>
@@ -338,21 +357,26 @@ re-register it.
 system. Add the appropriate information to Kconfig,
 apps/helloevent/Kbuild, apps/helloevent/Kconfig and
 apps/helloevent/Makefile as for the previous example. Create
-apps/helloevent/Kconfig for the build system menu: {{{\#!highlight
+apps/helloevent/Kconfig for the build system menu:
+```\#!highlight
 makefile \# apps/helloevent/Kconfig
 
 config APP_HELLOEVENT bool "Hello Event CAmkES application" default n
-help Hello event tutorial exercise. }}}
+help Hello event tutorial exercise.
+```
 
 Create a dependency entry in apps/helloevent/Kbuild for your
-application: {{{\#!highlight makefile \# apps/helloevent/Kbuild
+application:
+```\#!highlight makefile \# apps/helloevent/Kbuild
 
 apps-$(CONFIG_APP_HELLOEVENT) += helloevent helloevent: libsel4
 libmuslc libsel4platsupport
- libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
+ libsel4muslccamkes libsel4sync libsel4debug libsel4bench
+```
 
 Copy one of the Makefiles from another application or create
-apps/helloevent/Makefile from scratch: {{{\#!highlight makefile \#
+apps/helloevent/Makefile from scratch:
+```\#!highlight makefile \#
 apps/helloevent/Makefile
 
 TARGETS := helloevent.cdl ADL := helloevent.camkes
@@ -360,7 +384,8 @@ TARGETS := helloevent.cdl ADL := helloevent.camkes
 Consumer_CFILES = components/Consumer/src/main.c Emitter_CFILES =
 components/Emitter/src/main.c
 
-include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+```
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/helloevent/Kconfig" `
@@ -371,13 +396,17 @@ select your application from the Applications menu. Make sure you
 
 ### Build and Run
  Compile the system and run it with similar qemu
-commands to the previous example: {{{ make clean make qemu-system-arm -M
+commands to the previous example:
+``` make clean make qemu-system-arm -M
 kzm -nographic -kernel
- images/capdl-loader-experimental-image-arm-imx31 }}}
+ images/capdl-loader-experimental-image-arm-imx31
+```
 
-If all goes well you should see something like the following {{{
+If all goes well you should see something like the following
+```
 Registering callback... Callback fired! Polling... We didn't find an
-event Waiting... Unblocked by an event! Callback fired! }}}
+event Waiting... Unblocked by an event! Callback fired!
+```
 
 ### Under the Hood
  Whether you find an event during polling will be
@@ -400,13 +429,16 @@ demonstrate both.
 
 ### Setup Directory
  Create two components that will use a pair of
-dataports for communication: {{{ mkdir -p
+dataports for communication:
+``` mkdir -p
 apps/hellodataport/components/Ping mkdir -p
-apps/hellodataport/components/Pong }}}
+apps/hellodataport/components/Pong
+```
 
 ### Setup Dataport Type
  Let's define a struct that will be used as
-one of the dataports: {{{\#!highlight c /\*
+one of the dataports:
+```\#!highlight c /\*
 apps/hellodataport/include/porttype.h \*/
 
 \#ifndef \_PORTTYPE_H_ \#define \_PORTTYPE_H_
@@ -417,23 +449,27 @@ typedef struct MyData {
 
 } MyData_t;
 
-\#endif }}}
+\#endif
+```
 
 The build system puts some constraints on where included headers can
 reside so we need to symlink this header into the place the build system
-will be expecting it: {{{ mkdir -p
+will be expecting it:
+``` mkdir -p
 apps/hellodataport/components/Ping/include ln -s
 ../../../include/porttype.h
  apps/hellodataport/components/Ping/include/porttype.h mkdir -p
 apps/hellodataport/components/Pong/include ln -s
 ../../../include/porttype.h
- apps/hellodataport/components/Pong/include/porttype.h }}}
+ apps/hellodataport/components/Pong/include/porttype.h
+```
 
 ### Setup Components' CAmkES Files
  Note that we need to include the
 C header in the ADL. CAmkES does not actually parse this header, but it
 needs to know to \#include it whenever it references the MyData_t type.
-Now let's create an ADL description of the Ping component: {{{ /\*
+Now let's create an ADL description of the Ping component:
+``` /\*
 apps/hellodataport/components/Ping/Ping.camkes \*/
 
 component Ping {
@@ -444,7 +480,8 @@ component Ping {
 }
 =
 
-Add a similar description for Pong: {{{ /\*
+Add a similar description for Pong:
+``` /\*
 apps/hellodataport/components/Pong/Pong.camkes \*/
 
 component Pong {
@@ -460,7 +497,8 @@ component Pong {
 complete communication protocol between the two components, but for the
 purposes of this example spinning until a byte changes is good enough.
 We're ready to connect all these sources together with a top-level ADL
-file: {{{ /\* apps/hellodataport/hellodataport.camkes \*/
+file:
+``` /\* apps/hellodataport/hellodataport.camkes \*/
 
 import <std_connector.camkes>; import
 "components/Ping/Ping.camkes"; import "components/Pong/Pong.camkes";
@@ -485,7 +523,8 @@ assembly {
  Now we'll create some basic code for each
 component to use the dataports. Note that components generally need to
 use volatile variables when referring to shared memory to prevent the
-compiler eliminating repeated reads and writes. {{{\#!highlight c /\*
+compiler eliminating repeated reads and writes.
+```\#!highlight c /\*
 apps/hellodataport/components/Ping/src/main.c \*/
 
 \#include <camkes.h> \#include <porttype.h> \#include
@@ -508,8 +547,8 @@ int run(void) {
 
 }
 =
-
-{{{\#!highlight c /\* apps/hellodataport/components/Pong/src/main.c \*/
+```
+\#!highlight c /\* apps/hellodataport/components/Pong/src/main.c \*/
 
 \#include <camkes.h> \#include <porttype.h> \#include
 <stdio.h> \#include <string.h>
@@ -538,21 +577,26 @@ int run(void) {
 system. Add the appropriate information to Kconfig,
 apps/hellodataport/Kbuild, apps/hellodataport/Kconfig and
 apps/hellodataport/Makefile as for the previous example. Create
-apps/hellodataport/Kconfig for the build system menu: {{{\#!highlight
+apps/hellodataport/Kconfig for the build system menu:
+```\#!highlight
 makefile \# apps/hellodataport/Kconfig
 
 config APP_HELLODATAPORT bool "Hello Dataport CAmkES application"
-default n help Hello dataport tutorial exercise. }}}
+default n help Hello dataport tutorial exercise.
+```
 
 Create a dependency entry in apps/hellodataport/Kbuild for your
-application: {{{\#!highlight makefile \# apps/hellodataport/Kbuild
+application:
+```\#!highlight makefile \# apps/hellodataport/Kbuild
 
 apps-$(CONFIG_APP_HELLODATAPORT) += hellodataport hellodataport:
 libsel4 libmuslc libsel4platsupport
- libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
+ libsel4muslccamkes libsel4sync libsel4debug libsel4bench
+```
 
 Copy one of the Makefiles from another application or create
-apps/hellodataport/Makefile from scratch: {{{\#!highlight makefile \#
+apps/hellodataport/Makefile from scratch:
+```\#!highlight makefile \#
 apps/hellodataport/Makefile
 
 TARGETS := hellodataport.cdl ADL := hellodataport.camkes
@@ -562,7 +606,8 @@ components/Ping/include/porttype.h Pong_CFILES =
 components/Pong/src/main.c Pong_HFILES =
 components/Pong/include/porttype.h
 
-include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+```
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/hellodataport/Kconfig" `
@@ -573,19 +618,23 @@ select your application from the Applications menu. Make sure you
 
 ### Build and Run
  Compile the system and run it with similar qemu
-commands to the previous example: {{{ make clean make qemu-system-arm -M
+commands to the previous example:
+``` make clean make qemu-system-arm -M
 kzm -nographic -kernel
- images/capdl-loader-experimental-image-arm-imx31 }}}
+ images/capdl-loader-experimental-image-arm-imx31
+```
 
-If all goes well you should see something like the following {{{ Ping:
+If all goes well you should see something like the following
+``` Ping:
 sending hello... Pong: received hello Pong: sending world... Ping:
-received world. }}}
+received world.
+```
 
 ## Better Makefile
  There is a better way to write the Makefile for
 your application. Take apps/hellodataport/Makefile as an example
-
-{{{\#!highlight makefile \# apps/hellodataport/Makefile
+```
+\#!highlight makefile \# apps/hellodataport/Makefile
 
 TARGETS := $(notdir ${SOURCE_DIR}).cdl ADL := hellodataport.camkes
 
@@ -621,7 +670,8 @@ ${SOURCE_DIR}/components/Pong/include/plat/${PLAT}/*.h))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
 ${SOURCE_DIR}/components/Pong/include/arch/${ARCH}/\*.h))
 
-include ${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
+include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
+```
 
 Variable SOURCE_DIR will always point to application folder. In this
 case, SOURCE_DIR = camkes-project/apps/hellodataport

@@ -19,10 +19,10 @@ For an example project that can be managed by the CLI, see:
 ` camkes-cli new hello --template hello_world `
 
 ### Initialise a fresh checkout of existing project
-
-
-{{{ git clone <https://github.com/SEL4PROJ/camkes-cli-example> cd
-camkes-cli-example camkes-cli init }}}
+```
+git clone <https://github.com/SEL4PROJ/camkes-cli-example> cd
+camkes-cli-example camkes-cli init
+```
 
 ### Build a project for x86 (run from inside project directory)
 
@@ -36,7 +36,7 @@ camkes-cli-example camkes-cli init }}}
 
 ### Generate boilerplate for a component named BlahServer with some
 interfaces
-
-
-{{{ camkes-cli component BlahServer --dataport Buf b --consumes Signal
-sig }}}
+```
+camkes-cli component BlahServer --dataport Buf b --consumes Signal
+sig
+```
