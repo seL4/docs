@@ -12,7 +12,7 @@ for 2 seconds.
 
 We'll be working within apps/hello-camkes-timer for this tutorial.
 
-{{{ make arm_hello-camkes-timer_defconfig }}}
+` make arm_hello-camkes-timer_defconfig `
 
 ## Walkthrough
 
@@ -115,7 +115,7 @@ us and allowing the function to return after the delay.
 ## Output
 
 
-Build and run with: {{{ make simulate }}}
+Build and run with: ` make simulate `
 
 Expect the following output with a 2 second delay between the last 2
 lines: {{{ Starting the client ------Sleep for 2 seconds------After the

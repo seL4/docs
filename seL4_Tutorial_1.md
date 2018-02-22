@@ -73,7 +73,7 @@ fix it.
 Once you have fixed the problem, the build should succeed and you can
 run the example as follows:
 
-{{{ \$ make -j8 \$ make simulate }}} If you've succeeded, qemu should
+` \$ make -j8 \$ make simulate ` If you've succeeded, qemu should
 output:
 
 {{{ Starting node \#0 with APIC ID 0 Booting all finished, dropped to

@@ -95,7 +95,7 @@ In order to clean up after building (for example because you’ve set up a
 new configuration and you want to make sure that everything gets rebuilt
 correctly) do:
 
-{{{\#!highlight bash numbers=off make clean }}}
+`\#!highlight bash numbers=off make clean `
 
 ## Read Tutorial
 

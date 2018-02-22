@@ -355,7 +355,7 @@ effect.
 ----'''How do I dump the contents of Makefile variables? How do I
 determine what context my rules are executed in?'''
 
-{{{ \$(foreach var,\$(.VARIABLES),\$(warning \$(var)=\$(\$(var)))) }}}
+` \$(foreach var,\$(.VARIABLES),\$(warning \$(var)=\$(\$(var)))) `
 
 ----'''Why do some projects' libs/Kbuild use a sel4libs-y variable?'''
 

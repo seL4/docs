@@ -36,7 +36,7 @@ Once you have the wires in place, you can connect to the console via
 screen (or you can use minicom or another serial console program). In
 the following, we assume that the Tegra is connected to /dev/ttyUSB0.
 
-{{{\#!highlight bash numbers=off screen /dev/ttyUSB0 115200 }}}
+`\#!highlight bash numbers=off screen /dev/ttyUSB0 115200 `
 
 When you start the board, you will see the U-Boot prompt. To load the
 binary you need to interact with U-Boot. I personally use a DHCP/TFTP
@@ -47,11 +47,11 @@ following command will then scan the PCI bus and enable the ethernet,
 and then ask to get an address via the DHCP and get sel4.img file from
 the TFTP server at 192.168.1.1.
 
-{{{ pci enum dhcp \${loadaddr} 192.168.1.1:sel4.img }}}
+` pci enum dhcp \${loadaddr} 192.168.1.1:sel4.img `
 
 Then, let's start the program.
 
-{{{ bootelf \${loadaddr} }}}
+` bootelf \${loadaddr} `
 
 # Flash U-Boot
 

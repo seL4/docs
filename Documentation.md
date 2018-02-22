@@ -24,7 +24,7 @@
 To get the latest version of the manual, checkout the seL4 source code
 then:
 
-{{{ cd manual && make }}}
+` cd manual && make `
 
 You need LaTeX and doxygen installed, and if all succeeds a fresh manual
 will be produced in manual.pdf.

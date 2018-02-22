@@ -72,12 +72,12 @@ graphviz (first step above), visit this website:
 will work on the mac.
 
 ### Installing other dependencies
- {{{ sudo pip install ansi2html }}}
+ ` sudo pip install ansi2html `
 ## How to use
  This program is quite easy to use, yet quite powerful.
 To start the application, it would be:
 
-{{{ python \[path/to/camkes-tool/camkes\]/visualCAmkES }}} === Opening a
+` python \[path/to/camkes-tool/camkes\]/visualCAmkES ` === Opening a
 File === To open a file, click File-&gt;Open. Then select a '''top-level
 camkes file'''. Your graph will load.
 

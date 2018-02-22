@@ -26,13 +26,13 @@ not rely on powering the board over USB
 
 If you do not have minicom installed:
 
-{{{\#!highlight bash numbers=off sudo apt-get install minicom }}} If you
+`\#!highlight bash numbers=off sudo apt-get install minicom ` If you
 are connecting via a USB serial adapter:
 
-{{{\#!highlight bash numbers=off sudo minicom -s ttyUSB0 }}} And if you
+`\#!highlight bash numbers=off sudo minicom -s ttyUSB0 ` And if you
 were connecting via a "real" serial port:
 
-{{{\#!highlight bash numbers=off sudo minicom -s ttyS0 }}} In either
+`\#!highlight bash numbers=off sudo minicom -s ttyS0 ` In either
 case, this will take you to a configuration menu.
 
   1.  Choose Serial Port Setup
@@ -45,9 +45,9 @@ case, this will take you to a configuration menu.
 
 You can now connect to the !BeagleBoard using Minicom:
 
-{{{\#!highlight bash numbers=off minicom ttyUSB0 }}} Or:
+`\#!highlight bash numbers=off minicom ttyUSB0 ` Or:
 
-{{{\#!highlight bash numbers=off minicom ttyS0 }}} === Permissions ===
+`\#!highlight bash numbers=off minicom ttyS0 ` === Permissions ===
 If you get permissions errors you need to add yourself to the
 appropriate group. Find out which group on your machine has access to
 the serial ports (on Debian, it's usually dialout):
@@ -81,7 +81,7 @@ Then run:
 {{{\#!highlight bash numbers=off make beagle_debug_xml_defconfig make
 }}} Which after a few minutes should give you:
 
-{{{ \[GEN_IMAGE\] sel4test-image-arm-omap3 }}} Now, the ELF image we
+` \[GEN_IMAGE\] sel4test-image-arm-omap3 ` Now, the ELF image we
 boot into is the sel4test-image-arm file. Pull out the SD card, put it
 into the SD card reader and plug into your computer, then copy that file
 into the boot sector, then sync and remove, then plug the SD card back
@@ -97,4 +97,4 @@ After this you should start seeing output from seL4test.
 
 You can use:
 
-{{{ fatls mmc 0 }}} to see what is on the SD card.
+` fatls mmc 0 ` to see what is on the SD card.

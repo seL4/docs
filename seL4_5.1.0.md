@@ -1,5 +1,5 @@
 # Introducing seL4 5.1.0
- Announcing the release of {{{seL4 5.1.0}}}
+ Announcing the release of `seL4 5.1.0`
 with the following changes:
 
 Below are the changes to the seL4 ABI: x86-64 specific changes: \*
@@ -18,7 +18,7 @@ work. \* kzm: fix timer reload overflow calculations
 # Full changelog
 
 
-Use {{{git log 5.0.0..5.1.0}}} in <https://github.com/seL4/seL4>
+Use `git log 5.0.0..5.1.0` in <https://github.com/seL4/seL4>
 
 # More details
 

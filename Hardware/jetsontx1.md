@@ -113,7 +113,7 @@ Attach a USB mini cable to the mini-USB port on the TX1, and the other
 end of the cable to your PC. Then power on the TX1 and drop into the
 U-boot command line, and do the following:
 
-{{{ ums mmc 0 }}}
+` ums mmc 0 `
 
 Your PC should now show that a new USB mass storage device has been
 connected. Copy the seL4 image into the root directory of this mass

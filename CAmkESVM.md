@@ -10,10 +10,10 @@ the instructions [here](CAmkES\#Build_dependencies).
 Starting Point == This repo contains many vm apps. We'll start from
 something basic, and add to it:
 
-{{{ make cma34cr_minimal_defconfig make }}} Running this should boot a
+` make cma34cr_minimal_defconfig make ` Running this should boot a
 single, very basic linux as a guest in the vm:
 
-{{{ Welcome to Buildroot buildroot login: }}} The linux running here was
+` Welcome to Buildroot buildroot login: ` The linux running here was
 built using [buildroot](https://buildroot.org/). This tool
 creates a compatible kernel and root filesystem with busybox and not
 much else, and runs on a ramdisk (the actual hard drive isn't mounted).
@@ -164,7 +164,7 @@ Here's a summary of what the build-rootfs tool does:
 
 1.  Make a new directory:
 
-{{{ mkdir projects/vm/linux/pkg/hello }}}
+` mkdir projects/vm/linux/pkg/hello `
 
 2.  Make a simple C program in projects/vm/linux/pkg/hello/hello.c
 
@@ -194,11 +194,11 @@ Make sure there is a TAB character in the makefile, rather than spaces
 4.  Run the "build-rootfs" script to update the rootfs.cpio file to
     include our new "hello" program.
 
-{{{ cd projects/vm/linux/ ./build-rootfs cd ../../.. }}}
+` cd projects/vm/linux/ ./build-rootfs cd ../../.. `
 
 5.  Rebuild the app:
 
-{{{ make }}} 6. Run the app (use root as username and password):
+` make ` 6. Run the app (use root as username and password):
 
 {{{ Welcome to Buildroot buildroot login: root Password: \# hello Hello,
 World! }}} === Adding a kernel module === We're going to add a new
@@ -206,7 +206,7 @@ kernel module that lets us poke the vmm.
 
 1.  Make a new directory:
 
-{{{ mkdir projects/vm/linux/modules/poke }}}
+` mkdir projects/vm/linux/modules/poke `
 
 2.  Implement the module in projects/vm/linux/modules/poke/poke.c.
 
@@ -286,7 +286,7 @@ insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
 
 5.  Run the build-rootfs tool, then make
 
-{{{ cd projects/vm/linux/ ./build-rootfs cd ../../.. make }}}
+` cd projects/vm/linux/ ./build-rootfs cd ../../.. make `
 
 6.  Run the app:
 

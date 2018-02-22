@@ -162,7 +162,7 @@ Updates the CapDL database to contain a new object with a given name and
 type, returning a (python) reference to that object. Doesn't create any
 caps.
 
-{{{ /*- set ep = alloc_obj("my_ep", seL4_EndpointObject) -*/ }}}
+` /*- set ep = alloc_obj("my_ep", seL4_EndpointObject) -*/ `
 
 #### alloc_cap(name, object)
 

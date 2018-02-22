@@ -10,7 +10,7 @@
 # Implementation improvements
 
 
--   Several enhancements for both {{{x86}}} and {{{ARM}}} have
+-   Several enhancements for both `x86}}} and {{{ARM` have
     been made. Please see the commit log for details.
 
 # API Changes
@@ -21,7 +21,7 @@
 # ABI Changes
 
 
-  -   {{{seL4_BootInfo}}} has a new entry for IOSpace caps for
+  -   `seL4_BootInfo` has a new entry for IOSpace caps for
       ARM SMMU.
 
 # Upgrade notes
@@ -32,7 +32,7 @@
 # Full changelog
 
 
-Use {{{git log 3.1.0..3.2.0}}} in <https://github.com/seL4/seL4>
+Use `git log 3.1.0..3.2.0` in <https://github.com/seL4/seL4>
 
 # More details
 

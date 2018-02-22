@@ -60,7 +60,7 @@ We also need to update seL4_libs.
 git fetch alyons git checkout phd cd ../.. }}}
 
 That changed lots of stuff, so let's remove everything we've built so
-far: {{{ make mrproper make x64_optiplex9020_onevm_defconfig }}}
+far: ` make mrproper make x64_optiplex9020_onevm_defconfig `
 
 And try building... {{{ \$ make 12:12:45 \[KERNEL\] \[BF_GEN\]
 arch/object/structures_gen.h \[BF_GEN\]

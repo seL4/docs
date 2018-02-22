@@ -28,14 +28,14 @@ on VMWare because of hardware mismatch.
 
 With a recent Ubuntu (16.04+) all you need to do should be
 
-{{{\#!highlight bash numbers=off sudo apt install qemu-system-x86 }}}
+`\#!highlight bash numbers=off sudo apt install qemu-system-x86 `
 
 Your host machine has to have a CPU that supports Vt-x virtualization
 (for Intel CPUs), or AMD-V (for AMD CPUs, but that wasn't tested). Any
 newer i7 core should have Vt-x. Note that you might have to enable it
 first from BIOS. You can always check by
 
-{{{ lscpu }}}
+` lscpu `
 
 and look for '''vmx''' flag.
 
@@ -78,7 +78,7 @@ To run the images we just compiled, do:
 
 And you should be able to see the login prompt after a while:
 
-{{{ Welcome to Buildroot buildroot login: }}}
+` Welcome to Buildroot buildroot login: `
 
 Login with the username "root" and the password "root". Again, for more
 details about the VM, go to
@@ -125,7 +125,7 @@ VMWare virtual hard drive as described in
 install linux, modify grub, save images on the hdd). The second step is
 to convert the VMDK image to qcow2 (qemu) image. Use ''qemu-img'':
 
-{{{ qemu-img convert -f vmdk -O qcow2 image.vmdk image.img }}}
+` qemu-img convert -f vmdk -O qcow2 image.vmdk image.img `
 
 You can certainly do this directly with a qemu image, without the
 conversion step, but we din't test it.

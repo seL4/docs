@@ -128,7 +128,7 @@ prototypes for functions related to MyInterface that this component
 needs to implement. Note that the actual implementations of interface
 functions are prefixed with the component-local name of the interface
 (inf from Hello.camkes above) and an underscore. The function
-{{{inf__init}}} is for this component to do any required
+`inf__init` is for this component to do any required
 initialisation. In the case of this example we have no initialisation to
 perform.
 
@@ -176,7 +176,7 @@ components/Hello/src/hello.c
 include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
-that references this file: {{{ source "apps/helloworld/Kconfig" }}}
+that references this file: ` source "apps/helloworld/Kconfig" `
 
 You can now run '''make menuconfig''' from the top-level directory and
 select your application from the Applications menu. Make sure you
@@ -188,7 +188,7 @@ application: {{{ make clean make qemu-system-arm -M kzm -nographic
 -kernel
  images/capdl-loader-experimental-image-arm-imx31 }}}
 
-If all goes well you should see: {{{ Client says: hello world }}}
+If all goes well you should see: ` Client says: hello world `
 
 Congratulations, you've just made your first CAmkES application.
 
@@ -363,7 +363,7 @@ components/Emitter/src/main.c
 include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
-that references this file: {{{ source "apps/helloevent/Kconfig" }}}
+that references this file: ` source "apps/helloevent/Kconfig" `
 
 You can now run '''make menuconfig''' from the top-level directory and
 select your application from the Applications menu. Make sure you
@@ -565,7 +565,7 @@ components/Pong/include/porttype.h
 include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
-that references this file: {{{ source "apps/hellodataport/Kconfig" }}}
+that references this file: ` source "apps/hellodataport/Kconfig" `
 
 You can now run '''make menuconfig''' from the top-level directory and
 select your application from the Applications menu. Make sure you

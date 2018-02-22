@@ -20,7 +20,7 @@
 ## API Additions
 
 
-  -   {{{X86PageDirectoryGetStatusBits}}} allows users to get the status
+  -   `X86PageDirectoryGetStatusBits` allows users to get the status
       bits of a virtual address mapping. This is not supported on PAE.
 
 # Upgrade notes
@@ -31,7 +31,7 @@
 # Full changelog
 
 
-Use {{{git log 3.0.1..3.1.0}}} in <https://github.com/seL4/seL4>
+Use `git log 3.0.1..3.1.0` in <https://github.com/seL4/seL4>
 
 # More details
 

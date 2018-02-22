@@ -1,5 +1,5 @@
 # Introducing seL4 5.0.0
- Announcing the release of {{{seL4 5.0.0}}}
+ Announcing the release of `seL4 5.0.0`
 with the following changes:
 
 Below are the changes to the seL4 ABI and API: Generic changes: \* Add
@@ -36,7 +36,7 @@ arm specific changes:
 # Full changelog
 
 
-Use {{{git log 4.0.0..5.0.0}}} in <https://github.com/seL4/seL4>
+Use `git log 4.0.0..5.0.0` in <https://github.com/seL4/seL4>
 
 # More details
 

@@ -5,7 +5,7 @@
  &lt;&lt;TableOfContents()&gt;&gt;
 
 ## Constants
- {{{ \#define SEL4DRV_DEVATTR_NAME_MAXLEN (32) }}}
+ ` \#define SEL4DRV_DEVATTR_NAME_MAXLEN (32) `
 
 ## Functions
  {{{ seL4drv_mgmt_enumerate_get_num_children():

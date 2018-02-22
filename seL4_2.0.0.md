@@ -67,17 +67,17 @@ number of runnable threads, now log n)
         benchmarking
 
 tracepoints at once added {{{CONFIG_RELEASE_PRINTF}} in addition to
-{{{CONFIG_DEBUG}}} and {{{CONFIG_RELEASE}}}, which enables printf in a
+`CONFIG_DEBUG}}} and {{{CONFIG_RELEASE`, which enables printf in a
 release build
 
 # API Changes
 
 
-  -   {{{seL4_Recv}}} replaces {{{seL4_Wait}}} on endpoints
-  -   {{{seL4_Wait}}} is now only used on notification objects
+  -   `seL4_Recv}}} replaces {{{seL4_Wait` on endpoints
+  -   `seL4_Wait` is now only used on notification objects
   -   Async endpoint -&gt; notification object
   -   sync endpoint -&gt; endpoint
-  -   {{{seL4_Recv}}} on an endpoint may now return signals sent to a
+  -   `seL4_Recv` on an endpoint may now return signals sent to a
       thread's
 
 bound notification object.
@@ -85,29 +85,29 @@ bound notification object.
 ## API Additions
 
 
-  -   {{{seL4_NotificationObject}}} replaces deprecated
-      {{{seL4_AsyncEndpointObject}}}
-  -   {{{seL4_NotificationBits}}} size in bits of a notification object
-  -   {{{seL4_IRQHandler_SetNotification}}} replaces deprecated
-      {{{seL4_IRQHandler_SetEndpoint}}}
-  -   {{{seL4_Recv}}} replaces {{{seL4_Wait}}} for endpoints
-  -   {{{seL4_Wait}}} used on notifications
-  -   {{{seL4_NBRecv}}} non-blocking (polling) receive on an endpoint,
+  -   `seL4_NotificationObject` replaces deprecated
+      `seL4_AsyncEndpointObject`
+  -   `seL4_NotificationBits` size in bits of a notification object
+  -   `seL4_IRQHandler_SetNotification` replaces deprecated
+      `seL4_IRQHandler_SetEndpoint`
+  -   `seL4_Recv}}} replaces {{{seL4_Wait` for endpoints
+  -   `seL4_Wait` used on notifications
+  -   `seL4_NBRecv` non-blocking (polling) receive on an endpoint,
       which fails
 
-if there is no message waiting. Opposite of {{{NBSend}}} (which silently
-fails if there is no receiver waiting) \* {{{seL4_Poll}}} collects any
+if there is no message waiting. Opposite of `NBSend` (which silently
+fails if there is no receiver waiting) \* `seL4_Poll` collects any
 signals from a notification objects, returns zero if there are none \*
-{{{seL4_Signal}}} replaces deprecated seL4_Notify \*
-{{{seL4_TCB_BindNotification}}} bind a notification to a tcb \*
-{{{seL4_TCB_UnbindNotification}}} unbind a notification from a tcb
+`seL4_Signal` replaces deprecated seL4_Notify \*
+`seL4_TCB_BindNotification` bind a notification to a tcb \*
+`seL4_TCB_UnbindNotification` unbind a notification from a tcb
 
 ## Deprecations
 
 
-  -   {{{seL4_AsyncEndpointObject}}}
-  -   {{{seL4_Notify}}}
-  -   {{{seL4_IRQHandler_SetEndpoint}}}
+  -   `seL4_AsyncEndpointObject`
+  -   `seL4_Notify`
+  -   `seL4_IRQHandler_SetEndpoint`
 
 # Note on Syscall names
 
@@ -130,10 +130,10 @@ library repositories. To see the changes please compare 1.0.4.xml and
 # Upgrade notes
 
 
-Calls to {{{seL4_Wait}}} no longer return a {{{seL4_MessageInfo_t}}}
-as {{{seL4_Wait}}} is intended to be used on notification objects.
-Calls to the prior version of {{{seL4_Wait}}} need to be replaced with
-{{{seL4_Recv}}}.
+Calls to `seL4_Wait}}} no longer return a {{{seL4_MessageInfo_t`
+as `seL4_Wait` is intended to be used on notification objects.
+Calls to the prior version of `seL4_Wait` need to be replaced with
+`seL4_Recv`.
 
 If you don't want to upgrade yet - don't worry. Both the
 sel4test-manifest and verification manifest repositories have manifests

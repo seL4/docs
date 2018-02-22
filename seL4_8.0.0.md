@@ -36,7 +36,7 @@ Performance-Monitoring Counters to user level
 
 # Full changelog
  Refer to the git log in
-<https://github.com/seL4/seL4> using {{{git log 7.0.0..8.0.0}}}
+<https://github.com/seL4/seL4> using `git log 7.0.0..8.0.0`
 
 # More details
  See the

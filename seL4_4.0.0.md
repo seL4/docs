@@ -1,5 +1,5 @@
 # Introducing seL4 4.0.0
- Announcing the release of {{{seL4 4.0.0}}}
+ Announcing the release of `seL4 4.0.0`
 with the following changes:
 
   -   Reorder bootinfo structure.
@@ -42,7 +42,7 @@ with the following changes:
 # Implementation improvements
 
 
--   Several enhancements for both {{{x86}}} and {{{ARM}}} have
+-   Several enhancements for both `x86}}} and {{{ARM` have
     been made. Please see the commit log for details.
 
 # Upgrade notes
@@ -55,7 +55,7 @@ with the following changes:
 # Full changelog
 
 
-Use {{{git log 3.2.0..4.0.0}}} in <https://github.com/seL4/seL4>
+Use `git log 3.2.0..4.0.0` in <https://github.com/seL4/seL4>
 
 # More details
 

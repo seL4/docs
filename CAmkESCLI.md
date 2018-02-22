@@ -16,7 +16,7 @@ For an example project that can be managed by the CLI, see:
 "hello")
 
 
-{{{ camkes-cli new hello --template hello_world }}}
+` camkes-cli new hello --template hello_world `
 
 ### Initialise a fresh checkout of existing project
 
@@ -27,12 +27,12 @@ camkes-cli-example camkes-cli init }}}
 ### Build a project for x86 (run from inside project directory)
 
 
-{{{ camkes-cli build x86 }}}
+` camkes-cli build x86 `
 
 ### Run a project in qemu-system-i386 (builds first)
 
 
-{{{ camkes-cli run x86 }}}
+` camkes-cli run x86 `
 
 ### Generate boilerplate for a component named BlahServer with some
 interfaces

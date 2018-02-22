@@ -25,8 +25,8 @@ error }}}
 ## Parametrised Buf Type
 
 
-The {{{Buf}}} dataport type can now be optionally parametrised by the
-size (in bytes) of the dataport. The syntax for this is {{{Buf(size)}}}.
+The `Buf` dataport type can now be optionally parametrised by the
+size (in bytes) of the dataport. The syntax for this is `Buf(size)`.
 If left unspecified, the default size is 4096 bytes.
 
 It is an error to connect dataport interfaces of different sizes.
@@ -63,8 +63,8 @@ assembly {
 ## Asynch Connector Renamed
 
 
-The {{{seL4Asynch}}} connector has been renamed to
-{{{seL4Notification}}}.
+The `seL4Asynch` connector has been renamed to
+`seL4Notification`.
 
 ## Non-Volatile Dataports
 
@@ -85,17 +85,17 @@ reordering (ie. with volatile) is not sufficient to make shared memory
 coherent in a multicore environment. Changes made to shared memory by
 one core may become visible to other cores in a different order. \*
 Using functions from the standard library on dataports (e.g. passing a
-string in a dataport to {{{strlen}}}) requires casting from a volatile
+string in a dataport to `strlen`) requires casting from a volatile
 pointer to a regular pointer - an undefined operation in c.
 
 For a dataport interface foo, a component has access to
-{{{foo_acquire()}}} and {{{foo_release()}}} functions (they may
-instead be macros). Call {{{foo_acquire()}}} between multiple reads
+`foo_acquire()}}} and {{{foo_release()` functions (they may
+instead be macros). Call `foo_acquire()` between multiple reads
 from a dataport, where the correct behaviour of the program depends on
 the contents of the dataport possibly changing between reads. Call
-{{{foo_release()}}} between multiple writes to a dataport, where the
+`foo_release()` between multiple writes to a dataport, where the
 correct behaviour of the program depends on writes preceding the
-{{{foo_release()}}} in the program code being performed strictly before
+`foo_release()` in the program code being performed strictly before
 the writes following it.
 
 ## Many-to-Many Connections
@@ -160,26 +160,26 @@ unchanged } }}}
 
 
 In CAmkES 2, interrupts were abstracted as CAmkES events, emitted from a
-hardware component. For a component with an interface {{{foo}}}
-connected to an interrupt, components could call {{{foo_wait()}}},
-{{{foo_poll()}}}, and {{{foo_reg_callback()}}}, as with a regular
+hardware component. For a component with an interface `foo`
+connected to an interrupt, components could call `foo_wait()`,
+`foo_poll()}}}, and {{{foo_reg_callback()`, as with a regular
 event.
 
 In CAmkES 3, interrupts are still abstracted as events in the ADL
 (CAmkES spec). Component implementations however, use a different
 interface for interacting with interrupts than with regular event
-interfaces. More specifically, a component with an interface {{{foo}}}
-connected with the {{{seL4HardwareInterrupt}}} connection has access to
-{{{foo_acknowledge()}}} which acknowledges the associated interrupt to
+interfaces. More specifically, a component with an interface `foo`
+connected with the `seL4HardwareInterrupt` connection has access to
+`foo_acknowledge()` which acknowledges the associated interrupt to
 the kernel. In addition, the component implementation must provide a
-definition of a function {{{void foo_handler(void)}}}. The standard
-event methods ({{{foo_wait()}}}, {{{foo_poll()}}}, and
-{{{foo_reg_callback()}}}) are not implemented for interrupts.
+definition of a function `void foo_handler(void)`. The standard
+event methods (`foo_wait()}}}, {{{foo_poll()`, and
+`foo_reg_callback()`) are not implemented for interrupts.
 
-The user-provided function {{{foo_handler()}}} will be called by a
+The user-provided function `foo_handler()` will be called by a
 dedicated interrupt-handling thread (one thread per interface connected
-with {{{seL4HardwareInterrupt}}}). Unlike callbacks registered with
-{{{\*_reg_callback}}}, interrupt handlers do not need to be explicitly
+with `seL4HardwareInterrupt`). Unlike callbacks registered with
+`\*_reg_callback`, interrupt handlers do not need to be explicitly
 registered, and do not become unregistered after calling.
 
 ## Hierarchical Components

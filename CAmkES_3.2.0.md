@@ -1,7 +1,7 @@
 # CAmkES Version camkes-3.2.0 Release
 
 
-Announcing the release of {{{camkes-3.2.0}}} with the following changes:
+Announcing the release of `camkes-3.2.0` with the following changes:
 
 camkes-3.2.0 2018-01-17
 
@@ -79,7 +79,7 @@ functionality is required, hold off upgrading until this issue is fixed.
 which is the same as the old behaviour.
 
 # Full changelog
- Use {{{git log camkes-3.2.0..camkes-3.1.0}}} in
+ Use `git log camkes-3.2.0..camkes-3.1.0` in
 <https://github.com/seL4/camkes-tool>
 
 # More details

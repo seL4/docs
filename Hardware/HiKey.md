@@ -193,7 +193,7 @@ hikey_aarch32_debug_xml_defconfig }}} Then, use "menuconfig &gt;
 Tools &gt; Build elfloader &gt; Boot image type" and choose "Binary Boot
 Image"
 
-{{{\#!highlight bash numbers=off make menuconfig make }}} Once the
+`\#!highlight bash numbers=off make menuconfig make ` Once the
 system is compiled, you will have a new image file created in the images
 directory.
 

@@ -110,7 +110,7 @@ project and subproject source, you'll then need to use repo sync, which
 will then clone and checkout the project and all the required
 subprojects.
 
-{{{ repo sync }}}
+` repo sync `
 
 #### Getting cross compilers
  There are instructions on how to get

@@ -34,23 +34,23 @@ kzm_simulation_release_xml_defconfig ... }}}
 
 To use a specific config:
 
-{{{ \$ make ia32_simulation_release_xml_defconfig }}}
+` \$ make ia32_simulation_release_xml_defconfig `
 
-This copies {{{configs/ia32_simulation_release_xml_defconfig}}} to
-{{{./.config}}}, and sets up various header files.
+This copies `configs/ia32_simulation_release_xml_defconfig` to
+`./.config`, and sets up various header files.
 
 You can look at the configuration options using
 
-{{{ \$ make menuconfig }}}
+` \$ make menuconfig `
 
-Alternatively you can use any text editor to change {{{./.config}}}; if
+Alternatively you can use any text editor to change `./.config`; if
 you change anything you need to rebuild header files with {{{make
 oldconfig}}}. It's advisable also to make clean to clear out anything
 already built — the build system does not track as many dependencies as
 it ought to. === Useful configuration options === For cross compilation
 (targeting ARM), you can set the cross compiler triple. This will
 typically be '''arm-linux-gnueabi-''' or '''arm-none-eabi-'''. Do
-{{{make menuconfig}}} and look for '''toolchain-options'''
+`make menuconfig` and look for '''toolchain-options'''
 
 Some of the default configurations specify a particular x86 compiler. It
 is usually safe to set the triple to the empty string when building for
@@ -60,7 +60,7 @@ Fiddling with most of the other configuration options will lead to
 systems that will either not compile, or not run. == Building == When
 you've configured the system, you can build by doing
 
-{{{ make -j libmuslc && make }}}
+` make -j libmuslc && make `
 
 Currently parallel builds do not work for the whole build, but it is
 worth using for the C library. The build system does however support
@@ -83,7 +83,7 @@ command will run qemu and point it towards the image we just built.
 libmuslc && make \$ make simulate-ia32 }}}
 
 To exit qemu after the All is well in the universe message that
-indicates the test suite has passed, type {{{control-a x}}}.
+indicates the test suite has passed, type `control-a x`.
 
 ### ARM - kzm11
 
@@ -107,9 +107,9 @@ notifications.) Test BIND0001 passed &lt;system-out&gt; TEST_BIND0001
 &lt;/system-out&gt; &lt;/testcase&gt; ... }}} The test suite prints out
 JUnit-style XML which can be parsed by various tools. == Testing a
 Customised Kernel == Suppose you've got seL4 checked out in
-{{{\~/projects/seL4}}}, and sel4test in {{{\~/tests/sel4test}}}, and you
+`\~/projects/seL4}}}, and sel4test in {{{\~/tests/sel4test`, and you
 have been making changes on a feature branch of seL4 named
-{{{awesome-new-feature}}}. You want to test if your modified kernel
+`awesome-new-feature`. You want to test if your modified kernel
 still passes all the tests in sel4test. {{{ \$ cd
 \~/tests/sel4tests/kernel \$ git remote add feature \~/projects/seL4 \$
 git fetch feature \$ git checkout feature/awesome-new-feature \$ cd ..

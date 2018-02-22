@@ -35,10 +35,10 @@ Set up the TK1 as usual - connect the UART as well as the recovery USB
 port next to the ethernet jack. Stop u-boot from booting and issue the
 command:
 
-{{{ ums 0 mmc 0 }}} This will allow you to see the TK1's filesystem on
+` ums 0 mmc 0 ` This will allow you to see the TK1's filesystem on
 your host pc. On your host PC, list your devices:
 
-{{{ \$ lsblk }}} You should see a 14.7GB-ish device with a few
+` \$ lsblk ` You should see a 14.7GB-ish device with a few
 partitions - this is the TK1. (Make sure it is by mounting the largest
 partition and looking at the rootfs \[making sure to unmount again
 before next step!\])
@@ -60,7 +60,7 @@ should work.
 
 You may see some lines after boot like:
 
-{{{ rt5639 0-001c: Failed to set private addr: -121 }}} This is normal,
+` rt5639 0-001c: Failed to set private addr: -121 ` This is normal,
 and everything should work regardless (internet connectivity works fine
 on our system). We'll be looking into the reason for these errors in the
 future.

@@ -10,7 +10,7 @@ First make sure you have
 
 
 The build dependencies for seL4 can be found in the
-{{{Prerequisites.md}}}
+`Prerequisites.md`
 ([Click!](https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md))
 file in the root of the SEL4-tutorials GIT repository.
 
@@ -30,21 +30,21 @@ sel4-tutorials.xml repo sync }}}
 ### Do the tutorials
 
 
-The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "{{{projects/sel4-tutorials}}}". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference. In addition, for each of the TASK challenges in the tutorial, there is a Wiki page section that covers it, listed below.
+The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "`projects/sel4-tutorials`". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference. In addition, for each of the TASK challenges in the tutorial, there is a Wiki page section that covers it, listed below.
 
 :   -   The half-written sample applications are in the
-        subfolder: {{{exercises/}}}. Your job is to fill these out.
+        subfolder: `exercises/`. Your job is to fill these out.
     -   The completed sample applications showing the solutions to the
         tutorial challenges are in the
-        subfolder: {{{projects/sel4-tutorials/solutions/}}}.
+        subfolder: `projects/sel4-tutorials/solutions/`.
 
     \* The slide presentations to guide you through the tutorials are in the following files:
 
-    :   -   {{{projects/sel4-tutorials/docs/seL4-Overview.pdf}}}: This
+    :   -   `projects/sel4-tutorials/docs/seL4-Overview.pdf`: This
             is an overview of the design and thoughts behind seL4, and
             we strongly recommend you read it before starting
             the tutorials.
-        -   {{{projects/sel4-tutorials/docs/seL4-APILib-details.pdf}}}:
+        -   `projects/sel4-tutorials/docs/seL4-APILib-details.pdf`:
             This is the actual tutorial.
 
     \* Detailed explanations of each tutorial challenge:
@@ -86,12 +86,12 @@ challenges once again. There are also completed sample solutions.
 More info:
 
 :   -   The half-written sample applications are in this
-        folder: {{{apps/}}}.
+        folder: `apps/`.
     -   The solutions can be found in this
-        subfolder: {{{projects/sel4-tutorials/solutions/}}}.
+        subfolder: `projects/sel4-tutorials/solutions/`.
     -   The slide presentations to guide you through the tutorials are
         in this
-        file: {{{projects/sel4-tutorials/docs/CAmkESTutorial.pdf}}}.
+        file: `projects/sel4-tutorials/docs/CAmkESTutorial.pdf`.
 
 ## What next?
 

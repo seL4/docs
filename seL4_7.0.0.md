@@ -56,7 +56,7 @@
         is fixed.
 
 # Full changelog
- Use {{{git log 6.0.0..7.0.0}}} in
+ Use `git log 6.0.0..7.0.0` in
 <https://github.com/seL4/seL4>
 
 # More details

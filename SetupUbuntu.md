@@ -26,7 +26,7 @@ For Debian, first follow the instructions that are common to all Debian-based di
 :   -   [Debian Wheezy (oldstable)](\#wheezy)
     -   [Debian Jessie or later(testing or unstable)](\#jessie)
 
-To find out what distro you're using: {{{ lsb_release -a }}}
+To find out what distro you're using: ` lsb_release -a `
 
 ### Ubuntu machines
 

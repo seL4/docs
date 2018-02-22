@@ -1,5 +1,5 @@
 # Introducing seL4 5.2.0
- Announcing the release of {{{seL4 5.2.0}}}
+ Announcing the release of `seL4 5.2.0`
 with the following changes:
 
 Below are the changes to libsel4:
@@ -24,7 +24,7 @@ x86 specific changes:
 # Full changelog
 
 
-Use {{{git log 5.1.0..5.2.0}}} in <https://github.com/seL4/seL4>
+Use `git log 5.1.0..5.2.0` in <https://github.com/seL4/seL4>
 
 # More details
 

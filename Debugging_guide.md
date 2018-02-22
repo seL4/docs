@@ -154,7 +154,7 @@ prior to the kernel. GDB does not know the address of its print function
 (as we only gave GDB the kernel's symbol table) and it is not looking to
 break on its address. The breakpoint we have just hit is the first time
 the ''kernel'' tried to print. Similarly, the breakpoint we have
-configured will have no effect on userspace calls to {{{printf}}}.
+configured will have no effect on userspace calls to `printf`.
 
 Now that we are stopped at a breakpoint, all the standard GDB operations
 are possible (inspect registers or the stack, single-step, continue
@@ -214,7 +214,7 @@ binary:
 build/arm/imx31/sel4test-driver/sel4test-driver.bin }}}
 
 After connecting to Qemu, we can instruct GDB to break on the userspace
-{{{printf}}} function:
+`printf` function:
 
 {{{ Reading symbols from
 build/arm/imx31/sel4test-driver/sel4test-driver.bin...done. (gdb) target
@@ -234,7 +234,7 @@ libs/libmuslc/src/stdio/printf.c:9 9 ret = vfprintf(stdout, fmt, ap);
 If you examine the terminal window running Qemu at this point, you will
 note that we see an extra bit of output from the kernel. The kernel's
 print functionality is unaffected, but GDB has stopped execution the
-first time userspace called {{{printf}}}.
+first time userspace called `printf`.
 
 From here, the experience is essentially identical to debugging the
 kernel. One small complication to be aware of is that debugging across a
@@ -269,7 +269,7 @@ cross-compiler prefix.
 
 :   objdump -D binary_file_name &gt; dump.s
 
-}}} The file {{{dump.s}}} has the human-readable assembly instructions.
+}}} The file `dump.s` has the human-readable assembly instructions.
 
 If you have symbols and want (C) source information in your disassembly
 (and who doesn't!) then use the -S flag. for example:
@@ -285,13 +285,13 @@ the correct arguments generated from the .config.
 
 You can objdump the kernel:
 
-{{{\#!highlight bash numbers=off make objdump-kernel | less }}} The test
+`\#!highlight bash numbers=off make objdump-kernel | less ` The test
 driver:
 
-{{{\#!highlight bash numbers=off make objdump-driver | less }}} Or the
+`\#!highlight bash numbers=off make objdump-driver | less ` Or the
 tests themselves:
 
-{{{\#!highlight bash numbers=off make objdump-tests | less }}}
+`\#!highlight bash numbers=off make objdump-tests | less `
 
 ## In kernel debugging
 

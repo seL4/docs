@@ -60,7 +60,7 @@ following caveats exist:
         BIOS Extensions (VBE) information is being used.
 
 # Full changelog
- Use {{{git log 5.2.0..6.0.0}}} in
+ Use `git log 5.2.0..6.0.0` in
 <https://github.com/seL4/seL4>
 
 # More details

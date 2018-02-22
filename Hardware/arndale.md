@@ -93,7 +93,7 @@ usbethaddr 00:40:5c:26:0a:FF setenv pxefile_addr_r 0x50000000 }}}
 
 Now run:
 
-{{{ usb start; dhcp; bootelf; bootm; }}}
+` usb start; dhcp; bootelf; bootm; `
 
 ## References
 
