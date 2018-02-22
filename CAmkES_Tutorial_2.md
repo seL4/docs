@@ -1,5 +1,5 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en = CAmkES Tutorial 2 = This tutorial is an introduction to
+# CAmkES Tutorial 2
+This tutorial is an introduction to
 CAmkES: bootstrapping a basic static CAmkES application, describing its
 components, and linking them together.
 

@@ -1,5 +1,3 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en
 
 &lt;&lt;TableOfContents(3)&gt;&gt;
 

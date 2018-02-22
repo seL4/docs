@@ -1,5 +1,4 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en = Debugging userspace threads =
+# Debugging userspace threads
 
 ## Overview
  The seL4 microkernel leverages the hardware debugging

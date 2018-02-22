@@ -1,10 +1,10 @@
-\#\# page was renamed from Tk1SomMods = TK1-SOM Hardware Modifications =
+# TK1-SOM Hardware Modifications
 
 ## Adding a second UART connector
 
 
 ### The issue:
- \#\# Note: if you are using our
+Note: if you are using our
 [IO-Daughterboard](../Daughter-Board) , this is uneccessary;
 instead a straight-line passthrough jumper is used to hook up to level
 converters on the daughterboard.

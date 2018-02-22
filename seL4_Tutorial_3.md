@@ -1,5 +1,5 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en = seL4 Tutorial 3 = The third tutorial is designed to
+# seL4 Tutorial 3
+The third tutorial is designed to
 teach the basics of seL4 IPC using Endpoint objects, and userspace
 paging management. You'll be led through the process of creating a new
 thread (retyping an untyped object into a TCB object), and also made to

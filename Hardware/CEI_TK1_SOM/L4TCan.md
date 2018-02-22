@@ -1,5 +1,6 @@
-\#\# page was renamed from L4TCan = Using CAN on L4T through an MCP251X
-= {{<attachment:front.jpg%7CFront> view of TK1-Tower|width="25%"}}
+# Using CAN on L4T through an MCP251X
+
+{{<attachment:front.jpg%7CFront> view of TK1-Tower|width="25%"}}
 {{<attachment:bottom.jpg%7CBottom> view of TK1-Tower|width="25%"}}
 
 ## Before running L4TCAN: Jumper HW-based chipselect to the GPIO

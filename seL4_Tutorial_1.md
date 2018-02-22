@@ -1,5 +1,5 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en = seL4 Tutorial 1 = This tutorial is a fairly simple
+# seL4 Tutorial 1
+This tutorial is a fairly simple
 introduction to debugging, and doesn't really focus on seL4 itself, but
 rather on the idea and practice of tracing errors and debugging in a
 [freestanding](http://www.embedded.com/electronics-blogs/programming-pointers/4027541/Freestanding-vs-hosted-implementations)

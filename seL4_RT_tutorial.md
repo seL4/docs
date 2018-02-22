@@ -1,6 +1,3 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en
-
 # seL4 5.2.0-MCS Tutorial
 
 

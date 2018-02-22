@@ -1,5 +1,5 @@
-\#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
-\#language en = seL4 Tutorial 4 = The fourth tutorial is largely trying
+# seL4 Tutorial 4
+The fourth tutorial is largely trying
 to show how a separate ELF file can be loaded and expanded into a
 VSpace, and subsequently executed, while facilitating IPC between the
 two modules. It also shows how threads with different CSpaces have to

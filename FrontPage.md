@@ -1,5 +1,5 @@
-\#\#master-page:FrontPage \#format wiki \#language en \#pragma
-section-numbers off = seL4 Wiki = This WIKI is for cooperatively
+# seL4 Wiki
+This WIKI is for cooperatively
 developing and sharing documentation on
 [seL4](http://sel4.systems)
 
