@@ -2,16 +2,13 @@
 
 
 :   -   One !HiKey Board. See
-        \[\[<http://www.96boards.org/products/ce/hikey/%7CHikey>
-        96Board\]\]
+        [Hikey 96Board](http://www.96boards.org/products/ce/hikey/)
     -   Fully working development environment. See
-        \[\[<https://wiki.sel4.systems/Getting%20started%7CGetting>
-        started\]\]
+        [Getting started](https://wiki.sel4.systems/Getting%20started)
 
 # Getting Started
  The Hikey board is based around the
-\[\[<https://github.com/96boards/documentation/blob/master/hikey/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf%7CHiSilicon>
-Kirin 620\]\] eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
+[HiSilicon Kirin 620](https://github.com/96boards/documentation/blob/master/hikey/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf) eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
 Toe start using 32-bit seL4 follow the below instructions. They will
 walk you step by step beginning from the source files and ultimately
 running an image.
@@ -212,5 +209,4 @@ images/sel4test-driver-image-arm-hikey.bin }}}
       Section 11 onward need to be completed
 
 Other instructions can be viewed at
-\[\[<https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi%7Csee>
-this\]\].
+[see this](https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi).

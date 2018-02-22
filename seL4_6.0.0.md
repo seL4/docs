@@ -65,5 +65,4 @@ following caveats exist:
 
 # More details
  See the
-\[\[<http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf%7C6.0.0>
-manual\]\] included in the release or ask on the mailing list!
+[6.0.0 manual](http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf) included in the release or ask on the mailing list!

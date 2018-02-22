@@ -5,8 +5,7 @@ This page documents booting seL4 on the
 [Beagleboard](http://beagleboard.org/beagleboard), Omap
 3530See.
 
-\[\[<http://sel4.systems/pipermail/devel/2014-August/000030.html%7CTim>
-Newsham's post\]\] on the mailing list for one user's experience.
+[Tim Newsham's post](http://sel4.systems/pipermail/devel/2014-August/000030.html) on the mailing list for one user's experience.
 
 ## Preparing your SD card
  === Prologue === These instructions are for

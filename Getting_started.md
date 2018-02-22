@@ -22,8 +22,7 @@ and hopefully, inspiration that seL4 gives you.
 ## Code
  All seL4 code and proofs are available on github, at
 <https://github.com/seL4>, under standard
-\[\[<http://sel4.systems/Info/GettingStarted/license.pml%7Copen-source>
-licenses\]\].
+[open-source licenses](http://sel4.systems/Info/GettingStarted/license.pml).
 
 There are several repositories; the most interesting ones are the
 project repositories (whose names end in -manifest) and these two:
@@ -39,8 +38,7 @@ wiki entry associated with it that gives more information. The
 information on this page is common to all of them.
 
 We modeled the seL4 development process on the
-\[\[<https://source.android.com/source/developing.html%7CAndroid>
-development process\]\]. Each project consist of an XML file that
+[Android development process](https://source.android.com/source/developing.html). Each project consist of an XML file that
 describes which repositories to use, and how to lay them out to make a
 buildable system.
 
@@ -90,8 +88,7 @@ and GNU Make.
 managing multiple git repositories. All the seL4 related projects use
 multiple subprojects, and Repo will fetch all of them and place them in
 the correct subdirectories for you. To get repo,
-\[\[<http://source.android.com/source/downloading.html#installing-repo%7Cfollow>
-the instructions in the section "Installing Repo" here\]\]. (You don't
+[follow the instructions in the section "Installing Repo" here](http://source.android.com/source/downloading.html#installing-repo). (You don't
 need to initialise a repo client yet.)
 
 #### Using Repo to fetch an seL4 project and its subprojects

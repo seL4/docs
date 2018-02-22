@@ -26,8 +26,7 @@ flashing it onto the board.
 ## Booting via TFTP
  Unfortunately the stock U-boot that comes with
 the TX1 does not support TFTP because
-\[\[<https://devtalk.nvidia.com/default/topic/962946/tx1-pxe-boot/%7Cit>
-does not come with an ethernet driver\]\], but if you so choose, it
+[it does not come with an ethernet driver](https://devtalk.nvidia.com/default/topic/962946/tx1-pxe-boot/), but if you so choose, it
 seems that it is possible to recomplile u-boot with support for the
 ethernet driver, and then flash your custom U-boot onto your TX1.
 Instructions on how to do this are not included here.

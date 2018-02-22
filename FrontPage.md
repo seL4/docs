@@ -47,18 +47,15 @@ list\]\]) drop us a line if you want to be able to edit.
 ## seL4 Releases
 
 
-  -   \[\[<https://github.com/seL4/seL4/releases/latest%7CCurrent>
-      release\]\]
-  -   \[\[<http://sel4.systems/Info/Docs/seL4-manual-latest.pdf%7CCurrent>
-      manual\]\]
+  -   [Current release](https://github.com/seL4/seL4/releases/latest)
+  -   [Current manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
   -   [Release notes](ReleaseNotes)
   -   [Release process](ReleaseProcess)
 
 ## CAmkES Releases
 
 
-  -   \[\[<https://github.com/seL4/camkes-tool/releases/latest%7CCurrent>
-      release\]\]
+  -   [Current release](https://github.com/seL4/camkes-tool/releases/latest)
   -   [Release notes](CAmkESReleaseNotes)
 
 ## Community

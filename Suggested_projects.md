@@ -32,8 +32,7 @@ its drivers is trickier.
 Some interesting platforms that could support seL4 include:
 
   -   Any of the Tegra S\`\`oCs from NVIDIA.
-  -   The RK3188, maybe using the \[\[<http://radxa.com/Home%7CRadxa>
-      Rock Pro\]\] development board
+  -   The RK3188, maybe using the [Radxa Rock Pro](http://radxa.com/Home) development board
   -   Any of the Arm V8 64-bit processors that are beginning to
       become available.
 

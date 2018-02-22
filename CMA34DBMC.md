@@ -2,8 +2,7 @@ The CMA34D is an embedded i7 board. It needs 12V and 5V supplies. It
 does not have a BMC (Base Management Controller) so cannot be controlled
 remotely.
 
-We used a \[\[<http://www.ti.com/tool/ek-tm4c1294xl%7CStellaris>
-Connected Launchpad\]\] connected to an
+We used a [Stellaris Connected Launchpad](http://www.ti.com/tool/ek-tm4c1294xl) connected to an
 \[\[<http://www.ebay.com.au/itm/New-RS232-To-TTL-COM-Serial-Board-MAX232CSE-Converter-Module-/190880940437>?|RS232
 level converter\]\] and a 2-way
 \[\[<http://www.ebay.com.au/itm/5V-Two-2-Channel-Relay-Module-With-Optocoupler-For-ARM-PIC-AVR-DSP-New-/181752994310>?|Relay

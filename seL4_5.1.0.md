@@ -24,5 +24,4 @@ Use {{{git log 5.0.0..5.1.0}}} in <https://github.com/seL4/seL4>
 
 
 See the
-\[\[<http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf%7C5.1.0>
-manual\]\] included in the release or ask on the mailing list!
+[5.1.0 manual](http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf) included in the release or ask on the mailing list!

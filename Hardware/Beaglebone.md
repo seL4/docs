@@ -1,7 +1,6 @@
 # seL4 and RefOS on the Beaglebone Black
  This page contains info about
-building seL4 on \[\[<http://beagleboard.org/black%7CBeaglebone>
-Black\]\].
+building seL4 on [Beaglebone Black](http://beagleboard.org/black).
 
 ## Building for the Beaglebone Black
  These instructions were written
@@ -10,8 +9,7 @@ by Tim Newsham. The Beaglebone is a community-supported port.
 ### Requirements
  We suggest using the "arm-linux-gnueabi-"
 cross-compilers. Use
-\[\[<https://sel4.systems/Info/GettingStarted/#toolchains%7Cthe>
-instructions on getting a toolchain\]\].
+[the instructions on getting a toolchain](https://sel4.systems/Info/GettingStarted/#toolchains).
 
 ### Building
  ==== seL4test ==== First clone the seL4 repository.
@@ -100,5 +98,4 @@ the U-Boot prompt enter:
 :   dhcp \${loadaddr} 1.2.3.4:refos.bin go \${loadaddr}
 
 }}} == Other resources == \*
-\[\[<http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/%7CSupporting>
-the UART1 interface with CAmkES\]\]
+[Supporting the UART1 interface with CAmkES](http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/)

@@ -24,8 +24,7 @@ The development framework provides:
 
 :   -   Before you can use any of the SEL4 related repositories, you
         must
-        \[\[<http://source.android.com/source/downloading.html#installing-repo%7Cget>
-        the "repo" tool by Google\]\]. SEL4 projects have multiple
+        [get the "repo" tool by Google](http://source.android.com/source/downloading.html#installing-repo). SEL4 projects have multiple
         subproject dependencies, and repo will fetch all of them and
         place them in the correct subdirectories for you.
     -   Make sure that you already have the tools to build seL4

@@ -9,8 +9,7 @@ machine emulator and virtualizer, and can emulate different
 architectures on different systems.
 
 Qemu can run ARM targets too, more info about that can be found in
-\[\[<https://wiki.sel4.systems/Debugging%20guide#Qemu%7CDebugging>
-Guide\]\].
+[Debugging Guide](https://wiki.sel4.systems/Debugging%20guide#Qemu).
 
 We used Ubuntu 16.04 for our tests, but in theory qemu ''should'' work
 the same under Windows/MacOS.
@@ -148,16 +147,14 @@ Qemu by default provides a virtual Ethernet controller and VGA
 controller. A good way to find what devices are available is to install
 Linux on a virtual hard drive and then probe what is available.
 
-\[\[<https://en.wikibooks.org/wiki/QEMU/Images#Creating_an_image%7CQemu>
-wiki\]\] provides a good description how to create a new image, and how
+[Qemu wiki](https://en.wikibooks.org/wiki/QEMU/Images#Creating_an_image) provides a good description how to create a new image, and how
 to boot from an iso file:
 
 {{{ qemu-img create -f qcow2 linux.img 3G qemu-system-x86\_64 -m 256
 -hda linux.img -cdrom minimal.iso -enable-kvm }}}
 
 We used
-\[\[<https://help.ubuntu.com/community/Installation/MinimalCD%7CUbuntu>
-Minimal\]\] as the ISO.
+[Ubuntu Minimal](https://help.ubuntu.com/community/Installation/MinimalCD) as the ISO.
 
 Once you get your Linux system installed, you can type '''lspci''', you
 should see something like this:

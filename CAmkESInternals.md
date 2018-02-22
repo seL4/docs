@@ -66,8 +66,7 @@ components and connections). Part of the spec is the hierarchy of paging
 objects comprising the address space of each component. This is actually
 done by the python CapDL library. After each component is compiled, but
 before the CapDL Filters (see below) are applied,
-\[\[<https://github.com/seL4/camkes-tool/blob/master/camkes/runner/__main__.py%7Cthe>
-python capdl library is invoked (search for get\_spec)\]\] to inspect
+[the python capdl library is invoked (search for get\_spec)](https://github.com/seL4/camkes-tool/blob/master/camkes/runner/__main__.py) to inspect
 the ELF file produced by compiling the component and create all the
 paging structures it needs.
 
@@ -75,8 +74,7 @@ paging structures it needs.
 
 
 The
-\[\[<https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Filters.py%7CCapDL>
-Filters\]\] stage of the CAmkES build process deserves special mention.
+[CapDL Filters](https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Filters.py) stage of the CAmkES build process deserves special mention.
 These are transformations on the CapDL database that take place before
 creating the CapDL spec file and building the CapDL Loader. Here's a
 description of some of the filters:

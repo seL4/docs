@@ -33,14 +33,12 @@ with TK1|width="100%"}}
 ## Technical documentation
 
 
-:   -   \[\[<attachment:daughterboard_r3a_schematic.pdf%7CSchematic>
-        PDF\]\] (See '[Technical errata for R3A](\#errata)'
+:   -   [Schematic PDF](attachment:daughterboard_r3a_schematic.pdf) (See '[Technical errata for R3A](\#errata)'
         for changes)
     -   Bill of Materials:
         \[\[<attachment:tegra_daughterboard_bom3.xls>\]\]
     -   Project repository:
-        \[\[<https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard%7CAltium>
-        files\]\]
+        [Altium files](https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard)
 
 ## Connecting the Daughterboard
  Going from a TK1-SOM, a pixhawk/IRIS

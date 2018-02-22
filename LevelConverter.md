@@ -6,8 +6,7 @@ high-level differential voltages for transmission to the serial
 concentrator.
 
 We used the suggested circuit in the
-\[\[<http://datasheets.maximintegrated.com/en/ds/MAX218.pdf%7CManufacturer's>
-Datasheet\]\], laid out on a piece of perfboard.
+[Manufacturer's Datasheet](http://datasheets.maximintegrated.com/en/ds/MAX218.pdf), laid out on a piece of perfboard.
 
 [{{<attachment:levelconverter-small.jpg>}}](<attachment:levelconverter.jpg>)
 

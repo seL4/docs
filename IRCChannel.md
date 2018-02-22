@@ -9,6 +9,5 @@ available on the [Freenode](http://www.freenode.net/) irc
 network, chat.freenode.net.
 
 To join the discussion, you'll need an irc client. See
-\[\[<https://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients%7CComparison>
-of Internet Relay Chat clients\]\] for a list, or use a
+[Comparison of Internet Relay Chat clients](https://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients) for a list, or use a
 [web client](http://webchat.freenode.net/?channels=#sel4).

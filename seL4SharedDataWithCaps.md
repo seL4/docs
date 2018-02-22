@@ -13,8 +13,7 @@ The templates and connector definition for seL4SharedDataWithCaps is in
 [global-components](https://github.com/SEL4PROJ/global-components).
 
 For an example of this connector in action, see the
-\[\[<https://github.com/seL4/camkes-vm/blob/master/apps/vm/optiplex9020.camkes#L46%7CCAmkES>
-VM\]\].
+[CAmkES VM](https://github.com/seL4/camkes-vm/blob/master/apps/vm/optiplex9020.camkes#L46).
 
 ### Usage
 

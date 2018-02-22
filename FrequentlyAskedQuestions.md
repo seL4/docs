@@ -41,8 +41,7 @@ delegatable.
  L4 is a family of very small,
 high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
-\[\[<http://en.wikipedia.org/wiki/L4_microkernel_family%7CL4>
-microkernel family\]\] entry on Wikipedia and the website
+[L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia and the website
 [L4HQ](http://l4hq.org/) for more details.
 
 {{<http://sel4.systems/images/familytree.png>||width="500"}}
@@ -128,8 +127,7 @@ a full memory-management unit (MMU) makes little sense, as its resource
 management is fundamentally based on virtual memory. For lower-end
 processors that only have a memory-protection unit (MPU) or no memory
 protection at all, you should look at NICTA's
-\[\[<http://ssrg.nicta.com.au/projects/TS/echronos/%7CeChronos>
-real-time operating system\]\] (RTOS), which is designed for such
+[eChronos real-time operating system](http://ssrg.nicta.com.au/projects/TS/echronos/) (RTOS), which is designed for such
 processors and is also undergoing formal verification.
 
 ## What are the intended applications of seL4?
@@ -334,11 +332,9 @@ may be able to offer assistance.
  OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
-\[\[<http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract%7Ccomprehensive>
-overview\]\] paper on OS verification from 2008 as well as the related
+[comprehensive overview](http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract) paper on OS verification from 2008 as well as the related
 work section of the
-\[\[<http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract%7CseL4>
-overview paper\]\] from 2014.
+[seL4 overview paper](http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract) from 2014.
 
 The new and exciting thing about seL4 is that is has a) strong
 properties such as functional correctness, integrity, and
@@ -457,8 +453,7 @@ For security, the capabilities themselves are stored in kernel memory
 references.
 
 See the wikipedia article on
-\[\[<https://en.wikipedia.org/wiki/Capability-based_security%7Ccapability-based>
-security\]\] for more details on caps.
+[capability-based security](https://en.wikipedia.org/wiki/Capability-based_security) for more details on caps.
 
 ## How can usermode manage kernel memory safely?
 
@@ -569,8 +564,7 @@ Enabling or disabling the fastpath should not have any impact on the
 kernel behaviour except for performance.
 
 There is a section on the fastpath and its verification in
-\[\[<http://www.ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Cthis>
-article\]\]. The fastpath discussion starts on page 23.
+[this article](http://www.ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml). The fastpath discussion starts on page 23.
 
 ## I want to know more about seL4
 functionality/design/implementation/philosophy
@@ -591,8 +585,7 @@ uptake.
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
-\[\[<http://sel4.systems/Info/GettingStarted/license.pml%7Clicense>
-page\]\] for more details.
+[license page](http://sel4.systems/Info/GettingStarted/license.pml) for more details.
 
 # How do I contribute to seL4?
  See
@@ -622,8 +615,7 @@ There are two recommended ways to do this.
 
 For build instructions, and how to get started, see the
 [Download](http://sel4.systems/Info/GettingStarted/) page.
-Also, UNSW's \[\[<http://cs9242.web.cse.unsw.edu.au/%7CAdvanced>
-Operating Systems course\]\] has an extensive project component that
+Also, UNSW's [Advanced Operating Systems course](http://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
 builds an OS on top of seL4. If you have access to a Sabre Lite board,
 you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.
@@ -638,8 +630,7 @@ all peer-reviewed publications. Good starting points are:
   -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml%7Cfrom>
       L3 to seL4 – what have we learnt in 20 years of L4
       microkernels?\]\], a 20-year retrospective of L4 microkernels;
-  -   \[\[<http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract%7Cthe>
-      original 2009 paper\]\] describing seL4 and its formal
+  -   [the original 2009 paper](http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
       verification;
   -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Ca>
       much longer paper detailing the complete verification story of

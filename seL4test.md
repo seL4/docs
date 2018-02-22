@@ -2,8 +2,7 @@
 
 
 First make sure you have
-\[\[<https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine%7Cset>
-up your machine\]\].
+[set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine).
 
 &lt;&lt;TableOfContents()&gt;&gt;
 

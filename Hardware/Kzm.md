@@ -6,8 +6,7 @@ also be simulated in qemu.
 
 
 Checkout the sel4test project using repo as per
-\[\[<https://wiki.sel4.systems/Getting%20started#Getting_the_SEL4_Test_source_code%7CGetting>
-started\]\]
+[Getting started](https://wiki.sel4.systems/Getting%20started#Getting_the_SEL4_Test_source_code)
 
 {{{\#!highlight bash numbers=off make
 kzm\_simulation\_release\_xml\_defconfig make make simulate-kzm }}}

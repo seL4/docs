@@ -43,8 +43,7 @@ the remaining budget until the next period.
 
 Temporal isolation is provided with scheduling context by an
 implementation of
-\[\[<https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf%7Csporadic>
-servers\]\]. Please see the \[\[manual\]\] or tutorial for further
+[sporadic servers\]\]. Please see the \[\[manual](https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf) or tutorial for further
 explanation.
 
 However, in seL4, threads without budget left in their sporadic server
@@ -201,8 +200,7 @@ seL4 5.2.0.
 <https://github.com/seL4/sel4test-manifest.git> -m 5.2.x-mcs.xml \$ repo
 sync }}}
 
-  -   A \[\[<https://wiki.sel4.systems/seL4%20RT%20tutorial%7Cnew>
-      tutorial\]\] covers the difference in the APIs
+  -   A [new tutorial](https://wiki.sel4.systems/seL4%20RT%20tutorial) covers the difference in the APIs
 
 ## Hardware support
 

@@ -65,8 +65,7 @@ get GRUB2 on the virtual hard disk and its MBR somehow. Easiest way to
 do this is simple install some Linux distro that has GRUB2 (Ubuntu
 Debian Fedora...etc). If you want to save some hard disk space you can
 try
-\[\[<https://help.ubuntu.com/community/Installation/MinimalCD%7CUbuntu>
-Minimal\]\]. Choose to install GRUB to the MBR when installing your OS.
+[Ubuntu Minimal](https://help.ubuntu.com/community/Installation/MinimalCD). Choose to install GRUB to the MBR when installing your OS.
 
 Alternatively if you feel like extra headaches to save space and time
 you can try install GRUB2 manually with grub-install from some Linux

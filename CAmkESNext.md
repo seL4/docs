@@ -68,8 +68,7 @@ Replace the lines: {{{ ("C compiler flags", " -fno-stack-protector"),
 -fno-PIE -fPIC -fno-stack-protector"), ("C compiler link flags",
 "-no-pie -fPIC"), }}}
 
-See \[\[<https://github.com/commercialhaskell/stack/issues/2712%7Cthis>
-stack issue on github\]\] for more information.
+See [this stack issue on github](https://github.com/commercialhaskell/stack/issues/2712) for more information.
 
 ## Download and build example CAmkES app
 

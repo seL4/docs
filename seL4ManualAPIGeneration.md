@@ -2,8 +2,7 @@
 
 
 The documentation of the seL4 API in the
-\[\[<http://sel4.systems/Info/Docs/seL4-manual-latest.pdf%7CseL4>
-manual\]\] is automatically generated from comments in
+[seL4 manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf) is automatically generated from comments in
 [libsel4](https://github.com/seL4/seL4/tree/master/libsel4)'s
 source code. This page documents this process.
 

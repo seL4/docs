@@ -79,8 +79,7 @@ see: \[\[CAmkES\#Build\_dependencies\]\]
 CAmkES comes with a graphical tool for visualising the components and
 connections in a CAmkES application. For installation and usage
 instructions,
-\[\[<https://github.com/seL4/camkes-tool/tree/camkes-3.0.0/camkes/visualCAmkES%7Csee>
-its README\]\].
+[see its README](https://github.com/seL4/camkes-tool/tree/camkes-3.0.0/camkes/visualCAmkES).
 
 ### Typed Settings
 
@@ -110,16 +109,14 @@ volatile pointers for accessing shared memory. This is no longer the
 case, and components with dataport interfaces connected with
 seL4SharedData must explicitly insert barriers around dataport access to
 ensure the desired memory access ordering.
-\[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-dataports%7CRead>
-more in the manual.\]\]
+[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-dataports)
 
 ### Custom Attribute Types
 
 
 You can now define custom types for attributes in CAmkES ADL. Custom
 types resemble structs and arrays in C.
-\[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-structs-and-arrays-for-collections%7CRead>
-more in the manual.\]\]
+[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-structs-and-arrays-for-collections)
 
 ### Hierarchical Component Syntax Change
 
@@ -133,8 +130,7 @@ of it sub-components has changed.
 
 Binary Semaphores have been added as a new synchronization primitive.
 This is in addition to the existing primitives: semaphores and mutexes.
-\[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#synchronization-primitives%7CRead>
-more in the manual.\]\]
+[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#synchronization-primitives)
 
 ### Cache Accelerator
 
@@ -143,8 +139,7 @@ CAmkES now comes with a small tool for caching compilation results based
 on source files. This should greatly reduce compilation times by not
 unnecessarily recompiling code. It is enabled by default. Control it
 with the CONFIG\_CAMKES\_ACCELERATOR config variable.
-\[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator%7CRead>
-more in the manual.\]\]
+[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator)
 
 ### Python 3 Support
 
@@ -158,5 +153,4 @@ python2 and python3.
 The internals of the CAmkES parser have been rewritten to be easier to
 read and maintain. The parser is structured as a pipeline of
 transformations.
-\[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#parser-internals%7CRead>
-more in the manual.\]\]
+[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#parser-internals)

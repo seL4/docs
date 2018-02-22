@@ -1,11 +1,9 @@
 The
-\[\[<http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html%7CJetson>
-TK1\]\] is a affordable embedded system developed by NVIDIA. It runs
+[Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) is a affordable embedded system developed by NVIDIA. It runs
 seL4. We will explain how to run seL4 on the Tegra.
 &lt;&lt;TableOfContents&gt;&gt; = Pre-Requisites = \* One Tegra Board.
 See
-\[\[<http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html%7CJetson>
-TK1\]\] \* The development environment fully working. See \[\[Getting
+[Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) \* The development environment fully working. See \[\[Getting
 started\]\]
 
 # Getting Started

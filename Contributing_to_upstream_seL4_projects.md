@@ -14,8 +14,7 @@ The Licence agreement certifies:
     -   That you give us the rights to use your contribution.
 
 Please sign the
-\[\[<https://sel4.systems/Community/Contributing/seL4-CLA.pdf%7CContributor>
-License Agreement\]\], scan it and send it to us at ''licensing AT
+[Contributor License Agreement](https://sel4.systems/Community/Contributing/seL4-CLA.pdf), scan it and send it to us at ''licensing AT
 sel4.systems.''
 
 {{ <http://i.imgur.com/kuAok5A.png> }} ==== Figure 1 ====

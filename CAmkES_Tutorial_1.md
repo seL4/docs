@@ -8,11 +8,9 @@ components, and linking them together.
 ## Required Reading
  While it's possible to successfully complete the
 CAmkES tutorials without having read the
-'''\[\[<https://github.com/seL4/camkes-tool/blob/master/docs/index.md%7CCAmkES>
-manuals\]\]''', the manuals really explain everything in plain English,
+'''[CAmkES manuals](https://github.com/seL4/camkes-tool/blob/master/docs/index.md)''', the manuals really explain everything in plain English,
 and any aspiring CAmkES dev should read the
-'''\[\[<https://github.com/seL4/camkes-tool/blob/master/docs/index.md%7CCAmkES>
-manuals\]\]''' before attempting to complete the tutorials.
+'''[CAmkES manuals](https://github.com/seL4/camkes-tool/blob/master/docs/index.md)''' before attempting to complete the tutorials.
 
 ## Learning outcomes
 

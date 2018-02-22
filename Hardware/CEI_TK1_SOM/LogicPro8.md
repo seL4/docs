@@ -100,8 +100,7 @@ can see both CAN messages and SPI messages that were sent.
 interrupt line. The daughter board configures the CAN controller to
 interrupt over GPIO3 which is exposed as Pin 4 on pinout J5 as described
 in the
-\[\[<http://coloradoengineering.com/wp-content/uploads/2016/12/Reference-Guide_FINAL.pdf%7CTK1-SOM>
-Reference guide\]\]. This is at the back of the TK1 relative to our
+[TK1-SOM Reference guide](http://coloradoengineering.com/wp-content/uploads/2016/12/Reference-Guide_FINAL.pdf). This is at the back of the TK1 relative to our
 setup and we connect the probe as shown:
 
 {{<attachment:gpio.JPG>||width=50%}}

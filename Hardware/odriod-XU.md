@@ -9,8 +9,7 @@ seL4 assumes that one boots in HYP mode. To do this, one needs a new
 signed bootloader.
 
 Follow the instructions
-\[\[<http://forum.odroid.com/viewtopic.php?f=64&t=2778&sid=be659cc75c16e1ecf436075e3c548003&start=60#p33805%7Con>
-the HardKernel Forum\]\] to get and flash the firmware
+[on the HardKernel Forum](http://forum.odroid.com/viewtopic.php?f=64&t=2778&sid=be659cc75c16e1ecf436075e3c548003&start=60#p33805) to get and flash the firmware
 
 The standard U-Boot will allow booting via Fastboot or by putting the
 bootable ELF file onto an SD card or the eMMC chip.

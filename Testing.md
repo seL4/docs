@@ -4,8 +4,7 @@
 suite for seL4.
 
 First make sure you have
-\[\[<https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine%7Cset>
-up your machine\]\]. &lt;&lt;TableOfContents()&gt;&gt; == Getting the
+[set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine). &lt;&lt;TableOfContents()&gt;&gt; == Getting the
 Code == {{{ \$ mkdir sel4test \$ cd sel4test \$ repo init -u
 <https://github.com/seL4/sel4test-manifest.git> \$ repo sync \$ ls
 kernel/ libs/ projects/ tools/ apps configs Kbuild Kconfig Makefile }}}

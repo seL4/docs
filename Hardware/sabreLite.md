@@ -2,8 +2,7 @@
 
 
 For board details see
-\[\[<https://boundarydevices.com/product/sabre-lite-imx6-sbc/%7CSabre>
-Lite\]\]
+[Sabre Lite](https://boundarydevices.com/product/sabre-lite-imx6-sbc/)
 
 # Building for the Sabre Lite
  For preset build config, use defconfigs

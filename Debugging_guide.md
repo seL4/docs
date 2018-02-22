@@ -92,8 +92,7 @@ Qemu has some powerful debugging features built in. You can type
 Ctrl+"a", then "c" to switch to the Qemu monitor. From here you can
 inspect CPU or device state, read and write memory, and single-step
 execution. More information about this functionality is available in the
-\[\[<http://qemu.weilnetz.de/qemu-doc.html#pcsys_005fmonitor%7CQemu>
-documentation\]\].
+[Qemu documentation](http://qemu.weilnetz.de/qemu-doc.html#pcsys_005fmonitor).
 
 When debugging a seL4 project, the Qemu debugger is inherently limited.
 It has no understanding of your source code, so it is difficult to
