@@ -13,9 +13,9 @@ Linux kernel version &gt; 3.2
  Open minicom on /dev/ttyUSB\* and set the
 serial port settings to: 115200N1
 
-> -   115200bps
-> -   parity-none
-> -   1 stop bit
+  -   115200bps
+  -   parity-none
+  -   1 stop bit
 
 ##### udev
  You may also like to set up a udev rule for Fastboot:
@@ -68,30 +68,30 @@ source
 
 Follow these steps to boot your program:
 
-> 1.  Connect the USB cable between the ODROID and the client
-> 2.  Connect the UART converter between the ODROID and the client
-> 3.  Insert your SD card into the ODROID
-> 4.  Connect the 5V power supply
-> 5.  Open minicom
-> 6.  Hold the power button for 3 seconds
-> 7.  In minicom, press a key to stop the auto boot process or hold the
->     user button on the board during the boot process
+  1.  Connect the USB cable between the ODROID and the client
+  2.  Connect the UART converter between the ODROID and the client
+  3.  Insert your SD card into the ODROID
+  4.  Connect the 5V power supply
+  5.  Open minicom
+  6.  Hold the power button for 3 seconds
+  7.  In minicom, press a key to stop the auto boot process or hold the
+      user button on the board during the boot process
 
 To boot using fastboot:
 
-> 1.  At the u-boot prompt, type fastboot
->
-> 1. On the client machine, run sudo fastboot devices to ensure that the device has been recognised. The device should have the label "SMDKEXYNOS-01".
->
-> :   1.  NOTE: fastboot fails silently if you do not have permissions
->         to access the device. Try running with sudo.
->
-> 1.  On the client machine, run fastboot boot sel4-uImage
+  1.  At the u-boot prompt, type fastboot
+ 
+  1. On the client machine, run sudo fastboot devices to ensure that the device has been recognised. The device should have the label "SMDKEXYNOS-01".
+ 
+  :   1.  NOTE: fastboot fails silently if you do not have permissions
+          to access the device. Try running with sudo.
+ 
+  1.  On the client machine, run fastboot boot sel4-uImage
 
 To boot from mmc:
 
-> 1.  At the U-Boot prompt type
->     fatload mmc 0:2 0x42000000 &lt;filename&gt;; bootm 0x42000000
+  1.  At the U-Boot prompt type
+      fatload mmc 0:2 0x42000000 &lt;filename&gt;; bootm 0x42000000
 
 ## References
 

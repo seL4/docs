@@ -9,10 +9,10 @@ short:
 
 "Given a version number MAJOR.MINOR.PATCH, increment the:
 
-> -   MAJOR version when you make incompatible API changes,
-> -   MINOR version when you add functionality in a backwards-compatible
->     manner, and
-> -   PATCH version when you make backwards-compatible bug fixes."
+  -   MAJOR version when you make incompatible API changes,
+  -   MINOR version when you add functionality in a backwards-compatible
+      manner, and
+  -   PATCH version when you make backwards-compatible bug fixes."
 
 seL4 versions are tagged in git.
 
@@ -49,8 +49,8 @@ tip of each repository and may break when you pull in changes.
 
 Supported projects are:
 
-> -   [sel4test](https://github.com/seL4/sel4test-manifest)
-> -   [verification](https://github.com/seL4/verification-manifest)
+  -   [sel4test](https://github.com/seL4/sel4test-manifest)
+  -   [verification](https://github.com/seL4/verification-manifest)
 
 ## Upgrading
 

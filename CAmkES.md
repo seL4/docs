@@ -12,12 +12,12 @@ between the components.
 
 The development framework provides:
 
-> -   a language to describe component interfaces, components, and whole
->     component-based systems
-> -   a tool that processes these descriptions to combine
->     programmer-provided component code with generated scaffolding and
->     glue code to build a complete, bootable, system image
-> -   full integration in the seL4 environment and build system
+  -   a language to describe component interfaces, components, and whole
+      component-based systems
+  -   a tool that processes these descriptions to combine
+      programmer-provided component code with generated scaffolding and
+      glue code to build a complete, bootable, system image
+  -   full integration in the seL4 environment and build system
 
 ## Setting up your machine
 

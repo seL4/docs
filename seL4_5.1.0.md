@@ -12,8 +12,8 @@ work. \* kzm: fix timer reload overflow calculations
 # Upgrade notes
 
 
-> -   This release potentially breaks ABI with the earlier versions if
->     using benchmarking kernel configurations.
+  -   This release potentially breaks ABI with the earlier versions if
+      using benchmarking kernel configurations.
 
 # Full changelog
 

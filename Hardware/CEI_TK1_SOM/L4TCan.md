@@ -103,36 +103,36 @@ dmesg is a bit more helpful.
 not exist in the source code as mcp support has been hacked in. Here's
 the docs from mainline:
 
-> . {{{
+  . {{{
 
 -   Microchip MCP251X stand-alone CAN controller device tree bindings
 
 Required properties:
 
-> -   compatible: Should be one of the following:
->     -   "microchip,mcp2510" for MCP2510.
->
->     - "microchip,mcp2515" for MCP2515.
-> -   reg: SPI chip select.
-> -   clocks: The clock feeding the CAN controller.
-> -   interrupt-parent: The parent interrupt controller.
-> -   interrupts: Should contain IRQ line for the CAN controller.
+  -   compatible: Should be one of the following:
+      -   "microchip,mcp2510" for MCP2510.
+ 
+      - "microchip,mcp2515" for MCP2515.
+  -   reg: SPI chip select.
+  -   clocks: The clock feeding the CAN controller.
+  -   interrupt-parent: The parent interrupt controller.
+  -   interrupts: Should contain IRQ line for the CAN controller.
 
 Optional properties:
 
-> -   vdd-supply: Regulator that powers the CAN controller.
-> -   xceiver-supply: Regulator that powers the CAN transceiver.
+  -   vdd-supply: Regulator that powers the CAN controller.
+  -   xceiver-supply: Regulator that powers the CAN transceiver.
 
 Example:
 
-> can0: <can@1> {
->
-> :   compatible = "microchip,mcp2515"; reg = &lt;1&gt;; clocks =
->     &lt;&clk24m&gt;; interrupt-parent = &lt;&gpio4&gt;; interrupts =
->     &lt;13 0x2&gt;; vdd-supply = &lt;&reg5v0&gt;; xceiver-supply =
->     &lt;&reg5v0&gt;;
->
-> };
+  can0: <can@1> {
+ 
+  :   compatible = "microchip,mcp2515"; reg = &lt;1&gt;; clocks =
+      &lt;&clk24m&gt;; interrupt-parent = &lt;&gpio4&gt;; interrupts =
+      &lt;13 0x2&gt;; vdd-supply = &lt;&reg5v0&gt;; xceiver-supply =
+      &lt;&reg5v0&gt;;
+ 
+  };
 
 }}}
 

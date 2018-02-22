@@ -28,10 +28,10 @@ backwards compatible. Otherwise skip to the next Section.
 
 The necessary files are:
 
-> -   GCC 4.9 cross-toolchain for
->     Aarch64 (gcc-linaro-4.9-2016.02-x86\_64\_aarch64-linux-gnu.tar.xz)
-> -   GCC 4.9 cross-toolchain for
->     gnueabihf (gcc-linaro-4.9-2016.02-x86\_64\_arm-linux-gnueabihf.tar.xz)
+  -   GCC 4.9 cross-toolchain for
+      Aarch64 (gcc-linaro-4.9-2016.02-x86\_64\_aarch64-linux-gnu.tar.xz)
+  -   GCC 4.9 cross-toolchain for
+      gnueabihf (gcc-linaro-4.9-2016.02-x86\_64\_arm-linux-gnueabihf.tar.xz)
 
 {{{\#!highlight bash numbers=off \#The files are obtainable from the
 following links
@@ -136,12 +136,12 @@ Note the ttyUSBX that is observed
 \# In the second terminal sudo apt-get install minicom sudo minicom -s
 }}}
 
-> 1.  Use the arrow keys to scroll down to Serial port setup and press
->     enter
-> 2.  Press 'a' to start editting the Serial Device
-> 3.  Rename the serial device to /dev/ttyUSBX where X is the observed
->     number
-> 4.  Press 'esc' twice and select Save setup as dfl
+  1.  Use the arrow keys to scroll down to Serial port setup and press
+      enter
+  2.  Press 'a' to start editting the Serial Device
+  3.  Rename the serial device to /dev/ttyUSBX where X is the observed
+      number
+  4.  Press 'esc' twice and select Save setup as dfl
 
 ## 11. Flash the firmware
 
@@ -206,10 +206,10 @@ images/sel4test-driver-image-arm-hikey.bin }}}
 ## 14. Modifications to firmware or UEFI
 
 
-> -   If the firmware is modified the whole process from and including
->     Section 9 onward must be done.
-> -   If the UEFI loader is modified then only Section 9 and from
->     Section 11 onward need to be completed
+  -   If the firmware is modified the whole process from and including
+      Section 9 onward must be done.
+  -   If the UEFI loader is modified then only Section 9 and from
+      Section 11 onward need to be completed
 
 Other instructions can be viewed at
 \[\[<https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi%7Csee>

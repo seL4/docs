@@ -93,7 +93,7 @@ On the u-boot console do:
 
 Then to boot, on the u-boot console do:
 
-> . dfu 0 ram 0
+  . dfu 0 ram 0
 
 and on your host:
 
@@ -110,19 +110,19 @@ and on your host:
 This will load the sel4test-driver-image-arm-tk1 file onto the TK1-SOM
 at address \$loadaddr. You can then run it in uboot with
 
-> . bootelf \$loadaddr
+  . bootelf \$loadaddr
 
 If you want, you can automate all this with:
 
-> . setenv bootcmd\_dfu "dfu 0 ram 0; bootelf \$loadaddr" saveenv
+  . setenv bootcmd\_dfu "dfu 0 ram 0; bootelf \$loadaddr" saveenv
 
 then just
 
-> . run bootcmd\_dfu
+  . run bootcmd\_dfu
 
 If you ''always'' want to do this you can do
 
-> . setenv bootcmd "run bootcmd\_dfu"
+  . setenv bootcmd "run bootcmd\_dfu"
 
 # Booting from a USB storage device
 
@@ -154,8 +154,8 @@ an ext3 filesystem instead.
 Do:
 ===
 
-> sudo env ROOTFS\_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin
-> tk1-som mmcblk0p1
+  sudo env ROOTFS\_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin
+  tk1-som mmcblk0p1
 
 }}} instead of using the instructions in the Colorado-provided
 README.txt

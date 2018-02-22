@@ -6,7 +6,7 @@ info internet lowercase markup may moin moinmoin morphed navigational
 preformatted renumbered shouldn spam uppercase wiki wikis www
 überschneidet übersetzen
 
-> Bluetooth Browsers Intranet Wildcards
+  Bluetooth Browsers Intranet Wildcards
 
 Zope
 

@@ -31,11 +31,11 @@ its drivers is trickier.
 
 Some interesting platforms that could support seL4 include:
 
-> -   Any of the Tegra S\`\`oCs from NVIDIA.
-> -   The RK3188, maybe using the \[\[<http://radxa.com/Home%7CRadxa>
->     Rock Pro\]\] development board
-> -   Any of the Arm V8 64-bit processors that are beginning to
->     become available.
+  -   Any of the Tegra S\`\`oCs from NVIDIA.
+  -   The RK3188, maybe using the \[\[<http://radxa.com/Home%7CRadxa>
+      Rock Pro\]\] development board
+  -   Any of the Arm V8 64-bit processors that are beginning to
+      become available.
 
 ## Qubes
 
@@ -89,14 +89,14 @@ interesting challenge is to provide run-time support for higher level
 languages, such as C++, Java, Go, Haskell, Python. Some of that exists
 internally:
 
-> -   reasonably mature support for a subset of C++ (no template
->     library), we'll probably release that soon for others to build on
-> -   we have Haskell sort-of running on seL4 (thanks or friends from
->     [Galois](https://galois.com/) for their help), should be
->     released in the near future
-> -   there is a student-level port of Go, which is bitrotted but could
->     be made available if someone wants to revive it
-> -   limited support of Rust applications
+  -   reasonably mature support for a subset of C++ (no template
+      library), we'll probably release that soon for others to build on
+  -   we have Haskell sort-of running on seL4 (thanks or friends from
+      [Galois](https://galois.com/) for their help), should be
+      released in the near future
+  -   there is a student-level port of Go, which is bitrotted but could
+      be made available if someone wants to revive it
+  -   limited support of Rust applications
 
 ## Stuff we're working on
 

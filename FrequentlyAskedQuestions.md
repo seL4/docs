@@ -413,9 +413,9 @@ anything is missing, the proof fails.
 That means all of the C code that is in this kernel\_all.c\_pp file
 either:
 
-> -   has a proof,
-> -   or has an explicit assumption about it,
-> -   or is not part of the kernel (i.e. is never called)
+  -   has a proof,
+  -   or has an explicit assumption about it,
+  -   or is not part of the kernel (i.e. is never called)
 
 The functions with explicit assumptions are the machine interface
 functions mentioned above (they're usually inline asm) and the functions
@@ -613,12 +613,12 @@ it into something that can be run.
 
 There are two recommended ways to do this.
 
-> -   [CAmKES](http://sel4.systems/Info/CAmkES) is the
->     Component Architecture for Micro-Kernel-based Embedded Systems. It
->     provides a language for describing the distribution of resources
->     to components, and the assignment of components to address spaces.
-> -   Build on libsel4utils, which provides useful abstractions like
->     processes, but is generally more low-level.
+  -   [CAmKES](http://sel4.systems/Info/CAmkES) is the
+      Component Architecture for Micro-Kernel-based Embedded Systems. It
+      provides a language for describing the distribution of resources
+      to components, and the assignment of components to address spaces.
+  -   Build on libsel4utils, which provides useful abstractions like
+      processes, but is generally more low-level.
 
 For build instructions, and how to get started, see the
 [Download](http://sel4.systems/Info/GettingStarted/) page.
@@ -635,18 +635,18 @@ familiarising yourself with seL4.
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-> -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml%7Cfrom>
->     L3 to seL4 – what have we learnt in 20 years of L4
->     microkernels?\]\], a 20-year retrospective of L4 microkernels;
-> -   \[\[<http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract%7Cthe>
->     original 2009 paper\]\] describing seL4 and its formal
->     verification;
-> -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Ca>
->     much longer paper detailing the complete verification story of
->     seL4\]\], including the high-level security proofs, binary
->     verification and timeliness analysis. It also contains an analysis
->     of the cost of verification, and how it compares to that of
->     traditionally-engineered systems.
+  -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml%7Cfrom>
+      L3 to seL4 – what have we learnt in 20 years of L4
+      microkernels?\]\], a 20-year retrospective of L4 microkernels;
+  -   \[\[<http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract%7Cthe>
+      original 2009 paper\]\] describing seL4 and its formal
+      verification;
+  -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Ca>
+      much longer paper detailing the complete verification story of
+      seL4\]\], including the high-level security proofs, binary
+      verification and timeliness analysis. It also contains an analysis
+      of the cost of verification, and how it compares to that of
+      traditionally-engineered systems.
 
 # What's coming up next?
  We're currently working on a number of
@@ -657,8 +657,8 @@ these will be delivered (or even if they will be released at all).
 That being said, we are currently working on and should be able to
 release soon:
 
-> -   Arm virtualisation support, on the Arndale and Odroid
-> -   A port to the Odroid XU3
-> -   WCET guarantees for the current kernel
-> -   An SMP version of seL4
+  -   Arm virtualisation support, on the Arndale and Odroid
+  -   A port to the Odroid XU3
+  -   WCET guarantees for the current kernel
+  -   An SMP version of seL4
 

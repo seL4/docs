@@ -328,14 +328,14 @@ and tell the kernel about it is as follows:
 
 \#include &lt;sel4/benchmark\_track\_types.h&gt;
 
-> /\* Create large page to use for benchmarking and give to kernel */
-> void*log\_buffer = vspace\_new\_pages(&env.vspace, seL4\_AllRights, 1,
-> seL4\_LargePageBits); if (log\_buffer == NULL) { ZF\_LOGF("Could not
-> map log\_buffer page"); } seL4\_CPtr buffer\_cap =
-> vspace\_get\_cap(&env.vspace, log\_buffer); if (buffer\_cap == NULL) {
-> ZF\_LOGF("Could not get cap for log buffer"); } int res\_buf =
-> seL4\_BenchmarkSetLogBuffer(buffer\_cap); if (res\_buf) {
-> ZF\_LOGF("Could not set log buffer"); }
+  /\* Create large page to use for benchmarking and give to kernel */
+  void*log\_buffer = vspace\_new\_pages(&env.vspace, seL4\_AllRights, 1,
+  seL4\_LargePageBits); if (log\_buffer == NULL) { ZF\_LOGF("Could not
+  map log\_buffer page"); } seL4\_CPtr buffer\_cap =
+  vspace\_get\_cap(&env.vspace, log\_buffer); if (buffer\_cap == NULL) {
+  ZF\_LOGF("Could not get cap for log buffer"); } int res\_buf =
+  seL4\_BenchmarkSetLogBuffer(buffer\_cap); if (res\_buf) {
+  ZF\_LOGF("Could not set log buffer"); }
 
 \#endif CONFIG\_BENCHMARK\_TRACK\_KERNEL\_ENTRIES }}}
 

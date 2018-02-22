@@ -25,16 +25,16 @@ objects {
 
 caps {
 
-> // Specify cap addresses (ie. CPtrs) in cnodes. my\_cnode { 1: my\_tcb
-> 2: my\_frame 3: my\_page\_table 4: my\_page\_directory }
->
-> // Specify address space layout. // With 4gb page directories, 4mb
-> page tables, and 4kb frames, // the frame at paddr 0x12345000 will be
-> mapped at vaddr 0xABCDE000. my\_pd { 0x2AF: my\_pt } my\_pt { 0xDE:
-> my\_frame }
->
-> // Specify root cnode and root paging structure of thread. my\_tcb {
-> vspace: my\_pd cspace: my\_cnode }
+  // Specify cap addresses (ie. CPtrs) in cnodes. my\_cnode { 1: my\_tcb
+  2: my\_frame 3: my\_page\_table 4: my\_page\_directory }
+ 
+  // Specify address space layout. // With 4gb page directories, 4mb
+  page tables, and 4kb frames, // the frame at paddr 0x12345000 will be
+  mapped at vaddr 0xABCDE000. my\_pd { 0x2AF: my\_pt } my\_pt { 0xDE:
+  my\_frame }
+ 
+  // Specify root cnode and root paging structure of thread. my\_tcb {
+  vspace: my\_pd cspace: my\_cnode }
 
 }
 =

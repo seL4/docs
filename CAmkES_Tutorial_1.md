@@ -33,8 +33,8 @@ construction of a CAmkES application with two components: an Echo
 server, and its Client that makes calls to it. These components are
 defined here:
 
-> -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes>
-> -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes>
+  -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes>
+  -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes>
 
 Find the Component manual section here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component>
@@ -79,8 +79,8 @@ spaces with your program's logic. The two generated files in this
 tutorial application are, in accordance with the Components we have
 defined:
 
-> -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c>
-> -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c>
+  -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c>
+  -   <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c>
 
 Now when it comes to invoking the functions that were defined in the
 Interface specification

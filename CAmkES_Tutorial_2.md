@@ -35,10 +35,10 @@ Notification connection.
 You are strongly advised to read the manual section on Events here:
 \[\[<https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events>\]\].
 
-> ''Ensure that when declaring the consumes and emits keywords between
-> the Client.camkes and Echo.camkes files, you match them up so that
-> you're not emitting on both sides of a single interface, or consuming
-> on both sides of an interface.''
+  ''Ensure that when declaring the consumes and emits keywords between
+  the Client.camkes and Echo.camkes files, you match them up so that
+  you're not emitting on both sides of a single interface, or consuming
+  on both sides of an interface.''
 
 ### TASK 10, 11, 14, 15, 22, 25
  Recall that CAmkES prefixes the name

@@ -12,33 +12,33 @@ IDes.
 
 -   ARM IPI caveats:
 
-> -   Reserving the first two per-core SGIs for seL4's IPI operations: 0
->     to do a remote call, 1 to reschedule.
-> -   Relying on GIC.
-> -   Reschedule IPIs are sent when migrating a thread.
-> -   Remote call IPIs are sent if TLB and/or cache maintenance
->     operations are required.
-> -   Remote FPU operations (when migrating threads that use HW FPU).
+  -   Reserving the first two per-core SGIs for seL4's IPI operations: 0
+      to do a remote call, 1 to reschedule.
+  -   Relying on GIC.
+  -   Reschedule IPIs are sent when migrating a thread.
+  -   Remote call IPIs are sent if TLB and/or cache maintenance
+      operations are required.
+  -   Remote FPU operations (when migrating threads that use HW FPU).
 
 ### ARM FPU
  ARMv7 32-bit support is added to do lazy FP save/restore
 mechanism, required for user threads when they use the FPU. The
 following caveats exist:
 
-> -   Only support synchronous exceptions. No support for
->     asynchronous ones.
-> -   VFP opcodes are used instead of normal instructions to discard
->     compiler warnings/errors.
-> -   Support is limited to specific ARM subarchitectures we support and
->     tested this feature on.
-> -   Disable the FPU by default if users are not using it to
->     avoid channels.
-> -   FPU support is not verified yet.
-> -   Will not work properly if using a VM that's running alongside
->     other VMs/threads that are using the FPU.
-> -   Any trapped FPU instruction (e.g. traps that need support code or
->     deprecated vectored VFP operations) are forwarded to the user as
->     a fault.
+  -   Only support synchronous exceptions. No support for
+      asynchronous ones.
+  -   VFP opcodes are used instead of normal instructions to discard
+      compiler warnings/errors.
+  -   Support is limited to specific ARM subarchitectures we support and
+      tested this feature on.
+  -   Disable the FPU by default if users are not using it to
+      avoid channels.
+  -   FPU support is not verified yet.
+  -   Will not work properly if using a VM that's running alongside
+      other VMs/threads that are using the FPU.
+  -   Any trapped FPU instruction (e.g. traps that need support code or
+      deprecated vectored VFP operations) are forwarded to the user as
+      a fault.
 
 ## Changes
 

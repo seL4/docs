@@ -53,23 +53,23 @@ component Init0 {
 
 component VM {
 
-> composition {
->
-> :   VM\_COMPOSITION\_DEF() VM\_PER\_VM\_COMP\_DEF(0)
->
-> }
->
-> configuration {
->
-> :   VM\_CONFIGURATION\_DEF() VM\_PER\_VM\_CONFIG\_DEF(0, 2)
->
->     vm0.simple\_untyped23\_pool = 20; vm0.heap\_size = 0x2000000;
->     vm0.guest\_ram\_mb = 128; vm0.kernel\_cmdline =
->     VM\_GUEST\_CMDLINE; vm0.kernel\_image = KERNEL\_IMAGE;
->     vm0.kernel\_relocs = KERNEL\_IMAGE; vm0.initrd\_image = ROOTFS;
->     vm0.iospace\_domain = 0x0f;
->
-> }
+  composition {
+ 
+  :   VM\_COMPOSITION\_DEF() VM\_PER\_VM\_COMP\_DEF(0)
+ 
+  }
+ 
+  configuration {
+ 
+  :   VM\_CONFIGURATION\_DEF() VM\_PER\_VM\_CONFIG\_DEF(0, 2)
+ 
+      vm0.simple\_untyped23\_pool = 20; vm0.heap\_size = 0x2000000;
+      vm0.guest\_ram\_mb = 128; vm0.kernel\_cmdline =
+      VM\_GUEST\_CMDLINE; vm0.kernel\_image = KERNEL\_IMAGE;
+      vm0.kernel\_relocs = KERNEL\_IMAGE; vm0.initrd\_image = ROOTFS;
+      vm0.iospace\_domain = 0x0f;
+ 
+  }
 
 }
 =
@@ -136,28 +136,28 @@ some camkes-specific initialization code.
 
 Here's a summary of what the build-rootfs tool does:
 
-> 1.  Download the linux source (unless it's already been downloaded).
->     This is required for compiling kernel modules. The version of
->     linux must match the one used to build bzimage.
-> 2.  Copy some config files into the linux source so it builds the
->     modules the way we like.
-> 3.  Prepare the linux source for building modules (make prepare;
->     make modules\_prepare).
-> 4.  Extract the starting-point root filesystem (rootfs-bare.cpio).
-> 5.  Build all kernel modules in the "modules" directory, placing the
->     output in the extracted root filesystem.
-> 6.  Create an init script by instantiating the "init\_template" file
->     with information about the linux version we're using.
-> 7.  Add camkes-specific initialization from the "camkes\_init" file to
->     the init.d directory in the extracted root filesystem.
-> 8.  Build custom libraries that programs will use, located in the
->     "lib\_src" directory.
-> 9.  Build each program in the "pkg" directory, statically linked,
->     placing the output in the extracted root filesystem.
-> 10. Copy all the files in the "text" directory to the "opt" directory
->     in the extracted root filesystem.
-> 11. Create a CPIO archive from the extracted root filesystem, creating
->     the rootfs.cpio file.
+  1.  Download the linux source (unless it's already been downloaded).
+      This is required for compiling kernel modules. The version of
+      linux must match the one used to build bzimage.
+  2.  Copy some config files into the linux source so it builds the
+      modules the way we like.
+  3.  Prepare the linux source for building modules (make prepare;
+      make modules\_prepare).
+  4.  Extract the starting-point root filesystem (rootfs-bare.cpio).
+  5.  Build all kernel modules in the "modules" directory, placing the
+      output in the extracted root filesystem.
+  6.  Create an init script by instantiating the "init\_template" file
+      with information about the linux version we're using.
+  7.  Add camkes-specific initialization from the "camkes\_init" file to
+      the init.d directory in the extracted root filesystem.
+  8.  Build custom libraries that programs will use, located in the
+      "lib\_src" directory.
+  9.  Build each program in the "pkg" directory, statically linked,
+      placing the output in the extracted root filesystem.
+  10. Copy all the files in the "text" directory to the "opt" directory
+      in the extracted root filesystem.
+  11. Create a CPIO archive from the extracted root filesystem, creating
+      the rootfs.cpio file.
 
 ### Adding a program
  Let's add a simple program!
@@ -413,9 +413,9 @@ We'll start on the CAmkES side. Edit
 apps/cma34cr\_minimal/cma34cr.camkes, adding the following interfaces to
 the Init0 component definition: {{{ component Init0 { VM\_INIT\_DEF()
 
-> // Add the following four lines: dataport Buf(4096) data; emits
-> DoPrint do\_print; consumes DonePrinting done\_printing; has mutex
-> cross\_vm\_event\_mutex;
+  // Add the following four lines: dataport Buf(4096) data; emits
+  DoPrint do\_print; consumes DonePrinting done\_printing; has mutex
+  cross\_vm\_event\_mutex;
 
 }
 =
@@ -434,21 +434,21 @@ instantiate the print server and connect it to the VMM. Add the
 following to the composition section in
 apps/cma34cr\_minimal/cma34cr.camkes: {{{ component VM {
 
-> composition {
->
-> :   VM\_COMPOSITION\_DEF() VM\_PER\_VM\_COMP\_DEF(0)
->
->     // Add the following component and connections: component
->     PrintServer print\_server; connection seL4Notification
->     conn\_do\_print(from vm0.do\_print, to print\_server.do\_print);
->     connection seL4Notification conn\_done\_printing(from
->     print\_server.done\_printing, to vm0.done\_printing);
->
->     connection seL4SharedDataWithCaps conn\_data(from print\_server.data,
->
->     :   to vm0.data);
->
-> }
+  composition {
+ 
+  :   VM\_COMPOSITION\_DEF() VM\_PER\_VM\_COMP\_DEF(0)
+ 
+      // Add the following component and connections: component
+      PrintServer print\_server; connection seL4Notification
+      conn\_do\_print(from vm0.do\_print, to print\_server.do\_print);
+      connection seL4Notification conn\_done\_printing(from
+      print\_server.done\_printing, to vm0.done\_printing);
+ 
+      connection seL4SharedDataWithCaps conn\_data(from print\_server.data,
+ 
+      :   to vm0.data);
+ 
+  }
 
 ...
 ===
@@ -467,15 +467,15 @@ size of the dataport. Add the following to the configuration section in
 apps/cma34cr\_minimal/cma34cr.camkes: {{{ configuration {
 VM\_CONFIGURATION\_DEF() VM\_PER\_VM\_CONFIG\_DEF(0, 2)
 
-> vm0.simple\_untyped24\_pool = 12; vm0.heap\_size = 0x10000;
-> vm0.guest\_ram\_mb = 128; vm0.kernel\_cmdline = VM\_GUEST\_CMDLINE;
-> vm0.kernel\_image = KERNEL\_IMAGE; vm0.kernel\_relocs = KERNEL\_IMAGE;
-> vm0.initrd\_image = ROOTFS; vm0.iospace\_domain = 0x0f;
->
-> // Add the following 2 lines: vm0.data\_id = 1; // ids must be
-> contiguous, starting from 1 vm0.data\_size = 4096;
+  vm0.simple\_untyped24\_pool = 12; vm0.heap\_size = 0x10000;
+  vm0.guest\_ram\_mb = 128; vm0.kernel\_cmdline = VM\_GUEST\_CMDLINE;
+  vm0.kernel\_image = KERNEL\_IMAGE; vm0.kernel\_relocs = KERNEL\_IMAGE;
+  vm0.initrd\_image = ROOTFS; vm0.iospace\_domain = 0x0f;
+ 
+  // Add the following 2 lines: vm0.data\_id = 1; // ids must be
+  contiguous, starting from 1 vm0.data\_size = 4096;
 
-> }
+  }
 
 }}}
 
@@ -485,17 +485,17 @@ apps/cma34cr\_minimal/print\_server.c: {{{ \#include &lt;camkes.h&gt;
 
 int run(void) {
 
-> while (1) {
->
-> :   do\_print\_wait();
->
->     printf("%sn", (char\*)data);
->
->     done\_printing\_emit();
->
-> }
->
-> return 0;
+  while (1) {
+ 
+  :   do\_print\_wait();
+ 
+      printf("%sn", (char\*)data);
+ 
+      done\_printing\_emit();
+ 
+  }
+ 
+  return 0;
 
 }
 =
@@ -640,32 +640,32 @@ Create projects/vm/linux/pkg/print\_client/print\_client.c: {{{
 
 int main(int argc, char \*argv\[\]) {
 
-> int data\_fd = open("/dev/camkes\_data", O\_RDWR); assert(data\_fd
-> &gt;= 0);
->
-> int do\_print\_fd = open("/dev/camkes\_do\_print", O\_RDWR);
-> assert(do\_print\_fd &gt;= 0);
->
-> int done\_printing\_fd = open("/dev/camkes\_done\_printing", O\_RDWR);
-> assert(done\_printing\_fd &gt;= 0);
->
-> char *data = (char*)dataport\_mmap(data\_fd); assert(data !=
-> MAP\_FAILED);
->
-> ssize\_t dataport\_size = dataport\_get\_size(data\_fd);
-> assert(dataport\_size &gt; 0);
->
-> for (int i = 1; i &lt; argc; i++) {
->
-> :   strncpy(data, argv\[i\], dataport\_size);
->     emits\_event\_emit(do\_print\_fd);
->     consumes\_event\_wait(done\_printing\_fd);
->
-> }
->
-> close(data\_fd); close(do\_print\_fd); close(done\_printing\_fd);
->
-> return 0;
+  int data\_fd = open("/dev/camkes\_data", O\_RDWR); assert(data\_fd
+  &gt;= 0);
+ 
+  int do\_print\_fd = open("/dev/camkes\_do\_print", O\_RDWR);
+  assert(do\_print\_fd &gt;= 0);
+ 
+  int done\_printing\_fd = open("/dev/camkes\_done\_printing", O\_RDWR);
+  assert(done\_printing\_fd &gt;= 0);
+ 
+  char *data = (char*)dataport\_mmap(data\_fd); assert(data !=
+  MAP\_FAILED);
+ 
+  ssize\_t dataport\_size = dataport\_get\_size(data\_fd);
+  assert(dataport\_size &gt; 0);
+ 
+  for (int i = 1; i &lt; argc; i++) {
+ 
+  :   strncpy(data, argv\[i\], dataport\_size);
+      emits\_event\_emit(do\_print\_fd);
+      consumes\_event\_wait(done\_printing\_fd);
+ 
+  }
+ 
+  close(data\_fd); close(do\_print\_fd); close(done\_printing\_fd);
+ 
+  return 0;
 
 }
 =
@@ -903,31 +903,31 @@ ports, pci devices and irqs to pass through: {{{ vm0\_config.ioports =
 {"start":0x3000, "end":0x3020, "pci\_device":0, "name":"Ethernet5"}, //
 &lt;--- Add this entry \];
 
-> vm0\_config.pci\_devices = \[
->
-> :   
->
->     {
->
->     :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2, "irq":"SATA",
->         "memory":\[\],
->
->     },
->
->     // Add this entry: { "name":"Ethernet5", "bus":5, "dev":0,
->     "fun":0, "irq":"Ethernet5", "memory":\[ {"paddr":0xc0500000,
->     "size":0x20000, "page\_bits":12}, {"paddr":0xc0520000,
->     "size":0x4000, "page\_bits":12}, \], },
->
-> \];
->
-> vm0\_config.irqs = \[
->
-> :   {"name":"SATA", "source":19, "level\_trig":1, "active\_low":1,
->     "dest":11}, {"name":"Ethernet5", "source":0x11, "level\_trig":1,
->     "active\_low":1, "dest":10}, // &lt;--- Add this entry
->
-> \];
+  vm0\_config.pci\_devices = \[
+ 
+  :   
+ 
+      {
+ 
+      :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2, "irq":"SATA",
+          "memory":\[\],
+ 
+      },
+ 
+      // Add this entry: { "name":"Ethernet5", "bus":5, "dev":0,
+      "fun":0, "irq":"Ethernet5", "memory":\[ {"paddr":0xc0500000,
+      "size":0x20000, "page\_bits":12}, {"paddr":0xc0520000,
+      "size":0x4000, "page\_bits":12}, \], },
+ 
+  \];
+ 
+  vm0\_config.irqs = \[
+ 
+  :   {"name":"SATA", "source":19, "level\_trig":1, "active\_low":1,
+      "dest":11}, {"name":"Ethernet5", "source":0x11, "level\_trig":1,
+      "active\_low":1, "dest":10}, // &lt;--- Add this entry
+ 
+  \];
 
 }}}
 

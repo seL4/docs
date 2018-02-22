@@ -38,11 +38,11 @@ with &lt;component\_instance\_name&gt;.\_sc\_size\_bits = ...;.
 ### Documentation Fixes
 
 
-> -   Removed outdated information about dependencies
+  -   Removed outdated information about dependencies
 
 ### Bug Fixes
 
 
-> -   Fixed bug in parser preventing empty lists of the form \[\] from
->     parsing correctly
+  -   Fixed bug in parser preventing empty lists of the form \[\] from
+      parsing correctly
 

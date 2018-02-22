@@ -2,11 +2,11 @@
 \#language en = seL4 Tutorial 2 = The second tutorial is useful in that
 it addresses conceptual problems for two different types of developers:
 
-> -   Experienced kernel developers whose minds are pre-programmed to
->     think in terms of "One address space equals one process", and
->     begins to introduce the seL4 CSpace vs VSpace model.
-> -   New kernel developers, for whom the tutorial will prompt them on
->     what to read about.
+  -   Experienced kernel developers whose minds are pre-programmed to
+      think in terms of "One address space equals one process", and
+      begins to introduce the seL4 CSpace vs VSpace model.
+  -   New kernel developers, for whom the tutorial will prompt them on
+      what to read about.
 
 Don't gloss over the globals declared before main() -- they're declared
 for your benefit so you can grasp some of the basic data structures.
@@ -220,14 +220,14 @@ kernel successfully, we cause it to print something to the screen.
 ## Globals links
 
 
-> -   \`sel4\_BootInfo\`:
->     <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
-> -   \`simple\_t\`:
->     <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
-> -   \`vka\_t\`:
->     <https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h>
-> -   \`allocman\_t\`:
->     <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h>
-> -   \`name\_thread()\`:
->     <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-2/src/util.c>
+  -   \`sel4\_BootInfo\`:
+      <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
+  -   \`simple\_t\`:
+      <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
+  -   \`vka\_t\`:
+      <https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h>
+  -   \`allocman\_t\`:
+      <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h>
+  -   \`name\_thread()\`:
+      <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-2/src/util.c>
 

@@ -133,12 +133,12 @@ The composition section of the spec is the same for CAmkES 2 and 3: {{{
 assembly { composition { component Device device; component Driver
 driver;
 
-> connection seL4HardwareMMIO mmio(from driver.registers, to
-> device.registers); connection seL4HardwareInterrupt interrupt(from
-> device.interrupt, to driver.interrupt); connection seL4HardwareIOPort
-> ioport(from driver.port, to device.port);
+  connection seL4HardwareMMIO mmio(from driver.registers, to
+  device.registers); connection seL4HardwareInterrupt interrupt(from
+  device.interrupt, to driver.interrupt); connection seL4HardwareIOPort
+  ioport(from driver.port, to device.port);
 
-> } configuration { // see below }
+  } configuration { // see below }
 
 }
 =
@@ -191,21 +191,21 @@ sub-component:
 
 {{{ component Serial {
 
-> // interface of this component provides UartIface serial;
->
-> composition {
->
-> > // internal components component UartDevice uart\_device; component
-> > UartDriver uart\_driver;
-> >
-> > // internal connection connection seL4HardwareMMIO conn(from
-> > uart\_device.regs, to uart\_driver.regs);
-> >
-> > // export interface of driver component as interface of this
-> > component connection ExportRPC exp(from uart\_driver.uart, to
-> > serial);
->
-> }
+  // interface of this component provides UartIface serial;
+ 
+  composition {
+ 
+  > // internal components component UartDevice uart\_device; component
+  > UartDriver uart\_driver;
+  >
+  > // internal connection connection seL4HardwareMMIO conn(from
+  > uart\_device.regs, to uart\_driver.regs);
+  >
+  > // export interface of driver component as interface of this
+  > component connection ExportRPC exp(from uart\_driver.uart, to
+  > serial);
+ 
+  }
 
 }
 =
@@ -213,20 +213,20 @@ sub-component:
 CAmkES 3 introduces special syntax for exposing interfaces of
 sub-components: {{{ component Serial {
 
-> // interface of this component provides UartIface serial;
->
-> composition {
->
-> > // internal components component UartDevice uart\_device; component
-> > UartDriver uart\_driver;
-> >
-> > // internal connection connection seL4HardwareMMIO conn(from
-> > uart\_device.regs, to uart\_driver.regs);
-> >
-> > // export interface of driver component as interface of this
-> > component export uart\_driver.uart -&gt; serial;
->
-> }
+  // interface of this component provides UartIface serial;
+ 
+  composition {
+ 
+  > // internal components component UartDevice uart\_device; component
+  > UartDriver uart\_driver;
+  >
+  > // internal connection connection seL4HardwareMMIO conn(from
+  > uart\_device.regs, to uart\_driver.regs);
+  >
+  > // export interface of driver component as interface of this
+  > component export uart\_driver.uart -&gt; serial;
+ 
+  }
 
 }
 =

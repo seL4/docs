@@ -22,10 +22,10 @@ TK1-SOM to stabilize the 'tower' making it easier to work with.
 The part numbers of the standoffs between the CAN daughterboard and TK1
 is the same as is already used between the CPU & GPU board. Order codes:
 
-> -   '''STANDOFF '''- HEX M2.5 x 16MM ALUMINUM M-F (M2111-2545-AL)
->     between pcb standoff
-> -   '''SCREW''' - M2.5 x 5 MM SS PAN HEAD PHILIPS (92000A103) bottom
->     pcb screw
+  -   '''STANDOFF '''- HEX M2.5 x 16MM ALUMINUM M-F (M2111-2545-AL)
+      between pcb standoff
+  -   '''SCREW''' - M2.5 x 5 MM SS PAN HEAD PHILIPS (92000A103) bottom
+      pcb screw
 
 ## Using Linux with this daughterboard for CAN
  ('''hello world &

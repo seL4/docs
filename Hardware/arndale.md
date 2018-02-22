@@ -1,6 +1,6 @@
-> . seL4 supports the the
-> [Arndale](http://www.arndaleboard.org/wiki/index.php/Main_Page)
-> dual core A15 ARM development board.
+  . seL4 supports the the
+  [Arndale](http://www.arndaleboard.org/wiki/index.php/Main_Page)
+  dual core A15 ARM development board.
 
 # Client setup
  === Hardware requirements: === 1. 5V power supply,

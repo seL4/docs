@@ -41,13 +41,13 @@ incorrectly.
 NOTE 2: The connection order is important. You may find that your
 USB-TTY converter has locked up.
 
-> 1.  Move the DIP switch nearest the Ethernet port to the OFF position
-> 2.  Move the DIP switch farthest from the Ethernet port to the
->     ON position.
-> 3.  Plug the USB cable into the USB-OTG port located near the
->     HDMI port.
-> 4.  Connect the RS232 port to your computer and open minicom.
-> 5.  Power up the device.
+  1.  Move the DIP switch nearest the Ethernet port to the OFF position
+  2.  Move the DIP switch farthest from the Ethernet port to the
+      ON position.
+  3.  Plug the USB cable into the USB-OTG port located near the
+      HDMI port.
+  4.  Connect the RS232 port to your computer and open minicom.
+  5.  Power up the device.
 
 Now you are ready to load your image into memory and execute:
 
@@ -59,13 +59,13 @@ u-boot.bin
 ## Booting U-Boot from SPI Flash
  To boot from SPI flash:
 
-> 1.  Move the DIP switch nearest the Ethernet port to the OFF position
-> 2.  Move the DIP switch farthest from the Ethernet port to the OFF
->     position
-> 3.  Connect the RS232 port to your computer and open minicom.
-> 4.  Insert an SD or μSD card depending on which boot loader is
->     resident in SPI flash
-> 5.  Power up the device.
+  1.  Move the DIP switch nearest the Ethernet port to the OFF position
+  2.  Move the DIP switch farthest from the Ethernet port to the OFF
+      position
+  3.  Connect the RS232 port to your computer and open minicom.
+  4.  Insert an SD or μSD card depending on which boot loader is
+      resident in SPI flash
+  5.  Power up the device.
 
 Now you are ready to load your image into memory and execute:
 
@@ -77,13 +77,13 @@ u-boot.bin
 ## Booting U-Boot from SPI Flash
  To boot from SPI flash:
 
-> 1.  Move the DIP switch nearest the Ethernet port to the OFF position
-> 2.  Move the DIP switch farthest from the Ethernet port to the OFF
->     position
-> 3.  Connect the RS232 port to your computer and open minicom.
-> 4.  Insert an SD or μSD card depending on which boot loader is
->     resident in SPI flash
-> 5.  Power up the device.
+  1.  Move the DIP switch nearest the Ethernet port to the OFF position
+  2.  Move the DIP switch farthest from the Ethernet port to the OFF
+      position
+  3.  Connect the RS232 port to your computer and open minicom.
+  4.  Insert an SD or μSD card depending on which boot loader is
+      resident in SPI flash
+  5.  Power up the device.
 
 ## SD and μSD cards
  To boot U-Boot from an SD or μSD card, one must

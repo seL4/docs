@@ -36,13 +36,13 @@ were connecting via a "real" serial port:
 {{{\#!highlight bash numbers=off sudo minicom -s ttyS0 }}} In either
 case, this will take you to a configuration menu.
 
-> 1.  Choose Serial Port Setup
-> 2.  Set A: Serial Device to /dev/ttyUSB0 or /dev/ttyS0 depending on
->     which serial device you want to use.
-> 3.  Set F: Hardware Flow Control to No
-> 4.  Set speed to 115200 and eight bit no parity.
-> 5.  Save setup as ttyUSB0 or ttyS0
-> 6.  Exit Minicom
+  1.  Choose Serial Port Setup
+  2.  Set A: Serial Device to /dev/ttyUSB0 or /dev/ttyS0 depending on
+      which serial device you want to use.
+  3.  Set F: Hardware Flow Control to No
+  4.  Set speed to 115200 and eight bit no parity.
+  5.  Save setup as ttyUSB0 or ttyS0
+  6.  Exit Minicom
 
 You can now connect to the !BeagleBoard using Minicom:
 

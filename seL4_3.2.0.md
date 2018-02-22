@@ -1,11 +1,11 @@
 # Introducing seL4 3.2.0
 
 
-> -   ARM Hypervisor support.
-> -   ARM Jetson-TK1: Cleanup.
-> -   Benchmarking now supports tracking of syscalls.
-> -   Support for XSAVE feature set for x86 CPUs.
-> -   Simplified ARM platform selection during configuration.
+  -   ARM Hypervisor support.
+  -   ARM Jetson-TK1: Cleanup.
+  -   Benchmarking now supports tracking of syscalls.
+  -   Support for XSAVE feature set for x86 CPUs.
+  -   Simplified ARM platform selection during configuration.
 
 # Implementation improvements
 
@@ -16,18 +16,18 @@
 # API Changes
 
 
-> -   No API changes in this release.
+  -   No API changes in this release.
 
 # ABI Changes
 
 
-> -   {{{seL4\_BootInfo}}} has a new entry for IOSpace caps for
->     ARM SMMU.
+  -   {{{seL4\_BootInfo}}} has a new entry for IOSpace caps for
+      ARM SMMU.
 
 # Upgrade notes
 
 
-> -   This release is source compatible.
+  -   This release is source compatible.
 
 # Full changelog
 

@@ -28,8 +28,8 @@ licenses\]\].
 There are several repositories; the most interesting ones are the
 project repositories (whose names end in -manifest) and these two:
 
-> -   [l4v](https://github.com/seL4/l4v) the seL4 proofs
-> -   [seL4](https://github.com/seL4/seL4) the seL4 kernel
+  -   [l4v](https://github.com/seL4/l4v) the seL4 proofs
+  -   [seL4](https://github.com/seL4/seL4) the seL4 kernel
 
 ## Projects
 
@@ -46,19 +46,19 @@ buildable system.
 
 The available projects so far are:
 
-> -   [verification](https://github.com/seL4/verification-manifest),
->     the seL4 proofs.
-> -   [seL4test](https://github.com/seL4/sel4test-manifest), a
->     test suite for seL4, including a Library OS layer.
-> -   [CAmkES](https://github.com/seL4/camkes-manifest), a
->     component architecture for embedded systems based on seL4. See the
->     CAmkES pages for more documentation about CAmkES.
-> -   [VMM](https://github.com/seL4/camkes-vm-manifest) a
->     component-based virtual machine monitor for ia32 platforms using
->     Intel VT-X and VT-D extensions.
-> -   [RefOS](https://github.com/seL4/refos-manifest), a
->     reference example of how one might build a multi-server operating
->     system on top of seL4. It was built as a student project.
+  -   [verification](https://github.com/seL4/verification-manifest),
+      the seL4 proofs.
+  -   [seL4test](https://github.com/seL4/sel4test-manifest), a
+      test suite for seL4, including a Library OS layer.
+  -   [CAmkES](https://github.com/seL4/camkes-manifest), a
+      component architecture for embedded systems based on seL4. See the
+      CAmkES pages for more documentation about CAmkES.
+  -   [VMM](https://github.com/seL4/camkes-vm-manifest) a
+      component-based virtual machine monitor for ia32 platforms using
+      Intel VT-X and VT-D extensions.
+  -   [RefOS](https://github.com/seL4/refos-manifest), a
+      reference example of how one might build a multi-server operating
+      system on top of seL4. It was built as a student project.
 
 Other projects may be added later.
 
@@ -98,14 +98,14 @@ need to initialise a repo client yet.)
  Choose
 a project to start with. As an example, we'll use sel4test.
 
-> -   When fetching a project, look for the GIT repository from Github,
->     whose title has "-manifest" appended to it. So instead of fetching
->     the "sel4-tutorials" GIT repository on Github, we'll fetch the
->     "sel4-tutorials-manifest" repository. The difference is that the
->     "-manifest" repository is meant to tell Repo how to fetch the
->     subprojects and set up the source tree.
-> -   First create a directory for Repo to work in, then enter it and
->     initialise it using Repo:
+  -   When fetching a project, look for the GIT repository from Github,
+      whose title has "-manifest" appended to it. So instead of fetching
+      the "sel4-tutorials" GIT repository on Github, we'll fetch the
+      "sel4-tutorials-manifest" repository. The difference is that the
+      "-manifest" repository is meant to tell Repo how to fetch the
+      subprojects and set up the source tree.
+  -   First create a directory for Repo to work in, then enter it and
+      initialise it using Repo:
 
 {{{ mkdir seL4test cd seL4test repo init -u
 <https://github.com/seL4/sel4test-manifest.git> }}} To get the actual
@@ -122,9 +122,9 @@ Debian/Ubuntu/Fedora, but we imagine you should be able to substitute
 where necessary for your distro. Instructions should be similar for
 other distros, links to toolchains for other distros are provided.
 
-> -   \[\[SetupFedora|Cross compiler and general instructions for Fedora
->     and CentOS (RHEL should work as well)\]\]
-> -   [Cross compilers for Debian and Ubuntu](SetupUbuntu)
+  -   \[\[SetupFedora|Cross compiler and general instructions for Fedora
+      and CentOS (RHEL should work as well)\]\]
+  -   [Cross compilers for Debian and Ubuntu](SetupUbuntu)
 
 ## Start with the tutorials
 
@@ -184,8 +184,8 @@ could use some contributions – other than that, gauging what you can do
 externally is for the time being, difficult. If you have ideas, please
 feel free to visit the NICTA mailing lists and chime in:
 
-> -   \[\[<https://sel4.systems/lists/listinfo/announce%7CseL4> Announce\]\].
-> -   \[\[<https://sel4.systems/lists/listinfo/devel%7CseL4> Devel\]\].
+  -   \[\[<https://sel4.systems/lists/listinfo/announce%7CseL4> Announce\]\].
+  -   \[\[<https://sel4.systems/lists/listinfo/devel%7CseL4> Devel\]\].
 
 # Learn more about seL4
  For someone just getting to know about seL4

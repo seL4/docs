@@ -39,10 +39,10 @@ This page archives all of the release notes for seL4.
 ### Mixed Criticality Support (MCS) / Realtime
 
 
-> -   \[\[seL4 5.2.0-mcs\]\]
->     ([manual](http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf))
-> -   \[\[seL4 1.0.0-rt-dev\]\]
->     ([manual](http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf))
-> -   \[\[seL4 0.0.1-rt-dev\]\]
->     ([manual](http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf))
+  -   \[\[seL4 5.2.0-mcs\]\]
+      ([manual](http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf))
+  -   \[\[seL4 1.0.0-rt-dev\]\]
+      ([manual](http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf))
+  -   \[\[seL4 0.0.1-rt-dev\]\]
+      ([manual](http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf))
 

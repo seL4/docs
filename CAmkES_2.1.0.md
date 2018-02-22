@@ -4,21 +4,21 @@
 ## New Features
 
 
-> -   runner takes an --architecture command line argument which selects
->     the target architecture. Valid arguments are: aarch32, arm\_hyp,
->     ia32
-> -   added the ability to specify a hardware dataport as cached.
->     Previously all hardware dataports were mapped uncached. This
->     feature is intended to be used on dataports backed by DMA-able
->     memory to improve access times. Functions to flush dataports from
->     the cache are also provided.
-> -   support for seL4 3.0.0
+  -   runner takes an --architecture command line argument which selects
+      the target architecture. Valid arguments are: aarch32, arm\_hyp,
+      ia32
+  -   added the ability to specify a hardware dataport as cached.
+      Previously all hardware dataports were mapped uncached. This
+      feature is intended to be used on dataports backed by DMA-able
+      memory to improve access times. Functions to flush dataports from
+      the cache are also provided.
+  -   support for seL4 3.0.0
 
 ## Removed Features
 
 
-> -   --hyp command line argument is replaced with
->     --architecture arm\_hyp
+  -   --hyp command line argument is replaced with
+      --architecture arm\_hyp
 
 ## API Removals
 

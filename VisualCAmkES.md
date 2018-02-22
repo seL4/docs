@@ -119,13 +119,13 @@ n some cases, users may have external import paths which is usually a
 parameter to the camkes parser. In order to visualise these camkes
 projects, the user can add import paths by doing the following:
 
-> 1.  Click Edit -&gt; Add import paths
->
-> 1. In the dialog box, type (or paste) your import paths. These need to be absolute paths. To add many paths, have spaces between your paths.
->
-> :   a.  E.g "/home/someUser/camkes-next/projects/FileExtender
->         /home/someUser/camkes-next/projects/common"
->
+  1.  Click Edit -&gt; Add import paths
+ 
+  1. In the dialog box, type (or paste) your import paths. These need to be absolute paths. To add many paths, have spaces between your paths.
+ 
+  :   a.  E.g "/home/someUser/camkes-next/projects/FileExtender
+          /home/someUser/camkes-next/projects/common"
+ 
 A keyboard shortcut is also implemented, Cmd + I or Cmd + I .
 
 ### Key-mappings
@@ -151,18 +151,18 @@ the user sees; Controller keeps the Model and View in sync. Qt works on
 a Model-View paradigm, which is very similar - except the Controller and
 View are the same thing.
 
-> 1.  GraphController is the QMainWindow - and starts of the program. It
->     takes the chosen file from the user, gets an AST presentation from
->     the ASTModel, and passes it on to the GraphWidget (the view).
-> 2.  GraphWidget will traverse the AST, creating InstanceWidget for
->     Instances and ConnectionWidget for Connections.
-> 3.  GraphWidget is a QGraphicsView - containing QGraphicsScene.
->     InstanceWidget and ConnectionWidget are QGraphicWidget and
->     QGraphicItem respectively. QGraphicScene handles the placements of
->     QGraphicItems, and has functions for scaling (i.e. zoom), panning,
->     moving of nodes etc.
-> 4.  The program primary works by events. Events are like mouse clicks,
->     button presses etc.
+  1.  GraphController is the QMainWindow - and starts of the program. It
+      takes the chosen file from the user, gets an AST presentation from
+      the ASTModel, and passes it on to the GraphWidget (the view).
+  2.  GraphWidget will traverse the AST, creating InstanceWidget for
+      Instances and ConnectionWidget for Connections.
+  3.  GraphWidget is a QGraphicsView - containing QGraphicsScene.
+      InstanceWidget and ConnectionWidget are QGraphicWidget and
+      QGraphicItem respectively. QGraphicScene handles the placements of
+      QGraphicItems, and has functions for scaling (i.e. zoom), panning,
+      moving of nodes etc.
+  4.  The program primary works by events. Events are like mouse clicks,
+      button presses etc.
 
 Throughout my code, I use lazy instantiation. Most (if not all) global
 variables are declared as properties. Lazy instantiation is when

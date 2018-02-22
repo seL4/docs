@@ -58,8 +58,8 @@ For more details, see the 2.0.0 manual
 # Implementation improvements
 
 
-> -   introduces the bitfield scheduler: faster scheduler (Was linear in
->     the
+  -   introduces the bitfield scheduler: faster scheduler (Was linear in
+      the
 
 number of runnable threads, now log n)
 
@@ -73,27 +73,27 @@ release build
 # API Changes
 
 
-> -   {{{seL4\_Recv}}} replaces {{{seL4\_Wait}}} on endpoints
-> -   {{{seL4\_Wait}}} is now only used on notification objects
-> -   Async endpoint -&gt; notification object
-> -   sync endpoint -&gt; endpoint
-> -   {{{seL4\_Recv}}} on an endpoint may now return signals sent to a
->     thread's
+  -   {{{seL4\_Recv}}} replaces {{{seL4\_Wait}}} on endpoints
+  -   {{{seL4\_Wait}}} is now only used on notification objects
+  -   Async endpoint -&gt; notification object
+  -   sync endpoint -&gt; endpoint
+  -   {{{seL4\_Recv}}} on an endpoint may now return signals sent to a
+      thread's
 
 bound notification object.
 
 ## API Additions
 
 
-> -   {{{seL4\_NotificationObject}}} replaces deprecated
->     {{{seL4\_AsyncEndpointObject}}}
-> -   {{{seL4\_NotificationBits}}} size in bits of a notification object
-> -   {{{seL4\_IRQHandler\_SetNotification}}} replaces deprecated
->     {{{seL4\_IRQHandler\_SetEndpoint}}}
-> -   {{{seL4\_Recv}}} replaces {{{seL4\_Wait}}} for endpoints
-> -   {{{seL4\_Wait}}} used on notifications
-> -   {{{seL4\_NBRecv}}} non-blocking (polling) receive on an endpoint,
->     which fails
+  -   {{{seL4\_NotificationObject}}} replaces deprecated
+      {{{seL4\_AsyncEndpointObject}}}
+  -   {{{seL4\_NotificationBits}}} size in bits of a notification object
+  -   {{{seL4\_IRQHandler\_SetNotification}}} replaces deprecated
+      {{{seL4\_IRQHandler\_SetEndpoint}}}
+  -   {{{seL4\_Recv}}} replaces {{{seL4\_Wait}}} for endpoints
+  -   {{{seL4\_Wait}}} used on notifications
+  -   {{{seL4\_NBRecv}}} non-blocking (polling) receive on an endpoint,
+      which fails
 
 if there is no message waiting. Opposite of {{{NBSend}}} (which silently
 fails if there is no receiver waiting) \* {{{seL4\_Poll}}} collects any
@@ -105,9 +105,9 @@ signals from a notification objects, returns zero if there are none \*
 ## Deprecations
 
 
-> -   {{{seL4\_AsyncEndpointObject}}}
-> -   {{{seL4\_Notify}}}
-> -   {{{seL4\_IRQHandler\_SetEndpoint}}}
+  -   {{{seL4\_AsyncEndpointObject}}}
+  -   {{{seL4\_Notify}}}
+  -   {{{seL4\_IRQHandler\_SetEndpoint}}}
 
 # Note on Syscall names
 

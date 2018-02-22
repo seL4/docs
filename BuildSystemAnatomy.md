@@ -6,58 +6,58 @@
 of a project repository that are part of the build system (as opposed to
 code and tools related to the project):
 
-> -   '''[.config](\#config)''' - Your current
->     configuration (auto-generated)
->
-> \* '''apps/'''
->
-> :   -   '''[Kbuild](\#appskbuild)''' - Application targets and
->         dependencies
->     -   '''[Kconfig](\#kconfig)''' - Applications menu
->
->     \* '''myapp/'''
->
->     :   -   '''[Kconfig](\#kconfig)''' - Myapp-specific settings
->         -   '''[Makefile](\#appsmyappmakefile)''' - How to build
->             Myapp
->
-> -   '''configs/\*''' - Pre-made configurations for the project
-> -   '''[Kconfig](\#kconfig)''' - Top-level menu
-> -   '''kernel/Makefile''' - How to build seL4
->
-> \* libs/
->
-> :   -   '''[Kbuild](\#libskbuild)''' - Library targets and
->         dependencies
->     -   '''[Kconfig](\#kconfig)''' - Libraries menu
->
->     \* libfoo/
->
->     :   -   '''[Kconfig](\#kconfig)''' - Libfoo-specific settings
->         -   '''[Makefile](\#libfoomakefile)''' - How to build
->             Libfoo
->
-> -   '''[Makefile](\#makefile)''' - Top-level build specialisation
-> -   '''[Makefile.flags](\#makefileflags)''' - Top-level build
->     tuning
->
-> \* tools/common/
->
-> :   -   '''[common.mk](\#commonmk)''' - Boiler plate for building
->         applications/libraries
->     -   '''[Kconfig](\#kconfig)''' - Menu options for toolchains
->         and other common settings
->     -   '''[project-arm.mk](\#projectmk)''' - ARM-specific boiler
->         plate for a top-level build
->     -   '''[project-ia32.mk](\#projectmk)''' - IA32-specific
->         boiler plate for a top-level build
->     -   '''[project.mk](\#projectmk)''' -
->         Architecture-independent boiler plate for a top-level build
->     -   '''[Makefile.flags](\#makefileflags)''' - Shared build
->         system tuning
->     -   '''kbuild/\*''' - Kbuild from the Linux source tree. For
->         documentation, refer to the Kbuild mailing list.
->
+  -   '''[.config](\#config)''' - Your current
+      configuration (auto-generated)
+ 
+  \* '''apps/'''
+ 
+  :   -   '''[Kbuild](\#appskbuild)''' - Application targets and
+          dependencies
+      -   '''[Kconfig](\#kconfig)''' - Applications menu
+ 
+      \* '''myapp/'''
+ 
+      :   -   '''[Kconfig](\#kconfig)''' - Myapp-specific settings
+          -   '''[Makefile](\#appsmyappmakefile)''' - How to build
+              Myapp
+ 
+  -   '''configs/\*''' - Pre-made configurations for the project
+  -   '''[Kconfig](\#kconfig)''' - Top-level menu
+  -   '''kernel/Makefile''' - How to build seL4
+ 
+  \* libs/
+ 
+  :   -   '''[Kbuild](\#libskbuild)''' - Library targets and
+          dependencies
+      -   '''[Kconfig](\#kconfig)''' - Libraries menu
+ 
+      \* libfoo/
+ 
+      :   -   '''[Kconfig](\#kconfig)''' - Libfoo-specific settings
+          -   '''[Makefile](\#libfoomakefile)''' - How to build
+              Libfoo
+ 
+  -   '''[Makefile](\#makefile)''' - Top-level build specialisation
+  -   '''[Makefile.flags](\#makefileflags)''' - Top-level build
+      tuning
+ 
+  \* tools/common/
+ 
+  :   -   '''[common.mk](\#commonmk)''' - Boiler plate for building
+          applications/libraries
+      -   '''[Kconfig](\#kconfig)''' - Menu options for toolchains
+          and other common settings
+      -   '''[project-arm.mk](\#projectmk)''' - ARM-specific boiler
+          plate for a top-level build
+      -   '''[project-ia32.mk](\#projectmk)''' - IA32-specific
+          boiler plate for a top-level build
+      -   '''[project.mk](\#projectmk)''' -
+          Architecture-independent boiler plate for a top-level build
+      -   '''[Makefile.flags](\#makefileflags)''' - Shared build
+          system tuning
+      -   '''kbuild/\*''' - Kbuild from the Linux source tree. For
+          documentation, refer to the Kbuild mailing list.
+ 
 ### Build configuration
  Prior to building a project you need to
 specify a configuration (settings, components, etc.) that you want to
