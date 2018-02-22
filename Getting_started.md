@@ -63,7 +63,7 @@ Other projects may be added later.
 ## Supported Target Platforms
 
 
-Read the \[\[Hardware\]\] pages to see a list of supported platforms,
+Read the [Hardware](../Hardware) pages to see a list of supported platforms,
 and special instructions for particular hardware platforms.
 
 ## Setting up your machine
@@ -126,7 +126,7 @@ other distros, links to toolchains for other distros are provided.
 ## Start with the tutorials
 
 
-The seL4 and CAmkES \[\[Tutorials\]\] are an excellent, holistic
+The seL4 and CAmkES [Tutorials](../Tutorials) are an excellent, holistic
 introduction to the design of seL4, and also to preparing to develop for
 SEL4, and they are also used internally to train new seL4 developers.
 You are strongly encouraged to complete the tutorials if you are new to
@@ -169,7 +169,7 @@ features have to be disabled or worked around. These configurations have
 ## Running on real hardware
 
 
-See \[\[Hardware\]\].
+See [Hardware](../Hardware).
 
 # Contributing
 

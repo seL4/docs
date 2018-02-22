@@ -21,12 +21,12 @@ cross-platform compatibility, which doesn’t require heavy, insecure Java
 virtual machine. The tool uses the CAmkES Ast and Parser API, and since
 this was written in python, this tool was also written in python.
 
-VisualCAmkES is currently on the \[\[CAmkESNext\]\] branch only
+VisualCAmkES is currently on the [CAmkESNext](../CAmkESNext) branch only
 
 '''Table of Contents''' &lt;&lt;TableOfContents()&gt;&gt;
 
 ## How to Install
- Follow the instructions in \[\[CAmkESNext\]\] to
+ Follow the instructions in [CAmkESNext](../CAmkESNext) to
 obtain a copy of the CAmkES next repo. This tool should be found in
 \[path/to/camkes-tool\]/camkes/visualCAmkES.
 

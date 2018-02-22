@@ -575,7 +575,7 @@ There are plenty of references on the [documentation page](https://wiki.sel4.sys
 # What can I do with seL4?
  You can use seL4 for research, education or
 commerce. Details are specified in the standard open-source
-\[\[\#lic|licenses\]\] that come with the code. Different licenses apply
+[\#lic|licenses](../\#lic|licenses) that come with the code. Different licenses apply
 to different parts of the code, but the conditions are designed to ease
 uptake.
 

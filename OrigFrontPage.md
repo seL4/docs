@@ -13,7 +13,7 @@ contribute and share:
   -   Edit any page by pressing '''&lt;&lt;GetText(Edit)&gt;&gt;''' at
       the top or the bottom of the page
   -   Create a link to another page with joined capitalised words
-      (like WikiSandBox) or with {{{\[\[words in brackets\]\]}}}
+      (like WikiSandBox) or with {{{[words in brackets](../words in brackets)}}}
   -   Search for page titles or text within pages using the search box
       at the top of any page
   -   See HelpForBeginners to get you going, HelpContents for all

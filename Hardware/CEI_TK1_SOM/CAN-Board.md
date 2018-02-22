@@ -106,11 +106,11 @@ pins.PNG|MCP25625 pinout|height="168",width="458"}}
 
 ## Construction Information
  ||Schematic
-||\[\[<attachment:canboard_v3.pdf>\]\] || ||PCB Sources Repository
+||[<attachment:canboard_v3.pdf>](../<attachment:canboard_v3.pdf>) || ||PCB Sources Repository
 ||<https://bitbucket.csiro.au/projects/OH/repos/tk1som-can-daughterboard>
 || ||Gerber Files (in repo also)
-||\[\[<attachment:Tegra_CANboard_tofab_v1.zip>\]\] || ||BOM (in repo
-also) ||\[\[<attachment:CanBoardBOMDraft1.xlsx>\]\] ||
+||[<attachment:Tegra_CANboard_tofab_v1.zip>](../<attachment:Tegra_CANboard_tofab_v1.zip>) || ||BOM (in repo
+also) ||[<attachment:CanBoardBOMDraft1.xlsx>](../<attachment:CanBoardBOMDraft1.xlsx>) ||
 
 ## Construction notes
  Components '''R6, R14, R19, R23 should NOT be

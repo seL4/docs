@@ -8,7 +8,7 @@ compilers''', and assumes you're trying to build SEL4 on an x86 machine.
 
 Both SEL4 and CAmkES require these steps. After completing the steps on
 this page, go to the respective build instructions page for the project
-you're trying to build (SEL4, \[\[CAmkES\]\]...). Projects using CAmkES
+you're trying to build (SEL4, [CAmkES](../CAmkES)...). Projects using CAmkES
 (the seL4 component system) need Haskell and some extra python libraries
 in addition to the standard build tools.
 

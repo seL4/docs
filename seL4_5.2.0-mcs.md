@@ -224,9 +224,9 @@ See the 5.2.0-mcs manual included in the release.
 We have developed a branch of the seL4 and CAmkES tutorials for the MCS
 kernel.
 
-  -   \[\[seL4 RT tutorial\]\] a new tutorial which covers all of the
+  -   [seL4 RT tutorial](../seL4 RT tutorial) a new tutorial which covers all of the
       API changes and features is available here.
-  -   \[\[Tutorials\]\] Otherwise it's worth going through all of the
+  -   [Tutorials](../Tutorials) Otherwise it's worth going through all of the
       tutorials, as all have been ported to the MCS kernel on the
       'mcs' branch.
 

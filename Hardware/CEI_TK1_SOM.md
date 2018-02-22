@@ -76,7 +76,7 @@ password ubuntu.
 
 ## Peripherals
  We have an open-hardware CAN and I2C board available,
-see \[\[/CAN-Board\]\]
+see [/CAN-Board](..//CAN-Board)
 
 &lt;&lt;Anchor(dfu)&gt;&gt; == DFU: Loading kernels over USB == You can
 load seL4 kernels over USB using dfu-util. (you can also use fastboot,
@@ -161,4 +161,4 @@ Do:
 README.txt
 
 Alternatively we have a customised image that we use: more information
-at \[\[Hardware/CEI\_TK1\_SOM/L4TCan\]\].
+at [Hardware/CEI\_TK1\_SOM/L4TCan](../Hardware/CEI\_TK1\_SOM/L4TCan).

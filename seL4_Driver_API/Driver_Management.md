@@ -114,7 +114,7 @@ to enable operation.
 
 ### seL4drv\_mgmt\_power\_features(): Sync
  This function returns a
-bitmap of the supported driver power states (See \[\[\#Constants\]\]).
+bitmap of the supported driver power states (See [\#Constants](../\#Constants)).
 All drivers are required to support at minimum, the following states: \*
 SEL4DRV\_MGMT\_POWER\_BOOT \* SEL4DRV\_MGMT\_POWER\_SHUTDOWN \*
 SEL4DRV\_MGMT\_POWER\_KILL

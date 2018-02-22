@@ -101,7 +101,7 @@ correctly) do:
 
 
 To learn about developing your own CAmkES application, read the
-\[\[Tutorials\#CAmkES\_tutorials\]\].
+[Tutorials\#CAmkES\_tutorials](../Tutorials\#CAmkES\_tutorials).
 
 ## Camkes Terminology/Glossary
 
@@ -130,13 +130,13 @@ functional changes. For details about what's changed, see
 
 
 Here's some information about the internals of the CAmkES tool:
-\[\[CAmkESInternals\]\]
+[CAmkESInternals](../CAmkESInternals)
 
 ## Command Line Interface
 
 
 There is an experimental command line interface for managing CAmkES
-projects. Read more: \[\[CAmkESCLI\]\]
+projects. Read more: [CAmkESCLI](../CAmkESCLI)
 
 ## Python Dependencies
 

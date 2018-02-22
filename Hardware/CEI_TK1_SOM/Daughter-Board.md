@@ -36,7 +36,7 @@ with TK1|width="100%"}}
 :   -   [Schematic PDF](attachment:daughterboard_r3a_schematic.pdf) (See '[Technical errata for R3A](\#errata)'
         for changes)
     -   Bill of Materials:
-        \[\[<attachment:tegra_daughterboard_bom3.xls>\]\]
+        [<attachment:tegra_daughterboard_bom3.xls>](../<attachment:tegra_daughterboard_bom3.xls>)
     -   Project repository:
         [Altium files](https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard)
 

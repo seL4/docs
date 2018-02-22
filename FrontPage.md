@@ -16,17 +16,17 @@ list\]\]) drop us a line if you want to be able to edit.
 ## seL4 Basics
 
 
-  -   \[\[Getting started\]\]
-  -   \[\[Tutorials\]\]
-  -   \[\[Documentation\]\]
+  -   [Getting started](../Getting started)
+  -   [Tutorials](../Tutorials)
+  -   [Documentation](../Documentation)
   -   [seL4 libraries](SeL4Libraries)
-  -   \[\[CAmkES\]\]
-  -   \[\[CapDL\]\]
-  -   \[\[Testing\]\]
-  -   \[\[Debugging guide\]\]
-  -   \[\[Benchmarking guide\]\]
-  -   \[\[Virtualisation on seL4\]\]
-  -   \[\[Rust\]\]
+  -   [CAmkES](../CAmkES)
+  -   [CapDL](../CapDL)
+  -   [Testing](../Testing)
+  -   [Debugging guide](../Debugging guide)
+  -   [Benchmarking guide](../Benchmarking guide)
+  -   [Virtualisation on seL4](../Virtualisation on seL4)
+  -   [Rust](../Rust)
 
 ## seL4 Status
 
@@ -42,7 +42,7 @@ list\]\]) drop us a line if you want to be able to edit.
 
 
   -   [FAQ](FrequentlyAskedQuestions): editable list of FAQs
-  -   \[\[seL4 Recipes\]\]: How to do X with seL4
+  -   [seL4 Recipes](../seL4 Recipes): How to do X with seL4
 
 ## seL4 Releases
 
@@ -64,6 +64,6 @@ list\]\]) drop us a line if you want to be able to edit.
   -   \[\[<https://research.csiro.au/tsblog%7CTrustworthy> Systems
       Blog\]\]
   -   [IRC Channel](IRCChannel)
-  -   \[\[Suggested projects\]\]
+  -   [Suggested projects](../Suggested projects)
   -   CommunityProjects
 

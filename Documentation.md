@@ -7,7 +7,7 @@
       Microkernels: The Lessons from 20 Years of Research and
       Deployment\]\], a retrospective explaining how we got to where we
       are;
-  -   \[\[Getting started\]\]
+  -   [Getting started](../Getting started)
   -   \[\[<http://ssrg.nicta.com.au/projects/seL4/%7CNICTA> seL4
       research project pages\]\]
   -   [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and

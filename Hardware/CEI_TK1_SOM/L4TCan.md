@@ -84,7 +84,7 @@ binding for the mcp251X, so you have to modify the kernel driver.
 Easiest way to do that is to just use mine: (Works with latest L4T from
 colorado. Don't use the upstream NVIDIA L4T)
 
-Get it here: \[\[<attachment:mcp251x.c>\]\]
+Get it here: [<attachment:mcp251x.c>](../<attachment:mcp251x.c>)
 
 You want to replace the file in drivers/net/can/mcp251x.c
 
@@ -138,10 +138,10 @@ Example:
 
 ### Modify the device tree
  Replace the existing .dts files with
-\[\[<attachment:tegra124-tk1-som-pm375-000-c00-00.dts>\]\]
+[<attachment:tegra124-tk1-som-pm375-000-c00-00.dts>](../<attachment:tegra124-tk1-som-pm375-000-c00-00.dts>)
 
 You also need to remap some GPIOs, swap out the GPIO device tree with
-\[\[<attachment:tegra124-tk1-som-gpio-default.dtsi>\]\]
+[<attachment:tegra124-tk1-som-gpio-default.dtsi>](../<attachment:tegra124-tk1-som-gpio-default.dtsi>)
 
 ### Kernel Build Configuration
  Using make menuconfig, enable CAN and

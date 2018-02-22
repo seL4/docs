@@ -45,7 +45,7 @@ guarantee that it won't change in breaking ways in the future.
 
 
 There's a guide on the changes introduces by this version here:
-\[\[CAmkESDifferences\]\]
+[CAmkESDifferences](../CAmkESDifferences)
 
 ### I was using the "master" branch, and don't want to migrate
 
@@ -68,7 +68,7 @@ You don't have to do anything. Your project will continue to work.
 
 
 CAmkES dependencies have changed. For a definitive (maintained) list,
-see: \[\[CAmkES\#Build\_dependencies\]\]
+see: [CAmkES\#Build\_dependencies](../CAmkES\#Build\_dependencies)
 
 ## New Features
 
