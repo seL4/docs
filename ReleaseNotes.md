@@ -1,8 +1,10 @@
-= seL4 Releases =
+# seL4 Releases
+
 
 This page archives all of the release notes for seL4.
 
-== Master (verified kernel) ==
+## Master (verified kernel)
+
 
 :   -   \[\[seL4 8.0.0\]\]
         (\[\[<http://sel4.systems/Info/Docs/seL4-manual-8.0.0.pdf%7Cmanual>\]\])
@@ -31,9 +33,11 @@ This page archives all of the release notes for seL4.
     -   \[\[seL4 2.0.0\]\]
         (\[\[<http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf%7Cmanual>\]\])
 
-== Experimental branches ==
+## Experimental branches
 
-=== Mixed Criticality Support (MCS) / Realtime ===
+
+### Mixed Criticality Support (MCS) / Realtime
+
 
 > -   \[\[seL4 5.2.0-mcs\]\]
 >     (\[\[<http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf%7Cmanual>\]\])

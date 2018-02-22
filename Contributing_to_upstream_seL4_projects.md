@@ -1,6 +1,8 @@
-= Contributing to upstream seL4 projects =
+# Contributing to upstream seL4 projects
 
-== Contributor license agreement: ==
+
+## Contributor license agreement:
+
 
 We welcome contributions to the seL4 project. However, the copyright
 holders require us to have on file a signed Contributor Licence
@@ -26,7 +28,8 @@ All submissions to repositories under <https://github.com/sel4> require
 a CLA. All submissions to repositories under
 <https://github.com/sel4proj> do not require a CLA.
 
-== General: ==
+## General:
+
 
 Please see figure 1: the “master” branch of all of our repositories
 points to the bleeding edge of the source code. Internally, we have
@@ -52,7 +55,8 @@ Sabre platform on ARM. To see which code is verified, please have a look
 at \[\[<https://wiki.sel4.systems/Hardware%7Cour> verified
 platforms\]\].
 
-== User-level code: ==
+## User-level code:
+
 
 The story is different for most user-level code. While we are working on
 verifying some of this, and are likely to adopt a similar model as for

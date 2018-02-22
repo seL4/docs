@@ -1,4 +1,5 @@
-= Summary = The Jetson TX1 is a multimedia and DSP board with a highly
+# Summary
+ The Jetson TX1 is a multimedia and DSP board with a highly
 optimized 64-bit memory controller which supports low latency accesses
 from the CPU, high bandwidth accesses from the GPU and bounded latency
 accesses from real-time devices such as the display.
@@ -22,7 +23,8 @@ TX1's Ethernet driver and enable TFTP-boot, but this is beyond the scope
 of this article since it entails compiling a custom U-boot and then
 flashing it onto the board.
 
-== Booting via TFTP == Unfortunately the stock U-boot that comes with
+## Booting via TFTP
+ Unfortunately the stock U-boot that comes with
 the TX1 does not support TFTP because
 \[\[<https://devtalk.nvidia.com/default/topic/962946/tx1-pxe-boot/%7Cit>
 does not come with an ethernet driver\]\], but if you so choose, it
@@ -30,7 +32,8 @@ seems that it is possible to recomplile u-boot with support for the
 ethernet driver, and then flash your custom U-boot onto your TX1.
 Instructions on how to do this are not included here.
 
-== Booting via DFU ==
+## Booting via DFU
+
 
 Before attempting to boot over DFU on the TX1, be sure to double check
 that the seL4 build process is outputting a raw binary and not an ELF.
@@ -69,7 +72,8 @@ You may need to give dfu-util root privileges. If dfu-util is unable to
 find the TX1 device, try unplugging and replugging in the USB mini-cable
 that connects your PC to the TX1.
 
-== Booting via SD Card == Please be sure that your build process is
+## Booting via SD Card
+ Please be sure that your build process is
 producing a raw binary image and not an ELF image. You can do this by
 executing make menuconfig and then proceeding through: Tools =&gt;
 Build elfloader =&gt; Boot image type. Be sure that Binary Boot Image is
@@ -94,7 +98,8 @@ sel4test-driver-image-arm-tx1.bin go 0x82000000 }}}
 For EXT4: {{{ ext4load mmc 1 0x82000000
 sel4test-driver-image-arm-tx1.bin go 0x82000000 }}}
 
-== Internal 15 GiB USB mass storage ==
+## Internal 15 GiB USB mass storage
+
 
 Please be sure that your build process is producing a raw binary image
 and not an ELF image. You can do this by executing make menuconfig and

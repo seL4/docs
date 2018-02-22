@@ -1,18 +1,23 @@
-= seL4 Driver API Persistent Device Naming Scheme =
+# seL4 Driver API Persistent Device Naming Scheme
+
 
 Recommended prior reading for this page is the seL4 Driver API's
 \[\[seL4 Driver API/Child Enumeration\#Addressing Names|location-based
 device addressing scheme\]\].
 
-== Contents == &lt;&lt;TableOfContents()&gt;&gt;
+## Contents
+ &lt;&lt;TableOfContents()&gt;&gt;
 
-== Constants ==
+## Constants
 
-== Functions == {{{ seL4drv\_connection\_t
+
+## Functions
+ {{{ seL4drv\_connection\_t
 \*seL4drv\_external\_connect(); }}} == Data structures == {{{ typedef
 void seL4drv\_connection\_t; }}}
 
-== Description ==
+## Description
+
 
 The seL4 Driver API requires the use of a persistent naming scheme which
 forms the basis of the IPC connection system between device instances.

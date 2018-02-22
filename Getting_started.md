@@ -1,10 +1,13 @@
-= Contents = &lt;&lt;TableOfContents()&gt;&gt;
+# Contents
+ &lt;&lt;TableOfContents()&gt;&gt;
 
-= Getting Started = In general, if you're just getting started, you want
+# Getting Started
+ In general, if you're just getting started, you want
 to dive into the seL4 tutorials, then the CAmkES tutorials, then the
 seL4 Test suite. There's a section on this page for each.
 
-== Aims == This page seeks to comprehensively assist new seL4 developers
+## Aims
+ This page seeks to comprehensively assist new seL4 developers
 or interested parties to easily obtain the correct tools to duplicate
 the internal seL4 development environment, successfully build the seL4
 tutorials, and successfully follow the seL4 tutorials.
@@ -16,7 +19,8 @@ From that point, the guidance for what you should do with the functional
 source copy that you have will come from your own intuition, interest
 and hopefully, inspiration that seL4 gives you.
 
-== Code == All seL4 code and proofs are available on github, at
+## Code
+ All seL4 code and proofs are available on github, at
 <https://github.com/seL4>, under standard
 \[\[<http://sel4.systems/Info/GettingStarted/license.pml%7Copen-source>
 licenses\]\].
@@ -27,7 +31,8 @@ project repositories (whose names end in -manifest) and these two:
 > -   \[\[<https://github.com/seL4/l4v%7Cl4v>\]\] the seL4 proofs
 > -   \[\[<https://github.com/seL4/seL4%7CseL4>\]\] the seL4 kernel
 
-== Projects ==
+## Projects
+
 
 The seL4 kernel is usually built as part of project. Each project has a
 wiki entry associated with it that gives more information. The
@@ -57,26 +62,31 @@ The available projects so far are:
 
 Other projects may be added later.
 
-== Supported Target Platforms ==
+## Supported Target Platforms
+
 
 Read the \[\[Hardware\]\] pages to see a list of supported platforms,
 and special instructions for particular hardware platforms.
 
-== Setting up your machine ==
+## Setting up your machine
+
 
 You can setup all the dependencies on your local OS, or you may choose
 to use Docker.
 
-=== Using Docker === You can also use Docker to isolate the dependencies
+### Using Docker
+ You can also use Docker to isolate the dependencies
 from your machine. Instructions for using Docker for building seL4,
 CAmkES, and L4v can be found
 \[\[<https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles%7Chere>\]\].
 
-=== Using your local OS === These instructions are for Ubuntu. They
+### Using your local OS
+ These instructions are for Ubuntu. They
 assume you already know the basics of using the command line, compilers
 and GNU Make.
 
-==== Get Google's "Repo" tool ==== Repo is a tool by Google used for
+#### Get Google's "Repo" tool
+ Repo is a tool by Google used for
 managing multiple git repositories. All the seL4 related projects use
 multiple subprojects, and Repo will fetch all of them and place them in
 the correct subdirectories for you. To get repo,
@@ -84,7 +94,8 @@ the correct subdirectories for you. To get repo,
 the instructions in the section "Installing Repo" here\]\]. (You don't
 need to initialise a repo client yet.)
 
-==== Using Repo to fetch an seL4 project and its subprojects ==== Choose
+#### Using Repo to fetch an seL4 project and its subprojects
+ Choose
 a project to start with. As an example, we'll use sel4test.
 
 > -   When fetching a project, look for the GIT repository from Github,
@@ -104,7 +115,8 @@ subprojects.
 
 {{{ repo sync }}}
 
-==== Getting cross compilers ==== There are instructions on how to get
+#### Getting cross compilers
+ There are instructions on how to get
 cross compilers for building ARM. We only have direct instructions for
 Debian/Ubuntu/Fedora, but we imagine you should be able to substitute
 where necessary for your distro. Instructions should be similar for
@@ -114,7 +126,8 @@ other distros, links to toolchains for other distros are provided.
 >     and CentOS (RHEL should work as well)\]\]
 > -   \[\[SetupUbuntu|Cross compilers for Debian and Ubuntu\]\]
 
-== Start with the tutorials ==
+## Start with the tutorials
+
 
 The seL4 and CAmkES \[\[Tutorials\]\] are an excellent, holistic
 introduction to the design of seL4, and also to preparing to develop for
@@ -123,7 +136,8 @@ You are strongly encouraged to complete the tutorials if you are new to
 SEL4: they will quickly bring you up to speed and ready to practically
 contribute.
 
-== Get acquainted with seL4Test ==
+## Get acquainted with seL4Test
+
 
 Any changes you make to seL4 should pass the tests in seL4 Test, and
 pull requests to seL4 which are non-trivial or related only to
@@ -134,7 +148,8 @@ applicable) to the seL4Test repository as well.
 suite for seL4 and can be useful when porting to new platforms or adding
 new features.
 
-== Project Layout ==
+## Project Layout
+
 
 Each project has an associated wiki, accessible via github, that has
 up-to-date dependencies and instructions. The general instructions here
@@ -154,11 +169,13 @@ not produce a completely faithful emulation of the hardware, sometimes
 features have to be disabled or worked around. These configurations have
 ‘simulation’ in their names.
 
-== Running on real hardware ==
+## Running on real hardware
+
 
 See \[\[Hardware\]\].
 
-= Contributing =
+# Contributing
+
 
 Gernot's presentation:
 "\[\[<https://www.youtube.com/watch?v=lRndE7rSXiI%7CseL4> is free: What
@@ -170,7 +187,8 @@ feel free to visit the NICTA mailing lists and chime in:
 > -   \[\[<https://sel4.systems/lists/listinfo/announce%7CseL4> Announce\]\].
 > -   \[\[<https://sel4.systems/lists/listinfo/devel%7CseL4> Devel\]\].
 
-= Learn more about seL4 = For someone just getting to know about seL4
+# Learn more about seL4
+ For someone just getting to know about seL4
 and wanting to first at least understand how to build it, so that you
 can get comfortable with editing the source code, the following pre-init
 steps might help you get more context, before you try building, so you
@@ -179,7 +197,8 @@ creature you're about to step into the arena with. These are '''not'''
 pre-requisites for building the kernel, but they will help you a lot in
 understanding what you're dealing with.
 
-== Publications ==
+## Publications
+
 
 There are many publications available on the design of the seL4 kernel,
 documenting every design decision and the justifications for each one.
@@ -190,7 +209,8 @@ You can find a long list of seL4 publications here:
 \[\[<http://ts.data61.csiro.au/projects/seL4/%7CThe> seL4 project page
 at Data61\]\].
 
-== Youtube ==
+## Youtube
+
 
 :   -   Gernot Heiser outlines several areas where the kernel is looking
         for good Samaritans toward the end of this presentation,

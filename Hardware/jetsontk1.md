@@ -8,11 +8,13 @@ See
 TK1\]\] \* The development environment fully working. See \[\[Getting
 started\]\]
 
-= Getting Started = To get started, check out the
+# Getting Started
+ To get started, check out the
 \[\[<https://developer.nvidia.com/embedded-computing%7CNVIDIA> developer
 page\]\], make sure your board is correctly configured and plugged.
 
-= Build your first seL4 system = First, check out the seL4 project.
+# Build your first seL4 system
+ First, check out the seL4 project.
 {{{\#!highlight bash numbers=off \$ mkdir tegra-test \$ repo init -u
 <https://github.com/seL4/sel4test-manifest.git> \$ repo sync }}}
 
@@ -26,7 +28,8 @@ Once the system is compiled, you will have a new file creates in the
 {{{\#!highlight bash numbers=off \$ ls images/
 sel4test-driver-image-arm-tk1 \$ }}}
 
-= Load the binary = You need to be able to see output from the serial
+# Load the binary
+ You need to be able to see output from the serial
 console on the Tegra. Connect the serial port to your computer with a
 serial cable, either a USB-&gt;RS232 converter, or if your computer has
 a serial port, connect to it.
@@ -52,7 +55,8 @@ Then, let's start the program.
 
 {{{ bootelf \${loadaddr} }}}
 
-= Flash U-Boot =
+# Flash U-Boot
+
 
 Warning: This flashing procedure is for the Jetson TK1 by NVIDIA. There
 is another TK1 board called the TK1-SOM by Colorado Engineering which
@@ -90,7 +94,8 @@ tegra-u-boot-flasher repo init -u
 <https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git> repo sync
 }}}
 
-== Patching the sources ==
+## Patching the sources
+
 
 Apply the following patch to increase the console buffer size.
 {{{\#!highlight diff numbers=off diff --git
@@ -104,7 +109,8 @@ it is not possible to edit it */ -\#define CONFIG\_SYS\_CBSIZE (256* 2)
 CONFIG\_SYS\_PBSIZE (CONFIG\_SYS\_CBSIZE +
 sizeof(CONFIG\_SYS\_PROMPT) + 16) }}}
 
-== Building == To build the sources, build the necessary tools first.
+## Building
+ To build the sources, build the necessary tools first.
 
 Install autoconf, pkg-config, flex, bison, libcrypto++-dev and
 libusb-1.0.0-dev for your distribution. On Debian or Ubuntu you can do:
@@ -120,7 +126,8 @@ Then, in the script directory, build everything.
 {{{\#!highlight bash numbers=off ./build --socs tegra124 --boards
 jetson-tk1 build }}}
 
-== Flashing == To flash, attach the Jetson board's OTG USB port to a USB
+## Flashing
+ To flash, attach the Jetson board's OTG USB port to a USB
 port on your machine. Hold down the FORCE RECOVERY button while pressing
 the RESET button next to it; release FORCE RECOVERY a second or two
 after releasing the reset button
@@ -130,7 +137,8 @@ jetson-tk1 }}}
 
 The board should now be updated.
 
-== Running Linux with the new U-Boot == To boot Linux in non-secure
+## Running Linux with the new U-Boot
+ To boot Linux in non-secure
 mode, build the kernel with the Power-State Coordination Interface
 (PSCI) enabled (CONFIG\_ARM\_PSCI=y, in Kernel Features menu)and
 CPU-Idle PM support disabled (CONFIG\_CPU\_IDLE is not set in CPU Power

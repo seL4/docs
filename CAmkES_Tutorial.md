@@ -3,19 +3,23 @@
 
 &lt;&lt;TableOfContents(3)&gt;&gt;
 
-= CAmkES Tutorial = This tutorial will help you walk-through building
+# CAmkES Tutorial
+ This tutorial will help you walk-through building
 application with remote procedure, event and dataport connectors.
 
-== Remote Procedure Application == {{<attachment:echo.png>}}
+## Remote Procedure Application
+ {{<attachment:echo.png>}}
 
 Let's create some simple hello world applications using the different
 interface types available in CAmkES. Create a new application directory
 with two component types:
 
-=== Setup Directory === {{{ mkdir -p apps/helloworld/components/Hello
+### Setup Directory
+ {{{ mkdir -p apps/helloworld/components/Hello
 mkdir -p apps/helloworld/components/Client }}}
 
-=== Setup Interface === Functional interfaces, referred to as
+### Setup Interface
+ Functional interfaces, referred to as
 procedures, are made up of a set of methods. Define an interface that
 the components will communicate over and save this under
 apps/helloworld/interfaces/MyInterface.idl4: {{{ /\*
@@ -37,7 +41,8 @@ interfaces it exposes or needs in so-called Architecture Description
 Language. Create these in apps/helloworld/components/Hello/Hello.camkes
 and apps/helloworld/components/Client/Client.camkes.
 
-=== Setup Components' CAmkES Files === {{{ /\*
+### Setup Components' CAmkES Files
+ {{{ /\*
 apps/helloworld/components/Hello/Hello.camkes \*/
 
 import "../../interfaces/MyInterface.idl4";
@@ -71,7 +76,8 @@ indicates that Client is what is called an active component. This means
 it will contain a main function (prototyped as run) and have an active
 thread of control.
 
-=== Setup Composition CAmkES File === Create a file to describe the
+### Setup Composition CAmkES File
+ Create a file to describe the
 instantiation and structure of the system at
 apps/helloworld/helloworld.camkes. {{{ /\*
 apps/helloworld/helloworld.camkes \*/
@@ -102,7 +108,8 @@ each component once, h of type Hello and c of type Client. The
 components' interfaces are connected via a connection, conn, of type
 seL4RPC.
 
-=== Implement Components === Now for the implementation of the
+### Implement Components
+ Now for the implementation of the
 components. Create a single source file for Hello as
 apps/helloworld/components/Hello/src/hello.c: {{{\#!highlight c /\*
 apps/helloworld/components/Hello/src/hello.c \*/
@@ -143,7 +150,8 @@ int run(void) {
 
 The entry point of a CAmkES component is run.
 
-=== Setup Build System === The final thing is to add some build system
+### Setup Build System
+ The final thing is to add some build system
 boiler plate to be able to build the system. Create
 apps/helloworld/Kconfig for the build system menu: {{{\#!highlight
 makefile \# apps/helloworld/Kconfig
@@ -176,7 +184,8 @@ You can now run '''make menuconfig''' from the top-level directory and
 select your application from the Applications menu. Make sure you
 '''deselect the simple application''' while you're here.
 
-=== Build and Run === You're now ready to compile and run this
+### Build and Run
+ You're now ready to compile and run this
 application: {{{ make clean make qemu-system-arm -M kzm -nographic
 -kernel
  images/capdl-loader-experimental-image-arm-imx31 }}}
@@ -185,7 +194,8 @@ If all goes well you should see: {{{ Client says: hello world }}}
 
 Congratulations, you've just made your first CAmkES application.
 
-=== Under the Hood === We basically just wrote a verbose and roundabout
+### Under the Hood
+ We basically just wrote a verbose and roundabout
 Hello World example, so what benefit is CAmkES providing here? Note how
 the function call between the two components looks just like a normal
 function invocation in C, even though the two components are actually in
@@ -197,18 +207,21 @@ apps/helloworld/helloworld.camkes. The connection type we used was
 seL4RPC, but it is possible to use another connection type here without
 modifying the code of the components themselves.
 
-== Event Application == Events are the CAmkES interface type for
+## Event Application
+ Events are the CAmkES interface type for
 modelling asynchronous communication between components. Like
 procedures, events connect a single component to another single
 component, but the receiver of an event (called consumer in CAmkES
 parlance) has several ways of receiving the event. The following walks
 through an example demonstrating these.
 
-=== Setup Directory === Create a new application directory with two
+### Setup Directory
+ Create a new application directory with two
 components: {{{ mkdir -p apps/helloevent/components/Emitter mkdir -p
 apps/helloevent/components/Consumer }}}
 
-=== Setup Components' CAmkES Files === Events, unlike procedures, do not
+### Setup Components' CAmkES Files
+ Events, unlike procedures, do not
 need to be defined in a separate IDL file. You can simply refer to the
 event type in your component ADL files and CAmkES will infer an event
 type. Create the following description for Emitter: {{{ /\*
@@ -236,7 +249,8 @@ component Consumer {
 }
 =
 
-=== Setup Composition CAmkES File === Note that this component consumes
+### Setup Composition CAmkES File
+ Note that this component consumes
 (handles) an event of the same type. Let's instantiate and connect these
 components together using another ADL file: {{{ /\*
 apps/helloevent/helloevent.camkes \*/
@@ -263,7 +277,8 @@ In this file, seL4Notification is a seL4 specific connector for
 transmitting asynchronous signals. The two instantiated components,
 source and sink are connected over the connection channel.
 
-=== Implement Components === {{{\#!highlight c /\*
+### Implement Components
+ {{{\#!highlight c /\*
 apps/helloevent/components/Emitter/src/main.c \*/
 
 \#include &lt;camkes.h&gt;
@@ -320,7 +335,8 @@ handler. Callbacks are deregistered when invoked, so if you want the
 callback to fire again when another event arrives you need to explicitly
 re-register it.
 
-=== Setup Build System === We now have everything we need to run this
+### Setup Build System
+ We now have everything we need to run this
 system. Add the appropriate information to Kconfig,
 apps/helloevent/Kbuild, apps/helloevent/Kconfig and
 apps/helloevent/Makefile as for the previous example. Create
@@ -355,7 +371,8 @@ You can now run '''make menuconfig''' from the top-level directory and
 select your application from the Applications menu. Make sure you
 '''deselect the helloworld application''' while you're here.
 
-=== Build and Run === Compile the system and run it with similar qemu
+### Build and Run
+ Compile the system and run it with similar qemu
 commands to the previous example: {{{ make clean make qemu-system-arm -M
 kzm -nographic -kernel
  images/capdl-loader-experimental-image-arm-imx31 }}}
@@ -364,7 +381,8 @@ If all goes well you should see something like the following {{{
 Registering callback... Callback fired! Polling... We didn't find an
 event Waiting... Unblocked by an event! Callback fired! }}}
 
-=== Under the Hood === Whether you find an event during polling will be
+### Under the Hood
+ Whether you find an event during polling will be
 a matter of the schedule that seL4 uses to run the components. This
 covers all the functionality available when using events. One final
 point that may not be obvious from the example is that callbacks will
@@ -373,7 +391,8 @@ component registers a callback and then waits on an event to arrive, the
 callback will be fired when the first instance of the event arrives and
 the wait will return when/if the second instance of the event arrives.
 
-== Dataport Application == Dataports are CAmkES' abstraction of shared
+## Dataport Application
+ Dataports are CAmkES' abstraction of shared
 memory. Dataports, like other interfaces, connect a single component to
 a single other component. Both components get read/write access to the
 dataport. The default dataport type is Buf, which is implemented as a
@@ -381,12 +400,14 @@ byte array in C of size PAGE\_SIZE. Alternatively you can specify a
 user-defined type for the shared memory region. This example will
 demonstrate both.
 
-=== Setup Directory === Create two components that will use a pair of
+### Setup Directory
+ Create two components that will use a pair of
 dataports for communication: {{{ mkdir -p
 apps/hellodataport/components/Ping mkdir -p
 apps/hellodataport/components/Pong }}}
 
-=== Setup Dataport Type === Let's define a struct that will be used as
+### Setup Dataport Type
+ Let's define a struct that will be used as
 one of the dataports: {{{\#!highlight c /\*
 apps/hellodataport/include/porttype.h \*/
 
@@ -410,7 +431,8 @@ apps/hellodataport/components/Pong/include ln -s
 ../../../include/porttype.h
  apps/hellodataport/components/Pong/include/porttype.h }}}
 
-=== Setup Components' CAmkES Files === Note that we need to include the
+### Setup Components' CAmkES Files
+ Note that we need to include the
 C header in the ADL. CAmkES does not actually parse this header, but it
 needs to know to \#include it whenever it references the MyData\_t type.
 Now let's create an ADL description of the Ping component: {{{ /\*
@@ -435,7 +457,8 @@ component Pong {
 }
 =
 
-=== Setup Composition CAmkES File === A real system would have a more
+### Setup Composition CAmkES File
+ A real system would have a more
 complete communication protocol between the two components, but for the
 purposes of this example spinning until a byte changes is good enough.
 We're ready to connect all these sources together with a top-level ADL
@@ -460,7 +483,8 @@ assembly {
 }
 =
 
-=== Implement Components === Now we'll create some basic code for each
+### Implement Components
+ Now we'll create some basic code for each
 component to use the dataports. Note that components generally need to
 use volatile variables when referring to shared memory to prevent the
 compiler eliminating repeated reads and writes. {{{\#!highlight c /\*
@@ -511,7 +535,8 @@ int run(void) {
 }
 =
 
-=== Setup Build System === We now have everything we need to run this
+### Setup Build System
+ We now have everything we need to run this
 system. Add the appropriate information to Kconfig,
 apps/hellodataport/Kbuild, apps/hellodataport/Kconfig and
 apps/hellodataport/Makefile as for the previous example. Create
@@ -548,7 +573,8 @@ You can now run '''make menuconfig''' from the top-level directory and
 select your application from the Applications menu. Make sure you
 '''deselect the helloevent application''' while you're here.
 
-=== Build and Run === Compile the system and run it with similar qemu
+### Build and Run
+ Compile the system and run it with similar qemu
 commands to the previous example: {{{ make clean make qemu-system-arm -M
 kzm -nographic -kernel
  images/capdl-loader-experimental-image-arm-imx31 }}}
@@ -557,7 +583,8 @@ If all goes well you should see something like the following {{{ Ping:
 sending hello... Pong: received hello Pong: sending world... Ping:
 received world. }}}
 
-== Better Makefile == There is a better way to write the Makefile for
+## Better Makefile
+ There is a better way to write the Makefile for
 your application. Take apps/hellodataport/Makefile as an example
 
 {{{\#!highlight makefile \# apps/hellodataport/Makefile
@@ -608,7 +635,8 @@ their absolute path
 You can also specify platform and architecture building path if you
 need.
 
-= Tutorial Summary = You should now have a reasonably comprehensive
+# Tutorial Summary
+ You should now have a reasonably comprehensive
 understanding of the basic connector functionality available in CAmkES.
 The other apps in the CAmkES project repository provide some more
 diverse system examples.

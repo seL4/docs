@@ -1,6 +1,8 @@
-= Differences between CAmkES 2 and 3 =
+# Differences between CAmkES 2 and 3
 
-== Rich Types for Settings ==
+
+## Rich Types for Settings
+
 
 Previously all attribute settings were treated as strings by templates.
 Settings are now interpreted as an appropriate python type.
@@ -20,7 +22,8 @@ Settings are now interpreted as an appropriate python type.
 Arbitrary ids are no longer allowed as setting values: {{{ a.b = c; //
 error }}}
 
-== Parametrised Buf Type ==
+## Parametrised Buf Type
+
 
 The {{{Buf}}} dataport type can now be optionally parametrised by the
 size (in bytes) of the dataport. The syntax for this is {{{Buf(size)}}}.
@@ -57,12 +60,14 @@ assembly {
 
 }}}
 
-== Asynch Connector Renamed ==
+## Asynch Connector Renamed
+
 
 The {{{seL4Asynch}}} connector has been renamed to
 {{{seL4Notification}}}.
 
-== Non-Volatile Dataports ==
+## Non-Volatile Dataports
+
 
 Previously, c symbols used to access dataports had volatile pointer
 types. Users were encouraged to use volatile pointers to prevent the
@@ -93,7 +98,8 @@ correct behaviour of the program depends on writes preceding the
 {{{foo\_release()}}} in the program code being performed strictly before
 the writes following it.
 
-== Many-to-Many Connections ==
+## Many-to-Many Connections
+
 
 There is new syntax for connections with multiple from/to sides. The
 following fragments are equivalent (except for connection names):
@@ -104,7 +110,8 @@ from b.y, to c.z); }}}
 
 Both syntaxes are supported by CAmkES 3.
 
-== Hardware Component Configuration Attributes ==
+## Hardware Component Configuration Attributes
+
 
 The attributes for configuring hardware components have changed. Below
 is a CAmkES 2 spec, followed by the equivalent CAmkES 3 spec. These
@@ -137,17 +144,20 @@ driver;
 =
 
 CAmkES 2 configuration: {{{ configuration { device.registers\_attributes
-= "0x12345000:0x1000"; // string in format "paddr:size"
-device.interrupt\_attributes = 27; // irq number device.port\_attributes
-= "0x40:0x40"; // string in format "start\_port:end\_port" } }}}
+# "0x12345000:0x1000"; // string in format "paddr:size"
+device.interrupt\_attributes
+ 27; // irq number device.port\_attributes
+# "0x40:0x40"; // string in format "start\_port:end\_port" } }}}
 
-CAmkES 3 configuration: {{{ configuration { device.registers\_paddr =
+CAmkES 3 configuration: {{{ configuration { device.registers\_paddr
+
 0x12345000; // separate attribute for paddr and size
 device.registers\_size = 0x1000; device.interrupt\_irq\_number = 27; //
 attribute name has changed device.port\_attributes = "0x40:0x40"; //
 unchanged } }}}
 
-== Interrupt API ==
+## Interrupt API
+
 
 In CAmkES 2, interrupts were abstracted as CAmkES events, emitted from a
 hardware component. For a component with an interface {{{foo}}}
@@ -172,7 +182,8 @@ with {{{seL4HardwareInterrupt}}}). Unlike callbacks registered with
 {{{\*\_reg\_callback}}}, interrupt handlers do not need to be explicitly
 registered, and do not become unregistered after calling.
 
-== Hierarchical Components ==
+## Hierarchical Components
+
 
 The syntax for defining hierarchical components has changed in CAmkES 3.
 CAmkES 2 had special connectors used to export an interface of a

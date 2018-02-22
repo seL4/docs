@@ -5,7 +5,8 @@ components, and linking them together.
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Required Reading == While it's possible to successfully complete the
+## Required Reading
+ While it's possible to successfully complete the
 CAmkES tutorials without having read the
 '''\[\[<https://github.com/seL4/camkes-tool/blob/master/docs/index.md%7CCAmkES>
 manuals\]\]''', the manuals really explain everything in plain English,
@@ -13,7 +14,8 @@ and any aspiring CAmkES dev should read the
 '''\[\[<https://github.com/seL4/camkes-tool/blob/master/docs/index.md%7CCAmkES>
 manuals\]\]''' before attempting to complete the tutorials.
 
-== Learning outcomes ==
+## Learning outcomes
+
 
 :   -   Understand the structure of a CAmkES application, as a
         described, well-defined, static system.
@@ -21,7 +23,8 @@ manuals\]\]''' before attempting to complete the tutorials.
     -   Become acquainted with the basics of creating a practical
         CAmkES application.
 
-== Walkthrough == === TASK 1 === The fundamentals of CAmkES are the
+## Walkthrough
+ === TASK 1 === The fundamentals of CAmkES are the
 component, the interface and the connection. Components are logical
 groupings of code and resources. They communicate with other component
 instances via well-defined interfaces which must be statically defined,
@@ -36,7 +39,8 @@ defined here:
 Find the Component manual section here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component>
 
-=== TASK 2 === The second fundamental component of CAmkES applications
+### TASK 2
+ The second fundamental component of CAmkES applications
 is the Connection: a connection is the representation of a method of
 communication between two software components in CAmkES. The underlying
 implementation may be shared memory, synchronous IPC, notifications or
@@ -47,7 +51,8 @@ to the seL4\_Call() syscall on seL4.
 Find the "Connection" keyword manual section here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection>
 
-=== TASK 3 === All communications over a CAmkES connection must be well
+### TASK 3
+ All communications over a CAmkES connection must be well
 defined: static systems' communications should be able to be reasoned
 about at build time. All the function calls which will be delivered over
 a communication channel then, also are well defined, and logically
@@ -67,7 +72,8 @@ Procedure interface may be found here:
 Find the "Procedure" keyword definition here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure>
 
-=== TASK 4 === Based on the ADL, CAmkES generates boilerplate which
+### TASK 4
+ Based on the ADL, CAmkES generates boilerplate which
 conforms to your system's architecture, and enables you to fill in the
 spaces with your program's logic. The two generated files in this
 tutorial application are, in accordance with the Components we have
@@ -107,9 +113,11 @@ the second one was named "a2"? Then in order to call on that second
 
 Fill in the function calls in the generated C files!
 
-=== TASK 5 === Here you define the callee-side invocation functions for
+### TASK 5
+ Here you define the callee-side invocation functions for
 the Hello interface exposed by Echo.
 
-== Done == Congratulations: be sure to read up on the keywords and
+## Done
+ Congratulations: be sure to read up on the keywords and
 structure of ADL: it's key to understanding CAmkES. And well done on
 writing your first CAmkES application.

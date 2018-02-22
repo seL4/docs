@@ -1,4 +1,5 @@
-= Using the Saleae Logic Pro 8 to debug a CAN bus = == Introduction ==
+# Using the Saleae Logic Pro 8 to debug a CAN bus
+ == Introduction ==
 This page is a quick write up of how we used a logic analyzer to help
 solve a message loss issue when using a CAN bus. We had two TK1-SOMs
 connected together on a CAN bus. One of them runs Linux natively and the
@@ -15,7 +16,8 @@ site. Information about the TK1-SOM daughter board that we use is
 
 {{<attachment:setup.JPG>||width=50%}}
 
-== Setup == Each of the TK1-SOMs have a daughter board with a MCP25625
+## Setup
+ Each of the TK1-SOMs have a daughter board with a MCP25625
 CAN controller on them that can communicate with the processor over SPI.
 When a controller receives a CAN message it notifies the processor by
 interrupting it over a GPIO line. The processor then reads the CAN
@@ -25,7 +27,8 @@ is received on to get a feel for what is going on.
 
 {{<attachment:saleae.JPG>||width=50%}}
 
-=== Connecting to the CAN bus ===
+### Connecting to the CAN bus
+
 {{<attachment:daughterboard.PNG>||width=50%}}
 
 On our daughter board (schematic above), our CAN bus pins are CAN1H,
@@ -65,7 +68,8 @@ the message that was sent.
 
 {{<attachment:logic4.png>||width=50%}}
 
-=== Connecting to SPI ===
+### Connecting to SPI
+
 
 We now connect to the SPI bus. To do this we need to measure the CLK,
 MOSI and MISO. (These pins can be found at the bottom of the schematic).
@@ -91,7 +95,8 @@ can see both CAN messages and SPI messages that were sent.
 
 {{<attachment:logic7.png>||width=50%}}
 
-=== GPIO Interrupt line === We finally connect the probe to the
+### GPIO Interrupt line
+ We finally connect the probe to the
 interrupt line. The daughter board configures the CAN controller to
 interrupt over GPIO3 which is exposed as Pin 4 on pinout J5 as described
 in the

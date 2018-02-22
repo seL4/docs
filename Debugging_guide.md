@@ -1,10 +1,13 @@
-= Debugging guide =
+# Debugging guide
+
 
 &lt;&lt;TableOfContents&gt;&gt;
 
-== Compiler Settings ==
+## Compiler Settings
 
-=== Kernel ===
+
+### Kernel
+
 
 When debugging the kernel, make sure CONFIG\_DEBUG and CONFIG\_PRINTING
 are enabled. This can be done by make menuconfig and enabling the
@@ -21,7 +24,8 @@ including:
 > -   compile- and run-time asserts,
 > -   the kernel will print out error messages when invocations fail.
 
-=== User ===
+### User
+
 
 To make sure similar settings are passed to the user, make sure
 CONFIG\_USER\_DEBUG
@@ -31,7 +35,8 @@ Similarly, enable this setting by using make menuconfig and setting:
 > -   Toolchain options -&gt; build user level with assertions, -g and
 >     debugging messages
 
-== Qemu ==
+## Qemu
+
 
 \[\[<http://www.qemu.org/%7CQemu>\]\] is a simulator that provides
 software emulation of a hardware platform. It is useful for developing
@@ -96,7 +101,8 @@ relate what you are seeing back to the C code you compiled. It is
 possible to get a richer debugging environment by connecting GDB to
 Qemu.
 
-=== Using GDB with Qemu ===
+### Using GDB with Qemu
+
 
 \[\[<https://www.gnu.org/s/gdb/%7CGDB>\]\] is a debugger commonly used
 in C application development. Though not as seamless as debugging a
@@ -196,7 +202,8 @@ line 459.
 hit the first breakpoint. \# Breakpoint 1, main () at
 /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459 }}}
 
-==== Userspace debugging ====
+#### Userspace debugging
+
 
 The steps for debugging a userspace application on seL4 are identical to
 the ones we have just seen, except that we pass GDB a symbol table for
@@ -242,7 +249,8 @@ than the one you were debugging. Depending on the scenario you are
 debugging, it may be simpler to modify your system setup to ensure only
 one thread is running.
 
-== Objdump ==
+## Objdump
+
 
 Objdump can be used to disassemble an ELF file, be it a kernel or an
 application. This can be used to lookup the instruction where a fault
@@ -286,7 +294,8 @@ tests themselves:
 
 {{{\#!highlight bash numbers=off make objdump-tests | less }}}
 
-== In kernel debugging ==
+## In kernel debugging
+
 
 seL4 does not currently have a kernel debugger. As a result, most of our
 debugging is done with:

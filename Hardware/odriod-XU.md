@@ -1,4 +1,5 @@
-= seL4 on the Odroid XU =
+# seL4 on the Odroid XU
+
 
 This page provides info on the
 \[\[<http://www.hardkernel.com/main/products/prdt_info.php?g_code=G137510300620%7COdroid-XU>\]\]
@@ -14,13 +15,15 @@ the HardKernel Forum\]\] to get and flash the firmware
 The standard U-Boot will allow booting via Fastboot or by putting the
 bootable ELF file onto an SD card or the eMMC chip.
 
-== Run seL4test using fastboot == === Get and build sel4test ===
+## Run seL4test using fastboot
+ === Get and build sel4test ===
 {{{\#!highlight bash numbers=off mkdir seL4test cd seL4test repo init -u
 <https://github.com/seL4/sel4test-manifest.git> repo sync make
 odroidxu\_release\_xml\_defconfig }}} As always, you may need to change
 the CROSS\_COMPILE\_PREFIX by doing make menuconfig.
 
-=== Put seL4test onto the board === Boot the Odroid, with serial cable
+### Put seL4test onto the board
+ Boot the Odroid, with serial cable
 attached, and a terminal emulator attached to the serial port.
 
 Interrupt U-Boot's autoboot by hitting SPACE

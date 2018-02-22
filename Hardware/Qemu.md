@@ -1,6 +1,7 @@
 &lt;&lt;TableOfContents&gt;&gt;
 
-= seL4 on Qemu =
+# seL4 on Qemu
+
 
 This is a quick guide on how to run seL4 x86/x64 in
 \[\[<http://www.qemu.org/%7CQemu>\]\]. QEMU is a generic and open source
@@ -23,7 +24,8 @@ qemu. But the main reason for going with qemu is finer control over what
 hardware is emulated. We ran into some significant problems running seL4
 on VMWare because of hardware mismatch.
 
-== Prerequisites ==
+## Prerequisites
+
 
 With a recent Ubuntu (16.04+) all you need to do should be
 
@@ -38,7 +40,8 @@ first from BIOS. You can always check by
 
 and look for '''vmx''' flag.
 
-== Compilation ==
+## Compilation
+
 
 We are using \[\[<https://github.com/seL4/camkes-vm%7Ccamkes-vm>\]\]
 Github repository. It contains Virtual Machine build as a CAmkES
@@ -65,7 +68,8 @@ If everything goes fine, you should end up with two binaries in
 which contains the VM (and other components) and ''kernel-ia32-pc99''
 which is the seL4 kernel.
 
-== Running Qemu ==
+## Running Qemu
+
 
 To run the images we just compiled, do:
 
@@ -104,7 +108,8 @@ The qemu arguments are:
         command in the terminal. In that case you get graphical screen
         and read-only serial output
 
-== Boot from a Hard Disk ==
+## Boot from a Hard Disk
+
 
 In some cases it can be useful too boot from a hard drive, instead of
 running a kernel image directly. The main reason could be that you need
@@ -136,7 +141,8 @@ Where the '''-vga std''' option ''should'' pass the frame buffer to the
 qemu VM. Having Linux in seL4 VM print something on the screen (like a
 login prompt) is still under development though.
 
-== Hardware emulation ==
+## Hardware emulation
+
 
 Qemu by default provides a virtual Ethernet controller and VGA
 controller. A good way to find what devices are available is to install

@@ -1,6 +1,8 @@
-= CAmkES 3.1.0 Release Notes =
+# CAmkES 3.1.0 Release Notes
 
-== Default Values for Attributes ==
+
+## Default Values for Attributes
+
 
 It's now possible to give a default value when specifying an attribute
 of a component in a component { ... } block.
@@ -13,7 +15,8 @@ Specific details from manual:
     attribute that also has a default, then the different attribute's
     default will override the original default.
 
-=== Meaningful Thread Names ===
+### Meaningful Thread Names
+
 
 In seL4 threads can be named. A thread's name appears in the kernel's
 debugging printouts when the thread faults. Names of threads created by
@@ -22,7 +25,8 @@ CAmkES are now named
 threads, and &lt;component\_instance\_name&gt;:control for control
 threads.
 
-=== Scheduling Context Size Bits Attribute ===
+### Scheduling Context Size Bits Attribute
+
 
 When using CAmkES realtime extensions, the size\_bits field of a
 scheduling context can be set in CAmkES ADL. For interface threads,
@@ -31,11 +35,13 @@ specify the size bits of bound scheduling contexts with
 For control threads, specify the size bits of bound scheduling contexts
 with &lt;component\_instance\_name&gt;.\_sc\_size\_bits = ...;.
 
-=== Documentation Fixes ===
+### Documentation Fixes
+
 
 > -   Removed outdated information about dependencies
 
-=== Bug Fixes ===
+### Bug Fixes
+
 
 > -   Fixed bug in parser preventing empty lists of the form \[\] from
 >     parsing correctly

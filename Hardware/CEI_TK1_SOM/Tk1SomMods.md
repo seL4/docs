@@ -1,8 +1,10 @@
 \#\# page was renamed from Tk1SomMods = TK1-SOM Hardware Modifications =
 
-== Adding a second UART connector ==
+## Adding a second UART connector
 
-=== The issue: === \#\# Note: if you are using our
+
+### The issue:
+ \#\# Note: if you are using our
 \[\[../Daughter-Board|IO-Daughterboard\]\] , this is uneccessary;
 instead a straight-line passthrough jumper is used to hook up to level
 converters on the daughterboard.
@@ -15,14 +17,16 @@ because of the fan & heatsink (below right).
 {{[attachment:jumper.jpg|jumper|width=30%](attachment:jumper.jpg%7Cjumper%7Cwidth=30%)}}
 {{[attachment:heatsink.jpg|heatsink|width=30%](attachment:heatsink.jpg%7Cheatsink%7Cwidth=30%)}}
 
-=== What it looks like: ===
+### What it looks like:
+
 
 Viewed from the bottom of the CPU board, the secondary UART is the 4
 unpopulated pins just under the ethernet jack pins (see below):
 
 {{[attachment:connector.jpg|connector|width=30%](attachment:connector.jpg%7Cconnector%7Cwidth=30%)}}
 
-=== Right-angle connectors? === Initially I looked at normal right-angle
+### Right-angle connectors?
+ Initially I looked at normal right-angle
 0.1" headers, but they don't fit in either direction!
 
 {{[attachment:clearance.jpg|clearance|width=30%](attachment:clearance.jpg%7Cclearance%7Cwidth=30%)}}
@@ -32,7 +36,8 @@ Above left: you can't connect a jack as there is no clearance to the
 mezzanine connector. Above right: the pins will likely short with the
 ethernet jack pins.
 
-=== Solution: modify a dual-row header.. ===
+### Solution: modify a dual-row header..
+
 
 A normal dual-row 0.1" header looks like this:
 

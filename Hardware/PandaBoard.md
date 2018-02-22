@@ -4,22 +4,26 @@ update if you know the current procedure. }}}
 !PandaBoard is based on TI OMAP4 dual-core ARM CPU. The Fastboot is used
 to upload and boot the kernel.
 
-== Where to get the seL4 kernel for Pandaboard? == The code now lives in
+## Where to get the seL4 kernel for Pandaboard?
+ The code now lives in
 c-kernel-experimental arm-mpcore branch. The second core could be
 activated or not according to your configuration. To build the kernel,
 you need to use the Kbuild file under the top-level source tree instead
 of Makefile.
 
-== SD card setup == ====== Prologue ====== The first stage boot loader
+## SD card setup
+ ====== Prologue ====== The first stage boot loader
 expects to find the TI X-loader in te root of a FAT filesystem, on the
 first partition of the SD card with the name MLO.
 
 MLO expects to find a file named u-boot.bin in the root directory of the
 SD card.
 
-====== Original panda ====== Download to the SD card.
+###### Original panda
+ Download to the SD card.
 
-====== Panda ES ====== Download to the SD card. These files will need to
+###### Panda ES
+ Download to the SD card. These files will need to
 be renamed to MLO and u-boot.bin respectively.
 
 The reason to patch the u-boot is because the fastboot jumps to the
@@ -28,7 +32,8 @@ and load correctly, so in the lib\_arm/armlinux.c file, insert
 do\_bootelf(0, 0, 1, 0) before theKernel(0, bd-&gt;bi\_arch\_number,
 bd-&gt;bi\_boot\_params)
 
-== Steps to boot seL4 kernel ==
+## Steps to boot seL4 kernel
+
 
 :   1.  Download the tool. Alternatively, clone and build the tool from
         source &lt;TODO Fastboot link&gt;
@@ -50,9 +55,11 @@ bd-&gt;bi\_boot\_params)
         \$&gt; fastboot -b 0x80000000 boot the\_kernel\_image\_file\_boundled\_with\_application
     2.  The kernel should boot and application gets executed.
 
-= References = ==== SD setup ====
+# References
+ ==== SD setup ====
 <http://omappedia.org/wiki/4AI.1.4_OMAP4_Icecream_Sandwich_Panda_Notes#Patching_X-LOADER>
 
 <http://isrcepeda.blogspot.com.au/2012/05/getting-ics-working-on-pandaboard-uboot.html>
 
-=== Hardware === ||Model||SoC||Platform||
+### Hardware
+ ||Model||SoC||Platform||

@@ -1,4 +1,5 @@
-= Internal Libraries =
+# Internal Libraries
+
 
 We have four major collections of libraries developed in house:
 
@@ -18,7 +19,8 @@ We have four major collections of libraries developed in house:
 Please see the specific readmes of each library collection for more
 detail.
 
-= External libraries =
+# External libraries
+
 
 We keep external libraries in non-condensed repos so that it is trivial
 to pull in upstream changes.

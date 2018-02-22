@@ -1,6 +1,8 @@
-= CAmkES 2.3.0 Release Notes =
+# CAmkES 2.3.0 Release Notes
 
-== New Features ==
+
+## New Features
+
 
 :   -   support for seL4 4.0.0
     -   new dependency: \[\[<http://haskellstack.org%7CHaskell>

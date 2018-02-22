@@ -17,7 +17,8 @@ they were covered by a previous tutorial in the series.
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Learning outcomes ==
+## Learning outcomes
+
 
 :   -   Repeat the spawning of a thread. "''If it's nice, do it twice''"
         -- Caribbean folk-saying. Once again, the new thread will be
@@ -40,7 +41,8 @@ they were covered by a previous tutorial in the series.
         sure you understand the diagram on the "'''CSpace example and
         addressing'''" slide.
 
-== Tasks ==
+## Tasks
+
 
 First, build the tutorial:
 
@@ -50,7 +52,8 @@ simulate }}}
 
 Look for TASK in the apps/hello-3 directory for each task.
 
-=== TASK 1 ===
+### TASK 1
+
 
 As we mentioned in passing before, threads in seL4 do their own memory
 management. You implement your own Virtual Memory Manager, essentially.
@@ -66,7 +69,8 @@ of a MMU-utilizing kernel apply.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h>
 
-=== TASK 2 ===
+### TASK 2
+
 
 Take note of the line of code that precedes this: the one where a
 virtual address is randomly chosen for use. This is because, as we
@@ -89,7 +93,8 @@ into a VSpace, and the mapping of a new page-table into a VSpace.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml>
 
-=== TASK 3 ===
+### TASK 3
+
 
 So just as you previously had to manually retype a new frame to use for
 your IPC buffer, you're also going to have to manually retype a new
@@ -97,7 +102,8 @@ page-table object to use as a leaf page-table in your VSpace.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h>
 
-=== TASK 4 ===
+### TASK 4
+
 
 If you successfully retyped a new page table from an untyped memory
 object, you can now map that new page table into your VSpace, and then
@@ -107,13 +113,15 @@ try again to finally map the IPC-buffer's frame object into the VSpace.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml>
 
-=== TASK 5 === ''Corresponding line in tutorial:''
+### TASK 5
+ ''Corresponding line in tutorial:''
 (<https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-3/src/main.c#L296>)
 
 If everything was done correctly, there is no reason why this step
 should fail. Complete it and proceed.
 
-=== TASK 6 ===
+### TASK 6
+
 
 Now we have a (fully mapped) IPC buffer -- but no Endpoint object to
 send our IPC data across. We must retype an untyped object into a kernel
@@ -129,7 +137,8 @@ and proceed.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h>
 
-=== TASK 7 ===
+### TASK 7
+
 
 Badges are used to uniquely identify a message queued on an endpoint as
 having come from a particular sender. Recall that in seL4, each thread
@@ -156,7 +165,8 @@ data, and know which sender you are. Complete the step and proceed.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/types_32.bf>
 
-=== TASK 8 ===
+### TASK 8
+
 
 Here we get a formal introduction to message registers. At first glance,
 you might wonder why the sel4\_SetMR() calls don't specify a message
@@ -180,7 +190,8 @@ transmitted in the message.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
 
-=== TASK 9 ===
+### TASK 9
+
 
 Now that you've constructed your message and badged the endpoint that
 you'll use to send it, it's time to send it. The seL4\_Call() syscall
@@ -217,7 +228,8 @@ response message, if the sender doesn't want it to.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
 
-=== TASK 10 ===
+### TASK 10
+
 
 While this task is out of order, since we haven't yet examined the
 receive-side of the operation here, it's fairly simple anyway: this task
@@ -228,7 +240,8 @@ designated, single IPC buffer.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
 
-=== TASK 11 ===
+### TASK 11
+
 
 We're now in the receiving thread. The seL4\_Recv() syscall performs a
 blocking listen on an Endpoint or Notification capability. When new data
@@ -243,7 +256,8 @@ explicitly interested in distinguishing the sender.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
 
-=== TASK 12 ===
+### TASK 12
+
 
 These two calls here are just verification of the fidelity of the
 transmitted message. It's very unlikely you'll encounter an error here.
@@ -251,19 +265,22 @@ Complete them and proceed to the next step.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
 
-=== TASK 13 ===
+### TASK 13
+
 
 Again, just reading the data from the Message Registers.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
 
-=== TASK 14 ===
+### TASK 14
+
 
 And writing Message Registers again.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
 
-=== TASK 15 ===
+### TASK 15
+
 
 This is a formal introduction to the Reply capability which is
 automatically generated by the seL4 kernel, whenever an IPC message is

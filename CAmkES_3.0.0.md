@@ -1,15 +1,18 @@
-= CAmkES 3.0.0 Release Notes =
+# CAmkES 3.0.0 Release Notes
+
 
 This adds all the features from our development branch "next". Changes
 include several syntactic and functional changes. The development of new
 features will now continue on the "master" branch, and the "next" branch
 will remain as is for compatibility reasons.
 
-== Migrating ==
+## Migrating
+
 
 How you migrate will depend on your situation:
 
-=== I was using the "next" branch and want to switch to this release ===
+### I was using the "next" branch and want to switch to this release
+
 
 Hopefully most people will be in this category. Now that we've
 (finally!) done an official release of CAmkES 3, you can switch to a
@@ -39,12 +42,14 @@ path="tools/camkes"&gt; }}}
 Note that tracking the tip of the "master" branch is risky. There's no
 guarantee that it won't change in breaking ways in the future.
 
-=== I was using the "master" branch, and want to migrate ===
+### I was using the "master" branch, and want to migrate
+
 
 There's a guide on the changes introduces by this version here:
 \[\[CAmkESDifferences\]\]
 
-=== I was using the "master" branch, and don't want to migrate ===
+### I was using the "master" branch, and don't want to migrate
+
 
 That's fine! All the old versions of CAmkES will continue to be
 available. The latest release of this branch is
@@ -55,18 +60,22 @@ If you use repo, your manifest probably had a line resembling: {{{
 Change it to: {{{ &lt;project name="camkes-tool.git" path="tools/camkes"
 revision="refs/tags/camkes-2.3.1"&gt; }}}
 
-=== I was using a released version of CAmkES ===
+### I was using a released version of CAmkES
+
 
 You don't have to do anything. Your project will continue to work.
 
-== New Dependencies ==
+## New Dependencies
+
 
 CAmkES dependencies have changed. For a definitive (maintained) list,
 see: \[\[CAmkES\#Build\_dependencies\]\]
 
-== New Features ==
+## New Features
 
-=== Visualization Tool ===
+
+### Visualization Tool
+
 
 CAmkES comes with a graphical tool for visualising the components and
 connections in a CAmkES application. For installation and usage
@@ -74,24 +83,28 @@ instructions,
 \[\[<https://github.com/seL4/camkes-tool/tree/camkes-3.0.0/camkes/visualCAmkES%7Csee>
 its README\]\].
 
-=== Typed Settings ===
+### Typed Settings
+
 
 Previously, the values of settings (in "configuration" blocks) were
 strings under the hood. Now they are stored as a value of the
 appropriate (python) type, determined during parsing.
 \[\[CAmkESDifferences\#Rich\_Types\_for\_Settings|Read more.\]\]
 
-=== Parametrised Buf Type ===
+### Parametrised Buf Type
+
 
 The "Buf" type for dataports can now be optionally parametrised with the
 dataport's size in bytes.
 \[\[CAmkESDifferences\#Parametrised\_Buf\_Type|Read more.\]\]
 
-=== The seL4Asynch connector has been renamed to seL4Notification ===
+### The seL4Asynch connector has been renamed to seL4Notification
+
 
 This was to maintain consistency with the rest of our APIs.
 
-=== Non Volatile Dataports ===
+### Non Volatile Dataports
+
 
 Previously, the standard dataport connector, seL4SharedData, use
 volatile pointers for accessing shared memory. This is no longer the
@@ -101,27 +114,31 @@ ensure the desired memory access ordering.
 \[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-dataports%7CRead>
 more in the manual.\]\]
 
-=== Custom Attribute Types ===
+### Custom Attribute Types
+
 
 You can now define custom types for attributes in CAmkES ADL. Custom
 types resemble structs and arrays in C.
 \[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-structs-and-arrays-for-collections%7CRead>
 more in the manual.\]\]
 
-=== Hierarchical Component Syntax Change ===
+### Hierarchical Component Syntax Change
+
 
 The syntax for declaring that a component exports an interface from one
 of it sub-components has changed.
 \[\[CAmkESDifferences\#Hierarchical\_Components|See an example.\]\]
 
-=== Binary Semaphores ===
+### Binary Semaphores
+
 
 Binary Semaphores have been added as a new synchronization primitive.
 This is in addition to the existing primitives: semaphores and mutexes.
 \[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#synchronization-primitives%7CRead>
 more in the manual.\]\]
 
-=== Cache Accelerator ===
+### Cache Accelerator
+
 
 CAmkES now comes with a small tool for caching compilation results based
 on source files. This should greatly reduce compilation times by not
@@ -130,12 +147,14 @@ with the CONFIG\_CAMKES\_ACCELERATOR config variable.
 \[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator%7CRead>
 more in the manual.\]\]
 
-=== Python 3 Support ===
+### Python 3 Support
+
 
 Previously, CAmkES only worked with python2. It's now compatible with
 python2 and python3.
 
-=== Refactored Parser ===
+### Refactored Parser
+
 
 The internals of the CAmkES parser have been rewritten to be easier to
 read and maintain. The parser is structured as a pipeline of

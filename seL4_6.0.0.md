@@ -1,7 +1,9 @@
-= seL4 Version 6.0.0 Release = Announcing the release of {{{seL4
+# seL4 Version 6.0.0 Release
+ Announcing the release of {{{seL4
 6.0.0}}} with the following changes:
 
-== Highlights == === ARM 32-bit SMP === \* Works (and tested) only on
+## Highlights
+ === ARM 32-bit SMP === \* Works (and tested) only on
 Sabre/ARM with up to 4 cores. \* Using the big kernel lock (same as x86
 implementation). \* Boot core is assumed to have an ID of 0. \* Kernel
 bootstraps and initialises data structures only on the boot core. \*
@@ -18,7 +20,8 @@ IDes.
 >     operations are required.
 > -   Remote FPU operations (when migrating threads that use HW FPU).
 
-=== ARM FPU === ARMv7 32-bit support is added to do lazy FP save/restore
+### ARM FPU
+ ARMv7 32-bit support is added to do lazy FP save/restore
 mechanism, required for user threads when they use the FPU. The
 following caveats exist:
 
@@ -37,7 +40,8 @@ following caveats exist:
 >     deprecated vectored VFP operations) are forwarded to the user as
 >     a fault.
 
-== Changes ==
+## Changes
+
 
 :   -   aarch32 - Implement lazy FP save/restore
     -   ARM SMP support
@@ -45,7 +49,8 @@ following caveats exist:
     -   x86: Split large structs into portions (See upgrade notes below)
     -   License fixups
 
-= Upgrade notes =
+# Upgrade notes
+
 
 :   -   This release is not source compatible with previous releases.
     -   seL4\_DebugDumpScheduler has had its only argument removed as it
@@ -54,9 +59,11 @@ following caveats exist:
         only affects seL4\_VBEModeInfoBlock\_t which is used if VESA
         BIOS Extensions (VBE) information is being used.
 
-= Full changelog = Use {{{git log 5.2.0..6.0.0}}} in
+# Full changelog
+ Use {{{git log 5.2.0..6.0.0}}} in
 <https://github.com/seL4/seL4>
 
-= More details = See the
+# More details
+ See the
 \[\[<http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf%7C6.0.0>
 manual\]\] included in the release or ask on the mailing list!

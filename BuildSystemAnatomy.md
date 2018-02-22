@@ -1,6 +1,8 @@
-= Contents = &lt;&lt;TableOfContents()&gt;&gt;
+# Contents
+ &lt;&lt;TableOfContents()&gt;&gt;
 
-== Anatomy of the Build System == The following files are the components
+## Anatomy of the Build System
+ The following files are the components
 of a project repository that are part of the build system (as opposed to
 code and tools related to the project):
 
@@ -56,7 +58,8 @@ code and tools related to the project):
 >     -   '''kbuild/\*''' - Kbuild from the Linux source tree. For
 >         documentation, refer to the Kbuild mailing list.
 >
-=== Build configuration === Prior to building a project you need to
+### Build configuration
+ Prior to building a project you need to
 specify a configuration (settings, components, etc.) that you want to
 build. Kconfig is a tool for simplifying and automating this process. In
 a seL4 project you can enter make menuconfig in the top level directory
@@ -240,7 +243,8 @@ requirements may need to use Makefile.flags to override or extend the
 shared settings. Most projects will have an empty Makefile.flags because
 there is almost always a more appropriate place to put an override.
 
-= Build Execution = '''Note:''' ''If you are accustomed to Kbuild from
+# Build Execution
+ '''Note:''' ''If you are accustomed to Kbuild from
 the Linux kernel, note that we do not use Kbuild in the same way it is
 used in Linux. In particular, components are built with their own
 Makefiles, not with the Kbuild generic targets that build object files
@@ -253,7 +257,8 @@ build. The tools/Kbuild directory itself is a black hole of despair and
 I would encourage you not to look in there unless you have a high
 tolerance for pain. All other relevant files are covered above.
 
-== Frequently Asked Questions == '''Why do I need to specify the same
+## Frequently Asked Questions
+ '''Why do I need to specify the same
 list of dependencies in apps/myapp/Makefile, apps/Kbuild and
 apps/myapp/Kconfig?'''
 

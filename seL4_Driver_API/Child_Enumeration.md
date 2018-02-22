@@ -1,19 +1,25 @@
-= Child enumeration model for the seL4 Driver API: =
+# Child enumeration model for the seL4 Driver API:
 
-== Contents == &lt;&lt;TableOfContents()&gt;&gt;
 
-== Constants == {{{ \#define SEL4DRV\_DEVATTR\_NAME\_MAXLEN (32) }}}
+## Contents
+ &lt;&lt;TableOfContents()&gt;&gt;
 
-== Functions == {{{ seL4drv\_mgmt\_enumerate\_get\_num\_children():
+## Constants
+ {{{ \#define SEL4DRV\_DEVATTR\_NAME\_MAXLEN (32) }}}
+
+## Functions
+ {{{ seL4drv\_mgmt\_enumerate\_get\_num\_children():
 seL4drv\_mgmt\_enumerate\_children();
 seL4drv\_mgmt\_enumerate\_hotplug\_subscribe(); uint16\_t
 seL4drv\_mgmt\_query\_device\_match(); }}}
 
-== Structures == {{{ typedef struct seL4drv\_child\_attribute\_ { char
+## Structures
+ {{{ typedef struct seL4drv\_child\_attribute\_ { char
 attr\_name\[SEL4DRV\_DEVATTR\_NAME\_MAXLEN\]; uint32\_t attr\_value; }
 seL4drv\_child\_attribute\_t; }}}
 
-== Child IDs == Each driver whose device is capable of enumerating child
+## Child IDs
+ Each driver whose device is capable of enumerating child
 devices must generate a unique child ID for each such child. The child
 ID is not required to be globally unique, but it must be unique with
 respect to all of of that child's sibling devices.
@@ -35,7 +41,8 @@ this child ID shall be passed back to the driver exactly as originally
 given by the driver, for any API call into the driver that requires a
 child ID.
 
-== Addressing Names == Each driver whose device is capable of
+## Addressing Names
+ Each driver whose device is capable of
 enumerating child devices must also generate a unique addressing name
 for each of the children. This name does not need to be globally unique,
 but it is expected to be unique with respect to all of that child
@@ -79,7 +86,8 @@ The addressable naming scheme is attempting to determine the
 bus-relative location, and not the particular peripheral that is
 attached to that location/port.
 
-== Procedural flow == The intention of the enumeration API is to enable
+## Procedural flow
+ The intention of the enumeration API is to enable
 the environment to both build and maintain its "device tree", which it
 uses to track the status and availability of hardware. The enumeration
 API enables initial discovery of hardware devices, as well as dynamic
@@ -108,7 +116,8 @@ when requesting child device information.
 The driver will then fill out this information for each child device,
 and return the information to the environment.
 
-== Hotplug device enumeration == The API supports hotplug device
+## Hotplug device enumeration
+ The API supports hotplug device
 enumeration through the means of a "subscription" function. The driver
 does not initiate a notification to the environment. Rather, the
 environment posts an indication of interest (subscription notification),
@@ -133,9 +142,11 @@ calling seL4drv\_mgmt\_enumerate\_hotplug\_subscribe\_ind() again, or to
 choose to indicate that it is no longer interested in subscribing to
 such notifications by not calling it again.
 
-== API ==
+## API
 
-=== seL4drv\_mgmt\_enumerate\_get\_num\_children(): Sync === This
+
+### seL4drv\_mgmt\_enumerate\_get\_num\_children(): Sync
+ This
 function allows the environment to know how much memory it should
 allocate for its subsequent calls to
 seL4drv\_mgmt\_enumerate\_children().
@@ -159,19 +170,22 @@ N\_attrs\_per\_child \* sizeof(seL4drv\_child\_attribute\_t) \* N\_children.
 This amount of memory shall then be passed to
 seL4drv\_mgmt\_enumerate\_children().
 
-=== seL4drv\_mgmt\_enumerate\_children(): Sync === This function shall
+### seL4drv\_mgmt\_enumerate\_children(): Sync
+ This function shall
 cause the driver to return a list of child devices and their attributes,
 as well as Child IDs for each of the children, according to the its
 discretion, deferring to the constraints outlined above.
 
-=== seL4drv\_mgmt\_enumerate\_hotplug\_subscribe(): Async === This
+### seL4drv\_mgmt\_enumerate\_hotplug\_subscribe(): Async
+ This
 function shall transfer to the driver a block of memory which shall be
 kept by the driver until a hotplug event occurs. When such an event
 occurs, the driver shall complete the asynchronous roundtrip by calling
 back to the environment, returning the memory to the environment in so
 doing.
 
-=== seL4drv\_mgmt\_identify\_device(): Sync === This function shall take
+### seL4drv\_mgmt\_identify\_device(): Sync
+ This function shall take
 a list of attributes that describe a device, and return an unsigned
 integer which states whether or not the driver can handle the device
 that is described by those attributes.

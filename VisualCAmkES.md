@@ -1,4 +1,5 @@
-= VisualCAmkES = VisualCAmkES, also known as Visualisation of CAmkES, is
+# VisualCAmkES
+ VisualCAmkES, also known as Visualisation of CAmkES, is
 a tool that allows one to visually understand a CAmkES system, how it
 works and how the different components are connected together. This
 makes understanding easier and more intuitive than traversing CAmkES
@@ -24,7 +25,8 @@ VisualCAmkES is currently on the \[\[CAmkESNext\]\] branch only
 
 '''Table of Contents''' &lt;&lt;TableOfContents()&gt;&gt;
 
-== How to Install == Follow the instructions in \[\[CAmkESNext\]\] to
+## How to Install
+ Follow the instructions in \[\[CAmkESNext\]\] to
 obtain a copy of the CAmkES next repo. This tool should be found in
 \[path/to/camkes-tool\]/camkes/visualCAmkES.
 
@@ -33,7 +35,8 @@ Qt.&lt;&lt;BR&gt;&gt; QT is a framework, which includes GUI, Network,
 Concurrency and other things. &lt;&lt;BR&gt;&gt; This install procedure
 assumes you have the rest of CAmkES working.
 
-=== Installing Qt === For Debian/Ubuntu users, there are two ways to
+### Installing Qt
+ For Debian/Ubuntu users, there are two ways to
 install this. The easy way is to apt-get the items. The "long" way is to
 build from source. &lt;&lt;BR&gt;&gt; For Mac (and presumably Windows,
 although this is untested for windows): the only way (other than
@@ -42,10 +45,12 @@ macports/brew) is to build from source.
 Qt is quite big, and the major of it is unnecessary. So I recommend to
 build from source for personal computers.
 
-==== apt-get method ==== {{{\#!highlight bash sudo apt-get install
+#### apt-get method
+ {{{\#!highlight bash sudo apt-get install
 python-pyqt5 sudo apt-get install python-pyqt5.qtsvg }}}
 
-==== from source method ==== {{{\#!highlight bash cd
+#### from source method
+ {{{\#!highlight bash cd
 /some/temp/directory/like/Downloads git clone
 <git://code.qt.io/qt/qt5.git> cd qt5 git checkout 5.5
 
@@ -66,15 +71,18 @@ graphviz (first step above), visit this website:
 (or stable as long as greater than version 16), and install the dmg. Pip
 will work on the mac.
 
-=== Installing other dependencies === {{{ sudo pip install ansi2html }}}
-== How to use == This program is quite easy to use, yet quite powerful.
+### Installing other dependencies
+ {{{ sudo pip install ansi2html }}}
+## How to use
+ This program is quite easy to use, yet quite powerful.
 To start the application, it would be:
 
 {{{ python \[path/to/camkes-tool/camkes\]/visualCAmkES }}} === Opening a
 File === To open a file, click File-&gt;Open. Then select a '''top-level
 camkes file'''. Your graph will load.
 
-=== Manipulating the graph === In the right, you have a few buttons:
+### Manipulating the graph
+ In the right, you have a few buttons:
 &lt;&lt;BR&gt;&gt;
 {{<attachment:VisualCAmkES_userButtons.png%7CVisualCAmkES> Corner UI
 buttons|align="left"}} The button's name should be self-explanatory.
@@ -86,7 +94,8 @@ You can move the instances around by click & dragging each box. The
 connections will continually redraw as you move the box. There is a
 minimum distance to see the symbol for each connection.
 
-=== Exporting and Saving === As you change the graph, '''the program
+### Exporting and Saving
+ As you change the graph, '''the program
 automatically saves a .layout file''', which contains the current
 position of each box. This means that you can close the python
 application, and when you reopen it, your latest layout will appear.
@@ -103,7 +112,8 @@ You can export an image, into either PNG or SVG.
     1.  Click OK.
     2.  Choose a place to save your file, and name your picture.
 
-=== Import Paths ===
+### Import Paths
+
 
 n some cases, users may have external import paths which is usually a
 parameter to the camkes parser. In order to visualise these camkes
@@ -118,7 +128,8 @@ projects, the user can add import paths by doing the following:
 >
 A keyboard shortcut is also implemented, Cmd + I or Cmd + I .
 
-=== Key-mappings ===
+### Key-mappings
+
 
 The key-mappings are as follows:
 ||'''Task'''||'''Linux/Windows'''||'''Mac'''|| ||Open ||Ctrl + O||Cmd +
@@ -126,7 +137,8 @@ O|| ||Autolayout||Ctrl + L||Cmd + L|| ||Export (Save) Image ||Ctrl +
 E||Cmd + E|| ||Zoom In||Ctrl + =||Cmd + =|| ||Zoom Out||Ctrl + -||Cmd +
 -|| ||Add Import Paths||Ctrl + I||Cmd + I||
 
-== How it works == === High level overview ===
+## How it works
+ === High level overview ===
 {{<attachment:VisualCAmkES_UML.png%7CUML> Diagram of
 VisualCAmkES|width=900px}} &lt;&lt;BR&gt;&gt; The above is quick UML
 class diagram. A few other classes isn't shown like SaveOptionDialog -
@@ -164,7 +176,8 @@ different classes, say from GraphWidget to ConnectionWidget, the getter
 from GraphWidget is invoked. Hence, events can be triggered in
 GraphWidget when ConnectionWidget access the properties.
 
-=== Layout === In order to save the layout information - the program
+### Layout
+ In order to save the layout information - the program
 saves a .visualCAmkES.layout file. It starts with a . because it is
 purposefully hidden (which won't work on windows ...). This file is a
 json file containing dictionaries. The key is the instance name, the
@@ -172,7 +185,8 @@ value is another dictionary. The latter dictionary contains the position
 and whether it was hidden. Feel free to view the .layout file, but
 changing it can risk losing the layout.
 
-=== Additional implementation details ===
+### Additional implementation details
+
 
 :   -   When connection widgets are deleted, ConnectionWidget.delete()
         must be called on the object. This is because connection widget

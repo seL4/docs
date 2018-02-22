@@ -1,7 +1,9 @@
-= seL4 Version 8.0.0 Release = Announcing the release of {{{seL4
+# seL4 Version 8.0.0 Release
+ Announcing the release of {{{seL4
 8.0.0}}} with the following changes:
 
-= Changes =
+# Changes
+
 
 :   -   Support for additional zynq platform Zynq UltraScale+ MPSoC
         (Xilinx ZCU102, ARMv8a, Cortex A53)
@@ -21,7 +23,8 @@ destination. \* Benchmarking support for armv8/aarch64 is now available.
 information from multiboot 2 \* Debugging option to export x86
 Performance-Monitoring Counters to user level
 
-= Upgrade notes =
+# Upgrade notes
+
 
 :   -   seL4\_CapData\_t should be replaced with just seL4\_Word.
         Construction of badges should just be x instead
@@ -31,9 +34,11 @@ Performance-Monitoring Counters to user level
     -   Code that relied on non-blocking IPC to switch between threads
         of the same priority may break.
 
-= Full changelog = Refer to the git log in
+# Full changelog
+ Refer to the git log in
 <https://github.com/seL4/seL4> using {{{git log 7.0.0..8.0.0}}}
 
-= More details = See the
+# More details
+ See the
 \[\[<http://sel4.systems/Info/Docs/seL4-manual-8.0.0.pdf%7C8.0.0>
 manual\]\] included in the release or ask on the mailing list!

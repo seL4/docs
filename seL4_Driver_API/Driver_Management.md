@@ -1,8 +1,11 @@
-= Power management commands for the seL4 Driver API: =
+# Power management commands for the seL4 Driver API:
 
-== Contents == &lt;&lt;TableOfContents()&gt;&gt;
 
-== Constants == {{{ /\* Driver power states supported by the API. \*
+## Contents
+ &lt;&lt;TableOfContents()&gt;&gt;
+
+## Constants
+ {{{ /\* Driver power states supported by the API. \*
 These are used by both seL4drv\_mgmt\_power() \* and
 seL4drv\_mgmt\_power\_features(). \*/ \#define
 SEL4DRV\_MGMT\_POWER\_BOOT (1&lt;&lt;0) \#define
@@ -12,12 +15,14 @@ SEL4DRV\_MGMT\_POWER\_DEEP\_SLEEP (1&lt;&lt;3) \#define
 SEL4DRV\_MGMT\_POWER\_SHUTDOWN (1&lt;&lt;4) \#define
 SEL4DRV\_MGMT\_POWER\_KILL (1&lt;&lt;5) }}}
 
-== Functions == {{{ void
+## Functions
+ {{{ void
 seL4drv\_mgmt\_critical\_event\_subscription\_ind(); void
 seL4drv\_mgmt\_power(); void seL4drv\_mgmt\_power\_features(uint32\_t
 \*features\_bitmap); void seL4drv\_mgmt\_enumerate\_children(); }}}
 
-== Power state specifications ==
+## Power state specifications
+
 
 :   -   SEL4DRV\_MGMT\_POWER\_BOOT: Support for this power management
         command is required of all drivers. This is actually the global
@@ -68,9 +73,11 @@ seL4drv\_mgmt\_power(); void seL4drv\_mgmt\_power\_features(uint32\_t
         then place itself into a state that is compatible with the
         SEL4DRV\_MGMT\_POWER\_SHUTDOWN command.
 
-== API ==
+## API
 
-=== seL4drv\_mgmt\_critical\_event\_subscription\_ind(): Async === This
+
+### seL4drv\_mgmt\_critical\_event\_subscription\_ind(): Async
+ This
 function enables the environment to call into the driver, and give it an
 asynchronous context block which it should hold on to. If at any point
 the driver encounters a situation which requires it to ask the
@@ -83,7 +90,8 @@ which it cannot recover from. This is not a necessary function to
 implement, and it is likely to be a blank function for most
 implementations.
 
-=== seL4drv\_mgmt\_power(): Async === This operation is called by the
+### seL4drv\_mgmt\_power(): Async
+ This operation is called by the
 environment to place the device instance into one of the power states
 outlined above. It is important to note that SEL4DRV\_MGMT\_POWER\_BOOT
 is actually just a global entry point into the driver.
@@ -104,7 +112,8 @@ environment wishes to wake a particular child device, it must manually
 ensure that all of that device's parents are in a suitable power state
 to enable operation.
 
-=== seL4drv\_mgmt\_power\_features(): Sync === This function returns a
+### seL4drv\_mgmt\_power\_features(): Sync
+ This function returns a
 bitmap of the supported driver power states (See \[\[\#Constants\]\]).
 All drivers are required to support at minimum, the following states: \*
 SEL4DRV\_MGMT\_POWER\_BOOT \* SEL4DRV\_MGMT\_POWER\_SHUTDOWN \*
@@ -121,4 +130,5 @@ SLEEP or DEEP\_SLEEP command is supported and there is no support for
 the SEL4DRV\_MGMT\_POWER\_WAKEUP command, the environment should assume
 that the SLEEP or DEEP\_SLEEP operations are not adequately supported.
 
-== Child enumeration == See the main article:
+## Child enumeration
+ See the main article:

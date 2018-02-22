@@ -1,6 +1,8 @@
-= seL4 Release Process =
+# seL4 Release Process
 
-== Version Policy ==
+
+## Version Policy
+
 
 seL4 follows \[\[<http://semver.org/%7Csemantic> versioning\]\]. In
 short:
@@ -14,14 +16,16 @@ short:
 
 seL4 versions are tagged in git.
 
-== Release Frequency ==
+## Release Frequency
+
 
 We aim to follow a monthly release cycle, with fresh code pushed to
 github daily. This means that master is quite volatile, so unless you
 want to live on the bleeding edge we suggest you should work on a
 specific tag and choose when to upgrade.
 
-== Library Compatibility ==
+## Library Compatibility
+
 
 seL4 libraries have branches that track all MAJOR.MINOR versions, with
 branch names in the format MAJOR.MINOR-compatible. A
@@ -32,7 +36,8 @@ libraries are compatible with each other.
 To avoid too much dependency management we do not currently version our
 libraries themselves.
 
-== Project Compatibility ==
+## Project Compatibility
+
 
 Each MAJOR.MINOR release we add updated project manifest to each of our
 supported projects.
@@ -47,14 +52,16 @@ Supported projects are:
 > -   \[\[<https://github.com/seL4/sel4test-manifest%7Csel4test>\]\]
 > -   \[\[<https://github.com/seL4/verification-manifest%7Cverification>\]\]
 
-== Upgrading ==
+## Upgrading
+
 
 We recommend you develop on a specific version of the kernel, rather
 than the bleeding edge which is the tip of master. Each MAJOR.MINOR
 release has release notes which describe changes and specific upgrade
 notes, posted \[\[ReleaseNotes|here\]\].
 
-== Legacy support ==
+## Legacy support
+
 
 We only currently provide bug fixes and support for the latest version
 of the kernel and latest version of libraries.

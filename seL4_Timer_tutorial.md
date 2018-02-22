@@ -1,7 +1,8 @@
 \#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
 \#language en
 
-= seL4 Timer tutorial =
+# seL4 Timer tutorial
+
 
 This tutorial demonstrates how to set up and use a basic timer driver.
 
@@ -12,14 +13,16 @@ page, if they were covered by a previous tutorial in the series.
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Learning outcomes ==
+## Learning outcomes
+
 
 > -   Allocate a notification object.
 > -   Set up a timer provided by seL4 libs.
 > -   Use seL4\_libs functions to manipulate timer and
 >     handle interrupts.
 
-== Walkthrough ==
+## Walkthrough
+
 
 First, build and run the tutorial:
 
@@ -44,13 +47,15 @@ Terminated }}}
 Look for TASK in the apps/hello-timer and apps/hello-timer directory for
 each task.
 
-=== TASK 1 ===
+### TASK 1
+
 
 The first task is to allocate a notification object to receive
 interrupts on. The output will not change as a result of completing this
 task.
 
-=== TASK 2 ===
+### TASK 2
+
 
 Use our library function sel4platsupport\_get\_default\_timer to
 initialise a timer driver. Assign it to the timer global variable.
@@ -64,7 +69,8 @@ does not support main: hello world main: got a message from 0x61 to
 sleep 2 seconds timer client wakes up: got the current timer tick:
 17299121 }}}
 
-=== TASK 3 ===
+### TASK 3
+
 
 While at the end of the previous task the tutorial appears to be
 working, the main thread replies immediately to the client and doesn't

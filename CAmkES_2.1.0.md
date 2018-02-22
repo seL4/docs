@@ -1,6 +1,8 @@
-= CAmkES 2.1.0 Release Notes =
+# CAmkES 2.1.0 Release Notes
 
-== New Features ==
+
+## New Features
+
 
 > -   runner takes an --architecture command line argument which selects
 >     the target architecture. Valid arguments are: aarch32, arm\_hyp,
@@ -12,18 +14,22 @@
 >     the cache are also provided.
 > -   support for seL4 3.0.0
 
-== Removed Features ==
+## Removed Features
+
 
 > -   --hyp command line argument is replaced with
 >     --architecture arm\_hyp
 
-== API Removals ==
+## API Removals
 
-=== Unmarshalling Helpers === These were intended for use in templates,
+
+### Unmarshalling Helpers
+ These were intended for use in templates,
 but are no longer used in any internal templates: \* camkes\_marshal \*
 camkes\_marshal\_string \* camkes\_unmarshal \*
 camkes\_unmarshal\_string
 
-=== DMA Utilities === These had been deprecated for a long period and
+### DMA Utilities
+ These had been deprecated for a long period and
 are now being removed: \* camkes\_dma\_page\_alloc \*
 camkes\_dma\_page\_free

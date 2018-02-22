@@ -1,4 +1,5 @@
-= Documentation = == Kernel ==
+# Documentation
+ == Kernel ==
 
 > -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml>||Technical
 >     overview paper\]\]
@@ -19,7 +20,8 @@
 > -   \[\[seL4ManualAPIGeneration|Explanation of how the API docs in the
 >     manual are generated\]\]
 
-=== Building the manual for a specific version ===
+### Building the manual for a specific version
+
 
 To get the latest version of the manual, checkout the seL4 source code
 then:
@@ -29,7 +31,8 @@ then:
 You need LaTeX and doxygen installed, and if all succeeds a fresh manual
 will be produced in manual.pdf.
 
-== Proofs ==
+## Proofs
+
 
 > -   \[\[<http://sel4.systems/Info/Docs/seL4-spec.pdf%7CFormal>
 >     specification\]\]

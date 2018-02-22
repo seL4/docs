@@ -5,7 +5,8 @@ rather on the idea and practice of tracing errors and debugging in a
 \[\[<http://www.embedded.com/electronics-blogs/programming-pointers/4027541/Freestanding-vs-hosted-implementations%7Cfreestanding>\]\]
 environment.
 
-== Learning outcomes ==
+## Learning outcomes
+
 
 :   -   Reader should become accustomed to the idea of having to debug
         not only from the perspective of their own code, but also with
@@ -20,7 +21,8 @@ environment.
     -   Offhandedly hints to the reader that they should become
         acquainted with the Kconfig/Kbuild build utilities.
 
-== Walkthrough == Currently seL4 supports two major architectures: x86
+## Walkthrough
+ Currently seL4 supports two major architectures: x86
 and ARM. There are platforms/boards for each architecture. For example,
 pc99 is an x86 platform, while zynq7000 is an ARM platform. seL4
 Tutorials can run on both architectures. In seL4 Tutorials, we only

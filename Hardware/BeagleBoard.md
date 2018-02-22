@@ -1,4 +1,5 @@
-= seL4 on the BeagleBoard =
+# seL4 on the BeagleBoard
+
 
 This page documents booting seL4 on the
 \[\[<http://beagleboard.org/beagleboard%7CBeagleboard>\]\], Omap
@@ -7,7 +8,8 @@ This page documents booting seL4 on the
 \[\[<http://sel4.systems/pipermail/devel/2014-August/000030.html%7CTim>
 Newsham's post\]\] on the mailing list for one user's experience.
 
-== Preparing your SD card == === Prologue === These instructions are for
+## Preparing your SD card
+ === Prologue === These instructions are for
 later versions of the Beagleboard. Before the Xm, U-Boot and MLO were
 held in flash.
 
@@ -18,7 +20,8 @@ MLO.
 MLO expects to find a file named u-boot.bin in the root directory of the
 SD card.
 
-== Setting up Minicom == Plug the board in. seL4 userspace currently
+## Setting up Minicom
+ Plug the board in. seL4 userspace currently
 does no power management — you will probably need a 5V power source, and
 not rely on powering the board over USB
 
@@ -69,7 +72,8 @@ read the the SD card) || ||mmcinfo ||display current SD card info ||
 script/image into some RAM address to be run || ||run ||run scripts ||
 ||bootelf ||boot into en ELF image ||
 
-== Running seL4test == Get the sel4test-manifest repo using the
+## Running seL4test
+ Get the sel4test-manifest repo using the
 instructions at
 \[\[<https://sel4.systems/Info/Hardware/home.pml%7CDownload>\]\]
 
@@ -86,7 +90,8 @@ into the !BeagleBoard. Pretty self-explanatory.
 
 Reset the !BeagleBoard by pressing the "S2" (reset) button.
 
-=== To run the image: === {{{ mmc init mmcinfo fatload mmc 0
+### To run the image:
+ {{{ mmc init mmcinfo fatload mmc 0
 \${loadaddr} sel4test-image-arm bootelf \${loadaddr} }}} where loadaddr
 is some address, in this example defined as an environment variable.
 After this you should start seeing output from seL4test.

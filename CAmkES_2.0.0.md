@@ -1,4 +1,5 @@
-= CAmkES 2.0.0 Release Notes =
+# CAmkES 2.0.0 Release Notes
+
 
 The new release updates CAmkES to be compatible with seL4 version 2.0.0.
 It also marks the transition to more frequent and regular releases, as

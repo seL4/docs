@@ -1,6 +1,7 @@
 &lt;&lt;TableOfContents()&gt;&gt;
 
-= CAmkES Next =
+# CAmkES Next
+
 
 CAmkES Next refers to the "next" branch of camkes-tools. It is the
 active development branch of camkes.
@@ -14,7 +15,8 @@ Summary of differences between CAmkES next and CAmkES master:
 
 VisualCAmkes, a GUI tool to view a CAmkES system: \[\[VisualCAmkES\]\]
 
-== Setting up your machine ==
+## Setting up your machine
+
 
 The following commands were tested on a fresh installation of Ubuntu
 16.04. This will install the tools and libraries required to build seL4
@@ -69,7 +71,8 @@ Replace the lines: {{{ ("C compiler flags", " -fno-stack-protector"),
 See \[\[<https://github.com/commercialhaskell/stack/issues/2712%7Cthis>
 stack issue on github\]\] for more information.
 
-== Download and build example CAmkES app ==
+## Download and build example CAmkES app
+
 
 Create and enter an empty working directory before running the commands
 below. {{{\#!highlight bash numbers=off \# Download CAmkES, seL4, user

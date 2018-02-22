@@ -1,11 +1,13 @@
-= The TK1-SOM Daughterboard = The TK1-SOM Daughterboard is an
+# The TK1-SOM Daughterboard
+ The TK1-SOM Daughterboard is an
 open-hardware daughterboard designed by the Trustworthy Systems group at
 Data61/CSIRO, that can be mounted to the TK1-SOM. It provides '''CAN
 buses''', '''serial''','''sensors''', '''power management''', '''PWM
 outputs''' and other features that allow the TK1-SOM to be used as a
 flight controller for a quadcopter.
 
-=== Warning ===
+### Warning
+
 
 :   -   Don't plug in or unplug things from the daughterboard while it
         is turned on, especially the radio. The current transient will
@@ -13,19 +15,23 @@ flight controller for a quadcopter.
         LEDs above the white molex connector is lit, it is because U13
         is dead.
 
-=== Rough overview (top) ===
+### Rough overview (top)
+
 {{<attachment:daughterboard_top_strike.jpg%7CTop> of
 board|width="100%"}}
 
-=== Rough overview (bottom) ===
+### Rough overview (bottom)
+
 {{<attachment:daughterboard_bottom.jpg%7CBottom> of board|width="100%"}}
 
 &lt;&lt;Anchor(with\_tk1)&gt;&gt;
 
-=== With TK1 === {{<attachment:assembly_cropped.jpg%7CDaughterboard>
+### With TK1
+ {{<attachment:assembly_cropped.jpg%7CDaughterboard>
 with TK1|width="100%"}}
 
-== Technical documentation ==
+## Technical documentation
+
 
 :   -   \[\[<attachment:daughterboard_r3a_schematic.pdf%7CSchematic>
         PDF\]\] (See '\[\[\#errata|Technical errata for R3A\]\]'
@@ -36,7 +42,8 @@ with TK1|width="100%"}}
         \[\[<https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard%7CAltium>
         files\]\]
 
-== Connecting the Daughterboard == Going from a TK1-SOM, a pixhawk/IRIS
+## Connecting the Daughterboard
+ Going from a TK1-SOM, a pixhawk/IRIS
 and a daughterboard to a functioning system requires:
 
 > -   \[\[\#mount\_tk1|Mounting the TK1 to the daughterboard\]\]
@@ -51,7 +58,8 @@ and a daughterboard to a functioning system requires:
 
 &lt;&lt;Anchor(mount\_tk1)&gt;&gt;
 
-=== Mounting the TK1 to the daughterboard === Before mounting the
+### Mounting the TK1 to the daughterboard
+ Before mounting the
 TK1-SOM to the daughterboard, you will have to disassemble the TK1-SOM.
 This will involve:
 
@@ -89,7 +97,8 @@ TK1'\]\] near the top of this page
 
 &lt;&lt;Anchor(jumper\_uart)&gt;&gt;
 
-=== Jumpering the UART level translators === For the daughterboard to do
+### Jumpering the UART level translators
+ For the daughterboard to do
 any level translation, it needs to be connected to the TK1's UARTs. We
 achieve this by jumpering the TK1's UARTs to the 'UART TK1' connector on
 the daughterboard. (See 'rough overview', top view)
@@ -120,7 +129,8 @@ use an 'ordinary' 1V8 converter for debugging (See
 
 &lt;&lt;Anchor(jumper\_reset)&gt;&gt;
 
-=== Jumpering the RESET button === It's difficult to access the TK1's
+### Jumpering the RESET button
+ It's difficult to access the TK1's
 reset button when it is mounted, so there is a secondary reset button on
 the daughterboard that can optionally be used. First, you must solder a
 pin to the hole next to the reset switch on the TK1 (as RESET isn't
@@ -147,7 +157,8 @@ debounced etc on the TK1.
 
 &lt;&lt;Anchor(attach\_pix\_pwr)&gt;&gt;
 
-=== Attaching the pixhawk power cable === --(The pixhawk power cable is
+### Attaching the pixhawk power cable
+ --(The pixhawk power cable is
 how the daughterboard delivers power to the pixhawk. Note that this is
 very different to the previous daughterboards - we do not use the IRIS'
 power output (that would normally go into the pixhawk) for
@@ -160,7 +171,8 @@ daughterboard's rails. Do NOT connect anything to the daughterboard's
 
 &lt;&lt;Anchor(attach\_can)&gt;&gt;
 
-=== Attaching the CAN bus cable === The CAN1 connector we are using
+### Attaching the CAN bus cable
+ The CAN1 connector we are using
 (labelled 'PRIMARY CAN CONNECTOR' on 'Rough overview - Top' at the top
 of this page) is directly connected to the CAN port on the pixhawk.
 Connect one end of the 4-pin DF13 connector to the pixhawk, and the
@@ -181,7 +193,8 @@ connectors are CAN2.
 
 &lt;&lt;Anchor(attach\_telem)&gt;&gt;
 
-=== Attaching the telemetry cable === The telemetry connector to be
+### Attaching the telemetry cable
+ The telemetry connector to be
 connected to the 3DR RADIO has a 'RADIO' label, and it is next to the
 GPS connector - see 'Rough Overview - Bottom', above.
 
@@ -193,7 +206,8 @@ daughterboard|width="60%"}}
 
 &lt;&lt;Anchor(connect\_power)&gt;&gt;
 
-=== Connecting the power harness === The power harness is how the
+### Connecting the power harness
+ The power harness is how the
 daughterboard supplies power to the TK1-SOM, and also how it intercepts
 power from the IRIS' batteries (if it is running on batteries). This is
 the power harness:
@@ -209,7 +223,8 @@ want:
 
 &lt;&lt;Anchor(connect\_battery\_psu)&gt;&gt;
 
-=== Connecting the battery OR external PSU === There are 2 ways of
+### Connecting the battery OR external PSU
+ There are 2 ways of
 powering up the daughterboard and pixhawk:
 
 > -   1: Using the TK1-SOM's ordinary power supply (for testing)
@@ -246,14 +261,16 @@ doing this as it will turn everything on)
 
 Similarly, everything should turn on as pictured.
 
-=== Everything connected === Slightly more close-up photo of everything
+### Everything connected
+ Slightly more close-up photo of everything
 connected and turned on:
 {{<attachment:everything_connected.jpg%7CEverything>
 connected|width="70%"}}
 
 &lt;&lt;Anchor(debug\_ground)&gt;&gt;
 
-=== Debugging output & finding grounds === To use an 'ordinary' 1V8
+### Debugging output & finding grounds
+ To use an 'ordinary' 1V8
 converter and debug things, you will likely want to:
 
 > -   Connect the 1V8 converter to the primary UART on the TK1 (on
@@ -276,7 +293,8 @@ all along the bottom row of the servo connector:
 
 &lt;&lt;Anchor(errata)&gt;&gt;
 
-=== Technical errata for R3A, to be fixed next revision ===
+### Technical errata for R3A, to be fixed next revision
+
 
 :   -   The 'power out to pixhawk' connection on the daughterboard
         should not be used as it may cause a rail collision.

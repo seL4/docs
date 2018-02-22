@@ -1,4 +1,5 @@
-= Pre-Requisites =
+# Pre-Requisites
+
 
 :   -   One !HiKey Board. See
         \[\[<http://www.96boards.org/products/ce/hikey/%7CHikey>
@@ -7,17 +8,20 @@
         \[\[<https://wiki.sel4.systems/Getting%20started%7CGetting>
         started\]\]
 
-= Getting Started = The Hikey board is based around the
+# Getting Started
+ The Hikey board is based around the
 \[\[<https://github.com/96boards/documentation/blob/master/hikey/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf%7CHiSilicon>
 Kirin 620\]\] eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
 Toe start using 32-bit seL4 follow the below instructions. They will
 walk you step by step beginning from the source files and ultimately
 running an image.
 
-== 1. Creating a directory == {{{\#!highlight bash numbers=off mkdir
+## 1. Creating a directory
+ {{{\#!highlight bash numbers=off mkdir
 hikey-flash cd hikey-flash }}}
 
-== 2. Custom toolchains == The cross-toolchains GCC 4.9 for Aarch64 and
+## 2. Custom toolchains
+ The cross-toolchains GCC 4.9 for Aarch64 and
 gnueabihf are required to flash the Hikey. If versions of GCC 5, or
 higher, are installed the following steps must be taken as GCC5 is not
 backwards compatible. Otherwise skip to the next Section.
@@ -77,7 +81,8 @@ linaro-edk2/MdeModulePkg/Application/noboot patch -p7 &lt;
 \~/Downloads/efi-stub.patch \# Then return to the main directory
 hikey-flash }}}
 
-== 8. Building the UEFI for the Hikey == {{{\#!highlight bash
+## 8. Building the UEFI for the Hikey
+ {{{\#!highlight bash
 numbers=off export AARCH64\_TOOLCHAIN=GCC49 export
 EDK2\_DIR=\${PWD}/linaro-edk2 export UEFI\_TOOLS\_DIR=\${PWD}/uefi-tools
 
@@ -103,7 +108,8 @@ binary loader temp python gen\_loader.py -o l-loader.bin
 generate\_ptable.sh python gen\_loader.py -o ptable-linux.img
 --img\_prm\_ptable=prm\_ptable.img }}}
 
-== 9. Boot Image == Obtain the boot image from
+## 9. Boot Image
+ Obtain the boot image from
 <https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz>
 and follow the below commands.
 
@@ -119,7 +125,8 @@ boot-fat/EFI/BOOT/
 
 sudo umount boot-fat }}}
 
-== 10. Minicom == Install and configure minicom. Two terminals are
+## 10. Minicom
+ Install and configure minicom. Two terminals are
 required for the commands. If minicom is already installed and
 configured skip the next Section.
 
@@ -136,7 +143,8 @@ Note the ttyUSBX that is observed
 >     number
 > 4.  Press 'esc' twice and select Save setup as dfl
 
-== 11. Flash the firmware ==
+## 11. Flash the firmware
+
 
 :   1.  Turn off the power to the board if it is on.
     2.  Connect UART0 to a USB port if it is not connected already.
@@ -163,7 +171,8 @@ terminal
 
 \# Then power off the Hikey }}}
 
-== 12. Booting the Hikey ==
+## 12. Booting the Hikey
+
 
 :   1.  Remove the connection for pins 3&4 on the J15 header and connect
         pins 5&6 instead.
@@ -173,7 +182,8 @@ terminal
 {{{\#!highlight bash numbers=off \# In the third terminal fastboot boot
 images/sel4test-driver-image-arm-hikey.bin -c mode=32bit }}}
 
-== 13. Build your first seL4 system == An image of seL4 can be obtained
+## 13. Build your first seL4 system
+ An image of seL4 can be obtained
 by the following instructions. First, check out the seL4 project.
 
 {{{\#!highlight bash numbers=off mkdir hikey-test repo init -u
@@ -193,7 +203,8 @@ directory.
 {{{\#!highlight bash numbers=off ls
 images/sel4test-driver-image-arm-hikey.bin }}}
 
-== 14. Modifications to firmware or UEFI ==
+## 14. Modifications to firmware or UEFI
+
 
 > -   If the firmware is modified the whole process from and including
 >     Section 9 onward must be done.

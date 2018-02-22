@@ -1,13 +1,16 @@
-= Frequently Asked Questions on seL4 =
+# Frequently Asked Questions on seL4
+
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-= What is seL4? = seL4 is the most advanced member of the L4 microkernel
+# What is seL4?
+ seL4 is the most advanced member of the L4 microkernel
 family, notable for its comprehensive formal verification, which sets it
 apart from any other operating system. seL4 achieves this without
 compromising performance.
 
-== What is a microkernel? == A microkernel is the minimal core of an
+## What is a microkernel?
+ A microkernel is the minimal core of an
 operating system (OS). It presents a very small subset of what is
 generally considered an operating system today. The definition of what
 makes up a microkernel is given by Liedtke \[SOSP'95\]: A concept is
@@ -34,7 +37,8 @@ third-generation microkernels, such access rights are conferred by
 capabilities (unforgeable tokens representing privileges) and are fully
 delegatable.
 
-== What is the L4 microkernel family? == L4 is a family of very small,
+## What is the L4 microkernel family?
+ L4 is a family of very small,
 high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
 \[\[<http://en.wikipedia.org/wiki/L4_microkernel_family%7CL4>
@@ -46,7 +50,8 @@ microkernel family\]\] entry on Wikipedia and the website
 L4 microkernel family tree. Black arrows indicate code, green arrows ABI
 inheritance. Source: \[Elphinstone & Heiser, SOSP 2013\]
 
-== How does seL4's performance compare to other microkernels? == To the
+## How does seL4's performance compare to other microkernels?
+ To the
 best of our knowledge, seL4 is the world's fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
 of a cross-address-space message-passing (IPC) operation. For more
@@ -64,7 +69,8 @@ fluctuate up and down by 5–10 cycles, but there is no longer a
 performance difference between verified and unverified branches on
 ARMv7. ARMv8 is not yet fully optimised.
 
-= On what hardware does seL4 run? = == What processor architectures are
+# On what hardware does seL4 run?
+ == What processor architectures are
 supported? == Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
 A9, A15) and x86 cores. Supported ARM platforms for these are the
 Freescale i.MX31, OMAP3 !BeagleBoard, Exynos Arndale 5250, Odroid-X,
@@ -73,7 +79,8 @@ x86 machines are supported.
 
 Talk to us if you have funds to support a port to further architectures.
 
-== What devices does seL4 support? == seL4, like any real microkernel,
+## What devices does seL4 support?
+ seL4, like any real microkernel,
 runs all device drivers in user mode, device support is therefore not
 the kernel's problem. The exceptions are a timer driver, which seL4
 needs to enforce time-slice preemption, and the interrupt controller
@@ -84,7 +91,8 @@ Other than that, device support is the user's problem. seL4 provides the
 mechanisms for user-mode device drivers, especially the ability to map
 device memory to drivers and forward IRQs as (asynchronous) messages.
 
-== What about DMA? == The formal verification of seL4 on the ARM
+## What about DMA?
+ The formal verification of seL4 on the ARM
 platform assumes that the MMU has complete control over memory, which
 means the proof assumes that DMA is off. DMA devices can in theory
 overwrite any memory on the machine, including kernel data and code.
@@ -101,7 +109,8 @@ DMA and thereby enable DMA devices with untrusted user-level drivers. We
 are currently working on providing similar verified support for A15 ARM
 boards with SystemMMU.
 
-== Does seL4 support multicore? == On x86, seL4 can be configured to
+## Does seL4 support multicore?
+ On x86, seL4 can be configured to
 support multiple CPUs. Current multicore support is through a
 multikernel configuration where each booted CPU is given a portion of
 available memory. Cores can then communicate via limited shared memory
@@ -113,7 +122,8 @@ development, please refer to the
 \[\[<https://sel4.systems/Info/Roadmap/%7Croadmap>\]\] for anticipated
 release dates.
 
-== Can I run seL4 on an MMU-less microcontroller? == Using seL4 without
+## Can I run seL4 on an MMU-less microcontroller?
+ Using seL4 without
 a full memory-management unit (MMU) makes little sense, as its resource
 management is fundamentally based on virtual memory. For lower-end
 processors that only have a memory-protection unit (MPU) or no memory
@@ -122,7 +132,8 @@ protection at all, you should look at NICTA's
 real-time operating system\]\] (RTOS), which is designed for such
 processors and is also undergoing formal verification.
 
-== What are the intended applications of seL4? == seL4 is a
+## What are the intended applications of seL4?
+ seL4 is a
 general-purpose microkernel, so the answer is all of them. The main
 target are embedded systems with security or reliability requirements,
 but that is not exclusive. Using a microkernel like seL4 makes sense on
@@ -131,7 +142,8 @@ areas that need isolation between different parts of the software.
 Immediate application areas are in the financial, medical, automotive,
 avionics and defence sectors.
 
-= How good is seL4 at supporting virtual machines? = == Can I run Linux
+# How good is seL4 at supporting virtual machines?
+ == Can I run Linux
 on top of seL4? == Yes, seL4 can run Linux in a virtual machine. At
 present the master branch supports this on ARMv7 processors (presently
 A15/A7 cores). For x86 there is experimental virtualisation support
@@ -144,7 +156,8 @@ Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to
 a virtual machine monitor (VMM) which performs the necessary emulations.
 The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).
 
-== How does seL4+VMM compare with OKL4 or Codezero? == That’s a bit
+## How does seL4+VMM compare with OKL4 or Codezero?
+ That’s a bit
 difficult to answer, given that of the three, only seL4 is open-source.
 
 Codezero (when it was still open source) was a clone of the then OKL4
@@ -155,10 +168,12 @@ The OKL4 Microvisor has a different API, especially designed to support
 efficient para-virtualisation. It has fairly mature userland, especially
 a driver framework.
 
-== Does seL4 support multiple virtual machines at once? == Yes, multiple
+## Does seL4 support multiple virtual machines at once?
+ Yes, multiple
 VMs are supported, including heterogeneous ones.
 
-== Can I run a real-time OS in a virtual machine on seL4? == seL4 is the
+## Can I run a real-time OS in a virtual machine on seL4?
+ seL4 is the
 world’s only hypervisor with a sound worst-case execution-time (WCET)
 analysis, and as such the only one that can give you actual real-time
 guarantees, no matter what others may be claiming. (If someone else
@@ -185,7 +200,8 @@ necessarily the way to go, although that somewhat depends on your
 circumstances. In general you’ll better off running RT apps in a native
 seL4 environment.
 
-= What is formal verification? = Formal software verification is the
+# What is formal verification?
+ Formal software verification is the
 activity of using mathematical proof to show that a piece of software
 satisfies specific properties. Traditionally, formal verification has
 been widely used to show that the design or a specification of a piece
@@ -205,7 +221,8 @@ prover is interactive, but offers a comparatively high degree of
 automation. It also offers a very high degree of assurance that the
 resulting proof is correct.
 
-== What does seL4's formal verification mean? == Unique about seL4 is
+## What does seL4's formal verification mean?
+ Unique about seL4 is
 its unprecedented degree of assurance, achieved through formal
 verification. Specifically, the ARM version of seL4 is the first (and
 still only) general-purpose OS kernel with a full code-level functional
@@ -235,7 +252,8 @@ latencies of any other kernel operations). It is therefore the only
 kernel with memory protection that can give you hard real-time
 guarantees.
 
-== Does seL4 have zero bugs? == The functional correctness proof states
+## Does seL4 have zero bugs?
+ The functional correctness proof states
 that, if the proof assumptions are met, the seL4 kernel implementation
 has no deviations from its specification. The security proofs state that
 if the kernel is configured according to the proof assumptions and
@@ -258,7 +276,8 @@ systems, this is not a problem, because analysing hardware and proof
 assumptions is much easier than analysing a large software system, the
 same hardware, and test assumptions.
 
-== Is seL4 proven secure? == This depends on what you mean by secure. In
+## Is seL4 proven secure?
+ This depends on what you mean by secure. In
 the interpretation of classic operating system security, the answer is
 yes. In particular, seL4 has been proved to enforce specific security
 properties, namely integrity and confidentiality, under certain
@@ -271,7 +290,8 @@ formally verified by the user. While these restrictions are common for
 high-assurance systems, we are working to reduce them, for instance
 through the use of IOMMUs on x86 or System MMUs on ARM.
 
-== If I run seL4, is my system secure? == Not automatically, no.
+## If I run seL4, is my system secure?
+ Not automatically, no.
 Security is a question that spans the whole system, including its human
 parts. An OS kernel, verified or not, does not automatically make a
 system secure. In fact, any system, no matter how secure, can be used in
@@ -281,7 +301,8 @@ However, if used correctly, seL4 provides the system architect and user
 with strong mechanisms to implement security policies, backed by
 specific security theorems.
 
-== What are the proof assumptions? == The brief version is: we assume
+## What are the proof assumptions?
+ The brief version is: we assume
 that in-kernel assembly code is correct, hardware behaves correctly,
 in-kernel hardware management (TLB and caches) is correct, and boot code
 is correct. The hardware model assumes DMA to be off or to be trusted.
@@ -292,7 +313,8 @@ For a more in-depth description, see the
 \[\[<http://sel4.systems/Info/FAQ/proof.pml%7Cproof> and assumptions
 page\]\].
 
-== How do I leverage seL4's formal proofs? == The seL4 proofs are just
+## How do I leverage seL4's formal proofs?
+ The seL4 proofs are just
 the first step in building secure systems. They provide the tools that
 application and system developers need for providing evidence that their
 systems are secure.
@@ -308,7 +330,8 @@ of the entire system.
 If you are interested in connecting to the seL4 proofs, let us know, we
 may be able to offer assistance.
 
-== Have OS kernels not been verified before? == OS verification goes
+## Have OS kernels not been verified before?
+ OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
 \[\[<http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract%7Ccomprehensive>
@@ -334,7 +357,8 @@ been achieved. It is only in the last 5-10 years that code verification
 and theorem proving technology has advanced enough to make large
 code-level proofs feasible.
 
-== When and how often does seL4 get updated and re-proved? == We update
+## When and how often does seL4 get updated and re-proved?
+ We update
 the seL4 proofs semi-continuously, usually whenever something is pulled
 into the master branch in the seL4 github repository. You can see the
 proof updates coming through on
@@ -357,8 +381,9 @@ happen per year unless there is specific funding for a specific feature.
 Small updates take a day to a few weeks and we often do them on the
 side. There's no specific schedule at the moment.
 
-== How do I tell which code in github is covered by the proof and which
-isn't? == The verification sees the entire C code for one particular
+## How do I tell which code in github is covered by the proof and which
+isn't?
+ The verification sees the entire C code for one particular
 combination of configuration options. Currently this is the imx6
 platform, Cortex A9 processor, ARMv7-a architecture, all other config
 options unset (in particular DEBUG, PROFILING, etc). Excluded from this
@@ -401,7 +426,8 @@ As an example, the CPU and architecture options mean that everything
 under src/arch/ia32 is not covered by the proof, but that the files in
 src/kernel/object are.
 
-= How are resources managed and protected in seL4? =
+# How are resources managed and protected in seL4?
+
 
 The key idea in seL4 is that all resource management is done in
 userland. Access to and control over resources is controlled by
@@ -411,7 +437,8 @@ management itself. It has no heap, just a few global variables, a
 strictly bounded stack, and memory explicitly provided to it by
 userland.
 
-== What are capabilities ==
+## What are capabilities
+
 
 Capabilities are an OS abstraction for managing access rights. A
 capability represents ''prima facie'' evidence of the right to perform a
@@ -433,7 +460,8 @@ See the wikipedia article on
 \[\[<https://en.wikipedia.org/wiki/Capability-based_security%7Ccapability-based>
 security\]\] for more details on caps.
 
-== How can usermode manage kernel memory safely? ==
+## How can usermode manage kernel memory safely?
+
 
 The kernel puts userland in control of system resources by handing all
 free memory (called ''Untyped'') after booting to the first user process
@@ -456,7 +484,8 @@ These can be mapped into an ''Address Space Object'' (essentially a page
 table), after which userland can write to the physical memory
 represented by the Frame Objects.
 
-== How can threads communicate? ==
+## How can threads communicate?
+
 
 Communication can happen via message-passing IPC or shared memory. IPC
 only makes sense for short messages; there is an implementation-defined,
@@ -474,7 +503,8 @@ sender's to the receiver's address space.
 
 Shared-buffer access can be synchronised via ''Notifications''.
 
-== How does message-passing work? ==
+## How does message-passing work?
+
 
 As is characteristic to members of the L4 microkernel family, seL4 uses
 ''synchronous IPC''. This means a rendez-vous communication model, where
@@ -494,7 +524,8 @@ trying to receive from the Endpoint.
 Message broadcast is a higher-level abstraction that can be implemented
 on top of seL4's primitive mechanisms.
 
-== Why do send-only operations not return a success indication? ==
+## Why do send-only operations not return a success indication?
+
 
 The send-only IPC system calls ''seL4\_Send()'' and ''seL4\_NBSend()''
 can be invoked with a send-only capability, enabling one-way data
@@ -507,7 +538,8 @@ flow that is not explicitly authorised by a capability.
 
 In short, it's a feature, not a bug (painful as it may be).
 
-== What are Notifications? ==
+## What are Notifications?
+
 
 A ''Notification Object'' is logically a small array of binary
 semaphores. It has the same operations: ''Signal'' and ''Wait''. Due to
@@ -525,7 +557,8 @@ Notifications can also be ''Polled'', which is like Wait, except the
 operation does not block, and instead returns zero immediately, even if
 the Notification bit string is zero.
 
-== What is the seL4 fastpath? ==
+## What is the seL4 fastpath?
+
 
 The fastpath is an add-on frontend to the kernel which performs the
 simple cases of some common operations quickly. It is key to the high
@@ -539,33 +572,38 @@ There is a section on the fastpath and its verification in
 \[\[<http://www.ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Cthis>
 article\]\]. The fastpath discussion starts on page 23.
 
-== I want to know more about seL4
-functionality/design/implementation/philosophy ==
+## I want to know more about seL4
+functionality/design/implementation/philosophy
+
 
 There are plenty of references on the
 \[\[<https://wiki.sel4.systems/Documentation>||documentation page\]\].
 
-= What can I do with seL4? = You can use seL4 for research, education or
+# What can I do with seL4?
+ You can use seL4 for research, education or
 commerce. Details are specified in the standard open-source
 \[\[\#lic|licenses\]\] that come with the code. Different licenses apply
 to different parts of the code, but the conditions are designed to ease
 uptake.
 
-= What are the licensing conditions? = &lt;&lt;Anchor(lic)&gt;&gt;
+# What are the licensing conditions?
+ &lt;&lt;Anchor(lic)&gt;&gt;
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
 \[\[<http://sel4.systems/Info/GettingStarted/license.pml%7Clicense>
 page\]\] for more details.
 
-= How do I contribute to seL4? = See
+# How do I contribute to seL4?
+ See
 \[\[<http://sel4.systems/Community/Contributing%7CHow> to
 Contribute\]\]. In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.
 
-= How can I build a system with seL4? = Much more is required to build a
+# How can I build a system with seL4?
+ Much more is required to build a
 system on seL4 compared to building on, say Linux. Having decomposed
 your system into modules, you will need to work out what access each
 module needs to hardware resources, you will need to build device
@@ -590,7 +628,8 @@ builds an OS on top of seL4. If you have access to a Sabre Lite board,
 you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.
 
-= Where can I learn more? = NICTA's
+# Where can I learn more?
+ NICTA's
 \[\[<http://ssrg.nicta.com.au/projects/seL4/%7CseL4> project\]\] and
 \[\[<http://ssrg.nicta.com.au/projects/TS/%7CTrustworthy> Systems\]\]
 pages contain more technical information about seL4, including links to
@@ -609,7 +648,8 @@ all peer-reviewed publications. Good starting points are:
 >     of the cost of verification, and how it compares to that of
 >     traditionally-engineered systems.
 
-= What's coming up next? = We're currently working on a number of
+# What's coming up next?
+ We're currently working on a number of
 things. As we're in a research environment (not a product development
 environment) we cannot commit to dates, or the order in which any of
 these will be delivered (or even if they will be released at all).

@@ -6,7 +6,8 @@ Interesting starting points:
 > -   FindPage: find some content, explore the wiki
 > -   HelpOnMoinWikiSyntax: quick access to wiki markup
 
-== How to use this site == A Wiki is a collaborative site, anyone can
+## How to use this site
+ A Wiki is a collaborative site, anyone can
 contribute and share:
 
 > -   Edit any page by pressing '''&lt;&lt;GetText(Edit)&gt;&gt;''' at

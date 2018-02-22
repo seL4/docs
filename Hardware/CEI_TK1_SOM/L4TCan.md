@@ -2,8 +2,9 @@
 = {{<attachment:front.jpg%7CFront> view of TK1-Tower|width="25%"}}
 {{<attachment:bottom.jpg%7CBottom> view of TK1-Tower|width="25%"}}
 
-== Before running L4TCAN: Jumper HW-based chipselect to the GPIO
-chipselect == Because L4T with CAN doesn't use GPIO chipselect (yet),
+## Before running L4TCAN: Jumper HW-based chipselect to the GPIO
+chipselect
+ Because L4T with CAN doesn't use GPIO chipselect (yet),
 it's necessary to connect the hardware CSN line to the GPIO used for
 chipselect.
 
@@ -24,7 +25,8 @@ use GPIO-based chipselects.
 NOTE2: Justification for GPIO chipselects is that we have 2 CAN nodes
 and only 1 HW chipselect, so had to do it this way.
 
-== Option 1. Use our Linux image == Grab the image (tk1\_can.img.gz)
+## Option 1. Use our Linux image
+ Grab the image (tk1\_can.img.gz)
 available at <http://ts.data61.csiro.au/Downloads/tk1_can/>. Make sure
 to verify against the md5sum in the same folder once you've got it.
 
@@ -64,7 +66,8 @@ future.
 
 See bottom of this page for 'hello-world'-type examples.
 
-== Option 2: compile your own Linux == The instructions from here on go
+## Option 2: compile your own Linux
+ The instructions from here on go
 from a vanilla TK1-SOM L4T configuration to one which can support CAN
 using the daughterboard.
 
@@ -95,7 +98,8 @@ This means that this file will only work with an MCP251X that has a
 I've also added a lot of debugging information to the driver so that
 dmesg is a bit more helpful.
 
-=== Look at device tree documentation === Device tree documentation does
+### Look at device tree documentation
+ Device tree documentation does
 not exist in the source code as mcp support has been hacked in. Here's
 the docs from mainline:
 
@@ -132,13 +136,15 @@ Example:
 
 }}}
 
-=== Modify the device tree === Replace the existing .dts files with
+### Modify the device tree
+ Replace the existing .dts files with
 \[\[<attachment:tegra124-tk1-som-pm375-000-c00-00.dts>\]\]
 
 You also need to remap some GPIOs, swap out the GPIO device tree with
 \[\[<attachment:tegra124-tk1-som-gpio-default.dtsi>\]\]
 
-=== Kernel Build Configuration === Using make menuconfig, enable CAN and
+### Kernel Build Configuration
+ Using make menuconfig, enable CAN and
 MCP251X modules. Make sure your .config contains:
 
 {{{ CONFIG\_CAN=m CONFIG\_CAN\_RAW=m CONFIG\_CAN\_BCM=m
@@ -155,7 +161,8 @@ Once we figure out how to do GPIO-muxed chipselect on the TK1SOM
 (working on it) it will be possible to use more than one CAN node &
 user-space SPI at the same time.
 
-=== Enable hardware-based chipselect \#0 === There is a strange old
+### Enable hardware-based chipselect \#0
+ There is a strange old
 touch-driver hanging around that needs to be disabled for you to be able
 to use hardware CS on the TK1-SOM's SPI line.
 
@@ -165,7 +172,8 @@ you can disable it in extlinux.conf, which is much simpler.
 in /boot/extlinux/extlinux.conf on your rootfs, find the touch\_id=0@0
 line, and change it to touch\_id=3@3
 
-=== Load everything onto the board === You could do something like this:
+### Load everything onto the board
+ You could do something like this:
 
 update\_kernel.sh
 
@@ -201,7 +209,8 @@ rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at &lt;tk1&gt;
 
 }}}
 
-= Hello, world =
+# Hello, world
+
 
 When you boot up Linux login as: ubuntu password ubuntu.
 
@@ -246,7 +255,8 @@ sudo apt-get install can-utils \# (make sure to enable universe
 repository & update) cansend can0 5A1\#11.22.33.44.55.66.77.88 \# Send a
 packet candump can0 \# Dump packets }}}
 
-= Loopback mode test = {{{ ip link set can0 type can bitrate 500000
+# Loopback mode test
+ {{{ ip link set can0 type can bitrate 500000
 loopback on ifconfig can0 up candump any,0:0,\#FFFFFFFF \#In terminal 1
 
 cansend can0 123\#dead \#In terminal 2 }}}

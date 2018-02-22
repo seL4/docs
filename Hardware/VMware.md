@@ -1,4 +1,5 @@
-= seL4 on VMware =
+# seL4 on VMware
+
 
 This is a quick guide on how to run seL4 x86 on VMWare
 \[\[<http://www.vmware.com/au/products/workstation%7CWorkstation>\]\] /
@@ -10,7 +11,8 @@ for Windows host (although general idea should be similar).
 This guide assumes that your project is all set up and configured to
 build for x86. Read \[\[Getting started\]\] otherwise.
 
-== Setting up a VM ==
+## Setting up a VM
+
 
 Both the free non-commercial Player and Workstation run seL4 fine; the
 difference with player is that additional setup is required to automate
@@ -21,7 +23,8 @@ comes with VIX and Player both installed.
 Once you get VMWare installed and running, go on and create a VM for
 seL4 (choose install OS later, and choose "Other" for guest OS type).
 
-=== Set Up Serial Port ===
+### Set Up Serial Port
+
 
 After you have a VM, we want to add a serial port so we can see the
 stuff we print out. Go machine configuration -&gt; Add device -&gt;
@@ -54,7 +57,8 @@ Choose depending on whether you can get a serial cable from your
 machine, whether you need output...etc. Easiest is to just use a text
 file.
 
-=== Install GRUB2 ===
+### Install GRUB2
+
 
 Once you have a VM, you'll want to set up the hard disk partitions and
 get GRUB2 on the virtual hard disk and its MBR somehow. Easiest way to
@@ -68,7 +72,8 @@ Alternatively if you feel like extra headaches to save space and time
 you can try install GRUB2 manually with grub-install from some Linux
 Live CD image.
 
-=== Add GRUB2 Option To Run seL4 ===
+### Add GRUB2 Option To Run seL4
+
 
 Now we want to edit its '''grub.cfg''' (usually in /grub2 or /boot/grub
 or something like that) somehow and modify it to boot our seL4 kernel +
@@ -103,7 +108,8 @@ images/ folder).
 Also may be a good idea to add '''set default=&lt;seL4 menu index&gt;'''
 to the grub.cfg, so grub is configured to boot seL4.
 
-== Using The VM to run seL4 ==
+## Using The VM to run seL4
+
 
 Now you have a VM ready, you'll want to copy your built kernel +
 userland binary image over onto its HD, and then start the VM, and
@@ -114,7 +120,8 @@ need editing of paths here and there to fit where you put things).
 
 \[\[<attachment:seL4vmw%7CDownload> seL4vmw\]\]
 
-=== Do It Manually ===
+### Do It Manually
+
 
 First, use vmware-mount to mount the vmdk disk image. Then copy your
 newly built kernel and user binaries over. Then, unmount using

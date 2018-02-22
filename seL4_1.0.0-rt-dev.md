@@ -1,18 +1,22 @@
-= seL4 1.0.0-rt-dev =
+# seL4 1.0.0-rt-dev
+
 
 The development branch of the for the seL4 realtime extensions. This
 branch is not verified and is under active development.
 
-== Highlights ==
+## Highlights
 
-=== Maximum priorities ===
+
+### Maximum priorities
+
 
 Previously seL4 would not allow threads to set any other thread's
 priority to higher than its own. This has been extracted into a separate
 field for the RT kernel, a maximum priority, which limits what threads
 can set their own or other threads priorities to.
 
-=== Criticality & Max Criticality ===
+### Criticality & Max Criticality
+
 
 Criticality is a new field for threads. The kernel has a system
 criticality level which can be set by the user. When the criticality
@@ -20,7 +24,8 @@ level is raised, threads with criticality &gt;= the criticality level
 have their priorities boosted such that they are chosen by the scheduler
 over low criticality threads.
 
-=== Scheduling contexts ===
+### Scheduling contexts
+
 
 This branch adds scheduling contexts to seL4, which represent CPU time
 (as budget/period). Scheduling contexts are separate from threads
@@ -31,11 +36,13 @@ Scheduling contexts allow developers to create periodic threads,
 temporally isolate threads and have variable timeslices for round robin
 threads. If budget == period, the scheduling context acts as timeslice.
 
-=== IPC & Signal ordering ===
+### IPC & Signal ordering
+
 
 Signal and IPC delivery is now priority ordered, instead of FIFO.
 
-=== Temporal exceptions ===
+### Temporal exceptions
+
 
 Threads can register a temporal exception handler that will be called if
 a threads budget expires before its period has passed. This is optional.
@@ -43,17 +50,20 @@ a threads budget expires before its period has passed. This is optional.
 For more details, please see the manual. Most of the updates are in the
 threads chapter.
 
-=== User level scheduling support ===
+### User level scheduling support
+
 
 The new API makes it much easier to build high performing user level
 schedulers.
 
-== RT API ==
+## RT API
+
 
 This section documents kernel API changes as compared with the current
 master of seL4.
 
-=== API Changes ===
+### API Changes
+
 
 > -   seL4\_TCB\_Configure arguments changed (domain removed, scheduling
 >     context cap, max priority, criticality, max criticality, temporal
@@ -62,7 +72,8 @@ master of seL4.
 >     and looked up once rather than every fault.
 > -   seL4\_TCB\_SetSpace temporal exeception handler added.
 
-=== API Additions ===
+### API Additions
+
 
 > -   seL4\_CapSchedControl - initial cap for control of CPU time
 > -   seL4\_SchedContextObject - new object for that allows threads
@@ -117,14 +128,16 @@ master of seL4.
 >     will borrow the scheduling context.
 > -   seL4\_SchedContext\_UnbindNotification - unbind the notification.
 
-=== API deletions ===
+### API deletions
+
 
 > -   seL4\_Yield (replaced by seL4\_SchedContext\_Yield)
 > -   seL4\_DomainSet
 > -   Domain scheduler removed.
 > -   seL4\_CNode\_SaveCaller (replaced by seL4\_CNode\_SwapCaller).
 
-== Performance improvements ==
+## Performance improvements
+
 
 The RT kernel has various experimental performance improvements
 including:
@@ -136,7 +149,8 @@ including:
 > -   Fault endpoints are looked up when registered and installed in the
 >     TCB's CNode, saving lookups on each fault.
 
-== Library & test compatability ==
+## Library & test compatability
+
 
 The 'rt' branch of seL4\_libs has been adapted to the rt branch of seL4,
 and the rt branch of sel4test has been ported to the seL4\_rt-dev-1.0.0
@@ -146,7 +160,8 @@ run it, checkout the default.xml manifest on the rt branch of
 
 The rt branch is in no way compatible with the master branch of seL4.
 
-== Hardware support ==
+## Hardware support
+
 
 The RT kernel currently supports:
 
@@ -158,6 +173,7 @@ The RT kernel currently supports:
 Other hardware platforms will be added as required (the ports require
 updated kernel and user-level timer drivers)
 
-== More details ==
+## More details
+
 
 See the 1.0.0-rt-dev manual included in the release.

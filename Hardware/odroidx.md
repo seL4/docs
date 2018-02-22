@@ -2,25 +2,29 @@ seL4 supports the
 \[\[<http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947%7COdroid-X>\]\]
 Exynos4412 board.
 
-== Client setup == ===== Hardware requirements: ===== 1. 5V power supply
+## Client setup
+ ===== Hardware requirements: ===== 1. 5V power supply
 1. RS232 or USB to UART converter 1. USB OTG cable
 
 Note: The USB-UART converter that is shipped with the board requires a
 Linux kernel version &gt; 3.2
 
-===== Serial port setup ===== Open minicom on /dev/ttyUSB\* and set the
+##### Serial port setup
+ Open minicom on /dev/ttyUSB\* and set the
 serial port settings to: 115200N1
 
 > -   115200bps
 > -   parity-none
 > -   1 stop bit
 
-===== udev ===== You may also like to set up a udev rule for Fastboot:
+##### udev
+ You may also like to set up a udev rule for Fastboot:
 
 {{{ SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002",
 MODE="660", GROUP="dialout" }}}
 
-== SD card setup == An image file can be found here: TODO Add sd image
+## SD card setup
+ An image file can be found here: TODO Add sd image
 
 This image contains both U-Boot and Android. This should set up SD card
 partitions properly. seL4 image can be uploaded via Fastboot.
@@ -32,7 +36,8 @@ of=&lt;/dev/sdx&gt; }}}
 
 Where "sdx" is the device that is associated with your SD card.
 
-===== U-Boot ===== &lt;TODO&gt; Uboot source?
+##### U-Boot
+ &lt;TODO&gt; Uboot source?
 
 U-Boot must reside at a magical offset in a special partition of the SD
 card. To copy U-Boot and the other boot loaders to the SD card:
@@ -40,7 +45,8 @@ card. To copy U-Boot and the other boot loaders to the SD card:
 {{{\#!highlight bash numbers=off cd sd\_fusesudo ./sd\_fusing\_4412.sh
 /dev/sdx }}}
 
-== seL4 Image file preparation == The seL4 image file must be converted
+## seL4 Image file preparation
+ The seL4 image file must be converted
 into a U-Boot application file. The first step is to strip the elf file
 into a binary file. Next we use mkimage to create the image.
 
@@ -53,7 +59,8 @@ The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file
 into a binary file using objcopy.
 
-== Booting == Fastboot will be used to upload images to the device. The
+## Booting
+ Fastboot will be used to upload images to the device. The
 tool can be found here: or here: you can clone and build the tool from
 source
 
@@ -86,7 +93,8 @@ To boot from mmc:
 > 1.  At the U-Boot prompt type
 >     fatload mmc 0:2 0x42000000 &lt;filename&gt;; bootm 0x42000000
 
-== References ==
+## References
+
 <http://www.hardkernel.com/renewal_2011/products/prdt_info.php>
 
 <http://dev.odroid.com/projects/odroid-xq/#s-2.2.1> &lt;- This should be

@@ -1,10 +1,12 @@
-= seL4 3.0.0 Release Notes = This release is a minor release that brings
+# seL4 3.0.0 Release Notes
+ This release is a minor release that brings
 structural improvements to the kernel in preparation for 64bit
 architecture support. Although changes do break the API, the breakages
 are small (see API Changes and API Removals below) and should not effect
 most users.
 
-== Implementation improvements ==
+## Implementation improvements
+
 
 :   -   python3 compatability for our python scripts.
     -   more source code restructuring in preparation for 64-bit ports
@@ -13,12 +15,14 @@ most users.
         for the KZM11.
     -   more work to remove duplication between libsel4 and kernel.
 
-== API Additions ==
+## API Additions
+
 
 :   -   seL4\_IRQControl\_GetIOAPIC for x86.
     -   seL4\_IRQControl\_GetMSI for x86.
 
-== API Changes ==
+## API Changes
+
 
 :   -   Total number of ASIDs for x86 reduced from 2\^16\^ to 2\^12\^
         (max ASID 2\^12\^).
@@ -27,12 +31,14 @@ most users.
         structures for 64 bit kernel support.
     -   Diminish rights removed from IPC
 
-== API Removals ==
+## API Removals
+
 
 :   -   seL4\_IRQ\_SetMode removed (This only effects users who use the
         IOAPIC on x86, which is turned off by default).
 
-== API deprecations ==
+## API deprecations
+
 
 :   -   seL4\_IA32\_PageDirectory\_Map deprecated for
         seL4\_X86\_PageDirectory\_Map
@@ -98,9 +104,11 @@ most users.
         seL4\_X86\_WriteCombining
     -   seL4\_IA32\_VMAttributes deprecated for seL4\_X86\_VMAttributes
 
-== Upgrade notes == This change is not source or binary compatible.
+## Upgrade notes
+ This change is not source or binary compatible.
 
 Users will need to remove calls to seL4\_IRQ\_SetMode, and upgrade any
 manual parsing of seL4\_BootInfo.
 
-== Full changelog == Use git log 2.1.0..3.0.0
+## Full changelog
+ Use git log 2.1.0..3.0.0

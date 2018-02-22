@@ -1,6 +1,7 @@
 &lt;&lt;TableOfContents()&gt;&gt;
 
-= CAmkES = CAmkES (component architecture for microkernel-based embedded
+# CAmkES
+ CAmkES (component architecture for microkernel-based embedded
 systems) is a software development and runtime framework for quickly and
 reliably building microkernel-based multiserver (operating) systems. It
 follows a component-based software engineering approach to software
@@ -18,7 +19,8 @@ The development framework provides:
 >     glue code to build a complete, bootable, system image
 > -   full integration in the seL4 environment and build system
 
-== Setting up your machine ==
+## Setting up your machine
+
 
 :   -   Before you can use any of the SEL4 related repositories, you
         must
@@ -30,7 +32,8 @@ The development framework provides:
         (\[\[Getting started\#Setting\_up\_your\_machine|seL4: Setting
         up your machine\]\])
 
-== Build dependencies ==
+## Build dependencies
+
 
 :   
 
@@ -64,14 +67,16 @@ package manager) {{{\#!highlight bash numbers=off curl -sSL
 (via pip): {{{\#!highlight bash numbers=off pip install --user
 camkes-deps }}}
 
-== Download CAmkES ==
+## Download CAmkES
+
 
 Download CAmkES source code from github:
 
 {{{\#!highlight bash numbers=off mkdir camkes-project cd camkes-project
 repo init -u <https://github.com/seL4/camkes-manifest.git> repo sync }}}
 
-== Build and run simple application ==
+## Build and run simple application
+
 
 The following will configure, build, and run a simple example CAmkES
 system:
@@ -93,41 +98,49 @@ correctly) do:
 
 {{{\#!highlight bash numbers=off make clean }}}
 
-== Read Tutorial ==
+## Read Tutorial
+
 
 To learn about developing your own CAmkES application, read the
 \[\[Tutorials\#CAmkES\_tutorials\]\].
 
-== Camkes Terminology/Glossary ==
+## Camkes Terminology/Glossary
+
 
 Can be found \[\[CAmkES/Terminology|here\]\].
 
-== CAmkES VM ==
+## CAmkES VM
+
 
 Information about the x86 camkes vm can be found \[\[CAmkESVM|here\]\].
 
-== Visual CAmkES ==
+## Visual CAmkES
+
 
 CAmkES comes with a tool for visualising the components and connections
 making up an application. For more info, see \[\[VisualCAmkES|here\]\].
 
-== Changes in CAmkES 3 ==
+## Changes in CAmkES 3
+
 
 The current version of CAmkES introduces a number of syntactic and
 functional changes. For details about what's changed, see
 \[\[CAmkESDifferences|here\]\].
 
-== Internals ==
+## Internals
+
 
 Here's some information about the internals of the CAmkES tool:
 \[\[CAmkESInternals\]\]
 
-== Command Line Interface ==
+## Command Line Interface
+
 
 There is an experimental command line interface for managing CAmkES
 projects. Read more: \[\[CAmkESCLI\]\]
 
-== Python Dependencies ==
+## Python Dependencies
+
 
 The '''Build Dependencies''' section covers how to install the python
 dependencies. The python metapackage,

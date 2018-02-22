@@ -1,14 +1,16 @@
 \#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
 \#language en = Debugging userspace threads =
 
-== Overview == The seL4 microkernel leverages the hardware debugging
+## Overview
+ The seL4 microkernel leverages the hardware debugging
 capabilities of modern processors, and exports hardware breakpoint,
 watchpoint, and single-stepping to user threads via conditionally
 compiled-in APIs. These kernel-level APIs can be used as the backend for
 implementing a full-featured debugger, or porting an existing one such
 as the GNU Debugger.
 
-== Enabling this feature == You can enable and disable the hardware
+## Enabling this feature
+ You can enable and disable the hardware
 debugging API by going through the kernel's configuration system:
 make menuconfig -&gt; seL4 Kernel -&gt; Build Options -&gt;
 Enable hardware breakpoint and single-stepping API.
@@ -27,7 +29,8 @@ and your ARM platform doesn't support it, '''your kernel will abort at
 boot''', with a message (or without a message if you are compiling the
 kernel in release mode (CONFIG\_DEBUG\_BUILD=n)).
 
-== Summary of the invocations == The invocations are documented in
+## Summary of the invocations
+ The invocations are documented in
 detail in the seL4 manual. This article will cover how to practically
 call them and use them in a prospective debugger.
 

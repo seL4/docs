@@ -1,9 +1,11 @@
-= seL4 0.0.1-rt-dev =
+# seL4 0.0.1-rt-dev
+
 
 The development branch of the for the seL4 realtime extensions. This
 branch is not verified and is under active development.
 
-== Highlights ==
+## Highlights
+
 
 > \* Maximum priorities
 >
@@ -26,12 +28,14 @@ branch is not verified and is under active development.
 For more details, please see the manual. Most of the updates are in the
 threads chapter.
 
-== API Changes ==
+## API Changes
+
 
 > -   seL4\_TCB\_Configure arguments changed (domain removed, scheduling
 >     context cap and max priority added).
 
-== API Additions ==
+## API Additions
+
 
 > -   seL4\_CapSchedControl - initial cap for control of CPU time
 > -   seL4\_SchedContextObject - new object for that allows threads
@@ -71,13 +75,15 @@ threads chapter.
 >     will borrow the scheduling context.
 > -   seL4\_SchedContext\_UnbindNotification - unbind the notification.
 
-== API deletions ==
+## API deletions
+
 
 > -   seL4\_Yield (replaced by seL4\_SchedContext\_Yield)
 > -   seL4\_DomainSet
 > -   Domain scheduler removed.
 
-== Library & test compatability ==
+## Library & test compatability
+
 
 The 'rt' branch of seL4\_libs has been adapted to the rt branch of seL4,
 and the rt branch of sel4test has been ported to the seL4\_rt-dev-0.0.1

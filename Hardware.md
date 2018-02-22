@@ -1,11 +1,13 @@
-= Supported hardware platforms = \[\[Hardware/General-ARM|General info
+# Supported hardware platforms
+ \[\[Hardware/General-ARM|General info
 on ARM platforms\]\]
 
 \[\[Hardware/VMware|Running seL4 on VMware\]\]
 
 \[\[Hardware/Qemu|Running seL4 on Qemu\]\]
 
-== x86 == ||'''platform''' ||'''core''' ||'''arch'''
+## x86
+ ||'''platform''' ||'''core''' ||'''arch'''
 ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed
 by''' ||'''maintained by''' ||'''description''' ||
 ||\[\[Hardware/IA32|PC99\]\] ||various ||x86 ||VT-X ||VT-D ||unverified
@@ -13,9 +15,11 @@ by''' ||'''maintained by''' ||'''description''' ||
 ||\[\[Hardware/IA32|PC99\]\] ||various ||x64 ||VT-X ||VT-D ||unverified
 ||Data61 ||Data61 ||PC99-style Intel Architecture 64-bit ||
 
-== ARM ==
+## ARM
 
-=== ARMv6 ===
+
+### ARMv6
+
 
 ||'''platform (board)''' ||'''chip (SoC)''' ||'''core''' ||'''arch'''
 ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed
@@ -24,7 +28,8 @@ by''' ||'''maintained by''' ||'''description''' ||
 ||Data61 ||Data61 ||original verified version - proof no longer
 maintained ||
 
-=== ARMv7A ===
+### ARMv7A
+
 
 ||'''platform (board)'''||'''chip (SoC)'''||'''core'''||'''arch'''
 ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed
@@ -52,7 +57,8 @@ K1 ||A15 ||v7-1A ||ARM HYP ||System MMU ||unverified ||Data61 ||Data61
 Evaluation Kit\]\] ||Zynq 7000 ||A9 ||v7A ||No ||No ||unverified
 ||Data61 ||Data61 || ||
 
-=== ARMv8A ===
+### ARMv8A
+
 
 ||'''platform (board)''' ||'''chip (SoC)''' ||'''core''' ||'''arch'''
 ||'''virtualisation''' ||'''IOMMU''' ||'''status''' ||'''contributed

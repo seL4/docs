@@ -3,7 +3,8 @@ section-numbers off = seL4 Wiki = This WIKI is for cooperatively
 developing and sharing documentation on
 \[\[<http://sel4.systems%7CseL4>\]\]
 
-=== Editing the Wiki ===
+### Editing the Wiki
+
 
 To avoid spam and increase quality, editing is by invitation only.
 Create an account, and if we recognise your name you'll be added to the
@@ -12,7 +13,8 @@ posted anything to the
 \[\[<https://sel4.systems/lists/listinfo/devel%7Cdevel> mailing
 list\]\]) drop us a line if you want to be able to edit.
 
-== seL4 Basics ==
+## seL4 Basics
+
 
 > -   \[\[Getting started\]\]
 > -   \[\[Tutorials\]\]
@@ -26,7 +28,8 @@ list\]\]) drop us a line if you want to be able to edit.
 > -   \[\[Virtualisation on seL4\]\]
 > -   \[\[Rust\]\]
 
-== seL4 Status ==
+## seL4 Status
+
 
 > -   New Features: new features in development
 > -   \[\[Hardware|Hardware Support\]\]: information about hardware
@@ -35,12 +38,14 @@ list\]\]) drop us a line if you want to be able to edit.
 > -   Userland Components and Drivers: available device drivers and
 >     userland components
 
-== Questions and Recipes ==
+## Questions and Recipes
+
 
 > -   \[\[FrequentlyAskedQuestions|FAQ\]\]: editable list of FAQs
 > -   \[\[seL4 Recipes\]\]: How to do X with seL4
 
-== seL4 Releases ==
+## seL4 Releases
+
 
 > -   \[\[<https://github.com/seL4/seL4/releases/latest%7CCurrent>
 >     release\]\]
@@ -49,13 +54,15 @@ list\]\]) drop us a line if you want to be able to edit.
 > -   \[\[ReleaseNotes|Release notes\]\]
 > -   \[\[ReleaseProcess|Release process\]\]
 
-== CAmkES Releases ==
+## CAmkES Releases
+
 
 > -   \[\[<https://github.com/seL4/camkes-tool/releases/latest%7CCurrent>
 >     release\]\]
 > -   \[\[CAmkESReleaseNotes|Release notes\]\]
 
-== Community ==
+## Community
+
 
 > -   \[\[<https://research.csiro.au/tsblog%7CTrustworthy> Systems
 >     Blog\]\]

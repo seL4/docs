@@ -1,10 +1,12 @@
-=== Description: === This page relates to using cargo based rust modules
+### Description:
+ This page relates to using cargo based rust modules
 in userspace on seL4 utilizing the existing build system. It focuses on
 Interoperability between existing c based libraries and applications and
 working with CAmkES. For rust only projects on seL4 see
 \[\[<https://robigalia.org/%7Cthe> robigalia project\]\].
 
-=== Setup: === In addition to the typical sel4 build prerequisites you
+### Setup:
+ In addition to the typical sel4 build prerequisites you
 also need to have rust installed. This is achieved by the following:
 
 ||\# This installs multirust from here: https://github.com/brson/multirust&lt;&lt;BR&gt;&gt;curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh  &lt;&lt;BR&gt;&gt;&lt;&lt;BR&gt;&gt;\# This will install cargo and rustc using the current nightly version&lt;&lt;BR&gt;&gt;multirust update nightly&lt;&lt;BR&gt;&gt;\# This will set the default cargo and rustc paths to the nightly version&lt;&lt;BR&gt;&gt;multirust default nightly||
@@ -13,7 +15,8 @@ Additionally, if you want to use rust-bindgen (a helpful tool that
 generates rust bindings from c header files, such as bindings to camkes
 generated functions) you need to have libclang installed.
 
-=== Sample projects: ===
+### Sample projects:
+
 
 There is currently a sample project
 \[\[<https://github.com/SEL4PROJ/rust-camkes-samples%7Crust-camkes-samples>\]\]
@@ -30,7 +33,8 @@ version until the project has been updated on our end, in the near
 future.
 ||\# This just gets all of the sources&lt;&lt;BR&gt;&gt;repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git &lt;&lt;BR&gt;&gt;repo sync  &lt;&lt;BR&gt;&gt;\# Configuration for arm kzm (so we can use qemu)&lt;&lt;BR&gt;&gt;\# helloworld app: make rust-helloworld-kzm\_defconfig&lt;&lt;BR&gt;&gt;\# keyvalue app: make rust-keyvalue-kzm\_defconfig&lt;&lt;BR&gt;&gt;make rust-helloworld-kzm\_defconfig&lt;&lt;BR&gt;&gt;\# Build and run on qemu&lt;&lt;BR&gt;&gt;make qemu-arm||
 
-=== Build Dependencies: === In addition to the existing
+### Build Dependencies:
+ In addition to the existing
 \[\[SetupUbuntu|seL4\]\] dependencies and \[\[CAmkES|CAmkES\]\]
 dependencies, the following dependencies are required:
 
@@ -51,7 +55,8 @@ use the features:
 > -   linux-libc-dev:i386: Provides glibc headers for building libstd
 >     on x86.
 
-=== Build overview: === Two features have been added to the seL4 build
+### Build overview:
+ Two features have been added to the seL4 build
 system (seL4\_tools):
 
 > -   The ability to use cargo projects as libraries or apps with other
@@ -80,7 +85,8 @@ settings are the same as for a library: RUST\_TARGET := libcratename.a.
 >     uses rust. Additionally, libcompiler-rt needs to be added to any
 >     applications that use cargo projects directly or indirectly.
 
-== Known issues: ==
+## Known issues:
+
 
 :   -   Currently rely on a modified libmuslc with a hacked in global
         tls struct in order for rust printf functionality to work.

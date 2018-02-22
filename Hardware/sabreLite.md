@@ -1,17 +1,21 @@
-= Sabre Lite =
+# Sabre Lite
+
 
 For board details see
 \[\[<https://boundarydevices.com/product/sabre-lite-imx6-sbc/%7CSabre>
 Lite\]\]
 
-= Building for the Sabre Lite = For preset build config, use defconfigs
+# Building for the Sabre Lite
+ For preset build config, use defconfigs
 called "sabre\_" or "imx6"
 
-= Booting on the Sabre Lite = == Hardware Requirements == \* 5V/3A power
+# Booting on the Sabre Lite
+ == Hardware Requirements == \* 5V/3A power
 supply \* RS232 cable (or USB-RS232 adapter) \* USB OTG cable for
 Fastboot or Ethernet cable for TFTPboot
 
-== Board Setup == The !SabreLite can be configured to boot from either
+## Board Setup
+ The !SabreLite can be configured to boot from either
 USB or SPI flash. USB booting is typically only used when there is a
 failure in the SPI flash resident bootloader. One may use USB boot to
 temporarily boot u-boot and reflash the SPI memory.
@@ -20,7 +24,8 @@ SPI flash contains a simple boot loader that will can boot from either
 SPI flash, or from an image starting at block 2 of the SD or μSD card
 depending on which boot loader has been flashed.
 
-== Booting U-Boot from USB == USB booting offers a back door into the
+## Booting U-Boot from USB
+ USB booting offers a back door into the
 system. This method is usually only used to reprogram the SPI flash boot
 program.
 
@@ -51,7 +56,8 @@ Now you are ready to load your image into memory and execute:
 image\_file }}} The image file that is used will typically be named
 u-boot.bin
 
-== Booting U-Boot from SPI Flash == To boot from SPI flash:
+## Booting U-Boot from SPI Flash
+ To boot from SPI flash:
 
 > 1.  Move the DIP switch nearest the Ethernet port to the OFF position
 > 2.  Move the DIP switch farthest from the Ethernet port to the OFF
@@ -68,7 +74,8 @@ Now you are ready to load your image into memory and execute:
 image\_file }}} The image file that is used will typically be named
 u-boot.bin
 
-== Booting U-Boot from SPI Flash == To boot from SPI flash:
+## Booting U-Boot from SPI Flash
+ To boot from SPI flash:
 
 > 1.  Move the DIP switch nearest the Ethernet port to the OFF position
 > 2.  Move the DIP switch farthest from the Ethernet port to the OFF
@@ -78,7 +85,8 @@ u-boot.bin
 >     resident in SPI flash
 > 5.  Power up the device.
 
-== SD and μSD cards == To boot U-Boot from an SD or μSD card, one must
+## SD and μSD cards
+ To boot U-Boot from an SD or μSD card, one must
 install the appropriate boot loader into SPI flash. The method and boot
 loader images are provided in the SPI flash programming section. U-Boot
 must be located at block 2 of the SD or μSD card. This can be achieved

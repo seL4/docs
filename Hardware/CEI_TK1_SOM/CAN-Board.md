@@ -1,4 +1,5 @@
-= The CAN Daughterboard = The CAN Daughterboard is an open-hardware
+# The CAN Daughterboard
+ The CAN Daughterboard is an open-hardware
 '''CAN/SPI/I2C/Serial board''' designed by the Trustworthy Systems group
 at Data61/CSIRO, that can be mounted below the power supply module of
 the TK1-SOM. It provides '''two CAN buses''' implemented with MCP2515
@@ -9,7 +10,8 @@ ports.
 {{<attachment:bottom.jpg%7CBottom> of board|width="20%"}}
 {{<attachment:side.jpg%7CSide> view of mounted stack|width="20%"}}
 
-== Mounting == The board attaches to the bottom of a TK1-SOM via the
+## Mounting
+ The board attaches to the bottom of a TK1-SOM via the
 expansion connector. No further work should be needed to enumerate the
 device given a kernel supporting GPIO chipselects.
 
@@ -25,17 +27,20 @@ is the same as is already used between the CPU & GPU board. Order codes:
 > -   '''SCREW''' - M2.5 x 5 MM SS PAN HEAD PHILIPS (92000A103) bottom
 >     pcb screw
 
-== Using Linux with this daughterboard for CAN == ('''hello world &
+## Using Linux with this daughterboard for CAN
+ ('''hello world &
 testing''') See \[\[Hardware/CEI\_TK1\_SOM/L4TCan|Using CAN on L4T
 through an MCP251X\]\]
 
-== Pinout detail == The font on the silkscreen indicating pins is
+## Pinout detail
+ The font on the silkscreen indicating pins is
 difficult to see once the tower is assembled (wasn't enough space on the
 top) - See this picture (view taken from '''bottom'''):
 
 {{<attachment:silk.png%7CSilk> Screen|width="40%"}}
 
-=== Warning - UART Level Converter: ===
+### Warning - UART Level Converter:
+
 
 :   -   If using the level converter on the board, and if you are
         getting '''junk from your 3V3 serial cable''', read this:
@@ -52,7 +57,8 @@ If you need the faster baud rates (or don't want to change the default
 settings), '''use a 1V8 USB-TTL cable''' and plug it straight into the
 TK1 as usual. This will be fixed in a future revision.
 
-== TK1 SOC Connections == Useful for writing drivers - this is a list of
+## TK1 SOC Connections
+ Useful for writing drivers - this is a list of
 which pins on the board correspond to which SOC pins:
 
 Note: All I2C signals operate at 3V3 on their 0.1" headers, except
@@ -94,17 +100,20 @@ used by the CAN controller (diagram below).
 ||TK1\_GPIO6 ||AB31 ||GPIO3\_PR.06 || ||TK1\_GPIO7 ||Y27 ||GPIO3\_PS.04
 ||
 
-=== CAN Controller (MCP25625) GPIO Usage: === {{<attachment:CAN> board
+### CAN Controller (MCP25625) GPIO Usage:
+ {{<attachment:CAN> board
 pins.PNG|MCP25625 pinout|height="168",width="458"}}
 
-== Construction Information == ||Schematic
+## Construction Information
+ ||Schematic
 ||\[\[<attachment:canboard_v3.pdf>\]\] || ||PCB Sources Repository
 ||<https://bitbucket.csiro.au/projects/OH/repos/tk1som-can-daughterboard>
 || ||Gerber Files (in repo also)
 ||\[\[<attachment:Tegra_CANboard_tofab_v1.zip>\]\] || ||BOM (in repo
 also) ||\[\[<attachment:CanBoardBOMDraft1.xlsx>\]\] ||
 
-== Construction notes == Components '''R6, R14, R19, R23 should NOT be
+## Construction notes
+ Components '''R6, R14, R19, R23 should NOT be
 mounted'''. R6 and R19 are pull-up resistors that were found to cause
 signal integrity issues, the other 2 resistors when mounted will supply
 5v to the CAN lines and are optional.

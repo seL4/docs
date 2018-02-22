@@ -1,4 +1,5 @@
-= Introducing seL4 4.0.0 = Announcing the release of {{{seL4 4.0.0}}}
+# Introducing seL4 4.0.0
+ Announcing the release of {{{seL4 4.0.0}}}
 with the following changes:
 
 > -   Reorder bootinfo structure.
@@ -38,22 +39,26 @@ with the following changes:
 > management into mode and general. \* Fix cpuid family/model
 > composition. \* Add X86\_64 support.
 
-= Implementation improvements =
+# Implementation improvements
+
 
 -   Several enhancements for both {{{x86}}} and {{{ARM}}} have
     been made. Please see the commit log for details.
 
-= Upgrade notes =
+# Upgrade notes
+
 
 > -   This release breaks both API and ABI and is not source compatible
 >     with the earlier versions. Read more here:
 >     <https://research.csiro.au/tsblog/introducing-device-untyped-memory-sel4/>
 
-= Full changelog =
+# Full changelog
+
 
 Use {{{git log 3.2.0..4.0.0}}} in <https://github.com/seL4/seL4>
 
-= More details =
+# More details
+
 
 See the
 \[\[<http://sel4.systems/Info/Docs/seL4-manual-4.0.0.pdf%7C4.0.0>

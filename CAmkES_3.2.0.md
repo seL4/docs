@@ -1,4 +1,5 @@
-= CAmkES Version camkes-3.2.0 Release =
+# CAmkES Version camkes-3.2.0 Release
+
 
 Announcing the release of {{{camkes-3.2.0}}} with the following changes:
 
@@ -6,7 +7,8 @@ camkes-3.2.0 2018-01-17
 
 Using seL4 version 8.0.0
 
-= Changes =
+# Changes
+
 
 :   -   
 
@@ -49,7 +51,8 @@ Using seL4 version 8.0.0
             forward ported to camkes-3.x.x. documentation:
             <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports>
 
-= Known issues =
+# Known issues
+
 
 :   -   Hardware dataports that are large enough to use larger frame
         sizes are currently broken. There is an issue with
@@ -61,7 +64,8 @@ arm\_testhwdataportlrgpages\_defconfig or
 x86\_testhwdataportlrgpages\_defconfig configurations. If this
 functionality is required, hold off upgrading until this issue is fixed.
 
-= Upgrade notes =
+# Upgrade notes
+
 
 :   -   ADL files: ADL syntax changes in this release should not break
         any existing ADL files.
@@ -74,9 +78,11 @@ functionality is required, hold off upgrading until this issue is fixed.
 
 which is the same as the old behaviour.
 
-= Full changelog = Use {{{git log camkes-3.2.0..camkes-3.1.0}}} in
+# Full changelog
+ Use {{{git log camkes-3.2.0..camkes-3.1.0}}} in
 <https://github.com/seL4/camkes-tool>
 
-= More details = See the
+# More details
+ See the
 \[\[<https://github.com/seL4/camkes-tool/blob/camkes-3.2.0/docs/index.md%7Cdocumentation>\]\]
 or ask on the mailing list!

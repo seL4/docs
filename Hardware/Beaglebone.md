@@ -1,16 +1,20 @@
-= seL4 and RefOS on the Beaglebone Black = This page contains info about
+# seL4 and RefOS on the Beaglebone Black
+ This page contains info about
 building seL4 on \[\[<http://beagleboard.org/black%7CBeaglebone>
 Black\]\].
 
-== Building for the Beaglebone Black == These instructions were written
+## Building for the Beaglebone Black
+ These instructions were written
 by Tim Newsham. The Beaglebone is a community-supported port.
 
-=== Requirements === We suggest using the "arm-linux-gnueabi-"
+### Requirements
+ We suggest using the "arm-linux-gnueabi-"
 cross-compilers. Use
 \[\[<https://sel4.systems/Info/GettingStarted/#toolchains%7Cthe>
 instructions on getting a toolchain\]\].
 
-=== Building === ==== seL4test ==== First clone the seL4 repository.
+### Building
+ ==== seL4test ==== First clone the seL4 repository.
 
 {{{\#!highlight bash numbers=off
 
@@ -33,7 +37,8 @@ build with make with arm-linux-gnueabi-objcopy.
 In the menuconfig dialog, make sure that the correct BeagleBone platform
 is selected for your model. This will be under Kernel -&gt; seL4 System.
 
-==== RefOS ==== For RefOS, first clone the repository.
+#### RefOS
+ For RefOS, first clone the repository.
 
 {{{\#!highlight bash numbers=off
 
@@ -55,7 +60,8 @@ build with make with arm-linux-gnueabi-objcopy.
 <http://elinux.org/Beagleboard:BeagleBone_Black_Serial> \* SDCard for
 file booting or Ethernet cable for network boot
 
-=== Interacting with U-Boot === Connect a serial adapter between your
+### Interacting with U-Boot
+ Connect a serial adapter between your
 development box and the Beaglebone Black. Use a serial program such as
 minicom or screen to connect to the serial port at 115200 bps
 

@@ -1,8 +1,10 @@
-= CAmkES Internals =
+# CAmkES Internals
+
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Overview ==
+## Overview
+
 
 From the top, the CAmkES tool (typically found in "tools/camkes/camkes.sh") is a program that generates a '''single''' file that makes up part of the source of a seL4 application. There are a variety of types of files it can generate:
 
@@ -27,7 +29,8 @@ A typical build of a CAmkES application looks like:
         5.  Generate CapDL spec
         6.  Compile CapDL loader
 
-== Caching ==
+## Caching
+
 
 Remember that the CAmkES tool only generates one file each time it's
 run, and in a single build it's typically run many times. This means,
@@ -39,13 +42,15 @@ seems to unnecessarily repeat a lot of work.
 
 To get around this, CAmkES contains several caches:
 
-=== CAmkES Accelerator ===
+### CAmkES Accelerator
+
 
 Output files are cached with keys computed from hashes of the CAmkES
 spec. This prevents re-generating most files during a single build of a
 CAmkES app.
 
-=== Data Structure Cache ===
+### Data Structure Cache
+
 
 This stores the AST and CapDL database persistently (using pickle)
 across each invocation of the CAmkES tool in a single build of a CAmkES
@@ -53,7 +58,8 @@ app. This removes the need to parse the CAmkES spec multiple times in a
 single build, and also removes the need to re-instantiate component and
 connector templates to re-build the CapDL database.
 
-== Creating Component Address Spaces ==
+## Creating Component Address Spaces
+
 
 CAmkES creates a CapDL spec representing the entire application (ie. all
 components and connections). Part of the spec is the hierarchy of paging
@@ -65,7 +71,8 @@ python capdl library is invoked (search for get\_spec)\]\] to inspect
 the ELF file produced by compiling the component and create all the
 paging structures it needs.
 
-== CapDL Filters ==
+## CapDL Filters
+
 
 The
 \[\[<https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Filters.py%7CCapDL>
@@ -74,7 +81,8 @@ These are transformations on the CapDL database that take place before
 creating the CapDL spec file and building the CapDL Loader. Here's a
 description of some of the filters:
 
-=== Collapse Shared Frames ===
+### Collapse Shared Frames
+
 
 Dataport connections in CAmkES establish a region of shared memory
 between components. When a pair of components share memory, there must
@@ -93,7 +101,8 @@ space of one component, so it points to the frames already mapped into
 the address space of the other component. The frames in the first
 component are then removed from the spec.
 
-=== Remove TCB Caps ===
+### Remove TCB Caps
+
 
 CAmkES has the option to prevent components from being given a cap to
 their own TCB. This is implemented as a CapDL Filter, which examines the
@@ -101,7 +110,8 @@ cspace (CNode hierarchy) of each component (really each TCB, as
 components may have several threads), and removes any caps to any TCBs
 that are part of that component.
 
-=== Guard Pages ===
+### Guard Pages
+
 
 This filter adds guard pages around the stacks of all threads. For each
 thread in the system, the ELF that contains the program that will run on
@@ -110,7 +120,8 @@ This filter looks up the vaddr and size of that symbol in the ELF, and
 modifies the CapDL spec to make sure there's no frame mapped in
 immediately before or after the stack.
 
-== Template Context ==
+## Template Context
+
 
 The python-looking functions called from within templates (e.g.
 alloc\_cap, register\_shared\_variable) are actually keys in a dict
@@ -128,7 +139,8 @@ the cnode/cspace that will contain the cap isn't passed to alloc\_cap in
 the template code, but rather implied by the component for which the
 template is being instantiated.
 
-=== Object Space and Cap Space ===
+### Object Space and Cap Space
+
 
 A template context is created with an "object space" and "cap space".
 These are terms from the python CapDL library. An object space tracks
@@ -140,11 +152,13 @@ template on behalf of a component, the cap is placed in that component's
 cap space. The resulting CapDL spec will include in one of that
 component's CNodes, an entry for the allocated cap.
 
-=== Template Functions ===
+### Template Functions
+
 
 Here are some of the complicated functions in the template context:
 
-==== alloc\_obj(name, type) ====
+#### alloc\_obj(name, type)
+
 
 Updates the CapDL database to contain a new object with a given name and
 type, returning a (python) reference to that object. Doesn't create any
@@ -152,7 +166,8 @@ caps.
 
 {{{ /*- set ep = alloc\_obj("my\_ep", seL4\_EndpointObject) -*/ }}}
 
-==== alloc\_cap(name, object) ====
+#### alloc\_cap(name, object)
+
 
 Updates the CapDL database, adding a named cap to a given object to the
 current component's cap space, returning the CPtr of the cap.
@@ -160,11 +175,13 @@ current component's cap space, returning the CPtr of the cap.
 {{{ // continues from above /*- set ep\_cap = alloc\_cap("my\_ep\_cap",
 ep) -*/ seL4\_Wait(/*? ep\_cap ?*/); }}}
 
-==== alloc(name, type) ====
+#### alloc(name, type)
+
 
 Effectively equivalent to alloc\_cap(name, alloc\_obj(name, type))
 
-== Simple ==
+## Simple
+
 
 Simple is an interface in the seL4 libraries for accessing information
 about your environment, typically about which capabilities are
@@ -176,7 +193,8 @@ A component instance can be built with this simple implementation by
 adding the following to the assembly: {{{ configuration {
 instance\_name.simple = true; } }}}
 
-== Template Instantiation Order ==
+## Template Instantiation Order
+
 
 CAmkES instantiates templates in the following order: makefile,
 components, connections, simple, capdl. The makefile has to come first
@@ -212,7 +230,8 @@ allocate\_unless\_already\_allocated. It checks whether there's already
 an object by the given name, returns the object if it exists, otherwise
 allocates and returns it.
 
-== Perspectives ==
+## Perspectives
+
 
 In the CAmkES internals, a Perspective is collection of names of
 '''some''' entities (components, kernel objects, caps, etc) in some

@@ -1,4 +1,5 @@
-= Toolchains on CentOS and Fedora = These instructions are for
+# Toolchains on CentOS and Fedora
+ These instructions are for
 information only — at NICTA we usually use Debian-derived build systems
 
 Follow the instructions in \[\[\#allrpm|All RPM-Based\]\] Variants then
@@ -20,7 +21,8 @@ and subsequent compilations.
 
 }}}
 
-=== Extras for CAmkES === Projects using CAmkES (the seL4 component
+### Extras for CAmkES
+ Projects using CAmkES (the seL4 component
 system) need Haskell and some extra python libraries in addition to the
 standard build tools.
 

@@ -1,4 +1,5 @@
-= Introducing seL4 5.0.0 = Announcing the release of {{{seL4 5.0.0}}}
+# Introducing seL4 5.0.0
+ Announcing the release of {{{seL4 5.0.0}}}
 with the following changes:
 
 Below are the changes to the seL4 ABI and API: Generic changes: \* Add
@@ -26,16 +27,19 @@ arm specific changes:
     -   ARM-HYP: Add support for save/restore of debug registers
     -   Add aarch64 implementation
 
-= Upgrade notes =
+# Upgrade notes
+
 
 > -   This release breaks both API and ABI and is not source compatible
 >     with the earlier versions.
 
-= Full changelog =
+# Full changelog
+
 
 Use {{{git log 4.0.0..5.0.0}}} in <https://github.com/seL4/seL4>
 
-= More details =
+# More details
+
 
 See the
 \[\[<http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf%7C5.0.0>

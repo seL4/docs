@@ -1,5 +1,6 @@
-= Case Study: Building an app with a vm, a native ethernet driver, on
-the RT kernel, with CAmkES =
+# Case Study: Building an app with a vm, a native ethernet driver, on
+the RT kernel, with CAmkES
+
 
 This is a log of what I had to do to implement a CAmkES application with
 a vm and a native ethernet driver on the RT kernel. It should serve as a
@@ -11,7 +12,8 @@ internal forks that aren't publicly accessible, readers probably won't
 be able to reproduce what I show here. That said, it should serve to
 demonstrate a realistic workflow of building an app on seL4.
 
-== Starting Out ==
+## Starting Out
+
 
 When possible, I don't start apps from scratch. The most similar project
 to what I want to make is the CAmkES x86 VM, so let's start with that:
@@ -36,7 +38,8 @@ script that automates common cases. Everyone should use it! Get it here:
 
 Ok we have a working system, so now let's make some changes!
 
-== Real-Time Kernel ==
+## Real-Time Kernel
+
 
 So far we've been using the master branch of the kernel. The most
 daunting part of making this app will be switching to the RT kernel,
@@ -120,4 +123,5 @@ the rest of the system build fine. The specific error suggests the
 kernel api is different from what the capdl loader suggests, so let's
 fix the capdl loader.
 
-== Fixing the Capdl Loader ==
+## Fixing the Capdl Loader
+

@@ -2,10 +2,12 @@
 > \[\[<http://www.arndaleboard.org/wiki/index.php/Main_Page%7CArndale>\]\]
 > dual core A15 ARM development board.
 
-= Client setup = === Hardware requirements: === 1. 5V power supply,
+# Client setup
+ === Hardware requirements: === 1. 5V power supply,
 center +ve
 
-== SD card setup == The offsets depend on which versions of bl1, bl2 and
+## SD card setup
+ The offsets depend on which versions of bl1, bl2 and
 U-Boot you get.
 
 For BL1 from the Android tree:
@@ -44,7 +46,8 @@ use: (untested as yet)
 \${kernel} uImage; fatload mmc 0:1 \${dtb} dtb; bootm \${kernel} -
 \${dtb} }}}
 
-=== U-Boot === There are at least three versions available, the one in
+### U-Boot
+ There are at least three versions available, the one in
 the Android tree (which should have Fastboot) and the one from Linaro
 (which understands the USB and network drivers).
 
@@ -59,7 +62,8 @@ Inside the Android environment do:
 arndale sudo dd iflag=dsync oflag=dsync if=u-boot.bin of=/dev/sdb
 seek=63 }}}
 
-== seL4 Image file preparation == In most cases it is okay to simply
+## seL4 Image file preparation
+ In most cases it is okay to simply
 load the elf file into memory and run bootelf. However, Fastboot may
 require that the ELF file be packed into a U-Boot application image
 file. Follow the below instructions to create this image.
@@ -73,11 +77,14 @@ The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file
 into a binary file using objcopy.
 
-== Booting == === From SD card === &lt;TODO&gt;
+## Booting
+ === From SD card === &lt;TODO&gt;
 
-=== Fastboot === &lt;TODO&gt; Currently not working...
+### Fastboot
+ &lt;TODO&gt; Currently not working...
 
-=== tftpboot === At the U-Boot prompt, type print to see the list of
+### tftpboot
+ At the U-Boot prompt, type print to see the list of
 environment variables and their values. Use the following commands to
 set any variables that are missing from the list.
 
@@ -88,7 +95,8 @@ Now run:
 
 {{{ usb start; dhcp; bootelf; bootm; }}}
 
-== References ==
+## References
+
 \[\[<http://www.arndaleboard.org/%7Chttp://www.arndaleboard.org>\]\]
 
 \[\[<https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot%7CPXE> boot

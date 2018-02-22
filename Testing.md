@@ -1,4 +1,5 @@
-= seL4Test =
+# seL4Test
+
 \[\[<https://github.com/seL4/sel4test-manifest%7Csel4test>\]\] is a test
 suite for seL4.
 
@@ -69,9 +70,11 @@ ccache if you have it installed.
 A more comprehensive overview of the build system is available at
 \[\[BuildSystemAnatomy\]\]
 
-== Running it ==
+## Running it
 
-=== IA32 === We will now build seL4test for ia32, to run on the QEMU
+
+### IA32
+ We will now build seL4test for ia32, to run on the QEMU
 simulator.
 
 The makefile provides a target to simulate ia32. Running the following
@@ -83,7 +86,8 @@ libmuslc && make \$ make simulate-ia32 }}}
 To exit qemu after the All is well in the universe message that
 indicates the test suite has passed, type {{{control-a x}}}.
 
-=== ARM - kzm11 ===
+### ARM - kzm11
+
 
 Let's build the test suite for kzm\_simulation\_debug\_xml\_defconfig:
 

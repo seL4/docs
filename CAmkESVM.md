@@ -1,9 +1,11 @@
-= CAmkES x86 VM = Get the dependencies for building CAmkES by following
+# CAmkES x86 VM
+ Get the dependencies for building CAmkES by following
 the instructions \[\[CAmkES\#Build\_dependencies|here\]\].
 
 &lt;&lt;TableOfContents&gt;&gt;
 
-== Getting the Code == {{{ repo init -u
+## Getting the Code
+ {{{ repo init -u
 <https://github.com/seL4/camkes-vm-manifest.git> repo sync }}} ==
 Starting Point == This repo contains many vm apps. We'll start from
 something basic, and add to it:
@@ -17,7 +19,8 @@ creates a compatible kernel and root filesystem with busybox and not
 much else, and runs on a ramdisk (the actual hard drive isn't mounted).
 Login with the username "root" and the password "root".
 
-== Quick walk through the source code == The top level CAmkES spec is in
+## Quick walk through the source code
+ The top level CAmkES spec is in
 apps/cma34cr\_minimal/vm.camkes:
 
 {{{ import &lt;VM/vm.camkes&gt;; import "cma34cr.camkes";
@@ -118,7 +121,8 @@ and root filesystem images, as well as the images that these tools
 produce. A fresh checkout of this project will contain some pre-build
 images (bzimage and rootfs.cpio), to speed up build times.
 
-== Adding to the guest == In the simple buildroot guest image, the
+## Adding to the guest
+ In the simple buildroot guest image, the
 initrd (rootfs.cpio) is also the filesystem you get access to after
 logging in. To make new programs available to the guest, add them to the
 rootfs.cpio archive. Similarly, to make new kernel modules available to
@@ -155,7 +159,8 @@ Here's a summary of what the build-rootfs tool does:
 > 11. Create a CPIO archive from the extracted root filesystem, creating
 >     the rootfs.cpio file.
 
-=== Adding a program === Let's add a simple program!
+### Adding a program
+ Let's add a simple program!
 
 1.  Make a new directory:
 
@@ -321,7 +326,8 @@ In the function main\_continued register \`poke\_handler\`:
 {{{ Welcome to Buildroot buildroot login: root Password: \# mknod
 /dev/poke c 244 0 \# echo &gt; /dev/poke POKE!!! }}}
 
-== Cross VM Connectors ==
+## Cross VM Connectors
+
 
 It's possible to connect processes in the guest linux to regular CAmkES
 components. This is done with the addition of 3 kernel modules to the
@@ -344,9 +350,11 @@ linux syscall wrappers, and some utility programs in
 projects/vm/linux/pkg/{dataport,consumes\_event,emits\_event} which
 initialize and interact with cross vm connections.
 
-=== Implementation Details ===
+### Implementation Details
 
-==== Dataports ====
+
+#### Dataports
+
 
 In order for linux to use a dataport, it must first be initialized. To
 initialize a dataport, a linux process makes a particular ioctl call on
@@ -362,7 +370,8 @@ results in a region of shared memory existing between a camkes component
 and the guest. Linux processes can then map this memory into their own
 address space by calling mmap on the file associated with the dataport.
 
-==== Emitting Events ====
+#### Emitting Events
+
 
 A guest process emits an event by making ioctl call on the file
 associated with the event interface. This results in the emits\_event
@@ -371,7 +380,8 @@ event interface determined by the file being ioctl'd. The VMM then emits
 the real event (which doesn't block - events are notifications), and
 then immediately resumes the guest running.
 
-==== Consuming Events ====
+#### Consuming Events
+
 
 Consuming events is complicated because we'd like for a process in the
 guest to be able to block, waiting for an event, without blocking the
@@ -388,7 +398,8 @@ blocked on the file, some state is set in the module such that the next
 time a process waits on that file, it returns immediately and clears the
 state, mimicking the behaviour of notifications.
 
-=== Using Cross VM Connections ===
+### Using Cross VM Connections
+
 
 We'll create a program that runs in the guest, and prints a string by
 sending it to a CAmkES component. The guest program will write a string
@@ -682,7 +693,8 @@ Welcome to Buildroot buildroot login: root Password: \# print\_client
 hello world \[ 12.730073\] dataport received mmap for minor 1 hello
 world }}}
 
-== Booting from hard drive ==
+## Booting from hard drive
+
 
 These instructions are for ubuntu. For CentOS instructions, see
 \[\[CAmkESVMCentOS\]\].
@@ -706,7 +718,8 @@ buildroot one used thus far. We'll use the same kernel image as before,
 as our vm requires that PAE be turned off, and it's on by default in the
 ubuntu kernel.
 
-=== Getting the initrd image ===
+### Getting the initrd image
+
 
 We need to generate a root filesystem image suitable for ubuntu. Ubuntu
 ships with a tool called mkinitramfs which generates root filesystem
@@ -865,7 +878,8 @@ ertos-CMA34CR login: }}}
 
 You should be able to log in and use the system largely as normal.
 
-== Passthrough Ethernet ==
+## Passthrough Ethernet
+
 
 The ethernet device is not accessible to the guest: {{{ \$ ip addr 1:
 lo: &lt;LOOPBACK,UP,LOWER\_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
@@ -943,7 +957,8 @@ syd15s03-in-f14.1e100.net (172.217.25.142): icmp\_seq=3 ttl=51 time=1.99
 ms 64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp\_seq=4
 ttl=51 time=2.20 ms }}}
 
-== Figuring out information about PCI devices ==
+## Figuring out information about PCI devices
+
 
 To add a new passthrough device, or access a pci device in general, we
 need to know which io ports it uses, which interrupts it's associated

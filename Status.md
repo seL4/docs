@@ -1,4 +1,5 @@
-= Status of new and future seL4 features and projects =
+# Status of new and future seL4 features and projects
+
 
 This page tracks the status of various seL4 platform features that are
 in progress or not yet started (i.e. planned).
@@ -10,7 +11,8 @@ For status of existing kernel ports, features, drivers, and other userland compo
     -   \[\[Userland Components and Drivers\]\]: for device driver and
         userland components
 
-== Kernel Features and hardware platform ports ==
+## Kernel Features and hardware platform ports
+
 
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''|| || MCS kernel || in development ||
@@ -31,7 +33,8 @@ planned ||
 \[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
 || || ||
 
-== CAmkES Features ==
+## CAmkES Features
+
 
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''|| || CAmkES AArch64 || planned ||
@@ -40,7 +43,8 @@ by'''||'''Repo'''||'''Comment'''|| || CAmkES AArch64 || planned ||
 \[\[[mailto:devel@sel4.systems|D61](mailto:devel@sel4.systems%7CD61)\]\]
 || || ||
 
-== Virtualisation ==
+## Virtualisation
+
 
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''|| || camkes-arm-vmm for AArch64 ||
@@ -53,7 +57,8 @@ NVIDIA TX1 || planned ||
 || || || be able to run multiple VMMs, one VM per VMM. AArch32? AArch64?
 ||
 
-== Userland Components and Drivers ==
+## Userland Components and Drivers
+
 
 ||'''Feature'''||'''Status'''||'''Driven
 by'''||'''Repo'''||'''Comment'''||

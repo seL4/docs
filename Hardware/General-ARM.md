@@ -1,4 +1,5 @@
-= Loading onto ARM Hardware =
+# Loading onto ARM Hardware
+
 
 The ARM platform has many ways to boot into an operating system.
 Typically there is some low-level ROM code (very specific to each
@@ -65,7 +66,8 @@ You can use
 to see what is there. Most U-Boot implementations define a suitable
 loadaddr in their environment.
 
-== TFTP booting == Setting up a DHCP and TFTP server are out of scope
+## TFTP booting
+ Setting up a DHCP and TFTP server are out of scope
 for this document. Once you have done that, however, and installed a
 TFTP-enabled U-Boot on your board if it doesn't already have one.
 

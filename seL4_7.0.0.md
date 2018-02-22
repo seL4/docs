@@ -1,7 +1,9 @@
-= seL4 Version 7.0.0 Release = Announcing the release of {{{seL4
+# seL4 Version 7.0.0 Release
+ Announcing the release of {{{seL4
 7.0.0}}} with the following changes:
 
-== Changes ==
+## Changes
+
 
 :   -   Support for building standalone ia32 kernel added in e7327fa6df3
     -   ia32: Set sensible defaults for FS and GS selectors in
@@ -21,7 +23,8 @@
     -   Bugfix: x86: Unmap pages when delete non final frame caps in
         08b9265563a
 
-= Notable changes =
+# Notable changes
+
 
 :   -   CMake based build system added: Initial experimental support has
         been added for using CMake for building the kernel and some user
@@ -30,7 +33,8 @@
         in sel4test-manifest. Documentation can be found at:
         <https://github.com/seL4/seL4_tools/tree/master/cmake-tool>
 
-= Upgrade notes =
+# Upgrade notes
+
 
 :   -   This release is not source compatible with previous releases.
     -   seL4 invocations that previously returned long now return
@@ -42,7 +46,8 @@
         only affects seL4\_VBEModeInfoBlock\_t which is used if VESA
         BIOS Extensions (VBE) information is being used.
 
-= Known issues =
+# Known issues
+
 
 :   -   One of our tests is non-deterministicly becoming unresponsive on
         the SMP release build on the Sabre IMX.6 platform, which is a
@@ -50,9 +55,11 @@
         fixing this problem, and will likely do a point release once it
         is fixed.
 
-= Full changelog = Use {{{git log 6.0.0..7.0.0}}} in
+# Full changelog
+ Use {{{git log 6.0.0..7.0.0}}} in
 <https://github.com/seL4/seL4>
 
-= More details = See the
+# More details
+ See the
 \[\[<http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf%7C7.0.0>
 manual\]\] included in the release or ask on the mailing list!

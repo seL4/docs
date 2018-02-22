@@ -1,4 +1,5 @@
-== seL4SharedDataWithCaps ==
+## seL4SharedDataWithCaps
+
 
 seL4SharedDataWithCaps is a CAmkES connector for connecting dataport
 interfaces, where one side of the interface has caps to the frames
@@ -15,7 +16,8 @@ For an example of this connector in action, see the
 \[\[<https://github.com/seL4/camkes-vm/blob/master/apps/vm/optiplex9020.camkes#L46%7CCAmkES>
 VM\]\].
 
-=== Usage ===
+### Usage
+
 
 Connect a pair of dataport interfaces, as with seL4SharedData. The to
 component instance on the side of the connection will have caps to the

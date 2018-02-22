@@ -1,7 +1,8 @@
 \#\#master-page:HelpTemplate \#\#master-date:Unknown-Date \#format wiki
 \#language en
 
-= seL4 5.2.0-MCS Tutorial =
+# seL4 5.2.0-MCS Tutorial
+
 
 This tutorial demonstrates how to use the real-time features of the MCS
 kernel API, it covers enough such that if you have already done the seL4
@@ -16,7 +17,8 @@ page, if they were covered by a previous tutorial in the series.
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Learning outcomes ==
+## Learning outcomes
+
 
 > -   Obtain scheduling control capabilities.
 > -   Create and configure scheduling contexts.
@@ -25,7 +27,8 @@ page, if they were covered by a previous tutorial in the series.
 > -   Set up clients to call the passive server using the immediate
 >     priority ceiling protocol.
 
-== Walkthrough ==
+## Walkthrough
+
 
 This tutorial is currently stored separately from the other tutorials.
 To get the code: {{{ mkdir sel4-mcs-tutorials cd sel4-mcs-tutorials repo
@@ -46,7 +49,8 @@ seL4\_CapNull\] Failed to find sched\_control. }}}
 
 Look for TASK in the apps/hello-mcs directory for each task.
 
-=== TASK 1 === Find the scheduling control capability. There is one per
+### TASK 1
+ Find the scheduling control capability. There is one per
 node in the system. This allows you to populate scheduling contexts with
 parameters.
 
@@ -55,7 +59,8 @@ The output will now look like this: {{{ === Round robin === Ping 0 Ping
 Periodic === Tick Tick Tick Tick Tick Tick Tick Tick Tick Tick ==
 Sporadic == }}}
 
-=== TASK 2 === Create a scheduling context. The simplest way is to use
+### TASK 2
+ Create a scheduling context. The simplest way is to use
 the VKA interface. TODO add size.
 
 The output will not change, as we have not given the scheduling context
@@ -66,7 +71,8 @@ Scheduling contexts are variable sized in order to allow custom maximum
 sizes for the refill list. This is discussed in more detail in TASK 7.
 The minimum size for a scheduling context is seL4\_MinSchedContextBits.
 
-=== TASK 3 ===
+### TASK 3
+
 
 Configure the scheduling context as a round robin thread using the
 sched\_control capability obtained in TASK 2 and the scheduling context
@@ -82,7 +88,8 @@ Pong 3 Ping 4 Pong 4 === Just Ping === Ping Pong 5 Ping Pong 6 Ping Pong
 13 Pong 14 Pong 15 mcs <yielding_thread@main.c>:87 \[Cond failed: i &gt;
 NUM\_YIELDS \* 3\] Too many yeilds! }}}
 
-=== TASK 4 ===
+### TASK 4
+
 
 Note that in the previous output, while the Round robin section worked,
 the ''Just Ping'' section did not. The yielding\_thread is set to call
@@ -98,12 +105,14 @@ Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Tick Tick Tick Tick Tick Tick Tick Tick Tick Tick ==
 Sporadic == }}}
 
-=== TASK 5 ===
+### TASK 5
+
 
 Reconfigure the scheduling context to be periodic. The output should not
 change as the scheduling context is still unbound.
 
-=== TASK 6 ===
+### TASK 6
+
 
 Rebind the scheduling context to the thread. Altering scheduling context
 state has no impact on the state of the TCB, so it will start where it
@@ -127,7 +136,8 @@ thread 0xe0295500 "helper\_thread" at address 0x8049746 With stack:
 0x10075f58: 0x0 0x10075f5c: 0x0 0x10075f60: 0x0 0x10075f64: 0x0
 0x10075f68: 0x0 }}}
 
-=== TASK 7 ===
+### TASK 7
+
 
 Now we reconfigure the scheduling context to change the extra\_refills
 parameter. Extra\_refills controls how many times the scheduling context
@@ -174,7 +184,8 @@ thread 0xe0295500 "helper\_thread" at address 0x80497a6 With stack:
 0x10075f58: 0x0 0x10075f5c: 0x0 0x10075f60: 0x0 0x10075f64: 0x0
 0x10075f68: 0x0 }}}
 
-=== TASK 8 ===
+### TASK 8
+
 
 You'll notice an exception in the output of the last run. This is
 because we restart our helper thread as an echo server, and pass it an
@@ -218,7 +229,8 @@ Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
 4 49 5 56 6 56 7 56 8 63 Waiting for server echo: echo: 2nd message
 processed echo: mcs tutorial finished! }}}
 
-== Finished! ==
+## Finished!
+
 
 You're done. Please enjoy experimenting with the pre-release MCS version
 of seL4. Recall that this version is currently undergoing verification,

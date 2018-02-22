@@ -1,15 +1,19 @@
-= Benchmarking seL4 = &lt;&lt;TableOfContents(2)&gt;&gt;
+# Benchmarking seL4
+ &lt;&lt;TableOfContents(2)&gt;&gt;
 
-== Benchmarking project == There is a set of microbenchmarks for seL4
+## Benchmarking project
+ There is a set of microbenchmarks for seL4
 available, see the
 \[\[<https://github.com/seL4/sel4bench-manifest%7Csel4bench-manifest>\]\].
 
-= Benchmarking Tools =
+# Benchmarking Tools
+
 
 We have developed a set of tools which can be used to analyse kernel and
 workload performance.
 
-== CPU Utilisation == Threads (including the idle thread) and the
+## CPU Utilisation
+ Threads (including the idle thread) and the
 overall system time (in cycles) can be tracked by enabling the "track
 CPU utilisation feature". This feature can be enabled from the
 menuconfig list (seL4 Kernel &gt; Enable benchmarks &gt; Track threads
@@ -22,7 +26,8 @@ buffer is not used. During each context switch, the kernel adds how long
 this heir thread has run before being switched, and resets the start
 time of the next thread.
 
-=== How to use ===
+### How to use
+
 
 After enabling this feature, some few system calls can be used to start,
 stop, and retrieve data.
@@ -69,7 +74,8 @@ utilisation = %llun", ipcbuffer\[BENCHMARK\_IDLE\_UTILISATION\]);
 printf("Overall utilisation = %llun",
 ipcbuffer\[BENCHMARK\_TOTAL\_UTILISATION\]); }}}
 
-== In kernel log-buffer ==
+## In kernel log-buffer
+
 
 An in-kernel log buffer can be provided by the user when
 CONFIG\_ENABLE\_BENCHARMKS is set with the system call
@@ -82,10 +88,12 @@ is complete, data can be read out at user level.
 We provide several benchmarking tools that use the log buffer (trace
 points and kernel entry tracking).
 
-== Tracepoints == We allow the user to specify tracepoints in the kernel
+## Tracepoints
+ We allow the user to specify tracepoints in the kernel
 to track the time between points.
 
-=== How to use === Set "Maximum number of tracepoints" in Kconfig (seL4
+### How to use
+ Set "Maximum number of tracepoints" in Kconfig (seL4
 &gt; seL4 System Parameters) to a non-zero value.
 
 Wrap the regions you wish to time with TRACE\_POINT\_START(i) and
@@ -104,7 +112,8 @@ provided in libsel4bench (<https://github.com/seL4/libsel4bench>).
 An example of this feature in use can be found in the irq path benchmark
 in the sel4bench app(<https://github.com/seL4/libsel4bench>).
 
-=== Tracepoint Overhead === ==== Measuring Overhead ==== Using
+### Tracepoint Overhead
+ ==== Measuring Overhead ==== Using
 tracepoints adds a small amount of overhead to the kernel. To measure
 this overhead, use a pair of nested tracepoints:
 
@@ -120,7 +129,8 @@ Thus, to compute the total overhead of starting and stopping a
 tracepoint, subtract the values measured by the inner tracepoints from
 those measured by the outer tracepoints.
 
-==== Results ==== All results are in cycles. Results were obtained using
+#### Results
+ All results are in cycles. Results were obtained using
 the method described above. The total overhead is the number of cycles
 added to execution per tracepoint start/stop pair (inner pair result
 subtracted from outer pair result). The effective overhead is the number
@@ -261,7 +271,8 @@ style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
 style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
 221, 221);padding:7px 10px;vertical-align:top;"&gt;1% ||
 
-=== Advanced Use === ==== Conditional Logging ==== A log is stored when
+### Advanced Use
+ ==== Conditional Logging ==== A log is stored when
 TRACE\_POINT\_STOP(i) is called, only if a corresponding
 TRACE\_POINT\_START(i) was called since the last call to
 TRACE\_POINT\_STOP(i) or system boot. This allows for counting cycles of
@@ -296,7 +307,8 @@ TRACE\_POINT\_START(1); ... TRACE\_POINT\_STOP(1); ...
 TRACE\_POINT\_STOP(0); }}} When interleaving or nesting tracepoints, be
 sure to account for the overhead that will be introduced.
 
-== Kernel entry tracking == Kernel entries can be tracked, registering
+## Kernel entry tracking
+ Kernel entries can be tracked, registering
 info about interrupts, syscall, timestamp, invocations and capability
 types. The number of kernel entries is restricted by the log buffer
 size. The kernel provides a reserved area within its address space to
@@ -335,7 +347,8 @@ Finally, the log buffer can be analyzed to extract desired info. For
 reference, there are utility functions to extract such information in
 \[\[<https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/benchmark_track.h%7Csel4utils/benchmark_track.h>\]\].
 
-=== Hints === If you want only entry or exit times instead of function
+### Hints
+ If you want only entry or exit times instead of function
 call durations, modify line 56 of kernel/include/benchmark.h. This might
 be useful if you wish to time hardware events. For example, should you
 wish to time how long it takes for hardware to generate a fault to the

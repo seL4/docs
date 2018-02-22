@@ -1,21 +1,25 @@
-= seL4 MCS pre-release (5.2.0-mcs) =
+# seL4 MCS pre-release (5.2.0-mcs)
+
 
 This is a pre-release of the seL4 mixed-criticality systems (RT)
 extensions. This branch is not verified and is under active
 verification. This is a subset of the previously released RT extensions,
 which still exist and can be provided on request.
 
-== Highlights ==
+## Highlights
+
 
 The goals of the MCS kernel is to provide strong temporal isolation and
 a basis for reasoning about time.
 
-=== IPC & Signal ordering ===
+### IPC & Signal ordering
+
 
 Signal and IPC delivery is now priority ordered and FIFO within a
 priority, rather than plain FIFO
 
-=== Scheduling contexts ===
+### Scheduling contexts
+
 
 This branch adds scheduling contexts to seL4, which represent CPU time
 (as budget/period). Scheduling contexts are separate from threads
@@ -27,13 +31,15 @@ temporally isolate threads and have variable timeslices for round robin
 threads. If budget == period, the scheduling context acts as timeslice
 and the thread it is bound to is treated as round-robin.
 
-=== Periodic scheduling ===
+### Periodic scheduling
+
 
 Periodic threads can be created by binding them to scheduling contexts
 with a budget &lt; period. seL4\_Yield for these threads will sacrifice
 the remaining budget until the next period.
 
-=== Isolation through sporadic servers ===
+### Isolation through sporadic servers
+
 
 Temporal isolation is provided with scheduling context by an
 implementation of
@@ -50,7 +56,8 @@ Scheduling contexts are of a variable size, allowing for a variable
 maximum number of sporadic replenishment (termed refills in the API for
 brevity) pre scheduling context object.
 
-=== Passive Servers ===
+### Passive Servers
+
 
 Passive servers run on their clients scheduling context, as the do not
 have one of their own. This allows for basic temporal isolation of
@@ -64,7 +71,8 @@ while they are waiting on an endpoint. Then, any calling threads will
 automatically donate their scheduling context to this thread when they
 send it an IPC.
 
-=== Reply objects ===
+### Reply objects
+
 
 Reply objects are a new object in the API which serve two purposes:
 
@@ -76,12 +84,14 @@ Reply objects are a new object in the API which serve two purposes:
 > -   They track scheduling context donation over IPC to
 >     passive servers.
 
-== MCS ABI and libsel4 ==
+## MCS ABI and libsel4
+
 
 This section documents kernel ABI and libsel4 changes as compared with
 seL4 5.2.0.
 
-=== Changes ===
+### Changes
+
 
 > -   seL4\_TCB\_Configure arguments changed (scheduling context
 >     cap added).
@@ -101,9 +111,11 @@ seL4 5.2.0.
 > -   seL4\_MsgMaxLength is now 115, as a result.
 > -   seL4\_NotificationBits - increased.
 
-=== API Additions ===
+### API Additions
 
-==== Constants ====
+
+#### Constants
+
 
 > -   seL4\_SchedContextObject - new object for that allows threads
 >     access to CPU time
@@ -120,7 +132,8 @@ seL4 5.2.0.
 > -   seL4\_CapInitThreadSC - capability to the initial threads
 >     scheduling context
 
-==== System calls ====
+#### System calls
+
 
 > -   seL4\_NBSendRecv - new system call which allows a single kernel
 >     invocation to perform a non-blocking send on one capability, and
@@ -150,7 +163,8 @@ seL4 5.2.0.
 > -   seL4\_WaitWithMRs - a variant of seL4\_Wait that does not touch
 >     the IPC buffer.
 
-==== libsel4 ====
+#### libsel4
+
 
 > -   seL4\_SetReserved, \`seL4\_GetReserved\`: set a reserved word in
 >     the IPC buffer that may be used by the kernel ABI for arguments
@@ -160,18 +174,21 @@ seL4 5.2.0.
 >     context size.
 > -   \`seL4\_Time\`: type for specifying time arguments.
 
-==== Structures ====
+#### Structures
+
 
 > -   A sched control capability is provided to the root task per node
 >     via the seL4\_BootInfo structure.
 
-=== Deletions ===
+### Deletions
+
 
 > -   seL4\_CNode\_SaveCaller (deprecated by reply objects)
 > -   seL4\_Reply (replaced by invoking a reply object)
 > -   seL4\_ReplyWithMRs(as above)
 
-== Library & test compatability ==
+## Library & test compatability
+
 
 > -   CAmkES and CapDL both support seL4 5.2.0-mcs on their
 >     master branches.
@@ -187,7 +204,8 @@ sync }}}
 > -   A \[\[<https://wiki.sel4.systems/seL4%20RT%20tutorial%7Cnew>
 >     tutorial\]\] covers the difference in the APIs
 
-== Hardware support ==
+## Hardware support
+
 
 The RT kernel currently supports:
 
@@ -200,7 +218,8 @@ The RT kernel currently supports:
 Other hardware platforms will be added as required (the ports require
 updated kernel and user-level timer drivers)
 
-== More details ==
+## More details
+
 
 See the 5.2.0-mcs manual included in the release.
 

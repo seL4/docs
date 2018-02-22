@@ -1,4 +1,5 @@
-= IRC Channel =
+# IRC Channel
+
 
 seL4 developers and other community members can be reached on the
 \[\[<https://en.wikipedia.org/wiki/Internet_Relay_Chat%7CIRC>\]\]

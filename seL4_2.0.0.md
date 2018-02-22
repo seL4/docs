@@ -1,4 +1,5 @@
-= Introducing seL4 2.0.0 =
+# Introducing seL4 2.0.0
+
 
 Version 2.0.0 introduces more consistent terminology to manual and code,
 as well as API and performance improvements, including to seL4's
@@ -19,9 +20,11 @@ We have also switched our release process to semantic versioning, so
 it's easy to tell which seL4 releases are binary-compatible,
 source-compatible, or will require updates to user-level code.
 
-= Terminology Changes =
+# Terminology Changes
 
-== IPC vs Notifications ==
+
+## IPC vs Notifications
+
 
 The old terminology of "synchronous IPC" vs "asynchronous IPC" was
 confusing and misleading. We changed this to reflect the fact that IPC
@@ -35,9 +38,11 @@ a form of message passing, but arrays of binary semaphores, and the new
 terminology describes this better. The operations on them are
 consequently called "signal" and "wait"
 
-= New Features =
+# New Features
 
-== Notification binding ==
+
+## Notification binding
+
 
 A notification can be bound to a thread and is referred to as the
 thread's bound notification object. This is a 1:1 relationship. Whenever
@@ -50,7 +55,8 @@ notification object itself.
 
 For more details, see the 2.0.0 manual
 
-= Implementation improvements =
+# Implementation improvements
+
 
 > -   introduces the bitfield scheduler: faster scheduler (Was linear in
 >     the
@@ -64,7 +70,8 @@ tracepoints at once added {{{CONFIG\_RELEASE\_PRINTF}} in addition to
 {{{CONFIG\_DEBUG}}} and {{{CONFIG\_RELEASE}}}, which enables printf in a
 release build
 
-= API Changes =
+# API Changes
+
 
 > -   {{{seL4\_Recv}}} replaces {{{seL4\_Wait}}} on endpoints
 > -   {{{seL4\_Wait}}} is now only used on notification objects
@@ -75,7 +82,8 @@ release build
 
 bound notification object.
 
-== API Additions ==
+## API Additions
+
 
 > -   {{{seL4\_NotificationObject}}} replaces deprecated
 >     {{{seL4\_AsyncEndpointObject}}}
@@ -94,13 +102,15 @@ signals from a notification objects, returns zero if there are none \*
 {{{seL4\_TCB\_BindNotification}}} bind a notification to a tcb \*
 {{{seL4\_TCB\_UnbindNotification}}} unbind a notification from a tcb
 
-== Deprecations ==
+## Deprecations
+
 
 > -   {{{seL4\_AsyncEndpointObject}}}
 > -   {{{seL4\_Notify}}}
 > -   {{{seL4\_IRQHandler\_SetEndpoint}}}
 
-= Note on Syscall names =
+# Note on Syscall names
+
 
 Logically there are only two operations on capabilities, send and
 receive, which can take opcodes specifying sup-operations. For example,
@@ -110,13 +120,15 @@ separate kernel entry points for their operations. You must not rely on
 either, as this can change at any time. Instead, always use the
 object-specific wrapper functions.
 
-= User-level repositories =
+# User-level repositories
+
 
 To simply repository management we have merged many of our user level
 library repositories. To see the changes please compare 1.0.4.xml and
 2.0.x.xml in <https://github.com/seL4/seL4test-manifest>
 
-= Upgrade notes =
+# Upgrade notes
+
 
 Calls to {{{seL4\_Wait}}} no longer return a {{{seL4\_MessageInfo\_t}}}
 as {{{seL4\_Wait}}} is intended to be used on notification objects.
@@ -131,11 +143,13 @@ repositories before today. All library repositories have a branch called
 
 Note that to use the new merged repositories, you must upgrade to 2.0.0.
 
-= Full changelog =
+# Full changelog
+
 
 Use git log 1.0.4..2.0.0 in <https://github.com/seL4/seL4>
 
-= More details =
+# More details
+
 
 See the \[\[2.0.0
 manual|<http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf>\]\]

@@ -4,7 +4,8 @@ based on the Nvidia Tegra K1. Details and ordering are at
 
 We have ported seL4 to this board.
 
-== Hardware modifications and Daughterboards ==
+## Hardware modifications and Daughterboards
+
 
 \[\[/Tk1SomMods|Adding some missing connectors\]\] makes this board a
 bit easier to use.
@@ -51,7 +52,8 @@ device is the UBUNTU root partition.
 The \[\[Hardware/General-ARM\#sd|instructions for booting from SD\]\]
 are also valid for booting from MMC.
 
-== Serial Connection == The serial port is at 1V8 levels on J8, as
+## Serial Connection
+ The serial port is at 1V8 levels on J8, as
 follows: (pin one is farthest from the ground hole) ||'''Pin'''
 ||'''Function''' ||'''Direction''' || ||1 ||Rx ||In || ||2 ||Tx ||Out ||
 ||3 ||CTS ||In || ||4 ||RTS ||Out ||
@@ -72,7 +74,8 @@ silk-screen.
 Speed 115200 8bits no parity; the default Linux image has login ubuntu,
 password ubuntu.
 
-== Peripherals == We have an open-hardware CAN and I2C board available,
+## Peripherals
+ We have an open-hardware CAN and I2C board available,
 see \[\[/CAN-Board\]\]
 
 &lt;&lt;Anchor(dfu)&gt;&gt; == DFU: Loading kernels over USB == You can
@@ -121,7 +124,8 @@ If you ''always'' want to do this you can do
 
 > . setenv bootcmd "run bootcmd\_dfu"
 
-= Booting from a USB storage device =
+# Booting from a USB storage device
+
 
 You can boot from a USB storage device, by plugging it into the blue
 port (on the power supply board). Patches are pending upstream to enable
@@ -132,7 +136,8 @@ directly.
 {{{ usb start fatload usb 0:1 \${loadaddr} sel4test-image-arm bootelf
 \${loadaddr} }}}
 
-= Using L4T from CEI =
+# Using L4T from CEI
+
 
 CEI provides modifications to L4T and instructions for getting it
 running on the TK1-SOM. Unfortunately these seem to only be available on

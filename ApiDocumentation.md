@@ -1,4 +1,5 @@
-= Kernel =
+# Kernel
+
 
 > -   \[\[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml>||Technical
 >     overview paper\]\]
@@ -14,7 +15,8 @@
 > -   \[\[Manual|<http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf>\]\]
 >     for the current release.
 
-== Building the manual for a specific version ==
+## Building the manual for a specific version
+
 
 To get the latest version of the manual, checkout the seL4 source code
 then:
@@ -24,11 +26,13 @@ then:
 You need LaTeX installed, and if all suceeds a fresh manual will be
 produced in manual.pdf.
 
-= Camkes =
+# Camkes
+
 
 \[\[Camkes\]\]
 
-== Proofs ==
+## Proofs
+
 
 > -   \[\[<http://sel4.systems/Info/Docs/seL4-spec.pdf%7CFormal>
 >     specification\]

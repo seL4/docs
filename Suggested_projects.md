@@ -1,4 +1,5 @@
-= Suggested Projects =
+# Suggested Projects
+
 
 After trying the existing projects (especially \[\[Getting started|seL4
 test suite\]\]) a good way to learn the intricacies of programming on
@@ -6,7 +7,8 @@ top of seL4 is to do the exercise in the
 \[\[<http://www.cse.unsw.edu.au/~cs9242/current/%7CUNSW> Advanced
 Operating Systems course\]\].
 
-= Possible Projects =
+# Possible Projects
+
 
 Below is a set of suggested projects of varying degree of
 sophistication. If you're interested in providing generally-useful
@@ -20,7 +22,8 @@ larger development projects, and may already have something that can
 serve as a starting point. We will in the future try to be more
 pro-active in seeding projects with incomplete internal work.
 
-== Ports to other platforms ==
+## Ports to other platforms
+
 
 seL4 currently runs on only a small set of platforms. Porting seL4
 itself is usually pretty easy; porting the platform support library and
@@ -34,7 +37,8 @@ Some interesting platforms that could support seL4 include:
 > -   Any of the Arm V8 64-bit processors that are beginning to
 >     become available.
 
-== Qubes ==
+## Qubes
+
 
 \[\[<https://qubes-os.org/%7CQubes>\]\] is an open source operating
 system designed to provide strong security for desktop computing using
@@ -42,7 +46,8 @@ virtualisation to provide isolation. Qubes is based on Xen. seL4 is a
 much better fit for Qubes. The project is to port Qubes to seL4 (or
 develop an alternative Qubes-like system for seL4).
 
-== Bug fixes and enhancements ==
+## Bug fixes and enhancements
+
 
 The build system needs work. A typical project comprises the kernel,
 libraries and apps; dependencies between these are not properly tracked,
@@ -53,18 +58,21 @@ There are other problems with the system as a whole that need
 addressing. In particular the drivers in libsel4platsupport need
 extension and improvement.
 
-== Useful Components ==
+## Useful Components
+
 
 Drivers, file systems, useful libraries... Especially a POSIX
 environment would be useful.
 
-== Port Doom ==
+## Port Doom
+
 
 Port the PC game
 \[\[<https://en.wikipedia.org/wiki/Doom_(1993_video_game)%7CDoom>\]\] to
 run on seL4.
 
-== Minix 3 on seL4 ==
+## Minix 3 on seL4
+
 
 Minix is the original multi-server OS by Tannenbaum.
 \[\[<http://www.minix3.org/%7CMinix> 3\]\] is the latest shiny version
@@ -73,7 +81,8 @@ is supported.
 
 The project is to port Minix 3 to run on seL4.
 
-== Language Support ==
+## Language Support
+
 
 Userspace currently needs to be written in C (or assembler). An
 interesting challenge is to provide run-time support for higher level
@@ -89,7 +98,8 @@ internally:
 >     be made available if someone wants to revive it
 > -   limited support of Rust applications
 
-== Stuff we're working on ==
+## Stuff we're working on
+
 
 Kernel development will continue to happen primarily at NICTA for the
 foreseeable future, as this not only requires a good understanding of

@@ -1,9 +1,11 @@
-= Terminology = Throughout this document some domain specific
+# Terminology
+ Throughout this document some domain specific
 terminology is used that may have connotations outside CAmkES/component
 systems. To avoid confusion the meanings of these terms are made
 explicit below.
 
-=== Abstract Syntax Tree (AST) ===
+### Abstract Syntax Tree (AST)
+
 
 :   . An internal representation of the results of parsing a
     generalised grammar. More thorough definitions of ASTs are provided
@@ -11,7 +13,8 @@ explicit below.
     but this is noted here because the abbreviation 'AST' is used
     heavily in this documentation.
 
-=== Architecture Description Language (ADL) ===
+### Architecture Description Language (ADL)
+
 
 :   . The CAmkES syntax for describing a component system. Most
     component platforms have their own architecture description language
@@ -19,7 +22,8 @@ explicit below.
     but the term 'ADL' will be used in this documentation to exclusively
     refer to the CAmkES input specification language.
 
-=== Assembly ===
+### Assembly
+
 
 :   . A top-level element that encapsulates a component
     system description. An assembly can be thought of as a complete
@@ -29,7 +33,8 @@ explicit below.
     sections are the concatenation of the composition and configuration
     sections of each assembly.
 
-=== Attribute ===
+### Attribute
+
 
 :   . Components and connectors can have extra data of an arbitrary type
     associated with them. These are referred to as attributes. The
@@ -40,7 +45,8 @@ explicit below.
     generally used to specialise or differentiate a component
     at runtime.
 
-=== Component ===
+### Component
+
 
 :   . A ''type'' of functional entity. It is important to stress
     this distinction. 'Component' is used colloquially to refer to both
@@ -48,25 +54,29 @@ explicit below.
     to the type. To make this more concrete, the statement component foo
     f describes a component ''instance'' f, whose ''type'' is foo.
 
-=== Composition ===
+### Composition
+
 
 :   . A container for the component and connector instantiations that
     form a system. This is essentially a syntactic element for
     delimiting sections in a specification. It is contained by an
     assembly block, along with an optional configuration.
 
-=== Compound Component ===
+### Compound Component
+
 
 :   . A component with a composition section, and optionally a
     configuration section.
 
-=== Configuration ===
+### Configuration
+
 
 :   . A container for describing settings. This is a syntactic element
     to hold the assignment of attributes for a given system. It is
     expressed inside an assembly block.
 
-=== Connection ===
+### Connection
+
 
 :   . An instantiation of a connector. Connections connect
     two ''instances''. Because the instantiation of a connector does not
@@ -74,38 +84,44 @@ explicit below.
     conflate the two. However, the sources make important distinctions
     between connectors and connections.
 
-=== Connector ===
+### Connector
+
 
 :   . A ''type'' of link between instances. The distinction between
     'connector' and 'connection' is the same as that between 'component'
     and 'instance,' i.e. a connection is an instantiation of a
     particular connector.
 
-=== Consumes ===
+### Consumes
+
 
 :   . Event interfaces that are accepted by a component. If a component
     consumes a particular event it means that it is expecting to receive
     and handle that event.
 
-=== Dataport ===
+### Dataport
+
 
 :   . Port interfaces that are used by a component. A component's
     dataports are expected to be available to it at runtime as shared
     memory regions.
 
-=== Direction ===
+### Direction
+
 
 :   . The flow of a parameter of a procedure method. The only possible
     directions are 'in' (caller to callee), 'out' (callee to caller),
     'inout' (bidirectional) and 'refin' (identical to 'in' except for
     the C backend where this is optimised to pass-by-reference).
 
-=== Emits ===
+### Emits
+
 
 :   . Event interfaces that are expressed by a component. If a component
     emits a given event it means that it produces events of this type.
 
-=== Event ===
+### Event
+
 
 :   . An asynchronous signal interface of a component. Events are
     defined completely by their identifier, a numerical value. It may be
@@ -113,7 +129,8 @@ explicit below.
     interrupt number or a signal type, although they do not necessarily
     represent hardware messages.
 
-=== Export Connector ===
+### Export Connector
+
 
 :   . A special type of connector which can only appear inside a
     compound component's composition section. It can be used to connect
@@ -124,12 +141,14 @@ explicit below.
     Interfaces of internal instances connected to virtual interfaces are
     known as "Exported Interfaces".
 
-=== Exported Interface ===
+### Exported Interface
+
 
 :   . An interface of an internal instance connected to a virtual
     interface with an export connector.
 
-=== Instance ===
+### Instance
+
 
 :   . An instantiation of a component type. Of course 'instance' can be
     used to refer to an instantiation of any type, but when you see the
@@ -137,7 +156,8 @@ explicit below.
     instantiation of a component. To give a concrete example, in the
     statementcomponent foo f f is an instance.
 
-=== Interface ===
+### Interface
+
 
 :   . An abstract exposed interaction point of a component. There could
     be a distinction made here between type and instance of one of these
@@ -145,7 +165,8 @@ explicit below.
     ambiguity rarely arises. The subcategories of interface are
     ''procedure'', ''event''and ''port''.
 
-=== Interface Definition Language (IDL) ===
+### Interface Definition Language (IDL)
+
 
 :   . A subset of CAmkES ADL for describing interfaces of components.
     Previously this was considered distinct from ADL, but now the term
@@ -153,69 +174,81 @@ explicit below.
     is heavily inspired by
     \[\[<http://www.omg.org/gettingstarted/omg_idl.htm%7COMG> IDL\]\].
 
-=== Internal Instance ===
+### Internal Instance
+
 
 :   . A component instance declared inside a compound component's
     composition section.
 
-=== Internal Connection ===
+### Internal Connection
+
 
 :   . A connection declared inside a compound component which connects
     two internal instance interfaces. That is, any connection declared
     inside a compound component which does not use an export connector.
 
-=== Method ===
+### Method
+
 
 :   . An item of a procedure. When targeting a conventional programming
     language, methods usually map directly to generated functions.
 
-=== Parameter ===
+### Parameter
+
 
 :   . A piece of data referenced by a procedure method. This can be
     thought of as an argument to a function.
 
-=== Port ===
+### Port
+
 
 :   . The interface type that represents shared memory semantics.
 
-=== Procedure ===
+### Procedure
+
 
 :   . An interface with function call semantics. Procedures consist of a
     series of methods that can be invoked independently.
 
-=== Provides ===
+### Provides
+
 
 :   . Procedure interfaces implemented by a component. When targeting a
     conventional programming language this typically means that the
     component contains functions that are implementations of each method
     in the procedures provided.
 
-=== Setting ===
+### Setting
+
 
 :   . An assignment of an attribute to a specific value. A setting does
     not specify the type of the attribute, because this has already been
     described by the attribute as specified in the
     component/connector description.
 
-=== Type ===
+### Type
+
 
 :   . A procedure method's return type or parameter type. This
     information does not include the direction of a parameter. An
     example type is something like 'string.'
 
-=== Uses ===
+### Uses
+
 
 :   . Procedure interfaces that are invoked by a component. When
     targeting a conventional programming language this typically means
     that the component contains calls to functions that are expected to
     implement each method in the procedures used.
 
-=== Virtual Interface ===
+### Virtual Interface
+
 
 :   . An interface of a compound component connected to an internal
     instance's interface using an export connector.
 
-== A concrete example: == {{{ procedure thing { int func(in int x); }
+## A concrete example:
+ {{{ procedure thing { int func(in int x); }
 
 event sig = 42;
 

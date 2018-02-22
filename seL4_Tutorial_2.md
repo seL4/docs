@@ -14,7 +14,8 @@ Uncomment them one by one as needed when going through the tasks.
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Learning outcomes: ==
+## Learning outcomes:
+
 
 :   -   Understand the kernel's startup procedure.
     -   Understand that the kernel centers around certain objects and
@@ -29,7 +30,8 @@ Uncomment them one by one as needed when going through the tasks.
         idea that a thread has a TCB, VSpace and CSpace, and that you
         must fill these out.
 
-== Walkthrough ==
+## Walkthrough
+
 
 {{{ \# select the config for the first tutorial make
 ia32\_hello-2\_defconfig \# build it make -j8 \# run it in qemu make
@@ -37,7 +39,8 @@ simulate }}}
 
 Look for TASK in the apps/hello-2 directory for each task.
 
-=== TASK 1 ===
+### TASK 1
+
 
 After bootstrap, the kernel hands over control to to an init thread.
 This thread receives a structure from the kernel that describes all the
@@ -55,7 +58,8 @@ you set up memory management.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
 
-=== TASK 2 ===
+### TASK 2
+
 
 The "Simple" library is one of those you were introduced to in the
 slides: you need to initialize it with some default state before using
@@ -63,14 +67,16 @@ it.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h>
 
-=== TASK 3 ===
+### TASK 3
+
 
 Just a simple debugging print-out function. Allows you to examine the
 layout of the BootInfo.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
 
-=== TASK 4 ===
+### TASK 4
+
 
 In seL4, memory management is delegated in large part to userspace, and
 each process manages its own page faults with a custom pager. Without
@@ -84,7 +90,8 @@ step.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/bootstrap.h>
 
-=== TASK 5 ===
+### TASK 5
+
 
 libsel4vka is an seL4 type-aware object allocator that will allocate new
 kernel objects for you. The term "allocate new kernel objects" in seL4
@@ -96,7 +103,8 @@ and the VKA library simplifies this for you, among other things.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/vka.h>
 
-=== TASK 6 ===
+### TASK 6
+
 
 This is where the differences between seL4 and contemporary kernels
 begin to start playing out. Every kernel-object that you "retype" will
@@ -118,7 +126,8 @@ a CSpace.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
 
-=== TASK 7 ===
+### TASK 7
+
 
 Just as in the previous step, you were made to grab a reference to the
 root of your thread's CSpace, now you're being made to grab a reference
@@ -126,7 +135,8 @@ to the root of your thread's VSpace.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
 
-=== TASK 8 ===
+### TASK 8
+
 
 In order to manage the threads that are created in seL4, the seL4 kernel
 keeps track of TCB (Thread Control Block) objects. Each of these
@@ -138,7 +148,8 @@ still manually fill it out.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h>
 
-=== TASK 9 ===
+### TASK 9
+
 
 You must create a new VSpace for your new thread if you need it to
 execute in its own isolated address space, and tell the kernel which
@@ -153,11 +164,13 @@ main thread's CSpace and VSpace.
 
 <https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml>
 
-=== TASK 10 ===
+### TASK 10
+
 
 This is a convenience function -- sets a name string for the TCB object.
 
-=== TASK 11 ===
+### TASK 11
+
 
 Pay attention to the line that precedes this particular task -- the line
 that zeroes out a new "seL4\_UserContext" object. As we previously
@@ -169,7 +182,8 @@ your new thread through its registers.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h>
 
-=== TASK 12 ===
+### TASK 12
+
 
 This TASK is just some pointer arithmetic. The cautionary note that the
 stack grows down is meant to make you think about the arithmetic.
@@ -178,7 +192,8 @@ some thought.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h>
 
-=== TASK 13 ===
+### TASK 13
+
 
 As explained above, we've been filling out our new thread's TCB for the
 last few operations, so now we're writing the values we've chosen, to
@@ -186,7 +201,8 @@ the TCB object in the kernel.
 
 <https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml>
 
-=== TASK 14 ===
+### TASK 14
+
 
 Finally, we tell the kernel that our new thread is runnable. From here,
 the kernel itself will choose when to run the thread based on the
@@ -195,12 +211,14 @@ policy.
 
 <https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml>
 
-=== TASK 15 ===
+### TASK 15
+
 
 For the sake of confirmation that our new thread was executed by the
 kernel successfully, we cause it to print something to the screen.
 
-== Globals links ==
+## Globals links
+
 
 > -   \`sel4\_BootInfo\`:
 >     <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>

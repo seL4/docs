@@ -16,7 +16,8 @@ they were covered by a previous tutorial in the series.
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
-== Learning outcomes ==
+## Learning outcomes
+
 
 :   -   Once again, repeat the spawning of a thread: however, this time
         the two threads will only share the same vspace, but have
@@ -30,7 +31,8 @@ they were covered by a previous tutorial in the series.
     -   Understand how minting a capability to a thread in another
         CSpace works.
 
-== Walkthrough ==
+## Walkthrough
+
 
 {{{ \# select the config for the first tutorial make
 ia32\_hello-4\_defconfig \# build it make -j8 \# run it in qemu make
@@ -38,7 +40,8 @@ simulate }}} Look for TASK in the apps/hello-4 and apps/hello-4-app
 directory for each task. The first set of tasks are in
 apps/hello-4/src/main.c and the rest are in apps/hello-4-app/src/main.c
 
-=== TASK 1 ===
+### TASK 1
+
 
 Aside from receiving information about IRQs in the IRQControl object
 capability, and information about available IO-Ports, and ASID
@@ -58,7 +61,8 @@ function may seem tedious, it's doing some important things.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h>
 
-=== TASK 2 ===
+### TASK 2
+
 
 sel4utils\_configure\_process\_custom took a large amount of the work
 out of creating a new "processs". We skipped a number of steps. Take a
@@ -70,11 +74,13 @@ thread.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h>
 
-=== TASK 3 ===
+### TASK 3
+
 
 This should be a fairly easy step to complete!
 
-=== TASK 4 ===
+### TASK 4
+
 
 Now, in this particular case, we are making the new thread be the
 sender. Recall that the sender must have a capability to the endpoint
@@ -105,7 +111,8 @@ wouldn't know who was whom.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h>
 
-=== TASK 5 ===
+### TASK 5
+
 
 As discussed above, we now just mint a badged copy of a capability to
 the endpoint we're listening on, into the new thread's CSpace, in the
@@ -115,14 +122,16 @@ free slot that the VKA library found for us.
 
 <https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf>
 
-=== TASK 6 ===
+### TASK 6
+
 
 So now that we've given the new thread everything it needs to
 communicate with us, we can let it run. Complete this step and proceed.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h>
 
-=== TASK 7 ===
+### TASK 7
+
 
 We now wait for the new thread to send us data using seL4\_Recv()...
 
@@ -132,7 +141,8 @@ Then we verify the fidelity of the data that was transmitted.
 
 <https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf>
 
-=== TASK 8 ===
+### TASK 8
+
 
 Another demonstration of the sel4\_Reply() facility: we reply to the
 message sent by the new thread.
@@ -141,7 +151,8 @@ message sent by the new thread.
 
 <https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15>
 
-=== TASK 9 ===
+### TASK 9
+
 
 In the new thread, we initiate communications by using seL4\_Call(). As
 outlined above, the receiving thread replies to us using

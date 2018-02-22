@@ -1,4 +1,5 @@
-= CapDL =
+# CapDL
+
 
 &lt;&lt;TableOfContents()&gt;&gt;
 
@@ -9,7 +10,8 @@ those objects will be distributed.
 All CapDL-related projects are in this repo:
 <https://github.com/sel4/capdl>
 
-== Example Spec ==
+## Example Spec
+
 
 {{{ arch ia32
 
@@ -37,7 +39,8 @@ caps {
 }
 =
 
-== CapDL Translator (capDL-tool) ==
+## CapDL Translator (capDL-tool)
+
 
 This program transforms a CapDL spec into several formats:
 
@@ -48,7 +51,8 @@ This program transforms a CapDL spec into several formats:
     -   an isabelle model for use in proofs about the system described
         by the spec
 
-== CapDL Loader (capdl-loader-app) ==
+## CapDL Loader (capdl-loader-app)
+
 
 The CapDL Loader is a program that initializes the seL4 user-level
 environment to match the system described by a CapDL spec, and loads
@@ -63,7 +67,8 @@ the spec (if enough resources are available), and then loads programs
 into memory at locations specified by the spec. Finally, it starts all
 the threads it created and sleeps forever.
 
-== Python CapDL Library (python-capdl-tool) ==
+## Python CapDL Library (python-capdl-tool)
+
 
 This library allows one to build up an in-memory database storing the
 same information as a capdl spec. This is useful as it allows capdl
