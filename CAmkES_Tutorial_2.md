@@ -31,7 +31,7 @@ back and forth in this tutorial. An event is a signal is sent over a
 Notification connection.
 
 You are strongly advised to read the manual section on Events here:
-\[\[<https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events>\]\].
+<https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events>.
 
   ''Ensure that when declaring the consumes and emits keywords between
   the Client.camkes and Echo.camkes files, you match them up so that

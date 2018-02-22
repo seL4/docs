@@ -570,8 +570,7 @@ There is a section on the fastpath and its verification in
 functionality/design/implementation/philosophy
 
 
-There are plenty of references on the
-\[\[<https://wiki.sel4.systems/Documentation>||documentation page\]\].
+There are plenty of references on the [documentation page](https://wiki.sel4.systems/Documentation).
 
 # What can I do with seL4?
  You can use seL4 for research, education or
