@@ -28,7 +28,7 @@ The development framework provides:
         subproject dependencies, and repo will fetch all of them and
         place them in the correct subdirectories for you.
     -   Make sure that you already have the tools to build seL4
-        (\[\[Getting started\#Setting\_up\_your\_machine|seL4: Setting
+        (\[\[Getting started\#Setting_up_your_machine|seL4: Setting
         up your machine\]\])
 
 ## Build dependencies
@@ -80,7 +80,7 @@ repo init -u <https://github.com/seL4/camkes-manifest.git> repo sync }}}
 The following will configure, build, and run a simple example CAmkES
 system:
 
-{{{\#!highlight bash numbers=off make arm\_simple\_defconfig make
+{{{\#!highlight bash numbers=off make arm_simple_defconfig make
 silentoldconfig }}}
 
 If you haven't done so already, change the toolchain to the one for your
@@ -101,7 +101,7 @@ correctly) do:
 
 
 To learn about developing your own CAmkES application, read the
-[Tutorials\#CAmkES\_tutorials](../Tutorials\#CAmkES\_tutorials).
+[Tutorials\#CAmkES_tutorials](../Tutorials\#CAmkES_tutorials).
 
 ## Camkes Terminology/Glossary
 

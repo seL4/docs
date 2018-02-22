@@ -28,9 +28,9 @@ be renamed to MLO and u-boot.bin respectively.
 
 The reason to patch the u-boot is because the fastboot jumps to the
 kernel entry point directly but seL4 image needs a elf-loader to parse
-and load correctly, so in the lib\_arm/armlinux.c file, insert
-do\_bootelf(0, 0, 1, 0) before theKernel(0, bd-&gt;bi\_arch\_number,
-bd-&gt;bi\_boot\_params)
+and load correctly, so in the lib_arm/armlinux.c file, insert
+do_bootelf(0, 0, 1, 0) before theKernel(0, bd-&gt;bi_arch_number,
+bd-&gt;bi_boot_params)
 
 ## Steps to boot seL4 kernel
 
@@ -52,7 +52,7 @@ bd-&gt;bi\_boot\_params)
             to access the device. Try running with sudo.
 
     1.  Execute
-        \$&gt; fastboot -b 0x80000000 boot the\_kernel\_image\_file\_boundled\_with\_application
+        \$&gt; fastboot -b 0x80000000 boot the_kernel_image_file_boundled_with_application
     2.  The kernel should boot and application gets executed.
 
 # References

@@ -44,7 +44,7 @@ communication between two software components in CAmkES. The underlying
 implementation may be shared memory, synchronous IPC, notifications or
 some other implementation-provided means. In this particular tutorial,
 we are using synchronous IPC. In implementation terms, this boils down
-to the seL4\_Call() syscall on seL4.
+to the seL4_Call() syscall on seL4.
 
 Find the "Connection" keyword manual section here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection>
@@ -98,16 +98,16 @@ NIC connection, or the serial connection?
 The same component provides both. Therefore, CAmkES prefixes the
 instances of functions in an Interface with the Interface-instance's
 name. In the dual-function NIC device's case, it might have a "provides
-&lt;INTERFACE\_NAME&gt; serial" and a "provides &lt;INTERFACE\_NAME&gt;
+&lt;INTERFACE_NAME&gt; serial" and a "provides &lt;INTERFACE_NAME&gt;
 nic". When a caller wants to call for the NIC-send, it would call,
-nic\_send(), and when a caller wants to invoke the Serial-send, it would
-call, "serial\_send()".
+nic_send(), and when a caller wants to invoke the Serial-send, it would
+call, "serial_send()".
 
 So if the "Hello" interface is provided once by "Echo" as "a", you would
-call for the "a" instance of Echo's "Hello" by calling for "a\_hello()".
+call for the "a" instance of Echo's "Hello" by calling for "a_hello()".
 But what if Echo had provided 2 instances of the "Hello" interface, and
 the second one was named "a2"? Then in order to call on that second
-"Hello" interface instance on Echo, you would call "a2\_hello()".
+"Hello" interface instance on Echo, you would call "a2_hello()".
 
 Fill in the function calls in the generated C files!
 

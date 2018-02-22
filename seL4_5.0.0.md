@@ -3,11 +3,11 @@
 with the following changes:
 
 Below are the changes to the seL4 ABI and API: Generic changes: \* Add
-missing case to seL4\_getFault (seL4\_Fault\_DebugException) \*
+missing case to seL4_getFault (seL4_Fault_DebugException) \*
 Explicitly pack bootinfo data structures \* Modify FinalizeLog syscall -
 Now returns a number of entries in the log \* Extend bootinfo to support
 potentially arbitrary additional structures \* Deprecate bootinfo
-management in libsel4 - a replacement, platsupport\_get\_bootinfo can be
+management in libsel4 - a replacement, platsupport_get_bootinfo can be
 found in libsel4platsupport
 
 x86 specific changes:
@@ -18,7 +18,7 @@ x86 specific changes:
 x86-64 specific changes:
 
 :   -   VT-x related cap and object definitions added
-    -   seL4\_VMEnter syscall added
+    -   seL4_VMEnter syscall added
 
 arm specific changes:
 

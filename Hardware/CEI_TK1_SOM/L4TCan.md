@@ -13,7 +13,7 @@ Note that the GPIO dts sets the GPIO used for chipselect to high
 impedance so bad things don't happen.
 
 CSN is indicated on the SPI expansion header. Can node \#1 on the CAN
-daughterboard uses TK1\_GPIO2, so it's necessary to connect these 2
+daughterboard uses TK1_GPIO2, so it's necessary to connect these 2
 pins:
 
 {{<attachment:jumper.jpg>||width="375",height="219"}}
@@ -27,7 +27,7 @@ NOTE2: Justification for GPIO chipselects is that we have 2 CAN nodes
 and only 1 HW chipselect, so had to do it this way.
 
 ## Option 1. Use our Linux image
- Grab the image (tk1\_can.img.gz)
+ Grab the image (tk1_can.img.gz)
 available at <http://ts.data61.csiro.au/Downloads/tk1_can/>. Make sure
 to verify against the md5sum in the same folder once you've got it.
 
@@ -48,7 +48,7 @@ ABSOLUTELY sure that your of=/dev/sdX line is correct so you don't
 accidentally destroy data on your machine. Also, you want /dev/sdX (the
 device), NOT /dev/sdX3 (partitions) etc.
 
-{{{ gunzip -c tk1\_can.img.gz | sudo dd of=/dev/&lt;your TK1 device&gt;
+{{{ gunzip -c tk1_can.img.gz | sudo dd of=/dev/&lt;your TK1 device&gt;
 conv=sync bs=4K status=progress }}} This takes \~1.5Hr on my machine to
 complete. If dd throws a strange error to do with the 'status=progress'
 command, you may be using an old version of dd, it's fine to omit this
@@ -148,9 +148,9 @@ You also need to remap some GPIOs, swap out the GPIO device tree with
  Using make menuconfig, enable CAN and
 MCP251X modules. Make sure your .config contains:
 
-{{{ CONFIG\_CAN=m CONFIG\_CAN\_RAW=m CONFIG\_CAN\_BCM=m
-CONFIG\_CAN\_GW=m CONFIG\_CAN\_VCAN=m CONFIG\_CAN\_DEV=m
-CONFIG\_CAN\_CALC\_BITTIMING=y CONFIG\_CAN\_MCP251X=m }}} In addition to
+{{{ CONFIG_CAN=m CONFIG_CAN_RAW=m CONFIG_CAN_BCM=m
+CONFIG_CAN_GW=m CONFIG_CAN_VCAN=m CONFIG_CAN_DEV=m
+CONFIG_CAN_CALC_BITTIMING=y CONFIG_CAN_MCP251X=m }}} In addition to
 the 'normal' tk1-som kernel build settings given by Colorado in their
 readme.
 
@@ -170,25 +170,25 @@ to use hardware CS on the TK1-SOM's SPI line.
 Originally I pulled it out of the TK1-SOM's SPI driver, but it turns out
 you can disable it in extlinux.conf, which is much simpler.
 
-in /boot/extlinux/extlinux.conf on your rootfs, find the touch\_id=0@0
-line, and change it to touch\_id=3@3
+in /boot/extlinux/extlinux.conf on your rootfs, find the touch_id=0@0
+line, and change it to touch_id=3@3
 
 ### Load everything onto the board
  You could do something like this:
 
-update\_kernel.sh
+update_kernel.sh
 
 {{{
 
 :   \#!/bin/bash
 
-    > L4T\_DIR=/home/seb/TK1\_SOM\_2GB\_Flashing/Linux\_for\_Tegra
-    > SOM\_DIR=/mnt/TK1SOM
+    > L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
+    > SOM_DIR=/mnt/TK1SOM
     >
-    > sudo cp \$L4T\_DIR/sources/kernel/arch/arm/boot/zImage
-    > \$SOM\_DIR/boot/zImage sudo cp
-    > \$L4T\_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
-    > \$SOM\_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
+    > sudo cp \$L4T_DIR/sources/kernel/arch/arm/boot/zImage
+    > \$SOM_DIR/boot/zImage sudo cp
+    > \$L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
+    > \$SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 
 }}}
 
@@ -202,9 +202,9 @@ rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at &lt;tk1&gt;
 
     mount /dev/&lt;tk1&gt; /mnt/TK1SOM
 
-    ./update\_kernel.sh
+    ./update_kernel.sh
 
-    make modules\_install INSTALL\_MOD\_PATH=/mnt/TK1SOM
+    make modules_install INSTALL_MOD_PATH=/mnt/TK1SOM
 
     umount /dev/sdb1
 
@@ -219,7 +219,7 @@ Then:
 
 {{{ dmesg | grep mcp \# See if the driver loaded properly
 
-\[ 618.718288\] mcp251x spi0.0: entered mcp251x\_can\_probe \[
+\[ 618.718288\] mcp251x spi0.0: entered mcp251x_can_probe \[
 618.718296\] mcp251x spi0.0: v2 \[ 618.718332\] mcp251x spi0.0: got
 clock \[ 618.718336\] mcp251x spi0.0: finished clock configuration,
 freq: 20000000 \[ 618.718353\] mcp251x spi0.0: allocated CAN device \[

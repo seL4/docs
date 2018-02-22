@@ -26,9 +26,9 @@ backwards compatible. Otherwise skip to the next Section.
 The necessary files are:
 
   -   GCC 4.9 cross-toolchain for
-      Aarch64 (gcc-linaro-4.9-2016.02-x86\_64\_aarch64-linux-gnu.tar.xz)
+      Aarch64 (gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz)
   -   GCC 4.9 cross-toolchain for
-      gnueabihf (gcc-linaro-4.9-2016.02-x86\_64\_arm-linux-gnueabihf.tar.xz)
+      gnueabihf (gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz)
 
 {{{\#!highlight bash numbers=off \#The files are obtainable from the
 following links
@@ -36,9 +36,9 @@ following links
 <http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/>
 \#Run the following commands to use GCC 4.9 only in this directory mkdir
 arm-tc arm64-tc tar --strip-components=1 -C \${PWD}/arm-tc -xf
-\~/Downloads/gcc-linaro-4.9-2016.02-x86\_64\_aarch64-linux-gnu.tar.xz
+\~/Downloads/gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz
 tar --strip-components=1 -C \${PWD}/arm64-tc -xf
-\~/Downloads/gcc-linaro-4.9-2016.02-x86\_64\_arm-linux-gnueabihf.tar.xz
+\~/Downloads/gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz
 export PATH="\${PWD}/arm-tc/bin:\${PWD}/arm64-tc/bin:\$PATH"
 
 \# To check that GCC 4.9 is used aarch64-linux-gnu-gcc --version
@@ -52,21 +52,21 @@ git clone --depth 1 <https://github.com/96boards/l-loader.git> git clone
 UART0 == {{{\#!highlight bash numbers=off gedit
 LinaroPkg/platforms.config
 
-\# Uncomment the following lines BUILDFLAGS=-DSERIAL\_BASE=0xF8015000
-ATF\_BUILDFLAGS=CONSOLE\_BASE=PL011\_UART0\_BASE
-CRASH\_CONSOLE\_BASE=PL011\_UART0\_BASE }}} == 5. Patching the UEFI for
+\# Uncomment the following lines BUILDFLAGS=-DSERIAL_BASE=0xF8015000
+ATF_BUILDFLAGS=CONSOLE_BASE=PL011_UART0_BASE
+CRASH_CONSOLE_BASE=PL011_UART0_BASE }}} == 5. Patching the UEFI for
 the Hikey == Obtain the patch from <https://sel4.systems/hikey.patch>.
 
 {{{\#!highlight bash numbers=off cd linaro-edk2 patch -p1 &lt;
 \~/Downloads/hikey.patch \# Then return to the main directory
 hikey-flash }}} == 6.Modifying the firmware == If settings are required
 to be changed while in EL3 then the file in
-arm-trusted-firmware/bl1/bl1\_main.c can be modified. To disable the
+arm-trusted-firmware/bl1/bl1_main.c can be modified. To disable the
 prefetcher obtain the patch file from
 [<attachment:bl1_main.patch>](../<attachment:bl1_main.patch>) and follow the below steps.
 
 {{{\#!highlight bash numbers=off cd arm-trusted-firmware/bl1 patch -p5
-&lt; \~/Downloads/bl1\_main.patch \# Then return to the main directory
+&lt; \~/Downloads/bl1_main.patch \# Then return to the main directory
 hikey-flash }}} == 7. Modifying the UEFI == If settings are required to
 be changed while in EL2 then the file in
 linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S can be modified.
@@ -80,30 +80,30 @@ hikey-flash }}}
 
 ## 8. Building the UEFI for the Hikey
  {{{\#!highlight bash
-numbers=off export AARCH64\_TOOLCHAIN=GCC49 export
-EDK2\_DIR=\${PWD}/linaro-edk2 export UEFI\_TOOLS\_DIR=\${PWD}/uefi-tools
+numbers=off export AARCH64_TOOLCHAIN=GCC49 export
+EDK2_DIR=\${PWD}/linaro-edk2 export UEFI_TOOLS_DIR=\${PWD}/uefi-tools
 
-cd \${EDK2\_DIR} \${UEFI\_TOOLS\_DIR}/uefi-build.sh -c
+cd \${EDK2_DIR} \${UEFI_TOOLS_DIR}/uefi-build.sh -c
 ../LinaroPkg/platforms.config -b RELEASE -a ../arm-trusted-firmware
 hikey
 
-cd ../l-loader ln -s \${EDK2\_DIR}/Build/HiKey/RELEASE\_GCC49/FV/bl1.bin
-ln -s \${EDK2\_DIR}/Build/HiKey/RELEASE\_GCC49/FV/fip.bin
+cd ../l-loader ln -s \${EDK2_DIR}/Build/HiKey/RELEASE_GCC49/FV/bl1.bin
+ln -s \${EDK2_DIR}/Build/HiKey/RELEASE_GCC49/FV/fip.bin
 
 \# If the DEBUG version of the build is require run the below commands
-instead cd \${EDK2\_DIR} \${UEFI\_TOOLS\_DIR}/uefi-build.sh -c
+instead cd \${EDK2_DIR} \${UEFI_TOOLS_DIR}/uefi-build.sh -c
 ../LinaroPkg/platforms.config -b DEBUG -a ../arm-trusted-firmware hikey
 
-cd ../l-loader ln -s \${EDK2\_DIR}/Build/HiKey/DEBUG\_GCC49/FV/bl1.bin
-ln -s \${EDK2\_DIR}/Build/HiKey/DEBUG\_GCC49/FV/fip.bin \# End
+cd ../l-loader ln -s \${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/bl1.bin
+ln -s \${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/fip.bin \# End
 
 arm-linux-gnueabihf-gcc -c -o start.o start.S arm-linux-gnueabihf-gcc -c
 -o debug.o debug.S arm-linux-gnueabihf-ld -Bstatic -Tl-loader.lds -Ttext
 0xf9800800 start.o debug.o -o loader arm-linux-gnueabihf-objcopy -O
-binary loader temp python gen\_loader.py -o l-loader.bin
---img\_loader=temp --img\_bl1=bl1.bin sudo PTABLE=linux-4g bash -x
-generate\_ptable.sh python gen\_loader.py -o ptable-linux.img
---img\_prm\_ptable=prm\_ptable.img }}}
+binary loader temp python gen_loader.py -o l-loader.bin
+--img_loader=temp --img_bl1=bl1.bin sudo PTABLE=linux-4g bash -x
+generate_ptable.sh python gen_loader.py -o ptable-linux.img
+--img_prm_ptable=prm_ptable.img }}}
 
 ## 9. Boot Image
  Obtain the boot image from
@@ -115,9 +115,9 @@ and follow the below commands.
 mkdir -p boot-fat sudo mount -o loop,rw,sync boot-fat.uefi.img boot-fat
 
 sudo rm boot-fat/EFI/BOOT/fastboot.efi sudo cp
-../linaro-edk2/Build/HiKey/RELEASE\_GCC49/AARCH64/AndroidFastbootApp.efi
+../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/AndroidFastbootApp.efi
 boot-fat/EFI/BOOT/fastboot.efi sudo cp
-../linaro-edk2/Build/HiKey/RELEASE\_GCC49/AARCH64/noboot.efi
+../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/noboot.efi
 boot-fat/EFI/BOOT/
 
 sudo umount boot-fat }}}
@@ -189,7 +189,7 @@ by the following instructions. First, check out the seL4 project.
 Then, use the default config for the !HiKey and build the system.
 
 {{{\#!highlight bash numbers=off make
-hikey\_aarch32\_debug\_xml\_defconfig }}} Then, use "menuconfig &gt;
+hikey_aarch32_debug_xml_defconfig }}} Then, use "menuconfig &gt;
 Tools &gt; Build elfloader &gt; Boot image type" and choose "Binary Boot
 Image"
 

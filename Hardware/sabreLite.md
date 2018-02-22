@@ -6,7 +6,7 @@ For board details see
 
 # Building for the Sabre Lite
  For preset build config, use defconfigs
-called "sabre\_" or "imx6"
+called "sabre_" or "imx6"
 
 # Booting on the Sabre Lite
  == Hardware Requirements == \* 5V/3A power
@@ -51,8 +51,8 @@ USB-TTY converter has locked up.
 Now you are ready to load your image into memory and execute:
 
 {{{\#!highlight bash numbers=off \$ lsusb .... Bus 001 Device 019: ID
-15a2:0054 Freescale Semiconductor, Inc. .... \$ sudo ./imx\_usb
-image\_file }}} The image file that is used will typically be named
+15a2:0054 Freescale Semiconductor, Inc. .... \$ sudo ./imx_usb
+image_file }}} The image file that is used will typically be named
 u-boot.bin
 
 ## Booting U-Boot from SPI Flash
@@ -69,8 +69,8 @@ u-boot.bin
 Now you are ready to load your image into memory and execute:
 
 {{{\#!highlight bash numbers=off \$ lsusb .... Bus 001 Device 019: ID
-15a2:0054 Freescale Semiconductor, Inc. .... \$ sudo ./imx\_usb
-image\_file }}} The image file that is used will typically be named
+15a2:0054 Freescale Semiconductor, Inc. .... \$ sudo ./imx_usb
+image_file }}} The image file that is used will typically be named
 u-boot.bin
 
 ## Booting U-Boot from SPI Flash
@@ -107,8 +107,8 @@ applied: ||&lt;tableclass="table table-condensed"&gt;Name ||Purpose ||
 ||[03_android-imx6-uboot-extra_fs_features.patch](https://sel4.systems/Info/Hardware/sabreLite/03_android-imx6-uboot-extra_fs_features.patch)
 ||Add some extra file systems and associated features ||
 ||[04_android-imx6-uboot-update_env.patch](https://sel4.systems/Info/Hardware/sabreLite/04_android-imx6-uboot-update_env.patch)
-||Setup default environment. In particular, bootsel4\_mmc and
-bootsel4\_net ||
+||Setup default environment. In particular, bootsel4_mmc and
+bootsel4_net ||
 
 Prebuilt:
 [u-boot.bin](https://sel4.systems/Info/Hardware/sabreLite/u-boot.bin)
@@ -119,9 +119,9 @@ To obtain and build U-Boot, do:
 
 {{{\#!highlight bash numbers=off git clone
 <git://github.com/boundarydevices/u-boot-2009-08.git> cd u-boot-2009-08
-git checkout origin/boundary-imx\_3.0.35\_1.1.0 -b
-boundary-imx\_3.0.35\_1.1.0 export ARCH=arm export
-CROSS\_COMPILE=arm-none-eabi-make mx6q\_sabrelite\_android\_config make
+git checkout origin/boundary-imx_3.0.35_1.1.0 -b
+boundary-imx_3.0.35_1.1.0 export ARCH=arm export
+CROSS_COMPILE=arm-none-eabi-make mx6q_sabrelite_android_config make
 all ls -l u-boot.bin }}} === Installing U-Boot to SPI Flash === To
 install U-Boot, put u-boot.bin onto the first partition (either FAT16 or
 EXT2) of an SD card, boot into U-Boot then do this at the U-Boot prompt:
@@ -146,9 +146,9 @@ the file was loaded into RAM sf write 0x12000000 0 \${filesize}
 reboot the Sabrelite }}} = Booting seL4 applications = This assumes that
 the U-Boot version above is installed in SPI flash.
 ||&lt;tablewidth="822px" tableheight="105px"&gt;'''Command'''
-||'''Operation''' || ||run bootsel4\_mmc ||Scans through the SD card and
+||'''Operation''' || ||run bootsel4_mmc ||Scans through the SD card and
 their partitions looking for an elf file named "sel4-image" in the root
-directory. This file will be loaded and executed. || ||run bootsel4\_net
+directory. This file will be loaded and executed. || ||run bootsel4_net
 ||Performs a DHCP request followed by a TFTPBoot request and attempts to
-load a file named "sabre/sel4-image". || ||run bootsel4\_fastboot
+load a file named "sabre/sel4-image". || ||run bootsel4_fastboot
 ||Simple alias for the fastboot command ||

@@ -58,7 +58,7 @@ source differences. U-Boot.
 
 Inside the Android environment do:
 
-{{{\#!highlight bash numbers=off make ARCH=arm CROSS\_COMPILE=arm-eabi-
+{{{\#!highlight bash numbers=off make ARCH=arm CROSS_COMPILE=arm-eabi-
 arndale sudo dd iflag=dsync oflag=dsync if=u-boot.bin of=/dev/sdb
 seek=63 }}}
 
@@ -69,9 +69,9 @@ require that the ELF file be packed into a U-Boot application image
 file. Follow the below instructions to create this image.
 
 {{{\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
-INPUT\_FILE=images/sel4test-image-arm-exynos4 OUTPUT\_FILE=sel4-uImage
+INPUT_FILE=images/sel4test-image-arm-exynos4 OUTPUT_FILE=sel4-uImage
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d
-\$INPUT\_FILE \$OUTPUT\_FILE }}}
+\$INPUT_FILE \$OUTPUT_FILE }}}
 
 The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file
@@ -89,7 +89,7 @@ environment variables and their values. Use the following commands to
 set any variables that are missing from the list.
 
 {{{ setenv bootfile filename setenv ethaddr 00:40:5c:26:0a:FF setenv
-usbethaddr 00:40:5c:26:0a:FF setenv pxefile\_addr\_r 0x50000000 }}}
+usbethaddr 00:40:5c:26:0a:FF setenv pxefile_addr_r 0x50000000 }}}
 
 Now run:
 

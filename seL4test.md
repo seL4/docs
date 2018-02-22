@@ -20,8 +20,8 @@ on this very page.
 
 We will now build seL4test for ia32, to run on the QEMU simulator.
 
-{{{ make ia32\_simulation\_release\_xml\_defconfig }}} This copies
-{{{configs/ia32\_simulation\_release\_xml\_defconfig}}} to
+{{{ make ia32_simulation_release_xml_defconfig }}} This copies
+{{{configs/ia32_simulation_release_xml_defconfig}}} to
 {{{./.config}}}, and sets up various header files.
 
 You can look at the configuration options using
@@ -68,7 +68,7 @@ systems that will either not compile, or not run.
 ### Caveats
  ==== kzm simulation hangs ==== qemu does not simulate
 all the timers needed for a full sel4 test run. Use the
-'''kzm\_simulation\_configurations''' to avoid tests that rely on
+'''kzm_simulation_configurations''' to avoid tests that rely on
 unimplemented timers.
 
 #### arm-none-eabi
@@ -89,7 +89,7 @@ compilers from Debian and Ubuntu use hardware floating point. Binaries
 built with these compilers are incompatible with the prebuilt musl C
 library. You can either tweak the flags (in
 {{{tools/common/Makefile.flags}}}: add {{{-mfloat-abi=soft}}} to
-'''NK\_CFLAGS''') or disable the use of the prebuilt libraries as above.
+'''NK_CFLAGS''') or disable the use of the prebuilt libraries as above.
 
 ## Run on Real Hardware
 

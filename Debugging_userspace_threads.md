@@ -26,7 +26,7 @@ Not all platforms support this feature for two main reasons:
 Caveat lector: If you compile the kernel with support for the debug API,
 and your ARM platform doesn't support it, '''your kernel will abort at
 boot''', with a message (or without a message if you are compiling the
-kernel in release mode (CONFIG\_DEBUG\_BUILD=n)).
+kernel in release mode (CONFIG_DEBUG_BUILD=n)).
 
 ## Summary of the invocations
  The invocations are documented in
@@ -43,18 +43,18 @@ Additionally, there is available source code that demonstrates how the invocatio
 
 The invocations take capabilities to TCBs, and perform operations on the TCB register context to virtualize the hardware debug feature for each thread.
 
-:   -   \`seL4\_TCB\_SetBreakpoint\`: Takes a capability to a TCB, and a
+:   -   \`seL4_TCB_SetBreakpoint\`: Takes a capability to a TCB, and a
         hardware breakpoint register ID, and sets a breakpoint on a
         specified virtual address, for a range of addresses, for a
         certain access type (Read, Write, or both).
-    -   \`seL4\_TCB\_UnsetBreakpoint\`: Takes a capability to a TCB, and
+    -   \`seL4_TCB_UnsetBreakpoint\`: Takes a capability to a TCB, and
         both disables and clears the specific hardware breakpoint for
         that thread.
-    -   \`seL4\_TCB\_GetBreakpoint\`: Takes a capability to a TCB, and
+    -   \`seL4_TCB_GetBreakpoint\`: Takes a capability to a TCB, and
         returns information on whether or not the hardware breakpoint is
         enabled, and if enabled, what virtual address it will trigger
         on, and what types of accesses will trigger it.
-    -   \`seL4\_TCB\_ConfigureSingleStepping\`: Takes a capability to a
+    -   \`seL4_TCB_ConfigureSingleStepping\`: Takes a capability to a
         TCB, and configures a hardware debugging register to break on
         every instruction (or every Nth instruction), and send a message
         on the thread's fault endpoint everytime it faults. You may

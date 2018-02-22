@@ -92,7 +92,7 @@ Once you have grub.cfg open in your favourite editor, Add an extra
 option to it:
 
 {{{ menuentry 'seL4' --class fedora --class gnu-linux --class gnu
---class os { load\_video insmod gzio insmod part\_msdos insmod ext2 set
+--class os { load_video insmod gzio insmod part_msdos insmod ext2 set
 root='(hd0,msdos1)' search --no-floppy --fs-uuid --set=root
 &lt;deviceID&gt; echo 'Loading seL4 kernel' multiboot
 /kernel-image-ia32-pc99 echo 'Loading initial module ...' module

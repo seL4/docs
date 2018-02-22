@@ -80,7 +80,7 @@ instantiation and structure of the system at
 apps/helloworld/helloworld.camkes. {{{ /\*
 apps/helloworld/helloworld.camkes \*/
 
-import &lt;std\_connector.camkes&gt;; import
+import &lt;std_connector.camkes&gt;; import
 "components/Hello/Hello.camkes"; import
 "components/Client/Client.camkes";
 
@@ -100,7 +100,7 @@ assembly {
 
 This file begins with several import statements that reference other
 files. Hello.camkes and Client.camkes are the files we created above,
-while std\_connector.camkes is a built-in file that defines the standard
+while std_connector.camkes is a built-in file that defines the standard
 CAmkES connector types. The body of the system description instantiates
 each component once, h of type Hello and c of type Client. The
 components' interfaces are connected via a connection, conn, of type
@@ -114,9 +114,9 @@ apps/helloworld/components/Hello/src/hello.c \*/
 
 \#include &lt;camkes.h&gt; \#include &lt;stdio.h&gt;
 
-void inf\_\_init(void) { }
+void inf__init(void) { }
 
-void inf\_print(const char \*message) {
+void inf_print(const char \*message) {
 
 :   printf("Client says: %sn", message);
 
@@ -128,7 +128,7 @@ prototypes for functions related to MyInterface that this component
 needs to implement. Note that the actual implementations of interface
 functions are prefixed with the component-local name of the interface
 (inf from Hello.camkes above) and an underscore. The function
-{{{inf\_\_init}}} is for this component to do any required
+{{{inf__init}}} is for this component to do any required
 initialisation. In the case of this example we have no initialisation to
 perform.
 
@@ -141,7 +141,7 @@ apps/helloworld/components/Client/src/client.c \*/
 
 int run(void) {
 
-:   const char \*s = "hello world"; iface\_print(s); return 0;
+:   const char \*s = "hello world"; iface_print(s); return 0;
 
 }
 =
@@ -154,13 +154,13 @@ boiler plate to be able to build the system. Create
 apps/helloworld/Kconfig for the build system menu: {{{\#!highlight
 makefile \# apps/helloworld/Kconfig
 
-config APP\_HELLOWORLD bool "Hello world CAmkES application" default n
+config APP_HELLOWORLD bool "Hello world CAmkES application" default n
 help Hello world tutorial exercise. }}}
 
 Create a dependency entry in apps/helloworld/Kbuild for your
 application: {{{\#!highlight makefile \# apps/helloworld/Kbuild
 
-apps-\$(CONFIG\_APP\_HELLOWORLD) += helloworld helloworld: libsel4
+apps-\$(CONFIG_APP_HELLOWORLD) += helloworld helloworld: libsel4
 libmuslc libsel4platsupport
  libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
 
@@ -170,10 +170,10 @@ apps/helloworld/Makefile
 
 TARGETS := helloworld.cdl ADL := helloworld.camkes
 
-Client\_CFILES = components/Client/src/client.c Hello\_CFILES =
+Client_CFILES = components/Client/src/client.c Hello_CFILES =
 components/Hello/src/hello.c
 
-include \${SOURCE\_DIR}/../../tools/camkes/camkes.mk }}}
+include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: {{{ source "apps/helloworld/Kconfig" }}}
@@ -253,7 +253,7 @@ component Consumer {
 components together using another ADL file: {{{ /\*
 apps/helloevent/helloevent.camkes \*/
 
-import &lt;std\_connector.camkes&gt;; import
+import &lt;std_connector.camkes&gt;; import
 "components/Emitter/Emitter.camkes"; import
 "components/Consumer/Consumer.camkes";
 
@@ -287,7 +287,7 @@ int run(void) {
 
     while (1) {
 
-    :   e\_emit();
+    :   e_emit();
 
     } return 0;
 
@@ -309,19 +309,19 @@ apps/helloevent/components/Consumer/src/main.c \*/
 static void handler(void) {
 
 :   static int fired = 0; printf("Callback fired!n"); if (!fired) {
-    fired = 1; s\_reg\_callback(&handler, NULL); }
+    fired = 1; s_reg_callback(&handler, NULL); }
 
 }
 
 int run(void) {
 
-:   printf("Registering callback...n"); s\_reg\_callback(&handler,
+:   printf("Registering callback...n"); s_reg_callback(&handler,
     NULL);
 
-    printf("Polling...n"); if (s\_poll()) { printf("We found an
+    printf("Polling...n"); if (s_poll()) { printf("We found an
     event!n"); } else { printf("We didn't find an eventn"); }
 
-    printf("Waiting...n"); s\_wait(); printf("Unblocked by an event!n");
+    printf("Waiting...n"); s_wait(); printf("Unblocked by an event!n");
 
     return 0;
 
@@ -341,13 +341,13 @@ apps/helloevent/Makefile as for the previous example. Create
 apps/helloevent/Kconfig for the build system menu: {{{\#!highlight
 makefile \# apps/helloevent/Kconfig
 
-config APP\_HELLOEVENT bool "Hello Event CAmkES application" default n
+config APP_HELLOEVENT bool "Hello Event CAmkES application" default n
 help Hello event tutorial exercise. }}}
 
 Create a dependency entry in apps/helloevent/Kbuild for your
 application: {{{\#!highlight makefile \# apps/helloevent/Kbuild
 
-apps-\$(CONFIG\_APP\_HELLOEVENT) += helloevent helloevent: libsel4
+apps-\$(CONFIG_APP_HELLOEVENT) += helloevent helloevent: libsel4
 libmuslc libsel4platsupport
  libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
 
@@ -357,10 +357,10 @@ apps/helloevent/Makefile
 
 TARGETS := helloevent.cdl ADL := helloevent.camkes
 
-Consumer\_CFILES = components/Consumer/src/main.c Emitter\_CFILES =
+Consumer_CFILES = components/Consumer/src/main.c Emitter_CFILES =
 components/Emitter/src/main.c
 
-include \${SOURCE\_DIR}/../../tools/camkes/camkes.mk }}}
+include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: {{{ source "apps/helloevent/Kconfig" }}}
@@ -394,7 +394,7 @@ the wait will return when/if the second instance of the event arrives.
 memory. Dataports, like other interfaces, connect a single component to
 a single other component. Both components get read/write access to the
 dataport. The default dataport type is Buf, which is implemented as a
-byte array in C of size PAGE\_SIZE. Alternatively you can specify a
+byte array in C of size PAGE_SIZE. Alternatively you can specify a
 user-defined type for the shared memory region. This example will
 demonstrate both.
 
@@ -409,13 +409,13 @@ apps/hellodataport/components/Pong }}}
 one of the dataports: {{{\#!highlight c /\*
 apps/hellodataport/include/porttype.h \*/
 
-\#ifndef \_PORTTYPE\_H\_ \#define \_PORTTYPE\_H\_
+\#ifndef \_PORTTYPE_H_ \#define \_PORTTYPE_H_
 
 typedef struct MyData {
 
 :   char data\[10\];
 
-} MyData\_t;
+} MyData_t;
 
 \#endif }}}
 
@@ -432,13 +432,13 @@ apps/hellodataport/components/Pong/include ln -s
 ### Setup Components' CAmkES Files
  Note that we need to include the
 C header in the ADL. CAmkES does not actually parse this header, but it
-needs to know to \#include it whenever it references the MyData\_t type.
+needs to know to \#include it whenever it references the MyData_t type.
 Now let's create an ADL description of the Ping component: {{{ /\*
 apps/hellodataport/components/Ping/Ping.camkes \*/
 
 component Ping {
 
-:   include "porttype.h"; control; dataport Buf d1; dataport MyData\_t
+:   include "porttype.h"; control; dataport Buf d1; dataport MyData_t
     d2;
 
 }
@@ -449,7 +449,7 @@ apps/hellodataport/components/Pong/Pong.camkes \*/
 
 component Pong {
 
-:   include "porttype.h"; control; dataport Buf s1; dataport MyData\_t
+:   include "porttype.h"; control; dataport Buf s1; dataport MyData_t
     s2;
 
 }
@@ -462,7 +462,7 @@ purposes of this example spinning until a byte changes is good enough.
 We're ready to connect all these sources together with a top-level ADL
 file: {{{ /\* apps/hellodataport/hellodataport.camkes \*/
 
-import &lt;std\_connector.camkes&gt;; import
+import &lt;std_connector.camkes&gt;; import
 "components/Ping/Ping.camkes"; import "components/Pong/Pong.camkes";
 
 assembly {
@@ -541,13 +541,13 @@ apps/hellodataport/Makefile as for the previous example. Create
 apps/hellodataport/Kconfig for the build system menu: {{{\#!highlight
 makefile \# apps/hellodataport/Kconfig
 
-config APP\_HELLODATAPORT bool "Hello Dataport CAmkES application"
+config APP_HELLODATAPORT bool "Hello Dataport CAmkES application"
 default n help Hello dataport tutorial exercise. }}}
 
 Create a dependency entry in apps/hellodataport/Kbuild for your
 application: {{{\#!highlight makefile \# apps/hellodataport/Kbuild
 
-apps-\$(CONFIG\_APP\_HELLODATAPORT) += hellodataport hellodataport:
+apps-\$(CONFIG_APP_HELLODATAPORT) += hellodataport hellodataport:
 libsel4 libmuslc libsel4platsupport
  libsel4muslccamkes libsel4sync libsel4debug libsel4bench }}}
 
@@ -557,12 +557,12 @@ apps/hellodataport/Makefile
 
 TARGETS := hellodataport.cdl ADL := hellodataport.camkes
 
-Ping\_CFILES = components/Ping/src/main.c Ping\_HFILES =
-components/Ping/include/porttype.h Pong\_CFILES =
-components/Pong/src/main.c Pong\_HFILES =
+Ping_CFILES = components/Ping/src/main.c Ping_HFILES =
+components/Ping/include/porttype.h Pong_CFILES =
+components/Pong/src/main.c Pong_HFILES =
 components/Pong/include/porttype.h
 
-include \${SOURCE\_DIR}/../../tools/camkes/camkes.mk }}}
+include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: {{{ source "apps/hellodataport/Kconfig" }}}
@@ -587,44 +587,44 @@ your application. Take apps/hellodataport/Makefile as an example
 
 {{{\#!highlight makefile \# apps/hellodataport/Makefile
 
-TARGETS := \$(notdir \${SOURCE\_DIR}).cdl ADL := hellodataport.camkes
+TARGETS := \$(notdir \${SOURCE_DIR}).cdl ADL := hellodataport.camkes
 
-Ping\_CFILES =
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Ping/src/*.c))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Ping/src/plat/\${PLAT}/*.c))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Ping/src/arch/\${ARCH}/\*.c))
+Ping_CFILES =
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Ping/src/*.c))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Ping/src/plat/\${PLAT}/*.c))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Ping/src/arch/\${ARCH}/\*.c))
 
-Ping\_HFILES =
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Ping/include/*.h))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Ping/include/plat/\${PLAT}/*.h))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Ping/include/arch/\${ARCH}/\*.h))
+Ping_HFILES =
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Ping/include/*.h))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Ping/include/plat/\${PLAT}/*.h))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Ping/include/arch/\${ARCH}/\*.h))
 
-Pong\_CFILES =
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Pong/src/*.c))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Pong/src/plat/\${PLAT}/*.c))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Pong/src/arch/\${ARCH}/\*.c))
+Pong_CFILES =
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Pong/src/*.c))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Pong/src/plat/\${PLAT}/*.c))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Pong/src/arch/\${ARCH}/\*.c))
 
-Pong\_HFILES =
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Pong/include/*.h))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Pong/include/plat/\${PLAT}/*.h))
- \$(patsubst \${SOURCE\_DIR}/%,%,\$(wildcard
-\${SOURCE\_DIR}/components/Pong/include/arch/\${ARCH}/\*.h))
+Pong_HFILES =
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Pong/include/*.h))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Pong/include/plat/\${PLAT}/*.h))
+ \$(patsubst \${SOURCE_DIR}/%,%,\$(wildcard
+\${SOURCE_DIR}/components/Pong/include/arch/\${ARCH}/\*.h))
 
-include \${SOURCE\_DIR}/../../tools/camkes/camkes.mk }}}
+include \${SOURCE_DIR}/../../tools/camkes/camkes.mk }}}
 
-Variable SOURCE\_DIR will always point to application folder. In this
-case, SOURCE\_DIR = camkes-project/apps/hellodataport
+Variable SOURCE_DIR will always point to application folder. In this
+case, SOURCE_DIR = camkes-project/apps/hellodataport
 
 \$(wildcard) function will expands *.c in src/ and*.h in include/
 directory \$(patsubst) function will substitute all .c .h files with

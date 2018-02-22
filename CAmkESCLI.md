@@ -16,7 +16,7 @@ For an example project that can be managed by the CLI, see:
 "hello")
 
 
-{{{ camkes-cli new hello --template hello\_world }}}
+{{{ camkes-cli new hello --template hello_world }}}
 
 ### Initialise a fresh checkout of existing project
 

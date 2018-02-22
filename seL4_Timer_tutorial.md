@@ -16,7 +16,7 @@ page, if they were covered by a previous tutorial in the series.
 
   -   Allocate a notification object.
   -   Set up a timer provided by seL4 libs.
-  -   Use seL4\_libs functions to manipulate timer and
+  -   Use seL4_libs functions to manipulate timer and
       handle interrupts.
 
 ## Walkthrough
@@ -25,7 +25,7 @@ page, if they were covered by a previous tutorial in the series.
 First, build and run the tutorial:
 
 {{{ \# select the config for the first tutorial make
-ia32\_hello-timer\_defconfig \# build it make -j libmuslc && make \# run
+ia32_hello-timer_defconfig \# build it make -j libmuslc && make \# run
 it in qemu make simulate }}}
 
 Before you have done any tasks, when running the tutorial should show
@@ -55,13 +55,13 @@ task.
 ### TASK 2
 
 
-Use our library function sel4platsupport\_get\_default\_timer to
+Use our library function sel4platsupport_get_default_timer to
 initialise a timer driver. Assign it to the timer global variable.
 
 After this change, the server will no longer fault and the output will
 look something like this:
 
-{{{ Searching for ACPI\_SIG\_RSDP Parsing ACPI tables timer client: hey
+{{{ Searching for ACPI_SIG_RSDP Parsing ACPI tables timer client: hey
 hey hey <hpet_get_timer@hpet.c>:362 Requested fsb delivery, but timer0
 does not support main: hello world main: got a message from 0x61 to
 sleep 2 seconds timer client wakes up: got the current timer tick:

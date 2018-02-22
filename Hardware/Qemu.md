@@ -50,7 +50,7 @@ component. More information about the VM on seL4 can be found on
 I replicate some of the steps described there to make it easier to
 follow. First pull the code from the repository using ''repo'' tool.
 
-{{{ mkdir test\_default cd test\_default repo init -u
+{{{ mkdir test_default cd test_default repo init -u
 <https://github.com/seL4/camkes-vm-manifest.git> repo sync }}}
 
 We use ''optiplex9020'' configuration, because it is the most generic
@@ -59,7 +59,7 @@ one. The other configurations for
 compiled too, but you can't run them properly in qemu because they
 require a very specific hardware.
 
-Type: {{{ make clean make optiplex9020\_defconfig make silentoldconfig
+Type: {{{ make clean make optiplex9020_defconfig make silentoldconfig
 make }}}
 
 If everything goes fine, you should end up with two binaries in
@@ -72,7 +72,7 @@ which is the seL4 kernel.
 
 To run the images we just compiled, do:
 
-{{{ cd images qemu-system-x86\_64 -m 512 -kernel kernel-ia32-pc99
+{{{ cd images qemu-system-x86_64 -m 512 -kernel kernel-ia32-pc99
 -initrd capdl-loader-experimental-image-ia32-pc99 --enable-kvm -smp 2
 -cpu Nehalem,+vmx -nographic }}}
 
@@ -86,10 +86,10 @@ details about the VM, go to
 
 The qemu arguments are:
 
-:   1.  '''qemu-system-x86\_64''' - emulate x86/x64 system
+:   1.  '''qemu-system-x86_64''' - emulate x86/x64 system
     2.  '''-m 512''' - amount of RAM dedicated to qemu VM
-    3.  '''-kernel &lt;img\_name&gt;''' - path to kernel image
-    4.  '''-initrd &lt;img\_name&gt;''' - path to application image
+    3.  '''-kernel &lt;img_name&gt;''' - path to kernel image
+    4.  '''-initrd &lt;img_name&gt;''' - path to application image
     5.  '''--enable-kvm''' - necessary to enable Vt-x in qemu (seL4
         can't start a VM without this flag)
     6.  '''-smp 2''' - number of CPUs dedicated to qemu VM
@@ -133,7 +133,7 @@ conversion step, but we din't test it.
 Once you have the qemu image, you can run qemu with the following
 command:
 
-{{{ qemu-system-x86\_64 -m 512 -hda sel4\_test.img --enable-kvm -smp 2
+{{{ qemu-system-x86_64 -m 512 -hda sel4_test.img --enable-kvm -smp 2
 -cpu Nehalem,+vmx -serial /dev/pts/3 -vga std }}}
 
 Where the '''-vga std''' option ''should'' pass the frame buffer to the
@@ -150,7 +150,7 @@ Linux on a virtual hard drive and then probe what is available.
 [Qemu wiki](https://en.wikibooks.org/wiki/QEMU/Images#Creating_an_image) provides a good description how to create a new image, and how
 to boot from an iso file:
 
-{{{ qemu-img create -f qcow2 linux.img 3G qemu-system-x86\_64 -m 256
+{{{ qemu-img create -f qcow2 linux.img 3G qemu-system-x86_64 -m 256
 -hda linux.img -cdrom minimal.iso -enable-kvm }}}
 
 We used
@@ -159,8 +159,8 @@ We used
 Once you get your Linux system installed, you can type '''lspci''', you
 should see something like this:
 
-{{[attachment:qemu\_vga.png|VGA|width=100%](attachment:qemu_vga.png%7CVGA%7Cwidth=100%)}}
-{{[attachment:qemu\_ethernet.png|Ethernet|width=100%](attachment:qemu_ethernet.png%7CEthernet%7Cwidth=100%)}}
+{{[attachment:qemu_vga.png|VGA|width=100%](attachment:qemu_vga.png%7CVGA%7Cwidth=100%)}}
+{{[attachment:qemu_ethernet.png|Ethernet|width=100%](attachment:qemu_ethernet.png%7CEthernet%7Cwidth=100%)}}
 
 The first device is the VGA controller, the second one is the Ethernet
 controller. You can verify that seL4 can see these devices, because when
@@ -170,14 +170,14 @@ the output:
 {{{ PCI :: 00.02.00 : Unknown vendor ID. Unknown device ID. (vid 0x1234
 did 0x1111) line0 pin0 BAR0 : \[ mem 0xfd000000 sz 0x1000000 szmask
 0xff000000 prefetch \] BAR2 : \[ mem 0xfebf0000 sz 0x1000 szmask
-0xfffff000 \] lib\_pci\_scan\_dev found pci device 0 3 BASE\_ADDR\[0\]
----- base\_addr\_space\[0\]: 0x0 \[PCI\_BASE\_ADDRESS\_SPACE\_MEMORY\]
-base\_addr\_type\[0\]: 0x0 \[ 32bit \] base\_addr\_prefetchable\[0\]: no
-base\_addr\[0\]: 0xfebc0000 base\_addr\_size\_mask\[0\]: 0xfffe0000
-BASE\_ADDR\[1\] ---- base\_addr\_space\[1\]: 0x1
-\[PCI\_BASE\_ADDRESS\_SPACE\_IO\] base\_addr\_type\[1\]: 0x0 \[ 32bit \]
-base\_addr\_prefetchable\[1\]: no base\_addr\[1\]: 0xc000
-base\_addr\_size\_mask\[1\]: 0xffffffc0
+0xfffff000 \] lib_pci_scan_dev found pci device 0 3 BASE_ADDR\[0\]
+---- base_addr_space\[0\]: 0x0 \[PCI_BASE_ADDRESS_SPACE_MEMORY\]
+base_addr_type\[0\]: 0x0 \[ 32bit \] base_addr_prefetchable\[0\]: no
+base_addr\[0\]: 0xfebc0000 base_addr_size_mask\[0\]: 0xfffe0000
+BASE_ADDR\[1\] ---- base_addr_space\[1\]: 0x1
+\[PCI_BASE_ADDRESS_SPACE_IO\] base_addr_type\[1\]: 0x0 \[ 32bit \]
+base_addr_prefetchable\[1\]: no base_addr\[1\]: 0xc000
+base_addr_size_mask\[1\]: 0xffffffc0
 
 PCI :: 00.03.00 : intel Unknown device ID. (vid 0x8086 did 0x100e) line11 pin1
 

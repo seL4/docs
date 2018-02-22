@@ -21,7 +21,7 @@ We have also developed 2 daughterboards for the TK1-SOM
 
 Upstream U-Boot now supports this board.
 
-Follow the instructions for the [Jetson TK1](Hardware/jetsontk1\#Flash\_U-Boot), however:
+Follow the instructions for the [Jetson TK1](Hardware/jetsontk1\#Flash_U-Boot), however:
 
 :   -   use <https://github.com/wom-bat/tegra-uboot-flasher-manifests>
         as the URL for repo
@@ -29,9 +29,9 @@ Follow the instructions for the [Jetson TK1](Hardware/jetsontk1\#Flash\_U-Boot),
     -   use cei-tk1-som (instead of jetson-tk1) as the board ID
 
 As with the [Jetson](Hardware/jetsontk1) with this u-boot, set the
-environment variable bootm\_boot\_mode to nonsec In this boot mode, the
-standard Linux kernel will not boot: recompile with CONFIG\_ARM\_PSCI on
-and CONFIG\_CPU\_IDLE off.
+environment variable bootm_boot_mode to nonsec In this boot mode, the
+standard Linux kernel will not boot: recompile with CONFIG_ARM_PSCI on
+and CONFIG_CPU_IDLE off.
 
 The Pinmux spreadsheet, for use with
 <https://github.com/NVIDIA/tegra-pinmux-scripts> is
@@ -87,7 +87,7 @@ On the u-boot console do:
 
 {{{
 
-:   setenv dfu\_alt\_info "kernel ram \$loadaddr 0x1000000" saveenv
+:   setenv dfu_alt_info "kernel ram \$loadaddr 0x1000000" saveenv
 
 }}} once.
 
@@ -114,15 +114,15 @@ at address \$loadaddr. You can then run it in uboot with
 
 If you want, you can automate all this with:
 
-  . setenv bootcmd\_dfu "dfu 0 ram 0; bootelf \$loadaddr" saveenv
+  . setenv bootcmd_dfu "dfu 0 ram 0; bootelf \$loadaddr" saveenv
 
 then just
 
-  . run bootcmd\_dfu
+  . run bootcmd_dfu
 
 If you ''always'' want to do this you can do
 
-  . setenv bootcmd "run bootcmd\_dfu"
+  . setenv bootcmd "run bootcmd_dfu"
 
 # Booting from a USB storage device
 
@@ -154,11 +154,11 @@ an ext3 filesystem instead.
 Do:
 ===
 
-  sudo env ROOTFS\_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin
+  sudo env ROOTFS_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin
   tk1-som mmcblk0p1
 
 }}} instead of using the instructions in the Colorado-provided
 README.txt
 
 Alternatively we have a customised image that we use: more information
-at [Hardware/CEI\_TK1\_SOM/L4TCan](../Hardware/CEI\_TK1\_SOM/L4TCan).
+at [Hardware/CEI_TK1_SOM/L4TCan](../Hardware/CEI_TK1_SOM/L4TCan).

@@ -62,7 +62,7 @@ curl -sSL <https://get.haskellstack.org/> | sh }}}
 
 If you are using Debian, or Ubuntu 16.10 or higher, you'll need to
 modify the compiler/linker flags for building ghc. Modify
-\~/.stack/programs/x86\_64-linux/ghc-8.0.1/lib/ghc-8.0.1/settings.
+\~/.stack/programs/x86_64-linux/ghc-8.0.1/lib/ghc-8.0.1/settings.
 Replace the lines: {{{ ("C compiler flags", " -fno-stack-protector"),
 ("C compiler link flags", ""), }}} with {{{ ("C compiler flags", "
 -fno-PIE -fPIC -fno-stack-protector"), ("C compiler link flags",
@@ -79,7 +79,7 @@ libraries and example apps repo init -u
 <https://github.com/seL4/camkes-manifest.git> -m next.xml repo sync
 
 \# Select an app to build (build configs for example apps can be found
-in the "configs" directory) make arm\_simple\_defconfig
+in the "configs" directory) make arm_simple_defconfig
 
 \# Compile it make
 

@@ -9,7 +9,7 @@
 ### Kernel
 
 
-When debugging the kernel, make sure CONFIG\_DEBUG and CONFIG\_PRINTING
+When debugging the kernel, make sure CONFIG_DEBUG and CONFIG_PRINTING
 are enabled. This can be done by make menuconfig and enabling the
 following options:
 
@@ -28,7 +28,7 @@ including:
 
 
 To make sure similar settings are passed to the user, make sure
-CONFIG\_USER\_DEBUG
+CONFIG_USER_DEBUG
 
 Similarly, enable this setting by using make menuconfig and setting:
 
@@ -76,8 +76,8 @@ directed to the (emulated) UART device on your terminal:
 {{{ ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
 paddr=\[82000000..8225001f\] ELF-loading image 'kernel'
 paddr=\[80000000..80033fff\] vaddr=\[f0000000..f0033fff\]
-virt\_entry=f0000000 ELF-loading image 'sel4test-driver'
-paddr=\[80034000..8036efff\] vaddr=\[10000..34afff\] virt\_entry=1c880
+virt_entry=f0000000 ELF-loading image 'sel4test-driver'
+paddr=\[80034000..8036efff\] vaddr=\[10000..34afff\] virt_entry=1c880
 Enabling MMU and paging Jumping to kernel-image entry point...
 
 Bootstrapping kernel Switching to a safer, bigger stack... seL4 Test
@@ -168,13 +168,13 @@ or turning the MMU on/off) will confuse GDB and you may find breakpoints
 triggering unexpectedly or being missed.
 
 The process we have described is similar for x86, though if you are on
-an x86 or x86\_64 host you can simply use your platform's native GDB,
+an x86 or x86_64 host you can simply use your platform's native GDB,
 gdb.
 
 Below is another example for debugging userspace sel4test on ia32:
 
 {{{ \# Apply a sel4test config for simulating using qemu. make
-ia32\_release\_xml\_defconfig
+ia32_release_xml_defconfig
 
 \# After building, check that all of the tests run and pass. make
 simulate-ia32​
@@ -261,13 +261,13 @@ cross-compiler prefix.
 
 {{{\#!highlight bash numbers=off
 
-:   arm-none-eabi-objdump -D binary\_file\_name &gt; dump.s
+:   arm-none-eabi-objdump -D binary_file_name &gt; dump.s
 
 }}} For x86
 
 {{{\#!highlight bash numbers=off
 
-:   objdump -D binary\_file\_name &gt; dump.s
+:   objdump -D binary_file_name &gt; dump.s
 
 }}} The file {{{dump.s}}} has the human-readable assembly instructions.
 
@@ -276,7 +276,7 @@ If you have symbols and want (C) source information in your disassembly
 
 {{{\#!highlight bash numbers=off
 
-:   objdump -DS binary\_file\_name
+:   objdump -DS binary_file_name
 
 }}} === Debugging seL4test ===
 
@@ -301,9 +301,9 @@ debugging is done with:
 
   -   objdump as described above,
   -   printf,
-  -   \_\_builtin\_return\_address (to figure out stack traces).
+  -   \__builtin_return_address (to figure out stack traces).
 
-In the kernel, we provide debug\_printKernelEntryReason found in
+In the kernel, we provide debug_printKernelEntryReason found in
 [debug.h](https://github.com/seL4/seL4/blob/master/include/api/debug.h)
 which can be used at any point in the kernel to output the current
 operation that the kernel is doing.

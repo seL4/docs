@@ -8,13 +8,13 @@
 :   -   Support for building standalone ia32 kernel added in e7327fa6df3
     -   ia32: Set sensible defaults for FS and GS selectors in
         c2f6d48bcf2
-    -   aarch64: Use tpidrro\_el0 for IPC buffer instead of tpidr\_el0
+    -   aarch64: Use tpidrro_el0 for IPC buffer instead of tpidr_el0
         in ae9fe9b5d18
     -   More seL4 manual documentation added for aarch64 object
         invocations
-    -   Default NUM\_DOMAINS set to 16 for x86-64 standalone builds in
+    -   Default NUM_DOMAINS set to 16 for x86-64 standalone builds in
         baa9798f793
-    -   libsel4: Return seL4\_Error in invocation stubs in 8fb06eecff9
+    -   libsel4: Return seL4_Error in invocation stubs in 8fb06eecff9
         ''' This is a source code level breaking change '''
     -   Add a CMake based build system in 0b73072016e
     -   x86: Increase TCB size for debug builds in 4c8be8f4f91
@@ -38,12 +38,12 @@
 
 :   -   This release is not source compatible with previous releases.
     -   seL4 invocations that previously returned long now return
-        seL4\_Error which is an enum. Our libraries have already been
+        seL4_Error which is an enum. Our libraries have already been
         updated to reflect this change, but in other places where seL4
         invocations are used directly, the return types will need to be
         updated to reflect this change.
     -   On x86 some structs in the Bootinfo have been rearranged. This
-        only affects seL4\_VBEModeInfoBlock\_t which is used if VESA
+        only affects seL4_VBEModeInfoBlock_t which is used if VESA
         BIOS Extensions (VBE) information is being used.
 
 # Known issues

@@ -89,13 +89,13 @@ string in a dataport to {{{strlen}}}) requires casting from a volatile
 pointer to a regular pointer - an undefined operation in c.
 
 For a dataport interface foo, a component has access to
-{{{foo\_acquire()}}} and {{{foo\_release()}}} functions (they may
-instead be macros). Call {{{foo\_acquire()}}} between multiple reads
+{{{foo_acquire()}}} and {{{foo_release()}}} functions (they may
+instead be macros). Call {{{foo_acquire()}}} between multiple reads
 from a dataport, where the correct behaviour of the program depends on
 the contents of the dataport possibly changing between reads. Call
-{{{foo\_release()}}} between multiple writes to a dataport, where the
+{{{foo_release()}}} between multiple writes to a dataport, where the
 correct behaviour of the program depends on writes preceding the
-{{{foo\_release()}}} in the program code being performed strictly before
+{{{foo_release()}}} in the program code being performed strictly before
 the writes following it.
 
 ## Many-to-Many Connections
@@ -143,17 +143,17 @@ driver;
 }
 =
 
-CAmkES 2 configuration: {{{ configuration { device.registers\_attributes
+CAmkES 2 configuration: {{{ configuration { device.registers_attributes
 # "0x12345000:0x1000"; // string in format "paddr:size"
-device.interrupt\_attributes
- 27; // irq number device.port\_attributes
-# "0x40:0x40"; // string in format "start\_port:end\_port" } }}}
+device.interrupt_attributes
+ 27; // irq number device.port_attributes
+# "0x40:0x40"; // string in format "start_port:end_port" } }}}
 
-CAmkES 3 configuration: {{{ configuration { device.registers\_paddr
+CAmkES 3 configuration: {{{ configuration { device.registers_paddr
 
 0x12345000; // separate attribute for paddr and size
-device.registers\_size = 0x1000; device.interrupt\_irq\_number = 27; //
-attribute name has changed device.port\_attributes = "0x40:0x40"; //
+device.registers_size = 0x1000; device.interrupt_irq_number = 27; //
+attribute name has changed device.port_attributes = "0x40:0x40"; //
 unchanged } }}}
 
 ## Interrupt API
@@ -161,8 +161,8 @@ unchanged } }}}
 
 In CAmkES 2, interrupts were abstracted as CAmkES events, emitted from a
 hardware component. For a component with an interface {{{foo}}}
-connected to an interrupt, components could call {{{foo\_wait()}}},
-{{{foo\_poll()}}}, and {{{foo\_reg\_callback()}}}, as with a regular
+connected to an interrupt, components could call {{{foo_wait()}}},
+{{{foo_poll()}}}, and {{{foo_reg_callback()}}}, as with a regular
 event.
 
 In CAmkES 3, interrupts are still abstracted as events in the ADL
@@ -170,16 +170,16 @@ In CAmkES 3, interrupts are still abstracted as events in the ADL
 interface for interacting with interrupts than with regular event
 interfaces. More specifically, a component with an interface {{{foo}}}
 connected with the {{{seL4HardwareInterrupt}}} connection has access to
-{{{foo\_acknowledge()}}} which acknowledges the associated interrupt to
+{{{foo_acknowledge()}}} which acknowledges the associated interrupt to
 the kernel. In addition, the component implementation must provide a
-definition of a function {{{void foo\_handler(void)}}}. The standard
-event methods ({{{foo\_wait()}}}, {{{foo\_poll()}}}, and
-{{{foo\_reg\_callback()}}}) are not implemented for interrupts.
+definition of a function {{{void foo_handler(void)}}}. The standard
+event methods ({{{foo_wait()}}}, {{{foo_poll()}}}, and
+{{{foo_reg_callback()}}}) are not implemented for interrupts.
 
-The user-provided function {{{foo\_handler()}}} will be called by a
+The user-provided function {{{foo_handler()}}} will be called by a
 dedicated interrupt-handling thread (one thread per interface connected
 with {{{seL4HardwareInterrupt}}}). Unlike callbacks registered with
-{{{\*\_reg\_callback}}}, interrupt handlers do not need to be explicitly
+{{{\*_reg_callback}}}, interrupt handlers do not need to be explicitly
 registered, and do not become unregistered after calling.
 
 ## Hierarchical Components
@@ -195,14 +195,14 @@ sub-component:
  
   composition {
  
-  > // internal components component UartDevice uart\_device; component
-  > UartDriver uart\_driver;
+  > // internal components component UartDevice uart_device; component
+  > UartDriver uart_driver;
   >
   > // internal connection connection seL4HardwareMMIO conn(from
-  > uart\_device.regs, to uart\_driver.regs);
+  > uart_device.regs, to uart_driver.regs);
   >
   > // export interface of driver component as interface of this
-  > component connection ExportRPC exp(from uart\_driver.uart, to
+  > component connection ExportRPC exp(from uart_driver.uart, to
   > serial);
  
   }
@@ -217,14 +217,14 @@ sub-components: {{{ component Serial {
  
   composition {
  
-  > // internal components component UartDevice uart\_device; component
-  > UartDriver uart\_driver;
+  > // internal components component UartDevice uart_device; component
+  > UartDriver uart_driver;
   >
   > // internal connection connection seL4HardwareMMIO conn(from
-  > uart\_device.regs, to uart\_driver.regs);
+  > uart_device.regs, to uart_driver.regs);
   >
   > // export interface of driver component as interface of this
-  > component export uart\_driver.uart -&gt; serial;
+  > component export uart_driver.uart -&gt; serial;
  
   }
 

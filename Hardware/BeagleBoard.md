@@ -58,7 +58,7 @@ dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0 }}}
 Then add yourself to the right group:
 
 {{{\#!highlight bash numbers=off sudo usermod -G dialout -a
-your\_login\_name }}} === U-Boot === Now minicom should connect to what
+your_login_name }}} === U-Boot === Now minicom should connect to what
 it thinks is a "modem", and then give you a good old console to work
 with. You are now in the bootloader, U-Boot, of the \~BeagleBoard. You
 can type commands here and it'll display the results.
@@ -78,10 +78,10 @@ instructions at
 
 Then run:
 
-{{{\#!highlight bash numbers=off make beagle\_debug\_xml\_defconfig make
+{{{\#!highlight bash numbers=off make beagle_debug_xml_defconfig make
 }}} Which after a few minutes should give you:
 
-{{{ \[GEN\_IMAGE\] sel4test-image-arm-omap3 }}} Now, the ELF image we
+{{{ \[GEN_IMAGE\] sel4test-image-arm-omap3 }}} Now, the ELF image we
 boot into is the sel4test-image-arm file. Pull out the SD card, put it
 into the SD card reader and plug into your computer, then copy that file
 into the boot sector, then sync and remove, then plug the SD card back

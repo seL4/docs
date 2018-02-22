@@ -45,8 +45,8 @@ repository, there are several versioned manifests such as
 You want to pass the name of the manifest to your “repo init” command,
 similar to:
 
-''“repo init -u &lt;MANIFEST\_REPO\_CLONE\_URL&gt; -m
-&lt;VERSIONED\_MANIFEST\_FILENAME&gt;”''
+''“repo init -u &lt;MANIFEST_REPO_CLONE_URL&gt; -m
+&lt;VERSIONED_MANIFEST_FILENAME&gt;”''
 
 Code being on the master branch '''does not imply''' that it has been
 formally verified. The verified build of the kernel is currently I.MX7

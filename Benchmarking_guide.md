@@ -32,25 +32,25 @@ time of the next thread.
 After enabling this feature, some few system calls can be used to start,
 stop, and retrieve data.
 
-'''seL4\_BenchmarkResetLog() ''' This system call resets global counters
+'''seL4_BenchmarkResetLog() ''' This system call resets global counters
 (since the previous call to the same function) and idleThread counters
 that hold utilisation values, and starts CPU utilisation tracking.
 
-'''seL4\_BenchmarkResetThreadUtilisation(seL4\_CPtr thread\_cptr)'''
+'''seL4_BenchmarkResetThreadUtilisation(seL4_CPtr thread_cptr)'''
 resets the utilisation counters for the requested thread. It's the
 resposibility of the user to reset the thread's counters using this
-system call before calling seL4\_BenchmarkResetLog(), especially if
-seL4\_BenchmarkResetLog() is called multiple times to track the same
+system call before calling seL4_BenchmarkResetLog(), especially if
+seL4_BenchmarkResetLog() is called multiple times to track the same
 thread(s).
 
-'''seL4\_BenchmarkFinalizeLog()''' Stops the CPU tracking feature but
+'''seL4_BenchmarkFinalizeLog()''' Stops the CPU tracking feature but
 doesn't reset the counters. Calling this system call without a previous
-seL4\_BenchmarkResetLog() call has no effect.
+seL4_BenchmarkResetLog() call has no effect.
 
-'''seL4\_BenchmarkGetThreadUtilisation(seL4\_CPtr thread\_cptr)''' Gets
-the utilisation time of the thread that '''thread\_cptr '''capability
-points to between calls to seL4\_BenchmarkResetLog() and
-seL4\_BenchmarkFinalizeLog(). The utilisation time is dumped to the
+'''seL4_BenchmarkGetThreadUtilisation(seL4_CPtr thread_cptr)''' Gets
+the utilisation time of the thread that '''thread_cptr '''capability
+points to between calls to seL4_BenchmarkResetLog() and
+seL4_BenchmarkFinalizeLog(). The utilisation time is dumped to the
 IPCBuffer (first 64-bit word) of the calling thread into a fixed
 position. Additionally idle thread and overall CPU utilisation times are
 dumped to subsequent 64-bit words in the IPCBuffer.
@@ -58,28 +58,28 @@ dumped to subsequent 64-bit words in the IPCBuffer.
 Example code of using this feature:
 
 {{{\#!cplusplus numbers=off \#include
-&lt;sel4/benchmark\_utilisation\_types.h&gt;
+&lt;sel4/benchmark_utilisation_types.h&gt;
 
-uint64\_t *ipcbuffer = (uint64\_t*)
-&(seL4\_GetIPCBuffer()-&gt;msg\[0\]);
+uint64_t *ipcbuffer = (uint64_t*)
+&(seL4_GetIPCBuffer()-&gt;msg\[0\]);
 
-seL4\_BenchmarkResetThreadUtilisation(seL4\_CapInitThreadTCB);
+seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
 
-seL4\_BenchmarkResetLog(); ... seL4\_BenchmarkFinalizeLog();
+seL4_BenchmarkResetLog(); ... seL4_BenchmarkFinalizeLog();
 
-seL4\_BenchmarkGetThreadUtilisation(seL4\_CapInitThreadTCB);
+seL4_BenchmarkGetThreadUtilisation(seL4_CapInitThreadTCB);
 printf("Init thread utilisation = %llun",
-ipcbuffer\[BENCHMARK\_TCB\_UTILISATION\]); printf("Idle thread
-utilisation = %llun", ipcbuffer\[BENCHMARK\_IDLE\_UTILISATION\]);
+ipcbuffer\[BENCHMARK_TCB_UTILISATION\]); printf("Idle thread
+utilisation = %llun", ipcbuffer\[BENCHMARK_IDLE_UTILISATION\]);
 printf("Overall utilisation = %llun",
-ipcbuffer\[BENCHMARK\_TOTAL\_UTILISATION\]); }}}
+ipcbuffer\[BENCHMARK_TOTAL_UTILISATION\]); }}}
 
 ## In kernel log-buffer
 
 
 An in-kernel log buffer can be provided by the user when
-CONFIG\_ENABLE\_BENCHARMKS is set with the system call
-seL4\_BenchmarkSetLogBuffer. Users must provide a large frame capability
+CONFIG_ENABLE_BENCHARMKS is set with the system call
+seL4_BenchmarkSetLogBuffer. Users must provide a large frame capability
 for the kernel to use as a log buffer. This is mapped write-through to
 avoid impacting the caches, assuming that the kernel only writes to the
 log buffer and doesn't read to it during benchmarking. Once a benchmark
@@ -96,15 +96,15 @@ to track the time between points.
  Set "Maximum number of tracepoints" in Kconfig (seL4
 &gt; seL4 System Parameters) to a non-zero value.
 
-Wrap the regions you wish to time with TRACE\_POINT\_START(i) and
-TRACE\_POINT\_STOP(i) where i is an integer from 0 to 1 less than the
+Wrap the regions you wish to time with TRACE_POINT_START(i) and
+TRACE_POINT_STOP(i) where i is an integer from 0 to 1 less than the
 value of "Maximum number of tracepoints".
 
-The number of cycles consumed between a TRACE\_POINT\_START and
-TRACE\_POINT\_STOP will be stored in an in-kernel log. Entries of this
-log consist of a key (the argument to TRACE\_POINT\_START and
-TRACE\_POINT\_STOP) and a value (the number of cycles counted between
-TRACE\_POINT\_START an TRACE\_POINT\_STOP).
+The number of cycles consumed between a TRACE_POINT_START and
+TRACE_POINT_STOP will be stored in an in-kernel log. Entries of this
+log consist of a key (the argument to TRACE_POINT_START and
+TRACE_POINT_STOP) and a value (the number of cycles counted between
+TRACE_POINT_START an TRACE_POINT_STOP).
 
 Functionality for extracting and processing entries from this buffer is
 provided in libsel4bench (<https://github.com/seL4/libsel4bench>).
@@ -117,8 +117,8 @@ in the sel4bench app(<https://github.com/seL4/libsel4bench>).
 tracepoints adds a small amount of overhead to the kernel. To measure
 this overhead, use a pair of nested tracepoints:
 
-{{{\#!cplusplus numbers=off TRACE\_POINT\_START(0);
-TRACE\_POINT\_START(1); TRACE\_POINT\_STOP(1); TRACE\_POINT\_STOP(0);
+{{{\#!cplusplus numbers=off TRACE_POINT_START(0);
+TRACE_POINT_START(1); TRACE_POINT_STOP(1); TRACE_POINT_STOP(0);
 }}} The outer tracepoints will measure the time taken to start and stop
 the inner tracepoints. The cycle count recorded by the outer tracepoints
 will be slightly skewed, as starting and stopping itself (the outer
@@ -273,38 +273,38 @@ style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
 
 ### Advanced Use
  ==== Conditional Logging ==== A log is stored when
-TRACE\_POINT\_STOP(i) is called, only if a corresponding
-TRACE\_POINT\_START(i) was called since the last call to
-TRACE\_POINT\_STOP(i) or system boot. This allows for counting cycles of
+TRACE_POINT_STOP(i) is called, only if a corresponding
+TRACE_POINT_START(i) was called since the last call to
+TRACE_POINT_STOP(i) or system boot. This allows for counting cycles of
 a particular path through some region of code. Here are some examples:
 
 The cycles consumed by functions f and g is logged with the key 0, only
 when the condition c is true:
 
-{{{\#!cplusplus numbers=off TRACE\_POINT\_START(0); f(); if (c) { g();
-TRACE\_POINT\_STOP(0); } }}} The cycles consumed by functions f and g is
+{{{\#!cplusplus numbers=off TRACE_POINT_START(0); f(); if (c) { g();
+TRACE_POINT_STOP(0); } }}} The cycles consumed by functions f and g is
 logged with the key 1, only when the condition c is true:
 
-{{{\#!cplusplus numbers=off if (c) { f(); TRACE\_POINT\_START(1); } g();
-TRACE\_POINT\_STOP(1); }}} These two techniques can be combined to
+{{{\#!cplusplus numbers=off if (c) { f(); TRACE_POINT_START(1); } g();
+TRACE_POINT_STOP(1); }}} These two techniques can be combined to
 record cycle counts only when a particular path between 2 points is
 followed. In the following example, cycles consumed by functions f, g
 and h is logged, only when the condition c is true. Cycle counts are
 stored with 2 keys (2 and 3) which can be combined after extracting the
 data to user level.
 
-{{{\#!cplusplus numbers=off TRACE\_POINT\_START(2); f(); if (c) { h();
-TRACE\_POINT\_STOP(2); TRACE\_POINT\_START(3); } g();
-TRACE\_POINT\_STOP(3); }}} ==== Interleaving/Nesting ==== It's possible
+{{{\#!cplusplus numbers=off TRACE_POINT_START(2); f(); if (c) { h();
+TRACE_POINT_STOP(2); TRACE_POINT_START(3); } g();
+TRACE_POINT_STOP(3); }}} ==== Interleaving/Nesting ==== It's possible
 to interleave tracepoints:
 
-{{{\#!cplusplus numbers=off TRACE\_POINT\_START(0); ...
-TRACE\_POINT\_START(1); ... TRACE\_POINT\_STOP(0); ...
-TRACE\_POINT\_STOP(1); }}} and to nest tracepoints:
+{{{\#!cplusplus numbers=off TRACE_POINT_START(0); ...
+TRACE_POINT_START(1); ... TRACE_POINT_STOP(0); ...
+TRACE_POINT_STOP(1); }}} and to nest tracepoints:
 
-{{{\#!cplusplus numbers=off TRACE\_POINT\_START(0); ...
-TRACE\_POINT\_START(1); ... TRACE\_POINT\_STOP(1); ...
-TRACE\_POINT\_STOP(0); }}} When interleaving or nesting tracepoints, be
+{{{\#!cplusplus numbers=off TRACE_POINT_START(0); ...
+TRACE_POINT_START(1); ... TRACE_POINT_STOP(1); ...
+TRACE_POINT_STOP(0); }}} When interleaving or nesting tracepoints, be
 sure to account for the overhead that will be introduced.
 
 ## Kernel entry tracking
@@ -313,34 +313,34 @@ info about interrupts, syscall, timestamp, invocations and capability
 types. The number of kernel entries is restricted by the log buffer
 size. The kernel provides a reserved area within its address space to
 map the log buffer. It's the responsibility of the user to allocate a
-user-level log buffer (currently can be only of seL4\_LargePageBits
+user-level log buffer (currently can be only of seL4_LargePageBits
 size) and pass it to the kernel to use before doing any operations that
 involve the log buffer, otherwise an error will be triggered having
 incorrect user-level log buffer. To enable this feature, select
-CONFIG\_BENCHMARK\_TRACK\_KERNEL\_ENTRIES from menuconfig.
+CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES from menuconfig.
 
 An example how to create a user-level log buffer (using sel4 libraries)
 and tell the kernel about it is as follows:
 
 {{{\#!cplusplus numbers=off
 
-\#ifdef CONFIG\_BENCHMARK\_TRACK\_KERNEL\_ENTRIES
+\#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 
-\#include &lt;sel4/benchmark\_track\_types.h&gt;
+\#include &lt;sel4/benchmark_track_types.h&gt;
 
   /\* Create large page to use for benchmarking and give to kernel */
-  void*log\_buffer = vspace\_new\_pages(&env.vspace, seL4\_AllRights, 1,
-  seL4\_LargePageBits); if (log\_buffer == NULL) { ZF\_LOGF("Could not
-  map log\_buffer page"); } seL4\_CPtr buffer\_cap =
-  vspace\_get\_cap(&env.vspace, log\_buffer); if (buffer\_cap == NULL) {
-  ZF\_LOGF("Could not get cap for log buffer"); } int res\_buf =
-  seL4\_BenchmarkSetLogBuffer(buffer\_cap); if (res\_buf) {
-  ZF\_LOGF("Could not set log buffer"); }
+  void*log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1,
+  seL4_LargePageBits); if (log_buffer == NULL) { ZF_LOGF("Could not
+  map log_buffer page"); } seL4_CPtr buffer_cap =
+  vspace_get_cap(&env.vspace, log_buffer); if (buffer_cap == NULL) {
+  ZF_LOGF("Could not get cap for log buffer"); } int res_buf =
+  seL4_BenchmarkSetLogBuffer(buffer_cap); if (res_buf) {
+  ZF_LOGF("Could not set log buffer"); }
 
-\#endif CONFIG\_BENCHMARK\_TRACK\_KERNEL\_ENTRIES }}}
+\#endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES }}}
 
-seL4\_BenchmarkResetLog() can be used then to reset the log buffer index
-and start tracking. To stop tracking, call seL4\_BenchmarkFinalizeLog()
+seL4_BenchmarkResetLog() can be used then to reset the log buffer index
+and start tracking. To stop tracking, call seL4_BenchmarkFinalizeLog()
 which returns the log buffer index. Note, if the buffer is
 full/saturated, it will return the last entry index of the log buffer.
 Finally, the log buffer can be analyzed to extract desired info. For

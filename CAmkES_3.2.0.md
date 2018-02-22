@@ -45,7 +45,7 @@ Using seL4 version 8.0.0
 
     -   
 
-        Added "hardware\_cached" attribute to hardware dataports
+        Added "hardware_cached" attribute to hardware dataports
 
         :   This feature had been added to camkes-2.x.x but hadn't been
             forward ported to camkes-3.x.x. documentation:
@@ -60,8 +60,8 @@ Using seL4 version 8.0.0
 large frame promotion and hardware dataports where the capDL loader is
 unable to map the promoted memory. This can be demonstrated by running
 the testhwdataportlrgpages app on either
-arm\_testhwdataportlrgpages\_defconfig or
-x86\_testhwdataportlrgpages\_defconfig configurations. If this
+arm_testhwdataportlrgpages_defconfig or
+x86_testhwdataportlrgpages_defconfig configurations. If this
 functionality is required, hold off upgrading until this issue is fixed.
 
 # Upgrade notes

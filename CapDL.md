@@ -17,24 +17,24 @@ All CapDL-related projects are in this repo:
 
 objects {
 
-:   my\_tcb = tcb my\_cnode = cnode (3 bits) my\_frame = frame (4k,
-    paddr: 0x12345000) // paddr is optional my\_page\_table = pt
-    my\_page\_directory = pd
+:   my_tcb = tcb my_cnode = cnode (3 bits) my_frame = frame (4k,
+    paddr: 0x12345000) // paddr is optional my_page_table = pt
+    my_page_directory = pd
 
 }
 
 caps {
 
-  // Specify cap addresses (ie. CPtrs) in cnodes. my\_cnode { 1: my\_tcb
-  2: my\_frame 3: my\_page\_table 4: my\_page\_directory }
+  // Specify cap addresses (ie. CPtrs) in cnodes. my_cnode { 1: my_tcb
+  2: my_frame 3: my_page_table 4: my_page_directory }
  
   // Specify address space layout. // With 4gb page directories, 4mb
   page tables, and 4kb frames, // the frame at paddr 0x12345000 will be
-  mapped at vaddr 0xABCDE000. my\_pd { 0x2AF: my\_pt } my\_pt { 0xDE:
-  my\_frame }
+  mapped at vaddr 0xABCDE000. my_pd { 0x2AF: my_pt } my_pt { 0xDE:
+  my_frame }
  
-  // Specify root cnode and root paging structure of thread. my\_tcb {
-  vspace: my\_pd cspace: my\_cnode }
+  // Specify root cnode and root paging structure of thread. my_tcb {
+  vspace: my_pd cspace: my_cnode }
 
 }
 =

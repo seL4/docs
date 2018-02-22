@@ -35,14 +35,14 @@ sel4-mcs-tutorials.xml repo sync }}}
 Then, build and run the tutorial:
 
 {{{ \# select the config for the first tutorial make
-ia32\_hello-mcs\_defconfig \# build it make -j8 \# run it in qemu make
+ia32_hello-mcs_defconfig \# build it make -j8 \# run it in qemu make
 simulate }}}
 
 Before you have done any tasks, when running the tutorial should produce
 the following before halting:
 
-{{{ mcs <main@main.c>:179 \[Cond failed: sched\_control ==
-seL4\_CapNull\] Failed to find sched\_control. }}}
+{{{ mcs <main@main.c>:179 \[Cond failed: sched_control ==
+seL4_CapNull\] Failed to find sched_control. }}}
 
 Look for TASK in the apps/hello-mcs directory for each task.
 
@@ -66,30 +66,30 @@ any time to use. When they are created, scheduling contexts are
 
 Scheduling contexts are variable sized in order to allow custom maximum
 sizes for the refill list. This is discussed in more detail in TASK 7.
-The minimum size for a scheduling context is seL4\_MinSchedContextBits.
+The minimum size for a scheduling context is seL4_MinSchedContextBits.
 
 ### TASK 3
 
 
 Configure the scheduling context as a round robin thread using the
-sched\_control capability obtained in TASK 2 and the scheduling context
+sched_control capability obtained in TASK 2 and the scheduling context
 created in TASK 1.
 
 Once you have reached this point, the tutorial output should change. You
-should now see the yielding\_thread that we created outputting messages
+should now see the yielding_thread that we created outputting messages
 in between our own messages, as both threads yield to each other.
 
 {{{ === Round robin === Ping 0 Pong 0 Ping 1 Pong 1 Ping 2 Pong 2 Ping 3
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Pong 5 Ping Pong 6 Ping Pong
 7 Ping Pong 8 Ping Pong 9 === Periodic === Pong 10 Pong 11 Pong 12 Pong
 13 Pong 14 Pong 15 mcs <yielding_thread@main.c>:87 \[Cond failed: i &gt;
-NUM\_YIELDS \* 3\] Too many yeilds! }}}
+NUM_YIELDS \* 3\] Too many yeilds! }}}
 
 ### TASK 4
 
 
 Note that in the previous output, while the Round robin section worked,
-the ''Just Ping'' section did not. The yielding\_thread is set to call
+the ''Just Ping'' section did not. The yielding_thread is set to call
 abort if it runs for too long.
 
 To fix this, convert the round robin thread to passive by unbinding the
@@ -121,12 +121,12 @@ Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 49 1 56 2 63 3 70
 4 76 5 83 6 90 7 97 8 104 Waiting for server echo: &lt;&lt;seL4(CPU 0)
-\[decodeInvocation/578 T0xe0295500 "helper\_thread" @8049746\]:
+\[decodeInvocation/578 T0xe0295500 "helper_thread" @8049746\]:
 Attempted to invoke a null cap \#0.&gt;&gt; &lt;&lt;seL4(CPU 0)
-\[lookupReply/318 T0xe0295500 "helper\_thread" @8049746\]: Cap in reply
+\[lookupReply/318 T0xe0295500 "helper_thread" @8049746\]: Cap in reply
 slot is not a reply&gt;&gt; Caught cap fault in send phase at address
 0x0 while trying to handle: cap fault in receive phase at address 0x0 in
-thread 0xe0295500 "helper\_thread" at address 0x8049746 With stack:
+thread 0xe0295500 "helper_thread" at address 0x8049746 With stack:
 0x10075f2c: 0x10075f5c 0x10075f30: 0x806ef46 0x10075f34: 0x10075f5c
 0x10075f38: 0x0 0x10075f3c: 0x0 0x10075f40: 0x0 0x10075f44: 0x0
 0x10075f48: 0x0 0x10075f4c: 0x0 0x10075f50: 0x0 0x10075f54: 0x0
@@ -136,8 +136,8 @@ thread 0xe0295500 "helper\_thread" at address 0x8049746 With stack:
 ### TASK 7
 
 
-Now we reconfigure the scheduling context to change the extra\_refills
-parameter. Extra\_refills controls how many times the scheduling context
+Now we reconfigure the scheduling context to change the extra_refills
+parameter. Extra_refills controls how many times the scheduling context
 can change for a non-round robin thread without using up all of its
 budget. The current scheduling context is changed when a thread is
 preempted, blocks, or makes an RPC to an active thread (a thread that
@@ -149,7 +149,7 @@ which explains in detail the sporadic server algorithm the MCS version
 of seL4 uses to implement temporal isolation. Note that in code, we use
 the term refill to talk about sporadic replenishments for brevity.
 
-The sender\_thread used in this task simply sends a message and prints
+The sender_thread used in this task simply sends a message and prints
 out the number of times it has sent one. The main thread keeps sending
 messages, and prints out the current time (in seconds -- although on
 qemu these values are not reliable so may not match your output). This
@@ -169,12 +169,12 @@ Pong 3 Ping 4 Pong 4 === Just Ping === Ping Ping Ping Ping Ping ===
 Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
 4 49 5 56 6 56 7 56 8 63 Waiting for server echo: &lt;&lt;seL4(CPU 0)
-\[decodeInvocation/578 T0xe0295500 "helper\_thread" @80497a6\]:
+\[decodeInvocation/578 T0xe0295500 "helper_thread" @80497a6\]:
 Attempted to invoke a null cap \#0.&gt;&gt; &lt;&lt;seL4(CPU 0)
-\[lookupReply/318 T0xe0295500 "helper\_thread" @80497a6\]: Cap in reply
+\[lookupReply/318 T0xe0295500 "helper_thread" @80497a6\]: Cap in reply
 slot is not a reply&gt;&gt; Caught cap fault in send phase at address
 0x0 while trying to handle: cap fault in receive phase at address 0x0 in
-thread 0xe0295500 "helper\_thread" at address 0x80497a6 With stack:
+thread 0xe0295500 "helper_thread" at address 0x80497a6 With stack:
 0x10075f2c: 0x10075f5c 0x10075f30: 0x806efa6 0x10075f34: 0x10075f5c
 0x10075f38: 0x0 0x10075f3c: 0x0 0x10075f40: 0x0 0x10075f44: 0x0
 0x10075f48: 0x0 0x10075f4c: 0x0 0x10075f50: 0x0 0x10075f54: 0x0
@@ -209,7 +209,7 @@ way IPC echo server as an example passive server for this tutorial.
 Currently the main thread waits for a signal from the server that it is
 initialised and ready to be converted to passive.
 
-This task is to edit the server (echo\_server) function to signal to the
+This task is to edit the server (echo_server) function to signal to the
 main thread that it is ready to be converted to passive. Once the main
 thread gets this message, it deletes the servers scheduling context and
 makes a call to the server. Passive threads do not have their own

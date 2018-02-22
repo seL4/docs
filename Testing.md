@@ -20,23 +20,23 @@ In this example we clone version 2.0.x of the kernel, where "x" is the
 highest available minor version number. For more information on version
 numbers, see ReleaseProcess. == Build it == === Configurations ===
 Default make configurations are provided for a number of platforms: {{{
-\$ ls configs arndale\_debug\_xml\_defconfig
-inforce\_release\_xml\_defconfig arndale\_release\_xml\_defconfig
-kzm\_debug\_xml\_clang\_defconfig bbone\_debug\_xml\_defconfig
-kzm\_debug\_xml\_defconfig bbone\_release\_xml\_defconfig
-kzm\_debug\_xml\_goanna\_defconfig beagle\_debug\_xml\_defconfig
-kzm\_release\_xml\_clang\_defconfig beagle\_release\_xml\_defconfig
-kzm\_release\_xml\_defconfig beagle\_simulation\_debug\_xml\_defconfig
-kzm\_release\_xml\_goanna\_defconfig
-beagle\_simulation\_release\_xml\_defconfig
-kzm\_simulation\_debug\_xml\_defconfig goanna-arm-gcc.profile
-kzm\_simulation\_release\_xml\_defconfig ... }}}
+\$ ls configs arndale_debug_xml_defconfig
+inforce_release_xml_defconfig arndale_release_xml_defconfig
+kzm_debug_xml_clang_defconfig bbone_debug_xml_defconfig
+kzm_debug_xml_defconfig bbone_release_xml_defconfig
+kzm_debug_xml_goanna_defconfig beagle_debug_xml_defconfig
+kzm_release_xml_clang_defconfig beagle_release_xml_defconfig
+kzm_release_xml_defconfig beagle_simulation_debug_xml_defconfig
+kzm_release_xml_goanna_defconfig
+beagle_simulation_release_xml_defconfig
+kzm_simulation_debug_xml_defconfig goanna-arm-gcc.profile
+kzm_simulation_release_xml_defconfig ... }}}
 
 To use a specific config:
 
-{{{ \$ make ia32\_simulation\_release\_xml\_defconfig }}}
+{{{ \$ make ia32_simulation_release_xml_defconfig }}}
 
-This copies {{{configs/ia32\_simulation\_release\_xml\_defconfig}}} to
+This copies {{{configs/ia32_simulation_release_xml_defconfig}}} to
 {{{./.config}}}, and sets up various header files.
 
 You can look at the configuration options using
@@ -79,7 +79,7 @@ simulator.
 The makefile provides a target to simulate ia32. Running the following
 command will run qemu and point it towards the image we just built.
 
-{{{ \$ make ia32\_simulation\_release\_xml\_defconfig \$ make -j
+{{{ \$ make ia32_simulation_release_xml_defconfig \$ make -j
 libmuslc && make \$ make simulate-ia32 }}}
 
 To exit qemu after the All is well in the universe message that
@@ -88,9 +88,9 @@ indicates the test suite has passed, type {{{control-a x}}}.
 ### ARM - kzm11
 
 
-Let's build the test suite for kzm\_simulation\_debug\_xml\_defconfig:
+Let's build the test suite for kzm_simulation_debug_xml_defconfig:
 
-{{{ \$ make kzm\_simulation\_debug\_xml\_defconfig \$ make \$ ls images
+{{{ \$ make kzm_simulation_debug_xml_defconfig \$ make \$ ls images
 sel4test-driver-image-arm-imx31 }}}
 
 Run it in qemu:
@@ -99,11 +99,11 @@ Run it in qemu:
 images/sel4test-driver-image-arm-imx31 ELF-loader started on CPU: ARM
 Ltd. ARMv6 Part: 0xb36 r1p3 paddr=\[82000000..8223001f\] ELF-loading
 image 'kernel' paddr=\[80000000..80035fff\] vaddr=\[f0000000..f0035fff\]
-virt\_entry=f0000000 ELF-loading image 'sel4test-driver' ...
+virt_entry=f0000000 ELF-loading image 'sel4test-driver' ...
 &lt;testsuite&gt; &lt;testcase classname="sel4test"
-name="TEST\_BIND0001"&gt; Running test BIND0001 (Test that a bound tcb
+name="TEST_BIND0001"&gt; Running test BIND0001 (Test that a bound tcb
 waiting on a sync endpoint receives normal sync ipc and notification
-notifications.) Test BIND0001 passed &lt;system-out&gt; TEST\_BIND0001
+notifications.) Test BIND0001 passed &lt;system-out&gt; TEST_BIND0001
 &lt;/system-out&gt; &lt;/testcase&gt; ... }}} The test suite prints out
 JUnit-style XML which can be parsed by various tools. == Testing a
 Customised Kernel == Suppose you've got seL4 checked out in

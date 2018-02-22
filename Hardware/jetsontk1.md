@@ -17,7 +17,7 @@ page\]\], make sure your board is correctly configured and plugged.
 <https://github.com/seL4/sel4test-manifest.git> \$ repo sync }}}
 
 Then, use the default config for the tegra and build the system.
-{{{\#!highlight bash numbers=off \$ make tk1\_debug\_xml\_defconfig \$
+{{{\#!highlight bash numbers=off \$ make tk1_debug_xml_defconfig \$
 make }}}
 
 Once the system is compiled, you will have a new file creates in the
@@ -74,10 +74,10 @@ variable.
 Do
 ==
 
-setenv bootm\_boot\_mode nonsec saveenv }}} to boot in nonsecure (HYP)
+setenv bootm_boot_mode nonsec saveenv }}} to boot in nonsecure (HYP)
 mode. This also enables kvm if you boot Linux.
 
-To go back to secure mode booting do {{{ setenv bootm\_boot\_mode sec
+To go back to secure mode booting do {{{ setenv bootm_boot_mode sec
 saveenv }}} == Getting the sources ==
 
 {{{\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
@@ -101,11 +101,11 @@ a/include/configs/tegra-common.h b/include/configs/tegra-common.h index
 1c469d0..234023d 100644 --- a/include/configs/tegra-common.h +++
 b/include/configs/tegra-common.h @@ -77,7 +77,7 @@ \* Increasing the
 size of the IO buffer as default nfsargs size is more \* than 256 and so
-it is not possible to edit it */ -\#define CONFIG\_SYS\_CBSIZE (256* 2)
-/\* Console I/O Buffer Size */ +\#define CONFIG\_SYS\_CBSIZE (256* 3)
+it is not possible to edit it */ -\#define CONFIG_SYS_CBSIZE (256* 2)
+/\* Console I/O Buffer Size */ +\#define CONFIG_SYS_CBSIZE (256* 3)
 /\* Console I/O Buffer Size */ /* Print Buffer Size \*/ \#define
-CONFIG\_SYS\_PBSIZE (CONFIG\_SYS\_CBSIZE +
-sizeof(CONFIG\_SYS\_PROMPT) + 16) }}}
+CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE +
+sizeof(CONFIG_SYS_PROMPT) + 16) }}}
 
 ## Building
  To build the sources, build the necessary tools first.
@@ -138,6 +138,6 @@ The board should now be updated.
 ## Running Linux with the new U-Boot
  To boot Linux in non-secure
 mode, build the kernel with the Power-State Coordination Interface
-(PSCI) enabled (CONFIG\_ARM\_PSCI=y, in Kernel Features menu)and
-CPU-Idle PM support disabled (CONFIG\_CPU\_IDLE is not set in CPU Power
+(PSCI) enabled (CONFIG_ARM_PSCI=y, in Kernel Features menu)and
+CPU-Idle PM support disabled (CONFIG_CPU_IDLE is not set in CPU Power
 Management-&gt;CPU Idle). Without these changes the kernel will hang.

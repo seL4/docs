@@ -8,7 +8,7 @@ Out-of-the-box' it is set up for a Jetson TK1; there is also a configuration for
 {{{
 repo init -u https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
 repo sync
-make tk1\_vm\_defconfig
+make tk1_vm_defconfig
 make
 }}}
 

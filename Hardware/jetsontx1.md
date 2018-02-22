@@ -50,20 +50,20 @@ following:
 
 {{{
 
-:   setenv dfu\_alt\_info "kernel ram 0x82000000 0x1000000" setenv
-    bootcmd\_dfu "dfu 0 ram 0; go 0x82000000" saveenv
+:   setenv dfu_alt_info "kernel ram 0x82000000 0x1000000" setenv
+    bootcmd_dfu "dfu 0 ram 0; go 0x82000000" saveenv
 
 }}}
 
 To make U-boot enter its DFU server mode now, just type:
-run bootcmd\_dfu. U-boot should sit still waiting for a kernel image to
+run bootcmd_dfu. U-boot should sit still waiting for a kernel image to
 be uploaded. Now you should open up a new terminal on your PC, and type
 the following:
 
 {{{
 
 :   dfu-util --device 0955:701a -a kernel -D
-    &lt;PATH\_TO\_YOUR\_SEL4\_IMAGE&gt;/sel4test-driver-image-arm-tx1.bin
+    &lt;PATH_TO_YOUR_SEL4_IMAGE&gt;/sel4test-driver-image-arm-tx1.bin
 
 }}}
 

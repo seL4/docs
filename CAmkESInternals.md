@@ -66,7 +66,7 @@ components and connections). Part of the spec is the hierarchy of paging
 objects comprising the address space of each component. This is actually
 done by the python CapDL library. After each component is compiled, but
 before the CapDL Filters (see below) are applied,
-[the python capdl library is invoked (search for get\_spec)](https://github.com/seL4/camkes-tool/blob/master/camkes/runner/__main__.py) to inspect
+[the python capdl library is invoked (search for get_spec)](https://github.com/seL4/camkes-tool/blob/master/camkes/runner/__main__.py) to inspect
 the ELF file produced by compiling the component and create all the
 paging structures it needs.
 
@@ -122,10 +122,10 @@ immediately before or after the stack.
 
 
 The python-looking functions called from within templates (e.g.
-alloc\_cap, register\_shared\_variable) are actually keys in a dict
+alloc_cap, register_shared_variable) are actually keys in a dict
 defined here:
 <https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Context.py>.
-There are even some values (such as seL4\_EndpointObject), modules (such
+There are even some values (such as seL4_EndpointObject), modules (such
 as sys), and seemingly built-in functions (e.g. zip) passed through
 using this dict. You can update this dict to add new functions to the
 template context. Some of these functions are called "in the context" of
@@ -133,7 +133,7 @@ the template they are instantiating. That is, for component and
 connector templates, the generated code will be part of a single
 component (each connector has a separate template for each side of the
 connection). The most common example of this is when allocating a cap,
-the cnode/cspace that will contain the cap isn't passed to alloc\_cap in
+the cnode/cspace that will contain the cap isn't passed to alloc_cap in
 the template code, but rather implied by the component for which the
 template is being instantiated.
 
@@ -145,7 +145,7 @@ These are terms from the python CapDL library. An object space tracks
 all the objects that will exist in the system the CapDL spec describes.
 There is a single object space for an entire CAmkES application. A cap
 space tracks all the caps that will be placed in a particular cspace.
-There is one cap space for each component. When calling alloc\_cap in a
+There is one cap space for each component. When calling alloc_cap in a
 template on behalf of a component, the cap is placed in that component's
 cap space. The resulting CapDL spec will include in one of that
 component's CNodes, an entry for the allocated cap.
@@ -155,28 +155,28 @@ component's CNodes, an entry for the allocated cap.
 
 Here are some of the complicated functions in the template context:
 
-#### alloc\_obj(name, type)
+#### alloc_obj(name, type)
 
 
 Updates the CapDL database to contain a new object with a given name and
 type, returning a (python) reference to that object. Doesn't create any
 caps.
 
-{{{ /*- set ep = alloc\_obj("my\_ep", seL4\_EndpointObject) -*/ }}}
+{{{ /*- set ep = alloc_obj("my_ep", seL4_EndpointObject) -*/ }}}
 
-#### alloc\_cap(name, object)
+#### alloc_cap(name, object)
 
 
 Updates the CapDL database, adding a named cap to a given object to the
 current component's cap space, returning the CPtr of the cap.
 
-{{{ // continues from above /*- set ep\_cap = alloc\_cap("my\_ep\_cap",
-ep) -*/ seL4\_Wait(/*? ep\_cap ?*/); }}}
+{{{ // continues from above /*- set ep_cap = alloc_cap("my_ep_cap",
+ep) -*/ seL4_Wait(/*? ep_cap ?*/); }}}
 
 #### alloc(name, type)
 
 
-Effectively equivalent to alloc\_cap(name, alloc\_obj(name, type))
+Effectively equivalent to alloc_cap(name, alloc_obj(name, type))
 
 ## Simple
 
@@ -189,7 +189,7 @@ use to access (some of) its caps. It's implemented as a jinja template:
 
 A component instance can be built with this simple implementation by
 adding the following to the assembly: {{{ configuration {
-instance\_name.simple = true; } }}}
+instance_name.simple = true; } }}}
 
 ## Template Instantiation Order
 
@@ -215,16 +215,16 @@ This is because you can't talk about a cap to an object until that
 object has been allocated. Typically in such a situation, you'll see the
 following template code on both sides of the connection:
 
-{{{ /*- set ep = alloc\_obj('ep\_obj\_name', seL4\_EndpointObject) -*/
-/*- set ep\_cap = alloc\_cap('this\_components\_ep\_cap', ep) -*/
+{{{ /*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
+/*- set ep_cap = alloc_cap('this_components_ep_cap', ep) -*/
 
-// do something with ep\_cap }}}
+// do something with ep_cap }}}
 
 Looking at the code, it appears the endpoint will be allocated twice, as
-both sides of the connection will call alloc\_obj. Digging deeper into
-the implementation of alloc\_obj, we see it calls a function called
+both sides of the connection will call alloc_obj. Digging deeper into
+the implementation of alloc_obj, we see it calls a function called
 guard. guard is a bit of a misnomer. A more appropriate name might be
-allocate\_unless\_already\_allocated. It checks whether there's already
+allocate_unless_already_allocated. It checks whether there's already
 an object by the given name, returns the object if it exists, otherwise
 allocates and returns it.
 
@@ -240,13 +240,13 @@ using some name mangling rules. It's implemented here:
 Typical usage of a Perspective is adding names until it has enough
 information to derive the names you need, then querying it for the names
 you need. Here's an example of this: {{{ p = Perspective(instance='foo',
-control=True) print(p\['ipc\_buffer\_symbol'\]) \# prints
-"\_camkes\_ipc\_buffer\_foo\_0\_control" }}}
+control=True) print(p\['ipc_buffer_symbol'\]) \# prints
+"_camkes_ipc_buffer_foo_0_control" }}}
 
 Here we tell the perspective that we want names in the context of a
 component instance name "foo". This implies that the name of the ipc
 buffer symbol of the control thread will be
-"\_camkes\_ipc\_buffer\_foo\_0\_control".
+"_camkes_ipc_buffer_foo_0_control".
 
 Whenever you add an attribute that has some meaning for all components
 (e.g. thread priority, scheduling context budget), or symbols to

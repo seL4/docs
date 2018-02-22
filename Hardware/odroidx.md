@@ -42,7 +42,7 @@ Where "sdx" is the device that is associated with your SD card.
 U-Boot must reside at a magical offset in a special partition of the SD
 card. To copy U-Boot and the other boot loaders to the SD card:
 
-{{{\#!highlight bash numbers=off cd sd\_fusesudo ./sd\_fusing\_4412.sh
+{{{\#!highlight bash numbers=off cd sd_fusesudo ./sd_fusing_4412.sh
 /dev/sdx }}}
 
 ## seL4 Image file preparation
@@ -51,9 +51,9 @@ into a U-Boot application file. The first step is to strip the elf file
 into a binary file. Next we use mkimage to create the image.
 
 {{{\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
-INPUT\_FILE=images/sel4test-image-arm-exynos4 OUTPUT\_FILE=sel4-uImage
+INPUT_FILE=images/sel4test-image-arm-exynos4 OUTPUT_FILE=sel4-uImage
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d
-\$INPUT\_FILE \$OUTPUT\_FILE }}}
+\$INPUT_FILE \$OUTPUT_FILE }}}
 
 The reason we choose QNX is because we exploit the fact that, like seL4,
 QNX expects to be ELF-loaded. The alternative is to convert our ELF file

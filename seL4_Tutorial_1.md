@@ -32,17 +32,17 @@ well supported/maintained by seL4 and QEMU.
 
 The following instructions are for ia32/pc99/x86, but should be similar
 for zynq7000/ARM with just changing the config selection (e.g. make
-zynq7000\_hello-1\_defconfig)
+zynq7000_hello-1_defconfig)
 
 First try to build the code:
 
 {{{ \# go to the top level directory cd sel4-tutorials-manifest/ \#
-select the config for the first tutorial make ia32\_hello-1\_defconfig
+select the config for the first tutorial make ia32_hello-1_defconfig
 \# build it make -j8 }}} This will fail to build with the following
 error:
 
 {{{ /home/alyons/sel4-tutorials-source/stage/x86/pc99/lib/crt1.o: In
-function \_start\_c':
+function \_start_c':
 /home/alyons/sel4-tutorials-source/libs/libmuslc/crt/crt1.c:17: undefined reference to main'
 collect2: error: ld returned 1 exit status
 /home/alyons/sel4-tutorials-source/stage/x86/pc99/common/common.mk:301:

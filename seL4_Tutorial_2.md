@@ -34,7 +34,7 @@ Uncomment them one by one as needed when going through the tasks.
 
 
 {{{ \# select the config for the first tutorial make
-ia32\_hello-2\_defconfig \# build it make -j8 \# run it in qemu make
+ia32_hello-2_defconfig \# build it make -j8 \# run it in qemu make
 simulate }}}
 
 Look for TASK in the apps/hello-2 directory for each task.
@@ -173,7 +173,7 @@ This is a convenience function -- sets a name string for the TCB object.
 
 
 Pay attention to the line that precedes this particular task -- the line
-that zeroes out a new "seL4\_UserContext" object. As we previously
+that zeroes out a new "seL4_UserContext" object. As we previously
 explained, seL4 requires you to fill out the Thread Control Block
 manually. That includes the new thread's initial register contents. You
 can set the value of the stack pointer, the instruction pointer, and if
@@ -220,14 +220,14 @@ kernel successfully, we cause it to print something to the screen.
 ## Globals links
 
 
-  -   \`sel4\_BootInfo\`:
+  -   \`sel4_BootInfo\`:
       <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
-  -   \`simple\_t\`:
+  -   \`simple_t\`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
-  -   \`vka\_t\`:
+  -   \`vka_t\`:
       <https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h>
-  -   \`allocman\_t\`:
+  -   \`allocman_t\`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h>
-  -   \`name\_thread()\`:
+  -   \`name_thread()\`:
       <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-2/src/util.c>
 

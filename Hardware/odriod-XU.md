@@ -18,8 +18,8 @@ bootable ELF file onto an SD card or the eMMC chip.
  === Get and build sel4test ===
 {{{\#!highlight bash numbers=off mkdir seL4test cd seL4test repo init -u
 <https://github.com/seL4/sel4test-manifest.git> repo sync make
-odroidxu\_release\_xml\_defconfig }}} As always, you may need to change
-the CROSS\_COMPILE\_PREFIX by doing make menuconfig.
+odroidxu_release_xml_defconfig }}} As always, you may need to change
+the CROSS_COMPILE_PREFIX by doing make menuconfig.
 
 ### Put seL4test onto the board
  Boot the Odroid, with serial cable

@@ -13,7 +13,7 @@ Supply\]\].
 The exact parts don't matter, although I've given links to eBay stores
 where the ones we used can be seen.
 
-[target="\_blank"](<attachment:CMA34CRD-jig.jpg>|{{<attachment:CMA34CRD-thumb.jpg>}})
+[target="_blank"](<attachment:CMA34CRD-jig.jpg>|{{<attachment:CMA34CRD-thumb.jpg>}})
 
 In the picture, the CMA34D is at the left, with the TTL-to-RS232
 converter above it. The Launchpad is in the middle, with the relay board
@@ -25,7 +25,7 @@ and cables are mounted on 20mm standoffs.
 Software for the launchpad is available at
 <https://github.com/data61/echronos-lwip> Use the master branch, and the
 project is at
-packages/machine-tm4c1294-launchpad/projects/embedded\_pc\_testbed\_src
+packages/machine-tm4c1294-launchpad/projects/embedded_pc_testbed_src
 
 The relays are connected to pins PK6 and PK7 on the launchpad; the UART
 to pin PA0 (Rx) and PA1 (Tx). You'll need to swap the wires to the level

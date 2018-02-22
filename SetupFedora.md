@@ -54,7 +54,7 @@ targets you need an arm cross compiler; to run on the simulator you need
 Cross compilers are available from the EPEL repository. Do {{{ sudo yum
 install gcc-arm-linux-gnu }}}
 
-The resulting CROSS\_COMPILE\_PREFIX should be arm-linux-gnu in the
+The resulting CROSS_COMPILE_PREFIX should be arm-linux-gnu in the
 toolchain menus
 
 CentOS 6 and earlier also do not prepackage qemu. You will have to build

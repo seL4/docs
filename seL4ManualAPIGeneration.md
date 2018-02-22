@@ -30,10 +30,10 @@ seL4 has two types of API:
     -   Object Invocations, which are regular message-passing system
         calls, but whose recipient is effectively the kernel itself, and
         the message encodes some operation on a Kernel Object. Some
-        examples are TCB\_Resume and CNode\_Copy.
+        examples are TCB_Resume and CNode_Copy.
         -   Some kernel objects and object invocations are specific to a
             particular processor architecture. Some examples are
-            X86\_Page\_Map, and ARM\_VCPU\_InjectIrq.
+            X86_Page_Map, and ARM_VCPU_InjectIrq.
 
 The API documentation in the manual is divided into the following hierarchy:
 
@@ -47,7 +47,7 @@ The API documentation in the manual is divided into the following hierarchy:
         -   General x86 Object Methods
         -   IA32 Object Methods
 
-        \* x86\_64 Object Methods
+        \* x86_64 Object Methods
     -   ARM-Specific Object Methods
         -   General ARM Object Methods
         -   aarch32 Object Methods

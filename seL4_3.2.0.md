@@ -21,7 +21,7 @@
 # ABI Changes
 
 
-  -   {{{seL4\_BootInfo}}} has a new entry for IOSpace caps for
+  -   {{{seL4_BootInfo}}} has a new entry for IOSpace caps for
       ARM SMMU.
 
 # Upgrade notes

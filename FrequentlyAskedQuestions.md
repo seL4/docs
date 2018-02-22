@@ -393,7 +393,7 @@ the Haskell file
 [Hardware.lhs](https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs).
 
 You can further inspect the gory details by looking at the preprocessor
-output in the file kernel\_all.c\_pp in the proof build - this is what
+output in the file kernel_all.c_pp in the proof build - this is what
 the prover, the proof engineer, and the compiler see after configuration
 is done. So a quick way of figuring out if something is in the proof
 input or not is checking if the contents of that file change if you make
@@ -406,7 +406,7 @@ prover reads in these entry points, and anything that they call must
 either have a proof or an assumption for it to complete its proof. If
 anything is missing, the proof fails.
 
-That means all of the C code that is in this kernel\_all.c\_pp file
+That means all of the C code that is in this kernel_all.c_pp file
 either:
 
   -   has a proof,
@@ -416,7 +416,7 @@ either:
 The functions with explicit assumptions are the machine interface
 functions mentioned above (they're usually inline asm) and the functions
 that are only called by the boot process (usually marked with the
-BOOT\_CODE macro in the source so they're easy to spot).
+BOOT_CODE macro in the source so they're easy to spot).
 
 As an example, the CPU and architecture options mean that everything
 under src/arch/ia32 is not covered by the proof, but that the files in
@@ -522,7 +522,7 @@ on top of seL4's primitive mechanisms.
 ## Why do send-only operations not return a success indication?
 
 
-The send-only IPC system calls ''seL4\_Send()'' and ''seL4\_NBSend()''
+The send-only IPC system calls ''seL4_Send()'' and ''seL4_NBSend()''
 can be invoked with a send-only capability, enabling one-way data
 transfer. By definition, a send-ony cap cannot be used to receive any
 information. A result status, indicating whether or not the message has

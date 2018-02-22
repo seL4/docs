@@ -13,7 +13,7 @@ To boot via Fastboot, you need to convert the image file produced by the
 seL4 build system into a U-Boot image.
 
 {{{ mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel
--O qnx -d INPUT\_FILE OUTPUT\_FILE }}} The reason we choose QNX is
+-O qnx -d INPUT_FILE OUTPUT_FILE }}} The reason we choose QNX is
 because we exploit the fact that, like seL4, QNX expects to be
 ELF-loaded. The alternative is to convert our ELF file into a binary
 file using objcopy.
@@ -29,7 +29,7 @@ U-Boot, and type "fastboot"), then do:
 
 {{{
 
-:   fastboot boot OUTPUT\_FILE
+:   fastboot boot OUTPUT_FILE
 
 }}} == Beagle Board == You can compile a U-boot for
 Beagle`` Board that supports Fastboot, or you can use `dfu-util` with the standard U-Boot to transfer the image to the board.  The address that the file downloads to is controlled by the `loadaddr` environment variable in U-Boot. You can either download an  ELF file, and then run `bootelf` on the U-Boot command-line, or download a U-Boot image file (created with `mkimage`) and use `bootm` to run it. You may need to take care that the ELF sections or image regions do not overlap with the location of the ELF/image itself, or loaded to non-existent memory address (0x81000000 works fine, but 0x90000000 won't work on the original Beagle ``Board

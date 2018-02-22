@@ -47,7 +47,7 @@ they were covered by a previous tutorial in the series.
 First, build the tutorial:
 
 {{{ \# select the config for the first tutorial make
-ia32\_hello-3\_defconfig \# build it make -j8 \# run it in qemu make
+ia32_hello-3_defconfig \# build it make -j8 \# run it in qemu make
 simulate }}}
 
 Look for TASK in the apps/hello-3 directory for each task.
@@ -126,7 +126,7 @@ should fail. Complete it and proceed.
 Now we have a (fully mapped) IPC buffer -- but no Endpoint object to
 send our IPC data across. We must retype an untyped object into a kernel
 Endpoint object, and then proceed. This could be done via a more
-low-level approach using seL4\_Untyped\_Retype(), but instead, the
+low-level approach using seL4_Untyped_Retype(), but instead, the
 tutorial makes use of the VKA allocator. Remember that the VKA allocator
 is an seL4 type-aware object allocator? So we can simply ask it for a
 new object of a particular type, and it will do the low-level retyping
@@ -156,7 +156,7 @@ the listener can identify it.
 
 In this step, you are badging the endpoint that you will use when
 sending data to the thread you will be creating later on. The
-vka\_mint\_object() call will return a new, badged copy of the
+vka_mint_object() call will return a new, badged copy of the
 capability to the endpoint that your new thread will listen on. When you
 send data to your new thread, it will receive the badge value with the
 data, and know which sender you are. Complete the step and proceed.
@@ -169,18 +169,18 @@ data, and know which sender you are. Complete the step and proceed.
 
 
 Here we get a formal introduction to message registers. At first glance,
-you might wonder why the sel4\_SetMR() calls don't specify a message
+you might wonder why the sel4_SetMR() calls don't specify a message
 buffer, and seem to know which buffer to fill out -- and that would be
 correct, because they do. They are operating directly on the sending
 thread's IPC buffer. Recall that each thread has only one IPC buffer. Go
-back and look at your call to seL4\_TCB\_Configure() in step 7 again:
+back and look at your call to seL4_TCB_Configure() in step 7 again:
 you set the IPC buffer for the new thread in the last 2 arguments to
 this function. Likewise, the thread that created '''your''' main thread
 also set an IPC buffer up for you.
 
-So seL4\_SetMR() and seL4\_GetMR() simply write to and read from the IPC
-buffer you designated for your thread. MSG\_DATA is uninteresting -- can
-be any value. You'll find the seL4\_MessageInfo\_t type explained in the
+So seL4_SetMR() and seL4_GetMR() simply write to and read from the IPC
+buffer you designated for your thread. MSG_DATA is uninteresting -- can
+be any value. You'll find the seL4_MessageInfo_t type explained in the
 manuals. In short, it's a header that is embedded in each message that
 specifies, among other things, the number of Message Registers that hold
 meaningful data, and the number of capabilities that are going to be
@@ -194,7 +194,7 @@ transmitted in the message.
 
 
 Now that you've constructed your message and badged the endpoint that
-you'll use to send it, it's time to send it. The seL4\_Call() syscall
+you'll use to send it, it's time to send it. The seL4_Call() syscall
 will send a message across an endpoint synchronously. If there is no
 thread waiting at the other end of the target endpoint, the sender will
 block until there is a waiter. The reason for this is because the seL4
@@ -205,7 +205,7 @@ polling send operations, as well as polling receive operations in case
 you don't want to be forced to block if there is no receiver on the
 other end of an IPC Endpoint.
 
-When you send your badged data using seL4\_Call(), our receiving thread
+When you send your badged data using seL4_Call(), our receiving thread
 (which we created earlier) will pick up the data, see the badge, and
 know that it was us who sent the data. Notice how the sending thread
 uses the '''badged''' capability to the endpoint object, and the
@@ -235,7 +235,7 @@ While this task is out of order, since we haven't yet examined the
 receive-side of the operation here, it's fairly simple anyway: this task
 occurs after the receiver has sent a reply, and it shows the sender now
 reading the reply from the receiver. As mentioned before, the
-seL4\_GetMR() calls are simply reading from the calling thread's
+seL4_GetMR() calls are simply reading from the calling thread's
 designated, single IPC buffer.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
@@ -243,12 +243,12 @@ designated, single IPC buffer.
 ### TASK 11
 
 
-We're now in the receiving thread. The seL4\_Recv() syscall performs a
+We're now in the receiving thread. The seL4_Recv() syscall performs a
 blocking listen on an Endpoint or Notification capability. When new data
-is queued (or when the Notification is signalled), the seL4\_Recv
+is queued (or when the Notification is signalled), the seL4_Recv
 operation will unqueue the data and resume execution.
 
-Notice how the seL4\_Recv() operation explicitly makes allowance for
+Notice how the seL4_Recv() operation explicitly makes allowance for
 reading the badge value on the incoming message? The receiver is
 explicitly interested in distinguishing the sender.
 
@@ -284,8 +284,8 @@ And writing Message Registers again.
 
 This is a formal introduction to the Reply capability which is
 automatically generated by the seL4 kernel, whenever an IPC message is
-sent using the seL4\_Call() syscall. This is unique to the seL4\_Call()
-syscall, and if you send data instead with the seL4\_Send() syscall, the
+sent using the seL4_Call() syscall. This is unique to the seL4_Call()
+syscall, and if you send data instead with the seL4_Send() syscall, the
 seL4 kernel will not generate a Reply capability.
 
 The Reply capability solves the issue of a receiver getting a message
@@ -293,7 +293,7 @@ from a sender, but not having a sufficiently permissive capability to
 respond to that sender. The "Reply" capability is a one-time capability
 to respond to a particular sender. If a sender doesn't want to grant the
 target the ability to send to it repeatedly, but would like to allow the
-receiver to respond to a specific message once, it can use seL4\_Call(),
+receiver to respond to a specific message once, it can use seL4_Call(),
 and the seL4 kernel will facilitate this one-time permissive response.
 Complete the step and pat yourself on the back.
 
