@@ -15,17 +15,17 @@ drop us a line if you want to be able to edit.
 ## seL4 Basics
 
 
-  -   [Getting started](../Getting_started)
-  -   [Tutorials](../Tutorials)
-  -   [Documentation](../Documentation)
-  -   [seL4 libraries](SeL4Libraries)
-  -   [CAmkES](../CAmkES)
-  -   [CapDL](../CapDL)
-  -   [Testing](../Testing)
-  -   [Debugging guide](../Debugging_guide)
-  -   [Benchmarking guide](../Benchmarking_guide)
-  -   [Virtualisation on seL4](../Virtualisation_on_seL4)
-  -   [Rust](../Rust)
+  -   [Getting started](Getting_started.md)
+  -   [Tutorials](Tutorials.md)
+  -   [Documentation](Documentation.md)
+  -   [seL4 libraries](SeL4Libraries.md)
+  -   [CAmkES](CAmkES.md)
+  -   [CapDL](CapDL.md)
+  -   [Testing](Testing.md)
+  -   [Debugging guide](Debugging_guide.md)
+  -   [Benchmarking guide](Benchmarking_guide.md)
+  -   [Virtualisation on seL4](Virtualisation_on_seL4.md)
+  -   [Rust](Rust.md)
 
 ## seL4 Status
 
