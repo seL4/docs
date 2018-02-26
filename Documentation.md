@@ -8,8 +8,8 @@
       Deployment]], a retrospective explaining how we got to where we
       are;
   -   [Getting started](../Getting started)
-  -   [[<http://ssrg.nicta.com.au/projects/seL4/%7CNICTA> seL4
-      research project pages]]
+  -   [NICTA seL4
+      research project pages](http://ssrg.nicta.com.au/projects/seL4/)
   -   [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and
       Microkernel Design lectures
   -   [Release download page](https://github.com/seL4/seL4/releases/latest) for the current release.
@@ -33,15 +33,15 @@ will be produced in manual.pdf.
 
 
   -   [Formal specification](http://sel4.systems/Info/Docs/seL4-spec.pdf)
-  -   [[<http://github.com/seL4/l4v/%7CGit> Repository and Build
-      instructions]]
-  -   [[<http://ssrg.nicta.com.au/projects/TS/%7CNICTA> Trustworthy
-      Systems research project pages]]
+  -   [Git Repository and Build
+      instructions](http://github.com/seL4/l4v/)
+  -   [NICTA Trustworthy
+      Systems research project pages](http://ssrg.nicta.com.au/projects/TS/)
  
   \* Isabelle Proof Assistant:
  
-  :   -   [[<http://concrete-semantics.org/%7CConcrete> Semantics
-          Isabelle textbook]]
+  :   -   [Concrete Semantics
+          Isabelle textbook](http://concrete-semantics.org/)
       -   [[<http://isabelle.in.tum.de/website-Isabelle2013-2/dist/Isabelle2013-2/doc/tutorial.pdf>|
           Isabelle 2013-2 tutorial]]
       -   [Isabelle website](http://isabelle.in.tum.de/)

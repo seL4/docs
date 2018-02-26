@@ -104,8 +104,8 @@ Now run:
 
 [http://www.arndaleboard.org](http://www.arndaleboard.org/)
 
-[[<https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot%7CPXE> boot
-setup]]
+[PXE boot
+setup](https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot)
 
-[[<https://wiki.kubuntu.org/ARM/QA/ArndaleBoard%7CBetter> PXE
-instructions]]
+[Better PXE
+instructions](https://wiki.kubuntu.org/ARM/QA/ArndaleBoard)

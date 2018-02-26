@@ -210,8 +210,8 @@ The RT kernel currently supports:
 
   -   [BeagleBoard](Hardware/BeagleBoard)
   -   [SabreLite](Hardware/sabreLite)
-  -   [[<https://wiki.sel4.systems/Hardware/IA32%7Cx86> (ia32, x64),
-      multicore]]
+  -   [x86 (ia32, x64),
+      multicore](https://wiki.sel4.systems/Hardware/IA32)
   -   [Tegra TK1](Hardware/jetsontk1)
 
 Other hardware platforms will be added as required (the ports require

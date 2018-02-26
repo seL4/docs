@@ -8,8 +8,8 @@ started]]
 
 # Getting Started
  To get started, check out the
-[[<https://developer.nvidia.com/embedded-computing%7CNVIDIA> developer
-page]], make sure your board is correctly configured and plugged.
+[NVIDIA developer
+page](https://developer.nvidia.com/embedded-computing), make sure your board is correctly configured and plugged.
 
 # Build your first seL4 system
  First, check out the seL4 project.
@@ -66,8 +66,8 @@ is another TK1 board called the TK1-SOM by Colorado Engineering which
 requires a different flashing procedure. Please be sure you're following
 these instructions if you are truly trying to flash a '''Jetson''' and
 not the '''TK1-SOM'''. If you are trying to flash a TK1-SOM, please
-[[<https://wiki.sel4.systems/Hardware/CEI_TK1_SOM#U-Boot%7Cuse> the
-procedure described here instead]].
+[use the
+procedure described here instead](https://wiki.sel4.systems/Hardware/CEI_TK1_SOM#U-Boot).
 
 The initial version of U-Boot does not provides all necessary
 functionality. In particular, it boots the system in secure mode. To run

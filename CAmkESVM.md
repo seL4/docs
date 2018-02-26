@@ -727,8 +727,8 @@ we need to make to our VM app to allow it to boot into a Ubuntu
 environment installed on the hard drive. Thus far these examples should
 have been compatible with most modern x86 machines. The rest of this
 tutorial will focus on a particular machine:
-[[<https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm%7Cthe> cma34cr
-single board computer]]
+[the cma34cr
+single board computer](https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm)
 
 The first step is to install ubuntu natively on the cma34cr. It's
 currently required that guests of the camkes vm run in 32-bit mode, so

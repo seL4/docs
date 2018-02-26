@@ -104,5 +104,5 @@ To boot from mmc:
 <http://dev.odroid.com/projects/odroid-xq/#s-2.2.1> <- This should be
 replaced with the official Samsung exynos4412 "User manual"
 
-[[<http://dev.odroid.com/projects/ics/#s-6.2%7CAndroid> - uboot
-sources and instructions]]
+[Android - uboot
+sources and instructions](http://dev.odroid.com/projects/ics/#s-6.2)

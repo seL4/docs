@@ -55,8 +55,8 @@ best of our knowledge, seL4 is the world's fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
 of a cross-address-space message-passing (IPC) operation. For more
 information, check the
-[[<http://l4hq.org/docs/performance.php%7Cperformance> page on
-L4HQ]].
+[performance page on
+L4HQ](http://l4hq.org/docs/performance.php).
 
 Note that the x86 IPC times recorded at L4HQ are the result of
 micro-optimisations which are not yet in the public version, and may
@@ -308,8 +308,8 @@ The security proofs additionally give a list of conditions how the
 system is configured.
 
 For a more in-depth description, see the
-[[<http://sel4.systems/Info/FAQ/proof.pml%7Cproof> and assumptions
-page]].
+[proof and assumptions
+page](http://sel4.systems/Info/FAQ/proof.pml).
 
 ## How do I leverage seL4's formal proofs?
  The seL4 proofs are just
@@ -588,8 +588,8 @@ libraries are mostly under BSD. See the
 
 # How do I contribute to seL4?
  See
-[[<http://sel4.systems/Community/Contributing%7CHow> to
-Contribute]]. In brief, seL4 was released under a complicated
+[How to
+Contribute](http://sel4.systems/Community/Contributing). In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.
