@@ -1,5 +1,7 @@
 ---
 version: 5.2.0-mcs
+title: seL4-5.2.0-mcs
+
 ---
 
 # seL4 MCS pre-release (5.2.0-mcs)

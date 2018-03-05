@@ -1,5 +1,6 @@
 ---
 version: 8.0.0
+title: seL4-8.0.0
 ---
 
 # seL4 Version 8.0.0 Release
