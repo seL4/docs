@@ -20,7 +20,6 @@ gem "minima", "~> 2.0"
 # If you have any plugins, put them here!
 # Look here for supported github plugins: https://pages.github.com/versions/
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.6"
   gem "jekyll-titles-from-headings", "0.5.0"
   gem "jekyll-relative-links", "0.5.2"
   gem "jekyll-optional-front-matter", "0.3.0"
