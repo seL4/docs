@@ -1,6 +1,6 @@
-<<TableOfContents()>>
-
 # CAmkES
+
+<<TableOfContents()>>
  CAmkES (component architecture for microkernel-based embedded
 systems) is a software development and runtime framework for quickly and
 reliably building microkernel-based multiserver (operating) systems. It
@@ -122,7 +122,7 @@ To learn about developing your own CAmkES application, read the
 ## Camkes Terminology/Glossary
 
 
-Can be found [here](CAmkES/Terminology).
+Can be found [here](Terminology.md).
 
 ## CAmkES VM
 

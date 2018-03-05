@@ -51,7 +51,7 @@ krait (A15-like) ||v7A ||ARM HYP ||- ||unverified ||Data61 ||Data61
 ||limited System MMU ||unverified ||Data61 ||Data61 || ||
 ||[Sabre Lite](Hardware/sabreLite) ||i.MX6 ||A9 ||v7A ||No ||No
 ||verified ||Data61 ||Data61 ||current verified version ||
-||[TK1 SOM (Colorado Engineering)](Hardware/CEI_TK1_SOM) ||Tegra
+||[TK1 SOM (Colorado Engineering)](CEI_TK1_SOM.md) ||Tegra
 K1 ||A15 ||v7-1A ||ARM HYP ||System MMU ||unverified ||Data61 ||Data61
 ||Small form-factor Tegra K1 || ||[[Hardware/zynq7000|Zynq-7000 ZC706
 Evaluation Kit]] ||Zynq 7000 ||A9 ||v7A ||No ||No ||unverified

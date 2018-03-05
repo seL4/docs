@@ -19,7 +19,7 @@ drop us a line if you want to be able to edit.
   -   [Tutorials](Tutorials.md)
   -   [Documentation](Documentation.md)
   -   [seL4 libraries](SeL4Libraries.md)
-  -   [CAmkES](CAmkES.md)
+  -   [CAmkES](CAmkES)
   -   [CapDL](CapDL.md)
   -   [Testing](Testing.md)
   -   [Debugging guide](Debugging_guide.md)
