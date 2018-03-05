@@ -1,8 +1,10 @@
+---
+toc: true
+---
+
 # CAmkES x86 VM
  Get the dependencies for building CAmkES by following
 the instructions [here](CAmkES\#Build_dependencies).
-
-<<TableOfContents>>
 
 ## Getting the Code
 ``` repo init -u

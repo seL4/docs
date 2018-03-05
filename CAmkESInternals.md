@@ -1,7 +1,8 @@
+---
+toc: true
+---
+
 # CAmkES Internals
-
-
-<<TableOfContents()>>
 
 ## Overview
 

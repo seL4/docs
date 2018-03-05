@@ -1,7 +1,8 @@
+---
+toc: true
+---
+
 # Frequently Asked Questions on seL4
-
-
-<<TableOfContents()>>
 
 # What is seL4?
  seL4 is the most advanced member of the L4 microkernel

@@ -1,3 +1,7 @@
+---
+toc: true
+---
+
 # seL4 Manual API Generation
 
 
@@ -5,8 +9,6 @@ The documentation of the seL4 API in the
 [seL4 manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf) is automatically generated from comments in
 [libsel4](https://github.com/seL4/seL4/tree/master/libsel4)'s
 source code. This page documents this process.
-
-<<TableOfContents()>>
 
 ## File Paths
 

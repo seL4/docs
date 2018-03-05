@@ -1,11 +1,15 @@
+---
+toc: true
+---
 # seL4Test
 
-[sel4test](https://github.com/seL4/sel4test-manifest) is a test
-suite for seL4.
+[sel4test](https://github.com/seL4/sel4test-manifest) is a test suite for seL4.
 
 First make sure you have
-[set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine). <<TableOfContents()>> == Getting the
-Code ==
+[set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine). 
+
+## Getting the Code 
+
 ``` $ mkdir sel4test $ cd sel4test $ repo init -u
 <https://github.com/seL4/sel4test-manifest.git> $ repo sync $ ls
 kernel/ libs/ projects/ tools/ apps configs Kbuild Kconfig Makefile

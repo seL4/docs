@@ -1,8 +1,9 @@
+---
+toc: true
+---
+
 # Power management commands for the seL4 Driver API:
 
-
-## Contents
- <<TableOfContents()>>
 
 ## Constants
 ``` /\* Driver power states supported by the API. \*

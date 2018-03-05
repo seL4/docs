@@ -1,5 +1,6 @@
-
-<<TableOfContents(3)>>
+---
+toc: true
+---
 
 # CAmkES Tutorial
  This tutorial will help you walk-through building

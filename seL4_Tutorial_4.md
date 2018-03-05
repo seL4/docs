@@ -1,3 +1,7 @@
+---
+toc: true
+---
+
 # seL4 Tutorial 4
 The fourth tutorial is largely trying
 to show how a separate ELF file can be loaded and expanded into a
@@ -13,8 +17,6 @@ You'll observe that the things you've already covered in the second
 tutorial are filled out and you don't have to repeat them: in much the
 same way, we won't be repeating conceptual explanations on this page, if
 they were covered by a previous tutorial in the series.
-
-<<TableOfContents()>>
 
 ## Learning outcomes
 

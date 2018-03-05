@@ -1,10 +1,11 @@
+---
+toc: true
+---
 # seL4 and CAmkES tutorials
 
 
 First make sure you have
 [set up your machine](https://wiki.sel4.systems/Getting%20started#Setting_up_your_machine).
-
-<<TableOfContents()>>
 
 ## Prerequisites
 

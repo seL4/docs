@@ -1,12 +1,13 @@
+---
+toc: true
+---
+
 # seL4 Driver API Persistent Device Naming Scheme
 
 
 Recommended prior reading for this page is the seL4 Driver API's
 [[seL4 Driver API/Child Enumeration\#Addressing Names|location-based
 device addressing scheme]].
-
-## Contents
- <<TableOfContents()>>
 
 ## Constants
 

@@ -1,5 +1,7 @@
-# Table of Contents
- <<TableOfContents()>>
+---
+toc: true
+---
+# Setup Ubuntu
 
 ## Cross compiler toolchain summary
  This page doesn't detail the

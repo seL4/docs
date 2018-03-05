@@ -1,8 +1,9 @@
+---
+toc: true
+---
+
 # Child enumeration model for the seL4 Driver API:
 
-
-## Contents
- <<TableOfContents()>>
 
 ## Constants
  ` \#define SEL4DRV_DEVATTR_NAME_MAXLEN (32) `

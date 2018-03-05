@@ -1,3 +1,7 @@
+---
+toc: true
+---
+
 # seL4 Tutorial 3
 The third tutorial is designed to
 teach the basics of seL4 IPC using Endpoint objects, and userspace
@@ -14,8 +18,6 @@ You'll observe that the things you've already covered in the second
 tutorial are filled out and you don't have to repeat them: in much the
 same way, we won't be repeating conceptual explanations on this page, if
 they were covered by a previous tutorial in the series.
-
-<<TableOfContents()>>
 
 ## Learning outcomes
 

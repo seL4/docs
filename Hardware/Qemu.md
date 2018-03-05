@@ -1,4 +1,6 @@
-<<TableOfContents>>
+---
+toc: true
+---
 
 # seL4 on Qemu
 

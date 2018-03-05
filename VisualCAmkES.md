@@ -1,3 +1,7 @@
+---
+toc: true
+---
+
 # VisualCAmkES
  VisualCAmkES, also known as Visualisation of CAmkES, is
 a tool that allows one to visually understand a CAmkES system, how it
@@ -23,7 +27,6 @@ this was written in python, this tool was also written in python.
 
 VisualCAmkES is currently on the [CAmkESNext](../CAmkESNext) branch only
 
-'''Table of Contents''' <<TableOfContents()>>
 
 ## How to Install
  Follow the instructions in [CAmkESNext](../CAmkESNext) to

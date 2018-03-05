@@ -1,4 +1,6 @@
-<<TableOfContents()>>
+---
+toc: true
+---
 
 # CAmkES Next
 

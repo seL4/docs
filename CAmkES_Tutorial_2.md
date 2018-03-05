@@ -1,9 +1,11 @@
+---
+toc: true
+---
+
 # CAmkES Tutorial 2
 This tutorial is an introduction to
 CAmkES: bootstrapping a basic static CAmkES application, describing its
 components, and linking them together.
-
-<<TableOfContents()>>
 
 ## Required Reading
  While it's possible to successfully complete the

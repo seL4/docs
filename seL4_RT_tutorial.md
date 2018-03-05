@@ -1,3 +1,7 @@
+---
+toc: true
+---
+
 # seL4 5.2.0-MCS Tutorial
 
 
@@ -11,8 +15,6 @@ You'll observe that the things you've already covered in the other
 tutorials are already filled out and you don't have to repeat them: in
 much the same way, we won't be repeating conceptual explanations on this
 page, if they were covered by a previous tutorial in the series.
-
-<<TableOfContents()>>
 
 ## Learning outcomes
 

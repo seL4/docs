@@ -1,5 +1,6 @@
-# Contents
- <<TableOfContents()>>
+---
+toc: true
+---
 
 # Getting Started
  In general, if you're just getting started, you want

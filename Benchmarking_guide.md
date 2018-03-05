@@ -1,5 +1,8 @@
+---
+toc: true
+---
+
 # Benchmarking seL4
- <<TableOfContents(2)>>
 
 ## Benchmarking project
  There is a set of microbenchmarks for seL4

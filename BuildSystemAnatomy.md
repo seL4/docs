@@ -1,5 +1,8 @@
+---
+toc: true
+---
+
 # Contents
- <<TableOfContents()>>
 
 ## Anatomy of the Build System
  The following files are the components

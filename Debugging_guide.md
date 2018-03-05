@@ -1,7 +1,9 @@
+---
+toc: true
+---
+
 # Debugging guide
 
-
-<<TableOfContents>>
 
 ## Compiler Settings
 
