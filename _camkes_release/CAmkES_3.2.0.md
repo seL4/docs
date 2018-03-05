@@ -1,3 +1,6 @@
+---
+version: camkes-3.2.0
+---
 # CAmkES Version camkes-3.2.0 Release
 
 

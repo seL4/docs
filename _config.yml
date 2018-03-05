@@ -26,8 +26,33 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 markdown: kramdown
 theme: minima
 
+collections:
+  -sel4_release
+  -camkes_release
+
+collections:
+  sel4_release:
+    output: true
+  camkes_release:
+    output: true
+
+sel4_master: "8.0.0"
+sel4_mcs: "5.2.0-mcs"
+camkes: "3.2.0"
+
+
 # Front matter defaults:
 defaults:
+  - scope:
+      path: ""
+      type: sel4_release
+    values:
+      layout: "release"
+  - scope:
+      path: ""
+      type: camkes_release
+    values:
+      layout: "release"
   -
     scope:
       path: ""

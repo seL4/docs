@@ -1,3 +1,6 @@
+---
+version: 2.0.0
+---
 # Introducing seL4 2.0.0
 
 

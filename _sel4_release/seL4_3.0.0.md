@@ -1,3 +1,7 @@
+---
+version: 3.0.0
+---
+
 # seL4 3.0.0 Release Notes
  This release is a minor release that brings
 structural improvements to the kernel in preparation for 64bit
