@@ -1,0 +1,1 @@
+../dependencies/jekyll-breadcrumbs/source/_plugins/breadcrumbs.rb
