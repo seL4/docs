@@ -16,7 +16,7 @@ drop us a line if you want to be able to edit.
 
 
   -   [Getting started](Getting_started.md)
-  -   [Tutorials](Tutorials.md)
+  -   [Tutorials](Tutorials)
   -   [Documentation](Documentation.md)
   -   [seL4 libraries](SeL4Libraries.md)
   -   [CAmkES](CAmkES)

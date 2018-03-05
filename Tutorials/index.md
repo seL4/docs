@@ -50,12 +50,12 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
 
     \* Detailed explanations of each tutorial challenge:
 
-    :   -   [seL4 Tutorial 1](../seL4 Tutorial 1)
-        -   [seL4 Tutorial 2](../seL4 Tutorial 2)
-        -   [seL4 Tutorial 3](../seL4 Tutorial 3)
-        -   [seL4 Tutorial 4](../seL4 Tutorial 4)
-        -   [seL4 Timer tutorial](../seL4 Timer tutorial)
-        -   [seL4 MCS tutorial](seL4 RT tutorial)
+    :   -   [seL4 Tutorial 1](seL4_Tutorial_1)
+        -   [seL4 Tutorial 2](seL4_Tutorial_2)
+        -   [seL4 Tutorial 3](seL4_Tutorial_3)
+        -   [seL4 Tutorial 4](seL4_Tutorial_4)
+        -   [seL4 Timer tutorial](seL4_Timer_tutorial)
+        -   [seL4 MCS tutorial](seL4_RT_tutorial)
 
 ## CAmkES tutorials
 
@@ -79,10 +79,10 @@ guided by a slide presentation. There are half-completed sample
 applications, with a set of slides giving instructions, with TASK
 challenges once again. There are also completed sample solutions.
 
-  -   [CAmkES Tutorial 0](../CAmkES Tutorial 0)
-  -   [CAmkES Tutorial 1](../CAmkES Tutorial 1)
-  -   [CAmkES Tutorial 2](../CAmkES Tutorial 2)
-  -   [CAmkES Timer Tutorial](../CAmkES Timer Tutorial)
+  -   [CAmkES Tutorial 0](CAmkES_Tutorial_0)
+  -   [CAmkES Tutorial 1](CAmkES_Tutorial_1)
+  -   [CAmkES Tutorial 2](CAmkES_Tutorial_2)
+  -   [CAmkES Timer Tutorial](CAmkES_Timer_Tutorial)
 
 More info:
 
@@ -97,4 +97,4 @@ More info:
 ## What next?
 
 
-You can try building and running [seL4test](Testing)
+You can try building and running [seL4test](../Testing)
