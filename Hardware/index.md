@@ -13,7 +13,6 @@
 |-|-|-|-|-|-|-|-|-|-|
 | [PC99](IA32) |various |x86 |VT-X |VT-D |unverified |Data61 |Data61 |PC99-style Intel Architecture 32-bit |
 | [PC99](IA32) |various |x64 |VT-X |VT-D |unverified |Data61 |Data61 |PC99-style Intel Architecture 64-bit |
-{:.table-condensed .table-striped}
 
 ## ARM
 
@@ -23,7 +22,6 @@
 |platform (board) |chip (SoC) |core |arch |virtualisation |IOMMU |status |contributed by |maintained by |description |
 |-|-|-|-|-|-|-|-|-|-|
 |[KZM](Kzm) |i.MX31 |ARM11 |v6 |No |No |unverified |Data61 |Data61 |original verified version - proof no longer maintained |
-{:.table-condensed .table-striped}
 
 ### ARMv7A
 
@@ -40,7 +38,6 @@
 |[Sabre Lite](sabreLite) |i.MX6 |A9 |v7A |No |No|verified |Data61 |Data61 |current verified version |
 |[TK1 SOM (Colorado Engineering)](CEI_TK1_SOM.md) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 |Small form-factor Tegra K1 |
 |[Zynq-7000 ZC706 Evaluation Kit](zynq7000) |Zynq 7000 |A9 |v7A |No |No |unverified|Data61 |Data61 | |
-{:.table-condensed .table-striped}
 
 ### ARMv8A
 
@@ -51,4 +48,3 @@
 |[Jetson TX1 (NVIDIA) ](jetsontx1) | Tegra X1 |Quad A57 |v8A |ARM HYP |System MMU |unverified |Data61 |Data61 | A57 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. |
 |[HiKey](HiKey) |Kirin 620 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. |
 |[Raspberry Pi 3-b](Rpi3)|BCM2837 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''.|
-{:.table-condensed .table-striped }
