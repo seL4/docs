@@ -1,3 +1,7 @@
+---
+version: 6.0.0
+title: seL4 6.0.0
+---
 # seL4 Version 6.0.0 Release
  Announcing the release of
 ```seL4

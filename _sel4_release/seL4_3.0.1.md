@@ -1,3 +1,7 @@
+---
+title: seL4 3.0.1
+version: 3.0.1
+---
 # seL4 3.0.1 Release Notes
 
 

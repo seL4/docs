@@ -1,3 +1,8 @@
+---
+title: seL4 1.0.0-rt-dev
+version: 1.0.0-rt-dev
+variant: mcs
+---
 # seL4 1.0.0-rt-dev
 
 

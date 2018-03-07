@@ -1,3 +1,7 @@
+---
+version: camkes-2.1.0
+title: camkes-2.1.0
+---
 # CAmkES 2.1.0 Release Notes
 
 

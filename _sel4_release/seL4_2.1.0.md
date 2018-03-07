@@ -1,4 +1,5 @@
 ---
+title: seL4 2.1.0
 version: 2.1.0
 ---
 # seL4 2.1.0 Release Notes

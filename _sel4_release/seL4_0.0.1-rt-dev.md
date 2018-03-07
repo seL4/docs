@@ -1,5 +1,7 @@
 ---
-title: help
+title: seL4 0.0.1-rt-dev
+version: 0.0.1-rt-dev
+variant: mcs
 ---
 # seL4 0.0.1-rt-dev
 

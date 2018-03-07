@@ -48,14 +48,14 @@ drop us a line if you want to be able to edit.
 
   -   [Current release](https://github.com/seL4/seL4/releases/latest)
   -   [Current manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
-  -   [Release notes](ReleaseNotes)
+  -   [Release notes](sel4_release)
   -   [Release process](ReleaseProcess)
 
 ## CAmkES Releases
 
 
   -   [Current release](https://github.com/seL4/camkes-tool/releases/latest)
-  -   [Release notes](CAmkESReleaseNotes)
+  -   [Release notes](camkes_release)
 
 ## Community
 

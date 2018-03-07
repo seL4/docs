@@ -1,3 +1,7 @@
+---
+version: 3.2.0
+title: seL4 3.2.0
+---
 # Introducing seL4 3.2.0
 
 

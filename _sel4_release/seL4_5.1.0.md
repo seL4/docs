@@ -1,3 +1,7 @@
+---
+version: 5.1.0
+title: seL4 5.1.0
+---
 # Introducing seL4 5.1.0
  Announcing the release of `seL4 5.1.0`
 with the following changes:
