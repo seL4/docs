@@ -25,8 +25,8 @@ page, if they were covered by a previous tutorial in the series.
 
 First, build and run the tutorial:
 ```
-\# select the config for the first tutorial make
-ia32_hello-timer_defconfig \# build it make -j libmuslc && make \# run
+# select the config for the first tutorial make
+ia32_hello-timer_defconfig # build it make -j libmuslc && make # run
 it in qemu make simulate
 ```
 

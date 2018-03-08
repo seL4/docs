@@ -68,7 +68,7 @@ component Client {
 
 Note that each component description needs to import the interface file
 we created above from apps/helloworld/interfaces. Import statements
-function similar to C's \#include, in that they can be enclosed in
+function similar to C's #include, in that they can be enclosed in
 double quotes and are relative to the source file, or enclosed in angle
 brackets and refer to a built-in file. The Hello component is to contain
 an implementation of MyInterface and the Client component will expect to
@@ -114,10 +114,10 @@ seL4RPC.
  Now for the implementation of the
 components. Create a single source file for Hello as
 apps/helloworld/components/Hello/src/hello.c:
-```\#!highlight c /*
+```#!highlight c /*
 apps/helloworld/components/Hello/src/hello.c */
 
-\#include <camkes.h> \#include <stdio.h>
+#include <camkes.h> #include <stdio.h>
 
 void inf__init(void) { }
 
@@ -140,10 +140,10 @@ perform.
 Create a source file for Client as
 apps/helloworld/components/Client/src/client.c that calls these
 functions as if they are directly available to it:
-```\#!highlight c /*
+```#!highlight c /*
 apps/helloworld/components/Client/src/client.c */
 
-\#include <camkes.h>
+#include <camkes.h>
 
 int run(void) {
 
@@ -158,8 +158,8 @@ The entry point of a CAmkES component is run.
  The final thing is to add some build system
 boiler plate to be able to build the system. Create
 apps/helloworld/Kconfig for the build system menu:
-```\#!highlight
-makefile \# apps/helloworld/Kconfig
+```#!highlight
+makefile # apps/helloworld/Kconfig
 
 config APP_HELLOWORLD bool "Hello world CAmkES application" default n
 help Hello world tutorial exercise.
@@ -167,7 +167,7 @@ help Hello world tutorial exercise.
 
 Create a dependency entry in apps/helloworld/Kbuild for your
 application:
-```\#!highlight makefile \# apps/helloworld/Kbuild
+```#!highlight makefile # apps/helloworld/Kbuild
 
 apps-$(CONFIG_APP_HELLOWORLD) += helloworld helloworld: libsel4
 libmuslc libsel4platsupport
@@ -176,7 +176,7 @@ libmuslc libsel4platsupport
 
 Copy one of the Makefiles from another application or create
 apps/helloworld/Makefile from scratch:
-```\#!highlight makefile \#
+```#!highlight makefile #
 apps/helloworld/Makefile
 
 TARGETS := helloworld.cdl ADL := helloworld.camkes
@@ -295,10 +295,10 @@ transmitting asynchronous signals. The two instantiated components,
 source and sink are connected over the connection channel.
 
 ### Implement Components
-```\#!highlight c /*
+```#!highlight c /*
 apps/helloevent/components/Emitter/src/main.c */
 
-\#include <camkes.h>
+#include <camkes.h>
 
 int run(void) {
 
@@ -321,10 +321,10 @@ the event is received, they can call a blocking function that will
 return when the event is received or they can call a polling function
 that returns whether an event has arrived or not. Let's add some source
 code that uses all three:
-```\#!highlight c /*
+```#!highlight c /*
 apps/helloevent/components/Consumer/src/main.c */
 
-\#include <camkes.h> \#include <stdio.h>
+#include <camkes.h> #include <stdio.h>
 
 static void handler(void) {
 
@@ -359,8 +359,8 @@ system. Add the appropriate information to Kconfig,
 apps/helloevent/Kbuild, apps/helloevent/Kconfig and
 apps/helloevent/Makefile as for the previous example. Create
 apps/helloevent/Kconfig for the build system menu:
-```\#!highlight
-makefile \# apps/helloevent/Kconfig
+```#!highlight
+makefile # apps/helloevent/Kconfig
 
 config APP_HELLOEVENT bool "Hello Event CAmkES application" default n
 help Hello event tutorial exercise.
@@ -368,7 +368,7 @@ help Hello event tutorial exercise.
 
 Create a dependency entry in apps/helloevent/Kbuild for your
 application:
-```\#!highlight makefile \# apps/helloevent/Kbuild
+```#!highlight makefile # apps/helloevent/Kbuild
 
 apps-$(CONFIG_APP_HELLOEVENT) += helloevent helloevent: libsel4
 libmuslc libsel4platsupport
@@ -377,7 +377,7 @@ libmuslc libsel4platsupport
 
 Copy one of the Makefiles from another application or create
 apps/helloevent/Makefile from scratch:
-```\#!highlight makefile \#
+```#!highlight makefile #
 apps/helloevent/Makefile
 
 TARGETS := helloevent.cdl ADL := helloevent.camkes
@@ -439,10 +439,10 @@ apps/hellodataport/components/Pong
 ### Setup Dataport Type
  Let's define a struct that will be used as
 one of the dataports:
-```\#!highlight c /*
+```#!highlight c /*
 apps/hellodataport/include/porttype.h */
 
-\#ifndef \_PORTTYPE_H_ \#define \_PORTTYPE_H_
+#ifndef \_PORTTYPE_H_ #define \_PORTTYPE_H_
 
 typedef struct MyData {
 
@@ -450,7 +450,7 @@ typedef struct MyData {
 
 } MyData_t;
 
-\#endif
+#endif
 ```
 
 The build system puts some constraints on where included headers can
@@ -468,7 +468,7 @@ apps/hellodataport/components/Pong/include ln -s
 ### Setup Components' CAmkES Files
  Note that we need to include the
 C header in the ADL. CAmkES does not actually parse this header, but it
-needs to know to \#include it whenever it references the MyData_t type.
+needs to know to #include it whenever it references the MyData_t type.
 Now let's create an ADL description of the Ping component:
 ``` /*
 apps/hellodataport/components/Ping/Ping.camkes */
@@ -525,11 +525,11 @@ assembly {
 component to use the dataports. Note that components generally need to
 use volatile variables when referring to shared memory to prevent the
 compiler eliminating repeated reads and writes.
-```\#!highlight c /*
+```#!highlight c /*
 apps/hellodataport/components/Ping/src/main.c */
 
-\#include <camkes.h> \#include <porttype.h> \#include
-<stdio.h> \#include <string.h>
+#include <camkes.h> #include <porttype.h> #include
+<stdio.h> #include <string.h>
 
 int run(void) {
 
@@ -549,10 +549,10 @@ int run(void) {
 }
 =
 ```
-\#!highlight c /* apps/hellodataport/components/Pong/src/main.c */
+#!highlight c /* apps/hellodataport/components/Pong/src/main.c */
 
-\#include <camkes.h> \#include <porttype.h> \#include
-<stdio.h> \#include <string.h>
+#include <camkes.h> #include <porttype.h> #include
+<stdio.h> #include <string.h>
 
 int run(void) {
 
@@ -579,8 +579,8 @@ system. Add the appropriate information to Kconfig,
 apps/hellodataport/Kbuild, apps/hellodataport/Kconfig and
 apps/hellodataport/Makefile as for the previous example. Create
 apps/hellodataport/Kconfig for the build system menu:
-```\#!highlight
-makefile \# apps/hellodataport/Kconfig
+```#!highlight
+makefile # apps/hellodataport/Kconfig
 
 config APP_HELLODATAPORT bool "Hello Dataport CAmkES application"
 default n help Hello dataport tutorial exercise.
@@ -588,7 +588,7 @@ default n help Hello dataport tutorial exercise.
 
 Create a dependency entry in apps/hellodataport/Kbuild for your
 application:
-```\#!highlight makefile \# apps/hellodataport/Kbuild
+```#!highlight makefile # apps/hellodataport/Kbuild
 
 apps-$(CONFIG_APP_HELLODATAPORT) += hellodataport hellodataport:
 libsel4 libmuslc libsel4platsupport
@@ -597,7 +597,7 @@ libsel4 libmuslc libsel4platsupport
 
 Copy one of the Makefiles from another application or create
 apps/hellodataport/Makefile from scratch:
-```\#!highlight makefile \#
+```#!highlight makefile #
 apps/hellodataport/Makefile
 
 TARGETS := hellodataport.cdl ADL := hellodataport.camkes
@@ -635,7 +635,7 @@ received world.
  There is a better way to write the Makefile for
 your application. Take apps/hellodataport/Makefile as an example
 ```
-\#!highlight makefile \# apps/hellodataport/Makefile
+#!highlight makefile # apps/hellodataport/Makefile
 
 TARGETS := $(notdir ${SOURCE_DIR}).cdl ADL := hellodataport.camkes
 

@@ -120,7 +120,7 @@ from
 note: declared here seL4_SchedControl_Configure(seL4_SchedControl
 \_service, seL4_SchedContext schedcontext, seL4_Time budget,
 seL4_Time period, seL4_Word max_refills, seL4_Word badge)
-\^\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ ... \# more lines
+\^\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ ... # more lines
 of errors
 ```
 

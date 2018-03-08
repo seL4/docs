@@ -21,20 +21,20 @@ page](https://developer.nvidia.com/embedded-computing), make sure your board is 
 # Build your first seL4 system
  First, check out the seL4 project.
 ```
-\#!highlight bash numbers=off $ mkdir tegra-test $ repo init -u
+#!highlight bash numbers=off $ mkdir tegra-test $ repo init -u
 <https://github.com/seL4/sel4test-manifest.git> $ repo sync
 ```
 
 Then, use the default config for the tegra and build the system.
 ```
-\#!highlight bash numbers=off $ make tk1_debug_xml_defconfig $
+#!highlight bash numbers=off $ make tk1_debug_xml_defconfig $
 make
 ```
 
 Once the system is compiled, you will have a new file creates in the
 "images" directory
 ```
-\#!highlight bash numbers=off $ ls images/
+#!highlight bash numbers=off $ ls images/
 sel4test-driver-image-arm-tk1 $
 ```
 
@@ -48,7 +48,7 @@ Once you have the wires in place, you can connect to the console via
 screen (or you can use minicom or another serial console program). In
 the following, we assume that the Tegra is connected to /dev/ttyUSB0.
 
-`\#!highlight bash numbers=off screen /dev/ttyUSB0 115200 `
+`#!highlight bash numbers=off screen /dev/ttyUSB0 115200 `
 
 When you start the board, you will see the U-Boot prompt. To load the
 binary you need to interact with U-Boot. I personally use a DHCP/TFTP
@@ -97,7 +97,7 @@ saveenv
 ```
 == Getting the sources ==
 ```
-\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
+#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
 tegra-u-boot-flasher repo init -u
 <git@github.com>:NVIDIA/tegra-uboot-flasher-manifests.git repo sync
 ```
@@ -106,7 +106,7 @@ If you have some difficulties with the git:// protocol, (which will work
 only if you have a github account, and have installed an SSH key there),
 remove the new-u-boot-flasher directory, and start again thus:
 ```
-\#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
+#!highlight bash numbers=off mkdir tegra-u-boot-flasher cd
 tegra-u-boot-flasher repo init -u
 <https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git> repo sync
 ```
@@ -116,14 +116,14 @@ tegra-u-boot-flasher repo init -u
 
 Apply the following patch to increase the console buffer size.
 ```
-\#!highlight diff numbers=off diff --git
+#!highlight diff numbers=off diff --git
 a/include/configs/tegra-common.h b/include/configs/tegra-common.h index
 1c469d0..234023d 100644 --- a/include/configs/tegra-common.h +++
 b/include/configs/tegra-common.h @@ -77,7 +77,7 @@ * Increasing the
 size of the IO buffer as default nfsargs size is more * than 256 and so
-it is not possible to edit it */ -\#define CONFIG_SYS_CBSIZE (256* 2)
-/* Console I/O Buffer Size */ +\#define CONFIG_SYS_CBSIZE (256* 3)
-/* Console I/O Buffer Size */ /* Print Buffer Size */ \#define
+it is not possible to edit it */ -#define CONFIG_SYS_CBSIZE (256* 2)
+/* Console I/O Buffer Size */ +#define CONFIG_SYS_CBSIZE (256* 3)
+/* Console I/O Buffer Size */ /* Print Buffer Size */ #define
 CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE +
 sizeof(CONFIG_SYS_PROMPT) + 16)
 ```
@@ -140,12 +140,12 @@ gcc-arm-linux-gnueabi
 ```
 
 Then do:
-```\#!highlight bash numbers=off cd scripts ./build-tools build
+```#!highlight bash numbers=off cd scripts ./build-tools build
 ```
 
 Then, in the script directory, build everything.
 ```
-\#!highlight bash numbers=off ./build --socs tegra124 --boards
+#!highlight bash numbers=off ./build --socs tegra124 --boards
 jetson-tk1 build
 ```
 
@@ -156,7 +156,7 @@ the RESET button next to it; release FORCE RECOVERY a second or two
 after releasing the reset button
 
 Then issue:
-```\#!highlight bash numbers=off ./tegra-uboot-flasher flash
+```#!highlight bash numbers=off ./tegra-uboot-flasher flash
 jetson-tk1
 ```
 

@@ -49,25 +49,25 @@ Qt is quite big, and the major of it is unnecessary. So I recommend to
 build from source for personal computers.
 
 #### apt-get method
-```\#!highlight bash sudo apt-get install
+```#!highlight bash sudo apt-get install
 python-pyqt5 sudo apt-get install python-pyqt5.qtsvg
 ```
 
 #### from source method
-```\#!highlight bash cd
+```#!highlight bash cd
 /some/temp/directory/like/Downloads git clone
 <git://code.qt.io/qt/qt5.git> cd qt5 git checkout 5.5
 
 ./init-repository --no-webkit --module-subset=qtbase,qtsvg
 
-\# Check where Qt will install - needed for PyQt5 ./configure --help \#
+# Check where Qt will install - needed for PyQt5 ./configure --help #
 Have a look at where qt will be installed, for me it was installed in
 /usr/local/Qt-5.5.1
 
 ./configure -release -nomake examples -nomake tests -opensource
--confirm-license \# add "-qt-xcb" for linux
+-confirm-license # add "-qt-xcb" for linux
 
-make -j4 \# This takes a long time (1-3 hrs) make install
+make -j4 # This takes a long time (1-3 hrs) make install
 ```
 ===
 Installing Graphviz ===

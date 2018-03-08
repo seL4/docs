@@ -60,7 +60,7 @@ source differences. U-Boot.
 
 Inside the Android environment do:
 ```
-\#!highlight bash numbers=off make ARCH=arm CROSS_COMPILE=arm-eabi-
+#!highlight bash numbers=off make ARCH=arm CROSS_COMPILE=arm-eabi-
 arndale sudo dd iflag=dsync oflag=dsync if=u-boot.bin of=/dev/sdb
 seek=63
 ```
@@ -71,7 +71,7 @@ load the elf file into memory and run bootelf. However, Fastboot may
 require that the ELF file be packed into a U-Boot application image
 file. Follow the below instructions to create this image.
 ```
-\#!highlight bash numbers=off sudo apt-get install uboot-mkimage
+#!highlight bash numbers=off sudo apt-get install uboot-mkimage
 INPUT_FILE=images/sel4test-image-arm-exynos4 OUTPUT_FILE=sel4-uImage
 mkimage -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d
 $INPUT_FILE $OUTPUT_FILE

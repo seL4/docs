@@ -17,7 +17,7 @@ Enable hardware breakpoint and single-stepping API.
 Not all platforms support this feature for two main reasons:
 
 - The feature is gated behind certain hardware signals, such as
-        \#DBGEN, being active. If the hardware isn't asserting these
+        #DBGEN, being active. If the hardware isn't asserting these
         signals, the kernel will be unable to use them.
 - Your processor supports only the "Baseline" set of Coprocessor
         14 registers, and doesn't reliably expose the debug features

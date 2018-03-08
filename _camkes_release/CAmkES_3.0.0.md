@@ -84,7 +84,7 @@ You don't have to do anything. Your project will continue to work.
 
 
 CAmkES dependencies have changed. For a definitive (maintained) list,
-see: [CAmkES\#Build_dependencies](../CAmkES\#Build_dependencies)
+see: [CAmkES#Build_dependencies](../CAmkES#Build_dependencies)
 
 ## New Features
 
@@ -103,14 +103,14 @@ instructions,
 Previously, the values of settings (in "configuration" blocks) were
 strings under the hood. Now they are stored as a value of the
 appropriate (python) type, determined during parsing.
-[Read more.](CAmkESDifferences\#Rich_Types_for_Settings)
+[Read more.](CAmkESDifferences#Rich_Types_for_Settings)
 
 ### Parametrised Buf Type
 
 
 The "Buf" type for dataports can now be optionally parametrised with the
 dataport's size in bytes.
-[Read more.](CAmkESDifferences\#Parametrised_Buf_Type)
+[Read more.](CAmkESDifferences#Parametrised_Buf_Type)
 
 ### The seL4Asynch connector has been renamed to seL4Notification
 
@@ -139,7 +139,7 @@ types resemble structs and arrays in C.
 
 The syntax for declaring that a component exports an interface from one
 of it sub-components has changed.
-[See an example.](CAmkESDifferences\#Hierarchical_Components)
+[See an example.](CAmkESDifferences#Hierarchical_Components)
 
 ### Binary Semaphores
 

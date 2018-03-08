@@ -57,13 +57,13 @@ After compiling a seL4 project, you can use one of these to simulate
 execution of the resulting binaries. For example, after compiling
 sel4test for the KZM (IMX31) board:
 ```
-\#!highlight bash numbers=off $ qemu-system-arm -M kzm -nographic
+#!highlight bash numbers=off $ qemu-system-arm -M kzm -nographic
 -kernel images/sel4test-driver-image-arm-imx31
 ```
 
 On x86, kernel and userspace are provided as separate images:
 ```
-\#!highlight bash numbers=off $ qemu-system-i386 -m 512 -nographic
+#!highlight bash numbers=off $ qemu-system-i386 -m 512 -nographic
 -kernel images/kernel-ia32-pc99 -initrd
 images/sel4test-driver-image-ia32-pc99
 ```
@@ -71,8 +71,8 @@ images/sel4test-driver-image-ia32-pc99
 Some seL4 projects will define Makefile targets as shorthand for these
 commands, so you can simply run:
 ```
-\#!highlight bash numbers=off $ make simulate-kzm \# Simulate KZM
-execution $ make simulate-ia32 \# Simulate x86 execution
+#!highlight bash numbers=off $ make simulate-kzm # Simulate KZM
+execution $ make simulate-ia32 # Simulate x86 execution
 ```
 
 When simulating a seL4 system in Qemu, you should see output that is
@@ -117,7 +117,7 @@ Qemu's emulated environment.
 Start Qemu with the extra options "-S" (pause execution on start) and
 "-s" (start a GDB server on TCP port 1234):
 ```
-\#!highlight bash numbers=off $ qemu-system-arm -M kzm -nographic
+#!highlight bash numbers=off $ qemu-system-arm -M kzm -nographic
 -kernel images/sel4test-driver-image-arm-imx31 -S -s
 ```
 
@@ -130,7 +130,7 @@ debugging information" in the seL4 build configuration) if you want GDB
 to show you C source code while debugging. In this example we're going
 to debug the seL4 kernel that has been built in debug mode:
 ```
-\#!highlight bash numbers=off $ arm-none-eabi-gdb
+#!highlight bash numbers=off $ arm-none-eabi-gdb
 build/kernel/kernel.elf
 ```
 
@@ -184,32 +184,32 @@ gdb.
 
 Below is another example for debugging userspace sel4test on ia32:
 ```
-\# Apply a sel4test config for simulating using qemu. make
+# Apply a sel4test config for simulating using qemu. make
 ia32_release_xml_defconfig
 
-\# After building, check that all of the tests run and pass. make
+# After building, check that all of the tests run and pass. make
 simulate-ia32​
 
-\# Invoke qemu with the flags -s -S. It should block until you attach a
-gdb instance. \# -s shorthand for -gdb tcp::1234 \# -S freeze CPU at
+# Invoke qemu with the flags -s -S. It should block until you attach a
+gdb instance. # -s shorthand for -gdb tcp::1234 # -S freeze CPU at
 startup (use 'c' to start execution) qemu-system-i386 -m 512 -nographic
 -kernel images/kernel-ia32-pc99 -initrd
 images/sel4test-driver-image-ia32-pc99 -s -S
 
-\# Start a gdb instance in another window. gdb
-stage/x86/pc99/bin/sel4test-driver \# (Or gdb
+# Start a gdb instance in another window. gdb
+stage/x86/pc99/bin/sel4test-driver # (Or gdb
 stage/x86/pc99/bin/sel4test-tests)
 
-\# Attach to the qemu instance using remote gdb serial server protocol.
-(gdb) target remote :1234 \# Remote debugging using :1234 \# 0x0000fff0
+# Attach to the qemu instance using remote gdb serial server protocol.
+(gdb) target remote :1234 # Remote debugging using :1234 # 0x0000fff0
 in ?? ()
 
-\# Set a breakpoint at main. (gdb) break main \# Breakpoint 1 at
+# Set a breakpoint at main. (gdb) break main # Breakpoint 1 at
 0x8048460: file /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c,
 line 459.
 
-\# Resume the qemu cpu. (gdb) continue \# Continuing. \# \# It should
-hit the first breakpoint. \# Breakpoint 1, main () at
+# Resume the qemu cpu. (gdb) continue # Continuing. # # It should
+hit the first breakpoint. # Breakpoint 1, main () at
 /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459
 ```
 
@@ -222,7 +222,7 @@ userspace rather than the kernel. For example, using the same sel4test
 environment we start Qemu in the same way but start GDB with sel4test's
 binary:
 ```
-\#!highlight bash numbers=off $ arm-none-eabi-gdb
+#!highlight bash numbers=off $ arm-none-eabi-gdb
 build/arm/imx31/sel4test-driver/sel4test-driver.bin
 ```
 
@@ -274,13 +274,13 @@ information is included in the image.
 For ARM, supposing that **arm-none-eabi-** is used as the
 cross-compiler prefix.
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     arm-none-eabi-objdump -D binary_file_name > dump.s
 ```
 For x86
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     objdump -D binary_file_name > dump.s
 ```
@@ -289,7 +289,7 @@ The file `dump.s` has the human-readable assembly instructions.
 If you have symbols and want (C) source information in your disassembly
 (and who doesn't!) then use the -S flag. for example:
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     objdump -DS binary_file_name
 ```
@@ -300,13 +300,13 @@ the correct arguments generated from the .config.
 
 You can objdump the kernel:
 
-`\#!highlight bash numbers=off make objdump-kernel | less ` The test
+`#!highlight bash numbers=off make objdump-kernel | less ` The test
 driver:
 
-`\#!highlight bash numbers=off make objdump-driver | less ` Or the
+`#!highlight bash numbers=off make objdump-driver | less ` Or the
 tests themselves:
 
-`\#!highlight bash numbers=off make objdump-tests | less `
+`#!highlight bash numbers=off make objdump-tests | less `
 
 ## In kernel debugging
 

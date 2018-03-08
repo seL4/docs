@@ -30,7 +30,7 @@ on VMWare because of hardware mismatch.
 
 With a recent Ubuntu (16.04+) all you need to do should be
 
-`\#!highlight bash numbers=off sudo apt install qemu-system-x86 `
+`#!highlight bash numbers=off sudo apt install qemu-system-x86 `
 
 Your host machine has to have a CPU that supports Vt-x virtualization
 (for Intel CPUs), or AMD-V (for AMD CPUs, but that wasn't tested). Any

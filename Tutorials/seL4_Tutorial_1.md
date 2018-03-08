@@ -36,9 +36,9 @@ zynq7000_hello-1_defconfig)
 
 First try to build the code:
 ```
-\# go to the top level directory cd sel4-tutorials-manifest/ \#
+# go to the top level directory cd sel4-tutorials-manifest/ #
 select the config for the first tutorial make ia32_hello-1_defconfig
-\# build it make -j8
+# build it make -j8
 ```
 This will fail to build with the following
 error:
@@ -80,6 +80,6 @@ run the example as follows:
 ` $ make -j8 $ make simulate ` If you've succeeded, qemu should
 output:
 ```
-Starting node \#0 with APIC ID 0 Booting all finished, dropped to
+Starting node #0 with APIC ID 0 Booting all finished, dropped to
 user space hello world
 ```

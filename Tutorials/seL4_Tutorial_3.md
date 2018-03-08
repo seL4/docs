@@ -48,8 +48,8 @@ they were covered by a previous tutorial in the series.
 
 First, build the tutorial:
 ```
-\# select the config for the first tutorial make
-ia32_hello-3_defconfig \# build it make -j8 \# run it in qemu make
+# select the config for the first tutorial make
+ia32_hello-3_defconfig # build it make -j8 # run it in qemu make
 simulate
 ```
 
@@ -80,7 +80,7 @@ virtual address is randomly chosen for use. This is because, as we
 explained before, the process is responsible for its own Virtual Memory
 Management. As such, if it chooses, it can map any page in its VSpace to
 physical frame. It can technically choose to do unconventional things,
-like not unmap PFN \#0. The control of how the address space is managed
+like not unmap PFN #0. The control of how the address space is managed
 is up to the threads that have write-capabilities to that address space.
 There is both flexibility and responsibility implied here. Granted, seL4
 itself provides strong guarantees of isolation even if a thread decides

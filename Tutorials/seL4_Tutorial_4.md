@@ -35,8 +35,8 @@ they were covered by a previous tutorial in the series.
 
 ## Walkthrough
 ```
-\# select the config for the first tutorial make
-ia32_hello-4_defconfig \# build it make -j8 \# run it in qemu make
+# select the config for the first tutorial make
+ia32_hello-4_defconfig # build it make -j8 # run it in qemu make
 simulate
 ```
 Look for TASK in the apps/hello-4 and apps/hello-4-app

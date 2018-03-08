@@ -34,8 +34,8 @@ Uncomment them one by one as needed when going through the tasks.
 
 ## Walkthrough
 ```
-\# select the config for the first tutorial make
-ia32_hello-2_defconfig \# build it make -j8 \# run it in qemu make
+# select the config for the first tutorial make
+ia32_hello-2_defconfig # build it make -j8 # run it in qemu make
 simulate
 ```
 

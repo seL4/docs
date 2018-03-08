@@ -58,7 +58,7 @@ We press start and then send one CAN message from the Linux TK1 to the
 seL4 TK1.
 
 Native Linux:
-ubuntu@tegra-ubuntu:\~$ cansend can0 5A1\#11.22.33.44.55.66.77.88
+ubuntu@tegra-ubuntu:\~$ cansend can0 5A1#11.22.33.44.55.66.77.88
 
 seL4: Recv: error(0), id(5a1), data(11, 22, 33, 44, 55, 66, 77, 88)
 

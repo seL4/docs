@@ -31,7 +31,7 @@ The development framework provides:
         subproject dependencies, and repo will fetch all of them and
         place them in the correct subdirectories for you.
 - Make sure that you already have the tools to build seL4
-        ([[Getting started\#Setting_up_your_machine|seL4: Setting
+        ([[Getting started#Setting_up_your_machine|seL4: Setting
         up your machine]])
 
 ## Build dependencies
@@ -40,7 +40,7 @@ The development framework provides:
 * Getting dependencies differs across systems. Here's how to install dependencies for several systems:
 
   -Ubuntu 16.04
-```\#!highlight bash numbers=off
+```#!highlight bash numbers=off
 
 apt-get install git repo libncurses-dev python-pip libxml2-utils cmake
 ninja-build clang
@@ -48,7 +48,7 @@ libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect
 qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
 ```
 * Ubuntu 14.04
-```\#!highlight bash numbers=off apt-get install git
+```#!highlight bash numbers=off apt-get install git
 phablet-tools libncurses-dev python-dev python-pip libxml2-utils
 cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev
 gcc-multilib expect
@@ -59,7 +59,7 @@ update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
 ```
 *
 Archlinux
-```\#!highlight bash numbers=off pacman -S binutils
+```#!highlight bash numbers=off pacman -S binutils
 gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang
 moreutils cpio python python-pip expect cmake ninja m4 automake autoconf
 pkg-config
@@ -71,12 +71,12 @@ yaourt -S bcunit-cunit-compat spin
 will need to install haskell, and some python dependencies * Install
 [ haskell stack](<https://haskellstack.org> ) (haskell version and
 package manager)
-```\#!highlight bash numbers=off curl -sSL
+```#!highlight bash numbers=off curl -sSL
 <https://get.haskellstack.org/> | sh
 ```
 * Install python dependencies
 (via pip):
-```\#!highlight bash numbers=off pip install --user
+```#!highlight bash numbers=off pip install --user
 camkes-deps
 ```
 
@@ -85,7 +85,7 @@ camkes-deps
 
 Download CAmkES source code from github:
 ```
-\#!highlight bash numbers=off mkdir camkes-project cd camkes-project
+#!highlight bash numbers=off mkdir camkes-project cd camkes-project
 repo init -u <https://github.com/seL4/camkes-manifest.git> repo sync
 ```
 
@@ -95,7 +95,7 @@ repo init -u <https://github.com/seL4/camkes-manifest.git> repo sync
 The following will configure, build, and run a simple example CAmkES
 system:
 ```
-\#!highlight bash numbers=off make arm_simple_defconfig make
+#!highlight bash numbers=off make arm_simple_defconfig make
 silentoldconfig
 ```
 
@@ -104,7 +104,7 @@ system. You can do this by running make menuconfig, then going to
 **Toolchain Options -> Cross compiler prefix**. You will most
 likely be compiling with **arm-linux-gnueabi-**.
 ```
-\#!highlight bash numbers=off make qemu-system-arm -M kzm -nographic
+#!highlight bash numbers=off make qemu-system-arm -M kzm -nographic
 -kernel images/capdl-loader-experimental-image-arm-imx31
 ```
 
@@ -112,13 +112,13 @@ In order to clean up after building (for example because you’ve set up a
 new configuration and you want to make sure that everything gets rebuilt
 correctly) do:
 
-`\#!highlight bash numbers=off make clean `
+`#!highlight bash numbers=off make clean `
 
 ## Read Tutorial
 
 
 To learn about developing your own CAmkES application, read the
-[Tutorials\#CAmkES_tutorials](../Tutorials\#CAmkES_tutorials).
+[Tutorials#CAmkES_tutorials](../Tutorials#CAmkES_tutorials).
 
 ## Camkes Terminology/Glossary
 

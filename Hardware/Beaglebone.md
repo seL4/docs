@@ -14,7 +14,7 @@ cross-compilers. Use
 ### Building
  ==== seL4test ==== First clone the seL4 repository.
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     mkdir sel4test cd sel4test repo init -u
     <https://github.com/seL4/sel4test-manifest.git>
@@ -23,7 +23,7 @@ cross-compilers. Use
 Now you must build a configuration file for your BeagleBone. Finally,
 build with make with arm-linux-gnueabi-objcopy.
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     make menuconfig make arm-linux-gnueabi-objcopy --output-target
     binary
@@ -36,7 +36,7 @@ is selected for your model. This will be under Kernel -> seL4 System.
 #### RefOS
  For RefOS, first clone the repository.
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     mkdir refos cd refos repo init -u
     <https://github.com/seL4/refos-manifest.git>
@@ -45,7 +45,7 @@ is selected for your model. This will be under Kernel -> seL4 System.
 Now you must build a configuration file for your BeagleBone. Finally,
 build with make with arm-linux-gnueabi-objcopy.
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     make menuconfig make arm-linux-gnueabi-objcopy --output-target
     binary images/refos-image refos.bin
@@ -60,7 +60,7 @@ file booting or Ethernet cable for network boot
 development box and the Beaglebone Black. Use a serial program such as
 minicom or screen to connect to the serial port at 115200 bps
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     screen /dev/ttyUSB0 115200
 ```

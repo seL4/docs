@@ -12,7 +12,7 @@ chipselect.
 Note that the GPIO dts sets the GPIO used for chipselect to high
 impedance so bad things don't happen.
 
-CSN is indicated on the SPI expansion header. Can node \#1 on the CAN
+CSN is indicated on the SPI expansion header. Can node #1 on the CAN
 daughterboard uses TK1_GPIO2, so it's necessary to connect these 2
 pins:
 
@@ -166,7 +166,7 @@ Once we figure out how to do GPIO-muxed chipselect on the TK1SOM
 (working on it) it will be possible to use more than one CAN node &
 user-space SPI at the same time.
 
-### Enable hardware-based chipselect \#0
+### Enable hardware-based chipselect #0
  There is a strange old
 touch-driver hanging around that needs to be disabled for you to be able
 to use hardware CS on the TK1-SOM's SPI line.
@@ -183,7 +183,7 @@ line, and change it to touch_id=3@3
 update_kernel.sh
 ```
 
-    \#!/bin/bash
+    #!/bin/bash
 
     > L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
     > SOM_DIR=/mnt/TK1SOM
@@ -217,7 +217,7 @@ When you boot up Linux login as: ubuntu password ubuntu.
 
 Then:
 ```
-dmesg | grep mcp \# See if the driver loaded properly
+dmesg | grep mcp # See if the driver loaded properly
 
 [ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe [
 618.718296] mcp251x spi0.0: v2 [ 618.718332] mcp251x spi0.0: got
@@ -234,11 +234,11 @@ spi0.0: CANSTAT 0x80 CANCTRL 0x07 [ 618.740198] mcp251x spi0.0:
 successful hardware probe [ 618.740795] mcp251x spi0.0: probed [
 628.973815] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
 
-ls /sys/class/net \# See if the can device is available and what it's
+ls /sys/class/net # See if the can device is available and what it's
 called can0 dummy0 eth0 ip6tnl0 lo rmnetctl sit0
 
-sudo ip link set can0 up type can bitrate 500000 \# Bring it up ifconfig
-\# Take a look... can0 Link encap:UNSPEC HWaddr
+sudo ip link set can0 up type can bitrate 500000 # Bring it up ifconfig
+# Take a look... can0 Link encap:UNSPEC HWaddr
 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00 UP RUNNING NOARP MTU:16
 Metric:1 RX packets:0 errors:0 dropped:0 overruns:0 frame:0 TX packets:0
 errors:0 dropped:0 overruns:0 carrier:0 collisions:0 txqueuelen:10{ RX
@@ -252,14 +252,14 @@ eth0 Link encap:Ethernet HWaddr 00:50:c2:72:00:59
 
 ------------------------------------------------------------------------
 
-sudo apt-get install can-utils \# (make sure to enable universe
-repository & update) cansend can0 5A1\#11.22.33.44.55.66.77.88 \# Send a
-packet candump can0 \# Dump packets
+sudo apt-get install can-utils # (make sure to enable universe
+repository & update) cansend can0 5A1#11.22.33.44.55.66.77.88 # Send a
+packet candump can0 # Dump packets
 ```
 
 # Loopback mode test
 ``` ip link set can0 type can bitrate 500000
-loopback on ifconfig can0 up candump any,0:0,\#FFFFFFFF \#In terminal 1
+loopback on ifconfig can0 up candump any,0:0,#FFFFFFFF #In terminal 1
 
-cansend can0 123\#dead \#In terminal 2
+cansend can0 123#dead #In terminal 2
 ```

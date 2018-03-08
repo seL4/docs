@@ -30,7 +30,7 @@ program.
 
 You will first need to acquire and compile the IMX USB loader tool from
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     git clone <git://github.com/boundarydevices/imx_usb_loader.git>
 ```
@@ -50,7 +50,7 @@ USB-TTY converter has locked up.
 
 Now you are ready to load your image into memory and execute:
 ```
-\#!highlight bash numbers=off $ lsusb .... Bus 001 Device 019: ID
+#!highlight bash numbers=off $ lsusb .... Bus 001 Device 019: ID
 15a2:0054 Freescale Semiconductor, Inc. .... $ sudo ./imx_usb
 image_file
 ```
@@ -70,7 +70,7 @@ u-boot.bin
 
 Now you are ready to load your image into memory and execute:
 ```
-\#!highlight bash numbers=off $ lsusb .... Bus 001 Device 019: ID
+#!highlight bash numbers=off $ lsusb .... Bus 001 Device 019: ID
 15a2:0054 Freescale Semiconductor, Inc. .... $ sudo ./imx_usb
 image_file
 ```
@@ -96,7 +96,7 @@ must be located at block 2 of the SD or μSD card. This can be achieved
 with the following command, assuming that the SD or μSD device is
 /dev/sdb.
 ```
-\#!highlight bash numbers=off dd if=u-boot.bin of=/dev/sdb seek=2
+#!highlight bash numbers=off dd if=u-boot.bin of=/dev/sdb seek=2
 bs=512; sync
 ```
 == U-Boot for the Sabre Lite == === Obtaining and
@@ -123,7 +123,7 @@ The prebuilt version is for booting from SPI.
 
 To obtain and build U-Boot, do:
 ```
-\#!highlight bash numbers=off git clone
+#!highlight bash numbers=off git clone
 <git://github.com/boundarydevices/u-boot-2009-08.git> cd u-boot-2009-08
 git checkout origin/boundary-imx_3.0.35_1.1.0 -b
 boundary-imx_3.0.35_1.1.0 export ARCH=arm export
@@ -134,23 +134,23 @@ all ls -l u-boot.bin
 install U-Boot, put u-boot.bin onto the first partition (either FAT16 or
 EXT2) of an SD card, boot into U-Boot then do this at the U-Boot prompt:
 ```
-\# Initialise the SD card. Replace 1 with 0 for standard SD mmc dev
+# Initialise the SD card. Replace 1 with 0 for standard SD mmc dev
 1
 
-\# Load the file with name "u-boot.bin" from the 1st partition of the SD
+# Load the file with name "u-boot.bin" from the 1st partition of the SD
 card to RAM at address 0x12000000 ext2load mmc 1:1 12000000 u-boot.bin
 
-\# Initialise the SPI flash subsystem sf probe || sf probe 1
+# Initialise the SPI flash subsystem sf probe || sf probe 1
 
-\# Erase 0x100000 bytes from the SPI flash starting at address
-0x00000000 \# This covers both U-Boot and its saved environment. sf
+# Erase 0x100000 bytes from the SPI flash starting at address
+0x00000000 # This covers both U-Boot and its saved environment. sf
 erase 0 0x100000
 
-\# Copy ${filesize} bytes from RAM at address 0x12000000 to SPI flash
-at address 0x00000000 \# Note that the filesize variable was set when
+# Copy ${filesize} bytes from RAM at address 0x12000000 to SPI flash
+at address 0x00000000 # Note that the filesize variable was set when
 the file was loaded into RAM sf write 0x12000000 0 ${filesize}
 
-\# Ensure that the boot select switches are set appropriately, then
+# Ensure that the boot select switches are set appropriately, then
 reboot the Sabrelite
 ```
 = Booting seL4 applications = This assumes that

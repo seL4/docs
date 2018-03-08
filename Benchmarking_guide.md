@@ -60,7 +60,7 @@ dumped to subsequent 64-bit words in the IPCBuffer.
 
 Example code of using this feature:
 ```cpp
- \#include
+ #include
 <sel4/benchmark_utilisation_types.h>
 
 uint64_t *ipcbuffer = (uint64_t*)
@@ -143,16 +143,16 @@ of cycles added to a measurement by the tracepoint instrumentation
 (inner pair result).
 ||<tablestyle="margin-top:10px;margin-left:0px;overflow-x:auto;color:rgb(51,
 51, 51);font-family:Arial, sans-serif;font-size:14px;line-height:20px;"
-tableclass="confluenceTable"\#F0F0F0 class="confluenceTh"
+tableclass="confluenceTable"#F0F0F0 class="confluenceTh"
 style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
 10px;vertical-align:top;white-space:pre-wrap; ;text-align:center"
-|2>Machine ||<\#F0F0F0 class="confluenceTh"
+|2>Machine ||<#F0F0F0 class="confluenceTh"
 style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
 10px;vertical-align:top;white-space:pre-wrap; ;text-align:center"
-|2>\# Samples ||||||||||||<\#F0F0F0 class="confluenceTh"
+|2># Samples ||||||||||||<#F0F0F0 class="confluenceTh"
 style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
 10px;vertical-align:top;white-space:pre-wrap;
-;text-align:center">Total Overhead ||||||||||||<\#F0F0F0
+;text-align:center">Total Overhead ||||||||||||<#F0F0F0
 class="confluenceTh" style="border-style:solid;border-color:rgb(221,
 221, 221);padding:7px 10px;vertical-align:top;white-space:pre-wrap;
 ;text-align:center">Effective Overhead || ||<class="confluenceTd"
@@ -339,9 +339,9 @@ and tell the kernel about it is as follows:
 ```cpp
 
 
-\#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
+#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 
-\#include <sel4/benchmark_track_types.h>
+#include <sel4/benchmark_track_types.h>
 
   /* Create large page to use for benchmarking and give to kernel */
   void*log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1,
@@ -352,7 +352,7 @@ and tell the kernel about it is as follows:
   seL4_BenchmarkSetLogBuffer(buffer_cap); if (res_buf) {
   ZF_LOGF("Could not set log buffer"); }
 
-\#endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
+#endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 ```
 
 seL4_BenchmarkResetLog() can be used then to reset the log buffer index

@@ -26,13 +26,13 @@ not rely on powering the board over USB
 
 If you do not have minicom installed:
 
-`\#!highlight bash numbers=off sudo apt-get install minicom ` If you
+`#!highlight bash numbers=off sudo apt-get install minicom ` If you
 are connecting via a USB serial adapter:
 
-`\#!highlight bash numbers=off sudo minicom -s ttyUSB0 ` And if you
+`#!highlight bash numbers=off sudo minicom -s ttyUSB0 ` And if you
 were connecting via a "real" serial port:
 
-`\#!highlight bash numbers=off sudo minicom -s ttyS0 ` In either
+`#!highlight bash numbers=off sudo minicom -s ttyS0 ` In either
 case, this will take you to a configuration menu.
 
   1.  Choose Serial Port Setup
@@ -45,20 +45,20 @@ case, this will take you to a configuration menu.
 
 You can now connect to the !BeagleBoard using Minicom:
 
-`\#!highlight bash numbers=off minicom ttyUSB0 ` Or:
+`#!highlight bash numbers=off minicom ttyUSB0 ` Or:
 
-`\#!highlight bash numbers=off minicom ttyS0 ` === Permissions ===
+`#!highlight bash numbers=off minicom ttyS0 ` === Permissions ===
 If you get permissions errors you need to add yourself to the
 appropriate group. Find out which group on your machine has access to
 the serial ports (on Debian, it's usually dialout):
 ```
-\#!highlight bash numbers=off $ ls -l /dev/ttyUSB0 crw-rw---- 1 root
+#!highlight bash numbers=off $ ls -l /dev/ttyUSB0 crw-rw---- 1 root
 dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0
 ```
 
 Then add yourself to the right group:
 ```
-\#!highlight bash numbers=off sudo usermod -G dialout -a
+#!highlight bash numbers=off sudo usermod -G dialout -a
 your_login_name
 ```
 === U-Boot === Now minicom should connect to what
@@ -81,7 +81,7 @@ instructions at
 
 Then run:
 ```
-\#!highlight bash numbers=off make beagle_debug_xml_defconfig make
+#!highlight bash numbers=off make beagle_debug_xml_defconfig make
 ```
 Which after a few minutes should give you:
 

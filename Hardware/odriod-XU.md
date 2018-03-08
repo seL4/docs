@@ -17,7 +17,7 @@ bootable ELF file onto an SD card or the eMMC chip.
 ## Run seL4test using fastboot
  === Get and build sel4test ===
 ```
-\#!highlight bash numbers=off mkdir seL4test cd seL4test repo init -u
+#!highlight bash numbers=off mkdir seL4test cd seL4test repo init -u
 <https://github.com/seL4/sel4test-manifest.git> repo sync make
 odroidxu_release_xml_defconfig
 ```
@@ -34,7 +34,7 @@ Enter Fastboot mode by typing fastboot
 
 On the host,
 ```
-\#!highlight bash numbers=off
+#!highlight bash numbers=off
 
     mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel
     -O qnx -d images/sel4test-driver-image-arm-exynos5 image

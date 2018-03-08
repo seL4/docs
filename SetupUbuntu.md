@@ -23,10 +23,10 @@ On Wheezy and before, you need to use the Emdebian toolchains. Library
 support is now available on Jessie and later, but not a full complement
 of cross compilers.
 
-For Debian, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](\#all)) then the ones for your system:
+For Debian, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](#all)) then the ones for your system:
 
-- [Debian Wheezy (oldstable)](\#wheezy)
-- [Debian Jessie or later(testing or unstable)](\#jessie)
+- [Debian Wheezy (oldstable)](#wheezy)
+- [Debian Jessie or later(testing or unstable)](#jessie)
 
 To find out what distro you're using: ` lsb_release -a `
 
@@ -38,9 +38,9 @@ Ubuntu is relatively straightforward, as
 it — see <https://wiki.ubuntu.com/ToolChain>. You will however have to
 have enabled the Universe repository.
 
-For Ubuntu, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](\#all)) then the ones for your system:
+For Ubuntu, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](#all)) then the ones for your system:
 
-- [[\#ubuntu|Ubuntu later than Precise Pangolin (tested on
+- [[#ubuntu|Ubuntu later than Precise Pangolin (tested on
         14.04LTS — Trusty Tahr)]]
 
 ## Instructions

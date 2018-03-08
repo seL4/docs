@@ -23,7 +23,7 @@ We have also developed 2 daughterboards for the TK1-SOM
 
 Upstream U-Boot now supports this board.
 
-Follow the instructions for the [Jetson TK1](Hardware/jetsontk1\#Flash_U-Boot), however:
+Follow the instructions for the [Jetson TK1](Hardware/jetsontk1#Flash_U-Boot), however:
 
 - use <https://github.com/wom-bat/tegra-uboot-flasher-manifests>
         as the URL for repo
@@ -51,7 +51,7 @@ presented as a USB storage device to your host. In the default
 partitioning (as it comes from Colorado Engineering) partition 1 on the
 device is the UBUNTU root partition.
 
-The [instructions for booting from SD](Hardware/General-ARM\#sd)
+The [instructions for booting from SD](Hardware/General-ARM#sd)
 are also valid for booting from MMC.
 
 ## Serial Connection

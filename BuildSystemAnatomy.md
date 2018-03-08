@@ -9,54 +9,54 @@ toc: true
 of a project repository that are part of the build system (as opposed to
 code and tools related to the project):
 
-- **[.config](\#config)** - Your current
+- **[.config](#config)** - Your current
       configuration (auto-generated)
  
   * **apps/**
  
-      -**[Kbuild](\#appskbuild)** - Application targets and
+      -**[Kbuild](#appskbuild)** - Application targets and
           dependencies
-      -   **[Kconfig](\#kconfig)** - Applications menu
+      -   **[Kconfig](#kconfig)** - Applications menu
  
       * **myapp/**
  
-    -**[Kconfig](\#kconfig)** - Myapp-specific settings
-          -   **[Makefile](\#appsmyappmakefile)** - How to build
+    -**[Kconfig](#kconfig)** - Myapp-specific settings
+          -   **[Makefile](#appsmyappmakefile)** - How to build
               Myapp
  
 - **configs/*** - Pre-made configurations for the project
-- **[Kconfig](\#kconfig)** - Top-level menu
+- **[Kconfig](#kconfig)** - Top-level menu
 - **kernel/Makefile** - How to build seL4
  
   * libs/
  
-      -**[Kbuild](\#libskbuild)** - Library targets and
+      -**[Kbuild](#libskbuild)** - Library targets and
           dependencies
-      -   **[Kconfig](\#kconfig)** - Libraries menu
+      -   **[Kconfig](#kconfig)** - Libraries menu
  
       * libfoo/
  
-    -**[Kconfig](\#kconfig)** - Libfoo-specific settings
-          -   **[Makefile](\#libfoomakefile)** - How to build
+    -**[Kconfig](#kconfig)** - Libfoo-specific settings
+          -   **[Makefile](#libfoomakefile)** - How to build
               Libfoo
  
-- **[Makefile](\#makefile)** - Top-level build specialisation
-- **[Makefile.flags](\#makefileflags)** - Top-level build
+- **[Makefile](#makefile)** - Top-level build specialisation
+- **[Makefile.flags](#makefileflags)** - Top-level build
       tuning
  
   * tools/common/
  
-      -**[common.mk](\#commonmk)** - Boiler plate for building
+      -**[common.mk](#commonmk)** - Boiler plate for building
           applications/libraries
-      -   **[Kconfig](\#kconfig)** - Menu options for toolchains
+      -   **[Kconfig](#kconfig)** - Menu options for toolchains
           and other common settings
-      -   **[project-arm.mk](\#projectmk)** - ARM-specific boiler
+      -   **[project-arm.mk](#projectmk)** - ARM-specific boiler
           plate for a top-level build
-      -   **[project-ia32.mk](\#projectmk)** - IA32-specific
+      -   **[project-ia32.mk](#projectmk)** - IA32-specific
           boiler plate for a top-level build
-      -   **[project.mk](\#projectmk)** -
+      -   **[project.mk](#projectmk)** -
           Architecture-independent boiler plate for a top-level build
-      -   **[Makefile.flags](\#makefileflags)** - Shared build
+      -   **[Makefile.flags](#makefileflags)** - Shared build
           system tuning
       -   **kbuild/*** - Kbuild from the Linux source tree. For
           documentation, refer to the Kbuild mailing list.
@@ -192,14 +192,14 @@ library, **libs/libfoo/Makefile**, should just contain some variable
 configuration and then include common.mk. Note that by using generic
 environment variables you can often use the following template with no
 modification for your library:
-``` \# Library archive(s) that will be
+``` # Library archive(s) that will be
 built. TARGETS := $(notdir ${SOURCE_DIR}).a
 
-\# Source files required to build the target. CFILES := $(patsubst
+# Source files required to build the target. CFILES := $(patsubst
 $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.c)) ASMFILES :=
 $(patsubst $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.S))
 
-\# Header files/directories this library provides. HDRFILES :=
+# Header files/directories this library provides. HDRFILES :=
 $(wildcard ${SOURCE_DIR}/include/*)
 
 include $(SEL4_COMMON)/common.mk
@@ -218,12 +218,12 @@ may want to override the default (by defining a target before including
 project.mk) or provide some external targets of your own (after
 including project.mk). You will most likely just want to mimic the
 content of the file from the reference examples:
-``` \# app-images is
+``` # app-images is
 provided in project.mk. all: app-images
 
 include tools/common/project.mk
 
-\# Extra project-specific targets. simulate-kzm: qemu-arm -nographic -M
+# Extra project-specific targets. simulate-kzm: qemu-arm -nographic -M
 kzm -kernel images/hello-image-arm-imx31
 ```
 

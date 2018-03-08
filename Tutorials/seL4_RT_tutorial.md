@@ -38,8 +38,8 @@ sel4-mcs-tutorials.xml repo sync
 
 Then, build and run the tutorial:
 ```
-\# select the config for the first tutorial make
-ia32_hello-mcs_defconfig \# build it make -j8 \# run it in qemu make
+# select the config for the first tutorial make
+ia32_hello-mcs_defconfig # build it make -j8 # run it in qemu make
 simulate
 ```
 
@@ -132,7 +132,7 @@ Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 49 1 56 2 63 3 70
 4 76 5 83 6 90 7 97 8 104 Waiting for server echo: <<seL4(CPU 0)
 [decodeInvocation/578 T0xe0295500 "helper_thread" @8049746]:
-Attempted to invoke a null cap \#0.>> <<seL4(CPU 0)
+Attempted to invoke a null cap #0.>> <<seL4(CPU 0)
 [lookupReply/318 T0xe0295500 "helper_thread" @8049746]: Cap in reply
 slot is not a reply>> Caught cap fault in send phase at address
 0x0 while trying to handle: cap fault in receive phase at address 0x0 in
@@ -181,7 +181,7 @@ Periodic === Pong 5 Tick Tick Pong 6 Tick Tick Pong 7 Tick Tick Pong 8
 Tick Tick Pong 9 Tick Tick Pong 10 == Sporadic == 42 0 42 1 42 2 49 3 49
 4 49 5 56 6 56 7 56 8 63 Waiting for server echo: <<seL4(CPU 0)
 [decodeInvocation/578 T0xe0295500 "helper_thread" @80497a6]:
-Attempted to invoke a null cap \#0.>> <<seL4(CPU 0)
+Attempted to invoke a null cap #0.>> <<seL4(CPU 0)
 [lookupReply/318 T0xe0295500 "helper_thread" @80497a6]: Cap in reply
 slot is not a reply>> Caught cap fault in send phase at address
 0x0 while trying to handle: cap fault in receive phase at address 0x0 in

@@ -4,7 +4,7 @@ toc: true
 
 # CAmkES x86 VM
  Get the dependencies for building CAmkES by following
-the instructions [here](CAmkES\#Build_dependencies).
+the instructions [here](CAmkES#Build_dependencies).
 
 ## Getting the Code
 ``` repo init -u
@@ -47,7 +47,7 @@ different vm app will have its own implementation of the VM component,
 where the guest environment is configured. For this app, the VM
 component is defined in apps/cma34cr_minimal/cma34cr.camkes:
 ```
-\#include <autoconf.h> \#include <configurations/vm.h>
+#include <autoconf.h> #include <configurations/vm.h>
 
 component Init0 {
 
@@ -172,7 +172,7 @@ Here's a summary of what the build-rootfs tool does:
 
 2.  Make a simple C program in projects/vm/linux/pkg/hello/hello.c
 ```
-\#include <stdio.h>
+#include <stdio.h>
 
 int main(int argc, char *argv[]) {
 
@@ -203,7 +203,7 @@ Make sure there is a TAB character in the makefile, rather than spaces
 
 ` make ` 6. Run the app (use root as username and password):
 ```
-Welcome to Buildroot buildroot login: root Password: \# hello Hello,
+Welcome to Buildroot buildroot login: root Password: # hello Hello,
 World!
 ```
 === Adding a kernel module === We're going to add a new
@@ -220,13 +220,13 @@ care of communicating between the module and the vmm. For simplicity,
 we'll make it so when a special file associated with this module is
 written to, the vmm gets poked.
 ```
-\#include <linux/module.h> \#include <linux/kernel.h>
-\#include <linux/init.h> \#include <linux/fs.h>
+#include <linux/module.h> #include <linux/kernel.h>
+#include <linux/init.h> #include <linux/fs.h>
 
-\#include <asm/uaccess.h> \#include <asm/kvm_para.h>
-\#include <asm/io.h>
+#include <asm/uaccess.h> #include <asm/kvm_para.h>
+#include <asm/io.h>
 
-\#define DEVICE_NAME "poke"
+#define DEVICE_NAME "poke"
 
 static int major_number;
 
@@ -285,7 +285,7 @@ insmod
 /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/consumes_event.ko
 insmod
 /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/emits_event.ko
-insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
+insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko #
 <-- add this line ...
 ```
 
@@ -295,11 +295,11 @@ insmod /lib/modules/__LINUX_VERSION__/kernel/drivers/vmm/poke.ko \#
 
 6.  Run the app:
 ```
-Welcome to Buildroot buildroot login: root Password: \# grep poke
-/proc/devices \# figure out the major number of our driver 244 poke \#
-mknod /dev/poke c 244 0 \# create the special file \# echo >
-/dev/poke \# write to the file [ 57.389643] hi -sh: write error: Bad
-address \# the shell complains, but our module is being invoked!
+Welcome to Buildroot buildroot login: root Password: # grep poke
+/proc/devices # figure out the major number of our driver 244 poke #
+mknod /dev/poke c 244 0 # create the special file # echo >
+/dev/poke # write to the file [ 57.389643] hi -sh: write error: Bad
+address # the shell complains, but our module is being invoked!
 ```
 
 **Now let's make it talk to the vmm**.
@@ -328,8 +328,8 @@ In the function main_continued register \`poke_handler\`:
 
 9.  Finally re-run build-rootfs, make, and run:
 ```
-Welcome to Buildroot buildroot login: root Password: \# mknod
-/dev/poke c 244 0 \# echo > /dev/poke POKE!!!
+Welcome to Buildroot buildroot login: root Password: # mknod
+/dev/poke c 244 0 # echo > /dev/poke POKE!!!
 ```
 
 ## Cross VM Connectors
@@ -491,8 +491,8 @@ VM_CONFIGURATION_DEF() VM_PER_VM_CONFIG_DEF(0, 2)
 
 Now let's implement our print server. Create a file
 apps/cma34cr_minimal/print_server.c:
-``` \#include <camkes.h>
-\#include <stdio.h>
+``` #include <camkes.h>
+#include <stdio.h>
 
 int run(void) {
 
@@ -523,13 +523,13 @@ We need to create another c file that tells the VMM about our cross vm connectio
 - cross_vm_consumes_events_init
 
 Create a file apps/cma34cr_minimal/cross_vm.c:
-``` \#include
-<sel4/sel4.h> \#include <camkes.h> \#include
-<camkes_mutex.h> \#include <camkes_consumes_event.h>
-\#include <camkes_emits_event.h> \#include
-<dataport_caps.h> \#include <cross_vm_consumes_event.h>
-\#include <cross_vm_emits_event.h> \#include
-<cross_vm_dataport.h> \#include <vmm/vmm.h> \#include
+``` #include
+<sel4/sel4.h> #include <camkes.h> #include
+<camkes_mutex.h> #include <camkes_consumes_event.h>
+#include <camkes_emits_event.h> #include
+<dataport_caps.h> #include <cross_vm_consumes_event.h>
+#include <cross_vm_emits_event.h> #include
+<cross_vm_dataport.h> #include <vmm/vmm.h> #include
 <vspace/vspace.h>
 
 // this is defined in the dataport's glue code extern
@@ -593,7 +593,7 @@ And make the following change to apps/cma34cr_minimal/Makefile:
 include PCIConfigIO/PCIConfigIO.mk include FileServer/FileServer.mk
 include Init/Init.mk
 
-\# Add the following: Init0_CFILES += $(wildcard
+# Add the following: Init0_CFILES += $(wildcard
 $(SOURCE_DIR)/cross_vm.c)
  $(wildcard $(SOURCE_DIR)/common/src/*.c) Init0_HFILES +=
 $(wildcard $(SOURCE_DIR)/common/include/*.h)
@@ -607,15 +607,15 @@ The app should now build when you run "make", but we're not done yet. No
 we'll make these interfaces available to the guest linux. Edit
 projects/vm/linux/camkes_init. It's a shell script that is executed as
 linux is initialized. Currently it should look like:
-``` \#!/bin/sh \#
+``` #!/bin/sh #
 Initialises linux-side of cross vm connections.
 
-\# Dataport sizes must match those in the camkes spec. \# For each
-argument to dataport_init, the nth pair \# corresponds to the dataport
+# Dataport sizes must match those in the camkes spec. # For each
+argument to dataport_init, the nth pair # corresponds to the dataport
 with id n. dataport_init /dev/camkes_reverse_src 8192
 /dev/camkes_reverse_dest 8192
 
-\# The nth argument to event_init corresponds to the \# event with id n
+# The nth argument to event_init corresponds to the # event with id n
 according to the camkes vmm. consumes_event_init
 /dev/camkes_reverse_done emits_event_init
 /dev/camkes_reverse_ready
@@ -623,14 +623,14 @@ according to the camkes vmm. consumes_event_init
 
 This sets up some interfaces used for a simple demo. Delete all that,
 and add the following:
-``` \#!/bin/sh \# Initialises linux-side of cross
+``` #!/bin/sh # Initialises linux-side of cross
 vm connections.
 
-\# Dataport sizes must match those in the camkes spec. \# For each
-argument to dataport_init, the nth pair \# corresponds to the dataport
+# Dataport sizes must match those in the camkes spec. # For each
+argument to dataport_init, the nth pair # corresponds to the dataport
 with id n. dataport_init /dev/camkes_data 4096
 
-\# The nth argument to event_init corresponds to the \# event with id n
+# The nth argument to event_init corresponds to the # event with id n
 according to the camkes vmm. consumes_event_init
 /dev/camkes_done_printing emits_event_init /dev/camkes_do_print
 ```
@@ -652,12 +652,12 @@ projects/vm/linux/pkg/print_client
 
 Create projects/vm/linux/pkg/print_client/print_client.c:
 ```
-\#include <string.h> \#include <assert.h>
+#include <string.h> #include <assert.h>
 
-\#include <sys/types.h> \#include <sys/stat.h> \#include
-<sys/mman.h> \#include <fcntl.h>
+#include <sys/types.h> #include <sys/stat.h> #include
+<sys/mman.h> #include <fcntl.h>
 
-\#include "dataport.h" \#include "consumes_event.h" \#include
+#include "dataport.h" #include "consumes_event.h" #include
 "emits_event.h"
 
 int main(int argc, char *argv[]) {
@@ -712,7 +712,7 @@ Now, run build-rootfs, and make, and run!
 consuming event node /dev/camkes_done_printing Creating emitting event
 node /dev/camkes_do_print
 
-Welcome to Buildroot buildroot login: root Password: \# print_client
+Welcome to Buildroot buildroot login: root Password: # print_client
 hello world [ 12.730073] dataport received mmap for minor 1 hello
 world
 ```
@@ -781,7 +781,7 @@ Since we'll be using a real hard drive, we need to change the boot
 command line we give to the guest linux. Open
 apps/cma34cr_minimal/configurations/cma34cr_minimal.h, and change the
 definition of VM_GUEST_CMDLINE to:
-``` \#define VM_GUEST_CMDLINE
+``` #define VM_GUEST_CMDLINE
 "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y
 i8042.nomux=y i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug
 root=/dev/sda1 rdinit=/init 2"

@@ -33,7 +33,7 @@ with TK1|width="100%"}}
 ## Technical documentation
 
 
-- [Schematic PDF](attachment:daughterboard_r3a_schematic.pdf) (See '[Technical errata for R3A](\#errata)'
+- [Schematic PDF](attachment:daughterboard_r3a_schematic.pdf) (See '[Technical errata for R3A](#errata)'
         for changes)
 - Bill of Materials:
         [<attachment:tegra_daughterboard_bom3.xls>](../<attachment:tegra_daughterboard_bom3.xls>)
@@ -44,14 +44,14 @@ with TK1|width="100%"}}
  Going from a TK1-SOM, a pixhawk/IRIS
 and a daughterboard to a functioning system requires:
 
-- [Mounting the TK1 to the daughterboard](\#mount_tk1)
-- [Jumpering the UART level translators](\#jumper_uart)
-- [Jumpering the RESET button](\#jumper_reset)
-- [Attaching the pixhawk power cable](\#attach_pix_pwr)
-- [Attaching the CAN bus cable](\#attach_can)
-- [Attaching the telemetry cable](\#attach_telem)
-- [Connecting the power harness](\#connect_power)
-- [[\#connect_battery_psu|Connecting the battery **OR**
+- [Mounting the TK1 to the daughterboard](#mount_tk1)
+- [Jumpering the UART level translators](#jumper_uart)
+- [Jumpering the RESET button](#jumper_reset)
+- [Attaching the pixhawk power cable](#attach_pix_pwr)
+- [Attaching the CAN bus cable](#attach_can)
+- [Attaching the telemetry cable](#attach_telem)
+- [Connecting the power harness](#connect_power)
+- [[#connect_battery_psu|Connecting the battery **OR**
       Connecting the external PSU]]
 
 <<Anchor(mount_tk1)>>
@@ -90,7 +90,7 @@ an M2.5 screw, bolt, and standoff:
 
 {{<attachment:standoff.jpg%7CStandoff> fitted|width="50%"}}
 
-The end result should look like the image under [[\#with_tk1|'With
+The end result should look like the image under [[#with_tk1|'With
 TK1']] near the top of this page
 
 <<Anchor(jumper_uart)>>
@@ -123,7 +123,7 @@ It is possible to swap these at the TK1 input side without consequence
 (this would put the kernel dump through the GPS output, and UART2
 through telemetry). Additionally, one can disconnect these jumpers and
 use an 'ordinary' 1V8 converter for debugging (See
-[debugging & grounds](\#debug_ground) below).
+[debugging & grounds](#debug_ground) below).
 
 <<Anchor(jumper_reset)>>
 

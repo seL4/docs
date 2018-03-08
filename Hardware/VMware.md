@@ -49,7 +49,7 @@ There are three options for the serial port
     1\. **Output to a socket** (allows input/output but annoying to
     set up). You'll want to apt-get install socat and then run something
     like:
-```\#!highlight bash numbers=off \#!/bin/bash while true; do socat
+```#!highlight bash numbers=off #!/bin/bash while true; do socat
     -d -d UNIX-CONNECT:/tmp/vsock,forever PTY:link=/dev/tty99 done
 ```
 and
@@ -86,9 +86,9 @@ you just installed, and then edit the grub.cfg from the guest OS itself.
 
 Another method is to use **vmware-mount**:
 ```
-\#!highlight bash numbers=off \# Usage: vmware-mount diskPath
+#!highlight bash numbers=off # Usage: vmware-mount diskPath
 [partition num] mountPoint mkdir /tmp/vmount vmware-mount
-/path/to/your/HD.vmdk /tmp/vmount \# Now do your editing in /tmp/vmount.
+/path/to/your/HD.vmdk /tmp/vmount # Now do your editing in /tmp/vmount.
 vmware-mount -d /tmp/vmount
 ```
 

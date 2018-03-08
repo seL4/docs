@@ -8,12 +8,12 @@ toc: true
 ## Constants
 ``` /* Driver power states supported by the API. *
 These are used by both seL4drv_mgmt_power() * and
-seL4drv_mgmt_power_features(). */ \#define
-SEL4DRV_MGMT_POWER_BOOT (1<<0) \#define
-SEL4DRV_MGMT_POWER_WAKEUP (1<<1) \#define
-SEL4DRV_MGMT_POWER_SLEEP (1<<2) \#define
-SEL4DRV_MGMT_POWER_DEEP_SLEEP (1<<3) \#define
-SEL4DRV_MGMT_POWER_SHUTDOWN (1<<4) \#define
+seL4drv_mgmt_power_features(). */ #define
+SEL4DRV_MGMT_POWER_BOOT (1<<0) #define
+SEL4DRV_MGMT_POWER_WAKEUP (1<<1) #define
+SEL4DRV_MGMT_POWER_SLEEP (1<<2) #define
+SEL4DRV_MGMT_POWER_DEEP_SLEEP (1<<3) #define
+SEL4DRV_MGMT_POWER_SHUTDOWN (1<<4) #define
 SEL4DRV_MGMT_POWER_KILL (1<<5)
 ```
 
@@ -117,7 +117,7 @@ to enable operation.
 
 ### seL4drv_mgmt_power_features(): Sync
  This function returns a
-bitmap of the supported driver power states (See [\#Constants](../\#Constants)).
+bitmap of the supported driver power states (See [#Constants](../#Constants)).
 All drivers are required to support at minimum, the following states: *
 SEL4DRV_MGMT_POWER_BOOT * SEL4DRV_MGMT_POWER_SHUTDOWN *
 SEL4DRV_MGMT_POWER_KILL
