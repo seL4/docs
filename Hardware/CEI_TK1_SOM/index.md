@@ -9,7 +9,7 @@ We have ported seL4 to this board.
 ## Hardware modifications and Daughterboards
 
 
-[Adding some missing connectors](/Tk1SomMods) makes this board a
+[Adding some missing connectors](Tk1SomMods) makes this board a
 bit easier to use.
 
 We have also developed 2 daughterboards for the TK1-SOM
