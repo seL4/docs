@@ -6,11 +6,11 @@ title: seL4 5.0.0
  Announcing the release of `seL4 5.0.0`
 with the following changes:
 
-Below are the changes to the seL4 ABI and API: Generic changes: \* Add
-missing case to seL4_getFault (seL4_Fault_DebugException) \*
-Explicitly pack bootinfo data structures \* Modify FinalizeLog syscall -
-Now returns a number of entries in the log \* Extend bootinfo to support
-potentially arbitrary additional structures \* Deprecate bootinfo
+Below are the changes to the seL4 ABI and API: Generic changes: * Add
+missing case to seL4_getFault (seL4_Fault_DebugException) *
+Explicitly pack bootinfo data structures * Modify FinalizeLog syscall -
+Now returns a number of entries in the log * Extend bootinfo to support
+potentially arbitrary additional structures * Deprecate bootinfo
 management in libsel4 - a replacement, platsupport_get_bootinfo can be
 found in libsel4platsupport
 

@@ -54,7 +54,7 @@ simulator you need **qemu; ccache** speeds up builds after the first;
 and **ncurses-dev** is needed to run the configurator.
 ```
 
-:   sudo apt-get update sudo apt-get install build-essential realpath
+    sudo apt-get update sudo apt-get install build-essential realpath
     libxml2-utils python-tempita gcc-multilib ccache ncurses-dev
 ```
 
@@ -69,7 +69,7 @@ simplest way to do this on Wheezy is to use the emdebian pre-built
 compilers.
 ```
 
-:   sudo /bin/sh -c 'echo "deb <http://www.emdebian.org/debian/> squeeze
+    sudo /bin/sh -c 'echo "deb <http://www.emdebian.org/debian/> squeeze
     main" > /etc/apt/sources.list.d/emdebian.list' sudo /bin/sh -c
     'echo "deb <http://ftp.us.debian.org/debian/> squeeze main" >>
     /etc/apt/sources.list.d/emdebian.list' sudo apt-get update sudo
@@ -80,7 +80,7 @@ Either install it from Jessie or sid, or build it from the upstream
 source:
 ```
 
-:   git clone <git://git.qemu.org/qemu.git> sudo apt-get build-dep qemu
+    git clone <git://git.qemu.org/qemu.git> sudo apt-get build-dep qemu
     cd qemu ./configure --target-list=arm-softmmu make -j
 ```
 The resulting qemu binary is in **arm-softmmu/qemu-system-arm**
@@ -92,7 +92,7 @@ Jessie and following have multiarch support. To cross-build for ARM, add
 **armhf** as an architecture, and install the cross compiler:
 ```
 
-:   sudo dpkg --add-architecture armhf sudo apt-get update sudo apt-get
+    sudo dpkg --add-architecture armhf sudo apt-get update sudo apt-get
     install gcc-arm-none-eabi qemu
 ```
 The resulting cross compilers generate code that is incompatible

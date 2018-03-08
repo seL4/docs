@@ -10,7 +10,7 @@ Note: The USB-UART converter that is shipped with the board requires a
 Linux kernel version > 3.2
 
 ##### Serial port setup
- Open minicom on /dev/ttyUSB\* and set the
+ Open minicom on /dev/ttyUSB* and set the
 serial port settings to: 115200N1
 
 - 115200bps
@@ -87,7 +87,7 @@ To boot using fastboot:
  
   1. On the client machine, run sudo fastboot devices to ensure that the device has been recognised. The device should have the label "SMDKEXYNOS-01".
  
-  :   1.  NOTE: fastboot fails silently if you do not have permissions
+      1.  NOTE: fastboot fails silently if you do not have permissions
           to access the device. Try running with sudo.
  
   1.  On the client machine, run fastboot boot sel4-uImage

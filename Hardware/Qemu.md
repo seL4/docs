@@ -92,7 +92,7 @@ details about the VM, go to
 
 The qemu arguments are:
 
-:   1.  **qemu-system-x86_64** - emulate x86/x64 system
+    1.  **qemu-system-x86_64** - emulate x86/x64 system
     2.  **-m 512** - amount of RAM dedicated to qemu VM
     3.  **-kernel <img_name>** - path to kernel image
     4.  **-initrd <img_name>** - path to application image
@@ -189,7 +189,7 @@ base_addr_size_mask[1]: 0xffffffc0
 
 PCI :: 00.03.00 : intel Unknown device ID. (vid 0x8086 did 0x100e) line11 pin1
 
-:   BAR0 : [ mem 0xfebc0000 sz 0x20000 szmask 0xfffe0000 ] BAR1 : [
+    BAR0 : [ mem 0xfebc0000 sz 0x20000 szmask 0xfffe0000 ] BAR1 : [
     io 0xc000 sz 0x40 szmask 0xffffffc0 ]
 ```
 

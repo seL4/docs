@@ -36,7 +36,7 @@ On the host,
 ```
 \#!highlight bash numbers=off
 
-:   mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel
+    mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel
     -O qnx -d images/sel4test-driver-image-arm-exynos5 image
 
 fastboot boot image

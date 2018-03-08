@@ -17,7 +17,7 @@ arch ia32
 
 objects {
 
-:   my_tcb = tcb my_cnode = cnode (3 bits) my_frame = frame (4k,
+    my_tcb = tcb my_cnode = cnode (3 bits) my_frame = frame (4k,
     paddr: 0x12345000) // paddr is optional my_page_table = pt
     my_page_directory = pd
 

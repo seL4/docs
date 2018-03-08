@@ -39,23 +39,23 @@ The top of the source tree contains the kernel itself, and the actual tutorials 
         tutorial challenges are in the
         subfolder: `projects/sel4-tutorials/solutions/`.
 
-    \* The slide presentations to guide you through the tutorials are in the following files:
+* The slide presentations to guide you through the tutorials are in the following files:
 
-    :   -   `projects/sel4-tutorials/docs/seL4-Overview.pdf`: This
+  - `projects/sel4-tutorials/docs/seL4-Overview.pdf`: This
             is an overview of the design and thoughts behind seL4, and
             we strongly recommend you read it before starting
             the tutorials.
-        -   `projects/sel4-tutorials/docs/seL4-APILib-details.pdf`:
-            This is the actual tutorial.
+  - `projects/sel4-tutorials/docs/seL4-APILib-details.pdf`:
+    This is the actual tutorial.
 
-    \* Detailed explanations of each tutorial challenge:
+* Detailed explanations of each tutorial challenge:
 
-    :   -   [seL4 Tutorial 1](seL4_Tutorial_1)
-        -   [seL4 Tutorial 2](seL4_Tutorial_2)
-        -   [seL4 Tutorial 3](seL4_Tutorial_3)
-        -   [seL4 Tutorial 4](seL4_Tutorial_4)
-        -   [seL4 Timer tutorial](seL4_Timer_tutorial)
-        -   [seL4 MCS tutorial](seL4_RT_tutorial)
+  - [seL4 Tutorial 1](seL4_Tutorial_1)
+  - [seL4 Tutorial 2](seL4_Tutorial_2)
+  - [seL4 Tutorial 3](seL4_Tutorial_3)
+  - [seL4 Tutorial 4](seL4_Tutorial_4)
+  - [seL4 Timer tutorial](seL4_Timer_tutorial)
+  - [seL4 MCS tutorial](seL4_RT_tutorial)
 
 ## CAmkES tutorials
 

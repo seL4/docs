@@ -14,7 +14,7 @@ device addressing scheme]].
 
 ## Functions
 ``` seL4drv_connection_t
-\*seL4drv_external_connect();
+*seL4drv_external_connect();
 ```
 == Data structures ==
 ``` typedef
@@ -39,7 +39,7 @@ A driver connects to an external device that it depends on by calling
 seL4drv_external_connect(), passing in the addressable name of the
 particular device that it wishes to connect to. The environment shall
 search its device tree for a device which has that name, and return a
-handle of type seL4drv_connection_t \*. Notice that
+handle of type seL4drv_connection_t *. Notice that
 seL4drv_connection_t is of type void (see [[\#Data
 Structures|above]]: this is because it is an opaque handle, and the
 driver is not meant to dereference this handle after receiving it. This

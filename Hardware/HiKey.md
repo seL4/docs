@@ -125,7 +125,7 @@ generate_ptable.sh python gen_loader.py -o ptable-linux.img
 <https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz>
 and follow the below commands.
 ```
-\#!highlight bash numbers=off gunzip \*.img.gz
+\#!highlight bash numbers=off gunzip *.img.gz
 
 mkdir -p boot-fat sudo mount -o loop,rw,sync boot-fat.uefi.img boot-fat
 
@@ -159,7 +159,7 @@ Note the ttyUSBX that is observed
 ## 11. Flash the firmware
 
 
-:   1.  Turn off the power to the board if it is on.
+    1.  Turn off the power to the board if it is on.
     2.  Connect UART0 to a USB port if it is not connected already.
     3.  Connect the Hikey board with a USB to micro USB cable.
     4.  Connect pins 1&2 (AUTO PWR) and 3&4 (BOOT SEL) on the
@@ -188,7 +188,7 @@ terminal
 ## 12. Booting the Hikey
 
 
-:   1.  Remove the connection for pins 3&4 on the J15 header and connect
+    1.  Remove the connection for pins 3&4 on the J15 header and connect
         pins 5&6 instead.
     2.  Power the Hikey
     3.  Run the desired image. The command below is an example.

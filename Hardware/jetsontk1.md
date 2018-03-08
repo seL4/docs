@@ -8,9 +8,9 @@ The [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) 
 seL4. We will explain how to run seL4 on the Tegra.
  
 ## Pre-Requisites
-\* One Tegra Board.
+* One Tegra Board.
 See
-[Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) \* The development environment fully working. 
+[Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) * The development environment fully working. 
 See [[Getting started]]
 
 # Getting Started
@@ -119,11 +119,11 @@ Apply the following patch to increase the console buffer size.
 \#!highlight diff numbers=off diff --git
 a/include/configs/tegra-common.h b/include/configs/tegra-common.h index
 1c469d0..234023d 100644 --- a/include/configs/tegra-common.h +++
-b/include/configs/tegra-common.h @@ -77,7 +77,7 @@ \* Increasing the
-size of the IO buffer as default nfsargs size is more \* than 256 and so
+b/include/configs/tegra-common.h @@ -77,7 +77,7 @@ * Increasing the
+size of the IO buffer as default nfsargs size is more * than 256 and so
 it is not possible to edit it */ -\#define CONFIG_SYS_CBSIZE (256* 2)
-/\* Console I/O Buffer Size */ +\#define CONFIG_SYS_CBSIZE (256* 3)
-/\* Console I/O Buffer Size */ /* Print Buffer Size \*/ \#define
+/* Console I/O Buffer Size */ +\#define CONFIG_SYS_CBSIZE (256* 3)
+/* Console I/O Buffer Size */ /* Print Buffer Size */ \#define
 CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE +
 sizeof(CONFIG_SYS_PROMPT) + 16)
 ```

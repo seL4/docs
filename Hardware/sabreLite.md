@@ -9,8 +9,8 @@ For board details see
 called "sabre_" or "imx6"
 
 # Booting on the Sabre Lite
- == Hardware Requirements == \* 5V/3A power
-supply \* RS232 cable (or USB-RS232 adapter) \* USB OTG cable for
+ == Hardware Requirements == * 5V/3A power
+supply * RS232 cable (or USB-RS232 adapter) * USB OTG cable for
 Fastboot or Ethernet cable for TFTPboot
 
 ## Board Setup
@@ -32,7 +32,7 @@ You will first need to acquire and compile the IMX USB loader tool from
 ```
 \#!highlight bash numbers=off
 
-:   git clone <git://github.com/boundarydevices/imx_usb_loader.git>
+    git clone <git://github.com/boundarydevices/imx_usb_loader.git>
 ```
 NOTE 1: The Element14 Sabrelite platform has its DIP switch mounted
 incorrectly.

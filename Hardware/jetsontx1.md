@@ -49,7 +49,7 @@ When you have successfully got to the U-boot command prompt, enter the
 following:
 ```
 
-:   setenv dfu_alt_info "kernel ram 0x82000000 0x1000000" setenv
+    setenv dfu_alt_info "kernel ram 0x82000000 0x1000000" setenv
     bootcmd_dfu "dfu 0 ram 0; go 0x82000000" saveenv
 ```
 
@@ -59,7 +59,7 @@ be uploaded. Now you should open up a new terminal on your PC, and type
 the following:
 ```
 
-:   dfu-util --device 0955:701a -a kernel -D
+    dfu-util --device 0955:701a -a kernel -D
     <PATH_TO_YOUR_SEL4_IMAGE>/sel4test-driver-image-arm-tx1.bin
 ```
 

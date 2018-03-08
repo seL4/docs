@@ -17,7 +17,7 @@ For BL1 from the Android tree:
 
 For BL1 from
 <https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&do=view&target=arndale-bl1.img>
-:
+ 
 
 ||Key||Position (block)||file|| ||BL1 ||1 || || ||SPL ||17
 ||<https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&do=view&target=smdk5250-spl.bin>

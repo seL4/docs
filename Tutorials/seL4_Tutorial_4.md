@@ -55,7 +55,7 @@ ranges of memory as being used, and unavailable for applications.
 This call to sel4utils_bootstrap_vspace_with_bootinfo_leaky() does
 that. For an interesting look at what sorts of things the init thread
 does, see:
-static int reserve_initial_task_regions(vspace_t \*vspace, void \*existing_frames[]),
+static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[]),
 which is eventually called on by
 sel4utils_bootstrap_vspace_with_bootinfo_leaky(). So while this
 function may seem tedious, it's doing some important things.

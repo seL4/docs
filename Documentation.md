@@ -38,9 +38,9 @@ will be produced in manual.pdf.
 - [NICTA Trustworthy
       Systems research project pages](http://ssrg.nicta.com.au/projects/TS/)
  
-  \* Isabelle Proof Assistant:
+  * Isabelle Proof Assistant:
  
-  :   -   [Concrete Semantics
+      -[Concrete Semantics
           Isabelle textbook](http://concrete-semantics.org/)
       -   [[<http://isabelle.in.tum.de/website-Isabelle2013-2/dist/Isabelle2013-2/doc/tutorial.pdf>|
           Isabelle 2013-2 tutorial]]

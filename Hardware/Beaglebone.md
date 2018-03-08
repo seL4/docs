@@ -16,7 +16,7 @@ cross-compilers. Use
 ```
 \#!highlight bash numbers=off
 
-:   mkdir sel4test cd sel4test repo init -u
+    mkdir sel4test cd sel4test repo init -u
     <https://github.com/seL4/sel4test-manifest.git>
 ```
 
@@ -25,7 +25,7 @@ build with make with arm-linux-gnueabi-objcopy.
 ```
 \#!highlight bash numbers=off
 
-:   make menuconfig make arm-linux-gnueabi-objcopy --output-target
+    make menuconfig make arm-linux-gnueabi-objcopy --output-target
     binary
      images/sel4test-driver-image-arm-am335x sel4test.bin
 ```
@@ -38,7 +38,7 @@ is selected for your model. This will be under Kernel -> seL4 System.
 ```
 \#!highlight bash numbers=off
 
-:   mkdir refos cd refos repo init -u
+    mkdir refos cd refos repo init -u
     <https://github.com/seL4/refos-manifest.git>
 ```
 
@@ -47,12 +47,12 @@ build with make with arm-linux-gnueabi-objcopy.
 ```
 \#!highlight bash numbers=off
 
-:   make menuconfig make arm-linux-gnueabi-objcopy --output-target
+    make menuconfig make arm-linux-gnueabi-objcopy --output-target
     binary images/refos-image refos.bin
 ```
 == Booting on the Beaglebone Black == === Hardware Requirements ===
-\* power supply \* serial adapter
-<http://elinux.org/Beagleboard:BeagleBone_Black_Serial> \* SDCard for
+* power supply * serial adapter
+<http://elinux.org/Beagleboard:BeagleBone_Black_Serial> * SDCard for
 file booting or Ethernet cable for network boot
 
 ### Interacting with U-Boot
@@ -62,7 +62,7 @@ minicom or screen to connect to the serial port at 115200 bps
 ```
 \#!highlight bash numbers=off
 
-:   screen /dev/ttyUSB0 115200
+    screen /dev/ttyUSB0 115200
 ```
 Power on the device and hit enter a few times to interrupt the
 normal boot process and get a U-Boot prompt.
@@ -74,7 +74,7 @@ the normal boot process. Finally, enter the following commands at the
 U-Boot prompt to load and run the image:
 ```
 
-:   fatload mmc 0 ${loadaddr} sel4test.bin go ${loadaddr}
+    fatload mmc 0 ${loadaddr} sel4test.bin go ${loadaddr}
 ```
 To boot over Ethernet, configure your DHCP server to provide a DHCP
 lease and to specify the sel4test.bin (or refos.bin) as the boot file.
@@ -84,12 +84,12 @@ device up and hit ENTER to interrupt the normal boot process. Then, at
 the U-Boot prompt enter:
 ```
 
-:   dhcp go ${loadaddr}
+    dhcp go ${loadaddr}
 ```
 To load an alternate image from the TFTP server at 1.2.3.4, use:
 ```
 
-:   dhcp ${loadaddr} 1.2.3.4:refos.bin go ${loadaddr}
+    dhcp ${loadaddr} 1.2.3.4:refos.bin go ${loadaddr}
 ```
-== Other resources == \*
+== Other resources == *
 [Supporting the UART1 interface with CAmkES](http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/)

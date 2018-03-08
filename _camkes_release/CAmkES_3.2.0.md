@@ -14,46 +14,39 @@ Using seL4 version 8.0.0
 # Changes
 
 
-- 
+- New ADL Syntax: Allow struct elements to have defaults.
 
-        New ADL Syntax: Allow struct elements to have defaults.
+    See the following ADL files for examples of Struct and
+    Attribute behavior.
+    <https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes>
+    <https://github.com/seL4/camkes/tree/master/apps/structs>
+    <https://github.com/seL4/camkes/tree/master/apps/attributes>
 
-        :   See the following ADL files for examples of Struct and
-            Attribute behavior.
-            <https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes>
-            <https://github.com/seL4/camkes/tree/master/apps/structs>
-            <https://github.com/seL4/camkes/tree/master/apps/attributes>
+- Added experimental Rumprun support:
 
-- 
+    This functionality is experimental and may not work
+    as expected. See the following examples:
+    <https://github.com/seL4/camkes/tree/master/apps/rumprun_ethernet>
+    <https://github.com/seL4/camkes/tree/master/apps/rumprun_hello>
+    <https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads>
+    <https://github.com/seL4/camkes/tree/master/apps/rumprun_rust>
+    
+    More information about the Rumprun unikernel on seL4 can be
+    found here:
+    <https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/>
 
-        Added experimental Rumprun support:
+- New Templates: Remote GDB debugging support
 
-        :   This functionality is experimental and may not work
-            as expected. See the following examples:
-            <https://github.com/seL4/camkes/tree/master/apps/rumprun_ethernet>
-            <https://github.com/seL4/camkes/tree/master/apps/rumprun_hello>
-            <https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads>
-            <https://github.com/seL4/camkes/tree/master/apps/rumprun_rust>
-            More information about the Rumprun unikernel on seL4 can be
-            found here:
-            <https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/>
+    On ia32 platforms a GDB server can be used to debug a
+    component using the GDB server remote serial protocol.
+    documentation:
+    <https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md>
 
-- 
+- Added "hardware_cached" attribute to hardware dataports
 
-        New Templates: Remote GDB debugging support
-
-        :   On ia32 platforms a GDB server can be used to debug a
-            component using the GDB server remote serial protocol.
-            documentation:
-            <https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md>
-
-- 
-
-        Added "hardware_cached" attribute to hardware dataports
-
-        :   This feature had been added to camkes-2.x.x but hadn't been
-            forward ported to camkes-3.x.x. documentation:
-            <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports>
+    This feature had been added to camkes-2.x.x but hadn't been
+    forward ported to camkes-3.x.x. documentation:
+    <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports>
 
 # Known issues
 
@@ -77,7 +70,7 @@ functionality is required, hold off upgrading until this issue is fixed.
 
         Templates:
 
-        :   seL4HardwareMMIO template now has an option to map hardware
+            seL4HardwareMMIO template now has an option to map hardware
             memory as cached. The default setting is uncached
 
 which is the same as the old behaviour.

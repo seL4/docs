@@ -23,12 +23,12 @@ mkdir -p apps/helloworld/components/Client
 procedures, are made up of a set of methods. Define an interface that
 the components will communicate over and save this under
 apps/helloworld/interfaces/MyInterface.idl4:
-``` /\*
-apps/helloworld/interfaces/MyInterface.idl4 \*/
+``` /*
+apps/helloworld/interfaces/MyInterface.idl4 */
 
 procedure MyInterface {
 
-:   void print(in string message);
+    void print(in string message);
 
 };
 ==
@@ -37,31 +37,31 @@ This interface consists of a single method, print that takes an input
 parameter of type string. Note that, although we are planning to
 implement this component in C, interfaces are defined with abstract
 types that have equivalents in all target languages. In the case of C,
-string maps to char\*. Each component needs a description of the
+string maps to char*. Each component needs a description of the
 interfaces it exposes or needs in so-called Architecture Description
 Language. Create these in apps/helloworld/components/Hello/Hello.camkes
 and apps/helloworld/components/Client/Client.camkes.
 
 ### Setup Components' CAmkES Files
-``` /\*
-apps/helloworld/components/Hello/Hello.camkes \*/
+``` /*
+apps/helloworld/components/Hello/Hello.camkes */
 
 import "../../interfaces/MyInterface.idl4";
 
 component Hello {
 
-:   provides MyInterface inf;
+    provides MyInterface inf;
 
 }
 =
 ```
-/\* apps/helloworld/components/Client/Client.camkes \*/
+/* apps/helloworld/components/Client/Client.camkes */
 
 import "../../interfaces/MyInterface.idl4";
 
 component Client {
 
-:   control; uses MyInterface iface;
+    control; uses MyInterface iface;
 
 }
 =
@@ -81,8 +81,8 @@ thread of control.
  Create a file to describe the
 instantiation and structure of the system at
 apps/helloworld/helloworld.camkes.
-``` /\*
-apps/helloworld/helloworld.camkes \*/
+``` /*
+apps/helloworld/helloworld.camkes */
 
 import <std_connector.camkes>; import
 "components/Hello/Hello.camkes"; import
@@ -90,11 +90,11 @@ import <std_connector.camkes>; import
 
 assembly {
 
-:   
+    
 
     composition {
 
-    :   component Hello h; component Client c; connection seL4RPC
+        component Hello h; component Client c; connection seL4RPC
         conn(from c.iface, to h.inf);
 
     }
@@ -114,16 +114,16 @@ seL4RPC.
  Now for the implementation of the
 components. Create a single source file for Hello as
 apps/helloworld/components/Hello/src/hello.c:
-```\#!highlight c /\*
-apps/helloworld/components/Hello/src/hello.c \*/
+```\#!highlight c /*
+apps/helloworld/components/Hello/src/hello.c */
 
 \#include <camkes.h> \#include <stdio.h>
 
 void inf__init(void) { }
 
-void inf_print(const char \*message) {
+void inf_print(const char *message) {
 
-:   printf("Client says: %sn", message);
+    printf("Client says: %sn", message);
 
 }
 =
@@ -140,14 +140,14 @@ perform.
 Create a source file for Client as
 apps/helloworld/components/Client/src/client.c that calls these
 functions as if they are directly available to it:
-```\#!highlight c /\*
-apps/helloworld/components/Client/src/client.c \*/
+```\#!highlight c /*
+apps/helloworld/components/Client/src/client.c */
 
 \#include <camkes.h>
 
 int run(void) {
 
-:   const char \*s = "hello world"; iface_print(s); return 0;
+    const char *s = "hello world"; iface_print(s); return 0;
 
 }
 =
@@ -239,12 +239,12 @@ apps/helloevent/components/Consumer
 need to be defined in a separate IDL file. You can simply refer to the
 event type in your component ADL files and CAmkES will infer an event
 type. Create the following description for Emitter:
-``` /\*
-apps/helloevent/components/Emitter/Emitter.camkes \*/
+``` /*
+apps/helloevent/components/Emitter/Emitter.camkes */
 
 component Emitter {
 
-:   control; emits MyEvent e;
+    control; emits MyEvent e;
 
 }
 =
@@ -256,11 +256,11 @@ the event itself.
 
 Now let's create a description of the Consumer that will handle this
 event:
-``` /\* apps/helloevent/components/Consumer/Consumer.camkes \*/
+``` /* apps/helloevent/components/Consumer/Consumer.camkes */
 
 component Consumer {
 
-:   control; consumes MyEvent s;
+    control; consumes MyEvent s;
 
 }
 =
@@ -269,8 +269,8 @@ component Consumer {
  Note that this component consumes
 (handles) an event of the same type. Let's instantiate and connect these
 components together using another ADL file:
-``` /\*
-apps/helloevent/helloevent.camkes \*/
+``` /*
+apps/helloevent/helloevent.camkes */
 
 import <std_connector.camkes>; import
 "components/Emitter/Emitter.camkes"; import
@@ -278,11 +278,11 @@ import <std_connector.camkes>; import
 
 assembly {
 
-:   
+    
 
     composition {
 
-    :   component Emitter source; component Consumer sink; connection
+        component Emitter source; component Consumer sink; connection
         seL4Notification channel(from source.e, to sink.s);
 
     }
@@ -295,18 +295,18 @@ transmitting asynchronous signals. The two instantiated components,
 source and sink are connected over the connection channel.
 
 ### Implement Components
-```\#!highlight c /\*
-apps/helloevent/components/Emitter/src/main.c \*/
+```\#!highlight c /*
+apps/helloevent/components/Emitter/src/main.c */
 
 \#include <camkes.h>
 
 int run(void) {
 
-:   
+    
 
     while (1) {
 
-    :   e_emit();
+        e_emit();
 
     } return 0;
 
@@ -321,21 +321,21 @@ the event is received, they can call a blocking function that will
 return when the event is received or they can call a polling function
 that returns whether an event has arrived or not. Let's add some source
 code that uses all three:
-```\#!highlight c /\*
-apps/helloevent/components/Consumer/src/main.c \*/
+```\#!highlight c /*
+apps/helloevent/components/Consumer/src/main.c */
 
 \#include <camkes.h> \#include <stdio.h>
 
 static void handler(void) {
 
-:   static int fired = 0; printf("Callback fired!n"); if (!fired) {
+    static int fired = 0; printf("Callback fired!n"); if (!fired) {
     fired = 1; s_reg_callback(&handler, NULL); }
 
 }
 
 int run(void) {
 
-:   printf("Registering callback...n"); s_reg_callback(&handler,
+    printf("Registering callback...n"); s_reg_callback(&handler,
     NULL);
 
     printf("Polling...n"); if (s_poll()) { printf("We found an
@@ -439,14 +439,14 @@ apps/hellodataport/components/Pong
 ### Setup Dataport Type
  Let's define a struct that will be used as
 one of the dataports:
-```\#!highlight c /\*
-apps/hellodataport/include/porttype.h \*/
+```\#!highlight c /*
+apps/hellodataport/include/porttype.h */
 
 \#ifndef \_PORTTYPE_H_ \#define \_PORTTYPE_H_
 
 typedef struct MyData {
 
-:   char data[10];
+    char data[10];
 
 } MyData_t;
 
@@ -470,24 +470,24 @@ apps/hellodataport/components/Pong/include ln -s
 C header in the ADL. CAmkES does not actually parse this header, but it
 needs to know to \#include it whenever it references the MyData_t type.
 Now let's create an ADL description of the Ping component:
-``` /\*
-apps/hellodataport/components/Ping/Ping.camkes \*/
+``` /*
+apps/hellodataport/components/Ping/Ping.camkes */
 
 component Ping {
 
-:   include "porttype.h"; control; dataport Buf d1; dataport MyData_t
+    include "porttype.h"; control; dataport Buf d1; dataport MyData_t
     d2;
 
 }
 =
 
 Add a similar description for Pong:
-``` /\*
-apps/hellodataport/components/Pong/Pong.camkes \*/
+``` /*
+apps/hellodataport/components/Pong/Pong.camkes */
 
 component Pong {
 
-:   include "porttype.h"; control; dataport Buf s1; dataport MyData_t
+    include "porttype.h"; control; dataport Buf s1; dataport MyData_t
     s2;
 
 }
@@ -499,18 +499,18 @@ complete communication protocol between the two components, but for the
 purposes of this example spinning until a byte changes is good enough.
 We're ready to connect all these sources together with a top-level ADL
 file:
-``` /\* apps/hellodataport/hellodataport.camkes \*/
+``` /* apps/hellodataport/hellodataport.camkes */
 
 import <std_connector.camkes>; import
 "components/Ping/Ping.camkes"; import "components/Pong/Pong.camkes";
 
 assembly {
 
-:   
+    
 
     composition {
 
-    :   component Ping ping; component Pong pong;
+        component Ping ping; component Pong pong;
 
         connection seL4SharedData channel1(from ping.d1, to pong.s1);
         connection seL4SharedData channel2(from ping.d2, to pong.s2);
@@ -525,21 +525,21 @@ assembly {
 component to use the dataports. Note that components generally need to
 use volatile variables when referring to shared memory to prevent the
 compiler eliminating repeated reads and writes.
-```\#!highlight c /\*
-apps/hellodataport/components/Ping/src/main.c \*/
+```\#!highlight c /*
+apps/hellodataport/components/Ping/src/main.c */
 
 \#include <camkes.h> \#include <porttype.h> \#include
 <stdio.h> \#include <string.h>
 
 int run(void) {
 
-:   char \*hello = "hello";
+    char *hello = "hello";
 
-    printf("Ping: sending %s...n", hello); strcpy((void\*)d1, hello);
+    printf("Ping: sending %s...n", hello); strcpy((void*)d1, hello);
 
-    /\* Wait for Pong to reply. We can assume dataport d2 is
+    /* Wait for Pong to reply. We can assume dataport d2 is
 
-    :   \* zeroed on startup by seL4. \*/
+        * zeroed on startup by seL4. */
 
     while (!d2->data[0]); printf("Ping: received %s.n",
     d2->data);
@@ -549,23 +549,23 @@ int run(void) {
 }
 =
 ```
-\#!highlight c /\* apps/hellodataport/components/Pong/src/main.c \*/
+\#!highlight c /* apps/hellodataport/components/Pong/src/main.c */
 
 \#include <camkes.h> \#include <porttype.h> \#include
 <stdio.h> \#include <string.h>
 
 int run(void) {
 
-:   char \*world = "world";
+    char *world = "world";
 
-    /\* Wait for Ping to message us. We can assume dataport s1 is
+    /* Wait for Ping to message us. We can assume dataport s1 is
 
-    :   \* zeroed on startup by seL4. \*/
+        * zeroed on startup by seL4. */
 
-    while (!\*(volatile char\*)s1); printf("Pong: received %sn",
-    (volatile char\*)s1);
+    while (!*(volatile char*)s1); printf("Pong: received %sn",
+    (volatile char*)s1);
 
-    printf("Pong: sending %s...n", world); strcpy((void\*)s2->data,
+    printf("Pong: sending %s...n", world); strcpy((void*)s2->data,
     world);
 
     return 0;
@@ -645,7 +645,7 @@ ${SOURCE_DIR}/components/Ping/src/*.c))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
 ${SOURCE_DIR}/components/Ping/src/plat/${PLAT}/*.c))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
-${SOURCE_DIR}/components/Ping/src/arch/${ARCH}/\*.c))
+${SOURCE_DIR}/components/Ping/src/arch/${ARCH}/*.c))
 
 Ping_HFILES =
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
@@ -653,7 +653,7 @@ ${SOURCE_DIR}/components/Ping/include/*.h))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
 ${SOURCE_DIR}/components/Ping/include/plat/${PLAT}/*.h))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
-${SOURCE_DIR}/components/Ping/include/arch/${ARCH}/\*.h))
+${SOURCE_DIR}/components/Ping/include/arch/${ARCH}/*.h))
 
 Pong_CFILES =
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
@@ -661,7 +661,7 @@ ${SOURCE_DIR}/components/Pong/src/*.c))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
 ${SOURCE_DIR}/components/Pong/src/plat/${PLAT}/*.c))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
-${SOURCE_DIR}/components/Pong/src/arch/${ARCH}/\*.c))
+${SOURCE_DIR}/components/Pong/src/arch/${ARCH}/*.c))
 
 Pong_HFILES =
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
@@ -669,7 +669,7 @@ ${SOURCE_DIR}/components/Pong/include/*.h))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
 ${SOURCE_DIR}/components/Pong/include/plat/${PLAT}/*.h))
  $(patsubst ${SOURCE_DIR}/%,%,$(wildcard
-${SOURCE_DIR}/components/Pong/include/arch/${ARCH}/\*.h))
+${SOURCE_DIR}/components/Pong/include/arch/${ARCH}/*.h))
 
 include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
 ```

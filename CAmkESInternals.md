@@ -19,11 +19,11 @@ From the top, the CAmkES tool (typically found in "tools/camkes/camkes.sh") is a
 
 A typical build of a CAmkES application looks like:
 
-:   1.  Generate makefile (this file will be called "camkes-gen.mk")
+    1.  Generate makefile (this file will be called "camkes-gen.mk")
 
     2. Invoke generated makefile
 
-    :   1.  Copy sources into build directory
+        1.  Copy sources into build directory
         2.  Generated glue code for components and connectors
         3.  Compile each component
         4.  Run CapDL filters

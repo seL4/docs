@@ -91,7 +91,7 @@ in between our own messages, as both threads yield to each other.
 Pong 3 Ping 4 Pong 4 === Just Ping === Ping Pong 5 Ping Pong 6 Ping Pong
 7 Ping Pong 8 Ping Pong 9 === Periodic === Pong 10 Pong 11 Pong 12 Pong
 13 Pong 14 Pong 15 mcs <yielding_thread@main.c>:87 [Cond failed: i >
-NUM_YIELDS \* 3] Too many yeilds!
+NUM_YIELDS * 3] Too many yeilds!
 ```
 
 ### TASK 4

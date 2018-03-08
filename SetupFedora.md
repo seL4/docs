@@ -15,7 +15,7 @@ templating library. You can also install **ccache** to speed second
 and subsequent compilations.
 ```
 
-:   sudo yum groupinstall 'Development Tools' sudo yum install which
+    sudo yum groupinstall 'Development Tools' sudo yum install which
     ncurses-devel python-tempita ccache
 ```
 
@@ -29,7 +29,7 @@ libraries have to be installed manually. On CentOS you'll need to enable
 the EPEL repository to be able to install Haskell.
 ```
 
-:   sudo yum install epel-release sudo yum groupinstall haskell sudo yum
+    sudo yum install epel-release sudo yum groupinstall haskell sudo yum
     install cabal-install cabal update cabal install --user data-ordlist
     missingH split sudo yum install python-pip sudo pip install
     --upgrade pip pip install --user pyelftools jinja2 ply
@@ -40,7 +40,7 @@ targets you need an arm cross compiler; to run on the simulator you need
 **qemu**
 ```
 
-:   yum install 'arm-none-\*' qemu
+    yum install 'arm-none-*' qemu
 ```
 
 <<Anchor(centos)>> == CentOS ==
@@ -57,7 +57,7 @@ CentOS 6 and earlier also do not prepackage qemu. You will have to build
 it from source.
 ```
 
-:   sudo yum install glib2-devel git clone <git://git.qemu.org/qemu.git>
+    sudo yum install glib2-devel git clone <git://git.qemu.org/qemu.git>
     cd qemu ./configure --target-list=arm-softmmu make -j
 ```
 The resulting qemu binary is in arm-softmmu/qemu-system-arm

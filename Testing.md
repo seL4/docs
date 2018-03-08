@@ -143,6 +143,6 @@ Now just build and run the test suite as above. == Running a subset of
 the tests == You can use a regular expression to select a subset of
 tests. This can be set using Kconfig, or the build shortcut
 ```make
-select-test TEST=SCHED.\*
+select-test TEST=SCHED.*
 ```
 . By default the test suite runs all tests.

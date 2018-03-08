@@ -9,7 +9,7 @@ there's no way to tell which of many gadgets you are talking to.
 
 The general approach we take is:
 
-:   1.  As far as possible, boot everything on power-up via DHCP and
+    1.  As far as possible, boot everything on power-up via DHCP and
         TFTP
     2.  Connect a debug serial port via a LevelConverter to a Lantronix
         serial concentrator. An ETS16P for example provides 16

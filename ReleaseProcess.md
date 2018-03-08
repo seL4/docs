@@ -29,7 +29,7 @@ specific tag and choose when to upgrade.
 
 seL4 libraries have branches that track all MAJOR.MINOR versions, with
 branch names in the format MAJOR.MINOR-compatible. A
-MAJOR.MINOR-compatible branch will build with any MAJOR.MINOR.\* version
+MAJOR.MINOR-compatible branch will build with any MAJOR.MINOR.* version
 of the kernel, and all MAJOR.MINOR-compatible branches across our
 libraries are compatible with each other.
 

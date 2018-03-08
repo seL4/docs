@@ -111,11 +111,11 @@ application, and when you reopen it, your latest layout will appear.
 
 You can export an image, into either PNG or SVG.
 
-:   1.  Clicking Save Image or File->Export Image.
+    1.  Clicking Save Image or File->Export Image.
 
     1. Choose either PNG or SVG from the combo-box (first input).
 
-    :   a.  For PNG, resolutions is mandatory.
+        a.  For PNG, resolutions is mandatory.
         b.  For SVG, no input is mandatory.
 
     1.  Click OK.
@@ -132,7 +132,7 @@ projects, the user can add import paths by doing the following:
  
   1. In the dialog box, type (or paste) your import paths. These need to be absolute paths. To add many paths, have spaces between your paths.
  
-  :   a.  E.g "/home/someUser/camkes-next/projects/FileExtender
+      a.  E.g "/home/someUser/camkes-next/projects/FileExtender
           /home/someUser/camkes-next/projects/common"
  
 A keyboard shortcut is also implemented, Cmd + I or Cmd + I .

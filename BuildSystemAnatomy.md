@@ -12,31 +12,31 @@ code and tools related to the project):
 - **[.config](\#config)** - Your current
       configuration (auto-generated)
  
-  \* **apps/**
+  * **apps/**
  
-  :   -   **[Kbuild](\#appskbuild)** - Application targets and
+      -**[Kbuild](\#appskbuild)** - Application targets and
           dependencies
       -   **[Kconfig](\#kconfig)** - Applications menu
  
-      \* **myapp/**
+      * **myapp/**
  
-      :   -   **[Kconfig](\#kconfig)** - Myapp-specific settings
+    -**[Kconfig](\#kconfig)** - Myapp-specific settings
           -   **[Makefile](\#appsmyappmakefile)** - How to build
               Myapp
  
-- **configs/\*** - Pre-made configurations for the project
+- **configs/*** - Pre-made configurations for the project
 - **[Kconfig](\#kconfig)** - Top-level menu
 - **kernel/Makefile** - How to build seL4
  
-  \* libs/
+  * libs/
  
-  :   -   **[Kbuild](\#libskbuild)** - Library targets and
+      -**[Kbuild](\#libskbuild)** - Library targets and
           dependencies
       -   **[Kconfig](\#kconfig)** - Libraries menu
  
-      \* libfoo/
+      * libfoo/
  
-      :   -   **[Kconfig](\#kconfig)** - Libfoo-specific settings
+    -**[Kconfig](\#kconfig)** - Libfoo-specific settings
           -   **[Makefile](\#libfoomakefile)** - How to build
               Libfoo
  
@@ -44,9 +44,9 @@ code and tools related to the project):
 - **[Makefile.flags](\#makefileflags)** - Top-level build
       tuning
  
-  \* tools/common/
+  * tools/common/
  
-  :   -   **[common.mk](\#commonmk)** - Boiler plate for building
+      -**[common.mk](\#commonmk)** - Boiler plate for building
           applications/libraries
       -   **[Kconfig](\#kconfig)** - Menu options for toolchains
           and other common settings
@@ -58,7 +58,7 @@ code and tools related to the project):
           Architecture-independent boiler plate for a top-level build
       -   **[Makefile.flags](\#makefileflags)** - Shared build
           system tuning
-      -   **kbuild/\*** - Kbuild from the Linux source tree. For
+      -   **kbuild/*** - Kbuild from the Linux source tree. For
           documentation, refer to the Kbuild mailing list.
  
 ### Build configuration
@@ -156,7 +156,7 @@ include common.mk. It will typically look something like the following:
 TARGETS := $(notdir $(SOURCE_DIR)).bin
 
 CFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard
-$(SOURCE_DIR)/src/\*.c)) ASMFILES := $(patsubst
+$(SOURCE_DIR)/src/*.c)) ASMFILES := $(patsubst
 $(SOURCE_DIR)/%,%,$(wildcard
 $(SOURCE_DIR)/crt/arch-$(ARCH)/crt0.S))
 
@@ -200,7 +200,7 @@ $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.c)) ASMFILES :=
 $(patsubst $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.S))
 
 \# Header files/directories this library provides. HDRFILES :=
-$(wildcard ${SOURCE_DIR}/include/\*)
+$(wildcard ${SOURCE_DIR}/include/*)
 
 include $(SEL4_COMMON)/common.mk
 ```
@@ -329,22 +329,22 @@ config FOO bool "foo" depends on BAR
 
 config BAR
 
-:   bool "bar" depends on MOO
+    bool "bar" depends on MOO
 
 config MOO
 
-:   bool "moo"
+    bool "moo"
 ```
 or as:
 ``` config FOO bool "foo" select BAR
 
 config BAR
 
-:   bool "bar" select MOO
+    bool "bar" select MOO
 
 config MOO
 
-:   bool "moo"
+    bool "moo"
 ```
 The difference will be in the behaviour in menuconfig, not in the
 actual dependency inferred by Kconfig.
@@ -399,7 +399,7 @@ libs-$(CONFIG_LIB_FOO) += libfoo libs-$(CONFIG_LIB_BAR) +=
 libbar ...
 ```
 
-----**What does it mean when I get errors like make[1]: *\** No rule
+----**What does it mean when I get errors like make[1]: *** No rule
 to make target '-lfoo', needed by \`bar'. Stop.? Why is "-lfoo" a
 target?**
 

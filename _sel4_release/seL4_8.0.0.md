@@ -23,12 +23,12 @@ with the following changes:
 
 in the scheduler, the fastpath will be hit. Previously the fastpath
 would not be used on IPC from a high priority thread to a low priority
-thread. \* As a consequence of the above change, scheduling behaviour
+thread. * As a consequence of the above change, scheduling behaviour
 has changed in the case where a non-blocking IPC is sent between two
 same priority threads: the sender will be scheduled, rather than the
-destination. \* Benchmarking support for armv8/aarch64 is now available.
-\* Additional x86 extra bootinfo type for retrieving frame buffer
-information from multiboot 2 \* Debugging option to export x86
+destination. * Benchmarking support for armv8/aarch64 is now available.
+* Additional x86 extra bootinfo type for retrieving frame buffer
+information from multiboot 2 * Debugging option to export x86
 Performance-Monitoring Counters to user level
 
 # Upgrade notes

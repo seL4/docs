@@ -10,11 +10,11 @@ title: seL4 6.0.0
 with the following changes:
 
 ## Highlights
- === ARM 32-bit SMP === \* Works (and tested) only on
-Sabre/ARM with up to 4 cores. \* Using the big kernel lock (same as x86
-implementation). \* Boot core is assumed to have an ID of 0. \* Kernel
-bootstraps and initialises data structures only on the boot core. \*
-Root task proceeds on the boot core. \* Cores are assumed to have linear
+ === ARM 32-bit SMP === * Works (and tested) only on
+Sabre/ARM with up to 4 cores. * Using the big kernel lock (same as x86
+implementation). * Boot core is assumed to have an ID of 0. * Kernel
+bootstraps and initialises data structures only on the boot core. *
+Root task proceeds on the boot core. * Cores are assumed to have linear
 IDes.
 
 -   ARM IPI caveats:

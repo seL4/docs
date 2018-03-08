@@ -31,11 +31,11 @@ import <VM/vm.camkes>; import "cma34cr.camkes";
 
 assembly {
 
-:   
+    
 
     composition {
 
-    :   component VM vm;
+        component VM vm;
 
     }
 
@@ -51,7 +51,7 @@ component is defined in apps/cma34cr_minimal/cma34cr.camkes:
 
 component Init0 {
 
-:   VM_INIT_DEF()
+    VM_INIT_DEF()
 
 }
 
@@ -59,13 +59,13 @@ component VM {
 
   composition {
  
-  :   VM_COMPOSITION_DEF() VM_PER_VM_COMP_DEF(0)
+      VM_COMPOSITION_DEF() VM_PER_VM_COMP_DEF(0)
  
   }
  
   configuration {
  
-  :   VM_CONFIGURATION_DEF() VM_PER_VM_CONFIG_DEF(0, 2)
+      VM_CONFIGURATION_DEF() VM_PER_VM_CONFIG_DEF(0, 2)
  
       vm0.simple_untyped23_pool = 20; vm0.heap_size = 0x2000000;
       vm0.guest_ram_mb = 128; vm0.kernel_cmdline =
@@ -174,9 +174,9 @@ Here's a summary of what the build-rootfs tool does:
 ```
 \#include <stdio.h>
 
-int main(int argc, char \*argv[]) {
+int main(int argc, char *argv[]) {
 
-:   printf("Hello, World!n"); return 0;
+    printf("Hello, World!n"); return 0;
 
 }
 =
@@ -189,7 +189,7 @@ include ../../common.mk include ../../common_app.mk
 
 hello: hello.o
 
-:   $(CC) $(CFLAGS) $(LDFLAGS) $\^ -o $@
+    $(CC) $(CFLAGS) $(LDFLAGS) $\^ -o $@
 ```
 
 Make sure there is a TAB character in the makefile, rather than spaces
@@ -230,21 +230,21 @@ written to, the vmm gets poked.
 
 static int major_number;
 
-static ssize_t poke_write(struct file *f, const char \__user*b, size_t s, loff_t \*o) {
+static ssize_t poke_write(struct file *f, const char \__user*b, size_t s, loff_t *o) {
 
-:   printk("hin"); // TODO replace with hypercall return s;
+    printk("hin"); // TODO replace with hypercall return s;
 
 }
 
 struct file_operations fops = {
 
-:   .write = poke_write,
+    .write = poke_write,
 
 };
 
 static int \__init poke_init(void) {
 
-:   major_number = register_chrdev(0, DEVICE_NAME, &fops);
+    major_number = register_chrdev(0, DEVICE_NAME, &fops);
     printk(KERN_INFO "%s initialized with major number %dn",
     DEVICE_NAME, major_number); return 0;
 
@@ -252,7 +252,7 @@ static int \__init poke_init(void) {
 
 static void \__exit poke_exit(void) {
 
-:   unregister_chrdev(major_number, DEVICE_NAME); printk(KERN_INFO
+    unregister_chrdev(major_number, DEVICE_NAME); printk(KERN_INFO
     "%s exitn", DEVICE_NAME);
 
 }
@@ -267,11 +267,11 @@ obj-m += poke.o CFLAGS_poke.o = -I../../include
 
 all:
 
-:   make -C $(KHEAD) M=$(PWD) modules
+    make -C $(KHEAD) M=$(PWD) modules
 
 clean:
 
-:   make -C $(KHEAD) M=$(PWD) clean
+    make -C $(KHEAD) M=$(PWD) clean
 ```
 
 4.  Add the new module to so it is loaded during initialization, edit
@@ -314,16 +314,16 @@ The choice of 4 is because 0..3 are taken by other hypercalls.
 
 Add a new function at the top of the file:
 ```
-static int poke_handler(vmm_vcpu_t \*vmm_vcpu) {
+static int poke_handler(vmm_vcpu_t *vmm_vcpu) {
 printf("POKE!!!n"); return 0; }
 ```
 
 In the function main_continued register \`poke_handler\`:
 ```
 
-:   reg_new_handler(&vmm, poke_handler, 4); // <--- added
+    reg_new_handler(&vmm, poke_handler, 4); // <--- added
 
-    /\* Now go run the event loop \*/ vmm_run(&vmm);
+    /* Now go run the event loop */ vmm_run(&vmm);
 ```
 
 9.  Finally re-run build-rootfs, make, and run:
@@ -446,7 +446,7 @@ apps/cma34cr_minimal/cma34cr.camkes:
 
   composition {
  
-  :   VM_COMPOSITION_DEF() VM_PER_VM_COMP_DEF(0)
+      VM_COMPOSITION_DEF() VM_PER_VM_COMP_DEF(0)
  
       // Add the following component and connections: component
       PrintServer print_server; connection seL4Notification
@@ -456,7 +456,7 @@ apps/cma34cr_minimal/cma34cr.camkes:
  
       connection seL4SharedDataWithCaps conn_data(from print_server.data,
  
-      :   to vm0.data);
+          to vm0.data);
  
   }
 
@@ -498,9 +498,9 @@ int run(void) {
 
   while (1) {
  
-  :   do_print_wait();
+      do_print_wait();
  
-      printf("%sn", (char\*)data);
+      printf("%sn", (char*)data);
  
       done_printing_emit();
  
@@ -536,7 +536,7 @@ Create a file apps/cma34cr_minimal/cross_vm.c:
 dataport_caps_handle_t data_handle;
 
 // Array of dataport handles at positions corresponding to handle ids
-from spec static dataport_caps_handle_t \*dataports[] = { NULL, //
+from spec static dataport_caps_handle_t *dataports[] = { NULL, //
 entry 0 is NULL so ids correspond with indices &data_handle, };
 
 // Array of consumed event callbacks and ids static
@@ -552,30 +552,30 @@ cross_vm_event_mutex = (camkes_mutex_t) { .lock =
 cross_vm_event_mutex_lock, .unlock =
 cross_vm_event_mutex_unlock, };
 
-int cross_vm_dataports_init(vmm_t \*vmm) {
+int cross_vm_dataports_init(vmm_t *vmm) {
 
-:   return cross_vm_dataports_init_common(vmm, dataports,
+    return cross_vm_dataports_init_common(vmm, dataports,
     sizeof(dataports)/sizeof(dataports[0]));
 
 }
 
-int cross_vm_emits_events_init(vmm_t \*vmm) {
+int cross_vm_emits_events_init(vmm_t *vmm) {
 
-:   
+    
 
     return cross_vm_emits_events_init_common(vmm, emitted_events,
 
-    :   sizeof(emitted_events)/sizeof(emitted_events[0]));
+        sizeof(emitted_events)/sizeof(emitted_events[0]));
 
 }
 
 int cross_vm_consumes_events_init(vmm_t *vmm, vspace_t*vspace, seL4_Word irq_badge) {
 
-:   
+    
 
     return cross_vm_consumes_events_init_common(vmm, vspace, &cross_vm_event_mutex,
 
-    :   consumed_events,
+        consumed_events,
         sizeof(consumed_events)/sizeof(consumed_events[0]),
         irq_badge);
 
@@ -598,7 +598,7 @@ $(SOURCE_DIR)/cross_vm.c)
  $(wildcard $(SOURCE_DIR)/common/src/*.c) Init0_HFILES +=
 $(wildcard $(SOURCE_DIR)/common/include/*.h)
  $(wildcard
-$(SOURCE_DIR)/common/shared_include/cross_vm_shared/\*.h)
+$(SOURCE_DIR)/common/shared_include/cross_vm_shared/*.h)
 
 PrintServer_CFILES += $(SOURCE_DIR)/print_server.c ...
 ```
@@ -660,7 +660,7 @@ Create projects/vm/linux/pkg/print_client/print_client.c:
 \#include "dataport.h" \#include "consumes_event.h" \#include
 "emits_event.h"
 
-int main(int argc, char \*argv[]) {
+int main(int argc, char *argv[]) {
 
   int data_fd = open("/dev/camkes_data", O_RDWR); assert(data_fd
   >= 0);
@@ -679,7 +679,7 @@ int main(int argc, char \*argv[]) {
  
   for (int i = 1; i < argc; i++) {
  
-  :   strncpy(data, argv[i], dataport_size);
+      strncpy(data, argv[i], dataport_size);
       emits_event_emit(do_print_fd);
       consumes_event_wait(done_printing_fd);
  
@@ -703,7 +703,7 @@ include ../../common.mk include ../../common_app.mk
 
 print_client: print_client.o
 
-:   $(CC) $(CFLAGS) $(LDFLAGS) $\^ -lcamkes -o $@
+    $(CC) $(CFLAGS) $(LDFLAGS) $\^ -lcamkes -o $@
 ```
 
 Now, run build-rootfs, and make, and run!
@@ -815,17 +815,17 @@ configuration section:
 For AHCI:
 ```
 
-:   
+    
 
     configuration {
 
-    :   ...
+        ...
 
         vm0_config.pci_devices_iospace = 1;
 
         vm0_config.ioports = [
 
-        :   {"start":0x4088, "end":0x4090, "pci_device":0x1f,
+            {"start":0x4088, "end":0x4090, "pci_device":0x1f,
             "name":"SATA"}, {"start":0x4094, "end":0x4098,
             "pci_device":0x1f, "name":"SATA"}, {"start":0x4080,
             "end":0x4088, "pci_device":0x1f, "name":"SATA"},
@@ -836,11 +836,11 @@ For AHCI:
 
         vm0_config.pci_devices = [
 
-        :   
+            
 
             {
 
-            :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2,
+                "name":"SATA", "bus":0, "dev":0x1f, "fun":2,
                 "irq":"SATA", "memory":[ {"paddr":0xc0713000,
                 "size":0x800, "page_bits":12}, ],
 
@@ -850,7 +850,7 @@ For AHCI:
 
         vm0_config.irqs = [
 
-        :   {"name":"SATA", "source":19, "level_trig":1,
+            {"name":"SATA", "source":19, "level_trig":1,
             "active_low":1, "dest":11},
 
         ];
@@ -861,17 +861,17 @@ For AHCI:
 For IDE:
 ```
 
-:   
+    
 
     configuration {
 
-    :   ...
+        ...
 
         vm0_config.pci_devices_iospace = 1
 
         vm0_config.ioports = [
 
-        :   {"start":0x4080, "end":0x4090, "pci_device":0x1f,
+            {"start":0x4080, "end":0x4090, "pci_device":0x1f,
             "name":"SATA"}, {"start":0x4090, "end":0x40a0,
             "pci_device":0x1f, "name":"SATA"}, {"start":0x40b0,
             "end":0x40b8, "pci_device":0x1f, "name":"SATA"},
@@ -884,11 +884,11 @@ For IDE:
 
         vm0_config.pci_devices = [
 
-        :   
+            
 
             {
 
-            :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2,
+                "name":"SATA", "bus":0, "dev":0x1f, "fun":2,
                 "irq":"SATA", "memory":[],
 
             },
@@ -897,7 +897,7 @@ For IDE:
 
         vm0_config.irqs = [
 
-        :   {"name":"SATA", "source":19, "level_trig":1,
+            {"name":"SATA", "source":19, "level_trig":1,
             "active_low":1, "dest":11},
 
         ];
@@ -943,11 +943,11 @@ ports, pci devices and irqs to pass through:
 
   vm0_config.pci_devices = [
  
-  :   
+      
  
       {
  
-      :   "name":"SATA", "bus":0, "dev":0x1f, "fun":2, "irq":"SATA",
+          "name":"SATA", "bus":0, "dev":0x1f, "fun":2, "irq":"SATA",
           "memory":[],
  
       },
@@ -961,7 +961,7 @@ ports, pci devices and irqs to pass through:
  
   vm0_config.irqs = [
  
-  :   {"name":"SATA", "source":19, "level_trig":1, "active_low":1,
+      {"name":"SATA", "source":19, "level_trig":1, "active_low":1,
       "dest":11}, {"name":"Ethernet5", "source":0x11, "level_trig":1,
       "active_low":1, "dest":10}, // <--- Add this entry
  

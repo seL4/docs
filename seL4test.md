@@ -101,7 +101,7 @@ built with these compilers are incompatible with the prebuilt musl C
 library. You can either tweak the flags (in
 `tools/common/Makefile.flags
 ```
-: add
+  add
 ```-mfloat-abi=soft` to
 **NK_CFLAGS**) or disable the use of the prebuilt libraries as above.
 

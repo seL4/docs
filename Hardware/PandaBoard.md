@@ -37,7 +37,7 @@ bd->bi_boot_params)
 ## Steps to boot seL4 kernel
 
 
-:   1.  Download the tool. Alternatively, clone and build the tool from
+    1.  Download the tool. Alternatively, clone and build the tool from
         source <TODO Fastboot link>
     2.  Connect the serial cable for communication
     3.  Connect the usb cable to allow the flashing of your image via
@@ -47,7 +47,7 @@ bd->bi_boot_params)
 
     1. after you power on the board, you should be able see the "Fastboot entered ..." in minicom. You can check that the device is ready by using "$> fastboot devices".
 
-    :   1.  NOTE! The panda ES seems to be particular about which
+        1.  NOTE! The panda ES seems to be particular about which
             tty-USB converter it will communicate with. Avoid using the
             HL-340 chipset
         2.  NOTE! fastboot fails silently if you do not have permissions

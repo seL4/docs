@@ -25,7 +25,7 @@ seL4 has two types of API:
 
 - System Calls, mostly concerned with message-passing
         between threads. Some examples are Send and Recv
-        \* In addition to the message-passing syscalls, there are
+        * In addition to the message-passing syscalls, there are
         debugging and benchmarking syscalls which can be enabled with a
         build flag. These are true syscalls, rather than
         object invocations.
@@ -43,13 +43,13 @@ The API documentation in the manual is divided into the following hierarchy:
         -   General System Calls
         -   Debugging System Calls
 
-        \* Benchmarking System Calls
+        * Benchmarking System Calls
 - Architecture-Independent Object Methods
 - x86-Specific Object Methods
         -   General x86 Object Methods
         -   IA32 Object Methods
 
-        \* x86_64 Object Methods
+        * x86_64 Object Methods
 - ARM-Specific Object Methods
         -   General ARM Object Methods
         -   aarch32 Object Methods

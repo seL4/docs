@@ -156,19 +156,19 @@ seL4drv_mgmt_enumerate_children().
 
 There are two values returned by this function:
 
-:   1.  The number of child devices that the driver instance is
+    1.  The number of child devices that the driver instance is
         aware of. ''Let this value be N_children''.
     2.  The number of attributes required to describe each child device.
         ''Let this value be N_attrs_per_child''.
 
 The environment is expected to allocate memory equal to
-N_attrs_per_child \* sizeof(seL4drv_child_attribute_t) for each
+N_attrs_per_child * sizeof(seL4drv_child_attribute_t) for each
 child device.
 
 If seL4drv_mgmt_enumerate_get_num_children() reports that there are
 multiple child devices, the environment is expected to allocate memory
 equal to
-N_attrs_per_child \* sizeof(seL4drv_child_attribute_t) \* N_children.
+N_attrs_per_child * sizeof(seL4drv_child_attribute_t) * N_children.
 
 This amount of memory shall then be passed to
 seL4drv_mgmt_enumerate_children().

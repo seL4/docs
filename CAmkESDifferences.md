@@ -16,7 +16,7 @@ Settings are now interpreted as an appropriate python type.
 // dict crazy.stuff = { "key" : ["polymorphic", 42, "list",
 {"hello":true} ] };
 
-// appropriate numeric type arithmetic.expressions = 1 << (2 \*\*
+// appropriate numeric type arithmetic.expressions = 1 << (2 **
 2) == 3 ? -2 : 0x9;
 ```
 
@@ -39,23 +39,23 @@ E.g.
 
 component Foo {
 
-:   dataport Buf(8192) dp;
+    dataport Buf(8192) dp;
 
 }
 
 component Bar {
 
-:   dataport Buf(8192) dp;
+    dataport Buf(8192) dp;
 
 }
 
 assembly {
 
-:   
+    
 
     composition {
 
-    :   component Foo foo; component Bar bar; connection seL4SharedData
+        component Foo foo; component Bar bar; connection seL4SharedData
         conn(from foo.dp, to bar.dp);
 
     }
@@ -80,13 +80,13 @@ This is no longer the case. The c symbols referring to dataports are
 regular (ie. non-volatile) pointer types, and programmers are required
 to explicitly "acquire" and "release" dataports to prevent harmful
 re-ordering (at both compile time and runtime). The motivations for this
-change are: \* Treating dataports as always volatile prevents the
+change are: * Treating dataports as always volatile prevents the
 compiler from re-ordering any accesses to them, even in cases where it
 won't affect the correctness of programs. Using non-volatile dataports
-allows the compiler to make better optimizations. \* Preventing compiler
+allows the compiler to make better optimizations. * Preventing compiler
 reordering (ie. with volatile) is not sufficient to make shared memory
 coherent in a multicore environment. Changes made to shared memory by
-one core may become visible to other cores in a different order. \*
+one core may become visible to other cores in a different order. *
 Using functions from the standard library on dataports (e.g. passing a
 string in a dataport to `strlen`) requires casting from a volatile
 pointer to a regular pointer - an undefined operation in c.
@@ -133,7 +133,7 @@ interrupt; provides IOPort port; }
 
 component Driver {
 
-:   dataport Buf registers; consumes Interrupt interrupt; uses IOPort
+    dataport Buf registers; consumes Interrupt interrupt; uses IOPort
     port;
 
 }
@@ -200,7 +200,7 @@ event methods (`foo_wait()
 The user-provided function `foo_handler()` will be called by a
 dedicated interrupt-handling thread (one thread per interface connected
 with `seL4HardwareInterrupt`). Unlike callbacks registered with
-`\*_reg_callback`, interrupt handlers do not need to be explicitly
+`*_reg_callback`, interrupt handlers do not need to be explicitly
 registered, and do not become unregistered after calling.
 
 ## Hierarchical Components

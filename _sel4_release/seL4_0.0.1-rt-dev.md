@@ -12,17 +12,17 @@ branch is not verified and is under active development.
 ## Highlights
 
 
-  \* Maximum priorities
+  * Maximum priorities
  
-  :   -   Previously seL4 would not allow threads to set any other
+      -Previously seL4 would not allow threads to set any other
           thread's priority to higher than its own. This has been
           extracted into a separate field for the RT kernel, a maximum
           priority, which limits what thread cans set their own or other
           threads priorities to.
  
-  \* Scheduling contexts
+  * Scheduling contexts
  
-  :   -   This branch adds scheduling contexts to seL4, which represent
+      -This branch adds scheduling contexts to seL4, which represent
           CPU time. Scheduling contexts are separate to threads
           (although threads required one to run) and can be passed
           around over IPC.

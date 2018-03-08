@@ -110,10 +110,10 @@ replaces
       which fails
 
 if there is no message waiting. Opposite of `NBSend` (which silently
-fails if there is no receiver waiting) \* `seL4_Poll` collects any
-signals from a notification objects, returns zero if there are none \*
-`seL4_Signal` replaces deprecated seL4_Notify \*
-`seL4_TCB_BindNotification` bind a notification to a tcb \*
+fails if there is no receiver waiting) * `seL4_Poll` collects any
+signals from a notification objects, returns zero if there are none *
+`seL4_Signal` replaces deprecated seL4_Notify *
+`seL4_TCB_BindNotification` bind a notification to a tcb *
 `seL4_TCB_UnbindNotification` unbind a notification from a tcb
 
 ## Deprecations

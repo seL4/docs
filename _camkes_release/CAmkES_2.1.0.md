@@ -29,11 +29,11 @@ title: camkes-2.1.0
 
 ### Unmarshalling Helpers
  These were intended for use in templates,
-but are no longer used in any internal templates: \* camkes_marshal \*
-camkes_marshal_string \* camkes_unmarshal \*
+but are no longer used in any internal templates: * camkes_marshal *
+camkes_marshal_string * camkes_unmarshal *
 camkes_unmarshal_string
 
 ### DMA Utilities
  These had been deprecated for a long period and
-are now being removed: \* camkes_dma_page_alloc \*
+are now being removed: * camkes_dma_page_alloc *
 camkes_dma_page_free

@@ -6,12 +6,12 @@ title: seL4 5.1.0
  Announcing the release of `seL4 5.1.0`
 with the following changes:
 
-Below are the changes to the seL4 ABI: x86-64 specific changes: \*
+Below are the changes to the seL4 ABI: x86-64 specific changes: *
 implement seL4_BenchmarkFlushCaches debug syscall.
 
 Below are other changes that do not affect the seL4 ABI: arm specific
-changes: \* ARM-HYP: internal changes to support ARM-HYP verification
-work. \* kzm: fix timer reload overflow calculations
+changes: * ARM-HYP: internal changes to support ARM-HYP verification
+work. * kzm: fix timer reload overflow calculations
 
 # Upgrade notes
 

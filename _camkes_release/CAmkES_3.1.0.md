@@ -13,7 +13,7 @@ of a component in a component { ... } block.
 
 Specific details from manual:
 
-:   \* It is possible to give an attribute a default value when it
+    * It is possible to give an attribute a default value when it
     is declared. If there are no settings for an attribute, the default
     setting will be used. If an attribute is aliased to a different
     attribute that also has a default, then the different attribute's

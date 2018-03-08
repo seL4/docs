@@ -343,7 +343,7 @@ and tell the kernel about it is as follows:
 
 \#include <sel4/benchmark_track_types.h>
 
-  /\* Create large page to use for benchmarking and give to kernel */
+  /* Create large page to use for benchmarking and give to kernel */
   void*log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1,
   seL4_LargePageBits); if (log_buffer == NULL) { ZF_LOGF("Could not
   map log_buffer page"); } seL4_CPtr buffer_cap =

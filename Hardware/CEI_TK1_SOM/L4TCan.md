@@ -131,7 +131,7 @@ Example:
 
   can0: <can@1> {
  
-  :   compatible = "microchip,mcp2515"; reg = <1>; clocks =
+      compatible = "microchip,mcp2515"; reg = <1>; clocks =
       <&clk24m>; interrupt-parent = <&gpio4>; interrupts =
       <13 0x2>; vdd-supply = <&reg5v0>; xceiver-supply =
       <&reg5v0>;
@@ -183,7 +183,7 @@ line, and change it to touch_id=3@3
 update_kernel.sh
 ```
 
-:   \#!/bin/bash
+    \#!/bin/bash
 
     > L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
     > SOM_DIR=/mnt/TK1SOM
@@ -197,7 +197,7 @@ update_kernel.sh
 rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
 ```
 
-:   make
+    make
 
     make modules
 
@@ -246,7 +246,7 @@ bytes:0 (0.0 B) TX bytes:0 (0.0 B)
 
 eth0 Link encap:Ethernet HWaddr 00:50:c2:72:00:59
 
-:   inet addr:10.13.1.223 Bcast:10.13.1.255 Mask:255.255.254.0 inet6
+    inet addr:10.13.1.223 Bcast:10.13.1.255 Mask:255.255.254.0 inet6
     addr: 2402:1800:4000:1:250:c2ff:fe72:59/64 Scope:Global inet6 addr:
     fe80::250:c2ff:fe72:59/64 Scope:Link
 

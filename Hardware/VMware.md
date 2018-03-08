@@ -39,7 +39,7 @@ guest type.
 
 There are three options for the serial port
 
-:   1.  **Output to a text file** (easiest but output only). The VM
+    1.  **Output to a text file** (easiest but output only). The VM
         will dump its serial output to a text file when it runs, and you
         can simply go less -F <file>.
     2.  **Use physical serial port** (best but requires serial cable +

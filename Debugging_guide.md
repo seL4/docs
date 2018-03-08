@@ -276,13 +276,13 @@ cross-compiler prefix.
 ```
 \#!highlight bash numbers=off
 
-:   arm-none-eabi-objdump -D binary_file_name > dump.s
+    arm-none-eabi-objdump -D binary_file_name > dump.s
 ```
 For x86
 ```
 \#!highlight bash numbers=off
 
-:   objdump -D binary_file_name > dump.s
+    objdump -D binary_file_name > dump.s
 ```
 The file `dump.s` has the human-readable assembly instructions.
 
@@ -291,7 +291,7 @@ If you have symbols and want (C) source information in your disassembly
 ```
 \#!highlight bash numbers=off
 
-:   objdump -DS binary_file_name
+    objdump -DS binary_file_name
 ```
 === Debugging seL4test ===
 
