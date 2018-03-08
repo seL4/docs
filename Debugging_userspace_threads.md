@@ -24,8 +24,8 @@ Not all platforms support this feature for two main reasons:
         through the debug coprocessor.
 
 Caveat lector: If you compile the kernel with support for the debug API,
-and your ARM platform doesn't support it, '''your kernel will abort at
-boot''', with a message (or without a message if you are compiling the
+and your ARM platform doesn't support it, **your kernel will abort at
+boot**, with a message (or without a message if you are compiling the
 kernel in release mode (CONFIG_DEBUG_BUILD=n)).
 
 ## Summary of the invocations

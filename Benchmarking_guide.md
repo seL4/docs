@@ -35,23 +35,23 @@ time of the next thread.
 After enabling this feature, some few system calls can be used to start,
 stop, and retrieve data.
 
-'''seL4_BenchmarkResetLog() ''' This system call resets global counters
+**seL4_BenchmarkResetLog() ** This system call resets global counters
 (since the previous call to the same function) and idleThread counters
 that hold utilisation values, and starts CPU utilisation tracking.
 
-'''seL4_BenchmarkResetThreadUtilisation(seL4_CPtr thread_cptr)'''
+**seL4_BenchmarkResetThreadUtilisation(seL4_CPtr thread_cptr)**
 resets the utilisation counters for the requested thread. It's the
 resposibility of the user to reset the thread's counters using this
 system call before calling seL4_BenchmarkResetLog(), especially if
 seL4_BenchmarkResetLog() is called multiple times to track the same
 thread(s).
 
-'''seL4_BenchmarkFinalizeLog()''' Stops the CPU tracking feature but
+**seL4_BenchmarkFinalizeLog()** Stops the CPU tracking feature but
 doesn't reset the counters. Calling this system call without a previous
 seL4_BenchmarkResetLog() call has no effect.
 
-'''seL4_BenchmarkGetThreadUtilisation(seL4_CPtr thread_cptr)''' Gets
-the utilisation time of the thread that '''thread_cptr '''capability
+**seL4_BenchmarkGetThreadUtilisation(seL4_CPtr thread_cptr)** Gets
+the utilisation time of the thread that **thread_cptr **capability
 points to between calls to seL4_BenchmarkResetLog() and
 seL4_BenchmarkFinalizeLog(). The utilisation time is dumped to the
 IPCBuffer (first 64-bit word) of the calling thread into a fixed

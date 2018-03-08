@@ -87,8 +87,8 @@ will work on the mac.
 To start the application, it would be:
 
 ` python [path/to/camkes-tool/camkes]/visualCAmkES ` === Opening a
-File === To open a file, click File->Open. Then select a '''top-level
-camkes file'''. Your graph will load.
+File === To open a file, click File->Open. Then select a **top-level
+camkes file**. Your graph will load.
 
 ### Manipulating the graph
  In the right, you have a few buttons:
@@ -104,8 +104,8 @@ connections will continually redraw as you move the box. There is a
 minimum distance to see the symbol for each connection.
 
 ### Exporting and Saving
- As you change the graph, '''the program
-automatically saves a .layout file''', which contains the current
+ As you change the graph, **the program
+automatically saves a .layout file**, which contains the current
 position of each box. This means that you can close the python
 application, and when you reopen it, your latest layout will appear.
 
@@ -141,7 +141,7 @@ A keyboard shortcut is also implemented, Cmd + I or Cmd + I .
 
 
 The key-mappings are as follows:
-||'''Task'''||'''Linux/Windows'''||'''Mac'''|| ||Open ||Ctrl + O||Cmd +
+||**Task**||**Linux/Windows**||**Mac**|| ||Open ||Ctrl + O||Cmd +
 O|| ||Autolayout||Ctrl + L||Cmd + L|| ||Export (Save) Image ||Ctrl +
 E||Cmd + E|| ||Zoom In||Ctrl + =||Cmd + =|| ||Zoom Out||Ctrl + -||Cmd +
 -|| ||Add Import Paths||Ctrl + I||Cmd + I||

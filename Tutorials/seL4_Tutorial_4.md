@@ -88,7 +88,7 @@ This should be a fairly easy step to complete!
 Now, in this particular case, we are making the new thread be the
 sender. Recall that the sender must have a capability to the endpoint
 that the receiver is listening on, in order to send to that listener.
-But in this scenario, our threads do '''not''' share the same CSpace!
+But in this scenario, our threads do **not** share the same CSpace!
 The only way the new thread will know which endpoint it needs a
 capability to, is if we tell it. Furthermore, even if the new thread
 knows which endpoint object we are listening on, if it doesn't have a
@@ -106,7 +106,7 @@ capability.
 
 So we use vka_cspace_make_path(), which locates one free capability
 slot in the selected CSpace, and returns a handle to it, to us. We then
-filled that free slot in the new thread's CSpace with a '''badged'''
+filled that free slot in the new thread's CSpace with a **badged**
 capability to the endpoint we are listening on, so as so allow it to
 send to us immediately. We could have filled the slot with an unbadged
 capability, but then if we were listening for multiple senders, we

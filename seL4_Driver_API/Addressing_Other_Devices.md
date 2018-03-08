@@ -49,7 +49,7 @@ between the driver and the target device.
 
 If the environment is unable to locate a device whose addressable name
 matches the one supplied in the call to seL4drv_external_connect(), it
-shall return '''NULL'''. The calling driver shall take this to mean that
+shall return **NULL**. The calling driver shall take this to mean that
 the device is trying to connect to does not exist, or that it exists but
 the environment does not have a driver that can drive it, and so is
 unusable.

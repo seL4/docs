@@ -190,9 +190,9 @@ include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/helloworld/Kconfig" `
 
-You can now run '''make menuconfig''' from the top-level directory and
+You can now run **make menuconfig** from the top-level directory and
 select your application from the Applications menu. Make sure you
-'''deselect the simple application''' while you're here.
+**deselect the simple application** while you're here.
 
 ### Build and Run
  You're now ready to compile and run this
@@ -391,9 +391,9 @@ include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/helloevent/Kconfig" `
 
-You can now run '''make menuconfig''' from the top-level directory and
+You can now run **make menuconfig** from the top-level directory and
 select your application from the Applications menu. Make sure you
-'''deselect the helloworld application''' while you're here.
+**deselect the helloworld application** while you're here.
 
 ### Build and Run
  Compile the system and run it with similar qemu
@@ -613,9 +613,9 @@ include ${SOURCE_DIR}/../../tools/camkes/camkes.mk
 Add a source line to the top-level Kconfig under the applications menu
 that references this file: ` source "apps/hellodataport/Kconfig" `
 
-You can now run '''make menuconfig''' from the top-level directory and
+You can now run **make menuconfig** from the top-level directory and
 select your application from the Applications menu. Make sure you
-'''deselect the helloevent application''' while you're here.
+**deselect the helloevent application** while you're here.
 
 ### Build and Run
  Compile the system and run it with similar qemu

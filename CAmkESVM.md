@@ -302,7 +302,7 @@ mknod /dev/poke c 244 0 \# create the special file \# echo >
 address \# the shell complains, but our module is being invoked!
 ```
 
-'''Now let's make it talk to the vmm'''.
+**Now let's make it talk to the vmm**.
 
 7.  In projects/vm/linux/modules/poke/poke.c, replace ' printk("hin");'
     with 'kvm_hypercall1(4, 0);'

@@ -39,7 +39,7 @@ first from BIOS. You can always check by
 
 ` lscpu `
 
-and look for '''vmx''' flag.
+and look for **vmx** flag.
 
 ## Compilation
 
@@ -92,24 +92,24 @@ details about the VM, go to
 
 The qemu arguments are:
 
-:   1.  '''qemu-system-x86_64''' - emulate x86/x64 system
-    2.  '''-m 512''' - amount of RAM dedicated to qemu VM
-    3.  '''-kernel <img_name>''' - path to kernel image
-    4.  '''-initrd <img_name>''' - path to application image
-    5.  '''--enable-kvm''' - necessary to enable Vt-x in qemu (seL4
+:   1.  **qemu-system-x86_64** - emulate x86/x64 system
+    2.  **-m 512** - amount of RAM dedicated to qemu VM
+    3.  **-kernel <img_name>** - path to kernel image
+    4.  **-initrd <img_name>** - path to application image
+    5.  **--enable-kvm** - necessary to enable Vt-x in qemu (seL4
         can't start a VM without this flag)
-    6.  '''-smp 2''' - number of CPUs dedicated to qemu VM
-    7.  '''-cpu Nehalem,+vmx''' - because some of the newer CPUs come
+    6.  **-smp 2** - number of CPUs dedicated to qemu VM
+    7.  **-cpu Nehalem,+vmx** - because some of the newer CPUs come
         with features that the Linux running in seL4 VM doesn't
         recognize (such as advanced power management etc) we had better
-        luck using a default qemu CPU and pass it only the '''vmx'''
+        luck using a default qemu CPU and pass it only the **vmx**
         flag from the host CPU (again, your host machine must have
         Vt-x support). You should be able to use other CPU types (run
-        qemu with '''-cpu help''') and just pass the '''vmx''' flag, but
+        qemu with **-cpu help**) and just pass the **vmx** flag, but
         in our case Nehalem was closest to the host machine CPU.
-    8.  '''-nographic''' - the output of the serial port goes to
-        the terminal. You can instead run qemu with '''-serial
-        /dev/XX/XX''' where the serial device is the output of '''tty'''
+    8.  **-nographic** - the output of the serial port goes to
+        the terminal. You can instead run qemu with **-serial
+        /dev/XX/XX** where the serial device is the output of **tty**
         command in the terminal. In that case you get graphical screen
         and read-only serial output
 
@@ -143,7 +143,7 @@ qemu-system-x86_64 -m 512 -hda sel4_test.img --enable-kvm -smp 2
 -cpu Nehalem,+vmx -serial /dev/pts/3 -vga std
 ```
 
-Where the '''-vga std''' option ''should'' pass the frame buffer to the
+Where the **-vga std** option ''should'' pass the frame buffer to the
 qemu VM. Having Linux in seL4 VM print something on the screen (like a
 login prompt) is still under development though.
 
@@ -164,7 +164,7 @@ qemu-img create -f qcow2 linux.img 3G qemu-system-x86_64 -m 256
 We used
 [Ubuntu Minimal](https://help.ubuntu.com/community/Installation/MinimalCD) as the ISO.
 
-Once you get your Linux system installed, you can type '''lspci''', you
+Once you get your Linux system installed, you can type **lspci**, you
 should see something like this:
 
 {{[attachment:qemu_vga.png|VGA|width=100%](attachment:qemu_vga.png%7CVGA%7Cwidth=100%)}}

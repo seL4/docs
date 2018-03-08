@@ -30,7 +30,7 @@ U-boot no longer disables caches.
 
 In order to obtain a U-boot binary that disables caching, you can either
 compile U-Boot from source yourself, or you can
-'''[use this prebuilt U-Boot binary image which already works](https://sel4.systems/Info/Docs/u-boot-working-rpi3-32bit-v2017.11.bin)'''.
+**[use this prebuilt U-Boot binary image which already works](https://sel4.systems/Info/Docs/u-boot-working-rpi3-32bit-v2017.11.bin)**.
 
 If you choose to build your own U-boot, then clone U-boot from upstream,
 then revert commit 995eab8b5b580b67394312b1621c60a71042cd18, and then

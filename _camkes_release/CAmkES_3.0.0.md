@@ -33,7 +33,7 @@ revision="refs/tags/camkes-3.0.0">
 ```
 
 Watch the mailing list for new releases, and update your version of
-CAmkES when '''you''' want to.
+CAmkES when **you** want to.
 
 ### I was using the "next" branch, and want to stay on the bleeding edge
 

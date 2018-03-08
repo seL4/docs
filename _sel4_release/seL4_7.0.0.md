@@ -22,11 +22,11 @@ with the following changes:
     -   Default NUM_DOMAINS set to 16 for x86-64 standalone builds in
         baa9798f793
     -   libsel4: Return seL4_Error in invocation stubs in 8fb06eecff9
-        ''' This is a source code level breaking change '''
+        ** This is a source code level breaking change **
     -   Add a CMake based build system in 0b73072016e
     -   x86: Increase TCB size for debug builds in 4c8be8f4f91
     -   libsel4: x86: Remove nested struct declarations in a8d6315eb16
-        ''' This is a source code level breaking change '''
+        ** This is a source code level breaking change **
     -   Bugfix: x86: Unmap pages when delete non final frame caps in
         08b9265563a
 

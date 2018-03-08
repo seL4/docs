@@ -10,8 +10,8 @@ the ones for your system.
 
 <<Anchor(allrpm)>> == All RPM-Based Systems == === The
 Basics === To get a usable build system, install the Development Tools
-group, '''which, ncurses-devel''' and the '''python-tempita'''
-templating library. You can also install '''ccache''' to speed second
+group, **which, ncurses-devel** and the **python-tempita**
+templating library. You can also install **ccache** to speed second
 and subsequent compilations.
 ```
 
@@ -37,7 +37,7 @@ the EPEL repository to be able to install Haskell.
 
 <<Anchor(fedora)>> == Fedora == To build for any of the ARM
 targets you need an arm cross compiler; to run on the simulator you need
-'''qemu'''
+**qemu**
 ```
 
 :   yum install 'arm-none-\*' qemu

@@ -49,7 +49,7 @@ daunting part of making this app will be switching to the RT kernel,
 which has a different api from the master kernel, and hoping the world
 doesn't break.
 
-Oh, and we won't be using the '''actual''' rt branch, but a bleeding
+Oh, and we won't be using the **actual** rt branch, but a bleeding
 edge variant of Anna's fork of seL4.
 ```
 cd kernel git remote add alyons

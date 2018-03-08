@@ -27,8 +27,8 @@ rust and runs it on qemu. It assumes that rust is installed correctly.
 
 Note: the last rust nightly version this was specifically tested on is:
 nightly-2016-06-01. Since then, the build-system and structure of the
-upstream Rust compiler has changed, and '''is no longer compatible with
-our Rust infrastructure'''. Please continue to use this older nightly
+upstream Rust compiler has changed, and **is no longer compatible with
+our Rust infrastructure**. Please continue to use this older nightly
 version until the project has been updated on our end, in the near
 future.
 ||\# This just gets all of the sources<<BR>>repo init -u https://github.com/SEL4PROJ/rust-camkes-samples.git <<BR>>repo sync  <<BR>>\# Configuration for arm kzm (so we can use qemu)<<BR>>\# helloworld app: make rust-helloworld-kzm_defconfig<<BR>>\# keyvalue app: make rust-keyvalue-kzm_defconfig<<BR>>make rust-helloworld-kzm_defconfig<<BR>>\# Build and run on qemu<<BR>>make qemu-arm||

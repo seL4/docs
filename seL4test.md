@@ -58,11 +58,11 @@ universe message that indicates the test suite has passed, type
 ### Useful configuration options
  For cross compilation (targeting
 ARM), you can set the cross compiler triple. This will typically be
-'''arm-linux-gnueabi-''' or '''arm-none-eabi-'''. Do
+**arm-linux-gnueabi-** or **arm-none-eabi-**. Do
 ```make
 menuconfig
 ```
-and look for '''toolchain-options'''
+and look for **toolchain-options**
 
 Some of the default configurations specify a particular x86 compiler. It
 is usually safe to set the triple to the empty string when building for
@@ -74,11 +74,11 @@ systems that will either not compile, or not run.
 ### Caveats
  ==== kzm simulation hangs ==== qemu does not simulate
 all the timers needed for a full sel4 test run. Use the
-'''kzm_simulation_configurations''' to avoid tests that rely on
+**kzm_simulation_configurations** to avoid tests that rely on
 unimplemented timers.
 
 #### arm-none-eabi
- If you use '''arm-none-eabi''' compilers, the
+ If you use **arm-none-eabi** compilers, the
 prebuilt libraries will fail to link, with a message something like
 ```
 /usr/lib64/gcc/arm-none-eabi/4.8.1/../../../../arm-none-eabi/bin/ld:
@@ -103,7 +103,7 @@ library. You can either tweak the flags (in
 ```
 : add
 ```-mfloat-abi=soft` to
-'''NK_CFLAGS''') or disable the use of the prebuilt libraries as above.
+**NK_CFLAGS**) or disable the use of the prebuilt libraries as above.
 
 ## Run on Real Hardware
 

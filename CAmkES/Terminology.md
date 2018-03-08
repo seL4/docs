@@ -283,22 +283,22 @@ assembly {
 }
 =
 
-  -   thing is a '''procedure'''
-  -   int is a '''type'''
-  -   func is a '''method'''
-  -   in is a '''direction'''
-  -   x is a '''parameter'''
-  -   sig is an '''event'''
-  -   buffer is a '''port'''
-  -   foo and bar are '''component'''s
-  -   t1 is a '''uses'''
-  -   s1 is a '''emits'''
-  -   b1 and b2 are '''dataport'''s
-  -   t2 is a '''provides'''
-  -   s2 is a '''consumes'''
-  -   assembly { ... } is an '''assembly'''
-  -   composition { ... } is a '''composition'''
-  -   f and b are '''instance'''s
-  -   RPC, Notification and SharedData are '''connector'''s
-  -   c1, c2 and c3 are '''connection'''s
+  -   thing is a **procedure**
+  -   int is a **type**
+  -   func is a **method**
+  -   in is a **direction**
+  -   x is a **parameter**
+  -   sig is an **event**
+  -   buffer is a **port**
+  -   foo and bar are **component**s
+  -   t1 is a **uses**
+  -   s1 is a **emits**
+  -   b1 and b2 are **dataport**s
+  -   t2 is a **provides**
+  -   s2 is a **consumes**
+  -   assembly { ... } is an **assembly**
+  -   composition { ... } is a **composition**
+  -   f and b are **instance**s
+  -   RPC, Notification and SharedData are **connector**s
+  -   c1, c2 and c3 are **connection**s
 

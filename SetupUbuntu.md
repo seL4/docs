@@ -5,8 +5,8 @@ toc: true
 
 ## Cross compiler toolchain summary
  This page doesn't detail the
-build dependencies for SEL4. It details how to go about getting '''cross
-compilers''', and assumes you're trying to build SEL4 on an x86 machine.
+build dependencies for SEL4. It details how to go about getting **cross
+compilers**, and assumes you're trying to build SEL4 on an x86 machine.
 
 Both SEL4 and CAmkES require these steps. After completing the steps on
 this page, go to the respective build instructions page for the project
@@ -47,11 +47,11 @@ For Ubuntu, first follow the instructions that are common to all Debian-based di
  === Instructions common to Debian and all Debian
 derivatives [Ubuntu, etc] === <<Anchor(all)>>
 
-To get a usable build system, install '''build-essential, realpath,
-libxml2-utils''' and '''python-tempita'''. For cross compiling on a
-64-bit host, you also need '''gcc-multilib'''; to run things on a
-simulator you need '''qemu; ccache''' speeds up builds after the first;
-and '''ncurses-dev''' is needed to run the configurator.
+To get a usable build system, install **build-essential, realpath,
+libxml2-utils** and **python-tempita**. For cross compiling on a
+64-bit host, you also need **gcc-multilib**; to run things on a
+simulator you need **qemu; ccache** speeds up builds after the first;
+and **ncurses-dev** is needed to run the configurator.
 ```
 
 :   sudo apt-get update sudo apt-get install build-essential realpath
@@ -83,13 +83,13 @@ source:
 :   git clone <git://git.qemu.org/qemu.git> sudo apt-get build-dep qemu
     cd qemu ./configure --target-list=arm-softmmu make -j
 ```
-The resulting qemu binary is in '''arm-softmmu/qemu-system-arm'''
+The resulting qemu binary is in **arm-softmmu/qemu-system-arm**
 
 #### Debian Jessie or later
  <<Anchor(jessie)>>
 
 Jessie and following have multiarch support. To cross-build for ARM, add
-'''armhf''' as an architecture, and install the cross compiler:
+**armhf** as an architecture, and install the cross compiler:
 ```
 
 :   sudo dpkg --add-architecture armhf sudo apt-get update sudo apt-get

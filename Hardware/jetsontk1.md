@@ -71,8 +71,8 @@ Then, let's start the program.
 Warning: This flashing procedure is for the Jetson TK1 by NVIDIA. There
 is another TK1 board called the TK1-SOM by Colorado Engineering which
 requires a different flashing procedure. Please be sure you're following
-these instructions if you are truly trying to flash a '''Jetson''' and
-not the '''TK1-SOM'''. If you are trying to flash a TK1-SOM, please
+these instructions if you are truly trying to flash a **Jetson** and
+not the **TK1-SOM**. If you are trying to flash a TK1-SOM, please
 [use the
 procedure described here instead](https://wiki.sel4.systems/Hardware/CEI_TK1_SOM#U-Boot).
 

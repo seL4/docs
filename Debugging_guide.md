@@ -271,7 +271,7 @@ application. This can be used to lookup the instruction where a fault
 occurred. Make sure -g is passed to the compiler so that debug
 information is included in the image.
 
-For ARM, supposing that '''arm-none-eabi-''' is used as the
+For ARM, supposing that **arm-none-eabi-** is used as the
 cross-compiler prefix.
 ```
 \#!highlight bash numbers=off

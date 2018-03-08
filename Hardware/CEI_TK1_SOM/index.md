@@ -56,8 +56,8 @@ are also valid for booting from MMC.
 
 ## Serial Connection
  The serial port is at 1V8 levels on J8, as
-follows: (pin one is farthest from the ground hole) ||'''Pin'''
-||'''Function''' ||'''Direction''' || ||1 ||Rx ||In || ||2 ||Tx ||Out ||
+follows: (pin one is farthest from the ground hole) ||**Pin**
+||**Function** ||**Direction** || ||1 ||Rx ||In || ||2 ||Tx ||Out ||
 ||3 ||CTS ||In || ||4 ||RTS ||Out ||
 
 There is no ground connection. There is however an unpopulated hole next

@@ -155,8 +155,8 @@ reboot the Sabrelite
 ```
 = Booting seL4 applications = This assumes that
 the U-Boot version above is installed in SPI flash.
-||<tablewidth="822px" tableheight="105px">'''Command'''
-||'''Operation''' || ||run bootsel4_mmc ||Scans through the SD card and
+||<tablewidth="822px" tableheight="105px">**Command**
+||**Operation** || ||run bootsel4_mmc ||Scans through the SD card and
 their partitions looking for an elf file named "sel4-image" in the root
 directory. This file will be loaded and executed. || ||run bootsel4_net
 ||Performs a DHCP request followed by a TFTPBoot request and attempts to

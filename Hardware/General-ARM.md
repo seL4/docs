@@ -22,7 +22,7 @@ file using objcopy.
 
 The address to use varies from board to board. Unless you change the
 load address, use these: ||<tablewidth="534px"
-tableheight="105px">'''Platform''' ||'''Address''' || ||Arndale,
+tableheight="105px">**Platform** ||**Address** || ||Arndale,
 Odroid-X, Odroid-XU ||0x48000000 || ||Sabre Lite ||0x30000000 ||
 ||Panda, Panda ES ||0x80000000 ||
 

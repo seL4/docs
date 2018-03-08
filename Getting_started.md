@@ -15,7 +15,7 @@ tutorials, and successfully follow the seL4 tutorials.
 
 It's introductory – after you've followed these steps, you'll be at the
 crest point where you can confidently begin reading the seL4 API kernel
-manual with a '''functional''' copy of the kernel on your own machine.
+manual with a **functional** copy of the kernel on your own machine.
 From that point, the guidance for what you should do with the functional
 source copy that you have will come from your own intuition, interest
 and hopefully, inspiration that seL4 gives you.
@@ -192,7 +192,7 @@ and wanting to first at least understand how to build it, so that you
 can get comfortable with editing the source code, the following pre-init
 steps might help you get more context, before you try building, so you
 have at least a conceptual understanding of exactly what sort of
-creature you're about to step into the arena with. These are '''not'''
+creature you're about to step into the arena with. These are **not**
 pre-requisites for building the kernel, but they will help you a lot in
 understanding what you're dealing with.
 

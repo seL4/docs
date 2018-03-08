@@ -50,7 +50,7 @@ enumerating child devices must also generate a unique addressing name
 for each of the children. This name does not need to be globally unique,
 but it is expected to be unique with respect to all of that child
 device's siblings. This addressing name must target the device by its
-'''location''' relative to its parent bus technology.
+**location** relative to its parent bus technology.
 
 This persistent name must always uniquely identify the same device
 microcontroller relative to its parent's bus technology. For example, if
@@ -100,7 +100,7 @@ disappear.
 The environment should begin an enumeration sequence by calling
 seL4drv_mgmt_enumerate_get_num_children() on the target device
 instance, in order to ask the driver to tell it how many child devices
-it '''currently''' has. The parent driver shall report '''all''' such
+it **currently** has. The parent driver shall report **all** such
 child devices, regardless of whether or not they are powered on. All
 devices which are operationally viable and functional should be reported
 to the environment. By implication, faulty or malfunctioning devices, if
@@ -134,7 +134,7 @@ When the environment finally gets such a callback, it shall simply
 refresh its information about the children of the target device, by once
 again calling seL4drv_mgmt_enumerate_get_num_children(), and doing
 a re-run of seL4drv_mgmt_enumerate_children(). The environment can
-then compare the '''Child IDs''' of the newly returned list of devices
+then compare the **Child IDs** of the newly returned list of devices
 with those that it previously had in its device tree, and perform an
 update of its device tree.
 
@@ -194,9 +194,9 @@ integer which states whether or not the driver can handle the device
 that is described by those attributes.
 
 If the driver determines that the passed attributes do not describe a
-device that it can manage, the driver '''shall''' return integer 0
+device that it can manage, the driver **shall** return integer 0
 (zero). If the driver determines that the passed attributes describe a
-device that it is equipped to handle, it '''shall''' return a positive
+device that it is equipped to handle, it **shall** return a positive
 integer 1.
 
 ''It is recommended that drivers which return a value greater than 0

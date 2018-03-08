@@ -65,8 +65,8 @@ oldconfig
 already built — the build system does not track as many dependencies as
 it ought to. === Useful configuration options === For cross compilation
 (targeting ARM), you can set the cross compiler triple. This will
-typically be '''arm-linux-gnueabi-''' or '''arm-none-eabi-'''. Do
-`make menuconfig` and look for '''toolchain-options'''
+typically be **arm-linux-gnueabi-** or **arm-none-eabi-**. Do
+`make menuconfig` and look for **toolchain-options**
 
 Some of the default configurations specify a particular x86 compiler. It
 is usually safe to set the triple to the empty string when building for

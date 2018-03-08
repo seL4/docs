@@ -146,7 +146,7 @@ to the root of your thread's VSpace.
 In order to manage the threads that are created in seL4, the seL4 kernel
 keeps track of TCB (Thread Control Block) objects. Each of these
 represents a schedulable executable resource. Unlike other contemporary
-kernels, seL4 '''doesn't''' allocate a stack, virtual-address space
+kernels, seL4 **doesn't** allocate a stack, virtual-address space
 (VSpace) and other metadata on your behalf. This step creates a TCB,
 which is a very bare-bones, primitive resource, which requires you to
 still manually fill it out.

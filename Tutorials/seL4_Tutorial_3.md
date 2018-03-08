@@ -40,8 +40,8 @@ they were covered by a previous tutorial in the series.
     -   Understand CSpace pointers, which are really just integers with
         multiple indexes concatenated into one. Understanding them well
         however, is important to understanding how capabilities work. Be
-        sure you understand the diagram on the "'''CSpace example and
-        addressing'''" slide.
+        sure you understand the diagram on the "**CSpace example and
+        addressing**" slide.
 
 ## Tasks
 
@@ -151,7 +151,7 @@ data sent by each of its IPC partners? Each sender must "badge" its
 capability to its target's endpoint.
 
 Note the distinction: the badge is not applied to the target endpoint,
-but to the sender's '''capability''' to the target endpoint. This
+but to the sender's **capability** to the target endpoint. This
 enables the listening thread to mint off copies of a capability to an
 Endpoint to multiple senders. Each sender is responsible for applying a
 unique badge value to the capability that the listener gave it so that
@@ -178,7 +178,7 @@ correct, because they do. They are operating directly on the sending
 thread's IPC buffer. Recall that each thread has only one IPC buffer. Go
 back and look at your call to seL4_TCB_Configure() in step 7 again:
 you set the IPC buffer for the new thread in the last 2 arguments to
-this function. Likewise, the thread that created '''your''' main thread
+this function. Likewise, the thread that created **your** main thread
 also set an IPC buffer up for you.
 
 So seL4_SetMR() and seL4_GetMR() simply write to and read from the IPC
@@ -211,7 +211,7 @@ other end of an IPC Endpoint.
 When you send your badged data using seL4_Call(), our receiving thread
 (which we created earlier) will pick up the data, see the badge, and
 know that it was us who sent the data. Notice how the sending thread
-uses the '''badged''' capability to the endpoint object, and the
+uses the **badged** capability to the endpoint object, and the
 receiving thread uses the unmodified original capability to the same
 endpoint? The sender must identify itself.
 

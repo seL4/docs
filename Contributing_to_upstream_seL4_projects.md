@@ -48,7 +48,7 @@ similar to:
 ''“repo init -u <MANIFEST_REPO_CLONE_URL> -m
 <VERSIONED_MANIFEST_FILENAME>”''
 
-Code being on the master branch '''does not imply''' that it has been
+Code being on the master branch **does not imply** that it has been
 formally verified. The verified build of the kernel is currently I.MX7
 Sabre platform on ARM. To see which code is verified, please have a look
 at [our verified
@@ -59,8 +59,8 @@ platforms](https://wiki.sel4.systems/Hardware).
 
 The story is different for most user-level code. While we are working on
 verifying some of this, and are likely to adopt a similar model as for
-the kernel for such components, most user-level code is '''not likely to
-be verified in the foreseeable future'''. Many of the user-level
+the kernel for such components, most user-level code is **not likely to
+be verified in the foreseeable future**. Many of the user-level
 components are suitable for a truly open development model, and we will
 be happy to hand control to a suitable external maintainer for many of
 those. Our priority is on building an ecosystem and easing deployment of

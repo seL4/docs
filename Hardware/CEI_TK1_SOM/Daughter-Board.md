@@ -1,9 +1,9 @@
 # The TK1-SOM Daughterboard
  The TK1-SOM Daughterboard is an
 open-hardware daughterboard designed by the Trustworthy Systems group at
-Data61/CSIRO, that can be mounted to the TK1-SOM. It provides '''CAN
-buses''', '''serial''','''sensors''', '''power management''', '''PWM
-outputs''' and other features that allow the TK1-SOM to be used as a
+Data61/CSIRO, that can be mounted to the TK1-SOM. It provides **CAN
+buses**, **serial**,**sensors**, **power management**, **PWM
+outputs** and other features that allow the TK1-SOM to be used as a
 flight controller for a quadcopter.
 
 ### Warning
@@ -51,7 +51,7 @@ and a daughterboard to a functioning system requires:
   -   [Attaching the CAN bus cable](\#attach_can)
   -   [Attaching the telemetry cable](\#attach_telem)
   -   [Connecting the power harness](\#connect_power)
-  -   [[\#connect_battery_psu|Connecting the battery '''OR'''
+  -   [[\#connect_battery_psu|Connecting the battery **OR**
       Connecting the external PSU]]
 
 <<Anchor(mount_tk1)>>
@@ -117,7 +117,7 @@ end up with:
 
 {{<attachment:jumpered.jpg%7CUARTs> jumpered|width="50%"}}
 
-'''Note''': On this board, UART1 is connected to the RADIO output, the
+**Note**: On this board, UART1 is connected to the RADIO output, the
 FTDI port, and the activity LEDs. UART2 is connected to the GPS output.
 It is possible to swap these at the TK1 input side without consequence
 (this would put the kernel dump through the GPS output, and UART2

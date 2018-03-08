@@ -23,8 +23,8 @@ or in some other form. We also link to where it can be found.
 ## Device Drivers
 
 
-|| '''description''' || '''platform''' || '''type''' || '''location'''
-|| ''' comment''' || || CAN (MCP2515) || N/A || component || || || ||
+|| **description** || **platform** || **type** || **location**
+|| ** comment** || || CAN (MCP2515) || N/A || component || || || ||
 Ethernet (e1000) || x86 || library || || || || Ethernet (...) ||
 Sabre-Lite || library || || || || MMC (...) || Obroid-XU || component?
 || || || || I2C (...) || Odroid-XU || component || || || || SD (...) ||
@@ -40,7 +40,7 @@ library || || || || UART (...) || TK1 || library || || || || USB (...)
 ## Other Libraries and Components
 
 
-|| '''description''' || ''platform''' || '''type''' ||'''location''' ||
+|| **description** || ''platform** || **type** ||**location** ||
 || TCP/IP (LwIP) || x86 || library || || || TCP/IP (picoTCP) || x86 ||
 library || || || UDP Server (LwIP) || x86 || component || || || UDP
 Server (picoTCP) || x86 || component || || VMM & VM || x86 || library,

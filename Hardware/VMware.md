@@ -39,14 +39,14 @@ guest type.
 
 There are three options for the serial port
 
-:   1.  '''Output to a text file''' (easiest but output only). The VM
+:   1.  **Output to a text file** (easiest but output only). The VM
         will dump its serial output to a text file when it runs, and you
         can simply go less -F <file>.
-    2.  '''Use physical serial port''' (best but requires serial cable +
+    2.  **Use physical serial port** (best but requires serial cable +
         another machine to minicom/picocom off it). Set it to /dev/ttyS0
         or something.
 
-    1\. '''Output to a socket''' (allows input/output but annoying to
+    1\. **Output to a socket** (allows input/output but annoying to
     set up). You'll want to apt-get install socat and then run something
     like:
 ```\#!highlight bash numbers=off \#!/bin/bash while true; do socat
@@ -77,14 +77,14 @@ Live CD image.
 ### Add GRUB2 Option To Run seL4
 
 
-Now we want to edit its '''grub.cfg''' (usually in /grub2 or /boot/grub
+Now we want to edit its **grub.cfg** (usually in /grub2 or /boot/grub
 or something like that) somehow and modify it to boot our seL4 kernel +
 userland binary.
 
 Simplest method is to simply use VMWare player to boot into the guest OS
 you just installed, and then edit the grub.cfg from the guest OS itself.
 
-Another method is to use '''vmware-mount''':
+Another method is to use **vmware-mount**:
 ```
 \#!highlight bash numbers=off \# Usage: vmware-mount diskPath
 [partition num] mountPoint mkdir /tmp/vmount vmware-mount
@@ -103,13 +103,13 @@ root='(hd0,msdos1)' search --no-floppy --fs-uuid --set=root
 /sel4-image-ia32-pc99 }
 ```
 
-Of course, change the '''--set=root <DeviceID>''' line to your
+Of course, change the **--set=root <DeviceID>** line to your
 DeviceID (set the DeviceID from other entries already in your grub.cfg),
-and also change the '''sel4-image-ia32-pc99''' to match the name of your
+and also change the **sel4-image-ia32-pc99** to match the name of your
 binary image that your Make produces (look in your build logs or in
 images/ folder).
 
-Also may be a good idea to add '''set default=<seL4 menu index>'''
+Also may be a good idea to add **set default=<seL4 menu index>**
 to the grub.cfg, so grub is configured to boot seL4.
 
 ## Using The VM to run seL4
