@@ -15,16 +15,16 @@ When debugging the kernel, make sure CONFIG_DEBUG and CONFIG_PRINTING
 are enabled. This can be done by make menuconfig and enabling the
 following options:
 
-  -   seL4 Kernel -> Build Options -> Enable debug facilities
-  -   seL4 Kernel -> Build Options -> Enable kernel printing.
+- seL4 Kernel -> Build Options -> Enable debug facilities
+- seL4 Kernel -> Build Options -> Enable kernel printing.
 
 This will turn on some helpful features for debugging the kernel
 including:
 
-  -   printf + a serial driver,
-  -   -g is passed to the compiler,
-  -   compile- and run-time asserts,
-  -   the kernel will print out error messages when invocations fail.
+- printf + a serial driver,
+- -g is passed to the compiler,
+- compile- and run-time asserts,
+- the kernel will print out error messages when invocations fail.
 
 ### User
 
@@ -34,7 +34,7 @@ CONFIG_USER_DEBUG
 
 Similarly, enable this setting by using make menuconfig and setting:
 
-  -   Toolchain options -> build user level with assertions, -g and
+- Toolchain options -> build user level with assertions, -g and
       debugging messages
 
 ## Qemu
@@ -50,8 +50,8 @@ alternative than to debug on real hardware.
 
 There are two main Qemu binaries that are relevant for seL4 development:
 
-  -   qemu-system-arm - qemu for ARM
-  -   qemu-system-i386 - qemu for x86
+- qemu-system-arm - qemu for ARM
+- qemu-system-i386 - qemu for x86
 
 After compiling a seL4 project, you can use one of these to simulate
 execution of the resulting binaries. For example, after compiling
@@ -314,9 +314,9 @@ tests themselves:
 seL4 does not currently have a kernel debugger. As a result, most of our
 debugging is done with:
 
-  -   objdump as described above,
-  -   printf,
-  -   \__builtin_return_address (to figure out stack traces).
+- objdump as described above,
+- printf,
+- \__builtin_return_address (to figure out stack traces).
 
 In the kernel, we provide debug_printKernelEntryReason found in
 [debug.h](https://github.com/seL4/seL4/blob/master/include/api/debug.h)

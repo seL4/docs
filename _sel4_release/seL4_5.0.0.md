@@ -34,7 +34,7 @@ arm specific changes:
 # Upgrade notes
 
 
-  -   This release breaks both API and ABI and is not source compatible
+- This release breaks both API and ABI and is not source compatible
       with the earlier versions.
 
 # Full changelog

@@ -6,10 +6,10 @@ toc: true
 The second tutorial is useful in that
 it addresses conceptual problems for two different types of developers:
 
-  -   Experienced kernel developers whose minds are pre-programmed to
+- Experienced kernel developers whose minds are pre-programmed to
       think in terms of "One address space equals one process", and
       begins to introduce the seL4 CSpace vs VSpace model.
-  -   New kernel developers, for whom the tutorial will prompt them on
+- New kernel developers, for whom the tutorial will prompt them on
       what to read about.
 
 Don't gloss over the globals declared before main() -- they're declared
@@ -225,14 +225,14 @@ kernel successfully, we cause it to print something to the screen.
 ## Globals links
 
 
-  -   \`sel4_BootInfo\`:
+- \`sel4_BootInfo\`:
       <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
-  -   \`simple_t\`:
+- \`simple_t\`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
-  -   \`vka_t\`:
+- \`vka_t\`:
       <https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h>
-  -   \`allocman_t\`:
+- \`allocman_t\`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h>
-  -   \`name_thread()\`:
+- \`name_thread()\`:
       <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-2/src/util.c>
 

@@ -13,10 +13,10 @@ title: camkes-2.2.0
   :   -   For more details, see the
           [Realtime Extensions section of the CAmkES Manual](https://github.com/seL4/camkes-tool/blob/master/docs/index.md#realtime-extensions).
  
-  -   support for seL4 3.1.0
+- support for seL4 3.1.0
 
 ## Documentation Additions
 
 
-  -   "Keywords" section in manual
+- "Keywords" section in manual
 

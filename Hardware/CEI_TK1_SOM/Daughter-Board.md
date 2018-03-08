@@ -44,14 +44,14 @@ with TK1|width="100%"}}
  Going from a TK1-SOM, a pixhawk/IRIS
 and a daughterboard to a functioning system requires:
 
-  -   [Mounting the TK1 to the daughterboard](\#mount_tk1)
-  -   [Jumpering the UART level translators](\#jumper_uart)
-  -   [Jumpering the RESET button](\#jumper_reset)
-  -   [Attaching the pixhawk power cable](\#attach_pix_pwr)
-  -   [Attaching the CAN bus cable](\#attach_can)
-  -   [Attaching the telemetry cable](\#attach_telem)
-  -   [Connecting the power harness](\#connect_power)
-  -   [[\#connect_battery_psu|Connecting the battery **OR**
+- [Mounting the TK1 to the daughterboard](\#mount_tk1)
+- [Jumpering the UART level translators](\#jumper_uart)
+- [Jumpering the RESET button](\#jumper_reset)
+- [Attaching the pixhawk power cable](\#attach_pix_pwr)
+- [Attaching the CAN bus cable](\#attach_can)
+- [Attaching the telemetry cable](\#attach_telem)
+- [Connecting the power harness](\#connect_power)
+- [[\#connect_battery_psu|Connecting the battery **OR**
       Connecting the external PSU]]
 
 <<Anchor(mount_tk1)>>
@@ -63,10 +63,10 @@ This will involve:
 
 <<Anchor(disassemble_tk1)>>
 
-  -   Removing the fan screw
-  -   Unscrewing the standoffs
-  -   Separating the 2 module 'halves'
-  -   Removing the fan connector
+- Removing the fan screw
+- Unscrewing the standoffs
+- Separating the 2 module 'halves'
+- Removing the fan connector
 
 This must be done with care as it is easy to damage the TK1. Your goal
 is this:
@@ -225,8 +225,8 @@ want:
  There are 2 ways of
 powering up the daughterboard and pixhawk:
 
-  -   1: Using the TK1-SOM's ordinary power supply (for testing)
-  -   2: Using the LIPO battery on the quadcopter (for demoing)
+- 1: Using the TK1-SOM's ordinary power supply (for testing)
+- 2: Using the LIPO battery on the quadcopter (for demoing)
 
 The only difference from a functional point of view is that option 1
 will only power the pixhawk, daughterboard, and TK1-SOM; not the rest of
@@ -271,9 +271,9 @@ connected|width="70%"}}
  To use an 'ordinary' 1V8
 converter and debug things, you will likely want to:
 
-  -   Connect the 1V8 converter to the primary UART on the TK1 (on
+- Connect the 1V8 converter to the primary UART on the TK1 (on
       the top) for kernel messages
-  -   Swap UART1 with UART2 into the daughterboard, making the secondary
+- Swap UART1 with UART2 into the daughterboard, making the secondary
       UART go through telemetry. (i.e connect UART2 (TK1) to
       UART1 (Daughterboard) to get the secondary UART through telem)
 

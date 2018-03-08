@@ -38,28 +38,28 @@ future.
 [CAmkES](SetupUbuntu|seL4]] dependencies and [[CAmkES)
 dependencies, the following dependencies are required:
 
-  -   cargo and rustc: These are the rust build tool and compiler, they
+- cargo and rustc: These are the rust build tool and compiler, they
       should be installed with
       [multirust](https://github.com/brson/multirust)
       ([rustup.rs](https://www.rustup.rs/) is still in beta,
       and the build system has only been tested with multirust but
       rustup.sh should still be fine as long as rustc and cargo work)
-  -   Cmake >= 3.5.2
+- Cmake >= 3.5.2
 
 The following features also require extra dependencies, however the
 particular features are not required to build applications that don't
 use the features:
 
-  -   libclang: A dependency of rust-bindgen to generate rust bindings
+- libclang: A dependency of rust-bindgen to generate rust bindings
       from C header files.
-  -   linux-libc-dev:i386: Provides glibc headers for building libstd
+- linux-libc-dev:i386: Provides glibc headers for building libstd
       on x86.
 
 ### Build overview:
  Two features have been added to the seL4 build
 system (seL4_tools):
 
-  -   The ability to use cargo projects as libraries or apps with other
+- The ability to use cargo projects as libraries or apps with other
       C based libraries or apps on seL4. The cargo project just needs to
       have a staticlib crate-type. To use rust projects as libraries
       that can be used by other C libraries or apps, the make file just
@@ -74,7 +74,7 @@ lib name.
 For a non camkes application, to use a cargo project in an app then the
 settings are the same as for a library: RUST_TARGET := libcratename.a.
 
-  -   The second feature of the build system, is that it cross compiles
+- The second feature of the build system, is that it cross compiles
       the core rust libraries for the the target architecture. Currently
       it builds std and all required libraries. Most of std won't work
       (things that rely on muslc syscalls that are not supported

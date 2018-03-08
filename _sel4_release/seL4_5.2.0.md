@@ -22,7 +22,7 @@ x86 specific changes:
 # Upgrade notes
 
 
-  -   This release potentially breaks ABI with the earlier versions if
+- This release potentially breaks ABI with the earlier versions if
       using benchmarking kernel configurations.
 
 # Full changelog

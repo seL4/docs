@@ -13,9 +13,9 @@ Linux kernel version > 3.2
  Open minicom on /dev/ttyUSB\* and set the
 serial port settings to: 115200N1
 
-  -   115200bps
-  -   parity-none
-  -   1 stop bit
+- 115200bps
+- parity-none
+- 1 stop bit
 
 ##### udev
  You may also like to set up a udev rule for Fastboot:

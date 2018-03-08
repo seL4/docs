@@ -62,7 +62,7 @@ For more details, see the 2.0.0 manual
 # Implementation improvements
 
 
-  -   introduces the bitfield scheduler: faster scheduler (Was linear in
+- introduces the bitfield scheduler: faster scheduler (Was linear in
       the
 
 number of runnable threads, now log n)
@@ -81,14 +81,14 @@ release build
 # API Changes
 
 
-  -   `seL4_Recv
+- `seL4_Recv
 ```
 replaces
 ```seL4_Wait` on endpoints
-  -   `seL4_Wait` is now only used on notification objects
-  -   Async endpoint -> notification object
-  -   sync endpoint -> endpoint
-  -   `seL4_Recv` on an endpoint may now return signals sent to a
+- `seL4_Wait` is now only used on notification objects
+- Async endpoint -> notification object
+- sync endpoint -> endpoint
+- `seL4_Recv` on an endpoint may now return signals sent to a
       thread's
 
 bound notification object.
@@ -96,17 +96,17 @@ bound notification object.
 ## API Additions
 
 
-  -   `seL4_NotificationObject` replaces deprecated
+- `seL4_NotificationObject` replaces deprecated
       `seL4_AsyncEndpointObject`
-  -   `seL4_NotificationBits` size in bits of a notification object
-  -   `seL4_IRQHandler_SetNotification` replaces deprecated
+- `seL4_NotificationBits` size in bits of a notification object
+- `seL4_IRQHandler_SetNotification` replaces deprecated
       `seL4_IRQHandler_SetEndpoint`
-  -   `seL4_Recv
+- `seL4_Recv
 ```
 replaces
 ```seL4_Wait` for endpoints
-  -   `seL4_Wait` used on notifications
-  -   `seL4_NBRecv` non-blocking (polling) receive on an endpoint,
+- `seL4_Wait` used on notifications
+- `seL4_NBRecv` non-blocking (polling) receive on an endpoint,
       which fails
 
 if there is no message waiting. Opposite of `NBSend` (which silently
@@ -119,9 +119,9 @@ signals from a notification objects, returns zero if there are none \*
 ## Deprecations
 
 
-  -   `seL4_AsyncEndpointObject`
-  -   `seL4_Notify`
-  -   `seL4_IRQHandler_SetEndpoint`
+- `seL4_AsyncEndpointObject`
+- `seL4_Notify`
+- `seL4_IRQHandler_SetEndpoint`
 
 # Note on Syscall names
 

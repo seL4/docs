@@ -26,9 +26,9 @@ backwards compatible. Otherwise skip to the next Section.
 
 The necessary files are:
 
-  -   GCC 4.9 cross-toolchain for
+- GCC 4.9 cross-toolchain for
       Aarch64 (gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz)
-  -   GCC 4.9 cross-toolchain for
+- GCC 4.9 cross-toolchain for
       gnueabihf (gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz)
 ```
 \#!highlight bash numbers=off \#The files are obtainable from the
@@ -225,9 +225,9 @@ images/sel4test-driver-image-arm-hikey.bin
 ## 14. Modifications to firmware or UEFI
 
 
-  -   If the firmware is modified the whole process from and including
+- If the firmware is modified the whole process from and including
       Section 9 onward must be done.
-  -   If the UEFI loader is modified then only Section 9 and from
+- If the UEFI loader is modified then only Section 9 and from
       Section 11 onward need to be completed
 
 Other instructions can be viewed at

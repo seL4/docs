@@ -36,56 +36,56 @@ threads chapter.
 ## API Changes
 
 
-  -   seL4_TCB_Configure arguments changed (domain removed, scheduling
+- seL4_TCB_Configure arguments changed (domain removed, scheduling
       context cap and max priority added).
 
 ## API Additions
 
 
-  -   seL4_CapSchedControl - initial cap for control of CPU time
-  -   seL4_SchedContextObject - new object for that allows threads
+- seL4_CapSchedControl - initial cap for control of CPU time
+- seL4_SchedContextObject - new object for that allows threads
       access to CPU time
-  -   seL4_SchedContextBits - size in bits of a scheduling context
+- seL4_SchedContextBits - size in bits of a scheduling context
       object
-  -   seL4_NBSendRecv - new system call which allows once kernel
+- seL4_NBSendRecv - new system call which allows once kernel
       invocation to perform a non-blocking send on one capability, and
       wait on another.
-  -   seL4_NBSendRecvWithMRs - uses above new system call without
+- seL4_NBSendRecvWithMRs - uses above new system call without
       touching the IPC buffer, passing only data in registers
-  -   seL4_Time - type for specifying temporal units to the kernel
-  -   seL4_TCB_SetMaxPriority - set the max priority for a tcb,
+- seL4_Time - type for specifying temporal units to the kernel
+- seL4_TCB_SetMaxPriority - set the max priority for a tcb,
       threads can only start / set priorities threads up to and
       including their max priority
-  -   seL4_Prio_t - type for priority and max priority, used in
+- seL4_Prio_t - type for priority and max priority, used in
       TCB_Configure
-  -   seL4_CNode_SaveTCBCaller - save the reply cap of the target tcb.
+- seL4_CNode_SaveTCBCaller - save the reply cap of the target tcb.
       This allows another thread to reply on behalf of the owner of the
       reply cap.
-  -   seL4_SchedControl_Configure - invokes the scheduling control cap
+- seL4_SchedControl_Configure - invokes the scheduling control cap
       to populate a scheduling context with parameters
-  -   seL4_SchedContext_Yield - end the timeslice of the thread bound
+- seL4_SchedContext_Yield - end the timeslice of the thread bound
       to the sched context invoked.
-  -   seL4_SchedContext_BindTCB - bind a tcb to a scheduling context,
+- seL4_SchedContext_BindTCB - bind a tcb to a scheduling context,
       if the TCB is runnable and scheduling context has budget, this
       will start the tcb running
-  -   seL4_SchedContext_UnbindTCB - remove binding of a scheduling
+- seL4_SchedContext_UnbindTCB - remove binding of a scheduling
       context from a tcb, tcb will no longer run but state will be
       preserved
-  -   seL4_CapInitThreadSC - capability to the initial threads
+- seL4_CapInitThreadSC - capability to the initial threads
       scheduling context
-  -   seL4_CapSchedControl - scheduling control capability, which is
+- seL4_CapSchedControl - scheduling control capability, which is
       given to the root thread
-  -   seL4_SchedContext_BindNotification - Bind a notification to a
+- seL4_SchedContext_BindNotification - Bind a notification to a
       scheduling context. Passive threads waiting on this notification
       will borrow the scheduling context.
-  -   seL4_SchedContext_UnbindNotification - unbind the notification.
+- seL4_SchedContext_UnbindNotification - unbind the notification.
 
 ## API deletions
 
 
-  -   seL4_Yield (replaced by seL4_SchedContext_Yield)
-  -   seL4_DomainSet
-  -   Domain scheduler removed.
+- seL4_Yield (replaced by seL4_SchedContext_Yield)
+- seL4_DomainSet
+- Domain scheduler removed.
 
 ## Library & test compatability
 

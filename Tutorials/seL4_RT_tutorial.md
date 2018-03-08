@@ -19,11 +19,11 @@ page, if they were covered by a previous tutorial in the series.
 ## Learning outcomes
 
 
-  -   Obtain scheduling control capabilities.
-  -   Create and configure scheduling contexts.
-  -   Spawn round-robin and periodic threads.
-  -   Set up a passive server.
-  -   Set up clients to call the passive server using the immediate
+- Obtain scheduling control capabilities.
+- Create and configure scheduling contexts.
+- Spawn round-robin and periodic threads.
+- Set up a passive server.
+- Set up clients to call the passive server using the immediate
       priority ceiling protocol.
 
 ## Walkthrough

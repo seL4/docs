@@ -179,8 +179,7 @@ These are more complicated, as the C source code implementing the user-level obj
 There is a script in the sel4 repo for generating C header files from a
 given interface description:
 [libsel4/tools/syscall_stub_gen.py](https://github.com/seL4/seL4/blob/master/libsel4/tools/syscall_stub_gen.py).
-Note that despite its name, the script generates object invocation stubs
-- not syscall stubs.
+Note that despite its name, the script generates object invocation stubs - not syscall stubs.
 
 ### Documentation
 

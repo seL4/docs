@@ -9,7 +9,7 @@ toc: true
 of a project repository that are part of the build system (as opposed to
 code and tools related to the project):
 
-  -   **[.config](\#config)** - Your current
+- **[.config](\#config)** - Your current
       configuration (auto-generated)
  
   \* **apps/**
@@ -24,9 +24,9 @@ code and tools related to the project):
           -   **[Makefile](\#appsmyappmakefile)** - How to build
               Myapp
  
-  -   **configs/\*** - Pre-made configurations for the project
-  -   **[Kconfig](\#kconfig)** - Top-level menu
-  -   **kernel/Makefile** - How to build seL4
+- **configs/\*** - Pre-made configurations for the project
+- **[Kconfig](\#kconfig)** - Top-level menu
+- **kernel/Makefile** - How to build seL4
  
   \* libs/
  
@@ -40,8 +40,8 @@ code and tools related to the project):
           -   **[Makefile](\#libfoomakefile)** - How to build
               Libfoo
  
-  -   **[Makefile](\#makefile)** - Top-level build specialisation
-  -   **[Makefile.flags](\#makefileflags)** - Top-level build
+- **[Makefile](\#makefile)** - Top-level build specialisation
+- **[Makefile.flags](\#makefileflags)** - Top-level build
       tuning
  
   \* tools/common/

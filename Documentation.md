@@ -1,21 +1,21 @@
 # Documentation
  == Kernel ==
 
-  -   [[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml>||Technical
+- [[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml>||Technical
       overview paper]]
-  -   [[<https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml%7CL4>
+- [[<https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml%7CL4>
       Microkernels: The Lessons from 20 Years of Research and
       Deployment]], a retrospective explaining how we got to where we
       are;
-  -   [Getting started](../Getting started)
-  -   [NICTA seL4
+- [Getting started](../Getting started)
+- [NICTA seL4
       research project pages](http://ssrg.nicta.com.au/projects/seL4/)
-  -   [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and
+- [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and
       Microkernel Design lectures
-  -   [Release download page](https://github.com/seL4/seL4/releases/latest) for the current release.
-  -   [Manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
+- [Release download page](https://github.com/seL4/seL4/releases/latest) for the current release.
+- [Manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
       for the current release.
-  -   [[seL4ManualAPIGeneration|Explanation of how the API docs in the
+- [[seL4ManualAPIGeneration|Explanation of how the API docs in the
       manual are generated]]
 
 ### Building the manual for a specific version
@@ -32,10 +32,10 @@ will be produced in manual.pdf.
 ## Proofs
 
 
-  -   [Formal specification](http://sel4.systems/Info/Docs/seL4-spec.pdf)
-  -   [Git Repository and Build
+- [Formal specification](http://sel4.systems/Info/Docs/seL4-spec.pdf)
+- [Git Repository and Build
       instructions](http://github.com/seL4/l4v/)
-  -   [NICTA Trustworthy
+- [NICTA Trustworthy
       Systems research project pages](http://ssrg.nicta.com.au/projects/TS/)
  
   \* Isabelle Proof Assistant:

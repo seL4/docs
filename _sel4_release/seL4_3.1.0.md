@@ -5,17 +5,17 @@ title: seL4 3.1.0
 # Introducing seL4 3.1.0
 
 
-  -   Adds single-core support for HiKey cortex-a53 board, in 32 bit
+- Adds single-core support for HiKey cortex-a53 board, in 32 bit
       mode (non-verified). This is the first armv8 platform
       seL4 supports.
-  -   haskell kernel moved to verification repos (used to be in seL4
+- haskell kernel moved to verification repos (used to be in seL4
       repo, available here now:
       <https://github.com/seL4/l4v/tree/master/spec/haskell>
 
 # Implementation improvements
 
 
-  -   kernel now has debug feature which outputs part of the user stack
+- kernel now has debug feature which outputs part of the user stack
       on a double fault
 
 # API Changes
@@ -24,13 +24,13 @@ title: seL4 3.1.0
 ## API Additions
 
 
-  -   `X86PageDirectoryGetStatusBits` allows users to get the status
+- `X86PageDirectoryGetStatusBits` allows users to get the status
       bits of a virtual address mapping. This is not supported on PAE.
 
 # Upgrade notes
 
 
-  -   This release is source compatible.
+- This release is source compatible.
 
 # Full changelog
 

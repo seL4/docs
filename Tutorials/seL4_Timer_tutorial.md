@@ -15,9 +15,9 @@ page, if they were covered by a previous tutorial in the series.
 ## Learning outcomes
 
 
-  -   Allocate a notification object.
-  -   Set up a timer provided by seL4 libs.
-  -   Use seL4_libs functions to manipulate timer and
+- Allocate a notification object.
+- Set up a timer provided by seL4 libs.
+- Use seL4_libs functions to manipulate timer and
       handle interrupts.
 
 ## Walkthrough

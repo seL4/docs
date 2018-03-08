@@ -113,19 +113,19 @@ the docs from mainline:
 
 Required properties:
 
-  -   compatible: Should be one of the following:
+- compatible: Should be one of the following:
       -   "microchip,mcp2510" for MCP2510.
  
       - "microchip,mcp2515" for MCP2515.
-  -   reg: SPI chip select.
-  -   clocks: The clock feeding the CAN controller.
-  -   interrupt-parent: The parent interrupt controller.
-  -   interrupts: Should contain IRQ line for the CAN controller.
+- reg: SPI chip select.
+- clocks: The clock feeding the CAN controller.
+- interrupt-parent: The parent interrupt controller.
+- interrupts: Should contain IRQ line for the CAN controller.
 
 Optional properties:
 
-  -   vdd-supply: Regulator that powers the CAN controller.
-  -   xceiver-supply: Regulator that powers the CAN transceiver.
+- vdd-supply: Regulator that powers the CAN controller.
+- xceiver-supply: Regulator that powers the CAN transceiver.
 
 Example:
 

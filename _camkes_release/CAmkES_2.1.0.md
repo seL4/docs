@@ -8,20 +8,20 @@ title: camkes-2.1.0
 ## New Features
 
 
-  -   runner takes an --architecture command line argument which selects
+- runner takes an --architecture command line argument which selects
       the target architecture. Valid arguments are: aarch32, arm_hyp,
       ia32
-  -   added the ability to specify a hardware dataport as cached.
+- added the ability to specify a hardware dataport as cached.
       Previously all hardware dataports were mapped uncached. This
       feature is intended to be used on dataports backed by DMA-able
       memory to improve access times. Functions to flush dataports from
       the cache are also provided.
-  -   support for seL4 3.0.0
+- support for seL4 3.0.0
 
 ## Removed Features
 
 
-  -   --hyp command line argument is replaced with
+- --hyp command line argument is replaced with
       --architecture arm_hyp
 
 ## API Removals

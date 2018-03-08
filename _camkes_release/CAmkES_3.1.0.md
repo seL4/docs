@@ -42,11 +42,11 @@ with <component_instance_name>._sc_size_bits = ...;.
 ### Documentation Fixes
 
 
-  -   Removed outdated information about dependencies
+- Removed outdated information about dependencies
 
 ### Bug Fixes
 
 
-  -   Fixed bug in parser preventing empty lists of the form [] from
+- Fixed bug in parser preventing empty lists of the form [] from
       parsing correctly
 

@@ -79,10 +79,10 @@ guided by a slide presentation. There are half-completed sample
 applications, with a set of slides giving instructions, with TASK
 challenges once again. There are also completed sample solutions.
 
-  -   [CAmkES Tutorial 0](CAmkES_Tutorial_0)
-  -   [CAmkES Tutorial 1](CAmkES_Tutorial_1)
-  -   [CAmkES Tutorial 2](CAmkES_Tutorial_2)
-  -   [CAmkES Timer Tutorial](CAmkES_Timer_Tutorial)
+- [CAmkES Tutorial 0](CAmkES_Tutorial_0)
+- [CAmkES Tutorial 1](CAmkES_Tutorial_1)
+- [CAmkES Tutorial 2](CAmkES_Tutorial_2)
+- [CAmkES Timer Tutorial](CAmkES_Timer_Tutorial)
 
 More info:
 
