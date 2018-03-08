@@ -13,12 +13,12 @@ with the following changes:
 # Changes
 
 
-:   -   Support for additional zynq platform Zynq UltraScale+ MPSoC
+- Support for additional zynq platform Zynq UltraScale+ MPSoC
         (Xilinx ZCU102, ARMv8a, Cortex A53)
-    -   Support for multiboot2 bootloaders on x86 (contributed change
+- Support for multiboot2 bootloaders on x86 (contributed change
         from Genode Labs)
-    -   Deprecate seL4_CapData_t type and functions related to it
-    -   A fastpath improvement means that when there are two runnable
+- Deprecate seL4_CapData_t type and functions related to it
+- A fastpath improvement means that when there are two runnable
         threads and the target thread is the highest priority
 
 in the scheduler, the fastpath will be hit. Previously the fastpath
@@ -34,12 +34,12 @@ Performance-Monitoring Counters to user level
 # Upgrade notes
 
 
-:   -   seL4_CapData_t should be replaced with just seL4_Word.
+- seL4_CapData_t should be replaced with just seL4_Word.
         Construction of badges should just be x instead
         of seL4_CapData_Badge_new(x) and guards should
         be seL4_CNode_CapData_new(x, y) instead
         of seL4_CapData_Guard_new(x, y)
-    -   Code that relied on non-blocking IPC to switch between threads
+- Code that relied on non-blocking IPC to switch between threads
         of the same priority may break.
 
 # Full changelog

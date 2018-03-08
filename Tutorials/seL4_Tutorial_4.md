@@ -21,16 +21,16 @@ they were covered by a previous tutorial in the series.
 ## Learning outcomes
 
 
-:   -   Once again, repeat the spawning of a thread: however, this time
+- Once again, repeat the spawning of a thread: however, this time
         the two threads will only share the same vspace, but have
         different CSpaces. This is an automatic side effect of the way
         that sel4utils creates new "processes".
-    -   Learn how the init thread in an seL4 system performs some types
+- Learn how the init thread in an seL4 system performs some types
         of initialization that aren't traditionally left to userspace.
-    -   Observe and understand the effects of creating thread that do
+- Observe and understand the effects of creating thread that do
         not share the same CSpace.
-    -   Understand IPC across CSpace boundaries.
-    -   Understand how minting a capability to a thread in another
+- Understand IPC across CSpace boundaries.
+- Understand how minting a capability to a thread in another
         CSpace works.
 
 ## Walkthrough

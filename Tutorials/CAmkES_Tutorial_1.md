@@ -17,10 +17,10 @@ and any aspiring CAmkES dev should read the
 ## Learning outcomes
 
 
-:   -   Understand the structure of a CAmkES application, as a
+- Understand the structure of a CAmkES application, as a
         described, well-defined, static system.
-    -   Understand the file-layout of a CAmkES ADL project.
-    -   Become acquainted with the basics of creating a practical
+- Understand the file-layout of a CAmkES ADL project.
+- Become acquainted with the basics of creating a practical
         CAmkES application.
 
 ## Walkthrough

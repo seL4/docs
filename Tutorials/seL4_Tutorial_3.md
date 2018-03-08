@@ -22,22 +22,22 @@ they were covered by a previous tutorial in the series.
 ## Learning outcomes
 
 
-:   -   Repeat the spawning of a thread. "''If it's nice, do it twice''"
+- Repeat the spawning of a thread. "''If it's nice, do it twice''"
         -- Caribbean folk-saying. Once again, the new thread will be
         sharing its creator's VSpace and CSpace.
-    -   Introduction to the idea of badges, and minting badged copies of
+- Introduction to the idea of badges, and minting badged copies of
         an Endpoint capability. NB: you don't mint a new copy of the
         Endpoint object, but a copy of the capability that
         references it.
-    -   Basic IPC: sending and receiving: how to make two
+- Basic IPC: sending and receiving: how to make two
         threads communicate.
-    -   IPC Message format, and Message Registers. seL4 binds some of
+- IPC Message format, and Message Registers. seL4 binds some of
         the first Message Registers to hardware registers, and the rest
         are transferred in the IPC buffer.
-    -   Understand that each thread has only one IPC buffer, which is
+- Understand that each thread has only one IPC buffer, which is
         pointed to by its TCB. It's possible to make a thread wait on
         both an Endpoint and a Notification using "Bound Notifications".
-    -   Understand CSpace pointers, which are really just integers with
+- Understand CSpace pointers, which are really just integers with
         multiple indexes concatenated into one. Understanding them well
         however, is important to understanding how capabilities work. Be
         sure you understand the diagram on the "**CSpace example and

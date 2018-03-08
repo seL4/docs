@@ -6,9 +6,9 @@ in progress or not yet started (i.e. planned).
 
 For status of existing kernel ports, features, drivers, and other userland components, see:
 
-:   -   [Hardware](../Hardware): for hardware platform ports
-    -   [Kernel Features](../Kernel Features): for kernel features
-    -   [Userland Components and Drivers](../Userland Components and Drivers): for device driver and
+- [Hardware](../Hardware): for hardware platform ports
+- [Kernel Features](../Kernel Features): for kernel features
+- [Userland Components and Drivers](../Userland Components and Drivers): for device driver and
         userland components
 
 ## Kernel Features and hardware platform ports

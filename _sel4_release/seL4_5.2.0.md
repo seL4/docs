@@ -8,16 +8,16 @@ with the following changes:
 
 Below are the changes to libsel4:
 
-:   -   Add seL4_FastMessageRegisters: Exposes number of registers used
+- Add seL4_FastMessageRegisters: Exposes number of registers used
         in IPC for more optimised user-level IPC stubs.
-    -   Additional kernel entry types VMExit and VCPUFault added for
+- Additional kernel entry types VMExit and VCPUFault added for
         bench-marking kernel entries.
 
 x86 specific changes:
 
-:   -   multiboot memory map information passed to user-level through
+- multiboot memory map information passed to user-level through
         bootinfo extended regions
-    -   Expose more seL4 constants
+- Expose more seL4 constants
 
 # Upgrade notes
 

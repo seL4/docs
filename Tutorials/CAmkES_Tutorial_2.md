@@ -17,8 +17,8 @@ and any aspiring CAmkES dev should read the
 ## Learning outcomes
 
 
-:   -   Understand how to represent and implement events in CAmkES.
-    -   Understand how to use Dataports.
+- Understand how to represent and implement events in CAmkES.
+- Understand how to use Dataports.
 
 ## Walkthrough
  Bear in mind, this article will be going through the

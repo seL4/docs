@@ -14,9 +14,9 @@ bit easier to use.
 
 We have also developed 2 daughterboards for the TK1-SOM
 
-:   -   a [CAN daughterboard](CAN-Board), that adds two CAN
+- a [CAN daughterboard](CAN-Board), that adds two CAN
         controllers on the SPI bus
-    -   an [I/O daughterboard](/Daughter-Board) that adds CAN
+- an [I/O daughterboard](/Daughter-Board) that adds CAN
         controllers, various sensors and power management
 
 <<Anchor(uboot)>> == U-Boot ==
@@ -25,10 +25,10 @@ Upstream U-Boot now supports this board.
 
 Follow the instructions for the [Jetson TK1](Hardware/jetsontk1\#Flash_U-Boot), however:
 
-:   -   use <https://github.com/wom-bat/tegra-uboot-flasher-manifests>
+- use <https://github.com/wom-bat/tegra-uboot-flasher-manifests>
         as the URL for repo
-    -   don't apply the patch to increase the console buffer size
-    -   use cei-tk1-som (instead of jetson-tk1) as the board ID
+- don't apply the patch to increase the console buffer size
+- use cei-tk1-som (instead of jetson-tk1) as the board ID
 
 As with the [Jetson](Hardware/jetsontk1) with this u-boot, set the
 environment variable bootm_boot_mode to nonsec In this boot mode, the
@@ -98,8 +98,8 @@ Then to boot, on the u-boot console do:
 
 and on your host:
 
-:   -   install dfu-util (one time only: apt-get install dfu-util)
-    -   connect to the TK1-SOM using a USB connector to the on-the-go
+- install dfu-util (one time only: apt-get install dfu-util)
+- connect to the TK1-SOM using a USB connector to the on-the-go
         port
 
     \* run dfu-util (you may need to run this with sudo) .

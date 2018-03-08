@@ -67,7 +67,7 @@ For more details, see the 2.0.0 manual
 
 number of runnable threads, now log n)
 
-:   -   improved benchmarking macros: can now specify multiple
+- improved benchmarking macros: can now specify multiple
         benchmarking
 
 tracepoints at once added

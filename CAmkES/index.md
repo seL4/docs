@@ -25,12 +25,12 @@ The development framework provides:
 ## Setting up your machine
 
 
-:   -   Before you can use any of the SEL4 related repositories, you
+- Before you can use any of the SEL4 related repositories, you
         must
         [get the "repo" tool by Google](http://source.android.com/source/downloading.html#installing-repo). SEL4 projects have multiple
         subproject dependencies, and repo will fetch all of them and
         place them in the correct subdirectories for you.
-    -   Make sure that you already have the tools to build seL4
+- Make sure that you already have the tools to build seL4
         ([[Getting started\#Setting_up_your_machine|seL4: Setting
         up your machine]])
 

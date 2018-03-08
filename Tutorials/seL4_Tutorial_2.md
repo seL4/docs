@@ -19,16 +19,16 @@ Uncomment them one by one as needed when going through the tasks.
 ## Learning outcomes:
 
 
-:   -   Understand the kernel's startup procedure.
-    -   Understand that the kernel centers around certain objects and
+- Understand the kernel's startup procedure.
+- Understand that the kernel centers around certain objects and
         capabilities to those objects.
-    -   Understand that libraries exist to automate the very
+- Understand that libraries exist to automate the very
         fine-grained nature of the seL4 API, and get a rough idea of
         some of those libraries.
-    -   Learn how the kernel hands over control to userspace.
-    -   Get a feel for how the seL4 API enables developers to manipulate
+- Learn how the kernel hands over control to userspace.
+- Get a feel for how the seL4 API enables developers to manipulate
         the objects referred to by the capabilities they encounter.
-    -   Understand the how to spawn new threads in seL4, and the basic
+- Understand the how to spawn new threads in seL4, and the basic
         idea that a thread has a TCB, VSpace and CSpace, and that you
         must fill these out.
 

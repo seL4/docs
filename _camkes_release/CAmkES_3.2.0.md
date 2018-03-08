@@ -14,7 +14,7 @@ Using seL4 version 8.0.0
 # Changes
 
 
-:   -   
+- 
 
         New ADL Syntax: Allow struct elements to have defaults.
 
@@ -24,7 +24,7 @@ Using seL4 version 8.0.0
             <https://github.com/seL4/camkes/tree/master/apps/structs>
             <https://github.com/seL4/camkes/tree/master/apps/attributes>
 
-    -   
+- 
 
         Added experimental Rumprun support:
 
@@ -38,7 +38,7 @@ Using seL4 version 8.0.0
             found here:
             <https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/>
 
-    -   
+- 
 
         New Templates: Remote GDB debugging support
 
@@ -47,7 +47,7 @@ Using seL4 version 8.0.0
             documentation:
             <https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md>
 
-    -   
+- 
 
         Added "hardware_cached" attribute to hardware dataports
 
@@ -58,7 +58,7 @@ Using seL4 version 8.0.0
 # Known issues
 
 
-:   -   Hardware dataports that are large enough to use larger frame
+- Hardware dataports that are large enough to use larger frame
         sizes are currently broken. There is an issue with
 
 large frame promotion and hardware dataports where the capDL loader is
@@ -71,9 +71,9 @@ functionality is required, hold off upgrading until this issue is fixed.
 # Upgrade notes
 
 
-:   -   ADL files: ADL syntax changes in this release should not break
+- ADL files: ADL syntax changes in this release should not break
         any existing ADL files.
-    -   
+- 
 
         Templates:
 

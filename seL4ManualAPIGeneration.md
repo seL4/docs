@@ -23,13 +23,13 @@ subdirectory of the top-level directory.
 
 seL4 has two types of API:
 
-:   -   System Calls, mostly concerned with message-passing
+- System Calls, mostly concerned with message-passing
         between threads. Some examples are Send and Recv
         \* In addition to the message-passing syscalls, there are
         debugging and benchmarking syscalls which can be enabled with a
         build flag. These are true syscalls, rather than
         object invocations.
-    -   Object Invocations, which are regular message-passing system
+- Object Invocations, which are regular message-passing system
         calls, but whose recipient is effectively the kernel itself, and
         the message encodes some operation on a Kernel Object. Some
         examples are TCB_Resume and CNode_Copy.
@@ -39,18 +39,18 @@ seL4 has two types of API:
 
 The API documentation in the manual is divided into the following hierarchy:
 
-:   -   System Calls
+- System Calls
         -   General System Calls
         -   Debugging System Calls
 
         \* Benchmarking System Calls
-    -   Architecture-Independent Object Methods
-    -   x86-Specific Object Methods
+- Architecture-Independent Object Methods
+- x86-Specific Object Methods
         -   General x86 Object Methods
         -   IA32 Object Methods
 
         \* x86_64 Object Methods
-    -   ARM-Specific Object Methods
+- ARM-Specific Object Methods
         -   General ARM Object Methods
         -   aarch32 Object Methods
         -   aarch64 Object Methods
@@ -113,13 +113,13 @@ order to function.
 
 Each function in the API must have the following documentation:
 
-:   -   a @xmlonly <manual name="..." label=".../> @endxmlonly tag
+- a @xmlonly <manual name="..." label=".../> @endxmlonly tag
         with the name for use in the manual's text, and a label for
         creating references within the manual
-    -   a @brief description
-    -   a detailed description
-    -   a @param description of each argument
-    -   a @return description of the return value, unless the function
+- a @brief description
+- a detailed description
+- a @param description of each argument
+- a @return description of the return value, unless the function
         is void
 
 ### Detecting Missing Documentation
@@ -168,13 +168,13 @@ Each function is documented with a comment of the form described above.
 
 These are more complicated, as the C source code implementing the user-level object invocations functions is generated from some interface descriptions in XML. The following XML files contain object invocation interface descriptions:
 
-:   -   [libsel4/include/interfaces/sel4.xml](https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml)
-    -   [libsel4/arch_include/x86/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml)
-    -   [libsel4/arch_include/arm/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/arch_include/arm/interfaces/sel4arch.xml)
-    -   [libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml)
-    -   [libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml)
-    -   [libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml)
-    -   [libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml)
+- [libsel4/include/interfaces/sel4.xml](https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml)
+- [libsel4/arch_include/x86/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml)
+- [libsel4/arch_include/arm/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/arch_include/arm/interfaces/sel4arch.xml)
+- [libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/interfaces/sel4arch.xml)
+- [libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/x86_64/interfaces/sel4arch.xml)
+- [libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/interfaces/sel4arch.xml)
+- [libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml](https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch64/interfaces/sel4arch.xml)
 
 There is a script in the sel4 repo for generating C header files from a
 given interface description:

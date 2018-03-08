@@ -8,17 +8,17 @@ environment.
 ## Learning outcomes
 
 
-:   -   Reader should become accustomed to the idea of having to debug
+- Reader should become accustomed to the idea of having to debug
         not only from the perspective of their own code, but also with
         an understanding that there are lower layers beneath them that
         have a say in whether or their abstractions will work
         as intended.
-    -   Reader should become accustomed to the idea that the compiler
+- Reader should become accustomed to the idea that the compiler
         and language runtime are now part of their responsibility, and
         they should become at least trivially acquainted with the C
         runtime which they can usually ignore, and debug with it
         in mind.
-    -   Offhandedly hints to the reader that they should become
+- Offhandedly hints to the reader that they should become
         acquainted with the Kconfig/Kbuild build utilities.
 
 ## Walkthrough

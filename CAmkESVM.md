@@ -344,11 +344,11 @@ with the other end of the connection.
 
 The kernel modules are included in the root filesystem by default:
 
-:   -   dataport: facilitates setting up shared memory between the guest
+- dataport: facilitates setting up shared memory between the guest
         and CAmkES components
-    -   consumes_event: allows a process in the guest to wait or poll
+- consumes_event: allows a process in the guest to wait or poll
         for an event sent by a CAmkES component
-    -   emits_event: allows a process to emit an event to a CAmkES
+- emits_event: allows a process to emit an event to a CAmkES
         component
 
 There is a library in projects/vm/linux/lib_src/camkes containing some
@@ -518,9 +518,9 @@ risky, but will serve for our example here.
 
 We need to create another c file that tells the VMM about our cross vm connections. This file must define 3 functions which initialize each type of cross vm interface:
 
-:   -   cross_vm_dataports_init
-    -   cross_vm_emits_events_init
-    -   cross_vm_consumes_events_init
+- cross_vm_dataports_init
+- cross_vm_emits_events_init
+- cross_vm_consumes_events_init
 
 Create a file apps/cma34cr_minimal/cross_vm.c:
 ``` \#include

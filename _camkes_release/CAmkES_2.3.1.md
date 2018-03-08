@@ -8,6 +8,6 @@ title: camkes-2.3.1
 ## New Features
 
 
-:   -   support for seL4 5.2.0
+- support for seL4 5.2.0
 
 

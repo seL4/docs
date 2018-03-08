@@ -50,19 +50,19 @@ following caveats exist:
 ## Changes
 
 
-:   -   aarch32 - Implement lazy FP save/restore
-    -   ARM SMP support
-    -   add seL4_DebugDumpScheduler debug syscall
-    -   x86: Split large structs into portions (See upgrade notes below)
-    -   License fixups
+- aarch32 - Implement lazy FP save/restore
+- ARM SMP support
+- add seL4_DebugDumpScheduler debug syscall
+- x86: Split large structs into portions (See upgrade notes below)
+- License fixups
 
 # Upgrade notes
 
 
-:   -   This release is not source compatible with previous releases.
-    -   seL4_DebugDumpScheduler has had its only argument removed as it
+- This release is not source compatible with previous releases.
+- seL4_DebugDumpScheduler has had its only argument removed as it
         was unused.
-    -   On x86 some structs in the Bootinfo have been rearranged. This
+- On x86 some structs in the Bootinfo have been rearranged. This
         only affects seL4_VBEModeInfoBlock_t which is used if VESA
         BIOS Extensions (VBE) information is being used.
 

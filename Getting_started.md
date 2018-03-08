@@ -210,13 +210,13 @@ You can find a long list of seL4 publications here:
 ## Youtube
 
 
-:   -   Gernot Heiser outlines several areas where the kernel is looking
+- Gernot Heiser outlines several areas where the kernel is looking
         for good Samaritans toward the end of this presentation,
         "[seL4 is
         free: What does this mean for you? (2015)](https://www.youtube.com/watch?v=lRndE7rSXiI)". If you were
         looking for externally available information on the status of
         seL4, you probably ran across that presentation yourself.
-    -   In addition, this youtube video shows Gernot giving a
+- In addition, this youtube video shows Gernot giving a
         presentation on seL4's context and position in the timeline of
         L4 microkernel research:
         "[From L3 to

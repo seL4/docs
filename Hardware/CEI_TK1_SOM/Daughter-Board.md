@@ -9,7 +9,7 @@ flight controller for a quadcopter.
 ### Warning
 
 
-:   -   Don't plug in or unplug things from the daughterboard while it
+- Don't plug in or unplug things from the daughterboard while it
         is turned on, especially the radio. The current transient will
         sometimes kill U13 (TPS563200 5V regulator). If only 1 of the
         LEDs above the white molex connector is lit, it is because U13
@@ -33,11 +33,11 @@ with TK1|width="100%"}}
 ## Technical documentation
 
 
-:   -   [Schematic PDF](attachment:daughterboard_r3a_schematic.pdf) (See '[Technical errata for R3A](\#errata)'
+- [Schematic PDF](attachment:daughterboard_r3a_schematic.pdf) (See '[Technical errata for R3A](\#errata)'
         for changes)
-    -   Bill of Materials:
+- Bill of Materials:
         [<attachment:tegra_daughterboard_bom3.xls>](../<attachment:tegra_daughterboard_bom3.xls>)
-    -   Project repository:
+- Project repository:
         [Altium files](https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard)
 
 ## Connecting the Daughterboard
@@ -294,28 +294,28 @@ all along the bottom row of the servo connector:
 ### Technical errata for R3A, to be fixed next revision
 
 
-:   -   The 'power out to pixhawk' connection on the daughterboard
+- The 'power out to pixhawk' connection on the daughterboard
         should not be used as it may cause a rail collision.
-    -   All I2C lines CLK and DAT lines are reversed due to an error in
+- All I2C lines CLK and DAT lines are reversed due to an error in
         the schematic supplied to us by CEI; this has been modwired to
         the correct connection on some boards.
-    -   U8 (LSM303D, one of the many inertial sensors) is not mounted
+- U8 (LSM303D, one of the many inertial sensors) is not mounted
         due to a footprint error.
-    -   D10 & D11 CAN Reset diodes are not mounted on some boards. This
+- D10 & D11 CAN Reset diodes are not mounted on some boards. This
         has been tested OK, the diodes are just to improve CAN chip
         reset times - but we aren't actually using the CAN reset line.
-    -   R35 & R45 to supply power through the CAN ports --(ARE)-- ARE
+- R35 & R45 to supply power through the CAN ports --(ARE)-- ARE
         NOT mounted, and should never be to avoid rail collisions.
-    -   The LV cutout circuitry does not work. Since the IRIS battery is
+- The LV cutout circuitry does not work. Since the IRIS battery is
         disconnected when not in use anyway, this should not be a
         huge issue. UPDATE: Reason is footprint error with TLV431 chip,
         swapping A/K fixes issue.
-    -   On schematic sheet 5, the 'Do not populate' remarks indicate the
+- On schematic sheet 5, the 'Do not populate' remarks indicate the
         wrong designators. They should indicate R35 & R45.
-    -   R40 & R49 pull-ups on the SPI CSN line are not mounted. These
+- R40 & R49 pull-ups on the SPI CSN line are not mounted. These
         were found to cause signal integrity issues. Additionally, the
         silkscreen for R51 and R49 is swapped on the PCB.
-    -   R57 - R72 (Current limiting resistors for D12-D27), a value of
+- R57 - R72 (Current limiting resistors for D12-D27), a value of
         560 ohm was used instead of 10K ohm to increase
         their brightness.
 

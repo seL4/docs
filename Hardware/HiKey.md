@@ -1,9 +1,9 @@
 # Pre-Requisites
 
 
-:   -   One !HiKey Board. See
+- One !HiKey Board. See
         [Hikey 96Board](http://www.96boards.org/products/ce/hikey/)
-    -   Fully working development environment. See
+- Fully working development environment. See
         [Getting started](https://wiki.sel4.systems/Getting%20started)
 
 # Getting Started

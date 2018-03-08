@@ -9,11 +9,11 @@ toc: true
 
 From the top, the CAmkES tool (typically found in "tools/camkes/camkes.sh") is a program that generates a **single** file that makes up part of the source of a seL4 application. There are a variety of types of files it can generate:
 
-:   -   a capdl spec describing the cap distribution of the entire
+- a capdl spec describing the cap distribution of the entire
         CAmkES spec
-    -   a C file containing generated glue code for a component or
+- a C file containing generated glue code for a component or
         connector
-    -   a Makefile that knows how to invoke the CAmkES tool to generate
+- a Makefile that knows how to invoke the CAmkES tool to generate
         all the files required to compile the application (besides the
         Makefile itself)
 

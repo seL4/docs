@@ -197,11 +197,11 @@ changing it can risk losing the layout.
 ### Additional implementation details
 
 
-:   -   When connection widgets are deleted, ConnectionWidget.delete()
+- When connection widgets are deleted, ConnectionWidget.delete()
         must be called on the object. This is because connection widget
         is tracked by the from and to instance widgets, so it needs to
         delete itself from them.
-    -   Context menu is a bit weirdly implemented. This is what I mean
+- Context menu is a bit weirdly implemented. This is what I mean
         by weird: normally you would just create the menu and it all
         works - including closing of the menu. However this doesn't work
         with QGraphicScenes. So the solution is to add the context menu

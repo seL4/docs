@@ -44,11 +44,11 @@ caps {
 
 This program transforms a CapDL spec into several formats:
 
-:   -   a C file for linking against the CapDL Loader to create a
+- a C file for linking against the CapDL Loader to create a
         program that instantiates the system described by the spec
-    -   a dot file for visualization with graphviz
-    -   an XML file for further manipulation
-    -   an isabelle model for use in proofs about the system described
+- a dot file for visualization with graphviz
+- an XML file for further manipulation
+- an isabelle model for use in proofs about the system described
         by the spec
 
 ## CapDL Loader (capdl-loader-app)

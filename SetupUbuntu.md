@@ -25,8 +25,8 @@ of cross compilers.
 
 For Debian, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](\#all)) then the ones for your system:
 
-:   -   [Debian Wheezy (oldstable)](\#wheezy)
-    -   [Debian Jessie or later(testing or unstable)](\#jessie)
+- [Debian Wheezy (oldstable)](\#wheezy)
+- [Debian Jessie or later(testing or unstable)](\#jessie)
 
 To find out what distro you're using: ` lsb_release -a `
 
@@ -40,7 +40,7 @@ have enabled the Universe repository.
 
 For Ubuntu, first follow the instructions that are common to all Debian-based distros ([All Debian and Ubuntu Variants](\#all)) then the ones for your system:
 
-:   -   [[\#ubuntu|Ubuntu later than Precise Pangolin (tested on
+- [[\#ubuntu|Ubuntu later than Precise Pangolin (tested on
         14.04LTS — Trusty Tahr)]]
 
 ## Instructions

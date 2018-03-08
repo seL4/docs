@@ -3,12 +3,12 @@ you'd like to be listed here, add it.
 
 The seL4 kernel is currently used in projects in the following application areas:
 
-:   -   Automotive
-    -   Aviation (e.g.,
+- Automotive
+- Aviation (e.g.,
         [SMACCM](http://ts.data61.csiro.au/projects/TS/SMACCM/))
-    -   Connected Consumer Devices
-    -   SCADA
-    -   Spaceflight (e.g., the
+- Connected Consumer Devices
+- SCADA
+- Spaceflight (e.g., the
         [UNSW QB50](http://ts.data61.csiro.au/projects/TS/qb50) satellite.)
 
 The following platforms and language runtimes have been or are in the

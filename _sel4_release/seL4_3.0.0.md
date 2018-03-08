@@ -13,101 +13,101 @@ most users.
 ## Implementation improvements
 
 
-:   -   python3 compatability for our python scripts.
-    -   more source code restructuring in preparation for 64-bit ports
+- python3 compatability for our python scripts.
+- more source code restructuring in preparation for 64-bit ports
         of seL4
-    -   idle thread is run in system mode for all ARM platforms except
+- idle thread is run in system mode for all ARM platforms except
         for the KZM11.
-    -   more work to remove duplication between libsel4 and kernel.
+- more work to remove duplication between libsel4 and kernel.
 
 ## API Additions
 
 
-:   -   seL4_IRQControl_GetIOAPIC for x86.
-    -   seL4_IRQControl_GetMSI for x86.
+- seL4_IRQControl_GetIOAPIC for x86.
+- seL4_IRQControl_GetMSI for x86.
 
 ## API Changes
 
 
-:   -   Total number of ASIDs for x86 reduced from 2\^16\^ to 2\^12\^
+- Total number of ASIDs for x86 reduced from 2\^16\^ to 2\^12\^
         (max ASID 2\^12\^).
-    -   seL4_BootInfo struct: userImagePDs and userImagePTs combined
+- seL4_BootInfo struct: userImagePDs and userImagePTs combined
         into userImagePaging in preparation for multilevel paging
         structures for 64 bit kernel support.
-    -   Diminish rights removed from IPC
+- Diminish rights removed from IPC
 
 ## API Removals
 
 
-:   -   seL4_IRQ_SetMode removed (This only effects users who use the
+- seL4_IRQ_SetMode removed (This only effects users who use the
         IOAPIC on x86, which is turned off by default).
 
 ## API deprecations
 
 
-:   -   seL4_IA32_PageDirectory_Map deprecated for
+- seL4_IA32_PageDirectory_Map deprecated for
         seL4_X86_PageDirectory_Map
-    -   seL4_IA32_PageDirectory_Unmap deprecated for
+- seL4_IA32_PageDirectory_Unmap deprecated for
         seL4_X86_PageDirectory_Unmap
-    -   seL4_IA32_PageTable_Map deprecated for
+- seL4_IA32_PageTable_Map deprecated for
         seL4_X86_PageTable_Map
-    -   seL4_IA32_PageTable_Unmap deprecated for
+- seL4_IA32_PageTable_Unmap deprecated for
         seL4_X86_PageTable_Unmap
-    -   seL4_IA32_IOPageTable_Map deprecated for
+- seL4_IA32_IOPageTable_Map deprecated for
         seL4_X86_IOPageTable_Map
-    -   seL4_IA32_IOPageTable_Unmap deprecated for
+- seL4_IA32_IOPageTable_Unmap deprecated for
         seL4_X86_IOPageTable_Unmap
-    -   seL4_IA32_IOPageTable_Map deprecated for
+- seL4_IA32_IOPageTable_Map deprecated for
         seL4_X86_IOPageTable_Map
-    -   seL4_IA32_IOPageTable_Unmap deprecated for
+- seL4_IA32_IOPageTable_Unmap deprecated for
         seL4_X86_IOPageTable_Unmap
-    -   seL4_IA32_Page_Map deprecated for seL4_X86_Page_Map
-    -   seL4_IA32_Page_Unmap deprecated for seL4_X86_Page_Unmap
-    -   seL4_IA32_Page_Remap deprecated for seL4_X86_Page_Remap
-    -   seL4_IA32_Page_MapIO deprecated for seL4_X86_Page_MapIO
-    -   seL4_IA32_Page_GetAddress deprecated for
+- seL4_IA32_Page_Map deprecated for seL4_X86_Page_Map
+- seL4_IA32_Page_Unmap deprecated for seL4_X86_Page_Unmap
+- seL4_IA32_Page_Remap deprecated for seL4_X86_Page_Remap
+- seL4_IA32_Page_MapIO deprecated for seL4_X86_Page_MapIO
+- seL4_IA32_Page_GetAddress deprecated for
         seL4_X86_Page_GetAddress
-    -   seL4_IA32_ASIDControl_MakePool deprecated for
+- seL4_IA32_ASIDControl_MakePool deprecated for
         seL4_X86_ASIDControl_MakePool
-    -   seL4_IA32_ASIDPool_Assign deprecated for
+- seL4_IA32_ASIDPool_Assign deprecated for
         seL4_X86_ASIDPool_Assign
-    -   seL4_IA32_IOPort_In8 deprecated for seL4_X86_IOPort_In8
-    -   seL4_IA32_IOPort_In16 deprecated for seL4_X86_IOPort_In16
-    -   seL4_IA32_IOPort_In32 deprecated for seL4_X86_IOPort_In32
-    -   seL4_IA32_IOPort_Out8 deprecated for seL4_X86_IOPort_Out8
-    -   seL4_IA32_IOPort_Out16 deprecated for
+- seL4_IA32_IOPort_In8 deprecated for seL4_X86_IOPort_In8
+- seL4_IA32_IOPort_In16 deprecated for seL4_X86_IOPort_In16
+- seL4_IA32_IOPort_In32 deprecated for seL4_X86_IOPort_In32
+- seL4_IA32_IOPort_Out8 deprecated for seL4_X86_IOPort_Out8
+- seL4_IA32_IOPort_Out16 deprecated for
         seL4_X86_IOPort_Out16
-    -   seL4_IA32_IOPort_Out32 deprecated for
+- seL4_IA32_IOPort_Out32 deprecated for
         seL4_X86_IOPort_Out32
-    -   seL4_IA32_4K deprecated for seL4_X86_4K
-    -   seL4_IA32_LargePage deprecated for seL4_X86_LargePageObject
-    -   seL4_IA32_PageTableObject deprecated for
+- seL4_IA32_4K deprecated for seL4_X86_4K
+- seL4_IA32_LargePage deprecated for seL4_X86_LargePageObject
+- seL4_IA32_PageTableObject deprecated for
         seL4_X86_PageTableObject
-    -   seL4_IA32_PageDirectoryObject deprecated for
+- seL4_IA32_PageDirectoryObject deprecated for
         seL4_X86_PageDirectoryObject
-    -   seL4_IA32_IOPageTableObject deprecated for
+- seL4_IA32_IOPageTableObject deprecated for
         seL4_X86_IOPageTableObject
-    -   seL4_IA32_ASIDControl deprecated for seL4_X86_ASIDControl
-    -   seL4_IA32_ASIDPool deprecated for seL4_X86_ASIDPool
-    -   seL4_IA32_IOSpace deprecated for seL4_X86_IOSpace
-    -   seL4_IA32_IOPort deprecated for seL4_X86_IOPort
-    -   seL4_IA32_Page deprecated for seL4_X86_Page
-    -   seL4_IA32_PDPT deprecated for seL4_X86_PDPT
-    -   seL4_IA32_PageDirectory deprecated for
+- seL4_IA32_ASIDControl deprecated for seL4_X86_ASIDControl
+- seL4_IA32_ASIDPool deprecated for seL4_X86_ASIDPool
+- seL4_IA32_IOSpace deprecated for seL4_X86_IOSpace
+- seL4_IA32_IOPort deprecated for seL4_X86_IOPort
+- seL4_IA32_Page deprecated for seL4_X86_Page
+- seL4_IA32_PDPT deprecated for seL4_X86_PDPT
+- seL4_IA32_PageDirectory deprecated for
         seL4_X86_PageDirectory
-    -   seL4_IA32_PageTable deprecated for seL4_X86_PageTable
-    -   seL4_IA32_IOPageTable deprecated for seL4_X86_IOPageTable
-    -   seL4_IA32_Default_VMAttributes deprecated for
+- seL4_IA32_PageTable deprecated for seL4_X86_PageTable
+- seL4_IA32_IOPageTable deprecated for seL4_X86_IOPageTable
+- seL4_IA32_Default_VMAttributes deprecated for
         seL4_X86_Default_VMAttributes
-    -   seL4_IA32_WriteBack deprecated for seL4_X86_WriteBack
-    -   seL4_IA32_WriteThrough deprecated for seL4_X86_WriteThrough
-    -   seL4_IA32_CacheDisabled deprecated for
+- seL4_IA32_WriteBack deprecated for seL4_X86_WriteBack
+- seL4_IA32_WriteThrough deprecated for seL4_X86_WriteThrough
+- seL4_IA32_CacheDisabled deprecated for
         seL4_X86_CacheDisabled
-    -   seL4_IA32_Uncacheable  deprecated for \`
+- seL4_IA32_Uncacheable  deprecated for \`
         seL4_X86_Uncacheable \`
-    -   seL4_IA32_WriteCombining deprecated for
+- seL4_IA32_WriteCombining deprecated for
         seL4_X86_WriteCombining
-    -   seL4_IA32_VMAttributes deprecated for seL4_X86_VMAttributes
+- seL4_IA32_VMAttributes deprecated for seL4_X86_VMAttributes
 
 ## Upgrade notes
  This change is not source or binary compatible.

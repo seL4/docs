@@ -10,8 +10,8 @@ Agreement for all contributions.
 
 The Licence agreement certifies:
 
-:   -   That you have the rights to give us the contribution, and
-    -   That you give us the rights to use your contribution.
+- That you have the rights to give us the contribution, and
+- That you give us the rights to use your contribution.
 
 Please sign the
 [Contributor License Agreement](https://sel4.systems/Community/Contributing/seL4-CLA.pdf), scan it and send it to us at ''licensing AT

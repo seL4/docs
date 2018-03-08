@@ -16,20 +16,20 @@ found in libsel4platsupport
 
 x86 specific changes:
 
-:   -   Pass VBE information from multiboot through bootinfo
-    -   Remove PAE support
+- Pass VBE information from multiboot through bootinfo
+- Remove PAE support
 
 x86-64 specific changes:
 
-:   -   VT-x related cap and object definitions added
-    -   seL4_VMEnter syscall added
+- VT-x related cap and object definitions added
+- seL4_VMEnter syscall added
 
 arm specific changes:
 
-:   -   ARM-HYP: VCPU interface for manipulating banked registers added
-    -   plat: added nvidia tx1 support
-    -   ARM-HYP: Add support for save/restore of debug registers
-    -   Add aarch64 implementation
+- ARM-HYP: VCPU interface for manipulating banked registers added
+- plat: added nvidia tx1 support
+- ARM-HYP: Add support for save/restore of debug registers
+- Add aarch64 implementation
 
 # Upgrade notes
 

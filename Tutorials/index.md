@@ -33,9 +33,9 @@ sel4-tutorials.xml repo sync
 
 The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "`projects/sel4-tutorials`". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference. In addition, for each of the TASK challenges in the tutorial, there is a Wiki page section that covers it, listed below.
 
-:   -   The half-written sample applications are in the
+- The half-written sample applications are in the
         subfolder: `exercises/`. Your job is to fill these out.
-    -   The completed sample applications showing the solutions to the
+- The completed sample applications showing the solutions to the
         tutorial challenges are in the
         subfolder: `projects/sel4-tutorials/solutions/`.
 
@@ -86,11 +86,11 @@ challenges once again. There are also completed sample solutions.
 
 More info:
 
-:   -   The half-written sample applications are in this
+- The half-written sample applications are in this
         folder: `apps/`.
-    -   The solutions can be found in this
+- The solutions can be found in this
         subfolder: `projects/sel4-tutorials/solutions/`.
-    -   The slide presentations to guide you through the tutorials are
+- The slide presentations to guide you through the tutorials are
         in this
         file: `projects/sel4-tutorials/docs/CAmkESTutorial.pdf`.
 
