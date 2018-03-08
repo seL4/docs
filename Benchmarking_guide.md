@@ -141,140 +141,21 @@ added to execution per tracepoint start/stop pair (inner pair result
 subtracted from outer pair result). The effective overhead is the number
 of cycles added to a measurement by the tracepoint instrumentation
 (inner pair result).
-||<tablestyle="margin-top:10px;margin-left:0px;overflow-x:auto;color:rgb(51,
-51, 51);font-family:Arial, sans-serif;font-size:14px;line-height:20px;"
-tableclass="confluenceTable"#F0F0F0 class="confluenceTh"
-style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
-10px;vertical-align:top;white-space:pre-wrap; ;text-align:center"
-|2>Machine ||<#F0F0F0 class="confluenceTh"
-style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
-10px;vertical-align:top;white-space:pre-wrap; ;text-align:center"
-|2># Samples ||||||||||||<#F0F0F0 class="confluenceTh"
-style="border-style:solid;border-color:rgb(221, 221, 221);padding:7px
-10px;vertical-align:top;white-space:pre-wrap;
-;text-align:center">Total Overhead ||||||||||||<#F0F0F0
-class="confluenceTh" style="border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;white-space:pre-wrap;
-;text-align:center">Effective Overhead || ||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Min
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Max
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Mean
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Variance
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Std Dev
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Std Dev %
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Min
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Max
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Mean
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Variance
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Std Dev
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Std Dev % ||
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Sabre
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">740
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">18
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">18
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">18
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">0
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">0
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">0%
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">4
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">4
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">4
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">0
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">0
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">0 ||
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">Haswell2
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">740
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">532
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">852
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">550.33
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">295.16
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">17.19
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">3%
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">208
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">212
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">208.69
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">2.75
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">1.66
-||<class="confluenceTd"
-style="white-space:pre-wrap;border-style:solid;border-color:rgb(221,
-221, 221);padding:7px 10px;vertical-align:top;">1% ||
+
+* Total Overhead
+
+|Machine |# Samples |Min|Max|Mean|Variance|Std Dev|Std Dev %|
+|-|-|-|-|-|-|-|-|
+|Sabre|740|18|18|18|0|0|0%|
+|Haswell2|740|532|852|550.33|295.16|17.19|3%|
+
+* Effective overhead
+
+|Machine |# Samples |Min|Max|Mean|Variance|Std Dev|Std Dev %|
+|-|-|-|-|-|-|-|-|
+|Sabre|740|4|4|4|0|0|0 |
+|Haswell2|740|208|212|208.69|2.75|1.66|1% |
+
 
 ### Advanced Use
  ==== Conditional Logging ==== A log is stored when
