@@ -1,11 +1,10 @@
 # Using CAN on L4T through an MCP251X
 
-{{<attachment:front.jpg%7CFront> view of TK1-Tower|width="25%"}}
-{{<attachment:bottom.jpg%7CBottom> view of TK1-Tower|width="25%"}}
+<img style="width: 25%" src="front.jpg" alt="Front view of TK1-Tower" />
+<img style="width: 25%" src="bottom.jpg" alt="Bottom view of TK1-Tower" />
 
-## Before running L4TCAN: Jumper HW-based chipselect to the GPIO
-chipselect
- Because L4T with CAN doesn't use GPIO chipselect (yet),
+## Before running L4TCAN: Jumper HW-based chipselect to the GPIO chipselect
+Because L4T with CAN doesn't use GPIO chipselect (yet),
 it's necessary to connect the hardware CSN line to the GPIO used for
 chipselect.
 
@@ -16,7 +15,7 @@ CSN is indicated on the SPI expansion header. Can node #1 on the CAN
 daughterboard uses TK1_GPIO2, so it's necessary to connect these 2
 pins:
 
-{{<attachment:jumper.jpg>||width="375",height="219"}}
+<img style="width: 60%" src="jumper.jpg" />
 
 (From right-to-left on the TK1 GPIO header we have GPIO0, GPIO1, GPIO2)
 
@@ -35,10 +34,16 @@ Set up the TK1 as usual - connect the UART as well as the recovery USB
 port next to the ethernet jack. Stop u-boot from booting and issue the
 command:
 
-` ums 0 mmc 0 ` This will allow you to see the TK1's filesystem on
+``` 
+ums 0 mmc 0 
+``` 
+This will allow you to see the TK1's filesystem on
 your host pc. On your host PC, list your devices:
 
-` $ lsblk ` You should see a 14.7GB-ish device with a few
+``` 
+$ lsblk 
+```
+You should see a 14.7GB-ish device with a few
 partitions - this is the TK1. (Make sure it is by mounting the largest
 partition and looking at the rootfs [making sure to unmount again
 before next step!])
@@ -48,8 +53,7 @@ ABSOLUTELY sure that your of=/dev/sdX line is correct so you don't
 accidentally destroy data on your machine. Also, you want /dev/sdX (the
 device), NOT /dev/sdX3 (partitions) etc.
 ```
-gunzip -c tk1_can.img.gz | sudo dd of=/dev/<your TK1 device>
-conv=sync bs=4K status=progress
+gunzip -c tk1_can.img.gz | sudo dd of=/dev/<your TK1 device> conv=sync bs=4K status=progress
 ```
 This takes \~1.5Hr on my machine to
 complete. If dd throws a strange error to do with the 'status=progress'
@@ -62,7 +66,11 @@ should work.
 
 You may see some lines after boot like:
 
-` rt5639 0-001c: Failed to set private addr: -121 ` This is normal,
+``` 
+rt5639 0-001c: Failed to set private addr: -121 
+```
+
+This is normal,
 and everything should work regardless (internet connectivity works fine
 on our system). We'll be looking into the reason for these errors in the
 future.
@@ -80,14 +88,14 @@ of hackery, procedure outlined here.
 Before going ahead with this, follow the TK1-SOM custom kernel
 procedure, make sure you can build it and flash to the board
 
-=== Add device tree support for MCP251X to L4T & perform driver hacks
-=== The kernel that is included in L4T does not support device tree
+### Add device tree support for MCP251X to L4T & perform driver hacks
+The kernel that is included in L4T does not support device tree
 binding for the mcp251X, so you have to modify the kernel driver.
 
 Easiest way to do that is to just use mine: (Works with latest L4T from
 colorado. Don't use the upstream NVIDIA L4T)
 
-Get it here: [<attachment:mcp251x.c>](../<attachment:mcp251x.c>)
+Get it here: [mcp251x.c](mcp251x.c)
 
 You want to replace the file in drivers/net/can/mcp251x.c
 
@@ -131,28 +139,35 @@ Example:
 
   can0: <can@1> {
  
-      compatible = "microchip,mcp2515"; reg = <1>; clocks =
-      <&clk24m>; interrupt-parent = <&gpio4>; interrupts =
-      <13 0x2>; vdd-supply = <&reg5v0>; xceiver-supply =
-      <&reg5v0>;
- 
+      compatible = "microchip,mcp2515"; 
+      reg = <1>; 
+      clocks = <&clk24m>; 
+      interrupt-parent = <&gpio4>; 
+      interrupts = <13 0x2>; 
+      vdd-supply = <&reg5v0>; 
+      xceiver-supply = <&reg5v0>;
   };
 ```
 
 ### Modify the device tree
  Replace the existing .dts files with
-[<attachment:tegra124-tk1-som-pm375-000-c00-00.dts>](../<attachment:tegra124-tk1-som-pm375-000-c00-00.dts>)
+[tegra124-tk1-som-pm375-000-c00-00.dts](tegra124-tk1-som-pm375-000-c00-00.dts)
 
 You also need to remap some GPIOs, swap out the GPIO device tree with
-[<attachment:tegra124-tk1-som-gpio-default.dtsi>](../<attachment:tegra124-tk1-som-gpio-default.dtsi>)
+[tegra124-tk1-som-gpio-default.dtsi](tegra124-tk1-som-gpio-default.dtsi)
 
 ### Kernel Build Configuration
  Using make menuconfig, enable CAN and
 MCP251X modules. Make sure your .config contains:
 ```
-CONFIG_CAN=m CONFIG_CAN_RAW=m CONFIG_CAN_BCM=m
-CONFIG_CAN_GW=m CONFIG_CAN_VCAN=m CONFIG_CAN_DEV=m
-CONFIG_CAN_CALC_BITTIMING=y CONFIG_CAN_MCP251X=m
+CONFIG_CAN=m
+CONFIG_CAN_RAW=m
+CONFIG_CAN_BCM=m
+CONFIG_CAN_GW=m
+CONFIG_CAN_VCAN=m
+CONFIG_CAN_DEV=m
+CONFIG_CAN_CALC_BITTIMING=y
+CONFIG_CAN_MCP251X=m
 ```
 In addition to
 the 'normal' tk1-som kernel build settings given by Colorado in their
@@ -181,22 +196,20 @@ line, and change it to touch_id=3@3
  You could do something like this:
 
 update_kernel.sh
-```
+~~~bash
+#!/bin/bash
 
-    #!/bin/bash
+L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
+SOM_DIR=/mnt/TK1SOM
 
-    > L4T_DIR=/home/seb/TK1_SOM_2GB_Flashing/Linux_for_Tegra
-    > SOM_DIR=/mnt/TK1SOM
-    >
-    > sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage
-    > $SOM_DIR/boot/zImage sudo cp
-    > $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
-    > $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
-```
+sudo cp $L4T_DIR/sources/kernel/arch/arm/boot/zImage
+$SOM_DIR/boot/zImage sudo cp
+$L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
+$SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
+~~~
 
 rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
 ```
-
     make
 
     make modules
@@ -219,47 +232,51 @@ Then:
 ```
 dmesg | grep mcp # See if the driver loaded properly
 
-[ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe [
-618.718296] mcp251x spi0.0: v2 [ 618.718332] mcp251x spi0.0: got
-clock [ 618.718336] mcp251x spi0.0: finished clock configuration,
-freq: 20000000 [ 618.718353] mcp251x spi0.0: allocated CAN device [
-618.718358] mcp251x spi0.0: clock prepared for enable [ 618.729737]
-mcp251x spi0.0: configured can netdev [ 618.729741] mcp251x spi0.0:
-power & transceiver regulator pointers OK [ 618.729745] mcp251x
-spi0.0: enabled power [ 618.729749] mcp251x spi0.0: about to enable
-DMA (if required) [ 618.729754] mcp251x spi0.0: finished allocating
-DMA & non-DMA buffers [ 618.729757] mcp251x spi0.0: netdev set [
-618.729799] mcp251x spi0.0: configured SPI bus [ 618.740194] mcp251x
-spi0.0: CANSTAT 0x80 CANCTRL 0x07 [ 618.740198] mcp251x spi0.0:
-successful hardware probe [ 618.740795] mcp251x spi0.0: probed [
-628.973815] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
+[ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe
+[ 618.718296] mcp251x spi0.0: v2 
+[ 618.718332] mcp251x spi0.0: got clock 
+[ 618.718336] mcp251x spi0.0: finished clock configuration, freq: 20000000 
+[ 618.718353] mcp251x spi0.0: allocated CAN device 
+[ 618.718358] mcp251x spi0.0: clock prepared for enable 
+[ 618.729737] mcp251x spi0.0: configured can netdev 
+[ 618.729741] mcp251x spi0.0: power & transceiver regulator pointers OK 
+[ 618.729745] mcp251x spi0.0: enabled power 
+[ 618.729749] mcp251x spi0.0: about to enable DMA (if required) 
+[ 618.729754] mcp251x spi0.0: finished allocating DMA & non-DMA buffers 
+[ 618.729757] mcp251x spi0.0: netdev set
+[ 618.729799] mcp251x spi0.0: configured SPI bus 
+[ 618.740194] mcp251x spi0.0: CANSTAT 0x80 CANCTRL 0x07 
+[ 618.740198] mcp251x spi0.0: successful hardware probe 
+[ 618.740795] mcp251x spi0.0: probed 
+[ 628.973815] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
 
-ls /sys/class/net # See if the can device is available and what it's
-called can0 dummy0 eth0 ip6tnl0 lo rmnetctl sit0
+ls /sys/class/net # See if the can device is available and what it's called 
+can0 dummy0 eth0 ip6tnl0 lo rmnetctl sit0
 
-sudo ip link set can0 up type can bitrate 500000 # Bring it up ifconfig
-# Take a look... can0 Link encap:UNSPEC HWaddr
-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00 UP RUNNING NOARP MTU:16
-Metric:1 RX packets:0 errors:0 dropped:0 overruns:0 frame:0 TX packets:0
-errors:0 dropped:0 overruns:0 carrier:0 collisions:0 txqueuelen:10{ RX
-bytes:0 (0.0 B) TX bytes:0 (0.0 B)
+sudo ip link set can0 up type can bitrate 500000 # Bring it up 
+ifconfig                                         # Take a look... 
+can0      Link encap:UNSPEC HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+          UP RUNNING NOARP MTU:16 Metric:1 
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:10{
+          RX bytes:0 (0.0 B) TX bytes:0 (0.0 B)
 
-eth0 Link encap:Ethernet HWaddr 00:50:c2:72:00:59
-
-    inet addr:10.13.1.223 Bcast:10.13.1.255 Mask:255.255.254.0 inet6
-    addr: 2402:1800:4000:1:250:c2ff:fe72:59/64 Scope:Global inet6 addr:
-    fe80::250:c2ff:fe72:59/64 Scope:Link
-
+eth0      Link encap:Ethernet HWaddr 00:50:c2:72:00:59
+          inet addr:10.13.1.223 Bcast:10.13.1.255 Mask:255.255.254.0
+          inet6 addr: 2402:1800:4000:1:250:c2ff:fe72:59/64 Scope:Global
+          inet6 addr: fe80::250:c2ff:fe72:59/64 Scope:Link
 ------------------------------------------------------------------------
 
-sudo apt-get install can-utils # (make sure to enable universe
-repository & update) cansend can0 5A1#11.22.33.44.55.66.77.88 # Send a
-packet candump can0 # Dump packets
+sudo apt-get install can-utils # (make sure to enable universe repository & update) 
+cansend can0 5A1#11.22.33.44.55.66.77.88 # Send a packet 
+candump can0 # Dump packets
 ```
 
 # Loopback mode test
-``` ip link set can0 type can bitrate 500000
-loopback on ifconfig can0 up candump any,0:0,#FFFFFFFF #In terminal 1
-
-cansend can0 123#dead #In terminal 2
+``` 
+ip link set can0 type can bitrate 500000 loopback on
+ifconfig can0 up 
+candump any,0:0,#FFFFFFFF #In terminal 1
+cansend can0 123#dead     #In terminal 2
 ```

@@ -1,0 +1,171 @@
+/dts-v1/;
+
+#include "tegra124.dtsi"
+#include "tegra124-platforms/tegra124-jetson_tk1-keys-pm375-0000-c00-00.dtsi"
+#include "tegra124-platforms/tegra124-tk1-som-gpio-default.dtsi"
+#include "tegra124-platforms/tegra124-tk1-som-pinmux.dtsi"
+#include "tegra124-platforms/tegra124-jetson_tk1-pmic-pm375-0000-c00-00.dtsi"
+#include "tegra124-platforms/tegra124-jetson_tk1-fixed-pm375-0000-c00-00.dtsi"
+#include "tegra124-platforms/tegra124-pm359-camera-a00.dtsi"
+
+/ {
+	model = "NVIDIA Tegra124 PM375";
+	compatible = "nvidia,jetson-tk1", "nvidia,tegra124";
+	nvidia,dtsfilename = __FILE__;
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	chosen {
+		bootargs = "tegraid=40.0.0.00.00 vmalloc=256M video=tegrafb console=ttyS0,115200n8 earlyprintk";
+	};
+
+	pinmux {
+		pinctrl-names = "default", "drive", "unused", "suspend";
+		pinctrl-3 = <&pinmux_suspend>;
+
+		/* Change the pin dap_mclk1_req to required configurations */
+		unused_lowpower {
+			dap_mclk1_req_pee2 {
+			nvidia,pins = "dap_mclk1_req_pee2";
+			nvidia,function = "sata";
+			nvidia,enable-input = <TEGRA_PIN_DISABLE>;
+			nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+			nvidia,tristate = <TEGRA_PIN_DISABLE>;
+			};
+		};
+
+		/* On suspend, make dap_mclk1_req to pull up */
+		pinmux_suspend: pins_on_suspend {
+		dap_mclk1_req_pee2 {
+			nvidia,pins = "dap_mclk1_req_pee2";
+			nvidia,pull = <TEGRA_PIN_PULL_UP>;
+			};
+		};
+	};
+
+        serial@70006000 {
+                compatible = "nvidia,tegra114-hsuart";
+                status = "okay";
+        };
+
+        serial@70006040 {
+                compatible = "nvidia,tegra114-hsuart";
+                status = "okay";
+        };
+
+        serial@70006200 {
+                compatible = "nvidia,tegra114-hsuart";
+                status = "okay";
+        };
+
+	i2c@7000d000 {
+		nvidia,bit-banging-xfer-after-shutdown;
+	};
+
+	memory@0x80000000 {
+		device_type = "memory";
+		reg = <0x0 0x80000000 0x0 0x80000000>;
+	};
+
+    xtal_20mhz: oscillator {
+        compatible = "fixed-clock";
+        #clock-cells = <1>;
+        clock-frequency  = <20000000>;
+        clock-output-names = "xtal_20mhz";
+    };
+
+	spi@7000d400 {
+		      compatible = "nvidia,tegra114-spi";
+                      reg = <0x0 0x7000d400 0x0 0x200>;
+                      interrupts = <0x0 0x3b 0x4>;
+                      nvidia,dma-request-selector = <0x7 0xf>;
+                      nvidia,memory-clients = <0xe>;
+                      #address-cells = <0x1>;
+                      #size-cells = <0x0>;
+                      status = "okay";
+                      spi-max-frequency = <5000000>;
+
+                      can0 {
+                              #address-cells = <0x1>;
+                              #size-cells = <0x0>;
+                              compatible = "microchip,mcp2515";
+                              reg = <0x0>;
+                              oscillator = <&xtal_20mhz>,"clock-frequency";
+                              spi-max-frequency = <5000000>;
+                              spi-cpha;
+                              nvidia,enable-hw-based-cs;
+                              nvidia,cs-setup-clk-count = <0x1e>;
+                              nvidia,cs-hold-clk-count = <0x1e>;
+                              nvidia,rx-clk-tap-delay = <0x1f>;
+                              nvidia,tx-clk-tap-delay = <0x0>;
+                              //nvidia,chipselect-gpio = <&gpio_default TEGRA_GPIO(S,6) 0>;
+                              interrupt-parent = <&gpio>;
+                              interrupts = <TEGRA_GPIO(S,2) 0x2>;
+                      };
+
+                      /*
+                      spi0_0 {
+                              #address-cells = <0x1>;
+                              #size-cells = <0x0>;
+                              compatible = "spidev";
+                              reg = <0x0>;
+                              spi-max-frequency = <5000000>;
+                              spi-cpha;
+                              nvidia,enable-hw-based-cs;
+                              nvidia,cs-setup-clk-count = <0x1e>;
+                              nvidia,cs-hold-clk-count = <0x1e>;
+                              nvidia,rx-clk-tap-delay = <0x1f>;
+                              nvidia,tx-clk-tap-delay = <0x0>;
+
+                      };
+                      */
+     	     };
+
+
+
+	spi@7000da00 {
+		status = "okay";
+		spi-max-frequency = <25000000>;
+	};
+
+	pmc {
+		status = "okay";
+		nvidia,invert-interrupt;
+		nvidia,suspend-mode = <0>;
+		nvidia,cpu-pwr-good-time = <500>;
+		nvidia,cpu-pwr-off-time = <300>;
+		nvidia,core-pwr-good-time = <3845 3845>;
+		nvidia,core-pwr-off-time = <2000>;
+		nvidia,core-power-req-active-high;
+		nvidia,sys-clock-req-active-high;
+		nvidia,lp0-vec = <0xf46ff000 2064>;
+	};
+
+	pcie-controller {
+		nvidia,port0_status = <1>;
+		nvidia,port1_status = <1>;
+		status = "okay";
+	};
+
+	sata@0x70020000 {
+		nvidia,enable-sata-port;
+		nvidia,sata-connector-type=<STANDARD_SATA>;
+		vdd_sata-supply = <&as3722_sd4>;
+		avdd_sata_pll-supply =<&as3722_sd4>;
+		avdd_sata-supply = <&as3722_sd4>;
+		hvdd_sata-supply = <&as3722_gpio2_supply>;
+		vddio_pex_sata-supply = <&as3722_gpio2_supply>;
+		status = "okay";
+	};
+
+	xusb@70090000 {
+		/* nvidia,uses_external_pmic;
+		nvidia,gpio_controls_muxed_ss_lanes; */
+		nvidia,gpio_ss1_sata = <0>;
+		nvidia,portmap = <0x702>; /* SSP1, USB2P0, USBP1, USBP2 */
+		nvidia,ss_portmap = <0x27>; /* SSP0 Disable SSP1 on USB2P2 */
+		nvidia,lane_owner = <1>; /* SATA = USB#_SS_port1 PCIe PCIe */
+		nvidia,ulpicap = <0>; /* No ulpi support. can we remove */
+		status = "okay";
+	};
+};
