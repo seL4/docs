@@ -1,0 +1,22 @@
+--- /scratch/hikey3/linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S	2016-12-07 10:56:05.019616557 +1100
++++ /scratch/hikey/linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S	2016-12-05 10:49:54.201610316 +1100
+@@ -57,6 +57,19 @@
+   msr sctlr_el2, x0
+   isb
+ 
++/* Enable us to write to CPUACTLR_EL1
++ * in EL1 unsecured mode */
++
++  mrs x0, ACTLR_EL2
++  orr x0, x0, #1
++  msr ACTLR_EL2, x0
++
++/* Set total outstanding prefetchs
++ * bic x0, x0, #7 << 13 clear the bits
++ * mov x1, #0 << 13 disable the prefetcher 
++ * Valid numbers from 0-8 */
++
++
+ /* Set the exection state of the lower exception level
+  * hcr_el2 = #(1 << 31) and spsr_el2 = #0x3c5 for 64-bit
+  * hcr_el2 = 0 and spsr_el2 = #0x1d3 for 32-bit
