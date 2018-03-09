@@ -4,6 +4,9 @@ Currently WIP
 
 To build and host locally:
 ```
+git submodule init
+git submodule update
+
 # If this doesn't work see: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 bundle install
 
