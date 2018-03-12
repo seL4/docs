@@ -45,7 +45,7 @@ developed by Jochen Liedtke in the early '90s. See the
 [L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia and the website
 [L4HQ](http://l4hq.org/) for more details.
 
-{{<http://sel4.systems/images/familytree.png>||width="500"}}
+<img style="500" src="http://sel4.systems/images/familytree.png" />
 
 L4 microkernel family tree. Black arrows indicate code, green arrows ABI
 inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
@@ -576,12 +576,11 @@ There are plenty of references on the [documentation page](https://wiki.sel4.sys
 # What can I do with seL4?
  You can use seL4 for research, education or
 commerce. Details are specified in the standard open-source
-[#lic|licenses](../#lic|licenses) that come with the code. Different licenses apply
+[licenses](#what-are-the-licensing-conditions) that come with the code. Different licenses apply
 to different parts of the code, but the conditions are designed to ease
 uptake.
 
 # What are the licensing conditions?
- <<Anchor(lic)>>
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
@@ -627,14 +626,13 @@ familiarising yourself with seL4.
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-- [[<http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml%7Cfrom>
-      L3 to seL4 – what have we learnt in 20 years of L4
-      microkernels?]], a 20-year retrospective of L4 microkernels;
+- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml), 
+  a 20-year retrospective of L4 microkernels;
 - [the original 2009 paper](http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
       verification;
-- [[<http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml%7Ca>
-      much longer paper detailing the complete verification story of
-      seL4]], including the high-level security proofs, binary
+- [a much longer paper detailing the complete verification story of
+      seL4](http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
+      , including the high-level security proofs, binary
       verification and timeliness analysis. It also contains an analysis
       of the cost of verification, and how it compares to that of
       traditionally-engineered systems.
