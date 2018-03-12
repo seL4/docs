@@ -8,7 +8,7 @@ concentrator.
 We used the suggested circuit in the
 [Manufacturer's Datasheet](http://datasheets.maximintegrated.com/en/ds/MAX218.pdf), laid out on a piece of perfboard.
 
-[{{<attachment:levelconverter-small.jpg>}}](<attachment:levelconverter.jpg>)
+<img src="levelconverter-small.jpg" />
 
 This picture shows one wired to convert a single channel; because most
 of our gadgets need only a three-wire interface, you can convert two
