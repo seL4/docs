@@ -1,14 +1,16 @@
-# Pre-Requisites
+# HiKey
+
+### Pre-Requisites
 
 
 - One HiKey Board. See
         [Hikey 96Board](http://www.96boards.org/products/ce/hikey/)
 - Fully working development environment. See
-        [Getting started](https://wiki.sel4.systems/Getting%20started)
+        [Getting started](/Getting_started)
 
-# Getting Started
+### Getting Started
  The Hikey board is based around the
-[HiSilicon Kirin 620](https://github.com/96boards/documentation/blob/master/hikey/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf) eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
+[HiSilicon Kirin 620](https://github.com/96boards/documentation/blob/master/consumer/hikey/hardware-docs/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf) eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
 Toe start using 32-bit seL4 follow the below instructions. They will
 walk you step by step beginning from the source files and ultimately
 running an image.
