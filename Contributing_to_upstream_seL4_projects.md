@@ -17,7 +17,9 @@ Please sign the
 [Contributor License Agreement](https://sel4.systems/Community/Contributing/seL4-CLA.pdf), scan it and send it to us at ''licensing AT
 sel4.systems.''
 
-{{ <http://i.imgur.com/kuAok5A.png> }} ==== Figure 1 ====
+<img src="http://i.imgur.com/kuAok5A.png" />
+
+#### Figure 1
 
 We have two main groups of publicly hosted projects: the first group is
 the set of repositories found at <https://github.com/sel4>. The second
@@ -45,9 +47,9 @@ repository, there are several versioned manifests such as
 You want to pass the name of the manifest to your “repo init” command,
 similar to:
 
-''“repo init -u <MANIFEST_REPO_CLONE_URL> -m
-<VERSIONED_MANIFEST_FILENAME>”''
-
+~~~
+repo init -u <MANIFEST_REPO_CLONE_URL> -m <VERSIONED_MANIFEST_FILENAME>
+~~~
 Code being on the master branch **does not imply** that it has been
 formally verified. The verified build of the kernel is currently I.MX7
 Sabre platform on ARM. To see which code is verified, please have a look

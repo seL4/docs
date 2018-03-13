@@ -40,7 +40,7 @@ board. So the order of the pins in the photo is reversed)
 
 <img style="width: 50%" src="can.JPG" />
 
-Saleae provides the {{<https://www.saleae.com/downloads%7CLogic>}}
+Saleae provides the <https://www.saleae.com/downloads%7CLogic>
 software which is used to collect and analyse data.
 
 <img style="width: 50%" src="logic.png" />
