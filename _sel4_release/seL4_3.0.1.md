@@ -25,4 +25,4 @@ This change is source and binary compatible.
 ## Full changelog
 
 
-Use git log 3.0.0..3.0.1
+Use `git log 3.0.0..3.0.1`
