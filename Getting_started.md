@@ -64,7 +64,7 @@ Other projects may be added later.
 ## Supported Target Platforms
 
 
-Read the [Hardware](../Hardware) pages to see a list of supported platforms,
+Read the [Hardware](Hardware) pages to see a list of supported platforms,
 and special instructions for particular hardware platforms.
 
 ## Setting up your machine
@@ -105,16 +105,19 @@ a project to start with. As an example, we'll use sel4test.
 - First create a directory for Repo to work in, then enter it and
       initialise it using Repo:
 
-      ```
-      mkdir seL4test cd seL4test repo init -u <https://github.com/seL4/sel4test-manifest.git>
-      ```
+  ~~~bash
+  mkdir seL4test 
+  cd seL4test
+  repo init -u https://github.com/seL4/sel4test-manifest.git
+  ~~~
 
-To get the actual
-project and subproject source, you'll then need to use repo sync, which
-will then clone and checkout the project and all the required
-subprojects.
+  To get the actual project and subproject source, you'll then need to use repo sync, which
+  will then clone and checkout the project and all the required
+  subprojects.
 
-` repo sync `
+  ~~~ 
+  repo sync
+  ~~~
 
 #### Getting cross compilers
  There are instructions on how to get
@@ -130,7 +133,7 @@ other distros, links to toolchains for other distros are provided.
 ## Start with the tutorials
 
 
-The seL4 and CAmkES [Tutorials](../Tutorials) are an excellent, holistic
+The seL4 and CAmkES [Tutorials](Tutorials) are an excellent, holistic
 introduction to the design of seL4, and also to preparing to develop for
 SEL4, and they are also used internally to train new seL4 developers.
 You are strongly encouraged to complete the tutorials if you are new to
