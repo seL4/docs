@@ -15,7 +15,7 @@ source code. This page documents this process.
 
 This page will use file paths relative to the root of the
 [seL4 repository](https://github.com/seL4/seL4). In projects
-cloned using a repo manifest, this will correspond to the kernel
+cloned using a repo manifest, this will correspond to the `kernel`
 subdirectory of the top-level directory.
 
 ## Types of API
@@ -23,37 +23,33 @@ subdirectory of the top-level directory.
 
 seL4 has two types of API:
 
-- System Calls, mostly concerned with message-passing
-        between threads. Some examples are Send and Recv
-        * In addition to the message-passing syscalls, there are
-        debugging and benchmarking syscalls which can be enabled with a
-        build flag. These are true syscalls, rather than
-        object invocations.
+- System Calls, mostly concerned with message-passing between threads. Some examples are `Send` and `Recv`
+    * In addition to the message-passing syscalls, there are
+      debugging and benchmarking syscalls which can be enabled with a
+      build flag. These are true syscalls, rather than object invocations.
 - Object Invocations, which are regular message-passing system
-        calls, but whose recipient is effectively the kernel itself, and
-        the message encodes some operation on a Kernel Object. Some
-        examples are TCB_Resume and CNode_Copy.
-        -   Some kernel objects and object invocations are specific to a
-            particular processor architecture. Some examples are
-            X86_Page_Map, and ARM_VCPU_InjectIrq.
+  calls, but whose recipient is effectively the kernel itself, and
+  the message encodes some operation on a Kernel Object. Some
+  examples are `TCB_Resume` and `CNode_Copy`.
+    - Some kernel objects and object invocations are specific to a
+      particular processor architecture. Some examples are
+      `X86_Page_Map`, and `ARM_VCPU_InjectIrq`.
 
 The API documentation in the manual is divided into the following hierarchy:
 
 - System Calls
-        -   General System Calls
-        -   Debugging System Calls
-
-        * Benchmarking System Calls
+    - General System Calls
+    - Debugging System Calls
+    - Benchmarking System Calls
 - Architecture-Independent Object Methods
 - x86-Specific Object Methods
-        -   General x86 Object Methods
-        -   IA32 Object Methods
-
-        * x86_64 Object Methods
+    - General x86 Object Methods
+    - IA32 Object Methods
+    - x86_64 Object Methods
 - ARM-Specific Object Methods
-        -   General ARM Object Methods
-        -   aarch32 Object Methods
-        -   aarch64 Object Methods
+    - General ARM Object Methods
+    - aarch32 Object Methods
+    - aarch64 Object Methods
 
 The process of generating API docs is different between System Calls and
 Object Invocations, though each process has some parts in common.
@@ -91,19 +87,30 @@ explicitly add to doxygen comments inside @xmlonly ... @endxmlonly
 blocks.
 
 Here's a description of all the custom tags:
-||<manual name="NAME" label="LABEL"/>||Introduces documentation
-for a new function. The title of the section documenting the function
-will be NAME. Other parts of the manual can refer to this function's
-documentation with \\autoref{sec:LABEL}||
-||<autoref sec="SEC"/>||Translated to the latex
-\\autoref{sec:SEC}|| ||<shortref sec="SEC"/>||Translated to the
-latex \\ref{sec:SEC}|| ||<errorenumdesc/>||Translated to the latex
-\\errorenumdesc, a custom command defined in
-[manual/parts/api.tex](https://github.com/seL4/seL4/blob/master/manual/parts/api.tex)||
-||<obj name="NAME"/>||Translated to the latex \\obj{NAME}, a
-custom command defined in
-[manual/manual.tex](https://github.com/seL4/seL4/blob/master/manual/manual.tex)||
-||<texttt text="TEXT"/>||Translated to the latex \\texttt{TEXT}||
+
+~~~xml
+<!-- 
+Introduces documentation for a new function. 
+The title of the section documenting the function will be NAME. 
+Other parts of the manual can refer to this function's documentation with \autoref{sec:LABEL} 
+-->
+<manual name="NAME" label="LABEL"/>
+
+<!-- Translated to the latex \autoref{sec:SEC} -->
+<autoref sec="SEC"/>
+
+<!-- Translated to the latex \ref{sec:SEC} -->
+<shortref sec="SEC"/>
+
+<!-- Translated to the latex \errorenumdesc, a custom command defined in manual/parts/api.tex <https://github.com/seL4/seL4/blob/master/manual/parts/api.tex> -->
+<errorenumdesc/>
+
+<!-- Translated to the latex \obj{NAME}, a custom command defined in manual/manual.tex <https://github.com/seL4/seL4/blob/master/manual/manual.tex> -->
+<obj name="NAME"/>
+
+<!-- Translated to the latex \texttt{TEXT} -->
+<texttt text="TEXT"/>
+~~~
 
 Note that these must appear within @xmlonly ... @endxmlonly blocks in
 order to function.
@@ -113,20 +120,20 @@ order to function.
 
 Each function in the API must have the following documentation:
 
-- a @xmlonly <manual name="..." label=".../> @endxmlonly tag
-        with the name for use in the manual's text, and a label for
+- a `@xmlonly <manual name="..." label=".../> @endxmlonly` tag
+        with the `name` for use in the manual's text, and a `label` for
         creating references within the manual
-- a @brief description
+- a `@brief` description
 - a detailed description
-- a @param description of each argument
-- a @return description of the return value, unless the function
-        is void
+- a `@param` description of each argument
+- a `@return` description of the return value, unless the function
+        is `void`
 
 ### Detecting Missing Documentation
 
 
 If a required part of a function's documentation is empty, the
-translation script will insert the LaTeX command \\todo, defined in
+translation script will insert the LaTeX command `\todo`, defined in
 [manual/parts/api.tex](https://github.com/seL4/seL4/blob/master/manual/parts/api.tex).
 It generates the text "TODO" to help readers of the manual identify
 which parts of the API are undocumented.
@@ -135,11 +142,11 @@ which parts of the API are undocumented.
 
 
 The LaTeX files generated by the translation script are placed in
-manual/generated. Doxygen-generated XML files are placed in
-manual/doxygen-output/xml.
+`manual/generated`. Doxygen-generated XML files are placed in
+`manual/doxygen-output/xml`.
 
 Each API is documented in a separate file. The separation of APIs is
-implemented using doxygen's @defgroup directive. Specifically, each API
+implemented using doxygen's `@defgroup` directive. Specifically, each API
 is defined in a separate named group. In the doxygen-generated XML, each
 group's documentation is in a separate file. The XML-to-LaTeX script
 then transforms each relevant XML file into the corresponding LaTeX
@@ -149,7 +156,7 @@ file.
 
 
 The correct behaviour of the manual build system depends on a specific
-doxygen configuration. A Doxyfile containing this configuration is
+doxygen configuration. A `Doxyfile` containing this configuration is
 checked into the kernel repo at
 [manual/Doxyfile](https://github.com/seL4/seL4/blob/master/manual/Doxyfile)
 
