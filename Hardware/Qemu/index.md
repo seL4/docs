@@ -11,12 +11,12 @@ machine emulator and virtualizer, and can emulate different
 architectures on different systems.
 
 Qemu can run ARM targets too, more info about that can be found in
-[Debugging Guide](https://wiki.sel4.systems/Debugging%20guide#Qemu).
+[Debugging Guide](/Debugging_guide#qemu).
 
 We used Ubuntu 16.04 for our tests, but in theory qemu ''should'' work
 the same under Windows/MacOS.
 
-Note that [VMWare](https://wiki.sel4.systems/Hardware/VMware)
+Note that [VMWare](../VMware)
 can be used to run seL4 too, but it requires a licensed version of
 VMWare workstation (although the free VMWare player can be used too -
 but it doesn't offer a lot of features, making its use even more
@@ -45,7 +45,7 @@ first from BIOS. You can always check by `lscpu` and look for **vmx** flag.
 We are using [camkes-vm](https://github.com/seL4/camkes-vm)
 Github repository. It contains Virtual Machine build as a CAmkES
 component. More information about the VM on seL4 can be found on
-[CAmkESVM](https://wiki.sel4.systems/CAmkESVM) page.
+[CAmkESVM](/CAmkESVM) page.
 
 I replicate some of the steps described there to make it easier to
 follow. First pull the code from the repository using `repo` tool.
@@ -58,7 +58,7 @@ repo sync
 
 We use `optiplex9020` configuration, because it is the most generic
 one. The other configurations for
-[CMA34DBMC](https://wiki.sel4.systems/CMA34DBMC) can be
+[CMA34DBMC](/CMA34DBMC) can be
 compiled too, but you can't run them properly in qemu because they
 require a very specific hardware.
 
@@ -90,7 +90,7 @@ And you should be able to see the login prompt after a while:
 
 Login with the username "root" and the password "root". Again, for more
 details about the VM, go to
-[CAmkESVM](https://wiki.sel4.systems/CAmkESVM) page.
+[CAmkESVM](/CAmkESVM) page.
 
 The qemu arguments are:
 
@@ -129,7 +129,7 @@ grub).'' (more
 
 The most convenient way to get a hdd set up, was to first set up a
 VMWare virtual hard drive as described in
-[VMWare](https://wiki.sel4.systems/Hardware/VMware) (i.e.
+[VMWare](../VMware) (i.e.
 install linux, modify grub, save images on the hdd). The second step is
 to convert the VMDK image to qcow2 (qemu) image. Use `qemu-img`:
 
