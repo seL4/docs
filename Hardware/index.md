@@ -37,7 +37,7 @@
 |[Odroid-XU](odriod-XU) |Exynos5 |A15 |v7A |ARM HYP|limited System MMU |unverified |Data61 |Data61 | |
 |[Sabre Lite](sabreLite) |i.MX6 |A9 |v7A |No |No|verified |Data61 |Data61 |current verified version |
 |[TK1 SOM (Colorado Engineering)](CEI_TK1_SOM) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 |Small form-factor Tegra K1 |
-|[Zynq-7000 ZC706 Evaluation Kit](zynq7000) |Zynq 7000 |A9 |v7A |No |No |unverified|Data61 |Data61 | |
+|Zynq-7000 ZC706 Evaluation Kit |Zynq 7000 |A9 |v7A |No |No |unverified|Data61 |Data61 | |
 
 ### ARMv8A
 
