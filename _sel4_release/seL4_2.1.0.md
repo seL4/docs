@@ -3,7 +3,7 @@ title: seL4 2.1.0
 version: 2.1.0
 ---
 # seL4 2.1.0 Release Notes
- == New Features ==
+## New Features
 
 - ability to generate libsel4 system calls without inlining them
 - new kernel debugging feature added, which allows developers to
@@ -20,10 +20,10 @@ version: 2.1.0
 ## API Additions
 
 
-- seL4_MappingFailedLookupLevel() - get the page table level a
+- `seL4_MappingFailedLookupLevel()` - get the page table level a
       frame mapping failed at. This will always return 2 (second level
       page table) for currently supported 32 bit platforms.
-- seL4_NumInitialCaps constant added to bootinfo.h to track the
+- `seL4_NumInitialCaps` constant added to `bootinfo.h` to track the
       first free slot in the initial task's cspace.
 
 ## Upgrade notes
@@ -34,4 +34,4 @@ Source compatible, some API additions.
 ## Full changelog
 
 
-Use git log 2.0.0..2.1.0
+Use `git log 2.0.0..2.1.0`
