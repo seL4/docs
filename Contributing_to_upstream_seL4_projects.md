@@ -53,8 +53,7 @@ repo init -u <MANIFEST_REPO_CLONE_URL> -m <VERSIONED_MANIFEST_FILENAME>
 Code being on the master branch **does not imply** that it has been
 formally verified. The verified build of the kernel is currently I.MX7
 Sabre platform on ARM. To see which code is verified, please have a look
-at [our verified
-platforms](https://wiki.sel4.systems/Hardware).
+in the table on our [hardware](/Hardware) page.
 
 ## User-level code:
 
@@ -68,5 +67,5 @@ be happy to hand control to a suitable external maintainer for many of
 those. Our priority is on building an ecosystem and easing deployment of
 and with the system.
 
-See [Suggested Projects](https://sel4.systems/Info/Projects/)
+See [Suggested Projects](Suggested_projects)
 for suggestions on where to contribute.
