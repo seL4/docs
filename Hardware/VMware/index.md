@@ -9,7 +9,7 @@ and for a Linux host machine. May work on Mac host machine, won't work
 for Windows host (although general idea should be similar).
 
 This guide assumes that your project is all set up and configured to
-build for x86. Read [Getting started](../Getting started) otherwise.
+build for x86. Read [Getting started](/Getting_started) otherwise.
 
 ## Setting up a VM
 
@@ -113,13 +113,13 @@ menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
 }
 ~~~
 
-Of course, change the **--set=root <DeviceID>** line to your
+Of course, change the `--set=root <DeviceID>` line to your
 DeviceID (set the DeviceID from other entries already in your grub.cfg),
-and also change the **sel4-image-ia32-pc99** to match the name of your
+and also change the `sel4-image-ia32-pc99` to match the name of your
 binary image that your Make produces (look in your build logs or in
-images/ folder).
+`images/` folder).
 
-Also may be a good idea to add **set default=<seL4 menu index>**
+Also may be a good idea to add `set default=<seL4 menu index>`
 to the grub.cfg, so grub is configured to boot seL4.
 
 ## Using The VM to run seL4
