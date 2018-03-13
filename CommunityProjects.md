@@ -1,3 +1,4 @@
+# Community Projects
 This page collects seL4-based projects. If you know of a project that
 you'd like to be listed here, add it.
 
