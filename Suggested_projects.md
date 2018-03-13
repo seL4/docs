@@ -1,9 +1,9 @@
 # Suggested Projects
 
 
-After trying the existing projects (especially [[Getting started|seL4
-test suite]]) a good way to learn the intricacies of programming on
-top of seL4 is to do the exercise in the
+After trying the existing projects (especially those listed on [Getting started](Getting_started))
+a good way to learn the intricacies of programming on
+top of seL4 is to do the exercises in the
 [UNSW Advanced
 Operating Systems course](http://www.cse.unsw.edu.au/~cs9242/current/).
 
@@ -31,7 +31,7 @@ its drivers is trickier.
 
 Some interesting platforms that could support seL4 include:
 
-- Any of the Tegra S\`\`oCs from NVIDIA.
+- Any of the Tegra SoCs from NVIDIA.
 - The RK3188, maybe using the [Radxa Rock Pro](http://radxa.com/Home) development board
 - Any of the Arm V8 64-bit processors that are beginning to
       become available.
