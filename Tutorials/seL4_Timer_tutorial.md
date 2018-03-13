@@ -17,7 +17,7 @@ page, if they were covered by a previous tutorial in the series.
 
 - Allocate a notification object.
 - Set up a timer provided by seL4 libs.
-- Use seL4_libs functions to manipulate timer and
+- Use `seL4_libs` functions to manipulate timer and
       handle interrupts.
 
 ## Walkthrough
@@ -25,27 +25,46 @@ page, if they were covered by a previous tutorial in the series.
 
 First, build and run the tutorial:
 ```
-# select the config for the first tutorial make
-ia32_hello-timer_defconfig # build it make -j libmuslc && make # run
-it in qemu make simulate
+# select the config for the first tutorial
+make ia32_hello-timer_defconfig
+# build it
+make -j libmuslc && make
+# run it in qemu
+make simulate
 ```
 
 Before you have done any tasks, when running the tutorial should show
 the timer and timer client waking up, then a cap fault is triggered due
 to incomplete code:
 ```
-main: hello world timer client: hey hey hey main: got a message from
-0x61 to sleep 2 seconds Caught cap fault in send phase at address 0x0
-while trying to handle: vm fault on data at address 0x0 with status 0x4
-in thread 0xffaf7900 "hello-timer" at address 0x804841a With stack:
-0x80bc880: 0x806838c 0x80bc884: 0x61 0x80bc888: 0x2 0x80bc88c: 0x80482ff
-0x80bc890: 0x20 0x80bc894: 0x0 0x80bc898: 0x0 0x80bc89c: 0x0 0x80bc8a0:
-0x80bc8c0 0x80bc8a4: 0x80bc8d0 0x80bc8a8: 0x80be010 0x80bc8ac: 0x7
-0x80bc8b0: 0x0 0x80bc8b4: 0x0 0x80bc8b8: 0x0 0x80bc8bc: 0x10000000 QEMU:
-Terminated
+main: hello world
+timer client: hey hey hey
+main: got a message from 0x61 to sleep 2 seconds
+Caught cap fault in send phase at address 0x0
+while trying to handle:
+vm fault on data at address 0x0 with status 0x4
+in thread 0xffaf7900 "hello-timer" at address 0x804841a
+With stack:
+0x80bc880: 0x806838c
+0x80bc884: 0x61
+0x80bc888: 0x2
+0x80bc88c: 0x80482ff
+0x80bc890: 0x20
+0x80bc894: 0x0
+0x80bc898: 0x0
+0x80bc89c: 0x0
+0x80bc8a0: 0x80bc8c0
+0x80bc8a4: 0x80bc8d0
+0x80bc8a8: 0x80be010
+0x80bc8ac: 0x7
+0x80bc8b0: 0x0
+0x80bc8b4: 0x0
+0x80bc8b8: 0x0
+0x80bc8bc: 0x10000000
+QEMU: Terminated
 ```
 
-Look for TASK in the apps/hello-timer and apps/hello-timer directory for
+Look for `TASK` in the `apps/hello-timer` and `apps/hello-timer` directory for
 each task.
 
 ### TASK 1
@@ -58,17 +77,19 @@ task.
 ### TASK 2
 
 
-Use our library function sel4platsupport_get_default_timer to
-initialise a timer driver. Assign it to the timer global variable.
+Use our library function `sel4platsupport_get_default_timer` to
+initialise a timer driver. Assign it to the `timer` global variable.
 
 After this change, the server will no longer fault and the output will
 look something like this:
 ```
-Searching for ACPI_SIG_RSDP Parsing ACPI tables timer client: hey
-hey hey <hpet_get_timer@hpet.c>:362 Requested fsb delivery, but timer0
-does not support main: hello world main: got a message from 0x61 to
-sleep 2 seconds timer client wakes up: got the current timer tick:
-17299121
+Searching for ACPI_SIG_RSDP
+Parsing ACPI tables
+timer client: hey hey hey
+hpet_get_timer@hpet.c:362 Requested fsb delivery, but timer0 does not support
+main: hello world
+main: got a message from 0x61 to sleep 2 seconds
+timer client wakes up: got the current timer tick: 17299121
 ```
 
 ### TASK 3
