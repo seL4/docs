@@ -71,20 +71,13 @@ number of runnable threads, now log n)
         benchmarking
 
 tracepoints at once added
-```CONFIG_RELEASE_PRINTF}} in addition to
-`CONFIG_DEBUG
-```
-and
-```CONFIG_RELEASE`, which enables printf in a
-release build
+`CONFIG_RELEASE_PRINTF` in addition to `CONFIG_DEBUG` and `CONFIG_RELEASE`, which
+enables printf in a release build
 
 # API Changes
 
 
-- `seL4_Recv
-```
-replaces
-```seL4_Wait` on endpoints
+- `seL4_Recv` replaces `seL4_Wait` on endpoints
 - `seL4_Wait` is now only used on notification objects
 - Async endpoint -> notification object
 - sync endpoint -> endpoint
@@ -101,20 +94,18 @@ bound notification object.
 - `seL4_NotificationBits` size in bits of a notification object
 - `seL4_IRQHandler_SetNotification` replaces deprecated
       `seL4_IRQHandler_SetEndpoint`
-- `seL4_Recv
-```
-replaces
-```seL4_Wait` for endpoints
+- `seL4_Recv` replaces `seL4_Wait` for endpoints
 - `seL4_Wait` used on notifications
 - `seL4_NBRecv` non-blocking (polling) receive on an endpoint,
       which fails
 
 if there is no message waiting. Opposite of `NBSend` (which silently
-fails if there is no receiver waiting) * `seL4_Poll` collects any
-signals from a notification objects, returns zero if there are none *
-`seL4_Signal` replaces deprecated seL4_Notify *
-`seL4_TCB_BindNotification` bind a notification to a tcb *
-`seL4_TCB_UnbindNotification` unbind a notification from a tcb
+fails if there is no receiver waiting)
+- `seL4_Poll` collects any
+signals from a notification objects, returns zero if there are none
+- `seL4_Signal` replaces deprecated `seL4_Notify`
+- `seL4_TCB_BindNotification` bind a notification to a tcb
+- `seL4_TCB_UnbindNotification` unbind a notification from a tcb
 
 ## Deprecations
 
@@ -144,10 +135,7 @@ library repositories. To see the changes please compare 1.0.4.xml and
 # Upgrade notes
 
 
-Calls to `seL4_Wait
-```
-no longer return a
-```seL4_MessageInfo_t`
+Calls to `seL4_Wait` no longer return a `seL4_MessageInfo_t`
 as `seL4_Wait` is intended to be used on notification objects.
 Calls to the prior version of `seL4_Wait` need to be replaced with
 `seL4_Recv`.
@@ -168,7 +156,7 @@ Use git log 1.0.4..2.0.0 in <https://github.com/seL4/seL4>
 # More details
 
 
-See the [[2.0.0
-manual|<http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf>]]
+See the [2.0.0
+manual](http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf)
 included in the release for detailed descriptions of the new features.
 Or ask on this mailing list!
