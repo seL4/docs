@@ -70,8 +70,8 @@ performance difference between verified and unverified branches on
 ARMv7. ARMv8 is not yet fully optimised.
 
 # On what hardware does seL4 run?
- == What processor architectures are
-supported? == Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
+## What processor architectures are supported?
+Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
 A9, A15) and x86 cores. Supported ARM platforms for these are the
 Freescale i.MX31, OMAP3 !BeagleBoard, Exynos Arndale 5250, Odroid-X,
 Odroid-XU, Inforce IFC6410 and Freescale i.MX6 Sabre Lite. All modern
@@ -142,8 +142,8 @@ Immediate application areas are in the financial, medical, automotive,
 avionics and defence sectors.
 
 # How good is seL4 at supporting virtual machines?
- == Can I run Linux
-on top of seL4? == Yes, seL4 can run Linux in a virtual machine. At
+## Can I run Linux on top of seL4?
+Yes, seL4 can run Linux in a virtual machine. At
 present the master branch supports this on ARMv7 processors (presently
 A15/A7 cores). For x86 there is experimental virtualisation support
 (requiring Intel VT-x, ETP and a HPET that supports MSI delivery).
@@ -571,7 +571,7 @@ There is a section on the fastpath and its verification in
 functionality/design/implementation/philosophy
 
 
-There are plenty of references on the [documentation page](https://wiki.sel4.systems/Documentation).
+There are plenty of references on the [documentation page](/Documentation).
 
 # What can I do with seL4?
  You can use seL4 for research, education or
@@ -588,8 +588,7 @@ libraries are mostly under BSD. See the
 
 # How do I contribute to seL4?
  See
-[How to
-Contribute](http://sel4.systems/Community/Contributing). In brief, seL4 was released under a complicated
+[How to Contribute](Contributing_to_upstream_seL4_projects). In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.
@@ -605,7 +604,7 @@ it into something that can be run.
 
 There are two recommended ways to do this.
 
-- [CAmKES](http://sel4.systems/Info/CAmkES) is the
+- [CAmKES](/CAmkES) is the
       Component Architecture for Micro-Kernel-based Embedded Systems. It
       provides a language for describing the distribution of resources
       to components, and the assignment of components to address spaces.
@@ -613,7 +612,7 @@ There are two recommended ways to do this.
       processes, but is generally more low-level.
 
 For build instructions, and how to get started, see the
-[Download](http://sel4.systems/Info/GettingStarted/) page.
+[Getting started](Getting_started) page.
 Also, UNSW's [Advanced Operating Systems course](http://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
 builds an OS on top of seL4. If you have access to a Sabre Lite board,
 you should be able to do the project work yourself as a way of
