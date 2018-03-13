@@ -9,7 +9,7 @@ VSpace, and subsequently executed, while facilitating IPC between the
 two modules. It also shows how threads with different CSpaces have to
 maneuver in order to pass capabilities to one another.
 
-Don't gloss over the globals declared before main() -- they're declared
+Don't gloss over the globals declared before `main()` -- they're declared
 for your benefit so you can grasp some of the basic data structures.
 Uncomment them one by one as needed when going through the tasks.
 
@@ -35,13 +35,16 @@ they were covered by a previous tutorial in the series.
 
 ## Walkthrough
 ```
-# select the config for the first tutorial make
-ia32_hello-4_defconfig # build it make -j8 # run it in qemu make
-simulate
+# select the config for the first tutorial
+make ia32_hello-4_defconfig
+# build it
+make -j8
+# run it in qemu
+make simulate
 ```
-Look for TASK in the apps/hello-4 and apps/hello-4-app
+Look for `TASK` in the `apps/hello-4` and `apps/hello-4-app`
 directory for each task. The first set of tasks are in
-apps/hello-4/src/main.c and the rest are in apps/hello-4-app/src/main.c
+`apps/hello-4/src/main.c` and the rest are in `apps/hello-4-app/src/main.c`
 
 ### TASK 1
 
@@ -52,12 +55,12 @@ availability, and several other privileged bits of information, the init
 thread is also responsible, surprisingly, for reserving certain critical
 ranges of memory as being used, and unavailable for applications.
 
-This call to sel4utils_bootstrap_vspace_with_bootinfo_leaky() does
+This call to `sel4utils_bootstrap_vspace_with_bootinfo_leaky()` does
 that. For an interesting look at what sorts of things the init thread
 does, see:
-static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[]),
+`static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])`,
 which is eventually called on by
-sel4utils_bootstrap_vspace_with_bootinfo_leaky(). So while this
+`sel4utils_bootstrap_vspace_with_bootinfo_leaky()`. So while this
 function may seem tedious, it's doing some important things.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h>
@@ -67,9 +70,9 @@ function may seem tedious, it's doing some important things.
 ### TASK 2
 
 
-sel4utils_configure_process_custom took a large amount of the work
+`sel4utils_configure_process_custom` took a large amount of the work
 out of creating a new "processs". We skipped a number of steps. Take a
-look at the source for sel4utils_configure_process_custom() and
+look at the source for `sel4utils_configure_process_custom()` and
 notice how it spawns the new thread with its own CSpace by
 automatically. This will have an effect on our tutorial! It means that
 the new thread we're creating will not share a CSpace with our main
@@ -104,7 +107,7 @@ execution. We could also have spawned the new thread as a listener
 instead, and made it wait for us to send it a message with a sufficient
 capability.
 
-So we use vka_cspace_make_path(), which locates one free capability
+So we use `vka_cspace_make_path()`, which locates one free capability
 slot in the selected CSpace, and returns a handle to it, to us. We then
 filled that free slot in the new thread's CSpace with a **badged**
 capability to the endpoint we are listening on, so as so allow it to
@@ -136,7 +139,7 @@ communicate with us, we can let it run. Complete this step and proceed.
 ### TASK 7
 
 
-We now wait for the new thread to send us data using seL4_Recv()...
+We now wait for the new thread to send us data using `seL4_Recv()`...
 
 Then we verify the fidelity of the data that was transmitted.
 
@@ -147,7 +150,7 @@ Then we verify the fidelity of the data that was transmitted.
 ### TASK 8
 
 
-Another demonstration of the sel4_Reply() facility: we reply to the
+Another demonstration of the `sel4_Reply()` facility: we reply to the
 message sent by the new thread.
 
 <https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359>
@@ -157,9 +160,9 @@ message sent by the new thread.
 ### TASK 9
 
 
-In the new thread, we initiate communications by using seL4_Call(). As
+In the new thread, we initiate communications by using `seL4_Call()`. As
 outlined above, the receiving thread replies to us using
-sel4_ReplyRecv(). The new thread then checks the fidelity of the data
+`sel4_ReplyRecv()`. The new thread then checks the fidelity of the data
 that was sent, and that's the end.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>
