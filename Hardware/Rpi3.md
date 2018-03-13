@@ -73,7 +73,7 @@ In this section you should
 find the two most convenient methods of getting a kernel image booted on
 your RPi3 described. All three methods assume that you have already
 built a kernel image using one of our projects -- such as
-[seL4Test](Testing).
+[seL4Test](/Testing).
 
 The two methods described here are using the SD card and TFTP.
 
