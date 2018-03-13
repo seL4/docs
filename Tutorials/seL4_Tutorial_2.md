@@ -12,7 +12,7 @@ it addresses conceptual problems for two different types of developers:
 - New kernel developers, for whom the tutorial will prompt them on
       what to read about.
 
-Don't gloss over the globals declared before main() -- they're declared
+Don't gloss over the globals declared before `main()` -- they're declared
 for your benefit so you can grasp some of the basic data structures.
 Uncomment them one by one as needed when going through the tasks.
 
@@ -34,12 +34,15 @@ Uncomment them one by one as needed when going through the tasks.
 
 ## Walkthrough
 ```
-# select the config for the first tutorial make
-ia32_hello-2_defconfig # build it make -j8 # run it in qemu make
-simulate
+# select the config for the first tutorial
+make ia32_hello-2_defconfig
+# build it
+make -j8
+# run it in qemu
+make simulate
 ```
 
-Look for TASK in the apps/hello-2 directory for each task.
+Look for `TASK` in the `apps/hello-2` directory for each task.
 
 ### TASK 1
 
@@ -54,12 +57,14 @@ obtain that structure.
 
 Note that when you run the example, you should get a message similar to:
 ```
-6 untypeds of size 29 hello-2: <main@main.c>:132 [Cond failed:
-allocman == NULL] Failed to initialize alloc manager. Memory pool
-sufficiently sized? Memory pool pointer valid?
+6 untypeds of size 29
+hello-2: <main@main.c>:132 [Cond failed: allocman == NULL]
+Failed to initialize alloc manager.
+Memory pool sufficiently sized?
+Memory pool pointer valid?
 ```
-until Task 4, where
-you set up memory management.
+
+until Task 4, where you set up memory management.
 
 <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
 
@@ -85,7 +90,7 @@ layout of the BootInfo.
 
 In seL4, memory management is delegated in large part to userspace, and
 each process manages its own page faults with a custom pager. Without
-the use of the allocman library and the VKA library, you would have to
+the use of the `allocman` library and the `VKA` library, you would have to
 manually allocate a frame, then map the frame into a page-table, before
 you could use new memory in your address space. In this tutorial you
 don't go through that procedure, but you'll encounter it later. For now,
@@ -98,7 +103,7 @@ step.
 ### TASK 5
 
 
-libsel4vka is an seL4 type-aware object allocator that will allocate new
+`libsel4vka` is an seL4 type-aware object allocator that will allocate new
 kernel objects for you. The term "allocate new kernel objects" in seL4
 is a more detailed process of "retyping" previously un-typed memory.
 seL4 considers all memory that hasn't been explicitly earmarked for a
@@ -225,14 +230,14 @@ kernel successfully, we cause it to print something to the screen.
 ## Globals links
 
 
-- \`sel4_BootInfo\`:
+- `sel4_BootInfo`:
       <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
-- \`simple_t\`:
+- `simple_t`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
-- \`vka_t\`:
+- `vka_t`:
       <https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h>
-- \`allocman_t\`:
+- `allocman_t`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h>
-- \`name_thread()\`:
+- `name_thread()`:
       <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-2/src/util.c>
 
