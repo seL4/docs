@@ -14,10 +14,7 @@ title: seL4 3.2.0
 # Implementation improvements
 
 
--   Several enhancements for both `x86
-```
-and
-```ARM` have
+-   Several enhancements for both `x86` and `ARM` have
     been made. Please see the commit log for details.
 
 # API Changes
