@@ -34,7 +34,7 @@ is the same as is already used between the CPU & GPU board. Order codes:
       pcb screw
 
 ## Using Linux with this daughterboard for CAN
-(**hello world & testing**) See [Using CAN on L4T through an MCP251X](L4TCan)
+(**hello world & testing**) See [Using CAN on L4T through an MCP251X](../L4TCan)
 
 ## Pinout detail
  The font on the silkscreen indicating pins is
