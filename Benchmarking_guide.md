@@ -35,7 +35,7 @@ time of the next thread.
 After enabling this feature, some few system calls can be used to start,
 stop, and retrieve data.
 
-**seL4_BenchmarkResetLog() ** This system call resets global counters
+**seL4_BenchmarkResetLog()** This system call resets global counters
 (since the previous call to the same function) and idleThread counters
 that hold utilisation values, and starts CPU utilisation tracking.
 
@@ -51,7 +51,7 @@ doesn't reset the counters. Calling this system call without a previous
 seL4_BenchmarkResetLog() call has no effect.
 
 **seL4_BenchmarkGetThreadUtilisation(seL4_CPtr thread_cptr)** Gets
-the utilisation time of the thread that **thread_cptr **capability
+the utilisation time of the thread that **thread_cptr** capability
 points to between calls to seL4_BenchmarkResetLog() and
 seL4_BenchmarkFinalizeLog(). The utilisation time is dumped to the
 IPCBuffer (first 64-bit word) of the calling thread into a fixed
@@ -60,30 +60,28 @@ dumped to subsequent 64-bit words in the IPCBuffer.
 
 Example code of using this feature:
 ```cpp
- #include
-<sel4/benchmark_utilisation_types.h>
+#include <sel4/benchmark_utilisation_types.h>
 
-uint64_t *ipcbuffer = (uint64_t*)
-&(seL4_GetIPCBuffer()->msg[0]);
+uint64_t *ipcbuffer = (uint64_t*) &(seL4_GetIPCBuffer()->msg[0]);
 
 seL4_BenchmarkResetThreadUtilisation(seL4_CapInitThreadTCB);
 
-seL4_BenchmarkResetLog(); ... seL4_BenchmarkFinalizeLog();
+seL4_BenchmarkResetLog();
+...
+seL4_BenchmarkFinalizeLog();
 
 seL4_BenchmarkGetThreadUtilisation(seL4_CapInitThreadTCB);
-printf("Init thread utilisation = %llun",
-ipcbuffer[BENCHMARK_TCB_UTILISATION]); printf("Idle thread
-utilisation = %llun", ipcbuffer[BENCHMARK_IDLE_UTILISATION]);
-printf("Overall utilisation = %llun",
-ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
+printf("Init thread utilisation = %llun", ipcbuffer[BENCHMARK_TCB_UTILISATION]);
+printf("Idle thread utilisation = %llun", ipcbuffer[BENCHMARK_IDLE_UTILISATION]);
+printf("Overall utilisation = %llun", ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
 ```
 
 ## In kernel log-buffer
 
 
 An in-kernel log buffer can be provided by the user when
-CONFIG_ENABLE_BENCHARMKS is set with the system call
-seL4_BenchmarkSetLogBuffer. Users must provide a large frame capability
+`CONFIG_ENABLE_BENCHARMKS` is set with the system call
+`seL4_BenchmarkSetLogBuffer`. Users must provide a large frame capability
 for the kernel to use as a log buffer. This is mapped write-through to
 avoid impacting the caches, assuming that the kernel only writes to the
 log buffer and doesn't read to it during benchmarking. Once a benchmark
@@ -97,8 +95,7 @@ points and kernel entry tracking).
 to track the time between points.
 
 ### How to use
- Set "Maximum number of tracepoints" in Kconfig (seL4
-> seL4 System Parameters) to a non-zero value.
+ Set "Maximum number of tracepoints" in Kconfig (seL4 > seL4 System Parameters) to a non-zero value.
 
 Wrap the regions you wish to time with TRACE_POINT_START(i) and
 TRACE_POINT_STOP(i) where i is an integer from 0 to 1 less than the
@@ -117,12 +114,15 @@ An example of this feature in use can be found in the irq path benchmark
 in the sel4bench app(<https://github.com/seL4/libsel4bench>).
 
 ### Tracepoint Overhead
- ==== Measuring Overhead ==== Using
-tracepoints adds a small amount of overhead to the kernel. To measure
+
+#### Measuring Overhead
+Using tracepoints adds a small amount of overhead to the kernel. To measure
 this overhead, use a pair of nested tracepoints:
 ```cpp
- TRACE_POINT_START(0);
-TRACE_POINT_START(1); TRACE_POINT_STOP(1); TRACE_POINT_STOP(0);
+TRACE_POINT_START(0);
+TRACE_POINT_START(1); 
+TRACE_POINT_STOP(1); 
+TRACE_POINT_STOP(0);
 ```
 The outer tracepoints will measure the time taken to start and stop
 the inner tracepoints. The cycle count recorded by the outer tracepoints
@@ -158,7 +158,8 @@ of cycles added to a measurement by the tracepoint instrumentation
 
 
 ### Advanced Use
- ==== Conditional Logging ==== A log is stored when
+#### Conditional Logging
+A log is stored when
 TRACE_POINT_STOP(i) is called, only if a corresponding
 TRACE_POINT_START(i) was called since the last call to
 TRACE_POINT_STOP(i) or system boot. This allows for counting cycles of
@@ -167,39 +168,61 @@ a particular path through some region of code. Here are some examples:
 The cycles consumed by functions f and g is logged with the key 0, only
 when the condition c is true:
 ```cpp
- TRACE_POINT_START(0); f(); if (c) { g();
-TRACE_POINT_STOP(0); }
+TRACE_POINT_START(0); 
+f();
+if (c) {
+    g();
+    TRACE_POINT_STOP(0);
+}
 ```
 The cycles consumed by functions f and g is
 logged with the key 1, only when the condition c is true:
-```cpp
- if (c) { f(); TRACE_POINT_START(1); } g();
+~~~cpp
+if (c) {
+    f();
+    TRACE_POINT_START(1);
+}
+g();
 TRACE_POINT_STOP(1);
-```
+~~~
 These two techniques can be combined to
 record cycle counts only when a particular path between 2 points is
 followed. In the following example, cycles consumed by functions f, g
 and h is logged, only when the condition c is true. Cycle counts are
 stored with 2 keys (2 and 3) which can be combined after extracting the
 data to user level.
-```cpp
- TRACE_POINT_START(2); f(); if (c) { h();
-TRACE_POINT_STOP(2); TRACE_POINT_START(3); } g();
+~~~cpp
+TRACE_POINT_START(2);
+f();
+if (c) {
+    h();
+    TRACE_POINT_STOP(2);
+    TRACE_POINT_START(3);
+}
+g();
 TRACE_POINT_STOP(3);
-```
-==== Interleaving/Nesting ==== It's possible
-to interleave tracepoints:
+~~~
+#### Interleaving/Nesting
+It's possible to interleave tracepoints:
 ```cpp
- TRACE_POINT_START(0); ...
-TRACE_POINT_START(1); ... TRACE_POINT_STOP(0); ...
+TRACE_POINT_START(0);
+...
+TRACE_POINT_START(1);
+...
+TRACE_POINT_STOP(0);
+...
 TRACE_POINT_STOP(1);
 ```
 and to nest tracepoints:
-```cpp
- TRACE_POINT_START(0); ...
-TRACE_POINT_START(1); ... TRACE_POINT_STOP(1); ...
+~~~cpp
+TRACE_POINT_START(0);
+...
+TRACE_POINT_START(1);
+...
+TRACE_POINT_STOP(1);
+...
 TRACE_POINT_STOP(0);
-```
+~~~
 When interleaving or nesting tracepoints, be
 sure to account for the overhead that will be introduced.
 
@@ -218,20 +241,23 @@ CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES from menuconfig.
 An example how to create a user-level log buffer (using sel4 libraries)
 and tell the kernel about it is as follows:
 ```cpp
-
-
 #ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 
 #include <sel4/benchmark_track_types.h>
 
   /* Create large page to use for benchmarking and give to kernel */
-  void*log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1,
-  seL4_LargePageBits); if (log_buffer == NULL) { ZF_LOGF("Could not
-  map log_buffer page"); } seL4_CPtr buffer_cap =
-  vspace_get_cap(&env.vspace, log_buffer); if (buffer_cap == NULL) {
-  ZF_LOGF("Could not get cap for log buffer"); } int res_buf =
-  seL4_BenchmarkSetLogBuffer(buffer_cap); if (res_buf) {
-  ZF_LOGF("Could not set log buffer"); }
+  void*log_buffer = vspace_new_pages(&env.vspace, seL4_AllRights, 1, seL4_LargePageBits);
+  if (log_buffer == NULL) {
+    ZF_LOGF("Could not map log_buffer page");
+  }
+  seL4_CPtr buffer_cap = vspace_get_cap(&env.vspace, log_buffer);
+  if (buffer_cap == NULL) {
+    ZF_LOGF("Could not get cap for log buffer");
+  }
+  int res_buf = seL4_BenchmarkSetLogBuffer(buffer_cap);
+  if (res_buf) {
+    ZF_LOGF("Could not set log buffer");
+  }
 
 #endif CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 ```
@@ -250,7 +276,7 @@ call durations, modify line 56 of kernel/include/benchmark.h. This might
 be useful if you wish to time hardware events. For example, should you
 wish to time how long it takes for hardware to generate a fault to the
 kernel, perhaps record the cycle counter before causing the fault in
-userspace, then store the ksEntry as soon as you enter somewhere
+userspace, then store the `ksEntry` as soon as you enter somewhere
 relevant in the kernel, and then compare the difference of these two
 once you return to userspace, by reading out the value and taking the
 difference.
