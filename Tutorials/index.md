@@ -23,9 +23,10 @@ interacting directly with seL4 and our libraries.
 
 ### Get the code
 ```
-mkdir sel4-tutorials-manifest cd sel4-tutorials-manifest repo init
--u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m
-sel4-tutorials.xml repo sync
+mkdir sel4-tutorials-manifest
+cd sel4-tutorials-manifest
+repo init -u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m sel4-tutorials.xml
+repo sync
 ```
 
 ### Do the tutorials
@@ -66,9 +67,10 @@ generates the glue code for interacting with seL4.
 
 ### Get the code
 ```
-mkdir camkes-tutorials-manifest cd camkes-tutorials-manifest repo
-init -u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m
-camkes-tutorials.xml repo sync
+mkdir camkes-tutorials-manifest
+cd camkes-tutorials-manifest
+repo init -u <https://github.com/SEL4PROJ/sel4-tutorials-manifest> -m camkes-tutorials.xml
+repo sync
 ```
 
 ### Do the tutorials
