@@ -12,32 +12,47 @@ All CapDL-related projects are in this repo:
 <https://github.com/sel4/capdl>
 
 ## Example Spec
-```
+~~~
 arch ia32
 
 objects {
 
-    my_tcb = tcb my_cnode = cnode (3 bits) my_frame = frame (4k,
-    paddr: 0x12345000) // paddr is optional my_page_table = pt
-    my_page_directory = pd
+  my_tcb = tcb 
+  my_cnode = cnode (3 bits)
+  my_frame = frame (4k, paddr: 0x12345000) // paddr is optional
+  my_page_table = pt
+  my_page_directory = pd
 
 }
 
 caps {
 
-  // Specify cap addresses (ie. CPtrs) in cnodes. my_cnode { 1: my_tcb
-  2: my_frame 3: my_page_table 4: my_page_directory }
+  // Specify cap addresses (ie. CPtrs) in cnodes. 
+  my_cnode { 
+    1: my_tcb
+    2: my_frame
+    3: my_page_table
+    4: my_page_directory
+  }
  
-  // Specify address space layout. // With 4gb page directories, 4mb
-  page tables, and 4kb frames, // the frame at paddr 0x12345000 will be
-  mapped at vaddr 0xABCDE000. my_pd { 0x2AF: my_pt } my_pt { 0xDE:
-  my_frame }
+  // Specify address space layout.
+  // With 4gb page directories, 4mb page tables, and 4kb frames,
+  // the frame at paddr 0x12345000 will be mapped at vaddr 0xABCDE000.
+  my_pd {
+    0x2AF: my_pt
+  }
+  my_pt { 
+    0xDE: my_frame
+  }
  
-  // Specify root cnode and root paging structure of thread. my_tcb {
-  vspace: my_pd cspace: my_cnode }
+  // Specify root cnode and root paging structure of thread.
+  my_tcb {
+    vspace: my_pd
+    cspace: my_cnode
+  }
 
 }
-=
+~~~
 
 ## CapDL Translator (capDL-tool)
 
