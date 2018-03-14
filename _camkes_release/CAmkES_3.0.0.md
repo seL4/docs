@@ -84,7 +84,7 @@ You don't have to do anything. Your project will continue to work.
 
 
 CAmkES dependencies have changed. For a definitive (maintained) list,
-see: [CAmkES#Build_dependencies](../CAmkES#Build_dependencies)
+see: [CAmkES#build-dependencies](../CAmkES#build-dependencies)
 
 ## New Features
 
@@ -103,14 +103,14 @@ instructions,
 Previously, the values of settings (in "configuration" blocks) were
 strings under the hood. Now they are stored as a value of the
 appropriate (python) type, determined during parsing.
-[Read more.](CAmkESDifferences#Rich_Types_for_Settings)
+[Read more.](../CAmkESDifferences#rich-types-for-settings)
 
 ### Parametrised Buf Type
 
 
 The "Buf" type for dataports can now be optionally parametrised with the
 dataport's size in bytes.
-[Read more.](CAmkESDifferences#Parametrised_Buf_Type)
+[Read more.](../CAmkESDifferences#parametrised-buf-type)
 
 ### The seL4Asynch connector has been renamed to seL4Notification
 
@@ -139,7 +139,7 @@ types resemble structs and arrays in C.
 
 The syntax for declaring that a component exports an interface from one
 of it sub-components has changed.
-[See an example.](CAmkESDifferences#Hierarchical_Components)
+[See an example.](../CAmkESDifferences#hierarchical-components)
 
 ### Binary Semaphores
 
@@ -154,7 +154,7 @@ This is in addition to the existing primitives: semaphores and mutexes.
 CAmkES now comes with a small tool for caching compilation results based
 on source files. This should greatly reduce compilation times by not
 unnecessarily recompiling code. It is enabled by default. Control it
-with the CONFIG_CAMKES_ACCELERATOR config variable.
+with the `CONFIG_CAMKES_ACCELERATOR` config variable.
 [Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator)
 
 ### Python 3 Support

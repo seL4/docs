@@ -8,7 +8,7 @@ title: camkes-2.1.0
 ## New Features
 
 
-- runner takes an --architecture command line argument which selects
+- runner takes an `--architecture` command line argument which selects
       the target architecture. Valid arguments are: aarch32, arm_hyp,
       ia32
 - added the ability to specify a hardware dataport as cached.
@@ -21,19 +21,20 @@ title: camkes-2.1.0
 ## Removed Features
 
 
-- --hyp command line argument is replaced with
-      --architecture arm_hyp
+- `--hyp` command line argument is replaced with
+      `--architecture arm_hyp`
 
 ## API Removals
 
 
 ### Unmarshalling Helpers
- These were intended for use in templates,
-but are no longer used in any internal templates: * camkes_marshal *
-camkes_marshal_string * camkes_unmarshal *
-camkes_unmarshal_string
+These were intended for use in templates, but are no longer used in any internal templates:
+ * `camkes_marshal`
+ * `camkes_marshal_string`
+ * `camkes_unmarshal`
+ * `camkes_unmarshal_string`
 
 ### DMA Utilities
- These had been deprecated for a long period and
-are now being removed: * camkes_dma_page_alloc *
-camkes_dma_page_free
+ These had been deprecated for a long period and are now being removed:
+ * `camkes_dma_page_alloc`
+ * `camkes_dma_page_free`
