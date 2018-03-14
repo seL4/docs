@@ -3,21 +3,20 @@ version: 6.0.0
 title: seL4 6.0.0
 ---
 # seL4 Version 6.0.0 Release
- Announcing the release of
-```seL4
-6.0.0
-```
-with the following changes:
+ Announcing the release of `seL4 6.0.0` with the following changes:
 
 ## Highlights
- === ARM 32-bit SMP === * Works (and tested) only on
-Sabre/ARM with up to 4 cores. * Using the big kernel lock (same as x86
-implementation). * Boot core is assumed to have an ID of 0. * Kernel
-bootstraps and initialises data structures only on the boot core. *
-Root task proceeds on the boot core. * Cores are assumed to have linear
-IDes.
 
--   ARM IPI caveats:
+### ARM 32-bit SMP
+
+- Works (and tested) only on Sabre/ARM with up to 4 cores.
+- Using the big kernel lock (same as x86 implementation).
+- Boot core is assumed to have an ID of 0.
+- Kernel bootstraps and initialises data structures only on the boot core.
+- Root task proceeds on the boot core.
+- Cores are assumed to have linear IDes.
+
+#### ARM IPI caveats:
 
 - Reserving the first two per-core SGIs for seL4's IPI operations: 0
       to do a remote call, 1 to reschedule.
@@ -28,12 +27,11 @@ IDes.
 - Remote FPU operations (when migrating threads that use HW FPU).
 
 ### ARM FPU
- ARMv7 32-bit support is added to do lazy FP save/restore
+ARMv7 32-bit support is added to implement a lazy FP save/restore
 mechanism, required for user threads when they use the FPU. The
 following caveats exist:
 
-- Only support synchronous exceptions. No support for
-      asynchronous ones.
+- Only support synchronous exceptions. No support for asynchronous ones.
 - VFP opcodes are used instead of normal instructions to discard
       compiler warnings/errors.
 - Support is limited to specific ARM subarchitectures we support and
@@ -52,7 +50,7 @@ following caveats exist:
 
 - aarch32 - Implement lazy FP save/restore
 - ARM SMP support
-- add seL4_DebugDumpScheduler debug syscall
+- add `seL4_DebugDumpScheduler` debug syscall
 - x86: Split large structs into portions (See upgrade notes below)
 - License fixups
 
@@ -60,10 +58,10 @@ following caveats exist:
 
 
 - This release is not source compatible with previous releases.
-- seL4_DebugDumpScheduler has had its only argument removed as it
+- `seL4_DebugDumpScheduler` has had its only argument removed as it
         was unused.
 - On x86 some structs in the Bootinfo have been rearranged. This
-        only affects seL4_VBEModeInfoBlock_t which is used if VESA
+        only affects `seL4_VBEModeInfoBlock_t` which is used if VESA
         BIOS Extensions (VBE) information is being used.
 
 # Full changelog
