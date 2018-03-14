@@ -70,76 +70,76 @@ master of seL4.
 ### API Changes
 
 
-- seL4_TCB_Configure arguments changed (domain removed, scheduling
+- `seL4_TCB_Configure` arguments changed (domain removed, scheduling
       context cap, max priority, criticality, max criticality, temporal
       exception handler added). Fault endpoints are also now specified
       in the caller's cspace, as they are installed the the TCB cspace
       and looked up once rather than every fault.
-- seL4_TCB_SetSpace temporal exeception handler added.
+- `seL4_TCB_SetSpace` temporal exeception handler added.
 
 ### API Additions
 
 
-- seL4_CapSchedControl - initial cap for control of CPU time
-- seL4_SchedContextObject - new object for that allows threads
+- `seL4_CapSchedControl` - initial cap for control of CPU time
+- `seL4_SchedContextObject` - new object for that allows threads
       access to CPU time
-- seL4_SchedContextBits - size in bits of a scheduling context
+- `seL4_SchedContextBits` - size in bits of a scheduling context
       object
-- seL4_SignalRecv - new system call which allows a single kernel
+- `seL4_SignalRecv` - new system call which allows a single kernel
       invocation to perform a non-blocking send on one capability, and
       wait on another.
-- seL4_SignalRecvWithMRs - uses above new system call without
+- `seL4_SignalRecvWithMRs` - uses above new system call without
       touching the IPC buffer, passing only data in registers
-- seL4_Time - type for specifying temporal units to the kernel
-- seL4_TCB_SetMaxPriority - set the max priority for a TCB,
+- `seL4_Time` - type for specifying temporal units to the kernel
+- `seL4_TCB_SetMaxPriority` - set the max priority for a TCB,
       threads can only start / set priorities threads up to and
       including their max priority
-- seL4_TCB_SetCriticality - set the criticality for a TCB.
-- seL4_TCB_SetMaxCriticality - set the max criticality for a TCB,
+- `seL4_TCB_SetCriticality` - set the criticality for a TCB.
+- `seL4_TCB_SetMaxCriticality` - set the max criticality for a TCB,
       threads can only set criticalities of threads threads up to and
       including their max criticality
-- seL4_Prio_t - type for priority and max priority, criticality
+- `seL4_Prio_t` - type for priority and max priority, criticality
       and max criticality, used in TCB_Configure
-- seL4_CNode_SwapCaller - swap the reply cap in the TCB's reply
+- `seL4_CNode_SwapCaller` - swap the reply cap in the TCB's reply
       slot with the reply cap or null cap in the slot in the
       specified slot.
-- seL4_CNode_SwapTCBCaller - as above, but operates on the reply
+- `seL4_CNode_SwapTCBCaller` - as above, but operates on the reply
       cap slot of the target TCB. This allows another thread to reply on
       behalf of the owner of the reply cap.
-- seL4_SchedControl_Configure - invokes the scheduling control cap
+- `seL4_SchedControl_Configure` - invokes the scheduling control cap
       to populate a scheduling context with parameters
-- seL4_SchedContext_Yield - end the timeslice of the thread bound
+- `seL4_SchedContext_Yield` - end the timeslice of the thread bound
       to the sched context invoked. The thread will not run again until
       its period passes.
-- seL4_SchedContext_YieldTo - If a thread is bound to the
+- `seL4_SchedContext_YieldTo` - If a thread is bound to the
       scheduling context that this call is invoked on, place it at the
       head of the scheduling queue for that threads priority. Returns
       the amount of time the thread yielded to executes.
-- seL4_SchedContext_Consumed - returns the amount of time this
+- `seL4_SchedContext_Consumed` - returns the amount of time this
       scheduling context has executed since the last call to this
       function or YieldTo.
-- seL4_SchedContext_BindTCB - bind a TCB to a scheduling context,
+- `seL4_SchedContext_BindTCB` - bind a TCB to a scheduling context,
       if the TCB is runnable and scheduling context has budget, this
       will start the TCB running
-- seL4_SchedContext_UnbindTCB - remove binding of a scheduling
+- `seL4_SchedContext_UnbindTCB` - remove binding of a scheduling
       context from a TCB, TCB will no longer run but state will be
       preserved
-- seL4_CapInitThreadSC - capability to the initial threads
+- `seL4_CapInitThreadSC` - capability to the initial threads
       scheduling context
-- seL4_CapSchedControl - scheduling control capability, which is
+- `seL4_CapSchedControl` - scheduling control capability, which is
       given to the root thread
-- seL4_SchedContext_BindNotification - Bind a notification to a
+- `seL4_SchedContext_BindNotification` - Bind a notification to a
       scheduling context. Passive threads waiting on this notification
       will borrow the scheduling context.
-- seL4_SchedContext_UnbindNotification - unbind the notification.
+- `seL4_SchedContext_UnbindNotification` - unbind the notification.
 
 ### API deletions
 
 
-- seL4_Yield (replaced by seL4_SchedContext_Yield)
-- seL4_DomainSet
+- `seL4_Yield` (replaced by `seL4_SchedContext_Yield`)
+- `seL4_DomainSet`
 - Domain scheduler removed.
-- seL4_CNode_SaveCaller (replaced by seL4_CNode_SwapCaller).
+- `seL4_CNode_SaveCaller` (replaced by `seL4_CNode_SwapCaller`).
 
 ## Performance improvements
 
@@ -157,10 +157,10 @@ including:
 ## Library & test compatability
 
 
-The 'rt' branch of seL4_libs has been adapted to the rt branch of seL4,
-and the rt branch of sel4test has been ported to the seL4_rt-dev-1.0.0
+The 'rt' branch of `seL4_libs` has been adapted to the rt branch of seL4,
+and the rt branch of sel4test has been ported to the `seL4_rt-dev-1.0.0`
 kernel, along with many more tests written suited to the rt kernel. To
-run it, checkout the default.xml manifest on the rt branch of
+run it, checkout the `default.xml` manifest on the rt branch of
 [sel4test-manifest](https://github.com/seL4/sel4test-manifest/tree/rt).
 
 The rt branch is in no way compatible with the master branch of seL4.
@@ -172,7 +172,7 @@ The RT kernel currently supports:
 
 - Beagle board
 - Sabre
-- x86 (only processors that support TSC_DEADLINE mode)
+- x86 (only processors that support `TSC_DEADLINE` mode)
 - Odroid-XU
 
 Other hardware platforms will be added as required (the ports require
@@ -181,4 +181,4 @@ updated kernel and user-level timer drivers)
 ## More details
 
 
-See the 1.0.0-rt-dev manual included in the release.
+See the `1.0.0-rt-dev` manual included in the release.
