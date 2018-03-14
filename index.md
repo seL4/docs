@@ -24,24 +24,24 @@ drop us a line if you want to be able to edit.
 - [Testing](Testing.md)
 - [Debugging guide](Debugging_guide.md)
 - [Benchmarking guide](Benchmarking_guide.md)
-- [Virtualisation on seL4](Virtualisation_on_seL4.md)
+- Virtualisation on seL4
 - [Rust](Rust.md)
 
 ## seL4 Status
 
 
-- New Features: new features in development
+- [New Features](Status): new features in development
 - [Hardware Support](Hardware): information about hardware
       platform ports
 - Kernel Features: information about available kernel features
-- Userland Components and Drivers: available device drivers and
+- [Userland Components and Drivers](Userland_Components_and_Drivers): available device drivers and
       userland components
 
 ## Questions and Recipes
 
 
 - [FAQ](FrequentlyAskedQuestions): editable list of FAQs
-- [seL4 Recipes](../seL4 Recipes): How to do X with seL4
+- seL4 Recipes: How to do X with seL4
 
 ## seL4 Releases
 
@@ -62,5 +62,5 @@ drop us a line if you want to be able to edit.
 
 - [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
 - [IRC Channel](IRCChannel)
-- [Suggested projects](../Suggested projects)
+- [Suggested projects](../Suggested_projects)
 - [CommunityProjects](../CommunityProjects)
