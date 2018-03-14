@@ -13,7 +13,23 @@
       </div>
 
       <div class="footer-col">
-        <p>{{ site.description | escape }}</p>
+        <ul class="list-unstyled">
+          <li>
+            {{ site.description | escape }}
+          </li>
+          {% if jekyll.environment == "production" %}
+            <li>
+              Site last updated: {{ site.data.generated.date }}
+            </li>
+            <li>
+              {% for member in site.data.generated.timestamps %}
+                {% if page.path == member.page %}
+                  Page last updated: {{ member.date }}
+                {% endif %}
+              {% endfor %}
+            </li>
+          {% endif %}
+        </ul>
       </div>
     </div>
 
