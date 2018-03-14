@@ -12,23 +12,23 @@ branch is not verified and is under active development.
 ## Highlights
 
 
-  * Maximum priorities
+* Maximum priorities
  
-      -Previously seL4 would not allow threads to set any other
-          thread's priority to higher than its own. This has been
-          extracted into a separate field for the RT kernel, a maximum
-          priority, which limits what thread cans set their own or other
-          threads priorities to.
+  * Previously seL4 would not allow threads to set any other
+  thread's priority to higher than its own. This has been
+  extracted into a separate field for the RT kernel, a maximum
+  priority, which limits what thread cans set their own or other
+  threads priorities to.
  
-  * Scheduling contexts
+* Scheduling contexts
  
-      -This branch adds scheduling contexts to seL4, which represent
-          CPU time. Scheduling contexts are separate to threads
-          (although threads required one to run) and can be passed
-          around over IPC.
-      -   Scheduling contexts allow developers to create periodic
-          threads, temporally isolation threads and have variable
-          timeslices for round robin threads.
+  * This branch adds scheduling contexts to seL4, which represent
+  CPU time. Scheduling contexts are separate to threads
+  (although threads required one to run) and can be passed
+  around over IPC.
+  * Scheduling contexts allow developers to create periodic
+  threads, temporally isolation threads and have variable
+  timeslices for round robin threads.
  
 For more details, please see the manual. Most of the updates are in the
 threads chapter.
