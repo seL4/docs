@@ -11,8 +11,8 @@ as the GNU Debugger.
 ## Enabling this feature
  You can enable and disable the hardware
 debugging API by going through the kernel's configuration system:
-make menuconfig -> seL4 Kernel -> Build Options ->
-Enable hardware breakpoint and single-stepping API.
+`make menuconfig` -> `seL4 Kernel` -> `Build Options` ->
+`Enable hardware breakpoint and single-stepping API`.
 
 Not all platforms support this feature for two main reasons:
 
@@ -34,7 +34,7 @@ detail in the seL4 manual. This article will cover how to practically
 call them and use them in a prospective debugger.
 
 To view a current version of the seL4 manuals, please download the
-kernel source code and then cd manual and execute make.
+kernel source code and then `cd manual` and execute `make`.
 
 Additionally, there is available source code that demonstrates how the invocations can be used practically: the seL4-Test repository holds code tests the debug APIs, and shows how to use them to set breakpoints, watchpoints and single-stepping, on both x86 and ARM:
 
@@ -43,18 +43,18 @@ Additionally, there is available source code that demonstrates how the invocatio
 
 The invocations take capabilities to TCBs, and perform operations on the TCB register context to virtualize the hardware debug feature for each thread.
 
-- \`seL4_TCB_SetBreakpoint\`: Takes a capability to a TCB, and a
+- `seL4_TCB_SetBreakpoint`: Takes a capability to a TCB, and a
         hardware breakpoint register ID, and sets a breakpoint on a
         specified virtual address, for a range of addresses, for a
         certain access type (Read, Write, or both).
-- \`seL4_TCB_UnsetBreakpoint\`: Takes a capability to a TCB, and
+- `seL4_TCB_UnsetBreakpoint`: Takes a capability to a TCB, and
         both disables and clears the specific hardware breakpoint for
         that thread.
-- \`seL4_TCB_GetBreakpoint\`: Takes a capability to a TCB, and
+- `seL4_TCB_GetBreakpoint`: Takes a capability to a TCB, and
         returns information on whether or not the hardware breakpoint is
         enabled, and if enabled, what virtual address it will trigger
         on, and what types of accesses will trigger it.
-- \`seL4_TCB_ConfigureSingleStepping\`: Takes a capability to a
+- `seL4_TCB_ConfigureSingleStepping`: Takes a capability to a
         TCB, and configures a hardware debugging register to break on
         every instruction (or every Nth instruction), and send a message
         on the thread's fault endpoint everytime it faults. You may
