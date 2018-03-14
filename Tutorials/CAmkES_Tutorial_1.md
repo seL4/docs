@@ -24,7 +24,10 @@ and any aspiring CAmkES dev should read the
         CAmkES application.
 
 ## Walkthrough
- === TASK 1 === The fundamentals of CAmkES are the
+
+### TASK 1
+
+The fundamentals of CAmkES are the
 component, the interface and the connection. Components are logical
 groupings of code and resources. They communicate with other component
 instances via well-defined interfaces which must be statically defined,
