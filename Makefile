@@ -17,7 +17,10 @@ FILE_NAME=_data/generated.yml
 UPDATE_DATE:= $(shell git log -1 --format='%cd %h')
 FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | sed 's/.\///')
 
-_generate_git_site_timestamp:
+$(dir $(FILE_NAME)):
+	mkdir -p $@
+
+_generate_git_site_timestamp: $(dir $(FILE_NAME))
 	echo "date: $(UPDATE_DATE)" > $(FILE_NAME)
 
 _generate_git_per_page_timestamps: _generate_git_site_timestamp
