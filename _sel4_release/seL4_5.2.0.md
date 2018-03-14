@@ -8,10 +8,10 @@ with the following changes:
 
 Below are the changes to libsel4:
 
-- Add seL4_FastMessageRegisters: Exposes number of registers used
+- Add `seL4_FastMessageRegisters`: Exposes number of registers used
         in IPC for more optimised user-level IPC stubs.
-- Additional kernel entry types VMExit and VCPUFault added for
-        bench-marking kernel entries.
+- Additional kernel entry types `VMExit` and `VCPUFault` added for
+        benchmarking kernel entries.
 
 x86 specific changes:
 
