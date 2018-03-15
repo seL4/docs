@@ -4,54 +4,39 @@
     {% for crumbitem in breadcrumbs %}
       {% assign position = position  | plus: 1 %}
 
-      {% if forloop.first and site.breadcrumbs.root.image %}
-        {% include icon.html class="breadcrumb-item" color=include.color %}
-        {% continue %}
-      {% endif %}
-
       {% if forloop.last %}
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem"><span property="name">{{ crumbitem.title }}</span><meta property="position" content="{{ position }}" /></li>
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+          <span property="name">{{ crumbitem.title }}</span>
+          <meta property="position" content="{{ position }}" /></li>
         {% continue %}
       {% endif %}
 
       <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-          <a property="item" typeof="WebPage" href="{{ crumbitem.url | prepend: site.baseurl }}"><span property="name">{{ crumbitem.title }}</span><meta property="position" content="{{ position }}" /></a>
+          <a property="item" typeof="WebPage" href="{{ crumbitem.url | prepend: site.baseurl }}">
+            <span property="name">{{ crumbitem.title }}</span>
+            <meta property="position" content="{{ position }}" />
+          </a>
       </li>
     {% endfor %}
   </ol>
   <ol class="sel-version">
-    <li class=" list-unstyled text-right", style="margin-left:auto; padding:0rem 0.75rem;">
+    <li class="list-unstyled text-right", style="margin-left:auto; padding:0rem 0.75rem;">
       Current versions:</li>
-    <li class=" list-unstyled text-right" style="padding:0rem 0.5rem;">
-    <a href="/sel4_release/seL4_{{ site.sel4_master}}/">seL4-{{ site.sel4_master }}</a></li>
-    <li class=" list-unstyled text-right" style="padding:0rem 0.5rem;">
-    <a href="/sel4_release/seL4_{{ site.sel4_mcs}}/">seL4-{{ site.sel4_mcs }}</a></li>
-    <li class=" list-unstyled text-right" style="padding:0rem 0.5rem;">
-    <a href="/camkes_release/CAmkES_{{ site.camkes}}/">camkes-{{ site.camkes }}</a></li>
+    <li class="list-unstyled text-right">
+    <a href="/sel4_release/seL4_{{ site.sel4_master }}/">seL4-{{ site.sel4_master }}</a></li>
+    <li class="list-unstyled text-right">
+    <a href="/sel4_release/seL4_{{ site.sel4_mcs }}/">seL4-{{ site.sel4_mcs }}</a></li>
+    <li class="list-unstyled text-right">
+    <a href="/camkes_release/CAmkES_{{ site.camkes }}/">camkes-{{ site.camkes }}</a></li>
   </ol>
-    <div class='clear'></div>
+  <div class='clear'></div>
 </nav>
 
 
 <!-- This is an example of CSS. Maybe you want to implement the css code into your main css file or modify it as you want -->
 <style>
-.clear{
-  clear: both;
-}
-.sel-breadcrumb{
-  float: left;
-}
-.sel-version{
-  float: right;
-  margin-bottom: 0;
-}
-.sel-version li{
-  display: inline-block;
-}
-nav.breadcrumbs.bootstrap ol {
-  margin-left: 0;
-  margin-bottom: 0;
-}
+
+/* nav bar top settings */
 nav.breadcrumbs.bootstrap {
   font-size: 1rem;
   padding: 0.75rem 1rem;
@@ -60,14 +45,22 @@ nav.breadcrumbs.bootstrap {
   background-color: #f1f2ed;
   border-radius: 0.25rem;
 }
-nav.breadcrumbs.bootstrap .breadcrumb::after {
-  content: "";
-  display: table;
-  clear: both;
+
+nav.breadcrumbs.bootstrap ol {
+  margin-left: 0;
+  margin-bottom: 0;
 }
+
+.sel-breadcrumb{
+  float: left;
+}
+
+
 nav.breadcrumbs.bootstrap .breadcrumb-item {
   float: left;
 }
+
+/* The ".breadcrumb-item +" part prevents the "/" from being created for the first one */
 nav.breadcrumbs.bootstrap .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
   padding-right: 0.5rem;
@@ -75,37 +68,24 @@ nav.breadcrumbs.bootstrap .breadcrumb-item + .breadcrumb-item::before {
   color: #818a91;
   content: "/";
 }
- 
 
-nav.breadcrumbs.bootstrap .breadcrumb-item + .breadcrumb-item:hover::before {
-  text-decoration: underline;
-}
+/*Don't underline the content: "/" part on hover */
 nav.breadcrumbs.bootstrap .breadcrumb-item + .breadcrumb-item:hover::before {
   text-decoration: none;
 }
-nav.breadcrumbs.bootstrap .breadcrumb-item-active {
-  color: #818a91;
+
+.sel-version{
+  float: right;
+  margin-bottom: 0;
 }
 
-nav.breadcrumbs.bootstrap .breadcrumb a.breadcrumb-item:after {
+.sel-version li{
   display: inline-block;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  content: "/";
-  text-decoration: none;
+  padding:0rem 0.5rem;
 }
-nav.breadcrumbs.bootstrap .breadcrumb .icon:after {
-  display: inline-block;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  color: #818a91;
-  content: "/";
+
+.clear{
+  clear: both;
 }
-nav.breadcrumbs.bootstrap .breadcrumb .icon {
-  display: inline-block;
-}
-nav.breadcrumbs.bootstrap .breadcrumb .icon svg {
-  height: 0.7rem;
-  width: 0.7rem;
-}
+
 </style>
