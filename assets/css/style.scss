@@ -1,0 +1,196 @@
+---
+# This file is normally provided by our theme.  If this file is deleted,
+# the theme one will transparently replace it.
+---
+
+@charset "utf-8";
+
+// Override defaults for bootstrap variables here.
+
+// $font-size-base:   16px !default;
+
+$spacing-unit:     30px !default;
+
+$table-text-align: left !default;
+
+
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+html {
+    font-size: $font-size-base;
+}
+
+@media print {
+	#site-navigation { display: none; }
+	#site-header a[href]:after {
+	    content: none;
+	}
+}
+
+table.alttable tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+
+//  Menu styling borrowed from rust-www site.
+ul.menu {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+ul.menu li {
+  list-style-type: none;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+ul.menu h2 {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 1em;
+  display: inline;
+  line-height: 1.5em;
+}
+ul.menu li>ul {
+  margin-top: .5em;
+  padding-left: 0em;
+  line-height: 1.5em;
+}
+
+.menu img {
+  margin: 0 auto 1.5em auto;
+}
+@media (min-width: 992px) {
+  ul.menu li.menu {
+    margin-top: 3em;
+  }
+  ul.menu {
+    text-align: left;
+  }
+  .menu img {
+    margin: 0;
+  }
+}
+
+
+// This styles the toc 
+.section-nav {
+  background-color: #FFF;
+  margin: 5px 0;
+  padding: 10px 30px;
+  border: 1px solid #E8E8E8;
+  border-radius: 3px;
+}
+
+
+
+
+/**
+ * Tables, This code inspired by minima theme
+ * Bootstrap doesn't style tables automatically.
+ * These variables are defined by bootstrap
+ */
+table {
+  margin-bottom: $spacing-unit;
+  width: 100%;
+  text-align: $table-text-align;
+  border-collapse: collapse;
+  border: 1px solid $gray-lighter;
+  tr {
+    &:nth-child(even) {
+      background-color: lighten($gray-lighter, 3%);
+    }
+  }
+  th, td {
+    padding: ($spacing-unit / 3) ($spacing-unit / 2);
+  }
+  th {
+    background-color: darken($gray-lighter, 3%);
+    border: 1px solid darken($gray-lighter, 10%);
+    border-bottom-color: darken($gray-lighter, 12%);
+  }
+  td {
+    border: 1px solid $gray-lighter;
+  }
+}
+
+@mixin relative-font-size($ratio) {
+  font-size: $font-size-base * $ratio;
+}
+
+
+/**
+ * Site footer
+ */
+
+ 
+/**
+ * Clearfix
+ */
+%clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.site-footer {
+  border-top: 1px solid $gray-lighter;
+  padding: $spacing-unit 0;
+}
+
+.footer-heading {
+  @include relative-font-size(1.125);
+  margin-bottom: $spacing-unit / 2;
+}
+
+.contact-list,
+.social-media-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.footer-col-wrapper {
+  @include relative-font-size(0.9375);
+  color: $gray;
+  margin-left: -$spacing-unit / 2;
+  @extend %clearfix;
+}
+
+.footer-col {
+  float: left;
+  margin-bottom: $spacing-unit / 2;
+  padding-left: $spacing-unit / 2;
+}
+
+.footer-col-1 {
+  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
+  width:         calc(35% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-2 {
+  width: -webkit-calc(20% - (#{$spacing-unit} / 2));
+  width:         calc(20% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-3 {
+  width: -webkit-calc(45% - (#{$spacing-unit} / 2));
+  width:         calc(45% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-1,
+.footer-col-2 {
+width: -webkit-calc(50% - (#{$spacing-unit} / 2));
+width:         calc(50% - (#{$spacing-unit} / 2));
+}
+
+.footer-col-3 {
+width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+width:         calc(100% - (#{$spacing-unit} / 2));
+}
+
+
+

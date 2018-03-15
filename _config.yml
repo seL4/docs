@@ -22,9 +22,6 @@ description: "This site is for displaying seL4 related documentation.  Pull requ
 github_username:
   - "sel4"
   - "sel4proj"
-# Build settings
-markdown: kramdown
-theme: minima
 
 collections:
   -sel4_release
@@ -59,6 +56,17 @@ defaults:
     values:
       layout: "default"
 
+
+# Build/plugin settings.  These settings configure plugins.
+# Themes and plugins transparently add files to the site project.  To see what plugins
+# are being used run `bundle show`.  To see what files are contributed by each plugin:
+#  ls `bundle show $plugin_name`
+# The jekyll-theme-bootstrap dependency probably contributes the most files to site generation, so it would
+# be the first place to look if something weird is happening with layout/theming.
+# This theme provides a sass port of bootstrap that is imported using our assets/css/style.scss file.
+theme: jekyll-theme-bootstrap
+markdown: Kramdown
+
 plugins:
   # Sets the page title to the first heading.  Removes need for title to be set in every file
   - jekyll-titles-from-headings
@@ -68,6 +76,7 @@ plugins:
   - jekyll-optional-front-matter
   # Adds a sitemap.xml to site for webcrawlers
   - jekyll-sitemap
+  # Adds a table of contents to top of page if toc: true is set in the front matter.
   - jekyll-toc
 
 kramdown:
@@ -77,7 +86,6 @@ breadcrumbs:
   root:
     hide: false  # show breadcrumbs on root/home page
     image: false # Show image or title text
-
 
 optional_front_matter:
 # Set this to false if you want .md files to be accessible also
