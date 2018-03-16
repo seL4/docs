@@ -7,7 +7,7 @@ Note: adapted from the [Robigalia Code of Conduct](https://robigalia.org/conduct
 **Contact**: moderation@sel4.systems
 
 * We are committed to providing a friendly, safe and welcoming environment for all, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic.
-* On IRC, please avoid using overtly sexual nicknames or other nicknames that might detract from a friendly, safe and welcoming environment for all.
+* Please avoid using overtly sexual nicknames or other nicknames that might detract from a friendly, safe and welcoming environment for all.
 * Please be kind and courteous. There's no need to be mean or rude.
 * Respect that people have differences of opinion and that every design or implementation choice carries a trade-off and numerous costs. There is seldom a right answer.
 * Please keep unstructured critique to a minimum. If you have solid ideas you want to experiment with, make a fork and see how it works.
@@ -18,15 +18,15 @@ Note: adapted from the [Robigalia Code of Conduct](https://robigalia.org/conduct
 
 ## Moderation
 
-These are the policies for upholding our community's standards of conduct. If you feel that a thread needs moderation, please contact moderation@sel4.systems.
+These are the policies for upholding our community's standards of conduct. If you feel that a conversation needs moderation, please contact moderation@sel4.systems.
 
 1.  Remarks that violate the seL4 standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (Cursing is allowed, but never targeting another user, and never in a hateful manner.)
 2.  Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed.
 3.  Moderators will first respond to such remarks with a warning.
-4.  If the warning is unheeded, the user will be "kicked," i.e., kicked out of the communication channel to cool off.
+4.  If the warning is unheeded, we will take steps to temporarily restrict your interaction with the project, by e.g. kicking you from IRC or locking the relevant GitHub issue.
 5.  If the user comes back and continues to make trouble, they will be banned, i.e., indefinitely excluded.
 6.  Moderators may choose at their discretion to un-ban the user if it was a first offense and they offer the offended party a genuine apology.
-7.  If a moderator bans someone and you think it was unjustified, please take it up with that moderator, or with a different moderator, **in private**. Complaints about bans in-channel are not allowed.
+7.  If a moderator bans someone and you think it was unjustified, please take it up with that moderator, or with a different moderator, **in private**. Public complaints about bans are not allowed via any of our communication channels.
 8.  Moderators are held to a higher standard than other community members. If a moderator creates an inappropriate situation, they should expect less leeway than others.
 
 In the seL4 community we strive to go the extra step to look out for each other. Don't just aim to be technically unimpeachable, try to be your best self. In particular, avoid flirting with offensive or sensitive issues, particularly if they're off-topic; this all too often leads to unnecessary fights, hurt feelings, and damaged trust; worse, it can drive people away from the community entirely.
