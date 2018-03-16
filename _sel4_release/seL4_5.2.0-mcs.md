@@ -49,7 +49,7 @@ the remaining budget until the next period.
 
 Temporal isolation is provided with scheduling context by an
 implementation of
-sporadic servers. Please see the [manual](https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf) or tutorial for further
+[sporadic servers](https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf). Please see the [manual](http://sel4.systems/Info/Docs/seL4-manual-{{ page.version }}.pdf) or tutorial for further
 explanation.
 
 However, in seL4, threads without budget left in their sporadic server
@@ -208,18 +208,17 @@ $ repo init -u <https://github.com/seL4/sel4test-manifest.git> -m 5.2.x-mcs.xml
 $ repo sync
 ```
 
-- A [new tutorial](https://wiki.sel4.systems/seL4%20RT%20tutorial) covers the difference in the APIs
+- A [new tutorial](/Tutorials/seL4_RT_tutorial) covers the difference in the APIs
 
 ## Hardware support
 
 
 The RT kernel currently supports:
 
-- [BeagleBoard](Hardware/BeagleBoard)
-- [SabreLite](Hardware/sabreLite)
-- [x86 (ia32, x64),
-      multicore](https://wiki.sel4.systems/Hardware/IA32)
-- [Tegra TK1](Hardware/jetsontk1)
+- [BeagleBoard](/Hardware/BeagleBoard)
+- [SabreLite](/Hardware/sabreLite)
+- [x86 (ia32, x64), multicore](/Hardware/IA32)
+- [Tegra TK1](/Hardware/jetsontk1)
 
 Other hardware platforms will be added as required (the ports require
 updated kernel and user-level timer drivers)
@@ -232,9 +231,9 @@ See the `5.2.0-mcs` manual included in the release.
 We have developed a branch of the seL4 and CAmkES tutorials for the MCS
 kernel.
 
-- [seL4 RT tutorial](../seL4 RT tutorial) a new tutorial which covers all of the
+- [seL4 RT tutorial](/Tutorials/seL4_RT_tutorial) a new tutorial which covers all of the
       API changes and features is available here.
-- [Tutorials](../Tutorials) Otherwise it's worth going through all of the
+- [Tutorials](/Tutorials) Otherwise it's worth going through all of the
       tutorials, as all have been ported to the MCS kernel on the
       'mcs' branch.
 

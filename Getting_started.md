@@ -35,7 +35,7 @@ project repositories (whose names end in -manifest) and these two:
 
 
 The seL4 kernel is usually built as part of project. Each project has a
-wiki entry associated with it that gives more information. The
+README.md associated with it that gives more information. The
 information on this page is common to all of them.
 
 We modeled the seL4 development process on the
@@ -154,10 +154,6 @@ new features.
 
 ## Project Layout
 
-
-Each project has an associated wiki, accessible via github, that has
-up-to-date dependencies and instructions. The general instructions here
-apply to all projects.
 
 See [Build System Anatomy](BuildSystemAnatomy) for details of
 project layouts and the seL4 build system.
