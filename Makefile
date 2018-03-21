@@ -49,3 +49,14 @@ serve:
 
 serve_production:
 	$(MAKE) serve JEKYLL_ENV=production
+
+# Check conformance for Web Content Accessibility Guidelines (WCAG) 2.0, AA
+# This relies on Automated Accessibility Testing Tool (AATT) (https://github.com/paypal/AATT)
+# to be running and listening on http://localhose:3000
+# The resulting conformance_results.xml file can be viewed with `make check_conformance_errors` or using a junit xml viewer
+check_conformance:
+	bundle exec jekyll build
+	find _site -iname "*.html"| sed "s/_site.//" | python tools/testWCAG.py > conformance_results.xml
+
+check_conformance_errors: conformance_results.xml
+	grep -B1 'type="failure"' conformance_results.xml || true
