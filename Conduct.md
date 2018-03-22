@@ -2,6 +2,8 @@ Note: adapted from the [Robigalia Code of Conduct](https://robigalia.org/conduct
 
 # seL4 Code of Conduct
 
+Brief summary: be nice, considerate, and constructive.
+
 ## Conduct
 
 **Contact**: moderation@sel4.systems
@@ -20,7 +22,7 @@ Note: adapted from the [Robigalia Code of Conduct](https://robigalia.org/conduct
 
 These are the policies for upholding our community's standards of conduct. If you feel that a conversation needs moderation, please contact moderation@sel4.systems.
 
-1.  Remarks that violate the seL4 standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (Cursing is allowed, but never targeting another user, and never in a hateful manner.)
+1.  Remarks that violate the seL4 standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (No swearing is allowed in commit messages or post headings, but is tolerated elsewhere provided it should never target another user, and never in a hateful manner.)
 2.  Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed.
 3.  Moderators will first respond to such remarks with a warning.
 4.  If the warning is unheeded, we will take steps to temporarily restrict your interaction with the project, by e.g. kicking you from IRC or locking the relevant GitHub issue.
