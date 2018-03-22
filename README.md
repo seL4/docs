@@ -37,3 +37,10 @@ It requires the site to be hosted locally (using `make serve`) and a local serve
 contain a testcase for each generated html file of the site.  A make rule `make check_conformance_errors` will grep for failing testcases
 and output the html page name.  The idea here is to detect if any pages are failing and then manually using the AATT tool's webinterface
 to check what parts of the page violate the guidelines.
+
+### Linters
+
+Linting checks require the linters to be installed.
+
+- HTML output checking using `tidy`: `make check_html_output`
+- Liquid syntax checking using `liquid-linter`: `make check_liquid_syntax`

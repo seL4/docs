@@ -60,3 +60,22 @@ check_conformance:
 
 check_conformance_errors: conformance_results.xml
 	grep -B1 'type="failure"' conformance_results.xml || true
+
+LIQUID_CUSTOM_TAGS := continue
+
+LIQUID_LINTER_CMDLINE := liquid-linter $(LIQUID_CUSTOM_TAGS:%=--custom-tag %)
+
+# Liquid syntax linting check.
+# If it is complaining about unknown custom tags -> add them to the list above.
+# Requires `liquid-linter` to be installed.
+# git ls-files won't list any files that are untracked
+check_liquid_syntax:
+	git ls-files "*.html" | xargs $(LIQUID_LINTER_CMDLINE)
+	git ls-files "*.md" | xargs $(LIQUID_LINTER_CMDLINE)
+
+# Output html checking using tidy.
+# Any warnings or errors will be printed to stdout
+# Requires `tidy` to be installed.
+check_html_output:
+	bundle exec jekyll build	
+	find _site/ -iname "*.html"| xargs -l tidy -q --drop-empty-elements n -e
