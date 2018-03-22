@@ -6,19 +6,24 @@ toc: true
 
 
 ## Constants
- ` #define SEL4DRV_DEVATTR_NAME_MAXLEN (32) `
+```c
+#define SEL4DRV_DEVATTR_NAME_MAXLEN (32)
+```
 
 ## Functions
-``` seL4drv_mgmt_enumerate_get_num_children():
+```c
+seL4drv_mgmt_enumerate_get_num_children():
 seL4drv_mgmt_enumerate_children();
-seL4drv_mgmt_enumerate_hotplug_subscribe(); uint16_t
-seL4drv_mgmt_query_device_match();
+seL4drv_mgmt_enumerate_hotplug_subscribe();
+uint16_t seL4drv_mgmt_query_device_match();
 ```
 
 ## Structures
-``` typedef struct seL4drv_child_attribute_ { char
-attr_name[SEL4DRV_DEVATTR_NAME_MAXLEN]; uint32_t attr_value; }
-seL4drv_child_attribute_t;
+```c
+typedef struct seL4drv_child_attribute_ {
+   char attr_name[SEL4DRV_DEVATTR_NAME_MAXLEN];
+   uint32_t attr_value;
+} seL4drv_child_attribute_t;
 ```
 
 ## Child IDs
@@ -98,7 +103,7 @@ discovery and removal of devices from the tree as they appear and
 disappear.
 
 The environment should begin an enumeration sequence by calling
-seL4drv_mgmt_enumerate_get_num_children() on the target device
+`seL4drv_mgmt_enumerate_get_num_children()` on the target device
 instance, in order to ask the driver to tell it how many child devices
 it **currently** has. The parent driver shall report **all** such
 child devices, regardless of whether or not they are powered on. All
@@ -108,11 +113,11 @@ they can be recognized as such (e.g., if the firmware informs the driver
 that a device is faulty) should be omitted.
 
 After that, the environment should call
-seL4drv_mgmt_enumerate_children() to actually get information on all
+`seL4drv_mgmt_enumerate_children()` to actually get information on all
 the target device instance's children. The environment shall pass to
 this function a block of memory that is suitably sized to enable the
 driver to fill out the childrens' information. Please see the
-description of seL4drv_mgmt_enumerate_get_num_children() in its
+description of `seL4drv_mgmt_enumerate_get_num_children()` in its
 section below to understand how to determine how much memory to allocate
 when requesting child device information.
 
@@ -132,8 +137,8 @@ the "subscription" invocation.
 
 When the environment finally gets such a callback, it shall simply
 refresh its information about the children of the target device, by once
-again calling seL4drv_mgmt_enumerate_get_num_children(), and doing
-a re-run of seL4drv_mgmt_enumerate_children(). The environment can
+again calling `seL4drv_mgmt_enumerate_get_num_children()`, and doing
+a re-run of `seL4drv_mgmt_enumerate_children()`. The environment can
 then compare the **Child IDs** of the newly returned list of devices
 with those that it previously had in its device tree, and perform an
 update of its device tree.
@@ -141,7 +146,7 @@ update of its device tree.
 When the driver completes the asynchronous roundtrip, it shall return
 the same memory that was originally passed to it by the environment. The
 environment is then free to either re-subscribe to such notifications by
-calling seL4drv_mgmt_enumerate_hotplug_subscribe_ind() again, or to
+calling `seL4drv_mgmt_enumerate_hotplug_subscribe_ind()` again, or to
 choose to indicate that it is no longer interested in subscribing to
 such notifications by not calling it again.
 
@@ -152,26 +157,26 @@ such notifications by not calling it again.
  This
 function allows the environment to know how much memory it should
 allocate for its subsequent calls to
-seL4drv_mgmt_enumerate_children().
+`seL4drv_mgmt_enumerate_children()`.
 
 There are two values returned by this function:
 
-    1.  The number of child devices that the driver instance is
-        aware of. ''Let this value be N_children''.
-    2.  The number of attributes required to describe each child device.
-        ''Let this value be N_attrs_per_child''.
+1.  The number of child devices that the driver instance is
+    aware of. *Let this value be N_children*.
+2.  The number of attributes required to describe each child device.
+    *Let this value be N_attrs_per_child*.
 
 The environment is expected to allocate memory equal to
-N_attrs_per_child * sizeof(seL4drv_child_attribute_t) for each
+`N_attrs_per_child * sizeof(seL4drv_child_attribute_t)` for each
 child device.
 
-If seL4drv_mgmt_enumerate_get_num_children() reports that there are
+If `seL4drv_mgmt_enumerate_get_num_children()` reports that there are
 multiple child devices, the environment is expected to allocate memory
 equal to
-N_attrs_per_child * sizeof(seL4drv_child_attribute_t) * N_children.
+`N_attrs_per_child * sizeof(seL4drv_child_attribute_t) * N_children`.
 
 This amount of memory shall then be passed to
-seL4drv_mgmt_enumerate_children().
+`seL4drv_mgmt_enumerate_children()`.
 
 ### seL4drv_mgmt_enumerate_children(): Sync
  This function shall
@@ -194,14 +199,14 @@ integer which states whether or not the driver can handle the device
 that is described by those attributes.
 
 If the driver determines that the passed attributes do not describe a
-device that it can manage, the driver **shall** return integer 0
+device that it can manage, the driver **shall** return integer `0`
 (zero). If the driver determines that the passed attributes describe a
 device that it is equipped to handle, it **shall** return a positive
-integer 1.
+integer `1`.
 
-''It is recommended that drivers which return a value greater than 0
-should return 1 for now, since in the future, significance will be
+*It is recommended that drivers which return a value greater than `0`
+should return `1` for now, since in the future, significance will be
 ascribed to the values returned. At present, there is no significance
 attached to the particular value returned, but for future compatibility
-since values above 1 will carry significance, drivers must return 1 for
-now.''
+since values above `1` will carry significance, drivers must return `1` for
+now.*

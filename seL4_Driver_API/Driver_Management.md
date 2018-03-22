@@ -2,26 +2,29 @@
 toc: true
 ---
 
-# Power management commands for the seL4 Driver API:
+# Power management commands for the seL4 Driver API
 
 
 ## Constants
-``` /* Driver power states supported by the API. *
-These are used by both seL4drv_mgmt_power() * and
-seL4drv_mgmt_power_features(). */ #define
-SEL4DRV_MGMT_POWER_BOOT (1<<0) #define
-SEL4DRV_MGMT_POWER_WAKEUP (1<<1) #define
-SEL4DRV_MGMT_POWER_SLEEP (1<<2) #define
-SEL4DRV_MGMT_POWER_DEEP_SLEEP (1<<3) #define
-SEL4DRV_MGMT_POWER_SHUTDOWN (1<<4) #define
-SEL4DRV_MGMT_POWER_KILL (1<<5)
+```c
+/* Driver power states supported by the API.
+ * These are used by both seL4drv_mgmt_power()
+ * and seL4drv_mgmt_power_features().
+ */
+#define SEL4DRV_MGMT_POWER_BOOT       (1<<0)
+#define SEL4DRV_MGMT_POWER_WAKEUP     (1<<1)
+#define SEL4DRV_MGMT_POWER_SLEEP      (1<<2)
+#define SEL4DRV_MGMT_POWER_DEEP_SLEEP (1<<3)
+#define SEL4DRV_MGMT_POWER_SHUTDOWN   (1<<4)
+#define SEL4DRV_MGMT_POWER_KILL       (1<<5)
 ```
 
 ## Functions
-``` void
-seL4drv_mgmt_critical_event_subscription_ind(); void
-seL4drv_mgmt_power(); void seL4drv_mgmt_power_features(uint32_t
-*features_bitmap); void seL4drv_mgmt_enumerate_children();
+```c
+void seL4drv_mgmt_critical_event_subscription_ind();
+void seL4drv_mgmt_power();
+void seL4drv_mgmt_power_features(uint32_t *features_bitmap);
+void seL4drv_mgmt_enumerate_children();
 ```
 
 ## Power state specifications
@@ -117,10 +120,11 @@ to enable operation.
 
 ### seL4drv_mgmt_power_features(): Sync
  This function returns a
-bitmap of the supported driver power states (See [#Constants](../#Constants)).
-All drivers are required to support at minimum, the following states: *
-SEL4DRV_MGMT_POWER_BOOT * SEL4DRV_MGMT_POWER_SHUTDOWN *
-SEL4DRV_MGMT_POWER_KILL
+bitmap of the supported driver power states (See [#constants](#constants)).
+All drivers are required to support at minimum, the following states:
+- SEL4DRV_MGMT_POWER_BOOT
+- SEL4DRV_MGMT_POWER_SHUTDOWN
+- SEL4DRV_MGMT_POWER_KILL
 
 If any of these is not supported by the driver, the environment is free
 to respond in an implementation specific manner, including refusing to
