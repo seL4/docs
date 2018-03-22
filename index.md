@@ -1,7 +1,7 @@
 # seL4 Docs
 This documentation site is for cooperatively developing and sharing documentation on [seL4](http://sel4.systems).
 
-### Editing the site
+## Editing the site
 
 Contributions to this site are welcome and are accepted via Pull request to the github repository.
 
