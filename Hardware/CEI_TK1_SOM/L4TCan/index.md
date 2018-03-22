@@ -15,7 +15,7 @@ CSN is indicated on the SPI expansion header. Can node #1 on the CAN
 daughterboard uses TK1_GPIO2, so it's necessary to connect these 2
 pins:
 
-<img style="width: 60%" src="jumper.jpg" />
+<img style="width: 60%" src="jumper.jpg" alt="Jumper hw-based chipselect to GPIO chipselect" />
 
 (From right-to-left on the TK1 GPIO header we have GPIO0, GPIO1, GPIO2)
 

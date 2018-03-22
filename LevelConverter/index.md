@@ -8,9 +8,9 @@ concentrator.
 We used the suggested circuit in the
 [Manufacturer's Datasheet](http://datasheets.maximintegrated.com/en/ds/MAX218.pdf), laid out on a piece of perfboard.
 
-<img src="levelconverter-small.jpg" />
+<img src="levelconverter-small.jpg" alt="Image of Level convertor circuit on prototype board" aria-describedby="p1"/>
 
-This picture shows one wired to convert a single channel; because most
+<p id="p1">This picture shows one wired to convert a single channel; because most
 of our gadgets need only a three-wire interface, you can convert two
 channels with one chip. The converter is powered from the gadget:
-provide 1V8 or 3V3 depending on the signalling level.
+provide 1V8 or 3V3 depending on the signalling level.</p>

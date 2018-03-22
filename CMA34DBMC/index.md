@@ -10,7 +10,7 @@ We used a [Stellaris Connected Launchpad](http://www.ti.com/tool/ek-tm4c1294xl) 
 The exact parts don't matter, although I've given links to eBay stores
 where the ones we used can be seen.
 
-<img src="CMA34CRD-thumb.jpg" />
+<img src="CMA34CRD-thumb.jpg" alt="Photo of CMA34CRD setup"/>
 
 In the picture, the CMA34D is at the left, with the TTL-to-RS232
 converter above it. The Launchpad is in the middle, with the relay board

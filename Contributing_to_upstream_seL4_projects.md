@@ -17,7 +17,7 @@ Please sign the
 [Contributor License Agreement](https://sel4.systems/Community/Contributing/seL4-CLA.pdf), scan it and send it to us at ''licensing AT
 sel4.systems.''
 
-<img src="http://i.imgur.com/kuAok5A.png" />
+<img src="http://i.imgur.com/kuAok5A.png" alt="Sign CLA before submitting pull request.  Pull requests undergo code review before being accepted" />
 
 #### Figure 1
 

@@ -45,10 +45,12 @@ developed by Jochen Liedtke in the early '90s. See the
 [L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia and the website
 [L4HQ](http://l4hq.org/) for more details.
 
-<img style="500" src="http://sel4.systems/images/familytree.png" />
+<img style="500" src="http://sel4.systems/images/familytree.png" alt="L4 microkernel family tree" aria-describedby="p1"/>
 
-L4 microkernel family tree. Black arrows indicate code, green arrows ABI
-inheritance. Source: [Elphinstone & Heiser, SOSP 2013]
+<p id="p1">L4 microkernel family tree from 1993 until 2013. Black arrows indicate code, green arrows ABI
+inheritance. Node colours indicate author organisations. A full description of L4 variants and history can be found along
+this image source: "From L3 to seL4. What Have We Learnt in 20 Years of L4 Microkernels? [Elphinstone & Heiser, SOSP 2013]"</p>
+
 
 ## How does seL4's performance compare to other microkernels?
  To the
