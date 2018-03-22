@@ -8,7 +8,7 @@ For status of existing kernel ports, features, drivers, and other userland compo
 
 - [Hardware](Hardware): for hardware platform ports
 - Kernel Features: for kernel features
-- [Userland Components and Drivers](../Userland_Components_and_Drivers): for device driver and
+- [Userland Components and Drivers](/Userland_Components_and_Drivers): for device driver and
         userland components
 
 ## Kernel Features and hardware platform ports

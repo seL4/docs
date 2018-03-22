@@ -97,7 +97,7 @@ worth using for the C library. The build system does however support
 ccache if you have it installed.
 
 A more comprehensive overview of the build system is available at
-[BuildSystemAnatomy](../BuildSystemAnatomy)
+[BuildSystemAnatomy](/BuildSystemAnatomy/)
 
 ## Running it
 

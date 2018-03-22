@@ -15,7 +15,7 @@ Main CAmkES page: [CAmkES](/CAmkES)
 Summary of differences between CAmkES next and CAmkES master:
 [CAmkESDifferences](/CAmkESDifferences)
 
-VisualCAmkes, a GUI tool to view a CAmkES system: [VisualCAmkES](/VisualCAmkES)
+VisualCAmkes, a GUI tool to view a CAmkES system: [VisualCAmkES](/VisualCAmkES/)
 
 ## Setting up your machine
 

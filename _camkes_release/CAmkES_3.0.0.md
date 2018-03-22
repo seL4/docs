@@ -84,7 +84,7 @@ You don't have to do anything. Your project will continue to work.
 
 
 CAmkES dependencies have changed. For a definitive (maintained) list,
-see: [CAmkES#build-dependencies](../CAmkES#build-dependencies)
+see: [CAmkES#build-dependencies](/CAmkES/#build-dependencies)
 
 ## New Features
 

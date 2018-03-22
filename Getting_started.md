@@ -172,7 +172,7 @@ features have to be disabled or worked around. These configurations have
 ## Running on real hardware
 
 
-See [Hardware](../Hardware).
+See [Hardware](/Hardware).
 
 # Contributing
 

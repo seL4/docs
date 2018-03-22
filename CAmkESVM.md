@@ -4,7 +4,7 @@ toc: true
 
 # CAmkES x86 VM
  Get the dependencies for building CAmkES by following
-the instructions [here](CAmkES#build-dependencies).
+the instructions [here](/CAmkES/#build-dependencies).
 
 ## Getting the Code
 ```bash

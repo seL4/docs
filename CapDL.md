@@ -89,5 +89,5 @@ This library allows one to build up an in-memory database storing the
 same information as a capdl spec. This is useful as it allows capdl
 specs to be generated programmatically, and allows the programmer to
 incrementally add information about kernel objects and capability
-distribution. This library is used by [CAmkES](../CAmkES) to build up a spec
+distribution. This library is used by [CAmkES](/CAmkES/) to build up a spec
 describing the entire system (all components and connections).

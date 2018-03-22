@@ -55,5 +55,5 @@ Contributions to this site are welcome and are accepted via Pull request to the 
 
 - [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
 - [IRC Channel](IRCChannel)
-- [Suggested projects](../Suggested_projects)
-- [CommunityProjects](../CommunityProjects)
+- [Suggested projects](/Suggested_projects)
+- [CommunityProjects](/CommunityProjects)
