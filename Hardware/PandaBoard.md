@@ -39,7 +39,7 @@ and load correctly, so in the `lib_arm/armlinux.c` file, insert
 
 
 1.  Download the tool. Alternatively, clone and build the tool from
-    source <TODO Fastboot link>
+    source `<TODO Fastboot link>`
 2.  Connect the serial cable for communication
 3.  Connect the usb cable to allow the flashing of your image via
     fastboot

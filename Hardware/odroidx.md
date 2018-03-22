@@ -97,7 +97,7 @@ To boot using fastboot:
 To boot from mmc:
 
   1.  At the U-Boot prompt type
-      fatload mmc 0:2 0x42000000 <filename>; bootm 0x42000000
+      `fatload mmc 0:2 0x42000000 <filename> bootm 0x42000000`
 
 ## References
 

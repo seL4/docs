@@ -208,7 +208,7 @@ $L4T_DIR/sources/kernel/arch/arm/boot/dts/tegra124-tk1-som-pm375-000-c00-00.dtb
 $SOM_DIR/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 ~~~
 
-rebuild.sh - assumes u-boot running 'umc 0 mmc 0' at <tk1>
+rebuild.sh - assumes u-boot running `umc 0 mmc 0` at `<tk1>`
 ```
     make
 

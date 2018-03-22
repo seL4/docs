@@ -96,8 +96,8 @@ The qemu arguments are:
 
 1.  **qemu-system-x86_64** - emulate x86/x64 system
 2.  **-m 512** - amount of RAM dedicated to qemu VM
-3.  **-kernel <img_name>** - path to kernel image
-4.  **-initrd <img_name>** - path to application image
+3.  **-kernel *img_name*** - path to kernel image
+4.  **-initrd *img_name*** - path to application image
 5.  **--enable-kvm** - necessary to enable Vt-x in qemu (seL4
     can't start a VM without this flag)
 6.  **-smp 2** - number of CPUs dedicated to qemu VM
