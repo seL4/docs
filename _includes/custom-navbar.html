@@ -1,33 +1,37 @@
-<nav class="breadcrumbs bootstrap hidden-sm-down" {% if (page.url == '/') and (site.breadcrumbs.root.hide) %}{{ 'style="display: none;"' }}{% endif %}>
-  <ol class="sel-breadcrumb list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
-    {% assign position = 0 %}
-    {% for crumbitem in breadcrumbs %}
-      {% assign position = position  | plus: 1 %}
+<div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" {% if (page.url == '/') and (site.breadcrumbs.root.hide) %}{{ 'style="display: none;"' }}{% endif %}>
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      {% assign position = 0 %}
+      {% for crumbitem in breadcrumbs %}
+        {% assign position = position  | plus: 1 %}
 
-      {% if forloop.last %}
+        {% if forloop.last %}
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">{{ crumbitem.title }}</span>
+            <meta property="position" content="{{ position }}" /></li>
+          {% continue %}
+        {% endif %}
+
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-          <span property="name">{{ crumbitem.title }}</span>
-          <meta property="position" content="{{ position }}" /></li>
-        {% continue %}
-      {% endif %}
-
-      <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-          <a property="item" typeof="WebPage" href="{{ crumbitem.url | prepend: site.baseurl }}">
-            <span property="name"><b>{{ crumbitem.title }}</b></span>
-            <meta property="position" content="{{ position }}" />
-          </a>
-      </li>
-    {% endfor %}
-  </ol>
-  <ol class="sel-version">
-    <li class="list-unstyled text-right", style="margin-left:auto; padding:0rem 0.75rem;">
-      Current versions:</li>
-    <li class="list-unstyled text-right">
-    <a href="/sel4_release/seL4_{{ site.sel4_master }}/"><b>seL4-{{ site.sel4_master }}</b></li>
-    <li class="list-unstyled text-right">
-    <a href="/sel4_release/seL4_{{ site.sel4_mcs }}/"><b>seL4-{{ site.sel4_mcs }}</b></a></li>
-    <li class="list-unstyled text-right">
-    <a href="/camkes_release/CAmkES_{{ site.camkes }}/"><b>camkes-{{ site.camkes }}</b></a></li>
-  </ol>
+            <a property="item" typeof="WebPage" href="{{ crumbitem.url | prepend: site.baseurl }}">
+              <span property="name"><b>{{ crumbitem.title }}</b></span>
+              <meta property="position" content="{{ position }}" />
+            </a>
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_{{ site.sel4_master }}/"><b>seL4-{{ site.sel4_master }}</b></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_{{ site.sel4_mcs }}/"><b>seL4-{{ site.sel4_mcs }}</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_{{ site.camkes }}/"><b>camkes-{{ site.camkes }}</b></a></li>
+    </ol>
+  </nav>
   <div class='clear'></div>
-</nav>
+</div>

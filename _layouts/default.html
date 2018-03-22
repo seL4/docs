@@ -1,8 +1,13 @@
 ---
 layout: basic
 ---
-{% include custom-navbar.html %}
+
+{% if page.toc %}
+  <nav aria-label="Table of Contents">
+    {{content | toc_only}}
+  </nav>
+{% endif %}
 
 <div class="content">
-  {{ content | toc }}
+  {{ content }}
 </div>
