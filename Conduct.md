@@ -17,6 +17,14 @@ Brief summary: be nice, considerate, and constructive.
 * Private harassment is also unacceptable. No matter who you are, if you feel you have been or are being harassed or made uncomfortable by a community member, please contact one of the channel ops or moderation@sel4.systems immediately. Whether you're a regular contributor or a newcomer, we care about making this community a safe place for you and we've got your back.
 * Likewise any spamming, trolling, flaming, baiting or other attention-stealing behaviour is not welcome.
 
+Examples of behavior that contributes to creating a positive environment
+include:
+
+* Using welcoming and inclusive language
+* Being respectful of differing viewpoints and experiences
+* Gracefully accepting constructive criticism
+* Focusing on what is best for the community
+* Showing empathy towards other community members
 
 ## Moderation
 
@@ -37,4 +45,4 @@ And if someone takes issue with something you said or did, resist the urge to be
 
 The enforcement policies listed above apply to all official seL4 venues; including official IRC channels (#sel4); GitHub repositories under sel4 and sel4proj; and all mailing lists on https://sel4.systems/lists/listinfo/. For other projects adopting the seL4 Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
 
-*Adapted from the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling) as well as the [Contributor Covenant v1.3.0](http://contributor-covenant.org/version/1/3/0/).*
+*Adapted from the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling) as well as the [Contributor Covenant v1.4.0](https://www.contributor-covenant.org/version/1/4/).*
