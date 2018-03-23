@@ -1,4 +1,3 @@
-Note: adapted from the [Robigalia Code of Conduct](https://robigalia.org/conduct.html) (which was adapted from the [Rust code of conduct](https://github.com/rust-lang/rust-www/blob/master/en-US/conduct.md))
 
 # seL4 Code of Conduct
 
@@ -45,4 +44,4 @@ And if someone takes issue with something you said or did, resist the urge to be
 
 The enforcement policies listed above apply to all official seL4 venues; including official IRC channels (#sel4); GitHub repositories under sel4 and sel4proj; and all mailing lists on https://sel4.systems/lists/listinfo/. For other projects adopting the seL4 Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
 
-*Adapted from the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling) as well as the [Contributor Covenant v1.4.0](https://www.contributor-covenant.org/version/1/4/).*
+*Adapted from the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling), [Robigalia Code of Conduct](https://robigalia.org/conduct.html), the [Rust code of conduct](https://github.com/rust-lang/rust-www/blob/master/en-US/conduct.md) as well as the [Contributor Covenant v1.4.0](https://www.contributor-covenant.org/version/1/4/).*
