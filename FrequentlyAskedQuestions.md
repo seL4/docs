@@ -359,7 +359,7 @@ code-level proofs feasible.
 ## When and how often does seL4 get updated and re-proved?
  We update
 the seL4 proofs semi-continuously, usually whenever something is pulled
-into the master branch in the seL4 github repository. You can see the
+into the master branch in the seL4 GitHub repository. You can see the
 proof updates coming through on
 <https://github.com/seL4/l4v/commits/master> and you can see the kernel
 revision the proof currently refers to in
@@ -380,7 +380,7 @@ happen per year unless there is specific funding for a specific feature.
 Small updates take a day to a few weeks and we often do them on the
 side. There's no specific schedule at the moment.
 
-## How do I tell which code in github is covered by the proof and which
+## How do I tell which code in GitHub is covered by the proof and which
 isn't?
  The verification sees the entire C code for one particular
 combination of configuration options. Currently this is the imx6

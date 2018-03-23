@@ -21,7 +21,7 @@ source copy that you have will come from your own intuition, interest
 and hopefully, inspiration that seL4 gives you.
 
 ## Code
- All seL4 code and proofs are available on github, at
+ All seL4 code and proofs are available on GitHub, at
 <https://github.com/seL4>, under standard
 [open-source licenses](http://sel4.systems/Info/GettingStarted/license.pml).
 

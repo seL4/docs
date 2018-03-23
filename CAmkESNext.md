@@ -77,7 +77,7 @@ with
  ("C compiler link flags", "-no-pie -fPIC"),
 ```
 
-See [this stack issue on github](https://github.com/commercialhaskell/stack/issues/2712) for more information.
+See [this stack issue on GitHub](https://github.com/commercialhaskell/stack/issues/2712) for more information.
 
 ## Download and build example CAmkES app
 
