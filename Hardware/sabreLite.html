@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sabre Lite | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Sabre Lite</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sabre-lite">Sabre Lite</h1>
+
+<p>For board details see
+<a href="https://boundarydevices.com/product/sabre-lite-imx6-sbc/">Sabre Lite</a></p>
+
+<h1 id="building-for-the-sabre-lite">Building for the Sabre Lite</h1>
+<p>For preset build config, use defconfigs
+called “sabre_” or “imx6”</p>
+
+<h1 id="booting-on-the-sabre-lite">Booting on the Sabre Lite</h1>
+<h2 id="hardware-requirements">Hardware Requirements</h2>
+<ul>
+  <li>5V/3A power supply</li>
+  <li>RS232 cable (or USB-RS232 adapter)</li>
+  <li>USB OTG cable for Fastboot or Ethernet cable for TFTPboot</li>
+</ul>
+
+<h2 id="board-setup">Board Setup</h2>
+<p>The SabreLite can be configured to boot from either
+USB or SPI flash. USB booting is typically only used when there is a
+failure in the SPI flash resident bootloader. One may use USB boot to
+temporarily boot u-boot and reflash the SPI memory.</p>
+
+<p>SPI flash contains a simple boot loader that will can boot from either
+SPI flash, or from an image starting at block 2 of the SD or μSD card
+depending on which boot loader has been flashed.</p>
+
+<h2 id="booting-u-boot-from-usb">Booting U-Boot from USB</h2>
+<p>USB booting offers a back door into the
+system. This method is usually only used to reprogram the SPI flash boot
+program.</p>
+
+<p>You will first need to acquire and compile the IMX USB loader tool from</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git://github.com/boundarydevices/imx_usb_loader.git
+</code></pre></div></div>
+<p>NOTE 1: The Element14 Sabrelite platform has its DIP switch mounted
+incorrectly.</p>
+
+<p>NOTE 2: The connection order is important. You may find that your
+USB-TTY converter has locked up.</p>
+
+<ol>
+  <li>Move the DIP switch nearest the Ethernet port to the OFF position</li>
+  <li>Move the DIP switch farthest from the Ethernet port to the
+ON position.</li>
+  <li>Plug the USB cable into the USB-OTG port located near the
+HDMI port.</li>
+  <li>Connect the RS232 port to your computer and open minicom.</li>
+  <li>Power up the device.</li>
+</ol>
+
+<p>Now you are ready to load your image into memory and execute:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lsusb 
+.... 
+Bus 001 Device 019: ID
+15a2:0054 Freescale Semiconductor, Inc.
+.... 
+<span class="nv">$ </span><span class="nb">sudo</span> ./imx_usb image_file
+</code></pre></div></div>
+<p>The image file that is used will typically be named
+u-boot.bin</p>
+
+<h2 id="booting-u-boot-from-spi-flash">Booting U-Boot from SPI Flash</h2>
+<p>To boot from SPI flash:</p>
+
+<ol>
+  <li>Move the DIP switch nearest the Ethernet port to the OFF position</li>
+  <li>Move the DIP switch farthest from the Ethernet port to the OFF
+position</li>
+  <li>Connect the RS232 port to your computer and open minicom.</li>
+  <li>Insert an SD or μSD card depending on which boot loader is
+resident in SPI flash</li>
+  <li>Power up the device.</li>
+</ol>
+
+<p>Now you are ready to load your image into memory and execute:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lsusb 
+....
+Bus 001 Device 019: ID 15a2:0054 Freescale Semiconductor, Inc.
+.... 
+<span class="nv">$ </span><span class="nb">sudo</span> ./imx_usb image_file
+</code></pre></div></div>
+
+<p>The image file that is used will typically be named
+u-boot.bin</p>
+
+<h2 id="booting-u-boot-from-spi-flash-1">Booting U-Boot from SPI Flash</h2>
+<p>To boot from SPI flash:</p>
+
+<ol>
+  <li>Move the DIP switch nearest the Ethernet port to the OFF position</li>
+  <li>Move the DIP switch farthest from the Ethernet port to the OFF
+position</li>
+  <li>Connect the RS232 port to your computer and open minicom.</li>
+  <li>Insert an SD or μSD card depending on which boot loader is
+resident in SPI flash</li>
+  <li>Power up the device.</li>
+</ol>
+
+<h2 id="sd-and-μsd-cards">SD and μSD cards</h2>
+<p>To boot U-Boot from an SD or μSD card, one must
+install the appropriate boot loader into SPI flash. The method and boot
+loader images are provided in the SPI flash programming section. U-Boot
+must be located at block 2 of the SD or μSD card. This can be achieved
+with the following command, assuming that the SD or μSD device is
+<code class="highlighter-rouge">/dev/sdb</code>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd <span class="k">if</span><span class="o">=</span>u-boot.bin <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">seek</span><span class="o">=</span>2 <span class="nv">bs</span><span class="o">=</span>512<span class="p">;</span> sync
+</code></pre></div></div>
+
+<h2 id="u-boot-for-the-sabre-lite">U-Boot for the Sabre Lite</h2>
+<h3 id="obtaining-and-building">Obtaining and Building</h3>
+<p>There are many versions of U-Boot available for the Sabre
+Lite. The ones for Android support Fastboot; the mainline ones do not.</p>
+
+<p>We use the one from
+&lt;git://github.com/boundarydevices/u-boot-2009-08.git&gt; with these patches
+applied:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://sel4.systems/Info/Hardware/sabreLite/01_android-imx6-uboot-enable_bootelf.patch">01_android-imx6-uboot-enable_bootelf.patch</a></td>
+      <td>Enable bootelf command</td>
+    </tr>
+    <tr>
+      <td><a href="https://sel4.systems/Info/Hardware/sabreLite/02_android-imx6-uboot-fastbootfix.patch">02_android-imx6-uboot-fastbootfix.patch</a></td>
+      <td>Fix fastboot to allow the booting of elf and u-boot images</td>
+    </tr>
+    <tr>
+      <td><a href="https://sel4.systems/Info/Hardware/sabreLite/03_android-imx6-uboot-extra_fs_features.patch">03_android-imx6-uboot-extra_fs_features.patch</a></td>
+      <td>Add some extra file systems and associated features</td>
+    </tr>
+    <tr>
+      <td><a href="https://sel4.systems/Info/Hardware/sabreLite/04_android-imx6-uboot-update_env.patch">04_android-imx6-uboot-update_env.patch</a></td>
+      <td>Setup default environment. In particular, bootsel4_mmc and bootsel4_net</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Prebuilt:
+<a href="https://sel4.systems/Info/Hardware/sabreLite/u-boot.bin">u-boot.bin</a></p>
+
+<p>The prebuilt version is for booting from SPI.</p>
+
+<p>To obtain and build U-Boot, do:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git://github.com/boundarydevices/u-boot-2009-08.git
+<span class="nb">cd </span>u-boot-2009-08
+git checkout origin/boundary-imx_3.0.35_1.1.0 <span class="nt">-b</span> boundary-imx_3.0.35_1.1.0
+<span class="nb">export </span><span class="nv">ARCH</span><span class="o">=</span>arm
+<span class="nb">export </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-none-eabi-
+make mx6q_sabrelite_android_config
+make all
+<span class="nb">ls</span> <span class="nt">-l</span> u-boot.bin
+</code></pre></div></div>
+<h3 id="installing-u-boot-to-spi-flash">Installing U-Boot to SPI Flash</h3>
+<p>To install U-Boot, put u-boot.bin onto the first partition (either FAT16 or
+EXT2) of an SD card, boot into U-Boot then do this at the U-Boot prompt:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initialise the SD card. Replace 1 with 0 for standard SD</span>
+mmc dev 1
+
+<span class="c"># Load the file with name "u-boot.bin" from the 1st partition of the SD card to RAM at address 0x12000000</span>
+ext2load mmc 1:1 12000000 u-boot.bin
+
+<span class="c"># Initialise the SPI flash subsystem</span>
+sf probe | sf probe 1
+
+<span class="c"># Erase 0x100000 bytes from the SPI flash starting at address 0x00000000 </span>
+<span class="c"># This covers both U-Boot and its saved environment.</span>
+sf erase 0 0x100000
+
+<span class="c"># Copy ${filesize} bytes from RAM at address 0x12000000 to SPI flash at address 0x00000000</span>
+<span class="c"># Note that the filesize variable was set when the file was loaded into RAM</span>
+sf write 0x12000000 0 <span class="k">${</span><span class="nv">filesize</span><span class="k">}</span>
+
+<span class="c"># Ensure that the boot select switches are set appropriately, then reboot the Sabrelite</span>
+</code></pre></div></div>
+<h2 id="booting-sel4-applications">Booting seL4 applications</h2>
+<p>This assumes that the U-Boot version above is installed in SPI flash.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>run bootsel4_mmc</td>
+      <td>Scans through the SD card and their partitions looking for an elf file named “sel4-image” in the root directory. This file will be loaded and executed.</td>
+    </tr>
+    <tr>
+      <td>run bootsel4_net</td>
+      <td>Performs a DHCP request followed by a TFTPBoot request and attempts to load a file named “sabre/sel4-image”.</td>
+    </tr>
+    <tr>
+      <td>run bootsel4_fastboot</td>
+      <td>Simple alias for the fastboot command</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

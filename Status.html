@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Status of new and future seL4 features and projects | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Status of new and future seL4 features and projects</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="status-of-new-and-future-sel4-features-and-projects">Status of new and future seL4 features and projects</h1>
+
+<p>This page tracks the status of various seL4 platform features that are
+in progress or not yet started (i.e. planned).</p>
+
+<p>For status of existing kernel ports, features, drivers, and other userland components, see:</p>
+
+<ul>
+  <li><a href="Hardware">Hardware</a>: for hardware platform ports</li>
+  <li>Kernel Features: for kernel features</li>
+  <li><a href="/Userland_Components_and_Drivers">Userland Components and Drivers</a>: for device driver and
+      userland components</li>
+</ul>
+
+<h2 id="kernel-features-and-hardware-platform-ports">Kernel Features and hardware platform ports</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Status</th>
+      <th>Driven by</th>
+      <th>Repo</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MCS kernel</td>
+      <td>in development</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td><a href="https://github.com/seL4/seL4/tree/new-rt">https://github.com/seL4/seL4/tree/new-rt</a></td>
+      <td>being developed for x32, x64, AArch32, AArch64 on most supported platforms. Note, development branch is not released publicly, but github branch is updated from it occasionally</td>
+    </tr>
+    <tr>
+      <td>AArch64 hyp</td>
+      <td>in development (unreleased)</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td>being developed on NVIDIA TX1, HiKey</td>
+    </tr>
+    <tr>
+      <td>AArch64 SMP</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td>to be developed on NVIDIA TX1, HiKey</td>
+    </tr>
+    <tr>
+      <td>NVIDIA TX1 SMMU</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td>AArch32 and AArch64</td>
+    </tr>
+    <tr>
+      <td>RISC-V</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="camkes-features">CAmkES Features</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Status</th>
+      <th>Driven by</th>
+      <th>Repo</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CAmkES AArch64</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>CAmkES AArch64 &amp; hyp</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="virtualisation">Virtualisation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Status</th>
+      <th>Driven by</th>
+      <th>Repo</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>camkes-arm-vmm for AArch64</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td>Including libsel4arm-vmm for AArch64</td>
+    </tr>
+    <tr>
+      <td>camkes-arm-vmm for NVIDIA TX1</td>
+      <td>planned</td>
+      <td><a href="mailto:devel@sel4.systems">D61</a></td>
+      <td> </td>
+      <td>Including Linux running in a VM</td>
+    </tr>
+    <tr>
+      <td>multiple ARM VMs</td>
+      <td>planned</td>
+      <td> </td>
+      <td> </td>
+      <td>be able to run multiple VMMs, one VM per VMM. AArch32? AArch64?</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

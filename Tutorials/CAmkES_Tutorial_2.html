@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAmkES Tutorial 2 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">CAmkES Tutorial 2</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#camkes-tutorial-2">CAmkES Tutorial 2</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#required-reading">Required Reading</a></li>
+<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
+<li class="toc-entry toc-h3"><a href="#task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</a></li>
+<li class="toc-entry toc-h3"><a href="#task-18-21-24">TASK 18, 21, 24</a></li>
+<li class="toc-entry toc-h3"><a href="#task-2-4">TASK 2, 4</a></li>
+<li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
+<li class="toc-entry toc-h3"><a href="#task-9-12-13">TASK 9, 12, 13</a></li>
+<li class="toc-entry toc-h3"><a href="#task-19-20-23">TASK 19, 20, 23</a></li>
+<li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
+<li class="toc-entry toc-h3"><a href="#task-8-16">TASK 8, 16</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#done">Done!</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="camkes-tutorial-2">CAmkES Tutorial 2</h1>
+<p>This tutorial is an introduction to
+CAmkES: bootstrapping a basic static CAmkES application, describing its
+components, and linking them together.</p>
+
+<h2 id="required-reading">Required Reading</h2>
+<p>While it’s possible to successfully complete the
+CAmkES tutorials without having read the
+<strong><a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md">CAmkES manuals</a></strong>, the manuals really explain everything in plain English,
+and any aspiring CAmkES dev should read the
+<strong><a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md">CAmkES manuals</a></strong> before attempting to complete the tutorials.</p>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+
+<ul>
+  <li>Understand how to represent and implement events in CAmkES.</li>
+  <li>Understand how to use Dataports.</li>
+</ul>
+
+<h2 id="walkthrough">Walkthrough</h2>
+<p>Bear in mind, this article will be going through the
+tutorial steps in the order that the user is led through them in the
+slide presentation, except where several similar tasks are coalesced to
+avoid duplication. Additionally, if a tasks step covers material that
+has already been touched on, it will be omitted from this article.</p>
+
+<h3 id="task-1">TASK 1</h3>
+<p>Here you’re declaring the events that will be bounced
+back and forth in this tutorial. An event is a signal is sent over a
+Notification connection.</p>
+
+<p>You are strongly advised to read the manual section on Events here:
+<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events</a>.</p>
+
+<p>'’Ensure that when declaring the consumes and emits keywords between
+  the Client.camkes and Echo.camkes files, you match them up so that
+  you’re not emitting on both sides of a single interface, or consuming
+  on both sides of an interface.’’</p>
+
+<h3 id="task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</h3>
+<p>Recall that CAmkES prefixes the name
+of the interface instance to the function being called across that
+interface? This is the same phenomenon, but for events; in the case of a
+connection over which events are sent, there is no API, but rather
+CAmkES will generate _emit() and _wait() functions to enable the
+application to transparently interact with these events.</p>
+
+<h3 id="task-18-21-24">TASK 18, 21, 24</h3>
+<p>One way to handle notifications in CAmkES is to
+use callbacks when they are raised. CAmkES generates functions that
+handle the registration of callbacks for each notification interface
+instance. These steps help you to become familiar with this approach.</p>
+
+<hr />
+
+<h3 id="task-2-4">TASK 2, 4</h3>
+<p>Dataports are typed shared memory mappings. In your
+CAmkES ADL specification, you state what C data type you’ll be using to
+access the data in the shared memory – so you can specify a C struct
+type, etc.</p>
+
+<p>The really neat part is more that CAmkES provides access control for
+accessing these shared memory mappings: if a shared mem mapping is such
+that one party writes and the other reads and never writes, we can tell
+CAmkES about this access constraint in ADL.</p>
+
+<p>So in TASKs 2 and 4, you’re first being led to create the “Dataport”
+interface instances on each of the components that will be participating
+in the shared mem communication. We will then link them together using a
+“seL4SharedData” connector later on.</p>
+
+<h3 id="task-6">TASK 6</h3>
+<p>And here we are: we’re about to specify connections
+between the shared memory pages in each client, and tell CAmkES to link
+these using shared underlying Frame objects. Fill out this step, and
+proceed.</p>
+
+<h3 id="task-9-12-13">TASK 9, 12, 13</h3>
+<p>These steps are asking you to write some C code
+to access and manipulate the data in the shared memory mapping
+(Dataport) of the client. Follow through to the next step.</p>
+
+<h3 id="task-19-20-23">TASK 19, 20, 23</h3>
+<p>And these steps are asking you to write some C
+code to access and manipulate the data in the shared memory mapping
+(Dataport) of the server.</p>
+
+<h3 id="task-7">TASK 7</h3>
+<p>This is an introduction to CAmkES attributes: you’re
+being asked to set the priority of the components.</p>
+
+<h3 id="task-8-16">TASK 8, 16</h3>
+<p>This is where we specify the data access constraints
+for the Dataports in a shared memory connection. We then go about
+attempting to violate those constraints to see how CAmkES has truly met
+our constraints when mapping those Dataports.</p>
+
+<h2 id="done">Done!</h2>
+<p>Congratulations: be sure to read up on the keywords and
+structure of ADL: it’s key to understanding CAmkES. And well done on
+writing your first CAmkES application.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

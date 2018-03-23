@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAmkES Next | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">CAmkES Next</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#camkes-next">CAmkES Next</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#setting-up-your-machine">Setting up your machine</a></li>
+<li class="toc-entry toc-h2"><a href="#download-and-build-example-camkes-app">Download and build example CAmkES app</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="camkes-next">CAmkES Next</h1>
+
+<p>CAmkES Next refers to the “next” branch of camkes-tools. It is the
+active development branch of camkes.</p>
+
+<p>Github: <a href="https://github.com/seL4/camkes-tool/tree/next">https://github.com/seL4/camkes-tool/tree/next</a></p>
+
+<p>Main CAmkES page: <a href="/CAmkES">CAmkES</a></p>
+
+<p>Summary of differences between CAmkES next and CAmkES master:
+<a href="/CAmkESDifferences">CAmkESDifferences</a></p>
+
+<p>VisualCAmkes, a GUI tool to view a CAmkES system: <a href="/VisualCAmkES/">VisualCAmkES</a></p>
+
+<h2 id="setting-up-your-machine">Setting up your machine</h2>
+
+<p>The following commands were tested on a fresh installation of Ubuntu
+16.04. This will install the tools and libraries required to build seL4
+and CAmkES Next. Note that the dependencies are different from those of
+the “master” branch of CAmkES.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev \
+libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
+
+pip install six tempita plyplus pyelftools orderedset jinja2
+
+curl -sSL https://get.haskellstack.org/ | sh
+</code></pre></div></div>
+
+<p>If you are using Ubuntu 14.04, then you will need to install some extra
+packages and update your compiler. Instead of the above do the following
+(the main changes are: replace repo with phablet-tools, add python-dev,
+and install gcc-5 and gcc-5-multilib from the PPA and set it as the
+default gcc):</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add-apt-repository ppa:ubuntu-toolchain-r/test
+apt-get update
+apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev \
+libsqlite3-dev libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi \
+gcc-5 gcc-5-multilib
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
+
+pip install camkes-deps
+
+curl -sSL https://get.haskellstack.org/ | sh
+</code></pre></div></div>
+
+<p>On Archlinux:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pacman -S binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
+cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
+
+yaourt -S bcunit-cunit-compat spin
+
+pip install camkes-deps
+
+curl -sSL https://get.haskellstack.org/ | sh
+</code></pre></div></div>
+
+<p>If you are using Debian, or Ubuntu 16.10 or higher, you’ll need to
+modify the compiler/linker flags for building ghc. Modify
+<code class="highlighter-rouge">~/.stack/programs/x86_64-linux/ghc-8.0.1/lib/ghc-8.0.1/settings</code>.
+Replace the lines:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ("C compiler flags", " -fno-stack-protector"),
+ ("C compiler link flags", ""),
+</code></pre></div></div>
+<p>with</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ("C compiler flags", " -fno-PIE  -fPIC -fno-stack-protector"),
+ ("C compiler link flags", "-no-pie -fPIC"),
+</code></pre></div></div>
+
+<p>See <a href="https://github.com/commercialhaskell/stack/issues/2712">this stack issue on github</a> for more information.</p>
+
+<h2 id="download-and-build-example-camkes-app">Download and build example CAmkES app</h2>
+
+<p>Create and enter an empty working directory before running the commands
+below.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download CAmkES, seL4, user libraries and example apps</span>
+repo init <span class="nt">-u</span> https://github.com/seL4/camkes-manifest.git <span class="nt">-m</span> next.xml
+repo sync
+
+<span class="c"># Select an app to build (build configs for example apps can be found in the "configs" directory)</span>
+make arm_simple_defconfig
+
+<span class="c"># Compile it</span>
+make
+
+<span class="c"># Run the app in qemu</span>
+qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span> <span class="nt">-kernel</span> images/capdl-loader-experimental-image-arm-imx31
+</code></pre></div></div>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

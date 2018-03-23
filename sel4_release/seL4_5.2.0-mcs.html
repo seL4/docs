@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 5.2.0-mcs | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 5.2.0-mcs</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-mcs-pre-release-520-mcs">seL4 MCS pre-release (5.2.0-mcs)</h1>
+
+<p>This is a pre-release of the seL4 mixed-criticality systems (RT)
+extensions. This branch is not verified and is under active
+verification. This is a subset of the previously released RT extensions,
+which still exist and can be provided on request.</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<p>The goals of the MCS kernel is to provide strong temporal isolation and
+a basis for reasoning about time.</p>
+
+<h3 id="ipc--signal-ordering">IPC &amp; Signal ordering</h3>
+
+<p>Signal and IPC delivery is now priority ordered and FIFO within a
+priority, rather than plain FIFO</p>
+
+<h3 id="scheduling-contexts">Scheduling contexts</h3>
+
+<p>This branch adds scheduling contexts to seL4, which represent CPU time
+(as budget/period). Scheduling contexts are separate from threads
+(although threads require one to run) and can be passed around over IPC,
+if the target of an IPC does not have its own scheduling context.</p>
+
+<p>Scheduling contexts allow developers to create periodic threads,
+temporally isolate threads and have variable timeslices for round robin
+threads. If <code class="highlighter-rouge">budget == period</code>, the scheduling context acts as timeslice
+and the thread it is bound to is treated as round-robin.</p>
+
+<h3 id="periodic-scheduling">Periodic scheduling</h3>
+
+<p>Periodic threads can be created by binding them to scheduling contexts
+with a <code class="highlighter-rouge">budget &lt; period</code>. <code class="highlighter-rouge">seL4_Yield</code> for these threads will sacrifice
+the remaining budget until the next period.</p>
+
+<h3 id="isolation-through-sporadic-servers">Isolation through sporadic servers</h3>
+
+<p>Temporal isolation is provided with scheduling context by an
+implementation of
+<a href="https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf">sporadic servers</a>. Please see the <a href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf">manual</a> or tutorial for further
+explanation.</p>
+
+<p>However, in seL4, threads without budget left in their sporadic server
+are not runnable at all - this is used to provide an absolute cap on CPU
+time executed by a scheduling context. More complex scheduling
+algorithms can be implemented at user-level.</p>
+
+<p>Scheduling contexts are of a variable size, allowing for a variable
+maximum number of sporadic replenishment (termed refills in the API for
+brevity) pre scheduling context object.</p>
+
+<h3 id="passive-servers">Passive Servers</h3>
+
+<p>Passive servers run on their clients scheduling context, as the do not
+have one of their own. This allows for basic temporal isolation of
+shared resources, however clients must provide enough budget for the
+server to finish the request. Futher extensions in future add timeout
+exceptions, which allows a passive server to detect and recover from an
+overrun, however they are not included in this release.</p>
+
+<p>Threads can be converted to passive by removing their scheduling context
+while they are waiting on an endpoint. Then, any calling threads will
+automatically donate their scheduling context to this thread when they
+send it an IPC.</p>
+
+<h3 id="reply-objects">Reply objects</h3>
+
+<p>Reply objects are a new object in the API which serve two purposes:</p>
+
+<ul>
+  <li>They provide a container for the once-off reply capability
+    generated by a <code class="highlighter-rouge">seL4_Call</code> to be stored. This means that the reply
+    cap is always saved and cannot be overriden as it is no longer
+    stored in the internal CNode of a TCB, and <code class="highlighter-rouge">seL4_CNode_SaveCaller</code>
+    no longer needs to be used.</li>
+  <li>They track scheduling context donation over IPC to
+    passive servers.</li>
+</ul>
+
+<h2 id="mcs-abi-and-libsel4">MCS ABI and libsel4</h2>
+
+<p>This section documents kernel ABI and libsel4 changes as compared with
+seL4 <code class="highlighter-rouge">5.2.0</code>.</p>
+
+<h3 id="changes">Changes</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> arguments changed (scheduling context
+    cap added).</li>
+  <li><code class="highlighter-rouge">seL4_Recv</code>, <code class="highlighter-rouge">seL4_ReplyRecv</code>, <code class="highlighter-rouge">seL4_NBRecv</code> now take a reply object
+    such that the caller can receive a call. The reply capability is
+    generated in the reply object, rather than being saved into the
+    TCB CNode internally. <code class="highlighter-rouge">seL4_Call</code> must be paired with <code class="highlighter-rouge">seL4_Recv</code> -
+    and <code class="highlighter-rouge">seL4_CNode_SaveCaller</code> is no longer required.</li>
+  <li><code class="highlighter-rouge">seL4_Wait</code>, <code class="highlighter-rouge">seL4_NBWait</code> and variants do not require a reply
+    object and can be paired with <code class="highlighter-rouge">seL4_Send</code> on endpoints
+    and notifications. Instead of being an API wrapper, this is now a
+    real system call.</li>
+  <li>the x86 kernel ABI now only has 1 message register, due to the
+    need to store the reply object.</li>
+  <li><code class="highlighter-rouge">seL4_MsgLengthBits</code> increased - this increases amount of caps can
+    be sent per message.</li>
+  <li><code class="highlighter-rouge">seL4_MsgMaxLength</code> is now 115, as a result.</li>
+  <li><code class="highlighter-rouge">seL4_NotificationBits</code> - increased.</li>
+</ul>
+
+<h3 id="api-additions">API Additions</h3>
+
+<h4 id="constants">Constants</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_SchedContextObject</code> - new object for that allows threads
+    access to CPU time</li>
+  <li><code class="highlighter-rouge">seL4_MinSchedContextBits</code> - minimum size n (2\^n) of a scheduling
+    context object</li>
+  <li><code class="highlighter-rouge">seL4_CoreSchedContextBytes</code> - the amount of bytes required for the
+    fields in a scheduling context that are not sporadic refills.</li>
+  <li><code class="highlighter-rouge">seL4_RefillSizeBytes</code> - the size of a single refill. Together with
+    the above, these can be used to determine the number of refills
+    that will fit in a scheduling context object of a certain size.</li>
+  <li><code class="highlighter-rouge">seL4_ReplyObject</code> - new object to track scheduling context
+    donation over IPC and store reply capabilities.</li>
+  <li><code class="highlighter-rouge">seL4_ReplyObjectBits</code> - size of a reply object (2\^n).</li>
+  <li><code class="highlighter-rouge">seL4_CapInitThreadSC</code> - capability to the initial threads
+    scheduling context</li>
+</ul>
+
+<h4 id="system-calls">System calls</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_NBSendRecv</code> - new system call which allows a single kernel
+    invocation to perform a non-blocking send on one capability, and
+    recieve on another.</li>
+  <li><code class="highlighter-rouge">seL4_NBSendRecvWithMRs</code> - uses above new system call without
+    touching the IPC buffer, passing only data in registers</li>
+  <li><code class="highlighter-rouge">seL4_NBSendWait</code> - new system call which allows a single kernel
+    invocation to perform a non-blocking send on one capability, and
+    wait on another (no reply object).</li>
+  <li><code class="highlighter-rouge">seL4_NBSendWaitWithMRs</code> - uses above new system call without
+    touching the IPC buffer, passing only data in registers</li>
+  <li><code class="highlighter-rouge">seL4_SchedControl_Configure</code> - invokes the scheduling control cap
+    to populate a scheduling context with parameters</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Bind</code> - bind a TCB to a scheduling context, if
+    the TCB is runnable and scheduling context has budget, this will
+    start the TCB running</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> - remove binding of a scheduling
+    context from a TCB, TCB will no longer run but state will be
+    preserved</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> Object - remove binding of a scheduling
+    context from a TCB, TCB will no longer run but state will be
+    preserved</li>
+  <li><code class="highlighter-rouge">seL4_Wait</code> - block on an endpoint or notification without
+    providing a reply object. Can be paired with <code class="highlighter-rouge">seL4_Send</code> but
+    not <code class="highlighter-rouge">seL4_Call</code>.</li>
+  <li><code class="highlighter-rouge">seL4_NBWait</code> - a non-blocking variant of the above.</li>
+  <li><code class="highlighter-rouge">seL4_WaitWithMRs</code> - a variant of <code class="highlighter-rouge">seL4_Wait</code> that does not touch
+    the IPC buffer.</li>
+</ul>
+
+<h4 id="libsel4">libsel4</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_SetReserved</code>, <code class="highlighter-rouge">seL4_GetReserved</code>: set a reserved word in
+    the IPC buffer that may be used by the kernel ABI for arguments
+    that do not fit into registers.</li>
+  <li><code class="highlighter-rouge">seL4_MaxExtraRefills</code> is provided to allow users to calculate the
+    maximum number of extra refills for a specific scheduling
+    context size.</li>
+  <li><code class="highlighter-rouge">seL4_Time</code>: type for specifying time arguments.</li>
+</ul>
+
+<h4 id="structures">Structures</h4>
+
+<ul>
+  <li>A sched control capability is provided to the root task per node
+    via the <code class="highlighter-rouge">seL4_BootInfo</code> structure.</li>
+</ul>
+
+<h3 id="deletions">Deletions</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_CNode_SaveCaller</code> (deprecated by reply objects)</li>
+  <li><code class="highlighter-rouge">seL4_Reply</code> (replaced by invoking a reply object)</li>
+  <li><code class="highlighter-rouge">seL4_ReplyWithMRs</code> (as above)</li>
+</ul>
+
+<h2 id="library--test-compatability">Library &amp; test compatability</h2>
+
+<ul>
+  <li>CAmkES and CapDL both support seL4 <code class="highlighter-rouge">5.2.0-mcs</code> on their
+    master branches.</li>
+  <li>seL4_libs and sel4test both have <code class="highlighter-rouge">5.2.0-mcs-compatible</code> branches
+    that work with the forked API</li>
+  <li>You can obtain and run sel4test for seL4 <code class="highlighter-rouge">5.2.0-mcs</code> by doing the
+    following:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir sel4test-mcs $ cd sel4test-mcs
+$ repo init -u &lt;https://github.com/seL4/sel4test-manifest.git&gt; -m 5.2.x-mcs.xml
+$ repo sync
+</code></pre></div></div>
+
+<ul>
+  <li>A <a href="/Tutorials/seL4_RT_tutorial">new tutorial</a> covers the difference in the APIs</li>
+</ul>
+
+<h2 id="hardware-support">Hardware support</h2>
+
+<p>The RT kernel currently supports:</p>
+
+<ul>
+  <li><a href="/Hardware/BeagleBoard">BeagleBoard</a></li>
+  <li><a href="/Hardware/sabreLite">SabreLite</a></li>
+  <li><a href="/Hardware/IA32">x86 (ia32, x64), multicore</a></li>
+  <li><a href="/Hardware/jetsontk1">Tegra TK1</a></li>
+</ul>
+
+<p>Other hardware platforms will be added as required (the ports require
+updated kernel and user-level timer drivers)</p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the <code class="highlighter-rouge">5.2.0-mcs</code> manual included in the release.</p>
+
+<p>We have developed a branch of the seL4 and CAmkES tutorials for the MCS
+kernel.</p>
+
+<ul>
+  <li><a href="/Tutorials/seL4_RT_tutorial">seL4 RT tutorial</a> a new tutorial which covers all of the
+    API changes and features is available here.</li>
+  <li><a href="/Tutorials">Tutorials</a> Otherwise it’s worth going through all of the
+    tutorials, as all have been ported to the MCS kernel on the
+    ‘mcs’ branch.</li>
+</ul>
+
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

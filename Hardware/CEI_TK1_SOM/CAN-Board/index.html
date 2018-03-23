@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The CAN Daughterboard | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/CEI_TK1_SOM/">
+              <span property="name"><b>TK1 som</b></span>
+              <meta property="position" content="3" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">The CAN Daughterboard</span>
+            <meta property="position" content="4" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="the-can-daughterboard">The CAN Daughterboard</h1>
+<p>The CAN Daughterboard is an open-hardware
+<strong>CAN/SPI/I2C/Serial board</strong> designed by the Trustworthy Systems group
+at Data61/CSIRO, that can be mounted below the power supply module of
+the TK1-SOM. It provides <strong>two CAN buses</strong> implemented with MCP2515
+(on the TK1-SOM’s SPI bus) and voltage conversion for the two serial
+ports.</p>
+
+<style>
+div.content img {
+  width:20%;
+}
+</style>
+
+<p><img src="/Hardware/CEI_TK1_SOM/CAN-Board/top.jpg" alt="Top of board" />
+<img src="/Hardware/CEI_TK1_SOM/CAN-Board/bottom.jpg" alt="Bottom of board" />
+<img src="/Hardware/CEI_TK1_SOM/CAN-Board/side.jpg" alt="Side view of mounted stack" /></p>
+
+<h2 id="mounting">Mounting</h2>
+<p>The board attaches to the bottom of a TK1-SOM via the
+expansion connector. No further work should be needed to enumerate the
+device given a kernel supporting GPIO chipselects.</p>
+
+<p>Note the unpopulated standoff holes on the rightmost image above — it
+is possible to fit a standoff of the same type already installed in the
+TK1-SOM to stabilize the ‘tower’ making it easier to work with.</p>
+
+<p>The part numbers of the standoffs between the CAN daughterboard and TK1
+is the same as is already used between the CPU &amp; GPU board. Order codes:</p>
+
+<ul>
+  <li><strong>STANDOFF</strong> - HEX M2.5 x 16MM ALUMINUM M-F (M2111-2545-AL)
+    between pcb standoff</li>
+  <li><strong>SCREW</strong> - M2.5 x 5 MM SS PAN HEAD PHILIPS (92000A103) bottom
+    pcb screw</li>
+</ul>
+
+<h2 id="using-linux-with-this-daughterboard-for-can">Using Linux with this daughterboard for CAN</h2>
+<p>(<strong>hello world &amp; testing</strong>) See <a href="../L4TCan">Using CAN on L4T through an MCP251X</a></p>
+
+<h2 id="pinout-detail">Pinout detail</h2>
+<p>The font on the silkscreen indicating pins is
+difficult to see once the tower is assembled (wasn’t enough space on the
+top) - See this picture (view taken from <strong>bottom</strong>):</p>
+
+<p><img src="/Hardware/CEI_TK1_SOM/CAN-Board/silk.png" alt="Silk Screen" /></p>
+
+<h3 id="warning---uart-level-converter">Warning - UART Level Converter:</h3>
+
+<ul>
+  <li>If using the level converter on the board, and if you are
+getting <strong>junk from your 3V3 serial cable</strong>, read this:</li>
+  <li>Unfortunately there is an issue with these level converter
+chips, in some impedance situations the rise time is much worse
+than indicated on the datasheet. Basically, with some serial
+cables the converter will garble signals at a high baud rate
+(&gt; 57600).</li>
+  <li>This can be circumvented by changing your u-boot and extlinux to
+use a slower baud rate. 9600 is very safe, anything up to about
+57600 should be fine — start slow and work up.</li>
+</ul>
+
+<p>If you need the faster baud rates (or don’t want to change the default
+settings), <strong>use a 1V8 USB-TTL cable</strong> and plug it straight into the
+TK1 as usual. This will be fixed in a future revision.</p>
+
+<h2 id="tk1-soc-connections">TK1 SOC Connections</h2>
+<p>Useful for writing drivers - this is a list of
+which pins on the board correspond to which SOC pins:</p>
+
+<p>Note: All I2C signals operate at 3V3 on their 0.1” headers, except
+I2C_CAM which is selectable from 1V8&lt;-&gt;3V3 in software.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>PIN</th>
+      <th>BALL</th>
+      <th>PERIPHERAL ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>I2C_CAM_SCL</td>
+      <td>AF8</td>
+      <td>I2C3_CLK</td>
+    </tr>
+    <tr>
+      <td>I2C_CAM_SDA</td>
+      <td>AG8</td>
+      <td>I2C3_DAT</td>
+    </tr>
+    <tr>
+      <td>I2C_TK1_SCL</td>
+      <td>Y2</td>
+      <td>I2C2_CLK</td>
+    </tr>
+    <tr>
+      <td>I2C_TK1_SDA</td>
+      <td>AA2</td>
+      <td>I2C2_DAT</td>
+    </tr>
+    <tr>
+      <td>I2C_LOCAL_SCL</td>
+      <td>P6</td>
+      <td>I2C1_CLK</td>
+    </tr>
+    <tr>
+      <td>I2C_LOCAL_SDA</td>
+      <td>M6</td>
+      <td>I2C1_DAT</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All SPI signals out of the TK1 are at 1V8, but are translated to 3V3 by
+the board (the 0.1” header operates at 3V3)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>PIN</th>
+      <th>BALL</th>
+      <th>PERIPHERAL ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SPI_CLK</td>
+      <td>AG15</td>
+      <td>SPI1A_SCK</td>
+    </tr>
+    <tr>
+      <td>SPI_MISO</td>
+      <td>AL18</td>
+      <td>SPI1A_DIN</td>
+    </tr>
+    <tr>
+      <td>SPI_CSN</td>
+      <td>AL16</td>
+      <td>SPI1A_CS0</td>
+    </tr>
+    <tr>
+      <td>SPI_MOSI</td>
+      <td>AK17</td>
+      <td>SPI1A_DOUT</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All UART signals out of the TK1 are at 1V8, but are translated to 3V3 by
+the board. Note that UART signals will only be present on the board
+outputs if the uart is actually jumpered to the converter!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>PIN</th>
+      <th>BALL</th>
+      <th>PERIPHERAL ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>J8_RTSn</td>
+      <td>V5</td>
+      <td>UD3_RTS</td>
+    </tr>
+    <tr>
+      <td>J8_CTSn</td>
+      <td>V9</td>
+      <td>UD3_CTS</td>
+    </tr>
+    <tr>
+      <td>J8_TXD</td>
+      <td>V4</td>
+      <td>UD3_TXD</td>
+    </tr>
+    <tr>
+      <td>J8_RXD</td>
+      <td>U4</td>
+      <td>UD3_RXD</td>
+    </tr>
+    <tr>
+      <td>J2000_RXD</td>
+      <td>L0</td>
+      <td>UART2_RTS_N</td>
+    </tr>
+    <tr>
+      <td>J2000_TXD</td>
+      <td>M8</td>
+      <td>UART2_CTS_N</td>
+    </tr>
+    <tr>
+      <td>J2000_CTSn</td>
+      <td>M1</td>
+      <td>UART2_TXD</td>
+    </tr>
+    <tr>
+      <td>J2000_RTSn</td>
+      <td>P4</td>
+      <td>UART2_RXD</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note that TXD (1V8) is translated to TXD (3V3). NOT TXD (1V8) &lt;-&gt;
+RXD (1V8). This means that the jumper from the TK1-SOM should go from
+it’s TX to RX on the daughterboard for a standard ftdi pinout to work.</p>
+
+<p>Note that GPIOs aren’t actually brought out by the board but they are
+used by the CAN controller (diagram below).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>PIN</th>
+      <th>BALL</th>
+      <th>PERIPHERAL ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TK1_GPIO0</td>
+      <td>AF29</td>
+      <td>GPIO3_PS.05</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO1</td>
+      <td>AA26</td>
+      <td>GPIO3_PT.00</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO2</td>
+      <td>AC30</td>
+      <td>GPIO3_PS.06</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO3</td>
+      <td>AA31</td>
+      <td>GPIO3_PS.02</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO4</td>
+      <td>V28</td>
+      <td>GPIO3_PS.03</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO5</td>
+      <td>W31</td>
+      <td>GPIO3_PR.00</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO6</td>
+      <td>AB31</td>
+      <td>GPIO3_PR.06</td>
+    </tr>
+    <tr>
+      <td>TK1_GPIO7</td>
+      <td>Y27</td>
+      <td>GPIO3_PS.04</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="can-controller-mcp25625-gpio-usage">CAN Controller (MCP25625) GPIO Usage:</h3>
+<p><img style="width: 50%" src="Can_board_pins.png" alt="MCP25625 pinout" /></p>
+
+<h2 id="construction-information">Construction Information</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Schematic</td>
+      <td><a href="/Hardware/CEI_TK1_SOM/CAN-Board/canboard_v3.pdf">canboard_v3.pdf</a></td>
+    </tr>
+    <tr>
+      <td>PCB Sources Repository</td>
+      <td>https://bitbucket.csiro.au/projects/OH/repos/tk1som-can-daughterboard</td>
+    </tr>
+    <tr>
+      <td>Gerber Files (in repo also)</td>
+      <td><a href="/Hardware/CEI_TK1_SOM/CAN-Board/Tegra_CANboard_tofab_v1.zip">Tegra_CANboard_tofab_v1.zip</a></td>
+    </tr>
+    <tr>
+      <td>BOM (in repo also)</td>
+      <td><a href="/Hardware/CEI_TK1_SOM/CAN-Board/CanBoardBOMDraft1.xlsx">CanBoardBOMDraft1.xlsx</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="construction-notes">Construction notes</h2>
+<p>Components <strong>R6, R14, R19, R23 should NOT be
+mounted</strong>. R6 and R19 are pull-up resistors that were found to cause
+signal integrity issues, the other 2 resistors when mounted will supply
+5v to the CAN lines and are optional.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

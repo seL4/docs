@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TK1-SOM Hardware Modifications | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/CEI_TK1_SOM/">
+              <span property="name"><b>TK1 som</b></span>
+              <meta property="position" content="3" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">TK1-SOM Hardware Modifications</span>
+            <meta property="position" content="4" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="tk1-som-hardware-modifications">TK1-SOM Hardware Modifications</h1>
+
+<h2 id="adding-a-second-uart-connector">Adding a second UART connector</h2>
+
+<h3 id="the-issue">The issue:</h3>
+<p>Note: if you are using our
+<a href="../Daughter-Board">IO-Daughterboard</a> , this is uneccessary;
+instead a straight-line passthrough jumper is used to hook up to level
+converters on the daughterboard.</p>
+
+<p>The TK1-SOM has a secondary UART connection, however it’s a bit of a
+pain to get to as a normal jumper won’t fit sandwiched between the
+boards (below left), and you can’t get to the connection from the top
+because of the fan &amp; heatsink (below right).</p>
+
+<p><img style="width: 30%" src="jumper.jpg" alt="jumper" title="jumper" />
+<img style="width: 30%" src="heatsink.jpg" alt="heatsink" title="heatsink" /></p>
+
+<h3 id="what-it-looks-like">What it looks like:</h3>
+
+<p>Viewed from the bottom of the CPU board, the secondary UART is the 4
+unpopulated pins just under the ethernet jack pins (see below):</p>
+
+<p><img style="width: 30%" src="connector.jpg" alt="connector" title="connector" /></p>
+
+<h3 id="right-angle-connectors">Right-angle connectors?</h3>
+<p>Initially I looked at normal right-angle
+0.1” headers, but they don’t fit in either direction!</p>
+
+<p><img style="width: 30%" src="clearance.jpg" alt="clearance" title="clearance" />
+<img style="width: 30%" src="short.jpg" alt="short" title="short" /></p>
+
+<p>Above left: you can’t connect a jack as there is no clearance to the
+mezzanine connector. Above right: the pins will likely short with the
+ethernet jack pins.</p>
+
+<h3 id="solution-modify-a-dual-row-header">Solution: modify a dual-row header..</h3>
+
+<p>A normal dual-row 0.1” header looks like this:</p>
+
+<p><img style="width: 30%" src="14203013_1125907040788653_366710481_o.jpg" alt="normal header" /></p>
+
+<p>But we only need it for clearance - which we can do by just taking out
+the bottom 2 rows of pins:</p>
+
+<p><img style="width: 30%" src="14203078_1125907047455319_543597542_o.jpg" alt="bend pin" />
+<img style="width: 30%" src="14202988_1125907050788652_1468451190_o.jpg" alt="pull pin" /></p>
+
+<p>(It’s easiest to use pliers to push the pins out a little bit, bend
+them, and then pull them all the way out)</p>
+
+<p>Eventually, you end up with this (Only the top row left):</p>
+
+<p><img style="width: 30%" src="14203586_1125907067455317_1649032044_o.jpg" alt="single row header" /></p>
+
+<p>Now you can solder the pins on (make sure the pins are directed toward
+the ethernet jack so there’s enough clearance!)</p>
+
+<p><img style="width: 30%" src="14191325_1125907080788649_54990137_o.jpg" alt="attached header" /></p>
+
+<p>Make sure not to use too much heat in this step, there are a few 0201
+components nearby which can easily come off just because of the nearby
+heat. Also be sure to keep the iron angled away from the connectors as
+it is quite easy to accidentally melt them.</p>
+
+<p>Once done, put the TK1-SOM back together and you have some easily
+accessible UART pins:</p>
+
+<p><img style="width: 30%" src="final.jpg" alt="final" title="final" /></p>
+
+<p>The pinout &amp; levels are described in the TK1-SOM reference guide - this
+connector is called J2000. (Pin 1 is the square pad)</p>
+
+<p>Note the 1V8 logic levels!</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

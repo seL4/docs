@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 0.0.1-rt-dev | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 0.0.1-rt-dev</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-001-rt-dev">seL4 0.0.1-rt-dev</h1>
+
+<p>The development branch of the for the seL4 realtime extensions. This
+branch is not verified and is under active development.</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<ul>
+  <li>
+    <p>Maximum priorities</p>
+
+    <ul>
+      <li>Previously seL4 would not allow threads to set any other
+thread’s priority to higher than its own. This has been
+extracted into a separate field for the RT kernel, a maximum
+priority, which limits what thread cans set their own or other
+threads priorities to.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Scheduling contexts</p>
+
+    <ul>
+      <li>This branch adds scheduling contexts to seL4, which represent
+CPU time. Scheduling contexts are separate to threads
+(although threads required one to run) and can be passed
+around over IPC.</li>
+      <li>Scheduling contexts allow developers to create periodic
+threads, temporally isolation threads and have variable
+timeslices for round robin threads.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For more details, please see the manual. Most of the updates are in the
+threads chapter.</p>
+
+<h2 id="api-changes">API Changes</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> arguments changed (domain removed, scheduling
+    context cap and max priority added).</li>
+</ul>
+
+<h2 id="api-additions">API Additions</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_CapSchedControl</code> - initial cap for control of CPU time</li>
+  <li><code class="highlighter-rouge">seL4_SchedContextObject</code> - new object for that allows threads
+    access to CPU time</li>
+  <li><code class="highlighter-rouge">seL4_SchedContextBits</code> - size in bits of a scheduling context
+    object</li>
+  <li><code class="highlighter-rouge">seL4_NBSendRecv</code> - new system call which allows once kernel
+    invocation to perform a non-blocking send on one capability, and
+    wait on another.</li>
+  <li><code class="highlighter-rouge">seL4_NBSendRecvWithMRs</code> - uses above new system call without
+    touching the IPC buffer, passing only data in registers</li>
+  <li><code class="highlighter-rouge">seL4_Time</code> - type for specifying temporal units to the kernel</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetMaxPriority</code> - set the max priority for a tcb,
+    threads can only start / set priorities threads up to and
+    including their max priority</li>
+  <li><code class="highlighter-rouge">seL4_Prio_t</code> - type for priority and max priority, used in
+    <code class="highlighter-rouge">TCB_Configure</code></li>
+  <li><code class="highlighter-rouge">seL4_CNode_SaveTCBCaller</code> - save the reply cap of the target tcb.
+    This allows another thread to reply on behalf of the owner of the
+    reply cap.</li>
+  <li><code class="highlighter-rouge">seL4_SchedControl_Configure</code> - invokes the scheduling control cap
+    to populate a scheduling context with parameters</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Yield</code> - end the timeslice of the thread bound
+    to the sched context invoked.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_BindTCB</code> - bind a tcb to a scheduling context,
+    if the TCB is runnable and scheduling context has budget, this
+    will start the tcb running</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindTCB</code> - remove binding of a scheduling
+    context from a tcb, tcb will no longer run but state will be
+    preserved</li>
+  <li><code class="highlighter-rouge">seL4_CapInitThreadSC</code> - capability to the initial threads
+    scheduling context</li>
+  <li><code class="highlighter-rouge">seL4_CapSchedControl</code> - scheduling control capability, which is
+    given to the root thread</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_BindNotification</code> - Bind a notification to a
+    scheduling context. Passive threads waiting on this notification
+    will borrow the scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindNotification</code> - unbind the notification.</li>
+</ul>
+
+<h2 id="api-deletions">API deletions</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_Yield</code> (replaced by <code class="highlighter-rouge">seL4_SchedContext_Yield</code>)</li>
+  <li><code class="highlighter-rouge">seL4_DomainSet</code></li>
+  <li>Domain scheduler removed.</li>
+</ul>
+
+<h2 id="library--test-compatability">Library &amp; test compatability</h2>
+
+<p>The ‘rt’ branch of <code class="highlighter-rouge">seL4_libs</code> has been adapted to the rt branch of seL4,
+and the rt branch of sel4test has been ported to the <code class="highlighter-rouge">seL4_rt-dev-0.0.1</code>
+kernel, along with many more tests written suited to the rt kernel. To
+run it, checkout the <code class="highlighter-rouge">default.xml</code> manifest on the rt branch of
+sel4test-manifest.</p>
+
+<p>The rt branch is in no way compatible with the master branch of seL4.</p>
+
+<p>More details See the <code class="highlighter-rouge">0.0.1-rt-dev</code> manual included in the release.</p>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

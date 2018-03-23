@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The TK1-SOM Daughterboard | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/CEI_TK1_SOM/">
+              <span property="name"><b>TK1 som</b></span>
+              <meta property="position" content="3" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">The TK1-SOM Daughterboard</span>
+            <meta property="position" content="4" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="the-tk1-som-daughterboard">The TK1-SOM Daughterboard</h1>
+<p>The TK1-SOM Daughterboard is an
+open-hardware daughterboard designed by the Trustworthy Systems group at
+Data61/CSIRO, that can be mounted to the TK1-SOM. It provides <strong>CAN
+buses</strong>, <strong>serial</strong>,<strong>sensors</strong>, <strong>power management</strong>, <strong>PWM
+outputs</strong> and other features that allow the TK1-SOM to be used as a
+flight controller for a quadcopter.</p>
+
+<h3 id="warning">Warning</h3>
+
+<ul>
+  <li>Don’t plug in or unplug things from the daughterboard while it
+      is turned on, especially the radio. The current transient will
+      sometimes kill U13 (TPS563200 5V regulator). If only 1 of the
+      LEDs above the white molex connector is lit, it is because U13
+      is dead.</li>
+</ul>
+
+<h3 id="rough-overview-top">Rough overview (top)</h3>
+
+<p><img style="width: 100%" src="daughterboard_top_strike.jpg" alt="Top of board" /></p>
+
+<h3 id="rough-overview-bottom">Rough overview (bottom)</h3>
+
+<p><img style="width: 100%" src="daughterboard_bottom.jpg" alt="Bottom of board" /></p>
+
+<h3 id="with-tk1">With TK1</h3>
+<p><img style="width: 100%" src="assembly_cropped.jpg" alt="Daughterboard with TK1" /></p>
+
+<h2 id="technical-documentation">Technical documentation</h2>
+
+<ul>
+  <li><a href="/Hardware/CEI_TK1_SOM/Daughter-Board/daughterboard_r3a_schematic.pdf">Schematic PDF</a> (See ‘<a href="#errata">Technical errata for R3A</a>’
+      for changes)</li>
+  <li>Bill of Materials:
+      <a href="/Hardware/CEI_TK1_SOM/Daughter-Board/tegra_daughterboard_bom3.xls">tegra_daughterboard_bom3.xls</a></li>
+  <li>Project repository:
+      <a href="https://bitbucket.csiro.au/projects/OH/repos/tk1som-quadcopter-daughterboard">Altium files</a></li>
+</ul>
+
+<h2 id="connecting-the-daughterboard">Connecting the Daughterboard</h2>
+<p>Going from a TK1-SOM, a pixhawk/IRIS
+and a daughterboard to a functioning system requires:</p>
+
+<ul>
+  <li><a href="#mounting-the-tk1-to-the-daughterboard">Mounting the TK1 to the daughterboard</a></li>
+  <li><a href="#jumpering-the-uart-level-translators">Jumpering the UART level translators</a></li>
+  <li><a href="#jumpering-the-reset-button">Jumpering the RESET button</a></li>
+  <li><a href="#attaching-the-pixhawk-power-cable">Attaching the pixhawk power cable</a></li>
+  <li><a href="#attaching-the-can-bus-cable">Attaching the CAN bus cable</a></li>
+  <li><a href="#attaching-the-telemetry-cable">Attaching the telemetry cable</a></li>
+  <li><a href="#connecting-the-power-harness">Connecting the power harness</a></li>
+  <li><a href="#connecting-the-battery-or-external-psu">Connecting the battery <strong>OR</strong> Connecting the external PSU</a></li>
+</ul>
+
+<h3 id="mounting-the-tk1-to-the-daughterboard">Mounting the TK1 to the daughterboard</h3>
+<p>Before mounting the
+TK1-SOM to the daughterboard, you will have to disassemble the TK1-SOM.
+This will involve:</p>
+
+<ul>
+  <li>Removing the fan screw</li>
+  <li>Unscrewing the standoffs</li>
+  <li>Separating the 2 module ‘halves’</li>
+  <li>Removing the fan connector</li>
+</ul>
+
+<p>This must be done with care as it is easy to damage the TK1. Your goal
+is this:</p>
+
+<p><img style="width: 50%" src="tk1_disassemble.jpg" alt="TK1 disassembled" /></p>
+
+<p>Now you can start attaching the TK1 to the daughterboard. It’s easy to
+identify which half goes where by looking at the connectors on the
+bottom, or the overview at the top of this page.</p>
+
+<p>Firmly press both of the TK1 halves into their sockets. Try to use
+unpopulated parts of the PCB as ‘finger positions’ to avoid damaging
+components or connectors.</p>
+
+<p>Note: Standoffs can optionally be added in this step for extra support
+(the friction fit supplied by the TK1 connectors should be more than
+sufficient in most cases). Each module has a single standoff point for
+an M2.5 screw, bolt, and standoff:</p>
+
+<p><img style="width: 50%" src="standoff.jpg" alt="Standoff fitted" /></p>
+
+<p>The end result should look like the image under <a href="#with-tk1">With TK1</a> near the top of this page</p>
+
+<h3 id="jumpering-the-uart-level-translators">Jumpering the UART level translators</h3>
+<p>For the daughterboard to do
+any level translation, it needs to be connected to the TK1’s UARTs. We
+achieve this by jumpering the TK1’s UARTs to the ‘UART TK1’ connector on
+the daughterboard. (See ‘rough overview’, top view)</p>
+
+<p>The pinout of the TK1’s UARTS is the same as the pinout of the
+daughterboard’s UART inputs. Observe:</p>
+
+<p><img style="width: 40%" src="UART1.jpg" alt="UART 1 on TK1" /></p>
+
+<p><img style="width: 40%" src="uart2.jpg" alt="UART 2 on TK1" /></p>
+
+<p><img style="width: 40%" src="UARTS_board.jpg" alt="UARTs on daughterboard" /></p>
+
+<p>The pinout of the TK1 UARTS is:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>PIN 1</td>
+      <td>RX</td>
+    </tr>
+    <tr>
+      <td>PIN 2</td>
+      <td>TX</td>
+    </tr>
+    <tr>
+      <td>PIN 3</td>
+      <td>CTS-L</td>
+    </tr>
+    <tr>
+      <td>PIN 4</td>
+      <td>RTS-L</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Since we aren’t using flow control, you only need to connect pin 1 (TK1)
+to pin 1 (daughterboard), and pin 2 - pin 2 for both UARTS. You should
+end up with:</p>
+
+<p><img style="width: 50%" src="jumpered.jpg" alt="UARTs jumpered" /></p>
+
+<p><strong>Note</strong>: On this board, UART1 is connected to the RADIO output, the
+FTDI port, and the activity LEDs. UART2 is connected to the GPS output.
+It is possible to swap these at the TK1 input side without consequence
+(this would put the kernel dump through the GPS output, and UART2
+through telemetry). Additionally, one can disconnect these jumpers and
+use an ‘ordinary’ 1V8 converter for debugging (See
+<a href="#debugging-output-and-finding-grounds">debugging &amp; grounds</a> below).</p>
+
+<h3 id="jumpering-the-reset-button">Jumpering the RESET button</h3>
+<p>It’s difficult to access the TK1’s
+reset button when it is mounted, so there is a secondary reset button on
+the daughterboard that can optionally be used. First, you must solder a
+pin to the hole next to the reset switch on the TK1 (as RESET isn’t
+brought out on any of its connectors):</p>
+
+<p><img style="width: 50%" src="reset_pin_tk1.jpg" alt="Reset pin soldered to the TK1" /></p>
+
+<p>From here, you want to jumper this pin to the ‘RESET’ pin on the
+daughterboard (This is the pin just to the right of the grey switch):</p>
+
+<p><img style="width: 50%" src="reset_pin_daughterboard.jpg" alt="Reset button and pin on daughterboard" /></p>
+
+<p>Your end result is:</p>
+
+<p><img style="width: 50%" src="reset_jumpered.jpg" alt="Reset pin jumpered" /></p>
+
+<p>Note: As this reset switch is just a momentary short to ground, it is
+very easy to make your own reset switch that may be larger or more
+conveniently mounted elsewhere on the quadcopter. Essentially you just
+need a momentary switch between the TK1 pin and ground - the signal is
+debounced etc on the TK1.</p>
+
+<h3 id="attaching-the-pixhawk-power-cable">Attaching the pixhawk power cable</h3>
+<p>–(The pixhawk power cable is
+how the daughterboard delivers power to the pixhawk. Note that this is
+very different to the previous daughterboards - we do not use the IRIS’
+power output (that would normally go into the pixhawk) for
+anything.)–OUTDATED DUE TO POSSIBLE RAIL INTERACTION</p>
+
+<p>The pixhawk should be connected to the IRIS power supply as it would be
+in a vanilla configuration, to avoid any interaction with the
+daughterboard’s rails. Do NOT connect anything to the daughterboard’s
+‘Power out to Pixhawk’ connector.</p>
+
+<h3 id="attaching-the-can-bus-cable">Attaching the CAN bus cable</h3>
+<p>The CAN1 connector we are using
+(labelled ‘PRIMARY CAN CONNECTOR’ on ‘Rough overview - Top’ at the top
+of this page) is directly connected to the CAN port on the pixhawk.
+Connect one end of the 4-pin DF13 connector to the pixhawk, and the
+other to the daughterboard:</p>
+
+<p><img style="width: 60%" src="can2.jpg" alt="CAN connector on daughterboard" /></p>
+
+<p>The left arrow points to the connector. The right arrow points to the
+endpoint selection jumper. If the endpoint selection jumper is closed,
+CAN1 will be terminated as an endpoint. In our situation, the pixhawk
+and the daughterboard are endpoints, so the jumper should be closed for
+CAN1.</p>
+
+<p>Note that the connectors on the bottom and the top of the board are
+connected in parallel so that the board can be used in more complex
+network topologies, i.e the 2 left connectors are CAN1, and the 2 right
+connectors are CAN2.</p>
+
+<h3 id="attaching-the-telemetry-cable">Attaching the telemetry cable</h3>
+<p>The telemetry connector to be
+connected to the 3DR RADIO has a ‘RADIO’ label, and it is next to the
+GPS connector - see ‘Rough Overview - Bottom’, above.</p>
+
+<p>To connect it, find the 3DR RADIO cable inside the IRIS and just plug it
+in:</p>
+
+<p><img style="width: 60%" src="radio.jpg" alt="3DR Radio connected to daughterboard" /></p>
+
+<h3 id="connecting-the-power-harness">Connecting the power harness</h3>
+<p>The power harness is how the
+daughterboard supplies power to the TK1-SOM, and also how it intercepts
+power from the IRIS’ batteries (if it is running on batteries). This is
+the power harness:</p>
+
+<p><img style="width: 60%" src="harness1.jpg" alt="The power harness" /></p>
+
+<p>To connect it, plug in the molex connector under the daughterboard, and
+then plug into the TK1-SOM’s barrel jack. Do NOT plug this into the
+‘+12V IN’ barrel jack on the side of the daughterboard. This is what you
+want:</p>
+
+<p><img style="width: 60%" src="harness2.jpg" alt="The power harness plugged in" /></p>
+
+<h3 id="connecting-the-battery-or-external-psu">Connecting the battery OR external PSU</h3>
+<p>There are 2 ways of
+powering up the daughterboard and pixhawk:</p>
+
+<ul>
+  <li>1: Using the TK1-SOM’s ordinary power supply (for testing)</li>
+  <li>2: Using the LIPO battery on the quadcopter (for demoing)</li>
+</ul>
+
+<p>The only difference from a functional point of view is that option 1
+will only power the pixhawk, daughterboard, and TK1-SOM; not the rest of
+the quadcopter. The LIPO will do the same, but also provide power for
+the rotors etc.</p>
+
+<p>Note that in both cases the power harness must be connected to supply
+the TK1-SOM with power. If the TK1 power supply is used, the yellow
+battery connectors should be unplugged.</p>
+
+<p>In any case, for option 1: simply plug in the TK1 power supply to the
+‘+12V IN’ jack (See ‘Rough overview’ - Top):</p>
+
+<p><img style="width: 60%" src="external_power.jpg" alt="Powered with ordinary TK1 PSU" /></p>
+
+<p>The TK1 and daughterboard will all turn on. (And the pixhawk if it is
+connected unlike the above picture)</p>
+
+<p>For option 2: Connect one end of the power harness to the main IRIS
+power input:</p>
+
+<p><img style="width: 30%" src="battery_power.jpg" alt="Connecting to IRIS internal main power connector" /></p>
+
+<p>and the other end to the battery: (Follow ordinary 3DR procedures before
+doing this as it will turn everything on)</p>
+
+<p><img style="width: 70%" src="quadcopter_on.jpg" alt="Connecting the battery" /></p>
+
+<p>Similarly, everything should turn on as pictured.</p>
+
+<h3 id="everything-connected">Everything connected</h3>
+<p>Slightly more close-up photo of everything
+connected and turned on:
+<img style="width: 70%" src="everything_connected.jpg" alt="Everything connected" /></p>
+
+<h3 id="debugging-output-and-finding-grounds">Debugging output and finding grounds</h3>
+<p>To use an ‘ordinary’ 1V8
+converter and debug things, you will likely want to:</p>
+
+<ul>
+  <li>Connect the 1V8 converter to the primary UART on the TK1 (on
+    the top) for kernel messages</li>
+  <li>Swap UART1 with UART2 into the daughterboard, making the secondary
+    UART go through telemetry. (i.e connect UART2 (TK1) to
+    UART1 (Daughterboard) to get the secondary UART through telem)</li>
+</ul>
+
+<p>Our 1V8 converters have the following pinout:</p>
+
+<p><img style="width: 70%" src="uart_converter.jpg" alt="Everything connected" /></p>
+
+<p>You want to connect TX (converter) to RX on the TK1, and RX (converter)
+to TX on the TK1. You also need to connect a ground, which you can find
+all along the bottom row of the servo connector:</p>
+
+<p><img style="width: 70%" src="grounds.jpg" alt="Everything connected" /></p>
+
+<p>(The entire bottom row is connected to ground)</p>
+
+<h2 id="errata">Errata</h2>
+
+<h3 id="technical-errata-for-r3a-to-be-fixed-next-revision">Technical errata for R3A, to be fixed next revision</h3>
+
+<ul>
+  <li>The ‘power out to pixhawk’ connection on the daughterboard
+      should not be used as it may cause a rail collision.</li>
+  <li>All I2C lines CLK and DAT lines are reversed due to an error in
+      the schematic supplied to us by CEI; this has been modwired to
+      the correct connection on some boards.</li>
+  <li>U8 (LSM303D, one of the many inertial sensors) is not mounted
+      due to a footprint error.</li>
+  <li>D10 &amp; D11 CAN Reset diodes are not mounted on some boards. This
+      has been tested OK, the diodes are just to improve CAN chip
+      reset times - but we aren’t actually using the CAN reset line.</li>
+  <li>R35 &amp; R45 to supply power through the CAN ports –(ARE)– ARE
+      NOT mounted, and should never be to avoid rail collisions.</li>
+  <li>The LV cutout circuitry does not work. Since the IRIS battery is
+      disconnected when not in use anyway, this should not be a
+      huge issue. UPDATE: Reason is footprint error with TLV431 chip,
+      swapping A/K fixes issue.</li>
+  <li>On schematic sheet 5, the ‘Do not populate’ remarks indicate the
+      wrong designators. They should indicate R35 &amp; R45.</li>
+  <li>R40 &amp; R49 pull-ups on the SPI CSN line are not mounted. These
+      were found to cause signal integrity issues. Additionally, the
+      silkscreen for R51 and R49 is swapped on the PCB.</li>
+  <li>R57 - R72 (Current limiting resistors for D12-D27), a value of
+      560 ohm was used instead of 10K ohm to increase
+      their brightness.</li>
+</ul>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

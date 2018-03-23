@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arndale | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Arndale</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="arndale">Arndale</h1>
+<p>seL4 supports the the <a href="http://www.arndaleboard.org/wiki/index.php/Main_Page">Arndale</a>
+  dual core A15 ARM development board.</p>
+
+<h2 id="client-setup">Client setup</h2>
+
+<h3 id="hardware-requirements">Hardware requirements:</h3>
+<ol>
+  <li>5V power supply, center +ve</li>
+</ol>
+
+<h2 id="sd-card-setup">SD card setup</h2>
+<p>The offsets depend on which versions of bl1, bl2 and
+U-Boot you get.</p>
+
+<p>For BL1 from the Android tree:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Position (block)</th>
+      <th>file</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BL1</td>
+      <td>1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>BL2 (uboot-module)</td>
+      <td>31 (8k)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>u-boot</td>
+      <td>63</td>
+      <td>(24k)</td>
+    </tr>
+    <tr>
+      <td>!TrustZone</td>
+      <td>719</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For BL1 from
+<a href="https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=arndale-bl1.img">https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=arndale-bl1.img</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Position (block)</th>
+      <th>file</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BL1</td>
+      <td>1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SPL</td>
+      <td>17</td>
+      <td><a href="https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=smdk5250-spl.bin">https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=smdk5250-spl.bin</a></td>
+    </tr>
+    <tr>
+      <td>u-boot</td>
+      <td>49</td>
+      <td><a href="https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=u-boot.binu-boot.bin">https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=u-boot.binu-boot.bin</a> (24k)</td>
+    </tr>
+    <tr>
+      <td>kernel</td>
+      <td>1105</td>
+      <td><a href="https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=uImage">https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=uImage</a></td>
+    </tr>
+    <tr>
+      <td>DTB</td>
+      <td>9297</td>
+      <td><a href="https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=exynos5250-arndale.dtb">https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&amp;do=view&amp;target=exynos5250-arndale.dtb</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note — U-Boot understands DOS filesystems (and ext2) so uImage, uInitrd
+and the DTB could be normal files in a partition, rather than at a fixed
+offset on the SD card.</p>
+
+<p>These offsets are designed for a U-Boot environment like this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootargs=root=/dev/mmcblk1p1 rw rootwait console=ttySAC2,115200n8 init --no-log
+bootcmd=mmc read 40007000 451 2000;mmc read 42000000 2451 20;bootm 40007000 - 42000000
+</code></pre></div></div>
+
+<p>If you have a separate boot partition on your card you could instead
+use: (untested as yet)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel=0x40007000
+dtb=42000000
+bootcmd=mmc init; fatload mmc 0:1 ${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} - ${dtb}
+</code></pre></div></div>
+
+<h3 id="u-boot">U-Boot</h3>
+<p>There are at least three versions available, the one in
+the Android tree (which should have Fastboot) and the one from Linaro
+(which understands the USB and network drivers).</p>
+
+<p>There’s also <a href="http://www.spinics.net/lists/kvm-arm/msg02817.html">http://www.spinics.net/lists/kvm-arm/msg02817.html</a> which
+is supposed to enable the virtualisation features. I’m not sure at
+present whether the difference is merely configuration or if there are
+source differences. U-Boot.</p>
+
+<p>Inside the Android environment do:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nv">ARCH</span><span class="o">=</span>arm <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-eabi-arndale
+<span class="nb">sudo </span>dd <span class="nv">iflag</span><span class="o">=</span>dsync <span class="nv">oflag</span><span class="o">=</span>dsync <span class="k">if</span><span class="o">=</span>u-boot.bin <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">seek</span><span class="o">=</span>63
+</code></pre></div></div>
+
+<h2 id="sel4-image-file-preparation">seL4 Image file preparation</h2>
+<p>In most cases it is okay to simply
+load the elf file into memory and run bootelf. However, Fastboot may
+require that the ELF file be packed into a U-Boot application image
+file. Follow the below instructions to create this image.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install uboot-mkimage
+<span class="nv">INPUT_FILE</span><span class="o">=</span>images/sel4test-image-arm-exynos4
+<span class="nv">OUTPUT_FILE</span><span class="o">=</span>sel4-uImage
+mkimage <span class="nt">-a</span> 0x48000000 <span class="nt">-e</span> 0x48000000 <span class="nt">-C</span> none <span class="nt">-A</span> arm <span class="nt">-T</span> kernel <span class="nt">-O</span> qnx <span class="nt">-d</span> <span class="nv">$INPUT_FILE</span> <span class="nv">$OUTPUT_FILE</span>
+</code></pre></div></div>
+
+<p>The reason we choose QNX is because we exploit the fact that, like seL4,
+QNX expects to be ELF-loaded. The alternative is to convert our ELF file
+into a binary file using objcopy.</p>
+
+<h2 id="booting">Booting</h2>
+<h3 id="from-sd-card">From SD card</h3>
+
+<p>&lt;TODO&gt;</p>
+
+<h3 id="fastboot">Fastboot</h3>
+<p>&lt;TODO&gt; Currently not working…</p>
+
+<h3 id="tftpboot">tftpboot</h3>
+<p>At the U-Boot prompt, type print to see the list of
+environment variables and their values. Use the following commands to
+set any variables that are missing from the list.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootfile filename
+setenv ethaddr 00:40:5c:26:0a:FF
+setenv usbethaddr 00:40:5c:26:0a:FF
+setenv pxefile_addr_r 0x50000000
+</code></pre></div></div>
+
+<p>Now run:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start; dhcp; bootelf; bootm;
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<p><a href="http://www.arndaleboard.org/">http://www.arndaleboard.org</a></p>
+
+<p><a href="https://wiki.linaro.org/Boards/Arndale/Setup/PXEBoot">PXE boot
+setup</a></p>
+
+<p><a href="https://wiki.kubuntu.org/ARM/QA/ArndaleBoard">Better PXE
+instructions</a></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 7.0.0 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 7.0.0</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-version-700-release">seL4 Version 7.0.0 Release</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 7.0.0</code> with the following changes:</p>
+
+<h2 id="changes">Changes</h2>
+
+<ul>
+  <li>Support for building standalone ia32 kernel added in <code class="highlighter-rouge">e7327fa6df3</code></li>
+  <li>ia32: Set sensible defaults for FS and GS selectors in
+      <code class="highlighter-rouge">c2f6d48bcf2</code></li>
+  <li>aarch64: Use tpidrro_el0 for IPC buffer instead of tpidr_el0
+      in <code class="highlighter-rouge">ae9fe9b5d18</code></li>
+  <li>More seL4 manual documentation added for aarch64 object
+      invocations</li>
+  <li>Default <code class="highlighter-rouge">NUM_DOMAINS</code> set to 16 for x86-64 standalone builds in
+      <code class="highlighter-rouge">baa9798f793</code></li>
+  <li>libsel4: Return <code class="highlighter-rouge">seL4_Error</code> in invocation stubs in <code class="highlighter-rouge">8fb06eecff9</code>
+      ** This is a source code level breaking change **</li>
+  <li>Add a CMake based build system in <code class="highlighter-rouge">0b73072016e</code></li>
+  <li>x86: Increase TCB size for debug builds in <code class="highlighter-rouge">4c8be8f4f91</code></li>
+  <li>libsel4: x86: Remove nested struct declarations in <code class="highlighter-rouge">a8d6315eb16</code>
+      ** This is a source code level breaking change **</li>
+  <li>Bugfix: x86: Unmap pages when delete non final frame caps in
+      <code class="highlighter-rouge">08b9265563a</code></li>
+</ul>
+
+<h1 id="notable-changes">Notable changes</h1>
+
+<ul>
+  <li>CMake based build system added: Initial experimental support has
+      been added for using CMake for building the kernel and some user
+      level libraries. Currently the only project that takes advantage
+      of this is seL4test when using the cmake.xml manifest
+      in sel4test-manifest. Documentation can be found at:
+      <a href="https://github.com/seL4/seL4_tools/tree/master/cmake-tool">https://github.com/seL4/seL4_tools/tree/master/cmake-tool</a></li>
+</ul>
+
+<h1 id="upgrade-notes">Upgrade notes</h1>
+
+<ul>
+  <li>This release is not source compatible with previous releases.</li>
+  <li>seL4 invocations that previously returned long now return
+      <code class="highlighter-rouge">seL4_Error</code> which is an enum. Our libraries have already been
+      updated to reflect this change, but in other places where seL4
+      invocations are used directly, the return types will need to be
+      updated to reflect this change.</li>
+  <li>On x86 some structs in the Bootinfo have been rearranged. This
+      only affects <code class="highlighter-rouge">seL4_VBEModeInfoBlock_t</code> which is used if VESA
+      BIOS Extensions (VBE) information is being used.</li>
+</ul>
+
+<h1 id="known-issues">Known issues</h1>
+
+<ul>
+  <li>One of our tests is non-deterministicly becoming unresponsive on
+      the SMP release build on the Sabre IMX.6 platform, which is a
+      non verified configuration of the kernel. We are working on
+      fixing this problem, and will likely do a point release once it
+      is fixed.</li>
+</ul>
+
+<h1 id="full-changelog">Full changelog</h1>
+<p>Use <code class="highlighter-rouge">git log 6.0.0..7.0.0</code> in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf">7.0.0 manual</a> included in the release or ask on the mailing list!</p>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

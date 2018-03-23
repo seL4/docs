@@ -1,0 +1,36 @@
+--- /scratch/hikey3/arm-trusted-firmware/bl1/bl1_main.c	2016-12-07 10:53:30.222062392 +1100
++++ /scratch/hikey/arm-trusted-firmware/bl1/bl1_main.c	2016-12-02 14:27:03.257171632 +1100
+@@ -113,6 +113,33 @@
+ 	NOTICE("BL1: %s\n", build_message);
+ 
+ 	INFO("BL1: RAM 0x%lx - 0x%lx\n", BL1_RAM_BASE, BL1_RAM_LIMIT);
++	int ACTLR_EL3_EN, test;
++
++	__asm__ volatile (
++		"mrs %0, ACTLR_EL3"
++		: "=r" (ACTLR_EL3_EN)
++		:
++	);
++	
++	NOTICE("Read: ACTLR_EL3 = %x\n", ACTLR_EL3_EN);
++
++	ACTLR_EL3_EN |= 0x1;
++
++	NOTICE("Modify and Write: ACTLR_EL3 = %x\n", ACTLR_EL3_EN);
++
++	__asm__ volatile (
++		"msr ACTLR_EL3, %0"
++		:
++		: "r" (ACTLR_EL3_EN)
++	);
++
++	__asm__ volatile (
++		"mrs %0, ACTLR_EL3"
++		: "=r" (test)
++		:
++	);
++
++	NOTICE("Read again: ACTLR_EL3 = %x\n", test);
+ 
+ #if DEBUG
+ 	unsigned long sctlr_el3 = read_sctlr_el3();

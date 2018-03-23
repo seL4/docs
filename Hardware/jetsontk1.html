@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jetson TK1 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Jetson TK1</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#jetson-tk1">Jetson TK1</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#pre-requisites">Pre-Requisites</a></li>
+<li class="toc-entry toc-h2"><a href="#getting-started">Getting Started</a></li>
+<li class="toc-entry toc-h2"><a href="#build-your-first-sel4-system">Build your first seL4 system</a></li>
+<li class="toc-entry toc-h2"><a href="#load-the-binary">Load the binary</a></li>
+<li class="toc-entry toc-h2"><a href="#flash-u-boot">Flash U-Boot</a></li>
+<li class="toc-entry toc-h2"><a href="#getting-the-sources">Getting the sources</a></li>
+<li class="toc-entry toc-h2"><a href="#patching-the-sources">Patching the sources</a></li>
+<li class="toc-entry toc-h2"><a href="#building">Building</a></li>
+<li class="toc-entry toc-h2"><a href="#flashing">Flashing</a></li>
+<li class="toc-entry toc-h2"><a href="#running-linux-with-the-new-u-boot">Running Linux with the new U-Boot</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="jetson-tk1">Jetson TK1</h1>
+
+<p>The <a href="http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html">Jetson TK1</a> is a affordable embedded system developed by NVIDIA. It runs
+seL4. We will explain how to run seL4 on the Tegra.</p>
+
+<h3 id="pre-requisites">Pre-Requisites</h3>
+<ul>
+  <li>One Tegra Board. See <a href="http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html">Jetson TK1</a></li>
+  <li>The development environment fully working.  See <a href="/Getting_started">Getting started</a></li>
+</ul>
+
+<h2 id="getting-started">Getting Started</h2>
+<p>To get started, check out the
+<a href="https://developer.nvidia.com/embedded-computing">NVIDIA developer
+page</a>, make sure your board is correctly configured and plugged.</p>
+
+<h2 id="build-your-first-sel4-system">Build your first seL4 system</h2>
+<p>First, check out the seL4 project.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir tegra-test
+repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+</code></pre></div></div>
+
+<p>Then, use the default config for the tegra and build the system.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make tk1_debug_xml_defconfig
+make
+</code></pre></div></div>
+
+<p>Once the system is compiled, you will have a new file creates in the
+<code class="highlighter-rouge">images</code> directory</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>images/
+<span class="c"># sel4test-driver-image-arm-tk1</span>
+</code></pre></div></div>
+
+<h2 id="load-the-binary">Load the binary</h2>
+<p>You need to be able to see output from the serial
+console on the Tegra. Connect the serial port to your computer with a
+serial cable, either a USB-&gt;RS232 converter, or if your computer has
+a serial port, connect to it.</p>
+
+<p>Once you have the wires in place, you can connect to the console via
+<code class="highlighter-rouge">screen</code> (or you can use minicom or another serial console program). In
+the following, we assume that the Tegra is connected to <code class="highlighter-rouge">/dev/ttyUSB0</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/ttyUSB0 115200
+</code></pre></div></div>
+
+<p>When you start the board, you will see the U-Boot prompt. To load the
+binary you need to interact with U-Boot. I personally use a DHCP/TFTP
+server to get the binary onto the board. Copy <code class="highlighter-rouge">sel4.img</code> onto the tftp
+server; if you’ve set up DHCP properly it will pass the server IP to the
+board. Otherwise you can specify the IOP address on the command. The
+following command will then scan the PCI bus and enable the ethernet,
+and then ask to get an address via the DHCP and get <code class="highlighter-rouge">sel4.img</code> file from
+the TFTP server at <code class="highlighter-rouge">192.168.1.1</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pci enum dhcp ${loadaddr} 192.168.1.1:sel4.img
+</code></pre></div></div>
+
+<p>Then, let’s start the program.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootelf ${loadaddr}
+</code></pre></div></div>
+
+<h2 id="flash-u-boot">Flash U-Boot</h2>
+
+<p>Warning: This flashing procedure is for the Jetson TK1 by NVIDIA. There
+is another TK1 board called the TK1-SOM by Colorado Engineering which
+requires a different flashing procedure. Please be sure you’re following
+these instructions if you are truly trying to flash a <strong>Jetson</strong> and
+not the <strong>TK1-SOM</strong>. If you are trying to flash a TK1-SOM, please
+<a href="CEI_TK1_SOM#u-boot">use the procedure described here instead</a>.</p>
+
+<p>The initial version of U-Boot does not provides all necessary
+functionality. In particular, it boots the system in secure mode. To run
+a virtual machine monitor, the Tegra needs to be booted in nonsecure or
+HYP mode. After installing a new u-boot (instructions below) you can
+boot in either secure on non-secure mode based on a u-boot environment
+variable.</p>
+
+<p>Do</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootm_boot_mode nonsec
+saveenv
+</code></pre></div></div>
+<p>to boot in nonsecure (HYP)
+mode. This also enables kvm if you boot Linux.</p>
+
+<p>To go back to secure mode booting do</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootm_boot_mode sec
+saveenv
+</code></pre></div></div>
+<h2 id="getting-the-sources">Getting the sources</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir tegra-u-boot-flasher
+<span class="nb">cd </span>tegra-u-boot-flasher
+repo init <span class="nt">-u</span> https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git
+repo sync
+</code></pre></div></div>
+
+<h2 id="patching-the-sources">Patching the sources</h2>
+
+<p>Apply the following patch to increase the console buffer size.</p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git
+</span>a/include/configs/tegra-common.h b/include/configs/tegra-common.h
+<span class="gh">index 1c469d0..234023d 100644
+</span><span class="gd">--- a/include/configs/tegra-common.h 
+</span><span class="gi">+++ b/include/configs/tegra-common.h
+</span><span class="gu">@@ -77,7 +77,7 @@
+</span>* Increasing the size of the IO buffer as default nfsargs size is more
+* than 256 and so it is not possible to edit it
+*/
+<span class="gd">-#define CONFIG_SYS_CBSIZE (256* 2) /* Console I/O Buffer Size */
+</span><span class="gi">+#define CONFIG_SYS_CBSIZE (256* 3) /* Console I/O Buffer Size */
+</span>/* Print Buffer Size */
+#define CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE + \
+sizeof(CONFIG_SYS_PROMPT) + 16)
+</code></pre></div></div>
+
+<h2 id="building">Building</h2>
+<p>To build the sources, build the necessary tools first.</p>
+
+<p>Install autoconf, pkg-config, flex, bison, libcrypto++-dev and
+libusb-1.0.0-dev for your distribution. On Debian or Ubuntu you can do:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev gcc-arm-linux-gnueabi
+</code></pre></div></div>
+
+<p>Then do:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>scripts
+./build-tools build
+</code></pre></div></div>
+
+<p>Then, in the script directory, build everything.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build <span class="nt">--socs</span> tegra124 <span class="nt">--boards</span> jetson-tk1 build
+</code></pre></div></div>
+
+<h2 id="flashing">Flashing</h2>
+<p>To flash, attach the Jetson board’s OTG USB port to a USB
+port on your machine. Hold down the FORCE RECOVERY button while pressing
+the RESET button next to it; release FORCE RECOVERY a second or two
+after releasing the reset button</p>
+
+<p>Then issue:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./tegra-uboot-flasher flash jetson-tk1
+</code></pre></div></div>
+
+<p>The board should now be updated.</p>
+
+<h2 id="running-linux-with-the-new-u-boot">Running Linux with the new U-Boot</h2>
+<p>To boot Linux in non-secure
+mode, build the kernel with the Power-State Coordination Interface
+(PSCI) enabled (<code class="highlighter-rouge">CONFIG_ARM_PSCI=y</code>, in Kernel Features menu)and
+CPU-Idle PM support disabled (<code class="highlighter-rouge">CONFIG_CPU_IDLE is not set</code> in CPU Power
+Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

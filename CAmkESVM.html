@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAmkES x86 VM | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">CAmkES x86 VM</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#camkes-x86-vm">CAmkES x86 VM</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#getting-the-code">Getting the Code</a></li>
+<li class="toc-entry toc-h2"><a href="#starting-point">Starting Point</a></li>
+<li class="toc-entry toc-h2"><a href="#quick-walk-through-the-source-code">Quick walk through the source code</a></li>
+<li class="toc-entry toc-h2"><a href="#adding-to-the-guest">Adding to the guest</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#adding-a-program">Adding a program</a></li>
+<li class="toc-entry toc-h3"><a href="#adding-a-kernel-module">Adding a kernel module</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#cross-vm-connectors">Cross VM Connectors</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#implementation-details">Implementation Details</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#dataports">Dataports</a></li>
+<li class="toc-entry toc-h4"><a href="#emitting-events">Emitting Events</a></li>
+<li class="toc-entry toc-h4"><a href="#consuming-events">Consuming Events</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#using-cross-vm-connections">Using Cross VM Connections</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#booting-from-hard-drive">Booting from hard drive</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#getting-the-initrd-image">Getting the initrd image</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#passthrough-ethernet">Passthrough Ethernet</a></li>
+<li class="toc-entry toc-h2"><a href="#figuring-out-information-about-pci-devices">Figuring out information about PCI devices</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="camkes-x86-vm">CAmkES x86 VM</h1>
+<p>Get the dependencies for building CAmkES by following
+the instructions <a href="/CAmkES/#build-dependencies">here</a>.</p>
+
+<h2 id="getting-the-code">Getting the Code</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-manifest.git
+repo sync
+</code></pre></div></div>
+
+<h2 id="starting-point">Starting Point</h2>
+<p>This repo contains many vm apps. We’ll start from
+something basic, and add to it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make cma34cr_minimal_defconfig
+make
+</code></pre></div></div>
+<p>Running this should boot a
+single, very basic linux as a guest in the vm:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login:
+</code></pre></div></div>
+<p>The linux running here was built using <a href="https://buildroot.org/">buildroot</a>. This tool
+creates a compatible kernel and root filesystem with busybox and not
+much else, and runs on a ramdisk (the actual hard drive isn’t mounted).
+Login with the username <code class="highlighter-rouge">root</code> and the password <code class="highlighter-rouge">root</code>.</p>
+
+<h2 id="quick-walk-through-the-source-code">Quick walk through the source code</h2>
+<p>The top level CAmkES spec is in
+<code class="highlighter-rouge">apps/cma34cr_minimal/vm.camkes</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="o">&lt;</span><span class="n">VM</span><span class="o">/</span><span class="n">vm</span><span class="p">.</span><span class="n">camkes</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="n">import</span> <span class="s">"cma34cr.camkes"</span><span class="p">;</span>
+
+<span class="n">assembly</span> <span class="p">{</span>
+    <span class="n">composition</span> <span class="p">{</span>
+        <span class="n">component</span> <span class="n">VM</span> <span class="n">vm</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is a very simple app, with a single vm, and nothing else. Each
+different vm app will have its own implementation of the <code class="highlighter-rouge">VM</code> component,
+where the guest environment is configured. For this app, the <code class="highlighter-rouge">VM</code>
+component is defined in <code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;autoconf.h&gt;
+#include &lt;configurations/vm.h&gt;
+</span>
+<span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
+    <span class="n">VM_INIT_DEF</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="n">component</span> <span class="n">VM</span> <span class="p">{</span>
+
+  <span class="n">composition</span> <span class="p">{</span>
+      <span class="n">VM_COMPOSITION_DEF</span><span class="p">()</span>
+      <span class="n">VM_PER_VM_COMP_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+ 
+  <span class="n">configuration</span> <span class="p">{</span>
+      <span class="n">VM_CONFIGURATION_DEF</span><span class="p">()</span>
+      <span class="n">VM_PER_VM_CONFIG_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">simple_untyped23_pool</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">heap_size</span> <span class="o">=</span> <span class="mh">0x2000000</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">guest_ram_mb</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_cmdline</span> <span class="o">=</span> <span class="n">VM_GUEST_CMDLINE</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_image</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_relocs</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">initrd_image</span> <span class="o">=</span> <span class="n">ROOTFS</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">iospace_domain</span> <span class="o">=</span> <span class="mh">0x0f</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Most of the work here is done by five C preprocessor macros:
+<code class="highlighter-rouge">VM_INIT_DEF</code>, <code class="highlighter-rouge">VM_COMPOSITION_DEF</code>, <code class="highlighter-rouge">VM_PER_VM_COMP_DEF</code>,
+<code class="highlighter-rouge">VM_CONFIGURATION_DEF</code>, <code class="highlighter-rouge">VM_PER_VM_CONFIG_DEF</code></p>
+
+<p>These are all defined in <code class="highlighter-rouge">projects/vm/components/VM/configurations/vm.h</code>,
+and are concerned with specifying and configuring components that all
+VM(M)s need.</p>
+
+<p>The <code class="highlighter-rouge">Init0</code> component corresponds to a single guest. Because of some rules
+in the cpp macros, the <em>Ith</em> guest in your system must be defined as a
+component named <code class="highlighter-rouge">InitI</code>. <code class="highlighter-rouge">InitI</code> components will be instantiated in the
+composition section by the <code class="highlighter-rouge">VM_PER_VM_COMP_DEF</code> macro with instance
+names <code class="highlighter-rouge">vmI</code>. The <code class="highlighter-rouge">vm0</code> component instance being configured above is an
+instance of <code class="highlighter-rouge">Init0</code>. The C source code for<code class="highlighter-rouge">InitI</code> components is in
+<code class="highlighter-rouge">projects/vm/components/Init/src</code>. This source will be used for components
+named <code class="highlighter-rouge">InitI</code> for <em>I</em> in <code class="highlighter-rouge">0..VM_NUM_VM - 1</code>, where <code class="highlighter-rouge">VM_NUM_VM</code> is
+defined in the app’s Makefile (<code class="highlighter-rouge">apps/cma34cr_minimal/Makefile</code>).</p>
+
+<p>The values of <code class="highlighter-rouge">VM_GUEST_CMDLINE</code>, <code class="highlighter-rouge">KERNEL_IMAGE</code> and <code class="highlighter-rouge">ROOTFS</code> are in
+<code class="highlighter-rouge">apps/cma34cr_minimal/configurations/cma34cr_minimal.h</code>. They are all
+strings, specifying the guest linux boot arguments, the name of the
+guest linux kernel image file, and the name of the guest linux initrd
+file (root filesystem to use during system initialization).
+<code class="highlighter-rouge">KERNEL_IMAGE</code> and <code class="highlighter-rouge">ROOTFS</code> refer to file names. These are the names of
+files in a CPIO archive that gets created by the build system, and
+linked into the VMM. The VMM uses the <code class="highlighter-rouge">KERNEL_IMAGE</code> and <code class="highlighter-rouge">ROOTFS</code> names to
+find the appropriate files in this archive when preparing to boot the
+guest.</p>
+
+<p>The local files used to construct the CPIO archive are specified in the
+app’s <code class="highlighter-rouge">Makefile</code>, located at <code class="highlighter-rouge">apps/cma34cr_minimal/Makefile</code>:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ...
+</span><span class="nv">KERNEL_FILENAME</span> <span class="o">:=</span> bzimage
+<span class="nv">ROOTFS_FILENAME</span> <span class="o">:=</span> rootfs.cpio
+<span class="c"># ...
+</span><span class="nl">${STAGE_DIR}/${KERNEL_FILENAME}</span><span class="o">:</span> <span class="nf">$(SOURCE_DIR)/linux/${KERNEL_FILENAME}</span>
+<span class="c"># ...
+</span><span class="nl">${STAGE_DIR}/${ROOTFS_FILENAME}</span><span class="o">:</span> <span class="nf">${SOURCE_DIR}/linux/${ROOTFS_FILENAME}</span>
+<span class="c"># ...
+</span></code></pre></div></div>
+
+<p>Both these rules refer to the “linux” directory, located at
+<code class="highlighter-rouge">projects/vm/linux</code>. It contains some tools for building new linux kernel
+and root filesystem images, as well as the images that these tools
+produce. A fresh checkout of this project will contain some pre-build
+images (<code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">rootfs.cpio</code>), to speed up build times.</p>
+
+<h2 id="adding-to-the-guest">Adding to the guest</h2>
+<p>In the simple buildroot guest image, the
+initrd (rootfs.cpio) is also the filesystem you get access to after
+logging in. To make new programs available to the guest, add them to the
+rootfs.cpio archive. Similarly, to make new kernel modules available to
+the guest, they must be added to the rootfs.cpio archive also. The
+“linux” directory contains a tool called “build-rootfs”, which is
+unrelated to the unfortunately similarly-named buildroot, which
+generates a new rootfs.cpio archive based on a starting point
+(rootfs-bare.cpio), and a collection of programs and modules. It also
+allows you to specify what happens when the system starts, and install
+some camkes-specific initialization code.</p>
+
+<p>Here’s a summary of what the build-rootfs tool does:</p>
+
+<ol>
+  <li>Download the linux source (unless it’s already been downloaded).
+This is required for compiling kernel modules. The version of
+linux must match the one used to build bzimage.</li>
+  <li>Copy some config files into the linux source so it builds the
+modules the way we like.</li>
+  <li>Prepare the linux source for building modules (make prepare;
+make modules_prepare).</li>
+  <li>Extract the starting-point root filesystem (rootfs-bare.cpio).</li>
+  <li>Build all kernel modules in the “modules” directory, placing the
+output in the extracted root filesystem.</li>
+  <li>Create an init script by instantiating the “init_template” file
+with information about the linux version we’re using.</li>
+  <li>Add camkes-specific initialization from the “camkes_init” file to
+the init.d directory in the extracted root filesystem.</li>
+  <li>Build custom libraries that programs will use, located in the
+“lib_src” directory.</li>
+  <li>Build each program in the “pkg” directory, statically linked,
+placing the output in the extracted root filesystem.</li>
+  <li>Copy all the files in the “text” directory to the “opt” directory
+in the extracted root filesystem.</li>
+  <li>Create a CPIO archive from the extracted root filesystem, creating
+the rootfs.cpio file.</li>
+</ol>
+
+<h3 id="adding-a-program">Adding a program</h3>
+<p>Let’s add a simple program!</p>
+
+<ol>
+  <li>
+    <p>Make a new directory:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm/linux/pkg/hello 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Make a simple C program in <code class="highlighter-rouge">projects/vm/linux/pkg/hello/hello.c</code></p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>    
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!n"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add a <code class="highlighter-rouge">Makefile</code> in <code class="highlighter-rouge">projects/vm/linux/pkg/hello/Makefile</code>:</p>
+
+    <div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TARGET</span> <span class="o">=</span> hello
+
+<span class="err">include</span> <span class="err">../../common.mk</span>
+<span class="err">include</span> <span class="err">../../common_app.mk</span>
+
+<span class="nl">hello</span><span class="o">:</span> <span class="nf">hello.o</span>
+    <span class="err">$(CC)</span> <span class="err">$(CFLAGS)</span> <span class="err">$(LDFLAGS)</span> <span class="err">$\^</span> <span class="err">-o</span> <span class="err">$@</span>
+</code></pre></div>    </div>
+
+    <p>Make sure there is a TAB character in the makefile, rather than spaces</p>
+  </li>
+  <li>
+    <p>Run the “build-rootfs” script to update the rootfs.cpio file to
+include our new “hello” program.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>projects/vm/linux/
+./build-rootfs
+<span class="nb">cd</span> ../../..
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Rebuild the app:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run the app (use <code class="highlighter-rouge">root</code> as username and password):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login: root
+Password:
+# hello
+Hello, World!
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="adding-a-kernel-module">Adding a kernel module</h3>
+<p>We’re going to add a new kernel module that lets us poke the vmm.</p>
+
+<ol>
+  <li>
+    <p>Make a new directory:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm/linux/modules/poke
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Implement the module in <code class="highlighter-rouge">projects/vm/linux/modules/poke/poke.c</code>.</p>
+
+    <p>Initially we’ll just get the module building and running, and then take
+care of communicating between the module and the vmm. For simplicity,
+we’ll make it so when a special file associated with this module is
+written to, the vmm gets poked.</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/init.h&gt;
+#include &lt;linux/fs.h&gt;
+</span>
+<span class="cp">#include &lt;asm/uaccess.h&gt;
+#include &lt;asm/kvm_para.h&gt;
+#include &lt;asm/io.h&gt;
+</span>
+<span class="cp">#define DEVICE_NAME "poke"
+</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">major_number</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">poke_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="err">\</span><span class="n">__user</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">s</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"hi</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// TODO replace with hypercall
+</span>    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">file_operations</span> <span class="n">fops</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">poke_write</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">poke_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">major_number</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fops</span><span class="p">);</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"%s initialized with major number %dn"</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">,</span> <span class="n">major_number</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">poke_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">unregister_chrdev</span><span class="p">(</span><span class="n">major_number</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">);</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="s">"%s exitn"</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span><span class="n">poke_init</span><span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span><span class="n">poke_exit</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>And a makefile in <code class="highlighter-rouge">projects/vm/linux/modules/poke/Makefile</code>:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>obj-m += poke.o
+CFLAGS_poke.o = -I../../include -I../../../common/shared_include
+
+all:
+    make -C $(KHEAD) M=$(PWD) modules
+
+clean:
+    make -C $(KHEAD) M=$(PWD) clean
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add the new module to so it is loaded during initialization, edit <code class="highlighter-rouge">projects/vm/linux/init_template</code>:</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#...
+</span><span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">dataport</span><span class="p">.</span><span class="n">ko</span>
+<span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">consumes_event</span><span class="p">.</span><span class="n">ko</span>
+<span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">emits_event</span><span class="p">.</span><span class="n">ko</span>
+<span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">poke</span><span class="p">.</span><span class="n">ko</span> <span class="err">#</span> <span class="o">&lt;--</span> <span class="n">add</span> <span class="n">this</span> <span class="n">line</span>
+<span class="cp">#...
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run the build-rootfs tool, then make</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd projects/vm/linux/
+./build-rootfs
+cd ../../..
+make
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run the app:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login: root
+Password:
+# grep poke /proc/devices        # figure out the major number of our driver
+244 poke
+# mknod /dev/poke c 244 0        # create the special file
+# echo &gt; /dev/poke               # write to the file
+[ 57.389643] hi
+-sh: write error: Bad address    # the shell complains, but our module is being invoked!
+</code></pre></div>    </div>
+
+    <p><strong>Now let’s make it talk to the vmm</strong>.</p>
+  </li>
+  <li>
+    <p>In projects/vm/linux/modules/poke/poke.c, replace <code class="highlighter-rouge">printk("hi\n");</code>
+with <code class="highlighter-rouge">kvm_hypercall1(4, 0);</code>
+The choice of 4 is because 0..3 are taken by other hypercalls.</p>
+  </li>
+  <li>
+    <p>Now register a handler for this hypercall in
+<code class="highlighter-rouge">projects/vm/components/Init/src/main.c</code>:</p>
+
+    <p>Add a new function at the top of the file:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>static int poke_handler(vmm_vcpu_t *vmm_vcpu) {
+    printf("POKE!!!n");
+    return 0;
+}
+</code></pre></div>    </div>
+
+    <p>In the function main_continued register `poke_handler`:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reg_new_handler(&amp;vmm, poke_handler, 4); // &lt;--- added
+
+/* Now go run the event loop */
+vmm_run(&amp;vmm);
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Finally re-run build-rootfs, make, and run:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login: root
+Password:
+# mknod /dev/poke c 244 0
+# echo &gt; /dev/poke
+POKE!!!
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="cross-vm-connectors">Cross VM Connectors</h2>
+
+<p>It’s possible to connect processes in the guest linux to regular CAmkES
+components. This is done with the addition of 3 kernel modules to the
+guest linux, that allow device files to be created that correspond to
+CAmkES connections. Depending on the type of connection, there are some
+file operations defined for these files that can be used to communicate
+with the other end of the connection.</p>
+
+<p>The kernel modules are included in the root filesystem by default:</p>
+
+<ul>
+  <li>dataport: facilitates setting up shared memory between the guest
+      and CAmkES components</li>
+  <li>consumes_event: allows a process in the guest to wait or poll
+      for an event sent by a CAmkES component</li>
+  <li>emits_event: allows a process to emit an event to a CAmkES
+      component</li>
+</ul>
+
+<p>There is a library in <code class="highlighter-rouge">projects/vm/linux/lib_src/camkes</code> containing some
+linux syscall wrappers, and some utility programs in
+<code class="highlighter-rouge">projects/vm/linux/pkg/{dataport,consumes_event,emits_event}</code> which
+initialize and interact with cross vm connections.</p>
+
+<h3 id="implementation-details">Implementation Details</h3>
+
+<h4 id="dataports">Dataports</h4>
+
+<p>In order for linux to use a dataport, it must first be initialized. To
+initialize a dataport, a linux process makes a particular <code class="highlighter-rouge">ioctl</code> call on
+the file associated with the dataport, specifying the page-aligned size
+of the dataport. The dataport kernel module then allocates a
+page-aligned buffer of the appropriate size, and makes a hypercall to
+the VMM, passing it the guest physical address of this buffer, along
+with the id of the dataport, determined by the file on which ioctl was
+called. The VMM then modifies the guest’s address space, updating the
+mappings from the specified gpaddr to point to the physical memory
+backing the dataport seen by the other end of the connection. This
+results in a region of shared memory existing between a camkes component
+and the guest. Linux processes can then map this memory into their own
+address space by calling <code class="highlighter-rouge">mmap</code> on the file associated with the dataport.</p>
+
+<h4 id="emitting-events">Emitting Events</h4>
+
+<p>A guest process emits an event by making <code class="highlighter-rouge">ioctl</code> call on the file
+associated with the event interface. This results in the emits_event
+kernel module making a hypercall to the VMM, passing it the id of the
+event interface determined by the file being ioctl’d. The VMM then emits
+the real event (which doesn’t block - events are notifications), and
+then immediately resumes the guest running.</p>
+
+<h4 id="consuming-events">Consuming Events</h4>
+
+<p>Consuming events is complicated because we’d like for a process in the
+guest to be able to block, waiting for an event, without blocking the
+entire VM. A linux process can wait or poll for an event by calling poll
+on the file associated with that event, using the timeout argument to
+specify whether or not it should block. The event it polls for is
+POLLIN. When the VMM receives an event destined for the guest, it places
+the event id in some memory shared between the VMM and the
+consumes_event kernel module, and then injects an interrupt into the
+guest. The consumes_event kernel module is registered to handle this
+interrupt, which reads the event id from shared memory, and wakes a
+thread blocked on the corresponding event file. If no threads are
+blocked on the file, some state is set in the module such that the next
+time a process waits on that file, it returns immediately and clears the
+state, mimicking the behaviour of notifications.</p>
+
+<h3 id="using-cross-vm-connections">Using Cross VM Connections</h3>
+
+<p>We’ll create a program that runs in the guest, and prints a string by
+sending it to a CAmkES component. The guest program will write a string
+to a shared buffer between itself and a CAmkES component. When its ready
+for the string to be printed, it will emit an event, received by the
+CAmkES component. The CAmkES component will print the string, then send
+an event to the guest process so the guest knows it’s safe to send a new
+string.</p>
+
+<p>We’ll start on the CAmkES side. Edit
+<code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>, adding the following interfaces to
+the Init0 component definition:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
+  <span class="n">VM_INIT_DEF</span><span class="p">()</span>
+
+  <span class="c1">// Add the following four lines:
+</span>  <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">emits</span> <span class="n">DoPrint</span> <span class="n">do_print</span><span class="p">;</span>
+  <span class="n">consumes</span> <span class="n">DonePrinting</span> <span class="n">done_printing</span><span class="p">;</span>
+  <span class="n">has</span> <span class="n">mutex</span> <span class="n">cross_vm_event_mutex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>These interfaces will eventually be made visible to processes running in
+the guest linux. The mutex is used to protect access to shared state
+between the VMM and guest.</p>
+
+<p>Now, we’ll define the print server component. Add the following to
+<code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">PrintServer</span> <span class="p">{</span>
+  <span class="n">control</span><span class="p">;</span>
+  <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">consumes</span> <span class="n">DoPrint</span> <span class="n">do_print</span><span class="p">;</span>
+  <span class="n">emits</span> <span class="n">DonePrinting</span> <span class="n">done_printing</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We’ll get around to actually implementing this soon. First, let’s
+instantiate the print server and connect it to the VMM. Add the
+following to the composition section in
+apps/cma34cr_minimal/cma34cr.camkes:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">VM</span> <span class="p">{</span>
+
+    <span class="n">composition</span> <span class="p">{</span>
+        <span class="n">VM_COMPOSITION_DEF</span><span class="p">()</span>
+        <span class="n">VM_PER_VM_COMP_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1">// Add the following component and connections:
+</span>        <span class="n">component</span> <span class="n">PrintServer</span> <span class="n">print_server</span><span class="p">;</span>
+        <span class="n">connection</span> <span class="n">seL4Notification</span> <span class="n">conn_do_print</span><span class="p">(</span><span class="n">from</span> <span class="n">vm0</span><span class="p">.</span><span class="n">do_print</span><span class="p">,</span>
+                                                 <span class="n">to</span> <span class="n">print_server</span><span class="p">.</span><span class="n">do_print</span><span class="p">);</span>
+        <span class="n">connection</span> <span class="n">seL4Notification</span> <span class="n">conn_done_printing</span><span class="p">(</span><span class="n">from</span> <span class="n">print_server</span><span class="p">.</span><span class="n">done_printing</span><span class="p">,</span>
+                                                      <span class="n">to</span> <span class="n">vm0</span><span class="p">.</span><span class="n">done_printing</span><span class="p">);</span>
+
+        <span class="n">connection</span> <span class="n">seL4SharedDataWithCaps</span> <span class="n">conn_data</span><span class="p">(</span><span class="n">from</span> <span class="n">print_server</span><span class="p">.</span><span class="n">data</span><span class="p">,</span>
+                                                    <span class="n">to</span> <span class="n">vm0</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The only thing unusual about that was the <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a>
+connector. This is a dataport connector much like seL4SharedData. The
+only difference is that the “to” side of the connection gets access to
+the caps to the frames backing the dataport. This is necessary from
+cross vm dataports, as the VMM must be able to establish shared memory
+at runtime, by inserting new mappings into the guest’s address space,
+which requires caps to the physical memory being mapped in.</p>
+
+<p>Interfaces connected with <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
+configured with an integer specifying the id of the dataport, and the
+size of the dataport. Add the following to the configuration section in
+apps/cma34cr_minimal/cma34cr.camkes:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
+    <span class="n">VM_CONFIGURATION_DEF</span><span class="p">()</span>
+    <span class="n">VM_PER_VM_CONFIG_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">vm0</span><span class="p">.</span><span class="n">simple_untyped24_pool</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">heap_size</span> <span class="o">=</span> <span class="mh">0x10000</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">guest_ram_mb</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_cmdline</span> <span class="o">=</span> <span class="n">VM_GUEST_CMDLINE</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_image</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_relocs</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">initrd_image</span> <span class="o">=</span> <span class="n">ROOTFS</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">iospace_domain</span> <span class="o">=</span> <span class="mh">0x0f</span><span class="p">;</span>
+
+    <span class="c1">// Add the following 2 lines:
+</span>    <span class="n">vm0</span><span class="p">.</span><span class="n">data_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ids must be contiguous, starting from 1
+</span>    <span class="n">vm0</span><span class="p">.</span><span class="n">data_size</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now let’s implement our print server. Create a file
+apps/cma34cr_minimal/print_server.c:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;camkes.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">do_print_wait</span><span class="p">();</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">);</span>
+
+        <span class="n">done_printing_emit</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This component loops forever, waiting for an event, printing a string
+from shared memory, then emitting an event. It assumes that the shared
+buffer will contain a valid, null-terminated c string. Obviously this is
+risky, but will serve for our example here.</p>
+
+<p>We need to create another c file that tells the VMM about our cross vm connections. This file must define 3 functions which initialize each type of cross vm interface:</p>
+
+<ul>
+  <li>cross_vm_dataports_init</li>
+  <li>cross_vm_emits_events_init</li>
+  <li>cross_vm_consumes_events_init</li>
+</ul>
+
+<p>Create a file <code class="highlighter-rouge">apps/cma34cr_minimal/cross_vm.c</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;sel4/sel4.h&gt;
+#include &lt;camkes.h&gt;
+#include &lt;camkes_mutex.h&gt;
+#include &lt;camkes_consumes_event.h&gt;
+#include &lt;camkes_emits_event.h&gt;
+#include &lt;dataport_caps.h&gt;
+#include &lt;cross_vm_consumes_event.h&gt;
+#include &lt;cross_vm_emits_event.h&gt;
+#include &lt;cross_vm_dataport.h&gt;
+#include &lt;vmm/vmm.h&gt;
+#include &lt;vspace/vspace.h&gt;
+</span>
+<span class="c1">// this is defined in the dataport's glue code
+</span><span class="k">extern</span> <span class="n">dataport_caps_handle_t</span> <span class="n">data_handle</span><span class="p">;</span>
+
+<span class="c1">// Array of dataport handles at positions corresponding to handle ids from spec
+</span><span class="k">static</span> <span class="n">dataport_caps_handle_t</span> <span class="o">*</span><span class="n">dataports</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">NULL</span><span class="p">,</span> <span class="c1">// entry 0 is NULL so ids correspond with indices
+</span>    <span class="o">&amp;</span><span class="n">data_handle</span><span class="p">,</span>
+<span class="p">};</span>
+    
+<span class="c1">// Array of consumed event callbacks and ids
+</span><span class="k">static</span> <span class="n">camkes_consumes_event_t</span> <span class="n">consumed_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span> <span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="p">.</span><span class="n">reg_callback</span> <span class="o">=</span> <span class="n">done_printing_reg_callback</span> <span class="p">},</span>
+<span class="p">};</span>
+    
+<span class="c1">// Array of emitted event emit functions
+</span><span class="k">static</span> <span class="n">camkes_emit_fn</span> <span class="n">emitted_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">NULL</span><span class="p">,</span>   <span class="c1">// entry 0 is NULL so ids correspond with indices
+</span>    <span class="n">do_print_emit</span><span class="p">,</span>
+<span class="p">};</span>
+    
+<span class="c1">// mutex to protect shared event context
+</span><span class="k">static</span> <span class="n">camkes_mutex_t</span> <span class="n">cross_vm_event_mutex</span> <span class="o">=</span> <span class="p">(</span><span class="n">camkes_mutex_t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">cross_vm_event_mutex_lock</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">unlock</span> <span class="o">=</span> <span class="n">cross_vm_event_mutex_unlock</span><span class="p">,</span>
+<span class="p">};</span>  
+
+<span class="kt">int</span> <span class="nf">cross_vm_dataports_init</span><span class="p">(</span><span class="n">vmm_t</span> <span class="o">*</span><span class="n">vmm</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cross_vm_dataports_init_common</span><span class="p">(</span><span class="n">vmm</span><span class="p">,</span> <span class="n">dataports</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dataports</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dataports</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+<span class="p">}</span>   
+            
+<span class="kt">int</span> <span class="nf">cross_vm_emits_events_init</span><span class="p">(</span><span class="n">vmm_t</span> <span class="o">*</span><span class="n">vmm</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cross_vm_emits_events_init_common</span><span class="p">(</span><span class="n">vmm</span><span class="p">,</span> <span class="n">emitted_events</span><span class="p">,</span>
+            <span class="k">sizeof</span><span class="p">(</span><span class="n">emitted_events</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">emitted_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+<span class="p">}</span>   
+            
+<span class="kt">int</span> <span class="nf">cross_vm_consumes_events_init</span><span class="p">(</span><span class="n">vmm_t</span> <span class="o">*</span><span class="n">vmm</span><span class="p">,</span> <span class="n">vspace_t</span> <span class="o">*</span><span class="n">vspace</span><span class="p">,</span> <span class="n">seL4_Word</span> <span class="n">irq_badge</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cross_vm_consumes_events_init_common</span><span class="p">(</span><span class="n">vmm</span><span class="p">,</span> <span class="n">vspace</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cross_vm_event_mutex</span><span class="p">,</span>
+            <span class="n">consumed_events</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">consumed_events</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">consumed_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">irq_badge</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To make this build, we need to symlink the common source directory for
+the camkes vm into the app’s directory:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln -s ../../common apps/cma34cr_minimal
+</code></pre></div></div>
+
+<p>And make the following change to <code class="highlighter-rouge">apps/cma34cr_minimal/Makefile</code>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+include PCIConfigIO/PCIConfigIO.mk
+include FileServer/FileServer.mk
+include Init/Init.mk
+
+# Add the following:
+Init0_CFILES += $(wildcard $(SOURCE_DIR)/cross_vm.c) \
+                $(wildcard $(SOURCE_DIR)/common/src/*.c)
+Init0_HFILES += $(wildcard $(SOURCE_DIR)/common/include/*.h) \
+                $(wildcard $(SOURCE_DIR)/common/shared_include/cross_vm_shared/*.h)
+
+PrintServer_CFILES += $(SOURCE_DIR)/print_server.c
+...
+</code></pre></div></div>
+
+<p>The app should now build when you run <code class="highlighter-rouge">make</code>, but we’re not done yet. Now
+we’ll make these interfaces available to the guest linux. Edit
+<code class="highlighter-rouge">projects/vm/linux/camkes_init</code>. It’s a shell script that is executed as
+linux is initialized. Currently it should look like:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="c"># Initialises linux-side of cross vm connections.</span>
+
+<span class="c"># Dataport sizes must match those in the camkes spec.</span>
+<span class="c"># For each argument to dataport_init, the nth pair</span>
+<span class="c"># corresponds to the dataport with id n.</span>
+dataport_init /dev/camkes_reverse_src 8192 /dev/camkes_reverse_dest 8192
+
+<span class="c"># The nth argument to event_init corresponds to the</span>
+<span class="c"># event with id n according to the camkes vmm.</span>
+consumes_event_init /dev/camkes_reverse_done
+emits_event_init /dev/camkes_reverse_ready
+</code></pre></div></div>
+
+<p>This sets up some interfaces used for a simple demo. Delete all that,
+and add the following:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="c"># Initialises linux-side of cross vm connections.</span>
+
+<span class="c"># Dataport sizes must match those in the camkes spec.</span>
+<span class="c"># For each argument to dataport_init, the nth pair</span>
+<span class="c"># corresponds to the dataport with id n.</span>
+dataport_init /dev/camkes_data 4096
+                  
+<span class="c"># The nth argument to event_init corresponds to the</span>
+<span class="c"># event with id n according to the camkes vmm.</span>
+consumes_event_init /dev/camkes_done_printing
+emits_event_init /dev/camkes_do_print
+</code></pre></div></div>
+
+<p>Each of these commands creates device nodes associated with a particular
+linux kernel module supporting cross vm communication. Each command
+takes a list of device nodes to create, which must correpond to the ids
+assigned to interfaces in the <code class="highlighter-rouge">cma34cr.camkes</code> and <code class="highlighter-rouge">cross_vm.c</code>. The
+<code class="highlighter-rouge">dataport_init</code> command must also be passed the size of each dataport.</p>
+
+<p>These changes will cause device nodes to be created which correspond to
+the interfaces we added to the VMM component.</p>
+
+<p>Now let’s make an app that uses these nodes to communicate with the
+print server. As before, create a new directory in pkg:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm/linux/pkg/print_client
+</code></pre></div></div>
+
+<p>Create <code class="highlighter-rouge">projects/vm/linux/pkg/print_client/print_client.c</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+</span>
+<span class="cp">#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;fcntl.h&gt;
+</span>
+<span class="cp">#include "dataport.h"
+#include "consumes_event.h"
+#include "emits_event.h"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">data_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/camkes_data"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">data_fd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span> 
+
+    <span class="kt">int</span> <span class="n">do_print_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/camkes_do_print"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">do_print_fd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span> 
+
+    <span class="kt">int</span> <span class="n">done_printing_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/camkes_done_printing"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">done_printing_fd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span> 
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">dataport_mmap</span><span class="p">(</span><span class="n">data_fd</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">data</span> <span class="o">!=</span> <span class="n">MAP_FAILED</span><span class="p">);</span>
+
+    <span class="kt">ssize_t</span> <span class="n">dataport_size</span> <span class="o">=</span> <span class="n">dataport_get_size</span><span class="p">(</span><span class="n">data_fd</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">dataport_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span> 
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">strncpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dataport_size</span><span class="p">);</span>
+        <span class="n">emits_event_emit</span><span class="p">(</span><span class="n">do_print_fd</span><span class="p">);</span>
+        <span class="n">consumes_event_wait</span><span class="p">(</span><span class="n">done_printing_fd</span><span class="p">);</span>
+    <span class="p">}</span>   
+
+    <span class="n">close</span><span class="p">(</span><span class="n">data_fd</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">do_print_fd</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">done_printing_fd</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This program prints each of its arguments on a separate line, by sending
+each argument to the print server one at a time.</p>
+
+<p>Create <code class="highlighter-rouge">projects/vm/linux/pkg/print_client/Makefile</code>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TARGET = print_client
+
+include ../../common.mk
+include ../../common_app.mk
+
+print_client: print_client.o
+    $(CC) $(CFLAGS) $(LDFLAGS) $^ -lcamkes -o $@
+</code></pre></div></div>
+
+<p>Now, run build-rootfs, and make, and run!</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+Creating dataport node /dev/camkes_data
+Allocating 4096 bytes for /dev/camkes_data
+Creating consuming event node /dev/camkes_done_printing
+Creating emitting event node /dev/camkes_do_print
+
+Welcome to Buildroot
+buildroot login: root
+Password:
+# print_client hello world
+[   12.730073] dataport received mmap for minor 1
+hello
+world
+</code></pre></div></div>
+
+<h2 id="booting-from-hard-drive">Booting from hard drive</h2>
+
+<p>These instructions are for ubuntu. For CentOS instructions, see
+<a href="/CAmkESVMCentOS">CAmkESVMCentOS</a>.</p>
+
+<p>So far we’ve only run a tiny linux on a ram disk. What if we want to run
+Ubuntu booting off a hard drive? This section will explain the changes
+we need to make to our VM app to allow it to boot into a Ubuntu
+environment installed on the hard drive. Thus far these examples should
+have been compatible with most modern x86 machines. The rest of this
+tutorial will focus on a particular machine:
+<a href="https://www.rtd.com/PC104/CM/CMA34CR/CMA34CR.htm">the cma34cr
+single board computer</a></p>
+
+<p>The first step is to install ubuntu natively on the cma34cr. It’s
+currently required that guests of the camkes vm run in 32-bit mode, so
+install 32-bit ubuntu. These examples will use ubuntu-16.04.</p>
+
+<p>The plan will be to give the guest passthrough access to the hard drive,
+and use a ubuntu initrd as our initial root filesystem, replacing the
+buildroot one used thus far. We’ll use the same kernel image as before,
+as our vm requires that PAE be turned off, and it’s on by default in the
+ubuntu kernel.</p>
+
+<h3 id="getting-the-initrd-image">Getting the initrd image</h3>
+
+<p>We need to generate a root filesystem image suitable for ubuntu. Ubuntu
+ships with a tool called mkinitramfs which generates root filesystem
+images. Let’s use it to generate a root filesystem image compatible with
+the linux kernel we’ll be using. Boot ubuntu natively on the cma34cr and
+run the following command:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkinitramfs -o rootfs.cpio 4.8.16
+WARNING: missing /lib/modules/4.8.16
+Ensure all necessary drivers are built into the linux image!
+depmod: ERROR: could not open directory /lib/modules/4.8.16: No such file or directory
+depmod: FATAL: could not search modules: No such file or directory
+depmod: WARNING: could not open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/modules.order: No such file or directory
+depmod: WARNING: could not open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/modules.builtin: No such file or directory
+</code></pre></div></div>
+
+<p>The kernel we’ll be using has all the necessary drivers built in, so
+feel free to ignore those warnings and errors. You should now have a
+file called rootfs.cpio on the cma34cr. Transfer that file to your dev
+machine, and put it in <code class="highlighter-rouge">apps/cma34cr_minimal</code>. Now we need to tell the
+build system to take that rootfs image rather than the default buildroot
+one. Edit apps/cma34cr_minimal/Makefile. Change this line:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">${STAGE_DIR}/${ROOTFS_FILENAME}</span><span class="o">:</span> <span class="nf">${SOURCE_DIR}/linux/${ROOTFS_FILENAME}</span>
+</code></pre></div></div>
+<p>to</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">${STAGE_DIR}/${ROOTFS_FILENAME}</span><span class="o">:</span> <span class="nf">${SOURCE_DIR}/${ROOTFS_FILENAME}</span>
+</code></pre></div></div>
+
+<p>Since we’ll be using a real hard drive, we need to change the boot
+command line we give to the guest linux. Open
+<code class="highlighter-rouge">apps/cma34cr_minimal/configurations/cma34cr_minimal.h</code>, and change the
+definition of <code class="highlighter-rouge">VM_GUEST_CMDLINE</code> to:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/sda1 rdinit=/init 2"
+</code></pre></div></div>
+
+<p>Try building and running after this change:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BusyBox v1.22.1 (Ubuntu 1:1.22.0-15ubuntu1) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+(initramfs)
+</code></pre></div></div>
+
+<p>You should get dropped into a shell inside the root filesystem. You can
+run commands from here:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(initramfs) pwd
+/
+(initramfs) ls
+dev      run      init     scripts  var      usr      sys      tmp
+root     sbin     etc      bin      lib      conf     proc
+</code></pre></div></div>
+
+<p>If you look inside <code class="highlighter-rouge">/dev</code>, you’ll notice the lack of sda device. Linux
+can’t find the hard drive because we haven’t passed it through yet.
+Let’s do that now!</p>
+
+<p>We’re going to give the guest passthrough access to the sata controller.
+The sata controller will be in one of two modes: AHCI or IDE. The mode
+can be set when configuring BIOS. By default it should be AHCI. The next
+part has some minor differences depending on the mode. I’ll show both.
+Open <code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code> and add the following to the
+configuration section:</p>
+
+<p>For AHCI:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
+    <span class="p">...</span>
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">pci_devices_iospace</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">ioports</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4088</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4090</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4094</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4098</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4080</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4088</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4060</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4080</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">];</span>
+    
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">pci_devices</span> <span class="o">=</span> <span class="p">[</span> 
+        <span class="p">{</span>   
+            <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span>
+            <span class="s">"bus"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s">"dev"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span>
+            <span class="s">"fun"</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span>
+            <span class="s">"irq"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span>
+            <span class="s">"memory"</span><span class="o">:</span><span class="p">[</span>
+                <span class="p">{</span><span class="s">"paddr"</span><span class="o">:</span><span class="mh">0xc0713000</span><span class="p">,</span> <span class="s">"size"</span><span class="o">:</span><span class="mh">0x800</span><span class="p">,</span> <span class="s">"page_bits"</span><span class="o">:</span><span class="mi">12</span><span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">},</span>  
+    <span class="p">];</span>
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">irqs</span> <span class="o">=</span> <span class="p">[</span> 
+        <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">11</span><span class="p">},</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>For IDE:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
+    <span class="p">...</span>
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">pci_devices_iospace</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">ioports</span> <span class="o">=</span> <span class="p">[</span> 
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4080</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4090</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4090</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40a0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40b0</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40b8</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40b8</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40c0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40c8</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40cc</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40cc</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40d0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">];</span>  
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">pci_devices</span> <span class="o">=</span> <span class="p">[</span> 
+        <span class="p">{</span>   
+            <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span>
+            <span class="s">"bus"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+            <span class="s">"dev"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span>
+            <span class="s">"fun"</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span>
+            <span class="s">"irq"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span>
+            <span class="s">"memory"</span><span class="o">:</span><span class="p">[],</span>
+        <span class="p">},</span>  
+    <span class="p">];</span>  
+
+    <span class="n">vm0_config</span><span class="p">.</span><span class="n">irqs</span> <span class="o">=</span> <span class="p">[</span> 
+        <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">11</span><span class="p">},</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now rebuild and run:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ubuntu 16.04.1 LTS ertos-CMA34CR ttyS0
+
+ertos-CMA34CR login: 
+</code></pre></div></div>
+
+<p>You should be able to log in and use the system largely as normal.</p>
+
+<h2 id="passthrough-ethernet">Passthrough Ethernet</h2>
+
+<p>The ethernet device is not accessible to the guest:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ip addr
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: sit0@NONE: &lt;NOARP&gt; mtu 1480 qdisc noop state DOWN group default qlen 1
+    link/sit 0.0.0.0 brd 0.0.0.0
+</code></pre></div></div>
+
+<p>An easy way to give the guest network access is to give it passthrough
+access to the ethernet controller. This is done much in the same way as
+enabling passthrough access to the sata controller. In the configuration
+section in <code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>, add to the list of io
+ports, pci devices and irqs to pass through:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vm0_config</span><span class="p">.</span><span class="n">ioports</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4080</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4090</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4090</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40a0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40b0</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40b8</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40b8</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40c0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40c8</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40cc</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40cc</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40d0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x3000</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x3020</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">},</span> <span class="c1">// &lt;--- Add this entry
+</span><span class="p">];</span>
+
+<span class="n">vm0_config</span><span class="p">.</span><span class="n">pci_devices</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>   
+        <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span>
+        <span class="s">"bus"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s">"dev"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span>
+        <span class="s">"fun"</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span>
+        <span class="s">"irq"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span>
+        <span class="s">"memory"</span><span class="o">:</span><span class="p">[],</span>
+    <span class="p">},</span>
+
+    <span class="c1">// Add this entry:
+</span>    <span class="p">{</span>
+        <span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">,</span>
+        <span class="s">"bus"</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span>
+        <span class="s">"dev"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s">"fun"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s">"irq"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">,</span>
+        <span class="s">"memory"</span><span class="o">:</span><span class="p">[</span>
+            <span class="p">{</span><span class="s">"paddr"</span><span class="o">:</span><span class="mh">0xc0500000</span><span class="p">,</span> <span class="s">"size"</span><span class="o">:</span><span class="mh">0x20000</span><span class="p">,</span> <span class="s">"page_bits"</span><span class="o">:</span><span class="mi">12</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"paddr"</span><span class="o">:</span><span class="mh">0xc0520000</span><span class="p">,</span> <span class="s">"size"</span><span class="o">:</span><span class="mh">0x4000</span><span class="p">,</span> <span class="s">"page_bits"</span><span class="o">:</span><span class="mi">12</span><span class="p">},</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="n">vm0_config</span><span class="p">.</span><span class="n">irqs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">11</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mh">0x11</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">10</span><span class="p">},</span> <span class="c1">// &lt;--- Add this entry
+</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>You should have added a new entry to each of the three lists that
+describe passthrough devices. Building and running:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ip addr
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s2: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:d0:81:09:0c:7d brd ff:ff:ff:ff:ff:ff
+    inet 10.13.1.87/23 brd 10.13.1.255 scope global dynamic enp0s2
+       valid_lft 14378sec preferred_lft 14378sec
+    inet6 2402:1800:4000:1:90b3:f9d:ae22:33b7/64 scope global temporary dynamic 
+       valid_lft 86390sec preferred_lft 14390sec
+    inet6 2402:1800:4000:1:aa67:5925:2cbc:928f/64 scope global mngtmpaddr noprefixroute dynamic 
+       valid_lft 86390sec preferred_lft 14390sec
+    inet6 fe80::cc47:129d:bdff:a2da/64 scope link 
+       valid_lft forever preferred_lft forever
+3: sit0@NONE: &lt;NOARP&gt; mtu 1480 qdisc noop state DOWN group default qlen 1
+    link/sit 0.0.0.0 brd 0.0.0.0
+$ ping google.com
+PING google.com (172.217.25.142) 56(84) bytes of data.
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=1 ttl=51 time=2.17 ms
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=2 ttl=51 time=1.95 ms
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=3 ttl=51 time=1.99 ms
+64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=4 ttl=51 time=2.20 ms
+</code></pre></div></div>
+
+<h2 id="figuring-out-information-about-pci-devices">Figuring out information about PCI devices</h2>
+
+<p>To add a new passthrough device, or access a pci device in general, we
+need to know which io ports it uses, which interrupts it’s associated
+with, and the physical addresses of any memory-mapped io regions it
+uses. The easiest way to find this information is to boot linux
+natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

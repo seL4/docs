@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Raspberry PI 3 Model B | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Raspberry PI 3 Model B</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="raspberry-pi-3-model-b">Raspberry PI 3 Model B</h1>
+
+<p>This is an experimental port and is not guaranteed to work.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p><a href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf">RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Part</th>
+      <th>Datasheet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USB+ETH</td>
+      <td>SMSC LAN9514</td>
+      <td><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/9514.pdf">9514.pdf</a></td>
+    </tr>
+    <tr>
+      <td>SoC</td>
+      <td>BCM2837</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="running-sel4-on-the-raspberry-pi-3">Running seL4 on the Raspberry Pi 3</h2>
+
+<p>Please also find a feature article going on seL4 the Raspberry Pi 3
+<a href="https://research.csiro.au/tsblog/sel4-raspberry-pi-3/">on our blog</a> (and check out the rest of the blog too!)</p>
+
+<h2 id="serial-connection">Serial connection</h2>
+<p>Serial TX and RX are located at GPIO pins 14 and
+15 respectively (See Hardware schematic above)</p>
+
+<h2 id="reset">Reset</h2>
+<p>Short the jumper marked “RUN” between the expansion header and USB sockets to
+perform a soft reset of the CPU.</p>
+
+<h2 id="u-boot">U-Boot</h2>
+
+<p>Right now, the default U-Boot will not successfully boot an seL4 image
+on the RPi3, because of cache configuration issues in the seL4
+ELFLoader. This problem can be remedied by having U-boot disable caches
+before loading seL4. Unfortunately, the stock upstream U-boot used to
+disable caches before loading the kernel image, but as of this patch
+(<a href="https://github.com/u-boot/u-boot/commit/995eab8b5b580b67394312b1621c60a71042cd18">https://github.com/u-boot/u-boot/commit/995eab8b5b580b67394312b1621c60a71042cd18</a>),
+U-boot no longer disables caches.</p>
+
+<p>In order to obtain a U-boot binary that disables caching, you can either
+compile U-Boot from source yourself, or you can
+<strong><a href="https://sel4.systems/Info/Docs/u-boot-working-rpi3-32bit-v2017.11.bin">use this prebuilt U-Boot binary image which already works</a></strong>.</p>
+
+<p>If you choose to build your own U-boot, then clone U-boot from upstream,
+then revert commit 995eab8b5b580b67394312b1621c60a71042cd18, and then
+build it:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/u-boot/u-boot.git u-boot
+<span class="nb">cd </span>u-boot
+git revert 995eab8b5b580b67394312b1621c60a71042cd18
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi- rpi_3_32b_defconfig
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
+</code></pre></div></div>
+
+<p>This will enable you to get the most up-to-date U-boot which will boot
+seL4 on the RPi3 successfully.</p>
+
+<h2 id="sd-card-setup">SD card setup</h2>
+<p>The PI boots from the first FAT32 partition on the
+SD card. Where files are specified, they should be located in the root
+directory of this partition.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Filename</th>
+      <th>Description</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FSBL</td>
+      <td>-</td>
+      <td>Mounts SD and loads SSBL</td>
+      <td>ROM</td>
+    </tr>
+    <tr>
+      <td>SSBL</td>
+      <td>bootcode.bin</td>
+      <td>Loads GPU firmware and boots GPU</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+    </tr>
+    <tr>
+      <td>GPU firmware</td>
+      <td>start.elf or recovery.elf</td>
+      <td>Loads CPU bootloader and boots CPU</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+    </tr>
+    <tr>
+      <td>Usually the Linux kernel, but could also be u-boot</td>
+      <td>u-boot.bin</td>
+      <td>u-boot</td>
+      <td>You can either <a href="https://sel4.systems/Info/Docs/u-boot-working-rpi3-32bit-v2017.11.bin">use our prebuilt U-boot which works</a>, or compile your own using the instructions above</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>config.txt</td>
+      <td>u-boot parameters</td>
+      <td>Add enable_uart=1 and kernel=u-boot.bin to the bottom of config.txt (Sample: <a href="http://codepad.org/ykVYFSyP">http://codepad.org/ykVYFSyP</a>)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>uboot.env</td>
+      <td>u-boot saved environment</td>
+      <td>Generated by u-boot (default environment) bootcmd copied to bootcmd_orig bootcmd and bootdelay removed</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="getting-sel4-onto-your-raspberry-pi-3">Getting seL4 onto your Raspberry Pi 3</h2>
+<p>In this section you should
+find the two most convenient methods of getting a kernel image booted on
+your RPi3 described. All three methods assume that you have already
+built a kernel image using one of our projects – such as
+<a href="/Testing">seL4Test</a>.</p>
+
+<p>The two methods described here are using the SD card and TFTP.</p>
+
+<p>Both methods require you to use an SD card to provide the RPi3 firmware
+with a U-boot bootloader it can load. The RPi3 doesn’t store its
+bootloader in flash memory, so it looks for the bootloader on the SD
+card. Please see the section above for how to prepare your SD Card for
+the base set of requirements; you can glance at the table above to see
+the files you’ll need and how to obtain them.</p>
+
+<h3 id="sd-card">SD Card</h3>
+<p>Get a micro-SD card ready by getting the base files
+copied onto it (See the previous section).</p>
+
+<p>Following this, copy your seL4 image (such as an seL4test image), onto
+the SD card in its root directory - that’s it. You can now remove the SD
+Card from your PC and re-insert it into the RPi3, and power the RPi3 on.</p>
+
+<p>When the RPi3 boots up, be sure to interrupt the boot process and drop
+into the U-boot command prompt. From the U-boot command prompt, type
+something the following: fatls mmc 0. If you don’t see your seL4 image
+file’s name printed out, then you might need to double-check your steps
+so far to make sure you didn’t forget something along the way. If you
+see your file listed, then do something like:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2837
+bootelf 0x10000000
+</code></pre></div></div>
+
+<h3 id="tftp">TFTP</h3>
+
+<p>Be sure you’ve set up the internal SD card with the required files for
+U-Boot and the RPi3 firmware (consult the table above). Then make
+certain that you’ve started up a TFTP server with your seL4 image being
+served by that TFTP server. From there:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start
+dhcp
+tftp 0x10000000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-arm-bcm2837
+bootelf 0x10000000
+</code></pre></div></div>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

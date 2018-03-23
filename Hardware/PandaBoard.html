@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name"></span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>warning The following information is very out of date. Please
+update if you know the current procedure.
+</code></pre></div></div>
+
+<h1 id="pandaboard">PandaBoard</h1>
+<p>PandaBoard is based on TI OMAP4 dual-core ARM CPU. The Fastboot is used
+to upload and boot the kernel.</p>
+
+<h2 id="where-to-get-the-sel4-kernel-for-pandaboard">Where to get the seL4 kernel for Pandaboard?</h2>
+<p>The code now lives in
+c-kernel-experimental arm-mpcore branch. The second core could be
+activated or not according to your configuration. To build the kernel,
+you need to use the Kbuild file under the top-level source tree instead
+of Makefile.</p>
+
+<h2 id="sd-card-setup">SD card setup</h2>
+<h5 id="prologue">Prologue</h5>
+<p>The first stage boot loader
+expects to find the TI X-loader in te root of a FAT filesystem, on the
+first partition of the SD card with the name MLO.</p>
+
+<p>MLO expects to find a file named u-boot.bin in the root directory of the
+SD card.</p>
+
+<h5 id="original-panda">Original panda</h5>
+<p>Download to the SD card.</p>
+
+<h5 id="panda-es">Panda ES</h5>
+<p>Download to the SD card. These files will need to
+be renamed to MLO and u-boot.bin respectively.</p>
+
+<p>The reason to patch the u-boot is because the <code class="highlighter-rouge">fastboot</code> jumps to the
+kernel entry point directly but seL4 image needs a elf-loader to parse
+and load correctly, so in the <code class="highlighter-rouge">lib_arm/armlinux.c</code> file, insert
+<code class="highlighter-rouge">do_bootelf(0, 0, 1, 0)</code> before <code class="highlighter-rouge">theKernel(0, bd-&gt;bi_arch_number, bd-&gt;bi_boot_params)</code></p>
+
+<h2 id="steps-to-boot-sel4-kernel">Steps to boot seL4 kernel</h2>
+
+<ol>
+  <li>Download the tool. Alternatively, clone and build the tool from
+source <code class="highlighter-rouge">&lt;TODO Fastboot link&gt;</code></li>
+  <li>Connect the serial cable for communication</li>
+  <li>Connect the usb cable to allow the flashing of your image via
+fastboot</li>
+  <li>
+    <p>Open minicom at 115200bps – 8bit data – No parity – 1 stop
+bit</p>
+  </li>
+  <li>
+    <p>after you power on the board, you should be able see the “Fastboot entered …” in minicom. You can check that the device is ready by using “$&gt; fastboot devices”.</p>
+
+    <ol>
+      <li>NOTE! The panda ES seems to be particular about which
+tty-USB converter it will communicate with. Avoid using the
+HL-340 chipset</li>
+      <li>NOTE! fastboot fails silently if you do not have permissions
+to access the device. Try running with sudo.</li>
+    </ol>
+  </li>
+  <li>
+    <p>Execute</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; fastboot -b 0x80000000 boot the_kernel_image_file_boundled_with_application
+</code></pre></div>    </div>
+  </li>
+  <li>The kernel should boot and application gets executed.</li>
+</ol>
+
+<h1 id="references">References</h1>
+<h4 id="sd-setup">SD setup</h4>
+
+<p><a href="http://omappedia.org/wiki/4AI.1.4_OMAP4_Icecream_Sandwich_Panda_Notes#Patching_X-LOADER">http://omappedia.org/wiki/4AI.1.4_OMAP4_Icecream_Sandwich_Panda_Notes#Patching_X-LOADER</a></p>
+
+<p><a href="http://isrcepeda.blogspot.com.au/2012/05/getting-ics-working-on-pandaboard-uboot.html">http://isrcepeda.blogspot.com.au/2012/05/getting-ics-working-on-pandaboard-uboot.html</a></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

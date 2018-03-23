@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contents | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Contents</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#contents">Contents</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#anatomy-of-the-build-system">Anatomy of the Build System</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#build-configuration">Build configuration</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#config">.config</a></li>
+<li class="toc-entry toc-h4"><a href="#appskbuild">apps/Kbuild</a></li>
+<li class="toc-entry toc-h4"><a href="#kconfig">Kconfig</a></li>
+<li class="toc-entry toc-h4"><a href="#appsmyappmakefile">apps/myapp/Makefile</a></li>
+<li class="toc-entry toc-h4"><a href="#libskbuild">libs/Kbuild</a></li>
+<li class="toc-entry toc-h4"><a href="#libslibfoomakefile">libs/libfoo/Makefile</a></li>
+<li class="toc-entry toc-h4"><a href="#makefile">Makefile</a></li>
+<li class="toc-entry toc-h4"><a href="#projectmk">project.mk</a></li>
+<li class="toc-entry toc-h4"><a href="#commonmk">common.mk</a></li>
+<li class="toc-entry toc-h4"><a href="#makefileflags">Makefile.flags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#build-execution">Build Execution</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="contents">Contents</h1>
+
+<h2 id="anatomy-of-the-build-system">Anatomy of the Build System</h2>
+<p>The following files are the components
+of a project repository that are part of the build system (as opposed to
+code and tools related to the project):</p>
+
+<ul>
+  <li><strong><a href="#config">.config</a></strong> - Your current
+    configuration (auto-generated)</li>
+  <li><strong>apps/</strong>
+    <ul>
+      <li><strong><a href="#appskbuild">Kbuild</a></strong> - Application targets and
+  dependencies</li>
+      <li><strong><a href="#kconfig">Kconfig</a></strong> - Applications menu</li>
+      <li><strong>myapp/</strong>
+        <ul>
+          <li><strong><a href="#kconfig">Kconfig</a></strong> - Myapp-specific settings</li>
+          <li><strong><a href="#appsmyappmakefile">Makefile</a></strong> - How to build Myapp</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>configs/</strong>* - Pre-made configurations for the project</li>
+  <li><strong><a href="#kconfig">Kconfig</a></strong> - Top-level menu</li>
+  <li><strong>kernel/Makefile</strong> - How to build seL4</li>
+  <li><strong>libs/</strong>
+    <ul>
+      <li><strong><a href="#libskbuild">Kbuild</a></strong> - Library targets and
+  dependencies</li>
+      <li><strong><a href="#kconfig">Kconfig</a></strong> - Libraries menu</li>
+      <li><strong>libfoo/</strong>
+        <ul>
+          <li><strong><a href="#kconfig">Kconfig</a></strong> - Libfoo-specific settings</li>
+          <li><strong><a href="#libslibfoomakefile">Makefile</a></strong> - How to build Libfoo</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong><a href="#makefile">Makefile</a></strong> - Top-level build specialisation</li>
+  <li><strong><a href="#makefileflags">Makefile.flags</a></strong> - Top-level build
+    tuning</li>
+  <li><strong>tools/common/</strong>
+    <ul>
+      <li><strong><a href="#commonmk">common.mk</a></strong> - Boiler plate for building
+applications/libraries</li>
+      <li><strong><a href="#kconfig">Kconfig</a></strong> - Menu options for toolchains
+and other common settings</li>
+      <li><strong><a href="#projectmk">project-arm.mk</a></strong> - ARM-specific boiler
+plate for a top-level build</li>
+      <li><strong><a href="#projectmk">project-ia32.mk</a></strong> - IA32-specific
+boiler plate for a top-level build</li>
+      <li><strong><a href="#projectmk">project.mk</a></strong> -
+Architecture-independent boiler plate for a top-level build</li>
+      <li><strong><a href="#makefileflags">Makefile.flags</a></strong> - Shared build
+system tuning</li>
+      <li><strong>kbuild/</strong>* - Kbuild from the Linux source tree. For
+documentation, refer to the Kbuild mailing list.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="build-configuration">Build configuration</h3>
+<p>Prior to building a project you need to
+specify a configuration (settings, components, etc.) that you want to
+build. Kconfig is a tool for simplifying and automating this process. In
+a seL4 project you can enter make menuconfig in the top level directory
+to be presented with a terminal menu for choosing which components to
+build. Note that you will need the package libncurses5-dev installed to
+display terminal menus. It is possible to select a configuration without
+using the terminal menus, but techniques for doing this are not
+discussed on this page.</p>
+
+<p><img style="width:600" src="menuconfig.png" alt="The menu config interface" /></p>
+
+<p>Use arrow keys and Enter to navigate the menu, Space bar to
+select/deselect items and Esc-Esc to return to the parent level in the
+menu hierarchy. On exiting the menu system you will be asked whether you
+wish to save your configuration. If you choose to do so it will be
+written to the file .config in the top level directory.</p>
+
+<p>Many projects will have a default list of configurations for building
+common scenarios. These are located in the configs/ directory. You can
+load one of these by running make config_file where config_file is the
+filename of the configuration you want to load. Whenever you load one of
+these pre-made configurations it is usually wise to run make
+silentoldconfig. This scans your project for configuration settings that
+have changed since the pre-made configuration was created and updates
+the configuration with the defaults of these changed settings. This is
+not always what you want, but it generally works.</p>
+
+<p>Your current configuration is stored in the file .config. This file
+looks like a Makefile fragment and that is actually exactly how it is
+used by build system when it comes time to build your project. One
+gotcha to be aware of is that the comments in this file aren’t
+completely comments, which you will find out if you try to edit them.
+Kconfig parses these comments and will throw all manner of strange
+errors if it thinks one is malformed.</p>
+
+<p>Pre-made configurations are stored in configs/. To make a new
+configuration, pick the settings you want in the menus then copy your
+.config to configs/. Note that all the configurations in this directory
+must end in _defconfig for the build system to identify them correctly.</p>
+
+<p>The other file(s) you will want to care about is Kconfig. These files
+tell Kconfig how to construct the menu hierarchy. A formal description
+of the Kconfig options and syntax can be found at
+<a href="http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt">http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt</a>.
+Symbols are defined by using the ‘config’ statement. These symbols are
+given the prefix ‘CONFIG_’ when the configuration is written to the
+.config file.</p>
+
+<h4 id="config">.config</h4>
+<p><strong>.config</strong> is autogenerated by running
+make some_default_config or make menuconfig. In general, you shouldn’t
+modify this file manually, but the syntax is pretty obvious if you want
+to. As noted below, it is not recommended to touch the comments in this
+file. They are parsed by the build system and “malformed” comments can
+cause strange and mysterious errors.</p>
+
+<h4 id="appskbuild">apps/Kbuild</h4>
+<p><strong>apps/Kbuild</strong> needs to fill the
+apps-y variable with the targets of the applications to be built. To do
+this you can reference the CONFIG_-prefixed variables from Kconfig. A
+typical apps/Kbuild will look something like the following:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">apps-$(CONFIG_MY_APP)</span> <span class="err">+=</span> <span class="err">myapp</span>
+
+<span class="nl">hello</span><span class="o">:</span> <span class="nf">libfoo</span>
+</code></pre></div></div>
+<p>If your application has more complicated dependencies,
+for example if it depends on libbar only when the
+MYAPP_EXTRA_FUNCTIONALITY variable is selected, you can use the
+following pattern:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">apps-$(CONFIG_MY_APP)</span> <span class="err">+=</span> <span class="err">myapp</span>
+
+<span class="nv">hello-y</span> <span class="o">=</span> libfoo
+<span class="err">hello-$(CONFIG_MYAPP_EXTRA_FUNCTIONALITY)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<span class="nl">hello</span><span class="o">:</span> <span class="nf">$(hello-y)</span>
+</code></pre></div></div>
+
+<h4 id="kconfig">Kconfig</h4>
+<p>The Kconfig files (<strong>Kconfig,
+apps/Kconfig, apps/myapp/Kconfig, libs/Kconfig, libs/libfoo/Kconfig,
+tools/common/Kconfig</strong>) describe the structure of the menu you are
+presented with when you type make menuconfig. The syntax of these files
+is described at
+<a href="http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt">http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt</a> and
+they are broken up in the obvious way; that is, apps/Kconfig contains
+settings common to all applications in your project, libs/libfoo/Kconfig
+contains settings specific to libfoo, … The Kconfig files together
+determine the build configuration process that is described in more
+detail below.</p>
+
+<h4 id="appsmyappmakefile">apps/myapp/Makefile</h4>
+
+<p>Your application Makefile,
+<strong>apps/myapp/Makefile</strong>, should populate a set of variables and then
+include common.mk. It will typically look something like the following:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TARGETS</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>notdir <span class="nv">$(SOURCE_DIR)</span><span class="o">)</span>.bin
+
+<span class="nv">CFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="nv">$(SOURCE_DIR)</span>/src/<span class="k">*</span>.c<span class="o">))</span> 
+<span class="nv">ASMFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="nv">$(SOURCE_DIR)</span>/crt/arch-<span class="nv">$(ARCH)</span>/crt0.S<span class="o">))</span>
+
+<span class="nv">LIBS</span> <span class="o">:=</span> sel4c sel4 sel4rootserver sel4platsupport
+
+<span class="err">include</span> <span class="err">$(SEL4_COMMON)/common.mk</span>
+</code></pre></div></div>
+<p>TARGETS should contain the list
+of output files that this application needs built. CFILES and ASMFILES
+list the C and assembly sources of your application, respectively. LIBS
+lists the libraries this application will be linked against (without
+their “lib” prefix). You can also use your Makefile to modify the flags
+that are passed to the compiler or the linker when building your
+application. To do this, modify the variables CFLAGS and LDFLAGS,
+respectively. For example, you can use “LDFLAGS += -T
+path/to/linker.lds” to use a custom linker script for your application
+or “CFLAGS := $(filter-out -Wall,$(CFLAGS))” to turn off compiler
+warnings for your application. Note that these modifications should be
+added <strong>after</strong> including common.mk.</p>
+
+<h4 id="libskbuild">libs/Kbuild</h4>
+<p>Like apps/Kbuild describes top-level
+application dependencies, <strong>libs/Kbuild</strong> describes top-level library
+dependencies. Similarly, it fills the variable libs-y with the libraries
+to be built. A typical libs/Kbuild would look like:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">libs-$(CONFIG_LIB_FOO)</span> <span class="err">+=</span> <span class="err">libfoo</span> 
+<span class="err">libs-$(CONFIG_LIB_BAR)</span> <span class="err">+=</span> <span class="err">libbar</span>
+
+<span class="nl">libfoo</span><span class="o">:</span> <span class="nf">common </span>
+<span class="nl">libbar</span><span class="o">:</span> <span class="nf">common libfoo</span>
+</code></pre></div></div>
+
+<h4 id="libslibfoomakefile">libs/libfoo/Makefile</h4>
+<p>The Makefile for a particular
+library, <strong>libs/libfoo/Makefile</strong>, should just contain some variable
+configuration and then include common.mk. Note that by using generic
+environment variables you can often use the following template with no
+modification for your library:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Library archive(s) that will be built. 
+</span><span class="nv">TARGETS</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>notdir <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span><span class="o">)</span>.a
+
+<span class="c"># Source files required to build the target. 
+</span><span class="nv">CFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span>/src/<span class="k">*</span>.c<span class="o">))</span>
+<span class="nv">ASMFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span>/src/<span class="k">*</span>.S<span class="o">))</span>
+
+<span class="c"># Header files/directories this library provides. 
+</span><span class="nv">HDRFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>wildcard <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span>/include/<span class="k">*</span><span class="o">)</span>
+
+<span class="err">include</span> <span class="err">$(SEL4_COMMON)/common.mk</span>
+</code></pre></div></div>
+
+<p>You can modify the compiler or linker flags applied when building your
+library by modifying the NK_CFLAGS or NK_LDFLAGS variable
+respectively. The process for doing this is identical to that for
+apps/myapp/Makefile described above.</p>
+
+<h4 id="makefile">Makefile</h4>
+<p>Something that may be unexpected at
+first is that you don’t need to provide any project-specific targets in
+your top-level Makefile. Generally this file just needs to make
+app-images the default target and include project.mk. It’s possible you
+may want to override the default (by defining a target before including
+project.mk) or provide some external targets of your own (after
+including project.mk). You will most likely just want to mimic the
+content of the file from the reference examples:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># app-images is provided in project.mk. 
+</span><span class="nl">all</span><span class="o">:</span> <span class="nf">app-images</span>
+
+<span class="err">include</span> <span class="err">tools/common/project.mk</span>
+
+<span class="c"># Extra project-specific targets. simulate-kzm: 
+</span><span class="err">qemu-arm</span> <span class="err">-nographic</span> <span class="err">-M</span> <span class="err">kzm</span> <span class="err">-kernel</span> <span class="err">images/hello-image-arm-imx31</span>
+</code></pre></div></div>
+
+<h4 id="projectmk">project.mk</h4>
+<p><strong>tools/common/project.mk</strong> contains
+some generic targets and supporting infrastructure for building the
+various components of your system. It is from this Makefile that the
+application and library Makefiles are invoked. The architecture specific
+elements of this are contained in <strong>tools/common/project-arm.mk</strong> and
+<strong>tools/common/project-ia32.mk</strong>. Your top-level Makefile should
+import tools/common/project.mk to take advantage of the build system
+support.</p>
+
+<h4 id="commonmk">common.mk</h4>
+<p><strong>tools/common/common.mk</strong> is the
+equivalent of tools/common/project.mk for the application-/library-level
+compilation (as opposed to top-level). This probably won’t make much
+sense unless you are familiar with the two-stage build process that is
+being invoked when you type “make”, but you generally won’t need to
+concern yourself with the inner workings of this file anyway. This file
+contains a collection of generic compiler flags and targets shared
+between all projects. It has evolved over time (in some instances in
+response to bugs in toolchains), so it is possible there are sections of
+this file that are deprecated. If you find something incorrect or
+deprecated feel free to correct or modify it, but be aware that even
+seemingly innocuous changes to this file are quite likely to break other
+people’s builds.</p>
+
+<h4 id="makefileflags">Makefile.flags</h4>
+<p><strong>Makefile.flags</strong> and
+<strong>tools/common/Makefile.flags</strong> contain a set of options that are
+applied globally at the top level. These generally contain
+compiler-specific options to discriminate between your target platforms.
+The shared settings in tools/common/Makefile.flags should be more than
+sufficient for most projects, but projects with more esoteric build
+requirements may need to use Makefile.flags to override or extend the
+shared settings. Most projects will have an empty Makefile.flags because
+there is almost always a more appropriate place to put an override.</p>
+
+<h1 id="build-execution">Build Execution</h1>
+<p><strong>Note:</strong> ‘‘If you are accustomed to Kbuild from
+the Linux kernel, note that we do not use Kbuild in the same way it is
+used in Linux. In particular, components are built with their own
+Makefiles, not with the Kbuild generic targets that build object files
+at a directory-level granularity. It is best not to assume any behaviour
+you may be familiar with from Kbuild.’’</p>
+
+<p>Where Kconfig handles the configuration of your build process, the
+remainder of the build system manages dependencies and rules within a
+build. The tools/Kbuild directory itself is a black hole of despair and
+I would encourage you not to look in there unless you have a high
+tolerance for pain. All other relevant files are covered above.</p>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Why do I need to specify the same
+list of dependencies in apps/myapp/Makefile, apps/Kbuild and
+apps/myapp/Kconfig?</strong></p>
+
+<p>While these dependency lists appear to serve an identical function, they
+actually do not. apps/myapp/Makefile defines the contents of LIBS to be
+the libraries that your application is linked against. apps/Kbuild
+defines the dependencies (libraries or otherwise) of your applications.
+apps/myapp/Kconfig defines the dependency structure of Kconfig menu
+items that may or may not map to build targets. In practice, most of our
+use cases have an identical list for these three, but they have been
+kept separate to allow a finer grained control over the build system
+when necessary.</p>
+
+<p>If this really is a serious irritation to you and your dependencies
+really are the same in all three places, you can replace your dependency
+line in apps/Kbuild with:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">myapp</span><span class="o">:</span> <span class="nf">$(shell grep "depends on" $(APPS_ROOT)/myapp/Kconfig | sed -e 's/depends on//g' -e 's/[&amp;_]//g' | tr A-Z a-z)</span>
+</code></pre></div></div>
+<p>and your LIBS line in
+apps/myapp/Makefile with:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LIBS</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst lib%,%,<span class="nf">$(</span><span class="nb">shell</span> <span class="nb">grep</span> <span class="s2">"depends on"</span> <span class="nv">$(SOURCE_DIR)</span>/Kconfig | sed <span class="nt">-e</span> <span class="s1">'s/depends on//g'</span> <span class="nt">-e</span> <span class="s1">'s/[&amp;_]//g'</span> | tr A-Z a-z<span class="nv">)</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This will make apps/myapp/Kconfig the
+canonical source of your dependency information.</p>
+
+<hr />
+<p><strong>Why do I need to pick which libraries get built when this is
+determined by my application’s dependencies? Why does deslecting
+libraries hide the applications that depend on them?</strong></p>
+
+<p>This is related to the question above. These options exist in Kconfig so
+you can build libraries in isolation from any applications that depend
+on them. In general this is not something you want to do, but there are
+cases where we do need this functionality available. When you deselect
+an item in Kconfig it hides all the items that depend on that item. If
+this is not the behaviour you want you should consider using a select
+clause instead of a depends on clause.</p>
+
+<p>Be aware that while select and depends on can express the same
+dependency relationship that will correctly apply transitively, they do
+not play well together. An automated selection caused by a select will
+not take depends on clauses into account and automatic deselection
+caused by depends on will not take select clauses into account. Used
+exclusively however, either can be used in a given scenario. E.g. a
+dependency of FOO on BAR, that depends on MOO can be expressed as:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config FOO
+    bool "foo"
+    depends on BAR
+
+config BAR
+    bool "bar"
+    depends on MOO
+
+config MOO
+    bool "moo"
+</code></pre></div></div>
+
+<p>or as:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config FOO 
+    bool "foo"
+    select BAR
+
+config BAR
+    bool "bar"
+    select MOO
+
+config MOO
+    bool "moo"
+</code></pre></div></div>
+<p>The difference will be in the behaviour in menuconfig, not in the
+actual dependency inferred by Kconfig.</p>
+
+<hr />
+<p><strong>How do I debug what the build system is doing?</strong></p>
+
+<p>Use make V=2 or make V=3. Be aware that V=3 generates a lot of output.</p>
+
+<hr />
+<p><strong>What is this $(call cc-option… business?</strong></p>
+
+<p>cc-option is defined in tools/kbuild/Kbuild.include. It is used as
+$(call cc-option, flags1, flags2). It passes flags1 to your compiler
+($(CC), not $(HOST_CC)) and returns flags1 if they are accepted. If
+your compiler returns an error it returns flags2. It is basically a way
+of probing what flags your compiler supports.</p>
+
+<hr />
+<p><strong>What is the difference between CFLAGS, HOSTCFLAGS and
+NK_CFLAGS?</strong></p>
+
+<p>There are two compilers in the build system, CC and HOSTCC. CC is the
+compiler that is used to build your project, while HOSTCC is the
+compiler that is used to build the tools that are used to build your
+project. HOSTCC is typically your operating system’s native GCC, while
+CC is often a cross-compiler. The contents of HOSTCFLAGS are used when
+invoking HOSTCC, while the other two FLAGS variables are used with CC.
+The contents of CFLAGS is used when compiling the kernel. NK_CFLAGS
+applies to applications and libraries. The terminology stems from Linux,
+where there are kernel flags and Non-Kernel flags. To avoid confusion,
+the build system treats CFLAGS and NK_CFLAGS identically in your
+application/library Makefiles and you can modify either for the same
+effect.</p>
+
+<hr />
+<p><strong>How do I dump the contents of Makefile variables? How do I
+determine what context my rules are executed in?</strong></p>
+
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$(foreach</span> <span class="err">var,$(.VARIABLES),$(warning</span> <span class="err">$(var)=$($(var))))</span>
+</code></pre></div></div>
+
+<hr />
+<p><strong>Why do some projects’ libs/Kbuild use a sel4libs-y variable?</strong></p>
+
+<p>This is hangover from a previous abstraction for portability. This extra
+level of indirection serves no purpose in the current build system. If
+you encounter a libs/Kbuild that looks like the following:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">sel4libs-$(CONFIG_LIB_FOO)</span> <span class="err">+=</span> <span class="err">libfoo</span>
+<span class="err">sel4libs-$(CONFIG_LIB_BAR)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<span class="err">...</span>
+
+<span class="nv">libs-y</span> <span class="o">+=</span> <span class="err">$</span><span class="o">(</span>sel4libs-y<span class="o">)</span> 
+<span class="err">...</span>
+</code></pre></div></div>
+<p>please update it to remove sel4libs-y:</p>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">libs-$(CONFIG_LIB_FOO)</span> <span class="err">+=</span> <span class="err">libfoo</span>
+<span class="err">libs-$(CONFIG_LIB_BAR)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<span class="err">...</span>
+</code></pre></div></div>
+
+<p><strong>What does it mean when I get errors like make[1]: *** No rule
+to make target ‘-lfoo’, needed by `bar’. Stop.? Why is “-lfoo” a
+target?</strong></p>
+
+<p>Library targets are automatically generated by the build system. This
+error usually indicates that your apps/Kbuild or libs/Kbuild does not
+correctly describe the dependencies for one of your targets.</p>
+
+<hr />
+<p><strong>Why is the documentation for Kbuild and Kconfig so poor?</strong></p>
+
+<p>Kbuild and Kconfig exist in the Linux kernel source tree. Attempts have
+been made to separate them out and make them independent, but nothing
+particularly successful has come from this. As a result the only
+reliable and current source of documentation for both is in the Linux
+kernel, where maintainers tend to have an attitude of “the source is the
+documentation.” Most of the time the best way to determine
+Kbuild/Kconfig behaviour is to try something and see what happens.</p>
+
+<hr />
+<p><strong>Why does the build system silently ignore typos in variable
+names?</strong></p>
+
+<p>This is partly related to their origins from Kbuild and Kconfig and
+partly a limitation of GNU Make. In many instances variables are
+expanded in such a way that the system is provided with no feedback as
+to whether the variable was undefined or whether it was set to nothing.
+Either way, there’s not much to be done here other than pair program
+your Makefiles.</p>
+
+<hr />
+<p><strong>Why do some items in menuconfig get indented for no apparent
+reason? E.g. Twinkle library for seL4.</strong></p>
+
+<p>I have no idea. As near as I can tell it has something to do with the
+starting character, but if you manage to get to the bottom of this
+please fix.</p>
+
+<hr />
+<p><strong>When trying to compile libsel4muslcsys, why do I get errors like
+fatal error: stdio.h: No such file or directory?</strong></p>
+
+<p>You likely have a configuration line in your libs/Kbuild that causes one
+of libmuslc or libsel4muslcsys to depend on the other. In this file
+neither should depend on the other.</p>
+
+<p>There is a circular dependency between libmuslc and libsel4muslcsys.
+This is known and intentional; libsel4muslcsys provides the backend seL4
+support for libmuslc’s functionality. This dependency should not be
+expressed in the build system or you will experience compilation errors
+like the above. When the build system is configured such that neither
+library depends on each other, it will correctly stage the libc headers
+that libsel4muslcsys is expecting to find and correctly link the symbol
+references in libmuslc to the provided symbols in libsel4muslcsys.</p>
+
+<hr />
+<p><strong>I’m trying to do something unusual that is not natively supported
+by the build system, so I added my own rules to apps/my_app/Makefile.
+Now nothing seems to get built. What’s going on?</strong></p>
+
+<p>Adding custom rules is fine, but they need to come after the line where
+you include common.mk</p>
+
+<p>An app’s Makefile is invoked with no explicit target (make), so the
+first target encountered is built. This is intended to be default,
+supplied by common.mk, but if you introduce a rule before including this
+file, your target supersedes default. As a side note, it is possibly
+worth modifying the parent Makefile to directly call make default to
+remove this gotcha.</p>
+
+<hr />
+<p><strong>Kbuild and Kconfig are GPL-ed. Does this mean the code I build with them is automatically GPL-ed?</strong></p>
+
+<p>No. This is a well-established issue, which has been dealt with in other
+projects before. Using a GPL-ed build system or linking against GPL-ed
+libraries does not force your project to be GPL-ed.</p>
+
+<hr />
+<p><strong>This build system is terrible. Why aren’t we using &lt;insert some other build system&gt;?</strong></p>
+
+<p>All build systems suck. The only thing worse than your current build
+system is your future build system. Life goes on.&lt;/flamebait&gt;</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

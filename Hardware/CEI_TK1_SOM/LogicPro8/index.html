@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Using the Saleae Logic Pro 8 to debug a CAN bus | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/CEI_TK1_SOM/">
+              <span property="name"><b>TK1 som</b></span>
+              <meta property="position" content="3" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Using the Saleae Logic Pro 8 to debug a CAN bus</span>
+            <meta property="position" content="4" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="using-the-saleae-logic-pro-8-to-debug-a-can-bus">Using the Saleae Logic Pro 8 to debug a CAN bus</h1>
+
+<h1 id="introduction">Introduction</h1>
+<p>This page is a quick write up of how we used a logic analyzer to help
+solve a message loss issue when using a CAN bus. We had two TK1-SOMs
+connected together on a CAN bus. One of them runs Linux natively and the
+other runs a seL4 CAmkES application that receives CAN frames and then
+prints them out. We found that although the CAmkES application could
+correctly receive and reply to individual CAN frames, when frames were
+being received at the maximum rate of the bus the CAmkES application
+would only print out the first, last and occasionally a frame in the
+middle. Read more about CAN
+<a href="https://en.wikipedia.org/wiki/CAN_bus">here</a>, and
+<a href="https://www.saleae.com/index">here</a> is the Saleae Logic Pro 8
+site. Information about the TK1-SOM daughter board that we use is
+<a href="https://bitbucket.csiro.au/projects/OH/repos/tk1som-can-daughterboard/browse">here</a>.</p>
+
+<p><img style="width: 50%" src="setup.JPG" alt="Photo of CAN connected between two TK1-SOMs" /></p>
+
+<h2 id="setup">Setup</h2>
+<p>Each of the TK1-SOMs have a daughter board with a MCP25625
+CAN controller on them that can communicate with the processor over SPI.
+When a controller receives a CAN message it notifies the processor by
+interrupting it over a GPIO line. The processor then reads the CAN
+message out of the controller over SPI. We can use the LogicPro8 to
+probe the CAN bus, the SPI bus and also the GPIO pin that the interrupt
+is received on to get a feel for what is going on.</p>
+
+<p><img style="width: 50%" src="saleae.JPG" alt="Photo of Saleae connected to TK1-SOM" /></p>
+
+<h3 id="connecting-to-the-can-bus">Connecting to the CAN bus</h3>
+
+<p><img style="width: 50%" src="daughterboard.PNG" alt="Schematic of daughter board" /></p>
+
+<p>On our daughter board (schematic above), our CAN bus pins are CAN1H,
+CAN1L and GND. The Logic pro only needs to be plugged into CAN1L and GND
+in order to decode CAN frames. We connect Channel 0 of the Logic pro as
+shown: (Note that the schematic above shows the bottom of the daughter
+board. So the order of the pins in the photo is reversed)</p>
+
+<p><img style="width: 50%" src="can.JPG" alt="Closeup photo of Saleae connected to TK1-SOm" /></p>
+
+<p>Saleae provides the <a href="https://www.saleae.com/downloads">Logic</a>
+software which is used to collect and analyse data.</p>
+
+<p><img style="width: 50%" src="logic.png" alt="Screenshot of Logic software" /></p>
+
+<p>We configure Logic to collect at a rate of 50MS/s on channel 0 with
+3.3+V</p>
+
+<p><img style="width: 50%" src="logic1.png" alt="Screenshot of Logic software: Collection bitrate setting menu" /></p>
+
+<p>We add CAN as an analyser for Channel 0 and set the bitrate to 125000
+which is what our TK1s are configured to use.</p>
+
+<p><img style="width: 50%" src="logic2.png" alt="Screenshot of Logic software: Analyser setting menu" />
+<img style="width: 50%" src="logic3.png" alt="Screenshot of Logic software: Analyser setting menu, sample bitrate setting" /></p>
+
+<p>We press start and then send one CAN message from the Linux TK1 to the
+seL4 TK1.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Native Linux:
+ubuntu@tegra-ubuntu:\~$ cansend can0 5A1#11.22.33.44.55.66.77.88
+
+seL4: Recv: error(0), id(5a1), data(11, 22, 33, 44, 55, 66, 77, 88)
+</code></pre></div></div>
+<p>In Logic we see that we measured the CAN message being transmitted over
+the bus. On the side under Decoded protocols Logic reports the fields of
+the message that was sent.</p>
+
+<p><img style="width: 50%" src="logic4.png" alt="Screenshot of Logic software: CAN Sample result" /></p>
+
+<h3 id="connecting-to-spi">Connecting to SPI</h3>
+
+<p>We now connect to the SPI bus. To do this we need to measure the CLK,
+MOSI and MISO. (These pins can be found at the bottom of the schematic).
+We connect the probe to them as follows:</p>
+
+<p><img style="width: 50%" src="spi.JPG" alt="Photo of attaching Saleae to SPI bus" /></p>
+
+<p>In Logic we add the new channels and configure a SPI analyser for them.</p>
+
+<p><img style="width: 50%" src="logic5.png" alt="Screenshot of Logic software: SPI Analyser setting menu" /></p>
+
+<p>After running the scan again while sending a CAN message we now see the
+CAN frame sent on the bus followed by a few SPI transactions between the
+Processor and CAN controller.</p>
+
+<p><img style="width: 50%" src="logic6.png" alt="Screenshot of Logic software: SPI Sample result" /></p>
+
+<p>Zooming in on a single SPI transaction we see that the CAN driver send
+0x03, 0x2C and the CAN controller respond with 0x01. This corresponds to
+Read register 0x2C (Interrupt flag register) and the register value
+being returned as 0x01 (Message received). Under decoded protocols you
+can see both CAN messages and SPI messages that were sent.</p>
+
+<p><img style="width: 50%" src="logic7.png" alt="Screenshot of Logic software: SPI Sample result, Zoomed in" /></p>
+
+<h3 id="gpio-interrupt-line">GPIO Interrupt line</h3>
+<p>We finally connect the probe to the
+interrupt line. The daughter board configures the CAN controller to
+interrupt over GPIO3 which is exposed as Pin 4 on pinout J5 as described
+in the
+<a href="http://coloradoengineering.com/wp-content/uploads/2016/12/Reference-Guide_FINAL.pdf">TK1-SOM Reference guide</a>. This is at the back of the TK1 relative to our
+setup and we connect the probe as shown:</p>
+
+<p><img style="width: 50%" src="gpio.JPG" alt="Photo of attaching Saleae to GPIO interrupt" /></p>
+
+<p>We capture a message being sent again and now we can see the CAN message
+being sent, the controller interrupting the GPIO line and then the
+processor responding to the interrupt with SPI transactions. Eventually
+the interrupt line is reset once the processor has read out the received
+CAN message from the CAN controller.</p>
+
+<p><img style="width: 50%" src="logic8.png" alt="Screenshot of Logic software: GPIO Sample result" /></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

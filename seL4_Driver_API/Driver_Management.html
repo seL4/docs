@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Power management commands for the seL4 Driver API | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Power management commands for the seL4 Driver API</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#power-management-commands-for-the-sel4-driver-api">Power management commands for the seL4 Driver API</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#constants">Constants</a></li>
+<li class="toc-entry toc-h2"><a href="#functions">Functions</a></li>
+<li class="toc-entry toc-h2"><a href="#power-state-specifications">Power state specifications</a></li>
+<li class="toc-entry toc-h2"><a href="#api">API</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_critical_event_subscription_ind-async">seL4drv_mgmt_critical_event_subscription_ind(): Async</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_power-async">seL4drv_mgmt_power(): Async</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_power_features-sync">seL4drv_mgmt_power_features(): Sync</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#child-enumeration">Child enumeration</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="power-management-commands-for-the-sel4-driver-api">Power management commands for the seL4 Driver API</h1>
+
+<h2 id="constants">Constants</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Driver power states supported by the API.
+ * These are used by both seL4drv_mgmt_power()
+ * and seL4drv_mgmt_power_features().
+ */</span>
+<span class="cp">#define SEL4DRV_MGMT_POWER_BOOT       (1&lt;&lt;0)
+#define SEL4DRV_MGMT_POWER_WAKEUP     (1&lt;&lt;1)
+#define SEL4DRV_MGMT_POWER_SLEEP      (1&lt;&lt;2)
+#define SEL4DRV_MGMT_POWER_DEEP_SLEEP (1&lt;&lt;3)
+#define SEL4DRV_MGMT_POWER_SHUTDOWN   (1&lt;&lt;4)
+#define SEL4DRV_MGMT_POWER_KILL       (1&lt;&lt;5)
+</span></code></pre></div></div>
+
+<h2 id="functions">Functions</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">seL4drv_mgmt_critical_event_subscription_ind</span><span class="p">();</span>
+<span class="kt">void</span> <span class="n">seL4drv_mgmt_power</span><span class="p">();</span>
+<span class="kt">void</span> <span class="n">seL4drv_mgmt_power_features</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="n">features_bitmap</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">seL4drv_mgmt_enumerate_children</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="power-state-specifications">Power state specifications</h2>
+
+<ul>
+  <li>SEL4DRV_MGMT_POWER_BOOT: Support for this power management
+      command is required of all drivers. This is actually the global
+      entry point for a driver, and it will be called only once during
+      a particular device instance’s lifetime. After the driver
+      returns from this function call, the environment will assume
+      that the device has been initialized and is ready to
+      accept requests.</li>
+  <li>SEL4DRV_MGMT_POWER_WAKEUP: Support for this power management
+      command is required of all drivers which support the SLEEP or
+      DEEP_SLEEP commands. Instructs the driver to resume operation
+      after a SLEEP or DEEP_SLEEP command. The driver is expected to
+      do any necessary re-initialization of the hardware to get the
+      driver back into an operational state. If there were
+      asynchronous requests outstanding before the device was put into
+      a low-power mode, the driver should re-trigger and resume the
+      normal processing of such requests.</li>
+  <li>SEL4DRV_MGMT_POWER_SLEEP: Indicates to the driver that the
+      device is about to be placed into a light sleep state. In such a
+      state, the caches of its underlying and dependent hardware are
+      guaranteed not to be flushed, and there will be no need to
+      reinitialize the buses after wakeup. If the device does not
+      support such a light sleep mode, the device shall return an
+      error code.</li>
+  <li>SEL4DRV_MGMT_POWER_DEEP_SLEEP: Indicates to the driver that
+      the environment would like to place the device into a sleep
+      state in which there is no guarantee that hardware caches and
+      buffers will be preserved. Furthermore, there is no guarantee
+      that bus configuration will hold across this transition. The
+      driver shall cleanly commit the effect of all current
+      operations, and place any unsatisfied asynchronous requests on
+      hold, before putting the device into a state that is compatible
+      with this sleep state.</li>
+  <li>SEL4DRV_MGMT_POWER_SHUTDOWN: Support for this power
+      management command is required of all drivers. Indicates that
+      the device should be placed into a state in which it would be
+      safe to cut off power to the device. Such a state should at
+      least guarantee that all clients’ data is quickly cleaned out to
+      permanent storage, and that all effects requested by clients
+      are committed. If it is possible to satisfy any outstanding
+      asynchronous requests the driver should commit to completing
+      them, but it should reject all future requests from that
+      point onward.</li>
+  <li>SEL4DRV_MGMT_POWER_KILL: Support for this power management
+      command is required of all drivers. Indicates that the
+      environment wants to kill the device, NOW. Any outstanding
+      asynchronous requests should be canceled and the driver should
+      then place itself into a state that is compatible with the
+      SEL4DRV_MGMT_POWER_SHUTDOWN command.</li>
+</ul>
+
+<h2 id="api">API</h2>
+
+<h3 id="sel4drv_mgmt_critical_event_subscription_ind-async">seL4drv_mgmt_critical_event_subscription_ind(): Async</h3>
+<p>This
+function enables the environment to call into the driver, and give it an
+asynchronous context block which it should hold on to. If at any point
+the driver encounters a situation which requires it to ask the
+environment to shut it down, it can asynchronously callback into the
+environment to make such a request.</p>
+
+<p>The reason for this function is to enable the driver to report to the
+environment when it has found itself in an invalid operational state
+which it cannot recover from. This is not a necessary function to
+implement, and it is likely to be a blank function for most
+implementations.</p>
+
+<h3 id="sel4drv_mgmt_power-async">seL4drv_mgmt_power(): Async</h3>
+<p>This operation is called by the
+environment to place the device instance into one of the power states
+outlined above. It is important to note that SEL4DRV_MGMT_POWER_BOOT
+is actually just a global entry point into the driver.</p>
+
+<p>When it comes to placing devices into low power states, the environment
+must understand that it is not the responsibility of the driver to
+communicate the power management request to its children. If the
+environment would like to place an entire hardware bus in a low-power
+mode, then the environment must walk its own internal device tree, and
+for each descendant of the target bus, it must manually ask that
+descendent to enter a power state that is compatible with the power
+state it wishes to place the bus into. That is, parent devices are not
+responsible for recursing downward and calling their children to
+instruct them to enter power states on behalf of the environment.</p>
+
+<p>The same applies for waking devices up from power states. If the
+environment wishes to wake a particular child device, it must manually
+ensure that all of that device’s parents are in a suitable power state
+to enable operation.</p>
+
+<h3 id="sel4drv_mgmt_power_features-sync">seL4drv_mgmt_power_features(): Sync</h3>
+<p>This function returns a
+bitmap of the supported driver power states (See <a href="#constants">#constants</a>).
+All drivers are required to support at minimum, the following states:</p>
+<ul>
+  <li>SEL4DRV_MGMT_POWER_BOOT</li>
+  <li>SEL4DRV_MGMT_POWER_SHUTDOWN</li>
+  <li>SEL4DRV_MGMT_POWER_KILL</li>
+</ul>
+
+<p>If any of these is not supported by the driver, the environment is free
+to respond in an implementation specific manner, including refusing to
+load the driver.</p>
+
+<p>The driver is only required to support the SEL4DRV_MGMT_POWER_WAKEUP
+command if either the SEL4DRV_MGMT_POWER_SLEEP or
+SEL4DRV_MGMT_POWER_DEEP_SLEEP command is supported. If either the
+SLEEP or DEEP_SLEEP command is supported and there is no support for
+the SEL4DRV_MGMT_POWER_WAKEUP command, the environment should assume
+that the SLEEP or DEEP_SLEEP operations are not adequately supported.</p>
+
+<h2 id="child-enumeration">Child enumeration</h2>
+<p>See the main article:</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

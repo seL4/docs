@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suggested Projects | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Suggested Projects</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="suggested-projects">Suggested Projects</h1>
+
+<p>After trying the existing projects (especially those listed on <a href="Getting_started">Getting started</a>)
+a good way to learn the intricacies of programming on
+top of seL4 is to do the exercises in the
+<a href="http://www.cse.unsw.edu.au/~cs9242/current/">UNSW Advanced
+Operating Systems course</a>.</p>
+
+<h1 id="possible-projects">Possible Projects</h1>
+
+<p>Below is a set of suggested projects of varying degree of
+sophistication. If you’re interested in providing generally-useful
+infrastructure, you’re probably best off basing this on the CAmkES
+environment.</p>
+
+<p>If you are planning to produce a significant and long-lived part of the
+seL4 open-source ecosystem (as opposed to just having fun for yourself)
+you should talk to us first. We run frequent student and occasionally
+larger development projects, and may already have something that can
+serve as a starting point. We will in the future try to be more
+pro-active in seeding projects with incomplete internal work.</p>
+
+<h2 id="ports-to-other-platforms">Ports to other platforms</h2>
+
+<p>seL4 currently runs on only a small set of platforms. Porting seL4
+itself is usually pretty easy; porting the platform support library and
+its drivers is trickier.</p>
+
+<p>Some interesting platforms that could support seL4 include:</p>
+
+<ul>
+  <li>Any of the Tegra SoCs from NVIDIA.</li>
+  <li>The RK3188, maybe using the <a href="http://radxa.com/Home">Radxa Rock Pro</a> development board</li>
+  <li>Any of the Arm V8 64-bit processors that are beginning to
+    become available.</li>
+</ul>
+
+<h2 id="qubes">Qubes</h2>
+
+<p><a href="https://qubes-os.org/">Qubes</a> is an open source operating
+system designed to provide strong security for desktop computing using
+virtualisation to provide isolation. Qubes is based on Xen. seL4 is a
+much better fit for Qubes. The project is to port Qubes to seL4 (or
+develop an alternative Qubes-like system for seL4).</p>
+
+<h2 id="bug-fixes-and-enhancements">Bug fixes and enhancements</h2>
+
+<p>The build system needs work. A typical project comprises the kernel,
+libraries and apps; dependencies between these are not properly tracked,
+which means things are rebuilt even if up-to-date; also sometimes things
+are not rebuilt when they should be.</p>
+
+<p>There are other problems with the system as a whole that need
+addressing. In particular the drivers in libsel4platsupport need
+extension and improvement.</p>
+
+<h2 id="useful-components">Useful Components</h2>
+
+<p>Drivers, file systems, useful libraries… Especially a POSIX
+environment would be useful.</p>
+
+<h2 id="port-doom">Port Doom</h2>
+
+<p>Port the PC game
+<a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)">Doom</a> to
+run on seL4.</p>
+
+<h2 id="minix-3-on-sel4">Minix 3 on seL4</h2>
+
+<p>Minix is the original multi-server OS by Tannenbaum.
+<a href="http://www.minix3.org/">Minix 3</a> is the latest shiny version
+of it, and is based on a more limited microkernel than seL4. So far x86
+is supported.</p>
+
+<p>The project is to port Minix 3 to run on seL4.</p>
+
+<h2 id="language-support">Language Support</h2>
+
+<p>Userspace currently needs to be written in C (or assembler). An
+interesting challenge is to provide run-time support for higher level
+languages, such as C++, Java, Go, Haskell, Python. Some of that exists
+internally:</p>
+
+<ul>
+  <li>reasonably mature support for a subset of C++ (no template
+    library), we’ll probably release that soon for others to build on</li>
+  <li>we have Haskell sort-of running on seL4 (thanks or friends from
+    <a href="https://galois.com/">Galois</a> for their help), should be
+    released in the near future</li>
+  <li>there is a student-level port of Go, which is bitrotted but could
+    be made available if someone wants to revive it</li>
+  <li>limited support of Rust applications</li>
+</ul>
+
+<h2 id="stuff-were-working-on">Stuff we’re working on</h2>
+
+<p>Kernel development will continue to happen primarily at NICTA for the
+foreseeable future, as this not only requires a good understanding of
+the kernel design and implementation, but also a good understanding of
+what is feasible to verify. Several of these internal projects are
+reasonably mature and will be pushed into the public tree soon, see our
+<a href="http://sel4.systems/Info/Roadmap/">Roadmap</a></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

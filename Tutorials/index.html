@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 and CAmkES tutorials | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 and CAmkES tutorials</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#sel4-and-camkes-tutorials">seL4 and CAmkES tutorials</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#sel4-tutorials">seL4 tutorials</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#get-the-code">Get the code</a></li>
+<li class="toc-entry toc-h3"><a href="#do-the-tutorials">Do the tutorials</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#camkes-tutorials">CAmkES tutorials</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#get-the-code-1">Get the code</a></li>
+<li class="toc-entry toc-h3"><a href="#do-the-tutorials-1">Do the tutorials</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#what-next">What next?</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="sel4-and-camkes-tutorials">seL4 and CAmkES tutorials</h1>
+
+<p>First make sure you have
+<a href="/Getting_started#setting-up-your-machine">set up your machine</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>The build dependencies for seL4 can be found in the
+<code class="highlighter-rouge">Prerequisites.md</code>
+(<a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md">Click!</a>)
+file in the root of the SEL4-tutorials GIT repository.</p>
+
+<h2 id="sel4-tutorials">seL4 tutorials</h2>
+
+<p>These tutorials get you started with writing dynamic systems and
+interacting directly with seL4 and our libraries.</p>
+
+<h3 id="get-the-code">Get the code</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir sel4-tutorials-manifest
+cd sel4-tutorials-manifest
+repo init -u &lt;https://github.com/SEL4PROJ/sel4-tutorials-manifest&gt; -m sel4-tutorials.xml
+repo sync
+</code></pre></div></div>
+
+<h3 id="do-the-tutorials">Do the tutorials</h3>
+
+<p>The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: “<code class="highlighter-rouge">projects/sel4-tutorials</code>”. The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference.</p>
+
+<ul>
+  <li>The half-written sample applications are in the
+      subfolder: <code class="highlighter-rouge">exercises/</code>. Your job is to fill these out.</li>
+  <li>
+    <p>The completed sample applications showing the solutions to the
+      tutorial challenges are in the
+      subfolder: <code class="highlighter-rouge">projects/sel4-tutorials/solutions/</code>.</p>
+  </li>
+  <li>
+    <p>The slide presentations to guide you through the tutorials are in the following files:</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">projects/sel4-tutorials/docs/seL4-Overview.pdf</code>: This
+        is an overview of the design and thoughts behind seL4, and
+        we strongly recommend you read it before starting
+        the tutorials.</li>
+      <li><code class="highlighter-rouge">projects/sel4-tutorials/docs/seL4-APILib-details.pdf</code>:
+This is the actual tutorial.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Detailed explanations of each tutorial challenge:</p>
+
+    <ul>
+      <li><a href="seL4_Tutorial_1">seL4 Tutorial 1</a></li>
+      <li><a href="seL4_Tutorial_2">seL4 Tutorial 2</a></li>
+      <li><a href="seL4_Tutorial_3">seL4 Tutorial 3</a></li>
+      <li><a href="seL4_Tutorial_4">seL4 Tutorial 4</a></li>
+      <li><a href="seL4_Timer_tutorial">seL4 Timer tutorial</a></li>
+      <li><a href="seL4_RT_tutorial">seL4 MCS tutorial</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="camkes-tutorials">CAmkES tutorials</h2>
+
+<p>These tutorials get you started with our component system CAmkES, which
+is allows you to configure static systems through components. CAmkES
+generates the glue code for interacting with seL4.</p>
+
+<h3 id="get-the-code-1">Get the code</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir camkes-tutorials-manifest
+cd camkes-tutorials-manifest
+repo init -u &lt;https://github.com/SEL4PROJ/sel4-tutorials-manifest&gt; -m camkes-tutorials.xml
+repo sync
+</code></pre></div></div>
+
+<h3 id="do-the-tutorials-1">Do the tutorials</h3>
+
+<p>These tutorials work similarly to the SEL4 tutorials in that they are
+guided by a slide presentation. There are half-completed sample
+applications, with a set of slides giving instructions, with TASK
+challenges once again. There are also completed sample solutions.</p>
+
+<ul>
+  <li><a href="CAmkES_Tutorial_0">CAmkES Tutorial 0</a></li>
+  <li><a href="CAmkES_Tutorial_1">CAmkES Tutorial 1</a></li>
+  <li><a href="CAmkES_Tutorial_2">CAmkES Tutorial 2</a></li>
+  <li><a href="CAmkES_Timer_Tutorial">CAmkES Timer Tutorial</a></li>
+</ul>
+
+<p>More info:</p>
+
+<ul>
+  <li>The half-written sample applications are in this
+      folder: <code class="highlighter-rouge">apps/</code>.</li>
+  <li>The solutions can be found in this
+      subfolder: <code class="highlighter-rouge">projects/sel4-tutorials/solutions/</code>.</li>
+  <li>The slide presentations to guide you through the tutorials are
+      in this
+      file: <code class="highlighter-rouge">projects/sel4-tutorials/docs/CAmkESTutorial.pdf</code>.</li>
+</ul>
+
+<h2 id="what-next">What next?</h2>
+
+<p>You can try building and running <a href="../Testing">seL4test</a></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4Test | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4Test</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#sel4test">seL4Test</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#getting-the-code">Getting the Code</a></li>
+<li class="toc-entry toc-h2"><a href="#build-it">Build it</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#configurations">Configurations</a></li>
+<li class="toc-entry toc-h3"><a href="#useful-configuration-options">Useful configuration options</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#building">Building</a></li>
+<li class="toc-entry toc-h2"><a href="#running-it">Running it</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#ia32">IA32</a></li>
+<li class="toc-entry toc-h3"><a href="#arm---kzm11">ARM - kzm11</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#testing-a-customised-kernel">Testing a Customised Kernel</a></li>
+<li class="toc-entry toc-h2"><a href="#running-a-subset-of-the-tests">Running a subset of the tests</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="sel4test">seL4Test</h1>
+
+<p><a href="https://github.com/seL4/sel4test-manifest">sel4test</a> is a test suite for seL4.</p>
+
+<p>First make sure you have
+<a href="/Getting_started#setting-up-your-machine">set up your machine</a>.</p>
+
+<h2 id="getting-the-code">Getting the Code</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir sel4test
+<span class="nb">cd </span>sel4test
+repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+<span class="nb">ls</span> 
+<span class="c"># kernel/ libs/ projects/ tools/ apps configs Kbuild Kconfig Makefile</span>
+</code></pre></div></div>
+
+<p>This clones the seL4 kernel, the test suite, some libraries used by the
+tests, and some tools used in the build process. By default, the current
+master branch of the kernel is cloned. To clone a specific version of
+the kernel and compatible libraries and tools, replace the</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init
+</code></pre></div></div>
+<p>line above with:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git -m 2.0.x.xml
+</code></pre></div></div>
+
+<p>In this example we clone version 2.0.x of the kernel, where “x” is the
+highest available minor version number. For more information on version
+numbers, see ReleaseProcess.</p>
+<h2 id="build-it">Build it</h2>
+<h3 id="configurations">Configurations</h3>
+
+<p>Default make configurations are provided for a number of platforms:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls configs 
+arndale_debug_xml_defconfig              inforce_release_xml_defconfig
+arndale_release_xml_defconfig            kzm_debug_xml_clang_defconfig
+bbone_debug_xml_defconfig                kzm_debug_xml_defconfig
+bbone_release_xml_defconfig              kzm_debug_xml_goanna_defconfig
+beagle_debug_xml_defconfig               kzm_release_xml_clang_defconfig
+beagle_release_xml_defconfig             kzm_release_xml_defconfig
+beagle_simulation_debug_xml_defconfig    kzm_release_xml_goanna_defconfig
+beagle_simulation_release_xml_defconfig  kzm_simulation_debug_xml_defconfig
+goanna-arm-gcc.profile                   kzm_simulation_release_xml_defconfig
+...
+</code></pre></div></div>
+
+<p>To use a specific config:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make ia32_simulation_release_xml_defconfig
+</code></pre></div></div>
+
+<p>This copies <code class="highlighter-rouge">configs/ia32_simulation_release_xml_defconfig</code> to
+<code class="highlighter-rouge">./.config</code>, and sets up various header files.</p>
+
+<p>You can look at the configuration options using</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+</code></pre></div></div>
+
+<p>Alternatively you can use any text editor to change <code class="highlighter-rouge">./.config</code>; if
+you change anything you need to rebuild header files with
+<code class="highlighter-rouge">make oldconfig</code>
+. It’s advisable also to make clean to clear out anything
+already built — the build system does not track as many dependencies as
+it ought to.</p>
+
+<h3 id="useful-configuration-options">Useful configuration options</h3>
+<p>For cross compilation (targeting ARM), you can set the cross compiler triple. This will
+typically be <strong>arm-linux-gnueabi-</strong> or <strong>arm-none-eabi-</strong>. Do
+<code class="highlighter-rouge">make menuconfig</code> and look for <strong>toolchain-options</strong></p>
+
+<p>Some of the default configurations specify a particular x86 compiler. It
+is usually safe to set the triple to the empty string when building for
+x86, if you have a multilib gcc installed.</p>
+
+<p>Fiddling with most of the other configuration options will lead to
+systems that will either not compile, or not run.</p>
+<h2 id="building">Building</h2>
+<p>When you’ve configured the system, you can build by doing</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make -j libmuslc &amp;&amp; make
+</code></pre></div></div>
+
+<p>Currently parallel builds do not work for the whole build, but it is
+worth using for the C library. The build system does however support
+ccache if you have it installed.</p>
+
+<p>A more comprehensive overview of the build system is available at
+<a href="/BuildSystemAnatomy/">BuildSystemAnatomy</a></p>
+
+<h2 id="running-it">Running it</h2>
+
+<h3 id="ia32">IA32</h3>
+<p>We will now build seL4test for ia32, to run on the QEMU
+simulator.</p>
+
+<p>The makefile provides a target to simulate ia32. Running the following
+command will run qemu and point it towards the image we just built.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make ia32_simulation_release_xml_defconfig
+make <span class="nt">-j</span> libmuslc <span class="o">&amp;&amp;</span> make
+make simulate-ia32
+</code></pre></div></div>
+
+<p>To exit qemu after the All is well in the universe message that
+indicates the test suite has passed, type <code class="highlighter-rouge">control-a x</code>.</p>
+
+<h3 id="arm---kzm11">ARM - kzm11</h3>
+
+<p>Let’s build the test suite for kzm_simulation_debug_xml_defconfig:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make kzm_simulation_debug_xml_defconfig
+make
+<span class="nb">ls </span>images
+<span class="c"># sel4test-driver-image-arm-imx31</span>
+</code></pre></div></div>
+
+<p>Run it in qemu:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-arm -nographic -M kzm -kernel images/sel4test-driver-image-arm-imx31
+ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
+  paddr=[82000000..8223001f]
+ELF-loading image 'kernel'
+  paddr=[80000000..80035fff]
+  vaddr=[f0000000..f0035fff]
+  virt_entry=f0000000
+ELF-loading image 'sel4test-driver'
+...
+&lt;testsuite&gt;
+        &lt;testcase classname="sel4test" name="TEST_BIND0001"&gt;
+Running test BIND0001 (Test that a bound tcb waiting on a sync endpoint receives normal sync ipc and notification notifications.)
+Test BIND0001 passed
+                &lt;system-out&gt; TEST_BIND0001
+&lt;/system-out&gt;
+        &lt;/testcase&gt;
+...
+</code></pre></div></div>
+
+<p>The test suite prints out
+JUnit-style XML which can be parsed by various tools.</p>
+
+<h2 id="testing-a-customised-kernel">Testing a Customised Kernel</h2>
+
+<p>Suppose you’ve got seL4 checked out in <code class="highlighter-rouge">\~/projects/seL4</code>, and sel4test in
+<code class="highlighter-rouge">\~/tests/sel4test</code>, and you have been making changes on a feature branch of seL4 named
+<code class="highlighter-rouge">awesome-new-feature</code>. You want to test if your modified kernel
+still passes all the tests in sel4test.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/tests/sel4tests/kernel
+git remote add feature ~/projects/seL4
+git fetch feature
+git checkout feature/awesome-new-feature
+<span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<p>Now the kernel in sel4test has been changed to your custom kernel.
+Now just build and run the test suite as above.</p>
+
+<h2 id="running-a-subset-of-the-tests">Running a subset of the tests</h2>
+<p>You can use a regular expression to select a subset of
+tests. This can be set using Kconfig, or the build shortcut
+<code class="highlighter-rouge">make select-test TEST=SCHED.*</code>. By default the test suite runs all tests.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

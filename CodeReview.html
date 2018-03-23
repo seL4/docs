@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Making a Pull Request (Long version) | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Making a Pull Request (Long version)</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  
+<h2 id="making-a-pull-request-long-version">Making a Pull Request (Long version)</h2>
+
+<p><em>This is much more detailed and can be applied to pull requests to any of our public repos.
+We don’t expect pull requests to documentation to be as involved.</em></p>
+
+<p>A pull request (PR) should communicate what the change is, and why it’s necessary.</p>
+<h3 id="title--description">Title + Description</h3>
+
+<ul>
+  <li>describe the change in english</li>
+  <li>explain why it’s necessary</li>
+  <li>give a context for the change
+    <ul>
+      <li>is it part of a greater set of changes?</li>
+      <li>are any concurrent PRs dependant on this PR?</li>
+    </ul>
+  </li>
+  <li>explain what tests you have performed. e.g. “built all sel4test configs, ran sel4test debug+release on x86 and sabre”</li>
+</ul>
+
+<h3 id="reviewers">Reviewers</h3>
+
+<ul>
+  <li>Someone will review your work based on being familiar with the code you’re changing.
+    <ul>
+      <li>If you want a particular person to review you can tag them.</li>
+      <li>If there hasn’t been any activity after a couple of days, feel free to bump the post.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="commits">Commits</h3>
+
+<ul>
+  <li>the sequence of commits presented in a PR should be “coherent”
+    <ul>
+      <li>no commits that revert or fix mistakes in previous commits that are part of the same PR</li>
+      <li>no merge commits in the PR itself</li>
+      <li>some useful git commands to help make coherent commit history:
+        <ul>
+          <li>Interactive rebase (rewrite’s history): <code class="highlighter-rouge">git rebase -i</code></li>
+          <li>Interactive add (staging parts of files rather than entire files): <code class="highlighter-rouge">git add -p</code></li>
+          <li>Interactive reset (unstaging parts of files rather than entire files): <code class="highlighter-rouge">git reset -p</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>commits should make sense to people reading the commit log in the future
+    <ul>
+      <li>don’t mention people’s names in commit messages</li>
+      <li>don’t mention other PRs or commits to different repos (except where this is a clear interdependency)</li>
+    </ul>
+  </li>
+  <li>commits should get to the point
+    <ul>
+      <li>don’t sneak in commits unrelated to the change described by the PR</li>
+      <li>don’t sneak style corrections or whitespace into commits, unless the commit is specifically related to style or whitespace</li>
+    </ul>
+  </li>
+  <li>follow the git commit style guide: <a href="http://chris.beams.io/posts/git-commit/">http://chris.beams.io/posts/git-commit/</a>
+    <ul>
+      <li>Commits should follow the <a href="http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule">Scout rule</a></li>
+      <li>Commits should following the Coding Conventions</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="reviewing-a-pull-request">Reviewing a Pull Request</h2>
+
+<ul>
+  <li>review commits as well as code
+    <ul>
+      <li>see the commit section above</li>
+    </ul>
+  </li>
+  <li>be constructive with comments
+    <ul>
+      <li>see <a href="http://fishbowl.pastiche.org/2009/10/20/the_principle_of_charity_2/">http://fishbowl.pastiche.org/2009/10/20/the_principle_of_charity_2/</a></li>
+      <li>keep in mind that code reviews can be intimidating, especially for newcomers.</li>
+      <li>Criticise the code, not the person.</li>
+      <li>Comment on good things too! If you learn something from a review, or see someone going out of their way to do something awesome, or generally think a change is cool, say so!</li>
+      <li>Be respectful, and nice. We’re all here to learn, constructive criticism is what we’re aiming for.</li>
+      <li>phrasing comments as questions can help make them seem less intimidating:</li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bad</th>
+      <th>Better</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>This is broken and won’t work, do X</td>
+      <td>I think this would cause Y, have you considered X instead?</td>
+    </tr>
+    <tr>
+      <td>What were you attempting to do here?</td>
+      <td>I can’t see what this code is doing, could you explain further?</td>
+    </tr>
+    <tr>
+      <td>Why didn’t you just X?</td>
+      <td>Did you consider X?</td>
+    </tr>
+    <tr>
+      <td>This doesn’t make any sense</td>
+      <td>Can you please explain what this code is doing?</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pull-request-life-cycle">Pull Request Life Cycle</h2>
+<p>So you’ve made a PR and got some feedback from reviewers. What now?</p>
+<h3 id="making-changes-to-code-in-review">Making changes to code in review</h3>
+<p>If you made the PR from a branch in your forked repo, new commits pushed to that branch will appear in the PR automatically. This means you can update your PR to address comments or update due to changes on the remote repository.
+Whilst addressing reviewer comments you should not rewrite any of the existing commits in the PR, but only add new commits to the PR. This allows for reviewers to easily see, by looking at the commits, exactly what you did to address a problem, without the reviewer having to do a mental diff with what they remember previously being in the PR. Once reviewers are happy and there are no more changes to be made then history should be rewritten to fold those ‘fixme’ commits into a new coherent set of commits. If you rewrite history in a branch, you will need to use <code class="highlighter-rouge">git push -f</code> to push the changes to github.
+Once reviewers have approved your PR you should not push further changes with two exceptions</p>
+
+<ul>
+  <li>Trivial or optional comments where the reviewer did not mind if you changed something or not can be addressed</li>
+  <li>Rebasing onto the latest version of the remote, where the rebase was trivial and fully automatic</li>
+  <li>Sometimes a reviewer may raise an issue that cannot be fixed due to time constraints. If this is the case, discuss with the reviewer if there is an option to create an issue for cleaning up the code later. This should only be used in exceptional circumstances, for large, non-trivial refactors, see <a href="http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule">Scout rule</a>. In some cases it may be better to deliver the changes on a branch and merge into master later.</li>
+</ul>
+
+<p>If you must push new changes that should be re-reviewed you can ‘reset’ the approval of reviewers. Do <strong>not</strong> rely on a comment asking reviewers who have already approved to notice any changes
+Invalid reasons for additional changes without resetting approvals include</p>
+
+<ul>
+  <li>Adding features</li>
+  <li>Minor or small changes that you have since noticed but the reviewers didn’t</li>
+  <li>Rebasing where there is a complicated non-automatic merge</li>
+</ul>
+
+<p>In general you should only push to the review branch once you have addressed everything you can and are ready for reviewers to take another look. You can have a separate branch for pushing partial updates to if necessary (remember this is git, you can always have more branches), until you are reading to push to the review branch.</p>
+<h3 id="merge-or-rebase">Merge or rebase?</h3>
+<p>Our internal Bitbucket settings require merged PRs to not result in a merge commit, i.e. they must result in a fast-forward merge. This does not mean you cannot ‘simulate’ a merge by putting an actual merge commit in the PR, such that the final merge by Bitbucket ends up being a fast-forward. Whether branches should be rebased to have a ‘clean’ history, or whether they should be merged to preserve the ‘true’ history is a great tabs vs. discussion. Some pros (and implicitly cons) of each are</p>
+
+<p>merge</p>
+<ul>
+  <li>reflects actual development history and stores the state of the world at the point the author made the changes</li>
+  <li>prevents ‘broken’ commits that occur due to changes in the rebase that did not trigger a textual merge conflict</li>
+</ul>
+
+<p>rebase</p>
+<ul>
+  <li>easier to bisect over</li>
+  <li>prevents complicated details ‘hiding’ in a hard to inspect merge commit and forces resolving changes in the implementation whilst rebasing</li>
+</ul>
+
+<p>Neither merge nor rebase is always the correct solution. We favour rebase where possible and merge should only be done when it is too infeasible to rebase and test, and as such preserving the chronological history is valuable.</p>
+<h3 id="communicating-between-reviewers-and-reviewee">Communicating between reviewers and reviewee</h3>
+<p>Reviewers communicate with the reviewee primarily through comments. Comments fall into three broad categories</p>
+
+<ul>
+  <li>A notice of something that must be changed. The reviewer should create a task to indicate this is something that requires changing for them to press ‘approve’</li>
+  <li>Pointing out optional changes that the reviewer has no strong opinion on how something should be done, and is leaving it up to the reviewee / other reviewers. The reviewee should also create tasks for these so that reviewers know to expect this to be changed</li>
+  <li>General discussions, questions or encouragements</li>
+  <li>When reviewers are happy with the code being merged in as it is they should press approve. Once a PR is approved the reviewee can now assume that they can fix any optional issues if they want, but otherwise can press merge. Reviewers should not create tasks and assume they will be fixed correctly and press approve, rather they should observe the solution of any issues before approving.</li>
+</ul>
+
+<p>Reviewers should be honest about their ability to review and what they understand. This could mean a comment explaining that “the syntax of your code is fine but I have no knowledge of the code this is changing” to “I don’t know python and am removing myself from the PR”.
+If additional problems are noticed by you or others after you press approve you should un-approve (Bitbucket allows you to do this).
+Any history rewrites should follow the rules described in the previous section, and should still be followed by a comment explaining why the rewrite happened.
+Whilst you should only be pushing changes after addressing all changes, and this will notify reviewers, it can also be helpful to write a message explicitly telling reviewers what exactly you pushed (fixes, history rewrites, etc).</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

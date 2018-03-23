@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PC99 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">PC99</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="pc99">PC99</h1>
+<p>seL4 runs on 32-bit ia32 and 64-bit x64 machines, on qemu and on
+hardware.</p>
+
+<h2 id="simulation">Simulation</h2>
+
+<p>See <a href="/Testing#ia32">Testing</a>, which
+steps through building and running seL4 test on qemu.</p>
+
+<h2 id="real-hardware">Real Hardware</h2>
+<p>When running on real hardware console output will be
+over serial. You will need to plug a serial cable into your machine to
+see any output.</p>
+
+<p>The build system produces a multiboot compliant image for x86; a grub2
+stanza is here, but we usually boot via PXE for convenience.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry "Load seL4 VM" --class os {
+    load_video
+    insmod gzio
+    insmod part_msdos
+    insmod ext2
+    set root='(hd0,msdos2)'
+    multiboot /boot/sel4kernel
+    module /boot/sel4rootserver
+}
+</code></pre></div></div>
+
+<p>Booting via PXEBOOT using
+<a href="http://www.syslinux.org/wiki/index.php?title=PXELINUX">syslinux PXELINUX</a> requires setting up a tftp and dhcp server on the network
+that the machine you want to boot is connected to. This
+<a href="https://debian-administration.org/article/478/Setting_up_a_server_for_PXE_network_booting">debian page</a> explains how to setup a tftp and dhcp server, and the
+<a href="http://www.syslinux.org/wiki/index.php?title=Download">syslinux</a>
+site has a download for pxelinux which we load over PXEBOOT
+that then can load seL4. The configuration for pxelinux.cfg/default is
+provided below.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label seL4
+        kernel mboot.c32
+        append kernel-ia32-pc99 --- apps-ia32-pc99
+</code></pre></div></div>
+
+<h2 id="booting-off-usb-with-syslinux">Booting off USB with syslinux</h2>
+
+<p>Use syslinux to create a bootable USB stick as follows.</p>
+
+<p>Assuming your USB flash drive is at <code class="highlighter-rouge">/dev/sdb</code> with a FAT partition at
+<code class="highlighter-rouge">/dev/sdb1</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>install-mbr /dev/sdb
+syslinux <span class="nt">--install</span> /dev/sdb1
+mount /dev/sdb1 /mnt
+cp images/sel4test-driver-image-ia32-pc99 /mnt/rootserver
+cp images/kernel-ia32-pc99 /mnt/sel4kernel
+<span class="nb">cat</span> <span class="o">&gt;</span> /mnt/syslinux.cfg <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+SERIAL 0 115200
+DEFAULT seL4test
+LABEL seL4test
+    kernel mboot.c32
+    append sel4kernel --- rootserver
+</span><span class="no">EOF
+</span>cp /usr/lib/syslinux/modules/bios/mboot.c32 /mnt
+cp /usr/lib/syslinux/modules/bios/libcom32.c32 /mnt
+umount /mnt
+</code></pre></div></div>
+
+<p>Use <code class="highlighter-rouge">fdisk</code> to make sure the first partition is bootable.</p>
+
+<p>And you’re done. Output will come on the serial port</p>
+
+<p>Some more information about some of the hardware we use:</p>
+
+<ul>
+  <li><a href="/CMA34DBMC">CMA34DBMC</a></li>
+</ul>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

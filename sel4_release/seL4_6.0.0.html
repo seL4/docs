@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 6.0.0 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 6.0.0</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-version-600-release">seL4 Version 6.0.0 Release</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 6.0.0</code> with the following changes:</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<h3 id="arm-32-bit-smp">ARM 32-bit SMP</h3>
+
+<ul>
+  <li>Works (and tested) only on Sabre/ARM with up to 4 cores.</li>
+  <li>Using the big kernel lock (same as x86 implementation).</li>
+  <li>Boot core is assumed to have an ID of 0.</li>
+  <li>Kernel bootstraps and initialises data structures only on the boot core.</li>
+  <li>Root task proceeds on the boot core.</li>
+  <li>Cores are assumed to have linear IDes.</li>
+</ul>
+
+<h4 id="arm-ipi-caveats">ARM IPI caveats:</h4>
+
+<ul>
+  <li>Reserving the first two per-core SGIs for seL4’s IPI operations: 0
+    to do a remote call, 1 to reschedule.</li>
+  <li>Relying on GIC.</li>
+  <li>Reschedule IPIs are sent when migrating a thread.</li>
+  <li>Remote call IPIs are sent if TLB and/or cache maintenance
+    operations are required.</li>
+  <li>Remote FPU operations (when migrating threads that use HW FPU).</li>
+</ul>
+
+<h3 id="arm-fpu">ARM FPU</h3>
+<p>ARMv7 32-bit support is added to implement a lazy FP save/restore
+mechanism, required for user threads when they use the FPU. The
+following caveats exist:</p>
+
+<ul>
+  <li>Only support synchronous exceptions. No support for asynchronous ones.</li>
+  <li>VFP opcodes are used instead of normal instructions to discard
+    compiler warnings/errors.</li>
+  <li>Support is limited to specific ARM subarchitectures we support and
+    tested this feature on.</li>
+  <li>Disable the FPU by default if users are not using it to
+    avoid channels.</li>
+  <li>FPU support is not verified yet.</li>
+  <li>Will not work properly if using a VM that’s running alongside
+    other VMs/threads that are using the FPU.</li>
+  <li>Any trapped FPU instruction (e.g. traps that need support code or
+    deprecated vectored VFP operations) are forwarded to the user as
+    a fault.</li>
+</ul>
+
+<h2 id="changes">Changes</h2>
+
+<ul>
+  <li>aarch32 - Implement lazy FP save/restore</li>
+  <li>ARM SMP support</li>
+  <li>add <code class="highlighter-rouge">seL4_DebugDumpScheduler</code> debug syscall</li>
+  <li>x86: Split large structs into portions (See upgrade notes below)</li>
+  <li>License fixups</li>
+</ul>
+
+<h1 id="upgrade-notes">Upgrade notes</h1>
+
+<ul>
+  <li>This release is not source compatible with previous releases.</li>
+  <li><code class="highlighter-rouge">seL4_DebugDumpScheduler</code> has had its only argument removed as it
+      was unused.</li>
+  <li>On x86 some structs in the Bootinfo have been rearranged. This
+      only affects <code class="highlighter-rouge">seL4_VBEModeInfoBlock_t</code> which is used if VESA
+      BIOS Extensions (VBE) information is being used.</li>
+</ul>
+
+<h1 id="full-changelog">Full changelog</h1>
+<p>Use <code class="highlighter-rouge">git log 5.2.0..6.0.0</code> in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf">6.0.0 manual</a> included in the release or ask on the mailing list!</p>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Toolchains on CentOS and Fedora | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Toolchains on CentOS and Fedora</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="toolchains-on-centos-and-fedora">Toolchains on CentOS and Fedora</h1>
+<p>These instructions are for
+information only — at NICTA we usually use Debian-derived build systems</p>
+
+<p>Follow the instructions in <a href="#all-rpm-based-systems">All RPM-Based</a> Variants then
+the ones for your system.</p>
+
+<ul>
+  <li><a href="#fedora">Fedora</a></li>
+  <li><a href="#centos">CentOS</a></li>
+</ul>
+
+<h2 id="all-rpm-based-systems">All RPM-Based Systems</h2>
+<h3 id="the-basics">The Basics</h3>
+<p>To get a usable build system, install the Development Tools
+group, <code class="highlighter-rouge">which</code>, <code class="highlighter-rouge">ncurses-devel</code> and the <code class="highlighter-rouge">python-tempita</code>
+templating library. You can also install <code class="highlighter-rouge">ccache</code> to speed second
+and subsequent compilations.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum groupinstall <span class="s1">'Development Tools'</span>
+<span class="nb">sudo </span>yum install which ncurses-devel python-tempita ccache
+</code></pre></div></div>
+
+<h3 id="extras-for-camkes">Extras for CAmkES</h3>
+<p>Projects using CAmkES (the seL4 component
+system) need Haskell and some extra python libraries in addition to the
+standard build tools.</p>
+
+<p>You can get most of them from the repositories; some Haskell and python
+libraries have to be installed manually. On CentOS you’ll need to enable
+the EPEL repository to be able to install Haskell.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum install epel-release
+<span class="nb">sudo </span>yum groupinstall haskell
+<span class="nb">sudo </span>yum install cabal-install
+cabal update
+cabal install <span class="nt">--user</span> data-ordlist missingH split
+<span class="nb">sudo </span>yum install python-pip
+<span class="nb">sudo </span>pip install <span class="nt">--upgrade</span> pip
+pip install <span class="nt">--user</span> pyelftools jinja2 ply
+</code></pre></div></div>
+
+<h2 id="fedora">Fedora</h2>
+<p>To build for any of the ARM
+targets you need an arm cross compiler; to run on the simulator you need
+<code class="highlighter-rouge">qemu</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install <span class="s1">'arm-none-*'</span> qemu
+</code></pre></div></div>
+
+<h2 id="centos">CentOS</h2>
+
+<p>Cross compilers are available from the EPEL repository. Do</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum install gcc-arm-linux-gnu
+</code></pre></div></div>
+
+<p>The resulting <code class="highlighter-rouge">CROSS_COMPILE_PREFIX</code> should be <code class="highlighter-rouge">arm-linux-gnu</code> in the
+toolchain menus</p>
+
+<p>CentOS 6 and earlier also do not prepackage qemu. You will have to build
+it from source.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum install glib2-devel
+git clone git://git.qemu.org/qemu.git
+<span class="nb">cd </span>qemu
+./configure <span class="nt">--target-list</span><span class="o">=</span>arm-softmmu
+make <span class="nt">-j</span>
+</code></pre></div></div>
+<p>The resulting qemu binary is in <code class="highlighter-rouge">arm-softmmu/qemu-system-arm</code></p>
+
+<p>Note that cabal installs per-user, not into system directories.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

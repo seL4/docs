@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAmkES Tutorial 1 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">CAmkES Tutorial 1</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#camkes-tutorial-1">CAmkES Tutorial 1</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#required-reading">Required Reading</a></li>
+<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
+<li class="toc-entry toc-h3"><a href="#task-2">TASK 2</a></li>
+<li class="toc-entry toc-h3"><a href="#task-3">TASK 3</a></li>
+<li class="toc-entry toc-h3"><a href="#task-4">TASK 4</a></li>
+<li class="toc-entry toc-h3"><a href="#task-5">TASK 5</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#done">Done</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="camkes-tutorial-1">CAmkES Tutorial 1</h1>
+<p>This tutorial is an introduction to
+CAmkES: bootstrapping a basic static CAmkES application, describing its
+components, and linking them together.</p>
+
+<h2 id="required-reading">Required Reading</h2>
+<p>While it’s possible to successfully complete the
+CAmkES tutorials without having read the
+<strong><a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md">CAmkES manuals</a></strong>, the manuals really explain everything in plain English,
+and any aspiring CAmkES dev should read the
+<strong><a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md">CAmkES manuals</a></strong> before attempting to complete the tutorials.</p>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+
+<ul>
+  <li>Understand the structure of a CAmkES application, as a
+      described, well-defined, static system.</li>
+  <li>Understand the file-layout of a CAmkES ADL project.</li>
+  <li>Become acquainted with the basics of creating a practical
+      CAmkES application.</li>
+</ul>
+
+<h2 id="walkthrough">Walkthrough</h2>
+
+<h3 id="task-1">TASK 1</h3>
+
+<p>The fundamentals of CAmkES are the
+component, the interface and the connection. Components are logical
+groupings of code and resources. They communicate with other component
+instances via well-defined interfaces which must be statically defined,
+over communication channels. This tutorial will lead you through the
+construction of a CAmkES application with two components: an Echo
+server, and its Client that makes calls to it. These components are
+defined here:</p>
+
+<ul>
+  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes</a></li>
+  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes</a></li>
+</ul>
+
+<p>Find the Component manual section here:
+<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component</a></p>
+
+<h3 id="task-2">TASK 2</h3>
+<p>The second fundamental component of CAmkES applications
+is the Connection: a connection is the representation of a method of
+communication between two software components in CAmkES. The underlying
+implementation may be shared memory, synchronous IPC, notifications or
+some other implementation-provided means. In this particular tutorial,
+we are using synchronous IPC. In implementation terms, this boils down
+to the seL4_Call() syscall on seL4.</p>
+
+<p>Find the “Connection” keyword manual section here:
+<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection</a></p>
+
+<h3 id="task-3">TASK 3</h3>
+<p>All communications over a CAmkES connection must be well
+defined: static systems’ communications should be able to be reasoned
+about at build time. All the function calls which will be delivered over
+a communication channel then, also are well defined, and logically
+grouped so as to provide clear directional understanding of all
+transmissions over a connection. Components are connected together in
+CAmkES, yes – but the interfaces that are exposed over each connection
+for calling by other components, are also described. There are different
+kinds of interfaces: Dataports, Procedural interfaces and Notifications.</p>
+
+<p>This tutorial will lead you through the construction of a Procedural
+interface, which is an interface over which function calls are made
+according to a well-defined pre-determined API. The keyword for this
+kind of interface in CAmkES is “procedure”. The definition of this
+Procedure interface may be found here:
+<a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4</a></p>
+
+<p>Find the “Procedure” keyword definition here:
+<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure</a></p>
+
+<h3 id="task-4">TASK 4</h3>
+<p>Based on the ADL, CAmkES generates boilerplate which
+conforms to your system’s architecture, and enables you to fill in the
+spaces with your program’s logic. The two generated files in this
+tutorial application are, in accordance with the Components we have
+defined:</p>
+
+<ul>
+  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c</a></li>
+  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c</a></li>
+</ul>
+
+<p>Now when it comes to invoking the functions that were defined in the
+Interface specification
+(<a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4</a>),
+you must prefix the API function name with the name of the Interface
+instance that you are exposing over the particular connection.</p>
+
+<p>The reason for this is because it is possible for one component to
+expose an interface multiple times, with each instance of that interface
+referring to a different function altogether. For example, if a
+composite device, such as a network card with with a serial interface
+integrated into it, exposes two instances of a procedural interface that
+has a particular procedure named “send()” – how will the caller of
+“send()” know whether his “send()” is the one that is exposed over the
+NIC connection, or the serial connection?</p>
+
+<p>The same component provides both. Therefore, CAmkES prefixes the
+instances of functions in an Interface with the Interface-instance’s
+name. In the dual-function NIC device’s case, it might have a
+<code class="highlighter-rouge">provides &lt;INTERFACE_NAME&gt; serial</code> and a <code class="highlighter-rouge">provides &lt;INTERFACE_NAME&gt; nic</code>.
+When a caller wants to call for the NIC-send, it would call,
+nic_send(), and when a caller wants to invoke the Serial-send, it would
+call, “serial_send()”.</p>
+
+<p>So if the “Hello” interface is provided once by “Echo” as “a”, you would
+call for the “a” instance of Echo’s “Hello” by calling for “a_hello()”.
+But what if Echo had provided 2 instances of the “Hello” interface, and
+the second one was named “a2”? Then in order to call on that second
+“Hello” interface instance on Echo, you would call “a2_hello()”.</p>
+
+<p>Fill in the function calls in the generated C files!</p>
+
+<h3 id="task-5">TASK 5</h3>
+<p>Here you define the callee-side invocation functions for
+the Hello interface exposed by Echo.</p>
+
+<h2 id="done">Done</h2>
+<p>Congratulations: be sure to read up on the keywords and
+structure of ADL: it’s key to understanding CAmkES. And well done on
+writing your first CAmkES application.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

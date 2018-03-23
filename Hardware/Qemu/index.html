@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 on Qemu | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 on Qemu</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#sel4-on-qemu">seL4 on Qemu</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#compilation">Compilation</a></li>
+<li class="toc-entry toc-h2"><a href="#running-qemu">Running Qemu</a></li>
+<li class="toc-entry toc-h2"><a href="#boot-from-a-hard-disk">Boot from a Hard Disk</a></li>
+<li class="toc-entry toc-h2"><a href="#hardware-emulation">Hardware emulation</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="sel4-on-qemu">seL4 on Qemu</h1>
+
+<p>This is a quick guide on how to run seL4 x86/x64 in
+<a href="http://www.qemu.org/">Qemu</a>. QEMU is a generic and open source
+machine emulator and virtualizer, and can emulate different
+architectures on different systems.</p>
+
+<p>Qemu can run ARM targets too, more info about that can be found in
+<a href="/Debugging_guide#qemu">Debugging Guide</a>.</p>
+
+<p>We used Ubuntu 16.04 for our tests, but in theory qemu ‘‘should’’ work
+the same under Windows/MacOS.</p>
+
+<p>Note that <a href="../VMware">VMWare</a>
+can be used to run seL4 too, but it requires a licensed version of
+VMWare workstation (although the free VMWare player can be used too -
+but it doesn’t offer a lot of features, making its use even more
+cumbersome). VMWare takes longer to load and is more “heavy-weight” than
+qemu. But the main reason for going with qemu is finer control over what
+hardware is emulated. We ran into some significant problems running seL4
+on VMWare because of hardware mismatch.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>With a recent Ubuntu (16.04+) all you need to do should be</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt install qemu-system-x86
+</code></pre></div></div>
+
+<p>Your host machine has to have a CPU that supports Vt-x virtualization
+(for Intel CPUs), or AMD-V (for AMD CPUs, but that wasn’t tested). Any
+newer i7 core should have Vt-x. Note that you might have to enable it
+first from BIOS. You can always check by <code class="highlighter-rouge">lscpu</code> and look for <strong>vmx</strong> flag.</p>
+
+<h2 id="compilation">Compilation</h2>
+
+<p>We are using <a href="https://github.com/seL4/camkes-vm">camkes-vm</a>
+Github repository. It contains Virtual Machine build as a CAmkES
+component. More information about the VM on seL4 can be found on
+<a href="/CAmkESVM">CAmkESVM</a> page.</p>
+
+<p>I replicate some of the steps described there to make it easier to
+follow. First pull the code from the repository using <code class="highlighter-rouge">repo</code> tool.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir test_default
+<span class="nb">cd </span>test_default
+repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-manifest.git
+repo sync
+</code></pre></div></div>
+
+<p>We use <code class="highlighter-rouge">optiplex9020</code> configuration, because it is the most generic
+one. The other configurations for
+<a href="/CMA34DBMC">CMA34DBMC</a> can be
+compiled too, but you can’t run them properly in qemu because they
+require a very specific hardware.</p>
+
+<p>Type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make clean
+make optiplex9020_defconfig
+make silentoldconfig
+make
+</code></pre></div></div>
+
+<p>If everything goes fine, you should end up with two binaries in
+<code class="highlighter-rouge">images</code> directory: <code class="highlighter-rouge">capdl-loader-experimental-image-ia32-pc99</code>
+which contains the VM (and other components) and <code class="highlighter-rouge">kernel-ia32-pc99</code>
+which is the seL4 kernel.</p>
+
+<h2 id="running-qemu">Running Qemu</h2>
+
+<p>To run the images we just compiled, do:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>images
+qemu-system-x86_64 <span class="nt">-m</span> 512 <span class="nt">-kernel</span> kernel-ia32-pc99 <span class="nt">-initrd</span> capdl-loader-experimental-image-ia32-pc99 <span class="nt">--enable-kvm</span> <span class="nt">-smp</span> 2 <span class="nt">-cpu</span> Nehalem,+vmx <span class="nt">-nographic</span>
+</code></pre></div></div>
+
+<p>And you should be able to see the login prompt after a while:</p>
+
+<p><code class="highlighter-rouge">Welcome to Buildroot buildroot login:</code></p>
+
+<p>Login with the username “root” and the password “root”. Again, for more
+details about the VM, go to
+<a href="/CAmkESVM">CAmkESVM</a> page.</p>
+
+<p>The qemu arguments are:</p>
+
+<ol>
+  <li><strong>qemu-system-x86_64</strong> - emulate x86/x64 system</li>
+  <li><strong>-m 512</strong> - amount of RAM dedicated to qemu VM</li>
+  <li><strong>-kernel <em>img_name</em></strong> - path to kernel image</li>
+  <li><strong>-initrd <em>img_name</em></strong> - path to application image</li>
+  <li><strong>–enable-kvm</strong> - necessary to enable Vt-x in qemu (seL4
+can’t start a VM without this flag)</li>
+  <li><strong>-smp 2</strong> - number of CPUs dedicated to qemu VM</li>
+  <li><strong>-cpu Nehalem,+vmx</strong> - because some of the newer CPUs come
+with features that the Linux running in seL4 VM doesn’t
+recognize (such as advanced power management etc) we had better
+luck using a default qemu CPU and pass it only the <strong>vmx</strong>
+flag from the host CPU (again, your host machine must have
+Vt-x support). You should be able to use other CPU types (run
+qemu with <strong>-cpu help</strong>) and just pass the <strong>vmx</strong> flag, but
+in our case Nehalem was closest to the host machine CPU.</li>
+  <li><strong>-nographic</strong> - the output of the serial port goes to
+the terminal. You can instead run qemu with <strong>-serial
+/dev/XX/XX</strong> where the serial device is the output of <strong>tty</strong>
+command in the terminal. In that case you get graphical screen
+and read-only serial output</li>
+</ol>
+
+<h2 id="boot-from-a-hard-disk">Boot from a Hard Disk</h2>
+
+<p>In some cases it can be useful too boot from a hard drive, instead of
+running a kernel image directly. The main reason could be that you need
+to use a frame buffer to display graphical output. ‘‘Qemu does not
+support VBE with loading a kernel with –kernel. You need to use GRUB to
+load the kernel for the results you want, as that initializes VBE. Qemu
+with -vga std DOES support VBE, it just wont initialize it for you (like
+grub).’’ (more
+<a href="http://f.osdev.org/viewtopic.php?f=1&amp;t=27927">here</a>)</p>
+
+<p>The most convenient way to get a hdd set up, was to first set up a
+VMWare virtual hard drive as described in
+<a href="../VMware">VMWare</a> (i.e.
+install linux, modify grub, save images on the hdd). The second step is
+to convert the VMDK image to qcow2 (qemu) image. Use <code class="highlighter-rouge">qemu-img</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-img convert <span class="nt">-f</span> vmdk <span class="nt">-O</span> qcow2 image.vmdk image.img
+</code></pre></div></div>
+
+<p>You can certainly do this directly with a qemu image, without the
+conversion step, but we din’t test it.</p>
+
+<p>Once you have the qemu image, you can run qemu with the following
+command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-x86_64 <span class="nt">-m</span> 512 <span class="nt">-hda</span> sel4_test.img <span class="nt">--enable-kvm</span> <span class="nt">-smp</span> 2 <span class="nt">-cpu</span> Nehalem,+vmx <span class="nt">-serial</span> /dev/pts/3 <span class="nt">-vga</span> std
+</code></pre></div></div>
+
+<p>Where the <strong>-vga std</strong> option should pass the frame buffer to the
+qemu VM. Having Linux in seL4 VM print something on the screen (like a
+login prompt) is still under development though.</p>
+
+<h2 id="hardware-emulation">Hardware emulation</h2>
+
+<p>Qemu by default provides a virtual Ethernet controller and VGA
+controller. A good way to find what devices are available is to install
+Linux on a virtual hard drive and then probe what is available.</p>
+
+<p><a href="https://en.wikibooks.org/wiki/QEMU/Images#Creating_an_image">Qemu wiki</a> provides a good description how to create a new image, and how
+to boot from an iso file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-img create <span class="nt">-f</span> qcow2 linux.img 3G qemu-system-x86_64 <span class="nt">-m</span> 256 <span class="nt">-hda</span> linux.img <span class="nt">-cdrom</span> minimal.iso <span class="nt">-enable-kvm</span>
+</code></pre></div></div>
+
+<p>We used
+<a href="https://help.ubuntu.com/community/Installation/MinimalCD">Ubuntu Minimal</a> as the ISO.</p>
+
+<p>Once you get your Linux system installed, you can type <strong>lspci</strong>, you
+should see something like this:</p>
+
+<p><img style="width: 100%;" src="qemu_vga.png" alt="VGA" />
+<img style="width: 100%;" src="qemu_ethernet.png" alt="Ethernet" /></p>
+
+<p>The first device is the VGA controller, the second one is the Ethernet
+controller. You can verify that seL4 can see these devices, because when
+you run the seL4 images from before, seL4 scans the pci bus too. Here is
+the output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PCI :: 00.02.00 : Unknown vendor ID. Unknown device ID. <span class="o">(</span>vid 0x1234 did 0x1111<span class="o">)</span> line0 pin0 
+    BAR0 : <span class="o">[</span> mem 0xfd000000 sz 0x1000000 szmask 0xff000000 prefetch <span class="o">]</span>
+    BAR2 : <span class="o">[</span> mem 0xfebf0000 sz 0x1000 szmask 0xfffff000 <span class="o">]</span>
+lib_pci_scan_dev found pci device 0 3
+    BASE_ADDR[0] <span class="nt">----</span>
+        base_addr_space[0]: 0x0 <span class="o">[</span>PCI_BASE_ADDRESS_SPACE_MEMORY]
+        base_addr_type[0]: 0x0 <span class="o">[</span> 32bit <span class="o">]</span>
+        base_addr_prefetchable[0]: no
+        base_addr[0]: 0xfebc0000
+        base_addr_size_mask[0]: 0xfffe0000
+    BASE_ADDR[1] <span class="nt">----</span>
+        base_addr_space[1]: 0x1 <span class="o">[</span>PCI_BASE_ADDRESS_SPACE_IO]
+        base_addr_type[1]: 0x0 <span class="o">[</span> 32bit <span class="o">]</span>
+        base_addr_prefetchable[1]: no
+        base_addr[1]: 0xc000
+        base_addr_size_mask[1]: 0xffffffc0
+
+PCI :: 00.03.00 : intel Unknown device ID. <span class="o">(</span>vid 0x8086 did 0x100e<span class="o">)</span> line11 pin1
+    BAR0 : <span class="o">[</span> mem 0xfebc0000 sz 0x20000 szmask 0xfffe0000 <span class="o">]</span>
+    BAR1 : <span class="o">[</span> io 0xc000 sz 0x40 szmask 0xffffffc0 <span class="o">]</span>
+</code></pre></div></div>
+
+<p>where the first device is the VGA controller, and the second one is the
+Ethernet controller. Qemu also passes USB Host controller and PCI
+bridge. Indeed, if you log into the seL4 VM Linux, you wont see any of
+these devices because by default they aren’t passed to the Linux VM.</p>
+
+<p>Later we will add more info about how to modify the camkes to be
+actually able to use this hardware.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

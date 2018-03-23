@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inforce | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Inforce</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="inforce">Inforce</h1>
+
+<p>This page contains info on building seL4 for the
+<a href="http://www.inforcelive.com/index.php?route=product/product&amp;product_id=53">Inforce IFC6410</a> development board, running a Qualcomm Krait processor that
+is like an A15.</p>
+
+<h1 id="building-for-the-inforce-ifc6410">Building for the Inforce IFC6410</h1>
+<p>To use default build config, use
+“inforce_” configurations.</p>
+
+<p>To make a bootable image you will need the Android bootimg tool. On
+Debian, do</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install android-mkbootimg
+</code></pre></div></div>
+<p>Then when you have built your app, you can create a boot image with
+these commands (substituting the name of your output file for
+“sel4test-driver-image-arm-apq8064”):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> ramdisk
+objcopy <span class="nt">-O</span> binary sel4test-driver-image-arm-apq8064 sel4test-driver-image-arm-apq8064.bin
+mkbootimg <span class="nt">--kernel</span> sel4test-driver-image-arm-apq8064.bin <span class="nt">--ramdisk</span> ramdisk <span class="nt">--base</span> <span class="s2">"0x82000000"</span> <span class="nt">--output</span> boot.img
+</code></pre></div></div>
+<h2 id="serial-console">Serial Console</h2>
+<p>The serial port on the Inforce is at RS232 voltage levels. Connect to a
+normal serial port, then use minicom or screen to talk to it, at 115200
+baud, no parity, eight bits.</p>
+
+<h1 id="booting-sel4">Booting seL4</h1>
+<p>Force the board to boot into Fastboot mode by shorting
+pins 26 and 30 on the large header — see
+<a href="https://web.archive.org/web/20150526213626/http://mydragonboard.org/2013/forcing-ifc6410-into-fastboot">This blog post</a> for details.</p>
+
+<p>You will see something like this on the serial port:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Android Bootloader - UART_DM Initialized!!!
+[0] welcome to lk
+
+[10] platform_init()
+[10] target_init()
+[130] USB init ept @ 0x88f4e000
+[170] fastboot_init()
+[170] udc_start()
+[300] -- reset --
+[300] -- portchange --
+[470] fastboot: processing commands
+</code></pre></div></div>
+<p>You can then do:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fastboot boot boot.img
+</code></pre></div></div>
+<p>and should then see the output from your
+app.</p>
+
+<h1 id="caveats">CAVEATS</h1>
+<p>The timer driver is not complete, which means that two of
+the tests in seL4test will fail.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

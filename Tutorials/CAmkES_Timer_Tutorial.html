@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAmkES Timer Tutorial | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">CAmkES Timer Tutorial</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="camkes-timer-tutorial">CAmkES Timer Tutorial</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>This exercise is to set up a timer driver in CAmkES and use it to delay
+for 2 seconds.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>We’ll be working within <code class="highlighter-rouge">apps/hello-camkes-timer</code> for this tutorial.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make arm_hello-camkes-timer_defconfig
+</code></pre></div></div>
+
+<h2 id="walkthrough">Walkthrough</h2>
+
+<h3 id="task-1">TASK 1</h3>
+
+<p>Start in <code class="highlighter-rouge">hello-camkes-timer.camkes</code>.</p>
+
+<p>Instantiate some components. You’re already given one component instance</p>
+<ul>
+  <li><code class="highlighter-rouge">client</code>. You need to instantiate two more - a timer driver, and a
+component instance representing the timer hardware itself. Look in
+<code class="highlighter-rouge">components/Timer/Timer.camkes</code> for the definitions of both of these
+components.</li>
+</ul>
+
+<p>Note the lines
+<code class="highlighter-rouge">connection seL4RPCCall hello_timer(from client.hello, to timer.hello);</code>
+and <code class="highlighter-rouge">timer.sem_value = 0;</code>. They assume that the name of the timer
+‘‘driver’’ will be <code class="highlighter-rouge">timer</code>. If you wish to call your driver something
+else, you’ll have to change these lines.</p>
+
+<h3 id="task-2">TASK 2</h3>
+
+<p>Connect timer driver to timer hardware. The timer hardware component
+exposes two interfaces which must be connected to the timer driver. One
+of these represents memory-mapped registers. The other represents an
+interrupt.</p>
+
+<h3 id="task-3">TASK 3</h3>
+
+<p>Configure the timer hardware component instance with device-specific
+info. The physical address of the timer’s memory-mapped registers, and
+its irq number must both be configured.</p>
+
+<h3 id="task-4">TASK 4</h3>
+
+<p>Now open <code class="highlighter-rouge">components/Timer/src/timer.c</code>.</p>
+
+<p>We’ll start by completing the <code class="highlighter-rouge">irq_handle</code> function, which is called in
+response to each timer interrupt. Note the name of this function. It
+follows the naming convention <code class="highlighter-rouge">&lt;interface&gt;_handle</code>, where
+<code class="highlighter-rouge">&lt;interface&gt;</code> is the name of an IRQ interface connected with
+<code class="highlighter-rouge">seL4HardwareInterrupt</code>. When an interrupt is received on the interface
+<code class="highlighter-rouge">&lt;interface&gt;</code>, the function <code class="highlighter-rouge">&lt;interface&gt;_handle</code> will be
+called.</p>
+
+<p>The implementation of the timer driver itself isn’t directly in this
+file. The driver is implemented in a CAmkES-agnostic way in a library
+called <code class="highlighter-rouge">libplatsupport</code>.</p>
+
+<p>This task is to call the <code class="highlighter-rouge">timer_handle_irq</code> function from
+<code class="highlighter-rouge">libplatsupport</code>, to inform the driver that an interrupt has occurred.</p>
+
+<h3 id="task-5">TASK 5</h3>
+
+<p>Acknowledge the interrupt. CAmkES generates the seL4-specific code for
+ack-ing an interrupt and provides a function
+<code class="highlighter-rouge">&lt;interface&gt;_acknowldege</code> for IRQ interfaces (specifically those
+connected with <code class="highlighter-rouge">seL4HardwareInterrupt</code>).</p>
+
+<h3 id="task-6">TASK 6</h3>
+
+<p>Now we’ll complete <code class="highlighter-rouge">hello__init</code> - a function which is called once
+before the component’s interfaces start running.</p>
+
+<p>We need to initialise a timer driver from <code class="highlighter-rouge">libplatsupport</code> for this
+device, and store a handle to the driver in the global variable
+<code class="highlighter-rouge">timer_drv</code>.</p>
+
+<h3 id="task-7">TASK 7</h3>
+
+<p>Note that this task is to understand the existing code. You won’t have
+to modify any files.</p>
+
+<p>Implement the <code class="highlighter-rouge">timer_inf</code> RPC interface. This interface is defined in
+<code class="highlighter-rouge">interfaces/timer.camkes</code>, and contains a single method, <code class="highlighter-rouge">sleep</code>, which
+should return after a given number of seconds. in
+<code class="highlighter-rouge">components/Timer/Timer.camkes</code>, we can see that the <code class="highlighter-rouge">timer_inf</code> interface
+exposed by the <code class="highlighter-rouge">Timer</code> component is called <code class="highlighter-rouge">hello</code>. Thus, the function we
+need to implement is called <code class="highlighter-rouge">hello_sleep</code>.</p>
+
+<h3 id="task-8">TASK 8</h3>
+
+<p>Tell the timer to interrupt after the given number of seconds. The
+<code class="highlighter-rouge">timer_oneshot_relative</code> function from <code class="highlighter-rouge">libplatsupport</code> will help. Note
+that it expects its time argument to be given in nanoseconds.</p>
+
+<p>Note the existing code in <code class="highlighter-rouge">hello_sleep</code>. It waits on a binary semaphore.
+<code class="highlighter-rouge">irq_handle</code> will be called on another thread when the timer interrupt
+occurs, and that function will post to the binary semaphore, unblocking
+us and allowing the function to return after the delay.</p>
+
+<h2 id="output">Output</h2>
+
+<p>Build and run with:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make simulate
+</code></pre></div></div>
+
+<p>Expect the following output with a 2 second delay between the last 2
+lines:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting the client
+------Sleep for 2 seconds------
+After the client: wakeup
+</code></pre></div></div>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Differences between CAmkES 2 and 3 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Differences between CAmkES 2 and 3</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#differences-between-camkes-2-and-3">Differences between CAmkES 2 and 3</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#rich-types-for-settings">Rich Types for Settings</a></li>
+<li class="toc-entry toc-h2"><a href="#parametrised-buf-type">Parametrised Buf Type</a></li>
+<li class="toc-entry toc-h2"><a href="#asynch-connector-renamed">Asynch Connector Renamed</a></li>
+<li class="toc-entry toc-h2"><a href="#non-volatile-dataports">Non-Volatile Dataports</a></li>
+<li class="toc-entry toc-h2"><a href="#many-to-many-connections">Many-to-Many Connections</a></li>
+<li class="toc-entry toc-h2"><a href="#hardware-component-configuration-attributes">Hardware Component Configuration Attributes</a></li>
+<li class="toc-entry toc-h2"><a href="#interrupt-api">Interrupt API</a></li>
+<li class="toc-entry toc-h2"><a href="#hierarchical-components">Hierarchical Components</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="differences-between-camkes-2-and-3">Differences between CAmkES 2 and 3</h1>
+
+<h2 id="rich-types-for-settings">Rich Types for Settings</h2>
+
+<p>Previously all attribute settings were treated as strings by templates.
+Settings are now interpreted as an appropriate python type.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// list
+</span><span class="n">foo</span><span class="p">.</span><span class="n">bar</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">];</span>
+
+<span class="c1">// boolean
+</span><span class="n">moo</span><span class="p">.</span><span class="n">cow</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+<span class="c1">// string
+</span><span class="n">baz</span><span class="p">.</span><span class="n">qux</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
+
+<span class="c1">// dict
+</span><span class="n">crazy</span><span class="p">.</span><span class="n">stuff</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"key"</span> <span class="o">:</span> <span class="p">[</span><span class="s">"polymorphic"</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s">"list"</span><span class="p">,</span>
+                 <span class="p">{</span><span class="s">"hello"</span><span class="o">:</span><span class="nb">true</span><span class="p">}</span> <span class="p">]</span> <span class="p">};</span>
+
+<span class="c1">// appropriate numeric type 
+</span><span class="n">arithmetic</span><span class="p">.</span><span class="n">expressions</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mh">0x9</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Arbitrary ids are no longer allowed as setting values:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// error
+</span></code></pre></div></div>
+
+<h2 id="parametrised-buf-type">Parametrised Buf Type</h2>
+
+<p>The <code class="highlighter-rouge">Buf</code> dataport type can now be optionally parametrised by the
+size (in bytes) of the dataport. The syntax for this is <code class="highlighter-rouge">Buf(size)</code>.
+If left unspecified, the default size is 4096 bytes.</p>
+
+<p>It is an error to connect dataport interfaces of different sizes.</p>
+
+<p>E.g.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Foo</span> <span class="p">{</span>
+    <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">8192</span><span class="p">)</span> <span class="n">dp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">component</span> <span class="n">Bar</span> <span class="p">{</span>
+    <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">8192</span><span class="p">)</span> <span class="n">dp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">assembly</span> <span class="p">{</span>
+    <span class="n">composition</span> <span class="p">{</span>
+        <span class="n">component</span> <span class="n">Foo</span> <span class="n">foo</span><span class="p">;</span>
+        <span class="n">component</span> <span class="n">Bar</span> <span class="n">bar</span><span class="p">;</span>
+        <span class="n">connection</span> <span class="n">seL4SharedData</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">foo</span><span class="p">.</span><span class="n">dp</span><span class="p">,</span> <span class="n">to</span> <span class="n">bar</span><span class="p">.</span><span class="n">dp</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="asynch-connector-renamed">Asynch Connector Renamed</h2>
+
+<p>The <code class="highlighter-rouge">seL4Asynch</code> connector has been renamed to
+<code class="highlighter-rouge">seL4Notification</code>.</p>
+
+<h2 id="non-volatile-dataports">Non-Volatile Dataports</h2>
+
+<p>Previously, c symbols used to access dataports had volatile pointer
+types. Users were encouraged to use volatile pointers to prevent the
+compiler optimizing away, or re-ordering, accesses to shared memory.</p>
+
+<p>This is no longer the case. The c symbols referring to dataports are
+regular (ie. non-volatile) pointer types, and programmers are required
+to explicitly “acquire” and “release” dataports to prevent harmful
+re-ordering (at both compile time and runtime). The motivations for this
+change are: * Treating dataports as always volatile prevents the
+compiler from re-ordering any accesses to them, even in cases where it
+won’t affect the correctness of programs. Using non-volatile dataports
+allows the compiler to make better optimizations. * Preventing compiler
+reordering (ie. with volatile) is not sufficient to make shared memory
+coherent in a multicore environment. Changes made to shared memory by
+one core may become visible to other cores in a different order. *
+Using functions from the standard library on dataports (e.g. passing a
+string in a dataport to <code class="highlighter-rouge">strlen</code>) requires casting from a volatile
+pointer to a regular pointer - an undefined operation in c.</p>
+
+<p>For a dataport interface <code class="highlighter-rouge">foo</code>, a component has access to
+<code class="highlighter-rouge">foo_acquire()</code> and <code class="highlighter-rouge">foo_release()</code> functions (they may
+instead be macros). Call <code class="highlighter-rouge">foo_acquire()</code> between multiple reads
+from a dataport, where the correct behaviour of the program depends on
+the contents of the dataport possibly changing between reads. Call
+<code class="highlighter-rouge">foo_release()</code> between multiple writes to a dataport, where the
+correct behaviour of the program depends on writes preceding the
+<code class="highlighter-rouge">foo_release()</code> in the program code being performed strictly before
+the writes following it.</p>
+
+<h2 id="many-to-many-connections">Many-to-Many Connections</h2>
+
+<p>There is new syntax for connections with multiple from/to sides. The
+following fragments are equivalent (except for connection names):</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="n">foo</span><span class="p">(</span><span class="n">from</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="n">bar</span><span class="p">(</span><span class="n">from</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+</code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="n">foobar</span><span class="p">(</span><span class="n">from</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">from</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Both syntaxes are supported by CAmkES 3.</p>
+
+<h2 id="hardware-component-configuration-attributes">Hardware Component Configuration Attributes</h2>
+
+<p>The attributes for configuring hardware components have changed. Below
+is a CAmkES 2 spec, followed by the equivalent CAmkES 3 spec. These
+changes are not backwards compatible.</p>
+
+<p>These component definitions are the same in CAmkES 2 and 3:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Device</span> <span class="p">{</span>
+  <span class="n">hardware</span><span class="p">;</span>
+  <span class="n">dataport</span> <span class="n">Buf</span> <span class="n">registers</span><span class="p">;</span>
+  <span class="n">emits</span> <span class="n">Interrupt</span> <span class="n">interrupt</span><span class="p">;</span>
+  <span class="n">provides</span> <span class="n">IOPort</span> <span class="n">port</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">component</span> <span class="n">Driver</span> <span class="p">{</span>
+    <span class="n">dataport</span> <span class="n">Buf</span> <span class="n">registers</span><span class="p">;</span> <span class="n">consumes</span> <span class="n">Interrupt</span> <span class="n">interrupt</span><span class="p">;</span> <span class="n">uses</span> <span class="n">IOPort</span>
+    <span class="n">port</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The composition section of the spec is the same for CAmkES 2 and 3:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assembly</span> <span class="p">{</span>
+  <span class="n">composition</span> <span class="p">{</span>
+    <span class="n">component</span> <span class="n">Device</span> <span class="n">device</span><span class="p">;</span>
+    <span class="n">component</span> <span class="n">Driver</span> <span class="n">driver</span><span class="p">;</span>
+
+    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">mmio</span><span class="p">(</span><span class="n">from</span> <span class="n">driver</span><span class="p">.</span><span class="n">registers</span><span class="p">,</span> <span class="n">to</span> <span class="n">device</span><span class="p">.</span><span class="n">registers</span><span class="p">);</span>
+    <span class="n">connection</span> <span class="n">seL4HardwareInterrupt</span> <span class="n">interrupt</span><span class="p">(</span><span class="n">from</span> <span class="n">device</span><span class="p">.</span><span class="n">interrupt</span><span class="p">,</span> <span class="n">to</span> <span class="n">driver</span><span class="p">.</span><span class="n">interrupt</span><span class="p">);</span>
+    <span class="n">connection</span> <span class="n">seL4HardwareIOPort</span> <span class="n">ioport</span><span class="p">(</span><span class="n">from</span> <span class="n">driver</span><span class="p">.</span><span class="n">port</span><span class="p">,</span> <span class="n">to</span> <span class="n">device</span><span class="p">.</span><span class="n">port</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">configuration</span> <span class="p">{</span>
+    <span class="c1">// see below
+</span>  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>CAmkES 2 configuration:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">registers_attributes</span> <span class="o">=</span> <span class="s">"0x12345000:0x1000"</span><span class="p">;</span> <span class="c1">// string in format "paddr:size"
+</span>  <span class="n">device</span><span class="p">.</span><span class="n">interrupt_attributes</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>                  <span class="c1">// irq number
+</span>  <span class="n">device</span><span class="p">.</span><span class="n">port_attributes</span> <span class="o">=</span> <span class="s">"0x40:0x40"</span><span class="p">;</span>              <span class="c1">// string in format "start_port:end_port"
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>CAmkES 3 configuration:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">registers_paddr</span> <span class="o">=</span> <span class="mh">0x12345000</span><span class="p">;</span>  <span class="c1">// separate attribute for paddr and size
+</span>  <span class="n">device</span><span class="p">.</span><span class="n">registers_size</span> <span class="o">=</span> <span class="mh">0x1000</span><span class="p">;</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">interrupt_irq_number</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>     <span class="c1">// attribute name has changed
+</span>  <span class="n">device</span><span class="p">.</span><span class="n">port_attributes</span> <span class="o">=</span> <span class="s">"0x40:0x40"</span><span class="p">;</span> <span class="c1">// unchanged
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="interrupt-api">Interrupt API</h2>
+
+<p>In CAmkES 2, interrupts were abstracted as CAmkES events, emitted from a
+hardware component. For a component with an interface <code class="highlighter-rouge">foo</code>
+connected to an interrupt, components could call <code class="highlighter-rouge">foo_wait()</code>,
+<code class="highlighter-rouge">foo_poll()</code>, and <code class="highlighter-rouge">foo_reg_callback()</code>, as with a regular
+event.</p>
+
+<p>In CAmkES 3, interrupts are still abstracted as events in the ADL
+(CAmkES spec). Component implementations however, use a different
+interface for interacting with interrupts than with regular event
+interfaces. More specifically, a component with an interface <code class="highlighter-rouge">foo</code>
+connected with the <code class="highlighter-rouge">seL4HardwareInterrupt</code> connection has access to
+<code class="highlighter-rouge">foo_acknowledge()</code> which acknowledges the associated interrupt to
+the kernel. In addition, the component implementation must provide a
+definition of a function <code class="highlighter-rouge">void foo_handler(void)</code>. The standard
+event methods (<code class="highlighter-rouge">foo_wait()</code>, <code class="highlighter-rouge">foo_poll()</code>, and <code class="highlighter-rouge">foo_reg_callback()</code>) are not implemented for interrupts.</p>
+
+<p>The user-provided function <code class="highlighter-rouge">foo_handler()</code> will be called by a
+dedicated interrupt-handling thread (one thread per interface connected
+with <code class="highlighter-rouge">seL4HardwareInterrupt</code>). Unlike callbacks registered with
+<code class="highlighter-rouge">*_reg_callback</code>, interrupt handlers do not need to be explicitly
+registered, and do not become unregistered after calling.</p>
+
+<h2 id="hierarchical-components">Hierarchical Components</h2>
+
+<p>The syntax for defining hierarchical components has changed in CAmkES 3.
+CAmkES 2 had special connectors used to export an interface of a
+sub-component:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Serial</span> <span class="p">{</span>
+
+  <span class="c1">// interface of this component 
+</span>  <span class="n">provides</span> <span class="n">UartIface</span> <span class="n">serial</span><span class="p">;</span>
+ 
+  <span class="n">composition</span> <span class="p">{</span>
+ 
+    <span class="c1">// internal components
+</span>    <span class="n">component</span> <span class="n">UartDevice</span> <span class="n">uart_device</span><span class="p">;</span>
+    <span class="n">component</span> <span class="n">UartDriver</span> <span class="n">uart_driver</span><span class="p">;</span>
+
+    <span class="c1">// internal connection
+</span>    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_device</span><span class="p">.</span><span class="n">regs</span><span class="p">,</span> <span class="n">to</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">regs</span><span class="p">);</span>
+  
+    <span class="c1">// export interface of driver component as interface of this component
+</span>    <span class="n">connection</span> <span class="n">ExportRPC</span> <span class="n">exp</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">uart</span><span class="p">,</span> <span class="n">to</span> <span class="n">serial</span><span class="p">);</span>
+ 
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>CAmkES 3 introduces special syntax for exposing interfaces of
+sub-components:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Serial</span> <span class="p">{</span>
+
+  <span class="c1">// interface of this component
+</span>  <span class="n">provides</span> <span class="n">UartIface</span> <span class="n">serial</span><span class="p">;</span>
+ 
+  <span class="n">composition</span> <span class="p">{</span>
+ 
+    <span class="c1">// internal components
+</span>    <span class="n">component</span> <span class="n">UartDevice</span> <span class="n">uart_device</span><span class="p">;</span>
+    <span class="n">component</span> <span class="n">UartDriver</span> <span class="n">uart_driver</span><span class="p">;</span>
+
+    <span class="c1">// internal connection
+</span>    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_device</span><span class="p">.</span><span class="n">regs</span><span class="p">,</span> <span class="n">to</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">regs</span><span class="p">);</span>
+
+    <span class="c1">// export interface of driver component as interface of this component
+</span>    <span class="n">export</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">uart</span> <span class="o">-&gt;</span> <span class="n">serial</span><span class="p">;</span>
+ 
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

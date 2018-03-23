@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Odroid-X | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Odroid-X</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="odroid-x">Odroid-X</h1>
+
+<p>seL4 supports the
+<a href="http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947">Odroid-X</a>
+Exynos4412 board.</p>
+
+<h2 id="client-setup">Client setup</h2>
+<h4 id="hardware-requirements">Hardware requirements:</h4>
+<ol>
+  <li>5V power supply</li>
+  <li>RS232 or USB to UART converter</li>
+  <li>USB OTG cable</li>
+</ol>
+
+<p>Note: The USB-UART converter that is shipped with the board requires a
+Linux kernel version &gt; 3.2</p>
+
+<h5 id="serial-port-setup">Serial port setup</h5>
+<p>Open minicom on <code class="highlighter-rouge">/dev/ttyUSB*</code> and set the
+serial port settings to: <code class="highlighter-rouge">115200N1</code></p>
+
+<ul>
+  <li>115200bps</li>
+  <li>parity-none</li>
+  <li>1 stop bit</li>
+</ul>
+
+<h5 id="udev">udev</h5>
+<p>You may also like to set up a udev rule for Fastboot:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002", MODE="660", GROUP="dialout"
+</code></pre></div></div>
+
+<h2 id="sd-card-setup">SD card setup</h2>
+<p>An image file can be found here: TODO Add sd image</p>
+
+<p>This image contains both U-Boot and Android. This should set up SD card
+partitions properly. seL4 image can be uploaded via Fastboot.</p>
+
+<p>To prepare the SD card, run</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>dd <span class="k">if</span><span class="o">=</span>&lt;image file&gt; <span class="nv">of</span><span class="o">=</span>&lt;/dev/sdx&gt;
+</code></pre></div></div>
+
+<p>Where <code class="highlighter-rouge">sdx</code> is the device that is associated with your SD card.</p>
+
+<h5 id="u-boot">U-Boot</h5>
+<p>&lt;TODO&gt; Uboot source?</p>
+
+<p>U-Boot must reside at a magical offset in a special partition of the SD
+card. To copy U-Boot and the other boot loaders to the SD card:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>sd_fusesudo
+./sd_fusing_4412.sh /dev/sdx
+</code></pre></div></div>
+
+<h2 id="sel4-image-file-preparation">seL4 Image file preparation</h2>
+<p>The seL4 image file must be converted
+into a U-Boot application file. The first step is to strip the elf file
+into a binary file. Next we use mkimage to create the image.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install uboot-mkimage
+<span class="nv">INPUT_FILE</span><span class="o">=</span>images/sel4test-image-arm-exynos4
+<span class="nv">OUTPUT_FILE</span><span class="o">=</span>sel4-uImage
+mkimage <span class="nt">-a</span> 0x48000000 <span class="nt">-e</span> 0x48000000 <span class="nt">-C</span> none <span class="nt">-A</span> arm <span class="nt">-T</span> kernel <span class="nt">-O</span> qnx <span class="nt">-d</span> <span class="nv">$INPUT_FILE</span> <span class="nv">$OUTPUT_FILE</span>
+</code></pre></div></div>
+
+<p>The reason we choose QNX is because we exploit the fact that, like seL4,
+QNX expects to be ELF-loaded. The alternative is to convert our ELF file
+into a binary file using objcopy.</p>
+
+<h2 id="booting">Booting</h2>
+<p>Fastboot will be used to upload images to the device. The
+tool can be found here: or here: you can clone and build the tool from
+source</p>
+
+<p>&lt;TODO&gt; add fastboot link</p>
+
+<p>Follow these steps to boot your program:</p>
+
+<ol>
+  <li>Connect the USB cable between the ODROID and the client</li>
+  <li>Connect the UART converter between the ODROID and the client</li>
+  <li>Insert your SD card into the ODROID</li>
+  <li>Connect the 5V power supply</li>
+  <li>Open minicom</li>
+  <li>Hold the power button for 3 seconds</li>
+  <li>In minicom, press a key to stop the auto boot process or hold the
+user button on the board during the boot process</li>
+</ol>
+
+<p>To boot using fastboot:</p>
+
+<ol>
+  <li>
+    <p>At the u-boot prompt, type fastboot</p>
+  </li>
+  <li>
+    <p>On the client machine, run sudo fastboot devices to ensure that the device has been recognised. The device should have the label “SMDKEXYNOS-01”.</p>
+
+    <ol>
+      <li>NOTE: fastboot fails silently if you do not have permissions
+to access the device. Try running with sudo.</li>
+    </ol>
+  </li>
+  <li>
+    <p>On the client machine, run fastboot boot sel4-uImage</p>
+  </li>
+</ol>
+
+<p>To boot from mmc:</p>
+
+<ol>
+  <li>At the U-Boot prompt type
+<code class="highlighter-rouge">fatload mmc 0:2 0x42000000 &lt;filename&gt; bootm 0x42000000</code></li>
+</ol>
+
+<h2 id="references">References</h2>
+
+<p><a href="http://www.hardkernel.com/renewal_2011/products/prdt_info.php">http://www.hardkernel.com/renewal_2011/products/prdt_info.php</a></p>
+
+<p><a href="http://dev.odroid.com/projects/odroid-xq/#s-2.2.1">http://dev.odroid.com/projects/odroid-xq/#s-2.2.1</a> &lt;- This should be
+replaced with the official Samsung exynos4412 “User manual”</p>
+
+<p><a href="http://dev.odroid.com/projects/ics/#s-6.2">Android - uboot
+sources and instructions</a></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

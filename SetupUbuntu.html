@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setup Ubuntu | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Setup Ubuntu</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#setup-ubuntu">Setup Ubuntu</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#cross-compiler-toolchain-summary">Cross compiler toolchain summary</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#debian-machines">Debian machines</a></li>
+<li class="toc-entry toc-h3"><a href="#ubuntu-machines">Ubuntu machines</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#instructions">Instructions</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#instructions-common-to-debian-and-all-debian-derivatives-ubuntu-etc">Instructions common to Debian and all Debian derivatives [Ubuntu, etc]</a></li>
+<li class="toc-entry toc-h3"><a href="#instructions-for-debian">Instructions for Debian</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#debian-wheezy">Debian Wheezy</a></li>
+<li class="toc-entry toc-h4"><a href="#debian-jessie-or-later">Debian Jessie or later</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#instructions-for-ubuntu">Instructions for Ubuntu</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#trusty-tahr-1404lts">Trusty Tahr (14.04LTS)</a></li>
+<li class="toc-entry toc-h4"><a href="#precise-pangolin-1210">Precise Pangolin (12.10)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="setup-ubuntu">Setup Ubuntu</h1>
+
+<h2 id="cross-compiler-toolchain-summary">Cross compiler toolchain summary</h2>
+<p>This page doesn’t detail the
+build dependencies for SEL4. It details how to go about getting <strong>cross
+compilers</strong>, and assumes you’re trying to build SEL4 on an x86 machine.</p>
+
+<p>Both SEL4 and CAmkES require these steps. After completing the steps on
+this page, go to the respective build instructions page for the project
+you’re trying to build (SEL4, <a href="CAmkES">CAmkES</a>…). Projects using CAmkES
+(the seL4 component system) need Haskell and some extra python libraries
+in addition to the standard build tools.</p>
+
+<h3 id="debian-machines">Debian machines</h3>
+<p>Unfortunately, Debian is in a state of flux
+between the old Emdebian approach and the new MultiArch approach to
+cross-compilation.</p>
+
+<p>On Wheezy and before, you need to use the Emdebian toolchains. Library
+support is now available on Jessie and later, but not a full complement
+of cross compilers.</p>
+
+<p>For Debian, first follow the instructions that are common to all Debian-based distros (<a href="#instructions">All Debian and Ubuntu Variants</a>) then the ones for your system:</p>
+
+<ul>
+  <li><a href="#debian-wheezy">Debian Wheezy (oldstable)</a></li>
+  <li><a href="#debian-jessie-or-later">Debian Jessie or later(testing or unstable)</a></li>
+</ul>
+
+<p>To find out what distro you’re using: <code class="highlighter-rouge">lsb_release -a</code></p>
+
+<h3 id="ubuntu-machines">Ubuntu machines</h3>
+
+<p>Ubuntu is relatively straightforward, as
+<a href="http://www.linaro.org/">Linaro</a> maintain cross compilers for
+it — see <a href="https://wiki.ubuntu.com/ToolChain">https://wiki.ubuntu.com/ToolChain</a>. You will however have to
+have enabled the Universe repository.</p>
+
+<p>For Ubuntu, first follow the instructions that are common to all Debian-based distros (<a href="#instructions">All Debian and Ubuntu Variants</a>) then the ones for your system:</p>
+
+<ul>
+  <li><a href="#instructions-for-ubuntu">Ubuntu later than Precise Pangolin (tested on 14.04LTS — Trusty Tahr)</a></li>
+</ul>
+
+<h2 id="instructions">Instructions</h2>
+<h3 id="instructions-common-to-debian-and-all-debian-derivatives-ubuntu-etc">Instructions common to Debian and all Debian derivatives [Ubuntu, etc]</h3>
+
+<p>To get a usable build system, install <code class="highlighter-rouge">build-essential</code>, <code class="highlighter-rouge">realpath</code>,
+<code class="highlighter-rouge">libxml2-utils</code> and <code class="highlighter-rouge">python-tempita</code>. For cross compiling on a
+64-bit host, you also need <code class="highlighter-rouge">gcc-multilib</code>; to run things on a
+simulator you need <code class="highlighter-rouge">qemu</code>; <code class="highlighter-rouge">ccache</code> speeds up builds after the first;
+and <code class="highlighter-rouge">ncurses-dev</code> is needed to run the configurator.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get install build-essential realpath libxml2-utils python-tempita gcc-multilib ccache ncurses-dev
+</code></pre></div></div>
+
+<h3 id="instructions-for-debian">Instructions for Debian</h3>
+
+<h4 id="debian-wheezy">Debian Wheezy</h4>
+
+<p>To build for any of the ARM targets you need an arm cross compiler. The
+simplest way to do this on Wheezy is to use the emdebian pre-built
+compilers.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> /bin/sh <span class="nt">-c</span> <span class="s1">'echo "deb &lt;http://www.emdebian.org/debian/&gt; squeeze main" &gt; /etc/apt/sources.list.d/emdebian.list'</span>
+<span class="nb">sudo</span> /bin/sh <span class="nt">-c</span> <span class="s1">'echo "deb &lt;http://ftp.us.debian.org/debian/&gt; squeeze main" &gt;&gt; /etc/apt/sources.list.d/emdebian.list'</span>
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get install gcc-4.4-arm-linux-gnueabi
+</code></pre></div></div>
+
+<p>The version of qemu in Debian Wheezy does not have KZM support.
+Either install it from Jessie or sid, or build it from the upstream
+source:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git://git.qemu.org/qemu.git
+<span class="nb">sudo </span>apt-get build-dep qemu
+<span class="nb">cd </span>qemu ./configure <span class="nt">--target-list</span><span class="o">=</span>arm-softmmu
+make <span class="nt">-j</span>
+</code></pre></div></div>
+<p>The resulting qemu binary is in <code class="highlighter-rouge">arm-softmmu/qemu-system-arm</code></p>
+
+<h4 id="debian-jessie-or-later">Debian Jessie or later</h4>
+
+<p>Jessie and following have multiarch support. To cross-build for ARM, add
+<strong>armhf</strong> as an architecture, and install the cross compiler:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>dpkg <span class="nt">--add-architecture</span> armhf
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get install gcc-arm-none-eabi qemu
+</code></pre></div></div>
+<p>The resulting cross compilers generate code that is incompatible
+with the prebuilt libraries in the libmuslc repository. You will need to
+disable use of the prebuilt libraries in configurations that use musl C,
+as well as change the compiler prefix in the configuration.</p>
+
+<h3 id="instructions-for-ubuntu">Instructions for Ubuntu</h3>
+
+<h4 id="trusty-tahr-1404lts">Trusty Tahr (14.04LTS)</h4>
+<p>Linaro maintains cross compilers that
+run on Ubuntu. With current releases, the method for adding a foreign
+architecture is slightly more complicated than for Debian. Please note —
+this works on Ubuntu 14 and later.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install python-software-properties 
+<span class="nb">sudo </span>apt-get install g++-multilib
+<span class="nb">sudo </span>add-apt-repository universe
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get install gcc-arm-linux-gnueabi qemu-system-arm qemu-system-x86 g++-arm-linux-gnueabi
+</code></pre></div></div>
+
+<h4 id="precise-pangolin-1210">Precise Pangolin (12.10)</h4>
+<p>The compilers available in Precise do
+not compile seL4 correctly. Either upgrade to Trusty, or install
+compilers from
+<a href="https://www.mentor.com/embedded-software/codesourcery">CodeSourcery</a>.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

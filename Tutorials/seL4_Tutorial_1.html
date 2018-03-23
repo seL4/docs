@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 Tutorial 1 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 Tutorial 1</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-tutorial-1">seL4 Tutorial 1</h1>
+<p>This tutorial is a fairly simple
+introduction to debugging, and doesn’t really focus on seL4 itself, but
+rather on the idea and practice of tracing errors and debugging in a
+<a href="http://www.embedded.com/electronics-blogs/programming-pointers/4027541/Freestanding-vs-hosted-implementations">freestanding</a>
+environment.</p>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+
+<ul>
+  <li>Reader should become accustomed to the idea of having to debug
+      not only from the perspective of their own code, but also with
+      an understanding that there are lower layers beneath them that
+      have a say in whether or their abstractions will work
+      as intended.</li>
+  <li>Reader should become accustomed to the idea that the compiler
+      and language runtime are now part of their responsibility, and
+      they should become at least trivially acquainted with the C
+      runtime which they can usually ignore, and debug with it
+      in mind.</li>
+  <li>Offhandedly hints to the reader that they should become
+      acquainted with the Kconfig/Kbuild build utilities.</li>
+</ul>
+
+<h2 id="walkthrough">Walkthrough</h2>
+<p>Currently seL4 supports two major architectures: x86
+and ARM. There are platforms/boards for each architecture. For example,
+pc99 is an x86 platform, while zynq7000 is an ARM platform. seL4
+Tutorials can run on both architectures. In seL4 Tutorials, we only
+provide one platform to represent an architecture: ia32/pc99 for x86 and
+zynq7000 for ARM. The reason is that these platforms are popular and
+well supported/maintained by seL4 and QEMU.</p>
+
+<p>The following instructions are for ia32/pc99/x86, but should be similar
+for zynq7000/ARM with just changing the config selection (e.g. make
+zynq7000_hello-1_defconfig)</p>
+
+<p>First try to build the code:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># go to the top level directory
+cd sel4-tutorials-manifest/
+# select the config for the first tutorial
+make ia32_hello-1_defconfig
+# build it
+make -j8
+</code></pre></div></div>
+<p>This will fail to build with the following
+error:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/alyons/sel4-tutorials-source/stage/x86/pc99/lib/crt1.o: In function \_start_c':
+/home/alyons/sel4-tutorials-source/libs/libmuslc/crt/crt1.c:17: undefined reference to main'
+collect2: error: ld returned 1 exit status
+/home/alyons/sel4-tutorials-source/stage/x86/pc99/common/common.mk:301:
+recipe for target 'hello-1.elf' failed make[1]: *** [hello-1.elf]
+Error 1 tools/common/project.mk:332: recipe for target 'hello-1' failed
+make:*** [hello-1] Error 2
+</code></pre></div></div>
+<h3 id="task-1">TASK 1</h3>
+
+<p>Your task is to fix the above error. Look for TASK in <code class="highlighter-rouge">apps/hello1</code> to find the code to
+modify.</p>
+
+<p>Regardless of the programming language used, every binary that is
+created must have an entry point, which is the first instruction in the
+program. In the C Runtime, this is usually <code class="highlighter-rouge">_start()</code>, which then calls
+some other compiler-specific and platform specific functions to
+initialize the program’s environment, before calling the main()
+function. What you see here is the linker complaining that when
+<code class="highlighter-rouge">_start()</code> tried to call <code class="highlighter-rouge">main()</code>, it couldn’t find a <code class="highlighter-rouge">main()</code> function,
+because one doesn’t exist. Create a <code class="highlighter-rouge">main()</code> function, and proceed to the
+next step in the slides.</p>
+
+<p>This next step is meant to show the user some basics for how to go about
+debugging in a freestanding environment. Most of the time you’ll have to
+manually step through code, often without the help of a debugger, so
+this step forces a Divide by zero exception and tries to show you how
+debugging an exception looks. In the real world, in this kind of
+scenario, you’d usually want to know the instruction that triggered the
+exception, then find out what that instruction does that is wrong, and
+fix it.</p>
+
+<p>Once you have fixed the problem, the build should succeed and you can
+run the example as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make -j8
+$ make simulate
+</code></pre></div></div>
+
+<p>If you’ve succeeded, qemu should output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting node #0 with APIC ID 0 Booting all finished, dropped to user space
+hello world
+</code></pre></div></div>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

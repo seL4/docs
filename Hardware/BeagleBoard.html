@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 on the BeagleBoard | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 on the BeagleBoard</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-on-the-beagleboard">seL4 on the BeagleBoard</h1>
+
+<p>This page documents booting seL4 on the
+<a href="http://beagleboard.org/beagleboard">Beagleboard</a>, Omap
+3530</p>
+
+<p>See <a href="http://sel4.systems/pipermail/devel/2014-August/000030.html">Tim Newsham’s post</a> on the mailing list for one user’s experience.</p>
+
+<h2 id="preparing-your-sd-card">Preparing your SD card</h2>
+<h3 id="prologue">Prologue</h3>
+<p>These instructions are for
+later versions of the Beagleboard. Before the Xm, U-Boot and MLO were
+held in flash.</p>
+
+<p>The first stage boot loader expects to find the TI X-loader in the root
+of a FAT filesystem, on the first partition of the SD card with the name
+MLO.</p>
+
+<p>MLO expects to find a file named u-boot.bin in the root directory of the
+SD card.</p>
+
+<h2 id="setting-up-minicom">Setting up Minicom</h2>
+<p>Plug the board in. seL4 userspace currently
+does no power management — you will probably need a 5V power source, and
+not rely on powering the board over USB</p>
+
+<p>If you do not have minicom installed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install minicom
+</code></pre></div></div>
+
+<p>If you are connecting via a USB serial adapter:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>minicom <span class="nt">-s</span> ttyUSB0
+</code></pre></div></div>
+<p>And if you were connecting via a <strong>real</strong> serial port:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>minicom <span class="nt">-s</span> ttyS0
+</code></pre></div></div>
+
+<p>In either
+case, this will take you to a configuration menu.</p>
+
+<ol>
+  <li>Choose Serial Port Setup</li>
+  <li>Set A: Serial Device to <code class="highlighter-rouge">/dev/ttyUSB0</code> or <code class="highlighter-rouge">/dev/ttyS0</code> depending on
+  which serial device you want to use.</li>
+  <li>Set F: Hardware Flow Control to No</li>
+  <li>Set speed to <code class="highlighter-rouge">115200</code> and eight bit no parity.</li>
+  <li>Save setup as <code class="highlighter-rouge">ttyUSB0</code> or <code class="highlighter-rouge">ttyS0</code></li>
+  <li>Exit Minicom</li>
+</ol>
+
+<p>You can now connect to the !BeagleBoard using Minicom:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minicom ttyUSB0
+</code></pre></div></div>
+
+<p>Or:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minicom ttyS0
+</code></pre></div></div>
+
+<h3 id="permissions">Permissions</h3>
+<p>If you get permissions errors you need to add yourself to the
+appropriate group. Find out which group on your machine has access to
+the serial ports (on Debian, it’s usually dialout):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /dev/ttyUSB0
+crw-rw---- 1 root dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0
+</code></pre></div></div>
+
+<p>Then add yourself to the right group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>usermod <span class="nt">-G</span> dialout <span class="nt">-a</span> your_login_name
+</code></pre></div></div>
+
+<h3 id="u-boot">U-Boot</h3>
+<p>Now minicom should connect to what
+it thinks is a “modem”, and then give you a good old console to work
+with. You are now in the bootloader, U-Boot, of the ~BeagleBoard. You
+can type commands here and it’ll display the results.</p>
+
+<p>Some quick useful commands:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>help</td>
+      <td>display list of commands</td>
+    </tr>
+    <tr>
+      <td>printenv</td>
+      <td>lists defined environment variables</td>
+    </tr>
+    <tr>
+      <td>mmc init</td>
+      <td>initialise MMC (to read the the SD card)</td>
+    </tr>
+    <tr>
+      <td>mmcinfo</td>
+      <td>display current SD card info</td>
+    </tr>
+    <tr>
+      <td>fatls mmc 0</td>
+      <td>display list of files on SD card 0</td>
+    </tr>
+    <tr>
+      <td>fatload</td>
+      <td>load script/image into some RAM address to be run</td>
+    </tr>
+    <tr>
+      <td>run</td>
+      <td>run scripts</td>
+    </tr>
+    <tr>
+      <td>bootelf</td>
+      <td>boot into en ELF image</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="running-sel4test">Running seL4test</h2>
+<p>Get the sel4test-manifest repo using the
+instructions at
+<a href="/Testing">seL4Test</a></p>
+
+<p>Then run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make beagle_debug_xml_defconfig
+make
+</code></pre></div></div>
+<p>Which after a few minutes should give you:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[GEN_IMAGE] sel4test-image-arm-omap3
+</code></pre></div></div>
+<p>Now, the ELF image we
+boot into is the <code class="highlighter-rouge">sel4test-image-arm-omap3</code> file. Pull out the SD card, put it
+into the SD card reader and plug into your computer, then copy that file
+into the boot sector, then sync and remove, then plug the SD card back
+into the BeagleBoard.</p>
+
+<p>Reset the BeagleBoard by pressing the <code class="highlighter-rouge">S2</code> (reset) button.</p>
+
+<h3 id="to-run-the-image">To run the image:</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
+mmcinfo
+fatload mmc 0 ${loadaddr} sel4test-image-arm
+bootelf ${loadaddr}
+</code></pre></div></div>
+<p>where loadaddr
+is some address, in this example defined as an environment variable.
+After this you should start seeing output from seL4test.</p>
+
+<p>You can use:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
+</code></pre></div></div>
+<p>to see what is on the SD card.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Child enumeration model for the seL4 Driver API: | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Child enumeration model for the seL4 Driver API:</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#child-enumeration-model-for-the-sel4-driver-api">Child enumeration model for the seL4 Driver API:</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#constants">Constants</a></li>
+<li class="toc-entry toc-h2"><a href="#functions">Functions</a></li>
+<li class="toc-entry toc-h2"><a href="#structures">Structures</a></li>
+<li class="toc-entry toc-h2"><a href="#child-ids">Child IDs</a></li>
+<li class="toc-entry toc-h2"><a href="#addressing-names">Addressing Names</a></li>
+<li class="toc-entry toc-h2"><a href="#procedural-flow">Procedural flow</a></li>
+<li class="toc-entry toc-h2"><a href="#hotplug-device-enumeration">Hotplug device enumeration</a></li>
+<li class="toc-entry toc-h2"><a href="#api">API</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_enumerate_get_num_children-sync">seL4drv_mgmt_enumerate_get_num_children(): Sync</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_enumerate_children-sync">seL4drv_mgmt_enumerate_children(): Sync</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_enumerate_hotplug_subscribe-async">seL4drv_mgmt_enumerate_hotplug_subscribe(): Async</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4drv_mgmt_identify_device-sync">seL4drv_mgmt_identify_device(): Sync</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="child-enumeration-model-for-the-sel4-driver-api">Child enumeration model for the seL4 Driver API:</h1>
+
+<h2 id="constants">Constants</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define SEL4DRV_DEVATTR_NAME_MAXLEN (32)
+</span></code></pre></div></div>
+
+<h2 id="functions">Functions</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4drv_mgmt_enumerate_get_num_children</span><span class="p">()</span><span class="o">:</span>
+<span class="n">seL4drv_mgmt_enumerate_children</span><span class="p">();</span>
+<span class="n">seL4drv_mgmt_enumerate_hotplug_subscribe</span><span class="p">();</span>
+<span class="kt">uint16_t</span> <span class="n">seL4drv_mgmt_query_device_match</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="structures">Structures</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">seL4drv_child_attribute_</span> <span class="p">{</span>
+   <span class="kt">char</span> <span class="n">attr_name</span><span class="p">[</span><span class="n">SEL4DRV_DEVATTR_NAME_MAXLEN</span><span class="p">];</span>
+   <span class="kt">uint32_t</span> <span class="n">attr_value</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">seL4drv_child_attribute_t</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="child-ids">Child IDs</h2>
+<p>Each driver whose device is capable of enumerating child
+devices must generate a unique child ID for each such child. The child
+ID is not required to be globally unique, but it must be unique with
+respect to all of of that child’s sibling devices.</p>
+
+<p>The Child-ID need not be persistently unique across executions of the
+driver either. The same child device may be assigned a different
+child-ID if the driver is killed and then re-initialized. The purpose of
+the child-ID is to form a “relational key” (to borrow a database
+software term) between the driver and the environment. The same physical
+child device may be given different child-IDs by its parent even within
+the same execution of that parent if, for example, that child is
+unplugged from the computer, and then plugged back in as a hot-plug
+event; the parent driver may assign that child device a different
+child-ID when it is plugged back in.</p>
+
+<p>The Environment and the host OS may choose to use some other internal
+representation of such child IDs that best suits its device tree, but
+this child ID shall be passed back to the driver exactly as originally
+given by the driver, for any API call into the driver that requires a
+child ID.</p>
+
+<h2 id="addressing-names">Addressing Names</h2>
+<p>Each driver whose device is capable of
+enumerating child devices must also generate a unique addressing name
+for each of the children. This name does not need to be globally unique,
+but it is expected to be unique with respect to all of that child
+device’s siblings. This addressing name must target the device by its
+<strong>location</strong> relative to its parent bus technology.</p>
+
+<p>This persistent name must always uniquely identify the same device
+microcontroller relative to its parent’s bus technology. For example, if
+on an ISA bus, there are 4 ATA/IDE disks, and the parent ISA bus driver
+wishes to generate a persistent name for each of the disks, it should
+name them by their persistent locations on the ATA wire. Perhaps they
+might be “ATA0-master”, “ATA0-slave”, “ATA1-master” and “ATA1-slave”.</p>
+
+<p>NB: the intention is not to uniquely identify the attached, removable
+peripheral DISK that is attached to the ATA/IDE microcontroller, but to
+identify the ATA/IDE microcontroller itself, which is wired onto the
+silicon. The swappable disk that happens to be attached to the
+interfacing microcontroller will be persistently named by the Operating
+System according to that OS’s own convention. That is beyond the scope
+of this specification.</p>
+
+<p>In the case of a PCI device, the persistent name might be the
+location-based &lt;Bus+Device+Function&gt; combination which would
+uniquely, and persistently identify a particular PCI unit across
+executions. Again, the intention is not to identify the particular
+peripheral that is connected on that PCI &lt;bus+device+function&gt;.
+The recognition of a particular PCI peripheral card such as a specific
+graphics card, should be left up to the higher layer Operating System
+which will name that peripheral according to its own convention.</p>
+
+<p>In the case of a USB device, the persistent name might be an 8-bit
+location-based hub-relative identifier for the USB port, starting from
+the root hub down the tree of hubs to that USB port. The actual port’s
+persistent name might be a simple 8-bit integer that identifies that
+port’s hub, concatenated with that port’s address on that hub. The
+parent hub might have been named by the root hub. Once again, the
+generation of a persistent name for a specific USB flash disk that
+happens to be plugged into any particular USB port will be handled by
+the host Operating System, and is not the focus of this naming scheme.
+The addressable naming scheme is attempting to determine the
+bus-relative location, and not the particular peripheral that is
+attached to that location/port.</p>
+
+<h2 id="procedural-flow">Procedural flow</h2>
+<p>The intention of the enumeration API is to enable
+the environment to both build and maintain its “device tree”, which it
+uses to track the status and availability of hardware. The enumeration
+API enables initial discovery of hardware devices, as well as dynamic
+discovery and removal of devices from the tree as they appear and
+disappear.</p>
+
+<p>The environment should begin an enumeration sequence by calling
+<code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> on the target device
+instance, in order to ask the driver to tell it how many child devices
+it <strong>currently</strong> has. The parent driver shall report <strong>all</strong> such
+child devices, regardless of whether or not they are powered on. All
+devices which are operationally viable and functional should be reported
+to the environment. By implication, faulty or malfunctioning devices, if
+they can be recognized as such (e.g., if the firmware informs the driver
+that a device is faulty) should be omitted.</p>
+
+<p>After that, the environment should call
+<code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code> to actually get information on all
+the target device instance’s children. The environment shall pass to
+this function a block of memory that is suitably sized to enable the
+driver to fill out the childrens’ information. Please see the
+description of <code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> in its
+section below to understand how to determine how much memory to allocate
+when requesting child device information.</p>
+
+<p>The driver will then fill out this information for each child device,
+and return the information to the environment.</p>
+
+<h2 id="hotplug-device-enumeration">Hotplug device enumeration</h2>
+<p>The API supports hotplug device
+enumeration through the means of a “subscription” function. The driver
+does not initiate a notification to the environment. Rather, the
+environment posts an indication of interest (subscription notification),
+along with an asynchronous context preserving cookie. The driver shall
+keep this context cookie until a hotplug event occurs (whether the
+addition or removal of a device), and at such a time, it shall generate
+the asynchronous callback that completes the asynchronous roundtrip for
+the “subscription” invocation.</p>
+
+<p>When the environment finally gets such a callback, it shall simply
+refresh its information about the children of the target device, by once
+again calling <code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code>, and doing
+a re-run of <code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>. The environment can
+then compare the <strong>Child IDs</strong> of the newly returned list of devices
+with those that it previously had in its device tree, and perform an
+update of its device tree.</p>
+
+<p>When the driver completes the asynchronous roundtrip, it shall return
+the same memory that was originally passed to it by the environment. The
+environment is then free to either re-subscribe to such notifications by
+calling <code class="highlighter-rouge">seL4drv_mgmt_enumerate_hotplug_subscribe_ind()</code> again, or to
+choose to indicate that it is no longer interested in subscribing to
+such notifications by not calling it again.</p>
+
+<h2 id="api">API</h2>
+
+<h3 id="sel4drv_mgmt_enumerate_get_num_children-sync">seL4drv_mgmt_enumerate_get_num_children(): Sync</h3>
+<p>This
+function allows the environment to know how much memory it should
+allocate for its subsequent calls to
+<code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>.</p>
+
+<p>There are two values returned by this function:</p>
+
+<ol>
+  <li>The number of child devices that the driver instance is
+aware of. <em>Let this value be N_children</em>.</li>
+  <li>The number of attributes required to describe each child device.
+<em>Let this value be N_attrs_per_child</em>.</li>
+</ol>
+
+<p>The environment is expected to allocate memory equal to
+<code class="highlighter-rouge">N_attrs_per_child * sizeof(seL4drv_child_attribute_t)</code> for each
+child device.</p>
+
+<p>If <code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> reports that there are
+multiple child devices, the environment is expected to allocate memory
+equal to
+<code class="highlighter-rouge">N_attrs_per_child * sizeof(seL4drv_child_attribute_t) * N_children</code>.</p>
+
+<p>This amount of memory shall then be passed to
+<code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>.</p>
+
+<h3 id="sel4drv_mgmt_enumerate_children-sync">seL4drv_mgmt_enumerate_children(): Sync</h3>
+<p>This function shall
+cause the driver to return a list of child devices and their attributes,
+as well as Child IDs for each of the children, according to the its
+discretion, deferring to the constraints outlined above.</p>
+
+<h3 id="sel4drv_mgmt_enumerate_hotplug_subscribe-async">seL4drv_mgmt_enumerate_hotplug_subscribe(): Async</h3>
+<p>This
+function shall transfer to the driver a block of memory which shall be
+kept by the driver until a hotplug event occurs. When such an event
+occurs, the driver shall complete the asynchronous roundtrip by calling
+back to the environment, returning the memory to the environment in so
+doing.</p>
+
+<h3 id="sel4drv_mgmt_identify_device-sync">seL4drv_mgmt_identify_device(): Sync</h3>
+<p>This function shall take
+a list of attributes that describe a device, and return an unsigned
+integer which states whether or not the driver can handle the device
+that is described by those attributes.</p>
+
+<p>If the driver determines that the passed attributes do not describe a
+device that it can manage, the driver <strong>shall</strong> return integer <code class="highlighter-rouge">0</code>
+(zero). If the driver determines that the passed attributes describe a
+device that it is equipped to handle, it <strong>shall</strong> return a positive
+integer <code class="highlighter-rouge">1</code>.</p>
+
+<p><em>It is recommended that drivers which return a value greater than <code class="highlighter-rouge">0</code>
+should return <code class="highlighter-rouge">1</code> for now, since in the future, significance will be
+ascribed to the values returned. At present, there is no significance
+attached to the particular value returned, but for future compatibility
+since values above <code class="highlighter-rouge">1</code> will carry significance, drivers must return <code class="highlighter-rouge">1</code> for
+now.</em></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

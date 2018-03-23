@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HiKey | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">HiKey</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="hikey">HiKey</h1>
+
+<h3 id="pre-requisites">Pre-Requisites</h3>
+
+<ul>
+  <li>One HiKey Board. See
+      <a href="http://www.96boards.org/products/ce/hikey/">Hikey 96Board</a></li>
+  <li>Fully working development environment. See
+      <a href="/Getting_started">Getting started</a></li>
+</ul>
+
+<h3 id="getting-started">Getting Started</h3>
+<p>The Hikey board is based around the
+<a href="https://github.com/96boards/documentation/blob/master/consumer/hikey/hardware-docs/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf">HiSilicon Kirin 620</a> eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
+Toe start using 32-bit seL4 follow the below instructions. They will
+walk you step by step beginning from the source files and ultimately
+running an image.</p>
+
+<h2 id="1-creating-a-directory">1. Creating a directory</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir hikey-flash
+<span class="nb">cd </span>hikey-flash
+</code></pre></div></div>
+
+<h2 id="2-custom-toolchains">2. Custom toolchains</h2>
+<p>The cross-toolchains GCC 4.9 for Aarch64 and
+gnueabihf are required to flash the Hikey. If versions of GCC 5, or
+higher, are installed the following steps must be taken as GCC5 is not
+backwards compatible. Otherwise skip to the next Section.</p>
+
+<p>The necessary files are:</p>
+
+<ul>
+  <li>GCC 4.9 cross-toolchain for
+    Aarch64 (gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz)</li>
+  <li>GCC 4.9 cross-toolchain for
+    gnueabihf (gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz)</li>
+</ul>
+
+<p>The files are obtainable from the
+following links:</p>
+
+<ul>
+  <li><a href="http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/aarch64-linux-gnu/">http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/aarch64-linux-gnu/</a></li>
+  <li><a href="http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/">http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/</a></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Run the following commands to use GCC 4.9 only in this directory mkdir</span>
+arm-tc arm64-tc <span class="nb">tar</span> <span class="nt">--strip-components</span><span class="o">=</span>1 <span class="nt">-C</span> <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/arm-tc <span class="nt">-xf</span> ~/Downloads gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz
+<span class="nb">tar</span> <span class="nt">--strip-components</span><span class="o">=</span>1 <span class="nt">-C</span> <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/arm64-tc <span class="nt">-xf</span> ~/Downloads/gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span><span class="s2">/arm-tc/bin:</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span><span class="s2">/arm64-tc/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+
+<span class="c"># To check that GCC 4.9 is used aarch64-linux-gnu-gcc --version</span>
+arm-linux-gnueabihf-gcc <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h2 id="3-obtaining-the-source-files">3. Obtaining the source files</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> hikey <span class="nt">--depth</span> 1 https://github.com/96boards/edk2.git linaro-edk2
+git clone <span class="nt">-b</span> hikey <span class="nt">--depth</span> 1 https://github.com/96boards-hikey/arm-trusted-firmware.git
+git clone <span class="nt">-b</span> hikey <span class="nt">--depth</span> 1 https://github.com/96boards/LinaroPkg.git
+git clone <span class="nt">--depth</span> 1 https://github.com/96boards/l-loader.git
+git clone git://git.linaro.org/uefi/uefi-tools.git
+</code></pre></div></div>
+
+<h2 id="4-changing-console-to-uart0">4. Changing console to UART0</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gedit LinaroPkg/platforms.config
+
+<span class="c"># Uncomment the following lines</span>
+<span class="nv">BUILDFLAGS</span><span class="o">=</span><span class="nt">-DSERIAL_BASE</span><span class="o">=</span>0xF8015000
+<span class="nv">ATF_BUILDFLAGS</span><span class="o">=</span><span class="nv">CONSOLE_BASE</span><span class="o">=</span>PL011_UART0_BASE <span class="nv">CRASH_CONSOLE_BASE</span><span class="o">=</span>PL011_UART0_BASE
+</code></pre></div></div>
+<h2 id="5-patching-the-uefi-for-the-hikey">5. Patching the UEFI for the Hikey</h2>
+<p>Obtain the patch from <a href="https://sel4.systems/hikey.patch">https://sel4.systems/hikey.patch</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>linaro-edk2 
+patch <span class="nt">-p1</span> &lt; ~/Downloads/hikey.patch 
+<span class="c"># Then return to the main directory hikey-flash</span>
+</code></pre></div></div>
+
+<h2 id="6modifying-the-firmware">6.Modifying the firmware</h2>
+<p>If settings are required
+to be changed while in EL3 then the file in
+arm-trusted-firmware/bl1/bl1_main.c can be modified. To disable the
+prefetcher obtain the patch file from
+<a href="/Hardware/HiKey/bl1_main.patch">bl1_main.patch</a> and follow the below steps.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>arm-trusted-firmware/bl1
+patch <span class="nt">-p5</span> &lt; ~/Downloads/bl1_main.patch
+<span class="c"># Then return to the main directory hikey-flash</span>
+</code></pre></div></div>
+
+<h2 id="7-modifying-the-uefi">7. Modifying the UEFI</h2>
+<p>If settings are required to
+be changed while in EL2 then the file in
+linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S can be modified.
+To disable the prefetcher obtain the patch file from
+<a href="/Hardware/HiKey/efi-stub.patch">efi-stub.patch</a> follow the below steps.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd
+</span>linaro-edk2/MdeModulePkg/Application/noboot patch <span class="nt">-p7</span> &lt;
+~/Downloads/efi-stub.patch <span class="c"># Then return to the main directory</span>
+hikey-flash
+</code></pre></div></div>
+
+<h2 id="8-building-the-uefi-for-the-hikey">8. Building the UEFI for the Hikey</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">AARCH64_TOOLCHAIN</span><span class="o">=</span>GCC49
+<span class="nb">export </span><span class="nv">EDK2_DIR</span><span class="o">=</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/linaro-edk2
+<span class="nb">export </span><span class="nv">UEFI_TOOLS_DIR</span><span class="o">=</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/uefi-tools
+
+<span class="nb">cd</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>
+<span class="k">${</span><span class="nv">UEFI_TOOLS_DIR</span><span class="k">}</span>/uefi-build.sh <span class="nt">-c</span> ../LinaroPkg/platforms.config <span class="nt">-b</span> RELEASE <span class="nt">-a</span> ../arm-trusted-firmware hikey
+
+<span class="nb">cd</span> ../l-loader
+ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/RELEASE_GCC49/FV/bl1.bin
+ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/RELEASE_GCC49/FV/fip.bin
+
+<span class="c"># If the DEBUG version of the build is require run the below commands instead</span>
+<span class="nb">cd</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>
+<span class="k">${</span><span class="nv">UEFI_TOOLS_DIR</span><span class="k">}</span>/uefi-build.sh <span class="nt">-c</span> ../LinaroPkg/platforms.config <span class="nt">-b</span> DEBUG <span class="nt">-a</span> ../arm-trusted-firmware hikey
+
+<span class="nb">cd</span> ../l-loader
+ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/DEBUG_GCC49/FV/bl1.bin
+ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/DEBUG_GCC49/FV/fip.bin
+<span class="c"># End</span>
+
+arm-linux-gnueabihf-gcc <span class="nt">-c</span> <span class="nt">-o</span> start.o start.S
+arm-linux-gnueabihf-gcc <span class="nt">-c</span> <span class="nt">-o</span> debug.o debug.S
+arm-linux-gnueabihf-ld <span class="nt">-Bstatic</span> <span class="nt">-Tl-loader</span>.lds <span class="nt">-Ttext</span>
+0xf9800800 start.o debug.o <span class="nt">-o</span> loader 
+arm-linux-gnueabihf-objcopy <span class="nt">-O</span> binary loader temp
+python gen_loader.py <span class="nt">-o</span> l-loader.bin <span class="nt">--img_loader</span><span class="o">=</span>temp <span class="nt">--img_bl1</span><span class="o">=</span>bl1.bin
+<span class="nb">sudo </span><span class="nv">PTABLE</span><span class="o">=</span>linux-4g bash <span class="nt">-x</span> generate_ptable.sh
+python gen_loader.py <span class="nt">-o</span> ptable-linux.img <span class="nt">--img_prm_ptable</span><span class="o">=</span>prm_ptable.img
+</code></pre></div></div>
+
+<h2 id="9-boot-image">9. Boot Image</h2>
+<p>Obtain the boot image from
+<a href="https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz">https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz</a>
+and follow the below commands.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip <span class="k">*</span>.img.gz
+
+mkdir <span class="nt">-p</span> boot-fat
+<span class="nb">sudo </span>mount <span class="nt">-o</span> loop,rw,sync boot-fat.uefi.img boot-fat
+
+<span class="nb">sudo </span>rm boot-fat/EFI/BOOT/fastboot.efi
+<span class="nb">sudo </span>cp ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/AndroidFastbootApp.efi boot-fat/EFI/BOOT/fastboot.efi
+<span class="nb">sudo </span>cp ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/noboot.efi boot-fat/EFI/BOOT/
+
+<span class="nb">sudo </span>umount boot-fat
+</code></pre></div></div>
+
+<h2 id="10-minicom">10. Minicom</h2>
+<p>Install and configure minicom. Two terminals are required for the commands. If minicom is already installed and
+configured skip the next Section.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In the first terminal</span>
+<span class="nb">cd</span> /dev/
+<span class="nb">ls</span>
+<span class="c"># Note the ttyUSBX that is observed</span>
+
+<span class="c"># In the second terminal</span>
+<span class="nb">sudo </span>apt-get install minicom
+<span class="nb">sudo </span>minicom <span class="nt">-s</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Use the arrow keys to scroll down to Serial port setup and press
+enter</li>
+  <li>Press ‘a’ to start editting the Serial Device</li>
+  <li>Rename the serial device to /dev/ttyUSBX where X is the observed
+number</li>
+  <li>Press ‘esc’ twice and select Save setup as dfl</li>
+</ol>
+
+<h2 id="11-flash-the-firmware">11. Flash the firmware</h2>
+
+<ol>
+  <li>Turn off the power to the board if it is on.</li>
+  <li>Connect UART0 to a USB port if it is not connected already.</li>
+  <li>Connect the Hikey board with a USB to micro USB cable.</li>
+  <li>Connect pins 1&amp;2 (AUTO PWR) and 3&amp;4 (BOOT SEL) on the
+J15 header. The pins are silk screened onto the PCB, otherwise
+see page 8 of
+<a href="https://www.96boards.org/wp-content/uploads/2015/02/HiKey_User_Guide_Rev0.2.pdf">https://www.96boards.org/wp-content/uploads/2015/02/HiKey_User_Guide_Rev0.2.pdf</a>.</li>
+  <li>Obtain the Hikey flash recovery tool from
+<a href="https://raw.githubusercontent.com/96boards/burn-boot/master/hisi-idt.py">https://raw.githubusercontent.com/96boards/burn-boot/master/hisi-idt.py</a></li>
+  <li>Turn the power on the to Hikey</li>
+  <li>Three terminals are then required for the following commands</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In the first terminal </span>
+<span class="nb">ls</span> 
+<span class="c"># Note the next ttyUSBY that is observed, in addition to the current ttyUSBX</span>
+
+<span class="c"># In the third terminal</span>
+<span class="nb">sudo </span>python ~/Downloads/hisi-idt.py <span class="nt">--img1</span><span class="o">=</span>l-loader.bin <span class="nt">-d</span> /dev/ttyUSBY
+wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/nvme.img
+<span class="nb">sudo </span>fastboot flash ptable ptable-linux.img
+<span class="nb">sudo </span>fastboot flash fastboot fip.bin
+<span class="nb">sudo </span>fastboot flash nvme nvme.img
+<span class="nb">sudo </span>fastboot flash boot boot-fat.uefi.img
+<span class="c"># The debug prints are displayed in the second terminal</span>
+
+<span class="c"># Then power off the Hikey</span>
+</code></pre></div></div>
+
+<h2 id="12-booting-the-hikey">12. Booting the Hikey</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.  Remove the connection for pins 3&amp;4 on the J15 header and connect
+    pins 5&amp;6 instead.
+2.  Power the Hikey
+3.  Run the desired image. The command below is an example. ~~~bash # In the third terminal fastboot boot images/sel4test-driver-image-arm-hikey.bin -c mode=32bit ~~~
+</code></pre></div></div>
+
+<h2 id="13-build-your-first-sel4-system">13. Build your first seL4 system</h2>
+<p>An image of seL4 can be obtained
+by the following instructions. First, check out the seL4 project.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir hikey-test
+repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+</code></pre></div></div>
+
+<p>Then, use the default config for the !HiKey and build the system.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make hikey_aarch32_debug_xml_defconfig
+</code></pre></div></div>
+<p>Then, use “menuconfig &gt;
+Tools &gt; Build elfloader &gt; Boot image type” and choose “Binary Boot
+Image”</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+make
+</code></pre></div></div>
+
+<p>Once the system is compiled, you will have a new image file created in the images
+directory.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls
+</span>images/sel4test-driver-image-arm-hikey.bin
+</code></pre></div></div>
+
+<h2 id="14-modifications-to-firmware-or-uefi">14. Modifications to firmware or UEFI</h2>
+
+<ul>
+  <li>If the firmware is modified the whole process from and including
+    Section 9 onward must be done.</li>
+  <li>If the UEFI loader is modified then only Section 9 and from
+    Section 11 onward need to be completed</li>
+</ul>
+
+<p>Other instructions can be viewed at
+<a href="https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi">see this</a>.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 on VMware | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 on VMware</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-on-vmware">seL4 on VMware</h1>
+
+<p>This is a quick guide on how to run seL4 x86 on VMWare
+<a href="http://www.vmware.com/au/products/workstation">Workstation</a> /
+<a href="https://www.vmware.com/go/downloadplayer">Player</a>. Written
+based on decently up-to-date versions Workstation 9 &amp; 10 Player 5 &amp; 6
+and for a Linux host machine. May work on Mac host machine, won’t work
+for Windows host (although general idea should be similar).</p>
+
+<p>This guide assumes that your project is all set up and configured to
+build for x86. Read <a href="/Getting_started">Getting started</a> otherwise.</p>
+
+<h2 id="setting-up-a-vm">Setting up a VM</h2>
+
+<p>Both the free non-commercial Player and Workstation run seL4 fine; the
+difference with player is that additional setup is required to automate
+everything if you use Player. In order to start / stop VMWare from the
+command line you need to install VMWare VIX API for Player. Workstation
+comes with VIX and Player both installed.</p>
+
+<p>Once you get VMWare installed and running, go on and create a VM for
+seL4 (choose install OS later, and choose “Other” for guest OS type).</p>
+
+<h3 id="set-up-serial-port">Set Up Serial Port</h3>
+
+<p>After you have a VM, we want to add a serial port so we can see the
+stuff we print out. Go machine configuration -&gt; Add device -&gt;
+Serial port.</p>
+
+<p>Make sure this is the only serial port, and it is serial port 0. If you
+selected Guest OS type “Ubuntu” or something VMWare may set up a secret
+hidden serial port which you can’t edit from the GUI. Choose “Other” for
+guest type.</p>
+
+<p><img src="vmware-serial.png" alt="Virtual Machine Settings" /></p>
+
+<p>There are three options for the serial port</p>
+
+<ol>
+  <li><strong>Output to a text file</strong> (easiest but output only). The VM
+will dump its serial output to a text file when it runs, and you
+can simply go <code class="highlighter-rouge">less -F &lt;file&gt;</code>.</li>
+  <li>
+    <p><strong>Use physical serial port</strong> (best but requires serial cable +
+another machine to minicom/picocom off it). Set it to /dev/ttyS0
+or something.</p>
+  </li>
+  <li><strong>Output to a socket</strong> (allows input/output but annoying to
+set up). You’ll want to apt-get install socat and then run something
+like:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash </span>
+<span class="k">while </span><span class="nb">true</span><span class="p">;</span> <span class="k">do
+ </span>socat <span class="nt">-d</span> <span class="nt">-d</span> UNIX-CONNECT:/tmp/vsock,forever PTY:link<span class="o">=</span>/dev/tty99
+<span class="k">done</span>
+</code></pre></div>    </div>
+    <p>and
+ then minicom to <code class="highlighter-rouge">/dev/tty99</code> or
+ to <code class="highlighter-rouge">/dev/pts/&lt;whatever socat decides to use&gt;</code>.</p>
+  </li>
+</ol>
+
+<p>Choose depending on whether you can get a serial cable from your
+machine, whether you need output…etc. Easiest is to just use a text
+file.</p>
+
+<h3 id="install-grub2">Install GRUB2</h3>
+
+<p>Once you have a VM, you’ll want to set up the hard disk partitions and
+get GRUB2 on the virtual hard disk and its MBR somehow. Easiest way to
+do this is simple install some Linux distro that has GRUB2 (Ubuntu
+Debian Fedora…etc). If you want to save some hard disk space you can
+try
+<a href="https://help.ubuntu.com/community/Installation/MinimalCD">Ubuntu Minimal</a>. Choose to install GRUB to the MBR when installing your OS.</p>
+
+<p>Alternatively if you feel like extra headaches to save space and time
+you can try install GRUB2 manually with grub-install from some Linux
+Live CD image.</p>
+
+<h3 id="add-grub2-option-to-run-sel4">Add GRUB2 Option To Run seL4</h3>
+
+<p>Now we want to edit its <strong>grub.cfg</strong> (usually in /grub2 or /boot/grub
+or something like that) somehow and modify it to boot our seL4 kernel +
+userland binary.</p>
+
+<p>Simplest method is to simply use VMWare player to boot into the guest OS
+you just installed, and then edit the grub.cfg from the guest OS itself.</p>
+
+<p>Another method is to use <strong>vmware-mount</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Usage: vmware-mount diskPath [partition num] mountPoint</span>
+mkdir /tmp/vmount
+vmware-mount /path/to/your/HD.vmdk /tmp/vmount
+<span class="c"># Now do your editing in /tmp/vmount.</span>
+vmware-mount <span class="nt">-d</span> /tmp/vmount
+</code></pre></div></div>
+
+<p>Once you have grub.cfg open in your favourite editor, Add an extra
+option to it:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
+    load_video
+    insmod gzio
+    insmod part_msdos
+    insmod ext2
+    set root='(hd0,msdos1)'
+    search --no-floppy --fs-uuid --set=root &lt;deviceID&gt;
+    echo 'Loading seL4 kernel'
+    multiboot /kernel-image-ia32-pc99
+    echo 'Loading initial module ...'
+    module /sel4-image-ia32-pc99
+}
+</code></pre></div></div>
+
+<p>Of course, change the <code class="highlighter-rouge">--set=root &lt;DeviceID&gt;</code> line to your
+DeviceID (set the DeviceID from other entries already in your grub.cfg),
+and also change the <code class="highlighter-rouge">sel4-image-ia32-pc99</code> to match the name of your
+binary image that your Make produces (look in your build logs or in
+<code class="highlighter-rouge">images/</code> folder).</p>
+
+<p>Also may be a good idea to add <code class="highlighter-rouge">set default=&lt;seL4 menu index&gt;</code>
+to the grub.cfg, so grub is configured to boot seL4.</p>
+
+<h2 id="using-the-vm-to-run-sel4">Using The VM to run seL4</h2>
+
+<p>Now you have a VM ready, you’ll want to copy your built kernel +
+userland binary image over onto its HD, and then start the VM, and
+choose the seL4 option in GRUB, and then monitor the serial output. You
+will need to repeat this entire above process every time you build &amp; run
+seL4. Fortunately I have a script does all of the above in one go (may
+need editing of paths here and there to fit where you put things).</p>
+
+<p><a href="/Hardware/VMware/seL4vmw.py">Download seL4vmw.py</a></p>
+
+<h3 id="do-it-manually">Do It Manually</h3>
+
+<p>First, use vmware-mount to mount the vmdk disk image. Then copy your
+newly built kernel and user binaries over. Then, unmount using
+vmware -d.</p>
+
+<p>Then start your VM (either from VMWare Player GUI or using the vmrun
+script from VIX API), and choose seL4 boot option. Monitor serial
+output. If you’ve set up the seL4 option as the grub default then you
+just need to wait for the grub time out.</p>
+
+<p>If your kernel fails an assert during startup, make sure your kernel
+repo is up to date.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

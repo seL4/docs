@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 and RefOS on the Beaglebone Black | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported hardware platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 and RefOS on the Beaglebone Black</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-and-refos-on-the-beaglebone-black">seL4 and RefOS on the Beaglebone Black</h1>
+<p>This page contains info about
+building seL4 on <a href="http://beagleboard.org/black">Beaglebone Black</a>.</p>
+
+<h2 id="building-for-the-beaglebone-black">Building for the Beaglebone Black</h2>
+<p>These instructions were written
+by Tim Newsham. The Beaglebone is a community-supported port.</p>
+
+<h3 id="requirements">Requirements</h3>
+<p>We suggest using the <code class="highlighter-rouge">arm-linux-gnueabi-</code>
+cross-compilers. Use
+<a href="/Getting_started#getting-cross-compilers">the instructions on getting a toolchain</a>.</p>
+
+<h3 id="building">Building</h3>
+<h4 id="sel4test">seL4test</h4>
+<p>First clone the seL4 repository.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir sel4test
+<span class="nb">cd </span>sel4test
+repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+</code></pre></div></div>
+
+<p>Now you must build a configuration file for your BeagleBone. Finally,
+build with <code class="highlighter-rouge">make</code> with <code class="highlighter-rouge">arm-linux-gnueabi-objcopy</code>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+make
+arm-linux-gnueabi-objcopy <span class="nt">--output-target</span> binary images/sel4test-driver-image-arm-am335x sel4test.bin
+</code></pre></div></div>
+
+<p>In the <code class="highlighter-rouge">menuconfig</code> dialog, make sure that the correct BeagleBone platform
+is selected for your model. This will be under Kernel -&gt; seL4 System.</p>
+
+<h4 id="refos">RefOS</h4>
+<p>For RefOS, first clone the repository.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir refos
+<span class="nb">cd </span>refos
+repo init <span class="nt">-u</span> https://github.com/seL4/refos-manifest.git
+</code></pre></div></div>
+
+<p>Now you must build a configuration file for your BeagleBone. Finally,
+build with<code class="highlighter-rouge">make</code> with <code class="highlighter-rouge">arm-linux-gnueabi-objcopy</code>.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+make
+arm-linux-gnueabi-objcopy --output-target binary images/refos-image refos.bin
+</code></pre></div></div>
+
+<h2 id="booting-on-the-beaglebone-black">Booting on the Beaglebone Black</h2>
+<h3 id="hardware-requirements">Hardware Requirements</h3>
+<ul>
+  <li>power supply</li>
+  <li>serial adapter <a href="http://elinux.org/Beagleboard:BeagleBone_Black_Serial">http://elinux.org/Beagleboard:BeagleBone_Black_Serial</a></li>
+  <li>SDCard for file booting or Ethernet cable for network boot</li>
+</ul>
+
+<h3 id="interacting-with-u-boot">Interacting with U-Boot</h3>
+<p>Connect a serial adapter between your
+development box and the Beaglebone Black. Use a serial program such as
+minicom or screen to connect to the serial port at 115200 bps</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/ttyUSB0 115200
+</code></pre></div></div>
+<p>Power on the device and hit enter a few times to interrupt the
+normal boot process and get a U-Boot prompt.</p>
+
+<p>To boot from SDcard, copy the sel4test.bin binary to a FAT32 partition
+on an SDCard and place the card in the Beaglebone Black. Connect the
+serial device, power up the Beaglebone Black, and hit ENTER to interrupt
+the normal boot process. Finally, enter the following commands at the
+U-Boot prompt to load and run the image:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 ${loadaddr} sel4test.bin
+go ${loadaddr}
+</code></pre></div></div>
+<p>To boot over Ethernet, configure your DHCP server to provide a DHCP
+lease and to specify the sel4test.bin (or refos.bin) as the boot file.
+Configure a TFTP server to serve sel4test.bin file. Plug the Ethernet
+cable and connect the serial device to the Beaglebone black. Power the
+device up and hit ENTER to interrupt the normal boot process. Then, at
+the U-Boot prompt enter:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
+go ${loadaddr}
+</code></pre></div></div>
+<p>To load an alternate image from the TFTP server at 1.2.3.4, use:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp ${loadaddr} 1.2.3.4:refos.bin
+go ${loadaddr}
+</code></pre></div></div>
+<h2 id="other-resources">Other resources</h2>
+<ul>
+  <li><a href="http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/">Supporting the UART1 interface with CAmkES</a></li>
+</ul>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 Tutorial 4 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 Tutorial 4</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#sel4-tutorial-4">seL4 Tutorial 4</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
+<li class="toc-entry toc-h3"><a href="#task-2">TASK 2</a></li>
+<li class="toc-entry toc-h3"><a href="#task-3">TASK 3</a></li>
+<li class="toc-entry toc-h3"><a href="#task-4">TASK 4</a></li>
+<li class="toc-entry toc-h3"><a href="#task-5">TASK 5</a></li>
+<li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
+<li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
+<li class="toc-entry toc-h3"><a href="#task-8">TASK 8</a></li>
+<li class="toc-entry toc-h3"><a href="#task-9">TASK 9</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="sel4-tutorial-4">seL4 Tutorial 4</h1>
+<p>The fourth tutorial is largely trying
+to show how a separate ELF file can be loaded and expanded into a
+VSpace, and subsequently executed, while facilitating IPC between the
+two modules. It also shows how threads with different CSpaces have to
+maneuver in order to pass capabilities to one another.</p>
+
+<p>Don’t gloss over the globals declared before <code class="highlighter-rouge">main()</code> – they’re declared
+for your benefit so you can grasp some of the basic data structures.
+Uncomment them one by one as needed when going through the tasks.</p>
+
+<p>You’ll observe that the things you’ve already covered in the second
+tutorial are filled out and you don’t have to repeat them: in much the
+same way, we won’t be repeating conceptual explanations on this page, if
+they were covered by a previous tutorial in the series.</p>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+
+<ul>
+  <li>Once again, repeat the spawning of a thread: however, this time
+      the two threads will only share the same vspace, but have
+      different CSpaces. This is an automatic side effect of the way
+      that sel4utils creates new “processes”.</li>
+  <li>Learn how the init thread in an seL4 system performs some types
+      of initialization that aren’t traditionally left to userspace.</li>
+  <li>Observe and understand the effects of creating thread that do
+      not share the same CSpace.</li>
+  <li>Understand IPC across CSpace boundaries.</li>
+  <li>Understand how minting a capability to a thread in another
+      CSpace works.</li>
+</ul>
+
+<h2 id="walkthrough">Walkthrough</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># select the config for the first tutorial
+make ia32_hello-4_defconfig
+# build it
+make -j8
+# run it in qemu
+make simulate
+</code></pre></div></div>
+<p>Look for <code class="highlighter-rouge">TASK</code> in the <code class="highlighter-rouge">apps/hello-4</code> and <code class="highlighter-rouge">apps/hello-4-app</code>
+directory for each task. The first set of tasks are in
+<code class="highlighter-rouge">apps/hello-4/src/main.c</code> and the rest are in <code class="highlighter-rouge">apps/hello-4-app/src/main.c</code></p>
+
+<h3 id="task-1">TASK 1</h3>
+
+<p>Aside from receiving information about IRQs in the IRQControl object
+capability, and information about available IO-Ports, and ASID
+availability, and several other privileged bits of information, the init
+thread is also responsible, surprisingly, for reserving certain critical
+ranges of memory as being used, and unavailable for applications.</p>
+
+<p>This call to <code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code> does
+that. For an interesting look at what sorts of things the init thread
+does, see:
+<code class="highlighter-rouge">static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])</code>,
+which is eventually called on by
+<code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code>. So while this
+function may seem tedious, it’s doing some important things.</p>
+
+<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></p>
+
+<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></p>
+
+<h3 id="task-2">TASK 2</h3>
+
+<p><code class="highlighter-rouge">sel4utils_configure_process_custom</code> took a large amount of the work
+out of creating a new “processs”. We skipped a number of steps. Take a
+look at the source for <code class="highlighter-rouge">sel4utils_configure_process_custom()</code> and
+notice how it spawns the new thread with its own CSpace by
+automatically. This will have an effect on our tutorial! It means that
+the new thread we’re creating will not share a CSpace with our main
+thread.</p>
+
+<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></p>
+
+<h3 id="task-3">TASK 3</h3>
+
+<p>This should be a fairly easy step to complete!</p>
+
+<h3 id="task-4">TASK 4</h3>
+
+<p>Now, in this particular case, we are making the new thread be the
+sender. Recall that the sender must have a capability to the endpoint
+that the receiver is listening on, in order to send to that listener.
+But in this scenario, our threads do <strong>not</strong> share the same CSpace!
+The only way the new thread will know which endpoint it needs a
+capability to, is if we tell it. Furthermore, even if the new thread
+knows which endpoint object we are listening on, if it doesn’t have a
+capability to that endpoint, it still can’t send data to us. So we must
+provide our new thread with both a capability to the endpoint we’re
+listening on, and also make sure, that that capability we give it has
+sufficient privileges to send across the endpoint.</p>
+
+<p>There is a number of ways we could approach this, but in this tutorial
+we decided to just pre-initialize the sender’s CSpace with a sufficient
+capability to enable it to send to us right from the start of its
+execution. We could also have spawned the new thread as a listener
+instead, and made it wait for us to send it a message with a sufficient
+capability.</p>
+
+<p>So we use <code class="highlighter-rouge">vka_cspace_make_path()</code>, which locates one free capability
+slot in the selected CSpace, and returns a handle to it, to us. We then
+filled that free slot in the new thread’s CSpace with a <strong>badged</strong>
+capability to the endpoint we are listening on, so as so allow it to
+send to us immediately. We could have filled the slot with an unbadged
+capability, but then if we were listening for multiple senders, we
+wouldn’t know who was whom.</p>
+
+<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h</a></p>
+
+<h3 id="task-5">TASK 5</h3>
+
+<p>As discussed above, we now just mint a badged copy of a capability to
+the endpoint we’re listening on, into the new thread’s CSpace, in the
+free slot that the VKA library found for us.</p>
+
+<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></p>
+
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf</a></p>
+
+<h3 id="task-6">TASK 6</h3>
+
+<p>So now that we’ve given the new thread everything it needs to
+communicate with us, we can let it run. Complete this step and proceed.</p>
+
+<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></p>
+
+<h3 id="task-7">TASK 7</h3>
+
+<p>We now wait for the new thread to send us data using <code class="highlighter-rouge">seL4_Recv()</code>…</p>
+
+<p>Then we verify the fidelity of the data that was transmitted.</p>
+
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
+
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
+
+<h3 id="task-8">TASK 8</h3>
+
+<p>Another demonstration of the <code class="highlighter-rouge">sel4_Reply()</code> facility: we reply to the
+message sent by the new thread.</p>
+
+<p><a href="https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359">https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359</a></p>
+
+<p><a href="https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15">https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15</a></p>
+
+<h3 id="task-9">TASK 9</h3>
+
+<p>In the new thread, we initiate communications by using <code class="highlighter-rouge">seL4_Call()</code>. As
+outlined above, the receiving thread replies to us using
+<code class="highlighter-rouge">sel4_ReplyRecv()</code>. The new thread then checks the fidelity of the data
+that was sent, and that’s the end.</p>
+
+<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

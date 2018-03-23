@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-03-23 16:15:15 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 1.0.0-rt-dev | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 1.0.0-rt-dev</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0/"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs/"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0/"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+
+<div class="content">
+  <h1 id="sel4-100-rt-dev">seL4 1.0.0-rt-dev</h1>
+
+<p>The development branch of the for the seL4 realtime extensions. This
+branch is not verified and is under active development.</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<h3 id="maximum-priorities">Maximum priorities</h3>
+
+<p>Previously seL4 would not allow threads to set any other thread’s
+priority to higher than its own. This has been extracted into a separate
+field for the RT kernel, a maximum priority, which limits what threads
+can set their own or other threads priorities to.</p>
+
+<h3 id="criticality--max-criticality">Criticality &amp; Max Criticality</h3>
+
+<p>Criticality is a new field for threads. The kernel has a system
+criticality level which can be set by the user. When the criticality
+level is raised, threads with criticality &gt;= the criticality level
+have their priorities boosted such that they are chosen by the scheduler
+over low criticality threads.</p>
+
+<h3 id="scheduling-contexts">Scheduling contexts</h3>
+
+<p>This branch adds scheduling contexts to seL4, which represent CPU time
+(as budget/period). Scheduling contexts are separate from threads
+(although threads require one to run) and can be passed around over IPC,
+if the target of an IPC does not have its own scheduling context.</p>
+
+<p>Scheduling contexts allow developers to create periodic threads,
+temporally isolate threads and have variable timeslices for round robin
+threads. If budget == period, the scheduling context acts as timeslice.</p>
+
+<h3 id="ipc--signal-ordering">IPC &amp; Signal ordering</h3>
+
+<p>Signal and IPC delivery is now priority ordered, instead of FIFO.</p>
+
+<h3 id="temporal-exceptions">Temporal exceptions</h3>
+
+<p>Threads can register a temporal exception handler that will be called if
+a threads budget expires before its period has passed. This is optional.</p>
+
+<p>For more details, please see the manual. Most of the updates are in the
+threads chapter.</p>
+
+<h3 id="user-level-scheduling-support">User level scheduling support</h3>
+
+<p>The new API makes it much easier to build high performing user level
+schedulers.</p>
+
+<h2 id="rt-api">RT API</h2>
+
+<p>This section documents kernel API changes as compared with the current
+master of seL4.</p>
+
+<h3 id="api-changes">API Changes</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> arguments changed (domain removed, scheduling
+    context cap, max priority, criticality, max criticality, temporal
+    exception handler added). Fault endpoints are also now specified
+    in the caller’s cspace, as they are installed the the TCB cspace
+    and looked up once rather than every fault.</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetSpace</code> temporal exeception handler added.</li>
+</ul>
+
+<h3 id="api-additions">API Additions</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_CapSchedControl</code> - initial cap for control of CPU time</li>
+  <li><code class="highlighter-rouge">seL4_SchedContextObject</code> - new object for that allows threads
+    access to CPU time</li>
+  <li><code class="highlighter-rouge">seL4_SchedContextBits</code> - size in bits of a scheduling context
+    object</li>
+  <li><code class="highlighter-rouge">seL4_SignalRecv</code> - new system call which allows a single kernel
+    invocation to perform a non-blocking send on one capability, and
+    wait on another.</li>
+  <li><code class="highlighter-rouge">seL4_SignalRecvWithMRs</code> - uses above new system call without
+    touching the IPC buffer, passing only data in registers</li>
+  <li><code class="highlighter-rouge">seL4_Time</code> - type for specifying temporal units to the kernel</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetMaxPriority</code> - set the max priority for a TCB,
+    threads can only start / set priorities threads up to and
+    including their max priority</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetCriticality</code> - set the criticality for a TCB.</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetMaxCriticality</code> - set the max criticality for a TCB,
+    threads can only set criticalities of threads threads up to and
+    including their max criticality</li>
+  <li><code class="highlighter-rouge">seL4_Prio_t</code> - type for priority and max priority, criticality
+    and max criticality, used in TCB_Configure</li>
+  <li><code class="highlighter-rouge">seL4_CNode_SwapCaller</code> - swap the reply cap in the TCB’s reply
+    slot with the reply cap or null cap in the slot in the
+    specified slot.</li>
+  <li><code class="highlighter-rouge">seL4_CNode_SwapTCBCaller</code> - as above, but operates on the reply
+    cap slot of the target TCB. This allows another thread to reply on
+    behalf of the owner of the reply cap.</li>
+  <li><code class="highlighter-rouge">seL4_SchedControl_Configure</code> - invokes the scheduling control cap
+    to populate a scheduling context with parameters</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Yield</code> - end the timeslice of the thread bound
+    to the sched context invoked. The thread will not run again until
+    its period passes.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_YieldTo</code> - If a thread is bound to the
+    scheduling context that this call is invoked on, place it at the
+    head of the scheduling queue for that threads priority. Returns
+    the amount of time the thread yielded to executes.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Consumed</code> - returns the amount of time this
+    scheduling context has executed since the last call to this
+    function or YieldTo.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_BindTCB</code> - bind a TCB to a scheduling context,
+    if the TCB is runnable and scheduling context has budget, this
+    will start the TCB running</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindTCB</code> - remove binding of a scheduling
+    context from a TCB, TCB will no longer run but state will be
+    preserved</li>
+  <li><code class="highlighter-rouge">seL4_CapInitThreadSC</code> - capability to the initial threads
+    scheduling context</li>
+  <li><code class="highlighter-rouge">seL4_CapSchedControl</code> - scheduling control capability, which is
+    given to the root thread</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_BindNotification</code> - Bind a notification to a
+    scheduling context. Passive threads waiting on this notification
+    will borrow the scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindNotification</code> - unbind the notification.</li>
+</ul>
+
+<h3 id="api-deletions">API deletions</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_Yield</code> (replaced by <code class="highlighter-rouge">seL4_SchedContext_Yield</code>)</li>
+  <li><code class="highlighter-rouge">seL4_DomainSet</code></li>
+  <li>Domain scheduler removed.</li>
+  <li><code class="highlighter-rouge">seL4_CNode_SaveCaller</code> (replaced by <code class="highlighter-rouge">seL4_CNode_SwapCaller</code>).</li>
+</ul>
+
+<h2 id="performance-improvements">Performance improvements</h2>
+
+<p>The RT kernel has various experimental performance improvements
+including:</p>
+
+<ul>
+  <li>Interrupt fastpath</li>
+  <li>Signal fastpath (when signals are not delivered immediately - i.e
+    to a lower prio thread)</li>
+  <li>Slowpath avoids IPC lookup if message fits in registers</li>
+  <li>Fault endpoints are looked up when registered and installed in the
+    TCB’s CNode, saving lookups on each fault.</li>
+</ul>
+
+<h2 id="library--test-compatability">Library &amp; test compatability</h2>
+
+<p>The ‘rt’ branch of <code class="highlighter-rouge">seL4_libs</code> has been adapted to the rt branch of seL4,
+and the rt branch of sel4test has been ported to the <code class="highlighter-rouge">seL4_rt-dev-1.0.0</code>
+kernel, along with many more tests written suited to the rt kernel. To
+run it, checkout the <code class="highlighter-rouge">default.xml</code> manifest on the rt branch of
+<a href="https://github.com/seL4/sel4test-manifest/tree/rt">sel4test-manifest</a>.</p>
+
+<p>The rt branch is in no way compatible with the master branch of seL4.</p>
+
+<h2 id="hardware-support">Hardware support</h2>
+
+<p>The RT kernel currently supports:</p>
+
+<ul>
+  <li>Beagle board</li>
+  <li>Sabre</li>
+  <li>x86 (only processors that support <code class="highlighter-rouge">TSC_DEADLINE</code> mode)</li>
+  <li>Odroid-XU</li>
+</ul>
+
+<p>Other hardware platforms will be added as required (the ports require
+updated kernel and user-level timer drivers)</p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the <code class="highlighter-rouge">1.0.0-rt-dev</code> manual included in the release.</p>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>
