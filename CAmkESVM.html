@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-03-23 17:10:35 +1100 -->
+<!-- Page last generated 2018-03-23 17:20:14 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -123,7 +123,7 @@
 <div class="content">
   <h1 id="camkes-x86-vm">CAmkES x86 VM</h1>
 <p>Get the dependencies for building CAmkES by following
-the instructions <a href="/CAmkES/#build-dependencies">here</a>.</p>
+the instructions <a href="/docs/CAmkES/#build-dependencies">here</a>.</p>
 
 <h2 id="getting-the-code">Getting the Code</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-manifest.git
@@ -616,7 +616,7 @@ apps/cma34cr_minimal/cma34cr.camkes:</p>
     <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The only thing unusual about that was the <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a>
+<p>The only thing unusual about that was the <a href="/docs/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a>
 connector. This is a dataport connector much like seL4SharedData. The
 only difference is that the “to” side of the connection gets access to
 the caps to the frames backing the dataport. This is necessary from
@@ -624,7 +624,7 @@ cross vm dataports, as the VMM must be able to establish shared memory
 at runtime, by inserting new mappings into the guest’s address space,
 which requires caps to the physical memory being mapped in.</p>
 
-<p>Interfaces connected with <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
+<p>Interfaces connected with <a href="/docs/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
 configured with an integer specifying the id of the dataport, and the
 size of the dataport. Add the following to the configuration section in
 apps/cma34cr_minimal/cma34cr.camkes:</p>
@@ -878,7 +878,7 @@ world
 <h2 id="booting-from-hard-drive">Booting from hard drive</h2>
 
 <p>These instructions are for ubuntu. For CentOS instructions, see
-<a href="/CAmkESVMCentOS">CAmkESVMCentOS</a>.</p>
+<a href="/docs/CAmkESVMCentOS">CAmkESVMCentOS</a>.</p>
 
 <p>So far we’ve only run a tiny linux on a ram disk. What if we want to run
 Ubuntu booting off a hard drive? This section will explain the changes
