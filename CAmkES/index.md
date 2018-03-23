@@ -81,7 +81,7 @@ will need to install haskell, and some python dependencies
 ## Download CAmkES
 
 
-Download CAmkES source code from github:
+Download CAmkES source code from GitHub:
 ```
 mkdir camkes-project
 cd camkes-project

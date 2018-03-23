@@ -20,7 +20,7 @@ seL4 versions are tagged in git.
 
 
 We aim to follow a monthly release cycle, with fresh code pushed to
-github daily. This means that master is quite volatile, so unless you
+GitHub daily. This means that master is quite volatile, so unless you
 want to live on the bleeding edge we suggest you should work on a
 specific tag and choose when to upgrade.
 
