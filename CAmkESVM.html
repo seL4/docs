@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-03-23 18:52:01 +1100 -->
+<!-- Page last generated 2018-03-25 23:06:24 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,11 +8,11 @@
     <title>CAmkES x86 VM | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
-    <link rel="stylesheet" href="/docs/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
     <!-- Font awesome -->
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <!-- Pygments syntax highlighting  -->
-    <link rel="stylesheet" href="/docs/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
 
   </head>
 
@@ -23,15 +23,15 @@
 <header>
   <ul class="row menu">
     <li class="col-xs-12 col-md-2" >
-            <a href="/docs/">
-              <img class="img-responsive" src="/docs/logos/logo-text-white.svg" alt="seL4 logo" />
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
             </a>
     </li>
     <li class="col-xs-12 col-md-10 menu">
       <nav aria-label="Banner links">
-        <h2><a href="/docs/Documentation">Documentation</a></h2>
-        <h2><a href="/docs/Getting_started">Getting Started</a></h2>
-        <h2><a href="/docs/Tutorials">Tutorials</a></h2>
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
         <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
       </nav>
     </li>
@@ -47,7 +47,7 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/docs/">
+            <a property="item" typeof="WebPage" href="/">
               <span property="name"><b>seL4 Docs</b></span>
               <meta property="position" content="1" />
             </a>
@@ -67,11 +67,11 @@
       <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
         Current versions:</li>
       <li class="list-unstyled text-right">
-      <a href="/docs/sel4_release/seL4_8.0.0"><b>seL4-8.0.0</b></a></li>
+      <a href="/sel4_release/seL4_8.0.0"><b>seL4-8.0.0</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/docs/sel4_release/seL4_5.2.0-mcs"><b>seL4-5.2.0-mcs</b></a></li>
+      <a href="/sel4_release/seL4_5.2.0-mcs"><b>seL4-5.2.0-mcs</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/docs/camkes_release/CAmkES_3.2.0"><b>camkes-3.2.0</b></a></li>
+      <a href="/camkes_release/CAmkES_3.2.0"><b>camkes-3.2.0</b></a></li>
     </ol>
   </nav>
   <div class='clear'></div>
@@ -123,7 +123,7 @@
 <div class="content">
   <h1 id="camkes-x86-vm">CAmkES x86 VM</h1>
 <p>Get the dependencies for building CAmkES by following
-the instructions <a href="/docs/CAmkES/#build-dependencies">here</a>.</p>
+the instructions <a href="/CAmkES/#build-dependencies">here</a>.</p>
 
 <h2 id="getting-the-code">Getting the Code</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-manifest.git
@@ -616,7 +616,7 @@ apps/cma34cr_minimal/cma34cr.camkes:</p>
     <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The only thing unusual about that was the <a href="/docs/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a>
+<p>The only thing unusual about that was the <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a>
 connector. This is a dataport connector much like seL4SharedData. The
 only difference is that the “to” side of the connection gets access to
 the caps to the frames backing the dataport. This is necessary from
@@ -624,7 +624,7 @@ cross vm dataports, as the VMM must be able to establish shared memory
 at runtime, by inserting new mappings into the guest’s address space,
 which requires caps to the physical memory being mapped in.</p>
 
-<p>Interfaces connected with <a href="/docs/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
+<p>Interfaces connected with <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
 configured with an integer specifying the id of the dataport, and the
 size of the dataport. Add the following to the configuration section in
 apps/cma34cr_minimal/cma34cr.camkes:</p>
@@ -878,7 +878,7 @@ world
 <h2 id="booting-from-hard-drive">Booting from hard drive</h2>
 
 <p>These instructions are for ubuntu. For CentOS instructions, see
-<a href="/docs/CAmkESVMCentOS">CAmkESVMCentOS</a>.</p>
+<a href="/CAmkESVMCentOS">CAmkESVMCentOS</a>.</p>
 
 <p>So far we’ve only run a tiny linux on a ram disk. What if we want to run
 Ubuntu booting off a hard drive? This section will explain the changes
@@ -1156,10 +1156,229 @@ natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.<
           This site is for displaying seL4 related documentation.  Pull requests are welcome.
         </li>
         
+          <li>
+            Site last updated: Mon Mar 26 09:41:53 2018 +1100 2feb741
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Thu Mar 22 14:02:40 2018 +1100 e209f00
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="/docs/sitemap">Sitemap</a>
+      <a href="/sitemap">Sitemap</a>
     </div>
 
   </div>

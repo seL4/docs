@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-03-23 18:52:01 +1100 -->
+<!-- Page last generated 2018-03-25 23:06:24 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,11 +8,11 @@
     <title>seL4 on Qemu | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
-    <link rel="stylesheet" href="/docs/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
     <!-- Font awesome -->
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <!-- Pygments syntax highlighting  -->
-    <link rel="stylesheet" href="/docs/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
 
   </head>
 
@@ -23,15 +23,15 @@
 <header>
   <ul class="row menu">
     <li class="col-xs-12 col-md-2" >
-            <a href="/docs/">
-              <img class="img-responsive" src="/docs/logos/logo-text-white.svg" alt="seL4 logo" />
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
             </a>
     </li>
     <li class="col-xs-12 col-md-10 menu">
       <nav aria-label="Banner links">
-        <h2><a href="/docs/Documentation">Documentation</a></h2>
-        <h2><a href="/docs/Getting_started">Getting Started</a></h2>
-        <h2><a href="/docs/Tutorials">Tutorials</a></h2>
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
         <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
       </nav>
     </li>
@@ -47,7 +47,7 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/docs/">
+            <a property="item" typeof="WebPage" href="/">
               <span property="name"><b>seL4 Docs</b></span>
               <meta property="position" content="1" />
             </a>
@@ -58,7 +58,7 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/docs/Hardware/">
+            <a property="item" typeof="WebPage" href="/Hardware/">
               <span property="name"><b>Supported hardware platforms</b></span>
               <meta property="position" content="2" />
             </a>
@@ -78,11 +78,11 @@
       <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
         Current versions:</li>
       <li class="list-unstyled text-right">
-      <a href="/docs/sel4_release/seL4_8.0.0"><b>seL4-8.0.0</b></a></li>
+      <a href="/sel4_release/seL4_8.0.0"><b>seL4-8.0.0</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/docs/sel4_release/seL4_5.2.0-mcs"><b>seL4-5.2.0-mcs</b></a></li>
+      <a href="/sel4_release/seL4_5.2.0-mcs"><b>seL4-5.2.0-mcs</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/docs/camkes_release/CAmkES_3.2.0"><b>camkes-3.2.0</b></a></li>
+      <a href="/camkes_release/CAmkES_3.2.0"><b>camkes-3.2.0</b></a></li>
     </ol>
   </nav>
   <div class='clear'></div>
@@ -117,7 +117,7 @@ machine emulator and virtualizer, and can emulate different
 architectures on different systems.</p>
 
 <p>Qemu can run ARM targets too, more info about that can be found in
-<a href="/docs/Debugging_guide#qemu">Debugging Guide</a>.</p>
+<a href="/Debugging_guide#qemu">Debugging Guide</a>.</p>
 
 <p>We used Ubuntu 16.04 for our tests, but in theory qemu ‘‘should’’ work
 the same under Windows/MacOS.</p>
@@ -148,7 +148,7 @@ first from BIOS. You can always check by <code class="highlighter-rouge">lscpu</
 <p>We are using <a href="https://github.com/seL4/camkes-vm">camkes-vm</a>
 Github repository. It contains Virtual Machine build as a CAmkES
 component. More information about the VM on seL4 can be found on
-<a href="/docs/CAmkESVM">CAmkESVM</a> page.</p>
+<a href="/CAmkESVM">CAmkESVM</a> page.</p>
 
 <p>I replicate some of the steps described there to make it easier to
 follow. First pull the code from the repository using <code class="highlighter-rouge">repo</code> tool.</p>
@@ -160,7 +160,7 @@ repo sync
 
 <p>We use <code class="highlighter-rouge">optiplex9020</code> configuration, because it is the most generic
 one. The other configurations for
-<a href="/docs/CMA34DBMC">CMA34DBMC</a> can be
+<a href="/CMA34DBMC">CMA34DBMC</a> can be
 compiled too, but you can’t run them properly in qemu because they
 require a very specific hardware.</p>
 
@@ -189,7 +189,7 @@ qemu-system-x86_64 <span class="nt">-m</span> 512 <span class="nt">-kernel</span
 
 <p>Login with the username “root” and the password “root”. Again, for more
 details about the VM, go to
-<a href="/docs/CAmkESVM">CAmkESVM</a> page.</p>
+<a href="/CAmkESVM">CAmkESVM</a> page.</p>
 
 <p>The qemu arguments are:</p>
 
@@ -328,10 +328,229 @@ actually able to use this hardware.</p>
           This site is for displaying seL4 related documentation.  Pull requests are welcome.
         </li>
         
+          <li>
+            Site last updated: Mon Mar 26 09:41:53 2018 +1100 2feb741
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Fri Mar 23 15:17:08 2018 +1100 b501b67
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="/docs/sitemap">Sitemap</a>
+      <a href="/sitemap">Sitemap</a>
     </div>
 
   </div>
