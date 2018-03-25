@@ -3,7 +3,7 @@ This documentation site is for cooperatively developing and sharing documentatio
 
 ## Editing the site
 
-Contributions to this site are welcome and are accepted via pull request to the GitHub repository.
+Contributions to this site are welcome! Read our [CONTRIBUTING](CONTRIBUTING.md) and submit a pull request to the GitHub repository.
 
 ## seL4 Basics
 
