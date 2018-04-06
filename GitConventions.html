@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAmkES Tutorial 2 | seL4 docs</title>
+    <title>Git conventions | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -56,20 +56,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Tutorials/">
-              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
-              <meta property="position" content="2" />
-            </a>
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">CAmkES Tutorial 2</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">Git conventions</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -95,24 +84,12 @@
       
   <nav aria-label="Table of Contents">
     <ul class="section-nav">
-<li class="toc-entry toc-h1"><a href="#camkes-tutorial-2">CAmkES Tutorial 2</a>
+<li class="toc-entry toc-h1"><a href="#git-conventions">Git conventions</a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#required-reading">Required Reading</a></li>
-<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
-<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
-<li class="toc-entry toc-h3"><a href="#task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</a></li>
-<li class="toc-entry toc-h3"><a href="#task-18-21-24">TASK 18, 21, 24</a></li>
-<li class="toc-entry toc-h3"><a href="#task-2-4">TASK 2, 4</a></li>
-<li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
-<li class="toc-entry toc-h3"><a href="#task-9-12-13">TASK 9, 12, 13</a></li>
-<li class="toc-entry toc-h3"><a href="#task-19-20-23">TASK 19, 20, 23</a></li>
-<li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
-<li class="toc-entry toc-h3"><a href="#task-8-16">TASK 8, 16</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#done">Done!</a></li>
+<li class="toc-entry toc-h2"><a href="#commit-messages">Commit messages</a></li>
+<li class="toc-entry toc-h2"><a href="#whitespace-and-style">Whitespace and style</a></li>
+<li class="toc-entry toc-h2"><a href="#history">History</a></li>
+<li class="toc-entry toc-h2"><a href="#further-resources">Further resources</a></li>
 </ul>
 </li>
 </ul>
@@ -120,107 +97,61 @@
 
 
 <div class="content">
-  <h1 id="camkes-tutorial-2">CAmkES Tutorial 2</h1>
-<p>This tutorial is an introduction to
-CAmkES: bootstrapping a basic static CAmkES application, describing its
-components, and linking them together.</p>
+  <h1 id="git-conventions">Git conventions</h1>
 
-<h2 id="required-reading">Required Reading</h2>
-<p>While it’s possible to successfully complete the
-CAmkES tutorials without having read the
-<strong><a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md">CAmkES manuals</a></strong>, the manuals really explain everything in plain English,
-and any aspiring CAmkES dev should read the
-<strong><a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md">CAmkES manuals</a></strong> before attempting to complete the tutorials.</p>
+<p>This page outlines the conventions we attempt to use for our git history. Note that this applies to
+pull requests where the content is ready to merge to the master branch.
+If you are raising a pull request for feedback, you do not
+need to follow the history conventions, but please note this in the description of the pull request
+to avoid confusion.</p>
 
-<h2 id="learning-outcomes">Learning outcomes</h2>
+<p>We will review the history in pull requests that are in a <em>ready to merge</em> state. If you need help
+with git, or advice on how to structure your history, please reach out.</p>
+
+<p>Note that our work-flow is a <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow">fork-rebase
+workflow</a>.</p>
+
+<h2 id="commit-messages">Commit messages</h2>
+
+<p>Please follow the git commit <a href="https://chris.beams.io/posts/git-commit/">style guide</a>. Briefly:</p>
 
 <ul>
-  <li>Understand how to represent and implement events in CAmkES.</li>
-  <li>Understand how to use Dataports.</li>
+  <li>Use a subject line to summarize the commit.</li>
+  <li>Limit the subject line to roughly 50 characters.</li>
+  <li>Capitalise the subject line.</li>
+  <li>Avoid endpoint the subject line in a full stop.</li>
+  <li>Use the imperative mood in the subject line.</li>
+  <li>Follow this with a blank line, then a summary of why the changes are required, and if non-trivial,
+how they are required.</li>
+  <li>Wrap the body at 72 chars.</li>
 </ul>
 
-<h2 id="walkthrough">Walkthrough</h2>
-<p>Bear in mind, this article will be going through the
-tutorial steps in the order that the user is led through them in the
-slide presentation, except where several similar tasks are coalesced to
-avoid duplication. Additionally, if a tasks step covers material that
-has already been touched on, it will be omitted from this article.</p>
+<h2 id="whitespace-and-style">Whitespace and style</h2>
 
-<h3 id="task-1">TASK 1</h3>
-<p>Here you’re declaring the events that will be bounced
-back and forth in this tutorial. An event is a signal is sent over a
-Notification connection.</p>
+<ul>
+  <li>Please keep whitespace and style changes in their own commits, not mixed with other changes.</li>
+  <li>If making a trivial commit, please prefix with <code class="highlighter-rouge">trivial:</code></li>
+</ul>
 
-<p>You are strongly advised to read the manual section on Events here:
-<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events</a>.</p>
+<h2 id="history">History</h2>
 
-<p>'’Ensure that when declaring the consumes and emits keywords between
-  the Client.camkes and Echo.camkes files, you match them up so that
-  you’re not emitting on both sides of a single interface, or consuming
-  on both sides of an interface.’’</p>
+<ul>
+  <li>Merge commits are prohibited.</li>
+  <li>Revert commits which act on the contents of the PR are prohibited.</li>
+  <li>Commits should make the changes easier to follow: if you move a function and change it, please do
+so in separate commits.</li>
+  <li>Commits should be separated into functional, logical changes, unless those changes are dependant.
+if you find yourself writing a commit message which says ‘Fix X and clean up Y’, you should
+    probably use two commits.</li>
+</ul>
 
-<h3 id="task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</h3>
-<p>Recall that CAmkES prefixes the name
-of the interface instance to the function being called across that
-interface? This is the same phenomenon, but for events; in the case of a
-connection over which events are sent, there is no API, but rather
-CAmkES will generate _emit() and _wait() functions to enable the
-application to transparently interact with these events.</p>
+<h2 id="further-resources">Further resources</h2>
 
-<h3 id="task-18-21-24">TASK 18, 21, 24</h3>
-<p>One way to handle notifications in CAmkES is to
-use callbacks when they are raised. CAmkES generates functions that
-handle the registration of callbacks for each notification interface
-instance. These steps help you to become familiar with this approach.</p>
+<ul>
+  <li><a href="http://pcottle.github.io/learnGitBranching/">LearnGitBranching</a></li>
+  <li>Interactive <a href="http://ndpsoftware.com/git-cheatsheet.html#loc=stash">Git cheat sheet</a></li>
+</ul>
 
-<hr />
-
-<h3 id="task-2-4">TASK 2, 4</h3>
-<p>Dataports are typed shared memory mappings. In your
-CAmkES ADL specification, you state what C data type you’ll be using to
-access the data in the shared memory – so you can specify a C struct
-type, etc.</p>
-
-<p>The really neat part is more that CAmkES provides access control for
-accessing these shared memory mappings: if a shared mem mapping is such
-that one party writes and the other reads and never writes, we can tell
-CAmkES about this access constraint in ADL.</p>
-
-<p>So in TASKs 2 and 4, you’re first being led to create the “Dataport”
-interface instances on each of the components that will be participating
-in the shared mem communication. We will then link them together using a
-“seL4SharedData” connector later on.</p>
-
-<h3 id="task-6">TASK 6</h3>
-<p>And here we are: we’re about to specify connections
-between the shared memory pages in each client, and tell CAmkES to link
-these using shared underlying Frame objects. Fill out this step, and
-proceed.</p>
-
-<h3 id="task-9-12-13">TASK 9, 12, 13</h3>
-<p>These steps are asking you to write some C code
-to access and manipulate the data in the shared memory mapping
-(Dataport) of the client. Follow through to the next step.</p>
-
-<h3 id="task-19-20-23">TASK 19, 20, 23</h3>
-<p>And these steps are asking you to write some C
-code to access and manipulate the data in the shared memory mapping
-(Dataport) of the server.</p>
-
-<h3 id="task-7">TASK 7</h3>
-<p>This is an introduction to CAmkES attributes: you’re
-being asked to set the priority of the components.</p>
-
-<h3 id="task-8-16">TASK 8, 16</h3>
-<p>This is where we specify the data access constraints
-for the Dataports in a shared memory connection. We then go about
-attempting to violate those constraints to see how CAmkES has truly met
-our constraints when mapping those Dataports.</p>
-
-<h2 id="done">Done!</h2>
-<p>Congratulations: be sure to read up on the keywords and
-structure of ADL: it’s key to understanding CAmkES. And well done on
-writing your first CAmkES application.</p>
 
 </div>
 
@@ -310,8 +241,6 @@ writing your first CAmkES application.</p>
               
             
               
-                Page last updated: Thu Mar 8 14:13:52 2018 +1100 3880bf2
-              
             
               
             
@@ -411,6 +340,8 @@ writing your first CAmkES application.</p>
             
               
             
+              
+                Page last updated: Fri Apr 6 11:24:33 2018 +1000 c62b839
               
             
               
@@ -474,9 +405,9 @@ writing your first CAmkES application.</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/CAmkES_Tutorial_2.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/GitConventions.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/CAmkES_Tutorial_2.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/GitConventions.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
