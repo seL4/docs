@@ -41,15 +41,15 @@ We welcome community contributions to our sources and this website!
 
 ## Releases
 
+- [Release process](ReleaseProcess)
+
 ### seL4
 
 - [Current release](https://github.com/seL4/seL4/releases/latest)
 - [Current manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
 - [Release notes](sel4_release)
-- [Release process](ReleaseProcess)
 
 ### CAmkES
-
 
 - [Current release](https://github.com/seL4/camkes-tool/releases/latest)
 - [Release notes](camkes_release)
