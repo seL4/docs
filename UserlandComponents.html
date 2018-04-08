@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-06 01:27:00 +0000 -->
+<!-- Page last generated 2018-04-08 23:55:19 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Loading onto ARM Hardware | seL4 docs</title>
+    <title>Userland Components and Drivers | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -30,7 +30,7 @@
     <li class="col-xs-12 col-md-10 menu">
       <nav aria-label="Banner links">
         <h2><a href="/Documentation">Documentation</a></h2>
-        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
         <h2><a href="/Tutorials">Tutorials</a></h2>
         <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
       </nav>
@@ -56,20 +56,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Hardware/">
-              <span property="name"><b>Supported hardware platforms</b></span>
-              <meta property="position" content="2" />
-            </a>
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Loading onto ARM Hardware</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">Userland Components and Drivers</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -95,84 +84,211 @@
       
 
 <div class="content">
-  <h1 id="loading-onto-arm-hardware">Loading onto ARM Hardware</h1>
+  <h1 id="userland-components-and-drivers">Userland Components and Drivers</h1>
 
-<p>The ARM platform has many ways to boot into an operating system. Typically there is some low-level ROM code (very specific to each device) that turns on RAM, and turns on enough clocks to be able to load
-a second-stage bootloader which does the work. Some do this in several stages, to enable
-Trust Zone, HYP-mode etc.</p>
+<p>This page lists and tracks the various user-level libraries and
+components that are available to use in seL4 system.</p>
 
-<p>The main bootloaders after the ROM are U-Boot, UEFI, Loki (for Samsung devices) and simpleboot.  Most of these provide Fastboot over USB to allow software loading.</p>
+<h2 id="libraries-vs-components">Libraries vs Components</h2>
 
-<p>On UEFI for arm: <a href="http://blog.hansenpartnership.com/efitools-for-arm-released/">http://blog.hansenpartnership.com/efitools-for-arm-released/</a> On U-Boot for arm: <a href="http://www.denx.de/wiki/U-Boot">http://www.denx.de/wiki/U-Boot</a></p>
+<p>We generally put generic device driver and component code into
+libraries, so that they can be used in various scenarios (in native seL4
+processes, in CAmkES components, linked directly with clients, etc.).</p>
 
-<p>Load from U-Boot, from SD card or flash, or using Fastboot or TFTP. Most applications have two parts: treat the “kernel” part as a kernel, and the “application” part like an initial root disk. If there is only one part to an image (e.g., seL4test for some platforms) treat it like a kernel.</p>
+<p>Specific CAmkES components, seL4 processes, etc. wrap around the
+functionality provided by these libraries, performing relevant
+initialisation, etc. and providing the library’s functionality as a
+service.</p>
 
-<p>Detailed instructions differ from board to board. See The <a href="index">General Hardware Page</a> for general instructions; it has links to board-specific instructions as well.</p>
+<p>Below we list the various drives and other userland functionality we
+provide, and note whether it is available as a library, as a component,
+or in some other form. We also link to where it can be found.</p>
 
-<h2 id="fastboot">Fastboot</h2>
-<p>Most ARM platforms other than the Beagle Boards that seL4 can use support booting via Fastboot.</p>
-
-<p>To boot via Fastboot, you need to convert the image file produced by the seL4 build system into a U-Boot image.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkimage <span class="nt">-A</span> arm <span class="nt">-a</span> 0x48000000 <span class="nt">-e</span> 0x48000000 <span class="nt">-C</span> none <span class="nt">-A</span> arm <span class="nt">-T</span> kernel <span class="nt">-O</span> qnx <span class="nt">-d</span> INPUT_FILE OUTPUT_FILE
-</code></pre></div></div>
-<p>The reason we choose QNX is because we exploit the fact that, like seL4, QNX expects to be ELF-loaded. The alternative is to convert our ELF file into a binary file using <code class="highlighter-rouge">objcopy</code>.
-The address to use varies from board to board. Unless you change the load address, use these:</p>
+<h2 id="device-drivers">Device Drivers</h2>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left"><strong>Platform</strong></th>
-      <th style="text-align: left"><strong>Address</strong></th>
+      <th>description</th>
+      <th>platform</th>
+      <th>type</th>
+      <th>location</th>
+      <th>comment</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Arndale, Odroid-X, Odroid-XU</td>
-      <td style="text-align: left">0x48000000</td>
+      <td>CAN (MCP2515)</td>
+      <td>N/A</td>
+      <td>component</td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">Sabre Lite</td>
-      <td style="text-align: left">0x30000000</td>
+      <td>Ethernet (e1000)</td>
+      <td>x86</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">Panda, Panda ES</td>
-      <td style="text-align: left">0x80000000</td>
+      <td>Ethernet (…)</td>
+      <td>Sabre-Lite</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>MMC (…)</td>
+      <td>Obroid-XU</td>
+      <td>component?</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>I2C (…)</td>
+      <td>Odroid-XU</td>
+      <td>component</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SD (…)</td>
+      <td>Sabre-Lite</td>
+      <td>library?</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SPI (…)</td>
+      <td>Odroid-XU</td>
+      <td>component?</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>SPI (…)</td>
+      <td>TK1</td>
+      <td>component?</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>timer (PIT)</td>
+      <td>x86</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>timer (EPIT)</td>
+      <td>Sabre-Lite</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>timer (PWM)</td>
+      <td>Odroid-XU</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>timer (NVTMR)</td>
+      <td>TK1</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>UART (…)</td>
+      <td>x86</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>UART (…)</td>
+      <td>Sabre-Lite</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>UART (…)</td>
+      <td>Odroid-XU</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>UART (…)</td>
+      <td>TK1</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>USB (…)</td>
+      <td>x86, Odroid-XU</td>
+      <td>library</td>
+      <td> </td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<p>When you have your image, put the board into Fastboot mode (interrupt U-Boot, and type “fastboot”), then do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fastboot boot OUTPUT_FILE
-</code></pre></div></div>
-<h2 id="beagle-board">Beagle Board</h2>
-<p>You can compile a U-boot for Beagle Board that supports Fastboot, or you can use <code class="highlighter-rouge">dfu-util</code> with the standard U-Boot to transfer the image to the board.</p>
+<h2 id="other-libraries-and-components">Other Libraries and Components</h2>
 
-<p>The address that the file downloads to is controlled by the <code class="highlighter-rouge">loadaddr</code> environment variable in U-Boot. You can either download an  ELF file, and then run <code class="highlighter-rouge">bootelf</code> on the U-Boot command-line, or download a U-Boot image file (created with <code class="highlighter-rouge">mkimage</code>) and use <code class="highlighter-rouge">bootm</code> to run it. You may need to take care that the ELF sections or image regions do not overlap with the location of the ELF/image itself, or loaded to non-existent memory address (0x81000000 works fine, but 0x90000000 won’t work on the original Beagle Board since there’s no RAM there).</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu-util -D sel4test-image-arm
-</code></pre></div></div>
-
-<h2 id="booting-from-sd-card">Booting from SD card</h2>
-<p>Pull out the SD card from your board, and put it into an SD card reader attached to your build host. Mount the (MS-DOS) filesystem on the first partition on the SD card and copy your image to it. Unmount the filesystem, and put the card back into your board. Reset the board (by power cycling, or pressing the reset button). To run the image:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
-mmcinfo
-fatload mmc 0 ${loadaddr} sel4test-image-arm
-bootelf ${loadaddr}
-</code></pre></div></div>
-<p>You can use</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
-</code></pre></div></div>
-
-<p>to see what is there. Most U-Boot implementations define a suitable <code class="highlighter-rouge">loadaddr</code> in their environment.</p>
-
-<h2 id="tftp-booting">TFTP booting</h2>
-<p>Setting up a DHCP and TFTP server are out of scope for this document. Once you have done that, however, and installed a TFTP-enabled U-Boot on your board if it doesn’t already have one.</p>
-
-<p>You can then power up the device and stop U-Boot’s auto boot feature if
-enabled by pressing a key, and do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp file address
-bootelf address
-</code></pre></div></div>
-
+<table>
+  <thead>
+    <tr>
+      <th>description</th>
+      <th>platform</th>
+      <th>type</th>
+      <th>location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TCP/IP (LwIP)</td>
+      <td>x86</td>
+      <td>library</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>TCP/IP (picoTCP)</td>
+      <td>x86</td>
+      <td>library</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>UDP Server (LwIP)</td>
+      <td>x86</td>
+      <td>component</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>UDP Server (picoTCP)</td>
+      <td>x86</td>
+      <td>component</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>VMM &amp; VM</td>
+      <td>x86</td>
+      <td>library, component</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>VMM &amp; VM</td>
+      <td>Odroid-XU, TK1</td>
+      <td>library, component</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
 </div>
 
@@ -201,7 +317,7 @@ bootelf address
         </li>
         
           <li>
-            Site last updated: Fri Apr 6 11:24:33 2018 +1000 c62b839
+            Site last updated: Mon Apr 9 09:32:59 2018 +1000 69cb443
           </li>
           <li>
             
@@ -318,8 +434,6 @@ bootelf address
               
             
               
-                Page last updated: Fri Mar 16 11:18:41 2018 +1100 71db9bf
-              
             
               
             
@@ -351,6 +465,8 @@ bootelf address
             
               
             
+              
+                Page last updated: Mon Apr 9 09:32:32 2018 +1000 a5aa16a
               
             
               
@@ -426,9 +542,9 @@ bootelf address
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/General-ARM.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/UserlandComponents.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/General-ARM.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/UserlandComponents.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

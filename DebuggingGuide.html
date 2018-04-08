@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-04-08 23:55:19 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Debugging guide | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+
+  </head>
+
+  <body class="container">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Debugging guide</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_8.0.0"><b>seL4-8.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_5.2.0-mcs"><b>seL4-5.2.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.2.0"><b>camkes-3.2.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#debugging-guide">Debugging guide</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#compiler-settings">Compiler Settings</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#kernel">Kernel</a></li>
+<li class="toc-entry toc-h3"><a href="#user">User</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#qemu">Qemu</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#using-gdb-with-qemu">Using GDB with Qemu</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#userspace-debugging">Userspace debugging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#objdump">Objdump</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#debugging-sel4test">Debugging seL4test</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#in-kernel-debugging">In kernel debugging</a></li>
+</ul>
+</li>
+</ul>
+  </nav>
+
+
+<div class="content">
+  <h1 id="debugging-guide">Debugging guide</h1>
+
+<h2 id="compiler-settings">Compiler Settings</h2>
+
+<h3 id="kernel">Kernel</h3>
+
+<p>When debugging the kernel, make sure <code class="highlighter-rouge">CONFIG_DEBUG</code> and <code class="highlighter-rouge">CONFIG_PRINTING</code>
+are enabled. This can be done by <code class="highlighter-rouge">make menuconfig</code> and enabling the
+following options:</p>
+
+<ul>
+  <li>seL4 Kernel -&gt; Build Options -&gt; Enable debug facilities</li>
+  <li>seL4 Kernel -&gt; Build Options -&gt; Enable kernel printing.</li>
+</ul>
+
+<p>This will turn on some helpful features for debugging the kernel
+including:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">printf</code> + a serial driver,</li>
+  <li><code class="highlighter-rouge">-g</code> is passed to the compiler,</li>
+  <li>compile- and run-time asserts,</li>
+  <li>the kernel will print out error messages when invocations fail.</li>
+</ul>
+
+<h3 id="user">User</h3>
+
+<p>To make sure similar settings are passed to the user, make sure
+<code class="highlighter-rouge">CONFIG_USER_DEBUG</code></p>
+
+<p>Similarly, enable this setting by using <code class="highlighter-rouge">make menuconfig</code> and setting:</p>
+
+<ul>
+  <li>Toolchain options -&gt; build user level with assertions, -g and
+    debugging messages</li>
+</ul>
+
+<h2 id="qemu">Qemu</h2>
+
+<p><a href="http://www.qemu.org/">Qemu</a> is a simulator that provides
+software emulation of a hardware platform. It is useful for developing
+and debugging embedded software when you do not have access to the
+target platform. Even if you do have the target hardware, Qemu can
+shorten your edit-compile-debug cycle. Be aware that it is not
+cycle-accurate and cannot emulate every device, so sometimes you have no
+alternative than to debug on real hardware.</p>
+
+<p>There are two main Qemu binaries that are relevant for seL4 development:</p>
+
+<ul>
+  <li>qemu-system-arm - qemu for ARM</li>
+  <li>qemu-system-i386 - qemu for x86</li>
+</ul>
+
+<p>After compiling a seL4 project, you can use one of these to simulate
+execution of the resulting binaries. For example, after compiling
+sel4test for the KZM (IMX31) board:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span> <span class="nt">-kernel</span> images/sel4test-driver-image-arm-imx31
+</code></pre></div></div>
+
+<p>On x86, kernel and userspace are provided as separate images:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-i386 <span class="nt">-m</span> 512 <span class="nt">-nographic</span> <span class="nt">-kernel</span> images/kernel-ia32-pc99 <span class="nt">-initrd</span> images/sel4test-driver-image-ia32-pc99
+</code></pre></div></div>
+
+<p>Some seL4 projects will define Makefile targets as shorthand for these
+commands, so you can simply run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make simulate-kzm <span class="c"># Simulate KZM execution</span>
+make simulate-ia32 <span class="c"># Simulate x86 execution</span>
+</code></pre></div></div>
+
+<p>When simulating a seL4 system in Qemu, you should see output that is
+directed to the (emulated) UART device on your terminal:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
+  paddr=[82000000..8225001f] 
+ELF-loading image 'kernel'
+  paddr=[80000000..80033fff]
+  vaddr=[f0000000..f0033fff]
+  virt_entry=f0000000
+ELF-loading image 'sel4test-driver'
+  paddr=[80034000..8036efff]
+  vaddr=[10000..34afff]
+  virt_entry=1c880
+Enabling MMU and paging
+Jumping to kernel-image entry point...
+
+Bootstrapping kernel
+Switching to a safer, bigger stack...
+seL4 Test
+=========
+...
+</code></pre></div></div>
+
+<p>To exit from Qemu, type the sequence Ctrl+”a”, then “x”. Note that you
+can exit at any point; you do not need to wait for the system to finish
+or reach some stable state. If you exit Qemu while a system is running,
+it will simply be terminated.</p>
+
+<p>Qemu has some powerful debugging features built in. You can type
+Ctrl+”a”, then “c” to switch to the Qemu monitor. From here you can
+inspect CPU or device state, read and write memory, and single-step
+execution. More information about this functionality is available in the
+<a href="http://qemu.weilnetz.de/qemu-doc.html#pcsys_005fmonitor">Qemu documentation</a>.</p>
+
+<p>When debugging a seL4 project, the Qemu debugger is inherently limited.
+It has no understanding of your source code, so it is difficult to
+relate what you are seeing back to the C code you compiled. It is
+possible to get a richer debugging environment by connecting GDB to
+Qemu.</p>
+
+<h3 id="using-gdb-with-qemu">Using GDB with Qemu</h3>
+
+<p><a href="https://www.gnu.org/s/gdb/">GDB</a> is a debugger commonly used
+in C application development. Though not as seamless as debugging a
+native Linux application, it is possible to use GDB to debug within
+Qemu’s emulated environment.</p>
+
+<p>Start Qemu with the extra options “-S” (pause execution on start) and
+“-s” (start a GDB server on TCP port 1234):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span> <span class="nt">-kernel</span> images/sel4test-driver-image-arm-imx31 <span class="nt">-S</span> <span class="nt">-s</span>
+</code></pre></div></div>
+
+<p>In a separate terminal window, start your target platform’s version of
+GDB. You should either pass a binary of the seL4 kernel if you intend on
+debugging seL4 itself or the userspace application if you intend on
+debugging an application on seL4. Note that your binary needs to include
+debugging information (“-g” flag to GCC; “Toolchain Options” -&gt; “Emit
+debugging information” in the seL4 build configuration) if you want GDB
+to show you C source code while debugging. In this example we’re going
+to debug the seL4 kernel that has been built in debug mode:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arm-none-eabi-gdb build/kernel/kernel.elf
+</code></pre></div></div>
+
+<p>At the GDB prompt, enter “target remote :1234” to connect to the server
+Qemu is hosting:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reading symbols from build/kernel/kernel.elf...done.
+(gdb) target remote :1234
+Remote debugging using :1234
+0x82000000 in ?? ()
+(gdb)
+</code></pre></div></div>
+
+<p>Suppose we want to halt when kprintf is called. Enter “break kprintf” at
+the GDB prompt:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) break kprintf
+Breakpoint 1 at 0xf0011248: file kernel/src/machine/io.c, line 269.
+</code></pre></div></div>
+
+<p>We can now start Qemu running and wait until we hit the breakpoint. To
+do this, type “cont” at the GDB prompt:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) cont
+Continuing.
+
+Breakpoint 1, kprintf (format=0xf0428000 "") at kernel/src/machine/io.c:269
+269     {
+</code></pre></div></div>
+
+<p>Note that some output has appeared in the other terminal window running
+Qemu as it has partially executed. It may be surprising to see that some
+printing somehow happened without our breakpoint triggering. The reason
+for this is that output we’re seeing is from the ELF loader that runs
+prior to the kernel. GDB does not know the address of its print function
+(as we only gave GDB the kernel’s symbol table) and it is not looking to
+break on its address. The breakpoint we have just hit is the first time
+the ‘‘kernel’’ tried to print. Similarly, the breakpoint we have
+configured will have no effect on userspace calls to <code class="highlighter-rouge">printf</code>.</p>
+
+<p>Now that we are stopped at a breakpoint, all the standard GDB operations
+are possible (inspect registers or the stack, single-step, continue
+until function exit, …). More information is available in the
+<a href="http://www.gnu.org/software/gdb/documentation/">GDB manual</a>.</p>
+
+<p>Be warned that if you are debugging the kernel’s early boot steps,
+something that may not be immediately obvious is that debugging across a
+context in which page mappings change (e.g. switching page directories
+or turning the MMU on/off) will confuse GDB and you may find breakpoints
+triggering unexpectedly or being missed.</p>
+
+<p>The process we have described is similar for x86, though if you are on
+an x86 or x86_64 host you can simply use your platform’s native GDB,
+gdb.</p>
+
+<p>Below is another example for debugging userspace sel4test on ia32:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Apply a sel4test config for simulating using qemu.</span>
+make ia32_release_xml_defconfig
+
+<span class="c"># After building, check that all of the tests run and pass.</span>
+make simulate-ia32​
+
+<span class="c"># Invoke qemu with the flags -s -S. It should block until you attach a gdb instance.</span>
+<span class="c"># -s shorthand for -gdb tcp::1234</span>
+<span class="c"># -S freeze CPU at startup (use 'c' to start execution)</span>
+qemu-system-i386 <span class="nt">-m</span> 512 <span class="nt">-nographic</span> <span class="nt">-kernel</span> images/kernel-ia32-pc99 <span class="nt">-initrd</span> images/sel4test-driver-image-ia32-pc99 <span class="nt">-s</span> <span class="nt">-S</span>
+
+<span class="c"># Start a gdb instance in another window.</span>
+gdb stage/x86/pc99/bin/sel4test-driver <span class="c"># (Or gdb stage/x86/pc99/bin/sel4test-tests)</span>
+
+<span class="c"># Attach to the qemu instance using remote gdb serial server protocol.</span>
+<span class="o">(</span>gdb<span class="o">)</span> target remote :1234
+<span class="c"># Remote debugging using :1234</span>
+<span class="c"># 0x0000fff0 in ?? ()</span>
+
+<span class="c"># Set a breakpoint at main.</span>
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>main
+<span class="c"># Breakpoint 1 at 0x8048460: file /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c, line 459.</span>
+
+<span class="c"># Resume the qemu cpu. </span>
+<span class="o">(</span>gdb<span class="o">)</span> <span class="k">continue</span>
+<span class="c"># Continuing. </span>
+<span class="c"># # It should hit the first breakpoint.</span>
+<span class="c"># Breakpoint 1, main () at /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459</span>
+</code></pre></div></div>
+
+<h4 id="userspace-debugging">Userspace debugging</h4>
+
+<p>The steps for debugging a userspace application on seL4 are identical to
+the ones we have just seen, except that we pass GDB a symbol table for
+userspace rather than the kernel. For example, using the same sel4test
+environment we start Qemu in the same way but start GDB with sel4test’s
+binary:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arm-none-eabi-gdb build/arm/imx31/sel4test-driver/sel4test-driver.bin
+</code></pre></div></div>
+
+<p>After connecting to Qemu, we can instruct GDB to break on the userspace
+<code class="highlighter-rouge">printf</code> function:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reading symbols from build/arm/imx31/sel4test-driver/sel4test-driver.bin...done.
+(gdb) target remote :1234
+Remote debugging using :1234 0x82000000 in ?? () 
+(gdb) break printf
+Breakpoint 1 at 0x30870: file libs/libmuslc/src/stdio/printf.c, line 9.
+(gdb)
+</code></pre></div></div>
+
+<p>Note that GDB has correctly identified the printf function in Musl C. We
+now continue as before:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) cont
+Continuing.
+
+Breakpoint 1, printf (fmt=0x363e8 "%s") at libs/libmuslc/src/stdio/printf.c:9
+9               ret = vfprintf(stdout, fmt, ap);
+(gdb)
+</code></pre></div></div>
+
+<p>If you examine the terminal window running Qemu at this point, you will
+note that we see an extra bit of output from the kernel. The kernel’s
+print functionality is unaffected, but GDB has stopped execution the
+first time userspace called <code class="highlighter-rouge">printf</code>.</p>
+
+<p>From here, the experience is essentially identical to debugging the
+kernel. One small complication to be aware of is that debugging across a
+context switch may be confusing. If you are single-stepping in GDB and
+find execution suddenly diverted to an address where code is unknown,
+check the address itself. It is usually easy to identify from the
+address alone when execution is in kernel code or the exception vector
+table. Unfortunately there is no easy way to continue until you’re back
+in userspace, particularly if the kernel schedules a different thread
+than the one you were debugging. Depending on the scenario you are
+debugging, it may be simpler to modify your system setup to ensure only
+one thread is running.</p>
+
+<h2 id="objdump">Objdump</h2>
+
+<p>Objdump can be used to disassemble an ELF file, be it a kernel or an
+application. This can be used to lookup the instruction where a fault
+occurred. Make sure <code class="highlighter-rouge">-g</code> is passed to the compiler so that debug
+information is included in the image.</p>
+
+<p>For ARM, supposing that <strong>arm-none-eabi-</strong> is used as the
+cross-compiler prefix.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arm-none-eabi-objdump <span class="nt">-D</span> binary_file_name <span class="o">&gt;</span> dump.s
+</code></pre></div></div>
+<p>For x86</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>objdump <span class="nt">-D</span> binary_file_name <span class="o">&gt;</span> dump.s
+</code></pre></div></div>
+<p>The file <code class="highlighter-rouge">dump.s</code> has the human-readable assembly instructions.</p>
+
+<p>If you have symbols and want (C) source information in your disassembly
+(and who doesn’t!) then use the -S flag. for example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>objdump <span class="nt">-DS</span> binary_file_name
+</code></pre></div></div>
+<h3 id="debugging-sel4test">Debugging seL4test</h3>
+
+<p>The sel4test project has make targets which perform call objdump with
+the correct arguments generated from the .config.</p>
+
+<p>You can objdump the kernel:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make objdump-kernel | less
+</code></pre></div></div>
+
+<p>The test driver:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make objdump-driver | less
+</code></pre></div></div>
+
+<p>Or the tests themselves:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make objdump-tests | less
+</code></pre></div></div>
+
+<h2 id="in-kernel-debugging">In kernel debugging</h2>
+
+<p>seL4 does not currently have a kernel debugger. As a result, most of our
+debugging is done with:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">objdump</code> as described above,</li>
+  <li><code class="highlighter-rouge">printf</code>,</li>
+  <li><code class="highlighter-rouge">__builtin_return_address</code> (to figure out stack traces).</li>
+</ul>
+
+<p>In the kernel, we provide <code class="highlighter-rouge">debug_printKernelEntryReason</code> found in
+<a href="https://github.com/seL4/seL4/blob/master/include/api/debug.h">debug.h</a>
+which can be used at any point in the kernel to output the current
+operation that the kernel is doing.</p>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Apr 9 09:32:59 2018 +1000 69cb443
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Apr 9 09:06:48 2018 +1000 6c0ee73
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/DebuggingGuide.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/DebuggingGuide.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>
