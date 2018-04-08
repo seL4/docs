@@ -11,7 +11,7 @@ machine emulator and virtualizer, and can emulate different
 architectures on different systems.
 
 Qemu can run ARM targets too, more info about that can be found in
-[Debugging Guide](/Debugging_guide#qemu).
+[Debugging Guide](/DebuggingGuide#qemu).
 
 We used Ubuntu 16.04 for our tests, but in theory qemu ''should'' work
 the same under Windows/MacOS.

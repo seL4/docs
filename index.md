@@ -15,7 +15,7 @@ Contributions to this site are welcome! Read our [CONTRIBUTING](CONTRIBUTING.md)
 - [CAmkES](CAmkES)
 - [CapDL](CapDL.md)
 - [Testing](Testing.md)
-- [Debugging guide](Debugging_guide.md)
+- [Debugging guide](DebuggingGuide.md)
 - [Benchmarking guide](BenchmarkingGuide.md)
 - Virtualisation on seL4
 - [Rust](Rust.md)
