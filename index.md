@@ -27,7 +27,7 @@ Contributions to this site are welcome! Read our [CONTRIBUTING](CONTRIBUTING.md)
 - [Hardware Support](Hardware): information about hardware
       platform ports
 - Kernel Features: information about available kernel features
-- [Userland Components and Drivers](Userland_Components_and_Drivers): available device drivers and
+- [Userland Components and Drivers](UserlandComponents): available device drivers and
       userland components
 
 ## Questions and Recipes
