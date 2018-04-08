@@ -55,5 +55,5 @@ Contributions to this site are welcome! Read our [CONTRIBUTING](CONTRIBUTING.md)
 
 - [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
 - [IRC Channel](IRCChannel)
-- [Suggested projects](/Suggested_projects)
+- [Suggested projects](/SuggestedProjects)
 - [CommunityProjects](/CommunityProjects)

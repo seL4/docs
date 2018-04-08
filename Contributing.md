@@ -67,5 +67,5 @@ be happy to hand control to a suitable external maintainer for many of
 those. Our priority is on building an ecosystem and easing deployment of
 and with the system.
 
-See [Suggested Projects](Suggested_projects)
+See [Suggested Projects](SuggestedProjects)
 for suggestions on where to contribute.
