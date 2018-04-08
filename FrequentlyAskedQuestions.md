@@ -590,7 +590,7 @@ libraries are mostly under BSD. See the
 
 # How do I contribute to seL4?
  See
-[How to Contribute](Contributing_to_upstream_seL4_projects). In brief, seL4 was released under a complicated
+[How to Contribute](Contributing.md). In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.
