@@ -16,7 +16,7 @@ We have also developed 2 daughterboards for the TK1-SOM
 
 - a [CAN daughterboard](CANBoard), that adds two CAN
         controllers on the SPI bus
-- an [I/O daughterboard](Daughter-Board) that adds CAN
+- an [I/O daughterboard](DaughterBoard) that adds CAN
         controllers, various sensors and power management
 
 ## U-Boot

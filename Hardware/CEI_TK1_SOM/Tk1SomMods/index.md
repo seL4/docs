@@ -5,7 +5,7 @@
 
 ### The issue:
 Note: if you are using our
-[IO-Daughterboard](../Daughter-Board) , this is uneccessary;
+[IO-Daughterboard](../DaughterBoard) , this is uneccessary;
 instead a straight-line passthrough jumper is used to hook up to level
 converters on the daughterboard.
 
