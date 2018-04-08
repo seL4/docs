@@ -16,7 +16,7 @@ Contributions to this site are welcome! Read our [CONTRIBUTING](CONTRIBUTING.md)
 - [CapDL](CapDL.md)
 - [Testing](Testing.md)
 - [Debugging guide](Debugging_guide.md)
-- [Benchmarking guide](Benchmarking_guide.md)
+- [Benchmarking guide](BenchmarkingGuide.md)
 - Virtualisation on seL4
 - [Rust](Rust.md)
 
