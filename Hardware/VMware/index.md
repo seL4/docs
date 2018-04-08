@@ -9,7 +9,7 @@ and for a Linux host machine. May work on Mac host machine, won't work
 for Windows host (although general idea should be similar).
 
 This guide assumes that your project is all set up and configured to
-build for x86. Read [Getting started](/Getting_started) otherwise.
+build for x86. Read [Getting started](/GettingStarted) otherwise.
 
 ## Setting up a VM
 

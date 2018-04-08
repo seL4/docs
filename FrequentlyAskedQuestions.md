@@ -614,7 +614,7 @@ There are two recommended ways to do this.
       processes, but is generally more low-level.
 
 For build instructions, and how to get started, see the
-[Getting started](Getting_started) page.
+[Getting started](GettingStarted) page.
 Also, UNSW's [Advanced Operating Systems course](http://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
 builds an OS on top of seL4. If you have access to a Sabre Lite board,
 you should be able to do the project work yourself as a way of

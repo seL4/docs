@@ -5,7 +5,7 @@ toc: true
 
 
 First make sure you have
-[set up your machine](/Getting_started#setting-up-your-machine).
+[set up your machine](/GettingStarted#setting-up-your-machine).
 
 ## Prerequisites
 

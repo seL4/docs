@@ -9,7 +9,7 @@ by Tim Newsham. The Beaglebone is a community-supported port.
 ### Requirements
  We suggest using the `arm-linux-gnueabi-`
 cross-compilers. Use
-[the instructions on getting a toolchain](/Getting_started#getting-cross-compilers).
+[the instructions on getting a toolchain](/GettingStarted#getting-cross-compilers).
 
 ### Building
 #### seL4test

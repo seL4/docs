@@ -8,7 +8,7 @@ Contributions to this site are welcome! Read our [CONTRIBUTING](CONTRIBUTING.md)
 ## seL4 Basics
 
 
-- [Getting started](Getting_started.md)
+- [Getting started](GettingStarted.md)
 - [Tutorials](Tutorials)
 - [Documentation](Documentation.md)
 - [seL4 libraries](SeL4Libraries.md)

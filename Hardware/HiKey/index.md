@@ -6,7 +6,7 @@
 - One HiKey Board. See
         [Hikey 96Board](http://www.96boards.org/products/ce/hikey/)
 - Fully working development environment. See
-        [Getting started](/Getting_started)
+        [Getting started](/GettingStarted)
 
 ### Getting Started
  The Hikey board is based around the

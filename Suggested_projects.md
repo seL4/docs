@@ -1,7 +1,7 @@
 # Suggested Projects
 
 
-After trying the existing projects (especially those listed on [Getting started](Getting_started))
+After trying the existing projects (especially those listed on [Getting started](GettingStarted))
 a good way to learn the intricacies of programming on
 top of seL4 is to do the exercises in the
 [UNSW Advanced

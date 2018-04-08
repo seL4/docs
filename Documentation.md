@@ -4,7 +4,7 @@
 - [Technical overview paper](http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
 - [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml), 
   a retrospective explaining how we got to where we are;
-- [Getting started](Getting_started)
+- [Getting started](GettingStarted)
 - [NICTA seL4
       research project pages](http://ssrg.nicta.com.au/projects/seL4/)
 - [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and
