@@ -1,6 +1,6 @@
 # Supported hardware platforms
 
-[General info on ARM platforms](General-ARM)
+[General info on ARM platforms](GeneralARM)
 
 
 [Running seL4 on VMware](VMware)
