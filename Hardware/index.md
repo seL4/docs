@@ -34,7 +34,7 @@
 |[Inforce IFC6410](IF6410) |Snapdragon S4 Pro APQ8064 | krait (A15-like) |v7A |ARM HYP |- |unverified |Data61 |Data61 |Krait is a Qualcomm reimplementation of Armv7A |
 |[Jetson TK1 (NVIDIA)](jetsontk1) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 | |
 |[Odroid-X](odroidx) |Exynos4412 |A9 |v7A |No |No |unverified |Data61 |Data61 | |
-|[Odroid-XU](odriod-XU) |Exynos5 |A15 |v7A |ARM HYP|limited System MMU |unverified |Data61 |Data61 | |
+|[Odroid-XU](OdroidXU) |Exynos5 |A15 |v7A |ARM HYP|limited System MMU |unverified |Data61 |Data61 | |
 |[Sabre Lite](sabreLite) |i.MX6 |A9 |v7A |No |No|verified |Data61 |Data61 |current verified version |
 |[TK1 SOM (Colorado Engineering)](CEI_TK1_SOM) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 |Small form-factor Tegra K1 |
 |Zynq-7000 ZC706 Evaluation Kit |Zynq 7000 |A9 |v7A |No |No |unverified|Data61 |Data61 | |
