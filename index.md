@@ -1,10 +1,6 @@
 # seL4 Docs
 This documentation site is for cooperatively developing and sharing documentation on [seL4](http://sel4.systems).
 
-## Editing the site
-
-Contributions to this site are welcome! Read our [CONTRIBUTING](DocsContributing.md) and submit a pull request to the [GitHub repository]({{site.git_repo}}).
-
 ## seL4 Basics
 
 
@@ -32,19 +28,26 @@ Contributions to this site are welcome! Read our [CONTRIBUTING](DocsContributing
 
 ## Questions and Recipes
 
-
 - [FAQ](FrequentlyAskedQuestions): editable list of FAQs
 - seL4 Recipes: How to do X with seL4
 
-## seL4 Releases
+## Contributing
 
+We welcome community contributions to our sources and this website!
+
+- [Contributions to this doc site](DocsContributing)
+- [Source contributions](Contributing)
+
+## Releases
+
+### seL4
 
 - [Current release](https://github.com/seL4/seL4/releases/latest)
 - [Current manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
 - [Release notes](sel4_release)
 - [Release process](ReleaseProcess)
 
-## CAmkES Releases
+### CAmkES
 
 
 - [Current release](https://github.com/seL4/camkes-tool/releases/latest)
