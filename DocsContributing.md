@@ -4,7 +4,7 @@
 
 Thank you for considering helping improve the seL4 documentation.
 
-This page is about contributing to the [documentation site][docsite].  For contributing to other parts of the seL4 ecosystem, 
+This page is about contributing to the [documentation site][docsite].  For contributing to other parts of the seL4 ecosystem,
 visit our main [contributing page][contribute].
 
 [docsite]: https://docs.sel4.systems
