@@ -18,7 +18,6 @@ This documentation site is for cooperatively developing and sharing documentatio
 
 ## seL4 Status
 
-
 - [New Features](Status): new features in development
 - [Hardware Support](Hardware): information about hardware
       platform ports
@@ -54,7 +53,6 @@ We welcome community contributions to our sources and this website!
 - [Release notes](camkes_release)
 
 ## Community
-
 
 - [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
 - [IRC Channel](IRCChannel)
