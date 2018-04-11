@@ -1,6 +1,6 @@
 # seL4 Docs
 This documentation site is for cooperatively developing and sharing documentation on [seL4](http://sel4.systems).
-It replaces the old wiki.sel4.systems site.  The layout is different from the old wiki, so use your search engine 
+It replaces the old wiki.sel4.systems site.  The layout is different from the old wiki, so use the search bar 
 to find pages that have moved if it's not obvious whre they are from the index here.
 
 ## seL4 Basics
