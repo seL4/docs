@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>camkes-2.1.0 | seL4 docs</title>
+    <title>Contributing | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -57,7 +57,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">camkes-2.1.0</span>
+            <span property="name">Contributing</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -84,46 +84,96 @@
       
 
 <div class="content">
-  <h1 id="camkes-210-release-notes">CAmkES 2.1.0 Release Notes</h1>
+  <h1 id="contributing">Contributing</h1>
 
-<h2 id="new-features">New Features</h2>
+<p>Thank you for considering helping improve the seL4 documentation.</p>
 
+<p>This page is about contributing to the <a href="https://docs.sel4.systems">documentation site</a>.  For contributing to other parts of the seL4 ecosystem,
+visit our main <a href="https://docs.sel4.systems/Contributing_to_upstream_seL4_projects">contributing page</a>.</p>
+
+<p>We believe that documentation is important for any project and appreciate any contributions that improves it.
+The sort of contributions that we are looking for are:</p>
 <ul>
-  <li>runner takes an <code class="highlighter-rouge">--architecture</code> command line argument which selects
-    the target architecture. Valid arguments are: aarch32, arm_hyp,
-    ia32</li>
-  <li>added the ability to specify a hardware dataport as cached.
-    Previously all hardware dataports were mapped uncached. This
-    feature is intended to be used on dataports backed by DMA-able
-    memory to improve access times. Functions to flush dataports from
-    the cache are also provided.</li>
-  <li>support for seL4 3.0.0</li>
+  <li>Bug reporting
+    <ul>
+      <li>Stale or incorrect sections</li>
+      <li>Missing documentation</li>
+      <li>Ideas of how our documentation could be structured differently</li>
+    </ul>
+  </li>
+  <li>Improvements
+    <ul>
+      <li>Grammar and spell fixes (Nitpicks)</li>
+      <li>Missing documentation</li>
+      <li>Usage examples</li>
+      <li>Tutorials</li>
+      <li>Links to related external documentation</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="removed-features">Removed Features</h2>
+<p>For reporting issues about a particular project, please use the relevant repository’s issue tracker or post on the <a href="https://sel4.systems/lists/listinfo/">Devel mailing list</a>.</p>
+
+<p>As a reminder, all contributors are expected to follow our <a href="https://docs.sel4.systems/Conduct">Code of Conduct</a>.</p>
+
+<h2 id="your-first-contribution">Your First Contribution</h2>
+
+<p>You have noticed something that is wrong with some documentation on the site.  GitHub makes it pretty easy to edit Markdown files without having to leave the browser. By clicking edit on the relevant file, making your change and then submitting a pull request someone can then review you change and merge it which will result in the update appearing on the website.</p>
+
+<p>More detailed changes can be achieved by checking out the repository and editing locally, followed by commiting and making a pull request manually.  The README.md describes how to host the site locally so that you can see how your changes are presented.</p>
+
+<p>Contributions that are most helpful to us at the moment are:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">--hyp</code> command line argument is replaced with
-    <code class="highlighter-rouge">--architecture arm_hyp</code></li>
+  <li>Identifying which pages contain stale documentation.  Filing an issue in the issue tracker will let us know that something is broken or old.</li>
+  <li>Identifying areas where there is missing documentation or it is confusing</li>
+  <li>Fixing any syntax errors left over from our migration from the old <a href="http://wiki.sel4.systems">http://wiki.sel4.systems</a> site.</li>
 </ul>
 
-<h2 id="api-removals">API Removals</h2>
+<h2 id="submitting-a-contribution">Submitting a contribution</h2>
 
-<h3 id="unmarshalling-helpers">Unmarshalling Helpers</h3>
-<p>These were intended for use in templates, but are no longer used in any internal templates:</p>
+<p>Contributions can be submitted by pull requests at <a href="https://www.github.com/sel4proj/docs">https://www.github.com/sel4proj/docs</a>.</p>
+
+<p>Please try and follow the git commit style guide: <a href="http://chris.beams.io/posts/git-commit/">http://chris.beams.io/posts/git-commit/</a></p>
+
+<h3 id="style">Style</h3>
+
+<p>This repo contains sources in various formats.  We will add style guides and tools for checking conformance to these style guides.
+If there isn’t a tool to check style conformance, then we won’t be too pedantic about if the style is being followed correctly.  The general principle is to follow the same style used in the rest of the file or similar files.</p>
+
+<p>See the README.md for instructions on running style checks.</p>
+
+<p>Languages and styleguides that are used:</p>
 <ul>
-  <li><code class="highlighter-rouge">camkes_marshal</code></li>
-  <li><code class="highlighter-rouge">camkes_marshal_string</code></li>
-  <li><code class="highlighter-rouge">camkes_unmarshal</code></li>
-  <li><code class="highlighter-rouge">camkes_unmarshal_string</code></li>
+  <li>Markdown: GitHub flavoured markdown, rendered by kramdown.  <a href="https://github.com/slang800/markdown-styleguide">Styleguide</a>.  We intend on eventually using <a href="https://github.com/slang800/tidy-markdown">tidy-markdown</a> but the current codebase isn’t compliant yet.</li>
+  <li>HTML: Should be only used for presentation related content. Try and use markdown when possible. <a href="https://google.github.io/styleguide/htmlcssguide.html">Styleguide</a>.  We use <a href="http://www.html-tidy.org/">tidy</a> for detecting errors in the generated site.</li>
+  <li>SASS: Our styling should be kept into the <code class="highlighter-rouge">assets/css</code> folders.  We don’t currently follow a style guide.</li>
+  <li>Liquid templating language: We use <a href="https://www.npmjs.com/package/liquid-linter-cli">liquid-linter</a> to check for liquid errors.</li>
+  <li>python: use <code class="highlighter-rouge">pylint</code> if you want.</li>
+  <li>Makefile: tabs not spaces.</li>
 </ul>
 
-<h3 id="dma-utilities">DMA Utilities</h3>
-<p>These had been deprecated for a long period and are now being removed:</p>
+<h3 id="code-review-process">Code review process</h3>
+<p>Someone who is familiar with the source will review your changes.  They may request changes or have questions.<br />
+If no more feedback is required, we will likely approve and then merge the PR.</p>
+
+<h2 id="reporting-an-issue-or-feature-enhancement">Reporting an issue or feature enhancement</h2>
+
+<p>To report an issue, open an issue in the repository issue tracker.  Issues can be reporting problems, or ideas for improvement.</p>
+
 <ul>
-  <li><code class="highlighter-rouge">camkes_dma_page_alloc</code></li>
-  <li><code class="highlighter-rouge">camkes_dma_page_free</code></li>
+  <li>What is the issue?</li>
+  <li>Why is it a issue?</li>
 </ul>
+
+<p>And if relevant</p>
+<ul>
+  <li>What do you think a good fix or change may be?</li>
+  <li>How the fix or change removes the issue?</li>
+</ul>
+
+<h2 id="community">Community</h2>
+<p>Most community discussions about seL4 occur on our <a href="https://sel4.systems/lists/listinfo/">Devel mailing list</a>.  We also have an <a href="https://docs.sel4.systems/IRCChannel">IRC channel</a> that can be used.</p>
 
 
 </div>
@@ -176,7 +226,7 @@
               
             
               
-            
+                Page last updated: Wed Apr 11 15:46:46 2018 +1000 05ba884
               
             
               
@@ -200,7 +250,7 @@
               
             
               
-                Page last updated: Wed Mar 14 17:48:21 2018 +1100 ae0ce7d
+            
               
             
               
@@ -380,9 +430,9 @@
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_camkes_release/CAmkES_2.1.0.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/DocsContributing.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_camkes_release/CAmkES_2.1.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/DocsContributing.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

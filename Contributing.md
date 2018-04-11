@@ -1,6 +1,7 @@
 # Contributing
 
-We welcome contributions to the seL4 project.
+We welcome contributions to the seL4 project sources. For contributions to this documentation site,
+please see [our docs contribution guidelines](DocsContributing).
 
 ## Conventions
 
