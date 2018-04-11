@@ -1,5 +1,3 @@
----
----
 # Contributing
 
 Thank you for considering helping improve the seL4 documentation.
