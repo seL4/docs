@@ -1,7 +1,5 @@
 # seL4 Documentation site.
 
-Currently WIP
-
 These are the sources for the seL4 Documentation site located at <https://docs.sel4.systems>.
 It is for cooperatively developing and sharing documentation on [seL4](https://sel4.systems).
 
