@@ -35,8 +35,8 @@ A list of maintained projects, libraries and applications can be found [here](/M
 ## Releases
 
 We have two release channels:
-- [Bleeding edge](#bleeding-edge): These happen whenever any of our maintained project code is updated and the tests for it are passing
-- [Versioned releases](#versioned-releases): Versioned releases of the kernel and the CAmkES tool.  These happen less frequently.
+- **Bleeding edge**: These happen whenever any of our maintained project code is updated and the tests for it are passing
+- **Versioned releases**: Versioned releases of the kernel and the CAmkES tool.  These happen less frequently.
 
 Bleeding edge releases happen every time we update our code and it passes our test suites and
 proofs. Working on the bleeding edge means that API changes occur often, and you may get cut. Whenever any of the sources tracked by the manifests in the following repositories are updated and the
