@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 5.1.0 | seL4 docs</title>
+    <title>seL4 9.0.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -58,7 +58,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 5.1.0</span>
+            <span property="name">seL4 9.0.0</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -85,41 +85,63 @@
       
 
 <div class="content">
-  <h1 id="introducing-sel4-510">Introducing seL4 5.1.0</h1>
-<p>Announcing the release of <code class="highlighter-rouge">seL4 5.1.0</code>
-with the following changes:</p>
+  <h1 id="sel4-version-900-release">seL4 Version 9.0.0 Release</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 9.0.0</code> with the following changes:</p>
 
-<p>Below are the changes to the seL4 ABI:</p>
+<p>9.0.0 2018-04-11: BREAKING</p>
 
-<h2 id="x86-64-specific-changes">x86-64 specific changes:</h2>
-
+<h1 id="changes">Changes</h1>
 <ul>
-  <li>implement <code class="highlighter-rouge">seL4_BenchmarkFlushCaches</code> debug syscall.</li>
-</ul>
-
-<p>Below are other changes that do not affect the seL4 ABI:</p>
-
-<h2 id="arm-specific-changes">ARM specific changes:</h2>
-<ul>
-  <li>ARM-HYP: internal changes to support ARM-HYP verification work.</li>
-  <li>kzm: fix timer reload overflow calculations</li>
+  <li>Debugging option on x86 for syscall interface to read/write MSRs (this is an, equally dangerous, alternative to
+dangerous code injection)</li>
+  <li>Mitigation for Meltdown (https://meltdownattack.com) on x86-64 implemented. Mitigation is via a form of kernel
+page table isolation through the use of a Static Kernel Image with Microstate (SKIM) window that is used for
+trapping to and from the kernel address space. This can be enabled/disabled through the build configuration
+depending on whether you are running on vulnerable hardware or not.</li>
+  <li>Mitigation for Spectre (https://spectreattack.com) on x86 against the kernel implemented. Default is software
+mitigation and is the best performing so users need to do nothing. This does <em>not</em> prevent user processes from
+exploiting each other.</li>
+  <li>x86 configuration option for performing branch prediction barrier on context switch to prevent Spectre style
+attacks between user processes using the indirect branch predictor</li>
+  <li>x86 configuration option for flushing the RSB on context switch to prevent Spectre style attacks between user
+processes using the RSB</li>
+  <li>Define extended bootinfo header for the x86 TSC frequency</li>
+  <li>x86 TSC frequency exported in extended bootinfo header</li>
+  <li><code class="highlighter-rouge">archInfo</code> is no longer a member of the bootinfo struct. Its only use was for TSC frequency on x86, which
+can now be retrieved through the extended bootinfo</li>
+  <li>Invocations to set thread priority and maximum control priority (MCP) have changed.
+    <ul>
+      <li>For both invocations, users must now provide a TCB capability <code class="highlighter-rouge">auth</code></li>
+      <li>The requested MCP/priority is checked against the MCP of the <code class="highlighter-rouge">auth</code> capability.</li>
+      <li>Previous behavior checked against the invoked TCB, which could be subject to the confused deputy
+problem.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> no longer takes prio, mcp as an argument. Instead these fields must be set separately
+with <code class="highlighter-rouge">seL4_TCB_SetPriority</code> and <code class="highlighter-rouge">seL4_TCB_SetMCPriority</code>.</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetPriority</code> and <code class="highlighter-rouge">seL4_TCB_SetMCPriority</code> now take <code class="highlighter-rouge">seL4_Word</code> instead of <code class="highlighter-rouge">seL4_Uint8</code>.
+    - <code class="highlighter-rouge">seL4_MaxPrio</code> remains at 255.</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetSchedParams</code> is a new method where MCP and priority can be set in the same sytsem call.</li>
+  <li>Size of the TCB object is increased for some build configurations</li>
 </ul>
 
 <h1 id="upgrade-notes">Upgrade notes</h1>
-
 <ul>
-  <li>This release potentially breaks ABI with the earlier versions if
-    using benchmarking kernel configurations.</li>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> calls that set priority should be changed to explicitly call <code class="highlighter-rouge">seL4_TCB_SetSchedParams</code>
+or <code class="highlighter-rouge">SetPriority</code></li>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> calls that set MCP should be changed to explicitly call <code class="highlighter-rouge">seL4_TCB_SetSchedParams</code>
+or <code class="highlighter-rouge">seL4_TCB_SetMCPriority</code></li>
 </ul>
 
-<h1 id="full-changelog">Full changelog</h1>
+<hr />
 
-<p>Use <code class="highlighter-rouge">git log 5.0.0..5.1.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+<h1 id="full-changelog">Full changelog</h1>
+<p>Refer to the git log in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="highlighter-rouge">git log 8.0.0..9.0.0</code></p>
 
 <h1 id="more-details">More details</h1>
-
 <p>See the
-<a href="http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf">5.1.0 manual</a> included in the release or ask on the mailing list!</p>
+<a href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0.pdf">9.0.0 manual</a> included in the release or ask on the mailing list!</p>
 
 
 </div>
@@ -338,7 +360,7 @@ with the following changes:</p>
               
             
               
-            
+                Page last updated: Thu Apr 12 14:35:40 2018 +1000 de71ab9
               
             
               
@@ -350,7 +372,7 @@ with the following changes:</p>
               
             
               
-                Page last updated: Wed Mar 14 15:16:09 2018 +1100 0aff5b3
+            
               
             
               
@@ -382,9 +404,9 @@ with the following changes:</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_5.1.0.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_9.0.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_5.1.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_9.0.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

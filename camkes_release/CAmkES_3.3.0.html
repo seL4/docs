@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 5.1.0 | seL4 docs</title>
+    <title>camkes-3.3.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -58,7 +58,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 5.1.0</span>
+            <span property="name">camkes-3.3.0</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -85,41 +85,44 @@
       
 
 <div class="content">
-  <h1 id="introducing-sel4-510">Introducing seL4 5.1.0</h1>
-<p>Announcing the release of <code class="highlighter-rouge">seL4 5.1.0</code>
-with the following changes:</p>
+  <h1 id="camkes-version-camkes-330-release">CAmkES Version camkes-3.3.0 Release</h1>
 
-<p>Below are the changes to the seL4 ABI:</p>
+<p>Announcing the release of <code class="highlighter-rouge">camkes-3.3.0</code> with the following changes:</p>
 
-<h2 id="x86-64-specific-changes">x86-64 specific changes:</h2>
+<p>camkes-3.3.0 2018-04-11</p>
 
+<p>Using seL4 version 9.0.0</p>
+
+<h2 id="changes">Changes</h2>
 <ul>
-  <li>implement <code class="highlighter-rouge">seL4_BenchmarkFlushCaches</code> debug syscall.</li>
+  <li>Hardware dataport with large frame sizes issue has been fixed</li>
+  <li>Bug fix: Enumerating connections for hierarchical components with custom connection types is now done correctly</li>
+  <li>Bug fix: Data structure caching is now correctly invalidated between builds</li>
+  <li>Initial CMake implementation for CAmkES.  See the CAmkES test apps for examples.</li>
 </ul>
 
-<p>Below are other changes that do not affect the seL4 ABI:</p>
-
-<h2 id="arm-specific-changes">ARM specific changes:</h2>
+<h2 id="upgrade-notes">Upgrade notes</h2>
 <ul>
-  <li>ARM-HYP: internal changes to support ARM-HYP verification work.</li>
-  <li>kzm: fix timer reload overflow calculations</li>
+  <li>No special upgrade requirements.</li>
 </ul>
 
-<h1 id="upgrade-notes">Upgrade notes</h1>
-
+<h2 id="known-issues">Known issues</h2>
 <ul>
-  <li>This release potentially breaks ABI with the earlier versions if
-    using benchmarking kernel configurations.</li>
+  <li>Hierarchical components that export dataport connectors create compilation errors as the templates cannot accurately
+tell that the connector of the parent component is exported from the child and no code should be generated.  A
+temporary workaround involves making the dataport connection explicitly available to the parent component.</li>
 </ul>
+
+<hr />
 
 <h1 id="full-changelog">Full changelog</h1>
-
-<p>Use <code class="highlighter-rouge">git log 5.0.0..5.1.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+<p>Use <code class="highlighter-rouge">git log camkes-3.2.0..camkes-3.3.0</code> in
+<a href="https://github.com/seL4/camkes-tool">https://github.com/seL4/camkes-tool</a></p>
 
 <h1 id="more-details">More details</h1>
-
 <p>See the
-<a href="http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf">5.1.0 manual</a> included in the release or ask on the mailing list!</p>
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.3.0/docs/index.md">documentation</a>
+or ask on the mailing list!</p>
 
 
 </div>
@@ -206,7 +209,7 @@ with the following changes:</p>
               
             
               
-            
+                Page last updated: Thu Apr 12 14:35:40 2018 +1000 de71ab9
               
             
               
@@ -350,7 +353,7 @@ with the following changes:</p>
               
             
               
-                Page last updated: Wed Mar 14 15:16:09 2018 +1100 0aff5b3
+            
               
             
               
@@ -382,9 +385,9 @@ with the following changes:</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_5.1.0.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_camkes_release/CAmkES_3.3.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_5.1.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_camkes_release/CAmkES_3.3.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
