@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-11 06:07:15 +0000 -->
+<!-- Page last generated 2018-04-12 00:30:38 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 Release Process | seL4 docs</title>
+    <title>Release Process | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -58,7 +58,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 Release Process</span>
+            <span property="name">Release Process</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -83,13 +83,98 @@
 
     <main>
       
+  <nav aria-label="Table of Contents">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#release-process">Release Process</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#terminology">Terminology</a></li>
+<li class="toc-entry toc-h2"><a href="#sources">Sources</a></li>
+<li class="toc-entry toc-h2"><a href="#releases">Releases</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#which-release-should-you-use">Which release should you use?</a></li>
+<li class="toc-entry toc-h3"><a href="#version-numbers">Version Numbers</a></li>
+<li class="toc-entry toc-h3"><a href="#library-compatibility">Library Compatibility</a></li>
+<li class="toc-entry toc-h3"><a href="#legacy-support">Legacy support</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#manifests">Manifests</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#verified-manifests">Verified manifests</a></li>
+<li class="toc-entry toc-h3"><a href="#versioned-manifests">Versioned manifests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav>
+
 
 <div class="content">
-  <h1 id="sel4-release-process">seL4 Release Process</h1>
+  <h1 id="release-process">Release Process</h1>
 
-<h2 id="version-policy">Version Policy</h2>
+<p>This page outlines how we make <a href="/MaintainedRepositories">seL4 and its associated ecosystem</a> available to external developers. The goals of this process are as follows:</p>
 
-<p>seL4 follows <a href="http://semver.org/">semantic versioning</a>. In
+<ul>
+  <li>provide a current up to date version of our libraries and applications,</li>
+  <li>allow developers to decide when to upgrade between versions, i.e choose when breakage happens,</li>
+  <li>and provide libraries and apps compatible with each released version.</li>
+</ul>
+
+<p>Currently, we do not guarantee maintenance of previous releases, or individually version libraries,
+projects and applications.</p>
+
+<h2 id="terminology">Terminology</h2>
+
+<ul>
+  <li>Sources: Source code for everything</li>
+  <li>Kernel: the seL4 microkernel source repository</li>
+  <li>Libraries: user level libraries that run on seL4</li>
+  <li>Applications: applications that run on seL4</li>
+  <li>Projects: A collection of applications, libraries, kernel, denoted by a repo manifest</li>
+  <li>CAmkES: The CAmkES tool repository</li>
+  <li>Proofs: L4V proofs.</li>
+</ul>
+
+<h2 id="sources">Sources</h2>
+
+<p>We make a lot of source code available in the spirit of open source,
+however we do not guarantee that all source provided is
+maintained and tested.</p>
+
+<p>A list of maintained projects, libraries and applications can be found <a href="/MaintainedRepositories">here</a>.</p>
+
+<h2 id="releases">Releases</h2>
+
+<p>We have two release channels:</p>
+<ul>
+  <li><a href="#bleeding-edge">Bleeding edge</a>: These happen whenever any of our maintained project code is updated and the tests for it are passing</li>
+  <li><a href="#versioned-releases">Versioned releases</a>: Versioned releases of the kernel and the CAmkES tool.  These happen less frequently.</li>
+</ul>
+
+<p>Bleeding edge releases happen every time we update our code and it passes our test suites and
+proofs. Working on the bleeding edge means that API changes occur often, and you may get cut. Whenever any of the sources tracked by the manifests in the following repositories are updated and the
+regression tests pass, an updated version of the manifest will be committed to the repo and the new sources will be synced with GitHub.</p>
+
+<h3 id="which-release-should-you-use">Which release should you use?</h3>
+
+<p>We recommend you develop on a specific version of the kernel, rather
+than the bleeding edge which is the tip of master. Each MAJOR.MINOR
+release has release notes which describe changes and specific upgrade
+notes, posted <a href="/sel4_release">here</a>.</p>
+
+<p>New features and bug fixes will appear in bleeding edge updates much earlier than in a released version.  If you are
+working on a long term project on seL4 or using a different userlevel than we provide then it is probably better to
+pick a versioned release and manually upgrade when new features are required.  Additionally, we only guarantee working proofs for
+released versions.
+If you are trying out seL4 and experimenting with different features, rerunning benchmarks or doing the tutorials, using the
+bleeding edge versions of the projects is probably fine.  They don’t get updated unless they are passing our tests and any
+issues should be repoted to the GitHub issue tracker or posted on our mailing list.</p>
+
+<h3 id="version-numbers">Version Numbers</h3>
+
+<p>For versioned releases, seL4 and CAmkES have different policies.</p>
+
+<p><strong>seL4</strong> follows <a href="http://semver.org/">semantic versioning</a>. In
 short:</p>
 
 <p>“Given a version number MAJOR.MINOR.PATCH, increment the:</p>
@@ -103,14 +188,16 @@ short:</p>
 
 <p>seL4 versions are tagged in git.</p>
 
-<h2 id="release-frequency">Release Frequency</h2>
+<p><strong>CAmkES</strong> versions follow the following policy:</p>
 
-<p>We aim to follow a monthly release cycle, with fresh code pushed to
-GitHub daily. This means that master is quite volatile, so unless you
-want to live on the bleeding edge we suggest you should work on a
-specific tag and choose when to upgrade.</p>
+<p>MAJOR.MINOR.PATCH:</p>
+<ul>
+  <li>MAJOR: A big rewrite</li>
+  <li>MINOR: The actual release number, increased when seL4 is released or there are source/binary incompatible CAmkES updates</li>
+  <li>PATCH: Small bugfixes that are backwards compatible.</li>
+</ul>
 
-<h2 id="library-compatibility">Library Compatibility</h2>
+<h3 id="library-compatibility">Library Compatibility</h3>
 
 <p>seL4 libraries have branches that track all MAJOR.MINOR versions, with
 branch names in the format MAJOR.MINOR-compatible. A
@@ -118,37 +205,73 @@ MAJOR.MINOR-compatible branch will build with any MAJOR.MINOR.* version
 of the kernel, and all MAJOR.MINOR-compatible branches across our
 libraries are compatible with each other.</p>
 
-<p>To avoid too much dependency management we do not currently version our
-libraries themselves.</p>
-
-<h2 id="project-compatibility">Project Compatibility</h2>
-
-<p>Each MAJOR.MINOR release we add updated project manifest to each of our
-supported projects.</p>
-
-<p>For example, for the 2.0.0 release a 2.0.x.xml was added to the seL4
-test repository which tracks the 2.0.0 kernel and the 2.0-compatible
-branches of each library. default.xml in each repository points to the
-tip of each repository and may break when you pull in changes.</p>
-
-<p>Supported projects are:</p>
-
-<ul>
-  <li><a href="https://github.com/seL4/sel4test-manifest">sel4test</a></li>
-  <li><a href="https://github.com/seL4/verification-manifest">verification</a></li>
-</ul>
-
-<h2 id="upgrading">Upgrading</h2>
-
-<p>We recommend you develop on a specific version of the kernel, rather
-than the bleeding edge which is the tip of master. Each MAJOR.MINOR
-release has release notes which describe changes and specific upgrade
-notes, posted <a href="/sel4_release">here</a>.</p>
-
-<h2 id="legacy-support">Legacy support</h2>
+<h3 id="legacy-support">Legacy support</h3>
 
 <p>We only currently provide bug fixes and support for the latest version
 of the kernel and latest version of libraries.</p>
+
+<h2 id="manifests">Manifests</h2>
+
+<p>Each project repository above contains several manifest files:</p>
+<ul>
+  <li><code class="highlighter-rouge">default.xml</code> specifies pinned revisions of the source that are updated every time a new <em>bleeding
+edge</em> release is pushed. These manifests should always compile and pass tests if the correct build
+configurations are used.
+    <ul>
+      <li><code class="highlighter-rouge">master.xml</code> specifies the tip of each repository in a project. These aren’t guaranteed to work, and may contain combinations of repositories that have not been tested together.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><code class="highlighter-rouge">default.xml</code> is tagged at each released version. To obtain the manifest for a specific kernel
+version checkout the corresponding X.Y.z tag. Our previous process created an <code class="highlighter-rouge">X.Y.z.xml</code> manifest
+for each release, but this is no longer the case.</p>
+
+<h3 id="verified-manifests">Verified manifests</h3>
+
+<p>The verification-manifest project contains a <code class="highlighter-rouge">${SEL4_VERSION}.xml</code> containing revisions which correspond to a version of the proofs that pass for the released version of the kernel</p>
+
+<h3 id="versioned-manifests">Versioned manifests</h3>
+
+<p>The following projects manifest repositories are maintained, meaning both bleeding edge and
+versioned releases are available:</p>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/seL4/sel4test-manifest">sel4test-manifest</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/seL4/sel4bench-manifest">sel4bench-manifest</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/seL4/camkes-manifest">camkes-manifest</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/seL4/camkes-vm-manifest">camkes-vm-manifest</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/seL4/verification-manifest">verification-manifest</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/SEL4PROJ/sel4-tutorials-manifest/tree/sel4-tutorials">sel4-tutorials-manifest/tree/sel4-tutorials</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/SEL4PROJ/sel4-tutorials-manifest/tree/sel4-solutions">sel4-tutorials-manifest/tree/sel4-solutions</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/SEL4PROJ/sel4-tutorials-manifest/tree/camkes-tutorials">sel4-tutorials-manifest/tree/camkes-tutorials</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/SEL4PROJ/sel4-tutorials-manifest/tree/camkes-solutions">sel4-tutorials-manifest/tree/camkes-solutions</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/SEL4PROJ/camkes-arm-vm-manifest">camkes-arm-vm-manifest</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/SEL4PROJ/rumprun-sel4-demoapps">rumprun-sel4-demoapps</a></p>
+  </li>
+</ul>
+
 
 </div>
 
@@ -177,7 +300,7 @@ of the kernel and latest version of libraries.</p>
         </li>
         
           <li>
-            Site last updated: Wed Apr 11 16:05:10 2018 +1000 54a230a
+            Site last updated: Thu Apr 12 10:28:42 2018 +1000 16fc5be
           </li>
           <li>
             
@@ -350,7 +473,9 @@ of the kernel and latest version of libraries.</p>
               
             
               
-                Page last updated: Fri Mar 23 18:38:15 2018 +1100 63cb2bf
+            
+              
+                Page last updated: Thu Apr 12 10:28:42 2018 +1000 16fc5be
               
             
               
