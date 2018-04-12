@@ -1,3 +1,5 @@
+---
+---
 # Contributing
 
 We welcome contributions to the seL4 project sources. For contributions to this documentation site,
