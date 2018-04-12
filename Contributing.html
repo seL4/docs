@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-06 01:27:00 +0000 -->
+<!-- Page last generated 2018-04-12 00:41:20 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAmkES ARM VMM | seL4 docs</title>
+    <title>Contributing | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -30,9 +30,10 @@
     <li class="col-xs-12 col-md-10 menu">
       <nav aria-label="Banner links">
         <h2><a href="/Documentation">Documentation</a></h2>
-        <h2><a href="/Getting_started">Getting Started</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
         <h2><a href="/Tutorials">Tutorials</a></h2>
         <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;" frameborder="0"></iframe>
       </nav>
     </li>
   </ul>
@@ -57,7 +58,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">CAmkES ARM VMM</span>
+            <span property="name">Contributing</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -84,25 +85,49 @@
       
 
 <div class="content">
-  <h1 id="camkes-arm-vmm">CAmkES ARM VMM</h1>
-<p>This page describes the ARM virtual machine monitor. ‘Out-of-the-box’ it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the ‘‘original’’ XU, not the current XU4)</p>
+  <h1 id="contributing">Contributing</h1>
 
-<h2 id="getting-and-building">Getting and Building</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
-repo sync
-make tk1_vm_defconfig
-make
-</code></pre></div></div>
+<p>We welcome contributions to the seL4 project sources. For contributions to this documentation site,
+please see <a href="DocsContributing">our docs contribution guidelines</a>.</p>
 
-<p>An ELF file will be left in <code class="highlighter-rouge">images/capdl-loader-experimental-image-arm-tk1\</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-experimental-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp tftpboot <span class="nv">$loadaddr</span>
-/capdl-loader-experimental-image-arm-tk1
-bootelf
-</code></pre></div></div>
+<h2 id="conventions">Conventions</h2>
 
-<h2 id="notes">Notes</h2>
-<p>The default setup does not pass though many devices to the Linux kernel. If you <code class="highlighter-rouge">make menuconfig</code> you can set <code class="highlighter-rouge">insecure</code> mode in the <code class="highlighter-rouge">Applications</code> submenu; this is meant to pass through all devices, but not
-everything has been tested and confirmed to work yet. In particular, the SMMU needs to have extra entries added for any DMA-capable devices such as SATA.</p>
+<p>Please read and abide by the following conventions when contributing:</p>
+
+<ul>
+  <li><a href="StyleGuide">Style Guide</a></li>
+  <li><a href="GitConventions">Git Conventions</a></li>
+  <li><a href="Conduct">Code of Conduct</a></li>
+  <li><a href="CodeReview">Pull requests</a></li>
+</ul>
+
+<h2 id="contributor-license-agreement">Contributor license agreement:</h2>
+
+<p>We have two main groups of publicly hosted projects:</p>
+
+<ul>
+  <li><a href="https://github.com/sel4">https://github.com/sel4</a> (requires CLA)</li>
+  <li><a href="https://github.com/sel4proj">https://github.com/sel4proj</a> (No CLA)</li>
+</ul>
+
+<p>All submissions to repositories under <a href="https://github.com/sel4">https://github.com/sel4</a> require
+a signed contributor license agreement (CLA), which ceritfies:</p>
+
+<ul>
+  <li>That you have the rights to give us the contribution, and</li>
+  <li>That you give us the rights to use your contribution.</li>
+</ul>
+
+<p>If required, please sign the
+<a href="https://sel4.systems/Community/Contributing/seL4-CLA.pdf">Contributor License Agreement</a>, scan it and send it to us at ‘‘licensing AT
+sel4.systems.’’</p>
+
+<p><img src="http://i.imgur.com/kuAok5A.png" alt="Sign CLA before submitting pull request.  Pull requests undergo code review before being accepted" /></p>
+
+<p>Figure 1 illustrates the contribution process. Once your pull request is approved, it will be merged
+internally and pushed out to github.</p>
+
+<p>See <a href="SuggestedProjects">Suggested Projects</a> for suggestions on where to contribute.</p>
 
 </div>
 
@@ -131,7 +156,7 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
         </li>
         
           <li>
-            Site last updated: Fri Apr 6 11:24:33 2018 +1000 c62b839
+            Site last updated: Thu Apr 12 10:29:52 2018 +1000 6da0be4
           </li>
           <li>
             
@@ -280,8 +305,6 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
               
             
               
-                Page last updated: Fri Mar 16 11:18:41 2018 +1100 1fe1770
-              
             
               
             
@@ -349,6 +372,12 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
             
               
             
+              
+            
+              
+            
+              
+                Page last updated: Thu Apr 12 10:29:52 2018 +1000 6da0be4
               
             
           </li>
@@ -356,9 +385,9 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/CAmkES-ARM-VM.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Contributing.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/CAmkES-ARM-VM.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Contributing.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
