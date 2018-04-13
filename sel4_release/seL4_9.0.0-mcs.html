@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 5.2.0-mcs | seL4 docs</title>
+    <title>seL4 9.0.0-mcs | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -58,7 +58,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 5.2.0-mcs</span>
+            <span property="name">seL4 9.0.0-mcs</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -85,7 +85,7 @@
       
 
 <div class="content">
-  <h1 id="sel4-mcs-pre-release-520-mcs">seL4 MCS pre-release (5.2.0-mcs)</h1>
+  <h1 id="sel4-mcs-pre-release-900-mcs">seL4 MCS pre-release (9.0.0-mcs)</h1>
 
 <p>This is a pre-release of the seL4 mixed-criticality systems (RT)
 extensions. This branch is not verified and is under active
@@ -124,7 +124,7 @@ the remaining budget until the next period.</p>
 
 <p>Temporal isolation is provided with scheduling context by an
 implementation of
-<a href="https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf">sporadic servers</a>. Please see the <a href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf">manual</a> or tutorial for further
+<a href="https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf">sporadic servers</a>. Please see the <a href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0-mcs.pdf">manual</a> or tutorial for further
 explanation.</p>
 
 <p>However, in seL4, threads without budget left in their sporadic server
@@ -167,13 +167,15 @@ send it an IPC.</p>
 <h2 id="mcs-abi-and-libsel4">MCS ABI and libsel4</h2>
 
 <p>This section documents kernel ABI and libsel4 changes as compared with
-seL4 <code class="highlighter-rouge">5.2.0</code>.</p>
+seL4 <code class="highlighter-rouge">9.0.0</code>.</p>
 
 <h3 id="changes">Changes</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> arguments changed (scheduling context
-    cap added).</li>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> arguments changed (fault ep removed)</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetSchedParams</code> also sets scheduling context, and fault endpoint. The fault endpoint is
+a capability in the current thread’s cspace, unlike on the master kernel, where it is in the
+target thread’s cspace.</li>
   <li><code class="highlighter-rouge">seL4_Recv</code>, <code class="highlighter-rouge">seL4_ReplyRecv</code>, <code class="highlighter-rouge">seL4_NBRecv</code> now take a reply object
     such that the caller can receive a call. The reply capability is
     generated in the reply object, rather than being saved into the
@@ -244,6 +246,22 @@ seL4 <code class="highlighter-rouge">5.2.0</code>.</p>
     the IPC buffer.</li>
 </ul>
 
+<h4 id="invocations">Invocations</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_TCBSetTimeoutEndpoint</code> - new TCB invocation which allows a timeout endpoint to be set for a
+TCB.</li>
+  <li><code class="highlighter-rouge">seL4_SchedControl_Configure</code> - allows scheduling context parameters to be set.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Bind</code> - Allows a notification or TCB object to be bound to a scheduling context
+object.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> - Unbind any object bound to a scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindObject</code> - Unbind a specific object from a scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Consumed</code> - Read and reset the amount of time consumed from scheduling
+context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_YieldTo</code> - Place the active thread bound to this scheduling context at the head
+of the scheduling queue for its priority. Read and reset the amount of time consumed.</li>
+</ul>
+
 <h4 id="libsel4">libsel4</h4>
 
 <ul>
@@ -254,12 +272,14 @@ seL4 <code class="highlighter-rouge">5.2.0</code>.</p>
     maximum number of extra refills for a specific scheduling
     context size.</li>
   <li><code class="highlighter-rouge">seL4_Time</code>: type for specifying time arguments.</li>
+  <li><code class="highlighter-rouge">seL4_isTimeoutFault_tag</code>: detect a timeout fault message.</li>
+  <li><code class="highlighter-rouge">seL4_TimeoutReply_new</code>: construct a reply to a timeout fault message.</li>
 </ul>
 
 <h4 id="structures">Structures</h4>
 
 <ul>
-  <li>A sched control capability is provided to the root task per node
+  <li>A sched control capability per core is provided to the root task per node
     via the <code class="highlighter-rouge">seL4_BootInfo</code> structure.</li>
 </ul>
 
@@ -560,13 +580,13 @@ kernel.</p>
               
             
               
-            
+                Page last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
               
             
               
             
               
-                Page last updated: Fri Mar 16 13:19:09 2018 +1100 058823c
+            
               
             
               
@@ -584,9 +604,9 @@ kernel.</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_5.2.0-mcs.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_9.0.0-mcs.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_5.2.0-mcs.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_9.0.0-mcs.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
