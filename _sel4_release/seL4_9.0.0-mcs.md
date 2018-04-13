@@ -213,16 +213,16 @@ seL4 `9.0.0`.
 ## Library & test compatability
 
 
-- CAmkES and CapDL both support seL4 `5.2.0-mcs` on their
+- CAmkES and CapDL both support seL4 `9.0.0-mcs` on their
       master branches.
-- seL4_libs and sel4test both have `5.2.0-mcs-compatible` branches
+- seL4_libs and sel4test both have `9.0.0-mcs-compatible` branches
       that work with the forked API
-- You can obtain and run sel4test for seL4 `5.2.0-mcs` by doing the
+- You can obtain and run sel4test for seL4 `9.0.0-mcs` by doing the
       following:
 
 ```
 $ mkdir sel4test-mcs $ cd sel4test-mcs
-$ repo init -u <https://github.com/seL4/sel4test-manifest.git> -m 5.2.x-mcs.xml
+$ repo init -u <https://github.com/seL4/sel4test-manifest.git> -m 9.0.x-mcs.xml
 $ repo sync
 ```
 
@@ -244,7 +244,7 @@ updated kernel and user-level timer drivers)
 ## More details
 
 
-See the `5.2.0-mcs` manual included in the release.
+See the `9.0.0-mcs` manual included in the release.
 
 We have developed a branch of the seL4 and CAmkES tutorials for the MCS
 kernel.
