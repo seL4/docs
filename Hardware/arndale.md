@@ -1,4 +1,7 @@
 # Arndale
+
+**Note: This board is not being regression tested, but has same SoC as [Odroid-XU](/Hardware/OdroidXU) (which is tested).**
+
 seL4 supports the the [Arndale](http://www.arndaleboard.org/wiki/index.php/Main_Page)
   dual core A15 ARM development board.
 
