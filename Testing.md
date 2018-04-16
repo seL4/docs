@@ -28,7 +28,7 @@ repo init
 ```
 line above with:
 ```
-repo init -u https://github.com/seL4/sel4test-manifest.git -m 2.0.x.xml
+repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/{{site.sel4_master}}
 ```
 
 In this example we clone version 2.0.x of the kernel, where "x" is the
