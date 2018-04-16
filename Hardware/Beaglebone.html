@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -111,21 +111,16 @@ cross-compilers. Use
 
 <h3 id="building">Building</h3>
 <h4 id="sel4test">seL4test</h4>
-<p>First clone the seL4 repository.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir sel4test
-<span class="nb">cd </span>sel4test
-repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-</code></pre></div></div>
 
-<p>Now you must build a configuration file for your BeagleBone. Finally,
-build with <code class="highlighter-rouge">make</code> with <code class="highlighter-rouge">arm-linux-gnueabi-objcopy</code>.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make bbone_black_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
 make
-arm-linux-gnueabi-objcopy <span class="nt">--output-target</span> binary images/sel4test-driver-image-arm-am335x sel4test.bin
 </code></pre></div></div>
 
-<p>In the <code class="highlighter-rouge">menuconfig</code> dialog, make sure that the correct BeagleBone platform
-is selected for your model. This will be under Kernel -&gt; seL4 System.</p>
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
 <h4 id="refos">RefOS</h4>
 <p>For RefOS, first clone the repository.</p>
@@ -135,10 +130,9 @@ repo init <span class="nt">-u</span> https://github.com/seL4/refos-manifest.git
 </code></pre></div></div>
 
 <p>Now you must build a configuration file for your BeagleBone. Finally,
-build with<code class="highlighter-rouge">make</code> with <code class="highlighter-rouge">arm-linux-gnueabi-objcopy</code>.</p>
+build with<code class="highlighter-rouge">make</code>.</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
 make
-arm-linux-gnueabi-objcopy --output-target binary images/refos-image refos.bin
 </code></pre></div></div>
 
 <h2 id="booting-on-the-beaglebone-black">Booting on the Beaglebone Black</h2>
@@ -158,17 +152,17 @@ minicom or screen to connect to the serial port at 115200 bps</p>
 <p>Power on the device and hit enter a few times to interrupt the
 normal boot process and get a U-Boot prompt.</p>
 
-<p>To boot from SDcard, copy the sel4test.bin binary to a FAT32 partition
+<p>To boot from SDcard, copy the sel4test-driver-image-arm-am335x binary to a FAT32 partition
 on an SDCard and place the card in the Beaglebone Black. Connect the
 serial device, power up the Beaglebone Black, and hit ENTER to interrupt
 the normal boot process. Finally, enter the following commands at the
 U-Boot prompt to load and run the image:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 ${loadaddr} sel4test.bin
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-am335x
 go ${loadaddr}
 </code></pre></div></div>
 <p>To boot over Ethernet, configure your DHCP server to provide a DHCP
-lease and to specify the sel4test.bin (or refos.bin) as the boot file.
-Configure a TFTP server to serve sel4test.bin file. Plug the Ethernet
+lease and to specify sel4test (or refos) as the boot file.
+Configure a TFTP server to serve sel4test-driver-image-arm-am335x file. Plug the Ethernet
 cable and connect the serial device to the Beaglebone black. Power the
 device up and hit ENTER to interrupt the normal boot process. Then, at
 the U-Boot prompt enter:</p>
@@ -176,7 +170,7 @@ the U-Boot prompt enter:</p>
 go ${loadaddr}
 </code></pre></div></div>
 <p>To load an alternate image from the TFTP server at 1.2.3.4, use:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp ${loadaddr} 1.2.3.4:refos.bin
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp ${loadaddr} 1.2.3.4:refos-image-arm-am335x
 go ${loadaddr}
 </code></pre></div></div>
 <h2 id="other-resources">Other resources</h2>
@@ -211,7 +205,7 @@ go ${loadaddr}
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -316,7 +310,9 @@ go ${loadaddr}
               
             
               
-                Page last updated: Mon Apr 9 09:32:28 2018 +1000 7188ab0
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

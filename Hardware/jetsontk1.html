@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -132,22 +132,16 @@ seL4. We will explain how to run seL4 on the Tegra.</p>
 page</a>, make sure your board is correctly configured and plugged.</p>
 
 <h2 id="build-your-first-sel4-system">Build your first seL4 system</h2>
-<p>First, check out the seL4 project.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir tegra-test
-repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo sync
-</code></pre></div></div>
 
-<p>Then, use the default config for the tegra and build the system.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make tk1_debug_xml_defconfig
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make tk1_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
 make
 </code></pre></div></div>
 
-<p>Once the system is compiled, you will have a new file creates in the
-<code class="highlighter-rouge">images</code> directory</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>images/
-<span class="c"># sel4test-driver-image-arm-tk1</span>
-</code></pre></div></div>
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
 <h2 id="load-the-binary">Load the binary</h2>
 <p>You need to be able to see output from the serial
@@ -297,7 +291,7 @@ Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -424,7 +418,9 @@ Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
               
             
               
-                Page last updated: Mon Apr 9 09:32:28 2018 +1000 7188ab0
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

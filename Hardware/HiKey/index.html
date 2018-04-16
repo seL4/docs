@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -301,37 +301,29 @@ wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/nvme.img
 <span class="c"># Then power off the Hikey</span>
 </code></pre></div></div>
 
-<h2 id="12-booting-the-hikey">12. Booting the Hikey</h2>
+<h2 id="12-build-your-first-sel4-system">12. Build your first seL4 system</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.  Remove the connection for pins 3&amp;4 on the J15 header and connect
-    pins 5&amp;6 instead.
-2.  Power the Hikey
-3.  Run the desired image. The command below is an example. ~~~bash # In the third terminal fastboot boot images/sel4test-driver-image-arm-hikey.bin -c mode=32bit ~~~
-</code></pre></div></div>
-
-<h2 id="13-build-your-first-sel4-system">13. Build your first seL4 system</h2>
-<p>An image of seL4 can be obtained
-by the following instructions. First, check out the seL4 project.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir hikey-test
-repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
 repo sync
-</code></pre></div></div>
-
-<p>Then, use the default config for the !HiKey and build the system.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make hikey_aarch32_debug_xml_defconfig
-</code></pre></div></div>
-<p>Then, use “menuconfig &gt;
-Tools &gt; Build elfloader &gt; Boot image type” and choose “Binary Boot
-Image”</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+make hikey_aarch64_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
 make
 </code></pre></div></div>
 
-<p>Once the system is compiled, you will have a new image file created in the images
-directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls
-</span>images/sel4test-driver-image-arm-hikey.bin
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
+<h2 id="13-booting-the-hikey">13. Booting the Hikey</h2>
+
+<ol>
+  <li>Remove the connection for pins 3&amp;4 on the J15 header and connect
+pins 5&amp;6 instead.</li>
+  <li>Power the Hikey</li>
+  <li>Run the desired image. The command below is an example.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In the third terminal</span>
+fastboot boot images/sel4test-driver-image-arm-hikey <span class="nt">-c</span> <span class="nv">mode</span><span class="o">=</span>32bit
 </code></pre></div></div>
 
 <h2 id="14-modifications-to-firmware-or-uefi">14. Modifications to firmware or UEFI</h2>
@@ -373,7 +365,7 @@ directory.</p>
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -474,7 +466,9 @@ directory.</p>
               
             
               
-                Page last updated: Mon Apr 9 09:32:28 2018 +1000 7188ab0
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

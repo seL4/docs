@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -304,6 +304,19 @@ sf write 0x12000000 0 <span class="k">${</span><span class="nv">filesize</span><
   </tbody>
 </table>
 
+<h2 id="running-sel4-test">Running seL4 test</h2>
+
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make sabre_simulation_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
+make
+make simulate-sabre
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
 </div>
 
     </main>
@@ -331,7 +344,7 @@ sf write 0x12000000 0 <span class="k">${</span><span class="nv">filesize</span><
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -454,7 +467,9 @@ sf write 0x12000000 0 <span class="k">${</span><span class="nv">filesize</span><
               
             
               
-                Page last updated: Tue Mar 13 12:34:35 2018 +1100 ab2842d
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

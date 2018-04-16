@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -223,18 +223,19 @@ can type commands here and it’ll display the results.</p>
 </table>
 
 <h2 id="running-sel4test">Running seL4test</h2>
-<p>Get the sel4test-manifest repo using the
-instructions at
-<a href="/Testing">seL4Test</a></p>
 
-<p>Then run:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make beagle_debug_xml_defconfig
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make beagle_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
 make
 </code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
 <p>Which after a few minutes should give you:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[GEN_IMAGE] sel4test-image-arm-omap3
-</code></pre></div></div>
 <p>Now, the ELF image we
 boot into is the <code class="highlighter-rouge">sel4test-image-arm-omap3</code> file. Pull out the SD card, put it
 into the SD card reader and plug into your computer, then copy that file
@@ -286,7 +287,7 @@ After this you should start seeing output from seL4test.</p>
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -385,7 +386,9 @@ After this you should start seeing output from seL4test.</p>
               
             
               
-                Page last updated: Tue Mar 13 15:08:10 2018 +1100 39c5efd
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

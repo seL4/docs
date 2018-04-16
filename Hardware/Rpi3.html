@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -224,8 +224,17 @@ directory of this partition.</p>
 <p>In this section you should
 find the two most convenient methods of getting a kernel image booted on
 your RPi3 described. All three methods assume that you have already
-built a kernel image using one of our projects – such as
-<a href="/Testing">seL4Test</a>.</p>
+built a kernel image using one of our projects—such as seL4Test:</p>
+
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make rpi3_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
+make
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
 <p>The two methods described here are using the SD card and TFTP.</p>
 
@@ -293,7 +302,7 @@ bootelf 0x10000000
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -390,7 +399,9 @@ bootelf 0x10000000
               
             
               
-                Page last updated: Tue Mar 13 15:08:10 2018 +1100 2973096
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

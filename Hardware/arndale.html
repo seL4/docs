@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -97,6 +97,9 @@
 
 <div class="content">
   <h1 id="arndale">Arndale</h1>
+
+<p><strong>Note: This board is not being regression tested, but has same SoC as <a href="/Hardware/OdroidXU">Odroid-XU</a> (which is tested).</strong></p>
+
 <p>seL4 supports the the <a href="http://www.arndaleboard.org/wiki/index.php/Main_Page">Arndale</a>
   dual core A15 ARM development board.</p>
 
@@ -232,6 +235,19 @@ QNX expects to be ELF-loaded. The alternative is to convert our ELF file
 into a binary file using objcopy.</p>
 
 <h2 id="booting">Booting</h2>
+
+<h3 id="building-an-image">Building an image</h3>
+
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make arndale_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
+make
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
 <h3 id="from-sd-card">From SD card</h3>
 
 <p>&lt;TODO&gt;</p>
@@ -291,7 +307,7 @@ instructions</a></p>
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -382,7 +398,9 @@ instructions</a></p>
               
             
               
-                Page last updated: Tue Mar 13 12:24:56 2018 +1100 46c561a
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               

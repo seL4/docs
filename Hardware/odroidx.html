@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-13 05:27:11 +0000 -->
+<!-- Page last generated 2018-04-16 06:07:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -150,6 +150,17 @@ card. To copy U-Boot and the other boot loaders to the SD card:</p>
 </code></pre></div></div>
 
 <h2 id="sel4-image-file-preparation">seL4 Image file preparation</h2>
+
+<p>Checkout the sel4test project using repo as per <a href="/Testing">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+make odroidx_debug_xml_defconfig
+<span class="c"># The defconfig provides a set build configuration. You can use `make menuconfig` to customize build settings further if necessary.</span>
+make
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
 <p>The seL4 image file must be converted
 into a U-Boot application file. The first step is to strip the elf file
 into a binary file. Next we use mkimage to create the image.</p>
@@ -246,7 +257,7 @@ sources and instructions</a></p>
         </li>
         
           <li>
-            Site last updated: Fri Apr 13 15:21:46 2018 +1000 e8cbde7
+            Site last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
           </li>
           <li>
             
@@ -355,7 +366,9 @@ sources and instructions</a></p>
               
             
               
-                Page last updated: Fri Mar 23 15:17:08 2018 +1100 b501b67
+                Page last updated: Mon Apr 16 14:55:05 2018 +1000 5d73d8f
+              
+            
               
             
               
