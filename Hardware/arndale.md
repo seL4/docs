@@ -1,3 +1,7 @@
+---
+defconfig: arndale_debug_xml_defconfig
+---
+
 # Arndale
 
 **Note: This board is not being regression tested, but has same SoC as [Odroid-XU](/Hardware/OdroidXU) (which is tested).**
@@ -86,6 +90,11 @@ QNX expects to be ELF-loaded. The alternative is to convert our ELF file
 into a binary file using objcopy.
 
 ## Booting
+
+### Building an image
+
+{% include sel4test.md %}
+
 ### From SD card
 
 \<TODO>

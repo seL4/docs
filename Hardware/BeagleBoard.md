@@ -1,3 +1,6 @@
+---
+defconfig: beagle_debug_xml_defconfig
+---
 # seL4 on the BeagleBoard
 
 
@@ -99,20 +102,11 @@ Some quick useful commands:
 |bootelf |boot into en ELF image |
 
 ## Running seL4test
- Get the sel4test-manifest repo using the
-instructions at
-[seL4Test](/Testing)
 
-Then run:
-~~~bash
-make beagle_debug_xml_defconfig
-make
-~~~
+{% include sel4test.md %}
+
 Which after a few minutes should give you:
 
-~~~
-[GEN_IMAGE] sel4test-image-arm-omap3
-~~~
 Now, the ELF image we
 boot into is the `sel4test-image-arm-omap3` file. Pull out the SD card, put it
 into the SD card reader and plug into your computer, then copy that file

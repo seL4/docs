@@ -1,3 +1,7 @@
+---
+defconfig: hikey_aarch64_debug_xml_defconfig
+---
+
 # HiKey
 
 ### Pre-Requisites
@@ -206,45 +210,21 @@ sudo fastboot flash boot boot-fat.uefi.img
 # Then power off the Hikey
 ~~~
 
-## 12. Booting the Hikey
+## 12. Build your first seL4 system
+
+{% include sel4test.md %}
+
+## 13. Booting the Hikey
 
 
-    1.  Remove the connection for pins 3&4 on the J15 header and connect
-        pins 5&6 instead.
-    2.  Power the Hikey
-    3.  Run the desired image. The command below is an example.
+1.  Remove the connection for pins 3&4 on the J15 header and connect
+    pins 5&6 instead.
+2.  Power the Hikey
+3.  Run the desired image. The command below is an example.
+
 ~~~bash
 # In the third terminal
-fastboot boot images/sel4test-driver-image-arm-hikey.bin -c mode=32bit
-~~~
-
-## 13. Build your first seL4 system
- An image of seL4 can be obtained
-by the following instructions. First, check out the seL4 project.
-~~~bash
-mkdir hikey-test
-repo init -u https://github.com/seL4/sel4test-manifest.git
-repo sync
-~~~
-
-Then, use the default config for the !HiKey and build the system.
-~~~bash
-make hikey_aarch32_debug_xml_defconfig
-~~~
-Then, use "menuconfig >
-Tools > Build elfloader > Boot image type" and choose "Binary Boot
-Image"
-
-~~~bash
-make menuconfig
-make
-~~~
-
-Once the system is compiled, you will have a new image file created in the images
-directory.
-~~~bash
-ls
-images/sel4test-driver-image-arm-hikey.bin
+fastboot boot images/sel4test-driver-image-arm-hikey -c mode=32bit
 ~~~
 
 ## 14. Modifications to firmware or UEFI

@@ -1,5 +1,6 @@
 ---
 toc: true
+defconfig: tk1_debug_xml_defconfig
 ---
 
 # Jetson TK1
@@ -17,25 +18,8 @@ seL4. We will explain how to run seL4 on the Tegra.
 page](https://developer.nvidia.com/embedded-computing), make sure your board is correctly configured and plugged.
 
 ## Build your first seL4 system
- First, check out the seL4 project.
-~~~bash
-mkdir tegra-test
-repo init -u https://github.com/seL4/sel4test-manifest.git
-repo sync
-~~~
 
-Then, use the default config for the tegra and build the system.
-~~~bash
-make tk1_debug_xml_defconfig
-make
-~~~
-
-Once the system is compiled, you will have a new file creates in the
-`images` directory
-~~~bash
-ls images/
-# sel4test-driver-image-arm-tk1
-~~~
+{% include sel4test.md %}
 
 ## Load the binary
  You need to be able to see output from the serial

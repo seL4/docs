@@ -1,5 +1,8 @@
+---
+defconfig: sabre_simulation_debug_xml_defconfig
+simulation_target: simulate-sabre
+---
 # Sabre Lite
-
 
 For board details see
 [Sabre Lite](https://boundarydevices.com/product/sabre-lite-imx6-sbc/)
@@ -167,3 +170,7 @@ This assumes that the U-Boot version above is installed in SPI flash.
 |run bootsel4_mmc |Scans through the SD card and their partitions looking for an elf file named "sel4-image" in the root directory. This file will be loaded and executed. |
 |run bootsel4_net |Performs a DHCP request followed by a TFTPBoot request and attempts to load a file named "sabre/sel4-image". |
 |run bootsel4_fastboot|Simple alias for the fastboot command |
+
+## Running seL4 test
+
+{% include sel4test.md %}

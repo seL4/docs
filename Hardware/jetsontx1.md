@@ -1,5 +1,6 @@
 ---
 toc: true
+defconfig: tx1_aarch64_debug_xml_defconfig
 ---
 # Jetson TX1
  The Jetson TX1 is a multimedia and DSP board with a highly
@@ -25,6 +26,10 @@ TFTP-boot over the Ethernet port. You can get U-boot to support the
 TX1's Ethernet driver and enable TFTP-boot, but this is beyond the scope
 of this article since it entails compiling a custom U-boot and then
 flashing it onto the board.
+
+## Building seL4test
+
+{% include sel4test.md %}
 
 ## Booting via TFTP
  Unfortunately the stock U-boot that comes with
@@ -61,7 +66,7 @@ run bootcmd_dfu. U-boot should sit still waiting for a kernel image to
 be uploaded. Now you should open up a new terminal on your PC, and type
 the following:
 ~~~
-dfu-util --device 0955:701a -a kernel -D <PATH_TO_YOUR_SEL4_IMAGE>/sel4test-driver-image-arm-tx1.bin
+dfu-util --device 0955:701a -a kernel -D <PATH_TO_YOUR_SEL4_IMAGE>/sel4test-driver-image-arm-tx1
 ~~~
 
 You may need to give dfu-util root privileges. If dfu-util is unable to
@@ -87,19 +92,19 @@ the following:
 
 For FAT32:
 ~~~
-fatload mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin 
+fatload mmc 1 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
 ~~~
 
 For EXT2:
 ~~~ 
-ext2load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+ext2load mmc 1 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
 ~~~
 
 For EXT4:
 ~~~
-ext4load mmc 1 0x82000000 sel4test-driver-image-arm-tx1.bin
+ext4load mmc 1 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
 ~~~
 
@@ -134,18 +139,18 @@ internal mass storage):
 
 For FAT32:
 ~~~ 
-fatload mmc 0 0x82000000 sel4test-driver-image-arm-tx1.bin
+fatload mmc 0 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
 ~~~
 
 For EXT2:
 ~~~
-ext2load mmc 0 0x82000000 sel4test-driver-image-arm-tx1.bin 
+ext2load mmc 0 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
 ~~~
 
 For EXT4:
 ~~~
-ext4load mmc 0 0x82000000 sel4test-driver-image-arm-tx1.bin 
+ext4load mmc 0 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
 ~~~

@@ -1,3 +1,6 @@
+---
+defconfig: odroidx_debug_xml_defconfig
+---
 # Odroid-X
 
 seL4 supports the
@@ -51,7 +54,10 @@ cd sd_fusesudo
 ~~~
 
 ## seL4 Image file preparation
- The seL4 image file must be converted
+
+{% include sel4test.md %}
+
+The seL4 image file must be converted
 into a U-Boot application file. The first step is to strip the elf file
 into a binary file. Next we use mkimage to create the image.
 ~~~bash

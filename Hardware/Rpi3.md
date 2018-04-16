@@ -1,3 +1,7 @@
+---
+defconfig: rpi3_debug_xml_defconfig
+---
+
 # Raspberry PI 3 Model B
 
 This is an experimental port and is not guaranteed to work.
@@ -72,8 +76,9 @@ directory of this partition.
 In this section you should
 find the two most convenient methods of getting a kernel image booted on
 your RPi3 described. All three methods assume that you have already
-built a kernel image using one of our projects -- such as
-[seL4Test](/Testing).
+built a kernel image using one of our projects---such as seL4Test:
+
+{% include sel4test.md %}
 
 The two methods described here are using the SD card and TFTP.
 

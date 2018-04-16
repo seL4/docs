@@ -1,3 +1,6 @@
+---
+defconfig: odroidxu_release_xml_defconfig
+---
 # seL4 on the Odroid XU
 
 
@@ -17,15 +20,7 @@ bootable ELF file onto an SD card or the eMMC chip.
 ## Run seL4test using fastboot
 ### Get and build sel4test
 
-~~~bash
-mkdir seL4test
-cd seL4test
-repo init -u https://github.com/seL4/sel4test-manifest.git
-repo sync 
-make odroidxu_release_xml_defconfig
-~~~
-As always, you may need to change
-the `CROSS_COMPILE_PREFIX` by doing make menuconfig.
+{% include sel4test.md %}
 
 ### Put seL4test onto the board
  Boot the Odroid, with serial cable
