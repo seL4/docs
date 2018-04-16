@@ -31,9 +31,9 @@ line above with:
 repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/{{site.sel4_master}}
 ```
 
-In this example we clone version 2.0.x of the kernel, where "x" is the
-highest available minor version number. For more information on version
-numbers, see ReleaseProcess. 
+In this example we clone version {{site.sel4_master}} of the kernel. For more information on version
+numbers, see [ReleaseProcess](/ReleaseProcess#version-numbers).
+
 ## Build it
 ### Configurations
 
