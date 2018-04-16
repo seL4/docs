@@ -54,7 +54,7 @@ seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 
 ## RISC-V
 
-We currently support the 64-bit RISC-V spike platform. See [Simulating RISC-V](RISCV).
+We currently provide a prototype support for the 64-bit RISC-V spike platform. See [Simulating RISC-V](RISCV). Multicore and the floating point unit (FPU) are not supported.
 
 |platform (board) | status     | cotributed by        |maintained by |
 | Spike           | Unverified | Data61, [Hesham Almatary](https://github.com/heshamelmatary)     | Data61       |
