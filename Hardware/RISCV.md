@@ -1,6 +1,7 @@
 # RISC-V
 
-This is a guide to setting up the 64-bit RISC-V tools and running the seL4 test suite.
+This is a guide to setting up the 64-bit RISC-V tools and running the seL4 test suite for the Spike
+platform (the standard RISC-V simulator provided by UC Berkeley), via QEMU.
 
 ## Running seL4test on RISC-V
 
