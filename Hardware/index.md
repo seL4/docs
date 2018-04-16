@@ -31,7 +31,7 @@
 |[Arndale](arndale) |Exynos5 |A15 |v7A |ARM HYP |No|unverified |Data61 |not regression tested but same SoC as Odroid-XU||
 |[BeagleBoard](BeagleBoard) |OMAP3 |A8 |v7A |No|No |unverified |Data61 |Data61 | |
 |[Beaglebone Black](Beaglebone) |AM335x |A8 |v7A |No|No |unverified |external |Data61 regression tested | |
-|[Inforce IFC6410](IF6410) |Snapdragon S4 Pro APQ8064 | krait (A15-like) |v7A |ARM HYP |- |unverified |Data61 |Data61 |Krait is a Qualcomm reimplementation of Armv7A |
+|[Inforce IFC6410](IF6410) |Snapdragon S4 Pro APQ8064 | krait (A15-like) |v7A |ARM HYP |- |unverified |Data61 |Unmaintained |Krait is a Qualcomm reimplementation of Armv7A |
 |[Jetson TK1 (NVIDIA)](jetsontk1) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 | |
 |[Odroid-X](odroidx) |Exynos4412 |A9 |v7A |No |No |unverified |Data61 |Data61 | |
 |[Odroid-XU](OdroidXU) |Exynos5 |A15 |v7A |ARM HYP|limited System MMU |unverified |Data61 |Data61 | |
