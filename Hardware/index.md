@@ -51,3 +51,10 @@ seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 | [Jetson TX1 (NVIDIA) ](jetsontx1)             | Tegra X1                  | Quad A57         | v8A, aarch64  | ARM HYP        | System MMU | Unverified | Data61                                 | Data61        |
 | [HiKey](HiKey)                                | Kirin 620                 | A53              | v8A, aarch32 & aarch64 | ARM HYP        | -          | Unverified | Data61                                 | Data61        |
 | [Raspberry Pi 3-b](Rpi3)                      | BCM2837                   | A53              | v8A aarch64   | ARM HYP        | -          | Unverified | Data61                                 | Data61        |
+
+## RISC-V
+
+We currently support the 64-bit RISC-V spike platform. See [Simulating RISC-V](RISCV).
+
+|platform (board) | status     | cotributed by        |maintained by |
+| Spike           | Unverified | Data61, [Hesham Almatary](https://github.com/heshamelmatary)     | Data61       |
