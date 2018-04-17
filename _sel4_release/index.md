@@ -25,6 +25,7 @@ For the verification status of all platforms, see [Hardware](/Hardware).
 
 | Feature                        | Hardware                          | Verification status | Available From      |
 | -                              | -                                 | -                   | -                   |
+| RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [9.0.1](seL4_9.0.1) |
 | Meltdown mitigation            | x86                               | No                  | [9.0.0](seL4_9.0.0) |
 | Spectre mitigation             | x86                               | No                  | [9.0.0](seL4_9.0.0) |
 | Zynq UltraScale+ MPSoC         | Xilinx ZCU102, ARMv8a, Cortex A53 | No                  | [8.0.0](seL4_8.0.0) |
