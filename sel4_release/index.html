@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-17 02:30:27 +0000 -->
+<!-- Page last generated 2018-04-17 04:22:24 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -87,6 +87,123 @@
 <div class="content">
   <h1 id="sel4-releases">seL4 releases</h1>
 
+<p>This page documents tagged releases of the seL4 kernel and proofs, for documentation on the release
+process we follow see <a href="/ReleaseProcess">here</a>.</p>
+
+<h2 id="landmark-releases">Landmark releases</h2>
+
+<p>This section documents the version at which specific features were introduced to seL4. For future
+features, see <a href="/Status">seL4 status</a>. For other previous features, see the release notes below.</p>
+
+<p><em>Verification Status</em> carries the following definitions and refers to the version specified in the
+<a href="/ReleaseProcess#verified-manifests">verification manifest</a> tagged for that specific release.</p>
+
+<ul>
+  <li>No: As of this release, this feature is not verified.</li>
+  <li>FC: the functional correctness proofs are complete.</li>
+  <li>FCI: the integrity proofs are complete, in addition to functional correctness.</li>
+  <li>Yes: this feature has functional correctness, integrity and infoflow proofs completed, for verified platforms, as of this release.</li>
+</ul>
+
+<p>For the verification status of all platforms, see [/Hardware].</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Hardware</th>
+      <th>Verification status</th>
+      <th>Available From</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Meltdown mitigation</td>
+      <td>x86</td>
+      <td>No</td>
+      <td><a href="seL4_9.0.0">9.0.0</a></td>
+    </tr>
+    <tr>
+      <td>Spectre mitigation</td>
+      <td>x86</td>
+      <td>No</td>
+      <td><a href="seL4_9.0.0">9.0.0</a></td>
+    </tr>
+    <tr>
+      <td>Zynq UltraScale+ MPSoC</td>
+      <td>Xilinx ZCU102, ARMv8a, Cortex A53</td>
+      <td>No</td>
+      <td><a href="seL4_8.0.0">8.0.0</a></td>
+    </tr>
+    <tr>
+      <td>Multiboot2 support</td>
+      <td>x86</td>
+      <td>No</td>
+      <td><a href="seL4_8.0.0">8.0.0</a></td>
+    </tr>
+    <tr>
+      <td>CMake based build system</td>
+      <td>all</td>
+      <td>N/A</td>
+      <td><a href="seL4_7.0.0">7.0.0</a></td>
+    </tr>
+    <tr>
+      <td>ARM 32-bit SMP</td>
+      <td><a href="/Hardware/sabreLite">Sabre</a></td>
+      <td>No</td>
+      <td><a href="seL4_6.0.0">6.0.0</a></td>
+    </tr>
+    <tr>
+      <td>ARMv7 32-bit FPU support</td>
+      <td>ARM</td>
+      <td>No</td>
+      <td><a href="seL4_6.0.0">6.0.0</a></td>
+    </tr>
+    <tr>
+      <td>ARM 64-bit support</td>
+      <td>Aarch64</td>
+      <td>No</td>
+      <td><a href="seL4_5.0.0">5.0.0</a></td>
+    </tr>
+    <tr>
+      <td>64-bit x86 support</td>
+      <td>x86_64</td>
+      <td>No</td>
+      <td><a href="seL4_4.0.0">4.0.0</a></td>
+    </tr>
+    <tr>
+      <td>Raspberry Pi 3 support</td>
+      <td><a href="/Hardware/Rpi3">RPI3</a></td>
+      <td>No</td>
+      <td><a href="seL4_4.0.0">4.0.0</a></td>
+    </tr>
+    <tr>
+      <td>ARM Hypervisor initial support</td>
+      <td>ARM</td>
+      <td>FC</td>
+      <td><a href="seL4_3.2.0">3.2.0</a></td>
+    </tr>
+    <tr>
+      <td>First ARMv8 support</td>
+      <td><a href="/Hardware/Hikey">HiKey</a></td>
+      <td>No</td>
+      <td><a href="seL4_3.1.0">3.1.0</a></td>
+    </tr>
+    <tr>
+      <td>NVIDIA Tegra K1 support</td>
+      <td><a href="/Hardware/jetsontk1">TK1</a></td>
+      <td>No</td>
+      <td><a href="seL4_3.0.1">3.0.1</a></td>
+    </tr>
+    <tr>
+      <td>Notification binding</td>
+      <td>all</td>
+      <td>Yes</td>
+      <td><a href="seL4_2.0.0">2.0.0</a></td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="master-verified-kernel">Master (verified kernel)</h2>
 
 <p><a href="/sel4_release/seL4_9.0.0.html">seL4 9.0.0</a>
@@ -133,6 +250,8 @@
 
 <h2 id="experimental-branches">Experimental Branches</h2>
 
+<p>We occasionally pre-release experimental branches for community feedback and availability.</p>
+
 <h3 id="mixed-criticality-support-mcs--realtime">Mixed Criticality Support (MCS) / Realtime</h3>
 
 <p><a href="/sel4_release/seL4_9.0.0-mcs.html">seL4 9.0.0-mcs</a>
@@ -176,7 +295,7 @@
         </li>
         
           <li>
-            Site last updated: Tue Apr 17 11:22:06 2018 +1000 e6db160
+            Site last updated: Tue Apr 17 14:15:13 2018 +1000 2160ab1
           </li>
           <li>
             
@@ -373,7 +492,7 @@
               
             
               
-                Page last updated: Wed Mar 7 11:47:41 2018 +1100 549ff89
+                Page last updated: Tue Apr 17 14:15:13 2018 +1000 2160ab1
               
             
               
