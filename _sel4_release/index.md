@@ -21,7 +21,7 @@ features, see [seL4 status](/Status). For other previous features, see the relea
 * FCI: the integrity proofs are complete, in addition to functional correctness.
 * Yes: this feature has functional correctness, integrity and infoflow proofs completed, for verified platforms, as of this release.
 
-For the verification status of all platforms, see [/Hardware].
+For the verification status of all platforms, see [Hardware](/Hardware).
 
 | Feature                        | Hardware                          | Verification status | Available From      |
 | -                              | -                                 | -                   | -                   |
