@@ -16,7 +16,7 @@ For status of existing kernel ports, features, drivers, and other userland compo
 
 |Feature|Status|Driven by|Repo|Comment|
 |-|-|-|-|-|
-| MCS kernel | in development | [D61](mailto:devel@sel4.systems)| <https://github.com/seL4/seL4/tree/new-rt> | being developed for x32, x64, AArch32, AArch64 on most supported platforms. Note, development branch is not released publicly, but GitHub branch is updated from it occasionally | 
+| MCS kernel | in development | [D61](mailto:devel@sel4.systems)| {{site.sel4_mcs}} | Rebased onto master at each release, but the development branch is not public. Being developed for all architectures and most supported platforms. |
 | AArch64 hyp | in development (unreleased) | [D61](mailto:devel@sel4.systems)| | being developed on NVIDIA TX1, HiKey |
 | AArch64 SMP | planned | [D61](mailto:devel@sel4.systems)| | to be developed on NVIDIA TX1, HiKey |
 | NVIDIA TX1 SMMU | planned | [D61](mailto:devel@sel4.systems)| | AArch32 and AArch64 |
