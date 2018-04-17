@@ -45,9 +45,9 @@ seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 | [Odroid-X](odroidx)                           | Exynos4412                | A9               | v7A   | No             | No                 | Unverified | Data61         | Data61        |
 | [Odroid-XU](OdroidXU)                         | Exynos5                   | A15              | v7A   | ARM HYP        | limited System MMU | Unverified | Data61         | Data61        |
 | [Sabre Lite](sabreLite)                       | i.MX6                     | A9               | v7A   | No             | No                 | Verified   | Data61         | Data61        |
-| [TK1 SOM (Colorado Engineering)](CEI_TK1_SOM) | Tegra K1                  | A15              | v7-1A | ARM HYP        | System MMU         | Verified\* | Data61         | Data61        |
-| Zynq-7000 ZC706 Evaluation Kit                | Zynq 7000                 | A9               | v7A   | No             | No                 | FC (without MMU)|        | Data61         | Data61        |
-| zynqmp Zynq UltraScale+ MPSoC ZCU102 Evaluation Kit | Zynq !UltraScale+ MPSoC | A53      | v8A                    | ARM HYP        | System MMU | Unverified | [DornerWorks](http://dornerworks.com/) | Data61        |
-| [Jetson TX1 (NVIDIA) ](jetsontx1)                   | Tegra X1                | Quad A57 | v8A, aarch64           | ARM HYP        | System MMU | Unverified | Data61                                 | Data61        |
-| [HiKey](HiKey)                                      | Kirin 620               | A53      | v8A, aarch32 & aarch64 | ARM HYP        | -          | Unverified | Data61                                 | Data61        |
-| [Raspberry Pi 3-b](Rpi3)                            | BCM2837                 | A53      | v8A aarch64            | ARM HYP        | -          | Unverified | Data61                                 | Data61        |
+| [TK1 SOM (Colorado Engineering)](CEI_TK1_SOM) | Tegra K1                  | A15              | v7-1A | ARM HYP        | System MMU         | FC (without MMU) | Data61         | Data61        |
+| Zynq-7000 ZC706 Evaluation Kit                | Zynq 7000                 | A9               | v7A   | No             | No                 | Unverified | Data61         | Data61        |
+| Zynq ZCU102 Evaluation Kit                    | Zynq !UltraScale+ MPSoC   | A53              | v8A           | ARM HYP        | System MMU | Unverified | [DornerWorks](http://dornerworks.com/) | Data61        |
+| [Jetson TX1 (NVIDIA) ](jetsontx1)             | Tegra X1                  | Quad A57         | v8A, aarch64  | ARM HYP        | System MMU | Unverified | Data61                                 | Data61        |
+| [HiKey](HiKey)                                | Kirin 620                 | A53              | v8A, aarch32 & aarch64 | ARM HYP        | -          | Unverified | Data61                                 | Data61        |
+| [Raspberry Pi 3-b](Rpi3)                      | BCM2837                   | A53              | v8A aarch64   | ARM HYP        | -          | Unverified | Data61                                 | Data61        |
