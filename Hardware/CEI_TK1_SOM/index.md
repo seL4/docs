@@ -1,7 +1,7 @@
 # TK1 som
 
 The TK1-SOM from Colorado engineering is a small form-factor system
-based on the Nvidia Tegra K1. Details and ordering are at
+based on the NVIDIA Tegra K1. Details and ordering are at
 <https://tk1som.com/products/tk1-som>
 
 We have ported seL4 to this board.

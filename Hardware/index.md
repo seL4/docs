@@ -1,50 +1,42 @@
-# Supported hardware platforms
+# Supported Platforms
 
-[General info on ARM platforms](GeneralARM)
+## Simulating seL4
 
+Running seL4 in a simulator is a quick way to test it out and iteratively develop software. However,
+not that the feature support is limited by the simulator.
 
-[Running seL4 on VMware](VMware)
-
-[Running seL4 on Qemu](Qemu)
+* [Running seL4 on VMware](VMware)
+* [Running seL4 on Qemu](Qemu)
 
 ## x86
 
-| platform |core |arch |virtualisation |IOMMU |status |contributed by |maintained by |description |
-|-|-|-|-|-|-|-|-|-|-|
-| [PC99](IA32) |various |x86 |VT-X |VT-D |unverified |Data61 |Data61 |PC99-style Intel Architecture 32-bit |
-| [PC99](IA32) |various |x64 |VT-X |VT-D |unverified |Data61 |Data61 |PC99-style Intel Architecture 64-bit |
+We support PC99-style Intel Architecture Platforms.
+
+| Platform              | Arch | Virtualisation | IOMMU | Status     | Contributed by | Maintained by |
+| -                     |  -   | -              | -     | -          | -              | -             |
+| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | unverified | Data61         | Data61        |
+| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | unverified | Data61         | Data61        |
 
 ## ARM
 
+seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 
-### ARMv6
+* [General info on ARM Platforms](GeneralARM)
 
-|platform (board) |chip (SoC) |core |arch |virtualisation |IOMMU |status |contributed by |maintained by |description |
-|-|-|-|-|-|-|-|-|-|-|
-|[KZM](Kzm) |i.MX31 |ARM11 |v6 |No |No |unverified |Data61 |Data61 |original verified version - proof no longer maintained |
-
-### ARMv7A
-
-
-|platform (board)|chip (SoC)|core|arch|virtualisation |IOMMU |status |contributed by |maintained by |description |
-|-|-|-|-|-|-|-|-|-|-|
-|[Arndale](arndale) |Exynos5 |A15 |v7A |ARM HYP |No|unverified |Data61 |not regression tested but same SoC as Odroid-XU||
-|[BeagleBoard](BeagleBoard) |OMAP3 |A8 |v7A |No|No |unverified |Data61 |Data61 | |
-|[Beaglebone Black](Beaglebone) |AM335x |A8 |v7A |No|No |unverified |external |Data61 regression tested | |
-|[Inforce IFC6410](IF6410) |Snapdragon S4 Pro APQ8064 | krait (A15-like) |v7A |ARM HYP |- |unverified |Data61 |Unmaintained |Krait is a Qualcomm reimplementation of Armv7A |
-|[Jetson TK1 (NVIDIA)](jetsontk1) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 | |
-|[Odroid-X](odroidx) |Exynos4412 |A9 |v7A |No |No |unverified |Data61 |Data61 | |
-|[Odroid-XU](OdroidXU) |Exynos5 |A15 |v7A |ARM HYP|limited System MMU |unverified |Data61 |Data61 | |
-|[Sabre Lite](sabreLite) |i.MX6 |A9 |v7A |No |No|verified |Data61 |Data61 |current verified version |
-|[TK1 SOM (Colorado Engineering)](CEI_TK1_SOM) |Tegra K1 |A15 |v7-1A |ARM HYP |System MMU |unverified |Data61 |Data61 |Small form-factor Tegra K1 |
-|Zynq-7000 ZC706 Evaluation Kit |Zynq 7000 |A9 |v7A |No |No |unverified|Data61 |Data61 | |
-
-### ARMv8A
-
-
-|platform (board) |chip (SoC) |core |arch|virtualisation |IOMMU |status |contributed by |maintained by |description |
-|-|-|-|-|-|-|-|-|-|-|
-|zynqmp Zynq UltraScale+ MPSoC ZCU102 Evaluation Kit |Zynq !UltraScale+ MPSoC |A53 |v8A |ARM HYP |System MMU |unverified |[DornerWorks](http://dornerworks.com/) |Data61 | |
-|[Jetson TX1 (NVIDIA) ](jetsontx1) | Tegra X1 |Quad A57 |v8A |ARM HYP |System MMU |unverified |Data61 |Data61 | A57 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. |
-|[HiKey](HiKey) |Kirin 620 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. 64- and 32-bit support is available. |
-|[Raspberry Pi 3-b](Rpi3)|BCM2837 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''.|
+| Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | IOMMU              | Status     | Contributed by | Maintained by |
+| -                                             | -                         | -                | -     | -              | -                  | -          | -              | -             |
+| [KZM](Kzm)       | i.MX31     | ARM11 | v6   | No             | No    | unverified | Data61         | Data61        |
+| [Arndale](arndale)                            | Exynos5                   | A15              | v7A   | ARM HYP        | No                 | unverified | Data61         | No            |
+| [BeagleBoard](BeagleBoard)                    | OMAP3                     | A8               | v7A   | No             | No                 | unverified | Data61         | Data61        |
+| [Beaglebone Black](Beaglebone)                | AM335x                    | A8               | v7A   | No             | No                 | unverified | external       | Data61        |
+| [Inforce IFC6410](IF6410)                     | Snapdragon S4 Pro APQ8064 | krait (A15-like) | v7A   | ARM HYP        | -                  | unverified | Data61         | No            |
+| [Jetson TK1 (NVIDIA)](jetsontk1)              | Tegra K1                  | A15              | v7-1A | ARM HYP        | System MMU         | unverified | Data61         | Data61        |
+| [Odroid-X](odroidx)                           | Exynos4412                | A9               | v7A   | No             | No                 | unverified | Data61         | Data61        |
+| [Odroid-XU](OdroidXU)                         | Exynos5                   | A15              | v7A   | ARM HYP        | limited System MMU | unverified | Data61         | Data61        |
+| [Sabre Lite](sabreLite)                       | i.MX6                     | A9               | v7A   | No             | No                 | verified   | Data61         | Data61        |
+| [TK1 SOM (Colorado Engineering)](CEI_TK1_SOM) | Tegra K1                  | A15              | v7-1A | ARM HYP        | System MMU         | unverified | Data61         | Data61        |
+| Zynq-7000 ZC706 Evaluation Kit                | Zynq 7000                 | A9               | v7A   | No             | No                 | unverified | Data61         | Data61        |
+| zynqmp Zynq UltraScale+ MPSoC ZCU102 Evaluation Kit | Zynq !UltraScale+ MPSoC | A53      | v8A                    | ARM HYP        | System MMU | unverified | [DornerWorks](http://dornerworks.com/) | Data61        |
+| [Jetson TX1 (NVIDIA) ](jetsontx1)                   | Tegra X1                | Quad A57 | v8A, aarch64           | ARM HYP        | System MMU | unverified | Data61                                 | Data61        |
+| [HiKey](HiKey)                                      | Kirin 620               | A53      | v8A, aarch32 & aarch64 | ARM HYP        | -          | unverified | Data61                                 | Data61        |
+| [Raspberry Pi 3-b](Rpi3)                            | BCM2837                 | A53      | v8A aarch64            | ARM HYP        | -          | unverified | Data61                                 | Data61        |
