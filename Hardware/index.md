@@ -46,5 +46,5 @@
 |-|-|-|-|-|-|-|-|-|-|
 |zynqmp Zynq UltraScale+ MPSoC ZCU102 Evaluation Kit |Zynq !UltraScale+ MPSoC |A53 |v8A |ARM HYP |System MMU |unverified |[DornerWorks](http://dornerworks.com/) |Data61 | |
 |[Jetson TX1 (NVIDIA) ](jetsontx1) | Tegra X1 |Quad A57 |v8A |ARM HYP |System MMU |unverified |Data61 |Data61 | A57 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. |
-|[HiKey](HiKey) |Kirin 620 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''. |
+|[HiKey](HiKey) |Kirin 620 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. 64- and 32-bit support is available. |
 |[Raspberry Pi 3-b](Rpi3)|BCM2837 |A53 |v8A |ARM HYP |- |unverified |Data61 |Data61 | A53 has hardware support for AArch32 and AArch64. The 64-bit seL4 kernel has been ported to this board, but ''not the 32-bit kernel''.|
