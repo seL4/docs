@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-04-18 03:56:12 +0000 -->
+<!-- Page last generated 2018-04-18 04:07:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -109,10 +109,8 @@ platform (the standard RISC-V simulator provided by UC Berkeley), via QEMU.</p>
 
 <p>The following packages are required for the RISC-V tools:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~~~bash
-autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
 libglib2.0-dev zlib1g-dev libpixman-1-dev
-~~~
 </code></pre></div></div>
 
 <p>On Ubuntu, these can be obtained with apt.</p>
@@ -152,15 +150,12 @@ future steps.</p>
   </li>
   <li>
     <p>Build the 64-bit toolchain, this will take an hour or two.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span>/riscv-tools
+ sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
+ ./build.sh
+</code></pre></div>    </div>
   </li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">cd</span> <span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span>/riscv-tools
-    sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
-    ./build.sh
-</code></pre></div></div>
-
-<ol>
   <li>
     <p>Get sel4test sources. If you have them already make sure you are up to to date with the latest
 source.</p>
@@ -212,7 +207,7 @@ source.</p>
         </li>
         
           <li>
-            Site last updated: Wed Apr 18 08:41:12 2018 +1000 fb4a550
+            Site last updated: Wed Apr 18 14:03:40 2018 +1000 4033854
           </li>
           <li>
             
@@ -317,7 +312,7 @@ source.</p>
               
             
               
-                Page last updated: Wed Apr 18 08:36:53 2018 +1000 942dedd
+                Page last updated: Wed Apr 18 14:03:40 2018 +1000 4033854
               
             
               
