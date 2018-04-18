@@ -11,10 +11,10 @@ Make sure the [standard seL4 dependencies](GettingStarted.html#setting-up-your-m
 
 The following packages are required for the RISC-V tools:
 
-    ~~~bash
-    autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
-    libglib2.0-dev zlib1g-dev libpixman-1-dev
-    ~~~
+~~~bash
+autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
+libglib2.0-dev zlib1g-dev libpixman-1-dev
+~~~
 
 On Ubuntu, these can be obtained with apt.
 
@@ -52,11 +52,11 @@ On Ubuntu, these can be obtained with apt.
 
 4. Build the 64-bit toolchain, this will take an hour or two.
 
-  ~~~bash
+    ~~~bash
     cd ${RISCV}/riscv-tools
     sed -i 's/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g' ./build.sh
     ./build.sh
-  ~~~
+    ~~~
 
 
 5. Get sel4test sources. If you have them already make sure you are up to to date with the latest
