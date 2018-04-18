@@ -35,6 +35,7 @@ On Ubuntu, these can be obtained with apt.
     cd ${RISCV}
     git clone https://github.com/riscv/riscv-tools.git
     cd riscv-tools
+    git checkout priv-1.10
     git submodule update --init --recursive
     ~~~
 
