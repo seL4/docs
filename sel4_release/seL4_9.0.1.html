@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> | seL4 docs</title>
+    <title>seL4 9.0.1 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -58,7 +58,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name"></span>
+            <span property="name">seL4 9.0.1</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -85,10 +85,37 @@
       
 
 <div class="content">
-  <h1>404</h1>
+  <h1 id="sel4-version-901-release">seL4 Version 9.0.1 Release</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 9.0.1</code> with the following changes:</p>
 
-<p><strong>Page not found :(</strong></p>
-<p>The requested page could not be found.</p>
+<p>9.0.1 2018-04-18: BINARY COMPATIBLE</p>
+
+<h2 id="changes">Changes</h2>
+<ul>
+  <li>On 64-bit architectures, the <code class="highlighter-rouge">label</code> field of <code class="highlighter-rouge">seL4_MessageInfo</code> is now 52 bits wide. User-level programs
+which use any of the following functions may break, if the program relies on these functions to mask the
+<code class="highlighter-rouge">label</code> field to the previous width of 20 bits.
+    <ul>
+      <li><code class="highlighter-rouge">seL4_MessageInfo_new</code></li>
+      <li><code class="highlighter-rouge">seL4_MessageInfo_get_label</code></li>
+      <li><code class="highlighter-rouge">seL4_MessageInfo_set_label</code></li>
+    </ul>
+  </li>
+  <li>Initial prototype RISC-V architecture port. This port currently only supports running in 64-bit mode without FPU or
+or multicore support on the Spike simulation platform. There is <em>no verification</em> for this platform.</li>
+</ul>
+
+<h2 id="upgrade-notes">Upgrade Notes</h2>
+<hr />
+
+<h1 id="full-changelog">Full changelog</h1>
+<p>Refer to the git log in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="highlighter-rouge">git log 9.0.0..9.0.1</code></p>
+
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf">9.0.1 manual</a> included in the release or ask on the mailing list!</p>
+
 
 </div>
 
@@ -304,6 +331,8 @@
               
             
               
+                Page last updated: Wed Apr 18 08:41:12 2018 +1000 fb4a550
+              
             
               
             
@@ -358,9 +387,9 @@
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/404.html">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_9.0.1.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/404.html">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_9.0.1.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

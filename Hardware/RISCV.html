@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> | seL4 docs</title>
+    <title>RISC-V | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -57,9 +57,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name"></span>
-            <meta property="position" content="2" /></li>
+            <span property="name">RISC-V</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -85,10 +96,94 @@
       
 
 <div class="content">
-  <h1>404</h1>
+  <h1 id="risc-v">RISC-V</h1>
 
-<p><strong>Page not found :(</strong></p>
-<p>The requested page could not be found.</p>
+<p>This is a guide to setting up the 64-bit RISC-V tools and running the seL4 test suite for the Spike
+platform (the standard RISC-V simulator provided by UC Berkeley), via QEMU.</p>
+
+<h2 id="running-sel4test-on-risc-v">Running seL4test on RISC-V</h2>
+
+<h3 id="dependencies">Dependencies</h3>
+
+<p>Make sure the <a href="GettingStarted.html#setting-up-your-machine">standard seL4 dependencies</a> are installed.</p>
+
+<p>The following packages are required for the RISC-V tools:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~~~bash
+autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
+libglib2.0-dev zlib1g-dev libpixman-1-dev
+~~~
+</code></pre></div></div>
+
+<p>On Ubuntu, these can be obtained with apt.</p>
+
+<h3 id="build-the-tools">Build the tools</h3>
+
+<ol>
+  <li>
+    <p>Set up a directory for the RISC-V tools, and the RISCV environment variable, which we refer to in
+future steps.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir riscv
+ <span class="nb">cd </span>riscv
+ <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Get the RISC-V tools</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cd ${RISCV}
+ git clone https://github.com/riscv/riscv-tools.git
+ cd riscv-tools
+ git submodule update --init --recursive
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Get RISC-V qemu sources, and build them:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span>/riscv-tools
+ git clone https://github.com/heshamelmatary/riscv-qemu.git
+ <span class="nb">cd </span>riscv-qemu
+ git checkout sfence
+ git submodule update <span class="nt">--init</span> dtc
+ ./configure <span class="nt">--target-list</span><span class="o">=</span>riscv64-softmmu,riscv32-softmmu <span class="nt">--prefix</span><span class="o">=</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span>
+ make <span class="nt">-j8</span> <span class="o">&amp;&amp;</span> make install
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Build the 64-bit toolchain, this will take an hour or two.</p>
+  </li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">cd</span> <span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span>/riscv-tools
+    sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
+    ./build.sh
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Get sel4test sources. If you have them already make sure you are up to to date with the latest
+source.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir sel4test <span class="o">&amp;&amp;</span> <span class="nb">cd </span>sel4test
+ repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+ repo sync
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Build the RISC-V sel4test image and run sel4test</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd </span>sel4test
+ make bamboo_riscv64_defconfig
+ make <span class="nt">-j8</span>
+ make simulate-spike64
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="continuing-development">Continuing development</h3>
+
+<p>For further development, you only need to rebuild sel4test and rerun qemu, repeating step 6 above.</p>
 
 </div>
 
@@ -221,6 +316,8 @@
             
               
             
+              
+                Page last updated: Wed Apr 18 08:36:53 2018 +1000 942dedd
               
             
               
@@ -358,9 +455,9 @@
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/404.html">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/RISCV.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/404.html">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/RISCV.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
