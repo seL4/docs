@@ -29,4 +29,4 @@ title: seL4 9.0.1
 
 # More details
  See the
-[9.0.1 manual](http://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf) included in the release or ask on the mailing list!
+[9.0.1 manual](https://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf) included in the release or ask on the mailing list!
