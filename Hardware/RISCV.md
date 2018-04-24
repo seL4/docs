@@ -7,7 +7,7 @@ platform (the standard RISC-V simulator provided by UC Berkeley), via QEMU.
 
 ### Dependencies
 
-Make sure the [standard seL4 dependencies](GettingStarted.html#setting-up-your-machine) are installed.
+Make sure the [standard seL4 dependencies](/GettingStarted.html#setting-up-your-machine) are installed.
 
 The following packages are required for the RISC-V tools:
 

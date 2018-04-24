@@ -37,7 +37,7 @@ For the verification status of all platforms, see [Hardware](/Hardware).
 | 64-bit x86 support             | x86\_64                           | No                  | [4.0.0](seL4_4.0.0) |
 | Raspberry Pi 3 support         | [RPI3](/Hardware/Rpi3)            | No                  | [4.0.0](seL4_4.0.0) |
 | ARM Hypervisor initial support | ARM                               | FC                  | [3.2.0](seL4_3.2.0) |
-| First ARMv8 support            | [HiKey](/Hardware/Hikey)          | No                  | [3.1.0](seL4_3.1.0) |
+| First ARMv8 support            | [HiKey](/Hardware/HiKey)          | No                  | [3.1.0](seL4_3.1.0) |
 | NVIDIA Tegra K1 support        | [TK1](/Hardware/jetsontk1)        | No                  | [3.0.1](seL4_3.0.1) |
 | Notification binding           | all                               | Yes                 | [2.0.0](seL4_2.0.0) |
 

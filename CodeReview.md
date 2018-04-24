@@ -39,7 +39,7 @@ workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-wo
 
 - Commit history is part of the review
     - A good commit history assists reviewers in understanding the change
-    - Please see the [Git conventions](/git_conventions).
+    - Please see the [Git conventions](/GitConventions).
 - Good reviews are small reviews. Large PRs should only be created if neccessary.
 
 ## During a PR
