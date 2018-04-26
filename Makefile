@@ -17,6 +17,8 @@ FILE_NAME=_data/generated.yml
 UPDATE_DATE:= $(shell git log -1 --format='%cd %h')
 FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | sed 's/.\///')
 
+SEL4_GIT_URL=https://github.com/seL4/seL4.git
+
 $(dir $(FILE_NAME)):
 	mkdir -p $@
 
@@ -32,19 +34,27 @@ _generate_git_per_page_timestamps: _generate_git_site_timestamp
 
 generate_data_files: _generate_git_per_page_timestamps
 
+_repos/sel4:
+	git clone $(SEL4_GIT_URL) _repos/sel4
+
+_generate_api_pages: _repos/sel4
+	$(MAKE) markdown -C _repos/sel4/manual
+
+generate_api: _generate_api_pages
+
 # Rules for local serving of the site using jekyll.
 # Supports docker or running using local environment.
 # The _production versions run with JEKYLL_ENV=production which will show additional content.
 # The _production versions require `generate_data_files` to have been run separately.
 JEKYLL_ENV:=development
 
-docker_serve:
+docker_serve: generate_api
 	docker run --network=host -v $(PWD):/host -w /host -it ruby bash -c 'bundle install && JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve'
 
 docker_serve_production:
 	$(MAKE) docker_serve JEKYLL_ENV=production
 
-serve:
+serve: generate_api
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 serve_production:
@@ -54,7 +64,7 @@ serve_production:
 # This relies on Automated Accessibility Testing Tool (AATT) (https://github.com/paypal/AATT)
 # to be running and listening on http://localhose:3000
 # The resulting conformance_results.xml file can be viewed with `make check_conformance_errors` or using a junit xml viewer
-check_conformance:
+check_conformance: generate_api
 	bundle exec jekyll build
 	find _site -iname "*.html"| sed "s/_site.//" | python tools/testWCAG.py > conformance_results.xml
 
@@ -76,6 +86,6 @@ check_liquid_syntax:
 # Output html checking using tidy.
 # Any warnings or errors will be printed to stdout
 # Requires `tidy` to be installed.
-check_html_output:
+check_html_output: generate_api
 	bundle exec jekyll build	
 	find _site/ -iname "*.html"| xargs -l tidy -q --drop-empty-elements n -e
