@@ -48,6 +48,7 @@ We welcome community contributions to our sources and this website!
 - [Current release](https://github.com/seL4/seL4/releases/latest)
 - [Current manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
 - [Release notes](sel4_release)
+- [API Reference](/ApiDoc)
 
 ### CAmkES
 
