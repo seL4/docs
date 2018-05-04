@@ -19,6 +19,8 @@ FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | sed 's/.\///')
 
 SEL4_GIT_URL=https://github.com/seL4/seL4.git
 
+DOCKER_IMG:=docs_builder
+
 $(dir $(FILE_NAME)):
 	mkdir -p $@
 
@@ -48,11 +50,14 @@ generate_api: _generate_api_pages
 # The _production versions require `generate_data_files` to have been run separately.
 JEKYLL_ENV:=development
 
-docker_serve: generate_api
-	docker run --network=host -v $(PWD):/host -w /host -it ruby bash -c 'bundle install && JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve'
+docker_serve: docker_build
+	docker run --network=host -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c 'bundle install && $(MAKE) generate_api && JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve'
 
 docker_serve_production:
 	$(MAKE) docker_serve JEKYLL_ENV=production
+
+docker_build:
+	docker build -t $(DOCKER_IMG) tools/
 
 serve: generate_api
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
