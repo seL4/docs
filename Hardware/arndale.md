@@ -4,12 +4,12 @@ defconfig: arndale_debug_xml_defconfig
 platform: Arndale
 arch: ARMv7A
 virtualization: ARM Hyp
-iommu: No
+iommu: "No"
 soc: Exynos5
 cpu: Cortex-A15
 Status: Unverified
 Contrib: Data61
-Maintained: No
+Maintained: "No"
 ---
 
 # Arndale

@@ -4,8 +4,8 @@ defconfig: kzm_simulation_release_xml_defconfig
 simulation_target: simulate-kzm
 platform: KZM
 arch: ARMv6A
-virtualization: No
-iommu: No
+virtualization: "No"
+iommu: "No"
 soc: i.MX31
 cpu: ARM1136J
 Status: Unverified

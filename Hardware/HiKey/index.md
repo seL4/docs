@@ -4,7 +4,7 @@ defconfig: hikey_aarch64_debug_xml_defconfig
 platform: HiKey
 arch: ARMv8A
 virtualization: ARM HYP
-iommu: No
+iommu: "No"
 soc: Kirin 620
 cpu: Cortex-A53
 Status: Unverified

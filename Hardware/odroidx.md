@@ -3,8 +3,8 @@ arm_hardware: true
 defconfig: odroidx_debug_xml_defconfig
 platform: OdroidX
 arch: ARMv7A
-virtualization: No
-iommu: No
+virtualization: "No"
+iommu: "No"
 soc: Exynos4412
 cpu: Cortex-A9
 Status: Unverified

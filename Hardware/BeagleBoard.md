@@ -3,8 +3,8 @@ arm_hardware: true
 defconfig: beagle_debug_xml_defconfig
 platform: BeagleBoard
 arch: ARMv7A
-virtualization: No
-iommu: No
+virtualization: "No"
+iommu: "No"
 soc: OMAP3
 cpu: Cortex-A8
 Status: Unverified

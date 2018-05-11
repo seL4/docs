@@ -4,8 +4,8 @@ defconfig: sabre_simulation_debug_xml_defconfig
 simulation_target: simulate-sabre
 platform: Sabre Lite
 arch: ARMv7A
-virtualization: No
-iommu: No
+virtualization: "No"
+iommu: "No"
 soc: i.MX6
 cpu: Cortex-A9
 Status: Verified
