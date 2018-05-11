@@ -11,8 +11,9 @@ Status: Unverified
 Contrib: External
 Maintained: Data61
 ---
-# seL4 and RefOS on the Beaglebone Black
- This page contains info about
+# Beaglebone Black
+
+This page contains info about
 building seL4 on [Beaglebone Black](http://beagleboard.org/black).
 
 ## Building for the Beaglebone Black
@@ -28,21 +29,6 @@ cross-compilers. Use
 #### seL4test
 
 {% include sel4test.md %}
-
-#### RefOS
- For RefOS, first clone the repository.
-```bash
-mkdir refos
-cd refos
-repo init -u https://github.com/seL4/refos-manifest.git
-```
-
-Now you must build a configuration file for your BeagleBone. Finally,
-build with`make`.
-```
-make menuconfig
-make
-```
 
 ## Booting on the Beaglebone Black
 ### Hardware Requirements
