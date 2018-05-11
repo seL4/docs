@@ -36,11 +36,12 @@ seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 
 | Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | IOMMU              | Status     | Contributed by | Maintained by |
 | - | - | - | - | - | - | - | - | - |
-{% for page in site.pages %}
+{%- assign sorted = site.pages | sort: 'arch' %}
+{% for page in sorted %}
 {%- if page.arm_hardware -%}
-| [{{ page.platform }}]({{page.path}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
+| [{{ page.platform }}]({{page.url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
 {% endif %}
-{%- endfor -%}
+{%- endfor %}
 
 
 ## RISC-V
