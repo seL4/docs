@@ -8,7 +8,7 @@ iommu: "No"
 soc: AM335x
 cpu: Cortex-A8
 Status: Unverified
-Contrib: External
+Contrib: Community
 Maintained: Data61
 ---
 # Beaglebone Black
