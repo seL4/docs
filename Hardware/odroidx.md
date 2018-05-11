@@ -1,5 +1,15 @@
 ---
+arm_hardware: true
 defconfig: odroidx_debug_xml_defconfig
+platform: OdroidX
+arch: ARMv7A
+virtualization: No
+iommu: No
+soc: Exynos4412
+cpu: Cortex-A9
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 # Odroid-X
 

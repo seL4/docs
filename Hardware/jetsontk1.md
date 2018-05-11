@@ -1,6 +1,16 @@
 ---
 toc: true
+arm_hardware: true
 defconfig: tk1_debug_xml_defconfig
+platform: TK1
+arch: ARMv7A
+virtualization: ARM HYP
+iommu: System MMU
+soc: NVIDIA Tegra K1
+cpu: Cortex-A15
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 
 # Jetson TK1

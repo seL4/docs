@@ -1,6 +1,16 @@
 ---
 toc: true
+arm_hardware: true
 defconfig: tx1_aarch64_debug_xml_defconfig
+platform: TX1
+arch: ARMv8A, AArch64 only
+virtualization: ARM HYP
+iommu: System MMU
+soc: NVIDIA Tegra X1
+cpu: Cortex-A57 Quad
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 # Jetson TX1
  The Jetson TX1 is a multimedia and DSP board with a highly

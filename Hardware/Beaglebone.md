@@ -1,5 +1,15 @@
 ---
+arm_hardware: true
 defconfig: bbone_black_debug_xml_defconfig
+platform: Beaglebone Black
+arch: ARMv7A
+virtualization: No
+iommu: No
+soc: AM335x
+cpu: Cortex-A8
+Status: Unverified
+Contrib: External
+Maintained: Data61
 ---
 # seL4 and RefOS on the Beaglebone Black
  This page contains info about

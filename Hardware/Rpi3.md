@@ -1,5 +1,15 @@
 ---
+arm_hardware: true
 defconfig: rpi3_debug_xml_defconfig
+platform: Raspberry Pi 3-b
+arch: ARMv8A, aarch64 only
+virtualization: ARM HYP
+iommu: No
+soc: BCM2937
+cpu: Cortex-A53
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 
 # Raspberry PI 3 Model B

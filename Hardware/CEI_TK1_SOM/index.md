@@ -1,3 +1,15 @@
+---
+arm-hardware: true
+platform: TK1-SOM
+arch: ARMv7A
+virtualization: ARM HYP
+iommu: System MMU
+soc: NVIDIA Tegra K1
+cpu: Cortex-A15
+Status: FC (without MMU)
+Contrib: Data61
+Maintained: Data61
+---
 # TK1 som
 
 The TK1-SOM from Colorado engineering is a small form-factor system

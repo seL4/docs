@@ -1,5 +1,15 @@
 ---
+arm_hardware: true
 defconfig: odroidxu_release_xml_defconfig
+platform: OdroidXU
+arch: ARMv7A
+virtualization: ARM HYP
+iommu: limited System MMU
+soc: Exynos5
+cpu: Cortex-A15
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 # seL4 on the Odroid XU
 
