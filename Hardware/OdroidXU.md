@@ -41,7 +41,7 @@ Interrupt U-Boot's autoboot by hitting SPACE
 Enter Fastboot mode by typing fastboot
 
 On the host,
-~~~bash
+```bash
 mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d images/sel4test-driver-image-arm-exynos5 image
 fastboot boot image
-~~~
+```

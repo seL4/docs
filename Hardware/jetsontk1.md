@@ -96,18 +96,18 @@ setenv bootm_boot_mode sec
 saveenv
 ```
 ## Getting the sources
-~~~bash
+```bash
 mkdir tegra-u-boot-flasher
 cd tegra-u-boot-flasher
 repo init -u https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git
 repo sync
-~~~
+```
 
 ## Patching the sources
 
 
 Apply the following patch to increase the console buffer size.
-~~~diff
+```diff
 diff --git
 a/include/configs/tegra-common.h b/include/configs/tegra-common.h
 index 1c469d0..234023d 100644
@@ -122,28 +122,28 @@ index 1c469d0..234023d 100644
 /* Print Buffer Size */
 #define CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE + \
 sizeof(CONFIG_SYS_PROMPT) + 16)
-~~~
+```
 
 ## Building
  To build the sources, build the necessary tools first.
 
 Install autoconf, pkg-config, flex, bison, libcrypto++-dev and
 libusb-1.0.0-dev for your distribution. On Debian or Ubuntu you can do:
-~~~
+```
 sudo apt-get update
 sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev gcc-arm-linux-gnueabi
-~~~
+```
 
 Then do:
-~~~bash
+```bash
 cd scripts
 ./build-tools build
-~~~
+```
 
 Then, in the script directory, build everything.
-~~~bash
+```bash
 ./build --socs tegra124 --boards jetson-tk1 build
-~~~
+```
 
 ## Flashing
  To flash, attach the Jetson board's OTG USB port to a USB
@@ -152,9 +152,9 @@ the RESET button next to it; release FORCE RECOVERY a second or two
 after releasing the reset button
 
 Then issue:
-~~~bash
+```bash
 ./tegra-uboot-flasher flash jetson-tk1
-~~~
+```
 
 The board should now be updated.
 

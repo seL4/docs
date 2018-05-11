@@ -26,13 +26,13 @@ code, please refer to the verification requirements below, which override the ge
 
 For automatic formatting of c code, we use the [astyle](http://astyle.sourceforge.net/), version 2.05.1, with the following settings:
 
-~~~
+```
 max-instatement-indent=120
 style=otbs
 pad-header
 indent=spaces=4
 pad-oper
-~~~
+```
 
 ### Spacing and braces
 
@@ -42,7 +42,7 @@ pad-oper
 * Function prototypes should be all on the same line
 * We use "the one true brace style" (OTBS)
     * always brace everything (including single scope statments)
-~~~c
+```c
 if (x == FOO) {
     do_something();
 } else if (y == BAR) {
@@ -50,7 +50,7 @@ if (x == FOO) {
 } else {
     do_last_else();
 }
-~~~
+```
 
 ### Naming
 
@@ -78,11 +78,11 @@ if (x == FOO) {
 * Prefer `static inline` functions over preprocessor macros if the macro is even remotely complex,
   and preprocessor features are not required.
 * `#ifdef` blocks should always be commented at the end, e.g.:
-~~~c
+```c
 #ifndef CONFIG_BLAH
 ...
 #endif /* CONFIG_BLAH */
-~~~
+```
 * Always use defined macros for bit-manipulation (e.g `BIT(7)` over `1 << 7`).
 
 ### Memory allocation
@@ -165,21 +165,21 @@ the verified code requirements override anything in the general guide.
 * `unions` cannot be used, use the bitfield generator instead.
 * No preincrement (`++x`)
 * No variables that alias typedefs:
-~~~c
+```c
 typedef int A;
 A A;
-~~~
+```
 * No self-modifying code (e.g. no jump tables).
 * No fall-through cases in `switch` statements.
 * No use of `varargs`.
 * Must provide `void` in function definitions without arguments.
 * References to linker addresses must be sized arrays (e.g. `extern char xxx[]`)
 * No function calls that decay arrays to pointers:
-~~~c
+```c
 void foo(int *some_pointer);
 int my_array[10];
 foo(my_array);
-~~~
+```
 * No static local variables.
 * No unneccesary signed variables.
 * Prefix struct fields with the name of the struct, to avoid namespace conflicts in the proof.

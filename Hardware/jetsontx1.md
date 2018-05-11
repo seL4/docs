@@ -65,19 +65,19 @@ on. When the TX1 is powered on, pay attention to the text being printed
 out so that you can stop the boot process at the U-boot command prompt.
 When you have successfully got to the U-boot command prompt, enter the
 following:
-~~~
+```
 setenv dfu_alt_info "kernel ram 0x82000000 0x1000000"
 setenv bootcmd_dfu "dfu 0 ram 0; go 0x82000000"
 saveenv
-~~~
+```
 
 To make U-boot enter its DFU server mode now, just type:
 run bootcmd_dfu. U-boot should sit still waiting for a kernel image to
 be uploaded. Now you should open up a new terminal on your PC, and type
 the following:
-~~~
+```
 dfu-util --device 0955:701a -a kernel -D <PATH_TO_YOUR_SEL4_IMAGE>/sel4test-driver-image-arm-tx1
-~~~
+```
 
 You may need to give dfu-util root privileges. If dfu-util is unable to
 find the TX1 device, try unplugging and replugging in the USB mini-cable
@@ -101,22 +101,22 @@ into the U-boot command prompt. When you're at the prompt, please type
 the following:
 
 For FAT32:
-~~~
+```
 fatload mmc 1 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
-~~~
+```
 
 For EXT2:
-~~~ 
+``` 
 ext2load mmc 1 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
-~~~
+```
 
 For EXT4:
-~~~
+```
 ext4load mmc 1 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
-~~~
+```
 
 ## Internal 15 GiB USB mass storage
 
@@ -134,9 +134,9 @@ Attach a USB mini cable to the mini-USB port on the TX1, and the other
 end of the cable to your PC. Then power on the TX1 and drop into the
 U-boot command line, and do the following:
 
-~~~
+```
 ums mmc 0
-~~~
+```
 
 Your PC should now show that a new USB mass storage device has been
 connected. Copy the seL4 image into the root directory of this mass
@@ -148,19 +148,19 @@ personally format it, then whatever filesystem already existed on the
 internal mass storage):
 
 For FAT32:
-~~~ 
+``` 
 fatload mmc 0 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
-~~~
+```
 
 For EXT2:
-~~~
+```
 ext2load mmc 0 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
-~~~
+```
 
 For EXT4:
-~~~
+```
 ext4load mmc 0 0x82000000 sel4test-driver-image-arm-tx1
 go 0x82000000
-~~~
+```

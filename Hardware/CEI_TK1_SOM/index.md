@@ -102,16 +102,16 @@ but to boot a kernel over fastboot means making the ELF file produced
 from the build system look like an ANDROID Linux kernel).
 
 On the u-boot console do:
-~~~
+```
 setenv dfu_alt_info "kernel ram $loadaddr 0x1000000"
 saveenv
-~~~
+```
 once.
 
 Then to boot, on the u-boot console do:
-~~~
+```
 dfu 0 ram 0
-~~~
+```
 and on your host:
 
 - install dfu-util (one time only: apt-get install dfu-util)
@@ -152,11 +152,11 @@ port (on the power supply board). Patches are pending upstream to enable
 the other port too. Use a FAT32 or ext2 partition on the storage; put
 your image on it. You can either use a syslinux-style menu, or can boot
 directly.
-~~~
+```
 usb start 
 fatload usb 0:1 ${loadaddr} sel4test-image-arm 
 bootelf ${loadaddr}
-~~~
+```
 
 # Using L4T from CEI
 
@@ -176,9 +176,9 @@ an ext3 filesystem instead.
 Do:
 
 
-~~~
+```
 sudo env ROOTFS_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin tk1-som mmcblk0p1
-~~~
+```
 instead of using the instructions in the Colorado-provided
 README.txt
 

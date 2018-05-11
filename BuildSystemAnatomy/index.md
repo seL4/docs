@@ -111,22 +111,22 @@ cause strange and mysterious errors.
 apps-y variable with the targets of the applications to be built. To do
 this you can reference the CONFIG_-prefixed variables from Kconfig. A
 typical apps/Kbuild will look something like the following:
-~~~make
+```make
 apps-$(CONFIG_MY_APP) += myapp
 
 hello: libfoo
-~~~
+```
 If your application has more complicated dependencies,
 for example if it depends on libbar only when the
 MYAPP_EXTRA_FUNCTIONALITY variable is selected, you can use the
 following pattern:
-~~~make
+```make
 apps-$(CONFIG_MY_APP) += myapp
 
 hello-y = libfoo
 hello-$(CONFIG_MYAPP_EXTRA_FUNCTIONALITY) += libbar
 hello: $(hello-y)
-~~~
+```
 
 #### Kconfig
 The Kconfig files (**Kconfig,
@@ -146,7 +146,7 @@ detail below.
 Your application Makefile,
 **apps/myapp/Makefile**, should populate a set of variables and then
 include common.mk. It will typically look something like the following:
-~~~make
+```make
 TARGETS := $(notdir $(SOURCE_DIR)).bin
 
 CFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/*.c)) 
@@ -155,7 +155,7 @@ ASMFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/crt/arch-$(ARC
 LIBS := sel4c sel4 sel4rootserver sel4platsupport
 
 include $(SEL4_COMMON)/common.mk
-~~~
+```
 TARGETS should contain the list
 of output files that this application needs built. CFILES and ASMFILES
 list the C and assembly sources of your application, respectively. LIBS
@@ -174,13 +174,13 @@ Like apps/Kbuild describes top-level
 application dependencies, **libs/Kbuild** describes top-level library
 dependencies. Similarly, it fills the variable libs-y with the libraries
 to be built. A typical libs/Kbuild would look like:
-~~~make
+```make
 libs-$(CONFIG_LIB_FOO) += libfoo 
 libs-$(CONFIG_LIB_BAR) += libbar
 
 libfoo: common 
 libbar: common libfoo
-~~~
+```
 
 #### libs/libfoo/Makefile
 The Makefile for a particular
@@ -188,7 +188,7 @@ library, **libs/libfoo/Makefile**, should just contain some variable
 configuration and then include common.mk. Note that by using generic
 environment variables you can often use the following template with no
 modification for your library:
-~~~make
+```make
 # Library archive(s) that will be built. 
 TARGETS := $(notdir ${SOURCE_DIR}).a
 
@@ -200,7 +200,7 @@ ASMFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.S))
 HDRFILES := $(wildcard ${SOURCE_DIR}/include/*)
 
 include $(SEL4_COMMON)/common.mk
-~~~
+```
 
 You can modify the compiler or linker flags applied when building your
 library by modifying the NK_CFLAGS or NK_LDFLAGS variable
@@ -216,7 +216,7 @@ may want to override the default (by defining a target before including
 project.mk) or provide some external targets of your own (after
 including project.mk). You will most likely just want to mimic the
 content of the file from the reference examples:
-~~~make
+```make
 # app-images is provided in project.mk. 
 all: app-images
 
@@ -224,7 +224,7 @@ include tools/common/project.mk
 
 # Extra project-specific targets. simulate-kzm: 
 qemu-arm -nographic -M kzm -kernel images/hello-image-arm-imx31
-~~~
+```
 
 #### project.mk
 **tools/common/project.mk** contains
@@ -294,14 +294,14 @@ when necessary.
 If this really is a serious irritation to you and your dependencies
 really are the same in all three places, you can replace your dependency
 line in apps/Kbuild with:
-~~~make
+```make
 myapp: $(shell grep "depends on" $(APPS_ROOT)/myapp/Kconfig | sed -e 's/depends on//g' -e 's/[&_]//g' | tr A-Z a-z)
-~~~
+```
 and your LIBS line in
 apps/myapp/Makefile with:
-~~~make
+```make
 LIBS := $(patsubst lib%,%,$(shell grep "depends on" $(SOURCE_DIR)/Kconfig | sed -e 's/depends on//g' -e 's/[&_]//g' | tr A-Z a-z))
-~~~
+```
 
 This will make apps/myapp/Kconfig the
 canonical source of your dependency information.
@@ -327,7 +327,7 @@ caused by depends on will not take select clauses into account. Used
 exclusively however, either can be used in a given scenario. E.g. a
 dependency of FOO on BAR, that depends on MOO can be expressed as:
 
-~~~
+```
 config FOO
     bool "foo"
     depends on BAR
@@ -338,11 +338,11 @@ config BAR
 
 config MOO
     bool "moo"
-~~~
+```
 
 or as:
 
-~~~
+```
 config FOO 
     bool "foo"
     select BAR
@@ -353,7 +353,7 @@ config BAR
 
 config MOO
     bool "moo"
-~~~
+```
 The difference will be in the behaviour in menuconfig, not in the
 actual dependency inferred by Kconfig.
 
@@ -392,9 +392,9 @@ effect.
 **How do I dump the contents of Makefile variables? How do I
 determine what context my rules are executed in?**
 
-~~~make
+```make
 $(foreach var,$(.VARIABLES),$(warning $(var)=$($(var))))
-~~~
+```
 
 ----
 **Why do some projects' libs/Kbuild use a sel4libs-y variable?**
@@ -402,20 +402,20 @@ $(foreach var,$(.VARIABLES),$(warning $(var)=$($(var))))
 This is hangover from a previous abstraction for portability. This extra
 level of indirection serves no purpose in the current build system. If
 you encounter a libs/Kbuild that looks like the following:
-~~~make
+```make
 sel4libs-$(CONFIG_LIB_FOO) += libfoo
 sel4libs-$(CONFIG_LIB_BAR) += libbar
 ...
 
 libs-y += $(sel4libs-y) 
 ...
-~~~
+```
 please update it to remove sel4libs-y:
-~~~make
+```make
 libs-$(CONFIG_LIB_FOO) += libfoo
 libs-$(CONFIG_LIB_BAR) += libbar
 ...
-~~~
+```
 
 **What does it mean when I get errors like make[1]: *** No rule
 to make target '-lfoo', needed by \`bar'. Stop.? Why is "-lfoo" a
