@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-14 05:39:23 +0000 -->
+<!-- Page last generated 2018-05-14 07:11:37 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -26,7 +26,7 @@
 </script>
 </head>
 
-  <body class="container">
+  <body class="container-fluid">
 
     
 
@@ -93,7 +93,194 @@
 
     <main>
       <div class="row">
-  <div class="api content col-lg-8">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+            
+          </a>
+        </li>
+  
+        <li class="active">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+            
+              &nbsp;<i class="fas fa-external-link-alt"></i>
+            
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+            
+              &nbsp;<i class="fas fa-external-link-alt"></i>
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+            
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Tutorials</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_1.html">
+            seL4 Tutorial 1
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_2.html">
+            seL4 Tutorial 2
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_3.html">
+            seL4 Tutorial 3
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_4.html">
+            seL4 Tutorial 4
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
+            seL4 Timer tutorial
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_RT_tutorial.html">
+            seL4 MCS tutorial
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
+            CAmkES Tutorial 0
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
+            CAmkES Tutorial 1
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
+            CAmkES Tutorial 2
+            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
+            CAmkES Timer Tutorial
+            
+          </a>
+        </li>
+  
+      </ul>
+        
+</div>
+
+
+  </div>
+  <div class="api content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="api-reference">API Reference</h1>
 <p><em>Note: This page is auto-generated from the libsel4 API</em></p>
 
@@ -745,7 +932,8 @@
 
 <h2 id="architecture-independent-object-methods">Architecture-Independent Object Methods</h2>
 <hr />
-<h3 id="sel4_cnode">seL4_CNode{</h3>
+<h3 id="sel4_cnode">seL4_CNode</h3>
+
 <h4 id="cancel-badged-sends">Cancel Badged Sends</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_CancelBadgedSends</code></p>
 
@@ -1176,8 +1364,11 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_DomainSet{  #### Set `static inline int seL4_DomainSet_Set`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_DomainSet
 </code></pre></div></div>
+
+<h4 id="set">Set</h4>
+<p><code class="highlighter-rouge">static inline int seL4_DomainSet_Set</code></p>
 
 <p>Change the domain of a thread.</p>
 
@@ -1210,8 +1401,11 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_IRQControl{  #### Get `static inline int seL4_IRQControl_Get`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_IRQControl
 </code></pre></div></div>
+
+<h4 id="get">Get</h4>
+<p><code class="highlighter-rouge">static inline int seL4_IRQControl_Get</code></p>
 
 <p>Create an IRQ handler capability</p>
 
@@ -1254,8 +1448,11 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_IRQHandler{  #### Acknowledge `static inline int seL4_IRQHandler_Ack`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_IRQHandler
 </code></pre></div></div>
+
+<h4 id="acknowledge">Acknowledge</h4>
+<p><code class="highlighter-rouge">static inline int seL4_IRQHandler_Ack</code></p>
 
 <p>Acknowledge the receipt of an interrupt and re-enable it</p>
 
@@ -1332,8 +1529,11 @@ controlled by the supplied IRQ handler capability</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_TCB{  #### Bind Notification `static inline int seL4_TCB_BindNotification`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_TCB
 </code></pre></div></div>
+
+<h4 id="bind-notification">Bind Notification</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_BindNotification</code></p>
 
 <p>Binds a notification object to a <strong>TCB</strong></p>
 
@@ -2008,8 +2208,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_Untyped{  #### Retype `static inline int seL4_Untyped_Retype`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_Untyped
 </code></pre></div></div>
+
+<h4 id="retype">Retype</h4>
+<p><code class="highlighter-rouge">static inline int seL4_Untyped_Retype</code></p>
 
 <p>Retype an untyped object</p>
 
@@ -2074,7 +2277,8 @@ single-stepping.</p>
 <hr />
 
 <h3 id="general-x86-object-methods">General x86 Object Methods</h3>
-<h3 id="sel4_irqcontrol">seL4_IRQControl{</h3>
+<h3 id="sel4_irqcontrol">seL4_IRQControl</h3>
+
 <h4 id="get-io-apic">Get I/O APIC</h4>
 <p><code class="highlighter-rouge">static inline int seL4_IRQControl_GetIOAPIC</code></p>
 
@@ -2203,8 +2407,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_TCB{  #### Set EPT Root `static inline int seL4_TCB_SetEPTRoot`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_TCB
 </code></pre></div></div>
+
+<h4 id="set-ept-root">Set EPT Root</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetEPTRoot</code></p>
 
 <p>Set the EPT root of a thread</p>
 
@@ -2232,8 +2439,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_ASIDControl{  #### Make Pool `static inline int seL4_X86_ASIDControl_MakePool`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_ASIDControl
 </code></pre></div></div>
+
+<h4 id="make-pool">Make Pool</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_ASIDControl_MakePool</code></p>
 
 <p>Create an X86 ASID pool.</p>
 
@@ -2277,7 +2487,8 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.
-        ### seL4_X86_ASIDPool{</p>
+        ### seL4_X86_ASIDPool</p>
+
 <h4 id="assign">Assign</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_ASIDPool_Assign</code></p>
 
@@ -2308,7 +2519,8 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Assigns an ASID to the VSpace associated with the <code class="highlighter-rouge">Page Directory</code> passed in as an argument.
-        ### seL4_X86_EPTPD{</p>
+        ### seL4_X86_EPTPD</p>
+
 <h4 id="map">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_EPTPD_Map</code></p>
 
@@ -2372,8 +2584,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_EPTPDPT{  #### Map `static inline int seL4_X86_EPTPDPT_Map`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_EPTPDPT
 </code></pre></div></div>
+
+<h4 id="map-1">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_EPTPDPT_Map</code></p>
 
 <p>Map an EPT page directory page table.</p>
 
@@ -2435,8 +2650,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_EPTPT{  #### Map `static inline int seL4_X86_EPTPT_Map`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_EPTPT
 </code></pre></div></div>
+
+<h4 id="map-2">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_EPTPT_Map</code></p>
 
 <p>Map an EPT page table.</p>
 
@@ -2498,8 +2716,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_IOPageTable{  #### Map `static inline int seL4_X86_IOPageTable_Map`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_IOPageTable
 </code></pre></div></div>
+
+<h4 id="map-3">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_IOPageTable_Map</code></p>
 
 <p>Map an IO page table into an IOSpace.</p>
 
@@ -2556,8 +2777,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_IOPort{  #### In16 `static inline seL4_X86_IOPort_In16_t seL4_X86_IOPort_In16`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_IOPort
 </code></pre></div></div>
+
+<h4 id="in16">In16</h4>
+<p><code class="highlighter-rouge">static inline seL4_X86_IOPort_In16_t seL4_X86_IOPort_In16</code></p>
 
 <p>Read 16 bits from an IO port.</p>
 
@@ -2745,8 +2969,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_IOPortControl{  #### Issue `static inline int seL4_X86_IOPortControl_Issue`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_IOPortControl
 </code></pre></div></div>
+
+<h4 id="issue">Issue</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_IOPortControl_Issue</code></p>
 
 <p>Issue an IO port sub range.</p>
 
@@ -2794,8 +3021,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_Page{  #### Get Address `static inline seL4_X86_Page_GetAddress_t seL4_X86_Page_GetAddress`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_Page
 </code></pre></div></div>
+
+<h4 id="get-address">Get Address</h4>
+<p><code class="highlighter-rouge">static inline seL4_X86_Page_GetAddress_t seL4_X86_Page_GetAddress</code></p>
 
 <p>Get the physical address of the underlying frame.</p>
 
@@ -2903,7 +3133,7 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<h4 id="map-1">Map</h4>
+<h4 id="map-4">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_Map</code></p>
 
 <p>Map a page into an address space.</p>
@@ -3015,7 +3245,8 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Removes an existing mapping.
-        ### seL4_X86_PageDirectory{</p>
+        ### seL4_X86_PageDirectory</p>
+
 <h4 id="get-status-bits">Get Status Bits</h4>
 <p><code class="highlighter-rouge">static inline seL4_X86_PageDirectory_GetStatusBits_t seL4_X86_PageDirectory_GetStatusBits</code></p>
 
@@ -3045,7 +3276,7 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_PageDirectory_GetStatusBits_t</code> structure.</p>
 
-<h4 id="map-2">Map</h4>
+<h4 id="map-5">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PageDirectory_Map</code></p>
 
 <p>Map a page directory.</p>
@@ -3108,8 +3339,11 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_PageTable{  #### Map `static inline int seL4_X86_PageTable_Map`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_PageTable
 </code></pre></div></div>
+
+<h4 id="map-6">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_PageTable_Map</code></p>
 
 <p>Map a page table into an address space.</p>
 
@@ -3174,7 +3408,8 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">PageTable</code> from its containing <code class="highlighter-rouge">PageDirectory</code>. 
-        ### seL4_X86_VCPU{</p>
+        ### seL4_X86_VCPU</p>
+
 <h4 id="disable-io-port">Disable IO Port</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_VCPU_DisableIOPort</code></p>
 
@@ -3387,8 +3622,9 @@ single-stepping.</p>
 <p>No methods.</p>
 
 <h3 id="x86_64-specific-object-methods">x86_64-Specific Object Methods</h3>
-<h3 id="sel4_x86_pdpt">seL4_X86_PDPT{</h3>
-<h4 id="map-3">Map</h4>
+<h3 id="sel4_x86_pdpt">seL4_X86_PDPT</h3>
+
+<h4 id="map-7">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PDPT_Map</code></p>
 
 <p><em>TODO</em></p>
@@ -3459,8 +3695,9 @@ single-stepping.</p>
 <hr />
 
 <h3 id="general-arm-object-methods">General ARM Object Methods</h3>
-<h3 id="sel4_arm_asidcontrol">seL4_ARM_ASIDControl{</h3>
-<h4 id="make-pool">Make Pool</h4>
+<h3 id="sel4_arm_asidcontrol">seL4_ARM_ASIDControl</h3>
+
+<h4 id="make-pool-1">Make Pool</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_ASIDControl_MakePool</code></p>
 
 <p>Create an ASID Pool.</p>
@@ -3505,7 +3742,8 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.
-        ### seL4_ARM_ASIDPool{</p>
+        ### seL4_ARM_ASIDPool</p>
+
 <h4 id="asid-pool-assign">Asid Pool Assign</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_ASIDPool_Assign</code></p>
 
@@ -3536,8 +3774,9 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.
-        ### seL4_ARM_IOPageTable{</p>
-<h4 id="map-4">Map</h4>
+        ### seL4_ARM_IOPageTable</p>
+
+<h4 id="map-8">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_IOPageTable_Map</code></p>
 
 <p><em>TODO</em></p>
@@ -3598,7 +3837,8 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> <em>TODO</em>
-        ### seL4_ARM_Page{</p>
+        ### seL4_ARM_Page</p>
+
 <h4 id="clean-data">Clean Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Clean_Data</code></p>
 
@@ -3668,7 +3908,7 @@ The start and end are relative to the page being serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<h4 id="get-address">Get Address</h4>
+<h4 id="get-address-1">Get Address</h4>
 <p><code class="highlighter-rouge">static inline seL4_ARM_Page_GetAddress_t seL4_ARM_Page_GetAddress</code></p>
 
 <p>Get the physical address of the underlying frame.</p>
@@ -3768,7 +4008,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Description:</strong> <em>TODO</em></p>
 
-<h4 id="map-5">Map</h4>
+<h4 id="map-9">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Map</code></p>
 
 <p>Map a page into an address space.</p>
@@ -3917,8 +4157,9 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Removes an existing mapping.
-        ### seL4_ARM_PageTable{</p>
-<h4 id="map-6">Map</h4>
+        ### seL4_ARM_PageTable</p>
+
+<h4 id="map-10">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageTable_Map</code></p>
 
 <p>Map a page table into an address space.</p>
@@ -3984,7 +4225,8 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">Page Table</code> from its containing <code class="highlighter-rouge">Page Directory</code>.
-        ### seL4_ARM_VCPU{</p>
+        ### seL4_ARM_VCPU</p>
+
 <h4 id="inject-irq">Inject IRQ</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_VCPU_InjectIRQ</code></p>
 
@@ -4130,7 +4372,8 @@ serviced.</p>
 <p><strong>Description:</strong> <em>TODO</em></p>
 
 <h3 id="aarch32-specific-object-methods">Aarch32-Specific Object Methods</h3>
-<h3 id="sel4_arm_pagedirectory">seL4_ARM_PageDirectory{</h3>
+<h3 id="sel4_arm_pagedirectory">seL4_ARM_PageDirectory</h3>
+
 <h4 id="clean-data-1">Clean Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Clean_Data</code></p>
 
@@ -4268,8 +4511,9 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <h3 id="aarch64-specific-object-methods">Aarch64-Specific Object Methods</h3>
-<h3 id="sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory{</h3>
-<h4 id="map-7">Map</h4>
+<h3 id="sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory</h3>
+
+<h4 id="map-11">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Map</code></p>
 
 <p>Map a page directory</p>
@@ -4335,7 +4579,8 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Unmap a page directory (level 2) from an upper page directory (level 1)
-        ### seL4_ARM_PageGlobalDirectory{</p>
+        ### seL4_ARM_PageGlobalDirectory</p>
+
 <h4 id="clean-data-2">Clean Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageGlobalDirectory_Clean_Data</code></p>
 
@@ -4472,8 +4717,11 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_ARM_PageUpperDirectory{  #### Map `static inline int seL4_ARM_PageUpperDirectory_Map`
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_ARM_PageUpperDirectory
 </code></pre></div></div>
+
+<h4 id="map-12">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_PageUpperDirectory_Map</code></p>
 
 <p>Map an upper page directory</p>
 
@@ -4542,7 +4790,8 @@ serviced.</p>
 <h2 id="riscv-specific-object-methods">RISCV-Specific Object Methods</h2>
 <hr />
 
-<h3 id="sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl{</h3>
+<h3 id="sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl</h3>
+
 <h4 id="makepool">MakePool</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_ASIDControl_MakePool</code></p>
 
@@ -4588,7 +4837,8 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.
-        ### seL4_RISCV_ASIDPool{</p>
+        ### seL4_RISCV_ASIDPool</p>
+
 <h4 id="assign-1">Assign</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_ASIDPool_Assign</code></p>
 
@@ -4619,7 +4869,8 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.
-        ### seL4_RISCV_Page{</p>
+        ### seL4_RISCV_Page</p>
+
 <h4 id="getaddress">GetAddress</h4>
 <p><code class="highlighter-rouge">static inline seL4_RISCV_Page_GetAddress_t seL4_RISCV_Page_GetAddress</code></p>
 
@@ -4644,7 +4895,7 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_RISCV_Page_GetAddress_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word paddr</code>, which holds the physical address of the page,                 and <code class="highlighter-rouge">int error</code>.</p>
 
-<h4 id="map-8">Map</h4>
+<h4 id="map-13">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Map</code></p>
 
 <p>Map a page into a page table.</p>
@@ -4756,8 +5007,9 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Removes an existing mapping.
-        ### seL4_RISCV_PageTable{</p>
-<h4 id="map-9">Map</h4>
+        ### seL4_RISCV_PageTable</p>
+
+<h4 id="map-14">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_PageTable_Map</code></p>
 
 <p>Map a page table at a specific virtual address.</p>
@@ -4825,7 +5077,7 @@ serviced.</p>
 
   </div>
 
-  <div class="sidebar-nav col-lg-4">
+  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
     <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#system-calls">System Calls</a>
 <ul>
@@ -4863,7 +5115,7 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h2"><a href="#architecture-independent-object-methods">Architecture-Independent Object Methods</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#sel4_cnode">seL4_CNode{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_cnode">seL4_CNode</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#cancel-badged-sends">Cancel Badged Sends</a></li>
 <li class="toc-entry toc-h4"><a href="#copy">Copy</a></li>
@@ -4874,8 +5126,12 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#revoke">Revoke</a></li>
 <li class="toc-entry toc-h4"><a href="#rotate">Rotate</a></li>
 <li class="toc-entry toc-h4"><a href="#save-caller">Save Caller</a></li>
+<li class="toc-entry toc-h4"><a href="#set">Set</a></li>
+<li class="toc-entry toc-h4"><a href="#get">Get</a></li>
+<li class="toc-entry toc-h4"><a href="#acknowledge">Acknowledge</a></li>
 <li class="toc-entry toc-h4"><a href="#clear">Clear</a></li>
 <li class="toc-entry toc-h4"><a href="#set-notification">Set Notification</a></li>
+<li class="toc-entry toc-h4"><a href="#bind-notification">Bind Notification</a></li>
 <li class="toc-entry toc-h4"><a href="#configure-single-stepping">Configure Single Stepping</a></li>
 <li class="toc-entry toc-h4"><a href="#configure">Configure</a></li>
 <li class="toc-entry toc-h4"><a href="#copy-registers">Copy Registers</a></li>
@@ -4893,6 +5149,7 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#unbind-notification">Unbind Notification</a></li>
 <li class="toc-entry toc-h4"><a href="#unset-breakpoint">Unset Breakpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#write-registers">Write Registers</a></li>
+<li class="toc-entry toc-h4"><a href="#retype">Retype</a></li>
 </ul>
 </li>
 </ul>
@@ -4900,29 +5157,38 @@ serviced.</p>
 <li class="toc-entry toc-h2"><a href="#x86-specific-object-methods">x86-Specific Object Methods</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#general-x86-object-methods">General x86 Object Methods</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_irqcontrol">seL4_IRQControl{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_irqcontrol">seL4_IRQControl</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#get-io-apic">Get I/O APIC</a></li>
 <li class="toc-entry toc-h4"><a href="#get-msi">Get MSI</a></li>
+<li class="toc-entry toc-h4"><a href="#set-ept-root">Set EPT Root</a></li>
+<li class="toc-entry toc-h4"><a href="#make-pool">Make Pool</a></li>
 <li class="toc-entry toc-h4"><a href="#assign">Assign</a></li>
 <li class="toc-entry toc-h4"><a href="#map">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-1">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-1">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-2">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-2">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-3">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-3">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#in16">In16</a></li>
 <li class="toc-entry toc-h4"><a href="#in32">In32</a></li>
 <li class="toc-entry toc-h4"><a href="#in8">In8</a></li>
 <li class="toc-entry toc-h4"><a href="#out16">Out16</a></li>
 <li class="toc-entry toc-h4"><a href="#out32">Out32</a></li>
 <li class="toc-entry toc-h4"><a href="#out8">Out8</a></li>
+<li class="toc-entry toc-h4"><a href="#issue">Issue</a></li>
+<li class="toc-entry toc-h4"><a href="#get-address">Get Address</a></li>
 <li class="toc-entry toc-h4"><a href="#map-ept">Map EPT</a></li>
 <li class="toc-entry toc-h4"><a href="#map-io">Map I/O</a></li>
-<li class="toc-entry toc-h4"><a href="#map-1">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-4">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#remap">Remap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-4">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#get-status-bits">Get Status Bits</a></li>
-<li class="toc-entry toc-h4"><a href="#map-2">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-5">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-5">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-6">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-6">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#disable-io-port">Disable IO Port</a></li>
 <li class="toc-entry toc-h4"><a href="#enable-io-port">Enable IO Port</a></li>
@@ -4934,9 +5200,9 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#ia32-specific-object-methods">IA32-Specific Object Methods</a></li>
 <li class="toc-entry toc-h3"><a href="#x86_64-specific-object-methods">x86_64-Specific Object Methods</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_x86_pdpt">seL4_X86_PDPT{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_x86_pdpt">seL4_X86_PDPT</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#map-3">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-7">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-7">Unmap</a></li>
 </ul>
 </li>
@@ -4945,22 +5211,22 @@ serviced.</p>
 <li class="toc-entry toc-h2"><a href="#arm-specific-object-methods">ARM-Specific Object Methods</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#general-arm-object-methods">General ARM Object Methods</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_asidcontrol">seL4_ARM_ASIDControl{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_asidcontrol">seL4_ARM_ASIDControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#make-pool">Make Pool</a></li>
+<li class="toc-entry toc-h4"><a href="#make-pool-1">Make Pool</a></li>
 <li class="toc-entry toc-h4"><a href="#asid-pool-assign">Asid Pool Assign</a></li>
-<li class="toc-entry toc-h4"><a href="#map-4">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-8">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-8">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-data">Clean Data</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-and-invalidate-data">Clean and Invalidate Data</a></li>
-<li class="toc-entry toc-h4"><a href="#get-address">Get Address</a></li>
+<li class="toc-entry toc-h4"><a href="#get-address-1">Get Address</a></li>
 <li class="toc-entry toc-h4"><a href="#invalidate-data">Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#map-io-1">Map I/O</a></li>
-<li class="toc-entry toc-h4"><a href="#map-5">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-9">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#remap-1">Remap</a></li>
 <li class="toc-entry toc-h4"><a href="#unify-instruction">Unify Instruction</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-9">Unmap</a></li>
-<li class="toc-entry toc-h4"><a href="#map-6">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-10">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-10">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#inject-irq">Inject IRQ</a></li>
 <li class="toc-entry toc-h4"><a href="#read-registers-1">Read Registers</a></li>
@@ -4969,7 +5235,7 @@ serviced.</p>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#aarch32-specific-object-methods">Aarch32-Specific Object Methods</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_pagedirectory">seL4_ARM_PageDirectory{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_pagedirectory">seL4_ARM_PageDirectory</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#clean-data-1">Clean Data</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-and-invalidate-data-1">Clean and Invalidate Data</a></li>
@@ -4978,14 +5244,15 @@ serviced.</p>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#aarch64-specific-object-methods">Aarch64-Specific Object Methods</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#map-7">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-11">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-11">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-data-2">Clean Data</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-and-invalidate-data-2">Clean and Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#invalidate-data-2">Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#unify-instruction-2">Unify Instruction</a></li>
+<li class="toc-entry toc-h4"><a href="#map-12">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-12">Unmap</a></li>
 </ul>
 </li>
@@ -4993,15 +5260,15 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h2"><a href="#riscv-specific-object-methods">RISCV-Specific Object Methods</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl{</a>
+<li class="toc-entry toc-h3"><a href="#sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#makepool">MakePool</a></li>
 <li class="toc-entry toc-h4"><a href="#assign-1">Assign</a></li>
 <li class="toc-entry toc-h4"><a href="#getaddress">GetAddress</a></li>
-<li class="toc-entry toc-h4"><a href="#map-8">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-13">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#remap-2">Remap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-13">Unmap</a></li>
-<li class="toc-entry toc-h4"><a href="#map-9">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-14">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-14">Unmap</a></li>
 </ul>
 </li>
@@ -5037,7 +5304,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Mon May 14 15:38:39 2018 +1000 455e769
+            Site last updated: Mon May 14 17:09:06 2018 +1000 8b4fb34
           </li>
           <li>
             
