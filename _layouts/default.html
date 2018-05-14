@@ -1,13 +1,19 @@
 ---
 layout: basic
 ---
+<div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    {% include nav-sidebar.html %}
 
-{% if page.toc %}
-  <nav aria-label="Table of Contents">
-    {{content | toc_only}}
-  </nav>
-{% endif %}
-
-<div class="content">
-  {{ content }}
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    {% if page.toc %}
+      <nav aria-label="Table of Contents">
+        {{content | toc_only}}
+      </nav>
+    {% endif %}
+    <div class="content">
+      {{ content }}
+    </div>
+  </div>
 </div>
