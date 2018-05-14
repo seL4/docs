@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-11 06:43:25 +0000 -->
+<!-- Page last generated 2018-05-14 00:57:34 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -2276,8 +2276,10 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_ASIDPool{  #### Assign `static inline int seL4_X86_ASIDPool_Assign`
-</code></pre></div></div>
+<p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.
+        ### seL4_X86_ASIDPool{</p>
+<h4 id="assign">Assign</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_ASIDPool_Assign</code></p>
 
 <p>Assign an ASID pool.</p>
 
@@ -2297,7 +2299,7 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>The page directory that is being assigned to an ASID pool. Must not already be assigned to an ASID pool.</td>
     </tr>
   </tbody>
@@ -2305,8 +2307,10 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_EPTPD{  #### Map `static inline int seL4_X86_EPTPD_Map`
-</code></pre></div></div>
+<p><strong>Description:</strong> Assigns an ASID to the VSpace associated with the <code class="highlighter-rouge">Page Directory</code> passed in as an argument.
+        ### seL4_X86_EPTPD{</p>
+<h4 id="map">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_EPTPD_Map</code></p>
 
 <p>Map an EPT page directory.</p>
 
@@ -2835,7 +2839,7 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_EPTPML4</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td><em>TODO</em></td>
     </tr>
     <tr>
@@ -2899,7 +2903,7 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<h4 id="map">Map</h4>
+<h4 id="map-1">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_Map</code></p>
 
 <p>Map a page into an address space.</p>
@@ -2920,7 +2924,7 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping</td>
     </tr>
     <tr>
@@ -2943,6 +2947,8 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<p><strong>Description:</strong> Takes a <code class="highlighter-rouge">Page Directory</code> capability, which refers to the VSpace, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
+
 <h4 id="remap">Remap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_Remap</code></p>
 
@@ -2964,7 +2970,7 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping</td>
     </tr>
     <tr>
@@ -2981,6 +2987,8 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Changes the permissions of an existing mapping.</p>
 
 <h4 id="unmap-4">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_Unmap</code></p>
@@ -3006,10 +3014,12 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_PageDirectory{  #### Get Status Bits `static inline seL4_X86_PageDirectory_GetStatusBits_t seL4_X86_PageDirectory_GetStatusBits`
-</code></pre></div></div>
+<p><strong>Description:</strong> Removes an existing mapping.
+        ### seL4_X86_PageDirectory{</p>
+<h4 id="get-status-bits">Get Status Bits</h4>
+<p><code class="highlighter-rouge">static inline seL4_X86_PageDirectory_GetStatusBits_t seL4_X86_PageDirectory_GetStatusBits</code></p>
 
-<p>Retrieve the accessed and dirty bits of a page mapped mapped into an address space.</p>
+<p>Retrieve the accessed and dirty bits of a page mapped into an address space.</p>
 
 <table>
   <thead>
@@ -3035,7 +3045,7 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_PageDirectory_GetStatusBits_t</code> structure.</p>
 
-<h4 id="map-1">Map</h4>
+<h4 id="map-2">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PageDirectory_Map</code></p>
 
 <p>Map a page directory.</p>
@@ -3056,7 +3066,7 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping</td>
     </tr>
     <tr>
@@ -3119,7 +3129,7 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping</td>
     </tr>
     <tr>
@@ -3136,6 +3146,8 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Takes a <code class="highlighter-rouge">PageDirectory</code> capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in a specified slot in the <code class="highlighter-rouge">PageDirectory</code>.</p>
 
 <h4 id="unmap-6">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PageTable_Unmap</code></p>
@@ -3161,8 +3173,10 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_X86_VCPU{  #### Disable IO Port `static inline int seL4_X86_VCPU_DisableIOPort`
-</code></pre></div></div>
+<p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">PageTable</code> from its containing <code class="highlighter-rouge">PageDirectory</code>. 
+        ### seL4_X86_VCPU{</p>
+<h4 id="disable-io-port">Disable IO Port</h4>
+<p><code class="highlighter-rouge">static inline int seL4_X86_VCPU_DisableIOPort</code></p>
 
 <p>Disable I/O port range in privileged execution</p>
 
@@ -3374,7 +3388,7 @@ single-stepping.</p>
 
 <h3 id="x86_64-specific-object-methods">x86_64-Specific Object Methods</h3>
 <h3 id="sel4_x86_pdpt">seL4_X86_PDPT{</h3>
-<h4 id="map-2">Map</h4>
+<h4 id="map-3">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PDPT_Map</code></p>
 
 <p><em>TODO</em></p>
@@ -3490,8 +3504,10 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_ARM_ASIDPool{  #### Asid Pool Assign `static inline int seL4_ARM_ASIDPool_Assign`
-</code></pre></div></div>
+<p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.
+        ### seL4_ARM_ASIDPool{</p>
+<h4 id="asid-pool-assign">Asid Pool Assign</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_ASIDPool_Assign</code></p>
 
 <p>Assign an ASID Pool.</p>
 
@@ -3511,16 +3527,18 @@ single-stepping.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
-      <td>The page directory that is being assigned to an ASID pool. Must not already be assigned to an ASID pool.</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>The VSpace that is being assigned to an ASID pool. Must not already be assigned to an ASID pool.</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_ARM_IOPageTable{  #### Map `static inline int seL4_ARM_IOPageTable_Map`
-</code></pre></div></div>
+<p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.
+        ### seL4_ARM_IOPageTable{</p>
+<h4 id="map-4">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_IOPageTable_Map</code></p>
 
 <p><em>TODO</em></p>
 
@@ -3750,7 +3768,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Description:</strong> <em>TODO</em></p>
 
-<h4 id="map-3">Map</h4>
+<h4 id="map-5">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Map</code></p>
 
 <p>Map a page into an address space.</p>
@@ -3771,7 +3789,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">pd</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping.</td>
     </tr>
     <tr>
@@ -3794,6 +3812,8 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
+
 <h4 id="remap-1">Remap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Remap</code></p>
 
@@ -3815,7 +3835,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">pd</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping.</td>
     </tr>
     <tr>
@@ -3832,6 +3852,8 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Changes the permissions of an existing mapping.</p>
 
 <h4 id="unify-instruction">Unify Instruction</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Unify_Instruction</code></p>
@@ -3894,8 +3916,10 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_ARM_PageTable{  #### Map `static inline int seL4_ARM_PageTable_Map`
-</code></pre></div></div>
+<p><strong>Description:</strong> Removes an existing mapping.
+        ### seL4_ARM_PageTable{</p>
+<h4 id="map-6">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_PageTable_Map</code></p>
 
 <p>Map a page table into an address space.</p>
 
@@ -3915,7 +3939,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">pd</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
       <td>Capability to the VSpace which will contain the mapping.</td>
     </tr>
     <tr>
@@ -3933,10 +3957,12 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in the VSpace according to the provided virtual address.</p>
+
 <h4 id="unmap-10">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageTable_Unmap</code></p>
 
-<p>Unmap a page table from its address space and zero it out.</p>
+<p>Unmap a page table from its <code class="highlighter-rouge">Page Directory</code> and zero it out.</p>
 
 <table>
   <thead>
@@ -3957,8 +3983,10 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_ARM_VCPU{  #### Inject IRQ `static inline int seL4_ARM_VCPU_InjectIRQ`
-</code></pre></div></div>
+<p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">Page Table</code> from its containing <code class="highlighter-rouge">Page Directory</code>.
+        ### seL4_ARM_VCPU{</p>
+<h4 id="inject-irq">Inject IRQ</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_VCPU_InjectIRQ</code></p>
 
 <p>Inject an IRQ to a virtual CPU</p>
 
@@ -4241,7 +4269,7 @@ serviced.</p>
 
 <h3 id="aarch64-specific-object-methods">Aarch64-Specific Object Methods</h3>
 <h3 id="sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory{</h3>
-<h4 id="map-4">Map</h4>
+<h4 id="map-7">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Map</code></p>
 
 <p>Map a page directory</p>
@@ -4559,8 +4587,10 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_RISCV_ASIDPool{  #### Assign `static inline int seL4_RISCV_ASIDPool_Assign`
-</code></pre></div></div>
+<p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.
+        ### seL4_RISCV_ASIDPool{</p>
+<h4 id="assign-1">Assign</h4>
+<p><code class="highlighter-rouge">static inline int seL4_RISCV_ASIDPool_Assign</code></p>
 
 <p>Assign an ASID Pool.</p>
 
@@ -4580,16 +4610,18 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vroot</code></td>
-      <td>The top level page table that is being assigned to an ASID pool. Must not already be assigned to an ASID pool.</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>The top-level <code class="highlighter-rouge">PageTable</code>  that is being assigned to an ASID pool. Must not already be assigned to an ASID pool.</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_RISCV_Page{  #### GetAddress `static inline seL4_RISCV_Page_GetAddress_t seL4_RISCV_Page_GetAddress`
-</code></pre></div></div>
+<p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.
+        ### seL4_RISCV_Page{</p>
+<h4 id="getaddress">GetAddress</h4>
+<p><code class="highlighter-rouge">static inline seL4_RISCV_Page_GetAddress_t seL4_RISCV_Page_GetAddress</code></p>
 
 <p>Get the physical address of a page.</p>
 
@@ -4612,7 +4644,7 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_RISCV_Page_GetAddress_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word paddr</code>, which holds the physical address of the page,                 and <code class="highlighter-rouge">int error</code>.</p>
 
-<h4 id="map-5">Map</h4>
+<h4 id="map-8">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Map</code></p>
 
 <p>Map a page into a page table.</p>
@@ -4633,8 +4665,8 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_RISCV_PageTable</code></td>
-      <td><code class="highlighter-rouge">pt</code></td>
-      <td>Page table to map the page into.</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>VSpace to map the page into.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4655,6 +4687,8 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Takes a VSpace, or top-level <code class="highlighter-rouge">Page Table</code>, capability as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the page table slot corresponding to the given address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
 
 <h4 id="remap-2">Remap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Remap</code></p>
@@ -4677,8 +4711,8 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_RISCV_PageTable</code></td>
-      <td><code class="highlighter-rouge">pt</code></td>
-      <td>Page table to remap the page into.</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>VSpace to remap the page into.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CapRights_t</code></td>
@@ -4694,6 +4728,8 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Changes the permissions of an existing mapping.</p>
 
 <h4 id="unmap-13">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Unmap</code></p>
@@ -4719,10 +4755,12 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ### seL4_RISCV_PageTable{  #### Map `static inline int seL4_RISCV_PageTable_Map`
-</code></pre></div></div>
+<p><strong>Description:</strong> Removes an existing mapping.
+        ### seL4_RISCV_PageTable{</p>
+<h4 id="map-9">Map</h4>
+<p><code class="highlighter-rouge">static inline int seL4_RISCV_PageTable_Map</code></p>
 
-<p>Map a page table into a higher-level page table.</p>
+<p>Map a page table at a specific virtual address.</p>
 
 <table>
   <thead>
@@ -4740,8 +4778,8 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_RISCV_PageTable</code></td>
-      <td><code class="highlighter-rouge">pt</code></td>
-      <td>Higher-level page table to map the lower-level page table into.</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>VSpace to map the lower-level page table into.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4757,6 +4795,8 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Starting from the VSpace, map the page table object at any unpopulated level for the provided virtual address. If all paging structures and mappings are present for this virtual address, return an seL4_DeleteFirst error.</p>
 
 <h4 id="unmap-14">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_PageTable_Unmap</code></p>
@@ -4864,6 +4904,8 @@ serviced.</p>
 <ul>
 <li class="toc-entry toc-h4"><a href="#get-io-apic">Get I/O APIC</a></li>
 <li class="toc-entry toc-h4"><a href="#get-msi">Get MSI</a></li>
+<li class="toc-entry toc-h4"><a href="#assign">Assign</a></li>
+<li class="toc-entry toc-h4"><a href="#map">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-1">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-2">Unmap</a></li>
@@ -4875,12 +4917,14 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#out8">Out8</a></li>
 <li class="toc-entry toc-h4"><a href="#map-ept">Map EPT</a></li>
 <li class="toc-entry toc-h4"><a href="#map-io">Map I/O</a></li>
-<li class="toc-entry toc-h4"><a href="#map">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-1">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#remap">Remap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-4">Unmap</a></li>
-<li class="toc-entry toc-h4"><a href="#map-1">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#get-status-bits">Get Status Bits</a></li>
+<li class="toc-entry toc-h4"><a href="#map-2">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-5">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-6">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#disable-io-port">Disable IO Port</a></li>
 <li class="toc-entry toc-h4"><a href="#enable-io-port">Enable IO Port</a></li>
 <li class="toc-entry toc-h4"><a href="#read-vmcs">Read VMCS</a></li>
 <li class="toc-entry toc-h4"><a href="#set-tcb">Set TCB</a></li>
@@ -4892,7 +4936,7 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#x86_64-specific-object-methods">x86_64-Specific Object Methods</a></li>
 <li class="toc-entry toc-h3"><a href="#sel4_x86_pdpt">seL4_X86_PDPT{</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#map-2">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-3">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-7">Unmap</a></li>
 </ul>
 </li>
@@ -4904,17 +4948,21 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_asidcontrol">seL4_ARM_ASIDControl{</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#make-pool">Make Pool</a></li>
+<li class="toc-entry toc-h4"><a href="#asid-pool-assign">Asid Pool Assign</a></li>
+<li class="toc-entry toc-h4"><a href="#map-4">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-8">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-data">Clean Data</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-and-invalidate-data">Clean and Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#get-address">Get Address</a></li>
 <li class="toc-entry toc-h4"><a href="#invalidate-data">Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#map-io-1">Map I/O</a></li>
-<li class="toc-entry toc-h4"><a href="#map-3">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-5">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#remap-1">Remap</a></li>
 <li class="toc-entry toc-h4"><a href="#unify-instruction">Unify Instruction</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-9">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-6">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-10">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#inject-irq">Inject IRQ</a></li>
 <li class="toc-entry toc-h4"><a href="#read-registers-1">Read Registers</a></li>
 <li class="toc-entry toc-h4"><a href="#set-tcb-1">Set TCB</a></li>
 <li class="toc-entry toc-h4"><a href="#write-registers-2">Write Registers</a></li>
@@ -4932,7 +4980,7 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#aarch64-specific-object-methods">Aarch64-Specific Object Methods</a></li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory{</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#map-4">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#map-7">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-11">Unmap</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-data-2">Clean Data</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-and-invalidate-data-2">Clean and Invalidate Data</a></li>
@@ -4948,9 +4996,12 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl{</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#makepool">MakePool</a></li>
-<li class="toc-entry toc-h4"><a href="#map-5">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#assign-1">Assign</a></li>
+<li class="toc-entry toc-h4"><a href="#getaddress">GetAddress</a></li>
+<li class="toc-entry toc-h4"><a href="#map-8">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#remap-2">Remap</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-13">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-9">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-14">Unmap</a></li>
 </ul>
 </li>
@@ -4986,7 +5037,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Fri May 11 16:37:18 2018 +1000 19bb837
+            Site last updated: Fri May 11 17:01:54 2018 +1000 b97a5ec
           </li>
           <li>
             
