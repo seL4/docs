@@ -57,6 +57,10 @@ On Ubuntu, these can be obtained with apt.
     sed -i 's/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g' ./build.sh
     ./build.sh
     ~~~
+    
+    If you are using a recent distribution like Ubuntu 18.04 you may need to disable -Wall (turn compiler warning into errors) in riscv-openocd and riscv-isa-sim.
+    
+    After it is built, add the $RISCV/bin folder to your path for step 6.
 
 
 5. Get sel4test sources. If you have them already make sure you are up to to date with the latest
@@ -76,6 +80,8 @@ On Ubuntu, these can be obtained with apt.
     make -j8
     make simulate-spike64
     ~~~
+    
+    If make fails, you may need to install a few required python packages: sudo pip install tempita future
 
 ### Continuing development
 
