@@ -88,7 +88,7 @@ blocks.
 
 Here's a description of all the custom tags:
 
-~~~xml
+```xml
 <!-- 
 Introduces documentation for a new function. 
 The title of the section documenting the function will be NAME. 
@@ -110,7 +110,7 @@ Other parts of the manual can refer to this function's documentation with \autor
 
 <!-- Translated to the latex \texttt{TEXT} -->
 <texttt text="TEXT"/>
-~~~
+```
 
 Note that these must appear within @xmlonly ... @endxmlonly blocks in
 order to function.

@@ -1,5 +1,15 @@
 ---
+arm_hardware: true
 defconfig: beagle_debug_xml_defconfig
+platform: BeagleBoard
+arch: ARMv7A
+virtualization: "No"
+iommu: "No"
+soc: OMAP3
+cpu: Cortex-A8
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 # seL4 on the BeagleBoard
 
@@ -30,20 +40,20 @@ not rely on powering the board over USB
 
 If you do not have minicom installed:
 
-~~~bash
+```bash
 sudo apt-get install minicom
-~~~
+```
 
 If you are connecting via a USB serial adapter:
 
-~~~bash
+```bash
 sudo minicom -s ttyUSB0
-~~~
+```
 And if you were connecting via a **real** serial port:
 
-~~~bash
+```bash
 sudo minicom -s ttyS0
-~~~
+```
 
 In either
 case, this will take you to a configuration menu.
@@ -58,29 +68,29 @@ case, this will take you to a configuration menu.
 
 You can now connect to the !BeagleBoard using Minicom:
 
-~~~bash
+```bash
 minicom ttyUSB0
-~~~
+```
 
 Or:
 
-~~~bash
+```bash
 minicom ttyS0
-~~~
+```
 
 ### Permissions
 If you get permissions errors you need to add yourself to the
 appropriate group. Find out which group on your machine has access to
 the serial ports (on Debian, it's usually dialout):
-~~~bash
+```bash
 $ ls -l /dev/ttyUSB0
 crw-rw---- 1 root dialout 188, 0 Aug 11 09:43 /dev/ttyUSB0
-~~~
+```
 
 Then add yourself to the right group:
-~~~bash
+```bash
 sudo usermod -G dialout -a your_login_name
-~~~
+```
 
 ### U-Boot
 Now minicom should connect to what

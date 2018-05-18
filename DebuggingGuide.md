@@ -56,26 +56,26 @@ There are two main Qemu binaries that are relevant for seL4 development:
 After compiling a seL4 project, you can use one of these to simulate
 execution of the resulting binaries. For example, after compiling
 sel4test for the KZM (IMX31) board:
-~~~bash
+```bash
 qemu-system-arm -M kzm -nographic -kernel images/sel4test-driver-image-arm-imx31
-~~~
+```
 
 On x86, kernel and userspace are provided as separate images:
-~~~bash
+```bash
 qemu-system-i386 -m 512 -nographic -kernel images/kernel-ia32-pc99 -initrd images/sel4test-driver-image-ia32-pc99
-~~~
+```
 
 Some seL4 projects will define Makefile targets as shorthand for these
 commands, so you can simply run:
-~~~bash
+```bash
 make simulate-kzm # Simulate KZM execution
 make simulate-ia32 # Simulate x86 execution
-~~~
+```
 
 
 When simulating a seL4 system in Qemu, you should see output that is
 directed to the (emulated) UART device on your terminal:
-~~~
+```
 ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
   paddr=[82000000..8225001f] 
 ELF-loading image 'kernel'
@@ -94,7 +94,7 @@ Switching to a safer, bigger stack...
 seL4 Test
 =========
 ...
-~~~
+```
 
 To exit from Qemu, type the sequence Ctrl+"a", then "x". Note that you
 can exit at any point; you do not need to wait for the system to finish
@@ -123,9 +123,9 @@ Qemu's emulated environment.
 
 Start Qemu with the extra options "-S" (pause execution on start) and
 "-s" (start a GDB server on TCP port 1234):
-~~~bash
+```bash
 qemu-system-arm -M kzm -nographic -kernel images/sel4test-driver-image-arm-imx31 -S -s
-~~~
+```
 
 In a separate terminal window, start your target platform's version of
 GDB. You should either pass a binary of the seL4 kernel if you intend on
@@ -135,36 +135,36 @@ debugging information ("-g" flag to GCC; "Toolchain Options" -> "Emit
 debugging information" in the seL4 build configuration) if you want GDB
 to show you C source code while debugging. In this example we're going
 to debug the seL4 kernel that has been built in debug mode:
-~~~bash
+```bash
 arm-none-eabi-gdb build/kernel/kernel.elf
-~~~
+```
 
 At the GDB prompt, enter "target remote :1234" to connect to the server
 Qemu is hosting:
-~~~
+```
 Reading symbols from build/kernel/kernel.elf...done.
 (gdb) target remote :1234
 Remote debugging using :1234
 0x82000000 in ?? ()
 (gdb)
-~~~
+```
 
 Suppose we want to halt when kprintf is called. Enter "break kprintf" at
 the GDB prompt:
-~~~
+```
 (gdb) break kprintf
 Breakpoint 1 at 0xf0011248: file kernel/src/machine/io.c, line 269.
-~~~
+```
 
 We can now start Qemu running and wait until we hit the breakpoint. To
 do this, type "cont" at the GDB prompt:
-~~~
+```
 (gdb) cont
 Continuing.
 
 Breakpoint 1, kprintf (format=0xf0428000 "") at kernel/src/machine/io.c:269
 269     {
-~~~
+```
 
 Note that some output has appeared in the other terminal window running
 Qemu as it has partially executed. It may be surprising to see that some
@@ -192,7 +192,7 @@ an x86 or x86_64 host you can simply use your platform's native GDB,
 gdb.
 
 Below is another example for debugging userspace sel4test on ia32:
-~~~bash
+```bash
 # Apply a sel4test config for simulating using qemu.
 make ia32_release_xml_defconfig
 
@@ -221,7 +221,7 @@ gdb stage/x86/pc99/bin/sel4test-driver # (Or gdb stage/x86/pc99/bin/sel4test-tes
 # Continuing. 
 # # It should hit the first breakpoint.
 # Breakpoint 1, main () at /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459
-~~~
+```
 
 #### Userspace debugging
 
@@ -231,32 +231,32 @@ the ones we have just seen, except that we pass GDB a symbol table for
 userspace rather than the kernel. For example, using the same sel4test
 environment we start Qemu in the same way but start GDB with sel4test's
 binary:
-~~~bash
+```bash
 arm-none-eabi-gdb build/arm/imx31/sel4test-driver/sel4test-driver.bin
-~~~
+```
 
 After connecting to Qemu, we can instruct GDB to break on the userspace
 `printf` function:
-~~~
+```
 Reading symbols from build/arm/imx31/sel4test-driver/sel4test-driver.bin...done.
 (gdb) target remote :1234
 Remote debugging using :1234 0x82000000 in ?? () 
 (gdb) break printf
 Breakpoint 1 at 0x30870: file libs/libmuslc/src/stdio/printf.c, line 9.
 (gdb)
-~~~
+```
 
 Note that GDB has correctly identified the printf function in Musl C. We
 now continue as before:
 
-~~~
+```
 (gdb) cont
 Continuing.
 
 Breakpoint 1, printf (fmt=0x363e8 "%s") at libs/libmuslc/src/stdio/printf.c:9
 9               ret = vfprintf(stdout, fmt, ap);
 (gdb)
-~~~
+```
 
 If you examine the terminal window running Qemu at this point, you will
 note that we see an extra bit of output from the kernel. The kernel's
@@ -285,20 +285,20 @@ information is included in the image.
 
 For ARM, supposing that **arm-none-eabi-** is used as the
 cross-compiler prefix.
-~~~bash
+```bash
 arm-none-eabi-objdump -D binary_file_name > dump.s
-~~~
+```
 For x86
-~~~bash
+```bash
 objdump -D binary_file_name > dump.s
-~~~
+```
 The file `dump.s` has the human-readable assembly instructions.
 
 If you have symbols and want (C) source information in your disassembly
 (and who doesn't!) then use the -S flag. for example:
-~~~bash
+```bash
 objdump -DS binary_file_name
-~~~
+```
 ### Debugging seL4test
 
 The sel4test project has make targets which perform call objdump with
@@ -306,21 +306,21 @@ the correct arguments generated from the .config.
 
 You can objdump the kernel:
 
-~~~
+```
 make objdump-kernel | less
-~~~
+```
 
 The test driver:
 
-~~~
+```
 make objdump-driver | less
-~~~
+```
 
 Or the tests themselves:
 
-~~~
+```
 make objdump-tests | less
-~~~
+```
 
 ## In kernel debugging
 

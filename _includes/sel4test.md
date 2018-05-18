@@ -4,7 +4,7 @@ The platform defines what config it uses, and if it specifies a simulation targe
 {% endcomment %}
 
 Checkout the sel4test project using repo as per [seL4Test](/Testing)
-~~~bash
+```bash
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 make {{ page.defconfig }}
@@ -13,6 +13,6 @@ make
 {%- if page.simulation_target %}
 make {{ page.simulation_target }}
 {%- endif %}
-~~~
+```
 
 Generated binaries can be found in the `images/` directory.

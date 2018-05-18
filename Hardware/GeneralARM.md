@@ -19,9 +19,9 @@ Detailed instructions differ from board to board. See The [General Hardware Page
 Most ARM platforms other than the Beagle Boards that seL4 can use support booting via Fastboot.
 
 To boot via Fastboot, you need to convert the image file produced by the seL4 build system into a U-Boot image.
-~~~bash
+```bash
 mkimage -A arm -a 0x48000000 -e 0x48000000 -C none -A arm -T kernel -O qnx -d INPUT_FILE OUTPUT_FILE
-~~~
+```
 The reason we choose QNX is because we exploit the fact that, like seL4, QNX expects to be ELF-loaded. The alternative is to convert our ELF file into a binary file using `objcopy`.
 The address to use varies from board to board. Unless you change the load address, use these:
 

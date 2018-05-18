@@ -1,5 +1,15 @@
 ---
+arm-hardware: true
 defconfig: hikey_aarch64_debug_xml_defconfig
+platform: HiKey
+arch: ARMv8A
+virtualization: ARM HYP
+iommu: "No"
+soc: Kirin 620
+cpu: Cortex-A53
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
 ---
 
 # HiKey
@@ -21,10 +31,10 @@ running an image.
 
 ## 1. Creating a directory
 
-~~~bash
+```bash
 mkdir hikey-flash
 cd hikey-flash
-~~~
+```
 
 ## 2. Custom toolchains
  The cross-toolchains GCC 4.9 for Aarch64 and
@@ -45,7 +55,7 @@ following links:
 - <http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/aarch64-linux-gnu/>
 - <http://releases.linaro.org/components/toolchain/binaries/4.9-2016.02/arm-linux-gnueabihf/>
 
-~~~bash
+```bash
 #Run the following commands to use GCC 4.9 only in this directory mkdir
 arm-tc arm64-tc tar --strip-components=1 -C ${PWD}/arm-tc -xf ~/Downloads gcc-linaro-4.9-2016.02-x86_64_aarch64-linux-gnu.tar.xz
 tar --strip-components=1 -C ${PWD}/arm64-tc -xf ~/Downloads/gcc-linaro-4.9-2016.02-x86_64_arm-linux-gnueabihf.tar.xz
@@ -53,35 +63,35 @@ export PATH="${PWD}/arm-tc/bin:${PWD}/arm64-tc/bin:$PATH"
 
 # To check that GCC 4.9 is used aarch64-linux-gnu-gcc --version
 arm-linux-gnueabihf-gcc --version
-~~~
+```
 
 ## 3. Obtaining the source files
 
-~~~bash
+```bash
 git clone -b hikey --depth 1 https://github.com/96boards/edk2.git linaro-edk2
 git clone -b hikey --depth 1 https://github.com/96boards-hikey/arm-trusted-firmware.git
 git clone -b hikey --depth 1 https://github.com/96boards/LinaroPkg.git
 git clone --depth 1 https://github.com/96boards/l-loader.git
 git clone git://git.linaro.org/uefi/uefi-tools.git
-~~~
+```
 
 ## 4. Changing console to UART0
 
-~~~bash
+```bash
 gedit LinaroPkg/platforms.config
 
 # Uncomment the following lines
 BUILDFLAGS=-DSERIAL_BASE=0xF8015000
 ATF_BUILDFLAGS=CONSOLE_BASE=PL011_UART0_BASE CRASH_CONSOLE_BASE=PL011_UART0_BASE
-~~~
+```
 ## 5. Patching the UEFI for the Hikey 
 Obtain the patch from <https://sel4.systems/hikey.patch>.
 
-~~~bash
+```bash
 cd linaro-edk2 
 patch -p1 < ~/Downloads/hikey.patch 
 # Then return to the main directory hikey-flash
-~~~
+```
 
 ## 6.Modifying the firmware
 If settings are required
@@ -89,11 +99,11 @@ to be changed while in EL3 then the file in
 arm-trusted-firmware/bl1/bl1_main.c can be modified. To disable the
 prefetcher obtain the patch file from
 [bl1_main.patch](bl1_main.patch) and follow the below steps.
-~~~bash
+```bash
 cd arm-trusted-firmware/bl1
 patch -p5 < ~/Downloads/bl1_main.patch
 # Then return to the main directory hikey-flash
-~~~
+```
 
 ## 7. Modifying the UEFI
 If settings are required to
@@ -101,15 +111,15 @@ be changed while in EL2 then the file in
 linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S can be modified.
 To disable the prefetcher obtain the patch file from
 [efi-stub.patch](efi-stub.patch) follow the below steps.
-~~~bash
+```bash
  cd
 linaro-edk2/MdeModulePkg/Application/noboot patch -p7 <
 ~/Downloads/efi-stub.patch # Then return to the main directory
 hikey-flash
-~~~
+```
 
 ## 8. Building the UEFI for the Hikey
-~~~bash
+```bash
 export AARCH64_TOOLCHAIN=GCC49
 export EDK2_DIR=${PWD}/linaro-edk2
 export UEFI_TOOLS_DIR=${PWD}/uefi-tools
@@ -138,13 +148,13 @@ arm-linux-gnueabihf-objcopy -O binary loader temp
 python gen_loader.py -o l-loader.bin --img_loader=temp --img_bl1=bl1.bin
 sudo PTABLE=linux-4g bash -x generate_ptable.sh
 python gen_loader.py -o ptable-linux.img --img_prm_ptable=prm_ptable.img
-~~~
+```
 
 ## 9. Boot Image
  Obtain the boot image from
 <https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz>
 and follow the below commands.
-~~~bash
+```bash
 gunzip *.img.gz
 
 mkdir -p boot-fat
@@ -155,12 +165,12 @@ sudo cp ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/AndroidFastbootApp.efi 
 sudo cp ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/noboot.efi boot-fat/EFI/BOOT/
 
 sudo umount boot-fat
-~~~
+```
 
 ## 10. Minicom
 Install and configure minicom. Two terminals are required for the commands. If minicom is already installed and
 configured skip the next Section.
-~~~bash
+```bash
 # In the first terminal
 cd /dev/
 ls
@@ -169,7 +179,7 @@ ls
 # In the second terminal
 sudo apt-get install minicom
 sudo minicom -s
-~~~
+```
 
   1.  Use the arrow keys to scroll down to Serial port setup and press
       enter
@@ -193,7 +203,7 @@ sudo minicom -s
   6.  Turn the power on the to Hikey
   7.  Three terminals are then required for the following commands
 
-~~~bash
+```bash
 # In the first terminal 
 ls 
 # Note the next ttyUSBY that is observed, in addition to the current ttyUSBX
@@ -208,7 +218,7 @@ sudo fastboot flash boot boot-fat.uefi.img
 # The debug prints are displayed in the second terminal
 
 # Then power off the Hikey
-~~~
+```
 
 ## 12. Build your first seL4 system
 
@@ -222,10 +232,10 @@ sudo fastboot flash boot boot-fat.uefi.img
 2.  Power the Hikey
 3.  Run the desired image. The command below is an example.
 
-~~~bash
+```bash
 # In the third terminal
 fastboot boot images/sel4test-driver-image-arm-hikey -c mode=32bit
-~~~
+```
 
 ## 14. Modifications to firmware or UEFI
 

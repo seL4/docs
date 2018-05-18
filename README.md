@@ -23,6 +23,21 @@ Our markdown pages are rendered using [Kramdown](https://kramdown.gettalong.org/
 to interpret the markdown files (.md) as GitHub flavoured markdown (GFM).  We are currently using the `jekyll-theme-bootstrap` theme
 that provides a sass implementation of bootstrap.  Our custom styling is contained in `assets/css/style.scss`.  `HTML` templates are in either \_layouts or \_includes.
 
+### Requirements
+
+#### Building the site
+
+- ruby-bundler must be installed
+
+#### Linters
+
+Linting checks require the linters to be installed.
+
+- HTML output checking using `tidy`: `make check_html_output`
+- Liquid syntax checking using `liquid-linter`: `make check_liquid_syntax`
+
+### Building the docsite
+
 To build and host locally:
 ```
 git submodule init
@@ -61,9 +76,4 @@ contain a testcase for each generated html file of the site.  A make rule `make 
 and output the html page name.  The idea here is to detect if any pages are failing and then manually using the AATT tool's webinterface
 to check what parts of the page violate the guidelines.
 
-### Linters
 
-Linting checks require the linters to be installed.
-
-- HTML output checking using `tidy`: `make check_html_output`
-- Liquid syntax checking using `liquid-linter`: `make check_liquid_syntax`

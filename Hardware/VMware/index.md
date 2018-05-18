@@ -49,12 +49,12 @@ There are three options for the serial port
 3. **Output to a socket** (allows input/output but annoying to
 set up). You'll want to apt-get install socat and then run something
 like:
-~~~bash
+```bash
 #!/bin/bash 
 while true; do
     socat -d -d UNIX-CONNECT:/tmp/vsock,forever PTY:link=/dev/tty99
 done
-~~~
+```
 and
     then minicom to `/dev/tty99` or
     to `/dev/pts/<whatever socat decides to use>`.
@@ -88,17 +88,17 @@ Simplest method is to simply use VMWare player to boot into the guest OS
 you just installed, and then edit the grub.cfg from the guest OS itself.
 
 Another method is to use **vmware-mount**:
-~~~bash
+```bash
 # Usage: vmware-mount diskPath [partition num] mountPoint
 mkdir /tmp/vmount
 vmware-mount /path/to/your/HD.vmdk /tmp/vmount
 # Now do your editing in /tmp/vmount.
 vmware-mount -d /tmp/vmount
-~~~
+```
 
 Once you have grub.cfg open in your favourite editor, Add an extra
 option to it:
-~~~
+```
 menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
     load_video
     insmod gzio
@@ -111,7 +111,7 @@ menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
     echo 'Loading initial module ...'
     module /sel4-image-ia32-pc99
 }
-~~~
+```
 
 Of course, change the `--set=root <DeviceID>` line to your
 DeviceID (set the DeviceID from other entries already in your grub.cfg),

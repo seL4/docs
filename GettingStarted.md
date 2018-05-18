@@ -105,19 +105,19 @@ a project to start with. As an example, we'll use sel4test.
 - First create a directory for Repo to work in, then enter it and
       initialise it using Repo:
 
-  ~~~bash
+  ```bash
   mkdir seL4test 
   cd seL4test
   repo init -u https://github.com/seL4/sel4test-manifest.git
-  ~~~
+  ```
 
   To get the actual project and subproject source, you'll then need to use repo sync, which
   will then clone and checkout the project and all the required
   subprojects.
 
-  ~~~ 
+  ``` 
   repo sync
-  ~~~
+  ```
 
 #### Getting cross compilers
  There are instructions on how to get

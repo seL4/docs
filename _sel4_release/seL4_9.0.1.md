@@ -11,7 +11,8 @@ title: seL4 9.0.1
 ## Changes
  * On 64-bit architectures, the `label` field of `seL4_MessageInfo` is now 52 bits wide. User-level programs
    which use any of the following functions may break, if the program relies on these functions to mask the
-   `label` field to the previous width of 20 bits.
+   `label` field to the previous width of 20 bits. For more detail, see our
+   [explanation on the seL4 mailing list](https://sel4.systems/pipermail/devel/2018-April/001934.html).
      - `seL4_MessageInfo_new`
      - `seL4_MessageInfo_get_label`
      - `seL4_MessageInfo_set_label`
@@ -28,4 +29,4 @@ title: seL4 9.0.1
 
 # More details
  See the
-[9.0.1 manual](http://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf) included in the release or ask on the mailing list!
+[9.0.1 manual](https://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf) included in the release or ask on the mailing list!

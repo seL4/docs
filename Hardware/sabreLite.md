@@ -1,6 +1,16 @@
 ---
+arm_hardware: true
 defconfig: sabre_simulation_debug_xml_defconfig
 simulation_target: simulate-sabre
+platform: Sabre Lite
+arch: ARMv7A
+virtualization: "No"
+iommu: "No"
+soc: i.MX6
+cpu: Cortex-A9
+Status: Verified
+Contrib: Data61
+Maintained: Data61
 ---
 # Sabre Lite
 
@@ -33,9 +43,9 @@ system. This method is usually only used to reprogram the SPI flash boot
 program.
 
 You will first need to acquire and compile the IMX USB loader tool from
-~~~bash
+```bash
 git clone git://github.com/boundarydevices/imx_usb_loader.git
-~~~
+```
 NOTE 1: The Element14 Sabrelite platform has its DIP switch mounted
 incorrectly.
 
@@ -51,14 +61,14 @@ USB-TTY converter has locked up.
   5.  Power up the device.
 
 Now you are ready to load your image into memory and execute:
-~~~bash
+```bash
 $ lsusb 
 .... 
 Bus 001 Device 019: ID
 15a2:0054 Freescale Semiconductor, Inc.
 .... 
 $ sudo ./imx_usb image_file
-~~~
+```
 The image file that is used will typically be named
 u-boot.bin
 
@@ -74,13 +84,13 @@ u-boot.bin
   5.  Power up the device.
 
 Now you are ready to load your image into memory and execute:
-~~~bash
+```bash
 $ lsusb 
 ....
 Bus 001 Device 019: ID 15a2:0054 Freescale Semiconductor, Inc.
 .... 
 $ sudo ./imx_usb image_file
-~~~
+```
 
 The image file that is used will typically be named
 u-boot.bin
@@ -103,9 +113,9 @@ loader images are provided in the SPI flash programming section. U-Boot
 must be located at block 2 of the SD or μSD card. This can be achieved
 with the following command, assuming that the SD or μSD device is
 `/dev/sdb`.
-~~~bash
+```bash
 dd if=u-boot.bin of=/dev/sdb seek=2 bs=512; sync
-~~~
+```
 
 ## U-Boot for the Sabre Lite
 ### Obtaining and Building
@@ -129,7 +139,7 @@ Prebuilt:
 The prebuilt version is for booting from SPI.
 
 To obtain and build U-Boot, do:
-~~~bash
+```bash
 git clone git://github.com/boundarydevices/u-boot-2009-08.git
 cd u-boot-2009-08
 git checkout origin/boundary-imx_3.0.35_1.1.0 -b boundary-imx_3.0.35_1.1.0
@@ -138,11 +148,11 @@ export CROSS_COMPILE=arm-none-eabi-
 make mx6q_sabrelite_android_config
 make all
 ls -l u-boot.bin
-~~~
+```
 ### Installing U-Boot to SPI Flash
 To install U-Boot, put u-boot.bin onto the first partition (either FAT16 or
 EXT2) of an SD card, boot into U-Boot then do this at the U-Boot prompt:
-~~~bash
+```bash
 # Initialise the SD card. Replace 1 with 0 for standard SD
 mmc dev 1
 
@@ -161,7 +171,7 @@ sf erase 0 0x100000
 sf write 0x12000000 0 ${filesize}
 
 # Ensure that the boot select switches are set appropriately, then reboot the Sabrelite
-~~~
+```
 ## Booting seL4 applications 
 This assumes that the U-Boot version above is installed in SPI flash.
 

@@ -10,14 +10,14 @@ First make sure you have
 
 ## Getting the Code 
 
-~~~bash
+```bash
 mkdir sel4test
 cd sel4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 ls 
 # kernel/ libs/ projects/ tools/ apps configs Kbuild Kconfig Makefile
-~~~
+```
 
 This clones the seL4 kernel, the test suite, some libraries used by the
 tests, and some tools used in the build process. By default, the current
@@ -88,9 +88,9 @@ systems that will either not compile, or not run.
 ## Building
 When you've configured the system, you can build by doing
 
-~~~
+```
 make -j libmuslc && make
-~~~
+```
 
 Currently parallel builds do not work for the whole build, but it is
 worth using for the C library. The build system does however support
@@ -108,11 +108,11 @@ simulator.
 
 The makefile provides a target to simulate ia32. Running the following
 command will run qemu and point it towards the image we just built.
-~~~bash
+```bash
 make ia32_simulation_release_xml_defconfig
 make -j libmuslc && make
 make simulate-ia32
-~~~
+```
 
 To exit qemu after the All is well in the universe message that
 indicates the test suite has passed, type `control-a x`.
@@ -121,15 +121,15 @@ indicates the test suite has passed, type `control-a x`.
 
 
 Let's build the test suite for kzm_simulation_debug_xml_defconfig:
-~~~bash
+```bash
 make kzm_simulation_debug_xml_defconfig
 make
 ls images
 # sel4test-driver-image-arm-imx31
-~~~
+```
 
 Run it in qemu:
-~~~
+```
 qemu-system-arm -nographic -M kzm -kernel images/sel4test-driver-image-arm-imx31
 ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
   paddr=[82000000..8223001f]
@@ -147,7 +147,7 @@ Test BIND0001 passed
 </system-out>
         </testcase>
 ...
-~~~
+```
 
 The test suite prints out
 JUnit-style XML which can be parsed by various tools.
@@ -159,13 +159,13 @@ Suppose you've got seL4 checked out in `\~/projects/seL4`, and sel4test in
 `awesome-new-feature`. You want to test if your modified kernel
 still passes all the tests in sel4test.
 
-~~~bash
+```bash
 cd ~/tests/sel4tests/kernel
 git remote add feature ~/projects/seL4
 git fetch feature
 git checkout feature/awesome-new-feature
 cd ..
-~~~
+```
 
 Now the kernel in sel4test has been changed to your custom kernel.
 Now just build and run the test suite as above.
