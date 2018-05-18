@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-14 07:11:37 +0000 -->
+<!-- Page last generated 2018-05-18 05:46:05 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -353,6 +353,10 @@ future steps.</p>
  sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
  ./build.sh
 </code></pre></div>    </div>
+
+    <p>If you are using a recent distribution like Ubuntu 18.04 you may need to disable -Wall (turn compiler warning into errors) in riscv-openocd and riscv-isa-sim.</p>
+
+    <p>After it is built, add the $RISCV/bin folder to your path for step 6.</p>
   </li>
   <li>
     <p>Get sel4test sources. If you have them already make sure you are up to to date with the latest
@@ -371,6 +375,8 @@ source.</p>
  make <span class="nt">-j8</span>
  make simulate-spike64
 </code></pre></div>    </div>
+
+    <p>If make fails, you may need to install a few required python packages: sudo pip install tempita future</p>
   </li>
 </ol>
 
@@ -407,7 +413,7 @@ source.</p>
         </li>
         
           <li>
-            Site last updated: Mon May 14 17:09:06 2018 +1000 8b4fb34
+            Site last updated: Fri May 18 15:44:18 2018 +1000 a56ad43
           </li>
           <li>
             
@@ -512,7 +518,7 @@ source.</p>
               
             
               
-                Page last updated: Fri May 11 15:27:31 2018 +1000 01be067
+                Page last updated: Fri May 18 15:41:47 2018 +1000 bcdd8f9
               
             
               
