@@ -58,3 +58,11 @@ This liquid templating pulls an excerpt out of the child documentation pages to 
 ## [Documentation on Kernel standalone builds](/Developing/Building/seL4Standalone)
 
 > {{ seL4Standalone[1] | strip}}
+
+
+## Gotchas
+
+List of gotchas and easy mistakes that can be made when using cmake
+
+ * Configuration files passed to to cmake with `-C` *must* end in `.cmake`, otherwise CMake will silently throw
+   away your file
