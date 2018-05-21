@@ -1,0 +1,60 @@
+# System configuration and building
+
+seL4 and related projects use the [CMake](https://cmake.org/) family of tools to implement its build system.
+The seL4 build system refers to a collection of CMake scripts that manage:
+- system configuration: Configuration options such as platform flags and application settings.
+- dependency structures: Tracking build order dependencies
+- builds: Generating binary artifacts that can then be deployed on hardare.
+
+
+The following documentation covers how to use the seL4 build system to:
+- perform system configuration and builds
+- incorporating the build system into a project
+- Kernel stand-alone configuration and builds
+
+## CMake basics
+
+For a complete guide to CMake you can read the [extensive documentation](https://cmake.org/cmake/help/latest/),
+but for the purposes here we will assume a particular workflow with CMake involving out of tree builds.
+
+CMake is not itself a build tool, but rather is a build generator. This means that it generates build scripts,
+typically Makefiles or Ninja scripts, which will be used either by a tool like GNU Make or Ninja to perform
+the actual build.
+
+### Pre-requisites
+
+It is assumed that
+
+ * CMake of an appropriate version is installed
+ * You are using the Ninja CMake generator 
+ * You understand how to checkout projects using the repo tool as described on the
+   [Getting started](/GettingStarted) page
+
+
+{% comment %}
+This liquid templating pulls an excerpt out of the child documentation pages to display under the links below to provide slightly more context about the contents.  Using excerpts from other pages prevents the descriptions from getting out of date.
+{% endcomment %}
+
+{% for page in site.pages %}
+{% case page.path %}
+  {% when "Developing/Building/seL4Standalone.md" %}
+    {% assign seL4Standalone = page.content | split:'<!--excerpt-->' %}
+  {% when "Developing/Building/Using.md" %}
+    {% assign using = page.content | split:'<!--excerpt-->' %}
+  {% when "Developing/Building/Incorporating.md" %}
+    {% assign incorporating = page.content | split:'<!--excerpt-->' %}
+  {% else %}
+{% endcase %}
+{% endfor %}
+
+## [Documentation on configuring and building seL4 projects](/Developing/Building/Using)
+
+> {{ using[1] | strip }}
+
+## [Documentation on incorporating the build system into a project](/Developing/Building/Incorporating)
+
+> {{ incorporating[1] | strip }}
+
+## [Documentation on Kernel standalone builds](/Developing/Building/seL4Standalone)
+
+> {{ seL4Standalone[1] | strip}}
