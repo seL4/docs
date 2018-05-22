@@ -69,28 +69,8 @@ and special instructions for particular hardware platforms.
 
 ## Setting up your machine
 
-
-You can setup all the dependencies on your local OS, or you may choose
-to use Docker.
-
-### Using Docker
- You can also use Docker to isolate the dependencies
-from your machine. Instructions for using Docker for building seL4,
-CAmkES, and L4v can be found
-[here](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles).
-
-### Using your local OS
- These instructions are for Ubuntu. They
-assume you already know the basics of using the command line, compilers
-and GNU Make.
-
-#### Get Google's "Repo" tool
- Repo is a tool by Google used for
-managing multiple git repositories. All the seL4 related projects use
-multiple subprojects, and Repo will fetch all of them and place them in
-the correct subdirectories for you. To get repo,
-[follow the instructions in the section "Installing Repo" here](http://source.android.com/source/downloading.html#installing-repo). (You don't
-need to initialise a repo client yet.)
+Read the [Host Dependencies](HostDependencies) page to find instructions on how to set up
+your host machine to build seL4 and its various related projects.
 
 #### Using Repo to fetch an seL4 project and its subprojects
  Choose
@@ -118,17 +98,6 @@ a project to start with. As an example, we'll use sel4test.
   ``` 
   repo sync
   ```
-
-#### Getting cross compilers
- There are instructions on how to get
-cross compilers for building ARM. We only have direct instructions for
-Debian/Ubuntu/Fedora, but we imagine you should be able to substitute
-where necessary for your distro. Instructions should be similar for
-other distros, links to toolchains for other distros are provided.
-
-  - [Cross compiler and general instructions for Fedora
-     and CentOS (RHEL should work as well)](SetupFedora)
-  - [Cross compilers for Debian and Ubuntu](SetupUbuntu)
 
 ## Start with the tutorials
 

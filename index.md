@@ -17,6 +17,7 @@ to find pages that have moved if it's not obvious whre they are from the index h
 - [Benchmarking guide](BenchmarkingGuide.md)
 - Virtualisation on seL4
 - [Rust](Rust.md)
+- [Host Build Dependencies](HostDependencies.md)
 
 ## seL4 Status
 
