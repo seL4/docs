@@ -36,7 +36,7 @@ they were covered by a previous tutorial in the series.
 ## Walkthrough
 ```
 # select the config for the first tutorial
-make ia32_hello-4_defconfig
+make pc99_hello-4_defconfig
 # build it
 make -j8
 # run it in qemu
@@ -153,9 +153,9 @@ Then we verify the fidelity of the data that was transmitted.
 Another demonstration of the `sel4_Reply()` facility: we reply to the
 message sent by the new thread.
 
-<https://github.com/seL4/seL4/blob/3.0.0/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359>
+<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359>
 
-<https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/sel4/shared_types_32.bf#L15>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15>
 
 ### TASK 9
 
@@ -165,4 +165,4 @@ outlined above, the receiving thread replies to us using
 `sel4_ReplyRecv()`. The new thread then checks the fidelity of the data
 that was sent, and that's the end.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>

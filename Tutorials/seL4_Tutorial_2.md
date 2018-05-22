@@ -35,11 +35,7 @@ Uncomment them one by one as needed when going through the tasks.
 ## Walkthrough
 ```
 # select the config for the first tutorial
-make ia32_hello-2_defconfig
-# build it
-make -j8
-# run it in qemu
-make simulate
+make pc99_hello-2_defconfig
 ```
 
 Look for `TASK` in the `apps/hello-2` directory for each task.
@@ -55,9 +51,16 @@ IO-Ports (x86). This structure also tells the init thread where certain
 important capability references are. This step is teaching you how to
 obtain that structure.
 
-Note that when you run the example, you should get a message similar to:
+`seL4_BootInfo* platsupport_get_bootinfo(void)` is a function that returns the BootInfo structure.
+It also sets up the IPC buffer so that it can perform some syscalls such as `seL4_DebugNameThread` used by `name_thread`.
+
+To build and run:
 ```
-6 untypeds of size 29
+make simulate
+```
+
+After TASK 1 when you run the example, you should get a message similar to:
+```
 hello-2: <main@main.c>:132 [Cond failed: allocman == NULL]
 Failed to initialize alloc manager.
 Memory pool sufficiently sized?
@@ -66,8 +69,8 @@ Memory pool pointer valid?
 
 until Task 4, where you set up memory management.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
-
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/bootinfo_types.h>
+<https://github.com/seL4/seL4_libs/blob/master/libsel4platsupport/src/bootinfo.c>
 ### TASK 2
 
 
@@ -172,6 +175,12 @@ it. That's what you're doing now.
 In this particular example, you're allowing the new thread to share your
 main thread's CSpace and VSpace.
 
+In addition, a thread needs to have a priority set on it in order for it to run.
+`seL4_TCB_SetPriority(tcb_object.cptr, seL4_CapInitThreadTCB, seL4_MaxPrio);`
+will give your new thread the same priority as the current thread, allowing it
+to be run the next time the seL4 scheduler is invoked.  The seL4 scheduler is invoked
+everytime there is a kernel timer tick.
+
 <https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml>
 
 ### TASK 10
@@ -219,7 +228,7 @@ the kernel itself will choose when to run the thread based on the
 priority we gave it, and according to the kernel's configured scheduling
 policy.
 
-<https://github.com/seL4/seL4/blob/3.0.0/libsel4/include/interfaces/sel4.xml>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml>
 
 ### TASK 15
 
@@ -231,7 +240,7 @@ kernel successfully, we cause it to print something to the screen.
 
 
 - `sel4_BootInfo`:
-      <https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/bootinfo_types.h>
+      <https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/bootinfo_types.h>
 - `simple_t`:
       <https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h>
 - `vka_t`:

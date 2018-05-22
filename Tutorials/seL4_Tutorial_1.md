@@ -39,7 +39,7 @@ First try to build the code:
 # go to the top level directory
 cd sel4-tutorials-manifest/
 # select the config for the first tutorial
-make ia32_hello-1_defconfig
+make pc99_hello-1_defconfig
 # build it
 make -j8
 ```

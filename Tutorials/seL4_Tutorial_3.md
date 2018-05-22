@@ -49,7 +49,7 @@ they were covered by a previous tutorial in the series.
 First, build the tutorial:
 ```
 # select the config for the first tutorial
-make ia32_hello-3_defconfig
+make pc99_hello-3_defconfig
 # build it
 make -j8
 # run it in qemu
@@ -97,7 +97,7 @@ into a VSpace, and the mapping of a new page-table into a VSpace.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml>
+<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml>
 
 ### TASK 3
 
@@ -117,12 +117,10 @@ try again to finally map the IPC-buffer's frame object into the VSpace.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml>
+<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml>
 
 ### TASK 5
- ''Corresponding line in tutorial:''
-(<https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-3/src/main.c#L296>)
-
+Use `seL4_ARCH_Page_Map` to map the frame in.
 If everything was done correctly, there is no reason why this step
 should fail. Complete it and proceed.
 
@@ -169,7 +167,7 @@ data, and know which sender you are. Complete the step and proceed.
 
 <https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/types_32.bf>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf>
 
 ### TASK 8
 
@@ -192,9 +190,9 @@ specifies, among other things, the number of Message Registers that hold
 meaningful data, and the number of capabilities that are going to be
 transmitted in the message.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h>
 
 ### TASK 9
 
@@ -230,9 +228,9 @@ necessarily grant it sending powers (write capability) to the endpoint.
 It's entirely possible that the receiver may not be able to send a
 response message, if the sender doesn't want it to.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf>
 
 ### TASK 10
 
@@ -244,7 +242,7 @@ reading the reply from the receiver. As mentioned before, the
 `seL4_GetMR()` calls are simply reading from the calling thread's
 designated, single IPC buffer.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h>
 
 ### TASK 11
 
@@ -258,9 +256,9 @@ Notice how the `seL4_Recv()` operation explicitly makes allowance for
 reading the badge value on the incoming message? The receiver is
 explicitly interested in distinguishing the sender.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf>
 
 ### TASK 12
 
@@ -269,21 +267,21 @@ These two calls here are just verification of the fidelity of the
 transmitted message. It's very unlikely you'll encounter an error here.
 Complete them and proceed to the next step.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf>
 
 ### TASK 13
 
 
 Again, just reading the data from the Message Registers.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h>
 
 ### TASK 14
 
 
 And writing Message Registers again.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h>
 
 ### TASK 15
 
@@ -303,6 +301,6 @@ receiver to respond to a specific message once, it can use `seL4_Call()`,
 and the seL4 kernel will facilitate this one-time permissive response.
 Complete the step and pat yourself on the back.
 
-<https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>
+<https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h>
 
-<https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf>
+<https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf>
