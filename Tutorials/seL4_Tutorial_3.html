@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-22 04:27:53 +0000 -->
+<!-- Page last generated 2018-05-22 06:41:26 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -365,7 +365,7 @@ they were covered by a previous tutorial in the series.</p>
 
 <p>First, build the tutorial:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># select the config for the first tutorial
-make ia32_hello-3_defconfig
+make pc99_hello-3_defconfig
 # build it
 make -j8
 # run it in qemu
@@ -411,7 +411,7 @@ into a VSpace, and the mapping of a new page-table into a VSpace.</p>
 
 <p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></p>
 
 <h3 id="task-3">TASK 3</h3>
 
@@ -429,13 +429,11 @@ try again to finally map the IPC-buffer’s frame object into the VSpace.</p>
 
 <p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></p>
 
 <h3 id="task-5">TASK 5</h3>
-<p>'’Corresponding line in tutorial:’’
-(<a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-3/src/main.c#L296">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/exercises/hello-3/src/main.c#L296</a>)</p>
-
-<p>If everything was done correctly, there is no reason why this step
+<p>Use <code class="highlighter-rouge">seL4_ARCH_Page_Map</code> to map the frame in.
+If everything was done correctly, there is no reason why this step
 should fail. Complete it and proceed.</p>
 
 <h3 id="task-6">TASK 6</h3>
@@ -479,7 +477,7 @@ data, and know which sender you are. Complete the step and proceed.</p>
 
 <p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/types_32.bf</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf</a></p>
 
 <h3 id="task-8">TASK 8</h3>
 
@@ -501,9 +499,9 @@ specifies, among other things, the number of Message Registers that hold
 meaningful data, and the number of capabilities that are going to be
 transmitted in the message.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
 
 <h3 id="task-9">TASK 9</h3>
 
@@ -538,9 +536,9 @@ necessarily grant it sending powers (write capability) to the endpoint.
 It’s entirely possible that the receiver may not be able to send a
 response message, if the sender doesn’t want it to.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
 
 <h3 id="task-10">TASK 10</h3>
 
@@ -551,7 +549,7 @@ reading the reply from the receiver. As mentioned before, the
 <code class="highlighter-rouge">seL4_GetMR()</code> calls are simply reading from the calling thread’s
 designated, single IPC buffer.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
 
 <h3 id="task-11">TASK 11</h3>
 
@@ -564,9 +562,9 @@ operation will unqueue the data and resume execution.</p>
 reading the badge value on the incoming message? The receiver is
 explicitly interested in distinguishing the sender.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
 
 <h3 id="task-12">TASK 12</h3>
 
@@ -574,19 +572,19 @@ explicitly interested in distinguishing the sender.</p>
 transmitted message. It’s very unlikely you’ll encounter an error here.
 Complete them and proceed to the next step.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
 
 <h3 id="task-13">TASK 13</h3>
 
 <p>Again, just reading the data from the Message Registers.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
 
 <h3 id="task-14">TASK 14</h3>
 
 <p>And writing Message Registers again.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/release/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></p>
 
 <h3 id="task-15">TASK 15</h3>
 
@@ -605,9 +603,9 @@ receiver to respond to a specific message once, it can use <code class="highligh
 and the seL4 kernel will facilitate this one-time permissive response.
 Complete the step and pat yourself on the back.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/release/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
 
-<p><a href="https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/release/libsel4/include/sel4/shared_types_32.bf</a></p>
+<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
 
     </div>
   </div>
@@ -638,7 +636,7 @@ Complete the step and pat yourself on the back.</p>
         </li>
         
           <li>
-            Site last updated: Tue May 22 13:49:28 2018 +1000 8d89aac
+            Site last updated: Tue May 22 16:25:56 2018 +1000 ee9de15
           </li>
           <li>
             
@@ -725,7 +723,7 @@ Complete the step and pat yourself on the back.</p>
               
             
               
-                Page last updated: Tue Mar 13 13:59:55 2018 +1100 7efebd4
+                Page last updated: Tue May 22 16:25:56 2018 +1000 ee9de15
               
             
               
