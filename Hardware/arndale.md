@@ -1,6 +1,7 @@
 ---
 arm_hardware: true
-defconfig: arndale_debug_xml_defconfig
+cmake_plat: exynos5250
+xcompiler_arg: -DAARCH32=1
 platform: Arndale
 arch: ARMv7A
 virtualization: ARM Hyp

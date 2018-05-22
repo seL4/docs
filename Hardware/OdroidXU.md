@@ -1,6 +1,7 @@
 ---
 arm_hardware: true
-defconfig: odroidxu_release_xml_defconfig
+cmake_plat: exynos5410
+xcompiler_arg: -DAARCH32=1
 platform: OdroidXU
 arch: ARMv7A
 virtualization: ARM HYP

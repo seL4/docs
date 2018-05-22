@@ -1,7 +1,8 @@
 ---
 toc: true
 arm_hardware: true
-defconfig: tx1_aarch64_debug_xml_defconfig
+cmake_plat: tx1
+xcompiler_arg: -DAARCH64=1
 platform: TX1
 arch: ARMv8A, AArch64 only
 virtualization: ARM HYP
@@ -40,6 +41,9 @@ flashing it onto the board.
 ## Building seL4test
 
 {% include sel4test.md %}
+
+The TX1 also supports AArch32 mode. If you choose to build the AArch32 kernel,
+please be sure to pass `-DAARCH32=1` instead of `-DAARCH64=1`.
 
 ## Booting via TFTP
  Unfortunately the stock U-boot that comes with

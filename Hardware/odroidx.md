@@ -1,6 +1,7 @@
 ---
 arm_hardware: true
-defconfig: odroidx_debug_xml_defconfig
+cmake_plat: exynos4
+xcompiler_arg: -DAARCH32=1
 platform: OdroidX
 arch: ARMv7A
 virtualization: "No"

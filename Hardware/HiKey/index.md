@@ -1,6 +1,7 @@
 ---
-arm-hardware: true
-defconfig: hikey_aarch64_debug_xml_defconfig
+arm_hardware: true
+cmake_plat: hikey
+xcompiler_arg: -DAARCH64=1
 platform: HiKey
 arch: ARMv8A
 virtualization: ARM HYP
@@ -223,6 +224,9 @@ sudo fastboot flash boot boot-fat.uefi.img
 ## 12. Build your first seL4 system
 
 {% include sel4test.md %}
+
+The Hikey also supports AArch32 mode. If you choose to build the AArch32 kernel,
+please be sure to pass `-DAARCH32=1` instead of `-DAARCH64=1`.
 
 ## 13. Booting the Hikey
 

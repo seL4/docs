@@ -1,6 +1,7 @@
 ---
 arm_hardware: true
-defconfig: bbone_black_debug_xml_defconfig
+cmake_plat: am335x
+xcompiler_arg: -DAARCH32=1
 platform: Beaglebone Black
 arch: ARMv7A
 virtualization: "No"

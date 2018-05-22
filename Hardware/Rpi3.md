@@ -1,8 +1,9 @@
 ---
 arm_hardware: true
-defconfig: rpi3_debug_xml_defconfig
+cmake_plat: rpi3
+xcompiler_arg: -DAARCH32=1
 platform: Raspberry Pi 3-b
-arch: ARMv8A, aarch64 only
+arch: ARMv8A
 virtualization: ARM HYP
 iommu: "No"
 soc: BCM2937

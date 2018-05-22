@@ -1,6 +1,7 @@
 ---
 arm_hardware: true
-defconfig: beagle_debug_xml_defconfig
+cmake_plat: omap3
+xcompiler_arg: -DAARCH32=1
 platform: BeagleBoard
 arch: ARMv7A
 virtualization: "No"

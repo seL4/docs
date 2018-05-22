@@ -1,5 +1,7 @@
 ---
-arm-hardware: true
+arm_hardware: true
+cmake_plat: tk1
+xcompiler_arg: -DAARCH32=1
 platform: TK1-SOM
 arch: ARMv7A
 virtualization: ARM HYP

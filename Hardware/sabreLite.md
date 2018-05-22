@@ -1,7 +1,8 @@
 ---
 arm_hardware: true
-defconfig: sabre_simulation_debug_xml_defconfig
-simulation_target: simulate-sabre
+simulation_target: true
+cmake_plat: sabre
+xcompiler_arg: -DAARCH32=1
 platform: Sabre Lite
 arch: ARMv7A
 virtualization: "No"

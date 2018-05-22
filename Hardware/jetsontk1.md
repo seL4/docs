@@ -1,7 +1,8 @@
 ---
 toc: true
 arm_hardware: true
-defconfig: tk1_debug_xml_defconfig
+cmake_plat: tk1
+xcompiler_arg: -DAARCH32=1
 platform: TK1
 arch: ARMv7A
 virtualization: ARM HYP

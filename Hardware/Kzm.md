@@ -1,7 +1,8 @@
 ---
 arm_hardware: true
-defconfig: kzm_simulation_release_xml_defconfig
-simulation_target: simulate-kzm
+simulation_target: true
+cmake_plat: kzm
+xcompiler_arg: -DAARCH32=1
 platform: KZM
 arch: ARMv6A
 virtualization: "No"
