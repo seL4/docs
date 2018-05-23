@@ -34,11 +34,14 @@ Uncomment them one by one as needed when going through the tasks.
 
 ## Walkthrough
 ```
-# select the config for the first tutorial
-make pc99_hello-2_defconfig
+# create a build directory
+mkdir build_hello_2
+cd build_hello_2
+# initialise your build directory
+../init --plat pc99 --tut hello-2
 ```
 
-Look for `TASK` in the `apps/hello-2` directory for each task.
+Look for `TASK` in the `hello-2/src` directory for each task.
 
 ### TASK 1
 
@@ -56,7 +59,10 @@ It also sets up the IPC buffer so that it can perform some syscalls such as `seL
 
 To build and run:
 ```
-make simulate
+# build it
+ninja
+# run it in qemu
+./simulate
 ```
 
 After TASK 1 when you run the example, you should get a message similar to:

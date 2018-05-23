@@ -25,12 +25,15 @@ page, if they were covered by a previous tutorial in the series.
 
 First, build and run the tutorial:
 ```
-# select the config for the first tutorial
-make ia32_hello-timer_defconfig
+# create a build directory
+mkdir build_hello_timer
+cd build_hello_timer
+# initialise your build directory
+../init --plat pc99 --tut hello-timer
 # build it
-make -j libmuslc && make
+ninja
 # run it in qemu
-make simulate
+./simulate
 ```
 
 Before you have done any tasks, when running the tutorial should show

@@ -48,15 +48,18 @@ they were covered by a previous tutorial in the series.
 
 First, build the tutorial:
 ```
-# select the config for the first tutorial
-make pc99_hello-3_defconfig
+# create a build directory
+mkdir build_hello_3
+cd build_hello_3
+# initialise your build directory
+../init --plat pc99 --tut hello-3
 # build it
-make -j8
+ninja
 # run it in qemu
-make simulate
+./simulate
 ```
 
-Look for `TASK` in the `apps/hello-3` directory for each task.
+Look for `TASK` in the `hello-3/src` directory for each task.
 
 ### TASK 1
 

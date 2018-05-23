@@ -8,12 +8,14 @@ This exercise is to set up a timer driver in CAmkES and use it to delay
 for 2 seconds.
 
 ## Setup
-
-
-We'll be working within `apps/hello-camkes-timer` for this tutorial.
-
 ```
-make arm_hello-camkes-timer_defconfig
+# create a build directory
+mkdir build_camkes_timer
+cd build_camkes_timer
+# initialise your build directory
+../init --plat zynq7000 --tut hello-camkes-timer
+# build it
+ninja
 ```
 
 ## Walkthrough
@@ -119,7 +121,8 @@ us and allowing the function to return after the delay.
 
 Build and run with:
 ```
-make simulate
+ninja
+./simulate
 ```
 
 Expect the following output with a 2 second delay between the last 2

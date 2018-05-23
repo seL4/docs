@@ -34,10 +34,11 @@ instances via well-defined interfaces which must be statically defined,
 over communication channels. This tutorial will lead you through the
 construction of a CAmkES application with two components: an Echo
 server, and its Client that makes calls to it. These components are
-defined here:
+defined when you initialise your build repository, found in
+the following sub-directories:
 
-- <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes>
-- <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes>
+- `hello-camkes-1/components/Client/Client.camkes`
+- `hello-camkes-1/components/Echo/Echo.camkes`
 
 Find the Component manual section here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component>
@@ -70,7 +71,7 @@ interface, which is an interface over which function calls are made
 according to a well-defined pre-determined API. The keyword for this
 kind of interface in CAmkES is "procedure". The definition of this
 Procedure interface may be found here:
-<https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4>
+`hello-camkes-1/interfaces/HelloSimple.camkes`
 
 Find the "Procedure" keyword definition here:
 <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure>
@@ -82,12 +83,12 @@ spaces with your program's logic. The two generated files in this
 tutorial application are, in accordance with the Components we have
 defined:
 
-- <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c>
-- <https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c>
+- `hello-camkes-1/components/Echo/src/echo.c`
+- `hello-camkes-1/components/Client/src/client.c`
 
 Now when it comes to invoking the functions that were defined in the
 Interface specification
-(<https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4>),
+(`hello-camkes-1/interfaces/HelloSimple.camkes`),
 you must prefix the API function name with the name of the Interface
 instance that you are exposing over the particular connection.
 

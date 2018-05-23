@@ -35,16 +35,20 @@ they were covered by a previous tutorial in the series.
 
 ## Walkthrough
 ```
-# select the config for the first tutorial
-make pc99_hello-4_defconfig
+# create a build directory
+mkdir build_hello_4
+cd build_hello_4
+# initialise your build directory
+../init --plat pc99 --tut hello-4
 # build it
-make -j8
+ninja
 # run it in qemu
-make simulate
+./simulate
 ```
-Look for `TASK` in the `apps/hello-4` and `apps/hello-4-app`
+
+Look for `TASK` in the `hello-4/src` and `hello-4/hello-4-app`
 directory for each task. The first set of tasks are in
-`apps/hello-4/src/main.c` and the rest are in `apps/hello-4-app/src/main.c`
+`hello-4/src/main.c` and the rest are in `hello-4/hello-4-app/src/main.c`
 
 ### TASK 1
 

@@ -41,13 +41,25 @@ repo sync
 ### Do the tutorials
 
 
-The top of the source tree contains the kernel itself, and the actual tutorials are found in the subfolder: "`projects/sel4-tutorials`". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference.
+The top of the source tree contains the kernel itself, and the tutorials are found in the subfolder: "`projects/sel4-tutorials`". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference.
+When completing the tutorials you will be initialising and building your solutions with CMake. The general flow of completing a tutorial exercise involves:
+```
+# creating a build directory
+mkdir tutorial_build
+cd tutorial_build
+# initialising the build directory with a tutorial exercise
+../init --plat <platform> --tut <tutorial exercise>
+# building the tutorial exercise
+ninja
+```
+
+After initialising your build directory you will be setup with half-written source for you to complete. In your build directory you will find:
 
 - The half-written sample applications are in the
-        subfolder: `exercises/`. Your job is to fill these out.
+        subfolder: `<tutorial exercise>/`. `<tutorial exercise>` being the name of the exercise your are completing. Your job is to fill these out.
 - The completed sample applications showing the solutions to the
-        tutorial challenges are in the
-        subfolder: `projects/sel4-tutorials/solutions/`.
+        tutorial challenges can be retrieved by initialsing a build directory with the `--solution` argument
+        e.g. `../init --plat <platform> --tut <tutorial exercise> --solution`
 
 * The slide presentations to guide you through the tutorials are in the following files:
 
@@ -107,10 +119,10 @@ challenges once again. There are also completed sample solutions.
 
 More info:
 
-- The half-written sample applications are in this
-        folder: `apps/`.
-- The solutions can be found in this
-        subfolder: `projects/sel4-tutorials/solutions/`.
+- The half-written sample applications are created in your build directory, under the
+        folder: `<tutorial-exercise>/` (where `<tutorial exercise>` is the name of the exercise your are completing).
+- The solutions can be retrieved by initialising a build directory with the `--solution` argument
+        eg: `../init --plat <platform> --tut <tutorial exercise> --solution`.
 - The slide presentations to guide you through the tutorials are
         in this
         file: `projects/sel4-tutorials/docs/CAmkESTutorial.pdf`.

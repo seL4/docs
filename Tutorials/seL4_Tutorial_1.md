@@ -19,7 +19,7 @@ environment.
         runtime which they can usually ignore, and debug with it
         in mind.
 - Offhandedly hints to the reader that they should become
-        acquainted with the Kconfig/Kbuild build utilities.
+        acquainted with the CMake build utilities.
 
 ## Walkthrough
  Currently seL4 supports two major architectures: x86
@@ -31,33 +31,35 @@ zynq7000 for ARM. The reason is that these platforms are popular and
 well supported/maintained by seL4 and QEMU.
 
 The following instructions are for ia32/pc99/x86, but should be similar
-for zynq7000/ARM with just changing the config selection (e.g. make
-zynq7000_hello-1_defconfig)
+for zynq7000/ARM with just changing the config selection (../init --plat zynq7000 --tut hello-1)
 
 First try to build the code:
 ```
 # go to the top level directory
 cd sel4-tutorials-manifest/
-# select the config for the first tutorial
-make pc99_hello-1_defconfig
+# create a build directory
+mkdir build_hello_1
+cd build_hello_1
+# initialise your build directory for the first tutorial
+../init --plat pc99 --tut hello-1
 # build it
-make -j8
+ninja
 ```
 This will fail to build with the following
 error:
 ```
-/home/alyons/sel4-tutorials-source/stage/x86/pc99/lib/crt1.o: In function \_start_c':
-/home/alyons/sel4-tutorials-source/libs/libmuslc/crt/crt1.c:17: undefined reference to main'
+[4/20] Linking C executable projects/sel4-tutorials/tutorials/hello-1/hello-1
+FAILED: projects/sel4-tutorials/tutorials/hello-1/hello-1
+# ...
+/scratch/sel4_tutorials/exercises/build_hello_1/lib/crt1.o: In function `_start_c':
+crt1.c:(.text._start_c+0x1f): undefined reference to `main'
 collect2: error: ld returned 1 exit status
-/home/alyons/sel4-tutorials-source/stage/x86/pc99/common/common.mk:301:
-recipe for target 'hello-1.elf' failed make[1]: *** [hello-1.elf]
-Error 1 tools/common/project.mk:332: recipe for target 'hello-1' failed
-make:*** [hello-1] Error 2
+ninja: build stopped: subcommand failed.
 ```
 ### TASK 1 
 
-Your task is to fix the above error. Look for TASK in `apps/hello1` to find the code to
-modify.
+Your task is to fix the above error. Look for TASK in `hello-1/src` within your build directory
+to find the code to modify.
 
 Regardless of the programming language used, every binary that is
 created must have an entry point, which is the first instruction in the
@@ -82,8 +84,9 @@ Once you have fixed the problem, the build should succeed and you can
 run the example as follows:
 
 ```
-$ make -j8
-$ make simulate
+cd build_hello_1
+ninja
+./simulate
 ```
 
 If you've succeeded, qemu should output:
