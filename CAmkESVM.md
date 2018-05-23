@@ -4,22 +4,30 @@ toc: true
 
 # CAmkES x86 VM
  Get the dependencies for building CAmkES by following
-the instructions [here](/CAmkES/#build-dependencies).
+the instructions [here](HostDependencies#camkes-build-dependencies)
 
 ## Getting the Code
 ```bash
-repo init -u https://github.com/seL4/camkes-vm-manifest.git
+# Create a directory to store the project source
+mkdir camkes_vm
+cd camkes_vm
+repo init -u https://github.com/seL4/camkes-vm-examples-manifest.git
 repo sync
 ```
 
 ## Starting Point
-This repo contains many vm apps. We'll start from
-something basic, and add to it:
+This project provides some example CAmkES VM applications you can build. We'll start with a
+basic VM configuration, being the `minimal` application, and add to it. From the project root:
 
 ```bash
-make cma34cr_minimal_defconfig
-make
+# Create a directory to compile the project
+mkdir build_vm
+cd build_vm
+# Invoke CMake using the shell script wrapper 'init-build.sh', passing 'minimal' as the application we wish to compile
+../init-build.sh -DCAMKES_VM_APP=minimal
+ninja
 ```
+
 Running this should boot a
 single, very basic linux as a guest in the vm:
 
@@ -33,33 +41,22 @@ much else, and runs on a ramdisk (the actual hard drive isn't mounted).
 Login with the username `root` and the password `root`.
 
 ## Quick walk through the source code
- The top level CAmkES spec is in
-`apps/cma34cr_minimal/vm.camkes`:
-```c
-import <VM/vm.camkes>;
-import "cma34cr.camkes";
 
-assembly {
-    composition {
-        component VM vm;
-    }
-}
-```
-
-This is a very simple app, with a single vm, and nothing else. Each
-different vm app will have its own implementation of the `VM` component,
-where the guest environment is configured. For this app, the `VM`
-component is defined in `apps/cma34cr_minimal/cma34cr.camkes`:
+`minimal` is a very simple app, with a single vm, and nothing else. Each
+different vm app will have its own assembly implementation,
+where the guest environment is configured. For this app, the configuration
+is defined in `projects/vm-examples/minimal/minimal.camkes`:
 ```c
-#include <autoconf.h>
 #include <configurations/vm.h>
+
+#define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y \
+i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/mem"
 
 component Init0 {
     VM_INIT_DEF()
 }
 
-component VM {
-
+assembly {
   composition {
       VM_COMPOSITION_DEF()
       VM_PER_VM_COMP_DEF(0)
@@ -72,9 +69,9 @@ component VM {
       vm0.heap_size = 0x2000000;
       vm0.guest_ram_mb = 128;
       vm0.kernel_cmdline = VM_GUEST_CMDLINE;
-      vm0.kernel_image = KERNEL_IMAGE;
-      vm0.kernel_relocs = KERNEL_IMAGE;
-      vm0.initrd_image = ROOTFS;
+      vm0.kernel_image = "bzimage";
+      vm0.kernel_relocs = "bzimage";
+      vm0.initrd_image = "rootfs.cpio";
       vm0.iospace_domain = 0x0f;
   }
 
@@ -96,38 +93,63 @@ composition section by the `VM_PER_VM_COMP_DEF` macro with instance
 names `vmI`. The `vm0` component instance being configured above is an
 instance of `Init0`. The C source code for`InitI` components is in
 `projects/vm/components/Init/src`. This source will be used for components
-named `InitI` for *I* in `0..VM_NUM_VM - 1`, where `VM_NUM_VM` is
-defined in the app's Makefile (`apps/cma34cr_minimal/Makefile`).
+named `InitI` for *I* in `0..VM_NUM_VM - 1`. 
 
-The values of `VM_GUEST_CMDLINE`, `KERNEL_IMAGE` and `ROOTFS` are in
-`apps/cma34cr_minimal/configurations/cma34cr_minimal.h`. They are all
-strings, specifying the guest linux boot arguments, the name of the
-guest linux kernel image file, and the name of the guest linux initrd
-file (root filesystem to use during system initialization).
-`KERNEL_IMAGE` and `ROOTFS` refer to file names. These are the names of
-files in a CPIO archive that gets created by the build system, and
-linked into the VMM. The VMM uses the `KERNEL_IMAGE` and `ROOTFS` names to
-find the appropriate files in this archive when preparing to boot the
-guest.
+The values of `vm0.kernel_cmdline`, `vm0.kernel_image` and `vm0.initrd_image` are all
+strings specifying the guest linux boot arguments, the name of the guest linux kernel image file,
+and the name of the guest linux initrd file (root filesystem to use during system initialization).
+The kernel command-line is defined in the `VM_GUEST_CMDLINE` macro. The kernel image
+and rootfs names are defined in the applications CMakeLists file, located at `projects/vm-examples/minimal/CMakeLists.txt`.
+These are the names of files in a CPIO archive that gets created by the build system, and
+linked into the VMM. In our `minimal` app configuration the VMM uses
+the "bzimage" and "rootfs.cpio" names to find the appropriate files
+in this archive when preparing to boot the guest.
 
-The local files used to construct the CPIO archive are specified in the
-app's `Makefile`, located at `apps/cma34cr_minimal/Makefile`:
-```make
+To see how we define our `Init` components and the CPIO archive within the build system we can
+look at the app's `CMakeList.txt`, :
+```cmake
 # ...
-KERNEL_FILENAME := bzimage
-ROOTFS_FILENAME := rootfs.cpio
-# ...
-${STAGE_DIR}/${KERNEL_FILENAME}: $(SOURCE_DIR)/linux/${KERNEL_FILENAME}
-# ...
-${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/linux/${ROOTFS_FILENAME}
+project(minimal)
+
+# Include CAmkES VM helper functions
+include("../../vm/camkes_vm_helpers.cmake")
+
+# Define kernel config options
+set(KernelX86Sel4Arch ia32 CACHE STRING "" FORCE)
+set(KernelMaxNumNodes 1 CACHE STRING "" FORCE)
+
+# Declare VM component: Init0
+DeclareCAmkESVM(Init0)
+
+# Get Default Linux VM files
+GetDefaultLinuxKernelFile(kernel_file)
+GetDefaultLinuxRootfsFile(rootfs_file)
+
+# Decompress Linux Kernel image and add to file server
+DecompressLinuxKernel(extract_linux_kernel decompressed_kernel ${kernel_file})
+AddToFileServer("bzimage" ${decompressed_kernel} DEPENDS extract_linux_kernel)
+
+# Add rootfs images into file server
+AddToFileServer("rootfs.cpio" ${rootfs_file})
 # ...
 ```
 
-Both these rules refer to the "linux" directory, located at
-`projects/vm/linux`. It contains some tools for building new linux kernel
+To access a series of helper functions for defining our CAmkES VM project we need to
+include the `projects/vm/camkes_vm_helpers.cmake` file.
+This firstly enables us to call `DeclareCAmkESVM(Init0)` to define our `Init0` VM component.
+With each Init component we define in the CAmkES configuration we need to correspondingly define
+the component with the `DeclareCAmkESVM` function.
+
+To find a kernel and rootfs image we use the `GetDefaultLinuxKernelFile` helper
+to retrieve the location of the vm images provided in the `projects/vm` folder.
+This project contains some tools for building new linux kernel
 and root filesystem images, as well as the images that these tools
 produce. A fresh checkout of this project will contain some pre-build
-images (`bzimage` and `rootfs.cpio`), to speed up build times.
+images (`bzimage` and `rootfs.cpio`), to speed up build times. We call the
+`DecompressLinuxKernel` helper to extract the vmlinux image. Lastly we add the
+decompressed kernel image and rootfs to the fileserver through the `AddToFileServer` helper. These are
+placed in the file server under the names we wish to access them
+by in the archive. In our case this is "bzimage" and "rootfs.cpio".
 
 ## Adding to the guest
  In the simple buildroot guest image, the
@@ -135,7 +157,7 @@ initrd (rootfs.cpio) is also the filesystem you get access to after
 logging in. To make new programs available to the guest, add them to the
 rootfs.cpio archive. Similarly, to make new kernel modules available to
 the guest, they must be added to the rootfs.cpio archive also. The
-"linux" directory contains a tool called "build-rootfs", which is
+`projects/vm/linux` directory contains a tool called "build-rootfs", which is
 unrelated to the unfortunately similarly-named buildroot, which
 generates a new rootfs.cpio archive based on a starting point
 (rootfs-bare.cpio), and a collection of programs and modules. It also
@@ -213,7 +235,8 @@ Here's a summary of what the build-rootfs tool does:
 5.  Rebuild the app:
 
     ```
-    make
+    cd build_vm
+    ninja
     ```
 6.  Run the app (use `root` as username and password):
 
@@ -309,8 +332,8 @@ We're going to add a new kernel module that lets us poke the vmm.
     ```
     cd projects/vm/linux/
     ./build-rootfs
-    cd ../../..
-    make
+    cd ../../../build_vm
+    ninja
     ```
 
 6.  Run the app:
@@ -449,7 +472,7 @@ an event to the guest process so the guest knows it's safe to send a new
 string.
 
 We'll start on the CAmkES side. Edit
-`apps/cma34cr_minimal/cma34cr.camkes`, adding the following interfaces to
+`projects/vm-examples/minimal/minimal.camkes`, adding the following interfaces to
 the Init0 component definition:
 ```c
 component Init0 {
@@ -468,7 +491,7 @@ the guest linux. The mutex is used to protect access to shared state
 between the VMM and guest.
 
 Now, we'll define the print server component. Add the following to
-`apps/cma34cr_minimal/cma34cr.camkes`:
+`projects/vm-examples/minimal/minimal.camkes`:
 ```c
 component PrintServer {
   control;
@@ -481,7 +504,7 @@ component PrintServer {
 We'll get around to actually implementing this soon. First, let's
 instantiate the print server and connect it to the VMM. Add the
 following to the composition section in
-apps/cma34cr_minimal/cma34cr.camkes:
+`projects/vm-examples/minimal/minimal.camkes`:
 ```c
 component VM {
 
@@ -512,7 +535,7 @@ which requires caps to the physical memory being mapped in.
 Interfaces connected with [seL4SharedDataWithCaps](/seL4SharedDataWithCaps) must be
 configured with an integer specifying the id of the dataport, and the
 size of the dataport. Add the following to the configuration section in
-apps/cma34cr_minimal/cma34cr.camkes:
+`projects/vm-examples/minimal/minimal.camkes`
 ```c
 configuration {
     VM_CONFIGURATION_DEF()
@@ -522,9 +545,9 @@ configuration {
     vm0.heap_size = 0x10000;
     vm0.guest_ram_mb = 128;
     vm0.kernel_cmdline = VM_GUEST_CMDLINE;
-    vm0.kernel_image = KERNEL_IMAGE;
-    vm0.kernel_relocs = KERNEL_IMAGE;
-    vm0.initrd_image = ROOTFS;
+    vm0.kernel_image = "bzimage";
+    vm0.kernel_relocs = "bzimage";
+    vm0.initrd_image = "rootfs.cpio";
     vm0.iospace_domain = 0x0f;
 
     // Add the following 2 lines:
@@ -534,7 +557,7 @@ configuration {
 ```
 
 Now let's implement our print server. Create a file
-apps/cma34cr_minimal/print_server.c:
+`projects/vm-examples/minimal/components/print_server.c`
 ```c
 #include <camkes.h>
 #include <stdio.h>
@@ -564,7 +587,7 @@ We need to create another c file that tells the VMM about our cross vm connectio
 - cross_vm_emits_events_init
 - cross_vm_consumes_events_init
 
-Create a file `apps/cma34cr_minimal/cross_vm.c`:
+Create a file `projects/vm-examples/minimal/src/cross_vm.c`:
 ```c
 #include <sel4/sel4.h>
 #include <camkes.h>
@@ -619,30 +642,27 @@ int cross_vm_consumes_events_init(vmm_t *vmm, vspace_t *vspace, seL4_Word irq_ba
 }
 ```
 
-To make this build, we need to symlink the common source directory for
-the camkes vm into the app's directory:
-```
-ln -s ../../common apps/cma34cr_minimal
-```
+To make this build we need to update our applications CMakeLists file. Make the following changes
+in `projects/vm-examples/minimal/CMakeLists.txt`
 
-And make the following change to `apps/cma34cr_minimal/Makefile`:
+```cmake
+# ...
+# Retrieve Init0 cross vm src files
+file(GLOB init0_extra src/*.c)
+# Declare VM component: Init0
+DeclareCAmkESVM(Init0
+    EXTRA_SOURCES ${init0_extra}
+    EXTRA_LIBS crossvm
+)
+
+# Declare the CAmkES PrintServer component
+DeclareCAmkESComponent(PrintServer SOURCES components/print_server.c)
+# ...
 ```
-...
-include PCIConfigIO/PCIConfigIO.mk
-include FileServer/FileServer.mk
-include Init/Init.mk
+Here we extend our definition of the Init component with our cross_vm connector source and the crossvm
+library. We additionally define our new CAmkES component `PrintServer`.
 
-# Add the following:
-Init0_CFILES += $(wildcard $(SOURCE_DIR)/cross_vm.c) \
-                $(wildcard $(SOURCE_DIR)/common/src/*.c)
-Init0_HFILES += $(wildcard $(SOURCE_DIR)/common/include/*.h) \
-                $(wildcard $(SOURCE_DIR)/common/shared_include/cross_vm_shared/*.h)
-
-PrintServer_CFILES += $(SOURCE_DIR)/print_server.c
-...
-```
-
-The app should now build when you run `make`, but we're not done yet. Now
+The app should now build but we're not done yet. Now
 we'll make these interfaces available to the guest linux. Edit
 `projects/vm/linux/camkes_init`. It's a shell script that is executed as
 linux is initialized. Currently it should look like:
@@ -680,7 +700,7 @@ emits_event_init /dev/camkes_do_print
 
 Each of these commands creates device nodes associated with a particular
 linux kernel module supporting cross vm communication. Each command
-takes a list of device nodes to create, which must correpond to the ids
+takes a list of device nodes to create, which must correspond to the ids
 assigned to interfaces in the `cma34cr.camkes` and `cross_vm.c`. The
 `dataport_init` command must also be passed the size of each dataport.
 
@@ -815,20 +835,23 @@ depmod: WARNING: could not open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/m
 The kernel we'll be using has all the necessary drivers built in, so
 feel free to ignore those warnings and errors. You should now have a
 file called rootfs.cpio on the cma34cr. Transfer that file to your dev
-machine, and put it in `apps/cma34cr_minimal`. Now we need to tell the
+machine, and put it in `projects/vm/minimal`. Now we need to tell the
 build system to take that rootfs image rather than the default buildroot
-one. Edit apps/cma34cr_minimal/Makefile. Change this line:
-```make
-${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/linux/${ROOTFS_FILENAME}
+one. Edit `projects/vm-examples/minimal/CMakeLists.txt`. Change this line:
+
+```cmake
+AddToFileServer("rootfs.cpio" ${rootfs_file})
 ```
 to
-```make
-${STAGE_DIR}/${ROOTFS_FILENAME}: ${SOURCE_DIR}/${ROOTFS_FILENAME}
+```cmake
+AddToFileServer("rootfs.cpio" <ROOTFS_FILENAME>)
 ```
+where `<ROOTFS_FILENAME>` is replaced with the filename of the rootfs file you 
+added in `projects/vm/minimal`.
 
 Since we'll be using a real hard drive, we need to change the boot
 command line we give to the guest linux. Open
-`apps/cma34cr_minimal/configurations/cma34cr_minimal.h`, and change the
+`projects/vm-examples/minimal/minimal.camkes`, and change the
 definition of `VM_GUEST_CMDLINE` to:
 ```
 #define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/sda1 rdinit=/init 2"
@@ -860,7 +883,7 @@ We're going to give the guest passthrough access to the sata controller.
 The sata controller will be in one of two modes: AHCI or IDE. The mode
 can be set when configuring BIOS. By default it should be AHCI. The next
 part has some minor differences depending on the mode. I'll show both.
-Open `apps/cma34cr_minimal/cma34cr.camkes` and add the following to the
+Open `projects/vm-examples/minimal/minimal.camkes` and add the following to the
 configuration section:
 
 For AHCI:
@@ -958,7 +981,7 @@ $ ip addr
 An easy way to give the guest network access is to give it passthrough
 access to the ethernet controller. This is done much in the same way as
 enabling passthrough access to the sata controller. In the configuration
-section in `apps/cma34cr_minimal/cma34cr.camkes`, add to the list of io
+section in `projects/vm-examples/minimal/minimal.camkes`, add to the list of io
 ports, pci devices and irqs to pass through:
 ```c
 vm0_config.ioports = [
