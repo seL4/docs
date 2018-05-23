@@ -2,6 +2,6 @@
 
 
 See the
-[README.md](https://github.com/seL4/camkes-vm/blob/master/apps/vm/cma34cr_centos/README.md)
-in the [CAmkES VM
-repository](https://github.com/seL4/camkes-vm) for details
+[README.md](https://github.com/seL4/camkes-vm-examples/tree/master/cma34cr_centos)
+in the [CAmkES VM Examples
+repository](https://github.com/seL4/camkes-vm-examples) for details
