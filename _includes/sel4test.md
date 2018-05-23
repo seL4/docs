@@ -8,11 +8,24 @@ Checkout the sel4test project using repo as per [seL4Test](/Testing)
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 mkdir cbuild
-../init-build -DPLATFORM={{ page.cmake_plat }} [-DAARCH32|-DAARCH64] [-DRELEASE=<0|1>] [-DSIMULATION=<0|1>]
+../init-build -DPLATFORM={{ page.cmake_plat }} {{page.xcompiler_arg}}
 # The default cmake wrapper sets up a default configuration for the target platform.
 # To change individual settings, run `ccmake` and change the configuration
 # parameters to suit your needs.
 ninja
+
+{%- if page.simulation_target %}
+# If your target binaries can be executed in an emulator/simulator, and if
+# our build system happens to support that target emulator, then this script
+# might work for you:
+./simulate
+{%- endif %}
+
 ```
+
+{%- if page.simulation_target %}
+If you plan to use the ./simulate script, please be sure to add the
+`-DSIMULATION=1` argument when running cmake.
+{%- endif %}
 
 Generated binaries can be found in the `images/` directory.
