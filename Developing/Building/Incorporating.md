@@ -203,3 +203,38 @@ Stepping through line by line
 
 For more details of the different `config_*` helpers read the comments on the functions in `kernel/tools/helpers.cmake`
 
+### Helper functions
+
+Several CMake functions exist for reuse in seL4 projects.
+
+#### Kernel provided helpers
+
+Helper functions provided by the kernel scripts can all be found in `tools/helpers.cmake` in the seL4 repo.
+Most helper functions are only useful for the kernel build itself, but all of the config functions mentioned
+in the section above are defined here.
+
+#### cmake-tool provided helpers
+
+These helper functions are provided for user-level projects to use. They are provided in `common.cmake` and
+all of the files in `helpers/`. Notable functions are:
+- `DeclareRootserver(rootserver_target)`: Declares a CMake executable, `rootserver_target`, as the rootserver for
+the system. It can only be called once and will:
+  - Change build flags for the target
+  - Create necessary extra targets for setting up any required chain loading
+  - Create the `rootserver_image` target which will create the final binary images in `images`
+- `MakeCPIO`: Declares rules to create a linkable CPIO archive from a list of input files.
+- `GenerateSimulateScript`: Creates a target called `simulate_gen` which will generate a `./simulate` shell script
+  in your build directory for simulating your project on Qemu if the target platform is supported. An application is
+  responsible for ensuring that the system configuration is simulatable if it uses this function. Other functions are
+  provided such as `SetSimulationScriptProperty` to allow the application's CMake scripts to customise the simulation
+  command generated.
+- `ApplyCommonSimulationSettings`: Will try and change the kernel system configuration to disable features that aren't
+  simulatable.
+- `ApplyCommonReleaseVerificationSettings(release, verification)`: Will setup flags for different combinations of
+  'release' (performance optimized builds) and 'verification' (verification friendly features) builds.
+
+#### Other provided helpers
+
+Projects such as CAmkes, the Camkes x86 VMM, and Rumprun on seL4 will sometimes provide their own helper functions
+to allow applications to configure themselves. Generally helper scripts will be called some variant of `helpers.cmake`.
+The intention is that these files are included in any CMake scripts that want to use them.
