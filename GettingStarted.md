@@ -119,7 +119,7 @@ new features.
 ## Project Layout
 
 
-See [Build System Anatomy](BuildSystemAnatomy) for details of
+See [Building](/Developing/Building) for details of
 project layouts and the seL4 build system.
 
 Configuration files in the configs directory are named by target

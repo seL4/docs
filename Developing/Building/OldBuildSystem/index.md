@@ -2,7 +2,9 @@
 toc: true
 ---
 
-# Contents
+# Our old deprecated Build System
+
+_For the new build system see [Building](/Developing/Building)._
 
 ## Anatomy of the Build System
  The following files are the components
