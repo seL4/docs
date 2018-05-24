@@ -6,7 +6,7 @@ toc: true
 [sel4test](https://github.com/seL4/sel4test-manifest) is a test suite for seL4.
 
 First make sure you have
-[set up your machine](/GettingStarted#setting-up-your-machine).
+[set up your machine](/HostDependencies#sel4-build-dependencies).
 
 ## Getting the Code 
 
@@ -15,8 +15,8 @@ mkdir sel4test
 cd sel4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
-ls 
-# kernel/ libs/ projects/ tools/ apps configs Kbuild Kconfig Makefile
+ls
+# apps/ CMakeLists.txt init-build.sh kernel libs/ projects/ tools/
 ```
 
 This clones the seL4 kernel, the test suite, some libraries used by the
@@ -35,127 +35,93 @@ In this example we clone version {{site.sel4_master}} of the kernel. For more in
 numbers, see [ReleaseProcess](/ReleaseProcess#version-numbers).
 
 ## Build it
-### Configurations
+### Configuration
 
-Default make configurations are provided for a number of platforms:
-```
-$ ls configs 
-arndale_debug_xml_defconfig              inforce_release_xml_defconfig
-arndale_release_xml_defconfig            kzm_debug_xml_clang_defconfig
-bbone_debug_xml_defconfig                kzm_debug_xml_defconfig
-bbone_release_xml_defconfig              kzm_debug_xml_goanna_defconfig
-beagle_debug_xml_defconfig               kzm_release_xml_clang_defconfig
-beagle_release_xml_defconfig             kzm_release_xml_defconfig
-beagle_simulation_debug_xml_defconfig    kzm_release_xml_goanna_defconfig
-beagle_simulation_release_xml_defconfig  kzm_simulation_debug_xml_defconfig
-goanna-arm-gcc.profile                   kzm_simulation_release_xml_defconfig
-...
-```
+The CMake build environment supports a number of platforms. For information regarding our supported hardware platforms and their corresponding CMake
+configuration arguments, see the [Supported Platforms](/Hardware) page. Platforms that we test and are in-regression are listed as being maintained by Data61.
 
-To use a specific config:
+To start a build with a specific configuration we can create a new subdirectory from the project root
+and initialise it with CMake:
 
 ```
-make ia32_simulation_release_xml_defconfig
+# create build directory
+mkdir build
+cd build
+# configure build directory
+../init-build.sh -DPLATFORM=<platform-name> -DRELEASE=[TRUE|FALSE] -DSIMULATION=[TRUE|FALSE]
+```
+This configures your build directory with the necessary CMake configuration for your chosen platform.
+
+You can look at and edit the CMake configuration options from your build directory using
+
+```
+ccmake .
 ```
 
-This copies `configs/ia32_simulation_release_xml_defconfig` to
-`./.config`, and sets up various header files.
-
-You can look at the configuration options using
-
-```
-make menuconfig
-```
-
-Alternatively you can use any text editor to change `./.config`; if
-you change anything you need to rebuild header files with
-`make oldconfig`
-. It's advisable also to make clean to clear out anything
-already built — the build system does not track as many dependencies as
-it ought to. 
+It is also important to note that meta options such as `PLATFORM` and `SIMULATION` will override various settings in the
+seL4test build system in order to maintain the meta configuration. This can however be disabled if you first
+enable the `Sel4testAllowSettingsOverride` variable.
 
 ### Useful configuration options
-For cross compilation (targeting ARM), you can set the cross compiler triple. This will
-typically be **arm-linux-gnueabi-** or **arm-none-eabi-**. Do
-`make menuconfig` and look for **toolchain-options**
+For an overview of the CMake build system and further configuration options, including configuring for
+cross compilation (targeting ARM), see [seL4's CMake Build System](/Developing/Building/Using).
 
-Some of the default configurations specify a particular x86 compiler. It
-is usually safe to set the triple to the empty string when building for
-x86, if you have a multilib gcc installed.
-
-Fiddling with most of the other configuration options will lead to
-systems that will either not compile, or not run.
 ## Building
-When you've configured the system, you can build by doing
+When you've configured the system, you can build it by running:
 
 ```
-make -j libmuslc && make
+ninja
 ```
-
-Currently parallel builds do not work for the whole build, but it is
-worth using for the C library. The build system does however support
-ccache if you have it installed.
-
-A more comprehensive overview of the build system is available at
-[Building](/Developing/Building/)
 
 ## Running it
 
+### IA32 Example
+We will now build seL4test for ia32, to run on the QEMU simulator.
 
-### IA32
- We will now build seL4test for ia32, to run on the QEMU
-simulator.
+Passing `-DSIMULATION=TRUE` to CMake produces a script to simulate our release ia32 build. The following commands
+will configure our CMake build:
 
-The makefile provides a target to simulate ia32. Running the following
-command will run qemu and point it towards the image we just built.
 ```bash
-make ia32_simulation_release_xml_defconfig
-make -j libmuslc && make
-make simulate-ia32
+mkdir ia32_build
+cd ia32_build
+../init-build.sh -DPLATFORM=ia32 -DRELEASE=TRUE -DSIMULATION=TRUE
 ```
 
-To exit qemu after the All is well in the universe message that
-indicates the test suite has passed, type `control-a x`.
-
-### ARM - kzm11
-
-
-Let's build the test suite for kzm_simulation_debug_xml_defconfig:
-```bash
-make kzm_simulation_debug_xml_defconfig
-make
-ls images
-# sel4test-driver-image-arm-imx31
+Build it:
+```
+ninja
 ```
 
-Run it in qemu:
+Executing the following commands will run qemu and point it towards the image we just built:
 ```
-qemu-system-arm -nographic -M kzm -kernel images/sel4test-driver-image-arm-imx31
-ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
-  paddr=[82000000..8223001f]
-ELF-loading image 'kernel'
-  paddr=[80000000..80035fff]
-  vaddr=[f0000000..f0035fff]
-  virt_entry=f0000000
-ELF-loading image 'sel4test-driver'
+./simulate
 ...
-<testsuite>
-        <testcase classname="sel4test" name="TEST_BIND0001">
+ELF-loading userland images from boot modules:
+size=0x1dd000 v_entry=0x806716f v_start=0x8048000 v_end=0x8225000 p_start=0x21f000 p_end=0x3fc000
+Moving loaded userland images to final location: from=0x21f000 to=0x12e000 size=0x1dd000
+Starting node #0 with APIC ID 0
+Booting all finished, dropped to user space
+...
+Starting test 18: BIND0001
 Running test BIND0001 (Test that a bound tcb waiting on a sync endpoint receives normal sync ipc and notification notifications.)
 Test BIND0001 passed
-                <system-out> TEST_BIND0001
-</system-out>
-        </testcase>
+Starting test 19: BIND0002
+Running test BIND0002 (Test that a bound tcb waiting on its bound notification recieves notifications)
+Test BIND0002 passed
+Starting test 20: BIND0003
+Running test BIND0003 (Test IPC ordering 1) bound tcb waits on bound notification 2, true) another tcb sends a message)
+Test BIND0003 passed
 ...
 ```
+To exit qemu, use `Ctrl-AX`. The text string` All is well in the universe` indicates a successful build.
 
-The test suite prints out
-JUnit-style XML which can be parsed by various tools.
+We can further configure the test suite build to print out JUnit-style XML. Thus enabling the output to be parsed by various tools.
+To do so, edit the build settings through `ccmake`, enabling the `Sel4testAllowSettingsOverride` and `LibSel4TestPrintXML` variables.
 
 ## Testing a Customised Kernel
 
-Suppose you've got seL4 checked out in `\~/projects/seL4`, and sel4test in
-`\~/tests/sel4test`, and you have been making changes on a feature branch of seL4 named
+Suppose you've got seL4 checked out in `~/projects/seL4`, and sel4test in
+`~/tests/sel4test`, and you have been making changes on a feature branch of seL4 named
 `awesome-new-feature`. You want to test if your modified kernel
 still passes all the tests in sel4test.
 
@@ -171,6 +137,6 @@ Now the kernel in sel4test has been changed to your custom kernel.
 Now just build and run the test suite as above.
 
 ## Running a subset of the tests
-You can use a regular expression to select a subset of
-tests. This can be set using Kconfig, or the build shortcut
-`make select-test TEST=SCHED.*`. By default the test suite runs all tests.
+You can use a regular expression to select a subset of the
+tests. This can be configured by setting the CMake variable `LibSel4TestPrinterRegex`. We can modify this
+variable by running `ccmake .` in our build directory. By default the test suite runs all tests.
