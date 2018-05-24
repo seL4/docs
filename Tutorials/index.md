@@ -130,4 +130,4 @@ More info:
 ## What next?
 
 
-You can try building and running [seL4test](../Testing)
+You can try building and running [seL4test](../seL4Test)

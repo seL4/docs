@@ -12,7 +12,7 @@ to find pages that have moved if it's not obvious whre they are from the index h
 - [seL4 libraries](SeL4Libraries.md)
 - [CAmkES](CAmkES)
 - [CapDL](CapDL.md)
-- [Testing](Testing.md)
+- [seL4Test](seL4Test.md)
 - [Debugging guide](DebuggingGuide.md)
 - [Benchmarking guide](BenchmarkingGuide.md)
 - [Virtualisation on seL4](CAmkESVM.md)

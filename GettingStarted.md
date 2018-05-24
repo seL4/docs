@@ -112,7 +112,7 @@ pull requests to seL4 which are non-trivial or related only to
 documentation, should come with a matching pull request and new test (if
 applicable) to the seL4Test repository as well.
 
-[seL4test](Testing) is a comprehensive unit and functional testing
+[seL4test](seL4Test) is a comprehensive unit and functional testing
 suite for seL4 and can be useful when porting to new platforms or adding
 new features.
 

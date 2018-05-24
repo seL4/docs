@@ -3,7 +3,7 @@ This include generates commands for checking out and building sel4test for a par
 The platform defines what config it uses, and if it specifies a simulation target, then a simulation command will be added.
 {% endcomment %}
 
-Checkout the sel4test project using repo as per [seL4Test](/Testing)
+Checkout the sel4test project using repo as per [seL4Test](/seL4Test)
 ```bash
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
