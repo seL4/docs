@@ -67,6 +67,8 @@ pip install --user sel4-deps
 
 The primary way of obtaining and managing seL4 project source is through the use of Google's repo tool. To get repo, follow the instructions described in the section “Installing Repo” [here](http://source.android.com/source/downloading.html#installing-repo).
 
+See the [RepoCheatsheet](/RepoCheatsheet) page for a quick explanation of how we use Repo.
+
 ## CAmkES Build Dependencies
 
 To build a CAmkES based project on seL4, additional dependencies need to be installed on your host machine. Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools. The following instructions cover the CAmkES build dependencies for Ubuntu/Debian. Please ensure you have installed the dependencies listed in sections [sel4 Build Dependencies](#sel4-build-dependencies) and [Get Google's Repo tool](#get-googles-repo-tool) prior to building a CAmkES project.
