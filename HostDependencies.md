@@ -17,7 +17,9 @@ To establish a usable development environment it is important to install your di
 
 ####  Ubuntu
 
-> *The following instructions cover the build dependencies tested on [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) LTS. As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.*
+> *The following instructions cover the build dependencies tested on [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) LTS. Note that earlier versions of Ubuntu (e.g. 16.04) may not be sufficient for building as some default development packages are
+stuck at older versions (e.g CMake 3.5.1, GCC 5.4 for 16.04).
+As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.*
 
 The basic build package on Ubuntu is the `build-essential` package. To install run:
 
