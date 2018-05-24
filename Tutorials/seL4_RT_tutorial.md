@@ -4,6 +4,8 @@ toc: true
 
 # seL4 5.2.0-MCS Tutorial
 
+> *This tutorial is currently out of date. There may be issues when trying to
+compile the tutorial exercises. We aim to update this tutorial at a later date*
 
 This tutorial demonstrates how to use the real-time features of the MCS
 kernel API, it covers enough such that if you have already done the seL4
