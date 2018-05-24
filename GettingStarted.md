@@ -43,7 +43,7 @@ We modeled the seL4 development process on the
 describes which repositories to use, and how to lay them out to make a
 buildable system.
 
-The available projects so far are:
+Some available projects so far are described below, but for a full list see a [list of released projects(https://docs.sel4.systems/ReleaseProcess#versioned-manifests):
 
 - [verification](https://github.com/seL4/verification-manifest),
       the seL4 proofs.
@@ -52,14 +52,9 @@ The available projects so far are:
 - [CAmkES](https://github.com/seL4/camkes-manifest), a
       component architecture for embedded systems based on seL4. See the
       CAmkES pages for more documentation about CAmkES.
-- [VMM](https://github.com/seL4/camkes-vm-manifest) a
+- [VMM](https://github.com/seL4/camkes-vm-examples-manifest) a
       component-based virtual machine monitor for ia32 platforms using
       Intel VT-X and VT-D extensions.
-- [RefOS](https://github.com/seL4/refos-manifest), a
-      reference example of how one might build a multi-server operating
-      system on top of seL4. It was built as a student project.
-
-Other projects may be added later.
 
 ## Supported Target Platforms
 
