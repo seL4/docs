@@ -3,45 +3,32 @@ toc: true
 ---
 
 # Getting Started
- In general, if you're just getting started, you want
-to dive into the seL4 tutorials, then the CAmkES tutorials, then the
-seL4 Test suite. There's a section on this page for each.
 
-## Aims
- This page seeks to comprehensively assist new seL4 developers
-or interested parties to easily obtain the correct tools to duplicate
-the internal seL4 development environment, successfully build the seL4
-tutorials, and successfully follow the seL4 tutorials.
+This page will lead you through the steps required to setup your development environment to be
+able to work with seL4 and supported userlevel environments.
 
-It's introductory – after you've followed these steps, you'll be at the
-crest point where you can confidently begin reading the seL4 API kernel
-manual with a **functional** copy of the kernel on your own machine.
-From that point, the guidance for what you should do with the functional
-source copy that you have will come from your own intuition, interest
-and hopefully, inspiration that seL4 gives you.
 
-## Code
+## Sources
  All seL4 code and proofs are available on GitHub, at
 <https://github.com/seL4>, under standard
 [open-source licenses](http://sel4.systems/Info/GettingStarted/license.pml).
 
-There are several repositories; the most interesting ones are the
+There are [several repositories](/MaintainedRepositories).
+The most interesting ones are the
 project repositories (whose names end in -manifest) and these two:
 
 - [l4v](https://github.com/seL4/l4v) the seL4 proofs
 - [seL4](https://github.com/seL4/seL4) the seL4 kernel
 
-## Projects
-
-
 The seL4 kernel is usually built as part of project. Each project has a
-README.md associated with it that gives more information. The
-information on this page is common to all of them.
+README.md associated with it that gives more information.
 
-We modeled the seL4 development process on the
-[Android development process](https://source.android.com/source/developing.html). Each project consist of an XML file that
-describes which repositories to use, and how to lay them out to make a
-buildable system.
+As projects are a collection of several git repositories, we use
+[Android's Repo tool](http://source.android.com/source/downloading.html#installing-repo).
+Each project consist of an XML file that describes which repositories
+to use, and how to lay them out to make a buildable system.
+See the [RepoCheatsheet](/RepoCheatsheet) page for a quick
+explanation of how we use Repo and some common commands.
 
 Some available projects so far are described below, but for a full list see a [list of released projects](https://docs.sel4.systems/ReleaseProcess#versioned-manifests):
 
@@ -49,15 +36,16 @@ Some available projects so far are described below, but for a full list see a [l
       the seL4 proofs.
 - [seL4test](https://github.com/seL4/sel4test-manifest), a
       test suite for seL4, including a Library OS layer.
+- [seL4bench](https://github.com/seL4/sel4bench-manifest), a
+      microbenchmarking suite for seL4.
 - [CAmkES](https://github.com/seL4/camkes-manifest), a
       component architecture for embedded systems based on seL4. See the
       CAmkES pages for more documentation about CAmkES.
-- [VMM](https://github.com/seL4/camkes-vm-examples-manifest) a
+- [x86 Camkes VMM](https://github.com/seL4/camkes-vm-examples-manifest) a
       component-based virtual machine monitor for ia32 platforms using
       Intel VT-X and VT-D extensions.
 
 ## Supported Target Platforms
-
 
 Read the [Hardware](Hardware) pages to see a list of supported platforms,
 and special instructions for particular hardware platforms.
@@ -67,89 +55,98 @@ and special instructions for particular hardware platforms.
 Read the [Host Dependencies](HostDependencies) page to find instructions on how to set up
 your host machine to build seL4 and its various related projects.
 
-#### Using Repo to fetch an seL4 project and its subprojects
- Choose
-a project to start with. As an example, we'll use sel4test.
+## Build system
 
-- When fetching a project, look for the GIT repository from Github,
-      whose title has "-manifest" appended to it. So instead of fetching
-      the "sel4-tutorials" GIT repository on Github, we'll fetch the
-      "sel4-tutorials-manifest" repository. The difference is that the
-      "-manifest" repository is meant to tell Repo how to fetch the
-      subprojects and set up the source tree.
-- First create a directory for Repo to work in, then enter it and
-      initialise it using Repo:
+We use a collection of CMake scripts to handle system configuraiton and for building final binaries.
+More information on the build system can be found [here](/Developing/Building). 
 
-  ```bash
-  mkdir seL4test 
-  cd seL4test
-  repo init -u https://github.com/seL4/sel4test-manifest.git
-  ```
+#### Fetching, Configuring and Building seL4test
 
-  To get the actual project and subproject source, you'll then need to use repo sync, which
-  will then clone and checkout the project and all the required
-  subprojects.
+To build a project, you need to:
+- check out the sources using Repo
+- configure a target build using CMake
+- build the project using Ninja.
 
-  ``` 
-  repo sync
-  ```
+As an example, we'll use sel4test as it is a good way to verify your host setup.
 
-## Start with the tutorials
+We use repo to check sel4test out from GitHub. Its manifest is located in the `sel4test-manifest` repository.
+```sh
+mkdir seL4test 
+cd seL4test
+repo init -u https://github.com/seL4/sel4test-manifest.git
+repo sync
+```
 
+We will configure a x86_64 simulation target to be run by Qemu:
+```sh
+mkdir build-x86
+cd build-x86
+../init.sh -DPLATFORM=x86_64 -DSIMULATION=TRUE
+ninja
+```
+The target configurations available for each project are potentially different depending on what the project supports.
+[Building/Using](/Developing/Building/Using) describes how projects can generally be configured.
 
-The seL4 and CAmkES [Tutorials](Tutorials) are an excellent, holistic
-introduction to the design of seL4, and also to preparing to develop for
-SEL4, and they are also used internally to train new seL4 developers.
-You are strongly encouraged to complete the tutorials if you are new to
-SEL4: they will quickly bring you up to speed and ready to practically
-contribute.
+Now the images have been built they are available in `build-x86/images`.  There is also a `build-x86/simulation`
+script that will run Qemu with the correct arguments to hopefully pass all the tests.
+```sh
+./simulate
+```
+If all the tests pass you should see:
+```
+Test VSPACE0002 passed
 
-## Get acquainted with seL4Test
+        </testcase>
 
+        <testcase classname="sel4test" name="Test all tests ran">
 
-Any changes you make to seL4 should pass the tests in seL4 Test, and
-pull requests to seL4 which are non-trivial or related only to
-documentation, should come with a matching pull request and new test (if
-applicable) to the seL4Test repository as well.
+        </testcase>
+ 
+</testsuite>
 
-[seL4test](seL4Test) is a comprehensive unit and functional testing
-suite for seL4 and can be useful when porting to new platforms or adding
-new features.
+All is well in the universe
+```
+
+For more information on seL4test see its [project page](/seL4Test).
 
 ## Project Layout
 
-
-See [Building](/Developing/Building) for details of
-project layouts and the seL4 build system.
-
-Configuration files in the configs directory are named by target
-machine, then something about what they do. Most have either release or
-debug in their names. Debug kernels are built with debug symbols (so one
-can use gdb), enable assertions, and provide the sel4debug interfaces to
-allow debug printout on a serial port.
-
-Some configurations are intended to run under qemu. Because qemu does
-not produce a completely faithful emulation of the hardware, sometimes
-features have to be disabled or worked around. These configurations have
-‘simulation’ in their names.
+A project's layout refers to where apps, libraries, the kernel and required
+tools can be found once the sources have been checked out and how they depend
+on each other to build runnable images. 
+- The Repo manifest specifies where sources are checked out to in the project directory
+- CMakeLists.txt files specify dependencies. [Building/Incorporating](/Developing/Building/Using)
+  describes how CMake projects can be structured.
 
 ## Running on real hardware
 
+See [Hardware](/Hardware) for supported hardware and how to set it up.
 
-See [Hardware](/Hardware).
+## Learn more
 
-# Contributing
+### Start with the tutorials
 
+
+The seL4 and CAmkES [Tutorials](Tutorials) are an
+introduction to the design of seL4, and also to preparing to develop for
+seL4, and they are also used internally to train new seL4 engineers.
+You are strongly encouraged to complete the tutorials if you are new to
+seL4: they will quickly bring you up to speed and ready to practically
+contribute.
+
+## Community
 
 Gernot's presentation:
 [seL4 is free: What does this mean for you? (2015)](https://www.youtube.com/watch?v=lRndE7rSXiI) outlines areas where the kernel could use some contributions – other than that,
 gauging what you can do externally is for the time being, difficult. If you have
 ideas, please feel free to visit the NICTA mailing lists and chime in:
 
+### Mailing lists
 - [seL4 Announce](https://sel4.systems/lists/listinfo/announce).
 - [seL4 Devel](https://sel4.systems/lists/listinfo/devel).
 
-# Learn more about seL4
+
+## Learn more about seL4
  For someone just getting to know about seL4
 and wanting to first at least understand how to build it, so that you
 can get comfortable with editing the source code, the following pre-init
@@ -159,7 +156,7 @@ creature you're about to step into the arena with. These are **not**
 pre-requisites for building the kernel, but they will help you a lot in
 understanding what you're dealing with.
 
-## Publications
+### Publications
 
 
 There are many publications available on the design of the seL4 kernel,
@@ -170,7 +167,7 @@ You can find a long list of seL4 publications here:
 
 [The seL4 project page at Data61](http://ts.data61.csiro.au/projects/seL4/).
 
-## Youtube
+### Youtube
 
 
 - Gernot Heiser outlines several areas where the kernel is looking
