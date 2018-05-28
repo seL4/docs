@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-22 06:41:26 +0000 -->
+<!-- Page last generated 2018-05-28 11:00:45 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -42,7 +42,7 @@
         <h2><a href="/Documentation">Documentation</a></h2>
         <h2><a href="/GettingStarted">Getting Started</a></h2>
         <h2><a href="/Tutorials">Tutorials</a></h2>
-        <h2><a href="https://research.csiro.au/tsblog">Blog&nbsp;<i class="fas fa-external-link-alt icon-resize"></i></a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
         <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
       </nav>
     </li>
@@ -78,11 +78,11 @@
       <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
         Current versions:</li>
       <li class="list-unstyled text-right">
-      <a href="/sel4_release/seL4_9.0.1"><b>seL4-9.0.1</b></a></li>
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
       <li class="list-unstyled text-right">
       <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/camkes_release/CAmkES_3.4.0"><b>camkes-3.4.0</b></a></li>
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
     </ol>
   </nav>
   <div class='clear'></div>
@@ -102,51 +102,48 @@
         <li class="">
           <a class="" href="/GettingStarted.html">
             Getting Started
-            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building">
+            CMake Build System
           </a>
         </li>
   
         <li class="">
           <a class="" href="/FrequentlyAskedQuestions.html">
             FAQ
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Hardware/">
             Hardware
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/CAmkES/">
             CAmkES
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/sel4_release/">
             Release Notes
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/ApiDoc.html">
             libsel4 API
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
             Current Manual
-            
-              &nbsp;<i class="fas fa-external-link-alt"></i>
-            
           </a>
         </li>
   
@@ -158,44 +155,36 @@
         <li class="">
           <a class="" href="/Conduct.html">
             Code of Conduct
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Contributing.html">
             Contributing
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="https://research.csiro.au/tsblog">
             Trustworthy Systems Blog
-            
-              &nbsp;<i class="fas fa-external-link-alt"></i>
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/IRCChannel.html">
             IRC Channel
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/SuggestedProjects.html">
             Suggested projects
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/CommunityProjects.html">
             Community Projects
-            
           </a>
         </li>
   
@@ -207,70 +196,60 @@
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_1.html">
             seL4 Tutorial 1
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_2.html">
             seL4 Tutorial 2
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_3.html">
             seL4 Tutorial 3
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_4.html">
             seL4 Tutorial 4
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
             seL4 Timer tutorial
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_RT_tutorial.html">
             seL4 MCS tutorial
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
             CAmkES Tutorial 0
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
             CAmkES Tutorial 1
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
             CAmkES Tutorial 2
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
             CAmkES Timer Tutorial
-            
           </a>
         </li>
   
@@ -318,20 +297,28 @@
     <div class="content">
       <h1 id="camkes-x86-vm">CAmkES x86 VM</h1>
 <p>Get the dependencies for building CAmkES by following
-the instructions <a href="/CAmkES/#build-dependencies">here</a>.</p>
+the instructions <a href="HostDependencies#camkes-build-dependencies">here</a></p>
 
 <h2 id="getting-the-code">Getting the Code</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-manifest.git
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a directory to store the project source</span>
+mkdir camkes_vm
+<span class="nb">cd </span>camkes_vm
+repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-examples-manifest.git
 repo sync
 </code></pre></div></div>
 
 <h2 id="starting-point">Starting Point</h2>
-<p>This repo contains many vm apps. We’ll start from
-something basic, and add to it:</p>
+<p>This project provides some example CAmkES VM applications you can build. We’ll start with a
+basic VM configuration, being the <code class="highlighter-rouge">minimal</code> application, and add to it. From the project root:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make cma34cr_minimal_defconfig
-make
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a directory to compile the project</span>
+mkdir build_vm
+<span class="nb">cd </span>build_vm
+<span class="c"># Invoke CMake using the shell script wrapper 'init-build.sh', passing 'minimal' as the application we wish to compile</span>
+../init-build.sh <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>minimal
+ninja
 </code></pre></div></div>
+
 <p>Running this should boot a
 single, very basic linux as a guest in the vm:</p>
 
@@ -344,31 +331,21 @@ much else, and runs on a ramdisk (the actual hard drive isn’t mounted).
 Login with the username <code class="highlighter-rouge">root</code> and the password <code class="highlighter-rouge">root</code>.</p>
 
 <h2 id="quick-walk-through-the-source-code">Quick walk through the source code</h2>
-<p>The top level CAmkES spec is in
-<code class="highlighter-rouge">apps/cma34cr_minimal/vm.camkes</code>:</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="o">&lt;</span><span class="n">VM</span><span class="o">/</span><span class="n">vm</span><span class="p">.</span><span class="n">camkes</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="n">import</span> <span class="s">"cma34cr.camkes"</span><span class="p">;</span>
 
-<span class="n">assembly</span> <span class="p">{</span>
-    <span class="n">composition</span> <span class="p">{</span>
-        <span class="n">component</span> <span class="n">VM</span> <span class="n">vm</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>This is a very simple app, with a single vm, and nothing else. Each
-different vm app will have its own implementation of the <code class="highlighter-rouge">VM</code> component,
-where the guest environment is configured. For this app, the <code class="highlighter-rouge">VM</code>
-component is defined in <code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>:</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;autoconf.h&gt;
-#include &lt;configurations/vm.h&gt;
+<p><code class="highlighter-rouge">minimal</code> is a very simple app, with a single vm, and nothing else. Each
+different vm app will have its own assembly implementation,
+where the guest environment is configured. For this app, the configuration
+is defined in <code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;configurations/vm.h&gt;
+</span>
+<span class="cp">#define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y \
+i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/mem"
 </span>
 <span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
     <span class="n">VM_INIT_DEF</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="n">component</span> <span class="n">VM</span> <span class="p">{</span>
-
+<span class="n">assembly</span> <span class="p">{</span>
   <span class="n">composition</span> <span class="p">{</span>
       <span class="n">VM_COMPOSITION_DEF</span><span class="p">()</span>
       <span class="n">VM_PER_VM_COMP_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -381,9 +358,9 @@ component is defined in <code class="highlighter-rouge">apps/cma34cr_minimal/cma
       <span class="n">vm0</span><span class="p">.</span><span class="n">heap_size</span> <span class="o">=</span> <span class="mh">0x2000000</span><span class="p">;</span>
       <span class="n">vm0</span><span class="p">.</span><span class="n">guest_ram_mb</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
       <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_cmdline</span> <span class="o">=</span> <span class="n">VM_GUEST_CMDLINE</span><span class="p">;</span>
-      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_image</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
-      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_relocs</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
-      <span class="n">vm0</span><span class="p">.</span><span class="n">initrd_image</span> <span class="o">=</span> <span class="n">ROOTFS</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_image</span> <span class="o">=</span> <span class="s">"bzimage"</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_relocs</span> <span class="o">=</span> <span class="s">"bzimage"</span><span class="p">;</span>
+      <span class="n">vm0</span><span class="p">.</span><span class="n">initrd_image</span> <span class="o">=</span> <span class="s">"rootfs.cpio"</span><span class="p">;</span>
       <span class="n">vm0</span><span class="p">.</span><span class="n">iospace_domain</span> <span class="o">=</span> <span class="mh">0x0f</span><span class="p">;</span>
   <span class="p">}</span>
 
@@ -405,37 +382,62 @@ composition section by the <code class="highlighter-rouge">VM_PER_VM_COMP_DEF</c
 names <code class="highlighter-rouge">vmI</code>. The <code class="highlighter-rouge">vm0</code> component instance being configured above is an
 instance of <code class="highlighter-rouge">Init0</code>. The C source code for<code class="highlighter-rouge">InitI</code> components is in
 <code class="highlighter-rouge">projects/vm/components/Init/src</code>. This source will be used for components
-named <code class="highlighter-rouge">InitI</code> for <em>I</em> in <code class="highlighter-rouge">0..VM_NUM_VM - 1</code>, where <code class="highlighter-rouge">VM_NUM_VM</code> is
-defined in the app’s Makefile (<code class="highlighter-rouge">apps/cma34cr_minimal/Makefile</code>).</p>
+named <code class="highlighter-rouge">InitI</code> for <em>I</em> in <code class="highlighter-rouge">0..VM_NUM_VM - 1</code>.</p>
 
-<p>The values of <code class="highlighter-rouge">VM_GUEST_CMDLINE</code>, <code class="highlighter-rouge">KERNEL_IMAGE</code> and <code class="highlighter-rouge">ROOTFS</code> are in
-<code class="highlighter-rouge">apps/cma34cr_minimal/configurations/cma34cr_minimal.h</code>. They are all
-strings, specifying the guest linux boot arguments, the name of the
-guest linux kernel image file, and the name of the guest linux initrd
-file (root filesystem to use during system initialization).
-<code class="highlighter-rouge">KERNEL_IMAGE</code> and <code class="highlighter-rouge">ROOTFS</code> refer to file names. These are the names of
-files in a CPIO archive that gets created by the build system, and
-linked into the VMM. The VMM uses the <code class="highlighter-rouge">KERNEL_IMAGE</code> and <code class="highlighter-rouge">ROOTFS</code> names to
-find the appropriate files in this archive when preparing to boot the
-guest.</p>
+<p>The values of <code class="highlighter-rouge">vm0.kernel_cmdline</code>, <code class="highlighter-rouge">vm0.kernel_image</code> and <code class="highlighter-rouge">vm0.initrd_image</code> are all
+strings specifying the guest linux boot arguments, the name of the guest linux kernel image file,
+and the name of the guest linux initrd file (root filesystem to use during system initialization).
+The kernel command-line is defined in the <code class="highlighter-rouge">VM_GUEST_CMDLINE</code> macro. The kernel image
+and rootfs names are defined in the applications CMakeLists file, located at <code class="highlighter-rouge">projects/vm-examples/minimal/CMakeLists.txt</code>.
+These are the names of files in a CPIO archive that gets created by the build system, and
+linked into the VMM. In our <code class="highlighter-rouge">minimal</code> app configuration the VMM uses
+the “bzimage” and “rootfs.cpio” names to find the appropriate files
+in this archive when preparing to boot the guest.</p>
 
-<p>The local files used to construct the CPIO archive are specified in the
-app’s <code class="highlighter-rouge">Makefile</code>, located at <code class="highlighter-rouge">apps/cma34cr_minimal/Makefile</code>:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ...
-</span><span class="nv">KERNEL_FILENAME</span> <span class="o">:=</span> bzimage
-<span class="nv">ROOTFS_FILENAME</span> <span class="o">:=</span> rootfs.cpio
-<span class="c"># ...
-</span><span class="nl">${STAGE_DIR}/${KERNEL_FILENAME}</span><span class="o">:</span> <span class="nf">$(SOURCE_DIR)/linux/${KERNEL_FILENAME}</span>
-<span class="c"># ...
-</span><span class="nl">${STAGE_DIR}/${ROOTFS_FILENAME}</span><span class="o">:</span> <span class="nf">${SOURCE_DIR}/linux/${ROOTFS_FILENAME}</span>
-<span class="c"># ...
-</span></code></pre></div></div>
+<p>To see how we define our <code class="highlighter-rouge">Init</code> components and the CPIO archive within the build system we can
+look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>, :</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...</span>
+<span class="nb">project</span><span class="p">(</span>minimal<span class="p">)</span>
 
-<p>Both these rules refer to the “linux” directory, located at
-<code class="highlighter-rouge">projects/vm/linux</code>. It contains some tools for building new linux kernel
+<span class="c1"># Include CAmkES VM helper functions</span>
+<span class="nb">include</span><span class="p">(</span><span class="s2">"../../vm/camkes_vm_helpers.cmake"</span><span class="p">)</span>
+
+<span class="c1"># Define kernel config options</span>
+<span class="nb">set</span><span class="p">(</span>KernelX86Sel4Arch ia32 CACHE STRING <span class="s2">""</span> FORCE<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>KernelMaxNumNodes 1 CACHE STRING <span class="s2">""</span> FORCE<span class="p">)</span>
+
+<span class="c1"># Declare VM component: Init0</span>
+<span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0<span class="p">)</span>
+
+<span class="c1"># Get Default Linux VM files</span>
+<span class="nf">GetDefaultLinuxKernelFile</span><span class="p">(</span>kernel_file<span class="p">)</span>
+<span class="nf">GetDefaultLinuxRootfsFile</span><span class="p">(</span>rootfs_file<span class="p">)</span>
+
+<span class="c1"># Decompress Linux Kernel image and add to file server</span>
+<span class="nf">DecompressLinuxKernel</span><span class="p">(</span>extract_linux_kernel decompressed_kernel <span class="si">${</span><span class="nv">kernel_file</span><span class="si">}</span><span class="p">)</span>
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"bzimage"</span> <span class="si">${</span><span class="nv">decompressed_kernel</span><span class="si">}</span> DEPENDS extract_linux_kernel<span class="p">)</span>
+
+<span class="c1"># Add rootfs images into file server</span>
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">rootfs_file</span><span class="si">}</span><span class="p">)</span>
+<span class="c1"># ...</span>
+</code></pre></div></div>
+
+<p>To access a series of helper functions for defining our CAmkES VM project we need to
+include the <code class="highlighter-rouge">projects/vm/camkes_vm_helpers.cmake</code> file.
+This firstly enables us to call <code class="highlighter-rouge">DeclareCAmkESVM(Init0)</code> to define our <code class="highlighter-rouge">Init0</code> VM component.
+With each Init component we define in the CAmkES configuration we need to correspondingly define
+the component with the <code class="highlighter-rouge">DeclareCAmkESVM</code> function.</p>
+
+<p>To find a kernel and rootfs image we use the <code class="highlighter-rouge">GetDefaultLinuxKernelFile</code> helper
+to retrieve the location of the vm images provided in the <code class="highlighter-rouge">projects/vm</code> folder.
+This project contains some tools for building new linux kernel
 and root filesystem images, as well as the images that these tools
 produce. A fresh checkout of this project will contain some pre-build
-images (<code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">rootfs.cpio</code>), to speed up build times.</p>
+images (<code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">rootfs.cpio</code>), to speed up build times. We call the
+<code class="highlighter-rouge">DecompressLinuxKernel</code> helper to extract the vmlinux image. Lastly we add the
+decompressed kernel image and rootfs to the fileserver through the <code class="highlighter-rouge">AddToFileServer</code> helper. These are
+placed in the file server under the names we wish to access them
+by in the archive. In our case this is “bzimage” and “rootfs.cpio”.</p>
 
 <h2 id="adding-to-the-guest">Adding to the guest</h2>
 <p>In the simple buildroot guest image, the
@@ -443,7 +445,7 @@ initrd (rootfs.cpio) is also the filesystem you get access to after
 logging in. To make new programs available to the guest, add them to the
 rootfs.cpio archive. Similarly, to make new kernel modules available to
 the guest, they must be added to the rootfs.cpio archive also. The
-“linux” directory contains a tool called “build-rootfs”, which is
+<code class="highlighter-rouge">projects/vm/linux</code> directory contains a tool called “build-rootfs”, which is
 unrelated to the unfortunately similarly-named buildroot, which
 generates a new rootfs.cpio archive based on a starting point
 (rootfs-bare.cpio), and a collection of programs and modules. It also
@@ -524,7 +526,8 @@ include our new “hello” program.</p>
   <li>
     <p>Rebuild the app:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd build_vm
+ninja
 </code></pre></div>    </div>
   </li>
   <li>
@@ -624,8 +627,8 @@ clean:
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd projects/vm/linux/
 ./build-rootfs
-cd ../../..
-make
+cd ../../../build_vm
+ninja
 </code></pre></div>    </div>
   </li>
   <li>
@@ -762,7 +765,7 @@ an event to the guest process so the guest knows it’s safe to send a new
 string.</p>
 
 <p>We’ll start on the CAmkES side. Edit
-<code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>, adding the following interfaces to
+<code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code>, adding the following interfaces to
 the Init0 component definition:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
   <span class="n">VM_INIT_DEF</span><span class="p">()</span>
@@ -780,7 +783,7 @@ the guest linux. The mutex is used to protect access to shared state
 between the VMM and guest.</p>
 
 <p>Now, we’ll define the print server component. Add the following to
-<code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>:</p>
+<code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code>:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">PrintServer</span> <span class="p">{</span>
   <span class="n">control</span><span class="p">;</span>
   <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
@@ -792,7 +795,7 @@ between the VMM and guest.</p>
 <p>We’ll get around to actually implementing this soon. First, let’s
 instantiate the print server and connect it to the VMM. Add the
 following to the composition section in
-apps/cma34cr_minimal/cma34cr.camkes:</p>
+<code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code>:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">VM</span> <span class="p">{</span>
 
     <span class="n">composition</span> <span class="p">{</span>
@@ -822,7 +825,7 @@ which requires caps to the physical memory being mapped in.</p>
 <p>Interfaces connected with <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
 configured with an integer specifying the id of the dataport, and the
 size of the dataport. Add the following to the configuration section in
-apps/cma34cr_minimal/cma34cr.camkes:</p>
+<code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code></p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
     <span class="n">VM_CONFIGURATION_DEF</span><span class="p">()</span>
     <span class="n">VM_PER_VM_CONFIG_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -831,9 +834,9 @@ apps/cma34cr_minimal/cma34cr.camkes:</p>
     <span class="n">vm0</span><span class="p">.</span><span class="n">heap_size</span> <span class="o">=</span> <span class="mh">0x10000</span><span class="p">;</span>
     <span class="n">vm0</span><span class="p">.</span><span class="n">guest_ram_mb</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
     <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_cmdline</span> <span class="o">=</span> <span class="n">VM_GUEST_CMDLINE</span><span class="p">;</span>
-    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_image</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
-    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_relocs</span> <span class="o">=</span> <span class="n">KERNEL_IMAGE</span><span class="p">;</span>
-    <span class="n">vm0</span><span class="p">.</span><span class="n">initrd_image</span> <span class="o">=</span> <span class="n">ROOTFS</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_image</span> <span class="o">=</span> <span class="s">"bzimage"</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">kernel_relocs</span> <span class="o">=</span> <span class="s">"bzimage"</span><span class="p">;</span>
+    <span class="n">vm0</span><span class="p">.</span><span class="n">initrd_image</span> <span class="o">=</span> <span class="s">"rootfs.cpio"</span><span class="p">;</span>
     <span class="n">vm0</span><span class="p">.</span><span class="n">iospace_domain</span> <span class="o">=</span> <span class="mh">0x0f</span><span class="p">;</span>
 
     <span class="c1">// Add the following 2 lines:
@@ -843,7 +846,7 @@ apps/cma34cr_minimal/cma34cr.camkes:</p>
 </code></pre></div></div>
 
 <p>Now let’s implement our print server. Create a file
-apps/cma34cr_minimal/print_server.c:</p>
+<code class="highlighter-rouge">projects/vm-examples/minimal/components/print_server.c</code></p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;camkes.h&gt;
 #include &lt;stdio.h&gt;
 </span>
@@ -874,7 +877,7 @@ risky, but will serve for our example here.</p>
   <li>cross_vm_consumes_events_init</li>
 </ul>
 
-<p>Create a file <code class="highlighter-rouge">apps/cma34cr_minimal/cross_vm.c</code>:</p>
+<p>Create a file <code class="highlighter-rouge">projects/vm-examples/minimal/src/cross_vm.c</code>:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;sel4/sel4.h&gt;
 #include &lt;camkes.h&gt;
 #include &lt;camkes_mutex.h&gt;
@@ -928,28 +931,26 @@ risky, but will serve for our example here.</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>To make this build, we need to symlink the common source directory for
-the camkes vm into the app’s directory:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln -s ../../common apps/cma34cr_minimal
+<p>To make this build we need to update our applications CMakeLists file. Make the following changes
+in <code class="highlighter-rouge">projects/vm-examples/minimal/CMakeLists.txt</code></p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...</span>
+<span class="c1"># Retrieve Init0 cross vm src files</span>
+<span class="nb">file</span><span class="p">(</span>GLOB init0_extra src/*.c<span class="p">)</span>
+<span class="c1"># Declare VM component: Init0</span>
+<span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0
+    EXTRA_SOURCES <span class="si">${</span><span class="nv">init0_extra</span><span class="si">}</span>
+    EXTRA_LIBS crossvm
+<span class="p">)</span>
+
+<span class="c1"># Declare the CAmkES PrintServer component</span>
+<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>PrintServer SOURCES components/print_server.c<span class="p">)</span>
+<span class="c1"># ...</span>
 </code></pre></div></div>
+<p>Here we extend our definition of the Init component with our cross_vm connector source and the crossvm
+library. We additionally define our new CAmkES component <code class="highlighter-rouge">PrintServer</code>.</p>
 
-<p>And make the following change to <code class="highlighter-rouge">apps/cma34cr_minimal/Makefile</code>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
-include PCIConfigIO/PCIConfigIO.mk
-include FileServer/FileServer.mk
-include Init/Init.mk
-
-# Add the following:
-Init0_CFILES += $(wildcard $(SOURCE_DIR)/cross_vm.c) \
-                $(wildcard $(SOURCE_DIR)/common/src/*.c)
-Init0_HFILES += $(wildcard $(SOURCE_DIR)/common/include/*.h) \
-                $(wildcard $(SOURCE_DIR)/common/shared_include/cross_vm_shared/*.h)
-
-PrintServer_CFILES += $(SOURCE_DIR)/print_server.c
-...
-</code></pre></div></div>
-
-<p>The app should now build when you run <code class="highlighter-rouge">make</code>, but we’re not done yet. Now
+<p>The app should now build but we’re not done yet. Now
 we’ll make these interfaces available to the guest linux. Edit
 <code class="highlighter-rouge">projects/vm/linux/camkes_init</code>. It’s a shell script that is executed as
 linux is initialized. Currently it should look like:</p>
@@ -985,7 +986,7 @@ emits_event_init /dev/camkes_do_print
 
 <p>Each of these commands creates device nodes associated with a particular
 linux kernel module supporting cross vm communication. Each command
-takes a list of device nodes to create, which must correpond to the ids
+takes a list of device nodes to create, which must correspond to the ids
 assigned to interfaces in the <code class="highlighter-rouge">cma34cr.camkes</code> and <code class="highlighter-rouge">cross_vm.c</code>. The
 <code class="highlighter-rouge">dataport_init</code> command must also be passed the size of each dataport.</p>
 
@@ -1113,18 +1114,21 @@ depmod: WARNING: could not open /var/tmp/mkinitramfs_H9SRHb/lib/modules/4.8.16/m
 <p>The kernel we’ll be using has all the necessary drivers built in, so
 feel free to ignore those warnings and errors. You should now have a
 file called rootfs.cpio on the cma34cr. Transfer that file to your dev
-machine, and put it in <code class="highlighter-rouge">apps/cma34cr_minimal</code>. Now we need to tell the
+machine, and put it in <code class="highlighter-rouge">projects/vm/minimal</code>. Now we need to tell the
 build system to take that rootfs image rather than the default buildroot
-one. Edit apps/cma34cr_minimal/Makefile. Change this line:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">${STAGE_DIR}/${ROOTFS_FILENAME}</span><span class="o">:</span> <span class="nf">${SOURCE_DIR}/linux/${ROOTFS_FILENAME}</span>
+one. Edit <code class="highlighter-rouge">projects/vm-examples/minimal/CMakeLists.txt</code>. Change this line:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">rootfs_file</span><span class="si">}</span><span class="p">)</span>
 </code></pre></div></div>
 <p>to</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">${STAGE_DIR}/${ROOTFS_FILENAME}</span><span class="o">:</span> <span class="nf">${SOURCE_DIR}/${ROOTFS_FILENAME}</span>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> &lt;ROOTFS_FILENAME&gt;<span class="p">)</span>
 </code></pre></div></div>
+<p>where <code class="highlighter-rouge">&lt;ROOTFS_FILENAME&gt;</code> is replaced with the filename of the rootfs file you 
+added in <code class="highlighter-rouge">projects/vm/minimal</code>.</p>
 
 <p>Since we’ll be using a real hard drive, we need to change the boot
 command line we give to the guest linux. Open
-<code class="highlighter-rouge">apps/cma34cr_minimal/configurations/cma34cr_minimal.h</code>, and change the
+<code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code>, and change the
 definition of <code class="highlighter-rouge">VM_GUEST_CMDLINE</code> to:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/sda1 rdinit=/init 2"
 </code></pre></div></div>
@@ -1153,7 +1157,7 @@ Let’s do that now!</p>
 The sata controller will be in one of two modes: AHCI or IDE. The mode
 can be set when configuring BIOS. By default it should be AHCI. The next
 part has some minor differences depending on the mode. I’ll show both.
-Open <code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code> and add the following to the
+Open <code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code> and add the following to the
 configuration section:</p>
 
 <p>For AHCI:</p>
@@ -1246,7 +1250,7 @@ ertos-CMA34CR login:
 <p>An easy way to give the guest network access is to give it passthrough
 access to the ethernet controller. This is done much in the same way as
 enabling passthrough access to the sata controller. In the configuration
-section in <code class="highlighter-rouge">apps/cma34cr_minimal/cma34cr.camkes</code>, add to the list of io
+section in <code class="highlighter-rouge">projects/vm-examples/minimal/minimal.camkes</code>, add to the list of io
 ports, pci devices and irqs to pass through:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vm0_config</span><span class="p">.</span><span class="n">ioports</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x4080</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x4090</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
@@ -1354,7 +1358,7 @@ natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.<
         </li>
         
           <li>
-            Site last updated: Tue May 22 16:25:56 2018 +1000 ee9de15
+            Site last updated: Mon May 28 16:30:11 2018 +1000 9becb1a
           </li>
           <li>
             
@@ -1587,7 +1591,23 @@ natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.<
               
             
               
-                Page last updated: Thu Mar 22 14:02:40 2018 +1100 e209f00
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon May 28 16:30:11 2018 +1000 2d323eb
               
             
               

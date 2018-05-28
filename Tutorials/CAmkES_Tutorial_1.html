@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-22 06:41:26 +0000 -->
+<!-- Page last generated 2018-05-28 11:00:45 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -42,7 +42,7 @@
         <h2><a href="/Documentation">Documentation</a></h2>
         <h2><a href="/GettingStarted">Getting Started</a></h2>
         <h2><a href="/Tutorials">Tutorials</a></h2>
-        <h2><a href="https://research.csiro.au/tsblog">Blog&nbsp;<i class="fas fa-external-link-alt icon-resize"></i></a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
         <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
       </nav>
     </li>
@@ -89,11 +89,11 @@
       <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
         Current versions:</li>
       <li class="list-unstyled text-right">
-      <a href="/sel4_release/seL4_9.0.1"><b>seL4-9.0.1</b></a></li>
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
       <li class="list-unstyled text-right">
       <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/camkes_release/CAmkES_3.4.0"><b>camkes-3.4.0</b></a></li>
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
     </ol>
   </nav>
   <div class='clear'></div>
@@ -113,51 +113,48 @@
         <li class="">
           <a class="" href="/GettingStarted.html">
             Getting Started
-            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building">
+            CMake Build System
           </a>
         </li>
   
         <li class="">
           <a class="" href="/FrequentlyAskedQuestions.html">
             FAQ
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Hardware/">
             Hardware
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/CAmkES/">
             CAmkES
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/sel4_release/">
             Release Notes
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/ApiDoc.html">
             libsel4 API
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
             Current Manual
-            
-              &nbsp;<i class="fas fa-external-link-alt"></i>
-            
           </a>
         </li>
   
@@ -169,44 +166,36 @@
         <li class="">
           <a class="" href="/Conduct.html">
             Code of Conduct
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Contributing.html">
             Contributing
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="https://research.csiro.au/tsblog">
             Trustworthy Systems Blog
-            
-              &nbsp;<i class="fas fa-external-link-alt"></i>
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/IRCChannel.html">
             IRC Channel
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/SuggestedProjects.html">
             Suggested projects
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/CommunityProjects.html">
             Community Projects
-            
           </a>
         </li>
   
@@ -218,70 +207,60 @@
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_1.html">
             seL4 Tutorial 1
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_2.html">
             seL4 Tutorial 2
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_3.html">
             seL4 Tutorial 3
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_4.html">
             seL4 Tutorial 4
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
             seL4 Timer tutorial
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_RT_tutorial.html">
             seL4 MCS tutorial
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
             CAmkES Tutorial 0
-            
           </a>
         </li>
   
         <li class="active">
           <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
             CAmkES Tutorial 1
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
             CAmkES Tutorial 2
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
             CAmkES Timer Tutorial
-            
           </a>
         </li>
   
@@ -344,11 +323,12 @@ instances via well-defined interfaces which must be statically defined,
 over communication channels. This tutorial will lead you through the
 construction of a CAmkES application with two components: an Echo
 server, and its Client that makes calls to it. These components are
-defined here:</p>
+defined when you initialise your build repository, found in
+the following sub-directories:</p>
 
 <ul>
-  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/Client.camkes</a></li>
-  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/Echo.camkes</a></li>
+  <li><code class="highlighter-rouge">hello-camkes-1/components/Client/Client.camkes</code></li>
+  <li><code class="highlighter-rouge">hello-camkes-1/components/Echo/Echo.camkes</code></li>
 </ul>
 
 <p>Find the Component manual section here:
@@ -382,7 +362,7 @@ interface, which is an interface over which function calls are made
 according to a well-defined pre-determined API. The keyword for this
 kind of interface in CAmkES is “procedure”. The definition of this
 Procedure interface may be found here:
-<a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4</a></p>
+<code class="highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.camkes</code></p>
 
 <p>Find the “Procedure” keyword definition here:
 <a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure</a></p>
@@ -395,13 +375,13 @@ tutorial application are, in accordance with the Components we have
 defined:</p>
 
 <ul>
-  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Echo/src/echo.c</a></li>
-  <li><a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/components/Client/src/client.c</a></li>
+  <li><code class="highlighter-rouge">hello-camkes-1/components/Echo/src/echo.c</code></li>
+  <li><code class="highlighter-rouge">hello-camkes-1/components/Client/src/client.c</code></li>
 </ul>
 
 <p>Now when it comes to invoking the functions that were defined in the
 Interface specification
-(<a href="https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4">https://github.com/SEL4PROJ/sel4-tutorials/blob/master/apps/hello-camkes-1/interfaces/HelloSimple.idl4</a>),
+(<code class="highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.camkes</code>),
 you must prefix the API function name with the name of the Interface
 instance that you are exposing over the particular connection.</p>
 
@@ -468,7 +448,7 @@ writing your first CAmkES application.</p>
         </li>
         
           <li>
-            Site last updated: Tue May 22 16:25:56 2018 +1000 ee9de15
+            Site last updated: Mon May 28 16:30:11 2018 +1000 9becb1a
           </li>
           <li>
             
@@ -537,7 +517,23 @@ writing your first CAmkES application.</p>
               
             
               
-                Page last updated: Fri Mar 23 15:17:08 2018 +1100 b501b67
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon May 28 16:30:11 2018 +1000 7d528d8
+              
+            
+              
+            
               
             
               

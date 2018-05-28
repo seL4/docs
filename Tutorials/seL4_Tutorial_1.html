@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-05-22 06:41:26 +0000 -->
+<!-- Page last generated 2018-05-28 11:00:45 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -42,7 +42,7 @@
         <h2><a href="/Documentation">Documentation</a></h2>
         <h2><a href="/GettingStarted">Getting Started</a></h2>
         <h2><a href="/Tutorials">Tutorials</a></h2>
-        <h2><a href="https://research.csiro.au/tsblog">Blog&nbsp;<i class="fas fa-external-link-alt icon-resize"></i></a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
         <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
       </nav>
     </li>
@@ -89,11 +89,11 @@
       <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
         Current versions:</li>
       <li class="list-unstyled text-right">
-      <a href="/sel4_release/seL4_9.0.1"><b>seL4-9.0.1</b></a></li>
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
       <li class="list-unstyled text-right">
       <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/camkes_release/CAmkES_3.4.0"><b>camkes-3.4.0</b></a></li>
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
     </ol>
   </nav>
   <div class='clear'></div>
@@ -113,51 +113,48 @@
         <li class="">
           <a class="" href="/GettingStarted.html">
             Getting Started
-            
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building">
+            CMake Build System
           </a>
         </li>
   
         <li class="">
           <a class="" href="/FrequentlyAskedQuestions.html">
             FAQ
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Hardware/">
             Hardware
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/CAmkES/">
             CAmkES
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/sel4_release/">
             Release Notes
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/ApiDoc.html">
             libsel4 API
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
             Current Manual
-            
-              &nbsp;<i class="fas fa-external-link-alt"></i>
-            
           </a>
         </li>
   
@@ -169,44 +166,36 @@
         <li class="">
           <a class="" href="/Conduct.html">
             Code of Conduct
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Contributing.html">
             Contributing
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="https://research.csiro.au/tsblog">
             Trustworthy Systems Blog
-            
-              &nbsp;<i class="fas fa-external-link-alt"></i>
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/IRCChannel.html">
             IRC Channel
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/SuggestedProjects.html">
             Suggested projects
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/CommunityProjects.html">
             Community Projects
-            
           </a>
         </li>
   
@@ -218,70 +207,60 @@
         <li class="active">
           <a class="" href="/Tutorials/seL4_Tutorial_1.html">
             seL4 Tutorial 1
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_2.html">
             seL4 Tutorial 2
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_3.html">
             seL4 Tutorial 3
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Tutorial_4.html">
             seL4 Tutorial 4
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
             seL4 Timer tutorial
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/seL4_RT_tutorial.html">
             seL4 MCS tutorial
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
             CAmkES Tutorial 0
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
             CAmkES Tutorial 1
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
             CAmkES Tutorial 2
-            
           </a>
         </li>
   
         <li class="">
           <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
             CAmkES Timer Tutorial
-            
           </a>
         </li>
   
@@ -315,7 +294,7 @@ environment.</p>
       runtime which they can usually ignore, and debug with it
       in mind.</li>
   <li>Offhandedly hints to the reader that they should become
-      acquainted with the Kconfig/Kbuild build utilities.</li>
+      acquainted with the CMake build utilities.</li>
 </ul>
 
 <h2 id="walkthrough">Walkthrough</h2>
@@ -328,31 +307,33 @@ zynq7000 for ARM. The reason is that these platforms are popular and
 well supported/maintained by seL4 and QEMU.</p>
 
 <p>The following instructions are for ia32/pc99/x86, but should be similar
-for zynq7000/ARM with just changing the config selection (e.g. make
-zynq7000_hello-1_defconfig)</p>
+for zynq7000/ARM with just changing the config selection (../init –plat zynq7000 –tut hello-1)</p>
 
 <p>First try to build the code:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># go to the top level directory
 cd sel4-tutorials-manifest/
-# select the config for the first tutorial
-make pc99_hello-1_defconfig
+# create a build directory
+mkdir build_hello_1
+cd build_hello_1
+# initialise your build directory for the first tutorial
+../init --plat pc99 --tut hello-1
 # build it
-make -j8
+ninja
 </code></pre></div></div>
 <p>This will fail to build with the following
 error:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/alyons/sel4-tutorials-source/stage/x86/pc99/lib/crt1.o: In function \_start_c':
-/home/alyons/sel4-tutorials-source/libs/libmuslc/crt/crt1.c:17: undefined reference to main'
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[4/20] Linking C executable projects/sel4-tutorials/tutorials/hello-1/hello-1
+FAILED: projects/sel4-tutorials/tutorials/hello-1/hello-1
+# ...
+/scratch/sel4_tutorials/exercises/build_hello_1/lib/crt1.o: In function `_start_c':
+crt1.c:(.text._start_c+0x1f): undefined reference to `main'
 collect2: error: ld returned 1 exit status
-/home/alyons/sel4-tutorials-source/stage/x86/pc99/common/common.mk:301:
-recipe for target 'hello-1.elf' failed make[1]: *** [hello-1.elf]
-Error 1 tools/common/project.mk:332: recipe for target 'hello-1' failed
-make:*** [hello-1] Error 2
+ninja: build stopped: subcommand failed.
 </code></pre></div></div>
 <h3 id="task-1">TASK 1</h3>
 
-<p>Your task is to fix the above error. Look for TASK in <code class="highlighter-rouge">apps/hello1</code> to find the code to
-modify.</p>
+<p>Your task is to fix the above error. Look for TASK in <code class="highlighter-rouge">hello-1/src</code> within your build directory
+to find the code to modify.</p>
 
 <p>Regardless of the programming language used, every binary that is
 created must have an entry point, which is the first instruction in the
@@ -376,8 +357,9 @@ fix it.</p>
 <p>Once you have fixed the problem, the build should succeed and you can
 run the example as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make -j8
-$ make simulate
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd build_hello_1
+ninja
+./simulate
 </code></pre></div></div>
 
 <p>If you’ve succeeded, qemu should output:</p>
@@ -416,7 +398,7 @@ hello world
         </li>
         
           <li>
-            Site last updated: Tue May 22 16:25:56 2018 +1000 ee9de15
+            Site last updated: Mon May 28 16:30:11 2018 +1000 9becb1a
           </li>
           <li>
             
@@ -501,7 +483,23 @@ hello world
               
             
               
-                Page last updated: Tue May 22 16:25:56 2018 +1000 ee9de15
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon May 28 16:30:11 2018 +1000 7d528d8
+              
+            
+              
+            
               
             
               

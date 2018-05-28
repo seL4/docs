@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-05-28 11:00:45 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Repo Cheatsheet | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Repo Cheatsheet</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Tutorials</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_1.html">
+            seL4 Tutorial 1
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_2.html">
+            seL4 Tutorial 2
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_3.html">
+            seL4 Tutorial 3
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Tutorial_4.html">
+            seL4 Tutorial 4
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
+            seL4 Timer tutorial
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/seL4_RT_tutorial.html">
+            seL4 MCS tutorial
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
+            CAmkES Tutorial 0
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
+            CAmkES Tutorial 1
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
+            CAmkES Tutorial 2
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
+            CAmkES Timer Tutorial
+          </a>
+        </li>
+  
+      </ul>
+        
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#manifest-layout">Manifest layout</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#pinned-manifests">Pinned manifests</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#commands">Commands</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#init-and-sync">init and sync</a></li>
+<li class="toc-entry toc-h3"><a href="#diff-and-status">diff and status</a></li>
+<li class="toc-entry toc-h3"><a href="#diffmanifests">diffmanifests</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#faq">FAQ</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#how-do-i-check-out-a-released-version-of-a-project-such-as-sel4test">How do I check out a released version of a project such as seL4test?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-do-i-change-manifests-of-an-already-checked-out-project">How do I change manifests of an already checked out project?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-do-i-create-a-pinned-manifest">How do I create a pinned manifest?</a></li>
+<li class="toc-entry toc-h3"><a href="#is-there-a-faster-way-to-checkout-and-sync-a-project">Is there a faster way to checkout and sync a project?</a></li>
+</ul>
+</li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      <h1 id="repo-cheatsheet">Repo Cheatsheet</h1>
+
+<p>Repo is a tool developed by the Android Open Source Project.  We use repo for source dependency management.</p>
+
+<p>This page describes how we typically structure our manifests and also explains some common repo commands that we use in our workflows.</p>
+
+<p>Below is an example of a manifest for the sel4test project.  It is located in <a href="https://github.com/seL4/sel4test-manifest">https://github.com/seL4/sel4test-manifest</a>.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="c">&lt;!--
+     Copyright 2017, Data61
+     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+     ABN 41 687 119 230.
+
+     This software may be distributed and modified according to the terms of
+     the BSD 2-Clause license. Note that NO WARRANTY is provided.
+     See "LICENSE_BSD2.txt" for details.
+
+     @TAG(DATA61_BSD)
+--&gt;</span>
+<span class="nt">&lt;manifest&gt;</span>
+
+<span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"seL4"</span> <span class="na">fetch=</span><span class="s">"."</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"../sel4proj"</span> <span class="na">name=</span><span class="s">"sel4proj"</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;default</span> <span class="na">revision=</span><span class="s">"master"</span>
+<span class="na">remote=</span><span class="s">"seL4"</span>
+<span class="nt">/&gt;</span>
+
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4.git"</span> <span class="na">path=</span><span class="s">"kernel"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_tools.git"</span> <span class="na">path=</span><span class="s">"tools"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"cmake-tool/default-CMakeLists.txt"</span> <span class="na">dest=</span><span class="s">"CMakeLists.txt"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">dest=</span><span class="s">"init-build.sh"</span> <span class="na">src=</span><span class="s">"cmake-tool/init-build.sh"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"musllibc.git"</span> <span class="na">path=</span><span class="s">"projects/musllibc"</span> <span class="na">revision=</span><span class="s">"sel4"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_libs.git"</span> <span class="na">path=</span><span class="s">"projects/seL4_libs"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"util_libs.git"</span> <span class="na">path=</span><span class="s">"projects/util_libs"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4test.git"</span> <span class="na">path=</span><span class="s">"projects/sel4test"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"riscv-pk"</span> <span class="na">remote=</span><span class="s">"sel4proj"</span> <span class="na">revision=</span><span class="s">"fix-32bit"</span> <span class="na">path=</span><span class="s">"projects/riscv-pk"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
+<h2 id="manifest-layout">Manifest layout</h2>
+
+<p>We provide a brief overview of manifests as used in our projects in this section, please find more details in the full description of the manifest layout which can be found <a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.txt">here</a>.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">&lt;remote name="seL4" fetch="." /&gt;</code></p>
+</blockquote>
+
+<p>The <code class="highlighter-rouge">remote</code> element specifies a remote where git repositories can be found.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">&lt;project name="musllibc.git" remote="seL4" path="projects/musllibc" revision="sel4"/&gt;</code></p>
+</blockquote>
+
+<p>The <code class="highlighter-rouge">project</code> element declares a repository.</p>
+<ul>
+  <li><code class="highlighter-rouge">name</code> is the repository name at the <code class="highlighter-rouge">remote</code></li>
+  <li><code class="highlighter-rouge">path</code> is the repository checkout location relative to the directory the project was initialised in.</li>
+  <li><code class="highlighter-rouge">revision</code> specifies what version of the repository to use. Branches and revision hashes are supported.  Tags are supported but the attribute value must be structured as <code class="highlighter-rouge">refs/tags/tagname</code>.</li>
+  <li><code class="highlighter-rouge">linkfile</code> element specifies a symlink from the repository to somewhere else in the project layout.
+    <ul>
+      <li><code class="highlighter-rouge">src</code> is a path relative to the repository checkout.</li>
+      <li><code class="highlighter-rouge">dest</code> is a path relative to the project directory.</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p><code class="highlighter-rouge">&lt;default revision="master" remote="seL4"/&gt;</code></p>
+</blockquote>
+
+<p>The <code class="highlighter-rouge">default</code> element specifies attribute defaults that may be ommitted from <code class="highlighter-rouge">project</code> elements.
+If attributes are ommitted, the values from the default element will be used instead.</p>
+
+<h3 id="pinned-manifests">Pinned manifests</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="c">&lt;!--
+     Copyright 2018, Data61
+     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+     ABN 41 687 119 230.
+     This software may be distributed and modified according to the terms of
+     the BSD 2-Clause license. Note that NO WARRANTY is provided.
+     See "LICENSE_BSD2.txt" for details.
+     @TAG(DATA61_BSD)
+--&gt;</span>
+<span class="nt">&lt;manifest&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"."</span> <span class="na">name=</span><span class="s">"seL4"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"../sel4proj"</span> <span class="na">name=</span><span class="s">"sel4proj"</span><span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;default</span> <span class="na">remote=</span><span class="s">"seL4"</span> <span class="na">revision=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"musllibc.git"</span> <span class="na">path=</span><span class="s">"projects/musllibc"</span> <span class="na">revision=</span><span class="s">"f58dacf44a679a2d7c10fbb8d8bc8f58e2123791"</span> <span class="na">upstream=</span><span class="s">"sel4"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"riscv-pk"</span> <span class="na">path=</span><span class="s">"projects/riscv-pk"</span> <span class="na">remote=</span><span class="s">"sel4proj"</span> <span class="na">revision=</span><span class="s">"db937e995b09d343fb7146c447b0780ab1dca66b"</span> <span class="na">upstream=</span><span class="s">"fix-32bit"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4.git"</span> <span class="na">path=</span><span class="s">"kernel"</span> <span class="na">revision=</span><span class="s">"757c3ac98246afd0593367f1fa19054316a77495"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_libs.git"</span> <span class="na">path=</span><span class="s">"projects/seL4_libs"</span> <span class="na">revision=</span><span class="s">"1697cb16ecbc7820cbda78d7c7c1896e884195a1"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_tools.git"</span> <span class="na">path=</span><span class="s">"projects/tools"</span> <span class="na">revision=</span><span class="s">"930b6467eae8404e4a72555b693120ac0d64fc48"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">dest=</span><span class="s">"CMakeLists.txt"</span> <span class="na">src=</span><span class="s">"cmake-tool/default-CMakeLists.txt"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">dest=</span><span class="s">"init-build.sh"</span> <span class="na">src=</span><span class="s">"cmake-tool/init-build.sh"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/project&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4test.git"</span> <span class="na">path=</span><span class="s">"projects/sel4test"</span> <span class="na">revision=</span><span class="s">"dbd96aa862b8519165aaa8ae7bd5a1787048e34a"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"util_libs.git"</span> <span class="na">path=</span><span class="s">"projects/util_libs"</span> <span class="na">revision=</span><span class="s">"c575f7280ce6184dbb2876f83a6c591c91de219e"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
+<p>A pinned manifest uses pinned git revisions for all of its repositories. It is good practice to create a pinned manifest that refers to a working version of a project. For projects that we maintain, we provide at least two manifests: default.xml and master.xml (See <a href="/ReleaseProcess">ReleaseProcess</a> for more information about what manifests we make available).</p>
+
+<h2 id="commands">Commands</h2>
+
+<h3 id="init-and-sync"><code class="highlighter-rouge">init</code> and <code class="highlighter-rouge">sync</code></h3>
+
+<p><code class="highlighter-rouge">repo init</code> and <code class="highlighter-rouge">repo sync</code> are the most commonly used commands. Their purpose is for selecting a manifest and downloading all of the repositories and setting up a project directory structure.  Often project READMEs will provide the following instructions:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir source_dir
+cd source_dir
+repo init -u https://github.com/seL4/sel4test-manifest.git
+repo sync
+</code></pre></div></div>
+
+<p>This will initialise a new directory with the git repos checked out in the locations described by the manifest file.</p>
+
+<p>init is for selecting a manifest to use, and sync is for checking out that manifest.</p>
+
+<p><code class="highlighter-rouge">init</code></p>
+<ul>
+  <li><code class="highlighter-rouge">-u</code> git url. Note: GitHub <code class="highlighter-rouge">ssh</code> urls do not work using the generated URL they provide: <code class="highlighter-rouge">git@github.com:seL4/sel4test-manifest.git</code> has to be changed to <code class="highlighter-rouge">ssh://git@github.com/seL4/sel4test-manifest.git</code></li>
+  <li><code class="highlighter-rouge">-m</code> manifest name, default is default.xml.</li>
+  <li><code class="highlighter-rouge">-b</code> branch or revision, or tag if using format <code class="highlighter-rouge">refs/tags/tagname</code>. Default is default.xml</li>
+</ul>
+
+<p><code class="highlighter-rouge">sync</code></p>
+
+<p>This command synchronises your project directory with what the manifest describes.  If you have made commits in your branches, this may result in them getting <em>lost</em> as repo switches the HEAD back to what the manifest describes. If this happens, use <code class="highlighter-rouge">git reflog</code> to find the untracked commit, or use branches to keep track of commits as branches will remain in your local checkouts.</p>
+
+<p><code class="highlighter-rouge">sync</code> has several flags for specifying how to checkout from remotes such as <code class="highlighter-rouge">-j</code> for parallel checkouts.  Use <code class="highlighter-rouge">repo sync --help</code> for a list and description.</p>
+
+<h3 id="diff-and-status"><code class="highlighter-rouge">diff</code> and <code class="highlighter-rouge">status</code></h3>
+
+<p>These two commands are similar to running git diff or git status in every git repository.</p>
+
+<h3 id="diffmanifests"><code class="highlighter-rouge">diffmanifests</code></h3>
+
+<p>This command allows you to list the commit differences between two manifests of the same project.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>changed projects :
+
+        kernel changed from master to 757c3ac98246afd0593367f1fa19054316a77495
+                [-] 62445b35 x86: Correct labels for port out operations
+                [-] d9780ec7 manual: label object groups in parse_doxygen_xml.py
+                [-] 63c5ac6d manual: use level 3 for syscalls
+                [-] deba85b2 manual: promote sel4_arch API docs level
+                [-] b5ee12f0 manual: group generated API methods by object type
+                [-] da1e73fe manual: use int level in parse_doxygen_xml.py
+                [-] c2212688 x86: IOPort invocation has proper structure
+                [-] 7b8f6106 x86: Consistently compare against PPTR_USER_TOP
+                [-] 1b0a7181 manual: s/Polling Send/Non-Blocking Send
+                [-] 84b065b0 manual: use fontenc package
+
+        projects/tools changed from master to 930b6467eae8404e4a72555b693120ac0d64fc48
+                [-] 121782a CMake add error condition
+
+</code></pre></div></div>
+<!--
+## Repo mirroring
+
+TODO: Add details about repo mirroring
+ -->
+<h2 id="faq">FAQ</h2>
+
+<h3 id="how-do-i-check-out-a-released-version-of-a-project-such-as-sel4test">How do I check out a released version of a project such as seL4test?</h3>
+
+<blockquote>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/10.0.0
+repo sync
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="how-do-i-change-manifests-of-an-already-checked-out-project">How do I change manifests of an already checked out project?</h3>
+
+<blockquote>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -m master.xml
+repo sync
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This will change from the current manifest to <code class="highlighter-rouge">master.xml</code> in the manifest repository</p>
+
+<h3 id="how-do-i-create-a-pinned-manifest">How do I create a pinned manifest?</h3>
+
+<blockquote>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo manifest -r -o pinned.xml
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="is-there-a-faster-way-to-checkout-and-sync-a-project">Is there a faster way to checkout and sync a project?</h3>
+<blockquote>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git --no-clone-bundle --depth=1
+repo sync --jobs=8 --fetch-submodules --current-branch --no-clone-bundle
+</code></pre></div>  </div>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon May 28 16:30:11 2018 +1000 9becb1a
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon May 28 16:30:11 2018 +1000 a0320f5
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/RepoCheatsheet.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/RepoCheatsheet.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>
