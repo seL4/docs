@@ -3,7 +3,7 @@
 <!--excerpt-->
 
 This page contains documentation for how to interact with and build a project that is using this build system.
-If you are developing a project then should read the 'incorporating the build system' section.
+If you are developing a project then should read the [incorporating the build system](/Developing/Building/Incorporating) section.
 
 <!--excerpt-->
 

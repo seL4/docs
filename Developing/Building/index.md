@@ -47,15 +47,15 @@ This liquid templating pulls an excerpt out of the child documentation pages to 
 {% endcase %}
 {% endfor %}
 
-## [Documentation on configuring and building seL4 projects](/Developing/Building/Using)
+## [Configuring and building seL4 projects](/Developing/Building/Using)
 
 > {{ using[1] | strip }}
 
-## [Documentation on incorporating the build system into a project](/Developing/Building/Incorporating)
+## [Incorporating the build system into a project](/Developing/Building/Incorporating)
 
 > {{ incorporating[1] | strip }}
 
-## [Documentation on Kernel standalone builds](/Developing/Building/seL4Standalone)
+## [Kernel standalone builds](/Developing/Building/seL4Standalone)
 
 > {{ seL4Standalone[1] | strip}}
 
