@@ -22,7 +22,7 @@ Of the most significant are:
 ### Projects
 
 The seL4 kernel is built as part of project. Each project has a
-README.md associated with it which provicdes further information.
+README.md associated with it which provides further information.
 
 Projects are a collection of git repositories, with versions managed by
 [Android's Repo tool](http://source.android.com/source/downloading.html#installing-repo).
