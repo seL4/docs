@@ -82,7 +82,7 @@ repo sync
 ```sh
 mkdir build-x86
 cd build-x86
-../init.sh -DPLATFORM=x86_64 -DSIMULATION=TRUE
+../init-build.sh -DPLATFORM=x86_64 -DSIMULATION=TRUE
 ninja
 ```
 The target configurations available for each project are potentially different depending on what the project supports.
