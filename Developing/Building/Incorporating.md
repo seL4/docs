@@ -10,7 +10,7 @@ and desired customisation. This is reflected in the split of CMake files spread 
 
 ### Basic structure
 
-The build system here is in two pieces. One piece is in the seL4 kernel repository, which has all of the basic
+The build system here is in two pieces. One piece is in the seL4 kernel repository, which has all the basic
 compiler toolchain and flags settings as well as helpers for generating configurations. The other piece is in seL4_tools/cmake-tool,
 which has helpers for putting libraries and binaries together into a final system image (along with the kernel).
 
@@ -67,7 +67,7 @@ awesome_system/
 └── CMakeLists.txt -> tools/cmake-tool/default-CMakeLists.txt
 ```
 
-Then when `awesome_system/` is used used as the root source directory to initialise a CMake build directory
+Then when `awesome_system/` is used as the root source directory to initialise a CMake build directory
 the `tools/cmake-tool/all.cmake` file is included, that then includes `base.cmake`, which will then look for
 `awesome_system/kernel` as the directory of the kernel.
 
@@ -128,7 +128,7 @@ cmake -DCROSS_COMPILER_PREFIX=toolchain-prefix -DCMAKE_TOOLCHAIN_FILE=../seL4/gc
 ```
 
 What is important here is that the path for `CMAKE_TOOLCHAIN_FILE` is resolved immediately by CMake, and so is
-relative to the build directory, where as the `KERNEL_PATH` is resolved whilst processing `awesome_system/awesome/CMakeLists.txt`
+relative to the build directory, whereas the `KERNEL_PATH` is resolved whilst processing `awesome_system/awesome/CMakeLists.txt`
 and so is relative to that directory.
 
 The contents of `awesome_system/awesome/CMakeLists.txt` would be something like
@@ -210,13 +210,13 @@ Several CMake functions exist for reuse in seL4 projects.
 #### Kernel provided helpers
 
 Helper functions provided by the kernel scripts can all be found in `tools/helpers.cmake` in the seL4 repo.
-Most helper functions are only useful for the kernel build itself, but all of the config functions mentioned
+Most helper functions are only useful for the kernel build itself, but all the config functions mentioned
 in the section above are defined here.
 
 #### cmake-tool provided helpers
 
 These helper functions are provided for user-level projects to use. They are provided in `common.cmake` and
-all of the files in `helpers/`. Notable functions are:
+all the files in `helpers/`. Notable functions are:
 - `DeclareRootserver(rootserver_target)`: Declares a CMake executable, `rootserver_target`, as the rootserver for
 the system. It can only be called once and will:
   - Change build flags for the target
@@ -228,7 +228,7 @@ the system. It can only be called once and will:
   responsible for ensuring that the system configuration is simulatable if it uses this function. Other functions are
   provided such as `SetSimulationScriptProperty` to allow the application's CMake scripts to customise the simulation
   command generated.
-- `ApplyCommonSimulationSettings`: Will try and change the kernel system configuration to disable features that aren't
+- `ApplyCommonSimulationSettings`: Will try to change the kernel system configuration to disable features that aren't
   simulatable.
 - `ApplyCommonReleaseVerificationSettings(release, verification)`: Will setup flags for different combinations of
   'release' (performance optimized builds) and 'verification' (verification friendly features) builds.
