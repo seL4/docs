@@ -3,10 +3,9 @@
 <!--excerpt-->
 
 This page contains documentation for how to interact with and build a project that is using this build system.
-If you are developing a project then should read the [incorporating the build system](/Developing/Building/Incorporating) section.
+For new project development, see [incorporating the build system](/Developing/Building/Incorporating).
 
 <!--excerpt-->
-
 
 #### Basic build initialisation
 
@@ -19,83 +18,84 @@ cd build
 cmake -DCROSS_COMPILER_PREFIX=arm-linux-gnueabi- -DCMAKE_TOOLCHAIN_FILE=../kernel/gcc.cmake <OTHER_COMMAND_LINE_OPTIONS_HERE> -G Ninja ..
 ```
 
-We also provide a shorthand wrapping script which hides all of these necessary
-arguments other than the cross-compiler toolchain arguments, so you can instead
-invoke cmake by proxy via our wrapping script, like this:
+We now break down each component in the above invocation:
+
+ * `-D` defines a variable, in the form `X=Y`.
+ * `CROSS_COMPILER_PREFIX` specifies the toolchain for cross-compilation, which cannot be after
+    build directory initialisation. For further details, please see the "Cross Compiling"
+    below.
+ * `CMAKE_TOOLCHAIN_FILE` which indicates that CMake should load the specified file as a
+   'toolchain' file. A toolchain file is able to set up the C compiler, linker etc. for building the project.
+    In example we assume a typical project layout, where seL4 is in the 'kernel' directory, at the top level.
+    The [gcc.cmake](https://github.com/seL4/seL4/blob/master/gcc.cmake)' file from the seL4 repository
+     up C compilers and linkers using the `CROSS_COMPILER_PREFIX`.
+ * `-G Ninja` tells CMake to generate Ninja build scripts as opposed to GNU Makefiles. Only Ninja scripts are supported by parts of the kernel.
+ * `..` is the path to the top-level `CMakeLists.txt` file describing this project, which in this
+   case is placed in the root directory of the project.
+
+
+We also provide a shorthand wrapping script which abstracts the into a shorted command:
 
 ```sh
 ../init-build -DCROSS_COMPILER_PREFIX=arm-linux-gnueabi- <COMMAND_LINE_OPTIONS_HERE>
 ```
 
-
-Breaking down what each component means
-
- * `-D` means we are defining a variable in the form `X=Y`
- * `CROSS_COMPILER_PREFIX` which is used to specify the toolchain to be used for
-    cross-compilation. The toolchain cannot be changed after a build directory
-    is initialised. For further details, please see the "Cross Compiling"
-    section below.
- * `CMAKE_TOOLCHAIN_FILE` is variable understood by CMake and tells it to load the specified file as a
-   'toolchain' file. A toolchain file is able to setup the C compiler, linker etc that should be used. In this
-   case we assume a typical project layout with the seL4 kernel in a 'kernel' directory at the top level. The
-   '[gcc.cmake](https://github.com/seL4/seL4/blob/master/gcc.cmake)' file in it sets up C compilers and linkers
-   using the previously supplied `CROSS_COMPILER_PREFIX`
- * `-G Ninja` tells CMake that we want to generate Ninja build scripts as opposed to GNU Makefiles. Currently
-   only Ninja scripts are supported by parts of the kernel
- * `..` is the path to the top level `CMakeLists.txt` file that describes this project, generally this is
-   placed in the root directory so this parameter is typically `..`, but could be any path
-
-If all goes well you should now be able to build by doing
+After configuration, you can now build the project by invoking ninja:
 
 ```sh
 ninja
 ```
 
-And the resulting binaries will be placed in the `images/` subdirectory
+After the build has completed, the resulting binaries are available in the `images/` subdirectory.
 
 ### Configuration
 
-Many projects will have some degree of customisation available to them. Assuming a build directory that has been
-initialised with CMake you can do either
+#### Types of Options
+
+CMake has two types of configuration options:
+
+ * *Boolean options*, which are are either `ON` or `OFF`,
+ * *String options*, which can be set to any value, subject to restrictions set by the project authors.
+
+String options can have 'hints', which specify can one of several fixed values.
+CMake configuration editors respect these and provide a radio selection.
+
+
+#### Selecting Options
+
+Many projects have some degree of customisation available via configuration options. Once the build directory is initialised,
+you can use the following approaches to bring up a user-interface for option configuration:
+
+ * A `ncurses` based configuration:
 
 ```sh
 ccmake ..
 ```
 
-for a ncurses based configuration editor or
+ * Graphical configuration:
 
 ```sh
 cmake-gui ..
 ```
 
-for a graphical configuration editor.  In both invocations the path `..` should be the same path as was used in the original `cmake` invocation.
+In both cases the path `..` should resolve to the same directory used in the build configuration.
 
-CMake itself has two different kinds of options:
+#### Changing option values
 
- * Booleans: These are either `ON` or `OFF`
- * Strings: These can be set to any value, although they may be restricted to a set of values by whoever wrote the project.
+Any changes to configuration options will not be reflected in the user interface unless explicitly
+requested by using `(c)onfigure`, which may result in changes to the options available.
+For example if option `A` depends on boolean option `B`, `A` will not show up until `B` is enabled and
+`(c)onfigure` is used to reprocess the CMake files.
 
-String options can have 'hints' given to them that they should only take on one of several fixed values. The
-CMake configuration editors will respect these and provide a radio selection.
+To exit the configuration interface, use `(g)enerate and exit` or `(q)uit without generation`. CMake
+will not permit generation if the configuration is incomplete (`(c)onfigure` must be run and all
+options set).
 
-As you change configuration options the CMake scripts for the project are not continuously rerun. You can explicitly
-rerun by telling it to '(c)onfigure'. This may result in additional options appearing in the configuration editor,
-or some options being removed, depending on what their dependencies where. For example if there is option `A` that
-is dependent on option `B` being true, and you change `B` to true, `A` will not show up until you (c)onfigure and
-the CMake files are reprocessed.
-
-When you are done changing options you can either '(g)enerate and exit' or '(q)uit without generation'. If you
-quit without generating then your changes will be discarded, you may do this at any time. You will only be
-allowed to generate if you run (c)onfigure after doing any changes and CMake believes your configuration has
-reached a fixed point.
-
-After changing any options and generating call
+To rebuild after changing configuration options, invoke ninja:
 
 ```sh
 ninja
 ```
-
-to rebuild the project.
 
 #### Initial configuration:
 
@@ -112,32 +112,35 @@ approaches are used to present simple options to the user:
 
 ##### CMake cache scripts:
 
-The project may provide multiple `.cmake` files which each contain the cache
+CMake cache scripts provide subsets of preconfigured options, which allow the user of a project to
+avoid manually setting each option. Cache scripts have the file extension `.cmake`.
+
+Projects may provide cache scripts files which each contain the cache
 settings necessary to configure a single feature or option. By combining
-multiple `.cmake` files, you initialise the project in a certain way.
+multiple `.cmake` files, a project can be initialised in a specific way.
 Cache script configurations are provided when initialising the build directory
-by passing `-C <file>` to `cmake`. For example given some typical project structure,
-one might invoke `cmake` or `init-build.sh` with several of these partial
+by passing `-C <file>` to `cmake`. For example, given some typical project structure,
+one might invoke `cmake` or `init-build.sh` with several of
 cache scripts as arguments.
 
-You can pass multiple `-C` options on the command line, although if they try and set the same cache variables only one of the
-settings will actually get used. This means we might have two different configuration
-files for `arm.cmake` and `x86.cmake`, and then two other files for `debug.cmake` and `release.cmake`. We could
-now combine `arm.cmake` with either `debug.cmake` or `release.cmake`, similarly with `x86.cmake`. For example:
+Multiple cached scripts can be specified on the command line, although if the same option is set twice
+only one value is used. Consider an example with several cache scripts for setting the architecture
+details (`arm.cmake`, `x86.cmake`) and for setting build options (`debug.cmake`, `release.cmake`).
+The intended usage is that one architectural cache file is used, and one build options file, as
+demonstrated below:
 
 ```sh
 cmake -C../projects/awesome_project/configs/arm.cmake -C../projects/awesome_project/configs/debug.cmake -DCROSS_COMPILER_PREFIX=arm-linux-gnueabi- -DCMAKE_TOOLCHAIN_FILE=../kernel/gcc.cmake -G Ninja ..
 ```
 
-Nothing stops you from trying to initialise with both `arm.cmake` and `x86.cmake`, but since they are probably
-setting some of the same options only one will actually take effect. If the project has multiple configuration
-files you should check which can be composed.
+While nothing prevents the usage of both `arm.cmake` and `x86.cmake` at the same time, this does not
+make sense, and only one value for each option will be used.  For projects with multiple cache scripts,
+check which can be used together.
 
 ##### Meta configuration options:
 
-Not all projects follow this strictly but we have a set of top-level
-meta-variables which, if they are used by a project, will have the same
-behaviour:
+Some seL4  projects provide top-level variables which, used across projects, have the same behaviour.
+These options are as follows:
 
 * `-DPLATFORM=<YOUR_PREFERENCE>`: Selects the target system for the resulting
   binaries. Valid values for this variable are the first value (preceding the
@@ -152,74 +155,63 @@ behaviour:
 * `-DVERIFICATION`: Set to `0` or `1`: This is used to generate the version of
   the seL4 kernel source which is **VERIFIABLE**. This does not produce a binary
   for the **verified** kernel platform.
-* `-DSMP`: Set to `0` or `1`: Turns SMP (symmetric multiprocesing) support on or
+* `-DSMP`: Set to `0` or `1`: Turns SMP (symmetric multiprocessing) support on or
   off. By default it will enable support for up to 4 processors. To explicitly
-  set the max number of supported CPUs, try setting
+  set the maximum number of supported CPUs, try setting
   `-DKernelMaxNumNodes=<YOUR_PREFERENCE>`.
 * `-DSIMULATION`: Set to `0` or `1`: This produces a build of the project which
-   is suited for running in an emulator such as Qemu.
+   is suited for running in an emulator such as QEMU.
 
-seL4test and seL4bench follow this form.
+Both the [seL4test](/seL4Test) and [seL4bench](https://github.com/seL4/sel4bench-manifest) projects follow this form.
 
 #### [sel4test](https://github.com/seL4/sel4test) example:
 
-Please see the [main page on seL4test](../../seL4Test) for more information on how to configure
-and build seL4test.
+For more information on configuring, building and running the sel4test suite, please see the [main page on seL4test](../../seL4Test).
 
 ### Cross compiling:
 
-Cross compilation refers to compiling a program for a target machine which is
-different from the machine you're building it on. When compiling low level
-software you often find yourself needing to compile it on a machine which is
-different from the machine it will eventually be executed on.
+[Cross compilation](https://en.wikipedia.org/wiki/Cross_compiler) refers to compiling a program
+for a target machine which is different from the machine you are using to compile the program.
 
-In order to cross-compile, you usually need a separate compiler which
+Generally, in order to cross-compile, a separate compiler is required which
 specifically targets the foreign machine.
 
 #### For ARM-based targets:
 
-You must explicitly always pass in the command line argument `-DAARCH32` or
-`-DAARCH64` when cross-compiling for an ARM-based chipset -- **or** you can
-make use of `-DCROSS_COMPILER_PREFIX`.
+You can use the following command line options when when cross-compiling for an ARM-based machine:
 
-* `-DAARCH32`: Tells the build system that you are building for a 32-bit
+* `-DAARCH32=TRUE`: Tells the build system that you are building for a 32-bit
   ARM target. This will cause the build system to assume that you have a
   cross compiler installed which targets a system with the triplet name
   `arm-linux-gnueabi-`.
-* `-DAARCH32HF`: Tells the build system you're building for a 64-bit ARM
+* `-DAARCH32HF=TRUE`: Tells the build system you're building for a 64-bit ARM
   target which has hardware floating point support. Assumes you have a cross-
   compiler installed which targets `arm-linux-gnueabihf-`.
-* `-DAARCH64`: Tells the build system you're building for a 64-bit ARM
+* `-DAARCH64=TRUE`: Tells the build system you're building for a 64-bit ARM
   target. Assumes you have a cross-compiler installed which targets
   `aarch64-linux-gnu-`.
 
-**OR** you can always just pass in `-DCROSS_COMPILER_PREFIX=<TARGET_TRIPLET>`
-which can be used to explicitly set the target-triplet prefix of the
-cross-compiler which you would prefer to use to compile your binaries.
+Another option is to explicitly specify the toolchain through `-DCROSS_COMPILER_PREFIX`,
+which can be used to set the prefix of the
+cross-compiler to use.
 
 #### For RISC-V based targets:
 
-You must explicitly always pass in the command line argument `-DRISCV32` or
-`-DRISCV64` when cross compiling for a RISC-V target -- **or** you can make use
-of `-DCROSS_COMPILER_PREFIX`.
+You can use the following options when cross compiling for a RISC-V target:
 
-* `-DRISCV32`: Tells the build system that you are building for a 32-bit RISC-V
+* `-DRISCV32-TRUE`: Tells the build system that you are building for a 32-bit RISC-V
   target. This will cause the build system to assume that you have a cross-
   compiler installed which targets a system with the triplet name
   `riscv32-unknown-elf-`.
-* `-DRISCV64`: Tells the build system you're building for a 64-bit RISC-V
+* `-DRISCV64=TRUE`: Tells the build system you're building for a 64-bit RISC-V
   target. Assumes you have a cross-compiler installed which targets
   `riscv64-unknown-elf-`.
 
-**OR** you can always just pass in `-DCROSS_COMPILER_PREFIX=<TARGET_TRIPLET>`
-which can be used to explicitly set the target-triplet prefix of the
-cross-compiler which you would prefer to use to compile your binaries.
-
+Like ARM, you can explicitly specify the toolchain through `-DCROSS_COMPILER_PREFIX`,
+which can be used to set the prefix of the
+cross-compiler to use.
 
 #### CMAKE_BUILD_TYPE
 
-The `CMAKE_BUILD_TYPE` option is an option that will appear in the CMake configuration editors that is not
-defined by a project, but is rather defined by CMake itself. This option configures the kind of build to do;
-release, debug, release with debug information, etc. Note that the seL4 kernel ignores this setting as due
-to the way the kernel has to be built it side steps many of the CMake systems.
-
+The `CMAKE_BUILD_TYPE` option appears in CMake configuration editors and allows users to configure
+that build type (release, debug etc.). Note that this option is not respected by the seL4 kernel.
