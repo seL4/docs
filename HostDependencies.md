@@ -2,7 +2,7 @@
 
 This page describes how to set up your host machine to build and run seL4 and its supported projects. To compile and use seL4 you can either:
 
-* *Recommended:* Use Docker to isolate the dependencies from your machine. Detailed instructions for using Docker for building seL4, CAmkES, and L4v can be found [here](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles).
+* *Recommended:* Use Docker to isolate the dependencies from your machine. Detailed instructions for using Docker for building seL4, Camkes, and L4v can be found [here](Docker.md).
 * Install the following dependencies on your local OS
 
 The following instructions describe how to set up the required dependencies on your local OS. This page assumes you are building in a Linux OS. We however encourage site [contributions](https://docs.sel4.systems/DocsContributing) for building in alternative OSes (e.g. macOS).
