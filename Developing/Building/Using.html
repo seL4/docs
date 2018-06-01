@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-06-01 01:37:13 +0000 -->
+<!-- Page last generated 2018-06-01 03:57:28 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -278,7 +278,7 @@
 <!--excerpt-->
 
 <p>This page contains documentation for how to interact with and build a project that is using this build system.
-If you are developing a project then should read the <a href="/Developing/Building/Incorporating">incorporating the build system</a> section.</p>
+For new project development, see <a href="/Developing/Building/Incorporating">incorporating the build system</a>.</p>
 
 <!--excerpt-->
 
@@ -292,81 +292,85 @@ directory for the output binaries, then initialize CMake:</p>
 cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm-linux-gnueabi- <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>../kernel/gcc.cmake &lt;OTHER_COMMAND_LINE_OPTIONS_HERE&gt; <span class="nt">-G</span> Ninja ..
 </code></pre></div></div>
 
-<p>We also provide a shorthand wrapping script which hides all of these necessary
-arguments other than the cross-compiler toolchain arguments, so you can instead
-invoke cmake by proxy via our wrapping script, like this:</p>
+<p>We now break down each component in the above invocation:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">-D</code> defines a variable, in the form <code class="highlighter-rouge">X=Y</code>.</li>
+  <li><code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> specifies the toolchain for cross-compilation, which cannot be after
+ build directory initialisation. For further details, please see the “Cross Compiling”
+ below.</li>
+  <li><code class="highlighter-rouge">CMAKE_TOOLCHAIN_FILE</code> which indicates that CMake should load the specified file as a
+‘toolchain’ file. A toolchain file is able to set up the C compiler, linker etc. for building the project.
+ In example we assume a typical project layout, where seL4 is in the ‘kernel’ directory, at the top level.
+ The <a href="https://github.com/seL4/seL4/blob/master/gcc.cmake">gcc.cmake</a>’ file from the seL4 repository
+  up C compilers and linkers using the <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code>.</li>
+  <li><code class="highlighter-rouge">-G Ninja</code> tells CMake to generate Ninja build scripts as opposed to GNU Makefiles. Only Ninja scripts are supported by parts of the kernel.</li>
+  <li><code class="highlighter-rouge">..</code> is the path to the top-level <code class="highlighter-rouge">CMakeLists.txt</code> file describing this project, which in this
+case is placed in the root directory of the project.</li>
+</ul>
+
+<p>We also provide a shorthand wrapping script which abstracts the into a shorted command:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm-linux-gnueabi- &lt;COMMAND_LINE_OPTIONS_HERE&gt;
 </code></pre></div></div>
 
-<p>Breaking down what each component means</p>
-
-<ul>
-  <li><code class="highlighter-rouge">-D</code> means we are defining a variable in the form <code class="highlighter-rouge">X=Y</code></li>
-  <li><code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> which is used to specify the toolchain to be used for
- cross-compilation. The toolchain cannot be changed after a build directory
- is initialised. For further details, please see the “Cross Compiling”
- section below.</li>
-  <li><code class="highlighter-rouge">CMAKE_TOOLCHAIN_FILE</code> is variable understood by CMake and tells it to load the specified file as a
-‘toolchain’ file. A toolchain file is able to setup the C compiler, linker etc that should be used. In this
-case we assume a typical project layout with the seL4 kernel in a ‘kernel’ directory at the top level. The
-‘<a href="https://github.com/seL4/seL4/blob/master/gcc.cmake">gcc.cmake</a>’ file in it sets up C compilers and linkers
-using the previously supplied <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code></li>
-  <li><code class="highlighter-rouge">-G Ninja</code> tells CMake that we want to generate Ninja build scripts as opposed to GNU Makefiles. Currently
-only Ninja scripts are supported by parts of the kernel</li>
-  <li><code class="highlighter-rouge">..</code> is the path to the top level <code class="highlighter-rouge">CMakeLists.txt</code> file that describes this project, generally this is
-placed in the root directory so this parameter is typically <code class="highlighter-rouge">..</code>, but could be any path</li>
-</ul>
-
-<p>If all goes well you should now be able to build by doing</p>
+<p>After configuration, you can now build the project by invoking ninja:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
 </code></pre></div></div>
 
-<p>And the resulting binaries will be placed in the <code class="highlighter-rouge">images/</code> subdirectory</p>
+<p>After the build has completed, the resulting binaries are available in the <code class="highlighter-rouge">images/</code> subdirectory.</p>
 
 <h3 id="configuration">Configuration</h3>
 
-<p>Many projects will have some degree of customisation available to them. Assuming a build directory that has been
-initialised with CMake you can do either</p>
+<h4 id="types-of-options">Types of Options</h4>
+
+<p>CMake has two types of configuration options:</p>
+
+<ul>
+  <li><em>Boolean options</em>, which are are either <code class="highlighter-rouge">ON</code> or <code class="highlighter-rouge">OFF</code>,</li>
+  <li><em>String options</em>, which can be set to any value, subject to restrictions set by the project authors.</li>
+</ul>
+
+<p>String options can have ‘hints’, which specify can one of several fixed values.
+CMake configuration editors respect these and provide a radio selection.</p>
+
+<h4 id="selecting-options">Selecting Options</h4>
+
+<p>Many projects have some degree of customisation available via configuration options. Once the build directory is initialised,
+you can use the following approaches to bring up a user-interface for option configuration:</p>
+
+<ul>
+  <li>A <code class="highlighter-rouge">ncurses</code> based configuration:</li>
+</ul>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccmake ..
 </code></pre></div></div>
 
-<p>for a ncurses based configuration editor or</p>
+<ul>
+  <li>Graphical configuration:</li>
+</ul>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake-gui ..
 </code></pre></div></div>
 
-<p>for a graphical configuration editor.  In both invocations the path <code class="highlighter-rouge">..</code> should be the same path as was used in the original <code class="highlighter-rouge">cmake</code> invocation.</p>
+<p>In both cases the path <code class="highlighter-rouge">..</code> should resolve to the same directory used in the build configuration.</p>
 
-<p>CMake itself has two different kinds of options:</p>
+<h4 id="changing-option-values">Changing option values</h4>
 
-<ul>
-  <li>Booleans: These are either <code class="highlighter-rouge">ON</code> or <code class="highlighter-rouge">OFF</code></li>
-  <li>Strings: These can be set to any value, although they may be restricted to a set of values by whoever wrote the project.</li>
-</ul>
+<p>Any changes to configuration options will not be reflected in the user interface unless explicitly
+requested by using <code class="highlighter-rouge">(c)onfigure</code>, which may result in changes to the options available.
+For example if option <code class="highlighter-rouge">A</code> depends on boolean option <code class="highlighter-rouge">B</code>, <code class="highlighter-rouge">A</code> will not show up until <code class="highlighter-rouge">B</code> is enabled and
+<code class="highlighter-rouge">(c)onfigure</code> is used to reprocess the CMake files.</p>
 
-<p>String options can have ‘hints’ given to them that they should only take on one of several fixed values. The
-CMake configuration editors will respect these and provide a radio selection.</p>
+<p>To exit the configuration interface, use <code class="highlighter-rouge">(g)enerate and exit</code> or <code class="highlighter-rouge">(q)uit without generation</code>. CMake
+will not permit generation if the configuration is incomplete (<code class="highlighter-rouge">(c)onfigure</code> must be run and all
+options set).</p>
 
-<p>As you change configuration options the CMake scripts for the project are not continuously rerun. You can explicitly
-rerun by telling it to ‘(c)onfigure’. This may result in additional options appearing in the configuration editor,
-or some options being removed, depending on what their dependencies where. For example if there is option <code class="highlighter-rouge">A</code> that
-is dependent on option <code class="highlighter-rouge">B</code> being true, and you change <code class="highlighter-rouge">B</code> to true, <code class="highlighter-rouge">A</code> will not show up until you (c)onfigure and
-the CMake files are reprocessed.</p>
-
-<p>When you are done changing options you can either ‘(g)enerate and exit’ or ‘(q)uit without generation’. If you
-quit without generating then your changes will be discarded, you may do this at any time. You will only be
-allowed to generate if you run (c)onfigure after doing any changes and CMake believes your configuration has
-reached a fixed point.</p>
-
-<p>After changing any options and generating call</p>
+<p>To rebuild after changing configuration options, invoke ninja:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
 </code></pre></div></div>
-
-<p>to rebuild the project.</p>
 
 <h4 id="initial-configuration">Initial configuration:</h4>
 
@@ -385,31 +389,34 @@ system.</li>
 
 <h5 id="cmake-cache-scripts">CMake cache scripts:</h5>
 
-<p>The project may provide multiple <code class="highlighter-rouge">.cmake</code> files which each contain the cache
+<p>CMake cache scripts provide subsets of preconfigured options, which allow the user of a project to
+avoid manually setting each option. Cache scripts have the file extension <code class="highlighter-rouge">.cmake</code>.</p>
+
+<p>Projects may provide cache scripts files which each contain the cache
 settings necessary to configure a single feature or option. By combining
-multiple <code class="highlighter-rouge">.cmake</code> files, you initialise the project in a certain way.
+multiple <code class="highlighter-rouge">.cmake</code> files, a project can be initialised in a specific way.
 Cache script configurations are provided when initialising the build directory
-by passing <code class="highlighter-rouge">-C &lt;file&gt;</code> to <code class="highlighter-rouge">cmake</code>. For example given some typical project structure,
-one might invoke <code class="highlighter-rouge">cmake</code> or <code class="highlighter-rouge">init-build.sh</code> with several of these partial
+by passing <code class="highlighter-rouge">-C &lt;file&gt;</code> to <code class="highlighter-rouge">cmake</code>. For example, given some typical project structure,
+one might invoke <code class="highlighter-rouge">cmake</code> or <code class="highlighter-rouge">init-build.sh</code> with several of
 cache scripts as arguments.</p>
 
-<p>You can pass multiple <code class="highlighter-rouge">-C</code> options on the command line, although if they try and set the same cache variables only one of the
-settings will actually get used. This means we might have two different configuration
-files for <code class="highlighter-rouge">arm.cmake</code> and <code class="highlighter-rouge">x86.cmake</code>, and then two other files for <code class="highlighter-rouge">debug.cmake</code> and <code class="highlighter-rouge">release.cmake</code>. We could
-now combine <code class="highlighter-rouge">arm.cmake</code> with either <code class="highlighter-rouge">debug.cmake</code> or <code class="highlighter-rouge">release.cmake</code>, similarly with <code class="highlighter-rouge">x86.cmake</code>. For example:</p>
+<p>Multiple cached scripts can be specified on the command line, although if the same option is set twice
+only one value is used. Consider an example with several cache scripts for setting the architecture
+details (<code class="highlighter-rouge">arm.cmake</code>, <code class="highlighter-rouge">x86.cmake</code>) and for setting build options (<code class="highlighter-rouge">debug.cmake</code>, <code class="highlighter-rouge">release.cmake</code>).
+The intended usage is that one architectural cache file is used, and one build options file, as
+demonstrated below:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-C</span>../projects/awesome_project/configs/arm.cmake <span class="nt">-C</span>../projects/awesome_project/configs/debug.cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm-linux-gnueabi- <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>../kernel/gcc.cmake <span class="nt">-G</span> Ninja ..
 </code></pre></div></div>
 
-<p>Nothing stops you from trying to initialise with both <code class="highlighter-rouge">arm.cmake</code> and <code class="highlighter-rouge">x86.cmake</code>, but since they are probably
-setting some of the same options only one will actually take effect. If the project has multiple configuration
-files you should check which can be composed.</p>
+<p>While nothing prevents the usage of both <code class="highlighter-rouge">arm.cmake</code> and <code class="highlighter-rouge">x86.cmake</code> at the same time, this does not
+make sense, and only one value for each option will be used.  For projects with multiple cache scripts,
+check which can be used together.</p>
 
 <h5 id="meta-configuration-options">Meta configuration options:</h5>
 
-<p>Not all projects follow this strictly but we have a set of top-level
-meta-variables which, if they are used by a project, will have the same
-behaviour:</p>
+<p>Some seL4  projects provide top-level variables which, used across projects, have the same behaviour.
+These options are as follows:</p>
 
 <ul>
   <li><code class="highlighter-rouge">-DPLATFORM=&lt;YOUR_PREFERENCE&gt;</code>: Selects the target system for the resulting
@@ -427,81 +434,71 @@ Turning it on compiles the project without debugging features enabled.</li>
   <li><code class="highlighter-rouge">-DVERIFICATION</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: This is used to generate the version of
 the seL4 kernel source which is <strong>VERIFIABLE</strong>. This does not produce a binary
 for the <strong>verified</strong> kernel platform.</li>
-  <li><code class="highlighter-rouge">-DSMP</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: Turns SMP (symmetric multiprocesing) support on or
+  <li><code class="highlighter-rouge">-DSMP</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: Turns SMP (symmetric multiprocessing) support on or
 off. By default it will enable support for up to 4 processors. To explicitly
-set the max number of supported CPUs, try setting
+set the maximum number of supported CPUs, try setting
 <code class="highlighter-rouge">-DKernelMaxNumNodes=&lt;YOUR_PREFERENCE&gt;</code>.</li>
   <li><code class="highlighter-rouge">-DSIMULATION</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: This produces a build of the project which
- is suited for running in an emulator such as Qemu.</li>
+ is suited for running in an emulator such as QEMU.</li>
 </ul>
 
-<p>seL4test and seL4bench follow this form.</p>
+<p>Both the <a href="/seL4Test">seL4test</a> and <a href="https://github.com/seL4/sel4bench-manifest">seL4bench</a> projects follow this form.</p>
 
 <h4 id="sel4test-example"><a href="https://github.com/seL4/sel4test">sel4test</a> example:</h4>
 
-<p>Please see the <a href="../../seL4Test">main page on seL4test</a> for more information on how to configure
-and build seL4test.</p>
+<p>For more information on configuring, building and running the sel4test suite, please see the <a href="../../seL4Test">main page on seL4test</a>.</p>
 
 <h3 id="cross-compiling">Cross compiling:</h3>
 
-<p>Cross compilation refers to compiling a program for a target machine which is
-different from the machine you’re building it on. When compiling low level
-software you often find yourself needing to compile it on a machine which is
-different from the machine it will eventually be executed on.</p>
+<p><a href="https://en.wikipedia.org/wiki/Cross_compiler">Cross compilation</a> refers to compiling a program
+for a target machine which is different from the machine you are using to compile the program.</p>
 
-<p>In order to cross-compile, you usually need a separate compiler which
+<p>Generally, in order to cross-compile, a separate compiler is required which
 specifically targets the foreign machine.</p>
 
 <h4 id="for-arm-based-targets">For ARM-based targets:</h4>
 
-<p>You must explicitly always pass in the command line argument <code class="highlighter-rouge">-DAARCH32</code> or
-<code class="highlighter-rouge">-DAARCH64</code> when cross-compiling for an ARM-based chipset – <strong>or</strong> you can
-make use of <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>.</p>
+<p>You can use the following command line options when when cross-compiling for an ARM-based machine:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-DAARCH32</code>: Tells the build system that you are building for a 32-bit
+  <li><code class="highlighter-rouge">-DAARCH32=TRUE</code>: Tells the build system that you are building for a 32-bit
 ARM target. This will cause the build system to assume that you have a
 cross compiler installed which targets a system with the triplet name
 <code class="highlighter-rouge">arm-linux-gnueabi-</code>.</li>
-  <li><code class="highlighter-rouge">-DAARCH32HF</code>: Tells the build system you’re building for a 64-bit ARM
+  <li><code class="highlighter-rouge">-DAARCH32HF=TRUE</code>: Tells the build system you’re building for a 64-bit ARM
 target which has hardware floating point support. Assumes you have a cross-
 compiler installed which targets <code class="highlighter-rouge">arm-linux-gnueabihf-</code>.</li>
-  <li><code class="highlighter-rouge">-DAARCH64</code>: Tells the build system you’re building for a 64-bit ARM
+  <li><code class="highlighter-rouge">-DAARCH64=TRUE</code>: Tells the build system you’re building for a 64-bit ARM
 target. Assumes you have a cross-compiler installed which targets
 <code class="highlighter-rouge">aarch64-linux-gnu-</code>.</li>
 </ul>
 
-<p><strong>OR</strong> you can always just pass in <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX=&lt;TARGET_TRIPLET&gt;</code>
-which can be used to explicitly set the target-triplet prefix of the
-cross-compiler which you would prefer to use to compile your binaries.</p>
+<p>Another option is to explicitly specify the toolchain through <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>,
+which can be used to set the prefix of the
+cross-compiler to use.</p>
 
 <h4 id="for-risc-v-based-targets">For RISC-V based targets:</h4>
 
-<p>You must explicitly always pass in the command line argument <code class="highlighter-rouge">-DRISCV32</code> or
-<code class="highlighter-rouge">-DRISCV64</code> when cross compiling for a RISC-V target – <strong>or</strong> you can make use
-of <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>.</p>
+<p>You can use the following options when cross compiling for a RISC-V target:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-DRISCV32</code>: Tells the build system that you are building for a 32-bit RISC-V
+  <li><code class="highlighter-rouge">-DRISCV32-TRUE</code>: Tells the build system that you are building for a 32-bit RISC-V
 target. This will cause the build system to assume that you have a cross-
 compiler installed which targets a system with the triplet name
 <code class="highlighter-rouge">riscv32-unknown-elf-</code>.</li>
-  <li><code class="highlighter-rouge">-DRISCV64</code>: Tells the build system you’re building for a 64-bit RISC-V
+  <li><code class="highlighter-rouge">-DRISCV64=TRUE</code>: Tells the build system you’re building for a 64-bit RISC-V
 target. Assumes you have a cross-compiler installed which targets
 <code class="highlighter-rouge">riscv64-unknown-elf-</code>.</li>
 </ul>
 
-<p><strong>OR</strong> you can always just pass in <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX=&lt;TARGET_TRIPLET&gt;</code>
-which can be used to explicitly set the target-triplet prefix of the
-cross-compiler which you would prefer to use to compile your binaries.</p>
+<p>Like ARM, you can explicitly specify the toolchain through <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>,
+which can be used to set the prefix of the
+cross-compiler to use.</p>
 
 <h4 id="cmake_build_type">CMAKE_BUILD_TYPE</h4>
 
-<p>The <code class="highlighter-rouge">CMAKE_BUILD_TYPE</code> option is an option that will appear in the CMake configuration editors that is not
-defined by a project, but is rather defined by CMake itself. This option configures the kind of build to do;
-release, debug, release with debug information, etc. Note that the seL4 kernel ignores this setting as due
-to the way the kernel has to be built it side steps many of the CMake systems.</p>
-
+<p>The <code class="highlighter-rouge">CMAKE_BUILD_TYPE</code> option appears in CMake configuration editors and allows users to configure
+that build type (release, debug etc.). Note that this option is not respected by the seL4 kernel.</p>
 
     </div>
   </div>
@@ -532,7 +529,7 @@ to the way the kernel has to be built it side steps many of the CMake systems.</
         </li>
         
           <li>
-            Site last updated: Fri Jun 1 10:25:54 2018 +1000 39fb1fe
+            Site last updated: Fri Jun 1 10:25:57 2018 +1000 0706c77
           </li>
           <li>
             
@@ -577,7 +574,7 @@ to the way the kernel has to be built it side steps many of the CMake systems.</
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 595594e
+                Page last updated: Fri Jun 1 10:25:57 2018 +1000 0706c77
               
             
               
