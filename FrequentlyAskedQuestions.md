@@ -380,8 +380,7 @@ happen per year unless there is specific funding for a specific feature.
 Small updates take a day to a few weeks and we often do them on the
 side. There's no specific schedule at the moment.
 
-## How do I tell which code in GitHub is covered by the proof and which
-isn't?
+## How do I tell which code in GitHub is covered by the proof and which isn't?
  The verification sees the entire C code for one particular
 combination of configuration options. Currently this is the imx6
 platform, Cortex A9 processor, ARMv7-a architecture, all other config
