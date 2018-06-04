@@ -184,7 +184,7 @@ You can use the following command line options when when cross-compiling for an 
   ARM target. This will cause the build system to assume that you have a
   cross compiler installed which targets a system with the triplet name
   `arm-linux-gnueabi-`.
-* `-DAARCH32HF=TRUE`: Tells the build system you're building for a 64-bit ARM
+* `-DAARCH32HF=TRUE`: Tells the build system you're building for a 32-bit ARM
   target which has hardware floating point support. Assumes you have a cross-
   compiler installed which targets `arm-linux-gnueabihf-`.
 * `-DAARCH64=TRUE`: Tells the build system you're building for a 64-bit ARM
