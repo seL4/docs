@@ -59,6 +59,9 @@ We welcome community contributions to our sources and this website!
 ## Community
 
 - [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
+- Mailing lists
+  - [seL4 Announce](https://sel4.systems/lists/listinfo/announce)
+  - [seL4 Devel](https://sel4.systems/lists/listinfo/devel)
 - [IRC Channel](IRCChannel)
 - [Suggested projects](/SuggestedProjects)
 - [CommunityProjects](/CommunityProjects)
