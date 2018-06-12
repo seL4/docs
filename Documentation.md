@@ -36,7 +36,6 @@ will be produced in manual.pdf.
 - Isabelle Proof Assistant:
 
   -   [Concrete Semantics Isabelle textbook](http://concrete-semantics.org/)
-  -   [Isabelle 2013-2 tutorial](http://isabelle.in.tum.de/website-Isabelle2013-2/dist/Isabelle2013-2/doc/tutorial.pdf)
   -   [Isabelle website](http://isabelle.in.tum.de/)
   -   [Isabelle on Stack Overflow](http://stackoverflow.com/questions/tagged/isabelle)
 
