@@ -57,8 +57,7 @@ make qemu-arm
 
 ### Build Dependencies:
  In addition to the existing
-[seL4](SetupUbuntu) dependencies and [CAmkES](CAmkES)
-dependencies, the following dependencies are required:
+[seL4 dependencies and CAmkES dependencies](/HostDependencies), the following dependencies are required:
 
 - cargo and rustc: These are the rust build tool and compiler, they
       should be installed with
