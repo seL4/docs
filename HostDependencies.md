@@ -32,7 +32,7 @@ Additional base dependencies for building seL4 projects on Ubuntu include instal
 ```
 sudo apt-get install cmake ccache ninja-build gcc-6-base
 sudo apt-get install python-dev python-pip python3-dev python3-pip
-sudo apt-get install libxml2-utils python-tempita ncurses-dev
+sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen
 ```
 

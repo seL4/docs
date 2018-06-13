@@ -28,7 +28,7 @@ the "master" branch of CAmkES.
 apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev \
 libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
 
-pip install six tempita plyplus pyelftools orderedset jinja2
+pip install six plyplus pyelftools orderedset jinja2
 
 curl -sSL https://get.haskellstack.org/ | sh
 ```

@@ -81,7 +81,7 @@ On Ubuntu, these can be obtained with apt.
     make simulate-spike64
     ```
 
-    If make fails, you may need to install a few required python packages: sudo pip install tempita future
+    If make fails, you may need to install a few required python packages: sudo pip install sel4-deps
 
 ### Continuing development
 
