@@ -31,7 +31,7 @@ zynq7000 for ARM. The reason is that these platforms are popular and
 well supported/maintained by seL4 and QEMU.
 
 The following instructions are for ia32/pc99/x86, but should be similar
-for zynq7000/ARM with just changing the config selection (../init --plat zynq7000 --tut hello-1)
+for zynq7000/ARM with just changing the config selection (../init-build.sh -DTUT_BOARD=zynq7000 -DTUTORIAL=hello-1)
 
 First try to build the code:
 ```
@@ -41,7 +41,7 @@ cd sel4-tutorials-manifest/
 mkdir build_hello_1
 cd build_hello_1
 # initialise your build directory for the first tutorial
-../init --plat pc99 --tut hello-1
+../init-build.sh -DTUT_BOARD=pc99 -DTUTORIAL=hello-1
 # build it
 ninja
 ```
