@@ -25,16 +25,7 @@ interacting directly with seL4 and our libraries.
 ```
 mkdir sel4-tutorials-manifest
 cd sel4-tutorials-manifest
-repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/sel4-tutorials-9.0.1
-repo sync
-```
-
-If you want to check out the solutions:
-
-```
-mkdir sel4-tutorials-manifest
-cd sel4-tutorials-manifest
-repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/sel4-solutions-9.0.1
+repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/{{site.sel4_master}}
 repo sync
 ```
 
@@ -90,19 +81,9 @@ generates the glue code for interacting with seL4.
 ```
 mkdir camkes-tutorials-manifest
 cd camkes-tutorials-manifest
-repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/camkes-tutorials-3.4.0
+repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/camkes-{{site.camkes}}
 repo sync
 ```
-
-If you want to check out the solutions:
-
-```
-mkdir camkes-tutorials-manifest
-cd camkes-tutorials-manifest
-repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/camkes-solutions-3.4.0
-repo sync
-```
-
 
 ### Do the tutorials
 
