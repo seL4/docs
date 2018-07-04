@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-07-03 07:06:57 +0000 -->
+<!-- Page last generated 2018-07-04 06:49:46 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -2061,6 +2061,38 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="set-tls-base">Set TLS Base</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetTLSBase</code></p>
+
+<p>Set the TLS base of the target TCB. This intended for use on architectures where the register
+used for TLS can only be written to in privilidged mode</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">tls_base</code></td>
+      <td>The TLS base to set</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> <em>TODO</em></p>
+
+<p><strong>Description:</strong> <em>TODO</em></p>
 
 <h4 id="suspend">Suspend</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Suspend</code></p>
@@ -5124,6 +5156,7 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#set-priority">Set Priority</a></li>
 <li class="toc-entry toc-h4"><a href="#set-sched-params">Set Sched Params</a></li>
 <li class="toc-entry toc-h4"><a href="#set-space">Set Space</a></li>
+<li class="toc-entry toc-h4"><a href="#set-tls-base">Set TLS Base</a></li>
 <li class="toc-entry toc-h4"><a href="#suspend">Suspend</a></li>
 <li class="toc-entry toc-h4"><a href="#unbind-notification">Unbind Notification</a></li>
 <li class="toc-entry toc-h4"><a href="#unset-breakpoint">Unset Breakpoint</a></li>
@@ -5283,7 +5316,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Tue Jul 3 17:03:42 2018 +1000 5d38508
+            Site last updated: Wed Jul 4 16:38:43 2018 +1000 bae307b
           </li>
           <li>
             
