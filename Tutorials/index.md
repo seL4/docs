@@ -7,14 +7,6 @@ toc: true
 First make sure you have
 [set up your machine](/GettingStarted#setting-up-your-machine).
 
-## Prerequisites
-
-
-The build dependencies for seL4 can be found in the
-`Prerequisites.md`
-([Click!](https://github.com/SEL4PROJ/sel4-tutorials/blob/master/Prerequisites.md))
-file in the root of the SEL4-tutorials GIT repository.
-
 ## seL4 tutorials
 
 
