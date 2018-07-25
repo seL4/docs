@@ -66,6 +66,7 @@ if (x == FOO) {
 * Constants and macros should be in upper case.
 * Typedef structs and enums.
 * Prefix arch specific code with `arch_` and platform specific code with `plat_`.
+* upper case is only used for preprocessor directives and macros. 
 
 ### Structure
 
@@ -183,6 +184,7 @@ foo(my_array);
 * No static local variables.
 * No unneccesary signed variables.
 * Prefix struct fields with the name of the struct, to avoid namespace conflicts in the proof.
+* Avoid typedefing enums, always specify enum types as word_t (otherwise enum size is determined by the compiler)
 
 ## Further resources
 
