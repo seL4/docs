@@ -199,7 +199,7 @@ cross-compiler to use.
 
 You can use the following options when cross compiling for a RISC-V target:
 
-* `-DRISCV32-TRUE`: Tells the build system that you are building for a 32-bit RISC-V
+* `-DRISCV32=TRUE`: Tells the build system that you are building for a 32-bit RISC-V
   target. This will cause the build system to assume that you have a cross-
   compiler installed which targets a system with the triplet name
   `riscv32-unknown-elf-`.
