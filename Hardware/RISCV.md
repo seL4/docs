@@ -76,9 +76,9 @@ On Ubuntu, these can be obtained with apt.
 
     ```bash
     cd sel4test
-    make bamboo_riscv64_defconfig
-    make -j8
-    make simulate-spike64
+    ../init-build.sh -DPLATFORM=spike -DRISCV64=TRUE
+    ninja
+    ./simulate
     ```
 
     If make fails, you may need to install a few required python packages: sudo pip install sel4-deps
