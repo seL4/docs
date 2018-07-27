@@ -75,7 +75,7 @@ On Ubuntu, these can be obtained with apt.
 6. Build the RISC-V sel4test image and run sel4test
 
     ```bash
-    cd sel4test
+    mkdir build-riscv && cd build-riscv
     ../init-build.sh -DPLATFORM=spike -DRISCV64=TRUE
     ninja
     ./simulate
