@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-07-26 02:34:21 +0000 -->
+<!-- Page last generated 2018-07-30 10:59:12 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -349,10 +349,10 @@ source.</p>
   <li>
     <p>Build the RISC-V sel4test image and run sel4test</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd </span>sel4test
- make bamboo_riscv64_defconfig
- make <span class="nt">-j8</span>
- make simulate-spike64
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir build-riscv <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build-riscv
+ ../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>spike <span class="nt">-DRISCV64</span><span class="o">=</span>TRUE
+ ninja
+ ./simulate
 </code></pre></div>    </div>
 
     <p>If make fails, you may need to install a few required python packages: sudo pip install sel4-deps</p>
@@ -392,7 +392,7 @@ source.</p>
         </li>
         
           <li>
-            Site last updated: Thu Jul 26 12:33:46 2018 +1000 8d570e7
+            Site last updated: Fri Jul 27 22:40:59 2018 +1000 f919221
           </li>
           <li>
             
@@ -487,7 +487,7 @@ source.</p>
               
             
               
-            
+                Page last updated: Fri Jul 27 22:40:59 2018 +1000 f919221
               
             
               
@@ -507,7 +507,7 @@ source.</p>
               
             
               
-                Page last updated: Wed Jun 13 15:55:02 2018 +1000 9773f34
+            
               
             
               
