@@ -6,7 +6,7 @@ platform: Raspberry Pi 3-b
 arch: ARMv8A
 virtualization: ARM HYP
 iommu: "No"
-soc: BCM2937
+soc: BCM2837
 cpu: Cortex-A53
 Status: Unverified
 Contrib: Data61
