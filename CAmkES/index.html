@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-08-01 04:20:52 +0000 -->
+<!-- Page last generated 2018-08-01 05:01:49 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -263,8 +263,7 @@
     
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#setting-up-your-machine">Setting up your machine</a></li>
-<li class="toc-entry toc-h2"><a href="#download-camkes">Download CAmkES</a></li>
+<li class="toc-entry toc-h2"><a href="#get-camkes">Get Camkes</a></li>
 <li class="toc-entry toc-h2"><a href="#build-and-run-simple-application">Build and run simple application</a></li>
 <li class="toc-entry toc-h2"><a href="#read-tutorial">Read Tutorial</a></li>
 <li class="toc-entry toc-h2"><a href="#camkes-terminologyglossary">Camkes Terminology/Glossary</a></li>
@@ -299,16 +298,13 @@ between the components.</p>
   <li>full integration in the seL4 environment and build system</li>
 </ul>
 
-<h2 id="setting-up-your-machine">Setting up your machine</h2>
+<h2 id="get-camkes">Get Camkes</h2>
 
 <ul>
-  <li>Make sure that you already have the tools to build seL4
-(<a href="/GettingStarted#setting-up-your-machine">seL4: Setting up your machine</a>)</li>
+  <li>Make sure that you already have the tools to <a href="/GettingStarted#setting-up-your-machine">build seL4 and Camkes</a>.</li>
+  <li>Download Camkes:</li>
 </ul>
 
-<h2 id="download-camkes">Download CAmkES</h2>
-
-<p>Download CAmkES source code from GitHub:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir camkes-project
 cd camkes-project
 repo init -u https://github.com/seL4/camkes-manifest.git
@@ -319,23 +315,13 @@ repo sync
 
 <p>The following will configure, build, and run a simple example CAmkES
 system:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make arm_simple_defconfig
-make silentoldconfig
-</code></pre></div></div>
 
-<p>If you haven’t done so already, change the toolchain to the one for your
-system. You can do this by running <code class="highlighter-rouge">make menuconfig</code>, then going to
-<strong>Toolchain Options -&gt; Cross compiler prefix</strong>. You will most
-likely be compiling with <strong>arm-linux-gnueabi-</strong>.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make
-qemu-system-arm -M kzm -nographic -kernel images/capdl-loader-experimental-image-arm-imx31
-</code></pre></div></div>
-
-<p>In order to clean up after building (for example because you’ve set up a
-new configuration and you want to make sure that everything gets rebuilt
-correctly) do:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make clean
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd camkes-project
+mkdir build
+cd build
+../init-build.sh -DPLATFORM=sabre -DCROSS_COMPILER_PREFIX=arm-none-eabi- -DCAMKES_APP=adder -DSIMULATE=1
+ninja
+./simulate
 </code></pre></div></div>
 
 <h2 id="read-tutorial">Read Tutorial</h2>
@@ -402,7 +388,7 @@ projects. Read more: <a href="/CAmkESCLI">CAmkESCLI</a></p>
         </li>
         
           <li>
-            Site last updated: Wed Aug 1 14:19:48 2018 +1000 efb7f2f
+            Site last updated: Wed Aug 1 15:01:00 2018 +1000 13e6c1a
           </li>
           <li>
             
@@ -413,7 +399,7 @@ projects. Read more: <a href="/CAmkESCLI">CAmkESCLI</a></p>
               
             
               
-                Page last updated: Wed Aug 1 14:19:48 2018 +1000 efb7f2f
+                Page last updated: Wed Aug 1 15:01:00 2018 +1000 13e6c1a
               
             
               
