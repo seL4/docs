@@ -24,59 +24,8 @@ The development framework provides:
 
 ## Setting up your machine
 
-
-- Before you can use any of the SEL4 related repositories, you must
-  [get the "repo" tool by Google](http://source.android.com/source/downloading.html#installing-repo). SEL4 projects have multiple
-  subproject dependencies, and repo will fetch all of them and
-  place them in the correct subdirectories for you.
 - Make sure that you already have the tools to build seL4
   ([seL4: Setting up your machine](/GettingStarted#setting-up-your-machine))
-
-## Build dependencies
-  
-
-* Getting dependencies differs across systems. Here's how to install dependencies for several systems:
-
-  * Ubuntu 16.04
-  
-    ```bash
-    apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang \
-    libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect
-    qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
-    ```
-
-  * Ubuntu 14.04
-  
-    ```bash
-    apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils \
-    cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect \
-    qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi \
-    gcc-5 gcc-5-multilib
-
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
-    ```
-  * Archlinux
-
-    ```bash
-    pacman -S binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang \
-    moreutils cpio python python-pip expect cmake ninja m4 automake autoconf pkg-config \
-    valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
-
-    yaourt -S bcunit-cunit-compat spin
-    ```
-* Regardless of you system, you
-will need to install haskell, and some python dependencies
-  * Install [ haskell stack](<https://haskellstack.org> ) (haskell version and package manager)
-      
-    ```
-    curl -sSL https://get.haskellstack.org/ | sh
-    ```
-
-  * Install python dependencies (via pip):
-      
-    ```
-    pip install --user camkes-deps
-    ```
 
 ## Download CAmkES
 
@@ -157,11 +106,3 @@ Here's some information about the internals of the CAmkES tool:
 There is an experimental command line interface for managing CAmkES
 projects. Read more: [CAmkESCLI](/CAmkESCLI)
 
-## Python Dependencies
-
-
-The **Build Dependencies** section covers how to install the python
-dependencies. The python metapackage,
-[camkes-deps](https://pypi.python.org/pypi/camkes-deps), is
-implemented in the CAmkES repo
-[here](https://github.com/seL4/camkes-tool/blob/master/tools/python-deps/setup.py).
