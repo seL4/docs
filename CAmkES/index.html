@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-07-30 10:59:12 +0000 -->
+<!-- Page last generated 2018-08-01 04:20:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -264,7 +264,6 @@
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#setting-up-your-machine">Setting up your machine</a></li>
-<li class="toc-entry toc-h2"><a href="#build-dependencies">Build dependencies</a></li>
 <li class="toc-entry toc-h2"><a href="#download-camkes">Download CAmkES</a></li>
 <li class="toc-entry toc-h2"><a href="#build-and-run-simple-application">Build and run simple application</a></li>
 <li class="toc-entry toc-h2"><a href="#read-tutorial">Read Tutorial</a></li>
@@ -274,7 +273,6 @@
 <li class="toc-entry toc-h2"><a href="#changes-in-camkes-3">Changes in CAmkES 3</a></li>
 <li class="toc-entry toc-h2"><a href="#internals">Internals</a></li>
 <li class="toc-entry toc-h2"><a href="#command-line-interface">Command Line Interface</a></li>
-<li class="toc-entry toc-h2"><a href="#python-dependencies">Python Dependencies</a></li>
 </ul>
       </nav>
     
@@ -304,70 +302,8 @@ between the components.</p>
 <h2 id="setting-up-your-machine">Setting up your machine</h2>
 
 <ul>
-  <li>Before you can use any of the SEL4 related repositories, you must
-<a href="http://source.android.com/source/downloading.html#installing-repo">get the “repo” tool by Google</a>. SEL4 projects have multiple
-subproject dependencies, and repo will fetch all of them and
-place them in the correct subdirectories for you.</li>
   <li>Make sure that you already have the tools to build seL4
 (<a href="/GettingStarted#setting-up-your-machine">seL4: Setting up your machine</a>)</li>
-</ul>
-
-<h2 id="build-dependencies">Build dependencies</h2>
-
-<ul>
-  <li>
-    <p>Getting dependencies differs across systems. Here’s how to install dependencies for several systems:</p>
-
-    <ul>
-      <li>
-        <p>Ubuntu 16.04</p>
-
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang <span class="se">\</span>
-libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect
-qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
-</code></pre></div>        </div>
-      </li>
-      <li>
-        <p>Ubuntu 14.04</p>
-
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils <span class="se">\</span>
-cmake ninja-build clang libssl-dev libsqlite3-dev libcunit1-dev gcc-multilib expect <span class="se">\</span>
-qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi <span class="se">\</span>
-gcc-5 gcc-5-multilib
-
-update-alternatives <span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-5 60
-</code></pre></div>        </div>
-      </li>
-      <li>
-        <p>Archlinux</p>
-
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pacman <span class="nt">-S</span> binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang <span class="se">\</span>
-moreutils cpio python python-pip expect cmake ninja m4 automake autoconf pkg-config <span class="se">\</span>
-valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
-
-yaourt <span class="nt">-S</span> bcunit-cunit-compat spin
-</code></pre></div>        </div>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>Regardless of you system, you
-will need to install haskell, and some python dependencies</p>
-    <ul>
-      <li>
-        <p>Install [ haskell stack](<a href="https://haskellstack.org">https://haskellstack.org</a> ) (haskell version and package manager)</p>
-
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSL https://get.haskellstack.org/ | sh
-</code></pre></div>        </div>
-      </li>
-      <li>
-        <p>Install python dependencies (via pip):</p>
-
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install --user camkes-deps
-</code></pre></div>        </div>
-      </li>
-    </ul>
-  </li>
 </ul>
 
 <h2 id="download-camkes">Download CAmkES</h2>
@@ -436,13 +372,6 @@ functional changes. For details about what’s changed, see
 <p>There is an experimental command line interface for managing CAmkES
 projects. Read more: <a href="/CAmkESCLI">CAmkESCLI</a></p>
 
-<h2 id="python-dependencies">Python Dependencies</h2>
-
-<p>The <strong>Build Dependencies</strong> section covers how to install the python
-dependencies. The python metapackage,
-<a href="https://pypi.python.org/pypi/camkes-deps">camkes-deps</a>, is
-implemented in the CAmkES repo
-<a href="https://github.com/seL4/camkes-tool/blob/master/tools/python-deps/setup.py">here</a>.</p>
 
     </div>
   </div>
@@ -473,7 +402,7 @@ implemented in the CAmkES repo
         </li>
         
           <li>
-            Site last updated: Fri Jul 27 22:40:59 2018 +1000 f919221
+            Site last updated: Wed Aug 1 14:19:48 2018 +1000 efb7f2f
           </li>
           <li>
             
@@ -484,7 +413,7 @@ implemented in the CAmkES repo
               
             
               
-                Page last updated: Mon Apr 9 09:32:28 2018 +1000 7188ab0
+                Page last updated: Wed Aug 1 14:19:48 2018 +1000 efb7f2f
               
             
               
