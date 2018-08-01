@@ -22,15 +22,11 @@ The development framework provides:
       glue code to build a complete, bootable, system image
 - full integration in the seL4 environment and build system
 
-## Setting up your machine
+## Get Camkes
 
-- Make sure that you already have the tools to build seL4
-  ([seL4: Setting up your machine](/GettingStarted#setting-up-your-machine))
+- Make sure that you already have the tools to [build seL4 and Camkes](/GettingStarted#setting-up-your-machine).
+- Download Camkes:
 
-## Download CAmkES
-
-
-Download CAmkES source code from GitHub:
 ```
 mkdir camkes-project
 cd camkes-project
@@ -40,29 +36,16 @@ repo sync
 
 ## Build and run simple application
 
-
 The following will configure, build, and run a simple example CAmkES
 system:
-```
-make arm_simple_defconfig
-make silentoldconfig
-```
-
-If you haven't done so already, change the toolchain to the one for your
-system. You can do this by running `make menuconfig`, then going to
-**Toolchain Options -> Cross compiler prefix**. You will most
-likely be compiling with **arm-linux-gnueabi-**.
-```
-make
-qemu-system-arm -M kzm -nographic -kernel images/capdl-loader-experimental-image-arm-imx31
-```
-
-In order to clean up after building (for example because you’ve set up a
-new configuration and you want to make sure that everything gets rebuilt
-correctly) do:
 
 ```
-make clean
+cd camkes-project
+mkdir build
+cd build
+../init-build.sh -DPLATFORM=sabre -DCROSS_COMPILER_PREFIX=arm-none-eabi- -DCAMKES_APP=testsyscalls -DSIMULATE=1
+ninja
+./simulate
 ```
 
 ## Read Tutorial
