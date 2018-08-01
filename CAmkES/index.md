@@ -43,7 +43,7 @@ system:
 cd camkes-project
 mkdir build
 cd build
-../init-build.sh -DPLATFORM=sabre -DCROSS_COMPILER_PREFIX=arm-none-eabi- -DCAMKES_APP=testsyscalls -DSIMULATE=1
+../init-build.sh -DPLATFORM=sabre -DCROSS_COMPILER_PREFIX=arm-none-eabi- -DCAMKES_APP=adder -DSIMULATE=1
 ninja
 ./simulate
 ```
