@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-08-01 05:01:49 +0000 -->
+<!-- Page last generated 2018-08-03 08:28:46 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -268,6 +268,19 @@
 <li class="toc-entry toc-h2"><a href="#quick-walk-through-the-source-code">Quick walk through the source code</a></li>
 <li class="toc-entry toc-h2"><a href="#adding-to-the-guest">Adding to the guest</a>
 <ul>
+<li class="toc-entry toc-h3"><a href="#vm-linux-helperscmake">vm-linux-helpers.cmake</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#addfiletooverlaydirfilename-file_location-root_location-overlay_name">AddFileToOverlayDir(filename file_location root_location overlay_name)</a></li>
+<li class="toc-entry toc-h5"><a href="#addoverlaydirtorootfsrootfs_overlay-rootfs_image-rootfs_distro-rootfs_overlay_mode-output_rootfs_location-target_name">AddOverlayDirToRootfs(rootfs_overlay rootfs_image rootfs_distro rootfs_overlay_mode output_rootfs_location target_name)</a></li>
+<li class="toc-entry toc-h5"><a href="#addexternalprojfilestooverlayexternal_target-external_install_dir-overlay_target-overlay_root_location">AddExternalProjFilesToOverlay(external_target external_install_dir overlay_target overlay_root_location)</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#linux-source-helperscmake">linux-source-helpers.cmake</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#downloadlinuxlinux_major-linux_minor-linux_md5-linux_out_dir-linux_out_target">DownloadLinux(linux_major linux_minor linux_md5 linux_out_dir linux_out_target)</a></li>
+<li class="toc-entry toc-h5"><a href="#configurelinuxlinux_dir-linux_config_location-linux_symvers_location-configure_linux_target">ConfigureLinux(linux_dir linux_config_location linux_symvers_location configure_linux_target)</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#adding-a-program">Adding a program</a></li>
 <li class="toc-entry toc-h3"><a href="#adding-a-kernel-module">Adding a kernel module</a></li>
 </ul>
@@ -401,6 +414,7 @@ look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>, :</p>
 
 <span class="c1"># Include CAmkES VM helper functions</span>
 <span class="nb">include</span><span class="p">(</span><span class="s2">"../../vm/camkes_vm_helpers.cmake"</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="s2">"../../vm-linux/vm-linux-helpers.cmake"</span><span class="p">)</span>
 
 <span class="c1"># Define kernel config options</span>
 <span class="nb">set</span><span class="p">(</span>KernelX86Sel4Arch ia32 CACHE STRING <span class="s2">""</span> FORCE<span class="p">)</span>
@@ -428,9 +442,9 @@ This firstly enables us to call <code class="highlighter-rouge">DeclareCAmkESVM(
 With each Init component we define in the CAmkES configuration we need to correspondingly define
 the component with the <code class="highlighter-rouge">DeclareCAmkESVM</code> function.</p>
 
-<p>To find a kernel and rootfs image we use the <code class="highlighter-rouge">GetDefaultLinuxKernelFile</code> helper
-to retrieve the location of the vm images provided in the <code class="highlighter-rouge">projects/vm</code> folder.
-This project contains some tools for building new linux kernel
+<p>To find a kernel and rootfs image we use the <code class="highlighter-rouge">GetDefaultLinuxKernelFile</code> helper (defined in
+<code class="highlighter-rouge">projects/vm-linux/vm-linux-helpers.cmake</code>) to retrieve the location of the vm images provided
+in the <code class="highlighter-rouge">projects/vm-linux</code> folder. This project contains some tools for building new linux kernel
 and root filesystem images, as well as the images that these tools
 produce. A fresh checkout of this project will contain some pre-build
 images (<code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">rootfs.cpio</code>), to speed up build times. We call the
@@ -445,39 +459,53 @@ initrd (rootfs.cpio) is also the filesystem you get access to after
 logging in. To make new programs available to the guest, add them to the
 rootfs.cpio archive. Similarly, to make new kernel modules available to
 the guest, they must be added to the rootfs.cpio archive also. The
-<code class="highlighter-rouge">projects/vm/linux</code> directory contains a tool called “build-rootfs”, which is
-unrelated to the unfortunately similarly-named buildroot, which
-generates a new rootfs.cpio archive based on a starting point
-(rootfs-bare.cpio), and a collection of programs and modules. It also
-allows you to specify what happens when the system starts, and install
-some camkes-specific initialization code.</p>
+<code class="highlighter-rouge">projects/vm/vm-linux</code> directory contains CMake helpers to
+overlay rootfs.cpio archives with a desired set of programs, modules
+and scripts.</p>
 
-<p>Here’s a summary of what the build-rootfs tool does:</p>
+<p>Here’s a summary of some of the CMake helpers that are available to help you add your own files
+to the rootfs image:</p>
 
-<ol>
-  <li>Download the linux source (unless it’s already been downloaded).
-This is required for compiling kernel modules. The version of
-linux must match the one used to build bzimage.</li>
-  <li>Copy some config files into the linux source so it builds the
-modules the way we like.</li>
-  <li>Prepare the linux source for building modules (make prepare;
-make modules_prepare).</li>
-  <li>Extract the starting-point root filesystem (rootfs-bare.cpio).</li>
-  <li>Build all kernel modules in the “modules” directory, placing the
-output in the extracted root filesystem.</li>
-  <li>Create an init script by instantiating the “init_template” file
-with information about the linux version we’re using.</li>
-  <li>Add camkes-specific initialization from the “camkes_init” file to
-the init.d directory in the extracted root filesystem.</li>
-  <li>Build custom libraries that programs will use, located in the
-“lib_src” directory.</li>
-  <li>Build each program in the “pkg” directory, statically linked,
-placing the output in the extracted root filesystem.</li>
-  <li>Copy all the files in the “text” directory to the “opt” directory
-in the extracted root filesystem.</li>
-  <li>Create a CPIO archive from the extracted root filesystem, creating
-the rootfs.cpio file.</li>
-</ol>
+<h3 id="vm-linux-helperscmake">vm-linux-helpers.cmake</h3>
+
+<h5 id="addfiletooverlaydirfilename-file_location-root_location-overlay_name"><code class="highlighter-rouge">AddFileToOverlayDir(filename file_location root_location overlay_name)</code></h5>
+<p>This helper allows you to overlay specific files onto a rootfs image. The caller specifies
+the file they wish to install in the rootfs image (<code class="highlighter-rouge">file_location</code>), the name they want the file
+to be called in the rootfs (<code class="highlighter-rouge">filename</code>) and the location they want the file to installed in the
+rootfs (<code class="highlighter-rouge">root_location</code>), e.g “usr/bin”. Lastly the caller passes in a unique target name for the overlay
+(<code class="highlighter-rouge">overlay_name</code>). You can repeatedly call this helper with different files for a given target to build
+up a set of files to be installed on a rootfs image.</p>
+
+<h5 id="addoverlaydirtorootfsrootfs_overlay-rootfs_image-rootfs_distro-rootfs_overlay_mode-output_rootfs_location-target_name"><code class="highlighter-rouge">AddOverlayDirToRootfs(rootfs_overlay rootfs_image rootfs_distro rootfs_overlay_mode output_rootfs_location target_name)</code></h5>
+<p>This helper allows you to install a defined overlay target onto a given rootfs image. The caller specifies
+the rootfs overlay target name (<code class="highlighter-rouge">rootfs_overlay</code>), the rootfs image they wish to install their files onto
+(<code class="highlighter-rouge">rootfs_image</code>), the distribution of their rootfs image (<code class="highlighter-rouge">rootfs_distro</code>, only ‘buildroot’ and ‘debian’ is
+supported) and the output location of their overlayed rootfs image (<code class="highlighter-rouge">output_rootfs_location</code>). Lastly the caller
+specifies how the files will be installed into their rootfs image through <code class="highlighter-rouge">rootfs_overlay_mode</code>. These modes include:</p>
+<ul>
+  <li><code class="highlighter-rouge">rootfs_install</code>: The files are installed onto the rootfs image. This is useful if the rootfs image is the filesystem
+your guest VM is using when it boots. However this won’t be useful if your VM will be booting from disk since the installed files
+won’t be present after the VM boots.</li>
+  <li><code class="highlighter-rouge">overlay</code>: The files are mounted as an overlayed filesystem (overlayfs). This is useful if you are booting from disk and don’t wish to
+install the artifacts permanently onto the VM. The downside to this is that writes to the overlayed root do not persist between boots. This
+mode is benefitial for debugging purposes and live VM images.</li>
+  <li><code class="highlighter-rouge">fs_install</code>: The files are permanently installed on the VM’s file system, after the root has been mounted.
+    <h5 id="addexternalprojfilestooverlayexternal_target-external_install_dir-overlay_target-overlay_root_location"><code class="highlighter-rouge">AddExternalProjFilesToOverlay(external_target external_install_dir overlay_target overlay_root_location)</code></h5>
+    <p>This helper allows you to add files generated from an external CMake project to an overlay target. This is mainly a wrapper around
+<code class="highlighter-rouge">AddOverlayDirToRootfs</code> which in addition creates a target for the generated file in the external project. The caller passes the external
+project target (<code class="highlighter-rouge">external_target</code>), the external projects install directory (<code class="highlighter-rouge">external_install_dir</code>), the overlay target you want to add the
+file to (<code class="highlighter-rouge">overlay_target</code>) and the location you wish to install the file within the rootfs image (<code class="highlighter-rouge">overlay_root_location</code>).</p>
+  </li>
+</ul>
+
+<h3 id="linux-source-helperscmake">linux-source-helpers.cmake</h3>
+
+<h5 id="downloadlinuxlinux_major-linux_minor-linux_md5-linux_out_dir-linux_out_target"><code class="highlighter-rouge">DownloadLinux(linux_major linux_minor linux_md5 linux_out_dir linux_out_target)</code></h5>
+<p>This is a helper function for downloading the linux source. This is needed if we wish to build our own kernel modules.</p>
+
+<h5 id="configurelinuxlinux_dir-linux_config_location-linux_symvers_location-configure_linux_target"><code class="highlighter-rouge">ConfigureLinux(linux_dir linux_config_location linux_symvers_location configure_linux_target)</code></h5>
+<p>This helper function is used for configuring downloaded linux source with a given Kbuild defconfig (<code class="highlighter-rouge">linux_config_location</code>)
+and symvers file (<code class="highlighter-rouge">linux_symvers_location</code>).</p>
 
 <h3 id="adding-a-program">Adding a program</h3>
 <p>Let’s add a simple program!</p>
@@ -486,7 +514,7 @@ the rootfs.cpio file.</li>
   <li>
     <p>Make a new directory:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm/linux/pkg/hello 
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm-examples/minimal/pkg/hello
 </code></pre></div>    </div>
   </li>
   <li>
@@ -495,32 +523,58 @@ the rootfs.cpio file.</li>
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
 </span>    
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!n"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Add a <code class="highlighter-rouge">Makefile</code> in <code class="highlighter-rouge">projects/vm/linux/pkg/hello/Makefile</code>:</p>
+    <p>We want to target our application to run in a 32-bit x86 Linux VM. To achieve this we need to build our application as an external
+project. Firstly we need to add a CMake file in <code class="highlighter-rouge">projects/vm-examples/minimal/pkg/hello/CMakeList.txt</code>:</p>
 
-    <div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TARGET</span> <span class="o">=</span> hello
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
 
-<span class="err">include</span> <span class="err">../../common.mk</span>
-<span class="err">include</span> <span class="err">../../common_app.mk</span>
+<span class="nb">project</span><span class="p">(</span>hello C<span class="p">)</span>
 
-<span class="nl">hello</span><span class="o">:</span> <span class="nf">hello.o</span>
-    <span class="err">$(CC)</span> <span class="err">$(CFLAGS)</span> <span class="err">$(LDFLAGS)</span> <span class="err">$\^</span> <span class="err">-o</span> <span class="err">$@</span>
+<span class="nb">add_executable</span><span class="p">(</span>hello hello.c<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span>hello -static<span class="p">)</span>
 </code></pre></div>    </div>
-
-    <p>Make sure there is a TAB character in the makefile, rather than spaces</p>
   </li>
   <li>
-    <p>Run the “build-rootfs” script to update the rootfs.cpio file to
-include our new “hello” program.</p>
+    <p>Update our minimal apps CMakeList file (projects/vm-examples/minimal/CMakeLists.txt) to declare our hello application as an
+external project and add it to our overlay. Replace the line <code class="highlighter-rouge">GetDefaultLinuxRootfsFile(rootfs_file)</code> with the following:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>projects/vm/linux/
-./build-rootfs
-<span class="nb">cd</span> ../../..
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nf">GetDefaultLinuxRootfsFile</span><span class="p">(</span>default_rootfs_file<span class="p">)</span>
+
+<span class="c1"># Get Custom toolchain for 32 bit Linux</span>
+<span class="nf">FindCustomPollyToolchain</span><span class="p">(</span>LINUX_32BIT_TOOLCHAIN <span class="s2">"linux-gcc-32bit-pic"</span><span class="p">)</span>
+<span class="c1"># Declare our hello app external project</span>
+<span class="nf">ExternalProject_Add</span><span class="p">(</span>hello-app
+    URL file:///<span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/pkg/hello
+    BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/hello-app
+    BUILD_ALWAYS ON
+    STAMP_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/hello-app-stamp
+    EXCLUDE_FROM_ALL
+    INSTALL_COMMAND <span class="s2">""</span>
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
+        -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
+<span class="p">)</span>
+<span class="c1"># Add the hello world app to our overlay ('hello-overlay')</span>
+<span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>hello-app <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/hello-app minimal-overlay <span class="s2">"usr/sbin"</span>
+    FILES hello<span class="p">)</span>
+<span class="c1"># Add the overlay directory to our default rootfs image</span>
+<span class="nf">AddOverlayDirToRootfs</span><span class="p">(</span>minimal-overlay <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span> <span class="s2">"buildroot"</span> <span class="s2">"rootfs_install"</span>
+    rootfs_file rootfs_target<span class="p">)</span>
+...
+</code></pre></div>    </div>
+    <p>and update the line <code class="highlighter-rouge">AddToFileServer("rootfs.cpio" ${rootfs_file})</code> to depend on our new overlay:</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">rootfs_file</span><span class="si">}</span> DEPENDS rootfs_target<span class="p">)</span>
+...
 </code></pre></div>    </div>
   </li>
   <li>
@@ -549,11 +603,11 @@ Hello, World!
   <li>
     <p>Make a new directory:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm/linux/modules/poke
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm-examples/minimal/modules/poke
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Implement the module in <code class="highlighter-rouge">projects/vm/linux/modules/poke/poke.c</code>.</p>
+    <p>Implement the module in <code class="highlighter-rouge">projects/vm-examples/minimal/modules/poke/poke.c</code>.</p>
 
     <p>Initially we’ll just get the module building and running, and then take
 care of communicating between the module and the vmm. For simplicity,
@@ -599,10 +653,9 @@ written to, the vmm gets poked.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>And a makefile in <code class="highlighter-rouge">projects/vm/linux/modules/poke/Makefile</code>:</p>
+    <p>And a makefile in <code class="highlighter-rouge">projects/vm-examples/minimal/modules/poke/Makefile</code>:</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>obj-m += poke.o
-CFLAGS_poke.o = -I../../include -I../../../common/shared_include
 
 all:
     make -C $(KHEAD) M=$(PWD) modules
@@ -612,22 +665,89 @@ clean:
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Add the new module to so it is loaded during initialization, edit <code class="highlighter-rouge">projects/vm/linux/init_template</code>:</p>
+    <p>Create a CMakeLists.txt file to define our linux module. We will again be compiling our module
+as an external CMake project. We will import a special helper file (<code class="highlighter-rouge">linux-module-helpers.cmake</code>)
+from the <code class="highlighter-rouge">vm-linux</code> project to help us define our Linux module. Create the following file in
+<code class="highlighter-rouge">projects/vm-examples/minimal/modules/CMakeLists.txt</code></p>
 
-    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#...
-</span><span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">dataport</span><span class="p">.</span><span class="n">ko</span>
-<span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">consumes_event</span><span class="p">.</span><span class="n">ko</span>
-<span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">emits_event</span><span class="p">.</span><span class="n">ko</span>
-<span class="n">insmod</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">__LINUX_VERSION__</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">vmm</span><span class="o">/</span><span class="n">poke</span><span class="p">.</span><span class="n">ko</span> <span class="err">#</span> <span class="o">&lt;--</span> <span class="n">add</span> <span class="n">this</span> <span class="n">line</span>
-<span class="cp">#...
-</span></code></pre></div>    </div>
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+
+ <span class="nb">if</span><span class="p">(</span>NOT MODULE_HELPERS_FILE<span class="p">)</span>
+     <span class="nb">message</span><span class="p">(</span>FATAL_ERROR <span class="s2">"MODULE_HELPERS_FILE is not defined"</span><span class="p">)</span>
+ <span class="nb">endif</span><span class="p">()</span>
+
+ <span class="nb">include</span><span class="p">(</span><span class="s2">"</span><span class="si">${</span><span class="nv">MODULE_HELPERS_FILE</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+ <span class="nf">DefineLinuxModule</span><span class="p">(</span>poke<span class="p">)</span>
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>Run the build-rootfs tool, then make</p>
+    <p>Update our minimal apps CMakeList file (projects/vm-examples/minimal/CMakeLists.txt) to declare our poke module as an
+external project and add it to our overlay. Add the following:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd projects/vm/linux/
-./build-rootfs
-cd ../../../build_vm
+    <p>At the top of the file include our linux helpers:</p>
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">include</span><span class="p">(</span><span class="s2">"../../vm-linux/linux-source-helpers.cmake"</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>Below we can add:</p>
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># Setup Linux Sources</span>
+ <span class="nf">GetDefaultLinuxMajor</span><span class="p">(</span>linux_major<span class="p">)</span>
+ <span class="nf">GetDefaultLinuxMinor</span><span class="p">(</span>linux_minor<span class="p">)</span>
+ <span class="nf">GetDefaultLinuxMd5</span><span class="p">(</span>linux_md5<span class="p">)</span>
+ <span class="c1"># Download and Configure our Linux sources</span>
+ <span class="nf">DownloadLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_md5</span><span class="si">}</span> vm_linux_extract_dir download_vm_linux<span class="p">)</span>
+ <span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/../../vm-linux/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/config"</span><span class="p">)</span>
+ <span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/../../vm-linux/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/Module.symvers"</span><span class="p">)</span>
+ <span class="nf">ConfigureLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_config</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_symvers</span><span class="si">}</span> configure_vm_linux
+     DEPENDS download_vm_linux
+ <span class="p">)</span>
+ <span class="c1"># Add the external poke module project</span>
+ <span class="nf">ExternalProject_Add</span><span class="p">(</span>minimal-modules
+     URL file:///<span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/modules
+     BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/minimal-modules
+     BUILD_ALWAYS ON
+     STAMP_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/minimal-modules
+     EXCLUDE_FROM_ALL
+     INSTALL_COMMAND <span class="s2">""</span>
+     DEPENDS download_vm_linux configure_vm_linux
+     CMAKE_ARGS
+         -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
+         -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
+         -DLINUX_KERNEL_DIR=<span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span>
+         -DMODULE_HELPERS_FILE=<span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/../../vm-linux/linux-module-helpers.cmake
+ <span class="p">)</span>
+ <span class="c1"># Add our module binary to the overlay</span>
+ <span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>minimal-modules <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/minimal-modules minimal-overlay <span class="s2">"lib/modules/4.8.16/kernel/drivers/vmm"</span>
+     FILES poke.ko<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We want the new module to be loaded during initialization. To do this we can write our own custom init script. A sample init script exists
+in the vm-linux project. Copy the file <code class="highlighter-rouge">projects/vm-linux/camkes-linux-artifacts/camkes-linux-init-scripts/buildroot_init/init_template</code> to the
+minimal directory and add the following line:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+insmod /lib/modules/4.8.16/kernel/drivers/vmm/poke.ko
+...
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Update our minimal apps CMakeList file (projects/vm-examples/minimal/CMakeLists.txt) to add our init script to the
+overlay. After our call to <code class="highlighter-rouge">AddExternalProjFilesToOverlay</code> for the poke module we can add:</p>
+
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ...
+ <span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/init <span class="s2">"."</span> minimal-overlay<span class="p">)</span>
+ ...
+</code></pre></div>    </div>
+
+    <p>and give the script executable permissions:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> chmod +x projects/vm-examples/minimal/init
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Rebuild the app:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ../../../build_vm
 ninja
 </code></pre></div>    </div>
   </li>
@@ -648,7 +768,7 @@ Password:
     <p><strong>Now let’s make it talk to the vmm</strong>.</p>
   </li>
   <li>
-    <p>In projects/vm/linux/modules/poke/poke.c, replace <code class="highlighter-rouge">printk("hi\n");</code>
+    <p>In projects/vm-examples/minimal/modules/poke/poke.c, replace <code class="highlighter-rouge">printk("hi\n");</code>
 with <code class="highlighter-rouge">kvm_hypercall1(4, 0);</code>
 The choice of 4 is because 0..3 are taken by other hypercalls.</p>
   </li>
@@ -705,10 +825,16 @@ with the other end of the connection.</p>
       component</li>
 </ul>
 
-<p>There is a library in <code class="highlighter-rouge">projects/vm/linux/lib_src/camkes</code> containing some
-linux syscall wrappers, and some utility programs in
-<code class="highlighter-rouge">projects/vm/linux/pkg/{dataport,consumes_event,emits_event}</code> which
-initialize and interact with cross vm connections.</p>
+<p>There is a library in <code class="highlighter-rouge">vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs</code>
+containing some linux syscall wrappers, and some utility programs in
+<code class="highlighter-rouge">vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/{dataport,consumes_event,emits_event}</code>
+which initialize and interact with cross vm connections. To build and use these modules in your rootfs the vm-linux
+project provides an overlay target you can use. Add the following to your apps CMakeLists.txt file:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>CAmkESVMDefaultBuildrootOverlay ON CACHE BOOL <span class="s2">""</span> FORCE<span class="p">)</span>
+<span class="nf">AddOverlayDirToRootfs</span><span class="p">(</span>default_buildroot_overlay <span class="si">${</span><span class="nv">rootfs_file</span><span class="si">}</span> <span class="s2">"buildroot"</span> <span class="s2">"rootfs_install"</span>
+    rootfs_file rootfs_target<span class="p">)</span>
+</code></pre></div></div>
 
 <h3 id="implementation-details">Implementation Details</h3>
 
@@ -951,25 +1077,11 @@ in <code class="highlighter-rouge">projects/vm-examples/minimal/CMakeLists.txt</
 library. We additionally define our new CAmkES component <code class="highlighter-rouge">PrintServer</code>.</p>
 
 <p>The app should now build but we’re not done yet. Now
-we’ll make these interfaces available to the guest linux. Edit
-<code class="highlighter-rouge">projects/vm/linux/camkes_init</code>. It’s a shell script that is executed as
-linux is initialized. Currently it should look like:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
-<span class="c"># Initialises linux-side of cross vm connections.</span>
+we’ll make these interfaces available to the guest linux. We will create
+a shell script that is executed as linux is initialized. Edit
+<code class="highlighter-rouge">projects/vm-linux/camkes-linux-artifacts/camkes-linux-init-scripts/buildroot_init/camkes_init</code>
+by deleting its contents and adding the following:</p>
 
-<span class="c"># Dataport sizes must match those in the camkes spec.</span>
-<span class="c"># For each argument to dataport_init, the nth pair</span>
-<span class="c"># corresponds to the dataport with id n.</span>
-dataport_init /dev/camkes_reverse_src 8192 /dev/camkes_reverse_dest 8192
-
-<span class="c"># The nth argument to event_init corresponds to the</span>
-<span class="c"># event with id n according to the camkes vmm.</span>
-consumes_event_init /dev/camkes_reverse_done
-emits_event_init /dev/camkes_reverse_ready
-</code></pre></div></div>
-
-<p>This sets up some interfaces used for a simple demo. Delete all that,
-and add the following:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 <span class="c"># Initialises linux-side of cross vm connections.</span>
 
@@ -994,11 +1106,11 @@ assigned to interfaces in the <code class="highlighter-rouge">cma34cr.camkes</co
 the interfaces we added to the VMM component.</p>
 
 <p>Now let’s make an app that uses these nodes to communicate with the
-print server. As before, create a new directory in pkg:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm/linux/pkg/print_client
+print server. As before, create a new directory:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir projects/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/print_client
 </code></pre></div></div>
 
-<p>Create <code class="highlighter-rouge">projects/vm/linux/pkg/print_client/print_client.c</code>:</p>
+<p>Create <code class="highlighter-rouge">projects/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/print_client/print_client.c</code>:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;string.h&gt;
 #include &lt;assert.h&gt;
 </span>
@@ -1045,17 +1157,43 @@ print server. As before, create a new directory in pkg:</p>
 <p>This program prints each of its arguments on a separate line, by sending
 each argument to the print server one at a time.</p>
 
-<p>Create <code class="highlighter-rouge">projects/vm/linux/pkg/print_client/Makefile</code>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TARGET = print_client
+<p>Create <code class="highlighter-rouge">projects/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/print_client/CMakeLists.txt</code>:</p>
 
-include ../../common.mk
-include ../../common_app.mk
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
 
-print_client: print_client.o
-    $(CC) $(CFLAGS) $(LDFLAGS) $^ -lcamkes -o $@
+<span class="nb">project</span><span class="p">(</span>print_client C<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>print_client print_client.c<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>print_client camkeslinux<span class="p">)</span>
 </code></pre></div></div>
 
-<p>Now, run build-rootfs, and make, and run!</p>
+<p>and update <code class="highlighter-rouge">projects/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/CMakeLists.txt</code>
+by adding the line</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_subdirectory</span><span class="p">(</span>pkgs/print_client<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Lastly update <code class="highlighter-rouge">projects/vm-linux/CMakeLists.txt</code> changing the line:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>camkes-connector-apps <span class="si">${</span><span class="nv">connector_apps_binary_dir</span><span class="si">}</span> default_buildroot_overlay <span class="s2">"usr/sbin"</span>
+        FILES pkgs/consumes_event/consumes_event_init
+        pkgs/consumes_event/consumes_event_wait pkgs/emits_event/emits_event_emit
+        pkgs/emits_event/emits_event_init pkgs/dataport/dataport_init pkgs/dataport/dataport_read
+        pkgs/dataport/dataport_write pkgs/string_reverse/string_reverse<span class="p">)</span>
+
+</code></pre></div></div>
+<p>with</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>camkes-connector-apps <span class="si">${</span><span class="nv">connector_apps_binary_dir</span><span class="si">}</span> default_buildroot_overlay <span class="s2">"usr/sbin"</span>
+        FILES pkgs/consumes_event/consumes_event_init
+        pkgs/consumes_event/consumes_event_wait pkgs/emits_event/emits_event_emit
+        pkgs/emits_event/emits_event_init pkgs/dataport/dataport_init pkgs/dataport/dataport_read
+        pkgs/dataport/dataport_write pkgs/string_reverse/string_reverse
+        pkgs/print_client/print_client<span class="p">)</span>
+</code></pre></div></div>
+
+<p>After building and running the application you should see:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 Creating dataport node /dev/camkes_data
 Allocating 4096 bytes for /dev/camkes_data
@@ -1358,7 +1496,7 @@ natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.<
         </li>
         
           <li>
-            Site last updated: Wed Aug 1 15:01:00 2018 +1000 13e6c1a
+            Site last updated: Fri Aug 3 11:51:40 2018 +1000 7ad9f25
           </li>
           <li>
             
@@ -1381,7 +1519,7 @@ natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.<
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 2d323eb
+                Page last updated: Fri Aug 3 11:51:40 2018 +1000 7ad9f25
               
             
               
