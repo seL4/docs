@@ -63,7 +63,15 @@ On Ubuntu, these can be obtained with apt.
     After it is built, add the $RISCV/bin folder to your path for step 6.
 
 
-5. Get sel4test sources. If you have them already make sure you are up to to date with the latest
+5. (Optional) Build the 32-bit toolchain, this will also take an hour or two.
+
+    ```bash
+    cd ${RISCV}/riscv-tools
+    ./build-rv32ima.sh
+    ``` 
+
+
+6. Get sel4test sources. If you have them already make sure you are up to to date with the latest
    source.
 
     ```bash
@@ -72,7 +80,10 @@ On Ubuntu, these can be obtained with apt.
     repo sync
     ```
 
-6. Build the RISC-V sel4test image and run sel4test
+7. Build the RISC-V sel4test image and run sel4test
+
+    You will need to make sure that `$RISCV/bin` has been added to your
+    `PATH`.
 
     ```bash
     mkdir build-riscv && cd build-riscv
@@ -80,6 +91,9 @@ On Ubuntu, these can be obtained with apt.
     ninja
     ./simulate
     ```
+
+    You can also use run the tests on the 32-bit spike platform by
+    omitting the `-DRISCV64=TRUE` option.
 
     If make fails, you may need to install a few required python packages: sudo pip install sel4-deps
 
