@@ -30,7 +30,7 @@ sudo apt-get install build-essential
 
 Additional base dependencies for building seL4 projects on Ubuntu include installing:
 ```
-sudo apt-get install cmake ccache ninja-build gcc-6-base
+sudo apt-get install cmake ccache ninja-build
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen
@@ -45,14 +45,30 @@ sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 sudo apt-get install qemu-system-arm qemu-system-x86
 ```
 
+(you can install  the hardware floating point versions as well if you wish"
+```
+sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+```
 ####  Debian
 
-##### For Debian Jessie or later
+##### For Debian Stretch or later
 
 The dependencies listed in our docker files [repository](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
 
 * [Base Tools Dockerfile](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile)
 * [seL4 Dockerfile](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile)
+
+The version of `cmake` in Debian *stretch* is too old to build seL4 projects (*buster* and later are OK).  If you are on *stretch*, install `cmake` from stretch-backports:
+
+Add the *stretch-backports* repository like this (substitute a local mirror for `ftp.debian.org` if you like)
+```
+sudo sh -c "echo 'deb http://ftp.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list"
+```
+Then install `cmake` with
+```
+sudo apt-get update
+sudo apt-get -t stretch-backports install cmake
+```
 
 ### Python Dependencies
 
@@ -84,9 +100,12 @@ pip install --user camkes-deps
 ### Haskell Dependencies
 
 The CAmkES build toolchain additionally requires Haskell. You can install the [Haskell stack](https://haskellstack.org) on your distribution by running:
-
 ```
 curl -sSL https://get.haskellstack.org/ | sh
+```
+If you prefer not to bypass your distribution's package manager, you can do
+```
+sudo apt-get install haskell-stack
 ```
 
 ### Build Dependencies
@@ -104,7 +123,7 @@ sudo apt-get install qemu-kvm
 
 ####  Debian
 
-##### For Debian Jessie or later
+##### For Debian Stretch or later
 
 The dependencies listed in our docker files [repository](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
 
@@ -127,7 +146,7 @@ sudo apt-get install texlive-fonts-recommended texlive-latex-extra texlive-metap
 
 ###  Debian
 
-#### For Debian Jessie or later
+#### For Debian Stretch or later
 
 The dependencies listed in our docker files [repository](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
 
@@ -135,10 +154,15 @@ The dependencies listed in our docker files [repository](https://github.com/SEL4
 
 ### Haskell Dependencies
 
-The Haskell tool-stack is required to build the Haskell kernel model. You can install the [Haskell stack](https://haskellstack.org) on your distribution by running:
+The Haskell tool-stack is required to build the Haskell kernel model. You can install [Haskell stack](https://haskellstack.org) on your distribution by running:
 
 ```
 curl -sSL https://get.haskellstack.org/ | sh
+```
+
+If you prefer not to bypass your distribution's package manager, you can do
+```
+sudo apt-get install haskell-stack
 ```
 
 ### Setup Isabelle
