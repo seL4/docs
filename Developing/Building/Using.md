@@ -21,32 +21,32 @@ cmake -DCROSS_COMPILER_PREFIX=arm-linux-gnueabi- -DCMAKE_TOOLCHAIN_FILE=../kerne
 We now break down each component in the above invocation:
 
  * `-D` defines a variable, in the form `X=Y`.
- * `CROSS_COMPILER_PREFIX` specifies the toolchain for cross-compilation, which cannot be after
-    build directory initialisation. For further details, please see the "Cross Compiling"
+ * `CROSS_COMPILER_PREFIX` specifies the toolchain for cross-compilation, which cannot be changed after
+    build directory initialisation. For further details, please see "Cross Compiling"
     below.
  * `CMAKE_TOOLCHAIN_FILE` which indicates that CMake should load the specified file as a
-   'toolchain' file. A toolchain file is able to set up the C compiler, linker etc. for building the project.
-    In example we assume a typical project layout, where seL4 is in the 'kernel' directory, at the top level.
-    The [gcc.cmake](https://github.com/seL4/seL4/blob/master/gcc.cmake)' file from the seL4 repository
+   'toolchain' file. A toolchain file is able to set up the C compiler, linker etc., for building the project.
+    In the example we assume a typical project layout, where seL4 is in the 'kernel' directory, at the top level.
+    The [gcc.cmake](https://github.com/seL4/seL4/blob/master/gcc.cmake)' file from the seL4 repository sets
      up C compilers and linkers using the `CROSS_COMPILER_PREFIX`.
  * `-G Ninja` tells CMake to generate Ninja build scripts as opposed to GNU Makefiles. Only Ninja scripts are supported by parts of the kernel.
  * `..` is the path to the top-level `CMakeLists.txt` file describing this project, which in this
    case is placed in the root directory of the project.
 
 
-We also provide a shorthand wrapping script which abstracts the into a shorted command:
+We also provide a shorthand wrapping script which abstracts the above into a shorter command:
 
 ```sh
 ../init-build -DCROSS_COMPILER_PREFIX=arm-linux-gnueabi- <COMMAND_LINE_OPTIONS_HERE>
 ```
 
-After configuration, you can now build the project by invoking ninja:
+After configuration, you can build the project by invoking ninja:
 
 ```sh
 ninja
 ```
 
-After the build has completed, the resulting binaries are available in the `images/` subdirectory.
+After the build has completed, the resulting binaries will be in the `images/` subdirectory.
 
 ### Configuration
 
@@ -102,12 +102,12 @@ ninja
 Many of our projects support multiple configurations, where the following broad
 approaches are used to present simple options to the user:
 
-* **CMake cache scripts**: These files can set any number of configuration
-  variables to an initial value. By combining one or more of these together you
-  can coherently configure a system
+* **CMake cache scripts**: These files can assign initial values to any number of configuration
+  variables. By combining one or more of these together you
+  can configure an entire system.
 * **Meta configuration options**:  Meta configuration options are normally
   passed as initial `-DVAR=FOO` command line arguments to CMake and will be
-  programatically inspected by the projects CMake scripts to (re)configure the
+  programatically inspected by projects' CMake scripts to (re)configure the
   system.
 
 ##### CMake cache scripts:
@@ -115,11 +115,12 @@ approaches are used to present simple options to the user:
 CMake cache scripts provide subsets of preconfigured options, which allow the user of a project to
 avoid manually setting each option. Cache scripts have the file extension `.cmake`.
 
-Projects may provide cache scripts files which each contain the cache
+Projects may provide cache script files which each contain the cache
 settings necessary to configure a single feature or option. By combining
 multiple `.cmake` files, a project can be initialised in a specific way.
-Cache script configurations are provided when initialising the build directory
-by passing `-C <file>` to `cmake`. For example, given some typical project structure,
+Cache script configurations are provided
+by passing `-C <file>` to `cmake` when initialising the build directory. 
+For example, given a typical project structure,
 one might invoke `cmake` or `init-build.sh` with several of
 cache scripts as arguments.
 
