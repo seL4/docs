@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-09-07 13:48:14 +1000 -->
+<!-- Page last generated 2018-09-17 13:56:09 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -296,30 +296,30 @@ cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm
 
 <ul>
   <li><code class="highlighter-rouge">-D</code> defines a variable, in the form <code class="highlighter-rouge">X=Y</code>.</li>
-  <li><code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> specifies the toolchain for cross-compilation, which cannot be after
- build directory initialisation. For further details, please see the “Cross Compiling”
+  <li><code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> specifies the toolchain for cross-compilation, which cannot be changed after
+ build directory initialisation. For further details, please see “Cross Compiling”
  below.</li>
   <li><code class="highlighter-rouge">CMAKE_TOOLCHAIN_FILE</code> which indicates that CMake should load the specified file as a
-‘toolchain’ file. A toolchain file is able to set up the C compiler, linker etc. for building the project.
- In example we assume a typical project layout, where seL4 is in the ‘kernel’ directory, at the top level.
- The <a href="https://github.com/seL4/seL4/blob/master/gcc.cmake">gcc.cmake</a>’ file from the seL4 repository
+‘toolchain’ file. A toolchain file is able to set up the C compiler, linker etc., for building the project.
+ In the example we assume a typical project layout, where seL4 is in the ‘kernel’ directory, at the top level.
+ The <a href="https://github.com/seL4/seL4/blob/master/gcc.cmake">gcc.cmake</a>’ file from the seL4 repository sets
   up C compilers and linkers using the <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code>.</li>
   <li><code class="highlighter-rouge">-G Ninja</code> tells CMake to generate Ninja build scripts as opposed to GNU Makefiles. Only Ninja scripts are supported by parts of the kernel.</li>
   <li><code class="highlighter-rouge">..</code> is the path to the top-level <code class="highlighter-rouge">CMakeLists.txt</code> file describing this project, which in this
 case is placed in the root directory of the project.</li>
 </ul>
 
-<p>We also provide a shorthand wrapping script which abstracts the into a shorted command:</p>
+<p>We also provide a shorthand wrapping script which abstracts the above into a shorter command:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm-linux-gnueabi- &lt;COMMAND_LINE_OPTIONS_HERE&gt;
 </code></pre></div></div>
 
-<p>After configuration, you can now build the project by invoking ninja:</p>
+<p>After configuration, you can build the project by invoking ninja:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
 </code></pre></div></div>
 
-<p>After the build has completed, the resulting binaries are available in the <code class="highlighter-rouge">images/</code> subdirectory.</p>
+<p>After the build has completed, the resulting binaries will be in the <code class="highlighter-rouge">images/</code> subdirectory.</p>
 
 <h3 id="configuration">Configuration</h3>
 
@@ -378,12 +378,12 @@ options set).</p>
 approaches are used to present simple options to the user:</p>
 
 <ul>
-  <li><strong>CMake cache scripts</strong>: These files can set any number of configuration
-variables to an initial value. By combining one or more of these together you
-can coherently configure a system</li>
+  <li><strong>CMake cache scripts</strong>: These files can assign initial values to any number of configuration
+variables. By combining one or more of these together you
+can configure an entire system.</li>
   <li><strong>Meta configuration options</strong>:  Meta configuration options are normally
 passed as initial <code class="highlighter-rouge">-DVAR=FOO</code> command line arguments to CMake and will be
-programatically inspected by the projects CMake scripts to (re)configure the
+programatically inspected by projects’ CMake scripts to (re)configure the
 system.</li>
 </ul>
 
@@ -392,11 +392,12 @@ system.</li>
 <p>CMake cache scripts provide subsets of preconfigured options, which allow the user of a project to
 avoid manually setting each option. Cache scripts have the file extension <code class="highlighter-rouge">.cmake</code>.</p>
 
-<p>Projects may provide cache scripts files which each contain the cache
+<p>Projects may provide cache script files which each contain the cache
 settings necessary to configure a single feature or option. By combining
 multiple <code class="highlighter-rouge">.cmake</code> files, a project can be initialised in a specific way.
-Cache script configurations are provided when initialising the build directory
-by passing <code class="highlighter-rouge">-C &lt;file&gt;</code> to <code class="highlighter-rouge">cmake</code>. For example, given some typical project structure,
+Cache script configurations are provided
+by passing <code class="highlighter-rouge">-C &lt;file&gt;</code> to <code class="highlighter-rouge">cmake</code> when initialising the build directory. 
+For example, given a typical project structure,
 one might invoke <code class="highlighter-rouge">cmake</code> or <code class="highlighter-rouge">init-build.sh</code> with several of
 cache scripts as arguments.</p>
 
@@ -529,7 +530,7 @@ that build type (release, debug etc.). Note that this option is not respected by
         </li>
         
           <li>
-            Site last updated: Fri Sep 7 11:47:29 2018 +1000 ca9cb13
+            Site last updated: Mon Sep 17 13:53:19 2018 +1000 1988e9e
           </li>
           <li>
             
@@ -576,7 +577,7 @@ that build type (release, debug etc.). Note that this option is not respected by
               
             
               
-                Page last updated: Wed Jul 25 12:00:32 2018 +1000 2f868b6
+                Page last updated: Mon Sep 17 13:53:19 2018 +1000 1988e9e
               
             
               
