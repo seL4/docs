@@ -8,6 +8,7 @@ Checkout the sel4test project using repo as per [seL4Test](/seL4Test)
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 mkdir cbuild
+cd cbuild
 ../init-build -DPLATFORM={{ page.cmake_plat }} {{page.xcompiler_arg}}
 # The default cmake wrapper sets up a default configuration for the target platform.
 # To change individual settings, run `ccmake` and change the configuration
