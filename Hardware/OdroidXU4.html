@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> | seL4 docs</title>
+    <title>seL4 on the Odroid XU4 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,9 +67,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name"></span>
-            <meta property="position" content="2" /></li>
+            <span property="name">seL4 on the Odroid XU4</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -262,37 +273,28 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <p>The CMA34D is an embedded i7 board. It needs 12V and 5V supplies. It
-does not have a BMC (Base Management Controller) so cannot be controlled
-remotely.</p>
+      <h1 id="sel4-on-the-odroid-xu4">seL4 on the Odroid XU4</h1>
 
-<p>We used a <a href="http://www.ti.com/tool/ek-tm4c1294xl">Stellaris Connected Launchpad</a> connected to an
-<a href="http://www.ebay.com.au/itm/New-RS232-To-TTL-COM-Serial-Board-MAX232CSE-Converter-Module-/190880940437">RS232 level converter</a> and a 2-way
-<a href="http://www.ebay.com.au/itm/5V-Two-2-Channel-Relay-Module-With-Optocoupler-For-ARM-PIC-AVR-DSP-New-/181752994310">Relay Module</a>, together with a suitable
-<a href="http://www.ebay.com.au/itm/Regulated-Switching-DC-Power-Supply-Input-AC-100V-240V-to-Output-5V-6A-12V-2A-/151483601531">Power Supply</a>.</p>
+<p>This page provides info on the
+<a href="https://www.hardkernel.com/main/products/prdt_info.php">Odroid-XU4</a>
+Exynos 5 board</p>
 
-<p>The exact parts don’t matter, although I’ve given links to eBay stores
-where the ones we used can be seen.</p>
+<h3 id="get-and-build-sel4test">Get and build sel4test</h3>
 
-<p><img src="CMA34CRD-thumb.jpg" alt="Photo of CMA34CRD setup" /></p>
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+mkdir cbuild
+../init-build <span class="nt">-DPLATFORM</span><span class="o">=</span>exynos5422 <span class="nt">-DAARCH32</span><span class="o">=</span>1
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
 
-<p>In the picture, the CMA34D is at the left, with the TTL-to-RS232
-converter above it. The Launchpad is in the middle, with the relay board
-above it, partially obscured by the wiring harness. The power supply is
-on the right. All is mounted on a cheap polyethylene breadboard that has
-been covered in aluminium tape to provide a ground plane; all the boards
-and cables are mounted on 20mm standoffs.</p>
+</code></pre></div></div>
 
-<p>Software for the launchpad is available at
-<a href="https://github.com/data61/echronos-lwip">https://github.com/data61/echronos-lwip</a> Use the master branch, and the
-project is at
-packages/machine-tm4c1294-launchpad/projects/embedded_pc_testbed_src</p>
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
-<p>The relays are connected to pins PK6 and PK7 on the launchpad; the UART
-to pin PA0 (Rx) and PA1 (Tx). You’ll need to swap the wires to the level
-converter (so Rx from teh launcpad connects to Tx on the level
-converter, and vice versa); and make sure jumpers J4 and J5 are set to
-<code class="highlighter-rouge">UART</code>.</p>
 
     </div>
   </div>
@@ -350,8 +352,6 @@ converter, and vice versa); and make sure jumpers J4 and J5 are set to
               
             
               
-                Page last updated: Thu Mar 22 14:02:40 2018 +1100 03d1009
-              
             
               
             
@@ -417,6 +417,8 @@ converter, and vice versa); and make sure jumpers J4 and J5 are set to
             
               
             
+              
+                Page last updated: Mon Oct 8 10:48:02 2018 +1100 19b96f4
               
             
               
@@ -586,9 +588,9 @@ converter, and vice versa); and make sure jumpers J4 and J5 are set to
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/CMA34DBMC/index.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/OdroidXU4.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/CMA34DBMC/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/OdroidXU4.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
