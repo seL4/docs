@@ -46,10 +46,8 @@ _repos/sel4-tutorials:
 _repos/tutes/%.md: _repos/sel4-tutorials/tutorials/%
 	PYTHONPATH=_repos/capdl/python-capdl-tool _repos/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
 
-TUTORIALS:= hello-world capabilities mapping untyped
-
-tutorials: ${TUTORIALS:%=_repos/tutes/%.md}
-
+TUTORIALS:= $(filter-out "index.md",$(notdir $(wildcard Tutorials/*.md)))
+tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
 _repos/sel4:
 	git clone $(SEL4_GIT_URL) _repos/sel4
