@@ -10,5 +10,15 @@
         </li>
   {% endfor %}
       </ul>
-{% endfor %}        
+{% endfor %}
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  {% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
+  {% for t in tutorials %}
+        <li class="{% if page.url == t.url %}active{% endif %}">
+            <a class="" href="{{t.url}}">{{t.title}}</a>
+        <li>
+  {% endfor %}
+    </ul>
 </div>
