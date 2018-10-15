@@ -18,6 +18,8 @@ UPDATE_DATE:= $(shell git log -1 --format='%cd %h')
 FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | sed 's/.\///')
 
 SEL4_GIT_URL=https://github.com/seL4/seL4.git
+TUTORIALS_GIT_URL=https://github.com/sel4proj/sel4-tutorials.git
+CAPDL_GIT_URL=https://github.com/sel4/capdl.git
 
 DOCKER_IMG:=docs_builder
 
@@ -35,6 +37,19 @@ _generate_git_per_page_timestamps: _generate_git_site_timestamp
 	done
 
 generate_data_files: _generate_git_per_page_timestamps
+
+_repos/sel4-tutorials:
+	git clone $(TUTORIALS_GIT_URL) _repos/sel4-tutorials
+	git clone $(CAPDL_GIT_URL) _repos/capdl
+	mkdir -p _repos/tutes
+
+_repos/tutes/%.md: _repos/sel4-tutorials/tutorials/%
+	PYTHONPATH=_repos/capdl/python-capdl-tool _repos/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
+
+TUTORIALS:= hello-world capabilities mapping untyped
+
+tutorials: ${TUTORIALS:%=_repos/tutes/%.md}
+
 
 _repos/sel4:
 	git clone $(SEL4_GIT_URL) _repos/sel4

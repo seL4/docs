@@ -4,8 +4,7 @@ toc: true
 # seL4 and CAmkES tutorials
 
 
-First make sure you have
-[set up your machine](/GettingStarted#setting-up-your-machine).
+First make sure you have [set up your machine](/GettingStarted#setting-up-your-machine).
 
 ## seL4 tutorials
 
@@ -27,21 +26,22 @@ repo sync
 The top of the source tree contains the kernel itself, and the tutorials are found in the subfolder: "`projects/sel4-tutorials`". The tutorial consists of some pre-written sample applications which have been deliberately half-written. You will be guided through filling in the missing portions, and thereby become acquainted with seL4. For each of the sample applications however, there is a completed solution that shows all the correct answers, as a reference.
 When completing the tutorials you will be initialising and building your solutions with CMake. The general flow of completing a tutorial exercise involves:
 ```
-# creating a build directory
-mkdir tutorial_build
-cd tutorial_build
+# creating a Tutorial directory
+mkdir tutorial
+cd tutorial
 # initialising the build directory with a tutorial exercise
 ../init --plat <platform> --tut <tutorial exercise>
 # building the tutorial exercise
 ninja
 ```
 
-After initialising your build directory you will be setup with half-written source for you to complete. In your build directory you will find:
+After initialising your directory you will be setup with half-written source for you to complete. Additinally, a build
+directory will be created based on your directory name eg `tutorial_build`.
 
-- The half-written sample applications are in the
-        subfolder: `<tutorial exercise>/`. `<tutorial exercise>` being the name of the exercise your are completing. Your job is to fill these out.
+Your job is to follow the tutorial instructions to complete the application in the tutorial folder.
+
 - The completed sample applications showing the solutions to the
-        tutorial challenges can be retrieved by initialsing a build directory with the `--solution` argument
+        tutorial challenges can be retrieved by initialsing a directory with the `--solution` argument
         e.g. `../init --plat <platform> --tut <tutorial exercise> --solution`
 
 * The slide presentations to guide you through the tutorials are in the following files:
@@ -55,12 +55,10 @@ After initialising your build directory you will be setup with half-written sour
 
 * Detailed explanations of each tutorial challenge:
 
-  - [seL4 Tutorial 1](seL4_Tutorial_1)
-  - [seL4 Tutorial 2](seL4_Tutorial_2)
-  - [seL4 Tutorial 3](seL4_Tutorial_3)
-  - [seL4 Tutorial 4](seL4_Tutorial_4)
-  - [seL4 Timer tutorial](seL4_Timer_tutorial)
-  - [seL4 MCS tutorial](seL4_RT_tutorial)
+  - [hello-world](hello-world)
+  - [capabilities](capabilities)
+  - [untyped](untyped)
+  - [mapping](mapping)
 
 ## CAmkES tutorials
 
