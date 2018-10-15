@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camkes 2 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Camkes 2</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
+<li class="toc-entry toc-h3"><a href="#task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</a></li>
+<li class="toc-entry toc-h3"><a href="#task-18-21-24">TASK 18, 21, 24</a></li>
+<li class="toc-entry toc-h3"><a href="#task-2-4">TASK 2, 4</a></li>
+<li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
+<li class="toc-entry toc-h3"><a href="#task-9-12-13">TASK 9, 12, 13</a></li>
+<li class="toc-entry toc-h3"><a href="#task-19-20-23">TASK 19, 20, 23</a></li>
+<li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
+<li class="toc-entry toc-h3"><a href="#task-8-16">TASK 8, 16</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#done">Done!</a></li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="camkes-tutorial-2">CAmkES Tutorial 2</h1>
+<p>This tutorial is an introduction to
+CAmkES: bootstrapping a basic static CAmkES application, describing its
+components, and linking them together.</p>
+
+<h2 id="initialising">Initialising</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> hello-camkes-2
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>hello-camkes-2_build
+ninja
+</code></pre></div></div>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-1">Camkes 1</a></li>
+</ol>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+
+<ul>
+  <li>Understand how to represent and implement events in CAmkES.</li>
+  <li>Understand how to use Dataports.</li>
+</ul>
+
+<h2 id="walkthrough">Walkthrough</h2>
+<p>Bear in mind, this article will be going through the
+tutorial steps in the order that the user is led through them in the
+slide presentation, except where several similar tasks are coalesced to
+avoid duplication. Additionally, if a tasks step covers material that
+has already been touched on, it will be omitted from this article.</p>
+
+<h3 id="task-1">TASK 1</h3>
+<p>Here you’re declaring the events that will be bounced
+back and forth in this tutorial. An event is a signal is sent over a
+Notification connection.</p>
+
+<p>You are strongly advised to read the manual section on Events here:
+<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events</a>.</p>
+
+<p>'’Ensure that when declaring the consumes and emits keywords between
+  the Client.camkes and Echo.camkes files, you match them up so that
+  you’re not emitting on both sides of a single interface, or consuming
+  on both sides of an interface.’’</p>
+
+<h3 id="task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</h3>
+<p>Recall that CAmkES prefixes the name
+of the interface instance to the function being called across that
+interface? This is the same phenomenon, but for events; in the case of a
+connection over which events are sent, there is no API, but rather
+CAmkES will generate _emit() and _wait() functions to enable the
+application to transparently interact with these events.</p>
+
+<h3 id="task-18-21-24">TASK 18, 21, 24</h3>
+<p>One way to handle notifications in CAmkES is to
+use callbacks when they are raised. CAmkES generates functions that
+handle the registration of callbacks for each notification interface
+instance. These steps help you to become familiar with this approach.</p>
+
+<hr />
+
+<h3 id="task-2-4">TASK 2, 4</h3>
+<p>Dataports are typed shared memory mappings. In your
+CAmkES ADL specification, you state what C data type you’ll be using to
+access the data in the shared memory – so you can specify a C struct
+type, etc.</p>
+
+<p>The really neat part is more that CAmkES provides access control for
+accessing these shared memory mappings: if a shared mem mapping is such
+that one party writes and the other reads and never writes, we can tell
+CAmkES about this access constraint in ADL.</p>
+
+<p>So in TASKs 2 and 4, you’re first being led to create the “Dataport”
+interface instances on each of the components that will be participating
+in the shared mem communication. We will then link them together using a
+“seL4SharedData” connector later on.</p>
+
+<h3 id="task-6">TASK 6</h3>
+<p>And here we are: we’re about to specify connections
+between the shared memory pages in each client, and tell CAmkES to link
+these using shared underlying Frame objects. Fill out this step, and
+proceed.</p>
+
+<h3 id="task-9-12-13">TASK 9, 12, 13</h3>
+<p>These steps are asking you to write some C code
+to access and manipulate the data in the shared memory mapping
+(Dataport) of the client. Follow through to the next step.</p>
+
+<h3 id="task-19-20-23">TASK 19, 20, 23</h3>
+<p>And these steps are asking you to write some C
+code to access and manipulate the data in the shared memory mapping
+(Dataport) of the server.</p>
+
+<h3 id="task-7">TASK 7</h3>
+<p>This is an introduction to CAmkES attributes: you’re
+being asked to set the priority of the components.</p>
+
+<h3 id="task-8-16">TASK 8, 16</h3>
+<p>This is where we specify the data access constraints
+for the Dataports in a shared memory connection. We then go about
+attempting to violate those constraints to see how CAmkES has truly met
+our constraints when mapping those Dataports.</p>
+
+<h2 id="done">Done!</h2>
+<p>Congratulations: be sure to read up on the keywords and
+structure of ADL: it’s key to understanding CAmkES. And well done on
+writing your first CAmkES application.</p>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
+
+<span class="n">component</span> <span class="n">Client</span> <span class="p">{</span>
+    <span class="cm">/* include definitions of typedefs for the dataports */</span>
+    <span class="n">include</span> <span class="s">"str_buf.h"</span><span class="p">;</span>
+
+    <span class="cm">/* this component has a control thread */</span>
+    <span class="n">control</span><span class="p">;</span>
+
+    <span class="cm">/* TASK 1: the event interfaces */</span>
+    <span class="cm">/* hint 1: specify 2 interfaces: one "emits" and one "consumes"
+     * hint 2: you can use an arbitrary string as the interface type (it doesn't get used)
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+
+    <span class="cm">/* TASK 2: the dataport interfaces */</span>
+    <span class="cm">/* hint 1: specify 3 interfaces: one of type "Buf", one of type "str_buf_t" and one of type "ptr_buf_t"
+     * hint 2: for the definition of these types see "str_buf.h".
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
+
+<span class="n">component</span> <span class="n">Echo</span> <span class="p">{</span>
+    <span class="cm">/* include definitions of typedefs for the dataports */</span>
+    <span class="n">include</span> <span class="s">"str_buf.h"</span><span class="p">;</span>
+
+    <span class="cm">/* TASK 3: the event interfaces */</span>
+    <span class="cm">/* hint 1: specify 2 interfaces: one "emits" and one "consumes"
+     * hint 2: you can use an arbitrary string as the interface type (it doesn't get used)
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+
+    <span class="cm">/* TASK 4: the dataport interfaces */</span>
+    <span class="cm">/* hint 1: specify 3 interfaces: one of type "Buf", one of type "str_buf_t" and one of type "ptr_buf_t"
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
+
+<span class="cm">/*
+ * CAmkES tutorial part 2: events and dataports
+ */</span>
+
+<span class="n">import</span> <span class="o">&lt;</span><span class="n">std_connector</span><span class="p">.</span><span class="n">camkes</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="cm">/* import component defintions */</span>
+<span class="n">import</span> <span class="s">"components/Client/Client.camkes"</span><span class="p">;</span>
+<span class="n">import</span> <span class="s">"components/Echo/Echo.camkes"</span><span class="p">;</span>
+
+<span class="n">assembly</span> <span class="p">{</span>
+    <span class="n">composition</span> <span class="p">{</span>
+        <span class="cm">/* component instances */</span>
+        <span class="n">component</span> <span class="n">Client</span> <span class="n">client</span><span class="p">;</span>
+        <span class="n">component</span> <span class="n">Echo</span> <span class="n">echo</span><span class="p">;</span>
+
+        <span class="cm">/* TASK 5: Event connections */</span>
+        <span class="cm">/* hint 1: connect each "emits" interface in a component to the "consumes" interface in the other
+         * hint 2: use seL4Notification as the connector
+         * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+         */</span>
+
+
+        <span class="cm">/* TASK 6: Dataport connections */</span>
+        <span class="cm">/* hint 1: connect the corresponding dataport interfaces of the components to each other
+         * hint 2: use seL4SharedData as the connector
+         * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+         */</span>
+
+
+    <span class="p">}</span>
+    <span class="n">configuration</span> <span class="p">{</span>
+        <span class="cm">/* TASK 7: set component priorities */</span>
+        <span class="cm">/* hint 1: component priority is specified as an attribute with the name &lt;component name&gt;.priority
+         * hint 2: the highest priority is represented by 255, the lowest by 0
+         */</span>
+
+
+        <span class="cm">/* TASK 8: restrict access to dataports */</span>
+        <span class="cm">/* hint 1: use attributes &lt;connection name&gt;.to_access and &lt;connection name&gt;.from_access
+         * hint 2: appropriate values for the to_access and from_access attributes are: "R" or "W"
+         * hint 4: make the "Buf" dataport read only for the Echo component
+         * hint 3: make the "str_buf_t" dataport read only for the Client component
+         */</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
+
+<span class="cm">/*
+ * CAmkES tutorial part 2: events and dataports
+ */</span>
+
+<span class="cp">#ifndef __STR_BUF_H__
+#define __STR_BUF_H__
+</span>
+<span class="cp">#include &lt;camkes/dataport.h&gt;
+</span>
+<span class="cp">#define NUM_STRINGS 5
+#define STR_LEN 256
+</span>
+<span class="cm">/* for a typed dataport containing strings */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">NUM_STRINGS</span><span class="p">][</span><span class="n">STR_LEN</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">str_buf_t</span><span class="p">;</span>
+
+<span class="cp">#define MAX_PTRS 20
+</span>
+<span class="cm">/* for a typed dataport containing dataport pointers */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">dataport_ptr_t</span> <span class="n">ptr</span><span class="p">[</span><span class="n">MAX_PTRS</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">ptr_buf_t</span><span class="p">;</span>
+
+<span class="cp">#endif
+</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
+
+<span class="cm">/*
+ * CAmkES tutorial part 2: events and dataports
+ */</span>
+
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+</span>
+<span class="cp">#include &lt;camkes/dataport.h&gt;
+</span>
+<span class="cm">/* generated header for our component */</span>
+<span class="cp">#include &lt;camkes.h&gt;
+</span>
+<span class="cm">/* strings to send across to the other component */</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">s_arr</span><span class="p">[</span><span class="n">NUM_STRINGS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">,</span> <span class="s">"how"</span><span class="p">,</span> <span class="s">"are"</span><span class="p">,</span> <span class="s">"you?"</span> <span class="p">};</span>
+
+<span class="cm">/* run the control thread */</span>
+<span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s: Starting the client</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">get_instance_name</span><span class="p">());</span>
+
+    <span class="cm">/* TASK 9: copy strings to an untyped dataport */</span>
+    <span class="cm">/* hint 1: use the "Buf" dataport as defined in the Client.camkes file
+     * hint 2: to access the dataport use the interface name as defined in Client.camkes.
+     * For example if you defined it as "dataport Buf d" then you would use "d" to refer to the dataport in C.
+     * hint 3: first write the number of strings (NUM_STRINGS) to the dataport
+     * hint 4: then copy all the strings from "s_arr" to the dataport.
+     * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */</span>
+
+
+    <span class="cm">/* TASK 10: emit event to signal that the data is available */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface_name&gt;_emit
+     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+
+    <span class="cm">/* TASK 11: wait to get an event back signalling that the reply data is avaialble */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface_name&gt;.wait
+     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+
+    <span class="cm">/* TASK 12: read the reply data from a typed dataport */</span>
+    <span class="cm">/* hint 1: use the "str_buf_t" dataport as defined in the Client.camkes file
+     * hint 2: to access the dataport use the interface name as defined in Client.camkes.
+     * For example if you defined it as "dataport str_buf_t d_typed" then you would use "d_typed" to refer to the dataport in C.
+     * hint 3: for the definition of "str_buf_t" see "str_buf.h".
+     * hint 4: use the "n" field to determine the number of strings in the dataport
+     * hint 5: print out the specified number of strings from the "str" field
+     * hint 6: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */</span>
+
+
+    <span class="cm">/* TASK 13: send the data over again, this time using two dataports, one
+     * untyped dataport containing the data, and one typed dataport containing
+     * dataport pointers pointing to data in the untyped, dataport.
+     */</span>
+    <span class="cm">/* hint 1: for the untyped dataport use the "Buf" dataport as defined in the Client.camkes file
+     * hint 2: for the typed dataport use the "ptr_buf_t" dataport as defined in the Client.camkes file
+     * hint 3: for the definition of "ptr_buf_t" see "str_buf.h".
+     * hint 4: copy all the strings from "s_arr" into the untyped dataport
+     * hint 5: use the "n" field of the typed dataport to specify the number of dataport pointers (NUM_STRINGS)
+     * hint 6: use the "ptr" field of the typed dataport to store the dataport pointers
+     * hint 7: use the function "dataport_wrap_ptr()" to create a dataport pointer from a regular pointer
+     * hint 8: the dataport pointers should point into the untyped dataport
+     * hint 9: for more information about dataport pointers see: https://github.com/seL4/camkes-tool/blob/master/docs/index.md
+     */</span>
+
+
+    <span class="cm">/* TASK 14: emit event to signal that the data is available */</span>
+    <span class="cm">/* hint 1: we've already done this before */</span>
+
+
+    <span class="cm">/* TASK 15: wait to get an event back signalling that data has been read */</span>
+    <span class="cm">/* hint 1: we've already done this before */</span>
+
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s: the next instruction will cause a vm fault due to permissions</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">get_instance_name</span><span class="p">());</span>
+
+    <span class="cm">/* TASK 16: test the read and write permissions on the dataport.
+     * When we try to write to a read-only dataport, we will get a VM fault.
+     */</span>
+    <span class="cm">/* hint 1: try to assign a value to a field of the "str_buf_t" dataport */</span>
+
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
+
+<span class="cm">/*
+ * CAmkES tutorial part 2: events and dataports
+ */</span>
+
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+</span>
+<span class="cp">#include &lt;camkes/dataport.h&gt;
+#include &lt;sel4utils/sel4_zf_logif.h&gt;
+</span>
+<span class="cm">/* generated header for our component */</span>
+<span class="cp">#include &lt;camkes.h&gt;
+</span>
+<span class="cm">/* hepler function to modify a string to make it all uppercase */</span>
+<span class="kt">void</span> <span class="nf">uppercase</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">str</span> <span class="o">!=</span> <span class="sc">'\0'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+        <span class="n">str</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">callback_handler_2</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">);</span>
+
+<span class="cm">/* this callback handler is meant to be invoked when the first event
+ * arrives on the "consumes" event interface.
+ * Note: the callback handler must be explicitly registered before the
+ * callback will be invoked.
+ * Also the registration is one-shot only, if it wants to be invoked
+ * when a new event arrives then it must re-register itself.  Or it can
+ * also register a different handler.
+ */</span>
+<span class="kt">void</span> <span class="nf">callback_handler_1</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* TASK 19: read some data from the untyped dataport */</span>
+    <span class="cm">/* hint 1: use the "Buf" dataport as defined in the Echo.camkes file
+     * hint 2: to access the dataport use the interface name as defined in Echo.camkes.
+     * For example if you defined it as "dataport Buf d" then you would use "d" to refer to the dataport in C.
+     * hint 3: first read the number of strings from the dataport
+     * hint 4: then print each string from the dataport
+     * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */</span>
+
+
+    <span class="cm">/* TASK 20: put a modified copy of the data from the untyped dataport into the typed dataport */</span>
+    <span class="cm">/* hint 1: modify each string by making it upper case, use the function "uppercase"
+     * hint 2: read from the "Buf" dataport as above
+     * hint 3: write to the "str_buf_t" dataport as defined in the Echo.camkes file
+     * hint 4: to access the dataport use the interface name as defined in Echo.camkes.
+     * For example if you defined it as "dataport str_buf_t d_typed" then you would use "d_typed" to refer to the dataport in C.
+     * hint 5: for the definition of "str_buf_t" see "str_buf.h"
+     * hint 6: use the "n" field to specify the number of strings in the dataport
+     * hint 7: copy the specified number of strings from the "Buf" dataport to the "str" field
+     * hint 8: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     * hint 9: you could combine this TASK with the previous one in a single loop if you want
+     */</span>
+
+
+    <span class="cm">/* TASK 21: register the second callback for this event. */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface name&gt;_reg_callback()
+     * hint 2: register the function "callback_handler_2"
+     * hint 3: pass NULL as the extra argument to the callback
+     * hint 4: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+
+    <span class="cm">/* TASK 22: notify the client that there is new data available for it */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface_name&gt;_emit
+     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+<span class="p">}</span>
+
+<span class="cm">/* this callback handler is meant to be invoked the second time an event
+ * arrives on the "consumes" event interface.
+ * Note: the callback handler must be explicitly registered before the
+ * callback will be invoked.
+ * Also the registration is one-shot only, if it wants to be invoked
+ * when a new event arrives then it must re-register itself.  Or it can
+ * also register a different handler.
+ */</span>
+<span class="kt">void</span> <span class="nf">callback_handler_2</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* TASK 23: read some data from the dataports. specifically:
+     * read a dataport pointer from one of the typed dataports, then use
+     * that pointer to access data in the untyped dataport.
+     */</span>
+    <span class="cm">/* hint 1: for the untyped dataport use the "Buf" dataport as defined in the Echo.camkes file
+     * hint 2: for the typed dataport use the "ptr_buf_t" dataport as defined in the Echo.camkes file
+     * hint 3: for the definition of "ptr_buf_t" see "str_buf.h".
+     * hint 4: the "n" field of the typed dataport specifies the number of dataport pointers
+     * hint 5: the "ptr" field of the typed dataport contains the dataport pointers
+     * hint 6: use the function "dataport_unwrap_ptr()" to create a regular pointer from a dataport pointer
+     * hint 7: for more information about dataport pointers see: https://github.com/seL4/camkes-tool/blob/master/docs/index.md
+     * hint 8: print out the string pointed to by each dataport pointer
+     */</span>
+
+
+    <span class="cm">/* TASK 24: register the original callback handler for this event */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface name&gt;_reg_callback()
+     * hint 2: register the function "callback_handler_1"
+     * hint 3: pass NULL as the extra argument to the callback
+     * hint 4: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+
+    <span class="cm">/* TASK 25: notify the client that we are done reading the data */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface_name&gt;_emit
+     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+<span class="p">}</span>
+
+<span class="cm">/* this function is invoked to initialise the echo event interface before it
+ * becomes active. */</span>
+<span class="cm">/* TASK 17: replace "echo" with the actual name of the "consumes" event interface */</span>
+<span class="cm">/* hint 1: use the interface name as defined in Echo.camkes.
+ * For example if you defined it as "consumes TheEvent c_event" then you would use "c_event".
+ */</span>
+<span class="kt">void</span> <span class="nf">echo__init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* TASK 18: register the first callback handler for this interface */</span>
+    <span class="cm">/* hint 1: use the function &lt;interface name&gt;_reg_callback()
+     * hint 2: register the function "callback_handler_1"
+     * hint 3: pass NULL as the extra argument to the callback
+     * hint 4: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client: the next instruction will cause a vm fault due to permissions
+FAULT HANDLER: data fault from client.control
+</code></pre></div></div>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># @TAG(DATA61_BSD)</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.7.2<span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span>hello-camkes-0 C<span class="p">)</span>
+
+<span class="nf">ImportCamkes</span><span class="p">()</span>
+
+<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>Client INCLUDES include SOURCES components/Client/src/client.c<span class="p">)</span>
+<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>Echo INCLUDES include SOURCES components/Echo/src/echo.c<span class="p">)</span>
+
+<span class="nf">DeclareCAmkESRootserver</span><span class="p">(</span>hello-2.camkes<span class="p">)</span>
+
+<span class="nf">GenerateCAmkESRootserver</span><span class="p">()</span>
+
+<span class="c1"># utility CMake functions for the tutorials (not required in normal, non-tutorial applications)</span>
+<span class="nb">set</span><span class="p">(</span>FINISH_COMPLETION_TEXT <span class="s2">"FAULT HANDLER: data fault from client.control"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>START_COMPLETION_TEXT <span class="s2">"client: the next instruction will cause a vm fault due to permissions"</span><span class="p">)</span>
+<span class="nb">configure_file</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="si">}</span>/projects/sel4-tutorials/tools/expect.py <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/check @ONLY<span class="p">)</span>
+
+</code></pre></div></div>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/hello-camkes-2.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/hello-camkes-2.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

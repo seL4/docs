@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mapping | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Mapping</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#virtual-memory">Virtual memory</a></li>
+<li class="toc-entry toc-h3"><a href="#paging-structures">Paging structures</a></li>
+<li class="toc-entry toc-h3"><a href="#pages">Pages</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#types-and-sizes">Types and sizes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#map-a-page-directory">Map a page directory</a></li>
+<li class="toc-entry toc-h3"><a href="#map-a-page-table">Map a page table</a></li>
+<li class="toc-entry toc-h3"><a href="#remap-a-page">Remap a page</a></li>
+<li class="toc-entry toc-h3"><a href="#unmapping-pages">Unmapping pages</a></li>
+<li class="toc-entry toc-h3"><a href="#further-exercises">Further exercises</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="mapping">Mapping</h1>
+
+<p>This tutorial provides an introduction to virtual memory management on seL4.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities">Capabilities tutorial</a></li>
+</ol>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<p>By the end of this tutorial, you should be familiar with:</p>
+
+<ol>
+  <li>How to map and unmap virtual memory pages in seL4.</li>
+</ol>
+
+<h2 id="background">Background</h2>
+
+<h3 id="virtual-memory">Virtual memory</h3>
+
+<p>seL4 does not provide virtual memory management, beyond kernel primitives for manipulating hardware
+paging structures. User-level must provide services for creating intermediate paging structures,
+mapping and unmapping pages.</p>
+
+<p>Users are free to define their own address space layout with one restriction: the seL4 kernel claims
+the high part of the virtual memory range. On most 32-bit platforms, this is
+0xe0000000 and above. This variable is set per platform, and can be found by finding the <code class="highlighter-rouge">kernelBase</code> variable
+in the seL4 source.</p>
+
+<h3 id="paging-structures">Paging structures</h3>
+
+<p>As part of the boot process, seL4 initialises the root task with a top-level hardware virtual
+memory object, which is referred to as a <em>VSpace</em>. A capability to this structure is made available in the
+<code class="highlighter-rouge">seL4_CapInitThreadVSpace</code> slot in the root tasks CSpace. For each architecture, this capability is
+to a different object type corresponding to the hardware, top-level paging structure. The table below
+ lists the VSpace object type for each supported architecture.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Architecture</th>
+      <th>VSpace Object</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aarch32</td>
+      <td><code class="highlighter-rouge">seL4_PageDirectory</code></td>
+    </tr>
+    <tr>
+      <td>aarch64</td>
+      <td><code class="highlighter-rouge">seL4_PageGlobalDirectory</code></td>
+    </tr>
+    <tr>
+      <td>ia32</td>
+      <td><code class="highlighter-rouge">seL4_PageDirectory</code></td>
+    </tr>
+    <tr>
+      <td>x86_64</td>
+      <td><code class="highlighter-rouge">seL4_PML4 </code></td>
+    </tr>
+    <tr>
+      <td>RISC-V</td>
+      <td><code class="highlighter-rouge">seL4_PageTable</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In addition to the top-level paging structure, intermediate hardware virtual memory objects are required to
+map pages. The table below lists those objects, in order, for each architecture.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Architecture</th>
+      <th>Objects</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aarch32</td>
+      <td><code class="highlighter-rouge">seL4_PageTable</code></td>
+    </tr>
+    <tr>
+      <td>aarch64</td>
+      <td><code class="highlighter-rouge">seL4_PageUpperDirectory</code>, <code class="highlighter-rouge">seL4_PageDirectory</code>, <code class="highlighter-rouge">seL4_PageTable</code></td>
+    </tr>
+    <tr>
+      <td>ia32</td>
+      <td><code class="highlighter-rouge">seL4_PageTable</code></td>
+    </tr>
+    <tr>
+      <td>x86_64</td>
+      <td><code class="highlighter-rouge">seL4_PDPT</code>, <code class="highlighter-rouge">seL4_PageDirectory</code>, <code class="highlighter-rouge">seL4_PageTable</code></td>
+    </tr>
+    <tr>
+      <td>RISC-V</td>
+      <td><code class="highlighter-rouge">seL4_PageTable</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This tutorial covers the x86_64 architecture, but should contain sufficient information on the virtual
+memory API provided by seL4 to generalise to other architectures.</p>
+
+<p>Each paging structure can be invoked in order to map or unmap it. Below is an example of mapping
+an x86_64 <code class="highlighter-rouge">seL4_PDPT</code> object:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* map a PDPT at TEST_VADDR */</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_X86_PDPT_Map</span><span class="p">(</span><span class="n">pdpt</span><span class="p">,</span> <span class="n">seL4_CapInitThreadVSpace</span><span class="p">,</span> <span class="n">TEST_VADDR</span><span class="p">,</span> <span class="n">seL4_X86_Default_VMAttributes</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>All mapping functions take three arguments:</p>
+<ul>
+  <li>the VSpace to map the object into,</li>
+  <li>the virtual address to map the object at,</li>
+  <li>and virtual memory attributes.</li>
+</ul>
+
+<p>If the virtual memory address provided is not aligned to the size of the paging object, seL4 will mask out any
+unused bits e.g a 4KiB page mapped at 0xDEADBEEF will end up mapped at 0xDEADB000.</p>
+
+<p>Virtual memory attributes determine the caching attributes of the mapping, which is architecture dependent.
+Alongside the attributes used in this tutorial (<code class="highlighter-rouge">seL4_X86_Default_VMAttributes</code>) you can find alternative values, in
+<code class="highlighter-rouge">libsel4</code>.</p>
+
+<h3 id="pages">Pages</h3>
+
+<p>Once all of the intermediate paging structures have been mapped for a specific virtual address range,
+physical frames can be mapped into that range by invoking the frame capability. The code snippet below
+shows an example of mapping a frame at address <code class="highlighter-rouge">TEST_VADDR</code>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* map a read-only page at TEST_VADDR */</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_X86_Page_Map</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">seL4_CapInitThreadVSpace</span><span class="p">,</span> <span class="n">TEST_VADDR</span><span class="p">,</span> <span class="n">seL4_CanRead</span><span class="p">,</span> <span class="n">seL4_X86_Default_VMAttributes</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>For a page mapping to succeed, all mid-level paging structures must be mapped. The <code class="highlighter-rouge">libsel4</code> function
+<code class="highlighter-rouge">seL4_MappingFailedLookupLevel()</code> can be used to determine at which level paging structures are missing.
+Note that to map a frame multiple times, one must make copies of the frame capability: each frame capability
+can only track one mapping.</p>
+
+<p>In addition to the arguments taken by the map methods for intermediate paging structures, page mapping takes a
+<code class="highlighter-rouge">rights</code> argument which determines the mapping type. In the example above, we map the page read only.</p>
+
+<h4 id="types-and-sizes">Types and sizes</h4>
+
+<p>Page types and sizes are architecture dependent. For both x86 and ARM architectures,
+each size of page is a different object type with a specific size.
+On RISC-V, pages are the same object type and variably sized.
+Configuration and hardware settings alter the available page sizes.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>This tutorial uses several helper functions to allocate objects and capabilities. All object and
+CSlot allocations have already been done for you using these functions. For more information see the
+on these mechanisms, see the capabilities and untyped tutorials.</p>
+
+<h3 id="map-a-page-directory">Map a page directory</h3>
+
+<p>On starting the tutorial, you will see the following output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Missing intermediate paging structure at level 30
+main@main.c:34 [Cond failed: error != seL4_NoError]
+	Failed to map page
+</code></pre></div></div>
+<p>This is because while the provided code maps in a <code class="highlighter-rouge">seL4_PDPT</code> object, there are two missing levels of
+paging structures. The value corresponds to the <code class="highlighter-rouge">libsel4</code> constant <code class="highlighter-rouge">SEL4_MAPPING_LOOKUP_NO_PD</code> which is
+the number of bits in the virtual address that could not be resolved due to missing paging structures.</p>
+
+<p><strong>Exercise</strong> Map in the <code class="highlighter-rouge">pd</code> structure using (<code class="highlighter-rouge">seL4_PageDirectory_Map</code>)[https://docs.sel4.systems/ApiDoc.html#map-5].</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO map a page directory object
+</span></code></pre></div></div>
+
+<p>On success, you should see the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Missing intermediate paging structure at level 21
+main@main.c:34 [Cond failed: error != seL4_NoError]
+	Failed to map page
+</code></pre></div></div>
+
+<h3 id="map-a-page-table">Map a page table</h3>
+
+<p>Note that in the above output, the number of failed bits has changed from <code class="highlighter-rouge">30</code> to <code class="highlighter-rouge">21</code>: this is because another
+9 bits could be resolved from the newly mapped page directory.</p>
+
+<p><strong>Exercise</strong> Map in the <code class="highlighter-rouge">pt</code> structure using <a href="https://docs.sel4.systems/ApiDoc.html#map-6"><code class="highlighter-rouge">seL4_PageTable_Map</code></a>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO map a page table object
+</span></code></pre></div></div>
+
+<p>On success, you should see the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Read x: 0
+Set x to 5
+Caught cap fault in send phase at address (nil)
+while trying to handle:
+vm fault on data at address 0xa000000000 with status 0x7
+in thread 0xffffff801ffb5400 "rootserver" at address 0x401afe
+With stack:
+0x41c920: 0x41c9d0
+...
+</code></pre></div></div>
+
+<p>The page is successfully mapped and we read a value of 0: as seL4 zeros all non-device pages when they are retyped from
+untyped memory. However, then the code attempts to write to the page. Since you mapped the page as read-only, this fails
+and the kernel raises a VM fault.</p>
+
+<p>Since the initial task does not have a fault handler (more details in the upcoming
+threads tutorial), this triggers a subsequent capability fault (cap fault) on slot 0 (nil). Because you are running a
+debug kernel for the tutorial, the kernel outputs the details of both faults.</p>
+
+<p>The vm fault is the most interesting: it shows the fault address, fault status register, and the instruction pointer
+that the fault occured on (address).</p>
+
+<h3 id="remap-a-page">Remap a page</h3>
+
+<p><strong>Exercise</strong> Fix the fault by remapping the page with <code class="highlighter-rouge">seL4_ReadWrite</code> permissions, using the
+<a href="https://docs.sel4.systems/ApiDoc.html#remap">seL4_X86_Page_Remap</a> invocation.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO remap the page
+</span></code></pre></div></div>
+
+<h3 id="unmapping-pages">Unmapping pages</h3>
+
+<p>Pages can be unmapped by either using <code class="highlighter-rouge">Unmap</code> invocations on the page or any intermediate paging structure, or deleting
+the final capability to any of the paging structure.</p>
+
+<h3 id="further-exercises">Further exercises</h3>
+
+<p>That’s all for the detailed content of this tutorial. Below we list other ideas for exercises you can try,
+to become more familiar with virtual memory management on seL4.</p>
+
+<ul>
+  <li>Try unmapping the structures you just mapped in.</li>
+  <li>Port this tutorial to another architecture (ARM, RISCV).</li>
+  <li>Create a generic function for converting from <code class="highlighter-rouge">seL4_MappingFailedLookupLevel</code> to the required seL4 object.</li>
+</ul>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/mapping.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/mapping.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

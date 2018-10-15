@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IPC | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">IPC</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#system-calls">System calls</a></li>
+<li class="toc-entry toc-h3"><a href="#ipc-buffer">IPC Buffer</a></li>
+<li class="toc-entry toc-h3"><a href="#data-transfer">Data transfer</a></li>
+<li class="toc-entry toc-h3"><a href="#cap-transfer">Cap transfer</a></li>
+<li class="toc-entry toc-h3"><a href="#capability-unwrapping">Capability unwrapping</a></li>
+<li class="toc-entry toc-h3"><a href="#message-info">Message Info</a></li>
+<li class="toc-entry toc-h3"><a href="#badges">Badges</a></li>
+<li class="toc-entry toc-h3"><a href="#fastpath">Fastpath</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#further-exercises">Further exercises</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="ipc">IPC</h1>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities">Capabilities tutorial</a></li>
+</ol>
+
+<h2 id="initialising">Initialising</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> ipc
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>ipc_build
+ninja
+</code></pre></div></div>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<ol>
+  <li>Be able to use IPC to send data and capabilities between processes.</li>
+  <li>Learn the jargon <em>cap transfer</em>.</li>
+  <li>Be able to differentiate requests via badged capabilities.</li>
+  <li>Know how to design protocols that use the IPC fastpath.</li>
+</ol>
+
+<h2 id="background">Background</h2>
+
+<p>Interprocess communication (IPC) is the microkernel mechanism for synchronous transmission of small amounts of data
+and capabilities between processes. In seL4, IPC is facilitated by small kernel objects known as <em>endpoints</em>, which
+act as general communication ports. Invocations on endpoint objects are used to send and receive IPC messages.</p>
+
+<p>Endpoints consist of a queue of threads waiting to send, or waiting to receive messages. To understand
+this, consider an example where <em>n</em> threads are waiting for a message on an endpoint. If <em>n</em> threads
+send messages on the endpoint, all <em>n</em> waiting threads will receive the message and wake up. If an <em>n+1</em>th
+sender sends a message, that sender is now queued.</p>
+
+<h3 id="system-calls">System calls</h3>
+
+<p>Threads can send messages on endpoints with the system call <code class="highlighter-rouge">seL4_Send</code>, which blocks until the message has been
+consumed by another thread. <code class="highlighter-rouge">seL4_NBSend</code> can also be used, which performs a polling send: the send is only
+successful if a receiver is already blocked waiting for a message, and otherwise fails. To avoid a
+back channel, <code class="highlighter-rouge">seL4_NBSend</code> does not return a result indicating if the message was sent or not.</p>
+
+<p><code class="highlighter-rouge">seL4_Recv</code> can be used to receive messages, and <code class="highlighter-rouge">seL4_NBRecv</code> can be used to poll for messages.</p>
+
+<p><code class="highlighter-rouge">seL4_Call</code> is a system call that essentially combines an <code class="highlighter-rouge">seL4_Send</code> and an <code class="highlighter-rouge">seL4_Recv</code> with one
+major difference: in the receive phase, thread which uses this function is blocked on a one-time capability termed a
+<em>reply capability</em>, and not the endpoint itself. In a client-server scenario, where clients use
+<code class="highlighter-rouge">seL4_Call</code> to make requests, the server can explicitly reply to the correct client.</p>
+
+<p>The reply capability is stored internally in the thread control block (TCB) of the receiver. The system
+call <code class="highlighter-rouge">seL4_Reply</code> invokes this capability, which sends an IPC to the client and wakes it up. <code class="highlighter-rouge">seL4_ReplyRecv</code>
+does the same, except it sends the reply and blocks on the provided endpoint in a combined system call.</p>
+
+<p>Since TCBs have a single space to store a reply capability, if servers need to service multiple
+requests (e.g saving requests to reply at a later time, after hardware operations have been completed),
+<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="highlighter-rouge">seL4_CNode_SaveCaller</code></a> can be used to save
+the reply capability to an empty slot in the receivers CSpace.</p>
+
+<h3 id="ipc-buffer">IPC Buffer</h3>
+
+<p>Each thread has a buffer (referred to as the <em>IPC buffer</em>), which contains the payload of the IPC message,
+consisting of data and capabilities. Senders specify a message length and the kernel copies this (bounded)
+amount between the sender and receiver IPC buffer.</p>
+
+<h3 id="data-transfer">Data transfer</h3>
+
+<p>The IPC buffer contains a bounded area of message registers (MR) used to transmit data on IPC. Each
+register is the machine word size, and the maximum message size is available in the
+<code class="highlighter-rouge">seL4_MsgMaxLength</code> constant provided by <code class="highlighter-rouge">libsel4</code>.</p>
+
+<p>Messages can be loaded into the IPC buffer using <code class="highlighter-rouge">seL4_GetMR</code> and extracted using <code class="highlighter-rouge">seL4_SetMR</code>.
+Small messages are sent in registers and do not require a copy operation. The amount of words
+that fit in registers is available in the <code class="highlighter-rouge">seL4_FastMessageRegisters</code> constant.</p>
+
+<p>The amount of data being transferred, in terms of the number of message registers used, must be
+set in as the <code class="highlighter-rouge">length</code> field in the <code class="highlighter-rouge">seL4_MessageInfo_t</code> data structure.</p>
+
+<h3 id="cap-transfer">Cap transfer</h3>
+
+<p>Along with data, IPC can be used to send capabilities between processes per message. This is referred to as
+ <em>cap transfer</em>. The number of capabilities being transferred is encoded in the <code class="highlighter-rouge">seL4_MessageInfo_t</code>
+structure as <code class="highlighter-rouge">extraCaps</code>. Below is an example for sending a capability via IPC:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">seL4_MessageInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">seL4_MessageInfo_new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+   <span class="n">seL4_SetCap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">free_slot</span><span class="p">);</span>
+   <span class="n">seL4_Call</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">info</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>To receive a capability, the receiver must specify a cspace address to place the capability in. This is
+shown in the code example below:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_SetCapReceivePath</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">badged_endpoint</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
+    <span class="n">seL4_Recv</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sender</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The access rights of the received capability are the same as  by the rights that the receiver has to the endpoint.
+Note that while senders can send multiple capabilities, receivers can only receive one at a time.</p>
+
+<h3 id="capability-unwrapping">Capability unwrapping</h3>
+
+<p>seL4 can also <em>unwrap</em> capabilities on IPC.
+If the n-th capability in the message refers to the endpoint through which the message
+is sent, the capability is unwrapped: its badge is placed into the n-th position of the
+receiver’s IPC buffer (in the field <code class="highlighter-rouge">caps_or_badges</code>), and the kernel sets the n-th bit
+(counting from the least significant) in the <code class="highlighter-rouge">capsUnwrapped</code> field of <code class="highlighter-rouge">seL4_MessageInfo_t</code>.</p>
+
+<h3 id="message-info">Message Info</h3>
+
+<p>The <code class="highlighter-rouge">seL4_MessageInfo_t</code> data structure is used to encode the description of an IPC message into a single word.
+It is used to describe a message to be sent to seL4, and for seL4 to describe the message that was
+sent to the receiver.
+It contains the following fields:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">length</code> the amount of message registers (data) in the message (<code class="highlighter-rouge">seL4_MsgMaxLength</code> maximum),</li>
+  <li><code class="highlighter-rouge">extraCaps</code> the number of capabilities in the message (<code class="highlighter-rouge">seL4_MsgMaxExtraCaps</code>)</li>
+  <li><code class="highlighter-rouge">capsUnwrapped</code> marks any capabilities unwrapped by the kernel.</li>
+  <li><code class="highlighter-rouge">label</code> data that is transferred unmodified by the kernel from sender to receiver,</li>
+</ul>
+
+<h3 id="badges">Badges</h3>
+
+<p>Along with the message the kernel additionally delivers the badge of the endpoint capability
+that the sender invoked to send the message. Endpoints can be badged using
+<a href="https://docs.sel4.systems/ApiDoc.html#mint"><code class="highlighter-rouge">seL4_CNode_Mint</code></a> or
+ <a href="https://docs.sel4.systems/ApiDoc.html#mutate"><code class="highlighter-rouge">seL4_CNode_Mutate</code></a>. Once an endpoint is badged,
+the badge of the endpoint is transferred to any receiver that receives messages on that endpoint.
+The code example below demonstrates this:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4_Word</span> <span class="n">badge</span><span class="p">;</span>
+<span class="n">seL4_Recv</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">badge</span><span class="p">);</span>
+<span class="c1">// once a message is received, the badge value is set by seL4 to the
+// badge of capability used by the sender to send the message
+</span></code></pre></div></div>
+
+<h3 id="fastpath">Fastpath</h3>
+
+<p>Fast IPC is essential to microkernel-based systems, as services are often separated from each other
+for isolation, with IPC one of the core mechanisms for communication between clients and services.
+Consequently, IPC has a fastpath – a heavily optimised path in the kernel – which allows these operations
+to be very fast. In order to use the fastpath, an IPC must meet the following conditions:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_Call</code> or <code class="highlighter-rouge">seL4_ReplyRecv</code> must be used.</li>
+  <li>The data in the message must fit into the <code class="highlighter-rouge">seL4_FastMessageRegisters</code> registers.</li>
+  <li>The processes must have valid address spaces.</li>
+  <li>No caps should be transferred.</li>
+  <li>No other threads in the scheduler of higher priority than the thread unblocked by the IPC can be running.</li>
+</ul>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>This tutorial has several processes set up by the capDL loader, two clients and a server. All processes have
+access to a single endpoint capability, which provides access to the same endpoint object.</p>
+
+<p>In this tutorial, you will construct a server which echos the contents of messages sent by clients. You
+will also alter the ordering of replies from the clients to get the right message.</p>
+
+<p>When you run the tutorial, the output should be something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: waiting for badged endpoint
+Badged 2
+Assertion failed: seL4_MessageInfo_get_extraCaps(info) == 1 (../ipcCkQ6Ub/client_2.c: main: 22)
+Client 1: waiting for badged endpoint
+Badged 1
+Assertion failed: seL4_MessageInfo_get_extraCaps(info) == 1 (../ipcCkQ6Ub/client_1.c: main: 22)
+</code></pre></div></div>
+
+<p>On initialisation, both clients use the following protocol: they wait on the provided endpoint for
+a badged endpoint to be sent to them via cap transfer. All following messages sent by the client
+uses the badged endpoint, such that the server can identify the client. However, the server does not
+currently send the badged capability! We have provided code to badge the endpoint capability, and
+reply to the client.</p>
+
+<p><strong>Exercise</strong> Your task is to set up the cap transfer such that the client successfully
+receives the badged endpoint.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             <span class="cm">/* No badge! give this sender a badged copy of the endpoint */</span>
+             <span class="n">seL4_Word</span> <span class="n">badge</span> <span class="o">=</span> <span class="n">seL4_GetMR</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+             <span class="n">seL4_Error</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Mint</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
+                                                <span class="n">cnode</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
+                                                <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="n">badge</span><span class="p">);</span>
+             <span class="n">printf</span><span class="p">(</span><span class="s">"Badged %lu</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">badge</span><span class="p">);</span>
+
+             <span class="c1">// TODO use cap transfer to send the badged cap in the reply
+</span>
+             <span class="cm">/* reply to the sender and wait for the next message */</span>
+             <span class="n">seL4_Reply</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+
+             <span class="cm">/* now delete the transferred cap */</span>
+             <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Delete</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
+             <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
+
+             <span class="cm">/* wait for the next message */</span>
+             <span class="n">info</span> <span class="o">=</span> <span class="n">seL4_Recv</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sender</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Now the output should look something like:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+Client 2: waiting <span class="k">for </span>badged endpoint
+Badged 2
+Client 1: waiting <span class="k">for </span>badged endpoint
+Badged 1
+Client 2: received badged endpoint
+Client 1: received badged endpoint
+</code></pre></div></div>
+
+<p>Depending on timing, the messages may be different, the result is the same: the system hangs.
+This is because one of the clients has hit the else case, where the badge is set, and the server
+does not respond, or wait for new messages from this point.</p>
+
+<p><strong>Exercise</strong> Your next task is to implement the echo part of the server.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             <span class="c1">// TODO use printf to print out the message sent by the client
+</span>             <span class="c1">// followed by a new line
+</span></code></pre></div></div>
+
+<p>At this point, you should see a single word output to the console in a loop.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the
+the
+the
+</code></pre></div></div>
+
+<p>This is because the server does not reply to the client, and continues to spin in a loop
+ repeating the last message.
+<strong>Exercise</strong>  Update the code to reply to the clients after printing the message.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             <span class="c1">// TODO reply to the client and wait for the next message
+</span></code></pre></div></div>
+
+<p>Now the output should be something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: received badged endpoint
+the
+brown
+jumps
+the
+dog
+Client 1: received badged endpoint
+quick
+fox
+over
+lazy
+</code></pre></div></div>
+
+<p><strong>Exercise</strong> Currently each client is scheduled for its full timeslice until it is preempted. Alter
+your server to only print one message from each client, alternating. You will need to use
+<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="highlighter-rouge">seL4_CNode_SaveCaller</code></a>  to save the reply
+capability for each sender. You can use <code class="highlighter-rouge">free_slot</code> to store the reply capabilities.</p>
+
+<p>Depending on your approach, successful output should look something like this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: received badged endpoint
+the
+Client 1: received badged endpoint
+quick
+fox
+brown
+jumps
+over
+lazy
+the
+dog
+</code></pre></div></div>
+
+<h3 id="further-exercises">Further exercises</h3>
+
+<p>That’s all for the detailed content of this tutorial. Below we list other ideas for exercises you can try,
+to become more familiar with IPC.</p>
+
+<ul>
+  <li>Try using <code class="highlighter-rouge">seL4_Send</code> and <code class="highlighter-rouge">seL4_Recv</code>.</li>
+  <li>Try the non-blocking variants, <code class="highlighter-rouge">seL4_NBSend</code> and <code class="highlighter-rouge">seL4_NBRecv</code>.</li>
+</ul>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/ipc.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/ipc.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

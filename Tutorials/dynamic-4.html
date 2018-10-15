@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-10-08 13:46:50 +1100 -->
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 Timer tutorial | seL4 docs</title>
+    <title>Dynamic Libraries 4 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -70,7 +70,7 @@
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
             <a property="item" typeof="WebPage" href="/Tutorials/">
-              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <span property="name"><b></b></span>
               <meta property="position" content="2" />
             </a>
         </li>
@@ -79,7 +79,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 Timer tutorial</span>
+            <span property="name">Dynamic Libraries 4</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -201,71 +201,88 @@
   
       </ul>
 
-    <h3>Tutorials</h3>
-      <ul class="nav nav-sidebar">
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_1.html">
-            seL4 Tutorial 1
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_2.html">
-            seL4 Tutorial 2
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_3.html">
-            seL4 Tutorial 3
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_4.html">
-            seL4 Tutorial 4
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
   
         <li class="active">
-          <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
-            seL4 Timer tutorial
-          </a>
-        </li>
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_RT_tutorial.html">
-            seL4 MCS tutorial
-          </a>
-        </li>
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
-            CAmkES Tutorial 0
-          </a>
-        </li>
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
-            CAmkES Tutorial 1
-          </a>
-        </li>
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
-            CAmkES Tutorial 2
-          </a>
-        </li>
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
-            CAmkES Timer Tutorial
-          </a>
-        </li>
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
   
-      </ul>
-        
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
 </div>
 
 
@@ -275,20 +292,27 @@
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
-<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
-<li class="toc-entry toc-h3"><a href="#task-2">TASK 2</a></li>
-<li class="toc-entry toc-h3"><a href="#task-3">TASK 3</a></li>
+<li class="toc-entry toc-h3"><a href="#allocate-a-notification-object">Allocate a notification object</a></li>
+<li class="toc-entry toc-h3"><a href="#initialise-the-timer">Initialise the timer</a></li>
+<li class="toc-entry toc-h3"><a href="#use-the-timer">Use the timer</a></li>
+<li class="toc-entry toc-h3"><a href="#handle-the-interrupt">Handle the interrupt</a></li>
+<li class="toc-entry toc-h3"><a href="#destroy-the-timer">Destroy the timer</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
 </ul>
       </nav>
     
     <div class="content">
-      <h1 id="sel4-timer-tutorial">seL4 Timer tutorial</h1>
+      
+<h1 id="sel4-dynamic-libraries-timer-tutorial">seL4 Dynamic Libraries: Timer tutorial</h1>
 
-<p>This tutorial demonstrates how to set up and use a basic timer driver.</p>
+<p>This tutorial demonstrates how to set up and use a basic timer driver using the
+<code class="highlighter-rouge">seL4_libs</code> dynamic libraries.</p>
 
 <p>You’ll observe that the things you’ve already covered in the other
 tutorials are already filled out and you don’t have to repeat them: in
@@ -304,76 +328,83 @@ page, if they were covered by a previous tutorial in the series.</p>
     handle interrupts.</li>
 </ul>
 
-<h2 id="walkthrough">Walkthrough</h2>
+<h2 id="initialising">Initialising</h2>
 
-<p>First, build and run the tutorial:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># create a build directory
-mkdir build_hello_timer
-cd build_hello_timer
-# initialise your build directory
-../init --plat pc99 --tut hello-timer
-# build it
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> dynamic-3
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>dynamic-3_build
 ninja
-# run it in qemu
-./simulate
 </code></pre></div></div>
 
-<p>Before you have done any tasks, when running the tutorial should show
-the timer and timer client waking up, then a cap fault is triggered due
-to incomplete code:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/dynamic-3">dynamic-3</a></li>
+</ol>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>Once you initialise and run the tutorials, you will see the following output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+Node 0 of 1
+IOPT levels:     4294967295
+IPC buffer:      0x5a1000
+Empty slots:     [523 --&gt; 4096)
+sharedFrames:    [0 --&gt; 0)
+userImageFrames: [16 --&gt; 433)
+userImagePaging: [12 --&gt; 15)
+untypeds:        [433 --&gt; 523)
+Initial thread domain: 0
+Initial thread cnode size: 12
 timer client: hey hey hey
+main: hello world
 main: got a message from 0x61 to sleep 2 seconds
-Caught cap fault in send phase at address 0x0
-while trying to handle:
-vm fault on data at address 0x0 with status 0x4
-in thread 0xffaf7900 "hello-timer" at address 0x804841a
-With stack:
-0x80bc880: 0x806838c
-0x80bc884: 0x61
-0x80bc888: 0x2
-0x80bc88c: 0x80482ff
-0x80bc890: 0x20
-0x80bc894: 0x0
-0x80bc898: 0x0
-0x80bc89c: 0x0
-0x80bc8a0: 0x80bc8c0
-0x80bc8a4: 0x80bc8d0
-0x80bc8a8: 0x80be010
-0x80bc8ac: 0x7
-0x80bc8b0: 0x0
-0x80bc8b4: 0x0
-0x80bc8b8: 0x0
-0x80bc8bc: 0x10000000
-QEMU: Terminated
+ltimer_get_time@ltimer.h:267 get_time not implemented
+timer client wakes up:
+ got the current timer tick:
+ 0
 </code></pre></div></div>
-
-<p>Look for <code class="highlighter-rouge">TASK</code> in the <code class="highlighter-rouge">apps/hello-timer</code> and <code class="highlighter-rouge">apps/hello-timer</code> directory for
-each task.</p>
-
-<h3 id="task-1">TASK 1</h3>
+<h3 id="allocate-a-notification-object">Allocate a notification object</h3>
 
 <p>The first task is to allocate a notification object to receive
-interrupts on. The output will not change as a result of completing this
-task.</p>
+interrupts on.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 1: create a notification object for the timer interrupt */</span>
+    <span class="cm">/* hint: vka_alloc_notification()
+     * int vka_alloc_notification(vka_t *vka, vka_object_t *result)
+     * @param vka Pointer to vka interface.
+     * @param result Structure for the notification object. This gets initialised.
+     * @return 0 on success
+     * https://github.com/seL4/libsel4vka/blob/master/include/vka/object.h#L98
+     */</span>
+    <span class="n">vka_object_t</span> <span class="n">ntfn_object</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</code></pre></div></div>
+<p>The output will not change as a result of completing this task.</p>
 
-<h3 id="task-2">TASK 2</h3>
+<h3 id="initialise-the-timer">Initialise the timer</h3>
 
 <p>Use our library function <code class="highlighter-rouge">sel4platsupport_get_default_timer</code> to
 initialise a timer driver. Assign it to the <code class="highlighter-rouge">timer</code> global variable.</p>
-
-<p>After this change, the server will no longer fault and the output will
-look something like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Searching for ACPI_SIG_RSDP
-Parsing ACPI tables
-timer client: hey hey hey
-hpet_get_timer@hpet.c:362 Requested fsb delivery, but timer0 does not support
-main: hello world
-main: got a message from 0x61 to sleep 2 seconds
-timer client wakes up: got the current timer tick: 17299121
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 2: call sel4platsupport library to get the default timer */</span>
+    <span class="cm">/* hint: sel4platsupport_init_default_timer
+     */</span>
+    <span class="n">ps_io_ops_t</span> <span class="n">ops</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_io_ops</span><span class="p">(</span><span class="n">vspace</span><span class="p">,</span> <span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_arch_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+<p>After this change, the server will output non-zero for the tick value at the end.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> got the current timer tick:
+ 1409040
 </code></pre></div></div>
 
-<h3 id="task-3">TASK 3</h3>
+<h3 id="use-the-timer">Use the timer</h3>
 
 <p>While at the end of the previous task the tutorial appears to be
 working, the main thread replies immediately to the client and doesn’t
@@ -383,8 +414,63 @@ wait at all.</p>
 timeout, wait for an interrupt on the created notification, and handle
 it.</p>
 
-<p>After this task is completed you should see a 2 second wait between the
-message being sent and received.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/*
+     * TASK 3: Start and configure the timer
+     * hint 1: ltimer_set_timeout
+     * hint 2: set period to 1 millisecond
+     */</span>
+</code></pre></div></div>
+<p>The output will cease after the following line as a result of completing this task.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a message from 0x61 to sleep 2 seconds
+</code></pre></div></div>
+
+<h3 id="handle-the-interrupt">Handle the interrupt</h3>
+
+<p>In order to receive more interrupts, you need to handle the interrupt in the driver
+and acknowledge the irq.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+        <span class="cm">/*
+         * TASK 4: Handle the timer interrupt
+         * hint 1: wait for the incoming interrupt and handle it
+         * The loop runs for (1000 * msg) times, which is basically 1 second * msg.
+         *
+         * hint2: seL4_Wait
+         * hint3: sel4platsupport_handle_timer_irq
+         *
+         */</span>
+</code></pre></div></div>
+<p>After this task is completed you should see a 2 second wait, then output from the
+ client as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up:
+ got the current timer tick:
+ 2365866120
+</code></pre></div></div>
+
+<h3 id="destroy-the-timer">Destroy the timer</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/*
+     * TASK 5: Stop the timer
+     * hint: sel4platsupport_destroy_timer
+     */</span>
+</code></pre></div></div>
+<p>The output should not change on successful completion of completing this task.</p>
+
+<p>That’s it for this tutorial.</p>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
 
     </div>
   </div>
@@ -415,7 +501,7 @@ message being sent and received.</p>
         </li>
         
           <li>
-            Site last updated: Mon Oct 8 13:22:48 2018 +1100 c87156f
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
           </li>
           <li>
             
@@ -570,7 +656,27 @@ message being sent and received.</p>
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 7d528d8
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
               
             
               
@@ -678,9 +784,9 @@ message being sent and received.</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/seL4_Timer_tutorial.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/dynamic-4.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/seL4_Timer_tutorial.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/dynamic-4.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Threads | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Threads</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#thread-control-blocks">Thread Control Blocks</a></li>
+<li class="toc-entry toc-h3"><a href="#scheduling-model">Scheduling model</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#priorities">Priorities</a></li>
+<li class="toc-entry toc-h4"><a href="#round-robin">Round robin</a></li>
+<li class="toc-entry toc-h4"><a href="#domain-scheduling">Domain scheduling</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#thread-attributes">Thread Attributes</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#capdl-loader">CapDL Loader</a></li>
+<li class="toc-entry toc-h3"><a href="#configure-a-tcb">Configure a TCB</a></li>
+<li class="toc-entry toc-h3"><a href="#change-priority-via-sel4_tcb_setpriority">Change priority via seL4_TCB_SetPriority</a></li>
+<li class="toc-entry toc-h3"><a href="#set-initial-register-state">Set initial register state</a></li>
+<li class="toc-entry toc-h3"><a href="#start-the-thread">Start the thread</a></li>
+<li class="toc-entry toc-h3"><a href="#passing-arguments">Passing arguments</a></li>
+<li class="toc-entry toc-h3"><a href="#resolving-a-fault">Resolving a fault</a></li>
+<li class="toc-entry toc-h3"><a href="#further-exercises">Further exercises</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="threads">Threads</h1>
+
+<p>This is a tutorial for using threads on seL4.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities">Capabilities tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/mapping">Mapping tutorial</a></li>
+</ol>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<ol>
+  <li>Know the jargon TCB.</li>
+  <li>Learn how to start a thread in the same address space.</li>
+  <li>Understand how to read and update TCB register state.</li>
+  <li>Learn how to suspend and resume a thread.</li>
+  <li>Understand thread priorities and their interaction with the seL4 scheduler.</li>
+  <li>Gain a basic understanding of exceptions and debug fault handlers.</li>
+</ol>
+
+<h2 id="background">Background</h2>
+
+<h3 id="thread-control-blocks">Thread Control Blocks</h3>
+
+<p>seL4 provides threads to represent an execution context and manage processor time. Threads in
+seL4 are realised by <em>thread control block</em> objects (TCBs), one for each kernel thread.</p>
+
+<p>TCBs contain the following information:</p>
+<ul>
+  <li>a priority and maximum control priority,</li>
+  <li>register state and floating-point context,</li>
+  <li>CSpace capability,</li>
+  <li>VSpace capability,</li>
+  <li>endpoint capability to send fault messages to,</li>
+  <li>and the reply capability slot.</li>
+</ul>
+
+<h3 id="scheduling-model">Scheduling model</h3>
+
+<p>The seL4 scheduler chooses the next thread to run on a specific
+processing core, and is a priority-based round-robin scheduler. The scheduler picks
+threads that are runnable: that is, resumed, and not blocked on any IPC operation.</p>
+
+<h4 id="priorities">Priorities</h4>
+
+<p>The scheduler picks the highest-priority, runnable thread. seL4 provides a priority range of 0-255, where
+255 is the maximum priority (encoded in <code class="highlighter-rouge">libsel4</code> as <code class="highlighter-rouge">seL4_MinPrio</code> and <code class="highlighter-rouge">seL4_MaxPrio</code>).</p>
+
+<p>TCBs also have a <em>maximum control priority</em> (MCP), which acts as an informal capability over priorities.
+When setting the priority of a TCB, an explicit TCB capability must be provided to derive the
+authority from to set the priority. The priority being set is checked against the authority TCB’s
+MCP and the targer priority is greater, the operation fails. The root task starts with both priority and
+MCP set to <code class="highlighter-rouge">seL4_MaxPrio</code>.</p>
+
+<h4 id="round-robin">Round robin</h4>
+
+<p>When multiple TCBs are runnable and have the same priority, the are scheduled in a
+ first-in first-out round-robin fashion. In more detail, kernel time
+ is accounted for in fixed-time quanta referred to as ticks, and each TCB has
+a timeslice field which represents the number of ticks that TCB is eligible to execute
+until preempted. The kernel timer driver is configured to fire a periodic interrupt which
+marks each tick, and when the timeslice is exhausted round robin scheduling is applied.
+Threads can surrender their current tick using the <code class="highlighter-rouge">seL4_Yield</code> system call.</p>
+
+<h4 id="domain-scheduling">Domain scheduling</h4>
+
+<p>In order to provide confidentiality seL4 provides a top-level hierarchical scheduler which
+provides static, cyclical scheduling of scheduling partitions known as domains.  Domains are
+statically configured at compile time with a cyclic schedule, and are non-preemptible resulting in
+completely deterministic scheduling of domains.</p>
+
+<p>Threads can be assigned to domains, and threads are only scheduled
+when their domain is active. Cross-domain IPC is delayed until a domain switch, and
+seL4_Yield between domains is not possible. When there are no threads to run while a
+domain is scheduled, a domain-specific idle thread will run until a switch occurs.</p>
+
+<p>Assigning a thread to a domain requires access to the <code class="highlighter-rouge">seL4_DomainSet</code> capability. This allows a
+thread to be added to any domain.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Set thread's domain */</span>
+<span class="n">seL4_Error</span> <span class="n">seL4_DomainSet_Set</span><span class="p">(</span><span class="n">seL4_DomainSet</span> <span class="n">_service</span><span class="p">,</span> <span class="n">seL4_Uint8</span> <span class="n">domain</span><span class="p">,</span> <span class="n">seL4_TCB</span> <span class="kr">thread</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<h3 id="thread-attributes">Thread Attributes</h3>
+
+<p>seL4 threads are configured by <a href="https://docs.sel4.systems/ApiDoc.html#sel4_tcb">invocations on the TCB object</a>.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>This tutorial will guide you through using TCB invocations to create a new thread in the same
+address space and pass arguments to the new thread.
+Additionally, you will learn about how to debug a virtual memory
+fault.</p>
+
+<p>By the end of this tutorial you want to spawn a new thread to call the function in the code example
+ below.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">int</span> <span class="nf">new_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg1</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">arg2</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">arg3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello2: arg1 %p, arg2 %p, arg3 %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">arg1</span><span class="p">;</span>
+    <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">arg2</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="capdl-loader">CapDL Loader</h3>
+
+<p>Previous tutorials have taken place in the root task where the starting CSpace layout is set by the
+seL4 boot protocol. This tutorial uses a the <em>capDL loader</em>, a root task which allocates statically
+ configured objects and capabilities.</p>
+
+<p>The capDL loader parses
+a static description of the system and the relevant ELF binaries.
+It is primarily used in <a href="https://docs.sel4.systems/CAmkES/">Camkes</a> projects
+but we also use it in the tutorials to reduce redundant code.
+The program that you construct will end up with its own CSpace and VSpace, which are separate
+from the root task, meaning CSlots like <code class="highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
+in applications loaded by the capDL loader.</p>
+
+<p>Information about CapDL projects can be found <a href="https://docs.sel4.systems/CapDL.html">here</a>.</p>
+
+<h3 id="configure-a-tcb">Configure a TCB</h3>
+
+<p>When you first build and run the tutorial, you should see something like the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, World!
+Dumping all tcbs!
+Name                                        State           IP                       Prio    Core
+--------------------------------------------------------------------------------------
+tcb_threads                                running         0x4012ef    254                 0
+idle_thread                                 idle            (nil)   0                   0
+rootserver                                  inactive        0x4024c2    255                 0
+&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff8008140c00 "tcb_threads" @4012ef]: Attempted to invoke a &gt;
+main@threads.c:42 [Cond failed: result]
+Failed to retype thread: 2
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Dumping all tcbs!</code> and the following table is generated by a debug syscall called <code class="highlighter-rouge">seL4_DebugDumpScheduler()</code>.
+seL4 has a series of debug syscalls that are available in debug kernel builds. The available debug syscalls
+can be found in <a href="https://docs.sel4.systems/ApiDoc.html#debugging-system-calls">libsel4</a>. <code class="highlighter-rouge">seL4_DebugDumpScheduler()</code>
+is used to dump the current state of the scheduler and can be useful to debug situations where a
+system seems to have hung.</p>
+
+<p>After the TCB table, you can see the <code class="highlighter-rouge">seL4_Untyped_Retype</code> invocation is failing due to invalid arguments.
+The loader has been configured to set up the following capabilities and symbols:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// the root CNode of the current thread
+</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_cnode</span><span class="p">;</span>
+<span class="c1">// VSpace of the current thread
+</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_vspace</span><span class="p">;</span>
+<span class="c1">// TCB of the current thread
+</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_tcb</span><span class="p">;</span>
+<span class="c1">// Untyped object large enough to create a new TCB object
+</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_untyped</span><span class="p">;</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">buf2_frame_cap</span><span class="p">;</span>
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">buf2_frame</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
+
+<span class="c1">// Empty slot for the new TCB object
+</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_cap_slot</span><span class="p">;</span>
+<span class="c1">// Symbol for the IPC buffer mapping in the VSpace, and capability to the mapping
+</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_ipc_frame</span><span class="p">;</span>
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">thread_ipc_buff_sym</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
+<span class="c1">// Symbol for the top of a 16 * 4KiB stack mapping, and capability to the mapping
+</span><span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">tcb_stack_base</span><span class="p">[</span><span class="mi">65536</span><span class="p">];</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">uintptr_t</span> <span class="n">tcb_stack_top</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">uintptr_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">tcb_stack_base</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">tcb_stack_base</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Exercise</strong> Fix the <code class="highlighter-rouge">seL4_Untyped_Retype</code> call (shown below) using the capabilities provided above, such
+that a new TCB object is created in <code class="highlighter-rouge">tcb_cap_slot</code>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">arbv</span><span class="p">[])</span> <span class="p">{</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
+    <span class="c1">// TODO fix the parameters in this invocation
+</span>    <span class="n">seL4_Error</span> <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_Untyped_Retype</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="n">seL4_TCBObject</span><span class="p">,</span> <span class="n">seL4_TCBBits</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s">"Failed to retype thread: %d"</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Once the TCB has been created it will show up in the <code class="highlighter-rouge">seL4_DebugDumpScheduler()</code> output as
+<code class="highlighter-rouge">child of: 'tcb_threads'</code>. Throughout the tutorial you can use this syscall to debug some of the TCB attributes
+that you set.</p>
+
+<p>After the scheduler table, you should see a another error:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff800813fc00 "tcb_threads" @4004bf]: Attempted to invoke a null cap #0.&gt;&gt;
+main@threads.c:46 [Cond failed: result]
+	Failed to configure thread: 2
+</code></pre></div></div>
+
+<p><strong>Exercise</strong> Now that you have a TCB object, configure it to have the same CSpace and VSpace
+as the current thread. Use the IPC buffer we have provided, but don’t set a fault handler,
+ as the kernel will print any fault we receive with a debug build.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO fix the parameters in this invocation
+</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_TCB_Configure</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s">"Failed to configure thread: %d"</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>You should now be getting the following error:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeSetPriority/1035 T0xffffff8008140c00 "tcb_threads" @4012ef]: Set priority: author&gt;
+main@threads.c:51 [Cond failed: result]
+Failed to set the priority for the new TCB object.
+</code></pre></div></div>
+
+<h3 id="change-priority-via-sel4_tcb_setpriority">Change priority via <code class="highlighter-rouge">seL4_TCB_SetPriority</code></h3>
+
+<p>A newly created thread will have a priority of 0, while the thread created by the loader is at
+a priority of 254.  You need to change the priority of your new thread such that it will be
+ scheduled round-robin with the current thread.</p>
+
+<p><strong>Exercise</strong> use <code class="highlighter-rouge">seL4_TCB_SetPriority</code> to set the priority. Remember that to set a thread’s priority,
+the calling thread must have the authority to do so. In this case, the main thread can use its own
+TCB capability, which has an MCP of 254.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO fix the call to set priority using the authority of the current thread
+</span>    <span class="c1">// and change the priority to 254
+</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_TCB_SetPriority</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s">"Failed to set the priority for the new TCB object.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Fixing up the <code class="highlighter-rouge">seL4_TCB_SetPriority</code> call should allow you to see that the thread’s priority is now
+set to the same as the main thread in the next <code class="highlighter-rouge">seL4_DebugDumpScheduler()</code> call.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name                                        State           IP                       Prio    Core
+--------------------------------------------------------------------------------------
+child of: 'tcb_threads'                    inactive        (nil)   254                 0
+tcb_threads                                running         0x4012ef    254                 0
+idle_thread                                 idle            (nil)   0                   0
+rootserver                                  inactive        0x4024c2    255                 0
+&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff8008140c00 "tcb_threads" @4012ef]: Attempted to invoke a &gt;
+main@threads.c:57 [Err seL4_InvalidCapability]:
+Failed to write the new thread's register set.
+</code></pre></div></div>
+
+<h3 id="set-initial-register-state">Set initial register state</h3>
+
+<p>The TCB is nearly ready to run, except for its initial registers. You need to set the
+program counter and stack pointer to valid values, otherwise your thread will crash immediately.</p>
+
+<p><code class="highlighter-rouge">libsel4utils</code> contains some functions for setting register contents in a platform agnostic manner.
+You can use these methods to set the program counter (instruction pointer) and stack pointer in
+this way.  <em>Note: It is assumed that the stack grows downwards on all platforms.</em></p>
+
+<p><strong>Exercise</strong> Set up the new thread to call the function <code class="highlighter-rouge">new_thread</code>. You can use the debug syscall to verify that
+you have at least set the instruction pointer (IP) correctly.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_UserContext</span> <span class="n">regs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to read the new thread's register set.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// TODO use valid instruction pointer
+</span>    <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="c1">// TODO use valid stack pointer
+</span>    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="c1">// TODO fix parameters to this invocation
+</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
+                  <span class="s">"</span><span class="se">\t</span><span class="s">Did you write the correct number of registers? See arg4.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>On success, you will see the following output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff800813fc00 "tcb_threads" @4004bf]: Attempted to invoke a null cap #0.&gt;&gt;
+main@threads.c:63 [Err seL4_InvalidCapability]:
+	Failed to start new thread.
+</code></pre></div></div>
+
+<h3 id="start-the-thread">Start the thread</h3>
+
+<p>Finally you are ready to start the thread, which makes the TCB runnable and eligible to be picked by
+ the seL4 scheduler. This can be done by changing the second argument of
+<code class="highlighter-rouge">seL4_TCB_WriteRegisters</code> to 1 and removing the <code class="highlighter-rouge">seL4_TCB_Resume</code> call, or by fixing the resume call below.</p>
+
+<p><strong>Exercise</strong> resume the new thread.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO resume the new thread
+</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Resume</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to start new thread.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>If everything has been configured correctly, resuming the thread should result in the string
+<code class="highlighter-rouge">Hello2: arg1 0, arg2 0, arg3 0</code> followed by a fault.</p>
+
+<h3 id="passing-arguments">Passing arguments</h3>
+
+<p>You will notice that all of the arguments to the new thread are 0. You can set the arguments by
+using the helper function <code class="highlighter-rouge">sel4utils_arch_init_local_context</code> or by directly manipulating the registers
+for your target architecture.</p>
+
+<p><strong>Exercise</strong> update the values written with <code class="highlighter-rouge">seL4_TCB_WriteRegisters</code> to pass the values 1, 2, 3 as arg1,
+arg2, and arg3 respectively.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">UNUSED</span> <span class="n">seL4_UserContext</span> <span class="n">regs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
+                  <span class="s">"</span><span class="se">\t</span><span class="s">Did you write the correct number of registers? See arg4.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">sel4utils_arch_init_local_context</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">new_thread</span><span class="p">,</span>
+                                  <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">3</span><span class="p">,</span>
+                                  <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">tcb_stack_top</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
+                  <span class="s">"</span><span class="se">\t</span><span class="s">Did you write the correct number of registers? See arg4.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</code></pre></div></div>
+<h3 id="resolving-a-fault">Resolving a fault</h3>
+
+<p>At this point, you have created and configured a new thread, and given it initial arguments.
+The last part of this tutorial is what to do when your thread faults. We provide further detail
+ on fault handling in a future tutorial, but for now you can rely on the
+kernel printing a fault message, as the thread you have created does not have a fault handler.</p>
+
+<p>In the output below you can see a cap fault has occurred. The first part of the error is that
+the kernel was unable to send a fault to a fault handler as it is set to <code class="highlighter-rouge">(nil)</code>. The kernel
+then prints out the fault it was trying to send. In this case, the fault is a virtual memory fault.
+The new thread has tried to access data at address <code class="highlighter-rouge">0x2</code> which is an invalid and unmapped address.
+The output shows that the program counter of the thread when it faulted was <code class="highlighter-rouge">0x401e66</code>.</p>
+
+<p>The fault status register is also output, which can be decoded by
+using the relevant architecture manual.
+Additionally, the kernel prints a raw stack dump from the current stack pointer.
+The size of the stack dump is configurable, using the
+ <code class="highlighter-rouge">KernelUserStackTraceLength</code> cmake variable.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Caught cap fault in send phase at address (nil)
+while trying to handle:
+vm fault on data at address 0x2 with status 0x4
+in thread 0xffffff8008140400 "child of: 'tcb_threads'" at address 0x401e66
+With stack:
+0x439fc0: 0x0
+0x439fc8: 0x3
+0x439fd0: 0x2
+0x439fd8: 0x1
+0x439fe0: 0x0
+0x439fe8: 0x1
+0x439ff0: 0x0
+0x439ff8: 0x0
+0x43a000: 0x404fb3
+0x43a008: 0x0
+0x43a010: 0x0
+0x43a018: 0x0
+0x43a020: 0x0
+0x43a028: 0x0
+0x43a030: 0x0
+0x43a038: 0x0
+</code></pre></div></div>
+
+<p>To investigate the fault, you can use a tool such as <code class="highlighter-rouge">objdump</code> on the ELF file that was loaded to
+inspect the instruction that caused the fault.
+ In this case, the ELF file is located at <code class="highlighter-rouge">./&lt;BUILD_DIR&gt;/&lt;TUTORIAL_BUILD_DIR&gt;/threads</code>.</p>
+
+<p>You should be able to see that <code class="highlighter-rouge">arg2</code> is being dereferenced, but does not point to valid memory.</p>
+
+<p><strong>Exercise</strong> pass a valid arg2, by passing the address of a global variable.</p>
+
+<p>Next, another fault will occur as the new thread expects <code class="highlighter-rouge">arg1</code> to be a pointer to a function.</p>
+
+<p><strong>Exercise</strong> Pass the address of a function which outputs the argument which is passed to it, as <code class="highlighter-rouge">arg2</code>.</p>
+
+<p>Now you should have a new thread, which immediately calls the function passed in <code class="highlighter-rouge">arg2</code>.</p>
+
+<h3 id="further-exercises">Further exercises</h3>
+
+<p>That’s all for the detailed content of this tutorial. Below we list other ideas for exercises you can try,
+to become more familiar with TCBs and threading in seL4.</p>
+
+<ul>
+  <li>Using different TCB invocations to change the new thread’s attributes or objects</li>
+  <li>Investigate how setting different priorities affects when the threads are scheduled to run</li>
+  <li>Implementing synchronisation primitives using global memory.</li>
+  <li>Trying to repeat this tutorial in the root task where there are more resources available to
+create more thread objects.</li>
+  <li>Another tutorial…</li>
+</ul>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/threads.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/threads.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

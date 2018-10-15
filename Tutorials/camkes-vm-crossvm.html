@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camkes Cross-VM communication | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Camkes Cross-VM communication</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#dataports">Dataports</a></li>
+<li class="toc-entry toc-h3"><a href="#emitting-events">Emitting Events</a></li>
+<li class="toc-entry toc-h3"><a href="#consuming-events">Consuming Events</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#add-modules-to-the-guest">Add modules to the guest</a></li>
+<li class="toc-entry toc-h3"><a href="#define-interfaces-in-the-vmm">Define interfaces in the VMM</a></li>
+<li class="toc-entry toc-h3"><a href="#define-the-component-interface">Define the component interface</a></li>
+<li class="toc-entry toc-h3"><a href="#instantiate-the-print-server">Instantiate the print server</a></li>
+<li class="toc-entry toc-h3"><a href="#implement-the-print-server">Implement the print server</a></li>
+<li class="toc-entry toc-h3"><a href="#implement-the-vmm-side-of-the-connection">Implement the VMM side of the connection</a></li>
+<li class="toc-entry toc-h3"><a href="#update-the-build-system">Update the build system</a></li>
+<li class="toc-entry toc-h3"><a href="#add-interfaces-to-the-guest">Add interfaces to the Guest</a></li>
+<li class="toc-entry toc-h3"><a href="#create-a-process">Create a process</a></li>
+</ul>
+</li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="camkes-vm-cross-vm-connectors">CAmkES VM: Cross VM Connectors</h1>
+
+<p>This tutorial provides an introduction to using the cross virtual machine (VM) connector mechanisms
+provided by seL4 and Camkes in order to connect processes in a guest Linux instance to Camkes components.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies#camkes-build-dependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/camkes-vm-linux">Camkes VM</a></li>
+</ol>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<p>By the end of this tutorial, you should be able to:</p>
+
+<ul>
+  <li>Configure processes in a Linux guest VM to communicate with CAmkES components</li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<p>In order to connect guest Linux instances to CAmkES components,
+three additional kernel modules must be installed in the guest.
+These modules are included in the root filesystem by default:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">dataport</code>: facilitates setting up shared memory between the guest
+and CAmkES components.</li>
+  <li><code class="highlighter-rouge">consumes_event</code>: allows a process in the guest to wait or poll
+for an event sent by a CAmkES component.</li>
+  <li><code class="highlighter-rouge">emits_event</code>: allows a process to emit an event to a CAmkES component.</li>
+</ul>
+
+<p>Each type of module can be statically assigned to one or more file descriptors to associate that
+file descriptor with a specific instance of an interface. <code class="highlighter-rouge">ioctl</code> can then be used to
+manipulate that file descriptor and use the module.</p>
+
+<h3 id="dataports">Dataports</h3>
+
+<p>Dataports are the mechanism which allows guests and components to share memory.
+The dataport initialisation process is as follows:</p>
+
+<ul>
+  <li>The guest process uses <code class="highlighter-rouge">ioctl</code> on on the file associated with the dataport and specify a
+ page-aligned size for the shared memory.</li>
+  <li>The dataport kernel module in the guest then allocates a page-aligned buffer of the requested size,
+and makes a hypercall to the VMM, with the guest physical address and id of the data port.
+The ID is derived from the file on which <code class="highlighter-rouge">ioctl</code> was called.</li>
+  <li>The virtual machine manager (VMM) then modifies the guest’s address space, creating the shared memory region.
+ between a camkes component and the guest.</li>
+  <li>Linux processes can then map this memory into their own address space by calling <code class="highlighter-rouge">mmap</code> on the file
+associated with the dataport.</li>
+</ul>
+
+<h3 id="emitting-events">Emitting Events</h3>
+
+<p>Guest processes can emit events by using <code class="highlighter-rouge">ioctl</code> on files associated with the event interface.
+This results in the <code class="highlighter-rouge">emits_event</code> kernel module in the guest making a
+making a hypercall to the VMM, which triggers the event and resumes the guest.</p>
+
+<h3 id="consuming-events">Consuming Events</h3>
+
+<p>Linux process can wait or poll for an event by calling <code class="highlighter-rouge">poll</code>
+on the file associated with that event, using the timeout argument to
+specify whether or not it should block. The event it polls for is
+<code class="highlighter-rouge">POLLIN</code>. When the VMM receives an event destined for the guest, it places
+the event id in some memory shared between the VMM and the
+<code class="highlighter-rouge">consumes_event</code> kernel module, and then injects an interrupt into the
+guest. The <code class="highlighter-rouge">consumes_event</code> kernel module is registered to handle this
+interrupt, which reads the event ID from shared memory, and wakes a
+thread blocked on the corresponding event file. If no threads are
+blocked on the file, some state is set in the module such that the next
+time a process waits on that file, it returns immediately and clears the
+state, mimicking the behaviour of notifications.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>In this tutorial you will
+create a program that runs in the guest, and sends a string
+to a CAmkES component to output. To achieve this, the guest program will write a string
+to a shared buffer between itself and a CAmkES component. When its ready
+for the string to be printed, it will emit an event, received by the
+CAmkES component. The CAmkES component will print the string, then send
+an event to the guest process so the guest knows it’s safe to send a new
+string.</p>
+
+<h3 id="add-modules-to-the-guest">Add modules to the guest</h3>
+
+<p>There is a library in <code class="highlighter-rouge">projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs</code>
+containing Linux system call wrappers, and some utility programs in
+<code class="highlighter-rouge">projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/{dataport,consumes_event,emits_event}</code>
+which initialize and interact with cross VM connections. To build and use these modules in your rootfs the vm-linux
+project provides an overlay target you can use.</p>
+
+<p><strong>Exercise</strong> First add the <code class="highlighter-rouge">dataport</code>, <code class="highlighter-rouge">consumes_event</code> and <code class="highlighter-rouge">emits_event</code> kernel modules to the  rootfs in the guest.</p>
+
+<p>Start by replacing the line:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>in the target applications <code class="highlighter-rouge">CMakeLists.txt</code> file with the following:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>CAmkESVMDefaultBuildrootOverlay ON CACHE BOOL <span class="s2">""</span> FORCE<span class="p">)</span>
+<span class="nf">AddOverlayDirToRootfs</span><span class="p">(</span>default_buildroot_overlay <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span> <span class="s2">"buildroot"</span> <span class="s2">"rootfs_install"</span>
+    rootfs_file rootfs_target<span class="p">)</span>
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">rootfs_file</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="define-interfaces-in-the-vmm">Define interfaces in the VMM</h3>
+
+<p><strong>Exercise</strong> Update the CAmkES file, <code class="highlighter-rouge">crossvm_tutorial.camkes</code> by replacing the Init0 component definition:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
+    <span class="n">VM_INIT_DEF</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>with the following definition:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
+  <span class="n">VM_INIT_DEF</span><span class="p">()</span>
+
+  <span class="c1">// this is the data port for shared memory between the component and guest process
+</span>  <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
+  <span class="c1">// this event tells the component that there is data ready to print
+</span>  <span class="n">emits</span> <span class="n">DoPrint</span> <span class="n">do_print</span><span class="p">;</span>
+  <span class="c1">// this event tells the guest process that priting is complete
+</span>  <span class="n">consumes</span> <span class="n">DonePrinting</span> <span class="n">done_printing</span><span class="p">;</span>
+  <span class="c1">// this mutex protects access to shared state between the VMM and the guest Linux
+</span>  <span class="n">has</span> <span class="n">mutex</span> <span class="n">cross_vm_event_mutex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>These interfaces will eventually be made visible to processes running in
+the guest linux. The mutex is used to protect access to shared state
+between the VMM and guest.</p>
+
+<h3 id="define-the-component-interface">Define the component interface</h3>
+
+<p><strong>Exercise</strong> Define the print server component by adding the following to
+the <code class="highlighter-rouge">crossvm_tutorial.camkes</code> file, after the <code class="highlighter-rouge">Init0</code> definition:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">PrintServer</span> <span class="p">{</span>
+  <span class="n">control</span><span class="p">;</span>
+  <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">consumes</span> <span class="n">DoPrint</span> <span class="n">do_print</span><span class="p">;</span>
+  <span class="n">emits</span> <span class="n">DonePrinting</span> <span class="n">done_printing</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="instantiate-the-print-server">Instantiate the print server</h3>
+
+<p><strong>Exercise</strong> Replace the <code class="highlighter-rouge">composition</code> definition:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">composition</span> <span class="p">{</span>
+        <span class="n">VM_COMPOSITION_DEF</span><span class="p">()</span>
+        <span class="n">VM_PER_VM_COMP_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>with the following:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">composition</span> <span class="p">{</span>
+        <span class="n">VM_COMPOSITION_DEF</span><span class="p">()</span>
+        <span class="n">VM_PER_VM_COMP_DEF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">component</span> <span class="n">PrintServer</span> <span class="n">print_server</span><span class="p">;</span>
+        <span class="n">connection</span> <span class="n">seL4Notification</span> <span class="n">conn_do_print</span><span class="p">(</span><span class="n">from</span> <span class="n">vm0</span><span class="p">.</span><span class="n">do_print</span><span class="p">,</span>
+                                                 <span class="n">to</span> <span class="n">print_server</span><span class="p">.</span><span class="n">do_print</span><span class="p">);</span>
+        <span class="n">connection</span> <span class="n">seL4Notification</span> <span class="n">conn_done_printing</span><span class="p">(</span><span class="n">from</span> <span class="n">print_server</span><span class="p">.</span><span class="n">done_printing</span><span class="p">,</span>
+                                                      <span class="n">to</span> <span class="n">vm0</span><span class="p">.</span><span class="n">done_printing</span><span class="p">);</span>
+
+        <span class="n">connection</span> <span class="n">seL4SharedDataWithCaps</span> <span class="n">conn_data</span><span class="p">(</span><span class="n">from</span> <span class="n">print_server</span><span class="p">.</span><span class="n">data</span><span class="p">,</span>
+                                                    <span class="n">to</span> <span class="n">vm0</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> connector is a dataport connector much like <code class="highlighter-rouge">seL4SharedData</code>.
+ However, the <code class="highlighter-rouge">to</code> side of the connection also receives access to
+the capabilities to the frames backing the dataport, which is required
+for cross VM dataports, as the VMM must be able to establish shared memory
+at runtime by inserting new mappings into the guest’s address space.</p>
+
+<p><strong>Exercise</strong> Interfaces connected with <a href="/seL4SharedDataWithCaps">seL4SharedDataWithCaps</a> must be
+configured with an integer specifying the ID and size of the dataport.
+ Do this now by modifying <code class="highlighter-rouge">crossvm_tutorial.camkes</code> with the following
+two lines in the configuration section:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">configuration</span> <span class="p">{</span>
+    <span class="p">...</span>
+        <span class="c1">// Add the following 2 lines:
+</span>        <span class="n">vm0</span><span class="p">.</span><span class="n">data_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ids must be contiguous, starting from 1
+</span>        <span class="n">vm0</span><span class="p">.</span><span class="n">data_size</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="implement-the-print-server">Implement the print server</h3>
+
+<p><strong>Exercise</strong> Add the file <code class="highlighter-rouge">components/print_server.c</code> with the following contents:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;camkes.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// wait for the next event
+</span>        <span class="n">do_print_wait</span><span class="p">();</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">);</span>
+
+        <span class="c1">// signal that we are done printing
+</span>        <span class="n">done_printing_emit</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This provides a very simple component definition that loops forever, printing a string from
+shared memory whenever an event is received then emitting an event.
+The example code assumes that the shared buffer will contain a valid, null-terminated c string, which is not
+ something you should do in practice.</p>
+
+<h3 id="implement-the-vmm-side-of-the-connection">Implement the VMM side of the connection</h3>
+<p>Create another c file that tells the VMM about the cross VM connections.
+ This file must define 3 functions which initialize each type of cross vm interface:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">cross_vm_dataports_init</code></li>
+  <li><code class="highlighter-rouge">cross_vm_emits_events_init</code></li>
+  <li><code class="highlighter-rouge">cross_vm_consumes_events_init</code></li>
+</ul>
+
+<p><strong>Exercise</strong> Add a file <code class="highlighter-rouge">src/cross_vm.c</code> with the following contents:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;sel4/sel4.h&gt;
+#include &lt;camkes.h&gt;
+#include &lt;camkes_mutex.h&gt;
+#include &lt;camkes_consumes_event.h&gt;
+#include &lt;camkes_emits_event.h&gt;
+#include &lt;dataport_caps.h&gt;
+#include &lt;cross_vm_consumes_event.h&gt;
+#include &lt;cross_vm_emits_event.h&gt;
+#include &lt;cross_vm_dataport.h&gt;
+#include &lt;vmm/vmm.h&gt;
+#include &lt;vspace/vspace.h&gt;
+</span>
+<span class="c1">// this is defined in the dataport's glue code
+</span><span class="k">extern</span> <span class="n">dataport_caps_handle_t</span> <span class="n">data_handle</span><span class="p">;</span>
+
+<span class="c1">// Array of dataport handles at positions corresponding to handle ids from spec
+</span><span class="k">static</span> <span class="n">dataport_caps_handle_t</span> <span class="o">*</span><span class="n">dataports</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">NULL</span><span class="p">,</span> <span class="c1">// entry 0 is NULL so ids correspond with indices
+</span>    <span class="o">&amp;</span><span class="n">data_handle</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Array of consumed event callbacks and ids
+</span><span class="k">static</span> <span class="n">camkes_consumes_event_t</span> <span class="n">consumed_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span> <span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="p">.</span><span class="n">reg_callback</span> <span class="o">=</span> <span class="n">done_printing_reg_callback</span> <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// Array of emitted event emit functions
+</span><span class="k">static</span> <span class="n">camkes_emit_fn</span> <span class="n">emitted_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">NULL</span><span class="p">,</span>   <span class="c1">// entry 0 is NULL so ids correspond with indices
+</span>    <span class="n">do_print_emit</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// mutex to protect shared event context
+</span><span class="k">static</span> <span class="n">camkes_mutex_t</span> <span class="n">cross_vm_event_mutex</span> <span class="o">=</span> <span class="p">(</span><span class="n">camkes_mutex_t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">cross_vm_event_mutex_lock</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">unlock</span> <span class="o">=</span> <span class="n">cross_vm_event_mutex_unlock</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">cross_vm_dataports_init</span><span class="p">(</span><span class="n">vmm_t</span> <span class="o">*</span><span class="n">vmm</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cross_vm_dataports_init_common</span><span class="p">(</span><span class="n">vmm</span><span class="p">,</span> <span class="n">dataports</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dataports</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dataports</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">cross_vm_emits_events_init</span><span class="p">(</span><span class="n">vmm_t</span> <span class="o">*</span><span class="n">vmm</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cross_vm_emits_events_init_common</span><span class="p">(</span><span class="n">vmm</span><span class="p">,</span> <span class="n">emitted_events</span><span class="p">,</span>
+            <span class="k">sizeof</span><span class="p">(</span><span class="n">emitted_events</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">emitted_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">cross_vm_consumes_events_init</span><span class="p">(</span><span class="n">vmm_t</span> <span class="o">*</span><span class="n">vmm</span><span class="p">,</span> <span class="n">vspace_t</span> <span class="o">*</span><span class="n">vspace</span><span class="p">,</span> <span class="n">seL4_Word</span> <span class="n">irq_badge</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">cross_vm_consumes_events_init_common</span><span class="p">(</span><span class="n">vmm</span><span class="p">,</span> <span class="n">vspace</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cross_vm_event_mutex</span><span class="p">,</span>
+            <span class="n">consumed_events</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">consumed_events</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">consumed_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">irq_badge</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="update-the-build-system">Update the build system</h3>
+
+<p><strong>Exercise</strong> Make the following changes in <code class="highlighter-rouge">CMakeLists.txt</code> by firstly replacing the declaration of Init0:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0<span class="p">)</span>
+</code></pre></div></div>
+
+<p>with the following declaration:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Retrieve Init0 cross vm src files</span>
+<span class="nb">file</span><span class="p">(</span>GLOB init0_extra src/*.c<span class="p">)</span>
+<span class="c1"># Declare VM component: Init0</span>
+<span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0
+    EXTRA_SOURCES <span class="si">${</span><span class="nv">init0_extra</span><span class="si">}</span>
+    EXTRA_LIBS crossvm
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Also add a declaration for a PrintServer component:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Declare the CAmkES PrintServer component</span>
+<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>PrintServer SOURCES components/print_server.c<span class="p">)</span>
+</code></pre></div></div>
+
+<p>This extends the definition of the Init component with the <code class="highlighter-rouge">cross_vm connector</code> source and the crossvm
+library, and defines the new CAmkES component <code class="highlighter-rouge">PrintServer</code>.</p>
+
+<h3 id="add-interfaces-to-the-guest">Add interfaces to the Guest</h3>
+
+<p><strong>Exercise</strong> Create the following <code class="highlighter-rouge">camkes_init</code> shell script that is executed as Linux is initialized:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="c"># Initialises linux-side of cross vm connections.</span>
+
+<span class="c"># Dataport sizes must match those in the camkes spec.</span>
+<span class="c"># For each argument to dataport_init, the nth pair</span>
+<span class="c"># corresponds to the dataport with id n.</span>
+dataport_init /dev/camkes_data 4096
+
+<span class="c"># The nth argument to event_init corresponds to the</span>
+<span class="c"># event with id n according to the camkes vmm.</span>
+consumes_event_init /dev/camkes_done_printing
+emits_event_init /dev/camkes_do_print
+</code></pre></div></div>
+
+<p>Each of these commands creates device nodes associated with a particular
+Linux kernel module supporting cross VM communication. Each command
+takes a list of device nodes to create, which must correspond to the IDs
+assigned to interfaces in <code class="highlighter-rouge">crossvm_tutorial.camkes</code> and <code class="highlighter-rouge">cross_vm.c</code>. The
+<code class="highlighter-rouge">dataport_init</code> command must also be passed the size of each dataport.</p>
+
+<p>These changes will cause device nodes to be created which correspond to
+the interfaces you added to the VMM component.</p>
+
+<h3 id="create-a-process">Create a process</h3>
+
+<p>Now make a process that uses the device nodes to communicate with the
+print server.</p>
+
+<p><strong>Exercise</strong> First create a new directory:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p pkgs/print_client
+</code></pre></div></div>
+
+<p>with the following file <code class="highlighter-rouge">pkgs/print_client/print_client.c</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+</span>
+<span class="cp">#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;fcntl.h&gt;
+</span>
+<span class="cp">#include "dataport.h"
+#include "consumes_event.h"
+#include "emits_event.h"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">data_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/camkes_data"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">data_fd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">do_print_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/camkes_do_print"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">do_print_fd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">done_printing_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/camkes_done_printing"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">done_printing_fd</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">dataport_mmap</span><span class="p">(</span><span class="n">data_fd</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">data</span> <span class="o">!=</span> <span class="n">MAP_FAILED</span><span class="p">);</span>
+
+    <span class="kt">ssize_t</span> <span class="n">dataport_size</span> <span class="o">=</span> <span class="n">dataport_get_size</span><span class="p">(</span><span class="n">data_fd</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">dataport_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">strncpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dataport_size</span><span class="p">);</span>
+        <span class="n">emits_event_emit</span><span class="p">(</span><span class="n">do_print_fd</span><span class="p">);</span>
+        <span class="n">consumes_event_wait</span><span class="p">(</span><span class="n">done_printing_fd</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">close</span><span class="p">(</span><span class="n">data_fd</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">do_print_fd</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">done_printing_fd</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This program prints each of its arguments on a separate line, by sending
+each argument to the print server one at a time.</p>
+
+<p><strong>Exercise</strong> create <code class="highlighter-rouge">pkgs/print_client/CMakeLists.txt</code> for our client program:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span>print_client C<span class="p">)</span>
+
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/../../../projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs/camkes camkes<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>print_client print_client.c<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>print_client camkeslinux<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Exercise</strong> Update our the VM apps <code class="highlighter-rouge">CMakeLists.txt</code>. Below the line:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"bzimage"</span> <span class="si">${</span><span class="nv">decompressed_kernel</span><span class="si">}</span> DEPENDS extract_linux_kernel<span class="p">)</span>
+</code></pre></div></div>
+
+<p>add the <code class="highlighter-rouge">ExternalProject</code> declaration to include the print application:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get Custom toolchain for 32 bit Linux</span>
+<span class="nf">FindCustomPollyToolchain</span><span class="p">(</span>LINUX_32BIT_TOOLCHAIN <span class="s2">"linux-gcc-32bit-pic"</span><span class="p">)</span>
+<span class="c1"># Declare our print server app external project</span>
+<span class="nf">ExternalProject_Add</span><span class="p">(</span>print_client-app
+    SOURCE_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/pkgs/print_client
+    BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/print_client-app
+    BUILD_ALWAYS ON
+    STAMP_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/print_client-app-stamp
+    EXCLUDE_FROM_ALL
+    INSTALL_COMMAND <span class="s2">""</span>
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
+        -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
+<span class="p">)</span>
+<span class="c1"># Add the print client app to our overlay ('default_buildroot_overlay')</span>
+<span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>print_client-app <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/print_client-app default_buildroot_overlay <span class="s2">"usr/sbin"</span>
+    FILES print_client<span class="p">)</span>```
+
+Directly below this we also want to add our `camkes_init` script into the overlay. We place this into the VMs `init.d` directory so
+the script is run on start up:
+
+```cmake
+<span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"S90camkes_init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/camkes_init <span class="s2">"etc/init.d"</span> default_buildroot_overlay<span class="p">)</span>
+</code></pre></div></div>
+
+<p>That’s it. Build and run the system, and you should see the following output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+Creating dataport node /dev/camkes_data
+Allocating 4096 bytes for /dev/camkes_data
+Creating consuming event node /dev/camkes_done_printing
+Creating emitting event node /dev/camkes_do_print
+
+Welcome to Buildroot
+buildroot login: root
+Password:
+# print_client hello world
+[   12.730073] dataport received mmap for minor 1
+hello
+world
+</code></pre></div></div>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/camkes-vm-crossvm.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/camkes-vm-crossvm.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notifications | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Notifications</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#notification-objects">Notification objects</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#signalling">Signalling</a></li>
+<li class="toc-entry toc-h4"><a href="#waiting">Waiting</a></li>
+<li class="toc-entry toc-h4"><a href="#polling">Polling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#interrupts-and-ipc">Interrupts and IPC</a></li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#set-up-shared-memory">Set up shared memory</a></li>
+<li class="toc-entry toc-h3"><a href="#signal-the-producers-to-go">Signal the producers to go</a></li>
+<li class="toc-entry toc-h3"><a href="#differentiate-signals">Differentiate signals</a></li>
+<li class="toc-entry toc-h3"><a href="#further-exercises">Further exercises</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="notifications-and-shared-memory">Notifications and shared memory</h1>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities">Capabilities tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/mapping">Mapping tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/threads">Threads tutorial</a></li>
+</ol>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<ol>
+  <li>Understand how to set up shared memory between tasks.</li>
+  <li>Be able to use notification objects for synchronisation between tasks.</li>
+  <li>Know how to use badges to differentiate notifications.</li>
+</ol>
+
+<h2 id="background">Background</h2>
+
+<p>Notifications allow processes to send asynchronous signals to each other, and are primarily used for interrupt handling
+and to synchronise access to shared data buffers.</p>
+
+<h3 id="notification-objects">Notification objects</h3>
+
+<p>Signals are sent and received with invocations on capabilities to notification objects.
+A notification object consists of a data word, which acts as an array of binary semaphores, and a queue of
+TCBs waiting to for notifications.</p>
+
+<p>Notification objects can be in three states:</p>
+<ul>
+  <li>Waiting - there are TCBs queued on this notification waiting for to be signalled.</li>
+  <li>Active - TCBs have signalled data on this notification,</li>
+  <li>Idle - no TCBs are queued and no TCBs have signalled this object since it was last set to idle.</li>
+</ul>
+
+<h4 id="signalling">Signalling</h4>
+
+<p>When a task signals a notification object (using <code class="highlighter-rouge">seL4_Signal</code>), what occurs depends on the state of the object:</p>
+<ul>
+  <li>Idle - the data word is set to the badge of the capability used to send the signal, and the object is converted
+ to active.</li>
+  <li>Active - the badge of the capability used to signal the notification object is bitwise-orred with the notifications data word.</li>
+  <li>Waiting - the head of the queue of TCBs is woken and the badge sent to that TCB. If the queue is empty, the notification
+object is transitioned to idle.</li>
+</ul>
+
+<p>In this way notification objects can be seen as a binary array of semaphores - if the signallers all use a
+different bit in the badge, they can set different badge bits and waiters can observe which bits have been set.</p>
+
+<h4 id="waiting">Waiting</h4>
+
+<p>Tasks can wait on a notification object using <code class="highlighter-rouge">seL4_Wait</code>, which does the following:</p>
+
+<ul>
+  <li>Idle - the TCB is queued, and the notification transitioned to waiting.</li>
+  <li>Active - the TCB receives the data word, the data word is reset to 0 and the notification transitioned to idle,</li>
+  <li>Waiting - the TCB is appended to the queue.</li>
+</ul>
+
+<h4 id="polling">Polling</h4>
+
+<p>Notification objects can also be polled with <code class="highlighter-rouge">seL4_Poll</code>, which is a non-blocking version of <code class="highlighter-rouge">seL4_Wait</code> that returns
+immediately regardless of the state.</p>
+
+<h2 id="interrupts-and-ipc">Interrupts and IPC</h2>
+
+<p>Notification objects can be used to receive signals of interrupt delivery, and can also be bound to TCBs
+such that signals and IPC can be received by the same thread. This is explained in more detail in the
+timer tutorial. <!--TODO link to timer tutorial --></p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>These exercises guide you through a basic producer consumer set up using notifications and shared memory. The 
+tutorial uses the capDL loader, and already has 2 producer processes (<code class="highlighter-rouge">producer_1.c</code> and <code class="highlighter-rouge">producer_2</code>) and 1 consumer
+ process running (<code class="highlighter-rouge">consumer.c</code>). Each has access to a number of capabilities.</p>
+
+<p>Each producer shares a buffer with the consumer, and the consumer processes data from both producers when it is
+available.</p>
+
+<p>When you start the tutorial, the output will look something like this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+Waiting for producer
+Caught cap fault in send phase at address (nil)
+while trying to handle:
+vm fault on data at address 0x5ff000 with status 0x6
+in thread 0xffffff800838b400 "tcb_producer_2" at address 0x4005da
+With stack:
+0x425f40: 0x425fb8
+0x425f48: 0x2004007a1
+0x425f50: 0x5ff000
+0x425f58: 0x2
+0x425f60: 0x2
+0x425f68: 0x409076
+0x425f70: 0x0
+0x425f78: 0x0
+0x425f80: 0x0
+0x425f88: 0x0
+0x425f90: 0x0
+0x425f98: 0x4001da
+0x425fa0: 0x0
+0x425fa8: 0x4001ba
+0x425fb0: 0x2
+0x425fb8: 0x414020
+</code></pre></div></div>
+<h3 id="set-up-shared-memory">Set up shared memory</h3>
+
+<p>Both producers start and block immediately, waiting for the consumer to send an IPC with the address of the shared 
+mapping. We provide code below that sets up the shared page between producer 1 and the consumer:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* set up shared memory for consumer 1 */</span>
+    <span class="cm">/* first duplicate the cap */</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">mapping_1</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> 
+                          <span class="n">cnode</span><span class="p">,</span> <span class="n">buf1_frame_cap</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> <span class="n">seL4_AllRights</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to copy cap"</span><span class="p">);</span>
+    <span class="cm">/* now do the mapping */</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_ARCH_Page_Map</span><span class="p">(</span><span class="n">mapping_1</span><span class="p">,</span> <span class="n">producer_1_vspace</span><span class="p">,</span> <span class="n">BUF_VADDR</span><span class="p">,</span> 
+                               <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="n">seL4_ARCH_Default_VMAttributes</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to map frame"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>However, we do not map the second buffer in, so producer 2 crashes immediately.</p>
+
+<p><strong>Exercise</strong> Understand the above code, and create a second shared page between <code class="highlighter-rouge">producer_2</code> and <code class="highlighter-rouge">consumer</code>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO share buf2_frame_cap with producer_2
+</span>    <span class="cm">/* set up shared memory for producer 2 */</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">mapping_2</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> 
+                            <span class="n">cnode</span><span class="p">,</span> <span class="n">buf2_frame_cap</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> <span class="n">seL4_AllRights</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to copy cap"</span><span class="p">);</span>
+   <span class="cm">/* now do the mapping */</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_ARCH_Page_Map</span><span class="p">(</span><span class="n">mapping_2</span><span class="p">,</span> <span class="n">producer_2_vspace</span><span class="p">,</span> <span class="n">BUF_VADDR</span><span class="p">,</span>
+                               <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="n">seL4_ARCH_Default_VMAttributes</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to map frame"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>On success, the fault output should no longer occur.</p>
+
+<h3 id="signal-the-producers-to-go">Signal the producers to go</h3>
+
+<p>At this point, both producers are waiting on the <code class="highlighter-rouge">empty</code> notification for a signal that the buffer is ready 
+to be written to.</p>
+
+<p><strong>Exercise</strong> signal both producers via the <code class="highlighter-rouge">buf1_empty</code> and <code class="highlighter-rouge">buf2_empty</code> notification objects.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO signal both producers
+</span>    <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
+    <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf2_empty</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="differentiate-signals">Differentiate signals</h3>
+
+<p>Now you should see something like the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+Waiting for producer
+2: produce
+1: produce
+Got badge: 2
+Got badge: 1
+</code></pre></div></div>
+
+<p>At this point, the consumer should consume data from the appropriate buffer(s) and signal to the appropriate consumer(s)
+that the buffer is empty again. The capability to the <code class="highlighter-rouge">full</code> notification object has already been badged: <code class="highlighter-rouge">producer_1</code>s
+copy has a badge of <code class="highlighter-rouge">0b1</code> and <code class="highlighter-rouge">producer_2</code> a badge of <code class="highlighter-rouge">0b10</code>. By checking the bits in the badge, you can see
+which of the producers (it may be both) has produced data.</p>
+
+<p><strong>Exercise</strong> Check the badge and signal the empty notification for the producers according to the bits set in the badge
+ value.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO, use the badge to check which producer has signalled you, and signal it back. Note that you 
+</span>    <span class="c1">// may recieve more than 1 signal at a time.
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b01</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">assert</span><span class="p">(</span><span class="o">*</span><span class="n">buf1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="o">*</span><span class="n">buf1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b10</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">assert</span><span class="p">(</span><span class="o">*</span><span class="n">buf2</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+            <span class="o">*</span><span class="n">buf2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf2_empty</span><span class="p">);</span>
+        <span class="p">}</span>
+</code></pre></div></div>
+
+<p>At this point, you should see signals from both producers being processed, and the final <code class="highlighter-rouge">Success!</code> message printed.</p>
+
+<h3 id="further-exercises">Further exercises</h3>
+
+<p>That’s all for the detailed content of this tutorial. Below we list other ideas for exercises you can try,
+to become more familiar with IPC.</p>
+
+<ul>
+  <li>Create a counting semaphore implementation using notification objects.</li>
+  <li>Create a bounded-buffer producer consumer with a buffer size greater than 1.</li>
+</ul>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/notifications.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/notifications.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

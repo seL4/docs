@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camkes VM Linux | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Camkes VM Linux</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a></li>
+<li class="toc-entry toc-h2"><a href="#vm-components">VM Components</a></li>
+<li class="toc-entry toc-h2"><a href="#adding-to-the-guest">Adding to the guest</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#vm-linux-helperscmake">vm-linux-helpers.cmake</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#addfiletooverlaydirfilename-file_location-root_location-overlay_name">AddFileToOverlayDir(filename file_location root_location overlay_name)</a></li>
+<li class="toc-entry toc-h4"><a href="#addoverlaydirtorootfsrootfs_overlay-rootfs_image-rootfs_distro-rootfs_overlay_mode-output_rootfs_location-target_name">AddOverlayDirToRootfs(rootfs_overlay rootfs_image rootfs_distro rootfs_overlay_mode output_rootfs_location target_name)</a></li>
+<li class="toc-entry toc-h4"><a href="#addexternalprojfilestooverlayexternal_target-external_install_dir-overlay_target-overlay_root_location">AddExternalProjFilesToOverlay(external_target external_install_dir overlay_target overlay_root_location)</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#linux-source-helperscmake">linux-source-helpers.cmake</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#downloadlinuxlinux_major-linux_minor-linux_md5-linux_out_dir-linux_out_target">DownloadLinux(linux_major linux_minor linux_md5 linux_out_dir linux_out_target)</a></li>
+<li class="toc-entry toc-h4"><a href="#configurelinuxlinux_dir-linux_config_location-linux_symvers_location-configure_linux_target">ConfigureLinux(linux_dir linux_config_location linux_symvers_location configure_linux_target)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#adding-a-program">Adding a program</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#adding-a-kernel-module">Adding a kernel module</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#create-a-hypercall">Create a hypercall</a></li>
+</ul>
+</li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="camkes-vm-adding-a-linux-guest">CAmkES VM: Adding a Linux Guest</h1>
+
+<p>This tutorial provides an introduction to creating VM guests and applications on seL4 using CAmkES.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies#camkes-build-dependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/camkes-vm-linux">Camkes VM</a></li>
+</ol>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<p>By the end of this tutorial, you should be familiar with:</p>
+
+<ul>
+  <li>Creating, configuring and building guest Linux VM components in CAmkES.</li>
+  <li>Building and installing your own Linux VM user-level programs and kernel modules.</li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<p>This tutorial is set up with a basic CAmkES VM configuration for you to build upon.
+The starting application should boot a single, very basic Linux guest.</p>
+
+<p>To build the tutorial, run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In build directory</span>
+ninja
+</code></pre></div></div>
+
+<p>You can boot the tutorial on an x86 hardware platform with a multiboot boot loader, 
+or use the <a href="https://www.qemu.org">QEMU</a> simulator. <strong>Note if you are using QEMU
+it is important to ensure that your host machine has VT-x support and <a href="https://www.linux-kvm.org/page/Main_Page">KVM</a>
+installed. You also need to ensure you have enabled nested virtulisation with KVM guests as described
+<a href="https://www.linux-kvm.org/page/Nested_Guests">here</a>.</strong></p>
+
+<p>To simulate the image you can run the provided simulation script with some additional parameters:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In the build directory</span>
+<span class="c"># You will need to set up a tap device first:</span>
+<span class="c"># ip tuntap add tap0 mode tap</span>
+<span class="c"># ip addr add 10.0.120.100/24 dev tap0</span>
+<span class="c"># ip link set dev tap0 up</span>
+<span class="nb">sudo</span> ./simulate <span class="nt">--machine</span> q35,accel<span class="o">=</span>kvm,kernel-irqchip<span class="o">=</span>split <span class="nt">--mem-size</span> 2G <span class="nt">--extra-cpu-opts</span> <span class="s2">"+vmx"</span> <span class="nt">--extra-qemu-args</span><span class="o">=</span><span class="s2">"-enable-kvm -device intel-iommu,intremap=off -net nic,model=e1000 -net tap,script=no,ifname=tap0"</span>
+</code></pre></div></div>
+
+<p>When first simulating the image you should see the following login prompt:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login:
+</code></pre></div></div>
+
+<p>You can login with the username <code class="highlighter-rouge">root</code> and the password <code class="highlighter-rouge">root</code>.</p>
+
+<p>The Linux guest was built using <a href="https://buildroot.org/">buildroot</a>, which 
+creates a compatible kernel and minimal root filesystem containing busybox and a in-memory file system (a ramdisk).</p>
+
+<h2 id="vm-components">VM Components</h2>
+
+<p>Each VM component has its own assembly implementation, where the guest environment is configured.
+The provided VM configuration is defined in <code class="highlighter-rouge">vm_tutorial.camkes</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import &lt;VM/vm.camkes&gt;;
+
+#include &lt;configurations/vm.h&gt;
+
+#define VM_GUEST_CMDLINE "earlyprintk=ttyS0,115200 console=ttyS0,115200 i8042.nokbd=y i8042.nomux=y \
+i8042.noaux=y io_delay=udelay noisapnp pci=nomsi debug root=/dev/mem"
+
+component Init0 {
+    VM_INIT_DEF()
+}
+
+assembly {
+    composition {
+        VM_COMPOSITION_DEF()
+        VM_PER_VM_COMP_DEF(0)
+    }
+
+    configuration {
+        VM_CONFIGURATION_DEF()
+        VM_PER_VM_CONFIG_DEF(0)
+
+        vm0.simple_untyped23_pool = 20;
+        vm0.heap_size = 0x2000000;
+        vm0.guest_ram_mb = 128;
+        vm0.kernel_cmdline = VM_GUEST_CMDLINE;
+        vm0.kernel_image = "bzimage";
+        vm0.kernel_relocs = "bzimage";
+        vm0.initrd_image = "rootfs.cpio";
+        vm0.iospace_domain = 0x0f;
+    }
+}
+</code></pre></div></div>
+
+<p>Most of the work here is done by five C preprocessor macros:
+<code class="highlighter-rouge">VM_INIT_DEF</code>, <code class="highlighter-rouge">VM_COMPOSITION_DEF</code>, <code class="highlighter-rouge">VM_PER_VM_COMP_DEF</code>,
+<code class="highlighter-rouge">VM_CONFIGURATION_DEF</code>, <code class="highlighter-rouge">VM_PER_VM_CONFIG_DEF</code>.</p>
+
+<p>These are all defined in <code class="highlighter-rouge">projects/camkes/vm/components/VM/configurations/vm.h</code>,
+and are concerned with specifying and configuring components that all
+VM(M)s need.</p>
+
+<p>The <code class="highlighter-rouge">Init0</code> component corresponds to a single guest. Because of some rules
+in the cpp macros, the <em>Ith</em> guest in your system must be defined as a
+component named <code class="highlighter-rouge">InitI</code>. <code class="highlighter-rouge">InitI</code> components will be instantiated in the
+composition section by the <code class="highlighter-rouge">VM_PER_VM_COMP_DEF</code> macro with instance
+names <code class="highlighter-rouge">vmI</code>. The <code class="highlighter-rouge">vm0</code> component instance being configured above is an
+instance of <code class="highlighter-rouge">Init0</code>. The C source code for<code class="highlighter-rouge">InitI</code> components is in
+<code class="highlighter-rouge">projects/camkes/vm/components/Init/src</code>. This source will be used for components
+named <code class="highlighter-rouge">InitI</code> for <em>I</em> in <code class="highlighter-rouge">0..VM_NUM_VM - 1</code>.</p>
+
+<p>The values of <code class="highlighter-rouge">vm0.kernel_cmdline</code>, <code class="highlighter-rouge">vm0.kernel_image</code> and <code class="highlighter-rouge">vm0.initrd_image</code> are all
+strings specifying:</p>
+<ul>
+  <li>boot arguments to the guest Linux,</li>
+  <li>the name of the guest Linux kernel image file,</li>
+  <li>and the name of the guest Linux initrd file (the root filesystem to use during system initialization).</li>
+</ul>
+
+<p>The kernel command-line is defined in the <code class="highlighter-rouge">VM_GUEST_CMDLINE</code> macro. The kernel image
+and rootfs names are defined in the applications <code class="highlighter-rouge">CMakeLists.txt</code> file.
+These are the names of files in a CPIO archive that gets created by the build system, and
+linked into the VMM. In the simple configuration for thie tutorial, the VMM uses
+the <code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">rootfs.cpio</code> names to find the appropriate files
+in this archive.</p>
+
+<p>To see how the <code class="highlighter-rouge">Init</code> component and CPIO archive are definied within the build system,
+look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span>vm-app<span class="p">)</span>
+
+<span class="nf">ImportCamkesVM</span><span class="p">()</span>
+
+
+<span class="c1"># Include CAmkES VM helper functions</span>
+<span class="nb">include</span><span class="p">(</span><span class="s2">"../projects/camkes/vm/camkes_vm_helpers.cmake"</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="s2">"../projects/camkes/vm-linux/vm-linux-helpers.cmake"</span><span class="p">)</span>
+
+
+
+
+<span class="c1"># Declare VM component: Init0</span>
+<span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0<span class="p">)</span>
+
+<span class="c1"># Get Default Linux VM files</span>
+<span class="nf">GetDefaultLinuxKernelFile</span><span class="p">(</span>default_kernel_file<span class="p">)</span>
+<span class="nf">GetDefaultLinuxRootfsFile</span><span class="p">(</span>default_rootfs_file<span class="p">)</span>
+
+<span class="c1"># Decompress Linux Kernel image and add to file server</span>
+<span class="nf">DecompressLinuxKernel</span><span class="p">(</span>extract_linux_kernel decompressed_kernel <span class="si">${</span><span class="nv">default_kernel_file</span><span class="si">}</span><span class="p">)</span>
+
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"bzimage"</span> <span class="si">${</span><span class="nv">decompressed_kernel</span><span class="si">}</span> DEPENDS extract_linux_kernel<span class="p">)</span>
+
+
+
+<span class="c1"># Add rootfs images into file server</span>
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span><span class="p">)</span>
+
+
+
+<span class="c1"># Initialise CAmkES Root Server with addition CPP includes</span>
+<span class="nf">DeclareCAmkESVMRootServer</span><span class="p">(</span>vm_tutorial.camkes<span class="p">)</span>
+<span class="nf">GenerateCAmkESRootserver</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p>The file <code class="highlighter-rouge">projects/camkes/vm/camkes_vm_helpers.cmake</code> provides helper functions for the VM projects, 
+including  <code class="highlighter-rouge">DeclareCAmkESVM(Init0)</code>, which is used to define the <code class="highlighter-rouge">Init0</code> VM component.
+Each Init component requires a corresponding <code class="highlighter-rouge">DeclareCAmkESVM</code> function.</p>
+
+<p><code class="highlighter-rouge">GetDefaultLinuxKernelFile</code> (defined in <code class="highlighter-rouge">projects/camkes/vm-linux/vm-linux-helpers.cmake</code>) 
+is a helper function that retrieves the location of the vm images provided
+in the <code class="highlighter-rouge">projects/vm-linux</code> folder, which contains some tools for building new linux kernel
+and root filesystem images, as well as the images that these tools
+produce. A fresh checkout of this project will contain some pre-built
+images (<code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">rootfs.cpio</code>), to speed up build times.</p>
+
+<p><code class="highlighter-rouge">DecompressLinuxKernel</code> is used to extract the vmlinux image, which <code class="highlighter-rouge">AddToFileServer</code> then places 
+in the fileserver along with the rootfs.</p>
+
+<h2 id="adding-to-the-guest">Adding to the guest</h2>
+
+<p>In the simple buildroot guest image, the
+initrd (rootfs.cpio) is also the filesystem you get access to after
+logging in. To make new programs available to the guest you need to add them to the
+rootfs.cpio archive. Similarly, to make new kernel modules available to
+the guest they must be added to the rootfs.cpio archive also.</p>
+
+<p>In this tutorial you will  install new programs into the guest VM.</p>
+
+<h3 id="vm-linux-helperscmake">vm-linux-helpers.cmake</h3>
+
+<p>The <code class="highlighter-rouge">projects/camkes/vm-linux</code> directory contains CMake helpers to
+overlay rootfs.cpio archives with a desired set of programs, modules
+and scripts.</p>
+
+<h4 id="addfiletooverlaydirfilename-file_location-root_location-overlay_name"><code class="highlighter-rouge">AddFileToOverlayDir(filename file_location root_location overlay_name)</code></h4>
+<p>This helper allows you to overlay specific files onto a rootfs image. The caller specifies
+the file they wish to install in the rootfs image (<code class="highlighter-rouge">file_location</code>), the name they want the file
+to be called in the rootfs (<code class="highlighter-rouge">filename</code>) and the location they want the file to installed in the
+rootfs (<code class="highlighter-rouge">root_location</code>), e.g “usr/bin”. Lastly the caller passes in a unique target name for the overlay
+(<code class="highlighter-rouge">overlay_name</code>). You can repeatedly call this helper with different files for a given target to build
+up a set of files to be installed on a rootfs image.</p>
+
+<h4 id="addoverlaydirtorootfsrootfs_overlay-rootfs_image-rootfs_distro-rootfs_overlay_mode-output_rootfs_location-target_name"><code class="highlighter-rouge">AddOverlayDirToRootfs(rootfs_overlay rootfs_image rootfs_distro rootfs_overlay_mode output_rootfs_location target_name)</code></h4>
+<p>This helper allows you to install a defined overlay target onto a given rootfs image. The caller specifies
+the rootfs overlay target name (<code class="highlighter-rouge">rootfs_overlay</code>), the rootfs image they wish to install their files onto
+(<code class="highlighter-rouge">rootfs_image</code>), the distribution of their rootfs image (<code class="highlighter-rouge">rootfs_distro</code>, only ‘buildroot’ and ‘debian’ is
+supported) and the output location of their overlayed rootfs image (<code class="highlighter-rouge">output_rootfs_location</code>). Lastly the caller
+specifies how the files will be installed into their rootfs image through <code class="highlighter-rouge">rootfs_overlay_mode</code>. These modes include:</p>
+<ul>
+  <li><code class="highlighter-rouge">rootfs_install</code>: The files are installed onto the rootfs image. This is useful if the rootfs image is the filesystem
+your guest VM is using when it boots. However this won’t be useful if your VM will be booting from disk since the installed files
+won’t be present after the VM boots.</li>
+  <li><code class="highlighter-rouge">overlay</code>: The files are mounted as an overlayed filesystem (overlayfs). This is useful if you are booting from disk and don’t wish to
+install the artifacts permanently onto the VM. The downside to this is that writes to the overlayed root do not persist between boots. This
+mode is benefitial for debugging purposes and live VM images.</li>
+  <li><code class="highlighter-rouge">fs_install</code>: The files are permanently installed on the VM’s file system, after the root has been mounted.
+    <h4 id="addexternalprojfilestooverlayexternal_target-external_install_dir-overlay_target-overlay_root_location"><code class="highlighter-rouge">AddExternalProjFilesToOverlay(external_target external_install_dir overlay_target overlay_root_location)</code></h4>
+    <p>This helper allows you to add files generated from an external CMake project to an overlay target. This is mainly a wrapper around
+<code class="highlighter-rouge">AddOverlayDirToRootfs</code> which in addition creates a target for the generated file in the external project. The caller passes the external
+project target (<code class="highlighter-rouge">external_target</code>), the external projects install directory (<code class="highlighter-rouge">external_install_dir</code>), the overlay target you want to add the
+file to (<code class="highlighter-rouge">overlay_target</code>) and the location you wish to install the file within the rootfs image (<code class="highlighter-rouge">overlay_root_location</code>).</p>
+  </li>
+</ul>
+
+<h3 id="linux-source-helperscmake">linux-source-helpers.cmake</h3>
+
+<h4 id="downloadlinuxlinux_major-linux_minor-linux_md5-linux_out_dir-linux_out_target"><code class="highlighter-rouge">DownloadLinux(linux_major linux_minor linux_md5 linux_out_dir linux_out_target)</code></h4>
+<p>This is a helper function for downloading the linux source. This is needed if we wish to build our own kernel modules.</p>
+
+<h4 id="configurelinuxlinux_dir-linux_config_location-linux_symvers_location-configure_linux_target"><code class="highlighter-rouge">ConfigureLinux(linux_dir linux_config_location linux_symvers_location configure_linux_target)</code></h4>
+<p>This helper function is used for configuring downloaded linux source with a given Kbuild defconfig (<code class="highlighter-rouge">linux_config_location</code>)
+and symvers file (<code class="highlighter-rouge">linux_symvers_location</code>).</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<h3 id="adding-a-program">Adding a program</h3>
+
+<p>This exercise guides you through adding a new program to the Linux guest user-level environment.</p>
+
+<p>First, make a new directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> pkg/hello
+</code></pre></div></div>
+<p>Then a simple C program in <code class="highlighter-rouge">pkg/hello/hello.c</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Then create a build file for the program at <code class="highlighter-rouge">pkg/hello/CMakeLists.txt</code>:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span>hello C<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>hello hello.c<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span>hello -static<span class="p">)</span>
+</code></pre></div></div>
+<p>Now integrate the new program with the build system. 
+Update the vm apps <code class="highlighter-rouge">CMakeLists.txt</code> to declare the hello application as an
+external project and add it to our overlay.
+ Do this by replacing the line <code class="highlighter-rouge">AddToFileServer("rootfs.cpio" ${default_rootfs_file})</code> with the following:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get Custom toolchain for 32 bit Linux</span>
+<span class="nf">FindCustomPollyToolchain</span><span class="p">(</span>LINUX_32BIT_TOOLCHAIN <span class="s2">"linux-gcc-32bit-pic"</span><span class="p">)</span>
+<span class="c1"># Declare our hello app external project</span>
+<span class="nf">ExternalProject_Add</span><span class="p">(</span>hello-app
+    SOURCE_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/pkg/hello
+    BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/hello-app
+    BUILD_ALWAYS ON
+    STAMP_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/hello-app-stamp
+    EXCLUDE_FROM_ALL
+    INSTALL_COMMAND <span class="s2">""</span>
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
+        -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
+<span class="p">)</span>
+<span class="c1"># Add the hello world app to our overlay ('vm-overlay')</span>
+<span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>hello-app <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/hello-app vm-overlay <span class="s2">"usr/sbin"</span>
+    FILES hello<span class="p">)</span>
+<span class="c1"># Add the overlay directory to our default rootfs image</span>
+<span class="nf">AddOverlayDirToRootfs</span><span class="p">(</span>vm-overlay <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span> <span class="s2">"buildroot"</span> <span class="s2">"rootfs_install"</span>
+    rootfs_file rootfs_target<span class="p">)</span>
+<span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">rootfs_file</span><span class="si">}</span> DEPENDS rootfs_target<span class="p">)</span>
+</code></pre></div></div>
+<p>Now rebuild the project…</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In build directory</span>
+ninja
+</code></pre></div></div>
+<p>..and run it (use <code class="highlighter-rouge">root</code> as username and password).
+You should be able to use the new program.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login: root
+Password:
+# hello
+Hello, World!
+</code></pre></div></div>
+
+<h2 id="adding-a-kernel-module">Adding a kernel module</h2>
+
+<p>The next exercise guides you through the addition of a new kernel module that provides
+guest to VMM communication. This is a very simply module: you’ll create a special file
+associated with the new module, which when written to causes the VMM to print message.</p>
+
+<p>First, make a new directory:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p modules/poke
+</code></pre></div></div>
+<p>Then create the following file for the module in <code class="highlighter-rouge">modules/poke/poke.c</code>.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/init.h&gt;
+#include &lt;linux/fs.h&gt;
+</span>
+<span class="cp">#include &lt;asm/uaccess.h&gt;
+#include &lt;asm/kvm_para.h&gt;
+#include &lt;asm/io.h&gt;
+</span>
+<span class="cp">#define DEVICE_NAME "poke"
+</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">major_number</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">poke_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">s</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"hi</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// TODO replace with hypercall
+</span>    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">file_operations</span> <span class="n">fops</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">poke_write</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">poke_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">major_number</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fops</span><span class="p">);</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"%s initialized with major number %dn"</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">,</span> <span class="n">major_number</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">poke_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">unregister_chrdev</span><span class="p">(</span><span class="n">major_number</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">);</span>
+    <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="s">"%s exitn"</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span><span class="n">poke_init</span><span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span><span class="n">poke_exit</span><span class="p">);</span>
+</code></pre></div></div>
+<p>Now add a Makefile for building the module in <code class="highlighter-rouge">modules/poke/Makefile</code>:</p>
+
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-m</span> <span class="o">+=</span> poke.o
+
+<span class="nl">all</span><span class="o">:</span>
+	make <span class="nt">-C</span> <span class="nv">$(KHEAD)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(PWD)</span> modules
+
+<span class="nl">clean</span><span class="o">:</span>
+	make <span class="nt">-C</span> <span class="nv">$(KHEAD)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(PWD)</span> clean
+</code></pre></div></div>
+
+<p>Create a <code class="highlighter-rouge">modules/CMakeLists.txt</code> to define the new Linux module with the following content:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span>NOT MODULE_HELPERS_FILE<span class="p">)</span>
+    <span class="nb">message</span><span class="p">(</span>FATAL_ERROR <span class="s2">"MODULE_HELPERS_FILE is not defined"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">include</span><span class="p">(</span><span class="s2">"</span><span class="si">${</span><span class="nv">MODULE_HELPERS_FILE</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nf">DefineLinuxModule</span><span class="p">(</span>poke<span class="p">)</span>
+</code></pre></div></div>
+<p>Update the vm <code class="highlighter-rouge">CMakeLists.txt</code> file to declare the new poke module as an
+external project and add it to the overlay.</p>
+
+<p>At the top of the file include our linux helpers, add the following:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="s2">"../projects/camkes/vm-linux/linux-source-helpers.cmake"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Below the includes add:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Setup Linux Sources</span>
+<span class="nf">GetDefaultLinuxMajor</span><span class="p">(</span>linux_major<span class="p">)</span>
+<span class="nf">GetDefaultLinuxMinor</span><span class="p">(</span>linux_minor<span class="p">)</span>
+<span class="nf">GetDefaultLinuxMd5</span><span class="p">(</span>linux_md5<span class="p">)</span>
+<span class="c1"># Download and Configure our Linux sources</span>
+<span class="nf">DownloadLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_md5</span><span class="si">}</span> vm_linux_extract_dir download_vm_linux<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/../projects/camkes/vm-linux/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/config"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/../projects/camkes/vm-linux/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/Module.symvers"</span><span class="p">)</span>
+<span class="nf">ConfigureLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_config</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_symvers</span><span class="si">}</span> configure_vm_linux
+    DEPENDS download_vm_linux
+<span class="p">)</span>
+<span class="c1"># Add the external poke module project</span>
+<span class="nf">ExternalProject_Add</span><span class="p">(</span>poke-module
+    SOURCE_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/modules
+    BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/poke-module
+    BUILD_ALWAYS ON
+    STAMP_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/poke-module-stamp
+    EXCLUDE_FROM_ALL
+    INSTALL_COMMAND <span class="s2">""</span>
+    DEPENDS download_vm_linux configure_vm_linux
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
+        -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
+        -DLINUX_KERNEL_DIR=<span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span>
+        -DMODULE_HELPERS_FILE=<span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/../projects/camkes/vm-linux/linux-module-helpers.cmake
+<span class="p">)</span>
+<span class="c1"># Add our module binary to the overlay</span>
+<span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>poke-module <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/poke-module vm-overlay <span class="s2">"lib/modules/4.8.16/kernel/drivers/vmm"</span>
+    FILES poke.ko<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Write a custom init script that loads the new module during initialization. 
+Create a file called <code class="highlighter-rouge">init</code> in our tutorial directory with the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="c"># devtmpfs does not get automounted for initramfs</span>
+/bin/mount <span class="nt">-t</span> devtmpfs devtmpfs /dev
+<span class="nb">exec </span>0&lt;/dev/console
+<span class="nb">exec </span>1&gt;/dev/console
+<span class="nb">exec </span>2&gt;/dev/console
+
+insmod /lib/modules/4.8.16/kernel/drivers/vmm/poke.ko
+<span class="nb">exec</span> /sbin/init <span class="nv">$*</span>
+</code></pre></div></div>
+<p>Now update our the VM apps <code class="highlighter-rouge">CMakeLists.txt</code> file to add the new init script to the
+overlay. After our call to <code class="highlighter-rouge">AddExternalProjFilesToOverlay</code> for the poke module add the following:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/init <span class="s2">"."</span> vm-overlay<span class="p">)</span>
+</code></pre></div></div>
+<p>and give the script executable permissions:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x init
+</code></pre></div></div>
+<p>Rebuild the project:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In build directory</span>
+ninja
+</code></pre></div></div>
+<p>Run the following commands to see the module being used:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login: root
+Password:
+# grep poke /proc/devices        # figure out the major number of our driver
+244 poke
+# mknod /dev/poke c 244 0        # create the special file
+# echo &gt; /dev/poke               # write to the file
+[ 57.389643] hi
+-sh: write error: Bad address    # the shell complains, but our module is being invoked!
+</code></pre></div></div>
+
+<h3 id="create-a-hypercall">Create a hypercall</h3>
+
+<p>In <code class="highlighter-rouge">modules/poke/poke.c</code>, replace <code class="highlighter-rouge">printk("hi\n");</code> with <code class="highlighter-rouge">kvm_hypercall1(4, 0);</code>.
+The choice of 4 is because 0..3 are already used by existing hypercalls.</p>
+
+<p>Then register a handler for this hypercall in <code class="highlighter-rouge">projects/camkes/vm/components/Init/src/main.c</code>:.
+Add a new function at the top of the file:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">poke_handler</span><span class="p">(</span><span class="n">vmm_vcpu_t</span> <span class="o">*</span><span class="n">vmm_vcpu</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"POKE!!!n"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the function <code class="highlighter-rouge">main_continued</code> register `poke_handler`:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reg_new_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">,</span> <span class="n">poke_handler</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// &lt;--- added
+</span>
+<span class="cm">/* Now go run the event loop */</span>
+<span class="n">vmm_run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Rebuild the project and try out the hypercall + module:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In build directory</span>
+ninja
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
+buildroot login: root
+Password:
+# mknod /dev/poke c 244 0
+# echo &gt; /dev/poke
+POKE!!!
+</code></pre></div></div>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/camkes-vm-linux.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/camkes-vm-linux.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

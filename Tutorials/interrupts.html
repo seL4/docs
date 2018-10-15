@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Interrupts | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Interrupts</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#irqcontrol">IRQControl</a></li>
+<li class="toc-entry toc-h3"><a href="#irqhandlers">IRQHandlers</a></li>
+<li class="toc-entry toc-h3"><a href="#receiving-interrupts">Receiving interrupts</a></li>
+<li class="toc-entry toc-h3"><a href="#handling-interrupts">Handling interrupts</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a></li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="interrupts">Interrupts</h1>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/notifications">Notification tutorial</a></li>
+</ol>
+
+<h1 id="initialising">Initialising</h1>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> interrupts
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>interrupts_build
+ninja
+</code></pre></div></div>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<ul>
+  <li>Understand the purpose of the IRQControl capability.</li>
+  <li>Be able to obtain capabilities for specific interrupts.</li>
+  <li>Learn how to handle interrupts and their relation with notification objects.</li>
+</ul>
+
+<h2 id="background">Background</h2>
+
+<h3 id="irqcontrol">IRQControl</h3>
+
+<p>The root task is given a single capability from which capabilities to all irq numbers
+in the system can be derived, <code class="highlighter-rouge">seL4_CapIRQControl</code>. This capability can be moved between CSpaces
+and CSlots but cannot be duplicated. Revoking this capability results in all access to all 
+irq capabilities being removed.</p>
+
+<h3 id="irqhandlers">IRQHandlers</h3>
+
+<p>IRQHandler capabilities give access to a single irq and are standard seL4 capabilities: they
+<em>can</em> be moved and duplicated according to system policy. IRQHandlers are obtained by 
+invoking the IRQControl capability, with architecture specific parameters. Below is an
+example of obtaining an IRQHandler.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Get a capability <span class="k">for </span>irq number 7 and place it <span class="k">in </span>cslot 10 <span class="k">in </span>a single-level cspace.
+error <span class="o">=</span> seL4_IRQControl_Get<span class="o">(</span>seL4_IRQControl, 7, cspace_root, 10, seL4_WordBits<span class="o">)</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>There are a variety of different invocations to obtain irq capabilities which are hardware
+dependent, including:</p>
+
+<ul>
+  <li><a href="https://docs.sel4.systems/ApiDoc.html#get-io-apic"><code class="highlighter-rouge">seL4_IRQControl_GetIOAPIC</code></a> (x86)</li>
+  <li><a href="https://docs.sel4.systems/ApiDoc.html#get-msi"><code class="highlighter-rouge">seL4_IRQControl_GetMSI</code></a> (x86)</li>
+  <li><a href="https://docs.sel4.systems/ApiDoc.html#gettrigger"><code class="highlighter-rouge">seL4_IRQControl_GetTrigger</code></a> (ARM)</li>
+</ul>
+
+<h3 id="receiving-interrupts">Receiving interrupts</h3>
+
+<p>Interrupts are received by registering a capability to a notification object
+with the IRQHandler capability for that irq, as follows:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seL4_IRQHandler_setNotification<span class="o">(</span>irq_handler, notification<span class="o">)</span><span class="p">;</span>
+</code></pre></div></div>
+<p>On success, this call will result in signals being delivered to the notification object when
+an interrupt occurs. To handle multiple interrupts on the same notification object, you
+can set different badges on the notification capabilities bound to each IRQHandler.<br />
+ When an interrupt arrives,
+the badge of the notification object bound to that IRQHandler is bitwise orred with the data
+word in the notification object.
+Recall the badging technique for differentiating signals from the 
+ <a href="https://docs.sel4.systems/Tutorials/notifications">notification tutorial</a>.</p>
+
+<p>Interrupts can be polled for using <code class="highlighter-rouge">seL4_Poll</code> or waited for using <code class="highlighter-rouge">seL4_Wait</code>. Either system 
+call results in the data word of the notification object being delivered as the badge of the
+message, and the data word cleared.</p>
+
+<p><a href="https://docs.sel4.systems/ApiDoc.html#clear"><code class="highlighter-rouge">seL4_IRQHandler_Clear</code></a> can be used to unbind
+the notification from an IRQHandler.</p>
+
+<h3 id="handling-interrupts">Handling interrupts</h3>
+
+<p>Once an interrupt is received and processed by the software, you can unmask the interrupt
+using <a href="https://docs.sel4.systems/ApiDoc.html#ack"><code class="highlighter-rouge">seL4_IRQHandler_Ack</code></a> on the IRQHandler.
+seL4 will not deliver any further interrupts after an IRQ is raised until that IRQHandler 
+has been acked.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>In this tutorial you will set up interrupt handling for a provided timer driver on the zynq7000
+ARM platform. The tutorial has been set up with two processes: <code class="highlighter-rouge">timer.c</code>, the timer driver 
+and RPC server, and <code class="highlighter-rouge">client.c</code>, which makes a single request.</p>
+
+<p>On successful initialisation of the tutorial, you will see the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client: hey hey hey
+timer: got a message from 61 to sleep 2 seconds
+&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xe8265600 "tcb_timer" @84e4]: Attempted to invoke a null cap #9.&gt;&gt;
+main@timer.c:78 [Cond failed: error]
+	Failed to ack irq
+</code></pre></div></div>
+
+<p>The timer driver we are using emits an interrupt in the <code class="highlighter-rouge">TTC0_TIMER_IRQ</code> number.</p>
+
+<p><strong>Exercise</strong> Invoke <code class="highlighter-rouge">irq_control</code>, which contains the <code class="highlighter-rouge">seL4_IRQControl</code> capability,
+the place the <code class="highlighter-rouge">IRQHandler</code> capability for <code class="highlighter-rouge">TTC0_TIMER_IRQ</code> into the <code class="highlighter-rouge">irq_handler</code> CSlot.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* TODO invoke irq_control to put the interrupt for TTC0_TIMER1_IRQ in 
+       cslot irq_handler (depth is seL4_WordBits) */
+</code></pre></div></div>
+
+<p>On success, you should see the following output, without the error message that occurred earlier, 
+as the irq_handle capability is now valid:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undelivered IRQ: 42
+</code></pre></div></div>
+
+<p>This is a warning message from the kernel that an IRQ was recieved for irq number 42, but no 
+notification capability is set to sent a signal to.</p>
+
+<p><strong>Exercise</strong> Now set the notification capability (<code class="highlighter-rouge">ntfn</code>) by invoking the irq handler.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     /* TODO set ntfn as the notification for irq_handler */   
+</code></pre></div></div>
+
+<p>Now the output will be:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xe8265600 "tcb_timer" @84e4]: Attempted to invoke a null cap #9.&gt;&gt;
+main@timer.c:78 [Cond failed: error]
+Tick
+</code></pre></div></div>
+
+<p>Only one interrupt is delivered, as the interrupt has not been acknowledged. The timer driver is
+programmed to emit an interrupt every millisecond, so we need to count 2000 interrupts 
+before replying to the client.</p>
+
+<p><strong>Exercise</strong> Acknowledge the interrupt after handling it in the timer driver.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        /* TODO ack the interrupt */   
+</code></pre></div></div>
+
+<p>Now the timer interrupts continue to come in, and the reply is delivered to the client.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up
+got the current time:
+516119
+</code></pre></div></div>
+
+<p>That’s it for this tutorial.</p>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/interrupts.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/interrupts.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>

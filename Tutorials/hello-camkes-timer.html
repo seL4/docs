@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-10-08 13:46:50 +1100 -->
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 Tutorial 4 | seL4 docs</title>
+    <title>Camkes 3 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -70,7 +70,7 @@
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
             <a property="item" typeof="WebPage" href="/Tutorials/">
-              <span property="name"><b>seL4 and CAmkES tutorials</b></span>
+              <span property="name"><b></b></span>
               <meta property="position" content="2" />
             </a>
         </li>
@@ -79,7 +79,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 Tutorial 4</span>
+            <span property="name">Camkes 3</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -201,71 +201,88 @@
   
       </ul>
 
-    <h3>Tutorials</h3>
-      <ul class="nav nav-sidebar">
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_1.html">
-            seL4 Tutorial 1
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_2.html">
-            seL4 Tutorial 2
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Tutorial_3.html">
-            seL4 Tutorial 3
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
   
         <li class="active">
-          <a class="" href="/Tutorials/seL4_Tutorial_4.html">
-            seL4 Tutorial 4
-          </a>
-        </li>
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_Timer_tutorial.html">
-            seL4 Timer tutorial
-          </a>
-        </li>
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/seL4_RT_tutorial.html">
-            seL4 MCS tutorial
-          </a>
-        </li>
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Tutorial_0.html">
-            CAmkES Tutorial 0
-          </a>
-        </li>
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Tutorial_1.html">
-            CAmkES Tutorial 1
-          </a>
-        </li>
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Tutorial_2.html">
-            CAmkES Tutorial 2
-          </a>
-        </li>
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
   
         <li class="">
-          <a class="" href="/Tutorials/CAmkES_Timer_Tutorial.html">
-            CAmkES Timer Tutorial
-          </a>
-        </li>
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
   
-      </ul>
-        
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
 </div>
 
 
@@ -274,8 +291,9 @@
     
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
-<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
 <li class="toc-entry toc-h3"><a href="#task-2">TASK 2</a></li>
@@ -285,172 +303,145 @@
 <li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
 <li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
 <li class="toc-entry toc-h3"><a href="#task-8">TASK 8</a></li>
-<li class="toc-entry toc-h3"><a href="#task-9">TASK 9</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
 </ul>
       </nav>
     
     <div class="content">
-      <h1 id="sel4-tutorial-4">seL4 Tutorial 4</h1>
-<p>The fourth tutorial is largely trying
-to show how a separate ELF file can be loaded and expanded into a
-VSpace, and subsequently executed, while facilitating IPC between the
-two modules. It also shows how threads with different CSpaces have to
-maneuver in order to pass capabilities to one another.</p>
+      
+<h1 id="camkes-timer-tutorial">CAmkES Timer Tutorial</h1>
 
-<p>Don’t gloss over the globals declared before <code class="highlighter-rouge">main()</code> – they’re declared
-for your benefit so you can grasp some of the basic data structures.
-Uncomment them one by one as needed when going through the tasks.</p>
+<p>This tutorial guides you through setting up a timer driver in CAmkES and using it to delay
+for 2 seconds.</p>
 
-<p>You’ll observe that the things you’ve already covered in the second
-tutorial are filled out and you don’t have to repeat them: in much the
-same way, we won’t be repeating conceptual explanations on this page, if
-they were covered by a previous tutorial in the series.</p>
+<h2 id="initialising">Initialising</h2>
 
-<h2 id="learning-outcomes">Learning outcomes</h2>
-
-<ul>
-  <li>Once again, repeat the spawning of a thread: however, this time
-      the two threads will only share the same vspace, but have
-      different CSpaces. This is an automatic side effect of the way
-      that sel4utils creates new “processes”.</li>
-  <li>Learn how the init thread in an seL4 system performs some types
-      of initialization that aren’t traditionally left to userspace.</li>
-  <li>Observe and understand the effects of creating thread that do
-      not share the same CSpace.</li>
-  <li>Understand IPC across CSpace boundaries.</li>
-  <li>Understand how minting a capability to a thread in another
-      CSpace works.</li>
-</ul>
-
-<h2 id="walkthrough">Walkthrough</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># create a build directory
-mkdir build_hello_4
-cd build_hello_4
-# initialise your build directory
-../init --plat pc99 --tut hello-4
-# build it
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> hello-camkes-2
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>hello-camkes-2_build
 ninja
-# run it in qemu
-./simulate
 </code></pre></div></div>
 
-<p>Look for <code class="highlighter-rouge">TASK</code> in the <code class="highlighter-rouge">hello-4/src</code> and <code class="highlighter-rouge">hello-4/hello-4-app</code>
-directory for each task. The first set of tasks are in
-<code class="highlighter-rouge">hello-4/src/main.c</code> and the rest are in <code class="highlighter-rouge">hello-4/hello-4-app/src/main.c</code></p>
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-2">Camkes 2</a></li>
+</ol>
+
+<h2 id="exercises">Exercises</h2>
 
 <h3 id="task-1">TASK 1</h3>
 
-<p>Aside from receiving information about IRQs in the IRQControl object
-capability, and information about available IO-Ports, and ASID
-availability, and several other privileged bits of information, the init
-thread is also responsible, surprisingly, for reserving certain critical
-ranges of memory as being used, and unavailable for applications.</p>
+<p>Start in <code class="highlighter-rouge">hello-camkes-timer.camkes</code>.</p>
 
-<p>This call to <code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code> does
-that. For an interesting look at what sorts of things the init thread
-does, see:
-<code class="highlighter-rouge">static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])</code>,
-which is eventually called on by
-<code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code>. So while this
-function may seem tedious, it’s doing some important things.</p>
+<p>Instantiate some components. You’re already given one component instance</p>
+<ul>
+  <li><code class="highlighter-rouge">client</code>. You need to instantiate two more - a timer driver, and a
+component instance representing the timer hardware itself. Look in
+<code class="highlighter-rouge">components/Timer/Timer.camkes</code> for the definitions of both of these
+components.</li>
+</ul>
 
-<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></p>
-
-<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></p>
+<p>Note the lines
+<code class="highlighter-rouge">connection seL4RPCCall hello_timer(from client.hello, to timer.hello);</code>
+and <code class="highlighter-rouge">timer.sem_value = 0;</code>. They assume that the name of the timer
+‘‘driver’’ will be <code class="highlighter-rouge">timer</code>. If you wish to call your driver something
+else, you’ll have to change these lines.</p>
 
 <h3 id="task-2">TASK 2</h3>
 
-<p><code class="highlighter-rouge">sel4utils_configure_process_custom</code> took a large amount of the work
-out of creating a new “processs”. We skipped a number of steps. Take a
-look at the source for <code class="highlighter-rouge">sel4utils_configure_process_custom()</code> and
-notice how it spawns the new thread with its own CSpace by
-automatically. This will have an effect on our tutorial! It means that
-the new thread we’re creating will not share a CSpace with our main
-thread.</p>
-
-<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></p>
+<p>Connect timer driver to timer hardware. The timer hardware component
+exposes two interfaces which must be connected to the timer driver. One
+of these represents memory-mapped registers. The other represents an
+interrupt.</p>
 
 <h3 id="task-3">TASK 3</h3>
 
-<p>This should be a fairly easy step to complete!</p>
+<p>Configure the timer hardware component instance with device-specific
+info. The physical address of the timer’s memory-mapped registers, and
+its irq number must both be configured.</p>
 
 <h3 id="task-4">TASK 4</h3>
 
-<p>Now, in this particular case, we are making the new thread be the
-sender. Recall that the sender must have a capability to the endpoint
-that the receiver is listening on, in order to send to that listener.
-But in this scenario, our threads do <strong>not</strong> share the same CSpace!
-The only way the new thread will know which endpoint it needs a
-capability to, is if we tell it. Furthermore, even if the new thread
-knows which endpoint object we are listening on, if it doesn’t have a
-capability to that endpoint, it still can’t send data to us. So we must
-provide our new thread with both a capability to the endpoint we’re
-listening on, and also make sure, that that capability we give it has
-sufficient privileges to send across the endpoint.</p>
+<p>Now open <code class="highlighter-rouge">components/Timer/src/timer.c</code>.</p>
 
-<p>There is a number of ways we could approach this, but in this tutorial
-we decided to just pre-initialize the sender’s CSpace with a sufficient
-capability to enable it to send to us right from the start of its
-execution. We could also have spawned the new thread as a listener
-instead, and made it wait for us to send it a message with a sufficient
-capability.</p>
+<p>We’ll start by completing the <code class="highlighter-rouge">irq_handle</code> function, which is called in
+response to each timer interrupt. Note the name of this function. It
+follows the naming convention <code class="highlighter-rouge">&lt;interface&gt;_handle</code>, where
+<code class="highlighter-rouge">&lt;interface&gt;</code> is the name of an IRQ interface connected with
+<code class="highlighter-rouge">seL4HardwareInterrupt</code>. When an interrupt is received on the interface
+<code class="highlighter-rouge">&lt;interface&gt;</code>, the function <code class="highlighter-rouge">&lt;interface&gt;_handle</code> will be
+called.</p>
 
-<p>So we use <code class="highlighter-rouge">vka_cspace_make_path()</code>, which locates one free capability
-slot in the selected CSpace, and returns a handle to it, to us. We then
-filled that free slot in the new thread’s CSpace with a <strong>badged</strong>
-capability to the endpoint we are listening on, so as so allow it to
-send to us immediately. We could have filled the slot with an unbadged
-capability, but then if we were listening for multiple senders, we
-wouldn’t know who was whom.</p>
+<p>The implementation of the timer driver itself isn’t directly in this
+file. The driver is implemented in a CAmkES-agnostic way in a library
+called <code class="highlighter-rouge">libplatsupport</code>.</p>
 
-<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h</a></p>
+<p>This task is to call the <code class="highlighter-rouge">timer_handle_irq</code> function from
+<code class="highlighter-rouge">libplatsupport</code>, to inform the driver that an interrupt has occurred.</p>
 
 <h3 id="task-5">TASK 5</h3>
 
-<p>As discussed above, we now just mint a badged copy of a capability to
-the endpoint we’re listening on, into the new thread’s CSpace, in the
-free slot that the VKA library found for us.</p>
-
-<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></p>
-
-<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf</a></p>
+<p>Acknowledge the interrupt. CAmkES generates the seL4-specific code for
+ack-ing an interrupt and provides a function
+<code class="highlighter-rouge">&lt;interface&gt;_acknowldege</code> for IRQ interfaces (specifically those
+connected with <code class="highlighter-rouge">seL4HardwareInterrupt</code>).</p>
 
 <h3 id="task-6">TASK 6</h3>
 
-<p>So now that we’ve given the new thread everything it needs to
-communicate with us, we can let it run. Complete this step and proceed.</p>
+<p>Now we’ll complete <code class="highlighter-rouge">hello__init</code> - a function which is called once
+before the component’s interfaces start running.</p>
 
-<p><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></p>
+<p>We need to initialise a timer driver from <code class="highlighter-rouge">libplatsupport</code> for this
+device, and store a handle to the driver in the global variable
+<code class="highlighter-rouge">timer_drv</code>.</p>
 
 <h3 id="task-7">TASK 7</h3>
 
-<p>We now wait for the new thread to send us data using <code class="highlighter-rouge">seL4_Recv()</code>…</p>
+<p>Note that this task is to understand the existing code. You won’t have
+to modify any files.</p>
 
-<p>Then we verify the fidelity of the data that was transmitted.</p>
-
-<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
-
-<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></p>
+<p>Implement the <code class="highlighter-rouge">timer_inf</code> RPC interface. This interface is defined in
+<code class="highlighter-rouge">interfaces/timer.camkes</code>, and contains a single method, <code class="highlighter-rouge">sleep</code>, which
+should return after a given number of seconds. in
+<code class="highlighter-rouge">components/Timer/Timer.camkes</code>, we can see that the <code class="highlighter-rouge">timer_inf</code> interface
+exposed by the <code class="highlighter-rouge">Timer</code> component is called <code class="highlighter-rouge">hello</code>. Thus, the function we
+need to implement is called <code class="highlighter-rouge">hello_sleep</code>.</p>
 
 <h3 id="task-8">TASK 8</h3>
 
-<p>Another demonstration of the <code class="highlighter-rouge">sel4_Reply()</code> facility: we reply to the
-message sent by the new thread.</p>
+<p>Tell the timer to interrupt after the given number of seconds. The
+<code class="highlighter-rouge">timer_oneshot_relative</code> function from <code class="highlighter-rouge">libplatsupport</code> will help. Note
+that it expects its time argument to be given in nanoseconds.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359</a></p>
+<p>Note the existing code in <code class="highlighter-rouge">hello_sleep</code>. It waits on a binary semaphore.
+<code class="highlighter-rouge">irq_handle</code> will be called on another thread when the timer interrupt
+occurs, and that function will post to the binary semaphore, unblocking
+us and allowing the function to return after the delay.</p>
 
-<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15</a></p>
+<p>Expect the following output with a 2 second delay between the last 2
+lines:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting the client
+------Sleep for 2 seconds------
+After the client: wakeup
+</code></pre></div></div>
 
-<h3 id="task-9">TASK 9</h3>
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
 
-<p>In the new thread, we initiate communications by using <code class="highlighter-rouge">seL4_Call()</code>. As
-outlined above, the receiving thread replies to us using
-<code class="highlighter-rouge">sel4_ReplyRecv()</code>. The new thread then checks the fidelity of the data
-that was sent, and that’s the end.</p>
-
-<p><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></p>
 
     </div>
   </div>
@@ -481,7 +472,7 @@ that was sent, and that’s the end.</p>
         </li>
         
           <li>
-            Site last updated: Mon Oct 8 13:22:48 2018 +1100 c87156f
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
           </li>
           <li>
             
@@ -644,7 +635,27 @@ that was sent, and that’s the end.</p>
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 7d528d8
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 3d948f6
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
               
             
               
@@ -744,9 +755,9 @@ that was sent, and that’s the end.</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/seL4_Tutorial_4.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/hello-camkes-timer.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/seL4_Tutorial_4.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/hello-camkes-timer.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

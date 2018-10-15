@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-10-15 19:59:57 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dynamic Libraries 3 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b></b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Dynamic Libraries 3</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.0.0"><b>seL4-10.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/CAmkES_3.5.0"><b>camkes-3.5.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#virtual-memory-management">Virtual memory management</a></li>
+<li class="toc-entry toc-h3"><a href="#configure-a-process">Configure a process</a></li>
+<li class="toc-entry toc-h3"><a href="#get-a-cspacepath">Get a cspacepath</a></li>
+<li class="toc-entry toc-h3"><a href="#badge-a-capability">Badge a capability</a></li>
+<li class="toc-entry toc-h3"><a href="#spawn-a-process">Spawn a process</a></li>
+<li class="toc-entry toc-h3"><a href="#receive-a-message">Receive a message</a></li>
+<li class="toc-entry toc-h3"><a href="#send-a-reply">Send a reply</a></li>
+<li class="toc-entry toc-h3"><a href="#client-call">Client Call</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="sel4-dynamic-libraries-processes--elf-loading">seL4 Dynamic Libraries: Processes &amp; Elf loading</h1>
+
+<p>This tutorial shows how a separate ELF file can be loaded and expanded into a
+VSpace, and subsequently executed, while facilitating IPC between the
+two modules. It also shows how threads with different CSpaces have to
+maneuver in order to pass capabilities to one another.</p>
+
+<p>Don’t gloss over the globals declared before <code class="highlighter-rouge">main()</code> – they’re declared
+for your benefit so you can grasp some of the basic data structures.
+Uncomment them one by one as needed when going through the tasks.</p>
+
+<p>You’ll observe that the things you’ve already covered in the second
+tutorial are filled out and you don’t have to repeat them: in much the
+same way, we won’t be repeating conceptual explanations on this page, if
+they were covered by a previous tutorial in the series.</p>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+
+<ul>
+  <li>Once again, repeat the spawning of a thread: however, this time
+      the two threads will only share the same vspace, but have
+      different CSpaces. This is an automatic side effect of the way
+      that sel4utils creates new “processes”.</li>
+  <li>Learn how the init thread in an seL4 system performs some types
+      of initialization that aren’t traditionally left to userspace.</li>
+  <li>Observe and understand the effects of creating thread that do
+      not share the same CSpace.</li>
+  <li>Understand IPC across CSpace boundaries.</li>
+  <li>Understand how minting a capability to a thread in another
+      CSpace works.</li>
+</ul>
+
+<h2 id="initialising">Initialising</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> dynamic-3
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>dynamic-3_build
+ninja
+</code></pre></div></div>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/dynamic-2">dynamic-2</a></li>
+</ol>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>Tasks in this tutorial are in <code class="highlighter-rouge">main.c</code> and <code class="highlighter-rouge">app.c</code>.</p>
+
+<p>When you first run this tutorial, you should see the following output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+Node 0 of 1
+IOPT levels:     4294967295
+IPC buffer:      0x57f000
+Empty slots:     [488 --&gt; 4096)
+sharedFrames:    [0 --&gt; 0)
+userImageFrames: [16 --&gt; 399)
+userImagePaging: [12 --&gt; 15)
+untypeds:        [399 --&gt; 488)
+Initial thread domain: 0
+Initial thread cnode size: 12
+dynamic-3: vspace_reserve_range_aligned@vspace.h:621 Not implemented
+dynamic-3: main@main.c:117 [Cond failed: virtual_reservation.res == NULL]
+	Failed to reserve a chunk of memory.
+</code></pre></div></div>
+
+<h3 id="virtual-memory-management">Virtual memory management</h3>
+
+<p>Aside from receiving information about IRQs in the IRQControl object
+capability, and information about available IO-Ports, and ASID
+availability, and several other privileged bits of information, the init
+thread is also responsible, surprisingly, for reserving certain critical
+ranges of memory as being used, and unavailable for applications.</p>
+
+<p>This call to <code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code> does
+that. For an interesting look at what sorts of things the init thread
+does, see:
+<code class="highlighter-rouge">static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])</code>,
+which is eventually called on by
+<code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code>. So while this
+function may seem tedious, it’s doing some important things.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></li>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 1: create a vspace object to manage our vspace */</span>
+    <span class="cm">/* hint 1: sel4utils_bootstrap_vspace_with_bootinfo_leaky()
+     * int sel4utils_bootstrap_vspace_with_bootinfo_leaky(vspace_t *vspace, sel4utils_alloc_data_t *data, seL4_CPtr page_directory, vka_t *vka, seL4_BootInfo *info)
+     * @param vspace Uninitialised vspace struct to populate.
+     * @param data Uninitialised vspace data struct to populate.
+     * @param page_directory Page directory for the new vspace.
+     * @param vka Initialised vka that this virtual memory allocator will use to allocate pages and pagetables. This allocator will never invoke free.
+     * @param info seL4 boot info
+     * @return 0 on succes.
+     */</span>
+</code></pre></div></div>
+<p>On success, you should see a different error:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [handleUnknownSyscall/106 T0xffffff801ffb5400 "dynamic-3" @40139e]: SysDebugNameThread: cap is not a TCB, halting&gt;&gt;
+halting...
+</code></pre></div></div>
+
+<h3 id="configure-a-process">Configure a process</h3>
+
+<p><code class="highlighter-rouge">sel4utils_configure_process_custom</code> took a large amount of the work
+out of creating a new “processs”. We skipped a number of steps. Take a
+look at the source for <code class="highlighter-rouge">sel4utils_configure_process_custom()</code> and
+notice how it spawns the new thread with its own CSpace by
+automatically. This will have an effect on our tutorial! It means that
+the new thread we’re creating will not share a CSpace with our main
+thread.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 2: use sel4utils to make a new process */</span>
+    <span class="cm">/* hint 1: sel4utils_configure_process_custom()
+     * hint 2: process_config_default_simple()
+     * @param process Uninitialised process struct.
+     * @param vka Allocator to use to allocate objects.
+     * @param vspace Vspace allocator for the current vspace.
+     * @param priority Priority to configure the process to run as.
+     * @param image_name Name of the elf image to load from the cpio archive.
+     * @return 0 on success, -1 on error.
+     *
+     * hint 2: priority is in APP_PRIORITY and can be 0 to seL4_MaxPrio
+     * hint 3: the elf image name is in APP_IMAGE_NAME
+     */</span>
+</code></pre></div></div>
+<p>On success, you should see a different error:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dynamic-3: main@main.c:196 [Cond failed: new_ep_cap == 0]
+	Failed to mint a badged copy of the IPC endpoint into the new thread's CSpace.
+	sel4utils_mint_cap_to_process takes a cspacepath_t: double check what you passed.
+</code></pre></div></div>
+
+<h3 id="get-a-cspacepath">Get a <code class="highlighter-rouge">cspacepath</code></h3>
+
+<p>Now, in this particular case, we are making the new thread be the
+sender. Recall that the sender must have a capability to the endpoint
+that the receiver is listening on, in order to send to that listener.
+But in this scenario, our threads do <strong>not</strong> share the same CSpace!
+The only way the new thread will know which endpoint it needs a
+capability to, is if we tell it. Furthermore, even if the new thread
+knows which endpoint object we are listening on, if it doesn’t have a
+capability to that endpoint, it still can’t send data to us. So we must
+provide our new thread with both a capability to the endpoint we’re
+listening on, and also make sure, that that capability we give it has
+sufficient privileges to send across the endpoint.</p>
+
+<p>There is a number of ways we could approach this, but in this tutorial
+we decided to just pre-initialize the sender’s CSpace with a sufficient
+capability to enable it to send to us right from the start of its
+execution. We could also have spawned the new thread as a listener
+instead, and made it wait for us to send it a message with a sufficient
+capability.</p>
+
+<p>So we use <code class="highlighter-rouge">vka_cspace_make_path()</code>, which locates one free capability
+slot in the selected CSpace, and returns a handle to it, to us. We then
+filled that free slot in the new thread’s CSpace with a <strong>badged</strong>
+capability to the endpoint we are listening on, so as so allow it to
+send to us immediately. We could have filled the slot with an unbadged
+capability, but then if we were listening for multiple senders, we
+wouldn’t know who was whom.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h</a>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="cm">/* TASK 3: make a cspacepath for the new endpoint cap */</span>
+  <span class="cm">/* hint 1: vka_cspace_make_path()
+   * void vka_cspace_make_path(vka_t *vka, seL4_CPtr slot, cspacepath_t *res)
+   * @param vka Vka interface to use for allocation of objects.
+   * @param slot A cslot allocated by the cspace alloc function
+   * @param res Pointer to a cspacepath struct to fill out
+   *
+   * hint 2: use the cslot of the endpoint allocated above
+   */</span>
+  <span class="n">cspacepath_t</span> <span class="n">ep_cap_path</span><span class="p">;</span>
+  <span class="n">seL4_CPtr</span> <span class="n">new_ep_cap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>    </div>
+    <p>On success, the output should not change.</p>
+  </li>
+</ul>
+
+<h3 id="badge-a-capability">Badge a capability</h3>
+
+<p>As discussed above, we now just mint a badged copy of a capability to
+the endpoint we’re listening on, into the new thread’s CSpace, in the
+free slot that the VKA library found for us.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 4: copy the endpont cap and add a badge to the new cap */</span>
+    <span class="cm">/* hint 1: sel4utils_mint_cap_to_process()
+     * seL4_CPtr sel4utils_mint_cap_to_process(sel4utils_process_t *process, cspacepath_t src, seL4_CapRights rights, seL4_CapData_t data)
+     * @param process Process to copy the cap to
+     * @param src Path in the current cspace to copy the cap from
+     * @param rights The rights of the new cap
+     * @param data Extra data for the new cap (e.g., the badge)
+     * @return 0 on failure, otherwise the slot in the processes cspace.
+     *
+     * hint 2: for the rights, use seL4_AllRights
+     * hint 3: for the badge use seL4_CapData_Badge_new()
+     * seL4_CapData_t CONST seL4_CapData_Badge_new(seL4_Uint32 Badge)
+     * @param[in] Badge The badge number to use
+     * @return A CapData structure containing the desired badge info
+     *
+     * seL4_CapData_t is generated during build.
+     *
+     * hint 4: for the badge value use EP_BADGE
+     */</span>
+</code></pre></div></div>
+<p>On success, the output should look something like:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
+main: hello world
+dynamic-3: main@main.c:247 [Cond failed: sender_badge != EP_BADGE]
+	The badge we received from the new thread didn't match our expectation
+</code></pre></div></div>
+
+<h3 id="spawn-a-process">Spawn a process</h3>
+
+<p>So now that we’ve given the new thread everything it needs to
+communicate with us, we can let it run. Complete this step and proceed.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 5: spawn the process */</span>
+    <span class="cm">/* hint 1: sel4utils_spawn_process_v()
+     * int sel4utils_spawn_process(sel4utils_process_t *process, vka_t *vka, vspace_t *vspace, int argc, char *argv[], int resume)
+     * @param process Initialised sel4utils process struct.
+     * @param vka Vka interface to use for allocation of frames.
+     * @param vspace The current vspace.
+     * @param argc The number of arguments.
+     * @param argv A pointer to an array of strings in the current vspace.
+     * @param resume 1 to start the process, 0 to leave suspended.
+     * @return 0 on success, -1 on error.
+     */</span>
+</code></pre></div></div>
+<p>On success, you should be able to see the second process running. The output should
+be as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
+process_2: hey hey hey
+main@app.c:67 [Cond failed: msg != ~MSG_DATA]
+	Unexpected response from root thread.
+main: hello world
+dynamic-3: main@main.c:255 [Cond failed: sender_badge != EP_BADGE]
+	The badge we received from the new thread didn't match our expectation.
+</code></pre></div></div>
+
+<h3 id="receive-a-message">Receive a message</h3>
+
+<p>We now wait for the new thread to send us data using <code class="highlighter-rouge">seL4_Recv()</code>…
+Then we verify the fidelity of the data that was transmitted.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 6: wait for a message */</span>
+    <span class="cm">/* hint 1: seL4_Recv()
+     * seL4_MessageInfo_t seL4_Recv(seL4_CPtr src, seL4_Word* sender)
+     * @param src The capability to be invoked.
+     * @param sender The badge of the endpoint capability that was invoked by the sender is written to this address.
+     * @return A seL4_MessageInfo_t structure
+     *
+     * hint 2: seL4_MessageInfo_t is generated during build.
+     * hint 3: use the badged endpoint cap that you minted above
+     */</span>
+</code></pre></div></div>
+<p>On success, the badge error should no longer be visible.</p>
+
+<h3 id="send-a-reply">Send a reply</h3>
+
+<p>Another demonstration of the <code class="highlighter-rouge">sel4_Reply()</code> facility: we reply to the
+message sent by the new thread.</p>
+<ul>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 7: send the modified message back */</span>
+    <span class="cm">/* hint 1: seL4_ReplyRecv()
+     * seL4_MessageInfo_t seL4_ReplyRecv(seL4_CPtr dest, seL4_MessageInfo_t msgInfo, seL4_Word *sender)
+     * @param dest The capability to be invoked.
+     * @param msgInfo The messageinfo structure for the IPC.  This specifies information about the message to send (such as the number of message registers to send) as the Reply part.
+     * @param sender The badge of the endpoint capability that was invoked by the sender is written to this address. This is a result of the Wait part.
+     * @return A seL4_MessageInfo_t structure.  This is a result of the Wait part.
+     *
+     * hint 2: seL4_MessageInfo_t is generated during build.
+     * hint 3: use the badged endpoint cap that you used for Call
+     */</span>
+</code></pre></div></div>
+<p>On success, the output should not change.</p>
+
+<h3 id="client-call">Client Call</h3>
+
+<p>In the new thread, we initiate communications by using <code class="highlighter-rouge">seL4_Call()</code>. As
+outlined above, the receiving thread replies to us using
+<code class="highlighter-rouge">sel4_ReplyRecv()</code>. The new thread then checks the fidelity of the data
+that was sent, and that’s the end.</p>
+
+<ul>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="cm">/* TASK 8: send and wait for a reply */</span>
+    <span class="cm">/* hint 1: seL4_Call()
+     * seL4_MessageInfo_t seL4_Call(seL4_CPtr dest, seL4_MessageInfo_t msgInfo)
+     * @param dest The capability to be invoked.
+     * @param msgInfo The messageinfo structure for the IPC.  This specifies information about the message to send (such as the number of message registers to send).
+     * @return A seL4_MessageInfo_t structure.  This is information about the repy message.
+     *
+     * hint 2: send the endpoint cap using argv (see TASK 6 in the other main.c)
+     */</span>
+    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span>
+               <span class="s">"Missing arguments.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">seL4_CPtr</span> <span class="n">ep</span> <span class="o">=</span> <span class="p">(</span><span class="n">seL4_CPtr</span><span class="p">)</span> <span class="n">atol</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</code></pre></div></div>
+<p>On success, you should see the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>process_2: hey hey hey
+main: got a message 0x6161 from 0x61
+process_2: got a reply: 0xffffffffffff9e9e
+</code></pre></div></div>
+<p>That’s it for this tutorial.</p>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Oct 15 19:58:34 2018 +1100 d80fbf1
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/dynamic-3.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/dynamic-3.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>
