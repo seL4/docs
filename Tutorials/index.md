@@ -16,7 +16,7 @@ This page collates all available tutorials on seL4 material.
 ```
 mkdir sel4-tutorials-manifest
 cd sel4-tutorials-manifest
-repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest -b refs/tags/{{site.sel4_master}}
+repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest
 repo sync
 ```
 
