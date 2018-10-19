@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-10-15 20:04:03 +1100 -->
+<!-- Page last generated 2018-10-19 11:37:38 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -298,11 +298,22 @@
 <ul>
 <li class="toc-entry toc-h3"><a href="#scheduling-contexts">Scheduling Contexts</a></li>
 <li class="toc-entry toc-h3"><a href="#schedcontrol">SchedControl</a></li>
+<li class="toc-entry toc-h3"><a href="#schedcontext-binding">SchedContext Binding</a></li>
+<li class="toc-entry toc-h3"><a href="#bounding-execution">Bounding execution</a></li>
+<li class="toc-entry toc-h3"><a href="#scheduler">Scheduler</a></li>
+<li class="toc-entry toc-h3"><a href="#passive-servers">Passive servers</a></li>
+<li class="toc-entry toc-h3"><a href="#timeout-faults">Timeout faults</a></li>
+<li class="toc-entry toc-h3"><a href="#new-invocations">New invocations</a></li>
+<li class="toc-entry toc-h3"><a href="#reply-objects">Reply objects</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
 <li class="toc-entry toc-h3"><a href="#periodic-threads">Periodic threads</a></li>
 <li class="toc-entry toc-h3"><a href="#unbinding-scheduling-contexts">Unbinding scheduling contexts</a></li>
 <li class="toc-entry toc-h3"><a href="#sporadic-threads">Sporadic threads</a></li>
-<li class="toc-entry toc-h3"><a href="#passive-servers">Passive servers</a></li>
-<li class="toc-entry toc-h3"><a href="#timeout-faults">Timeout Faults</a></li>
+<li class="toc-entry toc-h3"><a href="#passive-servers-1">Passive servers</a></li>
+<li class="toc-entry toc-h3"><a href="#timeout-faults-1">Timeout Faults</a></li>
 <li class="toc-entry toc-h3"><a href="#further-exercises">Further exercises</a></li>
 </ul>
 </li>
@@ -325,11 +336,9 @@
 
 <p>This tutorial runs on a different branch of the seL4 kernel. First, check out this branch:</p>
 
-<!-- TODO update mcs version -->
-
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>kernel
-git fetch seL4 9.0.0-mcs 
-git checkout 9.0.0-mcs
+git fetch seL4 mcs-tutorials 
+git checkout mcs-tutorials
 </code></pre></div></div>
 
 <p>Then initialise the tutorial:</p>
@@ -386,113 +395,114 @@ scheduling context with a budget and period both equal to 1000us. Because the bu
 the scheduling context is treated as round-robin</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedControl_Configure</span><span class="p">(</span><span class="n">sched_control</span><span class="p">,</span> <span class="n">sched_context</span><span class="p">,</span> <span class="n">US_IN_S</span><span class="p">,</span> <span class="n">US_IN_S</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to configure schedcontext"</span><span class="p">);</span><span class="err">```</span>
-
-<span class="cp">### SchedContext Binding
-</span>
-<span class="n">Thread</span> <span class="n">control</span> <span class="n">blocks</span> <span class="p">(</span><span class="n">TCBs</span><span class="p">)</span> <span class="n">must</span> <span class="n">have</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">configured</span> <span class="n">with</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="n">budget</span> <span class="n">and</span> <span class="n">period</span>
- <span class="n">in</span> <span class="n">order</span> <span class="n">to</span> <span class="n">be</span> <span class="n">picked</span> <span class="n">by</span> <span class="n">the</span> <span class="n">scheduler</span><span class="p">.</span> <span class="n">This</span> 
-<span class="n">can</span> <span class="n">by</span> <span class="n">invoking</span> <span class="n">the</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">capability</span> <span class="n">with</span> <span class="n">the</span> <span class="err">`</span><span class="n">seL4_SchedContext_Bind</span><span class="err">`</span> <span class="n">invocation</span><span class="p">,</span> <span class="n">or</span> <span class="n">by</span>
-<span class="n">using</span> <span class="err">`</span><span class="n">seL4_TCB_SetSchedParams</span><span class="err">`</span><span class="p">,</span> <span class="n">which</span> <span class="n">takes</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">capability</span><span class="p">.</span> <span class="n">Below</span> <span class="n">is</span> <span class="n">example</span> <span class="n">code</span> <span class="k">for</span>
-<span class="n">binding</span> <span class="n">a</span> <span class="n">TCB</span> <span class="n">and</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span><span class="p">.</span>
-
-<span class="err">```</span><span class="n">c</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedContext_Bind</span><span class="p">(</span><span class="n">sched_context</span><span class="p">,</span> <span class="n">spinner_tcb</span><span class="p">);</span>
-    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to bind sched_context to round_robin_tcb"</span><span class="p">);</span><span class="err">```</span>
-
-<span class="n">TCB</span><span class="err">'</span><span class="n">s</span> <span class="n">can</span> <span class="n">only</span> <span class="n">be</span> <span class="n">bound</span> <span class="n">to</span> <span class="n">one</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">at</span> <span class="n">a</span> <span class="n">time</span><span class="p">,</span> <span class="n">and</span> <span class="n">vice</span> <span class="n">versa</span><span class="p">.</span> <span class="n">If</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">has</span> <span class="n">not</span>
-<span class="n">been</span> <span class="n">configured</span> <span class="n">with</span> <span class="n">any</span> <span class="n">time</span><span class="p">,</span> <span class="n">then</span> <span class="n">although</span> <span class="n">the</span> <span class="n">TCB</span> <span class="n">has</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">it</span> <span class="n">will</span> <span class="n">remain</span> <span class="n">ineligible</span> 
-<span class="k">for</span> <span class="n">scheduling</span><span class="p">.</span> 
-
-<span class="cp">### Bounding execution
-</span>
-<span class="n">For</span> <span class="n">partial</span> <span class="n">scheduling</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">an</span> <span class="n">upper</span> <span class="n">bound</span> <span class="n">on</span> <span class="n">execution</span> <span class="n">is</span> <span class="n">enforced</span> <span class="n">by</span> <span class="n">seL4</span> <span class="n">using</span> <span class="n">the</span> <span class="o">*</span><span class="n">sporadic</span> <span class="n">server</span><span class="o">*</span>
-<span class="n">algorithm</span><span class="p">,</span> <span class="n">which</span> <span class="n">work</span> <span class="n">by</span> <span class="n">guaranteeing</span> <span class="n">the</span> <span class="o">*</span><span class="n">sliding</span> <span class="n">window</span><span class="o">*</span> <span class="n">constrain</span><span class="p">,</span> <span class="n">meaning</span> <span class="n">that</span> <span class="n">during</span> <span class="n">any</span> <span class="n">period</span><span class="p">,</span> <span class="n">the</span>
-<span class="n">budget</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">exceeded</span><span class="p">.</span> <span class="n">This</span> <span class="n">is</span> <span class="n">achieved</span> <span class="n">by</span> <span class="n">tracking</span> <span class="n">the</span> <span class="n">eligible</span> <span class="n">budget</span> <span class="n">in</span> <span class="n">chunks</span> <span class="n">called</span> 
-<span class="o">*</span><span class="n">replenishments</span><span class="o">*</span> <span class="p">(</span><span class="n">abbreviated</span> <span class="n">to</span> <span class="err">`</span><span class="n">refills</span><span class="err">`</span> <span class="n">in</span> <span class="n">the</span> <span class="n">API</span> <span class="k">for</span> <span class="n">brevity</span><span class="p">).</span> <span class="n">A</span> <span class="n">replenishment</span> <span class="n">is</span> <span class="n">simply</span> <span class="n">an</span> <span class="n">amount</span> 
- <span class="n">of</span> <span class="n">time</span><span class="p">,</span> <span class="n">and</span> <span class="n">a</span> <span class="n">timestamp</span> <span class="n">from</span> <span class="n">which</span> <span class="n">that</span> <span class="n">time</span> <span class="n">can</span> <span class="n">be</span> <span class="n">consumed</span><span class="p">.</span> <span class="n">We</span> <span class="n">explain</span> <span class="n">this</span> <span class="n">now</span> <span class="n">through</span> <span class="n">an</span> <span class="n">example</span><span class="o">:</span>
-
-<span class="n">Consider</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">with</span> <span class="n">period</span> <span class="o">*</span><span class="n">T</span><span class="o">*</span> <span class="n">and</span> <span class="n">budget</span> <span class="o">*</span><span class="n">C</span><span class="o">*</span><span class="p">.</span> <span class="n">Initially</span><span class="p">,</span> <span class="n">the</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">has</span> 
-<span class="n">a</span> <span class="n">single</span> <span class="n">replenishment</span> <span class="n">of</span> <span class="n">size</span> <span class="o">*</span><span class="n">C</span><span class="o">*</span> <span class="n">which</span> <span class="n">is</span> <span class="n">eligible</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span> <span class="n">from</span> <span class="n">time</span> <span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="p">.</span> 
-
-<span class="n">The</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">is</span> <span class="n">scheduled</span> <span class="n">at</span> <span class="n">time</span> <span class="o">*</span><span class="n">t</span><span class="o">*</span> <span class="n">and</span> <span class="n">blocks</span> <span class="n">at</span> <span class="n">time</span> <span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">.</span> <span class="n">A</span> <span class="n">new</span> <span class="n">replenishment</span> <span class="n">is</span> <span class="n">then</span> <span class="n">scheduled</span>
-<span class="k">for</span> <span class="n">time</span> <span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">T</span><span class="o">*</span> <span class="k">for</span> <span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="p">.</span> <span class="n">The</span> <span class="n">existing</span> <span class="n">replenishment</span> <span class="n">is</span> <span class="n">updated</span> <span class="n">to</span> <span class="o">*</span><span class="n">C</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="p">,</span> <span class="n">subtracting</span> <span class="n">the</span> <span class="n">amount</span> <span class="n">consumed</span><span class="p">.</span>
-<span class="n">For</span> <span class="n">further</span> <span class="n">details</span> <span class="n">on</span> <span class="n">the</span> <span class="n">sporadic</span> <span class="n">server</span> <span class="n">algorithm</span><span class="p">,</span> <span class="n">see</span> <span class="n">the</span> 
-<span class="p">[</span><span class="n">original</span> <span class="n">paper</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//dl.acm.org/citation.cfm?id=917665).
-</span>
-<span class="n">If</span> <span class="n">the</span> <span class="n">replenishment</span> <span class="n">data</span> <span class="n">structure</span> <span class="n">is</span> <span class="n">full</span><span class="p">,</span> <span class="n">replenishments</span> <span class="n">are</span> <span class="n">merged</span> <span class="n">and</span> <span class="n">the</span> <span class="n">upper</span> <span class="n">bound</span> <span class="n">on</span> <span class="n">execution</span> <span class="n">is</span>
-<span class="n">reduced</span><span class="p">.</span> <span class="n">For</span> <span class="n">this</span> <span class="n">reason</span><span class="p">,</span> <span class="n">the</span> <span class="n">bound</span> <span class="n">on</span> <span class="n">execution</span> <span class="n">is</span> <span class="n">configurable</span> <span class="n">with</span> <span class="n">the</span> <span class="err">`</span><span class="n">extra_refills</span><span class="err">`</span> <span class="n">parameter</span>
-<span class="n">on</span> <span class="n">scheduling</span> <span class="n">contexts</span><span class="p">.</span> <span class="n">By</span> <span class="k">default</span><span class="p">,</span> <span class="n">scheduling</span> <span class="n">contexts</span> <span class="n">contain</span> <span class="n">only</span> <span class="n">two</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">meaning</span> <span class="k">if</span> <span class="n">a</span> 
-<span class="n">scheduling</span> <span class="n">context</span> <span class="n">is</span> <span class="n">blocked</span><span class="p">,</span> <span class="n">switched</span> <span class="n">or</span> <span class="n">preempted</span> <span class="n">more</span> <span class="n">than</span> <span class="n">twice</span><span class="p">,</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">the</span> <span class="n">budget</span> <span class="n">is</span> <span class="n">forfeit</span> <span class="n">until</span> 
-<span class="n">the</span> <span class="n">next</span> <span class="n">period</span><span class="p">.</span> <span class="err">`</span><span class="n">extra_refills</span><span class="err">`</span> <span class="n">provides</span> <span class="n">more</span> <span class="n">replenishment</span> <span class="n">data</span> <span class="n">structures</span> <span class="n">in</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span><span class="p">.</span> <span class="n">Note</span> 
-<span class="n">that</span> <span class="n">the</span> <span class="n">higher</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">replenishments</span> <span class="n">the</span> <span class="n">more</span> <span class="n">fragmentation</span> <span class="n">of</span> <span class="n">budget</span> <span class="n">can</span> <span class="n">occur</span><span class="p">,</span> <span class="n">which</span> <span class="n">will</span> <span class="n">increase</span>
-<span class="n">scheduling</span> <span class="n">overhead</span><span class="p">.</span>
-
-<span class="err">`</span><span class="n">extra_refills</span><span class="err">`</span> <span class="n">itself</span> <span class="n">is</span> <span class="n">bounded</span> <span class="n">by</span> <span class="n">the</span> <span class="n">size</span> <span class="n">of</span> <span class="n">a</span> <span class="n">scheduling</span> <span class="n">context</span><span class="p">,</span> <span class="n">which</span> <span class="n">is</span> <span class="n">itself</span> <span class="n">configurable</span><span class="p">.</span> 
-<span class="n">On</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">creation</span> <span class="n">a</span> <span class="n">size</span> <span class="n">can</span> <span class="n">be</span> <span class="n">specified</span><span class="p">,</span> <span class="n">and</span> <span class="n">must</span> <span class="n">be</span> <span class="err">`</span><span class="o">&gt;</span> <span class="n">seL4_MinSchedContextBits</span><span class="err">`</span><span class="p">.</span> <span class="n">The</span> 
-<span class="n">maximum</span> <span class="n">number</span> <span class="n">of</span> <span class="n">extra</span> <span class="n">refills</span> <span class="n">that</span> <span class="n">can</span> <span class="n">fit</span> <span class="n">into</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">size</span> <span class="n">can</span> <span class="n">be</span> <span class="n">calculated</span>
-<span class="n">with</span> <span class="n">the</span> <span class="n">function</span> <span class="err">`</span><span class="n">seL4_MaxExtraRefills</span><span class="p">()</span><span class="err">`</span> <span class="n">provided</span> <span class="n">in</span> <span class="err">`</span><span class="n">libsel4</span><span class="err">`</span><span class="p">.</span>
-
-<span class="n">Threads</span> <span class="n">bound</span> <span class="n">to</span> <span class="n">scheduling</span> <span class="n">contexts</span> <span class="n">that</span> <span class="k">do</span> <span class="n">not</span> <span class="n">have</span> <span class="n">an</span> <span class="n">available</span> <span class="n">replenishment</span> <span class="n">are</span> <span class="n">placed</span> <span class="n">into</span> <span class="n">an</span> <span class="n">ordered</span>
-<span class="n">queue</span> <span class="n">of</span> <span class="n">threads</span><span class="p">,</span> <span class="n">and</span> <span class="n">woken</span> <span class="n">once</span> <span class="n">their</span> <span class="n">next</span> <span class="n">replenishment</span> <span class="n">is</span> <span class="n">ready</span><span class="p">.</span>
-
-<span class="cp">### Scheduler
-</span>
-<span class="n">The</span> <span class="n">seL4</span> <span class="n">scheduler</span> <span class="n">is</span> <span class="n">largely</span> <span class="n">unchanged</span><span class="o">:</span> <span class="n">the</span> <span class="n">highest</span> <span class="n">priority</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">blocked</span> <span class="kr">thread</span> <span class="n">with</span> <span class="n">a</span> <span class="n">configured</span>
- <span class="n">scheduling</span> <span class="n">context</span> <span class="n">that</span> <span class="n">has</span> <span class="n">available</span> <span class="n">budget</span> <span class="n">is</span> <span class="n">chosen</span> <span class="n">by</span> <span class="n">the</span> <span class="n">scheduler</span> <span class="n">to</span> <span class="n">run</span><span class="p">.</span>
-
-<span class="cp">### Passive servers
-</span>
-<span class="n">The</span> <span class="n">MCS</span> <span class="n">extensions</span> <span class="n">allow</span> <span class="k">for</span> <span class="n">RPC</span> <span class="n">style</span> <span class="n">servers</span> <span class="n">to</span> <span class="n">run</span> <span class="n">on</span> <span class="n">client</span> <span class="n">TCBs</span><span class="err">'</span> <span class="n">scheduling</span> <span class="n">contexts</span><span class="p">.</span> <span class="n">This</span> <span class="n">is</span> <span class="n">achived</span> <span class="n">by</span> 
-<span class="n">unbinding</span> <span class="n">the</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">once</span> <span class="n">a</span> <span class="n">server</span> <span class="n">is</span> <span class="n">blocked</span> <span class="n">on</span> <span class="n">an</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">rendering</span> <span class="n">the</span> <span class="n">server</span> <span class="o">*</span><span class="n">passive</span><span class="o">*</span><span class="p">.</span> 
-<span class="n">Caller</span> <span class="n">scheduling</span> <span class="n">contexts</span> <span class="n">are</span> <span class="n">donated</span> <span class="n">to</span> <span class="n">the</span> <span class="n">server</span> <span class="n">on</span> <span class="err">`</span><span class="n">seL4_Call</span><span class="err">`</span> <span class="n">and</span> <span class="n">returned</span> <span class="n">on</span> <span class="err">`</span><span class="n">seL4_ReplyRecv</span><span class="err">`</span><span class="p">.</span>
-
-<span class="n">Passive</span> <span class="n">servers</span> <span class="n">can</span> <span class="n">also</span> <span class="n">receive</span> <span class="n">scheduling</span> <span class="n">contexts</span> <span class="n">from</span> <span class="n">their</span> <span class="n">bound</span> <span class="n">notification</span> <span class="n">object</span><span class="p">,</span> <span class="n">which</span> <span class="n">is</span> 
-<span class="n">achieved</span> <span class="n">by</span> <span class="n">binding</span> <span class="n">a</span> <span class="n">notification</span> <span class="n">object</span> <span class="n">using</span> <span class="err">`</span><span class="n">seL4_SchedContext_Bind</span><span class="err">`</span><span class="p">.</span>
-
-<span class="cp">### Timeout faults
-</span>
-<span class="n">Threads</span> <span class="n">can</span> <span class="k">register</span> <span class="n">a</span> <span class="n">timeout</span> <span class="n">fault</span> <span class="n">handler</span> <span class="n">using</span> <span class="err">`</span><span class="n">seL4_TCB_SetTimeoutEndpoint</span><span class="err">`</span><span class="p">.</span> <span class="n">Timeout</span> <span class="n">fault</span>
-<span class="n">handlers</span> <span class="n">are</span> <span class="n">optional</span> <span class="n">and</span> <span class="n">are</span> <span class="n">raised</span> <span class="n">when</span> <span class="n">a</span> <span class="kr">thread</span><span class="err">'</span><span class="n">s</span> <span class="n">replenishment</span> <span class="n">expires</span> <span class="o">*</span><span class="n">and</span><span class="o">*</span> <span class="n">they</span> <span class="n">have</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">handler</span>
-<span class="n">registered</span><span class="p">.</span> <span class="n">The</span> <span class="n">timeout</span> <span class="n">fault</span> <span class="n">message</span> <span class="n">from</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">data</span> <span class="n">word</span> <span class="n">which</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">the</span>
-<span class="n">scheduling</span> <span class="n">context</span> <span class="n">that</span> <span class="n">the</span> <span class="kr">thread</span> <span class="n">was</span> <span class="n">using</span> <span class="n">when</span> <span class="n">the</span> <span class="n">timeout</span> <span class="n">fault</span> <span class="n">occurred</span><span class="p">,</span> <span class="n">and</span> <span class="n">the</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">time</span>
-<span class="n">consumed</span> <span class="n">by</span> <span class="n">the</span> <span class="kr">thread</span> <span class="n">since</span> <span class="n">the</span> <span class="n">last</span> <span class="n">fault</span> <span class="n">or</span> <span class="err">`</span><span class="n">seL4_SchedContext_Consumed</span><span class="err">`</span><span class="p">.</span> 
-
-<span class="cp">### New invocations
-</span>
-<span class="o">*</span> <span class="err">`</span><span class="n">seL4_SchedContext_Bind</span><span class="err">`</span> <span class="o">-</span> <span class="n">bind</span> <span class="n">a</span> <span class="n">TCB</span> <span class="n">or</span> <span class="n">Notification</span> <span class="n">capability</span> <span class="n">to</span> <span class="n">the</span> <span class="n">invoked</span> <span class="n">scheduling</span> <span class="n">context</span><span class="p">.</span>
-<span class="o">*</span> <span class="err">`</span><span class="n">seL4_SchedContext_Unbind</span><span class="err">`</span> <span class="o">-</span> <span class="n">unbind</span> <span class="n">any</span> <span class="n">objects</span> <span class="n">from</span> <span class="n">the</span> <span class="n">invoked</span> <span class="n">scheduling</span> <span class="n">context</span><span class="p">.</span>
-<span class="o">*</span> <span class="err">`</span><span class="n">seL4_SchedContext_UnbindObject</span><span class="err">`</span><span class="o">-</span> <span class="n">unbind</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">object</span> <span class="n">from</span> <span class="n">the</span> <span class="n">invoked</span> <span class="n">scheduling</span> <span class="n">context</span><span class="p">.</span>
-<span class="o">*</span> <span class="err">`</span><span class="n">seL4_SchedContext_YieldTo</span><span class="err">`</span> <span class="o">-</span> <span class="k">if</span> <span class="n">the</span> <span class="kr">thread</span> <span class="n">running</span> <span class="n">on</span> <span class="n">the</span> <span class="n">invoked</span> <span class="n">scheduling</span> <span class="n">context</span> <span class="n">is</span> 
-<span class="n">schedulable</span><span class="p">,</span> <span class="n">place</span> <span class="n">it</span> <span class="n">at</span> <span class="n">the</span> <span class="n">head</span> <span class="n">of</span> <span class="n">the</span> <span class="n">scheduling</span> <span class="n">queue</span> <span class="k">for</span> <span class="n">its</span> <span class="n">priority</span><span class="p">.</span> <span class="n">For</span> <span class="n">same</span> <span class="n">priority</span> <span class="n">threads</span><span class="p">,</span> <span class="n">this</span> 
-<span class="n">will</span> <span class="n">result</span> <span class="n">in</span> <span class="n">the</span> <span class="n">target</span> <span class="kr">thread</span> <span class="n">being</span> <span class="n">scheduled</span><span class="p">.</span> <span class="n">Return</span> <span class="n">the</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">time</span> <span class="n">consumed</span> <span class="n">by</span> <span class="n">this</span> <span class="n">scheduling</span> 
-<span class="n">context</span> <span class="n">since</span> <span class="n">the</span> <span class="n">last</span> <span class="n">timeout</span> <span class="n">fault</span><span class="p">,</span> <span class="err">`</span><span class="n">YieldTo</span><span class="err">`</span> <span class="n">or</span> <span class="err">`</span><span class="n">Consumed</span><span class="err">`</span> <span class="n">invocation</span><span class="p">.</span>
-<span class="o">*</span> <span class="err">`</span><span class="n">seL4_SchedContext_Consumed</span><span class="err">`</span> <span class="o">-</span> <span class="n">Return</span> <span class="n">the</span> <span class="n">amount</span> <span class="n">of</span> <span class="n">time</span> <span class="n">consumed</span> <span class="n">by</span> <span class="n">this</span> <span class="n">scheduling</span> 
-<span class="n">context</span> <span class="n">since</span> <span class="n">the</span> <span class="n">last</span> <span class="n">timeout</span> <span class="n">fault</span><span class="p">,</span> <span class="err">`</span><span class="n">YieldTo</span><span class="err">`</span> <span class="n">or</span> <span class="err">`</span><span class="n">Consumed</span><span class="err">`</span> <span class="n">invocation</span><span class="p">.</span>
-<span class="o">*</span> <span class="err">`</span><span class="n">seL4_TCB_SetTimeoutEndpoint</span><span class="err">`</span> <span class="o">-</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">timeout</span> <span class="n">fault</span> <span class="n">endpoint</span> <span class="k">for</span> <span class="n">a</span> <span class="n">TCB</span><span class="p">.</span>
-
-<span class="cp">### Reply objects
-</span>
-<span class="n">The</span> <span class="n">MCS</span> <span class="n">API</span> <span class="n">also</span> <span class="n">makes</span> <span class="n">the</span> <span class="n">reply</span> <span class="n">channel</span> <span class="n">explicit</span><span class="o">:</span> <span class="n">reply</span> <span class="n">capabilities</span> <span class="n">are</span> <span class="n">now</span> <span class="n">fully</span> <span class="n">fledged</span> <span class="n">objects</span> 
-<span class="n">which</span> <span class="n">must</span> <span class="n">be</span> <span class="n">provided</span> <span class="n">by</span> <span class="n">a</span> <span class="kr">thread</span> <span class="n">on</span> <span class="err">`</span><span class="n">seL4_Recv</span><span class="err">`</span> <span class="n">operations</span><span class="p">.</span> <span class="n">They</span> <span class="n">are</span> <span class="n">used</span> <span class="n">to</span> <span class="n">track</span> <span class="n">the</span> <span class="n">scheduling</span>
-<span class="n">context</span> <span class="n">donation</span> <span class="n">chain</span> <span class="n">and</span> <span class="k">return</span> <span class="n">donated</span> <span class="n">scheduling</span> <span class="n">contexts</span> <span class="n">to</span> <span class="n">callers</span><span class="p">.</span>
-
-<span class="n">Please</span> <span class="n">see</span> <span class="n">the</span> <span class="p">[</span><span class="n">release</span> <span class="n">notes</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//docs.sel4.systems/sel4_release/seL4_9.0.0-mcs) and 
-</span><span class="p">[</span><span class="n">manual</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//docs.sel4.systems/sel4_release/seL4_9.0.0-mcs.html) for further details
-</span> <span class="n">on</span> <span class="n">the</span> <span class="n">API</span> <span class="n">changes</span><span class="p">.</span> 
- 
-<span class="cp">## Exercises
-</span>
-<span class="n">In</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">state</span> <span class="n">of</span> <span class="n">the</span> <span class="n">tutorial</span><span class="p">,</span> <span class="n">the</span> <span class="n">main</span> <span class="n">function</span> <span class="n">in</span> <span class="err">`</span><span class="n">mcs</span><span class="p">.</span><span class="n">c</span><span class="err">`</span> <span class="n">is</span> <span class="n">running</span> <span class="n">in</span> <span class="n">one</span> <span class="n">process</span><span class="p">,</span> <span class="n">and</span> <span class="n">the</span> 
-<span class="n">following</span> <span class="n">loop</span> <span class="n">from</span> <span class="err">`</span><span class="n">spinner</span><span class="p">.</span><span class="n">c</span><span class="err">`</span> <span class="n">is</span> <span class="n">running</span> <span class="n">in</span> <span class="n">another</span> <span class="n">process</span><span class="o">:</span>
-
-
+    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to configure schedcontext"</span><span class="p">);</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int i = 0;
-while (1) {
-    printf("Yield\n");
-    seL4_Yield();
-} ```
+
+<h3 id="schedcontext-binding">SchedContext Binding</h3>
+
+<p>Thread control blocks (TCBs) must have a scheduling context configured with non-zero budget and period
+ in order to be picked by the scheduler. This 
+can by invoking the scheduling context capability with the <code class="highlighter-rouge">seL4_SchedContext_Bind</code> invocation, or by
+using <code class="highlighter-rouge">seL4_TCB_SetSchedParams</code>, which takes a scheduling context capability. Below is example code for
+binding a TCB and a scheduling context.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedContext_Bind</span><span class="p">(</span><span class="n">sched_context</span><span class="p">,</span> <span class="n">spinner_tcb</span><span class="p">);</span>
+    <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to bind sched_context to round_robin_tcb"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>TCB’s can only be bound to one scheduling context at a time, and vice versa. If a scheduling context has not
+been configured with any time, then although the TCB has a scheduling context it will remain ineligible 
+for scheduling.</p>
+
+<h3 id="bounding-execution">Bounding execution</h3>
+
+<p>For partial scheduling contexts, an upper bound on execution is enforced by seL4 using the <em>sporadic server</em>
+algorithm, which work by guaranteeing the <em>sliding window</em> constrain, meaning that during any period, the
+budget cannot be exceeded. This is achieved by tracking the eligible budget in chunks called 
+<em>replenishments</em> (abbreviated to <code class="highlighter-rouge">refills</code> in the API for brevity). A replenishment is simply an amount 
+ of time, and a timestamp from which that time can be consumed. We explain this now through an example:</p>
+
+<p>Consider a scheduling context with period <em>T</em> and budget <em>C</em>. Initially, the scheduling context has 
+a single replenishment of size <em>C</em> which is eligible to be used from time <em>t</em>.</p>
+
+<p>The scheduling context is scheduled at time <em>t</em> and blocks at time <em>t + n</em>. A new replenishment is then scheduled
+for time <em>t+T</em> for <em>n</em>. The existing replenishment is updated to <em>C - n</em>, subtracting the amount consumed.
+For further details on the sporadic server algorithm, see the 
+<a href="https://dl.acm.org/citation.cfm?id=917665">original paper</a>.</p>
+
+<p>If the replenishment data structure is full, replenishments are merged and the upper bound on execution is
+reduced. For this reason, the bound on execution is configurable with the <code class="highlighter-rouge">extra_refills</code> parameter
+on scheduling contexts. By default, scheduling contexts contain only two parameters, meaning if a 
+scheduling context is blocked, switched or preempted more than twice, the rest of the budget is forfeit until 
+the next period. <code class="highlighter-rouge">extra_refills</code> provides more replenishment data structures in a scheduling context. Note 
+that the higher the number of replenishments the more fragmentation of budget can occur, which will increase
+scheduling overhead.</p>
+
+<p><code class="highlighter-rouge">extra_refills</code> itself is bounded by the size of a scheduling context, which is itself configurable. 
+On scheduling context creation a size can be specified, and must be <code class="highlighter-rouge">&gt; seL4_MinSchedContextBits</code>. The 
+maximum number of extra refills that can fit into a specific scheduling context size can be calculated
+with the function <code class="highlighter-rouge">seL4_MaxExtraRefills()</code> provided in <code class="highlighter-rouge">libsel4</code>.</p>
+
+<p>Threads bound to scheduling contexts that do not have an available replenishment are placed into an ordered
+queue of threads, and woken once their next replenishment is ready.</p>
+
+<h3 id="scheduler">Scheduler</h3>
+
+<p>The seL4 scheduler is largely unchanged: the highest priority, non-blocked thread with a configured
+ scheduling context that has available budget is chosen by the scheduler to run.</p>
+
+<h3 id="passive-servers">Passive servers</h3>
+
+<p>The MCS extensions allow for RPC style servers to run on client TCBs’ scheduling contexts. This is achived by 
+unbinding the scheduling context once a server is blocked on an endpoint, rendering the server <em>passive</em>. 
+Caller scheduling contexts are donated to the server on <code class="highlighter-rouge">seL4_Call</code> and returned on <code class="highlighter-rouge">seL4_ReplyRecv</code>.</p>
+
+<p>Passive servers can also receive scheduling contexts from their bound notification object, which is 
+achieved by binding a notification object using <code class="highlighter-rouge">seL4_SchedContext_Bind</code>.</p>
+
+<h3 id="timeout-faults">Timeout faults</h3>
+
+<p>Threads can register a timeout fault handler using <code class="highlighter-rouge">seL4_TCB_SetTimeoutEndpoint</code>. Timeout fault
+handlers are optional and are raised when a thread’s replenishment expires <em>and</em> they have a valid handler
+registered. The timeout fault message from the kernel contains the data word which can be used to identify the
+scheduling context that the thread was using when the timeout fault occurred, and the amount of time
+consumed by the thread since the last fault or <code class="highlighter-rouge">seL4_SchedContext_Consumed</code>.</p>
+
+<h3 id="new-invocations">New invocations</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Bind</code> - bind a TCB or Notification capability to the invoked scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> - unbind any objects from the invoked scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindObject</code>- unbind a specific object from the invoked scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_YieldTo</code> - if the thread running on the invoked scheduling context is 
+schedulable, place it at the head of the scheduling queue for its priority. For same priority threads, this 
+will result in the target thread being scheduled. Return the amount of time consumed by this scheduling 
+context since the last timeout fault, <code class="highlighter-rouge">YieldTo</code> or <code class="highlighter-rouge">Consumed</code> invocation.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Consumed</code> - Return the amount of time consumed by this scheduling 
+context since the last timeout fault, <code class="highlighter-rouge">YieldTo</code> or <code class="highlighter-rouge">Consumed</code> invocation.</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetTimeoutEndpoint</code> - Set the timeout fault endpoint for a TCB.</li>
+</ul>
+
+<h3 id="reply-objects">Reply objects</h3>
+
+<p>The MCS API also makes the reply channel explicit: reply capabilities are now fully fledged objects 
+which must be provided by a thread on <code class="highlighter-rouge">seL4_Recv</code> operations. They are used to track the scheduling
+context donation chain and return donated scheduling contexts to callers.</p>
+
+<p>Please see the <a href="https://docs.sel4.systems/sel4_release/seL4_9.0.0-mcs">release notes</a> and 
+<a href="https://docs.sel4.systems/sel4_release/seL4_9.0.0-mcs.html">manual</a> for further details
+ on the API changes.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>In the initial state of the tutorial, the main function in <code class="highlighter-rouge">mcs.c</code> is running in one process, and the 
+following loop from <code class="highlighter-rouge">spinner.c</code> is running in another process:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    int i = 0;
+    while (1) {
+        printf("Yield\n");
+        seL4_Yield();
+    }
 </code></pre></div></div>
 
 <p>Both processes share the same priority. The code in <code class="highlighter-rouge">mcs.c</code> binds
@@ -589,7 +599,7 @@ occurs in one go.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic with 6 extra refills
 </span></code></pre></div></div>
 
-<h3 id="passive-servers">Passive servers</h3>
+<h3 id="passive-servers-1">Passive servers</h3>
 
 <p>Now look to the third process, <code class="highlighter-rouge">server.c</code>, which is a very basic echo server. It currently does 
 not have a scheduling context, and needs one to initialise.</p>
@@ -622,7 +632,7 @@ Yield
 
 <p>From this point, the server runs on the <code class="highlighter-rouge">mcs</code> process’s scheduling context.</p>
 
-<h3 id="timeout-faults">Timeout Faults</h3>
+<h3 id="timeout-faults-1">Timeout Faults</h3>
 
 <p><strong>Exercise</strong> Set the data field of <code class="highlighter-rouge">sched_context</code> using <code class="highlighter-rouge">seL4_SchedControl_Configure</code> and set a 10s period, 1ms 
 budget and 0 extra refills.</p>
