@@ -55,14 +55,6 @@ Instructions on how to do this are not included here.
 
 ## Booting via DFU
 
-
-Before attempting to boot over DFU on the TX1, be sure to double check
-that the seL4 build process is outputting a raw binary and not an ELF.
-You can ascertain this by doing a make menuconfig and then proceeding
-through: Tools => Build elfloader => Boot image type
-
-Be sure that Binary Boot Image is selected.
-
 To boot via DFU, attach the usb-mini end of a USB cable to the USB-mini
 port on the TX1. Then plug in the power supply for the TX1 and power it
 on. When the TX1 is powered on, pay attention to the text being printed
@@ -88,11 +80,6 @@ find the TX1 device, try unplugging and replugging in the USB mini-cable
 that connects your PC to the TX1.
 
 ## Booting via SD Card
- Please be sure that your build process is
-producing a raw binary image and not an ELF image. You can do this by
-executing make menuconfig and then proceeding through: Tools =>
-Build elfloader => Boot image type. Be sure that Binary Boot Image is
-selected.
 
 Get an SD card and format it with either FAT32, EXT2 or EXT4. Then build
 seL4test, or any of the other seL4 projects. The resulting image file
@@ -123,12 +110,6 @@ go 0x82000000
 ```
 
 ## Internal 15 GiB USB mass storage
-
-
-Please be sure that your build process is producing a raw binary image
-and not an ELF image. You can do this by executing make menuconfig and
-then proceeding through: Tools => Build elfloader =>
-Boot image type. Be sure that Binary Boot Image is selected.
 
 Booting off the internal USB mass storage is almost the same as booting
 off the SD card, but in particular, you should do something along the
