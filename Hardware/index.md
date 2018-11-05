@@ -14,10 +14,11 @@ the *Status* column, as follows:
 ## Simulating seL4
 
 Running seL4 in a simulator is a quick way to test it out and iteratively develop software. However,
-not that the feature support is limited by the simulator.
+note that feature support is limited by the simulator.
+
+See [Running It](seL4Test#RunningIt) for how to run seL4 using Qemu.
 
 * [Running seL4 on VMware](VMware)
-* [Running seL4 on Qemu](Qemu)
 
 ## x86
 

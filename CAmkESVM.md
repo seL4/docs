@@ -4,10 +4,25 @@ toc: true
 
 # CAmkES x86 VM
 
+## Prerequisites
 
+* Get the dependencies for building CAmkES by following
+the instructions [here](HostDependencies#camkes-build-dependencies)
+* Your host machine has to have a CPU that supports Vt-x virtualization
+ (for Intel CPUs), or AMD-V (for AMD CPUs, but that wasn't tested). Any
+  newer i7 core should have Vt-x. Note that you might have to enable it
+  first from BIOS. You can always check by `lscpu` and look for **vmx** flag.
 
+## Tutorials
 
+Use the following tutorials to learn about the VM:
 
+{% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
+{%- for t in tutorials %}
+{%- if t.tutorial-order contains 'vm' %}
+1. [{{t.title}}]({{t.url}}) {{t.description}}
+{%- endif %}
+{%- endfor %}
 
 ## Booting from hard drive
 
