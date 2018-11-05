@@ -172,38 +172,6 @@ The process we have described is similar for x86, though if you are on
 an x86 or x86_64 host you can simply use your platform's native GDB,
 gdb.
 
-Below is another example for debugging userspace sel4test on ia32:
-```bash
-# Apply a sel4test config for simulating using qemu.
-make ia32_release_xml_defconfig
-
-# After building, check that all of the tests run and pass.
-make simulate-ia32​
-
-# Invoke qemu with the flags -s -S. It should block until you attach a gdb instance.
-# -s shorthand for -gdb tcp::1234
-# -S freeze CPU at startup (use 'c' to start execution)
-qemu-system-i386 -m 512 -nographic -kernel images/kernel-ia32-pc99 -initrd images/sel4test-driver-image-ia32-pc99 -s -S
-
-# Start a gdb instance in another window.
-gdb stage/x86/pc99/bin/sel4test-driver # (Or gdb stage/x86/pc99/bin/sel4test-tests)
-
-# Attach to the qemu instance using remote gdb serial server protocol.
-(gdb) target remote :1234
-# Remote debugging using :1234
-# 0x0000fff0 in ?? ()
-
-# Set a breakpoint at main.
-(gdb) break main
-# Breakpoint 1 at 0x8048460: file /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c, line 459.
-
-# Resume the qemu cpu. 
-(gdb) continue
-# Continuing. 
-# # It should hit the first breakpoint.
-# Breakpoint 1, main () at /tmp/tmp.hlCOEKke8y/apps/sel4test-driver/src/main.c:459
-```
-
 #### Userspace debugging
 
 The steps for debugging a userspace application on seL4 are identical to
