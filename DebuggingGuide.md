@@ -39,7 +39,6 @@ Similarly, enable this setting by using `make menuconfig` and setting:
 
 ## Qemu
 
-
 [Qemu](http://www.qemu.org/) is a simulator that provides
 software emulation of a hardware platform. It is useful for developing
 and debugging embedded software when you do not have access to the
@@ -72,12 +71,11 @@ make simulate-kzm # Simulate KZM execution
 make simulate-ia32 # Simulate x86 execution
 ```
 
-
 When simulating a seL4 system in Qemu, you should see output that is
 directed to the (emulated) UART device on your terminal:
 ```
 ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
-  paddr=[82000000..8225001f] 
+  paddr=[82000000..8225001f]
 ELF-loading image 'kernel'
   paddr=[80000000..80033fff]
   vaddr=[f0000000..f0033fff]
@@ -114,7 +112,6 @@ possible to get a richer debugging environment by connecting GDB to
 Qemu.
 
 ### Using GDB with Qemu
-
 
 [GDB](https://www.gnu.org/s/gdb/) is a debugger commonly used
 in C application development. Though not as seamless as debugging a
@@ -225,7 +222,6 @@ gdb stage/x86/pc99/bin/sel4test-driver # (Or gdb stage/x86/pc99/bin/sel4test-tes
 
 #### Userspace debugging
 
-
 The steps for debugging a userspace application on seL4 are identical to
 the ones we have just seen, except that we pass GDB a symbol table for
 userspace rather than the kernel. For example, using the same sel4test
@@ -240,7 +236,7 @@ After connecting to Qemu, we can instruct GDB to break on the userspace
 ```
 Reading symbols from build/arm/imx31/sel4test-driver/sel4test-driver.bin...done.
 (gdb) target remote :1234
-Remote debugging using :1234 0x82000000 in ?? () 
+Remote debugging using :1234 0x82000000 in ?? ()
 (gdb) break printf
 Breakpoint 1 at 0x30870: file libs/libmuslc/src/stdio/printf.c, line 9.
 (gdb)
@@ -276,7 +272,6 @@ debugging, it may be simpler to modify your system setup to ensure only
 one thread is running.
 
 ## Objdump
-
 
 Objdump can be used to disassemble an ELF file, be it a kernel or an
 application. This can be used to lookup the instruction where a fault
@@ -323,7 +318,6 @@ make objdump-tests | less
 ```
 
 ## In kernel debugging
-
 
 seL4 does not currently have a kernel debugger. As a result, most of our
 debugging is done with:
