@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-11-06 09:22:51 +1100 -->
+<!-- Page last generated 2018-11-06 09:59:24 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Debugging userspace threads | seL4 docs</title>
+    <title>Hardware debugging of userspace threads | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,7 +68,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Debugging userspace threads</span>
+            <span property="name">Hardware debugging of userspace threads</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -279,7 +279,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="debugging-userspace-threads">Debugging userspace threads</h1>
+      <h1 id="hardware-debugging-of-userspace-threads">Hardware debugging of userspace threads</h1>
 
 <h2 id="overview">Overview</h2>
 <p>The seL4 microkernel leverages the hardware debugging
@@ -291,9 +291,7 @@ as the GNU Debugger.</p>
 
 <h2 id="enabling-this-feature">Enabling this feature</h2>
 <p>You can enable and disable the hardware
-debugging API by going through the kernel’s configuration system:
-<code class="highlighter-rouge">make menuconfig</code> -&gt; <code class="highlighter-rouge">seL4 Kernel</code> -&gt; <code class="highlighter-rouge">Build Options</code> -&gt;
-<code class="highlighter-rouge">Enable hardware breakpoint and single-stepping API</code>.</p>
+debugging API by going through the kernel’s configuration system by passing <code class="highlighter-rouge">-DHardwareDebugAPI=1</code>.</p>
 
 <p>Not all platforms support this feature for two main reasons:</p>
 
@@ -309,7 +307,7 @@ debugging API by going through the kernel’s configuration system:
 <p>Caveat lector: If you compile the kernel with support for the debug API,
 and your ARM platform doesn’t support it, <strong>your kernel will abort at
 boot</strong>, with a message (or without a message if you are compiling the
-kernel in release mode (CONFIG_DEBUG_BUILD=n)).</p>
+kernel in release mode).</p>
 
 <h2 id="summary-of-the-invocations">Summary of the invocations</h2>
 <p>The invocations are documented in
@@ -377,7 +375,7 @@ kernel source code and then <code class="highlighter-rouge">cd manual</code> and
         </li>
         
           <li>
-            Site last updated: Tue Nov 6 09:18:35 2018 +1100 44f0df2
+            Site last updated: Tue Nov 6 09:18:35 2018 +1100 8e3c95f
           </li>
           <li>
             
@@ -418,7 +416,7 @@ kernel source code and then <code class="highlighter-rouge">cd manual</code> and
               
             
               
-                Page last updated: Mon Apr 9 09:10:08 2018 +1000 d64c6eb
+                Page last updated: Tue Nov 6 09:18:35 2018 +1100 8e3c95f
               
             
               
