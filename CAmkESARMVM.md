@@ -5,9 +5,13 @@
 ```bash
 repo init -u https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
 repo sync
-make tk1_vm_defconfig
-make
+mkdir build
+cd build
+../init-build.sh -DAARCH32=TRUE -DCAMKES_VM_APP=tk1_vm
+ninja
 ```
+
+To build for the odroid-XU instead of the tk1, use `-DCAMKES_VM_APP=odroid_vm`.
 
 An ELF file will be left in `images/capdl-loader-experimental-image-arm-tk1\` We normally boot using TFTP, by first copying `capdl-loader-experimental-image-arm-tk1` to a tftpserver then on the U-Boot serial console doing:
 ```bash
