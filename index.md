@@ -15,7 +15,7 @@ to find pages that have moved if it's not obvious whre they are from the index h
 - [seL4Test](seL4Test.md)
 - [Debugging guide](DebuggingGuide.md)
 - [Benchmarking guide](BenchmarkingGuide.md)
-- [Virtualisation on seL4](CAmkESVM.md)
+- [Virtualisation on seL4](VM)
 - [Rust](Rust.md)
 - [Host Build Dependencies](HostDependencies.md)
 

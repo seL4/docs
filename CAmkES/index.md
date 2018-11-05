@@ -62,7 +62,7 @@ Can be found [here](Terminology.md).
 ## CAmkES VM
 
 
-Information about the x86 camkes vm can be found [here](/CAmkESVM).
+Information about the x86 camkes vm can be found [here](/VM/CAmkESX86VM).
 
 ## Visual CAmkES
 

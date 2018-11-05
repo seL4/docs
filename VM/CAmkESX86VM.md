@@ -28,7 +28,7 @@ Use the following tutorials to learn about the VM:
 
 
 These instructions are for ubuntu. For CentOS instructions, see
-[CAmkESVMCentOS](/CAmkESVMCentOS).
+[CAmkESVMCentOS](CAmkESVMCentOS).
 
 So far we've only run a tiny linux on a ram disk. What if we want to run
 Ubuntu booting off a hard drive? This section will explain the changes
