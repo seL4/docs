@@ -249,6 +249,11 @@ If you have symbols and want (C) source information in your disassembly
 ```bash
 ${CROSS_COMPILER_PREFIX}objdump -DS binary_file_name
 ```
+
+## Hardware debugging
+
+For some platforms, seL4 supports hardware debugging. See [Hardware debugging of userspace threads](DebuggingUserspace).
+
 ## In kernel debugging
 
 seL4 does not currently have a kernel debugger. As a result, most of our

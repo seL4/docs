@@ -1,4 +1,4 @@
-# Debugging userspace threads
+# Hardware debugging of userspace threads
 
 ## Overview
  The seL4 microkernel leverages the hardware debugging
@@ -10,9 +10,7 @@ as the GNU Debugger.
 
 ## Enabling this feature
  You can enable and disable the hardware
-debugging API by going through the kernel's configuration system:
-`make menuconfig` -> `seL4 Kernel` -> `Build Options` ->
-`Enable hardware breakpoint and single-stepping API`.
+debugging API by going through the kernel's configuration system by passing `-DHardwareDebugAPI=1`.
 
 Not all platforms support this feature for two main reasons:
 
@@ -26,7 +24,7 @@ Not all platforms support this feature for two main reasons:
 Caveat lector: If you compile the kernel with support for the debug API,
 and your ARM platform doesn't support it, **your kernel will abort at
 boot**, with a message (or without a message if you are compiling the
-kernel in release mode (CONFIG_DEBUG_BUILD=n)).
+kernel in release mode).
 
 ## Summary of the invocations
  The invocations are documented in
