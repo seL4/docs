@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAmkES Next | seL4 docs</title>
+    <title>Virtualisation on seL4 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,7 +68,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">CAmkES Next</span>
+            <span property="name">Virtualisation on seL4</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -278,101 +278,17 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#setting-up-your-machine">Setting up your machine</a></li>
-<li class="toc-entry toc-h2"><a href="#download-and-build-example-camkes-app">Download and build example CAmkES app</a></li>
-</ul>
-      </nav>
-    
     <div class="content">
-      <h1 id="camkes-next">CAmkES Next</h1>
+      <h1 id="virtualisation-on-sel4">Virtualisation on seL4</h1>
 
-<p>CAmkES Next refers to the “next” branch of camkes-tools. It is the
-active development branch of camkes.</p>
+<p>Multiple projects exist for using virtualisation with seL4.</p>
 
-<p>Github: <a href="https://github.com/seL4/camkes-tool/tree/next">https://github.com/seL4/camkes-tool/tree/next</a></p>
+<ul>
+  <li><a href="CAmkESARMVM">ARM virtualisation</a></li>
+  <li><a href="CAmkESX86VM">x86 virtualisation</a></li>
+  <li><a href="CAmkESVMCentOS">CentOS</a></li>
+</ul>
 
-<p>Main CAmkES page: <a href="/CAmkES">CAmkES</a></p>
-
-<p>Summary of differences between CAmkES next and CAmkES master:
-<a href="/CAmkESDifferences">CAmkESDifferences</a></p>
-
-<p>VisualCAmkes, a GUI tool to view a CAmkES system: <a href="/VisualCAmkES/">VisualCAmkES</a></p>
-
-<h2 id="setting-up-your-machine">Setting up your machine</h2>
-
-<p>The following commands were tested on a fresh installation of Ubuntu
-16.04. This will install the tools and libraries required to build seL4
-and CAmkES Next. Note that the dependencies are different from those of
-the “master” branch of CAmkES.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install git repo libncurses-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev libsqlite3-dev \
-libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi
-
-pip install six plyplus pyelftools orderedset jinja2
-
-curl -sSL https://get.haskellstack.org/ | sh
-</code></pre></div></div>
-
-<p>If you are using Ubuntu 14.04, then you will need to install some extra
-packages and update your compiler. Instead of the above do the following
-(the main changes are: replace repo with phablet-tools, add python-dev,
-and install gcc-5 and gcc-5-multilib from the PPA and set it as the
-default gcc):</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add-apt-repository ppa:ubuntu-toolchain-r/test
-apt-get update
-apt-get install git phablet-tools libncurses-dev python-dev python-pip libxml2-utils cmake ninja-build clang libssl-dev \
-libsqlite3-dev libcunit1-dev gcc-multilib expect qemu-system-x86 qemu-system-arm gcc-arm-none-eabi binutils-arm-none-eabi \
-gcc-5 gcc-5-multilib
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60
-
-pip install camkes-deps
-
-curl -sSL https://get.haskellstack.org/ | sh
-</code></pre></div></div>
-
-<p>On Archlinux:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pacman -S binutils gcc-multilib arm-none-eabi-binutils arm-none-eabi-gcc ccache clang moreutils cpio python python-pip expect \
-cmake ninja m4 automake autoconf pkg-config valgrind cppcheck python-pylint qemu qemu-arch-extra openssl bcunit
-
-yaourt -S bcunit-cunit-compat spin
-
-pip install camkes-deps
-
-curl -sSL https://get.haskellstack.org/ | sh
-</code></pre></div></div>
-
-<p>If you are using Debian, or Ubuntu 16.10 or higher, you’ll need to
-modify the compiler/linker flags for building ghc. Modify
-<code class="highlighter-rouge">~/.stack/programs/x86_64-linux/ghc-8.0.1/lib/ghc-8.0.1/settings</code>.
-Replace the lines:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ("C compiler flags", " -fno-stack-protector"),
- ("C compiler link flags", ""),
-</code></pre></div></div>
-<p>with</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ("C compiler flags", " -fno-PIE  -fPIC -fno-stack-protector"),
- ("C compiler link flags", "-no-pie -fPIC"),
-</code></pre></div></div>
-
-<p>See <a href="https://github.com/commercialhaskell/stack/issues/2712">this stack issue on GitHub</a> for more information.</p>
-
-<h2 id="download-and-build-example-camkes-app">Download and build example CAmkES app</h2>
-
-<p>Create and enter an empty working directory before running the commands
-below.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download CAmkES, seL4, user libraries and example apps</span>
-repo init <span class="nt">-u</span> https://github.com/seL4/camkes-manifest.git <span class="nt">-m</span> next.xml
-repo sync
-
-<span class="c"># Select an app to build (build configs for example apps can be found in the "configs" directory)</span>
-make arm_simple_defconfig
-
-<span class="c"># Compile it</span>
-make
-
-<span class="c"># Run the app in qemu</span>
-qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span> <span class="nt">-kernel</span> images/capdl-loader-experimental-image-arm-imx31
-</code></pre></div></div>
 
     </div>
   </div>
@@ -422,8 +338,6 @@ qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span
               
             
               
-                Page last updated: Wed Jun 13 15:55:02 2018 +1000 9773f34
-              
             
               
             
@@ -587,6 +501,8 @@ qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span
             
               
             
+              
+                Page last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
               
             
               
@@ -686,9 +602,9 @@ qemu-system-arm <span class="nt">-M</span> kzm <span class="nt">-nographic</span
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/CAmkESNext.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/VM/index.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/CAmkESNext.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/VM/index.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-11-06 09:59:24 +1100 -->
+<!-- Page last generated 2018-11-06 10:48:52 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAmkES ARM VMM | seL4 docs</title>
+    <title>Boot CentOS on the CAmkES VM | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,9 +67,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/VM/">
+              <span property="name"><b>Virtualisation on seL4</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">CAmkES ARM VMM</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">Boot CentOS on the CAmkES VM</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -279,25 +290,12 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="camkes-arm-vmm">CAmkES ARM VMM</h1>
-<p>This page describes the ARM virtual machine monitor. ‘Out-of-the-box’ it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the ‘‘original’’ XU, not the current XU4)</p>
+      <h1 id="boot-centos-on-the-camkes-vm">Boot CentOS on the CAmkES VM</h1>
 
-<h2 id="getting-and-building">Getting and Building</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
-repo sync
-make tk1_vm_defconfig
-make
-</code></pre></div></div>
-
-<p>An ELF file will be left in <code class="highlighter-rouge">images/capdl-loader-experimental-image-arm-tk1\</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-experimental-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp tftpboot <span class="nv">$loadaddr</span>
-/capdl-loader-experimental-image-arm-tk1
-bootelf
-</code></pre></div></div>
-
-<h2 id="notes">Notes</h2>
-<p>The default setup does not pass though many devices to the Linux kernel. If you <code class="highlighter-rouge">make menuconfig</code> you can set <code class="highlighter-rouge">insecure</code> mode in the <code class="highlighter-rouge">Applications</code> submenu; this is meant to pass through all devices, but not
-everything has been tested and confirmed to work yet. In particular, the SMMU needs to have extra entries added for any DMA-capable devices such as SATA.</p>
+<p>See the
+<a href="https://github.com/seL4/camkes-vm-examples/tree/master/cma34cr_centos">README.md</a>
+in the <a href="https://github.com/seL4/camkes-vm-examples">CAmkES VM Examples
+repository</a> for details</p>
 
     </div>
   </div>
@@ -328,7 +326,7 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
         </li>
         
           <li>
-            Site last updated: Tue Nov 6 09:18:35 2018 +1100 8e3c95f
+            Site last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
           </li>
           <li>
             
@@ -341,7 +339,7 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
               
             
               
-                Page last updated: Fri May 11 15:27:31 2018 +1000 01be067
+            
               
             
               
@@ -506,6 +504,8 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
             
               
             
+              
+                Page last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
               
             
               
@@ -609,9 +609,9 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/CAmkESARMVM.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/VM/CAmkESVMCentOS.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/CAmkESARMVM.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/VM/CAmkESVMCentOS.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

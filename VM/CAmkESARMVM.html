@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-11-06 09:59:24 +1100 -->
+<!-- Page last generated 2018-11-06 10:48:52 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boot CentOS on the CAmkES VM | seL4 docs</title>
+    <title>CAmkES ARM VMM | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,9 +67,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/VM/">
+              <span property="name"><b>Virtualisation on seL4</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Boot CentOS on the CAmkES VM</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">CAmkES ARM VMM</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -279,12 +290,29 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="boot-centos-on-the-camkes-vm">Boot CentOS on the CAmkES VM</h1>
+      <h1 id="camkes-arm-vmm">CAmkES ARM VMM</h1>
+<p>This page describes the ARM virtual machine monitor. ‘Out-of-the-box’ it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the ‘‘original’’ XU, not the current XU4)</p>
 
-<p>See the
-<a href="https://github.com/seL4/camkes-vm-examples/tree/master/cma34cr_centos">README.md</a>
-in the <a href="https://github.com/seL4/camkes-vm-examples">CAmkES VM Examples
-repository</a> for details</p>
+<h2 id="getting-and-building">Getting and Building</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
+repo sync
+mkdir build
+<span class="nb">cd </span>build
+../init-build.sh <span class="nt">-DAARCH32</span><span class="o">=</span>TRUE <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>tk1_vm
+ninja
+</code></pre></div></div>
+
+<p>To build for the odroid-XU instead of the tk1, use <code class="highlighter-rouge">-DCAMKES_VM_APP=odroid_vm</code>.</p>
+
+<p>An ELF file will be left in <code class="highlighter-rouge">images/capdl-loader-experimental-image-arm-tk1\</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-experimental-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp tftpboot <span class="nv">$loadaddr</span>
+/capdl-loader-experimental-image-arm-tk1
+bootelf
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+<p>The default setup does not pass though many devices to the Linux kernel. If you <code class="highlighter-rouge">make menuconfig</code> you can set <code class="highlighter-rouge">insecure</code> mode in the <code class="highlighter-rouge">Applications</code> submenu; this is meant to pass through all devices, but not
+everything has been tested and confirmed to work yet. In particular, the SMMU needs to have extra entries added for any DMA-capable devices such as SATA.</p>
 
     </div>
   </div>
@@ -315,7 +343,7 @@ repository</a> for details</p>
         </li>
         
           <li>
-            Site last updated: Tue Nov 6 09:18:35 2018 +1100 8e3c95f
+            Site last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
           </li>
           <li>
             
@@ -340,7 +368,7 @@ repository</a> for details</p>
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 e169425
+            
               
             
               
@@ -491,6 +519,8 @@ repository</a> for details</p>
             
               
             
+              
+                Page last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
               
             
               
@@ -596,9 +626,9 @@ repository</a> for details</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/CAmkESVMCentOS.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/VM/CAmkESARMVM.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/CAmkESVMCentOS.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/VM/CAmkESARMVM.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
