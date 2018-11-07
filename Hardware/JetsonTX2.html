@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Documentation | seL4 docs</title>
+    <title>Jetson TX2 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,9 +67,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Documentation</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">Jetson TX2</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -278,54 +289,45 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
+<li class="toc-entry toc-h2"><a href="#booting-via-pxe">Booting via PXE</a></li>
+</ul>
+      </nav>
+    
     <div class="content">
-      <h1 id="documentation">Documentation</h1>
-<h2 id="kernel">Kernel</h2>
+      <h1 id="jetson-tx2">Jetson TX2</h1>
 
-<ul>
-  <li><a href="http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml">Technical overview paper</a></li>
-  <li><a href="https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml">L4 Microkernels: The Lessons from 20 Years of Research and Deployment</a>, 
-a retrospective explaining how we got to where we are;</li>
-  <li><a href="GettingStarted">Getting started</a></li>
-  <li><a href="http://ssrg.nicta.com.au/projects/seL4/">NICTA seL4
-    research project pages</a></li>
-  <li><a href="https://www.cse.unsw.edu.au/~cs9242/14/lectures/">UNSW Advanced OS lecture slides</a>, especialy the Introduction and
-    Microkernel Design lectures</li>
-  <li><a href="https://github.com/seL4/seL4/releases/latest">Release download page</a> for the current release.</li>
-  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">Manual</a>
-    for the current release.</li>
-  <li><a href="seL4ManualAPIGeneration">Explanation of how the API docs in the manual are generated</a></li>
-</ul>
+<p>The Jetson TX2 is an embedded system-on-module (SOM) developed by NVIDIA.</p>
 
-<h3 id="building-the-manual-for-a-specific-version">Building the manual for a specific version</h3>
+<p><a href="https://elinux.org/Jetson_TX2">https://elinux.org/Jetson_TX2</a></p>
 
-<p>To get the latest version of the manual, checkout the seL4 source code
-then:</p>
+<p>The seL4 kernel has a limited port to the TX2 which supports the SoM
+only in 64-bit mode. SMP, SMMU, Hyp-mode, etc are not supported by the
+current port.</p>
 
-<p><code class="highlighter-rouge"> cd manual &amp;&amp; make </code></p>
+<h2 id="building-sel4test">Building seL4test</h2>
 
-<p>You need LaTeX and doxygen installed, and if all succeeds a fresh manual
-will be produced in manual.pdf.</p>
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+mkdir cbuild
+<span class="nb">cd </span>cbuild
+../init-build <span class="nt">-DPLATFORM</span><span class="o">=</span>tx2 <span class="nt">-DAARCH64</span><span class="o">=</span>1
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
 
-<h2 id="proofs">Proofs</h2>
+</code></pre></div></div>
 
-<ul>
-  <li><a href="http://sel4.systems/Info/Docs/seL4-spec.pdf">Formal specification</a></li>
-  <li><a href="http://github.com/seL4/l4v/">Git Repository and Build
-    instructions</a></li>
-  <li><a href="http://ssrg.nicta.com.au/projects/TS/">NICTA Trustworthy
-    Systems research project pages</a></li>
-  <li>
-    <p>Isabelle Proof Assistant:</p>
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
-    <ul>
-      <li><a href="http://concrete-semantics.org/">Concrete Semantics Isabelle textbook</a></li>
-      <li><a href="http://isabelle.in.tum.de/">Isabelle website</a></li>
-      <li><a href="http://stackoverflow.com/questions/tagged/isabelle">Isabelle on Stack Overflow</a></li>
-    </ul>
-  </li>
-</ul>
+<h2 id="booting-via-pxe">Booting via PXE</h2>
 
+<p>A U-Boot uImage will be created by the seL4 build system. This can be booted
+by U-Boot using PXE.</p>
 
     </div>
   </div>
@@ -407,8 +409,6 @@ will be produced in manual.pdf.</p>
               
             
               
-                Page last updated: Tue Jun 12 15:24:34 2018 +0200 8eaeeff
-              
             
               
             
@@ -440,6 +440,8 @@ will be produced in manual.pdf.</p>
             
               
             
+              
+                Page last updated: Tue Nov 6 16:02:51 2018 +1100 23164c9
               
             
               
@@ -645,9 +647,9 @@ will be produced in manual.pdf.</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Documentation.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/JetsonTX2.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Documentation.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/JetsonTX2.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
