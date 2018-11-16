@@ -18,10 +18,6 @@ Maintained: Data61
 For board details see
 [Sabre Lite](https://boundarydevices.com/product/sabre-lite-imx6-sbc/)
 
-# Building for the Sabre Lite
- For preset build config, use defconfigs
-called "sabre_" or "imx6"
-
 # Booting on the Sabre Lite
 ## Hardware Requirements
 * 5V/3A power supply
