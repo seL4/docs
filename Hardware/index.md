@@ -24,10 +24,10 @@ See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
 
 We support PC99-style Intel Architecture Platforms.
 
-| Platform              | Arch | Virtualisation | IOMMU | Status     | Contributed by | Maintained by |
-| -                     |  -   | -              | -     | -          | -              | -             |
-| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified | Data61         | Data61        |
-| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | Pending    | Data61         | Data61        |
+| Platform              | Arch | Virtualisation | IOMMU | Status                               | Contributed by | Maintained by |
+| -                     |  -   | -              | -     | -                                    | -              | -             |
+| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | Data61        |
+| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | FC (without VT-X, VT-D and fastpath) | Data61         | Data61        |
 
 ## ARM
 
