@@ -2,9 +2,9 @@
 toc: true
 ---
 
-{% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
-
 # Tutorials
+
+{% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
 
 This page collates all available tutorials on seL4 material.
 
