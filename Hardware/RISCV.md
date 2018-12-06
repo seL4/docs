@@ -83,7 +83,7 @@ You will need to make sure that `$RISCV/bin` has been added to your `PATH`.
 {% include sel4test.md %}
 
     You can also use run the tests on the 32-bit spike platform by
-    omitting the `-DRISCV64=TRUE` option.
+    replacing the `-DRISCV64=TRUE` option with `-DRISCV32=TRUE`.
 
 ### Continuing development
 
