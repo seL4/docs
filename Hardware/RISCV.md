@@ -93,7 +93,7 @@ On Ubuntu, these can be obtained with apt.
     ```
 
     You can also use run the tests on the 32-bit spike platform by
-    omitting the `-DRISCV64=TRUE` option.
+    replacing the `-DRISCV64=TRUE` option with `-DRISCV32=TRUE`.
 
     If make fails, you may need to install a few required python packages: sudo pip install sel4-deps
 
