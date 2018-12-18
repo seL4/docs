@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-12-05 13:35:47 +1100 -->
+<!-- Page last generated 2018-12-18 12:19:12 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -275,6 +275,10 @@
         <li>
   
         <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
             <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
         <li>
   
@@ -313,7 +317,13 @@
 <li class="toc-entry toc-h3"><a href="#unbinding-scheduling-contexts">Unbinding scheduling contexts</a></li>
 <li class="toc-entry toc-h3"><a href="#sporadic-threads">Sporadic threads</a></li>
 <li class="toc-entry toc-h3"><a href="#passive-servers-1">Passive servers</a></li>
-<li class="toc-entry toc-h3"><a href="#timeout-faults-1">Timeout Faults</a></li>
+<li class="toc-entry toc-h3"><a href="#timeout-faults-1">Timeout Faults</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#configuring-a-fault-endpoint-on-the-mcs-kernel">Configuring a fault endpoint on the MCS kernel:</a></li>
+<li class="toc-entry toc-h4"><a href="#configuring-a-fault-endpoint-on-the-master-kernel">Configuring a fault endpoint on the Master kernel:</a></li>
+<li class="toc-entry toc-h4"><a href="#exercise">Exercise:</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#further-exercises">Further exercises</a></li>
 </ul>
 </li>
@@ -636,6 +646,38 @@ Yield
 
 <h3 id="timeout-faults-1">Timeout Faults</h3>
 
+<p>But before we discuss timeout faults, we must first discuss the differences
+between configuring a fault endpoint on the master vs the MCS kernel. There is a
+minor difference in the way that the kernel is informed of the cap to a fault
+endpoint, between the master and MCS kernels.</p>
+
+<p>Regardless though, on both versions of the kernel, to inform the kernel of the
+fault endpoint for a thread, call the usual <code class="highlighter-rouge">seL4_TCB_SetSpace()</code>.</p>
+
+<h4 id="configuring-a-fault-endpoint-on-the-mcs-kernel">Configuring a fault endpoint on the MCS kernel:</h4>
+
+<p>On the MCS kernel the cap given to the kernel must be a cap to an object in
+the CSpace of the thread which is <em>calling the syscall</em> (<code class="highlighter-rouge">seL4_TCB_Configure()</code>)
+to give the cap to the kernel.</p>
+
+<p>This calling thread may be the handler thread, or some other thread which
+manages both the handler thread and the faulting thread. Or in an oddly designed
+system, it might be the faulting thread itself if the faulting thread is allowed
+to configure its own fault endpoint.</p>
+
+<p>The reason for this difference is merely that it is faster to lookup the fault
+endpoint this way since it is looked up only once at the time it is configured.</p>
+
+<h4 id="configuring-a-fault-endpoint-on-the-master-kernel">Configuring a fault endpoint on the Master kernel:</h4>
+
+<p>On the Master kernel the cap given to the kernel must be a cap to an object in
+the CSpace of the <em>faulting thread</em>.</p>
+
+<p>On the Master kernel, the fault endpoint cap is looked up from within the CSpace
+of the faulting thread everytime a fault occurs.</p>
+
+<h4 id="exercise">Exercise:</h4>
+
 <p><strong>Exercise</strong> Set the data field of <code class="highlighter-rouge">sched_context</code> using <code class="highlighter-rouge">seL4_SchedControl_Configure</code> and set a 10s period, 1ms 
 budget and 0 extra refills.</p>
 
@@ -706,9 +748,11 @@ server TCB and an SC to the notification object.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 5 11:23:16 2018 +1100 18f5730
+            Site last updated: Wed Dec 12 17:38:24 2018 +1100 e2a53c4
           </li>
           <li>
+            
+              
             
               
             

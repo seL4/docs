@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<!-- Page last generated 2018-12-18 12:19:12 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Faults | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Tutorials/">
+              <span property="name"><b>Tutorials</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Faults</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="active">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
+<li class="toc-entry toc-h2"><a href="#background-what-is-a-fault-and-what-is-a-fault-handler">Background: What is a fault, and what is a fault handler?</a></li>
+<li class="toc-entry toc-h2"><a href="#thread-faults-vs-other-sources-of-faults">Thread faults vs other sources of faults</a></li>
+<li class="toc-entry toc-h2"><a href="#how-does-thread-fault-handling-work">How does thread fault handling work?</a></li>
+<li class="toc-entry toc-h2"><a href="#reasons-for-thread-faults">Reasons for thread faults:</a></li>
+<li class="toc-entry toc-h2"><a href="#thread-fault-messages">Thread fault messages:</a></li>
+<li class="toc-entry toc-h2"><a href="#setting-up-a-fault-endpoint-for-a-thread">Setting up a fault endpoint for a thread:</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#kernel-end-vs-handler-end">Kernel end vs handler end:</a></li>
+<li class="toc-entry toc-h3"><a href="#differences-between-mcs-and-master-kernel">Differences between MCS and Master kernel:</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#description-of-the-tutorial-program">Description of the tutorial program:</a></li>
+<li class="toc-entry toc-h3"><a href="#setting-up-the-endpoint-to-be-used-for-thread-fault-ipc-messages">Setting up the endpoint to be used for thread fault IPC messages.</a></li>
+<li class="toc-entry toc-h3"><a href="#receiving-the-ipc-message-from-the-kernel">Receiving the IPC message from the kernel:</a></li>
+<li class="toc-entry toc-h3"><a href="#finding-out-information-about-the-generated-thread-fault">Finding out information about the generated thread fault:</a></li>
+<li class="toc-entry toc-h3"><a href="#handling-a-thread-fault">Handling a thread fault:</a></li>
+<li class="toc-entry toc-h3"><a href="#resuming-a-faulting-thread">Resuming a faulting thread:</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#further-exercises">Further exercises</a></li>
+<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      
+<h1 id="fault-handling">Fault handling</h1>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities">Capabilities tutorial</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/ipc">IPC Tutorial</a>.</li>
+</ol>
+
+<h2 id="initialising">Initialising</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/#get-the-code</span>
+<span class="c">#</span>
+<span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--tut</span> fault-handlers
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>fault-handlers_build
+ninja
+</code></pre></div></div>
+
+<h2 id="outcomes">Outcomes</h2>
+
+<ol>
+  <li>Learn what a thread fault is.</li>
+  <li>Understand that a thread fault is different from a processor hardware fault.</li>
+  <li>Learn what a fault handler is.</li>
+  <li>Understand what the kernel does to a thread which has faulted.</li>
+  <li>Learn how to set the endpoint that the kernel will deliver fault messages on (master vs MCS).</li>
+  <li>Learn how to resume threads after they have faulted.</li>
+</ol>
+
+<h2 id="background-what-is-a-fault-and-what-is-a-fault-handler">Background: What is a fault, and what is a fault handler?</h2>
+
+<p>A fault handler is a separate instruction stream which the CPU can jump to in
+order to rectify an anomalous condition in the current thread and then return to
+the previous instruction stream.</p>
+
+<p>In seL4, faults are modeled as separately programmer-designated “fault handler”
+threads. In monolithic kernels, faults are not usually delivered to a userspace
+handler, but they are handled by the monolithic kernel itself.</p>
+
+<p>In general, attempting to resume execution of the faulted thread
+without rectifying the anomaly will simply re-trigger the fault ad infinitum
+until the anomaly is cleared away.</p>
+
+<h2 id="thread-faults-vs-other-sources-of-faults">Thread faults vs other sources of faults</h2>
+
+<p>There are several sources of faults in a running system; they include:</p>
+<ul>
+  <li>Fault events generated by the CPU itself when it encounters anomalies in the instruction stream (aka, “processor exceptions”).</li>
+  <li>Fault events generated by hardware in the event of some hardware anomaly (such as a machine check or non-maskable interrupt).</li>
+  <li>Fault events generated by the seL4 kernel when it encounters anomalies in the current thread.</li>
+</ul>
+
+<p>This tutorial is only concerned with those fault events generated by the seL4
+kernel. We will call them “thread faults” from here onward to reduce ambiguity.</p>
+
+<h2 id="how-does-thread-fault-handling-work">How does thread fault handling work?</h2>
+
+<p>In seL4, when a thread generates a thread fault, the kernel will <strong>block</strong> the
+faulting thread’s execution and attempt to deliver a message across a special
+endpoint associated with that thread, called its “fault handler” endpoint.</p>
+
+<p>The only special thing about the fault handler endpoint is that a thread can
+only have <em>one</em> of them. Otherwise it is created and managed just the same way
+as any other kind of seL4 endpoint object.</p>
+
+<p>The thread which is listening on the other end of the fault endpoint is called
+the “fault handler”. The kernel expects that the fault handler will correct the
+anomaly that ails the faulting thread and then tell the kernel when it is safe
+to try executing the faulting thread once again.</p>
+
+<p>To tell the kernel to resume execution of the faulting thread, the fault handler
+can either:</p>
+<ul>
+  <li>Invoke a reply operation (with <code class="highlighter-rouge">seL4_Reply()</code>) on the fault handler endpoint and make sure that the <code class="highlighter-rouge">label</code> in the <code class="highlighter-rouge">seL4_MessageInfo_t</code> tag is set to <code class="highlighter-rouge">0</code>;</li>
+  <li>Explicitly tell the kernel to resume executing the faulting thread using <code class="highlighter-rouge">seL4_TCB_Resume()</code>.</li>
+</ul>
+
+<p>Please note that if the <code class="highlighter-rouge">handler</code> sets message registers in the reply message,
+the kernel may interpret these as meaning something: some fault replies accept
+parameters. See the seL4 manual for the reply message format for all faults.</p>
+
+<p>If the fault handler did not properly rectify the anomaly in the faulting
+thread, resuming the faulting thread will simply cause the kernel to re-generate
+the fault.</p>
+
+<h2 id="reasons-for-thread-faults">Reasons for thread faults:</h2>
+
+<p>Thread faults can be generated for different reasons. When a fault occurs the
+kernel will pass information describing the cause of the fault as an IPC
+message. At the time of writing, the following faults could be generated by
+the Master version of the seL4 kernel:</p>
+
+<ul>
+  <li>Cap fault: A fault triggered because of an invalid cap access.</li>
+  <li>VM fault: A fault triggered by incoherent page table state or incorrect memory accesses by a thread.</li>
+  <li>Unknown Syscall fault: Triggered by performing a syscall invocation that is unknown to the kernel.</li>
+  <li>Debug fault: Triggered when a breakpoint, watchpoint or single-step debug event occurs.</li>
+</ul>
+
+<p>In addition, the following fault types are added by the MCS kernel:</p>
+
+<ul>
+  <li>Timeout fault: Triggered when a thread consumes all of its budget and still has further execution to do in the current period.</li>
+</ul>
+
+<h2 id="thread-fault-messages">Thread fault messages:</h2>
+
+<p>When a fault is generated, the kernel will deliver an IPC message across the
+fault endpoint. This IPC message contains information that tells the fault
+handler why the fault occured as well as surrounding contextual information
+about the fault which might help the fault handler to rectify the anomaly.</p>
+
+<p>Each anomaly has its own message format because the information needed to
+describe each anomaly will be different. For more information about the contents
+of the IPC message sent by the seL4 kernel for each fault anomaly, please see
+the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a>.</p>
+
+<p>The rest of this tutorial will attempt to teach the reader how to receive and
+handle seL4 thread faults.</p>
+
+<h2 id="setting-up-a-fault-endpoint-for-a-thread">Setting up a fault endpoint for a thread:</h2>
+
+<p>In the scenario where a fault message is being delivered on a fault endpoint,
+the kernel acts as the IPC “sender” and the fault handler acts as a receiver.</p>
+
+<p>This implies that when caps are being handed out to the fault endpoint object,
+one cap to the object must be given to the kernel and one cap to the object must
+be given to the handler.</p>
+
+<h3 id="kernel-end-vs-handler-end">Kernel end vs handler end:</h3>
+
+<p>Programmers specify the capability to use a fault handler for a thread when
+configuring a TCB. As a result the programmer can also set a badge on the
+kernel’s cap to the fault endpoint object.</p>
+
+<p>When the kernel sends a fault IPC message using a badged endpoint cap, the badge
+is delivered to the receiver just the same way it is delivered for any other
+IPC where there is a badge on the sender’s cap.</p>
+
+<p>A keen reader would probably have realized that this means that a badge on the
+kernel’s cap to a fault endpoint can be used to distinguish fault messages
+from different faulting threads, such that a single handler can handle
+faults from multiple threads. Please see the
+<a href="https://docs.sel4.systems/Tutorials/ipc">IPC Tutorial</a> for a refresher on how
+badged fault endpoints work.</p>
+
+<h3 id="differences-between-mcs-and-master-kernel">Differences between MCS and Master kernel:</h3>
+
+<p>There is a minor difference in the way that the kernel is informed of the
+cap to a fault endpoint, between the master and MCS kernels.</p>
+
+<p>Regardless though, on both versions of the kernel, to inform the kernel of the
+fault endpoint for a thread, call the usual <code class="highlighter-rouge">seL4_TCB_SetSpace()</code>.</p>
+
+<p>See the <a href="https://docs.sel4.systems/Tutorials/mcs.html">MCS tutorial</a> for more information.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>This tutorial has one address space set up by the CapDL loader, containing two
+threads which share the same CSpace. One of the threads is a fault handler while
+the other triggers a virtual memory fault.</p>
+
+<p>You will be guided through the following broad steps:</p>
+<ol>
+  <li>Badging and configuring a fault handler for the faulting thread.</li>
+  <li>Having the faulting thread trigger a thread fault.</li>
+  <li>Handling the fault in the fault handler.</li>
+  <li>Resuming the execution of the faulting thread.</li>
+</ol>
+
+<h3 id="description-of-the-tutorial-program">Description of the tutorial program:</h3>
+
+<p>The tutorial features two threads in different virtual address spaces. One
+thread is the “<code class="highlighter-rouge">faulter</code>” and the other is the “<code class="highlighter-rouge">handler</code>”. The <code class="highlighter-rouge">faulter</code> is going to
+generate a fault, and the <code class="highlighter-rouge">handler</code> will “handle” it.</p>
+
+<p>In order for the <code class="highlighter-rouge">handler</code> to handle the fault, the <code class="highlighter-rouge">handler</code> must set up a
+fault-handling endpoint and tell the kernel to send all fault IPC messages
+generated by the <code class="highlighter-rouge">faulter</code> thread to itself. This is therefore the first step we
+take.</p>
+
+<p>However, we have to ensure that the fault is only triggered <em>after</em> the <code class="highlighter-rouge">handler</code>
+thread has set up the fault-handling endpoint and is ready to receive the fault
+IPC message from the kernel.</p>
+
+<p>If the <code class="highlighter-rouge">faulter</code> thread generates a fault and there is no thread to handle the
+the IPC message, the kernel will simply suspend the <code class="highlighter-rouge">faulting</code> thread.</p>
+
+<p>For this reason we make the <code class="highlighter-rouge">faulter</code> thread <code class="highlighter-rouge">seL4_call()</code> the <code class="highlighter-rouge">handler</code> thread
+across an endpoint and tell it which slot the <code class="highlighter-rouge">handler</code> should place the fault
+handling endpoint cap into. After the <code class="highlighter-rouge">handler</code> has set up the handler endpoint,
+the <code class="highlighter-rouge">handler</code> will <code class="highlighter-rouge">seL4_Reply()</code> to the <code class="highlighter-rouge">faulter</code> to let it know that it the
+<code class="highlighter-rouge">handler</code> is ready to handle fault IPC messages.</p>
+
+<p>After that we trigger a fault in the <code class="highlighter-rouge">faulter</code>, handle the fault in the <code class="highlighter-rouge">handler</code>,
+and then resume the <code class="highlighter-rouge">faulter</code> and that’s the end of the exercise.</p>
+
+<h3 id="setting-up-the-endpoint-to-be-used-for-thread-fault-ipc-messages">Setting up the endpoint to be used for thread fault IPC messages.</h3>
+
+<p>The first exercise is to configure the TCB of the faulter with a fault endpoint.
+This exercise is meant to achieve two learning outcomes:</p>
+<ol>
+  <li>Explain that the end of the endpoint that is given to the kernel can be badged, and the kernel will return that badge value when it sends a fault IPC message.</li>
+  <li>Explain the differences between the Master and MCS kernels when it comes to telling the kernel about the fault endpoint.</li>
+</ol>
+
+<p>Right now the <code class="highlighter-rouge">faulter</code> thread is blocked on an Endpoint, waiting for the <code class="highlighter-rouge">handler</code>
+to tell it where to put the fault handler endpoint within its own (the
+<code class="highlighter-rouge">faulter</code>’s) CSpace (for the Master kernel).</p>
+
+<p>To set up the fault handler endpoint, we will to first badge it so that when the
+kernel sends us a fault IPC message, we will be able to identify the faulter.
+Fault handlers can handle faults from multiple threads, so a badge
+enables handlers to identify the faulters they are handling.</p>
+
+<p>To badge the endpoint, use the <code class="highlighter-rouge">seL4_CNode_Mint()</code> syscall:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Mint</span><span class="p">(</span>
+        <span class="n">handler_cspace_root</span><span class="p">,</span>
+        <span class="n">badged_faulter_fault_ep_cap</span><span class="p">,</span>
+        <span class="n">seL4_WordBits</span><span class="p">,</span>
+        <span class="n">handler_cspace_root</span><span class="p">,</span>
+        <span class="n">faulter_fault_ep_cap</span><span class="p">,</span>
+        <span class="n">seL4_WordBits</span><span class="p">,</span>
+        <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="n">FAULTER_BADGE_VALUE</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Since we are using the Master kernel, you will also need to copy the badged cap
+into the <code class="highlighter-rouge">faulter</code>’s CSpace (See the <a href="https://docs.sel4.systems/Tutorials/mcs.html">MCS tutorial</a>
+for an explanation of the differences between the Master and MCS kernel when
+configuring fault endpoints):</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span>
+        <span class="n">faulter_cspace_root</span><span class="p">,</span>
+        <span class="n">foreign_badged_faulter_empty_slot_cap</span><span class="p">,</span>
+        <span class="n">seL4_WordBits</span><span class="p">,</span>
+        <span class="n">handler_cspace_root</span><span class="p">,</span>
+        <span class="n">badged_faulter_fault_ep_cap</span><span class="p">,</span>
+        <span class="n">seL4_WordBits</span><span class="p">,</span>
+        <span class="n">seL4_AllRights</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Finally, we tell the kernel the cap address of the fault endpoint so that the
+kernel can deliver fault IPC messages to the <code class="highlighter-rouge">handler</code>. Since we’re
+using the Master kernel, we need to pass a CPtr that can be resolved from within
+the CSpace of the <code class="highlighter-rouge">faulter</code> thread:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_SetSpace</span><span class="p">(</span>
+        <span class="n">faulter_tcb_cap</span><span class="p">,</span>
+        <span class="n">foreign_badged_faulter_empty_slot_cap</span><span class="p">,</span>
+        <span class="n">faulter_cspace_root</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="n">faulter_vspace_root</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="receiving-the-ipc-message-from-the-kernel">Receiving the IPC message from the kernel:</h3>
+
+<p>The kernel will deliver the IPC message to any thread waiting on the fault
+endpoint. To wait for a fault IPC message simply <code class="highlighter-rouge">seL4_Recv()</code>, the same way
+you’d wait for any other IPC message:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">foreign_faulter_capfault_cap</span> <span class="o">=</span> <span class="n">seL4_GetMR</span><span class="p">(</span><span class="n">seL4_CapFault_Addr</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="finding-out-information-about-the-generated-thread-fault">Finding out information about the generated thread fault:</h3>
+
+<p>In the thread fault IPC message, the kernel will send information about the
+fault including the capability address whose access triggered the thread fault.
+The seL4 manual gives detailed information on which message registers in the IPC
+buffer contain information about the fault and if you’re so inclined, the
+libsel4 source code also has the exact code values as well.</p>
+
+<p>In our example here, our sample code generated a Cap Fault, so according to the
+seL4 manual, we can find out the cap fault address using at offset
+<code class="highlighter-rouge">seL4_CapFault_Addr</code> in the IPC message, as you see above in the code snippet.</p>
+
+<h3 id="handling-a-thread-fault">Handling a thread fault:</h3>
+
+<p>Now that we know the cap address that generated a fault in the <code class="highlighter-rouge">faulting</code> thread,
+we can “handle” the fault by putting a random cap into that slot and then when
+the <code class="highlighter-rouge">faulter</code> thread re-tries to access that slot, it will succeed this time and
+no thread fault will be generated.</p>
+
+<p>So here we’ll copy an endpoint cap into the faulting slot:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span>
+        <span class="n">faulter_cspace_root</span><span class="p">,</span>
+        <span class="n">foreign_faulter_capfault_cap</span><span class="p">,</span>
+        <span class="n">seL4_WordBits</span><span class="p">,</span>
+        <span class="n">handler_cspace_root</span><span class="p">,</span>
+        <span class="n">sequencing_ep_cap</span><span class="p">,</span>
+        <span class="n">seL4_WordBits</span><span class="p">,</span>
+        <span class="n">seL4_AllRights</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="resuming-a-faulting-thread">Resuming a faulting thread:</h3>
+
+<p>Finally, to have the <code class="highlighter-rouge">faulter</code> thread wake up and try to execute again, we
+<code class="highlighter-rouge">seL4_Reply()</code> to it:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_Reply</span><span class="p">(</span><span class="n">seL4_MessageInfo_new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h2 id="further-exercises">Further exercises</h2>
+
+<p>If you’d like to challenge yourself, make sure to set up the fault handling on
+both versions of the kernel: master and MCS.</p>
+
+<hr />
+<h2 id="getting-help">Getting help</h2>
+<p>Stuck? See the resources below.</p>
+<ul>
+  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
+  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
+  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
+  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Wed Dec 12 17:38:24 2018 +1100 e2a53c4
+          </li>
+          <li>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                Page last updated: Wed Dec 12 17:38:24 2018 +1100 e2a53c4
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/fault-handlers.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/fault-handlers.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+  </body>
+</html>
