@@ -297,3 +297,32 @@ need to know which io ports it uses, which interrupts it's associated
 with, and the physical addresses of any memory-mapped io regions it
 uses. The easiest way to find this information is to boot linux
 natively, and run the command `lspci -vv`.
+
+## Configuring a Linux kernel build
+
+We provide a custom kernel image with our CAmkES VM project, found [here](https://github.com/SEL4PROJ/camkes-vm-linux/tree/master/images/kernel).
+This kernel image is produced from building Linux 4.8.16, specifically configured with the following [.config file](https://github.com/SEL4PROJ/camkes-vm-linux/tree/master/linux_configs/4.8.16).
+
+However you may decide to build your own Linux kernel image (which may be a different version). When doing so, it is important to ensure the build is configured with the following Kbuild settings:
+
+```
+# General kernel settings
+CONFIG_X86_32=y
+CONFIG_X86=y
+CONFIG_X86_32_SMP=n
+CONFIG_SMP=n
+CONFIG_NOHIGHMEM=y
+CONFIG_PCI_MSI=n
+CONFIG_X86_UP_APIC=n
+# Power management and ACPI settings
+CONFIG_SUSPEND=n
+CONFIG_HIBERNATION=n
+CONFIG_PM=n
+CONFIG_ACPI=n
+# Virtio Settings
+CONFIG_VIRTIO=y
+CONFIG_VIRTIO_PCI=y
+CONFIG_VIRTIO_NET=y
+```
+
+You can configure these settings by either manually editing your kernel `.config` file in the root project directory or by interactively running `make menuconfig`.
