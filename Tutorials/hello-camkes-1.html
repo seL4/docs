@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2018-12-21 15:49:16 +1100 -->
+<!-- Page last generated 2019-01-08 17:04:03 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -91,7 +91,7 @@
       <li class="list-unstyled text-right">
       <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
       <li class="list-unstyled text-right">
-      <a href="/sel4_release/seL4_9.0.0-mcs"><b>seL4-9.0.0-mcs</b></a></li>
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
       <li class="list-unstyled text-right">
       <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
     </ol>
@@ -571,73 +571,6 @@ writing your first CAmkES application.</p>
   <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* @TAG(DATA61_BSD) */
-
-/*
- * CAmkES tutorial part 1: components with RPC.
- */
-
-import &lt;std_connector.camkes&gt;;
-
-import "interfaces/HelloSimple.idl4";
-
-/* A valid CAmkES assembly must have at least one component. As the starting point for
- * this tutorial does not have any valid components we declare an empty one that does nothing
- * just to construct a valid spec. Once you have added some components to the composition
- * you can remove this if you want, although it will cause no harm being left in */
-component EmptyComponent {
-}
-
-component Client {
-    control;
-    uses HelloSimple hello;
-}
-
-component Echo {
-    provides HelloSimple hello;
-}
-
-
-assembly {
-    composition {
-         component EmptyComponent empty;
-         // TODO remove the empty component, and define an Echo and a Client component
-
-        /* hint 1: use seL4RPCCall as the connector (or you could use seL4RPC if you prefer)
-         * hint 2: look at
-         * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
-         */
-
-    }
-}
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Component echo saying: hello world
-</code></pre></div></div>
-
-<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># @TAG(DATA61_BSD)</span>
-<span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.7.2<span class="p">)</span>
-
-<span class="nb">project</span><span class="p">(</span>hello-camkes-0 C<span class="p">)</span>
-
-<span class="nf">ImportCamkes</span><span class="p">()</span>
-
-<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>Client SOURCES components/Client/src/client.c<span class="p">)</span>
-<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>Echo SOURCES components/Echo/src/echo.c<span class="p">)</span>
-
-<span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>EmptyComponent<span class="p">)</span>
-
-<span class="nf">DeclareCAmkESRootserver</span><span class="p">(</span>hello-1.camkes<span class="p">)</span>
-
-<span class="nf">GenerateCAmkESRootserver</span><span class="p">()</span>
-
-<span class="c1"># utility CMake functions for the tutorials (not required in normal, non-tutorial applications)</span>
-<span class="nb">set</span><span class="p">(</span>FINISH_COMPLETION_TEXT <span class="s2">"Component echo saying: hello world"</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>START_COMPLETION_TEXT <span class="s2">"Booting all finished, dropped to user space"</span><span class="p">)</span>
-<span class="nb">configure_file</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="si">}</span>/projects/sel4-tutorials/tools/expect.py <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/check @ONLY<span class="p">)</span>
-
-</code></pre></div></div>
-
 
     </div>
   </div>
@@ -668,7 +601,7 @@ assembly {
         </li>
         
           <li>
-            Site last updated: Fri Dec 21 15:42:37 2018 +1100 836ce10
+            Site last updated: Tue Jan 8 17:00:31 2019 +1100 16ffb06
           </li>
           <li>
             
@@ -824,6 +757,8 @@ assembly {
             
               
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+              
+            
               
             
               
