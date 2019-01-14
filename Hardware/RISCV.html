@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-01-08 17:04:03 +1100 -->
+<!-- Page last generated 2019-01-14 13:17:37 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -365,33 +365,36 @@ future steps.</p>
  ./build-rv32ima.sh
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>Get sel4test sources. If you have them already make sure you are up to to date with the latest
-source.</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir sel4test <span class="o">&amp;&amp;</span> <span class="nb">cd </span>sel4test
- repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
- repo sync
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Build the RISC-V sel4test image and run sel4test</p>
-
-    <p>You will need to make sure that <code class="highlighter-rouge">$RISCV/bin</code> has been added to your
- <code class="highlighter-rouge">PATH</code>.</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir build-riscv <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build-riscv
- ../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>spike <span class="nt">-DRISCV64</span><span class="o">=</span>TRUE
- ninja
- ./simulate
-</code></pre></div>    </div>
-
-    <p>You can also use run the tests on the 32-bit spike platform by
- omitting the <code class="highlighter-rouge">-DRISCV64=TRUE</code> option.</p>
-
-    <p>If make fails, you may need to install a few required python packages: sudo pip install sel4-deps</p>
-  </li>
 </ol>
+
+<h2 id="running-sel4-test">Running seL4 test</h2>
+
+<p>You will need to make sure that <code class="highlighter-rouge">$RISCV/bin</code> has been added to your <code class="highlighter-rouge">PATH</code>.</p>
+
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+mkdir cbuild
+<span class="nb">cd </span>cbuild
+../init-build <span class="nt">-DPLATFORM</span><span class="o">=</span>spike <span class="nt">-DRISCV64</span>
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
+<span class="c"># If your target binaries can be executed in an emulator/simulator, and if</span>
+<span class="c"># our build system happens to support that target emulator, then this script</span>
+<span class="c"># might work for you:</span>
+./simulate
+
+</code></pre></div></div>
+<p>If you plan to use the ./simulate script, please be sure to add the
+<code class="highlighter-rouge">-DSIMULATION=1</code> argument when running cmake.</p>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You can also use run the tests on the 32-bit spike platform by
+omitting the `-DRISCV64=TRUE` option.
+</code></pre></div></div>
 
 <h3 id="continuing-development">Continuing development</h3>
 
@@ -426,7 +429,7 @@ source.</p>
         </li>
         
           <li>
-            Site last updated: Tue Jan 8 17:00:31 2019 +1100 16ffb06
+            Site last updated: Mon Jan 14 11:27:46 2019 +1100 056118e
           </li>
           <li>
             
@@ -517,7 +520,7 @@ source.</p>
               
             
               
-                Page last updated: Fri Sep 7 11:47:29 2018 +1000 ca9cb13
+                Page last updated: Mon Jan 14 11:27:46 2019 +1100 056118e
               
             
               
