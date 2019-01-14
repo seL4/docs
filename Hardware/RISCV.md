@@ -1,3 +1,9 @@
+---
+cmake_plat: spike
+xcompiler_arg: -DRISCV64
+simulation_target: true
+---
+
 # RISC-V
 
 This is a guide to setting up the 64-bit RISC-V tools and running the seL4 test suite for the Spike
@@ -68,34 +74,16 @@ On Ubuntu, these can be obtained with apt.
     ```bash
     cd ${RISCV}/riscv-tools
     ./build-rv32ima.sh
-    ``` 
-
-
-6. Get sel4test sources. If you have them already make sure you are up to to date with the latest
-   source.
-
-    ```bash
-    mkdir sel4test && cd sel4test
-    repo init -u https://github.com/seL4/sel4test-manifest.git
-    repo sync
     ```
 
-7. Build the RISC-V sel4test image and run sel4test
+## Running seL4 test
 
-    You will need to make sure that `$RISCV/bin` has been added to your
-    `PATH`.
+You will need to make sure that `$RISCV/bin` has been added to your `PATH`.
 
-    ```bash
-    mkdir build-riscv && cd build-riscv
-    ../init-build.sh -DPLATFORM=spike -DRISCV64=TRUE
-    ninja
-    ./simulate
-    ```
+{% include sel4test.md %}
 
     You can also use run the tests on the 32-bit spike platform by
     omitting the `-DRISCV64=TRUE` option.
-
-    If make fails, you may need to install a few required python packages: sudo pip install sel4-deps
 
 ### Continuing development
 
