@@ -55,6 +55,7 @@ if (x == FOO) {
 ### Naming
 
 * typedefs should always end in `_t`.
+* function pointer type defs endin `_fn_t`
 * Never typedef a pointer, we keep them explicit.
 * We use `under_scores` for separate words in a variable name.
 * Avoid pointer arithmetic unless neccessary.
