@@ -30,7 +30,15 @@ whilst maintaining our guarantees of isolation and security.
 
 To see all current RFCs, go check out the [RFC dashboard][].
 
+You can also stay notified
+of new RFCs and updates to RFCs
+by joining the [RFC miling list][].
+You can then use you [Atlassian Cloud][] account
+to keep track of and contribute to discussion
+on each of the RFCs.
+
 [RFC dashboard]: https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100
+[RFC mailing list]: https://sel4.systems/lists/listinfo/rfc
 
 
 # When to follow the RFC process
