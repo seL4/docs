@@ -43,7 +43,7 @@ system:
 cd camkes-project
 mkdir build
 cd build
-../init-build.sh -DPLATFORM=sabre -DAARCH32=1 DCAMKES_APP=adder -DSIMULATION=1
+../init-build.sh -DPLATFORM=sabre -DAARCH32=1 -DCAMKES_APP=adder -DSIMULATION=1
 ninja
 ./simulate
 ```
