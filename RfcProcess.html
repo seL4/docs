@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 5.0.0 | seL4 docs</title>
+    <title>The RFC Process | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,7 +68,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 5.0.0</span>
+            <span property="name">The RFC Process</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -283,62 +283,279 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="introducing-sel4-500">Introducing seL4 5.0.0</h1>
-<p>Announcing the release of <code class="highlighter-rouge">seL4 5.0.0</code>
-with the following changes:</p>
-
-<p>Below are the changes to the seL4 ABI and API:</p>
-
-<h2 id="generic-changes">Generic changes:</h2>
+      <p>We have introduced
+the request for comments (RFC) process
+for the following reasons:</p>
 
 <ul>
-  <li>Add missing case to <code class="highlighter-rouge">seL4_getFault</code> (<code class="highlighter-rouge">seL4_Fault_DebugException</code>)</li>
-  <li>Explicitly pack bootinfo data structures</li>
-  <li>Modify <code class="highlighter-rouge">FinalizeLog</code> syscall - Now returns a number of entries in the log</li>
-  <li>Extend bootinfo to support potentially arbitrary additional structures</li>
-  <li>Deprecate bootinfo management in libsel4 - a replacement, <code class="highlighter-rouge">platsupport_get_bootinfo</code> can be found in <code class="highlighter-rouge">libsel4platsupport</code></li>
+  <li>to allow the us to discuss design changes
+in a manner transparent to the community,</li>
+  <li>to gather valuable feedback from the community
+on changes we are considering,</li>
+  <li>to allow members of the seL4 community
+to get support and approval
+to propose and implement their own changes
+to the seL4 ecosystem,</li>
+  <li>to ensure that all changes
+made to core components of the seL4 ecosystem
+or that have wide and varying impacts on users of seL4
+undergo rigorous review, and</li>
+  <li>to ensure large changes are well advertised
+and can viewed publicly
+before we commit to them.</li>
 </ul>
 
-<h2 id="x86-specific-changes">x86 specific changes:</h2>
+<p>This helps us to ensure that such changes are made
+with the goal of the best outcome for the most users of seL4
+whilst maintaining our guarantees of isolation and security.</p>
+
+<p>To see all current RFCs, go check out the <a href="https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100">RFC dashboard</a>.</p>
+
+<p>You can also stay notified
+of new RFCs and updates to RFCs
+by joining the [RFC miling list][].
+You can then use you <a href="https://id.atlassian.com/" title="Atlassian Cloud Login">Atlassian Cloud</a> account
+to keep track of and contribute to discussion
+on each of the RFCs.</p>
+
+<h1 id="when-to-follow-the-rfc-process">When to follow the RFC process</h1>
+
+<p>All substantial changes to the seL4 ecosystem
+must be made using the RFC process.
+Substantial changes are those that that
+impact a large number of users of seL4
+in a way that may require them to change their own projects,
+changes the operation of toolchain used to build projects on seL4,
+changes the underlying model of one or more software components
+within the ecosystem.</p>
+
+<p>Examples of changes that must follow the RFC process include:</p>
 
 <ul>
-  <li>Pass VBE information from multiboot through bootinfo</li>
-  <li>Remove PAE support</li>
+  <li>removing support for a platform, and</li>
+  <li>changing the versioning system used for libraries.</li>
 </ul>
 
-<h2 id="x86-64-specific-changes">x86-64 specific changes:</h2>
+<p>Changes such as bug-fixes, refactorings, optimistions,
+or those that do not affect the functional requirements
+of the kernel, supporting tooling, infrastructure,
+or system components
+can be made through the existing pull-request process
+on the relevant repository.</p>
+
+<p>Examples of changes that should not involve the RFC process include:</p>
 
 <ul>
-  <li>VT-x related cap and object definitions added</li>
-  <li>seL4_VMEnter syscall added</li>
+  <li>Fixing a typo in existing code,</li>
+  <li>Clarifying code or documentation,</li>
+  <li>Adding a driver to an existing layer of the system.</li>
 </ul>
 
-<h2 id="arm-specific-changes">ARM specific changes:</h2>
+<p>If you try to make a substantial change
+via the pull-request process,
+or submit a pull-request that would result in such a change,
+your request will be rejected
+and you will be asked to use the RFC process
+to propose your change.</p>
 
-<ul>
-  <li>ARM-HYP: VCPU interface for manipulating banked registers added</li>
-  <li>plat: added nvidia tx1 support</li>
-  <li>ARM-HYP: Add support for save/restore of debug registers</li>
-  <li>Add aarch64 implementation</li>
-</ul>
+<p>If you are unsure whether a change requires an RFC,
+ask on the <a href="./IRCChannel.html" title="seL4 IRC channel">IRC channel</a>
+or post a question to the <a href="https://sel4.systems/lists/listinfo/" title="seL4 mailing list">mailing list</a>.</p>
 
-<h1 id="upgrade-notes">Upgrade notes</h1>
+<h1 id="the-rfc-process">The RFC Process</h1>
 
-<ul>
-  <li>This release breaks both API and ABI and is not source compatible
-    with the earlier versions.</li>
-</ul>
+<h2 id="before-creating-a-new-rfc">Before creating a new RFC</h2>
 
-<h1 id="full-changelog">Full changelog</h1>
+<p>Before proposing a new RFC
+it is important to determine whether it will be supported
+and what possible options exist
+to solve the particular problem.</p>
 
-<p>Use <code class="highlighter-rouge">git log 4.0.0..5.0.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+<p>This should be done through discussion
+one one of the many community forums
+such as the <a href="./IRCChannel.html" title="seL4 IRC channel">IRC channel</a>
+or the <a href="https://sel4.systems/lists/listinfo/" title="seL4 mailing list">mailing list</a>.</p>
 
-<h1 id="more-details">More details</h1>
+<p>This part of the process should help you determine
+whether your idea has already been proposed,
+whether or not it fits with the near-term goals of the ecosystem,
+and how to propose it with the best chances of acceptance.</p>
 
-<p>See the
-<a href="http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf">5.0.0 manual</a> included in the release for detailed descriptions of the new
-features. Or ask on the mailing list!</p>
+<p>You should make sure that during this discussion
+you address each of the sections in the template below.
+This will ensure that your proposal is well prepared
+before it is formally presented as an RFC
+and will speed up much of the RFC process.</p>
 
+<p>Once you have the support of some existing seL4 developers
+they can help you take your idea
+through the rest of the RFC process.</p>
+
+<h2 id="proposing-an-new-rfc">Proposing an new RFC</h2>
+
+<p>An RFC exists in the form of an RFC <em>issue</em>
+on the <a href="https://sel4kernel.atlassian.net/browse/RFC" title="seL4 RFCs">RFC project</a> of the seL4 <a href="https://sel4kernel.atlassian.net/" title="seL4 Atlassian Cloud">Jira</a> instance.
+Anyone who has an <a href="https://id.atlassian.com/" title="Atlassian Cloud Login">Atlassian Cloud</a> account
+is able to create an RFC.</p>
+
+<p>You should check the postponed RFCs
+to see if your idea has already been proposed
+but was previously postponed.
+You can adopt a postponed RFC
+which will return it to the proposal stage
+and you will become responsible for it.</p>
+
+<p>Once you create an RFC,
+you are the one responsible for maintaining it
+throughout the approval process.
+You will be able to modify it
+in response to discussion and feedback
+up until the point it is either approved or rejected.</p>
+
+<p>Every RFC should use the template below,
+omitting sections that are not relevant for the RFC.</p>
+
+<h3 id="the-rfc-template">The RFC template</h3>
+
+<p>You should consider each section of the RFC template in depth
+before determining that it is not relevant.</p>
+
+<p>You will probably want to work on this offline
+during the initial discussion
+so that you can paste the final document
+into the issue description
+when you create the RFC issue.</p>
+
+<pre><code class="language-wiki">h1. Summary
+
+One paragraph explanation of the change.
+
+h1. Motivation
+
+- Why are we doing this?
+- What use cases does it support?
+- What is the expected outcome?
+
+h1. Guide-level explanation
+
+Explain the change or feature as you would to another user of seL4.
+
+This section should clearly outline new named concepts, provide some examples of how it will be used, and explain how users should *think* about it.
+
+You should describe the change in a manner that is clear to both existing seL4 users and to new users of the ecosystem.
+
+Any changes that existing users need to make either as a result of the RFC or such that the can use the feature should be clearly stated here.
+
+h1. Reference-level explanation
+
+Explain the change or feature as you would to the maintainers of the seL4 ecosystem.
+
+This section should provide sufficent technical detail to guide any related implementation and ongoing maintenance.
+
+This section should clearly describe how this change will interact with the existing ecosystem, describe particular complex examples that may complicate the implementation, and describe how the implementation should support the examples in the previous section.
+
+h1. Drawbacks
+
+Outline any arguments that have been made against this proposal and discuss why we may not want to accept it.  Also discuss any complications that may arise from the proposed change that may require specific consideration.
+
+h1. Rationale and alternatives
+
+- Why is this design the best in the space of possible designs?
+- What other designs have been considered and what is the rationale for not choosing them?
+- What is the impact of not doing this?
+
+h1. Prior art
+
+Discuss prior art, both the good and the bad, in relation to this proposal.  A few examples of what this can include are:
+
+- For ecosystem proposals: Does this feature exist in similar systems and what experience have their community had?
+- For community proposals: Is this done by some other community and what were their experiences with it?
+- What lessons can we learn from what other communities have done here?
+- Are there any published papers or great posts that discuss this?  If you have some relevant papers to refer to, this can serve as a more detailed theoretical background.
+
+This section is intended to encourage you as an author to think about the lessons from other systems, provide readers of your RFC with a fuller picture.  If there is no prior art, that is fine - your ideas are interesting to us whether they are brand new or if it is an adaptation from other systems.
+
+Note that while precedent set by other systems is some motivation, it does not on its own motivate an RFC.
+
+h1. Unresolved questions
+
+- What needs to be resolved in further discussion before the RFC is approved?
+- What needs to resolved during the implementation of this RFC?
+- What related questions are beyond the scope of this RFC that should be addressed beyond its implementation?
+</code></pre>
+
+<h2 id="getting-an-rfc-approved">Getting an RFC approved</h2>
+
+<p>After you propose an RFC,
+it will undergo several rounds of changes
+in response to the discussion on <a href="https://sel4kernel.atlassian.net/" title="seL4 Atlassian Cloud">Jira</a>.
+The development team will hold offline meetings
+to discuss the change as a group.
+A summary of these meetings will be added
+to the discussion of the RFC.</p>
+
+<p>Once general consensus in the discussion on <a href="https://sel4kernel.atlassian.net/" title="seL4 Atlassian Cloud">Jira</a> has been reached
+and the seL4 development team agree on an outcome,
+the RFC may either be approved or rejected.
+When this occurs, a <em>disposition</em> will be added to the RFC
+outlining the reason for the particular ruling.
+If the discussion of an RFC has been particularly long,
+a summary comment will be made on the RFC
+before the given ruling is made.</p>
+
+<h3 id="postponement-of-an-rfc">Postponement of an RFC</h3>
+
+<p>When an RFC has a moderate amount of support
+and is generally accepted as a good idea
+but lacks someone to shepherd it
+to the point where it can be accepted
+it is <em>postponed</em>.</p>
+
+<p>This indicates that the RFC may be revived in the future
+when someone can be found to take it through
+the remainder of the approval process.
+Anyone may <em>adopt</em> a postponed RFC
+if they wish to see it approved
+and want to rally support for it.</p>
+
+<h2 id="implementation-of-an-approved-rfc">Implementation of an approved RFC</h2>
+
+<p>Once seL4 development team aprroves an,
+it becomes their responsibility
+and is marked as <em>active</em>.
+They may then assign it to a developer for implementation.
+Issues for the implementation of all of the necessary components
+will be created and linked to the RFC.</p>
+
+<p>The implementation of an RFC
+may lead to the resolution of many issues
+that were present in the RFC
+when it was approved.
+As such, the RFC may be subject to further changes
+throughout this part of the process.
+These changes should not change
+the overall goals or design of the RFC
+but should merely resolve issues
+or extend the design to cope
+with unanticipated corner cases.</p>
+
+<h3 id="deferment-of-an-approved-rfc">Deferment of an approved RFC</h3>
+
+<p>There may not be sufficient resources
+to implement an RFC when it is approved
+or resources may be diverted
+from the implementation of an RFC
+when higher priority work arises.
+In either case, the RFC will be <em>deferred</em>.
+A <em>deferred</em> RFC is lower priority than an <em>active</em> one
+and will generally see no progress on its implementation.</p>
+
+<p>Anyone can request that a <em>deferred</em> RFC be given priority
+be demonstrating increased demand or urgency
+for its implementation.
+Generally, a <em>deferred</em> RFC
+will be given preference for implementation
+in favour of approving a new RFC.</p>
 
     </div>
   </div>
@@ -496,7 +713,7 @@ features. Or ask on the mailing list!</p>
               
             
               
-            
+                Page last updated: Mon Feb 25 10:31:12 2019 +1100 237fcda
               
             
               
@@ -622,7 +839,7 @@ features. Or ask on the mailing list!</p>
               
             
               
-                Page last updated: Wed Mar 14 15:16:09 2018 +1100 a90571f
+            
               
             
               
@@ -668,9 +885,9 @@ features. Or ask on the mailing list!</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_5.0.0.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/RfcProcess.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_5.0.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/RfcProcess.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
