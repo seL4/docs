@@ -339,7 +339,7 @@ work on verified OS kernels. See also a
 work section of the
 [seL4 overview paper](http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract) from 2014.
 
-The new and exciting thing about seL4 is that is has a) strong
+The new and exciting thing about seL4 is that it has a) strong
 properties such as functional correctness, integrity, and
 confidentiality, and b) has these properties formally verified directly
 to the code — initially to C, now also to binary. In addition, the seL4
