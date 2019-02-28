@@ -14,6 +14,10 @@ Please read and abide by the following conventions when contributing:
 - [Code of Conduct](Conduct)
 - [Pull requests](CodeReview)
 
+## Large contributions
+
+If you would like to make significant changes to the seL4 kernel, or any of its libraries, consider making an [RFC|RfcProcess]. This will allow seL4 developers and the wider community to comment and approve of your design. 
+
 ## Contributor license agreement:
 
 We have two main groups of publicly hosted projects:
