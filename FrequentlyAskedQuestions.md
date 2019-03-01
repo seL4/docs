@@ -392,7 +392,7 @@ You can see the exact verification config options in
 [l4v/spec/cspec/c/Makefile](https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile).
 The machine interface are the functions that correspond to the ones in
 the Haskell file
-[Hardware.lhs](https://github.com/seL4/seL4/blob/master/haskell/src/SEL4/Machine/Hardware.lhs).
+[Hardware.lhs](https://github.com/seL4/l4v/blob/master/spec/haskell/src/SEL4/Machine/Hardware.lhs).
 
 You can further inspect the gory details by looking at the preprocessor
 output in the file kernel_all.c_pp in the proof build - this is what
