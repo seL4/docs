@@ -12,6 +12,13 @@ This page collates all available tutorials on seL4 material.
 
 *  [set up your machine](/GettingStarted#setting-up-your-machine).
 
+### Python Dependencies
+Additional python dependencies are required to build tutorials. To install you can run:
+```
+pip install --user aenum
+pip install --user pyelftools
+```
+
 ### Get the code
 ```
 mkdir sel4-tutorials-manifest
