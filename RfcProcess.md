@@ -32,13 +32,13 @@ To see all current RFCs, go check out the [RFC dashboard][].
 
 You can also stay notified
 of new RFCs and updates to RFCs
-by joining the [RFC miling list][].
+by joining the [RFC announcement mailing list][].
 You can then use you [Atlassian Cloud][] account
 to keep track of and contribute to discussion
 on each of the RFCs.
 
-[RFC dashboard]: https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100
-[RFC mailing list]: https://sel4.systems/lists/listinfo/rfc
+[RFC dashboard]: https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100 "RFC dashboard"
+[RFC announcement mailing list]: https://sel4.systems/lists/listinfo/rfc "RFC announcement mailing list"
 
 
 # When to follow the RFC process
@@ -87,7 +87,7 @@ to propose your change.
 
 If you are unsure whether a change requires an RFC,
 ask on the [IRC channel][]
-or post a question to the [mailing list][].
+or post a question to the [development mailing list][].
 
 # The RFC Process
 
@@ -102,7 +102,7 @@ to solve the particular problem.
 This should be done through discussion
 one one of the many community forums
 such as the [IRC channel][]
-or the [mailing list][].
+or the [development mailing list][].
 
 This part of the process should help you determine
 whether your idea has already been proposed,
@@ -120,7 +120,7 @@ they can help you take your idea
 through the rest of the RFC process.
 
 [IRC channel]: ./IRCChannel.html "seL4 IRC channel"
-[mailing list]: https://sel4.systems/lists/listinfo/ "seL4 mailing list"
+[development mailing list]: https://sel4.systems/lists/listinfo/devel "seL4 development mailing list"
 
 
 ## Proposing an new RFC
