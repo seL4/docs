@@ -104,27 +104,6 @@ repo init -u https://github.com/NVIDIA/tegra-uboot-flasher-manifests.git
 repo sync
 ```
 
-## Patching the sources
-
-
-Apply the following patch to increase the console buffer size.
-```diff
-diff --git
-a/include/configs/tegra-common.h b/include/configs/tegra-common.h
-index 1c469d0..234023d 100644
---- a/include/configs/tegra-common.h 
-+++ b/include/configs/tegra-common.h
-@@ -77,7 +77,7 @@
-* Increasing the size of the IO buffer as default nfsargs size is more
-* than 256 and so it is not possible to edit it
-*/
--#define CONFIG_SYS_CBSIZE (256* 2) /* Console I/O Buffer Size */
-+#define CONFIG_SYS_CBSIZE (256* 3) /* Console I/O Buffer Size */
-/* Print Buffer Size */
-#define CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE + \
-sizeof(CONFIG_SYS_PROMPT) + 16)
-```
-
 ## Building
  To build the sources, build the necessary tools first.
 
