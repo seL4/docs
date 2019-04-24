@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-03-29 16:12:32 +1100 -->
+<!-- Page last generated 2019-04-24 16:54:00 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -301,7 +301,6 @@
 <li class="toc-entry toc-h2"><a href="#load-the-binary">Load the binary</a></li>
 <li class="toc-entry toc-h2"><a href="#flash-u-boot">Flash U-Boot</a></li>
 <li class="toc-entry toc-h2"><a href="#getting-the-sources">Getting the sources</a></li>
-<li class="toc-entry toc-h2"><a href="#patching-the-sources">Patching the sources</a></li>
 <li class="toc-entry toc-h2"><a href="#building">Building</a></li>
 <li class="toc-entry toc-h2"><a href="#flashing">Flashing</a></li>
 <li class="toc-entry toc-h2"><a href="#running-linux-with-the-new-u-boot">Running Linux with the new U-Boot</a></li>
@@ -407,25 +406,6 @@ repo init <span class="nt">-u</span> https://github.com/NVIDIA/tegra-uboot-flash
 repo sync
 </code></pre></div></div>
 
-<h2 id="patching-the-sources">Patching the sources</h2>
-
-<p>Apply the following patch to increase the console buffer size.</p>
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git
-</span>a/include/configs/tegra-common.h b/include/configs/tegra-common.h
-<span class="gh">index 1c469d0..234023d 100644
-</span><span class="gd">--- a/include/configs/tegra-common.h 
-</span><span class="gi">+++ b/include/configs/tegra-common.h
-</span><span class="gu">@@ -77,7 +77,7 @@
-</span>* Increasing the size of the IO buffer as default nfsargs size is more
-* than 256 and so it is not possible to edit it
-*/
-<span class="gd">-#define CONFIG_SYS_CBSIZE (256* 2) /* Console I/O Buffer Size */
-</span><span class="gi">+#define CONFIG_SYS_CBSIZE (256* 3) /* Console I/O Buffer Size */
-</span>/* Print Buffer Size */
-#define CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE + \
-sizeof(CONFIG_SYS_PROMPT) + 16)
-</code></pre></div></div>
-
 <h2 id="building">Building</h2>
 <p>To build the sources, build the necessary tools first.</p>
 
@@ -492,7 +472,7 @@ Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
         </li>
         
           <li>
-            Site last updated: Fri Mar 29 15:34:26 2019 +1100 a000f35
+            Site last updated: Wed Apr 24 16:07:37 2019 +1000 5575379
           </li>
           <li>
             
@@ -597,7 +577,7 @@ Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 f530249
+                Page last updated: Wed Apr 24 16:07:37 2019 +1000 5575379
               
             
               
