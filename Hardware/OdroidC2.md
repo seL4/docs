@@ -1,0 +1,46 @@
+---
+toc: true
+arm_hardware: true
+cmake_plat: odroidc2
+xcompiler_arg: -DAARCH64=1
+platform: Odroid-C2
+arch: ARMv8A, AArch64 only
+virtualization: "No"
+iommu: "No"
+soc: Amlogic S905
+cpu: Cortex-A53
+Status: Unverified
+Contrib: Data61
+Maintained: Data61
+---
+
+# Odroid-C2
+
+The Odroid-C2 is a single board computer based on the Amlogic S905
+System-on-Chip.
+
+<https://wiki.odroid.com/odroid-c2/odroid-c2>
+
+Only 64-bit mode is supported, and SMP, Hyp, etc. are not currently supported.
+
+## U-Boot
+
+The default U-Boot will allocate DMA regions that can corrupt seL4
+kernel memory.
+Mainline U-Boot can be used instead on this board.
+Some Linux distributions include mainline U-Boot binaries compiled for
+this board, or you can compile U-Boot yourself.
+
+## Building seL4test
+
+{% include sel4test.md %}
+
+## Booting via TFTP
+
+Make sure you've set up a TFTP server to serve the seL4 image.
+
+```
+dhcp
+tftp 0x11000000 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-odroidc2
+go 0x11000000
+```
