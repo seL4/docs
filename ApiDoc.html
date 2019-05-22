@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-05-01 17:26:28 +1000 -->
+<!-- Page last generated 2019-05-22 13:30:49 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -4439,6 +4439,60 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<h4 id="gettriggercore">GetTriggerCore</h4>
+<p><code class="highlighter-rouge">static inline int seL4_IRQControl_GetTriggerCore</code></p>
+
+<p>Create an IRQ handler capability and specify the trigger method (edge or level) and the target core.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IRQControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>An IRQControl capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">irq</code></td>
+      <td>The IRQ that you want this capability to handle.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">trigger</code></td>
+      <td>Indicates whether this IRQ is edge (1) or level (0) triggered.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">root</code></td>
+      <td>CPTR to the CNode that forms the root of the destination CSpace. Must be at a depth equivalent to the wordsize.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">index</code></td>
+      <td>CPTR to the destination slot. Resolved from the root of the destination CSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="highlighter-rouge">depth</code></td>
+      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">target</code></td>
+      <td>Indicates the target core ID to which this irq will be sent.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
 <h3 id="aarch32-specific-object-methods">Aarch32-Specific Object Methods</h3>
 <h3 id="sel4_arm_pagedirectory">seL4_ARM_PageDirectory</h3>
 
@@ -5397,6 +5451,7 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#sel4_irqcontrol-2">seL4_IRQControl</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#gettrigger">GetTrigger</a></li>
+<li class="toc-entry toc-h4"><a href="#gettriggercore">GetTriggerCore</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#aarch32-specific-object-methods">Aarch32-Specific Object Methods</a></li>
