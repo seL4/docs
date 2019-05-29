@@ -4,7 +4,7 @@ seL4 and related projects use the [CMake](https://cmake.org/) family of tools to
 The seL4 build system refers to a collection of CMake scripts that manage:
 - system configuration: Configuration options such as platform flags and application settings.
 - dependency structures: Tracking build order dependencies
-- builds: Generating binary artifacts that can then be deployed on hardare.
+- builds: Generating binary artifacts that can then be deployed on hardware.
 
 
 The following documentation covers how to use the seL4 build system to:
