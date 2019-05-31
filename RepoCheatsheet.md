@@ -46,7 +46,7 @@ remote="seL4"
 ```
 ## Manifest layout
 
-We provide a brief overview of manifests as used in our projects in this section, please find more details in the full description of the manifest layout which can be found [here](https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.txt).
+We provide a brief overview of manifests as used in our projects in this section, please find more details in the full description of the manifest layout which can be found [here](https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md).
 
 > `<remote name="seL4" fetch="." />`
 
