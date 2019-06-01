@@ -24,31 +24,66 @@ As dependencies and packages may be frequently changed, deprecated or updated th
 The basic build package on Ubuntu is the `build-essential` package. To install run:
 
 ```
-sudo apt-get update
-sudo apt-get install build-essential
+sudo apt update
+sudo apt install build-essential
 ```
 
 Additional base dependencies for building seL4 projects on Ubuntu include installing:
 ```
-sudo apt-get install cmake ccache ninja-build
-sudo apt-get install python-dev python-pip python3-dev python3-pip
-sudo apt-get install libxml2-utils ncurses-dev
-sudo apt-get install curl git doxygen device-tree-compiler
+sudo apt install \
+    cmake ccache ninja-build \
+    python-dev python-pip python3-dev python3-pip \
+    libxml2-utils ncurses-dev \
+    curl git doxygen device-tree-compiler
 ```
 
 To build for ARM targets you will need a cross compiler. In addition, to run seL4 projects on a simulator you will need `qemu`. Installation of these additional base dependencies include running:
 
 
 ```
-sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
-sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-sudo apt-get install qemu-system-arm qemu-system-x86
+sudo apt install \
+    gcc-arm-linux-gnueabi g++-arm-linux-gnueabi \
+    gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
+    qemu-system-arm qemu-system-x86
 ```
 
 (you can install  the hardware floating point versions as well if you wish"
 ```
-sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 ```
+
+####  Fedora 
+
+> This is tested in fedora 30, some dependencies name may vary in early version. This equivalent to the process of ubuntu installation guide.
+
+The build-essential.
+
+```bash
+sudo dnf update 
+sudo dnf group install "Development Tools"
+
+sudo dnf install \
+    cmake ccache ninja-build \
+    python-devel python-pip python3-devel python3-pip \
+    libxml2-devel ncurses-devel \
+    curl git doxygen dtc
+```
+
+We do need some enum support in python:
+
+```
+pip install --user enum34 
+```
+
+To ARM target:
+
+```
+sudo dnf install \
+    gcc-arm-linux-gnu gcc-c++-arm-linux-gnu \
+    gcc-aarch64-linux-gnu gcc-c++-aarch64-linux-gnu \
+    qemu-system-arm qemu-system-x86
+```
+
 ####  Debian
 
 ##### For Debian Stretch or later
@@ -66,8 +101,8 @@ sudo sh -c "echo 'deb http://ftp.debian.org/debian stretch-backports main' > /et
 ```
 Then install `cmake` with
 ```
-sudo apt-get update
-sudo apt-get -t stretch-backports install cmake
+sudo apt update
+sudo apt -t stretch-backports install cmake
 ```
 
 ### Python Dependencies
@@ -75,7 +110,7 @@ sudo apt-get -t stretch-backports install cmake
 Regardless of your Linux distribution, python dependencies are required to build seL4, the manual and its proofs. To install you can run:
 
 ```
-pip install --user setuptools
+pip install --user setuptools 
 pip install --user sel4-deps
 ```
 
@@ -97,16 +132,6 @@ The python dependencies required by the CAmkES build toolchain can be installed 
 pip install --user camkes-deps
 ```
 
-### Haskell Dependencies
-
-The CAmkES build toolchain additionally requires Haskell. You can install the [Haskell stack](https://haskellstack.org) on your distribution by running:
-```
-curl -sSL https://get.haskellstack.org/ | sh
-```
-If you prefer not to bypass your distribution's package manager, you can do
-```
-sudo apt-get install haskell-stack
-```
 
 ### Build Dependencies
 
@@ -115,10 +140,10 @@ sudo apt-get install haskell-stack
 
 Install the following packages on your Ubuntu machine:
 
-```
-sudo apt-get install clang gdb
-sudo apt-get install libssl-dev libclang-dev libcunit1-dev libsqlite3-dev
-sudo apt-get install qemu-kvm
+```bash
+sudo apt install \
+    clang gdb libssl-dev libclang-dev \
+    libcunit1-dev libsqlite3-dev qemu-kvm
 ```
 
 ####  Debian
@@ -139,9 +164,10 @@ The proofs in the [L4.verified](https://github.com/seL4/l4v) repository use `Isa
 > *Tested on Ubuntu 18.04 LTS*
 
 ```
-sudo apt-get install libwww-perl libxml2-dev libxslt-dev
-sudo apt-get install mlton rsync
-sudo apt-get install texlive-fonts-recommended texlive-latex-extra texlive-metapost texlive-bibtex-extra
+sudo apt install \
+    libwww-perl libxml2-dev libxslt-dev mlton rsync \
+    texlive-fonts-recommended texlive-latex-extra \
+    texlive-metapost texlive-bibtex-extra
 ```
 
 ###  Debian
@@ -162,7 +188,7 @@ curl -sSL https://get.haskellstack.org/ | sh
 
 If you prefer not to bypass your distribution's package manager, you can do
 ```
-sudo apt-get install haskell-stack
+sudo apt install haskell-stack
 ```
 
 ### Setup Isabelle
@@ -183,4 +209,3 @@ cp -i misc/etc/settings ~/.isabelle/etc/settings
 ./isabelle/bin/isabelle jedit -bf
 ./isabelle/bin/isabelle build -bv HOL-Word
 ```
-
