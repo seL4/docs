@@ -34,6 +34,7 @@ sudo apt-get install cmake ccache ninja-build
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen device-tree-compiler
+sudo apt-get install u-boot-tools
 ```
 
 To build for ARM targets you will need a cross compiler. In addition, to run seL4 projects on a simulator you will need `qemu`. Installation of these additional base dependencies include running:
