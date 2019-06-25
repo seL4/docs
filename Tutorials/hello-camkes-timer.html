@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-06-01 08:03:38 +1000 -->
+<!-- Page last generated 2019-06-25 14:33:08 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -297,7 +297,7 @@
         <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<li class="toc-entry toc-h2"><a href="#exercises---part-1">Exercises - Part 1</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
 <li class="toc-entry toc-h3"><a href="#task-2">TASK 2</a></li>
@@ -307,6 +307,19 @@
 <li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
 <li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
 <li class="toc-entry toc-h3"><a href="#task-8">TASK 8</a></li>
+<li class="toc-entry toc-h3"><a href="#task-9">TASK 9</a></li>
+<li class="toc-entry toc-h3"><a href="#task-10">TASK 10</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#exercises---part-2">Exercises - Part 2</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#task-1-1">TASK 1</a></li>
+<li class="toc-entry toc-h3"><a href="#task-2-1">TASK 2</a></li>
+<li class="toc-entry toc-h3"><a href="#task-3-1">TASK 3</a></li>
+<li class="toc-entry toc-h3"><a href="#task-4-1">TASK 4</a></li>
+<li class="toc-entry toc-h3"><a href="#task-5-1">TASK 5</a></li>
+<li class="toc-entry toc-h3"><a href="#task-6-1">TASK 6</a></li>
+<li class="toc-entry toc-h3"><a href="#task-7---10">TASK 7 - 10</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
@@ -317,8 +330,20 @@
       
 <h1 id="camkes-timer-tutorial">CAmkES Timer Tutorial</h1>
 
-<p>This tutorial guides you through setting up a timer driver in CAmkES and using it to delay
-for 2 seconds.</p>
+<p>This tutorial guides you through setting up a timer driver in CAmkES and using
+it to delay for 2 seconds. For this tutorial, we will be using the ZYNQ7000
+ARM-based platform. Other ARM platforms that we support can be used, however,
+you will need to modify the build options manually or via <code class="highlighter-rouge">ccmake</code> and adapt
+parts of the tutorial with respect to the platform.</p>
+
+<p>The tutorial also has two parts to it. The first part will teach you how to
+manually define hardware details to configure the hardware component and
+initialise hardware resources.  The second part will teach you how to use a
+CAmkES connector to initialise hardware resources automatically for you.</p>
+
+<p>The solutions to this tutorial primarily uses the method of manually defining
+hardware details. The solutions to the second part are also included, albeit
+commented out.</p>
 
 <h2 id="initialising">Initialising</h2>
 
@@ -339,7 +364,7 @@ ninja
   <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-2">Camkes 2</a></li>
 </ol>
 
-<h2 id="exercises">Exercises</h2>
+<h2 id="exercises---part-1">Exercises - Part 1</h2>
 
 <h3 id="task-1">TASK 1</h3>
 
@@ -347,58 +372,70 @@ ninja
 
 <p>Instantiate some components. You’re already given one component instance</p>
 <ul>
-  <li><code class="highlighter-rouge">client</code>. You need to instantiate two more - a timer driver, and a
-component instance representing the timer hardware itself. Look in
-<code class="highlighter-rouge">components/Timer/Timer.camkes</code> for the definitions of both of these
-components.</li>
+  <li><code class="highlighter-rouge">client</code>. You need to instantiate additional components, a timer driver and
+a component instance representing the timer hardware itself. Look
+in <code class="highlighter-rouge">components/Timer/Timer.camkes</code> for the definitions of the components.</li>
 </ul>
 
-<p>Note the lines
-<code class="highlighter-rouge">connection seL4RPCCall hello_timer(from client.hello, to timer.hello);</code>
-and <code class="highlighter-rouge">timer.sem_value = 0;</code>. They assume that the name of the timer
-‘‘driver’’ will be <code class="highlighter-rouge">timer</code>. If you wish to call your driver something
-else, you’ll have to change these lines.</p>
+<p>Once you open the file, you will notice three different components. The <code class="highlighter-rouge">Timer</code>
+and <code class="highlighter-rouge">Timerbase</code> components represents the timer driver and the timer hardware
+respectively. The <code class="highlighter-rouge">TimerDTB</code> component represents both the timer driver and the
+timer hardware. This component is meant to be used with the <code class="highlighter-rouge">seL4DTBHardware</code>
+CAmkES connector to automatically initialise hardware resources. The second
+part of the tutorial will go into more detail about the <code class="highlighter-rouge">TimerDTB</code> component
+and the <code class="highlighter-rouge">seL4DTBHardware</code> connector.</p>
+
+<p>For now, instantiate the <code class="highlighter-rouge">Timer</code> and <code class="highlighter-rouge">Timerbase</code> components.</p>
+
+<p>Note the lines <code class="highlighter-rouge">connection seL4RPCCall hello_timer(from client.hello, to
+timer.hello);</code> and <code class="highlighter-rouge">timer.sem_value = 0;</code> in the <code class="highlighter-rouge">hello-camkes-timer.camkes</code>
+file. They assume that the name of the timer ‘‘driver’’ will be <code class="highlighter-rouge">timer</code>. If you
+wish to call your driver something else, you’ll have to change these lines.</p>
 
 <h3 id="task-2">TASK 2</h3>
 
-<p>Connect timer driver to timer hardware. The timer hardware component
-exposes two interfaces which must be connected to the timer driver. One
-of these represents memory-mapped registers. The other represents an
-interrupt.</p>
+<p>Connect the timer driver component (<code class="highlighter-rouge">Timer</code>) to the timer hardware component
+(<code class="highlighter-rouge">Timerbase</code>). The timer hardware component exposes two interfaces which must
+be connected to the timer driver. One of these represents memory-mapped
+registers. The other represents an interrupt.</p>
 
 <h3 id="task-3">TASK 3</h3>
 
-<p>Configure the timer hardware component instance with device-specific
-info. The physical address of the timer’s memory-mapped registers, and
-its irq number must both be configured.</p>
+<p>Configure the timer hardware component instance with device-specific info. The
+physical address of the timer’s memory-mapped registers, and its IRQ number
+must both be configured.</p>
 
 <h3 id="task-4">TASK 4</h3>
 
 <p>Now open <code class="highlighter-rouge">components/Timer/src/timer.c</code>.</p>
 
 <p>We’ll start by completing the <code class="highlighter-rouge">irq_handle</code> function, which is called in
-response to each timer interrupt. Note the name of this function. It
-follows the naming convention <code class="highlighter-rouge">&lt;interface&gt;_handle</code>, where
-<code class="highlighter-rouge">&lt;interface&gt;</code> is the name of an IRQ interface connected with
-<code class="highlighter-rouge">seL4HardwareInterrupt</code>. When an interrupt is received on the interface
-<code class="highlighter-rouge">&lt;interface&gt;</code>, the function <code class="highlighter-rouge">&lt;interface&gt;_handle</code> will be
-called.</p>
+response to each timer interrupt. Note the name of this function. It follows
+the naming convention <code class="highlighter-rouge">&lt;interface&gt;_handle</code>, where <code class="highlighter-rouge">&lt;interface&gt;</code> is the name of
+an IRQ interface connected with <code class="highlighter-rouge">seL4HardwareInterrupt</code>. When an interrupt is
+received on the interface <code class="highlighter-rouge">&lt;interface&gt;</code>, the function <code class="highlighter-rouge">&lt;interface&gt;_handle</code> will
+be called.</p>
 
-<p>The implementation of the timer driver itself isn’t directly in this
-file. The driver is implemented in a CAmkES-agnostic way in a library
-called <code class="highlighter-rouge">libplatsupport</code>.</p>
+<p>The implementation of the timer driver itself isn’t directly in this file. The
+driver is implemented in a CAmkES-agnostic way in a library called
+<code class="highlighter-rouge">libplatsupport</code>.</p>
 
 <p>This task is to call the <code class="highlighter-rouge">timer_handle_irq</code> function from
 <code class="highlighter-rouge">libplatsupport</code>, to inform the driver that an interrupt has occurred.</p>
 
 <h3 id="task-5">TASK 5</h3>
 
-<p>Acknowledge the interrupt. CAmkES generates the seL4-specific code for
-ack-ing an interrupt and provides a function
-<code class="highlighter-rouge">&lt;interface&gt;_acknowldege</code> for IRQ interfaces (specifically those
-connected with <code class="highlighter-rouge">seL4HardwareInterrupt</code>).</p>
+<p>Stop the timer from running. The <code class="highlighter-rouge">ttc_stop</code> function will be helpful here.</p>
 
 <h3 id="task-6">TASK 6</h3>
+
+<p>The interrupt now needs to be acknowledged.</p>
+
+<p>CAmkES generates the seL4-specific code for ack-ing an interrupt and provides a
+function <code class="highlighter-rouge">&lt;interface&gt;_acknowldege</code> for IRQ interfaces (specifically those
+connected with <code class="highlighter-rouge">seL4HardwareInterrupt</code>).</p>
+
+<h3 id="task-7">TASK 7</h3>
 
 <p>Now we’ll complete <code class="highlighter-rouge">hello__init</code> - a function which is called once
 before the component’s interfaces start running.</p>
@@ -407,10 +444,15 @@ before the component’s interfaces start running.</p>
 device, and store a handle to the driver in the global variable
 <code class="highlighter-rouge">timer_drv</code>.</p>
 
-<h3 id="task-7">TASK 7</h3>
+<h3 id="task-8">TASK 8</h3>
+
+<p>After initialising the timer, we now need to start the timer. Do so by calling
+<code class="highlighter-rouge">ttc_start</code> and passing the handle to the driver.</p>
+
+<h3 id="task-9">TASK 9</h3>
 
 <p>Note that this task is to understand the existing code. You won’t have
-to modify any files.</p>
+to modify anything for this task.</p>
 
 <p>Implement the <code class="highlighter-rouge">timer_inf</code> RPC interface. This interface is defined in
 <code class="highlighter-rouge">interfaces/timer.camkes</code>, and contains a single method, <code class="highlighter-rouge">sleep</code>, which
@@ -419,16 +461,16 @@ should return after a given number of seconds. in
 exposed by the <code class="highlighter-rouge">Timer</code> component is called <code class="highlighter-rouge">hello</code>. Thus, the function we
 need to implement is called <code class="highlighter-rouge">hello_sleep</code>.</p>
 
-<h3 id="task-8">TASK 8</h3>
+<h3 id="task-10">TASK 10</h3>
 
 <p>Tell the timer to interrupt after the given number of seconds. The
-<code class="highlighter-rouge">timer_oneshot_relative</code> function from <code class="highlighter-rouge">libplatsupport</code> will help. Note
+<code class="highlighter-rouge">ttc_set_timeout</code> function from <code class="highlighter-rouge">libplatsupport</code> will help. Note
 that it expects its time argument to be given in nanoseconds.</p>
 
 <p>Note the existing code in <code class="highlighter-rouge">hello_sleep</code>. It waits on a binary semaphore.
-<code class="highlighter-rouge">irq_handle</code> will be called on another thread when the timer interrupt
-occurs, and that function will post to the binary semaphore, unblocking
-us and allowing the function to return after the delay.</p>
+<code class="highlighter-rouge">irq_handle</code> will be called on another thread when the timer interrupt occurs,
+and that function will post to the binary semaphore, unblocking us and allowing
+the function to return after the delay.</p>
 
 <p>Expect the following output with a 2 second delay between the last 2
 lines:</p>
@@ -436,6 +478,89 @@ lines:</p>
 ------Sleep for 2 seconds------
 After the client: wakeup
 </code></pre></div></div>
+
+<h2 id="exercises---part-2">Exercises - Part 2</h2>
+
+<p>Now that you’ve learnt how to manually define the hardware details of a
+hardware component to initialise hardware resources, this part of the tutorial
+will teach you how to use the <code class="highlighter-rouge">seL4DTBHardware</code> connector to do that
+automatically.</p>
+
+<p>The connector requires a devicetree blob which describes an ARM platform.
+Additionally, the blob’s interrupt fields also need to follow the same format
+of the ARM GIC v1 and v2. There are devicetree source files bundled with the
+kernel, look in the <code class="highlighter-rouge">tools/dts/</code> folder of the kernel sources. If a suitable
+devicetree blob is not available for your platform, then do not proceed with
+the tutorial.</p>
+
+<h3 id="task-1-1">TASK 1</h3>
+
+<p>Navigate to the <code class="highlighter-rouge">hello-camkes-timer.camkes</code> file.</p>
+
+<p>Remove the <code class="highlighter-rouge">Timerbase</code> and <code class="highlighter-rouge">Timer</code> component instantiations and instantiate a
+<code class="highlighter-rouge">TimerDTB</code> component instead. Also change the <code class="highlighter-rouge">connection seL4RPCCall
+hello_timer(from client.hello, to timer.hello);</code> and <code class="highlighter-rouge">timer.sem_value = 0;</code>
+lines if necessary.</p>
+
+<h3 id="task-2-1">TASK 2</h3>
+
+<p>Remove the <code class="highlighter-rouge">seL4HardwareMMIO</code> and <code class="highlighter-rouge">seL4HardwareInterrupt</code> connections. Connect
+the two interfaces inside the <code class="highlighter-rouge">TimerDTB</code> component with the <code class="highlighter-rouge">seL4DTBHardware</code>
+connector.</p>
+
+<h3 id="task-3-1">TASK 3</h3>
+
+<p>Before opening <code class="highlighter-rouge">components/Timer/Timer.camkes</code>, remove the <code class="highlighter-rouge">Timerbase</code> settings
+inside the configurations block.</p>
+
+<p>Configure the <code class="highlighter-rouge">TimerDTB</code> component to pass in the correct DTB path to a timer
+to the connector and also initialise the interrupt resources for the timer.
+This will allow the connector to read a device node from the devicetree blob
+and grab the necessary data to initialise hardware resources. More
+specifically, it reads the registers field and optionally the interrupts field
+to allocate memory and interrupts.</p>
+
+<h3 id="task-4-1">TASK 4</h3>
+
+<p>Move to <code class="highlighter-rouge">components/TimerDTB/src/timerdtb.c</code>.</p>
+
+<p>Similar to part one, we’ll start with the <code class="highlighter-rouge">tmr_irq_handle</code> function. This
+function is called in response to a timer interrupt. The name of the function
+has a special meaning and the meaning is unique to the <code class="highlighter-rouge">seL4DTBHardware</code>
+connector.</p>
+
+<p>The IRQ handling functions of the connector follows the naming convention
+<code class="highlighter-rouge">&lt;to_interface&gt;_irq_handle</code>, where <code class="highlighter-rouge">&lt;to_interface&gt;</code> is the name of the
+interface of the ‘to’ end in an instance of a <code class="highlighter-rouge">seL4DTBHardware</code> connection.
+Also notice that it takes a <code class="highlighter-rouge">ps_irq_t *</code> type. This is because, for a given
+device, there may be multiple interrupts associated with the device. A
+<code class="highlighter-rouge">ps_irq_t</code> struct is given to the IRQ handling function and it contains
+information about the interrupt, allowing the handler to differentiate between
+the numerous interrupts of a device.</p>
+
+<p>Likewise with part one, the implementation of the timer driver also isn’t
+inside this file and the task here is to call <code class="highlighter-rouge">timer_handle_irq</code>.</p>
+
+<h3 id="task-5-1">TASK 5</h3>
+
+<p>The timer needs to be stopped, the task here is the same as part one’s task 5.</p>
+
+<h3 id="task-6-1">TASK 6</h3>
+
+<p>Again, the interrupt now has to be acknowledged.</p>
+
+<p>For the <code class="highlighter-rouge">seL4DTBHardware</code> connector, CAmkES also generates and provides a
+function to acknowledge interrupts. This function follows a similar naming
+convention to the IRQ handler above, <code class="highlighter-rouge">&lt;to_interface&gt;_irq_acknowledge</code> also
+takes in a <code class="highlighter-rouge">ps_irq_t *</code> argument. Similarly, the <code class="highlighter-rouge">ps_irq_t *</code> argument helps
+CAmkES to differentiate between the possibly many interrupts of a device that
+you wish to acknowledge.</p>
+
+<h3 id="task-7---10">TASK 7 - 10</h3>
+
+<p>Task 7 to 10 are the exact same as the tasks in part one.</p>
+
+<p>You should also expect the same output as the first part.</p>
 
 <hr />
 <h2 id="getting-help">Getting help</h2>
@@ -478,7 +603,7 @@ After the client: wakeup
         </li>
         
           <li>
-            Site last updated: Sat Jun 1 07:59:36 2019 +1000 9d5f757
+            Site last updated: Mon Jun 24 12:21:56 2019 +1000 92be3dd
           </li>
           <li>
             

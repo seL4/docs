@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-06-01 08:03:38 +1000 -->
+<!-- Page last generated 2019-06-25 14:33:08 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Beaglebone Black | seL4 docs</title>
+    <title>BeagleBone Black / Blue | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -79,7 +79,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Beaglebone Black</span>
+            <span property="name">BeagleBone Black / Blue</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -294,29 +294,32 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="beaglebone-black">Beaglebone Black</h1>
+      <h1 id="beaglebone-black--blue">BeagleBone Black / Blue</h1>
 
-<p>This page contains info about
-building seL4 on <a href="http://beagleboard.org/black">Beaglebone Black</a>.</p>
+<p>This page contains info about building seL4 on
+<a href="https://beagleboard.org/black">BeagleBone Black</a> and
+<a href="https://beagleboard.org/blue">BeagleBone Blue</a>.</p>
 
-<h2 id="building-for-the-beaglebone-black">Building for the Beaglebone Black</h2>
-<p>These instructions were written
-by Tim Newsham. The Beaglebone is a community-supported port.</p>
+<h2 id="building-for-the-beaglebone-black--blue">Building for the BeagleBone Black / Blue</h2>
+<p>These instructions were written by Tim Newsham. The BeagleBone is
+a community-supported port.</p>
 
 <h3 id="requirements">Requirements</h3>
-<p>We suggest using the <code class="highlighter-rouge">arm-linux-gnueabi-</code>
-cross-compilers. Use
+<p>We suggest using the <code class="highlighter-rouge">arm-linux-gnueabi-</code> cross-compilers. Use
 <a href="/GettingStarted#getting-cross-compilers">the instructions on getting a toolchain</a>.</p>
 
 <h3 id="building">Building</h3>
+
 <h4 id="sel4test">seL4test</h4>
+
+<p>For BeagleBone Blue, substitute <code class="highlighter-rouge">am335x-boneblack</code> with <code class="highlighter-rouge">am335x-boneblue</code>.</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
 repo sync
 mkdir cbuild
 <span class="nb">cd </span>cbuild
-../init-build <span class="nt">-DPLATFORM</span><span class="o">=</span>am335x <span class="nt">-DAARCH32</span><span class="o">=</span>1
+../init-build <span class="nt">-DPLATFORM</span><span class="o">=</span>am335x-boneblack <span class="nt">-DAARCH32</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -326,45 +329,67 @@ ninja
 
 <p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
-<h2 id="booting-on-the-beaglebone-black">Booting on the Beaglebone Black</h2>
-<h3 id="hardware-requirements">Hardware Requirements</h3>
+<h2 id="booting-on-the-beaglebone-black--blue">Booting on the BeagleBone Black / Blue</h2>
+
+<h3 id="hardware-requirements-beaglebone-black">Hardware Requirements (BeagleBone Black)</h3>
+
 <ul>
-  <li>power supply</li>
-  <li>serial adapter <a href="http://elinux.org/Beagleboard:BeagleBone_Black_Serial">http://elinux.org/Beagleboard:BeagleBone_Black_Serial</a></li>
-  <li>SDCard for file booting or Ethernet cable for network boot</li>
+  <li>Power supply (5V DC or miniUSB cable)</li>
+  <li>Serial adapter <a href="http://elinux.org/Beagleboard:BeagleBone_Black_Serial">http://elinux.org/Beagleboard:BeagleBone_Black_Serial</a></li>
+  <li>microSD card for file booting or Ethernet cable for network boot</li>
+</ul>
+
+<h3 id="hardware-requirements-beaglebone-blue">Hardware Requirements (BeagleBone Blue)</h3>
+
+<ul>
+  <li>Power supply (12V DC, 2S LiPo battery or microUSB)</li>
+  <li>Serial adapter (Connect to UT0 header)</li>
+  <li>microSD card</li>
 </ul>
 
 <h3 id="interacting-with-u-boot">Interacting with U-Boot</h3>
-<p>Connect a serial adapter between your
-development box and the Beaglebone Black. Use a serial program such as
-minicom or screen to connect to the serial port at 115200 bps</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/ttyUSB0 115200
-</code></pre></div></div>
-<p>Power on the device and hit enter a few times to interrupt the
-normal boot process and get a U-Boot prompt.</p>
 
-<p>To boot from SDcard, copy the sel4test-driver-image-arm-am335x binary to a FAT32 partition
-on an SDCard and place the card in the Beaglebone Black. Connect the
-serial device, power up the Beaglebone Black, and hit ENTER to interrupt
-the normal boot process. Finally, enter the following commands at the
-U-Boot prompt to load and run the image:</p>
+<p>Connect a serial adapter between your development box and the BeagleBone. Use
+a serial program such as picocom or screen to connect to the serial port:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>picocom /dev/ttyUSB0 -b 115200
+</code></pre></div></div>
+
+<p>Power on the device and hit space a few times to interrupt the normal boot
+process and get a U-Boot prompt.</p>
+
+<h4 id="booting-from-microsd-card">Booting from microSD card</h4>
+
+<p>To boot from a microSD card, copy the <code class="highlighter-rouge">sel4test-driver-image-arm-am335x</code> file
+to a FAT32 partition the microSD card and insert the card in the BeagleBone.</p>
+
+<p>At the U-Boot prompt, enter the following to load and run the image:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-am335x
 go ${loadaddr}
 </code></pre></div></div>
-<p>To boot over Ethernet, configure your DHCP server to provide a DHCP
-lease and to specify sel4test (or refos) as the boot file.
-Configure a TFTP server to serve sel4test-driver-image-arm-am335x file. Plug the Ethernet
-cable and connect the serial device to the Beaglebone black. Power the
-device up and hit ENTER to interrupt the normal boot process. Then, at
-the U-Boot prompt enter:</p>
+
+<h4 id="booting-from-tftp-beaglebone-black-only">Booting from TFTP (BeagleBone Black only)</h4>
+
+<p>To boot over Ethernet, configure your DHCP server to provide a DHCP lease and
+to specify sel4test as the boot file.
+Configure a TFTP server to serve the <code class="highlighter-rouge">sel4test-driver-image-arm-am335x</code> file.</p>
+
+<p>Plug an Ethernet cable to the BealeBone Black, then, at the U-Boot prompt
+enter:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
 go ${loadaddr}
 </code></pre></div></div>
+
 <p>To load an alternate image from the TFTP server at 1.2.3.4, use:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp ${loadaddr} 1.2.3.4:refos-image-arm-am335x
 go ${loadaddr}
 </code></pre></div></div>
+
 <h2 id="other-resources">Other resources</h2>
+
 <ul>
   <li><a href="http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/">Supporting the UART1 interface with CAmkES</a></li>
 </ul>
@@ -398,7 +423,7 @@ go ${loadaddr}
         </li>
         
           <li>
-            Site last updated: Sat Jun 1 07:59:36 2019 +1000 9d5f757
+            Site last updated: Mon Jun 24 12:21:56 2019 +1000 92be3dd
           </li>
           <li>
             
@@ -459,7 +484,7 @@ go ${loadaddr}
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 f530249
+                Page last updated: Mon Jun 24 12:21:56 2019 +1000 92be3dd
               
             
               
