@@ -30,7 +30,7 @@ sudo apt-get install build-essential
 
 Additional base dependencies for building seL4 projects on Ubuntu include installing:
 ```
-sudo apt-get install cmake ccache ninja-build
+sudo apt-get install cmake ccache ninja-build cmake-curses-gui
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen device-tree-compiler
