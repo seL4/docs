@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Camkes 2 | seL4 docs</title>
+    <title>Porting seL4 to a new platform | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,20 +67,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Tutorials/">
-              <span property="name"><b>Tutorials</b></span>
-              <meta property="position" content="2" />
-            </a>
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Camkes 2</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">Porting seL4 to a new platform</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -218,7 +207,7 @@
             <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
         <li>
   
-        <li class="active">
+        <li class="">
             <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
         <li>
   
@@ -293,156 +282,85 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
-<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
-<li class="toc-entry toc-h2"><a href="#walkthrough">Walkthrough</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#task-1">TASK 1</a></li>
-<li class="toc-entry toc-h3"><a href="#task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</a></li>
-<li class="toc-entry toc-h3"><a href="#task-18-21-24">TASK 18, 21, 24</a></li>
-<li class="toc-entry toc-h3"><a href="#task-2-4">TASK 2, 4</a></li>
-<li class="toc-entry toc-h3"><a href="#task-6">TASK 6</a></li>
-<li class="toc-entry toc-h3"><a href="#task-9-12-13">TASK 9, 12, 13</a></li>
-<li class="toc-entry toc-h3"><a href="#task-19-20-23">TASK 19, 20, 23</a></li>
-<li class="toc-entry toc-h3"><a href="#task-7">TASK 7</a></li>
-<li class="toc-entry toc-h3"><a href="#task-8-16">TASK 8, 16</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#done">Done!</a></li>
-<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
-</ul>
-      </nav>
-    
     <div class="content">
-      
-<h1 id="camkes-tutorial-2">CAmkES Tutorial 2</h1>
-<p>This tutorial is an introduction to
-CAmkES: bootstrapping a basic static CAmkES application, describing its
-components, and linking them together.</p>
+      <h1 id="porting-sel4-to-a-new-platform">Porting seL4 to a new platform</h1>
 
-<h2 id="initialising">Initialising</h2>
+<h2 id="setup">Setup</h2>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/#get-the-code</span>
-<span class="c">#</span>
-<span class="c"># Follow these instructions to initialise the tutorial</span>
-<span class="c"># initialising the build directory with a tutorial exercise</span>
-./init <span class="nt">--tut</span> hello-camkes-2
-<span class="c"># building the tutorial exercise</span>
-<span class="nb">cd </span>hello-camkes-2_build
-ninja
-</code></pre></div></div>
+<p>In order to load the seL4 image (via some means) it is important to have a working bootloader.
+We tend to use <a href="https://www.denx.de/wiki/U-Boot">U-boot</a> as it is open source, reliable and supports many different architectures.</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>For initial setup you can follow the instructions on the UNSW advanced operating systems website regarding <a href="https://www.cse.unsw.edu.au/~cs9242/19/project/linux.shtml">setting up a tftp server</a>.</p>
 
-<ol>
-  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
-  <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-1">Camkes 1</a></li>
-</ol>
+<p>Once you get U-boot up and running it is a good idea (if the platform is supported) to flash a
+Linux image onto the dev board. This way you can find the correct address to load the image into memory.
+This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.</p>
 
-<h2 id="learning-outcomes">Learning outcomes</h2>
+<p>Once you have found the correct address to load, you can use the command <code class="highlighter-rouge">bootcmd="tftpboot 0x20000000 sel4_image &amp;&amp; go 0x20000000"</code> 
+(using 0x20000000 as an example) followed by <code class="highlighter-rouge">saveenv</code> to save the starting address onto the boards flash memory.
+You will also need to set the ‘ipaddr’ and ‘serverip’ details can be found in the link above.</p>
 
-<ul>
-  <li>Understand how to represent and implement events in CAmkES.</li>
-  <li>Understand how to use Dataports.</li>
-</ul>
+<h2 id="sel4">seL4</h2>
 
-<h2 id="walkthrough">Walkthrough</h2>
-<p>Bear in mind, this article will be going through the
-tutorial steps in the order that the user is led through them in the
-slide presentation, except where several similar tasks are coalesced to
-avoid duplication. Additionally, if a tasks step covers material that
-has already been touched on, it will be omitted from this article.</p>
+<p>In order to have a successful port of seL4 to your target ARM platform you will need to go through the following steps.</p>
 
-<h3 id="task-1">TASK 1</h3>
-<p>Here you’re declaring the events that will be bounced
-back and forth in this tutorial. An event is a signal is sent over a
-Notification connection.</p>
+<h3 id="dts">DTS</h3>
 
-<p>You are strongly advised to read the manual section on Events here:
-<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events</a>.</p>
+<p>Look for DTS and drivers inside the <a href="https://github.com/torvalds/linux">Linux repository</a>, normally they will be supported. If they are supported clone Linux and modify the <code class="highlighter-rouge">update-dts.sh</code> to add your target. Run the script located in <code class="highlighter-rouge">kernel/tools/dts/update-dts.sh</code> at the cloned Linux repository. This will create a “platform.dts” file from Linux inside the dts folder in the kernel. You may need to add device nodes depending on what Linux uses and what is required by seL4. For example, in the port of the Rockpro64 a memory node and an extra timer node were needed so these had to be defined manually.</p>
 
-<p>'’Ensure that when declaring the consumes and emits keywords between
-  the Client.camkes and Echo.camkes files, you match them up so that
-  you’re not emitting on both sides of a single interface, or consuming
-  on both sides of an interface.’’</p>
+<h3 id="hardware-generation-script">Hardware generation script</h3>
 
-<h3 id="task-10-11-14-15-22-25">TASK 10, 11, 14, 15, 22, 25</h3>
-<p>Recall that CAmkES prefixes the name
-of the interface instance to the function being called across that
-interface? This is the same phenomenon, but for events; in the case of a
-connection over which events are sent, there is no API, but rather
-CAmkES will generate _emit() and _wait() functions to enable the
-application to transparently interact with these events.</p>
+<p>Depending on your platform and the way the DTS is defined you may need to modify the hardware_gen.py script.
+From the above example the Rockpro64 needed a memory node so that this script could define working memory.
+Other gotchas could include interrupt cells, interrupt numbers being mapped wrongly, or incorrect addresses.
+Also serial and timer drivers will need to be added to the kernel if they don’t already exist. You can check this through
+the DTS device strings and compare to the hardware.yml file in <code class="highlighter-rouge">kernel/tools/hardware.yml</code>. If needed add the required drivers in <code class="highlighter-rouge">kernel/drivers/</code>.</p>
 
-<h3 id="task-18-21-24">TASK 18, 21, 24</h3>
-<p>One way to handle notifications in CAmkES is to
-use callbacks when they are raised. CAmkES generates functions that
-handle the registration of callbacks for each notification interface
-instance. These steps help you to become familiar with this approach.</p>
+<h3 id="kernel">Kernel</h3>
 
-<hr />
+<p>You will need to add <code class="highlighter-rouge">libsel4/sel4_plat_include/&lt;platform&gt;/sel4/plat/api/constants.h</code> and add sel4_UserTop depending on what you support. Look in the other platform files for examples similar to your platform.</p>
 
-<h3 id="task-2-4">TASK 2, 4</h3>
-<p>Dataports are typed shared memory mappings. In your
-CAmkES ADL specification, you state what C data type you’ll be using to
-access the data in the shared memory – so you can specify a C struct
-type, etc.</p>
+<h3 id="cmake-build-system">CMake-build system</h3>
 
-<p>The really neat part is more that CAmkES provides access control for
-accessing these shared memory mappings: if a shared mem mapping is such
-that one party writes and the other reads and never writes, we can tell
-CAmkES about this access constraint in ADL.</p>
+<p>You will need to modify the build system in two places. Firstly in the kernel’s platform folder, you define <code class="highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>, again you can look at other platforms for examples.
+Secondly, you will need to add ‘KernelPlatform’ to the cmake and elf-loader tools. You can do this by editing 
+<code class="highlighter-rouge">tools/cmake-tool/helpers/application_settings.cmake</code> and <code class="highlighter-rouge">tools/elfloader-tool/CMakeLists.txt</code>.</p>
 
-<p>So in TASKs 2 and 4, you’re first being led to create the “Dataport”
-interface instances on each of the components that will be participating
-in the shared mem communication. We will then link them together using a
-“seL4SharedData” connector later on.</p>
+<h3 id="elf-loader">ELF-loader</h3>
 
-<h3 id="task-6">TASK 6</h3>
-<p>And here we are: we’re about to specify connections
-between the shared memory pages in each client, and tell CAmkES to link
-these using shared underlying Frame objects. Fill out this step, and
-proceed.</p>
+<p>You will need to add directories and files <code class="highlighter-rouge">tools/elfloader-tool/src/plat/&lt;platform&gt;/sys_fputc.c</code> and 
+<code class="highlighter-rouge">tools/elfloader-tool/include/plat/&lt;platform&gt;/platform.h</code> which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.</p>
 
-<h3 id="task-9-12-13">TASK 9, 12, 13</h3>
-<p>These steps are asking you to write some C code
-to access and manipulate the data in the shared memory mapping
-(Dataport) of the client. Follow through to the next step.</p>
+<h2 id="sel4-test">seL4 test</h2>
 
-<h3 id="task-19-20-23">TASK 19, 20, 23</h3>
-<p>And these steps are asking you to write some C
-code to access and manipulate the data in the shared memory mapping
-(Dataport) of the server.</p>
+<p>seL4test needs user level serial and timer drivers to run. Add these drivers and the following files to libplatsupport in
+order to get the test suite running. The directory structure and files will look something like the following. Some of these 
+files may not have anything in them but include them anyway to keep the build system happy.</p>
 
-<h3 id="task-7">TASK 7</h3>
-<p>This is an introduction to CAmkES attributes: you’re
-being asked to set the priority of the components.</p>
+<p>Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have it’s 
+own unique programming sequence and can sometimes be a bit tricky.</p>
 
-<h3 id="task-8-16">TASK 8, 16</h3>
-<p>This is where we specify the data access constraints
-for the Dataports in a shared memory connection. We then go about
-attempting to violate those constraints to see how CAmkES has truly met
-our constraints when mapping those Dataports.</p>
+<p>You can find the physical addresses and interrupt numbers for each device in its platform reference manual and copy them into the right places.</p>
 
-<h2 id="done">Done!</h2>
-<p>Congratulations: be sure to read up on the keywords and
-structure of ADL: it’s key to understanding CAmkES. And well done on
-writing your first CAmkES application.</p>
+<p><code class="highlighter-rouge">libplatsupport/plat_include/&lt;platform&gt;/</code>
+	-<code class="highlighter-rouge">clock.h</code>
+	-<code class="highlighter-rouge">gpio.h</code>
+	-<code class="highlighter-rouge">i2c.h</code>
+	-<code class="highlighter-rouge">mux.h</code>
+	-<code class="highlighter-rouge">serial.h</code>
+	-<code class="highlighter-rouge">timer.h</code>
+<code class="highlighter-rouge">libplatsupport/src/plat/&lt;platform&gt;/</code>
+	-<code class="highlighter-rouge">chardev.c</code>
+	-<code class="highlighter-rouge">ltimer.c</code>
+	-<code class="highlighter-rouge">serial.c</code>
+	-<code class="highlighter-rouge">timer.c</code></p>
 
-<hr />
-<h2 id="getting-help">Getting help</h2>
-<p>Stuck? See the resources below.</p>
-<ul>
-  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
-  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
-  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
-  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
-  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
-</ul>
+<h3 id="gotchas">Gotchas</h3>
 
+<p>Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is 
+to shorten memory regions in DTS memory nodes to check you are touching the correct area.</p>
+
+<p>Once you have succeeded with your port and have seL4 test passing in release mode, you can add an entry to the CHANGES file describing the platform you added and submit a pull request on the seL4 github.</p>
 
     </div>
   </div>
@@ -598,7 +516,7 @@ writing your first CAmkES application.</p>
               
             
               
-            
+                Page last updated: Thu Jul 18 18:11:17 2019 +1000 db79522
               
             
               
@@ -636,7 +554,7 @@ writing your first CAmkES application.</p>
               
             
               
-                Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+            
               
             
               
@@ -776,9 +694,9 @@ writing your first CAmkES application.</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/hello-camkes-2.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/PortingSeL4.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/hello-camkes-2.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/PortingSeL4.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
