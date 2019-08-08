@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-07-19 13:09:22 +1000 -->
+<!-- Page last generated 2019-08-08 11:17:13 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -705,6 +705,37 @@
 <p><strong>Return value:</strong> This method does not return anything.</p>
 
 <p><strong>Description:</strong> Name a thread. This name will then be output by the kernel in all debugging output. Note that the max name length that can be passed to this function is limited by the number of chars that will fit in an IPC message (<code class="highlighter-rouge">seL4_MsgMaxLength</code> multiplied by the amount of chars that fit in a word). However the name is also truncated in order to fit into a TCB object. For some platforms you may need to increase <code class="highlighter-rouge">seL4_TCBBits</code> by 1 in a debug build in order to fit a long enough name.</p>
+
+<h3 id="send-sgi-0-15">Send SGI 0-15</h3>
+<p><code class="highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_DebugSendIPI</code></p>
+
+<p>Sends arbitrary SGI.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="highlighter-rouge">target</code></td>
+      <td>The target core ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unsigned</code></td>
+      <td><code class="highlighter-rouge">irq</code></td>
+      <td>The SGI number (0-15).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> This method does not return anything.</p>
+
+<p><strong>Description:</strong> Send an arbitrary SGI (core-specific interrupt 0-15) to the specified target core.</p>
 
 <h3 id="run">Run</h3>
 <p><code class="highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_DebugRun</code></p>
@@ -4701,144 +4732,6 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Unmap a page directory (level 2) from an upper page directory (level 1)</p>
-<h3 id="sel4_arm_pageglobaldirectory">seL4_ARM_PageGlobalDirectory</h3>
-
-<h4 id="clean-data-2">Clean Data</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageGlobalDirectory_Clean_Data</code></p>
-
-<p>Clean cached pages within a global page directory</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageGlobalDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">start</code></td>
-      <td>Start address</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">end</code></td>
-      <td>End address</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<h4 id="clean-and-invalidate-data-2">Clean and Invalidate Data</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageGlobalDirectory_CleanInvalidate_Data</code></p>
-
-<p>Clean and invalidate cached pages within a global page directory</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageGlobalDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">start</code></td>
-      <td>Start address</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">end</code></td>
-      <td>End address</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<h4 id="invalidate-data-2">Invalidate Data</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageGlobalDirectory_Invalidate_Data</code></p>
-
-<p>Invalidate cached pages within a global page directory</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageGlobalDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">start</code></td>
-      <td>Start address</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">end</code></td>
-      <td>End address</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<h4 id="unify-instruction-2">Unify Instruction</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageGlobalDirectory_Unify_Instruction</code></p>
-
-<p>Clean and invalidate cached instruction pages to point of unification</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageGlobalDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">start</code></td>
-      <td><em>TODO</em></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">end</code></td>
-      <td><em>TODO</em></td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
 <h3 id="sel4_arm_pageupperdirectory">seL4_ARM_PageUpperDirectory</h3>
 
 <h4 id="map-12">Map</h4>
@@ -4862,8 +4755,8 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">pgd</code></td>
-      <td>Global page directory</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>top level translation table</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4880,7 +4773,7 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Map an upper page directory (level 1) to a global page directory (level 0)</p>
+<p><strong>Description:</strong> Map an upper page directory (level 1) to a top level translation table (level 0)</p>
 
 <h4 id="unmap-12">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageUpperDirectory_Unmap</code></p>
@@ -4907,6 +4800,143 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> <em>TODO</em></p>
+<h3 id="sel4_arm_vspace">seL4_ARM_VSpace</h3>
+
+<h4 id="clean-data-2">Clean Data</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_Clean_Data</code></p>
+
+<p>Clean cached pages within a top level translation table</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">start</code></td>
+      <td>Start address</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">end</code></td>
+      <td>End address</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="clean-and-invalidate-data-2">Clean and Invalidate Data</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_CleanInvalidate_Data</code></p>
+
+<p>Clean and invalidate cached pages within a top level translation table</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">start</code></td>
+      <td>Start address</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">end</code></td>
+      <td>End address</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="invalidate-data-2">Invalidate Data</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_Invalidate_Data</code></p>
+
+<p>Invalidate cached pages within a top level translation table</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">start</code></td>
+      <td>Start address</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">end</code></td>
+      <td>End address</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="unify-instruction-2">Unify Instruction</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_Unify_Instruction</code></p>
+
+<p>Clean and invalidate cached instruction pages to point of unification</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">start</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">end</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <h2 id="riscv-specific-object-methods">RISCV-Specific Object Methods</h2>
 <hr />
@@ -5222,6 +5252,7 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#snapshot">Snapshot</a></li>
 <li class="toc-entry toc-h3"><a href="#cap-identify">Cap Identify</a></li>
 <li class="toc-entry toc-h3"><a href="#name-thread">Name Thread</a></li>
+<li class="toc-entry toc-h3"><a href="#send-sgi-0-15">Send SGI 0-15</a></li>
 <li class="toc-entry toc-h3"><a href="#run">Run</a></li>
 <li class="toc-entry toc-h3"><a href="#benchmarking-system-calls">Benchmarking System Calls</a></li>
 <li class="toc-entry toc-h3"><a href="#reset-log">Reset Log</a></li>
@@ -5471,18 +5502,18 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#unmap-11">Unmap</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_pageglobaldirectory">seL4_ARM_PageGlobalDirectory</a>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_pageupperdirectory">seL4_ARM_PageUpperDirectory</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#map-12">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#unmap-12">Unmap</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_vspace">seL4_ARM_VSpace</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#clean-data-2">Clean Data</a></li>
 <li class="toc-entry toc-h4"><a href="#clean-and-invalidate-data-2">Clean and Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#invalidate-data-2">Invalidate Data</a></li>
 <li class="toc-entry toc-h4"><a href="#unify-instruction-2">Unify Instruction</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_pageupperdirectory">seL4_ARM_PageUpperDirectory</a>
-<ul>
-<li class="toc-entry toc-h4"><a href="#map-12">Map</a></li>
-<li class="toc-entry toc-h4"><a href="#unmap-12">Unmap</a></li>
 </ul>
 </li>
 </ul>
@@ -5545,7 +5576,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Thu Jul 18 18:11:17 2019 +1000 db79522
+            Site last updated: Wed Aug 7 16:34:02 2019 +1000 33ece86
           </li>
           <li>
             
