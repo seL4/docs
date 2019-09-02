@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-08-08 11:17:13 +1000 -->
+<!-- Page last generated 2019-09-02 22:24:17 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1557,6 +1557,222 @@ controlled by the supplied IRQ handler capability</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<h3 id="sel4_schedcontext">seL4_SchedContext</h3>
+
+<h4 id="bind">Bind</h4>
+<p><code class="highlighter-rouge">static inline int seL4_SchedContext_Bind</code></p>
+
+<p>Bind an object to a scheduling context. The object can be a notification object or a
+thread.</p>
+
+<p>If the object is a thread and the thread is in a runnable state and the scheduling
+context has available budget, this will start the thread running.</p>
+
+<p>If the object is a notification, when passive threads wait on the notification object and
+a signal arrives, the passive thread will receive the scheduling context and possess it
+until it waits on the notification object again.</p>
+
+<p>This operation will fail if the scheduling context is already bound to a thread or
+notification object.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">cap</code></td>
+      <td>Capability to a TCB or a notification object</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> See autoref[sec:threads]</p>
+
+<h4 id="consumed">Consumed</h4>
+<p><code class="highlighter-rouge">static inline seL4_SchedContext_Consumed_t seL4_SchedContext_Consumed</code></p>
+
+<p>Return the amount of time used by this scheduling context since this function was last called or a timeout exception triggered.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> See autoref[sec:threads]</p>
+
+<h4 id="unbind">Unbind</h4>
+<p><code class="highlighter-rouge">static inline int seL4_SchedContext_Unbind</code></p>
+
+<p>Unbind any objects (threads or notification objects) from a scheduling context. This
+will render the bound thread passive, see Section 6.1.5.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> See autoref[sec:threads]</p>
+
+<h4 id="unbindobject">UnbindObject</h4>
+<p><code class="highlighter-rouge">static inline int seL4_SchedContext_UnbindObject</code></p>
+
+<p>Unbind an object from a scheduling context. The object can be either a thread or a
+notification.</p>
+
+<p>If the thread being unbound is the thread that is bound to this scheduling context,
+this will render the thread passive. However if the thread being
+unbound received the scheduling context via scheduling context donation over IPC,
+the scheduling context will be returned to the thread that it was originally bound to.</p>
+
+<p>If the object is a notification and it is bound to the scheduling context, unbind it.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">cap</code></td>
+      <td>Capability to a notification that is bound to the scheduling context or capability to a tcb that is bound to this scheduling context or has received it through scheduling context donation.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> See autoref[sec:passive]</p>
+
+<h4 id="yieldto">YieldTo</h4>
+<p><code class="highlighter-rouge">static inline seL4_SchedContext_YieldTo_t seL4_SchedContext_YieldTo</code></p>
+
+<p>If a thread is currently runnable and running on this scheduling context and the scheduling context has available budget, place it at the head of the scheduling queue.
+If the caller is at an equal priority to the thread this will result in the thread being scheduled.
+If the caller is at a higher priority the thread will not run until the threads priority is the highest priority in the system.
+The caller must have a maximum control priority greater than or equal to the threads priority.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> <em>TODO</em></p>
+
+<p><strong>Description:</strong> TODO</p>
+<h3 id="sel4_schedcontrol">seL4_SchedControl</h3>
+
+<h4 id="configure">Configure</h4>
+<p><code class="highlighter-rouge">static inline int seL4_SchedControl_Configure</code></p>
+
+<p>Set the parameters of a scheduling context by invoking the scheduling control capability. If the scheduling context is bound to a currently running thread, the parameters will take effect immediately: that is the current budget will be increased or reduced by the difference between the new and previous budget and the replenishment time will be updated according to any difference in the period. This can result in active threads being post-poned or released depending on the nature of the parameter change and the state of the thread. Additionally, if the scheduling context was previously empty (no budget) but bound to a runnable thread, this can result in a thread running for the first time since it now has access to CPU time. This call will return seL4 Invalid Argument if the parameters are too small (smaller than the kernel WCET for this platform) or too large (will overflow the timer).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td><em>TODO</em></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="highlighter-rouge">schedcontext</code></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Time</code></td>
+      <td><code class="highlighter-rouge">budget</code></td>
+      <td>Timeslice in microseconds, when the budget expires the thread will be pre-empted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Time</code></td>
+      <td><code class="highlighter-rouge">period</code></td>
+      <td>Period in microseconds, if equal to budget, this thread will be treated as a round-robin thread. Otherwise, sporadic servers will be used to assure the scheduling context does not exceed the budget over the specified period.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">extra_refills</code></td>
+      <td>Number of extra sporadic replenishments this scheduling context should use. Ignored for round-robin threads.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">badge</code></td>
+      <td>Identifier for this scheduling context. Delivered to timeout exception handler. Can be used to determine which scheduling context triggered the timeout.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> See autoref[sec:threads]</p>
 <h3 id="sel4_tcb">seL4_TCB</h3>
 
 <h4 id="bind-notification">Bind Notification</h4>
@@ -1582,6 +1798,60 @@ controlled by the supplied IRQ handler capability</p>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
       <td><code class="highlighter-rouge">notification</code></td>
       <td>Notification to bind.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="configure-mcs">Configure (MCS)</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
+
+<p>Set the parameters of a TCB</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">cspace_root</code></td>
+      <td>The new CSpace root.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">cspace_root_data</code></td>
+      <td>Optionally set the guard and guard size of the new root CNode. If set to zero, this parameter has no effect.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">vspace_root</code></td>
+      <td>The new VSpace root.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">vspace_root_data</code></td>
+      <td>Has no effect on x86 or ARM processors.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">buffer</code></td>
+      <td>Location of the thread’s IPC buffer. Must be 512-byte aligned. The IPC buffer may not cross a page boundary.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">bufferFrame</code></td>
+      <td>Capability to a page containing the thread’s IPC buffer.</td>
     </tr>
   </tbody>
 </table>
@@ -1624,7 +1894,7 @@ this may or may not require the consumption of a hardware register.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_TCB_ConfigureSingleStepping_t</code>: Struct that contains                 <code class="highlighter-rouge">seL4_Error error</code>, an seL4 API error value,                 <code class="highlighter-rouge">seL4_Bool bp_was_consumed</code>, a boolean which indicates whether or not the <code class="highlighter-rouge">bp_num</code>                 breakpoint ID that was passed to the function, was consumed in the setup of the single-stepping                 functionality: if this is <code class="highlighter-rouge">true</code>, the caller should not attempt to re-use <code class="highlighter-rouge">bp_num</code>                 until it has disabled the single-stepping functionality via a subsequent call to                 seL4_TCB_ConfigureSingleStepping with an <code class="highlighter-rouge">num_instructions</code> argument of 0.</p>
 
-<h4 id="configure">Configure</h4>
+<h4 id="configure-1">Configure</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
 
 <p>Set the parameters of a TCB</p>
@@ -2022,6 +2292,56 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<h4 id="set-sched-params-mcs">Set Sched Params (MCS)</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
+
+<p>Change a thread’s priority, maximum controlled priority, scheduling context
+and fault handler.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">authority</code></td>
+      <td>Capability to the TCB to use the MCP from when setting the priority and MCP.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">mcp</code></td>
+      <td>The thread’s new maximum controlled priority.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">priority</code></td>
+      <td>The thread’s new priority.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">sched_context</code></td>
+      <td>Capability to the scheduling context that the TCB should run on. If the scheduling context is already bound to a notification or TCB that is not this TCB this operation will fail. Similarly, if this TCB is already bound to a scheduling context that is not this scheduling context, this will also fail.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">fault_ep</code></td>
+      <td>CPTR to the endpoint which receives IPCs when this thread faults.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
 <h4 id="set-sched-params">Set Sched Params</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
 
@@ -2083,7 +2403,7 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">fault_ep</code></td>
-      <td>CPTR to the endpoint which receives IPCs when this thread faults. This capability is in the CSpace of the thread being configured.</td>
+      <td>CPTR to the endpoint which receives IPCs when this thread faults. On MCS this cap gets copied into the TCB.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CNode</code></td>
@@ -2141,6 +2461,37 @@ used for TLS can only be written to in privilidged mode</p>
 <p><strong>Return value:</strong> <em>TODO</em></p>
 
 <p><strong>Description:</strong> <em>TODO</em></p>
+
+<h4 id="set-timeout-endpoint">Set Timeout Endpoint</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetTimeoutEndpoint</code></p>
+
+<p>Set a thread’s timeout endpoint.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">timeout_fault_ep</code></td>
+      <td>CPTR to the endpoint which receives IPCs when this thread triggers timeout faults. Can be null.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Timeout exception messages will be delivered to this endpoint if it is not a null capability.</p>
 
 <h4 id="suspend">Suspend</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Suspend</code></p>
@@ -5298,11 +5649,26 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#set-notification">Set Notification</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h3"><a href="#sel4_schedcontext">seL4_SchedContext</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#bind">Bind</a></li>
+<li class="toc-entry toc-h4"><a href="#consumed">Consumed</a></li>
+<li class="toc-entry toc-h4"><a href="#unbind">Unbind</a></li>
+<li class="toc-entry toc-h4"><a href="#unbindobject">UnbindObject</a></li>
+<li class="toc-entry toc-h4"><a href="#yieldto">YieldTo</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_schedcontrol">seL4_SchedControl</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#configure">Configure</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#sel4_tcb">seL4_TCB</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#bind-notification">Bind Notification</a></li>
+<li class="toc-entry toc-h4"><a href="#configure-mcs">Configure (MCS)</a></li>
 <li class="toc-entry toc-h4"><a href="#configure-single-stepping">Configure Single Stepping</a></li>
-<li class="toc-entry toc-h4"><a href="#configure">Configure</a></li>
+<li class="toc-entry toc-h4"><a href="#configure-1">Configure</a></li>
 <li class="toc-entry toc-h4"><a href="#copy-registers">Copy Registers</a></li>
 <li class="toc-entry toc-h4"><a href="#get-breakpoint">Get Breakpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#read-registers">Read Registers</a></li>
@@ -5312,9 +5678,11 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#set-ipc-buffer">Set IPC Buffer</a></li>
 <li class="toc-entry toc-h4"><a href="#set-maximum-controlled-priority">Set Maximum Controlled Priority</a></li>
 <li class="toc-entry toc-h4"><a href="#set-priority">Set Priority</a></li>
+<li class="toc-entry toc-h4"><a href="#set-sched-params-mcs">Set Sched Params (MCS)</a></li>
 <li class="toc-entry toc-h4"><a href="#set-sched-params">Set Sched Params</a></li>
 <li class="toc-entry toc-h4"><a href="#set-space">Set Space</a></li>
 <li class="toc-entry toc-h4"><a href="#set-tls-base">Set TLS Base</a></li>
+<li class="toc-entry toc-h4"><a href="#set-timeout-endpoint">Set Timeout Endpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#suspend">Suspend</a></li>
 <li class="toc-entry toc-h4"><a href="#unbind-notification">Unbind Notification</a></li>
 <li class="toc-entry toc-h4"><a href="#unset-breakpoint">Unset Breakpoint</a></li>

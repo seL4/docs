@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-08-08 11:17:13 +1000 -->
+<!-- Page last generated 2019-09-02 22:24:17 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -327,8 +327,8 @@ page, if they were covered by a previous tutorial in the series.</p>
 
 <ul>
   <li>Allocate a notification object.</li>
-  <li>Set up a timer provided by seL4 libs.</li>
-  <li>Use <code class="highlighter-rouge">seL4_libs</code> functions to manipulate timer and
+  <li>Set up a timer provided by <code class="highlighter-rouge">util_libs</code>.</li>
+  <li>Use <code class="highlighter-rouge">seL4_libs</code> and <code class="highlighter-rouge">util_libs</code> functions to manipulate timer and
     handle interrupts.</li>
 </ul>
 
@@ -393,15 +393,24 @@ interrupts on.</p>
 
 <h3 id="initialise-the-timer">Initialise the timer</h3>
 
-<p>Use our library function <code class="highlighter-rouge">sel4platsupport_get_default_timer</code> to
+<p>Use our library function <code class="highlighter-rouge">ltimer_default_init</code> to
 initialise a timer driver. Assign it to the <code class="highlighter-rouge">timer</code> global variable.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="cm">/* TASK 2: call sel4platsupport library to get the default timer */</span>
-    <span class="cm">/* hint: sel4platsupport_init_default_timer
+    <span class="cm">/* TASK 2: call ltimer library to get the default timer */</span>
+    <span class="cm">/* hint: ltimer_default_init, you can set NULL for the callback and token
      */</span>
     <span class="n">ps_io_ops_t</span> <span class="n">ops</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_io_ops</span><span class="p">(</span><span class="n">vspace</span><span class="p">,</span> <span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">);</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_malloc_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">malloc_ops</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_io_mapper</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vspace</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">io_mapper</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_fdt_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">io_fdt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">malloc_ops</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ntfn_object</span><span class="p">.</span><span class="n">cptr</span> <span class="o">!=</span> <span class="n">seL4_CapNull</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_mini_irq_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">irq_ops</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">malloc_ops</span><span class="p">,</span>
+                                                 <span class="n">ntfn_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="n">MASK</span><span class="p">(</span><span class="n">seL4_BadgeBits</span><span class="p">));</span>
+        <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_arch_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div></div>
@@ -443,10 +452,14 @@ and acknowledge the irq.</p>
          * The loop runs for (1000 * msg) times, which is basically 1 second * msg.
          *
          * hint2: seL4_Wait
-         * hint3: sel4platsupport_handle_timer_irq
+         * hint3: sel4platsupport_irq_handle
+         * hint4: 'ntfn_id' should be MINI_IRQ_INTERFACE_NTFN_ID and handle_mask' should be the badge
          *
          */</span>
 </code></pre></div></div>
+<p>The timer interrupts are bound to the IRQ interface initialised in Task 2,
+hence when we receive an interrupt, we forward it to the interface and let it notify the timer driver.</p>
+
 <p>After this task is completed you should see a 2 second wait, then output from the
  client as follows:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up:
@@ -459,7 +472,7 @@ and acknowledge the irq.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/*
      * TASK 5: Stop the timer
-     * hint: sel4platsupport_destroy_timer
+     * hint: ltimer_destroy 
      */</span>
 </code></pre></div></div>
 <p>The output should not change on successful completion of completing this task.</p>
