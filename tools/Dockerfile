@@ -3,10 +3,18 @@ FROM ruby
 RUN apt-get update -q \
     && apt-get install -y --no-install-recommends \
         doxygen \
-        python-bs4 \
-        python-lxml \
+        python3-bs4 \
+        python3-lxml \
+        python3-six \
+        python3-jinja2 \
+        python3-sh \
+        python-pip \
+        python3-pip \
+        python3-pyelftools \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
+    && pip3 install setuptools \
+    && pip3 install aenum sortedcontainers pyyaml pyaml \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Init bundle dependencies
