@@ -46,13 +46,14 @@ git submodule update
 # If this doesn't work see: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 bundle install
 
-bundle exec jekyll serve
+make serve
 #   Server address: http://127.0.0.1:4000/
 #   Server running... press ctrl-c to stop.
 ```
 Or with docker: 
 ```
-docker run --network=host -v $PWD:/host -w /host -it ruby bash -c 'bundle install && bundle exec jekyll serve'
+make docker_build
+make docker_serve
 ```
 
 ### Makefile and JEKYLL_ENV=production version

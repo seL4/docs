@@ -1,4 +1,11 @@
 
+
+default: serve
+
+.PHONY: ruby_deps
+ruby_deps: Gemfile Gemfile.lock
+	bundle install
+
 # The following rules generate a yaml file that contains file modification metadata
 # provided by git.  The format is:
 #
@@ -15,44 +22,39 @@
 FILE_NAME=_data/generated.yml
 
 UPDATE_DATE:= $(shell git log -1 --format='%cd %h')
-FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | sed 's/.\///')
-
-SEL4_GIT_URL=https://github.com/seL4/seL4.git
-TUTORIALS_GIT_URL=https://github.com/sel4proj/sel4-tutorials.git
-CAPDL_GIT_URL=https://github.com/sel4/capdl.git
-
-DOCKER_IMG:=docs_builder
-
-$(dir $(FILE_NAME)):
-	mkdir -p $@
-
-_generate_git_site_timestamp: $(dir $(FILE_NAME))
+FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | grep -ve "^./_repos/"| sed 's/.\///')
+.PHONY: _data/generated.yml
+_data/generated.yml:
 	echo "date: $(UPDATE_DATE)" > $(FILE_NAME)
-
-_generate_git_per_page_timestamps: _generate_git_site_timestamp
 	echo timestamps: >> $(FILE_NAME) && \
 	for i in $(FILES); do \
 		echo "  - page: $$i" >> $(FILE_NAME) &&\
 		echo "    date: `git log -1 --format='%cd %h' -- $$i`" >> $(FILE_NAME); \
 	done
+generate_data_files: _data/generated.yml
 
-generate_data_files: _generate_git_per_page_timestamps
 
-_repos/sel4-tutorials:
-	git clone $(TUTORIALS_GIT_URL) _repos/sel4-tutorials
-	git clone $(CAPDL_GIT_URL) _repos/capdl
-	mkdir -p _repos/tutes
+# Adding a git URL here and appending the directory name to REPOSITORY_LIST will
+# add a rule for checking out the repository under _repos/$(REPO_NAME)
+sel4_URL=https://github.com/seL4/seL4.git
+sel4-tutorials_URL=https://github.com/sel4proj/sel4-tutorials.git
+capdl_URL=https://github.com/sel4/capdl.git
+REPOSITORY_LIST = sel4 sel4-tutorials capdl
+REPOSITORIES = $(REPOSITORY_LIST:%=_repos/%)
 
-_repos/tutes/%.md: _repos/sel4-tutorials/tutorials/%
+$(REPOSITORIES):
+	git clone $($(subst _repos/,,$@)_URL) $@
+
+_repos/tutes:
+	mkdir -p $@
+
+_repos/tutes/%.md: _repos/sel4-tutorials/tutorials/% _repos/tutes
 	PYTHONPATH=_repos/capdl/python-capdl-tool _repos/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
 
 TUTORIALS:= $(filter-out index.md,$(notdir $(wildcard Tutorials/*.md)))
 tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
-_repos/sel4:
-	git clone $(SEL4_GIT_URL) _repos/sel4
-
-_generate_api_pages: _repos/sel4
+_generate_api_pages: $(REPOSITORIES)
 	$(MAKE) markdown -C _repos/sel4/manual
 
 generate_api: _generate_api_pages
@@ -62,28 +64,34 @@ generate_api: _generate_api_pages
 # The _production versions run with JEKYLL_ENV=production which will show additional content.
 # The _production versions require `generate_data_files` to have been run separately.
 JEKYLL_ENV:=development
-
+DOCKER_IMG:=docs_builder
 docker_serve: docker_build
-	docker run --network=host -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c 'bundle install && $(MAKE) generate_api && JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve'
-
-docker_serve_production:
-	$(MAKE) docker_serve JEKYLL_ENV=production
+	docker run --network=host -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c '$(MAKE) serve JEKYLL_ENV=$(JEKYLL_ENV)'
 
 docker_build:
 	docker build -t $(DOCKER_IMG) tools/
 
-serve: generate_api
+serve: build
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
-serve_production:
-	$(MAKE) serve JEKYLL_ENV=production
+build: generate_api ruby_deps $(REPOSITORIES)
+	$(MAKE) tutorials
+ifeq ($(JEKYLL_ENV),production)
+	$(MAKE) generate_data_files
+endif
+	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll build
 
+
+clean:
+	rm -rf _site
+	rm -rf _repos
+	rm -rf _data/generated.yml
+	rm -rf .sass-cache/
 # Check conformance for Web Content Accessibility Guidelines (WCAG) 2.0, AA
 # This relies on Automated Accessibility Testing Tool (AATT) (https://github.com/paypal/AATT)
 # to be running and listening on http://localhose:3000
 # The resulting conformance_results.xml file can be viewed with `make check_conformance_errors` or using a junit xml viewer
-check_conformance: generate_api
-	bundle exec jekyll build
+check_conformance: build
 	find _site -iname "*.html"| sed "s/_site.//" | python tools/testWCAG.py > conformance_results.xml
 
 check_conformance_errors: conformance_results.xml
@@ -104,6 +112,5 @@ check_liquid_syntax:
 # Output html checking using tidy.
 # Any warnings or errors will be printed to stdout
 # Requires `tidy` to be installed.
-check_html_output: generate_api
-	bundle exec jekyll build	
+check_html_output: build
 	find _site/ -iname "*.html"| xargs -l tidy -q --drop-empty-elements n -e
