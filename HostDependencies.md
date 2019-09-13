@@ -77,9 +77,10 @@ sudo apt-get -t stretch-backports install cmake
 Regardless of your Linux distribution, python dependencies are required to build seL4, the manual and its proofs. To install you can run:
 
 ```
-pip install --user setuptools
-pip install --user sel4-deps
+pip3 install --user setuptools
+pip3 install --user sel4-deps
 ```
+(Some distributions use `pip` for python3 and `pip2` for python2; others uses `pip` for python2 and `pip3` for python3.  Use the Python 3 version for your distribution)
 
 ## Get Google's Repo tool
 
@@ -96,7 +97,7 @@ To build a CAmkES based project on seL4, additional dependencies need to be inst
 The python dependencies required by the CAmkES build toolchain can be installed via pip:
 
 ```
-pip install --user camkes-deps
+pip3 install --user camkes-deps
 ```
 
 ### Haskell Dependencies
