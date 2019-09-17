@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dynamic Libraries 4 | seL4 docs</title>
+    <title>Imx8mq | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -69,8 +69,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Tutorials/">
-              <span property="name"><b>Tutorials</b></span>
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
               <meta property="position" content="2" />
             </a>
         </li>
@@ -79,7 +79,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Dynamic Libraries 4</span>
+            <span property="name">Imx8mq</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -238,7 +238,7 @@
             <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
         <li>
   
-        <li class="active">
+        <li class="">
             <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
         <li>
   
@@ -295,200 +295,31 @@
     
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
-<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
-<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#allocate-a-notification-object">Allocate a notification object</a></li>
-<li class="toc-entry toc-h3"><a href="#initialise-the-timer">Initialise the timer</a></li>
-<li class="toc-entry toc-h3"><a href="#use-the-timer">Use the timer</a></li>
-<li class="toc-entry toc-h3"><a href="#handle-the-interrupt">Handle the interrupt</a></li>
-<li class="toc-entry toc-h3"><a href="#destroy-the-timer">Destroy the timer</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
+<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
 </ul>
       </nav>
     
     <div class="content">
-      
-<h1 id="sel4-dynamic-libraries-timer-tutorial">seL4 Dynamic Libraries: Timer tutorial</h1>
+      <h1 id="imx8mq">Imx8mq</h1>
 
-<p>This tutorial demonstrates how to set up and use a basic timer driver using the
-<code class="highlighter-rouge">seL4_libs</code> dynamic libraries.</p>
+<p>Using the U-Boot bootloader.</p>
 
-<p>You’ll observe that the things you’ve already covered in the other
-tutorials are already filled out and you don’t have to repeat them: in
-much the same way, we won’t be repeating conceptual explanations on this
-page, if they were covered by a previous tutorial in the series.</p>
+<h2 id="building-sel4test">Building seL4test</h2>
 
-<h2 id="learning-outcomes">Learning outcomes</h2>
-
-<ul>
-  <li>Allocate a notification object.</li>
-  <li>Set up a timer provided by <code class="highlighter-rouge">util_libs</code>.</li>
-  <li>Use <code class="highlighter-rouge">seL4_libs</code> and <code class="highlighter-rouge">util_libs</code> functions to manipulate timer and
-    handle interrupts.</li>
-</ul>
-
-<h2 id="initialising">Initialising</h2>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/#get-the-code</span>
-<span class="c">#</span>
-<span class="c"># Follow these instructions to initialise the tutorial</span>
-<span class="c"># initialising the build directory with a tutorial exercise</span>
-./init <span class="nt">--tut</span> dynamic-3
-<span class="c"># building the tutorial exercise</span>
-<span class="nb">cd </span>dynamic-3_build
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+mkdir cbuild
+<span class="nb">cd </span>cbuild
+../init-build <span class="nt">-DPLATFORM</span><span class="o">=</span>imx8mq <span class="nt">-DAARCH64</span><span class="o">=</span>1
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
 ninja
+
 </code></pre></div></div>
 
-<h2 id="prerequisites">Prerequisites</h2>
-
-<ol>
-  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
-  <li><a href="https://docs.sel4.systems/Tutorials/dynamic-3">dynamic-3</a></li>
-</ol>
-
-<h2 id="exercises">Exercises</h2>
-
-<p>Once you initialise and run the tutorials, you will see the following output:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
-Node 0 of 1
-IOPT levels:     4294967295
-IPC buffer:      0x5a1000
-Empty slots:     [523 --&gt; 4096)
-sharedFrames:    [0 --&gt; 0)
-userImageFrames: [16 --&gt; 433)
-userImagePaging: [12 --&gt; 15)
-untypeds:        [433 --&gt; 523)
-Initial thread domain: 0
-Initial thread cnode size: 12
-timer client: hey hey hey
-main: hello world
-main: got a message from 0x61 to sleep 2 seconds
-ltimer_get_time@ltimer.h:267 get_time not implemented
-timer client wakes up:
- got the current timer tick:
- 0
-</code></pre></div></div>
-<h3 id="allocate-a-notification-object">Allocate a notification object</h3>
-
-<p>The first task is to allocate a notification object to receive
-interrupts on.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="cm">/* TASK 1: create a notification object for the timer interrupt */</span>
-    <span class="cm">/* hint: vka_alloc_notification()
-     * int vka_alloc_notification(vka_t *vka, vka_object_t *result)
-     * @param vka Pointer to vka interface.
-     * @param result Structure for the notification object. This gets initialised.
-     * @return 0 on success
-     * https://github.com/seL4/libsel4vka/blob/master/include/vka/object.h#L98
-     */</span>
-    <span class="n">vka_object_t</span> <span class="n">ntfn_object</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-</code></pre></div></div>
-<p>The output will not change as a result of completing this task.</p>
-
-<h3 id="initialise-the-timer">Initialise the timer</h3>
-
-<p>Use our library function <code class="highlighter-rouge">ltimer_default_init</code> to
-initialise a timer driver. Assign it to the <code class="highlighter-rouge">timer</code> global variable.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="cm">/* TASK 2: call ltimer library to get the default timer */</span>
-    <span class="cm">/* hint: ltimer_default_init, you can set NULL for the callback and token
-     */</span>
-    <span class="n">ps_io_ops_t</span> <span class="n">ops</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_malloc_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">malloc_ops</span><span class="p">);</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_io_mapper</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vspace</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">io_mapper</span><span class="p">);</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_fdt_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">io_fdt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">malloc_ops</span><span class="p">);</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">ntfn_object</span><span class="p">.</span><span class="n">cptr</span> <span class="o">!=</span> <span class="n">seL4_CapNull</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_mini_irq_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">irq_ops</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ops</span><span class="p">.</span><span class="n">malloc_ops</span><span class="p">,</span>
-                                                 <span class="n">ntfn_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="n">MASK</span><span class="p">(</span><span class="n">seL4_BadgeBits</span><span class="p">));</span>
-        <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4platsupport_new_arch_ops</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ops</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">);</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
-</code></pre></div></div>
-<p>After this change, the server will output non-zero for the tick value at the end.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> got the current timer tick:
- 1409040
-</code></pre></div></div>
-
-<h3 id="use-the-timer">Use the timer</h3>
-
-<p>While at the end of the previous task the tutorial appears to be
-working, the main thread replies immediately to the client and doesn’t
-wait at all.</p>
-
-<p>Consequently, the final task is to interact with the timer: set a
-timeout, wait for an interrupt on the created notification, and handle
-it.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="cm">/*
-     * TASK 3: Start and configure the timer
-     * hint 1: ltimer_set_timeout
-     * hint 2: set period to 1 millisecond
-     */</span>
-</code></pre></div></div>
-<p>The output will cease after the following line as a result of completing this task.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a message from 0x61 to sleep 2 seconds
-</code></pre></div></div>
-
-<h3 id="handle-the-interrupt">Handle the interrupt</h3>
-
-<p>In order to receive more interrupts, you need to handle the interrupt in the driver
-and acknowledge the irq.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-        <span class="cm">/*
-         * TASK 4: Handle the timer interrupt
-         * hint 1: wait for the incoming interrupt and handle it
-         * The loop runs for (1000 * msg) times, which is basically 1 second * msg.
-         *
-         * hint2: seL4_Wait
-         * hint3: sel4platsupport_irq_handle
-         * hint4: 'ntfn_id' should be MINI_IRQ_INTERFACE_NTFN_ID and handle_mask' should be the badge
-         *
-         */</span>
-</code></pre></div></div>
-<p>The timer interrupts are bound to the IRQ interface initialised in Task 2,
-hence when we receive an interrupt, we forward it to the interface and let it notify the timer driver.</p>
-
-<p>After this task is completed you should see a 2 second wait, then output from the
- client as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up:
- got the current timer tick:
- 2365866120
-</code></pre></div></div>
-
-<h3 id="destroy-the-timer">Destroy the timer</h3>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    <span class="cm">/*
-     * TASK 5: Stop the timer
-     * hint: ltimer_destroy 
-     */</span>
-</code></pre></div></div>
-<p>The output should not change on successful completion of completing this task.</p>
-
-<p>That’s it for this tutorial.</p>
-
-<hr />
-<h2 id="getting-help">Getting help</h2>
-<p>Stuck? See the resources below.</p>
-<ul>
-  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
-  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
-  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
-  <li><a href="https://docs.sel4.systems/IRCChannel">IRC Channel</a></li>
-  <li><a href="https://sel4.systems/lists/listinfo/devel">Developer’s mailing list</a></li>
-</ul>
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
 
     </div>
@@ -629,7 +460,7 @@ hence when we receive an interrupt, we forward it to the interface and let it no
               
             
               
-            
+                Page last updated: Tue Sep 17 14:50:21 2019 +1000 a487bf6
               
             
               
@@ -681,7 +512,7 @@ hence when we receive an interrupt, we forward it to the interface and let it no
               
             
               
-                Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
+            
               
             
               
@@ -829,9 +660,9 @@ hence when we receive an interrupt, we forward it to the interface and let it no
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Tutorials/dynamic-4.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/imx8mq.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Tutorials/dynamic-4.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/imx8mq.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
