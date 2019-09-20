@@ -16,11 +16,10 @@ We have developed a set of tools which can be used to analyse kernel and
 workload performance.
 
 ## CPU Utilisation
- Threads (including the idle thread) and the
-overall system time (in cycles) can be tracked by enabling the "track
-CPU utilisation feature". This feature can be enabled from the
-menuconfig list (seL4 Kernel > Enable benchmarks > Track threads
-and kernel CPU utilisation time).
+ Threads (including the idle thread) and the overall system time (in cycles) can
+be tracked by enabling the "track CPU utilisation feature". This feature can be
+enabled by setting the CMake configuration option `KernelConfiguration` to
+`track_utilisation`.
 
 By enabling CPU utilisation tracking, the kernel is instrumented with
 some variables and functions to log the utilisation time for each thread
@@ -79,13 +78,13 @@ printf("Overall utilisation = %llun", ipcbuffer[BENCHMARK_TOTAL_UTILISATION]);
 ## In kernel log-buffer
 
 
-An in-kernel log buffer can be provided by the user when
-`CONFIG_ENABLE_BENCHARMKS` is set with the system call
-`seL4_BenchmarkSetLogBuffer`. Users must provide a large frame capability
-for the kernel to use as a log buffer. This is mapped write-through to
-avoid impacting the caches, assuming that the kernel only writes to the
-log buffer and doesn't read to it during benchmarking. Once a benchmark
-is complete, data can be read out at user level.
+An in-kernel log buffer can be provided by the user when the `KernelBenchmarks`
+CMake config option is set to `track_kernel_entries` or `tracepoints` with the
+system call `seL4_BenchmarkSetLogBuffer`. Users must provide a large frame
+capability for the kernel to use as a log buffer. This is mapped write-through
+to avoid impacting the caches, assuming that the kernel only writes to the log
+buffer and doesn't read to it during benchmarking. Once a benchmark is
+complete, data can be read out at user level.
 
 We provide several benchmarking tools that use the log buffer (trace
 points and kernel entry tracking).
@@ -95,7 +94,8 @@ points and kernel entry tracking).
 to track the time between points.
 
 ### How to use
- Set "Maximum number of tracepoints" in Kconfig (seL4 > seL4 System Parameters) to a non-zero value.
+ Set the `KernelBenchmarks` CMake config option to `tracepoints`. Then set the
+`KernelMaxNumTracePoints` CMake config option to a non-zero value.
 
 Wrap the regions you wish to time with TRACE_POINT_START(i) and
 TRACE_POINT_STOP(i) where i is an integer from 0 to 1 less than the
@@ -227,16 +227,15 @@ When interleaving or nesting tracepoints, be
 sure to account for the overhead that will be introduced.
 
 ## Kernel entry tracking
- Kernel entries can be tracked, registering
-info about interrupts, syscall, timestamp, invocations and capability
-types. The number of kernel entries is restricted by the log buffer
-size. The kernel provides a reserved area within its address space to
-map the log buffer. It's the responsibility of the user to allocate a
-user-level log buffer (currently can be only of seL4_LargePageBits
-size) and pass it to the kernel to use before doing any operations that
-involve the log buffer, otherwise an error will be triggered having
-incorrect user-level log buffer. To enable this feature, select
-CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES from menuconfig.
+ Kernel entries can be tracked, registering info about interrupts, syscall,
+timestamp, invocations and capability types. The number of kernel entries is
+restricted by the log buffer size. The kernel provides a reserved area within
+its address space to map the log buffer. It's the responsibility of the user to
+allocate a user-level log buffer (currently can be only of seL4_LargePageBits
+size) and pass it to the kernel to use before doing any operations that involve
+the log buffer, otherwise an error will be triggered having incorrect
+user-level log buffer. To enable this feature, set the `KernelBenchmarks` CMake
+config option to `track_kernel_entries`. 
 
 An example how to create a user-level log buffer (using sel4 libraries)
 and tell the kernel about it is as follows:
