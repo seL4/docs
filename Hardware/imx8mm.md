@@ -1,7 +1,7 @@
 ---
 toc: true
 arm_hardware: true
-cmake_plat: imx8mm
+cmake_plat: imx8mm-evk
 xcompiler_arg: -DAARCH64=1
 platform: imx8mm
 arch: ARMv8A, AArch64
