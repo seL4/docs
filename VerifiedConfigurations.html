@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 5.2.0 | seL4 docs</title>
+    <title>Verified Configurations | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,7 +68,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 5.2.0</span>
+            <span property="name">Verified Configurations</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -147,7 +147,7 @@
           </a>
         </li>
   
-        <li class="">
+        <li class="active">
           <a class="" href="/VerifiedConfigurations.html">
             Verified Configurations
           </a>
@@ -288,43 +288,168 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#examining-and-building-verified-configurations">Examining and Building Verified Configurations</a></li>
+<li class="toc-entry toc-h2"><a href="#available-verified-configurations">Available Verified Configurations</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#unverified-features">Unverified Features</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#arm">ARM</a></li>
+<li class="toc-entry toc-h2"><a href="#arm_hyp">ARM_HYP</a></li>
+<li class="toc-entry toc-h2"><a href="#x64">X64</a></li>
+</ul>
+      </nav>
+    
     <div class="content">
-      <h1 id="introducing-sel4-520">Introducing seL4 5.2.0</h1>
-<p>Announcing the release of <code class="highlighter-rouge">seL4 5.2.0</code>
-with the following changes:</p>
+      <h1 id="verified-configurations">Verified Configurations</h1>
 
-<p>Below are the changes to libsel4:</p>
+<p>This page describes which architecture/platform/configuration
+combinations of seL4 have verified properties, which configurations
+possess which properties, and how to obtain an seL4 version for a
+specified configuration.</p>
 
-<ul>
-  <li>Add <code class="highlighter-rouge">seL4_FastMessageRegisters</code>: Exposes number of registers used
-      in IPC for more optimised user-level IPC stubs.</li>
-  <li>Additional kernel entry types <code class="highlighter-rouge">VMExit</code> and <code class="highlighter-rouge">VCPUFault</code> added for
-      benchmarking kernel entries.</li>
-</ul>
+<p>At this time, verification of seL4 remains a more time-intensive process
+than software development. Consequently, while seL4 has been ported to
+multiple architectures, and its build system allows further
+configuration of internal and hardware features, verified configurations
+are necessarily both less numerous and more specific.</p>
 
-<p>x86 specific changes:</p>
+<p>These configurations are also referred to as <em>verification platforms</em>,
+currently constituting: ARM, ARM_HYP, X64, RISCV64, ARM_MCS</p>
 
-<ul>
-  <li>multiboot memory map information passed to user-level through
-      bootinfo extended regions</li>
-  <li>Expose more seL4 constants</li>
-</ul>
+<p>Please consult <a href="FrequentlyAskedQuestions">Frequently Asked
+Questions</a>, as well as the <a href="http://sel4.systems/Info/FAQ/proof.pml">proof and
+assumptions page</a> for a better
+understanding of the intersection of verification and seL4.</p>
 
-<h1 id="upgrade-notes">Upgrade notes</h1>
+<h2 id="examining-and-building-verified-configurations">Examining and Building Verified Configurations</h2>
 
-<ul>
-  <li>This release potentially breaks ABI with the earlier versions if
-    using benchmarking kernel configurations.</li>
-</ul>
+<p>Current verified configurations can be found in seL4 sources in the
+<code class="highlighter-rouge">configs</code> folder:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>configs/<span class="k">*</span>_verified.cmake
+<span class="c"># configs/ARM_HYP_verified.cmake  configs/RISCV64_verified.cmake</span>
+<span class="c"># configs/ARM_MCS_verified.cmake  configs/X64_verified.cmake</span>
+<span class="c"># configs/ARM_verified.cmake</span>
+</code></pre></div></div>
 
-<h1 id="full-changelog">Full changelog</h1>
+<p>To obtain specific source code and build for a given configuration (e.g.
+ARM) in a build directory:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir build
+<span class="nb">cd </span>build
+cmake <span class="nt">-P</span> ../config/ARM_verified.cmake
+</code></pre></div></div>
 
-<p>Use <code class="highlighter-rouge">git log 5.1.0..5.2.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+<p>Notably <code class="highlighter-rouge">kernel.elf</code> is the kernel binary, and <code class="highlighter-rouge">kernel_all_pp.c</code> is
+the kernel source code after preprocessing, which is used as the basis
+for verification efforts.</p>
 
-<h1 id="more-details">More details</h1>
+<p>Also see <a href="Developing/Building/seL4Standalone">Stand-alone seL4 builds</a>
+for general guidelines on generating an seL4 binary from an existing
+configuration and what to do with a <code class="highlighter-rouge">kernel.elf</code> file.</p>
 
-<p>See the
-<a href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0.pdf">5.2.0 manual</a> included in the release or ask on the mailing list!</p>
+<h2 id="available-verified-configurations">Available Verified Configurations</h2>
+
+<h3 id="unverified-features">Unverified Features</h3>
+
+<p>At present, none of our verified configurations take into account
+address translation for devices (System MMU or IOMMU), debug/profiling
+interfaces, or the kernel startup at boot.</p>
+
+<p>The proofs for RISCV64 (RISC-V 64-bit port) and ARM_MCS
+(mixed-criticality extensions to real-time seL4 features) are in
+progress. Refer to the <a href="https://sel4.systems/Info/Roadmap/">roadmap</a> for
+status and upcoming features.</p>
+
+<h2 id="arm">ARM</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">ARM_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>iMX.6 (e.g. Sabre Lite)</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, integrity (access control), confidentiality (information flow), partial binary correctness</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm_hyp">ARM_HYP</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">ARM_HYP_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>Tegra TK1</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="x64">X64</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">X64_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture/Platform</td>
+      <td>x86 64-bit</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness</td>
+    </tr>
+  </tbody>
+</table>
 
 
     </div>
@@ -557,7 +682,7 @@ with the following changes:</p>
               
             
               
-            
+                Page last updated: Mon Sep 23 16:18:53 2019 +1000 66c1994
               
             
               
@@ -627,7 +752,7 @@ with the following changes:</p>
               
             
               
-                Page last updated: Wed Mar 14 15:16:09 2018 +1100 c13bd9a
+            
               
             
               
@@ -667,9 +792,9 @@ with the following changes:</p>
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/seL4_5.2.0.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/VerifiedConfigurations.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/seL4_5.2.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/VerifiedConfigurations.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
