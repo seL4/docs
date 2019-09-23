@@ -51,6 +51,23 @@ A subset of available projects are described below, for a full list see the [lis
 Read the [Hardware](Hardware) pages to see a list of supported platforms,
 and special instructions for particular hardware platforms.
 
+### Verification Targets and Claims
+
+The seL4 kernel has a number of verified properties on a selection of
+configured hardware platforms. These configurations are also referred to
+as *verification platforms* (e.g. ARM\_HYP). Read
+[Verified Configurations](VerifiedConfigurations) to see which proofs are
+available for which platform and how to make use of these
+configurations.
+
+**Note:** verification claims are limited to specific properties of seL4
+on specifically configured platforms. These claims do not automatically
+transfer to other platforms, other seL4 configurations, or custom seL4
+versions. Please consult [Frequently Asked
+Questions](FrequentlyAskedQuestions), as well as the [proof and
+assumptions page](http://sel4.systems/Info/FAQ/proof.pml) for a better
+understanding of the intersection of verification and seL4.
+
 ### Setting up your machine
 
 Read the [Host Dependencies](HostDependencies) page to find instructions on how to set up

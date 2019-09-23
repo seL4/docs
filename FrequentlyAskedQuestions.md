@@ -107,9 +107,8 @@ hardware for DMA devices need to be trusted.
 
 The unverified x86 version of seL4 supports VT-d extensions on the
 experimental branch. The VT-d extensions allow the kernel to restrict
-DMA and thereby enable DMA devices with untrusted user-level drivers. We
-are currently working on providing similar verified support for A15 ARM
-boards with SystemMMU.
+DMA and thereby enable DMA devices with untrusted user-level drivers.
+There is unverified support for the SystemMMU on multiple ARM boards.
 
 ## Does seL4 support multicore?
  On x86, seL4 can be configured to
@@ -225,28 +224,29 @@ resulting proof is correct.
 ## What does seL4's formal verification mean?
  Unique about seL4 is
 its unprecedented degree of assurance, achieved through formal
-verification. Specifically, the ARM version of seL4 is the first (and
-still only) general-purpose OS kernel with a full code-level functional
+verification. Specifically, the ARM, ARM\_HYP (ARM with virtualisation
+extensions), and X64 versions of seL4 comprise the first (and still
+only) general-purpose OS kernel with a full code-level functional
 correctness proof, meaning a mathematical proof that the implementation
 (written in C) adheres to its specification. In short, the
 implementation is proved to be bug-free (see below). This also implies a
 number of other properties, such as freedom from buffer overflows, null
 pointer exceptions, use-after-free, etc.
 
-There is a further proof that the binary code which executes on the
-hardware is a correct translation of the C code. This means that the
-compiler does not have to be trusted, and extends the functional
-correctness property to the binary.
+On the ARM platform, there is a further proof that the binary code which
+executes on the hardware is a correct translation of the C code. This
+means that the compiler does not have to be trusted, and extends the
+functional correctness property to the binary.
 
-Furthermore, there are proofs that seL4's specification, if used
-properly, will enforce integrity and confidentiality, core security
+Furthermore, also on ARM, there are proofs that seL4's specification, if
+used properly, will enforce integrity and confidentiality, core security
 properties. Combined with the proofs mentioned above, these properties
 are guaranteed to be enforced not only by a model of the kernel (the
 specification) but the actual binary that executes on the hardware.
 Therefore, seL4 is the world's first (and still only) OS that is proved
 secure in a very strong sense.
 
-Finally, seL4 is the first (and still only) protected-mode OS kernel
+Finally, seL4/ARM is the first (and still only) protected-mode OS kernel
 with a sound and complete timeliness analysis. Among others this means
 that it has provable upper bounds on interrupt latencies (as well as
 latencies of any other kernel operations). It is therefore the only
@@ -382,25 +382,28 @@ side. There's no specific schedule at the moment.
 
 ## How do I tell which code in GitHub is covered by the proof and which isn't?
  The verification sees the entire C code for one particular
-combination of configuration options. Currently this is the imx6
-platform, Cortex A9 processor, ARMv7-a architecture, all other config
-options unset (in particular DEBUG, PROFILING, etc). Excluded from this
-C code is the machine interface and boot code, their behavior is an
+combination of configuration options. See [Verified
+Configurations](/VerifiedConfigurations) for details of architecture and
+platform configurations which have verified properties.
+
+Excluded from the verification is the
+C code is the machine interface and boot code, whose behavior is an
 explicit assumption to the proof.
 
-You can see the exact verification config options in
+You can see how verification generates kernel source here in
 [l4v/spec/cspec/c/Makefile](https://github.com/seL4/l4v/blob/master/spec/cspec/c/Makefile).
 The machine interface are the functions that correspond to the ones in
 the Haskell file
 [Hardware.lhs](https://github.com/seL4/l4v/blob/master/spec/haskell/src/SEL4/Machine/Hardware.lhs).
 
 You can further inspect the gory details by looking at the preprocessor
-output in the file kernel_all.c_pp in the proof build - this is what
-the prover, the proof engineer, and the compiler see after configuration
-is done. So a quick way of figuring out if something is in the proof
-input or not is checking if the contents of that file change if you make
-a change to the source you're wondering about. You don't need the prover
-for this, and only parts of the seL4 build environment setup.
+output in the file `kernel_all.c_pp` in the proof build
+(or `kernel_all_pp.c` in the kernel build) - this is what the prover, the
+proof engineer, and the compiler see after configuration is done. So a
+quick way of figuring out if something is in the proof input or not is
+checking if the contents of that file change if you make a change to the
+source you're wondering about. You don't need the prover for this, and
+only parts of the seL4 build environment setup.
 
 The top-level proof makes statements about the behaviour of all of the
 kernel entry points, which we enumerate once manually in the proof. The
@@ -408,7 +411,7 @@ prover reads in these entry points, and anything that they call must
 either have a proof or an assumption for it to complete its proof. If
 anything is missing, the proof fails.
 
-That means all of the C code that is in this kernel_all.c_pp file
+That means all of the C code that is in this `kernel_all.c_pp` file
 either:
 
 - has a proof,
