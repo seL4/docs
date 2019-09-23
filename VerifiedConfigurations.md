@@ -70,7 +70,7 @@ status and upcoming features.
 | Platform | iMX.6 (e.g. Sabre Lite)
 | Floating-point support | No
 | Hypervisor mode | No
-| **Verified properties** | functional correctness, integrity (access control), confidentiality (information flow), partial binary correctness
+| **Verified properties** | functional correctness, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code)
 
 ## ARM\_HYP
 
