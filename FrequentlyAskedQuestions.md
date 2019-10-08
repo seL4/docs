@@ -129,7 +129,7 @@ a full memory-management unit (MMU) makes little sense, as its resource
 management is fundamentally based on virtual memory. For lower-end
 processors that only have a memory-protection unit (MPU) or no memory
 protection at all, you should look at NICTA's
-[eChronos real-time operating system](http://ssrg.nicta.com.au/projects/TS/echronos/) (RTOS), which is designed for such
+[eChronos real-time operating system](http://ts.data61.csiro.au/projects/TS/echronos/) (RTOS), which is designed for such
 processors and is also undergoing formal verification.
 
 ## What are the intended applications of seL4?
@@ -569,7 +569,7 @@ Enabling or disabling the fastpath should not have any impact on the
 kernel behaviour except for performance.
 
 There is a section on the fastpath and its verification in
-[this article](http://www.ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml). The fastpath discussion starts on page 23.
+[this article](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml). The fastpath discussion starts on page 23.
 
 ## I want to know more about seL4
 functionality/design/implementation/philosophy
@@ -623,18 +623,18 @@ you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.
 
 # Where can I learn more?
- NICTA's
-[seL4 project](http://ssrg.nicta.com.au/projects/seL4/) and
-[Trustworthy Systems](http://ssrg.nicta.com.au/projects/TS/)
+CSIRO's
+[seL4 project](http://ts.data61.csiro.au/projects/seL4/) and
+[Trustworthy Systems](http://ts.data61.csiro.au/)
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ssrg.nicta.com.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml), 
+- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml), 
   a 20-year retrospective of L4 microkernels;
 - [the original 2009 paper](http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
       verification;
 - [a much longer paper detailing the complete verification story of
-      seL4](http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
+      seL4](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
       , including the high-level security proofs, binary
       verification and timeliness analysis. It also contains an analysis
       of the cost of verification, and how it compares to that of
