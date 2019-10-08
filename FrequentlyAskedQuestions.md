@@ -335,9 +335,9 @@ may be able to offer assistance.
  OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
-[comprehensive overview](http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract) paper on OS verification from 2008 as well as the related
+[comprehensive overview](http://ts.data61.csiro.au/publications/papers/Klein_09.abstract) paper on OS verification from 2008 as well as the related
 work section of the
-[seL4 overview paper](http://ssrg.nicta.com.au/publications/papers/Klein_09.abstract) from 2014.
+[seL4 overview paper](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract) from 2014.
 
 The new and exciting thing about seL4 is that it has a) strong
 properties such as functional correctness, integrity, and
