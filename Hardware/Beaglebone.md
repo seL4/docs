@@ -47,7 +47,7 @@ For BeagleBone Blue, substitute `am335x-boneblack` with `am335x-boneblue`.
 
 * Power supply (12V DC, 2S LiPo battery or microUSB)
 * Serial adapter (Connect to UT0 header)
-* microSD card
+* microSD card for file booting or microUSB cable for network boot
 
 ### Interacting with U-Boot
 
@@ -70,28 +70,29 @@ At the U-Boot prompt, enter the following to load and run the image:
 
 ```
 fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-am335x
-go ${loadaddr}
+bootm ${loadaddr}
 ```
 
-#### Booting from TFTP (BeagleBone Black only)
+#### Booting from TFTP
 
 To boot over Ethernet, configure your DHCP server to provide a DHCP lease and
 to specify sel4test as the boot file.
 Configure a TFTP server to serve the `sel4test-driver-image-arm-am335x` file.
 
-Plug an Ethernet cable to the BealeBone Black, then, at the U-Boot prompt
-enter:
+For BeagleBone Black, plug in an Ethernet cable. For BeagleBone Blue, make sure
+a microUSB cable is plugged in and connected to a computer running a DHCP
+server. Then, at the U-Boot prompt enter:
 
 ```
 dhcp
-go ${loadaddr}
+bootm ${loadaddr}
 ```
 
 To load an alternate image from the TFTP server at 1.2.3.4, use:
 
 ```
 dhcp ${loadaddr} 1.2.3.4:refos-image-arm-am335x
-go ${loadaddr}
+bootm ${loadaddr}
 ```
 
 ## Other resources
