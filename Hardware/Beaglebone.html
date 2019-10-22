@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-10-22 14:13:12 +1100 -->
+<!-- Page last generated 2019-10-22 16:56:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -350,7 +350,7 @@ ninja
 <ul>
   <li>Power supply (12V DC, 2S LiPo battery or microUSB)</li>
   <li>Serial adapter (Connect to UT0 header)</li>
-  <li>microSD card</li>
+  <li>microSD card for file booting or microUSB cable for network boot</li>
 </ul>
 
 <h3 id="interacting-with-u-boot">Interacting with U-Boot</h3>
@@ -372,26 +372,27 @@ to a FAT32 partition the microSD card and insert the card in the BeagleBone.</p>
 <p>At the U-Boot prompt, enter the following to load and run the image:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-am335x
-go ${loadaddr}
+bootm ${loadaddr}
 </code></pre></div></div>
 
-<h4 id="booting-from-tftp-beaglebone-black-only">Booting from TFTP (BeagleBone Black only)</h4>
+<h4 id="booting-from-tftp">Booting from TFTP</h4>
 
 <p>To boot over Ethernet, configure your DHCP server to provide a DHCP lease and
 to specify sel4test as the boot file.
 Configure a TFTP server to serve the <code class="highlighter-rouge">sel4test-driver-image-arm-am335x</code> file.</p>
 
-<p>Plug an Ethernet cable to the BealeBone Black, then, at the U-Boot prompt
-enter:</p>
+<p>For BeagleBone Black, plug in an Ethernet cable. For BeagleBone Blue, make sure
+a microUSB cable is plugged in and connected to a computer running a DHCP
+server. Then, at the U-Boot prompt enter:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
-go ${loadaddr}
+bootm ${loadaddr}
 </code></pre></div></div>
 
 <p>To load an alternate image from the TFTP server at 1.2.3.4, use:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp ${loadaddr} 1.2.3.4:refos-image-arm-am335x
-go ${loadaddr}
+bootm ${loadaddr}
 </code></pre></div></div>
 
 <h2 id="other-resources">Other resources</h2>
@@ -429,7 +430,7 @@ go ${loadaddr}
         </li>
         
           <li>
-            Site last updated: Tue Oct 22 14:12:10 2019 +1100 c0b2d52
+            Site last updated: Tue Oct 22 16:54:43 2019 +1100 5536579
           </li>
           <li>
             
@@ -490,7 +491,7 @@ go ${loadaddr}
               
             
               
-                Page last updated: Mon Jun 24 12:21:56 2019 +1000 92be3dd
+                Page last updated: Tue Oct 22 16:54:43 2019 +1100 5536579
               
             
               
