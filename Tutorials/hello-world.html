@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-10-22 16:56:04 +1100 -->
+<!-- Page last generated 2019-10-28 18:32:19 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -399,9 +399,30 @@ Hello, World!
  incorporated into the project build system.</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># @TAG(DATA61_BSD)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
+<span class="nf">sel4_tutorials_regenerate_tutorial</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="p">)</span>
+
 <span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.7.2<span class="p">)</span>
 <span class="c1"># declare the hello-world CMake project and the languages it is written in (just C)</span>
-<span class="nb">project</span><span class="p">(</span>hello-world C<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>hello-world C ASM<span class="p">)</span>
+
+<span class="c1"># In future tutorials, these setup steps will be replaced with</span>
+<span class="c1"># sel4_tutorials_setup_roottask_tutorial_environment()</span>
+<span class="nb">find_package</span><span class="p">(</span>seL4 REQUIRED<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>elfloader-tool REQUIRED<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>musllibc REQUIRED<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>util_libs REQUIRED<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>seL4_libs REQUIRED<span class="p">)</span>
+
+<span class="nf">sel4_import_kernel</span><span class="p">()</span>
+<span class="nf">elfloader_import_project</span><span class="p">()</span>
+
+<span class="c1"># This sets up environment build flags and imports musllibc and runtime libraries.</span>
+<span class="nf">musllibc_setup_build_environment_with_sel4runtime</span><span class="p">()</span>
+<span class="nf">sel4_import_libsel4</span><span class="p">()</span>
+<span class="nf">util_libs_import_libraries</span><span class="p">()</span>
+<span class="nf">sel4_libs_import_libraries</span><span class="p">()</span>
+<span class="nf">sel4_tutorials_import_libsel4tutorials</span><span class="p">()</span>
 
 <span class="c1"># Name the executable and list source files required to build it</span>
 <span class="nb">add_executable</span><span class="p">(</span>hello-world src/main.c<span class="p">)</span>
@@ -413,6 +434,7 @@ Hello, World!
     sel4muslcsys sel4platsupport sel4utils sel4debug<span class="p">)</span>
 
 <span class="c1"># Tell the build system that this application is the root task. </span>
+<span class="nb">include</span><span class="p">(</span>rootserver<span class="p">)</span>
 <span class="nf">DeclareRootserver</span><span class="p">(</span>hello-world<span class="p">)</span>
 
 </code></pre></div></div>

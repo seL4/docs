@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-10-22 16:56:04 +1100 -->
+<!-- Page last generated 2019-10-28 18:32:19 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -470,11 +470,15 @@ directory should contain the following <code class="highlighter-rouge">CMakeList
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="c1"># @TAG(DATA61_BSD)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
+<span class="nf">sel4_tutorials_regenerate_tutorial</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="p">)</span>
+
 <span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.7.2<span class="p">)</span>
 
-<span class="nb">project</span><span class="p">(</span>hello-camkes-0 C<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>hello-camkes-0 C ASM<span class="p">)</span>
 
-<span class="nf">ImportCamkes</span><span class="p">()</span>
+<span class="nb">find_package</span><span class="p">(</span>camkes-tool REQUIRED<span class="p">)</span>
+<span class="nf">camkes_tool_setup_camkes_build_environment</span><span class="p">()</span>
 
 <span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>Client SOURCES client.c<span class="p">)</span>
 

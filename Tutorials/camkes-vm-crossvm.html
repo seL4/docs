@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-10-22 16:56:04 +1100 -->
+<!-- Page last generated 2019-10-28 18:32:19 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -734,7 +734,10 @@ each argument to the print server one at a time.</p>
 
 <span class="nb">project</span><span class="p">(</span>print_client C<span class="p">)</span>
 
-<span class="nb">add_subdirectory</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/../../../projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs/camkes camkes<span class="p">)</span>
+<span class="nb">file</span><span class="p">(</span>READ <span class="si">${</span><span class="nv">CMAKE_MODULE_PATH_FILE</span><span class="si">}</span> module_path<span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span>APPEND CMAKE_MODULE_PATH <span class="si">${</span><span class="nv">module_path</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>camkes-vm-linux REQUIRED<span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span>/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs/camkes camkes<span class="p">)</span>
 
 <span class="nb">add_executable</span><span class="p">(</span>print_client print_client.c<span class="p">)</span>
 <span class="nb">target_link_libraries</span><span class="p">(</span>print_client camkeslinux<span class="p">)</span>
@@ -748,9 +751,11 @@ each argument to the print server one at a time.</p>
 <p>add the <code class="highlighter-rouge">ExternalProject</code> declaration to include the print application:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get Custom toolchain for 32 bit Linux</span>
+<span class="nb">include</span><span class="p">(</span>cross_compiling<span class="p">)</span>
 <span class="nf">FindCustomPollyToolchain</span><span class="p">(</span>LINUX_32BIT_TOOLCHAIN <span class="s2">"linux-gcc-32bit-pic"</span><span class="p">)</span>
 <span class="c1"># Declare our print server app external project</span>
 <span class="nb">include</span><span class="p">(</span>ExternalProject<span class="p">)</span>
+<span class="nb">file</span><span class="p">(</span>WRITE <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/module_path <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_MODULE_PATH</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nf">ExternalProject_Add</span><span class="p">(</span>print_client-app
     SOURCE_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/pkgs/print_client
     BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/print_client-app
@@ -761,6 +766,7 @@ each argument to the print server one at a time.</p>
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
         -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
+        -DCMAKE_MODULE_PATH_FILE=<span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/module_path
 <span class="p">)</span>
 <span class="c1"># Add the print client app to our overlay ('default_buildroot_overlay')</span>
 <span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>print_client-app <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/print_client-app default_buildroot_overlay <span class="s2">"usr/sbin"</span>

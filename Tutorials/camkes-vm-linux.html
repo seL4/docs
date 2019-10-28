@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-10-22 16:56:04 +1100 -->
+<!-- Page last generated 2019-10-28 18:32:19 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -467,16 +467,21 @@ in this archive.</p>
 <p>To see how the <code class="highlighter-rouge">Init</code> component and CPIO archive are definied within the build system,
 look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>:</p>
 
-<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
+<span class="nf">sel4_tutorials_regenerate_tutorial</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="p">)</span>
 
-<span class="nb">project</span><span class="p">(</span>vm-app<span class="p">)</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
 
-<span class="nf">ImportCamkesVM</span><span class="p">()</span>
+<span class="nb">project</span><span class="p">(</span>vm-app C ASM<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>camkes-vm REQUIRED<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_SETTINGS_PATH</span><span class="si">}</span><span class="p">)</span>
+<span class="nf">camkes_x86_vm_setup_x86_vm_environment</span><span class="p">()</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_HELPERS_PATH</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>camkes-vm-linux REQUIRED<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_HELPERS_PATH</span><span class="si">}</span><span class="p">)</span>
 
 
 <span class="c1"># Include CAmkES VM helper functions</span>
-<span class="nb">include</span><span class="p">(</span><span class="s2">"../projects/camkes/vm/camkes_vm_helpers.cmake"</span><span class="p">)</span>
-<span class="nb">include</span><span class="p">(</span><span class="s2">"../projects/camkes/vm-linux/vm-linux-helpers.cmake"</span><span class="p">)</span>
 
 
 
@@ -608,6 +613,7 @@ external project and add it to our overlay.
  Do this by replacing the line <code class="highlighter-rouge">AddToFileServer("rootfs.cpio" ${default_rootfs_file})</code> with the following:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get Custom toolchain for 32 bit Linux</span>
+<span class="nb">include</span><span class="p">(</span>cross_compiling<span class="p">)</span>
 <span class="nf">FindCustomPollyToolchain</span><span class="p">(</span>LINUX_32BIT_TOOLCHAIN <span class="s2">"linux-gcc-32bit-pic"</span><span class="p">)</span>
 <span class="c1"># Declare our hello app external project</span>
 <span class="nf">ExternalProject_Add</span><span class="p">(</span>hello-app
@@ -717,7 +723,7 @@ external project and add it to the overlay.</p>
 
 <p>At the top of the file include our linux helpers, add the following:</p>
 
-<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="s2">"../projects/camkes/vm-linux/linux-source-helpers.cmake"</span><span class="p">)</span>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_SOURCE_HELPERS_PATH</span><span class="si">}</span><span class="p">)</span>
 </code></pre></div></div>
 <p>Below the includes add:</p>
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Setup Linux Sources</span>
@@ -726,8 +732,8 @@ external project and add it to the overlay.</p>
 <span class="nf">GetDefaultLinuxMd5</span><span class="p">(</span>linux_md5<span class="p">)</span>
 <span class="c1"># Download and Configure our Linux sources</span>
 <span class="nf">DownloadLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_md5</span><span class="si">}</span> vm_linux_extract_dir download_vm_linux<span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/../projects/camkes/vm-linux/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/config"</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="s2">/../projects/camkes/vm-linux/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/Module.symvers"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/config"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/Module.symvers"</span><span class="p">)</span>
 <span class="nf">ConfigureLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_config</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_symvers</span><span class="si">}</span> configure_vm_linux
     DEPENDS download_vm_linux
 <span class="p">)</span>
@@ -745,7 +751,7 @@ external project and add it to the overlay.</p>
         -DCMAKE_BUILD_TYPE=<span class="si">${</span><span class="nv">CMAKE_BUILD_TYPE</span><span class="si">}</span>
         -DCMAKE_TOOLCHAIN_FILE=<span class="si">${</span><span class="nv">LINUX_32BIT_TOOLCHAIN</span><span class="si">}</span>
         -DLINUX_KERNEL_DIR=<span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span>
-        -DMODULE_HELPERS_FILE=<span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/../projects/camkes/vm-linux/linux-module-helpers.cmake
+        -DMODULE_HELPERS_FILE=<span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span>/linux-module-helpers.cmake
 <span class="p">)</span>
 <span class="c1"># Add our module binary to the overlay</span>
 <span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>poke-module <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/poke-module vm-overlay <span class="s2">"lib/modules/4.8.16/kernel/drivers/vmm"</span>
