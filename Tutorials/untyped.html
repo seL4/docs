@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-07 14:03:25 +1100 -->
+<!-- Page last generated 2019-11-18 15:16:02 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -501,7 +501,7 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
     <span class="c1">// First, find an untyped big enough to fit all of our objects
 </span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">start</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untypedList</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">sizeBits</span> <span class="o">&gt;=</span> <span class="n">untyped_size_bits</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untypedList</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">sizeBits</span> <span class="o">&gt;=</span> <span class="n">untyped_size_bits</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untypedList</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">isDevice</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">parent_untyped</span> <span class="o">=</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
             <span class="k">break</span><span class="p">;</span>
         <span class="p">}</span>
@@ -615,7 +615,7 @@ to become more familiar with untyped objects and memory allocation in seL4.</p>
         </li>
         
           <li>
-            Site last updated: Thu Nov 7 12:59:41 2019 +1000 4a835c5
+            Site last updated: Mon Nov 18 15:08:54 2019 +1100 0a1ffeb
           </li>
           <li>
             

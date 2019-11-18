@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-07 14:03:25 +1100 -->
+<!-- Page last generated 2019-11-18 15:16:02 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -294,8 +294,8 @@
 <ul>
 <li class="toc-entry toc-h3"><a href="#automatic-formatting">Automatic formatting</a></li>
 <li class="toc-entry toc-h3"><a href="#spacing-and-braces">Spacing and braces</a></li>
-<li class="toc-entry toc-h3"><a href="#naming">Naming</a></li>
-<li class="toc-entry toc-h3"><a href="#structure">Structure</a></li>
+<li class="toc-entry toc-h3"><a href="#choosing-data-types">Choosing data types</a></li>
+<li class="toc-entry toc-h3"><a href="#naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (typedef)</a></li>
 <li class="toc-entry toc-h3"><a href="#memory-allocation">Memory allocation</a></li>
 <li class="toc-entry toc-h3"><a href="#commenting">Commenting</a></li>
 </ul>
@@ -323,21 +323,25 @@
     <div class="content">
       <h1 id="c-coding-conventions">C Coding Conventions</h1>
 
-<p>These are conventions which we attempt to follow in all of our code. They do not apply to external
-libraries, where we stick with the existing conventions.</p>
+<p>These are conventions which we attempt to follow in all of our code.
+They do not apply to external libraries, where we stick with the
+existing conventions.</p>
 
-<p>Much of our code pre-dates the conventions, so it may not all comply. However, please try to ensure
-that any new code does follow the rules. In general, we strive to abide by the scout rule:
-“Try and leave the code a little better than you found it”</p>
+<p>Much of our code pre-dates the conventions, so it may not all comply.
+However, please try to ensure that any new code does follow the rules.
+In general, we strive to abide by Robert Baden-Powell’s rule for
+scouting: “Try and leave [the code] a little better than you found it.”</p>
 
-<p>This guide is in three parts: first, we list general coding conventions, then we divide the rest of
-the conventions between kernel and user-level. Please read the appropriate guide, as often kernel
-and user-level conventions contradict each other.</p>
+<p>This guide is in three parts: first, we list general coding conventions;
+then we divide the rest of the conventions between kernel and
+user-level.  Please read the appropriate guide, as kernel and user-level
+conventions sometimes contradict each other.</p>
 
 <h2 id="general-c-code">General C code</h2>
 
-<p>This guide applies to general C code at user-level. For developing seL4 kernel and other verified
-code, please refer to the verification requirements below, which override the general conventions.</p>
+<p>This guide applies to general C code at user-level.  For developing the
+seL4 kernel and other verified code, please refer to the verification
+requirements below, which override the general conventions.</p>
 
 <ul>
   <li>Code should compile without warnings, with <code class="highlighter-rouge">-Wall</code>.</li>
@@ -345,25 +349,30 @@ code, please refer to the verification requirements below, which override the ge
 
 <h3 id="automatic-formatting">Automatic formatting</h3>
 
-<p>For automatic formatting of c code, we use the <a href="http://astyle.sourceforge.net/">astyle</a>, version 2.05.1, with the following settings:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>max-instatement-indent=120
-style=otbs
-pad-header
-indent=spaces=4
-pad-oper
-</code></pre></div></div>
+<p>For automatic formatting of C code, we use
+<a href="http://astyle.sourceforge.net/">astyle</a>, version 2.05.1, with the
+settings declared in our
+<a href="https://github.com/seL4/seL4_tools/blob/master/misc/astylerc">astylerc</a>.</p>
 
 <h3 id="spacing-and-braces">Spacing and braces</h3>
 
 <ul>
-  <li>4 space indent, no tabs</li>
-  <li>No space between * and variable name for pointers (<code class="highlighter-rouge">int *foo</code>)</li>
-  <li>Space between keywords and parentheses</li>
-  <li>Function prototypes should be all on the same line</li>
-  <li>We use “the one true brace style” (OTBS)
+  <li>Indent using four (4) spaces.  Do not use tabs for indentation at all.</li>
+  <li>Use no space between <code class="highlighter-rouge">*</code> and the variable name in pointer
+expressions (<code class="highlighter-rouge">int *foo</code>).</li>
+  <li>Use space between keywords and parentheses; e.g., <code class="highlighter-rouge">if (condition)</code>.</li>
+  <li>Put the opening brace of a function implementation on the line <em>after</em>
+the function’s return type, name, and argument list.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">atoi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">nptr</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="cm">/* ... */</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Use the “one true brace style” (1TBS):
     <ul>
-      <li>always brace everything (including single scope statments)
+      <li>Use braces everywhere the syntax allows (including
+single-statement scopes).
         <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">FOO</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">do_something</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">BAR</span><span class="p">)</span> <span class="p">{</span>
@@ -375,90 +384,127 @@ pad-oper
       </li>
     </ul>
   </li>
+  <li>When a function argument list gets too long for one line, indent the
+remaining arguments on the next line just inboard of the parenthesis
+on the line above.  For example:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">my_ridiculously_long_type_t</span> <span class="n">foo</span><span class="p">,</span>
+          <span class="n">my_ridiculously_long_type_t</span> <span class="n">bar</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="cm">/* ... */</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<h3 id="naming">Naming</h3>
+<h3 id="choosing-data-types">Choosing data types</h3>
 
 <ul>
-  <li>typedefs should always end in <code class="highlighter-rouge">_t</code>.</li>
-  <li>function pointer type defs end in <code class="highlighter-rouge">_fn_t</code></li>
-  <li>Never typedef a pointer, we keep them explicit.</li>
-  <li>We use <code class="highlighter-rouge">under_scores</code> for separate words in a variable name.</li>
-  <li>Avoid pointer arithmetic unless neccessary.</li>
-  <li>Non-static functions should be prefixed with appropriate names to avoid polluting the namespace:
-    <ul>
-      <li>the convention in library code is to use the name of the library,</li>
-      <li>a good guide for application code is to use the filename.</li>
-    </ul>
-  </li>
-  <li>Boolean types should be a verb (e.g <code class="highlighter-rouge">is_alive</code>).</li>
-  <li>Avoid magic numbers, define meaningful constants.</li>
-  <li>Constants and macros should be in upper case.</li>
-  <li>Typedef structs and enums.</li>
-  <li>Prefix arch specific code with <code class="highlighter-rouge">arch_</code> and platform specific code with <code class="highlighter-rouge">plat_</code>.</li>
-  <li>upper case is only used for preprocessor directives and macros.</li>
+  <li>When using integral types (<code class="highlighter-rouge">char</code>, <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">long</code>, etc.), qualify them
+explicitly as <code class="highlighter-rouge">unsigned</code> except where negative values are meaningful
+and must be handled.  (Overflow of signed integral types is undefined
+in the C standard.)</li>
 </ul>
 
-<h3 id="structure">Structure</h3>
+<h3 id="naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (<code class="highlighter-rouge">typedef</code>)</h3>
 
 <ul>
-  <li>Architecture and platform specific code belongs in dedicated directories.</li>
-  <li>Only <code class="highlighter-rouge">static inline</code> functions are permitted in header files, and then only for performance.</li>
-  <li>File local global variables must be marked as <code class="highlighter-rouge">static</code>.</li>
-  <li>Use public/private header files, avoid <code class="highlighter-rouge">extern</code> unless neccessary.</li>
-  <li>General purpose utiliy functions belong in shared libraries, not library specific files, and
-vice-versa.</li>
-  <li>Prefer <code class="highlighter-rouge">static inline</code> functions over preprocessor macros if the macro is even remotely complex,
-and preprocessor features are not required.</li>
-  <li><code class="highlighter-rouge">#ifdef</code> blocks should always be commented at the end, e.g.:
-    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef CONFIG_BLAH
-</span><span class="p">...</span>
-<span class="cp">#endif </span><span class="cm">/* CONFIG_BLAH */</span><span class="cp">
-</span></code></pre></div>    </div>
-  </li>
-  <li>Always use defined macros for bit-manipulation (e.g <code class="highlighter-rouge">BIT(7)</code> over <code class="highlighter-rouge">1 &lt;&lt; 7</code>).</li>
+  <li>Use <code class="highlighter-rouge">typedef</code> to create aliases for all <code class="highlighter-rouge">struct</code> types.</li>
+  <li>The names of type aliases should always end in <code class="highlighter-rouge">_t</code>.</li>
+  <li>Function pointer type aliases should always end in <code class="highlighter-rouge">_fn_t</code>.</li>
+  <li>Do not alias pointer types with <code class="highlighter-rouge">typedef</code>; we keep them explicit.
+```c
+typedef tick_count unsigned int;</li>
 </ul>
+
+<p>typedef tick_count_ptr_t <em>tick_count; /</em> NO <em>/
+tick_count *tick_count_ptr; /</em> yes */</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Use `snake_case` to name a multi-word variable or type.
+* Non-`static` functions should be prefixed with appropriate names to
+  avoid polluting the namespace.
+    * The convention in library code is to use the name of the library.
+    * A good guide for application code is to use the filename.
+* Name Boolean variables with a verb phrase including a verb like `is_`,
+  `has_`, or `want_` so that the intent of the variable is clear in
+  expressions and conditionals.
+* Avoid magic numbers; define meaningful constants.  Prefer C language
+  symbols over preprocessor symbols, because the former are visible in a
+  symbolic debugger like `gdb`.
+* Use `SCREAMING_SNAKE_CASE` for, and _only_ for, preprocessor symbols
+  and values of enumeration type.
+* Prefix architecture-specific code with arch\_, platform-specific
+  code with plat\_, and mode-specific code with mode\_.
+
+### Expressions
+
+* Avoid pointer arithmetic unless necessary.
+* Always use preprocessor macros for bit manipulation (e.g., use `BIT(7)`
+  instead of `1 &lt;&lt; 7`).
+
+### Structure
+
+* Put architecture- and platform-specific code in dedicated directories.
+* Only `static inline` functions are permitted in header files, and then
+  only for performance.
+* Variables at file scope must be marked as `static`.
+* Use public/private header files; avoid `extern` unless necessary.
+* General-purpose utility functions belong in shared libraries, not
+  library-specific files, and vice versa.  (Consider checking `libutils`
+  in the `util_libs` Git repository for existing functionality, and
+  consider making useful additions there.)
+* Prefer `static inline` functions over preprocessor macros unless
+  preprocessor features are required or the macro is simple.
+* Put a comment after the `#endif` of an `#if`, `#ifdef`, or `#ifndef`
+  blocks that refers to the preprocessor symbol(s) upon which the code
+  is guarded.
+```c
+#ifdef CONFIG_BLAH
+/* ... */
+#endif /* CONFIG_BLAH */
+</code></pre></div></div>
 
 <h3 id="memory-allocation">Memory allocation</h3>
 
 <ul>
-  <li>For memory that should be zeroed, use <code class="highlighter-rouge">calloc</code> rather than <code class="highlighter-rouge">malloc</code> + <code class="highlighter-rouge">bzero</code>.</li>
+  <li>For memory that should be zeroed, use <code class="highlighter-rouge">calloc</code> rather than <code class="highlighter-rouge">malloc</code>
+followed by <code class="highlighter-rouge">memset</code> or <code class="highlighter-rouge">bzero</code>.</li>
 </ul>
 
 <h3 id="commenting">Commenting</h3>
 
 <ul>
   <li>Prefer <code class="highlighter-rouge">/* this style */</code> comments over <code class="highlighter-rouge">// this style</code>.</li>
-  <li>Use javadoc style comments on function prototypes in headers.</li>
-  <li>Document function return types and parameters, at minimum.</li>
+  <li>Use Javadoc-style comments on function prototypes in headers.</li>
+  <li>Document function parameters and return types, at minimum.</li>
 </ul>
 
 <h2 id="user-level-code">User-level code</h2>
 
 <h3 id="type-conventions">Type conventions</h3>
 
-<p>Be aware that our code needs to be portable across 32- and 64-bit platforms.</p>
+<p>Be aware that our code needs to be portable across 32- and 64-bit
+platforms.</p>
 
 <ul>
+  <li>Use <code class="highlighter-rouge">seL4_Word</code> for word-sized things.</li>
   <li>Use <code class="highlighter-rouge">void *</code> for untyped addresses.</li>
   <li>Use <code class="highlighter-rouge">uintptr_t</code> for pointer arithmetic.
     <ul>
-      <li>but avoid pointer arithmetic unless neccessary.</li>
+      <li>…but avoid pointer arithmetic unless necessary.</li>
     </ul>
   </li>
-  <li>Use <code class="highlighter-rouge">intptr_t</code> or <code class="highlighter-rouge">uintptr_t</code> for sizes of pointers</li>
-  <li>Use <code class="highlighter-rouge">size_t</code> for sizes of objects.</li>
-  <li>Use <code class="highlighter-rouge">int</code> for values known to be small.</li>
-  <li>Only use fixed-width types when neccessary, e.g. drivers.</li>
-  <li>Only use signed types when neccessary.</li>
-  <li>Use long variants of builtin functions (<code class="highlighter-rouge">CLZL</code>) for 64-bit compatability, unless operating on a
-fixed-width type.</li>
+  <li>Use <code class="highlighter-rouge">size_t</code> for sizes of objects (including pointers themselves).</li>
+  <li>Use <code class="highlighter-rouge">unsigned int</code> for values known to be small.</li>
+  <li>Use fixed-width types only when necessary, e.g., in device drivers.</li>
+  <li>Use <code class="highlighter-rouge">long</code> variants of built-in functions (<code class="highlighter-rouge">CLZL</code>) for 64-bit
+compatibility, unless operating on a fixed-width type.</li>
+  <li>Use <code class="highlighter-rouge">typedef</code> to create aliases for all <code class="highlighter-rouge">enum</code> types.</li>
 </ul>
 
 <h3 id="format-strings">Format strings</h3>
 
 <ul>
-  <li>Use 64-bit friendly printing macros for printf (e.g. <code class="highlighter-rouge">PRIi32</code> for <code class="highlighter-rouge">uin32_t</code>).</li>
+  <li>Use 64-bit-friendly printing macros for <code class="highlighter-rouge">printf</code> (e.g. <code class="highlighter-rouge">PRIi32</code> for
+<code class="highlighter-rouge">uint32_t</code>).</li>
   <li>Use <code class="highlighter-rouge">%p</code> for pointers.</li>
   <li>Use <code class="highlighter-rouge">%zd</code> and <code class="highlighter-rouge">%zu</code> for <code class="highlighter-rouge">ssize_t</code> and <code class="highlighter-rouge">size_t</code> respectively.</li>
 </ul>
@@ -473,20 +519,21 @@ fixed-width type.</li>
 
 <ul>
   <li>Always check error codes.</li>
-  <li><code class="highlighter-rouge">assert</code> should only be used for testing invariants in code.</li>
+  <li>Use <code class="highlighter-rouge">assert</code> only to test invariants in code.</li>
   <li>Use <code class="highlighter-rouge">ZF_LOGF</code> for fatal errors: it will call <code class="highlighter-rouge">abort()</code>.</li>
   <li>For all other error reporting, use the appropriate <code class="highlighter-rouge">ZF_LOG</code> level.</li>
-  <li>Only use <code class="highlighter-rouge">printf</code> for general application output.</li>
-  <li>Try to follow a transactional approach to error handling: check input and report errors before
-modifying state.</li>
+  <li>Use only <code class="highlighter-rouge">ZF_LOG</code> macros for diagnostic messages–not <code class="highlighter-rouge">printf</code>.</li>
+  <li>Try to follow a transactional approach to error handling: check input
+and report errors before modifying state.</li>
 </ul>
 
 <h2 id="kernel-code">Kernel code</h2>
 
 <ul>
   <li>Use <code class="highlighter-rouge">word_t</code> for word-sized things.</li>
-  <li>Do not explicity type cast between pointers and references: use object specific macros for this
-purpose, e.g. <code class="highlighter-rouge">TCB_REF</code> and <code class="highlighter-rouge">TCB_PTR</code>.</li>
+  <li>Do not explicitly typecast between pointers and references (i.e.,
+integers used as, e.g. offsets into structures): use object-specific
+macros for this purpose, e.g. <code class="highlighter-rouge">TCB_REF</code> and <code class="highlighter-rouge">TCB_PTR</code>.</li>
 </ul>
 
 <h3 id="format-strings-1">Format strings</h3>
@@ -501,58 +548,69 @@ purpose, e.g. <code class="highlighter-rouge">TCB_REF</code> and <code class="hi
 <h3 id="header-guards-1">Header Guards</h3>
 
 <ul>
-  <li>Do not use <code class="highlighter-rouge">#pragma once</code>, use header guards.</li>
+  <li>Do not use <code class="highlighter-rouge">#pragma once</code>; use header guards.</li>
 </ul>
 
 <h3 id="error-handling-1">Error handling</h3>
 
 <ul>
-  <li>Within seL4, the <code class="highlighter-rouge">decode</code> stage must only check conditions, the <code class="highlighter-rouge">invoke</code> stage can alter state.</li>
+  <li>Within seL4, the <code class="highlighter-rouge">decode</code> stage must only check conditions; the
+<code class="highlighter-rouge">invoke</code> stage can alter state.</li>
 </ul>
 
 <h3 id="verification-requirements">Verification requirements</h3>
 
-<p>Verified code (such as that in the seL4 kernel) must follow these requimrents. Note that when
-the verified code requirements override anything in the general guide.</p>
+<p>Verified code (such as that in the seL4 kernel) must follow these
+requirements.  Note that the verified code requirements override
+anything in the general guide.</p>
 
 <ul>
-  <li>Follow the <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">C99</a> standard.</li>
-  <li>Avoid taking the address of a local variables.</li>
-  <li>No floating point types, e.g. <code class="highlighter-rouge">double</code> or <code class="highlighter-rouge">float</code>.</li>
-  <li><code class="highlighter-rouge">restrict</code> cannot be used.</li>
-  <li><code class="highlighter-rouge">unions</code> cannot be used, use the bitfield generator instead.</li>
-  <li>No preincrement (<code class="highlighter-rouge">++x</code>)</li>
-  <li>No variables that alias typedefs:
+  <li>Follow the
+<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">C99</a>
+standard.  (The link is to the final draft before ratification; the
+official standard document cannot be distributed freely.)</li>
+  <li>Avoid taking the address of a local (i.e., stack-allocated) variable.</li>
+  <li>Do not use floating-point types, e.g. <code class="highlighter-rouge">double</code> or <code class="highlighter-rouge">float</code>.</li>
+  <li>Do not use <code class="highlighter-rouge">restrict</code>.</li>
+  <li><code class="highlighter-rouge">union</code> types cannot be used; use the bitfield generator instead.</li>
+  <li>Do not preincrement or predecrement variables (<code class="highlighter-rouge">++x</code>, <code class="highlighter-rouge">--y</code>).</li>
+  <li>Do not use variable names that duplicate <code class="highlighter-rouge">typedef</code> type aliases:
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">int</span> <span class="n">A</span><span class="p">;</span>
 <span class="n">A</span> <span class="n">A</span><span class="p">;</span>
 </code></pre></div>    </div>
   </li>
-  <li>No self-modifying code (e.g. no jump tables).</li>
-  <li>No fall-through cases in <code class="highlighter-rouge">switch</code> statements.</li>
-  <li>No use of <code class="highlighter-rouge">varargs</code>.</li>
-  <li>Must provide <code class="highlighter-rouge">void</code> in function definitions without arguments.</li>
-  <li>References to linker addresses must be sized arrays (e.g. <code class="highlighter-rouge">extern char xxx[]</code>)</li>
-  <li>No function calls that decay arrays to pointers:
+  <li>Do not use fall-through cases in <code class="highlighter-rouge">switch</code> statements.</li>
+  <li>Do not use variadic argument lists.</li>
+  <li>Declare functions that take no arguments as taking a <code class="highlighter-rouge">void</code> argument.</li>
+  <li>References to linker addresses must be via <code class="highlighter-rouge">extern char[]</code> declarations
+rather than declarations of other types (such as <code class="highlighter-rouge">extern char</code> or
+<code class="highlighter-rouge">extern void *</code>).</li>
+  <li>Do not pass arrays as arguments to functions expecting pointers.
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">foo</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">some_pointer</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="n">foo</span><span class="p">(</span><span class="n">my_array</span><span class="p">);</span>
 </code></pre></div>    </div>
   </li>
-  <li>No static local variables.</li>
-  <li>No unneccesary signed variables.</li>
-  <li>Prefix struct fields with the name of the struct, to avoid namespace conflicts in the proof.</li>
-  <li>Avoid typedefing enums, always specify enum types as word_t (otherwise enum size is determined by the compiler)</li>
+  <li>Do not declare local variables as <code class="highlighter-rouge">static</code>.</li>
+  <li>Prefix <code class="highlighter-rouge">struct</code> fields with the name of the <code class="highlighter-rouge">struct</code> to avoid
+namespace conflicts in the proof.  (Much existing kernel code does not
+follow this directive; new code should adopt the recommended practice
+to avoid namespace collisions in proofs.)</li>
+  <li>Do not use <code class="highlighter-rouge">typedef</code> to create a type alias for an <code class="highlighter-rouge">enum</code>; always
+specify <code class="highlighter-rouge">enum</code> types as <code class="highlighter-rouge">word_t</code> (otherwise, the <code class="highlighter-rouge">enum</code> size is
+determined by the compiler).</li>
 </ul>
 
 <h2 id="further-resources">Further resources</h2>
 
 <ul>
-  <li><a href="http://www.kernel.org/doc/Documentation/CodingStyle">Linux coding conventions</a></li>
-  <li><a href="http://matt.sh/howto-c">A modern guide to C style</a></li>
-  <li><a href="https://google.github.io/styleguide/cppguide.html#64-bit_Portability">64-bit portability</a></li>
-  <li><a href="https://google.github.io/styleguide/cppguide.html#Integer_Types">Intger types</a></li>
+  <li><a href="https://softwareengineering.stackexchange.com/questions/99543/what-is-the-difference-between-kr-and-one-true-brace-style-1tbs-styles">What is the difference between K&amp;R and One True Brace Style (1TBS) styles?</a></li>
+  <li><a href="https://www.kernel.org/doc/Documentation/process/coding-style.rst">Linux kernel coding style</a></li>
+  <li><a href="http://matt.sh/howto-c">How to C in 2016</a></li>
+  <li><a href="https://google.github.io/styleguide/cppguide.html#64-bit_Portability">Google C++ Style Guide: 64-bit Portability</a></li>
+  <li><a href="https://google.github.io/styleguide/cppguide.html#Integer_Types">Google C++ Style Guide: Integer Types</a></li>
+  <li><a href="https://www.brainyquote.com/quotes/robert_badenpowell_753084">Baden-Powell quotation</a></li>
 </ul>
-
 
     </div>
   </div>
@@ -583,7 +641,7 @@ the verified code requirements override anything in the general guide.</p>
         </li>
         
           <li>
-            Site last updated: Thu Nov 7 12:59:41 2019 +1000 4a835c5
+            Site last updated: Mon Nov 18 15:08:54 2019 +1100 0a1ffeb
           </li>
           <li>
             
@@ -728,7 +786,7 @@ the verified code requirements override anything in the general guide.</p>
               
             
               
-                Page last updated: Fri Mar 1 15:34:58 2019 +1000 a71baa4
+                Page last updated: Mon Nov 18 15:08:54 2019 +1100 0a1ffeb
               
             
               

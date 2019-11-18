@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-07 14:03:25 +1100 -->
+<!-- Page last generated 2019-11-18 15:16:02 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -371,11 +371,10 @@ over communication channels. This tutorial will lead you through the
 construction of a CAmkES application with two components: an Echo
 server, and its Client that makes calls to it. These components are
 defined when you initialise your build repository, found in
-the following sub-directories:</p>
+the following camkes file:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">hello-camkes-1/components/Client/Client.camkes</code></li>
-  <li><code class="highlighter-rouge">hello-camkes-1/components/Echo/Echo.camkes</code></li>
+  <li><code class="highlighter-rouge">hello-camkes-1/hello-1.camkes</code></li>
 </ul>
 
 <p>Find the Component manual section here:
@@ -416,7 +415,7 @@ interface, which is an interface over which function calls are made
 according to a well-defined pre-determined API. The keyword for this
 kind of interface in CAmkES is <code class="highlighter-rouge">procedure</code>. The definition of this
 Procedure interface may be found here:
-<code class="highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.camkes</code></p>
+<code class="highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.idl4</code></p>
 
 <p>Find the “Procedure” keyword definition here:
 <a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure</a></p>
@@ -436,7 +435,7 @@ defined:</p>
 
 <p>Now when it comes to invoking the functions that were defined in the
 Interface specification
-(<code class="highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.camkes</code>),
+(<code class="highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.idl4</code>),
 you must prefix the API function name with the name of the Interface
 instance that you are exposing over the particular connection.</p>
 
@@ -513,8 +512,8 @@ assembly {
 </span><span class="cm">/* TASK 5: implement the RPC function. */</span>
 <span class="cm">/* hint 1: the name of the function to implement is a composition of an interface name and a function name:
  * i.e.: &lt;interface&gt;_&lt;function&gt;
- * hint 2: the interfaces available are defined by the component, e.g. in components/Echo/Echo.camkes
- * hint 3: the function name is defined by the interface definition, e.g. in interfaces/HelloSimple.camkes
+ * hint 2: the interfaces available are defined by the component, e.g. in hello-1.camkes
+ * hint 3: the function name is defined by the interface definition, e.g. in interfaces/HelloSimple.idl4
  * hint 4: so the function would be: hello_say_hello()
  * hint 5: the CAmkES 'string' type maps to 'const char *' in C
  * hint 6: make the function print out a mesage using printf
@@ -543,8 +542,8 @@ assembly {
     <span class="cm">/* TODO: invoke the RPC function */</span>
     <span class="cm">/* hint 1: the name of the function to invoke is a composition of an interface name and a function name:
      * i.e.: &lt;interface&gt;_&lt;function&gt;
-     * hint 2: the interfaces available are defined by the component, e.g. in components/Client/Client.camkes
-     * hint 3: the function name is defined by the interface definition, e.g. in interfaces/HelloSimple.camkes
+     * hint 2: the interfaces available are defined by the component, e.g. in hello-1.camkes
+     * hint 3: the function name is defined by the interface definition, e.g. in interfaces/HelloSimple.idl4
      * hint 4: so the function would be:  hello_say_hello()
      * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
      */</span>
@@ -607,7 +606,7 @@ writing your first CAmkES application.</p>
         </li>
         
           <li>
-            Site last updated: Thu Nov 7 12:59:41 2019 +1000 4a835c5
+            Site last updated: Mon Nov 18 15:08:54 2019 +1100 0a1ffeb
           </li>
           <li>
             
