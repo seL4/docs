@@ -169,7 +169,7 @@ platforms.
 * Use `%p` for pointers.
 * Use `%zd` and `%zu` for `ssize_t` and `size_t` respectively.
 
-### Header Guards
+### Header guards
 
 * Use `#pragma once` in header files to avoid duplicated includes.
 
@@ -197,7 +197,7 @@ The in-kernel `printf` implementation is limited.
 * Use `%p` for pointers.
 * Use `%lu` for words, and cast to avoid warnings.
 
-### Header Guards
+### Header guards
 
 * Do not use `#pragma once`; use header guards.
 
