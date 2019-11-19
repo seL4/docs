@@ -79,6 +79,10 @@ Regardless of your Linux distribution, python dependencies are required to build
 ```
 pip3 install --user setuptools
 pip3 install --user sel4-deps
+# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
+pip install --user setuptools
+pip install --user sel4-deps
+
 ```
 (Some distributions use `pip` for python3 and `pip2` for python2; others uses `pip` for python2 and `pip3` for python3.  Use the Python 3 version for your distribution)
 
@@ -98,6 +102,8 @@ The python dependencies required by the CAmkES build toolchain can be installed 
 
 ```
 pip3 install --user camkes-deps
+# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
+pip install --user camkes-deps
 ```
 
 ### Haskell Dependencies
