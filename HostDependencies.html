@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-18 15:16:02 +1100 -->
+<!-- Page last generated 2019-11-19 15:01:49 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -316,6 +316,10 @@ stuck at older versions (e.g CMake 3.5.1, GCC 5.4 for 16.04).
 As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new <a href="https://docs.sel4.systems/DocsContributing">contributions</a> to the page.</em></p>
 </blockquote>
 
+<blockquote>
+  <p><em>Note that we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: https://cmake.org/download/</em></p>
+</blockquote>
+
 <p>The basic build package on Ubuntu is the <code class="highlighter-rouge">build-essential</code> package. To install run:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
@@ -368,6 +372,10 @@ sudo apt-get -t stretch-backports install cmake
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install --user setuptools
 pip3 install --user sel4-deps
+# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
+pip install --user setuptools
+pip install --user sel4-deps
+
 </code></pre></div></div>
 <p>(Some distributions use <code class="highlighter-rouge">pip</code> for python3 and <code class="highlighter-rouge">pip2</code> for python2; others uses <code class="highlighter-rouge">pip</code> for python2 and <code class="highlighter-rouge">pip3</code> for python3.  Use the Python 3 version for your distribution)</p>
 
@@ -386,6 +394,8 @@ pip3 install --user sel4-deps
 <p>The python dependencies required by the CAmkES build toolchain can be installed via pip:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install --user camkes-deps
+# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
+pip install --user camkes-deps
 </code></pre></div></div>
 
 <h3 id="haskell-dependencies">Haskell Dependencies</h3>
@@ -505,7 +515,7 @@ cp -i misc/etc/settings ~/.isabelle/etc/settings
         </li>
         
           <li>
-            Site last updated: Mon Nov 18 15:08:54 2019 +1100 0a1ffeb
+            Site last updated: Tue Nov 19 14:57:52 2019 +1100 25142cd
           </li>
           <li>
             
@@ -628,7 +638,7 @@ cp -i misc/etc/settings ~/.isabelle/etc/settings
               
             
               
-                Page last updated: Thu Sep 5 14:27:40 2019 +1000 88250ae
+                Page last updated: Tue Nov 19 14:57:52 2019 +1100 25142cd
               
             
               
