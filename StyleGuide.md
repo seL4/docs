@@ -108,8 +108,8 @@ tick_count *tick_count_ptr; /* yes */
 ### Expressions
 
 * Avoid pointer arithmetic unless necessary.
-* Always use preprocessor macros for bit manipulation (e.g., use `BIT(7)`
-  instead of `1 << 7`).
+* Always use preprocessor macros for bit manipulation (e.g., use
+  `BIT(7)` instead of `1 << 7`).
 
 ### Structure
 
