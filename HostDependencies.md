@@ -21,6 +21,8 @@ To establish a usable development environment it is important to install your di
 stuck at older versions (e.g CMake 3.5.1, GCC 5.4 for 16.04).
 As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.*
 
+> *Note that we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: https://cmake.org/download/*
+
 The basic build package on Ubuntu is the `build-essential` package. To install run:
 
 ```
