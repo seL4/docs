@@ -41,33 +41,33 @@ settings declared in our
 * Use space between keywords and parentheses; e.g., `if (condition)`.
 * Put the opening brace of a function implementation on the line _after_
   the function's return type, name, and argument list.
-```c
-int atoi(const char *nptr)
-{
-    /* ... */
-}
-```
+  ```c
+  int atoi(const char *nptr)
+  {
+      /* ... */
+  }
+  ```
 * Use the "one true brace style" (1TBS); use braces everywhere the
   syntax allows (including single-statement scopes).
-```c
-if (x == FOO) {
-    do_something();
-} else if (y == BAR) {
-    do_something_else();
-} else {
-    do_last_else();
-}
-```
+  ```c
+  if (x == FOO) {
+      do_something();
+  } else if (y == BAR) {
+      do_something_else();
+  } else {
+      do_last_else();
+  }
+  ```
 * When a function argument list gets too long for one line, indent the
   remaining arguments on the next line just inboard of the parenthesis
   on the line above.  For example:
-```c
-void myfunc(my_ridiculously_long_type_t foo,
-            my_ridiculously_long_type_t bar)
-{
-    /* ... */
-}
-```
+  ```c
+  void myfunc(my_ridiculously_long_type_t foo,
+              my_ridiculously_long_type_t bar)
+  {
+      /* ... */
+  }
+  ```
 
 ### Choosing data types
 
@@ -82,12 +82,12 @@ void myfunc(my_ridiculously_long_type_t foo,
 * The names of type aliases should always end in `_t`.
 * Function pointer type aliases should always end in `_fn_t`.
 * Do not alias pointer types with `typedef`; we keep them explicit.
-```c
-typedef tick_count unsigned int;
+  ```c
+  typedef tick_count unsigned int;
 
-typedef tick_count_ptr_t *tick_count; /* NO */
-tick_count *tick_count_ptr; /* yes */
-```
+  typedef tick_count_ptr_t *tick_count; /* NO */
+  tick_count *tick_count_ptr; /* yes */
+  ```
 * Use `snake_case` to name a multi-word variable or type.
 * Non-`static` functions should be prefixed with appropriate names to
   avoid polluting the namespace.
@@ -127,9 +127,9 @@ tick_count *tick_count_ptr; /* yes */
   blocks that refers to the preprocessor symbol(s) upon which the code
   is guarded.
 ```c
-#ifdef CONFIG_BLAH
-/* ... */
-#endif /* CONFIG_BLAH */
+  #ifdef CONFIG_BLAH
+  /* ... */
+  #endif /* CONFIG_BLAH */
 ```
 
 ### Memory allocation
@@ -221,10 +221,10 @@ anything in the general guide.
 * `union` types cannot be used; use the bitfield generator instead.
 * Do not preincrement or predecrement variables (`++x`, `--y`).
 * Do not use variable names that duplicate `typedef` type aliases:
-```c
-typedef int A;
-A A;
-```
+  ```c
+  typedef int A;
+  A A;
+  ```
 * Do not use fall-through cases in `switch` statements.
 * Do not use variadic argument lists.
 * Declare functions that take no arguments as taking a `void` argument.
@@ -232,11 +232,11 @@ A A;
   rather than declarations of other types (such as `extern char` or
   `extern void *`).
 * Do not pass arrays as arguments to functions expecting pointers.
-```c
-void foo(int *some_pointer);
-int my_array[10];
-foo(my_array);
-```
+  ```c
+  void foo(int *some_pointer);
+  int my_array[10];
+  foo(my_array);
+  ```
 * Do not declare local variables as `static`.
 * Prefix `struct` fields with the name of the `struct` to avoid
   namespace conflicts in the proof.  (Much existing kernel code does not
