@@ -47,9 +47,8 @@ int atoi(const char *nptr)
     /* ... */
 }
 ```
-* Use the "one true brace style" (1TBS):
-    * Use braces everywhere the syntax allows (including
-      single-statement scopes).
+* Use the "one true brace style" (1TBS); use braces everywhere the
+  syntax allows (including single-statement scopes).
 ```c
 if (x == FOO) {
     do_something();
