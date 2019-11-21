@@ -2,7 +2,7 @@
 toc: true
 ---
 
-# C Coding Conventions
+# C Coding Conventions and Style Guide
 
 These are conventions which we attempt to follow in all of our code.
 They do not apply to external libraries, where we stick with the
