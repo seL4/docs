@@ -101,8 +101,8 @@ settings declared in our
   symbolic debugger like `gdb`.
 * Use `SCREAMING_SNAKE_CASE` for, and _only_ for, preprocessor symbols
   and values of enumeration type.
-* Prefix architecture-specific code with arch\_, platform-specific
-  code with plat\_, and mode-specific code with mode\_.
+* Prefix architecture-specific code with `arch_`, platform-specific
+  code with `plat_`, and mode-specific code with `mode_`.
 
 ### Expressions
 
