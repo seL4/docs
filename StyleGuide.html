@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-19 15:01:49 +1100 -->
+<!-- Page last generated 2019-11-21 14:47:56 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -296,6 +296,8 @@
 <li class="toc-entry toc-h3"><a href="#spacing-and-braces">Spacing and braces</a></li>
 <li class="toc-entry toc-h3"><a href="#choosing-data-types">Choosing data types</a></li>
 <li class="toc-entry toc-h3"><a href="#naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (typedef)</a></li>
+<li class="toc-entry toc-h3"><a href="#expressions">Expressions</a></li>
+<li class="toc-entry toc-h3"><a href="#structure">Structure</a></li>
 <li class="toc-entry toc-h3"><a href="#memory-allocation">Memory allocation</a></li>
 <li class="toc-entry toc-h3"><a href="#commenting">Commenting</a></li>
 </ul>
@@ -304,14 +306,14 @@
 <ul>
 <li class="toc-entry toc-h3"><a href="#type-conventions">Type conventions</a></li>
 <li class="toc-entry toc-h3"><a href="#format-strings">Format strings</a></li>
-<li class="toc-entry toc-h3"><a href="#header-guards">Header Guards</a></li>
+<li class="toc-entry toc-h3"><a href="#header-guards">Header guards</a></li>
 <li class="toc-entry toc-h3"><a href="#error-handling">Error handling</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#kernel-code">Kernel code</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#format-strings-1">Format strings</a></li>
-<li class="toc-entry toc-h3"><a href="#header-guards-1">Header Guards</a></li>
+<li class="toc-entry toc-h3"><a href="#header-guards-1">Header guards</a></li>
 <li class="toc-entry toc-h3"><a href="#error-handling-1">Error handling</a></li>
 <li class="toc-entry toc-h3"><a href="#verification-requirements">Verification requirements</a></li>
 </ul>
@@ -365,32 +367,28 @@ expressions (<code class="highlighter-rouge">int *foo</code>).</li>
 the function’s return type, name, and argument list.
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">atoi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">nptr</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="cm">/* ... */</span>
+    <span class="cm">/* ... */</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
-  <li>Use the “one true brace style” (1TBS):
-    <ul>
-      <li>Use braces everywhere the syntax allows (including
-single-statement scopes).
-        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">FOO</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">do_something</span><span class="p">();</span>
+  <li>Use the “one true brace style” (1TBS); use braces everywhere the
+syntax allows (including single-statement scopes).
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">FOO</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">do_something</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">BAR</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">do_something_else</span><span class="p">();</span>
+    <span class="n">do_something_else</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="n">do_last_else</span><span class="p">();</span>
+    <span class="n">do_last_else</span><span class="p">();</span>
 <span class="p">}</span>
-</code></pre></div>        </div>
-      </li>
-    </ul>
+</code></pre></div>    </div>
   </li>
   <li>When a function argument list gets too long for one line, indent the
 remaining arguments on the next line just inboard of the parenthesis
 on the line above.  For example:
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">my_ridiculously_long_type_t</span> <span class="n">foo</span><span class="p">,</span>
-          <span class="n">my_ridiculously_long_type_t</span> <span class="n">bar</span><span class="p">)</span>
+            <span class="n">my_ridiculously_long_type_t</span> <span class="n">bar</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="cm">/* ... */</span>
+    <span class="cm">/* ... */</span>
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
@@ -412,55 +410,63 @@ in the C standard.)</li>
   <li>The names of type aliases should always end in <code class="highlighter-rouge">_t</code>.</li>
   <li>Function pointer type aliases should always end in <code class="highlighter-rouge">_fn_t</code>.</li>
   <li>Do not alias pointer types with <code class="highlighter-rouge">typedef</code>; we keep them explicit.
-```c
-typedef tick_count unsigned int;</li>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="n">tick_count</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="n">tick_count_ptr_t</span> <span class="o">*</span><span class="n">tick_count</span><span class="p">;</span> <span class="cm">/* NO */</span>
+<span class="n">tick_count</span> <span class="o">*</span><span class="n">tick_count_ptr</span><span class="p">;</span> <span class="cm">/* yes */</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Use <code class="highlighter-rouge">snake_case</code> to name a multi-word variable or type.</li>
+  <li>Non-<code class="highlighter-rouge">static</code> functions should be prefixed with appropriate names to
+avoid polluting the namespace.
+    <ul>
+      <li>The convention in library code is to use the name of the library.</li>
+      <li>A good guide for application code is to use the filename.</li>
+    </ul>
+  </li>
+  <li>Name Boolean variables with a verb phrase including a verb like <code class="highlighter-rouge">is_</code>,
+<code class="highlighter-rouge">has_</code>, or <code class="highlighter-rouge">want_</code> so that the intent of the variable is clear in
+expressions and conditionals.</li>
+  <li>Avoid magic numbers; define meaningful constants.  Prefer C language
+symbols over preprocessor symbols, because the former are visible in a
+symbolic debugger like <code class="highlighter-rouge">gdb</code>.</li>
+  <li>Use <code class="highlighter-rouge">SCREAMING_SNAKE_CASE</code> for, and <em>only</em> for, preprocessor symbols
+and values of enumeration type.</li>
+  <li>Prefix architecture-specific code with arch_, platform-specific
+code with plat_, and mode-specific code with mode_.</li>
 </ul>
 
-<p>typedef tick_count_ptr_t <em>tick_count; /</em> NO <em>/
-tick_count *tick_count_ptr; /</em> yes */</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Use `snake_case` to name a multi-word variable or type.
-* Non-`static` functions should be prefixed with appropriate names to
-  avoid polluting the namespace.
-    * The convention in library code is to use the name of the library.
-    * A good guide for application code is to use the filename.
-* Name Boolean variables with a verb phrase including a verb like `is_`,
-  `has_`, or `want_` so that the intent of the variable is clear in
-  expressions and conditionals.
-* Avoid magic numbers; define meaningful constants.  Prefer C language
-  symbols over preprocessor symbols, because the former are visible in a
-  symbolic debugger like `gdb`.
-* Use `SCREAMING_SNAKE_CASE` for, and _only_ for, preprocessor symbols
-  and values of enumeration type.
-* Prefix architecture-specific code with arch\_, platform-specific
-  code with plat\_, and mode-specific code with mode\_.
+<h3 id="expressions">Expressions</h3>
 
-### Expressions
+<ul>
+  <li>Avoid pointer arithmetic unless necessary.</li>
+  <li>Always use preprocessor macros for bit manipulation (e.g., use
+<code class="highlighter-rouge">BIT(7)</code> instead of <code class="highlighter-rouge">1 &lt;&lt; 7</code>).</li>
+</ul>
 
-* Avoid pointer arithmetic unless necessary.
-* Always use preprocessor macros for bit manipulation (e.g., use `BIT(7)`
-  instead of `1 &lt;&lt; 7`).
+<h3 id="structure">Structure</h3>
 
-### Structure
-
-* Put architecture- and platform-specific code in dedicated directories.
-* Only `static inline` functions are permitted in header files, and then
-  only for performance.
-* Variables at file scope must be marked as `static`.
-* Use public/private header files; avoid `extern` unless necessary.
-* General-purpose utility functions belong in shared libraries, not
-  library-specific files, and vice versa.  (Consider checking `libutils`
-  in the `util_libs` Git repository for existing functionality, and
-  consider making useful additions there.)
-* Prefer `static inline` functions over preprocessor macros unless
-  preprocessor features are required or the macro is simple.
-* Put a comment after the `#endif` of an `#if`, `#ifdef`, or `#ifndef`
-  blocks that refers to the preprocessor symbol(s) upon which the code
-  is guarded.
-```c
-#ifdef CONFIG_BLAH
-/* ... */
-#endif /* CONFIG_BLAH */
-</code></pre></div></div>
+<ul>
+  <li>Put architecture- and platform-specific code in dedicated directories.</li>
+  <li>Only <code class="highlighter-rouge">static inline</code> functions are permitted in header files, and then
+only for performance.</li>
+  <li>Variables at file scope must be marked as <code class="highlighter-rouge">static</code>.</li>
+  <li>Use public/private header files; avoid <code class="highlighter-rouge">extern</code> unless necessary.</li>
+  <li>General-purpose utility functions belong in shared libraries, not
+library-specific files, and vice versa.  (Consider checking <code class="highlighter-rouge">libutils</code>
+in the <code class="highlighter-rouge">util_libs</code> Git repository for existing functionality, and
+consider making useful additions there.)</li>
+  <li>Prefer <code class="highlighter-rouge">static inline</code> functions over preprocessor macros unless
+preprocessor features are required or the macro is simple.</li>
+  <li>Put a comment after the <code class="highlighter-rouge">#endif</code> of an <code class="highlighter-rouge">#if</code>, <code class="highlighter-rouge">#ifdef</code>, or <code class="highlighter-rouge">#ifndef</code>
+blocks that refers to the preprocessor symbol(s) upon which the code
+is guarded.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef CONFIG_BLAH
+</span><span class="cm">/* ... */</span>
+<span class="cp">#endif </span><span class="cm">/* CONFIG_BLAH */</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+</ul>
 
 <h3 id="memory-allocation">Memory allocation</h3>
 
@@ -509,7 +515,7 @@ compatibility, unless operating on a fixed-width type.</li>
   <li>Use <code class="highlighter-rouge">%zd</code> and <code class="highlighter-rouge">%zu</code> for <code class="highlighter-rouge">ssize_t</code> and <code class="highlighter-rouge">size_t</code> respectively.</li>
 </ul>
 
-<h3 id="header-guards">Header Guards</h3>
+<h3 id="header-guards">Header guards</h3>
 
 <ul>
   <li>Use <code class="highlighter-rouge">#pragma once</code> in header files to avoid duplicated includes.</li>
@@ -545,7 +551,7 @@ macros for this purpose, e.g. <code class="highlighter-rouge">TCB_REF</code> and
   <li>Use <code class="highlighter-rouge">%lu</code> for words, and cast to avoid warnings.</li>
 </ul>
 
-<h3 id="header-guards-1">Header Guards</h3>
+<h3 id="header-guards-1">Header guards</h3>
 
 <ul>
   <li>Do not use <code class="highlighter-rouge">#pragma once</code>; use header guards.</li>
@@ -641,7 +647,7 @@ determined by the compiler).</li>
         </li>
         
           <li>
-            Site last updated: Tue Nov 19 14:57:52 2019 +1100 25142cd
+            Site last updated: Thu Nov 21 12:48:28 2019 +1100 ae12294
           </li>
           <li>
             
@@ -786,7 +792,7 @@ determined by the compiler).</li>
               
             
               
-                Page last updated: Mon Nov 18 15:08:54 2019 +1100 0a1ffeb
+                Page last updated: Thu Nov 21 12:48:28 2019 +1100 ae12294
               
             
               
