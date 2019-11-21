@@ -163,7 +163,7 @@ platforms.
 
 ### Format strings
 
-* Use 64-bit-friendly printing macros for `printf` (e.g. `PRIi32` for
+* Use 64-bit-friendly printing macros for `printf` (e.g., `PRIi32` for
   `uint32_t`).
 * Use `%p` for pointers.
 * Use `%zd` and `%zu` for `ssize_t` and `size_t` respectively.
@@ -186,8 +186,8 @@ platforms.
 
 * Use `word_t` for word-sized things.
 * Do not explicitly typecast between pointers and references (i.e.,
-  integers used as, e.g. offsets into structures): use object-specific
-  macros for this purpose, e.g. `TCB_REF` and `TCB_PTR`.
+  integers used as, e.g., offsets into structures): use object-specific
+  macros for this purpose, such as `TCB_REF` and `TCB_PTR`.
 
 ### Format strings
 
@@ -216,7 +216,7 @@ anything in the general guide.
   standard.  (The link is to the final draft before ratification; the
   official standard document cannot be distributed freely.)
 * Avoid taking the address of a local (i.e., stack-allocated) variable.
-* Do not use floating-point types, e.g. `double` or `float`.
+* Do not use floating-point types, e.g., `double` or `float`.
 * Do not use `restrict`.
 * `union` types cannot be used; use the bitfield generator instead.
 * Do not preincrement or predecrement variables (`++x`, `--y`).
