@@ -215,7 +215,8 @@ anything in the general guide.
   [C99](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf)
   standard.  (The link is to the final draft before ratification; the
   official standard document cannot be distributed freely.)
-* Avoid taking the address of a local (i.e., stack-allocated) variable.
+* Avoid taking the address of a variable of automatic storage class.
+  (In most C implementations, this means stack-allocated locals.)
 * Do not use floating-point types, e.g., `double` or `float`.
 * Do not use `restrict`.
 * `union` types cannot be used; use the bitfield generator instead.
