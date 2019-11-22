@@ -24,7 +24,9 @@ This guide applies to general C code at user-level.  For developing the
 seL4 kernel and other verified code, please refer to the verification
 requirements below, which override the general conventions.
 
-* Code should compile without warnings, with `-Wall`.
+### Compiler options
+
+Code should compile without warnings, with `-Wall`.
 
 ### Automatic formatting
 
