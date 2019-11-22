@@ -27,7 +27,7 @@ For the verification status of all platforms, see [Hardware](/Hardware).
 | -                              | -                                 | -                   | -                   |
 | AARCH64 RPI3                   | [RPI3](/Hardware/Rpi3)            | No                  | [10.1.0](seL4_10.1.0) |
 | TX2 support (Aarch64 only)     | [TX2](/Hardware/JetsonTX2)        | No                  | [10.1.0](seL4_10.1.0) |
-| Support for more than 1 VM | ARM |   ARM                           | No                  | [10.1.0](seL4_10.1.0) |
+| Support for more than 1 VM     | ARM                               | No                  | [10.1.0](seL4_10.1.0) |
 | 32-bit RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [10.0.0](seL4_10.0.0) |
 | 64-bit RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [9.0.1](seL4_9.0.1) |
 | Meltdown mitigation            | x86                               | No                  | [9.0.0](seL4_9.0.0) |
