@@ -73,10 +73,10 @@ settings declared in our
 
 ### Choosing data types
 
-* When using integral types (`char`, `int`, `long`, etc.), qualify them
-  explicitly as `unsigned` except where negative values are meaningful
-  and must be handled.  (Overflow of signed integral types is undefined
-  in the C standard.)
+When using integral types (`char`, `int`, `long`, etc.), qualify them
+explicitly as `unsigned` except where negative values are meaningful and
+must be handled.  (Overflow of signed integral types is undefined in the
+C standard.)
 
 ### Naming of symbols (variables), types, and type aliases (`typedef`)
 
@@ -136,8 +136,8 @@ settings declared in our
 
 ### Memory allocation
 
-* For memory that should be zeroed, use `calloc` rather than `malloc`
-  followed by `memset` or `bzero`.
+For memory that should be zeroed, use `calloc` rather than `malloc`
+followed by `memset` or `bzero`.
 
 ### Commenting
 
@@ -154,8 +154,8 @@ platforms.
 
 * Use `seL4_Word` for word-sized things.
 * Use `void *` for untyped addresses.
-* Use `uintptr_t` for pointer arithmetic.
-    * ...but avoid pointer arithmetic unless necessary.
+* Use `uintptr_t` for pointer arithmetic...
+* ...but avoid pointer arithmetic unless necessary.
 * Use `size_t` for sizes of objects (including pointers themselves).
 * Use `unsigned int` for values known to be small.
 * Use fixed-width types only when necessary, e.g., in device drivers.
@@ -172,7 +172,7 @@ platforms.
 
 ### Header guards
 
-* Use `#pragma once` in header files to avoid duplicated includes.
+Use `#pragma once` in header files to avoid duplicated includes.
 
 ### Error handling
 
@@ -200,11 +200,11 @@ The in-kernel `printf` implementation is limited.
 
 ### Header guards
 
-* Do not use `#pragma once`; use header guards.
+Do not use `#pragma once`; use header guards.
 
 ### Error handling
 
-* Within seL4, the `decode` stage must only check conditions; the
+Within seL4, the `decode` stage must only check conditions; the
   `invoke` stage can alter state.
 
 ### Verification requirements
