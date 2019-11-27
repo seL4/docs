@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-26 17:19:07 +1100 -->
+<!-- Page last generated 2019-11-27 13:18:50 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>C Coding Conventions | seL4 docs</title>
+    <title>C Coding Conventions and Style Guide | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,7 +68,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">C Coding Conventions</span>
+            <span property="name">C Coding Conventions and Style Guide</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -292,6 +292,7 @@
         <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#general-c-code">General C code</a>
 <ul>
+<li class="toc-entry toc-h3"><a href="#compiler-options">Compiler options</a></li>
 <li class="toc-entry toc-h3"><a href="#automatic-formatting">Automatic formatting</a></li>
 <li class="toc-entry toc-h3"><a href="#spacing-and-braces">Spacing and braces</a></li>
 <li class="toc-entry toc-h3"><a href="#choosing-data-types">Choosing data types</a></li>
@@ -323,7 +324,7 @@
       </nav>
     
     <div class="content">
-      <h1 id="c-coding-conventions">C Coding Conventions</h1>
+      <h1 id="c-coding-conventions-and-style-guide">C Coding Conventions and Style Guide</h1>
 
 <p>These are conventions which we attempt to follow in all of our code.
 They do not apply to external libraries, where we stick with the
@@ -345,9 +346,9 @@ conventions sometimes contradict each other.</p>
 seL4 kernel and other verified code, please refer to the verification
 requirements below, which override the general conventions.</p>
 
-<ul>
-  <li>Code should compile without warnings, with <code class="highlighter-rouge">-Wall</code>.</li>
-</ul>
+<h3 id="compiler-options">Compiler options</h3>
+
+<p>Code should compile without warnings, with <code class="highlighter-rouge">-Wall</code>.</p>
 
 <h3 id="automatic-formatting">Automatic formatting</h3>
 
@@ -396,12 +397,10 @@ on the line above.  For example:
 
 <h3 id="choosing-data-types">Choosing data types</h3>
 
-<ul>
-  <li>When using integral types (<code class="highlighter-rouge">char</code>, <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">long</code>, etc.), qualify them
-explicitly as <code class="highlighter-rouge">unsigned</code> except where negative values are meaningful
-and must be handled.  (Overflow of signed integral types is undefined
-in the C standard.)</li>
-</ul>
+<p>When using integral types (<code class="highlighter-rouge">char</code>, <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">long</code>, etc.), qualify them
+explicitly as <code class="highlighter-rouge">unsigned</code> except where negative values are meaningful and
+must be handled.  (Overflow of signed integral types is undefined in the
+C standard.)</p>
 
 <h3 id="naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (<code class="highlighter-rouge">typedef</code>)</h3>
 
@@ -432,8 +431,8 @@ symbols over preprocessor symbols, because the former are visible in a
 symbolic debugger like <code class="highlighter-rouge">gdb</code>.</li>
   <li>Use <code class="highlighter-rouge">SCREAMING_SNAKE_CASE</code> for, and <em>only</em> for, preprocessor symbols
 and values of enumeration type.</li>
-  <li>Prefix architecture-specific code with arch_, platform-specific
-code with plat_, and mode-specific code with mode_.</li>
+  <li>Prefix architecture-specific code with <code class="highlighter-rouge">arch_</code>, platform-specific
+code with <code class="highlighter-rouge">plat_</code>, and mode-specific code with <code class="highlighter-rouge">mode_</code>.</li>
 </ul>
 
 <h3 id="expressions">Expressions</h3>
@@ -470,10 +469,8 @@ is guarded.
 
 <h3 id="memory-allocation">Memory allocation</h3>
 
-<ul>
-  <li>For memory that should be zeroed, use <code class="highlighter-rouge">calloc</code> rather than <code class="highlighter-rouge">malloc</code>
-followed by <code class="highlighter-rouge">memset</code> or <code class="highlighter-rouge">bzero</code>.</li>
-</ul>
+<p>For memory that should be zeroed, use <code class="highlighter-rouge">calloc</code> rather than <code class="highlighter-rouge">malloc</code>
+followed by <code class="highlighter-rouge">memset</code> or <code class="highlighter-rouge">bzero</code>.</p>
 
 <h3 id="commenting">Commenting</h3>
 
@@ -493,11 +490,8 @@ platforms.</p>
 <ul>
   <li>Use <code class="highlighter-rouge">seL4_Word</code> for word-sized things.</li>
   <li>Use <code class="highlighter-rouge">void *</code> for untyped addresses.</li>
-  <li>Use <code class="highlighter-rouge">uintptr_t</code> for pointer arithmetic.
-    <ul>
-      <li>…but avoid pointer arithmetic unless necessary.</li>
-    </ul>
-  </li>
+  <li>Use <code class="highlighter-rouge">uintptr_t</code> for pointer arithmetic…</li>
+  <li>…but avoid pointer arithmetic unless necessary.</li>
   <li>Use <code class="highlighter-rouge">size_t</code> for sizes of objects (including pointers themselves).</li>
   <li>Use <code class="highlighter-rouge">unsigned int</code> for values known to be small.</li>
   <li>Use fixed-width types only when necessary, e.g., in device drivers.</li>
@@ -509,7 +503,7 @@ compatibility, unless operating on a fixed-width type.</li>
 <h3 id="format-strings">Format strings</h3>
 
 <ul>
-  <li>Use 64-bit-friendly printing macros for <code class="highlighter-rouge">printf</code> (e.g. <code class="highlighter-rouge">PRIi32</code> for
+  <li>Use 64-bit-friendly printing macros for <code class="highlighter-rouge">printf</code> (e.g., <code class="highlighter-rouge">PRIi32</code> for
 <code class="highlighter-rouge">uint32_t</code>).</li>
   <li>Use <code class="highlighter-rouge">%p</code> for pointers.</li>
   <li>Use <code class="highlighter-rouge">%zd</code> and <code class="highlighter-rouge">%zu</code> for <code class="highlighter-rouge">ssize_t</code> and <code class="highlighter-rouge">size_t</code> respectively.</li>
@@ -517,9 +511,7 @@ compatibility, unless operating on a fixed-width type.</li>
 
 <h3 id="header-guards">Header guards</h3>
 
-<ul>
-  <li>Use <code class="highlighter-rouge">#pragma once</code> in header files to avoid duplicated includes.</li>
-</ul>
+<p>Use <code class="highlighter-rouge">#pragma once</code> in header files to avoid duplicated includes.</p>
 
 <h3 id="error-handling">Error handling</h3>
 
@@ -538,8 +530,8 @@ and report errors before modifying state.</li>
 <ul>
   <li>Use <code class="highlighter-rouge">word_t</code> for word-sized things.</li>
   <li>Do not explicitly typecast between pointers and references (i.e.,
-integers used as, e.g. offsets into structures): use object-specific
-macros for this purpose, e.g. <code class="highlighter-rouge">TCB_REF</code> and <code class="highlighter-rouge">TCB_PTR</code>.</li>
+integers used as, e.g., offsets into structures): use object-specific
+macros for this purpose, such as <code class="highlighter-rouge">TCB_REF</code> and <code class="highlighter-rouge">TCB_PTR</code>.</li>
 </ul>
 
 <h3 id="format-strings-1">Format strings</h3>
@@ -553,16 +545,12 @@ macros for this purpose, e.g. <code class="highlighter-rouge">TCB_REF</code> and
 
 <h3 id="header-guards-1">Header guards</h3>
 
-<ul>
-  <li>Do not use <code class="highlighter-rouge">#pragma once</code>; use header guards.</li>
-</ul>
+<p>Do not use <code class="highlighter-rouge">#pragma once</code>; use header guards.</p>
 
 <h3 id="error-handling-1">Error handling</h3>
 
-<ul>
-  <li>Within seL4, the <code class="highlighter-rouge">decode</code> stage must only check conditions; the
-<code class="highlighter-rouge">invoke</code> stage can alter state.</li>
-</ul>
+<p>Within seL4, the <code class="highlighter-rouge">decode</code> stage must only check conditions; the
+  <code class="highlighter-rouge">invoke</code> stage can alter state.</p>
 
 <h3 id="verification-requirements">Verification requirements</h3>
 
@@ -575,8 +563,9 @@ anything in the general guide.</p>
 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">C99</a>
 standard.  (The link is to the final draft before ratification; the
 official standard document cannot be distributed freely.)</li>
-  <li>Avoid taking the address of a local (i.e., stack-allocated) variable.</li>
-  <li>Do not use floating-point types, e.g. <code class="highlighter-rouge">double</code> or <code class="highlighter-rouge">float</code>.</li>
+  <li>Avoid taking the address of a variable of automatic storage class.
+(In most C implementations, this means stack-allocated locals.)</li>
+  <li>Do not use floating-point types, e.g., <code class="highlighter-rouge">double</code> or <code class="highlighter-rouge">float</code>.</li>
   <li>Do not use <code class="highlighter-rouge">restrict</code>.</li>
   <li><code class="highlighter-rouge">union</code> types cannot be used; use the bitfield generator instead.</li>
   <li>Do not preincrement or predecrement variables (<code class="highlighter-rouge">++x</code>, <code class="highlighter-rouge">--y</code>).</li>
@@ -647,7 +636,7 @@ determined by the compiler).</li>
         </li>
         
           <li>
-            Site last updated: Fri Nov 22 13:55:19 2019 +1100 59eef7c
+            Site last updated: Wed Nov 27 13:05:09 2019 +1100 1932589
           </li>
           <li>
             
@@ -792,7 +781,7 @@ determined by the compiler).</li>
               
             
               
-                Page last updated: Thu Nov 21 12:48:28 2019 +1100 ae12294
+                Page last updated: Wed Nov 27 13:05:09 2019 +1100 1932589
               
             
               
