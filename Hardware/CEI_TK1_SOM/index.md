@@ -133,11 +133,11 @@ and on your host:
 This will load the `sel4test-driver-image-arm-tk1` file onto the TK1-SOM
 at address `$loadaddr`. You can then run it in uboot with
 
-    bootelf $loadaddr
+    bootefi $loadaddr
 
 If you want, you can automate all this with:
 
-    setenv bootcmd_dfu "dfu 0 ram 0; bootelf $loadaddr" saveenv
+    setenv bootcmd_dfu "dfu 0 ram 0; bootefi $loadaddr" saveenv
 
 then just
 

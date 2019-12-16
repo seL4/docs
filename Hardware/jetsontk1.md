@@ -62,7 +62,7 @@ pci enum dhcp ${loadaddr} 192.168.1.1:sel4.img
 Then, let's start the program.
 
 ```
-bootelf ${loadaddr}
+bootefi ${loadaddr}
 ```
 
 ## Flash U-Boot
