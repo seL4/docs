@@ -86,11 +86,11 @@ BUILDFLAGS=-DSERIAL_BASE=0xF8015000
 ATF_BUILDFLAGS=CONSOLE_BASE=PL011_UART0_BASE CRASH_CONSOLE_BASE=PL011_UART0_BASE
 ```
 ## 5. Patching the UEFI for the Hikey 
-Obtain the patch from <https://sel4.systems/hikey.patch>.
+Obtain the patch from [edk2.patch](edk2.patch) and follow the below steps.
 
 ```bash
 cd linaro-edk2 
-patch -p1 < ~/Downloads/hikey.patch 
+patch -p1 < ~/Downloads/edk2.patch 
 # Then return to the main directory hikey-flash
 ```
 
@@ -143,8 +143,7 @@ ln -s ${EDK2_DIR}/Build/HiKey/DEBUG_GCC49/FV/fip.bin
 
 arm-linux-gnueabihf-gcc -c -o start.o start.S
 arm-linux-gnueabihf-gcc -c -o debug.o debug.S
-arm-linux-gnueabihf-ld -Bstatic -Tl-loader.lds -Ttext
-0xf9800800 start.o debug.o -o loader 
+arm-linux-gnueabihf-ld -Bstatic -Tl-loader.lds -Ttext 0xf9800800 start.o debug.o -o loader
 arm-linux-gnueabihf-objcopy -O binary loader temp
 python gen_loader.py -o l-loader.bin --img_loader=temp --img_bl1=bl1.bin
 sudo PTABLE=linux-4g bash -x generate_ptable.sh
