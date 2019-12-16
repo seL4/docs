@@ -41,6 +41,6 @@ Make sure you've set up a TFTP server to serve the seL4 image.
 
 ```
 dhcp
-tftp 0x11000000 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-odroidc2
-go 0x11000000
+tftp 0x20000000 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-odroidc2
+go 0x20000000
 ```
