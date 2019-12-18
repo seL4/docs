@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-27 13:18:50 +1100 -->
+<!-- Page last generated 2019-12-18 12:09:17 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -728,7 +728,7 @@ print server.</p>
 <p>This program prints each of its arguments on a separate line, by sending
 each argument to the print server one at a time.</p>
 
-<p><strong>Exercise</strong> create <code class="highlighter-rouge">pkgs/print_client/CMakeLists.txt</code> for our client program:</p>
+<p><strong>Exercise</strong> Create <code class="highlighter-rouge">pkgs/print_client/CMakeLists.txt</code> for our client program:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
 
@@ -770,13 +770,13 @@ each argument to the print server one at a time.</p>
 <span class="p">)</span>
 <span class="c1"># Add the print client app to our overlay ('default_buildroot_overlay')</span>
 <span class="nf">AddExternalProjFilesToOverlay</span><span class="p">(</span>print_client-app <span class="si">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="si">}</span>/print_client-app default_buildroot_overlay <span class="s2">"usr/sbin"</span>
-    FILES print_client<span class="p">)</span>```
+    FILES print_client<span class="p">)</span>
+</code></pre></div></div>
 
-Directly below this we also want to add our `camkes_init` script into the overlay. We place this into the VMs `init.d` directory so
-the script is run on start up:
+<p>Directly below this we also want to add our <code class="highlighter-rouge">camkes_init</code> script into the overlay. We place this into the VMs <code class="highlighter-rouge">init.d</code> directory so
+the script is run on start up:</p>
 
-```cmake
-<span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"S90camkes_init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/camkes_init <span class="s2">"etc/init.d"</span> default_buildroot_overlay<span class="p">)</span>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"S90camkes_init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/camkes_init <span class="s2">"etc/init.d"</span> default_buildroot_overlay<span class="p">)</span>
 </code></pre></div></div>
 
 <p>That’s it. Build and run the system, and you should see the following output:</p>
@@ -826,7 +826,7 @@ world
         </li>
         
           <li>
-            Site last updated: Wed Nov 27 13:05:09 2019 +1100 1932589
+            Site last updated: Mon Dec 16 15:56:32 2019 +1100 2b73f71
           </li>
           <li>
             

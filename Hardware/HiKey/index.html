@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-27 13:18:50 +1100 -->
+<!-- Page last generated 2019-12-18 12:09:17 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -374,10 +374,10 @@ git clone git://git.linaro.org/uefi/uefi-tools.git
 <span class="nv">ATF_BUILDFLAGS</span><span class="o">=</span><span class="nv">CONSOLE_BASE</span><span class="o">=</span>PL011_UART0_BASE <span class="nv">CRASH_CONSOLE_BASE</span><span class="o">=</span>PL011_UART0_BASE
 </code></pre></div></div>
 <h2 id="5-patching-the-uefi-for-the-hikey">5. Patching the UEFI for the Hikey</h2>
-<p>Obtain the patch from <a href="https://sel4.systems/hikey.patch">https://sel4.systems/hikey.patch</a>.</p>
+<p>Obtain the patch from <a href="/Hardware/HiKey/edk2.patch">edk2.patch</a> and follow the below steps.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>linaro-edk2 
-patch <span class="nt">-p1</span> &lt; ~/Downloads/hikey.patch 
+patch <span class="nt">-p1</span> &lt; ~/Downloads/edk2.patch 
 <span class="c"># Then return to the main directory hikey-flash</span>
 </code></pre></div></div>
 
@@ -427,8 +427,7 @@ ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR
 
 arm-linux-gnueabihf-gcc <span class="nt">-c</span> <span class="nt">-o</span> start.o start.S
 arm-linux-gnueabihf-gcc <span class="nt">-c</span> <span class="nt">-o</span> debug.o debug.S
-arm-linux-gnueabihf-ld <span class="nt">-Bstatic</span> <span class="nt">-Tl-loader</span>.lds <span class="nt">-Ttext</span>
-0xf9800800 start.o debug.o <span class="nt">-o</span> loader 
+arm-linux-gnueabihf-ld <span class="nt">-Bstatic</span> <span class="nt">-Tl-loader</span>.lds <span class="nt">-Ttext</span> 0xf9800800 start.o debug.o <span class="nt">-o</span> loader
 arm-linux-gnueabihf-objcopy <span class="nt">-O</span> binary loader temp
 python gen_loader.py <span class="nt">-o</span> l-loader.bin <span class="nt">--img_loader</span><span class="o">=</span>temp <span class="nt">--img_bl1</span><span class="o">=</span>bl1.bin
 <span class="nb">sudo </span><span class="nv">PTABLE</span><span class="o">=</span>linux-4g bash <span class="nt">-x</span> generate_ptable.sh
@@ -579,7 +578,7 @@ fastboot boot images/sel4test-driver-image-arm-hikey <span class="nt">-c</span> 
         </li>
         
           <li>
-            Site last updated: Wed Nov 27 13:05:09 2019 +1100 1932589
+            Site last updated: Mon Dec 16 15:56:32 2019 +1100 2b73f71
           </li>
           <li>
             
@@ -656,7 +655,7 @@ fastboot boot images/sel4test-driver-image-arm-hikey <span class="nt">-c</span> 
               
             
               
-                Page last updated: Mon May 28 16:30:11 2018 +1000 f530249
+                Page last updated: Mon Dec 16 15:53:15 2019 +1100 9693255
               
             
               

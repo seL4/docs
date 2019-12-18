@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-11-27 13:18:50 +1100 -->
+<!-- Page last generated 2019-12-18 12:09:17 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -306,8 +306,12 @@
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
 <ul>
+<li class="toc-entry toc-h3"><a href="#allocate-an-ipc-buffer">Allocate an IPC buffer</a></li>
 <li class="toc-entry toc-h3"><a href="#try-to-map-a-page">Try to map a page</a></li>
+<li class="toc-entry toc-h3"><a href="#allocate-a-page-table">Allocate a page table</a></li>
+<li class="toc-entry toc-h3"><a href="#map-a-page-table">Map a page table</a></li>
 <li class="toc-entry toc-h3"><a href="#map-a-page">Map a page</a></li>
+<li class="toc-entry toc-h3"><a href="#allocate-an-endpoint">Allocate an endpoint</a></li>
 <li class="toc-entry toc-h3"><a href="#badge-an-endpoint">Badge an endpoint</a></li>
 <li class="toc-entry toc-h3"><a href="#message-registers">Message registers</a></li>
 <li class="toc-entry toc-h3"><a href="#ipc">IPC</a></li>
@@ -388,32 +392,37 @@ ninja
 
 <h2 id="exercises">Exercises</h2>
 
-<p>When you first run this tutorial, you will see a fault as follows:
-```Booting all finished, dropped to user space
+<p>When you first run this tutorial, you will see a fault as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Caught cap fault in send phase at address (nil)
 while trying to handle:
 vm fault on data at address 0x70003c8 with status 0x6
-in thread 0xffffff801ffb5400 “rootserver” at address 0x402977
+in thread 0xffffff801ffb5400 "rootserver" at address 0x402977
 With stack:
 0x43df70: 0x0
-0x43df78: 0x0</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-### Allocate an IPC buffer
+0x43df78: 0x0
+</code></pre></div></div>
 
-As we mentioned in passing before, threads in seL4 do their own memory
+<h3 id="allocate-an-ipc-buffer">Allocate an IPC buffer</h3>
+
+<p>As we mentioned in passing before, threads in seL4 do their own memory
 management. You implement your own Virtual Memory Manager, essentially.
 To the extent that you must allocate a physical memory frame, then map
-it into your thread's page directory -- and even manually allocate page
-tables on your own, where necessary.
+it into your thread’s page directory – and even manually allocate page
+tables on your own, where necessary.</p>
 
-Here's the first step in a conventional memory manager's process of
+<p>Here’s the first step in a conventional memory manager’s process of
 allocating memory: first allocate a physical frame. As you would expect,
 you cannot directly write to or read from this frame object since it is
 not mapped into any virtual address space as yet. Standard restrictions
-of a MMU-utilizing kernel apply.
+of a MMU-utilizing kernel apply.</p>
 
-- &lt;https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h&gt;
-```/* TASK 1: get a frame cap for the ipc buffer */
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h</a></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 1: get a frame cap for the ipc buffer */
     /* hint: vka_alloc_frame()
      * int vka_alloc_frame(vka_t *vka, uint32_t size_bits, vka_object_t *result)
      * @param vka Pointer to vka interface.
@@ -423,6 +432,7 @@ of a MMU-utilizing kernel apply.
      */
     vka_object_t ipc_frame_object;
 </code></pre></div></div>
+
 <p>On completion, the output will not change.</p>
 
 <h3 id="try-to-map-a-page">Try to map a page</h3>
@@ -444,9 +454,15 @@ since you’d need a new page table to contain the new page-table-entry.
 The tutorial deliberately walks you through both the mapping of a frame
 into a VSpace, and the mapping of a new page-table into a VSpace.</p>
 
-<p>```/* TASK 2: try to map the frame the first time  <em>/
-    /</em> hint 1: seL4_ARCH_Page_Map()
-     * The <em>ARCH</em> versions of seL4 sys calls are abstractions over the architecture provided by libsel4utils
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 2: try to map the frame the first time  */
+    /* hint 1: seL4_ARCH_Page_Map()
+     * The *ARCH* versions of seL4 sys calls are abstractions over the architecture provided by libsel4utils
      * this one is defined as:
      * #define seL4_ARCH_Page_Map seL4_X86_Page_Map
      * The signature for the underlying function is:
@@ -463,109 +479,118 @@ into a VSpace, and the mapping of a new page-table into a VSpace.</p>
      * hint 2: for the rights, use seL4_AllRights
      * hint 3: for VM attributes use seL4_ARCH_Default_VMAttributes
      * Hint 4: It is normal for this function call to fail. That means there are
-     *    no page tables with free slots – proceed to the next step where you’ll
+     *    no page tables with free slots -- proceed to the next step where you'll
      *    be led to allocate a new empty page table and map it into the VSpace,
      *    before trying again.
-     */</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- &lt;https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h&gt;
-- &lt;https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml&gt;
-
-On completion, the output will be as follows:
+     */
 </code></pre></div></div>
-<p>dynamic-2: main@main.c:260 [Err seL4_FailedLookup]:Failed to allocate new page table.</p>
+
+<p>On completion, the output will be as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:260 [Err seL4_FailedLookup]:
+	Failed to allocate new page table.
+</code></pre></div></div>
+
+<h3 id="allocate-a-page-table">Allocate a page table</h3>
+
+<p>So just as you previously had to manually retype a new frame to use for
+your IPC buffer, you’re also going to have to manually retype a new
+page-table object to use as a leaf page-table in your VSpace.</p>
+
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h</a></li>
+</ul>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-### Allocate a page table
-
-So just as you previously had to manually retype a new frame to use for
-your IPC buffer, you're also going to have to manually retype a new
-page-table object to use as a leaf page-table in your VSpace.
-
-- &lt;https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h&gt;
-
-</code></pre></div></div>
-<p>/* TASK 3: create a page table <em>/
-        /</em> hint: vka_alloc_page_table()
+        /* TASK 3: create a page table */
+        /* hint: vka_alloc_page_table()
          * int vka_alloc_page_table(vka_t *vka, vka_object_t *result)
          * @param vka Pointer to vka interface.
          * @param result Structure for the PageTable object.  This gets initialised.
          * @return 0 on success
-         */</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On completion, you will see another fault.
+         */
+</code></pre></div></div>
+<p>On completion, you will see another fault.</p>
 
-### Map a page table
+<h3 id="map-a-page-table">Map a page table</h3>
 
-If you successfully retyped a new page table from an untyped memory
+<p>If you successfully retyped a new page table from an untyped memory
 object, you can now map that new page table into your VSpace, and then
-try again to finally map the IPC-buffer's frame object into the VSpace.
+try again to finally map the IPC-buffer’s frame object into the VSpace.</p>
 
-- &lt;https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h&gt;
-- &lt;https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml&gt;
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vspace/arch_include/x86/vspace/arch/page.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></li>
+</ul>
 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+        /* TASK 4: map the page table */
+        /* hint 1: seL4_ARCH_PageTable_Map()
+         * The *ARCH* versions of seL4 sys calls are abstractions over the architecture provided by libsel4utils
+         * this one is defined as:
+         * #define seL4_ARCH_PageTable_Map seL4_X86_PageTable_Map
+         * The signature for the underlying function is:
+         * int seL4_X86_PageTable_Map(seL4_X86_PageTable service, seL4_X86_PageDirectory pd, seL4_Word vaddr, seL4_X86_VMAttributes attr)
+         * @param service Capability to the page table to map.
+         * @param pd Capability to the VSpace which will contain the mapping.
+         * @param vaddr Virtual address to map the page table into.
+         * @param rights Rights for the mapping.
+         * @param attr VM Attributes for the mapping.
+         * @return 0 on success.
+         *
+         * Note: this function is generated during build.  It is generated from the following definition:
+         *
+         * hint 2: for VM attributes use seL4_ARCH_Default_VMAttributes
+         */
 </code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* TASK 4: map the page table */
-    /* hint 1: seL4_ARCH_PageTable_Map()
-     * The *ARCH* versions of seL4 sys calls are abstractions over the architecture provided by libsel4utils
-     * this one is defined as:
-     * #define seL4_ARCH_PageTable_Map seL4_X86_PageTable_Map
-     * The signature for the underlying function is:
-     * int seL4_X86_PageTable_Map(seL4_X86_PageTable service, seL4_X86_PageDirectory pd, seL4_Word vaddr, seL4_X86_VMAttributes attr)
-     * @param service Capability to the page table to map.
-     * @param pd Capability to the VSpace which will contain the mapping.
-     * @param vaddr Virtual address to map the page table into.
-     * @param rights Rights for the mapping.
-     * @param attr VM Attributes for the mapping.
-     * @return 0 on success.
-     *
-     * Note: this function is generated during build.  It is generated from the following definition:
-     *
-     * hint 2: for VM attributes use seL4_ARCH_Default_VMAttributes
-     */ ``` On completion, you will see another fault.
-</code></pre></div></div>
+<p>On completion, you will see another fault.</p>
 
 <h3 id="map-a-page">Map a page</h3>
 
 <p>Use <code class="highlighter-rouge">seL4_ARCH_Page_Map</code> to map the frame in.
 If everything was done correctly, there is no reason why this step
 should fail. Complete it and proceed.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* TASK 5: then map the frame in */
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+        /* TASK 5: then map the frame in */
         /* hint 1: use seL4_ARCH_Page_Map() as above
          * hint 2: for the rights, use seL4_AllRights
          * hint 3: for VM attributes use seL4_ARCH_Default_VMAttributes
          */
 </code></pre></div></div>
-<p>On completion, you will see the following:
-```main: hello world
+<p>On completion, you will see the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
 dynamic-2: main@main.c:464 [Cond failed: seL4_MessageInfo_get_length(tag) != 1]
 	Response data from thread_2 was not the length expected.
-	How many registers did you set with seL4_SetMR within thread_2?</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-### Allocate an endpoint
+	How many registers did you set with seL4_SetMR within thread_2?
+</code></pre></div></div>
 
-Now we have a (fully mapped) IPC buffer -- but no Endpoint object to
+<h3 id="allocate-an-endpoint">Allocate an endpoint</h3>
+
+<p>Now we have a (fully mapped) IPC buffer – but no Endpoint object to
 send our IPC data across. We must retype an untyped object into a kernel
 Endpoint object, and then proceed. This could be done via a more
-low-level approach using `seL4_Untyped_Retype()`, but instead, the
+low-level approach using <code class="highlighter-rouge">seL4_Untyped_Retype()</code>, but instead, the
 tutorial makes use of the VKA allocator. Remember that the VKA allocator
 is an seL4 type-aware object allocator? So we can simply ask it for a
 new object of a particular type, and it will do the low-level retyping
-for us, and return a capability to a new object as requested.
+for us, and return a capability to a new object as requested.</p>
 
-In this case, we want a new Endpoint so we can do IPC. Complete the step
-and proceed.
+<p>In this case, we want a new Endpoint so we can do IPC. Complete the step
+and proceed.</p>
 
-- &lt;https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h&gt;
+<ul>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h</a></li>
+</ul>
 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 6: create an endpoint */
+    /* hint: vka_alloc_endpoint()
+     * int vka_alloc_endpoint(vka_t *vka, vka_object_t *result)
+     * @param vka Pointer to vka interface.
+     * @param result Structure for the Endpoint object.  This gets initialised.
+     * @return 0 on success
+     */
 </code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* TASK 6: create an endpoint */
-/* hint: vka_alloc_endpoint()
- * int vka_alloc_endpoint(vka_t *vka, vka_object_t *result)
- * @param vka Pointer to vka interface.
- * @param result Structure for the Endpoint object.  This gets initialised.
- * @return 0 on success
- */ ``` On completion, the output will not change.
-</code></pre></div></div>
+<p>On completion, the output will not change.</p>
 
 <h3 id="badge-an-endpoint">Badge an endpoint</h3>
 
@@ -645,36 +670,38 @@ transmitted in the message.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 8: set the data to send. We send it in the first message register */
-  /* hint 1: seL4_MessageInfo_new()
-   * seL4_MessageInfo_t CONST seL4_MessageInfo_new(seL4_Uint32 label, seL4_Uint32 capsUnwrapped, seL4_Uint32 extraCaps, seL4_Uint32 length)
-   * @param label The value of the label field
-   * @param capsUnwrapped The value of the capsUnwrapped field
-   * @param extraCaps The value of the extraCaps field
-   * @param length The number of message registers to send
-   * @return The seL4_MessageInfo_t containing the given values.
-   *
-   * seL4_MessageInfo_new() is generated during build. It can be found in:
-   * build/x86/pc99/libsel4/include/sel4/types_gen.h
-   *
-   * hint 2: use 0 for the first 3 fields.
-   * hint 3: send only 1 message register of data
-   *
-   * hint 4: seL4_SetMR()
-   * void seL4_SetMR(int i, seL4_Word mr)
-   * @param i The message register to write
-   * @param mr The value of the message register
-   *
-   * hint 5: send MSG_DATA
-   */
-</code></pre></div>    </div>
-    <p>On completion, the output should change as follows:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:472 [Cond failed: msg != ~MSG_DATA]Response data from thread_2's content was not what was expected.
-</code></pre></div>    </div>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 8: set the data to send. We send it in the first message register */
+    /* hint 1: seL4_MessageInfo_new()
+     * seL4_MessageInfo_t CONST seL4_MessageInfo_new(seL4_Uint32 label, seL4_Uint32 capsUnwrapped, seL4_Uint32 extraCaps, seL4_Uint32 length)
+     * @param label The value of the label field
+     * @param capsUnwrapped The value of the capsUnwrapped field
+     * @param extraCaps The value of the extraCaps field
+     * @param length The number of message registers to send
+     * @return The seL4_MessageInfo_t containing the given values.
+     *
+     * seL4_MessageInfo_new() is generated during build. It can be found in:
+     * build/x86/pc99/libsel4/include/sel4/types_gen.h
+     *
+     * hint 2: use 0 for the first 3 fields.
+     * hint 3: send only 1 message register of data
+     *
+     * hint 4: seL4_SetMR()
+     * void seL4_SetMR(int i, seL4_Word mr)
+     * @param i The message register to write
+     * @param mr The value of the message register
+     *
+     * hint 5: send MSG_DATA
+     */
+</code></pre></div></div>
+
+<p>On completion, the output should change as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:472 [Cond failed: msg != ~MSG_DATA]
+	Response data from thread_2's content was not what was expected.
+</code></pre></div></div>
 
 <h3 id="ipc">IPC</h3>
 
@@ -711,23 +738,26 @@ response message, if the sender doesn’t want it to.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 9: send and wait for a reply. */
-  /* hint: seL4_Call()
-   * seL4_MessageInfo_t seL4_Call(seL4_CPtr dest, seL4_MessageInfo_t msgInfo)
-   * @param dest The capability to be invoked.
-   * @param msgInfo The messageinfo structure for the IPC.  This specifies information about the message to send (such as the number of message registers to send).
-   * @return A seL4_MessageInfo_t structure.  This is information about the repy message.
-   *
-   * hint 2: seL4_MessageInfo_t is generated during build.
-   * The type definition and generated field access functions are defined in a generated file:
-   * build/x86/pc99/libsel4/include/sel4/types_gen.h
-   * It is generated from the following definition:
-   */
-</code></pre></div>    </div>
-    <p>On completion, you should see thread_2 fault as follows:
-<code class="highlighter-rouge">thread_2: hallo wereld
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 9: send and wait for a reply. */
+    /* hint: seL4_Call()
+     * seL4_MessageInfo_t seL4_Call(seL4_CPtr dest, seL4_MessageInfo_t msgInfo)
+     * @param dest The capability to be invoked.
+     * @param msgInfo The messageinfo structure for the IPC.  This specifies information about the message to send (such as the number of message registers to send).
+     * @return A seL4_MessageInfo_t structure.  This is information about the repy message.
+     *
+     * hint 2: seL4_MessageInfo_t is generated during build.
+     * The type definition and generated field access functions are defined in a generated file:
+     * build/x86/pc99/libsel4/include/sel4/types_gen.h
+     * It is generated from the following definition:
+     */
+</code></pre></div></div>
+
+<p>On completion, you should see thread_2 fault as follows:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: hallo wereld
 thread_2: got a message 0 from 0
 Caught cap fault in send phase at address (nil)
 while trying to handle:
@@ -735,9 +765,7 @@ vm fault on data at address (nil) with status 0x4
 in thread 0xffffff801ffb4400 "child of: 'rootserver'" at address (nil)
 in thread 0xffffff801ffb4400 "child of: 'rootserver'" at address (nil)
 With stack:
-</code></p>
-  </li>
-</ul>
+</code></pre></div></div>
 
 <h3 id="receive-a-reply">Receive a reply</h3>
 
@@ -749,18 +777,18 @@ reading the reply from the receiver. As mentioned before, the
 designated, single IPC buffer.</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 10: get the reply message */
-  /* hint: seL4_GetMR()
-   * seL4_Word seL4_GetMR(int i)
-   * @param i The message register to retreive
-   * @return The message register value
-   */
-</code></pre></div>    </div>
-    <p>On completion, the output should not change.</p>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 10: get the reply message */
+    /* hint: seL4_GetMR()
+     * seL4_Word seL4_GetMR(int i)
+     * @param i The message register to retreive
+     * @return The message register value
+     */
+</code></pre></div></div>
+<p>On completion, the output should not change.</p>
 
 <h3 id="receive-an-ipc">Receive an IPC</h3>
 
@@ -775,85 +803,88 @@ explicitly interested in distinguishing the sender.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 11: wait for a message to come in over the endpoint */
-  /* hint 1: seL4_Recv()
-   * seL4_MessageInfo_t seL4_Recv(seL4_CPtr src, seL4_Word* sender)
-   * @param src The capability to be invoked.
-   * @param sender The badge of the endpoint capability that was invoked by the sender is written to this address.
-   * @return A seL4_MessageInfo_t structure
-   *
-   * hint 2: seL4_MessageInfo_t is generated during build.
-   * The type definition and generated field access functions are defined in a generated file:
-   * build/x86/pc99/libsel4/include/sel4/types_gen.h
-   */
-</code></pre></div>    </div>
-    <p>On completion, the output should change slightly:
-<code class="highlighter-rouge">thread_2: got a message 0 from 0x61
-</code></p>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 11: wait for a message to come in over the endpoint */
+    /* hint 1: seL4_Recv()
+     * seL4_MessageInfo_t seL4_Recv(seL4_CPtr src, seL4_Word* sender)
+     * @param src The capability to be invoked.
+     * @param sender The badge of the endpoint capability that was invoked by the sender is written to this address.
+     * @return A seL4_MessageInfo_t structure
+     *
+     * hint 2: seL4_MessageInfo_t is generated during build.
+     * The type definition and generated field access functions are defined in a generated file:
+     * build/x86/pc99/libsel4/include/sel4/types_gen.h
+     */
+</code></pre></div></div>
+<p>On completion, the output should change slightly:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: got a message 0 from 0x61
+</code></pre></div></div>
 
 <h3 id="validate-the-message">Validate the message</h3>
 
 <p>These two calls here are just verification of the fidelity of the
 transmitted message. It’s very unlikely you’ll encounter an error here.
 Complete them and proceed to the next step.</p>
+
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 12: make sure it is what we expected */
-  /* hint 1: check the badge. is it EP_BADGE?
-   * hint 2: we are expecting only 1 message register
-   * hint 3: seL4_MessageInfo_get_length()
-   * seL4_Uint32 CONST seL4_MessageInfo_get_length(seL4_MessageInfo_t seL4_MessageInfo)
-   * @param seL4_MessageInfo the seL4_MessageInfo_t to extract a field from
-   * @return the number of message registers delivered
-   * seL4_MessageInfo_get_length() is generated during build. It can be found in:
-   * build/x86/pc99/libsel4/include/sel4/types_gen.h
-   */
-</code></pre></div>    </div>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 12: make sure it is what we expected */
+    /* hint 1: check the badge. is it EP_BADGE?
+     * hint 2: we are expecting only 1 message register
+     * hint 3: seL4_MessageInfo_get_length()
+     * seL4_Uint32 CONST seL4_MessageInfo_get_length(seL4_MessageInfo_t seL4_MessageInfo)
+     * @param seL4_MessageInfo the seL4_MessageInfo_t to extract a field from
+     * @return the number of message registers delivered
+     * seL4_MessageInfo_get_length() is generated during build. It can be found in:
+     * build/x86/pc99/libsel4/include/sel4/types_gen.h
+     */
+</code></pre></div></div>
 
 <p>On completion, the output should not change.</p>
 
 <h3 id="read-the-message-registers">Read the message registers</h3>
 
 <p>Again, just reading the data from the Message Registers.</p>
+
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 13: get the message stored in the first message register */
-  /* hint: seL4_GetMR()
-   * seL4_Word seL4_GetMR(int i)
-   * @param i The message register to retreive
-   * @return The message register value
-   */
-</code></pre></div>    </div>
-    <p>On completion, the output should change slightly:
-<code class="highlighter-rouge">thread_2: got a message 0x6161 from 0x61
-</code></p>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 13: get the message stored in the first message register */
+    /* hint: seL4_GetMR()
+     * seL4_Word seL4_GetMR(int i)
+     * @param i The message register to retreive
+     * @return The message register value
+     */
+</code></pre></div></div>
+<p>On completion, the output should change slightly:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: got a message 0x6161 from 0x61
+</code></pre></div></div>
 
 <h3 id="write-the-message-registers">Write the message registers</h3>
 
 <p>And writing Message Registers again.</p>
+
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  /* TASK 14: copy the modified message back into the message register */
-  /* hint: seL4_SetMR()
-   * void seL4_SetMR(int i, seL4_Word mr)
-   * @param i The message register to write
-   * @param mr The value of the message register
-   */
-</code></pre></div>    </div>
-    <p>On completion, the output should not change.</p>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 14: copy the modified message back into the message register */
+    /* hint: seL4_SetMR()
+     * void seL4_SetMR(int i, seL4_Word mr)
+     * @param i The message register to write
+     * @param mr The value of the message register
+     */
+</code></pre></div></div>
+<p>On completion, the output should not change.</p>
 
 <h3 id="reply-to-a-message">Reply to a message</h3>
 
@@ -871,30 +902,31 @@ target the ability to send to it repeatedly, but would like to allow the
 receiver to respond to a specific message once, it can use <code class="highlighter-rouge">seL4_Call()</code>,
 and the seL4 kernel will facilitate this one-time permissive response.
 Complete the step and pat yourself on the back.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- /* TASK 15: send the message back */
- /* hint 1: seL4_ReplyRecv()
-  * seL4_MessageInfo_t seL4_ReplyRecv(seL4_CPtr dest, seL4_MessageInfo_t msgInfo, seL4_Word *sender)
-  * @param dest The capability to be invoked.
-  * @param msgInfo The messageinfo structure for the IPC.  This specifies information about the message to send (such as the number of message registers to send) as the Reply part.
-  * @param sender The badge of the endpoint capability that was invoked by the sender is written to this address.  This is a result of the Wait part.
-  * @return A seL4_MessageInfo_t structure.  This is a result of the Wait part.
-  *
-  * hint 2: seL4_MessageInfo_t is generated during build.
-  * The type definition and generated field access functions are defined in a generated file:
-  * build/x86/pc99/libsel4/include/sel4/types_gen.h
-  * It is generated from the following definition:
-  */
-</code></pre></div>    </div>
-    <p>On completion, the output should change, with the fault message replaced with the following:
-<code class="highlighter-rouge">main: got a reply: [0xffff9e9e|0xffffffffffff9e9e]
-</code>
-That’s it for this tutorial.</p>
-  </li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /* TASK 15: send the message back */
+    /* hint 1: seL4_ReplyRecv()
+     * seL4_MessageInfo_t seL4_ReplyRecv(seL4_CPtr dest, seL4_MessageInfo_t msgInfo, seL4_Word *sender)
+     * @param dest The capability to be invoked.
+     * @param msgInfo The messageinfo structure for the IPC.  This specifies information about the message to send (such as the number of message registers to send) as the Reply part.
+     * @param sender The badge of the endpoint capability that was invoked by the sender is written to this address.  This is a result of the Wait part.
+     * @return A seL4_MessageInfo_t structure.  This is a result of the Wait part.
+     *
+     * hint 2: seL4_MessageInfo_t is generated during build.
+     * The type definition and generated field access functions are defined in a generated file:
+     * build/x86/pc99/libsel4/include/sel4/types_gen.h
+     * It is generated from the following definition:
+     */
+</code></pre></div></div>
+<p>On completion, the output should change, with the fault message replaced with the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a reply: [0xffff9e9e|0xffffffffffff9e9e]
+</code></pre></div></div>
+<p>That’s it for this tutorial.</p>
 
 <hr />
 <h2 id="getting-help">Getting help</h2>
@@ -937,7 +969,7 @@ That’s it for this tutorial.</p>
         </li>
         
           <li>
-            Site last updated: Wed Nov 27 13:05:09 2019 +1100 1932589
+            Site last updated: Mon Dec 16 15:56:32 2019 +1100 2b73f71
           </li>
           <li>
             
