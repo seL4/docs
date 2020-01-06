@@ -21,7 +21,7 @@ implementation of the system's required functionality.
 
 A microkernel therefore does not provide high-level abstractions over
 the hardware (files, processes, sockets etc) as most modern operating
-systems such as Linux or Windows do. Instead it provides minimal
+systems such as Linux or Windows do. Instead, it provides minimal
 mechanisms for controlling access to physical address space, interrupts,
 and processor time. Any higher-level constructs are built on top of the
 microkernel, using those mechanisms. Such higher-level services
@@ -119,7 +119,7 @@ and kernel supported IPIs. This configuration is highly experimental at
 the moment.
 
 A principled, high-performance multicore version is under active
-development, please refer to the
+development; please refer to the
 [roadmap](https://sel4.systems/Info/Roadmap/) for anticipated
 release dates.
 
@@ -135,7 +135,7 @@ processors and is also undergoing formal verification.
 ## What are the intended applications of seL4?
  seL4 is a
 general-purpose microkernel, so the answer is all of them. The main
-target are embedded systems with security or reliability requirements,
+targets are embedded systems with security or reliability requirements,
 but that is not exclusive. Using a microkernel like seL4 makes sense on
 platforms that provide virtual memory protection and for application
 areas that need isolation between different parts of the software.
@@ -197,7 +197,7 @@ requires real-time properties.
 
 We are actually not convinced that running an RTOS in a VM is
 necessarily the way to go, although that somewhat depends on your
-circumstances. In general you’ll better off running RT apps in a native
+circumstances. In general, you’ll better off running RT apps in a native
 seL4 environment.
 
 # What is formal verification?
@@ -328,7 +328,7 @@ to that private data. And one can tie together all of these into a proof
 about an entire (one-machine) systems without having to verify the code
 of the entire system.
 
-If you are interested in connecting to the seL4 proofs, let us know, we
+If you are interested in connecting to the seL4 proofs, let us know, as we
 may be able to offer assistance.
 
 ## Have OS kernels not been verified before?
@@ -386,7 +386,7 @@ combination of configuration options. See [Verified
 Configurations](/VerifiedConfigurations) for details of architecture and
 platform configurations which have verified properties.
 
-Excluded from the verification is the
+Excluded from the verification of the
 C code is the machine interface and boot code, whose behavior is an
 explicit assumption to the proof.
 
@@ -438,7 +438,7 @@ management itself. It has no heap, just a few global variables, a
 strictly bounded stack, and memory explicitly provided to it by
 userland.
 
-## What are capabilities
+## What are capabilities?
 
 
 Capabilities are an OS abstraction for managing access rights. A
@@ -477,7 +477,7 @@ Untyped memory into the corresponding kernel object type. Eg. for thread
 creation, userland must retype some Untyped into ''TCB Objects''. This
 memory then becomes kernel memory, in the sense that only the kernel can
 read or write it. Userland can still revoke it, which implicitly
-destroys the objects (eg threads) represented by the object.
+destroys the objects (e.g., threads) represented by the object.
 
 The only objects directly accessible by userland are ''Frame Objects'':
 These can be mapped into an ''Address Space Object'' (essentially a page
@@ -518,7 +518,7 @@ through a handshake. Anyone holding a Send capability can send a message
 through an Endpoint, and anyone holding a Receive cap can receive a
 message. This means that there can be any number of sender and receivers
 for each Endpoint. In particular, a specific message is only delivered
-to one sender (the first in the queue), no matter how many threads are
+to one receiver (the first in the queue), no matter how many threads are
 trying to receive from the Endpoint.
 
 Message broadcast is a higher-level abstraction that can be implemented
@@ -571,8 +571,7 @@ kernel behaviour except for performance.
 There is a section on the fastpath and its verification in
 [this article](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml). The fastpath discussion starts on page 23.
 
-## I want to know more about seL4
-functionality/design/implementation/philosophy
+## I want to know more about seL4 functionality/design/implementation/philosophy
 
 
 There are plenty of references on the [documentation page](/Documentation).
@@ -649,7 +648,7 @@ these will be delivered (or even if they will be released at all).
 That being said, we are currently working on and should be able to
 release soon:
 
-- Arm virtualisation support, on the Arndale and Odroid
+- ARM virtualisation support, on the Arndale and Odroid
 - A port to the Odroid XU3
 - WCET guarantees for the current kernel
 - An SMP version of seL4
