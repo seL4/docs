@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-12-18 12:09:17 +1100 -->
+<!-- Page last generated 2020-01-06 13:37:13 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -312,14 +312,14 @@
 <li class="toc-entry toc-h2"><a href="#have-os-kernels-not-been-verified-before">Have OS kernels not been verified before?</a></li>
 <li class="toc-entry toc-h2"><a href="#when-and-how-often-does-sel4-get-updated-and-re-proved">When and how often does seL4 get updated and re-proved?</a></li>
 <li class="toc-entry toc-h2"><a href="#how-do-i-tell-which-code-in-github-is-covered-by-the-proof-and-which-isnt">How do I tell which code in GitHub is covered by the proof and which isn’t?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-are-capabilities">What are capabilities</a></li>
+<li class="toc-entry toc-h2"><a href="#what-are-capabilities">What are capabilities?</a></li>
 <li class="toc-entry toc-h2"><a href="#how-can-usermode-manage-kernel-memory-safely">How can usermode manage kernel memory safely?</a></li>
 <li class="toc-entry toc-h2"><a href="#how-can-threads-communicate">How can threads communicate?</a></li>
 <li class="toc-entry toc-h2"><a href="#how-does-message-passing-work">How does message-passing work?</a></li>
 <li class="toc-entry toc-h2"><a href="#why-do-send-only-operations-not-return-a-success-indication">Why do send-only operations not return a success indication?</a></li>
 <li class="toc-entry toc-h2"><a href="#what-are-notifications">What are Notifications?</a></li>
 <li class="toc-entry toc-h2"><a href="#what-is-the-sel4-fastpath">What is the seL4 fastpath?</a></li>
-<li class="toc-entry toc-h2"><a href="#i-want-to-know-more-about-sel4">I want to know more about seL4</a></li>
+<li class="toc-entry toc-h2"><a href="#i-want-to-know-more-about-sel4-functionalitydesignimplementationphilosophy">I want to know more about seL4 functionality/design/implementation/philosophy</a></li>
 </ul>
       </nav>
     
@@ -343,7 +343,7 @@ implementation of the system’s required functionality.</p>
 
 <p>A microkernel therefore does not provide high-level abstractions over
 the hardware (files, processes, sockets etc) as most modern operating
-systems such as Linux or Windows do. Instead it provides minimal
+systems such as Linux or Windows do. Instead, it provides minimal
 mechanisms for controlling access to physical address space, interrupts,
 and processor time. Any higher-level constructs are built on top of the
 microkernel, using those mechanisms. Such higher-level services
@@ -440,7 +440,7 @@ and kernel supported IPIs. This configuration is highly experimental at
 the moment.</p>
 
 <p>A principled, high-performance multicore version is under active
-development, please refer to the
+development; please refer to the
 <a href="https://sel4.systems/Info/Roadmap/">roadmap</a> for anticipated
 release dates.</p>
 
@@ -456,7 +456,7 @@ processors and is also undergoing formal verification.</p>
 <h2 id="what-are-the-intended-applications-of-sel4">What are the intended applications of seL4?</h2>
 <p>seL4 is a
 general-purpose microkernel, so the answer is all of them. The main
-target are embedded systems with security or reliability requirements,
+targets are embedded systems with security or reliability requirements,
 but that is not exclusive. Using a microkernel like seL4 makes sense on
 platforms that provide virtual memory protection and for application
 areas that need isolation between different parts of the software.
@@ -518,7 +518,7 @@ requires real-time properties.</p>
 
 <p>We are actually not convinced that running an RTOS in a VM is
 necessarily the way to go, although that somewhat depends on your
-circumstances. In general you’ll better off running RT apps in a native
+circumstances. In general, you’ll better off running RT apps in a native
 seL4 environment.</p>
 
 <h1 id="what-is-formal-verification">What is formal verification?</h1>
@@ -649,7 +649,7 @@ to that private data. And one can tie together all of these into a proof
 about an entire (one-machine) systems without having to verify the code
 of the entire system.</p>
 
-<p>If you are interested in connecting to the seL4 proofs, let us know, we
+<p>If you are interested in connecting to the seL4 proofs, let us know, as we
 may be able to offer assistance.</p>
 
 <h2 id="have-os-kernels-not-been-verified-before">Have OS kernels not been verified before?</h2>
@@ -707,7 +707,7 @@ combination of configuration options. See <a href="/VerifiedConfigurations">Veri
 Configurations</a> for details of architecture and
 platform configurations which have verified properties.</p>
 
-<p>Excluded from the verification is the
+<p>Excluded from the verification of the
 C code is the machine interface and boot code, whose behavior is an
 explicit assumption to the proof.</p>
 
@@ -760,7 +760,7 @@ management itself. It has no heap, just a few global variables, a
 strictly bounded stack, and memory explicitly provided to it by
 userland.</p>
 
-<h2 id="what-are-capabilities">What are capabilities</h2>
+<h2 id="what-are-capabilities">What are capabilities?</h2>
 
 <p>Capabilities are an OS abstraction for managing access rights. A
 capability represents ‘‘prima facie’’ evidence of the right to perform a
@@ -797,7 +797,7 @@ Untyped memory into the corresponding kernel object type. Eg. for thread
 creation, userland must retype some Untyped into ‘‘TCB Objects’’. This
 memory then becomes kernel memory, in the sense that only the kernel can
 read or write it. Userland can still revoke it, which implicitly
-destroys the objects (eg threads) represented by the object.</p>
+destroys the objects (e.g., threads) represented by the object.</p>
 
 <p>The only objects directly accessible by userland are ‘‘Frame Objects’’:
 These can be mapped into an ‘‘Address Space Object’’ (essentially a page
@@ -836,7 +836,7 @@ through a handshake. Anyone holding a Send capability can send a message
 through an Endpoint, and anyone holding a Receive cap can receive a
 message. This means that there can be any number of sender and receivers
 for each Endpoint. In particular, a specific message is only delivered
-to one sender (the first in the queue), no matter how many threads are
+to one receiver (the first in the queue), no matter how many threads are
 trying to receive from the Endpoint.</p>
 
 <p>Message broadcast is a higher-level abstraction that can be implemented
@@ -886,8 +886,7 @@ kernel behaviour except for performance.</p>
 <p>There is a section on the fastpath and its verification in
 <a href="http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml">this article</a>. The fastpath discussion starts on page 23.</p>
 
-<h2 id="i-want-to-know-more-about-sel4">I want to know more about seL4</h2>
-<p>functionality/design/implementation/philosophy</p>
+<h2 id="i-want-to-know-more-about-sel4-functionalitydesignimplementationphilosophy">I want to know more about seL4 functionality/design/implementation/philosophy</h2>
 
 <p>There are plenty of references on the <a href="/Documentation">documentation page</a>.</p>
 
@@ -968,7 +967,7 @@ these will be delivered (or even if they will be released at all).</p>
 release soon:</p>
 
 <ul>
-  <li>Arm virtualisation support, on the Arndale and Odroid</li>
+  <li>ARM virtualisation support, on the Arndale and Odroid</li>
   <li>A port to the Odroid XU3</li>
   <li>WCET guarantees for the current kernel</li>
   <li>An SMP version of seL4</li>
@@ -1004,7 +1003,7 @@ release soon:</p>
         </li>
         
           <li>
-            Site last updated: Mon Dec 16 15:56:32 2019 +1100 2b73f71
+            Site last updated: Mon Jan 6 13:35:54 2020 +1100 01e0539
           </li>
           <li>
             
@@ -1057,7 +1056,7 @@ release soon:</p>
               
             
               
-                Page last updated: Tue Oct 8 10:52:05 2019 +1000 2bbd341
+                Page last updated: Mon Jan 6 13:35:54 2020 +1100 01e0539
               
             
               

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2019-12-18 12:09:17 +1100 -->
+<!-- Page last generated 2020-01-06 13:37:13 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -473,6 +473,7 @@ look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>:</p>
 <span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
 
 <span class="nb">project</span><span class="p">(</span>vm-app C ASM<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span>ExternalProject<span class="p">)</span>
 <span class="nb">find_package</span><span class="p">(</span>camkes-vm REQUIRED<span class="p">)</span>
 <span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_SETTINGS_PATH</span><span class="si">}</span><span class="p">)</span>
 <span class="nf">camkes_x86_vm_setup_x86_vm_environment</span><span class="p">()</span>
@@ -738,7 +739,6 @@ external project and add it to the overlay.</p>
     DEPENDS download_vm_linux
 <span class="p">)</span>
 <span class="c1"># Add the external poke module project</span>
-<span class="nb">include</span><span class="p">(</span>ExternalProject<span class="p">)</span>
 <span class="nf">ExternalProject_Add</span><span class="p">(</span>poke-module
     SOURCE_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span>/modules
     BINARY_DIR <span class="si">${</span><span class="nv">CMAKE_CURRENT_BINARY_DIR</span><span class="si">}</span>/poke-module
@@ -862,7 +862,7 @@ POKE!!!
         </li>
         
           <li>
-            Site last updated: Mon Dec 16 15:56:32 2019 +1100 2b73f71
+            Site last updated: Mon Jan 6 13:35:54 2020 +1100 01e0539
           </li>
           <li>
             
