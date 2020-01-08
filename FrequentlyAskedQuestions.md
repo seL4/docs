@@ -53,28 +53,25 @@ this image source: "From L3 to seL4. What Have We Learnt in 20 Years of L4 Micro
 
 
 ### How does seL4's performance compare to other microkernels?
- To the
+Up-to-date performance figures of the seL4 head revision are listed on the 
+[seL4 Benchmarks page](https://sel4.systems/About/Performance/). To the
 best of our knowledge, seL4 is the world's fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
-of a cross-address-space message-passing (IPC) operation. For more
-information, check the
-[performance page on
-L4HQ](http://l4hq.org/docs/performance.php).
+of a cross-address-space message-passing (IPC) operation.
 
-Note that the x86 IPC times recorded at L4HQ are the result of
-micro-optimisations which are not yet in the public version, and may
-never make it there, as we expect the soon-to-be-released x64 version to
-be significantly faster, making 32-bit x86 obsolete. On ARM the verified
-master branch version is actually faster than the figures on L4HQ,
-one-way IPC on the A9 is now well below 300 cycles. Actual numbers
-fluctuate up and down by 5–10 cycles, but there is no longer a
-performance difference between verified and unverified branches on
-ARMv7. ARMv8 is not yet fully optimised.
+In fact, we have not seen performance data from another microkernel 
+that are within a factor of two of seL4's, and in most cases the
+gap is closer to a factor of ten.
 
-## What is the size of seL4?
+### What is the size of seL4?
 
 Obviously this depends on the processor architecture. 
-As an example, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
+
+In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan'20). 
+The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more conplex platform,
+the extra code is mostly in the kernel initialisation.
+
+In terms of code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
 Its RAM size is about 162 KiB, which includes code, static data and the stack.
 Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
 capability storage etc, will add to this. 
