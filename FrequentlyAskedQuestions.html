@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-08 13:21:10 +1100 -->
+<!-- Page last generated 2020-01-08 14:07:48 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -290,49 +290,76 @@
     
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#what-is-a-microkernel">What is a microkernel?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-is-the-l4-microkernel-family">What is the L4 microkernel family?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-processor-architectures-are-supported">What processor architectures are supported?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-devices-does-sel4-support">What devices does seL4 support?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-about-dma">What about DMA?</a></li>
-<li class="toc-entry toc-h2"><a href="#does-sel4-support-multicore">Does seL4 support multicore?</a></li>
-<li class="toc-entry toc-h2"><a href="#can-i-run-sel4-on-an-mmu-less-microcontroller">Can I run seL4 on an MMU-less microcontroller?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-are-the-intended-applications-of-sel4">What are the intended applications of seL4?</a></li>
-<li class="toc-entry toc-h2"><a href="#can-i-run-linux-on-top-of-sel4">Can I run Linux on top of seL4?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-does-sel4vmm-compare-with-okl4-or-codezero">How does seL4+VMM compare with OKL4 or Codezero?</a></li>
-<li class="toc-entry toc-h2"><a href="#does-sel4-support-multiple-virtual-machines-at-once">Does seL4 support multiple virtual machines at once?</a></li>
-<li class="toc-entry toc-h2"><a href="#can-i-run-a-real-time-os-in-a-virtual-machine-on-sel4">Can I run a real-time OS in a virtual machine on seL4?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-does-sel4s-formal-verification-mean">What does seL4’s formal verification mean?</a></li>
-<li class="toc-entry toc-h2"><a href="#does-sel4-have-zero-bugs">Does seL4 have zero bugs?</a></li>
-<li class="toc-entry toc-h2"><a href="#is-sel4-proved-secure">Is seL4 proved secure?</a></li>
-<li class="toc-entry toc-h2"><a href="#if-i-run-sel4-is-my-system-secure">If I run seL4, is my system secure?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-are-the-proof-assumptions">What are the proof assumptions?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-do-i-leverage-sel4s-formal-proofs">How do I leverage seL4’s formal proofs?</a></li>
-<li class="toc-entry toc-h2"><a href="#have-os-kernels-not-been-verified-before">Have OS kernels not been verified before?</a></li>
-<li class="toc-entry toc-h2"><a href="#when-and-how-often-does-sel4-get-updated-and-re-proved">When and how often does seL4 get updated and re-proved?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-do-i-tell-which-code-in-github-is-covered-by-the-proof-and-which-isnt">How do I tell which code in GitHub is covered by the proof and which isn’t?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-are-capabilities">What are capabilities?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-can-usermode-manage-kernel-memory-safely">How can usermode manage kernel memory safely?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-can-threads-communicate">How can threads communicate?</a></li>
-<li class="toc-entry toc-h2"><a href="#how-does-message-passing-work">How does message-passing work?</a></li>
-<li class="toc-entry toc-h2"><a href="#why-do-send-only-operations-not-return-a-success-indication">Why do send-only operations not return a success indication?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-are-notifications">What are Notifications?</a></li>
-<li class="toc-entry toc-h2"><a href="#what-is-the-sel4-fastpath">What is the seL4 fastpath?</a></li>
-<li class="toc-entry toc-h2"><a href="#i-want-to-know-more-about-sel4-functionalitydesignimplementationphilosophy">I want to know more about seL4 functionality/design/implementation/philosophy</a></li>
+<li class="toc-entry toc-h2"><a href="#what-is-sel4">What is seL4?</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#what-is-a-microkernel">What is a microkernel?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-is-the-l4-microkernel-family">What is the L4 microkernel family?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#what-is-the-size-of-sel4">What is the size of seL4?</a></li>
+<li class="toc-entry toc-h2"><a href="#on-what-hardware-does-sel4-run">On what hardware does seL4 run?</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#what-processor-architectures-are-supported">What processor architectures are supported?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-devices-does-sel4-support">What devices does seL4 support?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-about-dma">What about DMA?</a></li>
+<li class="toc-entry toc-h3"><a href="#does-sel4-support-multicore">Does seL4 support multicore?</a></li>
+<li class="toc-entry toc-h3"><a href="#can-i-run-sel4-on-an-mmu-less-microcontroller">Can I run seL4 on an MMU-less microcontroller?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-are-the-intended-applications-of-sel4">What are the intended applications of seL4?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#how-good-is-sel4-at-supporting-virtual-machines">How good is seL4 at supporting virtual machines?</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#can-i-run-linux-on-top-of-sel4">Can I run Linux on top of seL4?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-does-sel4vmm-compare-with-okl4-or-codezero">How does seL4+VMM compare with OKL4 or Codezero?</a></li>
+<li class="toc-entry toc-h3"><a href="#does-sel4-support-multiple-virtual-machines-at-once">Does seL4 support multiple virtual machines at once?</a></li>
+<li class="toc-entry toc-h3"><a href="#can-i-run-a-real-time-os-in-a-virtual-machine-on-sel4">Can I run a real-time OS in a virtual machine on seL4?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#what-is-formal-verification">What is formal verification?</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#what-does-sel4s-formal-verification-mean">What does seL4’s formal verification mean?</a></li>
+<li class="toc-entry toc-h3"><a href="#does-sel4-have-zero-bugs">Does seL4 have zero bugs?</a></li>
+<li class="toc-entry toc-h3"><a href="#is-sel4-proved-secure">Is seL4 proved secure?</a></li>
+<li class="toc-entry toc-h3"><a href="#if-i-run-sel4-is-my-system-secure">If I run seL4, is my system secure?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-are-the-proof-assumptions">What are the proof assumptions?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-do-i-leverage-sel4s-formal-proofs">How do I leverage seL4’s formal proofs?</a></li>
+<li class="toc-entry toc-h3"><a href="#have-os-kernels-not-been-verified-before">Have OS kernels not been verified before?</a></li>
+<li class="toc-entry toc-h3"><a href="#when-and-how-often-does-sel4-get-updated-and-re-proved">When and how often does seL4 get updated and re-proved?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-do-i-tell-which-code-in-github-is-covered-by-the-proof-and-which-isnt">How do I tell which code in GitHub is covered by the proof and which isn’t?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#how-are-resources-managed-and-protected-in-sel4">How are resources managed and protected in seL4?</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#what-are-capabilities">What are capabilities?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-can-usermode-manage-kernel-memory-safely">How can usermode manage kernel memory safely?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-can-threads-communicate">How can threads communicate?</a></li>
+<li class="toc-entry toc-h3"><a href="#how-does-message-passing-work">How does message-passing work?</a></li>
+<li class="toc-entry toc-h3"><a href="#why-do-send-only-operations-not-return-a-success-indication">Why do send-only operations not return a success indication?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-are-notifications">What are Notifications?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-is-the-sel4-fastpath">What is the seL4 fastpath?</a></li>
+<li class="toc-entry toc-h3"><a href="#i-want-to-know-more-about-sel4-functionalitydesignimplementationphilosophy">I want to know more about seL4 functionality/design/implementation/philosophy</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#what-can-i-do-with-sel4">What can I do with seL4?</a></li>
+<li class="toc-entry toc-h2"><a href="#what-are-the-licensing-conditions">What are the licensing conditions?</a></li>
+<li class="toc-entry toc-h2"><a href="#how-do-i-contribute-to-sel4">How do I contribute to seL4?</a></li>
+<li class="toc-entry toc-h2"><a href="#how-can-i-build-a-system-with-sel4">How can I build a system with seL4?</a></li>
+<li class="toc-entry toc-h2"><a href="#where-can-i-learn-more">Where can I learn more?</a></li>
+<li class="toc-entry toc-h2"><a href="#whats-coming-up-next">What’s coming up next?</a></li>
 </ul>
       </nav>
     
     <div class="content">
       <h1 id="frequently-asked-questions-on-sel4">Frequently Asked Questions on seL4</h1>
 
-<h1 id="what-is-sel4">What is seL4?</h1>
+<h2 id="what-is-sel4">What is seL4?</h2>
 <p>seL4 is the most advanced member of the L4 microkernel
 family, notable for its comprehensive formal verification, which sets it
 apart from any other operating system. seL4 achieves this without
 compromising performance.</p>
 
-<h2 id="what-is-a-microkernel">What is a microkernel?</h2>
+<h3 id="what-is-a-microkernel">What is a microkernel?</h3>
 <p>A microkernel is the minimal core of an
 operating system (OS). It presents a very small subset of what is
 generally considered an operating system today. The definition of what
@@ -360,7 +387,7 @@ third-generation microkernels, such access rights are conferred by
 capabilities (unforgeable tokens representing privileges) and are fully
 delegatable.</p>
 
-<h2 id="what-is-the-l4-microkernel-family">What is the L4 microkernel family?</h2>
+<h3 id="what-is-the-l4-microkernel-family">What is the L4 microkernel family?</h3>
 <p>L4 is a family of very small,
 high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early ’90s. See the
@@ -373,7 +400,7 @@ developed by Jochen Liedtke in the early ’90s. See the
 inheritance. Node colours indicate author organisations. A full description of L4 variants and history can be found along
 this image source: "From L3 to seL4. What Have We Learnt in 20 Years of L4 Microkernels? [Elphinstone &amp; Heiser, SOSP 2013]"</p>
 
-<h2 id="how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</h2>
+<h3 id="how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</h3>
 <p>To the
 best of our knowledge, seL4 is the world’s fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
@@ -392,7 +419,7 @@ fluctuate up and down by 5–10 cycles, but there is no longer a
 performance difference between verified and unverified branches on
 ARMv7. ARMv8 is not yet fully optimised.</p>
 
-<h1 id="what-is-the-size-of-sel4">What is the size of seL4?</h1>
+<h2 id="what-is-the-size-of-sel4">What is the size of seL4?</h2>
 
 <p>Obviously this depends on the processor architecture. 
 As an example, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
@@ -401,8 +428,8 @@ Meta-data for usermode processes, incl. address spaces (page tables), thread-con
 capability storage etc, will add to this. 
 (But note that in seL4’s memory-management model, such dynamic memory must be supplied to the kernel by usermode code.)</p>
 
-<h1 id="on-what-hardware-does-sel4-run">On what hardware does seL4 run?</h1>
-<h2 id="what-processor-architectures-are-supported">What processor architectures are supported?</h2>
+<h2 id="on-what-hardware-does-sel4-run">On what hardware does seL4 run?</h2>
+<h3 id="what-processor-architectures-are-supported">What processor architectures are supported?</h3>
 <p>Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
 A9, A15) and x86 cores. Supported ARM platforms for these are the
 Freescale i.MX31, OMAP3 !BeagleBoard, Exynos Arndale 5250, Odroid-X,
@@ -411,7 +438,7 @@ x86 machines are supported.</p>
 
 <p>Talk to us if you have funds to support a port to further architectures.</p>
 
-<h2 id="what-devices-does-sel4-support">What devices does seL4 support?</h2>
+<h3 id="what-devices-does-sel4-support">What devices does seL4 support?</h3>
 <p>seL4, like any real microkernel,
 runs all device drivers in user mode, device support is therefore not
 the kernel’s problem. The exceptions are a timer driver, which seL4
@@ -423,7 +450,7 @@ kernel also contains a serial driver.</p>
 mechanisms for user-mode device drivers, especially the ability to map
 device memory to drivers and forward IRQs as (asynchronous) messages.</p>
 
-<h2 id="what-about-dma">What about DMA?</h2>
+<h3 id="what-about-dma">What about DMA?</h3>
 <p>The formal verification of seL4 on the ARM
 platform assumes that the MMU has complete control over memory, which
 means the proof assumes that DMA is off. DMA devices can in theory
@@ -440,7 +467,7 @@ experimental branch. The VT-d extensions allow the kernel to restrict
 DMA and thereby enable DMA devices with untrusted user-level drivers.
 There is unverified support for the SystemMMU on multiple ARM boards.</p>
 
-<h2 id="does-sel4-support-multicore">Does seL4 support multicore?</h2>
+<h3 id="does-sel4-support-multicore">Does seL4 support multicore?</h3>
 <p>On x86, seL4 can be configured to
 support multiple CPUs. Current multicore support is through a
 multikernel configuration where each booted CPU is given a portion of
@@ -453,7 +480,7 @@ development; please refer to the
 <a href="https://sel4.systems/Info/Roadmap/">roadmap</a> for anticipated
 release dates.</p>
 
-<h2 id="can-i-run-sel4-on-an-mmu-less-microcontroller">Can I run seL4 on an MMU-less microcontroller?</h2>
+<h3 id="can-i-run-sel4-on-an-mmu-less-microcontroller">Can I run seL4 on an MMU-less microcontroller?</h3>
 <p>Using seL4 without
 a full memory-management unit (MMU) makes little sense, as its resource
 management is fundamentally based on virtual memory. For lower-end
@@ -462,7 +489,7 @@ protection at all, you should look at NICTA’s
 <a href="http://ts.data61.csiro.au/projects/TS/echronos/">eChronos real-time operating system</a> (RTOS), which is designed for such
 processors and is also undergoing formal verification.</p>
 
-<h2 id="what-are-the-intended-applications-of-sel4">What are the intended applications of seL4?</h2>
+<h3 id="what-are-the-intended-applications-of-sel4">What are the intended applications of seL4?</h3>
 <p>seL4 is a
 general-purpose microkernel, so the answer is all of them. The main
 targets are embedded systems with security or reliability requirements,
@@ -472,8 +499,8 @@ areas that need isolation between different parts of the software.
 Immediate application areas are in the financial, medical, automotive,
 avionics and defence sectors.</p>
 
-<h1 id="how-good-is-sel4-at-supporting-virtual-machines">How good is seL4 at supporting virtual machines?</h1>
-<h2 id="can-i-run-linux-on-top-of-sel4">Can I run Linux on top of seL4?</h2>
+<h2 id="how-good-is-sel4-at-supporting-virtual-machines">How good is seL4 at supporting virtual machines?</h2>
+<h3 id="can-i-run-linux-on-top-of-sel4">Can I run Linux on top of seL4?</h3>
 <p>Yes, seL4 can run Linux in a virtual machine. At
 present the master branch supports this on ARMv7 processors (presently
 A15/A7 cores). For x86 there is experimental virtualisation support
@@ -486,7 +513,7 @@ Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to
 a virtual machine monitor (VMM) which performs the necessary emulations.
 The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).</p>
 
-<h2 id="how-does-sel4vmm-compare-with-okl4-or-codezero">How does seL4+VMM compare with OKL4 or Codezero?</h2>
+<h3 id="how-does-sel4vmm-compare-with-okl4-or-codezero">How does seL4+VMM compare with OKL4 or Codezero?</h3>
 <p>That’s a bit
 difficult to answer, given that of the three, only seL4 is open-source.</p>
 
@@ -498,11 +525,11 @@ fast.</p>
 efficient para-virtualisation. It has fairly mature userland, especially
 a driver framework.</p>
 
-<h2 id="does-sel4-support-multiple-virtual-machines-at-once">Does seL4 support multiple virtual machines at once?</h2>
+<h3 id="does-sel4-support-multiple-virtual-machines-at-once">Does seL4 support multiple virtual machines at once?</h3>
 <p>Yes, multiple
 VMs are supported, including heterogeneous ones.</p>
 
-<h2 id="can-i-run-a-real-time-os-in-a-virtual-machine-on-sel4">Can I run a real-time OS in a virtual machine on seL4?</h2>
+<h3 id="can-i-run-a-real-time-os-in-a-virtual-machine-on-sel4">Can I run a real-time OS in a virtual machine on seL4?</h3>
 <p>seL4 is the
 world’s only hypervisor with a sound worst-case execution-time (WCET)
 analysis, and as such the only one that can give you actual real-time
@@ -530,7 +557,7 @@ necessarily the way to go, although that somewhat depends on your
 circumstances. In general, you’ll better off running RT apps in a native
 seL4 environment.</p>
 
-<h1 id="what-is-formal-verification">What is formal verification?</h1>
+<h2 id="what-is-formal-verification">What is formal verification?</h2>
 <p>Formal software verification is the
 activity of using mathematical proof to show that a piece of software
 satisfies specific properties. Traditionally, formal verification has
@@ -551,7 +578,7 @@ prover is interactive, but offers a comparatively high degree of
 automation. It also offers a very high degree of assurance that the
 resulting proof is correct.</p>
 
-<h2 id="what-does-sel4s-formal-verification-mean">What does seL4’s formal verification mean?</h2>
+<h3 id="what-does-sel4s-formal-verification-mean">What does seL4’s formal verification mean?</h3>
 <p>Unique about seL4 is
 its unprecedented degree of assurance, achieved through formal
 verification. Specifically, the ARM, ARM_HYP (ARM with virtualisation
@@ -583,7 +610,7 @@ latencies of any other kernel operations). It is therefore the only
 kernel with memory protection that can give you hard real-time
 guarantees.</p>
 
-<h2 id="does-sel4-have-zero-bugs">Does seL4 have zero bugs?</h2>
+<h3 id="does-sel4-have-zero-bugs">Does seL4 have zero bugs?</h3>
 <p>The functional correctness proof states
 that, if the proof assumptions are met, the seL4 kernel implementation
 has no deviations from its specification. The security proofs state that
@@ -607,7 +634,7 @@ systems, this is not a problem, because analysing hardware and proof
 assumptions is much easier than analysing a large software system, the
 same hardware, and test assumptions.</p>
 
-<h2 id="is-sel4-proved-secure">Is seL4 proved secure?</h2>
+<h3 id="is-sel4-proved-secure">Is seL4 proved secure?</h3>
 <p>This depends on what you mean by secure. In
 the interpretation of classic operating system security, the answer is
 yes. In particular, seL4 has been proved to enforce specific security
@@ -621,7 +648,7 @@ formally verified by the user. While these restrictions are common for
 high-assurance systems, we are working to reduce them, for instance
 through the use of IOMMUs on x86 or System MMUs on ARM.</p>
 
-<h2 id="if-i-run-sel4-is-my-system-secure">If I run seL4, is my system secure?</h2>
+<h3 id="if-i-run-sel4-is-my-system-secure">If I run seL4, is my system secure?</h3>
 <p>Not automatically, no.
 Security is a question that spans the whole system, including its human
 parts. An OS kernel, verified or not, does not automatically make a
@@ -632,7 +659,7 @@ insecure ways.</p>
 with strong mechanisms to implement security policies, backed by
 specific security theorems.</p>
 
-<h2 id="what-are-the-proof-assumptions">What are the proof assumptions?</h2>
+<h3 id="what-are-the-proof-assumptions">What are the proof assumptions?</h3>
 <p>The brief version is: we assume
 that in-kernel assembly code is correct, hardware behaves correctly,
 in-kernel hardware management (TLB and caches) is correct, and boot code
@@ -644,7 +671,7 @@ system is configured.</p>
 <a href="http://sel4.systems/Info/FAQ/proof.pml">proof and assumptions
 page</a>.</p>
 
-<h2 id="how-do-i-leverage-sel4s-formal-proofs">How do I leverage seL4’s formal proofs?</h2>
+<h3 id="how-do-i-leverage-sel4s-formal-proofs">How do I leverage seL4’s formal proofs?</h3>
 <p>The seL4 proofs are just
 the first step in building secure systems. They provide the tools that
 application and system developers need for providing evidence that their
@@ -661,7 +688,7 @@ of the entire system.</p>
 <p>If you are interested in connecting to the seL4 proofs, let us know, as we
 may be able to offer assistance.</p>
 
-<h2 id="have-os-kernels-not-been-verified-before">Have OS kernels not been verified before?</h2>
+<h3 id="have-os-kernels-not-been-verified-before">Have OS kernels not been verified before?</h3>
 <p>OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
@@ -686,7 +713,7 @@ been achieved. It is only in the last 5-10 years that code verification
 and theorem proving technology has advanced enough to make large
 code-level proofs feasible.</p>
 
-<h2 id="when-and-how-often-does-sel4-get-updated-and-re-proved">When and how often does seL4 get updated and re-proved?</h2>
+<h3 id="when-and-how-often-does-sel4-get-updated-and-re-proved">When and how often does seL4 get updated and re-proved?</h3>
 <p>We update
 the seL4 proofs semi-continuously, usually whenever something is pulled
 into the master branch in the seL4 GitHub repository. You can see the
@@ -710,7 +737,7 @@ happen per year unless there is specific funding for a specific feature.
 Small updates take a day to a few weeks and we often do them on the
 side. There’s no specific schedule at the moment.</p>
 
-<h2 id="how-do-i-tell-which-code-in-github-is-covered-by-the-proof-and-which-isnt">How do I tell which code in GitHub is covered by the proof and which isn’t?</h2>
+<h3 id="how-do-i-tell-which-code-in-github-is-covered-by-the-proof-and-which-isnt">How do I tell which code in GitHub is covered by the proof and which isn’t?</h3>
 <p>The verification sees the entire C code for one particular
 combination of configuration options. See <a href="/VerifiedConfigurations">Verified
 Configurations</a> for details of architecture and
@@ -759,7 +786,7 @@ BOOT_CODE macro in the source so they’re easy to spot).</p>
 under src/arch/ia32 is not covered by the proof, but that the files in
 src/kernel/object are.</p>
 
-<h1 id="how-are-resources-managed-and-protected-in-sel4">How are resources managed and protected in seL4?</h1>
+<h2 id="how-are-resources-managed-and-protected-in-sel4">How are resources managed and protected in seL4?</h2>
 
 <p>The key idea in seL4 is that all resource management is done in
 userland. Access to and control over resources is controlled by
@@ -769,7 +796,7 @@ management itself. It has no heap, just a few global variables, a
 strictly bounded stack, and memory explicitly provided to it by
 userland.</p>
 
-<h2 id="what-are-capabilities">What are capabilities?</h2>
+<h3 id="what-are-capabilities">What are capabilities?</h3>
 
 <p>Capabilities are an OS abstraction for managing access rights. A
 capability represents ‘‘prima facie’’ evidence of the right to perform a
@@ -790,7 +817,7 @@ references.</p>
 <p>See the wikipedia article on
 <a href="https://en.wikipedia.org/wiki/Capability-based_security">capability-based security</a> for more details on caps.</p>
 
-<h2 id="how-can-usermode-manage-kernel-memory-safely">How can usermode manage kernel memory safely?</h2>
+<h3 id="how-can-usermode-manage-kernel-memory-safely">How can usermode manage kernel memory safely?</h3>
 
 <p>The kernel puts userland in control of system resources by handing all
 free memory (called ‘‘Untyped’’) after booting to the first user process
@@ -813,7 +840,7 @@ These can be mapped into an ‘‘Address Space Object’’ (essentially a page
 table), after which userland can write to the physical memory
 represented by the Frame Objects.</p>
 
-<h2 id="how-can-threads-communicate">How can threads communicate?</h2>
+<h3 id="how-can-threads-communicate">How can threads communicate?</h3>
 
 <p>Communication can happen via message-passing IPC or shared memory. IPC
 only makes sense for short messages; there is an implementation-defined,
@@ -831,7 +858,7 @@ sender’s to the receiver’s address space.</p>
 
 <p>Shared-buffer access can be synchronised via ‘‘Notifications’’.</p>
 
-<h2 id="how-does-message-passing-work">How does message-passing work?</h2>
+<h3 id="how-does-message-passing-work">How does message-passing work?</h3>
 
 <p>As is characteristic to members of the L4 microkernel family, seL4 uses
 ‘‘synchronous IPC’’. This means a rendez-vous communication model, where
@@ -851,7 +878,7 @@ trying to receive from the Endpoint.</p>
 <p>Message broadcast is a higher-level abstraction that can be implemented
 on top of seL4’s primitive mechanisms.</p>
 
-<h2 id="why-do-send-only-operations-not-return-a-success-indication">Why do send-only operations not return a success indication?</h2>
+<h3 id="why-do-send-only-operations-not-return-a-success-indication">Why do send-only operations not return a success indication?</h3>
 
 <p>The send-only IPC system calls ‘‘seL4_Send()’’ and ‘‘seL4_NBSend()’’
 can be invoked with a send-only capability, enabling one-way data
@@ -864,7 +891,7 @@ flow that is not explicitly authorised by a capability.</p>
 
 <p>In short, it’s a feature, not a bug (painful as it may be).</p>
 
-<h2 id="what-are-notifications">What are Notifications?</h2>
+<h3 id="what-are-notifications">What are Notifications?</h3>
 
 <p>A ‘‘Notification Object’’ is logically a small array of binary
 semaphores. It has the same operations: ‘‘Signal’’ and ‘‘Wait’’. Due to
@@ -882,7 +909,7 @@ the bit string and zeros out the array.</p>
 operation does not block, and instead returns zero immediately, even if
 the Notification bit string is zero.</p>
 
-<h2 id="what-is-the-sel4-fastpath">What is the seL4 fastpath?</h2>
+<h3 id="what-is-the-sel4-fastpath">What is the seL4 fastpath?</h3>
 
 <p>The fastpath is an add-on frontend to the kernel which performs the
 simple cases of some common operations quickly. It is key to the high
@@ -895,31 +922,31 @@ kernel behaviour except for performance.</p>
 <p>There is a section on the fastpath and its verification in
 <a href="http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml">this article</a>. The fastpath discussion starts on page 23.</p>
 
-<h2 id="i-want-to-know-more-about-sel4-functionalitydesignimplementationphilosophy">I want to know more about seL4 functionality/design/implementation/philosophy</h2>
+<h3 id="i-want-to-know-more-about-sel4-functionalitydesignimplementationphilosophy">I want to know more about seL4 functionality/design/implementation/philosophy</h3>
 
 <p>There are plenty of references on the <a href="/Documentation">documentation page</a>.</p>
 
-<h1 id="what-can-i-do-with-sel4">What can I do with seL4?</h1>
+<h2 id="what-can-i-do-with-sel4">What can I do with seL4?</h2>
 <p>You can use seL4 for research, education or
 commerce. Details are specified in the standard open-source
 <a href="#what-are-the-licensing-conditions">licenses</a> that come with the code. Different licenses apply
 to different parts of the code, but the conditions are designed to ease
 uptake.</p>
 
-<h1 id="what-are-the-licensing-conditions">What are the licensing conditions?</h1>
+<h2 id="what-are-the-licensing-conditions">What are the licensing conditions?</h2>
 
 <p>The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
 <a href="http://sel4.systems/Info/GettingStarted/license.pml">license page</a> for more details.</p>
 
-<h1 id="how-do-i-contribute-to-sel4">How do I contribute to seL4?</h1>
+<h2 id="how-do-i-contribute-to-sel4">How do I contribute to seL4?</h2>
 <p>See
 <a href="/Contributing.html">How to Contribute</a>. In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.</p>
 
-<h1 id="how-can-i-build-a-system-with-sel4">How can I build a system with seL4?</h1>
+<h2 id="how-can-i-build-a-system-with-sel4">How can I build a system with seL4?</h2>
 <p>Much more is required to build a
 system on seL4 compared to building on, say Linux. Having decomposed
 your system into modules, you will need to work out what access each
@@ -946,7 +973,7 @@ builds an OS on top of seL4. If you have access to an <a href="https://www.hardk
 you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.</p>
 
-<h1 id="where-can-i-learn-more">Where can I learn more?</h1>
+<h2 id="where-can-i-learn-more">Where can I learn more?</h2>
 <p>CSIRO’s
 <a href="http://ts.data61.csiro.au/projects/seL4/">seL4 project</a> and
 <a href="http://ts.data61.csiro.au/">Trustworthy Systems</a>
@@ -966,7 +993,7 @@ a 20-year retrospective of L4 microkernels;</li>
     traditionally-engineered systems.</li>
 </ul>
 
-<h1 id="whats-coming-up-next">What’s coming up next?</h1>
+<h2 id="whats-coming-up-next">What’s coming up next?</h2>
 <p>We’re currently working on a number of
 things. As we’re in a research environment (not a product development
 environment) we cannot commit to dates, or the order in which any of
@@ -1012,7 +1039,7 @@ release soon:</p>
         </li>
         
           <li>
-            Site last updated: Wed Jan 8 13:20:00 2020 +1100 b1c559a
+            Site last updated: Wed Jan 8 14:06:43 2020 +1100 7d1d7eb
           </li>
           <li>
             
@@ -1065,7 +1092,7 @@ release soon:</p>
               
             
               
-                Page last updated: Wed Jan 8 13:20:00 2020 +1100 b1c559a
+                Page last updated: Wed Jan 8 14:06:43 2020 +1100 7d1d7eb
               
             
               
