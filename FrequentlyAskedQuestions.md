@@ -71,6 +71,15 @@ fluctuate up and down by 5–10 cycles, but there is no longer a
 performance difference between verified and unverified branches on
 ARMv7. ARMv8 is not yet fully optimised.
 
+# What is the size of seL4?
+
+Obviously this depends on the processor architecture. 
+As an example, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
+Its RAM size is about 162 KiB, which includes code, static data and the stack.
+Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
+capability storage etc, will add to this. 
+(But note that in seL4's memory-management model, such dynamic memory must be supplied to the kernel by usermode code.)
+
 # On what hardware does seL4 run?
 ## What processor architectures are supported?
 Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
@@ -277,7 +286,7 @@ systems, this is not a problem, because analysing hardware and proof
 assumptions is much easier than analysing a large software system, the
 same hardware, and test assumptions.
 
-## Is seL4 proven secure?
+## Is seL4 proved secure?
  This depends on what you mean by secure. In
 the interpretation of classic operating system security, the answer is
 yes. In particular, seL4 has been proved to enforce specific security
