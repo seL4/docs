@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-06 13:37:13 +1100 -->
+<!-- Page last generated 2020-01-08 13:21:10 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -4158,7 +4158,7 @@ single-stepping.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_IOPageTable</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the I/O page table being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_IOSpace</code></td>
@@ -4194,7 +4194,7 @@ single-stepping.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_IOPageTable</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the I/O page table being operated on.</td>
     </tr>
   </tbody>
 </table>
@@ -4395,7 +4395,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
       <td><code class="highlighter-rouge">vspace</code></td>
-      <td>Capability to the VSpace which will contain the mapping.</td>
+      <td>Capability to the VSpace which will contain the mapping. Must be assigned to an ASID pool.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4417,7 +4417,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
+<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability.</p>
 
 <h4 id="unify-instruction">Unify Instruction</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Unify_Instruction</code></p>
@@ -4505,7 +4505,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
       <td><code class="highlighter-rouge">vspace</code></td>
-      <td>Capability to the VSpace which will contain the mapping.</td>
+      <td>Capability to the VSpace which will contain the mapping. Must be assigned to an ASID pool.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4522,7 +4522,7 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in the VSpace according to the provided virtual address.</p>
+<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in the VSpace according to the provided virtual address. If higher-level paging structures do not exist for the virtual address this operation will fail, returning a seL4_FailedLookup error. If the page table is already mapped this operation will fail, returning a seL4_InvalidCapability error. If another object is already mapped at this level for the virtual address this operation will fail, returning a seL4_DeleteFirst error.</p>
 
 <h4 id="unmap-10">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageTable_Unmap</code></p>
@@ -4568,7 +4568,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VCPU</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the VCPU being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Uint16</code></td>
@@ -4614,7 +4614,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VCPU</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the VCPU being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4645,7 +4645,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VCPU</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the VCPU being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_TCB</code></td>
@@ -4676,7 +4676,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VCPU</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the VCPU being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4819,7 +4819,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the page directory being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4853,7 +4853,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the page directory being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4887,7 +4887,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the page directory being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4921,7 +4921,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the page directory being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4958,12 +4958,12 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the page directory being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">pud</code></td>
-      <td>Upper page directory</td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>Top level translation table. Must be assigned to an ASID pool.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -4973,14 +4973,14 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VMAttributes</code></td>
       <td><code class="highlighter-rouge">attr</code></td>
-      <td>Memory attributes</td>
+      <td>VM Attributes for the mapping.</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Map a page directory (level 2) to an upper page directory (level 1)</p>
+<p><strong>Description:</strong> Map a page directory (level 2) to an upper page directory (level 1). If an upper page directory does not exist for the virtual address this operation will fail, returning a seL4_FailedLookup error. If the page directory is already mapped this operation will fail, returning a seL4_InvalidCapability error. If another object is already mapped at this level for the virtual address this operation will fail, returning a seL4_DeleteFirst error.</p>
 
 <h4 id="unmap-11">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Unmap</code></p>
@@ -4999,7 +4999,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the page directory being operated on.</td>
     </tr>
   </tbody>
 </table>
@@ -5026,12 +5026,12 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageUpperDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the upper page directory being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
       <td><code class="highlighter-rouge">vspace</code></td>
-      <td>top level translation table</td>
+      <td>Top level translation table. Must be assigned to an ASID pool.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -5041,14 +5041,14 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VMAttributes</code></td>
       <td><code class="highlighter-rouge">attr</code></td>
-      <td>Memory attributes</td>
+      <td>VM Attributes for the mapping.</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Map an upper page directory (level 1) to a top level translation table (level 0)</p>
+<p><strong>Description:</strong> Map an upper page directory (level 1) to a top level translation table (level 0). If the upper page directory is already mapped this operation will fail, returning a seL4_InvalidCapability error. If another object is already mapped at this level for the virtual address this operation will fail, returning a seL4_DeleteFirst error.</p>
 
 <h4 id="unmap-12">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageUpperDirectory_Unmap</code></p>
@@ -5067,7 +5067,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_PageUpperDirectory</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the upper page directory being operated on.</td>
     </tr>
   </tbody>
 </table>
@@ -5094,7 +5094,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the top level translation table being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -5128,7 +5128,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the top level translation table being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -5162,7 +5162,7 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the top level translation table being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
@@ -5196,17 +5196,17 @@ serviced.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_VSpace</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the top level translation table being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">start</code></td>
-      <td><em>TODO</em></td>
+      <td>Start address</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">end</code></td>
-      <td><em>TODO</em></td>
+      <td>End address</td>
     </tr>
   </tbody>
 </table>
@@ -5824,7 +5824,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Mon Jan 6 13:35:54 2020 +1100 01e0539
+            Site last updated: Wed Jan 8 13:20:00 2020 +1100 b1c559a
           </li>
           <li>
             

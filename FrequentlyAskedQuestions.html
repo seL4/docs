@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-06 13:37:13 +1100 -->
+<!-- Page last generated 2020-01-08 13:21:10 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -305,7 +305,7 @@
 <li class="toc-entry toc-h2"><a href="#can-i-run-a-real-time-os-in-a-virtual-machine-on-sel4">Can I run a real-time OS in a virtual machine on seL4?</a></li>
 <li class="toc-entry toc-h2"><a href="#what-does-sel4s-formal-verification-mean">What does seL4’s formal verification mean?</a></li>
 <li class="toc-entry toc-h2"><a href="#does-sel4-have-zero-bugs">Does seL4 have zero bugs?</a></li>
-<li class="toc-entry toc-h2"><a href="#is-sel4-proven-secure">Is seL4 proven secure?</a></li>
+<li class="toc-entry toc-h2"><a href="#is-sel4-proved-secure">Is seL4 proved secure?</a></li>
 <li class="toc-entry toc-h2"><a href="#if-i-run-sel4-is-my-system-secure">If I run seL4, is my system secure?</a></li>
 <li class="toc-entry toc-h2"><a href="#what-are-the-proof-assumptions">What are the proof assumptions?</a></li>
 <li class="toc-entry toc-h2"><a href="#how-do-i-leverage-sel4s-formal-proofs">How do I leverage seL4’s formal proofs?</a></li>
@@ -391,6 +391,15 @@ one-way IPC on the A9 is now well below 300 cycles. Actual numbers
 fluctuate up and down by 5–10 cycles, but there is no longer a
 performance difference between verified and unverified branches on
 ARMv7. ARMv8 is not yet fully optimised.</p>
+
+<h1 id="what-is-the-size-of-sel4">What is the size of seL4?</h1>
+
+<p>Obviously this depends on the processor architecture. 
+As an example, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
+Its RAM size is about 162 KiB, which includes code, static data and the stack.
+Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
+capability storage etc, will add to this. 
+(But note that in seL4’s memory-management model, such dynamic memory must be supplied to the kernel by usermode code.)</p>
 
 <h1 id="on-what-hardware-does-sel4-run">On what hardware does seL4 run?</h1>
 <h2 id="what-processor-architectures-are-supported">What processor architectures are supported?</h2>
@@ -598,7 +607,7 @@ systems, this is not a problem, because analysing hardware and proof
 assumptions is much easier than analysing a large software system, the
 same hardware, and test assumptions.</p>
 
-<h2 id="is-sel4-proven-secure">Is seL4 proven secure?</h2>
+<h2 id="is-sel4-proved-secure">Is seL4 proved secure?</h2>
 <p>This depends on what you mean by secure. In
 the interpretation of classic operating system security, the answer is
 yes. In particular, seL4 has been proved to enforce specific security
@@ -1003,7 +1012,7 @@ release soon:</p>
         </li>
         
           <li>
-            Site last updated: Mon Jan 6 13:35:54 2020 +1100 01e0539
+            Site last updated: Wed Jan 8 13:20:00 2020 +1100 b1c559a
           </li>
           <li>
             
@@ -1056,7 +1065,7 @@ release soon:</p>
               
             
               
-                Page last updated: Mon Jan 6 13:35:54 2020 +1100 01e0539
+                Page last updated: Wed Jan 8 13:20:00 2020 +1100 b1c559a
               
             
               
