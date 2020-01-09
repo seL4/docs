@@ -42,8 +42,7 @@ delegatable.
  L4 is a family of very small,
 high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
-[L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia and the website
-[L4HQ](http://l4hq.org/) for more details.
+[L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia for more details.
 
 <img style="500" src="http://sel4.systems/images/familytree.png" alt="L4 microkernel family tree" aria-describedby="p1"/>
 
@@ -630,7 +629,7 @@ all peer-reviewed publications. Good starting points are:
 
 - [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml), 
   a 20-year retrospective of L4 microkernels;
-- [the original 2009 paper](http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
+- [the original 2009 paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract.pml) describing seL4 and its formal
       verification;
 - [a much longer paper detailing the complete verification story of
       seL4](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
