@@ -181,18 +181,20 @@ infeasible paths high-assurance. We now also apply it to the verified
 kernel, so this now also has sound execution-time bounds. Unfortunately,
 we can only do a sound analysis on relatively dated processor cores
 (ARM11, which is an ARMv6 core) as ARM no longer publishes latency
-bounds for instructions.
-
-More importantly, we have developed a new scheduling model that supports
-the kind of temporal isolation that is required for supporting
-mixed-criticality systems. This is presently in a separate branch (the
-RT branch), which is the recommended starting point for any project that
-requires real-time properties.
+bounds for instructions. 
+We should be able to repeat this for open RISC-V processor implementations, stay tuned.
 
 We are actually not convinced that running an RTOS in a VM is
 necessarily the way to go, although that somewhat depends on your
 circumstances. In general, you’ll better off running RT apps in a native
 seL4 environment.
+
+More importantly, we have developed a new scheduling model that supports
+the kind of temporal isolation that is required for supporting
+mixed-criticality systems. This MCS model is presently in verification and 
+is being merged into mainline as verification progresses
+We strongly recommend basing any new project on the MCS model,
+irrespective of whether it requires real-time properties.
 
 ## What is formal verification?
  Formal software verification is the
