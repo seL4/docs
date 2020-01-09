@@ -331,9 +331,9 @@ may be able to offer assistance.
  OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
-[comprehensive overview](http://ts.data61.csiro.au/publications/papers/Klein_09.abstract) paper on OS verification from 2008 as well as the related
+[comprehensive overview](https://ts.data61.csiro.au/publications/papers/Klein_09.abstract) paper on OS verification from 2008 as well as the related
 work section of the
-[seL4 overview paper](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract) from 2014.
+[seL4 overview paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract) from 2014.
 
 The new and exciting thing about seL4 is that it has a) strong
 properties such as functional correctness, integrity, and
@@ -501,7 +501,6 @@ Shared-buffer access can be synchronised via ''Notifications''.
 
 ### How does message-passing work?
 
-
 As is characteristic to members of the L4 microkernel family, seL4 uses
 ''synchronous IPC''. This means a rendez-vous communication model, where
 the message is exchanged when both sender and receiver are ready. If
@@ -522,7 +521,6 @@ on top of seL4's primitive mechanisms.
 
 ### Why do send-only operations not return a success indication?
 
-
 The send-only IPC system calls ''seL4_Send()'' and ''seL4_NBSend()''
 can be invoked with a send-only capability, enabling one-way data
 transfer. By definition, a send-ony cap cannot be used to receive any
@@ -534,8 +532,14 @@ flow that is not explicitly authorised by a capability.
 
 In short, it's a feature, not a bug (painful as it may be).
 
-### What are Notifications?
+But also note that, unless you're building things like data diodes,
+[you should only use send-only and receive-only IPC for initialisation
+and exception handling](https://microkerneldude.wordpress.com/2019/03/07/how-to-and-how-not-to-use-sel4-ipc/). The normal pattern is that of a protected
+procedure call (i.e. invoking a function in a different protection domain),
+where the caller uses ''seL4_Call()'' and the receiver uses ''seL4_Reply_Wait()''
+invocations, which combine sending and receiving in a single system call.
 
+### What are Notifications?
 
 A ''Notification Object'' is logically a small array of binary
 semaphores. It has the same operations: ''Signal'' and ''Wait''. Due to
@@ -573,7 +577,8 @@ There is a section on the fastpath and its verification in
 There are plenty of references on the [documentation page](/Documentation).
 
 ## What can I do with seL4?
- You can use seL4 for research, education or
+
+You can use seL4 for research, education or
 commerce. Details are specified in the standard open-source
 [licenses](#what-are-the-licensing-conditions) that come with the code. Different licenses apply
 to different parts of the code, but the conditions are designed to ease
@@ -644,8 +649,7 @@ these will be delivered (or even if they will be released at all).
 That being said, we are currently working on and should be able to
 release soon:
 
-- ARM virtualisation support, on the Arndale and Odroid
-- A port to the Odroid XU3
-- WCET guarantees for the current kernel
-- An SMP version of seL4
-
+- verification of the RISC-V kernel
+- completing the 64-bit Arm version (multicore and hypervisor support)
+- verification of multicore seL4
+- [time protection](https://ts.data61.csiro.au/publications/csiroabstracts/Ge_YCH_19.abstract.pml?bib=combined) as a principled prevention of timing channels (this one is still very much cutting-edge research)
