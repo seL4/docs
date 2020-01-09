@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-09 15:56:04 +1100 -->
+<!-- Page last generated 2020-01-09 16:11:18 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -415,10 +415,10 @@ gap is closer to a factor of ten.</p>
 <p>Obviously this depends on the processor architecture.</p>
 
 <p>In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan’20). 
-The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more conplex platform,
+The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more complex platform,
 the extra code is mostly in the kernel initialisation.</p>
 
-<p>In terms of code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
+<p>In terms of executable code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
 Its RAM size is about 162 KiB, which includes code, static data and the stack.
 Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
 capability storage etc, will add to this. 
@@ -464,17 +464,16 @@ DMA and thereby enable DMA devices with untrusted user-level drivers.
 There is unverified support for the SystemMMU on multiple ARM boards.</p>
 
 <h3 id="does-sel4-support-multicore">Does seL4 support multicore?</h3>
-<p>On x86, seL4 can be configured to
-support multiple CPUs. Current multicore support is through a
-multikernel configuration where each booted CPU is given a portion of
-available memory. Cores can then communicate via limited shared memory
-and kernel supported IPIs. This configuration is highly experimental at
-the moment.</p>
 
-<p>A principled, high-performance multicore version is under active
-development; please refer to the
-<a href="https://sel4.systems/Info/Roadmap/">roadmap</a> for anticipated
-release dates.</p>
+<p>Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit). 
+Verification of the multicore kernel is in progress (but presently as an 
+unfunded background activity).</p>
+
+<p>The multicore kernel uses a <a href="https://ts.data61.csiro.au/publications/nictaabstracts/Peters_DEH_15.abstract.pml">big-lock approach, which makes sense for tightly-coupled
+cores that share an L2 cache</a>. It is not meant to scale to many cores, where instead
+multikernel is the right approach (running separate kernel image on each cluster
+of cores sharing a cache). This “clustered multikernel” configuration is presently not
+supported, though.</p>
 
 <h3 id="can-i-run-sel4-on-an-mmu-less-microcontroller">Can I run seL4 on an MMU-less microcontroller?</h3>
 <p>Using seL4 without
@@ -878,7 +877,7 @@ flow that is not explicitly authorised by a capability.</p>
 <p>In short, it’s a feature, not a bug (painful as it may be).</p>
 
 <p>But also note that, unless you’re building things like data diodes,
-<a href="https://microkerneldude.wordpress.com/2019/03/07/how-to-and-how-not-to-use-sel4-ipc/">you should only use send-only and receive-only IPC for initialisation
+<a href="https://microkerneldude.wordpress.com/2019/03/07/how-to-and-how-not-to-use-sel4-ipc/">you should use send-only and receive-only IPC only for initialisation
 and exception handling</a>. The normal pattern is that of a protected
 procedure call (i.e. invoking a function in a different protection domain),
 where the caller uses ‘‘seL4_Call()’’ and the receiver uses ‘‘seL4_Reply_Wait()’’
@@ -993,8 +992,7 @@ things. As we’re in a research environment (not a product development
 environment) we cannot commit to dates, or the order in which any of
 these will be delivered (or even if they will be released at all).</p>
 
-<p>That being said, we are currently working on and should be able to
-release soon:</p>
+<p>That being said, we are currently working on:</p>
 
 <ul>
   <li>verification of the RISC-V kernel</li>
@@ -1032,7 +1030,7 @@ release soon:</p>
         </li>
         
           <li>
-            Site last updated: Thu Jan 9 15:52:22 2020 +1100 be5bd8f
+            Site last updated: Thu Jan 9 16:10:03 2020 +1100 3e5d6d6
           </li>
           <li>
             
@@ -1085,7 +1083,7 @@ release soon:</p>
               
             
               
-                Page last updated: Thu Jan 9 15:52:22 2020 +1100 be5bd8f
+                Page last updated: Thu Jan 9 16:10:03 2020 +1100 3e5d6d6
               
             
               
