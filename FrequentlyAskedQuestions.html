@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-08 14:07:48 +1100 -->
+<!-- Page last generated 2020-01-09 15:56:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -295,9 +295,9 @@
 <li class="toc-entry toc-h3"><a href="#what-is-a-microkernel">What is a microkernel?</a></li>
 <li class="toc-entry toc-h3"><a href="#what-is-the-l4-microkernel-family">What is the L4 microkernel family?</a></li>
 <li class="toc-entry toc-h3"><a href="#how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</a></li>
+<li class="toc-entry toc-h3"><a href="#what-is-the-size-of-sel4">What is the size of seL4?</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#what-is-the-size-of-sel4">What is the size of seL4?</a></li>
 <li class="toc-entry toc-h2"><a href="#on-what-hardware-does-sel4-run">On what hardware does seL4 run?</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#what-processor-architectures-are-supported">What processor architectures are supported?</a></li>
@@ -311,7 +311,6 @@
 <li class="toc-entry toc-h2"><a href="#how-good-is-sel4-at-supporting-virtual-machines">How good is seL4 at supporting virtual machines?</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#can-i-run-linux-on-top-of-sel4">Can I run Linux on top of seL4?</a></li>
-<li class="toc-entry toc-h3"><a href="#how-does-sel4vmm-compare-with-okl4-or-codezero">How does seL4+VMM compare with OKL4 or Codezero?</a></li>
 <li class="toc-entry toc-h3"><a href="#does-sel4-support-multiple-virtual-machines-at-once">Does seL4 support multiple virtual machines at once?</a></li>
 <li class="toc-entry toc-h3"><a href="#can-i-run-a-real-time-os-in-a-virtual-machine-on-sel4">Can I run a real-time OS in a virtual machine on seL4?</a></li>
 </ul>
@@ -401,28 +400,25 @@ inheritance. Node colours indicate author organisations. A full description of L
 this image source: "From L3 to seL4. What Have We Learnt in 20 Years of L4 Microkernels? [Elphinstone &amp; Heiser, SOSP 2013]"</p>
 
 <h3 id="how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</h3>
-<p>To the
+<p>Up-to-date performance figures of the seL4 head revision are listed on the 
+<a href="https://sel4.systems/About/Performance/">seL4 Benchmarks page</a>. To the
 best of our knowledge, seL4 is the world’s fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
-of a cross-address-space message-passing (IPC) operation. For more
-information, check the
-<a href="http://l4hq.org/docs/performance.php">performance page on
-L4HQ</a>.</p>
+of a cross-address-space message-passing (IPC) operation.</p>
 
-<p>Note that the x86 IPC times recorded at L4HQ are the result of
-micro-optimisations which are not yet in the public version, and may
-never make it there, as we expect the soon-to-be-released x64 version to
-be significantly faster, making 32-bit x86 obsolete. On ARM the verified
-master branch version is actually faster than the figures on L4HQ,
-one-way IPC on the A9 is now well below 300 cycles. Actual numbers
-fluctuate up and down by 5–10 cycles, but there is no longer a
-performance difference between verified and unverified branches on
-ARMv7. ARMv8 is not yet fully optimised.</p>
+<p>In fact, we have not seen performance data from another microkernel 
+that are within a factor of two of seL4’s, and in most cases the
+gap is closer to a factor of ten.</p>
 
-<h2 id="what-is-the-size-of-sel4">What is the size of seL4?</h2>
+<h3 id="what-is-the-size-of-sel4">What is the size of seL4?</h3>
 
-<p>Obviously this depends on the processor architecture. 
-As an example, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
+<p>Obviously this depends on the processor architecture.</p>
+
+<p>In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan’20). 
+The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more conplex platform,
+the extra code is mostly in the kernel initialisation.</p>
+
+<p>In terms of code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
 Its RAM size is about 162 KiB, which includes code, static data and the stack.
 Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
 capability storage etc, will add to this. 
@@ -513,18 +509,6 @@ Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to
 a virtual machine monitor (VMM) which performs the necessary emulations.
 The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).</p>
 
-<h3 id="how-does-sel4vmm-compare-with-okl4-or-codezero">How does seL4+VMM compare with OKL4 or Codezero?</h3>
-<p>That’s a bit
-difficult to answer, given that of the three, only seL4 is open-source.</p>
-
-<p>Codezero (when it was still open source) was a clone of the then OKL4
-microkernel, without any of the optimisations that make L4 microkernels
-fast.</p>
-
-<p>The OKL4 Microvisor has a different API, especially designed to support
-efficient para-virtualisation. It has fairly mature userland, especially
-a driver framework.</p>
-
 <h3 id="does-sel4-support-multiple-virtual-machines-at-once">Does seL4 support multiple virtual machines at once?</h3>
 <p>Yes, multiple
 VMs are supported, including heterogeneous ones.</p>
@@ -544,18 +528,20 @@ infeasible paths high-assurance. We now also apply it to the verified
 kernel, so this now also has sound execution-time bounds. Unfortunately,
 we can only do a sound analysis on relatively dated processor cores
 (ARM11, which is an ARMv6 core) as ARM no longer publishes latency
-bounds for instructions.</p>
-
-<p>More importantly, we have developed a new scheduling model that supports
-the kind of temporal isolation that is required for supporting
-mixed-criticality systems. This is presently in a separate branch (the
-RT branch), which is the recommended starting point for any project that
-requires real-time properties.</p>
+bounds for instructions. 
+We should be able to repeat this for open RISC-V processor implementations, stay tuned.</p>
 
 <p>We are actually not convinced that running an RTOS in a VM is
 necessarily the way to go, although that somewhat depends on your
 circumstances. In general, you’ll better off running RT apps in a native
 seL4 environment.</p>
+
+<p>More importantly, we have developed a new scheduling model that supports
+the kind of temporal isolation that is required for supporting
+mixed-criticality systems. This MCS model is presently in verification and 
+is being merged into mainline as verification progresses
+We strongly recommend basing any new project on the MCS model,
+irrespective of whether it requires real-time properties.</p>
 
 <h2 id="what-is-formal-verification">What is formal verification?</h2>
 <p>Formal software verification is the
@@ -692,9 +678,9 @@ may be able to offer assistance.</p>
 <p>OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
-<a href="http://ts.data61.csiro.au/publications/papers/Klein_09.abstract">comprehensive overview</a> paper on OS verification from 2008 as well as the related
+<a href="https://ts.data61.csiro.au/publications/papers/Klein_09.abstract">comprehensive overview</a> paper on OS verification from 2008 as well as the related
 work section of the
-<a href="http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract">seL4 overview paper</a> from 2014.</p>
+<a href="https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract">seL4 overview paper</a> from 2014.</p>
 
 <p>The new and exciting thing about seL4 is that it has a) strong
 properties such as functional correctness, integrity, and
@@ -891,6 +877,13 @@ flow that is not explicitly authorised by a capability.</p>
 
 <p>In short, it’s a feature, not a bug (painful as it may be).</p>
 
+<p>But also note that, unless you’re building things like data diodes,
+<a href="https://microkerneldude.wordpress.com/2019/03/07/how-to-and-how-not-to-use-sel4-ipc/">you should only use send-only and receive-only IPC for initialisation
+and exception handling</a>. The normal pattern is that of a protected
+procedure call (i.e. invoking a function in a different protection domain),
+where the caller uses ‘‘seL4_Call()’’ and the receiver uses ‘‘seL4_Reply_Wait()’’
+invocations, which combine sending and receiving in a single system call.</p>
+
 <h3 id="what-are-notifications">What are Notifications?</h3>
 
 <p>A ‘‘Notification Object’’ is logically a small array of binary
@@ -927,6 +920,7 @@ kernel behaviour except for performance.</p>
 <p>There are plenty of references on the <a href="/Documentation">documentation page</a>.</p>
 
 <h2 id="what-can-i-do-with-sel4">What can I do with seL4?</h2>
+
 <p>You can use seL4 for research, education or
 commerce. Details are specified in the standard open-source
 <a href="#what-are-the-licensing-conditions">licenses</a> that come with the code. Different licenses apply
@@ -1003,12 +997,11 @@ these will be delivered (or even if they will be released at all).</p>
 release soon:</p>
 
 <ul>
-  <li>ARM virtualisation support, on the Arndale and Odroid</li>
-  <li>A port to the Odroid XU3</li>
-  <li>WCET guarantees for the current kernel</li>
-  <li>An SMP version of seL4</li>
+  <li>verification of the RISC-V kernel</li>
+  <li>completing the 64-bit Arm version (multicore and hypervisor support)</li>
+  <li>verification of multicore seL4</li>
+  <li><a href="https://ts.data61.csiro.au/publications/csiroabstracts/Ge_YCH_19.abstract.pml?bib=combined">time protection</a> as a principled prevention of timing channels (this one is still very much cutting-edge research)</li>
 </ul>
-
 
     </div>
   </div>
@@ -1039,7 +1032,7 @@ release soon:</p>
         </li>
         
           <li>
-            Site last updated: Wed Jan 8 14:06:43 2020 +1100 7d1d7eb
+            Site last updated: Thu Jan 9 15:52:22 2020 +1100 be5bd8f
           </li>
           <li>
             
@@ -1092,7 +1085,7 @@ release soon:</p>
               
             
               
-                Page last updated: Wed Jan 8 14:06:43 2020 +1100 7d1d7eb
+                Page last updated: Thu Jan 9 15:52:22 2020 +1100 be5bd8f
               
             
               
