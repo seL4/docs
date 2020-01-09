@@ -68,10 +68,10 @@ gap is closer to a factor of ten.
 Obviously this depends on the processor architecture. 
 
 In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan'20). 
-The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more conplex platform,
+The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more complex platform,
 the extra code is mostly in the kernel initialisation.
 
-In terms of code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
+In terms of executable code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
 Its RAM size is about 162 KiB, which includes code, static data and the stack.
 Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
 capability storage etc, will add to this. 
@@ -117,17 +117,16 @@ DMA and thereby enable DMA devices with untrusted user-level drivers.
 There is unverified support for the SystemMMU on multiple ARM boards.
 
 ### Does seL4 support multicore?
- On x86, seL4 can be configured to
-support multiple CPUs. Current multicore support is through a
-multikernel configuration where each booted CPU is given a portion of
-available memory. Cores can then communicate via limited shared memory
-and kernel supported IPIs. This configuration is highly experimental at
-the moment.
+ 
+Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit). 
+Verification of the multicore kernel is in progress (but presently as an 
+unfunded background activity).
 
-A principled, high-performance multicore version is under active
-development; please refer to the
-[roadmap](https://sel4.systems/Info/Roadmap/) for anticipated
-release dates.
+The multicore kernel uses a [big-lock approach, which makes sense for tightly-coupled
+cores that share an L2 cache](https://ts.data61.csiro.au/publications/nictaabstracts/Peters_DEH_15.abstract.pml). It is not meant to scale to many cores, where instead
+multikernel is the right approach (running separate kernel image on each cluster
+of cores sharing a cache). This "clustered multikernel" configuration is presently not
+supported, though.
 
 ### Can I run seL4 on an MMU-less microcontroller?
  Using seL4 without
@@ -533,7 +532,7 @@ flow that is not explicitly authorised by a capability.
 In short, it's a feature, not a bug (painful as it may be).
 
 But also note that, unless you're building things like data diodes,
-[you should only use send-only and receive-only IPC for initialisation
+[you should use send-only and receive-only IPC only for initialisation
 and exception handling](https://microkerneldude.wordpress.com/2019/03/07/how-to-and-how-not-to-use-sel4-ipc/). The normal pattern is that of a protected
 procedure call (i.e. invoking a function in a different protection domain),
 where the caller uses ''seL4_Call()'' and the receiver uses ''seL4_Reply_Wait()''
@@ -646,8 +645,7 @@ things. As we're in a research environment (not a product development
 environment) we cannot commit to dates, or the order in which any of
 these will be delivered (or even if they will be released at all).
 
-That being said, we are currently working on and should be able to
-release soon:
+That being said, we are currently working on:
 
 - verification of the RISC-V kernel
 - completing the 64-bit Arm version (multicore and hypervisor support)
