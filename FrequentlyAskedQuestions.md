@@ -162,18 +162,6 @@ Ring-0 root mode or ARM hyp mode) and forwards virtualisation events to
 a virtual machine monitor (VMM) which performs the necessary emulations.
 The VMM runs de-privileged (x86 Ring-3 root mode or ARM supv mode).
 
-### How does seL4+VMM compare with OKL4 or Codezero?
- That’s a bit
-difficult to answer, given that of the three, only seL4 is open-source.
-
-Codezero (when it was still open source) was a clone of the then OKL4
-microkernel, without any of the optimisations that make L4 microkernels
-fast.
-
-The OKL4 Microvisor has a different API, especially designed to support
-efficient para-virtualisation. It has fairly mature userland, especially
-a driver framework.
-
 ### Does seL4 support multiple virtual machines at once?
  Yes, multiple
 VMs are supported, including heterogeneous ones.
