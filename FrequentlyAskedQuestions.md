@@ -78,13 +78,20 @@ capability storage etc, will add to this.
 
 ## On what hardware does seL4 run?
 ### What processor architectures are supported?
-Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
-A9, A15) and x86 cores. Supported ARM platforms for these are the
-Freescale i.MX31, OMAP3 !BeagleBoard, Exynos Arndale 5250, Odroid-X,
-Odroid-XU, Inforce IFC6410 and Freescale i.MX6 Sabre Lite. All modern
-x86 machines are supported.
+Presently seL4 runs on Arm v6, v7 (32-bit) and v8 (64-bit) cores, 
+on PC99 (x86) cores (32- and 64-bit mode), and RISC-V RV64 (64-bit) cores.
+See the up-to-date list of [supported platforms](/Hardware/).
 
 Talk to us if you have funds to support a port to further architectures.
+
+### Which platform ports are verified?
+
+We have presently the most comprehensive verification story (functional
+correctness to the binary, plus security proofs) for (32-bit) Arm v6 and v7
+platforms. We also have functional-correctness proofs to C code for 64-bit x86.
+Verificaton of the 64-bit RISC-V is due to complete in early 2020.
+
+The list of [supported platforms](/Hardware/) shows verificaton status.
 
 ### What devices does seL4 support?
  seL4, like any real microkernel,
