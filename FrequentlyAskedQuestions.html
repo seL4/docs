@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-09 16:11:18 +1100 -->
+<!-- Page last generated 2020-01-20 14:25:47 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -301,6 +301,7 @@
 <li class="toc-entry toc-h2"><a href="#on-what-hardware-does-sel4-run">On what hardware does seL4 run?</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#what-processor-architectures-are-supported">What processor architectures are supported?</a></li>
+<li class="toc-entry toc-h3"><a href="#which-platform-ports-are-verified">Which platform ports are verified?</a></li>
 <li class="toc-entry toc-h3"><a href="#what-devices-does-sel4-support">What devices does seL4 support?</a></li>
 <li class="toc-entry toc-h3"><a href="#what-about-dma">What about DMA?</a></li>
 <li class="toc-entry toc-h3"><a href="#does-sel4-support-multicore">Does seL4 support multicore?</a></li>
@@ -390,8 +391,7 @@ delegatable.</p>
 <p>L4 is a family of very small,
 high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early ’90s. See the
-<a href="http://en.wikipedia.org/wiki/L4_microkernel_family">L4 microkernel family</a> entry on Wikipedia and the website
-<a href="http://l4hq.org/">L4HQ</a> for more details.</p>
+<a href="http://en.wikipedia.org/wiki/L4_microkernel_family">L4 microkernel family</a> entry on Wikipedia for more details.</p>
 
 <p><img style="500" src="http://sel4.systems/images/familytree.png" alt="L4 microkernel family tree" aria-describedby="p1" /></p>
 
@@ -426,13 +426,20 @@ capability storage etc, will add to this.
 
 <h2 id="on-what-hardware-does-sel4-run">On what hardware does seL4 run?</h2>
 <h3 id="what-processor-architectures-are-supported">What processor architectures are supported?</h3>
-<p>Presently seL4 runs on ARMv6 (ARM11), ARMv7 (Cortex A8,
-A9, A15) and x86 cores. Supported ARM platforms for these are the
-Freescale i.MX31, OMAP3 !BeagleBoard, Exynos Arndale 5250, Odroid-X,
-Odroid-XU, Inforce IFC6410 and Freescale i.MX6 Sabre Lite. All modern
-x86 machines are supported.</p>
+<p>Presently seL4 runs on Arm v6, v7 (32-bit) and v8 (64-bit) cores, 
+on PC99 (x86) cores (32- and 64-bit mode), and RISC-V RV64 (64-bit) cores.
+See the up-to-date list of <a href="/Hardware/">supported platforms</a>.</p>
 
 <p>Talk to us if you have funds to support a port to further architectures.</p>
+
+<h3 id="which-platform-ports-are-verified">Which platform ports are verified?</h3>
+
+<p>We have presently the most comprehensive verification story (functional
+correctness to the binary, plus security proofs) for (32-bit) Arm v6 and v7
+platforms. We also have functional-correctness proofs to C code for 64-bit x86.
+Verificaton of the 64-bit RISC-V is due to complete in early 2020.</p>
+
+<p>The list of <a href="/Hardware/">supported platforms</a> shows verificaton status.</p>
 
 <h3 id="what-devices-does-sel4-support">What devices does seL4 support?</h3>
 <p>seL4, like any real microkernel,
@@ -976,7 +983,7 @@ all peer-reviewed publications. Good starting points are:</p>
 <ul>
   <li><a href="http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml">from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?</a>, 
 a 20-year retrospective of L4 microkernels;</li>
-  <li><a href="http://ssrg.nicta.com.au/publications/papers/Klein_EHACDEEKNSTW_09.abstract">the original 2009 paper</a> describing seL4 and its formal
+  <li><a href="https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract.pml">the original 2009 paper</a> describing seL4 and its formal
     verification;</li>
   <li><a href="http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml">a much longer paper detailing the complete verification story of
     seL4</a>
@@ -1030,7 +1037,7 @@ these will be delivered (or even if they will be released at all).</p>
         </li>
         
           <li>
-            Site last updated: Thu Jan 9 16:10:03 2020 +1100 3e5d6d6
+            Site last updated: Sun Jan 19 11:43:31 2020 +1100 7b9c8c7
           </li>
           <li>
             
@@ -1083,7 +1090,7 @@ these will be delivered (or even if they will be released at all).</p>
               
             
               
-                Page last updated: Thu Jan 9 16:10:03 2020 +1100 3e5d6d6
+                Page last updated: Sun Jan 19 11:43:31 2020 +1100 7b9c8c7
               
             
               
