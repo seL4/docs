@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-20 14:25:47 +1100 -->
+<!-- Page last generated 2020-01-24 17:17:43 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -299,16 +299,34 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
-</ul>
-      </nav>
-    
     <div class="content">
       <h1 id="hifive-unleashed">HiFive Unleashed</h1>
 
 <p>Using the U-Boot bootloader.</p>
+
+<h2 id="build-the-gcc-toolchain">Build the GCC toolchain</h2>
+
+<ol>
+  <li>
+    <p>Build the 64-bit toolchain, this will take an hour or two.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
+ sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
+ ./build.sh
+</code></pre></div>    </div>
+
+    <p>If you are using a recent distribution like Ubuntu 18.04 you may need to disable -Wall (turn compiler warning into errors) in riscv-openocd and riscv-isa-sim.</p>
+
+    <p>After it is built, add the $RISCV/bin folder to your path.</p>
+  </li>
+  <li>
+    <p>(Optional) Build the 32-bit toolchain, this will also take an hour or two.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
+ ./build-rv32ima.sh
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <h2 id="building-sel4test">Building seL4test</h2>
 
@@ -357,7 +375,7 @@ ninja
         </li>
         
           <li>
-            Site last updated: Sun Jan 19 11:43:31 2020 +1100 7b9c8c7
+            Site last updated: Fri Jan 24 13:53:48 2020 +1100 a421dc3
           </li>
           <li>
             
@@ -462,7 +480,11 @@ ninja
               
             
               
-                Page last updated: Tue Sep 17 14:50:21 2019 +1000 a487bf6
+                Page last updated: Fri Jan 24 13:53:48 2020 +1100 d6ec36b
+              
+            
+              
+            
               
             
               

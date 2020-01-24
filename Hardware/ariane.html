@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Using Docker for seL4, Camkes, and L4v dependency management | seL4 docs</title>
+    <title>Ariane | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,9 +67,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Using Docker for seL4, Camkes, and L4v dependency management</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">Ariane</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -289,107 +300,48 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="using-docker-for-sel4-camkes-and-l4v-dependency-management">Using Docker for seL4, Camkes, and L4v dependency management</h1>
+      <h1 id="ariane">Ariane</h1>
 
-<p>This page provides instructions on how to quickly set up your machine for building the seL4 kernel and related projects.</p>
+<h2 id="build-the-gcc-toolchain">Build the GCC toolchain</h2>
 
-<h2 id="requirements">Requirements:</h2>
+<ol>
+  <li>
+    <p>Build the 64-bit toolchain, this will take an hour or two.</p>
 
-<p>These instructions assume you are using Debian (or a derivative, such as Ubuntu), and are using Bash for your shell. However, it should be informative enough for users of other distros/shells to adapt.</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
+ sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
+ ./build.sh
+</code></pre></div>    </div>
 
-<p>To begin, you will need at least these two programs:</p>
+    <p>If you are using a recent distribution like Ubuntu 18.04 you may need to disable -Wall (turn compiler warning into errors) in riscv-openocd and riscv-isa-sim.</p>
 
-<ul>
-  <li>make (<code class="highlighter-rouge">sudo apt install make</code>)</li>
-  <li>docker (See <a href="https://get.docker.com">here</a> or <a href="https://docs.docker.com/engine/installation">here</a> for installation instructions)</li>
-</ul>
+    <p>After it is built, add the $RISCV/bin folder to your path.</p>
+  </li>
+  <li>
+    <p>(Optional) Build the 32-bit toolchain, this will also take an hour or two.</p>
 
-<p>For convenience, add your account to the docker group:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
+ ./build-rv32ima.sh
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="k">$(</span>whoami<span class="k">)</span>
+<h2 id="building-sel4test">Building seL4test</h2>
+
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+mkdir cbuild
+<span class="nb">cd </span>cbuild
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ariane <span class="nt">-DRISCV64</span>
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
+
 </code></pre></div></div>
 
-<h2 id="getting-a-build-environment">Getting a build environment</h2>
-
-<p>To get a running build environment for seL4 and Camkes, run:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles.git
-<span class="nb">cd </span>seL4-CAmkES-L4v-dockerfiles
-make user
-</code></pre></div></div>
-
-<p>This will give you a terminal inside a container that has all the relevant tools to build, simulate, and test seL4 &amp; Camkes programs.</p>
-
-<p>The first time you run this, docker will fetch the relevant images, which may take a while.</p>
-
-<p>To map a particular directory into the container:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make user <span class="nv">HOST_DIR</span><span class="o">=</span>/scratch/seL4_stuff  <span class="c"># as an example</span>
-<span class="c"># Now /host in the container maps to /scratch/seL4_stuff</span>
-</code></pre></div></div>
-
-<p>To make this easier to type, you can setup a bash alias such as this:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">$'alias container=</span><span class="se">\'</span><span class="s1">make -C /&lt;path&gt;/&lt;to&gt;/seL4-CAmkES-L4v-dockerfiles user HOST_DIR=$(pwd)</span><span class="se">\'</span><span class="s1">'</span> <span class="o">&gt;&gt;</span> ~/.bashrc
-<span class="c"># now open a new terminal, or run `source ~/.bashrc`</span>
-</code></pre></div></div>
-
-<p>Replace <code class="highlighter-rouge">/&lt;path&gt;/&lt;to&gt;/</code> to match where you cloned the git repo of the docker files. This then allows you to run:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container
-</code></pre></div></div>
-
-<p>to start the container in the current directory you are in.</p>
-
-<h2 id="an-example-workflow">An example workflow:</h2>
-<p>A good workflow is to run two terminals:</p>
-
-<ul>
-  <li>terminal A is just a normal terminal, and is used for git operations, editing (e.g., vim, emacs), and other normal operations.</li>
-  <li>terminal B is running in a container, and is only used for compilation.</li>
-</ul>
-
-<p>This gives you the flexibility to use all the normal tools you are used to, while having the seL4 dependencies separated from your machine.</p>
-
-<h3 id="compiling-sel4-test">Compiling seL4 test</h3>
-
-<p>Start two terminals (terminal A and terminal B).</p>
-
-<p>In terminal A, run these commands:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jblogs@host:~<span class="nv">$ </span>mkdir ~/seL4test
-jblogs@host:~<span class="nv">$ </span><span class="nb">cd</span> ~/seL4test
-jblogs@host:~/seL4test<span class="nv">$ </span>repo init <span class="nt">-u</span> https://github.com/seL4/seL4test-manifest.git
-jblogs@host:~/seL4test<span class="nv">$ </span>repo sync
-</code></pre></div></div>
-
-<p>In terminal B, run these commands:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jblogs@host:~<span class="nv">$ </span><span class="nb">cd</span> ~/seL4test
-jblogs@host:~/seL4test<span class="nv">$ </span>container  <span class="c"># using the bash alias defined above</span>
-jblogs@in-container:/host<span class="nv">$ </span>mkdir build-x86
-jblogs@in-container:/host<span class="nv">$ </span><span class="nb">cd </span>build-x86
-jblogs@in-container:/host/build-x86<span class="nv">$ </span>../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>x86_64 <span class="nt">-DSIMULATION</span><span class="o">=</span>TRUE 
-jblogs@in-container:/host/build-x86<span class="nv">$ </span>ninja
-</code></pre></div></div>
-
-<p>If you need to make any code modifications or commit things to git, use terminal A. If you need to recompile or simulate an image, use terminal B.</p>
-
-<h2 id="adding-dependencies">Adding dependencies</h2>
-<p>To add more software inside the container, modify the <code class="highlighter-rouge">extras.dockerfile</code>. It contains an <code class="highlighter-rouge">apt-get</code> command which can be added to. After the first modification, docker will rebuild the extras image, and cache it after that.</p>
-
-<h2 id="available-images">Available images</h2>
-
-<p>All the prebuilt docker images are available on <a href="https://hub.docker.com/u/trustworthysystems">DockerHub here</a>
-These images are used by the Trustworthy Systems Continuous Integration (CI) software, and so represent a standard software setup we use.</p>
-
-<p>The CI software always uses the <code class="highlighter-rouge">latest</code> docker image, but images are also tagged with the date they were built.</p>
-
-<h2 id="more-information">More information</h2>
-
-<p>You can find the dockerfiles and supporting Makefile <a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles">here</a></p>
-
-<p>Pull-requests and issues are <a href="https://docs.sel4.systems/Contributing">welcome</a>.</p>
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
 
     </div>
@@ -468,8 +420,6 @@ These images are used by the Trustworthy Systems Continuous Integration (CI) sof
               
             
               
-                Page last updated: Wed Jul 11 11:41:23 2018 +1000 a79e45c
-              
             
               
             
@@ -523,6 +473,8 @@ These images are used by the Trustworthy Systems Continuous Integration (CI) sof
             
               
             
+              
+                Page last updated: Fri Jan 24 13:53:48 2020 +1100 d6ec36b
               
             
               
@@ -736,9 +688,9 @@ These images are used by the Trustworthy Systems Continuous Integration (CI) sof
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Docker.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/ariane.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Docker.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/ariane.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
