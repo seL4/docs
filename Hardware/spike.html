@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-24 17:17:43 +1100 -->
+<!-- Page last generated 2020-01-24 18:05:32 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -326,41 +326,6 @@
   </li>
 </ol>
 
-<h2 id="build-the-qemu-simulator">Build the QEMU simulator</h2>
-
-<ol>
-  <li>
-    <p>Set up a directory for the RISC-V tools, and the RISCV environment variable, which we refer to in
-future steps.</p>
-
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir riscv
- <span class="nb">cd </span>riscv
- <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span><span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Get the RISC-V tools</p>
-
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span>
- git clone https://github.com/riscv/riscv-tools.git
- <span class="nb">cd </span>riscv-tools
- git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Get RISC-V qemu sources, and build them:</p>
-
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
- git clone https://github.com/heshamelmatary/riscv-qemu.git
- <span class="nb">cd </span>riscv-qemu
- git checkout sfence
- git submodule update <span class="nt">--init</span> dtc
- ./configure <span class="nt">--target-list</span><span class="o">=</span>riscv64-softmmu,riscv32-softmmu <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span>
- make <span class="nt">-j8</span> <span class="o">&amp;&amp;</span> make install
-</code></pre></div>    </div>
-  </li>
-</ol>
-
 <h2 id="building-sel4test">Building seL4test</h2>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
@@ -416,7 +381,7 @@ the <code class="highlighter-rouge">-DRISCV64=TRUE</code> option with <code clas
         </li>
         
           <li>
-            Site last updated: Fri Jan 24 13:53:48 2020 +1100 a421dc3
+            Site last updated: Fri Jan 24 17:18:19 2020 +1100 450e993
           </li>
           <li>
             
