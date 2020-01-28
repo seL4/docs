@@ -16,6 +16,23 @@ Maintained: "Data61"
 
 {% include risc-v.md %}
 
+## Getting the Simulator
+You can use either [RISC-V ISA
+Simulator](https://github.com/riscv/riscv-isa-sim) or QEMU >= v4.2 shipped with
+your Linux distribution.
+
+If you prefer to build qemu from source, make sure you have the correct target
+enabled.
+
+```sh
+git clone https://git.qemu.org/git/qemu.git
+cd qemu
+mkdir build
+cd build
+../configure --prefix=/opt/riscv --target-list=riscv64-softmmu,riscv32-softmmu
+make
+```
+
 ## Building seL4test
 
 {% include sel4test.md %}
