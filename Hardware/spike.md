@@ -3,7 +3,7 @@ riscv_hardware: true
 cmake_plat: spike
 xcompiler_arg: -DRISCV64
 platform: Spike
-arch: RISC-V
+arch: RV32GC, RV64IMAFDC
 virtualization: "No"
 iommu: "No"
 simulation_target: true

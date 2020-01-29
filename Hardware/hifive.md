@@ -3,15 +3,15 @@ riscv_hardware: true
 cmake_plat: hifive
 xcompiler_arg: -DRISCV64
 platform: HiFive Unleashed
-arch: RISC-V, RISCV64
+arch: RV64IMAC, RV64GC
 virtualization: "No"
 iommu: "No"
 simulation_target: false
 Status: "Unverified"
 Contrib: "Data61"
 Maintained: "Data61"
-soc: SiFive Freedom U540 SoC
-cpu:  U54-MC
+soc: Freedom U540
+cpu:  U54-MC, E51
 ---
 
 # HiFive Unleashed
