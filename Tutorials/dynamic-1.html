@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-24 18:05:32 +1100 -->
+<!-- Page last generated 2020-01-29 15:38:27 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -308,6 +308,7 @@
 <ul>
 <li class="toc-entry toc-h3"><a href="#obtain-bootinfo">Obtain BootInfo</a></li>
 <li class="toc-entry toc-h3"><a href="#initialise-simple">Initialise simple</a></li>
+<li class="toc-entry toc-h3"><a href="#use-simple-to-print-bootinfo">Use simple to print BootInfo</a></li>
 <li class="toc-entry toc-h3"><a href="#initialise-an-allocator">Initialise an allocator</a></li>
 <li class="toc-entry toc-h3"><a href="#obtain-a-generic-allocation-interface-vka">Obtain a generic allocation interface (vka)</a></li>
 <li class="toc-entry toc-h3"><a href="#find-the-cspace-root-cap">Find the CSpace root cap</a></li>
@@ -319,7 +320,7 @@
 <li class="toc-entry toc-h3"><a href="#set-the-stack-pointer">Set the stack pointer</a></li>
 <li class="toc-entry toc-h3"><a href="#write-the-registers">Write the registers</a></li>
 <li class="toc-entry toc-h3"><a href="#start-the-new-thread">Start the new thread</a></li>
-<li class="toc-entry toc-h3"><a href="#task-15">TASK 15</a></li>
+<li class="toc-entry toc-h3"><a href="#print-something">Print something</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#links-to-source">Links to source</a></li>
@@ -432,29 +433,29 @@ It also sets up the IPC buffer so that it can perform some syscalls such as <cod
 You need to initialize it with some default state before using it.</p>
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h">https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h</a>
-```c</li>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="cm">/* TASK 2: initialise simple object */</span>
+ <span class="cm">/* hint: simple_default_init_bootinfo()
+  * void simple_default_init_bootinfo(simple_t *simple, seL4_BootInfo *bi);
+  * @param simple Structure for the simple interface object. This gets initialised.
+  * @param bi Pointer to the bootinfo describing what resources are available
+  */</span>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<p>/* TASK 2:  <em>/
-   /</em> hint: simple_default_init_bootinfo()
-    * void simple_default_init_bootinfo(simple_t *simple, seL4_BootInfo *bi);
-    * @param simple Structure for the simple interface object. This gets initialised.
-    * @param bi Pointer to the bootinfo describing what resources are available
-    */</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-On successful completion this task, the output should not change.
+<p>On successful completion of this task, the output should not change.</p>
 
-### Use simple to print BootInfo
+<h3 id="use-simple-to-print-bootinfo">Use simple to print BootInfo</h3>
 
-Use a `simple` function to print-out the contents of seL4_BootInfo function.
+<p>Use a <code class="highlighter-rouge">simple</code> function to print out the contents of the <code class="highlighter-rouge">seL4_BootInfo</code> function.</p>
 
-```c
-
-    /* TASK 3: print out bootinfo and other info about simple */
-    /* hint: simple_print()
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 3: print out bootinfo and other info about simple */</span>
+    <span class="cm">/* hint: simple_print()
      * void simple_print(simple_t *simple);
      * @param simple Pointer to simple interface.
-     */
+     */</span>
 </code></pre></div></div>
 
 <ul>
@@ -479,7 +480,7 @@ dynamic-1: main@main.c:126 [Cond failed: allocman == NULL]
 <h3 id="initialise-an-allocator">Initialise an allocator</h3>
 
 <p>In seL4, memory management is delegated in large part to userspace, and
-each process manages its own page faults with a custom pager. Without
+each thread manages its own page faults with a custom pager. Without
 the use of the <code class="highlighter-rouge">allocman</code> library and the <code class="highlighter-rouge">VKA</code> library, you would have to
 manually allocate a frame, then map the frame into a page-table, before
 you could use new memory in your address space. In this tutorial you
@@ -757,7 +758,7 @@ policy.</p>
 </ul>
 
 <p>On successful completion this task, the output should not change.</p>
-<h3 id="task-15">TASK 15</h3>
+<h3 id="print-something">Print something</h3>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 15: print something */</span>
     <span class="cm">/* hint: printf() */</span>
@@ -826,9 +827,11 @@ kernel successfully, we cause it to print something to the screen.</p>
         </li>
         
           <li>
-            Site last updated: Fri Jan 24 17:18:19 2020 +1100 450e993
+            Site last updated: Wed Jan 29 15:31:29 2020 +1100 5a1b68d
           </li>
           <li>
+            
+              
             
               
             

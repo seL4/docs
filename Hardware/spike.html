@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-24 18:05:32 +1100 -->
+<!-- Page last generated 2020-01-29 15:38:27 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -306,25 +306,39 @@
 
 <ol>
   <li>
-    <p>Build the 64-bit toolchain, this will take an hour or two.</p>
+    <p>It is recommended to build the toolchain from source.</p>
 
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
- sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
- ./build.sh
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://github.com/riscv/riscv-gnu-toolchain.git
+ <span class="nb">cd </span>riscv-gnu-toolchain
+ git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span>
+ <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span>/opt/riscv
+ ./configure <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span> <span class="nt">--enable-multilib</span>
+ make linux
 </code></pre></div>    </div>
 
-    <p>If you are using a recent distribution like Ubuntu 18.04 you may need to disable -Wall (turn compiler warning into errors) in riscv-openocd and riscv-isa-sim.</p>
-
-    <p>After it is built, add the $RISCV/bin folder to your path.</p>
+    <p>After it is built, add the $RISCV/bin folder to your PATH. The built
+ toolchain works for both 32-bit and 64-bit.</p>
   </li>
   <li>
-    <p>(Optional) Build the 32-bit toolchain, this will also take an hour or two.</p>
-
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
- ./build-rv32ima.sh
-</code></pre></div>    </div>
+    <p>Alternatively, any pre-built toolchain with multilib enabled should work.</p>
   </li>
 </ol>
+
+<h2 id="getting-the-simulator">Getting the Simulator</h2>
+<p>You can use either <a href="https://github.com/riscv/riscv-isa-sim">RISC-V ISA
+Simulator</a> or QEMU &gt;= v4.2 shipped with
+your Linux distribution.</p>
+
+<p>If you prefer to build qemu from source, make sure you have the correct target
+enabled.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://git.qemu.org/git/qemu.git
+<span class="nb">cd </span>qemu
+mkdir build
+<span class="nb">cd </span>build
+../configure <span class="nt">--prefix</span><span class="o">=</span>/opt/riscv <span class="nt">--target-list</span><span class="o">=</span>riscv64-softmmu,riscv32-softmmu
+make
+</code></pre></div></div>
 
 <h2 id="building-sel4test">Building seL4test</h2>
 
@@ -381,7 +395,7 @@ the <code class="highlighter-rouge">-DRISCV64=TRUE</code> option with <code clas
         </li>
         
           <li>
-            Site last updated: Fri Jan 24 17:18:19 2020 +1100 450e993
+            Site last updated: Wed Jan 29 15:31:29 2020 +1100 5a1b68d
           </li>
           <li>
             
@@ -502,7 +516,9 @@ the <code class="highlighter-rouge">-DRISCV64=TRUE</code> option with <code clas
               
             
               
-                Page last updated: Fri Jan 24 13:53:48 2020 +1100 d6ec36b
+            
+              
+                Page last updated: Wed Jan 29 15:31:29 2020 +1100 5a1b68d
               
             
               

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 Docs | seL4 docs</title>
+    <title>Rocketchip FPGA mapped to Zynq ZC706 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -56,9 +56,31 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 Docs</span>
-            <meta property="position" content="1" /></li>
+            <span property="name">Rocketchip FPGA mapped to Zynq ZC706</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -278,91 +300,52 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="sel4-docs">seL4 Docs</h1>
-<p>This documentation site is for cooperatively developing and sharing documentation on <a href="http://sel4.systems">seL4</a>.
-It replaces the old wiki.sel4.systems site.  The layout is different from the old wiki, so use the search bar 
-to find pages that have moved if it’s not obvious whre they are from the index here.</p>
+      <h1 id="rocketchip-fpga-mapped-to-zynq-zc706">Rocketchip FPGA mapped to Zynq ZC706</h1>
 
-<h2 id="sel4-basics">seL4 Basics</h2>
+<p>The current rocketchip implementation only tested on ZC706 FPGA, it should work
+for other Zynq FPGAs. Refer to
+<a href="https://github.com/ucb-bar/fpga-zynq">https://github.com/ucb-bar/fpga-zynq</a> for
+details.</p>
 
-<ul>
-  <li><a href="/GettingStarted.html">Getting started</a></li>
-  <li><a href="Tutorials">Tutorials</a></li>
-  <li><a href="/Documentation.html">Documentation</a></li>
-  <li><a href="/SeL4Libraries.html">seL4 libraries</a></li>
-  <li><a href="CAmkES">CAmkES</a></li>
-  <li><a href="/CapDL.html">CapDL</a></li>
-  <li><a href="/seL4Test.html">seL4Test</a></li>
-  <li><a href="/DebuggingGuide.html">Debugging guide</a></li>
-  <li><a href="/BenchmarkingGuide.html">Benchmarking guide</a></li>
-  <li><a href="VM">Virtualisation on seL4</a></li>
-  <li><a href="/Rust.html">Rust</a></li>
-  <li><a href="/HostDependencies.html">Host Build Dependencies</a></li>
-</ul>
+<h2 id="build-the-gcc-toolchain">Build the GCC toolchain</h2>
 
-<h2 id="sel4-status">seL4 Status</h2>
+<ol>
+  <li>
+    <p>It is recommended to build the toolchain from source.</p>
 
-<ul>
-  <li><a href="Status">New Features</a>: new features in development</li>
-  <li><a href="Hardware">Hardware Support</a>: information about hardware
-    platform ports</li>
-  <li>Kernel Features: information about available kernel features</li>
-  <li><a href="UserlandComponents">Userland Components and Drivers</a>: available device drivers and
-    userland components</li>
-</ul>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://github.com/riscv/riscv-gnu-toolchain.git
+ <span class="nb">cd </span>riscv-gnu-toolchain
+ git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span>
+ <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span>/opt/riscv
+ ./configure <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span> <span class="nt">--enable-multilib</span>
+ make linux
+</code></pre></div>    </div>
 
-<h2 id="questions-and-recipes">Questions and Recipes</h2>
-
-<ul>
-  <li><a href="FrequentlyAskedQuestions">FAQ</a>: editable list of FAQs</li>
-  <li>seL4 Recipes: How to do X with seL4</li>
-</ul>
-
-<h2 id="contributing">Contributing</h2>
-
-<p>We welcome community contributions to our sources and this website!</p>
-
-<ul>
-  <li><a href="DocsContributing">Contributions to this doc site</a></li>
-  <li><a href="Contributing">Source contributions</a></li>
-</ul>
-
-<h2 id="releases">Releases</h2>
-
-<ul>
-  <li><a href="ReleaseProcess">Release process</a></li>
-</ul>
-
-<h3 id="sel4">seL4</h3>
-
-<ul>
-  <li><a href="https://github.com/seL4/seL4/releases/latest">Current release</a></li>
-  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">Current manual</a></li>
-  <li><a href="sel4_release">Release notes</a></li>
-  <li><a href="/ApiDoc">API Reference</a></li>
-</ul>
-
-<h3 id="camkes">CAmkES</h3>
-
-<ul>
-  <li><a href="https://github.com/seL4/camkes-tool/releases/latest">Current release</a></li>
-  <li><a href="camkes_release">Release notes</a></li>
-</ul>
-
-<h2 id="community">Community</h2>
-
-<ul>
-  <li><a href="https://research.csiro.au/tsblog">Trustworthy Systems Blog</a></li>
-  <li>Mailing lists
-    <ul>
-      <li><a href="https://sel4.systems/lists/listinfo/announce">seL4 Announce</a></li>
-      <li><a href="https://sel4.systems/lists/listinfo/devel">seL4 Devel</a></li>
-    </ul>
+    <p>After it is built, add the $RISCV/bin folder to your PATH. The built
+ toolchain works for both 32-bit and 64-bit.</p>
   </li>
-  <li><a href="IRCChannel">IRC Channel</a></li>
-  <li><a href="/SuggestedProjects">Suggested projects</a></li>
-  <li><a href="/CommunityProjects">CommunityProjects</a></li>
-</ul>
+  <li>
+    <p>Alternatively, any pre-built toolchain with multilib enabled should work.</p>
+  </li>
+</ol>
+
+<h2 id="building-sel4test">Building seL4test</h2>
+
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo sync
+mkdir cbuild
+<span class="nb">cd </span>cbuild
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rocketchip <span class="nt">-DRISCV64</span>
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
+
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
 
     </div>
   </div>
@@ -512,7 +495,7 @@ to find pages that have moved if it’s not obvious whre they are from the index
               
             
               
-            
+                Page last updated: Wed Jan 29 15:31:29 2020 +1100 5a1b68d
               
             
               
@@ -688,7 +671,7 @@ to find pages that have moved if it’s not obvious whre they are from the index
               
             
               
-                Page last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
+            
               
             
               
@@ -710,9 +693,9 @@ to find pages that have moved if it’s not obvious whre they are from the index
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/index.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/rocketchip.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/rocketchip.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

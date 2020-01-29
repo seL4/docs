@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-01-24 18:05:32 +1100 -->
+<!-- Page last generated 2020-01-29 15:38:27 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -302,27 +302,28 @@
     <div class="content">
       <h1 id="ariane">Ariane</h1>
 
+<p>Ariane is a 6-stage RISC-V CPU. For details, refer to
+<a href="https://github.com/pulp-platform/ariane">https://github.com/pulp-platform/ariane</a></p>
+
 <h2 id="build-the-gcc-toolchain">Build the GCC toolchain</h2>
 
 <ol>
   <li>
-    <p>Build the 64-bit toolchain, this will take an hour or two.</p>
+    <p>It is recommended to build the toolchain from source.</p>
 
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
- sed <span class="nt">-i</span> <span class="s1">'s/build_project riscv-gnu-toolchain --prefix=$RISCV/build_project riscv-gnu-toolchain --prefix=$RISCV --with-arch=rv64imafdc --with-abi=lp64 --enable-multilib/g'</span> ./build.sh
- ./build.sh
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://github.com/riscv/riscv-gnu-toolchain.git
+ <span class="nb">cd </span>riscv-gnu-toolchain
+ git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span>
+ <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span>/opt/riscv
+ ./configure <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span> <span class="nt">--enable-multilib</span>
+ make linux
 </code></pre></div>    </div>
 
-    <p>If you are using a recent distribution like Ubuntu 18.04 you may need to disable -Wall (turn compiler warning into errors) in riscv-openocd and riscv-isa-sim.</p>
-
-    <p>After it is built, add the $RISCV/bin folder to your path.</p>
+    <p>After it is built, add the $RISCV/bin folder to your PATH. The built
+ toolchain works for both 32-bit and 64-bit.</p>
   </li>
   <li>
-    <p>(Optional) Build the 32-bit toolchain, this will also take an hour or two.</p>
-
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">/riscv-tools"</span>
- ./build-rv32ima.sh
-</code></pre></div>    </div>
+    <p>Alternatively, any pre-built toolchain with multilib enabled should work.</p>
   </li>
 </ol>
 
@@ -343,6 +344,26 @@ ninja
 
 <p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
+<h2 id="running-sel4test">Running seL4test</h2>
+<p>Ariane only provides support for the <a href="https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual">Genesys 2
+board</a></p>
+
+<ol>
+  <li>
+    <p>Compile the bitstream from source or download the pre-build bitstream from
+<a href="https://github.com/pulp-platform/ariane/releases">here</a>.</p>
+  </li>
+  <li>Prepare the SD card
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>sgdisk <span class="nt">--clear</span> <span class="nt">--new</span><span class="o">=</span>1:2048:67583 <span class="nt">--new</span><span class="o">=</span>2 <span class="nt">--typecode</span><span class="o">=</span>1:3000 <span class="nt">--typecode</span><span class="o">=</span>2:8300 /dev/sdX
+<span class="nb">sudo </span>dd <span class="k">if</span><span class="o">=</span>images/sel4test-driver-image-riscv-ariane <span class="nv">of</span><span class="o">=</span>/dev/sdX1
+</code></pre></div>    </div>
+    <p>Note that the “sgdisk” command above also creates a second partition for
+Linux rootfs, you could download a pre-build Linux kernel from
+<a href="https://github.com/pulp-platform/ariane-sdk/releases">here</a> to verify that
+the FPGA is working correctly.</p>
+  </li>
+  <li>Booting from the SD card and observing the output from the UART port.</li>
+</ol>
 
     </div>
   </div>
@@ -373,7 +394,7 @@ ninja
         </li>
         
           <li>
-            Site last updated: Fri Jan 24 17:18:19 2020 +1100 450e993
+            Site last updated: Wed Jan 29 15:31:29 2020 +1100 5a1b68d
           </li>
           <li>
             
@@ -474,7 +495,9 @@ ninja
               
             
               
-                Page last updated: Fri Jan 24 13:53:48 2020 +1100 d6ec36b
+                Page last updated: Wed Jan 29 15:31:29 2020 +1100 5a1b68d
+              
+            
               
             
               
