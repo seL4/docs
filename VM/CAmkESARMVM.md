@@ -1,5 +1,5 @@
 # CAmkES ARM VMM
- This page describes the ARM virtual machine monitor. 'Out-of-the-box' it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the ''original'' XU, not the current XU4)
+ This page describes the ARM virtual machine monitor. By default it's configured for Jetson TX1, other supported platforms are Jetson TX2, Jetson TK1, Exynos5-based boards (Ordroid-XU, Odroid-XU3, Odroid-XU4) and Qemu.
 
 ## Getting and Building
 ```bash
@@ -7,17 +7,17 @@ repo init -u https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
 repo sync
 mkdir build
 cd build
-../init-build.sh -DAARCH32=TRUE -DCAMKES_VM_APP=tk1_vm
+../init-build.sh -DAARCH32=TRUE -DCAMKES_VM_APP=vm_minimal -DPLATFORM=tk1
 ninja
 ```
 
-To build for the odroid-XU instead of the tk1, use `-DCAMKES_VM_APP=odroid_vm`.
+See `projects/vm/apps` for other supported virtual machine manager apps.
 
-An ELF file will be left in `images/capdl-loader-experimental-image-arm-tk1\` We normally boot using TFTP, by first copying `capdl-loader-experimental-image-arm-tk1` to a tftpserver then on the U-Boot serial console doing:
+An EFI application file will be left in `images/capdl-loader-image-arm-tk1` We normally boot using TFTP, by first copying `capdl-loader-image-arm-tk1` to a tftpserver then on the U-Boot serial console doing:
 ```bash
 dhcp tftpboot $loadaddr
-/capdl-loader-experimental-image-arm-tk1
-bootelf
+/capdl-loader-image-arm-tk1
+bootefi ${loadaddr}
 ```
 
 ## Notes
