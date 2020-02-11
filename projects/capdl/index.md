@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /CapDL
 ---
 
 # CapDL

@@ -11,7 +11,7 @@ to find pages that have moved if it's not obvious whre they are from the index h
 - [Documentation](Documentation.md)
 - [seL4 libraries](SeL4Libraries.md)
 - [CAmkES](CAmkES)
-- [CapDL](CapDL.md)
+- [CapDL](CapDL)
 - [seL4Test](seL4Test.md)
 - [Debugging guide](DebuggingGuide.md)
 - [Benchmarking guide](BenchmarkingGuide.md)
