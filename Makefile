@@ -36,26 +36,25 @@ generate_data_files: _data/generated.yml
 
 # Adding a git URL here and appending the directory name to REPOSITORY_LIST will
 # add a rule for checking out the repository under _repos/$(REPO_NAME)
-sel4_URL=https://github.com/seL4/seL4.git
-sel4-tutorials_URL=https://github.com/sel4proj/sel4-tutorials.git
-capdl_URL=https://github.com/sel4/capdl.git
+GIT_REPOS:=$(shell (cd _data/projects && for i in `ls`; do cat $$i | ../../tools/get_repos.py ; done) | sort -u)
 REPOSITORY_LIST = sel4 sel4-tutorials capdl
-REPOSITORIES = $(REPOSITORY_LIST:%=_repos/%)
+REPOSITORIES = $(GIT_REPOS:%=_repos/%)
 
 $(REPOSITORIES):
-	git clone $($(subst _repos/,,$@)_URL) $@
+	mkdir -p $@
+	git clone --depth=1 https://github.com/$(@:_repos/%=%) $@
 
 _repos/tutes:
 	mkdir -p $@
 
-_repos/tutes/%.md: _repos/sel4-tutorials/tutorials/% _repos/tutes
-	PYTHONPATH=_repos/capdl/python-capdl-tool _repos/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
+_repos/tutes/%.md: _repos/sel4proj/sel4-tutorials/tutorials/% _repos/tutes
+	PYTHONPATH=_repos/sel4/capdl/python-capdl-tool _repos/sel4proj/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
 
 TUTORIALS:= $(filter-out index.md,$(notdir $(wildcard Tutorials/*.md)))
 tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
 _generate_api_pages: $(REPOSITORIES)
-	$(MAKE) markdown -C _repos/sel4/manual
+	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
 generate_api: _generate_api_pages
 
