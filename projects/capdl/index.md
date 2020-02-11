@@ -56,7 +56,7 @@ caps {
 }
 ```
 
-## CapDL Translator (capDL-tool)
+## CapDL Translator (capDL-tool) [[Readme](translator)]
 
 
 This program transforms a CapDL spec into several formats:
@@ -68,7 +68,7 @@ This program transforms a CapDL spec into several formats:
 - an isabelle model for use in proofs about the system described
         by the spec
 
-## CapDL Loader (capdl-loader-app)
+## CapDL Loader (capdl-loader-app) [[Readme](c-loader-app)]
 
 
 The CapDL Loader is a program that initializes the seL4 user-level
@@ -84,7 +84,7 @@ the spec (if enough resources are available), and then loads programs
 into memory at locations specified by the spec. Finally, it starts all
 the threads it created and sleeps forever.
 
-## Python CapDL Library (python-capdl-tool)
+## Python CapDL Library (python-capdl-tool) [[Readme](python-tool)]
 
 
 This library allows one to build up an in-memory database storing the
