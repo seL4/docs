@@ -93,3 +93,13 @@ specs to be generated programmatically, and allows the programmer to
 incrementally add information about kernel objects and capability
 distribution. This library is used by [CAmkES](/CAmkES/) to build up a spec
 describing the entire system (all components and connections).
+
+## CMake libsel4 object size yaml generation target [[Readme](object-sizes)]
+
+This is a CMake target that generates a yaml file containing seL4 object-size
+and other constant definitions that have been extracted from the libsel4
+preprocessor macro definitions.
+
+## CapDL util scripts [[Readme](cdl-utils)]
+
+A collection of standalone scripts for using capDL in build scripts.
