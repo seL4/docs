@@ -10,6 +10,8 @@ simulation_target: true
 Status: "Unverified"
 Contrib: "Data61, [Hesham Almatary](https://github.com/heshamelmatary)"
 Maintained: "Data61"
+redirect_from:
+  - /Hardware/RISCV
 ---
 
 # Spike
