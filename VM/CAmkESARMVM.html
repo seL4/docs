@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-11 15:48:49 +1100 -->
+<!-- Page last generated 2020-02-11 17:34:03 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -301,23 +301,23 @@
     
     <div class="content">
       <h1 id="camkes-arm-vmm">CAmkES ARM VMM</h1>
-<p>This page describes the ARM virtual machine monitor. ‘Out-of-the-box’ it is set up for a Jetson TK1; there is also a configuration for an Odroid XU (note this is the ‘‘original’’ XU, not the current XU4)</p>
+<p>This page describes the ARM virtual machine monitor. By default it’s configured for Jetson TX1, other supported platforms are Jetson TX2, Jetson TK1, Exynos5-based boards (Ordroid-XU, Odroid-XU3, Odroid-XU4) and Qemu.</p>
 
 <h2 id="getting-and-building">Getting and Building</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
 repo sync
 mkdir build
 <span class="nb">cd </span>build
-../init-build.sh <span class="nt">-DAARCH32</span><span class="o">=</span>TRUE <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>tk1_vm
+../init-build.sh <span class="nt">-DAARCH32</span><span class="o">=</span>TRUE <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>vm_minimal <span class="nt">-DPLATFORM</span><span class="o">=</span>tk1
 ninja
 </code></pre></div></div>
 
-<p>To build for the odroid-XU instead of the tk1, use <code class="highlighter-rouge">-DCAMKES_VM_APP=odroid_vm</code>.</p>
+<p>See <code class="highlighter-rouge">projects/vm/apps</code> for other supported virtual machine manager apps.</p>
 
-<p>An ELF file will be left in <code class="highlighter-rouge">images/capdl-loader-experimental-image-arm-tk1\</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-experimental-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
+<p>An EFI application file will be left in <code class="highlighter-rouge">images/capdl-loader-image-arm-tk1</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp tftpboot <span class="nv">$loadaddr</span>
-/capdl-loader-experimental-image-arm-tk1
-bootelf
+/capdl-loader-image-arm-tk1
+bootefi <span class="k">${</span><span class="nv">loadaddr</span><span class="k">}</span>
 </code></pre></div></div>
 
 <h2 id="notes">Notes</h2>
@@ -353,10 +353,10 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
         </li>
         
           <li>
-            Site last updated: Tue Feb 11 15:44:43 2020 +1100 52ea536
+            Site last updated: Tue Feb 11 16:33:02 2020 +1000 fdaedda
           </li>
           <li>
-                Page last updated: Tue Nov 6 10:47:30 2018 +1100 7985b5e
+                Page last updated: Tue Feb 11 16:33:02 2020 +1000 fdaedda
           </li>
         
       </ul>
