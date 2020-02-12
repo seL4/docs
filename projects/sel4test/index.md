@@ -1,6 +1,9 @@
 ---
 toc: true
+redirect_from:
+  - /seL4Test
 ---
+
 # seL4Test
 
 [sel4test](https://github.com/seL4/sel4test-manifest) is a test suite for seL4.
