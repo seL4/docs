@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /VM/CAmkESVMCentOS
+---
+
 # Boot CentOS on the CAmkES VM
 
 

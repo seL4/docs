@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /VM/CAmkESX86VM
 ---
 
 # CAmkES x86 VM

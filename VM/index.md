@@ -3,6 +3,6 @@
 Multiple projects exist for using virtualisation with seL4.
 
 * [ARM virtualisation](/projects/camkes-arm-vm)
-* [x86 virtualisation](CAmkESX86VM)
-* [CentOS](CAmkESVMCentOS)
+* [x86 virtualisation](/projects/camkes-vm)
+* [CentOS](/projects/camkes-vm/centos)
 
