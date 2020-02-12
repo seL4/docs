@@ -1,3 +1,10 @@
+---
+redirect_from:
+  - /LevelConverter
+---
+
+# Level Converter
+
 Most of our gadgets have serial ports that work at 1V8 or 3V3
 single-ended; our serial concentrator expects true RS422 or RS232, at
 ±12 to ±25V. So we need to provide a level converter/driver to convert

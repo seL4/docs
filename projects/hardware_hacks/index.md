@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /HardwareHacks
+---
+
 # Hardware Hacks
 We have built various bits and pieces to enable easier use of our
 hardware. Some of these are documented here in case others might find
@@ -12,7 +17,7 @@ The general approach we take is:
 
 1.  As far as possible, boot everything on power-up via DHCP and
     TFTP
-2.  Connect a debug serial port via a [LevelConverter](LevelConverter) to a Lantronix
+2.  Connect a debug serial port via a [Level Converter](level-converter) to a Lantronix
     serial concentrator. An ETS16P for example provides 16
     RS422/RS232 ports, and can be obtained for less than $100
     on eBay.
@@ -31,4 +36,4 @@ A few machines already have a base-management-controller; if they have
 it we use it.
 
 One machine, the CMA34D, needed some extras; they are documented on
-[CMA34DBMC](CMA34DBMC).
+[CMA34DBMC](/CMA34DBMC).
