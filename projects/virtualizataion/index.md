@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /VM/
+---
+
 # Virtualisation on seL4
 
 Multiple projects exist for using virtualisation with seL4.
