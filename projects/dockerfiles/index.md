@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /Docker
+---
+
 # Using Docker for seL4, Camkes, and L4v dependency management
 
 This page provides instructions on how to quickly set up your machine for building the seL4 kernel and related projects.
