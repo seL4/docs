@@ -26,6 +26,13 @@ Use the following tutorials to learn about the VM:
 {%- endif %}
 {%- endfor %}
 
+
+## Examples
+
+- [Centos](centos)
+- [zmq_samples](zmq-samples)
+
+
 ## Booting from hard drive
 
 

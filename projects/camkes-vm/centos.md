@@ -1,12 +1,9 @@
 ---
+toc: true
 redirect_from:
   - /VM/CAmkESVMCentOS
 ---
 
 # Boot CentOS on the CAmkES VM
 
-
-See the
-[README.md](https://github.com/seL4/camkes-vm-examples/tree/master/cma34cr_centos)
-in the [CAmkES VM Examples
-repository](https://github.com/seL4/camkes-vm-examples) for details
+{% include include_github_repo_markdown.md repo='sel4/camkes-vm-examples' file='cma34cr_centos/README.md' indent_headings=true %}
