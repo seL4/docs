@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /Developing/Building/Incorporating
+---
+
 # Incorporating into your project
 
 <!--excerpt-->

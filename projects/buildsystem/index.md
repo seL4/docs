@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /Developing/Building/
+---
+
 # System configuration and building
 
 seL4 and related projects use the [CMake](https://cmake.org/) family of tools to implement its build system.
@@ -38,11 +43,11 @@ This liquid templating pulls an excerpt out of the child documentation pages to 
 
 {% for page in site.pages %}
 {% case page.path %}
-  {% when "Developing/Building/seL4Standalone.md" %}
+  {% when "projects/buildsystem/standalone.md" %}
     {% assign seL4Standalone = page.content | split:'<!--excerpt-->' %}
-  {% when "Developing/Building/Using.md" %}
+  {% when "projects/buildsystem/using.md" %}
     {% assign using = page.content | split:'<!--excerpt-->' %}
-  {% when "Developing/Building/Incorporating.md" %}
+  {% when "projects/buildsystem/incorporating.md" %}
     {% assign incorporating = page.content | split:'<!--excerpt-->' %}
   {% else %}
 {% endcase %}

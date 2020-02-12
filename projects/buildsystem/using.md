@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /Developing/Building/Using
+---
+
 # Configuring and building an seL4 project
 
 <!--excerpt-->

@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /Developing/Building/OldBuildSystem
 ---
 
 # Our old deprecated Build System

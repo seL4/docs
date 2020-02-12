@@ -1,3 +1,7 @@
+---
+redirect_from:
+  - /Developing/Building/seL4Standalone
+---
 
 # Stand-alone seL4 builds
 
