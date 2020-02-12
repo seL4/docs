@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /VM/CAmkESARMVM
+---
+
 # CAmkES ARM VMM
  This page describes the ARM virtual machine monitor. By default it's configured for Jetson TX1, other supported platforms are Jetson TX2, Jetson TK1, Exynos5-based boards (Ordroid-XU, Odroid-XU3, Odroid-XU4) and Qemu.
 
