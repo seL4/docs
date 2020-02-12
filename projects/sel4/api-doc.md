@@ -1,6 +1,8 @@
 ---
 layout: api
 toc: true
+redirect_from:
+  - /ApiDoc
 ---
 
 # API Reference

@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /seL4ManualAPIGeneration
 ---
 
 # seL4 Manual API Generation

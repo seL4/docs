@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /FrequentlyAskedQuestions
 ---
 
 # Frequently Asked Questions on seL4
@@ -597,7 +599,7 @@ libraries are mostly under BSD. See the
 
 ## How do I contribute to seL4?
  See
-[How to Contribute](Contributing.md). In brief, seL4 was released under a complicated
+[How to Contribute](/Contributing). In brief, seL4 was released under a complicated
 agreement between the partners who owned the code. A condition of the
 release is that we track all contributions, and get a signed licence
 agreement from all contributors.
@@ -621,7 +623,7 @@ There are two recommended ways to do this.
       processes, but is generally more low-level.
 
 For build instructions, and how to get started, see the
-[Getting started](GettingStarted) page.
+[Getting started](/GettingStarted) page.
 Also, UNSW's [Advanced Operating Systems course](http://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
 builds an OS on top of seL4. If you have access to an [Odroid-C2](https://www.hardkernel.com/shop/odroid-c2/),
 you should be able to do the project work yourself as a way of

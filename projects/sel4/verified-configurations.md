@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /VerifiedConfigurations
 ---
 
 # Verified Configurations
@@ -19,7 +21,7 @@ These configurations are also referred to as *verification platforms*,
 currently constituting: ARM, ARM\_HYP, X64, RISCV64, ARM\_MCS
 
 Please consult [Frequently Asked
-Questions](FrequentlyAskedQuestions), as well as the [proof and
+Questions](/FrequentlyAskedQuestions), as well as the [proof and
 assumptions page](http://sel4.systems/Info/FAQ/proof.pml) for a better
 understanding of the intersection of verification and seL4.
 
@@ -46,7 +48,7 @@ Notably ``kernel.elf`` is the kernel binary, and ``kernel_all_pp.c`` is
 the kernel source code after preprocessing, which is used as the basis
 for verification efforts.
 
-Also see [Stand-alone seL4 builds](Developing/Building/seL4Standalone)
+Also see [Stand-alone seL4 builds](/Developing/Building/seL4Standalone)
 for general guidelines on generating an seL4 binary from an existing
 configuration and what to do with a ``kernel.elf`` file.
 

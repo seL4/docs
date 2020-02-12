@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /PortingSeL4
+---
+
 # Porting seL4 to a new platform
 
 ## Setup

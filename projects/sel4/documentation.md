@@ -1,10 +1,15 @@
+---
+redirect_from:
+  - /Documentation
+---
+
 # Documentation
 ## Kernel
 
 - [Technical overview paper](http://ssrg.nicta.com.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
 - [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml), 
   a retrospective explaining how we got to where we are;
-- [Getting started](GettingStarted)
+- [Getting started](/GettingStarted)
 - [NICTA seL4
       research project pages](http://ssrg.nicta.com.au/projects/seL4/)
 - [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and
@@ -12,7 +17,7 @@
 - [Release download page](https://github.com/seL4/seL4/releases/latest) for the current release.
 - [Manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
       for the current release.
-- [Explanation of how the API docs in the manual are generated](seL4ManualAPIGeneration)
+- [Explanation of how the API docs in the manual are generated](/seL4ManualAPIGeneration)
 
 ### Building the manual for a specific version
 
