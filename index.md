@@ -6,18 +6,18 @@ to find pages that have moved if it's not obvious whre they are from the index h
 ## seL4 Basics
 
 
-- [Getting started](GettingStarted.md)
+- [Getting started](GettingStarted)
 - [Tutorials](Tutorials)
-- [Documentation](Documentation.md)
-- [seL4 libraries](SeL4Libraries.md)
+- [Documentation](Documentation)
+- [seL4 libraries](SeL4Libraries)
 - [CAmkES](CAmkES)
 - [CapDL](CapDL)
-- [seL4Test](seL4Test.md)
-- [Debugging guide](DebuggingGuide.md)
-- [Benchmarking guide](BenchmarkingGuide.md)
+- [seL4Test](seL4Test)
+- [Debugging guide](DebuggingGuide)
+- [Benchmarking guide](BenchmarkingGuide)
 - [Virtualisation on seL4](VM)
-- [Rust](Rust.md)
-- [Host Build Dependencies](HostDependencies.md)
+- [Rust](Rust)
+- [Host Build Dependencies](HostDependencies)
 
 ## seL4 Status
 
