@@ -1,3 +1,7 @@
+---
+redirect_from:
+  - /DebuggingUserspace
+---
 # Hardware debugging of userspace threads
 
 ## Overview

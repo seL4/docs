@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /DebuggingGuide
 ---
 
 # Debugging guide
