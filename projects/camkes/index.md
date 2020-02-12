@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /CAmkES/
 ---
 
 # CAmkES
@@ -57,7 +59,7 @@ To learn about developing your own CAmkES application, read the
 ## Camkes Terminology/Glossary
 
 
-Can be found [here](Terminology.md).
+Can be found [here](terminology).
 
 ## CAmkES VM
 
@@ -68,24 +70,24 @@ Information about the x86 camkes vm can be found [here](/VM/CAmkESX86VM).
 
 
 CAmkES comes with a tool for visualising the components and connections
-making up an application. For more info, see [here](/VisualCAmkES).
+making up an application. For more info, see [here](visual-camkes).
 
 ## Changes in CAmkES 3
 
 
 The current version of CAmkES introduces a number of syntactic and
 functional changes. For details about what's changed, see
-[here](/CAmkESDifferences).
+[here](differences).
 
 ## Internals
 
 
 Here's some information about the internals of the CAmkES tool:
-[CAmkESInternals](/CAmkESInternals)
+[CAmkESInternals](internals)
 
 ## Command Line Interface
 
 
 There is an experimental command line interface for managing CAmkES
-projects. Read more: [CAmkESCLI](/CAmkESCLI)
+projects. Read more: [CAmkESCLI](cli)
 

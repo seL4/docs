@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /CAmkESDifferences
 ---
 # Differences between CAmkES 2 and 3
 

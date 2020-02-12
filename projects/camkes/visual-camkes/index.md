@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /VisualCAmkES/
 ---
 
 # VisualCAmkES
@@ -25,11 +27,11 @@ cross-platform compatibility, which doesn’t require heavy, insecure Java
 virtual machine. The tool uses the CAmkES Ast and Parser API, and since
 this was written in python, this tool was also written in python.
 
-VisualCAmkES is currently on the [CAmkESNext](../CAmkESNext) branch only
+VisualCAmkES is currently on the [CAmkESNext](../next) branch only
 
 
 ## How to Install
- Follow the instructions in [CAmkESNext](../CAmkESNext) to
+ Follow the instructions in [CAmkESNext](../next) to
 obtain a copy of the CAmkES next repo. This tool should be found in
 [path/to/camkes-tool]/camkes/visualCAmkES.
 

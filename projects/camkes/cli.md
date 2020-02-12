@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /CAmkESCLI
+---
+
 # CAmkES CLI
 
 

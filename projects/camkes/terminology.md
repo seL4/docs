@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /CAmkES/Terminology
+---
+
 # Terminology
  Throughout this document some domain specific
 terminology is used that may have connotations outside CAmkES/component

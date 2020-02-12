@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /seL4SharedDataWithCaps
+---
+
 # seL4SharedDataWithCaps
 
 
