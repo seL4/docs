@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /GitConventions
 ---
 
 # Git conventions

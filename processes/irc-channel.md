@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /IRCChannel
+---
+
 # IRC Channel
 
 

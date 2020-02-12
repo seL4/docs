@@ -1,3 +1,8 @@
+---
+redirect_from:
+  - /CodeReview
+---
+
 # Pull Request Conventions
 
 This is a guide for conducting effective and efficient pull requests in our code projects and

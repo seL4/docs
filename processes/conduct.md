@@ -1,3 +1,7 @@
+---
+redirect_from:
+  - /Conduct
+---
 
 # seL4 Code of Conduct
 

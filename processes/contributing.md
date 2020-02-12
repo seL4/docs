@@ -1,18 +1,21 @@
 ---
+redirect_from:
+  - /Contributing
 ---
+
 # Contributing
 
 We welcome contributions to the seL4 project sources. For contributions to this documentation site,
-please see [our docs contribution guidelines](DocsContributing).
+please see [our docs contribution guidelines](/DocsContributing).
 
 ## Conventions
 
 Please read and abide by the following conventions when contributing:
 
-- [Style Guide](StyleGuide)
-- [Git Conventions](GitConventions)
-- [Code of Conduct](Conduct)
-- [Pull requests](CodeReview)
+- [Style Guide](/StyleGuide)
+- [Git Conventions](/GitConventions)
+- [Code of Conduct](/Conduct)
+- [Pull requests](/CodeReview)
 
 ## Large contributions
 
@@ -40,4 +43,4 @@ sel4.systems.''
 Figure 1 illustrates the contribution process. Once your pull request is approved, it will be merged
 internally and pushed out to github.
 
-See [Suggested Projects](SuggestedProjects) for suggestions on where to contribute.
+See [Suggested Projects](/SuggestedProjects) for suggestions on where to contribute.

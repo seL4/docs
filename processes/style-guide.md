@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /StyleGuide
 ---
 
 # C Coding Conventions and Style Guide

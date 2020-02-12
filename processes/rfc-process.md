@@ -2,7 +2,12 @@
 title: "The RFC Process"
 author: 
   - "Curtis Millar <curtis.millar@data61.csiro.au>"
+redirect_from:
+  - /RfcProcess
+toc: true
 ---
+
+# seL4 Request for Comments (RFC) Process
 
 We have introduced
 the request for comments (RFC) process
@@ -41,7 +46,7 @@ on each of the RFCs.
 [RFC announcement mailing list]: https://sel4.systems/lists/listinfo/rfc "RFC announcement mailing list"
 
 
-# When to follow the RFC process
+## When to follow the RFC process
 
 All substantial changes to the seL4 ecosystem
 must be made using the RFC process.
@@ -89,10 +94,10 @@ If you are unsure whether a change requires an RFC,
 ask on the [IRC channel][]
 or post a question to the [development mailing list][].
 
-# The RFC Process
+## The RFC Process
 
 
-## Before creating a new RFC
+### Before creating a new RFC
 
 Before proposing a new RFC
 it is important to determine whether it will be supported
@@ -123,7 +128,7 @@ through the rest of the RFC process.
 [development mailing list]: https://sel4.systems/lists/listinfo/devel "seL4 development mailing list"
 
 
-## Proposing an new RFC
+### Proposing an new RFC
 
 An RFC exists in the form of an RFC _issue_
 on the [RFC project][] of the seL4 [Jira][] instance.
@@ -152,7 +157,7 @@ omitting sections that are not relevant for the RFC.
 [Atlassian Cloud]: https://id.atlassian.com/ "Atlassian Cloud Login"
 
 
-### The RFC template
+#### The RFC template
 
 You should consider each section of the RFC template in depth
 before determining that it is not relevant.
@@ -252,7 +257,7 @@ h1. Unresolved questions
 ```
 
 
-## Getting an RFC approved
+### Getting an RFC approved
 
 After you propose an RFC,
 it will undergo several rounds of changes
@@ -271,7 +276,7 @@ If the discussion of an RFC has been particularly long,
 a summary comment will be made on the RFC
 before the given ruling is made.
 
-### Postponement of an RFC
+#### Postponement of an RFC
 
 When an RFC has a moderate amount of support
 and is generally accepted as a good idea
@@ -287,7 +292,7 @@ if they wish to see it approved
 and want to rally support for it.
 
 
-## Implementation of an approved RFC
+### Implementation of an approved RFC
 
 Once seL4 development team aprroves an,
 it becomes their responsibility
@@ -309,7 +314,7 @@ or extend the design to cope
 with unanticipated corner cases.
 
 
-### Deferment of an approved RFC
+#### Deferment of an approved RFC
 
 There may not be sufficient resources
 to implement an RFC when it is approved
