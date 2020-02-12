@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /seL4DriverAPI/DriverManagement
 ---
 
 # Power management commands for the seL4 Driver API

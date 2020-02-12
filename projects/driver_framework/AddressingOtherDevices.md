@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /seL4DriverAPI/AddressingOtherDevices
 ---
 
 # seL4 Driver API Persistent Device Naming Scheme

@@ -1,5 +1,7 @@
 ---
 toc: true
+redirect_from:
+  - /seL4DriverAPI/ChildEnumeration
 ---
 
 # Child enumeration model for the seL4 Driver API:
