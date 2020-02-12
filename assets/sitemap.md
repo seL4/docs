@@ -1,4 +1,6 @@
-
+---
+permalink: sitemap.html
+---
 # Sitemap
 
 
