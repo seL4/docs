@@ -1,3 +1,7 @@
+---
+redirect_from:
+  - /Rust
+---
 # Rust
 ```
 The rust support that this page talks about is no longer supported.
