@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-17 13:55:38 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incorporating into your project | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/logos/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/projects/buildsystem/">
+              <span property="name"><b>System configuration and building</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Incorporating into your project</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/VerifiedConfigurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+    <div class="content">
+      <h1 id="incorporating-into-your-project">Incorporating into your project</h1>
+
+<!--excerpt-->
+
+<p>This page describes the CMake-based build system in detail, with sufficient information for integrating it into new projects.
+There are a few different pieces that can be fit together in different ways depending on your project’s needs
+and desired customisation. This is reflected in the split of CMake files spread across several repositories.</p>
+
+<!--excerpt-->
+
+<h3 id="basic-structure">Basic structure</h3>
+
+<p>The build system is in two pieces. One piece is in the <a href="https://github.com/seL4/seL4">seL4 kernel repository</a>, which contains the
+compiler toolchain and flags settings as well as helpers for generating configurations. The other piece is in
+<a href="https://github.com/seL4/seL4_tools/tree/master/cmake-tool">seL4_tools/cmake-tool</a>,
+which contains helpers for combining libraries and binaries into a final system image (along with the kernel).</p>
+
+<p>This structure means that the kernel is completely responsible for building itself, but exports the settings
+and binaries for use by the rest of the build system.</p>
+
+<p>The <code class="highlighter-rouge">cmake-tool</code> directory has the following files of interest:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">default-CMakeLists.txt</code>: An example <code class="highlighter-rouge">CMakeLists.txt</code> file, which could be used as the <code class="highlighter-rouge">CMakeLists.txt</code> file in
+the top-level directory of a project. Simply, this file includes <code class="highlighter-rouge">all.cmake</code>, under the assumption of a directory structure
+where the <code class="highlighter-rouge">cmake-tool</code> repository is in a directory named <code class="highlighter-rouge">tools</code>. To use this file, <a href="/RepoCheatsheet">project manifests</a> are
+expected to create a symbolic link to this file, named <code class="highlighter-rouge">CMakeLists.txt</code>, at the top-level project directory.</li>
+  <li><code class="highlighter-rouge">all.cmake</code>: A wrapper that includes <code class="highlighter-rouge">base.cmake</code>, <code class="highlighter-rouge">projects.cmake</code> and
+<code class="highlighter-rouge">configuration.cmake</code>. This file can be used by projects which do not alter these three files.</li>
+  <li><code class="highlighter-rouge">base.cmake</code>: Constructs the basic build targets (<code class="highlighter-rouge">kernel</code>, <code class="highlighter-rouge">libsel4</code>, and <code class="highlighter-rouge">elfloader-tool</code>), in addition to
+basic compilation flags and helper routines, required to build an seL4 project, and can be used
+as a base for further targets in a project through the <code class="highlighter-rouge">add_subdirectory</code> routine or otherwise.</li>
+  <li><code class="highlighter-rouge">projects.cmake</code>: Adds build targets through <code class="highlighter-rouge">add_subdirectory</code> assuming a default project layout.
+Essentially it adds any <code class="highlighter-rouge">CMakeLists.txt</code> files it finds in any subdirectories of the projects directory.</li>
+  <li><code class="highlighter-rouge">configuration.cmake</code>: Provides a target for a library called <code class="highlighter-rouge">Configuration</code> that emulates the legacy
+<code class="highlighter-rouge">autoconf.h</code> header. Since the <code class="highlighter-rouge">autoconf.h</code> header contained configuration variables for the <em>entire</em> project
+this rule needs to come after all other targets and scripts which add to the configuration space.</li>
+  <li><code class="highlighter-rouge">common.cmake</code>: File included by <code class="highlighter-rouge">base.cmake</code> with some generic helper routines.</li>
+  <li><code class="highlighter-rouge">flags.cmake</code>: File included by <code class="highlighter-rouge">base.cmake</code> which sets up build flags and linker invocations.</li>
+  <li><code class="highlighter-rouge">init-build.sh</code>: A shell script which performs the initial configuration and generation for a new CMake build directory.</li>
+  <li><code class="highlighter-rouge">helpers/*</code>: Helper functions that are commonly imported by <code class="highlighter-rouge">common.cmake</code></li>
+</ul>
+
+<h3 id="kernel-directory">Kernel directory</h3>
+
+<p>The file <code class="highlighter-rouge">base.cmake</code> assumes that the seL4 kernel is in a specific location. Consider the following example:</p>
+
+<pre><code class="language-none">awesome_system/
+├── kernel/
+│   └── CMakeLists.txt
+├── projects/
+│   ├── awesome_system/
+│   │   └── CMakeLists.txt
+│   └── seL4_libs/
+│       └── CMakeLists.txt
+├── tools/
+│   └── cmake-tool/
+│       ├── base.cmake
+│       ├── all.cmake
+│       └── default-CMakeLists.txt
+├── .repo/
+└── CMakeLists.txt -&gt; tools/cmake-tool/default-CMakeLists.txt
+</code></pre>
+
+<p>When <code class="highlighter-rouge">awesome_system/</code> is used as the root source directory to initialise a CMake build directory
+and  <code class="highlighter-rouge">tools/cmake-tool/all.cmake</code> is used, <code class="highlighter-rouge">base.cmake</code> expects the kernel to be at
+<code class="highlighter-rouge">awesome_system/kernel</code>.</p>
+
+<p>The kernel can be placed in a different location, as described below.</p>
+
+<pre><code class="language-none">awesome_system/
+├── seL4/
+│   └── CMakeLists.txt
+├── projects/
+│   ├── awesome_system/
+│   │   └── CMakeLists.txt
+│   └── seL4_libs/
+│       └── CMakeLists.txt
+├── tools/
+│   └── cmake-tool/
+│       ├── base.cmake
+│       ├── all.cmake
+│       └── default-CMakeLists.txt
+├── .repo/
+└── CMakeLists.txt -&gt; tools/cmake-tool/default-CMakeLists.txt
+</code></pre>
+
+<p>For the example above, where the kernel is in a directory called <code class="highlighter-rouge">seL4</code>, the default kernel location can be overriden when invoking <code class="highlighter-rouge">cmake</code> with <code class="highlighter-rouge">-DKERNEL_PATH=seL4</code>.</p>
+
+<h3 id="advanced-structures">Advanced structures</h3>
+
+<p>Other project layouts can be used. Consider the following example:</p>
+
+<pre><code class="language-none">awesome_system/
+├── seL4/
+│   └── CMakeLists.txt
+├── awesome/
+│   └── CMakeLists.txt
+├── seL4_libs/
+│   └── CMakeLists.txt
+├── buildsystem/
+│   └── cmake-tool/
+│       ├── base.cmake
+│       ├── all.cmake
+│       └── default-CMakeLists.txt
+└── .repo/
+</code></pre>
+
+<p>The example above departs from the default in the following ways:</p>
+
+<ul>
+  <li>no <code class="highlighter-rouge">CMakeLists.txt</code> file in the root directory,</li>
+  <li><code class="highlighter-rouge">tools</code> directory has been renamed to <code class="highlighter-rouge">buildsystem</code>,</li>
+  <li><code class="highlighter-rouge">kernel</code> directory has been renamed to <code class="highlighter-rouge">seL4</code>,</li>
+  <li>and the <code class="highlighter-rouge">projects</code> directory is omitted.</li>
+</ul>
+
+<p>We now describe how to achieve such a project structure:</p>
+
+<p>To place the <code class="highlighter-rouge">CMakeLists.txt</code> in <code class="highlighter-rouge">awesome_system/awesome</code> directory then initialise CMake,
+assuming a build directory that is also in the <code class="highlighter-rouge">awesome_system</code> directory, do something like:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sel4@host:~/awesome_directory<span class="nv">$ </span>cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>toolchain-prefix <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>../seL4/gcc.cmake <span class="nt">-DKERNEL_PATH</span><span class="o">=</span>../seL4 <span class="nt">-G</span> Ninja ../awesome
+</code></pre></div></div>
+
+<p>Importantly, the path for <code class="highlighter-rouge">CMAKE_TOOLCHAIN_FILE</code> is resolved immediately by CMake, and so is
+relative to the build directory, whereas the <code class="highlighter-rouge">KERNEL_PATH</code> is resolved whilst processing <code class="highlighter-rouge">awesome_system/awesome/CMakeLists.txt</code> and is relative to that directory.</p>
+
+<p>The contents of <code class="highlighter-rouge">awesome_system/awesome/CMakeLists.txt</code> would be something like:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.7.2<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span>../buildsystem/cmake-tool/base.cmake<span class="p">)</span>
+<span class="nb">add_subdirectory</span><span class="p">(</span>../seL4_libs seL4_libs<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span>../buildsystem/cmake-tool/configuration.cmake<span class="p">)</span>
+</code></pre></div></div>
+
+<p>This looks pretty much like <code class="highlighter-rouge">all.cmake</code> except that we do not include <code class="highlighter-rouge">projects.cmake</code> as we do not have a
+projects folder. <code class="highlighter-rouge">projects.cmake</code> would be redundant to include, as it would not resolve any files.
+<code class="highlighter-rouge">all.cmake</code> cannot be included as we need to include specific subdirectories (in the example <code class="highlighter-rouge">seL4_libs</code>)
+between setting up the base flags and environment and finalising the Configuration library.
+We needed to give an explicit build directory (the second argument in <code class="highlighter-rouge">add_subdirectory</code>) as we are giving
+a directory that is not a subdirectory of the root source directory.</p>
+
+<p>For simplicity, the kernel path can be encoded directly into the projects top-level <code class="highlighter-rouge">CMakeLists.txt</code>. To
+achieve this the following line:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>KERNEL_PATH ../seL4<span class="p">)</span>
+</code></pre></div></div>
+
+<p>should be included before</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span>../buildsystem/cmake-tool/base.cmake<span class="p">)</span>
+</code></pre></div></div>
+
+<p>in <code class="highlighter-rouge">awesome_system/awesome/CMakeLists.txt</code>, thus removing the need for <code class="highlighter-rouge">-DKERNEL_PATH</code> in the <code class="highlighter-rouge">cmake</code>
+invocation.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>For compatibility with the legacy build system, various helpers and systems exist in order to
+achieve the following:</p>
+
+<ul>
+  <li>Automate configuration variables that appear in the <code class="highlighter-rouge">cmake-gui</code> with various kinds of dependencies.</li>
+  <li>Generate C-style configuration headers that declare these variables in format similar to the legacy build system.</li>
+  <li>Generate <code class="highlighter-rouge">autoconf.h</code> headers so legacy code using <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> works.</li>
+</ul>
+
+<p>The following fragment of CMake script demonstrates how these three things fit together:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>configure_string <span class="s2">""</span><span class="p">)</span>
+<span class="nf">config_option</span><span class="p">(</span>EnableAwesome HAVE_AWESOME <span class="s2">"Makes library awesome"</span> DEFAULT ON<span class="p">)</span>
+<span class="nf">add_config_library</span><span class="p">(</span>MyLibrary <span class="s2">"</span><span class="si">${</span><span class="nv">configure_string</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nf">generate_autoconf</span><span class="p">(</span>MyLibraryAutoconf <span class="s2">"MyLibrary"</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>MyLibrary PUBLIC MyLibrary_Config<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>LegacyApplication PRIVATE MyLibrary MyLibraryAutoconf<span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the above example, line by line:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">set(configure_string "")</code>: Initialise <code class="highlighter-rouge">configure_string</code> as blank, as various <code class="highlighter-rouge">config_*</code> helpers automatically append to this variable.</li>
+  <li><code class="highlighter-rouge">config_option(EnableAwesome HAVE_AWESOME "Makes library awesome" DEFAULT ON)</code>: Declare a configuration
+variable which appears in CMake scripts and the <code class="highlighter-rouge">cmake-gui</code> as <code class="highlighter-rouge">EnableAwesome</code>, while appearing in C headers as <code class="highlighter-rouge">CONFIG_HAVE_AWESOME</code>.</li>
+  <li><code class="highlighter-rouge">add_config_library(MyLibrary "${configure_string}")</code>: Generate a <code class="highlighter-rouge">MyLibrary_Config</code> target, which is an
+ <a href="https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#interface-libraries">interface library</a> that has a generated C header based on the configuration string. Also add <code class="highlighter-rouge">MyLibrary</code> to
+a global list of configuration libraries, which can be used to generate a library containing
+contains “all the configurations in the system” (<code class="highlighter-rouge">autoconf.h</code> in the legacy build system).</li>
+  <li><code class="highlighter-rouge">generate_autoconf(MyLibraryAutoconf "MyLibrary")</code>: Generates a <code class="highlighter-rouge">MyLibraryAutoconf</code> target, which is an
+ <a href="https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#interface-libraries">interface library</a> that depends upon <code class="highlighter-rouge">MyLibrary_Config</code>, and provides an <code class="highlighter-rouge">autoconf.h</code> file including the configuration
+header from <code class="highlighter-rouge">MyLibrary_Config</code>.</li>
+  <li><code class="highlighter-rouge">target_link_libraries(MyLibrary PUBLIC MyLibrary_Config)</code>: Allows <code class="highlighter-rouge">MyLibrary</code> to <code class="highlighter-rouge">#include</code> the generated
+configuration header by doing <code class="highlighter-rouge">#include &lt;MyLibrary/gen_config.h&gt;</code></li>
+  <li><code class="highlighter-rouge">target_link_libraries(LegacyApplication PRIVATE MyLibrary MyLibraryAutoconf)</code> Allows <code class="highlighter-rouge">LegacyApplication</code> to
+<code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> from <code class="highlighter-rouge">MyLibraryAutoconf</code>. The <code class="highlighter-rouge">autoconf.h</code> in this case will contain <code class="highlighter-rouge">#include &lt;MyLibrary/gen_config.h&gt;</code>.</li>
+</ul>
+
+<p>For more details of the different <code class="highlighter-rouge">config_*</code> helpers read the comments on the functions in <a href="https://github.com/seL4/seL4/blob/master/tools/helpers.cmake">kernel/tools/helpers.cmake</a>.</p>
+
+<h3 id="helper-functions">Helper functions</h3>
+
+<p>Several CMake functions exist for reuse in seL4 projects, which we now describe.</p>
+
+<h4 id="kernel-provided-helpers">Kernel provided helpers</h4>
+
+<p>All of the helper functions described in the above section are provided in <code class="highlighter-rouge">tools/helpers.cmake</code> in the seL4 repository. Other functions in this file are only useful for the kernel build itself.</p>
+
+<h4 id="cmake-tool-provided-helpers"><code class="highlighter-rouge">cmake-tool</code> provided helpers</h4>
+
+<!-- TODO once page defining root server exists, link -->
+<!-- TODO once page describing how we use CPIO exists, link -->
+
+<p>These helper functions are provided for user-level projects, in <code class="highlighter-rouge">common.cmake</code> and
+all the files in <code class="highlighter-rouge">helpers/</code>. Notable functions are:</p>
+<ul>
+  <li><code class="highlighter-rouge">DeclareRootserver(rootserver_target)</code>: Declares a CMake executable, <code class="highlighter-rouge">rootserver_target</code>, as the root server for
+the system. This can only be used once in a project and does the following:
+    <ul>
+      <li>changes build flags for the target,</li>
+      <li>creates necessary extra targets for chain loading,</li>
+      <li>creates the <code class="highlighter-rouge">rootserver_image</code> target which will create the final binary images in <code class="highlighter-rouge">images</code>.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">MakeCPIO</code>: Declares rules to create a linkable CPIO archive from a list of input files.</li>
+  <li><code class="highlighter-rouge">GenerateSimulateScript</code>: Creates a target called <code class="highlighter-rouge">simulate_gen</code> which will generate a <code class="highlighter-rouge">./simulate</code> shell script
+in the build directory for simulating the project on <a href="https://www.qemu.org/">QEMU</a> if the target platform is supported. An application is
+responsible for ensuring that the system configuration can be simulated if it uses this function. Other functions are
+provided such as <code class="highlighter-rouge">SetSimulationScriptProperty</code> to allow the application’s CMake scripts to customise the simulation
+command generated.</li>
+  <li><code class="highlighter-rouge">ApplyCommonSimulationSettings</code>: Attempts to change the kernel system configuration to disable
+features that are not compatible with simulation.</li>
+  <li><code class="highlighter-rouge">ApplyCommonReleaseVerificationSettings(release, verification)</code>: Sets flags for different combinations of
+‘release’ (performance optimized builds) and ‘verification’ (verification friendly features) builds. Please see [/Developing/Building/Using#Meta-configuration-options] for more detail on these options.</li>
+</ul>
+
+<h4 id="other-provided-helpers">Other provided helpers</h4>
+
+<p>Projects such as <a href="/CAmkES">Camkes</a>, the <a href="/CAmkESVM">Camkes x86 VMM</a>, and <a href="https://github.com/SEL4PROJ/rumprun-sel4-demoapps">Rumprun</a> may provide additional helper functions
+to allow applications to configure themselves. Generally helper scripts will be called some variant
+of <code class="highlighter-rouge">helpers.cmake</code>, and should be included in any CMake scripts that use them.</p>
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Feb 17 13:52:47 2020 +1100 66ac62b
+          </li>
+          <li>
+                Page last updated: Mon Feb 17 13:52:47 2020 +1100 e684964
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/projects/buildsystem/incorporating.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/projects/buildsystem/incorporating.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>
