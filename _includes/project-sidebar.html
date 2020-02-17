@@ -31,4 +31,18 @@
         </li>
 {% endfor %}
 
+{% assign update_where_exp = "item.url contains '/updates/" | append: page.project | append: "/'" %}
+{% assign updates = site['updates'] | where_exp:"item", update_where_exp %}
+{% for update in updates | sort: "date" %}
+    {% if forloop.first == true %}
+        <h3>Recent Updates</h3>
+    {% endif %}
+        <li>
+          <a style="{% if update.url == page.url %} font-weight: bold; {%endif%}" href="{{ update.url }}">
+            {{ update.title }}
+          </a>
+        </li>
+{% endfor %}
+    </ul>
+
 </div>
