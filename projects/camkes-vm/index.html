@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -523,8 +523,8 @@ ports, pci devices and irqs to pass through:</p>
     <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40b8</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40c0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
     <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40c8</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40cc</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
     <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x40cc</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x40d0</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mh">0x1f</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">},</span>
-    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x3000</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x3020</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">},</span> <span class="c1">// &lt;--- Add this entry
-</span><span class="p">];</span>
+    <span class="p">{</span><span class="s">"start"</span><span class="o">:</span><span class="mh">0x3000</span><span class="p">,</span> <span class="s">"end"</span><span class="o">:</span><span class="mh">0x3020</span><span class="p">,</span> <span class="s">"pci_device"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">},</span> <span class="c1">// &lt;--- Add this entry</span>
+<span class="p">];</span>
 
 <span class="n">vm0_config</span><span class="p">.</span><span class="n">pci_devices</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>   
@@ -536,8 +536,8 @@ ports, pci devices and irqs to pass through:</p>
         <span class="s">"memory"</span><span class="o">:</span><span class="p">[],</span>
     <span class="p">},</span>
 
-    <span class="c1">// Add this entry:
-</span>    <span class="p">{</span>
+    <span class="c1">// Add this entry:</span>
+    <span class="p">{</span>
         <span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">,</span>
         <span class="s">"bus"</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span>
         <span class="s">"dev"</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
@@ -552,8 +552,8 @@ ports, pci devices and irqs to pass through:</p>
 
 <span class="n">vm0_config</span><span class="p">.</span><span class="n">irqs</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"SATA"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mi">19</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">11</span><span class="p">},</span>
-    <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mh">0x11</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">10</span><span class="p">},</span> <span class="c1">// &lt;--- Add this entry
-</span><span class="p">];</span>
+    <span class="p">{</span><span class="s">"name"</span><span class="o">:</span><span class="s">"Ethernet5"</span><span class="p">,</span> <span class="s">"source"</span><span class="o">:</span><span class="mh">0x11</span><span class="p">,</span> <span class="s">"level_trig"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"active_low"</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"dest"</span><span class="o">:</span><span class="mi">10</span><span class="p">},</span> <span class="c1">// &lt;--- Add this entry</span>
+<span class="p">];</span>
 </code></pre></div></div>
 
 <p>You should have added a new entry to each of the three lists that
@@ -650,7 +650,7 @@ CONFIG_VIRTIO_NET=y
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Wed Feb 12 12:25:19 2020 +1100 6a2e811

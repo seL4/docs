@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -452,7 +452,7 @@ cause strange and mysterious errors.</p>
 apps-y variable with the targets of the applications to be built. To do
 this you can reference the CONFIG_-prefixed variables from Kconfig. A
 typical apps/Kbuild will look something like the following:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">apps-$(CONFIG_MY_APP)</span> <span class="err">+=</span> <span class="err">myapp</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">apps-$(CONFIG_MY_APP)</span> <span class="o">+=</span> myapp
 
 <span class="nl">hello</span><span class="o">:</span> <span class="nf">libfoo</span>
 </code></pre></div></div>
@@ -460,10 +460,10 @@ typical apps/Kbuild will look something like the following:</p>
 for example if it depends on libbar only when the
 MYAPP_EXTRA_FUNCTIONALITY variable is selected, you can use the
 following pattern:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">apps-$(CONFIG_MY_APP)</span> <span class="err">+=</span> <span class="err">myapp</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">apps-$(CONFIG_MY_APP)</span> <span class="o">+=</span> myapp
 
 <span class="nv">hello-y</span> <span class="o">=</span> libfoo
-<span class="err">hello-$(CONFIG_MYAPP_EXTRA_FUNCTIONALITY)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<span class="nv">hello-$(CONFIG_MYAPP_EXTRA_FUNCTIONALITY)</span> <span class="o">+=</span> libbar
 <span class="nl">hello</span><span class="o">:</span> <span class="nf">$(hello-y)</span>
 </code></pre></div></div>
 
@@ -485,14 +485,14 @@ detail below.</p>
 <p>Your application Makefile,
 <strong>apps/myapp/Makefile</strong>, should populate a set of variables and then
 include common.mk. It will typically look something like the following:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TARGETS</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>notdir <span class="nv">$(SOURCE_DIR)</span><span class="o">)</span>.bin
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">TARGETS</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">notdir</span> <span class="nv">$(SOURCE_DIR)</span><span class="nf">)</span>.bin
 
-<span class="nv">CFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="nv">$(SOURCE_DIR)</span>/src/<span class="k">*</span>.c<span class="o">))</span> 
-<span class="nv">ASMFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="nv">$(SOURCE_DIR)</span>/crt/arch-<span class="nv">$(ARCH)</span>/crt0.S<span class="o">))</span>
+<span class="nv">CFILES</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">patsubst</span> <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="nf">$(</span><span class="nb">wildcard</span> <span class="nv">$(SOURCE_DIR)</span>/src/<span class="k">*</span>.c<span class="nf">))</span> 
+<span class="nv">ASMFILES</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">patsubst</span> <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="nf">$(</span><span class="nb">wildcard</span> <span class="nv">$(SOURCE_DIR)</span>/crt/arch-<span class="nv">$(ARCH)</span>/crt0.S<span class="nf">))</span>
 
 <span class="nv">LIBS</span> <span class="o">:=</span> sel4c sel4 sel4rootserver sel4platsupport
 
-<span class="err">include</span> <span class="err">$(SEL4_COMMON)/common.mk</span>
+<span class="k">include</span><span class="sx"> $(SEL4_COMMON)/common.mk</span>
 </code></pre></div></div>
 <p>TARGETS should contain the list
 of output files that this application needs built. CFILES and ASMFILES
@@ -512,8 +512,8 @@ added <strong>after</strong> including common.mk.</p>
 application dependencies, <strong>libs/Kbuild</strong> describes top-level library
 dependencies. Similarly, it fills the variable libs-y with the libraries
 to be built. A typical libs/Kbuild would look like:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">libs-$(CONFIG_LIB_FOO)</span> <span class="err">+=</span> <span class="err">libfoo</span> 
-<span class="err">libs-$(CONFIG_LIB_BAR)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">libs-$(CONFIG_LIB_FOO)</span> <span class="o">+=</span> libfoo 
+<span class="nv">libs-$(CONFIG_LIB_BAR)</span> <span class="o">+=</span> libbar
 
 <span class="nl">libfoo</span><span class="o">:</span> <span class="nf">common </span>
 <span class="nl">libbar</span><span class="o">:</span> <span class="nf">common libfoo</span>
@@ -526,16 +526,16 @@ configuration and then include common.mk. Note that by using generic
 environment variables you can often use the following template with no
 modification for your library:</p>
 <div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Library archive(s) that will be built. 
-</span><span class="nv">TARGETS</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>notdir <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span><span class="o">)</span>.a
+</span><span class="nv">TARGETS</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">notdir</span> <span class="nv">${SOURCE_DIR}</span><span class="nf">)</span>.a
 
 <span class="c"># Source files required to build the target. 
-</span><span class="nv">CFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span>/src/<span class="k">*</span>.c<span class="o">))</span>
-<span class="nv">ASMFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="err">$</span><span class="o">(</span>wildcard <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span>/src/<span class="k">*</span>.S<span class="o">))</span>
+</span><span class="nv">CFILES</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">patsubst</span> <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="nf">$(</span><span class="nb">wildcard</span> <span class="nv">${SOURCE_DIR}</span>/src/<span class="k">*</span>.c<span class="nf">))</span>
+<span class="nv">ASMFILES</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">patsubst</span> <span class="nv">$(SOURCE_DIR)</span>/%,%,<span class="nf">$(</span><span class="nb">wildcard</span> <span class="nv">${SOURCE_DIR}</span>/src/<span class="k">*</span>.S<span class="nf">))</span>
 
 <span class="c"># Header files/directories this library provides. 
-</span><span class="nv">HDRFILES</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>wildcard <span class="k">${</span><span class="nv">SOURCE_DIR</span><span class="k">}</span>/include/<span class="k">*</span><span class="o">)</span>
+</span><span class="nv">HDRFILES</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">wildcard</span> <span class="nv">${SOURCE_DIR}</span>/include/<span class="k">*</span><span class="nf">)</span>
 
-<span class="err">include</span> <span class="err">$(SEL4_COMMON)/common.mk</span>
+<span class="k">include</span><span class="sx"> $(SEL4_COMMON)/common.mk</span>
 </code></pre></div></div>
 
 <p>You can modify the compiler or linker flags applied when building your
@@ -555,7 +555,7 @@ content of the file from the reference examples:</p>
 <div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># app-images is provided in project.mk. 
 </span><span class="nl">all</span><span class="o">:</span> <span class="nf">app-images</span>
 
-<span class="err">include</span> <span class="err">tools/common/project.mk</span>
+<span class="k">include</span><span class="sx"> tools/common/project.mk</span>
 
 <span class="c"># Extra project-specific targets. simulate-kzm: 
 </span><span class="err">qemu-arm</span> <span class="err">-nographic</span> <span class="err">-M</span> <span class="err">kzm</span> <span class="err">-kernel</span> <span class="err">images/hello-image-arm-imx31</span>
@@ -633,7 +633,7 @@ line in apps/Kbuild with:</p>
 </code></pre></div></div>
 <p>and your LIBS line in
 apps/myapp/Makefile with:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LIBS</span> <span class="o">:=</span> <span class="err">$</span><span class="o">(</span>patsubst lib%,%,<span class="nf">$(</span><span class="nb">shell</span> <span class="nb">grep</span> <span class="s2">"depends on"</span> <span class="nv">$(SOURCE_DIR)</span>/Kconfig | sed <span class="nt">-e</span> <span class="s1">'s/depends on//g'</span> <span class="nt">-e</span> <span class="s1">'s/[&amp;_]//g'</span> | tr A-Z a-z<span class="nv">)</span><span class="o">)</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LIBS</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">patsubst</span> lib%,%,<span class="nf">$(</span><span class="nb">shell</span> <span class="nb">grep</span> <span class="s2">"depends on"</span> <span class="nv">$(SOURCE_DIR)</span>/Kconfig | <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/depends on//g'</span> <span class="nt">-e</span> <span class="s1">'s/[&amp;_]//g'</span> | <span class="nb">tr </span>A-Z a-z<span class="nf">))</span>
 </code></pre></div></div>
 
 <p>This will make apps/myapp/Kconfig the
@@ -723,7 +723,7 @@ effect.</p>
 <p><strong>How do I dump the contents of Makefile variables? How do I
 determine what context my rules are executed in?</strong></p>
 
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$(foreach</span> <span class="err">var,$(.VARIABLES),$(warning</span> <span class="err">$(var)=$($(var))))</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$(foreach</span> <span class="err">var,$(.VARIABLES),$(warning</span> <span class="nv">$(var)</span><span class="o">=</span><span class="err">$</span><span class="o">(</span><span class="nv">$(var)</span><span class="o">)))</span>
 </code></pre></div></div>
 
 <hr />
@@ -732,16 +732,16 @@ determine what context my rules are executed in?</strong></p>
 <p>This is hangover from a previous abstraction for portability. This extra
 level of indirection serves no purpose in the current build system. If
 you encounter a libs/Kbuild that looks like the following:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">sel4libs-$(CONFIG_LIB_FOO)</span> <span class="err">+=</span> <span class="err">libfoo</span>
-<span class="err">sel4libs-$(CONFIG_LIB_BAR)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">sel4libs-$(CONFIG_LIB_FOO)</span> <span class="o">+=</span> libfoo
+<span class="nv">sel4libs-$(CONFIG_LIB_BAR)</span> <span class="o">+=</span> libbar
 <span class="err">...</span>
 
 <span class="nv">libs-y</span> <span class="o">+=</span> <span class="err">$</span><span class="o">(</span>sel4libs-y<span class="o">)</span> 
 <span class="err">...</span>
 </code></pre></div></div>
 <p>please update it to remove sel4libs-y:</p>
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">libs-$(CONFIG_LIB_FOO)</span> <span class="err">+=</span> <span class="err">libfoo</span>
-<span class="err">libs-$(CONFIG_LIB_BAR)</span> <span class="err">+=</span> <span class="err">libbar</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">libs-$(CONFIG_LIB_FOO)</span> <span class="o">+=</span> libfoo
+<span class="nv">libs-$(CONFIG_LIB_BAR)</span> <span class="o">+=</span> libbar
 <span class="err">...</span>
 </code></pre></div></div>
 
@@ -857,7 +857,7 @@ system is your future build system. Life goes on.&lt;/flamebait&gt;</p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Feb 17 13:52:47 2020 +1100 e684964

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -528,8 +528,8 @@ Yield
 <p><strong>Exercise</strong> Reconfigure <code class="highlighter-rouge">sched_context</code> with the following periodic scheduling parameters,
  (budget = <code class="highlighter-rouge">0.9 * US_IN_S</code>, period = <code class="highlighter-rouge">1 * US_IN_S</code>).</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic</span>
+</code></pre></div></div>
 
 <p>By completing this task successfully, the output will not change, but the rate that the output is
 printed will slow: each subsequent line should be output once the period has elapsed. You should now
@@ -574,8 +574,8 @@ thread state. Unbinding a scheduling context does not alter the thread state, bu
 from the scheduler queues.</p>
 
 <p><strong>Exercise</strong> Unbind <code class="highlighter-rouge">sched_context</code> to stop the spinner process from running.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO unbind sched_context to stop yielding thread 
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO unbind sched_context to stop yielding thread </span>
+</code></pre></div></div>
 
 <p>On success, you should see the output from the yielding thread stop.</p>
 
@@ -586,8 +586,8 @@ from the scheduler queues.</p>
 
 <p><strong>Exercise</strong> First, bind <code class="highlighter-rouge">sched_context</code> to <code class="highlighter-rouge">sender_tcb</code>.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO bind sched_context to sender_tcb
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO bind sched_context to sender_tcb</span>
+</code></pre></div></div>
 
 <p>The output should look like the following:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
@@ -605,8 +605,8 @@ occurs a refill is used up to schedule another.</p>
 <p><strong>Exercise</strong> Reconfigure the <code class="highlighter-rouge">sched_context</code> to an extra 6 refills, such that all of the <code class="highlighter-rouge">Tock</code> output 
 occurs in one go.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic with 6 extra refills
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic with 6 extra refills</span>
+</code></pre></div></div>
 
 <h3 id="passive-servers-1">Passive servers</h3>
 
@@ -615,8 +615,8 @@ not have a scheduling context, and needs one to initialise.</p>
 
 <p><strong>Exercise</strong> Bind <code class="highlighter-rouge">sched_context</code> to <code class="highlighter-rouge">server_tcb</code>.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO bind sched_context to server_tcb
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO bind sched_context to server_tcb</span>
+</code></pre></div></div>
 
 <p>Now you should see the server initialise and echo the messages sent. Note the initialisation protocol:
 first, you bound <code class="highlighter-rouge">sched_context</code> to the server. At this point, in <code class="highlighter-rouge">server.c</code>, the server calls 
@@ -635,8 +635,8 @@ Yield
 
 <p>The following code then converts the server to passive:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// convert to passive
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedContext_Unbind</span><span class="p">(</span><span class="n">sched_context</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// convert to passive</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedContext_Unbind</span><span class="p">(</span><span class="n">sched_context</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>From this point, the server runs on the <code class="highlighter-rouge">mcs</code> process’s scheduling context.</p>
@@ -678,14 +678,14 @@ of the faulting thread everytime a fault occurs.</p>
 <p><strong>Exercise</strong> Set the data field of <code class="highlighter-rouge">sched_context</code> using <code class="highlighter-rouge">seL4_SchedControl_Configure</code> and set a 10s period, 1ms 
 budget and 0 extra refills.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context with 10s period, 1ms budget, 0 extra refills and data of 5.
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context with 10s period, 1ms budget, 0 extra refills and data of 5.</span>
+</code></pre></div></div>
 <p>The code then binds the scheduling context back to <code class="highlighter-rouge">spinner_tcb</code>, which starts yielding again.</p>
 
 <p><strong>Exercise</strong> set the timeout fault endpoint for <code class="highlighter-rouge">spinner_tcb</code>.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO set endpoint as the timeout fault handler for spinner_tcb
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO set endpoint as the timeout fault handler for spinner_tcb</span>
+</code></pre></div></div>
 
 <p>When the <code class="highlighter-rouge">spinner</code> faults, you should see the following output:</p>
 
@@ -745,7 +745,7 @@ server TCB and an SC to the notification object.</li>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6

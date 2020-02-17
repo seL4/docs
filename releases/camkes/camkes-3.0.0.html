@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>camkes-3.0.0 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/camkes">
+              <span property="name"><b>CAmkES Releases</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">camkes-3.0.0</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/VerifiedConfigurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+    <div class="content">
+      <h1 id="camkes-300-release-notes">CAmkES 3.0.0 Release Notes</h1>
+
+<p>This adds all the features from our development branch “next”. Changes
+include several syntactic and functional changes. The development of new
+features will now continue on the “master” branch, and the “next” branch
+will remain as is for compatibility reasons.</p>
+
+<h2 id="migrating">Migrating</h2>
+
+<p>How you migrate will depend on your situation:</p>
+
+<h3 id="i-was-using-the-next-branch-and-want-to-switch-to-this-release">I was using the “next” branch and want to switch to this release</h3>
+
+<p>Hopefully most people will be in this category. Now that we’ve
+(finally!) done an official release of CAmkES 3, you can switch to a
+stable tag with all the features of “CAmkES Next”, without the risk of
+api breaking changes. If you use repo, your manifest probably has a line
+resembling:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"camkes-tool.git"</span> <span class="na">path=</span><span class="s">"tools/camkes"</span> <span class="na">revision=</span><span class="s">"next"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Change it to:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"camkes-tool.git"</span> <span class="na">path=</span><span class="s">"tools/camkes"</span> <span class="na">revision=</span><span class="s">"refs/tags/camkes-3.0.0"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Watch the mailing list for new releases, and update your version of
+CAmkES when <strong>you</strong> want to.</p>
+
+<h3 id="i-was-using-the-next-branch-and-want-to-stay-on-the-bleeding-edge">I was using the “next” branch, and want to stay on the bleeding edge</h3>
+
+<p>You need to switch to the “master” branch. The “next” branch will
+continue to exist for a time for compatibility, but will no longer
+receive updates. If you use repo, your manifest probably has a line
+resembling:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"camkes-tool.git"</span> <span class="na">path=</span><span class="s">"tools/camkes"</span> <span class="na">revision=</span><span class="s">"next"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Change it to:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"camkes-tool.git"</span> <span class="na">path=</span><span class="s">"tools/camkes"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Note that tracking the tip of the “master” branch is risky. There’s no
+guarantee that it won’t change in breaking ways in the future.</p>
+
+<h3 id="i-was-using-the-master-branch-and-want-to-migrate">I was using the “master” branch, and want to migrate</h3>
+
+<p>There’s a guide on the changes introduces by this version here:
+<a href="../CAmkESDifferences">CAmkESDifferences</a></p>
+
+<h3 id="i-was-using-the-master-branch-and-dont-want-to-migrate">I was using the “master” branch, and don’t want to migrate</h3>
+
+<p>That’s fine! All the old versions of CAmkES will continue to be
+available. The latest release of this branch is
+<a href="https://github.com/seL4/camkes-tool/releases/tag/camkes-2.3.1">camkes-2.3.1</a>.
+If you use repo, your manifest probably had a line resembling:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"camkes-tool.git"</span> <span class="na">path=</span><span class="s">"tools/camkes"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Change it to:
+<code class="highlighter-rouge">&lt;project name="camkes-tool.git" path="tools/camkes"
+revision="refs/tags/camkes-2.3.1"&gt;
+</code></p>
+
+<h3 id="i-was-using-a-released-version-of-camkes">I was using a released version of CAmkES</h3>
+
+<p>You don’t have to do anything. Your project will continue to work.</p>
+
+<h2 id="new-dependencies">New Dependencies</h2>
+
+<p>CAmkES dependencies have changed. For a definitive (maintained) list,
+see: <a href="/CAmkES/#build-dependencies">CAmkES#build-dependencies</a></p>
+
+<h2 id="new-features">New Features</h2>
+
+<h3 id="visualization-tool">Visualization Tool</h3>
+
+<p>CAmkES comes with a graphical tool for visualising the components and
+connections in a CAmkES application. For installation and usage
+instructions,
+<a href="https://github.com/seL4/camkes-tool/tree/camkes-3.0.0/camkes/visualCAmkES">see its README</a>.</p>
+
+<h3 id="typed-settings">Typed Settings</h3>
+
+<p>Previously, the values of settings (in “configuration” blocks) were
+strings under the hood. Now they are stored as a value of the
+appropriate (python) type, determined during parsing.
+<a href="../CAmkESDifferences#rich-types-for-settings">Read more.</a></p>
+
+<h3 id="parametrised-buf-type">Parametrised Buf Type</h3>
+
+<p>The “Buf” type for dataports can now be optionally parametrised with the
+dataport’s size in bytes.
+<a href="../CAmkESDifferences#parametrised-buf-type">Read more.</a></p>
+
+<h3 id="the-sel4asynch-connector-has-been-renamed-to-sel4notification">The seL4Asynch connector has been renamed to seL4Notification</h3>
+
+<p>This was to maintain consistency with the rest of our APIs.</p>
+
+<h3 id="non-volatile-dataports">Non Volatile Dataports</h3>
+
+<p>Previously, the standard dataport connector, seL4SharedData, use
+volatile pointers for accessing shared memory. This is no longer the
+case, and components with dataport interfaces connected with
+seL4SharedData must explicitly insert barriers around dataport access to
+ensure the desired memory access ordering.
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-dataports">Read more in the manual.</a></p>
+
+<h3 id="custom-attribute-types">Custom Attribute Types</h3>
+
+<p>You can now define custom types for attributes in CAmkES ADL. Custom
+types resemble structs and arrays in C.
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-structs-and-arrays-for-collections">Read more in the manual.</a></p>
+
+<h3 id="hierarchical-component-syntax-change">Hierarchical Component Syntax Change</h3>
+
+<p>The syntax for declaring that a component exports an interface from one
+of it sub-components has changed.
+<a href="../CAmkESDifferences#hierarchical-components">See an example.</a></p>
+
+<h3 id="binary-semaphores">Binary Semaphores</h3>
+
+<p>Binary Semaphores have been added as a new synchronization primitive.
+This is in addition to the existing primitives: semaphores and mutexes.
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#synchronization-primitives">Read more in the manual.</a></p>
+
+<h3 id="cache-accelerator">Cache Accelerator</h3>
+
+<p>CAmkES now comes with a small tool for caching compilation results based
+on source files. This should greatly reduce compilation times by not
+unnecessarily recompiling code. It is enabled by default. Control it
+with the <code class="highlighter-rouge">CONFIG_CAMKES_ACCELERATOR</code> config variable.
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator">Read more in the manual.</a></p>
+
+<h3 id="python-3-support">Python 3 Support</h3>
+
+<p>Previously, CAmkES only worked with python2. It’s now compatible with
+python2 and python3.</p>
+
+<h3 id="refactored-parser">Refactored Parser</h3>
+
+<p>The internals of the CAmkES parser have been rewritten to be easier to
+read and maintain. The parser is structured as a pipeline of
+transformations.
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#parser-internals">Read more in the manual.</a></p>
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/camkes/camkes-3.0.0.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/camkes/camkes-3.0.0.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

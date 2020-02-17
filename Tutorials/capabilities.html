@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -394,8 +394,8 @@ root task if a larger stack is needed:</p>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
     
     <span class="cm">/* set new register values */</span>
-    <span class="n">registers</span><span class="p">.</span><span class="n">sp</span> <span class="o">=</span> <span class="n">new_sp</span><span class="p">;</span> <span class="c1">// the new stack pointer, derived by prior code.
-</span>    
+    <span class="n">registers</span><span class="p">.</span><span class="n">sp</span> <span class="o">=</span> <span class="n">new_sp</span><span class="p">;</span> <span class="c1">// the new stack pointer, derived by prior code.</span>
+    
     <span class="cm">/* Write new values */</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="n">registers</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
@@ -511,8 +511,8 @@ The third line stating the number of slots in the CSpace, is incorrect, and your
 <h3 id="how-big-is-your-cspace">How big is your CSpace?</h3>
 
 <p><strong>Exercise:</strong> refer to the background above, and calculate the number of slots in the initial thread’s CSpace.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">size_t</span> <span class="n">num_initial_cnode_slots</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// TODO calculate this.
-</span>    <span class="n">printf</span><span class="p">(</span><span class="s">"The CSpace has %zu CSlots</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">num_initial_cnode_slots</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">size_t</span> <span class="n">num_initial_cnode_slots</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// TODO calculate this.</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"The CSpace has %zu CSlots</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">num_initial_cnode_slots</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h3 id="copy-a-capability-between-cslots">Copy a capability between CSlots</h3>
@@ -559,15 +559,15 @@ by a neat hack: by attempting to move the CSlots onto themselves. This should fa
   <li><code class="highlighter-rouge">seL4_CNode_Revoke</code> on the original capability to achieve this.</li>
 </ul>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO delete the created TCB capabilities
-</span>
-    <span class="c1">// check first_free_slot is empty
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Move</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">first_free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO delete the created TCB capabilities</span>
+
+    <span class="c1">// check first_free_slot is empty</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Move</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">first_free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
                             <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">first_free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_FailedLookup</span><span class="p">,</span> <span class="s">"first_free_slot is not empty"</span><span class="p">);</span>
    
-    <span class="c1">// check last_slot is empty 
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Move</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">last_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
+    <span class="c1">// check last_slot is empty </span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Move</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">last_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
                             <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">last_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_FailedLookup</span><span class="p">,</span> <span class="s">"last_slot is not empty"</span><span class="p">);</span>
 </code></pre></div></div>
@@ -582,8 +582,8 @@ main@main.c:56 Failed to suspend current thread
 
 <p><strong>Exercise</strong> Use <code class="highlighter-rouge">seL4_TCB_Suspend</code> to try and suspend the current thread.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"Suspending current thread</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="c1">// TODO suspend the current thread
-</span>    <span class="n">ZF_LOGF</span><span class="p">(</span><span class="s">"Failed to suspend current thread</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="c1">// TODO suspend the current thread</span>
+    <span class="n">ZF_LOGF</span><span class="p">(</span><span class="s">"Failed to suspend current thread</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>On success, the output will be as follows:</p>
@@ -644,7 +644,7 @@ to become more familiar with cspaces.</p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de

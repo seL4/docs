@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -418,7 +418,7 @@ domain is scheduled, a domain-specific idle thread will run until a switch occur
 thread to be added to any domain.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Set thread's domain */</span>
-<span class="n">seL4_Error</span> <span class="n">seL4_DomainSet_Set</span><span class="p">(</span><span class="n">seL4_DomainSet</span> <span class="n">_service</span><span class="p">,</span> <span class="n">seL4_Uint8</span> <span class="n">domain</span><span class="p">,</span> <span class="n">seL4_TCB</span> <span class="kr">thread</span><span class="p">);</span>
+<span class="n">seL4_Error</span> <span class="nf">seL4_DomainSet_Set</span><span class="p">(</span><span class="n">seL4_DomainSet</span> <span class="n">_service</span><span class="p">,</span> <span class="n">seL4_Uint8</span> <span class="n">domain</span><span class="p">,</span> <span class="n">seL4_TCB</span> <span class="kr">thread</span><span class="p">);</span>
 
 </code></pre></div></div>
 
@@ -487,25 +487,25 @@ system seems to have hung.</p>
 The loader has been configured to set up the following capabilities and symbols:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="c1">// the root CNode of the current thread
-</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_cnode</span><span class="p">;</span>
-<span class="c1">// VSpace of the current thread
-</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_vspace</span><span class="p">;</span>
-<span class="c1">// TCB of the current thread
-</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_tcb</span><span class="p">;</span>
-<span class="c1">// Untyped object large enough to create a new TCB object
-</span>
+<span class="c1">// the root CNode of the current thread</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_cnode</span><span class="p">;</span>
+<span class="c1">// VSpace of the current thread</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_vspace</span><span class="p">;</span>
+<span class="c1">// TCB of the current thread</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">root_tcb</span><span class="p">;</span>
+<span class="c1">// Untyped object large enough to create a new TCB object</span>
+
 <span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_untyped</span><span class="p">;</span>
 <span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">buf2_frame_cap</span><span class="p">;</span>
 <span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">buf2_frame</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
 
-<span class="c1">// Empty slot for the new TCB object
-</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_cap_slot</span><span class="p">;</span>
-<span class="c1">// Symbol for the IPC buffer mapping in the VSpace, and capability to the mapping
-</span><span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_ipc_frame</span><span class="p">;</span>
+<span class="c1">// Empty slot for the new TCB object</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_cap_slot</span><span class="p">;</span>
+<span class="c1">// Symbol for the IPC buffer mapping in the VSpace, and capability to the mapping</span>
+<span class="k">extern</span> <span class="n">seL4_CPtr</span> <span class="n">tcb_ipc_frame</span><span class="p">;</span>
 <span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">thread_ipc_buff_sym</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
-<span class="c1">// Symbol for the top of a 16 * 4KiB stack mapping, and capability to the mapping
-</span><span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">tcb_stack_base</span><span class="p">[</span><span class="mi">65536</span><span class="p">];</span>
+<span class="c1">// Symbol for the top of a 16 * 4KiB stack mapping, and capability to the mapping</span>
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">tcb_stack_base</span><span class="p">[</span><span class="mi">65536</span><span class="p">];</span>
 <span class="k">static</span> <span class="k">const</span> <span class="kt">uintptr_t</span> <span class="n">tcb_stack_top</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">uintptr_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">tcb_stack_base</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">tcb_stack_base</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -517,8 +517,8 @@ that a new TCB object is created in <code class="highlighter-rouge">tcb_cap_slot
     <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
     <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
-    <span class="c1">// TODO fix the parameters in this invocation
-</span>    <span class="n">seL4_Error</span> <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_Untyped_Retype</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="n">seL4_TCBObject</span><span class="p">,</span> <span class="n">seL4_TCBBits</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// TODO fix the parameters in this invocation</span>
+    <span class="n">seL4_Error</span> <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_Untyped_Retype</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="n">seL4_TCBObject</span><span class="p">,</span> <span class="n">seL4_TCBBits</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s">"Failed to retype thread: %d"</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
     <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
 </code></pre></div></div>
@@ -538,8 +538,8 @@ main@threads.c:46 [Cond failed: result]
 as the current thread. Use the IPC buffer we have provided, but don’t set a fault handler,
  as the kernel will print any fault we receive with a debug build.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO fix the parameters in this invocation
-</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_TCB_Configure</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO fix the parameters in this invocation</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_TCB_Configure</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s">"Failed to configure thread: %d"</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -559,9 +559,9 @@ a priority of 254.  You need to change the priority of your new thread such that
 the calling thread must have the authority to do so. In this case, the main thread can use its own
 TCB capability, which has an MCP of 254.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO fix the call to set priority using the authority of the current thread
-</span>    <span class="c1">// and change the priority to 254
-</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_TCB_SetPriority</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO fix the call to set priority using the authority of the current thread</span>
+    <span class="c1">// and change the priority to 254</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">seL4_TCB_SetPriority</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s">"Failed to set the priority for the new TCB object.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
 </code></pre></div></div>
@@ -596,12 +596,12 @@ you have at least set the instruction pointer (IP) correctly.</p>
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to read the new thread's register set.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
-    <span class="c1">// TODO use valid instruction pointer
-</span>    <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
-    <span class="c1">// TODO use valid stack pointer
-</span>    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="c1">// TODO fix parameters to this invocation
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+    <span class="c1">// TODO use valid instruction pointer</span>
+    <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="c1">// TODO use valid stack pointer</span>
+    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="c1">// TODO fix parameters to this invocation</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
                   <span class="s">"</span><span class="se">\t</span><span class="s">Did you write the correct number of registers? See arg4.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="n">seL4_DebugDumpScheduler</span><span class="p">();</span>
@@ -621,8 +621,8 @@ main@threads.c:63 [Err seL4_InvalidCapability]:
 
 <p><strong>Exercise</strong> resume the new thread.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO resume the new thread
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Resume</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO resume the new thread</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Resume</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to start new thread.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -761,7 +761,7 @@ create more thread objects.</li>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de

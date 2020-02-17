@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -312,8 +312,8 @@
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo sync
-mkdir cbuild
+repo <span class="nb">sync
+mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
 ../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>zynq7000 <span class="nt">-DAARCH32</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
@@ -335,24 +335,24 @@ ninja
 
 <p>Use the following patch to set up an appropriate u-boot environment and enable elf loading:</p>
 
-<div class="language-patch highlighter-rouge"><div class="highlight"><pre class="highlight"><code>From 8fb3caeb735b7cb6be409842a3e130a8a4173ad3 Mon Sep 17 00:00:00 2001
+<div class="language-patch highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">From 8fb3caeb735b7cb6be409842a3e130a8a4173ad3 Mon Sep 17 00:00:00 2001
 From: Adrian Herrera &lt;adrian.herrera@dsto.defence.gov.au&gt;
 Date: Wed, 5 Nov 2014 09:58:00 +1030
 Subject: [PATCH] Added Zynq ZC70x board for seL4
-
+</span>
 Currently only boots from a FAT-formatted SD card; so no network boot yet
----
- boards.cfg                        |  1 +
+<span class="p">---
+</span> boards.cfg                        |  1 +
  include/configs/zynq_zc70x_sel4.h | 60 +++++++++++++++++++++++++++++++++++++++
  2 files changed, 61 insertions(+)
  create mode 100644 include/configs/zynq_zc70x_sel4.h
 
-<span class="gh">diff --git a/boards.cfg b/boards.cfg
-index 7beb3c8..960b374 100644
+diff --git a/boards.cfg b/boards.cfg
+<span class="gh">index 7beb3c8..960b374 100644
 </span><span class="gd">--- a/boards.cfg
 </span><span class="gi">+++ b/boards.cfg
-</span><span class="gu">@@ -384,6 +384,7 @@ Active  arm         armv7          u8500       st-ericsson     u8500
-</span> Active  arm         armv7          vf610       freescale       vf610twr            vf610twr                              vf610twr:IMX_CONFIG=board/freescale/vf610twr/imximage.cfg                                                                         Alison Wang &lt;b18965@freescale.com&gt;
+</span><span class="p">@@ -384,6 +384,7 @@</span> Active  arm         armv7          u8500       st-ericsson     u8500
+ Active  arm         armv7          vf610       freescale       vf610twr            vf610twr                              vf610twr:IMX_CONFIG=board/freescale/vf610twr/imximage.cfg                                                                         Alison Wang &lt;b18965@freescale.com&gt;
  Active  arm         armv7          zynq        xilinx          zynq                zynq_microzed                        -                                                                                                                                  Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
  Active  arm         armv7          zynq        xilinx          zynq                zynq_zc70x                           -                                                                                                                                  Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
 <span class="gi">+Active  arm         armv7          zynq        xilinx          zynq                zynq_zc70x_sel4                      -                                                                                                                                  Adrian Herrera &lt;adrian.herrera@dsto.defence.gov.au&gt;
@@ -360,12 +360,12 @@ index 7beb3c8..960b374 100644
  Active  arm         armv7          zynq        xilinx          zynq                zynq_zc770_XM011                     zynq_zc770:ZC770_XM011                                                                                                             Michal Simek &lt;michal.simek@xilinx.com&gt;
  Active  arm         armv7          zynq        xilinx          zynq                zynq_zc770_XM012                     zynq_zc770:ZC770_XM012                                                                                                             Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
 <span class="gh">diff --git a/include/configs/zynq_zc70x_sel4.h b/include/configs/zynq_zc70x_sel4.h
-</span>new file mode 100644
-<span class="gh">index 0000000..f8bbac5
+</span><span class="p">new file mode 100644
+</span><span class="gh">index 0000000..f8bbac5
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/include/configs/zynq_zc70x_sel4.h
-</span><span class="gu">@@ -0,0 +1,60 @@
-</span><span class="gi">+/*
+</span><span class="p">@@ -0,0 +1,60 @@</span>
+<span class="gi">+/*
 + * (C) Copyright 2013 Xilinx, Inc.
 + *
 + * Configuration settings for the Xilinx Zynq ZC702 and ZC706 boards
@@ -426,8 +426,8 @@ index 7beb3c8..960b374 100644
 +
 +#endif /* __CONFIG_ZYNQ_ZC70X_SEL4_H */
 </span><span class="gd">-- 
-</span>1.9.1
-</code></pre></div></div>
+</span><span class="p">1.9.1
+</span></code></pre></div></div>
 
 <p>To get U-boot:</p>
 
@@ -441,7 +441,7 @@ make
 
 <p>The u-boot file cannot be booted directly. You must first generate a boot image:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp u-boot u-boot.elf
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>u-boot u-boot.elf
 <span class="nb">echo</span> <span class="s2">"image: { </span><span class="nv">$PWD</span><span class="s2">/u-boot.elf }"</span> <span class="o">&gt;</span> boot.bif
 /opt/Xilinx/SDK/2014.4/bin/bootgen <span class="nt">-o</span> BOOT.BIN <span class="nt">-w</span> <span class="nt">-image</span> image.bif
 </code></pre></div></div>
@@ -474,7 +474,7 @@ make
 
 <p>The last step is to install the cable drivers as follows:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uname <span class="nt">-a</span> | <span class="nb">grep</span> <span class="s2">"x86_64"</span> <span class="o">&amp;&amp;</span> <span class="nv">LIN</span><span class="o">=</span>lin64 <span class="o">||</span> <span class="nv">LIN</span><span class="o">=</span>lin
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">uname</span> <span class="nt">-a</span> | <span class="nb">grep</span> <span class="s2">"x86_64"</span> <span class="o">&amp;&amp;</span> <span class="nv">LIN</span><span class="o">=</span>lin64 <span class="o">||</span> <span class="nv">LIN</span><span class="o">=</span>lin
 <span class="nb">cd</span> /opt/Xilinx/SDK/2014.4/data/xicom/cable_drivers/<span class="nv">$LIN</span>/install_script/install_drivers
 <span class="nb">sudo</span> ./install_drivers
 </code></pre></div></div>
@@ -545,7 +545,7 @@ make
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon May 28 16:30:11 2018 +1000 f530249

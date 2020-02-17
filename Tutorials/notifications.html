@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -435,8 +435,8 @@ mapping. We provide code below that sets up the shared page between producer 1 a
 
 <p><strong>Exercise</strong> Understand the above code, and create a second shared page between <code class="highlighter-rouge">producer_2</code> and <code class="highlighter-rouge">consumer</code>.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO share buf2_frame_cap with producer_2
-</span>    <span class="cm">/* set up shared memory for producer 2 */</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO share buf2_frame_cap with producer_2</span>
+    <span class="cm">/* set up shared memory for producer 2 */</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">mapping_2</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> 
                             <span class="n">cnode</span><span class="p">,</span> <span class="n">buf2_frame_cap</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> <span class="n">seL4_AllRights</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to copy cap"</span><span class="p">);</span>
@@ -455,8 +455,8 @@ to be written to.</p>
 
 <p><strong>Exercise</strong> signal both producers via the <code class="highlighter-rouge">buf1_empty</code> and <code class="highlighter-rouge">buf2_empty</code> notification objects.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO signal both producers
-</span>    <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO signal both producers</span>
+    <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
     <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf2_empty</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -480,9 +480,9 @@ which of the producers (it may be both) has produced data.</p>
 <p><strong>Exercise</strong> Check the badge and signal the empty notification for the producers according to the bits set in the badge
  value.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO, use the badge to check which producer has signalled you, and signal it back. Note that you 
-</span>    <span class="c1">// may recieve more than 1 signal at a time.
-</span>        <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b01</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO, use the badge to check which producer has signalled you, and signal it back. Note that you </span>
+    <span class="c1">// may recieve more than 1 signal at a time.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b01</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">assert</span><span class="p">(</span><span class="o">*</span><span class="n">buf1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
             <span class="o">*</span><span class="n">buf1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
             <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
@@ -547,7 +547,7 @@ to become more familiar with IPC.</p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de

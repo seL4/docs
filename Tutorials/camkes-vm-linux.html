@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -382,7 +382,7 @@ installed. You also need to ensure you have enabled nested virtulisation with KV
 <span class="c"># ip tuntap add tap0 mode tap</span>
 <span class="c"># ip addr add 10.0.120.100/24 dev tap0</span>
 <span class="c"># ip link set dev tap0 up</span>
-<span class="nb">sudo</span> ./simulate <span class="nt">--machine</span> q35,accel<span class="o">=</span>kvm,kernel-irqchip<span class="o">=</span>split <span class="nt">--mem-size</span> 2G <span class="nt">--extra-cpu-opts</span> <span class="s2">"+vmx"</span> <span class="nt">--extra-qemu-args</span><span class="o">=</span><span class="s2">"-enable-kvm -device intel-iommu,intremap=off -net nic,model=e1000 -net tap,script=no,ifname=tap0"</span>
+<span class="nb">sudo</span> ./simulate <span class="nt">--machine</span> q35,accel<span class="o">=</span>kvm,kernel-irqchip<span class="o">=</span><span class="nb">split</span> <span class="nt">--mem-size</span> 2G <span class="nt">--extra-cpu-opts</span> <span class="s2">"+vmx"</span> <span class="nt">--extra-qemu-args</span><span class="o">=</span><span class="s2">"-enable-kvm -device intel-iommu,intremap=off -net nic,model=e1000 -net tap,script=no,ifname=tap0"</span>
 </code></pre></div></div>
 
 <p>When first simulating the image you should see the following login prompt:</p>
@@ -589,7 +589,7 @@ and symvers file (<code class="highlighter-rouge">linux_symvers_location</code>)
 <p>This exercise guides you through adding a new program to the Linux guest user-level environment.</p>
 
 <p>First, make a new directory:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> pkg/hello
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> pkg/hello
 </code></pre></div></div>
 <p>Then a simple C program in <code class="highlighter-rouge">pkg/hello/hello.c</code>:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
@@ -676,8 +676,8 @@ associated with the new module, which when written to causes the VMM to print me
 <span class="k">static</span> <span class="kt">int</span> <span class="n">major_number</span><span class="p">;</span>
 
 <span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">poke_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">s</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">o</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printk</span><span class="p">(</span><span class="s">"hi</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// TODO replace with hypercall
-</span>    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"hi</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="c1">// TODO replace with hypercall</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">fops</span> <span class="o">=</span> <span class="p">{</span>
@@ -778,7 +778,7 @@ overlay. After our call to <code class="highlighter-rouge">AddExternalProjFilesT
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/init <span class="s2">"."</span> vm-overlay<span class="p">)</span>
 </code></pre></div></div>
 <p>and give the script executable permissions:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x init
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x init
 </code></pre></div></div>
 <p>Rebuild the project:</p>
 
@@ -814,8 +814,8 @@ Add a new function at the top of the file:</p>
 
 <p>In the function <code class="highlighter-rouge">main_continued</code> register `poke_handler`:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reg_new_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">,</span> <span class="n">poke_handler</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// &lt;--- added
-</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reg_new_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">,</span> <span class="n">poke_handler</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// &lt;--- added</span>
+
 <span class="cm">/* Now go run the event loop */</span>
 <span class="n">vmm_run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">);</span>
 </code></pre></div></div>
@@ -863,7 +863,7 @@ POKE!!!
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de

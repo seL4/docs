@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>C Coding Conventions and Style Guide | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">C Coding Conventions and Style Guide</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/VerifiedConfigurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#general-c-code">General C code</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#compiler-options">Compiler options</a></li>
+<li class="toc-entry toc-h3"><a href="#automatic-formatting">Automatic formatting</a></li>
+<li class="toc-entry toc-h3"><a href="#spacing-and-braces">Spacing and braces</a></li>
+<li class="toc-entry toc-h3"><a href="#choosing-data-types">Choosing data types</a></li>
+<li class="toc-entry toc-h3"><a href="#naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (typedef)</a></li>
+<li class="toc-entry toc-h3"><a href="#expressions">Expressions</a></li>
+<li class="toc-entry toc-h3"><a href="#structure">Structure</a></li>
+<li class="toc-entry toc-h3"><a href="#memory-allocation">Memory allocation</a></li>
+<li class="toc-entry toc-h3"><a href="#commenting">Commenting</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#user-level-code">User-level code</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#type-conventions">Type conventions</a></li>
+<li class="toc-entry toc-h3"><a href="#format-strings">Format strings</a></li>
+<li class="toc-entry toc-h3"><a href="#header-guards">Header guards</a></li>
+<li class="toc-entry toc-h3"><a href="#error-handling">Error handling</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#kernel-code">Kernel code</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#format-strings-1">Format strings</a></li>
+<li class="toc-entry toc-h3"><a href="#header-guards-1">Header guards</a></li>
+<li class="toc-entry toc-h3"><a href="#error-handling-1">Error handling</a></li>
+<li class="toc-entry toc-h3"><a href="#verification-requirements">Verification requirements</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#further-resources">Further resources</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      <h1 id="c-coding-conventions-and-style-guide">C Coding Conventions and Style Guide</h1>
+
+<p>These are conventions which we attempt to follow in all of our code.
+They do not apply to external libraries, where we stick with the
+existing conventions.</p>
+
+<p>Much of our code pre-dates the conventions, so it may not all comply.
+However, please try to ensure that any new code does follow the rules.
+In general, we strive to abide by Robert Baden-Powell’s rule for
+scouting: “Try and leave [the code] a little better than you found it.”</p>
+
+<p>This guide is in three parts: first, we list general coding conventions;
+then we divide the rest of the conventions between kernel and
+user-level.  Please read the appropriate guide, as kernel and user-level
+conventions sometimes contradict each other.</p>
+
+<h2 id="general-c-code">General C code</h2>
+
+<p>This guide applies to general C code at user-level.  For developing the
+seL4 kernel and other verified code, please refer to the verification
+requirements below, which override the general conventions.</p>
+
+<h3 id="compiler-options">Compiler options</h3>
+
+<p>Code should compile without warnings, with <code class="highlighter-rouge">-Wall</code>.</p>
+
+<h3 id="automatic-formatting">Automatic formatting</h3>
+
+<p>For automatic formatting of C code, we use
+<a href="http://astyle.sourceforge.net/">astyle</a>, version 2.05.1, with the
+settings declared in our
+<a href="https://github.com/seL4/seL4_tools/blob/master/misc/astylerc">astylerc</a>.</p>
+
+<h3 id="spacing-and-braces">Spacing and braces</h3>
+
+<ul>
+  <li>Indent using four (4) spaces.  Do not use tabs for indentation at all.</li>
+  <li>Use no space between <code class="highlighter-rouge">*</code> and the variable name in pointer
+expressions (<code class="highlighter-rouge">int *foo</code>).</li>
+  <li>Use space between keywords and parentheses; e.g., <code class="highlighter-rouge">if (condition)</code>.</li>
+  <li>Put the opening brace of a function implementation on the line <em>after</em>
+the function’s return type, name, and argument list.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">atoi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">nptr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* ... */</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Use the “one true brace style” (1TBS); use braces everywhere the
+syntax allows (including single-statement scopes).
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">FOO</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">do_something</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">BAR</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">do_something_else</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">do_last_else</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>When a function argument list gets too long for one line, indent the
+remaining arguments on the next line just inboard of the parenthesis
+on the line above.  For example:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">my_ridiculously_long_type_t</span> <span class="n">foo</span><span class="p">,</span>
+            <span class="n">my_ridiculously_long_type_t</span> <span class="n">bar</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* ... */</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="choosing-data-types">Choosing data types</h3>
+
+<p>When using integral types (<code class="highlighter-rouge">char</code>, <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">long</code>, etc.), qualify them
+explicitly as <code class="highlighter-rouge">unsigned</code> except where negative values are meaningful and
+must be handled.  (Overflow of signed integral types is undefined in the
+C standard.)</p>
+
+<h3 id="naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (<code class="highlighter-rouge">typedef</code>)</h3>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">typedef</code> to create aliases for all <code class="highlighter-rouge">struct</code> types.</li>
+  <li>The names of type aliases should always end in <code class="highlighter-rouge">_t</code>.</li>
+  <li>Function pointer type aliases should always end in <code class="highlighter-rouge">_fn_t</code>.</li>
+  <li>Do not alias pointer types with <code class="highlighter-rouge">typedef</code>; we keep them explicit.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="n">tick_count</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="n">tick_count_ptr_t</span> <span class="o">*</span><span class="n">tick_count</span><span class="p">;</span> <span class="cm">/* NO */</span>
+<span class="n">tick_count</span> <span class="o">*</span><span class="n">tick_count_ptr</span><span class="p">;</span> <span class="cm">/* yes */</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Use <code class="highlighter-rouge">snake_case</code> to name a multi-word variable or type.</li>
+  <li>Non-<code class="highlighter-rouge">static</code> functions should be prefixed with appropriate names to
+avoid polluting the namespace.
+    <ul>
+      <li>The convention in library code is to use the name of the library.</li>
+      <li>A good guide for application code is to use the filename.</li>
+    </ul>
+  </li>
+  <li>Name Boolean variables with a verb phrase including a verb like <code class="highlighter-rouge">is_</code>,
+<code class="highlighter-rouge">has_</code>, or <code class="highlighter-rouge">want_</code> so that the intent of the variable is clear in
+expressions and conditionals.</li>
+  <li>Avoid magic numbers; define meaningful constants.  Prefer C language
+symbols over preprocessor symbols, because the former are visible in a
+symbolic debugger like <code class="highlighter-rouge">gdb</code>.</li>
+  <li>Use <code class="highlighter-rouge">SCREAMING_SNAKE_CASE</code> for, and <em>only</em> for, preprocessor symbols
+and values of enumeration type.</li>
+  <li>Prefix architecture-specific code with <code class="highlighter-rouge">arch_</code>, platform-specific
+code with <code class="highlighter-rouge">plat_</code>, and mode-specific code with <code class="highlighter-rouge">mode_</code>.</li>
+</ul>
+
+<h3 id="expressions">Expressions</h3>
+
+<ul>
+  <li>Avoid pointer arithmetic unless necessary.</li>
+  <li>Always use preprocessor macros for bit manipulation (e.g., use
+<code class="highlighter-rouge">BIT(7)</code> instead of <code class="highlighter-rouge">1 &lt;&lt; 7</code>).</li>
+</ul>
+
+<h3 id="structure">Structure</h3>
+
+<ul>
+  <li>Put architecture- and platform-specific code in dedicated directories.</li>
+  <li>Only <code class="highlighter-rouge">static inline</code> functions are permitted in header files, and then
+only for performance.</li>
+  <li>Variables at file scope must be marked as <code class="highlighter-rouge">static</code>.</li>
+  <li>Use public/private header files; avoid <code class="highlighter-rouge">extern</code> unless necessary.</li>
+  <li>General-purpose utility functions belong in shared libraries, not
+library-specific files, and vice versa.  (Consider checking <code class="highlighter-rouge">libutils</code>
+in the <code class="highlighter-rouge">util_libs</code> Git repository for existing functionality, and
+consider making useful additions there.)</li>
+  <li>Prefer <code class="highlighter-rouge">static inline</code> functions over preprocessor macros unless
+preprocessor features are required or the macro is simple.</li>
+  <li>Put a comment after the <code class="highlighter-rouge">#endif</code> of an <code class="highlighter-rouge">#if</code>, <code class="highlighter-rouge">#ifdef</code>, or <code class="highlighter-rouge">#ifndef</code>
+blocks that refers to the preprocessor symbol(s) upon which the code
+is guarded.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef CONFIG_BLAH
+</span><span class="cm">/* ... */</span>
+<span class="cp">#endif </span><span class="cm">/* CONFIG_BLAH */</span><span class="cp">
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="memory-allocation">Memory allocation</h3>
+
+<p>For memory that should be zeroed, use <code class="highlighter-rouge">calloc</code> rather than <code class="highlighter-rouge">malloc</code>
+followed by <code class="highlighter-rouge">memset</code> or <code class="highlighter-rouge">bzero</code>.</p>
+
+<h3 id="commenting">Commenting</h3>
+
+<ul>
+  <li>Prefer <code class="highlighter-rouge">/* this style */</code> comments over <code class="highlighter-rouge">// this style</code>.</li>
+  <li>Use Javadoc-style comments on function prototypes in headers.</li>
+  <li>Document function parameters and return types, at minimum.</li>
+</ul>
+
+<h2 id="user-level-code">User-level code</h2>
+
+<h3 id="type-conventions">Type conventions</h3>
+
+<p>Be aware that our code needs to be portable across 32- and 64-bit
+platforms.</p>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">seL4_Word</code> for word-sized things.</li>
+  <li>Use <code class="highlighter-rouge">void *</code> for untyped addresses.</li>
+  <li>Use <code class="highlighter-rouge">uintptr_t</code> for pointer arithmetic…</li>
+  <li>…but avoid pointer arithmetic unless necessary.</li>
+  <li>Use <code class="highlighter-rouge">size_t</code> for sizes of objects (including pointers themselves).</li>
+  <li>Use <code class="highlighter-rouge">unsigned int</code> for values known to be small.</li>
+  <li>Use fixed-width types only when necessary, e.g., in device drivers.</li>
+  <li>Use <code class="highlighter-rouge">long</code> variants of built-in functions (<code class="highlighter-rouge">CLZL</code>) for 64-bit
+compatibility, unless operating on a fixed-width type.</li>
+  <li>Use <code class="highlighter-rouge">typedef</code> to create aliases for all <code class="highlighter-rouge">enum</code> types.</li>
+</ul>
+
+<h3 id="format-strings">Format strings</h3>
+
+<ul>
+  <li>Use 64-bit-friendly printing macros for <code class="highlighter-rouge">printf</code> (e.g., <code class="highlighter-rouge">PRIi32</code> for
+<code class="highlighter-rouge">uint32_t</code>).</li>
+  <li>Use <code class="highlighter-rouge">%p</code> for pointers.</li>
+  <li>Use <code class="highlighter-rouge">%zd</code> and <code class="highlighter-rouge">%zu</code> for <code class="highlighter-rouge">ssize_t</code> and <code class="highlighter-rouge">size_t</code> respectively.</li>
+</ul>
+
+<h3 id="header-guards">Header guards</h3>
+
+<p>Use <code class="highlighter-rouge">#pragma once</code> in header files to avoid duplicated includes.</p>
+
+<h3 id="error-handling">Error handling</h3>
+
+<ul>
+  <li>Always check error codes.</li>
+  <li>Use <code class="highlighter-rouge">assert</code> only to test invariants in code.</li>
+  <li>Use <code class="highlighter-rouge">ZF_LOGF</code> for fatal errors: it will call <code class="highlighter-rouge">abort()</code>.</li>
+  <li>For all other error reporting, use the appropriate <code class="highlighter-rouge">ZF_LOG</code> level.</li>
+  <li>Use only <code class="highlighter-rouge">ZF_LOG</code> macros for diagnostic messages–not <code class="highlighter-rouge">printf</code>.</li>
+  <li>Try to follow a transactional approach to error handling: check input
+and report errors before modifying state.</li>
+</ul>
+
+<h2 id="kernel-code">Kernel code</h2>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">word_t</code> for word-sized things.</li>
+  <li>Do not explicitly typecast between pointers and references (i.e.,
+integers used as, e.g., offsets into structures): use object-specific
+macros for this purpose, such as <code class="highlighter-rouge">TCB_REF</code> and <code class="highlighter-rouge">TCB_PTR</code>.</li>
+</ul>
+
+<h3 id="format-strings-1">Format strings</h3>
+
+<p>The in-kernel <code class="highlighter-rouge">printf</code> implementation is limited.</p>
+
+<ul>
+  <li>Use <code class="highlighter-rouge">%p</code> for pointers.</li>
+  <li>Use <code class="highlighter-rouge">%lu</code> for words, and cast to avoid warnings.</li>
+</ul>
+
+<h3 id="header-guards-1">Header guards</h3>
+
+<p>Do not use <code class="highlighter-rouge">#pragma once</code>; use header guards.</p>
+
+<h3 id="error-handling-1">Error handling</h3>
+
+<p>Within seL4, the <code class="highlighter-rouge">decode</code> stage must only check conditions; the
+  <code class="highlighter-rouge">invoke</code> stage can alter state.</p>
+
+<h3 id="verification-requirements">Verification requirements</h3>
+
+<p>Verified code (such as that in the seL4 kernel) must follow these
+requirements.  Note that the verified code requirements override
+anything in the general guide.</p>
+
+<ul>
+  <li>Follow the
+<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">C99</a>
+standard.  (The link is to the final draft before ratification; the
+official standard document cannot be distributed freely.)</li>
+  <li>Avoid taking the address of a variable of automatic storage class.
+(In most C implementations, this means stack-allocated locals.)</li>
+  <li>Do not use floating-point types, e.g., <code class="highlighter-rouge">double</code> or <code class="highlighter-rouge">float</code>.</li>
+  <li>Do not use <code class="highlighter-rouge">restrict</code>.</li>
+  <li><code class="highlighter-rouge">union</code> types cannot be used; use the bitfield generator instead.</li>
+  <li>Do not preincrement or predecrement variables (<code class="highlighter-rouge">++x</code>, <code class="highlighter-rouge">--y</code>).</li>
+  <li>Do not use variable names that duplicate <code class="highlighter-rouge">typedef</code> type aliases:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">int</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">A</span> <span class="n">A</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Do not use fall-through cases in <code class="highlighter-rouge">switch</code> statements.</li>
+  <li>Do not use variadic argument lists.</li>
+  <li>Declare functions that take no arguments as taking a <code class="highlighter-rouge">void</code> argument.</li>
+  <li>References to linker addresses must be via <code class="highlighter-rouge">extern char[]</code> declarations
+rather than declarations of other types (such as <code class="highlighter-rouge">extern char</code> or
+<code class="highlighter-rouge">extern void *</code>).</li>
+  <li>Do not pass arrays as arguments to functions expecting pointers.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">some_pointer</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="n">foo</span><span class="p">(</span><span class="n">my_array</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Do not declare local variables as <code class="highlighter-rouge">static</code>.</li>
+  <li>Prefix <code class="highlighter-rouge">struct</code> fields with the name of the <code class="highlighter-rouge">struct</code> to avoid
+namespace conflicts in the proof.  (Much existing kernel code does not
+follow this directive; new code should adopt the recommended practice
+to avoid namespace collisions in proofs.)</li>
+  <li>Do not use <code class="highlighter-rouge">typedef</code> to create a type alias for an <code class="highlighter-rouge">enum</code>; always
+specify <code class="highlighter-rouge">enum</code> types as <code class="highlighter-rouge">word_t</code> (otherwise, the <code class="highlighter-rouge">enum</code> size is
+determined by the compiler).</li>
+</ul>
+
+<h2 id="further-resources">Further resources</h2>
+
+<ul>
+  <li><a href="https://softwareengineering.stackexchange.com/questions/99543/what-is-the-difference-between-kr-and-one-true-brace-style-1tbs-styles">What is the difference between K&amp;R and One True Brace Style (1TBS) styles?</a></li>
+  <li><a href="https://www.kernel.org/doc/Documentation/process/coding-style.rst">Linux kernel coding style</a></li>
+  <li><a href="http://matt.sh/howto-c">How to C in 2016</a></li>
+  <li><a href="https://google.github.io/styleguide/cppguide.html#64-bit_Portability">Google C++ Style Guide: 64-bit Portability</a></li>
+  <li><a href="https://google.github.io/styleguide/cppguide.html#Integer_Types">Google C++ Style Guide: Integer Types</a></li>
+  <li><a href="https://www.brainyquote.com/quotes/robert_badenpowell_753084">Baden-Powell quotation</a></li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
+          </li>
+          <li>
+                Page last updated: Mon Feb 17 13:52:47 2020 +1100 9ca9081
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/processes/style-guide.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/processes/style-guide.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

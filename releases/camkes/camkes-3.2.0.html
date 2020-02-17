@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>camkes-3.2.0 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/camkes">
+              <span property="name"><b>CAmkES Releases</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">camkes-3.2.0</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/VerifiedConfigurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+    <div class="content">
+      <h1 id="camkes-version-camkes-320-release">CAmkES Version camkes-3.2.0 Release</h1>
+
+<p>Announcing the release of <code class="highlighter-rouge">camkes-3.2.0</code> with the following changes:</p>
+
+<p>camkes-3.2.0 2018-01-17</p>
+
+<p>Using seL4 version 8.0.0</p>
+
+<h1 id="changes">Changes</h1>
+
+<ul>
+  <li>
+    <p>New ADL Syntax: Allow struct elements to have defaults.</p>
+
+    <p>See the following ADL files for examples of Struct and
+  Attribute behavior.
+  <a href="https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes">https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes</a>
+  <a href="https://github.com/seL4/camkes/tree/master/apps/structs">https://github.com/seL4/camkes/tree/master/apps/structs</a>
+  <a href="https://github.com/seL4/camkes/tree/master/apps/attributes">https://github.com/seL4/camkes/tree/master/apps/attributes</a></p>
+  </li>
+  <li>
+    <p>Added experimental Rumprun support:</p>
+
+    <p>This functionality is experimental and may not work
+  as expected. See the following examples:
+  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_ethernet">https://github.com/seL4/camkes/tree/master/apps/rumprun_ethernet</a>
+  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_hello">https://github.com/seL4/camkes/tree/master/apps/rumprun_hello</a>
+  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads">https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads</a>
+  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_rust">https://github.com/seL4/camkes/tree/master/apps/rumprun_rust</a></p>
+
+    <p>More information about the Rumprun unikernel on seL4 can be
+  found here:
+  <a href="https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/">https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/</a></p>
+  </li>
+  <li>
+    <p>New Templates: Remote GDB debugging support</p>
+
+    <p>On ia32 platforms a GDB server can be used to debug a
+  component using the GDB server remote serial protocol.
+  documentation:
+  <a href="https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md">https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md</a></p>
+  </li>
+  <li>
+    <p>Added “hardware_cached” attribute to hardware dataports</p>
+
+    <p>This feature had been added to camkes-2.x.x but hadn’t been
+  forward ported to camkes-3.x.x. documentation:
+  <a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports</a></p>
+  </li>
+</ul>
+
+<h1 id="known-issues">Known issues</h1>
+
+<ul>
+  <li>Hardware dataports that are large enough to use larger frame
+      sizes are currently broken. There is an issue with</li>
+</ul>
+
+<p>large frame promotion and hardware dataports where the capDL loader is
+unable to map the promoted memory. This can be demonstrated by running
+the testhwdataportlrgpages app on either
+arm_testhwdataportlrgpages_defconfig or
+x86_testhwdataportlrgpages_defconfig configurations. If this
+functionality is required, hold off upgrading until this issue is fixed.</p>
+
+<h1 id="upgrade-notes">Upgrade notes</h1>
+
+<ul>
+  <li>ADL files: ADL syntax changes in this release should not break
+      any existing ADL files.</li>
+  <li>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Templates:
+
+    seL4HardwareMMIO template now has an option to map hardware
+    memory as cached. The default setting is uncached
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>which is the same as the old behaviour.</p>
+
+<h1 id="full-changelog">Full changelog</h1>
+<p>Use <code class="highlighter-rouge">git log camkes-3.2.0..camkes-3.1.0</code> in
+<a href="https://github.com/seL4/camkes-tool">https://github.com/seL4/camkes-tool</a></p>
+
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.2.0/docs/index.md">documentation</a>
+or ask on the mailing list!</p>
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/camkes/camkes-3.2.0.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/camkes/camkes-3.2.0.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

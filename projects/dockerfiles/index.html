@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -307,7 +307,7 @@
 
 <p>For convenience, add your account to the docker group:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="k">$(</span>whoami<span class="k">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span>
 </code></pre></div></div>
 
 <h2 id="getting-a-build-environment">Getting a build environment</h2>
@@ -358,17 +358,17 @@ make user
 
 <p>In terminal A, run these commands:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jblogs@host:~<span class="nv">$ </span>mkdir ~/seL4test
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jblogs@host:~<span class="nv">$ </span><span class="nb">mkdir</span> ~/seL4test
 jblogs@host:~<span class="nv">$ </span><span class="nb">cd</span> ~/seL4test
 jblogs@host:~/seL4test<span class="nv">$ </span>repo init <span class="nt">-u</span> https://github.com/seL4/seL4test-manifest.git
-jblogs@host:~/seL4test<span class="nv">$ </span>repo sync
+jblogs@host:~/seL4test<span class="nv">$ </span>repo <span class="nb">sync</span>
 </code></pre></div></div>
 
 <p>In terminal B, run these commands:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jblogs@host:~<span class="nv">$ </span><span class="nb">cd</span> ~/seL4test
 jblogs@host:~/seL4test<span class="nv">$ </span>container  <span class="c"># using the bash alias defined above</span>
-jblogs@in-container:/host<span class="nv">$ </span>mkdir build-x86
+jblogs@in-container:/host<span class="nv">$ </span><span class="nb">mkdir </span>build-x86
 jblogs@in-container:/host<span class="nv">$ </span><span class="nb">cd </span>build-x86
 jblogs@in-container:/host/build-x86<span class="nv">$ </span>../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>x86_64 <span class="nt">-DSIMULATION</span><span class="o">=</span>TRUE 
 jblogs@in-container:/host/build-x86<span class="nv">$ </span>ninja
@@ -422,7 +422,7 @@ These images are used by the Trustworthy Systems Continuous Integration (CI) sof
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Wed Feb 12 13:01:28 2020 +1100 6f3afe5

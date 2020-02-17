@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 10.1.1-mcs | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/sel4">
+              <span property="name"><b>seL4 releases</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 10.1.1-mcs</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/VerifiedConfigurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+    <div class="content">
+      <h1 id="sel4-mcs-pre-release-1011-mcs">seL4 MCS pre-release (10.1.1-mcs)</h1>
+
+<p>This is a pre-release of the seL4 mixed-criticality systems (MCS)
+extensions. This branch is not verified and is under active
+verification.</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<p>The goals of the MCS kernel is to provide strong temporal isolation and
+a basis for reasoning about time.</p>
+
+<h3 id="ipc--signal-ordering">IPC &amp; Signal ordering</h3>
+
+<p>Signal and IPC delivery is now priority ordered and FIFO within a
+priority, rather than plain FIFO</p>
+
+<h3 id="scheduling-contexts">Scheduling contexts</h3>
+
+<p>This branch adds scheduling contexts to seL4, which represent CPU time
+(as budget/period). Scheduling contexts are separate from threads
+(although threads require one to run) and can be passed around over IPC,
+if the target of an IPC does not have its own scheduling context.</p>
+
+<p>Scheduling contexts allow developers to create periodic threads,
+temporally isolate threads and have variable timeslices for round robin
+threads. If <code class="highlighter-rouge">budget == period</code>, the scheduling context acts as timeslice
+and the thread it is bound to is treated as round-robin.</p>
+
+<h3 id="periodic-scheduling">Periodic scheduling</h3>
+
+<p>Periodic threads can be created by binding them to scheduling contexts
+with a <code class="highlighter-rouge">budget &lt; period</code>. <code class="highlighter-rouge">seL4_Yield</code> for these threads will sacrifice
+the remaining budget until the next period.</p>
+
+<h3 id="isolation-through-sporadic-servers">Isolation through sporadic servers</h3>
+
+<p>Temporal isolation is provided with scheduling context by an
+implementation of
+<a href="https://www.cs.fsu.edu/~awang/papers/rtas2010.pdf">sporadic servers</a>. Please see the <a href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1-mcs.pdf">manual</a> or tutorial for further
+explanation.</p>
+
+<p>However, in seL4, threads without budget left in their sporadic server
+are not runnable at all - this is used to provide an absolute cap on CPU
+time executed by a scheduling context. More complex scheduling
+algorithms can be implemented at user-level.</p>
+
+<p>Scheduling contexts are of a variable size, allowing for a variable
+maximum number of sporadic replenishment (termed refills in the API for
+brevity) pre scheduling context object.</p>
+
+<h3 id="passive-servers">Passive Servers</h3>
+
+<p>Passive servers run on their clients scheduling context, as the do not
+have one of their own. This allows for basic temporal isolation of
+shared resources, however clients must provide enough budget for the
+server to finish the request. Futher extensions in future add timeout
+exceptions, which allows a passive server to detect and recover from an
+overrun, however they are not included in this release.</p>
+
+<p>Threads can be converted to passive by removing their scheduling context
+while they are waiting on an endpoint. Then, any calling threads will
+automatically donate their scheduling context to this thread when they
+send it an IPC.</p>
+
+<h3 id="reply-objects">Reply objects</h3>
+
+<p>Reply objects are a new object in the API which serve two purposes:</p>
+
+<ul>
+  <li>They provide a container for the once-off reply capability
+    generated by a <code class="highlighter-rouge">seL4_Call</code> to be stored. This means that the reply
+    cap is always saved and cannot be overriden as it is no longer
+    stored in the internal CNode of a TCB, and <code class="highlighter-rouge">seL4_CNode_SaveCaller</code>
+    no longer needs to be used.</li>
+  <li>They track scheduling context donation over IPC to
+    passive servers.</li>
+</ul>
+
+<h2 id="mcs-abi-and-libsel4">MCS ABI and libsel4</h2>
+
+<p>This section documents kernel ABI and libsel4 changes as compared with
+seL4 <code class="highlighter-rouge">10.1.1</code>.</p>
+
+<h3 id="changes">Changes</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_TCB_Configure</code> arguments changed (fault ep removed)</li>
+  <li><code class="highlighter-rouge">seL4_TCB_SetSchedParams</code> also sets scheduling context, and fault endpoint. The fault endpoint is
+a capability in the current thread’s cspace, unlike on the master kernel, where it is in the
+target thread’s cspace.</li>
+  <li><code class="highlighter-rouge">seL4_Recv</code>, <code class="highlighter-rouge">seL4_ReplyRecv</code>, <code class="highlighter-rouge">seL4_NBRecv</code> now take a reply object
+    such that the caller can receive a call. The reply capability is
+    generated in the reply object, rather than being saved into the
+    TCB CNode internally. <code class="highlighter-rouge">seL4_Call</code> must be paired with <code class="highlighter-rouge">seL4_Recv</code> -
+    and <code class="highlighter-rouge">seL4_CNode_SaveCaller</code> is no longer required.</li>
+  <li><code class="highlighter-rouge">seL4_Wait</code>, <code class="highlighter-rouge">seL4_NBWait</code> and variants do not require a reply
+    object and can be paired with <code class="highlighter-rouge">seL4_Send</code> on endpoints
+    and notifications. Instead of being an API wrapper, this is now a
+    real system call.</li>
+  <li>the x86 kernel ABI now only has 1 message register, due to the
+    need to store the reply object.</li>
+  <li><code class="highlighter-rouge">seL4_MsgMaxLength</code> is now 119, as a reserved word is needed in the IPC buffer on 32-bit x86.</li>
+  <li><code class="highlighter-rouge">seL4_NotificationBits</code> - increased.</li>
+</ul>
+
+<h3 id="api-additions">API Additions</h3>
+
+<h4 id="constants">Constants</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_SchedContextObject</code> - new object for that allows threads
+    access to CPU time</li>
+  <li><code class="highlighter-rouge">seL4_MinSchedContextBits</code> - minimum size n (2\^n) of a scheduling
+    context object</li>
+  <li><code class="highlighter-rouge">seL4_CoreSchedContextBytes</code> - the amount of bytes required for the
+    fields in a scheduling context that are not sporadic refills.</li>
+  <li><code class="highlighter-rouge">seL4_RefillSizeBytes</code> - the size of a single refill. Together with
+    the above, these can be used to determine the number of refills
+    that will fit in a scheduling context object of a certain size.</li>
+  <li><code class="highlighter-rouge">seL4_ReplyObject</code> - new object to track scheduling context
+    donation over IPC and store reply capabilities.</li>
+  <li><code class="highlighter-rouge">seL4_ReplyObjectBits</code> - size of a reply object (2\^n).</li>
+  <li><code class="highlighter-rouge">seL4_CapInitThreadSC</code> - capability to the initial threads
+    scheduling context</li>
+</ul>
+
+<h4 id="system-calls">System calls</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_NBSendRecv</code> - new system call which allows a single kernel
+    invocation to perform a non-blocking send on one capability, and
+    recieve on another.</li>
+  <li><code class="highlighter-rouge">seL4_NBSendRecvWithMRs</code> - uses above new system call without
+    touching the IPC buffer, passing only data in registers</li>
+  <li><code class="highlighter-rouge">seL4_NBSendWait</code> - new system call which allows a single kernel
+    invocation to perform a non-blocking send on one capability, and
+    wait on another (no reply object).</li>
+  <li><code class="highlighter-rouge">seL4_NBSendWaitWithMRs</code> - uses above new system call without
+    touching the IPC buffer, passing only data in registers</li>
+  <li><code class="highlighter-rouge">seL4_SchedControl_Configure</code> - invokes the scheduling control cap
+    to populate a scheduling context with parameters</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Bind</code> - bind a TCB to a scheduling context, if
+    the TCB is runnable and scheduling context has budget, this will
+    start the TCB running</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> - remove binding of a scheduling
+    context from a TCB, TCB will no longer run but state will be
+    preserved</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> Object - remove binding of a scheduling
+    context from a TCB, TCB will no longer run but state will be
+    preserved</li>
+  <li><code class="highlighter-rouge">seL4_Wait</code> - block on an endpoint or notification without
+    providing a reply object. Can be paired with <code class="highlighter-rouge">seL4_Send</code> but
+    not <code class="highlighter-rouge">seL4_Call</code>.</li>
+  <li><code class="highlighter-rouge">seL4_NBWait</code> - a non-blocking variant of the above.</li>
+  <li><code class="highlighter-rouge">seL4_WaitWithMRs</code> - a variant of <code class="highlighter-rouge">seL4_Wait</code> that does not touch
+    the IPC buffer.</li>
+</ul>
+
+<h4 id="invocations">Invocations</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_TCBSetTimeoutEndpoint</code> - new TCB invocation which allows a timeout endpoint to be set for a
+TCB.</li>
+  <li><code class="highlighter-rouge">seL4_SchedControl_Configure</code> - allows scheduling context parameters to be set.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Bind</code> - Allows a notification or TCB object to be bound to a scheduling context
+object.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> - Unbind any object bound to a scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindObject</code> - Unbind a specific object from a scheduling context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_Consumed</code> - Read and reset the amount of time consumed from scheduling
+context.</li>
+  <li><code class="highlighter-rouge">seL4_SchedContext_YieldTo</code> - Place the active thread bound to this scheduling context at the head
+of the scheduling queue for its priority. Read and reset the amount of time consumed.</li>
+</ul>
+
+<h4 id="libsel4">libsel4</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_SetReserved</code>, <code class="highlighter-rouge">seL4_GetReserved</code>: set a reserved word in
+    the IPC buffer that may be used by the kernel ABI for arguments
+    that do not fit into registers.</li>
+  <li><code class="highlighter-rouge">seL4_MaxExtraRefills</code> is provided to allow users to calculate the
+    maximum number of extra refills for a specific scheduling
+    context size.</li>
+  <li><code class="highlighter-rouge">seL4_Time</code>: type for specifying time arguments.</li>
+  <li><code class="highlighter-rouge">seL4_isTimeoutFault_tag</code>: detect a timeout fault message.</li>
+  <li><code class="highlighter-rouge">seL4_TimeoutReply_new</code>: construct a reply to a timeout fault message.</li>
+</ul>
+
+<h4 id="structures">Structures</h4>
+
+<ul>
+  <li>A sched control capability per core is provided to the root task per node
+    via the <code class="highlighter-rouge">seL4_BootInfo</code> structure.</li>
+</ul>
+
+<h3 id="deletions">Deletions</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">seL4_CNode_SaveCaller</code> (deprecated by reply objects)</li>
+  <li><code class="highlighter-rouge">seL4_Reply</code> (replaced by invoking a reply object)</li>
+  <li><code class="highlighter-rouge">seL4_ReplyWithMRs</code> (as above)</li>
+</ul>
+
+<h2 id="library--test-compatability">Library &amp; test compatability</h2>
+
+<p>Please contact us if you need compatible libraries for the MCS kernel for a specific version.</p>
+
+<ul>
+  <li>A <a href="/Tutorials/MCS">new tutorial</a> covers the difference in the APIs</li>
+</ul>
+
+<h2 id="hardware-support">Hardware support</h2>
+
+<p>The MCS kernel currently supports:</p>
+
+<ul>
+  <li><a href="/Hardware/BeagleBoard">BeagleBoard</a></li>
+  <li><a href="/Hardware/sabreLite">SabreLite</a></li>
+  <li><a href="/Hardware/IA32">x86 (ia32, x64), multicore</a></li>
+  <li><a href="/Hardware/jetsontk1">Tegra TK1</a></li>
+  <li><a href="/Hardware/Hikey">Hikey</a></li>
+  <li><a href="/Hardware/OdroidXU">OdroidXU</a></li>
+  <li><a href="/Hardware/OdroidXU4">OdroidXU4</a></li>
+</ul>
+
+<p>Other hardware platforms will be added as required (the ports require
+updated kernel and user-level timer drivers)</p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the <code class="highlighter-rouge">10.1.1-mcs</code> manual included in the release.</p>
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/sel4/10.1.1-mcs.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/sel4/10.1.1-mcs.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

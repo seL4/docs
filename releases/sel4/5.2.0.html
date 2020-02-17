@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Virtualisation on seL4 | seL4 docs</title>
+    <title>seL4 5.2.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,9 +68,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/sel4">
+              <span property="name"><b>seL4 releases</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Virtualisation on seL4</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">seL4 5.2.0</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -290,16 +301,42 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="virtualisation-on-sel4">Virtualisation on seL4</h1>
+      <h1 id="introducing-sel4-520">Introducing seL4 5.2.0</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 5.2.0</code>
+with the following changes:</p>
 
-<p>Multiple projects exist for using virtualisation with seL4.</p>
+<p>Below are the changes to libsel4:</p>
 
 <ul>
-  <li><a href="/projects/camkes-arm-vm">ARM virtualisation</a></li>
-  <li><a href="/projects/camkes-vm">x86 virtualisation</a></li>
-  <li><a href="/projects/camkes-vm/centos">CentOS</a></li>
+  <li>Add <code class="highlighter-rouge">seL4_FastMessageRegisters</code>: Exposes number of registers used
+      in IPC for more optimised user-level IPC stubs.</li>
+  <li>Additional kernel entry types <code class="highlighter-rouge">VMExit</code> and <code class="highlighter-rouge">VCPUFault</code> added for
+      benchmarking kernel entries.</li>
 </ul>
 
+<p>x86 specific changes:</p>
+
+<ul>
+  <li>multiboot memory map information passed to user-level through
+      bootinfo extended regions</li>
+  <li>Expose more seL4 constants</li>
+</ul>
+
+<h1 id="upgrade-notes">Upgrade notes</h1>
+
+<ul>
+  <li>This release potentially breaks ABI with the earlier versions if
+    using benchmarking kernel configurations.</li>
+</ul>
+
+<h1 id="full-changelog">Full changelog</h1>
+
+<p>Use <code class="highlighter-rouge">git log 5.1.0..5.2.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+
+<h1 id="more-details">More details</h1>
+
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0.pdf">5.2.0 manual</a> included in the release or ask on the mailing list!</p>
 
     </div>
   </div>
@@ -330,18 +367,17 @@
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
-                Page last updated: Wed Feb 12 12:42:04 2020 +1100 a660d4e
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/projects/virtualizataion/index.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/sel4/5.2.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/projects/virtualizataion/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/sel4/5.2.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

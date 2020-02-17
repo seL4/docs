@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@ serial port settings to: <code class="highlighter-rouge">115200N1</code></p>
 partitions properly. seL4 image can be uploaded via Fastboot.</p>
 
 <p>To prepare the SD card, run</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>dd <span class="k">if</span><span class="o">=</span>&lt;image file&gt; <span class="nv">of</span><span class="o">=</span>&lt;/dev/sdx&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>&lt;image file&gt; <span class="nv">of</span><span class="o">=</span>&lt;/dev/sdx&gt;
 </code></pre></div></div>
 
 <p>Where <code class="highlighter-rouge">sdx</code> is the device that is associated with your SD card.</p>
@@ -358,8 +358,8 @@ card. To copy U-Boot and the other boot loaders to the SD card:</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo sync
-mkdir cbuild
+repo <span class="nb">sync
+mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
 ../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>exynos4 <span class="nt">-DAARCH32</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
@@ -374,7 +374,7 @@ ninja
 <p>The seL4 image file must be converted
 into a U-Boot application file. The first step is to strip the elf file
 into a binary file. Next we use mkimage to create the image.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get install uboot-mkimage
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>uboot-mkimage
 <span class="nv">INPUT_FILE</span><span class="o">=</span>images/sel4test-image-arm-exynos4
 <span class="nv">OUTPUT_FILE</span><span class="o">=</span>sel4-uImage
 mkimage <span class="nt">-a</span> 0x48000000 <span class="nt">-e</span> 0x48000000 <span class="nt">-C</span> none <span class="nt">-A</span> arm <span class="nt">-T</span> kernel <span class="nt">-O</span> qnx <span class="nt">-d</span> <span class="nv">$INPUT_FILE</span> <span class="nv">$OUTPUT_FILE</span>
@@ -469,7 +469,7 @@ sources and instructions</a></p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon May 28 16:30:11 2018 +1000 f530249

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 releases | seL4 docs</title>
+    <title>seL4 5.0.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,9 +68,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/sel4">
+              <span property="name"><b>seL4 releases</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 releases</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">seL4 5.0.0</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -290,233 +301,61 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="sel4-releases">seL4 releases</h1>
+      <h1 id="introducing-sel4-500">Introducing seL4 5.0.0</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 5.0.0</code>
+with the following changes:</p>
 
-<p>This page documents tagged releases of the seL4 kernel and proofs, for documentation on the release
-process we follow see <a href="/ReleaseProcess">here</a>.</p>
+<p>Below are the changes to the seL4 ABI and API:</p>
 
-<h2 id="landmark-releases">Landmark releases</h2>
-
-<p>This section documents the version at which specific features were introduced to seL4. For future
-features, see <a href="/Status">seL4 status</a>. For other previous features, see the release notes below.</p>
-
-<p><em>Verification Status</em> carries the following definitions and refers to the version specified in the
-<a href="/ReleaseProcess#verified-manifests">verification manifest</a> tagged for that specific release.</p>
+<h2 id="generic-changes">Generic changes:</h2>
 
 <ul>
-  <li>No: As of this release, this feature is not verified.</li>
-  <li>FC: the functional correctness proofs are complete.</li>
-  <li>FCI: the integrity proofs are complete, in addition to functional correctness.</li>
-  <li>Yes: this feature has functional correctness, integrity and infoflow proofs completed, for verified platforms, as of this release.</li>
+  <li>Add missing case to <code class="highlighter-rouge">seL4_getFault</code> (<code class="highlighter-rouge">seL4_Fault_DebugException</code>)</li>
+  <li>Explicitly pack bootinfo data structures</li>
+  <li>Modify <code class="highlighter-rouge">FinalizeLog</code> syscall - Now returns a number of entries in the log</li>
+  <li>Extend bootinfo to support potentially arbitrary additional structures</li>
+  <li>Deprecate bootinfo management in libsel4 - a replacement, <code class="highlighter-rouge">platsupport_get_bootinfo</code> can be found in <code class="highlighter-rouge">libsel4platsupport</code></li>
 </ul>
 
-<p>For the verification status of all platforms, see <a href="/Hardware">Hardware</a>.</p>
+<h2 id="x86-specific-changes">x86 specific changes:</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>Hardware</th>
-      <th>Verification status</th>
-      <th>Available From</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>AARCH64 RPI3</td>
-      <td><a href="/Hardware/Rpi3">RPI3</a></td>
-      <td>No</td>
-      <td><a href="seL4_10.1.0">10.1.0</a></td>
-    </tr>
-    <tr>
-      <td>TX2 support (Aarch64 only)</td>
-      <td><a href="/Hardware/JetsonTX2">TX2</a></td>
-      <td>No</td>
-      <td><a href="seL4_10.1.0">10.1.0</a></td>
-    </tr>
-    <tr>
-      <td>Support for more than 1 VM</td>
-      <td>ARM</td>
-      <td>No</td>
-      <td><a href="seL4_10.1.0">10.1.0</a></td>
-    </tr>
-    <tr>
-      <td>32-bit RISC-V architecture support</td>
-      <td>RISC-V (Spike simulation target)</td>
-      <td>No</td>
-      <td><a href="seL4_10.0.0">10.0.0</a></td>
-    </tr>
-    <tr>
-      <td>64-bit RISC-V architecture support</td>
-      <td>RISC-V (Spike simulation target)</td>
-      <td>No</td>
-      <td><a href="seL4_9.0.1">9.0.1</a></td>
-    </tr>
-    <tr>
-      <td>Meltdown mitigation</td>
-      <td>x86</td>
-      <td>No</td>
-      <td><a href="seL4_9.0.0">9.0.0</a></td>
-    </tr>
-    <tr>
-      <td>Spectre mitigation</td>
-      <td>x86</td>
-      <td>No</td>
-      <td><a href="seL4_9.0.0">9.0.0</a></td>
-    </tr>
-    <tr>
-      <td>Zynq UltraScale+ MPSoC</td>
-      <td>Xilinx ZCU102, ARMv8a, Cortex A53</td>
-      <td>No</td>
-      <td><a href="seL4_8.0.0">8.0.0</a></td>
-    </tr>
-    <tr>
-      <td>Multiboot2 support</td>
-      <td>x86</td>
-      <td>No</td>
-      <td><a href="seL4_8.0.0">8.0.0</a></td>
-    </tr>
-    <tr>
-      <td>CMake based build system</td>
-      <td>all</td>
-      <td>N/A</td>
-      <td><a href="seL4_7.0.0">7.0.0</a></td>
-    </tr>
-    <tr>
-      <td>ARM 32-bit SMP</td>
-      <td><a href="/Hardware/sabreLite">Sabre</a></td>
-      <td>No</td>
-      <td><a href="seL4_6.0.0">6.0.0</a></td>
-    </tr>
-    <tr>
-      <td>ARMv7 32-bit FPU support</td>
-      <td>ARM</td>
-      <td>No</td>
-      <td><a href="seL4_6.0.0">6.0.0</a></td>
-    </tr>
-    <tr>
-      <td>ARM 64-bit support</td>
-      <td>Aarch64</td>
-      <td>No</td>
-      <td><a href="seL4_5.0.0">5.0.0</a></td>
-    </tr>
-    <tr>
-      <td>64-bit x86 support</td>
-      <td>x86_64</td>
-      <td>No</td>
-      <td><a href="seL4_4.0.0">4.0.0</a></td>
-    </tr>
-    <tr>
-      <td>Raspberry Pi 3 support</td>
-      <td><a href="/Hardware/Rpi3">RPI3</a></td>
-      <td>No</td>
-      <td><a href="seL4_4.0.0">4.0.0</a></td>
-    </tr>
-    <tr>
-      <td>ARM Hypervisor initial support</td>
-      <td>ARM</td>
-      <td>FC</td>
-      <td><a href="seL4_3.2.0">3.2.0</a></td>
-    </tr>
-    <tr>
-      <td>First ARMv8 support</td>
-      <td><a href="/Hardware/HiKey">HiKey</a></td>
-      <td>No</td>
-      <td><a href="seL4_3.1.0">3.1.0</a></td>
-    </tr>
-    <tr>
-      <td>NVIDIA Tegra K1 support</td>
-      <td><a href="/Hardware/jetsontk1">TK1</a></td>
-      <td>No</td>
-      <td><a href="seL4_3.0.1">3.0.1</a></td>
-    </tr>
-    <tr>
-      <td>Notification binding</td>
-      <td>all</td>
-      <td>Yes</td>
-      <td><a href="seL4_2.0.0">2.0.0</a></td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>Pass VBE information from multiboot through bootinfo</li>
+  <li>Remove PAE support</li>
+</ul>
 
-<h2 id="master-verified-kernel">Master (verified kernel)</h2>
+<h2 id="x86-64-specific-changes">x86-64 specific changes:</h2>
 
-<p><a href="/sel4_release/seL4_9.0.1.html">seL4 9.0.1</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf">manual</a>)</p>
+<ul>
+  <li>VT-x related cap and object definitions added</li>
+  <li>seL4_VMEnter syscall added</li>
+</ul>
 
-<p><a href="/sel4_release/seL4_9.0.0.html">seL4 9.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0.pdf">manual</a>)</p>
+<h2 id="arm-specific-changes">ARM specific changes:</h2>
 
-<p><a href="/sel4_release/seL4_8.0.0.html">seL4 8.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-8.0.0.pdf">manual</a>)</p>
+<ul>
+  <li>ARM-HYP: VCPU interface for manipulating banked registers added</li>
+  <li>plat: added nvidia tx1 support</li>
+  <li>ARM-HYP: Add support for save/restore of debug registers</li>
+  <li>Add aarch64 implementation</li>
+</ul>
 
-<p><a href="/sel4_release/seL4_7.0.0.html">seL4 7.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf">manual</a>)</p>
+<h1 id="upgrade-notes">Upgrade notes</h1>
 
-<p><a href="/sel4_release/seL4_6.0.0.html">seL4 6.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf">manual</a>)</p>
+<ul>
+  <li>This release breaks both API and ABI and is not source compatible
+    with the earlier versions.</li>
+</ul>
 
-<p><a href="/sel4_release/seL4_5.2.0.html">seL4 5.2.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0.pdf">manual</a>)</p>
+<h1 id="full-changelog">Full changelog</h1>
 
-<p><a href="/sel4_release/seL4_5.1.0.html">seL4 5.1.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf">manual</a>)</p>
+<p>Use <code class="highlighter-rouge">git log 4.0.0..5.0.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
 
-<p><a href="/sel4_release/seL4_5.0.0.html">seL4 5.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf">manual</a>)</p>
+<h1 id="more-details">More details</h1>
 
-<p><a href="/sel4_release/seL4_4.0.0.html">seL4 4.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-4.0.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_3.2.0.html">seL4 3.2.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-3.2.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_3.1.0.html">seL4 3.1.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-3.1.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_3.0.1.html">seL4 3.0.1</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-3.0.1.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_3.0.0.html">seL4 3.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_2.1.0.html">seL4 2.1.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-2.1.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_2.0.0.html">seL4 2.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_10.1.1.html">seL4 10.1.1</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_10.1.0.html">seL4 10.1.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-10.1.0.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_10.0.0.html">seL4 10.0.0</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-10.0.0.pdf">manual</a>)</p>
-
-<h2 id="experimental-branches">Experimental Branches</h2>
-
-<p>We occasionally pre-release experimental branches for community feedback and availability.</p>
-
-<h3 id="mixed-criticality-support-mcs--realtime">Mixed Criticality Support (MCS) / Realtime</h3>
-
-<p><a href="/sel4_release/seL4_9.0.0-mcs.html">seL4 9.0.0-mcs</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0-mcs.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_5.2.0-mcs.html">seL4 5.2.0-mcs</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_10.1.1-mcs.html">seL4 10.1.1-mcs</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1-mcs.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_1.0.0-rt-dev.html">seL4 1.0.0-rt-dev</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf">manual</a>)</p>
-
-<p><a href="/sel4_release/seL4_0.0.1-rt-dev.html">seL4 0.0.1-rt-dev</a>
-(<a href="http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf">manual</a>)</p>
-
-
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf">5.0.0 manual</a> included in the release for detailed descriptions of the new
+features. Or ask on the mailing list!</p>
 
     </div>
   </div>
@@ -547,18 +386,17 @@ features, see <a href="/Status">seL4 status</a>. For other previous features, se
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
-                Page last updated: Fri Nov 22 13:55:19 2019 +1100 59eef7c
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_sel4_release/index.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/sel4/5.0.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_sel4_release/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/sel4/5.0.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

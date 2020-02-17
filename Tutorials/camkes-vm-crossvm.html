@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -453,14 +453,14 @@ project provides an overlay target you can use.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
   <span class="n">VM_INIT_DEF</span><span class="p">()</span>
 
-  <span class="c1">// this is the data port for shared memory between the component and guest process
-</span>  <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
-  <span class="c1">// this event tells the component that there is data ready to print
-</span>  <span class="n">emits</span> <span class="n">DoPrint</span> <span class="n">do_print</span><span class="p">;</span>
-  <span class="c1">// this event tells the guest process that priting is complete
-</span>  <span class="n">consumes</span> <span class="n">DonePrinting</span> <span class="n">done_printing</span><span class="p">;</span>
-  <span class="c1">// this mutex protects access to shared state between the VMM and the guest Linux
-</span>  <span class="n">has</span> <span class="n">mutex</span> <span class="n">cross_vm_event_mutex</span><span class="p">;</span>
+  <span class="c1">// this is the data port for shared memory between the component and guest process</span>
+  <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
+  <span class="c1">// this event tells the component that there is data ready to print</span>
+  <span class="n">emits</span> <span class="n">DoPrint</span> <span class="n">do_print</span><span class="p">;</span>
+  <span class="c1">// this event tells the guest process that priting is complete</span>
+  <span class="n">consumes</span> <span class="n">DonePrinting</span> <span class="n">done_printing</span><span class="p">;</span>
+  <span class="c1">// this mutex protects access to shared state between the VMM and the guest Linux</span>
+  <span class="n">has</span> <span class="n">mutex</span> <span class="n">cross_vm_event_mutex</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -520,9 +520,9 @@ two lines in the configuration section:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">configuration</span> <span class="p">{</span>
     <span class="p">...</span>
-        <span class="c1">// Add the following 2 lines:
-</span>        <span class="n">vm0</span><span class="p">.</span><span class="n">data_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ids must be contiguous, starting from 1
-</span>        <span class="n">vm0</span><span class="p">.</span><span class="n">data_size</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
+        <span class="c1">// Add the following 2 lines:</span>
+        <span class="n">vm0</span><span class="p">.</span><span class="n">data_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ids must be contiguous, starting from 1</span>
+        <span class="n">vm0</span><span class="p">.</span><span class="n">data_size</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span>
     <span class="p">}</span>
 </code></pre></div></div>
 
@@ -535,13 +535,13 @@ two lines in the configuration section:</p>
 <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// wait for the next event
-</span>        <span class="n">do_print_wait</span><span class="p">();</span>
+        <span class="c1">// wait for the next event</span>
+        <span class="n">do_print_wait</span><span class="p">();</span>
 
         <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">);</span>
 
-        <span class="c1">// signal that we are done printing
-</span>        <span class="n">done_printing_emit</span><span class="p">();</span>
+        <span class="c1">// signal that we are done printing</span>
+        <span class="n">done_printing_emit</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -577,28 +577,28 @@ The example code assumes that the shared buffer will contain a valid, null-termi
 #include &lt;vmm/vmm.h&gt;
 #include &lt;vspace/vspace.h&gt;
 </span>
-<span class="c1">// this is defined in the dataport's glue code
-</span><span class="k">extern</span> <span class="n">dataport_caps_handle_t</span> <span class="n">data_handle</span><span class="p">;</span>
+<span class="c1">// this is defined in the dataport's glue code</span>
+<span class="k">extern</span> <span class="n">dataport_caps_handle_t</span> <span class="n">data_handle</span><span class="p">;</span>
 
-<span class="c1">// Array of dataport handles at positions corresponding to handle ids from spec
-</span><span class="k">static</span> <span class="n">dataport_caps_handle_t</span> <span class="o">*</span><span class="n">dataports</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nb">NULL</span><span class="p">,</span> <span class="c1">// entry 0 is NULL so ids correspond with indices
-</span>    <span class="o">&amp;</span><span class="n">data_handle</span><span class="p">,</span>
+<span class="c1">// Array of dataport handles at positions corresponding to handle ids from spec</span>
+<span class="k">static</span> <span class="n">dataport_caps_handle_t</span> <span class="o">*</span><span class="n">dataports</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">NULL</span><span class="p">,</span> <span class="c1">// entry 0 is NULL so ids correspond with indices</span>
+    <span class="o">&amp;</span><span class="n">data_handle</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="c1">// Array of consumed event callbacks and ids
-</span><span class="k">static</span> <span class="n">camkes_consumes_event_t</span> <span class="n">consumed_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">// Array of consumed event callbacks and ids</span>
+<span class="k">static</span> <span class="n">camkes_consumes_event_t</span> <span class="n">consumed_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">{</span> <span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="p">.</span><span class="n">reg_callback</span> <span class="o">=</span> <span class="n">done_printing_reg_callback</span> <span class="p">},</span>
 <span class="p">};</span>
 
-<span class="c1">// Array of emitted event emit functions
-</span><span class="k">static</span> <span class="n">camkes_emit_fn</span> <span class="n">emitted_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nb">NULL</span><span class="p">,</span>   <span class="c1">// entry 0 is NULL so ids correspond with indices
-</span>    <span class="n">do_print_emit</span><span class="p">,</span>
+<span class="c1">// Array of emitted event emit functions</span>
+<span class="k">static</span> <span class="n">camkes_emit_fn</span> <span class="n">emitted_events</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">NULL</span><span class="p">,</span>   <span class="c1">// entry 0 is NULL so ids correspond with indices</span>
+    <span class="n">do_print_emit</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="c1">// mutex to protect shared event context
-</span><span class="k">static</span> <span class="n">camkes_mutex_t</span> <span class="n">cross_vm_event_mutex</span> <span class="o">=</span> <span class="p">(</span><span class="n">camkes_mutex_t</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// mutex to protect shared event context</span>
+<span class="k">static</span> <span class="n">camkes_mutex_t</span> <span class="n">cross_vm_event_mutex</span> <span class="o">=</span> <span class="p">(</span><span class="n">camkes_mutex_t</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">cross_vm_event_mutex_lock</span><span class="p">,</span>
     <span class="p">.</span><span class="n">unlock</span> <span class="o">=</span> <span class="n">cross_vm_event_mutex_unlock</span><span class="p">,</span>
 <span class="p">};</span>
@@ -827,7 +827,7 @@ world
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de

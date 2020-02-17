@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Host Dependencies | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/projects/buildsystem/">
+              <span property="name"><b>System configuration and building</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Host Dependencies</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1"><b>seL4-10.1.1</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/sel4_release/seL4_10.1.1-mcs"><b>seL4-10.1.1-mcs</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/camkes_release/Camkes_3.7.0"><b>camkes-3.7.0</b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Developing/Building/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/FrequentlyAskedQuestions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CAmkES/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/sel4_release/">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/ApiDoc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/VerifiedConfigurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/Conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/IRCChannel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#get-googles-repo-tool">Get Google’s Repo tool</a></li>
+<li class="toc-entry toc-h2"><a href="#sel4-build-dependencies">seL4 Build Dependencies</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#base-build-dependencies">Base Build Dependencies</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#ubuntu">Ubuntu</a></li>
+<li class="toc-entry toc-h4"><a href="#debian">Debian</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#for-debian-stretch-or-later">For Debian Stretch or later</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#python-dependencies">Python Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#camkes-build-dependencies">CAmkES Build Dependencies</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#python-dependencies-1">Python Dependencies</a></li>
+<li class="toc-entry toc-h3"><a href="#haskell-dependencies">Haskell Dependencies</a></li>
+<li class="toc-entry toc-h3"><a href="#build-dependencies">Build Dependencies</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#ubuntu-1">Ubuntu</a></li>
+<li class="toc-entry toc-h4"><a href="#debian-1">Debian</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#for-debian-stretch-or-later-1">For Debian Stretch or later</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#building-proofs-l4v-dependencies">Building Proofs (l4v dependencies)</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#ubuntu-2">Ubuntu</a></li>
+<li class="toc-entry toc-h3"><a href="#debian-2">Debian</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#for-debian-stretch-or-later-2">For Debian Stretch or later</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#haskell-dependencies-1">Haskell Dependencies</a></li>
+<li class="toc-entry toc-h3"><a href="#setup-isabelle">Setup Isabelle</a></li>
+</ul>
+</li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      <h1 id="host-dependencies">Host Dependencies</h1>
+
+<p>This page describes how to set up your host machine to build and run seL4 and its supported projects. To compile and use seL4 you can either:</p>
+
+<ul>
+  <li><em>Recommended:</em> Use Docker to isolate the dependencies from your machine. Detailed instructions for using Docker for building seL4, Camkes, and L4v can be found <a href="Docker">here</a>.</li>
+  <li>Install the following dependencies on your local OS</li>
+</ul>
+
+<p>The following instructions describe how to set up the required dependencies on your local OS. This page assumes you are building in a Linux OS. We however encourage site <a href="https://docs.sel4.systems/DocsContributing">contributions</a> for building in alternative OSes (e.g. macOS).</p>
+
+<h2 id="get-googles-repo-tool">Get Google’s Repo tool</h2>
+
+<p>The primary way of obtaining and managing seL4 project source is through the use of Google’s repo tool. To get repo, follow the instructions described in the section “Installing Repo” <a href="http://source.android.com/source/downloading.html#installing-repo">here</a>.</p>
+
+<p>See the <a href="repo-cheatsheet">RepoCheatsheet</a> page for a quick explanation of how we use Repo.</p>
+
+<h2 id="sel4-build-dependencies">seL4 Build Dependencies</h2>
+
+<p>To build seL4-based projects, ensure you have installed the dependencies described in the <a href="#base-build-dependencies">Base Build Dependencies</a> and <a href="#python-dependencies">Python Dependencies</a> sections below.</p>
+
+<h3 id="base-build-dependencies">Base Build Dependencies</h3>
+
+<p>To establish a usable development environment it is important to install your distributions basic build packages.</p>
+
+<h4 id="ubuntu">Ubuntu</h4>
+
+<blockquote>
+  <p><em>The following instructions cover the build dependencies tested on <a href="http://releases.ubuntu.com/18.04/">Ubuntu 18.04</a> LTS. Note that earlier versions of Ubuntu (e.g. 16.04) may not be sufficient for building as some default development packages are
+stuck at older versions (e.g CMake 3.5.1, GCC 5.4 for 16.04).
+As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new <a href="https://docs.sel4.systems/DocsContributing">contributions</a> to the page.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>Note that we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: https://cmake.org/download/</em></p>
+</blockquote>
+
+<p>The basic build package on Ubuntu is the <code class="highlighter-rouge">build-essential</code> package. To install run:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+sudo apt-get install build-essential
+</code></pre></div></div>
+
+<p>Additional base dependencies for building seL4 projects on Ubuntu include installing:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install cmake ccache ninja-build cmake-curses-gui
+sudo apt-get install python-dev python-pip python3-dev python3-pip
+sudo apt-get install libxml2-utils ncurses-dev
+sudo apt-get install curl git doxygen device-tree-compiler
+sudo apt-get install u-boot-tools
+sudo apt-get install protobuf-compiler python-protobuf
+</code></pre></div></div>
+
+<p>To build for ARM targets you will need a cross compiler. In addition, to run seL4 projects on a simulator you will need <code class="highlighter-rouge">qemu</code>. Installation of these additional base dependencies include running:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
+sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+sudo apt-get install qemu-system-arm qemu-system-x86 qemu-system-misc
+</code></pre></div></div>
+
+<p>(you can install  the hardware floating point versions as well if you wish”</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+</code></pre></div></div>
+<h4 id="debian">Debian</h4>
+
+<h5 id="for-debian-stretch-or-later">For Debian Stretch or later</h5>
+
+<p>The dependencies listed in our docker files <a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles">repository</a> will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:</p>
+
+<ul>
+  <li><a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile">Base Tools Dockerfile</a></li>
+  <li><a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile">seL4 Dockerfile</a></li>
+</ul>
+
+<p>The version of <code class="highlighter-rouge">cmake</code> in Debian <em>stretch</em> is too old to build seL4 projects (<em>buster</em> and later are OK).  If you are on <em>stretch</em>, install <code class="highlighter-rouge">cmake</code> from stretch-backports:</p>
+
+<p>Add the <em>stretch-backports</em> repository like this (substitute a local mirror for <code class="highlighter-rouge">ftp.debian.org</code> if you like)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo sh -c "echo 'deb http://ftp.debian.org/debian stretch-backports main' &gt; /etc/apt/sources.list.d/backports.list"
+</code></pre></div></div>
+<p>Then install <code class="highlighter-rouge">cmake</code> with</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+sudo apt-get -t stretch-backports install cmake
+</code></pre></div></div>
+
+<h3 id="python-dependencies">Python Dependencies</h3>
+
+<p>Regardless of your Linux distribution, python dependencies are required to build seL4, the manual and its proofs. To install you can run:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install --user setuptools
+pip3 install --user sel4-deps
+# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
+pip install --user setuptools
+pip install --user sel4-deps
+
+</code></pre></div></div>
+<p>(Some distributions use <code class="highlighter-rouge">pip</code> for python3 and <code class="highlighter-rouge">pip2</code> for python2; others uses <code class="highlighter-rouge">pip</code> for python2 and <code class="highlighter-rouge">pip3</code> for python3.  Use the Python 3 version for your distribution)</p>
+
+<h2 id="camkes-build-dependencies">CAmkES Build Dependencies</h2>
+
+<p>To build a CAmkES based project on seL4, additional dependencies need to be installed on your host machine. Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools. The following instructions cover the CAmkES build dependencies for Ubuntu/Debian. Please ensure you have installed the dependencies listed in sections <a href="#sel4-build-dependencies">sel4 Build Dependencies</a> and <a href="#get-googles-repo-tool">Get Google’s Repo tool</a> prior to building a CAmkES project.</p>
+
+<h3 id="python-dependencies">Python Dependencies</h3>
+
+<p>The python dependencies required by the CAmkES build toolchain can be installed via pip:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install --user camkes-deps
+# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
+pip install --user camkes-deps
+</code></pre></div></div>
+
+<h3 id="haskell-dependencies">Haskell Dependencies</h3>
+
+<p>The CAmkES build toolchain additionally requires Haskell. You can install the <a href="https://haskellstack.org">Haskell stack</a> on your distribution by running:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSL https://get.haskellstack.org/ | sh
+</code></pre></div></div>
+<p>If you prefer not to bypass your distribution’s package manager, you can do</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install haskell-stack
+</code></pre></div></div>
+
+<h3 id="build-dependencies">Build Dependencies</h3>
+
+<h4 id="ubuntu">Ubuntu</h4>
+<blockquote>
+  <p><em>Tested on Ubuntu 18.04 LTS</em></p>
+</blockquote>
+
+<p>Install the following packages on your Ubuntu machine:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install clang gdb
+sudo apt-get install libssl-dev libclang-dev libcunit1-dev libsqlite3-dev
+sudo apt-get install qemu-kvm
+</code></pre></div></div>
+
+<h4 id="debian">Debian</h4>
+
+<h5 id="for-debian-stretch-or-later">For Debian Stretch or later</h5>
+
+<p>The dependencies listed in our docker files <a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles">repository</a> will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:</p>
+
+<ul>
+  <li><a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/camkes.dockerfile">CAmkES Dockerfile</a></li>
+</ul>
+
+<h2 id="building-proofs-l4v-dependencies">Building Proofs (l4v dependencies)</h2>
+
+<p>The proofs in the <a href="https://github.com/seL4/l4v">L4.verified</a> repository use <code class="highlighter-rouge">Isabelle2017</code>. To best way to make sure you have all the dependencies on your host machine is to follow the instructions listed in sections <a href="#base-build-dependencies">Base Build Dependencies</a>. However you can get away with avoiding a full cross compiler setup. The dependencies for Isabelle you will need at least are listed below:</p>
+
+<h3 id="ubuntu">Ubuntu</h3>
+
+<blockquote>
+  <p><em>Tested on Ubuntu 18.04 LTS</em></p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libwww-perl libxml2-dev libxslt-dev
+sudo apt-get install mlton rsync
+sudo apt-get install texlive-fonts-recommended texlive-latex-extra texlive-metapost texlive-bibtex-extra
+</code></pre></div></div>
+
+<h3 id="debian">Debian</h3>
+
+<h4 id="for-debian-stretch-or-later">For Debian Stretch or later</h4>
+
+<p>The dependencies listed in our docker files <a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles">repository</a> will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:</p>
+
+<ul>
+  <li><a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/l4v.dockerfile">l4v Dockerfile</a></li>
+</ul>
+
+<h3 id="haskell-dependencies">Haskell Dependencies</h3>
+
+<p>The Haskell tool-stack is required to build the Haskell kernel model. You can install <a href="https://haskellstack.org">Haskell stack</a> on your distribution by running:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSL https://get.haskellstack.org/ | sh
+</code></pre></div></div>
+
+<p>If you prefer not to bypass your distribution’s package manager, you can do</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install haskell-stack
+</code></pre></div></div>
+
+<h3 id="setup-isabelle">Setup Isabelle</h3>
+
+<p>To setup Isabelle, you will firstly need to pull the <a href="https://github.com/seL4/l4v">L4.verified</a> project source using the Google repo tool (installing the Google repo tool is described in the <a href="#get-googles-repo-tool">Get Google’s Repo tool</a> section. The following steps to setup Isabelle:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a directory to store the project source
+mkdir lv4_repo
+cd lv4_repo
+# Initialise the project repo
+repo init -u https://github.com/seL4/verification-manifest.git
+repo sync
+cd l4v
+mkdir -p ~/.isabelle/etc
+cp -i misc/etc/settings ~/.isabelle/etc/settings
+./isabelle/bin/isabelle components -a
+./isabelle/bin/isabelle jedit -bf
+./isabelle/bin/isabelle build -bv HOL-Word
+</code></pre></div></div>
+
+
+    </div>
+  </div>
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
+          </li>
+          <li>
+                Page last updated: Mon Feb 17 13:52:47 2020 +1100 04996fa
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/projects/buildsystem/host-dependencies.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/projects/buildsystem/host-dependencies.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

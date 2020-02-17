@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -406,15 +406,15 @@ revoked.</p>
 
 <p>TL;DR: Untyped objects should be allocated in order of size, largest first, to avoid wasting memory.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_Untyped_Retype</span><span class="p">(</span><span class="n">parent_untyped</span><span class="p">,</span> <span class="c1">// the untyped capability to retype
-</span>                                <span class="n">seL4_UntypedObject</span><span class="p">,</span> <span class="c1">// type
-</span>                                <span class="n">untyped_size_bits</span><span class="p">,</span>  <span class="c1">//size
-</span>                                <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="c1">// root
-</span>                                <span class="mi">0</span><span class="p">,</span> <span class="c1">// node_index
-</span>                                <span class="mi">0</span><span class="p">,</span> <span class="c1">// node_depth
-</span>                                <span class="n">child_untyped</span><span class="p">,</span> <span class="c1">// node_offset
-</span>                                <span class="mi">1</span> <span class="c1">// num_caps
-</span>                                <span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_Untyped_Retype</span><span class="p">(</span><span class="n">parent_untyped</span><span class="p">,</span> <span class="c1">// the untyped capability to retype</span>
+                                <span class="n">seL4_UntypedObject</span><span class="p">,</span> <span class="c1">// type</span>
+                                <span class="n">untyped_size_bits</span><span class="p">,</span>  <span class="c1">//size</span>
+                                <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="c1">// root</span>
+                                <span class="mi">0</span><span class="p">,</span> <span class="c1">// node_index</span>
+                                <span class="mi">0</span><span class="p">,</span> <span class="c1">// node_depth</span>
+                                <span class="n">child_untyped</span><span class="p">,</span> <span class="c1">// node_offset</span>
+                                <span class="mi">1</span> <span class="c1">// num_caps</span>
+                                <span class="p">);</span>
 </code></pre></div></div>
 
 <p>The above code snippet shows an example of retyping an untyped into a smaller, 4KiB untyped object.
@@ -489,19 +489,19 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
 <p><strong>Exercise</strong> Calculate the size of the child untyped required, such that the child untyped can be used
  to create all of the objects lists in the <code class="highlighter-rouge">objects</code> array.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// list of general seL4 objects
-</span>    <span class="n">seL4_Word</span> <span class="n">objects</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">seL4_TCBObject</span><span class="p">,</span> <span class="n">seL4_EndpointObject</span><span class="p">,</span> <span class="n">seL4_NotificationObject</span><span class="p">};</span>
-    <span class="c1">// list of general seL4 object size_bits
-</span>    <span class="n">seL4_Word</span> <span class="n">sizes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">seL4_TCBBits</span><span class="p">,</span> <span class="n">seL4_EndpointBits</span><span class="p">,</span> <span class="n">seL4_NotificationBits</span><span class="p">};</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// list of general seL4 objects</span>
+    <span class="n">seL4_Word</span> <span class="n">objects</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">seL4_TCBObject</span><span class="p">,</span> <span class="n">seL4_EndpointObject</span><span class="p">,</span> <span class="n">seL4_NotificationObject</span><span class="p">};</span>
+    <span class="c1">// list of general seL4 object size_bits</span>
+    <span class="n">seL4_Word</span> <span class="n">sizes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">seL4_TCBBits</span><span class="p">,</span> <span class="n">seL4_EndpointBits</span><span class="p">,</span> <span class="n">seL4_NotificationBits</span><span class="p">};</span>
 
-    <span class="c1">// TODO work out what size object we need to create to be able to create all of the objects
-</span>    <span class="c1">// listed above
-</span>    <span class="n">seL4_Word</span> <span class="n">untyped_size_bits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// TODO work out what size object we need to create to be able to create all of the objects</span>
+    <span class="c1">// listed above</span>
+    <span class="n">seL4_Word</span> <span class="n">untyped_size_bits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">seL4_CPtr</span> <span class="n">parent_untyped</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">seL4_CPtr</span> <span class="n">child_untyped</span> <span class="o">=</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">empty</span><span class="p">.</span><span class="n">start</span><span class="p">;</span>
 
-    <span class="c1">// First, find an untyped big enough to fit all of our objects
-</span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">start</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// First, find an untyped big enough to fit all of our objects</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">start</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untypedList</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">sizeBits</span> <span class="o">&gt;=</span> <span class="n">untyped_size_bits</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">untypedList</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">isDevice</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">parent_untyped</span> <span class="o">=</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">start</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
             <span class="k">break</span><span class="p">;</span>
@@ -519,8 +519,8 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_CPtr</span> <span class="n">child_tcb</span> <span class="o">=</span> <span class="n">child_untyped</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
     <span class="cm">/* TODO create a TCB in CSlot child_tcb */</span>
 
-    <span class="c1">// try to set the TCB priority
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_SetPriority</span><span class="p">(</span><span class="n">child_tcb</span><span class="p">,</span> <span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="c1">// try to set the TCB priority</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_SetPriority</span><span class="p">(</span><span class="n">child_tcb</span><span class="p">,</span> <span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to set priority"</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -533,8 +533,8 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_CPtr</span> <span class="n">child_ep</span> <span class="o">=</span> <span class="n">child_tcb</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
     <span class="cm">/* TODO create an endpoint in CSlot child_ep */</span>
 
-    <span class="c1">// identify the type of child_ep
-</span>    <span class="kt">uint32_t</span> <span class="n">cap_id</span> <span class="o">=</span> <span class="n">seL4_DebugCapIdentify</span><span class="p">(</span><span class="n">child_ep</span><span class="p">);</span>
+    <span class="c1">// identify the type of child_ep</span>
+    <span class="kt">uint32_t</span> <span class="n">cap_id</span> <span class="o">=</span> <span class="n">seL4_DebugCapIdentify</span><span class="p">(</span><span class="n">child_ep</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">cap_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Endpoint cap is null cap"</span><span class="p">);</span>
 </code></pre></div></div>
 <p>On success, ‘Failed to bind notification’ should be output.</p>
@@ -543,10 +543,10 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
 <p><strong>Exercise</strong> create a notification object from <code class="highlighter-rouge">child_untyped</code> and place it in the <code class="highlighter-rouge">child_ntfn</code> CSlot.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_CPtr</span> <span class="n">child_ntfn</span> <span class="o">=</span> <span class="n">child_ep</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="c1">// TODO create a notification object in CSlot child_ntfn
-</span>
-    <span class="c1">// try to use child_ntfn
-</span>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_BindNotification</span><span class="p">(</span><span class="n">child_tcb</span><span class="p">,</span> <span class="n">child_ntfn</span><span class="p">);</span>
+    <span class="c1">// TODO create a notification object in CSlot child_ntfn</span>
+
+    <span class="c1">// try to use child_ntfn</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_BindNotification</span><span class="p">(</span><span class="n">child_tcb</span><span class="p">,</span> <span class="n">child_ntfn</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to bind notification."</span><span class="p">);</span>
 </code></pre></div></div>
 <h3 id="delete-the-objects">Delete the objects</h3>
@@ -554,10 +554,10 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 entire untyped object. However, this fails, because the untyped is already completely consumed by the previous allocations.</p>
 
 <p><strong>Exercise</strong> revoke the child untyped, so we can create new objects from it that use up the whole thing.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO revoke the child untyped
-</span>
-    <span class="c1">// allocate the whole child_untyped as endpoints
-</span>    <span class="n">seL4_Word</span> <span class="n">num_eps</span> <span class="o">=</span> <span class="n">BIT</span><span class="p">(</span><span class="n">untyped_size_bits</span> <span class="o">-</span> <span class="n">seL4_EndpointBits</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO revoke the child untyped</span>
+
+    <span class="c1">// allocate the whole child_untyped as endpoints</span>
+    <span class="n">seL4_Word</span> <span class="n">num_eps</span> <span class="o">=</span> <span class="n">BIT</span><span class="p">(</span><span class="n">untyped_size_bits</span> <span class="o">-</span> <span class="n">seL4_EndpointBits</span><span class="p">);</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_Untyped_Retype</span><span class="p">(</span><span class="n">child_untyped</span><span class="p">,</span> <span class="n">seL4_EndpointObject</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">child_tcb</span><span class="p">,</span> <span class="n">num_eps</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_NoError</span><span class="p">,</span> <span class="s">"Failed to create endpoints."</span><span class="p">);</span>
 
@@ -616,7 +616,7 @@ to become more familiar with untyped objects and memory allocation in seL4.</p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de

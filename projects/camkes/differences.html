@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -320,26 +320,26 @@
 
 <p>Previously all attribute settings were treated as strings by templates.
 Settings are now interpreted as an appropriate python type.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// list
-</span><span class="n">foo</span><span class="p">.</span><span class="n">bar</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">];</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// list</span>
+<span class="n">foo</span><span class="p">.</span><span class="n">bar</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">];</span>
 
-<span class="c1">// boolean
-</span><span class="n">moo</span><span class="p">.</span><span class="n">cow</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="c1">// boolean</span>
+<span class="n">moo</span><span class="p">.</span><span class="n">cow</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 
-<span class="c1">// string
-</span><span class="n">baz</span><span class="p">.</span><span class="n">qux</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
+<span class="c1">// string</span>
+<span class="n">baz</span><span class="p">.</span><span class="n">qux</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
 
-<span class="c1">// dict
-</span><span class="n">crazy</span><span class="p">.</span><span class="n">stuff</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"key"</span> <span class="o">:</span> <span class="p">[</span><span class="s">"polymorphic"</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s">"list"</span><span class="p">,</span>
+<span class="c1">// dict</span>
+<span class="n">crazy</span><span class="p">.</span><span class="n">stuff</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"key"</span> <span class="o">:</span> <span class="p">[</span><span class="s">"polymorphic"</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s">"list"</span><span class="p">,</span>
                  <span class="p">{</span><span class="s">"hello"</span><span class="o">:</span><span class="nb">true</span><span class="p">}</span> <span class="p">]</span> <span class="p">};</span>
 
-<span class="c1">// appropriate numeric type 
-</span><span class="n">arithmetic</span><span class="p">.</span><span class="n">expressions</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mh">0x9</span><span class="p">;</span>
+<span class="c1">// appropriate numeric type </span>
+<span class="n">arithmetic</span><span class="p">.</span><span class="n">expressions</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mh">0x9</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>Arbitrary ids are no longer allowed as setting values:</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// error
-</span></code></pre></div></div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// error</span>
+</code></pre></div></div>
 
 <h2 id="parametrised-buf-type">Parametrised Buf Type</h2>
 
@@ -407,10 +407,10 @@ the writes following it.</p>
 
 <p>There is new syntax for connections with multiple from/to sides. The
 following fragments are equivalent (except for connection names):</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="n">foo</span><span class="p">(</span><span class="n">from</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
-<span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="n">bar</span><span class="p">(</span><span class="n">from</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="nf">foo</span><span class="p">(</span><span class="n">from</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="nf">bar</span><span class="p">(</span><span class="n">from</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
 </code></pre></div></div>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="n">foobar</span><span class="p">(</span><span class="n">from</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">from</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="nf">foobar</span><span class="p">(</span><span class="n">from</span> <span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">from</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">to</span> <span class="n">c</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Both syntaxes are supported by CAmkES 3.</p>
@@ -446,27 +446,27 @@ changes are not backwards compatible.</p>
     <span class="n">connection</span> <span class="n">seL4HardwareIOPort</span> <span class="n">ioport</span><span class="p">(</span><span class="n">from</span> <span class="n">driver</span><span class="p">.</span><span class="n">port</span><span class="p">,</span> <span class="n">to</span> <span class="n">device</span><span class="p">.</span><span class="n">port</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="n">configuration</span> <span class="p">{</span>
-    <span class="c1">// see below
-</span>  <span class="p">}</span>
+    <span class="c1">// see below</span>
+  <span class="p">}</span>
 
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>CAmkES 2 configuration:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
-  <span class="n">device</span><span class="p">.</span><span class="n">registers_attributes</span> <span class="o">=</span> <span class="s">"0x12345000:0x1000"</span><span class="p">;</span> <span class="c1">// string in format "paddr:size"
-</span>  <span class="n">device</span><span class="p">.</span><span class="n">interrupt_attributes</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>                  <span class="c1">// irq number
-</span>  <span class="n">device</span><span class="p">.</span><span class="n">port_attributes</span> <span class="o">=</span> <span class="s">"0x40:0x40"</span><span class="p">;</span>              <span class="c1">// string in format "start_port:end_port"
-</span><span class="p">}</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">registers_attributes</span> <span class="o">=</span> <span class="s">"0x12345000:0x1000"</span><span class="p">;</span> <span class="c1">// string in format "paddr:size"</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">interrupt_attributes</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>                  <span class="c1">// irq number</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">port_attributes</span> <span class="o">=</span> <span class="s">"0x40:0x40"</span><span class="p">;</span>              <span class="c1">// string in format "start_port:end_port"</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>CAmkES 3 configuration:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">configuration</span> <span class="p">{</span>
-  <span class="n">device</span><span class="p">.</span><span class="n">registers_paddr</span> <span class="o">=</span> <span class="mh">0x12345000</span><span class="p">;</span>  <span class="c1">// separate attribute for paddr and size
-</span>  <span class="n">device</span><span class="p">.</span><span class="n">registers_size</span> <span class="o">=</span> <span class="mh">0x1000</span><span class="p">;</span>
-  <span class="n">device</span><span class="p">.</span><span class="n">interrupt_irq_number</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>     <span class="c1">// attribute name has changed
-</span>  <span class="n">device</span><span class="p">.</span><span class="n">port_attributes</span> <span class="o">=</span> <span class="s">"0x40:0x40"</span><span class="p">;</span> <span class="c1">// unchanged
-</span><span class="p">}</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">registers_paddr</span> <span class="o">=</span> <span class="mh">0x12345000</span><span class="p">;</span>  <span class="c1">// separate attribute for paddr and size</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">registers_size</span> <span class="o">=</span> <span class="mh">0x1000</span><span class="p">;</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">interrupt_irq_number</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>     <span class="c1">// attribute name has changed</span>
+  <span class="n">device</span><span class="p">.</span><span class="n">port_attributes</span> <span class="o">=</span> <span class="s">"0x40:0x40"</span><span class="p">;</span> <span class="c1">// unchanged</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h2 id="interrupt-api">Interrupt API</h2>
@@ -500,20 +500,20 @@ CAmkES 2 had special connectors used to export an interface of a
 sub-component:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Serial</span> <span class="p">{</span>
 
-  <span class="c1">// interface of this component 
-</span>  <span class="n">provides</span> <span class="n">UartIface</span> <span class="n">serial</span><span class="p">;</span>
+  <span class="c1">// interface of this component </span>
+  <span class="n">provides</span> <span class="n">UartIface</span> <span class="n">serial</span><span class="p">;</span>
  
   <span class="n">composition</span> <span class="p">{</span>
  
-    <span class="c1">// internal components
-</span>    <span class="n">component</span> <span class="n">UartDevice</span> <span class="n">uart_device</span><span class="p">;</span>
+    <span class="c1">// internal components</span>
+    <span class="n">component</span> <span class="n">UartDevice</span> <span class="n">uart_device</span><span class="p">;</span>
     <span class="n">component</span> <span class="n">UartDriver</span> <span class="n">uart_driver</span><span class="p">;</span>
 
-    <span class="c1">// internal connection
-</span>    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_device</span><span class="p">.</span><span class="n">regs</span><span class="p">,</span> <span class="n">to</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">regs</span><span class="p">);</span>
+    <span class="c1">// internal connection</span>
+    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_device</span><span class="p">.</span><span class="n">regs</span><span class="p">,</span> <span class="n">to</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">regs</span><span class="p">);</span>
   
-    <span class="c1">// export interface of driver component as interface of this component
-</span>    <span class="n">connection</span> <span class="n">ExportRPC</span> <span class="n">exp</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">uart</span><span class="p">,</span> <span class="n">to</span> <span class="n">serial</span><span class="p">);</span>
+    <span class="c1">// export interface of driver component as interface of this component</span>
+    <span class="n">connection</span> <span class="n">ExportRPC</span> <span class="n">exp</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">uart</span><span class="p">,</span> <span class="n">to</span> <span class="n">serial</span><span class="p">);</span>
  
   <span class="p">}</span>
 <span class="p">}</span>
@@ -523,20 +523,20 @@ sub-component:</p>
 sub-components:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Serial</span> <span class="p">{</span>
 
-  <span class="c1">// interface of this component
-</span>  <span class="n">provides</span> <span class="n">UartIface</span> <span class="n">serial</span><span class="p">;</span>
+  <span class="c1">// interface of this component</span>
+  <span class="n">provides</span> <span class="n">UartIface</span> <span class="n">serial</span><span class="p">;</span>
  
   <span class="n">composition</span> <span class="p">{</span>
  
-    <span class="c1">// internal components
-</span>    <span class="n">component</span> <span class="n">UartDevice</span> <span class="n">uart_device</span><span class="p">;</span>
+    <span class="c1">// internal components</span>
+    <span class="n">component</span> <span class="n">UartDevice</span> <span class="n">uart_device</span><span class="p">;</span>
     <span class="n">component</span> <span class="n">UartDriver</span> <span class="n">uart_driver</span><span class="p">;</span>
 
-    <span class="c1">// internal connection
-</span>    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_device</span><span class="p">.</span><span class="n">regs</span><span class="p">,</span> <span class="n">to</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">regs</span><span class="p">);</span>
+    <span class="c1">// internal connection</span>
+    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="n">conn</span><span class="p">(</span><span class="n">from</span> <span class="n">uart_device</span><span class="p">.</span><span class="n">regs</span><span class="p">,</span> <span class="n">to</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">regs</span><span class="p">);</span>
 
-    <span class="c1">// export interface of driver component as interface of this component
-</span>    <span class="n">export</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">uart</span> <span class="o">-&gt;</span> <span class="n">serial</span><span class="p">;</span>
+    <span class="c1">// export interface of driver component as interface of this component</span>
+    <span class="n">export</span> <span class="n">uart_driver</span><span class="p">.</span><span class="n">uart</span> <span class="o">-&gt;</span> <span class="n">serial</span><span class="p">;</span>
  
   <span class="p">}</span>
 <span class="p">}</span>
@@ -571,7 +571,7 @@ sub-components:</p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Wed Feb 12 12:24:54 2020 +1100 4fa95da

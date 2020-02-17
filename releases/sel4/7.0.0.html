@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAmkES Releases | seL4 docs</title>
+    <title>seL4 7.0.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,9 +68,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/sel4">
+              <span property="name"><b>seL4 releases</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">CAmkES Releases</span>
-            <meta property="position" content="2" /></li>
+            <span property="name">seL4 7.0.0</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -290,35 +301,73 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="camkes-releases">CAmkES releases</h1>
+      <h1 id="sel4-version-700-release">seL4 Version 7.0.0 Release</h1>
+<p>Announcing the release of <code class="highlighter-rouge">seL4 7.0.0</code> with the following changes:</p>
 
-<p><a href="/camkes_release/Camkes_3.7.0.html">camkes-3.7.0</a></p>
+<h2 id="changes">Changes</h2>
 
-<p><a href="/camkes_release/Camkes_3.6.0.html">camkes-3.6.0</a></p>
+<ul>
+  <li>Support for building standalone ia32 kernel added in <code class="highlighter-rouge">e7327fa6df3</code></li>
+  <li>ia32: Set sensible defaults for FS and GS selectors in
+      <code class="highlighter-rouge">c2f6d48bcf2</code></li>
+  <li>aarch64: Use tpidrro_el0 for IPC buffer instead of tpidr_el0
+      in <code class="highlighter-rouge">ae9fe9b5d18</code></li>
+  <li>More seL4 manual documentation added for aarch64 object
+      invocations</li>
+  <li>Default <code class="highlighter-rouge">NUM_DOMAINS</code> set to 16 for x86-64 standalone builds in
+      <code class="highlighter-rouge">baa9798f793</code></li>
+  <li>libsel4: Return <code class="highlighter-rouge">seL4_Error</code> in invocation stubs in <code class="highlighter-rouge">8fb06eecff9</code>
+      ** This is a source code level breaking change **</li>
+  <li>Add a CMake based build system in <code class="highlighter-rouge">0b73072016e</code></li>
+  <li>x86: Increase TCB size for debug builds in <code class="highlighter-rouge">4c8be8f4f91</code></li>
+  <li>libsel4: x86: Remove nested struct declarations in <code class="highlighter-rouge">a8d6315eb16</code>
+      ** This is a source code level breaking change **</li>
+  <li>Bugfix: x86: Unmap pages when delete non final frame caps in
+      <code class="highlighter-rouge">08b9265563a</code></li>
+</ul>
 
-<p><a href="/camkes_release/CAmkES_3.5.0.html">camkes-3.5.0</a></p>
+<h1 id="notable-changes">Notable changes</h1>
 
-<p><a href="/camkes_release/CAmkES_3.4.0.html">camkes-3.4.0</a></p>
+<ul>
+  <li>CMake based build system added: Initial experimental support has
+      been added for using CMake for building the kernel and some user
+      level libraries. Currently the only project that takes advantage
+      of this is seL4test when using the cmake.xml manifest
+      in sel4test-manifest. Documentation can be found at:
+      <a href="https://github.com/seL4/seL4_tools/tree/master/cmake-tool">https://github.com/seL4/seL4_tools/tree/master/cmake-tool</a></li>
+</ul>
 
-<p><a href="/camkes_release/CAmkES_3.3.0.html">camkes-3.3.0</a></p>
+<h1 id="upgrade-notes">Upgrade notes</h1>
 
-<p><a href="/camkes_release/CAmkES_3.2.0.html">camkes-3.2.0</a></p>
+<ul>
+  <li>This release is not source compatible with previous releases.</li>
+  <li>seL4 invocations that previously returned long now return
+      <code class="highlighter-rouge">seL4_Error</code> which is an enum. Our libraries have already been
+      updated to reflect this change, but in other places where seL4
+      invocations are used directly, the return types will need to be
+      updated to reflect this change.</li>
+  <li>On x86 some structs in the Bootinfo have been rearranged. This
+      only affects <code class="highlighter-rouge">seL4_VBEModeInfoBlock_t</code> which is used if VESA
+      BIOS Extensions (VBE) information is being used.</li>
+</ul>
 
-<p><a href="/camkes_release/CAmkES_3.1.0.html">camkes-3.1.0</a></p>
+<h1 id="known-issues">Known issues</h1>
 
-<p><a href="/camkes_release/CAmkES_3.0.0.html">camkes-3.0.0</a></p>
+<ul>
+  <li>One of our tests is non-deterministicly becoming unresponsive on
+      the SMP release build on the Sabre IMX.6 platform, which is a
+      non verified configuration of the kernel. We are working on
+      fixing this problem, and will likely do a point release once it
+      is fixed.</li>
+</ul>
 
-<p><a href="/camkes_release/CAmkES_2.3.1.html">camkes-2.3.1</a></p>
+<h1 id="full-changelog">Full changelog</h1>
+<p>Use <code class="highlighter-rouge">git log 6.0.0..7.0.0</code> in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
 
-<p><a href="/camkes_release/CAmkES_2.3.0.html">camkes-2.3.0</a></p>
-
-<p><a href="/camkes_release/CAmkES_2.2.0.html">camkes-2.2.0</a></p>
-
-<p><a href="/camkes_release/CAmkES_2.1.0.html">camkes-2.1.0</a></p>
-
-<p><a href="/camkes_release/CAmkES_2.0.0.html">camkes-2.0.0</a></p>
-
-
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf">7.0.0 manual</a> included in the release or ask on the mailing list!</p>
 
     </div>
   </div>
@@ -349,18 +398,17 @@
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
-                Page last updated: Wed Mar 7 11:47:41 2018 +1100 549ff89
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_camkes_release/index.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/sel4/7.0.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_camkes_release/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/sel4/7.0.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

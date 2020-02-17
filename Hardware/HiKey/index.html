@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -321,7 +321,7 @@ running an image.</p>
 
 <h2 id="1-creating-a-directory">1. Creating a directory</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir hikey-flash
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>hikey-flash
 <span class="nb">cd </span>hikey-flash
 </code></pre></div></div>
 
@@ -414,16 +414,16 @@ hikey-flash
 <span class="k">${</span><span class="nv">UEFI_TOOLS_DIR</span><span class="k">}</span>/uefi-build.sh <span class="nt">-c</span> ../LinaroPkg/platforms.config <span class="nt">-b</span> RELEASE <span class="nt">-a</span> ../arm-trusted-firmware hikey
 
 <span class="nb">cd</span> ../l-loader
-ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/RELEASE_GCC49/FV/bl1.bin
-ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/RELEASE_GCC49/FV/fip.bin
+<span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/RELEASE_GCC49/FV/bl1.bin
+<span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/RELEASE_GCC49/FV/fip.bin
 
 <span class="c"># If the DEBUG version of the build is require run the below commands instead</span>
 <span class="nb">cd</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>
 <span class="k">${</span><span class="nv">UEFI_TOOLS_DIR</span><span class="k">}</span>/uefi-build.sh <span class="nt">-c</span> ../LinaroPkg/platforms.config <span class="nt">-b</span> DEBUG <span class="nt">-a</span> ../arm-trusted-firmware hikey
 
 <span class="nb">cd</span> ../l-loader
-ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/DEBUG_GCC49/FV/bl1.bin
-ln <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/DEBUG_GCC49/FV/fip.bin
+<span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/DEBUG_GCC49/FV/bl1.bin
+<span class="nb">ln</span> <span class="nt">-s</span> <span class="k">${</span><span class="nv">EDK2_DIR</span><span class="k">}</span>/Build/HiKey/DEBUG_GCC49/FV/fip.bin
 <span class="c"># End</span>
 
 arm-linux-gnueabihf-gcc <span class="nt">-c</span> <span class="nt">-o</span> start.o start.S
@@ -439,14 +439,14 @@ python gen_loader.py <span class="nt">-o</span> ptable-linux.img <span class="nt
 <p>Obtain the boot image from
 <a href="https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz">https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz</a>
 and follow the below commands.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip <span class="k">*</span>.img.gz
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">gunzip</span> <span class="k">*</span>.img.gz
 
-mkdir <span class="nt">-p</span> boot-fat
+<span class="nb">mkdir</span> <span class="nt">-p</span> boot-fat
 <span class="nb">sudo </span>mount <span class="nt">-o</span> loop,rw,sync boot-fat.uefi.img boot-fat
 
-<span class="nb">sudo </span>rm boot-fat/EFI/BOOT/fastboot.efi
-<span class="nb">sudo </span>cp ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/AndroidFastbootApp.efi boot-fat/EFI/BOOT/fastboot.efi
-<span class="nb">sudo </span>cp ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/noboot.efi boot-fat/EFI/BOOT/
+<span class="nb">sudo rm </span>boot-fat/EFI/BOOT/fastboot.efi
+<span class="nb">sudo cp</span> ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/AndroidFastbootApp.efi boot-fat/EFI/BOOT/fastboot.efi
+<span class="nb">sudo cp</span> ../linaro-edk2/Build/HiKey/RELEASE_GCC49/AARCH64/noboot.efi boot-fat/EFI/BOOT/
 
 <span class="nb">sudo </span>umount boot-fat
 </code></pre></div></div>
@@ -460,7 +460,7 @@ configured skip the next Section.</p>
 <span class="c"># Note the ttyUSBX that is observed</span>
 
 <span class="c"># In the second terminal</span>
-<span class="nb">sudo </span>apt-get install minicom
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>minicom
 <span class="nb">sudo </span>minicom <span class="nt">-s</span>
 </code></pre></div></div>
 
@@ -509,8 +509,8 @@ wget https://builds.96boards.org/releases/hikey/linaro/binaries/latest/nvme.img
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo sync
-mkdir cbuild
+repo <span class="nb">sync
+mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
 ../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>hikey <span class="nt">-DAARCH64</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
@@ -579,7 +579,7 @@ fastboot boot images/sel4test-driver-image-arm-hikey <span class="nt">-c</span> 
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon Dec 16 15:53:15 2019 +1100 9693255

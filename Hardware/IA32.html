@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 13:58:27 +1100 -->
+<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -309,8 +309,8 @@ hardware.</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo sync
-mkdir cbuild
+repo <span class="nb">sync
+mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
 ../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>x86_64 
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
@@ -371,8 +371,8 @@ provided below.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>install-mbr /dev/sdb
 syslinux <span class="nt">--install</span> /dev/sdb1
 mount /dev/sdb1 /mnt
-cp images/sel4test-driver-image-ia32-pc99 /mnt/rootserver
-cp images/kernel-ia32-pc99 /mnt/sel4kernel
+<span class="nb">cp </span>images/sel4test-driver-image-ia32-pc99 /mnt/rootserver
+<span class="nb">cp </span>images/kernel-ia32-pc99 /mnt/sel4kernel
 <span class="nb">cat</span> <span class="o">&gt;</span> /mnt/syslinux.cfg <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
 SERIAL 0 115200
 DEFAULT seL4test
@@ -380,8 +380,8 @@ LABEL seL4test
     kernel mboot.c32
     append sel4kernel --- rootserver
 </span><span class="no">EOF
-</span>cp /usr/lib/syslinux/modules/bios/mboot.c32 /mnt
-cp /usr/lib/syslinux/modules/bios/libcom32.c32 /mnt
+</span><span class="nb">cp</span> /usr/lib/syslinux/modules/bios/mboot.c32 /mnt
+<span class="nb">cp</span> /usr/lib/syslinux/modules/bios/libcom32.c32 /mnt
 umount /mnt
 </code></pre></div></div>
 
@@ -425,7 +425,7 @@ umount /mnt
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 13:52:47 2020 +1100 afe8331
+            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
           </li>
           <li>
                 Page last updated: Mon May 28 16:30:11 2018 +1000 f530249
