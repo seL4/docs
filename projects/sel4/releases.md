@@ -49,8 +49,16 @@ For the verification status of all platforms, see [Hardware](/Hardware).
 | Notification binding           | all                               | Yes                 | [2.0.0](seL4_2.0.0) |
 
 ## Master (verified kernel)
-{% assign coll = site['releases'] | where: "project", "sel4" | reversed %}
-{% for release in coll  %}
+{% assign coll = site['releases'] | where: "project", "sel4" %}
+{% comment %}
+Sort sorts by string sorting so a version of 2.3.0 is higher than 10.0.0.
+Because of this we need to split the list into two before sorting.
+{% endcomment %}
+{% assign releases_1 = coll | where_exp:"item", "item.version_digits != 2" | sort: "version"  %}
+{% assign releases_2 = coll | where_exp:"item", "item.version_digits == 2" | sort: "version" %}
+{% assign releases =  releases_1 | concat: releases_2 %}
+
+{% for release in releases  %}
     {% if release.variant != "mcs" %}
 
 [{{ release.title }}]({{ release.url }})
@@ -65,7 +73,7 @@ For the verification status of all platforms, see [Hardware](/Hardware).
 We occasionally pre-release experimental branches for community feedback and availability.
 
 ### Mixed Criticality Support (MCS) / Realtime
-{% for release in coll  %}
+{% for release in releases  %}
     {% if release.variant == "mcs" %}
 [{{ release.title }}]({{ release.url }})
 ([manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf))
