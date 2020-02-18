@@ -1,6 +1,8 @@
 ---
 redirect_from:
   - /VM/CAmkESARMVM
+layout: project
+project: camkes-arm-vm
 ---
 
 # CAmkES ARM VMM

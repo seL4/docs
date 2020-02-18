@@ -1,6 +1,8 @@
 ---
 redirect_from:
   - /SeL4Libraries
+layout: project
+project: user_libs
 ---
 
 # Internal Libraries

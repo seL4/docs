@@ -1,6 +1,8 @@
 ---
 redirect_from:
   - /Docker
+layout: project
+project: dockerfiles
 ---
 
 # Using Docker for seL4, Camkes, and L4v dependency management

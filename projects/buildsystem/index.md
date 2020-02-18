@@ -1,6 +1,8 @@
 ---
 redirect_from:
   - /Developing/Building/
+layout: project
+project: buildsystem
 ---
 
 # System configuration and building

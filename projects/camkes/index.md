@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /CAmkES/
+layout: project
+project: camkes
 ---
 
 # CAmkES

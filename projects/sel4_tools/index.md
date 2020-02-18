@@ -1,5 +1,7 @@
 ---
 title: seL4_tools
+layout: project
+project: sel4_tools
 ---
 
 # seL4_tools

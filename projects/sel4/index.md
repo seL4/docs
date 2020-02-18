@@ -1,3 +1,7 @@
+---
+project: sel4
+layout: project
+---
 # seL4
 
 Documentation for the seL4 microkernel.

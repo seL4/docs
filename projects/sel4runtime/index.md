@@ -1,6 +1,8 @@
 ---
 title: The seL4 Run-time
 toc: true
+layout: project
+project: sel4runtime
 ---
 {% include include_github_repo_markdown.md repo='sel4proj/sel4runtime' file='README.md' %}
 

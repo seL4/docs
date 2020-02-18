@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /CapDL
+layout: project
+project: capdl
 ---
 
 # CapDL

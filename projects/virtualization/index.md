@@ -1,6 +1,8 @@
 ---
 redirect_from:
   - /VM/
+layout: project
+project: virtualization
 ---
 
 # Virtualisation on seL4

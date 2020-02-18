@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /seL4Test
+layout: project
+project: sel4test
 ---
 
 # seL4Test

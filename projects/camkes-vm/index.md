@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /VM/CAmkESX86VM
+layout: project
+project: camkes-vm
 ---
 
 # CAmkES x86 VM
