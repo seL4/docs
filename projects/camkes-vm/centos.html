@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-17 14:34:04 +1100 -->
+<!-- Page last generated 2020-02-21 09:25:50 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -118,13 +118,13 @@
         </li>
   
         <li class="">
-          <a class="" href="/Developing/Building/">
+          <a class="" href="/projects/buildsystem/">
             CMake Build System
           </a>
         </li>
   
         <li class="">
-          <a class="" href="/FrequentlyAskedQuestions.html">
+          <a class="" href="/projects/sel4/frequently-asked-questions.html">
             FAQ
           </a>
         </li>
@@ -136,19 +136,19 @@
         </li>
   
         <li class="">
-          <a class="" href="/CAmkES/">
+          <a class="" href="/projects/camkes/">
             CAmkES
           </a>
         </li>
   
         <li class="">
-          <a class="" href="/sel4_release/">
+          <a class="" href="/releases/sel4">
             Release Notes
           </a>
         </li>
   
         <li class="">
-          <a class="" href="/ApiDoc.html">
+          <a class="" href="/projects/sel4/api-doc.html">
             libsel4 API
           </a>
         </li>
@@ -160,7 +160,7 @@
         </li>
   
         <li class="">
-          <a class="" href="/VerifiedConfigurations.html">
+          <a class="" href="/projects/sel4/verified-configurations.html">
             Verified Configurations
           </a>
         </li>
@@ -171,13 +171,13 @@
       <ul class="nav nav-sidebar">
   
         <li class="">
-          <a class="" href="/Conduct.html">
+          <a class="" href="/processes/conduct.html">
             Code of Conduct
           </a>
         </li>
   
         <li class="">
-          <a class="" href="/Contributing.html">
+          <a class="" href="/processes/contributing.html">
             Contributing
           </a>
         </li>
@@ -189,7 +189,7 @@
         </li>
   
         <li class="">
-          <a class="" href="/IRCChannel.html">
+          <a class="" href="/processes/irc-channel.html">
             IRC Channel
           </a>
         </li>
@@ -302,11 +302,15 @@
     
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#installation">Installation</a></li>
-<li class="toc-entry toc-h2"><a href="#kernel-image">Kernel Image</a></li>
-<li class="toc-entry toc-h2"><a href="#kernel-command-line">Kernel Command Line</a></li>
-<li class="toc-entry toc-h2"><a href="#booting-the-vmm">Booting the VMM</a></li>
-<li class="toc-entry toc-h2"><a href="#hardware-configuration">Hardware Configuration</a></li>
+<li class="toc-entry toc-h2"><a href="#centos-guest">CentOS Guest</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#installation">Installation</a></li>
+<li class="toc-entry toc-h3"><a href="#kernel-image">Kernel Image</a></li>
+<li class="toc-entry toc-h3"><a href="#kernel-command-line">Kernel Command Line</a></li>
+<li class="toc-entry toc-h3"><a href="#booting-the-vmm">Booting the VMM</a></li>
+<li class="toc-entry toc-h3"><a href="#hardware-configuration">Hardware Configuration</a></li>
+</ul>
+</li>
 </ul>
       </nav>
     
@@ -327,15 +331,15 @@
   @TAG(DATA61_GPL)
 -->
 
-<h1 id="centos-guest">CentOS Guest</h1>
+<h2 id="centos-guest">CentOS Guest</h2>
 
-<h2 id="installation">Installation</h2>
+<h3 id="installation">Installation</h3>
 
 <p>CentOS should be installed on the 32GiB flash drive of the cma34cr using the entire drive,
 i.e. no dual booting etc. It must be an i386 CentOS 7 installation, images of which can be
 found at http://mirror.centos.org/altarch/7/isos/i386/</p>
 
-<h2 id="kernel-image">Kernel Image</h2>
+<h3 id="kernel-image">Kernel Image</h3>
 
 <p>The bzimage and roofs.cpio in this directory are from altarch CentOS-7. They are the
 /boot/initramfs-3.10.0-693.5.2.el7.centos.plus.i686.img
@@ -345,21 +349,21 @@ equivalent files from any i386 CentOS-7 installation, regardless of the precise 
 although you should not need to do this as this kernel/initramfs should be compatible with
 any installation.</p>
 
-<h2 id="kernel-command-line">Kernel Command Line</h2>
+<h3 id="kernel-command-line">Kernel Command Line</h3>
 
 <p>Assuming a default installation of CentOS the command line passed to the Linux kernel.
 In the case where you provided a custom name for your root partitions, or if
 something changes in later CentOS versions, then this needs to be updated from the
 command line in the grub configuration of your actual installation</p>
 
-<h2 id="booting-the-vmm">Booting the VMM</h2>
+<h3 id="booting-the-vmm">Booting the VMM</h3>
 
 <p>After building you will have two files in the images/ directory, a kernel- and a capdl-.
 These need to be booted with a multiboot compatible loader, with the capdl- image passed
 as a boot module. This can be done with with a PXE based network loader, or by adding to
 the grub menu of the installed CentOS.</p>
 
-<h2 id="hardware-configuration">Hardware Configuration</h2>
+<h3 id="hardware-configuration">Hardware Configuration</h3>
 
 <p>The component specification assumes that the cma34cr is close to its default configuration,
 with the exception that the SATA controller has been placed into legacy IDE mode instead of
@@ -397,7 +401,7 @@ its default AHCI mode.</p>
         </li>
         
           <li>
-            Site last updated: Mon Feb 17 14:29:31 2020 +1100 10fd90f
+            Site last updated: Fri Feb 21 09:22:32 2020 +1100 56a3057
           </li>
           <li>
                 Page last updated: Wed Feb 12 12:25:19 2020 +1100 6a2e811

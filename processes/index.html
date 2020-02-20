@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>camkes-3.2.0 | seL4 docs</title>
+    <title>Processes | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -68,20 +68,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/releases/camkes">
-              <span property="name"><b>CAmkES Releases</b></span>
-              <meta property="position" content="2" />
-            </a>
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">camkes-3.2.0</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">Processes</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -300,97 +289,171 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#development-processes">Development processes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#what-we-work-on">What we work on</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#supported-platforms">Supported platforms</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#how-we-choose-what-we-work-on">How we choose what we work on</a></li>
+<li class="toc-entry toc-h3"><a href="#where-we-work-on-things">Where we work on things</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#contact">Contact</a></li>
+<li class="toc-entry toc-h2"><a href="#contributing">Contributing</a></li>
+</ul>
+      </nav>
+    
     <div class="content">
-      <h1 id="camkes-version-camkes-320-release">CAmkES Version camkes-3.2.0 Release</h1>
+      <h1 id="processes">Processes</h1>
 
-<p>Announcing the release of <code class="highlighter-rouge">camkes-3.2.0</code> with the following changes:</p>
+<p>Documentation relating to development processes and how to get help or get involved in seL4
+can be found on this page. Note that these are generalizations and may be different for a
+particular project/repository.</p>
 
-<p>camkes-3.2.0 2018-01-17</p>
+<h2 id="development-processes">Development processes</h2>
 
-<p>Using seL4 version 8.0.0</p>
+<p>Developing trustworthy systems requires identifying critical, trusted, system components and ensuring that they:</p>
 
-<h1 id="changes">Changes</h1>
+<ul>
+  <li>are isolated from non-critical, untrusted, components</li>
+  <li>have assurance of their trustworthiness</li>
+</ul>
+
+<p>Determining appropriate system designs that clearly separate trusted from untrusted components and using this separation to achieve security and safety properties is beyond the scope of this section.
+However,  given such a design, the seL4 ecosystem tries to provide components, infrastructure, and tools to implement it in a trustworthy way.</p>
+
+<h3 id="what-we-work-on">What we work on</h3>
+
+<p>As a microkernel, seL4 intends to provide the smallest amount of mechanisms required to enable
+securely multiplexing hardware. A full system requires many more components than only the microkernel.
+We typically try and reuse existing components when possible, but below is a list of projects that
+are currently maintained to support the seL4 ecosystem:</p>
 
 <ul>
   <li>
-    <p>New ADL Syntax: Allow struct elements to have defaults.</p>
-
-    <p>See the following ADL files for examples of Struct and
-  Attribute behavior.
-  <a href="https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes">https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes</a>
-  <a href="https://github.com/seL4/camkes/tree/master/apps/structs">https://github.com/seL4/camkes/tree/master/apps/structs</a>
-  <a href="https://github.com/seL4/camkes/tree/master/apps/attributes">https://github.com/seL4/camkes/tree/master/apps/attributes</a></p>
+    <p><a href="/projects/sel4">seL4</a>: The seL4 microkernel.</p>
   </li>
   <li>
-    <p>Added experimental Rumprun support:</p>
-
-    <p>This functionality is experimental and may not work
-  as expected. See the following examples:
-  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_ethernet">https://github.com/seL4/camkes/tree/master/apps/rumprun_ethernet</a>
-  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_hello">https://github.com/seL4/camkes/tree/master/apps/rumprun_hello</a>
-  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads">https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads</a>
-  <a href="https://github.com/seL4/camkes/tree/master/apps/rumprun_rust">https://github.com/seL4/camkes/tree/master/apps/rumprun_rust</a></p>
-
-    <p>More information about the Rumprun unikernel on seL4 can be
-  found here:
-  <a href="https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/">https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/</a></p>
+    <p><a href="https://github.com/sel4/l4v">L4.verified</a>: formal specifications and proofs for the seL4 microkernel.</p>
   </li>
   <li>
-    <p>New Templates: Remote GDB debugging support</p>
-
-    <p>On ia32 platforms a GDB server can be used to debug a
-  component using the GDB server remote serial protocol.
-  documentation:
-  <a href="https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md">https://github.com/seL4/camkes-tool/blob/master/docs/DEBUG.md</a></p>
+    <p><a href="/projects/buildsystem">Build system</a> and <a href="/projects/sel4_tools">tooling</a>: Tooling, system configuration and building used to build seL4 projects using mostly CMake.</p>
   </li>
   <li>
-    <p>Added “hardware_cached” attribute to hardware dataports</p>
-
-    <p>This feature had been added to camkes-2.x.x but hadn’t been
-  forward ported to camkes-3.x.x. documentation:
-  <a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports</a></p>
+    <p><a href="/projects/elfloader">Elfloader</a>: For preparing the hardware for seL4 on ARM and RISC-V.</p>
+  </li>
+  <li>
+    <p><a href="/projects/sel4runtime">seL4 Run-time</a>: A minimal runtime for running a C or C-compatible process in a minimal seL4 environment.</p>
+  </li>
+  <li>
+    <p><a href="/projects/user_libs">User environment libraries</a>: Userlevel libraries on seL4.</p>
+  </li>
+  <li>
+    <p><a href="/projects/sel4test">seL4 testing framework</a>: Test suite for seL4.</p>
+  </li>
+  <li>
+    <p><a href="/projects/sel4bench">seL4 benchmarking framework</a>: sel4bench contains benchmarking applications and a support library for seL4.</p>
+  </li>
+  <li>
+    <p><a href="/projects/camkes">CAmkES framework</a>: Component Architecture for microkernel-based Embedded Systems.</p>
+  </li>
+  <li>
+    <p><a href="/projects/capdl">CapDL</a>: Collection of tools for generating, parsing and loading capdl specifications of systems.</p>
+  </li>
+  <li>
+    <p>Virtualization with <a href="/projects/camkes-vm">camkes-vm</a> and <a href="/projects/camkes-arm-vm">camkes-arm-vm</a>: x86 and Arm Virtual Machines built as a CAmkES component.</p>
+  </li>
+  <li>
+    <p><a href="/projects/sel4-tutorials">sel4-tutorials</a>: Collection of tutorials for learning to use seL4 and its ecosystem.</p>
+  </li>
+  <li>
+    <p><a href="/projects/dockerfiles">Dockerfiles</a>: Dockerfiles defining the dependencies required to build seL4, CAmkES, and L4v.</p>
+  </li>
+  <li>
+    <p><a href="/projects/sel4webserver">seL4 webserver reference application</a>: A reference for implementing applications on seL4.</p>
+  </li>
+  <li>
+    <p><a href="/projects/hardware_hacks">Hardware components</a>: Various bits and pieces to enable easier use of our hardware.</p>
   </li>
 </ul>
 
-<h1 id="known-issues">Known issues</h1>
+<h4 id="supported-platforms">Supported platforms</h4>
+
+<p>This all needs to be deployed on hardware components. The <a href="/Hardware">Supported Platforms</a> page has a list of currently supported platforms.</p>
+
+<h3 id="how-we-choose-what-we-work-on">How we choose what we work on</h3>
+
+<p>Primarily, what we work on gets prioritised by externally funded projects and what is long-term strategic.
+The strategic roadmap can be found on the <a href="http://sel4.systems/Info/Roadmap/">seL4 development and verification roadmap</a> page.</p>
+
+<p>Some priority is also given to maintaining all of the maintained projects and repositories which involves responding to
+breakages and reported issues as they arise.  Raising a GitHub issue on a relevant repository is the best way to get an issue
+acknowledged. Alternatively, the <em>devel</em> mailing list or the seL4 Mattermost can be used to ask about potential issues.</p>
+
+<p>Additionally, the <a href="/processes/rfc-process">RFC process</a> is intended as a way for external input to be provided on
+longer-term priorities as well as a way to promote a collaborative design process on externally contributed features
+before excessive effort is invested into their development. More information is provided on the RFC page above.</p>
+
+<h3 id="where-we-work-on-things">Where we work on things</h3>
+
+<p>We try and release all sources onto GitHub under either of the two organizations:</p>
+<ul>
+  <li><a href="https://github.com/sel4/">https://github.com/sel4/</a></li>
+  <li><a href="https://github.com/sel4proj/">https://github.com/sel4proj/</a></li>
+</ul>
+
+<p>Each project has a list of which repositories it contributes to on its documentation
+home page. Alternatively, the README.md of each repository should indicate what its
+purpose is.</p>
+
+<p>Communication about what is being developed can occur on any of the channels listed <a href="#contact">below</a>.
+In particular:</p>
+<ul>
+  <li>Discussions can occur on the Mailing list, seL4 Mattermost or seL4 Discourse.</li>
+  <li>Discussions about proposed changes can reach a point where an RFC is created.
+Further discussion then happens on the RFC site.</li>
+  <li>GitHub issue and Pull-request comment sections can also be used.</li>
+</ul>
+
+<p>Documentation about proposed changes such as roadmaps can be found on this Docsite,
+or on the <a href="http://sel4.systems/Info/Roadmap/">seL4 development and verification roadmap</a> page.</p>
+
+<h2 id="contact">Contact</h2>
+
+<p>We use the following communication mechanisms:</p>
 
 <ul>
-  <li>Hardware dataports that are large enough to use larger frame
-      sizes are currently broken. There is an issue with</li>
+  <li><a href="emails">Mailing lists</a>: For email-based discussions, for asking for help, reporting issues or general seL4 communication.</li>
+  <li><a href="https://sel4.discourse.group/">seL4 Discourse (seL4um)</a>: Forum for seL4. Attempting to build up useful knowledge-base.</li>
+  <li><a href="https://mattermost.ts.data61.csiro.au/sel4-external/">seL4 Mattermost</a>. seL4 chat platform (Signup link can be found on <a href="https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125">seL4 Discourse</a> with a valid account).</li>
+  <li>GitHub issues: Reporting issues or creating pull requests on repositories located at <a href="https://github.com/seL4">seL4</a> or <a href="https://github.com/seL4proj">seL4Proj</a> organisations.</li>
+  <li><a href="irc-channel">IRC</a>: #sel4 room on freenode.</li>
+  <li><a href="https://sel4.atlassian.net">seL4 Jira</a>: Currently for reading and creating <a href="rfc-process">RFCs</a></li>
+  <li><a href="websites">Websites</a>: Websites containing information about seL4.</li>
 </ul>
 
-<p>large frame promotion and hardware dataports where the capDL loader is
-unable to map the promoted memory. This can be demonstrated by running
-the testhwdataportlrgpages app on either
-arm_testhwdataportlrgpages_defconfig or
-x86_testhwdataportlrgpages_defconfig configurations. If this
-functionality is required, hold off upgrading until this issue is fixed.</p>
+<h2 id="contributing">Contributing</h2>
 
-<h1 id="upgrade-notes">Upgrade notes</h1>
+<p>We welcome your contributions to the source code and this website.
+To ensure a collaborative environment, we expect all contributions and interactions to fall within our <a href="/Conduct">Code of Conduct</a>.
+For some repositories, such as the main seL4 kernel repository, we require a <a href="/Contributing#contributor-license-agreement">contributor license agreement(CLA)</a>.</p>
 
+<p>In addition to following the development process that is outset below, most of the software projects generally follow the following conventions:</p>
 <ul>
-  <li>ADL files: ADL syntax changes in this release should not break
-      any existing ADL files.</li>
-  <li>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Templates:
-
-    seL4HardwareMMIO template now has an option to map hardware
-    memory as cached. The default setting is uncached
-</code></pre></div>    </div>
-  </li>
+  <li><a href="/StyleGuide">Style Guide</a></li>
+  <li><a href="/GitConventions">Git Conventions</a></li>
+  <li><a href="/CodeReview">Pull requests</a></li>
 </ul>
 
-<p>which is the same as the old behaviour.</p>
-
-<h1 id="full-changelog">Full changelog</h1>
-<p>Use <code class="highlighter-rouge">git log camkes-3.2.0..camkes-3.1.0</code> in
-<a href="https://github.com/seL4/camkes-tool">https://github.com/seL4/camkes-tool</a></p>
-
-<h1 id="more-details">More details</h1>
-<p>See the
-<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.2.0/docs/index.md">documentation</a>
-or ask on the mailing list!</p>
+<p>Additionally, each project may have a slightly augmented processes for contributing:</p>
+<ul>
+  <li><a href="docs-contributing">docs.sel4.systems</a></li>
+  <li><a href="https://github.com/seL4/l4v/blob/master/CONTRIBUTING.md">seL4 Proofs</a></li>
+</ul>
 
     </div>
   </div>
@@ -424,14 +487,15 @@ or ask on the mailing list!</p>
             Site last updated: Fri Feb 21 09:22:32 2020 +1100 56a3057
           </li>
           <li>
+                Page last updated: Fri Feb 21 09:22:27 2020 +1100 380c5f7
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/camkes/camkes-3.2.0.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/processes/index.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/camkes/camkes-3.2.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/processes/index.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
