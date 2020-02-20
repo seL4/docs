@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-21 09:29:33 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 11.0.x-compatible | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 11.0.x-compatible</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/sel4/11.0.0"><b>seL4-11.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/camkes/camkes-3.8.0"><b>camkes-3.8.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/capdl/0.1.0"><b>CapDL-0.1.0</b></a></li>
+    </ol>
+  </nav>
+  <nav class="sel-version">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-center">
+      <a href="https://sel4.discourse.group/t/19-november-2019/126"><b>Announcing new releases: </b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/buildsystem/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/sel4/frequently-asked-questions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/camkes/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/releases/sel4">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/sel4/api-doc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/sel4/verified-configurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/processes/conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/irc-channel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="api content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="updates-to-user_libs-from-sel4-101x-to-110x">Updates to user_libs from seL4 10.1.x to 11.0.x</h1>
+
+<h2 id="util_libs">util_libs</h2>
+
+<ul>
+  <li>libplatsupport: Refactor TX2 timers to use multiple 4k mappings instead of a single large mapping.</li>
+  <li>libplatsupport: Updated clock driver for exynos5422 that has different clocks layout compared to previous exynos54XX platforms.</li>
+  <li>libplatsupport: exynos/serial: Attempt TX IRQ handle on uart write.</li>
+  <li>libethdrivers: 64-bit compatibility fixes</li>
+  <li>libpci: Only print verbose log messages when logging verbosely</li>
+  <li>libplatsupport: Add BCM2837 system timer driver.</li>
+  <li>libplatsupport: Update BCM2837 ltimer to use system timer for absolute time.</li>
+  <li>libplatsupport: remove static init in ltimers. The regular init functions can be used with an implementation of
+  ps_io_ops_t that is a static implementation.</li>
+  <li>libplatsupport: Add Arm Fixed virtual platform(FVP) driver support: serial, SP804 timer, ltimer.</li>
+  <li>libelf: remove debug functions. These functions have not been maintained and are out of date.</li>
+  <li>libelf: delete unnecessary functions.
+    <ul>
+      <li>elf_getProgramHeaderInfo: This is an awkward convenience function that
+appears to be unused.</li>
+      <li>elfxx_getProgramSegmentTable,
+  elfxx_getSegmentType: Functions with different names but the same
+  functionality already exist.</li>
+      <li>elfxx_getSegmentInfo: Both of the above.</li>
+    </ul>
+  </li>
+  <li>libelf: make elf32.h, elf64.h internal header files.</li>
+  <li>libelf: introduce memory safety:
+    <ul>
+      <li>The size of the buffer containing the ELF file needs to be known to
+  access it safely.</li>
+      <li>Change all public <code class="highlighter-rouge">void *</code> references to <code class="highlighter-rouge">elf_t *</code>, which requires a size
+  parameter.</li>
+    </ul>
+  </li>
+  <li>libelf: delete struct definitions that are also provided by musllibc or newlib.</li>
+  <li>libelf: normalise types.
+    <ul>
+      <li>Use size_t and uintptr_t where appropriate.</li>
+      <li>Add enum elf_addr_type for physical/virtual memory.</li>
+    </ul>
+  </li>
+  <li>libelf: remove duplicate and add missing functions.
+  By normalising return types, most functions in <code class="highlighter-rouge">elfxx.c</code> can be merged and
+  moved into <code class="highlighter-rouge">elf.c</code>.
+  Also add missing prototypes and functions for accessing ELF fields.
+    <ul>
+      <li>getSectionStringTableIndex</li>
+      <li>getSectionNameOffset</li>
+      <li>getSectionOffset</li>
+      <li>getSectionLink</li>
+      <li>getSectionInfo</li>
+      <li>getSectionAddrAlign</li>
+      <li>getSectionEntrySize</li>
+    </ul>
+  </li>
+  <li>libelf: const-qualify strings. Strings returned by this library should be considered read-only.
+  If string tables are to be modified, elf_getSection should be used.</li>
+  <li>libelf: add elf_check_magic function to check if a pointer to a file contains the ELF magic number.</li>
+  <li>libcpio: avoid side effects when failing in cpio_parse_header by waiting until success before setting return values.</li>
+  <li>libcpio: introduce memory safety by requiring file_length argument to all CPIO functions.</li>
+  <li>libplatsupport: Cap the imx timer counter values if it cannot fit in 32 bits.</li>
+  <li>libplatsupport: Fix ZYNQ ltimer handle_irq() to return EINVAL correctly</li>
+  <li>libplatsupport: Change NVIDIA plat default timers.
+  We use TMR1 instead of TMR0 due to the fact that
+  the IRQ for TMR1 is missing from the DTS file for
+  TX1. It exists for TX2, but for the sake of
+  compatibility, we use TMR1 for both.</li>
+  <li>libplatsupport: Add IRQ type with trigger (<code class="highlighter-rouge">PS_TRIGGER</code>). Allows using IRQControl_GetTrigger in libsel4simple.</li>
+  <li>libplatsupport: Add timer and serial drivers for the Odroid-C2.</li>
+  <li>libcpio: make position-independent</li>
+  <li>Import libfdt library from linux kernel sourced from linux kernel version : 5.0.6.</li>
+  <li>libplatsupport: added ps_io_fdt in interface to return a pointer to an FDT blob.</li>
+  <li>libplatsupport: Add ‘other’ IRQ type (PS_OTHER) to <code class="highlighter-rouge">ps_irq_t</code> interface.</li>
+  <li>libplatsupport: Add ps_irq_ops_t interface for registering interrupt callbacks.</li>
+  <li>libutils: Add an unsigned long version of the POPCOUNT macro.</li>
+  <li>libplatsupport: Added initial i.MX8M Quad EVK Platform support.</li>
+  <li>libplatsupport: Add <code class="highlighter-rouge">ps_irq_ops_t</code> to <code class="highlighter-rouge">ps_io_ops</code> structure</li>
+  <li>libplatsupport: Add RISC-V HiFive serial and pwm drivers.</li>
+  <li>libplatsupport: zynqmp: Don’t set baud in serial driver init.
+  The driver doesn’t seem to have the correct clk frequency that it uses
+  to program the baud and this leads to incorrect baud settings. We assume
+  that the baud is already configured by the loaders that came before for
+  now.</li>
+  <li>libplatsupport: extend generic timer implementation.
+    <ul>
+      <li>update generic timer implementation to work on aarch64 in addition to aarch32.</li>
+      <li>add more manipulation functions for using the generic timer when it is exported to user level.
+Note that exporting the generic timer to user level exposes a timing
+channel. This should only be done for testing and benchmarking and never
+in a verified configuration of the kernel.</li>
+    </ul>
+  </li>
+  <li>libplatsupport: Add an ltimer backed by the arm generic timer. For use for
+  debugging/testing/benchmarking when CONFIG_EXPORT_PCNT_USER is set.</li>
+  <li>Remove Configuration library from util_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>libethdrivers: include config of lwip and picotcp
+  since global autoconf is removed, we need to explicitly
+  include the config of lwip and picotcp which will further
+  indicate the existance of corresponding lib.</li>
+  <li>libplatsupport: Added initial i.MX8M Mini EVK Platform support</li>
+  <li>libplatsupport: Added rockpro64 Platform support: Serial and timer drivers.</li>
+  <li>libplatsupport: Add IRQ register logic to ltimer driver level.
+  Instead of treating interrupt allocation being a OS/environment specific
+  thing, this commit now uses the OS/environment agnostic IRQ interface to
+  register these interrupts. Also fix bugs/clean-up the logic of the init
+  and destroy functions.</li>
+  <li>libplatsupport: Allow user callbacks for ltimer
+  With the IRQ changes to the ltimer, IRQs are now managed internally.
+  This poses a problem with the management of the time manager and other
+  services which rely on having known that an interrupt arrived for the
+  timers. This also isn’t a good idea as it presents a leaky abstraction
+  in that the services infers events based on interrupts received.
+  This adds the ability to allow users to supply a callback
+  that’ll be called when certain events occur for the timer, e.g. timeouts
+  and etc.</li>
+  <li>libplatsupport: Remove handle_irq from ltimers.
+  The ‘handle_irq’ function is no longer necessary and shouldn’t be called
+  externally as the IRQs will be managed by the IRQ handling functions of
+  the IRQ interface.</li>
+  <li>libplatsupport: mcs: Rename CONFIG_KERNEL_RT to CONFIG_KERNEL_MCS</li>
+  <li>zynqmp: Allow 32-bit free-running clock.
+  The current zynq machine code assumes a 16-bit counter, which is only
+  true for the zynq7000. The zynqmp has a 32-bit counter. The timestamp
+  timer would stop functioning on the zynqmp after it overflowed. This
+  commit handles the overflow properly on the zynqmp.</li>
+  <li>zynq: implement serial interrupt handler</li>
+  <li>pc99: Ack interrupts before handling timer when interrupts are edge triggered.</li>
+  <li>CMake: Add Findutil_libs.cmake module.
+  This adds support for importing this project via
+  <code class="highlighter-rouge">find_package(util_libs)</code> if the project exists in the
+  CMAKE_MODULE_PATH.</li>
+  <li>libplatsupport: Add FDT parsing library
+  This FDT parsing library is a collection of utility functions which
+  parses the FDT with the help of libfdt to simplify the common use cases
+  of the FDT.</li>
+  <li>liplatsupport: Add IRQ controller parsing library.
+  This is a private library that the FDT parsing library uses to parse the
+  interrupt properties of devices that use a specific IRQ controller.
+    <ul>
+      <li>GICv2</li>
+      <li>Tegra IRQ controller parser</li>
+    </ul>
+  </li>
+  <li>libutils: add uthash, a well documented, easy-to-use hash table header.</li>
+  <li>libplatsupport: add new PER_CPU irq type to ps_irq_t.</li>
+  <li>libplatsupport: nvidia,tx2: Remove hard-coded addr and IRQ numbers
+as these can be retrieved from the DTB and are no longer necessary.</li>
+  <li>libplatsupport: Add design docs for FDT parsing library</li>
+  <li>libplatsupport: Added the new <code class="highlighter-rouge">qemu-arm-virt</code> platform drivers: serial and timer.</li>
+  <li>libplatsupport: bbone-timer: update timer for mcs.
+    <ul>
+      <li>remove tick calculations and use frequency lib</li>
+      <li>fix bug checking wrong irq bit</li>
+      <li>update get time to use 64bit counter</li>
+      <li>fix race in ltimer</li>
+      <li>return correct error</li>
+      <li>use UINT32_MAX</li>
+    </ul>
+  </li>
+  <li>libplatsupport: Add placeholder support for Ariane.
+  Added placeholders in libplatsupport for Ariane to pass the compilation.
+  The actual driver is yet to be implemented.</li>
+  <li>libplatsupport: am335x/ltimer: return ETIME when timeout in past.</li>
+  <li>libethdrivers: The imx8mq-evk reuses the imx6 Ethernet drivers as the devices and setup
+  are very similar. This is a bit of a hack at the moment and will
+  eventually be cleaned up.</li>
+  <li>libutils: Add next-power-of-2 macro which calculates the next power of 2 for a
+  32 bit integer.</li>
+</ul>
+
+<h2 id="sel4_libs">seL4_libs</h2>
+
+<ul>
+  <li>libsel4simple: Fix translation of cap numbers to CPtrs
+  seL4_CapIOPortControl only exists on x86, while seL4_CapIOSpace only
+  exists on x86 with an IOMMU.
+  Simple does not address these on other configurations.
+  Ensure that this is correctly accounted for on all configurations and
+  architectures.</li>
+  <li>libsel4simple-default: Don’t assert return pointers in simple_default_nth_untyped.</li>
+  <li>libsel4utils: updates the address that seL4utils thinks is the maximum usable
+userspace vaddr for aarch64-hyp where the kernel provides a 44-bit userspace vaddrspace range.</li>
+  <li>libsel4vka: Lift the Arm VCPU object to arch level. This makes it available to aarch64.</li>
+  <li>libsel4utils, elf: Handle new GrantReply right in ELF loading code.</li>
+  <li>libsel4vka: add function for setting the receive cap slot with a path. (This is the receive slot
+for receiving caps over IPC)</li>
+  <li>libsel4utils: use seL4_UserTop and remove hard coded KERNEL_RESERVED_START values (which is
+  mean to represent the last page mappable by user-level) and calculates
+  the value from seL4_UserTop instead, such that if seL4_UserTop changes
+  at any point the vspace code will still work.</li>
+  <li>libsel4utils: new new function: sel4_strfault() which returns a string for an seL4 fault type</li>
+  <li>libsel4vka: Validate object type first in vka_alloc_object_at_maybe_dev and return if invalid.
+As a follow up, invalid object type argument error handling becomes non-fatal.</li>
+  <li>libsel4vka: “implement” utspace_paddr in nullvka and also ensure the struct is zeroed, just in case.</li>
+  <li>libsel4allocman: Fix bug in internal <code class="highlighter-rouge">_destroy_second_level</code> function where 32 was used instead of seL4_WordBits.</li>
+  <li>libsel4utils: transition to new libelf API. This newer API requires tighter buffer bounds checking on input ELF file.</li>
+  <li>libsel4vmm: update to use new libelf API</li>
+  <li>libsel4utils: transition to new libcpio API. This newer API requires tighter buffer bounds checking on input CPIO archive.</li>
+  <li>libsel4utils: Return NULL if sel4utils_elf_get_vsyscall cannot find <code class="highlighter-rouge">__vsyscall</code> symbol instead of memory faulting.</li>
+  <li>libsel4debug: add prefix for register dump to allow register dumps to identify the source of the dump.</li>
+  <li>libsel4platsupport,riscv: Fix stack overflow in crt0.  A stack frame of 10 words is created, but we were accidentally
+  overwriting the end due to a fence-post error.</li>
+  <li>libsel4vspace: Add <code class="highlighter-rouge">seL4_ARCH_Page_GetAddress</code>, <code class="highlighter-rouge">ARCHPageGetAddress</code> and <code class="highlighter-rouge">seL4_ARCH_Page_GetAddress_t</code> definitions for RISC-V.</li>
+  <li>libsel4simple: Add IRQControl_GetTrigger interface to specify edge or level trigger on
+  ARM platforms.</li>
+  <li>libsel4bench: add SEL4BENCH_RESET_CCNT macro definition for arm.
+  This is not possible on x86, but required on arm if a benchmark is
+  relying on the 32bit cycle count not overflowing.</li>
+  <li>libsel4vspace: Implemented a ‘vspace_access_page_with_callback’ function. This
+  performs a mapping of a page from a source to destination vspace.
+  The mapping is subsequently passed to a user defined callback
+  before being unmapped out of the destination vspace.</li>
+  <li>libsel4vspace: Enable sharing of mem range 0x0-0x1000</li>
+  <li>libsel4utils: avoid binding null sched contexts (mcs) when configuring passive threads.</li>
+  <li>libsel4vspace: add <code class="highlighter-rouge">vspace_map_page_fn_t</code> type and <code class="highlighter-rouge">vspace_iospace_map_page</code> iospace wrapper.
+This allows all page mapping functions we currently use to have the
+  same type signature.</li>
+  <li>libsel4vspace: extend map object to io and ept structures. This allows code implementing vspace management
+to abstract over different page table structures such as IOMMU page tables.</li>
+  <li>libsel4utils: allow 0 to be mapped by map_page.
+  0 is a valid address to map in many scenarios (eg virtualisation).</li>
+  <li>libsel4allocman: fix use of ALLOCMAN_NO_PADDR.
+  Throughout allocman, various parts of the code for allocating a
+  specific paddr would check that the paddr fell within the bounds of a
+  given untyped node. Unfortunately, in some cases ALLOCMAN_NO_PADDR +
+  node-&gt;size would overlap with the paddr and cause a false positive -
+  allocman would <em>think</em> that a given node contains the request paddr,
+  when in fact it didn’t.
+  Eventually, everything would fall apart: ALLOCMAN_NO_PADDR+node-&gt;size
+  would not be large enough to reach the paddr, and allocman would end
+  up with a NULL node where it wasn’t expecting one.
+  Fix this issue by avoiding nodes with paddr == ALLOCMAN_NO_PADDR
+  whenever we’re searching through node lists, thus preventing
+  such ‘false positive’ situations from occurring.</li>
+  <li>libsel4platsupport: Remove CRT runtime files in favor of sel4runtime.  Sel4runtime now provides the CRT.</li>
+  <li>libsel4platsupport: Remove TLS primitives and ELF segment definitions in favour of the ones provided by sel4runtime.</li>
+  <li>libsel4debug: Update register layout descriptions due to recent seL4 TLS ABI changes.</li>
+  <li>libsel4platsupport: platsupport_get_bootinfo now locates bootinfo by calling sel4runtime_bootinfo() instead of looking
+for an environment variable.</li>
+  <li>libsel4utils: Use aux vectors to pass context to new processes
+  Instead of encoding values in strings and storing them in environment
+  variables, store raw pointers in auxiliary vectors so that the runtime
+  can parse them without depending on <code class="highlighter-rouge">&lt;stdio.h&gt;</code>.</li>
+  <li>libsel4utils: Use sel4runtime to initialise TLS for newly created threads so that they get their own TLS regions.</li>
+  <li>libsel4platsupport: Add implementation of <code class="highlighter-rouge">ps_irq_ops_t</code> interrupt registration interface from libplatsupport. This
+implementation dynamically allocates interrupt handlers from a simple_t and vka_t interface, and also provides entry
+points for interrupts to be handled via blocking or polling.</li>
+  <li>libsel4test: add RPC support for allocating test resources over RPC.</li>
+  <li>libsel4serialserver: Create separate lib for tests so that they don’t need to get built in projects that don’t need them.</li>
+  <li>libserialserver: Remove sel4test library dependency.</li>
+  <li>libsel4platsupport: Remove serial_objects_t interface.
+This interface won’t scale to more complicated serial devices.
+Instead drivers describe their requirements via calls to ps_io_ops and
+the implementations of these interfaces can handle access and allocation policies.</li>
+  <li>libsel4utils, irqserver: Refactor IRQ server sources to use new libsel4platsupport <code class="highlighter-rouge">ps_irq_ops_t</code> interface.
+This changes the API, but the general design of the server is the same: the server provides an option of using several threads
+for forwarding IRQs to a single notification object such that more IRQs can be handled than what can fit on a single notification object.</li>
+  <li>Remove Configuration library from seL4_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>libsel4platsupport: Add IO FDT ops implementation by returning fdt from seL4_BootInfo.</li>
+  <li>libsel4utils, elf, riscv: Add FENCE.I instruction in ELF loading code.
+  Writes to executable memory may not become visible to execution until
+  after FENCE.I instruction. This prevents programs loaded by this
+  function crashing due to invalid program instructions.</li>
+  <li>utils/vka/vspace: update for aarch64 api change. Use seL4_ARM_VSpace* rather than seL4_ARM_PageGlobalDirectory*</li>
+  <li>libsel4vspace: Add definitions for 40-bit PA on aarch64-hyp.</li>
+  <li>libsel4vspace: Add deferred rights reservation mapping functions. <code class="highlighter-rouge">vspace_reserve_deferred_rights_range_at</code>
+and <code class="highlighter-rouge">vspace_deferred_rights_map_pages_at_vaddr</code> can be used to allocate reservations where the mapping
+rights will be supplied at time of mapping.</li>
+  <li>libsel4utils: Add implementations for mapping deferred rights reservations</li>
+  <li>libsel4platsupport: Refactor IO-related interfaces. This refactoring is intended to bring these interface initialisation
+functions more in line with the style of similar functions. Instead of
+accepting an rvalue (or an expression) of the interfaces, we accept a
+pointer to the interfaces themselves. Also add a warning regarding
+lifetimes and concurrency.</li>
+  <li>libsel4platsupport: Add mini IRQ interface.
+The new mini IRQ interface covers the common use case where there’s only
+a few interrupts to manage and these can fit into a single
+notification’s badge space. This also avoids the unneeded complexity
+that the standard IRQ interface offers.</li>
+  <li>mcs: Rename CONFIG_KERNEL_RT to CONFIG_KERNEL_MCS across all libraries</li>
+  <li>CMake: Add FindseL4_libs.cmake module. This adds support for importing this project via
+<code class="highlighter-rouge">find_package(seL4_libs)</code> if the project exists in the CMAKE_MODULE_PATH.</li>
+  <li>libsel4platsupport/libsel4simple: add per cpu irq support on arm
+    <ul>
+      <li>support PER_CPU interrupt type to specify a core</li>
+      <li>use GetTriggerCore on SMP (GetTrigger fails)</li>
+    </ul>
+  </li>
+  <li>libsel4muslcsys: Set <code class="highlighter-rouge">-u __vsyscall_ptr</code> on link args.
+Projects that use this library expect <code class="highlighter-rouge">__vsyscall_ptr</code> to be present in
+the final binary, but require forcing the symbol because it is often not
+used by the final binary but by the loader when setting up the AUX
+vectors.</li>
+  <li>libsel4vspace: Remove Remap operation macro definitions as seL4 Remap operation
+was removed.</li>
+  <li>libsel4utils: mcs: add api method for SC consumed</li>
+  <li>libsel4muslcsys: Implement sys_write wrapper.
+This wraps sys_writev the same way that sys_read is implemented.</li>
+  <li>libsel4bench: sel4bench.h: update documentation and style</li>
+  <li>libsel4bench: remove libsel4bench/include/sel4bench/flog.h as file was unused.</li>
+</ul>
+
+<h2 id="projects_libs">projects_libs</h2>
+
+<ul>
+  <li>Remove Configuration library from projects_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>libvirtqueue: Updated to a new multi-buffer, scatter-gather libvirtqueue, closer to
+  compliance with the virtio standard.</li>
+  <li>CMake: Add Findprojects_libs.cmake module. This adds support for importing this project via
+<code class="highlighter-rouge">find_package(projects_libs)</code> if the project exists in the CMAKE_MODULE_PATH.</li>
+  <li>Add libfdtgen, a library for generating device trees for virtual machines.</li>
+</ul>
+
+<h2 id="sel4_projects_libs">seL4_projects_libs</h2>
+
+<ul>
+  <li>libsel4arm-vmm: add initial support for aarch64 virtualization</li>
+  <li>libsel4arm-vmm: Add tx1 platform virtualization library support.</li>
+  <li>libsel4arm-vmm: exynos5: Increase MAX_VIRQS to 200 to support odroid-xu4</li>
+  <li>libsel4arm-vmm: use new libelf API. This newer API requires tighter buffer bounds checking on input ELF file.</li>
+  <li>Added a new library, libsel4pci to provide virtual pci emulation.
+As a base, the pci driver code from the x86 vmm (libsel4vmm) has
+been copied to this library.</li>
+  <li>libsel4pci: Add support for using PCI emulation in Arm VMs.</li>
+  <li>Added libsel4vmmcore to be a collection of shared vmm drivers
+and utilities that can be used between the x86 and arm vmms.</li>
+  <li>libsel4vmmcore: Port PCI IOPort emulation from x86 to Arm.</li>
+  <li>libsel4vmmcore: Port virtio-net driver from x86 VMM and add support for Arm VMs.</li>
+  <li>libsel4arm-vmm: Add functions for installing virtual PCI device to guest VMs.</li>
+  <li>libsel4arm-vmm: Support for gzipped initrd image being passed outside of guest kernel image.</li>
+  <li>libsel4arm-vmm: Add tx2 platform support</li>
+  <li>Added functionality with in the libsel4pci and libsel4vmmcore libs for vuart devices over vpci.</li>
+  <li>Add libsel4rpc: a basic library for managing allocating resources over process boundaries.</li>
+  <li>Add libsel4nanopb: An interface between sel4 IPC buffers and nanopb.</li>
+  <li>Remove Configuration library from seL4_projects_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>CMake: Add Findsel4_projects_libs.cmake module</li>
+  <li>libsel4arm-vmm: Added support for virtualization on qemu-arm-virt</li>
+</ul>
+
+<h2 id="musllibc">musllibc</h2>
+
+<ul>
+  <li>Remove musl runtime objects. These are now supplied by sel4runtime.</li>
+  <li>Remove <code class="highlighter-rouge">__aeabi_read_tp</code> symbol from <code class="highlighter-rouge">sel4_arm</code>. This is supplied by sel4runtime.</li>
+  <li>CMake: Add <code class="highlighter-rouge">Findmusllibc.cmake</code> module.</li>
+</ul>
+
+
+  </div>
+
+  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+
+    <ul class="section-nav">
+    	<h2> user_libs </h2> 
+        <li>
+          <a class="" href="/projects/user_libs">
+            Project Documentation
+          </a>
+        </li>
+
+    
+        <h3>Repositories</h3>
+    
+        <li>
+          <a class="" href="https://github.com/sel4/util_libs">
+            util_libs
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4/sel4_libs">
+            sel4_libs
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4proj/sel4_projects_libs">
+            sel4_projects_libs
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4proj/projects_libs">
+            projects_libs
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <h3>Recent Updates</h3>
+    
+        <li>
+          <a style=" font-weight: bold; " href="/updates/user_libs/11.0.x.html">
+            seL4 11.0.x-compatible
+          </a>
+        </li>
+
+    </ul>
+
+</div>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Fri Feb 21 09:25:26 2020 +1100 cd70fc0
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_updates/user_libs/11.0.x.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_updates/user_libs/11.0.x.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

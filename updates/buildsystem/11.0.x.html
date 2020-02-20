@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-02-21 09:29:33 +1100 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 11.0.x-compatible | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="/">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/Documentation">Documentation</a></h2>
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="https://research.csiro.au/tsblog">Blog</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 11.0.x-compatible</span>
+            <meta property="position" content="2" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/sel4/11.0.0"><b>seL4-11.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/camkes/camkes-3.8.0"><b>camkes-3.8.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/capdl/0.1.0"><b>CapDL-0.1.0</b></a></li>
+    </ol>
+  </nav>
+  <nav class="sel-version">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-center">
+      <a href="https://sel4.discourse.group/t/19-november-2019/126"><b>Announcing new releases: </b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    <div class="sidebar">
+
+    <h3>seL4</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/GettingStarted.html">
+            Getting Started
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/buildsystem/">
+            CMake Build System
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/sel4/frequently-asked-questions.html">
+            FAQ
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/Hardware/">
+            Hardware
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/camkes/">
+            CAmkES
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/releases/sel4">
+            Release Notes
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/sel4/api-doc.html">
+            libsel4 API
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">
+            Current Manual
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/projects/sel4/verified-configurations.html">
+            Verified Configurations
+          </a>
+        </li>
+  
+      </ul>
+
+    <h3>Community</h3>
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/processes/conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="https://research.csiro.au/tsblog">
+            Trustworthy Systems Blog
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/irc-channel.html">
+            IRC Channel
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/SuggestedProjects.html">
+            Suggested projects
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/CommunityProjects.html">
+            Community Projects
+          </a>
+        </li>
+  
+      </ul>
+
+
+  <h3><a href="/Tutorials">Tutorials</a></h3>
+    <ul class="nav nav-sidebar">
+  
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mcs.html">MCS</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/untyped.html">Untyped</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/mapping.html">Mapping</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/threads.html">Threads</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/ipc.html">IPC</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/notifications.html">Notifications</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
+        <li>
+  
+        <li class="">
+            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
+        <li>
+  
+    </ul>
+</div>
+
+
+  </div>
+  <div class="api content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="updates-to-the-build-system-from-sel4-101x-to-110x">Updates to the Build system from seL4 10.1.x to 11.0.x</h1>
+
+<h2 id="sel4_toolscmake-tool">seL4_tools/cmake-tool</h2>
+<ul>
+  <li><code class="highlighter-rouge">dts.cmake</code>: Suppress output from <code class="highlighter-rouge">dtc</code> unless it doesn’t produce an output file.</li>
+  <li><code class="highlighter-rouge">application_settings.cmake</code>: Disable kernel printing in release builds.</li>
+  <li><code class="highlighter-rouge">dts.cmake</code>: Use dts files from the kernel repository.</li>
+  <li><code class="highlighter-rouge">rootserver.cmake</code>: Support building RISC-V with <code class="highlighter-rouge">gcc-8</code>.</li>
+  <li>Split <code class="highlighter-rouge">common.cmake</code> into <code class="highlighter-rouge">simulation.cmake</code>, <code class="highlighter-rouge">cpio.cmake</code> and <code class="highlighter-rouge">rootserver.cmake</code>.</li>
+  <li>Remove <code class="highlighter-rouge">AddLegacyLibrary</code> function. This was used to wrap old build system libraries and is no longer used.</li>
+  <li><code class="highlighter-rouge">cpio.cmake</code>: Support constructing multiple CPIO archives within the same build directory.</li>
+  <li>Style all CMake files and python scripts.</li>
+  <li>Add <code class="highlighter-rouge">make.cpio</code> module with <code class="highlighter-rouge">MakefileDepsToList</code>, <code class="highlighter-rouge">create_depfile_by_find</code> and <code class="highlighter-rouge">execute_process_with_stale_check</code> helpers.
+These helpers add mechanisms for not re-running expensive <code class="highlighter-rouge">execute_process</code> commands during build
+configurations if inputs to the command are not stale.</li>
+  <li>Add <code class="highlighter-rouge">cmakerepl</code> script for inline debugging of CMake scripts.</li>
+  <li>Add <code class="highlighter-rouge">debug.cmake</code> that adds <code class="highlighter-rouge">set_break()</code> CMake function for limited CMake variable inspection.</li>
+  <li>Add <code class="highlighter-rouge">griddle</code> tool to enable easy build scenarios:
+    <ul>
+      <li>Automatically add additional CMake initialization flags on first init.</li>
+      <li>Present project build configuration options based on an <code class="highlighter-rouge">easy-settings.cmake</code> file.</li>
+      <li>Detect when <code class="highlighter-rouge">CMakeCache.txt</code> file is unstable and re-run cmake until it stabalizes.</li>
+      <li>Inform user about config stability.</li>
+      <li>Provide a <code class="highlighter-rouge">--platform-hel</code> option for listing all kernel supported platforms.</li>
+      <li>Handle platform toolchain configuration requirements.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">init-build.sh</code>: tidy script and remove bash-isms to make POSIX-compliant.</li>
+  <li><code class="highlighter-rouge">rootserver.cmake</code>: Support <code class="highlighter-rouge">uimage</code> format for ArmV7 platforms.</li>
+  <li>Add scripts in <code class="highlighter-rouge">helpers/</code> to <code class="highlighter-rouge">CMAKE_MODULE_PATH</code> and support importing on demand.</li>
+  <li><code class="highlighter-rouge">cakeml.cmake</code>: Add support for multiple CakeML libraries within a project.
+<code class="highlighter-rouge">Holmake</code> doesn’t support concurrent builds of different projects, so multiple builds need to be serialized.</li>
+  <li>Add <code class="highlighter-rouge">platform_sift.py</code> script for extracting platform memory region descriptions from a YAML file outputted by kernel build.</li>
+  <li><code class="highlighter-rouge">init-build.sh</code>: Remove multiple CMake invocations and only call CMake once.</li>
+  <li><code class="highlighter-rouge">application_settings.cmake</code>: Add <code class="highlighter-rouge">correct_platform_strings</code> for converting conventional <code class="highlighter-rouge">-DPLATFORM</code> values to
+valid <code class="highlighter-rouge">KernelPlatform</code> and <code class="highlighter-rouge">KernelSel4Arch</code> settings.</li>
+  <li><code class="highlighter-rouge">flags.cmake</code>: Use the runtime objects from <code class="highlighter-rouge">sel4runtime</code> rather than <code class="highlighter-rouge">musl</code>.</li>
+  <li><code class="highlighter-rouge">flags.cmake</code>: Always use <code class="highlighter-rouge">__aeabi_read_tp</code> for aarch32 by setting <code class="highlighter-rouge">-mtp=soft</code>.</li>
+  <li>Require <code class="highlighter-rouge">-C settings.cmake</code> for initializing CMake projects.
+This supports the new build structure where instead of blindly including
+every <code class="highlighter-rouge">settings.cmake</code> file in every <code class="highlighter-rouge">projects/</code> folder, we instead require a single <code class="highlighter-rouge">settings.cmake</code> file to be passed in.</li>
+  <li>Add <code class="highlighter-rouge">check_arch_compiler.cmake</code>. This triggers errors if the incorrect compiler is selected.</li>
+  <li>Add <code class="highlighter-rouge">nanopb.cmake</code> for nanopb support.</li>
+  <li><code class="highlighter-rouge">rust_targets</code>: Update <code class="highlighter-rouge">x86_64-target.json</code> to new format.</li>
+  <li><code class="highlighter-rouge">application_settings.cmake</code>: <code class="highlighter-rouge">ApplyData61ElfLoaderSettings</code> RISCV support.</li>
+  <li>Add <code class="highlighter-rouge">elf_sift.py</code> script for computing ELF image loadable segment sizes.</li>
+  <li>Add <code class="highlighter-rouge">shoehorn.py</code> script for computing load addresses of Elfloader, Kernel and User images in memory.</li>
+  <li>Add <code class="highlighter-rouge">make-uimage</code> script to extract the entry point (start symbol) of an ELF executable and wrap the object in a
+  chain-loadable payload for use by the U-Boot boot loader.</li>
+  <li><code class="highlighter-rouge">Holmakefile.in</code>, <code class="highlighter-rouge">buildScript.sml.in</code>, <code class="highlighter-rouge">cakeml.cmake</code>: Update CakeML build scripts for newer CakeML version.</li>
+  <li><code class="highlighter-rouge">simulate.py</code>: Add <code class="highlighter-rouge">tput reset</code> to end of Qemu command for when Qemu leaves the terminal in an inconsistent state.</li>
+  <li>Remove global <code class="highlighter-rouge">Configuration</code> CMake library. Each build artifact should instead control its own configuration dependencies.</li>
+  <li>Add <code class="highlighter-rouge">environment_flags.cmake</code> module for use in modules that are used for defining system environment build flags.</li>
+  <li>Move <code class="highlighter-rouge">musllibc</code> rules from <code class="highlighter-rouge">flags.cmake</code> to <code class="highlighter-rouge">Findmusllibc.cmake</code> CMake module and merge remainder of <code class="highlighter-rouge">flags.cmake</code> with <code class="highlighter-rouge">base.cmake</code>.</li>
+  <li>Mark CMake cache variables advanced by default and allow final project configuration to explicitly show options in the <code class="highlighter-rouge">ccmake</code> GUI.</li>
+  <li><code class="highlighter-rouge">init-build.sh</code>: Support alternative build structure where the top-level <code class="highlighter-rouge">CMakeLists.txt</code> project file is not located in the top level directory.</li>
+  <li>Move <code class="highlighter-rouge">ccache</code> settings to compiler toolchain files.</li>
+  <li><code class="highlighter-rouge">cpio.cmake</code>: Change strategy for constructing cpio archive object file to use linker instead of objcopy.</li>
+  <li><code class="highlighter-rouge">simulation.cmake</code>: Add new <code class="highlighter-rouge">qemu-arm-virt</code> platform simulator options with hyp support.</li>
+  <li><code class="highlighter-rouge">rust_targets</code>: add <code class="highlighter-rouge">aarch64-sel4-none.json</code> target file for Aarch64 rust targets.</li>
+</ul>
+
+<h2 id="kernel">kernel</h2>
+
+<ul>
+  <li>Add functions for querying all kernel platform names and architectures.</li>
+  <li>Add <code class="highlighter-rouge">check_outfile_stale</code> macro.
+  This checks if a file is older than other files during CMake configure
+  phase. This is to prevent unnecessary long running <code class="highlighter-rouge">execute_process</code>
+  calls.</li>
+  <li>Style all CMake and python files.</li>
+  <li>Add <code class="highlighter-rouge">FORCE</code> to all <code class="highlighter-rouge">INTERNAL</code> sets.
+  <code class="highlighter-rouge">INTERNAL</code> implies <code class="highlighter-rouge">FORCE</code> but in some versions of CMake if a config option
+  has been passed in via a -D option the <code class="highlighter-rouge">INTERNAL</code> set doesn’t override the
+  value when it should.
+  See: <a href="https://gitlab.kitware.com/cmake/cmake/issues/19015">https://gitlab.kitware.com/cmake/cmake/issues/19015</a> -
+    <code class="highlighter-rouge">INTERNAL</code> does not imply <code class="highlighter-rouge">FORCE</code> for <code class="highlighter-rouge">CACHE</code>.</li>
+  <li>Update <code class="highlighter-rouge">python2</code> –&gt; <code class="highlighter-rouge">python3</code> in build scripts.</li>
+  <li>Invoke verified configuration files to build kernel with verified configurations.</li>
+  <li>Add <code class="highlighter-rouge">SEL4_CONFIG_DEFAULT_ADVANCED</code> CMake variable.  If set then all cache variable
+declarations get marked as advanced by default.</li>
+  <li>Add device trees for every Arm and RISC-V platform.
+    <ul>
+      <li>Use per-config device tree overlays to customize platform layouts for different build configurations.</li>
+    </ul>
+  </li>
+  <li>Auto-generate hardware headers describing Arm and RISC-V platforms. Use these headers
+for creating Untyped objects and Kernel device binding and export YAML memory region
+file for use by other projects in build system.</li>
+  <li><code class="highlighter-rouge">sel4_deps</code>: Add <code class="highlighter-rouge">pyfdt</code>, <code class="highlighter-rouge">cmake-format</code>, <code class="highlighter-rouge">guardonce</code>, <code class="highlighter-rouge">pyelftools</code>, <code class="highlighter-rouge">autopep8</code>, <code class="highlighter-rouge">jsonschema</code> and <code class="highlighter-rouge">libarchive-c</code> to seL4 python package. Change <code class="highlighter-rouge">pyaml</code> to <code class="highlighter-rouge">pyyaml</code>.</li>
+  <li>Automatically select serial and timer drivers based on device trees.</li>
+  <li>Remove <code class="highlighter-rouge">kernel_astyle.sh</code> in favour of using style scripts in <code class="highlighter-rouge">sel4_tools</code>.</li>
+  <li>Use device tree <code class="highlighter-rouge">chosen</code> node to specify kernel devices with <code class="highlighter-rouge">seL4,kernel-devices</code> property.</li>
+  <li>Add <code class="highlighter-rouge">reciprocal.py</code> for calculating constants for reciprocal division used in MCS kernel.</li>
+  <li>Add <code class="highlighter-rouge">seL4Config.cmake</code> module to kernel configurations folder for use in CMake <code class="highlighter-rouge">-C</code> configuration scripts.
+This enables picking kernel platform settings before any projects are configured and also allows
+automatically picking the right toolchain files.</li>
+</ul>
+
+
+
+  </div>
+
+  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+
+    <ul class="section-nav">
+    	<h2> seL4 Buildsystem </h2> 
+        <li>
+          <a class="" href="/projects/buildsystem">
+            Project Documentation
+          </a>
+        </li>
+
+    
+        <h3>Repositories</h3>
+    
+        <li>
+          <a class="" href="https://github.com/sel4/sel4">
+            sel4
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4/sel4_tools">
+            sel4_tools
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <h3>Recent Updates</h3>
+    
+        <li>
+          <a style=" font-weight: bold; " href="/updates/buildsystem/11.0.x.html">
+            seL4 11.0.x-compatible
+          </a>
+        </li>
+
+    </ul>
+
+</div>
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Fri Feb 21 09:25:26 2020 +1100 cd70fc0
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_updates/buildsystem/11.0.x.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_updates/buildsystem/11.0.x.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>
