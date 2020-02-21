@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-02-21 09:29:33 +1100 -->
+<!-- Page last generated 2020-02-21 16:42:36 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -318,7 +318,7 @@ For new project development, see <a href="/Developing/Building/Incorporating">in
 
 <h4 id="basic-build-initialisation">Basic build initialisation</h4>
 
-<p>In the root directly of a seL4-based project, first create a separate build
+<p>In the root directory of a seL4-based project, first create a separate build
 directory for the output binaries, then initialize CMake:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>build
@@ -535,6 +535,19 @@ cross-compiler to use.</p>
 <p>The <code class="highlighter-rouge">CMAKE_BUILD_TYPE</code> option appears in CMake configuration editors and allows users to configure
 that build type (release, debug etc.). Note that this option is not respected by the seL4 kernel.</p>
 
+<h3 id="building-with-clang">Building with Clang</h3>
+
+<p>The kernel as well as, some other projects, can be built using the <a href="https://clang.llvm.org/">clang</a> compiler. To select this configuration,
+the <code class="highlighter-rouge">-DTRIPLE</code> variable must be set in the initial configuration step i.e pass in as an argument to the <code class="highlighter-rouge">init-build</code> script.</p>
+
+<p>The value of the <code class="highlighter-rouge">TRIPLE</code> should be the <a href="https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html#target-triple">target</a> for which you are compiling.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build <span class="nt">-DTRIPLE</span><span class="o">=</span>x86_64-linux-gnu &lt;COMMAND_LINE_OPTIONS_HERE&gt;
+</code></pre></div></div>
+<p>The <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> argument is unnecessary and ignored when compiling with clang. When building for arm based targets, the target <code class="highlighter-rouge">TRIPLE</code> will be equal
+to the <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> (when using gcc) without the trailing ‘-‘.</p>
+
+<p>Using clang to compile for RISC-V based targets is currently not supported.</p>
+
     </div>
   </div>
 </div>
@@ -564,10 +577,10 @@ that build type (release, debug etc.). Note that this option is not respected by
         </li>
         
           <li>
-            Site last updated: Fri Feb 21 09:25:26 2020 +1100 cd70fc0
+            Site last updated: Fri Feb 21 16:36:52 2020 +1100 26521b7
           </li>
           <li>
-                Page last updated: Mon Feb 17 13:52:47 2020 +1100 e684964
+                Page last updated: Fri Feb 21 16:36:52 2020 +1100 26521b7
           </li>
         
       </ul>
