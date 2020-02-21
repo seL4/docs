@@ -221,3 +221,17 @@ cross-compiler to use.
 
 The `CMAKE_BUILD_TYPE` option appears in CMake configuration editors and allows users to configure
 that build type (release, debug etc.). Note that this option is not respected by the seL4 kernel.
+
+### Building with Clang
+
+The kernel as well as some other projects can be built using the [clang](https://clang.llvm.org/) compiler. To select this configuration,
+the `-DTRIPLE` variable must be set in the initial configuration step i.e pass in as an argument to the `init-build` script.
+
+The value of the `TRIPLE` should be the [target](https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html#target-triple) for which you are compiling.
+```sh
+../init-build -DTRIPLE=x86_64-linux-gnu <COMMAND_LINE_OPTIONS_HERE>
+```
+The `CROSS_COMPILER_PREFIX` argument is unnecessary and ignored when compiling with clang. When building for arm based targets, the target `TRIPLE` will be equal
+to the `CROSS_COMPILER_PREFIX` (when using gcc) without the trailing '-'.
+
+Using clang to compile for RISC-V based targets is currently not supported.
