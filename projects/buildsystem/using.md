@@ -14,7 +14,7 @@ For new project development, see [incorporating the build system](/Developing/Bu
 
 #### Basic build initialisation
 
-In the root directly of a seL4-based project, first create a separate build
+In the root directory of a seL4-based project, first create a separate build
 directory for the output binaries, then initialize CMake:
 
 ```sh
@@ -224,7 +224,7 @@ that build type (release, debug etc.). Note that this option is not respected by
 
 ### Building with Clang
 
-The kernel as well as some other projects can be built using the [clang](https://clang.llvm.org/) compiler. To select this configuration,
+The kernel as well as, some other projects, can be built using the [clang](https://clang.llvm.org/) compiler. To select this configuration,
 the `-DTRIPLE` variable must be set in the initial configuration step i.e pass in as an argument to the `init-build` script.
 
 The value of the `TRIPLE` should be the [target](https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html#target-triple) for which you are compiling.
