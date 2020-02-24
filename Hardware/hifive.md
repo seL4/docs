@@ -7,7 +7,7 @@ arch: RV64IMAC, RV64GC
 virtualization: "No"
 iommu: "No"
 simulation_target: false
-Status: "Unverified"
+Status: "Pending"
 Contrib: "Data61"
 Maintained: "Data61"
 soc: Freedom U540
