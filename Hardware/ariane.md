@@ -7,7 +7,7 @@ arch: RV64IMAC
 virtualization: "No"
 iommu: "No"
 simulation_target: false
-Status: "Unverified"
+Status: "Pending"
 Contrib: "Data61"
 Maintained: "Data61"
 cpu: Ariane
