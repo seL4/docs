@@ -18,6 +18,7 @@ Documentation for the seL4 microkernel.
 - [Benchmarking guide](/BenchmarkingGuide)
 - [Virtualisation on seL4](/VM)
 - [Host Build Dependencies](/HostDependencies)
+- [Porting seL4](/projects/sel4/porting)
 
 ## seL4 Status
 

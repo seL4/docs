@@ -3,7 +3,7 @@ toc: true
 arm_hardware: true
 cmake_plat: imx8mm-evk
 xcompiler_arg: -DAARCH64=1
-platform: imx8mm
+platform: Imx8mm
 arch: ARMv8A, AArch64
 virtualization: "No"
 iommu: "No"
@@ -14,8 +14,6 @@ Contrib: Data61
 Maintained: Data61
 ---
 # Imx8mm
-
-Using the U-Boot bootloader.
 
 ## Building seL4test
 

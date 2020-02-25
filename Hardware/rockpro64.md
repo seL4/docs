@@ -1,19 +1,19 @@
 ---
 toc: true
 arm_hardware: true
-cmake_plat: imx8mq
+cmake_plat: rockpro64
 xcompiler_arg: -DAARCH64=1
-platform: Imx8mq
-arch: ARMv8A
+platform: Rockpro64
+arch: ARMv8A, AArch64
 virtualization: "No"
 iommu: "No"
-soc: MCIMX8M-EVKB
-cpu: Cortex-A53 Quad 1.5 GHz
+soc: RK3399 hexa-core
+cpu: Cortex-A53 Quad 1.8 GHz
 Status: Unverified
 Contrib: Data61
 Maintained: Data61
 ---
-# Imx8mq
+# Rockpro64
 
 ## Building seL4test
 
