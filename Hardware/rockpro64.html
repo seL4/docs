@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>camkes-2.3.1 | seL4 docs</title>
+    <title>Rockpro64 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -70,8 +70,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/releases/camkes">
-              <span property="name"><b>CAmkES Releases</b></span>
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
               <meta property="position" content="2" />
             </a>
         </li>
@@ -80,7 +80,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">camkes-2.3.1</span>
+            <span property="name">Rockpro64</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -304,175 +304,37 @@
 
 
   </div>
-  <div class="api content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="camkes-231-release-notes">CAmkES 2.3.1 Release Notes</h1>
-
-<h2 id="new-features">New Features</h2>
-
-<ul>
-  <li>support for seL4 5.2.0</li>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
 </ul>
+      </nav>
+    
+    <div class="content">
+      <h1 id="rockpro64">Rockpro64</h1>
+
+<h2 id="building-sel4test">Building seL4test</h2>
+
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo <span class="nb">sync
+mkdir </span>cbuild
+<span class="nb">cd </span>cbuild
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rockpro64 <span class="nt">-DAARCH64</span><span class="o">=</span>1
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
+
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
 
-
+    </div>
   </div>
-
-  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-
-    <ul class="section-nav">
-    	<h2> CAmkES </h2> 
-        <li>
-          <a class="" href="/projects/camkes">
-            Project Documentation
-          </a>
-        </li>
-
-    
-        <h3>Repositories</h3>
-    
-        <li>
-          <a class="" href="https://github.com/sel4/camkes-tool">
-            camkes-tool
-          </a>
-        </li>
-
-    
-        <li>
-          <a class="" href="https://github.com/sel4/camkes">
-            camkes
-          </a>
-        </li>
-
-    
-        <li>
-          <a class="" href="https://github.com/sel4/camkes-manifest">
-            camkes-manifest
-          </a>
-        </li>
-
-    
-        <li>
-          <a class="" href="https://github.com/sel4proj/global-components">
-            global-components
-          </a>
-        </li>
-
-
-
-
-
-
-
-
-
-    
-        <h3>Releases</h3>
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-2.0.0.html">
-            camkes-2.0.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-2.1.0.html">
-            camkes-2.1.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-2.2.0.html">
-            camkes-2.2.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-2.3.0.html">
-            camkes-2.3.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style=" font-weight: bold; " href="/releases/camkes/camkes-2.3.1.html">
-            camkes-2.3.1
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.0.0.html">
-            camkes-3.0.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.1.0.html">
-            camkes-3.1.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.2.0.html">
-            camkes-3.2.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.3.0.html">
-            camkes-3.3.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.4.0.html">
-            camkes-3.4.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.5.0.html">
-            camkes-3.5.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.6.0.html">
-            camkes-3.6.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.7.0.html">
-            camkes-3.7.0
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" href="/releases/camkes/camkes-3.8.0.html">
-            camkes-3.8.0
-          </a>
-        </li>
-
-
-
-
-
-    </ul>
-
-</div>
-
 </div>
 
     </main>
@@ -503,14 +365,15 @@
             Site last updated: Tue Feb 25 12:46:02 2020 +1100 0ba3833
           </li>
           <li>
+                Page last updated: Tue Feb 25 12:46:02 2020 +1100 0ba3833
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/camkes/camkes-2.3.1.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/rockpro64.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/camkes/camkes-2.3.1.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/rockpro64.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
