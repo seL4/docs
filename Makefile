@@ -56,7 +56,21 @@ tutorials: ${TUTORIALS:%=_repos/tutes/%}
 _generate_api_pages: $(REPOSITORIES)
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
-generate_api: _generate_api_pages
+generate_libsel4vm_api: $(REPOSITORIES)
+	mkdir -p projects/virtualization/docs/api && \
+		for i in `ls _repos/sel4proj/sel4_projects_libs/libsel4vm/docs/libsel4vm_*`; \
+		do \
+			tools/gen_markdown_api_doc.py -f $$i -o projects/virtualization/docs/api/`basename $$i`; \
+		done;
+
+generate_libsel4vmmplatsupport_api: $(REPOSITORIES)
+	mkdir -p projects/virtualization/docs/api && \
+		for i in `ls _repos/sel4proj/sel4_projects_libs/libsel4vmmplatsupport/docs/libsel4vmmplatsupport_*`; \
+		do \
+			tools/gen_markdown_api_doc.py -f $$i -o projects/virtualization/docs/api/`basename $$i`; \
+		done;
+
+generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplatsupport_api
 
 # Rules for local serving of the site using jekyll.
 # Supports docker or running using local environment.
