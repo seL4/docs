@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jetson TX2 | seL4 docs</title>
+    <title>libsel4vmmplatsupport | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -70,8 +70,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Hardware/">
-              <span property="name"><b>Supported Platforms</b></span>
+            <a property="item" typeof="WebPage" href="/projects/virtualization/">
+              <span property="name"><b>Virtualisation on seL4</b></span>
               <meta property="position" content="2" />
             </a>
         </li>
@@ -80,7 +80,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Jetson TX2</span>
+            <span property="name">libsel4vmmplatsupport</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -306,45 +306,38 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
-<li class="toc-entry toc-h2"><a href="#booting-via-pxe">Booting via PXE</a></li>
-</ul>
-      </nav>
-    
     <div class="content">
-      <h1 id="jetson-tx2">Jetson TX2</h1>
+      
+<p><em>File included from <a href="https://github.com/sel4proj/sel4_projects_libs/blob/master/libsel4vmmplatsupport/README.md">github repo</a> <a href="https://github.com/sel4proj/sel4_projects_libs/edit/master/libsel4vmmplatsupport/README.md">edit</a></em></p>
 
-<p>The Jetson TX2 is an embedded system-on-module (SOM) developed by NVIDIA.</p>
+<!--
+     Copyright 2019, Data61
+     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+     ABN 41 687 119 230.
 
-<p><a href="https://elinux.org/Jetson_TX2">https://elinux.org/Jetson_TX2</a></p>
+     This software may be distributed and modified according to the terms of
+     the BSD 2-Clause license. Note that NO WARRANTY is provided.
+     See "LICENSE_BSD2.txt" for details.
 
-<p>The seL4 kernel has a limited port to the TX2 which supports the SoM
-only in 64-bit mode. SMP, SMMU, Hyp-mode, etc are not supported by the
-current port.</p>
+     @TAG(DATA61_BSD)
+-->
 
-<h2 id="building-sel4test">Building seL4test</h2>
+<h1 id="libsel4vmmplatsupport">libsel4vmmplatsupport</h1>
 
-<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo <span class="nb">sync
-mkdir </span>cbuild
-<span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>tx2 <span class="nt">-DAARCH64</span><span class="o">=</span>1
-<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
-<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
-<span class="c"># parameters to suit your needs.</span>
-ninja
+<p>A library containing various VMM utilities and drivers that can be
+used to construct a Guest VM on a supported platform. This library makes use of ‘libsel4vm’ to implement VMM
+support.
+This is a consolidated library composed of libraries previously known as (but now deprecated) ‘libsel4vmm’ (x86),
+‘libsel4arm-vmm’ (arm), libsel4vmmcore and libsel4pci.</p>
 
-</code></pre></div></div>
+<p>Reference implementations using this library are:</p>
+<ul>
+  <li>CAmkES VM (x86) - https://github.com/seL4/camkes-vm</li>
+  <li>CAmkES ARM VM (arm) - https://github.com/SEL4PROJ/camkes-arm-vm</li>
+</ul>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p><em>End file included from <a href="https://github.com/sel4proj/sel4_projects_libs/blob/master/libsel4vmmplatsupport/README.md">github repo</a> <a href="https://github.com/sel4proj/sel4_projects_libs/edit/master/libsel4vmmplatsupport/README.md">edit</a></em></p>
 
-<h2 id="booting-via-pxe">Booting via PXE</h2>
-
-<p>A U-Boot uImage will be created by the seL4 build system. This can be booted
-by U-Boot using PXE.</p>
 
     </div>
   </div>
@@ -378,15 +371,15 @@ by U-Boot using PXE.</p>
             Site last updated: Fri Mar 6 15:59:33 2020 +1100 77dacb0
           </li>
           <li>
-                Page last updated: Tue Nov 6 16:02:51 2018 +1100 23164c9
+                Page last updated: Fri Mar 6 15:59:32 2020 +1100 97eabac
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/JetsonTX2.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/projects/virtualization/libsel4vmmplatsupport.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/JetsonTX2.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/projects/virtualization/libsel4vmmplatsupport.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>

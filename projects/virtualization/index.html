@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-05 21:12:31 +1100 -->
+<!-- Page last generated 2020-03-06 16:02:28 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -296,12 +296,28 @@
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="virtualisation-on-sel4">Virtualisation on seL4</h1>
 
-<p>Multiple projects exist for using virtualisation with seL4.</p>
+<h2 id="virtualisation-libraries">Virtualisation Libraries</h2>
+
+<p>Virtualisation support on seL4 is underpinned by two libraries. These being:</p>
+<ul>
+  <li><a href="/projects/virtualization/libsel4vm">libsel4vm</a>: A guest hardware virtualisation library for x86 (ia32) and ARM (ARMv7/w virtualization extensions &amp; ARMv8)</li>
+  <li><a href="/projects/virtualization/libsel4vmmplatsupport">libsel4vmmplatsupport</a>: A library containing various VMM utilities and drivers that can be used to construct a guest VM on a supported platform</li>
+</ul>
+
+<p>These libraries can be utilized to construct VMM servers through providing useful interfaces to create VM(+VCPU) instances, manage <em>guest</em> physical address spaces and provide virtual device support (among multiple other things).
+Refer to each library to see further documentation regarding their features and APIs.</p>
+
+<h2 id="reference-vmms">Reference VMMs</h2>
+
+<p>Multiple projects exist that make use of our virtualisation infrastructure on seL4. These include:</p>
 
 <ul>
   <li><a href="/projects/camkes-arm-vm">ARM virtualisation</a></li>
-  <li><a href="/projects/camkes-vm">x86 virtualisation</a></li>
-  <li><a href="/projects/camkes-vm/centos">CentOS</a></li>
+  <li><a href="/projects/camkes-vm">x86 virtualisation</a>
+    <ul>
+      <li><a href="/projects/camkes-vm/centos">CentOS</a></li>
+    </ul>
+  </li>
 </ul>
 
 
@@ -369,10 +385,10 @@
         </li>
         
           <li>
-            Site last updated: Thu Mar 5 20:08:08 2020 +1000 bfb0c0d
+            Site last updated: Fri Mar 6 15:59:33 2020 +1100 77dacb0
           </li>
           <li>
-                Page last updated: Fri Feb 21 09:19:42 2020 +1100 a3b24ba
+                Page last updated: Fri Mar 6 15:59:32 2020 +1100 97eabac
           </li>
         
       </ul>

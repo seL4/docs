@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jetson TX2 | seL4 docs</title>
+    <title>libsel4vm & libsel4vmmplatsupport API documentation | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -70,8 +70,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Hardware/">
-              <span property="name"><b>Supported Platforms</b></span>
+            <a property="item" typeof="WebPage" href="/projects/virtualization/">
+              <span property="name"><b>Virtualisation on seL4</b></span>
               <meta property="position" content="2" />
             </a>
         </li>
@@ -80,7 +80,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Jetson TX2</span>
+            <span property="name">libsel4vm & libsel4vmmplatsupport API documentation</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -306,45 +306,79 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
-<li class="toc-entry toc-h2"><a href="#booting-via-pxe">Booting via PXE</a></li>
-</ul>
-      </nav>
-    
     <div class="content">
-      <h1 id="jetson-tx2">Jetson TX2</h1>
+      <h1 id="libsel4vm-api">libsel4vm API</h1>
 
-<p>The Jetson TX2 is an embedded system-on-module (SOM) developed by NVIDIA.</p>
+<p>See below for usage documentation on various libsel4vm interfaces:</p>
 
-<p><a href="https://elinux.org/Jetson_TX2">https://elinux.org/Jetson_TX2</a></p>
+<h3 id="common-interfaces">Common Interfaces</h3>
+<ul>
+  <li><a href="api/libsel4vm_boot">sel4vm/boot.h</a>: An interface for creating, initialising and configuring VM instances</li>
+  <li><a href="api/libsel4vm_guest_irq_controller">sel4vm/guest_irq_controller.h</a>: Abstractions around initialising a guest VM IRQ controller</li>
+  <li><a href="api/libsel4vm_guest_memory_helpers">sel4vm/guest_memory_helpers.h</a>: Helpers for using the guest memory interface</li>
+  <li><a href="api/libsel4vm_guest_vcpu_fault">sel4vm/guest_vcpu_fault.h</a>: Useful methods to query and configure vcpu objects that have faulted during execution</li>
+  <li><a href="api/libsel4vm_guest_vm">sel4vm/guest_vm.h</a>: Provides base definitions of the guest vm datastructure and primitives to run the VM instance</li>
+  <li><a href="api/libsel4vm_guest_iospace">sel4vm/guest_iospace.h</a>:  Enables the registration and management of a guest VM’s IO Space</li>
+  <li><a href="api/libsel4vm_guest_memory">sel4vm/guest_memory.h</a>: Useful abstractions to manage your guest VM’s physical address space</li>
+  <li><a href="api/libsel4vm_guest_ram">sel4vm/guest_ram.h</a>: A set of methods to manage, register, allocate and copy to/from a guest VM’s RAM</li>
+  <li><a href="api/libsel4vm_guest_vm_util">sel4vm/guest_vm_util.h</a>: A set of utilties to query a guest vm instance</li>
+</ul>
 
-<p>The seL4 kernel has a limited port to the TX2 which supports the SoM
-only in 64-bit mode. SMP, SMMU, Hyp-mode, etc are not supported by the
-current port.</p>
+<h3 id="architecture-specific-interfaces">Architecture Specific Interfaces</h3>
 
-<h2 id="building-sel4test">Building seL4test</h2>
+<h4 id="arm">ARM</h4>
+<ul>
+  <li><a href="api/libsel4vm_guest_arm_context">sel4vm/arch/guest_arm_context.h</a>: Provides a set of useful getters and setters on ARM vcpu thread contexts</li>
+  <li><a href="api/libsel4vm_arm_guest_vm">sel4vm/arch/guest_vm_arch.h</a>: Provide definitions of the arm guest vm datastructures and primitives to configure the VM instance</li>
+</ul>
 
-<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo <span class="nb">sync
-mkdir </span>cbuild
-<span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>tx2 <span class="nt">-DAARCH64</span><span class="o">=</span>1
-<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
-<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
-<span class="c"># parameters to suit your needs.</span>
-ninja
+<h4 id="x86">X86</h4>
+<ul>
+  <li><a href="api/libsel4vm_guest_x86_context">sel4vm/arch/guest_x86_context.h</a>: Provides a set of useful getters and setters on x86 vcpu thread contexts</li>
+  <li><a href="api/libsel4vm_x86_guest_vm">sel4vm/arch/guest_vm_arch.h</a>: Provide definitions of the x86 guest vm datastructures and primitives to configure the VM instance</li>
+  <li><a href="api/libsel4vm_x86_vmcall">sel4vm/arch/vmcall.h</a>: Methods for registering and managing vmcall instruction handlers</li>
+  <li><a href="api/libsel4vm_x86_ioports">sel4vm/arch/ioports.h</a>: Abstractions for initialising, registering and handling ioport events</li>
+</ul>
 
-</code></pre></div></div>
+<h1 id="libsel4vmmplatsupport-api">libsel4vmmplatsupport API</h1>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>See below for usage documentation on various libsel4vmmplatsupport interfaces:</p>
 
-<h2 id="booting-via-pxe">Booting via PXE</h2>
+<h3 id="common-interfaces-1">Common Interfaces</h3>
+<ul>
+  <li><a href="api/libsel4vmmplatsupport_device">sel4vmmplatsupport/device.h</a>: Provides a series of datastructures and helpers to manage VMM devices.</li>
+  <li><a href="api/libsel4vmmplatsupport_device_utils">sel4vmmplatsupport/device_utils.h</a>: Provides various helpers to establish different types devices for a given VM instance</li>
+  <li><a href="api/libsel4vmmplatsupport_guest_image">sel4vmmplatsupport/guest_image.h</a>: Provides general utilites to load guest vm images (e.g. kernel, initrd, modules)</li>
+  <li><a href="api/libsel4vmmplatsupport_guest_memory_util">sel4vmmplatsupport/guest_memory_util.h</a>: Provides various utilities and helpers for using the libsel4vm guest memory interface</li>
+  <li><a href="api/libsel4vmmplatsupport_guest_vcpu_util">sel4vmmplatsupport/guest_vcpu_util.h</a>: Provides abstractions and helpers for managing libsel4vm vcpus</li>
+  <li><a href="api/libsel4vmmplatsupport_ioports">sel4vmmplatsupport/ioports.h</a>: Useful abstraction for initialising, registering and handling ioport events for a guest VM instance</li>
+  <li><a href="api/libsel4vmmplatsupport_cross_vm_connection">sel4vmmplatsupport/drivers/cross_vm_connection.h</a>: Facilitates the creation of communication channels between VM’s and other components on a seL4-based system</li>
+  <li><a href="api/libsel4vmmplatsupport_pci">sel4vmmplatsupport/drivers/pci.h</a>: Interface presents a VMM PCI Driver, which manages the host’s PCI devices, and handles guest OS PCI config space read &amp; writes</li>
+  <li><a href="api/libsel4vmmplatsupport_pci_helper">sel4vmmplatsupport/drivers/pci_helper.h</a>: This interface presents a series of helpers when using the VMM PCI Driver</li>
+  <li><a href="api/libsel4vmmplatsupport_virtio_con">sel4vmmplatsupport/drivers/virtio_con.h</a>: This interface provides the ability to initalise a VMM virtio console driver</li>
+  <li><a href="api/libsel4vmmplatsupport_virtio_net">sel4vmmplatsupport/drivers/virtio_net.h</a>: This interface provides the ability to initalise a VMM virtio net driver</li>
+</ul>
 
-<p>A U-Boot uImage will be created by the seL4 build system. This can be booted
-by U-Boot using PXE.</p>
+<h3 id="architecture-specific-interfaces-1">Architecture Specific Interfaces</h3>
+
+<h4 id="arm-1">ARM</h4>
+<ul>
+  <li><a href="api/libsel4vmmplatsupport_arm_generic_forward_device">sel4vmmplatsupport/arch/generic_forward_device.h</a>: This interface facilitates the creation of a virtual device used for dispatching faults to external handlers</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_guest_boot_init">sel4vmmplatsupport/arch/guest_boot_init.h</a>: Provides helpers to initialise the booting state of a VM instance</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_guest_reboot">sel4vmmplatsupport/arch/guest_reboot,h</a>: Provides a series of helpers for registering callbacks when rebooting the VMM</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_guest_vcpu_fault">sel4vmmplatsupport/arch/guest_vcpu_fault.h</a>: Provides a module for registering and processing ARM vcpu faults</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_guest_vcpu_util">sel4vmmplatsupport/arch/guest_vcpu_util.h</a>: Provides abstractions and helpers for managing libsel4vm vcpus on an ARM platform</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_vpci">sel4vmmplatsupport/arch/vpci.h</a>: Presents a Virtual PCI driver for ARM-based VM’s</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_vusb">sel4vmmplatsupport/arch/vusb.h</a>: Presents a Virtual USB driver for ARM-based VM’s</li>
+  <li><a href="api/libsel4vmmplatsupport_arm_ac_device">sel4vmmplatsupport/arch/ac_device.h</a>: Facilitates the creation of generic virtual devices in a VM instance with access control permissions over the devices addressable memory</li>
+</ul>
+
+<h4 id="x86-1">X86</h4>
+<ul>
+  <li><a href="api/libsel4vmmplatsupport_x86_acpi">sel4vmmplatsupport/arch/acpi.h</a>: Provides support for generating ACPI table in a guest x86 VM</li>
+  <li><a href="api/libsel4vmmplatsupport_x86_guest_boot_init">sel4vmmplatsupport/arch/guest_boot_init.h</a>: Provides helpers to initialise the booting state of a VM instance</li>
+  <li><a href="api/libsel4vmmplatsupport_x86_vmm_pci_helper">sel4vmmplatsupport/arch/drivers/vmm_pci_helper.h</a>: Interface presents a series of helpers for establishing VMM PCI support on x86 platforms</li>
+</ul>
 
     </div>
   </div>
@@ -378,15 +412,15 @@ by U-Boot using PXE.</p>
             Site last updated: Fri Mar 6 15:59:33 2020 +1100 77dacb0
           </li>
           <li>
-                Page last updated: Tue Nov 6 16:02:51 2018 +1100 23164c9
+                Page last updated: Fri Mar 6 15:59:33 2020 +1100 77dacb0
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/Hardware/JetsonTX2.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/projects/virtualization/docs/index.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/Hardware/JetsonTX2.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/projects/virtualization/docs/index.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
