@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-06 16:02:28 +1100 -->
+<!-- Page last generated 2020-03-09 13:54:29 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -295,28 +295,87 @@
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="camkes-arm-vmm">CAmkES ARM VMM</h1>
-<p>This page describes the ARM virtual machine monitor. By default it’s configured for Jetson TX1, other supported platforms are Jetson TX2, Jetson TK1, Exynos5-based boards (Ordroid-XU, Odroid-XU3, Odroid-XU4) and Qemu.</p>
 
-<h2 id="getting-and-building">Getting and Building</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
-repo <span class="nb">sync
-mkdir </span>build
-<span class="nb">cd </span>build
-../init-build.sh <span class="nt">-DAARCH32</span><span class="o">=</span>TRUE <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>vm_minimal <span class="nt">-DPLATFORM</span><span class="o">=</span>tk1
-ninja
+<p><em>File included from <a href="https://github.com/sel4proj/camkes-arm-vm/blob/master/README.md">github repo</a> <a href="https://github.com/sel4proj/camkes-arm-vm/edit/master/README.md">edit</a></em></p>
+
+<!--
+  Copyright 2016, Data61
+  Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+  ABN 41 687 119 230.
+  This software may be distributed and modified according to the terms of
+  the BSD 2-Clause license. Note that NO WARRANTY is provided.
+  See "LICENSE_BSD2.txt" for details.
+  @TAG(DATA61_BSD)
+
+-->
+
+<h1 id="camkes-arm-vm">camkes-arm-vm</h1>
+
+<p>This repo is for running virtualised Linux on seL4 for arm platforms.</p>
+
+<p>Currently the exynos5, tk1 and tx2 machines are supported.</p>
+
+<h2 id="tk1-configuration">tk1 configuration</h2>
+
+<p>We currently provide two linux binaries and two device tree configurations.</p>
+<ul>
+  <li><code class="highlighter-rouge">linux-tk1-debian</code> will try and load a debian userspace off of an emmc partition</li>
+  <li><code class="highlighter-rouge">linux-tk1-initrd</code> will load an included buildroot ramdisk</li>
+  <li><code class="highlighter-rouge">linux-tk1-secure.dts</code> is a device tree configuration with the devices that aren’t provided to the linux are disabled.</li>
+  <li><code class="highlighter-rouge">linux-tk1-nonsecured.dts</code> is a device tree configuration with all devices enabled.</li>
+</ul>
+
+<p>In the tk1 app configuration there is a <code class="highlighter-rouge">boot mode selection</code> option that chooses between the two linux binaries, and
+an <code class="highlighter-rouge">Insecure</code> option which selects whether to provide all hardware devices to the linux vm or not. If <code class="highlighter-rouge">Insecure</code> is not set
+then the VM will only be provided a minimal amount of hardware frames and the <code class="highlighter-rouge">linux-tk1-secure.dts</code> DTS will be used.  If <code class="highlighter-rouge">Insecure</code>
+is set then the VM will be provided all device frames apart from the Memory controller and the <code class="highlighter-rouge">linux-tk1-nonsecured.dts</code> DTS will be used.</p>
+
+<p>U-Boot is required to initialise the USB devices if <code class="highlighter-rouge">linux-tk1-secure.dts</code> is used.  This is done by: <code class="highlighter-rouge">usb start 0</code>.</p>
+
+<p>The tk1 currently uses linux binaries constructed using <a href="https://buildroot.org/downloads/">Buildroot 2016.08.1</a> with the following configs:</p>
+<ul>
+  <li><code class="highlighter-rouge">buildroot_tk1_initrd_defconfig</code> builds linux with an included ramdisk that will be loaded at boot.</li>
+  <li><code class="highlighter-rouge">buildroot_tk1_emmc_defconfig</code> builds linux without a ramdisk and it will mount and run /sbin/init /dev/mmcblk0p2</li>
+</ul>
+
+<p>To copy the files back into this project, change into the Linux directory and run make for each file as shown below. <strong>Note that you can only
+update one of linux-tk1-debian or linux-tk1-initrd at a time as they are built from different Buildroot configs</strong>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd projects/vm/linux
+LINUX_FILE=linux-tk1-initrd BUILDROOT_DIR=~/workspaces/buildroot-2016.08.1/ make
+LINUX_FILE=linux-tk1-dtb-secure BUILDROOT_DIR=~/workspaces/buildroot-2016.08.1/ make
 </code></pre></div></div>
 
-<p>See <code class="highlighter-rouge">projects/vm/apps</code> for other supported virtual machine manager apps.</p>
+<p>Both of these configs use the tegra124-jetson-tk1-sel4vm-secure device tree file.<br />
+To change to the tegra124-jetson-tk1-sel4vm.dts this will need to be changed in the buildroot make menuconfig.
+To change the mounted emmc partition the chosen dts file’s bootargs entry will need to be updated.</p>
 
-<p>An EFI application file will be left in <code class="highlighter-rouge">images/capdl-loader-image-arm-tk1</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp tftpboot <span class="nv">$loadaddr</span>
-/capdl-loader-image-arm-tk1
-bootefi <span class="k">${</span><span class="nv">loadaddr</span><span class="k">}</span>
+<p>The linux version used can be found in the seL4 branch of our <a href="https://github.com/SEL4PROJ/linux-tegra/tree/sel4">linux-tegra repo</a>.</p>
+
+<p>When buildroot starts:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>buildroot login: root
+#
+</code></pre></div></div>
+<p>When debian starts:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Debian GNU/Linux 8 tk1 ttyS0
+tk1 login: root
+Password: root
+root@tk1:~#
 </code></pre></div></div>
 
-<h2 id="notes">Notes</h2>
-<p>The default setup does not pass though many devices to the Linux kernel. If you <code class="highlighter-rouge">make menuconfig</code> you can set <code class="highlighter-rouge">insecure</code> mode in the <code class="highlighter-rouge">Applications</code> submenu; this is meant to pass through all devices, but not
-everything has been tested and confirmed to work yet. In particular, the SMMU needs to have extra entries added for any DMA-capable devices such as SATA.</p>
+<h3 id="wireless-configuration">wireless configuration</h3>
+<p>To configure the Ralink 2780 USB wifi dongle:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig wlan0 up
+iw wlan0 scan
+wpa_passphrase SSID_NAME &gt;&gt; /etc/wpa_supplicant.conf
+	ENTER_SSID_PASSPHRASE
+wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf
+iw wlan0 link
+dhclient wlan0
+</code></pre></div></div>
+
+<p><em>End file included from <a href="https://github.com/sel4proj/camkes-arm-vm/blob/master/README.md">github repo</a> <a href="https://github.com/sel4proj/camkes-arm-vm/edit/master/README.md">edit</a></em></p>
+
 
   </div>
 
@@ -398,10 +457,10 @@ everything has been tested and confirmed to work yet. In particular, the SMMU ne
         </li>
         
           <li>
-            Site last updated: Fri Mar 6 15:59:33 2020 +1100 77dacb0
+            Site last updated: Fri Mar 6 16:09:27 2020 +1100 748ef28
           </li>
           <li>
-                Page last updated: Fri Feb 21 09:19:42 2020 +1100 a3b24ba
+                Page last updated: Fri Mar 6 16:09:27 2020 +1100 748ef28
           </li>
         
       </ul>
