@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-09 13:54:29 +1100 -->
+<!-- Page last generated 2020-03-09 16:03:56 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -324,17 +324,102 @@
 
 <h1 id="libsel4vmmplatsupport">libsel4vmmplatsupport</h1>
 
-<p>A library containing various VMM utilities and drivers that can be
-used to construct a Guest VM on a supported platform. This library makes use of ‘libsel4vm’ to implement VMM
-support.
-This is a consolidated library composed of libraries previously known as (but now deprecated) ‘libsel4vmm’ (x86),
-‘libsel4arm-vmm’ (arm), libsel4vmmcore and libsel4pci.</p>
-
-<p>Reference implementations using this library are:</p>
+<p>A library containing various VMM utilities and drivers that can be used to construct a Guest VM on a supported platform.
+This library makes use of ‘libsel4vm’ to implement VMM support.
+Reference implementations using this library are:</p>
 <ul>
   <li>CAmkES VM (x86) - https://github.com/seL4/camkes-vm</li>
   <li>CAmkES ARM VM (arm) - https://github.com/SEL4PROJ/camkes-arm-vm</li>
 </ul>
+
+<p>For documentation on the libsel4vmmplatsupport interface see <a href="docs/">here</a></p>
+
+<h3 id="features">Features</h3>
+<ul>
+  <li>Virtio Support/Drivers
+    <ul>
+      <li>Virtio PCI</li>
+      <li>Virtio Console</li>
+      <li>Virtio Net</li>
+    </ul>
+  </li>
+  <li>Cross VM connection/communication driver</li>
+  <li>Guest image loading utilities (e.g. kernel, initramfs)</li>
+  <li><code class="highlighter-rouge">libsel4vm</code> memory helpers and utilities</li>
+  <li>IOPorts management interface</li>
+</ul>
+
+<h4 id="architecture-specific-features">Architecture Specific Features</h4>
+
+<h5 id="arm">ARM</h5>
+<ul>
+  <li>VCPU fault handler module
+    <ul>
+      <li>HSR/Exception decoding</li>
+      <li>HSR/Exception handler dispatching</li>
+      <li>SMC decoding + handling</li>
+    </ul>
+  </li>
+  <li>PSCI handlers - through VCPU fault (+SMC handler) interface</li>
+  <li>Generic virtual device interfaces
+    <ul>
+      <li>Generic access controlled devices - control read/write privileges to specific devices</li>
+      <li>Generic forwarding devices - interfaces for dispatching faults to external handlers</li>
+    </ul>
+  </li>
+  <li>Guest reboot utilities</li>
+  <li>Virtual USB driver</li>
+  <li>Guest OS Boot interfaces (for Linux VM’s) : Boot VCPU initialisation</li>
+</ul>
+
+<h5 id="x86">X86</h5>
+<ul>
+  <li>ACPI table generation</li>
+  <li>PCI device passthrough helpers</li>
+  <li>Guest OS Boot interfaces (for Linux VM’s) : Boot VCPU initialisation, BIOS boot info structure generation, E820 map generation, VESA initialisation</li>
+</ul>
+
+<h4 id="platform-specific-features">Platform Specific Features</h4>
+
+<h5 id="exynos5422">Exynos5422</h5>
+<ul>
+  <li>Virtual Clock device driver (Access Controlled Device)</li>
+  <li>Virtual IRQ combiner device driver</li>
+  <li>Virtual GPIO device driver</li>
+  <li>Virtual Power device driver</li>
+  <li>Virtual MCT device driver</li>
+  <li>Virtual UART UART device driver</li>
+</ul>
+
+<h4 id="tk1">TK1</h4>
+<ul>
+  <li>USB Reboot Hooks</li>
+</ul>
+
+<h3 id="potential-future-features-yet-to-be-implemented">Potential future features (yet to be implemented)</h3>
+
+<ul>
+  <li>Additional Virtio Driver Support
+    <ul>
+      <li>e.g Virtio Blk, Virtio RNG, Virtio Balloon</li>
+    </ul>
+  </li>
+  <li>Block Driver support</li>
+</ul>
+
+<h4 id="architecture-specific-features-1">Architecture Specific Features</h4>
+<h5 id="arm-1">ARM</h5>
+<ul>
+  <li>Additional virtual devices for various supported platforms</li>
+  <li>Additional platform/board support
+    <h5 id="x86-1">x86</h5>
+  </li>
+  <li>Generic virtual device interface (as supported on ARM platforms)</li>
+  <li>Additional virtual device support</li>
+</ul>
+
+<p><em>Note: This is a consolidated library composed of libraries previously known as (but now deprecated) ‘libsel4vmm’ (x86),
+‘libsel4arm-vmm’ (arm), libsel4vmmcore and libsel4pci.</em></p>
 
 <p><em>End file included from <a href="https://github.com/sel4proj/sel4_projects_libs/blob/master/libsel4vmmplatsupport/README.md">github repo</a> <a href="https://github.com/sel4proj/sel4_projects_libs/edit/master/libsel4vmmplatsupport/README.md">edit</a></em></p>
 

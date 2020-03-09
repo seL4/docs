@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-09 13:54:29 +1100 -->
+<!-- Page last generated 2020-03-09 16:03:56 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -324,15 +324,76 @@
 
 <h1 id="libsel4vm">libsel4vm</h1>
 
-<p>A guest hardware virtualisation library for X86 (32-bit) and ARM (aarch32 &amp; aarch64). This is
-a consolidated library composed of libraries previously known as (but now deprecated) ‘libsel4vmm’ (x86)
-and ‘libsel4arm-vmm’ (arm).</p>
-
-<p>Reference implementations using this library are:</p>
+<p>A guest hardware virtualisation library for X86 (32-bit) and ARM (aarch32 &amp; aarch64) for use on seL4-based systems.
+Reference implementations using this library are:</p>
 <ul>
   <li>CAmkES VM (x86) - https://github.com/seL4/camkes-vm</li>
   <li>CAmkES ARM VM (arm) - https://github.com/SEL4PROJ/camkes-arm-vm</li>
 </ul>
+
+<p>For documentation on the libsel4vm interface see <a href="docs/">here</a></p>
+
+<h3 id="features">Features</h3>
+<ul>
+  <li>Hardware virtualisation support for the following architectures:
+    <ul>
+      <li>ARM
+        <ul>
+          <li>ARMv7 (+ Virtualisation Extensions)</li>
+          <li>ARMv8</li>
+        </ul>
+      </li>
+      <li>X86
+        <ul>
+          <li>ia32 (Intel VTX)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>IRQ Controller emulation
+    <ul>
+      <li>GICv2 (aarch32, aarch64)</li>
+      <li>PIC &amp; LAPIC (ia32)</li>
+    </ul>
+  </li>
+  <li>Guest VM Memory and RAM Management</li>
+  <li>Guest VCPU Fault and Context Management</li>
+  <li>VM Runtime Management</li>
+</ul>
+
+<h4 id="architecture-specific-features">Architecture Specific Features</h4>
+
+<h5 id="arm">ARM</h5>
+<ul>
+  <li>SMP support for GICv2 (ARM) platforms
+    <h5 id="x86">X86</h5>
+  </li>
+  <li>IOPort fault registration handler</li>
+  <li>VMCall handler registration interface</li>
+</ul>
+
+<h3 id="potential-future-features-yet-to-be-implemented">Potential future features (yet to be implemented)</h3>
+
+<h4 id="architecture-specific-features-1">Architecture Specific Features</h4>
+<h5 id="arm-1">ARM</h5>
+<ul>
+  <li>Virtual GICv3 support (aarch32 &amp; aarch64)
+    <ul>
+      <li>
+        <ul>
+          <li>SMP support for GICv3 platforms
+            <h5 id="x86-1">X86</h5>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>x86-64 support (Intel VTX)</li>
+  <li>SMP support on x86 platforms (ia32 &amp; x86_64)</li>
+</ul>
+
+<p><em>Note: This is a consolidated library composed of libraries previously known as (but now deprecated) ‘libsel4vmm’ (x86)
+and ‘libsel4arm-vmm’ (arm).</em></p>
 
 <p><em>End file included from <a href="https://github.com/sel4proj/sel4_projects_libs/blob/master/libsel4vm/README.md">github repo</a> <a href="https://github.com/sel4proj/sel4_projects_libs/edit/master/libsel4vm/README.md">edit</a></em></p>
 
