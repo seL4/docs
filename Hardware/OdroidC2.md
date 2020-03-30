@@ -21,7 +21,8 @@ System-on-Chip.
 
 <https://wiki.odroid.com/odroid-c2/odroid-c2>
 
-Only 64-bit mode is supported, and SMP, Hyp, etc. are not currently supported.
+Only 64-bit mode is supported both with and without SMP. Hypervisor
+support has not been tested.
 
 ## U-Boot
 
