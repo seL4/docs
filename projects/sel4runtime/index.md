@@ -1,5 +1,5 @@
 ---
-title: The seL4 Run-time
+title: The seL4 run-time
 toc: true
 layout: project
 project: sel4runtime
