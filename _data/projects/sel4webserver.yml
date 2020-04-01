@@ -7,3 +7,47 @@ repositories:
     repo: sel4webserver
   - org: seL4proj
     repo: sel4webserver-manifest
+
+components:
+  - name: Finddocsite
+    display_name: "Finddocsite"
+    description: "CMake module for building and installing an instance of the docsite in the vm filesystem, to be served by lighttpd."
+    maintainer: "Data61"
+    status: "active"
+    component_type: cmake-module
+  - name: Findlighttpd
+    display_name: "Findlighttpd"
+    description: "CMake module for building and installing lighttpd in the VM filesystem."
+    maintainer: "Data61"
+    status: "active"
+    component_type: cmake-module
+  - name: main
+    display_name: "main"
+    description: "CAmkES main module for running a single VM with lighttpd serving the docsite."
+    maintainer: "Data61"
+    status: "active"
+    component_type: camkes-module
+  - name: exynos-devices
+    display_name: "exynos-devices"
+    description: "CAmkES description of exynos5422 devices for single VM webserver"
+    maintainer: "Data61"
+    status: "active"
+    component_type: camkes-module
+  - name: exynos-multi-devices
+    display_name: "exynos-multi-devices"
+    description: "CAmkES description of exynos5422 devices for multi VM webserver"
+    maintainer: "Data61"
+    status: "active"
+    component_type: camkes-module
+  - name: qemu-arm-virt-devices
+    display_name: "qemu-arm-virt-devices"
+    description: "CAmkES description of qemu-arm-virt devices for single VM webserver"
+    maintainer: "Data61"
+    status: "active"
+    component_type: camkes-module
+  - name: overlay-files
+    display_name: "overlay-files"
+    description: "Files to be added to the VM filesystem overlay, mostly network setup"
+    maintainer: "Data61"
+    status: "active"
+    component_type: init-script
