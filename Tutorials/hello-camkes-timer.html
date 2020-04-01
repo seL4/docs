@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-09 16:03:56 +1100 -->
+<!-- Page last generated 2020-04-01 14:30:57 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -343,11 +343,10 @@
       
 <h1 id="camkes-timer-tutorial">CAmkES Timer Tutorial</h1>
 
-<p>This tutorial guides you through setting up a timer driver in CAmkES and using
-it to delay for 2 seconds. For this tutorial, we will be using the ZYNQ7000
-ARM-based platform. Other ARM platforms that we support can be used, however,
-you will need to modify the build options manually or via <code class="highlighter-rouge">ccmake</code> and adapt
-parts of the tutorial with respect to the platform.</p>
+<p>This tutorial guides you through setting up a sample timer driver component in
+CAmkES and using it to delay for 2 seconds. For this tutorial, we will be using
+the ZYNQ7000 ARM-based platform. This platform can be simulated via QEMU so it
+is not a problem if you do not have access to the actual physical board.</p>
 
 <p>The tutorial also has two parts to it. The first part will teach you how to
 manually define hardware details to configure the hardware component and
@@ -429,16 +428,17 @@ an IRQ interface connected with <code class="highlighter-rouge">seL4HardwareInte
 received on the interface <code class="highlighter-rouge">&lt;interface&gt;</code>, the function <code class="highlighter-rouge">&lt;interface&gt;_handle</code> will
 be called.</p>
 
-<p>The implementation of the timer driver itself isn’t directly in this file. The
-driver is implemented in a CAmkES-agnostic way in a library called
-<code class="highlighter-rouge">libplatsupport</code>.</p>
+<p>The implementation of the timer driver is located inside a different folder and
+can be found in the <code class="highlighter-rouge">projects/sel4-tutorials/zynq_timer_driver</code> folder from the
+root of the projects directory, i.e. where the <code class="highlighter-rouge">.repo</code> folder can be found and
+where the initial <code class="highlighter-rouge">repo init</code> command was executed.</p>
 
-<p>This task is to call the <code class="highlighter-rouge">timer_handle_irq</code> function from
-<code class="highlighter-rouge">libplatsupport</code>, to inform the driver that an interrupt has occurred.</p>
+<p>This task is to call the <code class="highlighter-rouge">timer_handle_irq</code> function from the supply driver to
+inform the driver that an interrupt has occurred.</p>
 
 <h3 id="task-5">TASK 5</h3>
 
-<p>Stop the timer from running. The <code class="highlighter-rouge">ttc_stop</code> function will be helpful here.</p>
+<p>Stop the timer from running. The <code class="highlighter-rouge">timer_stop</code> function will be helpful here.</p>
 
 <h3 id="task-6">TASK 6</h3>
 
@@ -453,14 +453,13 @@ connected with <code class="highlighter-rouge">seL4HardwareInterrupt</code>).</p
 <p>Now we’ll complete <code class="highlighter-rouge">hello__init</code> - a function which is called once
 before the component’s interfaces start running.</p>
 
-<p>We need to initialise a timer driver from <code class="highlighter-rouge">libplatsupport</code> for this
-device, and store a handle to the driver in the global variable
-<code class="highlighter-rouge">timer_drv</code>.</p>
+<p>We need to initialise a handle to the timer driver for this device, and store a
+handle to the driver in the global variable <code class="highlighter-rouge">timer_drv</code>.</p>
 
 <h3 id="task-8">TASK 8</h3>
 
 <p>After initialising the timer, we now need to start the timer. Do so by calling
-<code class="highlighter-rouge">ttc_start</code> and passing the handle to the driver.</p>
+<code class="highlighter-rouge">timer_start</code> and passing the handle to the driver.</p>
 
 <h3 id="task-9">TASK 9</h3>
 
@@ -477,8 +476,8 @@ need to implement is called <code class="highlighter-rouge">hello_sleep</code>.<
 <h3 id="task-10">TASK 10</h3>
 
 <p>Tell the timer to interrupt after the given number of seconds. The
-<code class="highlighter-rouge">ttc_set_timeout</code> function from <code class="highlighter-rouge">libplatsupport</code> will help. Note
-that it expects its time argument to be given in nanoseconds.</p>
+<code class="highlighter-rouge">timer_set_timeout</code> function from the included driver will help. Note that it
+expects its time argument to be given in nanoseconds.</p>
 
 <p>Note the existing code in <code class="highlighter-rouge">hello_sleep</code>. It waits on a binary semaphore.
 <code class="highlighter-rouge">irq_handle</code> will be called on another thread when the timer interrupt occurs,
@@ -551,8 +550,9 @@ device, there may be multiple interrupts associated with the device. A
 information about the interrupt, allowing the handler to differentiate between
 the numerous interrupts of a device.</p>
 
-<p>Likewise with part one, the implementation of the timer driver also isn’t
-inside this file and the task here is to call <code class="highlighter-rouge">timer_handle_irq</code>.</p>
+<p>Likewise with part one, the implementation of the timer driver is in the
+included driver in <code class="highlighter-rouge">timer_driver</code> and the task here is to call
+<code class="highlighter-rouge">timer_handle_irq</code>.</p>
 
 <h3 id="task-5-1">TASK 5</h3>
 
@@ -616,7 +616,7 @@ you wish to acknowledge.</p>
         </li>
         
           <li>
-            Site last updated: Fri Mar 6 16:09:27 2020 +1100 748ef28
+            Site last updated: Wed Apr 1 14:00:30 2020 +1100 908982c
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 3d948f6

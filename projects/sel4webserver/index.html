@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-09 16:03:56 +1100 -->
+<!-- Page last generated 2020-04-01 14:30:57 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -317,9 +317,12 @@ a webserver inside a Linux VM component to serve a static website.</p>
 
 <h2 id="current-status">Current status</h2>
 
-<p>Currently there is a single configuration for serving a static website from a webserver running
-inside a Linux guest on an <a href="https://wiki.odroid.com/odroid-xu4/odroid-xu4">odroid-xu4</a> on a local network. It would be possible to
-modify which static website is being served by modifying the static html files located in <code class="highlighter-rouge">/run/site/</code>
+<p>Currently there are two configurations for serving a static website from a webserver running
+inside a Linux guest on an <a href="https://wiki.odroid.com/odroid-xu4/odroid-xu4">odroid-xu4</a> on a local network. This includes a configuration
+with a single VM instance that serves a static website. The second configuration involves
+multiple VM’s serving a static website. The multiple VM configuration has an additional VM that acts
+as an network access point for the other VMs.
+It would be possible to modify which static website is being served by modifying the static html files located in <code class="highlighter-rouge">/run/site/</code>
 in the Linux guest’s file system.</p>
 
 <h2 id="plans">Plans</h2>
@@ -366,16 +369,29 @@ Camkes dependencies described in <a href="https://docs.sel4.systems/HostDependen
 <span class="c"># Obtain sources via repo tool</span>
 repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/sel4webserver-manifest.git
 repo <span class="nb">sync</span>
+</code></pre></div></div>
 
-<span class="c"># Initalise project build directory</span>
+<h4 id="configure-single-vm-webserver">Configure: Single VM Webserver</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initalise project build directory</span>
 <span class="nb">mkdir </span>build
 <span class="nb">cd </span>build
 ../init-build.sh
 <span class="c"># -- Configuring done</span>
 <span class="c"># -- Generating done</span>
 <span class="c"># -- Build files have been written to: /tmp/tmp.xmwD2Fc3FW/buildweb</span>
+</code></pre></div></div>
+<h4 id="configure-multi-vm-webserver">Configure: Multi-VM Webserver</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initalise project build directory</span>
+<span class="nb">mkdir </span>build
+<span class="nb">cd </span>build
+../init-build.sh <span class="nt">-DMULTI_VM_LAN</span><span class="o">=</span>1
+<span class="c"># -- Configuring done</span>
+<span class="c"># -- Generating done</span>
+<span class="c"># -- Build files have been written to: /tmp/tmp.xmwD2Fc3FW/buildweb</span>
+</code></pre></div></div>
 
-<span class="c"># build</span>
+<h4 id="build-webserver">Build Webserver</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># build</span>
 ninja
 <span class="c"># [0/1] Re-running CMake...</span>
 <span class="c"># -- Configuring done</span>
@@ -507,7 +523,7 @@ See https://docs.sel4.systems/Contributing for our general contribution guidelin
         </li>
         
           <li>
-            Site last updated: Fri Mar 6 16:09:27 2020 +1100 748ef28
+            Site last updated: Wed Apr 1 14:00:30 2020 +1100 908982c
           </li>
           <li>
                 Page last updated: Fri Feb 21 09:19:42 2020 +1100 a3b24ba

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-03-09 16:03:56 +1100 -->
+<!-- Page last generated 2020-04-01 14:30:57 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -360,13 +360,13 @@ ninja
 
 <p>The root task is given a single capability from which capabilities to all irq numbers
 in the system can be derived, <code class="highlighter-rouge">seL4_CapIRQControl</code>. This capability can be moved between CSpaces
-and CSlots but cannot be duplicated. Revoking this capability results in all access to all 
+and CSlots but cannot be duplicated. Revoking this capability results in all access to all
 irq capabilities being removed.</p>
 
 <h3 id="irqhandlers">IRQHandlers</h3>
 
 <p>IRQHandler capabilities give access to a single irq and are standard seL4 capabilities: they
-<em>can</em> be moved and duplicated according to system policy. IRQHandlers are obtained by 
+<em>can</em> be moved and duplicated according to system policy. IRQHandlers are obtained by
 invoking the IRQControl capability, with architecture specific parameters. Below is an
 example of obtaining an IRQHandler.</p>
 
@@ -391,14 +391,14 @@ with the IRQHandler capability for that irq, as follows:</p>
 </code></pre></div></div>
 <p>On success, this call will result in signals being delivered to the notification object when
 an interrupt occurs. To handle multiple interrupts on the same notification object, you
-can set different badges on the notification capabilities bound to each IRQHandler.<br />
+can set different badges on the notification capabilities bound to each IRQHandler.
  When an interrupt arrives,
 the badge of the notification object bound to that IRQHandler is bitwise orred with the data
 word in the notification object.
-Recall the badging technique for differentiating signals from the 
+Recall the badging technique for differentiating signals from the
  <a href="https://docs.sel4.systems/Tutorials/notifications">notification tutorial</a>.</p>
 
-<p>Interrupts can be polled for using <code class="highlighter-rouge">seL4_Poll</code> or waited for using <code class="highlighter-rouge">seL4_Wait</code>. Either system 
+<p>Interrupts can be polled for using <code class="highlighter-rouge">seL4_Poll</code> or waited for using <code class="highlighter-rouge">seL4_Wait</code>. Either system
 call results in the data word of the notification object being delivered as the badge of the
 message, and the data word cleared.</p>
 
@@ -409,14 +409,18 @@ the notification from an IRQHandler.</p>
 
 <p>Once an interrupt is received and processed by the software, you can unmask the interrupt
 using <a href="https://docs.sel4.systems/ApiDoc.html#ack"><code class="highlighter-rouge">seL4_IRQHandler_Ack</code></a> on the IRQHandler.
-seL4 will not deliver any further interrupts after an IRQ is raised until that IRQHandler 
+seL4 will not deliver any further interrupts after an IRQ is raised until that IRQHandler
 has been acked.</p>
 
 <h2 id="exercises">Exercises</h2>
 
-<p>In this tutorial you will set up interrupt handling for a provided timer driver on the zynq7000
-ARM platform. The tutorial has been set up with two processes: <code class="highlighter-rouge">timer.c</code>, the timer driver 
-and RPC server, and <code class="highlighter-rouge">client.c</code>, which makes a single request.</p>
+<p>In this tutorial you will set up interrupt handling for a provided timer driver
+on the zynq7000 ARM platform. This timer driver can be located inside the
+<code class="highlighter-rouge">projects/sel4-tutorials/zynq_timer_driver</code> folder from the root of the
+projects directory, i.e. where the <code class="highlighter-rouge">.repo</code> folder can be found and where the
+initial <code class="highlighter-rouge">repo init</code> command was executed. The tutorial has been set up with two
+processes: <code class="highlighter-rouge">timer.c</code>, the timer driver and RPC server, and <code class="highlighter-rouge">client.c</code>, which
+makes a single request.</p>
 
 <p>On successful initialisation of the tutorial, you will see the following:</p>
 
@@ -427,27 +431,27 @@ main@timer.c:78 [Cond failed: error]
 	Failed to ack irq
 </code></pre></div></div>
 
-<p>The timer driver we are using emits an interrupt in the <code class="highlighter-rouge">TTC0_TIMER_IRQ</code> number.</p>
+<p>The timer driver we are using emits an interrupt in the <code class="highlighter-rouge">TTC0_TIMER1_IRQ</code> number.</p>
 
 <p><strong>Exercise</strong> Invoke <code class="highlighter-rouge">irq_control</code>, which contains the <code class="highlighter-rouge">seL4_IRQControl</code> capability,
-the place the <code class="highlighter-rouge">IRQHandler</code> capability for <code class="highlighter-rouge">TTC0_TIMER_IRQ</code> into the <code class="highlighter-rouge">irq_handler</code> CSlot.</p>
+the place the <code class="highlighter-rouge">IRQHandler</code> capability for <code class="highlighter-rouge">TTC0_TIMER1_IRQ</code> into the <code class="highlighter-rouge">irq_handler</code> CSlot.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* TODO invoke irq_control to put the interrupt for TTC0_TIMER1_IRQ in 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* TODO invoke irq_control to put the interrupt for TTC0_TIMER1_IRQ in
        cslot irq_handler (depth is seL4_WordBits) */
 </code></pre></div></div>
 
-<p>On success, you should see the following output, without the error message that occurred earlier, 
+<p>On success, you should see the following output, without the error message that occurred earlier,
 as the irq_handle capability is now valid:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undelivered IRQ: 42
 </code></pre></div></div>
 
-<p>This is a warning message from the kernel that an IRQ was recieved for irq number 42, but no 
+<p>This is a warning message from the kernel that an IRQ was recieved for irq number 42, but no
 notification capability is set to sent a signal to.</p>
 
 <p><strong>Exercise</strong> Now set the notification capability (<code class="highlighter-rouge">ntfn</code>) by invoking the irq handler.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     /* TODO set ntfn as the notification for irq_handler */   
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     /* TODO set ntfn as the notification for irq_handler */
 </code></pre></div></div>
 
 <p>Now the output will be:</p>
@@ -456,19 +460,17 @@ notification capability is set to sent a signal to.</p>
 </code></pre></div></div>
 
 <p>Only one interrupt is delivered, as the interrupt has not been acknowledged. The timer driver is
-programmed to emit an interrupt every millisecond, so we need to count 2000 interrupts 
+programmed to emit an interrupt every millisecond, so we need to count 2000 interrupts
 before replying to the client.</p>
 
 <p><strong>Exercise</strong> Acknowledge the interrupt after handling it in the timer driver.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        /* TODO ack the interrupt */   
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        /* TODO ack the interrupt */
 </code></pre></div></div>
 
 <p>Now the timer interrupts continue to come in, and the reply is delivered to the client.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up
-got the current time:
-516119
 </code></pre></div></div>
 
 <p>That’s it for this tutorial.</p>
@@ -514,7 +516,7 @@ got the current time:
         </li>
         
           <li>
-            Site last updated: Fri Mar 6 16:09:27 2020 +1100 748ef28
+            Site last updated: Wed Apr 1 14:00:30 2020 +1100 908982c
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 f28e6b6
