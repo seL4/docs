@@ -262,3 +262,26 @@ a[href*="//"]:not([href*="{{site.url}}"]):after {
   margin-left: 0.2em;
   content: " \f35d";
 }
+
+
+/* flexbox styling sourced from: https://css-tricks.com/dont-overthink-flexbox-grids/ */
+.flex-grid {
+  display: flex;
+}
+.col {
+  flex: 1;
+  padding: 20px;
+}
+@media (max-width: 400px) {
+  .flex-grid {
+    display: block;
+  }
+}
+
+.flex-grid-thirds {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-grid-thirds .col {
+  width: 32%;
+}
