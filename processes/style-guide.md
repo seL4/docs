@@ -73,6 +73,10 @@ settings declared in our
   }
   ```
 
+### Header guards
+
+Use `#pragma once` in header files to avoid duplicated includes.
+
 ### Choosing data types
 
 When using integral types (`char`, `int`, `long`, etc.), qualify them
@@ -172,10 +176,6 @@ platforms.
 * Use `%p` for pointers.
 * Use `%zd` and `%zu` for `ssize_t` and `size_t` respectively.
 
-### Header guards
-
-Use `#pragma once` in header files to avoid duplicated includes.
-
 ### Error handling
 
 * Always check error codes.
@@ -199,10 +199,6 @@ The in-kernel `printf` implementation is limited.
 
 * Use `%p` for pointers.
 * Use `%lu` for words, and cast to avoid warnings.
-
-### Header guards
-
-Do not use `#pragma once`; use header guards.
 
 ### Error handling
 
