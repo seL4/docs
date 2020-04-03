@@ -27,16 +27,49 @@ Because of this we need to split the list into two before sorting.
 {% assign releases_1 = releases | where_exp:"item", "item.version_digits != 2" | sort: "version"  %}
 {% assign releases_2 = releases | where_exp:"item", "item.version_digits == 2" | sort: "version" %}
 {% assign releases =  releases_1 | concat: releases_2 %}
-{% for release in releases %}
-    {% if forloop.first == true %}
-        <h3>Releases</h3>
+{% if project.name != 'sel4' %}
+  {% for release in releases %}
+      {% if forloop.first == true %}
+          <h3>Releases</h3>
+      {% endif %}
+          <li>
+            <a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="{{ release.url }}">
+              {{ release.title }}
+            </a>
+          </li>
+  {% endfor %}
+{% else %}
+<h3>Releases</h3>
+<h4> Master (verified kernel) </h4>
+
+{% for release in releases  %}
+    {% if release.variant != "mcs" %}
+      <li>
+        <a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="{{ release.url }}">
+          {{ release.title }}
+        </a> (<a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf">manual</a>)
+      </li>
+
     {% endif %}
-        <li>
-          <a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="{{ release.url }}">
-            {{ release.title }}
-          </a>
-        </li>
+
 {% endfor %}
+
+<h4>Experimental Branches</h4>
+
+We occasionally pre-release experimental branches for community feedback and availability.
+<h5>Mixed Criticality Support (MCS) / Realtime </h5>
+{% for release in releases  %}
+    {% if release.variant == "mcs" %}
+      <li>
+        <a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="{{ release.url }}">
+          {{ release.title }}
+        </a> (<a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf">manual</a>)
+      </li>
+    {% endif %}
+
+{% endfor %}
+
+{% endif %}
 
 {% assign update_where_exp = "item.url contains '/updates/" | append: project.name | append: "/'" %}
 {% assign updates = site['updates'] | where_exp:"item", update_where_exp %}
