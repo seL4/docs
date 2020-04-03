@@ -11,5 +11,17 @@ layout: basic
     {{ content }}
   </div>
 
-  {% include project-sidebar.html %}
+{% assign url = page.url | split: "/" %}
+{% capture project_name %}
+{% if page.project %}
+{{page.project}}
+{% elsif url[1] == "projects" %}
+{{url[2]}}
+{% endif %}
+{% endcapture %}
+
+{% assign project_name = project_name | strip %}
+{% assign project = site.data.projects[project_name] %}
+
+  {% include project-sidebar.html project=project %}
 </div>
