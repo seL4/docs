@@ -45,13 +45,7 @@ module Jekyll
 
     # Render the variable if required (@see https://goo.gl/N5sMV3)
     def render_variable(context)
-      if @file.match(VARIABLE_SYNTAX)
-        partial = context.registers[:site]
-          .liquid_renderer
-          .file("(variable)")
-          .parse(@file)
-        partial.render!(context)
-      end
+        Liquid::Template.parse(@file).render(context) if VARIABLE_SYNTAX.match?(@file)
     end
 
     def render(context)

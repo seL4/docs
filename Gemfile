@@ -8,10 +8,7 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.7.0"
-
-# This is our theme
-gem "jekyll-theme-bootstrap", "0.0.5"
+gem "jekyll", "~> 4.0.0"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
@@ -20,12 +17,13 @@ gem "jekyll-theme-bootstrap", "0.0.5"
 # If you have any plugins, put them here!
 # Look here for supported github plugins: https://pages.github.com/versions/
 group :jekyll_plugins do
-  gem "jekyll-titles-from-headings", "0.5.0"
-  gem "jekyll-relative-links", "0.5.2"
-  gem "jekyll-optional-front-matter", "0.3.0"
-  gem "jekyll-sitemap", "1.1.1"
+  gem "jekyll-titles-from-headings", "0.5.3"
+  gem "jekyll-relative-links", "0.6.1"
+  gem "jekyll-optional-front-matter", "0.3.2"
+  gem "jekyll-sitemap", "1.4.0"
   gem 'jekyll-toc', "0.5.2"
   gem 'jekyll-redirect-from'
+  gem 'jekyll-remote-theme'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
