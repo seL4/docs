@@ -23,5 +23,9 @@ layout: basic
 {% assign project_name = project_name | strip %}
 {% assign project = site.data.projects[project_name] %}
 
+  {% if page.toc %}
+    {% include toc-sidebar.html %}
+  {% endif %}
   {% include project-sidebar.html project=project %}
+
 </div>
