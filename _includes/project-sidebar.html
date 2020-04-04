@@ -7,6 +7,16 @@
             Project Documentation
           </a>
         </li>
+{% for status in site.status %}
+{% if status.project == project.name %}
+        <li>
+          <a class="" href="/status/{{ project.name }}">
+            Status
+          </a>
+        </li>
+{% endif %}
+{% endfor %}
+
 {% for repo in project.repositories %}
     {% if forloop.first == true %}
         <h3>Repositories</h3>

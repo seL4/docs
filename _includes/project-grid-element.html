@@ -4,10 +4,18 @@
 <div class="panel panel-default">
 <div class="panel panel-body">
 <h2>{{project.display_name}}</h2>
+<p>
 {% if include.description %}
-  <p>{{include.description}}</p>
+  {{include.description}}
 {% else %}
-  <p>{{project.description}}</p>
+  {{project.description}}.
 {% endif %}
-<a href="{{project.name}}" class="btn btn-link">See more</a>
+<br/>
+<a href="{{project.name}}" class="">See more information.</a>
+</p>
+{% for status in site.status %}
+{% if status.project == project.name %}
+<a href="/status/{{project.name}}" class="btn btn-link">Status</a>
+{% endif %}
+{% endfor %}
 </div></div>
