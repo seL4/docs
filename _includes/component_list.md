@@ -1,9 +1,16 @@
 {% assign project = site.data.projects[include.project] %}
 
-{% for component in project.components %}
+{% assign list = include.list | default: 'components' %}
+{% for component in project[list] %}
+
     {%- if forloop.first == true %}
-| Component  | Type | Description | Status  | Maintained by | Licensing |
-|-|-|-|-|-|-|-|
+| {{list | capitalize}}   | Description | Status  | Maintained by |
+|-|-|-|-|-|-|
     {%- endif %}
-| {{component.display_name}}| {{component.component_type}} |{{component.description}}|{{component.status}}|{{component.maintainer}}|{{component.licensing}}|
+    {%- if include.type and include.type != component.component_type -%}
+        {%- continue %}
+    {%- endif %}
+{%- capture link_text %}{{component.display_name_url}}{% endcapture %}
+{%- capture display_text %}{{component.display_name}}{% endcapture %}
+| {% include cond-wrap-link.md text=display_text link=link_text %} |{{component.description}}|{{component.status}}|{{component.maintainer}}|
 {%- endfor %}
