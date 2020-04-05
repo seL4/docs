@@ -93,3 +93,66 @@ components:
     maintainer: "Data61"
     status: "active"
     component_type: cmake-module
+  # Manifests
+  - name: master.xml
+    display_name: master.xml
+    description: "seL4bench project manifest with all repositories from master branches."
+    maintainer: "Data61"
+    status: "active. Updated whenever project repository structure changes."
+    component_type: repo-manifest
+  - name: default.xml
+    display_name: default.xml
+    description: "seL4bench project manifest with all repositories pinned to last versions that successfully produced benchmark results."
+    maintainer: "Data61"
+    status: "active. This gets updated automatically by continuous integration."
+    component_type: repo-manifest
+
+configurations:
+  - name: RELEASE
+    display_name: "RELEASE (BOOL)"
+    description: "Performance optimized build"
+    maintainer: "Data61"
+    status: "(Default: ON)"
+    component_type: sel4test-option
+  - name: HARDWARE
+    display_name: "HARDWARE (BOOL)"
+    description: "Configuration for sel4bench hardware app"
+    maintainer: "Data61"
+    status: "(Default: OFF)"
+    component_type: sel4test-option
+  - name: FAULT
+    display_name: "FAULT (BOOL)"
+    description: "Configuration sel4bench fault app"
+    maintainer: "Data61"
+    status: "(Default: OFF)"
+    component_type: sel4test-option
+  - name: VCPU
+    display_name: "VCPU (BOOL)"
+    description: "Whether or not to run the VCPU benchmarks"
+    maintainer: "Data61"
+    status: "(Default: OFF)"
+    component_type: sel4test-option
+  - name: SMP
+    display_name: "SMP (BOOL)"
+    description: "Configuration sel4bench smp app"
+    maintainer: "Data61"
+    status: "(Default: OFF)"
+    component_type: sel4test-option
+  - name: PLATFORM
+    display_name: "PLATFORM (STRING)"
+    description: "Platform to test"
+    maintainer: "Data61"
+    status: "(Default: x86_64)"
+    component_type: sel4test-option
+  - name: FASTPATH
+    display_name: "FASTPATH (BOOL)"
+    description: "Turn fastpath on or off"
+    maintainer: "Data61"
+    status: "(Default: ON)"
+    component_type: sel4test-option
+  - name: ARM_HYP
+    display_name: "ARM_HYP (BOOL)"
+    description: "ARM EL2 hypervisor features on or off"
+    maintainer: "Data61"
+    status: "(Default: OFF)"
+    component_type: sel4test-option
