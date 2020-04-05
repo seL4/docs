@@ -19,6 +19,19 @@
 {% endif %}
 {% endfor %}
 
+{% for link in project.useful_urls %}
+    {% if forloop.first == true %}
+        <h3>Useful URLs</h3>
+    {% endif %}
+        <li>
+          <a style="{% if link.url == page.url %} font-weight: bold; {%endif%}" class="" href="{{ link.url }}">
+            {{ link.label }}
+          </a>
+        </li>
+{% endfor %}
+
+
+
 {% for repo in project.repositories %}
     {% if forloop.first == true %}
         <h3>Repositories</h3>
