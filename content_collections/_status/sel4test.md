@@ -1,7 +1,10 @@
 ---
-title: seL4Test Project Status
+title: Project Status
 project: sel4test
 toc: true
+permalink: projects/sel4test/status.html
+redirect_from:
+  - status/sel4test.html
 ---
 
 # seL4test Project Status

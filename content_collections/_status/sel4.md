@@ -1,10 +1,13 @@
 ---
-title: seL4 status
+title: Project Status
 project: sel4
 toc: true
+permalink: /projects/sel4/status.html
+redirect_from:
+  - status/sel4.html
 ---
 
-# seL4 project status
+# seL4 Project Status
 
 The seL4 project contains a lot of different features and components that work across
 different hardware platforms and configurations. This page tries to give an overview
