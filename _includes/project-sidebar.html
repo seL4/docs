@@ -3,14 +3,16 @@
     <ul class="section-nav">
     	<h2> {{project.display_name}} </h2> 
         <li>
-          <a class="" href="/projects/{{ project.name }}">
+          {% capture project_page %}/projects/{{ project.name }}/{% endcapture %}
+          <a style="{% if project_page == page.url %} font-weight: bold; {%endif%}" class="" href="{{ project_page }}">
             Project Documentation
           </a>
         </li>
 {% for status in site.status %}
 {% if status.project == project.name %}
         <li>
-          <a class="" href="/status/{{ project.name }}">
+          {% capture status_page %}/status/{{ project.name }}.html{% endcapture %}
+          <a style="{% if status_page == page.url %} font-weight: bold; {%endif%}" class="" href="{{ status_page }}">
             Status
           </a>
         </li>
