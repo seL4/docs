@@ -9,9 +9,9 @@ This page serves as an index of components that are available across all project
 
 ## Native component libraries
 
-{% include component_list.md project='user_libs' type='util_libs' no_title=false %}
-{%- include component_list.md project='user_libs' type='projects_libs' no_title=true %}
-{%- include component_list.md project='user_libs' type='seL4_libs' no_title=true %}
+{% include component_list.md project='user_libs' type='util_libs' no_title=false continue_table=true %}
+{%- include component_list.md project='user_libs' type='projects_libs' no_title=true continue_table=true %}
+{%- include component_list.md project='user_libs' type='seL4_libs' no_title=true continue_table=true %}
 {%- include component_list.md project='user_libs' type='seL4_projects_libs' no_title=true %}
 
 
