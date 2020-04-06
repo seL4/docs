@@ -1,67 +1,75 @@
-# seL4 Docs
-This documentation site is for cooperatively developing and sharing documentation on [seL4](http://sel4.systems).
-It replaces the old wiki.sel4.systems site.  The layout is different from the old wiki, so use the search bar 
-to find pages that have moved if it's not obvious whre they are from the index here.
+---
+layout: home
+title: seL4 Docs
+---
+ <div class="flex-grid">
+  <div class="col">
 
-## seL4 Basics
+This documentation site is for cooperatively developing and sharing documentation about <a href="https://sel4.systems">seL4</a>.
+</div>
+</div>
 
 
-- [Getting started](GettingStarted)
-- [Tutorials](Tutorials)
-- [Documentation](Documentation)
-- [seL4 libraries](SeL4Libraries)
-- [CAmkES](CAmkES)
-- [CapDL](CapDL)
-- [seL4Test](seL4Test)
-- [Debugging guide](DebuggingGuide)
-- [Benchmarking guide](BenchmarkingGuide)
-- [Virtualisation on seL4](VM)
-- [Rust](Rust)
-- [Host Build Dependencies](HostDependencies)
+ <div class="flex-grid">
+  <div class="col">
+   <h1><a href="/GettingStarted">Getting started</a></h1>
+	<p>Information about working with seL4 and its ecosystem</p>
+	<ul>
+	<li><a href="/GettingStarted#background-and-terminology">seL4 Background</a></li>
+	<li><a href="/MaintainedRepositories">The source code</a></li>
+	<li><a href="/projects/sel4/documentation.html">Documentation</a></li>
+	<li><a href="/projects/sel4/frequently-asked-questions.html">Frequently Asked Questions (FAQ)</a></li>
+	<li><a href="/projects/roadmap.html">Roadmap</a></li>
+	<li><a href="/projects/buildsystem/host-dependencies.html">Build dependencies</a></li>
+	<li><a href="/GettingStarted#running-sel4">Building and Running seL4</a></li>
+	<li><a href="/Hardware">Hardware and Target platforms</a></li>
+	<li><a href="/projects/sel4/verified-configurations.html">Verification targets and claims</a></li>
+	</ul>
+  </div>
+  <div class="col">
+   <h1><a href="/processes/">Contributing</a></h1>
+	<p>Information about how to contribute to the seL4 platform and documentation.</p>
+        <ul>
+        <li><a href="/processes/conduct.html">Code of Conduct</a></li>
+        <li><a href="/processes#development-processes">Development process</a></li>
+        <li><a href="/processes/contributing.html">Contribution process</a></li>
+        <li><a href="/processes/release-process.html">Release process</a></li>
+        <li><a href="/processes/rfc-process.html">Request For Comment (RFC) process</a></li>
+        <li><a href="/processes/style-guide.html">Style Guide</a></li>
+	</ul>
+  </div>
+ </div>
+ <div class="flex-grid" >
+  <div class="col ">
+   <h1><a href="/projects/">Projects</a></h1>
+	<p>List and details of all the projects that make up the seL4 platform.</p>
 
-## seL4 Status
+	<ul>
+        <li><a href="/projects/sel4/">seL4 kernel</a></li>
+        <li><a href="/projects/l4v/">L4.verified</a></li>
+        <li><a href="/projects/camkes/">CAmkES</a></li>
+        <li><a href="/projects/sel4test/">seL4test</a></li>
+        <li><a href="/projects/sel4bench/">seL4bench</a></li>
+        <li><a href="/projects/virtualization/">Virtualisation</a></li>
+        <li><a href="/projects/buildsystem/">Build System</a></li>
+        <li><a href="/projects/sel4webserver/">Example system: seL4webserver</a></li>
+	</ul>
+  </div>
+  <div class="col">
+   <h1><a href="/Tutorials/">Tutorials</a></h1>
+	<p>Tutorials and other material to learn about seL4.</p>
 
-- [New Features](Status): new features in development
-- [Hardware Support](Hardware): information about hardware
-      platform ports
-- Kernel Features: information about available kernel features
-- [Userland Components and Drivers](UserlandComponents): available device drivers and
-      userland components
+	<ul>
+	<li><a href="/Tutorials#how-to-use-the-tutorials">Tutorial overview</a></li>
+	<li><a href="/Tutorials#introduction-tutorial">Introduction (hello world)</a></li>
+	<li><a href="/Tutorials#sel4-mechanisms-tutorials">seL4 mechanisms</a></li>
+	<li><a href="/Tutorials#camkes-tutorials">CAmkES</a></li>
+	<li><a href="/Tutorials#rapid-prototyping-tutorials">Rapid prototyping</a></li>
+	<li><a href="/Tutorials#virtual-machines">Virtual machines</a></li>
+	<li><a href="/Tutorials#mcs-extensions">MCS extensions</a></li>
+	</ul>
+  </div>
+ </div>
 
-## Questions and Recipes
 
-- [FAQ](FrequentlyAskedQuestions): editable list of FAQs
-- seL4 Recipes: How to do X with seL4
 
-## Contributing
-
-We welcome community contributions to our sources and this website!
-
-- [Contributions to this doc site](DocsContributing)
-- [Source contributions](Contributing)
-
-## Releases
-
-- [Release process](ReleaseProcess)
-
-### seL4
-
-- [Current release](https://github.com/seL4/seL4/releases/latest)
-- [Current manual](http://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
-- [Release notes](sel4_release)
-- [API Reference](/ApiDoc)
-
-### CAmkES
-
-- [Current release](https://github.com/seL4/camkes-tool/releases/latest)
-- [Release notes](camkes_release)
-
-## Community
-
-- [Trustworthy Systems Blog](https://research.csiro.au/tsblog)
-- Mailing lists
-  - [seL4 Announce](https://sel4.systems/lists/listinfo/announce)
-  - [seL4 Devel](https://sel4.systems/lists/listinfo/devel)
-- [IRC Channel](IRCChannel)
-- [Suggested projects](/SuggestedProjects)
-- [CommunityProjects](/CommunityProjects)
