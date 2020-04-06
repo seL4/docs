@@ -36,20 +36,22 @@ workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-wo
 
 ### Reviewers
 
-- The Trustworthy Systems team will delegate reviewers.
+- The [TSC][1] of the seL4 foundation will delegate reviewers to approve. Anyone can help to review a pull request.
 - If you want a particular person to review, please tag them.
 - If there hasn't been any activity after a couple of days, feel free to bump the post.
+
+[1]: https://sel4.systems/Foundation/TSC
 
 ### Commits
 
 - Commit history is part of the review
     - A good commit history assists reviewers in understanding the change
     - Please see the [Git conventions](/GitConventions).
-- Good reviews are small reviews. Large PRs should only be created if neccessary.
+- Good reviews are small reviews. Large PRs should only be created if necessary.
 
 ## During a PR
 
-- Always abide by our [Code of Conduct](/Conduct).
+- Always abide by the [seL4 Code of Conduct](/Conduct).
 
 ### Reviewers
 
