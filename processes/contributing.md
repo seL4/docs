@@ -19,7 +19,7 @@ Please read and abide by the following conventions when contributing:
 
 ## Large contributions
 
-If you would like to make significant changes to the seL4 kernel, or any of its libraries, consider making an [RFC|RfcProcess]. This will allow seL4 developers and the wider community to comment and approve of your design.
+If you would like to make significant changes to the seL4 kernel, or any of its libraries, consider making an [RFC](rfc-process). This will allow seL4 developers and the wider community to comment and approve of your design.
 
 ## Developer Certificate of Origin (DCO)
 
@@ -50,7 +50,7 @@ Some tips on using signed-off-by with git:
   - the DCO allows you to sign off commits for others -- see <https://developercertificate.org> for details
   - you can add an alias for sign-off to your git config, so you don’t have to think about it. For instance:
 
-       git config alias.ci “commit -s"
+            git config alias.ci “commit -s"
 
     now `git ci` will commit with sign-off. The config command above is local
     for the current repository.
@@ -68,4 +68,6 @@ request is approved, it will be merged either directly at github or first at
 Data61 via the testing tool chain of the Trustworthy Systems group and then
 pushed out to github.
 
-See also [Suggested Projects](/SuggestedProjects) for suggestions on where to contribute.
+See also the pages on [Pull Requests](code-review) and [Suggested Projects](/SuggestedProjects) for suggestions on where to contribute.
+
+[1]: https://sel4.systems/Foundation/TSC/
