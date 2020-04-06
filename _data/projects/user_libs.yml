@@ -246,4 +246,293 @@ components:
     description: "A library implementation of a vswitch, which is designed for providing an interface to manage and route data between components identified by a MAC address."
     maintainer: "Data61"
     status: "active"
-    component_type: projects_libs     
+    component_type: projects_libs
+# Drivers
+  - name: arch/x86/delay.c
+    display_name: "arch/x86/delay.c"
+    description: "x86 busy wait delay driver by spinning on tsc value"
+    maintainer: "Data61"
+    status: "Supported on x86 but currently unused by anything."
+    component_type: user-driver-other
+  - name: arch/x86/tsc.c
+    display_name: "arch/x86/tsc.c"
+    description: "Calculates tsc frequency using HPET or PIT"
+    maintainer: "Data61"
+    status: "Supported on x86. It may be better to use the tsc_freq Bootinfo field that seL4 provides."
+    component_type: user-driver-other
+  - name: arch/arm/generic_timer.c
+    display_name: "arch/arm/generic_timer.c"
+    description: "Arm generic timer driver. Should be used for debugging or development configurations only as register access is global."
+    maintainer: "Data61"
+    status: "Requires configuring seL4 to make the Physical timer registers available to user level."
+    component_type: user-driver-timer
+  - name: arch/arm/generic_ltimer.c
+    display_name: "arch/arm/generic_ltimer.c"
+    description: "ltimer implementation for Arm generic timer physical timer. Should be used for debugging or development configurations only as register access is global"
+    maintainer: "Data61"
+    status: "Requires configuring seL4 to make the Physical timer registers available to user level."
+    component_type: user-driver-ltimer
+  - name: arch/arm/delay.c
+    display_name: "arch/arm/delay.c"
+    description: "arm busy wait delay driver by repeatedly performing no-op instructions"
+    maintainer: "Data61"
+    status: "Supported on arm but currently relies on each instruction taking a constant amount of time"
+    component_type: user-driver-other
+  - name: arch/arm/dma330.c
+    display_name: "arch/arm/dma330.c"
+    description: "ARM PL-330 (DMA-330) DMA controller"
+    maintainer: "Data61"
+    status: "Unused currently"
+    component_type: user-driver-other
+  - name: arch/arm/i2c_bitbang.c
+    display_name: "arch/arm/i2c_bitbang.c"
+    description: "Transforms a GPIO interface into an I2C bitbang interface"
+    maintainer: "Data61"
+    status: "Currently used by libusbdrivers (but libusbdrivers itself isn't heavily used)"
+    component_type: user-driver-i2c
+  - name: local_time_manager.c
+    display_name: "local_time_manager.c"
+    description: "Uses an ltimer to provide timeout multiplexing across several clients"
+    maintainer: "Data61"
+    status: "Requires ltimer implementation for the target platform."
+    component_type: user-driver-other
+  - name: plat/rockpro64/timer.c
+    display_name: "plat/rockpro64/timer.c"
+    description: "rockchip,rk3399-timer driver"
+    maintainer: "Data61"
+    status: "Supported on rockpro64 platform"
+    component_type: user-driver-timer
+  - name: plat/rockpro64/serial.c
+    display_name: "plat/rockpro64/serial.c"
+    description: "rockchip,rk3399-uart driver"
+    maintainer: "Data61"
+    status: "Supported on rockpro64 platform"
+    component_type: user-driver-serial
+  - name: plat/rockpro64/ltimer.c
+    display_name: "plat/rockpro64/ltimer.c"
+    description: "rockpro64 ltimer implementation using 2 rk3399-timers"
+    maintainer: "Data61"
+    status: "Supported on rockpro64 platform"
+    component_type: user-driver-ltimer
+  - name: plat/bcm2837/spt.c
+    display_name: "plat/bcm2837/spt.c"
+    description: "rpi3 spt timer driver. The timer is based on a SP804 timer with some modifications."
+    maintainer: "Data61"
+    status: "Supported on rpi3 platform"
+    component_type: user-driver-timer
+  - name: plat/bcm2837/serial.c
+    display_name: "plat/bcm2837/serial.c"
+    description: "rpi3 brcm,bcm2835-aux-uart UART driver"
+    maintainer: "Data61"
+    status: "Supported on rpi3 platform"
+    component_type: user-driver-serial
+  - name: plat/bcm2837/system_timer.c
+    display_name: "plat/bcm2837/system_timer.c"
+    description: "rpi3 system timer driver."
+    maintainer: "Data61"
+    status: "Supported on rpi3 platform"
+    component_type: user-driver-timer
+  - name: plat/bcm2837/ltimer.c
+    display_name: "plat/bcm2837/ltimer.c"
+    description: "rpi3 ltimer implementation using the system timer and spt timer"
+    maintainer: "Data61"
+    status: "Supported on rpi3 platform"
+    component_type: user-driver-ltimer
+  - name: plat/zynq7000/devcfg.c
+    display_name: "plat/zynq7000/devcfg.c"
+    description: "devcfg (Device configuration Interface) zynq7000 driver"
+    maintainer: "Data61"
+    status: "Supported only for zynq7000 platform. Only functionality is mapping registers and providing a reference."
+    component_type: user-driver-other
+  - name: plat/zynq7000/tmu.c
+    display_name: "plat/zynq7000/tmu.c"
+    description: "Temperature sensor driver for zynq7000 tmu."
+    maintainer: "Data61"
+    status: "Supported on zynq7000 platform."
+    component_type: user-driver-other
+  - name: plat/zynq7000/clock.c
+    display_name: "plat/zynq7000/clock.c"
+    description: "zynq7000 clock subsystem driver"
+    maintainer: "Data61"
+    status: "Supported on zynq7000 platform."
+    component_type: user-driver-clock
+  - name: plat/zynq7000/xadc.c
+    display_name: "plat/zynq7000/xadc.c"
+    description: "zynq7000 XADC driver"
+    maintainer: "Data61"
+    status: "Supported on zynq7000 platform. Currently only used to read values from a temperature monitoring unit."
+    component_type: user-driver-other
+  - name: plat/zynq7000/src.c
+    display_name: "plat/zynq7000/src.c"
+    description: "zynq7000 System Level Control Registers driver"
+    maintainer: "Data61"
+    status: "Supported on zynq7000 platform. Currently used to unlock clock and reset registers only."
+    component_type: user-driver-other
+  - name: plat/exynos5/sysreg.c
+    display_name: "plat/exynos5/sysreg.c"
+    description: "exynos5 samsung,exynos5-sysreg system control driver"
+    maintainer: "Data61"
+    status: "Supported on exynos5 platforms. Currently can only be used to enable power for USB PHYs."
+    component_type: user-driver-other
+  - name: plat/exynos5/clock.c
+    display_name: "plat/exynos5/clock.c"
+    description: "exynos5 clock subsystem driver"
+    maintainer: "Data61"
+    status: "Supported on exynos5 platform."
+    component_type: user-driver-clock
+  - name: plat/odroidc2/serial.c
+    display_name: "plat/odroidc2/serial.c"
+    description: "odroidc2 amlogic,meson-gx-uart uart driver"
+    maintainer: "Data61"
+    status: "Supported on odroidc2 platform"
+    component_type: user-driver-serial
+  - name: plat/odroidc2/ltimer.c
+    display_name: "plat/odroidc2/ltimer.c"
+    description: "odroidc2 ltimer implementation using the meson timer"
+    maintainer: "Data61"
+    status: "Supported on odroidc2 platform"
+    component_type: user-driver-ltimer
+  - name: plat/odroidc2/meson_timer.c
+    display_name: "plat/odroidc2/meson_timer.c"
+    description: "odroidc2 meson timer implementation"
+    maintainer: "Data61"
+    status: "Supported on odroidc2 platform"
+    component_type: user-driver-timer
+  - name: plat/am335x/timer.c
+    display_name: "plat/am335x/timer.c"
+    description: "am335x ti,am335x-timer driver for DMTimer"
+    maintainer: "Data61"
+    status: "Supported on am335x platforms."
+    component_type: user-driver-timer
+  - name: plat/am335x/serial.c
+    display_name: "plat/am335x/serial.c"
+    description: "am335x ti,am3352-uart serial driver"
+    maintainer: "Data61"
+    status: "Supported on am335x platforms."
+    component_type: user-driver-serial
+  - name: plat/am335x/ltimer.c
+    display_name: "plat/am335x/ltimer.c"
+    description: "am335x ltimer implementation using 2 DMTimers"
+    maintainer: "Data61"
+    status: "Supported on am335x platforms."
+    component_type: user-driver-ltimer
+  - name: plat/am335x/i2c.c
+    display_name: "plat/am335x/i2c.c"
+    description: "am335x ti,omap4-i2c driver for I2C."
+    maintainer: "Data61"
+    status: "Supported on am335x platforms."
+    component_type: user-driver-i2c
+  - name: plat/tk1/mux.c
+    display_name: "plat/tk1/mux.c"
+    description: "tk1 nvidia,tegra124-pinmux pinmux driver"
+    maintainer: "Data61"
+    status: "Supported on tk1 platform"
+    component_type: user-driver-pinmux
+  - name: plat/tk1/clock.c
+    display_name: "plat/tk1/clock.c"
+    description: "tk1 nvidia,tegra124-car clock subsystem driver"
+    maintainer: "Data61"
+    status: "Supported on tk1 platform."
+    component_type: user-driver-clock
+  - name: plat/tk1/spi.c
+    display_name: "plat/tk1/spi.c"
+    description: "tk1 nvidia,tegra124-spi SPI driver"
+    maintainer: "Data61"
+    status: "Supported on tk1 platform."
+    component_type: user-driver-other
+  - name: plat/tk1/i2c.c
+    display_name: "plat/tk1/i2c.c"
+    description: "tk1 nvidia,tegra124-i2c I2C driver"
+    maintainer: "Data61"
+    status: "Supported on tk1 platform"
+    component_type: user-driver-i2c
+  - name: plat/tk1/gpio.c
+    display_name: "plat/tk1/gpio.c"
+    description: "tk1 nvidia,tegra124-gpio GPIO driver"
+    maintainer: "Data61"
+    status: "Supported on i2c platform."
+    component_type: user-driver-gpio
+  - name: plat/imx31/serial.c
+    display_name: "plat/imx31/serial.c"
+    description: "i.MX31 fsl,imx31-uart serial driver"
+    maintainer: "Data61"
+    status: "Supported on kzm platform."
+    component_type: user-driver-serial
+  - name: plat/fvp/serial.c
+    display_name: "plat/fvp/serial.c"
+    description: "fvp arm,pl011 serial driver"
+    maintainer: "Data61"
+    status: "This driver is a copy-paste from the pl011 driver for the hikey platform. They should be merged."
+    component_type: user-driver-serial
+  - name: plat/fvp/sp804.c
+    display_name: "plat/fvp/sp804.c"
+    description: "fvp arm,sp804 timer driver"
+    maintainer: "Data61"
+    status: "This driver is a copy-paste from the sp804 driver for the hikey platform. They should be merged."
+    component_type: user-driver-timer
+  - name: plat/fvp/ltimer.c
+    display_name: "plat/fvp/ltimer.c"
+    description: "fvp ltimer implementation using 2 sp804 timers"
+    maintainer: "Data61"
+    status: "Supported on fvp platform."
+    component_type: user-driver-ltimer
+  - name: plat/exynos4/clock.c
+    display_name: "plat/exynos4/clock.c"
+    description: "exynos4 clock subsystem driver"
+    maintainer: "Data61"
+    status: "Supported on exynos4 platform."
+    component_type: user-driver-clock
+  - name: plat/exynos4/src.c
+    display_name: "plat/exynos4/src.c"
+    description: "exynos4 samsung,exynos4-sysreg system control driver"
+    maintainer: "Data61"
+    status: "Supported on exynos4 platforms. Currently can only be used to enable power for USB PHYs."
+    component_type: user-driver-other
+  - name: plat/hikey/serial.c
+    display_name: "plat/hikey/serial.c"
+    description: "hikey arm,pl011 Serial driver"
+    maintainer: "Data61"
+    status: "Supported on Hikey platform. Could likely be made available for any platform."
+    component_type: user-driver-serial
+  - name: plat/hikey/ltimer.c
+    display_name: "plat/hikey/ltimer.c"
+    description: "hikey ltimer implementation using 2 sp804 timers"
+    maintainer: "Data61"
+    status: "Supported on hikey platform."
+    component_type: user-driver-ltimer
+  - name: plat/hikey/rtc.c
+    display_name: "plat/hikey/rtc.c"
+    description: "hikey arm,pl031 RTC driver"
+    maintainer: "Data61"
+    status: "Supported on Hikey platform. Could likely be made available for any platform."
+    component_type: user-driver-timer
+  - name: plat/hikey/dmt.c
+    display_name: "plat/hikey/dmt.c"
+    description: "hikey arm,sp804 timer driver"
+    maintainer: "Data61"
+    status: "Supported on Hikey platform. Could likely be made available for any platform."
+    component_type: user-driver-timer
+  - name: plat/qemu-arm-virt/serial.c
+    display_name: "plat/qemu-arm-virt/serial.c"
+    description: "qemu-arm-virt arm,pl011 serial driver"
+    maintainer: "Data61"
+    status: "This driver is a copy-paste from the pl011 driver for the hikey platform. They should be merged."
+    component_type: user-driver-serial
+  - name: plat/apq8064/timer.c
+    display_name: "plat/apq8064/timer.c"
+    description: "apq8064 timer driver"
+    maintainer: "Data61"
+    status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
+    component_type: user-driver-timer
+  - name: plat/apq8064/serial.c
+    display_name: "plat/apq8064/serial.c"
+    description: "apq8064 qcom,gsbi-v1.0.0 serial driver"
+    maintainer: "Data61"
+    status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
+    component_type: user-driver-serial
+  - name: plat/apq8064/clock.c
+    display_name: "plat/apq8064/clock.c"
+    description: "apq8064 qcom,gcc-apq8064 clock subsystem driver"
+    maintainer: "Data61"
+    status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
+    component_type: user-driver-clock
