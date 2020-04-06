@@ -57,7 +57,7 @@ Some tips on using signed-off-by with git:
 
 ## Review and Testing Process
 
-<img src="http://i.imgur.com/kuAok5A.png" alt="Pull requests undergo code review before being accepted" />
+<img src="contributing.png" alt="Pull requests undergo code review before being accepted" />
 
 The diagram illustrates the pull request review and testing process. For most
 of the repositories on <https://github.com/seL4> and
