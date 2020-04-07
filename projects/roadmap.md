@@ -3,7 +3,7 @@ toc: true
 layout: api
 ---
 
-# seL4 project roadmap
+# seL4 Project Roadmap
 
 Below tables list our plans for various parts of seL4 and Data61-supported parts of its ecosystem.
 
