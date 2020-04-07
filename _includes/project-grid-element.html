@@ -1,21 +1,32 @@
 
 {% assign project = site.data.projects[include.project] %}
+{% assign status = site.status | where: "project", project.name | first %}
 
-<div class="panel panel-default">
-<div class="panel panel-body">
-<h2>{{project.display_name}}</h2>
-<p>
+<div class="panel panel-default" style="height: 100%;">
+  <div class="panel-heading">
+    <div class="row" >
+      <div class="col-xs-6 ">
+        <h3 class="panel-title">{{project.display_name}}</h3>
+      </div>
+      <div class="col-xs-6 text-right">
+{% if status %}
+        <a href="/projects/{{project.name}}/status">
+          <h3 class="panel-title">Status</h3>
+        </a>
+{% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p>
 {% if include.description %}
   {{include.description}}
 {% else %}
   {{project.description}}.
 {% endif %}
-<br/>
-<a href="{{project.name}}" class="">See more information.</a>
-</p>
-{% for status in site.status %}
-{% if status.project == project.name %}
-<a href="/projects/{{project.name}}/status" class="btn btn-link">Status</a>
-{% endif %}
-{% endfor %}
-</div></div>
+      <br/>
+      <a href="{{project.name}}" class="">See more information.</a>
+    </p>
+  </div>
+
+</div>
