@@ -1,7 +1,8 @@
 ---
 toc: true
 redirect_from:
-  - /projects/sel4-tutorials
+  - /projects/sel4-tutorials.html
+  - /projects/sel4-tutorials/
 layout: project
 project: sel4-tutorials
 ---
