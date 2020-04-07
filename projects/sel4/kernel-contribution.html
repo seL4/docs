@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<!-- Page last generated 2020-04-07 20:37:40 +1000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contributing to kernel code | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
+<script>
+  if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+    window['ga-disable-UA-117737473-2'] = true;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117737473-2');
+</script>
+</head>
+
+  <body class="container-fluid">
+
+    
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="https://sel4.systems" class="skip-icon">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/processes">Contributing</a></h2>
+        <h2><a href="/projects">Projects</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+              <meta property="position" content="1" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/projects/">
+              <span property="name"><b>Projects</b></span>
+              <meta property="position" content="2" />
+            </a>
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/projects/sel4/">
+              <span property="name"><b>The seL4 microkernel</b></span>
+              <meta property="position" content="3" />
+            </a>
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">Contributing to kernel code</span>
+            <meta property="position" content="4" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/sel4/11.0.0"><b>seL4-11.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/camkes/camkes-3.8.0"><b>camkes-3.8.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/capdl/0.1.0"><b>CapDL-0.1.0</b></a></li>
+    </ol>
+  </nav>
+  <nav class="sel-version">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-center">
+      <a href="https://sel4.discourse.group/t/19-november-2019/126"><b>Announcing new releases: </b></a></li>
+    </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    
+
+<div class="sidebar">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <ul class="nav nav-sidebar">
+  
+    
+    
+
+    
+        <li class="active">
+            <a class="" href="/projects/sel4/">seL4</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/l4v/">L4.verified</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/camkes/">CAmkES</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/capdl/">CapDL</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/buildsystem/">seL4 Buildsystem</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/elfloader/">Elfloader</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4runtime/">The seL4 run-time</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/user_libs/">user_libs</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4-tutorials/">seL4 tutorials</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4bench/">sel4bench</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4test/">seL4Test</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4webserver/">seL4webserver</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/camkes-arm-vm/">camkes-arm-vm</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/camkes-vm/">camkes-vm</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/virtualization/">Virtualization</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/dockerfiles/">Dockerfiles</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/docsite/">seL4 Documentation website</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4_tools/">seL4_tools</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/hardware_hacks/">Hardware Hacks</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/rust/">Rust</a>
+        <li>
+  
+    </ul>
+
+
+
+
+</div>
+
+
+  </div>
+  <div class="content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="contributing-to-kernel-code">Contributing to kernel code</h1>
+
+<p>There four classes of kernel contributions possible:</p>
+
+<ol>
+  <li>Board Support Package (BSP) ports</li>
+  <li>Architecture features</li>
+  <li>Architecture ports</li>
+  <li>Kernel features</li>
+</ol>
+
+<p>For any kernel contributions it is important to note that a modified kernel 
+will <em>not</em> be considered formally verified (and therefore will not fully 
+benefit from the seL4 proofs), until the proofs themselves are also 
+appropriately modified, or it can be shown that the modifications do not
+affect the proofs.</p>
+
+<h2 id="bsp-ports">BSP ports</h2>
+
+<p><em>BSP ports</em> are the simplest, and require the least modifications, discussion 
+and approval.  This assumes that you are porting the kernel to a new board on 
+an existing architecture.</p>
+
+<p>The main thing is to follow the <a href="/projects/sel4/porting">BSP Porting guide</a>.</p>
+
+<p>Questions, discussion, and sharing of work in progress during this stage are 
+welcome.</p>
+
+<p>If you run into problems please ask questions - many of us may have run into 
+the same problems before and can provide information on how to fix them (and 
+save hours to weeks of frustration).  Please us one of our 
+<a href="https://sel4.systems/contact/">communication channels</a> for this.</p>
+
+<p>Make sure to write appropriate tests and include them in seL4test as
+part of the port.  Consider (and discuss) a plan for how to support
+this port (e.g. with regression testing) so that it continues to be
+updated and work as seL4 evolves.</p>
+
+<p>Once the code is ready for submission follow the 
+<a href="/processes/contributing.html">Contribution Guidelines</a> to submit the changes.</p>
+
+<h2 id="architecture-features">Architecture features</h2>
+
+<p>In some cases a kernel port requires more than just a BSP port.  If the port is 
+on a supported architecture, but you wish to make use of architecture features 
+that the kernel does not yet support, then these will be <em>architecture feature 
+contributions</em>.  This will typically require moderate modifications to kernel 
+design and implementation.</p>
+
+<p>We do not have general (nor specific) guidelines or how-tos for adding 
+architecture features.  Each such feature is different and the design
+decisions and implementations will also vary.</p>
+
+<p>Before starting on design and implementation of architecture features please 
+start an initial discussion on one of our <a href="https://sel4.systems/contact/">communication channels</a> 
+to check if such a feature is not already being worked on, if it is considered 
+appropriate to include in the kernel, etc.</p>
+
+<p>Then start a <a href="/processes/rfc-process">Request For Comment (RFC)</a>
+describing your design and plans, and engage in discussion with others
+about this.  The goal is to get feedback into specific design
+decisions, as well as to get agreement on the general direction and
+design (considering the fit with the overall philosophy and
+architecture of the kernel, performance impacts, verification impacts,
+etc).</p>
+
+<p>Once there is agreement on how to design and implement such a feature,
+then the next step is to implement it.  Discussion, revisions of
+design, and sharing of code (intermediate, proof of concept, prototype,
+etc) during this stage is encouraged.</p>
+
+<p>Evaluate any performance and security impacts of the implementation, and if 
+there are significant impacts, discuss these and consider how to redesign or 
+re-implement to avoid them.</p>
+
+<p>If the feature implementation affects the proofs in any way, then the
+modifications will also have to be evaluated and approved by proof
+engineers to ensure that the existing proofs are not invalidated.
+Note that this is even the case if the architecture feature
+implementation itself is not verified - it is still likely to touch
+code that does affect the verified part of the kernel.</p>
+
+<p>Consider whether you want to have the architecture feature
+implementation verified, and the plans for achieving that.</p>
+
+<p>As with a BSP port make sure to write appropriate tests and include
+them in seL4test as part of the work.  Consider (and discuss) a plan
+for how to support this port (e.g. with regression testing) so that it
+continues to be updated and work as seL4 evolves.</p>
+
+<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contrbution 
+Guidelines</a> for submitting changes.</p>
+
+<h2 id="architecture-ports">Architecture Ports</h2>
+
+<p>If you wish to port seL4 to a new hardware architecture that seL4 does not yet 
+support, then this will be a new <em>architecture port</em>.  This will require 
+extensive kernel design and implementation modifications.</p>
+
+<p>We feel that seL4 currently supports the most important hardware architectures 
+(ARM, x86, RISC-V), however, there may be reasons to port to other (new or 
+existing) architectures.</p>
+
+<p>Some architectures will be similar enough to currently supported
+architectures that a port will be relatively straight forward.
+However, other architectures may be radically different and introduce
+significantly different abstractions that require extensive kernel
+modifications or additions.  Furthermore, such changes may render the
+kernel for that architecture incompatible with much of the existing
+user-level code.</p>
+
+<p>Architecture ports also have significant impact on verification.</p>
+
+<p>For these reasons, it is critical to first engage in discussion before 
+commencing on such a port.</p>
+
+<p>Start an initial discussion on one of our <a href="Contact Us">communication channels</a> 
+to check if such a port is already being worked on, whether there are known challenges with such a port, etc.  After initial discussion, start a <a href="RFC">Request For 
+Comment (RFC)</a> describing your design and plans.</p>
+
+<p>Once there is agreement on the general suitability of and design of
+the port, then go on to implementing it.  Discussion, revisions of
+design, sharing intermediate, proof of concept, and prototype code
+during this stage is required.</p>
+
+<p>Evaluate the performance and security properties of the port, and if
+there are significant impacts, discuss these and consider how to redesign or
+re-implement to avoid them.</p>
+
+<p>Consider whether you want to have the port verified, and the plans for
+achieving that.  Verifying an architecture port is a significant undertaking.</p>
+
+<p>As with a BSP port, make sure to write appropriate tests and include
+them in seL4test as part of the port.  Consider (and discuss) a plan
+for how to support this port (e.g. with regression testing) so that it
+continues to be updated and work as seL4 evolves.</p>
+
+<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contribution 
+Guidelines</a> for submitting changes.</p>
+
+<h2 id="kernel-features">Kernel Features</h2>
+
+<p>If you wish to add new features to the kernel that are architecture
+independent (i.e. they span different architectures) then these are
+called <em>kernel feature contributions</em>.  These will require the most
+extensive kernel design and implementation modifications.</p>
+
+<p>As with architecture feature contributions, we do not have general
+(nor specific) guidelines or how-tos for adding kernel features.
+Each such feature is different and the design decisions and
+implementations will also vary.</p>
+
+<p>Such features are not to be considered lightly, and will often be the
+result of significant research (e.g. a PhD project).</p>
+
+<p>Before starting on design and implementation of architecture features
+please start an initial discussion on one of our <a href="https://sel4.systems/contact/">communication
+channels</a> to check if such a feature is
+not already being worked on, if it is considered appropriate to
+include in the kernel, known issues and challenges with such features,
+etc.</p>
+
+<p>Then start a <a href="/processes/rfc-process">Request For Comment (RFC)</a>
+describing your design and plans, and engage in discussion with others
+about this.  The goal is to get feedback into specific design
+decisions, as well as to get agreement on the general direction and
+design (considering the fit with the overall philosophy and
+architecture of the kernel, performance impacts, verification impacts,
+etc).</p>
+
+<p>It is particulary important to consider how such a kernel feature will
+affect, and be affected on, all the kernel ports, how it will affect
+user-level components and systems, and how it will impact key properties such as security.</p>
+
+<p>Once there is agreement on how to design and implement such a feature,
+then the next step is to implement it.  Discussion, revisions of
+design, and sharing of code (intermediate, proof of concept, prototype,
+etc) during this stage is required.</p>
+
+<p>As with any kernel modification, make sure to write appropriate tests
+and include them in seL4test.  Consider (and discuss) a plan for how
+to support this port (e.g. with regression testing) so that it
+continues to be updated and work as seL4 evolves.</p>
+
+<p>This is particularly important for features that span all the kernel
+ports and need to be tested on all the supported platfroms.  It is not
+sufficient to implement a kernel feature on a single platform, with no
+plans of how to ensure that it works on all supported platforms (where
+possible).</p>
+
+<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contribution
+Guidelines</a> for submitting changes.</p>
+
+<h2 id="proof-contributions">Proof Contributions</h2>
+
+<p>Contributing to the seL4 proofs requires a different skill set than contributing to the code, and so far we have not had many community contributions to the proofs.</p>
+
+<p>As a result, our infrastructure for proof contributions is not as mature as that for code contributions.</p>
+
+<p>If you are interested in proof contributions the main things to do are to:</p>
+
+<ul>
+  <li><a href="http://proofcraft.org/blog/proof-engineer-reading.html">Learn</a> about the <a href="http://isabelle.in.tum.de/">Isabelle theorem prover</a>.</li>
+  <li>Review the <a href="https://github.com/seL4/l4v/">proofs themselves</a>.</li>
+  <li><a href="https://sel4.systems/contact/home.pml">Contact us</a> to discuss the possibilities.</li>
+</ul>
+
+  </div>
+
+
+
+
+
+
+
+  
+  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+    <ul class="section-nav">
+    	<h2> seL4 </h2> 
+        <li>
+          
+          <a style="" class="" href="/projects/sel4/">
+            Documentation homepage
+          </a>
+        </li>
+
+
+
+
+        <li>
+          
+          <a style="" class="" href="/projects/sel4/status.html">
+            Status
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <h3>Repositories</h3>
+    
+        <li>
+          <a class="" href="https://github.com/seL4/sel4">
+            sel4
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+<h3>Releases</h3>
+<h4> Master (verified kernel) </h4>
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/2.0.0.html">
+          seL4 2.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/2.1.0.html">
+          seL4 2.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-2.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.0.0.html">
+          seL4 3.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.0.1.html">
+          seL4 3.0.1
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.0.1.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.1.0.html">
+          seL4 3.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.2.0.html">
+          seL4 3.2.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.2.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/4.0.0.html">
+          seL4 4.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-4.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.0.0.html">
+          seL4 5.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.1.0.html">
+          seL4 5.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.2.0.html">
+          seL4 5.2.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/6.0.0.html">
+          seL4 6.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/7.0.0.html">
+          seL4 7.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/8.0.0.html">
+          seL4 8.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-8.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/9.0.0.html">
+          seL4 9.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/9.0.1.html">
+          seL4 9.0.1
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.0.0.html">
+          seL4 10.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.1.0.html">
+          seL4 10.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.1.1.html">
+          seL4 10.1.1
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/11.0.0.html">
+          seL4 11.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-11.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+
+<h4>Experimental Branches</h4>
+
+We occasionally pre-release experimental branches for community feedback and availability.
+<h5>Mixed Criticality Support (MCS) / Realtime </h5>
+
+    
+      <li>
+        <a style="" href="/releases/sel4/0.0.1-rt-dev.html">
+          seL4 0.0.1-rt-dev
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf">manual</a>)
+      </li>
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/1.0.0-rt-dev.html">
+          seL4 1.0.0-rt-dev
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.2.0-mcs.html">
+          seL4 5.2.0-mcs
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/9.0.0-mcs.html">
+          seL4 9.0.0-mcs
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0-mcs.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.1.1-mcs.html">
+          seL4 10.1.1-mcs
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1-mcs.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+
+
+
+
+
+
+    </ul>
+
+</div>
+
+
+</div>
+
+    </main>
+    
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Tue Apr 7 20:21:10 2020 +1000 0819f46
+          </li>
+          <li>
+                Page last updated: Tue Apr 7 19:59:58 2020 +1000 82ae188
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/projects/sel4/kernel-contribution.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/projects/sel4/kernel-contribution.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>
