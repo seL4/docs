@@ -10,7 +10,97 @@ project: sel4-tutorials
 
 {% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
 
-This page collates all available tutorials on seL4 material.
+We have developed a series of tutorials to introduce seL4 and
+developing systems on seL4.
+
+## How to use the tutorials
+
+Depending on your goals and what you want to do with seL4, we suggest
+different paths to follow through the tutorial material.  Choose the
+most relevant category below and follow the tutorials in the suggested
+order.
+
+Note that all of these these tutorials require C programming
+experience and some understanding of operating systems and computer
+architecture.  Suggested resources for these include:
+
+- C programming language
+	- [C tutorial](https://www.cprogramming.com/tutorial/c-tutorial.html)
+- Operating Systems:
+	- [Modern Operating Systems (book)](https://www.amazon.com/Modern-Operating-Systems-Andrew-Tanenbaum/dp/013359162X)
+	- [COMP3231 at UNSW](http://www.cse.unsw.edu.au/~cs3231)
+- Computer Architecture
+	- [Computer Architecture (wikipedia)](https://en.wikipedia.org/wiki/Computer_architecture)
+	- [Instruction Set Architecture (wikipedia)](https://en.wikipedia.org/wiki/Instruction_set_architecture)
+
+### Evaluation
+
+Goal:
+
+- You want to understand what seL4 is and what benefits it gives.
+- You want to understand how seL4 can be used to develop trustworthy systems.
+- You want to get your hands a little dirty and see, compile, and run some code.
+
+Follow these tutorials:
+
+1. [seL4 overview](https://sel4.systems/About/seL4-whitepaper.pdf)
+2. [Introduction tutorial](#introduction-tutorial)
+
+### System Building
+
+Goal:
+
+- You want to build systems based on seL4.
+- You want to know what tools are available to do so and how to use those tools.
+- You want experience with how to use seL4 and the tools to build trustworthy systems.
+
+Follow these tutorials:
+
+1. [seL4 overview](https://sel4.systems/About/seL4-whitepaper.pdf)
+2. [Introduction tutorial](#introduction-tutorial)
+3. [CAmkES tutorials](#camkes-tutorials)
+4. [Virtualisation tutorials](#virtual-machines)
+5. [MCS tutorial](#mcs-extensions)
+
+### Platform Development
+
+Goal:
+
+- You want to contribute to development of the seL4 (user-level) platform.
+- You want to develop operating system services and device drivers.
+- You want to develop seL4-based frameworks and operating systems.
+
+Follow these tutorials:
+
+1. [seL4 overview](https://sel4.systems/About/seL4-whitepaper.pdf)
+2. [Introduction tutorial](#introduction-tutorial)
+3. [seL4 mechanisms tutorial](#seL4-mechanisms-tutorials)
+4. [Rapid prototyping tutorials](#rapid-prototyping-tutorials)
+5. [CAmkES tutorials](#camkes-tutorials)
+6. [Virtualisation tutorial](#virtual-machines)
+7. [MCS tutorial](#mcs-extensions)
+<!-- 8. Device driver tutorial [TBD?] -->
+
+### Kernel Development
+
+Goal:
+
+- You want to contribute to the seL4 kernel itself.
+- You want to port seL4 to a new platform.
+- You want to add new features to the kernel.
+
+Read this first:
+
+- [Contributing to kernel code](/projects/sel4/kernel-contribution.html)
+
+Then follow these tutorials:
+
+1. [seL4 overview](https://sel4.systems/About/seL4-whitepaper.pdf)
+2. [Introduction tutorial](#introduction-tutorial)
+3. [seL4 mechanisms tutorial](#seL4-mechanisms-tutorials)
+4. [MCS tutorial](#mcs-extensions)
+
+# The Tutorials
 
 ## Prerequisites
 
@@ -56,9 +146,13 @@ Your job is to follow the tutorial instructions to complete the application in t
 
 ## List of tutorials
 
-### Tutorial tutorial
+### Introduction tutorial
 
-Before any other tutorial, do the hello-world tutorial:
+Before starting tutorials, make sure that you have read through the
+[Prerequisites](#prerequisites) and in particular [Doing the
+tutorials](#doing-the-tutorials).
+
+Then, before any other tutorial, do the hello-world tutorial:
 
 {%- for t in tutorials %}
 {%- if t.tutorial-order contains '0-hello' %}
@@ -147,4 +241,10 @@ The MCS extensions are upcoming API changes to seL4.
 
 ## What next?
 
-You can try building and running [seL4test](../seL4Test)
+You can try building and running [seL4test](../seL4Test).
+
+Next steps include working on one of our [suggested
+projects](/SuggestedProjects.html) or helping to expand the collection
+of [libraries and
+components](/projects/available-user-components.html) available to
+build seL4-based systems.

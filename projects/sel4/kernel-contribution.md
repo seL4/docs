@@ -13,11 +13,6 @@ benefit from the seL4 proofs), until the proofs themselves are also
 appropriately modified, or it can be shown that the modifications do not
 affect the proofs. 
 
-This page only considers code modifications, and not the proof modifications.  
-
-We have separate information about (contributing to) 
-[proof modifications](Proof Contributions).
-
 ## BSP ports
 
 *BSP ports* are the simplest, and require the least modifications, discussion 
@@ -193,3 +188,15 @@ possible).
 
 Once the implementation is complete follow the [Contribution
 Guidelines](processes/contributing.html) for submitting changes.
+
+## Proof Contributions
+
+Contributing to the seL4 proofs requires a different skill set than contributing to the code, and so far we have not had many community contributions to the proofs.
+
+As a result, our infrastructure for proof contributions is not as mature as that for code contributions.
+
+If you are interested in proof contributions the main things to do are to:
+
+- [Learn](http://proofcraft.org/blog/proof-engineer-reading.html) about the [Isabelle theorem prover](http://isabelle.in.tum.de/).
+- Review the [proofs themselves](https://github.com/seL4/l4v/).
+- [Contact us](https://sel4.systems/contact/home.pml) to discuss the possibilities.
