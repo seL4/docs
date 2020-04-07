@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-04-07 20:37:40 +1000 -->
+<!-- Page last generated 2020-04-07 20:50:52 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1036,15 +1036,84 @@
             <td>Data61</td>
         </tr>
         <tr>
+            <td>plat/omap3/mux.c</td>
+            <td>omap3 ti,omap3-padconf pin controller driver</td>
+            <td>Non-functional skeleton implementation, supported on omap3 platform</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
             <td>plat/imx6/mux.c</td>
             <td>i.MX6 fsl,imx6q-iomuxc IO MUX driver</td>
             <td>Supported on sabre</td>
             <td>Data61</td>
         </tr>
         <tr>
+            <td>mach/exnyos4/mux.c</td>
+            <td>Pinctrl configurations for the Exynos4xxx SoCs</td>
+            <td>Supported on the Exynos4xxx SoCs</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>mach/exynos5/mux.c</td>
+            <td>Pinctrl configurations for the Exynos5xxx SoCs</td>
+            <td>Supported on the Exynos5xxx SoCs</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>mach/exynos/mux.c</td>
+            <td>Pinctrl driver for the pinctrl device in the Exynos SoCs</td>
+            <td>Supported on the Exynos SoCs</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>mach/exynos/ltimer.c</td>
+            <td>ltimer implementation for the Exynos platforms using the PWM timers</td>
+            <td>Supported on the Exynos SoCs</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
             <td>mach/zynq/mux.c</td>
             <td>Pinmux drivers for the pin controller in the ZYNQ SoCs</td>
             <td>Non-functional skeleton implementation, supported on ZYNQ SoCs</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/tx2/mux.c</td>
+            <td>Pin controller driver for the TX2 MUX based off on NVIDIA's L4T implementation</td>
+            <td>Supported on the tx2 platform</td>
+            <td>Data61</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 id="reset">Reset</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Components</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Maintained by</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>plat/imx6/src.c</td>
+            <td>i.MX6 fsl,imx6q-src reset controller driver</td>
+            <td>Supported on sabre platform</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/tx2/reset_bindings.c</td>
+            <td>libplatsupport reset ID to TX2 BPMP reset ID bindings</td>
+            <td>Supported on the tx2 platform</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/tx2/reset.c</td>
+            <td>Reset driver for the TX2 CAR (Clock And Reset) controller which relies on libtx2bpmp</td>
+            <td>Supported on the tx2 platform</td>
             <td>Data61</td>
         </tr>
     </tbody>
@@ -1172,6 +1241,63 @@
             <td>ltimer implementation for the NVIDIA platforms using the NVIDIA timers</td>
             <td>Supported on the NVIDIA SoCs</td>
             <td>Data61</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 id="ethernet">ethernet</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Components</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Maintained by</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>src/pico_dev_eth.c</td>
+            <td>Ethernet device interface to connect with the PicoTCP TCP/IP stack</td>
+            <td>Supported</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/lwip.c</td>
+            <td>Ethernet device interface to connect with the lwIP TCP/IP stack</td>
+            <td>Deprecated in favour of the PicoTCP Ethernet device interface</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/am335x/*</td>
+            <td>Ethernet driver for the am335x platform</td>
+            <td>Bitrotted, based off the lwIP stack</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/imx6/*</td>
+            <td>Ethernet driver for the i.MX6 platform based off on U-Boot's implementation</td>
+            <td>Supported on the sabre platform</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/pc99/*</td>
+            <td>Ethernet driver for the e1000 Ethernet devices</td>
+            <td>Supported on pc99 platform</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/tx2/*</td>
+            <td>Ethernet driver for the TX2 platform based off on U-Boot's implementation</td>
+            <td>Supported on the tx2 platform</td>
+            <td>Data61</td>
+        </tr>
+        <tr>
+            <td>src/plat/zynq700/*</td>
+            <td>Ethernet driver for the zynq7000 platform based off on U-Boot's implementation</td>
+            <td>Supported on the zynq7000 platform</td>
+            <td>Data61, Dornerworks</td>
         </tr>
     </tbody>
 </table>
@@ -1341,8 +1467,10 @@
 <li class="toc-entry toc-h4"><a href="#clock">Clock</a></li>
 <li class="toc-entry toc-h4"><a href="#i2c">I2C</a></li>
 <li class="toc-entry toc-h4"><a href="#pinmux">Pinmux</a></li>
+<li class="toc-entry toc-h4"><a href="#reset">Reset</a></li>
 <li class="toc-entry toc-h4"><a href="#gpio">GPIO</a></li>
 <li class="toc-entry toc-h4"><a href="#ltimer">ltimer</a></li>
+<li class="toc-entry toc-h4"><a href="#ethernet">ethernet</a></li>
 <li class="toc-entry toc-h4"><a href="#other">Other</a></li>
 </ul>
 </li>
@@ -1471,7 +1599,7 @@
         </li>
         
           <li>
-            Site last updated: Tue Apr 7 20:21:10 2020 +1000 0819f46
+            Site last updated: Tue Apr 7 20:48:24 2020 +1000 f7519b8
           </li>
           <li>
           </li>
