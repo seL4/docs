@@ -296,7 +296,7 @@ components:
     description: "Uses an ltimer to provide timeout multiplexing across several clients"
     maintainer: "Data61"
     status: "Requires ltimer implementation for the target platform."
-    component_type: user-driver-other
+    component_type: user-driver-ltimer
   - name: plat/rockpro64/timer.c
     display_name: "plat/rockpro64/timer.c"
     description: "rockchip,rk3399-timer driver"
@@ -537,3 +537,537 @@ components:
     maintainer: "Data61"
     status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
     component_type: user-driver-clock
+  - name: plat/hifive/pwm.c
+    display_name: "plat/hifive/pwm.c"
+    description: "hifive sifive,pwm0 timer driver"
+    maintainer: "Data61"
+    status: "Supported on hifive platform"
+    component_type: user-driver-timer
+  - name: plat/hifive/ltimer.c
+    display_name: "plat/hifive/ltimer.c"
+    description: "ltimer implementation for the hifive platform using two PWM timers"
+    maintainer: "Data61"
+    status: "Supported on hifive platform"
+    component_type: user-driver-ltimer
+  - name: plat/hifive/uart.c"
+    display_name: "plat/hifive/uart.c"
+    description: "hifive sifive,uart0 UART serial driver"
+    maintainer: "Data61"
+    status: "Supported on hifive platform"
+    component_type: user-driver-serial
+  - name: plat/pc99/keyboard_chardev.c
+    display_name: "plat/pc99/keyboard_chardev.c"
+    description: "chardev implementation for the pc99 keyboard which uses the pc99 PS/2 driver"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-chardev
+  - name: plat/pc99/acpi/
+    display_name: "plat/pc99/acpi/*"
+    description: "ACPI driver for the ACPI interface in the pc99 platform"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-acpi
+  - name: plat/pc99/serial.c
+    display_name: "plat/pc99/serial.c"
+    description: "UART serial driver for the serial devices on the pc99 platform"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-serial
+  - name: plat/pc99/keyboard_ps2.c
+    display_name: plat/pc99/keyboard_ps2.c
+    description: "Keyboard driver for the pc99 platform over the PS/2 keyboard interface"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-keyboard
+  - name: plat/pc99/keyboard_vkey.c
+    display_name: "plat/pc99/keyboard_vkey.c"
+    description: "Virtual keycodes for the pc99 PS/2 keyboard driver"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-keyboard
+  - name: plat/pc99/ltimer.c
+    display_name: "plat/pc99/ltimer.c"
+    description: "ltimer implementation for the pc99 platform using either PIT or HPET timers"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-ltimer
+  - name: plat/pc99/pit.c
+    display_name: "plat/pc99/pit.c"
+    description: "PIT driver for the PIT (Programmable Interval Timer) on the pc99 platform"
+    maintainer: "Data61"
+    status: "active"
+    component_type: user-driver-timer
+  - name: plat/pc99/rtc.c
+    display_name: "plat/pc99/rtc.c"
+    description: "RTC driver for the RTC on the pc99 platform"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-timer
+  - name: plat/pc99/ega.c
+    display_name: "plat/pc99/ega.c"
+    description: "EGA driver for the EGA (Enhanced Graphics Adapter) device on the pc99 platform"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-serial 
+  - name: plat/pc99/hpet.c
+    display_name: "plat/pc99/hpet.c"
+    description: "HPET driver for the HPET (High Precision Event Timer) device on the pc99 platform"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-timer
+  - name: plat/omap3/serial.c
+    display_name: "plat/omap3/serial.c"
+    description: "omap3 ti,omap3-uart UART serial driver"
+    maintainer: "Data61"
+    status: "Supported on omap3 platform"
+    component_type: user-driver-serial
+  - name: plat/omap3/mux.c
+    display_name: "plat/omap3/mux.c"
+    description: "omap3 ti,omap3-padconf pin controller driver"
+    maintainer: "Data61"
+    status: "Non-functional skeleton implementation, supported on omap3 platform"
+    component_type: user-driver-pinctrl
+  - name: plat/omap3/clock.c
+    display_name: "plat/omap3/clock.c"
+    description: "omap3 ti,omap3-cm clock controller driver"
+    maintainer: "Data61"
+    status: "Non-functional skeleton implementation, supported on omap3 platform"
+    component_type: user-driver-clock
+  - name: plat/rocketchip/serial.c
+    display_name: "plat/rocketchip/serial.c"
+    description: "Empty driver implementation for the serial device on the rocketchip platform."
+    maintainer: "Data61"
+    status: "Non-functional skeleton implementation, supported on rocketchip platform"
+    component_type: user-driver-serial
+  - name: plat/rocketchip/chardev.c
+    display_name: "plat/rocketchip/chardev.c"
+    description: "Empty chardev implementation for the rocketchip platform."
+    maintainer: "Data61"
+    status: "Non-functional skeleton implementation, supported on rocketchip platform"
+    component_type: user-driver-serial
+  - name: plat/imx6/mux.c
+    display_name: "plat/imx6/mux.c"
+    description: "i.MX6 fsl,imx6q-iomuxc IO MUX driver"
+    maintainer: "Data61"
+    status: "Supported on sabre"
+    component_type: user-driver-pinmux
+  - name: plat/imx6/clock.c
+    display_name: "plat/imx6/clock.c"
+    description: "i.MX6 fsl,imx6q-ccm clock subsystem driver"
+    maintainer: "Data61"
+    status: "Supported on sabre platform"
+    component_type: user-driver-clock
+  - name: plat/imx6/i2c.c
+    display_name: "plat/imx6/i2c.c"
+    description: "i.MX6 fsl,imx6q-i2c driver I2C"
+    maintainer: "Data61"
+    status: "Supported on sabre platform"
+    component_type: user-driver-i2c
+  - name: plat/imx6/gpio.c
+    display_name: "plat/imx6/gpio.c"
+    description: "i.MX6 fsl,imx6q-gpio GPIO driver"
+    maintainer: "Data61"
+    status: "Supported on sabre platform"
+    component_type: user-driver-gpio
+  - name: plat/imx6/src.c
+    display_name: "plat/imx6/src.c"
+    description: "i.MX6 fsl,imx6q-src reset controller driver"
+    maintainer: "Data61"
+    status: "Supported on sabre platform"
+    component_type: user-driver-reset
+  - name: mach/omap/gpt.c
+    display_name: "mach/omap/gpt.c"
+    description: "GPT driver for the GPT timers in the OMAP SoCs"
+    maintainer: "Data61"
+    status: "Supported on OMAP SoCs"
+    component_type: user-driver-timer
+  - name: mach/omap/ltimer.c
+    display_name: "mach/omap/ltimer.c"
+    description: "ltimer implementation for the OMAP platforms using GPT timers"
+    maintainer: "Data61"
+    status: "Supported on OMAP SoCs"
+    component_type: user-driver-other 
+  - name: mach/imx/epit/epit.c
+    display_name: "mach/imx/epit/epit.c"
+    description: "EPIT driver for the EPIT timers in the i.MX SoCs"
+    maintainer: "Data61"
+    status: "Supported on i.MX SoCs"
+    component_type: user-driver-timer
+  - name: mach/imx/ltimer.c
+    display_name: "mach/imx/ltimer.c"
+    description: "ltimer implementation for the i.MX platforms using a combination of GPT and EPIT timers"
+    maintainer: "Data61"
+    status: "Supported on i.MX SoCs"
+    component_type: user-driver-ltimer
+  - name: mach/imx/serial/serial.c
+    display_name: "mach/imx/serial/serial.c"
+    description: "UART serial drivers for the UART devices in the i.MX SoCs"
+    maintainer: "Data61"
+    status: "Supported on i.MX SoCs"
+    component_type: user-driver-serial
+  - name: mach/imx/gpt.c
+    display_name: "mach/imx/gpt.c"
+    description: "GPT driver for the GPT timers in the i.MX SoCs"
+    maintainer: "Data61"
+    status: "Supported on i.MX SoCs"
+    component_type: user-driver-timer
+  - name: mach/exynos/clock/exynos_common_clock.c
+    display_name: "mach/exynos/clock/exynos_common_clock.c"
+    description: "Exynos platform-common functions to manipulate the clock device in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on Exynos SoCs"
+    component_type: user-driver-timer
+  - name: mach/exynos/clock/exynos_5422_clock.c
+    display_name: "mach/exynos/clock/exynos_5422_clock.c"
+    description: "Exynos5422 platform-specific functions to manipulate the clock device in the Exynos5422 SoC"
+    maintainer: "Data61"
+    status: "Supported on Exynos SoCs"
+    component_type: user-driver-timer
+  - name: mach/exynos/clock.c
+    display_name: "mach/exynos/clock.h"
+    description: "Clock subsystem driver for the clock controller in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on Exynos SoCs"
+    component_type: user-driver-timer
+  - name: mach/exynos/pwm.c
+    display_name: "mach/exynos/pwm.c"
+    description: "PWM drivers for the PWM timers in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on Exynos SoCs"
+    component_type: user-driver-timer
+  - name: mach/exynos/tmu.c
+    display_name: "mach/exynos/tmu.c"
+    description: "TMU driver for the TMU (Thermal Management Unit) device in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on Exynos SoCs"
+    component_type: user-driver-other
+  - name: mach/exynos/serial.c
+    display_name: "mach/exynos/serial.c"
+    description: "UART serial driver for the UART devices in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on Exynos SoCs"
+    component_type: user-driver-serial
+  - name: mach/exynos/pmic.c
+    display_name: "mach/exynos/pmic.c"
+    description: "PMIC driver for the PMIC (Power Management IC) device in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-other
+  - name: mach/exynos4/mux.c
+    display_name: "mach/exnyos4/mux.c"
+    description: "Pinctrl configurations for the Exynos4xxx SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos4xxx SoCs"
+    component_type: user-driver-pinctrl
+  - name: mach/exynos5/mux.c
+    display_name: "mach/exynos5/mux.c"
+    description: "Pinctrl configurations for the Exynos5xxx SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos5xxx SoCs"
+    component_type: user-driver-pinctrl
+  - name: mach/exynos/mux.c
+    display_name: "mach/exynos/mux.c"
+    description: "Pinctrl driver for the pinctrl device in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-pinctrl
+  - name: mach/exynos/ltimer.c
+    display_name: "mach/exynos/ltimer.c"
+    description: "ltimer implementation for the Exynos platforms using the PWM timers"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-pinctrl
+  - name: mach/exynos/spi.c
+    display_name: "mach/exynos/spi.c"
+    description: "SPI driver for the SPI devices in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-spi
+  - name: mach/exynos/i2c.c
+    display_name: "mach/exynos/i2c.c"
+    description: "I2C driver for the I2C devices in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-i2c
+  - name: mach/exynos/pmic_rtc.c
+    display_name: "mach/exynos/pmic_rtc.c"
+    description: "RTC driver for the RTC located inside the PMIC device in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-other
+  - name: mach/exnyos/irq_combiner.c
+    display_name: "mach/exnyos/irq_combiner.c"
+    description: "IRQ combiner driver for the IRQ combiner device in the Exynos SoCs"
+    maintainer: "Data61"
+    status: "Supported on the Exynos SoCs"
+    component_type: user-driver-other
+  - name: mach/zynq/timer.c
+    display_name: "mach/zynq/timer.c"
+    description: "TTC driver for the TTC timers in the ZYNQ SoCs"
+    maintainer: "Data61"
+    status: "Supported on ZYNQ SoCs"
+    component_type: user-driver-timer
+  - name: mach/zynq/serial.c
+    display_name: "mach/zynq/serial.c"
+    description: "UART serial drivers for the UART devices in the ZYNQ SoCs"
+    maintainer: "Data61"
+    status: "Supported on ZYNQ SoCs"
+    component_type: user-driver-serial
+  - name: mach/zynq/mux.c
+    display_name: "mach/zynq/mux.c"
+    description: "Pinmux drivers for the pin controller in the ZYNQ SoCs"
+    maintainer: "Data61"
+    status: "Non-functional skeleton implementation, supported on ZYNQ SoCs"
+    component_type: user-driver-pinmux
+  - name: mach/zynq/ltimer.c
+    display_name: "mach/zynq/ltimer.c"
+    description: "ltimer implementation for the ZYNQ platforms using TTC timers"
+    maintainer: "Data61"
+    status: "Supported on ZYNQ SoCs"
+    component_type: user-driver-ltimer
+  - name: mach/zynq/axi_uartlite.c
+    display_name: "mach/zynq/axi_uartlite.c"
+    description: "UART serial driver to the AXI UART lite device on ZYNQ SoCs"
+    maintainer: "Data61"
+    status: "Suppored on ZYNQ SoCs"
+    component_type: user-driver-serial
+  - name: mach/nvidia/timer.c
+    display_name: "mach/nvidia/timer.c"
+    description: "Timer drivers for the timers on the NVIDIA SoCs"
+    maintainer: "Data61"
+    status: "Supported on the NVIDIA SoCs"
+    component_type: user-driver-timer 
+  - name: mach/nvidia/serial.c
+    display_name: "mach/nvidia/serial.c"
+    description: "Serial drivers for the UART serial devices on the NVIDIA SoCs"
+    maintainer: "Data61"
+    status: "Supported on the NVIDIA SoCs"
+    component_type: user-driver-serial
+  - name: mach/nvidia/ltimer.c
+    display_name: "mach/nvidia/ltimer.c"
+    description: "ltimer implementation for the NVIDIA platforms using the NVIDIA timers"
+    maintainer: "Data61"
+    status: "Supported on the NVIDIA SoCs"
+    component_type: user-driver-ltimer
+  #
+  # libethdrivers
+  # 
+  - name: src/pico_dev_eth.c
+    display_name: "src/pico_dev_eth.c"
+    description: "Ethernet device interface to connect with the PicoTCP TCP/IP stack"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-ethernet
+  - name: src/lwip.c
+    display_name: "src/lwip.c"
+    description: "Ethernet device interface to connect with the lwIP TCP/IP stack"
+    maintainer: "Data61"
+    status: "Deprecated in favour of the PicoTCP Ethernet device interface"
+    component_type: user-driver-ethernet
+  - name: src/helpers.c
+    display_name: "src/helpers.c"
+    description: "Helper functions for the Ethernet drivers in libethdrivers"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-other
+  - name: src/plat/am335x
+    display_name: "src/plat/am335x/*"
+    description: "Ethernet driver for the am335x platform"
+    maintainer: "Data61"
+    status: "Bitrotted, based off the lwIP stack"
+    component_type: user-driver-ethernet
+  - name: src/plat/imx6
+    display_name: "src/plat/imx6/*"
+    description: "Ethernet driver for the i.MX6 platform based off on U-Boot's implementation"
+    maintainer: "Data61"
+    status: "Supported on the sabre platform"
+    component_type: user-driver-ethernet
+  - name: src/plat/pc99
+    display_name: "src/plat/pc99/*"
+    description: "Ethernet driver for the e1000 Ethernet devices"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform"
+    component_type: user-driver-ethernet
+  - name: src/plat/tx2
+    display_name: "src/plat/tx2/*"
+    description: "Ethernet driver for the TX2 platform based off on U-Boot's implementation"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-ethernet
+  - name: src/plat/zynq7000
+    display_name: "src/plat/zynq700/*"
+    description: "Ethernet driver for the zynq7000 platform based off on U-Boot's implementation"
+    maintainer: "Data61, Dornerworks"
+    status: "Supported on the zynq7000 platform"
+    component_type: user-driver-ethernet
+  #
+  # libplatsupportports
+  #
+  - name: src/plat/tx2/clock_bindings.c
+    display_name: "src/plat/tx2/clock_bindings.c"
+    description: "libplatsupport clock ID to TX2 BPMP clock ID bindings"
+    maintainer: "Data61"
+    status: "Supported on tx2 platform"
+    component_type: user-driver-clock
+  - name: src/plat/tx2/clock.c
+    display_name: "src/plat/tx2/clock_bindings.c"
+    description: "Clock driver for the TX2 CAR (Clock And Reset) controller which relies on libtx2bpmp"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-clock
+  - name: src/plat/tx2/gpio.c
+    display_name: "src/plat/tx2/gpio.c"
+    description: "GPIO driver for the TX2 GPIO controller based off on U-Boot's implementation"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-gpio
+  - name: src/plat/tx2/mux.c
+    display_name: "src/plat/tx2/mux.c"
+    description: "Pin controller driver for the TX2 MUX based off on NVIDIA's L4T implementation"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-pinctrl
+  - name: src/plat/tx2/reset_bindings.c
+    display_name: "src/plat/tx2/reset_bindings.c"
+    description: "libplatsupport reset ID to TX2 BPMP reset ID bindings"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-reset
+  - name: src/plat/tx2/reset.c
+    display_name: "src/plat/tx2/reset.c"
+    description: "Reset driver for the TX2 CAR (Clock And Reset) controller which relies on libtx2bpmp"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-reset
+  #
+  # libtx2bpmp
+  #
+  - name: src/bpmp.c
+    display_name: "src/bpmp.c"
+    description: "BPMP driver for the BPMP (Boot and Power Management Processor) co-processor on the TX2 based off on U-Boot's implementation"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-other
+  - name: src/hsp.c
+    display_name: "src/hsp.c"
+    description: "HSP driver for the HSP (Hardware Synchronisation Primitives) module on the TX2"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-other
+  - name: src/ivc.c
+    display_name: "src/ivc.c"
+    description: "IVC implementation for the IVC (Inter-VM Communication) protocol used for communicating with the BPMP"
+    maintainer: "Data61"
+    status: "Supported on the tx2 platform"
+    component_type: user-driver-other
+  #
+  # libusbdrivers
+  #
+  - name: src/usb.c
+    display_name: "src/usb.c"
+    description: "Common USB driver for all the USB classes"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/ehci/
+    display_name: "src/ehci/*"
+    description: "Common USB EHCI host controller driver"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/otg.c
+    display_name: src/otg.c
+    description: "Common USB OTG driver for the USB OTG specification"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/plat/exynos5/ehci-exynos5.c
+    display_name: "src/plat/exynos5/ehci-exynos5.c"
+    description: "Exynos5xxx platform-specific EHCI driver functions"
+    maintainer: "Data61"
+    status: "Supported on exynos5 platform"
+    component_type: user-driver-usb
+  - name: src/plat/imx6/ehci-imx6.c
+    display_name: "src/plat/imx6/ehci-imx6.c"
+    description: "i.MX6 platform-specific EHCI driver functions"
+    maintainer: "Data61"
+    status: "Supported on sabre platform"
+    component_type: user-driver-usb
+  - name: src/plat/imx6/otg-imx6.c
+    display_name: "src/plat/imx6/otg-imx6.c"
+    description: "i.MX6 platform-specific OTG driver functions"
+    maintainer: "Data61"
+    status: "Supported on sabre platform"
+    component_type: user-driver-usb
+  - name: src/plat/pc99/ehci-pci.c
+    display_name: "src/plat/pc99/echi-pci.c"
+    description: "pc99 platform-specific EHCI driver functions"
+    maintainer: "Data61"
+    status: "Supported on pc99 platform, requires libpci"
+    component_type: user-driver-usb
+  - name: src/drivers/arch/arm/usb3503_hub.c
+    display_name: "src/drivers/arch/arm/usb3503_hub.c"
+    description: "USB hub controller driver for the Microchip USB3503 USB2.0 hub controller"
+    maintainer: "Data61"
+    status: "Supported on Arm platforms"
+    component_type: user-driver-usb
+  - name: src/drivers/cdc.c
+    display_name: "src/drivers/cdc.c"
+    description: "USB driver for the CDC and CDC PSTN subclass specifications"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/hid.c
+    display_name: "src/drivers/hid.c"
+    description: "USB driver for the HID subclass specification"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/lan9730.c
+    display_name: "src/drivers/lan9730.c"
+    description: "USB driver for the Microchip USB to 10/100 Ethernet adaptor"
+    maintainer: "Data61"
+    status: "Deprecated, requires the lwIP TCP/IP stack"
+    component_type: user-driver-usb
+  - name: src/drivers/mouse.c
+    display_name: "src/drivers/mouse.c"
+    description: "USB driver for the USB mouse class of devices"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/otgusbtty.c
+    display_name: "src/drivers/otgusbtty.c"
+    description: "USB driver for the OTG tty class of devices"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/pl2303.c
+    display_name: "src/drivers/pl2303.c"
+    description: "USB driver for the Prolific PL2303 USB to Serial adaptor"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/storage.c
+    display_name: "src/drivers/storage.c"
+    description: "USB driver for the USB Mass Storage Class Bulk-Only Transport specification"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/ufi.c
+    display_name: "src/drivers/ufi.c"
+    description: "USB driver for the UFI commands for the USB Mass Storage Class specification"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/usbhub.c
+    display_name: "src/drivers/usbhub.c"
+    description: "USB driver for the USB hub driver class of devices"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
+  - name: src/drivers/usbkbd.c
+    display_name: "src/drivers/usbkbd.c"
+    description: "USB driver for the USB keyboard class of devices"
+    maintainer: "Data61"
+    status: "Supported"
+    component_type: user-driver-usb
