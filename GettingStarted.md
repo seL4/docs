@@ -32,7 +32,7 @@ and directory structure of a project.
 See the [RepoCheatsheet](/RepoCheatsheet) page for a quick
 explanation of how we use Repo and some common commands.
 
-A subset of available projects are described below, for a full list see the [list of released projects](https://docs.sel4.systems/ReleaseProcess#versioned-manifests):
+A subset of available projects are described below, for a full list see the [list of released projects](/processes/release-process#versioned-manifests):
 
 - [verification](https://github.com/seL4/verification-manifest),
       the seL4 proofs.
