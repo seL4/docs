@@ -52,12 +52,18 @@ redirect_from:
 #### Pinmux
 {% include component_list.md project='user_libs' type='user-driver-pinmux' %}
 
+#### Reset
+{% include component_list.md project='user_libs' type='user-driver-reset' %}
+
 #### GPIO
 
 {% include component_list.md project='user_libs' type='user-driver-gpio' %}
 
 #### ltimer
 {% include component_list.md project='user_libs' type='user-driver-ltimer' %}
+
+#### ethernet
+{% include component_list.md project='user_libs' type='user-driver-ethernet' %}
 
 #### Other
 {% include component_list.md project='user_libs' type='user-driver-other' %}
