@@ -512,13 +512,126 @@ configurations:
     maintainer: "Data61"
     status: "x86 Option. (Default: OFF)"
     component_type: platform-x86
-  - name: TODO
-    display_name: "TODO arm options"
-    description: "TODO."
+  - name: KernelDangerousCodeInjectionOnUndefInstr
+    display_name: "KernelDangerousCodeInjectionOnUndefInstr"
+    description: "Replaces the undefined instruction handler with a call to a function pointer in r8.
+    This is an alternative mechanism to the code injection syscall. This option is mainly used
+    for benchmarking the kernel on ARMv6 platforms and has no effect on non-ARMv6 platforms."
     maintainer: "Data61"
-    status: ""
+    status: "Arm option. (Default: OFF)"
     component_type: platform-arm
-
+  - name: KernelDebugDisableL2Cache
+    display_name: "KernelDebugDisableL2Cache"
+    description: "Do not enable the L2 cache on startup for debugging purposes."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelDebugDisableL1ICache
+    display_name: "KernelDebugDisableL1ICache"
+    description: "Do not enable the L1 instruction cache on startup for debugging purposes."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelDebugDisableL1DCache
+    display_name: "KernelDebugDisableL1DCache"
+    description: "Do not enable the L1 data cache on startup for debugging purposes."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelDebugDisableBranchPrediction
+    display_name: "KernelDebugDisableBranchPrediction"
+    description: "Do not enable branch prediction (also called program flow control) on startup
+    for debugging purposes. This makes execution time more deterministic at the
+    expense of dramatically decreasing performance."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelArmHypervisorSupport
+    display_name: "KernelArmHypervisorSupport"
+    description: "Utilise Arm virtualisation extensions to build the kernel as a hypervisor."
+    maintainer: "Data61"
+    status: "Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))"
+    component_type: platform-arm
+  - name: KernelArmHypervisorSupport
+    display_name: "KernelArmHypervisorSupport"
+    description: "Utilise Arm virtualisation extensions to build the kernel as a hypervisor."
+    maintainer: "Data61"
+    status: "Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))"
+    component_type: platform-arm
+  - name: KernelArmHypEnableVCPUCP14SaveAndRestore
+    display_name: "KernelArmHypEnableVCPUCP14SaveAndRestore"
+    description: "The kernel does not save or restore VCPUs' CP14 accesses.
+    As a result, accessing VPU threads' CP14 context triggers a trap,
+    which allows the kernel to intercept the access and deliver it as a fault message
+    to the VM monitor."
+    maintainer: "Data61"
+    status: "Arm option. (Default: ON)"
+    component_type: platform-arm
+  - name: KernelArmErrata430973
+    display_name: "KernelArmErrata430973"
+    description: "Enable a workaround for 430973 Cortex-A8 (r1p0..r1p2) erratum
+    An error occurs if an instruction contains Arm/Thumb interworking branch
+    that is replaced by a different instruction from the same virtual address."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelArmErrata773022
+    display_name: "KernelArmErrata773022"
+    description: "Enable a workaround for 773022 Cortex-A15 (r0p0..r0p4) erratum.
+    An error occurs on rare sequences of instructions which results on the loop buffer delivering
+    incorrect instructions. The workaround is to disable the loop buffer."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelArmSMMU
+    display_name: "KernelArmSMMU"
+    description: "Enable the System MMU on the Tegra TK1 SoC."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelArmEnableA9Prefetcher
+    display_name: "KernelArmEnableA9Prefetcher"
+    description: "Enable the prefetcher on Arm Cortex-A9 core.
+    The Cortex-A9 has L1 and L2 prefetchers, which are disabled by default.
+    This config option enables those prefetchers, requiring the kernel to be executed in the secure mode.
+    Arm document indicates that the bit used for enabling those prefetchers is no longer supported
+    from version r4p1 of the Cortex-A9. However, the correctness of that is uncertain."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelArmExportPMUUser
+    display_name: "KernelArmExportPMUUser"
+    description: "Grant user access to the performance monitoring unit. While useful for
+    benchmarking, this option opens the possibility of timing channels."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelArmDisableWFIWFETraps
+    display_name: "KernelArmDisableWFIWFETraps"
+    description: "Disable the trapping of WFI  and WFE instructions by configuring the
+    Hyp Configuration Registor (HCR) of a VCPU."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelARMSMMUInterruptEnable
+    display_name: "KernelARMSMMUInterruptEnable"
+    description: "Enable system MMU (SMMU) interrupts.  System MMU interrupts currently only serve for debugging purpose because
+    they are not forwarded to user level. Enabling this will
+    cause some SMMU fault types to print out a message in the kernel. High frequency faults
+    can result in all time spent in the kernel printing fault messages."
+    maintainer: "Data61"
+    status: "Arm option. (Default: OFF)"
+    component_type: platform-arm
+  - name: KernelAArch32FPUEnableContextSwitch
+    display_name: "KernelAArch32FPUEnableContextSwitch"
+    description: "Enable hardware VFP and SIMD context switch.
+    This enables the VFP and SIMD context switch on platforms with hardware support,
+    allowing the user to execute hardware VFP and SIMD operations in a
+    multithreading environment, instead of relying on
+    software emulation of FPU/VFP from the C library (e.g. mfloat-abi=soft)."
+    maintainer: "Data61"
+    status: "Arm option. (Default: ON)"
+    component_type: platform-arm
 
 features:
   - name: arm

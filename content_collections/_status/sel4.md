@@ -69,10 +69,11 @@ kernel image.
 
 ### libsel4
 
-TODO Fill this in
+The libsel4 contains the interface that seL4 provides to user-level threads, including system calls,
+capability types, and definitions of the key data structures (e.g., boot_info).
 ### Manual
 
-TODO fill this in
+The manual contains the source files for generating the [seL4 reference manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf).
 
 ### Kernel drivers
 
