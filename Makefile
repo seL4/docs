@@ -44,10 +44,6 @@ $(REPOSITORIES):
 	mkdir -p $@
 	git clone --depth=1 https://github.com/$(@:_repos/%=%) $@
 
-_repos/sel4/l4v/README.md:
-	mkdir -p _repos/sel4/l4v
-	curl https://raw.githubusercontent.com/seL4/l4v/master/README.md > $@
-
 _repos/tutes:
 	mkdir -p $@
 
@@ -91,7 +87,7 @@ docker_build:
 serve: build
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
-build: generate_api ruby_deps $(REPOSITORIES) _repos/sel4/l4v/README.md
+build: generate_api ruby_deps $(REPOSITORIES)
 	$(MAKE) tutorials
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
