@@ -3,7 +3,7 @@
 These are the sources for the seL4 Documentation site located at <https://docs.sel4.systems>.
 It is for cooperatively developing and sharing documentation on [seL4](https://sel4.systems).
 
-See [CONTRIBUTING.md](DocsContributing.md) for information on how to contribute. _TL;DR click edit on the page in GitHub, make your changes and then submit a pull request._
+See [CONTRIBUTING.md](processes/docs-contributing.md) for information on how to contribute. _TL;DR click edit on the page in GitHub, make your changes and then submit a pull request._
 
 Ask on the [mailing list][mailing-list] or open an issue if something doesn't make sense.
 
