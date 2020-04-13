@@ -9,7 +9,7 @@ repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 mkdir cbuild
 cd cbuild
-../init-build.sh -DPLATFORM={{ page.cmake_plat }} {{page.xcompiler_arg}}
+../init-build.sh -DPLATFORM={{ page.cmake_plat }} {{page.xcompiler_arg}}=TRUE
 # The default cmake wrapper sets up a default configuration for the target platform.
 # To change individual settings, run `ccmake` and change the configuration
 # parameters to suit your needs.
