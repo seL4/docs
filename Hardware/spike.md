@@ -1,7 +1,7 @@
 ---
 riscv_hardware: true
 cmake_plat: spike
-xcompiler_arg: -DRISCV64
+xcompiler_arg: -DRISCV64=1
 platform: Spike
 arch: RV32GC, RV64IMAFDC
 virtualization: "No"

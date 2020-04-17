@@ -1,7 +1,7 @@
 ---
 riscv_hardware: true
 cmake_plat: rocketchip
-xcompiler_arg: -DRISCV64
+xcompiler_arg: -DRISCV64=1
 platform: Rocketchip
 arch: RV64IMAFDC
 virtualization: "No"
