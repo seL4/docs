@@ -1,7 +1,7 @@
 ---
 riscv_hardware: true
 cmake_plat: ariane
-xcompiler_arg: -DRISCV64
+xcompiler_arg: -DRISCV64=1
 platform: Ariane
 arch: RV64IMAC
 virtualization: "No"

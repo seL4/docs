@@ -1,7 +1,7 @@
 ---
 riscv_hardware: true
 cmake_plat: hifive
-xcompiler_arg: -DRISCV64
+xcompiler_arg: -DRISCV64=1
 platform: HiFive Unleashed
 arch: RV64IMAC, RV64GC
 virtualization: "No"
