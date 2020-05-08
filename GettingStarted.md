@@ -160,7 +160,8 @@ You can find a long list of seL4 publications here:
 
 ### Mailing lists
 
-If you have ideas or questions, please use the mailing lists:
-
-- [seL4 Announce](https://sel4.systems/lists/listinfo/announce).
+If you have ideas or questions, please use the developer mailing list:
 - [seL4 Devel](https://sel4.systems/lists/listinfo/devel).
+
+There is also a low-bandwidth list for general announcements:
+- [seL4 Announce](https://sel4.systems/lists/listinfo/announce).
