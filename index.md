@@ -32,6 +32,7 @@ This documentation site is for cooperatively developing and sharing documentatio
         <ul>
         <li><a href="/processes/conduct.html">Code of Conduct</a></li>
         <li><a href="/processes#development-processes">Development process</a></li>
+        <li><a href="/processes/roles.html">Roles</a></li>
         <li><a href="/processes/contributing.html">Contribution process</a></li>
         <li><a href="/processes/release-process.html">Release process</a></li>
         <li><a href="/processes/rfc-process.html">Request For Comment (RFC) process</a></li>
