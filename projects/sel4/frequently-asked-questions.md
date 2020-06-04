@@ -46,7 +46,7 @@ high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
 [L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia for more details.
 
-<img style="500" src="http://sel4.systems/images/familytree.png" alt="L4 microkernel family tree" aria-describedby="p1"/>
+<img style="500" src="http://sel4.systems/images/l4family.svg" alt="L4 microkernel family tree" aria-describedby="p1"/>
 
 <p id="p1">L4 microkernel family tree from 1993 until 2013. Black arrows indicate code, green arrows ABI
 inheritance. Node colours indicate author organisations. A full description of L4 variants and history can be found along
@@ -595,7 +595,7 @@ uptake.
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
-[license page](http://sel4.systems/Info/GettingStarted/license.pml) for more details.
+[license page](http://sel4.systems/Info/license.pml) for more details.
 
 ## How do I contribute to seL4?
  See
