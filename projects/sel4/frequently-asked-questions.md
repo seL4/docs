@@ -46,7 +46,7 @@ high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
 [L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia for more details.
 
-<img style="500" src="http://sel4.systems/images/l4family.svg" alt="L4 microkernel family tree" aria-describedby="p1"/>
+<img style="width:100%" src="http://sel4.systems/images/l4family.svg" alt="L4 microkernel family tree" aria-describedby="p1"/>
 
 <p id="p1">L4 microkernel family tree from 1993 until 2013. Black arrows indicate code, green arrows ABI
 inheritance. Node colours indicate author organisations. A full description of L4 variants and history can be found along
