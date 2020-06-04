@@ -74,16 +74,16 @@ you can use the following approaches to bring up a user-interface for option con
  * A `ncurses` based configuration:
 
 ```sh
-ccmake ..
+ccmake .
 ```
 
  * Graphical configuration:
 
 ```sh
-cmake-gui ..
+cmake-gui .
 ```
 
-In both cases the path `..` should resolve to the same directory used in the build configuration.
+In both cases the path `.` should resolve to the same directory used in the build configuration.
 
 #### Changing option values
 
