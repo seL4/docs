@@ -7,41 +7,37 @@ these roles by decision (vote) of the [Technical Steering Committee][2] (TSC).
 You can nominate someone for a role by emailing the chair of the TSC.
 
  - **Contributor**:
-
-    > Anyone who contributes code, documentation, issues, etc via pull requests
-    > or otherwise.
+    Anyone who contributes code, documentation, issues, etc via pull requests
+    or otherwise.
 
  - **Reviewer**:
+    People with technical experience and interest to approve reviews on
+    pull requests, be assigned and maintain issues, but without full
+    commit rights.  They would typically be active Contributors already,
+    but exceptions are possible. They become members of the seL4 GitHub
+    org.
 
-    > People with technical experience and interest to approve reviews on
-    > pull requests, be assigned and maintain issues, but without full
-    > commit rights.  They would typically be active Contributors already,
-    > but exceptions are possible. They become members of the seL4 GitHub
-    > org.
-    >
-    > The role does not confer membership or voting rights in the TSC.
+    The role does not confer membership or voting rights in the TSC.
 
    Current members are:
 
    - Yanyan Shen, Cog Systems
 
  - **Committer**:
+    People with direct write/push access to the repositories in the
+    seL4 GitHub org. These are the people that can merge pull requests.
 
-    > People with direct write/push access to the repositories in the
-    > seL4 GitHub org. These are the people that can merge pull requests.
-    >
-    > The role does not automatically confer membership or voting rights
-    > in the TSC.
+    The role does not automatically confer membership or voting rights
+    in the TSC.
 
    Current members are the members of the [TSC][2].
 
  - **SysAdmin**
+    People with admin access to the seL4 GitHub org and repositories
+    for purely administrative purposes, e.g. maintenance of CI
+    infrastructure and repo membership/access control.
 
-    > People with admin access to the seL4 GitHub org and repositories
-    > for purely administrative purposes, e.g. maintenance of CI
-    > infrastructure and repo membership/access control.
-    >
-    > The role does not confer membership or voting rights in the TSC.
+    The role does not confer membership or voting rights in the TSC.
 
    Current members are:
 
@@ -49,11 +45,10 @@ You can nominate someone for a role by emailing the chair of the TSC.
    - Luke Mondy, CSIRO's Data61
 
  - **TSC member**:
-
-    > a member of the [Technical Steering Committee][2] of the seL4
-    > Foundation. This is the body that decides on the technical direction
-    > of the project, sets processes, guidelines, etc. Meetings of the TSC
-    > are public and will be announced on the seL4 developer mailing list.
+    a member of the [Technical Steering Committee][2] of the seL4
+    Foundation. This is the body that decides on the technical direction
+    of the project, sets processes, guidelines, etc. Meetings of the TSC
+    are public and will be announced on the seL4 developer mailing list.
 
    See [the TSC page][2] for current members.
 
