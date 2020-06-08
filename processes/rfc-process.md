@@ -1,6 +1,6 @@
 ---
 title: "The RFC Process"
-author: 
+author:
   - "Curtis Millar <curtis.millar@data61.csiro.au>"
 redirect_from:
   - /RfcProcess
@@ -9,14 +9,12 @@ toc: true
 
 # seL4 Request for Comments (RFC) Process
 
-We have introduced
-the request for comments (RFC) process
-for the following reasons:
+We have introduced the request for comments (RFC) process for the following
+reasons:
 
-- to allow the us to discuss design changes
-  in a manner transparent to the community,
+- to allow the community to discuss design changes in seL4,
 - to gather valuable feedback from the community
-  on changes we are considering,
+  on changes the Foundation is considering,
 - to allow members of the seL4 community
   to get support and approval
   to propose and implement their own changes
@@ -27,11 +25,11 @@ for the following reasons:
   undergo rigorous review, and
 - to ensure large changes are well advertised
   and can viewed publicly
-  before we commit to them.
+  before contributors commit to implementing them.
 
-This helps us to ensure that such changes are made
+This helps the seL4 community ensure that such changes are made
 with the goal of the best outcome for the most users of seL4
-whilst maintaining our guarantees of isolation and security.
+whilst maintaining the seL4 guarantees of isolation and security.
 
 To see all current RFCs, go check out the [RFC dashboard][].
 
@@ -67,8 +65,9 @@ to benefit from the wider publicity
 and the documentation artefact it generates.
 {% endcomment %}
 
-* removing support for a platform, and
-* changing the versioning system used for libraries.
+* Removing support for a platform
+* Changing the versioning system used for libraries
+* Adding a new major API feature to the kernel
 
 Changes such as bug-fixes, refactorings, optimistions,
 or those that do not affect the functional requirements
@@ -85,13 +84,12 @@ Examples of changes that should not involve the RFC process include:
 
 If you try to make a substantial change
 via the pull-request process,
-or submit a pull-request that would result in such a change,
-your request will be rejected
+your request is likely to be rejected
 and you will be asked to use the RFC process
 to propose your change.
 
 If you are unsure whether a change requires an RFC,
-ask on the [IRC channel][]
+ask on the [seL4 Mattermost][] chat
 or post a question to the [development mailing list][].
 
 ## The RFC Process
@@ -106,7 +104,7 @@ to solve the particular problem.
 
 This should be done through discussion
 one one of the many community forums
-such as the [IRC channel][]
+such as the [seL4 Mattermost][] chat
 or the [development mailing list][].
 
 This part of the process should help you determine
@@ -124,8 +122,12 @@ Once you have the support of some existing seL4 developers
 they can help you take your idea
 through the rest of the RFC process.
 
-[IRC channel]: ./IRCChannel.html "seL4 IRC channel"
+After discussion, RFCs will ultimately be approved, postponed, or rejected by
+a decision of the [Technical Steering Committee][TSC] of the seL4 Foundation.
+
+[seL4 Mattermost]: https://mattermost.ts.data61.csiro.au/sel4-external/ "seL4 Mattermost"
 [development mailing list]: https://sel4.systems/lists/listinfo/devel "seL4 development mailing list"
+[TSC]: https://sel4.systems/Foundation/TSC/
 
 
 ### Proposing an new RFC
@@ -169,7 +171,7 @@ into the issue description
 when you create the RFC issue.
 
 {% comment %}
-This template has been taken from the Rust RFCs repository 
+This template has been taken from the Rust RFCs repository
 (https://github.com/rust-lang/rfcs) under the following MIT license:
 
 Permission is hereby granted, free of charge, to any
@@ -222,7 +224,7 @@ h1. Reference-level explanation
 
 Explain the change or feature as you would to the maintainers of the seL4 ecosystem.
 
-This section should provide sufficent technical detail to guide any related implementation and ongoing maintenance.
+This section should provide sufficient technical detail to guide any related implementation and ongoing maintenance.
 
 This section should clearly describe how this change will interact with the existing ecosystem, describe particular complex examples that may complicate the implementation, and describe how the implementation should support the examples in the previous section.
 
@@ -259,22 +261,21 @@ h1. Unresolved questions
 
 ### Getting an RFC approved
 
-After you propose an RFC,
-it will undergo several rounds of changes
-in response to the discussion on [Jira][].
-The development team will hold offline meetings
-to discuss the change as a group.
-A summary of these meetings will be added
-to the discussion of the RFC.
+After you propose an RFC, it is likely to undergo several rounds of changes
+in response to the discussion on [Jira][]. Anyone is allowed to engage in
+this discussion.
 
-Once general consensus in the discussion on [Jira][] has been reached
-and the seL4 development team agree on an outcome,
-the RFC may either be approved or rejected.
-When this occurs, a _disposition_ will be added to the RFC
-outlining the reason for the particular ruling.
-If the discussion of an RFC has been particularly long,
-a summary comment will be made on the RFC
-before the given ruling is made.
+Once the discussion phase is concluded, for instance because consensus has
+been reached or it has become clear that there will not be a consensus, the
+Technical Steering Committee of the seL4 Foundation will make a decision on
+the RFC.
+
+The Steering Committee will either approve, postpone, defer, require changes,
+or reject the RFC. When this occurs, a _disposition_ will be added to the RFC
+outlining the reason for the particular ruling. If the discussion of an RFC
+has been particularly long, a summary comment will be made on the RFC before
+the given ruling is made.
+
 
 #### Postponement of an RFC
 
@@ -294,11 +295,10 @@ and want to rally support for it.
 
 ### Implementation of an approved RFC
 
-Once seL4 development team aprroves an,
-it becomes their responsibility
-and is marked as _active_.
-They may then assign it to a developer for implementation.
-Issues for the implementation of all of the necessary components
+Once the Steering Committee aproves an RFC,
+it is marked as _active_.
+They may then assign it to a contributor for implementation.
+Issues for the implementation of the necessary components
 will be created and linked to the RFC.
 
 The implementation of an RFC
@@ -326,8 +326,6 @@ A _deferred_ RFC is lower priority than an _active_ one
 and will generally see no progress on its implementation.
 
 Anyone can request that a _deferred_ RFC be given priority
-be demonstrating increased demand or urgency
-for its implementation.
-Generally, a _deferred_ RFC
-will be given preference for implementation
-in favour of approving a new RFC.
+be demonstrating increased demand or urgency for its
+implementation, volunteering to work on the implementation,
+or find funding for the Foundation to implement it.
