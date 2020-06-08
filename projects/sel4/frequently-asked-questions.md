@@ -54,33 +54,33 @@ this image source: "From L3 to seL4. What Have We Learnt in 20 Years of L4 Micro
 
 
 ### How does seL4's performance compare to other microkernels?
-Up-to-date performance figures of the seL4 head revision are listed on the 
+Up-to-date performance figures of the seL4 head revision are listed on the
 [seL4 Benchmarks page](https://sel4.systems/About/Performance/). To the
 best of our knowledge, seL4 is the world's fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
 of a cross-address-space message-passing (IPC) operation.
 
-In fact, we have not seen performance data from another microkernel 
+In fact, we have not seen performance data from another microkernel
 that are within a factor of two of seL4's, and in most cases the
 gap is closer to a factor of ten.
 
 ### What is the size of seL4?
 
-Obviously this depends on the processor architecture. 
+Obviously this depends on the processor architecture.
 
-In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan'20). 
+In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan'20).
 The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more complex platform,
 the extra code is mostly in the kernel initialisation.
 
 In terms of executable code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
 Its RAM size is about 162 KiB, which includes code, static data and the stack.
-Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
-capability storage etc, will add to this. 
+Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks,
+capability storage etc, will add to this.
 (But note that in seL4's memory-management model, such dynamic memory must be supplied to the kernel by usermode code.)
 
 ## On what hardware does seL4 run?
 ### What processor architectures are supported?
-Presently seL4 runs on Arm v6, v7 (32-bit) and v8 (64-bit) cores, 
+Presently seL4 runs on Arm v6, v7 (32-bit) and v8 (64-bit) cores,
 on PC99 (x86) cores (32- and 64-bit mode), and RISC-V RV64 (64-bit) cores.
 See the up-to-date list of [supported platforms](/Hardware/).
 
@@ -125,9 +125,9 @@ DMA and thereby enable DMA devices with untrusted user-level drivers.
 There is unverified support for the SystemMMU on multiple ARM boards.
 
 ### Does seL4 support multicore?
- 
-Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit). 
-Verification of the multicore kernel is in progress (but presently as an 
+
+Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit).
+Verification of the multicore kernel is in progress (but presently as an
 unfunded background activity).
 
 The multicore kernel uses a [big-lock approach, which makes sense for tightly-coupled
@@ -161,7 +161,7 @@ Yes, seL4 can run Linux in a virtual machine. At
 present the master branch supports this on ARMv7 processors (presently
 A15/A7 cores). For x86 there is experimental virtualisation support
 (requiring Intel VT-x, ETP and a HPET that supports MSI delivery).
-Please see the [roadmap](https://sel4.systems/Info/Roadmap/)
+Please see the [roadmap](/projects/roadmap.html)
 for anticipated release of a mature version.
 
 To support virtual machines, seL4 itself runs as a hypervisor (x86
@@ -188,7 +188,7 @@ infeasible paths high-assurance. We now also apply it to the verified
 kernel, so this now also has sound execution-time bounds. Unfortunately,
 we can only do a sound analysis on relatively dated processor cores
 (ARM11, which is an ARMv6 core) as ARM no longer publishes latency
-bounds for instructions. 
+bounds for instructions.
 We should be able to repeat this for open RISC-V processor implementations, stay tuned.
 
 We are actually not convinced that running an RTOS in a VM is
@@ -198,7 +198,7 @@ seL4 environment.
 
 More importantly, we have developed a new scheduling model that supports
 the kind of temporal isolation that is required for supporting
-mixed-criticality systems. This MCS model is presently in verification and 
+mixed-criticality systems. This MCS model is presently in verification and
 is being merged into mainline as verification progresses
 We strongly recommend basing any new project on the MCS model,
 irrespective of whether it requires real-time properties.
@@ -636,7 +636,7 @@ CSIRO's
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml), 
+- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml),
   a 20-year retrospective of L4 microkernels;
 - [the original 2009 paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract.pml) describing seL4 and its formal
       verification;

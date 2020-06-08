@@ -62,7 +62,7 @@ interfaces, or the kernel startup at boot.
 
 The proofs for RISCV64 (RISC-V 64-bit port) and ARM\_MCS
 (mixed-criticality extensions to real-time seL4 features) are in
-progress. Refer to the [roadmap](https://sel4.systems/Info/Roadmap/) for
+progress. Refer to the [roadmap](/projects/roadmap.html) for
 status and upcoming features.
 
 ## ARM

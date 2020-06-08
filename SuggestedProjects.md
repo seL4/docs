@@ -99,10 +99,9 @@ internally:
 
 ## Stuff we're working on
 
-
-Kernel development will continue to happen primarily at NICTA for the
-foreseeable future, as this not only requires a good understanding of
-the kernel design and implementation, but also a good understanding of
-what is feasible to verify. Several of these internal projects are
-reasonably mature and will be pushed into the public tree soon, see our
-[Roadmap](http://sel4.systems/Info/Roadmap/)
+Development of major new kernel features will continue to happen primarily at
+the Trustworthy Systems group at Data61 for the foreseeable future, as this
+not only requires a good understanding of the kernel design and
+implementation, but also a good understanding of what is feasible to verify.
+Several of these internal projects are reasonably mature and will be
+published soon, see also the [seL4 roadmap](/projects/roadmap.html).
