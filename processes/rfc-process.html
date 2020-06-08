@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-06-05 11:21:38 +1000 -->
+<!-- Page last generated 2020-06-08 12:22:43 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -233,15 +233,13 @@
     <div class="content">
       <h1 id="sel4-request-for-comments-rfc-process">seL4 Request for Comments (RFC) Process</h1>
 
-<p>We have introduced
-the request for comments (RFC) process
-for the following reasons:</p>
+<p>We have introduced the request for comments (RFC) process for the following
+reasons:</p>
 
 <ul>
-  <li>to allow the us to discuss design changes
-in a manner transparent to the community,</li>
+  <li>to allow the community to discuss design changes in seL4,</li>
   <li>to gather valuable feedback from the community
-on changes we are considering,</li>
+on changes the Foundation is considering,</li>
   <li>to allow members of the seL4 community
 to get support and approval
 to propose and implement their own changes
@@ -252,12 +250,12 @@ or that have wide and varying impacts on users of seL4
 undergo rigorous review, and</li>
   <li>to ensure large changes are well advertised
 and can viewed publicly
-before we commit to them.</li>
+before contributors commit to implementing them.</li>
 </ul>
 
-<p>This helps us to ensure that such changes are made
+<p>This helps the seL4 community ensure that such changes are made
 with the goal of the best outcome for the most users of seL4
-whilst maintaining our guarantees of isolation and security.</p>
+whilst maintaining the seL4 guarantees of isolation and security.</p>
 
 <p>To see all current RFCs, go check out the <a href="https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100" title="RFC dashboard">RFC dashboard</a>.</p>
 
@@ -282,8 +280,9 @@ within the ecosystem.</p>
 <p>Examples of changes that must follow the RFC process include:</p>
 
 <ul>
-  <li>removing support for a platform, and</li>
-  <li>changing the versioning system used for libraries.</li>
+  <li>Removing support for a platform</li>
+  <li>Changing the versioning system used for libraries</li>
+  <li>Adding a new major API feature to the kernel</li>
 </ul>
 
 <p>Changes such as bug-fixes, refactorings, optimistions,
@@ -303,13 +302,12 @@ on the relevant repository.</p>
 
 <p>If you try to make a substantial change
 via the pull-request process,
-or submit a pull-request that would result in such a change,
-your request will be rejected
+your request is likely to be rejected
 and you will be asked to use the RFC process
 to propose your change.</p>
 
 <p>If you are unsure whether a change requires an RFC,
-ask on the <a href="./IRCChannel.html" title="seL4 IRC channel">IRC channel</a>
+ask on the <a href="https://mattermost.ts.data61.csiro.au/sel4-external/" title="seL4 Mattermost">seL4 Mattermost</a> chat
 or post a question to the <a href="https://sel4.systems/lists/listinfo/devel" title="seL4 development mailing list">development mailing list</a>.</p>
 
 <h2 id="the-rfc-process">The RFC Process</h2>
@@ -323,7 +321,7 @@ to solve the particular problem.</p>
 
 <p>This should be done through discussion
 one one of the many community forums
-such as the <a href="./IRCChannel.html" title="seL4 IRC channel">IRC channel</a>
+such as the <a href="https://mattermost.ts.data61.csiro.au/sel4-external/" title="seL4 Mattermost">seL4 Mattermost</a> chat
 or the <a href="https://sel4.systems/lists/listinfo/devel" title="seL4 development mailing list">development mailing list</a>.</p>
 
 <p>This part of the process should help you determine
@@ -340,6 +338,9 @@ and will speed up much of the RFC process.</p>
 <p>Once you have the support of some existing seL4 developers
 they can help you take your idea
 through the rest of the RFC process.</p>
+
+<p>After discussion, RFCs will ultimately be approved, postponed, or rejected by
+a decision of the <a href="https://sel4.systems/Foundation/TSC/">Technical Steering Committee</a> of the seL4 Foundation.</p>
 
 <h3 id="proposing-an-new-rfc">Proposing an new RFC</h3>
 
@@ -400,7 +401,7 @@ h1. Reference-level explanation
 
 Explain the change or feature as you would to the maintainers of the seL4 ecosystem.
 
-This section should provide sufficent technical detail to guide any related implementation and ongoing maintenance.
+This section should provide sufficient technical detail to guide any related implementation and ongoing maintenance.
 
 This section should clearly describe how this change will interact with the existing ecosystem, describe particular complex examples that may complicate the implementation, and describe how the implementation should support the examples in the previous section.
 
@@ -436,22 +437,20 @@ h1. Unresolved questions
 
 <h3 id="getting-an-rfc-approved">Getting an RFC approved</h3>
 
-<p>After you propose an RFC,
-it will undergo several rounds of changes
-in response to the discussion on <a href="https://sel4kernel.atlassian.net/" title="seL4 Atlassian Cloud">Jira</a>.
-The development team will hold offline meetings
-to discuss the change as a group.
-A summary of these meetings will be added
-to the discussion of the RFC.</p>
+<p>After you propose an RFC, it is likely to undergo several rounds of changes
+in response to the discussion on <a href="https://sel4kernel.atlassian.net/" title="seL4 Atlassian Cloud">Jira</a>. Anyone is allowed to engage in
+this discussion.</p>
 
-<p>Once general consensus in the discussion on <a href="https://sel4kernel.atlassian.net/" title="seL4 Atlassian Cloud">Jira</a> has been reached
-and the seL4 development team agree on an outcome,
-the RFC may either be approved or rejected.
-When this occurs, a <em>disposition</em> will be added to the RFC
-outlining the reason for the particular ruling.
-If the discussion of an RFC has been particularly long,
-a summary comment will be made on the RFC
-before the given ruling is made.</p>
+<p>Once the discussion phase is concluded, for instance because consensus has
+been reached or it has become clear that there will not be a consensus, the
+Technical Steering Committee of the seL4 Foundation will make a decision on
+the RFC.</p>
+
+<p>The Steering Committee will either approve, postpone, defer, require changes,
+or reject the RFC. When this occurs, a <em>disposition</em> will be added to the RFC
+outlining the reason for the particular ruling. If the discussion of an RFC
+has been particularly long, a summary comment will be made on the RFC before
+the given ruling is made.</p>
 
 <h4 id="postponement-of-an-rfc">Postponement of an RFC</h4>
 
@@ -470,11 +469,10 @@ and want to rally support for it.</p>
 
 <h3 id="implementation-of-an-approved-rfc">Implementation of an approved RFC</h3>
 
-<p>Once seL4 development team aprroves an,
-it becomes their responsibility
-and is marked as <em>active</em>.
-They may then assign it to a developer for implementation.
-Issues for the implementation of all of the necessary components
+<p>Once the Steering Committee aproves an RFC,
+it is marked as <em>active</em>.
+They may then assign it to a contributor for implementation.
+Issues for the implementation of the necessary components
 will be created and linked to the RFC.</p>
 
 <p>The implementation of an RFC
@@ -501,11 +499,9 @@ A <em>deferred</em> RFC is lower priority than an <em>active</em> one
 and will generally see no progress on its implementation.</p>
 
 <p>Anyone can request that a <em>deferred</em> RFC be given priority
-be demonstrating increased demand or urgency
-for its implementation.
-Generally, a <em>deferred</em> RFC
-will be given preference for implementation
-in favour of approving a new RFC.</p>
+be demonstrating increased demand or urgency for its
+implementation, volunteering to work on the implementation,
+or find funding for the Foundation to implement it.</p>
 
     </div>
   </div>
@@ -536,10 +532,10 @@ in favour of approving a new RFC.</p>
         </li>
         
           <li>
-            Site last updated: Fri Jun 5 09:20:35 2020 +1000 f4fe423
+            Site last updated: Mon Jun 8 10:17:34 2020 +0800 77c5b82
           </li>
           <li>
-                Page last updated: Mon Feb 17 13:52:47 2020 +1100 9ca9081
+                Page last updated: Mon Jun 8 10:17:34 2020 +0800 77c5b82
           </li>
         
       </ul>

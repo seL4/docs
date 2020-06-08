@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-06-05 11:21:38 +1000 -->
+<!-- Page last generated 2020-06-08 12:22:43 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -275,13 +275,13 @@ inheritance. Node colours indicate author organisations. A full description of L
 this image source: "From L3 to seL4. What Have We Learnt in 20 Years of L4 Microkernels? [Elphinstone &amp; Heiser, SOSP 2013]"</p>
 
 <h3 id="how-does-sel4s-performance-compare-to-other-microkernels">How does seL4’s performance compare to other microkernels?</h3>
-<p>Up-to-date performance figures of the seL4 head revision are listed on the 
+<p>Up-to-date performance figures of the seL4 head revision are listed on the
 <a href="https://sel4.systems/About/Performance/">seL4 Benchmarks page</a>. To the
 best of our knowledge, seL4 is the world’s fastest microkernel on the
 supported processors, in terms of the usual ping-pong metric: the cost
 of a cross-address-space message-passing (IPC) operation.</p>
 
-<p>In fact, we have not seen performance data from another microkernel 
+<p>In fact, we have not seen performance data from another microkernel
 that are within a factor of two of seL4’s, and in most cases the
 gap is closer to a factor of ten.</p>
 
@@ -289,19 +289,19 @@ gap is closer to a factor of ten.</p>
 
 <p>Obviously this depends on the processor architecture.</p>
 
-<p>In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan’20). 
+<p>In terms of source-code size, the 64-bit RISC-V kernel is about 9,400 SLOC (as of Jan’20).
 The Arm version is similar, x64 is larger (16-18 kSLOC) due to the more complex platform,
 the extra code is mostly in the kernel initialisation.</p>
 
 <p>In terms of executable code size, on the 64-bit RISC-V architecture, the single-core kernel compiles into about 138 KiB.
 Its RAM size is about 162 KiB, which includes code, static data and the stack.
-Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks, 
-capability storage etc, will add to this. 
+Meta-data for usermode processes, incl. address spaces (page tables), thread-control blocks,
+capability storage etc, will add to this.
 (But note that in seL4’s memory-management model, such dynamic memory must be supplied to the kernel by usermode code.)</p>
 
 <h2 id="on-what-hardware-does-sel4-run">On what hardware does seL4 run?</h2>
 <h3 id="what-processor-architectures-are-supported">What processor architectures are supported?</h3>
-<p>Presently seL4 runs on Arm v6, v7 (32-bit) and v8 (64-bit) cores, 
+<p>Presently seL4 runs on Arm v6, v7 (32-bit) and v8 (64-bit) cores,
 on PC99 (x86) cores (32- and 64-bit mode), and RISC-V RV64 (64-bit) cores.
 See the up-to-date list of <a href="/Hardware/">supported platforms</a>.</p>
 
@@ -347,8 +347,8 @@ There is unverified support for the SystemMMU on multiple ARM boards.</p>
 
 <h3 id="does-sel4-support-multicore">Does seL4 support multicore?</h3>
 
-<p>Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit). 
-Verification of the multicore kernel is in progress (but presently as an 
+<p>Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit).
+Verification of the multicore kernel is in progress (but presently as an
 unfunded background activity).</p>
 
 <p>The multicore kernel uses a <a href="https://ts.data61.csiro.au/publications/nictaabstracts/Peters_DEH_15.abstract.pml">big-lock approach, which makes sense for tightly-coupled
@@ -382,7 +382,7 @@ avionics and defence sectors.</p>
 present the master branch supports this on ARMv7 processors (presently
 A15/A7 cores). For x86 there is experimental virtualisation support
 (requiring Intel VT-x, ETP and a HPET that supports MSI delivery).
-Please see the <a href="https://sel4.systems/Info/Roadmap/">roadmap</a>
+Please see the <a href="/projects/roadmap.html">roadmap</a>
 for anticipated release of a mature version.</p>
 
 <p>To support virtual machines, seL4 itself runs as a hypervisor (x86
@@ -409,7 +409,7 @@ infeasible paths high-assurance. We now also apply it to the verified
 kernel, so this now also has sound execution-time bounds. Unfortunately,
 we can only do a sound analysis on relatively dated processor cores
 (ARM11, which is an ARMv6 core) as ARM no longer publishes latency
-bounds for instructions. 
+bounds for instructions.
 We should be able to repeat this for open RISC-V processor implementations, stay tuned.</p>
 
 <p>We are actually not convinced that running an RTOS in a VM is
@@ -419,7 +419,7 @@ seL4 environment.</p>
 
 <p>More importantly, we have developed a new scheduling model that supports
 the kind of temporal isolation that is required for supporting
-mixed-criticality systems. This MCS model is presently in verification and 
+mixed-criticality systems. This MCS model is presently in verification and
 is being merged into mainline as verification progresses
 We strongly recommend basing any new project on the MCS model,
 irrespective of whether it requires real-time properties.</p>
@@ -856,7 +856,7 @@ pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:</p>
 
 <ul>
-  <li><a href="http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml">from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?</a>, 
+  <li><a href="http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml">from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?</a>,
 a 20-year retrospective of L4 microkernels;</li>
   <li><a href="https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract.pml">the original 2009 paper</a> describing seL4 and its formal
     verification;</li>
@@ -1361,10 +1361,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Fri Jun 5 09:20:35 2020 +1000 f4fe423
+            Site last updated: Mon Jun 8 10:17:34 2020 +0800 77c5b82
           </li>
           <li>
-                Page last updated: Fri Jun 5 09:20:35 2020 +1000 f4fe423
+                Page last updated: Mon Jun 8 09:23:15 2020 +0800 cf96c45
           </li>
         
       </ul>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-06-05 11:21:38 +1000 -->
+<!-- Page last generated 2020-06-08 12:22:43 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -195,7 +195,7 @@
     <h1 id="processes">Processes</h1>
 
 <p>Documentation relating to development processes and how to get help or get involved in seL4
-can be found on this page. Note that these are generalizations and may be different for a
+can be found on this page. Note that these are generalisations and may be different for a
 particular project/repository.</p>
 
 <h2 id="development-processes">Development processes</h2>
@@ -222,7 +222,7 @@ are currently maintained to support the seL4 ecosystem:</p>
     <p><a href="/projects/sel4">seL4</a>: The seL4 microkernel.</p>
   </li>
   <li>
-    <p><a href="https://github.com/sel4/l4v">L4.verified</a>: formal specifications and proofs for the seL4 microkernel.</p>
+    <p><a href="https://github.com/sel4/l4v">seL4 verification</a>: formal specifications and proofs for the seL4 microkernel.</p>
   </li>
   <li>
     <p><a href="/projects/buildsystem">Build system</a> and <a href="/projects/sel4_tools">tooling</a>: Tooling, system configuration and building used to build seL4 projects using mostly CMake.</p>
@@ -272,39 +272,48 @@ are currently maintained to support the seL4 ecosystem:</p>
 <h3 id="how-we-choose-what-we-work-on">How we choose what we work on</h3>
 
 <p>Primarily, what we work on gets prioritised by externally funded projects and what is long-term strategic.
-The strategic roadmap can be found on the <a href="http://sel4.systems/Info/Roadmap/">seL4 development and verification roadmap</a> page.</p>
+The strategic roadmap can be found on the <a href="/projects/roadmap.html">seL4 development and verification roadmap</a> page.</p>
 
-<p>Some priority is also given to maintaining all of the maintained projects and repositories which involves responding to
+<p>Some priority is also given to the maintained projects and repositories which involves responding to
 breakages and reported issues as they arise.  Raising a GitHub issue on a relevant repository is the best way to get an issue
 acknowledged. Alternatively, the <em>devel</em> mailing list or the seL4 Mattermost can be used to ask about potential issues.</p>
 
-<p>Additionally, the <a href="/processes/rfc-process">RFC process</a> is intended as a way for external input to be provided on
-longer-term priorities as well as a way to promote a collaborative design process on externally contributed features
-before excessive effort is invested into their development. More information is provided on the RFC page above.</p>
+<p>Additionally, the <a href="/processes/rfc-process">RFC process</a> is intended as a way to provide input on
+longer-term priorities as well as a way to promote a collaborative design process on new kernel features
+before larger effort is invested into their development. More information is provided on the RFC page above.</p>
 
 <h3 id="where-we-work-on-things">Where we work on things</h3>
 
-<p>We try and release all sources onto GitHub under either of the two organizations:</p>
+<p>The code documented on this site is available from two GitHub organisations:</p>
+
 <ul>
-  <li><a href="https://github.com/sel4/">https://github.com/sel4/</a></li>
-  <li><a href="https://github.com/sel4proj/">https://github.com/sel4proj/</a></li>
+  <li>
+    <p><a href="https://github.com/sel4/">https://github.com/sel4/</a>: the seL4 kernel itself and the core
+repositories around it, managed by the <a href="https://sel4.systems/Foundation/About/">seL4
+Foundation</a>.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/sel4proj/">https://github.com/sel4proj/</a>: additional tools, libraries, and projects around seL4, managed by the <a href="https://ts.data61.csiro.au">Trustworthy Systems</a> group at Data61.</p>
+  </li>
 </ul>
 
-<p>Each project has a list of which repositories it contributes to on its documentation
-home page. Alternatively, the README.md of each repository should indicate what its
-purpose is.</p>
+<p>Each project has a list of which repositories it contributes to on its
+documentation home page. Alternatively, the README.md of each repository
+should indicate what its purpose is.</p>
 
 <p>Communication about what is being developed can occur on any of the channels listed <a href="#contact">below</a>.
 In particular:</p>
+
 <ul>
-  <li>Discussions can occur on the Mailing list, seL4 Mattermost or seL4 Discourse.</li>
-  <li>Discussions about proposed changes can reach a point where an RFC is created.
-Further discussion then happens on the RFC site.</li>
+  <li>The <em>devel</em> mailing list, seL4 Mattermost and seL4 Discourse are for general development discussions.</li>
+  <li>Discussions about proposed changes can reach a point where an <a href="/processes/rfc-process">RFC</a> is created.
+Further discussion then happens on the <a href="https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100">RFC</a> site.</li>
   <li>GitHub issue and Pull-request comment sections can also be used.</li>
 </ul>
 
-<p>Documentation about proposed changes such as roadmaps can be found on this Docsite,
-or on the <a href="http://sel4.systems/Info/Roadmap/">seL4 development and verification roadmap</a> page.</p>
+<p>The <a href="/projects/roadmap.html">seL4 development and verification
+roadmap</a> page lists major features and
+projects that someone has committed to deliver.</p>
 
 <h2 id="contact">Contact</h2>
 
@@ -322,9 +331,8 @@ or on the <a href="http://sel4.systems/Info/Roadmap/">seL4 development and verif
 
 <h2 id="contributing">Contributing</h2>
 
-<p>We welcome your contributions to the source code and this website.
-To ensure a collaborative environment, we expect all contributions and interactions to fall within our <a href="/Conduct">Code of Conduct</a>.
-For some repositories, such as the main seL4 kernel repository, we require a <a href="/Contributing#contributor-license-agreement">contributor license agreement(CLA)</a>.</p>
+<p>We welcome your contributions to code, documentation and this website.
+To ensure a collaborative environment, we expect all contributions and interactions to fall within our <a href="/Conduct">Code of Conduct</a>.</p>
 
 <p>In addition to following the development process that is outset below, most of the software projects generally follow the following conventions:</p>
 <ul>
@@ -386,10 +394,10 @@ For some repositories, such as the main seL4 kernel repository, we require a <a 
         </li>
         
           <li>
-            Site last updated: Fri Jun 5 09:20:35 2020 +1000 f4fe423
+            Site last updated: Mon Jun 8 10:17:34 2020 +0800 77c5b82
           </li>
           <li>
-                Page last updated: Tue Apr 7 19:55:23 2020 +1000 75dfc74
+                Page last updated: Mon Jun 8 09:23:15 2020 +0800 cf96c45
           </li>
         
       </ul>
