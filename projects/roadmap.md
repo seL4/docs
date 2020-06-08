@@ -20,9 +20,10 @@ In many cases, we could possibly deliver earlier if we had enough people to do t
 
 ## seL4 Development
 
+<!-- Draws content from the "roadmap" section in /_data/projects/<project>.yml -->
 {% include component_list.md project='sel4' list='roadmap' type='in-progress' %}
-
 
 ## Verification
 
+<!-- Draws content from the "roadmap: section in /_data/projects/<project>.yml -->
 {% include component_list.md project='l4v' list='roadmap' type='in-progress' %}
