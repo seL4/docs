@@ -62,7 +62,7 @@ this plan to be added to the roadmap on this page.
 
 If you are contracted to deliver a major user-level component, framework, or
 feature in the seL4 ecosystem with a delivery date, and ideally an approved
-[RFC](processes/rfc-process.html) to go with it, your contribution would be
+[RFC](processes/rfc-process) to go with it, your contribution would be
 an ideal addition to the roadmap.
 
 A new feature can become a part of the official seL4 roadmap by decision of
