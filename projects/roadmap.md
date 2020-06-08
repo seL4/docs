@@ -5,18 +5,43 @@ layout: api
 
 # seL4 Project Roadmap
 
-Below tables list our plans for various parts of seL4 and Data61-supported parts of its ecosystem.
+The seL4 project roadmap lists larger planned contributions to the seL4
+ecosystem, such as new architecture ports, new large formal verifications,
+large or fundamental new features, user-level frameworks, or components with
+general interest to the community.
 
+The purpose is to provide a timeline to the community of when larger
+contributions will become available with a reasonable level of commitment,
+and for contributors to advertise to others which larger contributions they
+are working on.
 
-Where we indicate that the feature will appear in <em>master</em>, it might possibly appear in a branch earlier.  Features in <em>branches</em> will be merged into mainline at a later time, timing of this is determined by the verification schedule. The reason is our commitment to ensuring that at any time, mainline code for our <em>verified</em> platforms is actually verified. This means that a feature can only be pushed into mainline if it doesn't break the verified platform proofs. In some cases this is no problem, e.g. as long as we haven't completed verification of x86, then changes that only affect x86 can go into mainline (as long as the verifiers agree that they will not inhibit future verification). This is the main reason why the real-time scheduling features will remain in a branch for some time &ndash; they are relatively invasive and break many existing proofs.
+Features that are *in progress* are currently being worked on, features that
+are *planned* have not yet had work started on them.
 
-Some features are in branches because they are of an experimental nature, and are released to the community to allow people to experiment with them, we will do the same. This means that such experimental branches may undergo significant changes on their way into mainline, if they ever make it there.
+To put a feature on the roadmap, the respective contributor will have made a
+commitment to delivering it, but these are not contracts &mdash; **any dates
+are indicative and subject to change!**
 
-Features that are <em>in progress</em> are currently being worked on, features that are <em>planned</em> have not yet had work started on them.
+Some features may become available in experimental preview *branches* before
+they are merged into the *master* branch. The dates in the table are for the
+completion of the feature in *master*. The preview branches may undergo
+significant changes before they are merged and may also be abandoned. Some of
+these branches may be long-lived, because features can only be merged into
+*master* when they are either formally verified or do not affect the verified
+configurations of the kernel. Typically, while a larger feature undergoes
+formal verification, it will be available in a branch or a non-verified
+configuration. Such features often undergo smaller API-level changes while
+the verification progresses and either finds flaws or otherwise influences
+the design.
 
-**Any dates are indicative and subject to change!**
+In many cases, the roadmap could be accelerated with more funding for the
+contributors who work on them, or, in some cases, by volunteering time. If
+you are interested, talk to the [seL4 Foundation][] or when it involves
+formal verification or major seL4 kernel features directly to the
+[Trustworthy Systems][] group at Data61!
 
-In many cases, we could possibly deliver earlier if we had enough people to do the work. If our recruiting is more successful than expected, we might be able to go faster. If you want to help accelerate this roadmap, help us to find the right developers!
+[seL4 Foundation]: https://sel4.systems/Foundation/About/ "seL4 Foundation"
+[Trustworthy Systems]: https://ts.data61.csiro.au "Trustworthy Systems"
 
 ## seL4 Development
 
@@ -27,3 +52,25 @@ In many cases, we could possibly deliver earlier if we had enough people to do t
 
 <!-- Draws content from the "roadmap: section in /_data/projects/<project>.yml -->
 {% include component_list.md project='l4v' list='roadmap' type='in-progress' %}
+
+## Adding to the Roadmap
+
+The roadmap is not only for sel4 kernel development or verification itself.
+If you are working on a larger feature or addition to the the wider seL4
+ecosystem, and are confident enough to commit to a timeline, you can request
+this plan to be added to the roadmap on this page.
+
+If you are contracted to deliver a major user-level component, framework, or
+feature in the seL4 ecosystem with a delivery date, and ideally an approved
+[RFC](processes/rfc-process.html) to go with it, your contribution would be
+an ideal addition to the roadmap.
+
+A new feature can become a part of the official seL4 roadmap by decision of
+the [Technical Steering Committee][TSC] (TSC) of the seL4 Foundation. To
+submit a request to the TSC for putting a planned feature on the roadmap,
+send an email to any TSC member with a description of the contribution, the
+planned timeline, and level of confidence for achieving it, e.g. by pointing
+to any related RFC. The TSC will discuss the proposal and either request more
+information or vote on it.
+
+[TSC]: https://sel4.systems/Foundation/TSC/
