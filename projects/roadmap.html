@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-06-08 12:22:43 +1000 -->
+<!-- Page last generated 2020-06-08 13:00:01 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -217,17 +217,40 @@
   <div class="api content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="sel4-project-roadmap">seL4 Project Roadmap</h1>
 
-<p>Below tables list our plans for various parts of seL4 and Data61-supported parts of its ecosystem.</p>
+<p>The seL4 project roadmap lists larger planned contributions to the seL4
+ecosystem, such as new architecture ports, new large formal verifications,
+large or fundamental new features, user-level frameworks, or components with
+general interest to the community.</p>
 
-<p>Where we indicate that the feature will appear in <em>master</em>, it might possibly appear in a branch earlier.  Features in <em>branches</em> will be merged into mainline at a later time, timing of this is determined by the verification schedule. The reason is our commitment to ensuring that at any time, mainline code for our <em>verified</em> platforms is actually verified. This means that a feature can only be pushed into mainline if it doesn’t break the verified platform proofs. In some cases this is no problem, e.g. as long as we haven’t completed verification of x86, then changes that only affect x86 can go into mainline (as long as the verifiers agree that they will not inhibit future verification). This is the main reason why the real-time scheduling features will remain in a branch for some time – they are relatively invasive and break many existing proofs.</p>
+<p>The purpose is to provide a timeline to the community of when larger
+contributions will become available with a reasonable level of commitment,
+and for contributors to advertise to others which larger contributions they
+are working on.</p>
 
-<p>Some features are in branches because they are of an experimental nature, and are released to the community to allow people to experiment with them, we will do the same. This means that such experimental branches may undergo significant changes on their way into mainline, if they ever make it there.</p>
+<p>Features that are <em>in progress</em> are currently being worked on, features that
+are <em>planned</em> have not yet had work started on them.</p>
 
-<p>Features that are <em>in progress</em> are currently being worked on, features that are <em>planned</em> have not yet had work started on them.</p>
+<p>To put a feature on the roadmap, the respective contributor will have made a
+commitment to delivering it, but these are not contracts — <strong>any dates
+are indicative and subject to change!</strong></p>
 
-<p><strong>Any dates are indicative and subject to change!</strong></p>
+<p>Some features may become available in experimental preview <em>branches</em> before
+they are merged into the <em>master</em> branch. The dates in the table are for the
+completion of the feature in <em>master</em>. The preview branches may undergo
+significant changes before they are merged and may also be abandoned. Some of
+these branches may be long-lived, because features can only be merged into
+<em>master</em> when they are either formally verified or do not affect the verified
+configurations of the kernel. Typically, while a larger feature undergoes
+formal verification, it will be available in a branch or a non-verified
+configuration. Such features often undergo smaller API-level changes while
+the verification progresses and either finds flaws or otherwise influences
+the design.</p>
 
-<p>In many cases, we could possibly deliver earlier if we had enough people to do the work. If our recruiting is more successful than expected, we might be able to go faster. If you want to help accelerate this roadmap, help us to find the right developers!</p>
+<p>In many cases, the roadmap could be accelerated with more funding for the
+contributors who work on them, or, in some cases, by volunteering time. If
+you are interested, talk to the <a href="https://sel4.systems/Foundation/About/" title="seL4 Foundation">seL4 Foundation</a> or when it involves
+formal verification or major seL4 kernel features directly to the
+<a href="https://ts.data61.csiro.au" title="Trustworthy Systems">Trustworthy Systems</a> group at Data61!</p>
 
 <h2 id="sel4-development">seL4 Development</h2>
 
@@ -287,12 +310,34 @@
     </tbody>
 </table>
 
+<h2 id="adding-to-the-roadmap">Adding to the Roadmap</h2>
+
+<p>The roadmap is not only for sel4 kernel development or verification itself.
+If you are working on a larger feature or addition to the the wider seL4
+ecosystem, and are confident enough to commit to a timeline, you can request
+this plan to be added to the roadmap on this page.</p>
+
+<p>If you are contracted to deliver a major user-level component, framework, or
+feature in the seL4 ecosystem with a delivery date, and ideally an approved
+<a href="processes/rfc-process.html">RFC</a> to go with it, your contribution would be
+an ideal addition to the roadmap.</p>
+
+<p>A new feature can become a part of the official seL4 roadmap by decision of
+the <a href="https://sel4.systems/Foundation/TSC/">Technical Steering Committee</a> (TSC) of the seL4 Foundation. To
+submit a request to the TSC for putting a planned feature on the roadmap,
+send an email to any TSC member with a description of the contribution, the
+planned timeline, and level of confidence for achieving it, e.g. by pointing
+to any related RFC. The TSC will discuss the proposal and either request more
+information or vote on it.</p>
+
+
   </div>
 
   <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
     <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#sel4-development">seL4 Development</a></li>
 <li class="toc-entry toc-h2"><a href="#verification">Verification</a></li>
+<li class="toc-entry toc-h2"><a href="#adding-to-the-roadmap">Adding to the Roadmap</a></li>
 </ul>
 </div>
 
@@ -323,10 +368,10 @@
         </li>
         
           <li>
-            Site last updated: Mon Jun 8 10:17:34 2020 +0800 77c5b82
+            Site last updated: Mon Jun 8 10:56:14 2020 +0800 0c8a412
           </li>
           <li>
-                Page last updated: Mon Jun 8 09:23:15 2020 +0800 a248cb0
+                Page last updated: Mon Jun 8 10:56:14 2020 +0800 0c8a412
           </li>
         
       </ul>
