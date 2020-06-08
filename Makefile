@@ -22,7 +22,7 @@ ruby_deps: Gemfile Gemfile.lock
 FILE_NAME=_data/generated.yml
 
 UPDATE_DATE:= $(shell git log -1 --format='%cd %h')
-FILES:= $(shell find -iname "*.md" | grep -ve "./README.md" | grep -ve "^./_repos/"| sed 's/.\///')
+FILES:= $(shell find . -iname "*.md" | grep -ve "./README.md" | grep -ve "^./_repos/"| sed 's/.\///')
 .PHONY: _data/generated.yml
 _data/generated.yml:
 	echo "date: $(UPDATE_DATE)" > $(FILE_NAME)
