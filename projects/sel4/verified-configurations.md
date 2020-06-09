@@ -60,7 +60,7 @@ At present, none of our verified configurations take into account
 address translation for devices (System MMU or IOMMU), debug/profiling
 interfaces, or the kernel startup at boot.
 
-The proofs for RISCV64 (RISC-V 64-bit port) and ARM\_MCS
+The proofs for RISC-V 64-bit binary verification and ARM\_MCS
 (mixed-criticality extensions to real-time seL4 features) are in
 progress. Refer to the [roadmap](/projects/roadmap.html) for
 status and upcoming features.
