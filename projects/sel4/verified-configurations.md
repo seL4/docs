@@ -91,3 +91,11 @@ Floating-point support | Yes
 Hypervisor mode | No
 **Verified properties** | functional correctness
 
+## RISCV64
+
+File | `RISCV64_verified.cmake`
+Architecture | RISC-V 64-bit
+Platform | HiFive
+Floating-point support | No
+Hypervisor mode | No
+**Verified properties** | functional correctness
