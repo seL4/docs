@@ -36,7 +36,9 @@ These are the policies for upholding our community's standards of conduct. If yo
 1.  Remarks that violate the seL4 standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (No swearing is allowed in commit messages or post headings, but is tolerated elsewhere provided it should never target another user, and never in a hateful manner.)
 2.  Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed.
 3.  Moderators will first respond to such remarks with a warning.
-4.  If the warning is unheeded, we will take steps to temporarily restrict your interaction with the project, by e.g. kicking you from IRC or locking the relevant GitHub issue.
+4.  If the warning is unheeded, we will take steps to temporarily
+    restrict your interaction with the project, by e.g. kicking you
+    from a forum or mailing list, or locking the relevant GitHub issue.
 5.  If the user comes back and continues to make trouble, they will be banned, i.e., indefinitely excluded.
 6.  Moderators may choose at their discretion to un-ban the user if it was a first offense and they offer the offended party a genuine apology.
 7.  If a moderator bans someone and you think it was unjustified, please take it up with that moderator, or with a different moderator, **in private**. Public complaints about bans are not allowed via any of our communication channels.
@@ -46,6 +48,6 @@ In the seL4 community we strive to go the extra step to look out for each other.
 
 And if someone takes issue with something you said or did, resist the urge to be defensive. Just stop doing what it was they complained about and apologize. Even if you feel you were misinterpreted or unfairly accused, chances are good there was something you could've communicated better — remember that it's your responsibility to make your fellow contributors comfortable. Everyone wants to get along and we are all here first and foremost because we want to build trustworthy systems. You will find that people will be eager to assume good intent and forgive as long as you earn their trust.
 
-The enforcement policies listed above apply to all official seL4 venues; including official IRC channels (#sel4); mattermost, discourse, JIRA, GitHub repositories under sel4 and sel4proj; and all mailing lists on https://sel4.systems/lists/listinfo/. For other projects adopting the seL4 Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
+The enforcement policies listed above apply to all official seL4 venues; including  mattermost, discourse, JIRA, GitHub repositories under sel4 and sel4proj; and all mailing lists on https://sel4.systems/lists/listinfo/. For other projects adopting the seL4 Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
 
 *Adapted from the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling), [Robigalia Code of Conduct](https://robigalia.org/conduct.html), the [Rust code of conduct](https://github.com/rust-lang/rust-www/blob/master/en-US/conduct.md) as well as the [Contributor Covenant v1.4.0](https://www.contributor-covenant.org/version/1/4/).*

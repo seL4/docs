@@ -87,6 +87,5 @@ And if relevant
 
 
 ## Community
-Most community discussions about seL4 occur on our [Devel mailing list][mailing-list].  We also have an [IRC channel][IRC] that can be used.
+Most community discussions about seL4 occur on our [Devel mailing list][mailing-list].
 
-[IRC]: https://docs.sel4.systems/IRCChannel

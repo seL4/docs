@@ -11,4 +11,3 @@ This page attempts to be a directory of relevant websites relating to seL4.
 - [seL4 Mattermost](https://mattermost.ts.data61.csiro.au/sel4-external/)
 - [seL4 Jira](https://sel4.atlassian.net)
 - [Trustworthy Systems seL4 blog](https://research.csiro.au/tsblog)
-- [freenode IRC: #sel4](http://webchat.freenode.net/?channels=#sel4)
