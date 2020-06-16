@@ -79,7 +79,7 @@ generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplat
 JEKYLL_ENV:=development
 DOCKER_IMG:=docs_builder
 docker_serve: docker_build
-	docker run --network=host -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c '$(MAKE) serve JEKYLL_ENV=$(JEKYLL_ENV)'
+	docker run --network=host -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c 'make serve JEKYLL_ENV=$(JEKYLL_ENV)'
 
 docker_build:
 	docker build -t $(DOCKER_IMG) tools/
