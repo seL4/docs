@@ -21,6 +21,7 @@ You can nominate someone for a role by emailing the chair of the TSC.
 
    Current members are:
 
+   - Christopher Guikema, Dornerworks
    - Axel Heider, Hensoldt Cyber
    - Jesse Millwood, Dornerworks
    - Yanyan Shen, Cog Systems
