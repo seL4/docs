@@ -118,7 +118,7 @@ Running test BIND0003 (Test IPC ordering 1) bound tcb waits on bound notificatio
 Test BIND0003 passed
 ...
 ```
-To exit qemu, use `Ctrl-AX`. The text string` All is well in the universe` indicates a successful build.
+To exit qemu, press `Ctrl-a`, then `x`. The text string` All is well in the universe` indicates a successful build.
 
 We can further configure the test suite build to print out JUnit-style XML. Thus enabling the output to be parsed by various tools.
 To do so, edit the build settings through `ccmake`, enabling the `Sel4testAllowSettingsOverride` and `LibSel4TestPrintXML` variables.
