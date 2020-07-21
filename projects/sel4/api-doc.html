@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-07-13 13:36:26 +1000 -->
+<!-- Page last generated 2020-07-21 22:22:31 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -878,6 +878,24 @@
 <p><strong>Return value:</strong> This method does not return anything.</p>
 
 <p><strong>Description:</strong> Reset the kernel’s timing information data (start time and utilisation) for a specific thread.</p>
+
+<h3 id="dump-all-threads-utilisation">Dump All Threads Utilisation</h3>
+<p><code class="highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_BenchmarkDumpAllThreadsUtilisation</code></p>
+
+<p>Print the current accumulated cycle count for every thread on the current node.</p>
+
+<p><strong>Return value:</strong> This method does not return anything.</p>
+
+<p><strong>Description:</strong> Uses kernel’s printf to print number of cycles on each line in the following format: thread_name,thread_cycles</p>
+
+<h3 id="reset-all-threads-utilisation">Reset All Threads Utilisation</h3>
+<p><code class="highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_BenchmarkResetAllThreadsUtilisation</code></p>
+
+<p>Reset the accumulated cycle count for every thread on the current node.</p>
+
+<p><strong>Return value:</strong> This method does not return anything.</p>
+
+<p><strong>Description:</strong> Reset the cycle count for each thread to 0.</p>
 
 <h3 id="x86-system-calls">X86 System Calls</h3>
 
@@ -5493,6 +5511,8 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#flush-l1-caches">Flush L1 Caches</a></li>
 <li class="toc-entry toc-h3"><a href="#get-thread-utilisation">Get Thread Utilisation</a></li>
 <li class="toc-entry toc-h3"><a href="#reset-thread-utilisation">Reset Thread Utilisation</a></li>
+<li class="toc-entry toc-h3"><a href="#dump-all-threads-utilisation">Dump All Threads Utilisation</a></li>
+<li class="toc-entry toc-h3"><a href="#reset-all-threads-utilisation">Reset All Threads Utilisation</a></li>
 <li class="toc-entry toc-h3"><a href="#x86-system-calls">X86 System Calls</a></li>
 <li class="toc-entry toc-h3"><a href="#vmenter">VMEnter</a></li>
 </ul>
@@ -5822,7 +5842,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Mon Jul 13 13:33:56 2020 +1000 acb718e
+            Site last updated: Tue Jul 21 22:19:58 2020 +1000 507e170
           </li>
           <li>
                 Page last updated: Mon Feb 17 13:52:47 2020 +1100 ad94a47
