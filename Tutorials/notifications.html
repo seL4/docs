@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-07-22 02:03:15 +1000 -->
+<!-- Page last generated 2020-08-10 11:16:57 +1000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -361,17 +361,9 @@ mapping. We provide code below that sets up the shared page between producer 1 a
 <p><strong>Exercise</strong> Understand the above code, and create a second shared page between <code class="highlighter-rouge">producer_2</code> and <code class="highlighter-rouge">consumer</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO share buf2_frame_cap with producer_2</span>
-    <span class="cm">/* set up shared memory for producer 2 */</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">mapping_2</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> 
-                            <span class="n">cnode</span><span class="p">,</span> <span class="n">buf2_frame_cap</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> <span class="n">seL4_AllRights</span><span class="p">);</span>
-    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to copy cap"</span><span class="p">);</span>
-   <span class="cm">/* now do the mapping */</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_ARCH_Page_Map</span><span class="p">(</span><span class="n">mapping_2</span><span class="p">,</span> <span class="n">producer_2_vspace</span><span class="p">,</span> <span class="n">BUF_VADDR</span><span class="p">,</span>
-                               <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="n">seL4_ARCH_Default_VMAttributes</span><span class="p">);</span>
-    <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to map frame"</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>On success, the fault output should no longer occur.</p>
+<p>Whether this is successful will be visible after the next exercise when the consumers access their buffers. If the shared page setup for producer 2 is not correct, it will fail with a vm fault.</p>
 
 <h3 id="signal-the-producers-to-go">Signal the producers to go</h3>
 
@@ -381,8 +373,6 @@ to be written to.</p>
 <p><strong>Exercise</strong> signal both producers via the <code class="highlighter-rouge">buf1_empty</code> and <code class="highlighter-rouge">buf2_empty</code> notification objects.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO signal both producers</span>
-    <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
-    <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf2_empty</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h3 id="differentiate-signals">Differentiate signals</h3>
@@ -407,16 +397,6 @@ which of the producers (it may be both) has produced data.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO, use the badge to check which producer has signalled you, and signal it back. Note that you </span>
     <span class="c1">// may recieve more than 1 signal at a time.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b01</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">assert</span><span class="p">(</span><span class="o">*</span><span class="n">buf1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
-            <span class="o">*</span><span class="n">buf1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf1_empty</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">&amp;</span> <span class="mi">0</span><span class="n">b10</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">assert</span><span class="p">(</span><span class="o">*</span><span class="n">buf2</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
-            <span class="o">*</span><span class="n">buf2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">seL4_Signal</span><span class="p">(</span><span class="n">buf2_empty</span><span class="p">);</span>
-        <span class="p">}</span>
 </code></pre></div></div>
 
 <p>At this point, you should see signals from both producers being processed, and the final <code class="highlighter-rouge">Success!</code> message printed.</p>
@@ -472,7 +452,7 @@ to become more familiar with IPC.</p>
         </li>
         
           <li>
-            Site last updated: Wed Jul 22 02:00:26 2020 +1000 c76cf9e
+            Site last updated: Mon Aug 10 11:09:01 2020 +1000 84aefb8
           </li>
           <li>
                 Page last updated: Mon Oct 15 17:13:12 2018 +1100 83f68de
