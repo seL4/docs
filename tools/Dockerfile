@@ -14,7 +14,7 @@ RUN apt-get update -q \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
     && pip3 install setuptools \
-    && pip3 install aenum sortedcontainers pyyaml pyaml \
+    && pip3 install aenum sortedcontainers pyyaml pyaml future \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Init bundle dependencies
