@@ -23,3 +23,6 @@ RUN git clone https://github.com/SEL4PROJ/docs.git \
     && bundle install \
     && cd / \
     && rm -rf docs
+
+# Jekyll will be serving on 127.0.0.1:4000
+EXPOSE 4000

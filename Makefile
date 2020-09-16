@@ -79,13 +79,15 @@ generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplat
 JEKYLL_ENV:=development
 DOCKER_IMG:=docs_builder
 docker_serve: docker_build
-	docker run --network=host -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c 'make serve JEKYLL_ENV=$(JEKYLL_ENV)'
+	docker run -p 4000:4000 -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c 'make serve JEKYLL_ENV=$(JEKYLL_ENV)'
 
 docker_build:
 	docker build -t $(DOCKER_IMG) tools/
 
+# --host 0.0.0.0 serves on all interfaces, so that docker can export
+# the connection; also works locally
 serve: build
-	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
+	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve --host 0.0.0.0
 
 build: generate_api ruby_deps $(REPOSITORIES)
 	$(MAKE) tutorials
