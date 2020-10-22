@@ -15,7 +15,7 @@ The following instructions describe how to set up the required dependencies on y
 
 ## Get Google's Repo tool
 
-The primary way of obtaining and managing seL4 project source is through the use of Google's repo tool. To get repo, follow the instructions described in the section “Installing Repo” [here](http://source.android.com/source/downloading.html#installing-repo).
+The primary way of obtaining and managing seL4 project source is through the use of Google's repo tool. To get repo, follow the instructions described in the section “Installing Repo” [here](https://source.android.com/setup/develop#installing-repo).
 
 See the [RepoCheatsheet](repo-cheatsheet) page for a quick explanation of how we use Repo.
 
