@@ -43,13 +43,12 @@ You will need to add `libsel4/sel4_plat_include/<platform>/sel4/plat/api/constan
 ### CMake-build system
 
 You will need to modify the build system in two places. Firstly in the kernel's platform folder, you define `kernel/src/plat/<platform>/config.cmake`, again you can look at other platforms for examples.
-Secondly, you will need to add 'KernelPlatform' to the cmake and elf-loader tools. You can do this by editing 
-`tools/cmake-tool/helpers/application_settings.cmake` and `tools/elfloader-tool/CMakeLists.txt`.
+Secondly, you will need to add 'KernelPlatform' to the cmake tool. You can do this by editing 
+`tools/cmake-tool/helpers/application_settings.cmake`.  You may also have to edit `tools/seL4/elfloader-tool/CMakeLists.txt`.
 
 ### ELF-loader
 
-You will need to add directories and files `tools/elfloader-tool/src/plat/<platform>/sys_fputc.c` and 
-`tools/elfloader-tool/include/plat/<platform>/platform.h` which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.
+The Elfloader uses the driver framework, see the`tools/seL4/elfloader/README.md`, you may need to add a new driver for the UART used for debug output.  Generally though the standard will work 'out of the box'
 
 ## seL4 test
 
