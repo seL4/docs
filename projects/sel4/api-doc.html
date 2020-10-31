@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-10-22 20:56:34 +1100 -->
+<!-- Page last generated 2020-10-31 19:57:05 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -4122,6 +4122,203 @@ single-stepping.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.</p>
+<h3 id="sel4_arm_cb">seL4_ARM_CB</h3>
+
+<h4 id="assignvspace">AssignVspace</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_CB_AssignVspace</code></p>
+
+<p>Assigning a vspace to a context bank.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CB capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">vspace</code></td>
+      <td>The VSpace that is being assigned to a context bank. Must already has an assigned ASID.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="cbclearfault">CBClearFault</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_CB_CBClearFault</code></p>
+
+<p>Clear the fault status of the context bank.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CB capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="cbgetfault">CBGetFault</h4>
+<p><code class="highlighter-rouge">static inline seL4_ARM_CB_CBGetFault_t seL4_ARM_CB_CBGetFault</code></p>
+
+<p>Get the fault status of the context bank.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CB capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_ARM_SMMU_CB_GetFault_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word status</code>, which holds the fault status of the context bank,                 <code class="highlighter-rouge">seL4_Word address</code>, which holds the faulty address,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<h4 id="tlbinvalidate">TLBInvalidate</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_CB_TLBInvalidate</code></p>
+
+<p>Invalidating TLB entries used by the current ASID in this context bank.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CB capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="unassignvspace">UnassignVspace</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_CB_UnassignVspace</code></p>
+
+<p>Unassigning a vspace to a context bank.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CB capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h3 id="sel4_arm_cbcontrol">seL4_ARM_CBControl</h3>
+
+<h4 id="getcb">GetCB</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_CBControl_GetCB</code></p>
+
+<p>Create a CB capability.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CBControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CBControl capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">cb</code></td>
+      <td>The CB that you want this capability to manage.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">root</code></td>
+      <td>CPTR to the CNode that forms the root of the destination CSpace. Must be at a depth equivalent to the wordsize.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">index</code></td>
+      <td>CPTR to the destination slot. Resolved from the root of the destination CSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="highlighter-rouge">depth</code></td>
+      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="tlbinvalidateall">TLBInvalidateAll</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_CBControl_TLBInvalidateAll</code></p>
+
+<p>Invalidate all TLB entries.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_CBControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A CBControl capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
 <h3 id="sel4_arm_iopagetable">seL4_ARM_IOPageTable</h3>
 
 <h4 id="map-8">Map</h4>
@@ -4532,6 +4729,155 @@ serviced.</p>
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">Page Table</code> from its containing <code class="highlighter-rouge">Page Directory</code>.</p>
+<h3 id="sel4_arm_sid">seL4_ARM_SID</h3>
+
+<h4 id="bindcb">BindCB</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_SID_BindCB</code></p>
+
+<p>Binding a context bank to a stream ID.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SID</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A SID capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">cb</code></td>
+      <td>The CB that is being binded to a stream ID. Must already has an assigned vspace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="unbindcb">UnbindCB</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_SID_UnbindCB</code></p>
+
+<p>Unbinding a context bank from a stream ID.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SID</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A SID capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h3 id="sel4_arm_sidcontrol">seL4_ARM_SIDControl</h3>
+
+<h4 id="clearfault">ClearFault</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_SIDControl_ClearFault</code></p>
+
+<p>Clear the fault status of the SMMU.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SIDControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A SIDControl capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<h4 id="getfault">GetFault</h4>
+<p><code class="highlighter-rouge">static inline seL4_ARM_SIDControl_GetFault_t seL4_ARM_SIDControl_GetFault</code></p>
+
+<p>Get the fault status of the SMMU.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SIDControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A SIDControl capability. This gives you the authority to make this call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_ARM_SMMU_GetFault_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word status</code>, which holds the global fault status of the SMMU,                 <code class="highlighter-rouge">seL4_Word syndrome_0</code>, which holds the global fault syndrome 0 of the SMMU,                 <code class="highlighter-rouge">seL4_Word syndrome_1</code>, which holds the global fault syndrome 1 of the SMMU,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<h4 id="getsid">GetSID</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_SIDControl_GetSID</code></p>
+
+<p>Create a SID capability.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SIDControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>A SIDControl capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">sid</code></td>
+      <td>The SID that you want this capability to manage.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">root</code></td>
+      <td>CPTR to the CNode that forms the root of the destination CSpace. Must be at a depth equivalent to the wordsize.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">index</code></td>
+      <td>CPTR to the destination slot. Resolved from the root of the destination CSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="highlighter-rouge">depth</code></td>
+      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
 <h3 id="sel4_arm_vcpu">seL4_ARM_VCPU</h3>
 
 <h4 id="acknowledge-virtual-ppi-irq">Acknowledge Virtual PPI IRQ</h4>
@@ -5714,6 +6060,21 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#asid-pool-assign">Asid Pool Assign</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_cb">seL4_ARM_CB</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#assignvspace">AssignVspace</a></li>
+<li class="toc-entry toc-h4"><a href="#cbclearfault">CBClearFault</a></li>
+<li class="toc-entry toc-h4"><a href="#cbgetfault">CBGetFault</a></li>
+<li class="toc-entry toc-h4"><a href="#tlbinvalidate">TLBInvalidate</a></li>
+<li class="toc-entry toc-h4"><a href="#unassignvspace">UnassignVspace</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_cbcontrol">seL4_ARM_CBControl</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#getcb">GetCB</a></li>
+<li class="toc-entry toc-h4"><a href="#tlbinvalidateall">TLBInvalidateAll</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_iopagetable">seL4_ARM_IOPageTable</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#map-8">Map</a></li>
@@ -5736,6 +6097,19 @@ serviced.</p>
 <ul>
 <li class="toc-entry toc-h4"><a href="#map-10">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-10">Unmap</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_sid">seL4_ARM_SID</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#bindcb">BindCB</a></li>
+<li class="toc-entry toc-h4"><a href="#unbindcb">UnbindCB</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_sidcontrol">seL4_ARM_SIDControl</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#clearfault">ClearFault</a></li>
+<li class="toc-entry toc-h4"><a href="#getfault">GetFault</a></li>
+<li class="toc-entry toc-h4"><a href="#getsid">GetSID</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_vcpu">seL4_ARM_VCPU</a>
@@ -5842,7 +6216,7 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Thu Oct 22 20:53:48 2020 +1100 c3d9b76
+            Site last updated: Sat Oct 31 19:51:37 2020 +1100 5e3aab4
           </li>
           <li>
                 Page last updated: Mon Feb 17 13:52:47 2020 +1100 ad94a47
