@@ -72,7 +72,7 @@ status and upcoming features.
 | Platform | iMX.6 (e.g. Sabre Lite)
 | Floating-point support | No
 | Hypervisor mode | No
-| **Verified properties** | functional correctness, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code)
+| **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code)
 
 ## ARM\_HYP
 
@@ -81,7 +81,7 @@ Architecture | ARMv7
 Platform | Tegra TK1
 Floating-point support | No
 Hypervisor mode | Yes
-**Verified properties** | functional correctness
+**Verified properties** | functional correctness, incl fast path
 
 ## X64
 
@@ -89,7 +89,7 @@ File | `X64_verified.cmake`
 Architecture/Platform | x86 64-bit
 Floating-point support | Yes
 Hypervisor mode | No
-**Verified properties** | functional correctness
+**Verified properties** | functional correctness, no fast path
 
 ## RISCV64
 
@@ -98,4 +98,4 @@ Architecture | RISC-V 64-bit
 Platform | HiFive
 Floating-point support | No
 Hypervisor mode | No
-**Verified properties** | functional correctness
+**Verified properties** | functional correctness; verification of fast path in progress
