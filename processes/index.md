@@ -8,6 +8,8 @@ Documentation relating to development processes and how to get help or get invol
 can be found on this page. Note that these are generalisations and may be different for a
 particular project/repository.
 
+The processes described here are managed by the [seL4 Foundation](https://sel4.systems/Foundation/).
+
 ## Development processes
 
 Developing trustworthy systems requires identifying critical, trusted, system components and ensuring that they:
@@ -109,7 +111,7 @@ We use the following communication mechanisms:
 - [seL4 Discourse (seL4um)](https://sel4.discourse.group/): Forum for seL4. Attempting to build up useful knowledge-base.
 - [seL4 Mattermost](https://mattermost.ts.data61.csiro.au/sel4-external/). seL4 chat platform (Signup link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
 - GitHub issues: Reporting issues or creating pull requests on repositories located at [seL4](https://github.com/seL4) or [seL4Proj](https://github.com/seL4proj) organisations.
-- [seL4 Jira](https://sel4.atlassian.net): Currently for reading and creating [RFCs](rfc-process)
+- [seL4 Jira](https://sel4.atlassian.net): for issue tracking on seL4, CAmkES, and formal verification, and for reading and creating [RFCs](rfc-process)
 - [Websites](websites): Websites containing information about seL4.
 
 
