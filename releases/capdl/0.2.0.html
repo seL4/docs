@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Roles | seL4 docs</title>
+    <title>capdl-0.2.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -69,20 +69,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/processes/">
-              <span property="name"><b>Processes</b></span>
-            </a>
-            <meta property="position" content="2" />
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Roles</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">capdl-0.2.0</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -138,81 +127,141 @@
 
 
   </div>
-  <div class="col-sm-8 col-md-9 col-lg-8 main">
-    
-    <div class="content">
-      <h1 id="roles">Roles</h1>
+  <div class="content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="capdl-version-capdl-020-release">capDL Version capdl-0.2.0 Release</h1>
 
-<p>The <a href="https://sel4.systems/Foundation/About/">seL4 Foundation</a> defines the following roles for seL4 development.</p>
+<p>Announcing the release of <code class="highlighter-rouge">capdl-0.2.0</code> with the following changes:</p>
 
-<p>Apart from Contributor, which anyone can be, you can become a member of any of
-these roles by decision (vote) of the <a href="https://sel4.systems/Foundation/TSC/">Technical Steering Committee</a> (TSC).
-You can nominate someone for a role by emailing the chair of the TSC.</p>
+<p>capdl-0.2.0 2020-10-26
+Using seL4 version 12.0.0</p>
+
+<h2 id="changes">Changes</h2>
 
 <ul>
   <li>
-    <p><strong>Contributor</strong>:
- Anyone who contributes code, documentation, issues, etc via pull requests
- or otherwise.</p>
+    <p>Convert to SPDX license tags. This includes marking all documentation files CC-BY-SA-4.0.</p>
   </li>
-  <li>
-    <p><strong>Reviewer</strong>:
- People with technical experience and interest to approve reviews on
- pull requests, be assigned and maintain issues, but without full
- commit rights.  They would typically be active Contributors already,
- but exceptions are possible. They become members of the seL4 GitHub
- org.</p>
-
-    <p>The role does not confer membership or voting rights in the TSC.</p>
-
-    <p>Current members are:</p>
-
+  <li>Build system:
     <ul>
-      <li>Christopher Guikema, Dornerworks</li>
-      <li>Axel Heider, Hensoldt Cyber</li>
-      <li>Jesse Millwood, Dornerworks</li>
-      <li>Yanyan Shen, Cog Systems</li>
+      <li>Support <code class="highlighter-rouge">CMakeForegroundComplexCommands</code>. This enables long-running build steps like Haskell installation to
+directly print to the console.</li>
+      <li>Make PLATFORM_SIFT agnostic of the build system directory layout</li>
+      <li>Save the binary artifacts for the capDL-tool in an out-of-build-tree directory, this will not rebuild in future if
+it can find a previously built artifact.</li>
+      <li>Migrate scripts to python3</li>
     </ul>
   </li>
-  <li>
-    <p><strong>Committer</strong>:
- People with direct write/push access to the repositories in the
- seL4 GitHub org. These are the people that can merge pull requests.</p>
-
-    <p>The role does not automatically confer membership or voting rights
- in the TSC.</p>
-
-    <p>Current members are the members of the <a href="https://sel4.systems/Foundation/TSC/">TSC</a>.</p>
-  </li>
-  <li>
-    <p><strong>SysAdmin</strong>
- People with admin access to the seL4 GitHub org and repositories
- for purely administrative purposes, e.g. maintenance of CI
- infrastructure and repo membership/access control.</p>
-
-    <p>The role does not confer membership or voting rights in the TSC.</p>
-
-    <p>Current members are:</p>
-
-    <ul>
-      <li>Peter Chubb, CSIRO’s Data61</li>
-      <li>Luke Mondy, CSIRO’s Data61</li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>TSC member</strong>:
- a member of the <a href="https://sel4.systems/Foundation/TSC/">Technical Steering Committee</a> of the seL4
- Foundation. This is the body that decides on the technical direction
- of the project, sets processes, guidelines, etc. Meetings of the TSC
- are public and will be announced on the seL4 developer mailing list.</p>
-
-    <p>See <a href="https://sel4.systems/Foundation/TSC/">the TSC page</a> for current members.</p>
-  </li>
+  <li>Add <code class="highlighter-rouge">seL4_BadgeBits</code> constant and update python-capdl-tool to directly query the object_sizes dictionary. This allows
+for templates to use badge sizes.</li>
+  <li>Add support for Arm smmu v2.</li>
+  <li>Add support for Arm GetTrigger and GetTriggerCore seL4 invocations. This enables specs to correctly specify interrupt
+trigger mode and core affinities on Arm.</li>
+  <li>Add TCB Resume field to capDL object and support raw TCB object creation.</li>
+  <li>Add GitHub actions scripts. These scripts replicate internal CI checks directly on GitHub</li>
 </ul>
 
+<h3 id="capdl-tool">capDL-tool</h3>
 
-    </div>
+<ul>
+  <li>rework validObjCap and check TCB slots, which allows vcpus for all architectures.</li>
+  <li>convert CapDL language specification to Markdown.</li>
+</ul>
+
+<h3 id="capdl-loader-app">Capdl-loader-app</h3>
+
+<ul>
+  <li>Improve log output.</li>
+  <li>Initialise libc in debug builds.</li>
+  <li>Add check to only flush and invalidate kernel memory regions in capdl loader on Arm. Add platform_info header with
+memory window.</li>
+  <li>Add vcpu support for aarch64.</li>
+  <li>Handle IRQ binding to badged notifications properly: If an irq is bound to a notification with a non-zero badge, a
+badged capability is minted and used.  Previously, the IRQ was bound to the unbadged notification.</li>
+  <li>Track number of used untypeds during object allocation and fail more gracefully if they run out.</li>
+  <li>Improve debugging printouts.</li>
+  <li>Fix issue where large DTB images inside BootInfo would overlap reserved memory address used to initialise frames.</li>
+  <li>Remove CONFIG_CAPDL_LOADER_ALLOW_NO_CSPACE config option as it has been unused for a while.</li>
+</ul>
+
+<h3 id="capdl-linker">Capdl-linker:</h3>
+
+<ul>
+  <li>Optimize spec generation performance:
+    <ul>
+      <li>Sort elf symbols by their vaddr.</li>
+      <li>Replace linear search with binary when looking for virtual addresses.</li>
+    </ul>
+  </li>
+  <li>Fix Python syntax warnings when <code class="highlighter-rouge">capdl_linker.py</code> is invoked.</li>
+</ul>
+
+<h2 id="upgrade-notes">Upgrade Notes</h2>
+
+<h1 id="full-changelog">Full changelog</h1>
+<p>Use <code class="highlighter-rouge">git log 0.1.0..capdl-0.2.0</code> in
+<a href="https://github.com/seL4/capdl">https://github.com/seL4/capdl</a></p>
+
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="https://github.com/seL4/capdl/tree/master/capDL-tool/doc">documentation</a>
+or ask on the mailing list!</p>
+
+
   </div>
+
+
+
+
+
+
+
+  
+  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+    <ul class="section-nav">
+    	<h2>  </h2> 
+        <li>
+          
+          <a style="" class="" href="/projects//">
+            Documentation homepage
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+    </ul>
+
+</div>
+
+
 </div>
 
     </main>
@@ -243,15 +292,14 @@ You can nominate someone for a role by emailing the chair of the TSC.</p>
             Site last updated: Fri Nov 6 17:18:34 2020 +1100 f519eca
           </li>
           <li>
-                Page last updated: Wed Jun 17 14:52:35 2020 +0800 9ea0829
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="https://github.com/SEL4PROJ/docs/blob/master/processes/roles.md">View page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/blob/master/_releases/capdl/0.2.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/SEL4PROJ/docs/edit/master/processes/roles.md">Edit page on GitHub</a>
+      <a href="https://github.com/SEL4PROJ/docs/edit/master/_releases/capdl/0.2.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
