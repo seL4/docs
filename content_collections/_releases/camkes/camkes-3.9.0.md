@@ -1,6 +1,7 @@
 ---
 version: camkes-3.9.0
 title: camkes-3.9.0
+project: camkes
 ---
 # CAmkES Version camkes-3.9.0 Release
 
