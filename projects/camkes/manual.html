@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-11-18 13:06:39 +1100 -->
+<!-- Page last generated 2020-11-18 15:42:44 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -2161,6 +2161,44 @@ in the glue code with the same name as the attribute.</p>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 </code></pre></div></div>
 
+<h4 id="attributes-conversion-to-literal">Attribute’s conversion to literal</h4>
+
+<p>Unfortunately, the <code class="highlighter-rouge">C</code> language (in contrast to C++) does not support using
+<code class="highlighter-rouge">lvalues</code> as literals (e.g. when declaring an array), even if declared as const,
+so we need to introduce a “mechanism” for converting CAmkES attributes to
+literals.</p>
+
+<p>The <code class="highlighter-rouge">CAMKES_CONST_ATTR</code> macro has been introduced for that purpose.</p>
+
+<p>Actually, the macro does not really convert arbitrary variables, but rather
+CAmkES declares a const variable and also adds a respective macro to the code,
+which is then used for that purpose.</p>
+
+<p>Usage example is presented below:</p>
+
+<pre><code class="language-C">/* main.camkes */
+assembly {
+    composition {
+        component FOO foo;
+    }
+    configuration {
+        foo.lenData  = 16;
+    }
+}
+
+/* Foo.c */
+const int foo[CAMKES_CONST_ATTR(lenData)] = { 0 };
+
+int run()
+{
+#if CAMKES_CONST_ATTR(lenData) &lt; 0xF0
+    return 0;
+#else
+    return 1;
+#endif
+}
+</code></pre>
+
 <h3 id="hardware-components">Hardware Components</h3>
 
 <p>A hardware component represents an interface to hardware in the form of a component.
@@ -3876,7 +3914,11 @@ script:</p>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#error-handling">Error Handling</a></li>
-<li class="toc-entry toc-h3"><a href="#custom-attributes">Custom Attributes</a></li>
+<li class="toc-entry toc-h3"><a href="#custom-attributes">Custom Attributes</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#attributes-conversion-to-literal">Attribute’s conversion to literal</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#hardware-components">Hardware Components</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#configuration">Configuration</a>
@@ -4202,7 +4244,7 @@ script:</p>
         </li>
         
           <li>
-            Site last updated: Wed Nov 18 13:03:43 2020 +1100 6204ec0
+            Site last updated: Wed Nov 18 14:47:56 2020 +1100 02c28de
           </li>
           <li>
                 Page last updated: Tue Apr 7 19:55:23 2020 +1000 0f0b4bf
