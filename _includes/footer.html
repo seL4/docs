@@ -32,9 +32,20 @@ This file was inspired by the file of the same name in the minima template.
       </ul>
     </div>
     <div class="col-md-2">
-      <a href="{{site.git_repo | append: '/blob/master/' | append: page.path}}">View page on GitHub</a>
+{% comment %}
+Collection pages set their absolute path variable relative to the site.collections_dir property.
+To provide a URL to this page in the GitHub repository, we need to amend the path.
+{% endcomment %}
+{% capture src_path %}
+  {% if page.collection %}
+{{site.collections_dir}}/{{page.path}}
+  {% else %}
+{{page.path}}
+  {% endif %}
+{% endcapture %}
+      <a href="{{site.git_repo | append: '/blob/master/' | append: src_path}}">View page on GitHub</a>
       <br />
-      <a href="{{site.git_repo | append: '/edit/master/' | append: page.path}}">Edit page on GitHub</a>
+      <a href="{{site.git_repo | append: '/edit/master/' | append: src_path}}">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
