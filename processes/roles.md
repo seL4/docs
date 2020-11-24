@@ -21,10 +21,11 @@ You can nominate someone for a role by emailing the chair of the TSC.
 
    Current members are:
 
-   - Christopher Guikema, Dornerworks
-   - Axel Heider, Hensoldt Cyber
-   - Jesse Millwood, Dornerworks
-   - Yanyan Shen, Cog Systems
+  - Christopher Guikema, Dornerworks
+  - Axel Heider, Hensoldt Cyber
+  - Jesse Millwood, Dornerworks
+  - Yanyan Shen, Cog Systems
+  - Benno Leslie, Breakaway Consulting
 
   &nbsp;
 
@@ -35,7 +36,9 @@ You can nominate someone for a role by emailing the chair of the TSC.
     The role does not automatically confer membership or voting rights
     in the TSC.
 
-   Current members are the members of the [TSC][2].
+    Current members are the members of the Committers team on the seL4 GitHub
+    organisation. These include the TSC members and the kernel engineers as well
+    as the verification engineers of the Trustworthy Systems group.
 
 - **SysAdmin**
     People with admin access to the seL4 GitHub org and repositories
