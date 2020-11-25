@@ -37,11 +37,11 @@ Collection pages set their absolute path variable relative to the site.collectio
 To provide a URL to this page in the GitHub repository, we need to amend the path.
 {% endcomment %}
 {% capture src_path %}
-  {% if page.collection %}
+{% if page.collection %}
 {{site.collections_dir}}/{{page.path}}
-  {% else %}
+{% else %}
 {{page.path}}
-  {% endif %}
+{% endif %}
 {% endcapture %}
       <a href="{{site.git_repo | append: '/blob/master/' | append: src_path}}">View page on GitHub</a>
       <br />
