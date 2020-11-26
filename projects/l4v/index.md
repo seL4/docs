@@ -27,6 +27,6 @@ smaller contributions. Stay tuned for updates and feel free to raise pull
 requests to add more information yourself!
 
 [1]: http://isabelle.in.tum.de
-[2]: https://github.com/seL4/l4v/blob/master/README.md
-[3]: http://proofcraft.org/blog/proof-engineer-reading.html
+[2]: http://proofcraft.org/blog/proof-engineer-reading.html
+[3]: https://github.com/seL4/l4v/blob/master/README.md
 [4]: https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml
