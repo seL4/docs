@@ -11,6 +11,8 @@ Status: Unverified
 Contrib: Data61
 Maintained: Data61
 cpu: Rocket
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # Rocketchip FPGA mapped to Zynq ZC706
 

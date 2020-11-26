@@ -5,6 +5,8 @@ redirect_from:
   - /camkes_release/Camkes_3.6.0.html
 title: camkes-3.6.0
 project: camkes
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # Camkes Version camkes-3.6.0 Release
 

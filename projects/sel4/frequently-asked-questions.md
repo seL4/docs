@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /FrequentlyAskedQuestions
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Frequently Asked Questions on seL4

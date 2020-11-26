@@ -1,6 +1,8 @@
 ---
 layout: home
 title: seL4 Docs
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
  <div class="flex-grid">
   <div class="col">

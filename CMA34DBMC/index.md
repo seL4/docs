@@ -1,3 +1,8 @@
+---
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+---
+
 The CMA34D is an embedded i7 board. It needs 12V and 5V supplies. It
 does not have a BMC (Base Management Controller) so cannot be controlled
 remotely.

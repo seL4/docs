@@ -1,3 +1,8 @@
+<!--
+    Copyright 2020 seL4 Project a Series of LF Projects, LLC.
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # seL4 Documentation site.
 
 These are the sources for the seL4 Documentation site located at <https://docs.sel4.systems>.
@@ -50,7 +55,7 @@ make serve
 #   Server address: http://127.0.0.1:4000/
 #   Server running... press ctrl-c to stop.
 ```
-Or with docker: 
+Or with docker:
 ```
 make docker_build
 make docker_serve

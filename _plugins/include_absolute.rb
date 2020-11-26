@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Copyright 2019 Tan Nhu, Maarten Brakkee
 #
 # Permission is hereby granted, free of charge, to any person obtaining

@@ -1,6 +1,8 @@
 ---
 redirect_from:
   - /PortingSeL4
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Porting seL4 to a new platform
@@ -16,7 +18,7 @@ Once you get U-boot up and running it is a good idea (if the platform is support
 Linux image onto the dev board. This way you can find the correct address to load the image into memory.
 This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.
 
-Once you have found the correct address to load, you can use the command `bootcmd="tftpboot 0x20000000 sel4_image && go 0x20000000"` 
+Once you have found the correct address to load, you can use the command `bootcmd="tftpboot 0x20000000 sel4_image && go 0x20000000"`
 (using 0x20000000 as an example) followed by `saveenv` to save the starting address onto the boards flash memory.
 You will also need to set the 'ipaddr' and 'serverip' details can be found in the link above.
 
@@ -43,21 +45,21 @@ You will need to add `libsel4/sel4_plat_include/<platform>/sel4/plat/api/constan
 ### CMake-build system
 
 You will need to modify the build system in two places. Firstly in the kernel's platform folder, you define `kernel/src/plat/<platform>/config.cmake`, again you can look at other platforms for examples.
-Secondly, you will need to add 'KernelPlatform' to the cmake and elf-loader tools. You can do this by editing 
+Secondly, you will need to add 'KernelPlatform' to the cmake and elf-loader tools. You can do this by editing
 `tools/cmake-tool/helpers/application_settings.cmake` and `tools/elfloader-tool/CMakeLists.txt`.
 
 ### ELF-loader
 
-You will need to add directories and files `tools/elfloader-tool/src/plat/<platform>/sys_fputc.c` and 
+You will need to add directories and files `tools/elfloader-tool/src/plat/<platform>/sys_fputc.c` and
 `tools/elfloader-tool/include/plat/<platform>/platform.h` which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.
 
 ## seL4 test
 
 seL4test needs user level serial and timer drivers to run. Add these drivers and the following files to libplatsupport in
-order to get the test suite running. The directory structure and files will look something like the following. Some of these 
-files may not have anything in them but include them anyway to keep the build system happy. 
+order to get the test suite running. The directory structure and files will look something like the following. Some of these
+files may not have anything in them but include them anyway to keep the build system happy.
 
-Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have it's 
+Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have it's
 own unique programming sequence and can sometimes be a bit tricky.
 
 You can find the physical addresses and interrupt numbers for each device in its platform reference manual and copy them into the right places.
@@ -77,7 +79,7 @@ You can find the physical addresses and interrupt numbers for each device in its
 
 ### Gotchas
 
-Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is 
+Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is
 to shorten memory regions in DTS memory nodes to check you are touching the correct area.
 
 Once you have succeeded with your port and have seL4 test passing in release mode, you can add an entry to the CHANGES file describing the platform you added and submit a pull request on the seL4 github.

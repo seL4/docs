@@ -5,6 +5,8 @@ toc: true
 permalink: /projects/sel4/status.html
 redirect_from:
   - status/sel4.html
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # seL4 Project Status
