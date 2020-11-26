@@ -4,6 +4,8 @@ title: seL4 releases
 permalink: /releases/sel4
 redirect_from:
   - /sel4_release
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # seL4 releases

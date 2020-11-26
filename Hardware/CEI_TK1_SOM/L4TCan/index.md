@@ -1,3 +1,8 @@
+---
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+---
+
 # Using CAN on L4T through an MCP251X
 
 <img style="width: 25%" src="front.jpg" alt="Front view of TK1-Tower" />

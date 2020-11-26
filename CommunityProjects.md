@@ -1,4 +1,10 @@
+---
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+---
+
 # Community Projects
+
 This page collects seL4-based projects. If you know of a project that
 you'd like to be listed here, add it.
 

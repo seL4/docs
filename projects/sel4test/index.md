@@ -4,6 +4,8 @@ redirect_from:
   - /seL4Test
 layout: project
 project: sel4test
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # seL4Test
@@ -13,7 +15,7 @@ project: sel4test
 First make sure you have
 [set up your machine](/HostDependencies#sel4-build-dependencies).
 
-## Getting the Code 
+## Getting the Code
 
 ```bash
 mkdir sel4test

@@ -1,6 +1,8 @@
 ---
 project: camkes-arm-vm
 title: "camkes-3.8.x-compatible"
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # Updates to camkes-arm-vm from camkes-3.7.x to camkes-3.8.0
 

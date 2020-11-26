@@ -4,6 +4,8 @@ redirect_from:
   - /VM/CAmkESX86VM
 layout: project
 project: camkes-vm
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # CAmkES x86 VM

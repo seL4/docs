@@ -1,3 +1,6 @@
+# Copyright 2018 Thomes Darde
+# SPDX-License-Identifier: MIT
+
 # Obtained from:
 # https://github.com/guard/listen/wiki/Duplicate-directory-errors
 require 'listen/record/symlink_detector'

@@ -5,6 +5,8 @@ redirect_from:
   - /camkes_release/CAmkES_2.1.0.html
 title: camkes-2.1.0
 project: camkes
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # CAmkES 2.1.0 Release Notes
 

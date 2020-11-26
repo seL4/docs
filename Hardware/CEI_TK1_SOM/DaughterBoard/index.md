@@ -1,3 +1,8 @@
+---
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+---
+
 # The TK1-SOM Daughterboard
  The TK1-SOM Daughterboard is an
 open-hardware daughterboard designed by the Trustworthy Systems group at

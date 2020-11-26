@@ -12,6 +12,8 @@ cpu: Cortex-A57 Quad
 Status: Unverified
 Contrib: Data61
 Maintained: Data61
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # Jetson TX1
  The Jetson TX1 is a multimedia and DSP board with a highly

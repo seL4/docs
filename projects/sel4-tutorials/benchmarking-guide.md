@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /BenchmarkingGuide
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Benchmarking seL4
@@ -122,8 +124,8 @@ Using tracepoints adds a small amount of overhead to the kernel. To measure
 this overhead, use a pair of nested tracepoints:
 ```cpp
 TRACE_POINT_START(0);
-TRACE_POINT_START(1); 
-TRACE_POINT_STOP(1); 
+TRACE_POINT_START(1);
+TRACE_POINT_STOP(1);
 TRACE_POINT_STOP(0);
 ```
 The outer tracepoints will measure the time taken to start and stop
@@ -170,7 +172,7 @@ a particular path through some region of code. Here are some examples:
 The cycles consumed by functions f and g is logged with the key 0, only
 when the condition c is true:
 ```cpp
-TRACE_POINT_START(0); 
+TRACE_POINT_START(0);
 f();
 if (c) {
     g();
@@ -237,7 +239,7 @@ allocate a user-level log buffer (currently can be only of seL4_LargePageBits
 size) and pass it to the kernel to use before doing any operations that involve
 the log buffer, otherwise an error will be triggered having incorrect
 user-level log buffer. To enable this feature, set the `KernelBenchmarks` CMake
-config option to `track_kernel_entries`. 
+config option to `track_kernel_entries`.
 
 An example how to create a user-level log buffer (using sel4 libraries)
 and tell the kernel about it is as follows:

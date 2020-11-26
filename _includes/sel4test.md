@@ -1,4 +1,9 @@
 {% comment %}
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+{% endcomment %}
+
+{% comment %}
 This include generates commands for checking out and building sel4test for a particular platorm.
 The platform defines what config it uses, and if it specifies a simulation target, then a simulation command will be added.
 {% endcomment %}

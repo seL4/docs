@@ -2,6 +2,8 @@
 toc: true
 redirect_from:
   - /seL4ManualAPIGeneration
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # seL4 Manual API Generation
@@ -91,10 +93,10 @@ blocks.
 Here's a description of all the custom tags:
 
 ```xml
-<!-- 
-Introduces documentation for a new function. 
-The title of the section documenting the function will be NAME. 
-Other parts of the manual can refer to this function's documentation with \autoref{sec:LABEL} 
+<!--
+Introduces documentation for a new function.
+The title of the section documenting the function will be NAME.
+Other parts of the manual can refer to this function's documentation with \autoref{sec:LABEL}
 -->
 <manual name="NAME" label="LABEL"/>
 

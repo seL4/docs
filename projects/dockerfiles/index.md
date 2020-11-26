@@ -3,6 +3,8 @@ redirect_from:
   - /Docker
 layout: project
 project: dockerfiles
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Using Docker for seL4, Camkes, and L4v dependency management

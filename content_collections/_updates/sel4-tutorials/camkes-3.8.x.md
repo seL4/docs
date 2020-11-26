@@ -1,6 +1,8 @@
 ---
 project: sel4-tutorials
 title: "camkes-3.8.x-compatible"
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # Updates to sel4-tutorials from camkes-3.7.x to camkes-3.8.0
 
