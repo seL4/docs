@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-11-25 15:01:12 +1100 -->
+<!-- Page last generated 2020-11-27 06:19:47 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -242,7 +242,7 @@ workflow</a>.</p>
   <li>Explain any context:
     <ul>
       <li>is it part of a greater set of changes?</li>
-      <li>are any concurrent PRs (in other repositorites) dependant on this PR?</li>
+      <li>are any concurrent PRs (in other repositories) dependent on this PR?</li>
     </ul>
   </li>
   <li>State what testing has been performed:
@@ -258,6 +258,8 @@ workflow</a>.</p>
   <li>The <a href="https://sel4.systems/Foundation/TSC">TSC</a> of the seL4 foundation will delegate reviewers to approve. Anyone can help to review a pull request.</li>
   <li>If you want a particular person to review, please tag them.</li>
   <li>If there hasn’t been any activity after a couple of days, feel free to bump the post.</li>
+  <li>Pull requests require at least one approving review for merge,
+and usually should aim for 2 reviews on each non-trivial pull request.</li>
 </ul>
 
 <h3 id="commits">Commits</h3>
@@ -272,17 +274,77 @@ workflow</a>.</p>
   <li>Good reviews are small reviews. Large PRs should only be created if necessary.</li>
 </ul>
 
+<h3 id="tests">Tests</h3>
+
+<ul>
+  <li>The foundation repositories require the following tests to pass
+before a pull request can be merged:
+    <ul>
+      <li>code style
+        <ul>
+          <li>these may vary per repository and language, but default should
+standardise on those in the repository
+<a href="https://github.com/seL4/seL4_tools/tree/master/misc">seL4/seL4_tools</a></li>
+        </ul>
+      </li>
+      <li>developer certificate of origin (<a href="contributing.html">DCO</a>)</li>
+      <li>checks for SPDX license tagging (using the <a href="https://reuse.software">REUSE tool</a>)</li>
+      <li>any applicable regression tests:
+        <ul>
+          <li>these vary per repository</li>
+          <li>for seL4 itself, they must include:
+            <ul>
+              <li>compile test</li>
+              <li>hardware and/or simulator runs</li>
+              <li>the proofs</li>
+            </ul>
+          </li>
+          <li>for verification target repositories (currently mainly seL4):
+            <ul>
+              <li>a pull request can only be merged on the master branch if either
+the corresponding proof is updated or if there is no proof impact.</li>
+              <li>there is no proof impact if:
+                <ul>
+                  <li>the preprocessed source for verified code has not changed
+(this is tested by the “preprocess” check on GitHub), or</li>
+                  <li>the proof still works unchanged despite the code change
+(please ping the <code class="highlighter-rouge">@verification</code> team on the GitHub seL4 org when
+the “preprocess” check fails and you think the proof might still
+work).</li>
+                </ul>
+              </li>
+              <li>for proof updates:
+                <ul>
+                  <li>submit a pull request to the <a href="https://github.com/seL4/l4v"><code class="highlighter-rouge">l4v</code></a>
+repository together with the
+pull request for the <a href="https://github.com/seL4/seL4"><code class="highlighter-rouge">seL4</code></a>
+repository, or</li>
+                  <li>ping the <code class="highlighter-rouge">@verification</code> team on the GitHub seL4 org for help in
+updating the proofs, or</li>
+                  <li>talk to the <a href="https://sel4.systems/Foundation/">seL4 Foundation</a> about finding funding
+and/or volunteers for the proofs updates if it is a bigger project.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Exceptions are possible by approval of someone in the <a href="roles.html">Committer</a> role</li>
+</ul>
+
 <h2 id="during-a-pr">During a PR</h2>
 
 <ul>
   <li>Always abide by the <a href="/Conduct">seL4 Code of Conduct</a>.</li>
 </ul>
 
-<h3 id="reviewers-1">Reviewers</h3>
+<h3 id="for-reviewers">For Reviewers</h3>
 
 <ul>
   <li>Take into account the context stated by the author.</li>
-  <li>Review commits as well as code</li>
+  <li>Review commits and commit messages as well as code</li>
   <li>Request that the above guide be followed if it is not.</li>
   <li>Provide constructive feedback.
     <ul>
@@ -292,7 +354,7 @@ workflow</a>.</p>
   <li>Remember to comment on good things.</li>
 </ul>
 
-<h3 id="authors">Authors</h3>
+<h3 id="for-authors">For Authors</h3>
 
 <ul>
   <li>Apply changes due to feedback from reviewers as additional commits, and squash them once the PR is
@@ -301,6 +363,40 @@ ready to merge.</li>
   <li>Please communicate any changes you make during the review process.</li>
   <li>Apart from editing history, or fixing trivial issues, do not push changes to a PR once it has been
 approved.</li>
+</ul>
+
+<h2 id="merging">Merging</h2>
+
+<ul>
+  <li>
+    <p>Anyone in the <a href="roles.html">Committer</a> role can merge pull requests after they
+satisfy the required tests and approvals.</p>
+  </li>
+  <li>
+    <p>Currently, for many repositories in the seL4 GitHub org, the
+Trustworthy Systems (TS) group still provides continuous integration
+(CI) infrastructure on their internal servers. For these
+repositories, someone from TS will merge the pull request on that
+internal infrastructure, and it will be pushed out to GitHub
+automatically by the CI pipeline. Some of these tests, especially
+those involving proofs may run for multiple hours, some more than
+24h, so it might take some time for the merge to become visible.</p>
+
+    <p>You can recognise these repositories by the fact that they require 6
+(instead of 1) approving reviews for pull requests – this is merely a
+mechanism to prevent accidental merges.</p>
+
+    <p>The seL4 foundation is working on making this CI infrastructure more
+accessible directly on GitHub to avoid this additional step, but it
+will require some time and resources to do so. If you’re interested
+in helping with this, please email the <a href="https://sel4.systems/Foundation/TSC/">TSC chair</a>.</p>
+  </li>
+  <li>
+    <p>As long as the CI infrastructure is hosted by TS, some pull requests
+will continue to be handled directly internally on the TS group’s
+infrastructure. The TS group must abide by the same rules for these
+as outlined above.</p>
+  </li>
 </ul>
 
 <h2 id="resources">Resources</h2>
@@ -341,10 +437,10 @@ approved.</li>
         </li>
         
           <li>
-            Site last updated: Wed Nov 25 14:46:45 2020 +1100 e657d4d
+            Site last updated: Thu Nov 26 15:32:39 2020 +1100 0be4ac1
           </li>
           <li>
-                Page last updated: Tue Apr 7 19:55:23 2020 +1000 4e48b0f
+                Page last updated: Thu Nov 26 15:32:39 2020 +1100 03fad71
           </li>
         
       </ul>
