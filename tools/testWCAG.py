@@ -12,8 +12,9 @@ from multiprocessing import Pool
 from HTMLParser import HTMLParser
 from junit_xml import TestSuite, TestCase
 
-AATT_SITE_ENDPOINT="http://localhost:3000/sniffURL"
-JEKYLL_SITE_URL="http://localhost:4000"
+AATT_SITE_ENDPOINT = "http://localhost:3000/sniffURL"
+JEKYLL_SITE_URL = "http://localhost:4000"
+
 
 def run_test(page):
 
@@ -24,6 +25,7 @@ def run_test(page):
         '''
         get_error = False
         num_errors = 0
+
         def handle_starttag(self, tag, attrs):
             if tag == "span":
                 for (key, val) in attrs:
@@ -36,12 +38,13 @@ def run_test(page):
                 self.get_error = False
 
         def get_result(self):
-            return self.num_errors;
+            return self.num_errors
 
     # POST request with url to AATT endpoint
     url = AATT_SITE_ENDPOINT
     headers = {'content-type': 'application/x-www-form-urlencoded'}
-    r = requests.post(url, data='engine=htmlcs&msgErr=true&textURL=%s/%s' % (JEKYLL_SITE_URL, page), headers=headers)
+    r = requests.post(url, data='engine=htmlcs&msgErr=true&textURL=%s/%s' %
+                      (JEKYLL_SITE_URL, page), headers=headers)
     output = json.loads(r.text)
 
     # Parse result using simple parser to get number of errors.
@@ -54,6 +57,7 @@ def run_test(page):
     if (parser.get_result() != "0"):
         tc.add_failure_info("Detected %s error(s)." % (parser.get_result()))
     return tc
+
 
 def main():
     # Read list of html files in from stdin line by line.
@@ -74,6 +78,7 @@ def main():
     ts = [TestSuite("my test suite", test_cases)]
     print(TestSuite.to_xml_string(ts))
     return 0
+
 
 if __name__ == "__main__":
     main()
