@@ -16,8 +16,8 @@ except ImportError:
 # Parse yaml file from stdin and output a newline separated list of repositories
 data = load(sys.stdin, Loader=Loader)
 try:
-	if "repositories" in data:
-		for repo in data["repositories"]:
-			print(("%s/%s" % (repo["org"], repo["repo"])).lower())
+    if "repositories" in data:
+        for repo in data["repositories"]:
+            print(("%s/%s" % (repo["org"], repo["repo"])).lower())
 except:
-	pass
+    pass

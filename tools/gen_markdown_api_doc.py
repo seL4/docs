@@ -10,7 +10,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--file", dest="file", type=str,
                     help="Markdown location (within repository)")
-parser.add_argument("-o","--output", dest="output", type=str,
+parser.add_argument("-o", "--output", dest="output", type=str,
                     help="Output docsite file")
 args = parser.parse_args()
 
