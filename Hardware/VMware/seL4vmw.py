@@ -26,7 +26,7 @@ vmx_file = ''
 vmdk_file = ''
 vcom_file = ''
 
-print ("seL4 VMWare Development Environment Script")
+print("seL4 VMWare Development Environment Script")
 
 # Functions
 
@@ -67,11 +67,11 @@ def VMoff():
         time.sleep(2)
         VMoff()
         return
-    print ("%s not running. OK." % vm_dirname)
+    print("%s not running. OK." % vm_dirname)
 
 
 def VMon():
-    print ("Starting VM %s ....." % vm_dirname)
+    print("Starting VM %s ....." % vm_dirname)
     if VMfind():
         xc("vmrun -T player reset %s %s" % (vmx_file, '' if vm_gui else 'nogui'))
     else:
@@ -88,15 +88,15 @@ mnt_dir = '/tmp/%s_mount_%s/' % (vm_dirname, random.SystemRandom().randint(10000
 def main():
     # Check VMWare installations and print usage.
     if len(sys.argv) < 3:
-        print ("\nChecking VMWare installations...")
-        print ("    This script needs you to install VMWare Workstation.")
-        print ("    Alternatively you may install VMWare Player and VIX separately manually.")
-        print ("    Tested on Workstation 10, Player 6.0.0, VIX 1.13.")
+        print("\nChecking VMWare installations...")
+        print("    This script needs you to install VMWare Workstation.")
+        print("    Alternatively you may install VMWare Player and VIX separately manually.")
+        print("    Tested on Workstation 10, Player 6.0.0, VIX 1.13.")
         xc("vmplayer -v")
         xc("vmrun | head -n 2 | tail -n 1")
         xc("vmrun -T player list")
-        print ("OK to go.\n")
-        print ("\tusage: seL4vmw KERNEL_IMAGE INIT_IMAGE\n")
+        print("OK to go.\n")
+        print("\tusage: seL4vmw KERNEL_IMAGE INIT_IMAGE\n")
         sys.exit()
 
     # Set variables.
@@ -107,9 +107,9 @@ def main():
     vmdk_file = vm_dir + ('%s-1.vmdk' % vm_name)
     vcom_file = vm_dir + ('%s-COM1.txt' % vm_name)
 
-    print ("    KERNEL_IMAGE = [%s]" % kernel_image)
-    print ("    INIT_IMAGE = [%s]" % init_image)
-    print ("    MNT_DIR = [%s]" % mnt_dir)
+    print("    KERNEL_IMAGE = [%s]" % kernel_image)
+    print("    INIT_IMAGE = [%s]" % init_image)
+    print("    MNT_DIR = [%s]" % mnt_dir)
 
     # Turn off any previous VMs.
     VMoff()
@@ -139,7 +139,7 @@ def main():
 try:
     main()
 except (KeyboardInterrupt, SystemExit):
-    print ('Ctrl + C recieved, shutting down VM ... (Please dont Ctrl+C this Ctrl+C).')
+    print('Ctrl + C recieved, shutting down VM ... (Please dont Ctrl+C this Ctrl+C).')
     VMoff()
     xc('vmware-mount -d %s > /dev/null' % mnt_dir, True)
     xc('rm -rf %s > /dev/null' % mnt_dir, True)
