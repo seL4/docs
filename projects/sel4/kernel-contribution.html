@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-11-27 22:06:41 +1100 -->
+<!--
+     SPDX-License-Identifier: CC-BY-SA-4.0
+     SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+-->
+<!-- Page last generated 2020-11-30 09:31:38 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -14,7 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <!-- Pygments syntax highlighting  -->
     <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
 <script>
   if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -31,6 +36,8 @@
   <body class="container-fluid">
 
     
+
+
 
 <header>
   <ul class="row menu">
@@ -50,7 +57,8 @@
     </li>
   </ul>
   <div class="clear"></div>
-  <div class="breadcrumbs bootstrap hidden-sm-down">
+  
+<div class="breadcrumbs bootstrap hidden-sm-down">
   <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
     <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
       
@@ -125,6 +133,7 @@
       <div class="row">
   <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
     
+
 
 <div class="sidebar">
 
@@ -325,26 +334,26 @@
   <li>Kernel features</li>
 </ol>
 
-<p>For any kernel contributions it is important to note that a modified kernel 
-will <em>not</em> be considered formally verified (and therefore will not fully 
-benefit from the seL4 proofs), until the proofs themselves are also 
+<p>For any kernel contributions it is important to note that a modified kernel
+will <em>not</em> be considered formally verified (and therefore will not fully
+benefit from the seL4 proofs), until the proofs themselves are also
 appropriately modified, or it can be shown that the modifications do not
 affect the proofs.</p>
 
 <h2 id="bsp-ports">BSP ports</h2>
 
-<p><em>BSP ports</em> are the simplest, and require the least modifications, discussion 
-and approval.  This assumes that you are porting the kernel to a new board on 
+<p><em>BSP ports</em> are the simplest, and require the least modifications, discussion
+and approval.  This assumes that you are porting the kernel to a new board on
 an existing architecture.</p>
 
 <p>The main thing is to follow the <a href="/projects/sel4/porting">BSP Porting guide</a>.</p>
 
-<p>Questions, discussion, and sharing of work in progress during this stage are 
+<p>Questions, discussion, and sharing of work in progress during this stage are
 welcome.</p>
 
-<p>If you run into problems please ask questions - many of us may have run into 
-the same problems before and can provide information on how to fix them (and 
-save hours to weeks of frustration).  Please us one of our 
+<p>If you run into problems please ask questions - many of us may have run into
+the same problems before and can provide information on how to fix them (and
+save hours to weeks of frustration).  Please us one of our
 <a href="https://sel4.systems/contact/">communication channels</a> for this.</p>
 
 <p>Make sure to write appropriate tests and include them in seL4test as
@@ -352,24 +361,24 @@ part of the port.  Consider (and discuss) a plan for how to support
 this port (e.g. with regression testing) so that it continues to be
 updated and work as seL4 evolves.</p>
 
-<p>Once the code is ready for submission follow the 
+<p>Once the code is ready for submission follow the
 <a href="/processes/contributing.html">Contribution Guidelines</a> to submit the changes.</p>
 
 <h2 id="architecture-features">Architecture features</h2>
 
-<p>In some cases a kernel port requires more than just a BSP port.  If the port is 
-on a supported architecture, but you wish to make use of architecture features 
-that the kernel does not yet support, then these will be <em>architecture feature 
-contributions</em>.  This will typically require moderate modifications to kernel 
+<p>In some cases a kernel port requires more than just a BSP port.  If the port is
+on a supported architecture, but you wish to make use of architecture features
+that the kernel does not yet support, then these will be <em>architecture feature
+contributions</em>.  This will typically require moderate modifications to kernel
 design and implementation.</p>
 
-<p>We do not have general (nor specific) guidelines or how-tos for adding 
+<p>We do not have general (nor specific) guidelines or how-tos for adding
 architecture features.  Each such feature is different and the design
 decisions and implementations will also vary.</p>
 
-<p>Before starting on design and implementation of architecture features please 
-start an initial discussion on one of our <a href="https://sel4.systems/contact/">communication channels</a> 
-to check if such a feature is not already being worked on, if it is considered 
+<p>Before starting on design and implementation of architecture features please
+start an initial discussion on one of our <a href="https://sel4.systems/contact/">communication channels</a>
+to check if such a feature is not already being worked on, if it is considered
 appropriate to include in the kernel, etc.</p>
 
 <p>Then start a <a href="/processes/rfc-process">Request For Comment (RFC)</a>
@@ -385,8 +394,8 @@ then the next step is to implement it.  Discussion, revisions of
 design, and sharing of code (intermediate, proof of concept, prototype,
 etc) during this stage is encouraged.</p>
 
-<p>Evaluate any performance and security impacts of the implementation, and if 
-there are significant impacts, discuss these and consider how to redesign or 
+<p>Evaluate any performance and security impacts of the implementation, and if
+there are significant impacts, discuss these and consider how to redesign or
 re-implement to avoid them.</p>
 
 <p>If the feature implementation affects the proofs in any way, then the
@@ -404,17 +413,17 @@ them in seL4test as part of the work.  Consider (and discuss) a plan
 for how to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.</p>
 
-<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contrbution 
+<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contrbution
 Guidelines</a> for submitting changes.</p>
 
 <h2 id="architecture-ports">Architecture Ports</h2>
 
-<p>If you wish to port seL4 to a new hardware architecture that seL4 does not yet 
-support, then this will be a new <em>architecture port</em>.  This will require 
+<p>If you wish to port seL4 to a new hardware architecture that seL4 does not yet
+support, then this will be a new <em>architecture port</em>.  This will require
 extensive kernel design and implementation modifications.</p>
 
-<p>We feel that seL4 currently supports the most important hardware architectures 
-(ARM, x86, RISC-V), however, there may be reasons to port to other (new or 
+<p>We feel that seL4 currently supports the most important hardware architectures
+(ARM, x86, RISC-V), however, there may be reasons to port to other (new or
 existing) architectures.</p>
 
 <p>Some architectures will be similar enough to currently supported
@@ -427,11 +436,11 @@ user-level code.</p>
 
 <p>Architecture ports also have significant impact on verification.</p>
 
-<p>For these reasons, it is critical to first engage in discussion before 
+<p>For these reasons, it is critical to first engage in discussion before
 commencing on such a port.</p>
 
-<p>Start an initial discussion on one of our <a href="Contact Us">communication channels</a> 
-to check if such a port is already being worked on, whether there are known challenges with such a port, etc.  After initial discussion, start a <a href="RFC">Request For 
+<p>Start an initial discussion on one of our <a href="Contact Us">communication channels</a>
+to check if such a port is already being worked on, whether there are known challenges with such a port, etc.  After initial discussion, start a <a href="RFC">Request For
 Comment (RFC)</a> describing your design and plans.</p>
 
 <p>Once there is agreement on the general suitability of and design of
@@ -451,7 +460,7 @@ them in seL4test as part of the port.  Consider (and discuss) a plan
 for how to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.</p>
 
-<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contribution 
+<p>Once the implementation is complete follow the <a href="processes/contributing.html">Contribution
 Guidelines</a> for submitting changes.</p>
 
 <h2 id="kernel-features">Kernel Features</h2>
@@ -530,7 +539,8 @@ Guidelines</a> for submitting changes.</p>
 
 
   
-  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
   
     <ul class="section-nav">
     	<h2> seL4 </h2> 
@@ -927,6 +937,7 @@ We occasionally pre-release experimental branches for community feedback and ava
     </main>
     
 
+
 <footer class="site-footer">
 
   <h2 class="footer-heading">seL4 docs</h2>
@@ -935,6 +946,8 @@ We occasionally pre-release experimental branches for community feedback and ava
 
     <div class="col-md-2">
       
+
+
 
 <ul class="social-media-list">
   <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
@@ -949,10 +962,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Fri Nov 27 11:59:37 2020 +1100 061a86b
+            Site last updated: Mon Nov 30 09:25:37 2020 +1100 43450ef
           </li>
           <li>
-                Page last updated: Tue Apr 7 19:59:58 2020 +1000 82ae188
+                Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
           </li>
         
       </ul>

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<!-- Page last generated 2020-11-27 22:06:41 +1100 -->
+<!--
+     SPDX-License-Identifier: CC-BY-SA-4.0
+     SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+-->
+<!-- Page last generated 2020-11-30 09:31:38 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -14,7 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <!-- Pygments syntax highlighting  -->
     <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117737473-2"></script>
 <script>
   if((window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
@@ -31,6 +36,8 @@
   <body class="container-fluid">
 
     
+
+
 
 <header>
   <ul class="row menu">
@@ -50,7 +57,8 @@
     </li>
   </ul>
   <div class="clear"></div>
-  <div class="breadcrumbs bootstrap hidden-sm-down">
+  
+<div class="breadcrumbs bootstrap hidden-sm-down">
   <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
     <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
       
@@ -125,6 +133,7 @@
       <div class="row">
   <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
     
+
 
 <div class="sidebar">
 
@@ -327,7 +336,7 @@ We tend to use <a href="https://www.denx.de/wiki/U-Boot">U-boot</a> as it is ope
 Linux image onto the dev board. This way you can find the correct address to load the image into memory.
 This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.</p>
 
-<p>Once you have found the correct address to load, you can use the command <code class="highlighter-rouge">bootcmd="tftpboot 0x20000000 sel4_image &amp;&amp; go 0x20000000"</code> 
+<p>Once you have found the correct address to load, you can use the command <code class="highlighter-rouge">bootcmd="tftpboot 0x20000000 sel4_image &amp;&amp; go 0x20000000"</code>
 (using 0x20000000 as an example) followed by <code class="highlighter-rouge">saveenv</code> to save the starting address onto the boards flash memory.
 You will also need to set the ‘ipaddr’ and ‘serverip’ details can be found in the link above.</p>
 
@@ -354,21 +363,21 @@ the DTS device strings and compare to the hardware.yml file in <code class="high
 <h3 id="cmake-build-system">CMake-build system</h3>
 
 <p>You will need to modify the build system in two places. Firstly in the kernel’s platform folder, you define <code class="highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>, again you can look at other platforms for examples.
-Secondly, you will need to add ‘KernelPlatform’ to the cmake and elf-loader tools. You can do this by editing 
+Secondly, you will need to add ‘KernelPlatform’ to the cmake and elf-loader tools. You can do this by editing
 <code class="highlighter-rouge">tools/cmake-tool/helpers/application_settings.cmake</code> and <code class="highlighter-rouge">tools/elfloader-tool/CMakeLists.txt</code>.</p>
 
 <h3 id="elf-loader">ELF-loader</h3>
 
-<p>You will need to add directories and files <code class="highlighter-rouge">tools/elfloader-tool/src/plat/&lt;platform&gt;/sys_fputc.c</code> and 
+<p>You will need to add directories and files <code class="highlighter-rouge">tools/elfloader-tool/src/plat/&lt;platform&gt;/sys_fputc.c</code> and
 <code class="highlighter-rouge">tools/elfloader-tool/include/plat/&lt;platform&gt;/platform.h</code> which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.</p>
 
 <h2 id="sel4-test">seL4 test</h2>
 
 <p>seL4test needs user level serial and timer drivers to run. Add these drivers and the following files to libplatsupport in
-order to get the test suite running. The directory structure and files will look something like the following. Some of these 
+order to get the test suite running. The directory structure and files will look something like the following. Some of these
 files may not have anything in them but include them anyway to keep the build system happy.</p>
 
-<p>Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have it’s 
+<p>Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have it’s
 own unique programming sequence and can sometimes be a bit tricky.</p>
 
 <p>You can find the physical addresses and interrupt numbers for each device in its platform reference manual and copy them into the right places.</p>
@@ -388,7 +397,7 @@ own unique programming sequence and can sometimes be a bit tricky.</p>
 
 <h3 id="gotchas">Gotchas</h3>
 
-<p>Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is 
+<p>Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is
 to shorten memory regions in DTS memory nodes to check you are touching the correct area.</p>
 
 <p>Once you have succeeded with your port and have seL4 test passing in release mode, you can add an entry to the CHANGES file describing the platform you added and submit a pull request on the seL4 github.</p>
@@ -402,7 +411,8 @@ to shorten memory regions in DTS memory nodes to check you are touching the corr
 
 
   
-  <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
   
     <ul class="section-nav">
     	<h2> seL4 </h2> 
@@ -799,6 +809,7 @@ We occasionally pre-release experimental branches for community feedback and ava
     </main>
     
 
+
 <footer class="site-footer">
 
   <h2 class="footer-heading">seL4 docs</h2>
@@ -807,6 +818,8 @@ We occasionally pre-release experimental branches for community feedback and ava
 
     <div class="col-md-2">
       
+
+
 
 <ul class="social-media-list">
   <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
@@ -821,10 +834,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Fri Nov 27 11:59:37 2020 +1100 061a86b
+            Site last updated: Mon Nov 30 09:25:37 2020 +1100 43450ef
           </li>
           <li>
-                Page last updated: Mon Feb 17 13:52:47 2020 +1100 ad94a47
+                Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
           </li>
         
       </ul>

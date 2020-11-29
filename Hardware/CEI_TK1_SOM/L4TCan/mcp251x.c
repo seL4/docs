@@ -53,6 +53,9 @@
  * struct mcp251x_platform_data.
  *
  */
+
+/* SPDX-License-Identifier: GPL-2.0-only */
+
 #define DEBUG
 
 #include <linux/can/core.h>
