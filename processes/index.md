@@ -111,7 +111,7 @@ We use the following communication mechanisms:
 
 - [Mailing lists](emails): For email-based discussions, for asking for help, reporting issues or general seL4 communication.
 - [seL4 Discourse (seL4um)](https://sel4.discourse.group/): Forum for seL4. Attempting to build up useful knowledge-base.
-- [seL4 Mattermost](https://mattermost.ts.data61.csiro.au/sel4-external/). seL4 chat platform (Signup link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
+- [seL4 Mattermost](https://mattermost.trustworthy.systems/sel4-external/). seL4 chat platform (Signup link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
 - GitHub issues: Reporting issues or creating pull requests on repositories located at [seL4](https://github.com/seL4) or [seL4Proj](https://github.com/seL4proj) organisations.
 - [seL4 Jira](https://sel4.atlassian.net): for issue tracking on seL4, CAmkES, and formal verification, and for reading and creating [RFCs](rfc-process)
 - [Websites](websites): Websites containing information about seL4.
