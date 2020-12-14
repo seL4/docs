@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2020-11-30 09:31:38 +1100 -->
+<!-- Page last generated 2020-12-14 15:35:38 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -377,59 +377,129 @@ sudo apt-get install qemu-kvm
   <li><a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/camkes.dockerfile">CAmkES Dockerfile</a></li>
 </ul>
 
-<h2 id="building-proofs-l4v-dependencies">Building Proofs (l4v dependencies)</h2>
+<!--
+     Copyright 2020, Data61, CSIRO (ABN 41 687 119 230)
 
-<p>The proofs in the <a href="https://github.com/seL4/l4v">L4.verified</a> repository use <code class="highlighter-rouge">Isabelle2017</code>. To best way to make sure you have all the dependencies on your host machine is to follow the instructions listed in sections <a href="#base-build-dependencies">Base Build Dependencies</a>. However you can get away with avoiding a full cross compiler setup. The dependencies for Isabelle you will need at least are listed below:</p>
+     SPDX-License-Identifier: CC-BY-SA-4.0
+-->
 
-<h3 id="ubuntu">Ubuntu</h3>
+<!-- This file is also included on https://docs.sel4.systems/projects/buildsystem/host-dependencies.html  -->
 
-<blockquote>
-  <p><em>Tested on Ubuntu 18.04 LTS</em></p>
-</blockquote>
+<h1 id="proof-and-isabelle-dependencies">Proof and Isabelle Dependencies</h1>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libwww-perl libxml2-dev libxslt-dev
-sudo apt-get install mlton rsync
-sudo apt-get install texlive-fonts-recommended texlive-latex-extra texlive-metapost texlive-bibtex-extra
+<h2 id="proof-dependencies">Proof Dependencies</h2>
+
+<h3 id="linux-packages---debian">Linux Packages - Debian</h3>
+<p>On <strong>Buster</strong> or <strong>Bullseye</strong>, to run all proofs against the
+<strong>ARMv7-A</strong> architecture you will need to install the following packages:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
+    python3 python3-pip python3-dev <span class="se">\</span>
+    gcc-arm-none-eabi build-essential libxml2-utils ccache <span class="se">\</span>
+    ncurses-dev librsvg2-bin device-tree-compiler cmake <span class="se">\</span>
+    ninja-build curl zlib1g-dev texlive-fonts-recommended <span class="se">\</span>
+    texlive-latex-extra texlive-metapost texlive-bibtex-extra <span class="se">\</span>
+    rsync
 </code></pre></div></div>
 
-<h3 id="debian">Debian</h3>
+<p>There is no package for the MLton compiler on Buster or Bullseye, so you will
+need to install it from the <a href="http://www.mlton.org">MLton website</a>.</p>
 
-<h4 id="for-debian-stretch-or-later">For Debian Stretch or later</h4>
+<p>The Haskell Stack package is unavailable on Bullseye and out-of-date on Buster,
+so you will need to install it from the <a href="https://docs.haskellstack.org/en/stable/README">Haskell Stack
+website</a>.</p>
 
-<p>The dependencies listed in our docker files <a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles">repository</a> will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:</p>
+<h3 id="linux-packages---ubuntu">Linux Packages - Ubuntu</h3>
+<p>On <strong>Ubuntu 18.04</strong>, to run all proofs against the <strong>ARMv7-A</strong>
+architecture you will need to install the following packages:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
+    python3 python3-pip python3-dev <span class="se">\</span>
+    gcc-arm-none-eabi build-essential libxml2-utils ccache <span class="se">\</span>
+    ncurses-dev librsvg2-bin device-tree-compiler cmake <span class="se">\</span>
+    ninja-build curl zlib1g-dev texlive-fonts-recommended <span class="se">\</span>
+    texlive-latex-extra texlive-metapost texlive-bibtex-extra <span class="se">\</span>
+    mlton-compiler haskell-stack
+</code></pre></div></div>
 
+<h3 id="python">Python</h3>
+<p>The build system for the seL4 kernel requires several python packages:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>pip3 <span class="nb">install</span> <span class="nt">--upgrade</span> pip
+<span class="nb">sudo </span>pip3 <span class="nb">install </span>sel4-deps
+</code></pre></div></div>
+
+<h3 id="haskell-stack">Haskell Stack</h3>
+<p>After installing
+<a href="https://docs.haskellstack.org/en/stable/README">haskell-stack</a>, make sure
+you’ve adjusted your <code class="highlighter-rouge">PATH</code> to include <code class="highlighter-rouge">$HOME/.local/bin</code>, and that you’re
+running an up-to-date version:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stack upgrade <span class="nt">--binary-only</span>
+which stack <span class="c"># should be $HOME/.local/bin/stack</span>
+</code></pre></div></div>
+
+<h3 id="macos">MacOS</h3>
+<p>Other than the cross-compiler <code class="highlighter-rouge">gcc</code> toolchain, setup on MacOS should be similar
+to that on Ubuntu. To set up a cross-compiler, try the following:</p>
 <ul>
-  <li><a href="https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/l4v.dockerfile">l4v Dockerfile</a></li>
+  <li>Install <code class="highlighter-rouge">XCode</code> from the AppStore and its command line tools. If you are
+running MacPorts, you have these already. Otherwise, after you have XCode
+installed, run <code class="highlighter-rouge">gcc --version</code> in a terminal window. If it reports a version,
+you’re set. Otherwise it should pop up a window and prompt for installation
+of the command line tools.</li>
+  <li>Install the seL4 Python dependencies, for instance using <code class="highlighter-rouge">sudo easy_install
+sel4-deps</code>.  <code class="highlighter-rouge">easy_install</code> is part of Python’s <a href="https://pypi.python.org/pypi/setuptools" title="python package installer"><code class="highlighter-rouge">setuptools</code></a>.</li>
+  <li>Install the <a href="https://github.com/seL4/l4v/blob/master/misc/scripts/cpp" title="cpp wrapper script"><code class="highlighter-rouge">misc/scripts/cpp</code></a> wrapper for clang, by
+putting it in <code class="highlighter-rouge">~/bin</code>, or somewhere else in your <code class="highlighter-rouge">PATH</code>.</li>
 </ul>
 
-<h3 id="haskell-dependencies">Haskell Dependencies</h3>
+<h2 id="isabelle-setup">Isabelle Setup</h2>
 
-<p>The Haskell tool-stack is required to build the Haskell kernel model. You can install <a href="https://haskellstack.org">Haskell stack</a> on your distribution by running:</p>
+<p>After the repository is set up using <code class="highlighter-rouge">repo</code> with
+<code class="highlighter-rouge">seL4/verification-manifest</code>, you should have following directory
+structure, where <code class="highlighter-rouge">l4v</code> is the repository you are currently looking at:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSL https://get.haskellstack.org/ | sh
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification/
+    isabelle/
+    l4v/
+    seL4/
 </code></pre></div></div>
 
-<p>If you prefer not to bypass your distribution’s package manager, you can do</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install haskell-stack
+<p>To set up Isabelle for use in <code class="highlighter-rouge">l4v/</code>, assuming you have no previous
+installation of Isabelle, run the following commands in the directory
+<code class="highlighter-rouge">verification/l4v/</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.isabelle/etc
+<span class="nb">cp</span> <span class="nt">-i</span> misc/etc/settings ~/.isabelle/etc/settings
+./isabelle/bin/isabelle components <span class="nt">-a</span>
+./isabelle/bin/isabelle jedit <span class="nt">-bf</span>
+./isabelle/bin/isabelle build <span class="nt">-bv</span> HOL-Word
 </code></pre></div></div>
 
-<h3 id="setup-isabelle">Setup Isabelle</h3>
+<p>These commands perform the following steps:</p>
 
-<p>To setup Isabelle, you will firstly need to pull the <a href="https://github.com/seL4/l4v">L4.verified</a> project source using the Google repo tool (installing the Google repo tool is described in the <a href="#get-googles-repo-tool">Get Google’s Repo tool</a> section. The following steps to setup Isabelle:</p>
+<ul>
+  <li>create an Isabelle user settings directory.</li>
+  <li>install L4.verified Isabelle settings.
+These settings initialise the Isabelle installation to use the standard
+Isabelle <code class="highlighter-rouge">contrib</code> tools from the Munich Isabelle repository and set up
+paths such that multiple Isabelle repository installations can be used
+side by side without interfering with each other.</li>
+  <li>download <code class="highlighter-rouge">contrib</code> components from either the Munich or TS repository. This includes
+Scala, a Java JDK, PolyML, and multiple external provers. You should
+download these, even if you have these tools previously installed
+elsewhere to make sure you have the right versions. Depending on your
+internet connection, this may take some time.</li>
+  <li>compile and build the Isabelle PIDE jEdit interface.</li>
+  <li>build basic Isabelle images, including <code class="highlighter-rouge">HOL-Word</code> to ensure that
+the installation works. This may take a few minutes.</li>
+</ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create a directory to store the project source
-mkdir lv4_repo
-cd lv4_repo
-# Initialise the project repo
-repo init -u https://github.com/seL4/verification-manifest.git
-repo sync
-cd l4v
-mkdir -p ~/.isabelle/etc
-cp -i misc/etc/settings ~/.isabelle/etc/settings
-./isabelle/bin/isabelle components -a
-./isabelle/bin/isabelle jedit -bf
-./isabelle/bin/isabelle build -bv HOL-Word
-</code></pre></div></div>
+<p>Alternatively, it is possible to use the official Isabelle2020 release
+bundle for your platform from the <a href="http://isabelle.in.tum.de">Isabelle website</a>. In this case, the
+installation steps above can be skipped, and you would replace the directory
+<code class="highlighter-rouge">verification/isabelle/</code> with a symbolic link to the Isabelle home directory
+of the release version. Note that this is not recommended for development,
+since Google repo will overwrite this link when you synchronise repositories
+and Isabelle upgrades will have to be performed manually as development
+progresses.</p>
 
 
   </div>
@@ -476,18 +546,16 @@ cp -i misc/etc/settings ~/.isabelle/etc/settings
 </li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#building-proofs-l4v-dependencies">Building Proofs (l4v dependencies)</a>
+<li class="toc-entry toc-h2"><a href="#proof-dependencies">Proof Dependencies</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#ubuntu-2">Ubuntu</a></li>
-<li class="toc-entry toc-h3"><a href="#debian-2">Debian</a>
-<ul>
-<li class="toc-entry toc-h4"><a href="#for-debian-stretch-or-later-2">For Debian Stretch or later</a></li>
+<li class="toc-entry toc-h3"><a href="#linux-packages---debian">Linux Packages - Debian</a></li>
+<li class="toc-entry toc-h3"><a href="#linux-packages---ubuntu">Linux Packages - Ubuntu</a></li>
+<li class="toc-entry toc-h3"><a href="#python">Python</a></li>
+<li class="toc-entry toc-h3"><a href="#haskell-stack">Haskell Stack</a></li>
+<li class="toc-entry toc-h3"><a href="#macos">MacOS</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h3"><a href="#haskell-dependencies-1">Haskell Dependencies</a></li>
-<li class="toc-entry toc-h3"><a href="#setup-isabelle">Setup Isabelle</a></li>
-</ul>
-</li>
+<li class="toc-entry toc-h2"><a href="#isabelle-setup">Isabelle Setup</a></li>
 </ul>
 </div>
 
@@ -594,7 +662,7 @@ cp -i misc/etc/settings ~/.isabelle/etc/settings
         </li>
         
           <li>
-            Site last updated: Mon Nov 30 09:25:37 2020 +1100 43450ef
+            Site last updated: Mon Dec 14 14:00:06 2020 +1100 f546ce1
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
