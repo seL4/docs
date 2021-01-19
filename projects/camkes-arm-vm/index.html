@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2020-12-17 20:31:47 +1100 -->
+<!-- Page last generated 2021-01-19 13:29:02 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -324,10 +324,11 @@
   @TAG(DATA61_BSD)
 
 -->
+<p><strong>This repository is deprecated.</strong> \</p>
 <ul>
-  <li>Depreciated: please use https://github.com/SEL4PROJ/camkes-vm-manifest</li>
-  <li>Apps are now here https://github.com/SEL4PROJ/camkes-vm-apps</li>
-  <li>ARM VM is now here https://github.com/seL4/camkes-vm</li>
+  <li>Camkes-arm-vm has been moved to https://github.com/seL4/camkes-vm</li>
+  <li>You can now access Arm example apps here https://github.com/seL4/camkes-vm-examples</li>
+  <li>New manifest is https://github.com/seL4/camkes-vm-examples-manifest</li>
 </ul>
 
 <h1 id="camkes-arm-vm">camkes-arm-vm</h1>
@@ -346,7 +347,7 @@ a virtual machine monitor (VMM) server, faciliating the intialisation, booting a
 
 <h2 id="getting-and-building">Getting and Building</h2>
 <p>The following example builds the camkes arm vmm for the TK1.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/camkes-arm-vm-manifest.git
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-examples-manifest
 repo <span class="nb">sync
 mkdir </span>build
 <span class="nb">cd </span>build
@@ -374,7 +375,7 @@ Linux guest (1-1 model).</li>
 traffic on the virtual network interface is sent to/from other native seL4 components.</li>
 </ul>
 
-<p>See the <code class="highlighter-rouge">apps/</code> subdirectory for all the supported virtual machine manager apps, their implementations and the platforms they target.</p>
+<p>See the <code class="highlighter-rouge">apps/Arm</code> subdirectory for all the supported virtual machine manager apps, their implementations and the platforms they target.</p>
 
 <h2 id="features">Features</h2>
 <p>See the below feature matrix for the various features the CAmkES ARM VMM implements/facilitates across the various supported platforms.</p>
@@ -447,7 +448,7 @@ traffic on the virtual network interface is sent to/from other native seL4 compo
       <td style="text-align: center">Supported</td>
       <td style="text-align: center">Supported</td>
       <td style="text-align: center">Supported</td>
-      <td style="text-align: center">Multi-VM support depends on porting the TimeServer to QEMU (See https://github.com/SEL4PROJ/global-components/tree/master/components/TimeServer)</td>
+      <td style="text-align: center">Multi-VM support depends on porting the TimeServer to QEMU (See https://github.com/seL4/global-components/tree/master/components/TimeServer)</td>
     </tr>
   </tbody>
 </table>
@@ -455,7 +456,7 @@ traffic on the virtual network interface is sent to/from other native seL4 compo
 <h2 id="platform-configuration-notes">Platform Configuration Notes</h2>
 
 <h3 id="exynos5422-tx1-tx2-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, QEMU ARM Virt configuration</h3>
-<p>We provide a pre-built Linux image and Buildroot image for our guest VM’s. See the images in the <code class="highlighter-rouge">camkes-vm-images</code> repository @ https://github.com/SEL4PROJ/camkes-vm-images
+<p>We provide a pre-built Linux image and Buildroot image for our guest VM’s. See the images in the <code class="highlighter-rouge">camkes-vm-images</code> repository @ https://github.com/seL4/camkes-vm-images
 When compiling an application for these platforms, the images are sourced from the platforms subdirectory in the <code class="highlighter-rouge">camkes-vm-images</code> repo.
 Feel free also to compile your own Linux and Rootfs images, see the README’s in each platform subdirectory (within <code class="highlighter-rouge">camkes-vm-images</code>) for information about our
 image build configurations.</p>
@@ -535,24 +536,24 @@ See the below list as as a rough list of items to check off:</p>
       <li>Second to this, the seL4 port to the given platform also supports running with <code class="highlighter-rouge">KernelArmHypervisorSupport</code></li>
     </ul>
   </li>
-  <li>Does your platform use a GICv2 or GICv3? <em>Note: We currently only support a virtual GICV2, with virtual GICV3 support under-development. See the listed features of libsel4vm for further information: https://github.com/SEL4PROJ/seL4_projects_libs/tree/master/libsel4vm</em></li>
+  <li>Does your platform use a GICv2 or GICv3? <em>Note: We currently only support a virtual GICV2, with virtual GICV3 support under-development. See the listed features of libsel4vm for further information: https://github.com/seL4/seL4_projects_libs/tree/master/libsel4vm</em></li>
   <li>When porting a VMM application to your platform, say <code class="highlighter-rouge">vm_minimal</code>, ensure you provide the following:
     <ul>
       <li>A <code class="highlighter-rouge">devices.camkes</code> file for your platform. These containing platform specific definitions, see in particular the vm <code class="highlighter-rouge">dtb</code> field and the <code class="highlighter-rouge">untyped_mmios</code> field (for device passthrough). The values in the aforementioned fields corresponding with those found in the kernel device tree.</li>
       <li>A <code class="highlighter-rouge">vmlinux.h</code> header for you platform. See the header file for the other supported platforms at <code class="highlighter-rouge">components/VM/plat_include</code></li>
     </ul>
   </li>
-  <li>Provide a pre-compiled Linux kernel and initrd image for your platform. Once compiled these are usually linked in through your apps <code class="highlighter-rouge">CMakeLists.txt</code>. See <code class="highlighter-rouge">apps/vm_minimal/CMakeLists.txt</code> for examples of how other platforms link in their images.</li>
+  <li>Provide a pre-compiled Linux kernel and initrd image for your platform. Once compiled these are usually linked in through your apps <code class="highlighter-rouge">CMakeLists.txt</code>. See <code class="highlighter-rouge">apps/Arm/vm_minimal/CMakeLists.txt</code> for examples of how other platforms link in their images.</li>
 </ul>
 
 <p>Feel free to contact the <a href="/processes/#contact">team</a> for further support on porting the camkes-arm-vm to your desired platform. We are also always open to contributions for new platforms.</p>
 
 <h4 id="can-a-single-vmm-component-support-running-multiple-vms">Can a single VMM component support running multiple VM’s?</h4>
 <p>Currently, No. A VMM component only creates and manages a single VM instance.
-To support multiple VM’s, you can run multiple VMM components, each managing its own VM. See <code class="highlighter-rouge">apps/vm_multi</code> for an example of this configuration.</p>
+To support multiple VM’s, you can run multiple VMM components, each managing its own VM. See <code class="highlighter-rouge">apps/Arm/vm_multi</code> for an example of this configuration.</p>
 
 <h4 id="how-do-i-enable-smp-support-for-a-vm-instance">How do I enable SMP support for a VM instance?</h4>
-<p>To configure your VM with multiple VCPU’s, you can set the VM instance attribute <code class="highlighter-rouge">num_vcpus</code> in your camkes configuration. See <a href="https://github.com/SEL4PROJ/camkes-arm-vm/blob/master/apps/vm_minimal/tx2/devices.camkes#L40">here</a> for an example.
+<p>To configure your VM with multiple VCPU’s, you can set the VM instance attribute <code class="highlighter-rouge">num_vcpus</code> in your camkes configuration. See <a href="https://github.com/seL4/camkes-vm-examples/blob/master/apps/Arm/vm_minimal/tx2/devices.camkes#L40">here</a> for an example.
 In addition, when initialising your build, ensure the <code class="highlighter-rouge">KernelMaxNumNodes</code> configuration option is set to your desired value. You can also initialise your build with variable <code class="highlighter-rouge">-DNUM_NODES</code> variable e.g.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build.sh <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>vm_minimal <span class="nt">-DPLATFORM</span><span class="o">=</span>tx2 <span class="nt">-DNUM_NODES</span><span class="o">=</span>4
 </code></pre></div></div>
@@ -672,7 +673,7 @@ In addition, when initialising your build, ensure the <code class="highlighter-r
         </li>
         
           <li>
-            Site last updated: Thu Dec 17 20:26:49 2020 +1100 2b02877
+            Site last updated: Tue Jan 19 10:29:50 2021 +1100 90e3da7
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
