@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-01-19 13:29:02 +1100 -->
+<!-- Page last generated 2021-02-05 21:08:49 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1775,6 +1775,16 @@ descriptions.</p>
   fence. In multiprocessor environments, memory barrier instructions will be
   emitted if necessary, depending on the affinities of component instances
   connected by the dataport.</p>
+</blockquote>
+
+<p><strong><code class="highlighter-rouge">size_t</code> <em><code class="highlighter-rouge">dataport</code></em><code class="highlighter-rouge">_get_size(void)</code></strong></p>
+
+<blockquote>
+  <p>Returns the size for the specific dataport this function gets called for. In
+  addition to this function, every component that has a dataport will be
+  provided with a macro <em><code class="highlighter-rouge">dataport</code></em><code class="highlighter-rouge">_size</code> that is defined to the size of the
+  invdividual dataport. This macro allows declaring fixed size arrays, as the
+  <code class="highlighter-rouge">C</code> language requires a constant-expression for this.</p>
 </blockquote>
 
 <p><strong><code class="highlighter-rouge">void *camkes_dma_alloc(size_t size, int align)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)
@@ -4258,7 +4268,7 @@ script:</p>
         </li>
         
           <li>
-            Site last updated: Tue Jan 19 10:29:50 2021 +1100 90e3da7
+            Site last updated: Fri Feb 5 21:02:56 2021 +1100 e8997da
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
