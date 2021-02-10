@@ -55,7 +55,6 @@ You can nominate someone for a role by emailing the chair of the TSC.
    Current members are:
 
   - Peter Chubb, CSIRO's Data61
-  - Luke Mondy, CSIRO's Data61
 
   &nbsp;
 
