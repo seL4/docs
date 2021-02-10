@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-02-05 21:08:49 +1100 -->
+<!-- Page last generated 2021-02-11 08:48:45 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -410,7 +410,7 @@ The user can then further back the reservation with seL4 frames by performing <c
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_reserve_anon_memoryvm-size-fault_callback-cookie-addr">Function <code class="highlighter-rouge">vm_reserve_anon_memory(vm, size, fault_callback, cookie, addr)</code></h3>
+<h3 id="function-vm_reserve_anon_memoryvm-size-align-fault_callback-cookie-addr">Function <code class="highlighter-rouge">vm_reserve_anon_memory(vm, size, align, fault_callback, cookie, addr)</code></h3>
 
 <p>Reserve an anonymous region of the VM’s memory. This uses memory previously made anonymous
 through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.</p>
@@ -420,6 +420,7 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 <ul>
   <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
   <li><code class="highlighter-rouge">size {size_t}</code>: Size of the anoymous emory region being reserved</li>
+  <li><code class="highlighter-rouge">align {size_t}</code>: Requested alignment of the memory region</li>
   <li><code class="highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Callback function that will be invoked if memory region is faulted on</li>
   <li><code class="highlighter-rouge">cookie {void *}</code>: User cookie to pass onto to callback</li>
   <li><code class="highlighter-rouge">addr {uintptr_t *}</code>: Pointer that will be set with the base address of the reserved anonymous region</li>
@@ -626,7 +627,7 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
         </li>
         
           <li>
-            Site last updated: Fri Feb 5 21:02:56 2021 +1100 e8997da
+            Site last updated: Thu Feb 11 08:41:47 2021 +1100 7be9137
           </li>
           <li>
                 Page last updated: 
