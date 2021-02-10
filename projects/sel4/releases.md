@@ -75,6 +75,9 @@ Because of this we need to split the list into two before sorting.
 We occasionally pre-release experimental branches for community feedback and availability.
 
 ### Mixed Criticality Support (MCS) / Realtime
+
+As of seL4 version 11.0.0, this is now provided via the kernel configuration option `KernelIsMCS` in CAmkES which should be set to `ON` which switch the scheduler implementaiton and enable the MCS API.
+
 {% for release in releases  %}
     {% if release.variant == "mcs" %}
 [{{ release.title }}]({{ release.url }})

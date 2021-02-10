@@ -27,6 +27,9 @@ Of the most significant are:
 The seL4 kernel is built as part of project. Each project has a
 README.md associated with it which provides further information.
 
+While the kernel is normally built as part of a project it is also
+possible create a [standalone build](/Developing/Building/seL4Standalone).
+
 Projects are a collection of git repositories, with versions managed by
 [Android's Repo tool](http://source.android.com/source/downloading.html#installing-repo).
 Each project consists of an XML manifest file which specifies the source dependencies,
