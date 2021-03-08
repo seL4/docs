@@ -75,14 +75,6 @@ before the CapDL Filters (see below) are applied,
 the ELF file produced by compiling the component and create all the
 paging structures it needs.
 
-## CapDL Filters
-
-
-The
-[CapDL Filters](https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Filters.py) stage of the CAmkES build process deserves special mention.
-These are transformations on the CapDL database that take place before
-creating the CapDL spec file and building the CapDL Loader. Here's a
-description of some of the filters:
 
 ### Collapse Shared Frames
 
@@ -241,33 +233,3 @@ the implementation of `alloc_obj`, we see it calls a function called
 `allocate_unless_already_allocated`. It checks whether there's already
 an object by the given name, returns the object if it exists, otherwise
 allocates and returns it.
-
-## Perspectives
-
-
-In the CAmkES internals, a Perspective is collection of names of
-**some** entities (components, kernel objects, caps, etc) in some
-context, from which **all** (or at least more) names can be derived
-using some name mangling rules. It's implemented here:
-<https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py>
-
-Typical usage of a Perspective is adding names until it has enough
-information to derive the names you need, then querying it for the names
-you need. Here's an example of this:
-```
-p = Perspective(instance='foo', control=True)
-print(p['ipc_buffer_symbol']) # prints "_camkes_ipc_buffer_foo_0_control"
-```
-
-Here we tell the perspective that we want names in the context of a
-component instance name `foo`. This implies that the name of the ipc
-buffer symbol of the control thread will be
-`_camkes_ipc_buffer_foo_0_control`.
-
-Whenever you add an attribute that has some meaning for all components
-(e.g. thread priority, scheduling context budget), or symbols to
-generated c code (e.g. stack, ipc buffer, dma pool), or any other time
-where you want to name a thing based on its context, it might be worth
-adding name mangling rules to simplify programmatically determining the
-names of those things. There are many examples of rule definitions in
-<https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py>
