@@ -66,5 +66,5 @@ You can nominate someone for a role by emailing the chair of the TSC.
 
    See [the TSC page][2] for current members.
 
-[1]: https://sel4.systems/Foundation/About/
+[1]: https://sel4.systems/Foundation/About
 [2]: https://sel4.systems/Foundation/TSC/

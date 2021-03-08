@@ -13,7 +13,7 @@ This page is about contributing to the [documentation site][docsite].  For contr
 visit our main [contributing page][contribute].
 
 [docsite]: https://docs.sel4.systems
-[contribute]: https://docs.sel4.systems/Contributing_to_upstream_seL4_projects
+[contribute]: https://docs.sel4.systems/processes/
 
 We believe that documentation is important for any project and appreciate any contributions that improves it.
 The sort of contributions that we are looking for are:

@@ -42,7 +42,7 @@ you are interested, talk to the [seL4 Foundation][] or when it involves
 formal verification or major seL4 kernel features directly to the
 [Trustworthy Systems][] group at Data61!
 
-[seL4 Foundation]: https://sel4.systems/Foundation/About/ "seL4 Foundation"
+[seL4 Foundation]: https://sel4.systems/Foundation/About "seL4 Foundation"
 [Trustworthy Systems]: https://ts.data61.csiro.au "Trustworthy Systems"
 
 ## seL4 Development

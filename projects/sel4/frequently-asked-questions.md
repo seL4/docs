@@ -133,7 +133,7 @@ Verification of the multicore kernel is in progress (but presently as an
 unfunded background activity).
 
 The multicore kernel uses a [big-lock approach, which makes sense for tightly-coupled
-cores that share an L2 cache](https://ts.data61.csiro.au/publications/nictaabstracts/Peters_DEH_15.abstract.pml). It is not meant to scale to many cores, where instead
+cores that share an L2 cache](https://ts.data61.csiro.au/publications/nictaabstracts/Peters_DEH_15.abstract). It is not meant to scale to many cores, where instead
 multikernel is the right approach (running separate kernel image on each cluster
 of cores sharing a cache). This "clustered multikernel" configuration is presently not
 supported, though.
@@ -340,7 +340,7 @@ may be able to offer assistance.
  OS verification goes
 back at least 40 years to the mid 1970s, so there is plenty of previous
 work on verified OS kernels. See also a
-[comprehensive overview](https://ts.data61.csiro.au/publications/papers/Klein_09.abstract) paper on OS verification from 2008 as well as the related
+[comprehensive overview](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_09.abstract.html) paper on OS verification from 2008 as well as the related
 work section of the
 [seL4 overview paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract) from 2014.
 
@@ -578,7 +578,7 @@ Enabling or disabling the fastpath should not have any impact on the
 kernel behaviour except for performance.
 
 There is a section on the fastpath and its verification in
-[this article](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml). The fastpath discussion starts on page 23.
+[this article](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract). The fastpath discussion starts on page 23.
 
 ### I want to know more about seL4 functionality/design/implementation/philosophy
 
@@ -638,12 +638,12 @@ CSIRO's
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract.pml),
+- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract),
   a 20-year retrospective of L4 microkernels;
-- [the original 2009 paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract.pml) describing seL4 and its formal
+- [the original 2009 paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
       verification;
 - [a much longer paper detailing the complete verification story of
-      seL4](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
+      seL4](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
       , including the high-level security proofs, binary
       verification and timeliness analysis. It also contains an analysis
       of the cost of verification, and how it compares to that of
@@ -660,4 +660,4 @@ That being said, we are currently working on:
 - verification of the RISC-V kernel
 - completing the 64-bit Arm version (multicore and hypervisor support)
 - verification of multicore seL4
-- [time protection](https://ts.data61.csiro.au/publications/csiroabstracts/Ge_YCH_19.abstract.pml?bib=combined) as a principled prevention of timing channels (this one is still very much cutting-edge research)
+- [time protection](https://ts.data61.csiro.au/publications/csiroabstracts/Ge_YCH_19.abstract?bib=combined) as a principled prevention of timing channels (this one is still very much cutting-edge research)

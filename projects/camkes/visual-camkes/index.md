@@ -64,7 +64,7 @@ sudo apt-get install python-pyqt5.qtsvg
 #### from source method
 ```bash
 cd /some/temp/directory/like/Downloads
-git clone git://code.qt.io/qt/qt5.git 
+git clone https://github.com/qt/qt5.git
 cd qt5
 git checkout 5.5
 ./init-repository --no-webkit --module-subset=qtbase,qtsvg

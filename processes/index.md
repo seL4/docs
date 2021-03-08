@@ -84,7 +84,7 @@ The code documented on this site is available from two GitHub organisations:
 
 - <https://github.com/sel4/>: the seL4 kernel itself and the core
   repositories around it, managed by the [seL4
-  Foundation](https://sel4.systems/Foundation/About/).
+  Foundation](https://sel4.systems/Foundation/About).
 
 - <https://github.com/sel4proj/>: additional tools, libraries, and projects around seL4, managed by the [Trustworthy Systems](https://ts.data61.csiro.au) group at Data61.
 

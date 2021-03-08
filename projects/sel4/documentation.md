@@ -8,8 +8,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # Documentation
 ## Kernel
 
-- [Technical overview paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract.pml)
-- [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract.pml), 
+- [Technical overview paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
+- [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract),
   a retrospective explaining how we got to where we are;
 - [Getting started](/GettingStarted)
 - [Data61/CSIRO seL4
@@ -39,7 +39,7 @@ will be produced in manual.pdf.
 - [Git Repository and Build
       instructions](http://github.com/seL4/l4v/)
 - [CSIRO's Data61 Trustworthy
-      Systems research project pages](hx) 
+      Systems research project pages](https://ts.data61.csiro.au/projects.html)
 - Isabelle Proof Assistant:
 
   -   [Concrete Semantics Isabelle textbook](http://concrete-semantics.org/)
