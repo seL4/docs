@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-03-08 17:10:48 +1100 -->
+<!-- Page last generated 2021-03-09 15:01:17 +1100 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -396,14 +396,6 @@ before the CapDL Filters (see below) are applied,
 the ELF file produced by compiling the component and create all the
 paging structures it needs.</p>
 
-<h2 id="capdl-filters">CapDL Filters</h2>
-
-<p>The
-<a href="https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Filters.py">CapDL Filters</a> stage of the CAmkES build process deserves special mention.
-These are transformations on the CapDL database that take place before
-creating the CapDL spec file and building the CapDL Loader. Here’s a
-description of some of the filters:</p>
-
 <h3 id="collapse-shared-frames">Collapse Shared Frames</h3>
 
 <p>Dataport connections in CAmkES establish a region of shared memory
@@ -547,34 +539,6 @@ the implementation of <code class="highlighter-rouge">alloc_obj</code>, we see i
 an object by the given name, returns the object if it exists, otherwise
 allocates and returns it.</p>
 
-<h2 id="perspectives">Perspectives</h2>
-
-<p>In the CAmkES internals, a Perspective is collection of names of
-<strong>some</strong> entities (components, kernel objects, caps, etc) in some
-context, from which <strong>all</strong> (or at least more) names can be derived
-using some name mangling rules. It’s implemented here:
-<a href="https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py">https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py</a></p>
-
-<p>Typical usage of a Perspective is adding names until it has enough
-information to derive the names you need, then querying it for the names
-you need. Here’s an example of this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p = Perspective(instance='foo', control=True)
-print(p['ipc_buffer_symbol']) # prints "_camkes_ipc_buffer_foo_0_control"
-</code></pre></div></div>
-
-<p>Here we tell the perspective that we want names in the context of a
-component instance name <code class="highlighter-rouge">foo</code>. This implies that the name of the ipc
-buffer symbol of the control thread will be
-<code class="highlighter-rouge">_camkes_ipc_buffer_foo_0_control</code>.</p>
-
-<p>Whenever you add an attribute that has some meaning for all components
-(e.g. thread priority, scheduling context budget), or symbols to
-generated c code (e.g. stack, ipc buffer, dma pool), or any other time
-where you want to name a thing based on its context, it might be worth
-adding name mangling rules to simplify programmatically determining the
-names of those things. There are many examples of rule definitions in
-<a href="https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py">https://github.com/seL4/camkes-tool/blob/master/camkes/runner/NameMangling.py</a></p>
-
   </div>
 
 
@@ -594,8 +558,7 @@ names of those things. There are many examples of rule definitions in
 <li class="toc-entry toc-h3"><a href="#data-structure-cache">Data Structure Cache</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#creating-component-address-spaces">Creating Component Address Spaces</a></li>
-<li class="toc-entry toc-h2"><a href="#capdl-filters">CapDL Filters</a>
+<li class="toc-entry toc-h2"><a href="#creating-component-address-spaces">Creating Component Address Spaces</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#collapse-shared-frames">Collapse Shared Frames</a></li>
 <li class="toc-entry toc-h3"><a href="#remove-tcb-caps">Remove TCB Caps</a></li>
@@ -616,7 +579,6 @@ names of those things. There are many examples of rule definitions in
 </li>
 <li class="toc-entry toc-h2"><a href="#simple">Simple</a></li>
 <li class="toc-entry toc-h2"><a href="#template-instantiation-order">Template Instantiation Order</a></li>
-<li class="toc-entry toc-h2"><a href="#perspectives">Perspectives</a></li>
 </ul>
 </div>
 
@@ -858,10 +820,10 @@ names of those things. There are many examples of rule definitions in
         </li>
         
           <li>
-            Site last updated: Fri Feb 12 15:04:19 2021 +1100 91f959d
+            Site last updated: Tue Mar 9 13:04:54 2021 +1100 6eb8c7f
           </li>
           <li>
-                Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
+                Page last updated: Tue Mar 9 13:04:54 2021 +1100 6eb8c7f
           </li>
         
       </ul>
