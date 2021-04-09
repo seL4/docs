@@ -3,13 +3,13 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-03-09 15:01:17 +1100 -->
+<!-- Page last generated 2021-04-09 09:16:31 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rockpro64 | seL4 docs</title>
+    <title>RockPro64 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Rockpro64</span>
+            <span property="name">RockPro64</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -152,11 +152,25 @@
       <nav aria-label="Table of Contents">
         <ul class="section-nav">
 <li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
+<li class="toc-entry toc-h2"><a href="#flashing-the-spi-with-u-boot">Flashing the SPI with U-Boot</a></li>
+<li class="toc-entry toc-h2"><a href="#setting-up-with-tftp-dhcp-uefi-recommended">Setting up with TFTP, DHCP, UEFI (recommended!)</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#manual-method-well-tested">Manual method (well tested)</a></li>
+<li class="toc-entry toc-h3"><a href="#automated-method">Automated method</a></li>
+<li class="toc-entry toc-h3"><a href="#building-things">Building things</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#setting-up-with-uefi-sd-card">Setting up with UEFI, SD card</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#manual">Manual</a></li>
+<li class="toc-entry toc-h3"><a href="#automated">Automated</a></li>
+</ul>
+</li>
 </ul>
       </nav>
     
     <div class="content">
-      <h1 id="rockpro64">Rockpro64</h1>
+      <h1 id="rockpro64">RockPro64</h1>
 
 <h2 id="building-sel4test">Building seL4test</h2>
 
@@ -175,6 +189,104 @@ ninja
 
 <p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
+<h2 id="flashing-the-spi-with-u-boot">Flashing the SPI with U-Boot</h2>
+
+<p><strong>WARNING! DO NOT POWER OFF THE DEVICE FOR ANY REASON DURING SPI FLASH! YOU WILL GET A (soft-) BRICKED DEVICE</strong></p>
+
+<p>The first step is getting U-Boot onto the system. It is recommended, particularly for TFTP boot, to put U-Boot on the SPI flash.</p>
+
+<p>If you have a “dirty” (any previously used) SPI flash, first:</p>
+<ol>
+  <li>Download https://github.com/sigmaris/u-boot/releases/download/v2020.01-ci/erase_spi.img.gz</li>
+  <li>Write it to an SD card</li>
+  <li>Boot from the SD card (will be done automatically if you don’t have a very weird setup). Once it completes (see this over serial or when white LED becomes stable), remove the SD card, but DO NOT reset.</li>
+</ol>
+
+<p>Then, to flash the actual image:</p>
+<ol>
+  <li>Get https://github.com/sigmaris/u-boot/releases/download/v2020.01-ci/flash_spi.img.gz and write it to an SD card.</li>
+  <li>Put the SD card into the rockpro64 and boot. Wait for completion (seen over serial or when white LED becomes stable).</li>
+  <li>Remove the SD card.</li>
+  <li>Reset and observe U-Boot come up.</li>
+</ol>
+
+<p>Compiling u-boot onesself has not been done and has been left as an exercise to the reader if wanted. HINT: https://github.com/sigmaris/u-boot/blob/v2020.01-ci/.azure-pipelines.yml. This fork is used as it resolves a number of issues present in mainline U-Boot and has pre-built images.</p>
+
+<h2 id="setting-up-with-tftp-dhcp-uefi-recommended">Setting up with TFTP, DHCP, UEFI (recommended!)</h2>
+
+<p>I assume you have:</p>
+<ul>
+  <li>setup a TFTP server</li>
+  <li>setup a DHCP server</li>
+  <li>linked the TFTP and DHCP servers appropriately</li>
+</ul>
+
+<p>Luckily the U-Boot defconfig for rockpro64 includes UEFI support. We are not using EDK2 because no stable and tested implementations exist for rockpro64.</p>
+
+<p>Copy your seL4 image to the TFTP root under the name <code class="highlighter-rouge">sel4img</code> (or any other name of your choosing but you will have to adjust following commands).</p>
+
+<h3 id="manual-method-well-tested">Manual method (well tested)</h3>
+
+<p>Drop into a U-Boot console when asked. Type in:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
+tftpboot ${kernel_addr_r} sel4img
+bootefi ${kernel_addr_r}
+</code></pre></div></div>
+
+<ul>
+  <li>Watch seL4 boot!</li>
+</ul>
+
+<h3 id="automated-method">Automated method</h3>
+
+<p>Create <code class="highlighter-rouge">pxelinux.cfg/default</code> in TFTP root:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menu title PXE!
+
+timeout 200
+
+label sel4
+menu default
+kernel /sel4img
+</code></pre></div></div>
+
+<p>Create <code class="highlighter-rouge">boot.scr</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi 0x2080000
+</code></pre></div></div>
+
+<p>Significance of 0x2080000 being where seL4 image is loaded by U-Boot.</p>
+
+<p>Convert <code class="highlighter-rouge">boot.scr</code> to a uImage using <code class="highlighter-rouge">mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</code>. Ensure <code class="highlighter-rouge">boot.scr.uimg</code> is in the TFTP root and <code class="highlighter-rouge">boot.scr</code> is removed.</p>
+
+<h3 id="building-things">Building things</h3>
+
+<p>Ensure your <code class="highlighter-rouge">tools/seL4</code> has the appropriate commit (TODO)</p>
+
+<h2 id="setting-up-with-uefi-sd-card">Setting up with UEFI, SD card</h2>
+
+<p>This process is similar to above with TFTP. The SD card should have one or more partitions, the first one must be ext2 and have the file files on it. (If required, you can change the 1:1 in the below commands to 1:2, 1:3 etc for using 2nd, 3rd, partition, etc).</p>
+
+<p>Copy your <code class="highlighter-rouge">sel4img</code> aforementioned in UEFI section to SD card.</p>
+
+<h3 id="manual">Manual</h3>
+
+<p>Drop to a U-Boot console and type in:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext2load mmc 1:1 ${kernel_addr_r} sel4img
+bootefi ${kernel_addr_r}
+</code></pre></div></div>
+
+<h3 id="automated">Automated</h3>
+
+<p>Create <code class="highlighter-rouge">boot.scr</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext2load mmc 1:1 ${kernel_addr_r} sel4img
+bootefi ${kernel_addr_r}
+</code></pre></div></div>
+
+<p>Convert to uImage using <code class="highlighter-rouge">mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</code>. Put in SD card and boot.</p>
 
     </div>
   </div>
@@ -208,10 +320,10 @@ ninja
         </li>
         
           <li>
-            Site last updated: Tue Mar 9 13:04:54 2021 +1100 6eb8c7f
+            Site last updated: Fri Apr 9 19:11:33 2021 +1000 0bd34e3
           </li>
           <li>
-                Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44
+                Page last updated: Fri Apr 9 19:11:33 2021 +1000 0bd34e3
           </li>
         
       </ul>
