@@ -1,0 +1,58 @@
+# Copyright 2020, Data61, CSIRO (ABN 41 687 119 230)
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
+# Build and deploy the site
+
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  schedule:
+    - cron: '7 3 * * *'
+
+jobs:
+  build:
+    name: Site
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - run: pip3 install -U camkes-deps
+    - run: sudo apt-get install doxygen
+    - run: make build JEKYLL_ENV=production
+    - run: tar -cvf site.tar _site/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: site
+        path: site.tar
+
+  deploy:
+    if: ${{ github.event_name == 'push' || github.event_name == 'schedule' }}
+    needs: build
+    name: 'Deploy'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+        token: ${{ secrets.GH_TOKEN }}
+    - uses: actions/download-artifact@v2
+      with:
+        name: site
+    - run: tar -xvf site.tar
+    - run: cp -a _site/* .
+    - run: rm -rf site.tar _site
+    - run: git add .
+    - run: git diff --cached
+    - run: git config user.name "CI"
+    - run: git config user.email ci@sel4.systems
+    - run: git commit -m "auto-deployed"
+    - run: git push
