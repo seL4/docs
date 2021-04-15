@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-04-14 03:19:15 +0000 -->
+<!-- Page last generated 2021-04-15 03:19:33 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1720,8 +1720,8 @@ The caller must have a maximum control priority greater than or equal to the thr
 <p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_schedcontrol">seL4_SchedControl</h3>
 
-<h4 id="configure">Configure</h4>
-<p><code class="highlighter-rouge">static inline int seL4_SchedControl_Configure</code></p>
+<h4 id="configureflags">ConfigureFlags</h4>
+<p><code class="highlighter-rouge">static inline int seL4_SchedControl_ConfigureFlags</code></p>
 
 <p>Set the parameters of a scheduling context by invoking the scheduling control capability. If the scheduling context is bound to a currently running thread, the parameters will take effect immediately: that is the current budget will be increased or reduced by the difference between the new and previous budget and the replenishment time will be updated according to any difference in the period. This can result in active threads being post-poned or released depending on the nature of the parameter change and the state of the thread. Additionally, if the scheduling context was previously empty (no budget) but bound to a runnable thread, this can result in a thread running for the first time since it now has access to CPU time. This call will return seL4 Invalid Argument if the parameters are too small (smaller than the kernel WCET for this platform) or too large (will overflow the timer).</p>
 
@@ -1763,6 +1763,11 @@ The caller must have a maximum control priority greater than or equal to the thr
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">badge</code></td>
       <td>Identifier for this scheduling context. Delivered to timeout exception handler. Can be used to determine which scheduling context triggered the timeout.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">flags</code></td>
+      <td>Bitwise OR’d set of seL4_SchedContextFlag.</td>
     </tr>
   </tbody>
 </table>
@@ -1891,7 +1896,7 @@ this may or may not require the consumption of a hardware register.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_TCB_ConfigureSingleStepping_t</code>: Struct that contains                 <code class="highlighter-rouge">seL4_Error error</code>, an seL4 API error value,                 <code class="highlighter-rouge">seL4_Bool bp_was_consumed</code>, a boolean which indicates whether or not the <code class="highlighter-rouge">bp_num</code>                 breakpoint ID that was passed to the function, was consumed in the setup of the single-stepping                 functionality: if this is <code class="highlighter-rouge">true</code>, the caller should not attempt to re-use <code class="highlighter-rouge">bp_num</code>                 until it has disabled the single-stepping functionality via a subsequent call to                 seL4_TCB_ConfigureSingleStepping with an <code class="highlighter-rouge">num_instructions</code> argument of 0.</p>
 
-<h4 id="configure-1">Configure</h4>
+<h4 id="configure">Configure</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
 
 <p>Set the parameters of a TCB</p>
@@ -5915,7 +5920,7 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_schedcontrol">seL4_SchedControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#configure">Configure</a></li>
+<li class="toc-entry toc-h4"><a href="#configureflags">ConfigureFlags</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_tcb">seL4_TCB</a>
@@ -5923,7 +5928,7 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#bind-notification">Bind Notification</a></li>
 <li class="toc-entry toc-h4"><a href="#configure-mcs">Configure (MCS)</a></li>
 <li class="toc-entry toc-h4"><a href="#configure-single-stepping">Configure Single Stepping</a></li>
-<li class="toc-entry toc-h4"><a href="#configure-1">Configure</a></li>
+<li class="toc-entry toc-h4"><a href="#configure">Configure</a></li>
 <li class="toc-entry toc-h4"><a href="#copy-registers">Copy Registers</a></li>
 <li class="toc-entry toc-h4"><a href="#get-breakpoint">Get Breakpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#read-registers">Read Registers</a></li>
