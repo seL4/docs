@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-05-06 03:37:49 +0000 -->
+<!-- Page last generated 2021-05-07 03:40:15 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -263,6 +263,12 @@
     
     <div class="content">
       
+<!--
+  Copyright 2017, Data61, CSIRO (ABN 41 687 119 230)
+
+  SPDX-License-Identifier: BSD-2-Clause
+-->
+
 <h1 id="camkes-tutorial-introduction">CAmkES Tutorial: Introduction</h1>
 
 <p>This tutorial is an introduction to CAmkES. This will involve introducing the CAmkES syntax, bootstrapping a basic
@@ -351,8 +357,7 @@ print “Hello CAmkES World” when it starts up.</p>
 <p>For this tutorial we require our component to simply print “Hello CAmkES World”. We define this in
 a typical C file <code class="highlighter-rouge">client.c</code>:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
-<span class="cm">/*
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * CAmkES tutorial part 0: just a component.
  */</span>
 
@@ -378,9 +383,7 @@ of a CAmkES component.</p>
 files are written using the CAmkES syntax. Employing the concepts discussed in the background
 section, we define the following:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* @TAG(DATA61_BSD) */</span>
-
-<span class="cm">/*
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * CAmkES tutorial part 0: just a component.
  */</span>
 
@@ -404,7 +407,6 @@ our component <code class="highlighter-rouge">Client</code> and declare an insta
 directory should contain the following <code class="highlighter-rouge">CMakeLists.txt</code> file:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="c1"># @TAG(DATA61_BSD)</span>
 <span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
 <span class="nf">sel4_tutorials_regenerate_tutorial</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="p">)</span>
 
