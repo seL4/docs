@@ -27,6 +27,7 @@ jobs:
         python-version: 3.9
     - run: pip3 install -U camkes-deps
     - run: sudo apt-get install doxygen
+    - run: sudo gem install bundler
     - run: make build JEKYLL_ENV=production
     - run: tar -cvf site.tar _site/
     - uses: actions/upload-artifact@v2
