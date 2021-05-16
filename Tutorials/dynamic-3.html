@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-05-13 03:45:23 +0000 -->
+<!-- Page last generated 2021-05-16 04:36:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -351,6 +351,7 @@ does, see:
 which is eventually called on by
 <code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code>. So while this
 function may seem tedious, it’s doing some important things.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></li>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/vspace.h</a></li>
@@ -368,7 +369,9 @@ function may seem tedious, it’s doing some important things.</p>
      * @return 0 on succes.
      */</span>
 </code></pre></div></div>
+
 <p>On success, you should see a different error:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [handleUnknownSyscall/106 T0xffffff801ffb5400 "dynamic-3" @40139e]: SysDebugNameThread: cap is not a TCB, halting&gt;&gt;
 halting...
 </code></pre></div></div>
@@ -382,6 +385,7 @@ notice how it spawns the new thread with its own CSpace by
 automatically. This will have an effect on our tutorial! It means that
 the new thread we’re creating will not share a CSpace with our main
 thread.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></li>
 </ul>
@@ -401,7 +405,9 @@ thread.</p>
      * hint 3: the elf image name is in APP_IMAGE_NAME
      */</span>
 </code></pre></div></div>
+
 <p>On success, you should see a different error:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dynamic-3: main@main.c:196 [Cond failed: new_ep_cap == 0]
 	Failed to mint a badged copy of the IPC endpoint into the new thread's CSpace.
 	sel4utils_mint_cap_to_process takes a cspacepath_t: double check what you passed.
@@ -435,39 +441,41 @@ capability to the endpoint we are listening on, so as so allow it to
 send to us immediately. We could have filled the slot with an unbadged
 capability, but then if we were listening for multiple senders, we
 wouldn’t know who was whom.</p>
+
 <ul>
-  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h</a>
-    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  <span class="cm">/* TASK 3: make a cspacepath for the new endpoint cap */</span>
-  <span class="cm">/* hint 1: vka_cspace_make_path()
-   * void vka_cspace_make_path(vka_t *vka, seL4_CPtr slot, cspacepath_t *res)
-   * @param vka Vka interface to use for allocation of objects.
-   * @param slot A cslot allocated by the cspace alloc function
-   * @param res Pointer to a cspacepath struct to fill out
-   *
-   * hint 2: use the cslot of the endpoint allocated above
-   */</span>
-  <span class="n">cspacepath_t</span> <span class="n">ep_cap_path</span><span class="p">;</span>
-  <span class="n">seL4_CPtr</span> <span class="n">new_ep_cap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</code></pre></div>    </div>
-    <p>On success, the output should not change.</p>
-  </li>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/vka.h</a></li>
 </ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    <span class="cm">/* TASK 3: make a cspacepath for the new endpoint cap */</span>
+    <span class="cm">/* hint 1: vka_cspace_make_path()
+     * void vka_cspace_make_path(vka_t *vka, seL4_CPtr slot, cspacepath_t *res)
+     * @param vka Vka interface to use for allocation of objects.
+     * @param slot A cslot allocated by the cspace alloc function
+     * @param res Pointer to a cspacepath struct to fill out
+     *
+     * hint 2: use the cslot of the endpoint allocated above
+     */</span>
+    <span class="n">cspacepath_t</span> <span class="n">ep_cap_path</span><span class="p">;</span>
+    <span class="n">seL4_CPtr</span> <span class="n">new_ep_cap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+<p>On success, the output should not change.</p>
 
 <h3 id="badge-a-capability">Badge a capability</h3>
 
 <p>As discussed above, we now just mint a badged copy of a capability to
 the endpoint we’re listening on, into the new thread’s CSpace, in the
 free slot that the VKA library found for us.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 4: copy the endpont cap and add a badge to the new cap */</span>
     <span class="cm">/* hint 1: sel4utils_mint_cap_to_process()
-     * seL4_CPtr sel4utils_mint_cap_to_process(sel4utils_process_t *process, cspacepath_t src, seL4_CapRights rights, seL4_CapData_t data)
+     * seL4_CPtr sel4utils_mint_cap_to_process(sel4utils_process_t *process, cspacepath_t src, seL4_CapRights rights, seL4_Word data)
      * @param process Process to copy the cap to
      * @param src Path in the current cspace to copy the cap from
      * @param rights The rights of the new cap
@@ -475,17 +483,12 @@ free slot that the VKA library found for us.</p>
      * @return 0 on failure, otherwise the slot in the processes cspace.
      *
      * hint 2: for the rights, use seL4_AllRights
-     * hint 3: for the badge use seL4_CapData_Badge_new()
-     * seL4_CapData_t CONST seL4_CapData_Badge_new(seL4_Uint32 Badge)
-     * @param[in] Badge The badge number to use
-     * @return A CapData structure containing the desired badge info
-     *
-     * seL4_CapData_t is generated during build.
-     *
-     * hint 4: for the badge value use EP_BADGE
+     * hint 3: for the badge value use EP_BADGE
      */</span>
 </code></pre></div></div>
+
 <p>On success, the output should look something like:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
 main: hello world
 dynamic-3: main@main.c:247 [Cond failed: sender_badge != EP_BADGE]
@@ -496,6 +499,7 @@ dynamic-3: main@main.c:247 [Cond failed: sender_badge != EP_BADGE]
 
 <p>So now that we’ve given the new thread everything it needs to
 communicate with us, we can let it run. Complete this step and proceed.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h</a></li>
 </ul>
@@ -513,8 +517,10 @@ communicate with us, we can let it run. Complete this step and proceed.</p>
      * @return 0 on success, -1 on error.
      */</span>
 </code></pre></div></div>
+
 <p>On success, you should be able to see the second process running. The output should
 be as follows:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
 process_2: hey hey hey
 main@app.c:67 [Cond failed: msg != ~MSG_DATA]
@@ -528,9 +534,10 @@ dynamic-3: main@main.c:255 [Cond failed: sender_badge != EP_BADGE]
 
 <p>We now wait for the new thread to send us data using <code class="highlighter-rouge">seL4_Recv()</code>…
 Then we verify the fidelity of the data that was transmitted.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -545,15 +552,17 @@ Then we verify the fidelity of the data that was transmitted.</p>
      * hint 3: use the badged endpoint cap that you minted above
      */</span>
 </code></pre></div></div>
+
 <p>On success, the badge error should no longer be visible.</p>
 
 <h3 id="send-a-reply">Send a reply</h3>
 
 <p>Another demonstration of the <code class="highlighter-rouge">sel4_Reply()</code> facility: we reply to the
 message sent by the new thread.</p>
+
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L359</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf#L15</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L621">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L621</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf#L11">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf#L11</a></li>
 </ul>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -569,6 +578,7 @@ message sent by the new thread.</p>
      * hint 3: use the badged endpoint cap that you used for Call
      */</span>
 </code></pre></div></div>
+
 <p>On success, the output should not change.</p>
 
 <h3 id="client-call">Client Call</h3>
@@ -596,11 +606,14 @@ that was sent, and that’s the end.</p>
                <span class="s">"Missing arguments.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="n">seL4_CPtr</span> <span class="n">ep</span> <span class="o">=</span> <span class="p">(</span><span class="n">seL4_CPtr</span><span class="p">)</span> <span class="n">atol</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 </code></pre></div></div>
+
 <p>On success, you should see the following:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>process_2: hey hey hey
 main: got a message 0x6161 from 0x61
 process_2: got a reply: 0xffffffffffff9e9e
 </code></pre></div></div>
+
 <p>That’s it for this tutorial.</p>
 
 <hr />
@@ -653,10 +666,10 @@ dynamic-3/dynamic-3.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Sat May 1 10:13:02 2021 +1000 88de871
+            Site last updated: Sun May 16 14:31:52 2021 +1000 4600409
           </li>
           <li>
-                Page last updated: Sat May 1 10:13:02 2021 +1000 88de871
+                Page last updated: Sun May 16 14:31:52 2021 +1000 4600409
           </li>
         
       </ul>

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-05-13 03:45:23 +0000 -->
+<!-- Page last generated 2021-05-16 04:36:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -558,14 +558,14 @@ data, and know which sender you are. Complete the step and proceed.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object_capops.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 7: make a badged copy of it in our cspace. This copy will be used to send
      * an IPC message to the original cap */
     /* hint 1: vka_mint_object()
-     * int vka_mint_object(vka_t *vka, vka_object_t *object, cspacepath_t *result, seL4_CapRights rights, seL4_CapData_t badge)
+     * int vka_mint_object(vka_t *vka, vka_object_t *object, cspacepath_t *result, seL4_CapRights rights, seL4_Word badge)
      * @param[in] vka The allocator for the cspace.
      * @param[in] object Target object for cap minting.
      * @param[out] result Allocated cspacepath.
@@ -574,17 +574,7 @@ data, and know which sender you are. Complete the step and proceed.</p>
      * @return 0 on success
      *
      * hint 2: for the rights, use seL4_AllRights
-     * hint 3: for the badge use seL4_CapData_Badge_new()
-     * seL4_CapData_t CONST seL4_CapData_Badge_new(seL4_Uint32 Badge)
-     * @param[in] Badge The badge number to use
-     * @return A CapData structure containing the desired badge info
-     *
-     * seL4_CapData_t is generated during build.
-     * The type definition and generated field access functions are defined in a generated file:
-     * build/x86/pc99/libsel4/include/sel4/types_gen.h
-     * It is generated from the following definition:
-     *
-     * hint 4: for the badge use EP_BADGE
+     * hint 3: for the badge use EP_BADGE
      */
 </code></pre></div></div>
 <p>On completion, the output will not change.</p>
@@ -610,8 +600,8 @@ meaningful data, and the number of capabilities that are going to be
 transmitted in the message.</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -679,7 +669,7 @@ response message, if the sender doesn’t want it to.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -718,7 +708,7 @@ reading the reply from the receiver. As mentioned before, the
 designated, single IPC buffer.</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -744,7 +734,7 @@ explicitly interested in distinguishing the sender.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/aarch32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -771,7 +761,7 @@ transmitted message. It’s very unlikely you’ll encounter an error here.
 Complete them and proceed to the next step.</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -794,7 +784,7 @@ Complete them and proceed to the next step.</p>
 <p>Again, just reading the data from the Message Registers.</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -814,7 +804,7 @@ Complete them and proceed to the next step.</p>
 <p>And writing Message Registers again.</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/sel4/arch/functions.h</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -846,7 +836,7 @@ Complete the step and pat yourself on the back.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h">https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h</a></li>
-  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/shared_types_32.bf</a></li>
+  <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -919,10 +909,10 @@ dynamic-2/dynamic-2.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Sat May 1 10:13:02 2021 +1000 88de871
+            Site last updated: Sun May 16 14:31:52 2021 +1000 4600409
           </li>
           <li>
-                Page last updated: Sat May 1 10:13:02 2021 +1000 88de871
+                Page last updated: Sun May 16 14:31:52 2021 +1000 4600409
           </li>
         
       </ul>
