@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-05-16 04:36:41 +0000 -->
+<!-- Page last generated 2021-05-17 03:57:31 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -390,8 +390,10 @@ sudo apt-get install qemu-kvm
 <h2 id="proof-dependencies">Proof Dependencies</h2>
 
 <h3 id="linux-packages---debian">Linux Packages - Debian</h3>
+
 <p>On <strong>Buster</strong> or <strong>Bullseye</strong>, to run all proofs against the
 <strong>ARMv7-A</strong> architecture you will need to install the following packages:</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
     python3 python3-pip python3-dev <span class="se">\</span>
     gcc-arm-none-eabi build-essential libxml2-utils ccache <span class="se">\</span>
@@ -409,8 +411,10 @@ so you will need to install it from the <a href="https://docs.haskellstack.org/e
 website</a>.</p>
 
 <h3 id="linux-packages---ubuntu">Linux Packages - Ubuntu</h3>
+
 <p>On <strong>Ubuntu 18.04</strong>, to run all proofs against the <strong>ARMv7-A</strong>
 architecture you will need to install the following packages:</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
     python3 python3-pip python3-dev <span class="se">\</span>
     gcc-arm-none-eabi build-essential libxml2-utils ccache <span class="se">\</span>
@@ -421,26 +425,32 @@ architecture you will need to install the following packages:</p>
 </code></pre></div></div>
 
 <h3 id="python">Python</h3>
+
 <p>The build system for the seL4 kernel requires several python packages:</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>pip3 <span class="nb">install</span> <span class="nt">--upgrade</span> pip
 <span class="nb">sudo </span>pip3 <span class="nb">install </span>sel4-deps
 </code></pre></div></div>
 
 <h3 id="haskell-stack">Haskell Stack</h3>
+
 <p>After installing
 <a href="https://docs.haskellstack.org/en/stable/README">haskell-stack</a>, make sure
 you’ve adjusted your <code class="highlighter-rouge">PATH</code> to include <code class="highlighter-rouge">$HOME/.local/bin</code>, and that you’re
 running an up-to-date version:</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stack upgrade <span class="nt">--binary-only</span>
 which stack <span class="c"># should be $HOME/.local/bin/stack</span>
 </code></pre></div></div>
 
 <h3 id="macos">MacOS</h3>
+
 <p>Other than the cross-compiler <code class="highlighter-rouge">gcc</code> toolchain, setup on MacOS should be similar
 to that on Ubuntu. To set up a cross-compiler, try the following:</p>
+
 <ul>
   <li>Install <code class="highlighter-rouge">XCode</code> from the AppStore and its command line tools. If you are
-running MacPorts, you have these already. Otherwise, after you have XCode
+running MacPorts or homebrew, you have these already. Otherwise, after you have XCode
 installed, run <code class="highlighter-rouge">gcc --version</code> in a terminal window. If it reports a version,
 you’re set. Otherwise it should pop up a window and prompt for installation
 of the command line tools.</li>
@@ -457,6 +467,8 @@ putting it in <code class="highlighter-rouge">~/bin</code>, or somewhere else in
 structure, where <code class="highlighter-rouge">l4v</code> is the repository you are currently looking at:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification/
+    HOL4/
+    graph-refine/
     isabelle/
     l4v/
     seL4/
