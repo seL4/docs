@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-06-02 05:54:15 +0000 -->
+<!-- Page last generated 2021-06-03 05:31:19 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -432,8 +432,8 @@ look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>:</p>
 <span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0<span class="p">)</span>
 
 <span class="c1"># Get Default Linux VM files</span>
-<span class="nf">GetDefaultLinuxKernelFile</span><span class="p">(</span>default_kernel_file<span class="p">)</span>
-<span class="nf">GetDefaultLinuxRootfsFile</span><span class="p">(</span>default_rootfs_file<span class="p">)</span>
+<span class="nf">GetArchDefaultLinuxKernelFile</span><span class="p">(</span><span class="s2">"32"</span> default_kernel_file<span class="p">)</span>
+<span class="nf">GetArchDefaultLinuxRootfsFile</span><span class="p">(</span><span class="s2">"32"</span> default_rootfs_file<span class="p">)</span>
 
 <span class="c1"># Decompress Linux Kernel image and add to file server</span>
 <span class="nf">DecompressLinuxKernel</span><span class="p">(</span>extract_linux_kernel decompressed_kernel <span class="si">${</span><span class="nv">default_kernel_file</span><span class="si">}</span><span class="p">)</span>
@@ -457,8 +457,8 @@ look at the app’s <code class="highlighter-rouge">CMakeList.txt</code>:</p>
 including  <code class="highlighter-rouge">DeclareCAmkESVM(Init0)</code>, which is used to define the <code class="highlighter-rouge">Init0</code> VM component.
 Each Init component requires a corresponding <code class="highlighter-rouge">DeclareCAmkESVM</code> function.</p>
 
-<p><code class="highlighter-rouge">GetDefaultLinuxKernelFile</code> (defined in <code class="highlighter-rouge">projects/camkes/vm-linux/vm-linux-helpers.cmake</code>) 
-is a helper function that retrieves the location of the vm images provided
+<p><code class="highlighter-rouge">GetArchDefaultLinuxKernelFile</code> (defined in <code class="highlighter-rouge">projects/camkes/vm-linux/vm-linux-helpers.cmake</code>)
+is a helper function that retrieves the location of an architectural specific vm image provided
 in the <code class="highlighter-rouge">projects/vm-linux</code> folder, which contains some tools for building new linux kernel
 and root filesystem images, as well as the images that these tools
 produce. A fresh checkout of this project will contain some pre-built
@@ -674,8 +674,8 @@ external project and add it to the overlay.</p>
 <span class="nf">GetDefaultLinuxMd5</span><span class="p">(</span>linux_md5<span class="p">)</span>
 <span class="c1"># Download and Configure our Linux sources</span>
 <span class="nf">DownloadLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_md5</span><span class="si">}</span> vm_linux_extract_dir download_vm_linux<span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/config"</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/Module.symvers"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/32/config"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/32/Module.symvers"</span><span class="p">)</span>
 <span class="nf">ConfigureLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_config</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_symvers</span><span class="si">}</span> configure_vm_linux
     DEPENDS download_vm_linux
 <span class="p">)</span>
