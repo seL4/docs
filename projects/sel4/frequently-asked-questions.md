@@ -46,9 +46,9 @@ delegatable.
  L4 is a family of very small,
 high-performance microkernels evolved from the first L4 microkernel
 developed by Jochen Liedtke in the early '90s. See the
-[L4 microkernel family](http://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia for more details.
+[L4 microkernel family](https://en.wikipedia.org/wiki/L4_microkernel_family) entry on Wikipedia for more details.
 
-<img style="width:100%" src="http://sel4.systems/images/l4family.svg" alt="L4 microkernel family tree" aria-describedby="p1"/>
+<img style="width:100%" src="https://sel4.systems/images/l4family.svg" alt="L4 microkernel family tree" aria-describedby="p1"/>
 
 <p id="p1">L4 microkernel family tree from 1993 until 2013. Black arrows indicate code, green arrows ABI
 inheritance. Node colours indicate author organisations. A full description of L4 variants and history can be found along
@@ -309,7 +309,7 @@ specific security theorems.
 
 ### What are the proof assumptions?
  The brief version is: we assume
-that in-kernel assembly code is correct, hardware behaves correctly,
+that the few lines of in-kernel assembly code are correct, hardware behaves correctly,
 in-kernel hardware management (TLB and caches) is correct, and boot code
 is correct. The hardware model assumes DMA to be off or to be trusted.
 The security proofs additionally give a list of conditions how the
@@ -317,7 +317,7 @@ system is configured.
 
 For a more in-depth description, see the
 [proof and assumptions
-page](http://sel4.systems/Info/FAQ/proof.pml).
+page](https://sel4.systems/Info/FAQ/proof.pml).
 
 ### How do I leverage seL4's formal proofs?
  The seL4 proofs are just
@@ -578,7 +578,7 @@ Enabling or disabling the fastpath should not have any impact on the
 kernel behaviour except for performance.
 
 There is a section on the fastpath and its verification in
-[this article](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract). The fastpath discussion starts on page 23.
+[this article](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract). The fastpath discussion starts on page 23.
 
 ### I want to know more about seL4 functionality/design/implementation/philosophy
 
@@ -597,7 +597,7 @@ uptake.
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
-[license page](http://sel4.systems/Info/license.pml) for more details.
+[license page](https://sel4.systems/Info/license.pml) for more details.
 
 ## How do I contribute to seL4?
  See
@@ -626,24 +626,24 @@ There are two recommended ways to do this.
 
 For build instructions, and how to get started, see the
 [Getting started](/GettingStarted) page.
-Also, UNSW's [Advanced Operating Systems course](http://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
+Also, UNSW's [Advanced Operating Systems course](https://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
 builds an OS on top of seL4. If you have access to an [Odroid-C2](https://www.hardkernel.com/shop/odroid-c2/),
 you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.
 
 ## Where can I learn more?
 CSIRO's
-[seL4 project](http://ts.data61.csiro.au/projects/seL4/) and
-[Trustworthy Systems](http://ts.data61.csiro.au/)
+[seL4 project](https://ts.data61.csiro.au/projects/seL4/) and
+[Trustworthy Systems](https://ts.data61.csiro.au/)
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:
 
-- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](http://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract),
+- [from L3 to seL4 – what have we learnt in 20 years of L4 microkernels?](https://ts.data61.csiro.au/publications/nictaabstracts/Elphinstone_Heiser_13.abstract),
   a 20-year retrospective of L4 microkernels;
 - [the original 2009 paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_EHACDEEKNSTW_09.abstract) describing seL4 and its formal
       verification;
 - [a much longer paper detailing the complete verification story of
-      seL4](http://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
+      seL4](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
       , including the high-level security proofs, binary
       verification and timeliness analysis. It also contains an analysis
       of the cost of verification, and how it compares to that of
