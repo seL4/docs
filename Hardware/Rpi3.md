@@ -71,12 +71,22 @@ make CROSS_COMPILE=arm-linux-gnueabi-
 This will enable you to get the most up-to-date U-boot which will boot
 seL4 on the RPi3 successfully.
 
-**NOTE:** Automatic revert is not going to work if you are using the latest version of u-boot. You need to manually revert the change by looking at the changeset.
+**NOTE:** Automatic revert is not going to work if you are using the
+latest version of u-boot. You need to manually revert the change by 
+looking at the changeset.
 
-Building u-boot using configuration rpi_3_3b_defconfig is going to produce an image that can boot seL4 on the Raspberry PI Model 3B and 3B+. Unfortunately for the 3B+ tftp boot is not going to work using this version of u-boot (the `tftp` command will report error `No Ethernet found`).
-In this case you need to build an image specific for the 3B+. Unfortunately the provided defconfig file for the 3B+ model (`rpi_3_b_plus_defconfig`) doesn't appear to build correctly.
+Building u-boot using configuration `rpi_3_3b_defconfig` is going to
+produce an image that can boot seL4 on the Raspberry PI Model 3B and
+3B+. Unfortunately for the 3B+ tftp boot is not going to work using 
+this version of u-boot (the `tftp` command will report error 
+`No Ethernet found`).
+In this case you need to build an image specific for the 3B+. 
+Unfortunately the provided defconfig file for the 3B+ model 
+(`rpi_3_b_plus_defconfig`) doesn't appear to build correctly.
 
-In order to use tftp boot on a Raspberry PI Model 3B+, use the defconfig for the 3B (as described above), then manually change the `CONFIG_DEFAULT_DEVICE_TREE` parameter in the `.config` from:
+In order to use tftp boot on a Raspberry PI Model 3B+, use the 
+defconfig for the 3B (as described above), then manually change the 
+`CONFIG_DEFAULT_DEVICE_TREE` parameter in the `.config` from:
 ```
 CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
 ```
@@ -84,7 +94,8 @@ to:
 ```
 CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b-plus"
 ```
-Now the generated image should be able to use the on-board Ethernet device for TFTP.
+Now the generated image should be able to use the on-board 
+Ethernet device for TFTP.
 
 
 
@@ -152,8 +163,8 @@ tftp 0x10000000 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-arm-bcm2837
 bootelf 0x10000000
 ```
 
-If you are using a Raspberry PI Model 3B+, make sure you build the correct u-boot image
-as described above.
+If you are using a Raspberry PI Model 3B+, make sure you build the 
+correct u-boot image as described above.
 
 To use static IP instead of DHCP, use:
 ```
