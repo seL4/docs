@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-06-08 04:15:14 +0000 -->
+<!-- Page last generated 2021-06-09 03:57:40 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -381,8 +381,14 @@ and supports loading a DTB from the EFI implementation.</p>
 
 <h2 id="risc-v">RISC-V</h2>
 
-<p>On RISC-V the elfloader is launched by the <code class="highlighter-rouge">bbl</code>, which is integrated in the seL4 build system.
-The <code class="highlighter-rouge">bbl</code> brings up secondary cores, and the elfloader uses SBI to provide a serial output on RISC-V.</p>
+<p>The elfloader on RISC-V basically follows the ARM platforms. However, due to the
+lack of available platforms, only two ways are currently supported actively:
+building it as ELF file or binary image. In bot cases the platform must provide
+a <a href="https://github.com/riscv/riscv-sbi-doc">SBI</a> implementation, which will be
+used by the elfloader for the log output channel and the multicore boot. The
+seL4 build system allows building <a href="https://github.com/riscv/opensbi"><code class="highlighter-rouge">OpenSBI</code></a>
+with the elfloader as payload. The <a href="https://github.com/riscv/riscv-pk"><code class="highlighter-rouge">bbl</code></a>
+Support has been dropped, because it is superseded by <code class="highlighter-rouge">OpenSBI</code>.</p>
 
 <h2 id="driver-framework">Driver framework</h2>
 

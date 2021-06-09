@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-06-08 04:15:14 +0000 -->
+<!-- Page last generated 2021-06-09 03:57:40 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -339,7 +339,8 @@ with a single VM instance that serves a static website. The second configuration
 multiple VM’s serving a static website. The multiple VM configuration has an additional VM that acts
 as an network access point for the other VMs.
 It would be possible to modify which static website is being served by modifying the static html files located in <code class="highlighter-rouge">/run/site/</code>
-in the Linux guest’s file system.</p>
+in the Linux guest’s file system.
+If you don’t have <a href="https://wiki.odroid.com/odroid-xu4/odroid-xu4">odroid-xu4</a> to test this project you still can use emulation. Please see “Configure: Single VM Webserver (qemu-arm-virt)”. Notice: check “Configure networking (qemu-arm-virt)” to learn more about this topic”.</p>
 
 <h2 id="plans">Plans</h2>
 
@@ -444,6 +445,121 @@ buildroot login:
 </code></pre></div></div>
 <p>You could then navigate to 10.13.1.7:3000 in a web browser on the same local network.</p>
 
+<h4 id="configure-single-vm-webserver-qemu-arm-virt">Configure: Single VM Webserver (qemu-arm-virt)</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Initialise project build directory</span>
+<span class="nb">mkdir </span>build
+<span class="nb">cd </span>build
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>qemu-arm-virt
+<span class="c">#...</span>
+<span class="c">#Warning: no cpu specified for virt board, fallback on cortex-a53</span>
+<span class="c">#...</span>
+<span class="c">#-- Configuring done</span>
+<span class="c">#-- Generating done</span>
+<span class="c">#-- Build files have been written to: /home/hugo/seL4/sel4webserver/build</span>
+</code></pre></div></div>
+
+<h4 id="build-webserver-qemu-arm-virt">Build Webserver (qemu-arm-virt)</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># build</span>
+ninja
+<span class="c"># [13/443] Performing configure step for 'cgi-load-file'</span>
+<span class="c"># -- The C compiler identification is GNU 9.3.0</span>
+<span class="c"># ...</span>
+<span class="c"># This step will take some time, be patient...</span>
+<span class="c"># [358/443] Completed 'docsite'</span>
+<span class="c"># ...</span>
+<span class="c"># [443/443] Generating images/capdl-loader-image-arm-qemu-arm-virt</span>
+
+<span class="c"># Resulting artifacts:</span>
+<span class="nb">ls </span>images
+<span class="c"># capdl-loader-image-arm-qemu-arm-virt</span>
+</code></pre></div></div>
+<h4 id="running-sel4-qemu-arm-virt-image">Running seL4 qemu-arm-virt image</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate 
+<span class="c"># ./simulate: qemu-system-aarch64 -machine virt,virtualization=on,highmem=off,secure=off -cpu cortex-a53 -nographic  -m size=2048  -kernel images/capdl-loader- image-arm-qemu-arm-virt </span>
+<span class="c"># ELF-loader started on CPU: ARM Ltd. Cortex-A53 r0p4</span>
+<span class="c"># ...</span>
+<span class="c"># Bootstrapping kernel</span>
+<span class="c"># Warning: Could not infer GIC interrupt target ID, assuming 0.</span>
+<span class="c"># Booting all finished, dropped to user space</span>
+<span class="c"># &lt;&lt;seL4(CPU 0) [decodeUntypedInvocation/205 T0xff80bf817400 "rootserver" @4006f8]: Untyped Retype: Insufficient memory (1 * 2097152 bytes needed, 0 bytes available).&gt;&gt;</span>
+<span class="c"># Loading Linux: 'linux' dtb: 'linux-dtb'</span>
+<span class="c"># ...</span>
+<span class="c"># [    0.000000] Booting Linux on physical CPU 0x0</span>
+<span class="c"># [    0.000000] Linux version 4.9.189+ (alisonf@shinyu-un) (gcc version 6.3.0 20170516 (Debian 6.3.0-18) ) #16 SMP Tue Feb 25 14:14:50 AEDT 2020</span>
+<span class="c"># [    0.000000] Boot CPU: AArch64 Processor [410fd034]</span>
+<span class="c"># ...</span>
+<span class="c"># Starting network: OK</span>
+<span class="c"># [    6.538957] connection: loading out-of-tree module taints kernel.</span>
+<span class="c"># [    6.579046] Event Bar (dev-0) initalised</span>
+<span class="c"># [    6.620310] 2 Dataports (dev-0) initalised</span>
+<span class="c"># ifconfig: SIOCGIFFLAGS: No such device</span>
+<span class="c"># udhcpc: SIOCGIFINDEX: No such device</span>
+<span class="c">#</span>
+<span class="c"># Welcome to Buildroot</span>
+<span class="c"># buildroot login: </span>
+
+</code></pre></div></div>
+
+<h2 id="configure-networking-qemu-arm-virt">Configure networking (qemu-arm-virt)</h2>
+
+<p>Networking under qemu may be somewhat tricky and specific configuration details may vary depending on the host configuration/distro/etc. Thus here there are some few suggestions to try having your set up ready as easy as possible.
+So, if you want to have networking on your virtualized guest then you can try:</p>
+
+<p>1st- Configure a dhcp server on the host. 
+2nd- Run “simulate” like this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ./simulate --extra-qemu-args="-netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device virtio-net,netdev=mynet0,mac=52:55:00:d1:55:01,disable-modern=on,disable-legacy=off"
+</code></pre></div></div>
+<p>3rd- Manually create the bridge interface to connect the guest and the host neworking. Again, here specific commands’ syntax depends on every environment. Just as an example here what worked on Ubuntu 20.04:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># sudo brctl addif virbr0 eno1
+# sudo brctl addif virbr0 tap0
+# sudo ifconfig tap0 up
+# sudo ifconfig virbr0 up
+# sudo ifconfig eno1 up
+# brctl show
+</code></pre></div></div>
+<p>Anyway, probably you will need to check the documentation of your specific host distro and qemu version to see how a bridge can be created in your specific setup.
+It is well known that on some deployments qemu scripts automatically takes cares of this so you will be able to skip this last step.</p>
+
+<p>Thus if everything goes as desired you should see udhcpc getting networking config, that is, something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting network: OK
+[    6.431947] connection: loading out-of-tree module taints kernel.
+[    6.469091] Event Bar (dev-0) initalised
+[    6.492662] 2 Dataports (dev-0) initalised
+udhcpc: started, v1.31.0
+[   16.026150] random: mktemp: uninitialized urandom read (6 bytes read)
+udhcpc: sending discover
+udhcpc: sending select for 192.168.122.100
+udhcpc: lease of 192.168.122.100 obtained, lease time 600
+[   17.503524] random: mktemp: uninitialized urandom read (6 bytes read)
+adding dns 8.8.8.8
+adding dns 8.8.4.4
+
+Welcome to Buildroot
+buildroot login:
+
+</code></pre></div></div>
+<h2 id="testing-the-web-server-qemu-arm-virt">Testing the web server (qemu-arm-virt)</h2>
+
+<p>Once the networking has been set up, you can check what IP has been assigned to your guest (also it is announced on the screen via udhcpc message…):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udhcpc: sending select for 192.168.122.100
+udhcpc: lease of 192.168.122.100 obtained, lease time 600
+[   17.503524] random: mktemp: uninitialized urandom read (6 bytes read)
+adding dns 8.8.8.8
+adding dns 8.8.4.4
+
+Welcome to Buildroot
+buildroot login: root
+# ifconfig 
+eth0      Link encap:Ethernet  HWaddr 52:55:00:D1:55:01  
+          inet addr:192.168.122.100  Bcast:192.168.122.255  Mask:255.255.255.0
+(...)          
+
+</code></pre></div></div>
+<p>and now just open web browser and open URL: http://<your_assigned_IP>:3000 and you should see an seL4 documentation web page.</your_assigned_IP></p>
+
 <h2 id="contributing">Contributing</h2>
 
 <p>Contributions are welcome in the form of feature requests, documentation requests, or documentation/code contributions.
@@ -485,10 +601,15 @@ See /Contributing for our general contribution guidelinies.</p>
 <li class="toc-entry toc-h4"><a href="#configure-single-vm-webserver">Configure: Single VM Webserver</a></li>
 <li class="toc-entry toc-h4"><a href="#configure-multi-vm-webserver">Configure: Multi-VM Webserver</a></li>
 <li class="toc-entry toc-h4"><a href="#build-webserver">Build Webserver</a></li>
+<li class="toc-entry toc-h4"><a href="#configure-single-vm-webserver-qemu-arm-virt">Configure: Single VM Webserver (qemu-arm-virt)</a></li>
+<li class="toc-entry toc-h4"><a href="#build-webserver-qemu-arm-virt">Build Webserver (qemu-arm-virt)</a></li>
+<li class="toc-entry toc-h4"><a href="#running-sel4-qemu-arm-virt-image">Running seL4 qemu-arm-virt image</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#configure-networking-qemu-arm-virt">Configure networking (qemu-arm-virt)</a></li>
+<li class="toc-entry toc-h2"><a href="#testing-the-web-server-qemu-arm-virt">Testing the web server (qemu-arm-virt)</a></li>
 <li class="toc-entry toc-h2"><a href="#contributing">Contributing</a></li>
 </ul>
 </div>
