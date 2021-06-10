@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>camkes-3.5.0 | seL4 docs</title>
+    <title>camkes-3.10.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">camkes-3.5.0</span>
+            <span property="name">camkes-3.10.0</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -148,36 +148,52 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="camkes-version-camkes-350-release">CAmkES Version camkes-3.5.0 Release</h1>
+    <h1 id="camkes-version-camkes-3100-release">CAmkES Version camkes-3.10.0 Release</h1>
 
-<p>Announcing the release of <code class="highlighter-rouge">camkes-3.5.0</code> with the following changes:</p>
+<p>Announcing the release of <code class="highlighter-rouge">camkes-3.10.0</code> with the following changes:</p>
 
-<p>camkes-3.5.0 2018-05-28
-Using seL4 version 10.0.0</p>
-
-<p>This release is the last release with official support for Kbuild based projects.
-This release and future releases use CMake as the build system for building applications.</p>
+<p>camkes-3.10.0 2021-06-10
+Using seL4 version 12.1.0</p>
 
 <h2 id="changes">Changes</h2>
+
 <ul>
-  <li>Remove <code class="highlighter-rouge">crit</code> and <code class="highlighter-rouge">max_crit</code> fields from TCB CapDL Object
-These fields were previously added to support an earlier version of seL4-mcs that gave threads criticality fields.
-This feature was removed from seL4-mcs. This also means that the arguments to camkes-tool, <code class="highlighter-rouge">--default-criticality</code>
-and <code class="highlighter-rouge">--default-max-criticality</code>, have also been removed.</li>
+  <li>Fixed new line generation in <code class="highlighter-rouge">show_attribute_value</code>.</li>
+  <li>Added const expression attributes to help convert CAmkES attributes to literals.</li>
+  <li>Fixed broken Python nosetests that weren’t updated when moving to Python3 from Python2.</li>
+  <li>Added caching when querying DMA frame physical addresses to avoid unnecessary kernel context switch overheads.</li>
+  <li>Changed templates and libraries to be DMA cache-aware and to not ignore requests for cache-able memory
+allocations.</li>
+  <li>Added a macro function for every dataport to query its size.</li>
+  <li>Changed DMA bookkeeping to keep track of pools of frames and not individual frames.</li>
+  <li>Added code to sanitize the names of nested components for the naming of a components’ DMA pool.</li>
+  <li>Converted the repository to use SPDX license tags.</li>
+  <li>Fixed the passing of LD flags to the linker from CAmkES generation tools.</li>
+  <li>Added the failing C pre-processor command to an exception in the CAmkES parser tools for easier diagnosis.</li>
+  <li>Moved the CAmkES component interface header contents away from <code class="highlighter-rouge">camkes.h</code> and into separate header files that is
+included by <code class="highlighter-rouge">camkes.h</code>.</li>
+  <li>Simplified the <code class="highlighter-rouge">sys_uname</code> library function.</li>
+  <li>Fix handling of array parameters for the CAmkES templates.</li>
+  <li>Sped up proofs for cdl-refine.</li>
+  <li>Fixed a CMake argument marshalling bug in the <code class="highlighter-rouge">execute_process_with_stale_check</code> function.</li>
 </ul>
 
-<h2 id="upgrade-notes">Upgrade Notes</h2>
+<h3 id="upgrade-notes">Upgrade Notes</h3>
+
 <ul>
-  <li>Calls to <code class="highlighter-rouge">camkes.sh</code> that used the above arugments will need to be updated.</li>
+  <li>DMA pools now require an option to be set explicitly to be made to be cache-able. In a <code class="highlighter-rouge">.camkes</code> CAmkES assembly
+file, add the following <code class="highlighter-rouge">&lt;component name&gt;.dma_pool_cached = True;</code> in the ‘configuration’ block to make a component’s
+DMA pool to be cached. Additionally, use <code class="highlighter-rouge">camkes_dma_alloc</code> in libsel4camkes with the correct arguments to allocate
+cached DMA memory from that pool.</li>
 </ul>
 
 <h1 id="full-changelog">Full changelog</h1>
-<p>Use <code class="highlighter-rouge">git log camkes-3.4.0..camkes-3.5.0</code> in
+<p>Use <code class="highlighter-rouge">git log camkes-3.9.0..camkes-3.10.0</code> in
 <a href="https://github.com/seL4/camkes-tool">https://github.com/seL4/camkes-tool</a></p>
 
 <h1 id="more-details">More details</h1>
 <p>See the
-<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.5.0/docs/index.md">documentation</a>
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.10.0/docs/index.md">documentation</a>
 or ask on the mailing list!</p>
 
 
@@ -333,7 +349,7 @@ or ask on the mailing list!</p>
   
       
           <li>
-            <a style="" href="/releases/camkes/camkes-3.10.0.html">
+            <a style=" font-weight: bold; " href="/releases/camkes/camkes-3.10.0.html">
               camkes-3.10.0
             </a>
           </li>
@@ -361,7 +377,7 @@ or ask on the mailing list!</p>
   
       
           <li>
-            <a style=" font-weight: bold; " href="/releases/camkes/camkes-3.5.0.html">
+            <a style="" href="/releases/camkes/camkes-3.5.0.html">
               camkes-3.5.0
             </a>
           </li>
@@ -446,13 +462,13 @@ or ask on the mailing list!</p>
 
       <a href="https://github.com/SEL4PROJ/docs/blob/master/
 
-content_collections/_releases/camkes/camkes-3.5.0.md
+content_collections/_releases/camkes/camkes-3.10.0.md
 
 ">View page on GitHub</a>
       <br />
       <a href="https://github.com/SEL4PROJ/docs/edit/master/
 
-content_collections/_releases/camkes/camkes-3.5.0.md
+content_collections/_releases/camkes/camkes-3.10.0.md
 
 ">Edit page on GitHub</a>
       <br />

@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Odroid-C2 | seL4 docs</title>
+    <title>0.2.1 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -77,20 +77,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Hardware/">
-              <span property="name"><b>Supported Platforms</b></span>
-            </a>
-            <meta property="position" content="2" />
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Odroid-C2</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">0.2.1</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -147,63 +136,127 @@
 
 
   </div>
-  <div class="col-sm-8 col-md-9 col-lg-8 main">
-    
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#u-boot">U-Boot</a></li>
-<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
-<li class="toc-entry toc-h2"><a href="#booting-via-tftp">Booting via TFTP</a></li>
+  <div class="content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="capdl-version-021-release">capDL Version 0.2.1 Release</h1>
+
+<p>Announcing the release of <code class="highlighter-rouge">0.2.1</code> with the following changes:</p>
+
+<p>0.2.1 2021-06-10
+Using seL4 version 12.1.0</p>
+
+<h2 id="changes">Changes</h2>
+
+<ul>
+  <li>Added page-upper-directory caps to the valid TCB check for platforms like QEMU arm-virt as they use different paging
+structures.</li>
+  <li>Added const qualifiers to the capdl-loader-app to avoid compiler warnings against other libraries.</li>
+  <li>Improved the README for the capdl-loader-app.</li>
 </ul>
-      </nav>
-    
-    <div class="content">
-      <h1 id="odroid-c2">Odroid-C2</h1>
 
-<p>The Odroid-C2 is a single board computer based on the Amlogic S905
-System-on-Chip.</p>
+<h2 id="upgrade-notes">Upgrade Notes</h2>
 
-<p><a href="https://wiki.odroid.com/odroid-c2/odroid-c2">https://wiki.odroid.com/odroid-c2/odroid-c2</a></p>
+<ul>
+  <li>None to be aware of. This is not a source-breaking or binary-breaking release.</li>
+</ul>
 
-<p>Only 64-bit mode is supported both with and without SMP. Hypervisor
-support has not been tested.</p>
+<h1 id="full-changelog">Full changelog</h1>
+<p>Use <code class="highlighter-rouge">git log capdl-0.2.0..0.2.1</code> in
+<a href="https://github.com/seL4/capdl">https://github.com/seL4/capdl</a></p>
 
-<h2 id="u-boot">U-Boot</h2>
+<h1 id="more-details">More details</h1>
+<p>See the
+<a href="https://github.com/seL4/capdl/tree/master/capDL-tool/doc">documentation</a>
+or ask on the mailing list!</p>
 
-<p>The default U-Boot will allocate DMA regions that can corrupt seL4
-kernel memory.
-Mainline U-Boot can be used instead on this board.
-Some Linux distributions include mainline U-Boot binaries compiled for
-this board, or you can compile U-Boot yourself.</p>
 
-<h2 id="building-sel4test">Building seL4test</h2>
-
-<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo <span class="nb">sync
-mkdir </span>cbuild
-<span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>odroidc2 <span class="nt">-DAARCH64</span><span class="o">=</span>1
-<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
-<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
-<span class="c"># parameters to suit your needs.</span>
-ninja
-
-</code></pre></div></div>
-
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
-
-<h2 id="booting-via-tftp">Booting via TFTP</h2>
-
-<p>Make sure you’ve set up a TFTP server to serve the seL4 image.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
-tftp 0x20000000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-arm-odroidc2
-go 0x20000000
-</code></pre></div></div>
-
-    </div>
   </div>
+
+
+
+
+
+
+
+  
+  
+<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+    <ul class="section-nav">
+    	<h2> CapDL </h2> 
+        <li>
+          
+          <a style="" class="" href="/projects/capdl/">
+            Documentation homepage
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <h3>Repositories</h3>
+    
+        <li>
+          <a class="" href="https://github.com/seL4/capdl">
+            capdl
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+  
+      
+          <h3>Releases</h3>
+      
+          <li>
+            <a style="" href="/releases/capdl/0.1.0.html">
+              CapDL 0.1.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style=" font-weight: bold; " href="/releases/capdl/0.2.1.html">
+              0.2.1
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/capdl/0.2.0.html">
+              capdl-0.2.0
+            </a>
+          </li>
+  
+
+
+
+
+
+    </ul>
+
+</div>
+
+
 </div>
 
     </main>
@@ -237,7 +290,6 @@ go 0x20000000
             Site last updated: Thu Jun 10 17:06:24 2021 +1000 ff4ab97
           </li>
           <li>
-                Page last updated: Thu Jun 10 17:06:24 2021 +1000 ff4ab97
           </li>
         
       </ul>
@@ -247,13 +299,13 @@ go 0x20000000
 
       <a href="https://github.com/SEL4PROJ/docs/blob/master/
 
-Hardware/OdroidC2.md
+content_collections/_releases/capdl/0.2.1.md
 
 ">View page on GitHub</a>
       <br />
       <a href="https://github.com/SEL4PROJ/docs/edit/master/
 
-Hardware/OdroidC2.md
+content_collections/_releases/capdl/0.2.1.md
 
 ">Edit page on GitHub</a>
       <br />
