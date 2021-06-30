@@ -35,6 +35,7 @@ workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-wo
     - are any concurrent PRs (in other repositories) dependent on this PR?
 - State what testing has been performed:
     - Run sel4test and for which platforms.
+    - If a new major feature has been added, corresponding tests must be added to `sel4test`.
 
 ### Reviewers
 
