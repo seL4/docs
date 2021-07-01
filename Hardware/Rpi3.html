@@ -3,13 +3,13 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-07-01 03:33:08 +0000 -->
+<!-- Page last generated 2021-07-01 23:57:00 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Raspberry PI 3 Model B | seL4 docs</title>
+    <title>Raspberry PI 3 Model B and Model B+ | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Raspberry PI 3 Model B</span>
+            <span property="name">Raspberry PI 3 Model B and Model B+</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -150,7 +150,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="raspberry-pi-3-model-b">Raspberry PI 3 Model B</h1>
+      <h1 id="raspberry-pi-3-model-b-and-model-b">Raspberry PI 3 Model B and Model B+</h1>
 
 <p>This is an experimental port and is not guaranteed to work.</p>
 
@@ -180,7 +180,7 @@
   </tbody>
 </table>
 
-<h2 id="running-sel4-on-the-raspberry-pi-3">Running seL4 on the Raspberry Pi 3</h2>
+<h2 id="running-sel4-on-the-raspberry-pi-3b3b">Running seL4 on the Raspberry Pi 3B/3B+</h2>
 
 <p>Please also find a feature article going on seL4 the Raspberry Pi 3
 <a href="https://research.csiro.au/tsblog/sel4-raspberry-pi-3/">on our blog</a> (and check out the rest of the blog too!)</p>
@@ -219,6 +219,30 @@ make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnue
 
 <p>This will enable you to get the most up-to-date U-boot which will boot
 seL4 on the RPi3 successfully.</p>
+
+<p><strong>NOTE:</strong> Automatic revert is not going to work if you are using the
+latest version of u-boot. You need to manually revert the change by
+looking at the changeset.</p>
+
+<p>Building u-boot using configuration <code class="highlighter-rouge">rpi_3_3b_defconfig</code> is going to
+produce an image that can boot seL4 on the Raspberry PI Model 3B and
+3B+. Unfortunately for the 3B+ tftp boot is not going to work using
+this version of u-boot (the <code class="highlighter-rouge">tftp</code> command will report error
+<code class="highlighter-rouge">No Ethernet found</code>).
+In this case you need to build an image specific for the 3B+.
+Unfortunately the provided defconfig file for the 3B+ model
+(<code class="highlighter-rouge">rpi_3_b_plus_defconfig</code>) doesn’t appear to build correctly.</p>
+
+<p>In order to use tftp boot on a Raspberry PI Model 3B+, use the
+defconfig for the 3B (as described above), then manually change the
+<code class="highlighter-rouge">CONFIG_DEFAULT_DEVICE_TREE</code> parameter in the <code class="highlighter-rouge">.config</code> from:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
+</code></pre></div></div>
+<p>to:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b-plus"
+</code></pre></div></div>
+<p>Now the generated image should be able to use the on-board
+Ethernet device for TFTP.</p>
 
 <h2 id="sd-card-setup">SD card setup</h2>
 <p>The PI boots from the first FAT32 partition on the
@@ -334,6 +358,17 @@ tftp 0x10000000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-arm-bc
 bootelf 0x10000000
 </code></pre></div></div>
 
+<p>If you are using a Raspberry PI Model 3B+, make sure you build the
+correct u-boot image as described above.</p>
+
+<p>To use static IP instead of DHCP, use:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start
+setenv ipaddr &lt;RPI_IP_ADDRESS&gt;
+setenv serverip &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;
+tftp 0x10000000 sel4test-driver-image-arm-bcm2837
+bootelf 0x10000000
+</code></pre></div></div>
+
     </div>
   </div>
 </div>
@@ -366,10 +401,10 @@ bootelf 0x10000000
         </li>
         
           <li>
-            Site last updated: Tue Jun 15 12:03:12 2021 +1000 bdd7d32
+            Site last updated: Fri Jul 2 09:52:16 2021 +1000 9115d8b
           </li>
           <li>
-                Page last updated: Tue Jun 15 12:03:12 2021 +1000 bdd7d32
+                Page last updated: Fri Jul 2 09:52:16 2021 +1000 9115d8b
           </li>
         
       </ul>
