@@ -63,7 +63,7 @@ issues should be repoted to the GitHub issue tracker or posted on our mailing li
 
 ### Version Numbers
 
-For versioned releases, seL4 and CAmkES have different policies.
+For versioned releases, seL4 and CAmkES/capDL have different policies.
 
 **seL4** follows [semantic versioning](http://semver.org/). In
 short:
@@ -77,7 +77,7 @@ short:
 
 seL4 versions are tagged in git.
 
-**CAmkES** versions follow the following policy:
+**CAmkES** and **capDL** versions follow the following policy:
 
 MAJOR.MINOR.PATCH:
 - MAJOR: A big rewrite
