@@ -120,7 +120,7 @@ pip install --user pyelftools
 ```
 mkdir sel4-tutorials-manifest
 cd sel4-tutorials-manifest
-repo init -u https://github.com/SEL4PROJ/sel4-tutorials-manifest
+repo init -u https://github.com/seL4/sel4-tutorials-manifest
 repo sync
 ```
 
