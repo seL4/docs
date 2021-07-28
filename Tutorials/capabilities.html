@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-07-27 03:32:46 +0000 -->
+<!-- Page last generated 2021-07-28 03:32:33 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -322,7 +322,7 @@ resources, users use the kernel API, available in <code class="highlighter-rouge
 
 <p>For example, the root task is provided with a capability to its own thread control block (TCB),
  <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>, a constant defined by <code class="highlighter-rouge">libsel4</code>. To change the properties of the initial TCB,
- one can use any of the <a href="https://docs.sel4.systems/ApiDoc.html#sel4_tcb">TCB API methods</a> on this capability.
+ one can use any of the <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_tcb">TCB API methods</a> on this capability.
 Below is an example which changes the stack pointer of the root task’s TCB, a common operation in the 
 root task if a larger stack is needed:</p>
 
@@ -337,12 +337,12 @@ root task if a larger stack is needed:</p>
     <span class="n">registers</span><span class="p">.</span><span class="n">sp</span> <span class="o">=</span> <span class="n">new_sp</span><span class="p">;</span> <span class="c1">// the new stack pointer, derived by prior code.</span>
     
     <span class="cm">/* Write new values */</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="n">registers</span><span class="p">);</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">registers</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Further documentation is available on <a href="https://docs.sel4.systems/ApiDoc.html#read-registers">TCB_ReadRegisters</a> and
-<a href="https://docs.sel4.systems/ApiDoc.html#write-registers">TCB_WriteRegisters</a>.</p>
+<p>Further documentation is available on <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#read-registers">TCB_ReadRegisters</a> and
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#write-registers">TCB_WriteRegisters</a>.</p>
 
 <h3 id="cnodes">CNodes</h3>
 
@@ -381,7 +381,7 @@ we now explain in further detail.</p>
 An <em>invocation</em> is when a CSlot is addressed by implicitly invoking a thread’s installed CSpace root. 
 In the code example above, we use an invocation on the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot to read and write
 to the registers of the TCB represented by the capability in that specific CSlot.</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="n">registers</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">registers</span><span class="p">);</span>
 </code></pre></div></div>
 <p>This implicity looks up the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot in the cspace root of the calling thread, which in this case 
 is the root task.</p>
@@ -403,7 +403,7 @@ More on CSpace depth will be discussed in future tutorials.</li>
 </ul>
 
 <p>In the example below, we directly address the root task’s TCB to make a copy of it in the 0th slot in the cspace root. 
-<a href="https://docs.sel4.systems/ApiDoc.html#copy">CNode copy</a> requires two CSlots to be directly addressed: the destination
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#copy">CNode copy</a> requires two CSlots to be directly addressed: the destination
  CSlot, and the source CSlot. Because we are copying in the same CNode, the root used in both addresses is the same: 
  <code class="highlighter-rouge">seL4_CapInitThreadCNode</code>, which is the slot where seL4 places a capability to the root task’s CSpace root.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_Error</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
@@ -412,7 +412,7 @@ More on CSpace depth will be discussed in future tutorials.</li>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>All <a href="https://docs.sel4.systems/ApiDoc.html#sel4_cnode">CNode invocations</a>, require direct CSpace addressing.</p>
+<p>All <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_cnode">CNode invocations</a>, require direct CSpace addressing.</p>
 
 <h3 id="initial-cspace">Initial CSpace</h3>
 
@@ -540,7 +540,7 @@ to become more familiar with cspaces.</p>
 <ul>
   <li>Use a data structure to track which CSlots in a CSpace are free.</li>
   <li>Make copies of the entire cspace described by <code class="highlighter-rouge">seL4_BootInfo</code></li>
-  <li>Experiment with other <a href="https://docs.sel4.systems/ApiDoc.html#sel4_cnode">CNode invocations</a>.</li>
+  <li>Experiment with other <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_cnode">CNode invocations</a>.</li>
 </ul>
 
 <hr />
@@ -593,10 +593,10 @@ capabilities/capabilities.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Mon Jul 19 14:42:37 2021 +1000 cf5d8df
+            Site last updated: Wed Jul 28 11:02:39 2021 +1000 4e9d4ab
           </li>
           <li>
-                Page last updated: Mon Jul 19 14:42:37 2021 +1000 cf5d8df
+                Page last updated: Wed Jul 28 11:02:39 2021 +1000 4e9d4ab
           </li>
         
       </ul>
