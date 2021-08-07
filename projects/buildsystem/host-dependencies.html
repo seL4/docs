@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-08-06 03:18:38 +0000 -->
+<!-- Page last generated 2021-08-07 03:17:49 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -513,6 +513,48 @@ since Google repo will overwrite this link when you synchronise repositories
 and Isabelle upgrades will have to be performed manually as development
 progresses.</p>
 
+<h2 id="pide-tools">PIDE Tools</h2>
+
+<p>The following tools and tips can make writing proofs easier and more efficient
+when using the Isabelle PIDE jEdit interface.</p>
+
+<h3 id="whitespace-plugin">WhiteSpace plugin</h3>
+
+<p>The WhiteSpace plugin can highlight normally invisible whitespace characters
+such as tabs and spaces, and can remove trailing whitespace on save. To
+install and configure the WhiteSpace plug-in for jEdit, follow
+the instructions below.</p>
+
+<ol>
+  <li>Go to Plugins -&gt; Plugin manager -&gt; Install.</li>
+  <li>Search for <code class="highlighter-rouge">WhiteSpace</code> and install the plugin.</li>
+  <li>Go to Plugins -&gt; Plugin Options -&gt; WhiteSpace -&gt; On save actions.</li>
+  <li>Check “Remove trailing whitespace” and click Apply.</li>
+</ol>
+
+<h3 id="key-bindings-for-navigator">Key bindings for Navigator</h3>
+
+<p>The Isabelle PIDE provides “Back” and “Forward” actions that allow you to
+easily navigate to previous positions in your edit history. Follow the steps
+below to bind a key to the “Back” function. We recommend <code class="highlighter-rouge">[ctrl]+[`]</code>.</p>
+
+<ol>
+  <li>Go to Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</li>
+  <li>Select Action Set -&gt; Plugin: Navigator.</li>
+  <li>Set a shortcut for <code class="highlighter-rouge">Back</code>.</li>
+</ol>
+
+<h3 id="go-to-error-macro">Go-to-error macro</h3>
+
+<p>Run the following commands in the directory <code class="highlighter-rouge">verification/l4v/</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ~/.isabelle/jedit/macros
+cp misc/jedit/macros/goto-error.bsh ~/.isabelle/jedit/macros/.
+</code></pre></div></div>
+
+<p>You can add keybindings for this macro in the usual way, by going to
+Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</p>
+
 
   </div>
 
@@ -568,6 +610,13 @@ progresses.</p>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#isabelle-setup">Isabelle Setup</a></li>
+<li class="toc-entry toc-h2"><a href="#pide-tools">PIDE Tools</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#whitespace-plugin">WhiteSpace plugin</a></li>
+<li class="toc-entry toc-h3"><a href="#key-bindings-for-navigator">Key bindings for Navigator</a></li>
+<li class="toc-entry toc-h3"><a href="#go-to-error-macro">Go-to-error macro</a></li>
+</ul>
+</li>
 </ul>
 </div>
 
