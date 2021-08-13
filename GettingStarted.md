@@ -95,30 +95,37 @@ To build a project, you need to:
 - build the project using Ninja.
 
 1. Use repo to check sel4test out from GitHub. Its manifest is located in the `sel4test-manifest` repository.
+
 ```sh
 mkdir seL4test
 cd seL4test
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
 ```
+
 2. Configure an x86\_64 build directory, with a simulation target to be run by
 [Qemu](http://www.qemu.org/). QEMU is a generic and open source
  machine emulator and virtualizer, and can emulate different
  architectures on different systems.
+
 ```sh
 mkdir build-x86
 cd build-x86
 ../init-build.sh -DPLATFORM=x86_64 -DSIMULATION=TRUE
 ninja
 ```
+
 The target configurations available for each project are potentially different depending on what the project supports.
 [Building/Using](/Developing/Building/Using) describes how projects can generally be configured.
 3. The build images are available in `build-x86/images`, and a script `build-x86/simulation`
 that will run Qemu with the correct arguments to run seL4test.
+
 ```sh
 ./simulate
 ```
+
 4. On success, you should see:
+
    ```
    Test VSPACE0002 passed
 
