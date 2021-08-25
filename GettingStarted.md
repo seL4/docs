@@ -161,7 +161,7 @@ contribute.
 
 You can find a long list of seL4 publications here:
 
-[The seL4 project page at Data61](http://ts.data61.csiro.au/projects/seL4/).
+[The seL4 project page at Data61](https://trustworthy.systems/projects/seL4/).
 
 ### Youtube
 

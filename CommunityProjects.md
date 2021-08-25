@@ -12,18 +12,18 @@ The seL4 kernel is currently used in projects in the following application areas
 
 - Automotive
 - Aviation (e.g.,
-        [SMACCM](http://ts.data61.csiro.au/projects/TS/SMACCM/))
+        [SMACCM](https://trustworthy.systems/projects/TS/SMACCM/))
 - Connected Consumer Devices
 - SCADA
 - Spaceflight (e.g., the
-        [UNSW QB50](http://ts.data61.csiro.au/projects/TS/qb50) satellite.)
+        [UNSW QB50](https://trustworthy.systems/projects/TS/qb50) satellite.)
 
 The following platforms and language runtimes have been or are in the
 process of being ported to seL4:
 
-- [CamkES](http://ts.data61.csiro.au/projects/TS/trustcomp)
+- [CamkES](https://trustworthy.systems/projects/TS/trustcomp)
 - [Genode](http://genode.org/about/index)
-- [Linux (virtualised)](http://ts.data61.csiro.au/projects/TS/virtualisation/about)
+- [Linux (virtualised)](https://trustworthy.systems/projects/TS/virtualisation/about)
 - C
 - [Ivory](http://ivorylang.org/ivory-introduction.html)
 - Rust: The [Robigalia](https://robigalia.org/) project:

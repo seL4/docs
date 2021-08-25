@@ -8,12 +8,12 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # Documentation
 ## Kernel
 
-- [Technical overview paper](https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
-- [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://ts.data61.csiro.au/publications/nictaabstracts/Heiser_Elphinstone_16.abstract),
+- [Technical overview paper](https://trustworthy.systems/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
+- [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://trustworthy.systems/publications/nictaabstracts/Heiser_Elphinstone_16.abstract),
   a retrospective explaining how we got to where we are;
 - [Getting started](/GettingStarted)
 - [Data61/CSIRO seL4
-      research project pages](http://ts.data61.csiro.au/projects/seL4/)
+      research project pages](https://trustworthy.systems/projects/seL4/)
 - [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and
       Microkernel Design lectures
 - [Release download page](https://github.com/seL4/seL4/releases/latest) for the current release.
@@ -39,7 +39,7 @@ will be produced in manual.pdf.
 - [Git Repository and Build
       instructions](http://github.com/seL4/l4v/)
 - [CSIRO's Data61 Trustworthy
-      Systems research project pages](https://ts.data61.csiro.au/projects.html)
+      Systems research project pages](https://trustworthy.systems/projects.html)
 - Isabelle Proof Assistant:
 
   -   [Concrete Semantics Isabelle textbook](http://concrete-semantics.org/)
