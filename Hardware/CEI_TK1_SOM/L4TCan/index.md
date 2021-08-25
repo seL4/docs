@@ -31,9 +31,11 @@ NOTE2: Justification for GPIO chipselects is that we have 2 CAN nodes
 and only 1 HW chipselect, so had to do it this way.
 
 ## Option 1. Use our Linux image
- Grab the image (tk1_can.img.gz)
-available at <https://trustworthy.systems/Downloads/tk1_can/>. Make sure
-to verify against the md5sum in the same folder once you've got it.
+Grab the image at [tk1_can.img.gz] ([md5]). Make sure to verify against the
+md5sum in the same folder once you've got it.
+
+[md5]: https://trustworthy.systems/Downloads/tk1_can/checksum.txt
+[tk1_can.img.gz]: https://trustworthy.systems/Downloads/tk1_can/tk1_can.img.gz
 
 Set up the TK1 as usual - connect the UART as well as the recovery USB
 port next to the ethernet jack. Stop u-boot from booting and issue the
