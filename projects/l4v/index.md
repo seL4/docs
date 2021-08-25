@@ -31,4 +31,4 @@ requests to add more information yourself!
 [1]: http://isabelle.in.tum.de
 [2]: http://proofcraft.org/blog/proof-engineer-reading.html
 [3]: https://github.com/seL4/l4v/blob/master/README.md
-[4]: https://ts.data61.csiro.au/publications/nictaabstracts/Klein_AEMSKH_14.abstract
+[4]: https://trustworthy.systems/publications/nictaabstracts/Klein_AEMSKH_14.abstract

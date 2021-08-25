@@ -127,7 +127,7 @@ through the rest of the RFC process.
 After discussion, RFCs will ultimately be approved, postponed, or rejected by
 a decision of the [Technical Steering Committee][TSC] of the seL4 Foundation.
 
-[seL4 Mattermost]: https://mattermost.ts.data61.csiro.au/sel4-external/ "seL4 Mattermost"
+[seL4 Mattermost]: https://mattermost.trustworthy.systems/sel4-external/ "seL4 Mattermost"
 [development mailing list]: https://sel4.systems/lists/listinfo/devel "seL4 development mailing list"
 [TSC]: https://sel4.systems/Foundation/TSC/
 

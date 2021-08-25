@@ -91,6 +91,6 @@ And if relevant
 ## Community
 Most community discussions about seL4 occur on our [Devel mailing
 list][mailing-list].  There is also a [seL4
-Mattermost](https://mattermost.ts.data61.csiro.au/sel4-external/) chat
+Mattermost](https://mattermost.trustworthy.systems/sel4-external/) chat
 room.  (The sign-up link can be found on  [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
 

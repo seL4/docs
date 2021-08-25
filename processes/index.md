@@ -86,7 +86,7 @@ The code documented on this site is available from two GitHub organisations:
   repositories around it, managed by the [seL4
   Foundation](https://sel4.systems/Foundation/About).
 
-- <https://github.com/sel4proj/>: additional tools, libraries, and projects around seL4, managed by the [Trustworthy Systems](https://ts.data61.csiro.au) group at Data61.
+- <https://github.com/sel4proj/>: additional tools, libraries, and projects around seL4, managed by the [Trustworthy Systems](https://trustworthy.systems) group at Data61.
 
 Each project has a list of which repositories it contributes to on its
 documentation home page. Alternatively, the README.md of each repository
