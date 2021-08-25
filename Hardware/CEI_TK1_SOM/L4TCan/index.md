@@ -41,14 +41,14 @@ Set up the TK1 as usual - connect the UART as well as the recovery USB
 port next to the ethernet jack. Stop u-boot from booting and issue the
 command:
 
-``` 
-ums 0 mmc 0 
-``` 
+```
+ums 0 mmc 0
+```
 This will allow you to see the TK1's filesystem on
 your host pc. On your host PC, list your devices:
 
-``` 
-$ lsblk 
+```
+$ lsblk
 ```
 You should see a 14.7GB-ish device with a few
 partitions - this is the TK1. (Make sure it is by mounting the largest
@@ -73,8 +73,8 @@ should work.
 
 You may see some lines after boot like:
 
-``` 
-rt5639 0-001c: Failed to set private addr: -121 
+```
+rt5639 0-001c: Failed to set private addr: -121
 ```
 
 This is normal,
@@ -130,7 +130,7 @@ Required properties:
 
 - compatible: Should be one of the following:
       -   "microchip,mcp2510" for MCP2510.
- 
+
       - "microchip,mcp2515" for MCP2515.
 - reg: SPI chip select.
 - clocks: The clock feeding the CAN controller.
@@ -145,13 +145,13 @@ Optional properties:
 Example:
 
   can0: <can@1> {
- 
-      compatible = "microchip,mcp2515"; 
-      reg = <1>; 
-      clocks = <&clk24m>; 
-      interrupt-parent = <&gpio4>; 
-      interrupts = <13 0x2>; 
-      vdd-supply = <&reg5v0>; 
+
+      compatible = "microchip,mcp2515";
+      reg = <1>;
+      clocks = <&clk24m>;
+      interrupt-parent = <&gpio4>;
+      interrupts = <13 0x2>;
+      vdd-supply = <&reg5v0>;
       xceiver-supply = <&reg5v0>;
   };
 ```
@@ -240,30 +240,30 @@ Then:
 dmesg | grep mcp # See if the driver loaded properly
 
 [ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe
-[ 618.718296] mcp251x spi0.0: v2 
-[ 618.718332] mcp251x spi0.0: got clock 
-[ 618.718336] mcp251x spi0.0: finished clock configuration, freq: 20000000 
-[ 618.718353] mcp251x spi0.0: allocated CAN device 
-[ 618.718358] mcp251x spi0.0: clock prepared for enable 
-[ 618.729737] mcp251x spi0.0: configured can netdev 
-[ 618.729741] mcp251x spi0.0: power & transceiver regulator pointers OK 
-[ 618.729745] mcp251x spi0.0: enabled power 
-[ 618.729749] mcp251x spi0.0: about to enable DMA (if required) 
-[ 618.729754] mcp251x spi0.0: finished allocating DMA & non-DMA buffers 
+[ 618.718296] mcp251x spi0.0: v2
+[ 618.718332] mcp251x spi0.0: got clock
+[ 618.718336] mcp251x spi0.0: finished clock configuration, freq: 20000000
+[ 618.718353] mcp251x spi0.0: allocated CAN device
+[ 618.718358] mcp251x spi0.0: clock prepared for enable
+[ 618.729737] mcp251x spi0.0: configured can netdev
+[ 618.729741] mcp251x spi0.0: power & transceiver regulator pointers OK
+[ 618.729745] mcp251x spi0.0: enabled power
+[ 618.729749] mcp251x spi0.0: about to enable DMA (if required)
+[ 618.729754] mcp251x spi0.0: finished allocating DMA & non-DMA buffers
 [ 618.729757] mcp251x spi0.0: netdev set
-[ 618.729799] mcp251x spi0.0: configured SPI bus 
-[ 618.740194] mcp251x spi0.0: CANSTAT 0x80 CANCTRL 0x07 
-[ 618.740198] mcp251x spi0.0: successful hardware probe 
-[ 618.740795] mcp251x spi0.0: probed 
+[ 618.729799] mcp251x spi0.0: configured SPI bus
+[ 618.740194] mcp251x spi0.0: CANSTAT 0x80 CANCTRL 0x07
+[ 618.740198] mcp251x spi0.0: successful hardware probe
+[ 618.740795] mcp251x spi0.0: probed
 [ 628.973815] mcp251x spi0.0: CNF: 0x00 0xbf 0x02
 
-ls /sys/class/net # See if the can device is available and what it's called 
+ls /sys/class/net # See if the can device is available and what it's called
 can0 dummy0 eth0 ip6tnl0 lo rmnetctl sit0
 
-sudo ip link set can0 up type can bitrate 500000 # Bring it up 
-ifconfig                                         # Take a look... 
+sudo ip link set can0 up type can bitrate 500000 # Bring it up
+ifconfig                                         # Take a look...
 can0      Link encap:UNSPEC HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
-          UP RUNNING NOARP MTU:16 Metric:1 
+          UP RUNNING NOARP MTU:16 Metric:1
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:10{
@@ -275,15 +275,15 @@ eth0      Link encap:Ethernet HWaddr 00:50:c2:72:00:59
           inet6 addr: fe80::250:c2ff:fe72:59/64 Scope:Link
 ------------------------------------------------------------------------
 
-sudo apt-get install can-utils # (make sure to enable universe repository & update) 
-cansend can0 5A1#11.22.33.44.55.66.77.88 # Send a packet 
+sudo apt-get install can-utils # (make sure to enable universe repository & update)
+cansend can0 5A1#11.22.33.44.55.66.77.88 # Send a packet
 candump can0 # Dump packets
 ```
 
 # Loopback mode test
-``` 
+```
 ip link set can0 type can bitrate 500000 loopback on
-ifconfig can0 up 
+ifconfig can0 up
 candump any,0:0,#FFFFFFFF #In terminal 1
 cansend can0 123#dead     #In terminal 2
 ```
