@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-09-01 03:17:42 +0000 -->
+<!-- Page last generated 2021-09-02 03:17:51 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -316,26 +316,26 @@ ninja
 
 <p>A <em>capability</em> is a unique, unforgeable token that gives the possessor
 permission to access an entity or object in system. In seL4, capabilities to all resources
-controlled by seL4 are given to the root task on initialisation. To change the state of any 
+controlled by seL4 are given to the root task on initialisation. To change the state of any
 resources, users use the kernel API, available in <code class="highlighter-rouge">libsel4</code> to request an operation on a specific
  capability.</p>
 
 <p>For example, the root task is provided with a capability to its own thread control block (TCB),
  <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>, a constant defined by <code class="highlighter-rouge">libsel4</code>. To change the properties of the initial TCB,
  one can use any of the <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_tcb">TCB API methods</a> on this capability.
-Below is an example which changes the stack pointer of the root task’s TCB, a common operation in the 
+Below is an example which changes the stack pointer of the root task’s TCB, a common operation in the
 root task if a larger stack is needed:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_UserContext</span> <span class="n">registers</span><span class="p">;</span>
     <span class="n">seL4_Word</span> <span class="n">num_registers</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_UserContext</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">);</span>
-    
+
     <span class="cm">/* Read the registers of the TCB that the capability in seL4_CapInitThreadTCB grants access to. */</span>
     <span class="n">seL4_Error</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">registers</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
-    
+
     <span class="cm">/* set new register values */</span>
     <span class="n">registers</span><span class="p">.</span><span class="n">sp</span> <span class="o">=</span> <span class="n">new_sp</span><span class="p">;</span> <span class="c1">// the new stack pointer, derived by prior code.</span>
-    
+
     <span class="cm">/* Write new values */</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">registers</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
@@ -364,50 +364,50 @@ Each CSlot in a CNode can be in the following state:</p>
 
 <h3 id="cspaces">CSpaces</h3>
 
-<p>A <em>CSpace</em> (capability-space) is the full range of capabilities accessible to a thread, which may be 
-formed of one or more CNodes. In this tutorial, we focus on the CSpace constructed for the root task 
+<p>A <em>CSpace</em> (capability-space) is the full range of capabilities accessible to a thread, which may be
+formed of one or more CNodes. In this tutorial, we focus on the CSpace constructed for the root task
 by seL4’s initialisation protocol, which consists of one CNode.</p>
 
 <h3 id="cspace-addressing">CSpace addressing</h3>
 
 <p>In order to refer to a capability, to perform operations on it, you must address the capability.
-There are two ways to address capabilities in the seL4 API. First is by invocation, the second 
+There are two ways to address capabilities in the seL4 API. First is by invocation, the second
 is by direct addressing. Invocation is what we used to manipulate the registers of the root task’s TCB, which
 we now explain in further detail.</p>
 
 <h4 id="invocation">Invocation</h4>
 
-<p>On boot, the root task has a CNode capability installed as its <em>CSpace root</em>. 
-An <em>invocation</em> is when a CSlot is addressed by implicitly invoking a thread’s installed CSpace root. 
+<p>On boot, the root task has a CNode capability installed as its <em>CSpace root</em>.
+An <em>invocation</em> is when a CSlot is addressed by implicitly invoking a thread’s installed CSpace root.
 In the code example above, we use an invocation on the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot to read and write
 to the registers of the TCB represented by the capability in that specific CSlot.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">registers</span><span class="p">);</span>
 </code></pre></div></div>
-<p>This implicity looks up the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot in the cspace root of the calling thread, which in this case 
+<p>This implicity looks up the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot in the CSpace root of the calling thread, which in this case
 is the root task.</p>
 
 <h4 id="direct-cspace-addressing">Direct CSpace addressing</h4>
 
-<p>Direct addressing allows you to specify the CNode to address, rather than implicitly using the CSpace root, and is 
-used to construct and manipulate the shape of CSpaces. Note that direct addressing requires invocation: the operation 
+<p>Direct addressing allows you to specify the CNode to address, rather than implicitly using the CSpace root, and is
+used to construct and manipulate the shape of CSpaces. Note that direct addressing requires invocation: the operation
 occurs by invoking a CNode capability, which itself is indexed from the CSpace root.</p>
 
 <p>The following fields are used when directly addressing CSlots:</p>
 <ul>
   <li><em>_service/root</em> A capability to the CNode to operate on.</li>
   <li><em>index</em> The index of the CSlot in the CNode to address.</li>
-  <li><em>depth</em> How far to traverse the CNode before resolving the CSlot. 
+  <li><em>depth</em> How far to traverse the CNode before resolving the CSlot.
 For the initial, single-level CSpace, the <em>depth</em> value is always <code class="highlighter-rouge">seL4_WordBits</code>. For invocations, the depth is always
  implicitly <code class="highlighter-rouge">seL4_WordBits</code>.
 More on CSpace depth will be discussed in future tutorials.</li>
 </ul>
 
-<p>In the example below, we directly address the root task’s TCB to make a copy of it in the 0th slot in the cspace root. 
+<p>In the example below, we directly address the root task’s TCB to make a copy of it in the 0th slot in the CSpace root.
 <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#copy">CNode copy</a> requires two CSlots to be directly addressed: the destination
- CSlot, and the source CSlot. Because we are copying in the same CNode, the root used in both addresses is the same: 
+ CSlot, and the source CSlot. Because we are copying in the same CNode, the root used in both addresses is the same:
  <code class="highlighter-rouge">seL4_CapInitThreadCNode</code>, which is the slot where seL4 places a capability to the root task’s CSpace root.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_Error</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
-                                       <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> 
+                                       <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
                                        <span class="n">seL4_AllRights</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
 </code></pre></div></div>
@@ -416,10 +416,10 @@ More on CSpace depth will be discussed in future tutorials.</li>
 
 <h3 id="initial-cspace">Initial CSpace</h3>
 
-<p>The root task has a CSpace, set up by seL4 during boot, which contains capabilities to all 
-resources manages by seL4. We have already seen several capabilities in the root cspace: <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>, 
- and <code class="highlighter-rouge">seL4_CapInitThreadCNode</code>. Both of these are specified by constants in <code class="highlighter-rouge">libsel4</code>, however not all initial 
- capabilities are statically specified. Other capabilities are described by the <code class="highlighter-rouge">seL4_BootInfo</code> data structure, 
+<p>The root task has a CSpace, set up by seL4 during boot, which contains capabilities to all
+resources manages by seL4. We have already seen several capabilities in the root CSpace: <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>,
+ and <code class="highlighter-rouge">seL4_CapInitThreadCNode</code>. Both of these are specified by constants in <code class="highlighter-rouge">libsel4</code>, however not all initial
+ capabilities are statically specified. Other capabilities are described by the <code class="highlighter-rouge">seL4_BootInfo</code> data structure,
  described in <code class="highlighter-rouge">libsel4</code> and initialised by seL4. <code class="highlighter-rouge">seL4_BootInfo</code> describes ranges of initial capabilities,
  including free slots available in the initial CSpace.</p>
 
@@ -462,8 +462,8 @@ The third line stating the number of slots in the CSpace, is incorrect, and your
 main@main.c:33 [Cond failed: error]
 	Failed to set priority
 </code></pre></div></div>
-<p>The error occurs as the existing code tries to set the priority of the initial thread’s TCB by 
- invoking the last CSlot in the CSpace, which is currently empty. seL4 then returns an error code, 
+<p>The error occurs as the existing code tries to set the priority of the initial thread’s TCB by
+ invoking the last CSlot in the CSpace, which is currently empty. seL4 then returns an error code,
  and our check that the operation succeeded fails.</p>
 
 <p><strong>Exercise:</strong> fix this problem by making another copy of the TCB capability into the last slot in the CNode.</p>
@@ -505,8 +505,8 @@ by a neat hack: by attempting to move the CSlots onto themselves. This should fa
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Move</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">first_free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
                             <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">first_free_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_FailedLookup</span><span class="p">,</span> <span class="s">"first_free_slot is not empty"</span><span class="p">);</span>
-   
-    <span class="c1">// check last_slot is empty </span>
+
+    <span class="c1">// check last_slot is empty</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Move</span><span class="p">(</span><span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">last_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span>
                             <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="n">last_slot</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">seL4_FailedLookup</span><span class="p">,</span> <span class="s">"last_slot is not empty"</span><span class="p">);</span>
@@ -534,12 +534,12 @@ Suspending current thread
 
 <h3 id="further-exercises">Further exercises</h3>
 
-<p>That’s all for the detailed content of this tutorial. Below we list other ideas for exercises you can try, 
-to become more familiar with cspaces.</p>
+<p>That’s all for the detailed content of this tutorial. Below we list other ideas for exercises you can try,
+to become more familiar with CSpaces.</p>
 
 <ul>
   <li>Use a data structure to track which CSlots in a CSpace are free.</li>
-  <li>Make copies of the entire cspace described by <code class="highlighter-rouge">seL4_BootInfo</code></li>
+  <li>Make copies of the entire CSpace described by <code class="highlighter-rouge">seL4_BootInfo</code></li>
   <li>Experiment with other <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_cnode">CNode invocations</a>.</li>
 </ul>
 
