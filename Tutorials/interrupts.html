@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-09-08 03:19:03 +0000 -->
+<!-- Page last generated 2021-09-09 03:18:03 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -321,7 +321,7 @@ dependent, including:</p>
 
 <p>Interrupts are received by registering a capability to a notification object
 with the IRQHandler capability for that irq, as follows:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seL4_IRQHandler_setNotification<span class="o">(</span>irq_handler, notification<span class="o">)</span><span class="p">;</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seL4_IRQHandler_SetNotification<span class="o">(</span>irq_handler, notification<span class="o">)</span><span class="p">;</span>
 </code></pre></div></div>
 <p>On success, this call will result in signals being delivered to the notification object when
 an interrupt occurs. To handle multiple interrupts on the same notification object, you

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-09-08 03:19:03 +0000 -->
+<!-- Page last generated 2021-09-09 03:18:03 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1095,8 +1095,6 @@ This example will demonstrate both.</p>
 
 <pre><code class="language-camkes">/* apps/hellodataport/components/Ping/Ping.camkes */
 
-import "Porttype.idl4";
-
 component Ping {
   include "porttype.h";
   control;
@@ -1110,8 +1108,6 @@ parse this header, but it needs to know to <code class="highlighter-rouge">#incl
 the <code class="highlighter-rouge">MyData_t</code> type. Add a similar description for Pong:</p>
 
 <pre><code class="language-camkes">/* apps/hellodataport/components/Pong/Pong.camkes */
-
-import "Porttype.idl4";
 
 component Pong {
   include "porttype.h";
@@ -1140,7 +1136,7 @@ component Pong {
   <span class="n">strncpy</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">d1</span><span class="p">,</span> <span class="n">hello</span><span class="p">,</span> <span class="n">D1_READY_IDX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 
   <span class="n">d1_release</span><span class="p">();</span> <span class="c1">// ensure the assignment below occurs after the strcpy above</span>
-  <span class="p">((</span><span class="o">*</span><span class="kt">char</span><span class="p">)</span><span class="n">d1</span><span class="p">)[</span><span class="n">D1_READY_IDX</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">d1</span><span class="p">)[</span><span class="n">D1_READY_IDX</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
   <span class="cm">/* Wait for Pong to reply. We can assume d2_data is
    * zeroed on startup by seL4.
