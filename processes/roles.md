@@ -27,9 +27,7 @@ You can nominate someone for a role by emailing the chair of the TSC.
    Current members are:
 
   - Christopher Guikema, Dornerworks
-  - Axel Heider, Hensoldt Cyber
   - Jesse Millwood, Dornerworks
-  - Yanyan Shen, Cog Systems
   - Benno Leslie, Breakaway Consulting
 
   &nbsp;
@@ -42,8 +40,26 @@ You can nominate someone for a role by emailing the chair of the TSC.
     in the TSC.
 
     Current members are the members of the Committers team on the seL4 GitHub
-    organisation. These include the TSC members and the kernel engineers as well
-    as the verification engineers of the Trustworthy Systems group.
+    organisation. These include all of the TSC members and the following
+    people:
+
+  - Ryan Barry, UNSW
+  - Scott Buckley, UNSW
+  - Peter Chubb, UNSW
+  - Axel Heider, Hensoldt Cyber
+  - Jashank Jeremy, UNSW
+  - Vincent Jackson, UNSW
+  - Zoltan Kocsis, UNSW
+  - Damon Lee, Kry10
+  - Michael McInerney, UNSW
+  - Johannes Åman Pohjohla, UNSW
+  - Miki Tanaka, UNSW
+  - Yanyan Shen, Cog Systems
+  - Robert Sison, Uni Melbourne
+  - Jingyao Zhou, UNSW
+  - Siwei Zhuang, UNSW
+
+  &nbsp;
 
 - **SysAdmin**
     People with admin access to the seL4 GitHub org and repositories
@@ -54,7 +70,7 @@ You can nominate someone for a role by emailing the chair of the TSC.
 
    Current members are:
 
-  - Peter Chubb, CSIRO's Data61
+  - Peter Chubb, UNSW
 
   &nbsp;
 
