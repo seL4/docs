@@ -71,7 +71,7 @@ and the documentation artefact it generates.
 * Changing the versioning system used for libraries
 * Adding a new major API feature to the kernel
 
-Changes such as bug-fixes, refactorings, optimistions,
+Changes such as bug-fixes, refactorings, optimisations,
 or those that do not affect the functional requirements
 of the kernel, supporting tooling, infrastructure,
 or system components
@@ -272,11 +272,11 @@ been reached or it has become clear that there will not be a consensus, the
 Technical Steering Committee of the seL4 Foundation will make a decision on
 the RFC.
 
-The Steering Committee will either approve, postpone, defer, require changes,
-or reject the RFC. When this occurs, a _disposition_ will be added to the RFC
-outlining the reason for the particular ruling. If the discussion of an RFC
-has been particularly long, a summary comment will be made on the RFC before
-the given ruling is made.
+The Steering Committee will either give stage 1 approval, fully approve,
+postpone, defer, require changes, or reject the RFC. When this occurs, a
+_disposition_ will be added to the RFC outlining the reason for the particular
+ruling. If the discussion of an RFC has been particularly long, a summary
+comment will be made on the RFC before the given ruling is made.
 
 
 #### Postponement of an RFC
@@ -295,9 +295,19 @@ if they wish to see it approved
 and want to rally support for it.
 
 
+### Stage 1 approval
+
+In some cases, an RFC may require an implementation or very detailed design to
+properly judge its merits. When the TSC decides that an RFC is likely to get
+accepted if a convincing implementation can be shown, the TSC may give _stage 1
+approval_ for this RFC. Stage 1 approval means a candidate implementation should
+go ahead, but will need to be reviewed again, e.g. for performance and
+usability, before it can be fully accepted.
+
+
 ### Implementation of an approved RFC
 
-Once the Steering Committee aproves an RFC,
+Once the Steering Committee approves an RFC,
 it is marked as _active_.
 They may then assign it to a contributor for implementation.
 Issues for the implementation of the necessary components
