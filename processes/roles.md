@@ -54,7 +54,7 @@ You can nominate someone for a role by emailing the chair of the TSC.
   - Michael McInerney, UNSW
   - Johannes Åman Pohjohla, UNSW
   - Miki Tanaka, UNSW
-  - Yanyan Shen, Cog Systems
+  - Yanyan Shen, NIO
   - Robert Sison, Uni Melbourne
   - Jingyao Zhou, UNSW
   - Siwei Zhuang, UNSW
