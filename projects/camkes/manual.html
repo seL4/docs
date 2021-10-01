@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-09-30 03:17:02 +0000 -->
+<!-- Page last generated 2021-10-01 03:19:03 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -712,13 +712,13 @@ echo and client, communicating over a single interface.</p>
 
 <p>To build this example, from the top-level directory run:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>build-kzm
-<span class="nb">cd </span>build-kzm
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>kzm <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm-none-eabi- <span class="nt">-DCAMKES_APP</span><span class="o">=</span>simple <span class="nt">-DSIMULATE</span><span class="o">=</span>1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>build
+<span class="nb">cd </span>build
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>sabre <span class="nt">-DCAMKES_APP</span><span class="o">=</span>simple <span class="nt">-DSIMULATE</span><span class="o">=</span>1
 ninja
 </code></pre></div></div>
 
-<p>This produces an image images/simple-image-arm-imx31. To run this image in
+<p>This produces an image images/capdl-loader-image-arm-imx6. To run this image in
 qemu:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate
@@ -891,7 +891,7 @@ DeclareCAmkESRootserver(helloworld.camkes)
 
 <p>You’re now ready to compile and run this application, by entering the <code class="highlighter-rouge">CAMKES_APP</code> value in the cmake configuration GUI:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>build-kzm
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>build
 cmake <span class="nb">.</span> <span class="nt">-DCAMKES_APP</span><span class="o">=</span>helloworld <span class="c"># set `helloworld` as CAMKES_APP</span>
 ninja
 ./simulate
