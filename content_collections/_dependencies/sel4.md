@@ -29,13 +29,16 @@ sudo apt-get install build-essential
 ```
 
 Additional base dependencies for building seL4 projects on Ubuntu include installing:
-```
+
+```sh
 sudo apt-get install cmake ccache ninja-build cmake-curses-gui
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen device-tree-compiler
 sudo apt-get install u-boot-tools
 sudo apt-get install protobuf-compiler python-protobuf
+sudo apt-get install gcc-8 g++8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 ```
 
 To build for ARM targets you will need a cross compiler. In addition, to run seL4 projects on a simulator you will need `qemu`. Installation of these additional base dependencies include running:
