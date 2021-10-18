@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-10-18 03:19:05 +0000 -->
+<!-- Page last generated 2021-10-18 21:49:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1959,8 +1959,9 @@ context has available budget, this will start the thread running.</p>
 a signal arrives, the passive thread will receive the scheduling context and possess it
 until it waits on the notification object again.</p>
 
-<p>This operation will fail if the scheduling context is already bound to a thread or
-notification object.</p>
+<p>This operation will fail for notification objects if the scheduling context is already
+bound to a notification object, and for thread objects if the the scheduling context is
+already bound to a thread.</p>
 
 <table>
   <thead>
@@ -1996,7 +1997,7 @@ notification object.</p>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">cap</code>  is already bound. Or, <code class="highlighter-rouge">cap</code>  is a TCB in the blocked state and <code class="highlighter-rouge">_service</code>  is not schedulable.</td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">cap</code>  is already bound to the same type of object. Or, <code class="highlighter-rouge">cap</code>  is a TCB in the blocked state and <code class="highlighter-rouge">_service</code>  is not schedulable.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
@@ -9570,10 +9571,10 @@ serviced.</p>
         </li>
         
           <li>
-            Site last updated: Fri Oct 1 14:55:48 2021 +1000 f22c913
+            Site last updated: Tue Oct 19 08:44:45 2021 +1100 ac725cd
           </li>
           <li>
-                Page last updated: Fri Oct 1 14:55:48 2021 +1000 f22c913
+                Page last updated: Tue Oct 19 08:44:45 2021 +1100 ac725cd
           </li>
         
       </ul>
