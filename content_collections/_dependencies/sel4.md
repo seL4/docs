@@ -60,10 +60,10 @@ sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 
 ##### For Debian Stretch or later
 
-The dependencies listed in our docker files [repository](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
+The dependencies listed in our docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
 
-* [Base Tools Dockerfile](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile)
-* [seL4 Dockerfile](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile)
+* [Base Tools Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile)
+* [seL4 Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile)
 
 The version of `cmake` in Debian *stretch* is too old to build seL4 projects (*buster* and later are OK).  If you are on *stretch*, install `cmake` from stretch-backports:
 
