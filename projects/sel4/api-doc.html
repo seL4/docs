@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-10-17 03:18:55 +0000 -->
+<!-- Page last generated 2021-10-18 03:19:05 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -999,6 +999,33 @@ This operation has no effect on un-badged or other objects.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the capability does not have full rights to the Endpoint .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="copy">Copy</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Copy</code></p>
 
@@ -1053,6 +1080,41 @@ This operation has no effect on un-badged or other objects.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The index or depth of the source or destination is invalid . Or, <code class="highlighter-rouge">src_root</code>  is a CPtr to a capability of the wrong type. Or, the source slot is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the source capability cannot be derived .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">dest_depth</code>  or <code class="highlighter-rouge">src_depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The source capability cannot be derived .</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="delete">Delete</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Delete</code></p>
 
@@ -1086,6 +1148,33 @@ This operation has no effect on un-badged or other objects.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="mint">Mint</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Mint</code></p>
@@ -1146,6 +1235,41 @@ This operation has no effect on un-badged or other objects.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The index or depth of the source or destination is invalid . Or, <code class="highlighter-rouge">src_root</code>  is a CPtr to a capability of the wrong type. Or, the source slot is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the source capability cannot be derived . Or, the badge or guard value is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">dest_depth</code>  or <code class="highlighter-rouge">src_depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The source capability cannot be derived .</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="move">Move</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Move</code></p>
 
@@ -1194,6 +1318,37 @@ This operation has no effect on un-badged or other objects.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The index or depth of the source or destination is invalid . Or, <code class="highlighter-rouge">src_root</code>  is a CPtr to a capability of the wrong type. Or, the source slot is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">dest_depth</code>  or <code class="highlighter-rouge">src_depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="mutate">Mutate</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Mutate</code></p>
@@ -1249,6 +1404,37 @@ This operation has no effect on un-badged or other objects.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The index or depth of the source or destination is invalid . Or, <code class="highlighter-rouge">src_root</code>  is a CPtr to a capability of the wrong type. Or, the source slot is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the guard value is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">dest_depth</code>  or <code class="highlighter-rouge">src_depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="revoke">Revoke</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Revoke</code></p>
 
@@ -1282,6 +1468,33 @@ This operation has no effect on un-badged or other objects.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="rotate">Rotate</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Rotate</code></p>
@@ -1358,6 +1571,37 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>If the destination is not the same slot as the source and the destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The index or depth of the source, destination, or pivot is invalid . Or, <code class="highlighter-rouge">src_root</code>  or <code class="highlighter-rouge">pivot_root</code>  is a CPtr to a capability of the wrong type. Or, the source or pivot slot is empty.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the pivot is the same slot as the source or destination. Or, the guard value on the destination or pivot is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">dest_depth</code>, <code class="highlighter-rouge">src_depth</code>, or <code class="highlighter-rouge">pivot_depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="save-caller">Save Caller</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_SaveCaller</code></p>
 
@@ -1391,6 +1635,37 @@ pivot slot to the destination slot and the capability in the source slot to the 
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_domainset">seL4_DomainSet</h3>
 
@@ -1427,6 +1702,29 @@ pivot slot to the destination slot and the capability in the source slot to the 
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">domain</code>  is greater than <code class="highlighter-rouge">CONFIG_NUM_DOMAINS</code>. Or, <code class="highlighter-rouge">thread</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_irqcontrol">seL4_IRQControl</h3>
 
@@ -1474,6 +1772,41 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">root</code>, <code class="highlighter-rouge">index</code>, or <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, on x86, an IOAPIC is being used.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">irq</code>  is invalid for the target architecture. Or, on x86, <code class="highlighter-rouge">irq</code>  is not in the ISA IRQ range. Or, <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="highlighter-rouge">irq</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="sel4_irqhandler">seL4_IRQHandler</h3>
 
 <h4 id="acknowledge">Acknowledge</h4>
@@ -1500,6 +1833,25 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="clear">Clear</h4>
 <p><code class="highlighter-rouge">static inline int seL4_IRQHandler_Clear</code></p>
 
@@ -1523,6 +1875,25 @@ pivot slot to the destination slot and the capability in the source slot to the 
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="set-notification">Set Notification</h4>
 <p><code class="highlighter-rouge">static inline int seL4_IRQHandler_SetNotification</code></p>
@@ -1553,6 +1924,25 @@ controlled by the supplied IRQ handler capability</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">notification</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">notification</code>  does not have the Write right .</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_schedcontext">seL4_SchedContext</h3>
 
@@ -1596,6 +1986,25 @@ notification object.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">cap</code>  is already bound. Or, <code class="highlighter-rouge">cap</code>  is a TCB in the blocked state and <code class="highlighter-rouge">_service</code>  is not schedulable.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">cap</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> See autoref[sec:threads]</p>
 
 <h4 id="consumed">Consumed</h4>
@@ -1621,6 +2030,25 @@ notification object.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> See autoref[sec:threads]</p>
 
@@ -1648,6 +2076,25 @@ will render the bound thread passive, see Section 6.1.5.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the current thread’s TCB is bound to <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> See autoref[sec:threads]</p>
 
@@ -1688,6 +2135,25 @@ the scheduling context will be returned to the thread that it was originally bou
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">cap</code>  is not bound to <code class="highlighter-rouge">_service</code>. Or, <code class="highlighter-rouge">cap</code>  is the current thread’s TCB.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">cap</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> See autoref[sec:passive]</p>
 
 <h4 id="yieldto">YieldTo</h4>
@@ -1716,6 +2182,25 @@ The caller must have a maximum control priority greater than or equal to the thr
 </table>
 
 <p><strong>Return value:</strong> <em>TODO</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not bound to a TCB or is bound to the current thread’s TCB. Or, the target thread’s priority is greater than the current thread’s maximum controlled priority .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_schedcontrol">seL4_SchedControl</h3>
@@ -1774,6 +2259,29 @@ The caller must have a maximum control priority greater than or equal to the thr
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">schedcontext</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">budget</code>  or <code class="highlighter-rouge">period</code>  or <code class="highlighter-rouge">extra_refills</code>  is too big or too small. Or, <code class="highlighter-rouge">budget</code>  is greater than <code class="highlighter-rouge">period</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> See autoref[sec:threads]</p>
 <h3 id="sel4_tcb">seL4_TCB</h3>
 
@@ -1805,6 +2313,25 @@ The caller must have a maximum control priority greater than or equal to the thr
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">notification</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">notification</code>  is already bound. Or, <code class="highlighter-rouge">notification</code>  does not have Read rights to the Notification .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="configure-mcs">Configure (MCS)</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
@@ -1860,6 +2387,33 @@ The caller must have a maximum control priority greater than or equal to the thr
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">buffer</code>  is not aligned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace_root</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">cspace_root_data</code>  is invalid. Or, <code class="highlighter-rouge">bufferFrame</code>  is retyped from a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="configure-single-stepping">Configure Single Stepping</h4>
 <p><code class="highlighter-rouge">static inline seL4_TCB_ConfigureSingleStepping_t seL4_TCB_ConfigureSingleStepping</code></p>
 
@@ -1895,6 +2449,29 @@ this may or may not require the consumption of a hardware register.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_TCB_ConfigureSingleStepping_t</code>: Struct that contains                 <code class="highlighter-rouge">seL4_Error error</code>, an seL4 API error value,                 <code class="highlighter-rouge">seL4_Bool bp_was_consumed</code>, a boolean which indicates whether or not the <code class="highlighter-rouge">bp_num</code>                 breakpoint ID that was passed to the function, was consumed in the setup of the single-stepping                 functionality: if this is <code class="highlighter-rouge">true</code>, the caller should not attempt to re-use <code class="highlighter-rouge">bp_num</code>                 until it has disabled the single-stepping functionality via a subsequent call to                 seL4_TCB_ConfigureSingleStepping with an <code class="highlighter-rouge">num_instructions</code> argument of 0.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the argument values are inappropriate for the target architecture.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The argument values are inappropriate for the target architecture.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="configure">Configure</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
@@ -1955,6 +2532,29 @@ this may or may not require the consumption of a hardware register.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace_root</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">cspace_root_data</code>  is invalid. Or, <code class="highlighter-rouge">buffer</code>  is not aligned. Or, <code class="highlighter-rouge">bufferFrame</code>  is retyped from a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="copy-registers">Copy Registers</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_CopyRegisters</code></p>
 
@@ -2009,6 +2609,25 @@ this may or may not require the consumption of a hardware register.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">source</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> In the context of this function, frame registers are those that are read, modified or preserved by a system call and integer registers are those that are not. Refer to the seL4 userland library source for specifics.</p>
 
 <h4 id="get-breakpoint">Get Breakpoint</h4>
@@ -2039,6 +2658,29 @@ this may or may not require the consumption of a hardware register.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_TCB_GetBreakpoint_t</code>: Struct that contains                 <code class="highlighter-rouge">seL4_Error error</code>, an seL4 API error value,                 <code class="highlighter-rouge">seL4_Word vaddr</code>, the virtual address at which the breakpoint will currently                 be triggered;                 <code class="highlighter-rouge">seL4_Word type</code>, the type of operation which will currently trigger the                 breakpoint, whether instruction execution, or data access;                 <code class="highlighter-rouge">seL4_Word size</code>, integer value for the span-size of the breakpoint.                 Usually a power of two (1, 2, 4, etc.);                 <code class="highlighter-rouge">seL4_Word rw</code>, the access direction that will currently trigger the breakpoint,                 whether read, write, or both and                 <code class="highlighter-rouge">seL4_Bool is_enabled</code>, which indicates whether or not the breakpoint                 will currently be triggered if the match conditions are met.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The argument values are inappropriate for the target architecture.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="read-registers">Read Registers</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_ReadRegisters</code></p>
@@ -2085,6 +2727,29 @@ seL4_UserContext</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is the current thread’s TCB.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">count</code>  requested too few or too many registers.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="resume">Resume</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Resume</code></p>
 
@@ -2108,6 +2773,25 @@ seL4_UserContext</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="set-breakpoint">Set Breakpoint</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetBreakpoint</code></p>
@@ -2161,6 +2845,37 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is not aligned to <code class="highlighter-rouge">size</code>  bytes.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">bp_num</code>, <code class="highlighter-rouge">size</code>, or <code class="highlighter-rouge">rw</code>  is not valid for the given <code class="highlighter-rouge">type</code>. Or, argument values are inappropriate for the target architecture. Or, <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The argument values are inappropriate for the target architecture.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="set-cpu-affinity">Set CPU Affinity</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetAffinity</code></p>
 
@@ -2189,6 +2904,25 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">affinity</code>  is not a valid CPU number.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="set-ipc-buffer">Set IPC Buffer</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetIPCBuffer</code></p>
@@ -2223,6 +2957,33 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">buffer</code>  is not aligned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">bufferFrame</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">bufferFrame</code>  is retyped from a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">bufferFrame</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> See Sections threads and messageinfo</p>
 
@@ -2260,6 +3021,29 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">authority</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">mcp</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="set-priority">Set Priority</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetPriority</code></p>
 
@@ -2293,6 +3077,29 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">authority</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">priority</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="set-sched-params-mcs">Set Sched Params (MCS)</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
@@ -2344,6 +3151,29 @@ and fault handler.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">sched_context</code>  is already bound. Or, <code class="highlighter-rouge">_service</code>  is the current thread’s TCB. Or, <code class="highlighter-rouge">_service</code>  is a TCB in the blocked state and <code class="highlighter-rouge">sched_context</code>  is not schedulable.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">authority</code>, <code class="highlighter-rouge">sched_context</code>, or <code class="highlighter-rouge">fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">mcp</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>. Or, <code class="highlighter-rouge">priority</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="set-sched-params">Set Sched Params</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
 
@@ -2382,6 +3212,29 @@ and fault handler.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">authority</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">mcp</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>. Or, <code class="highlighter-rouge">priority</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="set-space">Set Space</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetSpace</code></p>
@@ -2432,6 +3285,29 @@ and fault handler.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace_root</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">cspace_root_data</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">cspace_root</code>  or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="set-tls-base">Set TLS Base</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetTLSBase</code></p>
 
@@ -2461,6 +3337,25 @@ used for TLS can only be written to in privilidged mode</p>
 </table>
 
 <p><strong>Return value:</strong> <em>TODO</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> <em>TODO</em></p>
 
@@ -2493,6 +3388,25 @@ used for TLS can only be written to in privilidged mode</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">timeout_fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">timeout_fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Timeout exception messages will be delivered to this endpoint if it is not a null capability.</p>
 
 <h4 id="suspend">Suspend</h4>
@@ -2519,6 +3433,25 @@ used for TLS can only be written to in privilidged mode</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unbind-notification">Unbind Notification</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_UnbindNotification</code></p>
 
@@ -2542,6 +3475,25 @@ used for TLS can only be written to in privilidged mode</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not bound to a notification.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="unset-breakpoint">Unset Breakpoint</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_UnsetBreakpoint</code></p>
@@ -2575,6 +3527,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the argument values are inappropriate for the target architecture.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The argument values are inappropriate for the target architecture.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="write-registers">Write Registers</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_WriteRegisters</code></p>
@@ -2619,6 +3594,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is the current thread’s TCB.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_untyped">seL4_Untyped</h3>
 
@@ -2680,6 +3674,45 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A capability exists in the destination window of the CNode.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">root</code>, <code class="highlighter-rouge">node_index</code>, or <code class="highlighter-rouge">node_depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">size_bits</code>  is too big or too small for the requested object type. Or, <code class="highlighter-rouge">type</code>  cannot be created from a device untyped . Or, the requested object <code class="highlighter-rouge">type</code>  does not exist.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_NotEnoughMemory</code></td>
+      <td>The total size of the new objects exceeds the space available.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">num_objects</code>  do not fit in the destination CNode at <code class="highlighter-rouge">node_offset</code>. Or, <code class="highlighter-rouge">num_objects</code>  is greater than <code class="highlighter-rouge">CONFIG_RETYPE_FAN_OUT_LIMIT</code>. Or, <code class="highlighter-rouge">size_bits</code>  is too large.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Given a capability, <code class="highlighter-rouge">_service</code>, to an untyped object, creates <code class="highlighter-rouge">num_objects</code> of the requested type. Creates <code class="highlighter-rouge">num_objects</code> capabilities to the new objects starting at <code class="highlighter-rouge">node_offset</code> in the CNode specified by <code class="highlighter-rouge">root</code>, <code class="highlighter-rouge">node_index</code>, and <code class="highlighter-rouge">node_depth</code>.
  For variable-sized kernel objects, the <code class="highlighter-rouge">size_bits</code> argument is used to determine the size of objects to create. The relationship between <code class="highlighter-rouge">size_bits</code> and object size depends on the type of object being created.</p>
@@ -2754,6 +3787,41 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, an IOAPIC is not in use.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">vector</code>, <code class="highlighter-rouge">ioapic</code>, or <code class="highlighter-rouge">pin</code>  is invalid. Or, <code class="highlighter-rouge">level</code>  or <code class="highlighter-rouge">polarity</code>  is not 0 or 1. Or, <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="highlighter-rouge">vector</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="get-msi">Get MSI</h4>
 <p><code class="highlighter-rouge">static inline int seL4_IRQControl_GetMSI</code></p>
 
@@ -2818,6 +3886,41 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, an IOAPIC is not in use.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">vector</code>, <code class="highlighter-rouge">pic_bus</code>, <code class="highlighter-rouge">pci_dev</code>, or <code class="highlighter-rouge">pci_func</code>  is invalid. Or, the <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="highlighter-rouge">vector</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="sel4_tcb-1">seL4_TCB</h3>
 
 <h4 id="set-ept-root">Set EPT Root</h4>
@@ -2848,6 +3951,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">eptpml4</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_asidcontrol">seL4_X86_ASIDControl</h3>
 
@@ -2895,6 +4017,41 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability. Or, there are no more ASID pools available.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">untyped</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">untyped</code>  is not the exact size of an ASID pool object. Or, <code class="highlighter-rouge">untyped</code>  is a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">untyped</code>  has been used to retype an object. Or, a copy of the <code class="highlighter-rouge">untyped</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.</p>
 <h3 id="sel4_x86_asidpool">seL4_X86_ASIDPool</h3>
 
@@ -2926,6 +4083,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>There are no more ASIDs available in <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is already assigned to an ASID pool.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Assigns an ASID to the VSpace associated with the <code class="highlighter-rouge">Page Directory</code> passed in as an argument.</p>
 <h3 id="sel4_x86_eptpd">seL4_X86_EPTPD</h3>
@@ -2969,6 +4149,33 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">eptpml4</code>  at <code class="highlighter-rouge">gpa</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">eptpml4</code>  does not have an EPTPDPT mapped at <code class="highlighter-rouge">gpa</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">eptpml4</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace. Or, <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unmap">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_EPTPD_Unmap</code></p>
 
@@ -2992,6 +4199,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_eptpdpt">seL4_X86_EPTPDPT</h3>
 
@@ -3034,6 +4264,33 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">eptpml4</code>  at <code class="highlighter-rouge">gpa</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">eptpml4</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace. Or, <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unmap-1">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_EPTPDPT_Unmap</code></p>
 
@@ -3057,6 +4314,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_eptpt">seL4_X86_EPTPT</h3>
 
@@ -3099,6 +4379,33 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">eptpml4</code>  at <code class="highlighter-rouge">gpa</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">eptpml4</code>  does not have an EPTPD mapped at <code class="highlighter-rouge">gpa</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">eptpml4</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace. Or, <code class="highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unmap-2">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_EPTPT_Unmap</code></p>
 
@@ -3122,6 +4429,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_iopagetable">seL4_X86_IOPageTable</h3>
 
@@ -3159,6 +4489,33 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>All required page tables are already mapped in <code class="highlighter-rouge">iospace</code>  at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">iospace</code>  does not have a paging structure at the required level mapped at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">iospace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">iospace</code>  is not assigned to a PCI device. Or, <code class="highlighter-rouge">_service</code>  is already mapped in an IOSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unmap-3">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_IOPageTable_Unmap</code></p>
 
@@ -3182,6 +4539,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_ioport">seL4_X86_IOPort</h3>
 
@@ -3214,6 +4590,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_IOPort_In16_t</code> structure</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, reading from <code class="highlighter-rouge">port</code>  and <code class="highlighter-rouge">port+1</code>  is not authorized by the capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="in32">In32</h4>
 <p><code class="highlighter-rouge">static inline seL4_X86_IOPort_In32_t seL4_X86_IOPort_In32</code></p>
 
@@ -3243,6 +4638,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_IOPort_In32_t</code> structure</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, reading from ports <code class="highlighter-rouge">port</code>  through <code class="highlighter-rouge">port+3</code>  is not authorized by the capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="in8">In8</h4>
 <p><code class="highlighter-rouge">static inline seL4_X86_IOPort_In8_t seL4_X86_IOPort_In8</code></p>
 
@@ -3271,6 +4685,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_IOPort_In8_t</code> structure</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, reading from <code class="highlighter-rouge">port</code>  is not authorized by the capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="out16">Out16</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_IOPort_Out16</code></p>
@@ -3306,6 +4739,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, writing to <code class="highlighter-rouge">port</code>  and <code class="highlighter-rouge">port+1</code>  is not authorized by the capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="out32">Out32</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_IOPort_Out32</code></p>
 
@@ -3340,6 +4792,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, writing to ports <code class="highlighter-rouge">port</code>  through <code class="highlighter-rouge">port+3</code>  is not authorized by the capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="out8">Out8</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_IOPort_Out8</code></p>
 
@@ -3373,6 +4844,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, writing to <code class="highlighter-rouge">port</code>  is not authorized by the capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_ioportcontrol">seL4_X86_IOPortControl</h3>
 
@@ -3425,6 +4915,45 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">last_port</code>  is less than <code class="highlighter-rouge">first_port</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>One or more ports in the requested range have already been issued.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="sel4_x86_page">seL4_X86_Page</h3>
 
 <h4 id="get-address">Get Address</h4>
@@ -3450,6 +4979,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_IA32_Page_GetAddress_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word paddr</code>, which holds the physical address of the page,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="map-ept">Map EPT</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_MapEPT</code></p>
@@ -3495,7 +5043,38 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is not aligned to the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped. Or, <code class="highlighter-rouge">_service</code>  has an unsupported page size.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h4 id="map-io">Map I/O</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_MapIO</code></p>
@@ -3535,6 +5114,37 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists in <code class="highlighter-rouge">iospace</code>  at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">iospace</code>  does not have a sufficient number of IO Page Tables mapped at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>No rights were specified in <code class="highlighter-rouge">rights</code>. Or, the rights in the <code class="highlighter-rouge">_service</code>  capability do not include <code class="highlighter-rouge">rights</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">iospace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped. Or, <code class="highlighter-rouge">_service</code>  is not a page of size 4 KiB. Or, <code class="highlighter-rouge">iospace</code>  is not assigned to a PCI device.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="map-4">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_Map</code></p>
@@ -3580,6 +5190,41 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is not aligned to the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped in an IOSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is already mapped in <code class="highlighter-rouge">vspace</code>  at a different virtual address. Or, <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a different VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
 
 <h4 id="unmap-4">Unmap</h4>
@@ -3605,6 +5250,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Removes an existing mapping.</p>
 <h3 id="sel4_x86_pagedirectory">seL4_X86_PageDirectory</h3>
@@ -3637,6 +5301,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_PageDirectory_GetStatusBits_t</code> structure.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  does not have a mapping at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="map-5">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PageDirectory_Map</code></p>
@@ -3677,6 +5364,37 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a PDPT mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unmap-5">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PageDirectory_Unmap</code></p>
 
@@ -3700,6 +5418,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_x86_pagetable">seL4_X86_PageTable</h3>
 
@@ -3742,6 +5483,37 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a Page Directory mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Takes a <code class="highlighter-rouge">PageDirectory</code> capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in a specified slot in the <code class="highlighter-rouge">PageDirectory</code>.</p>
 
 <h4 id="unmap-6">Unmap</h4>
@@ -3767,6 +5539,29 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">PageTable</code> from its containing <code class="highlighter-rouge">PageDirectory</code>.</p>
 <h3 id="sel4_x86_vcpu">seL4_X86_VCPU</h3>
@@ -3804,6 +5599,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Disable a range of I/O ports for direct access by the execution mode in the <code class="highlighter-rouge">VCPU</code>.</p>
 
@@ -3846,6 +5660,29 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">ioPort</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">low</code>  or <code class="highlighter-rouge">high</code>  IO port exceeds the range authorized by <code class="highlighter-rouge">ioPort</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Enables a range of I/O ports for direct access by the execution mode in the <code class="highlighter-rouge">VCPU</code>. The requested port range must be a sub range of the provided I/O port capability.
  This also establishes a link between the provided I/O port capability and the <code class="highlighter-rouge">VCPU</code></p>
 
@@ -3878,6 +5715,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_VCPU_ReadVMCS_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word value</code>, which holds the return result of the <code class="highlighter-rouge">vmread</code> instruction,                 and <code class="highlighter-rouge">int error</code>.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">field</code>  is invalid or unsupported.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Thin wrapper around the <code class="highlighter-rouge">vmread</code> instruction that is performed on the VMCS region that is part of the VCPU object. After validating that a legal field is requested the value of <code class="highlighter-rouge">vmread</code> is returned directly in the result.</p>
 
 <h4 id="set-tcb">Set TCB</h4>
@@ -3909,6 +5765,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">tcb</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Configures the one-to-one binding of a VCPU and TCB, overwriting any previous binding in both.</p>
 
 <h4 id="write-registers-1">Write Registers</h4>
@@ -3939,6 +5814,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Sets the guest mode registers, which is any registers not already part of the VMCS.</p>
 
@@ -3975,6 +5869,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_X86_VCPU_WriteVMCS_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word writen</code>, which holds the final value written with the <code class="highlighter-rouge">vmwrite</code> instruction,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">field</code>  is invalid or unsupported.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Thin wrapper around the <code class="highlighter-rouge">vmwrite</code> instruction that is performed on the VMCS region that is part of the VCPU object. As well as validating that a legal field is requested, the value may be modified to ensure any bits that are fixed in the hardware are correct, and that any features required for kernel correctness are not disabled .
  The final value written to the hardware is returned and can be compared to the input parameter to determine what bits the kernel changed.</p>
@@ -4024,7 +5937,38 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">pml4</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">pml4</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">pml4</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h4 id="unmap-7">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PDPT_Unmap</code></p>
@@ -4050,7 +5994,30 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h2 id="arm-specific-object-methods">ARM-Specific Object Methods</h2>
 <hr />
@@ -4102,6 +6069,41 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability. Or, there are no more ASID pools available.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">untyped</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">untyped</code>  is not the exact size of an ASID pool object. Or, <code class="highlighter-rouge">untyped</code>  is a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">untyped</code>  has been used to retype an object. Or, a copy of the <code class="highlighter-rouge">untyped</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.</p>
 <h3 id="sel4_arm_asidpool">seL4_ARM_ASIDPool</h3>
 
@@ -4133,6 +6135,33 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>There are no more ASIDs available in <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The ASID pool of <code class="highlighter-rouge">_service</code>  is no longer assigned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is already assigned to an ASID pool.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.</p>
 <h3 id="sel4_arm_cb">seL4_ARM_CB</h3>
@@ -4166,6 +6195,29 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is already assigned to a VSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="cbclearfault">CBClearFault</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_CB_CBClearFault</code></p>
 
@@ -4189,6 +6241,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="cbgetfault">CBGetFault</h4>
 <p><code class="highlighter-rouge">static inline seL4_ARM_CB_CBGetFault_t seL4_ARM_CB_CBGetFault</code></p>
@@ -4214,6 +6285,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_ARM_SMMU_CB_GetFault_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word status</code>, which holds the fault status of the context bank,                 <code class="highlighter-rouge">seL4_Word address</code>, which holds the faulty address,                 and <code class="highlighter-rouge">int error</code>.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="tlbinvalidate">TLBInvalidate</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_CB_TLBInvalidate</code></p>
 
@@ -4238,6 +6328,25 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to a VSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unassignvspace">UnassignVspace</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_CB_UnassignVspace</code></p>
 
@@ -4261,6 +6370,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to a VSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_arm_cbcontrol">seL4_ARM_CBControl</h3>
 
@@ -4308,6 +6436,41 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">cb</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A CB capability for <code class="highlighter-rouge">cb</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="tlbinvalidateall">TLBInvalidateAll</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_CBControl_TLBInvalidateAll</code></p>
 
@@ -4331,6 +6494,25 @@ single-stepping.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_arm_iopagetable">seL4_ARM_IOPageTable</h3>
 
@@ -4368,7 +6550,30 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>All required page tables are already mapped in <code class="highlighter-rouge">iospace</code>  at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">iospace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped in an IOSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h4 id="unmap-8">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_IOPageTable_Unmap</code></p>
@@ -4394,7 +6599,26 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_arm_page">seL4_ARM_Page</h3>
 
 <h4 id="clean-data">Clean Data</h4>
@@ -4431,6 +6655,33 @@ single-stepping.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The VSpace of <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start_offset</code>  is greater than or equal to <code class="highlighter-rouge">end_offset</code>. Or, <code class="highlighter-rouge">start_offset</code>  or <code class="highlighter-rouge">end_offset</code>  exceeds the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="clean-and-invalidate-data">Clean and Invalidate Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_CleanInvalidate_Data</code></p>
 
@@ -4466,6 +6717,33 @@ The start and end are relative to the page being serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The VSpace of <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start_offset</code>  is greater than or equal to <code class="highlighter-rouge">end_offset</code>. Or, <code class="highlighter-rouge">start_offset</code>  or <code class="highlighter-rouge">end_offset</code>  exceeds the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="get-address-1">Get Address</h4>
 <p><code class="highlighter-rouge">static inline seL4_ARM_Page_GetAddress_t seL4_ARM_Page_GetAddress</code></p>
 
@@ -4489,6 +6767,25 @@ The start and end are relative to the page being serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_ARM_Page_GetAddress_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word paddr</code>, which holds the physical address of the page,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="invalidate-data">Invalidate Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Invalidate_Data</code></p>
@@ -4527,8 +6824,37 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The VSpace of <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start_offset</code>  is greater than or equal to <code class="highlighter-rouge">end_offset</code>. Or, <code class="highlighter-rouge">start_offset</code>  or <code class="highlighter-rouge">end_offset</code>  exceeds the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="map-io-1">Map I/O</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_MapIO</code></p>
+
+<p>TODO</p>
 
 <table>
   <thead>
@@ -4564,7 +6890,38 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists in <code class="highlighter-rouge">iospace</code>  at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">iospace</code>  does not have a sufficient number of IO Page Tables mapped at <code class="highlighter-rouge">ioaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>No rights were specified in <code class="highlighter-rouge">rights</code>. Or, the rights in the <code class="highlighter-rouge">_service</code>  capability do not include <code class="highlighter-rouge">rights</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">iospace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is already mapped. Or, <code class="highlighter-rouge">_service</code>  is not a page of size 4 KiB.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h4 id="map-9">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Map</code></p>
@@ -4610,7 +6967,42 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is not aligned to the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is already mapped in <code class="highlighter-rouge">vspace</code>  at a different virtual address. Or, <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a different VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability.</p>
 
 <h4 id="unify-instruction">Unify Instruction</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Unify_Instruction</code></p>
@@ -4649,6 +7041,33 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The VSpace of <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start_offset</code>  is greater than or equal to <code class="highlighter-rouge">end_offset</code>. Or, <code class="highlighter-rouge">start_offset</code>  or <code class="highlighter-rouge">end_offset</code>  exceeds the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unmap-9">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Unmap</code></p>
 
@@ -4672,6 +7091,25 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Removes an existing mapping.</p>
 <h3 id="sel4_arm_pagetable">seL4_ARM_PageTable</h3>
@@ -4715,7 +7153,38 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in the VSpace according to the provided virtual address. If higher-level paging structures do not exist for the virtual address this operation will fail, returning a seL4_FailedLookup error. If the page table is already mapped this operation will fail, returning a seL4_InvalidCapability error. If another object is already mapped at this level for the virtual address this operation will fail, returning a seL4_DeleteFirst error.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr.</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>On aarch64, <code class="highlighter-rouge">vspace</code>  does not have a Page Directory mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the invoked <code class="highlighter-rouge">PageTable</code> in the VSpace according to the provided virtual address.</p>
 
 <h4 id="unmap-10">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageTable_Unmap</code></p>
@@ -4740,6 +7209,29 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="highlighter-rouge">Page Table</code> from its containing <code class="highlighter-rouge">Page Directory</code>.</p>
 <h3 id="sel4_arm_sid">seL4_ARM_SID</h3>
@@ -4773,6 +7265,29 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is already bound to a context bank.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">cb</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">cb</code>  is not assigned to a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unbindcb">UnbindCB</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_SID_UnbindCB</code></p>
 
@@ -4796,6 +7311,25 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not bound to a context block.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="sel4_arm_sidcontrol">seL4_ARM_SIDControl</h3>
 
@@ -4823,6 +7357,25 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="getfault">GetFault</h4>
 <p><code class="highlighter-rouge">static inline seL4_ARM_SIDControl_GetFault_t seL4_ARM_SIDControl_GetFault</code></p>
 
@@ -4846,6 +7399,25 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_ARM_SMMU_GetFault_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word status</code>, which holds the global fault status of the SMMU,                 <code class="highlighter-rouge">seL4_Word syndrome_0</code>, which holds the global fault syndrome 0 of the SMMU,                 <code class="highlighter-rouge">seL4_Word syndrome_1</code>, which holds the global fault syndrome 1 of the SMMU,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="getsid">GetSID</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_SIDControl_GetSID</code></p>
@@ -4891,6 +7463,41 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">sid</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An SID capability for <code class="highlighter-rouge">sid</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="sel4_arm_vcpu">seL4_ARM_VCPU</h3>
 
 <h4 id="acknowledge-virtual-ppi-irq">Acknowledge Virtual PPI IRQ</h4>
@@ -4921,6 +7528,29 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">irq</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Acknowledge and unmask the PPI interrupt so that further interrupts can be forwarded through VPPIEvent faults.</p>
 
@@ -4968,7 +7598,34 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  is in use.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">virq</code>, <code class="highlighter-rouge">priority</code>, <code class="highlighter-rouge">group</code>, or <code class="highlighter-rouge">index</code>  is invalid.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h4 id="read-registers-1">Read Registers</h4>
 <p><code class="highlighter-rouge">static inline seL4_ARM_VCPU_ReadRegs_t seL4_ARM_VCPU_ReadRegs</code></p>
@@ -4999,7 +7656,30 @@ serviced.</p>
 
 <p><strong>Return value:</strong> <em>TODO</em></p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">field</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 
 <h4 id="set-tcb-1">Set TCB</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_VCPU_SetTCB</code></p>
@@ -5029,6 +7709,25 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">tcb</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> There is a 1:1 relationship between a virtual CPU and a TCB. If either (or both) of them is associated with another one, they will be dissociated, and then associated to the ones called in this system calls.</p>
 
@@ -5066,7 +7765,30 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">field</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_irqcontrol-2">seL4_IRQControl</h3>
 
 <h4 id="gettrigger">GetTrigger</h4>
@@ -5117,6 +7839,41 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the platform does not support setting the IRQ trigger.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">irq</code>  is invalid. Or, <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="highlighter-rouge">irq</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="gettriggercore">GetTriggerCore</h4>
 <p><code class="highlighter-rouge">static inline int seL4_IRQControl_GetTriggerCore</code></p>
@@ -5172,6 +7929,45 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, SMP support is not enabled.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">target</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="highlighter-rouge">irq</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="aarch32-specific-object-methods">Aarch32-Specific Object Methods</h3>
 <h3 id="sel4_arm_pagedirectory">seL4_ARM_PageDirectory</h3>
 
@@ -5209,6 +8005,37 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">start</code>  or <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="clean-and-invalidate-data-1">Clean and Invalidate Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_CleanInvalidate_Data</code></p>
 
@@ -5242,6 +8069,37 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">start</code>  or <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="invalidate-data-1">Invalidate Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Invalidate_Data</code></p>
@@ -5277,6 +8135,37 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">start</code>  or <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unify-instruction-1">Unify Instruction</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Unify_Instruction</code></p>
 
@@ -5310,6 +8199,37 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">start</code>  or <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="aarch64-specific-object-methods">Aarch64-Specific Object Methods</h3>
 <h3 id="sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory</h3>
@@ -5353,7 +8273,38 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Map a page directory (level 2) to an upper page directory (level 1). If an upper page directory does not exist for the virtual address this operation will fail, returning a seL4_FailedLookup error. If the page directory is already mapped this operation will fail, returning a seL4_InvalidCapability error. If another object is already mapped at this level for the virtual address this operation will fail, returning a seL4_DeleteFirst error.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a Page Upper Directory mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> Map a page directory (level 2) to an upper page directory (level 1).</p>
 
 <h4 id="unmap-11">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Unmap</code></p>
@@ -5378,6 +8329,29 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Unmap a page directory (level 2) from an upper page directory (level 1)</p>
 <h3 id="sel4_arm_pageupperdirectory">seL4_ARM_PageUpperDirectory</h3>
@@ -5421,7 +8395,38 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Map an upper page directory (level 1) to a top level translation table (level 0). If the upper page directory is already mapped this operation will fail, returning a seL4_InvalidCapability error. If another object is already mapped at this level for the virtual address this operation will fail, returning a seL4_DeleteFirst error.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> Map an upper page directory (level 1) to a top level translation table (level 0).</p>
 
 <h4 id="unmap-12">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_PageUpperDirectory_Unmap</code></p>
@@ -5447,7 +8452,30 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_arm_vspace">seL4_ARM_VSpace</h3>
 
 <h4 id="clean-data-2">Clean Data</h4>
@@ -5484,6 +8512,37 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="clean-and-invalidate-data-2">Clean and Invalidate Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_CleanInvalidate_Data</code></p>
 
@@ -5517,6 +8576,37 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="invalidate-data-2">Invalidate Data</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_Invalidate_Data</code></p>
@@ -5552,6 +8642,37 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="unify-instruction-2">Unify Instruction</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_VSpace_Unify_Instruction</code></p>
 
@@ -5585,6 +8706,37 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">start</code>  is greater than or equal to <code class="highlighter-rouge">end</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The specified range crosses a page boundary.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="riscv-specific-object-methods">RISCV-Specific Object Methods</h2>
 <hr />
@@ -5636,6 +8788,41 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability. Or, there are no more ASID pools available.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">untyped</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">untyped</code>  is not the exact size of an ASID pool object. Or, <code class="highlighter-rouge">untyped</code>  is a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">untyped</code>  has been used to retype an object. Or, a copy of the <code class="highlighter-rouge">untyped</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Together with a capability to <code class="highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.</p>
 <h3 id="sel4_riscv_asidpool">seL4_RISCV_ASIDPool</h3>
 
@@ -5668,6 +8855,29 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>There are no more ASIDs available in <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is already assigned to an ASID pool. Or, <code class="highlighter-rouge">vspace</code>  is mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.</p>
 <h3 id="sel4_riscv_page">seL4_RISCV_Page</h3>
 
@@ -5694,6 +8904,25 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A <code class="highlighter-rouge">seL4_RISCV_Page_GetAddress_t</code> struct that contains a                 <code class="highlighter-rouge">seL4_Word paddr</code>, which holds the physical address of the page,                 and <code class="highlighter-rouge">int error</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="map-13">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Map</code></p>
@@ -5739,6 +8968,41 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is not aligned to the page size of <code class="highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A mapping already exists in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is already mapped in <code class="highlighter-rouge">vspace</code>  at a different virtual address. Or, <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not the root of a VSpace. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a different VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Takes a VSpace, or top-level <code class="highlighter-rouge">Page Table</code>, capability as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the page table slot corresponding to the given address. If a page is already mapped at the same virtual address, update the mapping attributes. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
 
 <h4 id="unmap-13">Unmap</h4>
@@ -5764,6 +9028,25 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>Description:</strong> Removes an existing mapping.</p>
 <h3 id="sel4_riscv_pagetable">seL4_RISCV_PageTable</h3>
@@ -5807,6 +9090,37 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>A page is mapped in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>. Or, all required page tables are already mapped in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
+    </tr>
+  </tbody>
+</table>
+
 <p><strong>Description:</strong> Starting from the VSpace, map the page table object at any unpopulated level for the provided virtual address. If all paging structures and mappings are present for this virtual address, return an seL4_DeleteFirst error.</p>
 
 <h4 id="unmap-14">Unmap</h4>
@@ -5832,6 +9146,29 @@ serviced.</p>
 </table>
 
 <p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is the root of a VSpace. Or, a copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
+    </tr>
+  </tbody>
+</table>
 
 
   </div>
