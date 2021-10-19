@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-10-19 03:18:55 +0000 -->
+<!-- Page last generated 2021-10-19 09:15:56 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1353,7 +1353,11 @@ This operation has no effect on un-badged or other objects.</p>
 <h4 id="mutate">Mutate</h4>
 <p><code class="highlighter-rouge">static inline int seL4_CNode_Mutate</code></p>
 
-<p>Move a capability, setting its badge in the process</p>
+<p>Move a capability, setting its guard in the process. This
+operation is mostly useful for setting the guard of a CNode
+capability without losing revokability of that CNode capability.
+All other uses can be replaced by a combination of Mint and
+Delete.</p>
 
 <table>
   <thead>
@@ -1397,7 +1401,7 @@ This operation has no effect on un-badged or other objects.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">badge</code></td>
-      <td>Badge or guard to be applied to the new capability. For badges on 32-bit platforms, the high 4 bits are ignored.</td>
+      <td>Guard to be applied to the new capability.</td>
     </tr>
   </tbody>
 </table>
