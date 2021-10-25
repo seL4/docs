@@ -1,5 +1,4 @@
 ---
-arm_hardware: true
 simulation_target: true
 cmake_plat: kzm
 xcompiler_arg: -DAARCH32=1
@@ -15,15 +14,10 @@ Maintained: Data61
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
-# KZM
+# KZM (Deprecated seL4 platform)
 
-seL4 supports the the
-KZM-ARM11-01, which can
-also be simulated in qemu.
+**seL4 previously supported the KZM-ARM11-01 unitl version 12.1.0, which can also be simulated in qemu.**
+**Support for this platform has since been removed**
 
 The KZM is deprecated, ARMv11 Hardware which was used for the original seL4 verification. The latest
 verification platform is the [SabreLite](/Hardware/sabreLite).
-
-## Simulation
-
-{% include sel4test.md %}
