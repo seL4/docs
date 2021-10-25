@@ -3,13 +3,13 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-10-25 03:18:32 +0000 -->
+<!-- Page last generated 2021-10-25 21:50:25 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KZM | seL4 docs</title>
+    <title>KZM (Deprecated seL4 platform) | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">KZM</span>
+            <span property="name">KZM (Deprecated seL4 platform)</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -150,38 +150,13 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="kzm">KZM</h1>
+      <h1 id="kzm-deprecated-sel4-platform">KZM (Deprecated seL4 platform)</h1>
 
-<p>seL4 supports the the
-KZM-ARM11-01, which can
-also be simulated in qemu.</p>
+<p><strong>seL4 previously supported the KZM-ARM11-01 unitl version 12.1.0, which can also be simulated in qemu.</strong>
+<strong>Support for this platform has since been removed</strong></p>
 
 <p>The KZM is deprecated, ARMv11 Hardware which was used for the original seL4 verification. The latest
 verification platform is the <a href="/Hardware/sabreLite">SabreLite</a>.</p>
-
-<h2 id="simulation">Simulation</h2>
-
-<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo <span class="nb">sync
-mkdir </span>cbuild
-<span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>kzm <span class="nt">-DAARCH32</span><span class="o">=</span>1
-<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
-<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
-<span class="c"># parameters to suit your needs.</span>
-ninja
-<span class="c"># If your target binaries can be executed in an emulator/simulator, and if</span>
-<span class="c"># our build system happens to support that target emulator, then this script</span>
-<span class="c"># might work for you:</span>
-./simulate
-
-</code></pre></div></div>
-<p>If you plan to use the ./simulate script, please be sure to add the
-<code class="highlighter-rouge">-DSIMULATION=1</code> argument when running cmake.</p>
-
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
-
 
     </div>
   </div>
@@ -215,10 +190,10 @@ ninja
         </li>
         
           <li>
-            Site last updated: Tue Oct 19 08:44:45 2021 +1100 ac725cd
+            Site last updated: Tue Oct 26 08:45:23 2021 +1100 bc91e92
           </li>
           <li>
-                Page last updated: Tue Oct 19 08:44:45 2021 +1100 ac725cd
+                Page last updated: Tue Oct 26 08:45:23 2021 +1100 bc91e92
           </li>
         
       </ul>
