@@ -515,14 +515,6 @@ configurations:
     maintainer: "Data61"
     status: "x86 Option. (Default: OFF)"
     component_type: platform-x86
-  - name: KernelDangerousCodeInjectionOnUndefInstr
-    display_name: "KernelDangerousCodeInjectionOnUndefInstr"
-    description: "Replaces the undefined instruction handler with a call to a function pointer in r8.
-    This is an alternative mechanism to the code injection syscall. This option is mainly used
-    for benchmarking the kernel on ARMv6 platforms and has no effect on non-ARMv6 platforms."
-    maintainer: "Data61"
-    status: "Arm option. (Default: OFF)"
-    component_type: platform-arm
   - name: KernelDebugDisableL2Cache
     display_name: "KernelDebugDisableL2Cache"
     description: "Do not enable the L2 cache on startup for debugging purposes."
@@ -834,12 +826,6 @@ components:
     maintainer: "Data61"
     status: "active, currently used by the hifive seL4 platform"
     component_type: kernel-driver-irq
-  - name: fsl,imx31-avic
-    display_name: "fsl,imx31-avic"
-    description: "i.MX31 interrupt controller seL4 driver"
-    maintainer: "Data61"
-    status: "active, currently used by the kzm seL4 platform"
-    component_type: kernel-driver-irq
   - name: ti,omap3-intc
     display_name: "ti,omap3-intc"
     description: "omap3 interrupt controller seL4 driver"
@@ -960,12 +946,6 @@ components:
     maintainer: "Data61"
     status: "Active, currently used by the exynos4 seL4 platform"
     component_type: kernel-driver-timer
-  - name: fsl,imx31-epit
-    display_name: "fsl,imx31-epit"
-    description: "i.MX31 EPIT timer seL4 driver"
-    maintainer: "Data61"
-    status: "Active, currently used by the kzm seL4 platform"
-    component_type: kernel-driver-timer
   - name: ti,omap3430-timer
     display_name: "ti,omap3430-timer"
     description: "omap3 timer seL4 driver"
@@ -977,12 +957,6 @@ components:
     description: "Arm generic timer seL4 driver"
     maintainer: "Data61"
     status: "Active, currently used by several Arm seL4 platforms"
-    component_type: kernel-driver-timer
-  - name: "fsl,imx31-gpt"
-    display_name: "fsl,imx31-gpt"
-    description: "i.MX31 GPT timer seL4 driver"
-    maintainer: "Data61"
-    status: "Active, currently used by the kzm seL4 platform"
     component_type: kernel-driver-timer
   - name: "arm,cortex-a9-twd-timer"
     display_name: "arm,cortex-a9-twd-timer"
@@ -1054,12 +1028,6 @@ components:
   - name: exynos5422.dts
     display_name: exynos5422.dts
     description: "exynos5422 platform device tree (dts) sourced from Linux kernel path: exynos5422-odroidxu4"
-    maintainer: "Data61"
-    status: "active"
-    component_type: kernel-device-tree
-  - name: kzm.dts
-    display_name: kzm.dts
-    description: "kzm platform device tree (dts) sourced from Linux kernel path: imx31-bug"
     maintainer: "Data61"
     status: "active"
     component_type: kernel-device-tree
