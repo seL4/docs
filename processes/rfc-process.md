@@ -70,6 +70,8 @@ and the documentation artefact it generates.
 * Removing support for a platform
 * Changing the versioning system used for libraries
 * Adding a new major API feature to the kernel
+* Adding a new operation/invocation to an existing capability type, or removing one
+* Adding or removing a capability or object type
 
 Changes such as bug-fixes, refactorings, optimisations,
 or those that do not affect the functional requirements
