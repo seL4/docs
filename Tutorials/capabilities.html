@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-11-04 03:18:39 +0000 -->
+<!-- Page last generated 2021-11-05 03:17:45 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -378,8 +378,10 @@ Each CSlot in a CNode can be in the following state:</p>
 <p>By convention the 0th CSlot is kept empty, for the same reasons as keeping NULL unmapped in
  process virtual address spaces: to avoid errors when uninitialised slots are used unintentionally.</p>
 
-<p>CSlots are <code class="highlighter-rouge">1u &lt;&lt; seL4_SlotBits</code> in size, and as a result the number of slots in a CNode can be calculated
- by <code class="highlighter-rouge">CNodeSize / (1u &lt;&lt; seL4_SlotBits)</code>.</p>
+<p>The field <code class="highlighter-rouge">info-&gt;CNodeSizeBits</code> gives a measure of the size of the initial
+CNode: it will have <code class="highlighter-rouge">1 &lt;&lt; CNodeSizeBits</code> CSlots. A CSlot has
+<code class="highlighter-rouge">1 &lt;&lt; seL4_SlotBits</code> bytes, so the size of a CNode in bytes is
+<code class="highlighter-rouge">1 &lt;&lt; (CNodeSizeBits + seL4_SlotBits</code>.</p>
 
 <h3 id="cspaces">CSpaces</h3>
 
@@ -474,7 +476,7 @@ resources manages by seL4. We have already seen several capabilities in the root
 <h2 id="exercises">Exercises</h2>
 
 <p>The initial state of this tutorial provides you with the BootInfo structure,
-and calculates the size (in bytes) of the initial CNode object.</p>
+and calculates the size (in slots) of the initial CNode object.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
 
@@ -489,8 +491,8 @@ and calculates the size (in bytes) of the initial CNode object.</p>
 <p>When you run the tutorial without changes, you will see something like the following output:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
-Initial CNode is 4096 bytes in size
-The CSpace has 0 CSlots
+Initial CNode is 65536 slots in size
+The CNode is 0 bytes in size
 &lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "rootserver" @401397]: Attempted to invoke a null cap #4095.&gt;&gt;
 main@main.c:33 [Cond failed: error]
     Failed to set priority
@@ -502,15 +504,15 @@ The third line stating the number of slots in the CSpace, is incorrect, and your
 
 <h3 id="how-big-is-your-cspace">How big is your CSpace?</h3>
 
-<p><strong>Exercise:</strong> refer to the background above, and calculate the number of slots in the initial thread’s CSpace.</p>
+<p><strong>Exercise:</strong> refer to the background above, and calculate the number of bytes occupied by the initial thread’s CSpace.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">size_t</span> <span class="n">num_initial_cnode_slots</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// TODO calculate this.</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"The CSpace has %zu CSlots</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">num_initial_cnode_slots</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">size_t</span> <span class="n">initial_cnode_object_size_bytes</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// TODO calculate this.</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"The CNode is %zu bytes in size</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">initial_cnode_object_size_bytes</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h3 id="copy-a-capability-between-cslots">Copy a capability between CSlots</h3>
 
-<p>After the output showing the number of CSlots in the CSpace, you will see an error:</p>
+<p>After the output showing the number of bytes in the CSpace, you will see an error:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "rootserver" @401397]: Attempted to invoke a null cap #4095.&gt;&gt;
 main@main.c:33 [Cond failed: error]
