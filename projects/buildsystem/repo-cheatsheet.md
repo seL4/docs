@@ -12,42 +12,57 @@ Repo is a tool developed by the Android Open Source Project.  We use repo for so
 
 This page describes how we typically structure our manifests and also explains some common repo commands that we use in our workflows.
 
-Below is an example of a manifest for the sel4test project.  It is located in <https://github.com/seL4/sel4test-manifest>.
+Below is a set of example manifests for the sel4test project. They are located at <https://github.com/seL4/sel4test-manifest/>.
+
+- `common.xml`:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2017, Data61
-     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
-     ABN 41 687 119 230.
-
-     This software may be distributed and modified according to the terms of
-     the BSD 2-Clause license. Note that NO WARRANTY is provided.
-     See "LICENSE_BSD2.txt" for details.
-
-     @TAG(DATA61_BSD)
+     Copyright 2018, Data61, CSIRO
+     SPDX-License-Identifier: BSD-2-Clause
 -->
 <manifest>
-
-<remote name="seL4" fetch="."/>
-
+<remote name="seL4" fetch="." />
 <remote fetch="../sel4proj" name="sel4proj"/>
+<remote fetch="https://github.com/nanopb" name="nanopb" />
+<remote fetch="https://github.com/riscv" name="opensbi"/>
 
-<default revision="master"
-remote="seL4"
-/>
+<default revision="master" remote="seL4" />
 
-<project name="seL4.git" path="kernel"/>
-<project name="seL4_tools.git" path="tools">
-    <linkfile src="cmake-tool/default-CMakeLists.txt" dest="CMakeLists.txt"/>
-    <linkfile dest="init-build.sh" src="cmake-tool/init-build.sh"/>
+<project name="seL4_tools.git" path="tools/seL4">
+    <linkfile src="cmake-tool/init-build.sh" dest="init-build.sh"/>
+    <linkfile src="cmake-tool/griddle" dest="griddle"/>
 </project>
+<project name="sel4runtime.git" path="projects/sel4runtime"/>
 <project name="musllibc.git" path="projects/musllibc" revision="sel4"/>
 <project name="seL4_libs.git" path="projects/seL4_libs"/>
 <project name="util_libs.git" path="projects/util_libs"/>
-<project name="sel4test.git" path="projects/sel4test"/>
-<project name="riscv-pk" remote="sel4proj" revision="fix-32bit" path="projects/riscv-pk"/>
+<project name="sel4test.git" path="projects/sel4test">
+    <linkfile src="easy-settings.cmake" dest="easy-settings.cmake"/>
+</project>
+<project name="sel4_projects_libs" path="projects/sel4_projects_libs" />
+<project name="opensbi" remote="opensbi" revision="refs/tags/v0.8" path="tools/opensbi"/>
+<project name="nanopb" path="tools/nanopb" revision="refs/tags/0.4.3" upstream="master" remote="nanopb"/>
 </manifest>
 ```
+
+- `master.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright 2018, Data61, CSIRO
+     SPDX-License-Identifier: BSD-2-Clause
+-->
+<manifest>
+<!-- include all the common repositories, we just want to define the kernel -->
+<include name="common.xml"/>
+<project name="seL4.git" path="kernel"/>
+</manifest>
+```
+
+
 ## Manifest layout
 
 We provide a brief overview of manifests as used in our projects in this section, please find more details in the full description of the manifest layout which can be found [here](https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md).
@@ -73,35 +88,38 @@ If attributes are ommitted, the values from the default element will be used ins
 
 ### Pinned manifests
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2018, Data61
-     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
-     ABN 41 687 119 230.
-     This software may be distributed and modified according to the terms of
-     the BSD 2-Clause license. Note that NO WARRANTY is provided.
-     See "LICENSE_BSD2.txt" for details.
-     @TAG(DATA61_BSD)
+   Copyright 2021 seL4 Project a Series of LF Projects, LLC
+   SPDX-License-Identifier: BSD-2-Clause
 -->
 <manifest>
-  <remote fetch="." name="seL4"/>
-  <remote fetch="../sel4proj" name="sel4proj"/>
+  <remote name="nanopb" fetch="https://github.com/nanopb"/>
+  <remote name="opensbi" fetch="https://github.com/riscv"/>
+  <remote name="seL4" fetch="."/>
+  <remote name="sel4proj" fetch="../sel4proj"/>
 
   <default remote="seL4" revision="master"/>
 
-  <project name="musllibc.git" path="projects/musllibc" revision="f58dacf44a679a2d7c10fbb8d8bc8f58e2123791" upstream="sel4"/>
-  <project name="riscv-pk" path="projects/riscv-pk" remote="sel4proj" revision="db937e995b09d343fb7146c447b0780ab1dca66b" upstream="fix-32bit"/>
-  <project name="seL4.git" path="kernel" revision="757c3ac98246afd0593367f1fa19054316a77495" upstream="master"/>
-  <project name="seL4_libs.git" path="projects/seL4_libs" revision="1697cb16ecbc7820cbda78d7c7c1896e884195a1" upstream="master"/>
-  <project name="seL4_tools.git" path="projects/tools" revision="930b6467eae8404e4a72555b693120ac0d64fc48" upstream="master">
-    <linkfile dest="CMakeLists.txt" src="cmake-tool/default-CMakeLists.txt"/>
-    <linkfile dest="init-build.sh" src="cmake-tool/init-build.sh"/>
+  <project name="musllibc.git" path="projects/musllibc" revision="aa82031dd861f7ade4c3738b417de34120b01f15" upstream="sel4" dest-branch="sel4"/>
+  <project name="nanopb" path="tools/nanopb" remote="nanopb" revision="1466e6f953835b191a7f5acf0c06c941d4cd33d9" upstream="master" dest-branch="refs/tags/0.4.3"/>
+  <project name="opensbi" path="tools/opensbi" remote="opensbi" revision="a98258d0b537a295f517bbc8d813007336731fa9" upstream="refs/tags/v0.8" dest-branch="refs/tags/v0.8"/>
+  <project name="seL4.git" path="kernel" revision="a6c29549fce33df65b9018f420d330bca9086712" upstream="master" dest-branch="master"/>
+  <project name="seL4_libs.git" path="projects/seL4_libs" revision="14d3c94f5164c993033a35a5d9e23ba6dcf12f5f" upstream="master" dest-branch="master"/>
+  <project name="seL4_tools.git" path="tools/seL4" revision="553086aab4c9fb9c4869060fe51a3e95c20ce454" upstream="master" dest-branch="master">
+    <linkfile src="cmake-tool/init-build.sh" dest="init-build.sh"/>
+    <linkfile src="cmake-tool/griddle" dest="griddle"/>
   </project>
-  <project name="sel4test.git" path="projects/sel4test" revision="dbd96aa862b8519165aaa8ae7bd5a1787048e34a" upstream="master"/>
-  <project name="util_libs.git" path="projects/util_libs" revision="c575f7280ce6184dbb2876f83a6c591c91de219e" upstream="master"/>
+  <project name="sel4_projects_libs" path="projects/sel4_projects_libs" revision="a6fbc13c792ef518e5bcf1da69c8d27b6cd19814" upstream="master" dest-branch="master"/>
+  <project name="sel4runtime.git" path="projects/sel4runtime" revision="c27050513503f615137950cb3918f6f040f34407" upstream="master" dest-branch="master"/>
+  <project name="sel4test.git" path="projects/sel4test" revision="110ad99b32cb94f0604ce9fef796164b595fe6aa" upstream="master" dest-branch="master">
+    <linkfile src="easy-settings.cmake" dest="easy-settings.cmake"/>
+  </project>
+  <project name="util_libs.git" path="projects/util_libs" revision="280f7bb58290ea3d719d86894655a03f36d347e2" upstream="master" dest-branch="master"/>
 </manifest>
 ```
+
 A pinned manifest uses pinned git revisions for all of its repositories. It is good practice to create a pinned manifest that refers to a working version of a project. For projects that we maintain, we provide at least two manifests: default.xml and master.xml (See [ReleaseProcess](/ReleaseProcess) for more information about what manifests we make available).
 
 ## Commands
