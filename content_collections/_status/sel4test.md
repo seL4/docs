@@ -22,8 +22,8 @@ seL4test requires itself to be started directly by seL4 as the root-task in the 
 This is the `sel4test-driver` binary and it then also serves as the main test runner.
 It runs the configured tests and sets up the required test environment for each test.
 It prints out test results over a serial connection. `sel4test-driver` is maintained
-by Data61 and is currently the only test runner that is expected to run tests defined
-for seL4test.
+by the seL4 Foundation and is currently the only test runner that is expected to run
+tests defined for seL4test.
 
 ### Test environments
 

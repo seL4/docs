@@ -26,134 +26,134 @@ features:
   - name: assembly
     display_name: Assembly
     description: "An assembly is a top level component system description. It contains a complete description of a full system."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: composition
     display_name: Composition
     description: "A container for the component and connector instantiations that form a system."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: configuration
     display_name: Configuration
     description: "A container for describing settings. This is a syntactic element to hold the assignment of attributes for a given system.\
     It is expressed inside an assembly block."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: component-definitions
     display_name: Component definition
     description: "A `type` of functional entity. 'Component' is used colloquially to refer to both types and instances, but in a formal sense 'component' refers only to the type."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: hierarchical-components
     display_name: Hierarchical components
     description: "A component can contain its own composition and configuration sections that can define components and connections that are in a different namespace from the toplevel
     composition and configuration namespaces. Each component instance is still a separate component. The top level component type can then select internal interfaces to export as its own interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Mostly supported. There are some known template bugs where a component exporting dataport interfaces is also required to have a connection to the dataport."
     component_type: adl-feature
   - name: grouped-components
     display_name: Component Groups
     description: "A `Group` combines components into a single underlying process so they share an address space. This can reduce communication costs due to reduced context switching
     requirements, but components in a group are required to mutually trust each other."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Mostly supported. Connector implementations need to be aware that they are being used in a group component context. There are also issues with variable storage as some
     global variables will be defined for each component instance in the group, and threads that call across component boundaries may access incorrect variable instances."
     component_type: adl-feature
   - name: hardware-components
     display_name: Hardware components
     description: "A hardware component represents an interface to hardware in the form of a component. Declaring a component with the hardware keyword creates a hardware component."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: interfaces
     display_name: Component Interfaces
     description: "An abstract exposed interaction point of a component. The subcategories of interface are procedure, event and dataport."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: exported-interfaces
     display_name: Exported Interfaces
     description: "An interface of a compound component that is not implemented by that component, but is an alias for internal instance’s interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: optional-interfaces
     display_name: Optional Interfaces
     description: "Interfaces of components can be made optional using the `maybe` keyword. Optional interfaces do not need to be connected to any other interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: procedure-definition
     display_name: Procedure IDL
     description: "An interface with function call semantics use procedures which consist of a series of methods that can be invoked independently. Procedures are defined
     within the ADL which has a IDL subset for defining methods and parameters."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: attributes
     display_name: Attributes
     description: "An attribute is a configuration option that can be set on a component, connection or procedure definition. \
     It is used to pass configuration information through to the underlying implementations."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: structs
     display_name: Structured attributes
     description: "Attribute types support struct- and array-like declarations that support bundling and variable length attribute definitions."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: attribute-defaults
     display_name: Default attribute values
     description: "Attribute definitions can also provide default settings. These defaults are used in the absence attribute settings."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported for component and connection attributes"
     component_type: adl-feature
   - name: synchronization-primitives
     display_name: Synchronization Primitives
     description: "CAmkES provides three primitives for intra-component mutual exclusion and synchronization. Mutexes, semaphores, and binary semaphores are declared similarly to attributes of a component definition."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: adl-feature
   - name: includes
     display_name: "`include` statements"
     description: "`include` statements are used to declare source language include dependencies on component and procedure definitions. These are used when CAmkES is using types defined by another language."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported, but only used with C header files."
     component_type: adl-feature
   - name: connector-types
     display_name: Connector definitions
     description: "A type of link between instances. A connector implements the transportation for the interfaces it is connected between."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported."
     component_type: adl-feature
   - name: connections
     display_name: Connections
     description: "An instantiation of a connector. Connections connect two or more instances together via their interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported."
     component_type: adl-feature
   - name: imports
     display_name: Imports
     description: "`import` statements are used to define an assembly over multiple `.camkes` files and combine them together into a single AST."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported. It is possible to provide an import path argument to the camkes tool for where to search for files to import."
     component_type: adl-feature
   - name: cpreprocessor
     display_name: "C-Preprocessed ADL files"
     description: "The C Preprocessor is run over the ADL files before the parser starts parsing them."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported. Because of the C-Preprocessor, the ADL ignores lines starting with #.  This is not a valid comment syntax."
     component_type: adl-feature
   - name: query-plugins
     display_name: "Query syntax and plugins"
     description: "The parser supports adding plugins that can provide configuration values via a setting querying syntax. A plugin is able
     to respond to a query with a valid configuration value."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported. Currently only 1 plugin exists, fdtQueryEngine, for querying values out of a Flattened device tree (FDT)."
     component_type: adl-feature
 
@@ -166,457 +166,457 @@ components:
   - name: adder
     display_name: adder
     description: "A simple 'Hello world' CAmkES application which demonstrates some basics of the CAmkES framework."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: aeroplage
     display_name: aeroplage
     description: "A CAmkES application which implements a prototype of a previous multi-level terminal for seL4."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: alignment
     display_name: alignment
     description: "A CAmkES application which tests if the stack is aligned properly by crashing on an unaligned stack."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: attributes
     display_name: attributes
     description: "A CAmkES application which demonstrates the use of aliasing attributes."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: binary-semaphore
     display_name: binary-semaphore
     description: "A CAmkES application which demonstrates how to use a binary semaphore to turn an asynchronous interface into a synchronous one."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: cakeml_hello
     display_name: cakeml_hello
     description: "A 'Hello world' CAmkES application which demonstrates the ability to run CakeML-based CAmkES components inside CAmkES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: cakeml_regex
     display_name: cakeml_regex
     description: "A CAmkES application which demonstrates the use of CakeML to implement a CAmkES component which filters data between two different components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: cakeml_tipc
     display_name: cakeml_tipc
     description: "A CAmkES application which demonstrates the Transparent IPC protocol (TIPC) and the use of CakeML to implement a CAmkES component to filter data between two different CAmkES components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: cms-donate
     display_name: cms-donate
     description: "A CAmkES application which demonstrates the donation of a scheduling context between a client and server via an intermediary under a Mixed Criticality Scheduling (MCS) environment."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: cs-donate
     display_name: cs-donate
     description: "A CAmkES application which demonstrates the donation of a scheduling context between a client and server under a Mixed Criticality Scheduling (MCS) environment."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: cs-nodonate
     display_name: cs-nodonate
     description: "A CAmkES application which demonstrates two CAmkES components running using their own scheduling contexts under a Mixed Criticality Scheduling (MCS) environment."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: dataport
     display_name: dataport
     description: "A CAmkES application which demonstrates an example of the usage of CAmkES dataports."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: debug-simple
     display_name: debug-simple
     description: "A CAmkES application which demonstrates the use of the seL4GDB connector to debug CAmkES components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: dhcp
     display_name: dhcp
     description: "A CAmkES application which demonstrates an example DHCP server."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: dma-example
     display_name: dma-example
     description: "A CAmkES application which demonstrates the use of a CAmKES-allocated DMA pool."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: epit
     display_name: epit
     description: "A CAmkES application which demonstrates a simple hardware driver CAmkES component for the EPIT timers on the KZM platform."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: event
     display_name: event
     description: "A CAmkES application which demonstrates an example of CAmkES events."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: event-driven
     display_name: event-driven
     description: "A CAmkES application which demonstrates an example of a CAmkES event-driven application."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: exchangestring
     display_name: exchangestring
     description: "A CAmkES application which demonstrates how to pass string arguments between CAmkES components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: fdtgen
     display_name: fdtgen
     description: "A CAmkES application which demonstrates an example on how to include a DTB blob and how to modify it."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: filter
     display_name: filter
     description: "A CAmkES application which demonstrates the use of a CAmkES component to filter communication between two other CAmkES components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: global-imports
     display_name: global-imports
     description: "A CAmkES application which demonstrates an example of allowing CAmkES components to be globally imported using specific CMake macros."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: hellorust
     display_name: hellorust
     description: "A CAmkES application which demonstrates an example of running a Rust application inside CAmkES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: hierarchical-attributes
     display_name: hierarchical-attributes
     description: "A CAmkES application which demonstrates an example of hierarchical attributes in CAmKES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: hierarchical-components
     display_name: hierarchical-components
     description: "A CAmkES application which demonstrates an example of hierarhical CAmkES components in CAmkES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: keyboard
     display_name: keyboard
     description: "A CAmkES application which demonstrates an example keyboard driver for x86 platforms."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: lockserver
     display_name: lockserver
     description: "A CAmkES application which demonstrates an example system which contains a CAmkES component that manages a lock."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: mcs-donate
     display_name: mcs-donate
     description: "A CAmkES application which demonstrates the donation of scheduling contexts betwen two clients and a server under a Mixed Criticality Scheduling (MCS) environment."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: mcs-nodonate
     display_name: mcs-nodonate
     description: "A CAmkES application which demonstrates the three CAmkES components running using their own scheduling contexts under a Mixed Criticality Scheduling (MCS) environment."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: multiassembly
     display_name: multiassembly
     description: "A CAmkES application which demonstrates the ability to have two different 'assembly' blocks."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: multiclient
     display_name: multiclient
     description: "A CAmkES application which demonstrates the ability to allow multiple clients to share one connection."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: multiplier
     display_name: multiplier
     description: "A CAmkES application which demonstrates an example of using arrays as arguments for RPC functions between CAmkES components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: mutex
     display_name: mutex
     description: "A CAmkES application which demonstrates the use of user-defined connectors in CAmkES to implement a lock."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: periodic
     display_name: periodic
     description: "A CAmkES application which demonstrates the periodic timeslices of CAmkES components under a Mixed Criticality Scheduling (MCS) environment."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: picoserver
     display_name: picoserver
     description: "A CAmkES application which demonstrates a simple networking example which uses the PicoServer in the global-components repository."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: pit
     display_name: pit
     description: "A CAmkES application which demonstrates a timer driver CAmkES component for the Programmable Interval Timer on x86 platforms."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: reversestring
     display_name: reversestring
     description: "A CAmkES application which demonstrates dataport release and acquire semantics."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: rotate
     display_name: rotate
     description: "A CAmkES application which demonstrates the use of user-defined types as arguments of a RPC interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: RPCOverMultiSharedData
     display_name: RPCOverMultiSharedData
     description: "A CAmkES application which demonstrates the use of the seL4RPCOverMultiSharedData connector to perform RPC using shared memory buffers between the client and server."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: rumprun_ethernet
     display_name: rumprun_ethernet
     description: "A CAmkES application which demonstrates a single TCP echo program that runs in a Rumprun unikernel instance on CAmkES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: rumprun_pthreads
     display_name: rumprun_pthreads
     description: "A CAmKES application which demonstrates a simple pthreads program that runs in a Rumprun unikernel instance on CAmKES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: rumprun_rust
     display_name: rumprun_rust
     description: "A CAmkES application which demonstrates a simple Rust 'Hello world' program that runs in a Rumprun unikernel instance on CAmkES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: serialserver
     display_name: serialserver
     description: "A CAmkES application which demonstrates the use of the SerialServer component in the global-components repository."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: serialserver_loopback
     display_name: serialserver_loopback
     description: "A CAmkES application which demonstrates the use of the SerialServer component in the global-components repository looping back characters that it reads in from the serial device."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: simple
     display_name: simple
     description: "A CAmkES application which demonstrates an example of a CAmkES RPC connection."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: simplesingleaddressspace
     display_name: simplesingleaddressspace
     description: "A CAmkES application which demonstrates an example of a single address space CAmkES system which contains a RPC connection between its two components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: socket
     display_name: socket
     description: "A CAmkES application which demonstrates a user-defined dataport."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: structs
     display_name: structs
     description: "A CAmkES application which demonstrates the use of structs and arrays for CAmkES component attribute types."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: swapcounter
     display_name: swapcounter
     description: "A CAmkES application which was used for demonstration purposes for a paper submission to Formal Methods 2015 but has since been modified."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: terminal
     display_name: terminal
     description: "A CAmkES application which serves as a prototype for a secure terminal system."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testbufvariant
     display_name: testbufvariant
     description: "A CAmkES application which is used to test dataports."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testcamkes438
     display_name: testcamkes438
     description: "A CAmkES application that is used to test a specific function of the CAmkES framework."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testcontrolname
     display_name: testcontrolname
     description: "A CAmkES application that is used to test if interfaces could be named with a particular suffix."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testdataportbifurcate
     display_name: testdataportbifurcate
     description: "A CAmkES application that tests if we can have multiple dataports within a single component that maps to the same underlying physical memory."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testdataportmux
     display_name: testdataportmux
     description: "A CAmkES application that tests the ability to have multiple CAmkES components connected to the same dataport."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testdataportmuxflat
     display_name: testdataportmuxflat
     description: "A CAmkES application that tests the ability to have N-to-M dataport connections in a single address space."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testdataportptrwrap
     display_name: testdataportptrwrap
     description: "A CAmkES application that tests if dataport pointer wrapping and unwrapping functionality works on multiplexed dataports."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testdataportrpc
     display_name: testdataportrpc
     description: "A CAmkES application that tests if we can back an seL4RPCCall connection with various types of dataports."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testfaulthandlers
     display_name: testfaulthandlers
     description: "A CAmkES application that tests if the fault handlers work correctly as intended."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testgrouping
     display_name: testgrouping
     description: "A CAmkES application which tests for the various edge cases in grouping CAmkES components into single address spaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testgroupingcontrol
     display_name: testgroupingcontrol
     description: "A CAmkES application which tests whether CAmkES components with a control thread work correctly when grouped in a single address spaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testhardwareinterrupt
     display_name: testhardwareinterrupt
     description: "A CAmkES application which tests if an application containing a seL4HardwareInterrupt successfully compiles."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testhwdataportlrgpages
     display_name: testhwdataportlrgpages
     description: "A CAmkES application which tests whether or not large pages will be used to back a large dataport."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testnto1mmio
     display_name: testnto1mmio
     description: "A CAmkES application that tests if an N-to-1 MMIO connection to a piece of hardware functions correctly."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testnto1overload
     display_name: testnto1overload
     description: "A CAmKES application that tests if N-to-1 connections involving multiple ends from a single CAmkES component uses distinct caps."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testrefin
     display_name: testrefin
     description: "A CAmKES application that tests the 'refin' parameter function in CAmkES procedure interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testreplycapprotection
     display_name: testreplycapprotection
     description: "A CAmkES application that tests the reply cap protection functionality."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testsel4notification
     display_name: testsel4notification
     description: "A CAmkES application that tests the seL4Notification connector."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testsingleaddressspaceheap
     display_name: testsingleaddressspaceheap
     description: "A CAmkES application that tests that the heaps of CAmkES components that share a single address space do not overlap."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: teststringarrays
     display_name: teststringarrays
     description: "A CAmkES application that tests some unusual usages of string array parameters in procedure interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testsyscalls
     display_name: testsyscalls
     description: "A CAmkES application that serves as a testing sandbox for POSIX syscall functionality on CAmkES."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: testunderscorename
     display_name: testunderscorename
     description: "A CAmkES application that tests if CAmkES components can have interface names prefixed with an underscore."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: timeserver
     display_name: timeserver
     description: "A CAmkES application which demonstrates the use of the TimeServer componen fromthe global-components repository."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: uart
     display_name: uart
     description: "A CAmkES application which demonstrates a UART driver CAmkES component for the KZM platform."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: uart_cogent
     display_name: uart_cogent
     description: "A CAmkES application which demonstrates a prototype UART driver for the sabrelite platform that is written in Cogent."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   - name: vgatest
     display_name: vgatest
     description: "A CAmkES application which demonstrates a minimal implementation for a text mode VGA terminal."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-application
   #
@@ -625,73 +625,73 @@ components:
   - name: ClockServer
     display_name: ClockServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to clock devices on a platform."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: Ethdriver
     display_name: Ethdriver
     description: "A CAmkES component which abstracts over and multiplexes client accesses to an Ethernet device."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: FileServer
     display_name: FileServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to a CPIO-based file system."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: GPIOMUXServer
     display_name: GPIOMUXServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to a GPIO and pin multiplexer controller."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: PCIConfigIO
     display_name: PCIConfigIO
     description: "A CAmkES component which abstracts over and multiplexes client accesses to the PCI configuration space of a platform."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: PicoServer
     display_name: PicoServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to an IP stack, specifically, the PicoTCP TCP/IP stack."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: ResetServer
     display_name: ResetServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to a reset line controller."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: RTC
     display_name: RTC
     description: "A CAmkES component which abstracts over and multiplexes client accesses to a real-time clock device."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: SerialServer
     display_name: SerialServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to a serial device."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: TimeServer
     display_name: TimeServer
     description: "A CAmkES component which abstracts over and multiplexes client accesses to a timer device."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: VirtQueue
     display_name: VirtQueue
     description: "A stub CAmkES component which is used to help initialise virtqueue connections."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: camkes-connector-seL4Ethdriver
     display_name: seL4Ethdriver
     description: "CAmkES connector which is used to connect clients to the Ethdriver component's procedure interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4GlobalAsynchCallback
@@ -700,67 +700,67 @@ components:
                   capability available to the consuming side of the Event interface. \
                   This also allows the coupling of callback function that is called upon\
                   receiving an Event."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4GlobalAsync
     display_name: seL4GlobalAsync
     description: "CAmkES connector which is used to make the underlying seL4 notification capability available to the consuming side of the Event interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4MessageQueue
     display_name: seL4MessageQueue
     description: "CAmkES connector which allows the sending and queueing of user-defined messages from one component to another."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4MultiSharedData
     display_name: seL4MultiSharedData
     description: "CAmkES connector which allows multiple dataports to be connected to a single components and also provides multiplexed access across the dataports."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4RPCCallSignal
     display_name: seL4RPCCallSignal
     description: "CAmkES connector which bundles a procedure interface with an event interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4RPCDataport
     display_name: seL4RPCDataport
     description: "CAmkES connector which bundles a procedure interface with a dataport interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4RPCDataportSignal
     display_name: seL4RPCDataportSignal
     description: "CAmkES connector which bundles a procedure interface, event interface, and a dataport interface."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4RPCOverMultiSharedData
     display_name: seL4RPCOverMultiSharedData
     description: "CAmkES connector which uses shared memory to transfer data instead of the IPC buffer for procedure interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4SharedDataWithCaps
     display_name: seL4SharedDataWithCaps
     description: "CAmkES connector which allocates a shared memory region between components and also exposes the underlying frame caps."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4VirtQueues
     display_name: seL4VirtQueues
     description: "CAmkES connector which initialises a virtqueue connection between two components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: Findglobal-components
     display_name: Findglobal-components
     description: "CMake module for including the global-components components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: cmake-module
   #
@@ -769,109 +769,109 @@ components:
   - name: camkes
     display_name: camkes
     description: "The implementation of the CAmkES framework."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-implementation
   - name: libsel4camkes
     display_name: libsel4camkes
     description: "Supporting library for CAmkES components to access and manipulate CAmkES-allocated resources."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-library
   - name: libcamkescakeml
     display_name: libcamkescakeml
     description: "Utility library for CakeML-based CAmkES components that contains functions and interfaces to allow interaction with a CAmkES system."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-library
   - name: pc99-Serial
     display_name: Serial
     description: "Stub hardware CAmkES component that abstracts over a pc99-based serial device."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: pc99-Pit
     display_name: PIT
     description: "Stub hardware CAmkES component that abstracts over the x86 Programmable Interval Timer."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-component
   - name: camkes-connector-seL4DirectCall
     display_name: "seL4DirectCall"
     description: "Used for RPC interfaces between grouped components. Each call becomes a direct function call."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4Notification
     display_name: "seL4Notification"
     description: "Event connector where a seL4 Notification object is used for sending events. On the receiving end, a callback handler can be registerd or a thread can block waiting for events."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4NotificationBind
     display_name: "seL4NotificationBind"
     description: "Similar event connector to seL4Notification but the receiver has bound the Notification to its TCB."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4NotificationNative
     display_name: "seL4NotificationNative"
     description: "Similar event connector to seL4Notification but the receiver end can only call Poll or Wait on notification object."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4NotificationQueue
     display_name: "seL4NotificationQueue"
     description: "seL4Endpoint object is used to queue notifications so that if the sender is sending faster than the receiver is receiving, unreceived events will accumulate in a counter."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4RPCCall
     display_name: "seL4RPCCall"
     description: "Used for RPC interfaces where parameters will be marshalled into and out of IPC buffers and calls ocurr over seL4Endpoint objects."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported. There is also a CakeML implementation for the receiving end."
     component_type: camkes-connector
   - name: camkes-connector-seL4DTBHardware
     display_name: "seL4DTBHardware"
     description: "Hardware connector to hardware component specified by a Device tree node. This will extract MMIO and potentially IRQ information for creating connections to the component."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4RPCCallNoType
     display_name: "seL4RPCCallNoType"
     description: "seL4 RPCCall connector but without requirement of single procedure interface. This allows a single receiver thread to handle multiple senders with different interfaces."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4SharedData
     display_name: "seL4SharedData"
     description: "seL4 Dataport connector.  Creates a shared memory connection between components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4HardwareMMIO
     display_name: "seL4HardwareMMIO"
     description: "seL4 Dataport connector to MMIO region. Creates a MMIO mapping for device registers into a component."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4HardwareIOPort
     display_name: "seL4HardwareIOPort"
     description: "seL4 Procedure connector for x86 IOPorts. Provides functions for performing IOPort instructions via seL4 invocations."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4HardwareInterrupt
     display_name: "seL4HardwareInterrupt"
     description: "seL4 event connector for hardware interrupts. Provides interface for polling or blocking on interrupts and also for acknowledging IRQs."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: camkes-connector
   - name: camkes-connector-seL4IOAPICHardwareInterrupt
     display_name: "seL4IOAPICHardwareInterrupt"
     description: "seL4 event connector for IOAPIC hardware interrupts. Specialised connector for dealing with IOAPIC interrupts."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported on x86"
     component_type: camkes-connector
 
@@ -879,20 +879,20 @@ components:
   - name: Findcamkes-tool
     display_name: Findcamkes-tool
     description: "CMake module for including the camkes-tool components."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported"
     component_type: cmake-module
   # Manifests
   - name: master.xml
     display_name: master.xml
     description: "Camkes project manifest with all repositories from master branches."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported. Updated whenever project repository structure changes."
     component_type: repo-manifest
   - name: default.xml
     display_name: default.xml
     description: "Camkes project manifest with all repositories pinned to last versions that passed all tests."
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "Supported. This gets updated automatically by continuous integration."
     component_type: repo-manifest
 
@@ -902,24 +902,24 @@ configurations:
   - name: CAMKES_APP
     display_name: "CAMKES_APP (STRING)"
     description: "CAmkES application to build"
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "(Default: adder)"
     component_type: camkes-option
   - name: SIMULATION
     display_name: "SIMULATION (BOOL)"
     description: "Try and use simulable features"
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "(Default: ON)"
     component_type: camkes-option
   - name: RELEASE
     display_name: "RELEASE (BOOL)"
     description: "Performance optimized build"
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "(Default: OFF)"
     component_type: camkes-option
   - name: PLATFORM
     display_name: "PLATFORM (STRING)"
     description: "Platform to use"
-    maintainer: "Data61"
+    maintainer: "maintainer wanted"
     status: "(Default: x86_64)"
     component_type: camkes-option

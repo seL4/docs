@@ -10,7 +10,7 @@ soc: Exynos5
 cpu: Cortex-A15
 Status: Unverified
 Contrib: Data61
-Maintained: Data61
+Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

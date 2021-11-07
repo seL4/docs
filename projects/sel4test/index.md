@@ -45,7 +45,7 @@ numbers, see [ReleaseProcess](/ReleaseProcess#version-numbers).
 ### Configuration
 
 The CMake build environment supports a number of platforms. For information regarding our supported hardware platforms and their corresponding CMake
-configuration arguments, see the [Supported Platforms](/Hardware) page. Platforms that we test and are in-regression are listed as being maintained by Data61.
+configuration arguments, see the [Supported Platforms](/Hardware) page. Platforms that we test and are in-regression are listed as being maintained by the seL4 Foundation.
 
 To start a build with a specific configuration we can create a new subdirectory from the project root
 and initialise it with CMake:

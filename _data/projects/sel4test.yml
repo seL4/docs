@@ -16,26 +16,26 @@ components:
   - name: sel4test-driver
     display_name: sel4test-driver
     description: "The rootserver for the seL4 test suite."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4test-application
   - name: sel4test-tests
     display_name: sel4test-tests
     description: "The seL4 test suite."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4test-application
   # Manifests
   - name: master.xml
     display_name: master.xml
     description: "seL4test project manifest with all repositories from master branches."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active. Updated whenever project repository structure changes."
     component_type: repo-manifest
   - name: default.xml
     display_name: default.xml
     description: "seL4test project manifest with all repositories pinned to last versions that passed all tests."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active. This gets updated automatically by continuous integration."
     component_type: repo-manifest
 
@@ -43,13 +43,13 @@ components:
   - name: basic-testtype
     display_name: BASIC test type
     description: "General test type where test is launched in own process and can report test results to driver over IPC."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: test-environment
   - name: bootstrap-testtype
     display_name: BOOTSTRAP test type
     description: "Bootstrapping test type where each test is called in the same address space as the test driver. Used for testing functionality required for BASIC test type."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active."
     component_type: test-environment
 
@@ -59,78 +59,78 @@ configurations:
   - name: SIMULATION
     display_name: "SIMULATION (BOOL)"
     description: "Include only simulation compatible tests"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: RELEASE
     display_name: "RELEASE (BOOL)"
     description: "Performance optimized build"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: VERIFICATION
     display_name: "VERIFICATION (BOOL)"
     description: "Only verification friendly kernel features"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: BAMBOO
     display_name: "BAMBOO (BOOL)"
     description: "Enable machine parseable output"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: DOMAINS
     display_name: "DOMAINS (BOOL)"
     description: "Test multiple domains"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: SMP
     display_name: "SMP (BOOL)"
     description: "(if supported) Test SMP kernel"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: NUM_NODES
     display_name: "NUM_NODES (STRING)"
     description: "(if SMP) the number of nodes)"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: 4)"
     component_type: sel4test-option
   - name: PLATFORM
     display_name: "PLATFORM (STRING)"
     description: "Platform to test"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: x86_64)"
     component_type: sel4test-option
   - name: ARM_HYP
     display_name: "ARM_HYP (BOOL)"
     description: "Hyp mode for ARM platforms"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: MCS
     display_name: "MCS (BOOL)"
     description: "MCS kernel"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: KernelSel4Arch
     display_name: "KernelSel4Arch (STRING)"
     description: "aarch32, aarch64, arm_hyp, ia32, x86_64, riscv32, riscv64"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: Usually set by PLATFORM)"
     component_type: sel4test-option
   - name: LibSel4TestPrinterRegex
     display_name: "LibSel4TestPrinterRegex (STRING)"
     description: "A POSIX regex pattern used to filter tests"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: .*)"
     component_type: sel4test-option
   - name: LibSel4TestPrinterHaltOnTestFailure
     display_name: "LibSel4TestPrinterHaltOnTestFailure (BOOL)"
     description: "Halt on the first test failure"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option

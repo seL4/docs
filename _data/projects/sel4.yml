@@ -17,13 +17,13 @@ configurations:
     description: "When enabled this configuration option prevents the usage of any other options that\
     would compromise the verification story of the kernel. Enabling this option does NOT\
     imply you are using a verified kernel."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: ON)"
     component_type: generic
   - name: KernelIsMCS
     display_name: "KernelIsMCS"
     description: "Enable MCS feature for seL4."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Available on all MCS supported platforms (Default: Off)"
     component_type: generic
   - name: KernelRootCNodeSizeBits
@@ -31,71 +31,71 @@ configurations:
     description: "Root CNode Size (2^n slots) \
     The acceptable range is 12-27 and 12-26, for 32-bit and 64-bit respectively. \
     The root CNode needs at least enough space to contain up to BI_CAP_DYN_START."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set (Default: 12)"
     component_type: generic
   - name: KernelRetypeFanOutLimit
     display_name: "KernelRetypeFanOutLimit"
     description: "Maximum number of objects that can be created in a single Retype() invocation."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 256)"
     component_type: generic
   - name: KernelMaxNumBootinfoUntypedCaps
     display_name: "KernelMaxNumBootinfoUntypedCaps"
     description: "Max number of untyped capabilities given to initial boot thread. Additional caps
     won't be handed to the system."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 230 caps)"
     component_type: generic
 
   - name: KernelTimerTickMS
     display_name: "KernelTimerTickMS"
     description: "Kernel timer tick period in milliseconds."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Only available on non-MCS kernels. (Default: 2 milliseconds)"
     component_type: scheduling
   - name: KernelTimeSlice
     display_name: "KernelTimeSlice"
     description: "Number of kernel timer ticks until a thread is preempted."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Only available on non-MCS kernels. (Default: 5 ticks)"
     component_type: scheduling
   - name: KernelBootThreadTimeSlice
     display_name: "KernelBootThreadTimeSlice"
     description: "Budget of booth thread: Number of milliseconds until the boot thread is preempted."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Available on all MCS supported platforms. (Default: 5 milliseconds)"
     component_type: scheduling
   - name: KernelMaxNumWorkUnitsPerPreemption
     display_name: "KernelMaxNumWorkUnitsPerPreemption"
     description: "Maximum number of work units (delete/revoke iterations) until the kernel checks for\
     pending interrupts (and preempts the currently running syscall if interrupts are pending)."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 100)"
     component_type: scheduling
   - name: KernelResetChunkBits
     display_name: "KernelResetChunkBits"
     description: "Maximum size in bits of chunks of memory to zero before checking a preemption point."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 8 bits)"
     component_type: scheduling
   - name: KernelNumDomains
     display_name: "KernelNumDomains"
     description: "The number of scheduler domains in the system"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 1 domain)"
     component_type: scheduling
   - name: KernelDomainSchedule
     display_name: "KernelDomainSchedule"
     description: "A C file providing the symbols ksDomSchedule and ksDomeScheudleLength \
         to be linked with the kernel as a scheduling configuration."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: src/config/default_domain.c)"
     component_type: scheduling
   - name: KernelNumPriorities
     display_name: "KernelNumPriorities"
     description: "The number of priority levels per domain."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set, Valid range 1-256. (Default: 256)"
     component_type: scheduling
   - name: KernelWcetScale
@@ -105,14 +105,14 @@ configurations:
      kernel. When running in a simulator the WCET estimate, which is tuned  \
      for hardware, may not be sufficient. This option provides a hacky knob \
      that can be fiddled with when running inside a simulator."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Enabled if KernelIsMCS. (Default: 1)"
     component_type: scheduling
 
   - name: KernelDebugBuild
     display_name: "KernelDebugBuild"
     description: "Enable debug facilities (symbols and assertions) in the kernel"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Disabled if KernelVerificationBuild is set. (Default: ON)"
     component_type: debug
   - name: HardwareDebugAPI
@@ -120,13 +120,13 @@ configurations:
     description: "Builds the kernel with support for a userspace debug API, which can \
     allows userspace processes to set breakpoints, watchpoints and to \
     single-step through thread execution."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Requires platform support. (Default: Off)"
     component_type: debug
   - name: KernelPrinting
     display_name: "KernelPrinting"
     description: "Allow the kernel to print out messages to the serial console during bootup and execution."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Disabled if KernelVerificationBuild is set. (Default: Set to initial value of KernelDebugBuild)"
     component_type: debug
   - name: KernelIRQReporting
@@ -134,7 +134,7 @@ configurations:
     description: "seL4 does not properly check for and handle spurious interrupts. This can result \
     in unnecessary output from the kernel during debug builds. If you are CERTAIN these \
     messages are benign then use this config to turn them off."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Enabled if KernelPrinting is set. (Default: On)"
     component_type: debug
   - name: KernelColourPrinting
@@ -143,14 +143,14 @@ configurations:
     e.g., the cause of system call errors. This setting determines whether ANSI escape \
     codes are applied to colour code these error messages. You may wish to disable this \
     setting if your serial output is redirected to a file or pipe."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Enabled if KernelPrinting is set. (Default: On)"
     component_type: debug
   - name: KernelUserStackTraceLength
     display_name: "KernelUserStackTraceLength"
     description: "On a double fault the kernel can try and print out the users stack to aid \
     debugging. This option determines how many words of stack should be printed."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Enabled if KernelPrinting is set. (Default: 16)"
     component_type: debug
   - name: KernelDebugDisablePrefetchers
@@ -158,7 +158,7 @@ configurations:
     description: "On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent \
     cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher. On the cortex \
     a53 this disables the L1 Data prefetcher."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Available if KernelArchX86 OR KernelPlatformHikey is set. (Default: Off)"
     component_type: debug
 
@@ -167,7 +167,7 @@ configurations:
   - name: KernelFastpath
     display_name: "KernelFastpath"
     description: "Enable IPC fastpath.  Can be disabled for performance analyses."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: ON)"
     component_type: profiling
   - name: KernelFPUMaxRestoresSinceSwitch
@@ -177,7 +177,7 @@ configurations:
     enabled/disabled every thread switch. Every time we restore a thread and there is\
     active FPU state, we increment this setting and if it exceeds this threshold we\
     switch to the NULL state."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Only set if the system is using the FPU. (Default: 64 switches)"
     component_type: profiling
   - name: KernelBenchmarks
@@ -192,34 +192,34 @@ configurations:
     system calls, interrupts, user faults and VM faults.<br/> \
     **tracepoints** -> Enable manually inserted tracepoints that the kernel will track time consumed between.<br/> \
     **track_utilisation** -> Enable the kernel to track each thread's utilisation time."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "(FIXME: Which config supported?) Disabled if KernelVerificationBuild is set. (Default: None)"
     component_type: profiling
   - name: KernelMaxNumTracePoints
     display_name: "KernelMaxNumTracePoints"
     description: "The maximum number of different trace point identifiers which can be used. Use `TRACE_POINT_START(k)`\
     and `TRACE_POINT_STOP(k)` macros for recording data, where k is an integer between 0 and this value - 1"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Requires KernelBenchmarksTracepoints is set. (Default: 1)"
     component_type: profiling
   - name: KernelOptimisation
     display_name: "KernelOptimisation"
     description: "Select the kernel optimisation level. This should only be changed as part of performance analysis. -O2 is required for normal use."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: -O2)"
     component_type: profiling
   - name: KernelFWholeProgram
     display_name: "KernelFWholeProgram"
     description:     "Enable -fwhole-program when linking kernel. This should work modulo gcc bugs, which \
     are not uncommon with -fwhole-program. Consider this feature experimental!"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: OFF)"
     component_type: profiling
   - name: KernelDangerousCodeInjection
     display_name: "KernelDangerousCodeInjection"
     description: "Adds a system call that allows users to specify code to be run in kernel mode. \
     Useful for profiling."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelPlatformHikey;NOT KernelSkimWindow. (Default: Off)"
     component_type: profiling
   - name: KernelStackBits
@@ -227,52 +227,52 @@ configurations:
     description: "This describes the log2 size of the kernel stack. Great care should be taken as\
     there is no guard below the stack so setting this too small will cause random\
     memory corruption"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 12 bits)"
     component_type: profiling
 
   - name: KernelPlatform
     display_name: "KernelPlatform"
     description: "Hardware platform to target. This setting influences other kernel configuration values."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported platforms can be found [here](http://127.0.0.1:4000/status/sel4#hardware-platforms)."
     component_type: platform
   - name: KernelArch
     display_name: "KernelArch"
     description: "Architecture to use when building the kernel."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported values: (arm, x86, riscv)."
     component_type: platformform
   - name: KernelSel4Arch
     display_name: "KernelSel4Arch"
     description: "Architecture mode for building the kernel."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported values: (aarch32, aarch64, arm_hyp, riscv32, riscv64, x86_64, ia32)."
     component_type: platform
   - name: KernelHaveFPU
     display_name: "KernelHaveFPU"
     description: "Set if the platform and toolchain supports floating point unit."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Set on x86, Unset on RISC-V, toolchain + verirification dependent on Arm"
     component_type: platform
   - name: KernelMaxNumNodes
     display_name: "KernelMaxNumNodes"
     description: "Max number of CPU cores to boot."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Always set. (Default: 1 node)"
     component_type: platform
 
   - name: KernelX86MicroArch
     display_name: "KernelX86MicroArch"
     description: "Select the x86 micro architecture."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. Supported options:nehalem, generic, westmere, sandy, ivy, haswell, broadwell, skylake. (Default: nehalem)"
     component_type: platform-x86
   - name: KernelIRQController
     display_name: "KernelIRQController (x86)"
     description: "Select the IRQ controller seL4 will use. Code for others may still be included if \
     needed to disable at run time."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. Supported options: PIC, IOAPIC. (Default: IOAPIC)"
     component_type: platform-x86
   - name: KernelMaxNumIOAPIC
@@ -280,38 +280,38 @@ configurations:
     description: "Configure the maximum number of IOAPIC controllers that can be supported. SeL4 \
     will detect IOAPICs regardless of whether the IOAPIC will actually be used as \
     the final IRQ controller."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 1)"
     component_type: platform-x86
   - name: KernelLAPICMode
     display_name: "KernelLAPICMode"
     description: "Select the mode local APIC will use: XAPIC, X2APIC "
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. Not all machines support X2APIC mode (Default: XAPIC)"
     component_type: platform-x86
   - name: KernelUseLogcalIDs
     display_name: "KernelUseLogcalIDs"
     description: "Use logical IDs to broadcast IPI between cores. Not all machines support logical \
     IDs. In xAPIC mode only 8 cores can be addressed using logical IDs."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: OFF)"
     component_type: platform-x86
   - name: KernelCacheLnSz
     display_name: "KernelCacheLnSz (x86)"
     description: "Define cache line size for x86."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 64)"
     component_type: platform-x86
   - name: KernelVTX
     display_name: "KernelVTX (x86)"
     description: "VT-x support compiled into the kernel."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: Off)"
     component_type: platform-x86
   - name: KernelIOMMU
     display_name: "KernelIOMMU (x86)"
     description: "IOMMU support for VT-d enabled chipset."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: ON)"
     component_type: platform-x86
   - name: KernelMaxRMRREntries
@@ -319,7 +319,7 @@ configurations:
     description: "Sets the maximum number of Reserved Memory Region Reporting structures we support \
     recording from the ACPI tables. These structures are used for setting up passthrouh IOMMU mappings \
     for legacy devices."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 32)"
     component_type: platform-x86
   - name: KernelMaxVPIDs
@@ -327,19 +327,19 @@ configurations:
     description: "The kernel maintains a mapping of 16-bit VPIDs to VCPUs. This option should be \
     sized as small as possible to save memory, but be at least the number of VCPUs that \
     will be run for optimum performance."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 1024)"
     component_type: platform-x86
   - name: KernelHugePage
     display_name: "KernelHugePage (x86)"
     description: "Add support for 1GB huge page."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. Not all recent processor models support this feature (Default: On)"
     component_type: platform-x86
   - name: KernelSupportPCID
     display_name: "KernelSupportPCID"
     description: "Add support for PCIDs (aka hardware ASIDs)."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86_64 Option. Not all recent processor models support this feature (Default: On)"
     component_type: platform-x86
   - name: KernelSyscall
@@ -347,7 +347,7 @@ configurations:
     description: "Which syscall method that the kernel supports. This \
     config should be set to the most efficient one that is support by the hardware the \
     system will run on."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. The kernel only ever supports one method at a time: syscall, sysenter (Default: syscall)"
     component_type: platform-x86
   - name: KernelFPU
@@ -358,7 +358,7 @@ configurations:
     **XSAVE** -> This chooses the variable xsave region, and enables the ability to use any \
     of the xsave variants to save and restore. The actual size of the region is dependent on \
     the features enabled."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: XSAVE)"
     component_type: platform-x86
   - name: KernelXSave
@@ -375,7 +375,7 @@ configurations:
         **XSAVEOPT** -> Save state taking advantage of both the init optimization and modified optimization<br/> \
         **XSAVES** -> Save state taking advantage of the modified optimization. This instruction is only \
             available in OS code, and is the preferred save method if it exists."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: XSAVEOPT)"
     component_type: platform-x86
   - name: KernelXSaveFeatureSet
@@ -387,7 +387,7 @@ configurations:
         1 - SSE <br/>\
         2 - AVX <br/>\
         FPU and SSE is guaranteed to exist if XSAVE exists."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 3)"
     component_type: platform-x86
   - name: KernelFSGSBase
@@ -396,7 +396,7 @@ configurations:
     IA32_FS/GS_GDT, IA32_FS/GS_BASE_MSR, and fsgsbase instructions. \
     IA32_FS/GS_GDT and IA32_FS/GS_BASE_MSR are availble for 32-bit. \
     IA32_FS/GS_BASE_MSR and fsgsbase instructions are available for 64-bit."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default x86_64: fsgsbase, ia32: gdt)"
     component_type: platform-x86
   - name: KernelMultibootGFXMode
@@ -404,14 +404,14 @@ configurations:
     description: "The type of graphics mode to request from the boot loader. This is encoded into the \
     multiboot header and is merely a hint, the boot loader is free to ignore or set some \
     other mode"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. Options: none, text, linear (Default: none)"
     component_type: platform-x86
   - name: KernelMultibootGFXDepth
     display_name: "KernelMultibootGFXDepth (x86)"
     description: "The bits per pixel of the linear graphics mode ot request. Value of zero indicates \
     no preference."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 32)"
     component_type: platform-x86
   - name: KernelMultibootGFXWidth
@@ -419,7 +419,7 @@ configurations:
     description: "The width of the graphics mode to request. For a linear graphics mode this is the \
     number of pixels. For a text mode this is the number of characters, value of zero \
     indicates no preference."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 0)"
     component_type: platform-x86
   - name: KernelMultibootGFXHeight
@@ -427,20 +427,20 @@ configurations:
     description: "The height of the graphics mode to request. For a linear graphics mode this is the \
     number of pixels. For a text mode this is the number of characters, value of zero \
     indicates no preference."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: 0)"
     component_type: platform-x86
   - name: KernelMultiboot1Header
     display_name: "KernelMultiboot1Header (x86)"
     description: "Inserts a header that indicates to the bootloader that the kernel supports a multiboot 1 boot header"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: On)"
     component_type: platform-x86
   - name: KernelMultiboot2Header
     display_name: "KernelMultiboot2Header (x86)"
     description: "Inserts a header that indicates to the bootloader that the kernel supports a multiboot 2 boot header. \
     This is can be enabled together with a multiboot 1 header and the boot loader may use either one"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: On)"
     component_type: platform-x86
   - name: KernelSkimWindow
@@ -448,7 +448,7 @@ configurations:
     description: "Prevent against the Meltdown vulnerability by using a reduced Static Kernel
     Image and Micro-state window instead of having all kernel state in the kernel window.
     This only needs to be enabled if deploying to a vulnerable processor"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86_64 Option. (Default: On)"
     component_type: platform-x86
   - name: KernelExportPMCUser
@@ -459,7 +459,7 @@ configurations:
     are counting. Nevertheless whilst this is useful for
     evalulating performance this option opens timing and covert
     channels."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: Off)"
     component_type: platform-x86
   - name: KernelExportPMCUser
@@ -470,7 +470,7 @@ configurations:
     are counting. Nevertheless whilst this is useful for
     evalulating performance this option opens timing and covert
     channels."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: Off)"
     component_type: platform-x86
   - name: KernelX86DangerousMSR
@@ -478,7 +478,7 @@ configurations:
     description: "rdmsr/wrmsr kernel interface. Provides a syscall interface for reading and writing arbitrary MSRs.
     This is extremely dangerous as no checks are performed and exists
     to aid debugging and benchmarking."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: Off)"
     component_type: platform-x86
   - name: KernelX86IBRSMode
@@ -493,7 +493,7 @@ configurations:
     vulnerable to RSB underflow. The STIBP is essentially software mitigation but enables
     the single thread isolation for branch predictions. This is only needed if attempting
     to protect user level process from each other in a multicore environment."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: ibrs_none)"
     component_type: platform-x86
   - name: KernelX86IBPBOnContextSwitch
@@ -503,7 +503,7 @@ configurations:
     if absolutely necessary.
     Note that in a multicore environment you should also enable STIBP to prevent
     other cores retraining the branch predictor even after context switch."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: OFF)"
     component_type: platform-x86
   - name: KernelX86RSBOnContextSwitch
@@ -512,25 +512,25 @@ configurations:
     Whilst not nearly as expensive as an IBPB it is not enabled by default as it is
     largely pointless to flush the RSB without also doing an IBPB as the RSB is already
     a harder attack vector."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "x86 Option. (Default: OFF)"
     component_type: platform-x86
   - name: KernelDebugDisableL2Cache
     display_name: "KernelDebugDisableL2Cache"
     description: "Do not enable the L2 cache on startup for debugging purposes."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelDebugDisableL1ICache
     display_name: "KernelDebugDisableL1ICache"
     description: "Do not enable the L1 instruction cache on startup for debugging purposes."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelDebugDisableL1DCache
     display_name: "KernelDebugDisableL1DCache"
     description: "Do not enable the L1 data cache on startup for debugging purposes."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelDebugDisableBranchPrediction
@@ -538,19 +538,19 @@ configurations:
     description: "Do not enable branch prediction (also called program flow control) on startup
     for debugging purposes. This makes execution time more deterministic at the
     expense of dramatically decreasing performance."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelArmHypervisorSupport
     display_name: "KernelArmHypervisorSupport"
     description: "Utilise Arm virtualisation extensions to build the kernel as a hypervisor."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))"
     component_type: platform-arm
   - name: KernelArmHypervisorSupport
     display_name: "KernelArmHypervisorSupport"
     description: "Utilise Arm virtualisation extensions to build the kernel as a hypervisor."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))"
     component_type: platform-arm
   - name: KernelArmHypEnableVCPUCP14SaveAndRestore
@@ -559,7 +559,7 @@ configurations:
     As a result, accessing VPU threads' CP14 context triggers a trap,
     which allows the kernel to intercept the access and deliver it as a fault message
     to the VM monitor."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: ON)"
     component_type: platform-arm
   - name: KernelArmErrata430973
@@ -567,7 +567,7 @@ configurations:
     description: "Enable a workaround for 430973 Cortex-A8 (r1p0..r1p2) erratum
     An error occurs if an instruction contains Arm/Thumb interworking branch
     that is replaced by a different instruction from the same virtual address."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelArmErrata773022
@@ -575,13 +575,13 @@ configurations:
     description: "Enable a workaround for 773022 Cortex-A15 (r0p0..r0p4) erratum.
     An error occurs on rare sequences of instructions which results on the loop buffer delivering
     incorrect instructions. The workaround is to disable the loop buffer."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelArmSMMU
     display_name: "KernelArmSMMU"
     description: "Enable the System MMU on the Tegra TK1 SoC."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelArmEnableA9Prefetcher
@@ -591,21 +591,21 @@ configurations:
     This config option enables those prefetchers, requiring the kernel to be executed in the secure mode.
     Arm document indicates that the bit used for enabling those prefetchers is no longer supported
     from version r4p1 of the Cortex-A9. However, the correctness of that is uncertain."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelArmExportPMUUser
     display_name: "KernelArmExportPMUUser"
     description: "Grant user access to the performance monitoring unit. While useful for
     benchmarking, this option opens the possibility of timing channels."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelArmDisableWFIWFETraps
     display_name: "KernelArmDisableWFIWFETraps"
     description: "Disable the trapping of WFI  and WFE instructions by configuring the
     Hyp Configuration Registor (HCR) of a VCPU."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelARMSMMUInterruptEnable
@@ -614,7 +614,7 @@ configurations:
     they are not forwarded to user level. Enabling this will
     cause some SMMU fault types to print out a message in the kernel. High frequency faults
     can result in all time spent in the kernel printing fault messages."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: OFF)"
     component_type: platform-arm
   - name: KernelAArch32FPUEnableContextSwitch
@@ -624,7 +624,7 @@ configurations:
     allowing the user to execute hardware VFP and SIMD operations in a
     multithreading environment, instead of relying on
     software emulation of FPU/VFP from the C library (e.g. mfloat-abi=soft)."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Arm option. (Default: ON)"
     component_type: platform-arm
 
@@ -632,115 +632,115 @@ features:
   - name: arm
     display_name: "Arm"
     description: "Arm architecture support."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "ArmV6, ArmV7, ArmV8, 32 and 64bit"
     component_type: architecture
   - name: x86
     display_name: "x86"
     description: "x86 architecture support."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "ia32 and x86_64 (32/64bit)"
     component_type: architecture
   - name: riscv
     display_name: "RISC-V"
     description: "RISC-V architecture support."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "riscv32, riscv64, imac extensions, sv32 and sv39 virtual memory"
     component_type: architecture
   - name: aarch64-hyp
     display_name: "Aarch64 hyp"
     description: "Support for running seL4 in EL2, Aarch64 on ArmV8"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms: FIXME"
     component_type: hyp-support
   - name: aarch32-hyp
     display_name: "arm hyp"
     description: "Support for running seL4 in hyp mode, on ArmV7"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms: FIXME"
     component_type: hyp-support
   - name: intel-vtx
     display_name: "Intel VT-x"
     description: "Support for using x86 hardware virtualization on seL4."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms: FIXME"
     component_type: hyp-support
   - name: riscv-hyp
     display_name: "RISC-V hyp mode"
     description: "Support for utilizing RISC-V Hyp extensions on seL4. [More information](https://github.com/SEL4PROJ/sel4-riscv-vmm-manifest/blob/master/README.md)"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Experimental branches exist for RISCV HE v0.6"
     component_type: hyp-support
   - name: arm-smp
     display_name: "Arm multicore support"
     description: "Support for Arm SMP"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms/cores: FIXME"
     component_type: smp-support
   - name: x86-smp
     display_name: "x86 multicore support"
     description: "Support for x86 SMP"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms/cores: FIXME"
     component_type: smp-support
   - name: riscv-smp
     display_name: "RISC-V multicore support"
     description: "Support for RISC-V SMP"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms/cores: HiFive Unleashed"
     component_type: smp-support
   - name: call-fastpath
     display_name: "seL4_Call() Fastpath"
     description: "seL4_Call operations that meet certain criteria will use the fastpath."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on all platforms"
     component_type: fastpath-support
   - name: replyrecv-fastpath
     display_name: "seL4_ReplyRecv() Fastpath"
     description: "seL4_ReplyRecv operations that meet certain criteria will use the fastpath."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on all platforms"
     component_type: fastpath-support
   - name: intel-vtd
     display_name: "Intel VT-d"
     description: "x86 IOMMU support on seL4 via additional page table object definitions."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Supported on the following platforms/cores: FIXME"
     component_type: iommu-support
   - name: tk1-smmu
     display_name: "Jetson TK1 SMMU"
     description: "Supported on seL4 via additional page table object definitions."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Only applies to Jetson TK1 platform."
     component_type: iommu-support
   - name: smmuv2
     display_name: "Arm SMMUv2"
     description: "Generic Arm SMMU support on seL4 via additional page table object definitions."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Under development."
     component_type: iommu-support
   - name: mcs-verification
     display_name: "MCS Verification support"
     description: "Verification of the MCS extenstions to seL4"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Under development."
     component_type: mcs-support
   - name: mcs-hyp
     display_name: "MCS Hyp support"
     description: "MCS + Hyp extensions on seL4"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "?."
     component_type: mcs-support
   - name: mcs-smp
     display_name: "MCS SMP support"
     description: "MCS + SMP on seL4"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "?."
     component_type: mcs-support
   - name: mcs-fastpath
     display_name: "MCS Fastpath support"
     description: "Fastpath operations require a Scheduling Context donation to occur."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "?."
     component_type: mcs-support
 
@@ -749,382 +749,382 @@ components:
   - name: sel4-microkernel
     display_name: "seL4 Microkernel"
     description: "Formally verified operating system kernel"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4
   - name: libsel4
     display_name: "libsel4"
     description: "seL4 user level API bindings"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-library
   - name: manual
     display_name: "seL4 Manual"
     display_name_url: https://sel4.systems/Info/Docs/seL4-manual-latest.pdf
     description: "seL4 Reference Manual. Released for each seL4 version."
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-manual
   - name: ARM_HYP_verified.cmake
     display_name: "ARM_HYP verification configuration"
     display_name_url: https://github.com/seL4/seL4/blob/master/configs/ARM_HYP_verified.cmake
     description: "Build configuration settings for ARM_HYP verification target"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-configuration
   - name: ARM_MCS_verified.cmake
     display_name: "ARM_MCS verification configuration"
     description: "Build configuration settings for ARM_MCS verification target"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active (but ARM_MCS verification support is Coming Soon)"
     component_type: sel4-configuration
   - name: ARM_verified.cmake
     display_name: "ARM verification configuration"
     description: "Build configuration settings for ARM verification target"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-configuration
   - name: RISCV64_verified.cmake
     display_name: "RISCV64 verification configuration"
     description: "Build configuration settings for RISCV64 verification target"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active (but RISCV64 verification support is Coming Soon)"
     component_type: sel4-configuration
   - name: X64_verified.cmake
     display_name: "X64 verification configuration"
     description: "Build configuration settings for X64 verification target"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-configuration
   - name: sel4-deps
     display_name: "sel4-deps python package"
     description: "Python meta package for seL4 python dependencies"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: python-package
   - name: FindseL4.cmake
     display_name: "FindseL4 CMake module"
     description: "CMake module for importing seL4 into buildsystem"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: cmake-module
   - name: ti,am33xx-intc
     display_name: "ti,am33xx-intc"
     description: "am335x interrupt controller seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by am335x seL4 platforms"
     component_type: kernel-driver-irq
   - name: brcm,bcm2836-armctrl-ic
     display_name: "brcm,bcm2836-armctrl-ic"
     description: "Broadcom Raspberry Pi interrupt controller seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the rpi3 seL4 platform"
     component_type: kernel-driver-irq
   - name: hifive-plic
     display_name: "hifive-plic"
     description: "HiFive interrupt controller seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the hifive seL4 platform"
     component_type: kernel-driver-irq
   - name: ti,omap3-intc
     display_name: "ti,omap3-intc"
     description: "omap3 interrupt controller seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the omap3 seL4 platform"
     component_type: kernel-driver-irq
   - name: arm,gic-v2
     display_name: "arm,gic-v2"
     description: "Arm GICv2 interrupt controller seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by several seL4 platforms"
     component_type: kernel-driver-irq
   - name: arm,gic-v3
     display_name: "arm,gic-v3"
     description: "Arm GICv2 interrupt controller seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by several seL4 platforms"
     component_type: kernel-driver-irq
   - name: x86,pic
     display_name: "x86,pic"
     description: "Intel 8259 Programmable Interrupt Controller (PIC) seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the pc99 seL4 platform"
     component_type: kernel-driver-irq
   - name: x86,ioapic
     display_name: "x86,ioapic"
     description: "Intel IOAPIC seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the pc99 seL4 platform"
     component_type: kernel-driver-irq
   - name: x86,lapic
     display_name: "x86,lapic"
     description: "Intel Local APIC seL4 IRQ and timer driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the pc99 seL4 platform"
     component_type: kernel-driver-irq
   - name: brcm,bcm2835-aux-uart
     display_name: "brcm,bcm2835-aux-uart"
     description: "Raspberry Pi serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the rpi3 seL4 platform"
     component_type: kernel-driver-serial
   - name: samsung,exynos4210-uart
     display_name: "samsung,exynos4210-uart"
     description: "exynos4210 serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the exynos4 seL4 platform"
     component_type: kernel-driver-serial
   - name: amlogic,meson-gx-uart
     display_name: "amlogic,meson-gx-uart"
     description: "odroidc2 serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by the odroidc2 seL4 platform"
     component_type: kernel-driver-serial
   - name: arm,pl011
     display_name: "arm,pl011"
     description: "Arm standard serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by several seL4 platforms"
     component_type: kernel-driver-serial
   - name: xlnx,xuartps
     display_name: "xlnx,xuartps"
     description: "Xilinx serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by some zynq* seL4 platforms"
     component_type: kernel-driver-serial
   - name: fsl,imx**-uart
     display_name: "fsl,imx**-uart"
     description: "i.MX serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active, currently used by some imx* seL4 platforms"
     component_type: kernel-driver-serial
   - name: qcom,msm-uartdm
     display_name: "qcom,msm-uartdm"
     description: "apq8064 serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Inactive, currently used by the currently unmaintained apq8064 seL4 platform"
     component_type: kernel-driver-serial
   - name: arm-misc
     display_name: "nvidia,tegra20-uart;ti,omap3-uart;snps,dw-apb-uart"
     description: "Simple Arm serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by nvidia- and beagle- based seL4 platforms"
     component_type: kernel-driver-serial
   - name: allwinner,sun4i-a10-timer
     display_name: "allwinner,sun4i-a10-timer"
     description: "allwinnera20 timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Inactive, currently used by the unmaintained alwinnera20 platform"
     component_type: kernel-driver-timer
   - name: samsung,exynos4210-mct
     display_name: "samsung,exynos4210-mct"
     description: "exynos5 timer seL4 driver that wraps Arm Generic timer"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the exynos5 platforms"
     component_type: kernel-driver-timer
   - name: arm,cortex-a9-global-timer
     display_name: "arm,cortex-a9-global-timer"
     description: "Arm cortex-a9 global timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the cortex-a9 platforms"
     component_type: kernel-driver-timer
   - name: qcom,kpss-timer
     display_name: "qcom,kpss-timer"
     description: "apq8064 timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Inactive, currently used by the currently unmaintained apq8064 seL4 platform"
     component_type: kernel-driver-timer
   - name: ti,am335x-timer
     display_name: "ti,am335x-timer"
     description: "am335x timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the am335x seL4 platforms"
     component_type: kernel-driver-timer
   - name: samsung,exynos4412-mct
     display_name: "samsung,exynos4412-mct"
     description: "exynos4 timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the exynos4 seL4 platform"
     component_type: kernel-driver-timer
   - name: ti,omap3430-timer
     display_name: "ti,omap3430-timer"
     description: "omap3 timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the omap3 seL4 platform"
     component_type: kernel-driver-timer
   - name: "arm,armv7-timer;arm,armv8-timer"
     display_name: "arm,armv7-timer;arm,armv8-timer"
     description: "Arm generic timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by several Arm seL4 platforms"
     component_type: kernel-driver-timer
   - name: "arm,cortex-a9-twd-timer"
     display_name: "arm,cortex-a9-twd-timer"
     description: "Arm cortex-a9 private timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the cortex-a9 seL4 platforms"
     component_type: kernel-driver-timer
   - name: "pc99,pit"
     display_name: "pc99,pit"
     description: "x86 PIT timer seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the pc99 seL4 platform"
     component_type: kernel-driver-timer
   - name: "tk1,smmu"
     display_name: "tk1,smmu"
     description: "Tegra K1 System MMU (SMMU) seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the tk1 seL4 platform"
     component_type: kernel-driver-iommu
   - name: "intel,vtd"
     display_name: "intel,vtd"
     description: "Intel VT-d (IOMMU) seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the pc99 seL4 platform"
     component_type: kernel-driver-iommu
   - name: "x86,serial"
     display_name: "x86,serial"
     description: "Intel COM port serial seL4 driver"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "Active, currently used by the pc99 seL4 platform"
     component_type: kernel-driver-serial
 
   - name: am335x-boneblack.dts
     display_name: am335x-boneblack.dts
     description: "am335x-boneblack platform device tree (dts) sourced from Linux kernel path: am335x-boneblack"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: am335x-boneblue.dts
     display_name: am335x-boneblue.dts
     description: "am335x-boneblue platform device tree (dts) sourced from Linux kernel path: am335x-boneblue"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: rpi3.dts
     display_name: rpi3.dts
     description: "rpi3 platform device tree (dts) sourced from Linux kernel path: bcm2837-rpi-3-b"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: exynos4.dts
     display_name: exynos4.dts
     description: "exynos4 platform device tree (dts) sourced from Linux kernel path: exynos4412-odroidx"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: exynos5250.dts
     display_name: exynos5250.dts
     description: "exynos5250 platform device tree (dts) sourced from Linux kernel path: exynos5250-arndale"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: exynos5410.dts
     display_name: exynos5410.dts
     description: "exynos5410 platform device tree (dts) sourced from Linux kernel path: exynos5410-odroidxu"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: exynos5422.dts
     display_name: exynos5422.dts
     description: "exynos5422 platform device tree (dts) sourced from Linux kernel path: exynos5422-odroidxu4"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: sabre.dts
     display_name: sabre.dts
     description: "sabre platform device tree (dts) sourced from Linux kernel path: imx6q-sabrelite"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: wandq.dts
     display_name: wandq.dts
     description: "wandq platform device tree (dts) sourced from Linux kernel path: imx6q-wandboard-revd1"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: imx7sabre.dts
     display_name: imx7sabre.dts
     description: "imx7sabre platform device tree (dts) sourced from Linux kernel path: imx7d-sdb"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: omap3.dts
     display_name: omap3.dts
     description: "omap3 platform device tree (dts) sourced from Linux kernel path: omap3-beagle"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: apq8064.dts
     display_name: apq8064.dts
     description: "apq8064 platform device tree (dts) sourced from Linux kernel path: qcom-apq8064-ifc6410"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: allwinnera20.dts
     display_name: allwinnera20.dts
     description: "allwinnera20 platform device tree (dts) sourced from Linux kernel path: sun7i-a20-cubietruck"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: tk1.dts
     display_name: tk1.dts
     description: "tk1 platform device tree (dts) sourced from Linux kernel path: tegra124-jetson-tk1"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: zynq7000.dts
     display_name: zynq7000.dts
     description: "zynq7000 platform device tree (dts) sourced from Linux kernel path: zynq-zc706"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: odroidc2.dts
     display_name: odroidc2.dts
     description: "odroidc2 platform device tree (dts) sourced from Linux kernel path: amlogic/meson-gxbb-odroidc2"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: hikey.dts
     display_name: hikey.dts
     description: "hikey platform device tree (dts) sourced from Linux kernel path: hisilicon/hi6220-hikey"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: tx1.dts
     display_name: tx1.dts
     description: "tx1 platform device tree (dts) sourced from Linux kernel path: nvidia/tegra210-p2371-2180"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: ultra96.dts
     display_name: ultra96.dts
     description: "ultra96 platform device tree (dts) sourced from Linux kernel path: xilinx/avnet-ultra96-rev1"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: zynqmp.dts
     display_name: zynqmp.dts
     description: "zynqmp platform device tree (dts) sourced from Linux kernel path: xilinx/zynqmp-zcu102-rev1.0"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: imx8mq-evk.dts
     display_name: imx8mq-evk.dts
     description: "imx8mq-evk platform device tree (dts) sourced from Linux kernel path: freescale/fsl-imx8mq-evk"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: imx8mm-evk.dts
     display_name: imx8mm-evk.dts
     description: "imx8mm-evk platform device tree (dts) sourced from Linux kernel path: freescale/fsl-imx8mm-evk"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
   - name: rockpro64.dts
     display_name: rockpro64.dts
     description: "rockpro64 platform device tree (dts) sourced from Linux kernel path: rockchip/rk3399-rockpro64"
-    maintainer: "Data61"
+    maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
 
@@ -1132,6 +1132,6 @@ roadmap:
   - name: MCS
     display_name: MCS Kernel extensions
     description: A new scheduling model to support trustworthy mixed-criticality real-time systems.
-    assigned: Data61
+    assigned: UNSW
     status: "In progress. Main API stable and available. <em>Note: smaller API changes while verification is in progress.</em>"
     roadmap_type: in-progress

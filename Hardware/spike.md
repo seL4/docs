@@ -9,7 +9,7 @@ iommu: "No"
 simulation_target: true
 Status: "Unverified"
 Contrib: "Data61, [Hesham Almatary](https://github.com/heshamelmatary)"
-Maintained: "Data61"
+Maintained: "seL4 Foundation"
 redirect_from:
   - /Hardware/RISCV
 SPDX-License-Identifier: CC-BY-SA-4.0

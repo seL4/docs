@@ -4,9 +4,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # The CAN Daughterboard
- The CAN Daughterboard is an open-hardware
-**CAN/SPI/I2C/Serial board** designed by the Trustworthy Systems group
-at Data61/CSIRO, that can be mounted below the power supply module of
+
+The CAN Daughterboard is an open-hardware
+**CAN/SPI/I2C/Serial board** designed by the Trustworthy Systems group,
+that can be mounted below the power supply module of
 the TK1-SOM. It provides **two CAN buses** implemented with MCP2515
 (on the TK1-SOM's SPI bus) and voltage conversion for the two serial
 ports.
