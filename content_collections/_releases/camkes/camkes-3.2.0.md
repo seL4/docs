@@ -24,7 +24,7 @@ Using seL4 version 8.0.0
 
     See the following ADL files for examples of Struct and
     Attribute behavior.
-    <https://github.com/SEL4PROJ/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes>
+    <https://github.com/seL4/rumprun/blob/master/platform/sel4/camkes/rumprun.camkes>
     <https://github.com/seL4/camkes/tree/master/apps/structs>
     <https://github.com/seL4/camkes/tree/master/apps/attributes>
 

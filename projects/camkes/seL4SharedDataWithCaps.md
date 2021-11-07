@@ -17,7 +17,7 @@ which require the VMM to map memory backing a dataport into the VM's
 address space - an operation which requires caps to the frames.
 
 The templates and connector definition for `seL4SharedDataWithCaps` is in
-[global-components](https://github.com/SEL4PROJ/global-components).
+[global-components](https://github.com/seL4/global-components).
 
 For an example of this connector in action, see the
 [CAmkES VM](https://github.com/seL4/camkes-vm-examples/blob/master/apps/x86/optiplex9020/optiplex9020.camkes#L46).
