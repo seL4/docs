@@ -313,8 +313,8 @@ natively, and run the command `lspci -vv`.
 
 ## Configuring a Linux kernel build
 
-We provide a custom kernel image with our CAmkES VM project, found [here](https://github.com/SEL4PROJ/camkes-vm-linux/tree/master/images/kernel).
-This kernel image is produced from building Linux 4.8.16, specifically configured with the following [.config file](https://github.com/SEL4PROJ/camkes-vm-linux/tree/master/linux_configs/4.8.16).
+We provide a custom kernel image with our CAmkES VM project, found [here](https://github.com/seL4/camkes-vm-linux/tree/master/images/kernel).
+This kernel image is produced from building Linux 4.8.16, specifically configured with the following [.config file](https://github.com/seL4/camkes-vm-linux/tree/master/linux_configs/4.8.16).
 
 However you may decide to build your own Linux kernel image (which may be a different version). When doing so, it is important to ensure the build is configured with the following Kbuild settings:
 

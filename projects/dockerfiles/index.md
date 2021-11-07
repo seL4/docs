@@ -31,7 +31,7 @@ sudo usermod -aG docker $(whoami)
 To get a running build environment for seL4 and Camkes, run:
 
 ```bash
-git clone https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles.git
+git clone https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles.git
 cd seL4-CAmkES-L4v-dockerfiles
 make user
 ```
@@ -109,7 +109,7 @@ The CI software always uses the `latest` docker image, but images are also tagge
 
 ## More information
 
-You can find the dockerfiles and supporting Makefile [here](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles)
+You can find the dockerfiles and supporting Makefile [here](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles)
 
 Pull-requests and issues are [welcome](https://docs.sel4.systems/Contributing).
     

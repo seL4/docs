@@ -46,6 +46,6 @@ sudo apt-get install qemu-kvm
 
 ##### For Debian Stretch or later
 
-The dependencies listed in our docker files [repository](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
+The dependencies listed in our docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
 
-* [CAmkES Dockerfile](https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles/blob/master/camkes.dockerfile)
+* [CAmkES Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/camkes.dockerfile)

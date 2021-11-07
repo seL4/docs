@@ -18,10 +18,10 @@ We have four major collections of libraries developed in house:
 - **[util_libs](https://github.com/seL4/util_libs)**: OS
       independent libs that were started before the open sourcing of
       seL4
-- **[seL4_projects_libs](https://github.com/SEL4PROJ/seL4_projects_libs)**:
+- **[seL4_projects_libs](https://github.com/seL4/seL4_projects_libs)**:
       seL4 specific libs that were started after the open sourcing of
       seL4 - new libraries should go here.
-- **[projects_libs](https://github.com/SEL4PROJ/projects_libs)**:
+- **[projects_libs](https://github.com/seL4/projects_libs)**:
       OS independent libs that were started after the open source of
       seL4 - new OS independent libs should go here.
 
