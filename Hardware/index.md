@@ -9,11 +9,11 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 The seL4 proofs are only for specific platforms, as noted in the tables for x86 and ARM below, in
 the *Status* column, as follows:
 
-* Unverified: this platform is not verfied at all and is not scheduled for verification.
+* Unverified: this platform is not verified at all and is not scheduled for verification.
 * Pending: this feature is currently undergoing verification.
 * FC: the functional correctness proofs are complete.
 * FCI: the integrity proofs are complete, in addition to functional correctness.
-* Verified: all proofs for this platform are complete, including functional correctness, integrity and infoflow.
+* Verified: all proofs for this platform are complete, including functional correctness, integrity and information flow.
 
 ## Simulating seL4
 
