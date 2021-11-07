@@ -11,7 +11,6 @@ RUN apt-get update -q \
         python3-six \
         python3-jinja2 \
         python3-sh \
-        python-pip \
         python3-pip \
         python3-pyelftools \
     && apt-get clean autoclean \
