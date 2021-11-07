@@ -64,12 +64,11 @@ Some tips on using signed-off-by with git:
 The diagram illustrates the pull request review and testing process. For most
 of the repositories on <https://github.com/seL4> and
 <https://github.com/seL4proj>, additional tests, quality checks, and where
-applicable the formal proofs can be run at Data61 by members of the [TSC][1]
-or their delegates. Anyone can help review pull requests. Once your pull
-request is approved, it will be merged either directly at github or first at
-Data61 via the testing tool chain of the Trustworthy Systems group and then
-pushed out to github.
+applicable the formal proofs can be run by people with at least the [Reviewer][]
+role at the seL4 Foundation. Anyone can help review pull requests.
 
-See also the pages on [Pull Requests](code-review) and [Suggested Projects](/SuggestedProjects) for suggestions on where to contribute.
+See also the pages on [Pull Requests](code-review) and [Suggested
+Projects](/SuggestedProjects) for suggestions on where to contribute.
 
 [1]: https://sel4.systems/Foundation/TSC/
+[Reviewer]: https://docs.sel4.systems/processes/roles.html

@@ -30,8 +30,8 @@ We support PC99-style Intel Architecture Platforms.
 
 | Platform              | Arch | Virtualisation | IOMMU | Status                               | Contributed by | Maintained by |
 | -                     |  -   | -              | -     | -                                    | -              | -             |
-| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | Data61        |
-| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | FC (without VT-X, VT-D and fastpath) | Data61         | Data61        |
+| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
+| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | FC (without VT-X, VT-D and fastpath) | Data61         | seL4 Foundation        |
 
 ## ARM
 

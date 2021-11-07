@@ -4,9 +4,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # The TK1-SOM Daughterboard
- The TK1-SOM Daughterboard is an
-open-hardware daughterboard designed by the Trustworthy Systems group at
-Data61/CSIRO, that can be mounted to the TK1-SOM. It provides **CAN
+
+The TK1-SOM Daughterboard is an
+open-hardware daughterboard designed by the Trustworthy Systems group
+that can be mounted to the TK1-SOM. It provides **CAN
 buses**, **serial**,**sensors**, **power management**, **PWM
 outputs** and other features that allow the TK1-SOM to be used as a
 flight controller for a quadcopter.
@@ -103,7 +104,7 @@ daughterboard's UART inputs. Observe:
 
 <img style="width: 40%" src="UARTS_board.jpg" alt="UARTs on daughterboard" />
 
-The pinout of the TK1 UARTS is: 
+The pinout of the TK1 UARTS is:
 
 |PIN 1 |RX    |
 |PIN 2 |TX    |

@@ -24,8 +24,8 @@ This is the `sel4bench` binary and it then also serves as the main benchmark run
 It runs the configured benchmarks and sets up a new environment for each benchmark to run in.
 When a benchmark completes, it reports the results back to the runner and the runner prints
 the results out as JSON once all the benchmarks have run. `sel4bench` is maintained
-by Data61 and is currently the only benchmark runner that is expected to run benchmarks targeting
-sel4bench.
+by the seL4 Foundation and is currently the only benchmark runner that is expected to
+run benchmarks targeting sel4bench.
 
 ### Benchmarking environment
 
@@ -36,7 +36,7 @@ options for each benchmark. Each benchmark is able to provide an init function a
 that will get called in the main `sel4bench` app. Otherwise all benchmark functionality runs in the environment.
 
 The `libsel4benchsupport` is a library that provides the environment functions that the benchmarks can call.
-This library is maintained by Data61 and is extended to support new features as new benchmarks are added.
+This library is maintained by the seL4 Foundation and is extended to support new features as new benchmarks are added.
 
 
 ### Benchmarks

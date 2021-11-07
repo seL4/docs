@@ -9,7 +9,7 @@ iommu: "No"
 simulation_target: false
 Status: "FC"
 Contrib: "Data61"
-Maintained: "Data61"
+Maintained: "seL4 Foundation"
 soc: Freedom U540
 cpu:  U54-MC, E51
 SPDX-License-Identifier: CC-BY-SA-4.0

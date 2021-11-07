@@ -632,8 +632,8 @@ you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.
 
 ## Where can I learn more?
-CSIRO's
-[seL4 project](https://trustworthy.systems/projects/seL4/) and
+
+The UNSW [seL4 project](https://trustworthy.systems/projects/seL4/) and
 [Trustworthy Systems](https://trustworthy.systems/)
 pages contain more technical information about seL4, including links to
 all peer-reviewed publications. Good starting points are:

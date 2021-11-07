@@ -1,7 +1,7 @@
 ---
 title: "The RFC Process"
 author:
-  - "Curtis Millar <curtis.millar@data61.csiro.au>"
+  - "Curtis Millar"
 redirect_from:
   - /RfcProcess
 toc: true

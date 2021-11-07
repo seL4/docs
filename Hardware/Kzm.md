@@ -10,13 +10,13 @@ soc: i.MX31
 cpu: ARM1136J
 Status: Unverified
 Contrib: Data61
-Maintained: Data61
+Maintained: "No"
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # KZM (Deprecated seL4 platform)
 
-**seL4 previously supported the KZM-ARM11-01 unitl version 12.1.0, which can also be simulated in qemu.**
+**seL4 previously supported the KZM-ARM11-01 until version 12.1.0, which can also be simulated in qemu.**
 **Support for this platform has since been removed**
 
 The KZM is deprecated, ARMv11 Hardware which was used for the original seL4 verification. The latest
