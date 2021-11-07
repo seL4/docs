@@ -38,12 +38,13 @@ the design.
 
 In many cases, the roadmap could be accelerated with more funding for the
 contributors who work on them, or, in some cases, by volunteering time. If
-you are interested, talk to the [seL4 Foundation][] or when it involves
-formal verification or major seL4 kernel features directly to the
-[Trustworthy Systems][] group at Data61!
+you are interested, talk to the [seL4 Foundation][] or directly to foundation
+members, e.g. when it involves formal verification to [Proofcraft][] or for
+major seL4 kernel features to the [Trustworthy Systems][] group.
 
 [seL4 Foundation]: https://sel4.systems/Foundation/About "seL4 Foundation"
 [Trustworthy Systems]: https://trustworthy.systems "Trustworthy Systems"
+[Proofcraft]: https://proofcraft.systems "Proofcraft"
 
 ## seL4 Development
 
@@ -57,7 +58,7 @@ formal verification or major seL4 kernel features directly to the
 
 ## Adding to the Roadmap
 
-The roadmap is not only for sel4 kernel development or verification itself.
+The roadmap is not only for seL4 kernel development or verification itself.
 If you are working on a larger feature or addition to the the wider seL4
 ecosystem, and are confident enough to commit to a timeline, you can request
 this plan to be added to the roadmap on this page.
