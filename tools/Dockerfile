@@ -20,7 +20,7 @@ RUN apt-get update -q \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Init bundle dependencies
-RUN git clone https://github.com/SEL4PROJ/docs.git \
+RUN git clone https://github.com/seL4/docs.git \
     && cd docs \
     && bundle install \
     && cd / \
