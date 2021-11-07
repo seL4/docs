@@ -1,7 +1,7 @@
 # Copyright 2020 Data61, CSIRO
 # SPDX-License-Identifier: BSD-2-Clause
 
-FROM ruby
+FROM ruby:2
 
 RUN apt-get update -q \
     && apt-get install -y --no-install-recommends \
