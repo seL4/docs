@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-11-08 00:49:07 +0000 -->
+<!-- Page last generated 2021-11-08 00:49:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -227,15 +227,17 @@
 </li>
 <li class="toc-entry toc-h2"><a href="#manifests">Manifests</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#verified-manifests">Verified manifests</a></li>
+<li class="toc-entry toc-h3"><a href="#proofsverification-manifests">Proofs/Verification manifests</a></li>
 <li class="toc-entry toc-h3"><a href="#versioned-manifests">Versioned manifests</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#release-procedure">Release procedure</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#release-window-and-feeze">Release window and feeze</a></li>
+<li class="toc-entry toc-h3"><a href="#release-window-and-freeze">Release window and freeze</a></li>
 <li class="toc-entry toc-h3"><a href="#preparing-changelogs">Preparing changelogs</a></li>
-<li class="toc-entry toc-h3"><a href="#postrelease">Postrelease</a></li>
+<li class="toc-entry toc-h3"><a href="#verification">Verification</a></li>
+<li class="toc-entry toc-h3"><a href="#release">Release</a></li>
+<li class="toc-entry toc-h3"><a href="#post-release">Post release</a></li>
 </ul>
 </li>
 </ul>
@@ -258,13 +260,13 @@ projects and applications.</p>
 <h2 id="terminology">Terminology</h2>
 
 <ul>
-  <li>Sources: Source code for everything</li>
+  <li>Sources: source code for everything</li>
   <li>Kernel: the seL4 microkernel source repository</li>
   <li>Libraries: user level libraries that run on seL4</li>
   <li>Applications: applications that run on seL4</li>
-  <li>Projects: A collection of applications, libraries, kernel, denoted by a repo manifest</li>
-  <li>CAmkES: The CAmkES tool repository</li>
-  <li>Proofs: L4V proofs.</li>
+  <li>Projects: a collection of applications, libraries, kernel, denoted by a repo manifest</li>
+  <li>CAmkES: the CAmkES tool repository</li>
+  <li>Proofs: the formal proofs about seL4 in the l4v repository.</li>
 </ul>
 
 <h2 id="sources">Sources</h2>
@@ -278,14 +280,15 @@ maintained and tested.</p>
 <h2 id="releases">Releases</h2>
 
 <p>We have two release channels:</p>
+
 <ul>
   <li><strong>Bleeding edge</strong>: These happen whenever any of our maintained project code is updated and the tests for it are passing</li>
   <li><strong>Versioned releases</strong>: Versioned releases of the kernel and the CAmkES tool.  These happen less frequently.</li>
 </ul>
 
-<p>Bleeding edge releases happen every time we update our code and it passes our test suites and
+<p>Bleeding edge releases happen every time the code is updated and it passes the test suites and
 proofs. Working on the bleeding edge means that API changes occur often, and you may get cut. Whenever any of the sources tracked by the manifests in the following repositories are updated and the
-regression tests pass, an updated version of the manifest will be committed to the repo and the new sources will be synced with GitHub.</p>
+regression tests pass, an updated version of the corresponding <code class="highlighter-rouge">default.xml</code> manifest will automatically be committed to the repo indicating which version combination is confirmed to work.</p>
 
 <h3 id="which-release-should-you-use">Which release should you use?</h3>
 
@@ -294,13 +297,17 @@ than the bleeding edge which is the tip of master. Each MAJOR.MINOR
 release has release notes which describe changes and specific upgrade
 notes, posted <a href="/sel4_release">here</a>.</p>
 
-<p>New features and bug fixes will appear in bleeding edge updates much earlier than in a released version.  If you are
-working on a long term project on seL4 or using a different userlevel than we provide then it is probably better to
-pick a versioned release and manually upgrade when new features are required.  Additionally, we only guarantee working proofs for
-released versions.
-If you are trying out seL4 and experimenting with different features, rerunning benchmarks or doing the tutorials, using the
-bleeding edge versions of the projects is probably fine.  They don’t get updated unless they are passing our tests and any
-issues should be repoted to the GitHub issue tracker or posted on our mailing list.</p>
+<p>New features and bug fixes will appear in bleeding edge updates earlier than in
+a released version.  If you are working on a long-term project on seL4 or are
+using a different user level than we provide then it is probably better to pick
+a versioned release and manually upgrade when new features are required.  We
+only guarantee working proofs for released versions, although we try to maintain
+working proofs for bleeding edge releases as well. If you are trying out seL4
+and experimenting with different features, rerunning benchmarks or doing the
+tutorials, using the bleeding edge versions of the projects is probably fine.
+They don’t get updated unless they are passing our tests and any issues should
+be reported to the relevant GitHub issue tracker or posted on the
+<a href="https://lists.sel4.systems/postorius/lists/devel.sel4.systems/">mailing list</a> or <a href="https://sel4.discourse.group">discourse</a>.</p>
 
 <h3 id="version-numbers">Version Numbers</h3>
 
@@ -323,10 +330,11 @@ short:</p>
 <p><strong>CAmkES</strong> and <strong>capDL</strong> versions follow the following policy:</p>
 
 <p>MAJOR.MINOR.PATCH:</p>
+
 <ul>
   <li>MAJOR: A big rewrite</li>
   <li>MINOR: The actual release number, increased when seL4 is released or there are source/binary incompatible CAmkES updates</li>
-  <li>PATCH: Small bugfixes that are backwards compatible.</li>
+  <li>PATCH: Small bug fixes that are backwards compatible.</li>
 </ul>
 
 <h3 id="library-compatibility">Library Compatibility</h3>
@@ -345,21 +353,19 @@ of the kernel and latest version of libraries.</p>
 <h2 id="manifests">Manifests</h2>
 
 <p>Each project repository above contains several manifest files:</p>
+
 <ul>
   <li><code class="highlighter-rouge">default.xml</code> specifies pinned revisions of the source that are updated every time a new <em>bleeding
 edge</em> release is pushed. These manifests should always compile and pass tests if the correct build
-configurations are used.
-    <ul>
-      <li><code class="highlighter-rouge">master.xml</code> specifies the tip of each repository in a project. These aren’t guaranteed to work, and may contain combinations of repositories that have not been tested together.</li>
-    </ul>
-  </li>
+configurations are used.</li>
+  <li><code class="highlighter-rouge">master.xml</code> specifies the tip of each repository in a project. These aren’t guaranteed to work, and may contain combinations of repositories that have not been tested together.</li>
 </ul>
 
 <p><code class="highlighter-rouge">default.xml</code> is tagged at each released version. To obtain the manifest for a specific kernel
 version checkout the corresponding X.Y.z tag. Our previous process created an <code class="highlighter-rouge">X.Y.z.xml</code> manifest
 for each release, but this is no longer the case.</p>
 
-<h3 id="verified-manifests">Verified manifests</h3>
+<h3 id="proofsverification-manifests">Proofs/Verification manifests</h3>
 
 <p>The verification-manifest project contains a <code class="highlighter-rouge">${SEL4_VERSION}.xml</code> containing revisions which correspond to a version of the proofs that pass for the released version of the kernel</p>
 
@@ -406,15 +412,10 @@ versioned releases are available:</p>
 
 <h2 id="release-procedure">Release procedure</h2>
 
-<p>This section describes how a release is done. Most of the points below are
-applicable to the wider public except for those where the actual release work
-is carried out. Note that this procedure is based on the Trustworthy Systems
-team-internal Bamboo continuous infrastructure and GitHub setup. This procedure
-is likely to change in the coming future as the Trustworthy Systems team
-migrates away from the Bamboo setup and perhaps experiments with a more
-frequent release cycle.</p>
+<p>This section describes how a release is done, and is mostly a checklist for
+the person performing a versioned release.</p>
 
-<h3 id="release-window-and-feeze">Release window and feeze</h3>
+<h3 id="release-window-and-freeze">Release window and freeze</h3>
 
 <p>When a release is planned, decide on the timeframe of the release window in
 which changes can still be made, and then make an announcement to the relevant
@@ -424,9 +425,10 @@ they can prepare for the release and get features merged in before the release
 is done. A decent timeframe for the release window is a month.</p>
 
 <p>The relevant channels for the announcement are:</p>
+
 <ul>
-  <li><a href="https://sel4.discourse.group/">seL4 discourse</a></li>
-  <li>seL4 announcement mailing list: announce@sel4.systems</li>
+  <li><a href="https://sel4.discourse.group">seL4 discourse</a></li>
+  <li><a href="https://lists.sel4.systems/postorius/lists/announce.sel4.systems/">seL4 announcement mailing list</a></li>
   <li><a href="https://mattermost.trustworthy.systems/sel4-external/">seL4 Mattermost</a></li>
 </ul>
 
@@ -443,8 +445,8 @@ project since the last release and decide a new version number as according to
 the <a href="#version-numbers">Version Numbers</a> section.</p>
 
 <p>Clone the <code class="highlighter-rouge">seL4_release</code> repository from the <a href="https://github.com/seL4">seL4
-organization</a> (this is currently private and you will
-need to ask for permission).</p>
+organisation</a> (this is currently private and you will
+need to ask for access).</p>
 
 <p>Move to the directory of the repository that you cloned and execute the
 following while replacing the fields:</p>
@@ -465,17 +467,26 @@ with the relevant arguments to get the commits since the last release or go to
 each project’s GitHub page and filter the pull requests that were merged since
 the last release. Go through each of the commits/pull requests and summarise
 them in the <code class="highlighter-rouge">CHANGES</code> files. You do not need to add changes that are trivial. The
-best way to think about this is: “If i’m a user of (sel4, camkes, capdl) will
-it affect me? Do I need to know about it? e.g has the API changed?  Are
+best way to think about this is: “If I’m a user of (seL4, CAmkES, capDL) will
+it affect me? Do I need to know about it, e.g has the API changed?  Are
 variables renamed? New features? New licences? Removal of features?” etc. Make
 sure to also update the <code class="highlighter-rouge">Upgrade Notes</code> section in each <code class="highlighter-rouge">CHANGES</code> file.</p>
 
-<p>Meanwhile, you can also work on making the continuous integration builds green
-while preparing the changelogs. Remember to also include any fixes and changes
-to the changelogs.</p>
+<p>Meanwhile, you can also work on making sure the continuous integration builds
+are green while preparing the changelogs. Remember to also include any fixes and
+changes from this process to the changelogs.</p>
+
+<h3 id="verification">Verification</h3>
+
+<p>Coordinate with the verification team to make a simultaneous release of the
+verification repositories. If the proof builds are green, this should be a
+relatively short process. If the proof builds are not green, the release must
+wait until those are fixed.</p>
+
+<h3 id="release">Release</h3>
 
 <p>Once the continuous integration builds are all green (make sure that the
-verification builds are also green) and the changelogs are also done. Amend the
+verification builds are also green) and the changelogs are also done, amend the
 commits that the release tool made with the updated <code class="highlighter-rouge">CHANGES</code> file in each
 project, sign the commits off and submit pull requests for each project.  Make
 sure that the pull request <strong>only</strong> contains the two commits, one for updating
@@ -492,11 +503,11 @@ folder in the docsite’s repository
 Submit a pull request for those changes as well.</p>
 
 <p>Get all pull requests (should be four, one for each project, and one for the
-docsite) merged and then wait for Bamboo to release the version tags for each
+docsite) merged and then wait for GitHub to release the version tags for each
 project. Once this is done, we can now carry out the
 last remaining tasks and announce the release.</p>
 
-<h3 id="postrelease">Postrelease</h3>
+<h3 id="post-release">Post release</h3>
 
 <p>Update the links on the docsite to point to the new releases by updating the
 version numbers in this
@@ -518,7 +529,7 @@ the fields:</p>
 
 <p>This command will add version tags to each sub-project repository for each of
 the repositories that are under those projects. Running it without the
-<code class="highlighter-rouge">--release</code> flag will perform a dryrun. If there are issues during the dryrun,
+<code class="highlighter-rouge">--release</code> flag will perform a dry-run. If there are issues during the dry-run,
 fix them up and when everything is all good, run it with the <code class="highlighter-rouge">--release</code> flag.</p>
 
 <p>Now, the final task to do it to go to the GitHub pages for the seL4, CAmkES,
@@ -558,10 +569,10 @@ and capDL projects and draft new GitHub releases for each of the projects.</p>
         </li>
         
           <li>
-            Site last updated: Mon Nov 8 11:43:58 2021 +1100 6f5c8e3
+            Site last updated: Mon Nov 8 11:44:44 2021 +1100 b6c91ad
           </li>
           <li>
-                Page last updated: Mon Nov 8 11:43:58 2021 +1100 6f5c8e3
+                Page last updated: Mon Nov 8 11:44:44 2021 +1100 b6c91ad
           </li>
         
       </ul>
