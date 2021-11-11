@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-11-10 03:17:52 +0000 -->
+<!-- Page last generated 2021-11-11 00:55:00 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -354,20 +354,22 @@
 <span class="c"># ../sel4/configs/ARM_HYP_verified.cmake  ../sel4/configs/X64_verified.cmake</span>
 <span class="c"># ../sel4/configs/ARM_verified.cmake</span>
 </code></pre></div></div>
+
 <p>A typical verification configuration (<code class="highlighter-rouge">cat ../sel4/configs/X64_verified.cmake</code>):</p>
-<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
-<span class="c1"># Copyright 2017, Data61</span>
-<span class="c1"># Commonwealth Scientific and Industrial Research Organisation (CSIRO)</span>
-<span class="c1"># ABN 41 687 119 230.</span>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env -S cmake -P</span>
 <span class="c1">#</span>
-<span class="c1"># This software may be distributed and modified according to the terms of</span>
-<span class="c1"># the GNU General Public License version 2. Note that NO WARRANTY is provided.</span>
-<span class="c1"># See "LICENSE_GPLv2.txt" for details.</span>
+<span class="c1"># Copyright 2020, Data61, CSIRO (ABN 41 687 119 230)</span>
 <span class="c1">#</span>
-<span class="c1"># @TAG(DATA61_GPL)</span>
+<span class="c1"># SPDX-License-Identifier: GPL-2.0-only</span>
 <span class="c1">#</span>
-<span class="nb">set</span><span class="p">(</span>KernelArch <span class="s2">"x86"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>KernelX86Sel4Arch <span class="s2">"x86_64"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
+
+<span class="c1"># If this file is executed then build the kernel.elf and kernel_all_pp.c file</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/../tools/helpers.cmake<span class="p">)</span>
+<span class="nf">cmake_script_build_kernel</span><span class="p">()</span>
+
+<span class="nb">set</span><span class="p">(</span>KernelPlatform <span class="s2">"pc99"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>KernelSel4Arch <span class="s2">"x86_64"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span>KernelVerificationBuild ON CACHE BOOL <span class="s2">""</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span>KernelMaxNumNodes <span class="s2">"1"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span>KernelOptimisation <span class="s2">"-O2"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
@@ -380,6 +382,7 @@
 <span class="nb">set</span><span class="p">(</span>KernelMaxNumBootinfoUntypedCap 166 CACHE STRING <span class="s2">""</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span>KernelRootCNodeSizeBits 19 CACHE STRING <span class="s2">""</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span>KernelMaxNumBootinfoUntypedCaps 50 CACHE STRING <span class="s2">""</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>KernelFSGSBase <span class="s2">"inst"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>At this point you could use <code class="highlighter-rouge">ccmake ../sel4</code> to browse the configuration.</p>
@@ -526,10 +529,10 @@
         </li>
         
           <li>
-            Site last updated: Mon Nov 8 11:45:32 2021 +1100 7936038
+            Site last updated: Thu Nov 11 11:50:06 2021 +1100 318c724
           </li>
           <li>
-                Page last updated: Mon Nov 8 11:45:32 2021 +1100 7936038
+                Page last updated: Thu Nov 11 11:50:06 2021 +1100 318c724
           </li>
         
       </ul>

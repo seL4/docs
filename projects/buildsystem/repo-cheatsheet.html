@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-11-10 03:17:52 +0000 -->
+<!-- Page last generated 2021-11-11 00:55:00 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -329,41 +329,58 @@
 
 <p>This page describes how we typically structure our manifests and also explains some common repo commands that we use in our workflows.</p>
 
-<p>Below is an example of a manifest for the sel4test project.  It is located in <a href="https://github.com/seL4/sel4test-manifest">https://github.com/seL4/sel4test-manifest</a>.</p>
+<p>Below is a set of example manifests for the sel4test project. They are located at <a href="https://github.com/seL4/sel4test-manifest/">https://github.com/seL4/sel4test-manifest/</a>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">common.xml</code>:</li>
+</ul>
+
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="c">&lt;!--
-     Copyright 2017, Data61
-     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
-     ABN 41 687 119 230.
-
-     This software may be distributed and modified according to the terms of
-     the BSD 2-Clause license. Note that NO WARRANTY is provided.
-     See "LICENSE_BSD2.txt" for details.
-
-     @TAG(DATA61_BSD)
+     Copyright 2018, Data61, CSIRO
+     SPDX-License-Identifier: BSD-2-Clause
 --&gt;</span>
 <span class="nt">&lt;manifest&gt;</span>
-
-<span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"seL4"</span> <span class="na">fetch=</span><span class="s">"."</span><span class="nt">/&gt;</span>
-
+<span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"seL4"</span> <span class="na">fetch=</span><span class="s">"."</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"../sel4proj"</span> <span class="na">name=</span><span class="s">"sel4proj"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"https://github.com/nanopb"</span> <span class="na">name=</span><span class="s">"nanopb"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"https://github.com/riscv"</span> <span class="na">name=</span><span class="s">"opensbi"</span><span class="nt">/&gt;</span>
 
-<span class="nt">&lt;default</span> <span class="na">revision=</span><span class="s">"master"</span>
-<span class="na">remote=</span><span class="s">"seL4"</span>
-<span class="nt">/&gt;</span>
+<span class="nt">&lt;default</span> <span class="na">revision=</span><span class="s">"master"</span> <span class="na">remote=</span><span class="s">"seL4"</span> <span class="nt">/&gt;</span>
 
-<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4.git"</span> <span class="na">path=</span><span class="s">"kernel"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_tools.git"</span> <span class="na">path=</span><span class="s">"tools"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"cmake-tool/default-CMakeLists.txt"</span> <span class="na">dest=</span><span class="s">"CMakeLists.txt"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;linkfile</span> <span class="na">dest=</span><span class="s">"init-build.sh"</span> <span class="na">src=</span><span class="s">"cmake-tool/init-build.sh"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_tools.git"</span> <span class="na">path=</span><span class="s">"tools/seL4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"cmake-tool/init-build.sh"</span> <span class="na">dest=</span><span class="s">"init-build.sh"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"cmake-tool/griddle"</span> <span class="na">dest=</span><span class="s">"griddle"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/project&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4runtime.git"</span> <span class="na">path=</span><span class="s">"projects/sel4runtime"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"musllibc.git"</span> <span class="na">path=</span><span class="s">"projects/musllibc"</span> <span class="na">revision=</span><span class="s">"sel4"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_libs.git"</span> <span class="na">path=</span><span class="s">"projects/seL4_libs"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"util_libs.git"</span> <span class="na">path=</span><span class="s">"projects/util_libs"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4test.git"</span> <span class="na">path=</span><span class="s">"projects/sel4test"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"riscv-pk"</span> <span class="na">remote=</span><span class="s">"sel4proj"</span> <span class="na">revision=</span><span class="s">"fix-32bit"</span> <span class="na">path=</span><span class="s">"projects/riscv-pk"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4test.git"</span> <span class="na">path=</span><span class="s">"projects/sel4test"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"easy-settings.cmake"</span> <span class="na">dest=</span><span class="s">"easy-settings.cmake"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4_projects_libs"</span> <span class="na">path=</span><span class="s">"projects/sel4_projects_libs"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"opensbi"</span> <span class="na">remote=</span><span class="s">"opensbi"</span> <span class="na">revision=</span><span class="s">"refs/tags/v0.8"</span> <span class="na">path=</span><span class="s">"tools/opensbi"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"nanopb"</span> <span class="na">path=</span><span class="s">"tools/nanopb"</span> <span class="na">revision=</span><span class="s">"refs/tags/0.4.3"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">remote=</span><span class="s">"nanopb"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/manifest&gt;</span>
 </code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">master.xml</code>:</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="c">&lt;!--
+     Copyright 2018, Data61, CSIRO
+     SPDX-License-Identifier: BSD-2-Clause
+--&gt;</span>
+<span class="nt">&lt;manifest&gt;</span>
+<span class="c">&lt;!-- include all the common repositories, we just want to define the kernel --&gt;</span>
+<span class="nt">&lt;include</span> <span class="na">name=</span><span class="s">"common.xml"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4.git"</span> <span class="na">path=</span><span class="s">"kernel"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
+
 <h2 id="manifest-layout">Manifest layout</h2>
 
 <p>We provide a brief overview of manifests as used in our projects in this section, please find more details in the full description of the manifest layout which can be found <a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md">here</a>.</p>
@@ -400,34 +417,37 @@ If attributes are ommitted, the values from the default element will be used ins
 
 <h3 id="pinned-manifests">Pinned manifests</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="c">&lt;!--
-     Copyright 2018, Data61
-     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
-     ABN 41 687 119 230.
-     This software may be distributed and modified according to the terms of
-     the BSD 2-Clause license. Note that NO WARRANTY is provided.
-     See "LICENSE_BSD2.txt" for details.
-     @TAG(DATA61_BSD)
+   Copyright 2021 seL4 Project a Series of LF Projects, LLC
+   SPDX-License-Identifier: BSD-2-Clause
 --&gt;</span>
 <span class="nt">&lt;manifest&gt;</span>
-  <span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"."</span> <span class="na">name=</span><span class="s">"seL4"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;remote</span> <span class="na">fetch=</span><span class="s">"../sel4proj"</span> <span class="na">name=</span><span class="s">"sel4proj"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"nanopb"</span> <span class="na">fetch=</span><span class="s">"https://github.com/nanopb"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"opensbi"</span> <span class="na">fetch=</span><span class="s">"https://github.com/riscv"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"seL4"</span> <span class="na">fetch=</span><span class="s">"."</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">"sel4proj"</span> <span class="na">fetch=</span><span class="s">"../sel4proj"</span><span class="nt">/&gt;</span>
 
   <span class="nt">&lt;default</span> <span class="na">remote=</span><span class="s">"seL4"</span> <span class="na">revision=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
 
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"musllibc.git"</span> <span class="na">path=</span><span class="s">"projects/musllibc"</span> <span class="na">revision=</span><span class="s">"f58dacf44a679a2d7c10fbb8d8bc8f58e2123791"</span> <span class="na">upstream=</span><span class="s">"sel4"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"riscv-pk"</span> <span class="na">path=</span><span class="s">"projects/riscv-pk"</span> <span class="na">remote=</span><span class="s">"sel4proj"</span> <span class="na">revision=</span><span class="s">"db937e995b09d343fb7146c447b0780ab1dca66b"</span> <span class="na">upstream=</span><span class="s">"fix-32bit"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4.git"</span> <span class="na">path=</span><span class="s">"kernel"</span> <span class="na">revision=</span><span class="s">"757c3ac98246afd0593367f1fa19054316a77495"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_libs.git"</span> <span class="na">path=</span><span class="s">"projects/seL4_libs"</span> <span class="na">revision=</span><span class="s">"1697cb16ecbc7820cbda78d7c7c1896e884195a1"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_tools.git"</span> <span class="na">path=</span><span class="s">"projects/tools"</span> <span class="na">revision=</span><span class="s">"930b6467eae8404e4a72555b693120ac0d64fc48"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;linkfile</span> <span class="na">dest=</span><span class="s">"CMakeLists.txt"</span> <span class="na">src=</span><span class="s">"cmake-tool/default-CMakeLists.txt"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;linkfile</span> <span class="na">dest=</span><span class="s">"init-build.sh"</span> <span class="na">src=</span><span class="s">"cmake-tool/init-build.sh"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"musllibc.git"</span> <span class="na">path=</span><span class="s">"projects/musllibc"</span> <span class="na">revision=</span><span class="s">"aa82031dd861f7ade4c3738b417de34120b01f15"</span> <span class="na">upstream=</span><span class="s">"sel4"</span> <span class="na">dest-branch=</span><span class="s">"sel4"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"nanopb"</span> <span class="na">path=</span><span class="s">"tools/nanopb"</span> <span class="na">remote=</span><span class="s">"nanopb"</span> <span class="na">revision=</span><span class="s">"1466e6f953835b191a7f5acf0c06c941d4cd33d9"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"refs/tags/0.4.3"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"opensbi"</span> <span class="na">path=</span><span class="s">"tools/opensbi"</span> <span class="na">remote=</span><span class="s">"opensbi"</span> <span class="na">revision=</span><span class="s">"a98258d0b537a295f517bbc8d813007336731fa9"</span> <span class="na">upstream=</span><span class="s">"refs/tags/v0.8"</span> <span class="na">dest-branch=</span><span class="s">"refs/tags/v0.8"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4.git"</span> <span class="na">path=</span><span class="s">"kernel"</span> <span class="na">revision=</span><span class="s">"a6c29549fce33df65b9018f420d330bca9086712"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_libs.git"</span> <span class="na">path=</span><span class="s">"projects/seL4_libs"</span> <span class="na">revision=</span><span class="s">"14d3c94f5164c993033a35a5d9e23ba6dcf12f5f"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"seL4_tools.git"</span> <span class="na">path=</span><span class="s">"tools/seL4"</span> <span class="na">revision=</span><span class="s">"553086aab4c9fb9c4869060fe51a3e95c20ce454"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"cmake-tool/init-build.sh"</span> <span class="na">dest=</span><span class="s">"init-build.sh"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"cmake-tool/griddle"</span> <span class="na">dest=</span><span class="s">"griddle"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/project&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4test.git"</span> <span class="na">path=</span><span class="s">"projects/sel4test"</span> <span class="na">revision=</span><span class="s">"dbd96aa862b8519165aaa8ae7bd5a1787048e34a"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"util_libs.git"</span> <span class="na">path=</span><span class="s">"projects/util_libs"</span> <span class="na">revision=</span><span class="s">"c575f7280ce6184dbb2876f83a6c591c91de219e"</span> <span class="na">upstream=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4_projects_libs"</span> <span class="na">path=</span><span class="s">"projects/sel4_projects_libs"</span> <span class="na">revision=</span><span class="s">"a6fbc13c792ef518e5bcf1da69c8d27b6cd19814"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4runtime.git"</span> <span class="na">path=</span><span class="s">"projects/sel4runtime"</span> <span class="na">revision=</span><span class="s">"c27050513503f615137950cb3918f6f040f34407"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"sel4test.git"</span> <span class="na">path=</span><span class="s">"projects/sel4test"</span> <span class="na">revision=</span><span class="s">"110ad99b32cb94f0604ce9fef796164b595fe6aa"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;linkfile</span> <span class="na">src=</span><span class="s">"easy-settings.cmake"</span> <span class="na">dest=</span><span class="s">"easy-settings.cmake"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/project&gt;</span>
+  <span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">"util_libs.git"</span> <span class="na">path=</span><span class="s">"projects/util_libs"</span> <span class="na">revision=</span><span class="s">"280f7bb58290ea3d719d86894655a03f36d347e2"</span> <span class="na">upstream=</span><span class="s">"master"</span> <span class="na">dest-branch=</span><span class="s">"master"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/manifest&gt;</span>
 </code></pre></div></div>
+
 <p>A pinned manifest uses pinned git revisions for all of its repositories. It is good practice to create a pinned manifest that refers to a working version of a project. For projects that we maintain, we provide at least two manifests: default.xml and master.xml (See <a href="/ReleaseProcess">ReleaseProcess</a> for more information about what manifests we make available).</p>
 
 <h2 id="commands">Commands</h2>
@@ -665,10 +685,10 @@ repo sync --jobs=8 --fetch-submodules --current-branch --no-clone-bundle
         </li>
         
           <li>
-            Site last updated: Mon Nov 8 11:45:32 2021 +1100 7936038
+            Site last updated: Thu Nov 11 11:50:06 2021 +1100 318c724
           </li>
           <li>
-                Page last updated: Mon Nov 8 11:45:32 2021 +1100 7936038
+                Page last updated: Thu Nov 11 11:50:06 2021 +1100 318c724
           </li>
         
       </ul>
