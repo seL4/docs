@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2021-11-14 03:18:27 +0000 -->
+<!-- Page last generated 2021-11-15 03:18:07 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -458,7 +458,7 @@ including  <code class="highlighter-rouge">DeclareCAmkESVM(Init0)</code>, which 
 Each Init component requires a corresponding <code class="highlighter-rouge">DeclareCAmkESVM</code> function.</p>
 
 <p><code class="highlighter-rouge">GetArchDefaultLinuxKernelFile</code> (defined in <code class="highlighter-rouge">projects/camkes/vm-linux/vm-linux-helpers.cmake</code>)
-is a helper function that retrieves the location of an architectural specific vm image provided
+is a helper function that retrieves the location of an architectural specific VM image provided
 in the <code class="highlighter-rouge">projects/vm-linux</code> folder, which contains some tools for building new linux kernel
 and root filesystem images, as well as the images that these tools
 produce. A fresh checkout of this project will contain some pre-built
@@ -550,7 +550,7 @@ and symvers file (<code class="highlighter-rouge">linux_symvers_location</code>)
 <span class="nb">target_link_libraries</span><span class="p">(</span>hello -static<span class="p">)</span>
 </code></pre></div></div>
 <p>Now integrate the new program with the build system. 
-Update the vm apps <code class="highlighter-rouge">CMakeLists.txt</code> to declare the hello application as an
+Update the VM apps <code class="highlighter-rouge">CMakeLists.txt</code> to declare the hello application as an
 external project and add it to our overlay.
  Do this by replacing the line <code class="highlighter-rouge">AddToFileServer("rootfs.cpio" ${default_rootfs_file})</code> with the following:</p>
 
@@ -660,14 +660,14 @@ associated with the new module, which when written to causes the VMM to print me
 
 <span class="nf">DefineLinuxModule</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/poke poke-module poke-target KERNEL_DIR <span class="si">${</span><span class="nv">LINUX_KERNEL_DIR</span><span class="si">}</span><span class="p">)</span>
 </code></pre></div></div>
-<p>Update the vm <code class="highlighter-rouge">CMakeLists.txt</code> file to declare the new poke module as an
+<p>Update the VM <code class="highlighter-rouge">CMakeLists.txt</code> file to declare the new poke module as an
 external project and add it to the overlay.</p>
 
 <p>At the top of the file include our linux helpers, add the following:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_SOURCE_HELPERS_PATH</span><span class="si">}</span><span class="p">)</span>
 </code></pre></div></div>
-<p>Below the includes add:</p>
+<p>Below the includes (before <code class="highlighter-rouge">AddOverlayDirToRootfs</code> that was added in the first exercise <strong>Adding a program</strong>) add:</p>
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Setup Linux Sources</span>
 <span class="nf">GetDefaultLinuxMajor</span><span class="p">(</span>linux_major<span class="p">)</span>
 <span class="nf">GetDefaultLinuxMinor</span><span class="p">(</span>linux_minor<span class="p">)</span>
@@ -713,7 +713,7 @@ insmod /lib/modules/4.8.16/kernel/drivers/vmm/poke.ko
 <span class="nb">exec</span> /sbin/init <span class="nv">$*</span>
 </code></pre></div></div>
 <p>Now update our the VM apps <code class="highlighter-rouge">CMakeLists.txt</code> file to add the new init script to the
-overlay. After our call to <code class="highlighter-rouge">AddExternalProjFilesToOverlay</code> for the poke module add the following:</p>
+overlay. After our call to <code class="highlighter-rouge">AddExternalProjFilesToOverlay</code> and before <code class="highlighter-rouge">AddOverlayDirToRootfs</code> for the poke module add the following:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/init <span class="s2">"."</span> vm-overlay<span class="p">)</span>
 </code></pre></div></div>
@@ -731,8 +731,8 @@ ninja
 buildroot login: root
 Password:
 # grep poke /proc/devices        # figure out the major number of our driver
-244 poke
-# mknod /dev/poke c 244 0        # create the special file
+246 poke
+# mknod /dev/poke c 246 0        # create the special file
 # echo &gt; /dev/poke               # write to the file
 [ 57.389643] hi
 -sh: write error: Bad address    # the shell complains, but our module is being invoked!
@@ -746,18 +746,18 @@ The choice of 4 is because 0..3 are already used by existing hypercalls.</p>
 <p>Then register a handler for this hypercall in <code class="highlighter-rouge">projects/camkes/vm/components/Init/src/main.c</code>:.
 Add a new function at the top of the file:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">poke_handler</span><span class="p">(</span><span class="n">vmm_vcpu_t</span> <span class="o">*</span><span class="n">vmm_vcpu</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"POKE!!!n"</span><span class="p">);</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">poke_handler</span><span class="p">(</span><span class="n">vm_vcpu_t</span> <span class="o">*</span><span class="n">vm_vcpu</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"POKE!!!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>In the function <code class="highlighter-rouge">main_continued</code> register `poke_handler`:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reg_new_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">,</span> <span class="n">poke_handler</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// &lt;--- added</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vm_reg_new_vmcall_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vm</span><span class="p">,</span> <span class="n">poke_handler</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// &lt;--- added</span>
 
 <span class="cm">/* Now go run the event loop */</span>
-<span class="n">vmm_run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vmm</span><span class="p">);</span>
+<span class="n">vmm_run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vm</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Rebuild the project and try out the hypercall + module:</p>
@@ -768,7 +768,7 @@ ninja
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Buildroot
 buildroot login: root
 Password:
-# mknod /dev/poke c 244 0
+# mknod /dev/poke c 246 0
 # echo &gt; /dev/poke
 POKE!!!
 </code></pre></div></div>
