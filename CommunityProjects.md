@@ -27,7 +27,7 @@ process of being ported to seL4:
 - C
 - [Ivory](http://ivorylang.org/ivory-introduction.html)
 - Rust:
-  - The [Robigalia](https://robigalia.org/) project:
+  - The [Robigalia](https://gitlab.com/robigalia/) project:
       building a robust Rust ecosystem around seL4
   - [ferros](https://github.com/auxoncorp/ferros):
       A Rust-based userland which also adds compile-time assurances to seL4 development.
