@@ -24,6 +24,7 @@ process of being ported to seL4:
 - [CamkES](https://trustworthy.systems/projects/TS/trustcomp)
 - [Genode](http://genode.org/about/index)
 - [Linux (virtualised)](https://trustworthy.systems/projects/TS/virtualisation/about)
+- [WasmEdge](https://github.com/WasmEdge/WasmEdge): [porting a Cloud-native WebAssembly Runtime to seL4](https://github.com/second-state/wasmedge-seL4)
 - C
 - [Ivory](http://ivorylang.org/ivory-introduction.html)
 - Rust:
