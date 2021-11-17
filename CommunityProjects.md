@@ -26,6 +26,7 @@ process of being ported to seL4:
 - [Linux (virtualised)](https://trustworthy.systems/projects/TS/virtualisation/about)
 - C
 - [Ivory](http://ivorylang.org/ivory-introduction.html)
+- [WasmEdge](https://github.com/WasmEdge/WasmEdge): [porting a WebAssembly runtime to seL4](https://github.com/second-state/wasmedge-seL4) 
 - Rust:
   - The [Robigalia](https://gitlab.com/robigalia/) project:
       building a robust Rust ecosystem around seL4
@@ -33,4 +34,4 @@ process of being ported to seL4:
       A Rust-based userland which also adds compile-time assurances to seL4 development.
 - Python
 - C++
-
+  
