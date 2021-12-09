@@ -18,7 +18,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # Sabre Lite
 
 For board details see
-[Sabre Lite](https://boundarydevices.com/product/sabre-lite-imx6-sbc/)
+[Sabre Lite](https://boundarydevices.com/product/bd-sl-i-mx6/)
 
 # Booting on the Sabre Lite
 ## Hardware Requirements
