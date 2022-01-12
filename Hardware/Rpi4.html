@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ariane | seL4 docs</title>
+    <title>Raspberry PI 4 Model B | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Ariane</span>
+            <span property="name">Raspberry PI 4 Model B</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -150,41 +150,121 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="ariane">Ariane</h1>
+      <h1 id="raspberry-pi-4-model-b">Raspberry PI 4 Model B</h1>
 
-<p>Ariane is a 6-stage RISC-V CPU. For details, refer to
-<a href="https://github.com/pulp-platform/ariane">https://github.com/pulp-platform/ariane</a></p>
+<h2 id="serial-connection">Serial connection</h2>
+<p>Serial TX and RX are located at GPIO pins 14 and 15 respectively</p>
 
-<h2 id="build-the-gcc-toolchain">Build the GCC toolchain</h2>
+<h2 id="u-boot">U-Boot</h2>
 
-<ol>
-  <li>
-    <p>It is recommended to build the toolchain from source.</p>
+<p>Right now, the default U-Boot will not successfully boot an seL4 image
+on the RPi4 because of cache configuration issues in the seL4
+ELFLoader. This problem can be remedied by having U-boot disable caches
+before loading seL4. Unfortunately, the stock upstream U-boot used to
+disable caches before loading the kernel image, but as of this patch
+(<a href="https://github.com/u-boot/u-boot/commit/995eab8b5b580b67394312b1621c60a71042cd18">https://github.com/u-boot/u-boot/commit/995eab8b5b580b67394312b1621c60a71042cd18</a>),
+U-boot no longer disables caches.</p>
 
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://github.com/riscv/riscv-gnu-toolchain.git
- <span class="nb">cd </span>riscv-gnu-toolchain
- git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span>
- <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span>/opt/riscv
- ./configure <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span> <span class="nt">--enable-multilib</span>
- make linux
-</code></pre></div>    </div>
+<p>In order to obtain a U-boot binary that disables caching, you should
+compile U-Boot from source yourself.
+You can do this by cloning U-boot from upstream,
+then reverting commit 995eab8b5b580b67394312b1621c60a71042cd18, and then
+building it:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/u-boot/u-boot.git u-boot
+<span class="nb">cd </span>u-boot
+git revert 995eab8b5b580b67394312b1621c60a71042cd18
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu- rpi_4_defconfig
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-
+</code></pre></div></div>
 
-    <p>After it is built, add the $RISCV/bin folder to your PATH. The built
- toolchain works for both 32-bit and 64-bit.</p>
-  </li>
-  <li>
-    <p>Alternatively, any pre-built toolchain with multilib enabled should work.</p>
-  </li>
-</ol>
+<p>This will enable you to get the most up-to-date U-boot which will boot
+seL4 on the RPi4 successfully.</p>
 
-<h2 id="building-sel4test">Building seL4test</h2>
+<p><strong>NOTE:</strong> Automatic revert is not going to work if you are using the
+latest version of u-boot. You need to manually revert the change by
+looking at the changeset.</p>
+
+<h2 id="sd-card-setup">SD card setup</h2>
+<p>The PI boots from the first FAT32 partition on the
+SD card. Where files are specified, they should be located in the root
+directory of this partition.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Filename</th>
+      <th>Description</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FSBL</td>
+      <td>-</td>
+      <td>Mounts SD and loads SSBL</td>
+      <td>ROM</td>
+    </tr>
+    <tr>
+      <td>SSBL</td>
+      <td>bootcode.bin</td>
+      <td>Loads GPU firmware and boots GPU</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+    </tr>
+    <tr>
+      <td>GPU firmware</td>
+      <td>start4.elf</td>
+      <td>Loads CPU bootloader and boots CPU</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+    </tr>
+    <tr>
+      <td>Usually the Linux kernel, but could also be u-boot</td>
+      <td>u-boot.bin</td>
+      <td>u-boot</td>
+      <td>Compiled using the instructions above</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>config.txt</td>
+      <td>u-boot parameters</td>
+      <td>Add <code class="highlighter-rouge">arm_64bit=1</code>, <code class="highlighter-rouge">kernel=u-boot.bin</code>, and <code class="highlighter-rouge">dtoverlay=disable-bt</code> to the bottom of config.txt</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>uboot.env</td>
+      <td>u-boot saved environment</td>
+      <td>Generated by u-boot (default environment) bootcmd copied to bootcmd_orig bootcmd and bootdelay removed</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>bcm2711-rpi-4-b.dtb</td>
+      <td>RPi4 device tree blob</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>overlays/*</td>
+      <td>Device tree overlays</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/overlays">https://github.com/raspberrypi/firmware/tree/master/boot/overlays</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="getting-sel4-onto-your-raspberry-pi-4">Getting seL4 onto your Raspberry Pi 4</h2>
+
+<p>Because you have applied a device tree overlay to use the UART on GPIO pins 14 and 15,
+you will have to update seL4 to use serial0 instead of serial1.
+In the kernel at <code class="highlighter-rouge">src/plat/bcm2711/overlay-rpi4.dts</code>, you should replace all instances of
+<code class="highlighter-rouge">serial1</code> with <code class="highlighter-rouge">serial0</code>.</p>
+
+<p>Then, you should then build the kernel, such as in seL4test:</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
 repo <span class="nb">sync
 mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ariane <span class="nt">-DRISCV64</span><span class="o">=</span>1
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rpi4 <span class="nt">-DAARCH64</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -194,26 +274,22 @@ ninja
 
 <p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
-<h2 id="running-sel4test">Running seL4test</h2>
-<p>Ariane only provides support for the <a href="https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual">Genesys 2
-board</a></p>
+<p>The boot method described here is through the SD card. You should set up the files
+on your SD card as described in the previous section.</p>
 
-<ol>
-  <li>
-    <p>Compile the bitstream from source or download the pre-build bitstream from
-<a href="https://github.com/pulp-platform/ariane/releases">here</a>.</p>
-  </li>
-  <li>Prepare the SD card
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>sgdisk <span class="nt">--clear</span> <span class="nt">--new</span><span class="o">=</span>1:2048:67583 <span class="nt">--new</span><span class="o">=</span>2 <span class="nt">--typecode</span><span class="o">=</span>1:3000 <span class="nt">--typecode</span><span class="o">=</span>2:8300 /dev/sdX
-<span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>images/sel4test-driver-image-riscv-ariane <span class="nv">of</span><span class="o">=</span>/dev/sdX1
-</code></pre></div>    </div>
-    <p>Note that the “sgdisk” command above also creates a second partition for
-Linux rootfs, you could download a pre-build Linux kernel from
-<a href="https://github.com/pulp-platform/ariane-sdk/releases">here</a> to verify that
-the FPGA is working correctly.</p>
-  </li>
-  <li>Booting from the SD card and observing the output from the UART port.</li>
-</ol>
+<p>Following this, copy your seL4 image (such as an seL4test image) onto
+the SD card in its root directory. You can now remove the SD
+card from your PC and re-insert it into the RPi4, and power the RPi4 on.</p>
+
+<p>When the RPi4 boots up, be sure to interrupt the boot process and drop
+into the U-boot command prompt. From the U-boot command prompt, type
+something like the following: <code class="highlighter-rouge">fatls mmc 0</code>. If you don’t see your seL4 image
+filename printed out, then you might need to double-check your steps
+so far to make sure you didn’t forget something along the way. If you
+see your file listed, then do something like:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2711
+bootefi 0x10000000
+</code></pre></div></div>
 
     </div>
   </div>
@@ -256,9 +332,9 @@ the FPGA is working correctly.</p>
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/Hardware/ariane.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/Hardware/Rpi4.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/Hardware/ariane.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/Hardware/Rpi4.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
