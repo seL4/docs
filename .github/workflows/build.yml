@@ -47,13 +47,18 @@ jobs:
       with:
         ref: gh-pages
         token: ${{ secrets.GH_TOKEN }}
+    # for removing files, we need to start fresh; this does not remove dot-files
+    - run: rm -rf *
     - uses: actions/download-artifact@v2
       with:
         name: site
     - run: tar -xvf site.tar
     - run: cp -a _site/* .
     - run: rm -rf site.tar _site
-    - run: git add .
+    # recreate CNAME file for GitHub; not included in generated site
+    - run: echo docs.sel4.systems > CNAME
+    # add/remove everything
+    - run: git add -A .
     - run: git diff --cached
     - run: git config user.name "CI"
     - run: git config user.email ci@sel4.systems
