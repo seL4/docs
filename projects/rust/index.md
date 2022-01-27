@@ -13,7 +13,7 @@ The rust support that this page talks about is no longer supported.
 in userspace on seL4 utilizing the existing build system. It focuses on
 Interoperability between existing c based libraries and applications and
 working with CAmkES. For rust only projects on seL4 see
-[the robigalia project](https://robigalia.org/).
+[the robigalia project](https://rbg.systems/).
 
 ### Setup:
  In addition to the typical sel4 build prerequisites you
