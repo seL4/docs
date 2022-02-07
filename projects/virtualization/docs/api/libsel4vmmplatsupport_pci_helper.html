@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-02-06 03:17:27 +0000 -->
+<!-- Page last generated 2022-02-07 03:17:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -374,10 +374,6 @@ the creation of pci device entries and accessors the their configuration spaces.
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_pci_create_passthrough_bar_emulationexisting-num_bars-bars"><code class="highlighter-rouge">vmm_pci_create_passthrough_bar_emulation(existing, num_bars, bars)</code></a></p>
-</blockquote>
-
-<blockquote>
   <p><a href="#function-vmm_pci_create_irq_emulationexisting-irq"><code class="highlighter-rouge">vmm_pci_create_irq_emulation(existing, irq)</code></a></p>
 </blockquote>
 
@@ -530,27 +526,6 @@ you will almost certainly want to rebase io memory</p>
 
 <ul>
   <li><code class="highlighter-rouge">vmm_pci_entry_t</code> for emulated bar device</li>
-</ul>
-
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
-
-<h3 id="function-vmm_pci_create_passthrough_bar_emulationexisting-num_bars-bars">Function <code class="highlighter-rouge">vmm_pci_create_passthrough_bar_emulation(existing, num_bars, bars)</code></h3>
-
-<p>Construct a pci entry that passes through all bar read/writes through to emulated io(read/write) handlers. This is the
-inverse of <code class="highlighter-rouge">vmm_pci_create_bar_emulation</code></p>
-
-<p><strong>Parameters:</strong></p>
-
-<ul>
-  <li><code class="highlighter-rouge">existing {vmm_pci_entry_t}</code>: Existing PCI entry to wrap over and passthrough bar read/writes</li>
-  <li><code class="highlighter-rouge">num_bars {int}</code>: Number of emulated bars in PCI entry</li>
-  <li><code class="highlighter-rouge">bars {vmm_pci_bar_t *}</code>: Set of bars to passthrough access to</li>
-</ul>
-
-<p><strong>Returns:</strong></p>
-
-<ul>
-  <li><code class="highlighter-rouge">vmm_pci_entry_t</code> for passthrough bar device</li>
 </ul>
 
 <p>Back to <a href="#module-pcih">interface description</a>.</p>
