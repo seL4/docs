@@ -37,7 +37,7 @@ sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen device-tree-compiler
 sudo apt-get install u-boot-tools
 sudo apt-get install protobuf-compiler python-protobuf
-sudo apt-get install gcc-8 g++8
+sudo apt-get install gcc-8 g++-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 ```
 
