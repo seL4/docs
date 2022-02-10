@@ -41,7 +41,7 @@ seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 
 | Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | IOMMU              | Status     | Contributed by | Maintained by |
 | - | - | - | - | - | - | - | - | - |
-{%- assign sorted = site.pages | sort: 'arch' %}
+{%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}
 {%- if page.arm_hardware -%}
 | [{{ page.platform }}]({{page.url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
