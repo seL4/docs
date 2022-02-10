@@ -22,8 +22,7 @@ The Jetson TX2 is an embedded system-on-module (SOM) developed by NVIDIA.
 <https://elinux.org/Jetson_TX2>
 
 The seL4 kernel has a limited port to the TX2 which supports the SoM
-only in 64-bit mode. SMP is not supported by the
-current port.
+only in 64-bit mode.
 
 ## Building seL4test
 
