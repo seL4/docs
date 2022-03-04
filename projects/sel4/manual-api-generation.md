@@ -200,7 +200,7 @@ descriptions in the XML files listed above. The XML language with which
 the interfaces are described contains tags for documenting functions.
 For the purpose of validation, the XML schema defining this language is
 in:
-[libsel4/tools/sel4_idl.dtd](https://github.com/seL4/seL4/blob/master/libsel4/tools/sel4_idl.dtd).
+[libsel4/tools/sel4_idl.xsd](https://github.com/seL4/seL4/blob/master/libsel4/tools/sel4_idl.xsd).
 This is a superset of the XML tags used in doxygen comments. The doxygen
 comment tags described above have the same meaning in the interface
 description files. Additional tags are used for the description and
