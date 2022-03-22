@@ -14,7 +14,7 @@ Ask on the [mailing list][mailing-list] or open an issue if something doesn't ma
 
 We've tried to make sure the hosted site is [WCAG 2.0 AA](https://www.w3.org/TR/WCAG20/) compliant.  Please let us know if we have missed something.  [This is how we test it.](#wcag-2.0-aa-conformance)
 
-[mailing-list]: https://sel4.systems/lists/listinfo/
+[mailing-list]: https://lists.sel4.systems/postorius/lists/
 
 ## Diagnosing a problem
 

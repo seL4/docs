@@ -11,9 +11,9 @@ Private mailing lists have a restricted set of receivers.
 
 ## Public mailing lists:
 
-  - [announce@sel4.systems](https://sel4.systems/lists/listinfo/announce): For announcements about seL4.
+  - [announce@sel4.systems](https://lists.sel4.systems/postorius/lists/announce.sel4.systems/): For announcements about seL4.
     Sending to this list is restricted.
-  - [devel@sel4.systems](https://sel4.systems/lists/listinfo/devel): For asking questions about seL4.
+  - [devel@sel4.systems](https://lists.sel4.systems/postorius/lists/devel.sel4.systems/): For asking questions about seL4.
 
 ## Private mailing lists
 
