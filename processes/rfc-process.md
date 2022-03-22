@@ -43,7 +43,7 @@ to keep track of and contribute to discussion
 on each of the RFCs.
 
 [RFC dashboard]: https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100 "RFC dashboard"
-[RFC announcement mailing list]: https://sel4.systems/lists/listinfo/rfc "RFC announcement mailing list"
+[RFC announcement mailing list]: https://lists.sel4.systems/postorius/lists/rfc.sel4.systems/ "RFC announcement mailing list"
 
 
 ## When to follow the RFC process
@@ -130,7 +130,7 @@ After discussion, RFCs will ultimately be approved, postponed, or rejected by
 a decision of the [Technical Steering Committee][TSC] of the seL4 Foundation.
 
 [seL4 Mattermost]: https://mattermost.trustworthy.systems/sel4-external/ "seL4 Mattermost"
-[development mailing list]: https://sel4.systems/lists/listinfo/devel "seL4 development mailing list"
+[development mailing list]: https://lists.sel4.systems/postorius/lists/devel.sel4.systems/ "seL4 development mailing list"
 [TSC]: https://sel4.systems/Foundation/TSC/
 
 
