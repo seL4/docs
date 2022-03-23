@@ -49,7 +49,7 @@ are currently maintained to support the seL4 ecosystem:
 
 - [CapDL](/projects/capdl): {{site.data.projects["capdl"].description}}.
 
-- Virtualization with [camkes-vm](/projects/camkes-vm) and [camkes-arm-vm](/projects/camkes-arm-vm): x86 and Arm Virtual Machines built as a CAmkES component.
+- Virtualization with [camkes-vm](/projects/camkes-vm): x86 and Arm Virtual Machines built as a CAmkES component.
 
 - [sel4-tutorials](/projects/sel4-tutorials): {{site.data.projects["sel4-tutorials"].description}}.
 

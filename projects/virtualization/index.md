@@ -23,7 +23,6 @@ Refer to each library to see further documentation regarding their features and 
 
 Multiple projects exist that make use of our virtualisation infrastructure on seL4. These include:
 
-* [ARM virtualisation](/projects/camkes-arm-vm)
-* [x86 virtualisation](/projects/camkes-vm)
+* [x86 and Arm virtualisation](/projects/camkes-vm)
     * [CentOS](/projects/camkes-vm/centos)
 
