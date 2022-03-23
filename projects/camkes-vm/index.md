@@ -7,10 +7,13 @@ project: camkes-vm
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+# CAmkES VMM
 
-# CAmkES x86 VM
+{% include include_github_repo_markdown.md repo='sel4/camkes-vm-examples' file='README.md' %}
 
-## Prerequisites
+## CAmkES x86 VM
+
+### Prerequisites
 
 * Get the dependencies for building CAmkES by following
 the instructions [here](HostDependencies#camkes-build-dependencies)
@@ -19,7 +22,7 @@ the instructions [here](HostDependencies#camkes-build-dependencies)
   newer i7 core should have Vt-x. Note that you might have to enable it
   first from BIOS. You can always check by `lscpu` and look for **vmx** flag.
 
-## Tutorials
+### Tutorials
 
 Use the following tutorials to learn about the VM:
 
@@ -31,13 +34,13 @@ Use the following tutorials to learn about the VM:
 {%- endfor %}
 
 
-## Examples
+### Examples
 
 - [Centos](centos)
 - [zmq_samples](zmq-samples)
 
 
-## Booting from hard drive
+### Booting from hard drive
 
 
 These instructions are for ubuntu. For CentOS instructions, see
@@ -62,7 +65,7 @@ buildroot one used thus far. We'll use the same kernel image as before,
 as our vm requires that PAE be turned off, and it's on by default in the
 ubuntu kernel.
 
-### Getting the initrd image
+#### Getting the initrd image
 
 
 We need to generate a root filesystem image suitable for ubuntu. Ubuntu
@@ -210,7 +213,7 @@ ertos-CMA34CR login:
 
 You should be able to log in and use the system largely as normal.
 
-## Passthrough Ethernet
+### Passthrough Ethernet
 
 
 The ethernet device is not accessible to the guest:
@@ -302,7 +305,7 @@ PING google.com (172.217.25.142) 56(84) bytes of data.
 64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=4 ttl=51 time=2.20 ms
 ```
 
-## Figuring out information about PCI devices
+### Figuring out information about PCI devices
 
 
 To add a new passthrough device, or access a pci device in general, we
@@ -311,7 +314,7 @@ with, and the physical addresses of any memory-mapped io regions it
 uses. The easiest way to find this information is to boot linux
 natively, and run the command `lspci -vv`.
 
-## Configuring a Linux kernel build
+### Configuring a Linux kernel build
 
 We provide a custom kernel image with our CAmkES VM project, found [here](https://github.com/seL4/camkes-vm-linux/tree/master/images/kernel).
 This kernel image is produced from building Linux 4.8.16, specifically configured with the following [.config file](https://github.com/seL4/camkes-vm-linux/tree/master/linux_configs/4.8.16).
