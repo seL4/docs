@@ -72,7 +72,7 @@ Languages and styleguides that are used:
 - Makefile: tabs not spaces.
 
 ### Code review process
-Someone who is familiar with the source will review your changes.  They may request changes or have questions.  
+Someone who is familiar with the source will review your changes.  They may request changes or have questions.
 If no more feedback is required, we will likely approve and then merge the PR.
 
 
