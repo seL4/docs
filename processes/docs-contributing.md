@@ -30,7 +30,7 @@ The sort of contributions that we are looking for are:
 
 For reporting issues about a particular project, please use the relevant repository's issue tracker or post on the [Devel mailing list][mailing-list].
 
-[mailing-list]: https://lists.sel4.systems/postorius/lists/
+[mailing-list]: https://lists.sel4.systems/postorius/lists/devel.sel4.systems/
 
 As a reminder, all contributors are expected to follow our [Code of Conduct][conduct].
 
