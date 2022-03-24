@@ -3,13 +3,13 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-03-24 03:18:34 +0000 -->
+<!-- Page last generated 2022-03-24 03:24:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAmkES x86 VM | seL4 docs</title>
+    <title>CAmkES VMM | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">CAmkES x86 VM</span>
+            <span property="name">CAmkES VMM</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -243,14 +243,6 @@
 
     
         <li class="">
-            <a class="" href="/projects/camkes-arm-vm/">camkes-arm-vm</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
             <a class="" href="/projects/virtualization/">Virtualization</a>
         <li>
   
@@ -312,9 +304,294 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="camkes-x86-vm">CAmkES x86 VM</h1>
+    <h1 id="camkes-vmm">CAmkES VMM</h1>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<!--
+  Copyright 2020, Data61, CSIRO (ABN 41 687 119 230)
+
+  SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
+<h1 id="camkes-vm-apps">camkes-vm-apps</h1>
+
+<p>This project is for running virtualised Linux guests on seL4 for ARM and x86 platforms. The <code class="highlighter-rouge">camkes-vm</code> implements
+a virtual machine monitor (VMM) server, faciliating the intialisation, booting and run-time management of a guest OS.
+You can view the code for the VMMs in the <code class="highlighter-rouge">camkes-vm</code> repository under <code class="highlighter-rouge">VM_Arm</code> and <code class="highlighter-rouge">VM</code>.</p>
+
+<p>Currently the supported platforms include:</p>
+<ul>
+  <li>Exynos5 (exynos5410, exynos5422)</li>
+  <li>TK1</li>
+  <li>TX1</li>
+  <li>TX2</li>
+  <li>QEMU ARM virt machine</li>
+  <li>x86</li>
+  <li>x86_64 (coming)</li>
+</ul>
+
+<h2 id="getting-and-building">Getting and Building</h2>
+<p>The following example builds the camkes arm vmm for the TK1.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/camkes-vm-examples-manifest.git
+repo <span class="nb">sync
+mkdir </span>build
+<span class="nb">cd </span>build
+../init-build.sh <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>vm_minimal <span class="nt">-DPLATFORM</span><span class="o">=</span>tk1
+ninja
+</code></pre></div></div>
+<p><em>Note: To buid for another platform you can substitute the value of the <code class="highlighter-rouge">-DPLATFORM</code> variable e.g. (exynos5422, tx1, tx2, qemu-arm-virt)</em>
+<em>Note: If building for x86 you don’t need to specify the <code class="highlighter-rouge">-DPLATFORM</code> variable</em></p>
+
+<h3 id="for-arm">For Arm</h3>
+<p>An EFI application file will be left in <code class="highlighter-rouge">images/capdl-loader-image-arm-tk1</code> We normally boot using TFTP, by first copying <code class="highlighter-rouge">capdl-loader-image-arm-tk1</code> to a tftpserver then on the U-Boot serial console doing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp tftpboot <span class="nv">$loadaddr</span>
+/capdl-loader-image-arm-tk1
+bootefi <span class="k">${</span><span class="nv">loadaddr</span><span class="k">}</span>
+</code></pre></div></div>
+
+<h3 id="for-x86">For x86</h3>
+<p>Boot images/kernel-x86_64-pc99 and images/capdl-loader-experimental-image-x86_64-pc99 (or *.ia32-pc99 if built for 32-bit) with the multiboot boot loader of your choice.</p>
+
+<h2 id="camkes-arm-vmm-applications">CAmkES ARM VMM Applications</h2>
+<p>This project contains various reference CAmkES applications that incorporate the VMM component. These applications include:</p>
+<ul>
+  <li><code class="highlighter-rouge">vm_minimal</code>: A simple VMM application, launching a single guest Linux with a buildroot RAM-based file system</li>
+  <li><code class="highlighter-rouge">vm_cross_connector</code>: Application demonstrating communication between a Linux guest user-level process and a native seL4 component. This leveraging
+cross vm communication channels established between the VMM and the seL4 component.</li>
+  <li><code class="highlighter-rouge">vm_multi</code>: Application demonstrating running multiple guest VM’s. This is achieved through having multiple VMM components, each managing a single
+Linux guest (1-1 model).</li>
+  <li><code class="highlighter-rouge">vm_serial_server</code>: Application demonstrating the use of Virtio Console, where a VM’s serial I/O is forwarded to/from a serial server.</li>
+  <li><code class="highlighter-rouge">vm_virtio_net</code>: Application demonstrating the use of Virtio Net, where a virtual network interface is presented to a VM and subsequent network
+traffic on the virtual network interface is sent to/from other native seL4 components.</li>
+</ul>
+
+<p>See the <code class="highlighter-rouge">apps/Arm/</code> subdirectory for all the supported virtual machine manager apps, their implementations and the platforms they target.</p>
+
+<h2 id="camkes-x86-vmm-applications">CAmkES x86 VMM Applications</h2>
+
+<ul>
+  <li>
+    <p>The <code class="highlighter-rouge">minimal</code> application is simple CAmkES VM application. The application is configured with:</p>
+  </li>
+  <li>
+    <p><em>1 Guest Linux VM:</em> The Linux guest is a <a href="https://buildroot.org/">buildroot</a> built image sourced from the <a href="https://github.com/seL4/camkes-vm">the camkes-vm repo</a>. The Linux images (rootfs and kernel) are defined in the <code class="highlighter-rouge">CMakeLists.txt</code> file of the <code class="highlighter-rouge">minimal</code> application. In the <code class="highlighter-rouge">CMakeLists.txt</code> file we are able to find that the rootfs and kernel images  are added to the <code class="highlighter-rouge">FileServer</code> under the names <code class="highlighter-rouge">"rootfs.cpio"</code> and  <code class="highlighter-rouge">"bzimage"</code> respectively.</p>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">optiplex9020</code> VM application is configured with:</p>
+  </li>
+  <li><em>2 Guest Linux VM’s:</em> The Linux guests are <a href="https://buildroot.org/">buildroot</a> built images sourced from the <a href="https://github.com/seL4/camkes-vm">the camkes-vm repo</a>.</li>
+  <li><em>Cross VM Connectors:</em> To demo the use of cross-vm connectors a series of shared dataports and events are established between <code class="highlighter-rouge">vm0</code> and the <code class="highlighter-rouge">StringReverse</code> component. The <code class="highlighter-rouge">StringReverse</code> demo can be invoked from the command-line of <code class="highlighter-rouge">vm0</code>:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Welcome to Buildroot
+ buildroot login: root
+ Password:
+ \# string_reverse
+ [   19.739028] dataport received mmap for minor 1
+ [   19.743337] dataport received mmap for minor 2
+ hello
+ olleh
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">cma34cr_centos</code> application is a more complex CAmkES VM configuration demonstrating the use of passthrough hardware. The <code class="highlighter-rouge">cma34cr_centos</code> application is configured with:</p>
+  </li>
+  <li><em>1 Guest Linux VM:</em> The Linux guest images (<code class="highlighter-rouge">bzimage</code> and <code class="highlighter-rouge">roofs.cpio</code>) are located in the applications directory (<code class="highlighter-rouge">cma34cr_centos/centos_linux</code>), originally sourced from an i386 altarch CentOS-7 installation. Additionally the CentosOS installation should be on a flash drive passed-through to the <code class="highlighter-rouge">cma34cr</code> application. Further information regarding the Linux installation can be found in the applications <a href="https://github.com/seL4/camkes-vm-examples/blob/master/apps/x86/cma34cr_centos/README.md">README</a>.</li>
+  <li><em>Cross VM Connectors:</em> A series of shared dataports and events are established between <code class="highlighter-rouge">vm0</code> and the <code class="highlighter-rouge">StringReverse</code> component.</li>
+  <li><em>Ethernet Driver, UDPSever, Echo, Firewall:</em> A passthrough ethernet configuration demo. The guest VM is configured to use the Ethernet driver component through a virtio configuration.</li>
+  <li>
+    <p><em>Passthrough hardware storage (SATA/USB)</em>: A hardware configuration to boot the CentOS installation.</p>
+  </li>
+  <li>The <code class="highlighter-rouge">zmq_samples</code> application demonstrates messaging between VMs using the ZeroMQ messaging library.
+See the README.md in its folder for more information.</li>
+</ul>
+
+<p>See the <code class="highlighter-rouge">apps/x86/</code> subdirectory for all the supported virtual machine manager apps, their implementations and the platforms they target.</p>
+
+<h2 id="arm-features">Arm Features</h2>
+<p>See the below feature matrix for the various features the CAmkES ARM VMM implements/facilitates across the various supported platforms.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Plaform</th>
+      <th style="text-align: center">Guest Mode</th>
+      <th style="text-align: center">SMP Support</th>
+      <th style="text-align: center">Multiple VM Support</th>
+      <th style="text-align: center">Virtio PCI</th>
+      <th style="text-align: center">Virtio Console</th>
+      <th style="text-align: center">Virtio Net</th>
+      <th style="text-align: center">Cross VM Connector Support</th>
+      <th style="text-align: center"><em>Notes</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">exynos5422</td>
+      <td style="text-align: center">32-bit</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">SMP configurations are unsupported due to: * No exynos5422 kernel SMP support * No virtual power device interface to manage VCPU’s at runtime (e.g. core startup)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TK1</td>
+      <td style="text-align: center">32-bit</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">SMP configurations are unsupported due to: * No TK1 kernel SMP support * No virtual power device interface to manage VCPU’s at runtime (e.g. core startup) Virtio PCI, Console, Net, Cross VM connector support &amp; Multi-VM are untested</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TX1</td>
+      <td style="text-align: center">64-bit</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Virtio PCI, Console, Net, Cross VM connector support &amp; Multi-VM are untested</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TX2</td>
+      <td style="text-align: center">64-bit</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Cross VM connector support is untested</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">QEMU Virt</td>
+      <td style="text-align: center">64-bit</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Multi-VM support depends on porting the TimeServer to QEMU (See https://github.com/sel4/global-components/tree/master/components/TimeServer)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm-platform-configuration-notes">Arm Platform Configuration Notes</h2>
+
+<h3 id="exynos5422-tx1-tx2-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, QEMU ARM Virt configuration</h3>
+<p>We provide a pre-built Linux image and Buildroot image for our guest VM’s. See the images in the <code class="highlighter-rouge">camkes-vm-images</code> repository @ https://github.com/sel4/camkes-vm-images
+When compiling an application for these platforms, the images are sourced from the platforms subdirectory in the <code class="highlighter-rouge">camkes-vm-images</code> repo.
+Feel free also to compile your own Linux and Rootfs images, see the README’s in each platform subdirectory (within <code class="highlighter-rouge">camkes-vm-images</code>) for information about our
+image build configurations.</p>
+
+<h3 id="tk1-configuration">TK1 configuration</h3>
+
+<p>We currently provide two linux binaries and two device tree configurations.</p>
+<ul>
+  <li><code class="highlighter-rouge">linux-tk1-debian</code> will try and load a debian userspace off of an emmc partition</li>
+  <li><code class="highlighter-rouge">linux-tk1-initrd</code> will load an included buildroot ramdisk</li>
+  <li><code class="highlighter-rouge">linux-tk1-secure.dts</code> is a device tree configuration with the devices that aren’t provided to the linux are disabled.</li>
+  <li><code class="highlighter-rouge">linux-tk1-nonsecured.dts</code> is a device tree configuration with all devices enabled.</li>
+</ul>
+
+<p>In the tk1 app configuration there is a <code class="highlighter-rouge">boot mode selection</code> option that chooses between the two linux binaries, and
+an <code class="highlighter-rouge">Insecure</code> option which selects whether to provide all hardware devices to the linux vm or not. If <code class="highlighter-rouge">Insecure</code> is not set
+then the VM will only be provided a minimal amount of hardware frames and the <code class="highlighter-rouge">linux-tk1-secure.dts</code> DTS will be used.  If <code class="highlighter-rouge">Insecure</code>
+is set then the VM will be provided all device frames apart from the Memory controller and the <code class="highlighter-rouge">linux-tk1-nonsecured.dts</code> DTS will be used.</p>
+
+<p>U-Boot is required to initialise the USB devices if <code class="highlighter-rouge">linux-tk1-secure.dts</code> is used.  This is done by: <code class="highlighter-rouge">usb start 0</code>.</p>
+
+<p>The tk1 currently uses linux binaries constructed using <a href="https://buildroot.org/downloads/">Buildroot 2016.08.1</a> with the following configs:</p>
+<ul>
+  <li><code class="highlighter-rouge">buildroot_tk1_initrd_defconfig</code> builds linux with an included ramdisk that will be loaded at boot.</li>
+  <li><code class="highlighter-rouge">buildroot_tk1_emmc_defconfig</code> builds linux without a ramdisk and it will mount and run /sbin/init /dev/mmcblk0p2</li>
+</ul>
+
+<p>To copy the files back into this project, change into the Linux directory and run make for each file as shown below. <strong>Note that you can only
+update one of linux-tk1-debian or linux-tk1-initrd at a time as they are built from different Buildroot configs</strong>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd projects/vm/linux
+LINUX_FILE=linux-tk1-initrd BUILDROOT_DIR=~/workspaces/buildroot-2016.08.1/ make
+LINUX_FILE=linux-tk1-dtb-secure BUILDROOT_DIR=~/workspaces/buildroot-2016.08.1/ make
+</code></pre></div></div>
+
+<p>Both of these configs use the tegra124-jetson-tk1-sel4vm-secure device tree file.
+To change to the tegra124-jetson-tk1-sel4vm.dts this will need to be changed in the buildroot make menuconfig.
+To change the mounted emmc partition the chosen dts file’s bootargs entry will need to be updated.</p>
+
+<p>The linux version used can be found in the seL4 branch of our <a href="https://github.com/SEL4PROJ/linux-tegra/tree/sel4">linux-tegra repo</a>.</p>
+
+<p>When buildroot starts:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>buildroot login: root
+#
+</code></pre></div></div>
+<p>When debian starts:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Debian GNU/Linux 8 tk1 ttyS0
+tk1 login: root
+Password: root
+root@tk1:~#
+</code></pre></div></div>
+
+<h4 id="wireless-configuration">Wireless Configuration</h4>
+<p>To configure the Ralink 2780 USB wifi dongle:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig wlan0 up
+iw wlan0 scan
+wpa_passphrase SSID_NAME &gt;&gt; /etc/wpa_supplicant.conf
+  ENTER_SSID_PASSPHRASE
+wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf
+iw wlan0 link
+dhclient wlan0
+</code></pre></div></div>
+
+<h3 id="tk1-build-notes">TK1 Build Notes</h3>
+<p>The default setup does not pass though many devices to the Linux kernel. If you <code class="highlighter-rouge">make menuconfig</code> you can set <code class="highlighter-rouge">insecure</code> mode in the <code class="highlighter-rouge">Applications</code> submenu; this is meant to pass through all devices, but not
+everything has been tested and confirmed to work yet. In particular, the SMMU needs to have extra entries added for any DMA-capable devices such as SATA.</p>
+
+<h2 id="arm-faq-and-implementation-notes">Arm FAQ and Implementation Notes</h2>
+
+<h4 id="how-do-i-update-camkes-vm-apps-to-support-platform-x">How do I update camkes-vm-apps to support platform ‘X’</h4>
+<p>Whilst large parts of the ARM VMM implementation tries to be platform agnostic, there are a few things to keep in mind and implement in order to correctly run the camkes-arm-vm on your new target platform.
+See the below list as as a rough list of items to check off:</p>
+<ul>
+  <li>Ensure the platform is already supported by seL4 (or you have developed support for the platform prior). See the <a href="/Hardware/">following</a> page for a list of supported platforms.</li>
+  <li>The platform supports ARM’s hardware virtualisation features, these being found on ARMv7 (with virtualisation extensions) and ARMv8.
+    <ul>
+      <li>Second to this, the seL4 port to the given platform also supports running with <code class="highlighter-rouge">KernelArmHypervisorSupport</code></li>
+    </ul>
+  </li>
+  <li>Does your platform use a GICv2 or GICv3? <em>Note: We currently only support a virtual GICV2, with virtual GICV3 support under-development. See the listed features of libsel4vm for further information: https://github.com/sel4/seL4_projects_libs/tree/master/libsel4vm</em></li>
+  <li>When porting a VMM application to your platform, say <code class="highlighter-rouge">vm_minimal</code>, ensure you provide the following:
+    <ul>
+      <li>A <code class="highlighter-rouge">devices.camkes</code> file for your platform. These containing platform specific definitions, see in particular the vm <code class="highlighter-rouge">dtb</code> field and the <code class="highlighter-rouge">untyped_mmios</code> field (for device passthrough). The values in the aforementioned fields corresponding with those found in the kernel device tree.</li>
+      <li>A <code class="highlighter-rouge">vmlinux.h</code> header for you platform. See the header file for the other supported platforms at <code class="highlighter-rouge">components/VM_Arm/plat_include</code> in <code class="highlighter-rouge">camkes-vm</code> repository.</li>
+    </ul>
+  </li>
+  <li>Provide a pre-compiled Linux kernel and initrd image for your platform. Once compiled these are usually linked in through your apps <code class="highlighter-rouge">CMakeLists.txt</code>. See <code class="highlighter-rouge">apps/Arm/vm_minimal/CMakeLists.txt</code> for examples of how other platforms link in their images.</li>
+</ul>
+
+<p>Feel free to contact the <a href="/processes/#contact">team</a> for further support on porting the camkes-arm-vm to your desired platform. We are also always open to contributions for new platforms.</p>
+
+<h4 id="can-a-single-vmm-component-support-running-multiple-vms">Can a single VMM component support running multiple VM’s?</h4>
+<p>Currently, No. A VMM component only creates and manages a single VM instance.
+To support multiple VM’s, you can run multiple VMM components, each managing its own VM. See <code class="highlighter-rouge">apps/vm_multi</code> for an example of this configuration.</p>
+
+<h4 id="how-do-i-enable-smp-support-for-a-vm-instance">How do I enable SMP support for a VM instance?</h4>
+<p>To configure your VM with multiple VCPU’s, you can set the VM instance attribute <code class="highlighter-rouge">num_vcpus</code> in your camkes configuration. See <a href="https://github.com/sel4/camkes-vm-apps/blob/master/apps/Arm/vm_minimal/tx2/devices.camkes#L40">here</a> for an example.
+In addition, when initialising your build, ensure the <code class="highlighter-rouge">KernelMaxNumNodes</code> configuration option is set to your desired value. You can also initialise your build with variable <code class="highlighter-rouge">-DNUM_NODES</code> variable e.g.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build.sh <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>vm_minimal <span class="nt">-DPLATFORM</span><span class="o">=</span>tx2 <span class="nt">-DNUM_NODES</span><span class="o">=</span>4
+</code></pre></div></div>
+<p><em>Note: ensure your platform supports SMP configurations through the above feature matrix</em></p>
+
+<p><em>File included from <a href="https://github.com/sel4/camkes-vm-examples/blob/master/README.md">github repo</a> <a href="https://github.com/sel4/camkes-vm-examples/edit/master/README.md">edit</a></em></p>
+
+<h2 id="camkes-x86-vm">CAmkES x86 VM</h2>
+
+<h3 id="prerequisites">Prerequisites</h3>
 
 <ul>
   <li>Get the dependencies for building CAmkES by following
@@ -325,7 +602,7 @@ newer i7 core should have Vt-x. Note that you might have to enable it
 first from BIOS. You can always check by <code class="highlighter-rouge">lscpu</code> and look for <strong>vmx</strong> flag.</li>
 </ul>
 
-<h2 id="tutorials">Tutorials</h2>
+<h3 id="tutorials">Tutorials</h3>
 
 <p>Use the following tutorials to learn about the VM:</p>
 
@@ -334,14 +611,14 @@ first from BIOS. You can always check by <code class="highlighter-rouge">lscpu</
   <li><a href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a> walkthrough of adding communication between Linux guests in separate VMs.</li>
 </ol>
 
-<h2 id="examples">Examples</h2>
+<h3 id="examples">Examples</h3>
 
 <ul>
   <li><a href="centos">Centos</a></li>
   <li><a href="zmq-samples">zmq_samples</a></li>
 </ul>
 
-<h2 id="booting-from-hard-drive">Booting from hard drive</h2>
+<h3 id="booting-from-hard-drive">Booting from hard drive</h3>
 
 <p>These instructions are for ubuntu. For CentOS instructions, see
 <a href="CAmkESVMCentOS">CAmkESVMCentOS</a>.</p>
@@ -365,7 +642,7 @@ buildroot one used thus far. We’ll use the same kernel image as before,
 as our vm requires that PAE be turned off, and it’s on by default in the
 ubuntu kernel.</p>
 
-<h3 id="getting-the-initrd-image">Getting the initrd image</h3>
+<h4 id="getting-the-initrd-image">Getting the initrd image</h4>
 
 <p>We need to generate a root filesystem image suitable for ubuntu. Ubuntu
 ships with a tool called mkinitramfs which generates root filesystem
@@ -503,7 +780,7 @@ ertos-CMA34CR login:
 
 <p>You should be able to log in and use the system largely as normal.</p>
 
-<h2 id="passthrough-ethernet">Passthrough Ethernet</h2>
+<h3 id="passthrough-ethernet">Passthrough Ethernet</h3>
 
 <p>The ethernet device is not accessible to the guest:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ip addr
@@ -591,7 +868,7 @@ PING google.com (172.217.25.142) 56(84) bytes of data.
 64 bytes from syd15s03-in-f14.1e100.net (172.217.25.142): icmp_seq=4 ttl=51 time=2.20 ms
 </code></pre></div></div>
 
-<h2 id="figuring-out-information-about-pci-devices">Figuring out information about PCI devices</h2>
+<h3 id="figuring-out-information-about-pci-devices">Figuring out information about PCI devices</h3>
 
 <p>To add a new passthrough device, or access a pci device in general, we
 need to know which io ports it uses, which interrupts it’s associated
@@ -599,7 +876,7 @@ with, and the physical addresses of any memory-mapped io regions it
 uses. The easiest way to find this information is to boot linux
 natively, and run the command <code class="highlighter-rouge">lspci -vv</code>.</p>
 
-<h2 id="configuring-a-linux-kernel-build">Configuring a Linux kernel build</h2>
+<h3 id="configuring-a-linux-kernel-build">Configuring a Linux kernel build</h3>
 
 <p>We provide a custom kernel image with our CAmkES VM project, found <a href="https://github.com/seL4/camkes-vm-linux/tree/master/images/kernel">here</a>.
 This kernel image is produced from building Linux 4.8.16, specifically configured with the following <a href="https://github.com/seL4/camkes-vm-linux/tree/master/linux_configs/4.8.16">.config file</a>.</p>
@@ -639,17 +916,48 @@ CONFIG_VIRTIO_NET=y
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
     <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#tutorials">Tutorials</a></li>
-<li class="toc-entry toc-h2"><a href="#examples">Examples</a></li>
-<li class="toc-entry toc-h2"><a href="#booting-from-hard-drive">Booting from hard drive</a>
+<li class="toc-entry toc-h2"><a href="#getting-and-building">Getting and Building</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#getting-the-initrd-image">Getting the initrd image</a></li>
+<li class="toc-entry toc-h3"><a href="#for-arm">For Arm</a></li>
+<li class="toc-entry toc-h3"><a href="#for-x86">For x86</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#passthrough-ethernet">Passthrough Ethernet</a></li>
-<li class="toc-entry toc-h2"><a href="#figuring-out-information-about-pci-devices">Figuring out information about PCI devices</a></li>
-<li class="toc-entry toc-h2"><a href="#configuring-a-linux-kernel-build">Configuring a Linux kernel build</a></li>
+<li class="toc-entry toc-h2"><a href="#camkes-arm-vmm-applications">CAmkES ARM VMM Applications</a></li>
+<li class="toc-entry toc-h2"><a href="#camkes-x86-vmm-applications">CAmkES x86 VMM Applications</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-features">Arm Features</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-platform-configuration-notes">Arm Platform Configuration Notes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#exynos5422-tx1-tx2-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, QEMU ARM Virt configuration</a></li>
+<li class="toc-entry toc-h3"><a href="#tk1-configuration">TK1 configuration</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#wireless-configuration">Wireless Configuration</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#tk1-build-notes">TK1 Build Notes</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#arm-faq-and-implementation-notes">Arm FAQ and Implementation Notes</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#how-do-i-update-camkes-vm-apps-to-support-platform-x">How do I update camkes-vm-apps to support platform ‘X’</a></li>
+<li class="toc-entry toc-h4"><a href="#can-a-single-vmm-component-support-running-multiple-vms">Can a single VMM component support running multiple VM’s?</a></li>
+<li class="toc-entry toc-h4"><a href="#how-do-i-enable-smp-support-for-a-vm-instance">How do I enable SMP support for a VM instance?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#camkes-x86-vm">CAmkES x86 VM</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h3"><a href="#tutorials">Tutorials</a></li>
+<li class="toc-entry toc-h3"><a href="#examples">Examples</a></li>
+<li class="toc-entry toc-h3"><a href="#booting-from-hard-drive">Booting from hard drive</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#getting-the-initrd-image">Getting the initrd image</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#passthrough-ethernet">Passthrough Ethernet</a></li>
+<li class="toc-entry toc-h3"><a href="#figuring-out-information-about-pci-devices">Figuring out information about PCI devices</a></li>
+<li class="toc-entry toc-h3"><a href="#configuring-a-linux-kernel-build">Configuring a Linux kernel build</a></li>
+</ul>
+</li>
 </ul>
 </div>
 
@@ -723,6 +1031,13 @@ CONFIG_VIRTIO_NET=y
         <h3>Recent Updates</h3>
     
         <li>
+          <a style="" href="/updates/camkes-vm/camkes-3.8.x-arm-old.html">
+            camkes-3.8.x-compatible-arm-old
+          </a>
+        </li>
+
+    
+        <li>
           <a style="" href="/updates/camkes-vm/camkes-3.8.x.html">
             camkes-3.8.x-compatible
           </a>
@@ -763,10 +1078,10 @@ CONFIG_VIRTIO_NET=y
         </li>
         
           <li>
-            Site last updated: Wed Mar 23 12:37:08 2022 +1100 3bcc345
+            Site last updated: Thu Mar 24 14:19:51 2022 +1100 461e5e0
           </li>
           <li>
-                Page last updated: Wed Mar 23 12:37:08 2022 +1100 3bcc345
+                Page last updated: Thu Mar 24 14:19:51 2022 +1100 461e5e0
           </li>
         
       </ul>
