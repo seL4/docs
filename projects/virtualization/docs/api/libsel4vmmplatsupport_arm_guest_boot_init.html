@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-05-08 23:52:42 +0000 -->
+<!-- Page last generated 2022-05-09 03:38:17 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -351,19 +351,40 @@ a VM instance. This currently only targets booting a Linux guest OS.</p>
 
 <h3 id="function-vcpu_set_bootargsvcpu-pc-mach_type-atags">Function <code class="highlighter-rouge">vcpu_set_bootargs(vcpu, pc, mach_type, atags)</code></h3>
 
-<p>Set the boot args and pc for the VM.
-For linux:
-r0 -&gt; 0
-r1 -&gt; MACH_TYPE  (e.g #4151 for EXYNOS5410 eval. platform smdk5410)
-r2 -&gt; atags/dtb address</p>
+<p>Set the boot args and pc for the VM. The Linux kernel documentation contains a detailed description about
+the boot ABI for <a href="https://www.kernel.org/doc/Documentation/arm/Booting">AARCH32</a> and
+<a href="https://www.kernel.org/doc/Documentation/arm64/booting.txt">AARCH64</a></p>
+
+<p>The register setup for the booting core on AARCH32 is</p>
+
+<ul>
+  <li><code class="highlighter-rouge">r0</code> = <code class="highlighter-rouge">0</code></li>
+  <li><code class="highlighter-rouge">r1</code> = <code class="highlighter-rouge">MACH_TYPE</code></li>
+  <li><code class="highlighter-rouge">r2</code> = ATAGS or FTD/DTB address</li>
+</ul>
+
+<p>For AARCH64 it is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">x0</code> = FTD/DTB address</li>
+  <li><code class="highlighter-rouge">x1</code> = <code class="highlighter-rouge">0</code></li>
+  <li><code class="highlighter-rouge">x2</code> = <code class="highlighter-rouge">0</code></li>
+  <li><code class="highlighter-rouge">x3</code> = <code class="highlighter-rouge">0</code></li>
+</ul>
+
+<p>Passing a pointer to ATAGs is deprecated, modern kernels use a device tree that is passed as Flattened Device
+Tree (FDT), sometimes also called Device Tree Blob (DTB). The parameter <code class="highlighter-rouge">MACH_TYPE</code> contains a machine
+specific ID, various <code class="highlighter-rouge">MACH_TYPE_xxx</code> constants can be found in the
+<a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/arch/arm/tools/mach-types">Linux Source code at <code class="highlighter-rouge">arch/arm/tools/mach-types</code></a>
+FTDs usually contain all necessary information about the machine, so<code class="highlighter-rouge">-1</code> (<code class="highlighter-rouge">0xfff...fff</code>) can be passed.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
   <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the boot VCPU</li>
   <li><code class="highlighter-rouge">pc {seL4_Word}</code>: The initial PC for the VM</li>
-  <li><code class="highlighter-rouge">mach_type {seL4_Word}</code>: Linux specific machine ID see http://www.arm.linux.org.uk/developer/machines/</li>
-  <li><code class="highlighter-rouge">atags {seL4_Word}</code>: Linux specific IPA of atags. Can also be substituted with dtb address</li>
+  <li><code class="highlighter-rouge">mach_type {seL4_Word}</code>: Linux specific machine ID</li>
+  <li><code class="highlighter-rouge">atags {seL4_Word}</code>: Linux specific IPA of ATAGS or FTD/DTB address</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
