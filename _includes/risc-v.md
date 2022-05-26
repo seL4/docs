@@ -2,7 +2,6 @@
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% endcomment %}
-## Build the GCC toolchain
 
 1. It is recommended to build the toolchain from source.
 
