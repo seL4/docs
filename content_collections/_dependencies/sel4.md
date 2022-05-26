@@ -41,13 +41,17 @@ sudo apt-get install gcc-8 g++-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 ```
 
-To build for ARM targets you will need a cross compiler. In addition, to run seL4 projects on a simulator you will need `qemu`. Installation of these additional base dependencies include running:
+In order to run seL4 projects on a simulator you will need QEMU:
 
+```sh
+sudo apt-get install qemu-system-arm qemu-system-x86 qemu-system-misc
+```
+
+To build for ARM targets you will need a cross compiler:
 
 ```sh
 sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
 sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-sudo apt-get install qemu-system-arm qemu-system-x86 qemu-system-misc
 ```
 
 (you can install the hardware floating point versions as well if you wish)
