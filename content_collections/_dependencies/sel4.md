@@ -60,6 +60,10 @@ sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 ```
 
+To build for RISC-V targets you will need a cross compiler:
+
+{% include risc-v.md %}
+
 To build the seL4 manual, you will need the following LaTeX packages:
 
 ```sh

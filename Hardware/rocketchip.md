@@ -21,6 +21,8 @@ for other Zynq FPGAs. Refer to
 [https://github.com/ucb-bar/fpga-zynq](https://github.com/ucb-bar/fpga-zynq) for
 details.
 
+## Building the GCC toolchain
+
 {% include risc-v.md %}
 
 ## Building seL4test
