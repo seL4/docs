@@ -6,13 +6,13 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 ## CAmkES Build Dependencies
 
-To build a CAmkES based project on seL4, additional dependencies need to be installed on your host machine. Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools. The following instructions cover the CAmkES build dependencies for Ubuntu/Debian. Please ensure you have installed the dependencies listed in sections [sel4 Build Dependencies](#sel4-build-dependencies) and [Get Google's Repo tool](#get-googles-repo-tool) prior to building a CAmkES project.
+To build a CAmkES based project on seL4, additional dependencies need to be installed on your host machine. Projects using CAmkES (the seL4 component system) need Haskell and some extra Python libraries in addition to the standard build tools. The following instructions cover the CAmkES build dependencies for Ubuntu/Debian. Please ensure you have installed the dependencies listed in sections [seL4 Build Dependencies](#sel4-build-dependencies) and [Get Google's Repo tool](#get-googles-repo-tool) prior to building a CAmkES project.
 
 ### Python Dependencies
 
-The python dependencies required by the CAmkES build toolchain can be installed via pip:
+The Python dependencies required by the CAmkES build toolchain can be installed via pip:
 
-```
+```sh
 pip3 install --user camkes-deps
 # Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
 pip install --user camkes-deps
@@ -36,7 +36,7 @@ sudo apt-get install haskell-stack
 
 Install the following packages on your Ubuntu machine:
 
-```
+```sh
 sudo apt-get install clang gdb
 sudo apt-get install libssl-dev libclang-dev libcunit1-dev libsqlite3-dev
 sudo apt-get install qemu-kvm
