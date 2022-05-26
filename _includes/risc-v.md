@@ -15,7 +15,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
     make linux
     ```
 
-    After it is built, add the $RISCV/bin folder to your PATH. The built
+    After it is built, add the `$RISCV/bin` folder to your PATH. The built
     toolchain works for both 32-bit and 64-bit.
 
 2. Alternatively, any pre-built toolchain with multilib enabled should work.
