@@ -21,6 +21,8 @@ As dependencies and packages may be frequently changed, deprecated or updated th
 
 > *Note that we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: https://cmake.org/download/*
 
+**Base dependencies**
+
 The basic build package on Ubuntu is the `build-essential` package. To install run:
 
 ```sh
@@ -41,11 +43,15 @@ sudo apt-get install gcc-8 g++-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 ```
 
+**Simulating with QEMU**
+
 In order to run seL4 projects on a simulator you will need QEMU:
 
 ```sh
 sudo apt-get install qemu-system-arm qemu-system-x86 qemu-system-misc
 ```
+
+**Cross-compiling for ARM targets**
 
 To build for ARM targets you will need a cross compiler:
 
@@ -60,11 +66,15 @@ sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 ```
 
+**Cross-compiling for RISC-V targets**
+
 To build for RISC-V targets you will need a cross compiler:
 
 {% include risc-v.md %}
 
-To build the seL4 manual, you will need the following LaTeX packages:
+**Builidng the seL4 manual**
+
+If you would like to build the seL4 manual, you will need the following LaTeX pacakges:
 
 ```sh
 sudo apt-get install texlive texlive-latex-extra texlive-fonts-extra
