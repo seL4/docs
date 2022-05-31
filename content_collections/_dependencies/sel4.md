@@ -15,11 +15,11 @@ To establish a usable development environment it is important to install your di
 
 #### Ubuntu
 
-> *The following instructions cover the build dependencies tested on [Ubuntu 18.04](http://releases.ubuntu.com/18.04/) LTS. Note that earlier versions of Ubuntu (e.g. 16.04) may not be sufficient for building as some default development packages are
-stuck at older versions (e.g CMake 3.5.1, GCC 5.4 for 16.04).
-As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.*
+These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.
 
-> *Note that we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: https://cmake.org/download/*
+> *Note for Ubuntu 18.04: we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: [https://cmake.org/download/](https://cmake.org/download/)*
+
+> As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.
 
 **Base dependencies**
 
@@ -34,13 +34,25 @@ Additional base dependencies for building seL4 projects on Ubuntu include instal
 
 ```sh
 sudo apt-get install cmake ccache ninja-build cmake-curses-gui
-sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen device-tree-compiler
 sudo apt-get install u-boot-tools
+```
+
+For Ubuntu 18.04:
+
+```sh
+sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo apt-get install protobuf-compiler python-protobuf
 sudo apt-get install gcc-8 g++-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+```
+
+For Ubuntu 20.04 and 22.04:
+
+```sh
+sudo apt-get install python3-dev python3-pip python-is-python3
+sudo apt-get install protobuf-compiler python3-protobuf
 ```
 
 **Simulating with QEMU**
