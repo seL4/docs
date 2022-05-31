@@ -32,9 +32,10 @@ sudo apt-get install haskell-stack
 ### Build Dependencies
 
 ####  Ubuntu
-> *Tested on Ubuntu 18.04 LTS*
 
-Install the following packages on your Ubuntu machine:
+These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.
+
+Install the following packages:
 
 ```sh
 sudo apt-get install clang gdb
