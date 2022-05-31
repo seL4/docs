@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-05-31 03:39:35 +0000 -->
+<!-- Page last generated 2022-05-31 08:07:09 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -262,15 +262,17 @@
 
 <h4 id="ubuntu">Ubuntu</h4>
 
+<p>These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.</p>
+
 <blockquote>
-  <p><em>The following instructions cover the build dependencies tested on <a href="http://releases.ubuntu.com/18.04/">Ubuntu 18.04</a> LTS. Note that earlier versions of Ubuntu (e.g. 16.04) may not be sufficient for building as some default development packages are
-stuck at older versions (e.g CMake 3.5.1, GCC 5.4 for 16.04).
-As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new <a href="https://docs.sel4.systems/DocsContributing">contributions</a> to the page.</em></p>
+  <p><em>Note for Ubuntu 18.04: we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: <a href="https://cmake.org/download/">https://cmake.org/download/</a></em></p>
 </blockquote>
 
 <blockquote>
-  <p><em>Note that we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: https://cmake.org/download/</em></p>
+  <p>As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new <a href="https://docs.sel4.systems/DocsContributing">contributions</a> to the page.</p>
 </blockquote>
+
+<p><strong>Base dependencies</strong></p>
 
 <p>The basic build package on Ubuntu is the <code class="highlighter-rouge">build-essential</code> package. To install run:</p>
 
@@ -281,28 +283,72 @@ As dependencies and packages may be frequently changed, deprecated or updated th
 <p>Additional base dependencies for building seL4 projects on Ubuntu include installing:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>cmake ccache ninja-build cmake-curses-gui
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>python-dev python-pip python3-dev python3-pip
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>libxml2-utils ncurses-dev
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>curl git doxygen device-tree-compiler
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>u-boot-tools
+</code></pre></div></div>
+
+<p>For Ubuntu 18.04:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>python-dev python-pip python3-dev python3-pip
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>protobuf-compiler python-protobuf
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-8 g++-8
 <span class="nb">sudo </span>update-alternatives <span class="nt">--install</span> /usr/bin/gcc gcc /usr/bin/gcc-8 800 <span class="nt">--slave</span> /usr/bin/g++ g++ /usr/bin/g++-8
 </code></pre></div></div>
 
-<p>To build for ARM targets you will need a cross compiler. In addition, to run seL4 projects on a simulator you will need <code class="highlighter-rouge">qemu</code>. Installation of these additional base dependencies include running:</p>
+<p>For Ubuntu 20.04 and 22.04:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>python3-dev python3-pip python-is-python3
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>protobuf-compiler python3-protobuf
+</code></pre></div></div>
+
+<p><strong>Simulating with QEMU</strong></p>
+
+<p>In order to run seL4 projects on a simulator you will need QEMU:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>qemu-system-arm qemu-system-x86 qemu-system-misc
+</code></pre></div></div>
+
+<p><strong>Cross-compiling for ARM targets</strong></p>
+
+<p>To build for ARM targets you will need a cross compiler:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>qemu-system-arm qemu-system-x86 qemu-system-misc
 </code></pre></div></div>
 
-<p>(you can install  the hardware floating point versions as well if you wish”</p>
+<p>(you can install the hardware floating point versions as well if you wish)</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 </code></pre></div></div>
 
-<p>To build the seL4 manual, you will need the following LaTeX packages:</p>
+<p><strong>Cross-compiling for RISC-V targets</strong></p>
+
+<p>To build for RISC-V targets you will need a cross compiler:</p>
+
+<ol>
+  <li>
+    <p>It is recommended to build the toolchain from source.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git clone https://github.com/riscv/riscv-gnu-toolchain.git
+ <span class="nb">cd </span>riscv-gnu-toolchain
+ git submodule update <span class="nt">--init</span> <span class="nt">--recursive</span>
+ <span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span>/opt/riscv
+ ./configure <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span> <span class="nt">--enable-multilib</span>
+ make linux
+</code></pre></div>    </div>
+
+    <p>After it is built, add the <code class="highlighter-rouge">$RISCV/bin</code> folder to your PATH. The built
+ toolchain works for both 32-bit and 64-bit.</p>
+  </li>
+  <li>
+    <p>Alternatively, any pre-built toolchain with multilib enabled should work.</p>
+  </li>
+</ol>
+
+<p><strong>Builidng the seL4 manual</strong></p>
+
+<p>If you would like to build the seL4 manual, you will need the following LaTeX pacakges:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>texlive texlive-latex-extra texlive-fonts-extra
 </code></pre></div></div>
@@ -347,15 +393,15 @@ pip <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 
 <h2 id="camkes-build-dependencies">CAmkES Build Dependencies</h2>
 
-<p>To build a CAmkES based project on seL4, additional dependencies need to be installed on your host machine. Projects using CAmkES (the seL4 component system) need Haskell and some extra python libraries in addition to the standard build tools. The following instructions cover the CAmkES build dependencies for Ubuntu/Debian. Please ensure you have installed the dependencies listed in sections <a href="#sel4-build-dependencies">sel4 Build Dependencies</a> and <a href="#get-googles-repo-tool">Get Google’s Repo tool</a> prior to building a CAmkES project.</p>
+<p>To build a CAmkES based project on seL4, additional dependencies need to be installed on your host machine. Projects using CAmkES (the seL4 component system) need Haskell and some extra Python libraries in addition to the standard build tools. The following instructions cover the CAmkES build dependencies for Ubuntu/Debian. Please ensure you have installed the dependencies listed in sections <a href="#sel4-build-dependencies">seL4 Build Dependencies</a> and <a href="#get-googles-repo-tool">Get Google’s Repo tool</a> prior to building a CAmkES project.</p>
 
 <h3 id="python-dependencies">Python Dependencies</h3>
 
-<p>The python dependencies required by the CAmkES build toolchain can be installed via pip:</p>
+<p>The Python dependencies required by the CAmkES build toolchain can be installed via pip:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install --user camkes-deps
-# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
-pip install --user camkes-deps
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> camkes-deps
+<span class="c"># Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process</span>
+pip <span class="nb">install</span> <span class="nt">--user</span> camkes-deps
 </code></pre></div></div>
 
 <h3 id="haskell-dependencies">Haskell Dependencies</h3>
@@ -370,15 +416,14 @@ pip install --user camkes-deps
 <h3 id="build-dependencies">Build Dependencies</h3>
 
 <h4 id="ubuntu">Ubuntu</h4>
-<blockquote>
-  <p><em>Tested on Ubuntu 18.04 LTS</em></p>
-</blockquote>
 
-<p>Install the following packages on your Ubuntu machine:</p>
+<p>These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install clang gdb
-sudo apt-get install libssl-dev libclang-dev libcunit1-dev libsqlite3-dev
-sudo apt-get install qemu-kvm
+<p>Install the following packages:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>clang gdb
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>libssl-dev libclang-dev libcunit1-dev libsqlite3-dev
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>qemu-kvm
 </code></pre></div></div>
 
 <h4 id="debian">Debian</h4>
@@ -737,10 +782,10 @@ Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</p>
         </li>
         
           <li>
-            Site last updated: Thu May 19 15:45:01 2022 +1000 a5a19e6
+            Site last updated: Tue May 31 18:02:19 2022 +1000 d26e103
           </li>
           <li>
-                Page last updated: Thu May 19 15:45:01 2022 +1000 a5a19e6
+                Page last updated: Tue May 31 18:02:19 2022 +1000 d26e103
           </li>
         
       </ul>
