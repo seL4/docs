@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-07-05 03:47:03 +0000 -->
+<!-- Page last generated 2022-07-06 03:49:28 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -485,12 +485,45 @@ the following packages:</p>
     mlton-compiler haskell-stack
 </code></pre></div></div>
 
+<h3 id="macos-packages">macOS packages</h3>
+
+<p>These instructions use Homebrew, which can be installed from <a href="https://brew.sh">their website</a>.
+The main packages that are needed are:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install git libxml2 ncurses librsvg dtc cmake ninja texlive rysnc python ccache \
+    zstd haskell-stack
+</code></pre></div></div>
+
+<p>The installation of mlton on Apple silicon is currently not well supported. One
+approach would be to cross-compile mlton on another architecture and transfer it. On
+Intel machines, the following works:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install mlton
+</code></pre></div></div>
+
+<p>To install the cross-compilers, run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install --cask gcc-arm-embedded
+
+brew install arm-none-eabi-gcc
+
+brew tap messense/macos-cross-toolchains
+brew install x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu
+
+brew tap riscv/riscv
+brew install riscv-tools
+</code></pre></div></div>
+
+<p>Note that CMake will require the x86 compiler before it can be invoked.</p>
+
+<p>The instructions in the sections below should apply for both Linux and macOS.</p>
+
 <h3 id="python">Python</h3>
 
 <p>The build system for the seL4 kernel requires several python packages:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>pip3 <span class="nb">install</span> <span class="nt">--upgrade</span> pip
-<span class="nb">sudo </span>pip3 <span class="nb">install </span>sel4-deps
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--upgrade</span> pip
+pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 </code></pre></div></div>
 
 <h3 id="haskell-stack">Haskell Stack</h3>
@@ -503,23 +536,6 @@ running an up-to-date version:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stack upgrade <span class="nt">--binary-only</span>
 which stack <span class="c"># should be $HOME/.local/bin/stack</span>
 </code></pre></div></div>
-
-<h3 id="macos">MacOS</h3>
-
-<p>Other than the cross-compiler <code class="highlighter-rouge">gcc</code> toolchain, setup on MacOS should be similar
-to that on Ubuntu. To set up a cross-compiler, try the following:</p>
-
-<ul>
-  <li>Install <code class="highlighter-rouge">XCode</code> from the AppStore and its command line tools. If you are
-running MacPorts or homebrew, you have these already. Otherwise, after you have XCode
-installed, run <code class="highlighter-rouge">gcc --version</code> in a terminal window. If it reports a version,
-you’re set. Otherwise it should pop up a window and prompt for installation
-of the command line tools.</li>
-  <li>Install the seL4 Python dependencies, for instance using <code class="highlighter-rouge">sudo easy_install
-sel4-deps</code>.  <code class="highlighter-rouge">easy_install</code> is part of Python’s <a href="https://pypi.python.org/pypi/setuptools" title="python package installer"><code class="highlighter-rouge">setuptools</code></a>.</li>
-  <li>Install the <a href="https://github.com/seL4/l4v/blob/master/misc/scripts/cpp" title="cpp wrapper script"><code class="highlighter-rouge">misc/scripts/cpp</code></a> wrapper for clang, by
-putting it in <code class="highlighter-rouge">~/bin</code>, or somewhere else in your <code class="highlighter-rouge">PATH</code>.</li>
-</ul>
 
 <h2 id="isabelle-setup">Isabelle Setup</h2>
 
@@ -665,9 +681,9 @@ Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</p>
 <ul>
 <li class="toc-entry toc-h3"><a href="#linux-packages---debian">Linux Packages - Debian</a></li>
 <li class="toc-entry toc-h3"><a href="#linux-packages---ubuntu">Linux Packages - Ubuntu</a></li>
+<li class="toc-entry toc-h3"><a href="#macos-packages">macOS packages</a></li>
 <li class="toc-entry toc-h3"><a href="#python">Python</a></li>
 <li class="toc-entry toc-h3"><a href="#haskell-stack">Haskell Stack</a></li>
-<li class="toc-entry toc-h3"><a href="#macos">MacOS</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#isabelle-setup">Isabelle Setup</a></li>
