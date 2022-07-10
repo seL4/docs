@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-07-10 03:43:55 +0000 -->
+<!-- Page last generated 2022-07-10 23:55:40 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -319,9 +319,13 @@ See the up-to-date list of <a href="/Hardware/">supported platforms</a>.</p>
 <h3 id="which-platform-ports-are-verified">Which platform ports are verified?</h3>
 
 <p>We have presently the most comprehensive verification story (functional
-correctness to the binary, plus security proofs) for (32-bit) Arm v6 and v7
-platforms. We also have functional-correctness proofs to C code for 64-bit x86.
-Verificaton of the 64-bit RISC-V is due to complete in early 2020.</p>
+correctness to the binary, security proofs, user-level initialisation proofs)
+for 32-bit Arm v6 and v7 platforms. For 64-bit x86 there are
+functional-correctness proofs to C code, and for 64-bit RISC-V there are
+functional-correctness proofs to binary code as well as security proofs
+(but no user-level initialisation proofs yet).</p>
+
+<p>Verificaton of the 64-bit Arm (Armv8 AArch64) is in progress.</p>
 
 <p>The list of <a href="/Hardware/">supported platforms</a> shows verificaton status.</p>
 
@@ -458,7 +462,7 @@ resulting proof is correct.</p>
 <p>Unique about seL4 is
 its unprecedented degree of assurance, achieved through formal
 verification. Specifically, the ARM, ARM_HYP (ARM with virtualisation
-extensions), and X64 versions of seL4 comprise the first (and still
+extensions), X64, and RISCV64 versions of seL4 comprise the first (and still
 only) general-purpose OS kernel with a full code-level functional
 correctness proof, meaning a mathematical proof that the implementation
 (written in C) adheres to its specification. In short, the
@@ -466,13 +470,13 @@ implementation is proved to be bug-free (see below). This also implies a
 number of other properties, such as freedom from buffer overflows, null
 pointer exceptions, use-after-free, etc.</p>
 
-<p>On the ARM platform, there is a further proof that the binary code which
+<p>On the ARM and RISCV64 platforms, there is a further proof that the binary code which
 executes on the hardware is a correct translation of the C code. This
 means that the compiler does not have to be trusted, and extends the
 functional correctness property to the binary.</p>
 
-<p>Furthermore, also on ARM, there are proofs that seL4’s specification, if
-used properly, will enforce integrity and confidentiality, core security
+<p>Furthermore, also on ARM and RISCV64, there are proofs that seL4’s specification, if
+used properly, will enforce integrity and confidentiality, which are core security
 properties. Combined with the proofs mentioned above, these properties
 are guaranteed to be enforced not only by a model of the kernel (the
 specification) but the actual binary that executes on the hardware.
@@ -585,8 +589,8 @@ instead of the code itself.</p>
 
 <p>Some of these previous verifications were impressive achievements that
 laid much of the groundwork without which the seL4 proofs would not have
-been achieved. It is only in the last 5-10 years that code verification
-and theorem proving technology has advanced enough to make large
+been achieved. It is only since around (very roughly) the year 2005
+that code verification and theorem proving technology has advanced enough to make large
 code-level proofs feasible.</p>
 
 <h3 id="when-and-how-often-does-sel4-get-updated-and-re-proved">When and how often does seL4 get updated and re-proved?</h3>
@@ -603,8 +607,7 @@ This is usually the head of the master branch.</p>
 together with the kernel team, the verification team picks the next
 feature(s), isolates them on a separate small internal feature branch,
 starts verifying that, and when done, merges both into the proof
-repository and seL4 master. Occasionally, something new gets directly
-into master, is verified there and then pulled through to experimental.</p>
+repository and seL4 master.</p>
 
 <p>The frequency depends on what it is and who has time. Larger features
 take longer to write and prove, get pushed when they are done, and get
@@ -824,11 +827,7 @@ libraries are mostly under BSD. See the
 <a href="https://sel4.systems/Info/license.pml">license page</a> for more details.</p>
 
 <h2 id="how-do-i-contribute-to-sel4">How do I contribute to seL4?</h2>
-<p>See
-<a href="/Contributing">How to Contribute</a>. In brief, seL4 was released under a complicated
-agreement between the partners who owned the code. A condition of the
-release is that we track all contributions, and get a signed licence
-agreement from all contributors.</p>
+<p>See <a href="/Contributing">How to Contribute</a>.</p>
 
 <h2 id="how-can-i-build-a-system-with-sel4">How can I build a system with seL4?</h2>
 <p>Much more is required to build a
@@ -886,8 +885,7 @@ these will be delivered (or even if they will be released at all).</p>
 <p>That being said, we are currently working on:</p>
 
 <ul>
-  <li>verification of the RISC-V kernel</li>
-  <li>completing the 64-bit Arm version (multicore and hypervisor support)</li>
+  <li>verification of the Aarch64 kernel</li>
   <li>verification of multicore seL4</li>
   <li><a href="https://trustworthy.systems/publications/csiroabstracts/Ge_YCH_19.abstract?bib=combined">time protection</a> as a principled prevention of timing channels (this one is still very much cutting-edge research)</li>
 </ul>
@@ -1401,10 +1399,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Tue May 31 18:02:19 2022 +1000 d26e103
+            Site last updated: Mon Jul 11 09:50:29 2022 +1000 e2ad0e6
           </li>
           <li>
-                Page last updated: Tue May 31 18:02:19 2022 +1000 d26e103
+                Page last updated: Mon Jul 11 09:50:29 2022 +1000 e2ad0e6
           </li>
         
       </ul>

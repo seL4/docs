@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-07-10 03:43:55 +0000 -->
+<!-- Page last generated 2022-07-10 23:55:40 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -329,18 +329,18 @@ threads that are runnable: that is, resumed, and not blocked on any IPC operatio
 <p>TCBs also have a <em>maximum control priority</em> (MCP), which acts as an informal capability over priorities.
 When setting the priority of a TCB, an explicit TCB capability must be provided to derive the
 authority from to set the priority. The priority being set is checked against the authority TCB’s
-MCP and the targer priority is greater, the operation fails. The root task starts with both priority and
+MCP and the target priority is greater, the operation fails. The root task starts with both priority and
 MCP set to <code class="highlighter-rouge">seL4_MaxPrio</code>.</p>
 
 <h4 id="round-robin">Round robin</h4>
 
-<p>When multiple TCBs are runnable and have the same priority, the are scheduled in a
- first-in first-out round-robin fashion. In more detail, kernel time
- is accounted for in fixed-time quanta referred to as ticks, and each TCB has
+<p>When multiple TCBs are runnable and have the same priority, they are scheduled in a
+first-in, first-out round-robin fashion. In more detail, kernel time
+is accounted for in fixed-time quanta referred to as ticks, and each TCB has
 a timeslice field which represents the number of ticks that TCB is eligible to execute
 until preempted. The kernel timer driver is configured to fire a periodic interrupt which
 marks each tick, and when the timeslice is exhausted round robin scheduling is applied.
-Threads can surrender their current tick using the <code class="highlighter-rouge">seL4_Yield</code> system call.</p>
+Threads can surrender their current timeslice using the <code class="highlighter-rouge">seL4_Yield</code> system call.</p>
 
 <h4 id="domain-scheduling">Domain scheduling</h4>
 
@@ -711,10 +711,10 @@ threads/threads.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Tue May 31 18:02:19 2022 +1000 d26e103
+            Site last updated: Mon Jul 11 09:50:29 2022 +1000 e2ad0e6
           </li>
           <li>
-                Page last updated: Tue May 31 18:02:19 2022 +1000 d26e103
+                Page last updated: Mon Jul 11 09:50:29 2022 +1000 e2ad0e6
           </li>
         
       </ul>
