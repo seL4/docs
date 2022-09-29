@@ -6,6 +6,7 @@ FROM ruby:2
 RUN apt-get update -q \
     && apt-get install -y --no-install-recommends \
         doxygen \
+        python3-dev \
         python3-bs4 \
         python3-lxml \
         python3-six \
@@ -16,7 +17,7 @@ RUN apt-get update -q \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
     && pip3 install setuptools \
-    && pip3 install aenum sortedcontainers pyyaml pyaml future \
+    && pip3 install aenum sortedcontainers pyyaml pyaml future camkes-deps \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Init bundle dependencies
