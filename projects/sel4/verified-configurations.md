@@ -20,7 +20,7 @@ configuration of internal and hardware features, verified configurations
 are necessarily both less numerous and more specific.
 
 These configurations are also referred to as *verification platforms*,
-currently constituting: ARM, ARM\_HYP, X64, RISCV64, ARM\_MCS
+currently constituting: AARCH64, ARM, ARM\_HYP, X64, RISCV64, ARM\_MCS, RISCV64\_MCS
 
 Please consult [Frequently Asked
 Questions](/FrequentlyAskedQuestions), as well as the [proof and
@@ -33,9 +33,10 @@ Current verified configurations can be found in seL4 sources in the
 `configs` folder:
 ```sh
 ls configs/*_verified.cmake
-# configs/ARM_HYP_verified.cmake  configs/RISCV64_verified.cmake
-# configs/ARM_MCS_verified.cmake  configs/X64_verified.cmake
-# configs/ARM_verified.cmake
+#configs/AARCH64_verified.cmake     configs/RISCV64_MCS_verified.cmake
+#configs/ARM_HYP_verified.cmake     configs/RISCV64_verified.cmake
+#configs/ARM_MCS_verified.cmake     configs/X64_verified.cmake
+#configs/ARM_verified.cmake
 ```
 
 To obtain specific source code and build for a given configuration (e.g.
@@ -62,10 +63,9 @@ At present, none of our verified configurations take into account
 address translation for devices (System MMU or IOMMU), debug/profiling
 interfaces, or the kernel startup at boot.
 
-The proofs for RISC-V 64-bit binary verification and ARM\_MCS
-(mixed-criticality extensions to real-time seL4 features) are in
-progress. Refer to the [roadmap](/projects/roadmap.html) for
-status and upcoming features.
+The proofs for RISCV64\_MCS/ARM\_MCS (mixed-criticality extensions to real-time
+seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
+[roadmap](/projects/roadmap.html) for status and upcoming features.
 
 ## ARM
 
@@ -76,6 +76,16 @@ status and upcoming features.
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
+## ARM_MCS
+
+File | `ARM_MCS_verified.cmake`
+Architecture | ARMv7
+Platform | iMX.6 (e.g. Sabre Lite)
+Floating-point support | No
+Hypervisor mode | No
+Mixed-Criticality-Systems API | Yes
+**Verified properties** | in progress (design-level functional correctness completed)
+
 ## ARM\_HYP
 
 File | `ARM_HYP_verified.cmake`
@@ -84,6 +94,15 @@ Platform | Tegra TK1
 Floating-point support | No
 Hypervisor mode | Yes
 **Verified properties** | functional correctness, incl fast path
+
+## AARCH64
+
+| File | `AARCH64_verified.cmake`
+| Architecture | ARMv8
+| Platform | Tegra X2 (e.g. Jetson TX2)
+| Floating-point support | Yes
+| Hypervisor mode | Yes
+| **Verified properties** | in progress
 
 ## X64
 
@@ -100,5 +119,14 @@ Architecture | RISC-V 64-bit
 Platform | HiFive
 Floating-point support | No
 Hypervisor mode | No
-**Verified properties** | functional correctness, integrity (access control),
-confidentiality (information flow); verification of fast path in progress
+**Verified properties** | functional correctness, integrity (access control), confidentiality (information flow); verification of fast path in progress
+
+## RISCV64_MCS
+
+File | `RISCV64_MCS_verified.cmake`
+Architecture | RISC-V 64-bit
+Platform | HiFive
+Floating-point support | No
+Hypervisor mode | No
+Mixed-Criticality-Systems API | Yes
+**Verified properties** | C verification in progress (design-level functional correctness completed)
