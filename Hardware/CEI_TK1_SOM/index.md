@@ -8,7 +8,7 @@ virtualization: ARM HYP
 iommu: System MMU
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
-Status: FC (without MMU)
+Status: FC (without System MMU)
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
