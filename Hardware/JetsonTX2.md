@@ -9,7 +9,7 @@ virtualization: "Yes"
 iommu: "Yes"
 soc: NVIDIA Tegra X2
 cpu: Cortex-A57 Quad, Dual NVIDIA Denver
-Status: Unverified
+Status: "[in progress](/projects/sel4/verified-configurations.html#aarch64)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0

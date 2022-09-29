@@ -9,7 +9,7 @@ virtualization: "No"
 iommu: "No"
 soc: i.MX6
 cpu: Cortex-A9
-Status: Verified
+Status: "[Verified](/projects/sel4/verified-configurations.html#arm)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
