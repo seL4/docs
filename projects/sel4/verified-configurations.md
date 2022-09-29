@@ -74,7 +74,7 @@ status and upcoming features.
 | Platform | iMX.6 (e.g. Sabre Lite)
 | Floating-point support | No
 | Hypervisor mode | No
-| **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code)
+| **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
 ## ARM\_HYP
 
@@ -100,4 +100,5 @@ Architecture | RISC-V 64-bit
 Platform | HiFive
 Floating-point support | No
 Hypervisor mode | No
-**Verified properties** | functional correctness; verification of fast path in progress
+**Verified properties** | functional correctness, integrity (access control),
+confidentiality (information flow); verification of fast path in progress

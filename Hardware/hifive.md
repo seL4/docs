@@ -7,7 +7,7 @@ arch: RV64IMAC, RV64GC
 virtualization: "No"
 iommu: "No"
 simulation_target: false
-Status: "FC"
+Status: "FC + Security proofs"
 Contrib: "Data61"
 Maintained: "seL4 Foundation"
 soc: Freedom U540
