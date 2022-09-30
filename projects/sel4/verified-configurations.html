@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-09-30 07:05:27 +0000 -->
+<!-- Page last generated 2022-09-30 08:54:16 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -249,7 +249,7 @@ configuration of internal and hardware features, verified configurations
 are necessarily both less numerous and more specific.</p>
 
 <p>These configurations are also referred to as <em>verification platforms</em>,
-currently constituting: ARM, ARM_HYP, X64, RISCV64, ARM_MCS</p>
+currently constituting: AARCH64, ARM, ARM_HYP, X64, RISCV64, ARM_MCS, RISCV64_MCS</p>
 
 <p>Please consult <a href="/FrequentlyAskedQuestions">Frequently Asked
 Questions</a>, as well as the <a href="http://sel4.systems/Info/FAQ/proof.pml">proof and
@@ -261,9 +261,10 @@ understanding of the intersection of verification and seL4.</p>
 <p>Current verified configurations can be found in seL4 sources in the
 <code class="highlighter-rouge">configs</code> folder:</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>configs/<span class="k">*</span>_verified.cmake
-<span class="c"># configs/ARM_HYP_verified.cmake  configs/RISCV64_verified.cmake</span>
-<span class="c"># configs/ARM_MCS_verified.cmake  configs/X64_verified.cmake</span>
-<span class="c"># configs/ARM_verified.cmake</span>
+<span class="c">#configs/AARCH64_verified.cmake     configs/RISCV64_MCS_verified.cmake</span>
+<span class="c">#configs/ARM_HYP_verified.cmake     configs/RISCV64_verified.cmake</span>
+<span class="c">#configs/ARM_MCS_verified.cmake     configs/X64_verified.cmake</span>
+<span class="c">#configs/ARM_verified.cmake</span>
 </code></pre></div></div>
 
 <p>To obtain specific source code and build for a given configuration (e.g.
@@ -289,10 +290,9 @@ configuration and what to do with a <code class="highlighter-rouge">kernel.elf</
 address translation for devices (System MMU or IOMMU), debug/profiling
 interfaces, or the kernel startup at boot.</p>
 
-<p>The proofs for RISC-V 64-bit binary verification and ARM_MCS
-(mixed-criticality extensions to real-time seL4 features) are in
-progress. Refer to the <a href="/projects/roadmap.html">roadmap</a> for
-status and upcoming features.</p>
+<p>The proofs for RISCV64_MCS/ARM_MCS (mixed-criticality extensions to real-time
+seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
+<a href="/projects/roadmap.html">roadmap</a> for status and upcoming features.</p>
 
 <h2 id="arm">ARM</h2>
 
@@ -321,6 +321,41 @@ status and upcoming features.</p>
     <tr>
       <td><strong>Verified properties</strong></td>
       <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm_mcs">ARM_MCS</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">ARM_MCS_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>iMX.6 (e.g. Sabre Lite)</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Mixed-Criticality-Systems API</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>in progress (design-level functional correctness completed)</td>
     </tr>
   </tbody>
 </table>
@@ -356,6 +391,37 @@ status and upcoming features.</p>
   </tbody>
 </table>
 
+<h2 id="aarch64">AARCH64</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">AARCH64_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv8</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>Tegra X2 (e.g. Jetson TX2)</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>in progress</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="x64">X64</h2>
 
 <table>
@@ -385,13 +451,69 @@ status and upcoming features.</p>
 
 <h2 id="riscv64">RISCV64</h2>
 
-<p>File | <code class="highlighter-rouge">RISCV64_verified.cmake</code>
-Architecture | RISC-V 64-bit
-Platform | HiFive
-Floating-point support | No
-Hypervisor mode | No
-<strong>Verified properties</strong> | functional correctness, integrity (access control),
-confidentiality (information flow); verification of fast path in progress</p>
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">RISCV64_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>RISC-V 64-bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>HiFive</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, integrity (access control), confidentiality (information flow); verification of fast path in progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="riscv64_mcs">RISCV64_MCS</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">RISCV64_MCS_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>RISC-V 64-bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>HiFive</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Mixed-Criticality-Systems API</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>C verification in progress (design-level functional correctness completed)</td>
+    </tr>
+  </tbody>
+</table>
 
   </div>
 
@@ -412,9 +534,12 @@ confidentiality (information flow); verification of fast path in progress</p>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#arm">ARM</a></li>
+<li class="toc-entry toc-h2"><a href="#arm_mcs">ARM_MCS</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_hyp">ARM_HYP</a></li>
+<li class="toc-entry toc-h2"><a href="#aarch64">AARCH64</a></li>
 <li class="toc-entry toc-h2"><a href="#x64">X64</a></li>
 <li class="toc-entry toc-h2"><a href="#riscv64">RISCV64</a></li>
+<li class="toc-entry toc-h2"><a href="#riscv64_mcs">RISCV64_MCS</a></li>
 </ul>
 </div>
 
@@ -855,10 +980,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Fri Sep 30 08:59:20 2022 +0200 713dd45
+            Site last updated: Fri Sep 30 10:50:13 2022 +0200 092a5ad
           </li>
           <li>
-                Page last updated: Fri Sep 30 08:59:20 2022 +0200 713dd45
+                Page last updated: Fri Sep 30 10:50:13 2022 +0200 092a5ad
           </li>
         
       </ul>
