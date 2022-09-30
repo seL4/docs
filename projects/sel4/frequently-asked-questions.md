@@ -97,9 +97,12 @@ functional-correctness proofs to C code, and for 64-bit RISC-V there are
 functional-correctness proofs to binary code as well as security proofs
 (but no user-level initialisation proofs yet).
 
-Verificaton of the 64-bit Arm (Armv8 AArch64) is in progress.
+Verification of the 64-bit Arm (Armv8 AArch64) is in progress.
 
-The list of [supported platforms](/Hardware/) shows verificaton status.
+The list of [supported platforms](/Hardware/) shows verification status per
+hardware platform and the
+[verified configurations](/projects/sel4/verified-configurations.html) page has
+more details on which platform supports which level of proof.
 
 ### What devices does seL4 support?
  seL4, like any real microkernel,
