@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jetson TX2 | seL4 docs</title>
+    <title>Ultra96v2 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Jetson TX2</span>
+            <span property="name">Ultra96v2</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -149,31 +149,24 @@
   </div>
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
-      <nav aria-label="Table of Contents">
-        <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
-<li class="toc-entry toc-h2"><a href="#booting-via-pxe">Booting via PXE</a></li>
-</ul>
-      </nav>
-    
     <div class="content">
-      <h1 id="jetson-tx2">Jetson TX2</h1>
+      <h1 id="ultra96v2">Ultra96v2</h1>
 
-<p>The Jetson TX2 is an embedded system-on-module (SOM) developed by NVIDIA.</p>
+<p>The board is an Avnet Ultra96v2, which is a low-cost Zynq MPSoC development platform developed by
+AVNET.</p>
 
-<p><a href="https://elinux.org/Jetson_TX2">https://elinux.org/Jetson_TX2</a></p>
+<p>AVNET maintains online material, including designs and documentation
+<a href="https://www.avnet.com/wps/portal/us/products/new-product-introductions/npi/aes-ultra96-v2/">here</a>.</p>
 
-<p>The seL4 kernel has a limited port to the TX2 which supports the SoM
-only in 64-bit mode.</p>
-
-<h2 id="building-sel4test">Building seL4test</h2>
+<h2 id="building">Building</h2>
+<h3 id="sel4test">seL4test</h3>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
 repo <span class="nb">sync
 mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>tx2 <span class="nt">-DAARCH64</span><span class="o">=</span>1
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ultra96v2 <span class="nt">-DAARCH64</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -183,10 +176,19 @@ ninja
 
 <p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
-<h2 id="booting-via-pxe">Booting via PXE</h2>
+<p>The Ultra96v2 also supports AArch32 mode. If you choose to build the AArch32 kernel,
+please be sure to pass <code class="highlighter-rouge">-DAARCH32=1</code> instead of <code class="highlighter-rouge">-DAARCH64=1</code>. This requires modifications to u-boot
+to execute in 32-bit mode. See the ZCU102 page for instructions.</p>
 
-<p>A U-Boot uImage will be created by the seL4 build system. This can be booted
-by U-Boot using PXE.</p>
+<h2 id="booting-via-sd-card">Booting via SD Card</h2>
+
+<p>The ultra96v2 comes with a pre-formatted SD card. Load the <code class="highlighter-rouge">sel4test-driver-image-arm-zynqmp</code> onto
+the SD card, then insert the SD card into the Ultra96v2 and power on the board, dropping into the
+U-boot prompt. When at the prompt, type the following to run sel4test:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-zynqmp
+bootelf 0x10000000
+</code></pre></div></div>
 
     </div>
   </div>
@@ -229,9 +231,9 @@ by U-Boot using PXE.</p>
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/Hardware/JetsonTX2.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/Hardware/ultra96v2.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/Hardware/JetsonTX2.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/Hardware/ultra96v2.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
