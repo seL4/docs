@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-11-14 03:43:17 +0000 -->
+<!-- Page last generated 2022-11-15 03:34:43 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -347,18 +347,20 @@ access point but also have functions that need to be strongly isolated in a secu
 </ul>
 
 <h3 id="long-term">Long-term</h3>
+
 <ul>
   <li>More complex system design</li>
 </ul>
 
 <h2 id="setup">Setup</h2>
 
-<p>This project is based on an Arm VMM running inside a camkes system and therefore requires all of the 
-Camkes dependencies described in <a href="/HostDependencies">Host Dependencies</a>.</p>
+<p>This project is based on an Arm VMM running inside a camkes system and therefore requires all of the
+Camkes dependencies described in <a href="/projects/buildsystem/host-dependencies.html">Host Dependencies</a>.</p>
 
 <p>Additional dependencies required to run a lighttpd webserver serving docs.sel4.systems in a Linux guest:</p>
+
 <ul>
-  <li><a href="https://github.com/SEL4PROJ/docs/blob/master/tools/Dockerfile">docsite dependencies</a>: Dependencies required to build docs.sel4.systems.</li>
+  <li><a href="https://github.com/seL4/docs/blob/master/tools/Dockerfile">docsite dependencies</a>: Dependencies required to build docs.sel4.systems.</li>
   <li>libpcre3-dev:armel</li>
   <li>zlib compression library, armel arch: Required for building lighttpd (debian package: zlib1g-dev:armel)</li>
   <li>pcre regex library, armel arch: Required for building lighttpd (debian package: libpcre3-dev:armel)</li>
@@ -370,11 +372,12 @@ Camkes dependencies described in <a href="/HostDependencies">Host Dependencies</
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># After initialising a fresh directory</span>
 
 <span class="c"># Obtain sources via repo tool</span>
-repo init <span class="nt">-u</span> https://github.com/SEL4PROJ/sel4webserver-manifest.git
+repo init <span class="nt">-u</span> https://github.com/seL4/sel4webserver-manifest.git
 repo <span class="nb">sync</span>
 </code></pre></div></div>
 
 <h4 id="configure-single-vm-webserver">Configure: Single VM Webserver</h4>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initalise project build directory</span>
 <span class="nb">mkdir </span>build
 <span class="nb">cd </span>build
@@ -383,7 +386,9 @@ repo <span class="nb">sync</span>
 <span class="c"># -- Generating done</span>
 <span class="c"># -- Build files have been written to: /tmp/tmp.xmwD2Fc3FW/buildweb</span>
 </code></pre></div></div>
+
 <h4 id="configure-multi-vm-webserver">Configure: Multi-VM Webserver</h4>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Initalise project build directory</span>
 <span class="nb">mkdir </span>build
 <span class="nb">cd </span>build
@@ -394,6 +399,7 @@ repo <span class="nb">sync</span>
 </code></pre></div></div>
 
 <h4 id="build-webserver">Build Webserver</h4>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># build</span>
 ninja
 <span class="c"># [0/1] Re-running CMake...</span>
@@ -429,9 +435,11 @@ Welcome to Buildroot
 buildroot login:
 
 </code></pre></div></div>
+
 <p>You could then navigate to 10.13.1.7:3000 in a web browser on the same local network.</p>
 
 <h4 id="configure-single-vm-webserver-qemu-arm-virt">Configure: Single VM Webserver (qemu-arm-virt)</h4>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Initialise project build directory</span>
 <span class="nb">mkdir </span>build
 <span class="nb">cd </span>build
@@ -445,6 +453,7 @@ buildroot login:
 </code></pre></div></div>
 
 <h4 id="build-webserver-qemu-arm-virt">Build Webserver (qemu-arm-virt)</h4>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># build</span>
 ninja
 <span class="c"># [13/443] Performing configure step for 'cgi-load-file'</span>
@@ -459,9 +468,11 @@ ninja
 <span class="nb">ls </span>images
 <span class="c"># capdl-loader-image-arm-qemu-arm-virt</span>
 </code></pre></div></div>
+
 <h4 id="running-sel4-qemu-arm-virt-image">Running seL4 qemu-arm-virt image</h4>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate 
-<span class="c"># ./simulate: qemu-system-aarch64 -machine virt,virtualization=on,highmem=off,secure=off -cpu cortex-a53 -nographic  -m size=2048  -kernel images/capdl-loader- image-arm-qemu-arm-virt </span>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate
+<span class="c"># ./simulate: qemu-system-aarch64 -machine virt,virtualization=on,highmem=off,secure=off -cpu cortex-a53 -nographic  -m size=2048  -kernel images/capdl-loader-image-arm-qemu-arm-virt</span>
 <span class="c"># ELF-loader started on CPU: ARM Ltd. Cortex-A53 r0p4</span>
 <span class="c"># ...</span>
 <span class="c"># Bootstrapping kernel</span>
@@ -482,7 +493,7 @@ ninja
 <span class="c"># udhcpc: SIOCGIFINDEX: No such device</span>
 <span class="c">#</span>
 <span class="c"># Welcome to Buildroot</span>
-<span class="c"># buildroot login: </span>
+<span class="c"># buildroot login:</span>
 
 </code></pre></div></div>
 
@@ -491,19 +502,22 @@ ninja
 <p>Networking under qemu may be somewhat tricky and specific configuration details may vary depending on the host configuration/distro/etc. Thus here there are some few suggestions to try having your set up ready as easy as possible.
 So, if you want to have networking on your virtualized guest then you can try:</p>
 
-<p>1st- Configure a dhcp server on the host. 
+<p>1st- Configure a dhcp server on the host.
 2nd- Run “simulate” like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ./simulate --extra-qemu-args="-netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device virtio-net,netdev=mynet0,mac=52:55:00:d1:55:01,disable-modern=on,disable-legacy=off"
-</code></pre></div></div>
-<p>3rd- Manually create the bridge interface to connect the guest and the host neworking. Again, here specific commands’ syntax depends on every environment. Just as an example here what worked on Ubuntu 20.04:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># sudo brctl addif virbr0 eno1
-# sudo brctl addif virbr0 tap0
-# sudo ifconfig tap0 up
-# sudo ifconfig virbr0 up
-# sudo ifconfig eno1 up
-# brctl show
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./simulate <span class="nt">--extra-qemu-args</span><span class="o">=</span><span class="s2">"-netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device virtio-net,netdev=mynet0,mac=52:55:00:d1:55:01,disable-modern=on,disable-legacy=off"</span>
 </code></pre></div></div>
+
+<p>3rd- Manually create the bridge interface to connect the guest and the host networking. Again, here specific commands’ syntax depends on every environment. Just as an example here what worked on Ubuntu 20.04:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>brctl addif virbr0 eno1
+<span class="nb">sudo </span>brctl addif virbr0 tap0
+<span class="nb">sudo </span>ifconfig tap0 up
+<span class="nb">sudo </span>ifconfig virbr0 up
+<span class="nb">sudo </span>ifconfig eno1 up
+brctl show
+</code></pre></div></div>
+
 <p>Anyway, probably you will need to check the documentation of your specific host distro and qemu version to see how a bridge can be created in your specific setup.
 It is well known that on some deployments qemu scripts automatically takes cares of this so you will be able to skip this last step.</p>
 
@@ -524,8 +538,8 @@ adding dns 8.8.4.4
 
 Welcome to Buildroot
 buildroot login:
-
 </code></pre></div></div>
+
 <h2 id="testing-the-web-server-qemu-arm-virt">Testing the web server (qemu-arm-virt)</h2>
 
 <p>Once the networking has been set up, you can check what IP has been assigned to your guest (also it is announced on the screen via udhcpc message…):</p>
@@ -538,20 +552,21 @@ adding dns 8.8.4.4
 
 Welcome to Buildroot
 buildroot login: root
-# ifconfig 
-eth0      Link encap:Ethernet  HWaddr 52:55:00:D1:55:01  
+# ifconfig
+eth0      Link encap:Ethernet  HWaddr 52:55:00:D1:55:01
           inet addr:192.168.122.100  Bcast:192.168.122.255  Mask:255.255.255.0
-(...)          
-
+(...)
 </code></pre></div></div>
-<p>and now just open web browser and open URL: http://<your_assigned_IP>:3000 and you should see an seL4 documentation web page.</your_assigned_IP></p>
+
+<p>and now just open web browser and open URL: <code class="highlighter-rouge">http://&lt;your_assigned_IP&gt;:3000</code> and you should see an seL4 documentation web page.</p>
 
 <h2 id="contributing">Contributing</h2>
 
 <p>Contributions are welcome in the form of feature requests, documentation requests, or documentation/code contributions.
-See /Contributing for our general contribution guidelinies.</p>
+See <a href=".github/CONTRIBUTING.md">CONTRIBUTING.md</a> for our general contribution guidelines.</p>
 
 <p>Current code contributions we would be interested to receive:</p>
+
 <ul>
   <li>Additional platforms</li>
   <li>Additional VM modules</li>
