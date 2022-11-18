@@ -279,6 +279,7 @@ on the main branch.
 ### <span class="plain-links">[sel4webserver](https://github.com/seL4/sel4webserver/)</span>
 
 <span class="plain-links">[![CI](https://github.com/seL4/sel4webserver/workflows/CI/badge.svg?branch=master)](https://github.com/seL4/sel4webserver/actions/workflows/push.yml?query=branch%3Amaster)</span>
+<span class="plain-links">[![Web Server Demo](https://github.com/seL4/sel4webserver/actions/workflows/sel4webserver-deploy.yml/badge.svg?branch=master)](https://github.com/seL4/sel4webserver/actions/workflows/sel4webserver-deploy.yml?branch=master)</span>
 
 ### <span class="plain-links">[sel4webserver-manifest](https://github.com/seL4/sel4webserver-manifest/)</span>
 
