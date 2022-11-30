@@ -19,28 +19,28 @@ _Note: it is assumed that you know what to do with a generated kernel.elf binary
 
 ### Initialising build directory with existing configuration
 
-Building the kernel standalone requires initialising a cmake build directory using the sel4 repo as the root CMake project:
+Building the kernel standalone requires initialising a cmake build directory using the seL4 repo as the root CMake project:
 ```none
-├── sel4/
+├── seL4/
 │   └── CMakeLists.txt
 ├── build/ # Current directory
 ```
 
 The build directory is initialised as follows:
 ```sh
-cmake -DCROSS_COMPILER_PREFIX= -DCMAKE_TOOLCHAIN_FILE=../sel4/gcc.cmake -G Ninja -C ../sel4/configs/X64_verified.cmake ../sel4/
+cmake -DCROSS_COMPILER_PREFIX= -DCMAKE_TOOLCHAIN_FILE=../seL4/gcc.cmake -G Ninja -C ../seL4/configs/X64_verified.cmake ../seL4/
 ```
 We use the X64_verified.cmake file for configuration values.
 
 To find available verification configurations:
 
 ```sh
-ls ../sel4/configs/*.cmake
-# ../sel4/configs/ARM_HYP_verified.cmake  ../sel4/configs/X64_verified.cmake
-# ../sel4/configs/ARM_verified.cmake
+ls ../seL4/configs/*.cmake
+# ../seL4/configs/ARM_HYP_verified.cmake  ../seL4/configs/X64_verified.cmake
+# ../seL4/configs/ARM_verified.cmake
 ```
 
-A typical verification configuration (`cat ../sel4/configs/X64_verified.cmake`):
+A typical verification configuration (`cat ../seL4/configs/X64_verified.cmake`):
 
 ```cmake
 #!/usr/bin/env -S cmake -P
@@ -71,7 +71,7 @@ set(KernelMaxNumBootinfoUntypedCaps 50 CACHE STRING "")
 set(KernelFSGSBase "inst" CACHE STRING "")
 ```
 
-At this point you could use `ccmake ../sel4` to browse the configuration.
+At this point you could use `ccmake ../seL4` to browse the configuration.
 
 ### Building the kernel target
 
