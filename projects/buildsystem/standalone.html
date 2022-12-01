@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2022-11-30 03:19:08 +0000 -->
+<!-- Page last generated 2022-12-01 00:06:37 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -329,25 +329,25 @@
 
 <h3 id="initialising-build-directory-with-existing-configuration">Initialising build directory with existing configuration</h3>
 
-<p>Building the kernel standalone requires initialising a cmake build directory using the sel4 repo as the root CMake project:</p>
-<pre><code class="language-none">├── sel4/
+<p>Building the kernel standalone requires initialising a cmake build directory using the seL4 repo as the root CMake project:</p>
+<pre><code class="language-none">├── seL4/
 │   └── CMakeLists.txt
 ├── build/ # Current directory
 </code></pre>
 
 <p>The build directory is initialised as follows:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span> <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>../sel4/gcc.cmake <span class="nt">-G</span> Ninja <span class="nt">-C</span> ../sel4/configs/X64_verified.cmake ../sel4/
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span> <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>../seL4/gcc.cmake <span class="nt">-G</span> Ninja <span class="nt">-C</span> ../seL4/configs/X64_verified.cmake ../seL4/
 </code></pre></div></div>
 <p>We use the X64_verified.cmake file for configuration values.</p>
 
 <p>To find available verification configurations:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> ../sel4/configs/<span class="k">*</span>.cmake
-<span class="c"># ../sel4/configs/ARM_HYP_verified.cmake  ../sel4/configs/X64_verified.cmake</span>
-<span class="c"># ../sel4/configs/ARM_verified.cmake</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> ../seL4/configs/<span class="k">*</span>.cmake
+<span class="c"># ../seL4/configs/ARM_HYP_verified.cmake  ../seL4/configs/X64_verified.cmake</span>
+<span class="c"># ../seL4/configs/ARM_verified.cmake</span>
 </code></pre></div></div>
 
-<p>A typical verification configuration (<code class="highlighter-rouge">cat ../sel4/configs/X64_verified.cmake</code>):</p>
+<p>A typical verification configuration (<code class="highlighter-rouge">cat ../seL4/configs/X64_verified.cmake</code>):</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env -S cmake -P</span>
 <span class="c1">#</span>
@@ -377,7 +377,7 @@
 <span class="nb">set</span><span class="p">(</span>KernelFSGSBase <span class="s2">"inst"</span> CACHE STRING <span class="s2">""</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>At this point you could use <code class="highlighter-rouge">ccmake ../sel4</code> to browse the configuration.</p>
+<p>At this point you could use <code class="highlighter-rouge">ccmake ../seL4</code> to browse the configuration.</p>
 
 <h3 id="building-the-kernel-target">Building the kernel target</h3>
 
@@ -521,10 +521,10 @@
         </li>
         
           <li>
-            Site last updated: Wed Nov 23 09:51:18 2022 +1100 c8d6db0
+            Site last updated: Thu Dec 1 11:02:14 2022 +1100 5446a1b
           </li>
           <li>
-                Page last updated: Wed Nov 23 09:51:18 2022 +1100 c8d6db0
+                Page last updated: Thu Dec 1 11:02:14 2022 +1100 5446a1b
           </li>
         
       </ul>
