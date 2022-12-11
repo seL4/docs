@@ -43,21 +43,19 @@ You can nominate someone for a role by emailing the chair of the TSC.
     organisation. These include all of the TSC members and the following
     people:
 
-  - Ryan Barry, UNSW
+  - Ryan Barry, Proofcraft
   - Scott Buckley, UNSW
   - Peter Chubb, UNSW
+  - Courtney Darville, UNSW
   - Axel Heider, Hensoldt Cyber
-  - Jashank Jeremy, UNSW
-  - Vincent Jackson, UNSW
   - Zoltan Kocsis, UNSW
   - Damon Lee, Kry10
-  - Michael McInerney, UNSW
+  - Michael McInerney, Proofcraft
   - Johannes Åman Pohjohla, UNSW
   - Miki Tanaka, UNSW
-  - Yanyan Shen, NIO
   - Robert Sison, Uni Melbourne
+  - Ivan Velickovic, UNSW
   - Jingyao Zhou, UNSW
-  - Siwei Zhuang, UNSW
 
   &nbsp;
 
