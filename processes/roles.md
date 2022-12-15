@@ -78,7 +78,8 @@ You can nominate someone for a role by emailing the chair of the TSC.
     of the project, sets processes, guidelines, etc. Meetings of the TSC
     are public and will be announced on the seL4 developer mailing list.
 
-   See [the TSC page][2] for current members.
+   See [the TSC page][2] for current members. TSC members have at least
+   Committer access to the seL4 GitHub repositories.
 
 [1]: https://sel4.systems/Foundation/About
 [2]: https://sel4.systems/Foundation/TSC/
