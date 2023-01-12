@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-01-12 03:17:23 +0000 -->
+<!-- Page last generated 2023-01-12 04:21:24 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -388,7 +388,8 @@ jblogs@in-container:/host/build-x86<span class="nv">$ </span>../init-build.sh <s
 jblogs@in-container:/host/build-x86<span class="nv">$ </span>ninja
 </code></pre></div></div>
 
-<p>If you need to make any code modifications or commit things to git, use terminal A. If you need to recompile or simulate an image, use terminal B.</p>
+<p>If you need to make any code modifications or commit things to git, use terminal A. If you need to recompile or simulate an image, use terminal B.
+Note, if QEMU fails when trying to simulate the image, try configuring your Docker host to give the container more memory.</p>
 
 <h2 id="adding-dependencies">Adding dependencies</h2>
 <p>To add more software inside the container, modify the <code class="highlighter-rouge">extras.dockerfile</code>. It contains an <code class="highlighter-rouge">apt-get</code> command which can be added to. After the first modification, docker will rebuild the extras image, and cache it after that.</p>
@@ -502,10 +503,10 @@ These images are used by the Trustworthy Systems Continuous Integration (CI) sof
         </li>
         
           <li>
-            Site last updated: Thu Jan 12 11:07:34 2023 +1100 bf46bb9
+            Site last updated: Thu Jan 12 15:17:30 2023 +1100 dc9a925
           </li>
           <li>
-                Page last updated: Thu Jan 12 11:07:34 2023 +1100 bf46bb9
+                Page last updated: Thu Jan 12 15:17:30 2023 +1100 dc9a925
           </li>
         
       </ul>
