@@ -95,6 +95,7 @@ jblogs@in-container:/host/build-x86$ ninja
 ```
 
 If you need to make any code modifications or commit things to git, use terminal A. If you need to recompile or simulate an image, use terminal B.
+Note, if QEMU fails when trying to simulate the image, try configuring your Docker host to give the container more memory.
 
 ## Adding dependencies
 To add more software inside the container, modify the `extras.dockerfile`. It contains an `apt-get` command which can be added to. After the first modification, docker will rebuild the extras image, and cache it after that.
