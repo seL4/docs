@@ -603,7 +603,7 @@ uptake.
 
 The seL4 kernel is released under GPL Version 2. Userland tools and
 libraries are mostly under BSD. See the
-[license page](https://sel4.systems/Info/license.pml) for more details.
+[license page](/processes/licenses) for more details.
 
 ## How do I contribute to seL4?
 See [How to Contribute](/Contributing).

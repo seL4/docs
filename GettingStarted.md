@@ -14,7 +14,7 @@ This page is a quick start for working with seL4 and its ecosystem.
 ### Sources
 
 Code and proofs are available on [GitHub](https://github.com/seL4), under standard
-[open-source licenses](http://sel4.systems/Info/GettingStarted/license.pml).
+[open-source licenses](/processes/licenses).
 
 There are [many repositories](/MaintainedRepositories).
 Of the most significant are:
