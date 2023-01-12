@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BeagleBone Black / Blue | seL4 docs</title>
+    <title>Licensing | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -79,8 +79,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/Hardware/">
-              <span property="name"><b>Supported Platforms</b></span>
+            <a property="item" typeof="WebPage" href="/processes/">
+              <span property="name"><b>Processes</b></span>
             </a>
             <meta property="position" content="2" />
         </li>
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">BeagleBone Black / Blue</span>
+            <span property="name">Licensing</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -131,6 +131,82 @@
 
 
 
+      <ul class="nav nav-sidebar">
+  
+        <li class="">
+          <a class="" href="/processes/conduct.html">
+            Code of Conduct
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/contributing.html">
+            Contributing
+          </a>
+        </li>
+  
+        <li class="active">
+          <a class="" href="/processes/licenses.html">
+            Licensing
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/style-guide.html">
+            Style Guide
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/git-conventions.html">
+            Git Conventions
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/code-review.html">
+            Pull requests
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/release-process.html">
+            Release process
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/rfc-process.html">
+            RFC process
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/test-status.html">
+            Test Status
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/websites.html">
+            Websites
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/processes/emails.html">
+            Emails
+          </a>
+        </li>
+  
+        <li class="">
+          <a class="" href="/MaintainedRepositories.html">
+            Maintained Repositories
+          </a>
+        </li>
+  
+      </ul>
+
 
 
 
@@ -150,106 +226,37 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="beaglebone-black--blue">BeagleBone Black / Blue</h1>
+      <h1 id="licensing">Licensing</h1>
 
-<p>This page contains info about building seL4 on
-<a href="https://beagleboard.org/black">BeagleBone Black</a> and
-<a href="https://beagleboard.org/blue">BeagleBone Blue</a>.</p>
+<p>The code and documentation in the repositories of the <a href="https://github.com/seL4/">seL4 GitHub
+organisation</a> are available under standard open-source licenses,
+identified by <a href="https://spdx.org">SPDX license tags</a>.</p>
 
-<h2 id="building-for-the-beaglebone-black--blue">Building for the BeagleBone Black / Blue</h2>
-<p>These instructions were written by Tim Newsham. The BeagleBone is
-a community-supported port.</p>
-
-<h3 id="requirements">Requirements</h3>
-<p>We suggest using the <code class="highlighter-rouge">arm-linux-gnueabi-</code> cross-compilers. Use
-<a href="/GettingStarted#getting-cross-compilers">the instructions on getting a toolchain</a>.</p>
-
-<h3 id="building">Building</h3>
-
-<h4 id="sel4test">seL4test</h4>
-
-<p>For BeagleBone Blue, substitute <code class="highlighter-rouge">am335x-boneblack</code> with <code class="highlighter-rouge">am335x-boneblue</code>.</p>
-
-<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
-repo <span class="nb">sync
-mkdir </span>cbuild
-<span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>am335x-boneblack <span class="nt">-DAARCH32</span><span class="o">=</span>1
-<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
-<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
-<span class="c"># parameters to suit your needs.</span>
-ninja
-
-</code></pre></div></div>
-
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
-
-<h2 id="booting-on-the-beaglebone-black--blue">Booting on the BeagleBone Black / Blue</h2>
-
-<h3 id="hardware-requirements-beaglebone-black">Hardware Requirements (BeagleBone Black)</h3>
+<p>The seL4 Foundation licenses and accepts contributions for</p>
 
 <ul>
-  <li>Power supply (5V DC or miniUSB cable)</li>
-  <li>Serial adapter <a href="http://elinux.org/Beagleboard:BeagleBone_Black_Serial">http://elinux.org/Beagleboard:BeagleBone_Black_Serial</a></li>
-  <li>microSD card for file booting or Ethernet cable for network boot</li>
+  <li>the seL4 kernel itself under <a href="https://spdx.org/licenses/GPL-2.0-only.html">GPL Version 2</a>,</li>
+  <li>user code and proof libraries under the <a href="https://spdx.org/licenses/BSD-2-Clause.html">BSD 2 Clause license</a>,</li>
+  <li>code and proofs that depend on GPL-code or GPL-proofs under GPL,</li>
+  <li>documentation under <a href="https://spdx.org/licenses/CC-BY-SA-4.0.html">Creative Commons Attribution-ShareAlike</a>.</li>
 </ul>
 
-<h3 id="hardware-requirements-beaglebone-blue">Hardware Requirements (BeagleBone Blue)</h3>
+<p>Note that, as in the <a href="https://spdx.org/licenses/Linux-syscall-note.html">Linux syscall note for the GPL</a>, the seL4 kernel
+GPL license does <em>not</em> cover user-level code that uses kernel services by normal
+system calls - this is merely considered normal use of the kernel, and does
+<em>not</em> fall under the heading of “derived work”. Syscall headers are provided
+under BSD.</p>
 
-<ul>
-  <li>Power supply (12V DC, 2S LiPo battery or microUSB)</li>
-  <li>Serial adapter (Connect to UT0 header)</li>
-  <li>microSD card for file booting or microUSB cable for network boot</li>
-</ul>
+<p>For a longer explanation of how the seL4 license does or does not affect your
+own code see also <a href="https://microkerneldude.wordpress.com/2019/12/09/what-does-sel4s-license-imply/">this blog post</a>.</p>
 
-<h3 id="interacting-with-u-boot">Interacting with U-Boot</h3>
+<p>The repositories of the seL4 GitHub organisation also contain third-party code
+under additional compatible open source licenses. See the individual file
+headers for details, or use one of the publicly available <a href="https://spdx.org">SPDX</a> tools to
+generate a software bill of materials. The directory <code class="highlighter-rouge">LICENSES/</code> in each repository
+contains the text for all licenses that are mentioned by files in that
+repository.</p>
 
-<p>Connect a serial adapter between your development box and the BeagleBone. Use
-a serial program such as picocom or screen to connect to the serial port:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>picocom /dev/ttyUSB0 -b 115200
-</code></pre></div></div>
-
-<p>Power on the device and hit space a few times to interrupt the normal boot
-process and get a U-Boot prompt.</p>
-
-<h4 id="booting-from-microsd-card">Booting from microSD card</h4>
-
-<p>To boot from a microSD card, copy the <code class="highlighter-rouge">sel4test-driver-image-arm-am335x</code> file
-to a FAT32 partition the microSD card and insert the card in the BeagleBone.</p>
-
-<p>At the U-Boot prompt, enter the following to load and run the image:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-am335x
-bootm ${loadaddr}
-</code></pre></div></div>
-
-<h4 id="booting-from-tftp">Booting from TFTP</h4>
-
-<p>To boot over Ethernet, configure your DHCP server to provide a DHCP lease and
-to specify sel4test as the boot file.
-Configure a TFTP server to serve the <code class="highlighter-rouge">sel4test-driver-image-arm-am335x</code> file.</p>
-
-<p>For BeagleBone Black, plug in an Ethernet cable. For BeagleBone Blue, make sure
-a microUSB cable is plugged in and connected to a computer running a DHCP
-server. Then, at the U-Boot prompt enter:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
-bootm ${loadaddr}
-</code></pre></div></div>
-
-<p>To load an alternate image from the TFTP server at 1.2.3.4, use:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp ${loadaddr} 1.2.3.4:refos-image-arm-am335x
-bootm ${loadaddr}
-</code></pre></div></div>
-
-<h2 id="other-resources">Other resources</h2>
-
-<ul>
-  <li><a href="http://julien.gunnm.org/geek/sel4/beaglebone%20black/2016/06/15/beaglebone-black-sel4-uart1/">Supporting the UART1 interface with CAmkES</a></li>
-</ul>
 
     </div>
   </div>
@@ -292,9 +299,9 @@ bootm ${loadaddr}
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/Hardware/Beaglebone.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/processes/licenses.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/Hardware/Beaglebone.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/processes/licenses.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
