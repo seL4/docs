@@ -23,7 +23,7 @@ different paths to follow through the tutorial material.  Choose the
 most relevant category below and follow the tutorials in the suggested
 order.
 
-Note that all of these these tutorials require C programming
+Note that all of these tutorials require C programming
 experience and some understanding of operating systems and computer
 architecture.  Suggested resources for these include:
 
