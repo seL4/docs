@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Proofs | seL4 docs</title>
+    <title>Odroid-C4 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -79,8 +79,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/projects/">
-              <span property="name"><b>Projects</b></span>
+            <a property="item" typeof="WebPage" href="/Hardware/">
+              <span property="name"><b>Supported Platforms</b></span>
             </a>
             <meta property="position" content="2" />
         </li>
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">The Proofs</span>
+            <span property="name">Odroid-C4</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -140,162 +140,6 @@
 
 
 
-    <ul class="nav nav-sidebar">
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4/">seL4</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="active">
-            <a class="" href="/projects/l4v/">L4.verified</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/camkes/">CAmkES</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/capdl/">CapDL</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/buildsystem/">seL4 Buildsystem</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/elfloader/">Elfloader</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4runtime/">The seL4 run-time</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/user_libs/">user_libs</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4-tutorials/">seL4 tutorials</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4webserver/">seL4webserver</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4bench/">sel4bench</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4test/">seL4Test</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/virtualization/">Virtualization</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/camkes-vm/">camkes-vm</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/dockerfiles/">Dockerfiles</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4_tools/">seL4_tools</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/docsite/">seL4 Documentation website</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/hardware_hacks/">Hardware Hacks</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/rust/">Rust</a>
-        <li>
-  
-    </ul>
-
 
 
 
@@ -303,113 +147,53 @@
 
 
   </div>
-  <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="the-sel4-proofs">The seL4 Proofs</h1>
+  <div class="col-sm-8 col-md-9 col-lg-8 main">
+    
+      <nav aria-label="Table of Contents">
+        <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
+<li class="toc-entry toc-h2"><a href="#booting-via-tftp">Booting via TFTP</a></li>
+</ul>
+      </nav>
+    
+    <div class="content">
+      <h1 id="odroid-c4">Odroid-C4</h1>
 
-<p>The formal proofs for seL4 are hosted at <a href="https://github.com/seL4/l4v">https://github.com/seL4/l4v</a>.</p>
+<p>The Odroid-C4 is a single board computer based on the Amlogic S905X3
+System-on-Chip.</p>
 
-<p>They are written in the <a href="http://isabelle.in.tum.de">Isabelle/HOL</a> theorem prover, and some
-familiarity with this tool is required to understand them. There are many
-learning resources available for Isabelle – see the Isabelle website for
-tutorials and reference manuals, and <a href="http://proofcraft.org/blog/proof-engineer-reading.html">this blog</a> post for a list of what
-you’d need to really get deep into the proofs.</p>
+<p><a href="https://wiki.odroid.com/odroid-c4/odroid-c4">https://wiki.odroid.com/odroid-c4/odroid-c4</a></p>
 
-<p>There are also many publications about these proofs, some of which are fairly
-complex. A comprehensive technical overview is available in the <a href="https://trustworthy.systems/publications/nictaabstracts/Klein_AEMSKH_14.abstract">2014 TOCS
-paper</a>. It’s been a few years since then, but the technical concepts are
-still current.</p>
+<p>Note that only 64-bit mode is supported.</p>
 
-<p>The repository <a href="https://github.com/seL4/l4v/blob/master/README.md">README file</a> shows which proofs are where, and how to set
-up your machine to run them. You can run and check that the proofs work for a
-specific version of seL4 without a deep understanding of their content –
-that is one of the advantages of machine-checked proofs.</p>
+<h2 id="building-sel4test">Building seL4test</h2>
 
-<p>We’re planning to add more pointers to this page on how to get started on
-smaller contributions. Stay tuned for updates and feel free to raise pull
-requests to add more information yourself!</p>
+<p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo <span class="nb">sync
+mkdir </span>cbuild
+<span class="nb">cd </span>cbuild
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>odroidc4 <span class="nt">-DAARCH64</span><span class="o">=</span>1
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
 
+</code></pre></div></div>
 
+<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+
+<h2 id="booting-via-tftp">Booting via TFTP</h2>
+
+<p>Make sure you’ve set up a TFTP server to serve the seL4 image.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
+tftp 0x20000000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-arm-odroidc4
+go 0x20000000
+</code></pre></div></div>
+
+    </div>
   </div>
-
-
-
-
-
-
-
-  
-  
-<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-  
-    <ul class="section-nav">
-    	<h2> L4.verified </h2> 
-        <li>
-          
-          <a style=" font-weight: bold; " class="" href="/projects/l4v/">
-            Documentation homepage
-          </a>
-        </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-        <h3>Useful URLs</h3>
-    
-        <li>
-          <a style="" class="" href="https://trustworthy.systems/projects/seL4-verification/">
-            Trustworthy Systems seL4 verification project
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" class="" href="https://proofcraft.systems">
-            Commercial verification services (Proofcraft)
-          </a>
-        </li>
-
-
-
-
-
-    
-        <h3>Repositories</h3>
-    
-        <li>
-          <a class="" href="https://github.com/seL4/l4v">
-            l4v
-          </a>
-        </li>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-    </ul>
-
-</div>
-
-
 </div>
 
     </main>
@@ -449,9 +233,9 @@ requests to add more information yourself!</p>
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/projects/l4v/index.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/Hardware/OdroidC4.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/projects/l4v/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/Hardware/OdroidC4.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
