@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-03-31 03:18:23 +0000 -->
+<!-- Page last generated 2023-04-01 03:17:08 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -470,9 +470,11 @@ need to install it from the <a href="http://www.mlton.org">MLton website</a>.</p
 so you will need to install it from the <a href="https://docs.haskellstack.org/en/stable/">Haskell Stack
 website</a>.</p>
 
+<p>Continue with the <a href="#python">python setup step</a> below.</p>
+
 <h3 id="linux-packages---ubuntu">Linux Packages - Ubuntu</h3>
 
-<p>These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.</p>
+<p>These instructions are intended for Ubuntu LTS versions 20.04, and 22.04.</p>
 
 <p>To run all proofs against the <strong>ARMv7-A</strong> architecture you will need to install
 the following packages:</p>
@@ -483,41 +485,34 @@ the following packages:</p>
     ncurses-dev librsvg2-bin device-tree-compiler cmake <span class="se">\</span>
     ninja-build curl zlib1g-dev texlive-fonts-recommended <span class="se">\</span>
     texlive-latex-extra texlive-metapost texlive-bibtex-extra <span class="se">\</span>
-    mlton-compiler haskell-stack
+    mlton-compiler haskell-stack repo
 </code></pre></div></div>
+
+<p>Continue with the <a href="#python">python setup step</a> below.</p>
 
 <h3 id="macos-packages">macOS packages</h3>
 
+<p>The proofs work well on Intel Macs. For Apple silicon Macs, the <code class="highlighter-rouge">mlton</code> compiler
+is currently not well supported. One approach would be to cross-compile <code class="highlighter-rouge">mlton</code> on
+another architecture and transfer it. Most proof sessions work without <code class="highlighter-rouge">mlton</code>,
+but the C parser and therefore the C refinement proofs depend on it.</p>
+
 <p>These instructions use Homebrew, which can be installed from <a href="https://brew.sh">their website</a>.
-The main packages that are needed are:</p>
+To install the main dependencies and cross compilers, use the following steps:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install git libxml2 ncurses librsvg dtc cmake ninja texlive rsync python ccache \
-    zstd haskell-stack
-</code></pre></div></div>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>git libxml2 ncurses librsvg dtc cmake ninja texlive rsync python ccache <span class="se">\</span>
+    zstd haskell-stack mlton arm-none-eabi-gcc repo
 
-<p>The installation of mlton on Apple silicon is currently not well supported. One
-approach would be to cross-compile mlton on another architecture and transfer it. On
-Intel machines, the following works:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install mlton
-</code></pre></div></div>
-
-<p>To install the cross-compilers, run</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install --cask gcc-arm-embedded
-
-brew install arm-none-eabi-gcc
+brew <span class="nb">install</span> <span class="nt">--cask</span> gcc-arm-embedded
 
 brew tap messense/macos-cross-toolchains
-brew install x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu
+brew <span class="nb">install </span>x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu
 
 brew tap riscv/riscv
-brew install riscv-tools
+brew <span class="nb">install </span>riscv-tools
 </code></pre></div></div>
 
-<p>Note that CMake will require the x86 compiler before it can be invoked.</p>
-
-<p>The instructions in the sections below should apply for both Linux and macOS.</p>
+<p>The instructions in the sections below apply for both Linux and macOS.</p>
 
 <h3 id="python">Python</h3>
 
@@ -529,20 +524,53 @@ pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 
 <h3 id="haskell-stack">Haskell Stack</h3>
 
-<p>After installing
-<a href="https://docs.haskellstack.org/en/stable/">haskell-stack</a>, make sure
-you’ve adjusted your <code class="highlighter-rouge">PATH</code> to include <code class="highlighter-rouge">$HOME/.local/bin</code>, and that you’re
-running an up-to-date version:</p>
+<p>After installing <a href="https://docs.haskellstack.org/en/stable/">haskell-stack</a>
+(already included in the packages above on Mac and Ubuntu), make sure you’ve
+adjusted your <code class="highlighter-rouge">PATH</code> to include <code class="highlighter-rouge">$HOME/.local/bin</code>, and that you’re running an
+up-to-date version:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stack upgrade <span class="nt">--binary-only</span>
 which stack <span class="c"># should be $HOME/.local/bin/stack</span>
 </code></pre></div></div>
 
+<h2 id="checking-out-the-repository-collection">Checking out the repository collection</h2>
+
+<p>The seL4 repositories use the <a href="https://gerrit.googlesource.com/git-repo/+/HEAD/README.md">Google <code class="highlighter-rouge">repo</code> tool</a> for configuration
+control and managing sets of repositories. For verification, this means in
+particular managing the correct combinations of the proofs, the kernel sources,
+and the Isabelle/HOL theorem prover.</p>
+
+<p>The <a href="https://github.com/seL4/verification-manifest">verification-manifest</a> repository records which versions of these are known
+to work well together.</p>
+
+<p>To check out a consistent set of repositories, run the following steps:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>verification
+<span class="nb">cd </span>verification
+repo init <span class="nt">-u</span> https://git@github.com/seL4/verification-manifest.git
+repo <span class="nb">sync</span>
+</code></pre></div></div>
+
+<p>If you are developing proofs, intending to contribute, and have <code class="highlighter-rouge">ssh</code> set up
+for GitHub, use</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-m</span> devel.xml <span class="nt">-u</span> ssh://git@github.com/seL4/verification-manifest.git
+</code></pre></div></div>
+
+<p>instead for the <code class="highlighter-rouge">init</code> line. The <code class="highlighter-rouge">-m devel.xml</code> gives you the <code class="highlighter-rouge">master</code> branch of
+the <code class="highlighter-rouge">l4v</code> repository instead of the last known-good version. To set up <code class="highlighter-rouge">git</code> for
+<code class="highlighter-rouge">ssh</code> make sure to use the <code class="highlighter-rouge">ssh://</code> protocol explicitly as above instead of just
+<code class="highlighter-rouge">git@github.com</code>, because the short form seems to confuse <code class="highlighter-rouge">repo</code>.</p>
+
+<p>If you are looking to use the proofs for a specific release version of seL4, use
+the <code class="highlighter-rouge">-m</code> option to select the corresponding manifest file in the
+<a href="https://github.com/seL4/verification-manifest">verification-manifest</a> repository.</p>
+
 <h2 id="isabelle-setup">Isabelle Setup</h2>
 
-<p>After the repository is set up using <code class="highlighter-rouge">repo</code> with
-<code class="highlighter-rouge">seL4/verification-manifest</code>, you should have following directory
-structure, where <code class="highlighter-rouge">l4v</code> is the repository you are currently looking at:</p>
+<p>After the repository is set up using <code class="highlighter-rouge">repo</code> with the <a href="https://github.com/seL4/verification-manifest">verification-manifest</a>
+repository, you should have following directory structure, where <code class="highlighter-rouge">l4v</code> is the
+repository you are currently looking at:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification/
     HOL4/
@@ -582,7 +610,7 @@ internet connection, this may take some time.</li>
 the installation works. This may take a few minutes.</li>
 </ul>
 
-<p>Alternatively, it is possible to use the official Isabelle2021 release
+<p>Alternatively, it is possible to use the official Isabelle2022 release
 bundle for your platform from the <a href="http://isabelle.in.tum.de">Isabelle website</a>. In this case, the
 installation steps above can be skipped, and you would replace the directory
 <code class="highlighter-rouge">verification/isabelle/</code> with a symbolic link to the Isabelle home directory
@@ -590,6 +618,11 @@ of the release version. Note that this is not recommended for development,
 since Google repo will overwrite this link when you synchronise repositories
 and Isabelle upgrades will have to be performed manually as development
 progresses.</p>
+
+<p>You are now set up to process proofs, for instance by following the instructions
+at the bottom of the main <a href="https://github.com/seL4/l4v/blob/master/README.md#running-the-proofs">README page</a>.</p>
+
+<p>The sections below contain a few tools and tips for proof development on seL4.</p>
 
 <h2 id="pide-tools">PIDE Tools</h2>
 
@@ -626,12 +659,18 @@ below to bind a key to the “Back” function. We recommend <code class="highli
 
 <p>Run the following commands in the directory <code class="highlighter-rouge">verification/l4v/</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p ~/.isabelle/jedit/macros
-cp misc/jedit/macros/goto-error.bsh ~/.isabelle/jedit/macros/.
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.isabelle/jedit/macros
+<span class="nb">cp </span>misc/jedit/macros/goto-error.bsh ~/.isabelle/jedit/macros/.
 </code></pre></div></div>
 
 <p>You can add keybindings for this macro in the usual way, by going to
-Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</p>
+<code class="highlighter-rouge">Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts</code>.</p>
+
+<p>Additionally, our fork of Isabelle/jEdit has an updated indenter which is more
+proof-context aware than the ‘original’ indenter. Pressing <code class="highlighter-rouge">ctrl+i</code> while some
+<code class="highlighter-rouge">apply</code>-script text is selected should auto-indent the script while respecting
+subgoal depth and maintaining the relative indentation of multi-line <code class="highlighter-rouge">apply</code>
+statements.</p>
 
 
   </div>
@@ -687,6 +726,7 @@ Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</p>
 <li class="toc-entry toc-h3"><a href="#haskell-stack">Haskell Stack</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#checking-out-the-repository-collection">Checking out the repository collection</a></li>
 <li class="toc-entry toc-h2"><a href="#isabelle-setup">Isabelle Setup</a></li>
 <li class="toc-entry toc-h2"><a href="#pide-tools">PIDE Tools</a>
 <ul>
