@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-04-01 03:17:08 +0000 -->
+<!-- Page last generated 2023-04-02 03:16:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -492,16 +492,13 @@ the following packages:</p>
 
 <h3 id="macos-packages">macOS packages</h3>
 
-<p>The proofs work well on Intel Macs. For Apple silicon Macs, the <code class="highlighter-rouge">mlton</code> compiler
-is currently not well supported. One approach would be to cross-compile <code class="highlighter-rouge">mlton</code> on
-another architecture and transfer it. Most proof sessions work without <code class="highlighter-rouge">mlton</code>,
-but the C parser and therefore the C refinement proofs depend on it.</p>
+<p>The proofs work well on Intel and Apple Silicon Macs.</p>
 
 <p>These instructions use Homebrew, which can be installed from <a href="https://brew.sh">their website</a>.
 To install the main dependencies and cross compilers, use the following steps:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>git libxml2 ncurses librsvg dtc cmake ninja texlive rsync python ccache <span class="se">\</span>
-    zstd haskell-stack mlton arm-none-eabi-gcc repo
+     zstd haskell-stack mlton arm-none-eabi-gcc repo
 
 brew <span class="nb">install</span> <span class="nt">--cask</span> gcc-arm-embedded
 
