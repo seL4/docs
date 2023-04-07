@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-04-06 03:18:01 +0000 -->
+<!-- Page last generated 2023-04-07 03:17:19 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -382,6 +382,40 @@ hardware tests.</p>
 <p>Since this benchmark will cause the kernel image to be an EL2 image, it
 will have an impact on the observed numbers for the other benchmark
 applications as well, since they’ll be using an unexpected kernel build.</p>
+
+<h1 id="adding-a-new-benchmark">Adding a new benchmark</h1>
+
+<p>Contributing a new benchmark to seL4bench requires a few steps:</p>
+
+<ul>
+  <li>Under <code class="highlighter-rouge">apps</code>, create a directory for your new benchmark and:
+    <ul>
+      <li>Provide a <code class="highlighter-rouge">CMakelists.txt</code> file that defines a new executable.</li>
+      <li>Provide a <code class="highlighter-rouge">src</code> folder that contains the source code for your
+benchmark.</li>
+    </ul>
+  </li>
+  <li>Under <code class="highlighter-rouge">apps/sel4bench</code>:
+    <ul>
+      <li>Update <code class="highlighter-rouge">CMakeLists.txt</code> to add your new benchmark to the list of
+benchmarks.</li>
+      <li>Under <code class="highlighter-rouge">src</code>:
+        <ul>
+          <li>Update <code class="highlighter-rouge">benchmark.h</code> to include your generated config for your benchmark, and provide a function declaration that will act as the entry point for your benchmark.</li>
+          <li>Provide a <code class="highlighter-rouge">&lt;benchmark_name&gt;.c</code> file that implements the above function declaration. This function should return a <code class="highlighter-rouge">benchmark_t</code> struct. Construct this struct accordingly. The struct expects a function to process the results of the benchmark, which you should provide in this file as well</li>
+          <li>Inside <code class="highlighter-rouge">main.c</code>, add your entry point function that was declared/defined above to the array of <code class="highlighter-rouge">benchmark_t</code> present.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Update <code class="highlighter-rouge">easy-settings.cmake</code> to add your new benchmark. You can define here whether the benchmark should be enabled by default or not.</li>
+  <li>Under <code class="highlighter-rouge">libsel4benchsupport/include</code>:
+    <ul>
+      <li>Provide a <code class="highlighter-rouge">&lt;benchmark_name.h&gt;</code> file that provides any extra definitions that your benchmark may need. You will also generally provide a <code class="highlighter-rouge">benchmark_name_results_t</code> struct here, which will be used to store the results of your benchmark when processing.</li>
+    </ul>
+  </li>
+  <li>Update <code class="highlighter-rouge">settings.cmake</code> to include your new benchmark.</li>
+</ul>
 
 <p><em>File included from <a href="https://github.com/sel4/sel4bench/blob/master/README.md">github repo</a> <a href="https://github.com/sel4/sel4bench/edit/master/README.md">edit</a></em></p>
 
