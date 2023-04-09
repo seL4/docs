@@ -222,7 +222,7 @@ specification correctly. In recent years, it has become possible to
 apply formal verification directly to the code that implements the
 software and to show that this code has specific properties.
 
-There are two broad approached to formal verification: fully automated
+There are two broad approaches to formal verification: fully automated
 methods such as model checking that work on limited systems and
 properties, and interactive mathematical proof which requires manual
 effort.
@@ -337,7 +337,7 @@ an application interfaces correctly with the kernel. One can use the
 integrity property to show that others can't interfere with private
 data, and the confidentiality proof to show that others can't get access
 to that private data. And one can tie together all of these into a proof
-about an entire (one-machine) systems without having to verify the code
+about an entire (one-machine) system without having to verify the code
 of the entire system.
 
 If you are interested in connecting to the seL4 proofs, let us know, as we
@@ -628,7 +628,7 @@ There are two recommended ways to do this.
 
 For build instructions, and how to get started, see the
 [Getting started](/GettingStarted) page.
-Also, UNSW's [Advanced Operating Systems course](https://cs9242.web.cse.unsw.edu.au/) has an extensive project component that
+Also, UNSW's [Advanced Operating Systems course](http://www.cse.unsw.edu.au/~cs9242) has an extensive project component that
 builds an OS on top of seL4. If you have access to an [Odroid-C2](https://www.hardkernel.com/shop/odroid-c2/),
 you should be able to do the project work yourself as a way of
 familiarising yourself with seL4.
