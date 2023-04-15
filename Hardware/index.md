@@ -35,7 +35,7 @@ We support PC99-style Intel Architecture Platforms.
 
 ## ARM
 
-seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
+seL4 has support for select ARMv7 and ARMv8 Platforms.
 
 * [General info on ARM Platforms](GeneralARM)
 
@@ -51,7 +51,7 @@ seL4 has support for select ARMv6, ARMv7 and ARMv8 Platforms.
 
 ## RISC-V
 
-We currently provide support for some of the RISC-V platforms. Multicore, floating point unit (FPU) and hypervisor extension support are under internal review, will be released soon.
+We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
 | Platform | Simulation | System-on-chip | Core | Arch | Virtualisation | Status | Contributed by | Maintained by |
 {% for page in sorted %}
