@@ -45,7 +45,6 @@ on the main branch.
 <span class="plain-links">[![External](https://github.com/seL4/l4v/workflows/External/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/external.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![Weekly Clean](https://github.com/seL4/l4v/workflows/Weekly%20Clean/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/weekly-clean.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![Proofs](https://github.com/seL4/l4v/workflows/Proofs/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/proof-deploy.yml?query=branch%3Amaster)</span>
-<span class="plain-links">[![Prepare binary verification](https://github.com/seL4/l4v/workflows/Prepare%20binary%20verification/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/binary.yml?query=branch%3Amaster)</span>
 
 ### <span class="plain-links">[sel4bench](https://github.com/seL4/sel4bench/)</span>
 
@@ -173,7 +172,6 @@ on the main branch.
 <span class="plain-links">[![External](https://github.com/seL4/l4v/workflows/External/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/external.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![Weekly Clean](https://github.com/seL4/l4v/workflows/Weekly%20Clean/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/weekly-clean.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![Proofs](https://github.com/seL4/l4v/workflows/Proofs/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/proof-deploy.yml?query=branch%3Amaster)</span>
-<span class="plain-links">[![Prepare binary verification](https://github.com/seL4/l4v/workflows/Prepare%20binary%20verification/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/binary.yml?query=branch%3Amaster)</span>
 
 ### <span class="plain-links">[mcs-examples](https://github.com/seL4/mcs-examples/)</span>
 
