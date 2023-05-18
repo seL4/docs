@@ -39,7 +39,7 @@ will be produced in manual.pdf.
 - [Git Repository and Build
       instructions](http://github.com/seL4/l4v/)
 - [Trustworthy
-      Systems research project pages](https://trustworthy.systems/projects.html)
+      Systems research project pages](https://trustworthy.systems/projects/)
 - Isabelle Proof Assistant:
 
   -   [Concrete Semantics Isabelle textbook](http://concrete-semantics.org/)
