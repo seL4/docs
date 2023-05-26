@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-05-25 03:18:00 +0000 -->
+<!-- Page last generated 2023-05-26 03:17:59 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -363,6 +363,10 @@ The user can then further back the reservation with seL4 frames by performing <c
 </blockquote>
 
 <blockquote>
+  <p><a href="#function-vm_map_reservationvm-reservation-frames-num_frames-frame_size_bits"><code class="highlighter-rouge">vm_map_reservation_frames(vm, reservation, frames, num_frames, frame_size_bits)</code></a></p>
+</blockquote>
+
+<blockquote>
   <p><a href="#function-vm_get_reservation_memory_regionreservation-addr-size"><code class="highlighter-rouge">vm_get_reservation_memory_region(reservation, addr, size)</code></a></p>
 </blockquote>
 
@@ -456,6 +460,28 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
   <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
   <li><code class="highlighter-rouge">map_iterator {memory_map_iterator_fn}</code>: Iterator function that returns a cap to the memory region being mapped</li>
   <li><code class="highlighter-rouge">cookie {void *}</code>: Cookie to pass onto map_iterator function</li>
+</ul>
+
+<p><strong>Returns:</strong></p>
+
+<ul>
+  <li>-1 on failure otherwise 0 for success</li>
+</ul>
+
+<p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
+
+<h3 id="function-vm_map_reservation_framesvm-reservation-frames-num_frames-frame_size_bits">Function <code class="highlighter-rouge">vm_map_reservation_frames(vm, reservation, frames, num_frames, frame_size_bits)</code></h3>
+
+<p>Map a reservation into the VM’s virtual address space from given frames</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="highlighter-rouge">frames {seL4_CPtr *}</code>: Array of frame caps</li>
+  <li><code class="highlighter-rouge">num_frames {size_t}</code>: Number of frame caps</li>
+  <li><code class="highlighter-rouge">frame_size_bits {size_t}</code>: Bit size of a single frame</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
