@@ -93,5 +93,5 @@ so far to make sure you didn't forget something along the way. If you
 see your file listed, then do something like:
 ```
 fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2711
-bootefi 0x10000000
+go 0x10000000
 ```
