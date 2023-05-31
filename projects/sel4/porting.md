@@ -59,7 +59,7 @@ seL4test needs user level serial and timer drivers to run. Add these drivers and
 order to get the test suite running. The directory structure and files will look something like the following. Some of these
 files may not have anything in them but include them anyway to keep the build system happy.
 
-Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have it's
+Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have its
 own unique programming sequence and can sometimes be a bit tricky.
 
 You can find the physical addresses and interrupt numbers for each device in its platform reference manual and copy them into the right places.
