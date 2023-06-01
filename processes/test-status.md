@@ -297,7 +297,6 @@ on the main branch.
 
 ### <span class="plain-links">[website](https://github.com/seL4/website/)</span>
 
-<span class="plain-links">[![Bamboo](https://github.com/seL4/website/workflows/Bamboo/badge.svg?branch=master)](https://github.com/seL4/website/actions/workflows/bamboo.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![CI](https://github.com/seL4/website/workflows/CI/badge.svg?branch=master)](https://github.com/seL4/website/actions/workflows/push.yml?query=branch%3Amaster)</span>
 
 ### <span class="plain-links">[whitepaper](https://github.com/seL4/whitepaper/)</span>
