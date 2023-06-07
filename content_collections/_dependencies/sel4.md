@@ -42,7 +42,7 @@ sudo apt-get install u-boot-tools
 For Ubuntu 18.04:
 
 ```sh
-sudo apt-get install python-dev python-pip python3-dev python3-pip
+sudo apt-get install python3-dev python3-pip
 sudo apt-get install protobuf-compiler python-protobuf
 sudo apt-get install gcc-8 g++-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
@@ -124,9 +124,6 @@ Regardless of your Linux distribution, python dependencies are required to build
 ```sh
 pip3 install --user setuptools
 pip3 install --user sel4-deps
-# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
-pip install --user setuptools
-pip install --user sel4-deps
 ```
 
-(Some distributions use `pip` for python3 and `pip2` for python2; others uses `pip` for python2 and `pip3` for python3.  Use the Python 3 version for your distribution)
+(Some distributions use `pip` for python3, others use `pip3`.  Use the Python 3 version for your distribution)

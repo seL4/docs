@@ -14,8 +14,6 @@ The Python dependencies required by the CAmkES build toolchain can be installed 
 
 ```sh
 pip3 install --user camkes-deps
-# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
-pip install --user camkes-deps
 ```
 
 ### Haskell Dependencies
