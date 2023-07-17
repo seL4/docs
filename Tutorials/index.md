@@ -202,7 +202,7 @@ through intensive quality assurance and do have bugs. Contributions are welcome.
 ### CAmkES tutorials
 
 These tutorials get you started with our component system CAmkES, which
-is allows you to configure static systems through components. CAmkES
+allows you to configure static systems through components. CAmkES
 generates the glue code for interacting with seL4 and is designed for building
 high-assurance, static systems.
 
