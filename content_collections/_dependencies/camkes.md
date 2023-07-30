@@ -31,7 +31,7 @@ sudo apt-get install haskell-stack
 
 ####  Ubuntu
 
-These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.
+These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 
 Install the following packages:
 
