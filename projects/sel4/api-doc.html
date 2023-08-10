@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-08-09 03:17:02 +0000 -->
+<!-- Page last generated 2023-08-10 03:18:17 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8306,250 +8306,6 @@ serviced.</p>
 </table>
 
 <h3 id="aarch64-specific-object-methods">Aarch64-Specific Object Methods</h3>
-<h3 id="sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory</h3>
-
-<h4 id="map-11">Map</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Map</code></p>
-
-<p>Map a page directory</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the page directory being operated on.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vspace</code></td>
-      <td>Top level translation table. Must be assigned to an ASID pool.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">vaddr</code></td>
-      <td>Virtual adress</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_VMAttributes</code></td>
-      <td><code class="highlighter-rouge">attr</code></td>
-      <td>VM Attributes for the mapping.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
-      <td>The <code class="highlighter-rouge">vspace</code>  does not have a Page Upper Directory mapped at <code class="highlighter-rouge">vaddr</code>. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
-      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Description:</strong> Map a page directory (level 2) to an upper page directory (level 1).</p>
-
-<h4 id="unmap-11">Unmap</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageDirectory_Unmap</code></p>
-
-<p>Unmap a page directory</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the page directory being operated on.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
-      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Description:</strong> Unmap a page directory (level 2) from an upper page directory (level 1)</p>
-<h3 id="sel4_arm_pageupperdirectory">seL4_ARM_PageUpperDirectory</h3>
-
-<h4 id="map-12">Map</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageUpperDirectory_Map</code></p>
-
-<p>Map an upper page directory</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageUpperDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the upper page directory being operated on.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vspace</code></td>
-      <td>Top level translation table. Must be assigned to an ASID pool.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">vaddr</code></td>
-      <td>Virtual address</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_VMAttributes</code></td>
-      <td><code class="highlighter-rouge">attr</code></td>
-      <td>VM Attributes for the mapping.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>A mapping already exists for this level in <code class="highlighter-rouge">vspace</code>  at <code class="highlighter-rouge">vaddr</code>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
-      <td>The <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidArgument</code></td>
-      <td>The <code class="highlighter-rouge">vaddr</code>  is in the kernel virtual address range.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">_service</code>  is already mapped in a VSpace.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Description:</strong> Map an upper page directory (level 1) to a top level translation table (level 0).</p>
-
-<h4 id="unmap-12">Unmap</h4>
-<p><code class="highlighter-rouge">static inline int seL4_ARM_PageUpperDirectory_Unmap</code></p>
-
-<p><em>TODO</em></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_ARM_PageUpperDirectory</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the upper page directory being operated on.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
-      <td>A copy of the <code class="highlighter-rouge">_service</code>  capability exists.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_arm_vspace">seL4_ARM_VSpace</h3>
 
 <h4 id="clean-data-2">Clean Data</h4>
@@ -8998,7 +8754,7 @@ serviced.</p>
   </tbody>
 </table>
 
-<h4 id="map-13">Map</h4>
+<h4 id="map-11">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Map</code></p>
 
 <p>Map a page into a page table.</p>
@@ -9079,7 +8835,7 @@ serviced.</p>
 
 <p><strong>Description:</strong> Takes a VSpace, or top-level <code class="highlighter-rouge">Page Table</code>, capability as an argument and installs a reference to the given <code class="highlighter-rouge">Page</code> in the page table slot corresponding to the given address. If a page is already mapped at the same virtual address, update the mapping attributes. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
 
-<h4 id="unmap-13">Unmap</h4>
+<h4 id="unmap-11">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_Page_Unmap</code></p>
 
 <p>Unmap a page.</p>
@@ -9125,7 +8881,7 @@ serviced.</p>
 <p><strong>Description:</strong> Removes an existing mapping.</p>
 <h3 id="sel4_riscv_pagetable">seL4_RISCV_PageTable</h3>
 
-<h4 id="map-14">Map</h4>
+<h4 id="map-12">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_PageTable_Map</code></p>
 
 <p>Map a page table at a specific virtual address.</p>
@@ -9197,7 +8953,7 @@ serviced.</p>
 
 <p><strong>Description:</strong> Starting from the VSpace, map the page table object at any unpopulated level for the provided virtual address. If all paging structures and mappings are present for this virtual address, return an seL4_DeleteFirst error.</p>
 
-<h4 id="unmap-14">Unmap</h4>
+<h4 id="unmap-12">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_PageTable_Unmap</code></p>
 
 <p>Unmap a page table.</p>
@@ -9568,18 +9324,6 @@ serviced.</p>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#aarch64-specific-object-methods">Aarch64-Specific Object Methods</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_pagedirectory-1">seL4_ARM_PageDirectory</a>
-<ul>
-<li class="toc-entry toc-h4"><a href="#map-11">Map</a></li>
-<li class="toc-entry toc-h4"><a href="#unmap-11">Unmap</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h3"><a href="#sel4_arm_pageupperdirectory">seL4_ARM_PageUpperDirectory</a>
-<ul>
-<li class="toc-entry toc-h4"><a href="#map-12">Map</a></li>
-<li class="toc-entry toc-h4"><a href="#unmap-12">Unmap</a></li>
-</ul>
-</li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_vspace">seL4_ARM_VSpace</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#clean-data-2">Clean Data</a></li>
@@ -9605,14 +9349,14 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#sel4_riscv_page">seL4_RISCV_Page</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#getaddress">GetAddress</a></li>
-<li class="toc-entry toc-h4"><a href="#map-13">Map</a></li>
-<li class="toc-entry toc-h4"><a href="#unmap-13">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-11">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#unmap-11">Unmap</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_riscv_pagetable">seL4_RISCV_PageTable</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#map-14">Map</a></li>
-<li class="toc-entry toc-h4"><a href="#unmap-14">Unmap</a></li>
+<li class="toc-entry toc-h4"><a href="#map-12">Map</a></li>
+<li class="toc-entry toc-h4"><a href="#unmap-12">Unmap</a></li>
 </ul>
 </li>
 </ul>
