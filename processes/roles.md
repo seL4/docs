@@ -28,6 +28,7 @@ You can nominate someone for a role by emailing the chair of the TSC.
 
   - Christopher Guikema, Dornerworks
   - Jesse Millwood, Dornerworks
+  - Alwin Joshy, UNSW
   - Benno Leslie, Breakaway Consulting
   - Indan Zupancic, MEP
 
