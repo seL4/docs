@@ -135,7 +135,7 @@ There is unverified support for the SystemMMU on multiple ARM boards.
 
 ### Does seL4 support multicore?
 
-Multicore is presently supported on x64 and Arm v7 (32-bit) and v8 (64-bit).
+Multicore is presently supported on x64, ARMv7, ARMv8, and RISC-V.
 Verification of the multicore kernel is in progress (but presently as an
 unfunded background activity).
 
