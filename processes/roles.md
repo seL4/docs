@@ -30,7 +30,6 @@ You can nominate someone for a role by emailing the chair of the TSC.
   - Jesse Millwood, Dornerworks
   - Alwin Joshy, UNSW
   - Benno Leslie, Breakaway Consulting
-  - Indan Zupancic, MEP
 
   &nbsp;
 
@@ -46,17 +45,16 @@ You can nominate someone for a role by emailing the chair of the TSC.
     people:
 
   - Ryan Barry, Proofcraft
-  - Scott Buckley, UNSW
   - Peter Chubb, UNSW
-  - Axel Heider, Hensoldt Cyber
-  - Zoltan Kocsis, UNSW
+  - Axel Heider
   - Damon Lee, Kry10
   - Michael McInerney, Proofcraft
   - Johannes Åman Pohjohla, UNSW
+  - Robert Sison, UNSW
   - Miki Tanaka, UNSW
-  - Robert Sison, Uni Melbourne
   - Ivan Velickovic, UNSW
   - Jingyao Zhou, UNSW
+  - Indan Zupancic
 
   &nbsp;
 
