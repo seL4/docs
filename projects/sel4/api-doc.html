@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-08-26 03:17:49 +0000 -->
+<!-- Page last generated 2023-08-27 03:17:11 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8306,6 +8306,43 @@ serviced.</p>
 </table>
 
 <h3 id="aarch64-specific-object-methods">Aarch64-Specific Object Methods</h3>
+<h3 id="sel4_arm_smc">seL4_ARM_SMC</h3>
+
+<h4 id="smc-call">SMC Call</h4>
+<p><code class="highlighter-rouge">static inline int seL4_ARM_SMC_Call</code></p>
+
+<p>Tell the microkernel to make the real SMC call.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SMC</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to allow threads to make Secure Monitor Calls.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SMCContext *</code></td>
+      <td><code class="highlighter-rouge">smc_args</code></td>
+      <td>The structure that has the provided arguments.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_ARM_SMCContext *</code></td>
+      <td><code class="highlighter-rouge">smc_response</code></td>
+      <td>The structure to capture the responses.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<p><strong>Description:</strong> Takes x0-x7 as arguments to an SMC call which are defined as a seL4_ARM_SMCContext struct. The microkernel makes the SMC call and then returns the results as a new seL4_ARM_SMCContext.</p>
 <h3 id="sel4_arm_vspace">seL4_ARM_VSpace</h3>
 
 <h4 id="clean-data-2">Clean Data</h4>
@@ -9324,6 +9361,11 @@ serviced.</p>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#aarch64-specific-object-methods">Aarch64-Specific Object Methods</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_arm_smc">seL4_ARM_SMC</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#smc-call">SMC Call</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_vspace">seL4_ARM_VSpace</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#clean-data-2">Clean Data</a></li>
