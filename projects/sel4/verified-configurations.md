@@ -67,26 +67,35 @@ The proofs for RISCV64\_MCS/ARM\_MCS (mixed-criticality extensions to real-time
 seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
 [roadmap](/projects/roadmap.html) for status and upcoming features.
 
-## ARM
+## ARM Sabre Lite
 
 | File | `ARM_verified.cmake`
 | Architecture | ARMv7
-| Platform | iMX.6 (e.g. Sabre Lite)
+| Platform | i.MX 6 (Sabre Lite)
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
+
+## ARM IMX8MM-EVK
+
+| File | `ARM_imx8mm_verified.cmake`
+| Architecture | ARMv7
+| Platform | IMX8MM-EVK
+| Floating-point support | Yes
+| Hypervisor mode | No
+| **Verified properties** | functional correctness incl fast path
 
 ## ARM_MCS
 
 File | `ARM_MCS_verified.cmake`
 Architecture | ARMv7
-Platform | iMX.6 (e.g. Sabre Lite)
+Platform | i.MX 6 (Sabre Lite)
 Floating-point support | No
 Hypervisor mode | No
 Mixed-Criticality-Systems API | Yes
 **Verified properties** | in progress (design-level functional correctness completed)
 
-## ARM\_HYP
+## ARM\_HYP TK1
 
 File | `ARM_HYP_verified.cmake`
 Architecture | ARMv7
@@ -95,11 +104,20 @@ Floating-point support | No
 Hypervisor mode | Yes
 **Verified properties** | functional correctness, incl fast path
 
+## ARM\_HYP Exynos5
+
+File | `ARM_HYP_exynos5_verified.cmake`
+Architecture | ARMv7
+Platform | Odroid XU4
+Floating-point support | No
+Hypervisor mode | Yes
+**Verified properties** | functional correctness, incl fast path
+
 ## AARCH64
 
 | File | `AARCH64_verified.cmake`
 | Architecture | ARMv8
-| Platform | Tegra X2 (e.g. Jetson TX2)
+| Platform | Tegra X2 (Jetson TX2)
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | in progress
