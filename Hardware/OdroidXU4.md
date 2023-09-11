@@ -8,7 +8,7 @@ virtualization: ARM HYP
 iommu: limited System MMU
 soc: Exynos5
 cpu: Cortex-A15
-Status: FC with HYP, no System MMU
+Status: "[FC with HYP, no SMMU](/projects/sel4/verified-configurations.html#arm_hyp-exynos5)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
