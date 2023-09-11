@@ -9,7 +9,7 @@ virtualization: "No"
 iommu: "No"
 soc: IMX8MM-EVK
 cpu: Cortex-A53 Quad 1.8 GHz
-Status: "FC, unmaintained"
+Status: "FC"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
