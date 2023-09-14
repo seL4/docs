@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-09-14 03:18:18 +0000 -->
+<!-- Page last generated 2023-09-14 08:30:31 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -294,7 +294,7 @@ interfaces, or the kernel startup at boot.</p>
 seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
 <a href="/projects/roadmap.html">roadmap</a> for status and upcoming features.</p>
 
-<h2 id="arm">ARM</h2>
+<h2 id="arm-sabre-lite">ARM Sabre Lite</h2>
 
 <table>
   <tbody>
@@ -308,7 +308,7 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
     </tr>
     <tr>
       <td>Platform</td>
-      <td>iMX.6 (e.g. Sabre Lite)</td>
+      <td>i.MX 6 (Sabre Lite)</td>
     </tr>
     <tr>
       <td>Floating-point support</td>
@@ -321,6 +321,37 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
     <tr>
       <td><strong>Verified properties</strong></td>
       <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm-imx8mm-evk">ARM IMX8MM-EVK</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">ARM_imx8mm_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>IMX8MM-EVK</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path</td>
     </tr>
   </tbody>
 </table>
@@ -339,7 +370,7 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
     </tr>
     <tr>
       <td>Platform</td>
-      <td>iMX.6 (e.g. Sabre Lite)</td>
+      <td>i.MX 6 (Sabre Lite)</td>
     </tr>
     <tr>
       <td>Floating-point support</td>
@@ -360,7 +391,7 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
   </tbody>
 </table>
 
-<h2 id="arm_hyp">ARM_HYP</h2>
+<h2 id="arm_hyp-tk1">ARM_HYP TK1</h2>
 
 <table>
   <tbody>
@@ -391,6 +422,37 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
   </tbody>
 </table>
 
+<h2 id="arm_hyp-exynos5">ARM_HYP Exynos5</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="highlighter-rouge">ARM_HYP_exynos5_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>Odroid XU4</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, incl fast path</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="aarch64">AARCH64</h2>
 
 <table>
@@ -405,7 +467,7 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
     </tr>
     <tr>
       <td>Platform</td>
-      <td>Tegra X2 (e.g. Jetson TX2)</td>
+      <td>Tegra X2 (Jetson TX2)</td>
     </tr>
     <tr>
       <td>Floating-point support</td>
@@ -533,9 +595,11 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
 <li class="toc-entry toc-h3"><a href="#unverified-features">Unverified Features</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#arm">ARM</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-sabre-lite">ARM Sabre Lite</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-imx8mm-evk">ARM IMX8MM-EVK</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_mcs">ARM_MCS</a></li>
-<li class="toc-entry toc-h2"><a href="#arm_hyp">ARM_HYP</a></li>
+<li class="toc-entry toc-h2"><a href="#arm_hyp-tk1">ARM_HYP TK1</a></li>
+<li class="toc-entry toc-h2"><a href="#arm_hyp-exynos5">ARM_HYP Exynos5</a></li>
 <li class="toc-entry toc-h2"><a href="#aarch64">AARCH64</a></li>
 <li class="toc-entry toc-h2"><a href="#x64">X64</a></li>
 <li class="toc-entry toc-h2"><a href="#riscv64">RISCV64</a></li>
@@ -980,10 +1044,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Fri Sep 1 09:40:59 2023 +0200 3a0f883ad1
+            Site last updated: Thu Sep 14 10:24:17 2023 +0200 a83ee45263
           </li>
           <li>
-                Page last updated: Fri Sep 30 10:50:13 2022 +0200 3e1cdeb337
+                Page last updated: Thu Sep 14 10:24:17 2023 +0200 a83ee45263
           </li>
         
       </ul>
