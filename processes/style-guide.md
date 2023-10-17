@@ -248,6 +248,10 @@ anything in the general guide.
 * Do not use `typedef` to create a type alias for an `enum`; always
   specify `enum` types as `word_t` (otherwise, the `enum` size is
   determined by the compiler).
+* All `struct`s must be packed, i.e. not contain any implicit padding
+  that is inserted by the compiler (otherwise memory content is
+  unspecified). Use explicit `padding` fields of the required type size to
+  remove implicit compiler padding.
 
 ## Further resources
 
