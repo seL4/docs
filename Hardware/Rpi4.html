@@ -3,13 +3,13 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-10-18 03:17:37 +0000 -->
+<!-- Page last generated 2023-10-18 12:50:33 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Raspberry PI 4 Model B | seL4 docs</title>
+    <title>Raspberry Pi 4 Model B | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -89,7 +89,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Raspberry PI 4 Model B</span>
+            <span property="name">Raspberry Pi 4 Model B</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -150,44 +150,27 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="raspberry-pi-4-model-b">Raspberry PI 4 Model B</h1>
+      <h1 id="raspberry-pi-4-model-b">Raspberry Pi 4 Model B</h1>
 
 <h2 id="serial-connection">Serial connection</h2>
-<p>Serial TX and RX are located at GPIO pins 14 and 15 respectively</p>
+<p>Serial TX and RX are located at GPIO pins 14 and 15 respectively.</p>
 
 <h2 id="u-boot">U-Boot</h2>
 
-<p>Right now, the default U-Boot will not successfully boot an seL4 image
-on the RPi4 because of cache configuration issues in the seL4
-ELFLoader. This problem can be remedied by having U-boot disable caches
-before loading seL4. Unfortunately, the stock upstream U-boot used to
-disable caches before loading the kernel image, but as of this patch
-(<a href="https://github.com/u-boot/u-boot/commit/995eab8b5b580b67394312b1621c60a71042cd18">https://github.com/u-boot/u-boot/commit/995eab8b5b580b67394312b1621c60a71042cd18</a>),
-U-boot no longer disables caches.</p>
-
-<p>In order to obtain a U-boot binary that disables caching, you should
-compile U-Boot from source yourself.
-You can do this by cloning U-boot from upstream,
-then reverting commit 995eab8b5b580b67394312b1621c60a71042cd18, and then
-building it:</p>
+<p>In order to build U-Boot for the Raspberry Pi 4B, run the following commands:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/u-boot/u-boot.git u-boot
 <span class="nb">cd </span>u-boot
-git revert 995eab8b5b580b67394312b1621c60a71042cd18
 make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu- rpi_4_defconfig
 make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-
 </code></pre></div></div>
 
-<p>This will enable you to get the most up-to-date U-boot which will boot
-seL4 on the RPi4 successfully.</p>
+<p>In the <code class="highlighter-rouge">u-boot</code> directory you should now see the U-Boot image <code class="highlighter-rouge">u-boot.bin</code> indicating that U-Boot has successfully compiled.</p>
 
-<p><strong>NOTE:</strong> Automatic revert is not going to work if you are using the
-latest version of u-boot. You need to manually revert the change by
-looking at the changeset.</p>
+<p>More information regarding U-Boot support for the Raspberry Pi can be found <a href="https://u-boot.readthedocs.io/en/latest/board/broadcom/raspberrypi.html">here</a>.</p>
 
 <h2 id="sd-card-setup">SD card setup</h2>
-<p>The PI boots from the first FAT32 partition on the
-SD card. Where files are specified, they should be located in the root
-directory of this partition.</p>
+<p>The RPi4 boots from the first FAT32 partition on the microSD card. Where files are specified,
+they should be located in the root directory of this partition.</p>
 
 <table>
   <thead>
@@ -209,37 +192,37 @@ directory of this partition.</p>
       <td>SSBL</td>
       <td>bootcode.bin</td>
       <td>Loads GPU firmware and boots GPU</td>
-      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/bootcode.bin">https://github.com/raspberrypi/firmware/tree/master/boot/bootcode.bin</a></td>
     </tr>
     <tr>
       <td>GPU firmware</td>
       <td>start4.elf</td>
       <td>Loads CPU bootloader and boots CPU</td>
-      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf">https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf</a></td>
     </tr>
     <tr>
-      <td>Usually the Linux kernel, but could also be u-boot</td>
+      <td>Usually the Linux kernel, but could also be U-Boot</td>
       <td>u-boot.bin</td>
-      <td>u-boot</td>
+      <td>U-Boot binary</td>
       <td>Compiled using the instructions above</td>
     </tr>
     <tr>
       <td> </td>
       <td>config.txt</td>
-      <td>u-boot parameters</td>
-      <td>Add <code class="highlighter-rouge">arm_64bit=1</code>, <code class="highlighter-rouge">kernel=u-boot.bin</code>, and <code class="highlighter-rouge">dtoverlay=disable-bt</code> to the bottom of config.txt</td>
+      <td>U-Boot parameters</td>
+      <td>Add <code class="highlighter-rouge">arm_64bit=1</code>, <code class="highlighter-rouge">kernel=u-boot.bin</code>, and <code class="highlighter-rouge">dtoverlay=disable-bt</code> to the bottom of <code class="highlighter-rouge">config.txt</code></td>
     </tr>
     <tr>
       <td> </td>
       <td>uboot.env</td>
-      <td>u-boot saved environment</td>
-      <td>Generated by u-boot (default environment) bootcmd copied to bootcmd_orig bootcmd and bootdelay removed</td>
+      <td>U-Boot saved environment</td>
+      <td>Generated by U-Boot (default environment) bootcmd copied to bootcmd_orig bootcmd and bootdelay removed. This file will not exist when you first setup your SD card.</td>
     </tr>
     <tr>
       <td> </td>
       <td>bcm2711-rpi-4-b.dtb</td>
       <td>RPi4 device tree blob</td>
-      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot</a></td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/bcm2711-rpi-4-b.dtb">https://github.com/raspberrypi/firmware/tree/master/boot/bcm2711-rpi-4-b.dtb</a></td>
     </tr>
     <tr>
       <td> </td>
@@ -252,19 +235,22 @@ directory of this partition.</p>
 
 <h2 id="getting-sel4-onto-your-raspberry-pi-4">Getting seL4 onto your Raspberry Pi 4</h2>
 
-<p>Because you have applied a device tree overlay to use the UART on GPIO pins 14 and 15,
-you will have to update seL4 to use serial0 instead of serial1.
-In the kernel at <code class="highlighter-rouge">src/plat/bcm2711/overlay-rpi4.dts</code>, you should replace all instances of
-<code class="highlighter-rouge">serial1</code> with <code class="highlighter-rouge">serial0</code>.</p>
+<p>The final step to test that you have setup your RPi4 correctly is to build and run the
+seL4test project.</p>
 
-<p>Then, you should then build the kernel, such as in seL4test:</p>
+<p>You will see that the <code class="highlighter-rouge">init-build.sh</code> command contains the flag
+<code class="highlighter-rouge">-DRPI4_MEMORY</code>, this specifies how much RAM exists on the Raspberry Pi that will run
+the final seL4 image. Since seL4 needs to know the physical memory layout of the hardware
+at build time, and the RPi4 has multiple models with different amounts of RAM, we have to
+specify how much RAM the system will have when we build seL4. If <code class="highlighter-rouge">-DRPI4_MEMORY</code> is not supplied,
+seL4 defaults to expecting 8GB of memory.</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
 repo <span class="nb">sync
 mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rpi4 <span class="nt">-DAARCH64</span><span class="o">=</span>1
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rpi4 <span class="nt">-DAARCH64</span><span class="o">=</span>1 <span class="nt">-DRPI4_MEMORY</span><span class="o">=</span>&lt;1024,2048,4096,8192&gt;
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -274,19 +260,26 @@ ninja
 
 <p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
 
-<p>The boot method described here is through the SD card. You should set up the files
-on your SD card as described in the previous section.</p>
+<p>Now that we have a bootable image, we can run it on your RPi4. The following instructions describe
+how to use a microSD card to boot seL4, using the seL4test image as well as the files mentioned
+in the previous section.</p>
 
-<p>Following this, copy your seL4 image (such as an seL4test image) onto
-the SD card in its root directory. You can now remove the SD
-card from your PC and re-insert it into the RPi4, and power the RPi4 on.</p>
+<p>The first step is to copy the seL4 image onto the microSD card to the root directory. After
+removing the card from your computer and inserting into your RPi4, you can power on the RPi4.</p>
 
-<p>When the RPi4 boots up, be sure to interrupt the boot process and drop
-into the U-boot command prompt. From the U-boot command prompt, type
-something like the following: <code class="highlighter-rouge">fatls mmc 0</code>. If you don’t see your seL4 image
-filename printed out, then you might need to double-check your steps
-so far to make sure you didn’t forget something along the way. If you
-see your file listed, then do something like:</p>
+<p>Once the RPi4 boots up, you will see something like the following text from U-Boot:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hit any key to stop autoboot:  2
+</code></pre></div></div>
+
+<p>At this point you want to interrupt the U-Boot booting process by pressing any key.</p>
+
+<p>You will now be in the U-Boot command prompt, type the following command:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
+</code></pre></div></div>
+
+<p>You should see the seL4test image you just placed on your microSD card.</p>
+
+<p>From here, you can load and boot the image using:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2711
 go 0x10000000
 </code></pre></div></div>
@@ -323,10 +316,10 @@ go 0x10000000
         </li>
         
           <li>
-            Site last updated: Wed Oct 18 11:52:29 2023 +1100 7b0cc2c80e
+            Site last updated: Wed Oct 18 23:45:08 2023 +1100 fb0be1d098
           </li>
           <li>
-                Page last updated: Thu Jun 1 15:09:41 2023 +1000 c9322c7672
+                Page last updated: Wed Oct 18 23:45:08 2023 +1100 fb0be1d098
           </li>
         
       </ul>
