@@ -59,7 +59,8 @@ You will see that the `init-build.sh` command contains the flag
 `-DRPI4_MEMORY`, this specifies how much RAM exists on the Raspberry Pi that will run
 the final seL4 image. Since seL4 needs to know the physical memory layout of the hardware
 at build time, and the RPi4 has multiple models with different amounts of RAM, we have to
-specify how much RAM the system will have when we build seL4.
+specify how much RAM the system will have when we build seL4. If `-DRPI4_MEMORY` is not supplied,
+seL4 defaults to expecting 8GB of memory.
 
 {% include sel4test.md %}
 
