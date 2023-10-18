@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-10-17 03:19:06 +0000 -->
+<!-- Page last generated 2023-10-18 00:57:59 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -526,6 +526,10 @@ to avoid namespace collisions in proofs.)</li>
   <li>Do not use <code class="highlighter-rouge">typedef</code> to create a type alias for an <code class="highlighter-rouge">enum</code>; always
 specify <code class="highlighter-rouge">enum</code> types as <code class="highlighter-rouge">word_t</code> (otherwise, the <code class="highlighter-rouge">enum</code> size is
 determined by the compiler).</li>
+  <li>All <code class="highlighter-rouge">struct</code> definitions must be packed, i.e. not contain any implicit padding
+that is inserted by the compiler (otherwise memory content is
+unspecified). Use explicit <code class="highlighter-rouge">padding</code> fields of the required type size to
+remove implicit compiler padding.</li>
 </ul>
 
 <h2 id="further-resources">Further resources</h2>
@@ -571,10 +575,10 @@ determined by the compiler).</li>
         </li>
         
           <li>
-            Site last updated: Tue Sep 19 12:39:04 2023 -0700 d4bd9b052c
+            Site last updated: Wed Oct 18 11:52:29 2023 +1100 7b0cc2c80e
           </li>
           <li>
-                Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17
+                Page last updated: Wed Oct 18 11:52:29 2023 +1100 7b0cc2c80e
           </li>
         
       </ul>
