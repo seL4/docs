@@ -30,10 +30,9 @@ make CROSS_COMPILE=aarch64-linux-gnu- rpi_4_defconfig
 make CROSS_COMPILE=aarch64-linux-gnu-
 ```
 
-More information regarding U-Boot support for the Raspberry Pi can be found [here](https://u-boot.readthedocs.io/en/latest/board/broadcom/raspberrypi.html).
+In the `u-boot` directory you should now see the U-Boot image `u-boot.bin` indicating that U-Boot has successfully compiled.
 
-This will enable you to get the most up-to-date U-boot which will boot
-seL4 on the RPi4 successfully.
+More information regarding U-Boot support for the Raspberry Pi can be found [here](https://u-boot.readthedocs.io/en/latest/board/broadcom/raspberrypi.html).
 
 ## SD card setup
 The RPi4 boots from the first FAT32 partition on the microSD card. Where files are specified,
