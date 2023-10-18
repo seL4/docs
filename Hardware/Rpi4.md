@@ -2,7 +2,7 @@
 arm_hardware: true
 cmake_plat: rpi4
 xcompiler_arg: -DAARCH64=1
-platform: Raspberry Pi 4-b
+platform: Raspberry Pi 4B
 arch: ARMv8A
 virtualization: ARM HYP
 iommu: "No"
@@ -15,7 +15,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Raspberry PI 4 Model B
+# Raspberry Pi 4 Model B
 
 ## Serial connection
 Serial TX and RX are located at GPIO pins 14 and 15 respectively
