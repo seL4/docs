@@ -50,6 +50,7 @@ This documentation site is for cooperatively developing and sharing documentatio
 	<ul>
         <li><a href="/projects/sel4/">seL4 kernel</a></li>
         <li><a href="/projects/l4v/">L4.verified</a></li>
+        <li><a href="/projects/microkit/">seL4 Microkit</a></li>
         <li><a href="/projects/camkes/">CAmkES</a></li>
         <li><a href="/projects/sel4test/">seL4test</a></li>
         <li><a href="/projects/sel4bench/">seL4bench</a></li>
