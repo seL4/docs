@@ -32,8 +32,6 @@ See also the list of [Projects at Trustworthy Systems](https://trustworthy.syste
 
 - [CamkES](https://trustworthy.systems/projects/TS/camkes) to build
     [Trustworthy components](https://trustworthy.systems/projects/TS/trustcomp)
-- [seL4 Core Platform](https://github.com/BreakawayConsulting/sel4cp)
-personality for seL4
 - [Genode](https://genode.org)
 - [RefOS](https://github.com/seL4/refos) was created as reference OS
 - [Neptune OS](https://github.com/cl91/NeptuneOS) is a WinNT personality
