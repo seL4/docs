@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>libsel4vmmplatsupport_guest_vcpu_util | seL4 docs</title>
+    <title>Microkit | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -88,31 +88,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/projects/virtualization/">
-              <span property="name"><b>Virtualisation on seL4</b></span>
-            </a>
-            <meta property="position" content="3" />
-        </li>
-      
-        
-
-        
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/projects/virtualization/docs/">
-              <span property="name"><b>libsel4vm & libsel4vmmplatsupport API documentation</b></span>
-            </a>
-            <meta property="position" content="4" />
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">libsel4vmmplatsupport_guest_vcpu_util</span>
-            <meta property="position" content="5" /></li>
+            <span property="name">Microkit</span>
+            <meta property="position" content="3" /></li>
           
     </ol>
   </nav>
@@ -272,7 +250,7 @@
     
 
     
-        <li class="active">
+        <li class="">
             <a class="" href="/projects/virtualization/">Virtualization</a>
         <li>
   
@@ -304,7 +282,7 @@
     
 
     
-        <li class="">
+        <li class="active">
             <a class="" href="/projects/microkit/">Microkit</a>
         <li>
   
@@ -334,49 +312,30 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <!--
-     Copyright 2020, Data61, CSIRO (ABN 41 687 119 230)
+    <h1 id="the-sel4-microkit">The seL4 Microkit</h1>
 
-     SPDX-License-Identifier: CC-BY-SA-4.0
--->
+<p>The seL4 Microkit is an operating system framework on top of seL4 provides a small set of simple abstractions that ease the design and implementation of statically structured systems on seL4, while still leveraging the kernel’s benefits of security and performance.</p>
 
-<h2 id="interface-guest_vcpu_utilh">Interface <code class="highlighter-rouge">guest_vcpu_util.h</code></h2>
+<p>The Microkit is distributed as an SDK that integrates with the build system of your choice, significantly reducing the barrier to entry for new users of seL4.</p>
 
-<p>The guest vcpu util interface provides abstractions and helpers for managing libsel4vm vcpus.</p>
-
-<h3 id="brief-content">Brief content:</h3>
-
-<p><strong>Functions</strong>:</p>
-
-<blockquote>
-  <p><a href="#function-create_vmm_plat_vcpuvm-priority"><code class="highlighter-rouge">create_vmm_plat_vcpu(vm, priority)</code></a></p>
-</blockquote>
-
-<h2 id="functions">Functions</h2>
-
-<p>The interface <code class="highlighter-rouge">guest_vcpu_util.h</code> defines the following functions.</p>
-
-<h3 id="function-create_vmm_plat_vcpuvm-priority">Function <code class="highlighter-rouge">create_vmm_plat_vcpu(vm, priority)</code></h3>
-
-<p>Create a new platform vcpu. This is a wrapper around the libsel4vm function <code class="highlighter-rouge">vm_create_vcpu</code> however
-further intialises and configures the vcpu with platform specific attributes</p>
-
-<p><strong>Parameters:</strong></p>
-
+<h2 id="more-information">More information</h2>
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">priority {int}</code>: Priority of the new vcpu thread</li>
+  <li>
+    <p><a href="https://github.com/sel4/microkit">Microkit GitHub repository</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/seL4/microkit/blob/main/docs/manual.md">Microkit user manual</a></p>
+  </li>
+  <li>
+    <p><a href="https://trustworthy.systems/projects/microkit/tutorial">Microkit tutorial</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/seL4/microkit/issues/61">Microkit development roadmap</a></p>
+  </li>
+  <li>
+    <p><a href="https://trustworthy.systems/projects/microkit">Trustworthy Systems Microkit project</a></p>
+  </li>
 </ul>
-
-<p><strong>Returns:</strong></p>
-
-<ul>
-  <li>NULL for error, otherwise pointer to created vm_vcpu_t object</li>
-</ul>
-
-<p>Back to <a href="#module-guest_vcpu_utilh">interface description</a>.</p>
-
-<p>Back to <a href="#">top</a>.</p>
 
 
   </div>
@@ -392,10 +351,10 @@ further intialises and configures the vcpu with platform specific attributes</p>
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
   
     <ul class="section-nav">
-    	<h2> Virtualization </h2> 
+    	<h2> Microkit </h2> 
         <li>
           
-          <a style="" class="" href="/projects/virtualization/">
+          <a style=" font-weight: bold; " class="" href="/projects/microkit/">
             Documentation homepage
           </a>
         </li>
@@ -412,6 +371,36 @@ further intialises and configures the vcpu with platform specific attributes</p>
 
 
 
+    
+        <h3>Useful URLs</h3>
+    
+        <li>
+          <a style="" class="" href="https://github.com/seL4/microkit/blob/main/docs/manual.md">
+            Microkit user manual
+          </a>
+        </li>
+
+    
+        <li>
+          <a style="" class="" href="https://trustworthy.systems/projects/microkit/tutorial">
+            Microkit tutorial
+          </a>
+        </li>
+
+    
+        <li>
+          <a style="" class="" href="https://github.com/seL4/microkit/issues/61">
+            Microkit development roadmap
+          </a>
+        </li>
+
+    
+        <li>
+          <a style="" class="" href="https://trustworthy.systems/projects/microkit">
+            Trustworthy Systems Microkit project
+          </a>
+        </li>
+
 
 
 
@@ -420,8 +409,15 @@ further intialises and configures the vcpu with platform specific attributes</p>
         <h3>Repositories</h3>
     
         <li>
-          <a class="" href="https://github.com/seL4proj/seL4_projects_libs">
-            seL4_projects_libs
+          <a class="" href="https://github.com/sel4/microkit">
+            microkit
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/au-ts/microkit_tutorial">
+            microkit_tutorial
           </a>
         </li>
 
@@ -477,15 +473,15 @@ further intialises and configures the vcpu with platform specific attributes</p>
             Site last updated: Mon Oct 23 14:16:33 2023 +1100 827111ddcf
           </li>
           <li>
-                Page last updated: 
+                Page last updated: Mon Oct 23 14:16:33 2023 +1100 827111ddcf
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/projects/virtualization/docs/api/libsel4vmmplatsupport_guest_vcpu_util.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/projects/microkit/index.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/projects/virtualization/docs/api/libsel4vmmplatsupport_guest_vcpu_util.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/projects/microkit/index.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
