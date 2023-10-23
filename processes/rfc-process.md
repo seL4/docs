@@ -42,7 +42,7 @@ You can then use you [Atlassian Cloud][] account
 to keep track of and contribute to discussion
 on each of the RFCs.
 
-[RFC dashboard]: https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100 "RFC dashboard"
+[RFC dashboard]: https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10103 "RFC dashboard"
 [RFC announcement mailing list]: https://lists.sel4.systems/postorius/lists/rfc.sel4.systems/ "RFC announcement mailing list"
 
 
