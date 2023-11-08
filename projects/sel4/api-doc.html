@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-11-07 03:17:25 +0000 -->
+<!-- Page last generated 2023-11-08 03:17:58 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1948,7 +1948,7 @@ controlled by the supplied IRQ handler capability</p>
   </tbody>
 </table>
 
-<h3 id="sel4_schedcontext">seL4_SchedContext</h3>
+<h3 id="sel4_schedcontext-mcs">seL4_SchedContext (MCS)</h3>
 
 <h4 id="bind">Bind</h4>
 <p><code class="highlighter-rouge">static inline int seL4_SchedContext_Bind</code></p>
@@ -2208,7 +2208,7 @@ The caller must have a maximum control priority greater than or equal to the thr
 </table>
 
 <p><strong>Description:</strong> TODO</p>
-<h3 id="sel4_schedcontrol">seL4_SchedControl</h3>
+<h3 id="sel4_schedcontrol-mcs">seL4_SchedControl (MCS)</h3>
 
 <h4 id="configureflags">ConfigureFlags</h4>
 <p><code class="highlighter-rouge">static inline int seL4_SchedControl_ConfigureFlags</code></p>
@@ -2334,87 +2334,6 @@ The caller must have a maximum control priority greater than or equal to the thr
     <tr>
       <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
       <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="configure-mcs">Configure (MCS)</h4>
-<p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
-
-<p>Set the parameters of a TCB</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_TCB</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the TCB which is being operated on.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CNode</code></td>
-      <td><code class="highlighter-rouge">cspace_root</code></td>
-      <td>The new CSpace root.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">cspace_root_data</code></td>
-      <td>Optionally set the guard and guard size of the new root CNode. If set to zero, this parameter has no effect.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">vspace_root</code></td>
-      <td>The new VSpace root.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">vspace_root_data</code></td>
-      <td>Has no effect on x86 or ARM processors.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">buffer</code></td>
-      <td>Location of the thread’s IPC buffer. Must be 512-byte aligned. The IPC buffer may not cross a page boundary.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">bufferFrame</code></td>
-      <td>Capability to a page containing the thread’s IPC buffer.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
-      <td>The <code class="highlighter-rouge">buffer</code>  is not aligned.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace_root</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">cspace_root_data</code>  is invalid. Or, <code class="highlighter-rouge">bufferFrame</code>  is retyped from a device untyped .</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
-      <td>The <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type.</td>
     </tr>
   </tbody>
 </table>
@@ -3106,79 +3025,6 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
   </tbody>
 </table>
 
-<h4 id="set-sched-params-mcs">Set Sched Params (MCS)</h4>
-<p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
-
-<p>Change a thread’s priority, maximum controlled priority, scheduling context
-and fault handler.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_TCB</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the TCB which is being operated on.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_TCB</code></td>
-      <td><code class="highlighter-rouge">authority</code></td>
-      <td>Capability to the TCB to use the MCP from when setting the priority and MCP.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">mcp</code></td>
-      <td>The thread’s new maximum controlled priority.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_Word</code></td>
-      <td><code class="highlighter-rouge">priority</code></td>
-      <td>The thread’s new priority.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">sched_context</code></td>
-      <td>Capability to the scheduling context that the TCB should run on. If the scheduling context is already bound to a notification or TCB that is not this TCB this operation will fail. Similarly, if this TCB is already bound to a scheduling context that is not this scheduling context, this will also fail.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">fault_ep</code></td>
-      <td>CPTR to the endpoint which receives IPCs when this thread faults.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">sched_context</code>  is already bound. Or, <code class="highlighter-rouge">_service</code>  is the current thread’s TCB. Or, <code class="highlighter-rouge">_service</code>  is a TCB in the blocked state and <code class="highlighter-rouge">sched_context</code>  is not schedulable.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">authority</code>, <code class="highlighter-rouge">sched_context</code>, or <code class="highlighter-rouge">fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
-      <td>The <code class="highlighter-rouge">mcp</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>. Or, <code class="highlighter-rouge">priority</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>.</td>
-    </tr>
-  </tbody>
-</table>
-
 <h4 id="set-sched-params">Set Sched Params</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
 
@@ -3263,7 +3109,7 @@ and fault handler.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">fault_ep</code></td>
-      <td>CPTR to the endpoint which receives IPCs when this thread faults. On MCS this cap gets copied into the TCB.</td>
+      <td>CPTR to the endpoint which receives IPCs when this thread faults. This capability is in the CSpace of the thread being configured.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CNode</code></td>
@@ -3304,7 +3150,7 @@ and fault handler.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
@@ -3363,56 +3209,6 @@ used for TLS can only be written to in privilidged mode</p>
 </table>
 
 <p><strong>Description:</strong> <em>TODO</em></p>
-
-<h4 id="set-timeout-endpoint">Set Timeout Endpoint</h4>
-<p><code class="highlighter-rouge">static inline int seL4_TCB_SetTimeoutEndpoint</code></p>
-
-<p>Set a thread’s timeout endpoint.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_TCB</code></td>
-      <td><code class="highlighter-rouge">_service</code></td>
-      <td>Capability to the TCB which is being operated on.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
-      <td><code class="highlighter-rouge">timeout_fault_ep</code></td>
-      <td>CPTR to the endpoint which receives IPCs when this thread triggers timeout faults. Can be null.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">timeout_fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">timeout_fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Description:</strong> Timeout exception messages will be delivered to this endpoint if it is not a null capability.</p>
 
 <h4 id="suspend">Suspend</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Suspend</code></p>
@@ -3619,6 +3415,283 @@ single-stepping.</p>
   </tbody>
 </table>
 
+<h3 id="sel4_tcb-mcs">seL4_TCB (MCS)</h3>
+
+<h4 id="configure-mcs">Configure (MCS)</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_Configure</code></p>
+
+<p>Set the parameters of a TCB</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">cspace_root</code></td>
+      <td>The new CSpace root.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">cspace_root_data</code></td>
+      <td>Optionally set the guard and guard size of the new root CNode. If set to zero, this parameter has no effect.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">vspace_root</code></td>
+      <td>The new VSpace root.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">vspace_root_data</code></td>
+      <td>Has no effect on x86 or ARM processors.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">buffer</code></td>
+      <td>Location of the thread’s IPC buffer. Must be 512-byte aligned. The IPC buffer may not cross a page boundary.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">bufferFrame</code></td>
+      <td>Capability to a page containing the thread’s IPC buffer.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_AlignmentError</code></td>
+      <td>The <code class="highlighter-rouge">buffer</code>  is not aligned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace_root</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">cspace_root_data</code>  is invalid. Or, <code class="highlighter-rouge">bufferFrame</code>  is retyped from a device untyped .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">bufferFrame</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="set-sched-params-mcs">Set Sched Params (MCS)</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetSchedParams</code></p>
+
+<p>Change a thread’s priority, maximum controlled priority, scheduling context
+and fault handler.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">authority</code></td>
+      <td>Capability to the TCB to use the MCP from when setting the priority and MCP.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">mcp</code></td>
+      <td>The thread’s new maximum controlled priority.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">priority</code></td>
+      <td>The thread’s new priority.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">sched_context</code></td>
+      <td>Capability to the scheduling context that the TCB should run on. If the scheduling context is already bound to a notification or TCB that is not this TCB this operation will fail. Similarly, if this TCB is already bound to a scheduling context that is not this scheduling context, this will also fail.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">fault_ep</code></td>
+      <td>CPTR to the endpoint which receives IPCs when this thread faults.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">sched_context</code>  is already bound. Or, <code class="highlighter-rouge">_service</code>  is the current thread’s TCB. Or, <code class="highlighter-rouge">_service</code>  is a TCB in the blocked state and <code class="highlighter-rouge">sched_context</code>  is not schedulable.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">authority</code>, <code class="highlighter-rouge">sched_context</code>, or <code class="highlighter-rouge">fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">mcp</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>. Or, <code class="highlighter-rouge">priority</code>  is greater than the maximum controlled priority of <code class="highlighter-rouge">authority</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="set-space-mcs">Set Space (MCS)</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetSpace</code></p>
+
+<p>Set the fault endpoint, CSpace and VSpace of a thread</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">fault_ep</code></td>
+      <td>CPTR to the endpoint which receives IPCs when this thread faults. On MCS this cap gets copied into the TCB.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">cspace_root</code></td>
+      <td>The new CSpace root.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">cspace_root_data</code></td>
+      <td>Optionally set the guard and guard size of the new root CNode. If set to zero, this parameter has no effect.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">vspace_root</code></td>
+      <td>The new VSpace root.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">vspace_root_data</code></td>
+      <td>Has no effect on x86 or ARM processors.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>, <code class="highlighter-rouge">cspace_root</code>, or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">vspace_root</code>  is not assigned to an ASID pool. Or, <code class="highlighter-rouge">cspace_root_data</code>  is invalid.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>The <code class="highlighter-rouge">cspace_root</code>  or <code class="highlighter-rouge">vspace_root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="set-timeout-endpoint">Set Timeout Endpoint</h4>
+<p><code class="highlighter-rouge">static inline int seL4_TCB_SetTimeoutEndpoint</code></p>
+
+<p>Set a thread’s timeout endpoint.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="highlighter-rouge">timeout_fault_ep</code></td>
+      <td>CPTR to the endpoint which receives IPCs when this thread triggers timeout faults. Can be null.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  or <code class="highlighter-rouge">timeout_fault_ep</code>  is a CPtr to a capability of the wrong type. Or, <code class="highlighter-rouge">timeout_fault_ep</code>  does not have both Write rights and either Grant or GrantReply rights to the Endpoint .</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> Timeout exception messages will be delivered to this endpoint if it is not a null capability.</p>
 <h3 id="sel4_untyped">seL4_Untyped</h3>
 
 <h4 id="retype">Retype</h4>
@@ -8609,7 +8682,92 @@ serviced.</p>
 <hr />
 
 <h3 id="sel4_irqcontrol-3">seL4_IRQControl</h3>
-<p>No methods.### seL4_RISCV_ASIDControl</p>
+
+<h4 id="gettrigger-1">GetTrigger</h4>
+<p><code class="highlighter-rouge">static inline int seL4_IRQControl_GetTrigger</code></p>
+
+<p>Create an IRQ handler capability and specify the trigger method (edge or level).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IRQControl</code></td>
+      <td><code class="highlighter-rouge">_service</code></td>
+      <td>An IRQControl capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">irq</code></td>
+      <td>The IRQ that you want this capability to handle.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">trigger</code></td>
+      <td>Indicates whether this IRQ is edge (1) or level (0) triggered.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="highlighter-rouge">root</code></td>
+      <td>CPTR to the CNode that forms the root of the destination CSpace. Must be at a depth equivalent to the wordsize.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Word</code></td>
+      <td><code class="highlighter-rouge">index</code></td>
+      <td>CPTR to the destination slot. Resolved from the root of the destination CSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="highlighter-rouge">depth</code></td>
+      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="highlighter-rouge">index</code>  or <code class="highlighter-rouge">depth</code>  is invalid . Or, <code class="highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the platform does not support setting the IRQ trigger.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="highlighter-rouge">irq</code>  is invalid. Or, <code class="highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="highlighter-rouge">irq</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl</h3>
 
 <h4 id="makepool">MakePool</h4>
 <p><code class="highlighter-rouge">static inline int seL4_RISCV_ASIDControl_MakePool</code></p>
@@ -9113,7 +9271,7 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#set-notification">Set Notification</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h3"><a href="#sel4_schedcontext">seL4_SchedContext</a>
+<li class="toc-entry toc-h3"><a href="#sel4_schedcontext-mcs">seL4_SchedContext (MCS)</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#bind">Bind</a></li>
 <li class="toc-entry toc-h4"><a href="#consumed">Consumed</a></li>
@@ -9122,7 +9280,7 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#yieldto">YieldTo</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h3"><a href="#sel4_schedcontrol">seL4_SchedControl</a>
+<li class="toc-entry toc-h3"><a href="#sel4_schedcontrol-mcs">seL4_SchedControl (MCS)</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#configureflags">ConfigureFlags</a></li>
 </ul>
@@ -9130,7 +9288,6 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#sel4_tcb">seL4_TCB</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#bind-notification">Bind Notification</a></li>
-<li class="toc-entry toc-h4"><a href="#configure-mcs">Configure (MCS)</a></li>
 <li class="toc-entry toc-h4"><a href="#configure-single-stepping">Configure Single Stepping</a></li>
 <li class="toc-entry toc-h4"><a href="#configure">Configure</a></li>
 <li class="toc-entry toc-h4"><a href="#copy-registers">Copy Registers</a></li>
@@ -9142,15 +9299,21 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#set-ipc-buffer">Set IPC Buffer</a></li>
 <li class="toc-entry toc-h4"><a href="#set-maximum-controlled-priority">Set Maximum Controlled Priority</a></li>
 <li class="toc-entry toc-h4"><a href="#set-priority">Set Priority</a></li>
-<li class="toc-entry toc-h4"><a href="#set-sched-params-mcs">Set Sched Params (MCS)</a></li>
 <li class="toc-entry toc-h4"><a href="#set-sched-params">Set Sched Params</a></li>
 <li class="toc-entry toc-h4"><a href="#set-space">Set Space</a></li>
 <li class="toc-entry toc-h4"><a href="#set-tls-base">Set TLS Base</a></li>
-<li class="toc-entry toc-h4"><a href="#set-timeout-endpoint">Set Timeout Endpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#suspend">Suspend</a></li>
 <li class="toc-entry toc-h4"><a href="#unbind-notification">Unbind Notification</a></li>
 <li class="toc-entry toc-h4"><a href="#unset-breakpoint">Unset Breakpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#write-registers">Write Registers</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_tcb-mcs">seL4_TCB (MCS)</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#configure-mcs">Configure (MCS)</a></li>
+<li class="toc-entry toc-h4"><a href="#set-sched-params-mcs">Set Sched Params (MCS)</a></li>
+<li class="toc-entry toc-h4"><a href="#set-space-mcs">Set Space (MCS)</a></li>
+<li class="toc-entry toc-h4"><a href="#set-timeout-endpoint">Set Timeout Endpoint</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_untyped">seL4_Untyped</a>
@@ -9379,6 +9542,11 @@ serviced.</p>
 <li class="toc-entry toc-h2"><a href="#riscv-specific-object-methods">RISCV-Specific Object Methods</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#sel4_irqcontrol-3">seL4_IRQControl</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#gettrigger-1">GetTrigger</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#makepool">MakePool</a></li>
 </ul>
