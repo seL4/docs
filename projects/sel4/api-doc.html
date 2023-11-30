@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-11-29 03:46:32 +0000 -->
+<!-- Page last generated 2023-11-30 03:16:53 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1979,7 +1979,7 @@ already bound to a thread.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
@@ -2029,7 +2029,7 @@ already bound to a thread.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
     </tr>
   </tbody>
 </table>
@@ -2075,7 +2075,7 @@ will render the bound thread passive, see Section 6.1.5.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
     </tr>
   </tbody>
 </table>
@@ -2128,7 +2128,7 @@ the scheduling context will be returned to the thread that it was originally bou
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CPtr</code></td>
@@ -2181,12 +2181,12 @@ The caller must have a maximum control priority greater than or equal to the thr
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Return value:</strong> <em>TODO</em></p>
+<p><strong>Return value:</strong> See autoref[sec:scheduling_contexts]</p>
 
 <table>
   <thead>
@@ -2207,7 +2207,7 @@ The caller must have a maximum control priority greater than or equal to the thr
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
+<p><strong>Description:</strong> Capability to the scheduling context which is being operated on.</p>
 <h3 id="sel4_schedcontrol-mcs">seL4_SchedControl (MCS)</h3>
 
 <h4 id="configureflags">ConfigureFlags</h4>
@@ -2227,7 +2227,7 @@ The caller must have a maximum control priority greater than or equal to the thr
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedControl</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to a scheduling control object.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_SchedContext</code></td>
@@ -3162,8 +3162,7 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
 <h4 id="set-tls-base">Set TLS Base</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_SetTLSBase</code></p>
 
-<p>Set the TLS base of the target TCB. This intended for use on architectures where the register
-used for TLS can only be written to in privilidged mode</p>
+<p>Set the TLS base of the target TCB.</p>
 
 <table>
   <thead>
@@ -3182,12 +3181,12 @@ used for TLS can only be written to in privilidged mode</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">tls_base</code></td>
-      <td>The TLS base to set</td>
+      <td>The TLS base to set.</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Return value:</strong> <em>TODO</em></p>
+<p><strong>Return value:</strong> A return value of <code class="highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
 <table>
   <thead>
@@ -3208,7 +3207,7 @@ used for TLS can only be written to in privilidged mode</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> <em>TODO</em></p>
+<p><strong>Description:</strong> An invocation for setting the Thread Local Storage (TLS) base address. This ensures that across all platforms, the TLSBase register is viewed as being completely mutable, just like all of the general purpose registers, even on platforms where modification is a privileged operation.</p>
 
 <h4 id="suspend">Suspend</h4>
 <p><code class="highlighter-rouge">static inline int seL4_TCB_Suspend</code></p>
@@ -4018,7 +4017,7 @@ and fault handler.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_TCB</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the TCB which is being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_EPTPML4</code></td>
@@ -5080,7 +5079,7 @@ and fault handler.</p>
 <h4 id="map-ept">Map EPT</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_MapEPT</code></p>
 
-<p><em>TODO</em></p>
+<p>Map an extended page table.</p>
 
 <table>
   <thead>
@@ -5099,22 +5098,22 @@ and fault handler.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_EPTPML4</code></td>
       <td><code class="highlighter-rouge">vspace</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the VSpace which will contain the mapping</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">vaddr</code></td>
-      <td><em>TODO</em></td>
+      <td>Virtual address at which to map page.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CapRights_t</code></td>
       <td><code class="highlighter-rouge">rights</code></td>
-      <td><em>TODO</em></td>
+      <td>Rights for the mapping. Possible values for this type are given in autoref[sec:cap_rights].</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_VMAttributes</code></td>
       <td><code class="highlighter-rouge">attr</code></td>
-      <td><em>TODO</em></td>
+      <td>VM attributes for the mapping. Possible values for this type are given in autoref[ch:vspace].</td>
     </tr>
   </tbody>
 </table>
@@ -5151,8 +5150,6 @@ and fault handler.</p>
     </tr>
   </tbody>
 </table>
-
-<p><strong>Description:</strong> TODO</p>
 
 <h4 id="map-io">Map I/O</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_Page_MapIO</code></p>
@@ -5979,7 +5976,7 @@ and fault handler.</p>
 <h4 id="map-7">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PDPT_Map</code></p>
 
-<p><em>TODO</em></p>
+<p>Map a page directory page table.</p>
 
 <table>
   <thead>
@@ -5993,22 +5990,22 @@ and fault handler.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_PDPT</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the PDPT being operated on.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_X64_PML4</code></td>
       <td><code class="highlighter-rouge">pml4</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the VSpace which will contain the mapping.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">vaddr</code></td>
-      <td><em>TODO</em></td>
+      <td>Virtual address at which to map page.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_VMAttributes</code></td>
       <td><code class="highlighter-rouge">attr</code></td>
-      <td><em>TODO</em></td>
+      <td>VM attributes for the mapping. Possible values for this type are given in autoref[ch:vspace].</td>
     </tr>
   </tbody>
 </table>
@@ -6046,12 +6043,10 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
-
 <h4 id="unmap-7">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_X86_PDPT_Unmap</code></p>
 
-<p><em>TODO</em></p>
+<p>Unmap a page directory page table.</p>
 
 <table>
   <thead>
@@ -6065,7 +6060,7 @@ and fault handler.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_X86_PDPT</code></td>
       <td><code class="highlighter-rouge">_service</code></td>
-      <td><em>TODO</em></td>
+      <td>Capability to the PDPT being operated on.</td>
     </tr>
   </tbody>
 </table>
@@ -6095,7 +6090,6 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_x86_vcpu-1">seL4_X86_VCPU</h3>
 
 <h4 id="readmsr">ReadMSR</h4>
@@ -6666,7 +6660,7 @@ and fault handler.</p>
 <h4 id="map-8">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_IOPageTable_Map</code></p>
 
-<p><em>TODO</em></p>
+<p>Map an IO page table into an IOSpace.</p>
 
 <table>
   <thead>
@@ -6685,12 +6679,12 @@ and fault handler.</p>
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_IOSpace</code></td>
       <td><code class="highlighter-rouge">iospace</code></td>
-      <td><em>TODO</em></td>
+      <td>The IOSpace to map the page table into.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">ioaddr</code></td>
-      <td><em>TODO</em></td>
+      <td>Virtual address at which to map the page table.</td>
     </tr>
   </tbody>
 </table>
@@ -6720,12 +6714,10 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
-
 <h4 id="unmap-8">Unmap</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_IOPageTable_Unmap</code></p>
 
-<p><em>TODO</em></p>
+<p>Unmap an IO page table from an IOSpace.</p>
 
 <table>
   <thead>
@@ -6765,7 +6757,6 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_arm_page">seL4_ARM_Page</h3>
 
 <h4 id="clean-data">Clean Data</h4>
@@ -7001,7 +6992,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
 <h4 id="map-io-1">Map I/O</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_MapIO</code></p>
 
-<p>TODO</p>
+<p>Map a page into an IOSpace.</p>
 
 <table>
   <thead>
@@ -7020,17 +7011,17 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     <tr>
       <td><code class="highlighter-rouge">seL4_ARM_IOSpace</code></td>
       <td><code class="highlighter-rouge">iospace</code></td>
-      <td><em>TODO</em></td>
+      <td>The IOSpace to map the page into.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_CapRights_t</code></td>
       <td><code class="highlighter-rouge">rights</code></td>
-      <td><em>TODO</em></td>
+      <td>Rights for the mapping.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">seL4_Word</code></td>
       <td><code class="highlighter-rouge">ioaddr</code></td>
-      <td><em>TODO</em></td>
+      <td>Virtual address at which to map page.</td>
     </tr>
   </tbody>
 </table>
@@ -7067,8 +7058,6 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     </tr>
   </tbody>
 </table>
-
-<p><strong>Description:</strong> TODO</p>
 
 <h4 id="map-9">Map</h4>
 <p><code class="highlighter-rouge">static inline int seL4_ARM_Page_Map</code></p>
