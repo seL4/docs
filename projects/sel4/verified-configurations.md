@@ -33,10 +33,11 @@ Current verified configurations can be found in seL4 sources in the
 `configs` folder:
 ```sh
 ls configs/*_verified.cmake
-#configs/AARCH64_verified.cmake     configs/RISCV64_MCS_verified.cmake
-#configs/ARM_HYP_verified.cmake     configs/RISCV64_verified.cmake
-#configs/ARM_MCS_verified.cmake     configs/X64_verified.cmake
-#configs/ARM_verified.cmake
+# AARCH64_verified.cmake         ARM_verified.cmake
+# ARM_HYP_exynos5_verified.cmake RISCV64_MCS_verified.cmake
+# ARM_HYP_verified.cmake         RISCV64_verified.cmake
+# ARM_MCS_verified.cmake         X64_verified.cmake
+# ARM_imx8mm_verified.cmake
 ```
 
 To obtain specific source code and build for a given configuration (e.g.
