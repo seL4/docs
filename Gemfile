@@ -11,7 +11,7 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.0.0"
+gem "jekyll"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
@@ -20,11 +20,11 @@ gem "jekyll", "~> 4.0.0"
 # If you have any plugins, put them here!
 # Look here for supported github plugins: https://pages.github.com/versions/
 group :jekyll_plugins do
-  gem "jekyll-titles-from-headings", "0.5.3"
-  gem "jekyll-relative-links", "0.6.1"
-  gem "jekyll-optional-front-matter", "0.3.2"
-  gem "jekyll-sitemap", "1.4.0"
-  gem 'jekyll-toc', "0.5.2"
+  gem "jekyll-titles-from-headings"
+  gem "jekyll-relative-links"
+  gem "jekyll-optional-front-matter"
+  gem "jekyll-sitemap"
+  gem 'jekyll-toc'
   gem 'jekyll-redirect-from'
   gem 'jekyll-remote-theme'
 end
