@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_vmh">Interface <code class="highlighter-rouge">guest_vm.h</code></h2>
+<h2 id="interface-guest_vmh">Interface <code class="language-plaintext highlighter-rouge">guest_vm.h</code></h2>
 
 <p>The guest vm interface is central to libsel4vm, providing definitions of the guest vm datastructure and
 primitives to run the VM instance and start its vcpus.</p>
@@ -350,56 +350,56 @@ primitives to run the VM instance and start its vcpus.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_runvm_t-vm"><code class="highlighter-rouge">vm_run(vm_t *vm)</code></a></p>
+  <p><a href="#function-vm_runvm_t-vm"><code class="language-plaintext highlighter-rouge">vm_run(vm_t *vm)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vcpu_startvcpu"><code class="highlighter-rouge">vcpu_start(vcpu)</code></a></p>
+  <p><a href="#function-vcpu_startvcpu"><code class="language-plaintext highlighter-rouge">vcpu_start(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_register_unhandled_mem_fault_callbackvm-fault_handler-cookie"><code class="highlighter-rouge">vm_register_unhandled_mem_fault_callback(vm, fault_handler, cookie)</code></a></p>
+  <p><a href="#function-vm_register_unhandled_mem_fault_callbackvm-fault_handler-cookie"><code class="language-plaintext highlighter-rouge">vm_register_unhandled_mem_fault_callback(vm, fault_handler, cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_register_notification_callbackvm-notification_callback-cookie"><code class="highlighter-rouge">vm_register_notification_callback(vm, notification_callback, cookie)</code></a></p>
+  <p><a href="#function-vm_register_notification_callbackvm-notification_callback-cookie"><code class="language-plaintext highlighter-rouge">vm_register_notification_callback(vm, notification_callback, cookie)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-vm_ram_region"><code class="highlighter-rouge">vm_ram_region</code></a></p>
+  <p><a href="#struct-vm_ram_region"><code class="language-plaintext highlighter-rouge">vm_ram_region</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vm_mem"><code class="highlighter-rouge">vm_mem</code></a></p>
+  <p><a href="#struct-vm_mem"><code class="language-plaintext highlighter-rouge">vm_mem</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vm_tcb"><code class="highlighter-rouge">vm_tcb</code></a></p>
+  <p><a href="#struct-vm_tcb"><code class="language-plaintext highlighter-rouge">vm_tcb</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vm_vcpu"><code class="highlighter-rouge">vm_vcpu</code></a></p>
+  <p><a href="#struct-vm_vcpu"><code class="language-plaintext highlighter-rouge">vm_vcpu</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vm_run"><code class="highlighter-rouge">vm_run</code></a></p>
+  <p><a href="#struct-vm_run"><code class="language-plaintext highlighter-rouge">vm_run</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vm_cspace"><code class="highlighter-rouge">vm_cspace</code></a></p>
+  <p><a href="#struct-vm_cspace"><code class="language-plaintext highlighter-rouge">vm_cspace</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vm"><code class="highlighter-rouge">vm</code></a></p>
+  <p><a href="#struct-vm"><code class="language-plaintext highlighter-rouge">vm</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_vm.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_vm.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_runvm_t-vm">Function <code class="highlighter-rouge">vm_run(vm_t *vm)</code></h3>
+<h3 id="function-vm_runvm_t-vm">Function <code class="language-plaintext highlighter-rouge">vm_run(vm_t *vm)</code></h3>
 
 <p>Enter the VM event runtime loop.
 This funtion is a blocking call, returning on the event of an unhandled VM exit or error</p>
@@ -407,7 +407,7 @@ This funtion is a blocking call, returning on the event of an unhandled VM exit 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM to run</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM to run</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -418,14 +418,14 @@ This funtion is a blocking call, returning on the event of an unhandled VM exit 
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="function-vcpu_startvcpu">Function <code class="highlighter-rouge">vcpu_start(vcpu)</code></h3>
+<h3 id="function-vcpu_startvcpu">Function <code class="language-plaintext highlighter-rouge">vcpu_start(vcpu)</code></h3>
 
 <p>Start an initialised vcpu thread</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to vcpu to start</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to vcpu to start</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -436,16 +436,16 @@ This funtion is a blocking call, returning on the event of an unhandled VM exit 
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="function-vm_register_unhandled_mem_fault_callbackvm-fault_handler-cookie">Function <code class="highlighter-rouge">vm_register_unhandled_mem_fault_callback(vm, fault_handler, cookie)</code></h3>
+<h3 id="function-vm_register_unhandled_mem_fault_callbackvm-fault_handler-cookie">Function <code class="language-plaintext highlighter-rouge">vm_register_unhandled_mem_fault_callback(vm, fault_handler, cookie)</code></h3>
 
 <p>Register a callback for processing unhandled memory faults (memory regions not previously registered or reserved)</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">fault_handler {unhandled_mem_fault_callback_fn}</code>: A user supplied callback to process unhandled memory faults</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: A cookie to supply to the memory fault handler</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">fault_handler {unhandled_mem_fault_callback_fn}</code>: A user supplied callback to process unhandled memory faults</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: A cookie to supply to the memory fault handler</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -456,16 +456,16 @@ This funtion is a blocking call, returning on the event of an unhandled VM exit 
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="function-vm_register_notification_callbackvm-notification_callback-cookie">Function <code class="highlighter-rouge">vm_register_notification_callback(vm, notification_callback, cookie)</code></h3>
+<h3 id="function-vm_register_notification_callbackvm-notification_callback-cookie">Function <code class="language-plaintext highlighter-rouge">vm_register_notification_callback(vm, notification_callback, cookie)</code></h3>
 
 <p>Register a callback for processing unhandled notifications (events unknown to libsel4vm)</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">notification_callback {notification_callback_fn}</code>: A user supplied callback to process unhandled notifications</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: A cookie to supply to the callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">notification_callback {notification_callback_fn}</code>: A user supplied callback to process unhandled notifications</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: A cookie to supply to the callback</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -478,120 +478,120 @@ This funtion is a blocking call, returning on the event of an unhandled VM exit 
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_vm.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_vm.h</code> defines the following structs.</p>
 
-<h3 id="struct-vm_ram_region">Struct <code class="highlighter-rouge">vm_ram_region</code></h3>
+<h3 id="struct-vm_ram_region">Struct <code class="language-plaintext highlighter-rouge">vm_ram_region</code></h3>
 
 <p>Structure representing individual RAM region. A VM can have multiple regions to represent its total RAM</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">start {uintptr_t}</code>: Guest physical start address of region</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of region in bytes</li>
-  <li><code class="highlighter-rouge">allocated {int}</code>: Whether or not this region has been ‘allocated’</li>
+  <li><code class="language-plaintext highlighter-rouge">start {uintptr_t}</code>: Guest physical start address of region</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of region in bytes</li>
+  <li><code class="language-plaintext highlighter-rouge">allocated {int}</code>: Whether or not this region has been ‘allocated’</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="struct-vm_mem">Struct <code class="highlighter-rouge">vm_mem</code></h3>
+<h3 id="struct-vm_mem">Struct <code class="language-plaintext highlighter-rouge">vm_mem</code></h3>
 
 <p>Structure representing VM memory managment</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm_vspace {vspace_t}</code>: Guest VM’s vspace</li>
-  <li><code class="highlighter-rouge">vm_vspace_root {vka_object_t}</code>: VKA allocated guest VM root vspace</li>
-  <li><code class="highlighter-rouge">vmm_vspace {vspace_t}</code>: Hosts/VMMs vspace</li>
-  <li><code class="highlighter-rouge">num_ram_regions {int}</code>: Total number of registered <code class="highlighter-rouge">vm_ram_regions</code></li>
-  <li><code class="highlighter-rouge">Set {struct vm_ram_region *}</code>: of registered <code class="highlighter-rouge">vm_ram_regions</code></li>
-  <li><code class="highlighter-rouge">Initialised {vm_memory_reservation_cookie_t *}</code>: instance of vm memory interface</li>
-  <li><code class="highlighter-rouge">unhandled_mem_fault_handler {unhandled_mem_fault_callback_fn}</code>: Registered callback for unhandled memory faults</li>
-  <li><code class="highlighter-rouge">unhandled_mem_fault_cookie {void *}</code>: User data passed onto unhandled mem fault callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_vspace {vspace_t}</code>: Guest VM’s vspace</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_vspace_root {vka_object_t}</code>: VKA allocated guest VM root vspace</li>
+  <li><code class="language-plaintext highlighter-rouge">vmm_vspace {vspace_t}</code>: Hosts/VMMs vspace</li>
+  <li><code class="language-plaintext highlighter-rouge">num_ram_regions {int}</code>: Total number of registered <code class="language-plaintext highlighter-rouge">vm_ram_regions</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Set {struct vm_ram_region *}</code>: of registered <code class="language-plaintext highlighter-rouge">vm_ram_regions</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Initialised {vm_memory_reservation_cookie_t *}</code>: instance of vm memory interface</li>
+  <li><code class="language-plaintext highlighter-rouge">unhandled_mem_fault_handler {unhandled_mem_fault_callback_fn}</code>: Registered callback for unhandled memory faults</li>
+  <li><code class="language-plaintext highlighter-rouge">unhandled_mem_fault_cookie {void *}</code>: User data passed onto unhandled mem fault callback</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="struct-vm_tcb">Struct <code class="highlighter-rouge">vm_tcb</code></h3>
+<h3 id="struct-vm_tcb">Struct <code class="language-plaintext highlighter-rouge">vm_tcb</code></h3>
 
 <p>Structure used for TCB management within a VCPU</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">tcb {vka_object_t}</code>: VKA allocated TCB object</li>
-  <li><code class="highlighter-rouge">sc {vka_object_t}</code>: VKA allocated scheduling context</li>
-  <li><code class="highlighter-rouge">priority {int}</code>: VCPU scheduling priority</li>
+  <li><code class="language-plaintext highlighter-rouge">tcb {vka_object_t}</code>: VKA allocated TCB object</li>
+  <li><code class="language-plaintext highlighter-rouge">sc {vka_object_t}</code>: VKA allocated scheduling context</li>
+  <li><code class="language-plaintext highlighter-rouge">priority {int}</code>: VCPU scheduling priority</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="struct-vm_vcpu">Struct <code class="highlighter-rouge">vm_vcpu</code></h3>
+<h3 id="struct-vm_vcpu">Struct <code class="language-plaintext highlighter-rouge">vm_vcpu</code></h3>
 
 <p>Structure used to represent a VCPU</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {struct vm *}</code>: Parent VM</li>
-  <li><code class="highlighter-rouge">vcpu {vka_object_t}</code>: VKA allocated vcpu object</li>
-  <li><code class="highlighter-rouge">tcb {struct vm_tcb}</code>: VCPUs TCB management structure</li>
-  <li><code class="highlighter-rouge">vcpu_id {unsigned int}</code>: VCPU Identifier</li>
-  <li><code class="highlighter-rouge">target_cpu {int}</code>: The target core the vcpu is assigned to</li>
-  <li><code class="highlighter-rouge">vcpu_online {bool}</code>: Flag representing if the vcpu has been started</li>
-  <li><code class="highlighter-rouge">vcpu_arch {struct vm_vcpu_arch}</code>: Architecture specific vcpu properties</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {struct vm *}</code>: Parent VM</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vka_object_t}</code>: VKA allocated vcpu object</li>
+  <li><code class="language-plaintext highlighter-rouge">tcb {struct vm_tcb}</code>: VCPUs TCB management structure</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu_id {unsigned int}</code>: VCPU Identifier</li>
+  <li><code class="language-plaintext highlighter-rouge">target_cpu {int}</code>: The target core the vcpu is assigned to</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu_online {bool}</code>: Flag representing if the vcpu has been started</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu_arch {struct vm_vcpu_arch}</code>: Architecture specific vcpu properties</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="struct-vm_run">Struct <code class="highlighter-rouge">vm_run</code></h3>
+<h3 id="struct-vm_run">Struct <code class="language-plaintext highlighter-rouge">vm_run</code></h3>
 
 <p>VM Runtime management structure</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">exit_reason {int}</code>: Records last vm exit reason</li>
-  <li><code class="highlighter-rouge">notification_callback {notification_callback_fn}</code>: Callback for processing unhandled notifications</li>
-  <li><code class="highlighter-rouge">notification_callback_cookie {void *}</code>: A cookie to supply to the notification callback</li>
+  <li><code class="language-plaintext highlighter-rouge">exit_reason {int}</code>: Records last vm exit reason</li>
+  <li><code class="language-plaintext highlighter-rouge">notification_callback {notification_callback_fn}</code>: Callback for processing unhandled notifications</li>
+  <li><code class="language-plaintext highlighter-rouge">notification_callback_cookie {void *}</code>: A cookie to supply to the notification callback</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="struct-vm_cspace">Struct <code class="highlighter-rouge">vm_cspace</code></h3>
+<h3 id="struct-vm_cspace">Struct <code class="language-plaintext highlighter-rouge">vm_cspace</code></h3>
 
 <p>VM cspace management structure</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">cspace_obj {vka_object_t}</code>: VKA allocated cspace object</li>
-  <li><code class="highlighter-rouge">cspace_root_data {seL4_Word}</code>: cspace root data capability</li>
+  <li><code class="language-plaintext highlighter-rouge">cspace_obj {vka_object_t}</code>: VKA allocated cspace object</li>
+  <li><code class="language-plaintext highlighter-rouge">cspace_root_data {seL4_Word}</code>: cspace root data capability</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
 
-<h3 id="struct-vm">Struct <code class="highlighter-rouge">vm</code></h3>
+<h3 id="struct-vm">Struct <code class="language-plaintext highlighter-rouge">vm</code></h3>
 
 <p>Structure representing a VM instance</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">arch {struct vm_arch}</code>: Architecture specfic vm structure</li>
-  <li><code class="highlighter-rouge">num_vcpus {unsigned int}</code>: Number of vcpus created for the VM</li>
-  <li><code class="highlighter-rouge">vcpus {struct vm_vcpu*}</code>: vcpu’s belonging to the VM</li>
-  <li><code class="highlighter-rouge">mem {struct vm_mem}</code>: Memory management structure</li>
-  <li><code class="highlighter-rouge">run {struct vm_run}</code>: VM Runtime management structure</li>
-  <li><code class="highlighter-rouge">cspace {struct vm_cspace}</code>: VM CSpace management structure</li>
-  <li><code class="highlighter-rouge">host_endpoint {seL4_CPtr}</code>: Host/VMM endpoint. <code class="highlighter-rouge">vm_run</code> waits on this enpoint</li>
-  <li><code class="highlighter-rouge">vka {vka_t *}</code>: Handle to virtual kernel allocator for seL4 kernel object allocation</li>
-  <li><code class="highlighter-rouge">io_ops {ps_io_ops_t *}</code>: Handle to platforms io ops</li>
-  <li><code class="highlighter-rouge">simple {simple_t *}</code>: Handle to hosts simple environment</li>
-  <li><code class="highlighter-rouge">vm_name {char *}</code>: String used to describe VM. Useful for debugging</li>
-  <li><code class="highlighter-rouge">vm_id {unsigned int}</code>: Identifier for VM. Useful for debugging</li>
-  <li><code class="highlighter-rouge">vm_initialised {bool}</code>: Boolean flagging whether VM is intialised or not</li>
+  <li><code class="language-plaintext highlighter-rouge">arch {struct vm_arch}</code>: Architecture specfic vm structure</li>
+  <li><code class="language-plaintext highlighter-rouge">num_vcpus {unsigned int}</code>: Number of vcpus created for the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpus {struct vm_vcpu*}</code>: vcpu’s belonging to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">mem {struct vm_mem}</code>: Memory management structure</li>
+  <li><code class="language-plaintext highlighter-rouge">run {struct vm_run}</code>: VM Runtime management structure</li>
+  <li><code class="language-plaintext highlighter-rouge">cspace {struct vm_cspace}</code>: VM CSpace management structure</li>
+  <li><code class="language-plaintext highlighter-rouge">host_endpoint {seL4_CPtr}</code>: Host/VMM endpoint. <code class="language-plaintext highlighter-rouge">vm_run</code> waits on this enpoint</li>
+  <li><code class="language-plaintext highlighter-rouge">vka {vka_t *}</code>: Handle to virtual kernel allocator for seL4 kernel object allocation</li>
+  <li><code class="language-plaintext highlighter-rouge">io_ops {ps_io_ops_t *}</code>: Handle to platforms io ops</li>
+  <li><code class="language-plaintext highlighter-rouge">simple {simple_t *}</code>: Handle to hosts simple environment</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_name {char *}</code>: String used to describe VM. Useful for debugging</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_id {unsigned int}</code>: Identifier for VM. Useful for debugging</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_initialised {bool}</code>: Boolean flagging whether VM is intialised or not</li>
 </ul>
 
 <p>Back to <a href="#module-guest_vmh">interface description</a>.</p>
@@ -694,7 +694,7 @@ This funtion is a blocking call, returning on the event of an unhandled VM exit 
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

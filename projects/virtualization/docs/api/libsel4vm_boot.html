@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-booth">Interface <code class="highlighter-rouge">boot.h</code></h2>
+<h2 id="interface-booth">Interface <code class="language-plaintext highlighter-rouge">boot.h</code></h2>
 
 <p>The libsel4vm boot interface provides us with base abstractions to create, initialise and configure VM and VCPU instances.</p>
 
@@ -349,35 +349,35 @@
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_initvm-vka-host_simple-host_vspace-io_ops-host_endpoint-name"><code class="highlighter-rouge">vm_init(vm, vka, host_simple, host_vspace, io_ops, host_endpoint, name)</code></a></p>
+  <p><a href="#function-vm_initvm-vka-host_simple-host_vspace-io_ops-host_endpoint-name"><code class="language-plaintext highlighter-rouge">vm_init(vm, vka, host_simple, host_vspace, io_ops, host_endpoint, name)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_create_vcpuvm-priority"><code class="highlighter-rouge">vm_create_vcpu(vm, priority)</code></a></p>
+  <p><a href="#function-vm_create_vcpuvm-priority"><code class="language-plaintext highlighter-rouge">vm_create_vcpu(vm, priority)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_assign_vcpu_targetvcpu-target_cpu"><code class="highlighter-rouge">vm_assign_vcpu_target(vcpu, target_cpu)</code></a></p>
+  <p><a href="#function-vm_assign_vcpu_targetvcpu-target_cpu"><code class="language-plaintext highlighter-rouge">vm_assign_vcpu_target(vcpu, target_cpu)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">boot.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">boot.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_initvm-vka-host_simple-host_vspace-io_ops-host_endpoint-name">Function <code class="highlighter-rouge">vm_init(vm, vka, host_simple, host_vspace, io_ops, host_endpoint, name)</code></h3>
+<h3 id="function-vm_initvm-vka-host_simple-host_vspace-io_ops-host_endpoint-name">Function <code class="language-plaintext highlighter-rouge">vm_init(vm, vka, host_simple, host_vspace, io_ops, host_endpoint, name)</code></h3>
 
 <p>Initialise/Create VM</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: Handle to the VM being initialised</li>
-  <li><code class="highlighter-rouge">vka {vka_t *}</code>: Initialised handle to virtual kernel allocator for seL4 kernel object allocation</li>
-  <li><code class="highlighter-rouge">host_simple {simple_t *}</code>: Initialised handle to hosts simple environment</li>
-  <li><code class="highlighter-rouge">host_vspace {vspace_t}</code>: Initialised handle to hosts vspace</li>
-  <li><code class="highlighter-rouge">ps_io_ops {ps_io_ops_t *}</code>: Initialised handle to platforms io ops</li>
-  <li><code class="highlighter-rouge">host_enpoint {seL4_CPtr}</code>: Host’s endpoint. The library will wait and manage the endpoint when running a VM instance</li>
-  <li><code class="highlighter-rouge">name {const char *}</code>: String used to describe VM. Useful for debugging</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: Handle to the VM being initialised</li>
+  <li><code class="language-plaintext highlighter-rouge">vka {vka_t *}</code>: Initialised handle to virtual kernel allocator for seL4 kernel object allocation</li>
+  <li><code class="language-plaintext highlighter-rouge">host_simple {simple_t *}</code>: Initialised handle to hosts simple environment</li>
+  <li><code class="language-plaintext highlighter-rouge">host_vspace {vspace_t}</code>: Initialised handle to hosts vspace</li>
+  <li><code class="language-plaintext highlighter-rouge">ps_io_ops {ps_io_ops_t *}</code>: Initialised handle to platforms io ops</li>
+  <li><code class="language-plaintext highlighter-rouge">host_enpoint {seL4_CPtr}</code>: Host’s endpoint. The library will wait and manage the endpoint when running a VM instance</li>
+  <li><code class="language-plaintext highlighter-rouge">name {const char *}</code>: String used to describe VM. Useful for debugging</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -388,15 +388,15 @@
 
 <p>Back to <a href="#module-booth">interface description</a>.</p>
 
-<h3 id="function-vm_create_vcpuvm-priority">Function <code class="highlighter-rouge">vm_create_vcpu(vm, priority)</code></h3>
+<h3 id="function-vm_create_vcpuvm-priority">Function <code class="language-plaintext highlighter-rouge">vm_create_vcpu(vm, priority)</code></h3>
 
 <p>Create a VCPU for a given VM</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to VM being configured with a new vcpu</li>
-  <li><code class="highlighter-rouge">priority {int}</code>: The scheduling priority assigned to the VCPU thread</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to VM being configured with a new vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">priority {int}</code>: The scheduling priority assigned to the VCPU thread</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -407,15 +407,15 @@
 
 <p>Back to <a href="#module-booth">interface description</a>.</p>
 
-<h3 id="function-vm_assign_vcpu_targetvcpu-target_cpu">Function <code class="highlighter-rouge">vm_assign_vcpu_target(vcpu, target_cpu)</code></h3>
+<h3 id="function-vm_assign_vcpu_targetvcpu-target_cpu">Function <code class="language-plaintext highlighter-rouge">vm_assign_vcpu_target(vcpu, target_cpu)</code></h3>
 
 <p>Assign a vcpu with logical target cpu to run on</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the VCPU</li>
-  <li><code class="highlighter-rouge">target {int}</code>: Logical target CPU ID</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the VCPU</li>
+  <li><code class="language-plaintext highlighter-rouge">target {int}</code>: Logical target CPU ID</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -524,7 +524,7 @@
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

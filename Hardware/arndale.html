@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -247,13 +247,13 @@ and the DTB could be normal files in a partition, rather than at a fixed
 offset on the SD card.</p>
 
 <p>These offsets are designed for a U-Boot environment like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootargs=root=/dev/mmcblk1p1 rw rootwait console=ttySAC2,115200n8 init --no-log
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootargs=root=/dev/mmcblk1p1 rw rootwait console=ttySAC2,115200n8 init --no-log
 bootcmd=mmc read 40007000 451 2000;mmc read 42000000 2451 20;bootm 40007000 - 42000000
 </code></pre></div></div>
 
 <p>If you have a separate boot partition on your card you could instead
 use: (untested as yet)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel=0x40007000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel=0x40007000
 dtb=42000000
 bootcmd=mmc init; fatload mmc 0:1 ${kernel} uImage; fatload mmc 0:1 ${dtb} dtb; bootm ${kernel} - ${dtb}
 </code></pre></div></div>
@@ -305,7 +305,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <h3 id="from-sd-card">From SD card</h3>
 
@@ -318,7 +318,7 @@ ninja
 <p>At the U-Boot prompt, type print to see the list of
 environment variables and their values. Use the following commands to
 set any variables that are missing from the list.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootfile filename
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootfile filename
 setenv ethaddr 00:40:5c:26:0a:FF
 setenv usbethaddr 00:40:5c:26:0a:FF
 setenv pxefile_addr_r 0x50000000
@@ -326,7 +326,7 @@ setenv pxefile_addr_r 0x50000000
 
 <p>Now run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start; dhcp; bootelf; bootm;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start; dhcp; bootelf; bootm;
 </code></pre></div></div>
 
 <h2 id="references">References</h2>
@@ -371,7 +371,7 @@ instructions</a></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

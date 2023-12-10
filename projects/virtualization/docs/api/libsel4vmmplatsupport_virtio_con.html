@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-virtio_conh">Interface <code class="highlighter-rouge">virtio_con.h</code></h2>
+<h2 id="interface-virtio_conh">Interface <code class="language-plaintext highlighter-rouge">virtio_con.h</code></h2>
 
 <p>This interface provides the ability to initalise a VMM virtio console driver. This creating a virtio
 PCI device in the VM’s virtual pci. This can subsequently be accessed through ‘/dev/hvc0’ in the guest.</p>
@@ -350,20 +350,20 @@ PCI device in the VM’s virtual pci. This can subsequently be accessed through 
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-common_make_virtio_convm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_lin-backend"><code class="highlighter-rouge">common_make_virtio_con(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_lin, backend)</code></a></p>
+  <p><a href="#function-common_make_virtio_convm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_lin-backend"><code class="language-plaintext highlighter-rouge">common_make_virtio_con(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_lin, backend)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-virtio_con"><code class="highlighter-rouge">virtio_con</code></a></p>
+  <p><a href="#struct-virtio_con"><code class="language-plaintext highlighter-rouge">virtio_con</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">virtio_con.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">virtio_con.h</code> defines the following functions.</p>
 
-<h3 id="function-common_make_virtio_convm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_lin-backend">Function <code class="highlighter-rouge">common_make_virtio_con(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_lin, backend)</code></h3>
+<h3 id="function-common_make_virtio_convm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_lin-backend">Function <code class="language-plaintext highlighter-rouge">common_make_virtio_con(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_lin, backend)</code></h3>
 
 <p>Initialise a new virtio_con device with Base Address Registers (BARs) starting at iobase and backend functions
 specified by the console_passthrough struct.
@@ -372,14 +372,14 @@ virtio_con_default_backend for default methods.</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
-  <li><code class="highlighter-rouge">pci {vmm_pci_space_t *}</code>: PCI library instance to register virtio con device</li>
-  <li><code class="highlighter-rouge">ioport {vmm_io_port_list_t *}</code>: IOPort library instance to register virtio con ioport</li>
-  <li><code class="highlighter-rouge">ioport_range {ioport_range_t}</code>: BAR port for front end emulation</li>
-  <li><code class="highlighter-rouge">iotype {ioport_type_t}</code>: Type of ioport i.e. whether to alloc or use given range</li>
-  <li><code class="highlighter-rouge">interrupt_pin {unsigned int}</code>: PCI interrupt pin e.g. INTA = 1, INTB = 2 ,…</li>
-  <li><code class="highlighter-rouge">interrupt_line {unsigned int}</code>: PCI interrupt line for virtio con IRQS</li>
-  <li><code class="highlighter-rouge">backend {struct console_passthrough}</code>: Function pointers to backend implementation. Can be initialised by</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">pci {vmm_pci_space_t *}</code>: PCI library instance to register virtio con device</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport {vmm_io_port_list_t *}</code>: IOPort library instance to register virtio con ioport</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_range {ioport_range_t}</code>: BAR port for front end emulation</li>
+  <li><code class="language-plaintext highlighter-rouge">iotype {ioport_type_t}</code>: Type of ioport i.e. whether to alloc or use given range</li>
+  <li><code class="language-plaintext highlighter-rouge">interrupt_pin {unsigned int}</code>: PCI interrupt pin e.g. INTA = 1, INTB = 2 ,…</li>
+  <li><code class="language-plaintext highlighter-rouge">interrupt_line {unsigned int}</code>: PCI interrupt line for virtio con IRQS</li>
+  <li><code class="language-plaintext highlighter-rouge">backend {struct console_passthrough}</code>: Function pointers to backend implementation. Can be initialised by</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -392,19 +392,19 @@ virtio_con_default_backend for default methods.</p>
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">virtio_con.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">virtio_con.h</code> defines the following structs.</p>
 
-<h3 id="struct-virtio_con">Struct <code class="highlighter-rouge">virtio_con</code></h3>
+<h3 id="struct-virtio_con">Struct <code class="language-plaintext highlighter-rouge">virtio_con</code></h3>
 
 <p>Virtio Console Driver Interface</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">iobase {unsigned int}</code>: IO Port base for virtio con device</li>
-  <li><code class="highlighter-rouge">emul {virtio_emul_t *}</code>: Virtio console emulation interface: VMM &lt;-&gt; Guest</li>
-  <li><code class="highlighter-rouge">emul_driver_funcs {struct console_passthrough}</code>: Virtio console emulation functions: VMM &lt;-&gt; Guest</li>
-  <li><code class="highlighter-rouge">ioops {ps_io_ops_t}</code>: Platform support io ops datastructure</li>
+  <li><code class="language-plaintext highlighter-rouge">iobase {unsigned int}</code>: IO Port base for virtio con device</li>
+  <li><code class="language-plaintext highlighter-rouge">emul {virtio_emul_t *}</code>: Virtio console emulation interface: VMM &lt;-&gt; Guest</li>
+  <li><code class="language-plaintext highlighter-rouge">emul_driver_funcs {struct console_passthrough}</code>: Virtio console emulation functions: VMM &lt;-&gt; Guest</li>
+  <li><code class="language-plaintext highlighter-rouge">ioops {ps_io_ops_t}</code>: Platform support io ops datastructure</li>
 </ul>
 
 <p>Back to <a href="#module-virtio_conh">interface description</a>.</p>
@@ -507,7 +507,7 @@ virtio_con_default_backend for default methods.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

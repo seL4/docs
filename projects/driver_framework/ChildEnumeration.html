@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -409,7 +409,7 @@ discovery and removal of devices from the tree as they appear and
 disappear.</p>
 
 <p>The environment should begin an enumeration sequence by calling
-<code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> on the target device
+<code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> on the target device
 instance, in order to ask the driver to tell it how many child devices
 it <strong>currently</strong> has. The parent driver shall report <strong>all</strong> such
 child devices, regardless of whether or not they are powered on. All
@@ -419,11 +419,11 @@ they can be recognized as such (e.g., if the firmware informs the driver
 that a device is faulty) should be omitted.</p>
 
 <p>After that, the environment should call
-<code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code> to actually get information on all
+<code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_children()</code> to actually get information on all
 the target device instance’s children. The environment shall pass to
 this function a block of memory that is suitably sized to enable the
 driver to fill out the childrens’ information. Please see the
-description of <code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> in its
+description of <code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> in its
 section below to understand how to determine how much memory to allocate
 when requesting child device information.</p>
 
@@ -443,8 +443,8 @@ the “subscription” invocation.</p>
 
 <p>When the environment finally gets such a callback, it shall simply
 refresh its information about the children of the target device, by once
-again calling <code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code>, and doing
-a re-run of <code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>. The environment can
+again calling <code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code>, and doing
+a re-run of <code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>. The environment can
 then compare the <strong>Child IDs</strong> of the newly returned list of devices
 with those that it previously had in its device tree, and perform an
 update of its device tree.</p>
@@ -452,7 +452,7 @@ update of its device tree.</p>
 <p>When the driver completes the asynchronous roundtrip, it shall return
 the same memory that was originally passed to it by the environment. The
 environment is then free to either re-subscribe to such notifications by
-calling <code class="highlighter-rouge">seL4drv_mgmt_enumerate_hotplug_subscribe_ind()</code> again, or to
+calling <code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_hotplug_subscribe_ind()</code> again, or to
 choose to indicate that it is no longer interested in subscribing to
 such notifications by not calling it again.</p>
 
@@ -462,7 +462,7 @@ such notifications by not calling it again.</p>
 <p>This
 function allows the environment to know how much memory it should
 allocate for its subsequent calls to
-<code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>.</p>
+<code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>.</p>
 
 <p>There are two values returned by this function:</p>
 
@@ -474,16 +474,16 @@ aware of. <em>Let this value be N_children</em>.</li>
 </ol>
 
 <p>The environment is expected to allocate memory equal to
-<code class="highlighter-rouge">N_attrs_per_child * sizeof(seL4drv_child_attribute_t)</code> for each
+<code class="language-plaintext highlighter-rouge">N_attrs_per_child * sizeof(seL4drv_child_attribute_t)</code> for each
 child device.</p>
 
-<p>If <code class="highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> reports that there are
+<p>If <code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_get_num_children()</code> reports that there are
 multiple child devices, the environment is expected to allocate memory
 equal to
-<code class="highlighter-rouge">N_attrs_per_child * sizeof(seL4drv_child_attribute_t) * N_children</code>.</p>
+<code class="language-plaintext highlighter-rouge">N_attrs_per_child * sizeof(seL4drv_child_attribute_t) * N_children</code>.</p>
 
 <p>This amount of memory shall then be passed to
-<code class="highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>.</p>
+<code class="language-plaintext highlighter-rouge">seL4drv_mgmt_enumerate_children()</code>.</p>
 
 <h3 id="sel4drv_mgmt_enumerate_children-sync">seL4drv_mgmt_enumerate_children(): Sync</h3>
 <p>This function shall
@@ -506,16 +506,16 @@ integer which states whether or not the driver can handle the device
 that is described by those attributes.</p>
 
 <p>If the driver determines that the passed attributes do not describe a
-device that it can manage, the driver <strong>shall</strong> return integer <code class="highlighter-rouge">0</code>
+device that it can manage, the driver <strong>shall</strong> return integer <code class="language-plaintext highlighter-rouge">0</code>
 (zero). If the driver determines that the passed attributes describe a
 device that it is equipped to handle, it <strong>shall</strong> return a positive
-integer <code class="highlighter-rouge">1</code>.</p>
+integer <code class="language-plaintext highlighter-rouge">1</code>.</p>
 
-<p><em>It is recommended that drivers which return a value greater than <code class="highlighter-rouge">0</code>
-should return <code class="highlighter-rouge">1</code> for now, since in the future, significance will be
+<p><em>It is recommended that drivers which return a value greater than <code class="language-plaintext highlighter-rouge">0</code>
+should return <code class="language-plaintext highlighter-rouge">1</code> for now, since in the future, significance will be
 ascribed to the values returned. At present, there is no significance
 attached to the particular value returned, but for future compatibility
-since values above <code class="highlighter-rouge">1</code> will carry significance, drivers must return <code class="highlighter-rouge">1</code> for
+since values above <code class="language-plaintext highlighter-rouge">1</code> will carry significance, drivers must return <code class="language-plaintext highlighter-rouge">1</code> for
 now.</em></p>
 
   </div>
@@ -529,7 +529,7 @@ now.</em></p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#constants">Constants</a></li>
 <li class="toc-entry toc-h2"><a href="#functions">Functions</a></li>
 <li class="toc-entry toc-h2"><a href="#structures">Structures</a></li>
@@ -626,7 +626,7 @@ now.</em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

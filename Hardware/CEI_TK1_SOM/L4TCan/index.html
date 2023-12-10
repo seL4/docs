@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -196,12 +196,12 @@ md5sum in the same folder once you’ve got it.</p>
 port next to the ethernet jack. Stop u-boot from booting and issue the
 command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ums 0 mmc 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ums 0 mmc 0
 </code></pre></div></div>
 <p>This will allow you to see the TK1’s filesystem on
 your host pc. On your host PC, list your devices:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ lsblk
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ lsblk
 </code></pre></div></div>
 <p>You should see a 14.7GB-ish device with a few
 partitions - this is the TK1. (Make sure it is by mounting the largest
@@ -212,7 +212,7 @@ before next step!])</p>
 ABSOLUTELY sure that your of=/dev/sdX line is correct so you don’t
 accidentally destroy data on your machine. Also, you want /dev/sdX (the
 device), NOT /dev/sdX3 (partitions) etc.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip -c tk1_can.img.gz | sudo dd of=/dev/&lt;your TK1 device&gt; conv=sync bs=4K status=progress
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip -c tk1_can.img.gz | sudo dd of=/dev/&lt;your TK1 device&gt; conv=sync bs=4K status=progress
 </code></pre></div></div>
 <p>This takes ~1.5Hr on my machine to
 complete. If dd throws a strange error to do with the ‘status=progress’
@@ -225,7 +225,7 @@ should work.</p>
 
 <p>You may see some lines after boot like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rt5639 0-001c: Failed to set private addr: -121
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rt5639 0-001c: Failed to set private addr: -121
 </code></pre></div></div>
 
 <p>This is normal,
@@ -273,7 +273,7 @@ not exist in the source code as mcp support has been hacked in. Here’s
 the docs from mainline:</p>
 
 <p>.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 -   Microchip MCP251X stand-alone CAN controller device tree bindings
 
 Required properties:
@@ -316,7 +316,7 @@ Example:
 <h3 id="kernel-build-configuration">Kernel Build Configuration</h3>
 <p>Using make menuconfig, enable CAN and
 MCP251X modules. Make sure your .config contains:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_CAN=m
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_CAN=m
 CONFIG_CAN_RAW=m
 CONFIG_CAN_BCM=m
 CONFIG_CAN_GW=m
@@ -363,8 +363,8 @@ line, and change it to touch_id=3@3</p>
 <span class="nv">$SOM_DIR</span>/boot/tegra124-tk1-som-pm375-000-c00-00.dtb
 </code></pre></div></div>
 
-<p>rebuild.sh - assumes u-boot running <code class="highlighter-rouge">umc 0 mmc 0</code> at <code class="highlighter-rouge">&lt;tk1&gt;</code></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    make
+<p>rebuild.sh - assumes u-boot running <code class="language-plaintext highlighter-rouge">umc 0 mmc 0</code> at <code class="language-plaintext highlighter-rouge">&lt;tk1&gt;</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    make
 
     make modules
 
@@ -382,7 +382,7 @@ line, and change it to touch_id=3@3</p>
 <p>When you boot up Linux login as: ubuntu password ubuntu.</p>
 
 <p>Then:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dmesg | grep mcp # See if the driver loaded properly
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dmesg | grep mcp # See if the driver loaded properly
 
 [ 618.718288] mcp251x spi0.0: entered mcp251x_can_probe
 [ 618.718296] mcp251x spi0.0: v2
@@ -426,7 +426,7 @@ candump can0 # Dump packets
 </code></pre></div></div>
 
 <h1 id="loopback-mode-test">Loopback mode test</h1>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip link set can0 type can bitrate 500000 loopback on
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip link set can0 type can bitrate 500000 loopback on
 ifconfig can0 up
 candump any,0:0,#FFFFFFFF #In terminal 1
 cansend can0 123#dead     #In terminal 2
@@ -464,7 +464,7 @@ cansend can0 123#dead     #In terminal 2
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Wed Aug 25 12:10:59 2021 +1000 c6060204d6

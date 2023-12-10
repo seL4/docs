@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#background">Background</a>
@@ -296,15 +296,15 @@ three additional kernel modules must be installed in the guest.
 These modules are included in the root filesystem by default:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">dataport</code>: facilitates setting up shared memory between the guest
+  <li><code class="language-plaintext highlighter-rouge">dataport</code>: facilitates setting up shared memory between the guest
 and CAmkES components.</li>
-  <li><code class="highlighter-rouge">consumes_event</code>: allows a process in the guest to wait or poll
+  <li><code class="language-plaintext highlighter-rouge">consumes_event</code>: allows a process in the guest to wait or poll
 for an event sent by a CAmkES component.</li>
-  <li><code class="highlighter-rouge">emits_event</code>: allows a process to emit an event to a CAmkES component.</li>
+  <li><code class="language-plaintext highlighter-rouge">emits_event</code>: allows a process to emit an event to a CAmkES component.</li>
 </ul>
 
 <p>Each type of module can be statically assigned to one or more file descriptors to associate that
-file descriptor with a specific instance of an interface. <code class="highlighter-rouge">ioctl</code> can then be used to
+file descriptor with a specific instance of an interface. <code class="language-plaintext highlighter-rouge">ioctl</code> can then be used to
 manipulate that file descriptor and use the module.</p>
 
 <h3 id="dataports">Dataports</h3>
@@ -313,32 +313,32 @@ manipulate that file descriptor and use the module.</p>
 The dataport initialisation process is as follows:</p>
 
 <ul>
-  <li>The guest process uses <code class="highlighter-rouge">ioctl</code> on on the file associated with the dataport and specify a
+  <li>The guest process uses <code class="language-plaintext highlighter-rouge">ioctl</code> on on the file associated with the dataport and specify a
  page-aligned size for the shared memory.</li>
   <li>The dataport kernel module in the guest then allocates a page-aligned buffer of the requested size,
 and makes a hypercall to the VMM, with the guest physical address and id of the data port.
-The ID is derived from the file on which <code class="highlighter-rouge">ioctl</code> was called.</li>
+The ID is derived from the file on which <code class="language-plaintext highlighter-rouge">ioctl</code> was called.</li>
   <li>The virtual machine manager (VMM) then modifies the guest’s address space, creating the shared memory region.
  between a camkes component and the guest.</li>
-  <li>Linux processes can then map this memory into their own address space by calling <code class="highlighter-rouge">mmap</code> on the file
+  <li>Linux processes can then map this memory into their own address space by calling <code class="language-plaintext highlighter-rouge">mmap</code> on the file
 associated with the dataport.</li>
 </ul>
 
 <h3 id="emitting-events">Emitting Events</h3>
 
-<p>Guest processes can emit events by using <code class="highlighter-rouge">ioctl</code> on files associated with the event interface.
-This results in the <code class="highlighter-rouge">emits_event</code> kernel module in the guest making a
+<p>Guest processes can emit events by using <code class="language-plaintext highlighter-rouge">ioctl</code> on files associated with the event interface.
+This results in the <code class="language-plaintext highlighter-rouge">emits_event</code> kernel module in the guest making a
 making a hypercall to the VMM, which triggers the event and resumes the guest.</p>
 
 <h3 id="consuming-events">Consuming Events</h3>
 
-<p>Linux process can wait or poll for an event by calling <code class="highlighter-rouge">poll</code>
+<p>Linux process can wait or poll for an event by calling <code class="language-plaintext highlighter-rouge">poll</code>
 on the file associated with that event, using the timeout argument to
 specify whether or not it should block. The event it polls for is
-<code class="highlighter-rouge">POLLIN</code>. When the VMM receives an event destined for the guest, it places
+<code class="language-plaintext highlighter-rouge">POLLIN</code>. When the VMM receives an event destined for the guest, it places
 the event id in some memory shared between the VMM and the
-<code class="highlighter-rouge">consumes_event</code> kernel module, and then injects an interrupt into the
-guest. The <code class="highlighter-rouge">consumes_event</code> kernel module is registered to handle this
+<code class="language-plaintext highlighter-rouge">consumes_event</code> kernel module, and then injects an interrupt into the
+guest. The <code class="language-plaintext highlighter-rouge">consumes_event</code> kernel module is registered to handle this
 interrupt, which reads the event ID from shared memory, and wakes a
 thread blocked on the corresponding event file. If no threads are
 blocked on the file, some state is set in the module such that the next
@@ -358,20 +358,20 @@ string.</p>
 
 <h3 id="add-modules-to-the-guest">Add modules to the guest</h3>
 
-<p>There is a library in <code class="highlighter-rouge">projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs</code>
+<p>There is a library in <code class="language-plaintext highlighter-rouge">projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/libs</code>
 containing Linux system call wrappers, and some utility programs in
-<code class="highlighter-rouge">projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/{dataport,consumes_event,emits_event}</code>
+<code class="language-plaintext highlighter-rouge">projects/camkes/vm-linux/camkes-linux-artifacts/camkes-linux-apps/camkes-connector-apps/pkgs/{dataport,consumes_event,emits_event}</code>
 which initialize and interact with cross VM connections. To build and use these modules in your rootfs the vm-linux
 project provides an overlay target you can use.</p>
 
-<p><strong>Exercise</strong> First add the <code class="highlighter-rouge">dataport</code>, <code class="highlighter-rouge">consumes_event</code> and <code class="highlighter-rouge">emits_event</code> kernel modules to the  rootfs in the guest.</p>
+<p><strong>Exercise</strong> First add the <code class="language-plaintext highlighter-rouge">dataport</code>, <code class="language-plaintext highlighter-rouge">consumes_event</code> and <code class="language-plaintext highlighter-rouge">emits_event</code> kernel modules to the  rootfs in the guest.</p>
 
 <p>Start by replacing the line:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"rootfs.cpio"</span> <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>in the target applications <code class="highlighter-rouge">CMakeLists.txt</code> file with the following:</p>
+<p>in the target applications <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file with the following:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>CAmkESVMDefaultBuildrootOverlay ON CACHE BOOL <span class="s2">""</span> FORCE<span class="p">)</span>
 <span class="nf">AddOverlayDirToRootfs</span><span class="p">(</span>default_buildroot_overlay <span class="si">${</span><span class="nv">default_rootfs_file</span><span class="si">}</span> <span class="s2">"buildroot"</span> <span class="s2">"rootfs_install"</span>
@@ -381,7 +381,7 @@ project provides an overlay target you can use.</p>
 
 <h3 id="define-interfaces-in-the-vmm">Define interfaces in the VMM</h3>
 
-<p><strong>Exercise</strong> Update the CAmkES file, <code class="highlighter-rouge">crossvm_tutorial.camkes</code> by replacing the Init0 component definition:</p>
+<p><strong>Exercise</strong> Update the CAmkES file, <code class="language-plaintext highlighter-rouge">crossvm_tutorial.camkes</code> by replacing the Init0 component definition:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">Init0</span> <span class="p">{</span>
     <span class="n">VM_INIT_DEF</span><span class="p">()</span>
@@ -411,7 +411,7 @@ between the VMM and guest.</p>
 <h3 id="define-the-component-interface">Define the component interface</h3>
 
 <p><strong>Exercise</strong> Define the print server component by adding the following to
-the <code class="highlighter-rouge">crossvm_tutorial.camkes</code> file, after the <code class="highlighter-rouge">Init0</code> definition:</p>
+the <code class="language-plaintext highlighter-rouge">crossvm_tutorial.camkes</code> file, after the <code class="language-plaintext highlighter-rouge">Init0</code> definition:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">component</span> <span class="n">PrintServer</span> <span class="p">{</span>
   <span class="n">control</span><span class="p">;</span>
   <span class="n">dataport</span> <span class="n">Buf</span><span class="p">(</span><span class="mi">4096</span><span class="p">)</span> <span class="n">data</span><span class="p">;</span>
@@ -422,7 +422,7 @@ the <code class="highlighter-rouge">crossvm_tutorial.camkes</code> file, after t
 
 <h3 id="instantiate-the-print-server">Instantiate the print server</h3>
 
-<p><strong>Exercise</strong> Replace the <code class="highlighter-rouge">composition</code> definition:</p>
+<p><strong>Exercise</strong> Replace the <code class="language-plaintext highlighter-rouge">composition</code> definition:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">composition</span> <span class="p">{</span>
         <span class="n">VM_COMPOSITION_DEF</span><span class="p">()</span>
@@ -448,15 +448,15 @@ the <code class="highlighter-rouge">crossvm_tutorial.camkes</code> file, after t
 </code></pre></div></div>
 
 <p>The <a href="https://docs.sel4.systems/projects/camkes/seL4SharedDataWithCaps.html">seL4SharedDataWithCaps</a>
-connector is a dataport connector much like <code class="highlighter-rouge">seL4SharedData</code>.
-However, the <code class="highlighter-rouge">to</code> side of the connection also receives access to
+connector is a dataport connector much like <code class="language-plaintext highlighter-rouge">seL4SharedData</code>.
+However, the <code class="language-plaintext highlighter-rouge">to</code> side of the connection also receives access to
 the capabilities to the frames backing the dataport, which is required
 for cross VM dataports, as the VMM must be able to establish shared memory
 at runtime by inserting new mappings into the guest’s address space.</p>
 
 <p><strong>Exercise</strong> Interfaces connected with <a href="https://docs.sel4.systems/projects/camkes/seL4SharedDataWithCaps.html">seL4SharedDataWithCaps</a> must be
 configured with an integer specifying the ID and size of the dataport.
- Do this now by modifying <code class="highlighter-rouge">crossvm_tutorial.camkes</code> with the following
+ Do this now by modifying <code class="language-plaintext highlighter-rouge">crossvm_tutorial.camkes</code> with the following
 two lines in the configuration section:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">configuration</span> <span class="p">{</span>
@@ -469,9 +469,9 @@ two lines in the configuration section:</p>
 
 <h3 id="implement-the-print-server">Implement the print server</h3>
 
-<p><strong>Exercise</strong> Add the file <code class="highlighter-rouge">components/print_server.c</code> with the following contents:</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;camkes.h&gt;
-#include &lt;stdio.h&gt;
+<p><strong>Exercise</strong> Add the file <code class="language-plaintext highlighter-rouge">components/print_server.c</code> with the following contents:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
 
@@ -499,24 +499,24 @@ The example code assumes that the shared buffer will contain a valid, null-termi
  This file must define 3 functions which initialize each type of cross vm interface:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">cross_vm_dataports_init</code></li>
-  <li><code class="highlighter-rouge">cross_vm_emits_events_init</code></li>
-  <li><code class="highlighter-rouge">cross_vm_consumes_events_init</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cross_vm_dataports_init</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cross_vm_emits_events_init</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cross_vm_consumes_events_init</code></li>
 </ul>
 
-<p><strong>Exercise</strong> Add a file <code class="highlighter-rouge">src/cross_vm.c</code> with the following contents:</p>
+<p><strong>Exercise</strong> Add a file <code class="language-plaintext highlighter-rouge">src/cross_vm.c</code> with the following contents:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;sel4/sel4.h&gt;
-#include &lt;camkes.h&gt;
-#include &lt;camkes_mutex.h&gt;
-#include &lt;camkes_consumes_event.h&gt;
-#include &lt;camkes_emits_event.h&gt;
-#include &lt;dataport_caps.h&gt;
-#include &lt;cross_vm_consumes_event.h&gt;
-#include &lt;cross_vm_emits_event.h&gt;
-#include &lt;cross_vm_dataport.h&gt;
-#include &lt;vmm/vmm.h&gt;
-#include &lt;vspace/vspace.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;sel4/sel4.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;camkes_mutex.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;camkes_consumes_event.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;camkes_emits_event.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;dataport_caps.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cross_vm_consumes_event.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cross_vm_emits_event.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cross_vm_dataport.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vmm/vmm.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vspace/vspace.h&gt;</span><span class="cp">
 </span>
 <span class="c1">// this is defined in the dataport's glue code</span>
 <span class="k">extern</span> <span class="n">dataport_caps_handle_t</span> <span class="n">data_handle</span><span class="p">;</span>
@@ -561,7 +561,7 @@ The example code assumes that the shared buffer will contain a valid, null-termi
 
 <h3 id="update-the-build-system">Update the build system</h3>
 
-<p><strong>Exercise</strong> Make the following changes in <code class="highlighter-rouge">CMakeLists.txt</code> by firstly replacing the declaration of Init0:</p>
+<p><strong>Exercise</strong> Make the following changes in <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> by firstly replacing the declaration of Init0:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">DeclareCAmkESVM</span><span class="p">(</span>Init0<span class="p">)</span>
 </code></pre></div></div>
@@ -583,12 +583,12 @@ The example code assumes that the shared buffer will contain a valid, null-termi
 <span class="nf">DeclareCAmkESComponent</span><span class="p">(</span>PrintServer SOURCES components/print_server.c<span class="p">)</span>
 </code></pre></div></div>
 
-<p>This extends the definition of the Init component with the <code class="highlighter-rouge">cross_vm connector</code> source and the crossvm
-library, and defines the new CAmkES component <code class="highlighter-rouge">PrintServer</code>.</p>
+<p>This extends the definition of the Init component with the <code class="language-plaintext highlighter-rouge">cross_vm connector</code> source and the crossvm
+library, and defines the new CAmkES component <code class="language-plaintext highlighter-rouge">PrintServer</code>.</p>
 
 <h3 id="add-interfaces-to-the-guest">Add interfaces to the Guest</h3>
 
-<p><strong>Exercise</strong> Create the following <code class="highlighter-rouge">camkes_init</code> shell script that is executed as Linux is initialized:</p>
+<p><strong>Exercise</strong> Create the following <code class="language-plaintext highlighter-rouge">camkes_init</code> shell script that is executed as Linux is initialized:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 <span class="c"># Initialises linux-side of cross vm connections.</span>
@@ -607,8 +607,8 @@ emits_event_init /dev/camkes_do_print
 <p>Each of these commands creates device nodes associated with a particular
 Linux kernel module supporting cross VM communication. Each command
 takes a list of device nodes to create, which must correspond to the IDs
-assigned to interfaces in <code class="highlighter-rouge">crossvm_tutorial.camkes</code> and <code class="highlighter-rouge">cross_vm.c</code>. The
-<code class="highlighter-rouge">dataport_init</code> command must also be passed the size of each dataport.</p>
+assigned to interfaces in <code class="language-plaintext highlighter-rouge">crossvm_tutorial.camkes</code> and <code class="language-plaintext highlighter-rouge">cross_vm.c</code>. The
+<code class="language-plaintext highlighter-rouge">dataport_init</code> command must also be passed the size of each dataport.</p>
 
 <p>These changes will cause device nodes to be created which correspond to
 the interfaces you added to the VMM component.</p>
@@ -619,22 +619,22 @@ the interfaces you added to the VMM component.</p>
 print server.</p>
 
 <p><strong>Exercise</strong> First create a new directory:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p pkgs/print_client
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p pkgs/print_client
 </code></pre></div></div>
 
-<p>with the following file <code class="highlighter-rouge">pkgs/print_client/print_client.c</code>:</p>
+<p>with the following file <code class="language-plaintext highlighter-rouge">pkgs/print_client/print_client.c</code>:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;string.h&gt;
-#include &lt;assert.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
 </span>
-<span class="cp">#include &lt;sys/types.h&gt;
-#include &lt;sys/stat.h&gt;
-#include &lt;sys/mman.h&gt;
-#include &lt;fcntl.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
 </span>
-<span class="cp">#include "dataport.h"
-#include "consumes_event.h"
-#include "emits_event.h"
+<span class="cp">#include</span> <span class="cpf">"dataport.h"</span><span class="cp">
+#include</span> <span class="cpf">"consumes_event.h"</span><span class="cp">
+#include</span> <span class="cpf">"emits_event.h"</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
 
@@ -670,7 +670,7 @@ print server.</p>
 <p>This program prints each of its arguments on a separate line, by sending
 each argument to the print server one at a time.</p>
 
-<p><strong>Exercise</strong> Create <code class="highlighter-rouge">pkgs/print_client/CMakeLists.txt</code> for our client program:</p>
+<p><strong>Exercise</strong> Create <code class="language-plaintext highlighter-rouge">pkgs/print_client/CMakeLists.txt</code> for our client program:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
 
@@ -685,12 +685,12 @@ each argument to the print server one at a time.</p>
 <span class="nb">target_link_libraries</span><span class="p">(</span>print_client camkeslinux<span class="p">)</span>
 </code></pre></div></div>
 
-<p><strong>Exercise</strong> Update our the VM apps <code class="highlighter-rouge">CMakeLists.txt</code>. Below the line:</p>
+<p><strong>Exercise</strong> Update our the VM apps <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. Below the line:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddToFileServer</span><span class="p">(</span><span class="s2">"bzimage"</span> <span class="si">${</span><span class="nv">decompressed_kernel</span><span class="si">}</span> DEPENDS extract_linux_kernel<span class="p">)</span>
 </code></pre></div></div>
 
-<p>add the <code class="highlighter-rouge">ExternalProject</code> declaration to include the print application:</p>
+<p>add the <code class="language-plaintext highlighter-rouge">ExternalProject</code> declaration to include the print application:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get Custom toolchain for 32 bit Linux</span>
 <span class="nb">include</span><span class="p">(</span>cross_compiling<span class="p">)</span>
@@ -715,7 +715,7 @@ each argument to the print server one at a time.</p>
     FILES print_client<span class="p">)</span>
 </code></pre></div></div>
 
-<p>Directly below this we also want to add our <code class="highlighter-rouge">camkes_init</code> script into the overlay. We place this into the VMs <code class="highlighter-rouge">init.d</code> directory so
+<p>Directly below this we also want to add our <code class="language-plaintext highlighter-rouge">camkes_init</code> script into the overlay. We place this into the VMs <code class="language-plaintext highlighter-rouge">init.d</code> directory so
 the script is run on start up:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">AddFileToOverlayDir</span><span class="p">(</span><span class="s2">"S90camkes_init"</span> <span class="si">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="si">}</span>/camkes_init <span class="s2">"etc/init.d"</span> default_buildroot_overlay<span class="p">)</span>
@@ -723,7 +723,7 @@ the script is run on start up:</p>
 
 <p>That’s it. Build and run the system, and you should see the following output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 Creating dataport node /dev/camkes_data
 Allocating 4096 bytes for /dev/camkes_data
 Creating consuming event node /dev/camkes_done_printing
@@ -777,7 +777,7 @@ camkes-vm-crossvm/camkes-vm-crossvm.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

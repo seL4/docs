@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-ioportsh">Interface <code class="highlighter-rouge">ioports.h</code></h2>
+<h2 id="interface-ioportsh">Interface <code class="language-plaintext highlighter-rouge">ioports.h</code></h2>
 
 <p>The x86 ioports interface provides a useful abstraction for initialising, registering and handling ioport events
 for a guest VM instance. IOPort faults are directed through this interface.</p>
@@ -350,31 +350,31 @@ for a guest VM instance. IOPort faults are directed through this interface.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_io_port_add_handlervm-ioport_range-ioport_interface"><code class="highlighter-rouge">vm_io_port_add_handler(vm, ioport_range, ioport_interface)</code></a></p>
+  <p><a href="#function-vm_io_port_add_handlervm-ioport_range-ioport_interface"><code class="language-plaintext highlighter-rouge">vm_io_port_add_handler(vm, ioport_range, ioport_interface)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_register_unhandled_ioport_callbackvm-ioport_callback-cookie"><code class="highlighter-rouge">vm_register_unhandled_ioport_callback(vm, ioport_callback, cookie)</code></a></p>
+  <p><a href="#function-vm_register_unhandled_ioport_callbackvm-ioport_callback-cookie"><code class="language-plaintext highlighter-rouge">vm_register_unhandled_ioport_callback(vm, ioport_callback, cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_enable_passthrough_ioportvcpu-port_start-port_end"><code class="highlighter-rouge">vm_enable_passthrough_ioport(vcpu, port_start, port_end)</code></a></p>
+  <p><a href="#function-vm_enable_passthrough_ioportvcpu-port_start-port_end"><code class="language-plaintext highlighter-rouge">vm_enable_passthrough_ioport(vcpu, port_start, port_end)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">ioports.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">ioports.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_io_port_add_handlervm-ioport_range-ioport_interface">Function <code class="highlighter-rouge">vm_io_port_add_handler(vm, ioport_range, ioport_interface)</code></h3>
+<h3 id="function-vm_io_port_add_handlervm-ioport_range-ioport_interface">Function <code class="language-plaintext highlighter-rouge">vm_io_port_add_handler(vm, ioport_range, ioport_interface)</code></h3>
 
 <p>Add an io port range for emulation</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">ioport_range {vm_ioport_range_t}</code>: Range of ioport being emulated with the given handler</li>
-  <li><code class="highlighter-rouge">ioport_interface {vm_ioport_interface_t}</code>: Interface for ioport range, containing io_in and io_out handler functions</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_range {vm_ioport_range_t}</code>: Range of ioport being emulated with the given handler</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_interface {vm_ioport_interface_t}</code>: Interface for ioport range, containing io_in and io_out handler functions</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -385,16 +385,16 @@ for a guest VM instance. IOPort faults are directed through this interface.</p>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="function-vm_register_unhandled_ioport_callbackvm-ioport_callback-cookie">Function <code class="highlighter-rouge">vm_register_unhandled_ioport_callback(vm, ioport_callback, cookie)</code></h3>
+<h3 id="function-vm_register_unhandled_ioport_callbackvm-ioport_callback-cookie">Function <code class="language-plaintext highlighter-rouge">vm_register_unhandled_ioport_callback(vm, ioport_callback, cookie)</code></h3>
 
 <p>Register a callback for processing unhandled ioport faults (faults unknown to libsel4vm)</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">ioport_callback {unhandled_ioport_callback_fn}</code>: A user supplied callback to process unhandled ioport faults</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: A cookie to supply to the callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_callback {unhandled_ioport_callback_fn}</code>: A user supplied callback to process unhandled ioport faults</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: A cookie to supply to the callback</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -405,16 +405,16 @@ for a guest VM instance. IOPort faults are directed through this interface.</p>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="function-vm_enable_passthrough_ioportvcpu-port_start-port_end">Function <code class="highlighter-rouge">vm_enable_passthrough_ioport(vcpu, port_start, port_end)</code></h3>
+<h3 id="function-vm_enable_passthrough_ioportvcpu-port_start-port_end">Function <code class="language-plaintext highlighter-rouge">vm_enable_passthrough_ioport(vcpu, port_start, port_end)</code></h3>
 
 <p>Enable the passing-through of specific ioport ranges to the VM</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the VCPU being given ioport passthrough access</li>
-  <li><code class="highlighter-rouge">port_start {uint16_t}</code>: Base address of ioport</li>
-  <li><code class="highlighter-rouge">port_end {uint16_t}</code>: End address of ioport</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the VCPU being given ioport passthrough access</li>
+  <li><code class="language-plaintext highlighter-rouge">port_start {uint16_t}</code>: Base address of ioport</li>
+  <li><code class="language-plaintext highlighter-rouge">port_end {uint16_t}</code>: End address of ioport</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -523,7 +523,7 @@ for a guest VM instance. IOPort faults are directed through this interface.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

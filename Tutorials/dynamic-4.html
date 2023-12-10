@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
@@ -263,7 +263,7 @@
 <h1 id="sel4-dynamic-libraries-timer-tutorial">seL4 Dynamic Libraries: Timer tutorial</h1>
 
 <p>This tutorial demonstrates how to set up and use a basic timer driver using the
-<code class="highlighter-rouge">seL4_libs</code> dynamic libraries.</p>
+<code class="language-plaintext highlighter-rouge">seL4_libs</code> dynamic libraries.</p>
 
 <p>You’ll observe that the things you’ve already covered in the other
 tutorials are already filled out and you don’t have to repeat them: in
@@ -274,8 +274,8 @@ page, if they were covered by a previous tutorial in the series.</p>
 
 <ul>
   <li>Allocate a notification object.</li>
-  <li>Set up a timer provided by <code class="highlighter-rouge">util_libs</code>.</li>
-  <li>Use <code class="highlighter-rouge">seL4_libs</code> and <code class="highlighter-rouge">util_libs</code> functions to manipulate timer and
+  <li>Set up a timer provided by <code class="language-plaintext highlighter-rouge">util_libs</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">seL4_libs</code> and <code class="language-plaintext highlighter-rouge">util_libs</code> functions to manipulate timer and
     handle interrupts.</li>
 </ul>
 
@@ -302,7 +302,7 @@ ninja
 
 <p>Once you initialise and run the tutorials, you will see the following output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Node 0 of 1
 IOPT levels:     4294967295
 IPC buffer:      0x5a1000
@@ -340,8 +340,8 @@ interrupts on.</p>
 
 <h3 id="initialise-the-timer">Initialise the timer</h3>
 
-<p>Use our library function <code class="highlighter-rouge">ltimer_default_init</code> to
-initialise a timer driver. Assign it to the <code class="highlighter-rouge">timer</code> global variable.</p>
+<p>Use our library function <code class="language-plaintext highlighter-rouge">ltimer_default_init</code> to
+initialise a timer driver. Assign it to the <code class="language-plaintext highlighter-rouge">timer</code> global variable.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 2: call ltimer library to get the default timer */</span>
     <span class="cm">/* hint: ltimer_default_init, you can set NULL for the callback and token
@@ -362,7 +362,7 @@ initialise a timer driver. Assign it to the <code class="highlighter-rouge">time
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div></div>
 <p>After this change, the server will output non-zero for the tick value at the end.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> got the current timer tick:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> got the current timer tick:
  1409040
 </code></pre></div></div>
 
@@ -384,7 +384,7 @@ it.</p>
      */</span>
 </code></pre></div></div>
 <p>The output will cease after the following line as a result of completing this task.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a message from 0x61 to sleep 2 seconds
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a message from 0x61 to sleep 2 seconds
 </code></pre></div></div>
 
 <h3 id="handle-the-interrupt">Handle the interrupt</h3>
@@ -409,7 +409,7 @@ hence when we receive an interrupt, we forward it to the interface and let it no
 
 <p>After this task is completed you should see a 2 second wait, then output from the
  client as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up:
  got the current timer tick:
  2365866120
 </code></pre></div></div>
@@ -477,7 +477,7 @@ dynamic-4/dynamic-4.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

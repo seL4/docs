@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_boot_inith">Interface <code class="highlighter-rouge">guest_boot_init.h</code></h2>
+<h2 id="interface-guest_boot_inith">Interface <code class="language-plaintext highlighter-rouge">guest_boot_init.h</code></h2>
 
 <p>The libsel4vmmplatsupport arm guest boot init interface provides helpers to initialise the booting state of
 a VM instance. This currently only targets booting a Linux guest OS.</p>
@@ -350,14 +350,14 @@ a VM instance. This currently only targets booting a Linux guest OS.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vcpu_set_bootargsvcpu-pc-mach_type-atags"><code class="highlighter-rouge">vcpu_set_bootargs(vcpu, pc, mach_type, atags)</code></a></p>
+  <p><a href="#function-vcpu_set_bootargsvcpu-pc-mach_type-atags"><code class="language-plaintext highlighter-rouge">vcpu_set_bootargs(vcpu, pc, mach_type, atags)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_boot_init.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_boot_init.h</code> defines the following functions.</p>
 
-<h3 id="function-vcpu_set_bootargsvcpu-pc-mach_type-atags">Function <code class="highlighter-rouge">vcpu_set_bootargs(vcpu, pc, mach_type, atags)</code></h3>
+<h3 id="function-vcpu_set_bootargsvcpu-pc-mach_type-atags">Function <code class="language-plaintext highlighter-rouge">vcpu_set_bootargs(vcpu, pc, mach_type, atags)</code></h3>
 
 <p>Set the boot args and pc for the VM. The Linux kernel documentation contains a detailed description about
 the boot ABI for <a href="https://www.kernel.org/doc/Documentation/arm/Booting">AARCH32</a> and
@@ -366,33 +366,33 @@ the boot ABI for <a href="https://www.kernel.org/doc/Documentation/arm/Booting">
 <p>The register setup for the booting core on AARCH32 is</p>
 
 <ul>
-  <li><code class="highlighter-rouge">r0</code> = <code class="highlighter-rouge">0</code></li>
-  <li><code class="highlighter-rouge">r1</code> = <code class="highlighter-rouge">MACH_TYPE</code></li>
-  <li><code class="highlighter-rouge">r2</code> = ATAGS or FTD/DTB address</li>
+  <li><code class="language-plaintext highlighter-rouge">r0</code> = <code class="language-plaintext highlighter-rouge">0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">r1</code> = <code class="language-plaintext highlighter-rouge">MACH_TYPE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">r2</code> = ATAGS or FTD/DTB address</li>
 </ul>
 
 <p>For AARCH64 it is:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">x0</code> = FTD/DTB address</li>
-  <li><code class="highlighter-rouge">x1</code> = <code class="highlighter-rouge">0</code></li>
-  <li><code class="highlighter-rouge">x2</code> = <code class="highlighter-rouge">0</code></li>
-  <li><code class="highlighter-rouge">x3</code> = <code class="highlighter-rouge">0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x0</code> = FTD/DTB address</li>
+  <li><code class="language-plaintext highlighter-rouge">x1</code> = <code class="language-plaintext highlighter-rouge">0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x2</code> = <code class="language-plaintext highlighter-rouge">0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x3</code> = <code class="language-plaintext highlighter-rouge">0</code></li>
 </ul>
 
 <p>Passing a pointer to ATAGs is deprecated, modern kernels use a device tree that is passed as Flattened Device
-Tree (FDT), sometimes also called Device Tree Blob (DTB). The parameter <code class="highlighter-rouge">MACH_TYPE</code> contains a machine
-specific ID, various <code class="highlighter-rouge">MACH_TYPE_xxx</code> constants can be found in the
-<a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/arch/arm/tools/mach-types">Linux Source code at <code class="highlighter-rouge">arch/arm/tools/mach-types</code></a>
-FTDs usually contain all necessary information about the machine, so<code class="highlighter-rouge">-1</code> (<code class="highlighter-rouge">0xfff...fff</code>) can be passed.</p>
+Tree (FDT), sometimes also called Device Tree Blob (DTB). The parameter <code class="language-plaintext highlighter-rouge">MACH_TYPE</code> contains a machine
+specific ID, various <code class="language-plaintext highlighter-rouge">MACH_TYPE_xxx</code> constants can be found in the
+<a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/arch/arm/tools/mach-types">Linux Source code at <code class="language-plaintext highlighter-rouge">arch/arm/tools/mach-types</code></a>
+FTDs usually contain all necessary information about the machine, so<code class="language-plaintext highlighter-rouge">-1</code> (<code class="language-plaintext highlighter-rouge">0xfff...fff</code>) can be passed.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the boot VCPU</li>
-  <li><code class="highlighter-rouge">pc {seL4_Word}</code>: The initial PC for the VM</li>
-  <li><code class="highlighter-rouge">mach_type {seL4_Word}</code>: Linux specific machine ID</li>
-  <li><code class="highlighter-rouge">atags {seL4_Word}</code>: Linux specific IPA of ATAGS or FTD/DTB address</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the boot VCPU</li>
+  <li><code class="language-plaintext highlighter-rouge">pc {seL4_Word}</code>: The initial PC for the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">mach_type {seL4_Word}</code>: Linux specific machine ID</li>
+  <li><code class="language-plaintext highlighter-rouge">atags {seL4_Word}</code>: Linux specific IPA of ATAGS or FTD/DTB address</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -501,7 +501,7 @@ FTDs usually contain all necessary information about the machine, so<code class=
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -177,7 +177,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <p>Converting to a u-boot uImage:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkimage <span class="nt">-A</span> riscv <span class="nt">-O</span> linux <span class="nt">-T</span> kernel <span class="nt">-C</span> none <span class="nt">-a</span> 0x80000000 <span class="nt">-e</span> 0x80000000 <span class="nt">-n</span> sel4test <span class="nt">-d</span> <span class="se">\</span>
@@ -197,7 +197,7 @@ The following instructions are based on SoftConsole v2022.2</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Open SoftConsole and import a project from the newly cloned <code class="highlighter-rouge">hart-software-services</code> repo.</p>
+    <p>Open SoftConsole and import a project from the newly cloned <code class="language-plaintext highlighter-rouge">hart-software-services</code> repo.</p>
   </li>
   <li>Build the project with the project defaults.</li>
 </ol>
@@ -208,7 +208,7 @@ The following instructions are based on SoftConsole v2022.2</p>
 make
 </code></pre></div></div>
 
-<p>This generates a <code class="highlighter-rouge">hss-payload-generator</code> ELF.</p>
+<p>This generates a <code class="language-plaintext highlighter-rouge">hss-payload-generator</code> ELF.</p>
 
 <h3 id="u-boot">U-Boot</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/polarfire-soc/u-boot
@@ -217,9 +217,9 @@ make
 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>riscv64-linux-gnu- <span class="nv">ARCH</span><span class="o">=</span>riscv make
 </code></pre></div></div>
 
-<p>This generates a <code class="highlighter-rouge">u-boot-dtb.bin</code> binary.</p>
+<p>This generates a <code class="language-plaintext highlighter-rouge">u-boot-dtb.bin</code> binary.</p>
 
-<p>In order boot u-boot from the HSS, the <code class="highlighter-rouge">u-boot-dtb.bin</code> needs to be packaged as an HSS payload using
+<p>In order boot u-boot from the HSS, the <code class="language-plaintext highlighter-rouge">u-boot-dtb.bin</code> needs to be packaged as an HSS payload using
 the hss-payload-generator tool but first a payload configuration yaml file needs to be created:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#</span>
@@ -231,7 +231,7 @@ the hss-payload-generator tool but first a payload configuration yaml file needs
 <span class="na">hart-entry-points</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">u54_1</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0x1000200000'</span><span class="pi">,</span> <span class="nv">u54_2</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0x1000200000'</span><span class="pi">,</span> <span class="nv">u54_3</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0x1000200000'</span><span class="pi">,</span> <span class="nv">u54_4</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0x1000200000'</span><span class="pi">}</span>
 
 <span class="na">payloads</span><span class="pi">:</span>
-  <span class="s">u-boot.bin</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">exec-addr</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0x1000200000'</span><span class="pi">,</span> <span class="nv">owner-hart</span><span class="pi">:</span> <span class="nv">u54_1</span><span class="pi">,</span> <span class="nv">secondary-hart</span><span class="pi">:</span> <span class="nv">u54_2</span><span class="pi">,</span> <span class="nv">secondary-hart</span><span class="pi">:</span> <span class="nv">u54_3</span><span class="pi">,</span> <span class="nv">secondary-hart</span><span class="pi">:</span> <span class="nv">u54_4</span><span class="pi">,</span> <span class="nv">priv-mode</span><span class="pi">:</span> <span class="nv">prv_s</span> <span class="pi">}</span>
+  <span class="na">u-boot.bin</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">exec-addr</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0x1000200000'</span><span class="pi">,</span> <span class="nv">owner-hart</span><span class="pi">:</span> <span class="nv">u54_1</span><span class="pi">,</span> <span class="nv">secondary-hart</span><span class="pi">:</span> <span class="nv">u54_2</span><span class="pi">,</span> <span class="nv">secondary-hart</span><span class="pi">:</span> <span class="nv">u54_3</span><span class="pi">,</span> <span class="nv">secondary-hart</span><span class="pi">:</span> <span class="nv">u54_4</span><span class="pi">,</span> <span class="nv">priv-mode</span><span class="pi">:</span> <span class="nv">prv_s</span> <span class="pi">}</span>
 
 </code></pre></div></div>
 
@@ -239,7 +239,7 @@ the hss-payload-generator tool but first a payload configuration yaml file needs
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./hss-payload-generator <span class="nt">-c</span> u-boot.yaml uboot-payload.bin
 </code></pre></div></div>
 
-<p>This generates a <code class="highlighter-rouge">uboot-payload.bin</code> binary.</p>
+<p>This generates a <code class="language-plaintext highlighter-rouge">uboot-payload.bin</code> binary.</p>
 
 <h2 id="booting-via-sd-card">Booting via SD card</h2>
 
@@ -292,7 +292,7 @@ bootm 0x1000200000 - 0x1020200000
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Sun Nov 6 18:33:54 2022 +1100 a46c148f47

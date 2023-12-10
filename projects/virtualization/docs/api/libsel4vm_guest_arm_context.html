@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_arm_contexth">Interface <code class="highlighter-rouge">guest_arm_context.h</code></h2>
+<h2 id="interface-guest_arm_contexth">Interface <code class="language-plaintext highlighter-rouge">guest_arm_context.h</code></h2>
 
 <p>The libsel4vm ARM context interface provides a set of useful getters and setters on ARM vcpu thread contexts.
 This interface is commonly leveraged by VMM’s to initialise a vcpu state, process a vcpu fault and
@@ -351,42 +351,42 @@ accordingly update its state.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_set_thread_contextvcpu-context"><code class="highlighter-rouge">vm_set_thread_context(vcpu, context)</code></a></p>
+  <p><a href="#function-vm_set_thread_contextvcpu-context"><code class="language-plaintext highlighter-rouge">vm_set_thread_context(vcpu, context)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_set_thread_context_regvcpu-reg-value"><code class="highlighter-rouge">vm_set_thread_context_reg(vcpu, reg, value)</code></a></p>
+  <p><a href="#function-vm_set_thread_context_regvcpu-reg-value"><code class="language-plaintext highlighter-rouge">vm_set_thread_context_reg(vcpu, reg, value)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_get_thread_contextvcpu-context"><code class="highlighter-rouge">vm_get_thread_context(vcpu, context)</code></a></p>
+  <p><a href="#function-vm_get_thread_contextvcpu-context"><code class="language-plaintext highlighter-rouge">vm_get_thread_context(vcpu, context)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_get_thread_context_regvcpu-reg-value"><code class="highlighter-rouge">vm_get_thread_context_reg(vcpu, reg, value)</code></a></p>
+  <p><a href="#function-vm_get_thread_context_regvcpu-reg-value"><code class="language-plaintext highlighter-rouge">vm_get_thread_context_reg(vcpu, reg, value)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_set_arm_vcpu_regvcpu-reg-value"><code class="highlighter-rouge">vm_set_arm_vcpu_reg(vcpu, reg, value)</code></a></p>
+  <p><a href="#function-vm_set_arm_vcpu_regvcpu-reg-value"><code class="language-plaintext highlighter-rouge">vm_set_arm_vcpu_reg(vcpu, reg, value)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_get_arm_vcpu_regvcpu-reg-value"><code class="highlighter-rouge">vm_get_arm_vcpu_reg(vcpu, reg, value)</code></a></p>
+  <p><a href="#function-vm_get_arm_vcpu_regvcpu-reg-value"><code class="language-plaintext highlighter-rouge">vm_get_arm_vcpu_reg(vcpu, reg, value)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_arm_context.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_arm_context.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_set_thread_contextvcpu-context">Function <code class="highlighter-rouge">vm_set_thread_context(vcpu, context)</code></h3>
+<h3 id="function-vm_set_thread_contextvcpu-context">Function <code class="language-plaintext highlighter-rouge">vm_set_thread_context(vcpu, context)</code></h3>
 
 <p>Set a VCPU’s thread registers given a TCB user context</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
-  <li><code class="highlighter-rouge">context {seL4_UserContext}</code>: seL4_UserContext applied to VCPU’s TCB</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">context {seL4_UserContext}</code>: seL4_UserContext applied to VCPU’s TCB</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -397,16 +397,16 @@ accordingly update its state.</p>
 
 <p>Back to <a href="#module-guest_arm_contexth">interface description</a>.</p>
 
-<h3 id="function-vm_set_thread_context_regvcpu-reg-value">Function <code class="highlighter-rouge">vm_set_thread_context_reg(vcpu, reg, value)</code></h3>
+<h3 id="function-vm_set_thread_context_regvcpu-reg-value">Function <code class="language-plaintext highlighter-rouge">vm_set_thread_context_reg(vcpu, reg, value)</code></h3>
 
 <p>Set a single VCPU’s TCB register</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
-  <li><code class="highlighter-rouge">reg {unsigned int}</code>: Index offset of register in seL4_UserContext e.g pc (seL4_UserContext.pc) =&gt; 0</li>
-  <li><code class="highlighter-rouge">value {uintptr_t}</code>: Value to set TCB register with</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">reg {unsigned int}</code>: Index offset of register in seL4_UserContext e.g pc (seL4_UserContext.pc) =&gt; 0</li>
+  <li><code class="language-plaintext highlighter-rouge">value {uintptr_t}</code>: Value to set TCB register with</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -417,15 +417,15 @@ accordingly update its state.</p>
 
 <p>Back to <a href="#module-guest_arm_contexth">interface description</a>.</p>
 
-<h3 id="function-vm_get_thread_contextvcpu-context">Function <code class="highlighter-rouge">vm_get_thread_context(vcpu, context)</code></h3>
+<h3 id="function-vm_get_thread_contextvcpu-context">Function <code class="language-plaintext highlighter-rouge">vm_get_thread_context(vcpu, context)</code></h3>
 
 <p>Get a VCPU’s TCB user context</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t}</code>: Handle to the vcpu</li>
-  <li><code class="highlighter-rouge">context {seL4_UserContext}</code>: Pointer to user supplied seL4_UserContext to populate with VCPU’s TCB user context</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t}</code>: Handle to the vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">context {seL4_UserContext}</code>: Pointer to user supplied seL4_UserContext to populate with VCPU’s TCB user context</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -436,16 +436,16 @@ accordingly update its state.</p>
 
 <p>Back to <a href="#module-guest_arm_contexth">interface description</a>.</p>
 
-<h3 id="function-vm_get_thread_context_regvcpu-reg-value">Function <code class="highlighter-rouge">vm_get_thread_context_reg(vcpu, reg, value)</code></h3>
+<h3 id="function-vm_get_thread_context_regvcpu-reg-value">Function <code class="language-plaintext highlighter-rouge">vm_get_thread_context_reg(vcpu, reg, value)</code></h3>
 
 <p>Get a single VCPU’s TCB register</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
-  <li><code class="highlighter-rouge">reg {unsigned int}</code>: Index offset of register in seL4_UserContext e.g pc (seL4_UserContext.pc) =&gt; 0</li>
-  <li><code class="highlighter-rouge">value {uintptr_t *}</code>: Pointer to user supplied variable to populate TCB register value with</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">reg {unsigned int}</code>: Index offset of register in seL4_UserContext e.g pc (seL4_UserContext.pc) =&gt; 0</li>
+  <li><code class="language-plaintext highlighter-rouge">value {uintptr_t *}</code>: Pointer to user supplied variable to populate TCB register value with</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -456,16 +456,16 @@ accordingly update its state.</p>
 
 <p>Back to <a href="#module-guest_arm_contexth">interface description</a>.</p>
 
-<h3 id="function-vm_set_arm_vcpu_regvcpu-reg-value">Function <code class="highlighter-rouge">vm_set_arm_vcpu_reg(vcpu, reg, value)</code></h3>
+<h3 id="function-vm_set_arm_vcpu_regvcpu-reg-value">Function <code class="language-plaintext highlighter-rouge">vm_set_arm_vcpu_reg(vcpu, reg, value)</code></h3>
 
 <p>Set an ARM VCPU register</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
-  <li><code class="highlighter-rouge">reg {seL4_Word}</code>: VCPU Register field defined in seL4_VCPUReg</li>
-  <li><code class="highlighter-rouge">value {uintptr_t *}</code>: Value to set VCPU register with</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">reg {seL4_Word}</code>: VCPU Register field defined in seL4_VCPUReg</li>
+  <li><code class="language-plaintext highlighter-rouge">value {uintptr_t *}</code>: Value to set VCPU register with</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -476,16 +476,16 @@ accordingly update its state.</p>
 
 <p>Back to <a href="#module-guest_arm_contexth">interface description</a>.</p>
 
-<h3 id="function-vm_get_arm_vcpu_regvcpu-reg-value">Function <code class="highlighter-rouge">vm_get_arm_vcpu_reg(vcpu, reg, value)</code></h3>
+<h3 id="function-vm_get_arm_vcpu_regvcpu-reg-value">Function <code class="language-plaintext highlighter-rouge">vm_get_arm_vcpu_reg(vcpu, reg, value)</code></h3>
 
 <p>Get an ARM VCPU register</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
-  <li><code class="highlighter-rouge">reg {seL4_Word}</code>: VCPU Register field defined in seL4_VCPUReg</li>
-  <li><code class="highlighter-rouge">value {uintptr_t *}</code>: Pointer to user supplied variable to populate VCPU register value with</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">reg {seL4_Word}</code>: VCPU Register field defined in seL4_VCPUReg</li>
+  <li><code class="language-plaintext highlighter-rouge">value {uintptr_t *}</code>: Pointer to user supplied variable to populate VCPU register value with</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -594,7 +594,7 @@ accordingly update its state.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -154,59 +154,59 @@
 
 <ul>
   <li>List valid platforms if invalid platform is provided in build configuration.</li>
-  <li>Add <code class="highlighter-rouge">IPCRIGHTS</code> tests for master and mcs to test new <code class="highlighter-rouge">grantreply</code> access right:
+  <li>Add <code class="language-plaintext highlighter-rouge">IPCRIGHTS</code> tests for master and mcs to test new <code class="language-plaintext highlighter-rouge">grantreply</code> access right:
     <ul>
-      <li><code class="highlighter-rouge">IPCRIGHTS0001</code>, “seL4_Send needs write”</li>
-      <li><code class="highlighter-rouge">IPCRIGHTS0002</code>, “seL4_Recv needs read”</li>
-      <li><code class="highlighter-rouge">IPCRIGHTS0003</code>, “seL4_Send with caps needs grant”</li>
-      <li><code class="highlighter-rouge">IPCRIGHTS0004</code>, “seL4_Call needs grant or grant-reply”</li>
-      <li><code class="highlighter-rouge">IPCRIGHTS0005</code>, “seL4_Reply grant depends of the grant of previous seL4_Recv”</li>
+      <li><code class="language-plaintext highlighter-rouge">IPCRIGHTS0001</code>, “seL4_Send needs write”</li>
+      <li><code class="language-plaintext highlighter-rouge">IPCRIGHTS0002</code>, “seL4_Recv needs read”</li>
+      <li><code class="language-plaintext highlighter-rouge">IPCRIGHTS0003</code>, “seL4_Send with caps needs grant”</li>
+      <li><code class="language-plaintext highlighter-rouge">IPCRIGHTS0004</code>, “seL4_Call needs grant or grant-reply”</li>
+      <li><code class="language-plaintext highlighter-rouge">IPCRIGHTS0005</code>, “seL4_Reply grant depends of the grant of previous seL4_Recv”</li>
     </ul>
   </li>
-  <li>add test <code class="highlighter-rouge">UNKNOWN_SYSCALL_001</code>, “Test seL4_VMEnter in a non-vm thread” to check cannot enter VM in no-vm thread on x86.</li>
+  <li>add test <code class="language-plaintext highlighter-rouge">UNKNOWN_SYSCALL_001</code>, “Test seL4_VMEnter in a non-vm thread” to check cannot enter VM in no-vm thread on x86.</li>
   <li>Added tests for maximum ASID pools usage:
     <ul>
-      <li><code class="highlighter-rouge">VSPACE0003</code>, “Test create multiple ASID pools”</li>
-      <li><code class="highlighter-rouge">VSPACE0004</code>, “Test running out of ASID pools”</li>
-      <li><code class="highlighter-rouge">VSPACE0005</code>, “Test overassigning ASID pool”</li>
-      <li><code class="highlighter-rouge">VSPACE0006</code>, “Test touching all available ASID pools”</li>
+      <li><code class="language-plaintext highlighter-rouge">VSPACE0003</code>, “Test create multiple ASID pools”</li>
+      <li><code class="language-plaintext highlighter-rouge">VSPACE0004</code>, “Test running out of ASID pools”</li>
+      <li><code class="language-plaintext highlighter-rouge">VSPACE0005</code>, “Test overassigning ASID pool”</li>
+      <li><code class="language-plaintext highlighter-rouge">VSPACE0006</code>, “Test touching all available ASID pools”</li>
     </ul>
   </li>
-  <li>Add griddle support to sel4test via <code class="highlighter-rouge">easy-settings.cmake</code> file.</li>
+  <li>Add griddle support to sel4test via <code class="language-plaintext highlighter-rouge">easy-settings.cmake</code> file.</li>
   <li>Re-enable serial_server tests on RISC-V with addition of userlevel serial driver.</li>
-  <li>Change timeout time for <code class="highlighter-rouge">PREEMPT_REVOKE</code> to make test more robust.</li>
+  <li>Change timeout time for <code class="language-plaintext highlighter-rouge">PREEMPT_REVOKE</code> to make test more robust.</li>
   <li>Added tests to check IRQ routing:
     <ul>
-      <li><code class="highlighter-rouge">SMPIRQ0001</code>, “Test multicore irqs”</li>
+      <li><code class="language-plaintext highlighter-rouge">SMPIRQ0001</code>, “Test multicore irqs”</li>
     </ul>
   </li>
   <li>Enable TLS tests for RISC-V as they are now supported.</li>
-  <li>Change RISC-V bad instruction value to <code class="highlighter-rouge">0xffffffff</code> in fault tests. This change was motivated by some simulators not
-  trapping <code class="highlighter-rouge">0x00000000</code> or <code class="highlighter-rouge">0x0000</code> as invalid instructions.</li>
+  <li>Change RISC-V bad instruction value to <code class="language-plaintext highlighter-rouge">0xffffffff</code> in fault tests. This change was motivated by some simulators not
+  trapping <code class="language-plaintext highlighter-rouge">0x00000000</code> or <code class="language-plaintext highlighter-rouge">0x0000</code> as invalid instructions.</li>
   <li>Enable timer tests on RISC-V.</li>
-  <li>Disable flaky <code class="highlighter-rouge">SCHED0000</code> on RISCV.</li>
+  <li>Disable flaky <code class="language-plaintext highlighter-rouge">SCHED0000</code> on RISCV.</li>
   <li>Update vspace test to support 40 bit PAs</li>
-  <li>add <code class="highlighter-rouge">NUM_NODES</code> to override <code class="highlighter-rouge">KernelMaxNumNodes</code>.
+  <li>add <code class="language-plaintext highlighter-rouge">NUM_NODES</code> to override <code class="language-plaintext highlighter-rouge">KernelMaxNumNodes</code>.
   This allows users to pass NUM_NODES on the command line to an init-build
-  invocation and override the default of <code class="highlighter-rouge">4</code> cores when <code class="highlighter-rouge">SMP=ON</code>. Example:
-  <code class="highlighter-rouge">../init-build.sh -DPLATFORM=imx8mq-evk -DAARCH32=1 -DSMP=1 -DNUM_NODES=2</code></li>
+  invocation and override the default of <code class="language-plaintext highlighter-rouge">4</code> cores when <code class="language-plaintext highlighter-rouge">SMP=ON</code>. Example:
+  <code class="language-plaintext highlighter-rouge">../init-build.sh -DPLATFORM=imx8mq-evk -DAARCH32=1 -DSMP=1 -DNUM_NODES=2</code></li>
   <li>Disable device mem tests for spike.</li>
   <li>Change frame tests to not try and steal timer device frame from runtime and instead request device frames
 more reliably.</li>
-  <li>set <code class="highlighter-rouge">Sel4testHaveTimer</code> and <code class="highlighter-rouge">Sel4testHaveCache</code> options to advanced if <code class="highlighter-rouge">Sel4testAllowSettingsOverride</code> is not set.
+  <li>set <code class="language-plaintext highlighter-rouge">Sel4testHaveTimer</code> and <code class="language-plaintext highlighter-rouge">Sel4testHaveCache</code> options to advanced if <code class="language-plaintext highlighter-rouge">Sel4testAllowSettingsOverride</code> is not set.
 Otherwise any changes to these settings will get overridden.</li>
-  <li>Set <code class="highlighter-rouge">SEL4_CONFIG_DEFAULT_ADVANCED=On</code>. This will cause most CMake config options to be hidden apart from ones
+  <li>Set <code class="language-plaintext highlighter-rouge">SEL4_CONFIG_DEFAULT_ADVANCED=On</code>. This will cause most CMake config options to be hidden apart from ones
 expected to be changed.</li>
-  <li>Add MCS option for configuring <code class="highlighter-rouge">KernelIsMCS</code>. <code class="highlighter-rouge">-DMCS=ON</code> will enable MCS configurations and <code class="highlighter-rouge">-DMCS=OFF</code> will use mainline
+  <li>Add MCS option for configuring <code class="language-plaintext highlighter-rouge">KernelIsMCS</code>. <code class="language-plaintext highlighter-rouge">-DMCS=ON</code> will enable MCS configurations and <code class="language-plaintext highlighter-rouge">-DMCS=OFF</code> will use mainline
   configurations.</li>
-  <li>Remove <code class="highlighter-rouge">Remap</code> and use <code class="highlighter-rouge">Map</code> instead in mapping tests due to kernel API change.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">Remap</code> and use <code class="language-plaintext highlighter-rouge">Map</code> instead in mapping tests due to kernel API change.</li>
   <li>RISCV: Disable huge page test for Ariane</li>
-  <li><code class="highlighter-rouge">MULTICORE0003</code>: Extend to test different VSpaces.
+  <li><code class="language-plaintext highlighter-rouge">MULTICORE0003</code>: Extend to test different VSpaces.
   On x86 the kernel was only performing TLB cross-core invalidation if the
   VSpace that was being unmapped was running on the current core.  This
   means that if a core unmaps a page from a different VSpace running on a
   different core then the cross-core invalidation wouldn’t happen.
-  We extend <code class="highlighter-rouge">MULTICORE0003</code> to test unmapping from different VSpaces as well
+  We extend <code class="language-plaintext highlighter-rouge">MULTICORE0003</code> to test unmapping from different VSpaces as well
   as the same VSpace. We also now repeat the test a few times for if a
   kernel timer IRQ is received during any of them leading to a false
   success.</li>
@@ -216,20 +216,20 @@ expected to be changed.</li>
 
 <ul>
   <li>Correctly initialize clocks for exynos5422 serial driver</li>
-  <li>Improve test <code class="highlighter-rouge">SCHED0011</code>: compare timestamps in nanoseconds not microseconds to improve accuracy.
+  <li>Improve test <code class="language-plaintext highlighter-rouge">SCHED0011</code>: compare timestamps in nanoseconds not microseconds to improve accuracy.
 Use period value instead as wait time instead of assuming 1s.</li>
-  <li>Switch to new <code class="highlighter-rouge">libelf</code> and <code class="highlighter-rouge">libcpio</code> API</li>
+  <li>Switch to new <code class="language-plaintext highlighter-rouge">libelf</code> and <code class="language-plaintext highlighter-rouge">libcpio</code> API</li>
   <li>Style source files.</li>
-  <li>Use <code class="highlighter-rouge">seL4runtime</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">seL4runtime</code>.</li>
   <li>Refactor build scripts to keep up to date with build system changes.</li>
-  <li>Refactor object allocation to use <code class="highlighter-rouge">libsel4rpc</code> to dynamically allocate additional resources
+  <li>Refactor object allocation to use <code class="language-plaintext highlighter-rouge">libsel4rpc</code> to dynamically allocate additional resources
 instead of trying to preallocate everything.</li>
-  <li>Remove <code class="highlighter-rouge">autoconf.h</code> and global <code class="highlighter-rouge">Configuration</code> library usage.</li>
-  <li>Add memory barriers in <code class="highlighter-rouge">SCHED0004</code> to prevent spurious failures.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">autoconf.h</code> and global <code class="language-plaintext highlighter-rouge">Configuration</code> library usage.</li>
+  <li>Add memory barriers in <code class="language-plaintext highlighter-rouge">SCHED0004</code> to prevent spurious failures.</li>
   <li>Use custom IRQ handler allocation function in IRQ allocation so that some tests may borrow the
 caps.</li>
-  <li>Rename <code class="highlighter-rouge">CONFIG_KERNEL_RT</code> to <code class="highlighter-rouge">CONFIG_KERNEL_MCS</code></li>
-  <li><code class="highlighter-rouge">MULTICORE0003</code>: Reduce wait time to limit timer IRQ. This makes the test more reliable.</li>
+  <li>Rename <code class="language-plaintext highlighter-rouge">CONFIG_KERNEL_RT</code> to <code class="language-plaintext highlighter-rouge">CONFIG_KERNEL_MCS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MULTICORE0003</code>: Reduce wait time to limit timer IRQ. This makes the test more reliable.</li>
 </ul>
 
 
@@ -351,7 +351,7 @@ caps.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

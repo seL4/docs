@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -168,7 +168,7 @@
  make linux
 </code></pre></div>    </div>
 
-    <p>After it is built, add the <code class="highlighter-rouge">$RISCV/bin</code> folder to your PATH. The built
+    <p>After it is built, add the <code class="language-plaintext highlighter-rouge">$RISCV/bin</code> folder to your PATH. The built
  toolchain works for both 32-bit and 64-bit.</p>
   </li>
   <li>
@@ -191,15 +191,15 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <h3 id="updating-opensbi">Updating OpenSBI</h3>
 
-<p>In order to run on the ZCU102, the OpenSBI platform must be changed from <code class="highlighter-rouge">generic</code>.
+<p>In order to run on the ZCU102, the OpenSBI platform must be changed from <code class="language-plaintext highlighter-rouge">generic</code>.
 <a href="https://github.com/dornerworks/opensbi/tree/bao/rocket">DornerWorks</a> has forked a version of
 OpenSBI from the bao-project that supports the ZCU104 platform, which is nearly identical to the
 ZCU102. Perform the following commands in the seL4 codebase to set the OpenSBI target to
-<code class="highlighter-rouge">rocket-fpga-zcu104</code>.</p>
+<code class="language-plaintext highlighter-rouge">rocket-fpga-zcu104</code>.</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>tools/opensbi
 git remote add dornerworks https://github.com/dornerworks/opensbi/
@@ -273,10 +273,10 @@ git checkout hyp
 <h3 id="modifying-the-scripts">Modifying the scripts</h3>
 
 <p>Before building the design, a few lines in the tcl scripts must be modified in order to ensure we
-are building for the ZCU102. Change directory to <code class="highlighter-rouge">$BAO_DEMOS_VIVADO_SCRIPTS</code> and modify the switch
-statement in <code class="highlighter-rouge">env.tcl</code> with the following information.</p>
+are building for the ZCU102. Change directory to <code class="language-plaintext highlighter-rouge">$BAO_DEMOS_VIVADO_SCRIPTS</code> and modify the switch
+statement in <code class="language-plaintext highlighter-rouge">env.tcl</code> with the following information.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    zcu102 {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    zcu102 {
         set part xczu9eg-ffvb1156-2-e
         set board_part xilinx.com:zcu102:part0:3.1
     }
@@ -284,7 +284,7 @@ statement in <code class="highlighter-rouge">env.tcl</code> with the following i
 
 <p>The board declaration must be changed to ZCU102 with the following line:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set board zcu102
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set board zcu102
 </code></pre></div></div>
 
 <h3 id="building-the-soc-design">Building the SoC Design</h3>
@@ -300,30 +300,30 @@ vivado <span class="nt">-nolog</span> <span class="nt">-nojournal</span> <span c
 <h2 id="prebuilt-rocketchip-bitstreams">Prebuilt Rocketchip Bitstreams</h2>
 
 <p>DornerWorks has pre-built a version of the rocketchip with and without the h-extensions
-available. The bitsteams, along with the corresponding <code class="highlighter-rouge">psu_init.tcl</code> scripts, can be found at the
+available. The bitsteams, along with the corresponding <code class="language-plaintext highlighter-rouge">psu_init.tcl</code> scripts, can be found at the
 following <a href="https://github.com/dornerworks/Vivado-Prebuilts">repo</a>. This repo also contains a script
 to flash the rocketchip onto the ZCU102.</p>
 
 <h2 id="booting-the-rocketchip">Booting the Rocketchip</h2>
 
-<p>Use the Xilinx <code class="highlighter-rouge">xsct</code> tool to flash the ZCU102. Connect the JTAG and UART ports to your computer. If
+<p>Use the Xilinx <code class="language-plaintext highlighter-rouge">xsct</code> tool to flash the ZCU102. Connect the JTAG and UART ports to your computer. If
 using VMWare, ensure that USB3.0 is enabled. Set the ZCU102 to boot via JTAG and power on the board.</p>
 
-<p>Open a <code class="highlighter-rouge">screen</code> session for the ZCU102 with the following command:</p>
+<p>Open a <code class="language-plaintext highlighter-rouge">screen</code> session for the ZCU102 with the following command:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/ttyUSB1 115200
 </code></pre></div></div>
 
 <p>Next, ensure the generated seL4 image is in the binary format. This will be the case when the
-<code class="highlighter-rouge">ElfloaderImage</code> CMake variable is set to <code class="highlighter-rouge">binary</code>.</p>
+<code class="language-plaintext highlighter-rouge">ElfloaderImage</code> CMake variable is set to <code class="language-plaintext highlighter-rouge">binary</code>.</p>
 
 <p>Finally, flash the ZCU102 with the following command:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xsct  <span class="nv">$BAO_DEMOS_VIVADO_SCRIPTS</span>/deploy.tcl /PATH/TO/BINARY/SEL4/IMAGE
 </code></pre></div></div>
 
-<p>Alternatively, if using the prebuilt bitstream provided by DornerWorks, the <code class="highlighter-rouge">Vivado-Prebuilts</code>
-repository contains a <code class="highlighter-rouge">flash_rocket</code> shell script which can be invoked to flash the ZCU102 with the
+<p>Alternatively, if using the prebuilt bitstream provided by DornerWorks, the <code class="language-plaintext highlighter-rouge">Vivado-Prebuilts</code>
+repository contains a <code class="language-plaintext highlighter-rouge">flash_rocket</code> shell script which can be invoked to flash the ZCU102 with the
 prebuilt bitstream.</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$DW_VIVADO_PREBUILTS</span>
@@ -362,7 +362,7 @@ prebuilt bitstream.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Wed Feb 22 09:35:20 2023 +1100 517f592877

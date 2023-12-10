@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -179,7 +179,7 @@ appears to be unused.</li>
     <ul>
       <li>The size of the buffer containing the ELF file needs to be known to
   access it safely.</li>
-      <li>Change all public <code class="highlighter-rouge">void *</code> references to <code class="highlighter-rouge">elf_t *</code>, which requires a size
+      <li>Change all public <code class="language-plaintext highlighter-rouge">void *</code> references to <code class="language-plaintext highlighter-rouge">elf_t *</code>, which requires a size
   parameter.</li>
     </ul>
   </li>
@@ -191,8 +191,8 @@ appears to be unused.</li>
     </ul>
   </li>
   <li>libelf: remove duplicate and add missing functions.
-  By normalising return types, most functions in <code class="highlighter-rouge">elfxx.c</code> can be merged and
-  moved into <code class="highlighter-rouge">elf.c</code>.
+  By normalising return types, most functions in <code class="language-plaintext highlighter-rouge">elfxx.c</code> can be merged and
+  moved into <code class="language-plaintext highlighter-rouge">elf.c</code>.
   Also add missing prototypes and functions for accessing ELF fields.
     <ul>
       <li>getSectionStringTableIndex</li>
@@ -216,16 +216,16 @@ appears to be unused.</li>
   the IRQ for TMR1 is missing from the DTS file for
   TX1. It exists for TX2, but for the sake of
   compatibility, we use TMR1 for both.</li>
-  <li>libplatsupport: Add IRQ type with trigger (<code class="highlighter-rouge">PS_TRIGGER</code>). Allows using IRQControl_GetTrigger in libsel4simple.</li>
+  <li>libplatsupport: Add IRQ type with trigger (<code class="language-plaintext highlighter-rouge">PS_TRIGGER</code>). Allows using IRQControl_GetTrigger in libsel4simple.</li>
   <li>libplatsupport: Add timer and serial drivers for the Odroid-C2.</li>
   <li>libcpio: make position-independent</li>
   <li>Import libfdt library from linux kernel sourced from linux kernel version : 5.0.6.</li>
   <li>libplatsupport: added ps_io_fdt in interface to return a pointer to an FDT blob.</li>
-  <li>libplatsupport: Add ‘other’ IRQ type (PS_OTHER) to <code class="highlighter-rouge">ps_irq_t</code> interface.</li>
+  <li>libplatsupport: Add ‘other’ IRQ type (PS_OTHER) to <code class="language-plaintext highlighter-rouge">ps_irq_t</code> interface.</li>
   <li>libplatsupport: Add ps_irq_ops_t interface for registering interrupt callbacks.</li>
   <li>libutils: Add an unsigned long version of the POPCOUNT macro.</li>
   <li>libplatsupport: Added initial i.MX8M Quad EVK Platform support.</li>
-  <li>libplatsupport: Add <code class="highlighter-rouge">ps_irq_ops_t</code> to <code class="highlighter-rouge">ps_io_ops</code> structure</li>
+  <li>libplatsupport: Add <code class="language-plaintext highlighter-rouge">ps_irq_ops_t</code> to <code class="language-plaintext highlighter-rouge">ps_io_ops</code> structure</li>
   <li>libplatsupport: Add RISC-V HiFive serial and pwm drivers.</li>
   <li>libplatsupport: zynqmp: Don’t set baud in serial driver init.
   The driver doesn’t seem to have the correct clk frequency that it uses
@@ -243,8 +243,8 @@ in a verified configuration of the kernel.</li>
   </li>
   <li>libplatsupport: Add an ltimer backed by the arm generic timer. For use for
   debugging/testing/benchmarking when CONFIG_EXPORT_PCNT_USER is set.</li>
-  <li>Remove Configuration library from util_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
-  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>Remove Configuration library from util_libs and append <code class="language-plaintext highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="language-plaintext highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
   <li>libethdrivers: include config of lwip and picotcp
   since global autoconf is removed, we need to explicitly
   include the config of lwip and picotcp which will further
@@ -279,7 +279,7 @@ in a verified configuration of the kernel.</li>
   <li>pc99: Ack interrupts before handling timer when interrupts are edge triggered.</li>
   <li>CMake: Add Findutil_libs.cmake module.
   This adds support for importing this project via
-  <code class="highlighter-rouge">find_package(util_libs)</code> if the project exists in the
+  <code class="language-plaintext highlighter-rouge">find_package(util_libs)</code> if the project exists in the
   CMAKE_MODULE_PATH.</li>
   <li>libplatsupport: Add FDT parsing library
   This FDT parsing library is a collection of utility functions which
@@ -298,7 +298,7 @@ in a verified configuration of the kernel.</li>
   <li>libplatsupport: nvidia,tx2: Remove hard-coded addr and IRQ numbers
 as these can be retrieved from the DTB and are no longer necessary.</li>
   <li>libplatsupport: Add design docs for FDT parsing library</li>
-  <li>libplatsupport: Added the new <code class="highlighter-rouge">qemu-arm-virt</code> platform drivers: serial and timer.</li>
+  <li>libplatsupport: Added the new <code class="language-plaintext highlighter-rouge">qemu-arm-virt</code> platform drivers: serial and timer.</li>
   <li>libplatsupport: bbone-timer: update timer for mcs.
     <ul>
       <li>remove tick calculations and use frequency lib</li>
@@ -344,15 +344,15 @@ for receiving caps over IPC)</li>
   <li>libsel4vka: Validate object type first in vka_alloc_object_at_maybe_dev and return if invalid.
 As a follow up, invalid object type argument error handling becomes non-fatal.</li>
   <li>libsel4vka: “implement” utspace_paddr in nullvka and also ensure the struct is zeroed, just in case.</li>
-  <li>libsel4allocman: Fix bug in internal <code class="highlighter-rouge">_destroy_second_level</code> function where 32 was used instead of seL4_WordBits.</li>
+  <li>libsel4allocman: Fix bug in internal <code class="language-plaintext highlighter-rouge">_destroy_second_level</code> function where 32 was used instead of seL4_WordBits.</li>
   <li>libsel4utils: transition to new libelf API. This newer API requires tighter buffer bounds checking on input ELF file.</li>
   <li>libsel4vmm: update to use new libelf API</li>
   <li>libsel4utils: transition to new libcpio API. This newer API requires tighter buffer bounds checking on input CPIO archive.</li>
-  <li>libsel4utils: Return NULL if sel4utils_elf_get_vsyscall cannot find <code class="highlighter-rouge">__vsyscall</code> symbol instead of memory faulting.</li>
+  <li>libsel4utils: Return NULL if sel4utils_elf_get_vsyscall cannot find <code class="language-plaintext highlighter-rouge">__vsyscall</code> symbol instead of memory faulting.</li>
   <li>libsel4debug: add prefix for register dump to allow register dumps to identify the source of the dump.</li>
   <li>libsel4platsupport,riscv: Fix stack overflow in crt0.  A stack frame of 10 words is created, but we were accidentally
   overwriting the end due to a fence-post error.</li>
-  <li>libsel4vspace: Add <code class="highlighter-rouge">seL4_ARCH_Page_GetAddress</code>, <code class="highlighter-rouge">ARCHPageGetAddress</code> and <code class="highlighter-rouge">seL4_ARCH_Page_GetAddress_t</code> definitions for RISC-V.</li>
+  <li>libsel4vspace: Add <code class="language-plaintext highlighter-rouge">seL4_ARCH_Page_GetAddress</code>, <code class="language-plaintext highlighter-rouge">ARCHPageGetAddress</code> and <code class="language-plaintext highlighter-rouge">seL4_ARCH_Page_GetAddress_t</code> definitions for RISC-V.</li>
   <li>libsel4simple: Add IRQControl_GetTrigger interface to specify edge or level trigger on
   ARM platforms.</li>
   <li>libsel4bench: add SEL4BENCH_RESET_CCNT macro definition for arm.
@@ -364,7 +364,7 @@ As a follow up, invalid object type argument error handling becomes non-fatal.</
   before being unmapped out of the destination vspace.</li>
   <li>libsel4vspace: Enable sharing of mem range 0x0-0x1000</li>
   <li>libsel4utils: avoid binding null sched contexts (mcs) when configuring passive threads.</li>
-  <li>libsel4vspace: add <code class="highlighter-rouge">vspace_map_page_fn_t</code> type and <code class="highlighter-rouge">vspace_iospace_map_page</code> iospace wrapper.
+  <li>libsel4vspace: add <code class="language-plaintext highlighter-rouge">vspace_map_page_fn_t</code> type and <code class="language-plaintext highlighter-rouge">vspace_iospace_map_page</code> iospace wrapper.
 This allows all page mapping functions we currently use to have the
   same type signature.</li>
   <li>libsel4vspace: extend map object to io and ept structures. This allows code implementing vspace management
@@ -392,9 +392,9 @@ for an environment variable.</li>
   <li>libsel4utils: Use aux vectors to pass context to new processes
   Instead of encoding values in strings and storing them in environment
   variables, store raw pointers in auxiliary vectors so that the runtime
-  can parse them without depending on <code class="highlighter-rouge">&lt;stdio.h&gt;</code>.</li>
+  can parse them without depending on <code class="language-plaintext highlighter-rouge">&lt;stdio.h&gt;</code>.</li>
   <li>libsel4utils: Use sel4runtime to initialise TLS for newly created threads so that they get their own TLS regions.</li>
-  <li>libsel4platsupport: Add implementation of <code class="highlighter-rouge">ps_irq_ops_t</code> interrupt registration interface from libplatsupport. This
+  <li>libsel4platsupport: Add implementation of <code class="language-plaintext highlighter-rouge">ps_irq_ops_t</code> interrupt registration interface from libplatsupport. This
 implementation dynamically allocates interrupt handlers from a simple_t and vka_t interface, and also provides entry
 points for interrupts to be handled via blocking or polling.</li>
   <li>libsel4test: add RPC support for allocating test resources over RPC.</li>
@@ -404,11 +404,11 @@ points for interrupts to be handled via blocking or polling.</li>
 This interface won’t scale to more complicated serial devices.
 Instead drivers describe their requirements via calls to ps_io_ops and
 the implementations of these interfaces can handle access and allocation policies.</li>
-  <li>libsel4utils, irqserver: Refactor IRQ server sources to use new libsel4platsupport <code class="highlighter-rouge">ps_irq_ops_t</code> interface.
+  <li>libsel4utils, irqserver: Refactor IRQ server sources to use new libsel4platsupport <code class="language-plaintext highlighter-rouge">ps_irq_ops_t</code> interface.
 This changes the API, but the general design of the server is the same: the server provides an option of using several threads
 for forwarding IRQs to a single notification object such that more IRQs can be handled than what can fit on a single notification object.</li>
-  <li>Remove Configuration library from seL4_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
-  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>Remove Configuration library from seL4_libs and append <code class="language-plaintext highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="language-plaintext highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
   <li>libsel4platsupport: Add IO FDT ops implementation by returning fdt from seL4_BootInfo.</li>
   <li>libsel4utils, elf, riscv: Add FENCE.I instruction in ELF loading code.
   Writes to executable memory may not become visible to execution until
@@ -416,8 +416,8 @@ for forwarding IRQs to a single notification object such that more IRQs can be h
   function crashing due to invalid program instructions.</li>
   <li>utils/vka/vspace: update for aarch64 api change. Use seL4_ARM_VSpace* rather than seL4_ARM_PageGlobalDirectory*</li>
   <li>libsel4vspace: Add definitions for 40-bit PA on aarch64-hyp.</li>
-  <li>libsel4vspace: Add deferred rights reservation mapping functions. <code class="highlighter-rouge">vspace_reserve_deferred_rights_range_at</code>
-and <code class="highlighter-rouge">vspace_deferred_rights_map_pages_at_vaddr</code> can be used to allocate reservations where the mapping
+  <li>libsel4vspace: Add deferred rights reservation mapping functions. <code class="language-plaintext highlighter-rouge">vspace_reserve_deferred_rights_range_at</code>
+and <code class="language-plaintext highlighter-rouge">vspace_deferred_rights_map_pages_at_vaddr</code> can be used to allocate reservations where the mapping
 rights will be supplied at time of mapping.</li>
   <li>libsel4utils: Add implementations for mapping deferred rights reservations</li>
   <li>libsel4platsupport: Refactor IO-related interfaces. This refactoring is intended to bring these interface initialisation
@@ -432,15 +432,15 @@ notification’s badge space. This also avoids the unneeded complexity
 that the standard IRQ interface offers.</li>
   <li>mcs: Rename CONFIG_KERNEL_RT to CONFIG_KERNEL_MCS across all libraries</li>
   <li>CMake: Add FindseL4_libs.cmake module. This adds support for importing this project via
-<code class="highlighter-rouge">find_package(seL4_libs)</code> if the project exists in the CMAKE_MODULE_PATH.</li>
+<code class="language-plaintext highlighter-rouge">find_package(seL4_libs)</code> if the project exists in the CMAKE_MODULE_PATH.</li>
   <li>libsel4platsupport/libsel4simple: add per cpu irq support on arm
     <ul>
       <li>support PER_CPU interrupt type to specify a core</li>
       <li>use GetTriggerCore on SMP (GetTrigger fails)</li>
     </ul>
   </li>
-  <li>libsel4muslcsys: Set <code class="highlighter-rouge">-u __vsyscall_ptr</code> on link args.
-Projects that use this library expect <code class="highlighter-rouge">__vsyscall_ptr</code> to be present in
+  <li>libsel4muslcsys: Set <code class="language-plaintext highlighter-rouge">-u __vsyscall_ptr</code> on link args.
+Projects that use this library expect <code class="language-plaintext highlighter-rouge">__vsyscall_ptr</code> to be present in
 the final binary, but require forcing the symbol because it is often not
 used by the final binary but by the loader when setting up the AUX
 vectors.</li>
@@ -456,12 +456,12 @@ This wraps sys_writev the same way that sys_read is implemented.</li>
 <h2 id="projects_libs">projects_libs</h2>
 
 <ul>
-  <li>Remove Configuration library from projects_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
-  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>Remove Configuration library from projects_libs and append <code class="language-plaintext highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="language-plaintext highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
   <li>libvirtqueue: Updated to a new multi-buffer, scatter-gather libvirtqueue, closer to
   compliance with the virtio standard.</li>
   <li>CMake: Add Findprojects_libs.cmake module. This adds support for importing this project via
-<code class="highlighter-rouge">find_package(projects_libs)</code> if the project exists in the CMAKE_MODULE_PATH.</li>
+<code class="language-plaintext highlighter-rouge">find_package(projects_libs)</code> if the project exists in the CMAKE_MODULE_PATH.</li>
   <li>Add libfdtgen, a library for generating device trees for virtual machines.</li>
 </ul>
 
@@ -486,8 +486,8 @@ and utilities that can be used between the x86 and arm vmms.</li>
   <li>Added functionality with in the libsel4pci and libsel4vmmcore libs for vuart devices over vpci.</li>
   <li>Add libsel4rpc: a basic library for managing allocating resources over process boundaries.</li>
   <li>Add libsel4nanopb: An interface between sel4 IPC buffers and nanopb.</li>
-  <li>Remove Configuration library from seL4_projects_libs and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
-  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
+  <li>Remove Configuration library from seL4_projects_libs and append <code class="language-plaintext highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="language-plaintext highlighter-rouge">#include &lt;autoconf.h&gt;</code> since autoconf.h is only for the kernel and libsel4 config now.</li>
   <li>CMake: Add Findsel4_projects_libs.cmake module</li>
   <li>libsel4arm-vmm: Added support for virtualization on qemu-arm-virt</li>
 </ul>
@@ -496,8 +496,8 @@ and utilities that can be used between the x86 and arm vmms.</li>
 
 <ul>
   <li>Remove musl runtime objects. These are now supplied by sel4runtime.</li>
-  <li>Remove <code class="highlighter-rouge">__aeabi_read_tp</code> symbol from <code class="highlighter-rouge">sel4_arm</code>. This is supplied by sel4runtime.</li>
-  <li>CMake: Add <code class="highlighter-rouge">Findmusllibc.cmake</code> module.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">__aeabi_read_tp</code> symbol from <code class="language-plaintext highlighter-rouge">sel4_arm</code>. This is supplied by sel4runtime.</li>
+  <li>CMake: Add <code class="language-plaintext highlighter-rouge">Findmusllibc.cmake</code> module.</li>
 </ul>
 
 
@@ -633,7 +633,7 @@ and utilities that can be used between the x86 and arm vmms.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -173,11 +173,11 @@ ninja
 
 </code></pre></div></div>
 <p>If you plan to use the ./simulate script, please be sure to add the
-<code class="highlighter-rouge">-DSIMULATION=1</code> argument when running cmake.</p>
+<code class="language-plaintext highlighter-rouge">-DSIMULATION=1</code> argument when running cmake.</p>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
-<p>Please substitute <code class="highlighter-rouge">-DPLATFORM=ia32</code> in place of <code class="highlighter-rouge">-DPLATFORM=x86_64</code> if you would
+<p>Please substitute <code class="language-plaintext highlighter-rouge">-DPLATFORM=ia32</code> in place of <code class="language-plaintext highlighter-rouge">-DPLATFORM=x86_64</code> if you would
 prefer to build 32-bit binaries.</p>
 
 <h2 id="real-hardware">Real Hardware</h2>
@@ -187,7 +187,7 @@ see any output.</p>
 
 <p>The build system produces a multiboot compliant image for x86; a grub2
 stanza is here, but we usually boot via PXE for convenience.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry "Load seL4 VM" --class os {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry "Load seL4 VM" --class os {
     load_video
     insmod gzio
     insmod part_msdos
@@ -206,7 +206,7 @@ that the machine you want to boot is connected to. This
 site has a download for pxelinux which we load over PXEBOOT
 that then can load seL4. The configuration for pxelinux.cfg/default is
 provided below.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label seL4
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label seL4
         kernel mboot.c32
         append kernel-ia32-pc99 --- apps-ia32-pc99
 </code></pre></div></div>
@@ -215,8 +215,8 @@ provided below.</p>
 
 <p>Use syslinux to create a bootable USB stick as follows.</p>
 
-<p>Assuming your USB flash drive is at <code class="highlighter-rouge">/dev/sdb</code> with a FAT partition at
-<code class="highlighter-rouge">/dev/sdb1</code>:</p>
+<p>Assuming your USB flash drive is at <code class="language-plaintext highlighter-rouge">/dev/sdb</code> with a FAT partition at
+<code class="language-plaintext highlighter-rouge">/dev/sdb1</code>:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>install-mbr /dev/sdb
 syslinux <span class="nt">--install</span> /dev/sdb1
 mount /dev/sdb1 /mnt
@@ -234,7 +234,7 @@ LABEL seL4test
 umount /mnt
 </code></pre></div></div>
 
-<p>Use <code class="highlighter-rouge">fdisk</code> to make sure the first partition is bootable.</p>
+<p>Use <code class="language-plaintext highlighter-rouge">fdisk</code> to make sure the first partition is bootable.</p>
 
 <p>And you’re done. Output will come on the serial port</p>
 
@@ -277,7 +277,7 @@ umount /mnt
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

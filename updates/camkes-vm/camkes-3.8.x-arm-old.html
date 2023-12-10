@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -151,106 +151,106 @@
     <h1 id="updates-to-camkes-arm-vm-from-camkes-37x-to-camkes-380">Updates to camkes-arm-vm from camkes-3.7.x to camkes-3.8.0</h1>
 
 <ul>
-  <li><code class="highlighter-rouge">VM</code>: Load kernel and dtb images using <code class="highlighter-rouge">FileServer</code>.
-This now uses the same mechanism as the x86 <code class="highlighter-rouge">Init</code> VM component.</li>
-  <li><code class="highlighter-rouge">VM</code>: Add basic module abstraction.  This allows compilation units
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Load kernel and dtb images using <code class="language-plaintext highlighter-rouge">FileServer</code>.
+This now uses the same mechanism as the x86 <code class="language-plaintext highlighter-rouge">Init</code> VM component.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Add basic module abstraction.  This allows compilation units
 to declare modules that the vmm will
 initialise without having to directly call the init function. This
-should reduce the amount of <code class="highlighter-rouge">#ifdefs</code> throughout the code.</li>
-  <li><code class="highlighter-rouge">VM</code>: Create <code class="highlighter-rouge">map_frame_hack</code> module.
-This is a hack that was used in the <code class="highlighter-rouge">SMACCM</code> demo for giving the VM direct
+should reduce the amount of <code class="language-plaintext highlighter-rouge">#ifdefs</code> throughout the code.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Create <code class="language-plaintext highlighter-rouge">map_frame_hack</code> module.
+This is a hack that was used in the <code class="language-plaintext highlighter-rouge">SMACCM</code> demo for giving the VM direct
 memory access to a crypto component.</li>
-  <li><code class="highlighter-rouge">VM</code>: Create <code class="highlighter-rouge">device_fwd</code> module for tk1.</li>
-  <li><code class="highlighter-rouge">VM</code>: Create <code class="highlighter-rouge">vchan</code> module. This moves the vchan source into its own module.</li>
-  <li><code class="highlighter-rouge">VM</code>: Move remaining <code class="highlighter-rouge">vmlinux.c</code> code to per-platform init modules.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Create <code class="language-plaintext highlighter-rouge">device_fwd</code> module for tk1.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Create <code class="language-plaintext highlighter-rouge">vchan</code> module. This moves the vchan source into its own module.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Move remaining <code class="language-plaintext highlighter-rouge">vmlinux.c</code> code to per-platform init modules.</li>
   <li>Add initial aarch64 support.</li>
   <li>Add initial TX1 support.</li>
-  <li>Rename <code class="highlighter-rouge">tk1_vm</code> to <code class="highlighter-rouge">vm_minimal</code> as this app supports more than one platform.</li>
-  <li><code class="highlighter-rouge">vm_minimal</code>: Added Exynos5422 support.</li>
-  <li><code class="highlighter-rouge">VM</code>: Perform <code class="highlighter-rouge">map_unity_ram</code> on Exynos5422.  This allows for
+  <li>Rename <code class="language-plaintext highlighter-rouge">tk1_vm</code> to <code class="language-plaintext highlighter-rouge">vm_minimal</code> as this app supports more than one platform.</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_minimal</code>: Added Exynos5422 support.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Perform <code class="language-plaintext highlighter-rouge">map_unity_ram</code> on Exynos5422.  This allows for
 a one-to-one PA&lt;-&gt;IPA mapping of the guest RAM device on the exynos5422.</li>
-  <li>Remove duplicate frames from <code class="highlighter-rouge">vm_odroid.camkes</code>.
+  <li>Remove duplicate frames from <code class="language-plaintext highlighter-rouge">vm_odroid.camkes</code>.
 The new CapDL allocator will not permit separate objects with the same
-physical address. This change makes the <code class="highlighter-rouge">vm_odroid</code> share its hardware MMIO objects
+physical address. This change makes the <code class="language-plaintext highlighter-rouge">vm_odroid</code> share its hardware MMIO objects
 without duplicating them.</li>
-  <li><code class="highlighter-rouge">VM</code>: Install <code class="highlighter-rouge">vpci</code> device. Added call to the <code class="highlighter-rouge">sel4arm-vmm</code> in order to install the virtual
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Install <code class="language-plaintext highlighter-rouge">vpci</code> device. Added call to the <code class="language-plaintext highlighter-rouge">sel4arm-vmm</code> in order to install the virtual
 pci device in the guest VM.</li>
-  <li><code class="highlighter-rouge">VM</code>: Added <code class="highlighter-rouge">virtio_net</code> module.
-This introduces the <code class="highlighter-rouge">virtio_net</code> module. This initializes and
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Added <code class="language-plaintext highlighter-rouge">virtio_net</code> module.
+This introduces the <code class="language-plaintext highlighter-rouge">virtio_net</code> module. This initializes and
 manages the virtio net driver in the guest VM. The module
 is a basic demonstration that responds to ARP request packets.
-This is refactored out of the x86 VMM (<code class="highlighter-rouge">camkes-vm</code>).</li>
-  <li><code class="highlighter-rouge">VM</code>: Support for loading <code class="highlighter-rouge">initrd</code> vm module.
-Attempts to load an <code class="highlighter-rouge">initrd</code> module if provided in the CPIO archive.
+This is refactored out of the x86 VMM (<code class="language-plaintext highlighter-rouge">camkes-vm</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Support for loading <code class="language-plaintext highlighter-rouge">initrd</code> vm module.
+Attempts to load an <code class="language-plaintext highlighter-rouge">initrd</code> module if provided in the CPIO archive.
 This is loaded in the kernel lowmem alongside the dtb.</li>
-  <li><code class="highlighter-rouge">vm_minimal</code>: Added rootfs to archive for exynos5422.
-Updated the <code class="highlighter-rouge">vm_minimal</code> <code class="highlighter-rouge">CMakeLists.txt</code> to pass the linux-initrd file
+  <li><code class="language-plaintext highlighter-rouge">vm_minimal</code>: Added rootfs to archive for exynos5422.
+Updated the <code class="language-plaintext highlighter-rouge">vm_minimal</code> <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> to pass the linux-initrd file
 to the file server. This change pertains to the exynos5422
 platform.</li>
-  <li><code class="highlighter-rouge">vm_virtio_net</code>: New virtio_net application.
-Added <code class="highlighter-rouge">vm_viritio_net</code> application. This is currently target to
+  <li><code class="language-plaintext highlighter-rouge">vm_virtio_net</code>: New virtio_net application.
+Added <code class="language-plaintext highlighter-rouge">vm_viritio_net</code> application. This is currently target to
 the exynos5422 platform. The application demonstrates the use
 user level linux overlays, adding an arping test and network
 interface file to test virtio net functionality in the vm.</li>
   <li>Add griddle support:
     <ul>
-      <li>Migrate <code class="highlighter-rouge">RELEASE</code> and <code class="highlighter-rouge">CAMKES_VM_APP</code> to <code class="highlighter-rouge">easy-settings.cmake</code>.</li>
-      <li>Give <code class="highlighter-rouge">CAMKES_VM_APP</code> a default of <code class="highlighter-rouge">vm_minimal</code>.</li>
-      <li>Add <code class="highlighter-rouge">PLATFORM</code> to <code class="highlighter-rouge">easy-settings.cmake</code> as well; default <code class="highlighter-rouge">tx1</code>.</li>
+      <li>Migrate <code class="language-plaintext highlighter-rouge">RELEASE</code> and <code class="language-plaintext highlighter-rouge">CAMKES_VM_APP</code> to <code class="language-plaintext highlighter-rouge">easy-settings.cmake</code>.</li>
+      <li>Give <code class="language-plaintext highlighter-rouge">CAMKES_VM_APP</code> a default of <code class="language-plaintext highlighter-rouge">vm_minimal</code>.</li>
+      <li>Add <code class="language-plaintext highlighter-rouge">PLATFORM</code> to <code class="language-plaintext highlighter-rouge">easy-settings.cmake</code> as well; default <code class="language-plaintext highlighter-rouge">tx1</code>.</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">VM</code>: Added TX2 Support.</li>
-  <li><code class="highlighter-rouge">VM</code>: Added GlobalAsynch notification to the VM.
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Added TX2 Support.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Added GlobalAsynch notification to the VM.
 Added support for a global async notification within the VM
 component. This supports additional components in the system to
 send notifications to the VM.</li>
-  <li><code class="highlighter-rouge">VM</code>: Added Virtio Net <code class="highlighter-rouge">virtqueue</code> module.
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Added Virtio Net <code class="language-plaintext highlighter-rouge">virtqueue</code> module.
 Added a new VM module that forwards and recieves packets through
 virtqueues. This allows packets to be forwarded to another
 component in the system and in addition for the connected component
 to send messages to the VM.</li>
-  <li><code class="highlighter-rouge">vm_virtio_net</code>: Added ping echo response client.
+  <li><code class="language-plaintext highlighter-rouge">vm_virtio_net</code>: Added ping echo response client.
 Added an example camkes application that uses the VM’s virtio
 net support to recieve and reply to arping and [icmp] ping
 packets sent by the connect guest VM. This is performed over
 virtqueues.</li>
-  <li><code class="highlighter-rouge">serial-server-app</code>: added console support libvirtio.
+  <li><code class="language-plaintext highlighter-rouge">serial-server-app</code>: added console support libvirtio.
 Added console support to libvirtio library.
 This copys the same setup as net where we install
 a vpci device. Uses linux hvc0 device to communicate with
 the camkes serial server through the vm.</li>
-  <li><code class="highlighter-rouge">virtio-con</code>: Add module for virtual console.</li>
-  <li><code class="highlighter-rouge">VM</code>: Added CPP Macro configuration helpers.
+  <li><code class="language-plaintext highlighter-rouge">virtio-con</code>: Add module for virtual console.</li>
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Added CPP Macro configuration helpers.
 Added a set of CPP macro helpers that can be used to configure
 a camkes arm vm application. These can be used in substitute of
 the vm_common.camkes file.</li>
-  <li><code class="highlighter-rouge">VM</code>: Memory and image settings as camkes attributes.
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Memory and image settings as camkes attributes.
 Refactored the definitions of the linux guest attributes (e.g. ram
 base, size, image names) into camkes attributes. This makes the
 VM component more configurable, removing the need to have to hard
 code values into the source. Updated the vm apps and component
 source to reflect these changes.</li>
-  <li><code class="highlighter-rouge">VM</code>: Update common sources for new IRQ server changes in libsel4utils.</li>
-  <li>Remove Configuration library and append <code class="highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
-  <code class="highlighter-rouge">#include &lt;autoconf.h&gt;</code> since <code class="highlighter-rouge">autoconf.h</code> is only for the kernel and libsel4 config now.</li>
-  <li>templates: Added new template <code class="highlighter-rouge">seL4VMDTBPassthrough</code>.
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Update common sources for new IRQ server changes in libsel4utils.</li>
+  <li>Remove Configuration library and append <code class="language-plaintext highlighter-rouge">#include &lt;&lt;lib_name&gt;/gen_config.h&gt;</code> after each
+  <code class="language-plaintext highlighter-rouge">#include &lt;autoconf.h&gt;</code> since <code class="language-plaintext highlighter-rouge">autoconf.h</code> is only for the kernel and libsel4 config now.</li>
+  <li>templates: Added new template <code class="language-plaintext highlighter-rouge">seL4VMDTBPassthrough</code>.
 Added a new template/interface that can be used in a camkes
-arm vm app. <code class="highlighter-rouge">seL4VMDTBPassthrough</code> allows users to define a series
+arm vm app. <code class="language-plaintext highlighter-rouge">seL4VMDTBPassthrough</code> allows users to define a series
 of dtb nodes that will in turn be converted into a series of
 untyped memory and irq objects. This can then be used for passing
 the devices through to the guest vm. This is an alternative
 interface that can be used as opposed to specifying two
 independent lists of untypes and irqs.</li>
-  <li><code class="highlighter-rouge">VM</code>: Component support for the <code class="highlighter-rouge">seL4VMDTBPassthrough</code>.
-Added support for the <code class="highlighter-rouge">seL4VMDTBPassthrough</code> template in the VM
+  <li><code class="language-plaintext highlighter-rouge">VM</code>: Component support for the <code class="language-plaintext highlighter-rouge">seL4VMDTBPassthrough</code>.
+Added support for the <code class="language-plaintext highlighter-rouge">seL4VMDTBPassthrough</code> template in the VM
 component. This in particular will add the untypes presented by
 the passthrough template and updating the camkes simple interface
 to account for the dtb irq caps.</li>
-  <li><code class="highlighter-rouge">vm_minimal</code>, <code class="highlighter-rouge">vm_serial</code>, <code class="highlighter-rouge">vm_virtio_net</code>, <code class="highlighter-rouge">odroid_vm</code>: Updated to use <code class="highlighter-rouge">seL4VMDTBPassthrough</code>.
-Updated the device configurations to the use <code class="highlighter-rouge">seL4VMDTBPassthrough</code>.
+  <li><code class="language-plaintext highlighter-rouge">vm_minimal</code>, <code class="language-plaintext highlighter-rouge">vm_serial</code>, <code class="language-plaintext highlighter-rouge">vm_virtio_net</code>, <code class="language-plaintext highlighter-rouge">odroid_vm</code>: Updated to use <code class="language-plaintext highlighter-rouge">seL4VMDTBPassthrough</code>.
+Updated the device configurations to the use <code class="language-plaintext highlighter-rouge">seL4VMDTBPassthrough</code>.
 This converts the untyped and irq arrays into a single dtb query
 array.</li>
-  <li>Update <code class="highlighter-rouge">ping_client</code> to use the new virtqueue lib.
+  <li>Update <code class="language-plaintext highlighter-rouge">ping_client</code> to use the new virtqueue lib.
 Introduces the necessary changes for the ping client to use the new
 libvirtqueue with multi-entry rings and scatter buffer logic.</li>
   <li>Added support for the QEMU virt platform, starting a linux VM with buildroot.</li>
@@ -383,7 +383,7 @@ libvirtqueue with multi-entry rings and scatter buffer logic.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -338,8 +338,8 @@ workload performance.</p>
 <h2 id="cpu-utilisation">CPU Utilisation</h2>
 <p>Threads (including the idle thread) and the overall system time (in cycles) can
 be tracked by enabling the “track CPU utilisation feature”. This feature can be
-enabled by setting the CMake configuration option <code class="highlighter-rouge">KernelConfiguration</code> to
-<code class="highlighter-rouge">track_utilisation</code>.</p>
+enabled by setting the CMake configuration option <code class="language-plaintext highlighter-rouge">KernelConfiguration</code> to
+<code class="language-plaintext highlighter-rouge">track_utilisation</code>.</p>
 
 <p>By enabling CPU utilisation tracking, the kernel is instrumented with
 some variables and functions to log the utilisation time for each thread
@@ -377,7 +377,7 @@ position. Additionally idle thread and overall CPU utilisation times are
 dumped to subsequent 64-bit words in the IPCBuffer.</p>
 
 <p>Example code of using this feature:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;sel4/benchmark_utilisation_types.h&gt;
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;sel4/benchmark_utilisation_types.h&gt;</span><span class="cp">
 </span>
 <span class="kt">uint64_t</span> <span class="o">*</span><span class="n">ipcbuffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">seL4_GetIPCBuffer</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 
@@ -395,9 +395,9 @@ dumped to subsequent 64-bit words in the IPCBuffer.</p>
 
 <h2 id="in-kernel-log-buffer">In kernel log-buffer</h2>
 
-<p>An in-kernel log buffer can be provided by the user when the <code class="highlighter-rouge">KernelBenchmarks</code>
-CMake config option is set to <code class="highlighter-rouge">track_kernel_entries</code> or <code class="highlighter-rouge">tracepoints</code> with the
-system call <code class="highlighter-rouge">seL4_BenchmarkSetLogBuffer</code>. Users must provide a large frame
+<p>An in-kernel log buffer can be provided by the user when the <code class="language-plaintext highlighter-rouge">KernelBenchmarks</code>
+CMake config option is set to <code class="language-plaintext highlighter-rouge">track_kernel_entries</code> or <code class="language-plaintext highlighter-rouge">tracepoints</code> with the
+system call <code class="language-plaintext highlighter-rouge">seL4_BenchmarkSetLogBuffer</code>. Users must provide a large frame
 capability for the kernel to use as a log buffer. This is mapped write-through
 to avoid impacting the caches, assuming that the kernel only writes to the log
 buffer and doesn’t read to it during benchmarking. Once a benchmark is
@@ -411,8 +411,8 @@ points and kernel entry tracking).</p>
 to track the time between points.</p>
 
 <h3 id="how-to-use-1">How to use</h3>
-<p>Set the <code class="highlighter-rouge">KernelBenchmarks</code> CMake config option to <code class="highlighter-rouge">tracepoints</code>. Then set the
-<code class="highlighter-rouge">KernelMaxNumTracePoints</code> CMake config option to a non-zero value.</p>
+<p>Set the <code class="language-plaintext highlighter-rouge">KernelBenchmarks</code> CMake config option to <code class="language-plaintext highlighter-rouge">tracepoints</code>. Then set the
+<code class="language-plaintext highlighter-rouge">KernelMaxNumTracePoints</code> CMake config option to a non-zero value.</p>
 
 <p>Wrap the regions you wish to time with TRACE_POINT_START(i) and
 TRACE_POINT_STOP(i) where i is an integer from 0 to 1 less than the
@@ -612,14 +612,14 @@ its address space to map the log buffer. It’s the responsibility of the user t
 allocate a user-level log buffer (currently can be only of seL4_LargePageBits
 size) and pass it to the kernel to use before doing any operations that involve
 the log buffer, otherwise an error will be triggered having incorrect
-user-level log buffer. To enable this feature, set the <code class="highlighter-rouge">KernelBenchmarks</code> CMake
-config option to <code class="highlighter-rouge">track_kernel_entries</code>.</p>
+user-level log buffer. To enable this feature, set the <code class="language-plaintext highlighter-rouge">KernelBenchmarks</code> CMake
+config option to <code class="language-plaintext highlighter-rouge">track_kernel_entries</code>.</p>
 
 <p>An example how to create a user-level log buffer (using sel4 libraries)
 and tell the kernel about it is as follows:</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef CONFIG_BENCHMARK_TRACK_KERNEL_ENTRIES
 </span>
-<span class="cp">#include &lt;sel4/benchmark_track_types.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;sel4/benchmark_track_types.h&gt;</span><span class="cp">
 </span>
   <span class="cm">/* Create large page to use for benchmarking and give to kernel */</span>
   <span class="kt">void</span><span class="o">*</span><span class="n">log_buffer</span> <span class="o">=</span> <span class="n">vspace_new_pages</span><span class="p">(</span><span class="o">&amp;</span><span class="n">env</span><span class="p">.</span><span class="n">vspace</span><span class="p">,</span> <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">seL4_LargePageBits</span><span class="p">);</span>
@@ -652,7 +652,7 @@ call durations, modify line 56 of kernel/include/benchmark.h. This might
 be useful if you wish to time hardware events. For example, should you
 wish to time how long it takes for hardware to generate a fault to the
 kernel, perhaps record the cycle counter before causing the fault in
-userspace, then store the <code class="highlighter-rouge">ksEntry</code> as soon as you enter somewhere
+userspace, then store the <code class="language-plaintext highlighter-rouge">ksEntry</code> as soon as you enter somewhere
 relevant in the kernel, and then compare the difference of these two
 once you return to userspace, by reading out the value and taking the
 difference.</p>
@@ -668,7 +668,7 @@ difference.</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#benchmarking-project">Benchmarking project</a></li>
 <li class="toc-entry toc-h2"><a href="#cpu-utilisation">CPU Utilisation</a>
 <ul>
@@ -804,7 +804,7 @@ difference.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

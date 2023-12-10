@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -168,8 +168,8 @@ Exynos4412 board.</p>
 Linux kernel version &gt; 3.2</p>
 
 <h5 id="serial-port-setup">Serial port setup</h5>
-<p>Open minicom on <code class="highlighter-rouge">/dev/ttyUSB*</code> and set the
-serial port settings to: <code class="highlighter-rouge">115200N1</code></p>
+<p>Open minicom on <code class="language-plaintext highlighter-rouge">/dev/ttyUSB*</code> and set the
+serial port settings to: <code class="language-plaintext highlighter-rouge">115200N1</code></p>
 
 <ul>
   <li>115200bps</li>
@@ -179,7 +179,7 @@ serial port settings to: <code class="highlighter-rouge">115200N1</code></p>
 
 <h5 id="udev">udev</h5>
 <p>You may also like to set up a udev rule for Fastboot:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002", MODE="660", GROUP="dialout"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002", MODE="660", GROUP="dialout"
 </code></pre></div></div>
 
 <h2 id="sd-card-setup">SD card setup</h2>
@@ -192,7 +192,7 @@ partitions properly. seL4 image can be uploaded via Fastboot.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>&lt;image file&gt; <span class="nv">of</span><span class="o">=</span>&lt;/dev/sdx&gt;
 </code></pre></div></div>
 
-<p>Where <code class="highlighter-rouge">sdx</code> is the device that is associated with your SD card.</p>
+<p>Where <code class="language-plaintext highlighter-rouge">sdx</code> is the device that is associated with your SD card.</p>
 
 <h5 id="u-boot">U-Boot</h5>
 <p>&lt;TODO&gt; Uboot source?</p>
@@ -218,7 +218,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <p>The seL4 image file must be converted
 into a U-Boot application file. The first step is to strip the elf file
@@ -276,7 +276,7 @@ to access the device. Try running with sudo.</li>
 
 <ol>
   <li>At the U-Boot prompt type
-<code class="highlighter-rouge">fatload mmc 0:2 0x42000000 &lt;filename&gt; bootm 0x42000000</code></li>
+<code class="language-plaintext highlighter-rouge">fatload mmc 0:2 0x42000000 &lt;filename&gt; bootm 0x42000000</code></li>
 </ol>
 
 <h2 id="references">References</h2>
@@ -321,7 +321,7 @@ sources and instructions</a></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 5fc78c1c47

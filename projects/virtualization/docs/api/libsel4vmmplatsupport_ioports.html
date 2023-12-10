@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-ioportsh">Interface <code class="highlighter-rouge">ioports.h</code></h2>
+<h2 id="interface-ioportsh">Interface <code class="language-plaintext highlighter-rouge">ioports.h</code></h2>
 
 <p>The ioports interface provides a useful abstraction for initialising, registering and handling ioport events
 for a guest VM instance. This is independent from the x86 libsel4vm ioports interface. This interface is intended
@@ -352,40 +352,40 @@ support (virtio PCI).</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vmm_io_port_initio_list-ioport_alloc_addr"><code class="highlighter-rouge">vmm_io_port_init(io_list, ioport_alloc_addr)</code></a></p>
+  <p><a href="#function-vmm_io_port_initio_list-ioport_alloc_addr"><code class="language-plaintext highlighter-rouge">vmm_io_port_init(io_list, ioport_alloc_addr)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_io_port_add_handlerio_list-ioport_range-ioport_interface-port_type"><code class="highlighter-rouge">vmm_io_port_add_handler(io_list, ioport_range, ioport_interface, port_type)</code></a></p>
+  <p><a href="#function-vmm_io_port_add_handlerio_list-ioport_range-ioport_interface-port_type"><code class="language-plaintext highlighter-rouge">vmm_io_port_add_handler(io_list, ioport_range, ioport_interface, port_type)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-emulate_io_handlerio_port-port_no-is_in-size-data"><code class="highlighter-rouge">emulate_io_handler(io_port, port_no, is_in, size, data)</code></a></p>
+  <p><a href="#function-emulate_io_handlerio_port-port_no-is_in-size-data"><code class="language-plaintext highlighter-rouge">emulate_io_handler(io_port, port_no, is_in, size, data)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-ioport_range"><code class="highlighter-rouge">ioport_range</code></a></p>
+  <p><a href="#struct-ioport_range"><code class="language-plaintext highlighter-rouge">ioport_range</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-ioport_interface"><code class="highlighter-rouge">ioport_interface</code></a></p>
+  <p><a href="#struct-ioport_interface"><code class="language-plaintext highlighter-rouge">ioport_interface</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-ioport_entry"><code class="highlighter-rouge">ioport_entry</code></a></p>
+  <p><a href="#struct-ioport_entry"><code class="language-plaintext highlighter-rouge">ioport_entry</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-vmm_io_list"><code class="highlighter-rouge">vmm_io_list</code></a></p>
+  <p><a href="#struct-vmm_io_list"><code class="language-plaintext highlighter-rouge">vmm_io_list</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">ioports.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">ioports.h</code> defines the following functions.</p>
 
-<h3 id="function-vmm_io_port_initio_list-ioport_alloc_addr">Function <code class="highlighter-rouge">vmm_io_port_init(io_list, ioport_alloc_addr)</code></h3>
+<h3 id="function-vmm_io_port_initio_list-ioport_alloc_addr">Function <code class="language-plaintext highlighter-rouge">vmm_io_port_init(io_list, ioport_alloc_addr)</code></h3>
 
 <p>Initialize the io port list manager.
 This is used when registering ioport handlers of type ‘IOPORT_FREE’</p>
@@ -393,8 +393,8 @@ This is used when registering ioport handlers of type ‘IOPORT_FREE’</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">io_list {vmm_io_port_list_t **}</code>: Pointer to io_port list handle. This will be allocated and initialised</li>
-  <li><code class="highlighter-rouge">ioport_alloc_addr {uint16_t}</code>: Base ioport address we can safely bump allocate from (doesn’t conflict with other ioports).</li>
+  <li><code class="language-plaintext highlighter-rouge">io_list {vmm_io_port_list_t **}</code>: Pointer to io_port list handle. This will be allocated and initialised</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_alloc_addr {uint16_t}</code>: Base ioport address we can safely bump allocate from (doesn’t conflict with other ioports).</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -405,17 +405,17 @@ This is used when registering ioport handlers of type ‘IOPORT_FREE’</p>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="function-vmm_io_port_add_handlerio_list-ioport_range-ioport_interface-port_type">Function <code class="highlighter-rouge">vmm_io_port_add_handler(io_list, ioport_range, ioport_interface, port_type)</code></h3>
+<h3 id="function-vmm_io_port_add_handlerio_list-ioport_range-ioport_interface-port_type">Function <code class="language-plaintext highlighter-rouge">vmm_io_port_add_handler(io_list, ioport_range, ioport_interface, port_type)</code></h3>
 
 <p>Add an io port range for emulation</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">io_list {vmm_io_port_list_t *}</code>: Handle to ioport list. This is where the new ioport handler will be appended to</li>
-  <li><code class="highlighter-rouge">ioport_range {ioport_range_t}</code>: Range the ioport handler will emulate</li>
-  <li><code class="highlighter-rouge">ioport_interface {ioport_interface_t}</code>: IOPort emulation interface</li>
-  <li><code class="highlighter-rouge">port_type {ioport_type_t}</code>: The type of ioport being registered - IOPORT_FREE, IOPORT_ADDR</li>
+  <li><code class="language-plaintext highlighter-rouge">io_list {vmm_io_port_list_t *}</code>: Handle to ioport list. This is where the new ioport handler will be appended to</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_range {ioport_range_t}</code>: Range the ioport handler will emulate</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_interface {ioport_interface_t}</code>: IOPort emulation interface</li>
+  <li><code class="language-plaintext highlighter-rouge">port_type {ioport_type_t}</code>: The type of ioport being registered - IOPORT_FREE, IOPORT_ADDR</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -426,18 +426,18 @@ This is used when registering ioport handlers of type ‘IOPORT_FREE’</p>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="function-emulate_io_handlerio_port-port_no-is_in-size-data">Function <code class="highlighter-rouge">emulate_io_handler(io_port, port_no, is_in, size, data)</code></h3>
+<h3 id="function-emulate_io_handlerio_port-port_no-is_in-size-data">Function <code class="language-plaintext highlighter-rouge">emulate_io_handler(io_port, port_no, is_in, size, data)</code></h3>
 
 <p>From a set of registered ioports, emulate an io instruction given a current ioport access.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">io_port {vmm_io_port_list_t *}</code>: List of registered ioports with in/out handlers</li>
-  <li><code class="highlighter-rouge">port_no {unsigned int}</code>: IOPort address being accessed</li>
-  <li><code class="highlighter-rouge">is_in {bool}</code>: True if we are performing an io in operation, otherwise False</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of io access</li>
-  <li><code class="highlighter-rouge">data {unsigned int *}</code>: Pointer with the data being written if io-out op, otherwise will be populated with data from an io-in op</li>
+  <li><code class="language-plaintext highlighter-rouge">io_port {vmm_io_port_list_t *}</code>: List of registered ioports with in/out handlers</li>
+  <li><code class="language-plaintext highlighter-rouge">port_no {unsigned int}</code>: IOPort address being accessed</li>
+  <li><code class="language-plaintext highlighter-rouge">is_in {bool}</code>: True if we are performing an io in operation, otherwise False</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of io access</li>
+  <li><code class="language-plaintext highlighter-rouge">data {unsigned int *}</code>: Pointer with the data being written if io-out op, otherwise will be populated with data from an io-in op</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -450,60 +450,60 @@ This is used when registering ioport handlers of type ‘IOPORT_FREE’</p>
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">ioports.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">ioports.h</code> defines the following structs.</p>
 
-<h3 id="struct-ioport_range">Struct <code class="highlighter-rouge">ioport_range</code></h3>
+<h3 id="struct-ioport_range">Struct <code class="language-plaintext highlighter-rouge">ioport_range</code></h3>
 
 <p>Range of ioport handler</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">start {uint16_t}</code>: Start address of ioport range</li>
-  <li><code class="highlighter-rouge">end {uint16_t}</code>: End address of ioport range</li>
-  <li><code class="highlighter-rouge">size {uint16_t}</code>: Size of ioport range</li>
+  <li><code class="language-plaintext highlighter-rouge">start {uint16_t}</code>: Start address of ioport range</li>
+  <li><code class="language-plaintext highlighter-rouge">end {uint16_t}</code>: End address of ioport range</li>
+  <li><code class="language-plaintext highlighter-rouge">size {uint16_t}</code>: Size of ioport range</li>
 </ul>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="struct-ioport_interface">Struct <code class="highlighter-rouge">ioport_interface</code></h3>
+<h3 id="struct-ioport_interface">Struct <code class="language-plaintext highlighter-rouge">ioport_interface</code></h3>
 
 <p>Datastructure used for ioport emulation, containing handlers for the ioport range</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: User supplied cookie to pass onto handlers</li>
-  <li><code class="highlighter-rouge">port_in {ioport_in_fn}</code>: IO in operation handler</li>
-  <li><code class="highlighter-rouge">port_out {ioport_out_fn}</code>: IO out operation handler</li>
-  <li><code class="highlighter-rouge">desc {const char *}</code>: IOPort description, useful for debugging</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: User supplied cookie to pass onto handlers</li>
+  <li><code class="language-plaintext highlighter-rouge">port_in {ioport_in_fn}</code>: IO in operation handler</li>
+  <li><code class="language-plaintext highlighter-rouge">port_out {ioport_out_fn}</code>: IO out operation handler</li>
+  <li><code class="language-plaintext highlighter-rouge">desc {const char *}</code>: IOPort description, useful for debugging</li>
 </ul>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="struct-ioport_entry">Struct <code class="highlighter-rouge">ioport_entry</code></h3>
+<h3 id="struct-ioport_entry">Struct <code class="language-plaintext highlighter-rouge">ioport_entry</code></h3>
 
 <p>Datastructure used to present a registered ioport range</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">range {ioport_range_t}</code>: IO address range of ioport entry</li>
-  <li><code class="highlighter-rouge">interface {ioport_interface_t}</code>: Emulation interface for ioport range</li>
+  <li><code class="language-plaintext highlighter-rouge">range {ioport_range_t}</code>: IO address range of ioport entry</li>
+  <li><code class="language-plaintext highlighter-rouge">interface {ioport_interface_t}</code>: Emulation interface for ioport range</li>
 </ul>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
 
-<h3 id="struct-vmm_io_list">Struct <code class="highlighter-rouge">vmm_io_list</code></h3>
+<h3 id="struct-vmm_io_list">Struct <code class="language-plaintext highlighter-rouge">vmm_io_list</code></h3>
 
 <p>Parent datastructure used to maintain a list of registered ioports</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">num_ioports {int}</code>: Total number of registered ioports</li>
-  <li><code class="highlighter-rouge">List {ioport_entry_t **}</code>: of registered ioport objects</li>
-  <li><code class="highlighter-rouge">alloc_addr {uint16_t}</code>: Base ioport address we can safely bump allocate from, used when registering ioport handlers of type ‘IOPORT_FREE’</li>
+  <li><code class="language-plaintext highlighter-rouge">num_ioports {int}</code>: Total number of registered ioports</li>
+  <li><code class="language-plaintext highlighter-rouge">List {ioport_entry_t **}</code>: of registered ioport objects</li>
+  <li><code class="language-plaintext highlighter-rouge">alloc_addr {uint16_t}</code>: Base ioport address we can safely bump allocate from, used when registering ioport handlers of type ‘IOPORT_FREE’</li>
 </ul>
 
 <p>Back to <a href="#module-ioportsh">interface description</a>.</p>
@@ -606,7 +606,7 @@ This is used when registering ioport handlers of type ‘IOPORT_FREE’</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

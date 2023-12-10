@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -164,7 +164,7 @@ make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-
 make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-
 </code></pre></div></div>
 
-<p>In the <code class="highlighter-rouge">u-boot</code> directory you should now see the U-Boot image <code class="highlighter-rouge">u-boot.bin</code> indicating that U-Boot has successfully compiled.</p>
+<p>In the <code class="language-plaintext highlighter-rouge">u-boot</code> directory you should now see the U-Boot image <code class="language-plaintext highlighter-rouge">u-boot.bin</code> indicating that U-Boot has successfully compiled.</p>
 
 <p>More information regarding U-Boot support for the Raspberry Pi can be found <a href="https://u-boot.readthedocs.io/en/latest/board/broadcom/raspberrypi.html">here</a>.</p>
 
@@ -210,7 +210,7 @@ they should be located in the root directory of this partition.</p>
       <td> </td>
       <td>config.txt</td>
       <td>U-Boot parameters</td>
-      <td>Add <code class="highlighter-rouge">arm_64bit=1</code>, <code class="highlighter-rouge">kernel=u-boot.bin</code>, and <code class="highlighter-rouge">dtoverlay=disable-bt</code> to the bottom of <code class="highlighter-rouge">config.txt</code></td>
+      <td>Add <code class="language-plaintext highlighter-rouge">arm_64bit=1</code>, <code class="language-plaintext highlighter-rouge">kernel=u-boot.bin</code>, and <code class="language-plaintext highlighter-rouge">dtoverlay=disable-bt</code> to the bottom of <code class="language-plaintext highlighter-rouge">config.txt</code></td>
     </tr>
     <tr>
       <td> </td>
@@ -238,11 +238,11 @@ they should be located in the root directory of this partition.</p>
 <p>The final step to test that you have setup your RPi4 correctly is to build and run the
 seL4test project.</p>
 
-<p>You will see that the <code class="highlighter-rouge">init-build.sh</code> command contains the flag
-<code class="highlighter-rouge">-DRPI4_MEMORY</code>, this specifies how much RAM exists on the Raspberry Pi that will run
+<p>You will see that the <code class="language-plaintext highlighter-rouge">init-build.sh</code> command contains the flag
+<code class="language-plaintext highlighter-rouge">-DRPI4_MEMORY</code>, this specifies how much RAM exists on the Raspberry Pi that will run
 the final seL4 image. Since seL4 needs to know the physical memory layout of the hardware
 at build time, and the RPi4 has multiple models with different amounts of RAM, we have to
-specify how much RAM the system will have when we build seL4. If <code class="highlighter-rouge">-DRPI4_MEMORY</code> is not supplied,
+specify how much RAM the system will have when we build seL4. If <code class="language-plaintext highlighter-rouge">-DRPI4_MEMORY</code> is not supplied,
 seL4 defaults to expecting 8GB of memory.</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/seL4Test">seL4Test</a></p>
@@ -258,7 +258,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <p>Now that we have a bootable image, we can run it on your RPi4. The following instructions describe
 how to use a microSD card to boot seL4, using the seL4test image as well as the files mentioned
@@ -268,19 +268,19 @@ in the previous section.</p>
 removing the card from your computer and inserting into your RPi4, you can power on the RPi4.</p>
 
 <p>Once the RPi4 boots up, you will see something like the following text from U-Boot:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hit any key to stop autoboot:  2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hit any key to stop autoboot:  2
 </code></pre></div></div>
 
 <p>At this point you want to interrupt the U-Boot booting process by pressing any key.</p>
 
 <p>You will now be in the U-Boot command prompt, type the following command:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
 </code></pre></div></div>
 
 <p>You should see the seL4test image you just placed on your microSD card.</p>
 
 <p>From here, you can load and boot the image using:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2711
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2711
 go 0x10000000
 </code></pre></div></div>
 
@@ -316,7 +316,7 @@ go 0x10000000
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Wed Oct 18 23:45:08 2023 +1100 fb0be1d098

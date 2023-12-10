@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -155,43 +155,43 @@
 <ul>
   <li>Add new VCPU benchmarks.  This new benchmark app benchmarks the following overheads:
     <ul>
-      <li>The overhead of a <code class="highlighter-rouge">HVC</code> privilege escalation from EL1 to EL2.</li>
-      <li>The overhead of an <code class="highlighter-rouge">ERET</code> privilege de-escalation from EL2 to EL1.</li>
-      <li>The overhead of a <code class="highlighter-rouge">NULL</code> hypercall into the seL4 EL2 kernel.</li>
-      <li>The overhead of an <code class="highlighter-rouge">seL4_Call</code> syscall.</li>
-      <li>The overhead of an <code class="highlighter-rouge">seL4_Reply</code> syscall.</li>
+      <li>The overhead of a <code class="language-plaintext highlighter-rouge">HVC</code> privilege escalation from EL1 to EL2.</li>
+      <li>The overhead of an <code class="language-plaintext highlighter-rouge">ERET</code> privilege de-escalation from EL2 to EL1.</li>
+      <li>The overhead of a <code class="language-plaintext highlighter-rouge">NULL</code> hypercall into the seL4 EL2 kernel.</li>
+      <li>The overhead of an <code class="language-plaintext highlighter-rouge">seL4_Call</code> syscall.</li>
+      <li>The overhead of an <code class="language-plaintext highlighter-rouge">seL4_Reply</code> syscall.</li>
     </ul>
   </li>
-  <li>Add griddle support with <code class="highlighter-rouge">easy-settings.cmake</code> file.</li>
+  <li>Add griddle support with <code class="language-plaintext highlighter-rouge">easy-settings.cmake</code> file.</li>
   <li>Force FPU state to only be restored when used.
   This ensures that during benchmarks where the FPU state isn’t being used
   that the FPU state does not get restored. This ensures that context
   switches in benchmarks accurately show the case where FPU restore is not
   performed.</li>
   <li>Allow for platform counters to be enabled in IPC benchmark.</li>
-  <li>Update <code class="highlighter-rouge">page_mapping</code> benchmark to remap pages using the changed kernel API.</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">page_mapping</code> benchmark to remap pages using the changed kernel API.</li>
 </ul>
 
 <h2 id="internal">Internal</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">sel4bench</code>: make <code class="highlighter-rouge">plat_setup</code> a weak symbol and remove stub functions for each platform</li>
-  <li><code class="highlighter-rouge">sel4bench</code>: Add newlines to <code class="highlighter-rouge">printf</code> calls.
-  <code class="highlighter-rouge">printf</code> buffering the output makes debugging harder as output becomes
+  <li><code class="language-plaintext highlighter-rouge">sel4bench</code>: make <code class="language-plaintext highlighter-rouge">plat_setup</code> a weak symbol and remove stub functions for each platform</li>
+  <li><code class="language-plaintext highlighter-rouge">sel4bench</code>: Add newlines to <code class="language-plaintext highlighter-rouge">printf</code> calls.
+  <code class="language-plaintext highlighter-rouge">printf</code> buffering the output makes debugging harder as output becomes
   ordered differently.</li>
-  <li>Update usages of <code class="highlighter-rouge">libcpio</code> to match new api.</li>
+  <li>Update usages of <code class="language-plaintext highlighter-rouge">libcpio</code> to match new api.</li>
   <li>Style files.</li>
-  <li><code class="highlighter-rouge">smp</code>: use <code class="highlighter-rouge">SEL4BENCH_RESET_CCNT</code>. This is a generic function for achieving what the code was hardcoded to
+  <li><code class="language-plaintext highlighter-rouge">smp</code>: use <code class="language-plaintext highlighter-rouge">SEL4BENCH_RESET_CCNT</code>. This is a generic function for achieving what the code was hardcoded to
   armv7 for.</li>
-  <li><code class="highlighter-rouge">sel4bench</code>: start looking for untyped at <code class="highlighter-rouge">seL4_MaxUntypedBits</code>.</li>
-  <li>Use <code class="highlighter-rouge">sel4runtime</code>.</li>
-  <li><code class="highlighter-rouge">libsel4benchsupport</code>: fix child process stack init by ensuring <code class="highlighter-rouge">benchmark_spawn_process</code> leaves the stack top
+  <li><code class="language-plaintext highlighter-rouge">sel4bench</code>: start looking for untyped at <code class="language-plaintext highlighter-rouge">seL4_MaxUntypedBits</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">sel4runtime</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">libsel4benchsupport</code>: fix child process stack init by ensuring <code class="language-plaintext highlighter-rouge">benchmark_spawn_process</code> leaves the stack top
   intact.</li>
-  <li><code class="highlighter-rouge">sel4bench</code>: remove <code class="highlighter-rouge">autoconf.h</code> and global <code class="highlighter-rouge">Configuration</code> library and link configuration libraries explicitly.</li>
+  <li><code class="language-plaintext highlighter-rouge">sel4bench</code>: remove <code class="language-plaintext highlighter-rouge">autoconf.h</code> and global <code class="language-plaintext highlighter-rouge">Configuration</code> library and link configuration libraries explicitly.</li>
   <li>Rename configuration libraries to follow a consistent naming convention.</li>
-  <li>Use <code class="highlighter-rouge">sel4rpc</code> library for allocating untypeds.</li>
-  <li>Remove <code class="highlighter-rouge">sel4platsupport_timer</code> usages and replace with <code class="highlighter-rouge">ltimer</code> and new <code class="highlighter-rouge">ps_io_irq_t</code> interfaces.</li>
-  <li>Rename <code class="highlighter-rouge">CONFIG_KERNEL_RT</code> to <code class="highlighter-rouge">CONFIG_KERNEL_MCS</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">sel4rpc</code> library for allocating untypeds.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">sel4platsupport_timer</code> usages and replace with <code class="language-plaintext highlighter-rouge">ltimer</code> and new <code class="language-plaintext highlighter-rouge">ps_io_irq_t</code> interfaces.</li>
+  <li>Rename <code class="language-plaintext highlighter-rouge">CONFIG_KERNEL_RT</code> to <code class="language-plaintext highlighter-rouge">CONFIG_KERNEL_MCS</code>.</li>
   <li>Fix SMP thread checkpointing. This fixes breakage in SMP x86_64 benchmark.</li>
   <li>Refactor buildsystem to keep up with underlying changes.  Try to also make configuration scripts easier to follow.</li>
   <li>Use device tree for binding drivers to devices on Arm.</li>
@@ -316,7 +316,7 @@
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_rebooth">Interface <code class="highlighter-rouge">guest_reboot.h</code></h2>
+<h2 id="interface-guest_rebooth">Interface <code class="language-plaintext highlighter-rouge">guest_reboot.h</code></h2>
 
 <p>The guest reboot interface provides a series of helpers for registering callbacks when rebooting the VMM.
 This interface giving various VMM components and drivers the ability to reset necessary state on a reboot.</p>
@@ -350,39 +350,39 @@ This interface giving various VMM components and drivers the ability to reset ne
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vmm_init_reboot_hooks_listrb_hooks_list"><code class="highlighter-rouge">vmm_init_reboot_hooks_list(rb_hooks_list)</code></a></p>
+  <p><a href="#function-vmm_init_reboot_hooks_listrb_hooks_list"><code class="language-plaintext highlighter-rouge">vmm_init_reboot_hooks_list(rb_hooks_list)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_register_reboot_callbackrb_hooks_list-hook-token"><code class="highlighter-rouge">vmm_register_reboot_callback(rb_hooks_list, hook, token)</code></a></p>
+  <p><a href="#function-vmm_register_reboot_callbackrb_hooks_list-hook-token"><code class="language-plaintext highlighter-rouge">vmm_register_reboot_callback(rb_hooks_list, hook, token)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_process_reboot_callbacksvm-rb_hooks_list"><code class="highlighter-rouge">vmm_process_reboot_callbacks(vm, rb_hooks_list)</code></a></p>
+  <p><a href="#function-vmm_process_reboot_callbacksvm-rb_hooks_list"><code class="language-plaintext highlighter-rouge">vmm_process_reboot_callbacks(vm, rb_hooks_list)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-reboot_hook"><code class="highlighter-rouge">reboot_hook</code></a></p>
+  <p><a href="#struct-reboot_hook"><code class="language-plaintext highlighter-rouge">reboot_hook</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-reboot_hooks_list"><code class="highlighter-rouge">reboot_hooks_list</code></a></p>
+  <p><a href="#struct-reboot_hooks_list"><code class="language-plaintext highlighter-rouge">reboot_hooks_list</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_reboot.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_reboot.h</code> defines the following functions.</p>
 
-<h3 id="function-vmm_init_reboot_hooks_listrb_hooks_list">Function <code class="highlighter-rouge">vmm_init_reboot_hooks_list(rb_hooks_list)</code></h3>
+<h3 id="function-vmm_init_reboot_hooks_listrb_hooks_list">Function <code class="language-plaintext highlighter-rouge">vmm_init_reboot_hooks_list(rb_hooks_list)</code></h3>
 
 <p>Initialise state of a given reboot hooks list</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">rb_hooks_list {reboot_hooks_list_t *}</code>: Handle to reboot hooks list</li>
+  <li><code class="language-plaintext highlighter-rouge">rb_hooks_list {reboot_hooks_list_t *}</code>: Handle to reboot hooks list</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -393,16 +393,16 @@ This interface giving various VMM components and drivers the ability to reset ne
 
 <p>Back to <a href="#module-guest_rebooth">interface description</a>.</p>
 
-<h3 id="function-vmm_register_reboot_callbackrb_hooks_list-hook-token">Function <code class="highlighter-rouge">vmm_register_reboot_callback(rb_hooks_list, hook, token)</code></h3>
+<h3 id="function-vmm_register_reboot_callbackrb_hooks_list-hook-token">Function <code class="language-plaintext highlighter-rouge">vmm_register_reboot_callback(rb_hooks_list, hook, token)</code></h3>
 
 <p>Register a reboot callback within a given reboot hooks list</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">rb_hooks_list {reboot_hooks_list_t *}</code>: Handle to reboot hooks list</li>
-  <li><code class="highlighter-rouge">hook {rb_hook_fn}</code>: Reboot callback to be invoked when list is processed</li>
-  <li><code class="highlighter-rouge">token {void *}</code>: Cookie passed to reboot callback when invoked</li>
+  <li><code class="language-plaintext highlighter-rouge">rb_hooks_list {reboot_hooks_list_t *}</code>: Handle to reboot hooks list</li>
+  <li><code class="language-plaintext highlighter-rouge">hook {rb_hook_fn}</code>: Reboot callback to be invoked when list is processed</li>
+  <li><code class="language-plaintext highlighter-rouge">token {void *}</code>: Cookie passed to reboot callback when invoked</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -413,15 +413,15 @@ This interface giving various VMM components and drivers the ability to reset ne
 
 <p>Back to <a href="#module-guest_rebooth">interface description</a>.</p>
 
-<h3 id="function-vmm_process_reboot_callbacksvm-rb_hooks_list">Function <code class="highlighter-rouge">vmm_process_reboot_callbacks(vm, rb_hooks_list)</code></h3>
+<h3 id="function-vmm_process_reboot_callbacksvm-rb_hooks_list">Function <code class="language-plaintext highlighter-rouge">vmm_process_reboot_callbacks(vm, rb_hooks_list)</code></h3>
 
 <p>Process the reboot hooks registered in a reboot hooks list</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: Handle to vm - passed onto reboot callback</li>
-  <li><code class="highlighter-rouge">rb_hooks_list {reboot_hooks_list_t *}</code>: Handle to reboot hooks list</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: Handle to vm - passed onto reboot callback</li>
+  <li><code class="language-plaintext highlighter-rouge">rb_hooks_list {reboot_hooks_list_t *}</code>: Handle to reboot hooks list</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -434,9 +434,9 @@ This interface giving various VMM components and drivers the ability to reset ne
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_reboot.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_reboot.h</code> defines the following structs.</p>
 
-<h3 id="struct-reboot_hook">Struct <code class="highlighter-rouge">reboot_hook</code></h3>
+<h3 id="struct-reboot_hook">Struct <code class="language-plaintext highlighter-rouge">reboot_hook</code></h3>
 
 <p>Datastructure representing a reboot hook, containing a callback function to invoke when processing the
 hook</p>
@@ -444,21 +444,21 @@ hook</p>
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">fn {reboot_hook_fn}</code>: Function pointer to reboot callback</li>
-  <li><code class="highlighter-rouge">token {void *}</code>: Cookie passed to reboot callback when invoked</li>
+  <li><code class="language-plaintext highlighter-rouge">fn {reboot_hook_fn}</code>: Function pointer to reboot callback</li>
+  <li><code class="language-plaintext highlighter-rouge">token {void *}</code>: Cookie passed to reboot callback when invoked</li>
 </ul>
 
 <p>Back to <a href="#module-guest_rebooth">interface description</a>.</p>
 
-<h3 id="struct-reboot_hooks_list">Struct <code class="highlighter-rouge">reboot_hooks_list</code></h3>
+<h3 id="struct-reboot_hooks_list">Struct <code class="language-plaintext highlighter-rouge">reboot_hooks_list</code></h3>
 
 <p>Reboot hooks management datastructure. Contains a list of reboot hooks that a VMM registers</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">rb_hooks {reboot_hook_t *}</code>: List of reboot hooks</li>
-  <li><code class="highlighter-rouge">nhooks {size_t}</code>: Number of reboot hooks in <code class="highlighter-rouge">rb_hooks</code> member</li>
+  <li><code class="language-plaintext highlighter-rouge">rb_hooks {reboot_hook_t *}</code>: List of reboot hooks</li>
+  <li><code class="language-plaintext highlighter-rouge">nhooks {size_t}</code>: Number of reboot hooks in <code class="language-plaintext highlighter-rouge">rb_hooks</code> member</li>
 </ul>
 
 <p>Back to <a href="#module-guest_rebooth">interface description</a>.</p>
@@ -561,7 +561,7 @@ hook</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

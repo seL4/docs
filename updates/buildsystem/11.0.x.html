@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -152,82 +152,82 @@
 
 <h2 id="sel4_toolscmake-tool">seL4_tools/cmake-tool</h2>
 <ul>
-  <li><code class="highlighter-rouge">dts.cmake</code>: Suppress output from <code class="highlighter-rouge">dtc</code> unless it doesn’t produce an output file.</li>
-  <li><code class="highlighter-rouge">application_settings.cmake</code>: Disable kernel printing in release builds.</li>
-  <li><code class="highlighter-rouge">dts.cmake</code>: Use dts files from the kernel repository.</li>
-  <li><code class="highlighter-rouge">rootserver.cmake</code>: Support building RISC-V with <code class="highlighter-rouge">gcc-8</code>.</li>
-  <li>Split <code class="highlighter-rouge">common.cmake</code> into <code class="highlighter-rouge">simulation.cmake</code>, <code class="highlighter-rouge">cpio.cmake</code> and <code class="highlighter-rouge">rootserver.cmake</code>.</li>
-  <li>Remove <code class="highlighter-rouge">AddLegacyLibrary</code> function. This was used to wrap old build system libraries and is no longer used.</li>
-  <li><code class="highlighter-rouge">cpio.cmake</code>: Support constructing multiple CPIO archives within the same build directory.</li>
+  <li><code class="language-plaintext highlighter-rouge">dts.cmake</code>: Suppress output from <code class="language-plaintext highlighter-rouge">dtc</code> unless it doesn’t produce an output file.</li>
+  <li><code class="language-plaintext highlighter-rouge">application_settings.cmake</code>: Disable kernel printing in release builds.</li>
+  <li><code class="language-plaintext highlighter-rouge">dts.cmake</code>: Use dts files from the kernel repository.</li>
+  <li><code class="language-plaintext highlighter-rouge">rootserver.cmake</code>: Support building RISC-V with <code class="language-plaintext highlighter-rouge">gcc-8</code>.</li>
+  <li>Split <code class="language-plaintext highlighter-rouge">common.cmake</code> into <code class="language-plaintext highlighter-rouge">simulation.cmake</code>, <code class="language-plaintext highlighter-rouge">cpio.cmake</code> and <code class="language-plaintext highlighter-rouge">rootserver.cmake</code>.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">AddLegacyLibrary</code> function. This was used to wrap old build system libraries and is no longer used.</li>
+  <li><code class="language-plaintext highlighter-rouge">cpio.cmake</code>: Support constructing multiple CPIO archives within the same build directory.</li>
   <li>Style all CMake files and python scripts.</li>
-  <li>Add <code class="highlighter-rouge">make.cpio</code> module with <code class="highlighter-rouge">MakefileDepsToList</code>, <code class="highlighter-rouge">create_depfile_by_find</code> and <code class="highlighter-rouge">execute_process_with_stale_check</code> helpers.
-These helpers add mechanisms for not re-running expensive <code class="highlighter-rouge">execute_process</code> commands during build
+  <li>Add <code class="language-plaintext highlighter-rouge">make.cpio</code> module with <code class="language-plaintext highlighter-rouge">MakefileDepsToList</code>, <code class="language-plaintext highlighter-rouge">create_depfile_by_find</code> and <code class="language-plaintext highlighter-rouge">execute_process_with_stale_check</code> helpers.
+These helpers add mechanisms for not re-running expensive <code class="language-plaintext highlighter-rouge">execute_process</code> commands during build
 configurations if inputs to the command are not stale.</li>
-  <li>Add <code class="highlighter-rouge">cmakerepl</code> script for inline debugging of CMake scripts.</li>
-  <li>Add <code class="highlighter-rouge">debug.cmake</code> that adds <code class="highlighter-rouge">set_break()</code> CMake function for limited CMake variable inspection.</li>
-  <li>Add <code class="highlighter-rouge">griddle</code> tool to enable easy build scenarios:
+  <li>Add <code class="language-plaintext highlighter-rouge">cmakerepl</code> script for inline debugging of CMake scripts.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">debug.cmake</code> that adds <code class="language-plaintext highlighter-rouge">set_break()</code> CMake function for limited CMake variable inspection.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">griddle</code> tool to enable easy build scenarios:
     <ul>
       <li>Automatically add additional CMake initialization flags on first init.</li>
-      <li>Present project build configuration options based on an <code class="highlighter-rouge">easy-settings.cmake</code> file.</li>
-      <li>Detect when <code class="highlighter-rouge">CMakeCache.txt</code> file is unstable and re-run cmake until it stabalizes.</li>
+      <li>Present project build configuration options based on an <code class="language-plaintext highlighter-rouge">easy-settings.cmake</code> file.</li>
+      <li>Detect when <code class="language-plaintext highlighter-rouge">CMakeCache.txt</code> file is unstable and re-run cmake until it stabalizes.</li>
       <li>Inform user about config stability.</li>
-      <li>Provide a <code class="highlighter-rouge">--platform-hel</code> option for listing all kernel supported platforms.</li>
+      <li>Provide a <code class="language-plaintext highlighter-rouge">--platform-hel</code> option for listing all kernel supported platforms.</li>
       <li>Handle platform toolchain configuration requirements.</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">init-build.sh</code>: tidy script and remove bash-isms to make POSIX-compliant.</li>
-  <li><code class="highlighter-rouge">rootserver.cmake</code>: Support <code class="highlighter-rouge">uimage</code> format for ArmV7 platforms.</li>
-  <li>Add scripts in <code class="highlighter-rouge">helpers/</code> to <code class="highlighter-rouge">CMAKE_MODULE_PATH</code> and support importing on demand.</li>
-  <li><code class="highlighter-rouge">cakeml.cmake</code>: Add support for multiple CakeML libraries within a project.
-<code class="highlighter-rouge">Holmake</code> doesn’t support concurrent builds of different projects, so multiple builds need to be serialized.</li>
-  <li>Add <code class="highlighter-rouge">platform_sift.py</code> script for extracting platform memory region descriptions from a YAML file outputted by kernel build.</li>
-  <li><code class="highlighter-rouge">init-build.sh</code>: Remove multiple CMake invocations and only call CMake once.</li>
-  <li><code class="highlighter-rouge">application_settings.cmake</code>: Add <code class="highlighter-rouge">correct_platform_strings</code> for converting conventional <code class="highlighter-rouge">-DPLATFORM</code> values to
-valid <code class="highlighter-rouge">KernelPlatform</code> and <code class="highlighter-rouge">KernelSel4Arch</code> settings.</li>
-  <li><code class="highlighter-rouge">flags.cmake</code>: Use the runtime objects from <code class="highlighter-rouge">sel4runtime</code> rather than <code class="highlighter-rouge">musl</code>.</li>
-  <li><code class="highlighter-rouge">flags.cmake</code>: Always use <code class="highlighter-rouge">__aeabi_read_tp</code> for aarch32 by setting <code class="highlighter-rouge">-mtp=soft</code>.</li>
-  <li>Require <code class="highlighter-rouge">-C settings.cmake</code> for initializing CMake projects.
+  <li><code class="language-plaintext highlighter-rouge">init-build.sh</code>: tidy script and remove bash-isms to make POSIX-compliant.</li>
+  <li><code class="language-plaintext highlighter-rouge">rootserver.cmake</code>: Support <code class="language-plaintext highlighter-rouge">uimage</code> format for ArmV7 platforms.</li>
+  <li>Add scripts in <code class="language-plaintext highlighter-rouge">helpers/</code> to <code class="language-plaintext highlighter-rouge">CMAKE_MODULE_PATH</code> and support importing on demand.</li>
+  <li><code class="language-plaintext highlighter-rouge">cakeml.cmake</code>: Add support for multiple CakeML libraries within a project.
+<code class="language-plaintext highlighter-rouge">Holmake</code> doesn’t support concurrent builds of different projects, so multiple builds need to be serialized.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">platform_sift.py</code> script for extracting platform memory region descriptions from a YAML file outputted by kernel build.</li>
+  <li><code class="language-plaintext highlighter-rouge">init-build.sh</code>: Remove multiple CMake invocations and only call CMake once.</li>
+  <li><code class="language-plaintext highlighter-rouge">application_settings.cmake</code>: Add <code class="language-plaintext highlighter-rouge">correct_platform_strings</code> for converting conventional <code class="language-plaintext highlighter-rouge">-DPLATFORM</code> values to
+valid <code class="language-plaintext highlighter-rouge">KernelPlatform</code> and <code class="language-plaintext highlighter-rouge">KernelSel4Arch</code> settings.</li>
+  <li><code class="language-plaintext highlighter-rouge">flags.cmake</code>: Use the runtime objects from <code class="language-plaintext highlighter-rouge">sel4runtime</code> rather than <code class="language-plaintext highlighter-rouge">musl</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">flags.cmake</code>: Always use <code class="language-plaintext highlighter-rouge">__aeabi_read_tp</code> for aarch32 by setting <code class="language-plaintext highlighter-rouge">-mtp=soft</code>.</li>
+  <li>Require <code class="language-plaintext highlighter-rouge">-C settings.cmake</code> for initializing CMake projects.
 This supports the new build structure where instead of blindly including
-every <code class="highlighter-rouge">settings.cmake</code> file in every <code class="highlighter-rouge">projects/</code> folder, we instead require a single <code class="highlighter-rouge">settings.cmake</code> file to be passed in.</li>
-  <li>Add <code class="highlighter-rouge">check_arch_compiler.cmake</code>. This triggers errors if the incorrect compiler is selected.</li>
-  <li>Add <code class="highlighter-rouge">nanopb.cmake</code> for nanopb support.</li>
-  <li><code class="highlighter-rouge">rust_targets</code>: Update <code class="highlighter-rouge">x86_64-target.json</code> to new format.</li>
-  <li><code class="highlighter-rouge">application_settings.cmake</code>: <code class="highlighter-rouge">ApplyData61ElfLoaderSettings</code> RISCV support.</li>
-  <li>Add <code class="highlighter-rouge">elf_sift.py</code> script for computing ELF image loadable segment sizes.</li>
-  <li>Add <code class="highlighter-rouge">shoehorn.py</code> script for computing load addresses of Elfloader, Kernel and User images in memory.</li>
-  <li>Add <code class="highlighter-rouge">make-uimage</code> script to extract the entry point (start symbol) of an ELF executable and wrap the object in a
+every <code class="language-plaintext highlighter-rouge">settings.cmake</code> file in every <code class="language-plaintext highlighter-rouge">projects/</code> folder, we instead require a single <code class="language-plaintext highlighter-rouge">settings.cmake</code> file to be passed in.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">check_arch_compiler.cmake</code>. This triggers errors if the incorrect compiler is selected.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">nanopb.cmake</code> for nanopb support.</li>
+  <li><code class="language-plaintext highlighter-rouge">rust_targets</code>: Update <code class="language-plaintext highlighter-rouge">x86_64-target.json</code> to new format.</li>
+  <li><code class="language-plaintext highlighter-rouge">application_settings.cmake</code>: <code class="language-plaintext highlighter-rouge">ApplyData61ElfLoaderSettings</code> RISCV support.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">elf_sift.py</code> script for computing ELF image loadable segment sizes.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">shoehorn.py</code> script for computing load addresses of Elfloader, Kernel and User images in memory.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">make-uimage</code> script to extract the entry point (start symbol) of an ELF executable and wrap the object in a
   chain-loadable payload for use by the U-Boot boot loader.</li>
-  <li><code class="highlighter-rouge">Holmakefile.in</code>, <code class="highlighter-rouge">buildScript.sml.in</code>, <code class="highlighter-rouge">cakeml.cmake</code>: Update CakeML build scripts for newer CakeML version.</li>
-  <li><code class="highlighter-rouge">simulate.py</code>: Add <code class="highlighter-rouge">tput reset</code> to end of Qemu command for when Qemu leaves the terminal in an inconsistent state.</li>
-  <li>Remove global <code class="highlighter-rouge">Configuration</code> CMake library. Each build artifact should instead control its own configuration dependencies.</li>
-  <li>Add <code class="highlighter-rouge">environment_flags.cmake</code> module for use in modules that are used for defining system environment build flags.</li>
-  <li>Move <code class="highlighter-rouge">musllibc</code> rules from <code class="highlighter-rouge">flags.cmake</code> to <code class="highlighter-rouge">Findmusllibc.cmake</code> CMake module and merge remainder of <code class="highlighter-rouge">flags.cmake</code> with <code class="highlighter-rouge">base.cmake</code>.</li>
-  <li>Mark CMake cache variables advanced by default and allow final project configuration to explicitly show options in the <code class="highlighter-rouge">ccmake</code> GUI.</li>
-  <li><code class="highlighter-rouge">init-build.sh</code>: Support alternative build structure where the top-level <code class="highlighter-rouge">CMakeLists.txt</code> project file is not located in the top level directory.</li>
-  <li>Move <code class="highlighter-rouge">ccache</code> settings to compiler toolchain files.</li>
-  <li><code class="highlighter-rouge">cpio.cmake</code>: Change strategy for constructing cpio archive object file to use linker instead of objcopy.</li>
-  <li><code class="highlighter-rouge">simulation.cmake</code>: Add new <code class="highlighter-rouge">qemu-arm-virt</code> platform simulator options with hyp support.</li>
-  <li><code class="highlighter-rouge">rust_targets</code>: add <code class="highlighter-rouge">aarch64-sel4-none.json</code> target file for Aarch64 rust targets.</li>
+  <li><code class="language-plaintext highlighter-rouge">Holmakefile.in</code>, <code class="language-plaintext highlighter-rouge">buildScript.sml.in</code>, <code class="language-plaintext highlighter-rouge">cakeml.cmake</code>: Update CakeML build scripts for newer CakeML version.</li>
+  <li><code class="language-plaintext highlighter-rouge">simulate.py</code>: Add <code class="language-plaintext highlighter-rouge">tput reset</code> to end of Qemu command for when Qemu leaves the terminal in an inconsistent state.</li>
+  <li>Remove global <code class="language-plaintext highlighter-rouge">Configuration</code> CMake library. Each build artifact should instead control its own configuration dependencies.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">environment_flags.cmake</code> module for use in modules that are used for defining system environment build flags.</li>
+  <li>Move <code class="language-plaintext highlighter-rouge">musllibc</code> rules from <code class="language-plaintext highlighter-rouge">flags.cmake</code> to <code class="language-plaintext highlighter-rouge">Findmusllibc.cmake</code> CMake module and merge remainder of <code class="language-plaintext highlighter-rouge">flags.cmake</code> with <code class="language-plaintext highlighter-rouge">base.cmake</code>.</li>
+  <li>Mark CMake cache variables advanced by default and allow final project configuration to explicitly show options in the <code class="language-plaintext highlighter-rouge">ccmake</code> GUI.</li>
+  <li><code class="language-plaintext highlighter-rouge">init-build.sh</code>: Support alternative build structure where the top-level <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> project file is not located in the top level directory.</li>
+  <li>Move <code class="language-plaintext highlighter-rouge">ccache</code> settings to compiler toolchain files.</li>
+  <li><code class="language-plaintext highlighter-rouge">cpio.cmake</code>: Change strategy for constructing cpio archive object file to use linker instead of objcopy.</li>
+  <li><code class="language-plaintext highlighter-rouge">simulation.cmake</code>: Add new <code class="language-plaintext highlighter-rouge">qemu-arm-virt</code> platform simulator options with hyp support.</li>
+  <li><code class="language-plaintext highlighter-rouge">rust_targets</code>: add <code class="language-plaintext highlighter-rouge">aarch64-sel4-none.json</code> target file for Aarch64 rust targets.</li>
 </ul>
 
 <h2 id="kernel">kernel</h2>
 
 <ul>
   <li>Add functions for querying all kernel platform names and architectures.</li>
-  <li>Add <code class="highlighter-rouge">check_outfile_stale</code> macro.
+  <li>Add <code class="language-plaintext highlighter-rouge">check_outfile_stale</code> macro.
   This checks if a file is older than other files during CMake configure
-  phase. This is to prevent unnecessary long running <code class="highlighter-rouge">execute_process</code>
+  phase. This is to prevent unnecessary long running <code class="language-plaintext highlighter-rouge">execute_process</code>
   calls.</li>
   <li>Style all CMake and python files.</li>
-  <li>Add <code class="highlighter-rouge">FORCE</code> to all <code class="highlighter-rouge">INTERNAL</code> sets.
-  <code class="highlighter-rouge">INTERNAL</code> implies <code class="highlighter-rouge">FORCE</code> but in some versions of CMake if a config option
-  has been passed in via a -D option the <code class="highlighter-rouge">INTERNAL</code> set doesn’t override the
+  <li>Add <code class="language-plaintext highlighter-rouge">FORCE</code> to all <code class="language-plaintext highlighter-rouge">INTERNAL</code> sets.
+  <code class="language-plaintext highlighter-rouge">INTERNAL</code> implies <code class="language-plaintext highlighter-rouge">FORCE</code> but in some versions of CMake if a config option
+  has been passed in via a -D option the <code class="language-plaintext highlighter-rouge">INTERNAL</code> set doesn’t override the
   value when it should.
   See: <a href="https://gitlab.kitware.com/cmake/cmake/issues/19015">https://gitlab.kitware.com/cmake/cmake/issues/19015</a> -
-    <code class="highlighter-rouge">INTERNAL</code> does not imply <code class="highlighter-rouge">FORCE</code> for <code class="highlighter-rouge">CACHE</code>.</li>
-  <li>Update <code class="highlighter-rouge">python2</code> –&gt; <code class="highlighter-rouge">python3</code> in build scripts.</li>
+    <code class="language-plaintext highlighter-rouge">INTERNAL</code> does not imply <code class="language-plaintext highlighter-rouge">FORCE</code> for <code class="language-plaintext highlighter-rouge">CACHE</code>.</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">python2</code> –&gt; <code class="language-plaintext highlighter-rouge">python3</code> in build scripts.</li>
   <li>Invoke verified configuration files to build kernel with verified configurations.</li>
-  <li>Add <code class="highlighter-rouge">SEL4_CONFIG_DEFAULT_ADVANCED</code> CMake variable.  If set then all cache variable
+  <li>Add <code class="language-plaintext highlighter-rouge">SEL4_CONFIG_DEFAULT_ADVANCED</code> CMake variable.  If set then all cache variable
 declarations get marked as advanced by default.</li>
   <li>Add device trees for every Arm and RISC-V platform.
     <ul>
@@ -237,12 +237,12 @@ declarations get marked as advanced by default.</li>
   <li>Auto-generate hardware headers describing Arm and RISC-V platforms. Use these headers
 for creating Untyped objects and Kernel device binding and export YAML memory region
 file for use by other projects in build system.</li>
-  <li><code class="highlighter-rouge">sel4_deps</code>: Add <code class="highlighter-rouge">pyfdt</code>, <code class="highlighter-rouge">cmake-format</code>, <code class="highlighter-rouge">guardonce</code>, <code class="highlighter-rouge">pyelftools</code>, <code class="highlighter-rouge">autopep8</code>, <code class="highlighter-rouge">jsonschema</code> and <code class="highlighter-rouge">libarchive-c</code> to seL4 python package. Change <code class="highlighter-rouge">pyaml</code> to <code class="highlighter-rouge">pyyaml</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">sel4_deps</code>: Add <code class="language-plaintext highlighter-rouge">pyfdt</code>, <code class="language-plaintext highlighter-rouge">cmake-format</code>, <code class="language-plaintext highlighter-rouge">guardonce</code>, <code class="language-plaintext highlighter-rouge">pyelftools</code>, <code class="language-plaintext highlighter-rouge">autopep8</code>, <code class="language-plaintext highlighter-rouge">jsonschema</code> and <code class="language-plaintext highlighter-rouge">libarchive-c</code> to seL4 python package. Change <code class="language-plaintext highlighter-rouge">pyaml</code> to <code class="language-plaintext highlighter-rouge">pyyaml</code>.</li>
   <li>Automatically select serial and timer drivers based on device trees.</li>
-  <li>Remove <code class="highlighter-rouge">kernel_astyle.sh</code> in favour of using style scripts in <code class="highlighter-rouge">sel4_tools</code>.</li>
-  <li>Use device tree <code class="highlighter-rouge">chosen</code> node to specify kernel devices with <code class="highlighter-rouge">seL4,kernel-devices</code> property.</li>
-  <li>Add <code class="highlighter-rouge">reciprocal.py</code> for calculating constants for reciprocal division used in MCS kernel.</li>
-  <li>Add <code class="highlighter-rouge">seL4Config.cmake</code> module to kernel configurations folder for use in CMake <code class="highlighter-rouge">-C</code> configuration scripts.
+  <li>Remove <code class="language-plaintext highlighter-rouge">kernel_astyle.sh</code> in favour of using style scripts in <code class="language-plaintext highlighter-rouge">sel4_tools</code>.</li>
+  <li>Use device tree <code class="language-plaintext highlighter-rouge">chosen</code> node to specify kernel devices with <code class="language-plaintext highlighter-rouge">seL4,kernel-devices</code> property.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">reciprocal.py</code> for calculating constants for reciprocal division used in MCS kernel.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">seL4Config.cmake</code> module to kernel configurations folder for use in CMake <code class="language-plaintext highlighter-rouge">-C</code> configuration scripts.
 This enables picking kernel platform settings before any projects are configured and also allows
 automatically picking the right toolchain files.</li>
 </ul>
@@ -360,7 +360,7 @@ automatically picking the right toolchain files.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

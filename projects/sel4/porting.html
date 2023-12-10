@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -336,8 +336,8 @@ We tend to use <a href="https://www.denx.de/wiki/U-Boot">U-boot</a> as it is ope
 Linux image onto the dev board. This way you can find the correct address to load the image into memory.
 This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.</p>
 
-<p>Once you have found the correct address to load, you can use the command <code class="highlighter-rouge">bootcmd="tftpboot 0x20000000 sel4_image &amp;&amp; go 0x20000000"</code>
-(using 0x20000000 as an example) followed by <code class="highlighter-rouge">saveenv</code> to save the starting address onto the boards flash memory.
+<p>Once you have found the correct address to load, you can use the command <code class="language-plaintext highlighter-rouge">bootcmd="tftpboot 0x20000000 sel4_image &amp;&amp; go 0x20000000"</code>
+(using 0x20000000 as an example) followed by <code class="language-plaintext highlighter-rouge">saveenv</code> to save the starting address onto the boards flash memory.
 You will also need to set the ‘ipaddr’ and ‘serverip’ details can be found in the link above.</p>
 
 <h2 id="sel4">seL4</h2>
@@ -346,7 +346,7 @@ You will also need to set the ‘ipaddr’ and ‘serverip’ details can be fou
 
 <h3 id="dts">DTS</h3>
 
-<p>Look for DTS and drivers inside the <a href="https://github.com/torvalds/linux">Linux repository</a>, normally they will be supported. If they are supported clone Linux and modify the <code class="highlighter-rouge">update-dts.sh</code> to add your target. Run the script located in <code class="highlighter-rouge">kernel/tools/dts/update-dts.sh</code> at the cloned Linux repository. This will create a “platform.dts” file from Linux inside the dts folder in the kernel. You may need to add device nodes depending on what Linux uses and what is required by seL4. For example, in the port of the Rockpro64 a memory node and an extra timer node were needed so these had to be defined manually.</p>
+<p>Look for DTS and drivers inside the <a href="https://github.com/torvalds/linux">Linux repository</a>, normally they will be supported. If they are supported clone Linux and modify the <code class="language-plaintext highlighter-rouge">update-dts.sh</code> to add your target. Run the script located in <code class="language-plaintext highlighter-rouge">kernel/tools/dts/update-dts.sh</code> at the cloned Linux repository. This will create a “platform.dts” file from Linux inside the dts folder in the kernel. You may need to add device nodes depending on what Linux uses and what is required by seL4. For example, in the port of the Rockpro64 a memory node and an extra timer node were needed so these had to be defined manually.</p>
 
 <h3 id="hardware-generation-script">Hardware generation script</h3>
 
@@ -354,22 +354,22 @@ You will also need to set the ‘ipaddr’ and ‘serverip’ details can be fou
 From the above example the Rockpro64 needed a memory node so that this script could define working memory.
 Other gotchas could include interrupt cells, interrupt numbers being mapped wrongly, or incorrect addresses.
 Also serial and timer drivers will need to be added to the kernel if they don’t already exist. You can check this through
-the DTS device strings and compare to the hardware.yml file in <code class="highlighter-rouge">kernel/tools/hardware.yml</code>. If needed add the required drivers in <code class="highlighter-rouge">kernel/drivers/</code>.</p>
+the DTS device strings and compare to the hardware.yml file in <code class="language-plaintext highlighter-rouge">kernel/tools/hardware.yml</code>. If needed add the required drivers in <code class="language-plaintext highlighter-rouge">kernel/drivers/</code>.</p>
 
 <h3 id="kernel">Kernel</h3>
 
-<p>You will need to add <code class="highlighter-rouge">libsel4/sel4_plat_include/&lt;platform&gt;/sel4/plat/api/constants.h</code> and add sel4_UserTop depending on what you support. Look in the other platform files for examples similar to your platform.</p>
+<p>You will need to add <code class="language-plaintext highlighter-rouge">libsel4/sel4_plat_include/&lt;platform&gt;/sel4/plat/api/constants.h</code> and add sel4_UserTop depending on what you support. Look in the other platform files for examples similar to your platform.</p>
 
 <h3 id="cmake-build-system">CMake-build system</h3>
 
-<p>You will need to modify the build system in two places. Firstly in the kernel’s platform folder, you define <code class="highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>, again you can look at other platforms for examples.
+<p>You will need to modify the build system in two places. Firstly in the kernel’s platform folder, you define <code class="language-plaintext highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>, again you can look at other platforms for examples.
 Secondly, you will need to add ‘KernelPlatform’ to the cmake and elf-loader tools. You can do this by editing
-<code class="highlighter-rouge">tools/cmake-tool/helpers/application_settings.cmake</code> and <code class="highlighter-rouge">tools/elfloader-tool/CMakeLists.txt</code>.</p>
+<code class="language-plaintext highlighter-rouge">tools/cmake-tool/helpers/application_settings.cmake</code> and <code class="language-plaintext highlighter-rouge">tools/elfloader-tool/CMakeLists.txt</code>.</p>
 
 <h3 id="elf-loader">ELF-loader</h3>
 
-<p>You will need to add directories and files <code class="highlighter-rouge">tools/elfloader-tool/src/plat/&lt;platform&gt;/sys_fputc.c</code> and
-<code class="highlighter-rouge">tools/elfloader-tool/include/plat/&lt;platform&gt;/platform.h</code> which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.</p>
+<p>You will need to add directories and files <code class="language-plaintext highlighter-rouge">tools/elfloader-tool/src/plat/&lt;platform&gt;/sys_fputc.c</code> and
+<code class="language-plaintext highlighter-rouge">tools/elfloader-tool/include/plat/&lt;platform&gt;/platform.h</code> which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.</p>
 
 <h2 id="sel4-test">seL4 test</h2>
 
@@ -382,18 +382,18 @@ own unique programming sequence and can sometimes be a bit tricky.</p>
 
 <p>You can find the physical addresses and interrupt numbers for each device in its platform reference manual and copy them into the right places.</p>
 
-<p><code class="highlighter-rouge">libplatsupport/plat_include/&lt;platform&gt;/</code>
-	-<code class="highlighter-rouge">clock.h</code>
-	-<code class="highlighter-rouge">gpio.h</code>
-	-<code class="highlighter-rouge">i2c.h</code>
-	-<code class="highlighter-rouge">mux.h</code>
-	-<code class="highlighter-rouge">serial.h</code>
-	-<code class="highlighter-rouge">timer.h</code>
-<code class="highlighter-rouge">libplatsupport/src/plat/&lt;platform&gt;/</code>
-	-<code class="highlighter-rouge">chardev.c</code>
-	-<code class="highlighter-rouge">ltimer.c</code>
-	-<code class="highlighter-rouge">serial.c</code>
-	-<code class="highlighter-rouge">timer.c</code></p>
+<p><code class="language-plaintext highlighter-rouge">libplatsupport/plat_include/&lt;platform&gt;/</code>
+	-<code class="language-plaintext highlighter-rouge">clock.h</code>
+	-<code class="language-plaintext highlighter-rouge">gpio.h</code>
+	-<code class="language-plaintext highlighter-rouge">i2c.h</code>
+	-<code class="language-plaintext highlighter-rouge">mux.h</code>
+	-<code class="language-plaintext highlighter-rouge">serial.h</code>
+	-<code class="language-plaintext highlighter-rouge">timer.h</code>
+<code class="language-plaintext highlighter-rouge">libplatsupport/src/plat/&lt;platform&gt;/</code>
+	-<code class="language-plaintext highlighter-rouge">chardev.c</code>
+	-<code class="language-plaintext highlighter-rouge">ltimer.c</code>
+	-<code class="language-plaintext highlighter-rouge">serial.c</code>
+	-<code class="language-plaintext highlighter-rouge">timer.c</code></p>
 
 <h3 id="gotchas">Gotchas</h3>
 
@@ -847,7 +847,7 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Jun 1 09:12:08 2023 +1000 f8d4139f9a

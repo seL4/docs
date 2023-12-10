@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -355,7 +355,7 @@ to be placed on the IRQ path where the meaurements are to be taken from.</p>
 
 <p>This is a hot-cache benchmark of a scheduling decision.  It works by
 using a producer/consumer pattern between two notification objects.
-This benchmark also measures <code class="highlighter-rouge">seL4_Yield()</code>.</p>
+This benchmark also measures <code class="language-plaintext highlighter-rouge">seL4_Yield()</code>.</p>
 
 <h2 id="signal">signal</h2>
 
@@ -372,19 +372,19 @@ kernel synchronization on IPC throughput.</p>
 <p>This benchmark will execute a thread as a VCPU (an EL1 guest kernel) and
 then obtain numbers for the following actions:</p>
 <ul>
-  <li>Privilege escalation from EL1 to EL2 using the <code class="highlighter-rouge">HVC</code> instruction.</li>
-  <li>Privilege de-escalation from EL2 to EL1 using the <code class="highlighter-rouge">ERET</code> instruction.</li>
-  <li>The cost of a null invocation of the EL2 kernel using <code class="highlighter-rouge">HVC</code>.</li>
-  <li>The cost of an <code class="highlighter-rouge">seL4_Call()</code> from an EL1 guest thread to a native seL4
+  <li>Privilege escalation from EL1 to EL2 using the <code class="language-plaintext highlighter-rouge">HVC</code> instruction.</li>
+  <li>Privilege de-escalation from EL2 to EL1 using the <code class="language-plaintext highlighter-rouge">ERET</code> instruction.</li>
+  <li>The cost of a null invocation of the EL2 kernel using <code class="language-plaintext highlighter-rouge">HVC</code>.</li>
+  <li>The cost of an <code class="language-plaintext highlighter-rouge">seL4_Call()</code> from an EL1 guest thread to a native seL4
 thread.</li>
-  <li>The cost of an <code class="highlighter-rouge">seL4_Reply()</code> from an seL4 native thread to an EL1
+  <li>The cost of an <code class="language-plaintext highlighter-rouge">seL4_Reply()</code> from an seL4 native thread to an EL1
 guest thread.</li>
 </ul>
 
 <p><em>Note:</em> In order to run this benchmark, you must notify the build system
-that you wish to enable this benchmark by passing <code class="highlighter-rouge">-DVCPU=true</code> on the
+that you wish to enable this benchmark by passing <code class="language-plaintext highlighter-rouge">-DVCPU=true</code> on the
 command line, which will cause the kernel to be compiled to run in EL2.
-You must also ensure that you pass <code class="highlighter-rouge">-DHARDWARE=false</code> to disable the
+You must also ensure that you pass <code class="language-plaintext highlighter-rouge">-DHARDWARE=false</code> to disable the
 hardware tests.</p>
 
 <p>Since this benchmark will cause the kernel image to be an EL2 image, it
@@ -396,33 +396,33 @@ applications as well, since they’ll be using an unexpected kernel build.</p>
 <p>Contributing a new benchmark to seL4bench requires a few steps:</p>
 
 <ul>
-  <li>Under <code class="highlighter-rouge">apps</code>, create a directory for your new benchmark and:
+  <li>Under <code class="language-plaintext highlighter-rouge">apps</code>, create a directory for your new benchmark and:
     <ul>
-      <li>Provide a <code class="highlighter-rouge">CMakelists.txt</code> file that defines a new executable.</li>
-      <li>Provide a <code class="highlighter-rouge">src</code> folder that contains the source code for your
+      <li>Provide a <code class="language-plaintext highlighter-rouge">CMakelists.txt</code> file that defines a new executable.</li>
+      <li>Provide a <code class="language-plaintext highlighter-rouge">src</code> folder that contains the source code for your
 benchmark.</li>
     </ul>
   </li>
-  <li>Under <code class="highlighter-rouge">apps/sel4bench</code>:
+  <li>Under <code class="language-plaintext highlighter-rouge">apps/sel4bench</code>:
     <ul>
-      <li>Update <code class="highlighter-rouge">CMakeLists.txt</code> to add your new benchmark to the list of
+      <li>Update <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> to add your new benchmark to the list of
 benchmarks.</li>
-      <li>Under <code class="highlighter-rouge">src</code>:
+      <li>Under <code class="language-plaintext highlighter-rouge">src</code>:
         <ul>
-          <li>Update <code class="highlighter-rouge">benchmark.h</code> to include your generated config for your benchmark, and provide a function declaration that will act as the entry point for your benchmark.</li>
-          <li>Provide a <code class="highlighter-rouge">&lt;benchmark_name&gt;.c</code> file that implements the above function declaration. This function should return a <code class="highlighter-rouge">benchmark_t</code> struct. Construct this struct accordingly. The struct expects a function to process the results of the benchmark, which you should provide in this file as well</li>
-          <li>Inside <code class="highlighter-rouge">main.c</code>, add your entry point function that was declared/defined above to the array of <code class="highlighter-rouge">benchmark_t</code> present.</li>
+          <li>Update <code class="language-plaintext highlighter-rouge">benchmark.h</code> to include your generated config for your benchmark, and provide a function declaration that will act as the entry point for your benchmark.</li>
+          <li>Provide a <code class="language-plaintext highlighter-rouge">&lt;benchmark_name&gt;.c</code> file that implements the above function declaration. This function should return a <code class="language-plaintext highlighter-rouge">benchmark_t</code> struct. Construct this struct accordingly. The struct expects a function to process the results of the benchmark, which you should provide in this file as well</li>
+          <li>Inside <code class="language-plaintext highlighter-rouge">main.c</code>, add your entry point function that was declared/defined above to the array of <code class="language-plaintext highlighter-rouge">benchmark_t</code> present.</li>
         </ul>
       </li>
     </ul>
   </li>
-  <li>Update <code class="highlighter-rouge">easy-settings.cmake</code> to add your new benchmark. You can define here whether the benchmark should be enabled by default or not.</li>
-  <li>Under <code class="highlighter-rouge">libsel4benchsupport/include</code>:
+  <li>Update <code class="language-plaintext highlighter-rouge">easy-settings.cmake</code> to add your new benchmark. You can define here whether the benchmark should be enabled by default or not.</li>
+  <li>Under <code class="language-plaintext highlighter-rouge">libsel4benchsupport/include</code>:
     <ul>
-      <li>Provide a <code class="highlighter-rouge">&lt;benchmark_name.h&gt;</code> file that provides any extra definitions that your benchmark may need. You will also generally provide a <code class="highlighter-rouge">benchmark_name_results_t</code> struct here, which will be used to store the results of your benchmark when processing.</li>
+      <li>Provide a <code class="language-plaintext highlighter-rouge">&lt;benchmark_name.h&gt;</code> file that provides any extra definitions that your benchmark may need. You will also generally provide a <code class="language-plaintext highlighter-rouge">benchmark_name_results_t</code> struct here, which will be used to store the results of your benchmark when processing.</li>
     </ul>
   </li>
-  <li>Update <code class="highlighter-rouge">settings.cmake</code> to include your new benchmark.</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">settings.cmake</code> to include your new benchmark.</li>
 </ul>
 
 <p><em>File included from <a href="https://github.com/sel4/sel4bench/blob/master/README.md">github repo</a> <a href="https://github.com/sel4/sel4bench/edit/master/README.md">edit</a></em></p>
@@ -546,7 +546,7 @@ benchmarks.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
@@ -311,25 +311,25 @@ sender sends a message, that sender is now queued.</p>
 
 <h3 id="system-calls">System calls</h3>
 
-<p>Threads can send messages on endpoints with the system call <code class="highlighter-rouge">seL4_Send</code>, which blocks until the message has been
-consumed by another thread. <code class="highlighter-rouge">seL4_NBSend</code> can also be used, which performs a polling send: the send is only
+<p>Threads can send messages on endpoints with the system call <code class="language-plaintext highlighter-rouge">seL4_Send</code>, which blocks until the message has been
+consumed by another thread. <code class="language-plaintext highlighter-rouge">seL4_NBSend</code> can also be used, which performs a polling send: the send is only
 successful if a receiver is already blocked waiting for a message, and otherwise fails. To avoid a
-back channel, <code class="highlighter-rouge">seL4_NBSend</code> does not return a result indicating if the message was sent or not.</p>
+back channel, <code class="language-plaintext highlighter-rouge">seL4_NBSend</code> does not return a result indicating if the message was sent or not.</p>
 
-<p><code class="highlighter-rouge">seL4_Recv</code> can be used to receive messages, and <code class="highlighter-rouge">seL4_NBRecv</code> can be used to poll for messages.</p>
+<p><code class="language-plaintext highlighter-rouge">seL4_Recv</code> can be used to receive messages, and <code class="language-plaintext highlighter-rouge">seL4_NBRecv</code> can be used to poll for messages.</p>
 
-<p><code class="highlighter-rouge">seL4_Call</code> is a system call that essentially combines an <code class="highlighter-rouge">seL4_Send</code> and an <code class="highlighter-rouge">seL4_Recv</code> with one
+<p><code class="language-plaintext highlighter-rouge">seL4_Call</code> is a system call that essentially combines an <code class="language-plaintext highlighter-rouge">seL4_Send</code> and an <code class="language-plaintext highlighter-rouge">seL4_Recv</code> with one
 major difference: in the receive phase, thread which uses this function is blocked on a one-time capability termed a
 <em>reply capability</em>, and not the endpoint itself. In a client-server scenario, where clients use
-<code class="highlighter-rouge">seL4_Call</code> to make requests, the server can explicitly reply to the correct client.</p>
+<code class="language-plaintext highlighter-rouge">seL4_Call</code> to make requests, the server can explicitly reply to the correct client.</p>
 
 <p>The reply capability is stored internally in the thread control block (TCB) of the receiver. The system
-call <code class="highlighter-rouge">seL4_Reply</code> invokes this capability, which sends an IPC to the client and wakes it up. <code class="highlighter-rouge">seL4_ReplyRecv</code>
+call <code class="language-plaintext highlighter-rouge">seL4_Reply</code> invokes this capability, which sends an IPC to the client and wakes it up. <code class="language-plaintext highlighter-rouge">seL4_ReplyRecv</code>
 does the same, except it sends the reply and blocks on the provided endpoint in a combined system call.</p>
 
 <p>Since TCBs have a single space to store a reply capability, if servers need to service multiple
 requests (e.g saving requests to reply at a later time, after hardware operations have been completed),
-<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="highlighter-rouge">seL4_CNode_SaveCaller</code></a> can be used to save
+<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code></a> can be used to save
 the reply capability to an empty slot in the receivers CSpace.</p>
 
 <h3 id="ipc-buffer">IPC Buffer</h3>
@@ -342,20 +342,20 @@ amount between the sender and receiver IPC buffer.</p>
 
 <p>The IPC buffer contains a bounded area of message registers (MR) used to transmit data on IPC. Each
 register is the machine word size, and the maximum message size is available in the
-<code class="highlighter-rouge">seL4_MsgMaxLength</code> constant provided by <code class="highlighter-rouge">libsel4</code>.</p>
+<code class="language-plaintext highlighter-rouge">seL4_MsgMaxLength</code> constant provided by <code class="language-plaintext highlighter-rouge">libsel4</code>.</p>
 
-<p>Messages can be loaded into the IPC buffer using <code class="highlighter-rouge">seL4_SetMR</code> and extracted using <code class="highlighter-rouge">seL4_GetMR</code>.
+<p>Messages can be loaded into the IPC buffer using <code class="language-plaintext highlighter-rouge">seL4_SetMR</code> and extracted using <code class="language-plaintext highlighter-rouge">seL4_GetMR</code>.
 Small messages are sent in registers and do not require a copy operation. The amount of words
-that fit in registers is available in the <code class="highlighter-rouge">seL4_FastMessageRegisters</code> constant.</p>
+that fit in registers is available in the <code class="language-plaintext highlighter-rouge">seL4_FastMessageRegisters</code> constant.</p>
 
 <p>The amount of data being transferred, in terms of the number of message registers used, must be
-set in as the <code class="highlighter-rouge">length</code> field in the <code class="highlighter-rouge">seL4_MessageInfo_t</code> data structure.</p>
+set in as the <code class="language-plaintext highlighter-rouge">length</code> field in the <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code> data structure.</p>
 
 <h3 id="cap-transfer">Cap transfer</h3>
 
 <p>Along with data, IPC can be used to send capabilities between processes per message. This is referred to as
- <em>cap transfer</em>. The number of capabilities being transferred is encoded in the <code class="highlighter-rouge">seL4_MessageInfo_t</code>
-structure as <code class="highlighter-rouge">extraCaps</code>. Below is an example for sending a capability via IPC:</p>
+ <em>cap transfer</em>. The number of capabilities being transferred is encoded in the <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code>
+structure as <code class="language-plaintext highlighter-rouge">extraCaps</code>. Below is an example for sending a capability via IPC:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">seL4_MessageInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">seL4_MessageInfo_new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
    <span class="n">seL4_SetCap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">free_slot</span><span class="p">);</span>
@@ -377,29 +377,29 @@ Note that while senders can send multiple capabilities, receivers can only recei
 <p>seL4 can also <em>unwrap</em> capabilities on IPC.
 If the n-th capability in the message refers to the endpoint through which the message
 is sent, the capability is unwrapped: its badge is placed into the n-th position of the
-receiver’s IPC buffer (in the field <code class="highlighter-rouge">caps_or_badges</code>), and the kernel sets the n-th bit
-(counting from the least significant) in the <code class="highlighter-rouge">capsUnwrapped</code> field of <code class="highlighter-rouge">seL4_MessageInfo_t</code>.</p>
+receiver’s IPC buffer (in the field <code class="language-plaintext highlighter-rouge">caps_or_badges</code>), and the kernel sets the n-th bit
+(counting from the least significant) in the <code class="language-plaintext highlighter-rouge">capsUnwrapped</code> field of <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code>.</p>
 
 <h3 id="message-info">Message Info</h3>
 
-<p>The <code class="highlighter-rouge">seL4_MessageInfo_t</code> data structure is used to encode the description of an IPC message into a single word.
+<p>The <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code> data structure is used to encode the description of an IPC message into a single word.
 It is used to describe a message to be sent to seL4, and for seL4 to describe the message that was
 sent to the receiver.
 It contains the following fields:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">length</code> the amount of message registers (data) in the message (<code class="highlighter-rouge">seL4_MsgMaxLength</code> maximum),</li>
-  <li><code class="highlighter-rouge">extraCaps</code> the number of capabilities in the message (<code class="highlighter-rouge">seL4_MsgMaxExtraCaps</code>)</li>
-  <li><code class="highlighter-rouge">capsUnwrapped</code> marks any capabilities unwrapped by the kernel.</li>
-  <li><code class="highlighter-rouge">label</code> data that is transferred unmodified by the kernel from sender to receiver,</li>
+  <li><code class="language-plaintext highlighter-rouge">length</code> the amount of message registers (data) in the message (<code class="language-plaintext highlighter-rouge">seL4_MsgMaxLength</code> maximum),</li>
+  <li><code class="language-plaintext highlighter-rouge">extraCaps</code> the number of capabilities in the message (<code class="language-plaintext highlighter-rouge">seL4_MsgMaxExtraCaps</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">capsUnwrapped</code> marks any capabilities unwrapped by the kernel.</li>
+  <li><code class="language-plaintext highlighter-rouge">label</code> data that is transferred unmodified by the kernel from sender to receiver,</li>
 </ul>
 
 <h3 id="badges">Badges</h3>
 
 <p>Along with the message the kernel additionally delivers the badge of the endpoint capability
 that the sender invoked to send the message. Endpoints can be badged using
-<a href="https://docs.sel4.systems/ApiDoc.html#mint"><code class="highlighter-rouge">seL4_CNode_Mint</code></a> or
- <a href="https://docs.sel4.systems/ApiDoc.html#mutate"><code class="highlighter-rouge">seL4_CNode_Mutate</code></a>. Once an endpoint is badged,
+<a href="https://docs.sel4.systems/ApiDoc.html#mint"><code class="language-plaintext highlighter-rouge">seL4_CNode_Mint</code></a> or
+ <a href="https://docs.sel4.systems/ApiDoc.html#mutate"><code class="language-plaintext highlighter-rouge">seL4_CNode_Mutate</code></a>. Once an endpoint is badged,
 the badge of the endpoint is transferred to any receiver that receives messages on that endpoint.
 The code example below demonstrates this:</p>
 
@@ -417,8 +417,8 @@ Consequently, IPC has a fastpath – a heavily optimised path in the kernel – 
 to be very fast. In order to use the fastpath, an IPC must meet the following conditions:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_Call</code> or <code class="highlighter-rouge">seL4_ReplyRecv</code> must be used.</li>
-  <li>The data in the message must fit into the <code class="highlighter-rouge">seL4_FastMessageRegisters</code> registers.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Call</code> or <code class="language-plaintext highlighter-rouge">seL4_ReplyRecv</code> must be used.</li>
+  <li>The data in the message must fit into the <code class="language-plaintext highlighter-rouge">seL4_FastMessageRegisters</code> registers.</li>
   <li>The processes must have valid address spaces.</li>
   <li>No caps should be transferred.</li>
   <li>No other threads in the scheduler of higher priority than the thread unblocked by the IPC can be running.</li>
@@ -434,7 +434,7 @@ will also alter the ordering of replies from the clients to get the right messag
 
 <p>When you run the tutorial, the output should be something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: waiting for badged endpoint
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: waiting for badged endpoint
 Badged 2
 Assertion failed: seL4_MessageInfo_get_extraCaps(info) == 1 (../ipcCkQ6Ub/client_2.c: main: 22)
 Client 1: waiting for badged endpoint
@@ -492,7 +492,7 @@ does not respond, or wait for new messages from this point.</p>
 </code></pre></div></div>
 
 <p>At this point, you should see a single word output to the console in a loop.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the
 the
 the
 </code></pre></div></div>
@@ -506,7 +506,7 @@ the
 
 <p>Now the output should be something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: received badged endpoint
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: received badged endpoint
 the
 brown
 jumps
@@ -521,11 +521,11 @@ lazy
 
 <p><strong>Exercise</strong> Currently each client is scheduled for its full timeslice until it is preempted. Alter
 your server to only print one message from each client, alternating. You will need to use
-<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="highlighter-rouge">seL4_CNode_SaveCaller</code></a>  to save the reply
-capability for each sender. You can use <code class="highlighter-rouge">free_slot</code> to store the reply capabilities.</p>
+<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code></a>  to save the reply
+capability for each sender. You can use <code class="language-plaintext highlighter-rouge">free_slot</code> to store the reply capabilities.</p>
 
 <p>Depending on your approach, successful output should look something like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: received badged endpoint
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client 2: received badged endpoint
 the
 Client 1: received badged endpoint
 quick
@@ -544,8 +544,8 @@ dog
 to become more familiar with IPC.</p>
 
 <ul>
-  <li>Try using <code class="highlighter-rouge">seL4_Send</code> and <code class="highlighter-rouge">seL4_Recv</code>.</li>
-  <li>Try the non-blocking variants, <code class="highlighter-rouge">seL4_NBSend</code> and <code class="highlighter-rouge">seL4_NBRecv</code>.</li>
+  <li>Try using <code class="language-plaintext highlighter-rouge">seL4_Send</code> and <code class="language-plaintext highlighter-rouge">seL4_Recv</code>.</li>
+  <li>Try the non-blocking variants, <code class="language-plaintext highlighter-rouge">seL4_NBSend</code> and <code class="language-plaintext highlighter-rouge">seL4_NBRecv</code>.</li>
 </ul>
 
 <hr />
@@ -599,7 +599,7 @@ ipc/ipc.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

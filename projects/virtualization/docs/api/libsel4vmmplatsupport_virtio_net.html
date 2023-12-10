@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-virtio_neth">Interface <code class="highlighter-rouge">virtio_net.h</code></h2>
+<h2 id="interface-virtio_neth">Interface <code class="language-plaintext highlighter-rouge">virtio_net.h</code></h2>
 
 <p>This interface provides the ability to initalise a VMM virtio net driver. This creating a virtio
 PCI device in the VM’s virtual pci. This can subsequently be accessed as an ethernet interface in the
@@ -351,24 +351,24 @@ guest.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-common_make_virtio_netvm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_line-backend"><code class="highlighter-rouge">common_make_virtio_net(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_line, backend)</code></a></p>
+  <p><a href="#function-common_make_virtio_netvm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_line-backend"><code class="language-plaintext highlighter-rouge">common_make_virtio_net(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_line, backend)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-virtio_net_default_backend"><code class="highlighter-rouge">virtio_net_default_backend()</code></a></p>
+  <p><a href="#function-virtio_net_default_backend"><code class="language-plaintext highlighter-rouge">virtio_net_default_backend()</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-virtio_net"><code class="highlighter-rouge">virtio_net</code></a></p>
+  <p><a href="#struct-virtio_net"><code class="language-plaintext highlighter-rouge">virtio_net</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">virtio_net.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">virtio_net.h</code> defines the following functions.</p>
 
-<h3 id="function-common_make_virtio_netvm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_line-backend">Function <code class="highlighter-rouge">common_make_virtio_net(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_line, backend)</code></h3>
+<h3 id="function-common_make_virtio_netvm-pci-ioport-ioport_range-port_type-interrupt_pin-interrupt_line-backend">Function <code class="language-plaintext highlighter-rouge">common_make_virtio_net(vm, pci, ioport, ioport_range, port_type, interrupt_pin, interrupt_line, backend)</code></h3>
 
 <p>Initialise a new virtio_net device with Base Address Registers (BARs) starting at iobase and backend functions
 specified by the raw_iface_funcs struct.
@@ -377,14 +377,14 @@ virtio_net_default_backend for default methods.</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">pci {vmm_pci_space_t *}</code>: PCI library instance to register virtio net device</li>
-  <li><code class="highlighter-rouge">ioport {vmm_io_port_list_t *}</code>: IOPort library instance to register virtio net ioport</li>
-  <li><code class="highlighter-rouge">ioport_range {ioport_range_t}</code>: BAR port for front end emulation</li>
-  <li><code class="highlighter-rouge">port_type {ioport_type_t}</code>: Type of ioport i.e. whether to alloc or use given range</li>
-  <li><code class="highlighter-rouge">interrupt_pin {unsigned int}</code>: PCI interrupt pin e.g. INTA = 1, INTB = 2 ,…</li>
-  <li><code class="highlighter-rouge">interrupt_line {unsigned int}</code>: PCI interrupt line for virtio net IRQS</li>
-  <li><code class="highlighter-rouge">backend {struct raw_iface_funcs}</code>: Function pointers to backend implementation. Can be initialised by</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">pci {vmm_pci_space_t *}</code>: PCI library instance to register virtio net device</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport {vmm_io_port_list_t *}</code>: IOPort library instance to register virtio net ioport</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport_range {ioport_range_t}</code>: BAR port for front end emulation</li>
+  <li><code class="language-plaintext highlighter-rouge">port_type {ioport_type_t}</code>: Type of ioport i.e. whether to alloc or use given range</li>
+  <li><code class="language-plaintext highlighter-rouge">interrupt_pin {unsigned int}</code>: PCI interrupt pin e.g. INTA = 1, INTB = 2 ,…</li>
+  <li><code class="language-plaintext highlighter-rouge">interrupt_line {unsigned int}</code>: PCI interrupt line for virtio net IRQS</li>
+  <li><code class="language-plaintext highlighter-rouge">backend {struct raw_iface_funcs}</code>: Function pointers to backend implementation. Can be initialised by</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -395,7 +395,7 @@ virtio_net_default_backend for default methods.</p>
 
 <p>Back to <a href="#module-virtio_neth">interface description</a>.</p>
 
-<h3 id="function-virtio_net_default_backend">Function <code class="highlighter-rouge">virtio_net_default_backend()</code></h3>
+<h3 id="function-virtio_net_default_backend">Function <code class="language-plaintext highlighter-rouge">virtio_net_default_backend()</code></h3>
 
 <p>update these function pointers with its own custom backend.</p>
 
@@ -413,20 +413,20 @@ virtio_net_default_backend for default methods.</p>
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">virtio_net.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">virtio_net.h</code> defines the following structs.</p>
 
-<h3 id="struct-virtio_net">Struct <code class="highlighter-rouge">virtio_net</code></h3>
+<h3 id="struct-virtio_net">Struct <code class="language-plaintext highlighter-rouge">virtio_net</code></h3>
 
 <p>Virtio Net Driver Interface</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">iobase {unsigned int}</code>: IO Port base for Virtio Net device</li>
-  <li><code class="highlighter-rouge">emul {virtio_emul_t *}</code>: Virtio Ethernet emulation interface: VMM &lt;-&gt; Guest</li>
-  <li><code class="highlighter-rouge">emul_driver {struct eth_driver *}</code>: Backend Ethernet driver interface: VMM &lt;-&gt; Ethernet driver</li>
-  <li><code class="highlighter-rouge">emul_driver_funcs {struct raw_iface_funcs}</code>: Virtio Ethernet emulation functions: VMM &lt;-&gt; Guest</li>
-  <li><code class="highlighter-rouge">ioops {ps_io_ops_t}</code>: Platform support ioops for dma management</li>
+  <li><code class="language-plaintext highlighter-rouge">iobase {unsigned int}</code>: IO Port base for Virtio Net device</li>
+  <li><code class="language-plaintext highlighter-rouge">emul {virtio_emul_t *}</code>: Virtio Ethernet emulation interface: VMM &lt;-&gt; Guest</li>
+  <li><code class="language-plaintext highlighter-rouge">emul_driver {struct eth_driver *}</code>: Backend Ethernet driver interface: VMM &lt;-&gt; Ethernet driver</li>
+  <li><code class="language-plaintext highlighter-rouge">emul_driver_funcs {struct raw_iface_funcs}</code>: Virtio Ethernet emulation functions: VMM &lt;-&gt; Guest</li>
+  <li><code class="language-plaintext highlighter-rouge">ioops {ps_io_ops_t}</code>: Platform support ioops for dma management</li>
 </ul>
 
 <p>Back to <a href="#module-virtio_neth">interface description</a>.</p>
@@ -529,7 +529,7 @@ virtio_net_default_backend for default methods.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

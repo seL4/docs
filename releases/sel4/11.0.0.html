@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -149,7 +149,7 @@
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="sel4-version-1100-release">seL4 Version 11.0.0 Release</h1>
-<p>Announcing the release of <code class="highlighter-rouge">seL4 11.0.0</code> with the following changes:</p>
+<p>Announcing the release of <code class="language-plaintext highlighter-rouge">seL4 11.0.0</code> with the following changes:</p>
 
 <p>11.0.0 2019-11-19: BREAKING</p>
 
@@ -159,10 +159,10 @@
   <li>Add GrantReply access right for endpoint capabilities.</li>
   <li>seL4_Call is permitted on endpoints with either the Grant or the GrantReply access rights.</li>
   <li>Capabilities can only be transferred in a reply message if receiver’s endpoint capability has the Grant right.</li>
-  <li><code class="highlighter-rouge">seL4_CapRights_new</code> now takes 4 parameters</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_CapRights_new</code> now takes 4 parameters</li>
   <li>seL4_CapRightsBits added to libsel4. seL4_CapRightsBits is the number of bits
  to encode seL4_CapRights.</li>
-  <li><code class="highlighter-rouge">seL4_UserTop</code> added
+  <li><code class="language-plaintext highlighter-rouge">seL4_UserTop</code> added
     <ul>
       <li>a new constant in libsel4 that contains the first virtual address unavailable to
 user level.</li>
@@ -218,8 +218,8 @@ the value returned by seL4_MappingFailedLookupLevel on X86 EPT mapping calls.</l
     <ul>
       <li>The aarch64 api now refers to VSpaces rather than PageGlobalDirectories,
 as depending on the PA the top level translation structure can change.</li>
-      <li>all <code class="highlighter-rouge">seL4_ARM_PageGlobalDirectory</code> invocations are now <code class="highlighter-rouge">seL4_ARM_VSpace</code> invocations.</li>
-      <li>new constants <code class="highlighter-rouge">seL4_ARM_VSpaceObject</code> and <code class="highlighter-rouge">seL4_VSpaceIndexBits</code>.</li>
+      <li>all <code class="language-plaintext highlighter-rouge">seL4_ARM_PageGlobalDirectory</code> invocations are now <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpace</code> invocations.</li>
+      <li>new constants <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpaceObject</code> and <code class="language-plaintext highlighter-rouge">seL4_VSpaceIndexBits</code>.</li>
     </ul>
   </li>
   <li>Merged MCS kernel feature.
@@ -265,10 +265,10 @@ result. The ARCH_Page_Remap invocation has been removed from all configurations.
 <ul>
   <li>Usages of Endpoints can now use seL4_Call without providing Grant rights by downgrading the Grant to GrantReply</li>
   <li>The kernel no longer reserves a register for holding the address of a thread’s IPC buffer. It is now expected that the
-location of the IPC buffer is stored in a <code class="highlighter-rouge">__thread</code> local variable and a thread register is used to refer to each
+location of the IPC buffer is stored in a <code class="language-plaintext highlighter-rouge">__thread</code> local variable and a thread register is used to refer to each
 thread’s thread local variables. The sel4runtime is an seL4 runtime that provides program entry points that setup
 the IPC buffer address and serves as a reference for how the IPC buffer is expected to be accessed.</li>
-  <li>All <code class="highlighter-rouge">seL4_ARM_PageGlobalDirectory</code> invocations need to be replaced with <code class="highlighter-rouge">seL4_ARM_VSpace</code>.</li>
+  <li>All <code class="language-plaintext highlighter-rouge">seL4_ARM_PageGlobalDirectory</code> invocations need to be replaced with <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpace</code>.</li>
   <li>Usages of ARCH_Page_Remap can be replaced with ARCH_Page_Map and require the original mapping address to be provided.</li>
   <li>Device untypeds are provided to user level in different sizes which may require more initial processing to break them
 down for each device they refer to.</li>
@@ -276,7 +276,7 @@ down for each device they refer to.</li>
 
 <h1 id="full-changelog">Full changelog</h1>
 <p>Refer to the git log in
-<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="highlighter-rouge">git log 10.1.1..11.0.0</code></p>
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="language-plaintext highlighter-rouge">git log 10.1.1..11.0.0</code></p>
 
 <h1 id="more-details">More details</h1>
 <p>See the
@@ -728,7 +728,7 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

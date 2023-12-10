@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -150,7 +150,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h3"><a href="#pre-requisites">Pre-Requisites</a></li>
 <li class="toc-entry toc-h2"><a href="#getting-started">Getting Started</a></li>
 <li class="toc-entry toc-h2"><a href="#build-your-first-sel4-system">Build your first seL4 system</a></li>
@@ -195,7 +195,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <h2 id="load-the-binary">Load the binary</h2>
 <p>You need to be able to see output from the serial
@@ -204,27 +204,27 @@ serial cable, either a USB-&gt;RS232 converter, or if your computer has
 a serial port, connect to it.</p>
 
 <p>Once you have the wires in place, you can connect to the console via
-<code class="highlighter-rouge">screen</code> (or you can use minicom or another serial console program). In
-the following, we assume that the Tegra is connected to <code class="highlighter-rouge">/dev/ttyUSB0</code>.</p>
+<code class="language-plaintext highlighter-rouge">screen</code> (or you can use minicom or another serial console program). In
+the following, we assume that the Tegra is connected to <code class="language-plaintext highlighter-rouge">/dev/ttyUSB0</code>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/ttyUSB0 115200
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/ttyUSB0 115200
 </code></pre></div></div>
 
 <p>When you start the board, you will see the U-Boot prompt. To load the
 binary you need to interact with U-Boot. I personally use a DHCP/TFTP
-server to get the binary onto the board. Copy <code class="highlighter-rouge">sel4.img</code> onto the tftp
+server to get the binary onto the board. Copy <code class="language-plaintext highlighter-rouge">sel4.img</code> onto the tftp
 server; if you’ve set up DHCP properly it will pass the server IP to the
 board. Otherwise you can specify the IOP address on the command. The
 following command will then scan the PCI bus and enable the ethernet,
-and then ask to get an address via the DHCP and get <code class="highlighter-rouge">sel4.img</code> file from
-the TFTP server at <code class="highlighter-rouge">192.168.1.1</code>.</p>
+and then ask to get an address via the DHCP and get <code class="language-plaintext highlighter-rouge">sel4.img</code> file from
+the TFTP server at <code class="language-plaintext highlighter-rouge">192.168.1.1</code>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pci enum dhcp ${loadaddr} 192.168.1.1:sel4.img
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pci enum dhcp ${loadaddr} 192.168.1.1:sel4.img
 </code></pre></div></div>
 
 <p>Then, let’s start the program.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi ${loadaddr}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi ${loadaddr}
 </code></pre></div></div>
 
 <h2 id="flash-u-boot">Flash U-Boot</h2>
@@ -245,14 +245,14 @@ variable.</p>
 
 <p>Do</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootm_boot_mode nonsec
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootm_boot_mode nonsec
 saveenv
 </code></pre></div></div>
 <p>to boot in nonsecure (HYP)
 mode. This also enables kvm if you boot Linux.</p>
 
 <p>To go back to secure mode booting do</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootm_boot_mode sec
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootm_boot_mode sec
 saveenv
 </code></pre></div></div>
 <h2 id="getting-the-sources">Getting the sources</h2>
@@ -267,7 +267,7 @@ repo <span class="nb">sync</span>
 
 <p>Install autoconf, pkg-config, flex, bison, libcrypto++-dev and
 libusb-1.0.0-dev for your distribution. On Debian or Ubuntu you can do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
 sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev gcc-arm-linux-gnueabi
 </code></pre></div></div>
 
@@ -295,8 +295,8 @@ after releasing the reset button</p>
 <h2 id="running-linux-with-the-new-u-boot">Running Linux with the new U-Boot</h2>
 <p>To boot Linux in non-secure
 mode, build the kernel with the Power-State Coordination Interface
-(PSCI) enabled (<code class="highlighter-rouge">CONFIG_ARM_PSCI=y</code>, in Kernel Features menu)and
-CPU-Idle PM support disabled (<code class="highlighter-rouge">CONFIG_CPU_IDLE is not set</code> in CPU Power
+(PSCI) enabled (<code class="language-plaintext highlighter-rouge">CONFIG_ARM_PSCI=y</code>, in Kernel Features menu)and
+CPU-Idle PM support disabled (<code class="language-plaintext highlighter-rouge">CONFIG_CPU_IDLE is not set</code> in CPU Power
 Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
 
     </div>
@@ -331,7 +331,7 @@ Management-&gt;CPU Idle). Without these changes the kernel will hang.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 5fc78c1c47

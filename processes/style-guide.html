@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -226,7 +226,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#general-c-code">General C code</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#compiler-options">Compiler options</a></li>
@@ -284,7 +284,7 @@ requirements below, which override the general conventions.</p>
 
 <h3 id="compiler-options">Compiler options</h3>
 
-<p>Code should compile without warnings, with <code class="highlighter-rouge">-Wall</code>.</p>
+<p>Code should compile without warnings, with <code class="language-plaintext highlighter-rouge">-Wall</code>.</p>
 
 <h3 id="automatic-formatting">Automatic formatting</h3>
 
@@ -297,9 +297,9 @@ settings declared in our
 
 <ul>
   <li>Indent using four (4) spaces.  Do not use tabs for indentation at all.</li>
-  <li>Use no space between <code class="highlighter-rouge">*</code> and the variable name in pointer
-expressions (<code class="highlighter-rouge">int *foo</code>).</li>
-  <li>Use space between keywords and parentheses; e.g., <code class="highlighter-rouge">if (condition)</code>.</li>
+  <li>Use no space between <code class="language-plaintext highlighter-rouge">*</code> and the variable name in pointer
+expressions (<code class="language-plaintext highlighter-rouge">int *foo</code>).</li>
+  <li>Use space between keywords and parentheses; e.g., <code class="language-plaintext highlighter-rouge">if (condition)</code>.</li>
   <li>Put the opening brace of a function implementation on the line <em>after</em>
 the function’s return type, name, and argument list.
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">atoi</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">nptr</span><span class="p">)</span>
@@ -333,46 +333,46 @@ on the line above.  For example:
 
 <h3 id="header-guards">Header guards</h3>
 
-<p>Use <code class="highlighter-rouge">#pragma once</code> in header files to avoid duplicated includes.</p>
+<p>Use <code class="language-plaintext highlighter-rouge">#pragma once</code> in header files to avoid duplicated includes.</p>
 
 <h3 id="choosing-data-types">Choosing data types</h3>
 
-<p>When using integral types (<code class="highlighter-rouge">char</code>, <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">long</code>, etc.), qualify them
-explicitly as <code class="highlighter-rouge">unsigned</code> except where negative values are meaningful and
+<p>When using integral types (<code class="language-plaintext highlighter-rouge">char</code>, <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, etc.), qualify them
+explicitly as <code class="language-plaintext highlighter-rouge">unsigned</code> except where negative values are meaningful and
 must be handled.  (Overflow of signed integral types is undefined in the
 C standard.)</p>
 
-<h3 id="naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (<code class="highlighter-rouge">typedef</code>)</h3>
+<h3 id="naming-of-symbols-variables-types-and-type-aliases-typedef">Naming of symbols (variables), types, and type aliases (<code class="language-plaintext highlighter-rouge">typedef</code>)</h3>
 
 <ul>
-  <li>Use <code class="highlighter-rouge">typedef</code> to create aliases for all <code class="highlighter-rouge">struct</code> types.</li>
-  <li>The names of type aliases should always end in <code class="highlighter-rouge">_t</code>.</li>
-  <li>Function pointer type aliases should always end in <code class="highlighter-rouge">_fn_t</code>.</li>
-  <li>Do not alias pointer types with <code class="highlighter-rouge">typedef</code>; we keep them explicit.
+  <li>Use <code class="language-plaintext highlighter-rouge">typedef</code> to create aliases for all <code class="language-plaintext highlighter-rouge">struct</code> types.</li>
+  <li>The names of type aliases should always end in <code class="language-plaintext highlighter-rouge">_t</code>.</li>
+  <li>Function pointer type aliases should always end in <code class="language-plaintext highlighter-rouge">_fn_t</code>.</li>
+  <li>Do not alias pointer types with <code class="language-plaintext highlighter-rouge">typedef</code>; we keep them explicit.
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="n">tick_count</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">;</span>
 
 <span class="k">typedef</span> <span class="n">tick_count_ptr_t</span> <span class="o">*</span><span class="n">tick_count</span><span class="p">;</span> <span class="cm">/* NO */</span>
 <span class="n">tick_count</span> <span class="o">*</span><span class="n">tick_count_ptr</span><span class="p">;</span> <span class="cm">/* yes */</span>
 </code></pre></div>    </div>
   </li>
-  <li>Use <code class="highlighter-rouge">snake_case</code> to name a multi-word variable or type.</li>
-  <li>Non-<code class="highlighter-rouge">static</code> functions should be prefixed with appropriate names to
+  <li>Use <code class="language-plaintext highlighter-rouge">snake_case</code> to name a multi-word variable or type.</li>
+  <li>Non-<code class="language-plaintext highlighter-rouge">static</code> functions should be prefixed with appropriate names to
 avoid polluting the namespace.
     <ul>
       <li>The convention in library code is to use the name of the library.</li>
       <li>A good guide for application code is to use the filename.</li>
     </ul>
   </li>
-  <li>Name Boolean variables with a verb phrase including a verb like <code class="highlighter-rouge">is_</code>,
-<code class="highlighter-rouge">has_</code>, or <code class="highlighter-rouge">want_</code> so that the intent of the variable is clear in
+  <li>Name Boolean variables with a verb phrase including a verb like <code class="language-plaintext highlighter-rouge">is_</code>,
+<code class="language-plaintext highlighter-rouge">has_</code>, or <code class="language-plaintext highlighter-rouge">want_</code> so that the intent of the variable is clear in
 expressions and conditionals.</li>
   <li>Avoid magic numbers; define meaningful constants.  Prefer C language
 symbols over preprocessor symbols, because the former are visible in a
-symbolic debugger like <code class="highlighter-rouge">gdb</code>.</li>
-  <li>Use <code class="highlighter-rouge">SCREAMING_SNAKE_CASE</code> for, and <em>only</em> for, preprocessor symbols
+symbolic debugger like <code class="language-plaintext highlighter-rouge">gdb</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">SCREAMING_SNAKE_CASE</code> for, and <em>only</em> for, preprocessor symbols
 and values of enumeration type.</li>
-  <li>Prefix architecture-specific code with <code class="highlighter-rouge">arch_</code>, platform-specific
-code with <code class="highlighter-rouge">plat_</code>, and mode-specific code with <code class="highlighter-rouge">mode_</code>.</li>
+  <li>Prefix architecture-specific code with <code class="language-plaintext highlighter-rouge">arch_</code>, platform-specific
+code with <code class="language-plaintext highlighter-rouge">plat_</code>, and mode-specific code with <code class="language-plaintext highlighter-rouge">mode_</code>.</li>
 </ul>
 
 <h3 id="expressions">Expressions</h3>
@@ -380,24 +380,24 @@ code with <code class="highlighter-rouge">plat_</code>, and mode-specific code w
 <ul>
   <li>Avoid pointer arithmetic unless necessary.</li>
   <li>Always use preprocessor macros for bit manipulation (e.g., use
-<code class="highlighter-rouge">BIT(7)</code> instead of <code class="highlighter-rouge">1 &lt;&lt; 7</code>).</li>
+<code class="language-plaintext highlighter-rouge">BIT(7)</code> instead of <code class="language-plaintext highlighter-rouge">1 &lt;&lt; 7</code>).</li>
 </ul>
 
 <h3 id="structure">Structure</h3>
 
 <ul>
   <li>Put architecture- and platform-specific code in dedicated directories.</li>
-  <li>Only <code class="highlighter-rouge">static inline</code> functions are permitted in header files, and then
+  <li>Only <code class="language-plaintext highlighter-rouge">static inline</code> functions are permitted in header files, and then
 only for performance.</li>
-  <li>Variables at file scope must be marked as <code class="highlighter-rouge">static</code>.</li>
-  <li>Use public/private header files; avoid <code class="highlighter-rouge">extern</code> unless necessary.</li>
+  <li>Variables at file scope must be marked as <code class="language-plaintext highlighter-rouge">static</code>.</li>
+  <li>Use public/private header files; avoid <code class="language-plaintext highlighter-rouge">extern</code> unless necessary.</li>
   <li>General-purpose utility functions belong in shared libraries, not
-library-specific files, and vice versa.  (Consider checking <code class="highlighter-rouge">libutils</code>
-in the <code class="highlighter-rouge">util_libs</code> Git repository for existing functionality, and
+library-specific files, and vice versa.  (Consider checking <code class="language-plaintext highlighter-rouge">libutils</code>
+in the <code class="language-plaintext highlighter-rouge">util_libs</code> Git repository for existing functionality, and
 consider making useful additions there.)</li>
-  <li>Prefer <code class="highlighter-rouge">static inline</code> functions over preprocessor macros unless
+  <li>Prefer <code class="language-plaintext highlighter-rouge">static inline</code> functions over preprocessor macros unless
 preprocessor features are required or the macro is simple.</li>
-  <li>Put a comment after the <code class="highlighter-rouge">#endif</code> of an <code class="highlighter-rouge">#if</code>, <code class="highlighter-rouge">#ifdef</code>, or <code class="highlighter-rouge">#ifndef</code>
+  <li>Put a comment after the <code class="language-plaintext highlighter-rouge">#endif</code> of an <code class="language-plaintext highlighter-rouge">#if</code>, <code class="language-plaintext highlighter-rouge">#ifdef</code>, or <code class="language-plaintext highlighter-rouge">#ifndef</code>
 blocks that refers to the preprocessor symbol(s) upon which the code
 is guarded.
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef CONFIG_BLAH
@@ -409,13 +409,13 @@ is guarded.
 
 <h3 id="memory-allocation">Memory allocation</h3>
 
-<p>For memory that should be zeroed, use <code class="highlighter-rouge">calloc</code> rather than <code class="highlighter-rouge">malloc</code>
-followed by <code class="highlighter-rouge">memset</code> or <code class="highlighter-rouge">bzero</code>.</p>
+<p>For memory that should be zeroed, use <code class="language-plaintext highlighter-rouge">calloc</code> rather than <code class="language-plaintext highlighter-rouge">malloc</code>
+followed by <code class="language-plaintext highlighter-rouge">memset</code> or <code class="language-plaintext highlighter-rouge">bzero</code>.</p>
 
 <h3 id="commenting">Commenting</h3>
 
 <ul>
-  <li>Prefer <code class="highlighter-rouge">/* this style */</code> comments over <code class="highlighter-rouge">// this style</code>.</li>
+  <li>Prefer <code class="language-plaintext highlighter-rouge">/* this style */</code> comments over <code class="language-plaintext highlighter-rouge">// this style</code>.</li>
   <li>Use Javadoc-style comments on function prototypes in headers.</li>
   <li>Document function parameters and return types, at minimum.</li>
 </ul>
@@ -428,35 +428,35 @@ followed by <code class="highlighter-rouge">memset</code> or <code class="highli
 platforms.</p>
 
 <ul>
-  <li>Use <code class="highlighter-rouge">seL4_Word</code> for word-sized things.</li>
-  <li>Use <code class="highlighter-rouge">void *</code> for untyped addresses.</li>
-  <li>Use <code class="highlighter-rouge">uintptr_t</code> for pointer arithmetic…</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">seL4_Word</code> for word-sized things.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">void *</code> for untyped addresses.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">uintptr_t</code> for pointer arithmetic…</li>
   <li>…but avoid pointer arithmetic unless necessary.</li>
-  <li>Use <code class="highlighter-rouge">size_t</code> for sizes of objects (including pointers themselves).</li>
-  <li>Use <code class="highlighter-rouge">unsigned int</code> for values known to be small.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">size_t</code> for sizes of objects (including pointers themselves).</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">unsigned int</code> for values known to be small.</li>
   <li>Use fixed-width types only when necessary, e.g., in device drivers.</li>
-  <li>Use <code class="highlighter-rouge">long</code> variants of built-in functions (<code class="highlighter-rouge">CLZL</code>) for 64-bit
+  <li>Use <code class="language-plaintext highlighter-rouge">long</code> variants of built-in functions (<code class="language-plaintext highlighter-rouge">CLZL</code>) for 64-bit
 compatibility, unless operating on a fixed-width type.</li>
-  <li>Use <code class="highlighter-rouge">typedef</code> to create aliases for all <code class="highlighter-rouge">enum</code> types.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">typedef</code> to create aliases for all <code class="language-plaintext highlighter-rouge">enum</code> types.</li>
 </ul>
 
 <h3 id="format-strings">Format strings</h3>
 
 <ul>
-  <li>Use 64-bit-friendly printing macros for <code class="highlighter-rouge">printf</code> (e.g., <code class="highlighter-rouge">PRIi32</code> for
-<code class="highlighter-rouge">uint32_t</code>).</li>
-  <li>Use <code class="highlighter-rouge">%p</code> for pointers.</li>
-  <li>Use <code class="highlighter-rouge">%zd</code> and <code class="highlighter-rouge">%zu</code> for <code class="highlighter-rouge">ssize_t</code> and <code class="highlighter-rouge">size_t</code> respectively.</li>
+  <li>Use 64-bit-friendly printing macros for <code class="language-plaintext highlighter-rouge">printf</code> (e.g., <code class="language-plaintext highlighter-rouge">PRIi32</code> for
+<code class="language-plaintext highlighter-rouge">uint32_t</code>).</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">%p</code> for pointers.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">%zd</code> and <code class="language-plaintext highlighter-rouge">%zu</code> for <code class="language-plaintext highlighter-rouge">ssize_t</code> and <code class="language-plaintext highlighter-rouge">size_t</code> respectively.</li>
 </ul>
 
 <h3 id="error-handling">Error handling</h3>
 
 <ul>
   <li>Always check error codes.</li>
-  <li>Use <code class="highlighter-rouge">assert</code> only to test invariants in code.</li>
-  <li>Use <code class="highlighter-rouge">ZF_LOGF</code> for fatal errors: it will call <code class="highlighter-rouge">abort()</code>.</li>
-  <li>For all other error reporting, use the appropriate <code class="highlighter-rouge">ZF_LOG</code> level.</li>
-  <li>Use only <code class="highlighter-rouge">ZF_LOG</code> macros for diagnostic messages–not <code class="highlighter-rouge">printf</code>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">assert</code> only to test invariants in code.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">ZF_LOGF</code> for fatal errors: it will call <code class="language-plaintext highlighter-rouge">abort()</code>.</li>
+  <li>For all other error reporting, use the appropriate <code class="language-plaintext highlighter-rouge">ZF_LOG</code> level.</li>
+  <li>Use only <code class="language-plaintext highlighter-rouge">ZF_LOG</code> macros for diagnostic messages–not <code class="language-plaintext highlighter-rouge">printf</code>.</li>
   <li>Try to follow a transactional approach to error handling: check input
 and report errors before modifying state.</li>
 </ul>
@@ -464,25 +464,25 @@ and report errors before modifying state.</li>
 <h2 id="kernel-code">Kernel code</h2>
 
 <ul>
-  <li>Use <code class="highlighter-rouge">word_t</code> for word-sized things.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">word_t</code> for word-sized things.</li>
   <li>Do not explicitly typecast between pointers and references (i.e.,
 integers used as, e.g., offsets into structures): use object-specific
-macros for this purpose, such as <code class="highlighter-rouge">TCB_REF</code> and <code class="highlighter-rouge">TCB_PTR</code>.</li>
+macros for this purpose, such as <code class="language-plaintext highlighter-rouge">TCB_REF</code> and <code class="language-plaintext highlighter-rouge">TCB_PTR</code>.</li>
 </ul>
 
 <h3 id="format-strings-1">Format strings</h3>
 
-<p>The in-kernel <code class="highlighter-rouge">printf</code> implementation is limited.</p>
+<p>The in-kernel <code class="language-plaintext highlighter-rouge">printf</code> implementation is limited.</p>
 
 <ul>
-  <li>Use <code class="highlighter-rouge">%p</code> for pointers.</li>
-  <li>Use <code class="highlighter-rouge">%lu</code> for words, and cast to avoid warnings.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">%p</code> for pointers.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">%lu</code> for words, and cast to avoid warnings.</li>
 </ul>
 
 <h3 id="error-handling-1">Error handling</h3>
 
-<p>Within seL4, the <code class="highlighter-rouge">decode</code> stage must only check conditions; the
-  <code class="highlighter-rouge">invoke</code> stage can alter state.</p>
+<p>Within seL4, the <code class="language-plaintext highlighter-rouge">decode</code> stage must only check conditions; the
+  <code class="language-plaintext highlighter-rouge">invoke</code> stage can alter state.</p>
 
 <h3 id="verification-requirements">Verification requirements</h3>
 
@@ -497,38 +497,38 @@ standard.  (The link is to the final draft before ratification; the
 official standard document cannot be distributed freely.)</li>
   <li>Avoid taking the address of a variable of automatic storage class.
 (In most C implementations, this means stack-allocated locals.)</li>
-  <li>Do not use floating-point types, e.g., <code class="highlighter-rouge">double</code> or <code class="highlighter-rouge">float</code>.</li>
-  <li>Do not use <code class="highlighter-rouge">restrict</code>.</li>
-  <li><code class="highlighter-rouge">union</code> types cannot be used; use the bitfield generator instead.</li>
-  <li>Do not preincrement or predecrement variables (<code class="highlighter-rouge">++x</code>, <code class="highlighter-rouge">--y</code>).</li>
-  <li>Do not use variable names that duplicate <code class="highlighter-rouge">typedef</code> type aliases:
+  <li>Do not use floating-point types, e.g., <code class="language-plaintext highlighter-rouge">double</code> or <code class="language-plaintext highlighter-rouge">float</code>.</li>
+  <li>Do not use <code class="language-plaintext highlighter-rouge">restrict</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">union</code> types cannot be used; use the bitfield generator instead.</li>
+  <li>Do not preincrement or predecrement variables (<code class="language-plaintext highlighter-rouge">++x</code>, <code class="language-plaintext highlighter-rouge">--y</code>).</li>
+  <li>Do not use variable names that duplicate <code class="language-plaintext highlighter-rouge">typedef</code> type aliases:
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">int</span> <span class="n">A</span><span class="p">;</span>
 <span class="n">A</span> <span class="n">A</span><span class="p">;</span>
 </code></pre></div>    </div>
   </li>
-  <li>Do not use fall-through cases in <code class="highlighter-rouge">switch</code> statements.</li>
+  <li>Do not use fall-through cases in <code class="language-plaintext highlighter-rouge">switch</code> statements.</li>
   <li>Do not use variadic argument lists.</li>
-  <li>Declare functions that take no arguments as taking a <code class="highlighter-rouge">void</code> argument.</li>
-  <li>References to linker addresses must be via <code class="highlighter-rouge">extern char[]</code> declarations
-rather than declarations of other types (such as <code class="highlighter-rouge">extern char</code> or
-<code class="highlighter-rouge">extern void *</code>).</li>
+  <li>Declare functions that take no arguments as taking a <code class="language-plaintext highlighter-rouge">void</code> argument.</li>
+  <li>References to linker addresses must be via <code class="language-plaintext highlighter-rouge">extern char[]</code> declarations
+rather than declarations of other types (such as <code class="language-plaintext highlighter-rouge">extern char</code> or
+<code class="language-plaintext highlighter-rouge">extern void *</code>).</li>
   <li>Do not pass arrays as arguments to functions expecting pointers.
     <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">some_pointer</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="n">foo</span><span class="p">(</span><span class="n">my_array</span><span class="p">);</span>
 </code></pre></div>    </div>
   </li>
-  <li>Do not declare local variables as <code class="highlighter-rouge">static</code>.</li>
-  <li>Prefix <code class="highlighter-rouge">struct</code> fields with the name of the <code class="highlighter-rouge">struct</code> to avoid
+  <li>Do not declare local variables as <code class="language-plaintext highlighter-rouge">static</code>.</li>
+  <li>Prefix <code class="language-plaintext highlighter-rouge">struct</code> fields with the name of the <code class="language-plaintext highlighter-rouge">struct</code> to avoid
 namespace conflicts in the proof.  (Much existing kernel code does not
 follow this directive; new code should adopt the recommended practice
 to avoid namespace collisions in proofs.)</li>
-  <li>Do not use <code class="highlighter-rouge">typedef</code> to create a type alias for an <code class="highlighter-rouge">enum</code>; always
-specify <code class="highlighter-rouge">enum</code> types as <code class="highlighter-rouge">word_t</code> (otherwise, the <code class="highlighter-rouge">enum</code> size is
+  <li>Do not use <code class="language-plaintext highlighter-rouge">typedef</code> to create a type alias for an <code class="language-plaintext highlighter-rouge">enum</code>; always
+specify <code class="language-plaintext highlighter-rouge">enum</code> types as <code class="language-plaintext highlighter-rouge">word_t</code> (otherwise, the <code class="language-plaintext highlighter-rouge">enum</code> size is
 determined by the compiler).</li>
-  <li>All <code class="highlighter-rouge">struct</code> definitions must be packed, i.e. not contain any implicit padding
+  <li>All <code class="language-plaintext highlighter-rouge">struct</code> definitions must be packed, i.e. not contain any implicit padding
 that is inserted by the compiler (otherwise memory content is
-unspecified). Use explicit <code class="highlighter-rouge">padding</code> fields of the required type size to
+unspecified). Use explicit <code class="language-plaintext highlighter-rouge">padding</code> fields of the required type size to
 remove implicit compiler padding.</li>
 </ul>
 
@@ -575,7 +575,7 @@ remove implicit compiler padding.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Wed Oct 18 11:52:29 2023 +1100 7b0cc2c80e

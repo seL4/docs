@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_imageh">Interface <code class="highlighter-rouge">guest_image.h</code></h2>
+<h2 id="interface-guest_imageh">Interface <code class="language-plaintext highlighter-rouge">guest_image.h</code></h2>
 
 <p>The guest image interface provides general utilites to load guest vm images (e.g. kernel, initrd, modules).
 This interface probably stops being relevant/useful after we start running a VM instance.</p>
@@ -350,39 +350,39 @@ This interface probably stops being relevant/useful after we start running a VM 
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_load_guest_kernelvm-kernel_name-load_address-alignment-guest_kernel_image"><code class="highlighter-rouge">vm_load_guest_kernel(vm, kernel_name, load_address, alignment, guest_kernel_image)</code></a></p>
+  <p><a href="#function-vm_load_guest_kernelvm-kernel_name-load_address-alignment-guest_kernel_image"><code class="language-plaintext highlighter-rouge">vm_load_guest_kernel(vm, kernel_name, load_address, alignment, guest_kernel_image)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_load_guest_modulevm-module_name-load_address-alignment-guest_image"><code class="highlighter-rouge">vm_load_guest_module(vm, module_name, load_address, alignment, guest_image)</code></a></p>
+  <p><a href="#function-vm_load_guest_modulevm-module_name-load_address-alignment-guest_image"><code class="language-plaintext highlighter-rouge">vm_load_guest_module(vm, module_name, load_address, alignment, guest_image)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-guest_image"><code class="highlighter-rouge">guest_image</code></a></p>
+  <p><a href="#struct-guest_image"><code class="language-plaintext highlighter-rouge">guest_image</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-guest_kernel_image"><code class="highlighter-rouge">guest_kernel_image</code></a></p>
+  <p><a href="#struct-guest_kernel_image"><code class="language-plaintext highlighter-rouge">guest_kernel_image</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_image.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_image.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_load_guest_kernelvm-kernel_name-load_address-alignment-guest_kernel_image">Function <code class="highlighter-rouge">vm_load_guest_kernel(vm, kernel_name, load_address, alignment, guest_kernel_image)</code></h3>
+<h3 id="function-vm_load_guest_kernelvm-kernel_name-load_address-alignment-guest_kernel_image">Function <code class="language-plaintext highlighter-rouge">vm_load_guest_kernel(vm, kernel_name, load_address, alignment, guest_kernel_image)</code></h3>
 
 <p>Load guest kernel image</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
-  <li><code class="highlighter-rouge">kernel_name {const char *}</code>: Name of the kernel image</li>
-  <li><code class="highlighter-rouge">load_address {uintptr_t}</code>: Address to load guest kernel image at</li>
-  <li><code class="highlighter-rouge">alignment {size_t}</code>: Alignment for loading kernel image</li>
-  <li><code class="highlighter-rouge">guest_kernel_image {guest_kernel_image_t *}</code>: Handle to information regarding the resulted loading of the guest kernel image</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">kernel_name {const char *}</code>: Name of the kernel image</li>
+  <li><code class="language-plaintext highlighter-rouge">load_address {uintptr_t}</code>: Address to load guest kernel image at</li>
+  <li><code class="language-plaintext highlighter-rouge">alignment {size_t}</code>: Alignment for loading kernel image</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_kernel_image {guest_kernel_image_t *}</code>: Handle to information regarding the resulted loading of the guest kernel image</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -393,18 +393,18 @@ This interface probably stops being relevant/useful after we start running a VM 
 
 <p>Back to <a href="#module-guest_imageh">interface description</a>.</p>
 
-<h3 id="function-vm_load_guest_modulevm-module_name-load_address-alignment-guest_image">Function <code class="highlighter-rouge">vm_load_guest_module(vm, module_name, load_address, alignment, guest_image)</code></h3>
+<h3 id="function-vm_load_guest_modulevm-module_name-load_address-alignment-guest_image">Function <code class="language-plaintext highlighter-rouge">vm_load_guest_module(vm, module_name, load_address, alignment, guest_image)</code></h3>
 
 <p>Load guest kernel module e.g. initrd</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
-  <li><code class="highlighter-rouge">module_name {const char *}</code>: Name of the module image</li>
-  <li><code class="highlighter-rouge">load_address {uintptr_t}</code>: Address to load guest kernel image at</li>
-  <li><code class="highlighter-rouge">alignment {size_t}</code>: Alignment for loading module image</li>
-  <li><code class="highlighter-rouge">guest_image {guest_image_t *}</code>: Handle to information regarding the resulted loading of the guest module image</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">module_name {const char *}</code>: Name of the module image</li>
+  <li><code class="language-plaintext highlighter-rouge">load_address {uintptr_t}</code>: Address to load guest kernel image at</li>
+  <li><code class="language-plaintext highlighter-rouge">alignment {size_t}</code>: Alignment for loading module image</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_image {guest_image_t *}</code>: Handle to information regarding the resulted loading of the guest module image</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -417,31 +417,31 @@ This interface probably stops being relevant/useful after we start running a VM 
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_image.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_image.h</code> defines the following structs.</p>
 
-<h3 id="struct-guest_image">Struct <code class="highlighter-rouge">guest_image</code></h3>
+<h3 id="struct-guest_image">Struct <code class="language-plaintext highlighter-rouge">guest_image</code></h3>
 
 <p>General datastructure for managing a guest image</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">load_paddr {uintptr_t}</code>: Base address (in guest physical) where the image was loaded</li>
-  <li><code class="highlighter-rouge">alignment {size_t}</code>: Alignment we used when loading the image</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of guest image</li>
+  <li><code class="language-plaintext highlighter-rouge">load_paddr {uintptr_t}</code>: Base address (in guest physical) where the image was loaded</li>
+  <li><code class="language-plaintext highlighter-rouge">alignment {size_t}</code>: Alignment we used when loading the image</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of guest image</li>
 </ul>
 
 <p>Back to <a href="#module-guest_imageh">interface description</a>.</p>
 
-<h3 id="struct-guest_kernel_image">Struct <code class="highlighter-rouge">guest_kernel_image</code></h3>
+<h3 id="struct-guest_kernel_image">Struct <code class="language-plaintext highlighter-rouge">guest_kernel_image</code></h3>
 
 <p>Stores information about the guest kernel image we are loading.</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">kernel_image {guest_image_t}</code>: Datastructure referring to guest kernel image</li>
-  <li><code class="highlighter-rouge">kernel_image_arch {guest_kernel_image_arch_t}</code>: Architecture specific information for loaded guest image</li>
+  <li><code class="language-plaintext highlighter-rouge">kernel_image {guest_image_t}</code>: Datastructure referring to guest kernel image</li>
+  <li><code class="language-plaintext highlighter-rouge">kernel_image_arch {guest_kernel_image_arch_t}</code>: Architecture specific information for loaded guest image</li>
 </ul>
 
 <p>Back to <a href="#module-guest_imageh">interface description</a>.</p>
@@ -544,7 +544,7 @@ This interface probably stops being relevant/useful after we start running a VM 
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

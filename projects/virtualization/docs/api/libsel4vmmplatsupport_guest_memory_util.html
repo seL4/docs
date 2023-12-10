@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_memory_utilh">Interface <code class="highlighter-rouge">guest_memory_util.h</code></h2>
+<h2 id="interface-guest_memory_utilh">Interface <code class="language-plaintext highlighter-rouge">guest_memory_util.h</code></h2>
 
 <p>The guest memory util interface provides various utilities and helpers for using the libsel4vm guest memory
 interface. The methods in the interface cover common usage patterns when managing memory for a VM instance.</p>
@@ -350,45 +350,45 @@ interface. The methods in the interface cover common usage patterns when managin
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-create_allocated_reservation_framevm-addr-rights-alloc_fault_callback-alloc_fault_cookie"><code class="highlighter-rouge">create_allocated_reservation_frame(vm, addr, rights, alloc_fault_callback, alloc_fault_cookie)</code></a></p>
+  <p><a href="#function-create_allocated_reservation_framevm-addr-rights-alloc_fault_callback-alloc_fault_cookie"><code class="language-plaintext highlighter-rouge">create_allocated_reservation_frame(vm, addr, rights, alloc_fault_callback, alloc_fault_cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-create_device_reservation_framevm-addr-rights-fault_callback-fault_cookie"><code class="highlighter-rouge">create_device_reservation_frame(vm, addr, rights, fault_callback, fault_cookie)</code></a></p>
+  <p><a href="#function-create_device_reservation_framevm-addr-rights-fault_callback-fault_cookie"><code class="language-plaintext highlighter-rouge">create_device_reservation_frame(vm, addr, rights, fault_callback, fault_cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-map_ut_alloc_reservation_with_base_paddrvm-paddr-reservation"><code class="highlighter-rouge">map_ut_alloc_reservation_with_base_paddr(vm, paddr, reservation)</code></a></p>
+  <p><a href="#function-map_ut_alloc_reservation_with_base_paddrvm-paddr-reservation"><code class="language-plaintext highlighter-rouge">map_ut_alloc_reservation_with_base_paddr(vm, paddr, reservation)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-map_ut_alloc_reservationvm-reservation"><code class="highlighter-rouge">map_ut_alloc_reservation(vm, reservation)</code></a></p>
+  <p><a href="#function-map_ut_alloc_reservationvm-reservation"><code class="language-plaintext highlighter-rouge">map_ut_alloc_reservation(vm, reservation)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-map_frame_alloc_reservationvm-reservation"><code class="highlighter-rouge">map_frame_alloc_reservation(vm, reservation)</code></a></p>
+  <p><a href="#function-map_frame_alloc_reservationvm-reservation"><code class="language-plaintext highlighter-rouge">map_frame_alloc_reservation(vm, reservation)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-map_maybe_device_reservationvm-reservation"><code class="highlighter-rouge">map_maybe_device_reservation(vm, reservation)</code></a></p>
+  <p><a href="#function-map_maybe_device_reservationvm-reservation"><code class="language-plaintext highlighter-rouge">map_maybe_device_reservation(vm, reservation)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_memory_util.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_memory_util.h</code> defines the following functions.</p>
 
-<h3 id="function-create_allocated_reservation_framevm-addr-rights-alloc_fault_callback-alloc_fault_cookie">Function <code class="highlighter-rouge">create_allocated_reservation_frame(vm, addr, rights, alloc_fault_callback, alloc_fault_cookie)</code></h3>
+<h3 id="function-create_allocated_reservation_framevm-addr-rights-alloc_fault_callback-alloc_fault_cookie">Function <code class="language-plaintext highlighter-rouge">create_allocated_reservation_frame(vm, addr, rights, alloc_fault_callback, alloc_fault_cookie)</code></h3>
 
 <p>Create and map a reservation for a vka allocated frame. The allocated frame is mapped in both the vm and vmm vspace</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">addr {uintptr_t}</code>: Address of emulated frame</li>
-  <li><code class="highlighter-rouge">rights {seL4_CapRights_t}</code>: Rights for mapping the allocated frame into the vm’s vspace</li>
-  <li><code class="highlighter-rouge">alloc_fault_callback {memory_fault_callback_fn}</code>: Fault callback for allocated frame</li>
-  <li><code class="highlighter-rouge">alloc_fault_cookie {void *}</code>: Cookie for fault callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr_t}</code>: Address of emulated frame</li>
+  <li><code class="language-plaintext highlighter-rouge">rights {seL4_CapRights_t}</code>: Rights for mapping the allocated frame into the vm’s vspace</li>
+  <li><code class="language-plaintext highlighter-rouge">alloc_fault_callback {memory_fault_callback_fn}</code>: Fault callback for allocated frame</li>
+  <li><code class="language-plaintext highlighter-rouge">alloc_fault_cookie {void *}</code>: Cookie for fault callback</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -399,18 +399,18 @@ interface. The methods in the interface cover common usage patterns when managin
 
 <p>Back to <a href="#module-guest_memory_utilh">interface description</a>.</p>
 
-<h3 id="function-create_device_reservation_framevm-addr-rights-fault_callback-fault_cookie">Function <code class="highlighter-rouge">create_device_reservation_frame(vm, addr, rights, fault_callback, fault_cookie)</code></h3>
+<h3 id="function-create_device_reservation_framevm-addr-rights-fault_callback-fault_cookie">Function <code class="language-plaintext highlighter-rouge">create_device_reservation_frame(vm, addr, rights, fault_callback, fault_cookie)</code></h3>
 
 <p>Create and map a reservation for a device frame. The device frame is mapped in both the vm and vmm vspace</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">addr {uintptr_t}</code>: Address of emulated frame</li>
-  <li><code class="highlighter-rouge">rights {seL4_CapRights_t}</code>: Rights for mapping the device frame into the vm’s vspace</li>
-  <li><code class="highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Fault callback for the frame</li>
-  <li><code class="highlighter-rouge">fault_cookie {void *}</code>: Cookie for fault callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr_t}</code>: Address of emulated frame</li>
+  <li><code class="language-plaintext highlighter-rouge">rights {seL4_CapRights_t}</code>: Rights for mapping the device frame into the vm’s vspace</li>
+  <li><code class="language-plaintext highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Fault callback for the frame</li>
+  <li><code class="language-plaintext highlighter-rouge">fault_cookie {void *}</code>: Cookie for fault callback</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -421,16 +421,16 @@ interface. The methods in the interface cover common usage patterns when managin
 
 <p>Back to <a href="#module-guest_memory_utilh">interface description</a>.</p>
 
-<h3 id="function-map_ut_alloc_reservation_with_base_paddrvm-paddr-reservation">Function <code class="highlighter-rouge">map_ut_alloc_reservation_with_base_paddr(vm, paddr, reservation)</code></h3>
+<h3 id="function-map_ut_alloc_reservation_with_base_paddrvm-paddr-reservation">Function <code class="language-plaintext highlighter-rouge">map_ut_alloc_reservation_with_base_paddr(vm, paddr, reservation)</code></h3>
 
 <p>Map a guest reservation backed with untyped frames allocated from a base paddr</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">paddr {uintptr_t}</code>: Base paddr to allocate from</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">paddr {uintptr_t}</code>: Base paddr to allocate from</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -441,15 +441,15 @@ interface. The methods in the interface cover common usage patterns when managin
 
 <p>Back to <a href="#module-guest_memory_utilh">interface description</a>.</p>
 
-<h3 id="function-map_ut_alloc_reservationvm-reservation">Function <code class="highlighter-rouge">map_ut_alloc_reservation(vm, reservation)</code></h3>
+<h3 id="function-map_ut_alloc_reservationvm-reservation">Function <code class="language-plaintext highlighter-rouge">map_ut_alloc_reservation(vm, reservation)</code></h3>
 
 <p>Map a guest reservation backed with untyped frames</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -460,15 +460,15 @@ interface. The methods in the interface cover common usage patterns when managin
 
 <p>Back to <a href="#module-guest_memory_utilh">interface description</a>.</p>
 
-<h3 id="function-map_frame_alloc_reservationvm-reservation">Function <code class="highlighter-rouge">map_frame_alloc_reservation(vm, reservation)</code></h3>
+<h3 id="function-map_frame_alloc_reservationvm-reservation">Function <code class="language-plaintext highlighter-rouge">map_frame_alloc_reservation(vm, reservation)</code></h3>
 
 <p>Map a guest reservation backed with free vka frames</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -479,15 +479,15 @@ interface. The methods in the interface cover common usage patterns when managin
 
 <p>Back to <a href="#module-guest_memory_utilh">interface description</a>.</p>
 
-<h3 id="function-map_maybe_device_reservationvm-reservation">Function <code class="highlighter-rouge">map_maybe_device_reservation(vm, reservation)</code></h3>
+<h3 id="function-map_maybe_device_reservationvm-reservation">Function <code class="language-plaintext highlighter-rouge">map_maybe_device_reservation(vm, reservation)</code></h3>
 
 <p>Map a guest reservation backed with device frames</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -596,7 +596,7 @@ interface. The methods in the interface cover common usage patterns when managin
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_boot_inith">Interface <code class="highlighter-rouge">guest_boot_init.h</code></h2>
+<h2 id="interface-guest_boot_inith">Interface <code class="language-plaintext highlighter-rouge">guest_boot_init.h</code></h2>
 
 <p>The libsel4vmmplatsupport x86 guest boot init interface provides helpers to initialise the booting state of
 a VM instance. This currently only targets booting a Linux guest OS.</p>
@@ -350,18 +350,18 @@ a VM instance. This currently only targets booting a Linux guest OS.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vmm_plat_init_guest_boot_structurevm-cmdline-guest_kernel_image-guest_ramdisk_image-guest_boot_info_addr"><code class="highlighter-rouge">vmm_plat_init_guest_boot_structure(vm, cmdline, guest_kernel_image, guest_ramdisk_image, guest_boot_info_addr)</code></a></p>
+  <p><a href="#function-vmm_plat_init_guest_boot_structurevm-cmdline-guest_kernel_image-guest_ramdisk_image-guest_boot_info_addr"><code class="language-plaintext highlighter-rouge">vmm_plat_init_guest_boot_structure(vm, cmdline, guest_kernel_image, guest_ramdisk_image, guest_boot_info_addr)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_plat_init_guest_thread_statevcpu-guest_entry_addr-guest_boot_info_addr"><code class="highlighter-rouge">vmm_plat_init_guest_thread_state(vcpu, guest_entry_addr, guest_boot_info_addr)</code></a></p>
+  <p><a href="#function-vmm_plat_init_guest_thread_statevcpu-guest_entry_addr-guest_boot_info_addr"><code class="language-plaintext highlighter-rouge">vmm_plat_init_guest_thread_state(vcpu, guest_entry_addr, guest_boot_info_addr)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_boot_init.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_boot_init.h</code> defines the following functions.</p>
 
-<h3 id="function-vmm_plat_init_guest_boot_structurevm-cmdline-guest_kernel_image-guest_ramdisk_image-guest_boot_info_addr">Function <code class="highlighter-rouge">vmm_plat_init_guest_boot_structure(vm, cmdline, guest_kernel_image, guest_ramdisk_image, guest_boot_info_addr)</code></h3>
+<h3 id="function-vmm_plat_init_guest_boot_structurevm-cmdline-guest_kernel_image-guest_ramdisk_image-guest_boot_info_addr">Function <code class="language-plaintext highlighter-rouge">vmm_plat_init_guest_boot_structure(vm, cmdline, guest_kernel_image, guest_ramdisk_image, guest_boot_info_addr)</code></h3>
 
 <p>Establish the necessary BIOS boot structures to initialise and boot a guest Linux OS. This includes the creation of a BIOS
 boot info structure, an e820 map and ACPI tables.
@@ -370,11 +370,11 @@ boot info structure, an e820 map and ACPI tables.
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the guest VM</li>
-  <li><code class="highlighter-rouge">cmdline {const char *}</code>: The guest Linux boot commandline</li>
-  <li><code class="highlighter-rouge">guest_kernel_image {guest_kernel_image_t}</code>: Guest kernel image (preloaded into the VM’s memory)</li>
-  <li><code class="highlighter-rouge">guest_ramdisk_image {guest_image_t}</code>: Guest ramdisk image (preloaded into the VM’s memory)</li>
-  <li><code class="highlighter-rouge">guest_boot_info_addr {uintptr_t *}</code>: Resulting address of loaded generated guest boot info structure</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the guest VM</li>
+  <li><code class="language-plaintext highlighter-rouge">cmdline {const char *}</code>: The guest Linux boot commandline</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_kernel_image {guest_kernel_image_t}</code>: Guest kernel image (preloaded into the VM’s memory)</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_ramdisk_image {guest_image_t}</code>: Guest ramdisk image (preloaded into the VM’s memory)</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_boot_info_addr {uintptr_t *}</code>: Resulting address of loaded generated guest boot info structure</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -385,16 +385,16 @@ boot info structure, an e820 map and ACPI tables.
 
 <p>Back to <a href="#module-guest_boot_inith">interface description</a>.</p>
 
-<h3 id="function-vmm_plat_init_guest_thread_statevcpu-guest_entry_addr-guest_boot_info_addr">Function <code class="highlighter-rouge">vmm_plat_init_guest_thread_state(vcpu, guest_entry_addr, guest_boot_info_addr)</code></h3>
+<h3 id="function-vmm_plat_init_guest_thread_statevcpu-guest_entry_addr-guest_boot_info_addr">Function <code class="language-plaintext highlighter-rouge">vmm_plat_init_guest_thread_state(vcpu, guest_entry_addr, guest_boot_info_addr)</code></h3>
 
 <p>Initialise the booting state of a guest VM, establishing the necessary thread state to launch a guest Linux OS</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the boot vcpu</li>
-  <li><code class="highlighter-rouge">guest_entry_addr {uintptr_t}</code>: Address of VM entry point (often entry point defined in kernel elf image)</li>
-  <li><code class="highlighter-rouge">guest_boot_info_addr {uintptr_t}</code>: Address of loaded guest boot info structure</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: A handle to the boot vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_entry_addr {uintptr_t}</code>: Address of VM entry point (often entry point defined in kernel elf image)</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_boot_info_addr {uintptr_t}</code>: Address of loaded guest boot info structure</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -503,7 +503,7 @@ boot info structure, an e820 map and ACPI tables.
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -173,17 +173,17 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <p>The ZCU102 also supports AArch32 mode. If you choose to build the AArch32 kernel,
-please be sure to pass <code class="highlighter-rouge">-DAARCH32=1</code> instead of <code class="highlighter-rouge">-DAARCH64=1</code>.</p>
+please be sure to pass <code class="language-plaintext highlighter-rouge">-DAARCH32=1</code> instead of <code class="language-plaintext highlighter-rouge">-DAARCH64=1</code>.</p>
 
 <h2 id="arm-trusted-firmware-atf">ARM Trusted Firmware (ATF)</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Xilinx/arm-trusted-firmware.git
 <span class="nb">cd </span>arm-trusted-firmware
 make <span class="nv">PLAT</span><span class="o">=</span>zynqmp <span class="nv">RESET_TO_BL31</span><span class="o">=</span>1 <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-
 </code></pre></div></div>
-<p>Generated ELF file can be found at <code class="highlighter-rouge">build/zynqmp/release/bl31/bl31.elf</code>.</p>
+<p>Generated ELF file can be found at <code class="language-plaintext highlighter-rouge">build/zynqmp/release/bl31/bl31.elf</code>.</p>
 
 <h2 id="u-boot">U-Boot</h2>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Xilinx/u-boot-xlnx.git
@@ -201,9 +201,9 @@ index fd825ebba6..24af549977 100644
 </span><span class="p">@@ -38,7 +38,6 @@</span> LINECOMMENT	"//".*\n
  #include "srcpos.h"
  #include "dtc-parser.tab.h"
-
--YYLTYPE yylloc;
- extern bool treesource_error;
+<span class="err">
+</span><span class="gd">-YYLTYPE yylloc;
+</span> extern bool treesource_error;
  
  /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
 </code></pre></div></div>
@@ -222,7 +222,7 @@ index 52b08c4dbe..c9ebd33d15 100644
  		printf("FAIL: current EL is not above EL1\n");
  		ret = EINVAL;
 </code></pre></div></div>
-<p>Generated ELF file is <code class="highlighter-rouge">u-boot.elf</code>.</p>
+<p>Generated ELF file is <code class="language-plaintext highlighter-rouge">u-boot.elf</code>.</p>
 
 <p>Upstream U-Boot also works; instructions are <a href="https://u-boot.readthedocs.io/en/stable/board/xilinx/zynqmp.html">here</a></p>
 
@@ -244,7 +244,7 @@ index 52b08c4dbe..c9ebd33d15 100644
   <li>Template: Zynq MP FSBL</li>
 </ul>
 
-<p>Generated ELF file is in <code class="highlighter-rouge">Debug</code> directory</p>
+<p>Generated ELF file is in <code class="language-plaintext highlighter-rouge">Debug</code> directory</p>
 
 <h3 id="pmu-firmware">PMU firmware</h3>
 
@@ -256,7 +256,7 @@ index 52b08c4dbe..c9ebd33d15 100644
   <li>Language: C</li>
 </ul>
 
-<p>Generated ELF file is in <code class="highlighter-rouge">Debug</code> directory</p>
+<p>Generated ELF file is in <code class="language-plaintext highlighter-rouge">Debug</code> directory</p>
 
 <h2 id="booting-via-jtag">Booting via JTAG</h2>
 
@@ -292,7 +292,7 @@ con
 <p>Set DIP switch (SW6) to SD boot (off, off, off, on)</p>
 
 <p>Create a output.bif file with the following content:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the_ROM_image:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the_ROM_image:
 {
     [bootloader, destination_cpu = a53-0] fsbl.elf
     [pmufw_image] pmufw.elf
@@ -345,7 +345,7 @@ bootelf 0x8000000
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Aug 28 09:28:12 2023 +0200 3f741e7f52

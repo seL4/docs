@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -335,7 +335,7 @@ as the GNU Debugger.</p>
 
 <h2 id="enabling-this-feature">Enabling this feature</h2>
 <p>You can enable and disable the hardware
-debugging API by going through the kernel’s configuration system by passing <code class="highlighter-rouge">-DHardwareDebugAPI=1</code>.</p>
+debugging API by going through the kernel’s configuration system by passing <code class="language-plaintext highlighter-rouge">-DHardwareDebugAPI=1</code>.</p>
 
 <p>Not all platforms support this feature for two main reasons:</p>
 
@@ -359,7 +359,7 @@ detail in the seL4 manual. This article will cover how to practically
 call them and use them in a prospective debugger.</p>
 
 <p>To view a current version of the seL4 manuals, please download the
-kernel source code and then <code class="highlighter-rouge">cd manual</code> and execute <code class="highlighter-rouge">make</code>.</p>
+kernel source code and then <code class="language-plaintext highlighter-rouge">cd manual</code> and execute <code class="language-plaintext highlighter-rouge">make</code>.</p>
 
 <p>Additionally, there is available source code that demonstrates how the invocations can be used practically: the seL4-Test repository holds code tests the debug APIs, and shows how to use them to set breakpoints, watchpoints and single-stepping, on both x86 and ARM:</p>
 
@@ -371,18 +371,18 @@ kernel source code and then <code class="highlighter-rouge">cd manual</code> and
 <p>The invocations take capabilities to TCBs, and perform operations on the TCB register context to virtualize the hardware debug feature for each thread.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_TCB_SetBreakpoint</code>: Takes a capability to a TCB, and a
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_SetBreakpoint</code>: Takes a capability to a TCB, and a
       hardware breakpoint register ID, and sets a breakpoint on a
       specified virtual address, for a range of addresses, for a
       certain access type (Read, Write, or both).</li>
-  <li><code class="highlighter-rouge">seL4_TCB_UnsetBreakpoint</code>: Takes a capability to a TCB, and
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_UnsetBreakpoint</code>: Takes a capability to a TCB, and
       both disables and clears the specific hardware breakpoint for
       that thread.</li>
-  <li><code class="highlighter-rouge">seL4_TCB_GetBreakpoint</code>: Takes a capability to a TCB, and
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_GetBreakpoint</code>: Takes a capability to a TCB, and
       returns information on whether or not the hardware breakpoint is
       enabled, and if enabled, what virtual address it will trigger
       on, and what types of accesses will trigger it.</li>
-  <li><code class="highlighter-rouge">seL4_TCB_ConfigureSingleStepping</code>: Takes a capability to a
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_ConfigureSingleStepping</code>: Takes a capability to a
       TCB, and configures a hardware debugging register to break on
       every instruction (or every Nth instruction), and send a message
       on the thread’s fault endpoint everytime it faults. You may
@@ -501,7 +501,7 @@ kernel source code and then <code class="highlighter-rouge">cd manual</code> and
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

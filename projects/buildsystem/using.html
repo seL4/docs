@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -345,17 +345,17 @@ cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm
 <p>We now break down each component in the above invocation:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-D</code> defines a variable, in the form <code class="highlighter-rouge">X=Y</code>.</li>
-  <li><code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> specifies the toolchain for cross-compilation, which cannot be changed after
+  <li><code class="language-plaintext highlighter-rouge">-D</code> defines a variable, in the form <code class="language-plaintext highlighter-rouge">X=Y</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">CROSS_COMPILER_PREFIX</code> specifies the toolchain for cross-compilation, which cannot be changed after
  build directory initialisation. For further details, please see “Cross Compiling”
  below.</li>
-  <li><code class="highlighter-rouge">CMAKE_TOOLCHAIN_FILE</code> which indicates that CMake should load the specified file as a
+  <li><code class="language-plaintext highlighter-rouge">CMAKE_TOOLCHAIN_FILE</code> which indicates that CMake should load the specified file as a
 ‘toolchain’ file. A toolchain file is able to set up the C compiler, linker etc., for building the project.
  In the example we assume a typical project layout, where seL4 is in the ‘kernel’ directory, at the top level.
  The <a href="https://github.com/seL4/seL4/blob/master/gcc.cmake">gcc.cmake</a>’ file from the seL4 repository sets
-  up C compilers and linkers using the <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code>.</li>
-  <li><code class="highlighter-rouge">-G Ninja</code> tells CMake to generate Ninja build scripts as opposed to GNU Makefiles. Only Ninja scripts are supported by parts of the kernel.</li>
-  <li><code class="highlighter-rouge">..</code> is the path to the top-level <code class="highlighter-rouge">CMakeLists.txt</code> file describing this project, which in this
+  up C compilers and linkers using the <code class="language-plaintext highlighter-rouge">CROSS_COMPILER_PREFIX</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">-G Ninja</code> tells CMake to generate Ninja build scripts as opposed to GNU Makefiles. Only Ninja scripts are supported by parts of the kernel.</li>
+  <li><code class="language-plaintext highlighter-rouge">..</code> is the path to the top-level <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file describing this project, which in this
 case is placed in the root directory of the project.</li>
 </ul>
 
@@ -369,7 +369,7 @@ case is placed in the root directory of the project.</li>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
 </code></pre></div></div>
 
-<p>After the build has completed, the resulting binaries will be in the <code class="highlighter-rouge">images/</code> subdirectory.</p>
+<p>After the build has completed, the resulting binaries will be in the <code class="language-plaintext highlighter-rouge">images/</code> subdirectory.</p>
 
 <h3 id="configuration">Configuration</h3>
 
@@ -378,7 +378,7 @@ case is placed in the root directory of the project.</li>
 <p>CMake has two types of configuration options:</p>
 
 <ul>
-  <li><em>Boolean options</em>, which are are either <code class="highlighter-rouge">ON</code> or <code class="highlighter-rouge">OFF</code>,</li>
+  <li><em>Boolean options</em>, which are are either <code class="language-plaintext highlighter-rouge">ON</code> or <code class="language-plaintext highlighter-rouge">OFF</code>,</li>
   <li><em>String options</em>, which can be set to any value, subject to restrictions set by the project authors.</li>
 </ul>
 
@@ -391,7 +391,7 @@ CMake configuration editors respect these and provide a radio selection.</p>
 you can use the following approaches to bring up a user-interface for option configuration:</p>
 
 <ul>
-  <li>A <code class="highlighter-rouge">ncurses</code> based configuration:</li>
+  <li>A <code class="language-plaintext highlighter-rouge">ncurses</code> based configuration:</li>
 </ul>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccmake <span class="nb">.</span>
@@ -404,17 +404,17 @@ you can use the following approaches to bring up a user-interface for option con
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake-gui <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>In both cases the path <code class="highlighter-rouge">.</code> should resolve to the same directory used in the build configuration.</p>
+<p>In both cases the path <code class="language-plaintext highlighter-rouge">.</code> should resolve to the same directory used in the build configuration.</p>
 
 <h4 id="changing-option-values">Changing option values</h4>
 
 <p>Any changes to configuration options will not be reflected in the user interface unless explicitly
-requested by using <code class="highlighter-rouge">(c)onfigure</code>, which may result in changes to the options available.
-For example if option <code class="highlighter-rouge">A</code> depends on boolean option <code class="highlighter-rouge">B</code>, <code class="highlighter-rouge">A</code> will not show up until <code class="highlighter-rouge">B</code> is enabled and
-<code class="highlighter-rouge">(c)onfigure</code> is used to reprocess the CMake files.</p>
+requested by using <code class="language-plaintext highlighter-rouge">(c)onfigure</code>, which may result in changes to the options available.
+For example if option <code class="language-plaintext highlighter-rouge">A</code> depends on boolean option <code class="language-plaintext highlighter-rouge">B</code>, <code class="language-plaintext highlighter-rouge">A</code> will not show up until <code class="language-plaintext highlighter-rouge">B</code> is enabled and
+<code class="language-plaintext highlighter-rouge">(c)onfigure</code> is used to reprocess the CMake files.</p>
 
-<p>To exit the configuration interface, use <code class="highlighter-rouge">(g)enerate and exit</code> or <code class="highlighter-rouge">(q)uit without generation</code>. CMake
-will not permit generation if the configuration is incomplete (<code class="highlighter-rouge">(c)onfigure</code> must be run and all
+<p>To exit the configuration interface, use <code class="language-plaintext highlighter-rouge">(g)enerate and exit</code> or <code class="language-plaintext highlighter-rouge">(q)uit without generation</code>. CMake
+will not permit generation if the configuration is incomplete (<code class="language-plaintext highlighter-rouge">(c)onfigure</code> must be run and all
 options set).</p>
 
 <p>To rebuild after changing configuration options, invoke ninja:</p>
@@ -432,7 +432,7 @@ approaches are used to present simple options to the user:</p>
 variables. By combining one or more of these together you
 can configure an entire system.</li>
   <li><strong>Meta configuration options</strong>:  Meta configuration options are normally
-passed as initial <code class="highlighter-rouge">-DVAR=FOO</code> command line arguments to CMake and will be
+passed as initial <code class="language-plaintext highlighter-rouge">-DVAR=FOO</code> command line arguments to CMake and will be
 programatically inspected by projects’ CMake scripts to (re)configure the
 system.</li>
 </ul>
@@ -440,27 +440,27 @@ system.</li>
 <h5 id="cmake-cache-scripts">CMake cache scripts:</h5>
 
 <p>CMake cache scripts provide subsets of preconfigured options, which allow the user of a project to
-avoid manually setting each option. Cache scripts have the file extension <code class="highlighter-rouge">.cmake</code>.</p>
+avoid manually setting each option. Cache scripts have the file extension <code class="language-plaintext highlighter-rouge">.cmake</code>.</p>
 
 <p>Projects may provide cache script files which each contain the cache
 settings necessary to configure a single feature or option. By combining
-multiple <code class="highlighter-rouge">.cmake</code> files, a project can be initialised in a specific way.
+multiple <code class="language-plaintext highlighter-rouge">.cmake</code> files, a project can be initialised in a specific way.
 Cache script configurations are provided
-by passing <code class="highlighter-rouge">-C &lt;file&gt;</code> to <code class="highlighter-rouge">cmake</code> when initialising the build directory. 
+by passing <code class="language-plaintext highlighter-rouge">-C &lt;file&gt;</code> to <code class="language-plaintext highlighter-rouge">cmake</code> when initialising the build directory. 
 For example, given a typical project structure,
-one might invoke <code class="highlighter-rouge">cmake</code> or <code class="highlighter-rouge">init-build.sh</code> with several of
+one might invoke <code class="language-plaintext highlighter-rouge">cmake</code> or <code class="language-plaintext highlighter-rouge">init-build.sh</code> with several of
 cache scripts as arguments.</p>
 
 <p>Multiple cached scripts can be specified on the command line, although if the same option is set twice
 only one value is used. Consider an example with several cache scripts for setting the architecture
-details (<code class="highlighter-rouge">arm.cmake</code>, <code class="highlighter-rouge">x86.cmake</code>) and for setting build options (<code class="highlighter-rouge">debug.cmake</code>, <code class="highlighter-rouge">release.cmake</code>).
+details (<code class="language-plaintext highlighter-rouge">arm.cmake</code>, <code class="language-plaintext highlighter-rouge">x86.cmake</code>) and for setting build options (<code class="language-plaintext highlighter-rouge">debug.cmake</code>, <code class="language-plaintext highlighter-rouge">release.cmake</code>).
 The intended usage is that one architectural cache file is used, and one build options file, as
 demonstrated below:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-C</span>../projects/awesome_project/configs/arm.cmake <span class="nt">-C</span>../projects/awesome_project/configs/debug.cmake <span class="nt">-DCROSS_COMPILER_PREFIX</span><span class="o">=</span>arm-linux-gnueabi- <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>../kernel/gcc.cmake <span class="nt">-G</span> Ninja ..
 </code></pre></div></div>
 
-<p>While nothing prevents the usage of both <code class="highlighter-rouge">arm.cmake</code> and <code class="highlighter-rouge">x86.cmake</code> at the same time, this does not
+<p>While nothing prevents the usage of both <code class="language-plaintext highlighter-rouge">arm.cmake</code> and <code class="language-plaintext highlighter-rouge">x86.cmake</code> at the same time, this does not
 make sense, and only one value for each option will be used.  For projects with multiple cache scripts,
 check which can be used together.</p>
 
@@ -470,9 +470,9 @@ check which can be used together.</p>
 These options are as follows:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-DPLATFORM=&lt;YOUR_PREFERENCE&gt;</code>: Selects the target system for the resulting
+  <li><code class="language-plaintext highlighter-rouge">-DPLATFORM=&lt;YOUR_PREFERENCE&gt;</code>: Selects the target system for the resulting
 binaries. Valid values for this variable are the first value (preceding the
-semicolon) on each line of the <code class="highlighter-rouge">config_choice</code> directive for each
+semicolon) on each line of the <code class="language-plaintext highlighter-rouge">config_choice</code> directive for each
 architecture:
     <ul>
       <li>For ARM: <a href="https://github.com/seL4/seL4/blob/master/src/arch/arm/config.cmake#L21">List in source</a>.</li>
@@ -480,16 +480,16 @@ architecture:
       <li>For RISC-V: <a href="https://github.com/seL4/seL4/blob/master/src/arch/riscv/config.cmake#L15">List in source</a>.</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">-DRELEASE</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: Turning this off compiles a debug build.
+  <li><code class="language-plaintext highlighter-rouge">-DRELEASE</code>: Set to <code class="language-plaintext highlighter-rouge">0</code> or <code class="language-plaintext highlighter-rouge">1</code>: Turning this off compiles a debug build.
 Turning it on compiles the project without debugging features enabled.</li>
-  <li><code class="highlighter-rouge">-DVERIFICATION</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: This is used to generate the version of
+  <li><code class="language-plaintext highlighter-rouge">-DVERIFICATION</code>: Set to <code class="language-plaintext highlighter-rouge">0</code> or <code class="language-plaintext highlighter-rouge">1</code>: This is used to generate the version of
 the seL4 kernel source which is <strong>VERIFIABLE</strong>. This does not produce a binary
 for the <strong>verified</strong> kernel platform.</li>
-  <li><code class="highlighter-rouge">-DSMP</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: Turns SMP (symmetric multiprocessing) support on or
+  <li><code class="language-plaintext highlighter-rouge">-DSMP</code>: Set to <code class="language-plaintext highlighter-rouge">0</code> or <code class="language-plaintext highlighter-rouge">1</code>: Turns SMP (symmetric multiprocessing) support on or
 off. By default it will enable support for up to 4 processors. To explicitly
 set the maximum number of supported CPUs, try setting
-<code class="highlighter-rouge">-DKernelMaxNumNodes=&lt;YOUR_PREFERENCE&gt;</code>.</li>
-  <li><code class="highlighter-rouge">-DSIMULATION</code>: Set to <code class="highlighter-rouge">0</code> or <code class="highlighter-rouge">1</code>: This produces a build of the project which
+<code class="language-plaintext highlighter-rouge">-DKernelMaxNumNodes=&lt;YOUR_PREFERENCE&gt;</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">-DSIMULATION</code>: Set to <code class="language-plaintext highlighter-rouge">0</code> or <code class="language-plaintext highlighter-rouge">1</code>: This produces a build of the project which
  is suited for running in an emulator such as QEMU.</li>
 </ul>
 
@@ -512,19 +512,19 @@ specifically targets the foreign machine.</p>
 <p>You can use the following command line options when when cross-compiling for an ARM-based machine:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-DAARCH32=TRUE</code>: Tells the build system that you are building for a 32-bit
+  <li><code class="language-plaintext highlighter-rouge">-DAARCH32=TRUE</code>: Tells the build system that you are building for a 32-bit
 ARM target. This will cause the build system to assume that you have a
 cross compiler installed which targets a system with the triplet name
-<code class="highlighter-rouge">arm-linux-gnueabi-</code>.</li>
-  <li><code class="highlighter-rouge">-DAARCH32HF=TRUE</code>: Tells the build system you’re building for a 32-bit ARM
+<code class="language-plaintext highlighter-rouge">arm-linux-gnueabi-</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">-DAARCH32HF=TRUE</code>: Tells the build system you’re building for a 32-bit ARM
 target which has hardware floating point support. Assumes you have a cross-
-compiler installed which targets <code class="highlighter-rouge">arm-linux-gnueabihf-</code>.</li>
-  <li><code class="highlighter-rouge">-DAARCH64=TRUE</code>: Tells the build system you’re building for a 64-bit ARM
+compiler installed which targets <code class="language-plaintext highlighter-rouge">arm-linux-gnueabihf-</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">-DAARCH64=TRUE</code>: Tells the build system you’re building for a 64-bit ARM
 target. Assumes you have a cross-compiler installed which targets
-<code class="highlighter-rouge">aarch64-linux-gnu-</code>.</li>
+<code class="language-plaintext highlighter-rouge">aarch64-linux-gnu-</code>.</li>
 </ul>
 
-<p>Another option is to explicitly specify the toolchain through <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>,
+<p>Another option is to explicitly specify the toolchain through <code class="language-plaintext highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>,
 which can be used to set the prefix of the
 cross-compiler to use.</p>
 
@@ -533,34 +533,34 @@ cross-compiler to use.</p>
 <p>You can use the following options when cross compiling for a RISC-V target:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-DRISCV32=TRUE</code>: Tells the build system that you are building for a 32-bit RISC-V
+  <li><code class="language-plaintext highlighter-rouge">-DRISCV32=TRUE</code>: Tells the build system that you are building for a 32-bit RISC-V
 target. This will cause the build system to assume that you have a cross-
 compiler installed which targets a system with the triplet name
-<code class="highlighter-rouge">riscv32-unknown-elf-</code>.</li>
-  <li><code class="highlighter-rouge">-DRISCV64=TRUE</code>: Tells the build system you’re building for a 64-bit RISC-V
+<code class="language-plaintext highlighter-rouge">riscv32-unknown-elf-</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">-DRISCV64=TRUE</code>: Tells the build system you’re building for a 64-bit RISC-V
 target. Assumes you have a cross-compiler installed which targets
-<code class="highlighter-rouge">riscv64-unknown-elf-</code>.</li>
+<code class="language-plaintext highlighter-rouge">riscv64-unknown-elf-</code>.</li>
 </ul>
 
-<p>Like ARM, you can explicitly specify the toolchain through <code class="highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>,
+<p>Like ARM, you can explicitly specify the toolchain through <code class="language-plaintext highlighter-rouge">-DCROSS_COMPILER_PREFIX</code>,
 which can be used to set the prefix of the
 cross-compiler to use.</p>
 
 <h4 id="cmake_build_type">CMAKE_BUILD_TYPE</h4>
 
-<p>The <code class="highlighter-rouge">CMAKE_BUILD_TYPE</code> option appears in CMake configuration editors and allows users to configure
+<p>The <code class="language-plaintext highlighter-rouge">CMAKE_BUILD_TYPE</code> option appears in CMake configuration editors and allows users to configure
 that build type (release, debug etc.). Note that this option is not respected by the seL4 kernel.</p>
 
 <h3 id="building-with-clang">Building with Clang</h3>
 
 <p>The kernel as well as, some other projects, can be built using the <a href="https://clang.llvm.org/">clang</a> compiler. To select this configuration,
-the <code class="highlighter-rouge">-DTRIPLE</code> variable must be set in the initial configuration step i.e pass in as an argument to the <code class="highlighter-rouge">init-build</code> script.</p>
+the <code class="language-plaintext highlighter-rouge">-DTRIPLE</code> variable must be set in the initial configuration step i.e pass in as an argument to the <code class="language-plaintext highlighter-rouge">init-build</code> script.</p>
 
-<p>The value of the <code class="highlighter-rouge">TRIPLE</code> should be the <a href="https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html#target-triple">target</a> for which you are compiling.</p>
+<p>The value of the <code class="language-plaintext highlighter-rouge">TRIPLE</code> should be the <a href="https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html#target-triple">target</a> for which you are compiling.</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build <span class="nt">-DTRIPLE</span><span class="o">=</span>x86_64-linux-gnu &lt;COMMAND_LINE_OPTIONS_HERE&gt;
 </code></pre></div></div>
-<p>The <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> argument is unnecessary and ignored when compiling with clang. When building for arm based targets, the target <code class="highlighter-rouge">TRIPLE</code> will be equal
-to the <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> (when using gcc) without the trailing ‘-‘.</p>
+<p>The <code class="language-plaintext highlighter-rouge">CROSS_COMPILER_PREFIX</code> argument is unnecessary and ignored when compiling with clang. When building for arm based targets, the target <code class="language-plaintext highlighter-rouge">TRIPLE</code> will be equal
+to the <code class="language-plaintext highlighter-rouge">CROSS_COMPILER_PREFIX</code> (when using gcc) without the trailing ‘-‘.</p>
 
 <p>Using clang to compile for RISC-V based targets is currently not supported.</p>
 
@@ -675,7 +675,7 @@ to the <code class="highlighter-rouge">CROSS_COMPILER_PREFIX</code> (when using 
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

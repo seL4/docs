@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
@@ -270,7 +270,7 @@ VSpace, and subsequently executed, while facilitating IPC between the
 two modules. It also shows how threads with different CSpaces have to
 maneuver in order to pass capabilities to one another.</p>
 
-<p>Don’t gloss over the globals declared before <code class="highlighter-rouge">main()</code> – they’re declared
+<p>Don’t gloss over the globals declared before <code class="language-plaintext highlighter-rouge">main()</code> – they’re declared
 for your benefit so you can grasp some of the basic data structures.
 Uncomment them one by one as needed when going through the tasks.</p>
 
@@ -316,11 +316,11 @@ ninja
 
 <h2 id="exercises">Exercises</h2>
 
-<p>Tasks in this tutorial are in <code class="highlighter-rouge">main.c</code> and <code class="highlighter-rouge">app.c</code>.</p>
+<p>Tasks in this tutorial are in <code class="language-plaintext highlighter-rouge">main.c</code> and <code class="language-plaintext highlighter-rouge">app.c</code>.</p>
 
 <p>When you first run this tutorial, you should see the following output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Node 0 of 1
 IOPT levels:     4294967295
 IPC buffer:      0x57f000
@@ -344,12 +344,12 @@ availability, and several other privileged bits of information, the init
 thread is also responsible, surprisingly, for reserving certain critical
 ranges of memory as being used, and unavailable for applications.</p>
 
-<p>This call to <code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code> does
+<p>This call to <code class="language-plaintext highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code> does
 that. For an interesting look at what sorts of things the init thread
 does, see:
-<code class="highlighter-rouge">static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])</code>,
+<code class="language-plaintext highlighter-rouge">static int reserve_initial_task_regions(vspace_t *vspace, void *existing_frames[])</code>,
 which is eventually called on by
-<code class="highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code>. So while this
+<code class="language-plaintext highlighter-rouge">sel4utils_bootstrap_vspace_with_bootinfo_leaky()</code>. So while this
 function may seem tedious, it’s doing some important things.</p>
 
 <ul>
@@ -372,15 +372,15 @@ function may seem tedious, it’s doing some important things.</p>
 
 <p>On success, you should see a different error:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [handleUnknownSyscall/106 T0xffffff801ffb5400 "dynamic-3" @40139e]: SysDebugNameThread: cap is not a TCB, halting&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [handleUnknownSyscall/106 T0xffffff801ffb5400 "dynamic-3" @40139e]: SysDebugNameThread: cap is not a TCB, halting&gt;&gt;
 halting...
 </code></pre></div></div>
 
 <h3 id="configure-a-process">Configure a process</h3>
 
-<p><code class="highlighter-rouge">sel4utils_configure_process_custom</code> took a large amount of the work
+<p><code class="language-plaintext highlighter-rouge">sel4utils_configure_process_custom</code> took a large amount of the work
 out of creating a new “processs”. We skipped a number of steps. Take a
-look at the source for <code class="highlighter-rouge">sel4utils_configure_process_custom()</code> and
+look at the source for <code class="language-plaintext highlighter-rouge">sel4utils_configure_process_custom()</code> and
 notice how it spawns the new thread with its own CSpace by
 automatically. This will have an effect on our tutorial! It means that
 the new thread we’re creating will not share a CSpace with our main
@@ -408,12 +408,12 @@ thread.</p>
 
 <p>On success, you should see a different error:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dynamic-3: main@main.c:196 [Cond failed: new_ep_cap == 0]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dynamic-3: main@main.c:196 [Cond failed: new_ep_cap == 0]
 	Failed to mint a badged copy of the IPC endpoint into the new thread's CSpace.
 	sel4utils_mint_cap_to_process takes a cspacepath_t: double check what you passed.
 </code></pre></div></div>
 
-<h3 id="get-a-cspacepath">Get a <code class="highlighter-rouge">cspacepath</code></h3>
+<h3 id="get-a-cspacepath">Get a <code class="language-plaintext highlighter-rouge">cspacepath</code></h3>
 
 <p>Now, in this particular case, we are making the new thread be the
 sender. Recall that the sender must have a capability to the endpoint
@@ -434,7 +434,7 @@ execution. We could also have spawned the new thread as a listener
 instead, and made it wait for us to send it a message with a sufficient
 capability.</p>
 
-<p>So we use <code class="highlighter-rouge">vka_cspace_make_path()</code>, which locates one free capability
+<p>So we use <code class="language-plaintext highlighter-rouge">vka_cspace_make_path()</code>, which locates one free capability
 slot in the selected CSpace, and returns a handle to it, to us. We then
 filled that free slot in the new thread’s CSpace with a <strong>badged</strong>
 capability to the endpoint we are listening on, so as so allow it to
@@ -489,7 +489,7 @@ free slot that the VKA library found for us.</p>
 
 <p>On success, the output should look something like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
 main: hello world
 dynamic-3: main@main.c:247 [Cond failed: sender_badge != EP_BADGE]
 	The badge we received from the new thread didn't match our expectation
@@ -532,7 +532,7 @@ communicate with us, we can let it run. Complete this step and proceed.</p>
 <p>On success, you should be able to see the second process running. The output should
 be as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
 process_2: hey hey hey
 main@app.c:67 [Cond failed: msg != ~MSG_DATA]
 	Unexpected response from root thread.
@@ -543,7 +543,7 @@ dynamic-3: main@main.c:255 [Cond failed: sender_badge != EP_BADGE]
 
 <h3 id="receive-a-message">Receive a message</h3>
 
-<p>We now wait for the new thread to send us data using <code class="highlighter-rouge">seL4_Recv()</code>…
+<p>We now wait for the new thread to send us data using <code class="language-plaintext highlighter-rouge">seL4_Recv()</code>…
 Then we verify the fidelity of the data that was transmitted.</p>
 
 <ul>
@@ -568,7 +568,7 @@ Then we verify the fidelity of the data that was transmitted.</p>
 
 <h3 id="send-a-reply">Send a reply</h3>
 
-<p>Another demonstration of the <code class="highlighter-rouge">sel4_Reply()</code> facility: we reply to the
+<p>Another demonstration of the <code class="language-plaintext highlighter-rouge">sel4_Reply()</code> facility: we reply to the
 message sent by the new thread.</p>
 
 <ul>
@@ -594,9 +594,9 @@ message sent by the new thread.</p>
 
 <h3 id="client-call">Client Call</h3>
 
-<p>In the new thread, we initiate communications by using <code class="highlighter-rouge">seL4_Call()</code>. As
+<p>In the new thread, we initiate communications by using <code class="language-plaintext highlighter-rouge">seL4_Call()</code>. As
 outlined above, the receiving thread replies to us using
-<code class="highlighter-rouge">sel4_ReplyRecv()</code>. The new thread then checks the fidelity of the data
+<code class="language-plaintext highlighter-rouge">sel4_ReplyRecv()</code>. The new thread then checks the fidelity of the data
 that was sent, and that’s the end.</p>
 
 <ul>
@@ -620,7 +620,7 @@ that was sent, and that’s the end.</p>
 
 <p>On success, you should see the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>process_2: hey hey hey
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>process_2: hey hey hey
 main: got a message 0x6161 from 0x61
 process_2: got a reply: 0xffffffffffff9e9e
 </code></pre></div></div>
@@ -678,7 +678,7 @@ dynamic-3/dynamic-3.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

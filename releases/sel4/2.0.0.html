@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -215,17 +215,17 @@ notification object itself.</p>
 </ul>
 
 <p>tracepoints at once added
-<code class="highlighter-rouge">CONFIG_RELEASE_PRINTF</code> in addition to <code class="highlighter-rouge">CONFIG_DEBUG</code> and <code class="highlighter-rouge">CONFIG_RELEASE</code>, which
+<code class="language-plaintext highlighter-rouge">CONFIG_RELEASE_PRINTF</code> in addition to <code class="language-plaintext highlighter-rouge">CONFIG_DEBUG</code> and <code class="language-plaintext highlighter-rouge">CONFIG_RELEASE</code>, which
 enables printf in a release build</p>
 
 <h1 id="api-changes">API Changes</h1>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_Recv</code> replaces <code class="highlighter-rouge">seL4_Wait</code> on endpoints</li>
-  <li><code class="highlighter-rouge">seL4_Wait</code> is now only used on notification objects</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Recv</code> replaces <code class="language-plaintext highlighter-rouge">seL4_Wait</code> on endpoints</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Wait</code> is now only used on notification objects</li>
   <li>Async endpoint -&gt; notification object</li>
   <li>sync endpoint -&gt; endpoint</li>
-  <li><code class="highlighter-rouge">seL4_Recv</code> on an endpoint may now return signals sent to a
+  <li><code class="language-plaintext highlighter-rouge">seL4_Recv</code> on an endpoint may now return signals sent to a
     thread’s</li>
 </ul>
 
@@ -234,33 +234,33 @@ enables printf in a release build</p>
 <h2 id="api-additions">API Additions</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_NotificationObject</code> replaces deprecated
-    <code class="highlighter-rouge">seL4_AsyncEndpointObject</code></li>
-  <li><code class="highlighter-rouge">seL4_NotificationBits</code> size in bits of a notification object</li>
-  <li><code class="highlighter-rouge">seL4_IRQHandler_SetNotification</code> replaces deprecated
-    <code class="highlighter-rouge">seL4_IRQHandler_SetEndpoint</code></li>
-  <li><code class="highlighter-rouge">seL4_Recv</code> replaces <code class="highlighter-rouge">seL4_Wait</code> for endpoints</li>
-  <li><code class="highlighter-rouge">seL4_Wait</code> used on notifications</li>
-  <li><code class="highlighter-rouge">seL4_NBRecv</code> non-blocking (polling) receive on an endpoint,
+  <li><code class="language-plaintext highlighter-rouge">seL4_NotificationObject</code> replaces deprecated
+    <code class="language-plaintext highlighter-rouge">seL4_AsyncEndpointObject</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_NotificationBits</code> size in bits of a notification object</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IRQHandler_SetNotification</code> replaces deprecated
+    <code class="language-plaintext highlighter-rouge">seL4_IRQHandler_SetEndpoint</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Recv</code> replaces <code class="language-plaintext highlighter-rouge">seL4_Wait</code> for endpoints</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Wait</code> used on notifications</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_NBRecv</code> non-blocking (polling) receive on an endpoint,
     which fails</li>
 </ul>
 
-<p>if there is no message waiting. Opposite of <code class="highlighter-rouge">NBSend</code> (which silently
+<p>if there is no message waiting. Opposite of <code class="language-plaintext highlighter-rouge">NBSend</code> (which silently
 fails if there is no receiver waiting)</p>
 <ul>
-  <li><code class="highlighter-rouge">seL4_Poll</code> collects any
+  <li><code class="language-plaintext highlighter-rouge">seL4_Poll</code> collects any
 signals from a notification objects, returns zero if there are none</li>
-  <li><code class="highlighter-rouge">seL4_Signal</code> replaces deprecated <code class="highlighter-rouge">seL4_Notify</code></li>
-  <li><code class="highlighter-rouge">seL4_TCB_BindNotification</code> bind a notification to a tcb</li>
-  <li><code class="highlighter-rouge">seL4_TCB_UnbindNotification</code> unbind a notification from a tcb</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Signal</code> replaces deprecated <code class="language-plaintext highlighter-rouge">seL4_Notify</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_BindNotification</code> bind a notification to a tcb</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_UnbindNotification</code> unbind a notification from a tcb</li>
 </ul>
 
 <h2 id="deprecations">Deprecations</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_AsyncEndpointObject</code></li>
-  <li><code class="highlighter-rouge">seL4_Notify</code></li>
-  <li><code class="highlighter-rouge">seL4_IRQHandler_SetEndpoint</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_AsyncEndpointObject</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_Notify</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IRQHandler_SetEndpoint</code></li>
 </ul>
 
 <h1 id="note-on-syscall-names">Note on Syscall names</h1>
@@ -281,10 +281,10 @@ library repositories. To see the changes please compare 1.0.4.xml and
 
 <h1 id="upgrade-notes">Upgrade notes</h1>
 
-<p>Calls to <code class="highlighter-rouge">seL4_Wait</code> no longer return a <code class="highlighter-rouge">seL4_MessageInfo_t</code>
-as <code class="highlighter-rouge">seL4_Wait</code> is intended to be used on notification objects.
-Calls to the prior version of <code class="highlighter-rouge">seL4_Wait</code> need to be replaced with
-<code class="highlighter-rouge">seL4_Recv</code>.</p>
+<p>Calls to <code class="language-plaintext highlighter-rouge">seL4_Wait</code> no longer return a <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code>
+as <code class="language-plaintext highlighter-rouge">seL4_Wait</code> is intended to be used on notification objects.
+Calls to the prior version of <code class="language-plaintext highlighter-rouge">seL4_Wait</code> need to be replaced with
+<code class="language-plaintext highlighter-rouge">seL4_Recv</code>.</p>
 
 <p>If you don’t want to upgrade yet - don’t worry. Both the
 sel4test-manifest and verification manifest repositories have manifests
@@ -751,7 +751,7 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

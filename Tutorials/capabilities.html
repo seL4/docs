@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
@@ -321,18 +321,18 @@ capabilities in seL4:</p>
 
 <ul>
   <li>capabilities that control access to kernel objects such as thread control blocks,</li>
-  <li>capabilities that control access to abstract resources such as <code class="highlighter-rouge">IRQControl</code>, and</li>
+  <li>capabilities that control access to abstract resources such as <code class="language-plaintext highlighter-rouge">IRQControl</code>, and</li>
   <li>untyped capabilities, that are responsible for memory ranges and allocation
 from those (see also the <a href="https://docs.sel4.systems/Tutorials/untyped.html">Untyped</a> tutorial).</li>
 </ul>
 
 <p>In seL4, capabilities to all resources controlled by the kernel are given to the root
 task on initialisation. To change the state of any resource, user code can use
-the kernel API, available in <code class="highlighter-rouge">libsel4</code> to request an operation on the resource
+the kernel API, available in <code class="language-plaintext highlighter-rouge">libsel4</code> to request an operation on the resource
 a specific capability points to.</p>
 
 <p>For example, the root task is provided with a capability to its own thread
-control block (TCB), <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>, a constant defined by <code class="highlighter-rouge">libsel4</code>.
+control block (TCB), <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code>, a constant defined by <code class="language-plaintext highlighter-rouge">libsel4</code>.
 To change the properties of the initial TCB, one can use any of the <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_tcb">TCB API
 methods</a> on this
 capability.</p>
@@ -355,8 +355,8 @@ common operation in the root task if a larger stack is needed:</p>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="n">seL4_NoError</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>The first argument of <code class="highlighter-rouge">seL4_TCB_ReadRegisters</code> and <code class="highlighter-rouge">seL4_TCB_WriteRegisters</code>
-addresses the capability in slot <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>. We will explain
+<p>The first argument of <code class="language-plaintext highlighter-rouge">seL4_TCB_ReadRegisters</code> and <code class="language-plaintext highlighter-rouge">seL4_TCB_WriteRegisters</code>
+addresses the capability in slot <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code>. We will explain
 addressing and slots below. The rest of the arguments are specific to the
 invocations. Further documentation is available on
 <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#read-registers">TCB_ReadRegisters</a>
@@ -366,7 +366,7 @@ and
 <h3 id="cnodes-and-cslots">CNodes and CSlots</h3>
 
 <p>A <em>CNode</em> (capability-node) is an object full of capabilities: you can think of a CNode as an array of capabilities.
-We refer to slots as <em>CSlots</em> (capability-slots). In the example above, <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> is the slot in the root
+We refer to slots as <em>CSlots</em> (capability-slots). In the example above, <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code> is the slot in the root
 task’s CNode that contains the capability to the root task’s TCB.
 Each CSlot in a CNode can be in the following state:</p>
 
@@ -378,10 +378,10 @@ Each CSlot in a CNode can be in the following state:</p>
 <p>By convention the 0th CSlot is kept empty, for the same reasons as keeping NULL unmapped in
  process virtual address spaces: to avoid errors when uninitialised slots are used unintentionally.</p>
 
-<p>The field <code class="highlighter-rouge">info-&gt;CNodeSizeBits</code> gives a measure of the size of the initial
-CNode: it will have <code class="highlighter-rouge">1 &lt;&lt; CNodeSizeBits</code> CSlots. A CSlot has
-<code class="highlighter-rouge">1 &lt;&lt; seL4_SlotBits</code> bytes, so the size of a CNode in bytes is
-<code class="highlighter-rouge">1 &lt;&lt; (CNodeSizeBits + seL4_SlotBits</code>.</p>
+<p>The field <code class="language-plaintext highlighter-rouge">info-&gt;CNodeSizeBits</code> gives a measure of the size of the initial
+CNode: it will have <code class="language-plaintext highlighter-rouge">1 &lt;&lt; CNodeSizeBits</code> CSlots. A CSlot has
+<code class="language-plaintext highlighter-rouge">1 &lt;&lt; seL4_SlotBits</code> bytes, so the size of a CNode in bytes is
+<code class="language-plaintext highlighter-rouge">1 &lt;&lt; (CNodeSizeBits + seL4_SlotBits</code>.</p>
 
 <h3 id="cspaces">CSpaces</h3>
 
@@ -406,13 +406,13 @@ CNode. The root task always has a CSpace root capability that points to a CNode.
 
 <p>In an <em>invocation</em>, a CSlot is addressed by implicitly invoking the CSpace root
 of the thread that is performing the invocation. In the code example above, we
-use an invocation on the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot to read from and write to
+use an invocation on the <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot to read from and write to
 the registers of the TCB represented by the capability in that specific CSlot.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapInitThreadTCB</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">num_registers</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">registers</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>This implicitly looks up the <code class="highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot in the CNode pointed to
+<p>This implicitly looks up the <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code> CSlot in the CNode pointed to
 by the CSpace root capability of the calling thread, which here is the root task.</p>
 
 <p>When it is clear by context and not otherwise relevant, we sometimes identify
@@ -440,20 +440,20 @@ itself is indexed from the CSpace root.</p>
   <li><em>depth</em> How far to traverse the CNode before resolving the CSlot.</li>
 </ul>
 
-<p>For the initial, single-level CSpace, the <em>depth</em> value is always <code class="highlighter-rouge">seL4_WordBits</code>. For invocations, the depth is always
- implicitly <code class="highlighter-rouge">seL4_WordBits</code>.
+<p>For the initial, single-level CSpace, the <em>depth</em> value is always <code class="language-plaintext highlighter-rouge">seL4_WordBits</code>. For invocations, the depth is always
+ implicitly <code class="language-plaintext highlighter-rouge">seL4_WordBits</code>.
 More on CSpace depth will be discussed in future tutorials.</p>
 
 <p>In the example below, we directly address the root task’s TCB to make a copy of
 it in the 0th slot in the CSpace root. <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#copy">CNode
 copy</a> requires two
 CSlots to be directly addressed: the destination CSlot, and the source CSlot.
-<code class="highlighter-rouge">seL4_CapInitThreadCNode</code> is used in three different roles here: as source root,
+<code class="language-plaintext highlighter-rouge">seL4_CapInitThreadCNode</code> is used in three different roles here: as source root,
 as destination root, and as source slot. It is used as source and destination
 root, because we are copying within the same CNode – the CNode of the initial
 thread. It is used as source slot, because within the CNode of the initial
-thread, <code class="highlighter-rouge">seL4_CapInitThreadCNode</code> is the slot of the capability we want to copy
-(and the slot <code class="highlighter-rouge">0</code> is the destination).</p>
+thread, <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadCNode</code> is the slot of the capability we want to copy
+(and the slot <code class="language-plaintext highlighter-rouge">0</code> is the destination).</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_Error</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_CNode_Copy</span><span class="p">(</span>
         <span class="n">seL4_CapInitThreadCNode</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">,</span> <span class="c1">// destination root, slot, and depth</span>
@@ -467,10 +467,10 @@ thread, <code class="highlighter-rouge">seL4_CapInitThreadCNode</code> is the sl
 <h3 id="initial-cspace">Initial CSpace</h3>
 
 <p>The root task has a CSpace, set up by seL4 during boot, which contains capabilities to all
-resources manages by seL4. We have already seen several capabilities in the root CSpace: <code class="highlighter-rouge">seL4_CapInitThreadTCB</code>,
- and <code class="highlighter-rouge">seL4_CapInitThreadCNode</code>. Both of these are specified by constants in <code class="highlighter-rouge">libsel4</code>, however not all initial
- capabilities are statically specified. Other capabilities are described by the <code class="highlighter-rouge">seL4_BootInfo</code> data structure,
- described in <code class="highlighter-rouge">libsel4</code> and initialised by seL4. <code class="highlighter-rouge">seL4_BootInfo</code> describes ranges of initial capabilities,
+resources manages by seL4. We have already seen several capabilities in the root CSpace: <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code>,
+ and <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadCNode</code>. Both of these are specified by constants in <code class="language-plaintext highlighter-rouge">libsel4</code>, however not all initial
+ capabilities are statically specified. Other capabilities are described by the <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> data structure,
+ described in <code class="language-plaintext highlighter-rouge">libsel4</code> and initialised by seL4. <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> describes ranges of initial capabilities,
  including free slots available in the initial CSpace.</p>
 
 <h2 id="exercises">Exercises</h2>
@@ -490,7 +490,7 @@ and calculates the size (in slots) of the initial CNode object.</p>
 
 <p>When you run the tutorial without changes, you will see something like the following output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Initial CNode is 65536 slots in size
 The CNode is 0 bytes in size
 &lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "rootserver" @401397]: Attempted to invoke a null cap #4095.&gt;&gt;
@@ -499,7 +499,7 @@ main@main.c:33 [Cond failed: error]
 </code></pre></div></div>
 
 <p>By the end of the tutorial all of the output will make sense. For now, the first line is from the kernel.
-The second is the <code class="highlighter-rouge">printf</code>, telling you the size of the initial CNode.
+The second is the <code class="language-plaintext highlighter-rouge">printf</code>, telling you the size of the initial CNode.
 The third line stating the number of slots in the CSpace, is incorrect, and your first task is to fix that.</p>
 
 <h3 id="how-big-is-your-cspace">How big is your CSpace?</h3>
@@ -514,7 +514,7 @@ The third line stating the number of slots in the CSpace, is incorrect, and your
 
 <p>After the output showing the number of bytes in the CSpace, you will see an error:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "rootserver" @401397]: Attempted to invoke a null cap #4095.&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "rootserver" @401397]: Attempted to invoke a null cap #4095.&gt;&gt;
 main@main.c:33 [Cond failed: error]
     Failed to set priority
 </code></pre></div></div>
@@ -539,7 +539,7 @@ main@main.c:33 [Cond failed: error]
 </code></pre></div></div>
 <p>On success, you will now see the output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/94 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Destination not empty.&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/94 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Destination not empty.&gt;&gt;
 main@main.c:44 [Cond failed: error != seL4_FailedLookup]
     first_free_slot is not empty
 </code></pre></div></div>
@@ -548,16 +548,16 @@ main@main.c:44 [Cond failed: error != seL4_FailedLookup]
 
 <h3 id="how-do-you-delete-capabilities">How do you delete capabilities?</h3>
 
-<p>The provided code checks that both <code class="highlighter-rouge">first_free_slot</code> and <code class="highlighter-rouge">last_slot</code> are empty, which of course is not
+<p>The provided code checks that both <code class="language-plaintext highlighter-rouge">first_free_slot</code> and <code class="language-plaintext highlighter-rouge">last_slot</code> are empty, which of course is not
 true, as you copied TCB capabilities into those CSlots. Checking if CSlots are empty is done
 by a neat hack: by attempting to move the CSlots onto themselves. This should fail with an error code
-<code class="highlighter-rouge">seL4_FailedLookup</code> if the source CSLot is empty, and an <code class="highlighter-rouge">seL4_DeleteFirst</code> if not.</p>
+<code class="language-plaintext highlighter-rouge">seL4_FailedLookup</code> if the source CSLot is empty, and an <code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code> if not.</p>
 
 <p><strong>Exercise:</strong> delete both copies of the TCB capability.</p>
 
 <ul>
-  <li>You can either use <code class="highlighter-rouge">seL4_CNode_Delete</code> on the copies, or</li>
-  <li><code class="highlighter-rouge">seL4_CNode_Revoke</code> on the original capability to achieve this.</li>
+  <li>You can either use <code class="language-plaintext highlighter-rouge">seL4_CNode_Delete</code> on the copies, or</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_CNode_Revoke</code> on the original capability to achieve this.</li>
 </ul>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO delete the created TCB capabilities</span>
@@ -575,7 +575,7 @@ by a neat hack: by attempting to move the CSlots onto themselves. This should fa
 
 <p>On success, the output will now show:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/106 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Source slot invalid or empty.&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/106 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Source slot invalid or empty.&gt;&gt;
 &lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/106 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Source slot invalid or empty.&gt;&gt;
 Suspending current thread
 main@main.c:56 Failed to suspend current thread
@@ -583,7 +583,7 @@ main@main.c:56 Failed to suspend current thread
 
 <h4 id="invoking-capabilities">Invoking capabilities</h4>
 
-<p><strong>Exercise</strong> Use <code class="highlighter-rouge">seL4_TCB_Suspend</code> to try and suspend the current thread.</p>
+<p><strong>Exercise</strong> Use <code class="language-plaintext highlighter-rouge">seL4_TCB_Suspend</code> to try and suspend the current thread.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"Suspending current thread</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="c1">// TODO suspend the current thread</span>
@@ -592,7 +592,7 @@ main@main.c:56 Failed to suspend current thread
 
 <p>On success, the output will be as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/106 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Source slot invalid or empty.&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/106 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Source slot invalid or empty.&gt;&gt;
 &lt;&lt;seL4(CPU 0) [decodeCNodeInvocation/106 T0xffffff801ffb5400 "rootserver" @401397]: CNode Copy/Mint/Move/Mutate: Source slot invalid or empty.&gt;&gt;
 Suspending current thread
 </code></pre></div></div>
@@ -604,7 +604,7 @@ to become more familiar with CSpaces.</p>
 
 <ul>
   <li>Use a data structure to track which CSlots in a CSpace are free.</li>
-  <li>Make copies of the entire CSpace described by <code class="highlighter-rouge">seL4_BootInfo</code></li>
+  <li>Make copies of the entire CSpace described by <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code></li>
   <li>Experiment with other <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_cnode">CNode invocations</a>.</li>
 </ul>
 
@@ -659,7 +659,7 @@ capabilities/capabilities.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

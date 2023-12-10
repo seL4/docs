@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#background">Background</a>
@@ -247,7 +247,7 @@
 <ul>
 <li class="toc-entry toc-h4"><a href="#types">Types</a></li>
 <li class="toc-entry toc-h4"><a href="#size">Size</a></li>
-<li class="toc-entry toc-h4"><a href="#root-node_index--node_depth">Root, node_index & node_depth</a></li>
+<li class="toc-entry toc-h4"><a href="#root-node_index--node_depth">Root, node_index &amp; node_depth</a></li>
 <li class="toc-entry toc-h4"><a href="#node_offset">Node_offset</a></li>
 <li class="toc-entry toc-h4"><a href="#num_caps">Num_caps</a></li>
 </ul>
@@ -323,9 +323,9 @@ to by the kernel.</p>
 
 <h3 id="initial-state">Initial state</h3>
 
-<p>The <code class="highlighter-rouge">seL4_BootInfo</code> structure provided to the root task describes all of the untyped capabilities, including their size,
+<p>The <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> structure provided to the root task describes all of the untyped capabilities, including their size,
 if they are a device untyped, and the physical address of the untyped. The code example below
-shows how to print out the initial untyped capabilities provided from <code class="highlighter-rouge">seL4_BootInfo</code>.</p>
+shows how to print out the initial untyped capabilities provided from <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"    CSlot   </span><span class="se">\t</span><span class="s">Paddr           </span><span class="se">\t</span><span class="s">Size</span><span class="se">\t</span><span class="s">Type</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">seL4_CPtr</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">start</span><span class="p">;</span> <span class="n">slot</span> <span class="o">!=</span> <span class="n">info</span><span class="o">-&gt;</span><span class="n">untyped</span><span class="p">.</span><span class="n">end</span><span class="p">;</span> <span class="n">slot</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -370,21 +370,21 @@ The memory cannot be reclaimed until both children are revoked.</p>
 </code></pre></div></div>
 
 <p>The above code snippet shows an example of retyping an untyped into a smaller,
-4KiB untyped capability (despite the name <code class="highlighter-rouge">seL4_UntypedObject</code> no object is
+4KiB untyped capability (despite the name <code class="language-plaintext highlighter-rouge">seL4_UntypedObject</code> no object is
 created, the new untyped capability simply points to a subset of the untyped
-memory of <code class="highlighter-rouge">parent_untyped</code>. However, it is convenient to treat this memory like
+memory of <code class="language-plaintext highlighter-rouge">parent_untyped</code>. However, it is convenient to treat this memory like
 an object for the purposes of this operation). We will refer to this snippet as
 we discuss each parameter in the retype invocation. Recall that the first
 parameter is the untyped capability being invoked to do the retype.</p>
 
 <h4 id="types">Types</h4>
 
-<p>Each object in seL4 has a specific type, and all of the type constants can be found in <code class="highlighter-rouge">libsel4</code>. Some types
+<p>Each object in seL4 has a specific type, and all of the type constants can be found in <code class="language-plaintext highlighter-rouge">libsel4</code>. Some types
 are architecture specific, while others are general across architectures. In the example above, we create a
 new untyped capability, which can be further retyped. All other object type parameters create kernel objects <em>and</em>
 capabilities to them, and the type of the created object (and capability) determines the invocations
 that can be made on that capability. For example, were we to retype into a thread control block
-(TCB – <code class="highlighter-rouge">seL4_TCBObject</code>), we could then perform TCB invocations on the capability to the new TCB object, including <code class="highlighter-rouge">seL4_TCB_SetPriority</code>.</p>
+(TCB – <code class="language-plaintext highlighter-rouge">seL4_TCBObject</code>), we could then perform TCB invocations on the capability to the new TCB object, including <code class="language-plaintext highlighter-rouge">seL4_TCB_SetPriority</code>.</p>
 
 <h4 id="size">Size</h4>
 
@@ -394,38 +394,38 @@ depends on the object type that is being requested:</p>
 <ul>
   <li>most objects in seL4 are fixed size, and for these, the kernel will <em>ignore</em>
 the size argument;</li>
-  <li>the types <code class="highlighter-rouge">seL4_UntypedObject</code> and <code class="highlighter-rouge">seL4_SchedContextObject</code> allow a
-variable size, which is specified in <code class="highlighter-rouge">size_bits</code> (more below);</li>
-  <li>the type <code class="highlighter-rouge">seL4_CapTableObject</code> is also of variable size, and the argument specifies
-the <em>number of capability slots</em>. The same mechanism as for <code class="highlighter-rouge">size_bits</code> is used,
+  <li>the types <code class="language-plaintext highlighter-rouge">seL4_UntypedObject</code> and <code class="language-plaintext highlighter-rouge">seL4_SchedContextObject</code> allow a
+variable size, which is specified in <code class="language-plaintext highlighter-rouge">size_bits</code> (more below);</li>
+  <li>the type <code class="language-plaintext highlighter-rouge">seL4_CapTableObject</code> is also of variable size, and the argument specifies
+the <em>number of capability slots</em>. The same mechanism as for <code class="language-plaintext highlighter-rouge">size_bits</code> is used,
 but for the number of slots, not the size in bytes.</li>
 </ul>
 
 <p>In general in seL4, if sizes are measured in bits, they are powers
 of two. “Bits”  does not refer to the number of bits the object takes up, but
-the bit-width that is needed to describe its contents. An object of bit size <code class="highlighter-rouge">n</code>
-measures 2<sup><code class="highlighter-rouge">n</code></sup> bytes. Also, generally in seL4, objects and memory
-regions are aligned to their size, i.e. an <code class="highlighter-rouge">n</code>-bit object is aligned to
-2<sup><code class="highlighter-rouge">n</code></sup> bytes, or, equivalently, the address of the object has 0 as its
-<code class="highlighter-rouge">n</code> bottom bits.</p>
+the bit-width that is needed to describe its contents. An object of bit size <code class="language-plaintext highlighter-rouge">n</code>
+measures 2<sup><code class="language-plaintext highlighter-rouge">n</code></sup> bytes. Also, generally in seL4, objects and memory
+regions are aligned to their size, i.e. an <code class="language-plaintext highlighter-rouge">n</code>-bit object is aligned to
+2<sup><code class="language-plaintext highlighter-rouge">n</code></sup> bytes, or, equivalently, the address of the object has 0 as its
+<code class="language-plaintext highlighter-rouge">n</code> bottom bits.</p>
 
-<p>For <code class="highlighter-rouge">retype</code>, it is enough to remember that the parameter <code class="highlighter-rouge">size_bits</code> means the
-object will measure 2<sup><code class="highlighter-rouge">size_bits</code></sup> bytes, and for <code class="highlighter-rouge">seL4_CapTableObject</code>
-that you are requesting 2<sup><code class="highlighter-rouge">size_bits</code></sup> slots (you can compute the size
-in bytes by taking 2<sup><code class="highlighter-rouge">size_bits + seL4_SlotBits</code></sup>).</p>
+<p>For <code class="language-plaintext highlighter-rouge">retype</code>, it is enough to remember that the parameter <code class="language-plaintext highlighter-rouge">size_bits</code> means the
+object will measure 2<sup><code class="language-plaintext highlighter-rouge">size_bits</code></sup> bytes, and for <code class="language-plaintext highlighter-rouge">seL4_CapTableObject</code>
+that you are requesting 2<sup><code class="language-plaintext highlighter-rouge">size_bits</code></sup> slots (you can compute the size
+in bytes by taking 2<sup><code class="language-plaintext highlighter-rouge">size_bits + seL4_SlotBits</code></sup>).</p>
 
 <h4 id="root-node_index--node_depth">Root, node_index &amp; node_depth</h4>
 
-<p>The <code class="highlighter-rouge">root</code>, <code class="highlighter-rouge">node_index</code> and <code class="highlighter-rouge">node_depth</code> parameters are used to specify the CNode in which to place the new capabilities.
-Depending on the <code class="highlighter-rouge">depth</code> parameter, the CSlot to use is addressed by invocation or by direct addressing (see the <a href="https://docs.sel4.systems/Tutorials/capabilities.html">capabilities tutorial</a> for an explanation of those terms).</p>
+<p>The <code class="language-plaintext highlighter-rouge">root</code>, <code class="language-plaintext highlighter-rouge">node_index</code> and <code class="language-plaintext highlighter-rouge">node_depth</code> parameters are used to specify the CNode in which to place the new capabilities.
+Depending on the <code class="language-plaintext highlighter-rouge">depth</code> parameter, the CSlot to use is addressed by invocation or by direct addressing (see the <a href="https://docs.sel4.systems/Tutorials/capabilities.html">capabilities tutorial</a> for an explanation of those terms).</p>
 
-<p>In the example above, <code class="highlighter-rouge">node_depth</code> is set to 0, which means invocation addressing is used: the <code class="highlighter-rouge">root</code> parameter is
-looked up implicitly using the CSpace root of the current thread at a depth of <code class="highlighter-rouge">seL4_WordBits</code>. So the example code
-specifies the root task’s CNode (<code class="highlighter-rouge">seL4_CapInitThreadCNode</code>). The <code class="highlighter-rouge">node_index</code> parameter in this case is ignored.</p>
+<p>In the example above, <code class="language-plaintext highlighter-rouge">node_depth</code> is set to 0, which means invocation addressing is used: the <code class="language-plaintext highlighter-rouge">root</code> parameter is
+looked up implicitly using the CSpace root of the current thread at a depth of <code class="language-plaintext highlighter-rouge">seL4_WordBits</code>. So the example code
+specifies the root task’s CNode (<code class="language-plaintext highlighter-rouge">seL4_CapInitThreadCNode</code>). The <code class="language-plaintext highlighter-rouge">node_index</code> parameter in this case is ignored.</p>
 
-<p>If the <code class="highlighter-rouge">node_depth</code> value is not set to 0, then direct addressing is used with the current thread’s CSpace root
-as the root. Then the <code class="highlighter-rouge">node_index</code> parameter is used to locate the CNode capability to place new capabilities in,
-at the specified <code class="highlighter-rouge">node_depth</code>. This is designed for managing multi-level CSpaces, and is not covered in this tutorial.</p>
+<p>If the <code class="language-plaintext highlighter-rouge">node_depth</code> value is not set to 0, then direct addressing is used with the current thread’s CSpace root
+as the root. Then the <code class="language-plaintext highlighter-rouge">node_index</code> parameter is used to locate the CNode capability to place new capabilities in,
+at the specified <code class="language-plaintext highlighter-rouge">node_depth</code>. This is designed for managing multi-level CSpaces, and is not covered in this tutorial.</p>
 
 <h4 id="node_offset">Node_offset</h4>
 
@@ -438,7 +438,7 @@ at the specified <code class="highlighter-rouge">node_depth</code>. This is desi
 specified using this argument. Note that there are two constraints on this value:</p>
 
 <ol>
-  <li>The untyped must be big enough to fit all of the memory being retyped (<code class="highlighter-rouge">num_caps * (1u &lt;&lt; size_bits)</code>).</li>
+  <li>The untyped must be big enough to fit all of the memory being retyped (<code class="language-plaintext highlighter-rouge">num_caps * (1u &lt;&lt; size_bits)</code>).</li>
   <li>The CNode must have enough consecutive free CSlots to fit all of the new capabilities.</li>
 </ol>
 
@@ -449,7 +449,7 @@ specified using this argument. Note that there are two constraints on this value
 <p>When you first run this tutorial, you will see something like the following output, which lists all of the
 untyped capabilities provided to the root task on boot:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
     CSlot   Paddr       Size    Type
    0x12d    0x100000    2^20    device untyped
    0x12e    0x200000    2^21    device untyped
@@ -459,7 +459,7 @@ untyped capabilities provided to the root task on boot:</p>
 
 <p>At the end of the output, there is an error:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeUntypedInvocation/105 T0xffffff801ffb5400 "rootserver" @4012e1]: Untyped Retype: Requested UntypedItem size too small.&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeUntypedInvocation/105 T0xffffff801ffb5400 "rootserver" @4012e1]: Untyped Retype: Requested UntypedItem size too small.&gt;&gt;
 main@main.c:49 [Cond failed: error != seL4_NoError]
     Failed to retype
 </code></pre></div></div>
@@ -467,7 +467,7 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 <p>This error happens because we are trying to create an untyped of size 0.</p>
 
 <p><strong>Exercise</strong> Calculate the size of the child untyped required, such that the child untyped can be used
- to create all of the objects listed in the <code class="highlighter-rouge">objects</code> array. Remember that object sizes are measured in
+ to create all of the objects listed in the <code class="language-plaintext highlighter-rouge">objects</code> array. Remember that object sizes are measured in
  bits, that is, in powers of two.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// list of general seL4 objects</span>
@@ -494,9 +494,9 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
 <h3 id="create-a-tcb-object">Create a TCB Object</h3>
 
-<p>The priority check is failing as <code class="highlighter-rouge">child_tcb</code> is an empty CSlot.</p>
+<p>The priority check is failing as <code class="language-plaintext highlighter-rouge">child_tcb</code> is an empty CSlot.</p>
 
-<p><strong>Exercise</strong> fix this by creating a TCB object from <code class="highlighter-rouge">child_untyped</code> and place its cap into the <code class="highlighter-rouge">child_tcb</code> CSlot.</p>
+<p><strong>Exercise</strong> fix this by creating a TCB object from <code class="language-plaintext highlighter-rouge">child_untyped</code> and place its cap into the <code class="language-plaintext highlighter-rouge">child_tcb</code> CSlot.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// use the slot after child_untyped for the new TCB cap:</span>
     <span class="n">seL4_CPtr</span> <span class="n">child_tcb</span> <span class="o">=</span> <span class="n">child_untyped</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
@@ -513,7 +513,7 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
 <p>The error you see now is caused be an invalid endpoint capability.</p>
 
-<p><strong>Exercise</strong> Create an endpoint object from <code class="highlighter-rouge">child_untyped</code> and place its cap into the <code class="highlighter-rouge">child_ep</code> CSlot.</p>
+<p><strong>Exercise</strong> Create an endpoint object from <code class="language-plaintext highlighter-rouge">child_untyped</code> and place its cap into the <code class="language-plaintext highlighter-rouge">child_ep</code> CSlot.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// use the slot after child_tcb for the new endpoint cap:</span>
     <span class="n">seL4_CPtr</span> <span class="n">child_ep</span> <span class="o">=</span> <span class="n">child_tcb</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
@@ -530,7 +530,7 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
 <p>The next part of the tutorial attempts to use a notification object that does not yet exist.</p>
 
-<p><strong>Exercise</strong> create a notification object from <code class="highlighter-rouge">child_untyped</code> and place its cap into the <code class="highlighter-rouge">child_ntfn</code> CSlot.</p>
+<p><strong>Exercise</strong> create a notification object from <code class="language-plaintext highlighter-rouge">child_untyped</code> and place its cap into the <code class="language-plaintext highlighter-rouge">child_ntfn</code> CSlot.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// use the slot after child_ep for the new notification cap:</span>
     <span class="n">seL4_CPtr</span> <span class="n">child_ntfn</span> <span class="o">=</span> <span class="n">child_ep</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
@@ -543,7 +543,7 @@ main@main.c:49 [Cond failed: error != seL4_NoError]
 
 <h3 id="delete-the-objects">Delete the objects</h3>
 
-<p>The final part of the tutorial attempts to create enough endpoint objects from <code class="highlighter-rouge">child_untyped</code> to consume the
+<p>The final part of the tutorial attempts to create enough endpoint objects from <code class="language-plaintext highlighter-rouge">child_untyped</code> to consume the
 entire untyped object. However, this fails, because the untyped is already completely consumed by the previous allocations.</p>
 
 <p><strong>Exercise</strong> revoke the child untyped, so we can create new objects from it that use up the whole thing.</p>
@@ -622,7 +622,7 @@ untyped/untyped.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -322,7 +322,7 @@
 <h1 id="the-sel4-run-time">The seL4 Run-time</h1>
 
 <p>This provides a minimal runtime for running a C or C-compatible process, 
-i.e. one with a C-like <code class="highlighter-rouge">main</code>, in a minimal seL4 environment.</p>
+i.e. one with a C-like <code class="language-plaintext highlighter-rouge">main</code>, in a minimal seL4 environment.</p>
 
 <p>This runtime provides mechanisms for accessing everything a standard
 process would expect to need at start and provides additional utilities
@@ -331,26 +331,26 @@ for delegating the creation of processes and threads.</p>
 <h2 id="standard-processes">Standard Processes</h2>
 
 <p>All processes (except for the root task) will use the entry-points
-provided here as normal and require the <code class="highlighter-rouge">_start</code> entry-point provided in
-the architecture-dependant <code class="highlighter-rouge">crt0.S</code>. This will then bootstrap into the
-runtime entry-point <code class="highlighter-rouge">__sel4_start_c</code> which simply processes the stack to
+provided here as normal and require the <code class="language-plaintext highlighter-rouge">_start</code> entry-point provided in
+the architecture-dependant <code class="language-plaintext highlighter-rouge">crt0.S</code>. This will then bootstrap into the
+runtime entry-point <code class="language-plaintext highlighter-rouge">__sel4_start_c</code> which simply processes the stack to
 find the argument, environment, and auxiliary vectors.</p>
 
-<p>The found vectors, along with<code class="highlighter-rouge">main</code>, are passed into
-<code class="highlighter-rouge">__sel4_start_main</code> which configures the runtime before starting
-<code class="highlighter-rouge">main</code>.</p>
+<p>The found vectors, along with<code class="language-plaintext highlighter-rouge">main</code>, are passed into
+<code class="language-plaintext highlighter-rouge">__sel4_start_main</code> which configures the runtime before starting
+<code class="language-plaintext highlighter-rouge">main</code>.</p>
 
 <h2 id="root-task">Root Task</h2>
 
-<p>The root task requires an alternate entry-point <code class="highlighter-rouge">_sel4_start</code> which
-assumes that the <code class="highlighter-rouge">seL4_BootInfo</code> argument has been passed to it and that
+<p>The root task requires an alternate entry-point <code class="language-plaintext highlighter-rouge">_sel4_start</code> which
+assumes that the <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> argument has been passed to it and that
 it has not been given a stack.</p>
 
 <p>This entry-point moves onto a static 16 kilobyte stack before invoking
-<code class="highlighter-rouge">__sel4_start_root</code>, which constructs the argument, environment, and
+<code class="language-plaintext highlighter-rouge">__sel4_start_root</code>, which constructs the argument, environment, and
 auxiliary vectors. It then passes the constructed vectors, along with
-<code class="highlighter-rouge">main</code>, into <code class="highlighter-rouge">__sel4_start_main</code> which configures the runtime before
-starting <code class="highlighter-rouge">main</code>.</p>
+<code class="language-plaintext highlighter-rouge">main</code>, into <code class="language-plaintext highlighter-rouge">__sel4_start_main</code> which configures the runtime before
+starting <code class="language-plaintext highlighter-rouge">main</code>.</p>
 
 <h2 id="thread-local-storage-layout">Thread-local storage layout</h2>
 
@@ -380,13 +380,13 @@ the thread pointer for it’s thread structure.</p>
 files:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">crt0.o</code>; This provides the <code class="highlighter-rouge">_start</code> symbol which is used as the entry
+  <li><code class="language-plaintext highlighter-rouge">crt0.o</code>; This provides the <code class="language-plaintext highlighter-rouge">_start</code> symbol which is used as the entry
 point into a C program.</li>
-  <li><code class="highlighter-rouge">crti.o</code>; This provides the prologue to the <code class="highlighter-rouge">_init</code> and <code class="highlighter-rouge">_fini</code>
+  <li><code class="language-plaintext highlighter-rouge">crti.o</code>; This provides the prologue to the <code class="language-plaintext highlighter-rouge">_init</code> and <code class="language-plaintext highlighter-rouge">_fini</code>
 symbols. As it occurs in the linker arguments <em>before</em> other object
 files, other object files may add function calls to the body of these
 symbols.</li>
-  <li><code class="highlighter-rouge">crtn.o</code>; This provides the epilogue to the <code class="highlighter-rouge">_init</code> and <code class="highlighter-rouge">_fini</code>
+  <li><code class="language-plaintext highlighter-rouge">crtn.o</code>; This provides the epilogue to the <code class="language-plaintext highlighter-rouge">_init</code> and <code class="language-plaintext highlighter-rouge">_fini</code>
 symbols and occurs in the linker arguments after all other object
 files.</li>
 </ul>
@@ -394,30 +394,30 @@ files.</li>
 <h3 id="constructors-and-destructors">Constructors and Destructors.</h3>
 
 <p>The C runtime provides a mechanism for providing functions to be
-executed before and after <code class="highlighter-rouge">main</code> as constructors and destructors for
+executed before and after <code class="language-plaintext highlighter-rouge">main</code> as constructors and destructors for
 object files and global state.</p>
 
 <p>There are two mechanisms that provide this as documented in the <a href="http://www.sco.com/developers/gabi/latest/ch4.sheader.html#special_sections">System
 V ABI</a>.</p>
 
-<p>The first is the aforementioned <code class="highlighter-rouge">_init</code> and <code class="highlighter-rouge">_fini</code> symbols. The second
-is a set of regions called <code class="highlighter-rouge">.preinit_array</code>, <code class="highlighter-rouge">.init_array</code>, and
-<code class="highlighter-rouge">.fini_array</code>. Each of these is simply a vector of void function
+<p>The first is the aforementioned <code class="language-plaintext highlighter-rouge">_init</code> and <code class="language-plaintext highlighter-rouge">_fini</code> symbols. The second
+is a set of regions called <code class="language-plaintext highlighter-rouge">.preinit_array</code>, <code class="language-plaintext highlighter-rouge">.init_array</code>, and
+<code class="language-plaintext highlighter-rouge">.fini_array</code>. Each of these is simply a vector of void function
 pointers to be executed.</p>
 
-<p>The runtime must, before <code class="highlighter-rouge">main</code>, execute <code class="highlighter-rouge">_init</code>, all function pointers
-in <code class="highlighter-rouge">.preinit_array</code>, then all function pointers in <code class="highlighter-rouge">.init_array</code>. The
-runtime must also, at <code class="highlighter-rouge">exit</code>, execute all function pointers in
-<code class="highlighter-rouge">.fini_array</code> in reverse, then execute <code class="highlighter-rouge">_fini</code>.</p>
+<p>The runtime must, before <code class="language-plaintext highlighter-rouge">main</code>, execute <code class="language-plaintext highlighter-rouge">_init</code>, all function pointers
+in <code class="language-plaintext highlighter-rouge">.preinit_array</code>, then all function pointers in <code class="language-plaintext highlighter-rouge">.init_array</code>. The
+runtime must also, at <code class="language-plaintext highlighter-rouge">exit</code>, execute all function pointers in
+<code class="language-plaintext highlighter-rouge">.fini_array</code> in reverse, then execute <code class="language-plaintext highlighter-rouge">_fini</code>.</p>
 
 <p>To assist in iterating through these arrays, GCC’s internal linker
-script defines the symbols <code class="highlighter-rouge">__(preinit,init,fini)_array_(start,end)</code> in
+script defines the symbols <code class="language-plaintext highlighter-rouge">__(preinit,init,fini)_array_(start,end)</code> in
 the appropriate sections marking the first function in each and the end
 of the array.</p>
 
-<h3 id="the-_start-symbol">The <code class="highlighter-rouge">_start</code> Symbol</h3>
+<h3 id="the-_start-symbol">The <code class="language-plaintext highlighter-rouge">_start</code> Symbol</h3>
 
-<p>Arguments to <code class="highlighter-rouge">_start</code> are on the stack for all platforms.
+<p>Arguments to <code class="language-plaintext highlighter-rouge">_start</code> are on the stack for all platforms.
 The top of the stack is structured as so:</p>
 
 <ul>
@@ -438,8 +438,8 @@ follows:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">__sel4_start_c</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">stack</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>NOTE: <code class="highlighter-rouge">__sel4_start_c</code> is a void function as it should call the
-non-returning <code class="highlighter-rouge">_exit</code> symbol after calling <code class="highlighter-rouge">main</code>.</p>
+<p>NOTE: <code class="language-plaintext highlighter-rouge">__sel4_start_c</code> is a void function as it should call the
+non-returning <code class="language-plaintext highlighter-rouge">_exit</code> symbol after calling <code class="language-plaintext highlighter-rouge">main</code>.</p>
 
 <p><em>File included from <a href="https://github.com/sel4proj/sel4runtime/blob/master/crt/README.md">github repo</a> <a href="https://github.com/sel4proj/sel4runtime/edit/master/crt/README.md">edit</a></em></p>
 
@@ -455,7 +455,7 @@ non-returning <code class="highlighter-rouge">_exit</code> symbol after calling 
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#standard-processes">Standard Processes</a></li>
 <li class="toc-entry toc-h2"><a href="#root-task">Root Task</a></li>
 <li class="toc-entry toc-h2"><a href="#thread-local-storage-layout">Thread-local storage layout</a></li>
@@ -564,7 +564,7 @@ non-returning <code class="highlighter-rouge">_exit</code> symbol after calling 
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -198,7 +198,7 @@ and CONFIG_CPU_IDLE off.</p>
 <h2 id="accessing-the-mmc">Accessing the MMC</h2>
 <p>Attach a USB cable
 between the TK1-SOM’s OTG port and your host, then on the U-Boot console
-type <code class="highlighter-rouge">ums mmc 0</code>.</p>
+type <code class="language-plaintext highlighter-rouge">ums mmc 0</code>.</p>
 
 <p>A spinning wheel will appear on the console, and the entire MMC will be
 presented as a USB storage device to your host. In the default
@@ -270,13 +270,13 @@ but to boot a kernel over fastboot means making the ELF file produced
 from the build system look like an ANDROID Linux kernel).</p>
 
 <p>On the u-boot console do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv dfu_alt_info "kernel ram $loadaddr 0x1000000"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv dfu_alt_info "kernel ram $loadaddr 0x1000000"
 saveenv
 </code></pre></div></div>
 <p>once.</p>
 
 <p>Then to boot, on the u-boot console do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu 0 ram 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu 0 ram 0
 </code></pre></div></div>
 <p>and on your host:</p>
 
@@ -289,7 +289,7 @@ saveenv
   <li>
     <p>run dfu-util (you may need to run this with sudo)</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu-util --device 0955:701a -a kernel -D sel4test-driver-image-arm-tk1 .
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu-util --device 0955:701a -a kernel -D sel4test-driver-image-arm-tk1 .
 dfu-util --device 0955:701a -e
 </code></pre></div>    </div>
 
@@ -299,25 +299,25 @@ of dfu in u-boot on the TK1-SOM)</p>
   </li>
 </ul>
 
-<p>This will load the <code class="highlighter-rouge">sel4test-driver-image-arm-tk1</code> file onto the TK1-SOM
-at address <code class="highlighter-rouge">$loadaddr</code>. You can then run it in uboot with</p>
+<p>This will load the <code class="language-plaintext highlighter-rouge">sel4test-driver-image-arm-tk1</code> file onto the TK1-SOM
+at address <code class="language-plaintext highlighter-rouge">$loadaddr</code>. You can then run it in uboot with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi $loadaddr
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi $loadaddr
 </code></pre></div></div>
 
 <p>If you want, you can automate all this with:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootcmd_dfu "dfu 0 ram 0; bootefi $loadaddr" saveenv
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootcmd_dfu "dfu 0 ram 0; bootefi $loadaddr" saveenv
 </code></pre></div></div>
 
 <p>then just</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run bootcmd_dfu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run bootcmd_dfu
 </code></pre></div></div>
 
 <p>If you ‘‘always’’ want to do this you can do</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootcmd "run bootcmd_dfu"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv bootcmd "run bootcmd_dfu"
 </code></pre></div></div>
 
 <h1 id="booting-from-a-usb-storage-device">Booting from a USB storage device</h1>
@@ -327,7 +327,7 @@ port (on the power supply board). Patches are pending upstream to enable
 the other port too. Use a FAT32 or ext2 partition on the storage; put
 your image on it. You can either use a syslinux-style menu, or can boot
 directly.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start 
 fatload usb 0:1 ${loadaddr} sel4test-image-arm 
 bootelf ${loadaddr}
 </code></pre></div></div>
@@ -348,7 +348,7 @@ an ext3 filesystem instead.</p>
 
 <p>Do:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo env ROOTFS_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin tk1-som mmcblk0p1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo env ROOTFS_TYPE=ext3 ./flash.sh -L bootloader/ardbeg/u-boot.bin tk1-som mmcblk0p1
 </code></pre></div></div>
 <p>instead of using the instructions in the Colorado-provided
 README.txt</p>
@@ -388,7 +388,7 @@ at <a href="L4TCan">L4TCan</a>.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Sep 14 10:24:17 2023 +0200 a83ee45263

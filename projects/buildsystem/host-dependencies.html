@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -270,7 +270,7 @@
 
 <p><strong>Base dependencies</strong></p>
 
-<p>The basic build package on Ubuntu is the <code class="highlighter-rouge">build-essential</code> package. To install run:</p>
+<p>The basic build package on Ubuntu is the <code class="language-plaintext highlighter-rouge">build-essential</code> package. To install run:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential
@@ -322,7 +322,7 @@
  make linux
 </code></pre></div>    </div>
 
-    <p>After it is built, add the <code class="highlighter-rouge">$RISCV/bin</code> folder to your PATH. The built
+    <p>After it is built, add the <code class="language-plaintext highlighter-rouge">$RISCV/bin</code> folder to your PATH. The built
  toolchain works for both 32-bit and 64-bit.</p>
   </li>
   <li>
@@ -349,14 +349,14 @@
   <li><a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/apply-tex.sh">LaTeX</a></li>
 </ul>
 
-<p>The version of <code class="highlighter-rouge">cmake</code> in Debian <em>stretch</em> is too old to build seL4 projects (<em>buster</em> and later are OK).  If you are on <em>stretch</em>, install <code class="highlighter-rouge">cmake</code> from stretch-backports:</p>
+<p>The version of <code class="language-plaintext highlighter-rouge">cmake</code> in Debian <em>stretch</em> is too old to build seL4 projects (<em>buster</em> and later are OK).  If you are on <em>stretch</em>, install <code class="language-plaintext highlighter-rouge">cmake</code> from stretch-backports:</p>
 
-<p>Add the <em>stretch-backports</em> repository like this (substitute a local mirror for <code class="highlighter-rouge">ftp.debian.org</code> if you like)</p>
+<p>Add the <em>stretch-backports</em> repository like this (substitute a local mirror for <code class="language-plaintext highlighter-rouge">ftp.debian.org</code> if you like)</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s2">"echo 'deb http://ftp.debian.org/debian stretch-backports main' &gt; /etc/apt/sources.list.d/backports.list"</span>
 </code></pre></div></div>
 
-<p>Then install <code class="highlighter-rouge">cmake</code> with</p>
+<p>Then install <code class="language-plaintext highlighter-rouge">cmake</code> with</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
 <span class="nb">sudo </span>apt-get <span class="nt">-t</span> stretch-backports <span class="nb">install </span>cmake
@@ -370,7 +370,7 @@
 pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 </code></pre></div></div>
 
-<p>(Some distributions use <code class="highlighter-rouge">pip</code> for python3, others use <code class="highlighter-rouge">pip3</code>.  Use the Python 3 version for your distribution)</p>
+<p>(Some distributions use <code class="language-plaintext highlighter-rouge">pip</code> for python3, others use <code class="language-plaintext highlighter-rouge">pip3</code>.  Use the Python 3 version for your distribution)</p>
 
 <h2 id="camkes-build-dependencies">CAmkES Build Dependencies</h2>
 
@@ -386,10 +386,10 @@ pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 <h3 id="haskell-dependencies">Haskell Dependencies</h3>
 
 <p>The CAmkES build toolchain additionally requires Haskell. You can install the <a href="https://haskellstack.org">Haskell stack</a> on your distribution by running:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSL https://get.haskellstack.org/ | sh
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSL https://get.haskellstack.org/ | sh
 </code></pre></div></div>
 <p>If you prefer not to bypass your distribution’s package manager, you can do</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install haskell-stack
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install haskell-stack
 </code></pre></div></div>
 
 <h3 id="build-dependencies">Build Dependencies</h3>
@@ -502,7 +502,7 @@ pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 
 <p>After installing <a href="https://docs.haskellstack.org/en/stable/">haskell-stack</a>
 (already included in the packages above on Mac and Ubuntu), make sure you’ve
-adjusted your <code class="highlighter-rouge">PATH</code> to include <code class="highlighter-rouge">$HOME/.local/bin</code>, that you’re running an
+adjusted your <code class="language-plaintext highlighter-rouge">PATH</code> to include <code class="language-plaintext highlighter-rouge">$HOME/.local/bin</code>, that you’re running an
 up-to-date version, and that you have installed cabal:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stack upgrade <span class="nt">--binary-only</span>
@@ -512,7 +512,7 @@ stack <span class="nb">install </span>cabal-install
 
 <h2 id="checking-out-the-repository-collection">Checking out the repository collection</h2>
 
-<p>The seL4 repositories use the <a href="https://gerrit.googlesource.com/git-repo/+/HEAD/README.md">Google <code class="highlighter-rouge">repo</code> tool</a> for configuration
+<p>The seL4 repositories use the <a href="https://gerrit.googlesource.com/git-repo/+/HEAD/README.md">Google <code class="language-plaintext highlighter-rouge">repo</code> tool</a> for configuration
 control and managing sets of repositories. For verification, this means in
 particular managing the correct combinations of the proofs, the kernel sources,
 and the Isabelle/HOL theorem prover.</p>
@@ -528,25 +528,25 @@ repo init <span class="nt">-u</span> https://git@github.com/seL4/verification-ma
 repo <span class="nb">sync</span>
 </code></pre></div></div>
 
-<p>If you are developing proofs, intending to contribute, and have <code class="highlighter-rouge">ssh</code> set up
+<p>If you are developing proofs, intending to contribute, and have <code class="language-plaintext highlighter-rouge">ssh</code> set up
 for GitHub, use</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-m</span> devel.xml <span class="nt">-u</span> ssh://git@github.com/seL4/verification-manifest.git
 </code></pre></div></div>
 
-<p>instead for the <code class="highlighter-rouge">init</code> line. The <code class="highlighter-rouge">-m devel.xml</code> gives you the <code class="highlighter-rouge">master</code> branch of
-the <code class="highlighter-rouge">l4v</code> repository instead of the last known-good version. To set up <code class="highlighter-rouge">git</code> for
-<code class="highlighter-rouge">ssh</code> make sure to use the <code class="highlighter-rouge">ssh://</code> protocol explicitly as above instead of just
-<code class="highlighter-rouge">git@github.com</code>, because the short form seems to confuse <code class="highlighter-rouge">repo</code>.</p>
+<p>instead for the <code class="language-plaintext highlighter-rouge">init</code> line. The <code class="language-plaintext highlighter-rouge">-m devel.xml</code> gives you the <code class="language-plaintext highlighter-rouge">master</code> branch of
+the <code class="language-plaintext highlighter-rouge">l4v</code> repository instead of the last known-good version. To set up <code class="language-plaintext highlighter-rouge">git</code> for
+<code class="language-plaintext highlighter-rouge">ssh</code> make sure to use the <code class="language-plaintext highlighter-rouge">ssh://</code> protocol explicitly as above instead of just
+<code class="language-plaintext highlighter-rouge">git@github.com</code>, because the short form seems to confuse <code class="language-plaintext highlighter-rouge">repo</code>.</p>
 
 <p>If you are looking to use the proofs for a specific release version of seL4, use
-the <code class="highlighter-rouge">-m</code> option to select the corresponding manifest file in the
+the <code class="language-plaintext highlighter-rouge">-m</code> option to select the corresponding manifest file in the
 <a href="https://github.com/seL4/verification-manifest">verification-manifest</a> repository.</p>
 
 <h2 id="isabelle-setup">Isabelle Setup</h2>
 
-<p>After the repository is set up using <code class="highlighter-rouge">repo</code> with the <a href="https://github.com/seL4/verification-manifest">verification-manifest</a>
-repository, you should have following directory structure, where <code class="highlighter-rouge">l4v</code> is the
+<p>After the repository is set up using <code class="language-plaintext highlighter-rouge">repo</code> with the <a href="https://github.com/seL4/verification-manifest">verification-manifest</a>
+repository, you should have following directory structure, where <code class="language-plaintext highlighter-rouge">l4v</code> is the
 repository you are currently looking at:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification/
@@ -557,9 +557,9 @@ repository you are currently looking at:</p>
     seL4/
 </code></pre></div></div>
 
-<p>To set up Isabelle for use in <code class="highlighter-rouge">l4v/</code>, assuming you have no previous
+<p>To set up Isabelle for use in <code class="language-plaintext highlighter-rouge">l4v/</code>, assuming you have no previous
 installation of Isabelle, run the following commands in the directory
-<code class="highlighter-rouge">verification/l4v/</code>:</p>
+<code class="language-plaintext highlighter-rouge">verification/l4v/</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.isabelle/etc
 <span class="nb">cp</span> <span class="nt">-i</span> misc/etc/settings ~/.isabelle/etc/settings
@@ -574,10 +574,10 @@ installation of Isabelle, run the following commands in the directory
   <li>create an Isabelle user settings directory.</li>
   <li>install L4.verified Isabelle settings.
 These settings initialise the Isabelle installation to use the standard
-Isabelle <code class="highlighter-rouge">contrib</code> tools from the Munich Isabelle repository and set up
+Isabelle <code class="language-plaintext highlighter-rouge">contrib</code> tools from the Munich Isabelle repository and set up
 paths such that multiple Isabelle repository installations can be used
 side by side without interfering with each other.</li>
-  <li>download <code class="highlighter-rouge">contrib</code> components from the Isabelle repository. This includes
+  <li>download <code class="language-plaintext highlighter-rouge">contrib</code> components from the Isabelle repository. This includes
 Scala, a Java JDK, PolyML, and multiple external provers. You should
 download these, even if you have these tools previously installed
 elsewhere to make sure you have the right versions. Depending on your
@@ -590,7 +590,7 @@ the installation works. This may take a few minutes.</li>
 <p>Alternatively, it is possible to use the official Isabelle2022 release
 bundle for your platform from the <a href="http://isabelle.in.tum.de">Isabelle website</a>. In this case, the
 installation steps above can be skipped, and you would replace the directory
-<code class="highlighter-rouge">verification/isabelle/</code> with a symbolic link to the Isabelle home directory
+<code class="language-plaintext highlighter-rouge">verification/isabelle/</code> with a symbolic link to the Isabelle home directory
 of the release version. Note that this is not recommended for development,
 since Google repo will overwrite this link when you synchronise repositories
 and Isabelle upgrades will have to be performed manually as development
@@ -615,7 +615,7 @@ the instructions below.</p>
 
 <ol>
   <li>Go to Plugins -&gt; Plugin manager -&gt; Install.</li>
-  <li>Search for <code class="highlighter-rouge">WhiteSpace</code> and install the plugin.</li>
+  <li>Search for <code class="language-plaintext highlighter-rouge">WhiteSpace</code> and install the plugin.</li>
   <li>Go to Plugins -&gt; Plugin Options -&gt; WhiteSpace -&gt; On save actions.</li>
   <li>Check “Remove trailing whitespace” and click Apply.</li>
 </ol>
@@ -624,29 +624,29 @@ the instructions below.</p>
 
 <p>The Isabelle PIDE provides “Back” and “Forward” actions that allow you to
 easily navigate to previous positions in your edit history. Follow the steps
-below to bind a key to the “Back” function. We recommend <code class="highlighter-rouge">[ctrl]+[`]</code>.</p>
+below to bind a key to the “Back” function. We recommend <code class="language-plaintext highlighter-rouge">[ctrl]+[`]</code>.</p>
 
 <ol>
   <li>Go to Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts.</li>
   <li>Select Action Set -&gt; Plugin: Navigator.</li>
-  <li>Set a shortcut for <code class="highlighter-rouge">Back</code>.</li>
+  <li>Set a shortcut for <code class="language-plaintext highlighter-rouge">Back</code>.</li>
 </ol>
 
 <h3 id="go-to-error-macro">Go-to-error macro</h3>
 
-<p>Run the following commands in the directory <code class="highlighter-rouge">verification/l4v/</code>:</p>
+<p>Run the following commands in the directory <code class="language-plaintext highlighter-rouge">verification/l4v/</code>:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.isabelle/jedit/macros
 <span class="nb">cp </span>misc/jedit/macros/goto-error.bsh ~/.isabelle/jedit/macros/.
 </code></pre></div></div>
 
 <p>You can add keybindings for this macro in the usual way, by going to
-<code class="highlighter-rouge">Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts</code>.</p>
+<code class="language-plaintext highlighter-rouge">Utilities -&gt; Global Options -&gt; jEdit -&gt; Shortcuts</code>.</p>
 
 <p>Additionally, our fork of Isabelle/jEdit has an updated indenter which is more
-proof-context aware than the ‘original’ indenter. Pressing <code class="highlighter-rouge">ctrl+i</code> while some
-<code class="highlighter-rouge">apply</code>-script text is selected should auto-indent the script while respecting
-subgoal depth and maintaining the relative indentation of multi-line <code class="highlighter-rouge">apply</code>
+proof-context aware than the ‘original’ indenter. Pressing <code class="language-plaintext highlighter-rouge">ctrl+i</code> while some
+<code class="language-plaintext highlighter-rouge">apply</code>-script text is selected should auto-indent the script while respecting
+subgoal depth and maintaining the relative indentation of multi-line <code class="language-plaintext highlighter-rouge">apply</code>
 statements.</p>
 
 
@@ -661,7 +661,7 @@ statements.</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#get-googles-repo-tool">Get Google’s Repo tool</a></li>
 <li class="toc-entry toc-h2"><a href="#sel4-build-dependencies">seL4 Build Dependencies</a>
 <ul>
@@ -680,14 +680,14 @@ statements.</p>
 </li>
 <li class="toc-entry toc-h2"><a href="#camkes-build-dependencies">CAmkES Build Dependencies</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#python-dependencies-1">Python Dependencies</a></li>
+<li class="toc-entry toc-h3"><a href="#python-dependencies">Python Dependencies</a></li>
 <li class="toc-entry toc-h3"><a href="#haskell-dependencies">Haskell Dependencies</a></li>
 <li class="toc-entry toc-h3"><a href="#build-dependencies">Build Dependencies</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#ubuntu-1">Ubuntu</a></li>
-<li class="toc-entry toc-h4"><a href="#debian-1">Debian</a>
+<li class="toc-entry toc-h4"><a href="#ubuntu">Ubuntu</a></li>
+<li class="toc-entry toc-h4"><a href="#debian">Debian</a>
 <ul>
-<li class="toc-entry toc-h5"><a href="#for-debian-stretch-or-later-1">For Debian Stretch or later</a></li>
+<li class="toc-entry toc-h5"><a href="#for-debian-stretch-or-later">For Debian Stretch or later</a></li>
 </ul>
 </li>
 </ul>
@@ -818,7 +818,7 @@ statements.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

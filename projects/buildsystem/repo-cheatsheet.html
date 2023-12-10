@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -332,7 +332,7 @@
 <p>Below is a set of example manifests for the sel4test project. They are located at <a href="https://github.com/seL4/sel4test-manifest/">https://github.com/seL4/sel4test-manifest/</a>.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">common.xml</code>:</li>
+  <li><code class="language-plaintext highlighter-rouge">common.xml</code>:</li>
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
@@ -366,7 +366,7 @@
 </code></pre></div></div>
 
 <ul>
-  <li><code class="highlighter-rouge">master.xml</code>:</li>
+  <li><code class="language-plaintext highlighter-rouge">master.xml</code>:</li>
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
@@ -386,33 +386,33 @@
 <p>We provide a brief overview of manifests as used in our projects in this section, please find more details in the full description of the manifest layout which can be found <a href="https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md">here</a>.</p>
 
 <blockquote>
-  <p><code class="highlighter-rouge">&lt;remote name="seL4" fetch="." /&gt;</code></p>
+  <p><code class="language-plaintext highlighter-rouge">&lt;remote name="seL4" fetch="." /&gt;</code></p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">remote</code> element specifies a remote where git repositories can be found.</p>
+<p>The <code class="language-plaintext highlighter-rouge">remote</code> element specifies a remote where git repositories can be found.</p>
 
 <blockquote>
-  <p><code class="highlighter-rouge">&lt;project name="musllibc.git" remote="seL4" path="projects/musllibc" revision="sel4"/&gt;</code></p>
+  <p><code class="language-plaintext highlighter-rouge">&lt;project name="musllibc.git" remote="seL4" path="projects/musllibc" revision="sel4"/&gt;</code></p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">project</code> element declares a repository.</p>
+<p>The <code class="language-plaintext highlighter-rouge">project</code> element declares a repository.</p>
 <ul>
-  <li><code class="highlighter-rouge">name</code> is the repository name at the <code class="highlighter-rouge">remote</code></li>
-  <li><code class="highlighter-rouge">path</code> is the repository checkout location relative to the directory the project was initialised in.</li>
-  <li><code class="highlighter-rouge">revision</code> specifies what version of the repository to use. Branches and revision hashes are supported.  Tags are supported but the attribute value must be structured as <code class="highlighter-rouge">refs/tags/tagname</code>.</li>
-  <li><code class="highlighter-rouge">linkfile</code> element specifies a symlink from the repository to somewhere else in the project layout.
+  <li><code class="language-plaintext highlighter-rouge">name</code> is the repository name at the <code class="language-plaintext highlighter-rouge">remote</code></li>
+  <li><code class="language-plaintext highlighter-rouge">path</code> is the repository checkout location relative to the directory the project was initialised in.</li>
+  <li><code class="language-plaintext highlighter-rouge">revision</code> specifies what version of the repository to use. Branches and revision hashes are supported.  Tags are supported but the attribute value must be structured as <code class="language-plaintext highlighter-rouge">refs/tags/tagname</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">linkfile</code> element specifies a symlink from the repository to somewhere else in the project layout.
     <ul>
-      <li><code class="highlighter-rouge">src</code> is a path relative to the repository checkout.</li>
-      <li><code class="highlighter-rouge">dest</code> is a path relative to the project directory.</li>
+      <li><code class="language-plaintext highlighter-rouge">src</code> is a path relative to the repository checkout.</li>
+      <li><code class="language-plaintext highlighter-rouge">dest</code> is a path relative to the project directory.</li>
     </ul>
   </li>
 </ul>
 
 <blockquote>
-  <p><code class="highlighter-rouge">&lt;default revision="master" remote="seL4"/&gt;</code></p>
+  <p><code class="language-plaintext highlighter-rouge">&lt;default revision="master" remote="seL4"/&gt;</code></p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">default</code> element specifies attribute defaults that may be ommitted from <code class="highlighter-rouge">project</code> elements.
+<p>The <code class="language-plaintext highlighter-rouge">default</code> element specifies attribute defaults that may be ommitted from <code class="language-plaintext highlighter-rouge">project</code> elements.
 If attributes are ommitted, the values from the default element will be used instead.</p>
 
 <h3 id="pinned-manifests">Pinned manifests</h3>
@@ -452,10 +452,10 @@ If attributes are ommitted, the values from the default element will be used ins
 
 <h2 id="commands">Commands</h2>
 
-<h3 id="init-and-sync"><code class="highlighter-rouge">init</code> and <code class="highlighter-rouge">sync</code></h3>
+<h3 id="init-and-sync"><code class="language-plaintext highlighter-rouge">init</code> and <code class="language-plaintext highlighter-rouge">sync</code></h3>
 
-<p><code class="highlighter-rouge">repo init</code> and <code class="highlighter-rouge">repo sync</code> are the most commonly used commands. Their purpose is for selecting a manifest and downloading all of the repositories and setting up a project directory structure.  Often project READMEs will provide the following instructions:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir source_dir
+<p><code class="language-plaintext highlighter-rouge">repo init</code> and <code class="language-plaintext highlighter-rouge">repo sync</code> are the most commonly used commands. Their purpose is for selecting a manifest and downloading all of the repositories and setting up a project directory structure.  Often project READMEs will provide the following instructions:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir source_dir
 cd source_dir
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
@@ -465,28 +465,28 @@ repo sync
 
 <p>init is for selecting a manifest to use, and sync is for checking out that manifest.</p>
 
-<p><code class="highlighter-rouge">init</code></p>
+<p><code class="language-plaintext highlighter-rouge">init</code></p>
 <ul>
-  <li><code class="highlighter-rouge">-u</code> git url. Note: GitHub <code class="highlighter-rouge">ssh</code> urls do not work using the generated URL they provide: <code class="highlighter-rouge">git@github.com:seL4/sel4test-manifest.git</code> has to be changed to <code class="highlighter-rouge">ssh://git@github.com/seL4/sel4test-manifest.git</code></li>
-  <li><code class="highlighter-rouge">-m</code> manifest name, default is default.xml.</li>
-  <li><code class="highlighter-rouge">-b</code> branch or revision, or tag if using format <code class="highlighter-rouge">refs/tags/tagname</code>. Default is default.xml</li>
+  <li><code class="language-plaintext highlighter-rouge">-u</code> git url. Note: GitHub <code class="language-plaintext highlighter-rouge">ssh</code> urls do not work using the generated URL they provide: <code class="language-plaintext highlighter-rouge">git@github.com:seL4/sel4test-manifest.git</code> has to be changed to <code class="language-plaintext highlighter-rouge">ssh://git@github.com/seL4/sel4test-manifest.git</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-m</code> manifest name, default is default.xml.</li>
+  <li><code class="language-plaintext highlighter-rouge">-b</code> branch or revision, or tag if using format <code class="language-plaintext highlighter-rouge">refs/tags/tagname</code>. Default is default.xml</li>
 </ul>
 
-<p><code class="highlighter-rouge">sync</code></p>
+<p><code class="language-plaintext highlighter-rouge">sync</code></p>
 
-<p>This command synchronises your project directory with what the manifest describes.  If you have made commits in your branches, this may result in them getting <em>lost</em> as repo switches the HEAD back to what the manifest describes. If this happens, use <code class="highlighter-rouge">git reflog</code> to find the untracked commit, or use branches to keep track of commits as branches will remain in your local checkouts.</p>
+<p>This command synchronises your project directory with what the manifest describes.  If you have made commits in your branches, this may result in them getting <em>lost</em> as repo switches the HEAD back to what the manifest describes. If this happens, use <code class="language-plaintext highlighter-rouge">git reflog</code> to find the untracked commit, or use branches to keep track of commits as branches will remain in your local checkouts.</p>
 
-<p><code class="highlighter-rouge">sync</code> has several flags for specifying how to checkout from remotes such as <code class="highlighter-rouge">-j</code> for parallel checkouts.  Use <code class="highlighter-rouge">repo sync --help</code> for a list and description.</p>
+<p><code class="language-plaintext highlighter-rouge">sync</code> has several flags for specifying how to checkout from remotes such as <code class="language-plaintext highlighter-rouge">-j</code> for parallel checkouts.  Use <code class="language-plaintext highlighter-rouge">repo sync --help</code> for a list and description.</p>
 
-<h3 id="diff-and-status"><code class="highlighter-rouge">diff</code> and <code class="highlighter-rouge">status</code></h3>
+<h3 id="diff-and-status"><code class="language-plaintext highlighter-rouge">diff</code> and <code class="language-plaintext highlighter-rouge">status</code></h3>
 
 <p>These two commands are similar to running git diff or git status in every git repository.</p>
 
-<h3 id="diffmanifests"><code class="highlighter-rouge">diffmanifests</code></h3>
+<h3 id="diffmanifests"><code class="language-plaintext highlighter-rouge">diffmanifests</code></h3>
 
 <p>This command allows you to list the commit differences between two manifests of the same project.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>changed projects :
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>changed projects :
 
         kernel changed from master to 757c3ac98246afd0593367f1fa19054316a77495
                 [-] 62445b35 x86: Correct labels for port out operations
@@ -515,7 +515,7 @@ TODO: Add details about repo mirroring
 
 <blockquote>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/
 repo sync
 </code></pre></div>  </div>
 </blockquote>
@@ -524,25 +524,25 @@ repo sync
 
 <blockquote>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -m master.xml
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -m master.xml
 repo sync
 </code></pre></div>  </div>
 </blockquote>
 
-<p>This will change from the current manifest to <code class="highlighter-rouge">master.xml</code> in the manifest repository</p>
+<p>This will change from the current manifest to <code class="language-plaintext highlighter-rouge">master.xml</code> in the manifest repository</p>
 
 <h3 id="how-do-i-create-a-pinned-manifest">How do I create a pinned manifest?</h3>
 
 <blockquote>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo manifest -r -o pinned.xml
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo manifest -r -o pinned.xml
 </code></pre></div>  </div>
 </blockquote>
 
 <h3 id="is-there-a-faster-way-to-checkout-and-sync-a-project">Is there a faster way to checkout and sync a project?</h3>
 <blockquote>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git --no-clone-bundle --depth=1
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git --no-clone-bundle --depth=1
 repo sync --jobs=8 --fetch-submodules --current-branch --no-clone-bundle
 </code></pre></div>  </div>
 </blockquote>
@@ -558,7 +558,7 @@ repo sync --jobs=8 --fetch-submodules --current-branch --no-clone-bundle
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#manifest-layout">Manifest layout</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#pinned-manifests">Pinned manifests</a></li>
@@ -685,7 +685,7 @@ repo sync --jobs=8 --fetch-submodules --current-branch --no-clone-bundle
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 0469eefc77

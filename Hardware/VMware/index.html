@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -191,7 +191,7 @@ guest type.</p>
 <ol>
   <li><strong>Output to a text file</strong> (easiest but output only). The VM
 will dump its serial output to a text file when it runs, and you
-can simply go <code class="highlighter-rouge">less -F &lt;file&gt;</code>.</li>
+can simply go <code class="language-plaintext highlighter-rouge">less -F &lt;file&gt;</code>.</li>
   <li>
     <p><strong>Use physical serial port</strong> (best but requires serial cable +
 another machine to minicom/picocom off it). Set it to /dev/ttyS0
@@ -206,8 +206,8 @@ like:
 <span class="k">done</span>
 </code></pre></div>    </div>
     <p>and
- then minicom to <code class="highlighter-rouge">/dev/tty99</code> or
- to <code class="highlighter-rouge">/dev/pts/&lt;whatever socat decides to use&gt;</code>.</p>
+ then minicom to <code class="language-plaintext highlighter-rouge">/dev/tty99</code> or
+ to <code class="language-plaintext highlighter-rouge">/dev/pts/&lt;whatever socat decides to use&gt;</code>.</p>
   </li>
 </ol>
 
@@ -247,7 +247,7 @@ vmware-mount <span class="nt">-d</span> /tmp/vmount
 
 <p>Once you have grub.cfg open in your favourite editor, Add an extra
 option to it:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry 'seL4' --class fedora --class gnu-linux --class gnu --class os {
     load_video
     insmod gzio
     insmod part_msdos
@@ -261,13 +261,13 @@ option to it:</p>
 }
 </code></pre></div></div>
 
-<p>Of course, change the <code class="highlighter-rouge">--set=root &lt;DeviceID&gt;</code> line to your
+<p>Of course, change the <code class="language-plaintext highlighter-rouge">--set=root &lt;DeviceID&gt;</code> line to your
 DeviceID (set the DeviceID from other entries already in your grub.cfg),
-and also change the <code class="highlighter-rouge">sel4-image-ia32-pc99</code> to match the name of your
+and also change the <code class="language-plaintext highlighter-rouge">sel4-image-ia32-pc99</code> to match the name of your
 binary image that your Make produces (look in your build logs or in
-<code class="highlighter-rouge">images/</code> folder).</p>
+<code class="language-plaintext highlighter-rouge">images/</code> folder).</p>
 
-<p>Also may be a good idea to add <code class="highlighter-rouge">set default=&lt;seL4 menu index&gt;</code>
+<p>Also may be a good idea to add <code class="language-plaintext highlighter-rouge">set default=&lt;seL4 menu index&gt;</code>
 to the grub.cfg, so grub is configured to boot seL4.</p>
 
 <h2 id="using-the-vm-to-run-sel4">Using The VM to run seL4</h2>
@@ -327,7 +327,7 @@ repo is up to date.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

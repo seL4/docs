@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -169,8 +169,8 @@ most users.</p>
 <h2 id="api-additions">API Additions</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_IRQControl_GetIOAPIC</code> for x86.</li>
-  <li><code class="highlighter-rouge">seL4_IRQControl_GetMSI</code> for x86.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetIOAPIC</code> for x86.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetMSI</code> for x86.</li>
 </ul>
 
 <h2 id="api-changes">API Changes</h2>
@@ -178,8 +178,8 @@ most users.</p>
 <ul>
   <li>Total number of ASIDs for x86 reduced from 2\^16\^ to 2\^12\^
       (max ASID 2\^12\^).</li>
-  <li><code class="highlighter-rouge">seL4_BootInfo</code> struct: <code class="highlighter-rouge">userImagePDs</code> and <code class="highlighter-rouge">userImagePTs</code> combined
-      into <code class="highlighter-rouge">userImagePaging</code> in preparation for multilevel paging
+  <li><code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> struct: <code class="language-plaintext highlighter-rouge">userImagePDs</code> and <code class="language-plaintext highlighter-rouge">userImagePTs</code> combined
+      into <code class="language-plaintext highlighter-rouge">userImagePaging</code> in preparation for multilevel paging
       structures for 64 bit kernel support.</li>
   <li>Diminish rights removed from IPC</li>
 </ul>
@@ -187,86 +187,86 @@ most users.</p>
 <h2 id="api-removals">API Removals</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_IRQ_SetMode</code> removed (This only effects users who use the
+  <li><code class="language-plaintext highlighter-rouge">seL4_IRQ_SetMode</code> removed (This only effects users who use the
       IOAPIC on x86, which is turned off by default).</li>
 </ul>
 
 <h2 id="api-deprecations">API deprecations</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_IA32_PageDirectory_Map</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageDirectory_Map</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageDirectory_Unmap</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageDirectory_Unmap</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageTable_Map</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageTable_Map</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageTable_Unmap</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageTable_Unmap</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPageTable_Map</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPageTable_Map</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPageTable_Unmap</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPageTable_Unmap</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPageTable_Map</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPageTable_Map</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPageTable_Unmap</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPageTable_Unmap</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Page_Map</code> deprecated for <code class="highlighter-rouge">seL4_X86_Page_Map</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Page_Unmap</code> deprecated for <code class="highlighter-rouge">seL4_X86_Page_Unmap</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Page_Remap</code> deprecated for <code class="highlighter-rouge">seL4_X86_Page_Remap</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Page_MapIO</code> deprecated for <code class="highlighter-rouge">seL4_X86_Page_MapIO</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Page_GetAddress</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_Page_GetAddress</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_ASIDControl_MakePool</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_ASIDControl_MakePool</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_ASIDPool_Assign</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_ASIDPool_Assign</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort_In8</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOPort_In8</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort_In16</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOPort_In16</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort_In32</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOPort_In32</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort_Out8</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOPort_Out8</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort_Out16</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPort_Out16</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort_Out32</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPort_Out32</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_4K</code> deprecated for <code class="highlighter-rouge">seL4_X86_4K</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_LargePage</code> deprecated for <code class="highlighter-rouge">seL4_X86_LargePageObject</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageTableObject</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageTableObject</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageDirectoryObject</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageDirectoryObject</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPageTableObject</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_IOPageTableObject</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_ASIDControl</code> deprecated for <code class="highlighter-rouge">seL4_X86_ASIDControl</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_ASIDPool</code> deprecated for <code class="highlighter-rouge">seL4_X86_ASIDPool</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOSpace</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOSpace</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPort</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOPort</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Page</code> deprecated for <code class="highlighter-rouge">seL4_X86_Page</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PDPT</code> deprecated for <code class="highlighter-rouge">seL4_X86_PDPT</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageDirectory</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_PageDirectory</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_PageTable</code> deprecated for <code class="highlighter-rouge">seL4_X86_PageTable</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_IOPageTable</code> deprecated for <code class="highlighter-rouge">seL4_X86_IOPageTable</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Default_VMAttributes</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_Default_VMAttributes</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_WriteBack</code> deprecated for <code class="highlighter-rouge">seL4_X86_WriteBack</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_WriteThrough</code> deprecated for <code class="highlighter-rouge">seL4_X86_WriteThrough</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_CacheDisabled</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_CacheDisabled</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_Uncacheable</code>  deprecated for
-      <code class="highlighter-rouge">seL4_X86_Uncacheable</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_WriteCombining</code> deprecated for
-      <code class="highlighter-rouge">seL4_X86_WriteCombining</code></li>
-  <li><code class="highlighter-rouge">seL4_IA32_VMAttributes</code> deprecated for <code class="highlighter-rouge">seL4_X86_VMAttributes</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageDirectory_Map</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageDirectory_Map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageDirectory_Unmap</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageDirectory_Unmap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageTable_Map</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageTable_Map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageTable_Unmap</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageTable_Unmap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPageTable_Map</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPageTable_Map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPageTable_Unmap</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPageTable_Unmap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPageTable_Map</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPageTable_Map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPageTable_Unmap</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPageTable_Unmap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Page_Map</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_Page_Map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Page_Unmap</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_Page_Unmap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Page_Remap</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_Page_Remap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Page_MapIO</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_Page_MapIO</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Page_GetAddress</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_Page_GetAddress</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_ASIDControl_MakePool</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_ASIDControl_MakePool</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_ASIDPool_Assign</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_ASIDPool_Assign</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort_In8</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort_In8</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort_In16</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort_In16</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort_In32</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort_In32</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort_Out8</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort_Out8</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort_Out16</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort_Out16</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort_Out32</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort_Out32</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_4K</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_4K</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_LargePage</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_LargePageObject</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageTableObject</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageTableObject</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageDirectoryObject</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageDirectoryObject</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPageTableObject</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_IOPageTableObject</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_ASIDControl</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_ASIDControl</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_ASIDPool</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_ASIDPool</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOSpace</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOSpace</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPort</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOPort</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Page</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_Page</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PDPT</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_PDPT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageDirectory</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_PageDirectory</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_PageTable</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_PageTable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_IOPageTable</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_IOPageTable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Default_VMAttributes</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_Default_VMAttributes</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_WriteBack</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_WriteBack</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_WriteThrough</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_WriteThrough</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_CacheDisabled</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_CacheDisabled</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_Uncacheable</code>  deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_Uncacheable</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_WriteCombining</code> deprecated for
+      <code class="language-plaintext highlighter-rouge">seL4_X86_WriteCombining</code></li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_IA32_VMAttributes</code> deprecated for <code class="language-plaintext highlighter-rouge">seL4_X86_VMAttributes</code></li>
 </ul>
 
 <h2 id="upgrade-notes">Upgrade notes</h2>
 <p>This change is not source or binary compatible.</p>
 
-<p>Users will need to remove calls to <code class="highlighter-rouge">seL4_IRQ_SetMode</code>, and upgrade any
-manual parsing of <code class="highlighter-rouge">seL4_BootInfo</code>.</p>
+<p>Users will need to remove calls to <code class="language-plaintext highlighter-rouge">seL4_IRQ_SetMode</code>, and upgrade any
+manual parsing of <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code>.</p>
 
 <h2 id="full-changelog">Full changelog</h2>
-<p>Use <code class="highlighter-rouge">git log 2.1.0..3.0.0</code></p>
+<p>Use <code class="language-plaintext highlighter-rouge">git log 2.1.0..3.0.0</code></p>
 
 
   </div>
@@ -714,7 +714,7 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

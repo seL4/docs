@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -195,7 +195,7 @@ in the EFI system tables, identified by a GUID.</li>
   should go based on the size and locations of the payloads (kernel plus
   rootserver) it will extract, and place the image just above their end.
   Futhermore, for U-Boot images, pass the computed load address through to
-  the <code class="highlighter-rouge">mkimage</code> command instead of using a hard-coded one (for this format
+  the <code class="language-plaintext highlighter-rouge">mkimage</code> command instead of using a hard-coded one (for this format
   the load address and entry address are identical).</li>
   <li>Still allow statically configuring image start address via -DIMAGE_START_ADDR=0xaddress</li>
   <li>Support aarch64 2MiB kernel load addresses
@@ -204,7 +204,7 @@ in the EFI system tables, identified by a GUID.</li>
   is still the case.</li>
   <li>CMake: Add Findelfloader-tool.cmake module
   This adds support for importing this project via
-  <code class="highlighter-rouge">find_package(elfloader-tool)</code> if the project exists in the
+  <code class="language-plaintext highlighter-rouge">find_package(elfloader-tool)</code> if the project exists in the
   CMAKE_MODULE_PATH.</li>
   <li>output: use CR LF as line break and not LF CR for all console output.</li>
 </ul>
@@ -232,9 +232,9 @@ to prevent buffer overflows.</li>
   <li>RISC-V: Add fence.i before kernel start. This fence operation ensures that writes to memory that will be executed
   are visible to the instruction stream.</li>
   <li>Support 40-bit PA. Configure the EL2_TCR register with the correct PS value.</li>
-  <li>output: introduce <code class="highlighter-rouge">plat_console_putchar()</code>. drop <code class="highlighter-rouge">__fputc()</code> and provide <code class="highlighter-rouge">plat_console_putchar()</code> instead. Duplicated
+  <li>output: introduce <code class="language-plaintext highlighter-rouge">plat_console_putchar()</code>. drop <code class="language-plaintext highlighter-rouge">__fputc()</code> and provide <code class="language-plaintext highlighter-rouge">plat_console_putchar()</code> instead. Duplicated
   CR LF handling is removed from the platform code and happens centralized
-  in <code class="highlighter-rouge">arch_write_char()</code></li>
+  in <code class="language-plaintext highlighter-rouge">arch_write_char()</code></li>
   <li>Support multiple RISC-V hart entries.
   On multi-hart platforms, the bbl will call the payload’s entrypoint on
   each hart and it is up to the payload to synchronise them for a
@@ -349,7 +349,7 @@ to prevent buffer overflows.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

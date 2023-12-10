@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#background">Background</a>
@@ -309,7 +309,7 @@ TCBs waiting for notifications.</p>
 
 <h4 id="signalling">Signalling</h4>
 
-<p>When a task signals a notification object (using <code class="highlighter-rouge">seL4_Signal</code>), what occurs depends on the state of the object:</p>
+<p>When a task signals a notification object (using <code class="language-plaintext highlighter-rouge">seL4_Signal</code>), what occurs depends on the state of the object:</p>
 <ul>
   <li>Idle - the data word is set to the badge of the capability used to send the signal, and the object is converted
  to active.</li>
@@ -323,7 +323,7 @@ different bit in the badge, they can set different badge bits and waiters can ob
 
 <h4 id="waiting">Waiting</h4>
 
-<p>Tasks can wait on a notification object using <code class="highlighter-rouge">seL4_Wait</code>, which does the following:</p>
+<p>Tasks can wait on a notification object using <code class="language-plaintext highlighter-rouge">seL4_Wait</code>, which does the following:</p>
 
 <ul>
   <li>Idle - the TCB is queued, and the notification transitioned to waiting.</li>
@@ -333,7 +333,7 @@ different bit in the badge, they can set different badge bits and waiters can ob
 
 <h4 id="polling">Polling</h4>
 
-<p>Notification objects can also be polled with <code class="highlighter-rouge">seL4_Poll</code>, which is a non-blocking version of <code class="highlighter-rouge">seL4_Wait</code> that returns
+<p>Notification objects can also be polled with <code class="language-plaintext highlighter-rouge">seL4_Poll</code>, which is a non-blocking version of <code class="language-plaintext highlighter-rouge">seL4_Wait</code> that returns
 immediately regardless of the state.</p>
 
 <h2 id="interrupts-and-ipc">Interrupts and IPC</h2>
@@ -345,14 +345,14 @@ timer tutorial. <!--TODO link to timer tutorial --></p>
 <h2 id="exercises">Exercises</h2>
 
 <p>These exercises guide you through a basic producer consumer set up using notifications and shared memory. The 
-tutorial uses the capDL loader, and already has 2 producer processes (<code class="highlighter-rouge">producer_1.c</code> and <code class="highlighter-rouge">producer_2</code>) and 1 consumer
- process running (<code class="highlighter-rouge">consumer.c</code>). Each has access to a number of capabilities.</p>
+tutorial uses the capDL loader, and already has 2 producer processes (<code class="language-plaintext highlighter-rouge">producer_1.c</code> and <code class="language-plaintext highlighter-rouge">producer_2</code>) and 1 consumer
+ process running (<code class="language-plaintext highlighter-rouge">consumer.c</code>). Each has access to a number of capabilities.</p>
 
 <p>Each producer shares a buffer with the consumer, and the consumer processes data from both producers when it is
 available.</p>
 
 <p>When you start the tutorial, the output will look something like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Waiting for producer
 </code></pre></div></div>
 <h3 id="set-up-shared-memory">Set up shared memory</h3>
@@ -373,7 +373,7 @@ mapping. We provide code below that sets up the shared page between producer 1 a
 
 <p>However, we do not map the second buffer in, so producer 2 crashes immediately.</p>
 
-<p><strong>Exercise</strong> Understand the above code, and create a second shared page between <code class="highlighter-rouge">producer_2</code> and <code class="highlighter-rouge">consumer</code>.</p>
+<p><strong>Exercise</strong> Understand the above code, and create a second shared page between <code class="language-plaintext highlighter-rouge">producer_2</code> and <code class="language-plaintext highlighter-rouge">consumer</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO share buf2_frame_cap with producer_2</span>
 </code></pre></div></div>
@@ -382,10 +382,10 @@ mapping. We provide code below that sets up the shared page between producer 1 a
 
 <h3 id="signal-the-producers-to-go">Signal the producers to go</h3>
 
-<p>At this point, both producers are waiting on the <code class="highlighter-rouge">empty</code> notification for a signal that the buffer is ready 
+<p>At this point, both producers are waiting on the <code class="language-plaintext highlighter-rouge">empty</code> notification for a signal that the buffer is ready 
 to be written to.</p>
 
-<p><strong>Exercise</strong> signal both producers via the <code class="highlighter-rouge">buf1_empty</code> and <code class="highlighter-rouge">buf2_empty</code> notification objects.</p>
+<p><strong>Exercise</strong> signal both producers via the <code class="language-plaintext highlighter-rouge">buf1_empty</code> and <code class="language-plaintext highlighter-rouge">buf2_empty</code> notification objects.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO signal both producers</span>
 </code></pre></div></div>
@@ -394,7 +394,7 @@ to be written to.</p>
 
 <p>Now you should see something like the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Waiting for producer
 2: produce
 1: produce
@@ -403,8 +403,8 @@ Got badge: 1
 </code></pre></div></div>
 
 <p>At this point, the consumer should consume data from the appropriate buffer(s) and signal to the appropriate consumer(s)
-that the buffer is empty again. The capability to the <code class="highlighter-rouge">full</code> notification object has already been badged: <code class="highlighter-rouge">producer_1</code>s
-copy has a badge of <code class="highlighter-rouge">0b1</code> and <code class="highlighter-rouge">producer_2</code> a badge of <code class="highlighter-rouge">0b10</code>. By checking the bits in the badge, you can see
+that the buffer is empty again. The capability to the <code class="language-plaintext highlighter-rouge">full</code> notification object has already been badged: <code class="language-plaintext highlighter-rouge">producer_1</code>s
+copy has a badge of <code class="language-plaintext highlighter-rouge">0b1</code> and <code class="language-plaintext highlighter-rouge">producer_2</code> a badge of <code class="language-plaintext highlighter-rouge">0b10</code>. By checking the bits in the badge, you can see
 which of the producers (it may be both) has produced data.</p>
 
 <p><strong>Exercise</strong> Check the badge and signal the empty notification for the producers according to the bits set in the badge
@@ -414,7 +414,7 @@ which of the producers (it may be both) has produced data.</p>
     <span class="c1">// may recieve more than 1 signal at a time.</span>
 </code></pre></div></div>
 
-<p>At this point, you should see signals from both producers being processed, and the final <code class="highlighter-rouge">Success!</code> message printed.</p>
+<p>At this point, you should see signals from both producers being processed, and the final <code class="language-plaintext highlighter-rouge">Success!</code> message printed.</p>
 
 <h3 id="further-exercises">Further exercises</h3>
 
@@ -477,7 +477,7 @@ notifications/notifications.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

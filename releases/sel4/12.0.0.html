@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -149,7 +149,7 @@
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="sel4-version-1200-release">seL4 Version 12.0.0 Release</h1>
-<p>Announcing the release of <code class="highlighter-rouge">seL4 12.0.0</code> with the following changes:</p>
+<p>Announcing the release of <code class="language-plaintext highlighter-rouge">seL4 12.0.0</code> with the following changes:</p>
 
 <p>12.0.0 2020-10-21: BREAKING</p>
 
@@ -242,7 +242,7 @@ elfloader that are consistent with the kernel’s own definitions.</li>
 end of the user image in the initial thread’s vspace. The kernel initialisation code wasn’t calculating the
 bootinfo size correctly which could lead to a kernel fault when trying to map the bootinfo in when the parent page
 table object hadn’t been allocated.</li>
-  <li>Use autoconf definition for <code class="highlighter-rouge">RetypeMaxObjects</code> in &lt;sel4/types.h&gt;. This ensures that the definition stays consistent
+  <li>Use autoconf definition for <code class="language-plaintext highlighter-rouge">RetypeMaxObjects</code> in &lt;sel4/types.h&gt;. This ensures that the definition stays consistent
 with what the kernel is configured with.</li>
   <li>Fix up timers and clock frequencies
     <ul>
@@ -270,11 +270,11 @@ with a padding field that is a variable number of bytes depending on the platfor
 
 <ul>
   <li>Stop scheduling contexts from being bound to tcb’s that already have scheduling contexts.</li>
-  <li>Fix x86 <code class="highlighter-rouge">KERNEL_TIMER_IRQ</code> definition. Previously, MCS preemption point handling would check the wrong interrupt on
+  <li>Fix x86 <code class="language-plaintext highlighter-rouge">KERNEL_TIMER_IRQ</code> definition. Previously, MCS preemption point handling would check the wrong interrupt on
 x86 platforms.</li>
   <li>smp: tcb affinity modification bug. When changing the affinity of a thread on a remote core, the reschedule
 operation wasn’t being performed.</li>
-  <li>Allow <code class="highlighter-rouge">replyGrant</code> for fault handlers. The MCS kernel so far insisted on full grant rights for fault handler caps,
+  <li>Allow <code class="language-plaintext highlighter-rouge">replyGrant</code> for fault handlers. The MCS kernel so far insisted on full grant rights for fault handler caps,
 but replyGrant is sufficient and consistent with the default kernel config.</li>
   <li>All scheduling contexts compare their time with time in assigned core instead of currently executing core.</li>
   <li>Prevent recursion on timeout faults by suspending a passive server that receives a timeout fault.</li>
@@ -337,7 +337,7 @@ internally by the kernel to manage its own address space.</li>
 FAR_EL1 register.</li>
   <li>aarch64: Add missing faults to seL4_getArchFault. seL4_getArchFault is a libsel4 helper that constructs fault messages
 out of the IPC buffer message registers but it wasn’t aware of all possible fault types.</li>
-  <li>aarch64,vcpu: Add CNTKCTL_EL1 register to <code class="highlighter-rouge">vcpu_t</code>. This register tracks timer delegation to EL0 from EL1 and
+  <li>aarch64,vcpu: Add CNTKCTL_EL1 register to <code class="language-plaintext highlighter-rouge">vcpu_t</code>. This register tracks timer delegation to EL0 from EL1 and
 needs to be switched for different VCPUs.</li>
   <li>aarch64: Adds missing vcpu cases for some aarch64-specific functions on capabilities.</li>
   <li>cortex-a53,hyp: Reduce seL4_UserTop when on a cortex-a53 platform and KernelArmHypervisorSupport is set.
@@ -356,9 +356,9 @@ devices and their drivers’ memory accesses to the rest of a running system.</l
 <h3 id="x86">x86</h3>
 
 <ul>
-  <li>Fix printf typo in <code class="highlighter-rouge">apic_init</code>.</li>
+  <li>Fix printf typo in <code class="language-plaintext highlighter-rouge">apic_init</code>.</li>
   <li>x86_64: Fix PCID feature constant to use the correct bit.</li>
-  <li>Fix interrupt flag reset upon nested interrupt resume, <code class="highlighter-rouge">c_nested_interrupt</code>. This fixes an issue where ia32 kernels
+  <li>Fix interrupt flag reset upon nested interrupt resume, <code class="language-plaintext highlighter-rouge">c_nested_interrupt</code>. This fixes an issue where ia32 kernels
 would crash if receiving a nested interrupt.</li>
 </ul>
 
@@ -428,7 +428,7 @@ executing.</li>
 
 <h1 id="full-changelog">Full changelog</h1>
 <p>Refer to the git log in
-<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="highlighter-rouge">git log 11.0.0..12.0.0</code></p>
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="language-plaintext highlighter-rouge">git log 11.0.0..12.0.0</code></p>
 
 <h1 id="more-details">More details</h1>
 <p>See the
@@ -880,7 +880,7 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

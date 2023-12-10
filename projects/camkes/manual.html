@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -408,7 +408,7 @@ of these terms are made explicit below.</p>
   <p>A <em>type</em> of functional entity. It is important to stress this distinction.
   ‘Component’ is used colloquially to refer to both types and instances, but in
   a formal sense ‘component’ refers only to the type. To make this more
-  concrete, the statement <code class="highlighter-rouge">component foo f</code> describes a component <em>instance</em> f,
+  concrete, the statement <code class="language-plaintext highlighter-rouge">component foo f</code> describes a component <em>instance</em> f,
   whose <em>type</em> is foo.</p>
 </blockquote>
 
@@ -508,7 +508,7 @@ of these terms are made explicit below.</p>
   <p>An instantiation of a component type. Of course ‘instance’ can be used to
   refer to an instantiation of any type, but when you see the term ‘instance’ in
   the sources it is generally referring to the instantiation of a component. To
-  give a concrete example, in the statement <code class="highlighter-rouge">component foo f</code> f is an instance.</p>
+  give a concrete example, in the statement <code class="language-plaintext highlighter-rouge">component foo f</code> f is an instance.</p>
 </blockquote>
 
 <p><strong>Interface</strong></p>
@@ -537,12 +537,12 @@ of these terms are made explicit below.</p>
 <p><strong>Maybe</strong></p>
 
 <blockquote>
-  <p>Interfaces of components can be made optional using the <code class="highlighter-rouge">maybe</code> keyword. Optional
+  <p>Interfaces of components can be made optional using the <code class="language-plaintext highlighter-rouge">maybe</code> keyword. Optional
   interfaces do not need to be connected to any other interfaces. C symbols associated
   with optional interfaces (functions and dataport pointers) are declared as weak
   symbols. If nothing is connected to an optional interface, its associated symbols
   lack definitions. That is, functions and dataport pointers associated with unconnected
-  optional interfaces take the value <code class="highlighter-rouge">NULL</code> at runtime.</p>
+  optional interfaces take the value <code class="language-plaintext highlighter-rouge">NULL</code> at runtime.</p>
 </blockquote>
 
 <p><strong>Method</strong></p>
@@ -660,27 +660,27 @@ assembly {
 </code></pre>
 
 <ul>
-  <li><code class="highlighter-rouge">thing</code> is a <strong>procedure</strong></li>
-  <li><code class="highlighter-rouge">int</code> is a <strong>type</strong></li>
-  <li><code class="highlighter-rouge">func</code> is a <strong>method</strong></li>
-  <li><code class="highlighter-rouge">in</code> is a <strong>direction</strong></li>
-  <li><code class="highlighter-rouge">x</code> is a <strong>parameter</strong></li>
-  <li><code class="highlighter-rouge">sig</code> is an <strong>event</strong></li>
-  <li><code class="highlighter-rouge">buffer</code> is a <strong>port</strong></li>
-  <li><code class="highlighter-rouge">foo</code> and <code class="highlighter-rouge">bar</code> are <strong>component</strong>s</li>
-  <li><code class="highlighter-rouge">t1</code> is a <strong>uses</strong></li>
-  <li><code class="highlighter-rouge">s1</code> is a <strong>emits</strong></li>
-  <li><code class="highlighter-rouge">b1</code> and <code class="highlighter-rouge">b2</code> are <strong>dataport</strong>s</li>
-  <li><code class="highlighter-rouge">t2</code> is a <strong>provides</strong></li>
-  <li><code class="highlighter-rouge">s2</code> is a <strong>consumes</strong></li>
-  <li><code class="highlighter-rouge">assembly { ... }</code> is an <strong>assembly</strong></li>
-  <li><code class="highlighter-rouge">composition { ... }</code> is a <strong>composition</strong></li>
-  <li><code class="highlighter-rouge">f</code> and <code class="highlighter-rouge">b</code> are <strong>instance</strong>s</li>
-  <li><code class="highlighter-rouge">RPC</code>, <code class="highlighter-rouge">Notification</code> and <code class="highlighter-rouge">SharedData</code> are <strong>connector</strong>s</li>
-  <li><code class="highlighter-rouge">c1</code>, <code class="highlighter-rouge">c2</code> and <code class="highlighter-rouge">c3</code> are <strong>connection</strong>s</li>
-  <li><code class="highlighter-rouge">cat</code> is a <strong>struct</strong></li>
-  <li><code class="highlighter-rouge">kitty</code> is an <strong>attribute</strong></li>
-  <li><code class="highlighter-rouge">f.kitty</code> is a <strong>setting</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">thing</code> is a <strong>procedure</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">int</code> is a <strong>type</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">func</code> is a <strong>method</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">in</code> is a <strong>direction</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">x</code> is a <strong>parameter</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">sig</code> is an <strong>event</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">buffer</code> is a <strong>port</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">foo</code> and <code class="language-plaintext highlighter-rouge">bar</code> are <strong>component</strong>s</li>
+  <li><code class="language-plaintext highlighter-rouge">t1</code> is a <strong>uses</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">s1</code> is a <strong>emits</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">b1</code> and <code class="language-plaintext highlighter-rouge">b2</code> are <strong>dataport</strong>s</li>
+  <li><code class="language-plaintext highlighter-rouge">t2</code> is a <strong>provides</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">s2</code> is a <strong>consumes</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">assembly { ... }</code> is an <strong>assembly</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">composition { ... }</code> is a <strong>composition</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">f</code> and <code class="language-plaintext highlighter-rouge">b</code> are <strong>instance</strong>s</li>
+  <li><code class="language-plaintext highlighter-rouge">RPC</code>, <code class="language-plaintext highlighter-rouge">Notification</code> and <code class="language-plaintext highlighter-rouge">SharedData</code> are <strong>connector</strong>s</li>
+  <li><code class="language-plaintext highlighter-rouge">c1</code>, <code class="language-plaintext highlighter-rouge">c2</code> and <code class="language-plaintext highlighter-rouge">c3</code> are <strong>connection</strong>s</li>
+  <li><code class="language-plaintext highlighter-rouge">cat</code> is a <strong>struct</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">kitty</code> is an <strong>attribute</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">f.kitty</code> is a <strong>setting</strong></li>
 </ul>
 
 <h2 id="usage">Usage</h2>
@@ -726,7 +726,7 @@ qemu:</p>
 
 <p>You should see debugging output from the system initialisation, followed by:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo_int: 42 -&gt; 42
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo_int: 42 -&gt; 42
 echo_float: 273421.437500 -&gt; 273421.437500
 echo_double: 273421.427400 -&gt; 273421.427400
 echo_mix: 273421.427400 -&gt; 273421
@@ -774,7 +774,7 @@ procedure MyInterface {
 <p>This interface consists of a single method, print that takes an input parameter
 of type string. Note that, although we are planning to implement this component
 in C, interfaces are defined with abstract types that have equivalents in all
-target languages. In the case of C, string maps to <code class="highlighter-rouge">char*</code>. Each component
+target languages. In the case of C, string maps to <code class="language-plaintext highlighter-rouge">char*</code>. Each component
 needs a description of the interfaces it exposes or needs in so-called
 Architecture Description Language. Create these in
 apps/helloworld/components/Hello/Hello.camkes and
@@ -800,13 +800,13 @@ component Client {
 
 <p>Note that each component description needs to import the interface file we
 created above from apps/helloworld/interfaces. Import statements function
-similar to C’s <code class="highlighter-rouge">#include</code>, in that they can be enclosed in double quotes and
+similar to C’s <code class="language-plaintext highlighter-rouge">#include</code>, in that they can be enclosed in double quotes and
 are relative to the source file, or enclosed in angle brackets and refer to a
 built-in file. The Hello component is to contain an implementation of
 MyInterface and the Client component will expect to be provided with an
-implementation of MyInterface. The <code class="highlighter-rouge">control</code> keyword indicates that Client is
+implementation of MyInterface. The <code class="language-plaintext highlighter-rouge">control</code> keyword indicates that Client is
 what is called an active component. This means it will contain a main function
-(prototyped as <code class="highlighter-rouge">run</code>) and have an active thread of control.</p>
+(prototyped as <code class="language-plaintext highlighter-rouge">run</code>) and have an active thread of control.</p>
 
 <p>Create a file to describe the instantiation and structure of the system at
 apps/helloworld/helloworld.camkes.</p>
@@ -830,16 +830,16 @@ assembly {
 Hello.camkes and Client.camkes are the files we created above, while
 std_connector.camkes is a built-in file that defines the standard CAmkES
 connector types. The body of the system description instantiates each component
-once, <code class="highlighter-rouge">h</code> of type <code class="highlighter-rouge">Hello</code> and <code class="highlighter-rouge">c</code> of type <code class="highlighter-rouge">Client</code>. The components’ interfaces
-are connected via a connection, <code class="highlighter-rouge">conn</code>, of type <code class="highlighter-rouge">seL4RPCCall</code>.</p>
+once, <code class="language-plaintext highlighter-rouge">h</code> of type <code class="language-plaintext highlighter-rouge">Hello</code> and <code class="language-plaintext highlighter-rouge">c</code> of type <code class="language-plaintext highlighter-rouge">Client</code>. The components’ interfaces
+are connected via a connection, <code class="language-plaintext highlighter-rouge">conn</code>, of type <code class="language-plaintext highlighter-rouge">seL4RPCCall</code>.</p>
 
 <p>Now for the implementation of the components. Create a single source file for
 Hello as apps/helloworld/components/Hello/src/hello.c:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* apps/helloworld/components/Hello/src/hello.c */</span>
 
-<span class="cp">#include &lt;camkes.h&gt;
-#include &lt;stdio.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span>
 <span class="kt">void</span> <span class="nf">inf__init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
@@ -853,7 +853,7 @@ Hello as apps/helloworld/components/Hello/src/hello.c:</p>
 prototypes for functions related to MyInterface that this component needs to
 implement. Note that the actual implementations of interface functions are
 prefixed with the component-local name of the interface (inf from Hello.camkes
-above) and an underscore. The function <code class="highlighter-rouge">inf__init</code> is for this component to do
+above) and an underscore. The function <code class="language-plaintext highlighter-rouge">inf__init</code> is for this component to do
 any required initialisation. In the case of this example we have no
 initialisation to perform.</p>
 
@@ -863,7 +863,7 @@ they are directly available to it:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* apps/helloworld/components/Client/src/client.c */</span>
 
-<span class="cp">#include &lt;camkes.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s">"hello world"</span><span class="p">;</span>
@@ -872,14 +872,14 @@ they are directly available to it:</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The entry point of a CAmkES component is <code class="highlighter-rouge">run</code>.</p>
+<p>The entry point of a CAmkES component is <code class="language-plaintext highlighter-rouge">run</code>.</p>
 
 <p>The final thing is to add some build system boiler plate to be able to build
 the system.
-Copy one of the <code class="highlighter-rouge">CMakeLists.txt</code> files from another application or create
-<code class="highlighter-rouge">apps/helloworld/CMakeLists.txt</code> from scratch:</p>
+Copy one of the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> files from another application or create
+<code class="language-plaintext highlighter-rouge">apps/helloworld/CMakeLists.txt</code> from scratch:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake_minimum_required(VERSION 3.7.2)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake_minimum_required(VERSION 3.7.2)
 
 project(helloworld C)
 
@@ -889,7 +889,7 @@ DeclareCAmkESComponent(Hello SOURCES components/Hello/src/hello.c)
 DeclareCAmkESRootserver(helloworld.camkes)
 </code></pre></div></div>
 
-<p>You’re now ready to compile and run this application, by entering the <code class="highlighter-rouge">CAMKES_APP</code> value in the cmake configuration GUI:</p>
+<p>You’re now ready to compile and run this application, by entering the <code class="language-plaintext highlighter-rouge">CAMKES_APP</code> value in the cmake configuration GUI:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>build
 cmake <span class="nb">.</span> <span class="nt">-DCAMKES_APP</span><span class="o">=</span>helloworld <span class="c"># set `helloworld` as CAMKES_APP</span>
@@ -899,7 +899,7 @@ ninja
 
 <p>If all goes well you should see:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client says: hello world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client says: hello world
 </code></pre></div></div>
 
 <p>Congratulations, you’ve just made your first CAmkES application.</p>
@@ -953,7 +953,7 @@ for the component that does nothing except emit the event itself:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* apps/helloevent/components/Emitter/src/main.c */</span>
 
-<span class="cp">#include &lt;camkes.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -1003,8 +1003,8 @@ received, they can call a blocking function that will return when the event is
 received or they can call a polling function that returns whether an event has
 arrived or not. Let’s add some source code that uses all three:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;camkes.h&gt;
-#include &lt;stdio.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span>
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">static</span> <span class="kt">int</span> <span class="n">fired</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1040,11 +1040,11 @@ again when another event arrives you need to explicitly re-register it.</p>
 
 <p>We now have everything we need to run this system.</p>
 
-<p>Create the appropriate <code class="highlighter-rouge">apps/helloevent/CMakeLists.txt</code> as for the previous example. Compile the system and
+<p>Create the appropriate <code class="language-plaintext highlighter-rouge">apps/helloevent/CMakeLists.txt</code> as for the previous example. Compile the system and
 run it with the simulate script as per the previous example. If all goes well you
 should see something like the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Registering callback...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Registering callback...
 Callback fired!
 Polling...
 We didn't find an event
@@ -1066,7 +1066,7 @@ will return when/if the second instance of the event arrives.</p>
 <p>Dataports are CAmkES’ abstraction of shared memory. All
 components participating in a connection involving dataports get read/write
 access to the dataport by default. The default dataport type is
-<code class="highlighter-rouge">Buf</code>, which is implemented as a byte array in C of size <code class="highlighter-rouge">PAGE_SIZE</code>.
+<code class="language-plaintext highlighter-rouge">Buf</code>, which is implemented as a byte array in C of size <code class="language-plaintext highlighter-rouge">PAGE_SIZE</code>.
 Alternatively you can specify a user-defined type for the shared memory region.
 This example will demonstrate both.</p>
 
@@ -1104,8 +1104,8 @@ component Ping {
 </code></pre>
 
 <p>Note that we need to include the C header in the ADL. CAmkES does not actually
-parse this header, but it needs to know to <code class="highlighter-rouge">#include</code> it whenever it references
-the <code class="highlighter-rouge">MyData_t</code> type. Add a similar description for Pong:</p>
+parse this header, but it needs to know to <code class="language-plaintext highlighter-rouge">#include</code> it whenever it references
+the <code class="language-plaintext highlighter-rouge">MyData_t</code> type. Add a similar description for Pong:</p>
 
 <pre><code class="language-camkes">/* apps/hellodataport/components/Pong/Pong.camkes */
 
@@ -1121,10 +1121,10 @@ component Pong {
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* apps/components/Ping/src/main.c */</span>
 
-<span class="cp">#include &lt;camkes.h&gt;
-#include &lt;porttype.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;porttype.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
 </span>
 <span class="c1">// index in d1 to use to signal pong</span>
 <span class="cp">#define D1_READY_IDX 20
@@ -1153,10 +1153,10 @@ component Pong {
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* apps/components/Pong/src/main.c */</span>
 
-<span class="cp">#include &lt;camkes.h&gt;
-#include &lt;porttype.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;porttype.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
 </span>
 <span class="c1">// index in s1 to use to signal ping</span>
 <span class="cp">#define S1_READY_IDX 20
@@ -1183,12 +1183,12 @@ component Pong {
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Note the use of <code class="highlighter-rouge">*_acquire()</code> and <code class="highlighter-rouge">*_release()</code> functions. These are used to maintain
-coherency of shared memory between components. Call <code class="highlighter-rouge">*_acquire()</code> between multiple
+<p>Note the use of <code class="language-plaintext highlighter-rouge">*_acquire()</code> and <code class="language-plaintext highlighter-rouge">*_release()</code> functions. These are used to maintain
+coherency of shared memory between components. Call <code class="language-plaintext highlighter-rouge">*_acquire()</code> between multiple
 reads from a dataport, where the correct behaviour of the program depends on the
-contents of the dataport possibly changing between reads. Call <code class="highlighter-rouge">*_release()</code> between
+contents of the dataport possibly changing between reads. Call <code class="language-plaintext highlighter-rouge">*_release()</code> between
 multiple writes to a dataport, where the correct behaviour of the program depends
-on writes preceding the <code class="highlighter-rouge">*_release()</code> in the program code being performed strictly
+on writes preceding the <code class="language-plaintext highlighter-rouge">*_release()</code> in the program code being performed strictly
 before the writes following it.</p>
 
 <p>Typically, a real system would have a more complete communication protocol between
@@ -1213,7 +1213,7 @@ assembly {
 }
 </code></pre>
 
-<p>Add the now familiar <code class="highlighter-rouge">apps/hellodataport/CMakeLists.txt</code>:</p>
+<p>Add the now familiar <code class="language-plaintext highlighter-rouge">apps/hellodataport/CMakeLists.txt</code>:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.7.2<span class="p">)</span>
 
@@ -1230,22 +1230,22 @@ assembly {
 
 </code></pre></div></div>
 <p>We added an interface library containing the shared header file. The LIBS field in DeclareCAmkESComponent can be
-used to specify any argument that can be ordinarily given to CMake’s <code class="highlighter-rouge">target_link_libraries()</code>.</p>
+used to specify any argument that can be ordinarily given to CMake’s <code class="language-plaintext highlighter-rouge">target_link_libraries()</code>.</p>
 
 <p>If you now compile and run the resulting
 image you should see some output like the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ping: sending hello...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ping: sending hello...
 Pong: received hello
 Pong: sending world...
 Ping: received world.
 </code></pre></div></div>
 <h4 id="an-example-of-structs-and-arrays-for-collections">An example of structs and arrays for collections</h4>
 
-<p>A struct can be defined with the <code class="highlighter-rouge">struct</code> keyword.  The attributes that make
-up the struct are listed in a <code class="highlighter-rouge">type</code> <code class="highlighter-rouge">name</code> format (similar to C).</p>
+<p>A struct can be defined with the <code class="language-plaintext highlighter-rouge">struct</code> keyword.  The attributes that make
+up the struct are listed in a <code class="language-plaintext highlighter-rouge">type</code> <code class="language-plaintext highlighter-rouge">name</code> format (similar to C).</p>
 
-<p>Arrays are specified by appending the attribute name with a <code class="highlighter-rouge">[]</code>.  The size of
+<p>Arrays are specified by appending the attribute name with a <code class="language-plaintext highlighter-rouge">[]</code>.  The size of
 an array is set at code generation time when the setting for the attribute is
 specified.</p>
 
@@ -1282,8 +1282,8 @@ assembly {
 
 </code></pre>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;camkes.h&gt;
-#include &lt;stdio.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1397,9 +1397,9 @@ that checks its dependencies:</p>
 <p><strong>-I PATH</strong>, <strong>–import-path</strong></p>
 
 <blockquote>
-  <p>CAmkES specifications can contain <code class="highlighter-rouge">import</code> statements that are either
-  relative or builtin. Analogously to C pre-processor <code class="highlighter-rouge">#include</code> directives,
-  builtin <code class="highlighter-rouge">import</code> statements use angle brackets, <code class="highlighter-rouge">import &amp;lt;foo.camkes&amp;gt;</code>.
+  <p>CAmkES specifications can contain <code class="language-plaintext highlighter-rouge">import</code> statements that are either
+  relative or builtin. Analogously to C pre-processor <code class="language-plaintext highlighter-rouge">#include</code> directives,
+  builtin <code class="language-plaintext highlighter-rouge">import</code> statements use angle brackets, <code class="language-plaintext highlighter-rouge">import &amp;lt;foo.camkes&amp;gt;</code>.
   This option is similar to the C compiler flag, -I, and adds a directory to be
   searched for these builtin files. When resolving imports, directories will be
   searched in the order in which they are specified on the command line with
@@ -1506,7 +1506,7 @@ sense in the context of another platform.</p>
 defines exactly what functions and variables are exported. The APIs of these
 are described below and usage should be reasonably straightforward. To import
 any of these modules the top-level directory of this distribution should be in
-your <code class="highlighter-rouge">PYTHONPATH</code> environment variable. The available modules are:</p>
+your <code class="language-plaintext highlighter-rouge">PYTHONPATH</code> environment variable. The available modules are:</p>
 
 <p><strong><a href="#camkes.ast">camkes.ast</a></strong></p>
 
@@ -1549,19 +1549,19 @@ your <code class="highlighter-rouge">PYTHONPATH</code> environment variable. The
 
 <p>The result of parsing a CAmkES specification is an Abstract Syntax Tree (AST),
 representing the input as a set of interconnected nodes. When using the default
-parser, the object returned is of type, <code class="highlighter-rouge">LiftedAST</code>, which is defined in this
-module. <code class="highlighter-rouge">LiftedAST</code> and its children all inherit from a base type, <code class="highlighter-rouge">ASTObject</code>,
+parser, the object returned is of type, <code class="language-plaintext highlighter-rouge">LiftedAST</code>, which is defined in this
+module. <code class="language-plaintext highlighter-rouge">LiftedAST</code> and its children all inherit from a base type, <code class="language-plaintext highlighter-rouge">ASTObject</code>,
 that provides common functionality like traversal and comparison.</p>
 
-<p>One of the AST objects is a class, <code class="highlighter-rouge">Reference</code>. Objects of this class are used
+<p>One of the AST objects is a class, <code class="language-plaintext highlighter-rouge">Reference</code>. Objects of this class are used
 in the AST to represent symbols that refer to entities that are defined
 elsewhere. During parsing, references are removed from the AST as they are
 resolved to the entities to which they refer. In particular, if you are using
-the default parser, the returned AST will never contain any <code class="highlighter-rouge">Reference</code>
+the default parser, the returned AST will never contain any <code class="language-plaintext highlighter-rouge">Reference</code>
 objects.</p>
 
 <p>In the code and in this document there is some discussion of ‘collapsing’ AST
-references. This is meant to refer to replacing the <code class="highlighter-rouge">Reference</code> object in the
+references. This is meant to refer to replacing the <code class="language-plaintext highlighter-rouge">Reference</code> object in the
 AST by the entity to which it refers. Note that this needs to be done by
 reference so that you still only end up with a single copy of the entity, but
 multiple pointers to it.</p>
@@ -1579,20 +1579,20 @@ out, you will want to import the parser as a module into your own code. After
 importing this module, you can interact with the parser through the following
 high-level API.</p>
 
-<p><strong><code class="highlighter-rouge">parse_file(filename, options=None)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">parse_file(filename, options=None)</code></strong></p>
 
 <blockquote>
-  <p>Parse a file into a <code class="highlighter-rouge">LiftedAST</code>. The <code class="highlighter-rouge">options</code> arguments is expected to be a
+  <p>Parse a file into a <code class="language-plaintext highlighter-rouge">LiftedAST</code>. The <code class="language-plaintext highlighter-rouge">options</code> arguments is expected to be a
   namespace as constructed by the runner. If you have non-standard parsing
   requirements, you may find this function is insufficiently flexible for your
   needs. In this case, you will need to compose the low-level parsers. You can
   see a rough guide of how to do this in camkes/parser/parser.py.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">parse_string(string, options=None)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">parse_string(string, options=None)</code></strong></p>
 
 <blockquote>
-  <p>Parse a string into a <code class="highlighter-rouge">LiftedAST</code>. This function works identically to the
+  <p>Parse a string into a <code class="language-plaintext highlighter-rouge">LiftedAST</code>. This function works identically to the
   previous in all respects, except obviously you will not have accurate
   filename information.</p>
 </blockquote>
@@ -1608,16 +1608,16 @@ actually work you will need to read the source code and comments.</p>
 <p>The API only contains a single class through which all access is intended to
 flow.</p>
 
-<p><code class="highlighter-rouge">Templates.</code><strong><code class="highlighter-rouge">__init__(self, platform)</code></strong></p>
+<p><code class="language-plaintext highlighter-rouge">Templates.</code><strong><code class="language-plaintext highlighter-rouge">__init__(self, platform)</code></strong></p>
 
 <blockquote>
   <p>Create a new template store in which templates can later be looked up. The
   category of templates that are available from this store is specialised via
-  <strong><code class="highlighter-rouge">platform</code></strong>. At time of writing the valid values of <strong><code class="highlighter-rouge">platform</code></strong> are
+  <strong><code class="language-plaintext highlighter-rouge">platform</code></strong>. At time of writing the valid values of <strong><code class="language-plaintext highlighter-rouge">platform</code></strong> are
   ‘seL4’, ‘CIMP’ and ‘GraphViz’.</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">Templates.</code><strong><code class="highlighter-rouge">add_root(self, root)</code></strong></p>
+<p><code class="language-plaintext highlighter-rouge">Templates.</code><strong><code class="language-plaintext highlighter-rouge">add_root(self, root)</code></strong></p>
 
 <blockquote>
   <p>Add a directory to be searched for templates when performing lookups. This
@@ -1625,39 +1625,39 @@ flow.</p>
   overwrite builtin templates if you wish.</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">Templates.</code><strong><code class="highlighter-rouge">get_roots(self)</code></strong></p>
+<p><code class="language-plaintext highlighter-rouge">Templates.</code><strong><code class="language-plaintext highlighter-rouge">get_roots(self)</code></strong></p>
 
 <blockquote>
   <p>Return the list of directories that are searched for templates. Note that if
-  you are the only client operating on this <code class="highlighter-rouge">Templates</code> object you will know
+  you are the only client operating on this <code class="language-plaintext highlighter-rouge">Templates</code> object you will know
   the contents of this list anyway, but this function is provided for
   convenience.</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">Templates.</code><strong><code class="highlighter-rouge">add(self, connector_name, path, template)</code></strong></p>
+<p><code class="language-plaintext highlighter-rouge">Templates.</code><strong><code class="language-plaintext highlighter-rouge">add(self, connector_name, path, template)</code></strong></p>
 
 <blockquote>
   <p>Add a template to the lookup dictionary, such that it can later be returned
   in a template lookup. Only connector templates can be added currently (i.e.
   component templates and top-level templates cannot be added). The caller
-  provides the <strong><code class="highlighter-rouge">connector_name</code></strong> this template applies to (e.g.
-  ‘seL4MyConnector’), a partial lookup <strong><code class="highlighter-rouge">path</code></strong> to the template (e.g.
-  ‘from.source’) and a roots-relative path to the <strong><code class="highlighter-rouge">template</code></strong> itself. Again,
+  provides the <strong><code class="language-plaintext highlighter-rouge">connector_name</code></strong> this template applies to (e.g.
+  ‘seL4MyConnector’), a partial lookup <strong><code class="language-plaintext highlighter-rouge">path</code></strong> to the template (e.g.
+  ‘from.source’) and a roots-relative path to the <strong><code class="language-plaintext highlighter-rouge">template</code></strong> itself. Again,
   this function is sufficiently complicated that it may be easier to comprehend
-  its usage from reading <code class="highlighter-rouge">camkes/runner/__main__.py</code>.</p>
+  its usage from reading <code class="language-plaintext highlighter-rouge">camkes/runner/__main__.py</code>.</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">Templates.</code><strong><code class="highlighter-rouge">lookup(self, path, entity=None)</code></strong></p>
+<p><code class="language-plaintext highlighter-rouge">Templates.</code><strong><code class="language-plaintext highlighter-rouge">lookup(self, path, entity=None)</code></strong></p>
 
 <blockquote>
-  <p>Locate and return a template. The <strong><code class="highlighter-rouge">path</code></strong> provided should be a full lookup
+  <p>Locate and return a template. The <strong><code class="language-plaintext highlighter-rouge">path</code></strong> provided should be a full lookup
   path from the second-level of the lookup dictionary (i.e. not including the
-  platform prefix). For example, a valid <strong><code class="highlighter-rouge">path</code></strong> might be
-  ‘seL4RPCCall.from.source’. If you provide an <strong><code class="highlighter-rouge">entity</code></strong> this is used as a guard
+  platform prefix). For example, a valid <strong><code class="language-plaintext highlighter-rouge">path</code></strong> might be
+  ‘seL4RPCCall.from.source’. If you provide an <strong><code class="language-plaintext highlighter-rouge">entity</code></strong> this is used as a guard
   on the lookup. The guards come into play when looking up connector templates.
   In this situation the connector type of the connection you pass in as
-  <strong><code class="highlighter-rouge">entity</code></strong> will be used to determine if a given template matches your
-  lookup. This function returns <code class="highlighter-rouge">None</code> if a matching template can’t be found.</p>
+  <strong><code class="language-plaintext highlighter-rouge">entity</code></strong> will be used to determine if a given template matches your
+  lookup. This function returns <code class="language-plaintext highlighter-rouge">None</code> if a matching template can’t be found.</p>
 </blockquote>
 
 <h3 id="runtime-api">Runtime API</h3>
@@ -1679,21 +1679,21 @@ descriptions.</p>
 
 <p>The following types are available at runtime from the C context of a component:</p>
 
-<p><strong><code class="highlighter-rouge">Buf</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">Buf</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)</p>
 
 <blockquote>
   <p>The underlying type of a dataport. A user is never expected to instantiate
   one of these manually, but they are free to do so if they wish.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">camkes_error_handler_t</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/error.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">camkes_error_handler_t</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/error.h&gt;</code>)</p>
 <blockquote>
   <p>The type of an error handler for dealing with errors originating in glue
   code. For more information about this see
   <a href="#error-handling">Error Handling</a>.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">camkes_tls_t</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">camkes_tls_t</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
 
 <blockquote>
   <p>Thread-local storage metadata. This captures some necessary information for
@@ -1702,48 +1702,48 @@ descriptions.</p>
   wish.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">dataport_ptr_t</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">dataport_ptr_t</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)</p>
 
 <blockquote>
   <p>A component-independent representation of a pointer into a dataport. This is
   intended to be an opaque type to the user that is only ever used via the
-  <code class="highlighter-rouge">dataport_wrap_ptr</code> and <code class="highlighter-rouge">dataport_unwrap_ptr</code> functions.</p>
+  <code class="language-plaintext highlighter-rouge">dataport_wrap_ptr</code> and <code class="language-plaintext highlighter-rouge">dataport_unwrap_ptr</code> functions.</p>
 </blockquote>
 
 <p>The following variables are available:</p>
 
-<p><strong><em><code class="highlighter-rouge">dataport</code></em></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><em><code class="language-plaintext highlighter-rouge">dataport</code></em></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>If a component has a dataport they will be provided with a symbol of the
   dataport’s name that is a pointer of the type they specified in their CAmkES
-  specification. As mentioned previously, the default type is <code class="highlighter-rouge">Buf</code>.</p>
+  specification. As mentioned previously, the default type is <code class="language-plaintext highlighter-rouge">Buf</code>.</p>
 </blockquote>
 
 <p>The following functions are available at runtime:</p>
 
-<p><strong><code class="highlighter-rouge">camkes_error_handler_t camkes_register_error_handler(camkes_error_handler_t handler)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/error.h&gt;</code>)
-<strong><code class="highlighter-rouge">camkes_error_handler_t </code> <em><code class="highlighter-rouge">interface</code></em><code class="highlighter-rouge">_register_error_handler(camkes_error_handler_t handler)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/error.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">camkes_error_handler_t camkes_register_error_handler(camkes_error_handler_t handler)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/error.h&gt;</code>)
+<strong><code class="language-plaintext highlighter-rouge">camkes_error_handler_t </code> <em><code class="language-plaintext highlighter-rouge">interface</code></em><code class="language-plaintext highlighter-rouge">_register_error_handler(camkes_error_handler_t handler)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/error.h&gt;</code>)</p>
 
 <blockquote>
   <p>Register a component-wide or interface-specific error handler, respectively.
-  These functions return the previous error handler or <code class="highlighter-rouge">NULL</code> if there was no
+  These functions return the previous error handler or <code class="language-plaintext highlighter-rouge">NULL</code> if there was no
   previously installed error handler. For more information see
   <a href="#error-handling">Error Handling</a>.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">dataport_ptr_t dataport_wrap_ptr(void *ptr)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)
-<strong><code class="highlighter-rouge">void *dataport_unwrap_ptr(dataport_ptr_t ptr)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">dataport_ptr_t dataport_wrap_ptr(void *ptr)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)
+<strong><code class="language-plaintext highlighter-rouge">void *dataport_unwrap_ptr(dataport_ptr_t ptr)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dataport.h&gt;</code>)</p>
 
 <blockquote>
   <p>Utility functions for creating and destroying a component-independent
-  representation of a pointer into a dataport. This <code class="highlighter-rouge">dataport_ptr_t</code> can be
+  representation of a pointer into a dataport. This <code class="language-plaintext highlighter-rouge">dataport_ptr_t</code> can be
   passed over a procedure interface to be unwrapped by the receiving component.
   Unwrapping will fail if the underlying pointer is not into a dataport that is
-  shared with the receiver. <code class="highlighter-rouge">dataport_unwrap_ptr</code> returns <code class="highlighter-rouge">NULL</code> on failure.</p>
+  shared with the receiver. <code class="language-plaintext highlighter-rouge">dataport_unwrap_ptr</code> returns <code class="language-plaintext highlighter-rouge">NULL</code> on failure.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void</code> <em><code class="highlighter-rouge">dataport</code></em><code class="highlighter-rouge">_acquire(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">void</code> <em><code class="language-plaintext highlighter-rouge">dataport</code></em><code class="language-plaintext highlighter-rouge">_acquire(void)</code></strong></p>
 
 <blockquote>
   <p>An acquire memory fence. Any read from the dataport preceding this fence in
@@ -1754,7 +1754,7 @@ descriptions.</p>
   connected by the dataport.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void</code> <em><code class="highlighter-rouge">dataport</code></em><code class="highlighter-rouge">_release(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">void</code> <em><code class="language-plaintext highlighter-rouge">dataport</code></em><code class="language-plaintext highlighter-rouge">_release(void)</code></strong></p>
 
 <blockquote>
   <p>A release memory fence. Any write to the dataport following this fence in
@@ -1765,36 +1765,36 @@ descriptions.</p>
   connected by the dataport.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">size_t</code> <em><code class="highlighter-rouge">dataport</code></em><code class="highlighter-rouge">_get_size(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">size_t</code> <em><code class="language-plaintext highlighter-rouge">dataport</code></em><code class="language-plaintext highlighter-rouge">_get_size(void)</code></strong></p>
 
 <blockquote>
   <p>Returns the size for the specific dataport this function gets called for. In
   addition to this function, every component that has a dataport will be
-  provided with a macro <em><code class="highlighter-rouge">dataport</code></em><code class="highlighter-rouge">_size</code> that is defined to the size of the
+  provided with a macro <em><code class="language-plaintext highlighter-rouge">dataport</code></em><code class="language-plaintext highlighter-rouge">_size</code> that is defined to the size of the
   invdividual dataport. This macro allows declaring fixed size arrays, as the
-  <code class="highlighter-rouge">C</code> language requires a constant-expression for this.</p>
+  <code class="language-plaintext highlighter-rouge">C</code> language requires a constant-expression for this.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void *camkes_dma_alloc(size_t size, int align)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)
-<strong><code class="highlighter-rouge">void camkes_dma_free(void *ptr, size_t size)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">void *camkes_dma_alloc(size_t size, int align)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)
+<strong><code class="language-plaintext highlighter-rouge">void camkes_dma_free(void *ptr, size_t size)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)</p>
 
 <blockquote>
   <p>Allocator for DMA device operations. These are closely linked with the DMA
   pool functionality, as the allocation is backed by this pool.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">uintptr_t camkes_dma_get_paddr(void *ptr)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">uintptr_t camkes_dma_get_paddr(void *ptr)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/dma.h&gt;</code>)</p>
 
 <blockquote>
   <p>Translate a pointer into a DMA region into a physical address. This function
   assumes that the pointer you are passing in is to a byte within a region
-  allocated to you by <code class="highlighter-rouge">camkes_dma_alloc_page</code>. The reason for needing to obtain
+  allocated to you by <code class="language-plaintext highlighter-rouge">camkes_dma_alloc_page</code>. The reason for needing to obtain
   the physical address of a pointer is typically to pass to a device that is
   going to access this region outside of the scope of the MMU. For more
   information, see the <a href="#direct-memory-access">DMA</a> section below.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void *camkes_io_map(void *cookie, uintptr_t paddr, size_t size, int cached, ps_mem_flags_t flags)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">void *camkes_io_map(void *cookie, uintptr_t paddr, size_t size, int cached, ps_mem_flags_t flags)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
 
 <blockquote>
   <p>Lookup the translation to virtual address from the physical address of a
@@ -1803,22 +1803,22 @@ descriptions.</p>
   appropriate.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int camkes_io_mapper(ps_io_mapper_t *mapper)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int camkes_io_mapper(ps_io_mapper_t *mapper)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
 
 <blockquote>
   <p>Construct an IO mapping structure to pass to libplatsupport. See source
   comments for more information about how to use this.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int camkes_io_ops(ps_io_ops_t *ops)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int camkes_io_ops(ps_io_ops_t *ops)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
 
 <blockquote>
   <p>Construct an IO operations structure to pass to libplatsupport. See source
   comments for more information about how to use this.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int camkes_io_port_in(void *cookie, uint32_t port, int io_size, uint32_t *result)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)
-<strong><code class="highlighter-rouge">int camkes_io_port_out(void *cookie, uint32_t port, int io_size, uint32_t val)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int camkes_io_port_in(void *cookie, uint32_t port, int io_size, uint32_t *result)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)
+<strong><code class="language-plaintext highlighter-rouge">int camkes_io_port_out(void *cookie, uint32_t port, int io_size, uint32_t val)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
 
 <blockquote>
   <p>Read from or write to a hardware IO port. This function is primarily to ease
@@ -1826,14 +1826,14 @@ descriptions.</p>
   where appropriate.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int camkes_io_port_ops(ps_io_port_ops_t *ops)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int camkes_io_port_ops(ps_io_port_ops_t *ops)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/io.h&gt;</code>)</p>
 
 <blockquote>
   <p>Construct an IO port access structure to pass to libplatsupport. See source
   comments for more information about how to use this.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">const char *get_instance_name(void)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">const char *get_instance_name(void)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>Returns the name of this component instance. This can be helpful if you want
@@ -1841,37 +1841,37 @@ descriptions.</p>
   which instance it is.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int</code> <em><code class="highlighter-rouge">instance</code></em><code class="highlighter-rouge">_main(int thread_id)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">int</code> <em><code class="language-plaintext highlighter-rouge">instance</code></em><code class="language-plaintext highlighter-rouge">_main(int thread_id)</code></strong></p>
 
 <blockquote>
   <p>A component instance’s entry point. This is generated by the platform and
-  invokes the user’s <code class="highlighter-rouge">run</code> function when complete.</p>
+  invokes the user’s <code class="language-plaintext highlighter-rouge">run</code> function when complete.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int main(int thread_id)</code></strong> (in libsel4camkes.a)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int main(int thread_id)</code></strong> (in libsel4camkes.a)</p>
 
 <blockquote>
   <p>This function — the C entry point to a component — is provided by
-  the platform. Components should not provide their own <code class="highlighter-rouge">main</code>.</p>
+  the platform. Components should not provide their own <code class="language-plaintext highlighter-rouge">main</code>.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int run(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">int run(void)</code></strong></p>
 
 <blockquote>
   <p>This function is expected to be provided by the user in a control component.
-  It is invoked by <code class="highlighter-rouge">main</code> after component initialisation is complete.</p>
+  It is invoked by <code class="language-plaintext highlighter-rouge">main</code> after component initialisation is complete.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">NORETURN _start(int thread_id)</code></strong> (in libsel4camkes.a)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">NORETURN _start(int thread_id)</code></strong> (in libsel4camkes.a)</p>
 
 <blockquote>
   <p>This function provides the assembly entry point of a component and consists
-  of a brief trampoline to <code class="highlighter-rouge">main</code>. The user can override this if they wish, but
+  of a brief trampoline to <code class="language-plaintext highlighter-rouge">main</code>. The user can override this if they wish, but
   it is unwise to do this unless you have a deep understanding of the runtime
   environment.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void pre_init(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">void pre_init(void)</code></strong></p>
 
 <blockquote>
   <p>This function can be optionally provided by the user. If it is present, it
@@ -1880,7 +1880,7 @@ descriptions.</p>
   function. For example, interfaces cannot be expected to be accessible.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void</code> <em><code class="highlighter-rouge">interface</code></em><code class="highlighter-rouge">__init(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">void</code> <em><code class="language-plaintext highlighter-rouge">interface</code></em><code class="language-plaintext highlighter-rouge">__init(void)</code></strong></p>
 
 <blockquote>
   <p>For each incoming or outgoing interface a user can optionally provide this
@@ -1889,7 +1889,7 @@ descriptions.</p>
   the runtime environment from above are applicable here.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void post_init(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">void post_init(void)</code></strong></p>
 
 <blockquote>
   <p>This function can be optionally provided by the user. If it is present, it
@@ -1898,7 +1898,7 @@ descriptions.</p>
   function.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int</code> <em><code class="highlighter-rouge">interface</code></em><code class="highlighter-rouge">__run(void)</code></strong></p>
+<p><strong><code class="language-plaintext highlighter-rouge">int</code> <em><code class="language-plaintext highlighter-rouge">interface</code></em><code class="language-plaintext highlighter-rouge">__run(void)</code></strong></p>
 
 <blockquote>
   <p>This function can be provided for any incoming or outgoing interface. If it
@@ -1906,7 +1906,7 @@ descriptions.</p>
   run.</p>
 </blockquote>
 
-<p><strong><em><code class="highlighter-rouge">return</code></em> <em><code class="highlighter-rouge">procedure</code></em><code class="highlighter-rouge">_</code><em><code class="highlighter-rouge">method</code></em><code class="highlighter-rouge">(</code><em><code class="highlighter-rouge">args...</code></em><code class="highlighter-rouge">)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><em><code class="language-plaintext highlighter-rouge">return</code></em> <em><code class="language-plaintext highlighter-rouge">procedure</code></em><code class="language-plaintext highlighter-rouge">_</code><em><code class="language-plaintext highlighter-rouge">method</code></em><code class="language-plaintext highlighter-rouge">(</code><em><code class="language-plaintext highlighter-rouge">args...</code></em><code class="language-plaintext highlighter-rouge">)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>In a component that provides a procedure interface, things are somewhat
@@ -1916,14 +1916,14 @@ descriptions.</p>
   functions of this form are available for you to call.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void</code> <em><code class="highlighter-rouge">event</code></em><code class="highlighter-rouge">_emit(void)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">void</code> <em><code class="language-plaintext highlighter-rouge">event</code></em><code class="language-plaintext highlighter-rouge">_emit(void)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>In a component that emits an event a function prefixed with the event’s name
   is available that causes the event to be sent.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void</code> <em><code class="highlighter-rouge">event</code></em><code class="highlighter-rouge">_poll(void)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">void</code> <em><code class="language-plaintext highlighter-rouge">event</code></em><code class="language-plaintext highlighter-rouge">_poll(void)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>In a component that consumes an event a function prefixed with the event’s
@@ -1931,19 +1931,19 @@ descriptions.</p>
   function never blocks.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">int</code> <em><code class="highlighter-rouge">event</code></em><code class="highlighter-rouge">_reg_callback(void (*callback)(void*), void *arg)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int</code> <em><code class="language-plaintext highlighter-rouge">event</code></em><code class="language-plaintext highlighter-rouge">_reg_callback(void (*callback)(void*), void *arg)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>In a component that consumes an event a function prefixed with the event’s
   name is available for registering a callback for this event. When the event
   is received, the provided function will be invoked with the argument provided
   when registering the callback. Note that registered
-  callbacks take precedence over threads blocked on calls to <em><code class="highlighter-rouge">event</code></em><code class="highlighter-rouge">_wait</code>.
-  <em><code class="highlighter-rouge">event</code></em><code class="highlighter-rouge">_reg_callback</code> returns 0 on success and non-zero if the callback
+  callbacks take precedence over threads blocked on calls to <em><code class="language-plaintext highlighter-rouge">event</code></em><code class="language-plaintext highlighter-rouge">_wait</code>.
+  <em><code class="language-plaintext highlighter-rouge">event</code></em><code class="language-plaintext highlighter-rouge">_reg_callback</code> returns 0 on success and non-zero if the callback
   could not be registered.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void</code> <em><code class="highlighter-rouge">event</code></em><code class="highlighter-rouge">_wait(void)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">void</code> <em><code class="language-plaintext highlighter-rouge">event</code></em><code class="language-plaintext highlighter-rouge">_wait(void)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes.h&gt;</code>)</p>
 
 <blockquote>
   <p>In a component that consumes an event a function prefixed with the event’s
@@ -2043,7 +2043,7 @@ describe a DMA pool with a size in bytes. For example,</p>
 
 <p>This declares an 8KB pool of memory that is available for DMA operations.
 Within the component you must allocate and release pointers into this region
-with the <code class="highlighter-rouge">camkes_dma_alloc</code> and <code class="highlighter-rouge">camkes_dma_free</code> functions described above.
+with the <code class="language-plaintext highlighter-rouge">camkes_dma_alloc</code> and <code class="language-plaintext highlighter-rouge">camkes_dma_free</code> functions described above.
 The allocation function accepts a size and alignment constraint, but be aware
 that allocation may not be efficient or guaranteed when requesting more than
 4Kb. Note that if you declare a DMA pool that is not page-aligned (4K on the
@@ -2072,7 +2072,7 @@ achieving this in a CAmkES project are documented below.</p>
 to get promoted to large frames with an alignment constraint that was rejected
 by the GNU Assembler, you should see output like the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/tmp/ccfGhK5Z.s: Assembler messages:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/tmp/ccfGhK5Z.s: Assembler messages:
 /tmp/ccfGhK5Z.s:1483: Error: alignment too large: 15 assumed
 </code></pre></div></div>
 <p>Updating binutils should fix this issue.</p>
@@ -2092,47 +2092,47 @@ accesses to a device that unexpectedly is not found at runtime.</p>
 mode is generally the only relevant one you will need. It allows for runtime
 handling of errors. By default, all errors cause a diagnostic message and a
 system halt on a debug kernel. To alter this behaviour, user code can call the
-function <code class="highlighter-rouge">camkes_register_error_handler</code> (described in
+function <code class="language-plaintext highlighter-rouge">camkes_register_error_handler</code> (described in
 <a href="#runtime-api">Runtime API</a>) and provide their own error handling function.
 The user’s error handling will thenceforth be invoked by glue code whenever an
 error is detected. The error handling function should return one of the
-following values, documented further in <code class="highlighter-rouge">camkes/error.h</code>, that indicate to the
+following values, documented further in <code class="language-plaintext highlighter-rouge">camkes/error.h</code>, that indicate to the
 glue code how it should proceed:</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">CEA_DISCARD</code> — Ignore whatever message or request was currently being
+    <p><code class="language-plaintext highlighter-rouge">CEA_DISCARD</code> — Ignore whatever message or request was currently being
 handled and return to the original calling function of the user or an event
 loop as appropriate. This is typically the failure mode you want for servers
 that are intended to be robust against denial-of-service attacks from
 malicious clients.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">CEA_IGNORE</code> — Pretend the error was not detected and continue executing.
+    <p><code class="language-plaintext highlighter-rouge">CEA_IGNORE</code> — Pretend the error was not detected and continue executing.
 This is almost never the response you want to take, but it can be useful for
 debugging or masking spurious errors.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">CEA_ABORT</code> — Terminate the current thread with failure status. This is a
+    <p><code class="language-plaintext highlighter-rouge">CEA_ABORT</code> — Terminate the current thread with failure status. This is a
 fail-stop response, though note it will not halt the rest of the system. If
 the glue code is currently handling a request on behalf of a client, the
 client will likely end up stuck blocked waiting for a response.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">CEA_HALT</code> — Halt the entire system. This is only possible on a debug
-kernel. On a release kernel it will act identically to <code class="highlighter-rouge">CEA_ABORT</code>.</p>
+    <p><code class="language-plaintext highlighter-rouge">CEA_HALT</code> — Halt the entire system. This is only possible on a debug
+kernel. On a release kernel it will act identically to <code class="language-plaintext highlighter-rouge">CEA_ABORT</code>.</p>
   </li>
 </ul>
 
 <p>To conditionally determine which response to return, the error handler is
 passed a structure that describes the error that was detected. For details on
-this structure, refer to <code class="highlighter-rouge">camkes/error.h</code>.</p>
+this structure, refer to <code class="language-plaintext highlighter-rouge">camkes/error.h</code>.</p>
 
 <p>The mechanism just described allows for handling errors at a component-wide
 level. In a more complicated component, there are often notional subsystems
 that want to be able to handle their own errors independently. For this there
 are interface-specific error handlers. Each interface has its own error handler
-registration function as <em><code class="highlighter-rouge">interface</code></em><code class="highlighter-rouge">_register_error_handler</code>. Any interface that
+registration function as <em><code class="language-plaintext highlighter-rouge">interface</code></em><code class="language-plaintext highlighter-rouge">_register_error_handler</code>. Any interface that
 does not have a registered interface-specific error handler will default to the
 component-wide error handler.</p>
 
@@ -2170,12 +2170,12 @@ in the glue code with the same name as the attribute.</p>
 
 <h4 id="attributes-conversion-to-literal">Attribute’s conversion to literal</h4>
 
-<p>Unfortunately, the <code class="highlighter-rouge">C</code> language (in contrast to C++) does not support using
-<code class="highlighter-rouge">lvalues</code> as literals (e.g. when declaring an array), even if declared as const,
+<p>Unfortunately, the <code class="language-plaintext highlighter-rouge">C</code> language (in contrast to C++) does not support using
+<code class="language-plaintext highlighter-rouge">lvalues</code> as literals (e.g. when declaring an array), even if declared as const,
 so we need to introduce a “mechanism” for converting CAmkES attributes to
 literals.</p>
 
-<p>The <code class="highlighter-rouge">CAMKES_CONST_ATTR</code> macro has been introduced for that purpose.</p>
+<p>The <code class="language-plaintext highlighter-rouge">CAMKES_CONST_ATTR</code> macro has been introduced for that purpose.</p>
 
 <p>Actually, the macro does not really convert arbitrary variables, but rather
 CAmkES declares a const variable and also adds a respective macro to the code,
@@ -2209,7 +2209,7 @@ int run()
 <h3 id="hardware-components">Hardware Components</h3>
 
 <p>A hardware component represents an interface to hardware in the form of a component.
-Declaring a component with the <code class="highlighter-rouge">hardware</code> keyword creates a hardware component.</p>
+Declaring a component with the <code class="language-plaintext highlighter-rouge">hardware</code> keyword creates a hardware component.</p>
 
 <pre><code class="language-camkes">component Device {
   hardware;
@@ -2229,29 +2229,29 @@ and the connector used. Available connectors for hardware, and their
 corresponding hardware interfaces are listed below.</p>
 
 <p><strong>Interface:</strong> procedure            <br />
-<strong>Keyword:</strong> <code class="highlighter-rouge">provides</code>               <br />
-<strong>Connector:</strong> <code class="highlighter-rouge">seL4HardwareIOPort</code>   <br />
+<strong>Keyword:</strong> <code class="language-plaintext highlighter-rouge">provides</code>               <br />
+<strong>Connector:</strong> <code class="language-plaintext highlighter-rouge">seL4HardwareIOPort</code>   <br />
 <strong>Description:</strong>
-When using <code class="highlighter-rouge">IOPort</code> as the interface type, this provides access to IO ports. The connected
-component gets access to the methods in the <code class="highlighter-rouge">IOPort</code> interface, which allow sending and receiving
+When using <code class="language-plaintext highlighter-rouge">IOPort</code> as the interface type, this provides access to IO ports. The connected
+component gets access to the methods in the <code class="language-plaintext highlighter-rouge">IOPort</code> interface, which allow sending and receiving
 data over IO ports. This is specific to the IA32 architecture.</p>
 
 <p><strong>Interface:</strong> event                    <br />
-<strong>Keyword:</strong> <code class="highlighter-rouge">emits</code>                      <br />
-<strong>Connector:</strong> <code class="highlighter-rouge">seL4HardwareInterrupt</code>    <br />
+<strong>Keyword:</strong> <code class="language-plaintext highlighter-rouge">emits</code>                      <br />
+<strong>Connector:</strong> <code class="language-plaintext highlighter-rouge">seL4HardwareInterrupt</code>    <br />
 <strong>Description:</strong>
 An event is emitted when an interrupt occurs.</p>
 
 <p><strong>Interface:</strong> port                 <br />
-<strong>Keyword:</strong> <code class="highlighter-rouge">dataport</code>              <br />
-<strong>Connector:</strong> <code class="highlighter-rouge">seL4HardwareMMIO</code>     <br />
+<strong>Keyword:</strong> <code class="language-plaintext highlighter-rouge">dataport</code>              <br />
+<strong>Connector:</strong> <code class="language-plaintext highlighter-rouge">seL4HardwareMMIO</code>     <br />
 <strong>Description:</strong>
 Memory mapped registers can be accessed via the shared memory.</p>
 
 <p>The following shows an example of connecting a hardware component to a driver
-component. Note the order of arguments to the connection. <code class="highlighter-rouge">seL4HardwareInterrupt</code> requires
-the hardware interface on the <code class="highlighter-rouge">from</code> side of the connection, whereas the other connectors
-require the hardware interface on the <code class="highlighter-rouge">to</code> side.</p>
+component. Note the order of arguments to the connection. <code class="language-plaintext highlighter-rouge">seL4HardwareInterrupt</code> requires
+the hardware interface on the <code class="language-plaintext highlighter-rouge">from</code> side of the connection, whereas the other connectors
+require the hardware interface on the <code class="language-plaintext highlighter-rouge">to</code> side.</p>
 
 <pre><code class="language-camkes">component Driver {
   uses IOPort io_port;
@@ -2280,7 +2280,7 @@ to work. This is done by setting attributes of instances of device components.</
 
 <p>The physical address of the memory, and size (in bytes) to make available
 to a connected component must be specified. The example below specifies that
-the port named <code class="highlighter-rouge">mem</code> of the component instance <code class="highlighter-rouge">d</code> is a 0x1000 byte region
+the port named <code class="language-plaintext highlighter-rouge">mem</code> of the component instance <code class="language-plaintext highlighter-rouge">d</code> is a 0x1000 byte region
 starting at physical address 0xE0000000.</p>
 
 <pre><code class="language-camkes">component Device {
@@ -2347,10 +2347,10 @@ will come in on</li>
 across all destination vectors defined in an assembly.</p>
 
 <p>Selecting between edge and level trigger modes is done by setting the
-<code class="highlighter-rouge">*_irq_ioapic_level</code> attribute where a value of <code class="highlighter-rouge">1</code> means level triggered and
-<code class="highlighter-rouge">0</code> means edge triggered. Similarly the active polarity is configured by
-the <code class="highlighter-rouge">*_irq_ioapic_polarity</code> attribute where a value of <code class="highlighter-rouge">1</code> means active
-low and <code class="highlighter-rouge">0</code> means active high.</p>
+<code class="language-plaintext highlighter-rouge">*_irq_ioapic_level</code> attribute where a value of <code class="language-plaintext highlighter-rouge">1</code> means level triggered and
+<code class="language-plaintext highlighter-rouge">0</code> means edge triggered. Similarly the active polarity is configured by
+the <code class="language-plaintext highlighter-rouge">*_irq_ioapic_polarity</code> attribute where a value of <code class="language-plaintext highlighter-rouge">1</code> means active
+low and <code class="language-plaintext highlighter-rouge">0</code> means active high.</p>
 
 <p>To change the previous example to connect an interrupt on I/O APIC 0, pin 2
 that is edge triggered with active high polarity you would change</p>
@@ -2368,7 +2368,7 @@ d.irq_irq_ioapic_level = 0;
 d.irq_irq_vector = 42;
 </code></pre>
 
-<p>With the <code class="highlighter-rouge">vector</code> being arbitrarily chosen as <code class="highlighter-rouge">42</code></p>
+<p>With the <code class="language-plaintext highlighter-rouge">vector</code> being arbitrarily chosen as <code class="language-plaintext highlighter-rouge">42</code></p>
 
 <p>An interrupt that is edge triggered and active high can be more concisely
 declared as an ISA interrupt by</p>
@@ -2392,7 +2392,7 @@ d.irq_irq_vector = 42;
 
 <p>The allowable range of IO Ports must be specified.
 The example below specifies that the hardware component instance
-<code class="highlighter-rouge">d</code> may access IO ports greater than or equal to 0x60, and less
+<code class="language-plaintext highlighter-rouge">d</code> may access IO ports greater than or equal to 0x60, and less
 than 0x64.</p>
 
 <pre><code class="language-camkes">component Device {
@@ -2418,13 +2418,13 @@ assembly {
 
 <p>CAmkES allows the programmer to specify access rights that instances have over
 the ports connecting them to other instances. This is done by setting the
-<code class="highlighter-rouge">*_access</code> attribute of the port. The value of the attribute must be a string
+<code class="language-plaintext highlighter-rouge">*_access</code> attribute of the port. The value of the attribute must be a string
 containing the letters “R”, “W” and “X”, giving the port read, write and execute
 privileges, respectively. If left unspecified, full access will be given.</p>
 
-<p>In the example below, instance <code class="highlighter-rouge">f</code> has read-only access to <code class="highlighter-rouge">port_a</code>, and
-instance <code class="highlighter-rouge">b</code> has read/write access to <code class="highlighter-rouge">port_a</code>. Instance <code class="highlighter-rouge">b</code> has read-only
-access to <code class="highlighter-rouge">port_b</code>. Instance <code class="highlighter-rouge">a</code> has read/write/execute access to <code class="highlighter-rouge">port_b</code> even
+<p>In the example below, instance <code class="language-plaintext highlighter-rouge">f</code> has read-only access to <code class="language-plaintext highlighter-rouge">port_a</code>, and
+instance <code class="language-plaintext highlighter-rouge">b</code> has read/write access to <code class="language-plaintext highlighter-rouge">port_a</code>. Instance <code class="language-plaintext highlighter-rouge">b</code> has read-only
+access to <code class="language-plaintext highlighter-rouge">port_b</code>. Instance <code class="language-plaintext highlighter-rouge">a</code> has read/write/execute access to <code class="language-plaintext highlighter-rouge">port_b</code> even
 though it’s not explicitly stated, as this is the default.</p>
 
 <pre><code class="language-camkes">component Foo {
@@ -2461,7 +2461,7 @@ assembly {
 it is often necessary to understand what threads exist in your system.</p>
 
 <p>Firstly there is a single active thread. This is the thread of control that
-calls the component’s entry point for components declared <code class="highlighter-rouge">control</code>. This
+calls the component’s entry point for components declared <code class="language-plaintext highlighter-rouge">control</code>. This
 thread is present even in non-control components in order to perform
 initialisation actions.</p>
 
@@ -2483,13 +2483,13 @@ callback was invoked.</p>
 
 <p>Each thread in a CAmkES system has a priority that determines how it is
 scheduled by seL4. These priorities default to a value given by the
-<code class="highlighter-rouge">--default-priority</code> command-line argument to the runner. The higher number,
+<code class="language-plaintext highlighter-rouge">--default-priority</code> command-line argument to the runner. The higher number,
 the higher thread’s priority, that is, a thread with priority 100 will be
 executed before a thread with priority 90.</p>
 
 <p>In a given system, it it possible to adjust the priority of a specific thread
 with an attribute that has specific semantics. To adjust the priority of the
-control thread (the thread that calls <code class="highlighter-rouge">run</code>), use the <code class="highlighter-rouge">_priority</code> attribute:</p>
+control thread (the thread that calls <code class="language-plaintext highlighter-rouge">run</code>), use the <code class="language-plaintext highlighter-rouge">_priority</code> attribute:</p>
 
 <pre><code class="language-camkes">assembly {
   composition {
@@ -2602,8 +2602,8 @@ virtual memory fault when threads underrun or overrun their stacks.</p>
 Each interface of each component instance will have an associated thread, and
 there will be an additional thread per-component to perform initialisation and
 optionally act as the control thread. For interface threads, their domain can be
-specified by setting the attribute <code class="highlighter-rouge">&lt;interface&gt;_domain</code> of the instance. For
-control threads, the attribute <code class="highlighter-rouge">_domain</code> of the instance can be set.</p>
+specified by setting the attribute <code class="language-plaintext highlighter-rouge">&lt;interface&gt;_domain</code> of the instance. For
+control threads, the attribute <code class="language-plaintext highlighter-rouge">_domain</code> of the instance can be set.</p>
 
 <pre><code class="language-camkes">component Foo {
   control;
@@ -2634,7 +2634,7 @@ assembly {
 <p>By default, the majority of RPC connectors exchange data through a
 kernel-managed IPC buffer. RPC communication involving longer messages can be
 optimised by exchanging data through userspace buffers instead of the IPC
-buffer. To achieve this, set up an <code class="highlighter-rouge">seL4SharedData</code> connection and assign a
+buffer. To achieve this, set up an <code class="language-plaintext highlighter-rouge">seL4SharedData</code> connection and assign a
 custom attribute:</p>
 
 <pre><code class="language-camkes">component Foo {
@@ -2663,8 +2663,8 @@ assembly {
 
 <p>There are a few limitations to be aware of when using this technique. The only
 RPC connector that supports this style of userspace communication at time of
-writing is <code class="highlighter-rouge">seL4RPCCall</code>. The RPC connection must be 1-to-1 and the
-<code class="highlighter-rouge">seL4SharedData</code> connection must connect the same two component instances. The
+writing is <code class="language-plaintext highlighter-rouge">seL4RPCCall</code>. The RPC connection must be 1-to-1 and the
+<code class="language-plaintext highlighter-rouge">seL4SharedData</code> connection must connect the same two component instances. The
 size of the buffer (determined by the dataports’ type) is flexible, but if you
 use a buffer that is too small to accommodate RPC data you will trigger runtime
 errors during parameter marshalling.</p>
@@ -2749,8 +2749,8 @@ assembly {
 }
 </code></pre>
 
-<p>In the example above, the component <code class="highlighter-rouge">Foo</code> exposes a virtual interface <code class="highlighter-rouge">a</code>,
-which is exported from the interface <code class="highlighter-rouge">a_impl</code> of the component instance <code class="highlighter-rouge">fi</code> of type <code class="highlighter-rouge">Foo_Impl</code>.</p>
+<p>In the example above, the component <code class="language-plaintext highlighter-rouge">Foo</code> exposes a virtual interface <code class="language-plaintext highlighter-rouge">a</code>,
+which is exported from the interface <code class="language-plaintext highlighter-rouge">a_impl</code> of the component instance <code class="language-plaintext highlighter-rouge">fi</code> of type <code class="language-plaintext highlighter-rouge">Foo_Impl</code>.</p>
 
 <h4 id="hierarchy-resolution">Hierarchy Resolution</h4>
 
@@ -2993,15 +2993,15 @@ their corresponding referent attributes.</p>
 
 <h4 id="syntax-1">Syntax</h4>
 
-<p>The <code class="highlighter-rouge">&lt;-</code> operator is used to set an attribute to refer to another. Lines of the following form
+<p>The <code class="language-plaintext highlighter-rouge">&lt;-</code> operator is used to set an attribute to refer to another. Lines of the following form
 may appear in the configuration section of a compound component:</p>
 
 <pre><code class="language-camkes">entity_name.attribute_name &lt;- local_attribute_name;
 </code></pre>
 
-<p>Here, <code class="highlighter-rouge">entity_name</code> is the name of a component instance or connection declared in the component’s
-composition section, <code class="highlighter-rouge">attribute_name</code> is the name of an attribute of the entity, and
-<code class="highlighter-rouge">local_attribute_name</code> is the name of an attribute of the composition component.</p>
+<p>Here, <code class="language-plaintext highlighter-rouge">entity_name</code> is the name of a component instance or connection declared in the component’s
+composition section, <code class="language-plaintext highlighter-rouge">attribute_name</code> is the name of an attribute of the entity, and
+<code class="language-plaintext highlighter-rouge">local_attribute_name</code> is the name of an attribute of the composition component.</p>
 
 <h4 id="example">Example</h4>
 
@@ -3070,7 +3070,7 @@ Sections of the application that refer to custom types must include the header f
 
 <h4 id="procedures">Procedures</h4>
 
-<p>Assume a data type <code class="highlighter-rouge">Vector</code> is defined in the file vector.h in the top level include directory of the application:</p>
+<p>Assume a data type <code class="language-plaintext highlighter-rouge">Vector</code> is defined in the file vector.h in the top level include directory of the application:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef _VECTOR_H_
 #define _VECTOR_H_
@@ -3093,18 +3093,18 @@ Sections of the application that refer to custom types must include the header f
 
 <p>C source files that need access to this data type can include the file with:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;vector.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;vector.h&gt;</span><span class="cp">
 </span></code></pre></div></div>
 
 <p>To make the build system aware of the header file, for each component that uses it, the following must be added
-to the application’s <code class="highlighter-rouge">CMakeLists.txt</code> (replacing the name <code class="highlighter-rouge">Component</code> with the name of the component):</p>
+to the application’s <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> (replacing the name <code class="language-plaintext highlighter-rouge">Component</code> with the name of the component):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DeclareCAmkESComponent(Component INCLUDES include/vector.h)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DeclareCAmkESComponent(Component INCLUDES include/vector.h)
 </code></pre></div></div>
 
 <h4 id="ports">Ports</h4>
 
-<p>Assume a data type <code class="highlighter-rouge">IntArray</code> is defined in int_array.h in the top level include directory of the application:</p>
+<p>Assume a data type <code class="language-plaintext highlighter-rouge">IntArray</code> is defined in int_array.h in the top level include directory of the application:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef _INT_ARRAY_H_
 #define _INT_ARRAY_H_
@@ -3160,7 +3160,7 @@ connection seL4RPCCall conn(from my_group.foo.inf1,
 </code></pre>
 
 <p>When component instances are colocated, another connector becomes available.
-The <code class="highlighter-rouge">seL4DirectCall</code> connector collapses RPC communication into a direct
+The <code class="language-plaintext highlighter-rouge">seL4DirectCall</code> connector collapses RPC communication into a direct
 function call. Its usage is identical to other connectors:</p>
 
 <pre><code class="language-camkes">...
@@ -3181,9 +3181,9 @@ separation. This abstraction is not perfect and there are some mechanisms that
 have slightly different semantics when used in a single address space scenario
 and in an isolated scenario.</p>
 
-<p>Parameters of direction <code class="highlighter-rouge">out</code> of certain types are typically heap-located in an
+<p>Parameters of direction <code class="language-plaintext highlighter-rouge">out</code> of certain types are typically heap-located in an
 isolated component instance. This is still true in a colocated environment, but
-when using the <code class="highlighter-rouge">seL4DirectCall</code> connector, these are located in the <em>callee’s</em>
+when using the <code class="language-plaintext highlighter-rouge">seL4DirectCall</code> connector, these are located in the <em>callee’s</em>
 heap, not the caller’s as may be otherwise expected. Freeing one of these
 pointers to the incorrect heap will result in heap corruption and should be
 avoided. Conversely, <em>not</em> freeing this pointer will leak memory and should also
@@ -3249,7 +3249,7 @@ memory is always freed to the correct heap:</p>
 
 <p>This is cumbersome, but at least allows one to write safe code. In a
 continually evolving project, it may not be known in advance whether
-<code class="highlighter-rouge">seL4DirectCall</code> will be used. In these situations, it is recommended to use a
+<code class="language-plaintext highlighter-rouge">seL4DirectCall</code> will be used. In these situations, it is recommended to use a
 free wrapper that detects where a pointer is hosted. In the case of a simple
 static heap region (the default), a wrapper can be constructed as follows:</p>
 
@@ -3281,8 +3281,8 @@ static heap region (the default), a wrapper can be constructed as follows:</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The preceding discussion dealt with <code class="highlighter-rouge">out</code> parameters, but note that the same
-issue exists on <em>both</em> sides of an <code class="highlighter-rouge">seL4DirectCall</code> connection using <code class="highlighter-rouge">inout</code>
+<p>The preceding discussion dealt with <code class="language-plaintext highlighter-rouge">out</code> parameters, but note that the same
+issue exists on <em>both</em> sides of an <code class="language-plaintext highlighter-rouge">seL4DirectCall</code> connection using <code class="language-plaintext highlighter-rouge">inout</code>
 parameters. That is, the argument to the callee and the final value to the
 caller are both pointers that would normally point into a local heap, but now
 potentially point into a remote heap.</p>
@@ -3296,12 +3296,12 @@ it will be ignored for component groups.</p>
 
 <p>CAmkES allows users to define a list of directories that will be searched
 when resolving imports of .camkes files (components and interfaces).
-<code class="highlighter-rouge">CAmkESAddImportPath(interfaces)</code> will append a directory to this search path.
+<code class="language-plaintext highlighter-rouge">CAmkESAddImportPath(interfaces)</code> will append a directory to this search path.
 There is an additional path for templates which can be modified by calling
-<code class="highlighter-rouge">CAmkESAddTemplatesPath(templates)</code>. The repository global-components repository
+<code class="language-plaintext highlighter-rouge">CAmkESAddTemplatesPath(templates)</code>. The repository global-components repository
 is an example of these mechanisms being used to import components, interfaces
 and templates into a project. The target project simply needs to include
-<code class="highlighter-rouge">global-components.cmake</code> to enable these modules to be referred to from within
+<code class="language-plaintext highlighter-rouge">global-components.cmake</code> to enable these modules to be referred to from within
 the project’s camkes files. Below is an example of importing global-components:</p>
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_file</span><span class="p">(</span>GLOBAL_COMPONENTS_PATH global-components.cmake PATHS <span class="si">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="si">}</span>/projects/global-components/ CMAKE_FIND_ROOT_PATH_BOTH<span class="p">)</span>
 <span class="nb">mark_as_advanced</span><span class="p">(</span>FORCE GLOBAL_COMPONENTS_PATH<span class="p">)</span>
@@ -3346,7 +3346,7 @@ in a well known top-level subdirectory of the component repository.</p>
 
 <h3 id="cached-hardware-dataports">Cached Hardware Dataports</h3>
 
-<p>By default, memory backing hardware dataports (<code class="highlighter-rouge">seL4HardwareMMIO</code>) is mapped uncached.
+<p>By default, memory backing hardware dataports (<code class="language-plaintext highlighter-rouge">seL4HardwareMMIO</code>) is mapped uncached.
 Typically such a dataport will be backed by a device’s memory mapped registers rather
 than main memory. In such cases it’s generally desired that after writing to a register
 the effect of the write is felt immediately, and changes to device registers are observable
@@ -3370,9 +3370,9 @@ hardware dataport.</p>
 
 <h4 id="marking-a-hardware-dataport-as-cached">Marking a hardware dataport as cached</h4>
 
-<p>To map a hardware dataport cached, set the <code class="highlighter-rouge">&lt;instance&gt;.&lt;interface&gt;_hardware_cached</code> attribute to <code class="highlighter-rouge">true</code>:</p>
+<p>To map a hardware dataport cached, set the <code class="language-plaintext highlighter-rouge">&lt;instance&gt;.&lt;interface&gt;_hardware_cached</code> attribute to <code class="language-plaintext highlighter-rouge">true</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>component DisplayDevice {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>component DisplayDevice {
   hardware;
   dataport FrameBuffer framebuffer;
 }
@@ -3410,15 +3410,15 @@ it is necessary to manipulate the cache to ensure a consistent view of the memor
 between the CPU and any devices. CAmkES provides a function for each hardware dataport
 for doing cache operations on the range of addresses inside the dataport.</p>
 
-<p>For a dataport interface named <code class="highlighter-rouge">framebuffer</code>, the function that operates on the cache
+<p>For a dataport interface named <code class="language-plaintext highlighter-rouge">framebuffer</code>, the function that operates on the cache
 will be</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">framebuffer_cache_op</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">start_offset</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="n">dma_cache_op_t</span> <span class="n">cache_op</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">start_offset</code> and <code class="highlighter-rouge">size</code> are the offset in bytes into the dataport to start flushing,
-and the number of bytes to flush respectively. <code class="highlighter-rouge">cache_op</code> is one of the three defined
-cache operations: <code class="highlighter-rouge">DMA_CACHE_OP_CLEAN</code>, <code class="highlighter-rouge">DMA_CACHE_OP_INVALIDATE</code>, <code class="highlighter-rouge">DMA_CACHE_OP_CLEAN_INVALIDATE</code>.
+<p><code class="language-plaintext highlighter-rouge">start_offset</code> and <code class="language-plaintext highlighter-rouge">size</code> are the offset in bytes into the dataport to start flushing,
+and the number of bytes to flush respectively. <code class="language-plaintext highlighter-rouge">cache_op</code> is one of the three defined
+cache operations: <code class="language-plaintext highlighter-rouge">DMA_CACHE_OP_CLEAN</code>, <code class="language-plaintext highlighter-rouge">DMA_CACHE_OP_INVALIDATE</code>, <code class="language-plaintext highlighter-rouge">DMA_CACHE_OP_CLEAN_INVALIDATE</code>.
 The function returns 0 on success and non-zero on error</p>
 
 <h2 id="templating">Templating</h2>
@@ -3441,40 +3441,40 @@ modify the template environment itself, you should instead refer to the
 special comments to run Python code:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">/*- execute code -*/</code> (equivalent of Python’s <code class="highlighter-rouge">exec</code>)</li>
-  <li><code class="highlighter-rouge">/*? execute code and replace with result -*/</code> (equivalent of Python’s <code class="highlighter-rouge">eval</code>)</li>
-  <li><code class="highlighter-rouge">/*# a comment to be removed at instantiation #*/</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/*- execute code -*/</code> (equivalent of Python’s <code class="language-plaintext highlighter-rouge">exec</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">/*? execute code and replace with result -*/</code> (equivalent of Python’s <code class="language-plaintext highlighter-rouge">eval</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">/*# a comment to be removed at instantiation #*/</code></li>
 </ul>
 
 <p>In general, when writing code in a template, refer to the Jinja documentation
 syntax and functionality. Note that the default Jinja delimiters have been modified
-to <code class="highlighter-rouge">/*</code> and <code class="highlighter-rouge">*/</code> to let syntax highlighting in C work more naturally.</p>
+to <code class="language-plaintext highlighter-rouge">/*</code> and <code class="language-plaintext highlighter-rouge">*/</code> to let syntax highlighting in C work more naturally.</p>
 
-<p>Within a given template you have a variable <code class="highlighter-rouge">me</code> that functions like native
-Python’s <code class="highlighter-rouge">self</code>. It refers to the object of relevance to the current template.
+<p>Within a given template you have a variable <code class="language-plaintext highlighter-rouge">me</code> that functions like native
+Python’s <code class="language-plaintext highlighter-rouge">self</code>. It refers to the object of relevance to the current template.
 So, for example, during instantiation of the component source file, it refers
 to the component instance being instantiated. In certain general “top-level”
 templates, there is no particular “subject.” In these templates, for example
-<code class="highlighter-rouge">camkes-gen.cmake</code>, <code class="highlighter-rouge">me</code> will be <code class="highlighter-rouge">None</code>.</p>
+<code class="language-plaintext highlighter-rouge">camkes-gen.cmake</code>, <code class="language-plaintext highlighter-rouge">me</code> will be <code class="language-plaintext highlighter-rouge">None</code>.</p>
 
 <p>The template environment is a limited subset of Python. It is relatively easy
 to extend, and if you intend to do this you can see how in the
 <a href="#template-environment">Template Environment</a> section. Some statements in
 Python could not be cleanly exposed and so have instead become functions. In
-particular, be aware of quirks in assertions, lambdas and exceptions. <code class="highlighter-rouge">assert</code>
-is available as a function. So instead of writing <code class="highlighter-rouge">assert foo == 1</code> you would
-write <code class="highlighter-rouge">assert(foo == 1)</code>.</p>
+particular, be aware of quirks in assertions, lambdas and exceptions. <code class="language-plaintext highlighter-rouge">assert</code>
+is available as a function. So instead of writing <code class="language-plaintext highlighter-rouge">assert foo == 1</code> you would
+write <code class="language-plaintext highlighter-rouge">assert(foo == 1)</code>.</p>
 
 <p>Lambdas are perhaps more confusing. Instead of writing
-<code class="highlighter-rouge">lambda x: x.startswith('hello')</code> you would write
-<code class="highlighter-rouge">lambda('x: x.startswith(\'hello\')'</code>. Note that you lose some type safety and
+<code class="language-plaintext highlighter-rouge">lambda x: x.startswith('hello')</code> you would write
+<code class="language-plaintext highlighter-rouge">lambda('x: x.startswith(\'hello\')'</code>. Note that you lose some type safety and
 expressivity here, but there did not seem to be a nicer way to expose this.
 Exceptions are now also raised by function. So instead of writing
-<code class="highlighter-rouge">raise Exception('foo')</code> you would write <code class="highlighter-rouge">raise(Exception('foo'))</code>.</p>
+<code class="language-plaintext highlighter-rouge">raise Exception('foo')</code> you would write <code class="language-plaintext highlighter-rouge">raise(Exception('foo'))</code>.</p>
 
 <p>For the specific functionality available in the template context, it may be
 helpful to refer to the file camkes/runner/Context.py. Note that in the
-template context you also have access to the command line options via <code class="highlighter-rouge">options</code>
+template context you also have access to the command line options via <code class="language-plaintext highlighter-rouge">options</code>
 as well.</p>
 
 <h3 id="idioms">Idioms</h3>
@@ -3489,17 +3489,17 @@ snippets of code that may look unusual when you first encounter them.</p>
 templates that form each side of a connection you often wish to talk about the
 same object on both sides. None of the templates currently call the low-level
 helper functions that enable this directly, but if you do want to invoke them,
-they are <code class="highlighter-rouge">stash</code> and <code class="highlighter-rouge">pop</code>. <code class="highlighter-rouge">stash</code> lets you save a Python object under a given
-key name and <code class="highlighter-rouge">pop</code> retrieves a previously saved Python object by key. Note that
+they are <code class="language-plaintext highlighter-rouge">stash</code> and <code class="language-plaintext highlighter-rouge">pop</code>. <code class="language-plaintext highlighter-rouge">stash</code> lets you save a Python object under a given
+key name and <code class="language-plaintext highlighter-rouge">pop</code> retrieves a previously saved Python object by key. Note that
 these are only usable for passing objects between templates that share related
-<code class="highlighter-rouge">me</code> references.</p>
+<code class="language-plaintext highlighter-rouge">me</code> references.</p>
 
 <h4 id="generating-symbol-names">Generating Symbol Names</h4>
 
 <p>Within a C template you sometimes need a temporary variable in a context in
 which user-provided variables may be in scope. That is, you need a named symbol
 but you need to ensure it doesn’t collide with any existing user symbols. To do
-this you can call the function <code class="highlighter-rouge">c_symbol</code>. This generates a pseudo-unique name
+this you can call the function <code class="language-plaintext highlighter-rouge">c_symbol</code>. This generates a pseudo-unique name
 that you can use from then on. For example,</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*- set my_var = c_symbol() -*/</span>
@@ -3507,7 +3507,7 @@ that you can use from then on. For example,</p>
 <span class="p">...</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">c_symbol</code> takes an optional string argument that will make that string part of
+<p><code class="language-plaintext highlighter-rouge">c_symbol</code> takes an optional string argument that will make that string part of
 the resulting symbol name. This is helpful for debugging purposes if you want
 to give someone looking at the instantiated template a visual clue as to the
 purpose of a temporary variable.</p>
@@ -3518,7 +3518,7 @@ purpose of a temporary variable.</p>
 Occasionally templates wish to conditionally assign to a variable within the
 context of a loop or other Jinja block. In these circumstances it can be tricky
 to get the write to propagate outside the loop. You may see a temporary array
-and a <code class="highlighter-rouge">do</code> construct used in these situations:</p>
+and a <code class="language-plaintext highlighter-rouge">do</code> construct used in these situations:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*- set temp = [None] -*/</span>
 <span class="cm">/*- for .... -*/</span>
@@ -3535,7 +3535,7 @@ and a <code class="highlighter-rouge">do</code> construct used in these situatio
 
 <h3 id="reply-capabilities">Reply Capabilities</h3>
 
-<p>The seL4 system call, <code class="highlighter-rouge">seL4_Call</code>, generates transient capabilities called
+<p>The seL4 system call, <code class="language-plaintext highlighter-rouge">seL4_Call</code>, generates transient capabilities called
 reply capabilities (see the seL4 documentation for more specific details). Care
 must be taken when writing template code in order to avoid interfering with the
 functionality of another piece of template code that may have created reply
@@ -3543,7 +3543,7 @@ capabilities. If you are not using reply capabilities yourself, there is a
 simple rule to remember:</p>
 
 <ul>
-  <li>always call <code class="highlighter-rouge">camkes_protect_reply_cap()</code> before performing an operation that
+  <li>always call <code class="language-plaintext highlighter-rouge">camkes_protect_reply_cap()</code> before performing an operation that
 would cause a wait on a synchronous endpoint.</li>
 </ul>
 
@@ -3551,7 +3551,7 @@ would cause a wait on a synchronous endpoint.</li>
 effects), though be aware it may modify the contents of your IPC buffer. You
 do not need to perform this operation when sending on a synchronous endpoint or
 waiting on a notification, however it <em>is</em> necessary when performing
-batched system calls like <code class="highlighter-rouge">seL4_ReplyRecv</code> or <code class="highlighter-rouge">seL4_Call</code> on a synchronous
+batched system calls like <code class="language-plaintext highlighter-rouge">seL4_ReplyRecv</code> or <code class="language-plaintext highlighter-rouge">seL4_Call</code> on a synchronous
 endpoint.</p>
 
 <p>If you are <em>receiving</em> reply capabilities in your own template and calling
@@ -3560,7 +3560,7 @@ overwritten when execution is outside your template. To safe guard yourself
 against this, there is a complementary rule:</p>
 
 <ul>
-  <li>always call <code class="highlighter-rouge">camkes_declare_reply_cap(...)</code> when you have just received a
+  <li>always call <code class="language-plaintext highlighter-rouge">camkes_declare_reply_cap(...)</code> when you have just received a
 reply capability.</li>
 </ul>
 
@@ -3578,14 +3578,14 @@ receive a reply capability:</p>
 </code></pre></div></div>
 
 <p>When you need to use a reply capability you have protected, you should check
-the <code class="highlighter-rouge">reply_cap_in_tcb</code> member of the CAmkES TLS structure and, if the capability
-is no longer in your TCB, call <code class="highlighter-rouge">camkes_unprotect_reply_cap()</code> and deal with any
+the <code class="language-plaintext highlighter-rouge">reply_cap_in_tcb</code> member of the CAmkES TLS structure and, if the capability
+is no longer in your TCB, call <code class="language-plaintext highlighter-rouge">camkes_unprotect_reply_cap()</code> and deal with any
 possible error that may have occurred. The functional API for dealing with
 reply capabilities is provided below. Though this is technically part of the
 <a href="#runtime-api">runtime API</a>, it is included here because user code is never
 expected to call these functions.</p>
 
-<p><strong><code class="highlighter-rouge">int camkes_declare_reply_cap(seL4_CPtr shadow_slot)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">int camkes_declare_reply_cap(seL4_CPtr shadow_slot)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
 
 <blockquote>
   <p>Identify to the CAmkES library that you are in possession of a reply
@@ -3593,10 +3593,10 @@ expected to call these functions.</p>
   currently and, as such, you should not call this function when you have
   previously declared a pending reply capability you have not yet discarded.
   This essentially says to CAmkES, “I have a reply cap in my TCB; please save
-  it to <code class="highlighter-rouge">shadow_slot</code> if it is in risk of being deleted.”</p>
+  it to <code class="language-plaintext highlighter-rouge">shadow_slot</code> if it is in risk of being deleted.”</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">void camkes_protect_reply_cap(void)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">void camkes_protect_reply_cap(void)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
 
 <blockquote>
   <p>Guard any potential pending reply capability against deletion by saving it
@@ -3610,7 +3610,7 @@ expected to call these functions.</p>
   chance of deleting it.</p>
 </blockquote>
 
-<p><strong><code class="highlighter-rouge">seL4_Error camkes_unprotect_reply_cap(void)</code></strong> (<code class="highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
+<p><strong><code class="language-plaintext highlighter-rouge">seL4_Error camkes_unprotect_reply_cap(void)</code></strong> (<code class="language-plaintext highlighter-rouge">#include &lt;camkes/tls.h&gt;</code>)</p>
 
 <blockquote>
   <p>Discard any information relating to a current pending reply capability. This
@@ -3618,9 +3618,9 @@ expected to call these functions.</p>
   it is about to use (or discard) that capability. Note that this returns a
   potential error that was encountered when some intermediate code tried to
   protect the capability and it failed. The return value is essentially a
-  result from <code class="highlighter-rouge">seL4_CNode_SaveCaller</code>. This should <em>only</em> be called when you
+  result from <code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code>. This should <em>only</em> be called when you
   know the reply cap you need is no longer in your TCB. That is, you should
-  check the <code class="highlighter-rouge">reply_cap_in_tcb</code> member of the CAmkES TLS structure to determine
+  check the <code class="language-plaintext highlighter-rouge">reply_cap_in_tcb</code> member of the CAmkES TLS structure to determine
   if calling this function is necessary.</p>
 </blockquote>
 
@@ -3629,31 +3629,31 @@ the seL4RPCCall connector that uses this mechanism.</p>
 
 <p>One final thing to note is that this functionality assumes cooperative
 templates. There is nothing to prevent a malicious template omitting a call to
-<code class="highlighter-rouge">camkes_protect_reply_cap()</code> and wilfully destroying pending reply
+<code class="language-plaintext highlighter-rouge">camkes_protect_reply_cap()</code> and wilfully destroying pending reply
 capabilities.</p>
 
 <h3 id="template-debugging">Template Debugging</h3>
 
 <p>If you are writing complicated template logic and need to debug during
 instantiation, you can insert breakpoints into your template. These can be
-inserted as either <code class="highlighter-rouge">/*- breakpoint() -*/</code> or <code class="highlighter-rouge">/*? breakpoint() ?*/</code>. When
+inserted as either <code class="language-plaintext highlighter-rouge">/*- breakpoint() -*/</code> or <code class="language-plaintext highlighter-rouge">/*? breakpoint() ?*/</code>. When
 encountered during instantiation they will drop you into the Python
-interpreter, from where you can explore <code class="highlighter-rouge">me</code> and other local variables.</p>
+interpreter, from where you can explore <code class="language-plaintext highlighter-rouge">me</code> and other local variables.</p>
 
 <p>When prototyping or debugging more complicated problems it can be helpful to
 have the ability to run arbitrary Python in the template context. There is some
-limited support for this, with the functions <code class="highlighter-rouge">exec</code> and <code class="highlighter-rouge">eval</code>. These operate
-like the native Python <code class="highlighter-rouge">exec</code> and <code class="highlighter-rouge">eval</code>, but may be a little more fragile.
-Note that <code class="highlighter-rouge">exec</code> is a function in this context, not a statement. So where you
-would normally write <code class="highlighter-rouge">exec 'print \'hello\''</code> you would write
-<code class="highlighter-rouge">exec('print \'hello\'')</code>.</p>
+limited support for this, with the functions <code class="language-plaintext highlighter-rouge">exec</code> and <code class="language-plaintext highlighter-rouge">eval</code>. These operate
+like the native Python <code class="language-plaintext highlighter-rouge">exec</code> and <code class="language-plaintext highlighter-rouge">eval</code>, but may be a little more fragile.
+Note that <code class="language-plaintext highlighter-rouge">exec</code> is a function in this context, not a statement. So where you
+would normally write <code class="language-plaintext highlighter-rouge">exec 'print \'hello\''</code> you would write
+<code class="language-plaintext highlighter-rouge">exec('print \'hello\'')</code>.</p>
 
 <p>Although never advisable in a proper implementation, it is possible to pass
-arbitrary information between unrelated templates. Similar to the <code class="highlighter-rouge">stash</code> and
-<code class="highlighter-rouge">pop</code> functions described above, there are lower level versions, <code class="highlighter-rouge">_stash</code> and
-<code class="highlighter-rouge">_pop</code> that let you write to and read from a context that propagates across all
+arbitrary information between unrelated templates. Similar to the <code class="language-plaintext highlighter-rouge">stash</code> and
+<code class="language-plaintext highlighter-rouge">pop</code> functions described above, there are lower level versions, <code class="language-plaintext highlighter-rouge">_stash</code> and
+<code class="language-plaintext highlighter-rouge">_pop</code> that let you write to and read from a context that propagates across all
 templates. Note that you can only use this to pass information “forwards” to
-templates that are instantiated after the one you are calling <code class="highlighter-rouge">_stash</code> from.</p>
+templates that are instantiated after the one you are calling <code class="language-plaintext highlighter-rouge">_stash</code> from.</p>
 
 <h2 id="developers">Developers</h2>
 
@@ -3735,8 +3735,8 @@ following representations are described in order from least to most abstract:</p
 <ul>
   <li><strong>Augmented input</strong> This is not an AST, as such, but rather a tuple of source
 data and a set of read files.</li>
-  <li><strong>Raw AST</strong> This is a tree of <code class="highlighter-rouge">plyplus.stree</code>s.</li>
-  <li><strong>Augmented AST</strong> This is a list of <code class="highlighter-rouge">plyplus.stree</code>s with attached
+  <li><strong>Raw AST</strong> This is a tree of <code class="language-plaintext highlighter-rouge">plyplus.stree</code>s.</li>
+  <li><strong>Augmented AST</strong> This is a list of <code class="language-plaintext highlighter-rouge">plyplus.stree</code>s with attached
 information about their original source data and the file they came from.</li>
   <li><strong>Lifted AST</strong> This is the most abstract programmatic representation of an
 input specification and the form developers will come to be most familiar
@@ -3749,31 +3749,31 @@ of use. The low-level parsers are:</p>
 
 <ul>
   <li><strong>Stage 0</strong> Reads an input file and optionally runs the C pre-processor over
-it. This “parser” is really just a more full featured version of the <code class="highlighter-rouge">open</code>
+it. This “parser” is really just a more full featured version of the <code class="language-plaintext highlighter-rouge">open</code>
 call.</li>
-  <li><strong>Stage 1</strong> Parses input using <code class="highlighter-rouge">plyplus</code>. Note that this is where the CAmkES
+  <li><strong>Stage 1</strong> Parses input using <code class="language-plaintext highlighter-rouge">plyplus</code>. Note that this is where the CAmkES
 grammer (camkes/parser/camkes.g) comes into play.</li>
-  <li><strong>Stage 2</strong> Resolves <code class="highlighter-rouge">import</code> statements. This parser repeatedly calls back
+  <li><strong>Stage 2</strong> Resolves <code class="language-plaintext highlighter-rouge">import</code> statements. This parser repeatedly calls back
 into the stage 1 parser to parse further sources. Note that from here on,
-<code class="highlighter-rouge">import</code> statements do not appear in the AST.</li>
-  <li><strong>Stage 3</strong> Lifts the <code class="highlighter-rouge">plyplus</code> AST into the objects of
+<code class="language-plaintext highlighter-rouge">import</code> statements do not appear in the AST.</li>
+  <li><strong>Stage 3</strong> Lifts the <code class="language-plaintext highlighter-rouge">plyplus</code> AST into the objects of
 <a href="#camkes.ast">camkes.ast</a>. This is generally the most intensive parse phase
 and inherently the most fragile as it encodes much of the semantics of the
 CAmkES input language.</li>
   <li><strong>Stage 4</strong> Resolves semantic references. From here on, no
-<code class="highlighter-rouge">camkes.ast.Reference</code>s remain in the AST.</li>
-  <li><strong>Stage 5</strong> Collapses <code class="highlighter-rouge">group</code>s. The <code class="highlighter-rouge">group</code> keyword is used to colocate
+<code class="language-plaintext highlighter-rouge">camkes.ast.Reference</code>s remain in the AST.</li>
+  <li><strong>Stage 5</strong> Collapses <code class="language-plaintext highlighter-rouge">group</code>s. The <code class="language-plaintext highlighter-rouge">group</code> keyword is used to colocate
 component instances into a single address space. This stage removes groups
 from the AST, assigning the same address space to their contained instances.</li>
   <li><strong>Stage 6</strong> Combines multiple assemblies. It is possible for more than one
-<code class="highlighter-rouge">assembly</code> block to be specified in a CAmkES input specification, in which
+<code class="language-plaintext highlighter-rouge">assembly</code> block to be specified in a CAmkES input specification, in which
 case the intended assembly is the concatentaion of all of them. This stage
 performs that concatenation.</li>
   <li><strong>Stage 7</strong> Flattens component hierarchies. Component instances that are
 nested inside other components are hoisted to the top-level assembly by this
 stage.</li>
   <li><strong>Stage 8</strong> Resolves attribute references. Settings can be given a value that
-references another attribute (using the <code class="highlighter-rouge">&lt;-</code> operator). This stage resolves
+references another attribute (using the <code class="language-plaintext highlighter-rouge">&lt;-</code> operator). This stage resolves
 these references to concrete values.</li>
   <li><strong>Stage 9</strong> Freezes the AST. This stage transforms various AST internal data
 structures into optimised forms and makes AST modification from this point on
@@ -3804,20 +3804,20 @@ template sources.</p>
 <p>The code that renders the templates themselves is all contained under the
 runner directory in the CAmkES module. While the rendering itself is driven
 from Renderer.py, the more relevant file is actually Context.py. The
-<code class="highlighter-rouge">new_context</code> function returns a dictionary that defines the template
+<code class="language-plaintext highlighter-rouge">new_context</code> function returns a dictionary that defines the template
 environment, that is, what local variables are present in the template at
 instantiation time.</p>
 
 <p>There is some fairly complex functionality here aimed at providing nice
-abstractions to template authors. In particular, <code class="highlighter-rouge">alloc_obj</code>, <code class="highlighter-rouge">alloc_cap</code>,
-<code class="highlighter-rouge">stash</code>, <code class="highlighter-rouge">pop</code> and <code class="highlighter-rouge">guard</code> are intended to provide an abstraction for the
+abstractions to template authors. In particular, <code class="language-plaintext highlighter-rouge">alloc_obj</code>, <code class="language-plaintext highlighter-rouge">alloc_cap</code>,
+<code class="language-plaintext highlighter-rouge">stash</code>, <code class="language-plaintext highlighter-rouge">pop</code> and <code class="language-plaintext highlighter-rouge">guard</code> are intended to provide an abstraction for the
 template author to pass variables between templates. Refer to the comments in
 this file to understand more about the template context.</p>
 
 <p>Extending the context can be done by adding more items to this dictionary and
 there aren’t many gotchas here. If you’re doing something more complicated than
 exposing an existing built-in and having difficulty you may find the
-implementations of <code class="highlighter-rouge">breakpoint</code> or <code class="highlighter-rouge">exec</code> informative as examples.</p>
+implementations of <code class="language-plaintext highlighter-rouge">breakpoint</code> or <code class="language-plaintext highlighter-rouge">exec</code> informative as examples.</p>
 
 <h3 id="core-libraries">Core Libraries</h3>
 
@@ -3892,7 +3892,7 @@ script:</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#terminology">Terminology</a></li>
 <li class="toc-entry toc-h2"><a href="#usage">Usage</a>
 <ul>
@@ -4266,7 +4266,7 @@ script:</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

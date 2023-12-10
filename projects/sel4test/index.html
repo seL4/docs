@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -333,10 +333,10 @@ ls</span>
 tests, and some tools used in the build process. By default, the current
 master branch of the kernel is cloned. To clone a specific version of
 the kernel and compatible libraries and tools, replace the</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init
 </code></pre></div></div>
 <p>line above with:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/
 </code></pre></div></div>
 
 <p>In this example we clone version  of the kernel. For more information on version
@@ -351,7 +351,7 @@ configuration arguments, see the <a href="/Hardware">Supported Platforms</a> pag
 <p>To start a build with a specific configuration we can create a new subdirectory from the project root
 and initialise it with CMake:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># create build directory
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># create build directory
 mkdir build
 cd build
 # configure build directory
@@ -361,12 +361,12 @@ cd build
 
 <p>You can look at and edit the CMake configuration options from your build directory using</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccmake .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccmake .
 </code></pre></div></div>
 
-<p>It is also important to note that meta options such as <code class="highlighter-rouge">PLATFORM</code> and <code class="highlighter-rouge">SIMULATION</code> will override various settings in the
+<p>It is also important to note that meta options such as <code class="language-plaintext highlighter-rouge">PLATFORM</code> and <code class="language-plaintext highlighter-rouge">SIMULATION</code> will override various settings in the
 seL4test build system in order to maintain the meta configuration. This can however be disabled if you first
-enable the <code class="highlighter-rouge">Sel4testAllowSettingsOverride</code> variable.</p>
+enable the <code class="language-plaintext highlighter-rouge">Sel4testAllowSettingsOverride</code> variable.</p>
 
 <h3 id="useful-configuration-options">Useful configuration options</h3>
 <p>For an overview of the CMake build system and further configuration options, including configuring for
@@ -375,7 +375,7 @@ cross compilation (targeting ARM), see <a href="/Developing/Building/Using">seL4
 <h2 id="building">Building</h2>
 <p>When you’ve configured the system, you can build it by running:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
 </code></pre></div></div>
 
 <h2 id="running-it">Running it</h2>
@@ -383,7 +383,7 @@ cross compilation (targeting ARM), see <a href="/Developing/Building/Using">seL4
 <h3 id="ia32-example">IA32 Example</h3>
 <p>We will now build seL4test for ia32, to run on the QEMU simulator.</p>
 
-<p>Passing <code class="highlighter-rouge">-DSIMULATION=TRUE</code> to CMake produces a script to simulate our release ia32 build. The following commands
+<p>Passing <code class="language-plaintext highlighter-rouge">-DSIMULATION=TRUE</code> to CMake produces a script to simulate our release ia32 build. The following commands
 will configure our CMake build:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>ia32_build
@@ -392,11 +392,11 @@ will configure our CMake build:</p>
 </code></pre></div></div>
 
 <p>Build it:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
 </code></pre></div></div>
 
 <p>Executing the following commands will run qemu and point it towards the image we just built:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate
 ...
 ELF-loading userland images from boot modules:
 size=0x1dd000 v_entry=0x806716f v_start=0x8048000 v_end=0x8225000 p_start=0x21f000 p_end=0x3fc000
@@ -415,16 +415,16 @@ Running test BIND0003 (Test IPC ordering 1) bound tcb waits on bound notificatio
 Test BIND0003 passed
 ...
 </code></pre></div></div>
-<p>To exit qemu, press <code class="highlighter-rouge">Ctrl-a</code>, then <code class="highlighter-rouge">x</code>. The text string<code class="highlighter-rouge"> All is well in the universe</code> indicates a successful build.</p>
+<p>To exit qemu, press <code class="language-plaintext highlighter-rouge">Ctrl-a</code>, then <code class="language-plaintext highlighter-rouge">x</code>. The text string<code class="language-plaintext highlighter-rouge"> All is well in the universe</code> indicates a successful build.</p>
 
 <p>We can further configure the test suite build to print out JUnit-style XML. Thus enabling the output to be parsed by various tools.
-To do so, edit the build settings through <code class="highlighter-rouge">ccmake</code>, enabling the <code class="highlighter-rouge">Sel4testAllowSettingsOverride</code> and <code class="highlighter-rouge">LibSel4TestPrintXML</code> variables.</p>
+To do so, edit the build settings through <code class="language-plaintext highlighter-rouge">ccmake</code>, enabling the <code class="language-plaintext highlighter-rouge">Sel4testAllowSettingsOverride</code> and <code class="language-plaintext highlighter-rouge">LibSel4TestPrintXML</code> variables.</p>
 
 <h2 id="testing-a-customised-kernel">Testing a Customised Kernel</h2>
 
-<p>Suppose you’ve got seL4 checked out in <code class="highlighter-rouge">~/projects/seL4</code>, and sel4test in
-<code class="highlighter-rouge">~/tests/sel4test</code>, and you have been making changes on a feature branch of seL4 named
-<code class="highlighter-rouge">awesome-new-feature</code>. You want to test if your modified kernel
+<p>Suppose you’ve got seL4 checked out in <code class="language-plaintext highlighter-rouge">~/projects/seL4</code>, and sel4test in
+<code class="language-plaintext highlighter-rouge">~/tests/sel4test</code>, and you have been making changes on a feature branch of seL4 named
+<code class="language-plaintext highlighter-rouge">awesome-new-feature</code>. You want to test if your modified kernel
 still passes all the tests in sel4test.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/tests/sel4tests/kernel
@@ -439,8 +439,8 @@ Now just build and run the test suite as above.</p>
 
 <h2 id="running-a-subset-of-the-tests">Running a subset of the tests</h2>
 <p>You can use a regular expression to select a subset of the
-tests. This can be configured by setting the CMake variable <code class="highlighter-rouge">LibSel4TestPrinterRegex</code>. We can modify this
-variable by running <code class="highlighter-rouge">ccmake .</code> in our build directory. By default the test suite runs all tests.</p>
+tests. This can be configured by setting the CMake variable <code class="language-plaintext highlighter-rouge">LibSel4TestPrinterRegex</code>. We can modify this
+variable by running <code class="language-plaintext highlighter-rouge">ccmake .</code> in our build directory. By default the test suite runs all tests.</p>
 
   </div>
 
@@ -453,7 +453,7 @@ variable by running <code class="highlighter-rouge">ccmake .</code> in our build
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#getting-the-code">Getting the Code</a></li>
 <li class="toc-entry toc-h2"><a href="#build-it">Build it</a>
 <ul>
@@ -582,7 +582,7 @@ variable by running <code class="highlighter-rouge">ccmake .</code> in our build
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 5fc78c1c47

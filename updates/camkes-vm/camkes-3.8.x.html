@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -153,29 +153,29 @@
 <h2 id="camkes-vm">camkes-vm</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">FileServer</code>: Move <code class="highlighter-rouge">fsclient</code> to <code class="highlighter-rouge">libFileServer-client</code>.
-<code class="highlighter-rouge">libFileServer-client</code> is now a library bundled with the <code class="highlighter-rouge">FileServer</code>
+  <li><code class="language-plaintext highlighter-rouge">FileServer</code>: Move <code class="language-plaintext highlighter-rouge">fsclient</code> to <code class="language-plaintext highlighter-rouge">libFileServer-client</code>.
+<code class="language-plaintext highlighter-rouge">libFileServer-client</code> is now a library bundled with the <code class="language-plaintext highlighter-rouge">FileServer</code>
 component. Components that are clients of the RPC interface provided by
-the <code class="highlighter-rouge">FileServer</code> can now link this client library and initialise it with
-the name of the local-client interface binding (<code class="highlighter-rouge">fs</code> for <code class="highlighter-rouge">Init</code>) to set up
-the <code class="highlighter-rouge">muslc</code> syscall bindings.</li>
-  <li>Update RPC templates with new <code class="highlighter-rouge">grantreply</code> right (rather than <code class="highlighter-rouge">grant</code>).</li>
-  <li><code class="highlighter-rouge">Ethdriver</code>: Fix DMA physical and virtual DMA address assumption.
+the <code class="language-plaintext highlighter-rouge">FileServer</code> can now link this client library and initialise it with
+the name of the local-client interface binding (<code class="language-plaintext highlighter-rouge">fs</code> for <code class="language-plaintext highlighter-rouge">Init</code>) to set up
+the <code class="language-plaintext highlighter-rouge">muslc</code> syscall bindings.</li>
+  <li>Update RPC templates with new <code class="language-plaintext highlighter-rouge">grantreply</code> right (rather than <code class="language-plaintext highlighter-rouge">grant</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">Ethdriver</code>: Fix DMA physical and virtual DMA address assumption.
 Previously, the component assumed that the physical and virtual DMA
 addresses are the same. This is supposedly the case on x86 platforms but
 not on ARM platforms. This commit fixes this assumption and correctly
 passes the physical DMA addresses down to the Ethernet device driver.</li>
-  <li><code class="highlighter-rouge">Ethdriver</code>: Add ARM <code class="highlighter-rouge">Ethdriver</code> component and platform specific definitions</li>
+  <li><code class="language-plaintext highlighter-rouge">Ethdriver</code>: Add ARM <code class="language-plaintext highlighter-rouge">Ethdriver</code> component and platform specific definitions</li>
   <li>Add PicoServer component for providing a UDP/TCP socket client interface and
-consuming a <code class="highlighter-rouge">seL4Ethernet</code> interface.</li>
-  <li><code class="highlighter-rouge">Ethdriver</code>: Use new <code class="highlighter-rouge">seL4DTBHardware</code> connector.
-This commit updates the ARM versions of the <code class="highlighter-rouge">Ethdriver</code> component to use
-the new <code class="highlighter-rouge">seL4DTBHardware</code> connector. This is done to remove the additional
+consuming a <code class="language-plaintext highlighter-rouge">seL4Ethernet</code> interface.</li>
+  <li><code class="language-plaintext highlighter-rouge">Ethdriver</code>: Use new <code class="language-plaintext highlighter-rouge">seL4DTBHardware</code> connector.
+This commit updates the ARM versions of the <code class="language-plaintext highlighter-rouge">Ethdriver</code> component to use
+the new <code class="language-plaintext highlighter-rouge">seL4DTBHardware</code> connector. This is done to remove the additional
 boilerplate code needed to initialise hardware resources.</li>
-  <li>Move <code class="highlighter-rouge">Ethdriver</code> and <code class="highlighter-rouge">PicoServer</code> components, templates and interfaces to <code class="highlighter-rouge">global-components</code> repository.</li>
-  <li>remove global <code class="highlighter-rouge">Configuration</code> library.</li>
-  <li>Update <code class="highlighter-rouge">virtio_net_switch</code> to new <code class="highlighter-rouge">libvirtqueue</code>.
-Introduces the necessary changes for the <code class="highlighter-rouge">virtio_net_switch</code> to work with
+  <li>Move <code class="language-plaintext highlighter-rouge">Ethdriver</code> and <code class="language-plaintext highlighter-rouge">PicoServer</code> components, templates and interfaces to <code class="language-plaintext highlighter-rouge">global-components</code> repository.</li>
+  <li>remove global <code class="language-plaintext highlighter-rouge">Configuration</code> library.</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">virtio_net_switch</code> to new <code class="language-plaintext highlighter-rouge">libvirtqueue</code>.
+Introduces the necessary changes for the <code class="language-plaintext highlighter-rouge">virtio_net_switch</code> to work with
 the new multi buffer virtqueue.</li>
   <li>CMake: Add Findcamkes-vm.cmake module</li>
 </ul>
@@ -313,7 +313,7 @@ the new multi buffer virtqueue.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -195,11 +195,11 @@ case, this will take you to a configuration menu.</p>
 
 <ol>
   <li>Choose Serial Port Setup</li>
-  <li>Set A: Serial Device to <code class="highlighter-rouge">/dev/ttyUSB0</code> or <code class="highlighter-rouge">/dev/ttyS0</code> depending on
+  <li>Set A: Serial Device to <code class="language-plaintext highlighter-rouge">/dev/ttyUSB0</code> or <code class="language-plaintext highlighter-rouge">/dev/ttyS0</code> depending on
   which serial device you want to use.</li>
   <li>Set F: Hardware Flow Control to No</li>
-  <li>Set speed to <code class="highlighter-rouge">115200</code> and eight bit no parity.</li>
-  <li>Save setup as <code class="highlighter-rouge">ttyUSB0</code> or <code class="highlighter-rouge">ttyS0</code></li>
+  <li>Set speed to <code class="language-plaintext highlighter-rouge">115200</code> and eight bit no parity.</li>
+  <li>Save setup as <code class="language-plaintext highlighter-rouge">ttyUSB0</code> or <code class="language-plaintext highlighter-rouge">ttyS0</code></li>
   <li>Exit Minicom</li>
 </ol>
 
@@ -291,17 +291,17 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <p>Which after a few minutes should give you:</p>
 
 <p>Now, the ELF image we
-boot into is the <code class="highlighter-rouge">sel4test-driver-image-arm-omap3</code> file. 
+boot into is the <code class="language-plaintext highlighter-rouge">sel4test-driver-image-arm-omap3</code> file. 
 Copy that file onto the sdcard (the boot loader will be able to load images into RAM from a FAT image: there is no need to do an image copy). If your SD card is not formatted, just format it using FAT32.
-Plug the SD card back into the BeagleBoard and reset the board by pressing the <code class="highlighter-rouge">S2</code> (reset) button.</p>
+Plug the SD card back into the BeagleBoard and reset the board by pressing the <code class="language-plaintext highlighter-rouge">S2</code> (reset) button.</p>
 
 <h3 id="to-run-the-image">To run the image:</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
 mmcinfo
 fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-omap3
 bootelf ${loadaddr}
@@ -309,10 +309,10 @@ bootelf ${loadaddr}
 <p>where loadaddr
 is some address, in this example defined as an environment variable.</p>
 
-<p>Note: by default, the image produced is relocated to run at address 0x82000000. If you want to change the address, you need to modify the file <code class="highlighter-rouge">projects/tools/elfloader-tool/gen_boot_image.sh</code> (look for the omap3 case). For the Beaglebone Black Rev A5, RAM is from address 0x80000000 - 0x9FFFFFFF.</p>
+<p>Note: by default, the image produced is relocated to run at address 0x82000000. If you want to change the address, you need to modify the file <code class="language-plaintext highlighter-rouge">projects/tools/elfloader-tool/gen_boot_image.sh</code> (look for the omap3 case). For the Beaglebone Black Rev A5, RAM is from address 0x80000000 - 0x9FFFFFFF.</p>
 
-<p>Depending on the uBoot version present on the Beaglebone, the <code class="highlighter-rouge">bootelf</code> command might not be present. You can use the <code class="highlighter-rouge">go</code> command instead. I.e.:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
+<p>Depending on the uBoot version present on the Beaglebone, the <code class="language-plaintext highlighter-rouge">bootelf</code> command might not be present. You can use the <code class="language-plaintext highlighter-rouge">go</code> command instead. I.e.:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
 mmcinfo
 fatload mmc 0 0x82000000 sel4test-driver-image-arm-omap3
 go 0x82000000
@@ -321,7 +321,7 @@ go 0x82000000
 <p>After this you should start seeing output from seL4test.</p>
 
 <p>Tip: if you don’t remember the name of the images on your SD card, you can use:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
 </code></pre></div></div>
 <p>to see what is on the SD card.</p>
 
@@ -357,7 +357,7 @@ go 0x82000000
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 5fc78c1c47

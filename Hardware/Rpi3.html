@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -224,22 +224,22 @@ seL4 on the RPi3 successfully.</p>
 latest version of u-boot. You need to manually revert the change by
 looking at the changeset.</p>
 
-<p>Building u-boot using configuration <code class="highlighter-rouge">rpi_3_3b_defconfig</code> is going to
+<p>Building u-boot using configuration <code class="language-plaintext highlighter-rouge">rpi_3_3b_defconfig</code> is going to
 produce an image that can boot seL4 on the Raspberry PI Model 3B and
 3B+. Unfortunately for the 3B+ tftp boot is not going to work using
-this version of u-boot (the <code class="highlighter-rouge">tftp</code> command will report error
-<code class="highlighter-rouge">No Ethernet found</code>).
+this version of u-boot (the <code class="language-plaintext highlighter-rouge">tftp</code> command will report error
+<code class="language-plaintext highlighter-rouge">No Ethernet found</code>).
 In this case you need to build an image specific for the 3B+.
 Unfortunately the provided defconfig file for the 3B+ model
-(<code class="highlighter-rouge">rpi_3_b_plus_defconfig</code>) doesn’t appear to build correctly.</p>
+(<code class="language-plaintext highlighter-rouge">rpi_3_b_plus_defconfig</code>) doesn’t appear to build correctly.</p>
 
 <p>In order to use tftp boot on a Raspberry PI Model 3B+, use the
 defconfig for the 3B (as described above), then manually change the
-<code class="highlighter-rouge">CONFIG_DEFAULT_DEVICE_TREE</code> parameter in the <code class="highlighter-rouge">.config</code> from:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
+<code class="language-plaintext highlighter-rouge">CONFIG_DEFAULT_DEVICE_TREE</code> parameter in the <code class="language-plaintext highlighter-rouge">.config</code> from:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
 </code></pre></div></div>
 <p>to:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b-plus"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b-plus"
 </code></pre></div></div>
 <p>Now the generated image should be able to use the on-board
 Ethernet device for TFTP.</p>
@@ -317,7 +317,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <p>The two methods described here are using the SD card and TFTP.</p>
 
@@ -342,7 +342,7 @@ something the following: fatls mmc 0. If you don’t see your seL4 image
 file’s name printed out, then you might need to double-check your steps
 so far to make sure you didn’t forget something along the way. If you
 see your file listed, then do something like:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2837
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2837
 bootelf 0x10000000
 </code></pre></div></div>
 
@@ -352,7 +352,7 @@ bootelf 0x10000000
 U-Boot and the RPi3 firmware (consult the table above). Then make
 certain that you’ve started up a TFTP server with your seL4 image being
 served by that TFTP server. From there:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start
 dhcp
 tftp 0x10000000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-arm-bcm2837
 bootelf 0x10000000
@@ -362,7 +362,7 @@ bootelf 0x10000000
 correct u-boot image as described above.</p>
 
 <p>To use static IP instead of DHCP, use:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb start
 setenv ipaddr &lt;RPI_IP_ADDRESS&gt;
 setenv serverip &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;
 tftp 0x10000000 sel4test-driver-image-arm-bcm2837
@@ -401,7 +401,7 @@ bootelf 0x10000000
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 5fc78c1c47

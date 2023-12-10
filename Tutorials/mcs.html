@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
@@ -331,13 +331,13 @@ for more than <em>budget</em> microseconds out of <em>period</em> microseconds.<
 
 <h3 id="schedcontrol">SchedControl</h3>
 
-<p>Parameters for scheduling contexts are configured by invoking <code class="highlighter-rouge">seL4_SchedControl</code> capabilities, one of 
-which is provided per CPU. The invoked <code class="highlighter-rouge">seL4_SchedControl</code> determines which processing core that specific 
+<p>Parameters for scheduling contexts are configured by invoking <code class="language-plaintext highlighter-rouge">seL4_SchedControl</code> capabilities, one of 
+which is provided per CPU. The invoked <code class="language-plaintext highlighter-rouge">seL4_SchedControl</code> determines which processing core that specific 
 scheduling context provides access to.</p>
 
-<p>Scheduling contexts can be configured as <em>full</em> or <em>partial</em>. Full scheduling contexts have <code class="highlighter-rouge">budget == 
+<p>Scheduling contexts can be configured as <em>full</em> or <em>partial</em>. Full scheduling contexts have <code class="language-plaintext highlighter-rouge">budget == 
 period</code> and grant access to 100% of CPU time. Partial scheduling contexts grant access to an upper bound of
- <code class="highlighter-rouge">budget/period</code> CPU time.</p>
+ <code class="language-plaintext highlighter-rouge">budget/period</code> CPU time.</p>
 
 <p>The code example below configures a 
 scheduling context with a budget and period both equal to 1000us. Because the budget and period are equal, 
@@ -351,8 +351,8 @@ the scheduling context is treated as round-robin</p>
 
 <p>Thread control blocks (TCBs) must have a scheduling context configured with non-zero budget and period
  in order to be picked by the scheduler. This 
-can by invoking the scheduling context capability with the <code class="highlighter-rouge">seL4_SchedContext_Bind</code> invocation, or by
-using <code class="highlighter-rouge">seL4_TCB_SetSchedParams</code>, which takes a scheduling context capability. Below is example code for
+can by invoking the scheduling context capability with the <code class="language-plaintext highlighter-rouge">seL4_SchedContext_Bind</code> invocation, or by
+using <code class="language-plaintext highlighter-rouge">seL4_TCB_SetSchedParams</code>, which takes a scheduling context capability. Below is example code for
 binding a TCB and a scheduling context.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedContext_Bind</span><span class="p">(</span><span class="n">sched_context</span><span class="p">,</span> <span class="n">spinner_tcb</span><span class="p">);</span>
@@ -368,7 +368,7 @@ for scheduling.</p>
 <p>For partial scheduling contexts, an upper bound on execution is enforced by seL4 using the <em>sporadic server</em>
 algorithm, which work by guaranteeing the <em>sliding window</em> constrain, meaning that during any period, the
 budget cannot be exceeded. This is achieved by tracking the eligible budget in chunks called 
-<em>replenishments</em> (abbreviated to <code class="highlighter-rouge">refills</code> in the API for brevity). A replenishment is simply an amount 
+<em>replenishments</em> (abbreviated to <code class="language-plaintext highlighter-rouge">refills</code> in the API for brevity). A replenishment is simply an amount 
  of time, and a timestamp from which that time can be consumed. We explain this now through an example:</p>
 
 <p>Consider a scheduling context with period <em>T</em> and budget <em>C</em>. Initially, the scheduling context has 
@@ -380,17 +380,17 @@ For further details on the sporadic server algorithm, see the
 <a href="https://dl.acm.org/citation.cfm?id=917665">original paper</a>.</p>
 
 <p>If the replenishment data structure is full, replenishments are merged and the upper bound on execution is
-reduced. For this reason, the bound on execution is configurable with the <code class="highlighter-rouge">extra_refills</code> parameter
+reduced. For this reason, the bound on execution is configurable with the <code class="language-plaintext highlighter-rouge">extra_refills</code> parameter
 on scheduling contexts. By default, scheduling contexts contain only two parameters, meaning if a 
 scheduling context is blocked, switched or preempted more than twice, the rest of the budget is forfeit until 
-the next period. <code class="highlighter-rouge">extra_refills</code> provides more replenishment data structures in a scheduling context. Note 
+the next period. <code class="language-plaintext highlighter-rouge">extra_refills</code> provides more replenishment data structures in a scheduling context. Note 
 that the higher the number of replenishments the more fragmentation of budget can occur, which will increase
 scheduling overhead.</p>
 
-<p><code class="highlighter-rouge">extra_refills</code> itself is bounded by the size of a scheduling context, which is itself configurable. 
-On scheduling context creation a size can be specified, and must be <code class="highlighter-rouge">&gt; seL4_MinSchedContextBits</code>. The 
+<p><code class="language-plaintext highlighter-rouge">extra_refills</code> itself is bounded by the size of a scheduling context, which is itself configurable. 
+On scheduling context creation a size can be specified, and must be <code class="language-plaintext highlighter-rouge">&gt; seL4_MinSchedContextBits</code>. The 
 maximum number of extra refills that can fit into a specific scheduling context size can be calculated
-with the function <code class="highlighter-rouge">seL4_MaxExtraRefills()</code> provided in <code class="highlighter-rouge">libsel4</code>.</p>
+with the function <code class="language-plaintext highlighter-rouge">seL4_MaxExtraRefills()</code> provided in <code class="language-plaintext highlighter-rouge">libsel4</code>.</p>
 
 <p>Threads bound to scheduling contexts that do not have an available replenishment are placed into an ordered
 queue of threads, and woken once their next replenishment is ready.</p>
@@ -404,38 +404,38 @@ queue of threads, and woken once their next replenishment is ready.</p>
 
 <p>The MCS extensions allow for RPC style servers to run on client TCBs’ scheduling contexts. This is achived by 
 unbinding the scheduling context once a server is blocked on an endpoint, rendering the server <em>passive</em>. 
-Caller scheduling contexts are donated to the server on <code class="highlighter-rouge">seL4_Call</code> and returned on <code class="highlighter-rouge">seL4_ReplyRecv</code>.</p>
+Caller scheduling contexts are donated to the server on <code class="language-plaintext highlighter-rouge">seL4_Call</code> and returned on <code class="language-plaintext highlighter-rouge">seL4_ReplyRecv</code>.</p>
 
 <p>Passive servers can also receive scheduling contexts from their bound notification object, which is 
-achieved by binding a notification object using <code class="highlighter-rouge">seL4_SchedContext_Bind</code>.</p>
+achieved by binding a notification object using <code class="language-plaintext highlighter-rouge">seL4_SchedContext_Bind</code>.</p>
 
 <h3 id="timeout-faults">Timeout faults</h3>
 
-<p>Threads can register a timeout fault handler using <code class="highlighter-rouge">seL4_TCB_SetTimeoutEndpoint</code>. Timeout fault
+<p>Threads can register a timeout fault handler using <code class="language-plaintext highlighter-rouge">seL4_TCB_SetTimeoutEndpoint</code>. Timeout fault
 handlers are optional and are raised when a thread’s replenishment expires <em>and</em> they have a valid handler
 registered. The timeout fault message from the kernel contains the data word which can be used to identify the
 scheduling context that the thread was using when the timeout fault occurred, and the amount of time
-consumed by the thread since the last fault or <code class="highlighter-rouge">seL4_SchedContext_Consumed</code>.</p>
+consumed by the thread since the last fault or <code class="language-plaintext highlighter-rouge">seL4_SchedContext_Consumed</code>.</p>
 
 <h3 id="new-invocations">New invocations</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">seL4_SchedContext_Bind</code> - bind a TCB or Notification capability to the invoked scheduling context.</li>
-  <li><code class="highlighter-rouge">seL4_SchedContext_Unbind</code> - unbind any objects from the invoked scheduling context.</li>
-  <li><code class="highlighter-rouge">seL4_SchedContext_UnbindObject</code>- unbind a specific object from the invoked scheduling context.</li>
-  <li><code class="highlighter-rouge">seL4_SchedContext_YieldTo</code> - if the thread running on the invoked scheduling context is 
+  <li><code class="language-plaintext highlighter-rouge">seL4_SchedContext_Bind</code> - bind a TCB or Notification capability to the invoked scheduling context.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_SchedContext_Unbind</code> - unbind any objects from the invoked scheduling context.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_SchedContext_UnbindObject</code>- unbind a specific object from the invoked scheduling context.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_SchedContext_YieldTo</code> - if the thread running on the invoked scheduling context is 
 schedulable, place it at the head of the scheduling queue for its priority. For same priority threads, this 
 will result in the target thread being scheduled. Return the amount of time consumed by this scheduling 
-context since the last timeout fault, <code class="highlighter-rouge">YieldTo</code> or <code class="highlighter-rouge">Consumed</code> invocation.</li>
-  <li><code class="highlighter-rouge">seL4_SchedContext_Consumed</code> - Return the amount of time consumed by this scheduling 
-context since the last timeout fault, <code class="highlighter-rouge">YieldTo</code> or <code class="highlighter-rouge">Consumed</code> invocation.</li>
-  <li><code class="highlighter-rouge">seL4_TCB_SetTimeoutEndpoint</code> - Set the timeout fault endpoint for a TCB.</li>
+context since the last timeout fault, <code class="language-plaintext highlighter-rouge">YieldTo</code> or <code class="language-plaintext highlighter-rouge">Consumed</code> invocation.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_SchedContext_Consumed</code> - Return the amount of time consumed by this scheduling 
+context since the last timeout fault, <code class="language-plaintext highlighter-rouge">YieldTo</code> or <code class="language-plaintext highlighter-rouge">Consumed</code> invocation.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_TCB_SetTimeoutEndpoint</code> - Set the timeout fault endpoint for a TCB.</li>
 </ul>
 
 <h3 id="reply-objects">Reply objects</h3>
 
 <p>The MCS API also makes the reply channel explicit: reply capabilities are now fully fledged objects 
-which must be provided by a thread on <code class="highlighter-rouge">seL4_Recv</code> operations. They are used to track the scheduling
+which must be provided by a thread on <code class="language-plaintext highlighter-rouge">seL4_Recv</code> operations. They are used to track the scheduling
 context donation chain and return donated scheduling contexts to callers.</p>
 
 <p>Please see the <a href="https://docs.sel4.systems/sel4_release/seL4_9.0.0-mcs">release notes</a> and 
@@ -444,39 +444,39 @@ context donation chain and return donated scheduling contexts to callers.</p>
 
 <h2 id="exercises">Exercises</h2>
 
-<p>In the initial state of the tutorial, the main function in <code class="highlighter-rouge">mcs.c</code> is running in one process, and the 
-following loop from <code class="highlighter-rouge">spinner.c</code> is running in another process:</p>
+<p>In the initial state of the tutorial, the main function in <code class="language-plaintext highlighter-rouge">mcs.c</code> is running in one process, and the 
+following loop from <code class="language-plaintext highlighter-rouge">spinner.c</code> is running in another process:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    int i = 0;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    int i = 0;
     while (1) {
         printf("Yield\n");
         seL4_Yield();
     }
 </code></pre></div></div>
 
-<p>Both processes share the same priority. The code in <code class="highlighter-rouge">mcs.c</code> binds
-a scheduling context (<code class="highlighter-rouge">sched_context</code>) to the TCB of the spinner process (<code class="highlighter-rouge">spinner_tcb)</code> with round-robin scheduling parameters. As a result, you should see
+<p>Both processes share the same priority. The code in <code class="language-plaintext highlighter-rouge">mcs.c</code> binds
+a scheduling context (<code class="language-plaintext highlighter-rouge">sched_context</code>) to the TCB of the spinner process (<code class="language-plaintext highlighter-rouge">spinner_tcb)</code> with round-robin scheduling parameters. As a result, you should see
  something like the following output, which continues uninterrupted:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yield
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yield
 Yield
 Yield
 </code></pre></div></div>
 
 <h3 id="periodic-threads">Periodic threads</h3>
 
-<p><strong>Exercise</strong> Reconfigure <code class="highlighter-rouge">sched_context</code> with the following periodic scheduling parameters,
- (budget = <code class="highlighter-rouge">0.9 * US_IN_S</code>, period = <code class="highlighter-rouge">1 * US_IN_S</code>).</p>
+<p><strong>Exercise</strong> Reconfigure <code class="language-plaintext highlighter-rouge">sched_context</code> with the following periodic scheduling parameters,
+ (budget = <code class="language-plaintext highlighter-rouge">0.9 * US_IN_S</code>, period = <code class="language-plaintext highlighter-rouge">1 * US_IN_S</code>).</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic</span>
 </code></pre></div></div>
 
 <p>By completing this task successfully, the output will not change, but the rate that the output is
 printed will slow: each subsequent line should be output once the period has elapsed. You should now
-be able to see the loop where the <code class="highlighter-rouge">mcs.c</code> process and <code class="highlighter-rouge">spinner.c</code> process alternate, until the <code class="highlighter-rouge">mcs.c</code> 
-process blocks, at which point <code class="highlighter-rouge">"Yield"</code> is emitted by <code class="highlighter-rouge">spinner.c</code> every second, as shown below:</p>
+be able to see the loop where the <code class="language-plaintext highlighter-rouge">mcs.c</code> process and <code class="language-plaintext highlighter-rouge">spinner.c</code> process alternate, until the <code class="language-plaintext highlighter-rouge">mcs.c</code> 
+process blocks, at which point <code class="language-plaintext highlighter-rouge">"Yield"</code> is emitted by <code class="language-plaintext highlighter-rouge">spinner.c</code> every second, as shown below:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yield
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yield
 Tick 0
 Yield
 Tick 1
@@ -499,21 +499,21 @@ Yield
 Yield
 </code></pre></div></div>
 <p>Before you completed this task, the scheduling context was round-robin, and so was 
-schedulable immediately after the call to <code class="highlighter-rouge">seL4_Yield</code>. 
+schedulable immediately after the call to <code class="language-plaintext highlighter-rouge">seL4_Yield</code>. 
 By changing
-the scheduling parameters of <code class="highlighter-rouge">sched_context</code> to periodic parameters (budget &lt; period), each time 
-<code class="highlighter-rouge">seL4_Yield()</code> is called the available budget in the scheduling context is abandoned, causing the 
+the scheduling parameters of <code class="language-plaintext highlighter-rouge">sched_context</code> to periodic parameters (budget &lt; period), each time 
+<code class="language-plaintext highlighter-rouge">seL4_Yield()</code> is called the available budget in the scheduling context is abandoned, causing the 
 thread to sleep until the next replenishment, determined by the period.</p>
 
 <h3 id="unbinding-scheduling-contexts">Unbinding scheduling contexts</h3>
 
 <p>You can cease a threads execution by unbinding the scheduling context.
-Unlike <em>suspending</em> a thread via <code class="highlighter-rouge">seL4_TCB_Suspend</code>, unbinding will not change the thread state. Using suspend
+Unlike <em>suspending</em> a thread via <code class="language-plaintext highlighter-rouge">seL4_TCB_Suspend</code>, unbinding will not change the thread state. Using suspend
 cancels any system calls in process (e.g IPC) and renders the thread unschedulable by changing the
 thread state. Unbinding a scheduling context does not alter the thread state, but merely removes the thread
 from the scheduler queues.</p>
 
-<p><strong>Exercise</strong> Unbind <code class="highlighter-rouge">sched_context</code> to stop the spinner process from running.</p>
+<p><strong>Exercise</strong> Unbind <code class="language-plaintext highlighter-rouge">sched_context</code> to stop the spinner process from running.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO unbind sched_context to stop yielding thread </span>
 </code></pre></div></div>
 
@@ -521,16 +521,16 @@ from the scheduler queues.</p>
 
 <h3 id="sporadic-threads">Sporadic threads</h3>
 
-<p>Your next task is to use a different process, <code class="highlighter-rouge">sender</code> to experiment with sporadic tasks. The 
-<code class="highlighter-rouge">sender</code> process is ready to run, and just needs a scheduling context in order to do so.</p>
+<p>Your next task is to use a different process, <code class="language-plaintext highlighter-rouge">sender</code> to experiment with sporadic tasks. The 
+<code class="language-plaintext highlighter-rouge">sender</code> process is ready to run, and just needs a scheduling context in order to do so.</p>
 
-<p><strong>Exercise</strong> First, bind <code class="highlighter-rouge">sched_context</code> to <code class="highlighter-rouge">sender_tcb</code>.</p>
+<p><strong>Exercise</strong> First, bind <code class="language-plaintext highlighter-rouge">sched_context</code> to <code class="language-plaintext highlighter-rouge">sender_tcb</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO bind sched_context to sender_tcb</span>
 </code></pre></div></div>
 
 <p>The output should look like the following:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 Tock 3
 Tock 4
 Tock 5
@@ -542,7 +542,7 @@ a second break between (the period of the scheduling context you set earlier). T
 scheduling context only has the minimum sporadic refills (see background), and each time a context switch 
 occurs a refill is used up to schedule another.</p>
 
-<p><strong>Exercise</strong> Reconfigure the <code class="highlighter-rouge">sched_context</code> to an extra 6 refills, such that all of the <code class="highlighter-rouge">Tock</code> output 
+<p><strong>Exercise</strong> Reconfigure the <code class="language-plaintext highlighter-rouge">sched_context</code> to an extra 6 refills, such that all of the <code class="language-plaintext highlighter-rouge">Tock</code> output 
 occurs in one go.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context to be periodic with 6 extra refills</span>
@@ -550,20 +550,20 @@ occurs in one go.</p>
 
 <h3 id="passive-servers-1">Passive servers</h3>
 
-<p>Now look to the third process, <code class="highlighter-rouge">server.c</code>, which is a very basic echo server. It currently does 
+<p>Now look to the third process, <code class="language-plaintext highlighter-rouge">server.c</code>, which is a very basic echo server. It currently does 
 not have a scheduling context, and needs one to initialise.</p>
 
-<p><strong>Exercise</strong> Bind <code class="highlighter-rouge">sched_context</code> to <code class="highlighter-rouge">server_tcb</code>.</p>
+<p><strong>Exercise</strong> Bind <code class="language-plaintext highlighter-rouge">sched_context</code> to <code class="language-plaintext highlighter-rouge">server_tcb</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO bind sched_context to server_tcb</span>
 </code></pre></div></div>
 
 <p>Now you should see the server initialise and echo the messages sent. Note the initialisation protocol:
-first, you bound <code class="highlighter-rouge">sched_context</code> to the server. At this point, in <code class="highlighter-rouge">server.c</code>, the server calls 
-<code class="highlighter-rouge">seL4_NBSendRecv</code> which sends an IPC message on <code class="highlighter-rouge">endpoint</code>, indicating that the server is now initialised.
+first, you bound <code class="language-plaintext highlighter-rouge">sched_context</code> to the server. At this point, in <code class="language-plaintext highlighter-rouge">server.c</code>, the server calls 
+<code class="language-plaintext highlighter-rouge">seL4_NBSendRecv</code> which sends an IPC message on <code class="language-plaintext highlighter-rouge">endpoint</code>, indicating that the server is now initialised.
 The output should be as follows</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tock 8
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tock 8
 Starting server
 Wait for server
 Server initialising
@@ -579,7 +579,7 @@ Yield
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_SchedContext_Unbind</span><span class="p">(</span><span class="n">sched_context</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>From this point, the server runs on the <code class="highlighter-rouge">mcs</code> process’s scheduling context.</p>
+<p>From this point, the server runs on the <code class="language-plaintext highlighter-rouge">mcs</code> process’s scheduling context.</p>
 
 <h3 id="timeout-faults-1">Timeout Faults</h3>
 
@@ -589,12 +589,12 @@ minor difference in the way that the kernel is informed of the cap to a fault
 endpoint, between the master and MCS kernels.</p>
 
 <p>Regardless though, on both versions of the kernel, to inform the kernel of the
-fault endpoint for a thread, call the usual <code class="highlighter-rouge">seL4_TCB_SetSpace()</code>.</p>
+fault endpoint for a thread, call the usual <code class="language-plaintext highlighter-rouge">seL4_TCB_SetSpace()</code>.</p>
 
 <h4 id="configuring-a-fault-endpoint-on-the-mcs-kernel">Configuring a fault endpoint on the MCS kernel:</h4>
 
 <p>On the MCS kernel the cap given to the kernel must be a cap to an object in
-the CSpace of the thread which is <em>calling the syscall</em> (<code class="highlighter-rouge">seL4_TCB_Configure()</code>)
+the CSpace of the thread which is <em>calling the syscall</em> (<code class="language-plaintext highlighter-rouge">seL4_TCB_Configure()</code>)
 to give the cap to the kernel.</p>
 
 <p>This calling thread may be the handler thread, or some other thread which
@@ -615,21 +615,21 @@ of the faulting thread everytime a fault occurs.</p>
 
 <h4 id="exercise">Exercise:</h4>
 
-<p><strong>Exercise</strong> Set the data field of <code class="highlighter-rouge">sched_context</code> using <code class="highlighter-rouge">seL4_SchedControl_Configure</code> and set a 10s period, 1ms 
+<p><strong>Exercise</strong> Set the data field of <code class="language-plaintext highlighter-rouge">sched_context</code> using <code class="language-plaintext highlighter-rouge">seL4_SchedControl_Configure</code> and set a 10s period, 1ms 
 budget and 0 extra refills.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO reconfigure sched_context with 10s period, 1ms budget, 0 extra refills and data of 5.</span>
 </code></pre></div></div>
-<p>The code then binds the scheduling context back to <code class="highlighter-rouge">spinner_tcb</code>, which starts yielding again.</p>
+<p>The code then binds the scheduling context back to <code class="language-plaintext highlighter-rouge">spinner_tcb</code>, which starts yielding again.</p>
 
-<p><strong>Exercise</strong> set the timeout fault endpoint for <code class="highlighter-rouge">spinner_tcb</code>.</p>
+<p><strong>Exercise</strong> set the timeout fault endpoint for <code class="language-plaintext highlighter-rouge">spinner_tcb</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//TODO set endpoint as the timeout fault handler for spinner_tcb</span>
 </code></pre></div></div>
 
-<p>When the <code class="highlighter-rouge">spinner</code> faults, you should see the following output:</p>
+<p>When the <code class="language-plaintext highlighter-rouge">spinner</code> faults, you should see the following output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Received timeout fault
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Received timeout fault
 Success!
 </code></pre></div></div>
 
@@ -695,7 +695,7 @@ mcs/mcs.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -325,15 +325,15 @@
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="sel4shareddatawithcaps">seL4SharedDataWithCaps</h1>
 
-<p><code class="highlighter-rouge">seL4SharedDataWithCaps</code> is a CAmkES connector for connecting dataport
+<p><code class="language-plaintext highlighter-rouge">seL4SharedDataWithCaps</code> is a CAmkES connector for connecting dataport
 interfaces, where one side of the interface has caps to the frames
 backing the dataport. This is different from the common dataport
-connector <code class="highlighter-rouge">seL4SharedData</code>, in which neither side has caps to the frames.
-<code class="highlighter-rouge">seL4SharedData</code> is used in the CAmkES VM to implement Cross VM Dataports,
+connector <code class="language-plaintext highlighter-rouge">seL4SharedData</code>, in which neither side has caps to the frames.
+<code class="language-plaintext highlighter-rouge">seL4SharedData</code> is used in the CAmkES VM to implement Cross VM Dataports,
 which require the VMM to map memory backing a dataport into the VM’s
 address space - an operation which requires caps to the frames.</p>
 
-<p>The templates and connector definition for <code class="highlighter-rouge">seL4SharedDataWithCaps</code> is in
+<p>The templates and connector definition for <code class="language-plaintext highlighter-rouge">seL4SharedDataWithCaps</code> is in
 <a href="https://github.com/seL4/global-components">global-components</a>.</p>
 
 <p>For an example of this connector in action, see the
@@ -341,22 +341,22 @@ address space - an operation which requires caps to the frames.</p>
 
 <h3 id="usage">Usage</h3>
 
-<p>Connect a pair of dataport interfaces, as with <code class="highlighter-rouge">seL4SharedData</code>. The <code class="highlighter-rouge">to</code>
+<p>Connect a pair of dataport interfaces, as with <code class="language-plaintext highlighter-rouge">seL4SharedData</code>. The <code class="language-plaintext highlighter-rouge">to</code>
 component instance on the side of the connection will have caps to the
 dataport frames in its cspace. The connector implements the following
 interface, which provides access to the caps mapping the dataport:
 <a href="https://github.com/seL4/camkes-vm/blob/3883770209ba2bfb4f85ed2b7d387731e2601b7d/common/include/dataport_caps.h">dataport_caps.h</a>.</p>
 
-<p>The interface on the <code class="highlighter-rouge">to</code> side of each <code class="highlighter-rouge">seL4SharedDataWithCaps</code> connection
+<p>The interface on the <code class="language-plaintext highlighter-rouge">to</code> side of each <code class="language-plaintext highlighter-rouge">seL4SharedDataWithCaps</code> connection
 must be configured with a unique id and size:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;instance&gt;.&lt;interface&gt;_id = &lt;unique integer &gt;= 1&gt;;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;instance&gt;.&lt;interface&gt;_id = &lt;unique integer &gt;= 1&gt;;
 &lt;instance&gt;.&lt;interface&gt;_size = &lt;integer size&gt;;
 </code></pre></div></div>
 
 <p>Specifying a non-unique or non-positive id is an error. Specifying a
 size other than the size of the type of the dataport is an error.
 Omitting this configuration for an interface connected with
-<code class="highlighter-rouge">seL4SharedDataWithCaps</code> is an error.</p>
+<code class="language-plaintext highlighter-rouge">seL4SharedDataWithCaps</code> is an error.</p>
 
   </div>
 
@@ -611,7 +611,7 @@ Omitting this configuration for an interface connected with
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 8 11:45:32 2021 +1100 7936038ee0

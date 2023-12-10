@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_irq_controllerh">Interface <code class="highlighter-rouge">guest_irq_controller.h</code></h2>
+<h2 id="interface-guest_irq_controllerh">Interface <code class="language-plaintext highlighter-rouge">guest_irq_controller.h</code></h2>
 
 <p>The libsel4vm IRQ controller interface provides a base abstraction around initialising a guest VM irq controller
 and methods for injecting IRQs into a running VM instance.</p>
@@ -350,34 +350,34 @@ and methods for injecting IRQs into a running VM instance.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_inject_irqvcpu-irq"><code class="highlighter-rouge">vm_inject_irq(vcpu, irq)</code></a></p>
+  <p><a href="#function-vm_inject_irqvcpu-irq"><code class="language-plaintext highlighter-rouge">vm_inject_irq(vcpu, irq)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_set_irq_levelvcpu-irq-irq_level"><code class="highlighter-rouge">vm_set_irq_level(vcpu, irq, irq_level)</code></a></p>
+  <p><a href="#function-vm_set_irq_levelvcpu-irq-irq_level"><code class="language-plaintext highlighter-rouge">vm_set_irq_level(vcpu, irq, irq_level)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_register_irqvcpu-irq-ack_fn-cookie"><code class="highlighter-rouge">vm_register_irq(vcpu, irq, ack_fn, cookie)</code></a></p>
+  <p><a href="#function-vm_register_irqvcpu-irq-ack_fn-cookie"><code class="language-plaintext highlighter-rouge">vm_register_irq(vcpu, irq, ack_fn, cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_create_default_irq_controllervm"><code class="highlighter-rouge">vm_create_default_irq_controller(vm)</code></a></p>
+  <p><a href="#function-vm_create_default_irq_controllervm"><code class="language-plaintext highlighter-rouge">vm_create_default_irq_controller(vm)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_irq_controller.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_irq_controller.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_inject_irqvcpu-irq">Function <code class="highlighter-rouge">vm_inject_irq(vcpu, irq)</code></h3>
+<h3 id="function-vm_inject_irqvcpu-irq">Function <code class="language-plaintext highlighter-rouge">vm_inject_irq(vcpu, irq)</code></h3>
 
 <p>Inject an IRQ into a VM’s interrupt controller</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the VCPU</li>
-  <li><code class="highlighter-rouge">irq {int}</code>: IRQ number to inject</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the VCPU</li>
+  <li><code class="language-plaintext highlighter-rouge">irq {int}</code>: IRQ number to inject</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -388,16 +388,16 @@ and methods for injecting IRQs into a running VM instance.</p>
 
 <p>Back to <a href="#module-guest_irq_controllerh">interface description</a>.</p>
 
-<h3 id="function-vm_set_irq_levelvcpu-irq-irq_level">Function <code class="highlighter-rouge">vm_set_irq_level(vcpu, irq, irq_level)</code></h3>
+<h3 id="function-vm_set_irq_levelvcpu-irq-irq_level">Function <code class="language-plaintext highlighter-rouge">vm_set_irq_level(vcpu, irq, irq_level)</code></h3>
 
 <p>Set level of IRQ number into a VM’s interrupt controller</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t}</code>: Handle to the VCPU</li>
-  <li><code class="highlighter-rouge">irq {int}</code>: IRQ number to set level on</li>
-  <li><code class="highlighter-rouge">irq_level {int}</code>: Value of IRQ level</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t}</code>: Handle to the VCPU</li>
+  <li><code class="language-plaintext highlighter-rouge">irq {int}</code>: IRQ number to set level on</li>
+  <li><code class="language-plaintext highlighter-rouge">irq_level {int}</code>: Value of IRQ level</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -408,17 +408,17 @@ and methods for injecting IRQs into a running VM instance.</p>
 
 <p>Back to <a href="#module-guest_irq_controllerh">interface description</a>.</p>
 
-<h3 id="function-vm_register_irqvcpu-irq-ack_fn-cookie">Function <code class="highlighter-rouge">vm_register_irq(vcpu, irq, ack_fn, cookie)</code></h3>
+<h3 id="function-vm_register_irqvcpu-irq-ack_fn-cookie">Function <code class="language-plaintext highlighter-rouge">vm_register_irq(vcpu, irq, ack_fn, cookie)</code></h3>
 
 <p>Register irq with an acknowledgment function</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the VCPU</li>
-  <li><code class="highlighter-rouge">irq {int}</code>: IRQ number to register acknowledgement function on</li>
-  <li><code class="highlighter-rouge">ack_fn {irq_ack_fn_t}</code>: IRQ acknowledgement function</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: Cookie to pass back with IRQ acknowledgement function</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to the VCPU</li>
+  <li><code class="language-plaintext highlighter-rouge">irq {int}</code>: IRQ number to register acknowledgement function on</li>
+  <li><code class="language-plaintext highlighter-rouge">ack_fn {irq_ack_fn_t}</code>: IRQ acknowledgement function</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: Cookie to pass back with IRQ acknowledgement function</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -429,14 +429,14 @@ and methods for injecting IRQs into a running VM instance.</p>
 
 <p>Back to <a href="#module-guest_irq_controllerh">interface description</a>.</p>
 
-<h3 id="function-vm_create_default_irq_controllervm">Function <code class="highlighter-rouge">vm_create_default_irq_controller(vm)</code></h3>
+<h3 id="function-vm_create_default_irq_controllervm">Function <code class="language-plaintext highlighter-rouge">vm_create_default_irq_controller(vm)</code></h3>
 
 <p>Install the default interrupt controller into the VM</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: Handle to the VM</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -545,7 +545,7 @@ and methods for injecting IRQs into a running VM instance.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

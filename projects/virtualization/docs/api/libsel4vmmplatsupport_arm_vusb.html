@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-vusbh">Interface <code class="highlighter-rouge">vusb.h</code></h2>
+<h2 id="interface-vusbh">Interface <code class="language-plaintext highlighter-rouge">vusb.h</code></h2>
 
 <p>The libsel4vmmplatsupport vusb interface presents a Virtual USB driver for ARM-based VM’s.</p>
 
@@ -349,18 +349,18 @@
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_install_vusbvm-hcd-pbase-virq-vmm_ncap-vm_ncap-badge"><code class="highlighter-rouge">vm_install_vusb(vm, hcd, pbase, virq, vmm_ncap, vm_ncap, badge)</code></a></p>
+  <p><a href="#function-vm_install_vusbvm-hcd-pbase-virq-vmm_ncap-vm_ncap-badge"><code class="language-plaintext highlighter-rouge">vm_install_vusb(vm, hcd, pbase, virq, vmm_ncap, vm_ncap, badge)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_vusb_notifyvusb"><code class="highlighter-rouge">vm_vusb_notify(vusb)</code></a></p>
+  <p><a href="#function-vm_vusb_notifyvusb"><code class="language-plaintext highlighter-rouge">vm_vusb_notify(vusb)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">vusb.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">vusb.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_install_vusbvm-hcd-pbase-virq-vmm_ncap-vm_ncap-badge">Function <code class="highlighter-rouge">vm_install_vusb(vm, hcd, pbase, virq, vmm_ncap, vm_ncap, badge)</code></h3>
+<h3 id="function-vm_install_vusbvm-hcd-pbase-virq-vmm_ncap-vm_ncap-badge">Function <code class="language-plaintext highlighter-rouge">vm_install_vusb(vm, hcd, pbase, virq, vmm_ncap, vm_ncap, badge)</code></h3>
 
 <p>Install a virtual usb device
 Calls made to this hcd may be redirected for filtering.</p>
@@ -368,13 +368,13 @@ Calls made to this hcd may be redirected for filtering.</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: The VM in which to install the device</li>
-  <li><code class="highlighter-rouge">hcd {usb_host_t *}</code>: The USB host controller that should be used for USB transactions.</li>
-  <li><code class="highlighter-rouge">pbase {uintptr_t}</code>: The guest physical address of the device (2 pages)</li>
-  <li><code class="highlighter-rouge">virq {int}</code>: The virtual IRQ number for this device</li>
-  <li><code class="highlighter-rouge">vmm_ncap {seL4_CPtr}</code>: The capability to the endpoint at which the VMM waits for notifications.</li>
-  <li><code class="highlighter-rouge">vm_ncap {seL4_CPtr}</code>: The index at which to install a notification capability into the VM</li>
-  <li><code class="highlighter-rouge">badge {int}</code>: The seL4 badge which should be applied to the notification capability.</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: The VM in which to install the device</li>
+  <li><code class="language-plaintext highlighter-rouge">hcd {usb_host_t *}</code>: The USB host controller that should be used for USB transactions.</li>
+  <li><code class="language-plaintext highlighter-rouge">pbase {uintptr_t}</code>: The guest physical address of the device (2 pages)</li>
+  <li><code class="language-plaintext highlighter-rouge">virq {int}</code>: The virtual IRQ number for this device</li>
+  <li><code class="language-plaintext highlighter-rouge">vmm_ncap {seL4_CPtr}</code>: The capability to the endpoint at which the VMM waits for notifications.</li>
+  <li><code class="language-plaintext highlighter-rouge">vm_ncap {seL4_CPtr}</code>: The index at which to install a notification capability into the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">badge {int}</code>: The seL4 badge which should be applied to the notification capability.</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -385,7 +385,7 @@ Calls made to this hcd may be redirected for filtering.</p>
 
 <p>Back to <a href="#module-vusbh">interface description</a>.</p>
 
-<h3 id="function-vm_vusb_notifyvusb">Function <code class="highlighter-rouge">vm_vusb_notify(vusb)</code></h3>
+<h3 id="function-vm_vusb_notifyvusb">Function <code class="language-plaintext highlighter-rouge">vm_vusb_notify(vusb)</code></h3>
 
 <p>This function should be called when a notification is received from the
 VM. The notification is identifyable by a message on the fault endpoint
@@ -395,7 +395,7 @@ vm_install_vusb function.</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vusb {vusb_device_t *}</code>: A handle to a virtual usb device</li>
+  <li><code class="language-plaintext highlighter-rouge">vusb {vusb_device_t *}</code>: A handle to a virtual usb device</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -502,7 +502,7 @@ vm_install_vusb function.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#background">Background</a>
@@ -311,16 +311,16 @@ An example of this in concrete CAmkES syntax can be seen below:</p>
 </code></pre></div></div>
 
 <p>Disregarding the items defined within the component (we will unpack these in a later tutorial), we defined a component above
-whose <em>type</em> is <code class="highlighter-rouge">foo</code>. We later can use our <code class="highlighter-rouge">foo</code> type to define a component <em>instance</em>.
-For example, the statement <code class="highlighter-rouge">component foo bar</code> refers to a component instance <code class="highlighter-rouge">bar</code> whose type is
-<code class="highlighter-rouge">foo</code>.</p>
+whose <em>type</em> is <code class="language-plaintext highlighter-rouge">foo</code>. We later can use our <code class="language-plaintext highlighter-rouge">foo</code> type to define a component <em>instance</em>.
+For example, the statement <code class="language-plaintext highlighter-rouge">component foo bar</code> refers to a component instance <code class="language-plaintext highlighter-rouge">bar</code> whose type is
+<code class="language-plaintext highlighter-rouge">foo</code>.</p>
 
 <h3 id="describing-a-static-system-assembly-composition-and-configuration">Describing a static system: Assembly, Composition and Configuration</h3>
 
-<p>In CAmkES, we will commonly see the use of three hierarchical elements, being <code class="highlighter-rouge">assembly</code>, <code class="highlighter-rouge">composition</code> and <code class="highlighter-rouge">configuration</code>. We use these concepts
+<p>In CAmkES, we will commonly see the use of three hierarchical elements, being <code class="language-plaintext highlighter-rouge">assembly</code>, <code class="language-plaintext highlighter-rouge">composition</code> and <code class="language-plaintext highlighter-rouge">configuration</code>. We use these concepts
 to build upon a well-defined static system. We firstly use the term ‘assembly’ to refer to a complete description of our static system. In the CAmkES ADL (Architecture Description Language),
-we employ the term <code class="highlighter-rouge">assembly</code> as a top-level element that will encapsulate our system definition. Each CAmkES project must contain
-at least one <code class="highlighter-rouge">assembly</code> definition. An example of using the <code class="highlighter-rouge">assembly</code> term in CAmkES can be seen below:</p>
+we employ the term <code class="language-plaintext highlighter-rouge">assembly</code> as a top-level element that will encapsulate our system definition. Each CAmkES project must contain
+at least one <code class="language-plaintext highlighter-rouge">assembly</code> definition. An example of using the <code class="language-plaintext highlighter-rouge">assembly</code> term in CAmkES can be seen below:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assembly</span> <span class="p">{</span>
   <span class="n">composition</span> <span class="p">{</span>
@@ -333,9 +333,9 @@ at least one <code class="highlighter-rouge">assembly</code> definition. An exam
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>In the above example we can also see the use of the <code class="highlighter-rouge">composition</code> and <code class="highlighter-rouge">configuration</code> elements. The <code class="highlighter-rouge">composition</code> element is
+<p>In the above example we can also see the use of the <code class="language-plaintext highlighter-rouge">composition</code> and <code class="language-plaintext highlighter-rouge">configuration</code> elements. The <code class="language-plaintext highlighter-rouge">composition</code> element is
 used as a container to encapsulate our component and connector instantiations. Above we declare an instance of
-our <code class="highlighter-rouge">foo</code> component and we appropriately called it <code class="highlighter-rouge">bar</code>. The <code class="highlighter-rouge">configuration</code> element is also used to describe settings and attribute
+our <code class="language-plaintext highlighter-rouge">foo</code> component and we appropriately called it <code class="language-plaintext highlighter-rouge">bar</code>. The <code class="language-plaintext highlighter-rouge">configuration</code> element is also used to describe settings and attribute
 assignments in our given system.</p>
 
 <h2 id="creating-your-first-camkes-application">Creating your first CAmkES application</h2>
@@ -347,24 +347,24 @@ print “Hello CAmkES World” when it starts up.</p>
 
 <p>In the tutorial directory, you will find the following files:</p>
 <ul>
-  <li><code class="highlighter-rouge">CMakeLists.txt</code> - the file that defines how to build our CAmkES application</li>
-  <li><code class="highlighter-rouge">client.c</code> - the single source file for our ‘Hello World’ client component</li>
-  <li><code class="highlighter-rouge">hello.camkes</code> - Our CAmkES file describing our static system</li>
+  <li><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> - the file that defines how to build our CAmkES application</li>
+  <li><code class="language-plaintext highlighter-rouge">client.c</code> - the single source file for our ‘Hello World’ client component</li>
+  <li><code class="language-plaintext highlighter-rouge">hello.camkes</code> - Our CAmkES file describing our static system</li>
 </ul>
 
-<h4 id="clientc"><code class="highlighter-rouge">client.c</code></h4>
+<h4 id="clientc"><code class="language-plaintext highlighter-rouge">client.c</code></h4>
 
 <p>For this tutorial we require our component to simply print “Hello CAmkES World”. We define this in
-a typical C file <code class="highlighter-rouge">client.c</code>:</p>
+a typical C file <code class="language-plaintext highlighter-rouge">client.c</code>:</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * CAmkES tutorial part 0: just a component.
  */</span>
 
-<span class="cp">#include &lt;stdio.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span>
 <span class="cm">/* generated header for our component */</span>
-<span class="cp">#include &lt;camkes.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;camkes.h&gt;</span><span class="cp">
 </span>
 <span class="cm">/* run the control thread */</span>
 <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
@@ -373,13 +373,13 @@ a typical C file <code class="highlighter-rouge">client.c</code>:</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Note above that in the source code of <code class="highlighter-rouge">client.c</code> instead of typically using <code class="highlighter-rouge">main</code>, we place
-our runtime code in the function <code class="highlighter-rouge">int run(void)</code>. <code class="highlighter-rouge">run</code> is the entry point
+<p>Note above that in the source code of <code class="language-plaintext highlighter-rouge">client.c</code> instead of typically using <code class="language-plaintext highlighter-rouge">main</code>, we place
+our runtime code in the function <code class="language-plaintext highlighter-rouge">int run(void)</code>. <code class="language-plaintext highlighter-rouge">run</code> is the entry point
 of a CAmkES component.</p>
 
-<h4 id="hellocamkes"><code class="highlighter-rouge">hello.camkes</code></h4>
+<h4 id="hellocamkes"><code class="language-plaintext highlighter-rouge">hello.camkes</code></h4>
 
-<p>The <code class="highlighter-rouge">hello.camkes</code> file is where we form our description of a static CAmkES system. Our <code class="highlighter-rouge">.camkes</code>
+<p>The <code class="language-plaintext highlighter-rouge">hello.camkes</code> file is where we form our description of a static CAmkES system. Our <code class="language-plaintext highlighter-rouge">.camkes</code>
 files are written using the CAmkES syntax. Employing the concepts discussed in the background
 section, we define the following:</p>
 
@@ -399,12 +399,12 @@ section, we define the following:</p>
 </code></pre></div></div>
 
 <p>In the source above we create a minimal static system with a single component instance. We define
-our component <code class="highlighter-rouge">Client</code> and declare an instance of that component in our system.</p>
+our component <code class="language-plaintext highlighter-rouge">Client</code> and declare an instance of that component in our system.</p>
 
-<h4 id="cmakeliststxt"><code class="highlighter-rouge">CMakeLists.txt</code></h4>
+<h4 id="cmakeliststxt"><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code></h4>
 
-<p>Every CAmkES project requires a <code class="highlighter-rouge">CMakeLists.txt</code> file to be incorporated in the seL4 build system. Our tutorial
-directory should contain the following <code class="highlighter-rouge">CMakeLists.txt</code> file:</p>
+<p>Every CAmkES project requires a <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file to be incorporated in the seL4 build system. Our tutorial
+directory should contain the following <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
@@ -424,8 +424,8 @@ directory should contain the following <code class="highlighter-rouge">CMakeList
 <span class="nf">GenerateCAmkESRootserver</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>Our <code class="highlighter-rouge">CMakeLists.txt</code> file declares our <code class="highlighter-rouge">Client</code> component, linking it with our <code class="highlighter-rouge">client.c</code> source
-file. In addition it declares the CAmkES Root Server using our <code class="highlighter-rouge">hello.camkes</code> system description.</p>
+<p>Our <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file declares our <code class="language-plaintext highlighter-rouge">Client</code> component, linking it with our <code class="language-plaintext highlighter-rouge">client.c</code> source
+file. In addition it declares the CAmkES Root Server using our <code class="language-plaintext highlighter-rouge">hello.camkes</code> system description.</p>
 
 <h3 id="building-your-first-camkes-system">Building your first CAmkES system</h3>
 
@@ -443,7 +443,7 @@ ninja
 
 <p>and should see the following once the system has booted:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello CAmkES World
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello CAmkES World
 </code></pre></div></div>
 
 <h2 id="done">Done</h2>
@@ -502,7 +502,7 @@ hello-camkes-0/hello-camkes-0.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

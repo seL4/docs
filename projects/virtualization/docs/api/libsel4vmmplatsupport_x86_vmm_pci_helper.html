@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-vmm_pci_helperh">Interface <code class="highlighter-rouge">vmm_pci_helper.h</code></h2>
+<h2 id="interface-vmm_pci_helperh">Interface <code class="language-plaintext highlighter-rouge">vmm_pci_helper.h</code></h2>
 
 <p>The interface presents a series of helpers for establishing VMM PCI support on x86 platforms.</p>
 
@@ -349,22 +349,22 @@
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vmm_pci_helper_map_barsvm-cfg-bars"><code class="highlighter-rouge">vmm_pci_helper_map_bars(vm, cfg, bars)</code></a></p>
+  <p><a href="#function-vmm_pci_helper_map_barsvm-cfg-bars"><code class="language-plaintext highlighter-rouge">vmm_pci_helper_map_bars(vm, cfg, bars)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_pci_io_port_invcpu-cookie-port_no-size-result"><code class="highlighter-rouge">vmm_pci_io_port_in(vcpu, cookie, port_no, size, result)</code></a></p>
+  <p><a href="#function-vmm_pci_io_port_invcpu-cookie-port_no-size-result"><code class="language-plaintext highlighter-rouge">vmm_pci_io_port_in(vcpu, cookie, port_no, size, result)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vmm_pci_io_port_outvcpu-cookie-port_no-size-value"><code class="highlighter-rouge">vmm_pci_io_port_out(vcpu, cookie, port_no, size, value)</code></a></p>
+  <p><a href="#function-vmm_pci_io_port_outvcpu-cookie-port_no-size-value"><code class="language-plaintext highlighter-rouge">vmm_pci_io_port_out(vcpu, cookie, port_no, size, value)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">vmm_pci_helper.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">vmm_pci_helper.h</code> defines the following functions.</p>
 
-<h3 id="function-vmm_pci_helper_map_barsvm-cfg-bars">Function <code class="highlighter-rouge">vmm_pci_helper_map_bars(vm, cfg, bars)</code></h3>
+<h3 id="function-vmm_pci_helper_map_barsvm-cfg-bars">Function <code class="language-plaintext highlighter-rouge">vmm_pci_helper_map_bars(vm, cfg, bars)</code></h3>
 
 <p>Given a PCI device config, map the PCI device bars into the VM, effectively passing-through the
 PCI device. This will map MMIO and IO-based bars.</p>
@@ -372,9 +372,9 @@ PCI device. This will map MMIO and IO-based bars.</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">cfg {libpci_device_iocfg_t *}</code>: PCI device config</li>
-  <li><code class="highlighter-rouge">bars {vmm_pci_bar_t *}</code>: Resulting PCI bars mapped into the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">cfg {libpci_device_iocfg_t *}</code>: PCI device config</li>
+  <li><code class="language-plaintext highlighter-rouge">bars {vmm_pci_bar_t *}</code>: Resulting PCI bars mapped into the VM</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -385,17 +385,17 @@ PCI device. This will map MMIO and IO-based bars.</p>
 
 <p>Back to <a href="#module-vmm_pci_helperh">interface description</a>.</p>
 
-<h3 id="function-vmm_pci_io_port_invcpu-cookie-port_no-size-result">Function <code class="highlighter-rouge">vmm_pci_io_port_in(vcpu, cookie, port_no, size, result)</code></h3>
+<h3 id="function-vmm_pci_io_port_invcpu-cookie-port_no-size-result">Function <code class="language-plaintext highlighter-rouge">vmm_pci_io_port_in(vcpu, cookie, port_no, size, result)</code></h3>
 
 <p>Emulates IOPort in access on the VMM Virtual PCI device</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Faulting vcpu performing ioport access</li>
-  <li><code class="highlighter-rouge">port_no {unsigned int}</code>: Port address being accessed</li>
-  <li><code class="highlighter-rouge">size {unsigned int}</code>: Size of ioport access</li>
-  <li><code class="highlighter-rouge">result {unsigned int *}</code>: Pointer that will be populated with resulting data of io-in op</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Faulting vcpu performing ioport access</li>
+  <li><code class="language-plaintext highlighter-rouge">port_no {unsigned int}</code>: Port address being accessed</li>
+  <li><code class="language-plaintext highlighter-rouge">size {unsigned int}</code>: Size of ioport access</li>
+  <li><code class="language-plaintext highlighter-rouge">result {unsigned int *}</code>: Pointer that will be populated with resulting data of io-in op</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -404,17 +404,17 @@ PCI device. This will map MMIO and IO-based bars.</p>
 
 <p>Back to <a href="#module-vmm_pci_helperh">interface description</a>.</p>
 
-<h3 id="function-vmm_pci_io_port_outvcpu-cookie-port_no-size-value">Function <code class="highlighter-rouge">vmm_pci_io_port_out(vcpu, cookie, port_no, size, value)</code></h3>
+<h3 id="function-vmm_pci_io_port_outvcpu-cookie-port_no-size-value">Function <code class="language-plaintext highlighter-rouge">vmm_pci_io_port_out(vcpu, cookie, port_no, size, value)</code></h3>
 
 <p>Emulates IOPort out access on the VMM Virtual PCI device</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Faulting vcpu performing ioport access</li>
-  <li><code class="highlighter-rouge">port_no {unsigned int}</code>: Port address being accessed</li>
-  <li><code class="highlighter-rouge">size {unsigned int}</code>: Size of ioport access</li>
-  <li><code class="highlighter-rouge">value {unsigned int}</code>: Value being written in io-out op</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Faulting vcpu performing ioport access</li>
+  <li><code class="language-plaintext highlighter-rouge">port_no {unsigned int}</code>: Port address being accessed</li>
+  <li><code class="language-plaintext highlighter-rouge">size {unsigned int}</code>: Size of ioport access</li>
+  <li><code class="language-plaintext highlighter-rouge">value {unsigned int}</code>: Value being written in io-out op</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -521,7 +521,7 @@ PCI device. This will map MMIO and IO-based bars.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

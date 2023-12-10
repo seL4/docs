@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -332,7 +332,7 @@ inside a Linux guest on an <a href="https://wiki.odroid.com/odroid-xu4/odroid-xu
 with a single VM instance that serves a static website. The second configuration involves
 multiple VM’s serving a static website. The multiple VM configuration has an additional VM that acts
 as an network access point for the other VMs.
-It would be possible to modify which static website is being served by modifying the static html files located in <code class="highlighter-rouge">/run/site/</code>
+It would be possible to modify which static website is being served by modifying the static html files located in <code class="language-plaintext highlighter-rouge">/run/site/</code>
 in the Linux guest’s file system.
 If you don’t have <a href="https://wiki.odroid.com/odroid-xu4/odroid-xu4">odroid-xu4</a> to test this project you still can use emulation. Please see “Configure: Single VM Webserver (qemu-arm-virt)”. Notice: check “Configure networking (qemu-arm-virt)” to learn more about this topic”.</p>
 
@@ -428,7 +428,7 @@ for additional information about running an seL4 image on an Odroid XU4.</p>
 
 <p>Running the generated seL4webserver image will result in a running webserver listening on port 3000.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udhcpc: started, v1.27.2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udhcpc: started, v1.27.2
 [   10.485099] random: mktemp: uninitialized urandom read (6 bytes read)
 udhcpc: sending [   10.504865] r8152 6-1:1.0 eth0: carrier on
 discover
@@ -531,7 +531,7 @@ It is well known that on some deployments qemu scripts automatically takes cares
 
 <p>Thus if everything goes as desired you should see udhcpc getting networking config, that is, something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting network: OK
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting network: OK
 [    6.431947] connection: loading out-of-tree module taints kernel.
 [    6.469091] Event Bar (dev-0) initalised
 [    6.492662] 2 Dataports (dev-0) initalised
@@ -552,7 +552,7 @@ buildroot login:
 
 <p>Once the networking has been set up, you can check what IP has been assigned to your guest (also it is announced on the screen via udhcpc message…):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udhcpc: sending select for 192.168.122.100
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>udhcpc: sending select for 192.168.122.100
 udhcpc: lease of 192.168.122.100 obtained, lease time 600
 [   17.503524] random: mktemp: uninitialized urandom read (6 bytes read)
 adding dns 8.8.8.8
@@ -566,7 +566,7 @@ eth0      Link encap:Ethernet  HWaddr 52:55:00:D1:55:01
 (...)
 </code></pre></div></div>
 
-<p>and now just open web browser and open URL: <code class="highlighter-rouge">http://&lt;your_assigned_IP&gt;:3000</code> and you should see an seL4 documentation web page.</p>
+<p>and now just open web browser and open URL: <code class="language-plaintext highlighter-rouge">http://&lt;your_assigned_IP&gt;:3000</code> and you should see an seL4 documentation web page.</p>
 
 <h2 id="contributing">Contributing</h2>
 
@@ -595,7 +595,7 @@ See <a href=".github/CONTRIBUTING.md">CONTRIBUTING.md</a> for our general contri
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#current-status">Current status</a></li>
 <li class="toc-entry toc-h2"><a href="#plans">Plans</a>
 <ul>
@@ -726,7 +726,7 @@ See <a href=".github/CONTRIBUTING.md">CONTRIBUTING.md</a> for our general contri
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

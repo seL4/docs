@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -226,7 +226,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#terminology">Terminology</a></li>
 <li class="toc-entry toc-h2"><a href="#sources">Sources</a></li>
 <li class="toc-entry toc-h2"><a href="#releases">Releases</a>
@@ -300,7 +300,7 @@ maintained and tested.</p>
 
 <p>Bleeding edge releases happen every time the code is updated and it passes the test suites and
 proofs. Working on the bleeding edge means that API changes occur often, and you may get cut. Whenever any of the sources tracked by the manifests in the following repositories are updated and the
-regression tests pass, an updated version of the corresponding <code class="highlighter-rouge">default.xml</code> manifest will automatically be committed to the repo indicating which version combination is confirmed to work.</p>
+regression tests pass, an updated version of the corresponding <code class="language-plaintext highlighter-rouge">default.xml</code> manifest will automatically be committed to the repo indicating which version combination is confirmed to work.</p>
 
 <h3 id="which-release-should-you-use">Which release should you use?</h3>
 
@@ -367,19 +367,19 @@ of the kernel and latest version of libraries.</p>
 <p>Each project repository above contains several manifest files:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">default.xml</code> specifies pinned revisions of the source that are updated every time a new <em>bleeding
+  <li><code class="language-plaintext highlighter-rouge">default.xml</code> specifies pinned revisions of the source that are updated every time a new <em>bleeding
 edge</em> release is pushed. These manifests should always compile and pass tests if the correct build
 configurations are used.</li>
-  <li><code class="highlighter-rouge">master.xml</code> specifies the tip of each repository in a project. These aren’t guaranteed to work, and may contain combinations of repositories that have not been tested together.</li>
+  <li><code class="language-plaintext highlighter-rouge">master.xml</code> specifies the tip of each repository in a project. These aren’t guaranteed to work, and may contain combinations of repositories that have not been tested together.</li>
 </ul>
 
-<p><code class="highlighter-rouge">default.xml</code> is tagged at each released version. To obtain the manifest for a specific kernel
-version checkout the corresponding X.Y.z tag. Our previous process created an <code class="highlighter-rouge">X.Y.z.xml</code> manifest
+<p><code class="language-plaintext highlighter-rouge">default.xml</code> is tagged at each released version. To obtain the manifest for a specific kernel
+version checkout the corresponding X.Y.z tag. Our previous process created an <code class="language-plaintext highlighter-rouge">X.Y.z.xml</code> manifest
 for each release, but this is no longer the case.</p>
 
 <h3 id="proofsverification-manifests">Proofs/Verification manifests</h3>
 
-<p>The verification-manifest project contains a <code class="highlighter-rouge">${SEL4_VERSION}.xml</code> containing revisions which correspond to a version of the proofs that pass for the released version of the kernel</p>
+<p>The verification-manifest project contains a <code class="language-plaintext highlighter-rouge">${SEL4_VERSION}.xml</code> containing revisions which correspond to a version of the proofs that pass for the released version of the kernel</p>
 
 <h3 id="versioned-manifests">Versioned manifests</h3>
 
@@ -447,7 +447,7 @@ integration builds to be green while working on the next step.</p>
 project since the last release and decide a new version number as according to
 the <a href="#version-numbers">Version Numbers</a> section.</p>
 
-<p>Clone the <code class="highlighter-rouge">seL4_release</code> repository from the <a href="https://github.com/seL4">seL4
+<p>Clone the <code class="language-plaintext highlighter-rouge">seL4_release</code> repository from the <a href="https://github.com/seL4">seL4
 organisation</a> (this is currently private and you will
 need to ask for access).</p>
 
@@ -461,19 +461,19 @@ following while replacing the fields:</p>
 ./releaseit prerelease <span class="nt">--config</span> data/camkes_prerelease.yml <span class="nt">--new-version</span><span class="o">=</span>camkes-&lt;new CAmkES version&gt; <span class="nt">--sel4-version</span><span class="o">=</span>&lt;new seL4 version&gt;
 </code></pre></div></div>
 
-<p>These commands clone the projects in the <code class="highlighter-rouge">/tmp</code> directory of your machine and
-apply two commits that add changes to the <code class="highlighter-rouge">CHANGES</code> and <code class="highlighter-rouge">VERSION</code> files. Note
-that it also creates a <code class="highlighter-rouge">&lt;project&gt;_release.md</code> file in each project directory.
+<p>These commands clone the projects in the <code class="language-plaintext highlighter-rouge">/tmp</code> directory of your machine and
+apply two commits that add changes to the <code class="language-plaintext highlighter-rouge">CHANGES</code> and <code class="language-plaintext highlighter-rouge">VERSION</code> files. Note
+that it also creates a <code class="language-plaintext highlighter-rouge">&lt;project&gt;_release.md</code> file in each project directory.
 You now need to add any extra changes since the last release that were not
-already included in the <code class="highlighter-rouge">CHANGES</code> file for each project. To do so, run <code class="highlighter-rouge">git log</code>
+already included in the <code class="language-plaintext highlighter-rouge">CHANGES</code> file for each project. To do so, run <code class="language-plaintext highlighter-rouge">git log</code>
 with the relevant arguments to get the commits since the last release or go to
 each project’s GitHub page and filter the pull requests that were merged since
 the last release. Go through each of the commits/pull requests and summarise
-them in the <code class="highlighter-rouge">CHANGES</code> files. You do not need to add changes that are trivial. The
+them in the <code class="language-plaintext highlighter-rouge">CHANGES</code> files. You do not need to add changes that are trivial. The
 best way to think about this is: “If I’m a user of (seL4, CAmkES, capDL) will
 it affect me? Do I need to know about it, e.g has the API changed?  Are
 variables renamed? New features? New licences? Removal of features?” etc. Make
-sure to also update the <code class="highlighter-rouge">Upgrade Notes</code> section in each <code class="highlighter-rouge">CHANGES</code> file.</p>
+sure to also update the <code class="language-plaintext highlighter-rouge">Upgrade Notes</code> section in each <code class="language-plaintext highlighter-rouge">CHANGES</code> file.</p>
 
 <p>Meanwhile, you can also work on making sure the continuous integration builds
 are green while preparing the changelogs. Remember to also include any fixes and
@@ -490,17 +490,17 @@ wait until those are fixed.</p>
 
 <p>Once the continuous integration builds are all green (make sure that the
 verification builds are also green) and the changelogs are also done, amend the
-commits that the release tool made with the updated <code class="highlighter-rouge">CHANGES</code> file in each
+commits that the release tool made with the updated <code class="language-plaintext highlighter-rouge">CHANGES</code> file in each
 project, sign the commits off and submit pull requests for each project.  Make
 sure that the pull request <strong>only</strong> contains the two commits, one for updating
-the <code class="highlighter-rouge">VERSION</code> and the <code class="highlighter-rouge">CHANGES</code> files to the latest version and one for
-updating the <code class="highlighter-rouge">VERSION</code> file to add the <code class="highlighter-rouge">dev</code> suffix to the contents.</p>
+the <code class="language-plaintext highlighter-rouge">VERSION</code> and the <code class="language-plaintext highlighter-rouge">CHANGES</code> files to the latest version and one for
+updating the <code class="language-plaintext highlighter-rouge">VERSION</code> file to add the <code class="language-plaintext highlighter-rouge">dev</code> suffix to the contents.</p>
 
-<p>The next step is to copy the contents of each project’s <code class="highlighter-rouge">CHANGES</code> file to the
-<code class="highlighter-rouge">&lt;project&gt;_release.md</code> file in the same directory. Make sure that the top of
-the <code class="highlighter-rouge">&lt;project&gt;_release.md</code> file contains a <code class="highlighter-rouge">project: sel4</code>, <code class="highlighter-rouge">project: camkes</code>,
-or <code class="highlighter-rouge">project: capdl</code> tag. Take all of the <code class="highlighter-rouge">&lt;project&gt;_release.md</code> files and
-rename them to the current release version and add them under the <code class="highlighter-rouge">_releases</code>
+<p>The next step is to copy the contents of each project’s <code class="language-plaintext highlighter-rouge">CHANGES</code> file to the
+<code class="language-plaintext highlighter-rouge">&lt;project&gt;_release.md</code> file in the same directory. Make sure that the top of
+the <code class="language-plaintext highlighter-rouge">&lt;project&gt;_release.md</code> file contains a <code class="language-plaintext highlighter-rouge">project: sel4</code>, <code class="language-plaintext highlighter-rouge">project: camkes</code>,
+or <code class="language-plaintext highlighter-rouge">project: capdl</code> tag. Take all of the <code class="language-plaintext highlighter-rouge">&lt;project&gt;_release.md</code> files and
+rename them to the current release version and add them under the <code class="language-plaintext highlighter-rouge">_releases</code>
 folder in the docsite’s repository
 <a href="https://github.com/seL4/docs/tree/master/content_collections/_releases">here</a>.
 Submit a pull request for those changes as well.</p>
@@ -532,8 +532,8 @@ the fields:</p>
 
 <p>This command will add version tags to each sub-project repository for each of
 the repositories that are under those projects. Running it without the
-<code class="highlighter-rouge">--release</code> flag will perform a dry-run. If there are issues during the dry-run,
-fix them up and when everything is all good, run it with the <code class="highlighter-rouge">--release</code> flag.</p>
+<code class="language-plaintext highlighter-rouge">--release</code> flag will perform a dry-run. If there are issues during the dry-run,
+fix them up and when everything is all good, run it with the <code class="language-plaintext highlighter-rouge">--release</code> flag.</p>
 
 <p>Now, the final task to do it to go to the GitHub pages for the seL4, CAmkES,
 and capDL projects and draft new GitHub releases for each of the projects.</p>
@@ -572,7 +572,7 @@ and capDL projects and draft new GitHub releases for each of the projects.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 8 11:44:44 2021 +1100 b6c91ad468

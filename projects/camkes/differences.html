@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -352,8 +352,8 @@ Settings are now interpreted as an appropriate python type.</p>
 
 <h2 id="parametrised-buf-type">Parametrised Buf Type</h2>
 
-<p>The <code class="highlighter-rouge">Buf</code> dataport type can now be optionally parametrised by the
-size (in bytes) of the dataport. The syntax for this is <code class="highlighter-rouge">Buf(size)</code>.
+<p>The <code class="language-plaintext highlighter-rouge">Buf</code> dataport type can now be optionally parametrised by the
+size (in bytes) of the dataport. The syntax for this is <code class="language-plaintext highlighter-rouge">Buf(size)</code>.
 If left unspecified, the default size is 4096 bytes.</p>
 
 <p>It is an error to connect dataport interfaces of different sizes.</p>
@@ -378,8 +378,8 @@ If left unspecified, the default size is 4096 bytes.</p>
 
 <h2 id="asynch-connector-renamed">Asynch Connector Renamed</h2>
 
-<p>The <code class="highlighter-rouge">seL4Asynch</code> connector has been renamed to
-<code class="highlighter-rouge">seL4Notification</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">seL4Asynch</code> connector has been renamed to
+<code class="language-plaintext highlighter-rouge">seL4Notification</code>.</p>
 
 <h2 id="non-volatile-dataports">Non-Volatile Dataports</h2>
 
@@ -399,17 +399,17 @@ reordering (ie. with volatile) is not sufficient to make shared memory
 coherent in a multicore environment. Changes made to shared memory by
 one core may become visible to other cores in a different order. *
 Using functions from the standard library on dataports (e.g. passing a
-string in a dataport to <code class="highlighter-rouge">strlen</code>) requires casting from a volatile
+string in a dataport to <code class="language-plaintext highlighter-rouge">strlen</code>) requires casting from a volatile
 pointer to a regular pointer - an undefined operation in c.</p>
 
-<p>For a dataport interface <code class="highlighter-rouge">foo</code>, a component has access to
-<code class="highlighter-rouge">foo_acquire()</code> and <code class="highlighter-rouge">foo_release()</code> functions (they may
-instead be macros). Call <code class="highlighter-rouge">foo_acquire()</code> between multiple reads
+<p>For a dataport interface <code class="language-plaintext highlighter-rouge">foo</code>, a component has access to
+<code class="language-plaintext highlighter-rouge">foo_acquire()</code> and <code class="language-plaintext highlighter-rouge">foo_release()</code> functions (they may
+instead be macros). Call <code class="language-plaintext highlighter-rouge">foo_acquire()</code> between multiple reads
 from a dataport, where the correct behaviour of the program depends on
 the contents of the dataport possibly changing between reads. Call
-<code class="highlighter-rouge">foo_release()</code> between multiple writes to a dataport, where the
+<code class="language-plaintext highlighter-rouge">foo_release()</code> between multiple writes to a dataport, where the
 correct behaviour of the program depends on writes preceding the
-<code class="highlighter-rouge">foo_release()</code> in the program code being performed strictly before
+<code class="language-plaintext highlighter-rouge">foo_release()</code> in the program code being performed strictly before
 the writes following it.</p>
 
 <h2 id="many-to-many-connections">Many-to-Many Connections</h2>
@@ -481,25 +481,25 @@ changes are not backwards compatible.</p>
 <h2 id="interrupt-api">Interrupt API</h2>
 
 <p>In CAmkES 2, interrupts were abstracted as CAmkES events, emitted from a
-hardware component. For a component with an interface <code class="highlighter-rouge">foo</code>
-connected to an interrupt, components could call <code class="highlighter-rouge">foo_wait()</code>,
-<code class="highlighter-rouge">foo_poll()</code>, and <code class="highlighter-rouge">foo_reg_callback()</code>, as with a regular
+hardware component. For a component with an interface <code class="language-plaintext highlighter-rouge">foo</code>
+connected to an interrupt, components could call <code class="language-plaintext highlighter-rouge">foo_wait()</code>,
+<code class="language-plaintext highlighter-rouge">foo_poll()</code>, and <code class="language-plaintext highlighter-rouge">foo_reg_callback()</code>, as with a regular
 event.</p>
 
 <p>In CAmkES 3, interrupts are still abstracted as events in the ADL
 (CAmkES spec). Component implementations however, use a different
 interface for interacting with interrupts than with regular event
-interfaces. More specifically, a component with an interface <code class="highlighter-rouge">foo</code>
-connected with the <code class="highlighter-rouge">seL4HardwareInterrupt</code> connection has access to
-<code class="highlighter-rouge">foo_acknowledge()</code> which acknowledges the associated interrupt to
+interfaces. More specifically, a component with an interface <code class="language-plaintext highlighter-rouge">foo</code>
+connected with the <code class="language-plaintext highlighter-rouge">seL4HardwareInterrupt</code> connection has access to
+<code class="language-plaintext highlighter-rouge">foo_acknowledge()</code> which acknowledges the associated interrupt to
 the kernel. In addition, the component implementation must provide a
-definition of a function <code class="highlighter-rouge">void foo_handler(void)</code>. The standard
-event methods (<code class="highlighter-rouge">foo_wait()</code>, <code class="highlighter-rouge">foo_poll()</code>, and <code class="highlighter-rouge">foo_reg_callback()</code>) are not implemented for interrupts.</p>
+definition of a function <code class="language-plaintext highlighter-rouge">void foo_handler(void)</code>. The standard
+event methods (<code class="language-plaintext highlighter-rouge">foo_wait()</code>, <code class="language-plaintext highlighter-rouge">foo_poll()</code>, and <code class="language-plaintext highlighter-rouge">foo_reg_callback()</code>) are not implemented for interrupts.</p>
 
-<p>The user-provided function <code class="highlighter-rouge">foo_handler()</code> will be called by a
+<p>The user-provided function <code class="language-plaintext highlighter-rouge">foo_handler()</code> will be called by a
 dedicated interrupt-handling thread (one thread per interface connected
-with <code class="highlighter-rouge">seL4HardwareInterrupt</code>). Unlike callbacks registered with
-<code class="highlighter-rouge">*_reg_callback</code>, interrupt handlers do not need to be explicitly
+with <code class="language-plaintext highlighter-rouge">seL4HardwareInterrupt</code>). Unlike callbacks registered with
+<code class="language-plaintext highlighter-rouge">*_reg_callback</code>, interrupt handlers do not need to be explicitly
 registered, and do not become unregistered after calling.</p>
 
 <h2 id="hierarchical-components">Hierarchical Components</h2>
@@ -562,7 +562,7 @@ sub-components:</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#rich-types-for-settings">Rich Types for Settings</a></li>
 <li class="toc-entry toc-h2"><a href="#parametrised-buf-type">Parametrised Buf Type</a></li>
 <li class="toc-entry toc-h2"><a href="#asynch-connector-renamed">Asynch Connector Renamed</a></li>
@@ -819,7 +819,7 @@ sub-components:</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

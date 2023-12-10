@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -151,20 +151,20 @@
     <h1 id="updates-to-sel4runtime-from-sel4-101x-to-110x">Updates to sel4runtime from seL4 10.1.x to 11.0.x</h1>
 
 <ul>
-  <li>Created <code class="highlighter-rouge">sel4runtime</code> project to be a runtime for running a C or C-compatible process, i.e. one with a C-like main, in a minimal seL4 environment.
+  <li>Created <code class="language-plaintext highlighter-rouge">sel4runtime</code> project to be a runtime for running a C or C-compatible process, i.e. one with a C-like main, in a minimal seL4 environment.
     <ul>
       <li>Added seL4 roottask runtime entry points for: AARCH32, AARCH64, IA32, x86_64, RISC-V 32-bit and RISC-V 64-bit with supporting documentation for calling conventions.</li>
       <li>Added regular runtime entry points for non-roottask new processes for the above architectures.</li>
       <li>Added CMake rules for replacing musllibc’s CRT files with a CMake object library.</li>
-      <li>Added CMake configuration option, <code class="highlighter-rouge">Sel4RuntimeRootStack</code>, for setting Roottask’s initial stack size.</li>
+      <li>Added CMake configuration option, <code class="language-plaintext highlighter-rouge">Sel4RuntimeRootStack</code>, for setting Roottask’s initial stack size.</li>
       <li>Create runtime datastructure containing:
         <ul>
-          <li>process name likely read from <code class="highlighter-rouge">argv[0]</code>.</li>
+          <li>process name likely read from <code class="language-plaintext highlighter-rouge">argv[0]</code>.</li>
           <li>AUX vector with additional seL4 specific AUX values:
             <ul>
-              <li><code class="highlighter-rouge">AT_SEL4_BOOT_INFO</code>: <code class="highlighter-rouge">seL4_BootInfo</code> pointer in current vspace.</li>
-              <li><code class="highlighter-rouge">AT_SEL4_IPC_BUFFER_PTR</code>: IPC buffer pointer in current vspace of initial thread.</li>
-              <li><code class="highlighter-rouge">AT_SEL4_TCB</code>: TCP capability <code class="highlighter-rouge">seL4_CPtr</code> to initial thread’s TCB object.</li>
+              <li><code class="language-plaintext highlighter-rouge">AT_SEL4_BOOT_INFO</code>: <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> pointer in current vspace.</li>
+              <li><code class="language-plaintext highlighter-rouge">AT_SEL4_IPC_BUFFER_PTR</code>: IPC buffer pointer in current vspace of initial thread.</li>
+              <li><code class="language-plaintext highlighter-rouge">AT_SEL4_TCB</code>: TCP capability <code class="language-plaintext highlighter-rouge">seL4_CPtr</code> to initial thread’s TCB object.</li>
             </ul>
           </li>
           <li>Environment vector.</li>
@@ -181,12 +181,12 @@
       </li>
       <li>Add support for calling constructors and destructors.</li>
       <li>Add support for managing threads’ static TLS regions.</li>
-      <li>set a global <code class="highlighter-rouge">__sysinfo</code> pointer if <code class="highlighter-rouge">AT_SYSINFO</code> is set in AUX vector.</li>
-      <li>Call <code class="highlighter-rouge">main()</code> with required <code class="highlighter-rouge">argc</code> and <code class="highlighter-rouge">argv</code> arguments.</li>
+      <li>set a global <code class="language-plaintext highlighter-rouge">__sysinfo</code> pointer if <code class="language-plaintext highlighter-rouge">AT_SYSINFO</code> is set in AUX vector.</li>
+      <li>Call <code class="language-plaintext highlighter-rouge">main()</code> with required <code class="language-plaintext highlighter-rouge">argc</code> and <code class="language-plaintext highlighter-rouge">argv</code> arguments.</li>
       <li>Support for setting TLS variables of threads remotely.</li>
-      <li>Call <code class="highlighter-rouge">seL4_DebugNameThread</code> if the runtime has a process name and the initial thread has a TCB cap
+      <li>Call <code class="language-plaintext highlighter-rouge">seL4_DebugNameThread</code> if the runtime has a process name and the initial thread has a TCB cap
 and IPC buffer set.</li>
-      <li>Add <code class="highlighter-rouge">Findsel4runtime.cmake</code> module for importing as CMake module.</li>
+      <li>Add <code class="language-plaintext highlighter-rouge">Findsel4runtime.cmake</code> module for importing as CMake module.</li>
     </ul>
   </li>
 </ul>
@@ -296,7 +296,7 @@ and IPC buffer set.</li>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

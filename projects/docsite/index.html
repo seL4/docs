@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -337,8 +337,8 @@ Our continuous integration is configured to regenerate and update the live site 
 There is a timestamp in the source that indicates when it was last generated.  Additionally, each page has a timestamp and revision hash from when it was last updated located in the footer based on the git history.</p>
 
 <p>Our markdown pages are rendered using <a href="https://kramdown.gettalong.org/">Kramdown</a>, a ruby based markdown converter that is configured
-to interpret the markdown files (.md) as GitHub flavoured markdown (GFM).  We are currently using the <code class="highlighter-rouge">jekyll-theme-bootstrap</code> theme
-that provides a sass implementation of bootstrap.  Our custom styling is contained in <code class="highlighter-rouge">assets/css/style.scss</code>.  <code class="highlighter-rouge">HTML</code> templates are in either _layouts or _includes.</p>
+to interpret the markdown files (.md) as GitHub flavoured markdown (GFM).  We are currently using the <code class="language-plaintext highlighter-rouge">jekyll-theme-bootstrap</code> theme
+that provides a sass implementation of bootstrap.  Our custom styling is contained in <code class="language-plaintext highlighter-rouge">assets/css/style.scss</code>.  <code class="language-plaintext highlighter-rouge">HTML</code> templates are in either _layouts or _includes.</p>
 
 <h3 id="requirements">Requirements</h3>
 
@@ -353,14 +353,14 @@ that provides a sass implementation of bootstrap.  Our custom styling is contain
 <p>Linting checks require the linters to be installed.</p>
 
 <ul>
-  <li>HTML output checking using <code class="highlighter-rouge">tidy</code>: <code class="highlighter-rouge">make check_html_output</code></li>
-  <li>Liquid syntax checking using <code class="highlighter-rouge">liquid-linter</code>: <code class="highlighter-rouge">make check_liquid_syntax</code></li>
+  <li>HTML output checking using <code class="language-plaintext highlighter-rouge">tidy</code>: <code class="language-plaintext highlighter-rouge">make check_html_output</code></li>
+  <li>Liquid syntax checking using <code class="language-plaintext highlighter-rouge">liquid-linter</code>: <code class="language-plaintext highlighter-rouge">make check_liquid_syntax</code></li>
 </ul>
 
 <h3 id="building-the-docsite">Building the docsite</h3>
 
 <p>To build and host locally:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git submodule init
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git submodule init
 git submodule update
 
 # If this doesn't work see: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
@@ -371,7 +371,7 @@ make serve
 #   Server running... press ctrl-c to stop.
 </code></pre></div></div>
 <p>Or with docker:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make docker_build
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make docker_build
 make docker_serve
 </code></pre></div></div>
 
@@ -387,12 +387,12 @@ to call the make rule to generate the _data/generated.yml also.</p>
 
 <h3 id="wcag-20-aa-conformance">WCAG 2.0 AA conformance</h3>
 
-<p>There is a make rule to check conformance to all testable statements from the guidelines. <code class="highlighter-rouge">make check_conformance</code>.
-It requires the site to be hosted locally (using <code class="highlighter-rouge">make serve</code>) and a local server of
+<p>There is a make rule to check conformance to all testable statements from the guidelines. <code class="language-plaintext highlighter-rouge">make check_conformance</code>.
+It requires the site to be hosted locally (using <code class="language-plaintext highlighter-rouge">make serve</code>) and a local server of
 <a href="https://github.com/paypal/AATT">Automated Accessibility Testing Tool (AATT)</a>.</p>
 
-<p><code class="highlighter-rouge">make check_conformance</code> will output a file named <code class="highlighter-rouge">conformance_results.xml</code> which is a junit testsuite output file that will
-contain a testcase for each generated html file of the site.  A make rule <code class="highlighter-rouge">make check_conformance_errors</code> will grep for failing testcases
+<p><code class="language-plaintext highlighter-rouge">make check_conformance</code> will output a file named <code class="language-plaintext highlighter-rouge">conformance_results.xml</code> which is a junit testsuite output file that will
+contain a testcase for each generated html file of the site.  A make rule <code class="language-plaintext highlighter-rouge">make check_conformance_errors</code> will grep for failing testcases
 and output the html page name.  The idea here is to detect if any pages are failing and then manually using the AATT tool’s webinterface
 to check what parts of the page violate the guidelines.</p>
 
@@ -408,7 +408,7 @@ to check what parts of the page violate the guidelines.</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#diagnosing-a-problem">Diagnosing a problem</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#requirements">Requirements</a>
@@ -507,7 +507,7 @@ to check what parts of the page violate the guidelines.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

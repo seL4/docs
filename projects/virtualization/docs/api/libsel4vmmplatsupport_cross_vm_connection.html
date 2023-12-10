@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-cross_vm_connectionh">Interface <code class="highlighter-rouge">cross_vm_connection.h</code></h2>
+<h2 id="interface-cross_vm_connectionh">Interface <code class="language-plaintext highlighter-rouge">cross_vm_connection.h</code></h2>
 
 <p>The crossvm connection module facilitates the creation of communication channels between VM’s and other
 components on a seL4-based system. The module exports registered cross vm connections to a Linux VM such that
@@ -351,28 +351,28 @@ processes can access them from userlevel. This being facilitated over a virtual 
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-cross_vm_connections_init_commonvm-connection_base_addr-connections-num_connections-pci-alloc_irq"><code class="highlighter-rouge">cross_vm_connections_init_common(vm, connection_base_addr, connections, num_connections, pci, alloc_irq)</code></a></p>
+  <p><a href="#function-cross_vm_connections_init_commonvm-connection_base_addr-connections-num_connections-pci-alloc_irq"><code class="language-plaintext highlighter-rouge">cross_vm_connections_init_common(vm, connection_base_addr, connections, num_connections, pci, alloc_irq)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-consume_connection_eventvm-event_id-inject_irq"><code class="highlighter-rouge">consume_connection_event(vm, event_id, inject_irq)</code></a></p>
+  <p><a href="#function-consume_connection_eventvm-event_id-inject_irq"><code class="language-plaintext highlighter-rouge">consume_connection_event(vm, event_id, inject_irq)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-crossvm_dataport_handle"><code class="highlighter-rouge">crossvm_dataport_handle</code></a></p>
+  <p><a href="#struct-crossvm_dataport_handle"><code class="language-plaintext highlighter-rouge">crossvm_dataport_handle</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#struct-crossvm_handle"><code class="highlighter-rouge">crossvm_handle</code></a></p>
+  <p><a href="#struct-crossvm_handle"><code class="language-plaintext highlighter-rouge">crossvm_handle</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">cross_vm_connection.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">cross_vm_connection.h</code> defines the following functions.</p>
 
-<h3 id="function-cross_vm_connections_init_commonvm-connection_base_addr-connections-num_connections-pci-alloc_irq">Function <code class="highlighter-rouge">cross_vm_connections_init_common(vm, connection_base_addr, connections, num_connections, pci, alloc_irq)</code></h3>
+<h3 id="function-cross_vm_connections_init_commonvm-connection_base_addr-connections-num_connections-pci-alloc_irq">Function <code class="language-plaintext highlighter-rouge">cross_vm_connections_init_common(vm, connection_base_addr, connections, num_connections, pci, alloc_irq)</code></h3>
 
 <p>Install a set of cross vm connections into a guest VM (for either x86 or ARM VM platforms)
 for the crossvm connectors
@@ -381,12 +381,12 @@ PCI device</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">connection_base_addr {uintptr_t}</code>: The base guest physical address that can be used to reserve memory</li>
-  <li><code class="highlighter-rouge">connections {crossvm_handle_t *}</code>: The set of crossvm connections to be initialised and installed in the guest</li>
-  <li><code class="highlighter-rouge">num_connection {int}</code>: The number of connections passed in through the ‘connections’ parameter</li>
-  <li><code class="highlighter-rouge">pci {vmm_pci_space_t *}</code>: A handle to the VM’s host PCI device. The connections are advertised through the</li>
-  <li><code class="highlighter-rouge">alloc_irq {alloc_free_interrupt_fn}</code>: A function that is used to allocated an irq number for the crossvm connections</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">connection_base_addr {uintptr_t}</code>: The base guest physical address that can be used to reserve memory</li>
+  <li><code class="language-plaintext highlighter-rouge">connections {crossvm_handle_t *}</code>: The set of crossvm connections to be initialised and installed in the guest</li>
+  <li><code class="language-plaintext highlighter-rouge">num_connection {int}</code>: The number of connections passed in through the ‘connections’ parameter</li>
+  <li><code class="language-plaintext highlighter-rouge">pci {vmm_pci_space_t *}</code>: A handle to the VM’s host PCI device. The connections are advertised through the</li>
+  <li><code class="language-plaintext highlighter-rouge">alloc_irq {alloc_free_interrupt_fn}</code>: A function that is used to allocated an irq number for the crossvm connections</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -397,7 +397,7 @@ PCI device</p>
 
 <p>Back to <a href="#module-cross_vm_connectionh">interface description</a>.</p>
 
-<h3 id="function-consume_connection_eventvm-event_id-inject_irq">Function <code class="highlighter-rouge">consume_connection_event(vm, event_id, inject_irq)</code></h3>
+<h3 id="function-consume_connection_eventvm-event_id-inject_irq">Function <code class="language-plaintext highlighter-rouge">consume_connection_event(vm, event_id, inject_irq)</code></h3>
 
 <p>Handler to consume a cross vm connection event. This being called by the VMM when it recieves a notification from an
 external process. The event is then relayed onto the VM.</p>
@@ -405,9 +405,9 @@ external process. The event is then relayed onto the VM.</p>
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">event_id {seL4_Word}</code>: The id that corresponds to the occuring event</li>
-  <li><code class="highlighter-rouge">inject_irq {bool}</code>: Whether to inject an interrupt into the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">event_id {seL4_Word}</code>: The id that corresponds to the occuring event</li>
+  <li><code class="language-plaintext highlighter-rouge">inject_irq {bool}</code>: Whether to inject an interrupt into the VM</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -418,33 +418,33 @@ external process. The event is then relayed onto the VM.</p>
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">cross_vm_connection.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">cross_vm_connection.h</code> defines the following structs.</p>
 
-<h3 id="struct-crossvm_dataport_handle">Struct <code class="highlighter-rouge">crossvm_dataport_handle</code></h3>
+<h3 id="struct-crossvm_dataport_handle">Struct <code class="language-plaintext highlighter-rouge">crossvm_dataport_handle</code></h3>
 
 <p>Datastructure representing a dataport of a crossvm connection</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">frame_size_bits {size_t}</code>: Bit size of a single frame in the <code class="highlighter-rouge">frames</code> member</li>
-  <li><code class="highlighter-rouge">num_frames {int}</code>: Total number of frames in the <code class="highlighter-rouge">frames</code> member</li>
-  <li><code class="highlighter-rouge">frames {seL4_CPtr *}</code>: The set of frames backing the dataport</li>
+  <li><code class="language-plaintext highlighter-rouge">frame_size_bits {size_t}</code>: Bit size of a single frame in the <code class="language-plaintext highlighter-rouge">frames</code> member</li>
+  <li><code class="language-plaintext highlighter-rouge">num_frames {int}</code>: Total number of frames in the <code class="language-plaintext highlighter-rouge">frames</code> member</li>
+  <li><code class="language-plaintext highlighter-rouge">frames {seL4_CPtr *}</code>: The set of frames backing the dataport</li>
 </ul>
 
 <p>Back to <a href="#module-cross_vm_connectionh">interface description</a>.</p>
 
-<h3 id="struct-crossvm_handle">Struct <code class="highlighter-rouge">crossvm_handle</code></h3>
+<h3 id="struct-crossvm_handle">Struct <code class="language-plaintext highlighter-rouge">crossvm_handle</code></h3>
 
 <p>Datastructure representing a single crossvm connection
-This is matched on when invoking <code class="highlighter-rouge">consume_connection_event</code></p>
+This is matched on when invoking <code class="language-plaintext highlighter-rouge">consume_connection_event</code></p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">dataport {crossvm_dataport_handle_t *}</code>: The dataport associated with the crossvm connection</li>
-  <li><code class="highlighter-rouge">emit_fn {emit_fn}</code>: The function pointer to the crossvm emit method</li>
-  <li><code class="highlighter-rouge">consume_id {seL4_Word}</code>: The identifier used for the crossvm connection when receiving incoming notifications</li>
+  <li><code class="language-plaintext highlighter-rouge">dataport {crossvm_dataport_handle_t *}</code>: The dataport associated with the crossvm connection</li>
+  <li><code class="language-plaintext highlighter-rouge">emit_fn {emit_fn}</code>: The function pointer to the crossvm emit method</li>
+  <li><code class="language-plaintext highlighter-rouge">consume_id {seL4_Word}</code>: The identifier used for the crossvm connection when receiving incoming notifications</li>
 </ul>
 
 <p>Back to <a href="#module-cross_vm_connectionh">interface description</a>.</p>
@@ -547,7 +547,7 @@ This is matched on when invoking <code class="highlighter-rouge">consume_connect
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

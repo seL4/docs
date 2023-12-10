@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -332,8 +332,8 @@
 
 <h1 id="zeromq-cross-vm-communication-example">ZeroMQ cross-vm communication example</h1>
 
-<p>The <code class="highlighter-rouge">zmq_samples</code> application demonstrates messaging between VMs using the ZeroMQ messaging library. Each VM contains a VirtNet
-ethernet device <code class="highlighter-rouge">eth0</code> which is connected to the <code class="highlighter-rouge">eth0</code> devices in the other VMs. Ethernet packets sent from a VM over this
+<p>The <code class="language-plaintext highlighter-rouge">zmq_samples</code> application demonstrates messaging between VMs using the ZeroMQ messaging library. Each VM contains a VirtNet
+ethernet device <code class="language-plaintext highlighter-rouge">eth0</code> which is connected to the <code class="language-plaintext highlighter-rouge">eth0</code> devices in the other VMs. Ethernet packets sent from a VM over this
 interface will be transmitted to another VM if the correct macaddress is used. Broadcasting is supported which enables ARP to facilitate Macaddress discovery from an IP.</p>
 
 <p>There are three ZeroMQ application scenarios.  They can be found in zmq_samples/src/user:</p>
@@ -344,7 +344,7 @@ interface will be transmitted to another VM if the correct macaddress is used. B
 </ul>
 
 <p>The CMakeLists.txt file in zmq_samples builds libzmq (likely found in tools/libzmq) for a linux 32bit target environment, builds the above apps, and installs them into the buildroot rootfs using CMake functions declared found in camkes-vm-linux.
-An custom init script is installed for each of the VMs that run each of the scenarios on a single VM, and then accross all 3 VMs, before providing the login prompt for each of them.  Currently if all of the scenarios are run correctly, <code class="highlighter-rouge">Finished running all scenarios</code> will be printed, otherwise <code class="highlighter-rouge">Exited with error</code> on an error. If one of the VMs appear to have hung, this could indicate an incorrect network address.</p>
+An custom init script is installed for each of the VMs that run each of the scenarios on a single VM, and then accross all 3 VMs, before providing the login prompt for each of them.  Currently if all of the scenarios are run correctly, <code class="language-plaintext highlighter-rouge">Finished running all scenarios</code> will be printed, otherwise <code class="language-plaintext highlighter-rouge">Exited with error</code> on an error. If one of the VMs appear to have hung, this could indicate an incorrect network address.</p>
 
 <p>Each network interface is configured as follows:</p>
 
@@ -383,7 +383,7 @@ An custom init script is installed for each of the VMs that run each of the scen
 
 <p>See <a href="/GettingStarted.html#setting-up-your-machine">Setting up your machine</a> for instructions on how to set up your host machine.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/sel4/camkes-vm-examples-manifest.git -b tipc-stage
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init -u https://github.com/sel4/camkes-vm-examples-manifest.git -b tipc-stage
 
 repo sync
 
@@ -399,7 +399,7 @@ ninja
 
 <p>The working output is below.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running 3 scenarios on one vm
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running 3 scenarios on one vm
 emul_raw_tx@virtio_net_vswitch.c:146Running client server scenario
  Unreachable dest macaddr 33:33:0:0:0:16. Dropping frame.
 emul_raw_tx@virtio_net_vswitch.c:146 Unreachable dest macaddr 33:33:0:0:0:16. Dropping frame.
@@ -470,8 +470,8 @@ buildroot login:
 
 <p>The topology definition can be found in zmq_samples.camkes.</p>
 <ul>
-  <li>To change the macaddress of a vm, <code class="highlighter-rouge">VM[ID]_MACADDRESS</code> needs to be updated</li>
-  <li>To change what vms a vm connects to: the vms need to be removed for each other’s <code class="highlighter-rouge">topology_def</code></li>
+  <li>To change the macaddress of a vm, <code class="language-plaintext highlighter-rouge">VM[ID]_MACADDRESS</code> needs to be updated</li>
+  <li>To change what vms a vm connects to: the vms need to be removed for each other’s <code class="language-plaintext highlighter-rouge">topology_def</code></li>
   <li>To create partitioned topologies, a separate topology_def needs to be created and separate calls to each of the macros in the file will need to be added</li>
   <li>For VMs that are in the same topology, it may be possible for vms to read ethernet frames meant for other vms in the same topology.</li>
   <li>If a vm is used in more than one topology it will still only have one network interface, but vms from one topology won’t be able to read frames sent over a separate topology.</li>
@@ -479,7 +479,7 @@ buildroot login:
 will be changed if a topology becomes tied to a separate network interface in the future.</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// VM0 is connected to vm1 and vm2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// VM0 is connected to vm1 and vm2
 #define VM0_topology_def(f) f(0,1,2)
 
 // VM1 is connected to vm0 and vm2
@@ -558,7 +558,7 @@ to implement cross component communication</li>
 <p>A variant of this app that uses a CakeML component in place of the 3rd VM can
 be built by providing an additional option to the build script:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ../init-build.sh -DCAMKES_VM_APP=zmq_samples -DCAKEML_FILTER=TRUE -DCAKEMLDIR=/path/to/cakeml
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ../init-build.sh -DCAMKES_VM_APP=zmq_samples -DCAKEML_FILTER=TRUE -DCAKEMLDIR=/path/to/cakeml
 </code></pre></div></div>
 
 <p>The CakeML component sits between the two VMs and proxies their traffic to each
@@ -586,7 +586,7 @@ other. Presently it doesn’t do any filtering.</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#checkout-and-build">Checkout and build</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#changing-connection-topology">Changing connection topology</a></li>
@@ -714,7 +714,7 @@ other. Presently it doesn’t do any filtering.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_vcpu_faulth">Interface <code class="highlighter-rouge">guest_vcpu_fault.h</code></h2>
+<h2 id="interface-guest_vcpu_faulth">Interface <code class="language-plaintext highlighter-rouge">guest_vcpu_fault.h</code></h2>
 
 <p>The libsel4vm VCPU fault interface provides a set of useful methods to query and configure vcpu objects that
 have faulted during execution. This interface is commonly leveraged by VMM’s to process a vcpu fault and handle
@@ -351,57 +351,57 @@ it accordingly.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-get_vcpu_fault_addressvcpu"><code class="highlighter-rouge">get_vcpu_fault_address(vcpu)</code></a></p>
+  <p><a href="#function-get_vcpu_fault_addressvcpu"><code class="language-plaintext highlighter-rouge">get_vcpu_fault_address(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-get_vcpu_fault_ipvcpu"><code class="highlighter-rouge">get_vcpu_fault_ip(vcpu)</code></a></p>
+  <p><a href="#function-get_vcpu_fault_ipvcpu"><code class="language-plaintext highlighter-rouge">get_vcpu_fault_ip(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-get_vcpu_fault_datavcpu"><code class="highlighter-rouge">get_vcpu_fault_data(vcpu)</code></a></p>
+  <p><a href="#function-get_vcpu_fault_datavcpu"><code class="language-plaintext highlighter-rouge">get_vcpu_fault_data(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-get_vcpu_fault_data_maskvcpu"><code class="highlighter-rouge">get_vcpu_fault_data_mask(vcpu)</code></a></p>
+  <p><a href="#function-get_vcpu_fault_data_maskvcpu"><code class="language-plaintext highlighter-rouge">get_vcpu_fault_data_mask(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-get_vcpu_fault_sizevcpu"><code class="highlighter-rouge">get_vcpu_fault_size(vcpu)</code></a></p>
+  <p><a href="#function-get_vcpu_fault_sizevcpu"><code class="language-plaintext highlighter-rouge">get_vcpu_fault_size(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-is_vcpu_read_faultvcpu"><code class="highlighter-rouge">is_vcpu_read_fault(vcpu)</code></a></p>
+  <p><a href="#function-is_vcpu_read_faultvcpu"><code class="language-plaintext highlighter-rouge">is_vcpu_read_fault(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-set_vcpu_fault_datavcpu-data"><code class="highlighter-rouge">set_vcpu_fault_data(vcpu, data)</code></a></p>
+  <p><a href="#function-set_vcpu_fault_datavcpu-data"><code class="language-plaintext highlighter-rouge">set_vcpu_fault_data(vcpu, data)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-emulate_vcpu_faultvcpu-data"><code class="highlighter-rouge">emulate_vcpu_fault(vcpu, data)</code></a></p>
+  <p><a href="#function-emulate_vcpu_faultvcpu-data"><code class="language-plaintext highlighter-rouge">emulate_vcpu_fault(vcpu, data)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-advance_vcpu_faultvcpu"><code class="highlighter-rouge">advance_vcpu_fault(vcpu)</code></a></p>
+  <p><a href="#function-advance_vcpu_faultvcpu"><code class="language-plaintext highlighter-rouge">advance_vcpu_fault(vcpu)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-restart_vcpu_faultvcpu"><code class="highlighter-rouge">restart_vcpu_fault(vcpu)</code></a></p>
+  <p><a href="#function-restart_vcpu_faultvcpu"><code class="language-plaintext highlighter-rouge">restart_vcpu_fault(vcpu)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_vcpu_fault.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_vcpu_fault.h</code> defines the following functions.</p>
 
-<h3 id="function-get_vcpu_fault_addressvcpu">Function <code class="highlighter-rouge">get_vcpu_fault_address(vcpu)</code></h3>
+<h3 id="function-get_vcpu_fault_addressvcpu">Function <code class="language-plaintext highlighter-rouge">get_vcpu_fault_address(vcpu)</code></h3>
 
 <p>Get current fault address of vcpu</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -412,14 +412,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-get_vcpu_fault_ipvcpu">Function <code class="highlighter-rouge">get_vcpu_fault_ip(vcpu)</code></h3>
+<h3 id="function-get_vcpu_fault_ipvcpu">Function <code class="language-plaintext highlighter-rouge">get_vcpu_fault_ip(vcpu)</code></h3>
 
 <p>Get instruction pointer of current vcpu fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -430,14 +430,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-get_vcpu_fault_datavcpu">Function <code class="highlighter-rouge">get_vcpu_fault_data(vcpu)</code></h3>
+<h3 id="function-get_vcpu_fault_datavcpu">Function <code class="language-plaintext highlighter-rouge">get_vcpu_fault_data(vcpu)</code></h3>
 
 <p>Get the data of the current vcpu fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -448,14 +448,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-get_vcpu_fault_data_maskvcpu">Function <code class="highlighter-rouge">get_vcpu_fault_data_mask(vcpu)</code></h3>
+<h3 id="function-get_vcpu_fault_data_maskvcpu">Function <code class="language-plaintext highlighter-rouge">get_vcpu_fault_data_mask(vcpu)</code></h3>
 
 <p>Get data mask of the current vcpu fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -466,14 +466,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-get_vcpu_fault_sizevcpu">Function <code class="highlighter-rouge">get_vcpu_fault_size(vcpu)</code></h3>
+<h3 id="function-get_vcpu_fault_sizevcpu">Function <code class="language-plaintext highlighter-rouge">get_vcpu_fault_size(vcpu)</code></h3>
 
 <p>Get access size of the current vcpu fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -484,14 +484,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-is_vcpu_read_faultvcpu">Function <code class="highlighter-rouge">is_vcpu_read_fault(vcpu)</code></h3>
+<h3 id="function-is_vcpu_read_faultvcpu">Function <code class="language-plaintext highlighter-rouge">is_vcpu_read_fault(vcpu)</code></h3>
 
 <p>Is current vcpu fault a read fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -502,15 +502,15 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-set_vcpu_fault_datavcpu-data">Function <code class="highlighter-rouge">set_vcpu_fault_data(vcpu, data)</code></h3>
+<h3 id="function-set_vcpu_fault_datavcpu-data">Function <code class="language-plaintext highlighter-rouge">set_vcpu_fault_data(vcpu, data)</code></h3>
 
 <p>Set the data of the current vcpu fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
-  <li><code class="highlighter-rouge">data {seL4_Word}</code>: Data to set for current vcpu fault</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">data {seL4_Word}</code>: Data to set for current vcpu fault</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -521,15 +521,15 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-emulate_vcpu_faultvcpu-data">Function <code class="highlighter-rouge">emulate_vcpu_fault(vcpu, data)</code></h3>
+<h3 id="function-emulate_vcpu_faultvcpu-data">Function <code class="language-plaintext highlighter-rouge">emulate_vcpu_fault(vcpu, data)</code></h3>
 
 <p>Emulate a read or write fault on a given data value</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
-  <li><code class="highlighter-rouge">data {seL4_Word}</code>: Data to perform emulate fault on</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">data {seL4_Word}</code>: Data to perform emulate fault on</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -540,14 +540,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-advance_vcpu_faultvcpu">Function <code class="highlighter-rouge">advance_vcpu_fault(vcpu)</code></h3>
+<h3 id="function-advance_vcpu_faultvcpu">Function <code class="language-plaintext highlighter-rouge">advance_vcpu_fault(vcpu)</code></h3>
 
 <p>Advance the current vcpu fault to the next stage/instruction</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -556,14 +556,14 @@ it accordingly.</p>
 
 <p>Back to <a href="#module-guest_vcpu_faulth">interface description</a>.</p>
 
-<h3 id="function-restart_vcpu_faultvcpu">Function <code class="highlighter-rouge">restart_vcpu_fault(vcpu)</code></h3>
+<h3 id="function-restart_vcpu_faultvcpu">Function <code class="language-plaintext highlighter-rouge">restart_vcpu_fault(vcpu)</code></h3>
 
 <p>Restart the current vcpu fault</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu {vm_vcpu_t *}</code>: Handle to vcpu</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -670,7 +670,7 @@ it accordingly.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

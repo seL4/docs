@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#learning-outcomes">Learning outcomes</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
@@ -279,7 +279,7 @@ thread (retyping an untyped object into a TCB object), and also made to
 manually do your own memory management to allocate some virtual memory
 for use as the shared memory buffer between your two threads.</p>
 
-<p>Don’t gloss over the globals declared before <code class="highlighter-rouge">main()</code> – they’re declared
+<p>Don’t gloss over the globals declared before <code class="language-plaintext highlighter-rouge">main()</code> – they’re declared
 for your benefit so you can grasp some of the basic data structures.</p>
 
 <p>You’ll observe that the things you’ve already covered in the second
@@ -334,7 +334,7 @@ ninja
 <h2 id="exercises">Exercises</h2>
 
 <p>When you first run this tutorial, you will see a fault as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Caught cap fault in send phase at address (nil)
 while trying to handle:
 vm fault on data at address 0x70003c8 with status 0x6
@@ -362,7 +362,7 @@ of a MMU-utilizing kernel apply.</p>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 1: get a frame cap for the ipc buffer */
     /* hint: vka_alloc_frame()
      * int vka_alloc_frame(vka_t *vka, uint32_t size_bits, vka_object_t *result)
@@ -400,7 +400,7 @@ into a VSpace, and the mapping of a new page-table into a VSpace.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 2: try to map the frame the first time  */
     /* hint 1: seL4_ARCH_Page_Map()
      * The *ARCH* versions of seL4 sys calls are abstractions over the architecture provided by libsel4utils
@@ -427,7 +427,7 @@ into a VSpace, and the mapping of a new page-table into a VSpace.</p>
 </code></pre></div></div>
 
 <p>On completion, the output will be as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:260 [Err seL4_FailedLookup]:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:260 [Err seL4_FailedLookup]:
 	Failed to allocate new page table.
 </code></pre></div></div>
 
@@ -441,7 +441,7 @@ page-table object to use as a leaf page-table in your VSpace.</p>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
         /* TASK 3: create a page table */
         /* hint: vka_alloc_page_table()
          * int vka_alloc_page_table(vka_t *vka, vka_object_t *result)
@@ -463,7 +463,7 @@ try again to finally map the IPC-buffer’s frame object into the VSpace.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml">https://github.com/seL4/seL4/blob/master/libsel4/arch_include/x86/interfaces/sel4arch.xml</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
         /* TASK 4: map the page table */
         /* hint 1: seL4_ARCH_PageTable_Map()
          * The *ARCH* versions of seL4 sys calls are abstractions over the architecture provided by libsel4utils
@@ -487,10 +487,10 @@ try again to finally map the IPC-buffer’s frame object into the VSpace.</p>
 
 <h3 id="map-a-page">Map a page</h3>
 
-<p>Use <code class="highlighter-rouge">seL4_ARCH_Page_Map</code> to map the frame in.
+<p>Use <code class="language-plaintext highlighter-rouge">seL4_ARCH_Page_Map</code> to map the frame in.
 If everything was done correctly, there is no reason why this step
 should fail. Complete it and proceed.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
         /* TASK 5: then map the frame in */
         /* hint 1: use seL4_ARCH_Page_Map() as above
          * hint 2: for the rights, use seL4_AllRights
@@ -498,7 +498,7 @@ should fail. Complete it and proceed.</p>
          */
 </code></pre></div></div>
 <p>On completion, you will see the following:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
 dynamic-2: main@main.c:464 [Cond failed: seL4_MessageInfo_get_length(tag) != 1]
 	Response data from thread_2 was not the length expected.
 	How many registers did you set with seL4_SetMR within thread_2?
@@ -509,7 +509,7 @@ dynamic-2: main@main.c:464 [Cond failed: seL4_MessageInfo_get_length(tag) != 1]
 <p>Now we have a (fully mapped) IPC buffer – but no Endpoint object to
 send our IPC data across. We must retype an untyped object into a kernel
 Endpoint object, and then proceed. This could be done via a more
-low-level approach using <code class="highlighter-rouge">seL4_Untyped_Retype()</code>, but instead, the
+low-level approach using <code class="language-plaintext highlighter-rouge">seL4_Untyped_Retype()</code>, but instead, the
 tutorial makes use of the VKA allocator. Remember that the VKA allocator
 is an seL4 type-aware object allocator? So we can simply ask it for a
 new object of a particular type, and it will do the low-level retyping
@@ -522,7 +522,7 @@ and proceed.</p>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h">https://github.com/seL4/seL4_libs/blob/master/libsel4vka/include/vka/object.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 6: create an endpoint */
     /* hint: vka_alloc_endpoint()
      * int vka_alloc_endpoint(vka_t *vka, vka_object_t *result)
@@ -551,7 +551,7 @@ the listener can identify it.</p>
 
 <p>In this step, you are badging the endpoint that you will use when
 sending data to the thread you will be creating later on. The
-<code class="highlighter-rouge">vka_mint_object()</code> call will return a new, badged copy of the
+<code class="language-plaintext highlighter-rouge">vka_mint_object()</code> call will return a new, badged copy of the
 capability to the endpoint that your new thread will listen on. When you
 send data to your new thread, it will receive the badge value with the
 data, and know which sender you are. Complete the step and proceed.</p>
@@ -561,7 +561,7 @@ data, and know which sender you are. Complete the step and proceed.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 7: make a badged copy of it in our cspace. This copy will be used to send
      * an IPC message to the original cap */
     /* hint 1: vka_mint_object()
@@ -582,18 +582,18 @@ data, and know which sender you are. Complete the step and proceed.</p>
 <h3 id="message-registers">Message registers</h3>
 
 <p>Here we get a formal introduction to message registers. At first glance,
-you might wonder why the <code class="highlighter-rouge">sel4_SetMR()</code> calls don’t specify a message
+you might wonder why the <code class="language-plaintext highlighter-rouge">sel4_SetMR()</code> calls don’t specify a message
 buffer, and seem to know which buffer to fill out – and that would be
 correct, because they do. They are operating directly on the sending
 thread’s IPC buffer. Recall that each thread has only one IPC buffer. Go
-back and look at your call to <code class="highlighter-rouge">seL4_TCB_Configure()</code> in step 7 again:
+back and look at your call to <code class="language-plaintext highlighter-rouge">seL4_TCB_Configure()</code> in step 7 again:
 you set the IPC buffer for the new thread in the last 2 arguments to
 this function. Likewise, the thread that created <strong>your</strong> main thread
 also set an IPC buffer up for you.</p>
 
-<p>So <code class="highlighter-rouge">seL4_SetMR()</code> and <code class="highlighter-rouge">seL4_GetMR()</code> simply write to and read from the IPC
-buffer you designated for your thread. <code class="highlighter-rouge">MSG_DATA</code> is uninteresting – can
-be any value. You’ll find the <code class="highlighter-rouge">seL4_MessageInfo_t</code> type explained in the
+<p>So <code class="language-plaintext highlighter-rouge">seL4_SetMR()</code> and <code class="language-plaintext highlighter-rouge">seL4_GetMR()</code> simply write to and read from the IPC
+buffer you designated for your thread. <code class="language-plaintext highlighter-rouge">MSG_DATA</code> is uninteresting – can
+be any value. You’ll find the <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code> type explained in the
 manuals. In short, it’s a header that is embedded in each message that
 specifies, among other things, the number of Message Registers that hold
 meaningful data, and the number of capabilities that are going to be
@@ -604,7 +604,7 @@ transmitted in the message.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 8: set the data to send. We send it in the first message register */
     /* hint 1: seL4_MessageInfo_new()
      * seL4_MessageInfo_t CONST seL4_MessageInfo_new(seL4_Uint32 label, seL4_Uint32 capsUnwrapped, seL4_Uint32 extraCaps, seL4_Uint32 length)
@@ -630,14 +630,14 @@ transmitted in the message.</p>
 </code></pre></div></div>
 
 <p>On completion, the output should change as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:472 [Cond failed: msg != ~MSG_DATA]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-2: main@main.c:472 [Cond failed: msg != ~MSG_DATA]
 	Response data from thread_2's content was not what was expected.
 </code></pre></div></div>
 
 <h3 id="ipc">IPC</h3>
 
 <p>Now that you’ve constructed your message and badged the endpoint that
-you’ll use to send it, it’s time to send it. The <code class="highlighter-rouge">seL4_Call()</code> syscall
+you’ll use to send it, it’s time to send it. The <code class="language-plaintext highlighter-rouge">seL4_Call()</code> syscall
 will send a message across an endpoint synchronously. If there is no
 thread waiting at the other end of the target endpoint, the sender will
 block until there is a waiter. The reason for this is because the seL4
@@ -648,7 +648,7 @@ polling send operations, as well as polling receive operations in case
 you don’t want to be forced to block if there is no receiver on the
 other end of an IPC Endpoint.</p>
 
-<p>When you send your badged data using <code class="highlighter-rouge">seL4_Call()</code>, our receiving thread
+<p>When you send your badged data using <code class="language-plaintext highlighter-rouge">seL4_Call()</code>, our receiving thread
 (which we created earlier) will pick up the data, see the badge, and
 know that it was us who sent the data. Notice how the sending thread
 uses the <strong>badged</strong> capability to the endpoint object, and the
@@ -672,7 +672,7 @@ response message, if the sender doesn’t want it to.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 9: send and wait for a reply. */
     /* hint: seL4_Call()
      * seL4_MessageInfo_t seL4_Call(seL4_CPtr dest, seL4_MessageInfo_t msgInfo)
@@ -688,7 +688,7 @@ response message, if the sender doesn’t want it to.</p>
 </code></pre></div></div>
 
 <p>On completion, you should see thread_2 fault as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: hallo wereld
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: hallo wereld
 thread_2: got a message 0 from 0
 Caught cap fault in send phase at address (nil)
 while trying to handle:
@@ -704,14 +704,14 @@ With stack:
 receive-side of the operation here, it’s fairly simple anyway: this task
 occurs after the receiver has sent a reply, and it shows the sender now
 reading the reply from the receiver. As mentioned before, the
-<code class="highlighter-rouge">seL4_GetMR()</code> calls are simply reading from the calling thread’s
+<code class="language-plaintext highlighter-rouge">seL4_GetMR()</code> calls are simply reading from the calling thread’s
 designated, single IPC buffer.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 10: get the reply message */
     /* hint: seL4_GetMR()
      * seL4_Word seL4_GetMR(int i)
@@ -723,12 +723,12 @@ designated, single IPC buffer.</p>
 
 <h3 id="receive-an-ipc">Receive an IPC</h3>
 
-<p>We’re now in the receiving thread. The <code class="highlighter-rouge">seL4_Recv()</code> syscall performs a
+<p>We’re now in the receiving thread. The <code class="language-plaintext highlighter-rouge">seL4_Recv()</code> syscall performs a
 blocking listen on an Endpoint or Notification capability. When new data
-is queued (or when the Notification is signalled), the <code class="highlighter-rouge">seL4_Recv</code>
+is queued (or when the Notification is signalled), the <code class="language-plaintext highlighter-rouge">seL4_Recv</code>
 operation will unqueue the data and resume execution.</p>
 
-<p>Notice how the <code class="highlighter-rouge">seL4_Recv()</code> operation explicitly makes allowance for
+<p>Notice how the <code class="language-plaintext highlighter-rouge">seL4_Recv()</code> operation explicitly makes allowance for
 reading the badge value on the incoming message? The receiver is
 explicitly interested in distinguishing the sender.</p>
 
@@ -737,7 +737,7 @@ explicitly interested in distinguishing the sender.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 11: wait for a message to come in over the endpoint */
     /* hint 1: seL4_Recv()
      * seL4_MessageInfo_t seL4_Recv(seL4_CPtr src, seL4_Word* sender)
@@ -751,7 +751,7 @@ explicitly interested in distinguishing the sender.</p>
      */
 </code></pre></div></div>
 <p>On completion, the output should change slightly:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: got a message 0 from 0x61
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: got a message 0 from 0x61
 </code></pre></div></div>
 
 <h3 id="validate-the-message">Validate the message</h3>
@@ -764,7 +764,7 @@ Complete them and proceed to the next step.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 12: make sure it is what we expected */
     /* hint 1: check the badge. is it EP_BADGE?
      * hint 2: we are expecting only 1 message register
@@ -787,7 +787,7 @@ Complete them and proceed to the next step.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 13: get the message stored in the first message register */
     /* hint: seL4_GetMR()
      * seL4_Word seL4_GetMR(int i)
@@ -796,7 +796,7 @@ Complete them and proceed to the next step.</p>
      */
 </code></pre></div></div>
 <p>On completion, the output should change slightly:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: got a message 0x6161 from 0x61
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thread_2: got a message 0x6161 from 0x61
 </code></pre></div></div>
 
 <h3 id="write-the-message-registers">Write the message registers</h3>
@@ -807,7 +807,7 @@ Complete them and proceed to the next step.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/functions.h</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 14: copy the modified message back into the message register */
     /* hint: seL4_SetMR()
      * void seL4_SetMR(int i, seL4_Word mr)
@@ -819,10 +819,10 @@ Complete them and proceed to the next step.</p>
 
 <h3 id="reply-to-a-message">Reply to a message</h3>
 
-<p>This is a formal introduction to the <code class="highlighter-rouge">Reply</code> capability which is
+<p>This is a formal introduction to the <code class="language-plaintext highlighter-rouge">Reply</code> capability which is
 automatically generated by the seL4 kernel, whenever an IPC message is
-sent using the <code class="highlighter-rouge">seL4_Call()</code> syscall. This is unique to the <code class="highlighter-rouge">seL4_Call()</code>
-syscall, and if you send data instead with the <code class="highlighter-rouge">seL4_Send()</code> syscall, the
+sent using the <code class="language-plaintext highlighter-rouge">seL4_Call()</code> syscall. This is unique to the <code class="language-plaintext highlighter-rouge">seL4_Call()</code>
+syscall, and if you send data instead with the <code class="language-plaintext highlighter-rouge">seL4_Send()</code> syscall, the
 seL4 kernel will not generate a Reply capability.</p>
 
 <p>The Reply capability solves the issue of a receiver getting a message
@@ -830,7 +830,7 @@ from a sender, but not having a sufficiently permissive capability to
 respond to that sender. The “Reply” capability is a one-time capability
 to respond to a particular sender. If a sender doesn’t want to grant the
 target the ability to send to it repeatedly, but would like to allow the
-receiver to respond to a specific message once, it can use <code class="highlighter-rouge">seL4_Call()</code>,
+receiver to respond to a specific message once, it can use <code class="language-plaintext highlighter-rouge">seL4_Call()</code>,
 and the seL4 kernel will facilitate this one-time permissive response.
 Complete the step and pat yourself on the back.</p>
 
@@ -839,7 +839,7 @@ Complete the step and pat yourself on the back.</p>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf">https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf</a></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     /* TASK 15: send the message back */
     /* hint 1: seL4_ReplyRecv()
      * seL4_MessageInfo_t seL4_ReplyRecv(seL4_CPtr dest, seL4_MessageInfo_t msgInfo, seL4_Word *sender)
@@ -855,7 +855,7 @@ Complete the step and pat yourself on the back.</p>
      */
 </code></pre></div></div>
 <p>On completion, the output should change, with the fault message replaced with the following:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a reply: [0xffff9e9e|0xffffffffffff9e9e]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: got a reply: [0xffff9e9e|0xffffffffffff9e9e]
 </code></pre></div></div>
 <p>That’s it for this tutorial.</p>
 
@@ -910,7 +910,7 @@ dynamic-2/dynamic-2.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

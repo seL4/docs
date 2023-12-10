@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -150,7 +150,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#building-sel4test">Building seL4test</a></li>
 <li class="toc-entry toc-h2"><a href="#flashing-the-spi-with-u-boot">Flashing the SPI with U-Boot</a></li>
 <li class="toc-entry toc-h2"><a href="#setting-up-with-tftp-dhcp-uefi-recommended">Setting up with TFTP, DHCP, UEFI (recommended!)</a>
@@ -187,7 +187,7 @@ ninja
 
 </code></pre></div></div>
 
-<p>Generated binaries can be found in the <code class="highlighter-rouge">images/</code> directory.</p>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <h2 id="flashing-the-spi-with-u-boot">Flashing the SPI with U-Boot</h2>
 
@@ -223,13 +223,13 @@ ninja
 
 <p>Luckily the U-Boot defconfig for rockpro64 includes UEFI support. We are not using EDK2 because no stable and tested implementations exist for rockpro64.</p>
 
-<p>Copy your seL4 image to the TFTP root under the name <code class="highlighter-rouge">sel4img</code> (or any other name of your choosing but you will have to adjust following commands).</p>
+<p>Copy your seL4 image to the TFTP root under the name <code class="language-plaintext highlighter-rouge">sel4img</code> (or any other name of your choosing but you will have to adjust following commands).</p>
 
 <h3 id="manual-method-well-tested">Manual method (well tested)</h3>
 
 <p>Drop into a U-Boot console when asked. Type in:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
 tftpboot ${kernel_addr_r} sel4img
 bootefi ${kernel_addr_r}
 </code></pre></div></div>
@@ -240,9 +240,9 @@ bootefi ${kernel_addr_r}
 
 <h3 id="automated-method">Automated method</h3>
 
-<p>Create <code class="highlighter-rouge">pxelinux.cfg/default</code> in TFTP root:</p>
+<p>Create <code class="language-plaintext highlighter-rouge">pxelinux.cfg/default</code> in TFTP root:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menu title PXE!
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menu title PXE!
 
 timeout 200
 
@@ -251,42 +251,42 @@ menu default
 kernel /sel4img
 </code></pre></div></div>
 
-<p>Create <code class="highlighter-rouge">boot.scr</code>:</p>
+<p>Create <code class="language-plaintext highlighter-rouge">boot.scr</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi 0x2080000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootefi 0x2080000
 </code></pre></div></div>
 
 <p>Significance of 0x2080000 being where seL4 image is loaded by U-Boot.</p>
 
-<p>Convert <code class="highlighter-rouge">boot.scr</code> to a uImage using <code class="highlighter-rouge">mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</code>. Ensure <code class="highlighter-rouge">boot.scr.uimg</code> is in the TFTP root and <code class="highlighter-rouge">boot.scr</code> is removed.</p>
+<p>Convert <code class="language-plaintext highlighter-rouge">boot.scr</code> to a uImage using <code class="language-plaintext highlighter-rouge">mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</code>. Ensure <code class="language-plaintext highlighter-rouge">boot.scr.uimg</code> is in the TFTP root and <code class="language-plaintext highlighter-rouge">boot.scr</code> is removed.</p>
 
 <h3 id="building-things">Building things</h3>
 
-<p>Ensure your <code class="highlighter-rouge">tools/seL4</code> has the appropriate commit (TODO)</p>
+<p>Ensure your <code class="language-plaintext highlighter-rouge">tools/seL4</code> has the appropriate commit (TODO)</p>
 
 <h2 id="setting-up-with-uefi-sd-card">Setting up with UEFI, SD card</h2>
 
 <p>This process is similar to above with TFTP. The SD card should have one or more partitions, the first one must be ext2 and have the file files on it. (If required, you can change the 1:1 in the below commands to 1:2, 1:3 etc for using 2nd, 3rd, partition, etc).</p>
 
-<p>Copy your <code class="highlighter-rouge">sel4img</code> aforementioned in UEFI section to SD card.</p>
+<p>Copy your <code class="language-plaintext highlighter-rouge">sel4img</code> aforementioned in UEFI section to SD card.</p>
 
 <h3 id="manual">Manual</h3>
 
 <p>Drop to a U-Boot console and type in:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext2load mmc 1:1 ${kernel_addr_r} sel4img
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext2load mmc 1:1 ${kernel_addr_r} sel4img
 bootefi ${kernel_addr_r}
 </code></pre></div></div>
 
 <h3 id="automated">Automated</h3>
 
-<p>Create <code class="highlighter-rouge">boot.scr</code>:</p>
+<p>Create <code class="language-plaintext highlighter-rouge">boot.scr</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext2load mmc 1:1 ${kernel_addr_r} sel4img
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext2load mmc 1:1 ${kernel_addr_r} sel4img
 bootefi ${kernel_addr_r}
 </code></pre></div></div>
 
-<p>Convert to uImage using <code class="highlighter-rouge">mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</code>. Put in SD card and boot.</p>
+<p>Convert to uImage using <code class="language-plaintext highlighter-rouge">mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</code>. Put in SD card and boot.</p>
 
     </div>
   </div>
@@ -320,7 +320,7 @@ bootefi ${kernel_addr_r}
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Thu Nov 11 11:50:06 2021 +1100 5fc78c1c47

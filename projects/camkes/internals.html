@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -435,18 +435,18 @@ immediately before or after the stack.</p>
 <h2 id="template-context">Template Context</h2>
 
 <p>The python-looking functions called from within templates (e.g.
-<code class="highlighter-rouge">alloc_cap</code>, <code class="highlighter-rouge">register_shared_variable</code>) are actually keys in a dict
+<code class="language-plaintext highlighter-rouge">alloc_cap</code>, <code class="language-plaintext highlighter-rouge">register_shared_variable</code>) are actually keys in a dict
 defined here:
 <a href="https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Context.py">https://github.com/seL4/camkes-tool/blob/master/camkes/runner/Context.py</a>.
-There are even some values (such as <code class="highlighter-rouge">seL4_EndpointObject</code>), modules (such
-as <code class="highlighter-rouge">sys</code>), and seemingly built-in functions (e.g. <code class="highlighter-rouge">zip</code>) passed through
+There are even some values (such as <code class="language-plaintext highlighter-rouge">seL4_EndpointObject</code>), modules (such
+as <code class="language-plaintext highlighter-rouge">sys</code>), and seemingly built-in functions (e.g. <code class="language-plaintext highlighter-rouge">zip</code>) passed through
 using this dict. You can update this dict to add new functions to the
 template context. Some of these functions are called “in the context” of
 the template they are instantiating. That is, for component and
 connector templates, the generated code will be part of a single
 component (each connector has a separate template for each side of the
 connection). The most common example of this is when allocating a cap,
-the cnode/cspace that will contain the cap isn’t passed to <code class="highlighter-rouge">alloc_cap</code> in
+the cnode/cspace that will contain the cap isn’t passed to <code class="language-plaintext highlighter-rouge">alloc_cap</code> in
 the template code, but rather implied by the component for which the
 template is being instantiated.</p>
 
@@ -457,7 +457,7 @@ These are terms from the python CapDL library. An object space tracks
 all the objects that will exist in the system the CapDL spec describes.
 There is a single object space for an entire CAmkES application. A cap
 space tracks all the caps that will be placed in a particular cspace.
-There is one cap space for each component. When calling <code class="highlighter-rouge">alloc_cap</code> in a
+There is one cap space for each component. When calling <code class="language-plaintext highlighter-rouge">alloc_cap</code> in a
 template on behalf of a component, the cap is placed in that component’s
 cap space. The resulting CapDL spec will include in one of that
 component’s CNodes, an entry for the allocated cap.</p>
@@ -472,21 +472,21 @@ component’s CNodes, an entry for the allocated cap.</p>
 type, returning a (python) reference to that object. Doesn’t create any
 caps.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*- set ep = alloc_obj("my_ep", seL4_EndpointObject) -*/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*- set ep = alloc_obj("my_ep", seL4_EndpointObject) -*/
 </code></pre></div></div>
 
 <h4 id="alloc_capname-object">alloc_cap(name, object)</h4>
 
 <p>Updates the CapDL database, adding a named cap to a given object to the
 current component’s cap space, returning the CPtr of the cap.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// continues from above
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// continues from above
 /*- set ep_cap = alloc_cap("my_ep_cap", ep) -*/
 seL4_Wait(/*? ep_cap ?*/);
 </code></pre></div></div>
 
 <h4 id="allocname-type">alloc(name, type)</h4>
 
-<p>Effectively equivalent <code class="highlighter-rouge">to alloc_cap(name, alloc_obj(name, type))</code></p>
+<p>Effectively equivalent <code class="language-plaintext highlighter-rouge">to alloc_cap(name, alloc_obj(name, type))</code></p>
 
 <h2 id="simple">Simple</h2>
 
@@ -498,7 +498,7 @@ use to access (some of) its caps. It’s implemented as a jinja template:
 
 <p>A component instance can be built with this simple implementation by
 adding the following to the assembly:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configuration {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configuration {
    instance_name.simple = true;
 }
 </code></pre></div></div>
@@ -525,17 +525,17 @@ cap to the object must first allocate it unless it’s already allocated.
 This is because you can’t talk about a cap to an object until that
 object has been allocated. Typically in such a situation, you’ll see the
 following template code on both sides of the connection:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*- set ep = alloc_obj('ep_obj_name', seL4_EndpointObject) -*/
 /*- set ep_cap = alloc_cap('this_components_ep_cap', ep) -*/
 
 // do something with ep_cap
 </code></pre></div></div>
 
 <p>Looking at the code, it appears the endpoint will be allocated twice, as
-both sides of the connection will call <code class="highlighter-rouge">alloc_obj</code>. Digging deeper into
-the implementation of <code class="highlighter-rouge">alloc_obj</code>, we see it calls a function called
-<code class="highlighter-rouge">guard</code>. <code class="highlighter-rouge">guard</code> is a bit of a misnomer. A more appropriate name might be
-<code class="highlighter-rouge">allocate_unless_already_allocated</code>. It checks whether there’s already
+both sides of the connection will call <code class="language-plaintext highlighter-rouge">alloc_obj</code>. Digging deeper into
+the implementation of <code class="language-plaintext highlighter-rouge">alloc_obj</code>, we see it calls a function called
+<code class="language-plaintext highlighter-rouge">guard</code>. <code class="language-plaintext highlighter-rouge">guard</code> is a bit of a misnomer. A more appropriate name might be
+<code class="language-plaintext highlighter-rouge">allocate_unless_already_allocated</code>. It checks whether there’s already
 an object by the given name, returns the object if it exists, otherwise
 allocates and returns it.</p>
 
@@ -550,7 +550,7 @@ allocates and returns it.</p>
   
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-    <ul class="section-nav">
+    <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#overview">Overview</a></li>
 <li class="toc-entry toc-h2"><a href="#caching">Caching</a>
 <ul>
@@ -827,7 +827,7 @@ allocates and returns it.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Tue Mar 9 13:04:54 2021 +1100 6eb8c7ffa9

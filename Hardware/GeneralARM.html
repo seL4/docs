@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -170,7 +170,7 @@ Trust Zone, HYP-mode etc.</p>
 <p>To boot via Fastboot, you need to convert the image file produced by the seL4 build system into a U-Boot image.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkimage <span class="nt">-A</span> arm <span class="nt">-a</span> 0x48000000 <span class="nt">-e</span> 0x48000000 <span class="nt">-C</span> none <span class="nt">-A</span> arm <span class="nt">-T</span> kernel <span class="nt">-O</span> qnx <span class="nt">-d</span> INPUT_FILE OUTPUT_FILE
 </code></pre></div></div>
-<p>The reason we choose QNX is because we exploit the fact that, like seL4, QNX expects to be ELF-loaded. The alternative is to convert our ELF file into a binary file using <code class="highlighter-rouge">objcopy</code>.
+<p>The reason we choose QNX is because we exploit the fact that, like seL4, QNX expects to be ELF-loaded. The alternative is to convert our ELF file into a binary file using <code class="language-plaintext highlighter-rouge">objcopy</code>.
 The address to use varies from board to board. Unless you change the load address, use these:</p>
 
 <table>
@@ -197,34 +197,34 @@ The address to use varies from board to board. Unless you change the load addres
 </table>
 
 <p>When you have your image, put the board into Fastboot mode (interrupt U-Boot, and type “fastboot”), then do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fastboot boot OUTPUT_FILE
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fastboot boot OUTPUT_FILE
 </code></pre></div></div>
 <h2 id="beagle-board">Beagle Board</h2>
-<p>You can compile a U-boot for Beagle Board that supports Fastboot, or you can use <code class="highlighter-rouge">dfu-util</code> with the standard U-Boot to transfer the image to the board.</p>
+<p>You can compile a U-boot for Beagle Board that supports Fastboot, or you can use <code class="language-plaintext highlighter-rouge">dfu-util</code> with the standard U-Boot to transfer the image to the board.</p>
 
-<p>The address that the file downloads to is controlled by the <code class="highlighter-rouge">loadaddr</code> environment variable in U-Boot. You can either download an  ELF file, and then run <code class="highlighter-rouge">bootelf</code> on the U-Boot command-line, or download a U-Boot image file (created with <code class="highlighter-rouge">mkimage</code>) and use <code class="highlighter-rouge">bootm</code> to run it. You may need to take care that the ELF sections or image regions do not overlap with the location of the ELF/image itself, or loaded to non-existent memory address (0x81000000 works fine, but 0x90000000 won’t work on the original Beagle Board since there’s no RAM there).</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu-util -D sel4test-image-arm
+<p>The address that the file downloads to is controlled by the <code class="language-plaintext highlighter-rouge">loadaddr</code> environment variable in U-Boot. You can either download an  ELF file, and then run <code class="language-plaintext highlighter-rouge">bootelf</code> on the U-Boot command-line, or download a U-Boot image file (created with <code class="language-plaintext highlighter-rouge">mkimage</code>) and use <code class="language-plaintext highlighter-rouge">bootm</code> to run it. You may need to take care that the ELF sections or image regions do not overlap with the location of the ELF/image itself, or loaded to non-existent memory address (0x81000000 works fine, but 0x90000000 won’t work on the original Beagle Board since there’s no RAM there).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dfu-util -D sel4test-image-arm
 </code></pre></div></div>
 
 <h2 id="booting-from-sd-card">Booting from SD card</h2>
 <p>Pull out the SD card from your board, and put it into an SD card reader attached to your build host. Mount the (MS-DOS) filesystem on the first partition on the SD card and copy your image to it. Unmount the filesystem, and put the card back into your board. Reset the board (by power cycling, or pressing the reset button). To run the image:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc init
 mmcinfo
 fatload mmc 0 ${loadaddr} sel4test-image-arm
 bootelf ${loadaddr}
 </code></pre></div></div>
 <p>You can use</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
 </code></pre></div></div>
 
-<p>to see what is there. Most U-Boot implementations define a suitable <code class="highlighter-rouge">loadaddr</code> in their environment.</p>
+<p>to see what is there. Most U-Boot implementations define a suitable <code class="language-plaintext highlighter-rouge">loadaddr</code> in their environment.</p>
 
 <h2 id="tftp-booting">TFTP booting</h2>
 <p>Setting up a DHCP and TFTP server are out of scope for this document. Once you have done that, however, and installed a TFTP-enabled U-Boot on your board if it doesn’t already have one.</p>
 
 <p>You can then power up the device and stop U-Boot’s auto boot feature if
 enabled by pressing a key, and do:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp file address
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp file address
 bootelf address
 </code></pre></div></div>
 
@@ -261,7 +261,7 @@ bootelf address
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -150,7 +150,7 @@
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="camkes-version-camkes-390-release">CAmkES Version camkes-3.9.0 Release</h1>
 
-<p>Announcing the release of <code class="highlighter-rouge">camkes-3.9.0</code> with the following changes:</p>
+<p>Announcing the release of <code class="language-plaintext highlighter-rouge">camkes-3.9.0</code> with the following changes:</p>
 
 <p>camkes-3.9.0 2020-10-26
 Using seL4 version 12.0.0</p>
@@ -162,23 +162,23 @@ Using seL4 version 12.0.0</p>
 <ul>
   <li>Enforce system-V stack ordering for libc.
     <ul>
-      <li>This allows <code class="highlighter-rouge">musllibc</code> to initialise and infer the location of <code class="highlighter-rouge">auxv</code> from <code class="highlighter-rouge">envp</code> consistently.</li>
+      <li>This allows <code class="language-plaintext highlighter-rouge">musllibc</code> to initialise and infer the location of <code class="language-plaintext highlighter-rouge">auxv</code> from <code class="language-plaintext highlighter-rouge">envp</code> consistently.</li>
     </ul>
   </li>
-  <li>Add <code class="highlighter-rouge">uint64_t</code> and <code class="highlighter-rouge">int64_t</code> types to language.
+  <li>Add <code class="language-plaintext highlighter-rouge">uint64_t</code> and <code class="language-plaintext highlighter-rouge">int64_t</code> types to language.
     <ul>
       <li>This introduced two new data types into the CAmkES language to support larger types.</li>
     </ul>
   </li>
-  <li>Remove <code class="highlighter-rouge">elf.h</code>, now defined in sel4runtime.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">elf.h</code>, now defined in sel4runtime.</li>
   <li>Camkes,rumprun: fix tls management implementation:
     <ul>
-      <li><code class="highlighter-rouge">.tdata*</code> and <code class="highlighter-rouge">.tbss*</code> linker symbol declarations are suppressed until the final link step.</li>
+      <li><code class="language-plaintext highlighter-rouge">.tdata*</code> and <code class="language-plaintext highlighter-rouge">.tbss*</code> linker symbol declarations are suppressed until the final link step.</li>
     </ul>
   </li>
-  <li>Fix <code class="highlighter-rouge">generate_seL4_SignalRecv</code> in <code class="highlighter-rouge">Context.py</code> and update <code class="highlighter-rouge">rpc-connector.c</code> template accordingly.
+  <li>Fix <code class="language-plaintext highlighter-rouge">generate_seL4_SignalRecv</code> in <code class="language-plaintext highlighter-rouge">Context.py</code> and update <code class="language-plaintext highlighter-rouge">rpc-connector.c</code> template accordingly.
     <ul>
-      <li><code class="highlighter-rouge">seL4SignalRecv</code> only exists on MCS, split the two calls for compatibility.</li>
+      <li><code class="language-plaintext highlighter-rouge">seL4SignalRecv</code> only exists on MCS, split the two calls for compatibility.</li>
     </ul>
   </li>
   <li>Save preprocessed camkes files to allow for easier debugging.</li>
@@ -190,33 +190,33 @@ Using seL4 version 12.0.0</p>
   <li>Support for running odroidc2 in camkes-arm-vm. Get the IRQ trigger type through the interrupt node in the dts.</li>
   <li>Add gpio query engine.
     <ul>
-      <li>The engine takes in a YAML file containing a list of GPIO pins and sorts out the ‘gpio’ queries so that the connector templates for the <code class="highlighter-rouge">seL4GPIOServer</code> can generate the appropriate structures and functions.</li>
+      <li>The engine takes in a YAML file containing a list of GPIO pins and sorts out the ‘gpio’ queries so that the connector templates for the <code class="language-plaintext highlighter-rouge">seL4GPIOServer</code> can generate the appropriate structures and functions.</li>
     </ul>
   </li>
-  <li>Add option <code class="highlighter-rouge">CAmkESNoFPUByDefault</code>.
+  <li>Add option <code class="language-plaintext highlighter-rouge">CAmkESNoFPUByDefault</code>.
     <ul>
       <li>By enabling CAmkESNoFPUByDefault camkes will compile all user-level libraries (except musllibc) with compilation flags to not use the FPU. A component that wishes to use the FPU must override the flags itself.</li>
     </ul>
   </li>
-  <li>Update <code class="highlighter-rouge">seL4InitHardware</code> template for api change.
+  <li>Update <code class="language-plaintext highlighter-rouge">seL4InitHardware</code> template for api change.
     <ul>
       <li>The configuration name for the list of devices to bind is now a component attribute instead of an interface attribute.</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">libsel4camkes</code> Support registering DMA memory that is both cached and uncached.</li>
-  <li>Add sel4bench dependency into <code class="highlighter-rouge">camkes/templates</code> to allow for cycle counting.</li>
-  <li><code class="highlighter-rouge">component.common.c</code>: use correct label for dma pool.
+  <li><code class="language-plaintext highlighter-rouge">libsel4camkes</code> Support registering DMA memory that is both cached and uncached.</li>
+  <li>Add sel4bench dependency into <code class="language-plaintext highlighter-rouge">camkes/templates</code> to allow for cycle counting.</li>
+  <li><code class="language-plaintext highlighter-rouge">component.common.c</code>: use correct label for dma pool.
     <ul>
-      <li>When calling <code class="highlighter-rouge">register_shared_variable</code> from a component context the label needs to be provided.</li>
+      <li>When calling <code class="language-plaintext highlighter-rouge">register_shared_variable</code> from a component context the label needs to be provided.</li>
     </ul>
   </li>
-  <li>Add <code class="highlighter-rouge">seL4DTBHW</code> connector. This connector variant is similar to <code class="highlighter-rouge">seL4DTBHardware</code>, but takes a hardware component on the from end.</li>
-  <li><code class="highlighter-rouge">seL4DTBHardware</code> bug fix, use global interface name. This prevents the allocator from throwing an error when the same interface name is used in a different component.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">seL4DTBHW</code> connector. This connector variant is similar to <code class="language-plaintext highlighter-rouge">seL4DTBHardware</code>, but takes a hardware component on the from end.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4DTBHardware</code> bug fix, use global interface name. This prevents the allocator from throwing an error when the same interface name is used in a different component.</li>
   <li>Camkes connector extensions + DMA improvements:
     <ul>
       <li>libsel4camkes: Implement DMA cache for Arm</li>
       <li>component.common.c: Support additional DMA setting. Allow setting the cache and base paddr value of the DMA pool.</li>
-      <li>Add single_threaded attribute which when set adds the <code class="highlighter-rouge">seL4SingleThreadedComponent</code> templates.</li>
+      <li>Add single_threaded attribute which when set adds the <code class="language-plaintext highlighter-rouge">seL4SingleThreadedComponent</code> templates.</li>
       <li>Allow connectors to declare CMake libraries for each end of the connection. This allows a connector to have most of its implementation in a library and only use the template for initialisation and configuration.</li>
       <li>camkes-gen.cmake: Create component target stub. This is equivalent to creating a Component with no customization but would still contain things based on its Camkes definition, such as connector artifacts.</li>
     </ul>
@@ -228,20 +228,20 @@ Using seL4 version 12.0.0</p>
   </li>
   <li>Libsel4camkes: camkes_call_hardware_init_modules
 Provide this public function for starting hardware modules that have been registered.</li>
-  <li>Add <code class="highlighter-rouge">global_rpc_endpoint_badges</code> macro.
+  <li>Add <code class="language-plaintext highlighter-rouge">global_rpc_endpoint_badges</code> macro.
     <ul>
       <li>This macro assigns badges for different connectors that share the global-rpc-endpoint object for a component instance.</li>
     </ul>
   </li>
   <li>Libsel4camkes: irq backend for global-connectors. This adds a way for calling registered IRQ notification handlers for connectors that don’t have their own threads.</li>
-  <li>Add seL4DMASharedData connector and add appropriate library functionality in <code class="highlighter-rouge">libsel4camkes</code>.
+  <li>Add seL4DMASharedData connector and add appropriate library functionality in <code class="language-plaintext highlighter-rouge">libsel4camkes</code>.
     <ul>
       <li>This connector sets up a dataport connector that is added to the DMA pool that the camkes runtime tracks for each component.</li>
     </ul>
   </li>
   <li>Add support for connector header files and component header templates.
     <ul>
-      <li>A connector can now define template header files that will be included by <code class="highlighter-rouge">camkes.h</code>. Similarly, component header templates will be instantiated and then automatically included by <code class="highlighter-rouge">camkes.h</code>.</li>
+      <li>A connector can now define template header files that will be included by <code class="language-plaintext highlighter-rouge">camkes.h</code>. Similarly, component header templates will be instantiated and then automatically included by <code class="language-plaintext highlighter-rouge">camkes.h</code>.</li>
     </ul>
   </li>
   <li>Support creating TCB pools and assigning domains to them in camkes templates.
@@ -250,40 +250,40 @@ Provide this public function for starting hardware modules that have been regist
     </ul>
   </li>
   <li>Generalise jinja linter to support non-camkes use cases. The Jinja linter can now be used on any arbitrary Jinja template.</li>
-  <li>Add support in <code class="highlighter-rouge">libsel4camkes</code> for matching interrupts even if they are defined
+  <li>Add support in <code class="language-plaintext highlighter-rouge">libsel4camkes</code> for matching interrupts even if they are defined
 with different base types.</li>
-  <li>Add interface registration to <code class="highlighter-rouge">libsel4camkes</code> via <code class="highlighter-rouge">interface_registration.h</code> as part of the driver framework.</li>
+  <li>Add interface registration to <code class="language-plaintext highlighter-rouge">libsel4camkes</code> via <code class="language-plaintext highlighter-rouge">interface_registration.h</code> as part of the driver framework.</li>
   <li>Revive graph.dot output file for each asssembly. This can be loaded with a
-program like <code class="highlighter-rouge">xdot</code> to view a diagram of the camkes system.</li>
+program like <code class="language-plaintext highlighter-rouge">xdot</code> to view a diagram of the camkes system.</li>
   <li>Virtqueues:
     <ul>
       <li>Add virtqueue recieve.</li>
       <li>Set virtqueue size on creation to the number of rings and descriptor tables have.</li>
-      <li>Add <code class="highlighter-rouge">virtqueue_get_client_id</code> macro for automatically assigning client IDs to distinguish different virtqueue channels within a single component instance.</li>
+      <li>Add <code class="language-plaintext highlighter-rouge">virtqueue_get_client_id</code> macro for automatically assigning client IDs to distinguish different virtqueue channels within a single component instance.</li>
       <li>Link channel ID to name, this allows components to bind to channels via naming them rather than knowing their IDs.</li>
     </ul>
   </li>
-  <li>Add Arm irq type support to <code class="highlighter-rouge">seL4HardwareInterrupt</code> template. This allows IRQs on Arm to have the trigger mode and target core configured.</li>
-  <li>Allow <code class="highlighter-rouge">size</code> to be number as well as a string in <code class="highlighter-rouge">marshal.c</code> template.</li>
-  <li>Add <code class="highlighter-rouge">global_endpoint_badges</code> macro used by the global-endpoints mechanism to assign badge
+  <li>Add Arm irq type support to <code class="language-plaintext highlighter-rouge">seL4HardwareInterrupt</code> template. This allows IRQs on Arm to have the trigger mode and target core configured.</li>
+  <li>Allow <code class="language-plaintext highlighter-rouge">size</code> to be number as well as a string in <code class="language-plaintext highlighter-rouge">marshal.c</code> template.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">global_endpoint_badges</code> macro used by the global-endpoints mechanism to assign badge
 values based on a full system composition.</li>
-  <li>Make <code class="highlighter-rouge">public allocate_badges</code> method which is used to standardize badge allocation across many connectors.</li>
+  <li>Make <code class="language-plaintext highlighter-rouge">public allocate_badges</code> method which is used to standardize badge allocation across many connectors.</li>
   <li>Add support for a component definition to specify a template C source file. This file will be passed through the template tool before passed to the C compiler.
     <ul>
       <li>This is how components can allocate objects required from a loader without having to define special connector types.</li>
     </ul>
   </li>
-  <li>Add <code class="highlighter-rouge">msgqueue</code> mechanism which allows componets to sent messages. This is essentially another layer ontop of the virtqueue functionality.</li>
-  <li>Accept Red Hat ARM cross-compilers in <code class="highlighter-rouge">check_deps.py</code>.</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">msgqueue</code> mechanism which allows componets to sent messages. This is essentially another layer ontop of the virtqueue functionality.</li>
+  <li>Accept Red Hat ARM cross-compilers in <code class="language-plaintext highlighter-rouge">check_deps.py</code>.</li>
   <li>Simplify the logic for combining the connections in the stage9 parser. This improves processing times.</li>
   <li>Camkes-tool:
     <ul>
       <li>Add priority to muslc so that its initialsation comes after camkes. This relates to recent changes in sel4runtime.</li>
-      <li>Add an interface <code class="highlighter-rouge">dataport_caps</code> for accessing dataport caps that is used by the seL4SharedDataWithCaps template.</li>
+      <li>Add an interface <code class="language-plaintext highlighter-rouge">dataport_caps</code> for accessing dataport caps that is used by the seL4SharedDataWithCaps template.</li>
     </ul>
   </li>
-  <li>Tools: define <code class="highlighter-rouge">camkes_tool_processing</code> when running the C preprocessor.</li>
-  <li>Remove <code class="highlighter-rouge">template</code> keyword from camkes language.
+  <li>Tools: define <code class="language-plaintext highlighter-rouge">camkes_tool_processing</code> when running the C preprocessor.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">template</code> keyword from camkes language.
     <ul>
       <li>This is driven by wanting to make it easier to extend camkes generation build rules with more inputs than a single template file and make it possible better manage non-template code that needs to run when generating templates.</li>
     </ul>
@@ -293,7 +293,7 @@ values based on a full system composition.</li>
 <h2 id="upgrade-notes">Upgrade Notes</h2>
 
 <h1 id="full-changelog">Full changelog</h1>
-<p>Use <code class="highlighter-rouge">git log camkes-3.8.0..camkes-3.9.0</code> in
+<p>Use <code class="language-plaintext highlighter-rouge">git log camkes-3.8.0..camkes-3.9.0</code> in
 <a href="https://github.com/seL4/camkes-tool">https://github.com/seL4/camkes-tool</a></p>
 
 <h1 id="more-details">More details</h1>
@@ -555,7 +555,7 @@ or ask on the mailing list!</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
           </li>

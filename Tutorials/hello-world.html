@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes</a></li>
@@ -289,7 +289,7 @@ ninja
 <ul>
   <li>Be familiar with the jargon <em>root task</em>.</li>
   <li>Be able to build and simulate seL4 projects.</li>
-  <li>Have a basic understanding of the role of the <code class="highlighter-rouge">CMakeLists.txt</code> file in applications.</li>
+  <li>Have a basic understanding of the role of the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file in applications.</li>
 </ul>
 
 <h2 id="building-your-first-program">Building your first program</h2>
@@ -307,7 +307,7 @@ ninja
 </code></pre></div></div>
 
 <p>If successful, you should see the final ninja rule passing:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[150/150] objcopy kernel into bootable elf
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[150/150] objcopy kernel into bootable elf
 $
 </code></pre></div></div>
 
@@ -320,7 +320,7 @@ $
 <p>This will run the result on an instance of the <a href="https://www.qemu.org">QEMU</a> simulator. 
 If everything has worked, you should see:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 
 Hello, World!
 </code></pre></div></div>
@@ -328,20 +328,20 @@ Hello, World!
 <p>After that output, there should be a capability violation and a stack dump,
 because the program hasn’t properly cleaned up after itself yet. (This will come in later examples)</p>
 
-<p><code class="highlighter-rouge">Ctrl-A, X</code> will terminate QEMU.</p>
+<p><code class="language-plaintext highlighter-rouge">Ctrl-A, X</code> will terminate QEMU.</p>
 
 <h2 id="looking-at-the-sources">Looking at the sources</h2>
 
 <p>In your tutorial directory, you will find the following files:</p>
 <ul>
-  <li><code class="highlighter-rouge">CMakeLists.txt</code> - the file that incorporates the root task into the wider seL4 build system.</li>
-  <li><code class="highlighter-rouge">src/main.c</code> - the single source file for the initial task.</li>
-  <li><code class="highlighter-rouge">hello-world.md</code> - A generated README for the tutorial.</li>
+  <li><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> - the file that incorporates the root task into the wider seL4 build system.</li>
+  <li><code class="language-plaintext highlighter-rouge">src/main.c</code> - the single source file for the initial task.</li>
+  <li><code class="language-plaintext highlighter-rouge">hello-world.md</code> - A generated README for the tutorial.</li>
 </ul>
 
-<h3 id="cmakeliststxt"><code class="highlighter-rouge">CMakeLists.txt</code></h3>
+<h3 id="cmakeliststxt"><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code></h3>
 
-<p>Every application and library in an seL4 project requires a <code class="highlighter-rouge">CMakeLists.txt</code> file in order to be
+<p>Every application and library in an seL4 project requires a <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file in order to be
  incorporated into the project build system.</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
@@ -384,12 +384,12 @@ because the program hasn’t properly cleaned up after itself yet. (This will co
 
 </code></pre></div></div>
 
-<h3 id="mainc"><code class="highlighter-rouge">main.c</code></h3>
+<h3 id="mainc"><code class="language-plaintext highlighter-rouge">main.c</code></h3>
 
 <p>The main C is a very typical C file. For a basic root server application, the only requirement is that 
-a <code class="highlighter-rouge">main</code> function is provided.</p>
+a <code class="language-plaintext highlighter-rouge">main</code> function is provided.</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
@@ -399,7 +399,7 @@ a <code class="highlighter-rouge">main</code> function is provided.</p>
 
 <h2 id="making-a-change">Making a change</h2>
 
-<p>Test making a change to <code class="highlighter-rouge">main.c</code> by adding a second printf to output <code class="highlighter-rouge">"Second hello\n"</code>.</p>
+<p>Test making a change to <code class="language-plaintext highlighter-rouge">main.c</code> by adding a second printf to output <code class="language-plaintext highlighter-rouge">"Second hello\n"</code>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
@@ -408,7 +408,7 @@ a <code class="highlighter-rouge">main</code> function is provided.</p>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>Once you have made your change, rerun <code class="highlighter-rouge">ninja</code> to rebuild the project:</p>
+<p>Once you have made your change, rerun <code class="language-plaintext highlighter-rouge">ninja</code> to rebuild the project:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In build directory</span>
 ninja
@@ -421,7 +421,7 @@ ninja
 
 <p>On success, you should see the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 Second hello
 
 </code></pre></div></div>
@@ -477,7 +477,7 @@ hello-world/hello-world.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17

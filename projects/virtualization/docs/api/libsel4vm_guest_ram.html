@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,7 +340,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_ramh">Interface <code class="highlighter-rouge">guest_ram.h</code></h2>
+<h2 id="interface-guest_ramh">Interface <code class="language-plaintext highlighter-rouge">guest_ram.h</code></h2>
 
 <p>The libsel4vm RAM interface provides us with a set of methods to manage a guest VM’s RAM. This involves functions
 to register, allocate and copy to and from RAM regions.</p>
@@ -350,58 +350,58 @@ to register, allocate and copy to and from RAM regions.</p>
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_guest_ram_read_callbackvm-guest_addr-vaddr-size-offset-buf"><code class="highlighter-rouge">vm_guest_ram_read_callback(vm, guest_addr, vaddr, size, offset, buf)</code></a></p>
+  <p><a href="#function-vm_guest_ram_read_callbackvm-guest_addr-vaddr-size-offset-buf"><code class="language-plaintext highlighter-rouge">vm_guest_ram_read_callback(vm, guest_addr, vaddr, size, offset, buf)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_guest_ram_write_callbackvm-guest_addr-vaddr-size-offset-buf"><code class="highlighter-rouge">vm_guest_ram_write_callback(vm, guest_addr, vaddr, size, offset, buf)</code></a></p>
+  <p><a href="#function-vm_guest_ram_write_callbackvm-guest_addr-vaddr-size-offset-buf"><code class="language-plaintext highlighter-rouge">vm_guest_ram_write_callback(vm, guest_addr, vaddr, size, offset, buf)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_touchvm-addr-size-touch_callback-cookie"><code class="highlighter-rouge">vm_ram_touch(vm, addr, size, touch_callback, cookie)</code></a></p>
+  <p><a href="#function-vm_ram_touchvm-addr-size-touch_callback-cookie"><code class="language-plaintext highlighter-rouge">vm_ram_touch(vm, addr, size, touch_callback, cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_find_largest_free_regionvm-addr-size"><code class="highlighter-rouge">vm_ram_find_largest_free_region(vm, addr, size)</code></a></p>
+  <p><a href="#function-vm_ram_find_largest_free_regionvm-addr-size"><code class="language-plaintext highlighter-rouge">vm_ram_find_largest_free_region(vm, addr, size)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_registervm-bytes"><code class="highlighter-rouge">vm_ram_register(vm, bytes)</code></a></p>
+  <p><a href="#function-vm_ram_registervm-bytes"><code class="language-plaintext highlighter-rouge">vm_ram_register(vm, bytes)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_register_atvm-start-bytes-untyped"><code class="highlighter-rouge">vm_ram_register_at(vm, start, bytes, untyped)</code></a></p>
+  <p><a href="#function-vm_ram_register_atvm-start-bytes-untyped"><code class="language-plaintext highlighter-rouge">vm_ram_register_at(vm, start, bytes, untyped)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_mark_allocatedvm-start-bytes"><code class="highlighter-rouge">vm_ram_mark_allocated(vm, start, bytes)</code></a></p>
+  <p><a href="#function-vm_ram_mark_allocatedvm-start-bytes"><code class="language-plaintext highlighter-rouge">vm_ram_mark_allocated(vm, start, bytes)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_allocatevm-bytes"><code class="highlighter-rouge">vm_ram_allocate(vm, bytes)</code></a></p>
+  <p><a href="#function-vm_ram_allocatevm-bytes"><code class="language-plaintext highlighter-rouge">vm_ram_allocate(vm, bytes)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_ram_freevm-start-bytes"><code class="highlighter-rouge">vm_ram_free(vm, start, bytes)</code></a></p>
+  <p><a href="#function-vm_ram_freevm-start-bytes"><code class="language-plaintext highlighter-rouge">vm_ram_free(vm, start, bytes)</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_ram.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_ram.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_guest_ram_read_callbackvm-guest_addr-vaddr-size-offset-buf">Function <code class="highlighter-rouge">vm_guest_ram_read_callback(vm, guest_addr, vaddr, size, offset, buf)</code></h3>
+<h3 id="function-vm_guest_ram_read_callbackvm-guest_addr-vaddr-size-offset-buf">Function <code class="language-plaintext highlighter-rouge">vm_guest_ram_read_callback(vm, guest_addr, vaddr, size, offset, buf)</code></h3>
 
 <p>Common guest ram touch callback for reading from a guest address into a user supplied buffer</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">guest_addr {uintptr_t}</code>: Guest physical address to read from</li>
-  <li><code class="highlighter-rouge">vmm_vaddr {void *}</code>: Virtual address in hosts (vmm) vspace corresponding with the ‘guest_addr’</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of region being currently accessed</li>
-  <li><code class="highlighter-rouge">offset {size_t}</code>: Current offset from the base guest physical address supplied to ‘vm_ram_touch’</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: User supplied buffer to store read data into</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_addr {uintptr_t}</code>: Guest physical address to read from</li>
+  <li><code class="language-plaintext highlighter-rouge">vmm_vaddr {void *}</code>: Virtual address in hosts (vmm) vspace corresponding with the ‘guest_addr’</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of region being currently accessed</li>
+  <li><code class="language-plaintext highlighter-rouge">offset {size_t}</code>: Current offset from the base guest physical address supplied to ‘vm_ram_touch’</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: User supplied buffer to store read data into</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -412,19 +412,19 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_guest_ram_write_callbackvm-guest_addr-vaddr-size-offset-buf">Function <code class="highlighter-rouge">vm_guest_ram_write_callback(vm, guest_addr, vaddr, size, offset, buf)</code></h3>
+<h3 id="function-vm_guest_ram_write_callbackvm-guest_addr-vaddr-size-offset-buf">Function <code class="language-plaintext highlighter-rouge">vm_guest_ram_write_callback(vm, guest_addr, vaddr, size, offset, buf)</code></h3>
 
 <p>Common guest ram touch callback for writing a user supplied buffer into a guest address</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">guest_addr {uintptr_t}</code>: Guest physical address to write to</li>
-  <li><code class="highlighter-rouge">vmm_vaddr {void *}</code>: Virtual address in hosts (vmm) vspace corresponding with the ‘guest_addr’</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of region being currently accessed</li>
-  <li><code class="highlighter-rouge">offset {size_t}</code>: Current offset from the base guest physical address supplied to ‘vm_ram_touch’</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: User supplied buffer to write data from</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">guest_addr {uintptr_t}</code>: Guest physical address to write to</li>
+  <li><code class="language-plaintext highlighter-rouge">vmm_vaddr {void *}</code>: Virtual address in hosts (vmm) vspace corresponding with the ‘guest_addr’</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of region being currently accessed</li>
+  <li><code class="language-plaintext highlighter-rouge">offset {size_t}</code>: Current offset from the base guest physical address supplied to ‘vm_ram_touch’</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: User supplied buffer to write data from</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -435,18 +435,18 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_touchvm-addr-size-touch_callback-cookie">Function <code class="highlighter-rouge">vm_ram_touch(vm, addr, size, touch_callback, cookie)</code></h3>
+<h3 id="function-vm_ram_touchvm-addr-size-touch_callback-cookie">Function <code class="language-plaintext highlighter-rouge">vm_ram_touch(vm, addr, size, touch_callback, cookie)</code></h3>
 
 <p>Touch a series of pages in the guest vm and invoke a callback for each page accessed</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">addr {uintptr_t}</code>: Address to access in the guest vm</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of memory region to access</li>
-  <li><code class="highlighter-rouge">callback {ram_touch_callback_fn}</code>: Callback to invoke on each page access</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: User data to pass onto callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr_t}</code>: Address to access in the guest vm</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of memory region to access</li>
+  <li><code class="language-plaintext highlighter-rouge">callback {ram_touch_callback_fn}</code>: Callback to invoke on each page access</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: User data to pass onto callback</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -457,16 +457,16 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_find_largest_free_regionvm-addr-size">Function <code class="highlighter-rouge">vm_ram_find_largest_free_region(vm, addr, size)</code></h3>
+<h3 id="function-vm_ram_find_largest_free_regionvm-addr-size">Function <code class="language-plaintext highlighter-rouge">vm_ram_find_largest_free_region(vm, addr, size)</code></h3>
 
 <p>Find the largest free ram region</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">addr {uintptr_t *}</code>: Pointer to be set with largest region address</li>
-  <li><code class="highlighter-rouge">size {size_t *}</code>: Pointer to be set with largest region size</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr_t *}</code>: Pointer to be set with largest region address</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t *}</code>: Pointer to be set with largest region size</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -477,15 +477,15 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_registervm-bytes">Function <code class="highlighter-rouge">vm_ram_register(vm, bytes)</code></h3>
+<h3 id="function-vm_ram_registervm-bytes">Function <code class="language-plaintext highlighter-rouge">vm_ram_register(vm, bytes)</code></h3>
 
 <p>Reserve a region of memory for RAM in the guest VM</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">bytes {size_t}</code>: Size of RAM region to allocate</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">bytes {size_t}</code>: Size of RAM region to allocate</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -496,17 +496,17 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_register_atvm-start-bytes-untyped">Function <code class="highlighter-rouge">vm_ram_register_at(vm, start, bytes, untyped)</code></h3>
+<h3 id="function-vm_ram_register_atvm-start-bytes-untyped">Function <code class="language-plaintext highlighter-rouge">vm_ram_register_at(vm, start, bytes, untyped)</code></h3>
 
 <p>Reserve a region of memory for RAM in the guest VM at a starting guest physical address</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM that ram needs to be allocated for</li>
-  <li><code class="highlighter-rouge">start {uintptr_t}</code>: Starting guest physical address of the ram region being allocated</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: The size of the RAM region to be allocated</li>
-  <li><code class="highlighter-rouge">untyped {bool}</code>: Allocate RAM frames such that it uses untyped memory</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM that ram needs to be allocated for</li>
+  <li><code class="language-plaintext highlighter-rouge">start {uintptr_t}</code>: Starting guest physical address of the ram region being allocated</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: The size of the RAM region to be allocated</li>
+  <li><code class="language-plaintext highlighter-rouge">untyped {bool}</code>: Allocate RAM frames such that it uses untyped memory</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -517,16 +517,16 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_mark_allocatedvm-start-bytes">Function <code class="highlighter-rouge">vm_ram_mark_allocated(vm, start, bytes)</code></h3>
+<h3 id="function-vm_ram_mark_allocatedvm-start-bytes">Function <code class="language-plaintext highlighter-rouge">vm_ram_mark_allocated(vm, start, bytes)</code></h3>
 
 <p>Mark a registered region of RAM as allocated</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">start {uintptr_t}</code>: Starting address of guest ram region</li>
-  <li><code class="highlighter-rouge">bytes {size_t}</code>: Size of RAM region</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">start {uintptr_t}</code>: Starting address of guest ram region</li>
+  <li><code class="language-plaintext highlighter-rouge">bytes {size_t}</code>: Size of RAM region</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -535,15 +535,15 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_allocatevm-bytes">Function <code class="highlighter-rouge">vm_ram_allocate(vm, bytes)</code></h3>
+<h3 id="function-vm_ram_allocatevm-bytes">Function <code class="language-plaintext highlighter-rouge">vm_ram_allocate(vm, bytes)</code></h3>
 
 <p>Allocate a region of registered ram</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">bytes {size_t}</code>: Size of allocation</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">bytes {size_t}</code>: Size of allocation</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -554,16 +554,16 @@ to register, allocate and copy to and from RAM regions.</p>
 
 <p>Back to <a href="#module-guest_ramh">interface description</a>.</p>
 
-<h3 id="function-vm_ram_freevm-start-bytes">Function <code class="highlighter-rouge">vm_ram_free(vm, start, bytes)</code></h3>
+<h3 id="function-vm_ram_freevm-start-bytes">Function <code class="language-plaintext highlighter-rouge">vm_ram_free(vm, start, bytes)</code></h3>
 
 <p>Free a RAM a previously allocated RAM region</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM that ram needs to be free’d for</li>
-  <li><code class="highlighter-rouge">start {uintptr_t}</code>: Starting guest physical address of the ram region being free’d</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: The size of the RAM region to be free’d</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM that ram needs to be free’d for</li>
+  <li><code class="language-plaintext highlighter-rouge">start {uintptr_t}</code>: Starting guest physical address of the ram region being free’d</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: The size of the RAM region to be free’d</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -670,7 +670,7 @@ to register, allocate and copy to and from RAM regions.</p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

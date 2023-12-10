@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -340,70 +340,70 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h2 id="interface-guest_memoryh">Interface <code class="highlighter-rouge">guest_memory.h</code></h2>
+<h2 id="interface-guest_memoryh">Interface <code class="language-plaintext highlighter-rouge">guest_memory.h</code></h2>
 
 <p>The libsel4vm memory interface provides useful abstractions to manage your guest VM’s address space.
 This interface can be leveraged for uses such as mapping device memory into your VM instance
 or for creating emulated device regions binded with custom handlers/callbacks.
 The main mechanisms this interface provides involves reserving memory regions and using those reservations
 to either map memory into your guest VM’s address space or emulate subsequent accesses. Reservations
-are created through either using <code class="highlighter-rouge">vm_reserve_memory_at</code> or <code class="highlighter-rouge">vm_reserve_anon_memory</code>.
-The user can then further back the reservation with seL4 frames by performing <code class="highlighter-rouge">vm_map_reservation</code>.</p>
+are created through either using <code class="language-plaintext highlighter-rouge">vm_reserve_memory_at</code> or <code class="language-plaintext highlighter-rouge">vm_reserve_anon_memory</code>.
+The user can then further back the reservation with seL4 frames by performing <code class="language-plaintext highlighter-rouge">vm_map_reservation</code>.</p>
 
 <h3 id="brief-content">Brief content:</h3>
 
 <p><strong>Functions</strong>:</p>
 
 <blockquote>
-  <p><a href="#function-vm_reserve_memory_atvm-addr-size-fault_callback-cookie"><code class="highlighter-rouge">vm_reserve_memory_at(vm, addr, size, fault_callback, cookie)</code></a></p>
+  <p><a href="#function-vm_reserve_memory_atvm-addr-size-fault_callback-cookie"><code class="language-plaintext highlighter-rouge">vm_reserve_memory_at(vm, addr, size, fault_callback, cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_reserve_anon_memoryvm-size-fault_callback-cookie-addr"><code class="highlighter-rouge">vm_reserve_anon_memory(vm, size, fault_callback, cookie, addr)</code></a></p>
+  <p><a href="#function-vm_reserve_anon_memoryvm-size-fault_callback-cookie-addr"><code class="language-plaintext highlighter-rouge">vm_reserve_anon_memory(vm, size, fault_callback, cookie, addr)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_free_reserved_memoryvm-reservation"><code class="highlighter-rouge">vm_free_reserved_memory(vm, reservation)</code></a></p>
+  <p><a href="#function-vm_free_reserved_memoryvm-reservation"><code class="language-plaintext highlighter-rouge">vm_free_reserved_memory(vm, reservation)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_map_reservationvm-reservation-map_iterator-cookie"><code class="highlighter-rouge">vm_map_reservation(vm, reservation, map_iterator, cookie)</code></a></p>
+  <p><a href="#function-vm_map_reservationvm-reservation-map_iterator-cookie"><code class="language-plaintext highlighter-rouge">vm_map_reservation(vm, reservation, map_iterator, cookie)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_map_reservationvm-reservation-frames-num_frames-frame_size_bits"><code class="highlighter-rouge">vm_map_reservation_frames(vm, reservation, frames, num_frames, frame_size_bits)</code></a></p>
+  <p><a href="#function-vm_map_reservationvm-reservation-frames-num_frames-frame_size_bits"><code class="language-plaintext highlighter-rouge">vm_map_reservation_frames(vm, reservation, frames, num_frames, frame_size_bits)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_get_reservation_memory_regionreservation-addr-size"><code class="highlighter-rouge">vm_get_reservation_memory_region(reservation, addr, size)</code></a></p>
+  <p><a href="#function-vm_get_reservation_memory_regionreservation-addr-size"><code class="language-plaintext highlighter-rouge">vm_get_reservation_memory_region(reservation, addr, size)</code></a></p>
 </blockquote>
 
 <blockquote>
-  <p><a href="#function-vm_memory_initvm"><code class="highlighter-rouge">vm_memory_init(vm)</code></a></p>
+  <p><a href="#function-vm_memory_initvm"><code class="language-plaintext highlighter-rouge">vm_memory_init(vm)</code></a></p>
 </blockquote>
 
 <p><strong>Structs</strong>:</p>
 
 <blockquote>
-  <p><a href="#struct-vm_frame_t"><code class="highlighter-rouge">vm_frame_t</code></a></p>
+  <p><a href="#struct-vm_frame_t"><code class="language-plaintext highlighter-rouge">vm_frame_t</code></a></p>
 </blockquote>
 
 <h2 id="functions">Functions</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_memory.h</code> defines the following functions.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_memory.h</code> defines the following functions.</p>
 
-<h3 id="function-vm_reserve_memory_atvm-addr-size-fault_callback-cookie">Function <code class="highlighter-rouge">vm_reserve_memory_at(vm, addr, size, fault_callback, cookie)</code></h3>
+<h3 id="function-vm_reserve_memory_atvm-addr-size-fault_callback-cookie">Function <code class="language-plaintext highlighter-rouge">vm_reserve_memory_at(vm, addr, size, fault_callback, cookie)</code></h3>
 
 <p>Reserve a region of the VM’s memory at a given base address</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">addr {uintptr}</code>: Base address of the memory region being reserved</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of the memory region being reserved</li>
-  <li><code class="highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Callback function that will be invoked if memory region is faulted on</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: User cookie to pass onto to callback</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr}</code>: Base address of the memory region being reserved</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of the memory region being reserved</li>
+  <li><code class="language-plaintext highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Callback function that will be invoked if memory region is faulted on</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: User cookie to pass onto to callback</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -414,20 +414,20 @@ The user can then further back the reservation with seL4 frames by performing <c
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_reserve_anon_memoryvm-size-align-fault_callback-cookie-addr">Function <code class="highlighter-rouge">vm_reserve_anon_memory(vm, size, align, fault_callback, cookie, addr)</code></h3>
+<h3 id="function-vm_reserve_anon_memoryvm-size-align-fault_callback-cookie-addr">Function <code class="language-plaintext highlighter-rouge">vm_reserve_anon_memory(vm, size, align, fault_callback, cookie, addr)</code></h3>
 
 <p>Reserve an anonymous region of the VM’s memory. This uses memory previously made anonymous
-through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.</p>
+through the <code class="language-plaintext highlighter-rouge">vm_memory_make_anon</code> function.</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">size {size_t}</code>: Size of the anoymous emory region being reserved</li>
-  <li><code class="highlighter-rouge">align {size_t}</code>: Requested alignment of the memory region</li>
-  <li><code class="highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Callback function that will be invoked if memory region is faulted on</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: User cookie to pass onto to callback</li>
-  <li><code class="highlighter-rouge">addr {uintptr_t *}</code>: Pointer that will be set with the base address of the reserved anonymous region</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t}</code>: Size of the anoymous emory region being reserved</li>
+  <li><code class="language-plaintext highlighter-rouge">align {size_t}</code>: Requested alignment of the memory region</li>
+  <li><code class="language-plaintext highlighter-rouge">fault_callback {memory_fault_callback_fn}</code>: Callback function that will be invoked if memory region is faulted on</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: User cookie to pass onto to callback</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr_t *}</code>: Pointer that will be set with the base address of the reserved anonymous region</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -438,15 +438,15 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_free_reserved_memoryvm-reservation">Function <code class="highlighter-rouge">vm_free_reserved_memory(vm, reservation)</code></h3>
+<h3 id="function-vm_free_reserved_memoryvm-reservation">Function <code class="language-plaintext highlighter-rouge">vm_free_reserved_memory(vm, reservation)</code></h3>
 
 <p>Free memory reservation from the VM</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to the reservation being free’d</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to the reservation being free’d</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -457,17 +457,17 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_map_reservationvm-reservation-map_iterator-cookie">Function <code class="highlighter-rouge">vm_map_reservation(vm, reservation, map_iterator, cookie)</code></h3>
+<h3 id="function-vm_map_reservationvm-reservation-map_iterator-cookie">Function <code class="language-plaintext highlighter-rouge">vm_map_reservation(vm, reservation, map_iterator, cookie)</code></h3>
 
 <p>Map a reservation into the VM’s virtual address space</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
-  <li><code class="highlighter-rouge">map_iterator {memory_map_iterator_fn}</code>: Iterator function that returns a cap to the memory region being mapped</li>
-  <li><code class="highlighter-rouge">cookie {void *}</code>: Cookie to pass onto map_iterator function</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">map_iterator {memory_map_iterator_fn}</code>: Iterator function that returns a cap to the memory region being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">cookie {void *}</code>: Cookie to pass onto map_iterator function</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -478,18 +478,18 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_map_reservation_framesvm-reservation-frames-num_frames-frame_size_bits">Function <code class="highlighter-rouge">vm_map_reservation_frames(vm, reservation, frames, num_frames, frame_size_bits)</code></h3>
+<h3 id="function-vm_map_reservation_framesvm-reservation-frames-num_frames-frame_size_bits">Function <code class="language-plaintext highlighter-rouge">vm_map_reservation_frames(vm, reservation, frames, num_frames, frame_size_bits)</code></h3>
 
 <p>Map a reservation into the VM’s virtual address space from given frames</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
-  <li><code class="highlighter-rouge">frames {seL4_CPtr *}</code>: Array of frame caps</li>
-  <li><code class="highlighter-rouge">num_frames {size_t}</code>: Number of frame caps</li>
-  <li><code class="highlighter-rouge">frame_size_bits {size_t}</code>: Bit size of a single frame</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object being mapped</li>
+  <li><code class="language-plaintext highlighter-rouge">frames {seL4_CPtr *}</code>: Array of frame caps</li>
+  <li><code class="language-plaintext highlighter-rouge">num_frames {size_t}</code>: Number of frame caps</li>
+  <li><code class="language-plaintext highlighter-rouge">frame_size_bits {size_t}</code>: Bit size of a single frame</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -500,16 +500,16 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_get_reservation_memory_regionreservation-addr-size">Function <code class="highlighter-rouge">vm_get_reservation_memory_region(reservation, addr, size)</code></h3>
+<h3 id="function-vm_get_reservation_memory_regionreservation-addr-size">Function <code class="language-plaintext highlighter-rouge">vm_get_reservation_memory_region(reservation, addr, size)</code></h3>
 
 <p>Get the memory region information (address &amp; size) from a given reservation</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object</li>
-  <li><code class="highlighter-rouge">addr {uintptr_t *}</code>: Pointer that will be set with the address of reservation</li>
-  <li><code class="highlighter-rouge">size {size_t *}</code>: Pointer that will be set with the size of reservation</li>
+  <li><code class="language-plaintext highlighter-rouge">reservation {vm_memory_reservation_t *}</code>: Pointer to reservation object</li>
+  <li><code class="language-plaintext highlighter-rouge">addr {uintptr_t *}</code>: Pointer that will be set with the address of reservation</li>
+  <li><code class="language-plaintext highlighter-rouge">size {size_t *}</code>: Pointer that will be set with the size of reservation</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -518,14 +518,14 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
 
-<h3 id="function-vm_memory_initvm">Function <code class="highlighter-rouge">vm_memory_init(vm)</code></h3>
+<h3 id="function-vm_memory_initvm">Function <code class="language-plaintext highlighter-rouge">vm_memory_init(vm)</code></h3>
 
 <p>Initialise a VM’s memory management interface</p>
 
 <p><strong>Parameters:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
+  <li><code class="language-plaintext highlighter-rouge">vm {vm_t *}</code>: A handle to the VM</li>
 </ul>
 
 <p><strong>Returns:</strong></p>
@@ -538,19 +538,19 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
 
 <h2 id="structs">Structs</h2>
 
-<p>The interface <code class="highlighter-rouge">guest_memory.h</code> defines the following structs.</p>
+<p>The interface <code class="language-plaintext highlighter-rouge">guest_memory.h</code> defines the following structs.</p>
 
-<h3 id="struct-vm_frame_t">Struct <code class="highlighter-rouge">vm_frame_t</code></h3>
+<h3 id="struct-vm_frame_t">Struct <code class="language-plaintext highlighter-rouge">vm_frame_t</code></h3>
 
 <p>Structure representing a mappable memory frame</p>
 
 <p><strong>Elements:</strong></p>
 
 <ul>
-  <li><code class="highlighter-rouge">cptr {seL4_CPtr}</code>: Capability to frame</li>
-  <li><code class="highlighter-rouge">rights {seL4_CapRights_t}</code>: Mapping rights of frame</li>
-  <li><code class="highlighter-rouge">vaddr {uintptr_t}</code>: Virtual address of which to map the frame into</li>
-  <li><code class="highlighter-rouge">size_bits {size_t}</code>: Size of frame in bits</li>
+  <li><code class="language-plaintext highlighter-rouge">cptr {seL4_CPtr}</code>: Capability to frame</li>
+  <li><code class="language-plaintext highlighter-rouge">rights {seL4_CapRights_t}</code>: Mapping rights of frame</li>
+  <li><code class="language-plaintext highlighter-rouge">vaddr {uintptr_t}</code>: Virtual address of which to map the frame into</li>
+  <li><code class="language-plaintext highlighter-rouge">size_bits {size_t}</code>: Size of frame in bits</li>
 </ul>
 
 <p>Back to <a href="#module-guest_memoryh">interface description</a>.</p>
@@ -653,7 +653,7 @@ through the <code class="highlighter-rouge">vm_memory_make_anon</code> function.
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: 

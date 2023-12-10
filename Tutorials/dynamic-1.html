@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-10 03:16:50 +0000 -->
+<!-- Page last generated 2023-12-10 10:21:57 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -235,7 +235,7 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
       <nav aria-label="Table of Contents">
-        <ul class="section-nav">
+        <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
 <li class="toc-entry toc-h2"><a href="#outcomes">Outcomes:</a></li>
 <li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
@@ -274,7 +274,7 @@
 <h1 id="sel4-dynamic-libraries-initialisation--threading">seL4 Dynamic Libraries: initialisation &amp; threading</h1>
 
 <p>This tutorial provides code examples and exercises for using the dynamic libraries
-found in <a href="https://github.com/seL4/seL4_libs"><code class="highlighter-rouge">seL4_libs</code></a> to bootstrap a system and start a thread.</p>
+found in <a href="https://github.com/seL4/seL4_libs"><code class="language-plaintext highlighter-rouge">seL4_libs</code></a> to bootstrap a system and start a thread.</p>
 
 <p>The tutorial is useful in that
 it addresses conceptual problems for two different types of developers:</p>
@@ -287,7 +287,7 @@ it addresses conceptual problems for two different types of developers:</p>
     what to read about.</li>
 </ul>
 
-<p>Don’t gloss over the globals declared before <code class="highlighter-rouge">main()</code> – they’re declared
+<p>Don’t gloss over the globals declared before <code class="language-plaintext highlighter-rouge">main()</code> – they’re declared
 for your benefit so you can grasp some of the basic data structures.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
@@ -330,7 +330,7 @@ ninja
 
 <p>When you first run the tutorial, you should see the following output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 main@main.c:89 [Cond failed: info == NULL]
 Failed to get bootinfo.
 </code></pre></div></div>
@@ -346,8 +346,8 @@ IO-Ports (x86). This structure also tells the init thread where certain
 important capability references are. This step is teaching you how to
 obtain that structure.</p>
 
-<p><code class="highlighter-rouge">seL4_BootInfo* platsupport_get_bootinfo(void)</code> is a function that returns the BootInfo structure.
-It also sets up the IPC buffer so that it can perform some syscalls such as <code class="highlighter-rouge">seL4_DebugNameThread</code> used by <code class="highlighter-rouge">name_thread</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">seL4_BootInfo* platsupport_get_bootinfo(void)</code> is a function that returns the BootInfo structure.
+It also sets up the IPC buffer so that it can perform some syscalls such as <code class="language-plaintext highlighter-rouge">seL4_DebugNameThread</code> used by <code class="language-plaintext highlighter-rouge">name_thread</code>.</p>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/bootinfo_types.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/bootinfo_types.h</a></li>
@@ -363,7 +363,7 @@ It also sets up the IPC buffer so that it can perform some syscalls such as <cod
 <span class="err">}</span>
 </code></pre></div></div>
 <p>On success, you should see the following:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-1: main@main.c:124 [Cond failed: allocman == NULL]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-1: main@main.c:124 [Cond failed: allocman == NULL]
 	Failed to initialize alloc manager.
 	Memory pool sufficiently sized?
 	Memory pool pointer valid?
@@ -371,7 +371,7 @@ It also sets up the IPC buffer so that it can perform some syscalls such as <cod
 
 <h3 id="initialise-simple">Initialise simple</h3>
 
-<p><code class="highlighter-rouge">libsel4simple</code> provides an abstraction for the boot environment of a thread.
+<p><code class="language-plaintext highlighter-rouge">libsel4simple</code> provides an abstraction for the boot environment of a thread.
 You need to initialize it with some default state before using it.</p>
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h">https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h</a>
@@ -390,7 +390,7 @@ You need to initialize it with some default state before using it.</p>
 
 <h3 id="use-simple-to-print-bootinfo">Use simple to print BootInfo</h3>
 
-<p>Use a <code class="highlighter-rouge">simple</code> function to print out the contents of the <code class="highlighter-rouge">seL4_BootInfo</code> function.</p>
+<p>Use a <code class="language-plaintext highlighter-rouge">simple</code> function to print out the contents of the <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> function.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 3: print out bootinfo and other info about simple */</span>
@@ -406,7 +406,7 @@ You need to initialize it with some default state before using it.</p>
 
 <p>The error message should remain, but your output should now also contain something like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Node 0 of 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Node 0 of 1
 IOPT levels:     4294967295
 IPC buffer:      0x52c000
 Empty slots:     [406 --&gt; 4096)
@@ -423,7 +423,7 @@ dynamic-1: main@main.c:126 [Cond failed: allocman == NULL]
 
 <p>In seL4, memory management is delegated in large part to userspace, and
 each thread manages its own page faults with a custom pager. Without
-the use of the <code class="highlighter-rouge">allocman</code> library and the <code class="highlighter-rouge">VKA</code> library, you would have to
+the use of the <code class="language-plaintext highlighter-rouge">allocman</code> library and the <code class="language-plaintext highlighter-rouge">VKA</code> library, you would have to
 manually allocate a frame, then map the frame into a page-table, before
 you could use new memory in your address space. In this tutorial you
 don’t go through that procedure, but you’ll encounter it later. For now,
@@ -445,14 +445,14 @@ step.</p>
      */</span>
 </code></pre></div></div>
 <p>The output should now be as follows:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "dynamic-1" @401303]: Attempted to invoke a null cap #0.&gt;&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "dynamic-1" @401303]: Attempted to invoke a null cap #0.&gt;&gt;
 dynamic-1: main@main.c:199 [Err seL4_InvalidCapability]:
 	Failed to set the priority for the new TCB object.
 </code></pre></div></div>
 
 <h3 id="obtain-a-generic-allocation-interface-vka">Obtain a generic allocation interface (vka)</h3>
 
-<p><code class="highlighter-rouge">libsel4vka</code> is an seL4 type-aware object allocator that will allocate new
+<p><code class="language-plaintext highlighter-rouge">libsel4vka</code> is an seL4 type-aware object allocator that will allocate new
 kernel objects for you. The term “allocate new kernel objects” in seL4
 is a more detailed process of “retyping” previously un-typed memory.
 seL4 considers all memory that hasn’t been explicitly earmarked for a
@@ -554,7 +554,7 @@ still manually fill it out.</p>
 
 <p>After completing this task, the errors should disappear, and you should see the following
 output:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
 </code></pre></div></div>
 
 <h3 id="configure-the-new-tcb">Configure the new TCB</h3>
@@ -590,7 +590,7 @@ it. That’s what you’re doing now.</p>
 main thread’s CSpace and VSpace.</p>
 
 <p>In addition, a thread needs to have a priority set on it in order for it to run.
-<code class="highlighter-rouge">seL4_TCB_SetPriority(tcb_object.cptr, seL4_CapInitThreadTCB, seL4_MaxPrio);</code>
+<code class="language-plaintext highlighter-rouge">seL4_TCB_SetPriority(tcb_object.cptr, seL4_CapInitThreadTCB, seL4_MaxPrio);</code>
 will give your new thread the same priority as the current thread, allowing it
 to be run the next time the seL4 scheduler is invoked.  The seL4 scheduler is invoked
 everytime there is a kernel timer tick.</p>
@@ -714,15 +714,15 @@ kernel successfully, we cause it to print something to the screen.</p>
 <h2 id="links-to-source">Links to source</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">sel4_BootInfo</code>:
+  <li><code class="language-plaintext highlighter-rouge">sel4_BootInfo</code>:
     <a href="https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/bootinfo_types.h">https://github.com/seL4/seL4/blob/master/libsel4/include/sel4/bootinfo_types.h</a></li>
-  <li><code class="highlighter-rouge">simple_t</code>:
+  <li><code class="language-plaintext highlighter-rouge">simple_t</code>:
     <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h">https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h</a></li>
-  <li><code class="highlighter-rouge">vka_t</code>:
+  <li><code class="language-plaintext highlighter-rouge">vka_t</code>:
     <a href="https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h">https://github.com/seL4/seL4_libs/blob/master//libsel4vka/include/vka/vka.h</a></li>
-  <li><code class="highlighter-rouge">allocman_t</code>:
+  <li><code class="language-plaintext highlighter-rouge">allocman_t</code>:
     <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h">https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/allocman.h</a></li>
-  <li><code class="highlighter-rouge">name_thread()</code>:
+  <li><code class="language-plaintext highlighter-rouge">name_thread()</code>:
     <a href="https://github.com/seL4/sel4-tutorials/blob/master/libsel4tutorials/src/constructors.c">https://github.com/seL4/sel4-tutorials/blob/master/libsel4tutorials/src/constructors.c</a></li>
 </ul>
 
@@ -779,7 +779,7 @@ dynamic-1/dynamic-1.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Wed Dec 6 16:32:38 2023 +1100 a2efcf9484
+            Site last updated: Sun Dec 10 11:19:58 2023 +0100 4bf4654bef
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17
