@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-13 10:47:53 +0000 -->
+<!-- Page last generated 2023-12-14 03:14:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -381,7 +381,7 @@ Each CSlot in a CNode can be in the following state:</p>
 <p>The field <code class="language-plaintext highlighter-rouge">info-&gt;CNodeSizeBits</code> gives a measure of the size of the initial
 CNode: it will have <code class="language-plaintext highlighter-rouge">1 &lt;&lt; CNodeSizeBits</code> CSlots. A CSlot has
 <code class="language-plaintext highlighter-rouge">1 &lt;&lt; seL4_SlotBits</code> bytes, so the size of a CNode in bytes is
-<code class="language-plaintext highlighter-rouge">1 &lt;&lt; (CNodeSizeBits + seL4_SlotBits</code>.</p>
+<code class="language-plaintext highlighter-rouge">1 &lt;&lt; (CNodeSizeBits + seL4_SlotBits)</code>.</p>
 
 <h3 id="cspaces">CSpaces</h3>
 
@@ -467,7 +467,7 @@ thread, <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadCNo
 <h3 id="initial-cspace">Initial CSpace</h3>
 
 <p>The root task has a CSpace, set up by seL4 during boot, which contains capabilities to all
-resources manages by seL4. We have already seen several capabilities in the root CSpace: <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code>,
+resources managed by seL4. We have already seen several capabilities in the root CSpace: <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadTCB</code>,
  and <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadCNode</code>. Both of these are specified by constants in <code class="language-plaintext highlighter-rouge">libsel4</code>, however not all initial
  capabilities are statically specified. Other capabilities are described by the <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> data structure,
  described in <code class="language-plaintext highlighter-rouge">libsel4</code> and initialised by seL4. <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> describes ranges of initial capabilities,
