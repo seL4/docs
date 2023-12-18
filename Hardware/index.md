@@ -54,6 +54,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
 | Platform | Simulation | System-on-chip | Core | Arch | Virtualisation | Status | Contributed by | Maintained by |
+| -        |  -         | -              | -    | -    | -              | -      | -              | -             |
 {% for page in sorted %}
 {%- if page.riscv_hardware -%}
 | [{{ page.platform }}]({{page.url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.Status }} | {{ page.Contrib }} | {{ page.Maintained }} |
