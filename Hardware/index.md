@@ -9,7 +9,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 The seL4 proofs are only for specific platforms, as noted in the *Status* column as follows:
 
 * Unverified: this platform is not verified at all and is not scheduled for verification.
-* Pending: this feature is currently undergoing verification.
+* Ongoing: this feature is currently undergoing verification.
 * FC: the functional correctness proofs are complete.
 * Verified: all proofs for this platform are complete, including functional correctness, integrity and information flow.
 
@@ -26,7 +26,7 @@ See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
 
 We support PC99-style Intel Architecture Platforms.
 
-| Platform              | Arch | Virtualisation | IOMMU | Status                               | Contributed by | Maintained by |
+| Platform              | Arch | Virtualisation | IOMMU | Verification Status                  | Contributed by | Maintained by |
 | -                     |  -   | -              | -     | -                                    | -              | -             |
 | [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
 | [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
@@ -39,7 +39,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 
 * [General info on ARM Platforms](GeneralARM)
 
-| Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | SMMU              | Status     | Contributed by | Maintained by |
+| Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | SMMU              | Verification Status     | Contributed by | Maintained by |
 | - | - | - | - | - | - | - | - | - |
 {%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}
@@ -53,8 +53,8 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 
 We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
-| Platform | Simulation | System-on-chip | Core | Arch | Virtualisation | Status | Contributed by | Maintained by |
-| -        |  -         | -              | -    | -    | -              | -      | -              | -             |
+| Platform | Simulation | System-on-chip | Core | Arch | Virtualisation | Verification Status | Contributed by | Maintained by |
+| -        |  -         | -              | -    | -    | -              | -                   | -              | -             |
 {% for page in sorted %}
 {%- if page.riscv_hardware -%}
 | [{{ page.platform }}]({{page.url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.Status }} | {{ page.Contrib }} | {{ page.Maintained }} |
