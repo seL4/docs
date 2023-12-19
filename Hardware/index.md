@@ -4,23 +4,47 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # Supported Platforms
 
-## Verification status
+### Summary
 
-The seL4 proofs are only for specific platforms, as noted in the *Status* column as follows:
+seL4 is available on 3 major hardware architectures, [ARM](#arm),
+[RISC-V](#risc-v) and [x86](#x86), for a number of platforms (with varying
+hardware features).
+
+seL4 is formally verified (to various degrees) for a subset of these
+configurations, i.e. combination of architecture, platform and hardware
+features.
+
+Details are given in the tables below.
+
+### Platforms' attributes
+
+The tables below list of all the platforms for which seL4's implementation is
+available. For each platform, the tables list:
+
+- whether specific features are supported (e.g. *Virtualisation*, *IOMMU/SSMU*, etc) and to which degree (where applicable);
+- the *verification status* (see more [below](#verification-status));
+- who has contributed this configuration;
+- who is maintaining this configuration.
+
+### Verification status
+
+The seL4 proofs only hold for specific configurations, as noted in the *Verification Status* column in the tables, as follows:
 
 * Unverified: this platform is not verified at all and is not scheduled for verification.
 * Ongoing: this feature is currently undergoing verification.
 * FC: the functional correctness proofs are complete.
 * Verified: all proofs for this platform are complete, including functional correctness, integrity and information flow.
 
-## Simulating seL4
+More information can be found on the [Verified Configurations](../projects/sel4/verified-configurations.md) page.
 
-Running seL4 in a simulator is a quick way to test it out and iteratively develop software. However,
-note that feature support is limited by the simulator.
 
+### Simulating seL4
+
+Running seL4 in a simulator is a quick way to test it out and iteratively develop software.
+Note that feature support is then limited by the simulator.
 See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
 
-* [Running seL4 on VMware](VMware)
+You can also [run seL4 on VMware](VMware).
 
 ## x86
 
