@@ -39,7 +39,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 
 * [General info on ARM Platforms](GeneralARM)
 
-| Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | IOMMU              | Status     | Contributed by | Maintained by |
+| Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | SMMU              | Status     | Contributed by | Maintained by |
 | - | - | - | - | - | - | - | - | - |
 {%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}

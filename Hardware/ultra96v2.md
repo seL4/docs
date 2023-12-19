@@ -5,7 +5,7 @@ arm_hardware: true
 platform: Ultra96v2 Evaluation Kit
 arch: ARMv8A
 virtualization: ARM HYP
-iommu: System MMU
+iommu: SMMU
 soc: Zynq UltraScale+ MPSoC
 cpu: Cortex-A53
 Status: Unverified
