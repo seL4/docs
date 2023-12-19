@@ -24,7 +24,7 @@ This documentation site is for cooperatively developing and sharing documentatio
 	<li><a href="/projects/roadmap.html">Roadmap</a></li>
 	<li><a href="/projects/buildsystem/host-dependencies.html">Build dependencies</a></li>
 	<li><a href="/GettingStarted#running-sel4">Building and Running seL4</a></li>
-	<li><a href="/Hardware">Hardware and Target platforms</a></li>
+	<li><a href="/Hardware">Supported hardware platforms</a></li>
 	<li><a href="/projects/sel4/verified-configurations.html">Verification targets and claims</a></li>
 	</ul>
   </div>
