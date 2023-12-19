@@ -5,7 +5,7 @@ xcompiler_arg: -DAARCH32=1
 platform: OdroidXU
 arch: ARMv7A
 virtualization: ARM HYP
-iommu: limited System MMU
+iommu: limited SMMU
 soc: Exynos5
 cpu: Cortex-A15
 Status: Unverified
