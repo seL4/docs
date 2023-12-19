@@ -4,7 +4,7 @@ cmake_plat: exynos5250
 xcompiler_arg: -DAARCH32=1
 platform: Arndale
 arch: ARMv7A
-virtualization: ARM Hyp
+virtualization: ARM HYP
 iommu: "No"
 soc: Exynos5
 cpu: Cortex-A15
