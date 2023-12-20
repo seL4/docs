@@ -23,8 +23,8 @@ available. For each platform, the tables list:
 
 - whether specific features are supported (e.g. *Virtualisation*, *IOMMU/SSMU*, etc) and to which degree (where applicable);
 - the *verification status* (see more [below](#verification-status));
-- who has contributed this configuration;
-- who is maintaining this configuration.
+- who has contributed this platform port;
+- who is maintaining this platform port.
 
 ### Verification status
 
