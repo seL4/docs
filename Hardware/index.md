@@ -7,8 +7,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ### Summary
 
 seL4 is available on 3 major hardware architectures, [ARM](#arm),
-[RISC-V](#risc-v) and [x86](#x86), for a number of platforms (with varying
-hardware features).
+[RISC-V](#risc-v) and [x86](#x86), for a number of platforms with varying
+hardware features.
 
 seL4 is formally verified (to various degrees) for a subset of these
 configurations, i.e. combination of architecture, platform and hardware
