@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2023-12-20 03:14:28 +0000 -->
+<!-- Page last generated 2023-12-20 16:55:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -217,9 +217,33 @@
     <div class="content">
       <h1 id="supported-platforms">Supported Platforms</h1>
 
-<h2 id="verification-status">Verification status</h2>
+<h3 id="summary">Summary</h3>
 
-<p>The seL4 proofs are only for specific platforms, as noted in the <em>Status</em> column as follows:</p>
+<p>seL4 is available on 3 major hardware architectures, <a href="#arm">ARM</a>,
+<a href="#risc-v">RISC-V</a> and <a href="#x86">x86</a>, for a number of platforms with varying
+hardware features.</p>
+
+<p>seL4 is formally verified for specific configurations for a subset of these
+platforms. The depth of the proofs and which properties are verified depend on
+the platform.</p>
+
+<p>The tables below provide more details.</p>
+
+<h3 id="platforms-attributes">Platforms’ attributes</h3>
+
+<p>The tables below list the platforms for which seL4 is available. For each
+platform, the tables list:</p>
+
+<ul>
+  <li>whether specific features are supported (e.g. <em>Virtualisation</em>, <em>IOMMU/SSMU</em>, etc) and to which degree (where applicable);</li>
+  <li>the <em>verification status</em> (see more <a href="#verification-status">below</a>);</li>
+  <li>who has contributed this platform port;</li>
+  <li>who is maintaining this platform port.</li>
+</ul>
+
+<h3 id="verification-status">Verification status</h3>
+
+<p>The seL4 proofs only hold for specific configurations, as noted in the <em>Verification Status</em> column in the tables, as follows:</p>
 
 <ul>
   <li>Unverified: this platform is not verified at all and is not scheduled for verification.</li>
@@ -228,16 +252,15 @@
   <li>Verified: all proofs for this platform are complete, including functional correctness, integrity and information flow.</li>
 </ul>
 
-<h2 id="simulating-sel4">Simulating seL4</h2>
+<p>More information can be found on the <a href="/projects/sel4/verified-configurations.html">Verified Configurations</a> page.</p>
 
-<p>Running seL4 in a simulator is a quick way to test it out and iteratively develop software. However,
-note that feature support is limited by the simulator.</p>
+<h3 id="simulating-sel4">Simulating seL4</h3>
 
-<p>See <a href="/seL4Test#RunningIt">Running It</a> for how to run seL4 using Qemu.</p>
+<p>Running seL4 in a simulator is a quick way to test it out and iteratively develop software.
+Note that feature support is then limited by the simulator.
+See <a href="/seL4Test#RunningIt">Running It</a> for how to run seL4 using Qemu.</p>
 
-<ul>
-  <li><a href="VMware">Running seL4 on VMware</a></li>
-</ul>
+<p>You can also <a href="VMware">run seL4 on VMware</a>.</p>
 
 <h2 id="x86">x86</h2>
 
@@ -688,10 +711,10 @@ note that feature support is limited by the simulator.</p>
         </li>
         
           <li>
-            Site last updated: Tue Dec 19 12:55:38 2023 +0100 8dba742073
+            Site last updated: Wed Dec 20 17:53:30 2023 +0100 94d415117e
           </li>
           <li>
-                Page last updated: Tue Dec 19 12:55:38 2023 +0100 cb5305c9cb
+                Page last updated: Wed Dec 20 17:53:30 2023 +0100 94d415117e
           </li>
         
       </ul>
