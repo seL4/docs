@@ -10,16 +10,17 @@ seL4 is available on 3 major hardware architectures, [ARM](#arm),
 [RISC-V](#risc-v) and [x86](#x86), for a number of platforms with varying
 hardware features.
 
-seL4 is formally verified (to various degrees) for a subset of these
-configurations, i.e. combination of architecture, platform and hardware
-features.
+seL4 is formally verified for specific configurations for a subset of these
+platforms. The depth of the proofs and which properties are verified depend on
+the platform.
 
-Details are given in the tables below.
+The tables below provide more details.
+
 
 ### Platforms' attributes
 
-The tables below list of all the platforms for which seL4's implementation is
-available. For each platform, the tables list:
+The tables below list the platforms for which seL4 is available. For each
+platform, the tables list:
 
 - whether specific features are supported (e.g. *Virtualisation*, *IOMMU/SSMU*, etc) and to which degree (where applicable);
 - the *verification status* (see more [below](#verification-status));
