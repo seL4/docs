@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-01-03 03:15:03 +0000 -->
+<!-- Page last generated 2024-01-03 10:21:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -249,7 +249,7 @@ configuration of internal and hardware features, verified configurations
 are necessarily both less numerous and more specific.</p>
 
 <p>These configurations are also referred to as <em>verification platforms</em>,
-currently constituting: AARCH64, ARM, ARM_HYP, X64, RISCV64, ARM_MCS, RISCV64_MCS</p>
+currently constituting: ARM, ARM_HYP, ARM_MCS, AARCH64, RISCV64, RISCV64_MCS, X64</p>
 
 <p>Please consult <a href="/FrequentlyAskedQuestions">Frequently Asked
 Questions</a>, as well as the <a href="http://sel4.systems/Info/FAQ/proof.pml">proof and
@@ -357,41 +357,6 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
   </tbody>
 </table>
 
-<h2 id="arm_mcs">ARM_MCS</h2>
-
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_MCS_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>i.MX 6 (Sabre Lite)</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Mixed-Criticality-Systems API</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>in progress (design-level functional correctness completed)</td>
-    </tr>
-  </tbody>
-</table>
-
 <h2 id="arm_hyp-tk1">ARM_HYP TK1</h2>
 
 <table>
@@ -454,6 +419,41 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
   </tbody>
 </table>
 
+<h2 id="arm_mcs">ARM_MCS</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_MCS_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>i.MX 6 (Sabre Lite)</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Mixed-Criticality-Systems API</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>in progress (design-level functional correctness completed)</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="aarch64">AARCH64</h2>
 
 <table>
@@ -481,33 +481,6 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
     <tr>
       <td><strong>Verified properties</strong></td>
       <td>in progress</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="x64">X64</h2>
-
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">X64_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture/Platform</td>
-      <td>x86 64-bit</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, no fast path</td>
     </tr>
   </tbody>
 </table>
@@ -578,6 +551,33 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
   </tbody>
 </table>
 
+<h2 id="x64">X64</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">X64_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture/Platform</td>
+      <td>x86 64-bit</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, no fast path</td>
+    </tr>
+  </tbody>
+</table>
+
   </div>
 
 
@@ -598,13 +598,13 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
 </li>
 <li class="toc-entry toc-h2"><a href="#arm-sabre-lite">ARM Sabre Lite</a></li>
 <li class="toc-entry toc-h2"><a href="#arm-imx8mm-evk">ARM IMX8MM-EVK</a></li>
-<li class="toc-entry toc-h2"><a href="#arm_mcs">ARM_MCS</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_hyp-tk1">ARM_HYP TK1</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_hyp-exynos5">ARM_HYP Exynos5</a></li>
+<li class="toc-entry toc-h2"><a href="#arm_mcs">ARM_MCS</a></li>
 <li class="toc-entry toc-h2"><a href="#aarch64">AARCH64</a></li>
-<li class="toc-entry toc-h2"><a href="#x64">X64</a></li>
 <li class="toc-entry toc-h2"><a href="#riscv64">RISCV64</a></li>
 <li class="toc-entry toc-h2"><a href="#riscv64_mcs">RISCV64_MCS</a></li>
+<li class="toc-entry toc-h2"><a href="#x64">X64</a></li>
 </ul>
 </div>
 
@@ -1045,10 +1045,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Wed Dec 20 17:53:30 2023 +0100 94d415117e
+            Site last updated: Wed Jan 3 21:19:13 2024 +1100 cdd362ed11
           </li>
           <li>
-                Page last updated: Wed Dec 13 11:45:46 2023 +0100 96d1ff062d
+                Page last updated: Wed Jan 3 21:19:13 2024 +1100 cdd362ed11
           </li>
         
       </ul>
