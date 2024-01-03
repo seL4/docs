@@ -47,16 +47,6 @@ See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
 
 You can also [run seL4 on VMware](VMware).
 
-## x86
-
-We support PC99-style Intel Architecture Platforms.
-
-| Platform              | Arch | Virtualisation | IOMMU | Verification Status                  | Contributed by | Maintained by |
-| -                     |  -   | -              | -     | -                                    | -              | -             |
-| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
-| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
-
-[X64]: /projects/sel4/verified-configurations.html#x64
 
 ## ARM
 
@@ -85,3 +75,14 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 | [{{ page.platform }}]({{page.url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.Status }} | {{ page.Contrib }} | {{ page.Maintained }} |
 {% endif %}
 {%- endfor %}
+
+## x86
+
+We support PC99-style Intel Architecture Platforms.
+
+| Platform              | Arch | Virtualisation | IOMMU | Verification Status                  | Contributed by | Maintained by |
+| -                     |  -   | -              | -     | -                                    | -              | -             |
+| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
+| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
+
+[X64]: /projects/sel4/verified-configurations.html#x64
