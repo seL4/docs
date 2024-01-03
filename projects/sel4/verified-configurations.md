@@ -20,7 +20,7 @@ configuration of internal and hardware features, verified configurations
 are necessarily both less numerous and more specific.
 
 These configurations are also referred to as *verification platforms*,
-currently constituting: AARCH64, ARM, ARM\_HYP, X64, RISCV64, ARM\_MCS, RISCV64\_MCS
+currently constituting: ARM, ARM\_HYP, ARM\_MCS, AARCH64, RISCV64, RISCV64\_MCS, X64
 
 Please consult [Frequently Asked
 Questions](/FrequentlyAskedQuestions), as well as the [proof and
@@ -86,16 +86,6 @@ seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path
 
-## ARM_MCS
-
-File | `ARM_MCS_verified.cmake`
-Architecture | ARMv7
-Platform | i.MX 6 (Sabre Lite)
-Floating-point support | No
-Hypervisor mode | No
-Mixed-Criticality-Systems API | Yes
-**Verified properties** | in progress (design-level functional correctness completed)
-
 ## ARM\_HYP TK1
 
 File | `ARM_HYP_verified.cmake`
@@ -114,6 +104,16 @@ Floating-point support | No
 Hypervisor mode | Yes
 **Verified properties** | functional correctness, incl fast path
 
+## ARM_MCS
+
+File | `ARM_MCS_verified.cmake`
+Architecture | ARMv7
+Platform | i.MX 6 (Sabre Lite)
+Floating-point support | No
+Hypervisor mode | No
+Mixed-Criticality-Systems API | Yes
+**Verified properties** | in progress (design-level functional correctness completed)
+
 ## AARCH64
 
 | File | `AARCH64_verified.cmake`
@@ -122,14 +122,6 @@ Hypervisor mode | Yes
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | in progress
-
-## X64
-
-File | `X64_verified.cmake`
-Architecture/Platform | x86 64-bit
-Floating-point support | Yes
-Hypervisor mode | No
-**Verified properties** | functional correctness, no fast path
 
 ## RISCV64
 
@@ -149,3 +141,11 @@ Floating-point support | No
 Hypervisor mode | No
 Mixed-Criticality-Systems API | Yes
 **Verified properties** | C verification in progress (design-level functional correctness completed)
+
+## X64
+
+File | `X64_verified.cmake`
+Architecture/Platform | x86 64-bit
+Floating-point support | Yes
+Hypervisor mode | No
+**Verified properties** | functional correctness, no fast path
