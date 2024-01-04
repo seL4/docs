@@ -22,7 +22,7 @@ The tables below provide more details.
 The tables below list the platforms for which seL4 is available. For each
 platform, the tables list:
 
-- whether specific features are supported (e.g. *Virtualisation*, *IOMMU/SSMU*, etc) and to which degree (where applicable);
+- whether specific features are supported (e.g. *Virtualisation*, *IOMMU/SMMU*, etc) and to which degree (where applicable);
 - the *verification status* (see more [below](#verification-status));
 - who has contributed this platform port;
 - who is maintaining this platform port.
