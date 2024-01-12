@@ -20,11 +20,13 @@ To begin, you will need at least these two programs:
  * make (`sudo apt install make`)
  * docker (See [here](https://get.docker.com) or [here](https://docs.docker.com/engine/installation) for installation instructions)
 
-For convenience, add your account to the docker group:
+For convenience, add your account to the Docker group:
 
 ```bash
 sudo usermod -aG docker $(whoami)
 ```
+
+Note that after doing so you may have to logout of your account and log back in for the change to have affect.
 
 ## Getting a build environment
 

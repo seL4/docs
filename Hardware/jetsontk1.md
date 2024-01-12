@@ -6,7 +6,7 @@ xcompiler_arg: -DAARCH32=1
 platform: TK1
 arch: ARMv7A
 virtualization: ARM HYP
-iommu: System MMU
+iommu: SMMU
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
 Status: Unverified
