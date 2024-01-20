@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-01-19 03:15:23 +0000 -->
+<!-- Page last generated 2024-01-20 03:14:54 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -417,7 +417,7 @@
 
 <p><strong>Return value:</strong> A <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code> structure</p>
 
-<h3 id="nbrecv">NBRecv</h3>
+<h3 id="non-blocking-recv">Non-Blocking Recv</h3>
 <p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_NBRecv</code></p>
 
 <p>Receive a message from an endpoint but do not block in the case that no messages are pending.</p>
@@ -539,7 +539,7 @@
 
 <p><strong>Return value:</strong> A <code class="language-plaintext highlighter-rouge">seL4_MessageInfo_t</code> structure</p>
 
-<p><strong>Description:</strong> This is not a proper system call known by the kernel. Rather, it is a convenience wrapper which calls <a href="#nbrecv"><code class="language-plaintext highlighter-rouge">seL4_NBRecv</code></a>. It is useful for doing a non-blocking wait on a notification.</p>
+<p><strong>Description:</strong> This is not a proper system call known by the kernel. Rather, it is a convenience wrapper which calls <a href="#non-blocking-recv"><code class="language-plaintext highlighter-rouge">seL4_NBRecv</code></a>. It is useful for doing a non-blocking wait on a notification.</p>
 
 <h3 id="debugging-system-calls">Debugging System Calls</h3>
 
@@ -569,7 +569,7 @@
 
 <p><strong>Description:</strong> Use the kernel serial driver to output a single character. This is useful for debugging when a user level serial driver is not available.</p>
 
-<h3 id="dump-scheduler">Dump scheduler</h3>
+<h3 id="dump-scheduler">Dump Scheduler</h3>
 <p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_DebugDumpScheduler</code></p>
 
 <p>Output the contents of the kernel scheduler.</p>
@@ -907,7 +907,7 @@
 
 <h3 id="x86-system-calls">X86 System Calls</h3>
 
-<h3 id="vmenter">VMEnter</h3>
+<h3 id="vm-enter">VM Enter</h3>
 <p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC seL4_Word seL4_VMEnter</code></p>
 
 <p>Change current thread to execute from its bound VCPU.</p>
@@ -1732,7 +1732,7 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <h3 id="sel4_irqcontrol">seL4_IRQControl</h3>
 
-<h4 id="get">Get</h4>
+<h4 id="get-irq-handler">Get IRQ Handler</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_Get</code></p>
 
 <p>Create an IRQ handler capability</p>
@@ -2057,53 +2057,7 @@ already bound to a thread.</p>
 
 <p><strong>Description:</strong> See autoref[sec:threads]</p>
 
-<h4 id="unbind">Unbind</h4>
-<p><code class="language-plaintext highlighter-rouge">static inline int seL4_SchedContext_Unbind</code></p>
-
-<p>Unbind any objects (threads or notification objects) from a scheduling context. This
-will render the bound thread passive, see Section 6.1.5.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_SchedContext</code></td>
-      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
-      <td>Capability to the scheduling context which is being operated on.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the current thread’s TCB is bound to <code class="language-plaintext highlighter-rouge">_service</code>.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Description:</strong> See autoref[sec:threads]</p>
-
-<h4 id="unbindobject">UnbindObject</h4>
+<h4 id="unbind-object">Unbind Object</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_SchedContext_UnbindObject</code></p>
 
 <p>Unbind an object from a scheduling context. The object can be either a thread or a
@@ -2161,7 +2115,53 @@ the scheduling context will be returned to the thread that it was originally bou
 
 <p><strong>Description:</strong> See autoref[sec:passive]</p>
 
-<h4 id="yieldto">YieldTo</h4>
+<h4 id="unbind">Unbind</h4>
+<p><code class="language-plaintext highlighter-rouge">static inline int seL4_SchedContext_Unbind</code></p>
+
+<p>Unbind any objects (threads or notification objects) from a scheduling context. This
+will render the bound thread passive, see Section 6.1.5.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_SchedContext</code></td>
+      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
+      <td>Capability to the scheduling context which is being operated on.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the current thread’s TCB is bound to <code class="language-plaintext highlighter-rouge">_service</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> See autoref[sec:threads]</p>
+
+<h4 id="yield-to">Yield To</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_SchedContext_YieldTo_t seL4_SchedContext_YieldTo</code></p>
 
 <p>If a thread is currently runnable and running on this scheduling context and the scheduling context has available budget, place it at the head of the scheduling queue.
@@ -2210,7 +2210,7 @@ The caller must have a maximum control priority greater than or equal to the thr
 <p><strong>Description:</strong> Capability to the scheduling context which is being operated on.</p>
 <h3 id="sel4_schedcontrol-mcs">seL4_SchedControl (MCS)</h3>
 
-<h4 id="configureflags">ConfigureFlags</h4>
+<h4 id="configure-flags">Configure Flags</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_SchedControl_ConfigureFlags</code></p>
 
 <p>Set the parameters of a scheduling context by invoking the scheduling control capability. If the scheduling context is bound to a currently running thread, the parameters will take effect immediately: that is the current budget will be increased or reduced by the difference between the new and previous budget and the replenishment time will be updated according to any difference in the period. This can result in active threads being post-poned or released depending on the nature of the parameter change and the state of the thread. Additionally, if the scheduling context was previously empty (no budget) but bound to a runnable thread, this can result in a thread running for the first time since it now has access to CPU time. This call will return seL4 Invalid Argument if the parameters are too small (smaller than the kernel WCET for this platform) or too large (will overflow the timer).</p>
@@ -3800,7 +3800,7 @@ and fault handler.</p>
 <h3 id="general-x86-object-methods">General x86 Object Methods</h3>
 <h3 id="sel4_irqcontrol-1">seL4_IRQControl</h3>
 
-<h4 id="get-io-apic">Get I/O APIC</h4>
+<h4 id="get-io-apic-handler">Get I/O APIC Handler</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_GetIOAPIC</code></p>
 
 <p>Create an IRQ handler capability for an interrupt from an IOAPIC.</p>
@@ -3899,7 +3899,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<h4 id="get-msi">Get MSI</h4>
+<h4 id="get-msi-handler">Get MSI Handler</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_GetMSI</code></p>
 
 <p>Create an IRQ handler capability for an interrupt from an MSI.</p>
@@ -5641,7 +5641,7 @@ and fault handler.</p>
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="language-plaintext highlighter-rouge">PageTable</code> from its containing <code class="language-plaintext highlighter-rouge">PageDirectory</code>.</p>
 <h3 id="sel4_x86_vcpu">seL4_X86_VCPU</h3>
 
-<h4 id="disable-io-port">Disable IO Port</h4>
+<h4 id="disable-io-port">Disable I/O Port</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_VCPU_DisableIOPort</code></p>
 
 <p>Disable I/O port range in privileged execution</p>
@@ -5696,7 +5696,7 @@ and fault handler.</p>
 
 <p><strong>Description:</strong> Disable a range of I/O ports for direct access by the execution mode in the <code class="language-plaintext highlighter-rouge">VCPU</code>.</p>
 
-<h4 id="enable-io-port">Enable IO Port</h4>
+<h4 id="enable-io-port">Enable I/O Port</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_VCPU_EnableIOPort</code></p>
 
 <p>Enable I/O port range in guest execution</p>
@@ -6092,7 +6092,7 @@ and fault handler.</p>
 
 <h3 id="sel4_x86_vcpu-1">seL4_X86_VCPU</h3>
 
-<h4 id="readmsr">ReadMSR</h4>
+<h4 id="read-msr">Read MSR</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_X86_VCPU_ReadMSR_t seL4_X86_VCPU_ReadMSR</code></p>
 
 <p>Read 64-bit specific MSR field from the hardware</p>
@@ -6123,7 +6123,7 @@ and fault handler.</p>
 
 <p><strong>Description:</strong> Thin wrapper around the <code class="language-plaintext highlighter-rouge">rdmsr</code> instruction that is performed on specific, needed registers. Certain registers might simply be cached and restored later.</p>
 
-<h4 id="writemsr">WriteMSR</h4>
+<h4 id="write-msr">Write MSR</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_X86_VCPU_WriteMSR_t seL4_X86_VCPU_WriteMSR</code></p>
 
 <p>Write 64-bit specific MSR field to the hardware</p>
@@ -6248,7 +6248,7 @@ and fault handler.</p>
 <p><strong>Description:</strong> Together with a capability to <code class="language-plaintext highlighter-rouge">Untyped Memory</code>, which is passed as an argument, create an <code class="language-plaintext highlighter-rouge">ASID Pool</code>. The untyped capability must represent a 4K memory object. This will create an ASID pool with enough space for 1024 VSpaces.</p>
 <h3 id="sel4_arm_asidpool">seL4_ARM_ASIDPool</h3>
 
-<h4 id="asid-pool-assign">Asid Pool Assign</h4>
+<h4 id="asid-pool-assign">ASID Pool Assign</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_ASIDPool_Assign</code></p>
 
 <p>Assign an ASID Pool.</p>
@@ -6307,7 +6307,7 @@ and fault handler.</p>
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.</p>
 <h3 id="sel4_arm_cb">seL4_ARM_CB</h3>
 
-<h4 id="assignvspace">AssignVspace</h4>
+<h4 id="assign-vspace">Assign VSpace</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CB_AssignVspace</code></p>
 
 <p>Assigning a vspace to a context bank.</p>
@@ -6359,7 +6359,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<h4 id="cbclearfault">CBClearFault</h4>
+<h4 id="cb-clear-fault">CB Clear Fault</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CB_CBClearFault</code></p>
 
 <p>Clear the fault status of the context bank.</p>
@@ -6402,7 +6402,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<h4 id="cbgetfault">CBGetFault</h4>
+<h4 id="cb-get-fault">CB Get Fault</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_ARM_CB_CBGetFault_t seL4_ARM_CB_CBGetFault</code></p>
 
 <p>Get the fault status of the context bank.</p>
@@ -6445,7 +6445,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<h4 id="tlbinvalidate">TLBInvalidate</h4>
+<h4 id="tlb-invalidate">TLB Invalidate</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CB_TLBInvalidate</code></p>
 
 <p>Invalidating TLB entries used by the current ASID in this context bank.</p>
@@ -6488,7 +6488,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<h4 id="unassignvspace">UnassignVspace</h4>
+<h4 id="unassign-vspace">Unassign VSpace</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CB_UnassignVspace</code></p>
 
 <p>Unassigning a vspace to a context bank.</p>
@@ -6533,7 +6533,7 @@ and fault handler.</p>
 
 <h3 id="sel4_arm_cbcontrol">seL4_ARM_CBControl</h3>
 
-<h4 id="getcb">GetCB</h4>
+<h4 id="get-cb">Get CB</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CBControl_GetCB</code></p>
 
 <p>Create a CB capability.</p>
@@ -6612,7 +6612,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<h4 id="tlbinvalidateall">TLBInvalidateAll</h4>
+<h4 id="tlb-invalidate-all">TLB Invalidate All</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CBControl_TLBInvalidateAll</code></p>
 
 <p>Invalidate all TLB entries.</p>
@@ -7372,7 +7372,7 @@ serviced.</p>
 <p><strong>Description:</strong> Removes the reference to the invoked <code class="language-plaintext highlighter-rouge">Page Table</code> from its containing <code class="language-plaintext highlighter-rouge">Page Directory</code>.</p>
 <h3 id="sel4_arm_sid">seL4_ARM_SID</h3>
 
-<h4 id="bindcb">BindCB</h4>
+<h4 id="bind-cb">Bind CB</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_SID_BindCB</code></p>
 
 <p>Binding a context bank to a stream ID.</p>
@@ -7424,7 +7424,7 @@ serviced.</p>
   </tbody>
 </table>
 
-<h4 id="unbindcb">UnbindCB</h4>
+<h4 id="unbind-cb">Unbind CB</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_SID_UnbindCB</code></p>
 
 <p>Unbinding a context bank from a stream ID.</p>
@@ -7469,7 +7469,7 @@ serviced.</p>
 
 <h3 id="sel4_arm_sidcontrol">seL4_ARM_SIDControl</h3>
 
-<h4 id="clearfault">ClearFault</h4>
+<h4 id="clear-fault">Clear Fault</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_SIDControl_ClearFault</code></p>
 
 <p>Clear the fault status of the SMMU.</p>
@@ -7512,7 +7512,7 @@ serviced.</p>
   </tbody>
 </table>
 
-<h4 id="getfault">GetFault</h4>
+<h4 id="get-fault">Get Fault</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_ARM_SIDControl_GetFault_t seL4_ARM_SIDControl_GetFault</code></p>
 
 <p>Get the fault status of the SMMU.</p>
@@ -7555,7 +7555,7 @@ serviced.</p>
   </tbody>
 </table>
 
-<h4 id="getsid">GetSID</h4>
+<h4 id="get-sid">Get SID</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_SIDControl_GetSID</code></p>
 
 <p>Create a SID capability.</p>
@@ -7927,91 +7927,7 @@ serviced.</p>
 <p><strong>Description:</strong> TODO</p>
 <h3 id="sel4_irqcontrol-2">seL4_IRQControl</h3>
 
-<h4 id="gettrigger">GetTrigger</h4>
-<p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_GetTrigger</code></p>
-
-<p>Create an IRQ handler capability and specify the trigger method (edge or level).</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_IRQControl</code></td>
-      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
-      <td>An IRQControl capability. This gives you the authority to make this call.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
-      <td><code class="language-plaintext highlighter-rouge">irq</code></td>
-      <td>The IRQ that you want this capability to handle.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
-      <td><code class="language-plaintext highlighter-rouge">trigger</code></td>
-      <td>Indicates whether this IRQ is edge (1) or level (0) triggered.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_CNode</code></td>
-      <td><code class="language-plaintext highlighter-rouge">root</code></td>
-      <td>CPtr to the CNode that forms the root of the destination CSpace. Must be at a depth equivalent to the wordsize.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
-      <td><code class="language-plaintext highlighter-rouge">index</code></td>
-      <td>CPtr to the destination slot. Resolved from the root of the destination CSpace.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
-      <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Error Code</th>
-      <th>Possible Cause</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>The destination slot contains a capability.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_FailedLookup</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">index</code>  or <code class="language-plaintext highlighter-rouge">depth</code>  is invalid . Or, <code class="language-plaintext highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the platform does not support setting the IRQ trigger.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_RangeError</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">irq</code>  is invalid. Or, <code class="language-plaintext highlighter-rouge">depth</code>  is invalid .</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_RevokeFirst</code></td>
-      <td>An IRQ handler capability for <code class="language-plaintext highlighter-rouge">irq</code>  has already been created.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="gettriggercore">GetTriggerCore</h4>
+<h4 id="get-irq-handler-smp">Get IRQ Handler (SMP)</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_GetTriggerCore</code></p>
 
 <p>Create an IRQ handler capability and specify the trigger method (edge or level) and the target core.</p>
@@ -8096,6 +8012,90 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_RangeError</code></td>
       <td>The <code class="language-plaintext highlighter-rouge">depth</code>  is invalid .</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_RevokeFirst</code></td>
+      <td>An IRQ handler capability for <code class="language-plaintext highlighter-rouge">irq</code>  has already been created.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="get-irq-handler-with-trigger-type">Get IRQ Handler with Trigger Type</h4>
+<p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_GetTrigger</code></p>
+
+<p>Create an IRQ handler capability and specify the trigger method (edge or level).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_IRQControl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
+      <td>An IRQControl capability. This gives you the authority to make this call.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">irq</code></td>
+      <td>The IRQ that you want this capability to handle.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">trigger</code></td>
+      <td>Indicates whether this IRQ is edge (1) or level (0) triggered.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_CNode</code></td>
+      <td><code class="language-plaintext highlighter-rouge">root</code></td>
+      <td>CPtr to the CNode that forms the root of the destination CSpace. Must be at a depth equivalent to the wordsize.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">index</code></td>
+      <td>CPtr to the destination slot. Resolved from the root of the destination CSpace.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="language-plaintext highlighter-rouge">depth</code></td>
+      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code></td>
+      <td>The destination slot contains a capability.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_FailedLookup</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">index</code>  or <code class="language-plaintext highlighter-rouge">depth</code>  is invalid . Or, <code class="language-plaintext highlighter-rouge">root</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, the platform does not support setting the IRQ trigger.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_RangeError</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">irq</code>  is invalid. Or, <code class="language-plaintext highlighter-rouge">depth</code>  is invalid .</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_RevokeFirst</code></td>
@@ -8672,7 +8672,7 @@ serviced.</p>
 
 <h3 id="sel4_irqcontrol-3">seL4_IRQControl</h3>
 
-<h4 id="gettrigger-1">GetTrigger</h4>
+<h4 id="get-irq-handler-with-trigger-type-1">Get IRQ Handler with Trigger Type</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_IRQControl_GetTrigger</code></p>
 
 <p>Create an IRQ handler capability and specify the trigger method (edge or level).</p>
@@ -8758,7 +8758,7 @@ serviced.</p>
 
 <h3 id="sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl</h3>
 
-<h4 id="makepool">MakePool</h4>
+<h4 id="make-pool-2">Make Pool</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_RISCV_ASIDControl_MakePool</code></p>
 
 <p>Create an ASID Pool.</p>
@@ -8895,7 +8895,7 @@ serviced.</p>
 <p><strong>Description:</strong> Assigns an ASID to the VSpace passed in as an argument.</p>
 <h3 id="sel4_riscv_page">seL4_RISCV_Page</h3>
 
-<h4 id="getaddress">GetAddress</h4>
+<h4 id="get-address-2">Get Address</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_RISCV_Page_GetAddress_t seL4_RISCV_Page_GetAddress</code></p>
 
 <p>Get the physical address of a page.</p>
@@ -9199,14 +9199,14 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#reply">Reply</a></li>
 <li class="toc-entry toc-h3"><a href="#non-blocking-send">Non-Blocking Send</a></li>
 <li class="toc-entry toc-h3"><a href="#reply-recv">Reply Recv</a></li>
-<li class="toc-entry toc-h3"><a href="#nbrecv">NBRecv</a></li>
+<li class="toc-entry toc-h3"><a href="#non-blocking-recv">Non-Blocking Recv</a></li>
 <li class="toc-entry toc-h3"><a href="#yield">Yield</a></li>
 <li class="toc-entry toc-h3"><a href="#signal">Signal</a></li>
 <li class="toc-entry toc-h3"><a href="#wait">Wait</a></li>
 <li class="toc-entry toc-h3"><a href="#poll">Poll</a></li>
 <li class="toc-entry toc-h3"><a href="#debugging-system-calls">Debugging System Calls</a></li>
 <li class="toc-entry toc-h3"><a href="#put-char">Put Char</a></li>
-<li class="toc-entry toc-h3"><a href="#dump-scheduler">Dump scheduler</a></li>
+<li class="toc-entry toc-h3"><a href="#dump-scheduler">Dump Scheduler</a></li>
 <li class="toc-entry toc-h3"><a href="#halt">Halt</a></li>
 <li class="toc-entry toc-h3"><a href="#snapshot">Snapshot</a></li>
 <li class="toc-entry toc-h3"><a href="#cap-identify">Cap Identify</a></li>
@@ -9225,7 +9225,7 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#dump-all-threads-utilisation">Dump All Threads Utilisation</a></li>
 <li class="toc-entry toc-h3"><a href="#reset-all-threads-utilisation">Reset All Threads Utilisation</a></li>
 <li class="toc-entry toc-h3"><a href="#x86-system-calls">X86 System Calls</a></li>
-<li class="toc-entry toc-h3"><a href="#vmenter">VMEnter</a></li>
+<li class="toc-entry toc-h3"><a href="#vm-enter">VM Enter</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#architecture-independent-object-methods">Architecture-Independent Object Methods</a>
@@ -9250,7 +9250,7 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_irqcontrol">seL4_IRQControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#get">Get</a></li>
+<li class="toc-entry toc-h4"><a href="#get-irq-handler">Get IRQ Handler</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_irqhandler">seL4_IRQHandler</a>
@@ -9264,14 +9264,14 @@ serviced.</p>
 <ul>
 <li class="toc-entry toc-h4"><a href="#bind">Bind</a></li>
 <li class="toc-entry toc-h4"><a href="#consumed">Consumed</a></li>
+<li class="toc-entry toc-h4"><a href="#unbind-object">Unbind Object</a></li>
 <li class="toc-entry toc-h4"><a href="#unbind">Unbind</a></li>
-<li class="toc-entry toc-h4"><a href="#unbindobject">UnbindObject</a></li>
-<li class="toc-entry toc-h4"><a href="#yieldto">YieldTo</a></li>
+<li class="toc-entry toc-h4"><a href="#yield-to">Yield To</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_schedcontrol-mcs">seL4_SchedControl (MCS)</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#configureflags">ConfigureFlags</a></li>
+<li class="toc-entry toc-h4"><a href="#configure-flags">Configure Flags</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_tcb">seL4_TCB</a>
@@ -9317,8 +9317,8 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#general-x86-object-methods">General x86 Object Methods</a></li>
 <li class="toc-entry toc-h3"><a href="#sel4_irqcontrol-1">seL4_IRQControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#get-io-apic">Get I/O APIC</a></li>
-<li class="toc-entry toc-h4"><a href="#get-msi">Get MSI</a></li>
+<li class="toc-entry toc-h4"><a href="#get-io-apic-handler">Get I/O APIC Handler</a></li>
+<li class="toc-entry toc-h4"><a href="#get-msi-handler">Get MSI Handler</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_tcb-1">seL4_TCB</a>
@@ -9399,8 +9399,8 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_x86_vcpu">seL4_X86_VCPU</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#disable-io-port">Disable IO Port</a></li>
-<li class="toc-entry toc-h4"><a href="#enable-io-port">Enable IO Port</a></li>
+<li class="toc-entry toc-h4"><a href="#disable-io-port">Disable I/O Port</a></li>
+<li class="toc-entry toc-h4"><a href="#enable-io-port">Enable I/O Port</a></li>
 <li class="toc-entry toc-h4"><a href="#read-vmcs">Read VMCS</a></li>
 <li class="toc-entry toc-h4"><a href="#set-tcb">Set TCB</a></li>
 <li class="toc-entry toc-h4"><a href="#write-registers-1">Write Registers</a></li>
@@ -9417,8 +9417,8 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_x86_vcpu-1">seL4_X86_VCPU</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#readmsr">ReadMSR</a></li>
-<li class="toc-entry toc-h4"><a href="#writemsr">WriteMSR</a></li>
+<li class="toc-entry toc-h4"><a href="#read-msr">Read MSR</a></li>
+<li class="toc-entry toc-h4"><a href="#write-msr">Write MSR</a></li>
 </ul>
 </li>
 </ul>
@@ -9433,22 +9433,22 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_asidpool">seL4_ARM_ASIDPool</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#asid-pool-assign">Asid Pool Assign</a></li>
+<li class="toc-entry toc-h4"><a href="#asid-pool-assign">ASID Pool Assign</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_cb">seL4_ARM_CB</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#assignvspace">AssignVspace</a></li>
-<li class="toc-entry toc-h4"><a href="#cbclearfault">CBClearFault</a></li>
-<li class="toc-entry toc-h4"><a href="#cbgetfault">CBGetFault</a></li>
-<li class="toc-entry toc-h4"><a href="#tlbinvalidate">TLBInvalidate</a></li>
-<li class="toc-entry toc-h4"><a href="#unassignvspace">UnassignVspace</a></li>
+<li class="toc-entry toc-h4"><a href="#assign-vspace">Assign VSpace</a></li>
+<li class="toc-entry toc-h4"><a href="#cb-clear-fault">CB Clear Fault</a></li>
+<li class="toc-entry toc-h4"><a href="#cb-get-fault">CB Get Fault</a></li>
+<li class="toc-entry toc-h4"><a href="#tlb-invalidate">TLB Invalidate</a></li>
+<li class="toc-entry toc-h4"><a href="#unassign-vspace">Unassign VSpace</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_cbcontrol">seL4_ARM_CBControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#getcb">GetCB</a></li>
-<li class="toc-entry toc-h4"><a href="#tlbinvalidateall">TLBInvalidateAll</a></li>
+<li class="toc-entry toc-h4"><a href="#get-cb">Get CB</a></li>
+<li class="toc-entry toc-h4"><a href="#tlb-invalidate-all">TLB Invalidate All</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_iopagetable">seL4_ARM_IOPageTable</a>
@@ -9477,15 +9477,15 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_sid">seL4_ARM_SID</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#bindcb">BindCB</a></li>
-<li class="toc-entry toc-h4"><a href="#unbindcb">UnbindCB</a></li>
+<li class="toc-entry toc-h4"><a href="#bind-cb">Bind CB</a></li>
+<li class="toc-entry toc-h4"><a href="#unbind-cb">Unbind CB</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_sidcontrol">seL4_ARM_SIDControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#clearfault">ClearFault</a></li>
-<li class="toc-entry toc-h4"><a href="#getfault">GetFault</a></li>
-<li class="toc-entry toc-h4"><a href="#getsid">GetSID</a></li>
+<li class="toc-entry toc-h4"><a href="#clear-fault">Clear Fault</a></li>
+<li class="toc-entry toc-h4"><a href="#get-fault">Get Fault</a></li>
+<li class="toc-entry toc-h4"><a href="#get-sid">Get SID</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_arm_vcpu">seL4_ARM_VCPU</a>
@@ -9499,8 +9499,8 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_irqcontrol-2">seL4_IRQControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#gettrigger">GetTrigger</a></li>
-<li class="toc-entry toc-h4"><a href="#gettriggercore">GetTriggerCore</a></li>
+<li class="toc-entry toc-h4"><a href="#get-irq-handler-smp">Get IRQ Handler (SMP)</a></li>
+<li class="toc-entry toc-h4"><a href="#get-irq-handler-with-trigger-type">Get IRQ Handler with Trigger Type</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#aarch32-specific-object-methods">Aarch32-Specific Object Methods</a></li>
@@ -9532,12 +9532,12 @@ serviced.</p>
 <ul>
 <li class="toc-entry toc-h3"><a href="#sel4_irqcontrol-3">seL4_IRQControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#gettrigger-1">GetTrigger</a></li>
+<li class="toc-entry toc-h4"><a href="#get-irq-handler-with-trigger-type-1">Get IRQ Handler with Trigger Type</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_riscv_asidcontrol">seL4_RISCV_ASIDControl</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#makepool">MakePool</a></li>
+<li class="toc-entry toc-h4"><a href="#make-pool-2">Make Pool</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_riscv_asidpool">seL4_RISCV_ASIDPool</a>
@@ -9547,7 +9547,7 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_riscv_page">seL4_RISCV_Page</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#getaddress">GetAddress</a></li>
+<li class="toc-entry toc-h4"><a href="#get-address-2">Get Address</a></li>
 <li class="toc-entry toc-h4"><a href="#map-11">Map</a></li>
 <li class="toc-entry toc-h4"><a href="#unmap-11">Unmap</a></li>
 </ul>
