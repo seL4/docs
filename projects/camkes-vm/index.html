@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-01-23 03:15:51 +0000 -->
+<!-- Page last generated 2024-01-24 03:14:59 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -333,6 +333,7 @@ You can view the code for the VMMs in the <code class="language-plaintext highli
   <li>TX1</li>
   <li>TX2</li>
   <li>QEMU ARM virt machine</li>
+  <li>ZCU102</li>
   <li>x86</li>
   <li>x86_64 (coming)</li>
 </ul>
@@ -346,7 +347,8 @@ mkdir </span>build
 ../init-build.sh <span class="nt">-DCAMKES_VM_APP</span><span class="o">=</span>vm_minimal <span class="nt">-DPLATFORM</span><span class="o">=</span>tk1
 ninja
 </code></pre></div></div>
-<p><em>Note: To buid for another platform you can substitute the value of the <code class="language-plaintext highlighter-rouge">-DPLATFORM</code> variable e.g. (exynos5422, tx1, tx2, qemu-arm-virt)</em>
+<p><em>Note: To buid for another platform you can substitute the value of the <code class="language-plaintext highlighter-rouge">-DPLATFORM</code> variable
+e.g. (exynos5422, tx1, tx2, qemu-arm-virt, zcu102)</em>
 <em>Note: If building for x86 you don’t need to specify the <code class="language-plaintext highlighter-rouge">-DPLATFORM</code> variable</em></p>
 
 <h3 id="for-arm">For Arm</h3>
@@ -476,6 +478,17 @@ See the README.md in its folder for more information.</li>
       <td style="text-align: center">Cross VM connector support is untested</td>
     </tr>
     <tr>
+      <td style="text-align: center">ZCU102</td>
+      <td style="text-align: center">64-bit</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Supported</td>
+      <td style="text-align: center">Unsupported</td>
+      <td style="text-align: center">Cross VM connector support is untested</td>
+    </tr>
+    <tr>
       <td style="text-align: center">QEMU Virt</td>
       <td style="text-align: center">64-bit</td>
       <td style="text-align: center">Supported</td>
@@ -491,7 +504,7 @@ See the README.md in its folder for more information.</li>
 
 <h2 id="arm-platform-configuration-notes">Arm Platform Configuration Notes</h2>
 
-<h3 id="exynos5422-tx1-tx2-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, QEMU ARM Virt configuration</h3>
+<h3 id="exynos5422-tx1-tx2-zcu102-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, ZCU102, QEMU ARM Virt configuration</h3>
 <p>We provide a pre-built Linux image and Buildroot image for our guest VM’s. See the images in the <code class="language-plaintext highlighter-rouge">camkes-vm-images</code> repository @ https://github.com/sel4/camkes-vm-images
 When compiling an application for these platforms, the images are sourced from the platforms subdirectory in the <code class="language-plaintext highlighter-rouge">camkes-vm-images</code> repo.
 Feel free also to compile your own Linux and Rootfs images, see the README’s in each platform subdirectory (within <code class="language-plaintext highlighter-rouge">camkes-vm-images</code>) for information about our
@@ -941,7 +954,7 @@ CONFIG_VIRTIO_NET=y
 <li class="toc-entry toc-h2"><a href="#arm-features">Arm Features</a></li>
 <li class="toc-entry toc-h2"><a href="#arm-platform-configuration-notes">Arm Platform Configuration Notes</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#exynos5422-tx1-tx2-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, QEMU ARM Virt configuration</a></li>
+<li class="toc-entry toc-h3"><a href="#exynos5422-tx1-tx2-zcu102-qemu-arm-virt-configuration">Exynos5422, TX1, TX2, ZCU102, QEMU ARM Virt configuration</a></li>
 <li class="toc-entry toc-h3"><a href="#tk1-configuration">TK1 configuration</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#wireless-configuration">Wireless Configuration</a></li>
