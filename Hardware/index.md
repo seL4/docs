@@ -14,7 +14,9 @@ seL4 is formally verified for specific configurations for a subset of these
 platforms. The depth of the proofs and which properties are verified depend on
 the platform.
 
-The tables below provide more details.
+The tables below provide more details on [maintained](#maintained-platforms)
+platforms. You can also find below a table of
+[unmaintained](#unmaintained-platforms) platforms if needed.
 
 
 ### Platforms' attributes
@@ -48,7 +50,9 @@ See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
 You can also [run seL4 on VMware](VMware).
 
 
-## ARM
+## Maintained platforms
+
+### ARM
 
 seL4 has support for select ARMv7 and ARMv8 Platforms.
 
@@ -58,13 +62,13 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 | - | - | - | - | - | - | - | - | - |
 {%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}
-{%- if page.arm_hardware -%}
+{%- if page.arm_hardware and page.Maintained != "No"" -%}
 | [{{ page.platform }}]({{page.url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
 {% endif %}
 {%- endfor %}
 
 
-## RISC-V
+### RISC-V
 
 We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
@@ -76,7 +80,7 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 {% endif %}
 {%- endfor %}
 
-## x86
+### x86
 
 We support PC99-style Intel Architecture Platforms.
 
@@ -86,3 +90,21 @@ We support PC99-style Intel Architecture Platforms.
 | [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
 
 [X64]: /projects/sel4/verified-configurations.html#x64
+
+
+---
+
+## *Unmaintained platforms*
+
+
+### *ARM*
+
+
+| *Platform* | *System-on-chip* | *Core* | *Arch* | *Virtualisation* | *SMMU* | *Verification Status* | *Contributed by* |
+| - | - | - | - | - | - | - | - | - |
+{%- assign sorted = site.pages | sort: 'platform'%}
+{% for page in sorted %}
+{%- if page.arm_hardware and page.Maintained == "No"" -%}
+| *[{{ page.platform }}]({{page.url}}) (**unmaintained**)* | *{{ page.soc}}* | *{{ page.cpu }}* | *{{ page.arch }}* | *{{ page.virtualization }}* | *{{ page.iommu}}* | *{{ page.Status }}* | *{{ page.Contrib }}* |
+{% endif %}
+{%- endfor %}
