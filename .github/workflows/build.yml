@@ -20,11 +20,11 @@ jobs:
     name: Site
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
         submodules: true
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: 3.9
     - run: pip3 install -U camkes-deps
@@ -32,7 +32,7 @@ jobs:
     - run: sudo gem install bundler -v 2.4.22
     - run: make build JEKYLL_ENV=production
     - run: tar -cvf site.tar _site/
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: site
         path: site.tar
@@ -45,13 +45,13 @@ jobs:
     name: 'Deploy'
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         ref: gh-pages
         token: ${{ secrets.GH_TOKEN }}
     # for removing files, we need to start fresh; this does not remove dot-files
     - run: rm -rf *
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: site
     - run: tar -xvf site.tar
