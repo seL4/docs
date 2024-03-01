@@ -80,13 +80,13 @@ This documentation site is for cooperatively developing and sharing documentatio
     <h1><a href="/TutorialsReworked/">Tutorials</a></h1>
   	<p>Tutorials and other material to learn about seL4.</p>
     <ul>
-      <li><a href="/TutorialsReworked/GettingStarted">Getting started</a></li>
+      <li>Getting started</li>
       <ul>
         <li><a href="/TutorialsReworked/GettingStarted/about-seL4">About seL4</a></li>
         <li><a href="/TutorialsReworked/GettingStarted/microkit">Microkit</a></li>
         <li><a href="/TutorialsReworked/GettingStarted/basic-principles">Basic Principles</a></li>
       </ul>
-      <li><a href="/TutorialsReworked/seL4Kernel">The seL4 kernel</a></li>
+      <li>The seL4 kernel</li>
       <ul>
         <li><a href="TutorialsReworked/seL4Kernel/setting-up">Setting up your machine</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/hello-world">Hello world</a></li>
@@ -99,14 +99,14 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="TutorialsReworked/seL4Kernel/faults">Faults</a></li>
       </ul>
       <li><a href="/TutorialsReworked/mcs">MCS</a></li>
-      <li><a href="TutorialsReworked/DynamicLibraries/">Dynamic libraries</a></li>
+      <li>Dynamic libraries</li>
       <ul>
         <li><a href="TutorialsReworked/DynamicLibraries/initialisation">Initialisation & threading</a></li>
         <li><a href="TutorialsReworked/DynamicLibraries/ipc">IPC</a></li>
         <li><a href="TutorialsReworked/DynamicLibraries/processes">Processes & Elf loading</a></li>
         <li><a href="TutorialsReworked/DynamicLibraries/timer">Timer</a></li>
       </ul>
-      <li><a href="TutorialsReworked/CAmkES/">CAmkES</a></li>
+      <li>CAmkES</li>
       <ul>
         <li><a href="TutorialsReworked/CAmkES/hello-camkes">Hello CAmkES</a></li>
         <li><a href="TutorialsReworked/CAmkES/camkes1">CAmkES 1</a></li>
