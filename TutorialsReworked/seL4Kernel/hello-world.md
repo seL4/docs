@@ -203,6 +203,5 @@ On success, you should see the following:
 Hello, World!
 Second hello
 ```
-<p>
-    Next tutorial: <a href="capabilities">Capabilities</a>
-</p>
+
+Next tutorial: <a href="capabilities">Capabilities</a>

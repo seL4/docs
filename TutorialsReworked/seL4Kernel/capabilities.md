@@ -372,7 +372,4 @@ to become more familiar with CSpaces.
 * Experiment with other [CNode invocations](https://docs.sel4.systems/projects/sel4/api-doc.html#sel4_cnode).
 
 
-
-<p>
-    Next tutorial: <a href="untyped">Untyped</a>
-<p>
+Next tutorial: <a href="untyped">Untyped</a>

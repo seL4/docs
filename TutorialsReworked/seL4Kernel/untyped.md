@@ -355,6 +355,4 @@ to become more familiar with untyped objects and memory allocation in seL4.
 * Allocate objects at specific physical addresses.
 * Create a simple object allocator for allocating seL4 objects.
 
-<p>
-    Next tutorial: <a href="mapping">Mapping</a>
-<p>
+Next tutorial: <a href="mapping">Mapping</a>
