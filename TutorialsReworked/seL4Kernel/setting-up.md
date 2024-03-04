@@ -2,11 +2,11 @@
 toc: true
 layout: api
 SPDX-License-Identifier: CC-BY-SA-4.0
-SPDX-FileCopyrightText: 2023 seL4 Project a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Setting up your machine
-Overview
+**Overview**
 - Set up your machine - install dependencies required to run seL4
 - Run seL4test on a simulator
 - Gain awareness of terminology used for seL4
@@ -161,7 +161,7 @@ Hello, welcome to the seL4/CAmkES/L4v docker build environment
 ```
 
 ## Mapping a container
-To run the container from other directories (e.g. starting a container for the **[Hello World](hello-world) tutorial, you can setup a bash alias such as this:
+To run the container from other directories (e.g. starting a container for the [Hello World](hello-world) tutorial, which we'll do next), you can setup a bash alias such as this:
 
 ```bash
 echo $'alias container=\'make -C /<path>/<to>/seL4-CAmkES-L4v-dockerfiles user HOST_DIR=$(pwd)\'' >> ~/.bashrc
@@ -180,7 +180,7 @@ echo $'alias container=\'make -C //home/jblogs/seL4-CAmkES-L4v-dockerfiles user 
 
 This then allows you to run `container` from any directory.
 
-*Reminder:* Restart Ubuntu or run a new terminal for the changes in ``.bashrc` to take effect.
+*Reminder:* Restart Ubuntu or run a new terminal for the changes in `.bashrc` to take effect.
 
 
 ## An example workflow
@@ -232,5 +232,32 @@ That's it! seL4 is running.
 
 To quit QEMU: `Ctrl+a, x`
 
-## Next steps
-- Try the [Hello world](hello-world) tutorial
+# Tutorials
+## Python Dependencies
+Additional python dependencies are required to build [tutorials](ReworkedTutorials). To install you can run:
+```
+pip install --user aenum
+pip install --user pyelftools
+```
+*Hint:* This step only needs to be done once, i.e. before doing your first tutorial
+
+## Get the code
+All tutorials are in the <a href="https://github.com/seL4/sel4-tutorials-manifest">sel4-tutorials-manifest</a>. Get the code with:
+```
+mkdir sel4-tutorials-manifest
+cd sel4-tutorials-manifest
+repo init -u https://github.com/seL4/sel4-tutorials-manifest
+repo sync
+```
+
+`repo sync` may take a few moments to run
+
+*Hint:* The **Get the code** step only needs to be done once, i.e. before doing your first tutorial.
+
+
+<p>
+    Previous: <a href="overview">Overview</a>
+<p>
+<p>
+    Next: <a href="hello-world">Hello world</a>
+</p>

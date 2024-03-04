@@ -83,13 +83,14 @@ This documentation site is for cooperatively developing and sharing documentatio
       <li>Getting started</li>
       <ul>
         <li><a href="/TutorialsReworked/GettingStarted/about-seL4">About seL4</a></li>
-        <li><a href="/TutorialsReworked/GettingStarted/microkit">Microkit</a></li>
-        <li><a href="/TutorialsReworked/GettingStarted/basic-principles">Basic Principles</a></li>
+        <li><a href="/TutorialsReworked/GettingStarted/microkit">Microkit tutorial</a></li>
       </ul>
       <li>The seL4 kernel</li>
       <ul>
+        <li><a href="/TutorialsReworked/seL4Kernel/overview">Overview</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/setting-up">Setting up your machine</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/hello-world">Hello world</a></li>
+        <li><a href="TutorialsReworked/seL4Kernel/capabilities">Capabilities</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/untyped">Untyped</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/mapping">Mapping</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/threads">Threads</a></li>

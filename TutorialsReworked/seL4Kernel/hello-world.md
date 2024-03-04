@@ -2,42 +2,15 @@
 toc: true
 layout: api
 SPDX-License-Identifier: CC-BY-SA-4.0
-SPDX-FileCopyrightText: 2023 seL4 Project a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Hello, world!
-Outcomes
-
 In this tutorial you will
 - Run Hello, World! to ensure your setup is working correctly
 - Become familiar with the jargon *root task*
 - Build and simulate a seL4 project
 - Have a basic understanding of the role of the `CMakeLists.txt` file in applications
-
-## Prerequisites
-
-- [Set up your machine](setting-up-your-machine).
-
-## Python Dependencies
-Additional python dependencies are required to build [tutorials](ReworkedTutorials). To install you can run:
-```
-pip install --user aenum
-pip install --user pyelftools
-```
-*Hint:* This step only needs to be done once, i.e. before doing your first tutorial
-
-## Get the code
-```
-mkdir sel4-tutorials-manifest
-cd sel4-tutorials-manifest
-repo init -u https://github.com/seL4/sel4-tutorials-manifest
-repo sync
-```
-
-`repo sync` may take a few moments to run
-
-*Hint:* The **Get the code** step only needs to be done once, i.e. before doing your first tutorial
-
 
 ## Building your first program
 
@@ -54,19 +27,35 @@ all you need to do is build and run the tutorial.
 ```
 cd sel4-tutorials-manifest
 ./init --tut hello-world
-
 ```
 This step creates two new directories in `sel4-tutorials-manifest`, namely `hello-world` and `hello-world_build`
 
-We will now use two terminals, as described in [Setting up your machine](setting-up-your-machine#mapping-a-container).
+<details markdown='1'>
+<summary style="display:list-item"><em>Hint:</em> tutorial solutions</summary>
+<br>
+All tutorials come with complete solutions. To get solutions run:
+```
+./init --solution --tut hello-world
+```
+This will generate another `hello-world` directory and `hello-world_build` directory, with unique names, e.g. `hello-world44h1po5q` and `hello-world44h1po5q_build`.
+</details>
+
+We will now use two terminals, as described in [Setting up your machine](setting-up#mapping-a-container).
 
  - Terminal A is just a normal terminal, and is used for git operations, editing (e.g., vim, emacs), and other normal operations.
  - Terminal B is running in a container, and is only used for compilation.
 
 This gives you the flexibility to use all the normal tools you are used to, while having the seL4 dependencies separated from your machine.
 
-### Build the program
+### Create a container
 Open a new terminal, Terminal B, to run a container.
+
+Create a container:
+```
+container
+```
+
+### Build the program
 
 ```
 cd sel4-tutorials-manifest/hello-world_build
@@ -84,11 +73,6 @@ If successful, you should see the final ninja rule passing, e.g.:
 [150/150] objcopy kernel into bootable elf
 ```
 
-### Create a container
-Then, create a container in Terminal B:
-```
-container
-```
 
 
 ### Run Hello, World using QEMU
@@ -218,7 +202,9 @@ On success, you should see the following:
 Hello, World!
 Second hello
 ```
-
-
-**Include this stuff?**
-- Get an understanding of the basic project layout
+<p>
+    Previous: <a href="setting-up">Setting up your machine</a>
+<p>
+<p>
+    Next: <a href="capabilities">Capabilities</a>
+</p>
