@@ -204,8 +204,5 @@ Hello, World!
 Second hello
 ```
 <p>
-    Previous: <a href="setting-up">Setting up your machine</a>
-<p>
-<p>
-    Next: <a href="capabilities">Capabilities</a>
+    Next tutorial: <a href="capabilities">Capabilities</a>
 </p>

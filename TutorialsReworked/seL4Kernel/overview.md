@@ -1,6 +1,6 @@
 ---
-layout: home
-title: seL4 Docs
+toc: true
+layout: project
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -34,8 +34,5 @@ We recommend having access to the <a target="_blank" href="https://sel4.systems/
 * [Mattermost Channel](https://mattermost.trustworthy.systems/sel4-external/)
 
 <p>
-    Previous: <a href="../GettingStarted/microkit">Microkit tutorial</a>
-<p>
-<p>
-    Next: <a href="../seL4Kernel/setting-up">Setting up your machine</a>
+    Next tutorial: <a href="../seL4Kernel/setting-up">Setting up your machine</a>
 </p>

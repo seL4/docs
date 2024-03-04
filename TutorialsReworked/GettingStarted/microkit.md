@@ -1,6 +1,6 @@
 ---
-layout: home
-title: seL4 Docs
+toc: true
+layout: project
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -18,8 +18,5 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
     Go to the <a target="_blank" href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit tutorial</a>
 </p>
 <p>
-    Previous: <a href="about-seL4">About seL4</a>
-<p>
-<p>
-    Next: <a href="../seL4Kernel/overview">seL4 kernel tutorials</a>
+    Next tutorial: <a href="../seL4Kernel/overview">seL4 kernel tutorials</a>
 </p>

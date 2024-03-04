@@ -254,10 +254,6 @@ repo sync
 
 *Hint:* The **Get the code** step only needs to be done once, i.e. before doing your first tutorial.
 
-
 <p>
-    Previous: <a href="overview">Overview</a>
-<p>
-<p>
-    Next: <a href="hello-world">Hello world</a>
+    Next tutorial: <a href="hello-world">Hello world</a>
 </p>

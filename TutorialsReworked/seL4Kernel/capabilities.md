@@ -374,8 +374,5 @@ to become more familiar with CSpaces.
 
 
 <p>
-    Previous: <a href="hello-world">Hello world</a>
-</p>
-<p>
-    Next: <a href="untyped">Untyped</a>
+    Next tutorial: <a href="untyped">Untyped</a>
 <p>

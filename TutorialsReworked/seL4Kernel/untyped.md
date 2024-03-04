@@ -356,8 +356,5 @@ to become more familiar with untyped objects and memory allocation in seL4.
 * Create a simple object allocator for allocating seL4 objects.
 
 <p>
-    Previous: <a href="capabilities">Capabilities</a>
-</p>
-<p>
-    Next: <a href="mapping">Mapping</a>
+    Next tutorial: <a href="mapping">Mapping</a>
 <p>

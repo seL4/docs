@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
       <ul class="nav nav-sidebar">
   {% for entry in item.subfolderitems %}
         <li class="{% if page.url == entry.url %}active{% endif %}">
-          <a class="" href="{{ entry.url }}">
+          <a class="" href="../{{ entry.url }}">
             {{ entry.page }}
           </a>
         </li>
@@ -48,7 +48,7 @@ executed for production builds. This is all so the project links can be sorted
 
     {% assign url = "/projects/" | append: new_project[0].name | append: '/' %}
         <li class="{% if page_url[2] == new_project[0].name %}active{% endif %}">
-            <a class="" href="{{url}}">{{new_project[0].display_name}}</a>
+            <a class="" href="../{{url}}">{{new_project[0].display_name}}</a>
         <li>
   {% endfor %}
     </ul>
@@ -60,7 +60,7 @@ executed for production builds. This is all so the project links can be sorted
   {% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
   {% for t in tutorials %}
         <li class="{% if page.url == t.url %}active{% endif %}">
-            <a class="" href="{{t.url}}">{{t.title}}</a>
+            <a class="" href="../{{t.url}}">{{t.title}}</a>
         <li>
   {% endfor %}
     </ul>
@@ -71,40 +71,39 @@ executed for production builds. This is all so the project links can be sorted
     <ul class="nav nav-sidebar">
       <li>Getting started</li>
       <ul>
-        <li><a href="/TutorialsReworked/GettingStarted/about-seL4">About seL4</a></li>
-        <li><a href="/TutorialsReworked/GettingStarted/microkit">Microkit tutorial</a></li>
+        <li><a href="../GettingStarted/about-seL4">About seL4</a></li>
+        <li><a href="../GettingStarted/microkit">Microkit tutorial</a></li>
       </ul>
       <li>The seL4 kernel</li>
       <ul>
-        <li><a href="/TutorialsReworked/seL4Kernel/overview">Overview</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/setting-up">Setting up your machine</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/hello-world">Hello world</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/capabilities">Capabilities</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/untyped">Untyped</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/mapping">Mapping</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/threads">Threads</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/ipc">IPC</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/notifications">Notifications</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/interrupts">Interrupts</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/faults">Faults</a></li>
+        <li><a href="../seL4Kernel/overview">Overview</a></li>
+        <li><a href="../seL4Kernel/setting-up">Setting up your machine</a></li>
+        <li><a href="../seL4Kernel/hello-world">Hello world</a></li>
+        <li><a href="../seL4Kernel/capabilities">Capabilities</a></li>
+        <li><a href="../seL4Kernel/untyped">Untyped</a></li>
+        <li><a href="../seL4Kernel/mapping">Mapping</a></li>
+        <li><a href="../seL4Kernel/threads">Threads</a></li>
+        <li><a href="../seL4Kernel/ipc">IPC</a></li>
+        <li><a href="../seL4Kernel/notifications">Notifications</a></li>
+        <li><a href="../seL4Kernel/interrupts">Interrupts</a></li>
+        <li><a href="../seL4Kernel/faults">Faults</a></li>
       </ul>
-      <li><a href="/TutorialsReworked/mcs">MCS</a></li>
+      <li><a href="../mcs">MCS</a></li>
       <li>Dynamic libraries</li>
       <ul>
-        <li><a href="TutorialsReworked/DynamicLibraries/initialisation">Initialisation & threading</a></li>
-        <li><a href="TutorialsReworked/DynamicLibraries/ipc">IPC</a></li>
-        <li><a href="TutorialsReworked/DynamicLibraries/processes">Processes & Elf loading</a></li>
-        <li><a href="TutorialsReworked/DynamicLibraries/timer">Timer</a></li>
+        <li><a href="../DynamicLibraries/initialisation">Initialisation & threading</a></li>
+        <li><a href="../DynamicLibraries/ipc">IPC</a></li>
+        <li><a href="../DynamicLibraries/processes">Processes & Elf loading</a></li>
+        <li><a href="../DynamicLibraries/timer">Timer</a></li>
       </ul>
       <li>CAmkES</li>
       <ul>
-        <li><a href="TutorialsReworked/CAmkES/hello-camkes">Hello CAmkES</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes1">CAmkES 1</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes2">CAmkES 2</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes3">CAmkES 3</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes-vm">CAmkES VM</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
+        <li><a href="../CAmkES/hello-camkes">Hello CAmkES</a></li>
+        <li><a href="../CAmkES/camkes1">CAmkES 1</a></li>
+        <li><a href="../CAmkES/camkes2">CAmkES 2</a></li>
+        <li><a href="../CAmkES/camkes3">CAmkES 3</a></li>
+        <li><a href="../CAmkES/camkes-vm">CAmkES VM</a></li>
+        <li><a href="../CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
       </ul>
     </ul>
 {% endif %}
-<!-- </div> -->
