@@ -1,6 +1,6 @@
 ---
 toc: true
-layout: api
+layout: project
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -148,6 +148,15 @@ the number of bits in the virtual address that could not be resolved due to miss
 ```c
     // TODO map a page directory object
 ```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```c
+    // TODO map a page directory object
+    error = seL4_X86_PageDirectory_Map(pd,seL4_CapInitThreadVSpace, TEST_VADDR, seL4_X86_Default_VMAttributes);
+    assert(error == seL4_NoError);
+```
+</details>
+
 
 On success, you should see the following:
 ```
@@ -166,6 +175,14 @@ Note that in the above output, the number of failed bits has changed from `30` t
 ```c
     // TODO map a page table object
 ```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```c
+    // map a page table object
+    error = seL4_X86_PageTable_Map(pt, seL4_CapInitThreadVSpace, TEST_VADDR, seL4_X86_Default_VMAttributes);
+    assert(error == seL4_NoError);
+```
+</details>
 
 On success, you should see the following:
 ```
@@ -198,6 +215,15 @@ that the fault occured on (address).
 ```c
     // TODO remap the page
 ```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```c
+    // remap the page
+    error = seL4_X86_Page_Map(frame, seL4_CapInitThreadVSpace, TEST_VADDR, seL4_ReadWrite, seL4_X86_Default_VMAttributes);
+    assert(error == seL4_NoError);
+```
+</details>
+
 
 ### Unmapping pages
 

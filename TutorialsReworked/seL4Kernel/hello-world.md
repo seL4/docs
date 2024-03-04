@@ -1,9 +1,10 @@
 ---
 toc: true
-layout: api
+layout: project
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
+
 
 # Hello, world!
 In this tutorial you will
