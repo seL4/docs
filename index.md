@@ -97,7 +97,7 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="TutorialsReworked/seL4Kernel/ipc">IPC</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/notifications">Notifications</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/interrupts">Interrupts</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/faults">Faults</a></li>
+        <li><a href="TutorialsReworked/seL4Kernel/faults">Fault Handling</a></li>
       </ul>
       <li><a href="/TutorialsReworked/mcs">MCS</a></li>
       <li>Dynamic libraries</li>
