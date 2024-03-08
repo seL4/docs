@@ -83,7 +83,7 @@ This documentation site is for cooperatively developing and sharing documentatio
       <li>Getting started</li>
       <ul>
         <li><a href="/TutorialsReworked/GettingStarted/about-seL4">About seL4</a></li>
-        <li><a href="/TutorialsReworked/GettingStarted/microkit">Microkit tutorial</a></li>
+        <li><a href="/TutorialsReworked/GettingStarted/microkit">Using the seL4 Microkit tutorial to get started with seL4</a></li>
       </ul>
       <li>The seL4 kernel</li>
       <ul>

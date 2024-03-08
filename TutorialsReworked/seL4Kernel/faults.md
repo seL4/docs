@@ -335,4 +335,4 @@ Finally, to have the `faulter` thread wake up and try to execute again, we
 If you'd like to challenge yourself, make sure to set up the fault handling on
 both versions of the kernel: master and MCS.
 
-Next tutorial: <a href="../DynamicLibraries/initialisation">Dynamic libraries</a>
+Next tutorial: <a href="../mcs">MCS</a>

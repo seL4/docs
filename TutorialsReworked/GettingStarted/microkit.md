@@ -4,7 +4,7 @@ layout: project
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
-<h1>The seL4 Microkit tutorial</h1>
+<h1>Using the seL4 Microkit tutorial to get started with seL4</h1>
 <p>
     The seL4 Microkit is an operating system framework on top of seL4 provides a small set of simple abstractions that ease the design and implementation of statically structured systems on seL4, while still leveraging the kernel’s benefits of security and performance.
 </p>
