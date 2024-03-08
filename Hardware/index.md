@@ -14,9 +14,7 @@ seL4 is formally verified for specific configurations for a subset of these
 platforms. The depth of the proofs and which properties are verified depend on
 the platform.
 
-The tables below provide more details on [maintained](#maintained-platforms)
-platforms. You can also find below a table of
-[unmaintained](#unmaintained-platforms) platforms if needed.
+The tables below provide more details.
 
 
 ### Platforms' attributes
@@ -49,10 +47,7 @@ See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
 
 You can also [run seL4 on VMware](VMware).
 
-
-## Maintained platforms
-
-### ARM
+## ARM
 
 seL4 has support for select ARMv7 and ARMv8 Platforms.
 
@@ -68,7 +63,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 {%- endfor %}
 
 
-### RISC-V
+## RISC-V
 
 We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
@@ -80,7 +75,7 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 {% endif %}
 {%- endfor %}
 
-### x86
+## x86
 
 We support PC99-style Intel Architecture Platforms.
 
@@ -94,17 +89,22 @@ We support PC99-style Intel Architecture Platforms.
 
 ---
 
-## *Unmaintained platforms*
+##  <span style="color:grey">Unmaintained platforms</span>
+
+<span style="color:grey">
+Unmaintained platforms are platforms for which code has been contributed, but
+this code is not or no longer tested and is unlikely to work. We list these
+here, because bringing an unmaintained platform up may be faster and easier than
+starting from scratch on a new platform port.
 
 
-### *ARM*
+###  <span style="color:grey">ARM</span>
 
-
-| *Platform* | *System-on-chip* | *Core* | *Arch* | *Virtualisation* | *SMMU* | *Verification Status* | *Contributed by* |
+| <span style="color:grey">Platform</span> | <span style="color:grey">System-on-chip</span> | <span style="color:grey">Core</span> | <span style="color:grey">Arch</span> | <span style="color:grey">Virtualisation</span> | <span style="color:grey">SMMU</span> | <span style="color:grey">Verification Status</span> | <span style="color:grey">Contributed by</span> |
 | - | - | - | - | - | - | - | - | - |
 {%- assign sorted = site.pages | sort: 'platform'%}
 {% for page in sorted %}
 {%- if page.arm_hardware and page.Maintained == "No"" -%}
-| *[{{ page.platform }}]({{page.url}}) (**unmaintained**)* | *{{ page.soc}}* | *{{ page.cpu }}* | *{{ page.arch }}* | *{{ page.virtualization }}* | *{{ page.iommu}}* | *{{ page.Status }}* | *{{ page.Contrib }}* |
+| <span style="color:grey">[{{ page.platform }}]({{page.url}})</span> (**unmaintained**) | <span style="color:grey">{{ page.soc}}</span> | <span style="color:grey">{{ page.cpu }}</span> | <span style="color:grey">{{ page.arch }}</span> | <span style="color:grey">{{ page.virtualization }}</span> | <span style="color:grey">{{ page.iommu}}</span> | <span style="color:grey">{{ page.Status }}</span> | <span style="color:grey">{{ page.Contrib }}</span> |
 {% endif %}
 {%- endfor %}
