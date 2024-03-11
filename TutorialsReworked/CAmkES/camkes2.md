@@ -1,7 +1,5 @@
 # CAmkES Tutorial 2
-This tutorial is an introduction to
-CAmkES: bootstrapping a basic static CAmkES application, describing its
-components, and linking them together.
+This tutorial describes CAmkES in greater detail, building on [Tutorial 1](camkes1).
 
 Learn how to:
 - Represent and implement events in CAmkES.
@@ -30,13 +28,6 @@ All tutorials come with complete solutions. To get solutions run:
 </details>
 
 
-## Walkthrough
- Bear in mind, this article will be going through the
-tutorial steps in the order that the user is led through them in the
-slide presentation, except where several similar tasks are coalesced to
-avoid duplication. Additionally, if a tasks step covers material that
-has already been touched on, it will be omitted from this article.
-
 ### TASK 1
  Here you're declaring the events that will be bounced
 back and forth in this tutorial. An event is a signal is sent over a
@@ -50,9 +41,17 @@ You are strongly advised to read the manual section on Events here:
   you're not emitting on both sides of a single interface, or consuming
   on both sides of an interface.''
 
+#### Specify an events interface
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+    /* TASK 1: the event interfaces */
+    /* hint 1: specify 2 interfaces: one "emits" and one "consumes"
+     * hint 2: you can use an arbitrary string as the interface type (it doesn't get used)
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
+     */
+    emits TheEvent echo;
+    consumes TheEvent client;
 ```
 </details>
 
@@ -65,6 +64,7 @@ connection over which events are sent, there is no API, but rather
 CAmkES will generate \_emit() and \_wait() functions to enable the
 application to transparently interact with these events.
 
+#### Emit event to signal that the data is available
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -76,6 +76,7 @@ application to transparently interact with these events.
   echo_emit();
 ```
 </details>
+
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -215,12 +216,29 @@ in the shared mem communication. We will then link them together using a
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+  /* TASK 2: the dataport interfaces */
+    /* hint 1: specify 3 interfaces: one of type "Buf", one of type "str_buf_t" and one of type "ptr_buf_t"
+     * hint 2: for the definition of these types see "str_buf.h".
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */
+
+    dataport Buf d;
+    dataport str_buf_t d_typed;
+    dataport ptr_buf_t d_ptrs;
 ```
 </details>
 
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+  /* TASK 4: the dataport interfaces */
+    /* hint 1: specify 3 interfaces: one of type "Buf", one of type "str_buf_t" and one of type "ptr_buf_t"
+     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+     */
+
+    dataport Buf d;
+    dataport str_buf_t d_typed;
+    dataport ptr_buf_t d_ptrs;
 ```
 </details>
 
@@ -233,6 +251,15 @@ proceed.
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+  /* TASK 6: Dataport connections */
+  /* hint 1: connect the corresponding dataport interfaces of the components to each other
+    * hint 2: use seL4SharedData as the connector
+    * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
+    */
+
+  connection seL4SharedData data_conn(from client.d, to echo.d);
+  connection seL4SharedData typed_data_conn(from client.d_typed, to echo.d_typed);
+  connection seL4SharedData ptr_data_conn(from client.d_ptrs, to echo.d_ptrs);
 ```
 </details>
 
@@ -396,6 +423,13 @@ being asked to set the priority of the components.
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+  /* TASK 7: set component priorities */
+  /* hint 1: component priority is specified as an attribute with the name <component name>.priority
+    * hint 2: the highest priority is represented by 255, the lowest by 0
+    */
+
+  client.priority = 255;
+  echo.priority = 254;
 ```
 </details>
 
@@ -408,12 +442,29 @@ our constraints when mapping those Dataports.
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+  /* TASK 8: restrict access to dataports */
+  /* hint 1: use attribute <component>.<interface_name>_access for each component and interface
+    * hint 2: appropriate values for the to_access and from_access attributes are: "R" or "W"
+    * hint 4: make the "Buf" dataport read only for the Echo component
+    * hint 3: make the "str_buf_t" dataport read only for the Client component
+    */
+
+  echo.d_access = "R";
+  client.d_access = "W";
+  echo.d_typed_access = "W";
+  client.d_typed_access = "R";
 ```
 </details>
 
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
+  /* TASK 16: test the read and write permissions on the dataport.
+    * When we try to write to a read-only dataport, we will get a VM fault.
+    */
+  /* hint 1: try to assign a value to a field of the "str_buf_t" dataport */
+
+  d_typed->n = 0;
 ```
 </details>
 

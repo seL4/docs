@@ -141,7 +141,7 @@ the second one was named `a2`? Then in order to call on that second
 
 ## Exercises
 
-
+### Define instance in the composition section of the ADL
 **Exercise** First modify `hello-1.camkes`. Define instances of `Echo` and `Client` in the
 `composition` section of the ADL.
 
@@ -162,7 +162,7 @@ assembly {
 ```
 </details>
 
-
+### Add a connection
 **Exercise** Now add a connection from `client.hello` to `echo.hello`.
 
 ```
@@ -177,6 +177,8 @@ assembly {
     connection seL4RPCCall hello_con(from client.hello, to echo.hello);
 ```
 </details>
+
+### Define an interface
 
 **Exercise** Define the interface for hello in `interfaces/HelloSimple.idl4`.
 
@@ -196,6 +198,7 @@ procedure HelloSimple {
 ```
 </details>
 
+### Implement a RPC function
 **Exercise** Implement the RPC hello function.
 
 ```c
@@ -226,6 +229,7 @@ void hello_say_hello(const char *str) {
 ```
 </details>
 
+### Invoke a RPC function
 **Exercise** Invoke the RPC function in `components/Client/src/client.c`.
 ```c
 /*

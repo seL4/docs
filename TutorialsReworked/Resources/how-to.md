@@ -113,8 +113,30 @@ seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
    - [Use a timer](../DynamicLibraries/timer#use-the-timer)
    - [Handle an interrupt](../DynamicLibraries/timer#handle-the-interrupt)
    - [Destroy a timer](../DynamicLibraries/timer#destroy-the-timer)
-
-
-## CAmkES
-TBD
+ - ## [CAmkES](../CAmkES/)
+   - [A basic CAmkES application](../CAmkES/camkes1)
+     - [Define instance in the composition section of the ADL](../CAmkES/camkes1#define-instance-in-the-composition-section-of-the-adl)
+     - [Add a connection](../CAmkES/camkes1#add-a-connection)
+     - [Define an interface](../CAmkES/camkes1#define-an-interface)
+     - [Implement a RPC function](../CAmkES/camkes1#implement-a-rpc-function)
+     - [Invoke a RPC function](../CAmkES/camkes1#invoke-a-rpc-function)
+   - [Events in CAmkES](../CAmkES/camkes2)
+     - [Specify an events interface](../CAmkES/camkes2#specify-an-events-interface)
+     -
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
+(../CAmkES/camkes2
 
