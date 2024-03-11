@@ -38,8 +38,6 @@ All tutorials come with complete solutions. To get solutions run:
 ```
 </details>
 
-**TBD: There are no solutions for CAmkES 1-3!!!!**
-
 
 ## Background
 
@@ -152,12 +150,18 @@ assembly {
     composition {
          component EmptyComponent empty;
          // TODO remove the empty component, and define an Echo and a Client component
-assembly {
+```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```
+    assembly {
     composition {
          component EmptyComponent empty;
          component Client client;
          component Echo echo;
 ```
+</details>
+
 
 **Exercise** Now add a connection from `client.hello` to `echo.hello`.
 
@@ -166,8 +170,13 @@ assembly {
          * hint 2: look at
          * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
          */
-        connection seL4RPCCall hello_con(from client.hello, to echo.hello);
 ```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```
+    connection seL4RPCCall hello_con(from client.hello, to echo.hello);
+```
+</details>
 
 **Exercise** Define the interface for hello in `interfaces/HelloSimple.idl4`.
 
@@ -180,6 +189,12 @@ procedure HelloSimple {
      */
 };
 ```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```
+    void say_hello(in string str);
+```
+</details>
 
 **Exercise** Implement the RPC hello function.
 
@@ -201,10 +216,15 @@ procedure HelloSimple {
  * hint 6: make the function print out a mesage using printf
  * hint 7: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
  */
+```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```
 void hello_say_hello(const char *str) {
     printf("Component %s saying: %s\n", get_instance_name(), str);
 }
 ```
+</details>
 
 **Exercise** Invoke the RPC function in `components/Client/src/client.c`.
 ```c
@@ -229,17 +249,29 @@ int run(void) {
      * hint 4: so the function would be:  hello_say_hello()
      * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
      */
-    char *shello = "hello world";
-    hello_say_hello(shello);
-
     printf("After the client\n");
     return 0;
 }
 ```
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```
+    char *shello = "hello world";
+    hello_say_hello(shello);
+```
+</details>
 
 ### TASK 5
  Here you define the callee-side invocation functions for
 the Hello interface exposed by Echo.
+
+**Can't find a solution---------------------------------------------------------**
+
+<details markdown='1'>
+<summary style="display:list-item"><em>Quick solution</em></summary>
+```
+```
+</details>
 
 ## Done
 

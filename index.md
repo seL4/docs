@@ -119,7 +119,9 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="TutorialsReworked/CAmkES/camkes-vm">CAmkES VM</a></li>
         <li><a href="TutorialsReworked/CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
       </ul>
-            <li>Resources</li>
+      <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>
+      <li><a href= "https://github.com/seL4/rust-sel4">Rust</a></li>
+      <li>Resources</li>
       <ul>
         <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
         <li><a href= "/projects/sel4/api-doc.html">API references</a></li>
