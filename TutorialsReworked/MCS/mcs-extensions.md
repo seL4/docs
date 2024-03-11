@@ -368,7 +368,7 @@ endpoint, between the master and MCS kernels.
 Regardless though, on both versions of the kernel, to inform the kernel of the
 fault endpoint for a thread, call the usual `seL4_TCB_SetSpace()`.
 
-#### Configuring a fault endpoint on the MCS kernel:
+#### Configuring a fault endpoint on the MCS kernel
 
 On the MCS kernel the cap given to the kernel must be a cap to an object in
 the CSpace of the thread which is *calling the syscall* (`seL4_TCB_Configure()`)
@@ -382,7 +382,7 @@ to configure its own fault endpoint.
 The reason for this difference is merely that it is faster to lookup the fault
 endpoint this way since it is looked up only once at the time it is configured.
 
-#### Configuring a fault endpoint on the Master kernel:
+#### Configuring a fault endpoint on the Master kernel
 
 On the Master kernel the cap given to the kernel must be a cap to an object in
 the CSpace of the *faulting thread*.
@@ -436,4 +436,4 @@ to become more familiar with the MCS extensions.
 * Experiment with notification binding on a passive server, by binding both a notification object to the
 server TCB and an SC to the notification object.
 
-Next tutorial: <a href="DynamicLibraries/initialisation">Dynamic libraries</a>
+Next tutorial: <a href="../DynamicLibraries/initialisation">Dynamic libraries</a>

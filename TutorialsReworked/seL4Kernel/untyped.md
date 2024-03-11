@@ -243,7 +243,7 @@ This error happens because we are trying to create an untyped of size 0.
 
 On success, the tutorial will progress further, printing "Failed to set priority"
 
-### Create a TCB Object
+### Create a TCB object
 
 The priority check is failing as `child_tcb` is an empty CSlot.
 

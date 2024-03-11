@@ -57,9 +57,6 @@ For this tutorial clone the [CapDL repo](https://github.com/sel4/capdl). This ca
 </details>
 
 
-## Outcomes
-
-
 ## Background
 
 ### IRQControl
@@ -140,6 +137,8 @@ main@timer.c:78 [Cond failed: error]
 
 The timer driver we are using emits an interrupt in the `TTC0_TIMER1_IRQ` number.
 
+### Invoke IRQ control
+
 **Exercise** Invoke `irq_control`, which contains the `seL4_IRQControl` capability,
 the place the `IRQHandler` capability for `TTC0_TIMER1_IRQ` into the `irq_handler` CSlot.
 
@@ -165,6 +164,7 @@ Undelivered IRQ: 42
 This is a warning message from the kernel that an IRQ was recieved for irq number 42, but no
 notification capability is set to sent a signal to.
 
+### Set NTFN
 **Exercise** Now set the notification capability (`ntfn`) by invoking the irq handler.
 
 ```
@@ -187,6 +187,8 @@ Tick
 Only one interrupt is delivered, as the interrupt has not been acknowledged. The timer driver is
 programmed to emit an interrupt every millisecond, so we need to count 2000 interrupts
 before replying to the client.
+
+### Acknowledge an interrupt
 
 **Exercise** Acknowledge the interrupt after handling it in the timer driver.
 

@@ -43,11 +43,6 @@ Answers are also available in drop down menus under each section.
 </details>
 
 
-## Prerequisites
-
-1. [Set up your machine](https://docs.sel4.systems/HostDependencies).
-1. [dynamic-3](https://docs.sel4.systems/Tutorials/dynamic-3)
-
 ## Exercises
 
 Once you initialise and run the tutorials, you will see the following output:

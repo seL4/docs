@@ -279,7 +279,7 @@ the CSpace of the `faulter` thread:
         0);
 ```
 
-### Receiving the IPC message from the kernel:
+### Receiving the IPC message from the kernel
 
 The kernel will deliver the IPC message to any thread waiting on the fault
 endpoint. To wait for a fault IPC message simply `seL4_Recv()`, the same way
@@ -289,7 +289,7 @@ you'd wait for any other IPC message:
     foreign_faulter_capfault_cap = seL4_GetMR(seL4_CapFault_Addr);
 ```
 
-### Finding out information about the generated thread fault:
+### Finding out information about the generated thread fault
 
 In the thread fault IPC message, the kernel will send information about the
 fault including the capability address whose access triggered the thread fault.
@@ -301,7 +301,7 @@ In our example here, our sample code generated a Cap Fault, so according to the
 seL4 manual, we can find out the cap fault address using at offset
 `seL4_CapFault_Addr` in the IPC message, as you see above in the code snippet.
 
-### Handling a thread fault:
+### Handling a thread fault
 
 Now that we know the cap address that generated a fault in the `faulting` thread,
 we can "handle" the fault by putting a random cap into that slot and then when
@@ -321,7 +321,7 @@ So here we'll copy an endpoint cap into the faulting slot:
         seL4_AllRights);
 ```
 
-### Resuming a faulting thread:
+### Resuming a faulting thread
 
 Finally, to have the `faulter` thread wake up and try to execute again, we
 `seL4_Reply()` to it:
@@ -335,4 +335,4 @@ Finally, to have the `faulter` thread wake up and try to execute again, we
 If you'd like to challenge yourself, make sure to set up the fault handling on
 both versions of the kernel: master and MCS.
 
-Next tutorial: <a href="../mcs">MCS</a>
+Next tutorial: <a href="../MCS/mcs-extensions">MCS</a>

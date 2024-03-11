@@ -99,7 +99,10 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="TutorialsReworked/seL4Kernel/interrupts">Interrupts</a></li>
         <li><a href="TutorialsReworked/seL4Kernel/faults">Fault Handling</a></li>
       </ul>
-      <li><a href="/TutorialsReworked/mcs">MCS</a></li>
+      <li>MCS</li>
+      <ul>
+        <li><a href="TutorialsReworked/MCS/mcs-extensions">MCS Extensions</a></li>
+      </ul>
       <li>Dynamic libraries</li>
       <ul>
         <li><a href="TutorialsReworked/DynamicLibraries/initialisation">Initialisation & threading</a></li>
@@ -115,6 +118,12 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="TutorialsReworked/CAmkES/camkes3">CAmkES 3</a></li>
         <li><a href="TutorialsReworked/CAmkES/camkes-vm">CAmkES VM</a></li>
         <li><a href="TutorialsReworked/CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
+      </ul>
+            <li>Resources</li>
+      <ul>
+        <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+        <li><a href= "/projects/sel4/api-doc.html">API references</a></li>
+        <li><a href="TutorialsReworked/Resources/how-to"><em>How to:</em> A quick solutions guide</a></li>
       </ul>
     </ul>
   </div>
