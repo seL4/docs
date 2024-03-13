@@ -122,21 +122,35 @@ seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
      - [Invoke a RPC function](../CAmkES/camkes1#invoke-a-rpc-function)
    - [Events in CAmkES](../CAmkES/camkes2)
      - [Specify an events interface](../CAmkES/camkes2#specify-an-events-interface)
+     - [Wait for data to become available](../CAmkES/camkes2#wait-for-data-to-become-available)
+     - [Signal that data is available](../CAmkES/camkes2#signal-that-data-is-available)
+     - [Register a callback handler](../CAmkES/camkes2#register-a-callback-handler)
+     - [Specify dataport interfaces](../CAmkES/camkes2#specify-an-events-interface)
+     - [Specify dataport connections](../CAmkES/camkes2#specify-dataport-connections)
+     - [Copy strings to an untyped dataport](../CAmkES/camkes2#copy-strings-to-an-untyped-dataport)
+     - [Read the reply data from a typed dataport](../CAmkES/camkes2#read-the-reply-data-from-a-typed-dataport)
+     - [Send data using dataports](../CAmkES/camkes2#send-data-using-dataports)
+     - [Read data from an untyped dataport](../CAmkES/camkes2#read-data-from-an-untyped-dataport)
+     - [Put data into a typed dataport](../CAmkES/camkes2#put-data-into-a-typed-dataport)
+     - [Read data from a typed dataport](../CAmkES/camkes2#read-data-from-a-typed-dataport)
+     - [Set component priorities](../CAmkES/camkes2#set-component-priorities)
+     - [Restrict access to dataports](../CAmkES/camkes2#restrict-access-to-dataports)
+     - [Test the read and write permissions on the dataport](../CAmkES/camkes2#test-the-read-and-write-permissions-on-the-dataport)
+   - [CAmkES Timer](../CAmkES/camkes)
+     - [Instantiate a Timer and Timerbase](../CAmkES/camkes3#task-1)
+     - [Connect a timer driver component](../CAmkES/camkes3#task-2)
+     - [Configure a timer hardware component instance](../CAmkES/camkes3#task-3)
+     - [Call into a supplied driver to handle the interrupt](../CAmkES/camkes3#task-4)
+     - [Stop a timer](../CAmkES/camkes3#task-5)
+     - [Acknowledge an interrupt](../CAmkES/camkes3#task-6)
+     - [Get a timer handler](../CAmkES/camkes3#task-7)
+     - [Start a timer](../CAmkES/camkes3#task-8)
+     - [Implement a RPC interface](../CAmkES/camkes3#task-9)
+     - [Set a timer interrupt](../CAmkES/camkes3#task-10)
+     - [Instantiate a TimerDTB component](../CAmkES/camkes3#task-1-1)
+     - [Connect interfaces using the seL4DTBHardware connector](../CAmkES/camkes3#task-2-1)
+     - [Configure the `TimerDTB` component](../CAmkES/camkes3#task-3-1)
      -
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
-(../CAmkES/camkes2
+(../CAmkES/camkes3
+(../CAmkES/camkes3
 

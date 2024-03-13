@@ -1,5 +1,5 @@
 # CAmkES Tutorial 2
-This tutorial describes CAmkES in greater detail, building on [Tutorial 1](camkes1).
+This tutorial shows how to build events in CAmkES.
 
 Learn how to:
 - Represent and implement events in CAmkES.
@@ -64,7 +64,7 @@ connection over which events are sent, there is no API, but rather
 CAmkES will generate \_emit() and \_wait() functions to enable the
 application to transparently interact with these events.
 
-#### Emit event to signal that the data is available
+#### Signal that the data is available
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -72,45 +72,44 @@ application to transparently interact with these events.
   /* hint 1: use the function <interface_name>_emit
     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
     */
-
   echo_emit();
 ```
 </details>
 
+#### Wait for data to become available
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
-    /* TASK 11: wait to get an event back signalling that the reply data is avaialble */
+    /* TASK 11: wait to get an event back signalling that the reply data is available */
     /* hint 1: use the function <interface_name>_wait
      * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
      */
-
     client_wait();
 ```
 </details>
 
-
+#### Signal that data is available
 </details>
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
   /* TASK 14: emit event to signal that the data is available */
     /* hint 1: we've already done this before */
-
     echo_emit();
 ```
 </details>
 
+#### Wait for data to be read
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
   /* TASK 15: wait to get an event back signalling that data has been read */
   /* hint 1: we've already done this before */
-
   client_wait();
 ```
 </details>
 
+#### Signal that data is available
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -118,11 +117,11 @@ application to transparently interact with these events.
   /* hint 1: use the function <interface_name>_emit
     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
     */
-
   client_emit();
 ```
 </details>
 
+#### Signal that data has been read
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -130,7 +129,6 @@ application to transparently interact with these events.
   /* hint 1: use the function <interface_name>_emit
     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
     */
-
   client_emit();
 ```
 </details>
@@ -142,6 +140,7 @@ use callbacks when they are raised. CAmkES generates functions that
 handle the registration of callbacks for each notification interface
 instance. These steps help you to become familiar with this approach.
 
+#### Register a callback handler
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -158,13 +157,13 @@ instance. These steps help you to become familiar with this approach.
      * hint 3: pass NULL as the extra argument to the callback
      * hint 4: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
      */
-
     int error = echo_reg_callback(callback_handler_1, NULL);
     ZF_LOGF_IF(error != 0, "Failed to register callback");
   }
 ```
 </details>
 
+#### Register another callback handler
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -174,12 +173,12 @@ instance. These steps help you to become familiar with this approach.
     * hint 3: pass NULL as the extra argument to the callback
     * hint 4: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
     */
-
   int error = echo_reg_callback(callback_handler_2, NULL);
   ZF_LOGF_IF(error != 0, "Failed to register callback");
 ```
 </details>
 
+#### Register a callback handler
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -189,7 +188,6 @@ instance. These steps help you to become familiar with this approach.
      * hint 3: pass NULL as the extra argument to the callback
      * hint 4: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-events
      */
-
     int error = echo_reg_callback(callback_handler_1, NULL);
     ZF_LOGF_IF(error != 0, "Failed to register callback");
 ```
@@ -213,6 +211,7 @@ interface instances on each of the components that will be participating
 in the shared mem communication. We will then link them together using a
 "seL4SharedData" connector later on.
 
+#### Specify dataport interfaces
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
@@ -221,13 +220,13 @@ in the shared mem communication. We will then link them together using a
      * hint 2: for the definition of these types see "str_buf.h".
      * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
      */
-
     dataport Buf d;
     dataport str_buf_t d_typed;
     dataport ptr_buf_t d_ptrs;
 ```
 </details>
 
+#### Specify dataport interfaces
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
@@ -235,7 +234,6 @@ in the shared mem communication. We will then link them together using a
     /* hint 1: specify 3 interfaces: one of type "Buf", one of type "str_buf_t" and one of type "ptr_buf_t"
      * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
      */
-
     dataport Buf d;
     dataport str_buf_t d_typed;
     dataport ptr_buf_t d_ptrs;
@@ -248,6 +246,7 @@ between the shared memory pages in each client, and tell CAmkES to link
 these using shared underlying Frame objects. Fill out this step, and
 proceed.
 
+#### Specify dataport connections
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
@@ -256,7 +255,6 @@ proceed.
     * hint 2: use seL4SharedData as the connector
     * hint 3: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
     */
-
   connection seL4SharedData data_conn(from client.d, to echo.d);
   connection seL4SharedData typed_data_conn(from client.d_typed, to echo.d_typed);
   connection seL4SharedData ptr_data_conn(from client.d_ptrs, to echo.d_ptrs);
@@ -268,6 +266,7 @@ proceed.
 to access and manipulate the data in the shared memory mapping
 (Dataport) of the client. Follow through to the next step.
 
+#### Copy strings to an untyped dataport
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -279,7 +278,6 @@ to access and manipulate the data in the shared memory mapping
      * hint 4: then copy all the strings from "s_arr" to the dataport.
      * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
      */
-
     int *n = (int*)d;
     *n = NUM_STRINGS;
     char *str = (char*)(n + 1);
@@ -287,10 +285,10 @@ to access and manipulate the data in the shared memory mapping
         strcpy(str, s_arr[i]);
         str += strlen(str) + 1;
     }
-
 ```
 </details>
 
+#### Read the reply data from a typed dataport
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
@@ -303,13 +301,13 @@ to access and manipulate the data in the shared memory mapping
      * hint 5: print out the specified number of strings from the "str" field
      * hint 6: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
      */
-
     for (int i = 0; i < d_typed->n; i++) {
         printf("%s: string %d (%p): \"%s\"\n", get_instance_name(), i, d_typed->str[i], d_typed->str[i]);
     }
 ```
 </details>
 
+# Send data using dataports
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
@@ -327,7 +325,6 @@ to access and manipulate the data in the shared memory mapping
      * hint 8: the dataport pointers should point into the untyped dataport
      * hint 9: for more information about dataport pointers see: https://github.com/seL4/camkes-tool/blob/master/docs/index.md
      */
-
     d_ptrs->n = NUM_STRINGS;
     str = (char*)d;
     for (int i = 0; i < NUM_STRINGS; i++) {
@@ -343,6 +340,7 @@ to access and manipulate the data in the shared memory mapping
 code to access and manipulate the data in the shared memory mapping
 (Dataport) of the server.
 
+#### Read data from an untyped dataport
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -354,7 +352,6 @@ code to access and manipulate the data in the shared memory mapping
     * hint 4: then print each string from the dataport
     * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
     */
-
   int *n = (int*)d;
   char *str = (char*)(n + 1);
   for (int i = 0; i < *n; i++) {
@@ -364,6 +361,7 @@ code to access and manipulate the data in the shared memory mapping
 ```
 </details>
 
+#### Put data into a typed dataport
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -379,7 +377,6 @@ code to access and manipulate the data in the shared memory mapping
      * hint 8: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#an-example-of-dataports
      * hint 9: you could combine this TASK with the previous one in a single loop if you want
      */
-
     n = (int*)d;
     str = (char*)(n + 1);
     for (int i = 0, j = *n - 1; i < *n; i++, j--) {
@@ -391,6 +388,7 @@ code to access and manipulate the data in the shared memory mapping
 ```
 </details>
 
+#### Read data from a typed dataport
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
@@ -407,7 +405,6 @@ code to access and manipulate the data in the shared memory mapping
     * hint 7: for more information about dataport pointers see: https://github.com/seL4/camkes-tool/blob/master/docs/index.md
     * hint 8: print out the string pointed to by each dataport pointer
     */
-
   char *str;
   for (int i = 0; i < d_ptrs->n; i++) {
       str = dataport_unwrap_ptr(d_ptrs->ptr[i]);
@@ -420,14 +417,14 @@ code to access and manipulate the data in the shared memory mapping
  This is an introduction to CAmkES attributes: you're
 being asked to set the priority of the components.
 
+#### Set component priorities
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
   /* TASK 7: set component priorities */
   /* hint 1: component priority is specified as an attribute with the name <component name>.priority
-    * hint 2: the highest priority is represented by 255, the lowest by 0
-    */
-
+   * hint 2: the highest priority is represented by 255, the lowest by 0
+  */
   client.priority = 255;
   echo.priority = 254;
 ```
@@ -439,6 +436,7 @@ for the Dataports in a shared memory connection. We then go about
 attempting to violate those constraints to see how CAmkES has truly met
 our constraints when mapping those Dataports.
 
+#### Restrict access to dataports
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
@@ -448,7 +446,6 @@ our constraints when mapping those Dataports.
     * hint 4: make the "Buf" dataport read only for the Echo component
     * hint 3: make the "str_buf_t" dataport read only for the Client component
     */
-
   echo.d_access = "R";
   client.d_access = "W";
   echo.d_typed_access = "W";
@@ -456,6 +453,7 @@ our constraints when mapping those Dataports.
 ```
 </details>
 
+#### Test the read and write permissions on the dataport
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```
