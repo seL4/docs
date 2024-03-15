@@ -14,16 +14,16 @@ This documentation site is for cooperatively developing and sharing documentatio
 
  <div class="flex-grid">
   <div class="col">
-   <h1><a href="/GettingStarted">Getting started</a></h1>
+   <h1><a href="/Working-with-seL4">Working with seL4</a></h1>
 	<p>Information about working with seL4 and its ecosystem</p>
 	<ul>
-	<li><a href="/GettingStarted#background-and-terminology">seL4 Background</a></li>
+	<li><a href="/Working-with-seL4#background-and-terminology">seL4 Background</a></li>
 	<li><a href="/MaintainedRepositories">The source code</a></li>
 	<li><a href="/projects/sel4/documentation.html">Documentation</a></li>
 	<li><a href="/projects/sel4/frequently-asked-questions.html">Frequently Asked Questions (FAQ)</a></li>
 	<li><a href="/projects/roadmap.html">Roadmap</a></li>
 	<li><a href="/projects/buildsystem/host-dependencies.html">Build dependencies</a></li>
-	<li><a href="/GettingStarted#running-sel4">Building and Running seL4</a></li>
+	<li><a href="/Working-with-seL4#running-sel4">Building and Running seL4</a></li>
 	<li><a href="/Hardware">Supported platforms</a></li>
 	<li><a href="/projects/sel4/verified-configurations.html">Verification targets and claims</a></li>
 	</ul>
