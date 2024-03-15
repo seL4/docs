@@ -51,7 +51,8 @@ commitment, to a degree depending on the nature of the contribution.
 * You can contact one of the seL4 Foundation [Endorsed Services
   Providers](https://sel4.systems/Foundation/Services/) to get commercial
   support or professional advice to develop such a port or feature (with the
-  same implications and expectations as above for any contributions);
+  implications and expectations detailed in our [guidelines for contributing
+  kernel code](../projects/sel4/kernel-contribution.html));
 
 * You can check the [roadmap](../projects/roadmap.html) for any planned
   contributions, from the seL4 Foundation or larger community, such on any new
