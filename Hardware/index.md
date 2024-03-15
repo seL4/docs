@@ -52,9 +52,9 @@ commitment, to a degree depending on the nature of the contribution.
   architecture ports, new large formal verifications, or large or fundamental
   new features;
 
-* You can inquire the seL4 community, through one of our [communication
-  channels](https://sel4.systems/contact/) as to whether someone is developing
-  such a port or feature already, or as to the general interest in discussing
+* You can contact the seL4 community through one of our [communication
+  channels](https://sel4.systems/contact/) to ask whether someone is developing
+  such a port or feature already, or if there is general interest in discussing
   such such a new port or feature;
 
 * If you are in a position to develop the seL4 port or feature yourself, you
