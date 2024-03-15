@@ -14,7 +14,7 @@ This assumes that:
 * from your available [options](/Hardware/index.html#not-in-the-lists-below),
   you choose to contribute the port or feature yourself;
 * you are following the [guidelines for kernel
-  contributions](../projects/sel4/kernel-contribution.html#) and the specific
+  contributions](/projects/sel4/kernel-contribution.html#) and the specific
   [Platform Porting guide](/projects/sel4/porting).
 
 
