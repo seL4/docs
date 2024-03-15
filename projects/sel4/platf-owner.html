@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>seL4 11.0.0 | seL4 docs</title>
+    <title>Becoming a platform owner | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -67,8 +67,8 @@
         
 
         <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/releases/sel4">
-              <span property="name"><b>seL4 releases</b></span>
+            <a property="item" typeof="WebPage" href="/projects/">
+              <span property="name"><b>Projects</b></span>
             </a>
             <meta property="position" content="2" />
         </li>
@@ -76,9 +76,20 @@
         
 
         
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/projects/sel4/">
+              <span property="name"><b>The seL4 microkernel</b></span>
+            </a>
+            <meta property="position" content="3" />
+        </li>
+      
+        
+
+        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">seL4 11.0.0</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">Becoming a platform owner</span>
+            <meta property="position" content="4" /></li>
           
     </ol>
   </nav>
@@ -128,6 +139,170 @@
 
 
 
+    <ul class="nav nav-sidebar">
+  
+    
+    
+
+    
+        <li class="active">
+            <a class="" href="/projects/sel4/">seL4</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/l4v/">L4.verified</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/camkes/">CAmkES</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/capdl/">CapDL</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/buildsystem/">seL4 Buildsystem</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/elfloader/">Elfloader</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4runtime/">The seL4 run-time</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/user_libs/">user_libs</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4bench/">sel4bench</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4test/">seL4Test</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4-tutorials/">seL4 tutorials</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4webserver/">seL4webserver</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/virtualization/">Virtualization</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/camkes-vm/">camkes-vm</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/sel4_tools/">seL4_tools</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/dockerfiles/">Dockerfiles</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/docsite/">seL4 Documentation website</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/hardware_hacks/">Hardware Hacks</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/microkit/">Microkit</a>
+        <li>
+  
+    
+    
+
+    
+        <li class="">
+            <a class="" href="/projects/rust/">Rust</a>
+        <li>
+  
+    </ul>
+
 
 
 
@@ -136,140 +311,57 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="sel4-version-1100-release">seL4 Version 11.0.0 Release</h1>
-<p>Announcing the release of <code class="language-plaintext highlighter-rouge">seL4 11.0.0</code> with the following changes:</p>
+    <h1 id="becoming-a-platform-owner">Becoming a platform owner</h1>
 
-<p>11.0.0 2019-11-19: BREAKING</p>
+<p>Below are the guidelines defined by the <a href="https://sel4.systems/Foundation/TSC/">Technical Steering Committee
+(TSC)</a> to become a <em>platform owner</em>.</p>
 
-<h2 id="changes">Changes</h2>
-
+<p>This assumes that:</p>
 <ul>
-  <li>Add GrantReply access right for endpoint capabilities.</li>
-  <li>seL4_Call is permitted on endpoints with either the Grant or the GrantReply access rights.</li>
-  <li>Capabilities can only be transferred in a reply message if receiver’s endpoint capability has the Grant right.</li>
-  <li><code class="language-plaintext highlighter-rouge">seL4_CapRights_new</code> now takes 4 parameters</li>
-  <li>seL4_CapRightsBits added to libsel4. seL4_CapRightsBits is the number of bits
- to encode seL4_CapRights.</li>
-  <li><code class="language-plaintext highlighter-rouge">seL4_UserTop</code> added
-    <ul>
-      <li>a new constant in libsel4 that contains the first virtual address unavailable to
-user level.</li>
-    </ul>
-  </li>
-  <li>Add Kernel log buffer to aarch64</li>
-  <li>Support added for Aarch64 hypervisor mode (EL2) for Nvidia TX1 and TX2. This is not verified.</li>
-  <li>Support for generating ARM machine header files (memory regions and interrupts) based on a device tree.</li>
-  <li>Support added for ARM kernel serial driver to be linked in at build time based on the device tree compatibility string.</li>
-  <li>Support added for compiling verified configurations of the kernel with Clang 7.</li>
-  <li>RISC-V: handle all faults
-    <ul>
-      <li>Pass all non-VM faults as user exceptions.</li>
-    </ul>
-  </li>
-  <li>arm-hyp: pass ESR in handleUserLevelFault</li>
-  <li>aarch64: return ESR as part of user level fault</li>
-  <li>Created new seL4_nbASIDPoolsBits constant to keep track of max nb of ASID pools.</li>
-  <li>Support added for Hardkernel ODROID-C2.</li>
-  <li>Added extended bootinfo header for device tree (SEL4_BOOTINFO_HEADER_FDT).</li>
-  <li>Support added for passing a device tree from the bootloader to the root task on ARM.</li>
-  <li>Add seL4_VSpaceBits, the size of the top level page table.</li>
-  <li>The root cnode size is now a minimum of 4K.</li>
-  <li>Hifive board support and RISC-V external interrupt support via a PLIC driver.</li>
-  <li>Update seL4_FaultType size to 4bits.</li>
-  <li>Fix seL4_MappingFailedLookupLevel() for EPTs on x86.
-    <ul>
-      <li>add SEL4<em>MAPING_LOOKUP_NO</em>[EPTPDPT, EPTPD, EPTPT] which now correspond to
-the value returned by seL4_MappingFailedLookupLevel on X86 EPT mapping calls.</li>
-    </ul>
-  </li>
-  <li>BeagleBone Black renamed from am335x to am335x-boneblack.</li>
-  <li>Supported added for BeagleBone Blue (am335x-boneblue).</li>
-  <li>Remove IPC Buffer register in user space on all platforms</li>
-  <li>Add managed TLS register for all platforms</li>
-  <li>Add configurable system call allowing userspace to set TLS register without capability on all platforms.</li>
-  <li>Non-hyp support added for Arm GICv3 interrupt controller.</li>
-  <li>Add initial support for i.MX8M boards.
-    <ul>
-      <li>Support for i.MX8M Quad evk AArch64 EL2 and EL1, AArch32 smode only is accessible via the imx8mq-evk platform.</li>
-      <li>Support for i.MX8M Mini evk AArch64 EL2 and EL1, AArch32 smode only is accessible via the imx8mm-evk platform.</li>
-    </ul>
-  </li>
-  <li>Add FVP platform with fixed configuration. This currently assumes A57 configuration described in tools/dts/fvp.dts.</li>
-  <li>Arm SMP invocation IRQControl_GetTriggerCore added
-    <ul>
-      <li>Used to route a specify which core an IRQ should be delivered on.</li>
-    </ul>
-  </li>
-  <li>Kernel log buffer: Specify on which core an IRQ was delivered.</li>
-  <li>Add new seL4_DebugSendIPI syscall to send arbitrary SGIs on ARM when SMP and DEBUG_BUILD are activated.</li>
-  <li>Support for aarch64-hyp configurations with 40-bit physical addresses (PA) added.
-    <ul>
-      <li>The aarch64 api now refers to VSpaces rather than PageGlobalDirectories,
-as depending on the PA the top level translation structure can change.</li>
-      <li>all <code class="language-plaintext highlighter-rouge">seL4_ARM_PageGlobalDirectory</code> invocations are now <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpace</code> invocations.</li>
-      <li>new constants <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpaceObject</code> and <code class="language-plaintext highlighter-rouge">seL4_VSpaceIndexBits</code>.</li>
-    </ul>
-  </li>
-  <li>Merged MCS kernel feature.
-    <ul>
-      <li>this is not verified and is under active verification.</li>
-      <li>The goals of the MCS kernel is to provide strong temporal isolation and a basis for reasoning about time.</li>
-    </ul>
-  </li>
-  <li>Moved aarch64 kernel window
-    <ul>
-      <li>aarch64 kernel window is now placed at 0, meaning the kernel can access memory
-below where the kernel image is mapped.</li>
-    </ul>
-  </li>
-  <li>aarch64: Moved TPIDRRO_EL0 (EL0 Read-Only Thread ID register) to TCB register context from VCPU registers. This means
-changes to this register from user level have to go via seL4_TCB_Write Registers instead of seL4_ARM_VCPU_WriteRegs.</li>
-  <li>Merge ARCH_Page_Remap functionality into ARCH_Page_Map. Remap was used for updating the mapping attributes of a page
-without changing its virtual address. Now ARCH_Page_Map can be performed on an existing mapping to achieve the same
-result. The ARCH_Page_Remap invocation has been removed from all configurations.</li>
-  <li>riscv64: Experimental SMP support for RISCV64 on HiFive.</li>
-  <li>Support added for QEMU ARM virt platform, with 3 CPUs: cortex-a15, cortex-a53 and cortex-a57
-    <ul>
-      <li>PLATFORM=qemu-arm-virt</li>
-      <li>ARM_CPU={cortex-a15, cortex-a53, cortex-a57}</li>
-      <li>QEMU_MEMORY=1024 (default)</li>
-    </ul>
-  </li>
-  <li>Support added for rockpro64.</li>
-  <li>RISCV: Add support for Ariane SoC</li>
-  <li>Unify device untyped initialisation across x86, Arm and RISC-V
-    <ul>
-      <li>Access to the entire physical address range is made available via untypes.</li>
-      <li>The kernel reserves regions that user level is not able to access and doesn’t hand out untypeds for it.</li>
-      <li>Ram memory is part of this reservation and is instead handed out as regular Untypeds.</li>
-      <li>Memory reserved for use by the kernel or other reserved regions are not accessible via any untypeds.</li>
-      <li>Devices used by the kernel are also not accessible via any untypeds.</li>
-    </ul>
-  </li>
+  <li>the platform that you are after is not listed on the <a href="/Hardware/">Supported Platforms
+page</a>;</li>
+  <li>from your available <a href="/Hardware/index.html#not-in-the-lists-below">options</a>,
+you choose to contribute the port or feature yourself;</li>
+  <li>you are following the <a href="/projects/sel4/kernel-contribution.html#">guidelines for kernel
+contributions</a> and the specific
+<a href="/projects/sel4/porting">Platform Porting guide</a>.</li>
 </ul>
 
-<h2 id="upgrade-notes">Upgrade Notes</h2>
-
-<ul>
-  <li>Usages of Endpoints can now use seL4_Call without providing Grant rights by downgrading the Grant to GrantReply</li>
-  <li>The kernel no longer reserves a register for holding the address of a thread’s IPC buffer. It is now expected that the
-location of the IPC buffer is stored in a <code class="language-plaintext highlighter-rouge">__thread</code> local variable and a thread register is used to refer to each
-thread’s thread local variables. The sel4runtime is an seL4 runtime that provides program entry points that setup
-the IPC buffer address and serves as a reference for how the IPC buffer is expected to be accessed.</li>
-  <li>All <code class="language-plaintext highlighter-rouge">seL4_ARM_PageGlobalDirectory</code> invocations need to be replaced with <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpace</code>.</li>
-  <li>Usages of ARCH_Page_Remap can be replaced with ARCH_Page_Map and require the original mapping address to be provided.</li>
-  <li>Device untypeds are provided to user level in different sizes which may require more initial processing to break them
-down for each device they refer to.</li>
-</ul>
-
-<h1 id="full-changelog">Full changelog</h1>
-<p>Refer to the git log in
-<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="language-plaintext highlighter-rouge">git log 10.1.1..11.0.0</code></p>
-
-<h1 id="more-details">More details</h1>
-<p>See the
-<a href="http://sel4.systems/Info/Docs/seL4-manual-11.0.0.pdf">11.0.0 manual</a> included in the release or ask on the mailing list!</p>
-
+<blockquote>
+  <p>A platform owner:</p>
+  <ul>
+    <li>is the maintainer of platform specific kernel and library code for that
+platform</li>
+    <li>is the “driver” for that platform (setting the direction where things are
+going for the platform)</li>
+    <li>is usually one of the main code contributors for that platform</li>
+    <li>has the following responsibilities:
+      <ul>
+        <li>keep the platform working, make sure sel4test and sel4bench are passing on
+the master branch for all supported configurations (esp MCS, but also
+multicore, and IOMMU/VCPU where relevant/appropriate) write and maintain
+documentation for the platform,</li>
+      </ul>
+    </li>
+    <li>help to keep the verification passing for verified configurations (only
+relevant for a few platforms, but might increase in the future)</li>
+    <li>handle bug reports for that platform on github and devel mailing list (has
+access to github issues and/or the new sel4 Jira at sel4.atlassian.net for
+this if desired)</li>
+    <li>handle support requests/questions for that platform (if low-key, ideally
+publicly on the mailing list, but also paid support etc for bigger things)</li>
+    <li>review and help merge PRs for that platform (relevant PRs should have one
+approving review from the platform owner if possible)</li>
+    <li>providing binaries for bootloader and load instructions would be desirable</li>
+    <li>if other development on the master branch has platform impact (from
+contributions or D61), it should preferably include relevant platform code
+updates already, but might need consultation with the platform owner to get
+done, i.e. the basic expectation would be “you break it, you fix it”, but
+people sometimes might need help.</li>
+    <li>the foundation advertises platform owners on the website, and platform owners
+would link back to the foundation.</li>
+  </ul>
+</blockquote>
 
   </div>
 
@@ -533,9 +625,9 @@ down for each device they refer to.</li>
 
     
       <li>
-        <a style=" font-weight: bold; " href="/releases/sel4/11.0.0.html">
+        <a style="" href="/releases/sel4/11.0.0.html">
           seL4 11.0.0
-        </a> (<a style=" font-weight: bold; " href="http://sel4.systems/Info/Docs/seL4-manual-11.0.0.pdf">manual</a>)
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-11.0.0.pdf">manual</a>)
       </li>
 
     
@@ -719,14 +811,15 @@ We occasionally pre-release experimental branches for community feedback and ava
             Site last updated: Fri Mar 15 15:07:51 2024 +0100 983ea6eebc
           </li>
           <li>
+                Page last updated: Fri Mar 15 15:07:51 2024 +0100 983ea6eebc
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/sel4/11.0.0.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/projects/sel4/platf-owner.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/sel4/11.0.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/projects/sel4/platf-owner.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
