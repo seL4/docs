@@ -38,6 +38,23 @@ The seL4 proofs only hold for specific configurations, as noted in the *Verifica
 
 More information can be found on the [Verified Configurations](../projects/sel4/verified-configurations.md) page.
 
+### Not in the lists below?
+
+If the platform, architecture, feature that you are after is not listed below, your
+options are:
+
+* contact one of the seL4 Foundation [Endorsed Services
+  Providers](https://sel4.systems/Foundation/Services/) to get commercial
+  support to develop such a port or feature;
+* check the [roadmap](../projects/roadmap.html) for any planned contributions,
+  from the seL4 Foundation or larger community, such on any new architecture
+  ports, new large formal verifications, or large or fundamental new features.
+* use one of our [communication channels](https://sel4.systems/contact/) to
+  inquire information, from the seL4 Foundation or the larger community, on
+  implementing such a port or feature;
+* develop the seL4 port or feature yourself, following our [guidelines for
+  contributing kernel code](../projects/sel4/kernel-contribution.html).
+
 
 ### Simulating seL4
 
