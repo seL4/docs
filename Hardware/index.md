@@ -40,20 +40,32 @@ More information can be found on the [Verified Configurations](../projects/sel4/
 
 ### Not in the lists below?
 
-If the platform, architecture, feature that you are after is not listed below, your
-options are:
+If the platform, architecture, feature that you are after is not listed below,
+you have several options, listed below. It is important to note however that, as
+explained in the guidelines linked below, new ports or features will require
+compelling arguments, discussion with the technical community (including through
+Request-For-Comments), as well as testing requirements and maintenance/expertise
+commitment, to a degree depending on the nature of the contribution.
 
-* contact one of the seL4 Foundation [Endorsed Services
+* You can check the [roadmap](../projects/roadmap.html) for any planned
+  contributions, from the seL4 Foundation or larger community, such on any new
+  architecture ports, new large formal verifications, or large or fundamental
+  new features;
+
+* You can inquire the seL4 community, through one of our [communication
+  channels](https://sel4.systems/contact/) as to whether someone is developing
+  such a port or feature already, or as to the general interest in discussing
+  such such a new port or feature;
+
+* If you are in a position to develop the seL4 port or feature yourself, you
+  should follow our [guidelines for contributing kernel
+  code](../projects/sel4/kernel-contribution.html), which details the
+  implications and expectations;
+
+* You can also contact one of the seL4 Foundation [Endorsed Services
   Providers](https://sel4.systems/Foundation/Services/) to get commercial
-  support to develop such a port or feature;
-* check the [roadmap](../projects/roadmap.html) for any planned contributions,
-  from the seL4 Foundation or larger community, such on any new architecture
-  ports, new large formal verifications, or large or fundamental new features.
-* use one of our [communication channels](https://sel4.systems/contact/) to
-  inquire information, from the seL4 Foundation or the larger community, on
-  implementing such a port or feature;
-* develop the seL4 port or feature yourself, following our [guidelines for
-  contributing kernel code](../projects/sel4/kernel-contribution.html).
+  support or professional advice to develop such a port or feature (with the
+  same implications and expectations as above for any contributions).
 
 
 ### Simulating seL4

@@ -17,10 +17,6 @@ This assumes that:
   contributions](/projects/sel4/kernel-contribution.html#) and the specific
   [Platform Porting guide](/projects/sel4/porting).
 
-
-
-
-
 > A platform owner:
 > * is the maintainer of platform specific kernel and library code for that
 >   platform
