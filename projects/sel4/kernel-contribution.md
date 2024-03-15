@@ -5,9 +5,14 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Contributing to kernel code
 
+If the platform, architecture, feature that you are after is not listed on the
+[Supported Platforms page](/Hardware/), and if, from your available
+[options](/Hardware/index.html#not-in-the-lists-below), you choose to contribute
+the port or feature yourself, here are the guidelines for it.
+
 There four classes of kernel contributions possible:
 
-1. Board Support Package (BSP) ports
+1. Board Support Package (BSP) ports, also known as platform ports.
 2. Architecture features
 3. Architecture ports
 4. Kernel features
@@ -18,13 +23,17 @@ benefit from the seL4 proofs), until the proofs themselves are also
 appropriately modified, or it can be shown that the modifications do not
 affect the proofs.
 
-## BSP ports
+## Platform/BSP ports
 
-*BSP ports* are the simplest, and require the least modifications, discussion
-and approval.  This assumes that you are porting the kernel to a new board on
-an existing architecture.
+*Platform ports*, also known as *Board Support Package (BSP) ports* are the
+simplest, and require the least modifications, discussion and approval.  This
+assumes that you are porting the kernel to a new board on an existing
+architecture.
 
-The main thing is to follow the [BSP Porting guide](/projects/sel4/porting).
+The main thing is to:
+
+* follow the [platform porting guide](/projects/sel4/porting);
+* follow the guidelines to [become a platform owner](/projects/seL4/platf-owner.html).
 
 Questions, discussion, and sharing of work in progress during this stage are
 welcome.
@@ -44,7 +53,7 @@ Once the code is ready for submission follow the
 
 ## Architecture features
 
-In some cases a kernel port requires more than just a BSP port.  If the port is
+In some cases a kernel port requires more than just a platform/BSP port.  If the port is
 on a supported architecture, but you wish to make use of architecture features
 that the kernel does not yet support, then these will be *architecture feature
 contributions*.  This will typically require moderate modifications to kernel
@@ -86,12 +95,12 @@ code that does affect the verified part of the kernel.
 Consider whether you want to have the architecture feature
 implementation verified, and the plans for achieving that.
 
-As with a BSP port make sure to write appropriate tests and include
+As with a platform/BSP port make sure to write appropriate tests and include
 them in seL4test as part of the work.  Consider (and discuss) a plan
 for how to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.
 
-Once the implementation is complete follow the [Contrbution
+Once the implementation is complete follow the [Contribution
 Guidelines](processes/contributing.html) for submitting changes.
 
 ## Architecture Ports
@@ -133,7 +142,7 @@ re-implement to avoid them.
 Consider whether you want to have the port verified, and the plans for
 achieving that.  Verifying an architecture port is a significant undertaking.
 
-As with a BSP port, make sure to write appropriate tests and include
+As with a platform/BSP port, make sure to write appropriate tests and include
 them in seL4test as part of the port.  Consider (and discuss) a plan
 for how to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.
