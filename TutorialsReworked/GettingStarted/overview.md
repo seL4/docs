@@ -6,7 +6,7 @@ The tutorials are split into a number of broad categories:
 - [About seL4](about-seL4) and [Getting started with the Microkit tutorial](microkit) introduce seL4 concepts.
 - The [seL4 Kernel tutorials](../seL4Kernel/overview.md) are a deep dive into seL4 concepts.
 - [MCS](../MCS/mcs-extensions) introduces seL4 MCS extensions.
-- [Dynamic Libraries](../DynamicLibraries/initialisation.md) covers the libraries found in `seL4_libs`.
+- [Dynamic Libraries](../DynamicLibraries/initialisation.md) covers the libraries that have been developed for rapidly prototyping systems on seL4.
 - [CAmkES](../CAmkES/hello-camkes.md) is a platform for building componentised systems for embedded platforms.
 - [Microkit](https://trustworthy.systems/projects/microkit/tutorial/)is an operating system framework on top of seL4 provides a small set of simple abstractions that ease the design and implementation of statically structured systems on seL4. (Links to the same tutorial as in the [Getting Started](../GettingStarted/microkit) section.)
 - [Rust](https://github.com/seL4/rust-sel4) provide crates for supporting the use of Rust in seL4 userspace.
