@@ -1,4 +1,11 @@
-# CAmkES Tutorial 2
+---
+toc: true
+layout: project
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
+---
+
+# CAmkES Tutorial 2: Events
 This tutorial shows how to build events in CAmkES.
 
 Learn how to:
@@ -473,4 +480,4 @@ writing your first CAmkES application.
 
 
 
-Next tutorial: <a href="camkes3">CAmkES 3</a>
+Next tutorial: <a href="camkes3">CAmkES 3: Timer</a>

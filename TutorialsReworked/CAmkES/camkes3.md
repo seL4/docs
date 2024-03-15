@@ -1,3 +1,9 @@
+---
+toc: true
+layout: project
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
+---
 # CAmkES Timer Tutorial
 
 This tutorial guides you through setting up a sample timer driver component in
@@ -440,4 +446,4 @@ Task 7 to 10 are the exact same as the tasks in part one.
 
 You should also expect the same output as the first part.
 
-Next tutorial: <a href="camkes3">CAmkES VM</a>
+Next tutorial: <a href="camkes-VM">CAmkES VM</a>

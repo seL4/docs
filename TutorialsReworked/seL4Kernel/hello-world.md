@@ -7,7 +7,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 
 
 # Hello, world!
-In this tutorial you will
+In this tutorial you will:
 - Run Hello, World! to ensure your setup is working correctly
 - Become familiar with the jargon *root task*
 - Build and simulate a seL4 project
@@ -23,7 +23,7 @@ When the root task starts there are no available drivers, however a minimal C li
 The tutorial is already set up to print "Hello, world!", so at this point
 all you need to do is build and run the tutorial.
 
-### Initialise the build directory
+### Initialising
 
 ```
 cd sel4-tutorials-manifest
@@ -35,13 +35,15 @@ This step creates two new directories in `sel4-tutorials-manifest`, namely `hell
 <summary style="display:list-item"><em>Hint:</em> tutorial solutions</summary>
 <br>
 All tutorials come with complete solutions. To get solutions run:
+
 ```
 ./init --solution --tut hello-world
 ```
+
 This will generate another `hello-world` directory and `hello-world_build` directory, with unique names, e.g. `hello-world44h1po5q` and `hello-world44h1po5q_build`.
 </details>
 
-We will now use two terminals, as described in [Setting up your machine](setting-up#mapping-a-container).
+We will now use two terminals, as described in [Setting up your machine](https://docs.sel4.systems/Tutorials/seL4Kernel/setting-up#mapping-a-container).
 
  - Terminal A is just a normal terminal, and is used for git operations, editing (e.g., vim, emacs), and other normal operations.
  - Terminal B is running in a container, and is only used for compilation.
@@ -188,12 +190,11 @@ int main(int argc, char *argv[]) {
 ```
 Once you have made your change, use Terminal B to rebuild the project:
 
-*Hint:* Remember to exit the QEMU siumator before rerunning the project with `ctrl-A,x`. *And* exit the container using `ctrl-D`
+*Hint:* Remember to exit the QEMU siumator before rerunning the project with `ctrl-A,x`.
 
 Then rebuild using ninja and run the simulator again:
 ```
 ninja
-container
 ./simulate
 ```
 

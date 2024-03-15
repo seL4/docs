@@ -5,7 +5,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# CAmkES Tutorial 1
+# CAmkES Tutorial 1: Introduction to CAmkES
 This tutorial is an introduction to
 CAmkES: bootstrapping a basic static CAmkES application, describing its
 components, and linking them together.
@@ -283,5 +283,5 @@ Now build and run the project, if it compiles: Congratulations! Be sure to read 
 structure of ADL: it's key to understanding CAmkES. And well done on
 writing your first CAmkES application.
 
-Next tutorial: <a href="camkes2">CAmkES 2</a>
+Next tutorial: <a href="camkes2">CAmkES 2: Events</a>
 

@@ -188,4 +188,4 @@ Hello CAmkES World
 structure of ADL: it's key to understanding CAmkES. And well done on
 building and running your first CAmkES application.
 
-Next tutorial: <a href="camkes1">CAmkES 1</a>
+Next tutorial: <a href="camkes1">CAmkES 1: Introduction to CAmkES</a>

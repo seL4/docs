@@ -9,8 +9,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 
 This tutorial provides a basic introduction to seL4 capabilities.
 
-By the end of this tutorial, you should be familiar with:
-
+You will learn:
 1. The jargon CNode, CSpace, CSlot.
 2. Know how to invoke a capability.
 3. Know how to delete and copy CSlots.
@@ -32,9 +31,11 @@ ninja
 <summary style="display:list-item"><em>Hint:</em> tutorial solutions</summary>
 <br>
 All tutorials come with complete solutions. To get solutions run:
+
 ```
 ./init --solution --tut capabilities
 ```
+
 Answers are also available in drop down menus under each section.
 </details>
 
@@ -241,9 +242,11 @@ The third line stating the number of slots in the CSpace, is incorrect, and your
 ```
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
+
 ```c
     size_t initial_cnode_object_size_bytes = initial_cnode_object_size * (1u << seL4_SlotBits);
 ```
+
 </details>
 
 ### Copy a capability between CSlots
@@ -277,12 +280,14 @@ The error occurs as the existing code tries to set the priority of the initial t
 ```
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
+
 ```c
     /* use seL4_CNode_Copy to make another copy of the initial TCB capability to the last slot in the CSpace */
     error = seL4_CNode_Copy(seL4_CapInitThreadCNode, last_slot, seL4_WordBits,
                       seL4_CapInitThreadCNode, first_free_slot, seL4_WordBits, seL4_AllRights);
     ZF_LOGF_IF(error, "Failed to copy cap!");
 ```
+
 </details>
 On success, you will now see the output:
 
@@ -348,6 +353,7 @@ main@main.c:56 Failed to suspend current thread
 ```
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
+
 ```c
     // suspend the current thread
     seL4_TCB_Suspend(seL4_CapInitThreadTCB);
