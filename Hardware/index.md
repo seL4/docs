@@ -47,6 +47,12 @@ compelling arguments, discussion with the technical community (including through
 Request-For-Comments), as well as testing requirements and maintenance/expertise
 commitment, to a degree depending on the nature of the contribution.
 
+
+* You can contact one of the seL4 Foundation [Endorsed Services
+  Providers](https://sel4.systems/Foundation/Services/) to get commercial
+  support or professional advice to develop such a port or feature (with the
+  same implications and expectations as above for any contributions);
+
 * You can check the [roadmap](../projects/roadmap.html) for any planned
   contributions, from the seL4 Foundation or larger community, such on any new
   architecture ports, new large formal verifications, or large or fundamental
@@ -54,18 +60,13 @@ commitment, to a degree depending on the nature of the contribution.
 
 * You can contact the seL4 community through one of our [communication
   channels](https://sel4.systems/contact/) to ask whether someone is developing
-  such a port or feature already, or if there is general interest in discussing
-  such such a new port or feature;
+  such a port or feature already, or whether there is general interest in discussing
+  such a new port or feature;
 
 * If you are in a position to develop the seL4 port or feature yourself, you
   should follow our [guidelines for contributing kernel
   code](../projects/sel4/kernel-contribution.html), which details the
-  implications and expectations;
-
-* You can also contact one of the seL4 Foundation [Endorsed Services
-  Providers](https://sel4.systems/Foundation/Services/) to get commercial
-  support or professional advice to develop such a port or feature (with the
-  same implications and expectations as above for any contributions).
+  implications and expectations.
 
 
 ### Simulating seL4
