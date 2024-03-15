@@ -46,7 +46,6 @@ This documentation site is for cooperatively developing and sharing documentatio
   <div class="col ">
    <h1><a href="/projects/">Projects</a></h1>
 	<p>List and details of all the projects that make up the seL4 platform.</p>
-
 	<ul>
         <li><a href="/projects/sel4/">seL4 kernel</a></li>
         <li><a href="/projects/l4v/">L4.verified</a></li>
@@ -60,64 +59,48 @@ This documentation site is for cooperatively developing and sharing documentatio
 	</ul>
   </div>
   <div class="col">
-   <h1><a href="/Tutorials/">Tutorials</a></h1>
-	<p>Tutorials and other material to learn about seL4.</p>
-
-	<ul>
-	<li><a href="/Tutorials#how-to-use-the-tutorials">Tutorial overview</a></li>
-	<li><a href="/Tutorials#introduction-tutorial">Introduction (hello world)</a></li>
-	<li><a href="/Tutorials#sel4-mechanisms-tutorials">seL4 mechanisms</a></li>
-	<li><a href="/Tutorials#camkes-tutorials">CAmkES</a></li>
-	<li><a href="/Tutorials#rapid-prototyping-tutorials">Rapid prototyping</a></li>
-	<li><a href="/Tutorials#virtual-machines">Virtual machines</a></li>
-	<li><a href="/Tutorials#mcs-extensions">MCS extensions</a></li>
-	</ul>
-  </div>
- </div>
-
-
-  <div class="col">
-    <h1><a href="/TutorialsReworked/GettingStarted/overview">Tutorials</a></h1>
+    <h1><a href="/Tutorials(old)">TutorialsOld</a></h1>
+    <h1><a href="/Tutorials/GettingStarted/overview">Tutorials</a></h1>
   	<p>Tutorials and other material to learn about seL4.</p>
     <ul>
       <li>Getting started</li>
       <ul>
-        <li><a href="/TutorialsReworked/GettingStarted/about-seL4">About seL4</a></li>
-        <li><a href="/TutorialsReworked/GettingStarted/microkit">Using the seL4 Microkit tutorial to get started with seL4</a></li>
+        <li><a href="/Tutorials/GettingStarted/about-seL4">About seL4</a></li>
+        <li><a href="/Tutorials/GettingStarted/microkit">Using the seL4 Microkit tutorial to get started with seL4</a></li>
       </ul>
       <li>The seL4 kernel</li>
       <ul>
-        <li><a href="/TutorialsReworked/seL4Kernel/overview">Overview</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/setting-up">Setting up your machine</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/hello-world">Hello world</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/capabilities">Capabilities</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/untyped">Untyped</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/mapping">Mapping</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/threads">Threads</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/ipc">IPC</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/notifications">Notifications</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/interrupts">Interrupts</a></li>
-        <li><a href="TutorialsReworked/seL4Kernel/faults">Fault Handling</a></li>
+        <li><a href="/Tutorials/seL4Kernel/overview">Overview</a></li>
+        <li><a href="Tutorials/seL4Kernel/setting-up">Setting up your machine</a></li>
+        <li><a href="Tutorials/seL4Kernel/hello-world">Hello world</a></li>
+        <li><a href="Tutorials/seL4Kernel/capabilities">Capabilities</a></li>
+        <li><a href="Tutorials/seL4Kernel/untyped">Untyped</a></li>
+        <li><a href="Tutorials/seL4Kernel/mapping">Mapping</a></li>
+        <li><a href="Tutorials/seL4Kernel/threads">Threads</a></li>
+        <li><a href="Tutorials/seL4Kernel/ipc">IPC</a></li>
+        <li><a href="Tutorials/seL4Kernel/notifications">Notifications</a></li>
+        <li><a href="Tutorials/seL4Kernel/interrupts">Interrupts</a></li>
+        <li><a href="Tutorials/seL4Kernel/faults">Fault Handling</a></li>
       </ul>
       <li>MCS</li>
       <ul>
-        <li><a href="TutorialsReworked/MCS/mcs-extensions">MCS Extensions</a></li>
+        <li><a href="Tutorials/MCS/mcs-extensions">MCS Extensions</a></li>
       </ul>
       <li>Dynamic libraries</li>
       <ul>
-        <li><a href="TutorialsReworked/DynamicLibraries/initialisation">Initialisation & threading</a></li>
-        <li><a href="TutorialsReworked/DynamicLibraries/ipc">IPC</a></li>
-        <li><a href="TutorialsReworked/DynamicLibraries/processes">Processes & Elf loading</a></li>
-        <li><a href="TutorialsReworked/DynamicLibraries/timer">Timer</a></li>
+        <li><a href="Tutorials/DynamicLibraries/initialisation">Initialisation & threading</a></li>
+        <li><a href="Tutorials/DynamicLibraries/ipc">IPC</a></li>
+        <li><a href="Tutorials/DynamicLibraries/processes">Processes & Elf loading</a></li>
+        <li><a href="Tutorials/DynamicLibraries/timer">Timer</a></li>
       </ul>
       <li>CAmkES</li>
       <ul>
-        <li><a href="TutorialsReworked/CAmkES/hello-camkes">Hello CAmkES</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes1">CAmkES 1</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes2">CAmkES 2</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes3">CAmkES 3</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes-vm">CAmkES VM</a></li>
-        <li><a href="TutorialsReworked/CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
+        <li><a href="Tutorials/CAmkES/hello-camkes">Hello CAmkES</a></li>
+        <li><a href="Tutorials/CAmkES/camkes1">CAmkES 1</a></li>
+        <li><a href="Tutorials/CAmkES/camkes2">CAmkES 2</a></li>
+        <li><a href="Tutorials/CAmkES/camkes3">CAmkES 3</a></li>
+        <li><a href="Tutorials/CAmkES/camkes-vm">CAmkES VM</a></li>
+        <li><a href="Tutorials/CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
       </ul>
       <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>
       <li><a href= "https://github.com/seL4/rust-sel4">Rust</a></li>
@@ -125,7 +108,7 @@ This documentation site is for cooperatively developing and sharing documentatio
       <ul>
         <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
         <li><a href= "/projects/sel4/api-doc.html">API references</a></li>
-        <li><a href="TutorialsReworked/Resources/how-to"><em>How to:</em> A quick solutions guide</a></li>
+        <li><a href="Tutorials/Resources/how-to"><em>How to:</em> A quick solutions guide</a></li>
       </ul>
     </ul>
   </div>
