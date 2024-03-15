@@ -42,7 +42,7 @@ More information can be found on the [Verified Configurations](../projects/sel4/
 
 If the platform, architecture, feature that you are after is not listed below,
 you have several options, listed below. It is important to note however that, as
-explained in the guidelines linked below, new ports or features will require
+explained in the guidelines linked below, contributing new ports or features will require
 compelling arguments, discussion with the technical community (including through
 Request-For-Comments), as well as testing requirements and maintenance/expertise
 commitment, to a degree depending on the nature of the contribution.
