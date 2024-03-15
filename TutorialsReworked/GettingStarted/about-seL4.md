@@ -41,5 +41,5 @@ memory object, which allocates the memory for the object, initialises it, and re
     Because sel4 is small, a lot more needs to be done in user space and there are a lot more choices about how to do that. We'll start by building a simple system using the seL4 Microkit, which is a software development kit for building static systems on seL4.
 </p>
 <p>
-    Next tutorial: <a href="microkit">seL4 microkit tutorial</a>
+    Next: Get started with the <a href="microkit">seL4 microkit tutorial</a>
 </p>

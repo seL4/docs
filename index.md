@@ -77,7 +77,7 @@ This documentation site is for cooperatively developing and sharing documentatio
 
 
   <div class="col">
-    <h1><a href="/TutorialsReworked/">Tutorials</a></h1>
+    <h1><a href="/TutorialsReworked/GettingStarted/overview">Tutorials</a></h1>
   	<p>Tutorials and other material to learn about seL4.</p>
     <ul>
       <li>Getting started</li>

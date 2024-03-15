@@ -23,15 +23,10 @@ architecture.  Suggested resources for these include:
 	- [Instruction Set Architecture (wikipedia)](https://en.wikipedia.org/wiki/Instruction_set_architecture)
 
 <h2>Resources</h2>
-We recommend having access to the <a target="_blank" href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 manual<a/> and the <a target="_blank" href="../projects/sel4/api-doc.html">API references</a>.
+We recommend having access to the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 manual<a/> and the <a href="../projects/sel4/api-doc.html">API references</a>.
 
+The <a href="../Resources/how-to">How to</a> page provides links to tutorial solutions as quick references for seL4 calls and methods.
 
-<h3>Getting help</h3>
-* [FAQ](https://docs.sel4.systems/FrequentlyAskedQuestions)
-* [Debugging guide](https://docs.sel4.systems/DebuggingGuide.html)
-* [seL4 Discourse forum](https://sel4.discourse.group)
-* [Developer's mailing list](https://lists.sel4.systems/postorius/lists/devel.sel4.systems/)
-* [Mattermost Channel](https://mattermost.trustworthy.systems/sel4-external/)
 
 <p>
     Next tutorial: <a href="../seL4Kernel/setting-up">Setting up your machine</a>
