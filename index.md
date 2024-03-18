@@ -41,73 +41,32 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="/processes/style-guide.html">Style Guide</a></li>
 	</ul>
   </div>
- </div>
- <div class="flex-grid" >
   <div class="col ">
-   <h1><a href="/projects/">Projects</a></h1>
-	<p>List and details of all the projects that make up the seL4 platform.</p>
-	<ul>
-        <li><a href="/projects/sel4/">seL4 kernel</a></li>
-        <li><a href="/projects/l4v/">L4.verified</a></li>
-        <li><a href="/projects/microkit/">seL4 Microkit</a></li>
-        <li><a href="/projects/camkes/">CAmkES</a></li>
-        <li><a href="/projects/sel4test/">seL4test</a></li>
-        <li><a href="/projects/sel4bench/">seL4bench</a></li>
-        <li><a href="/projects/virtualization/">Virtualisation</a></li>
-        <li><a href="/projects/buildsystem/">Build System</a></li>
-        <li><a href="/projects/sel4webserver/">Example system: seL4webserver</a></li>
-	</ul>
-  </div>
+    <h1><a href="/projects/">Projects</a></h1>
+    <p>List and details of all the projects that make up the seL4 platform.</p>
+    <ul>
+          <li><a href="/projects/sel4/">seL4 kernel</a></li>
+          <li><a href="/projects/l4v/">L4.verified</a></li>
+          <li><a href="/projects/microkit/">seL4 Microkit</a></li>
+          <li><a href="/projects/camkes/">CAmkES</a></li>
+          <li><a href="/projects/sel4test/">seL4test</a></li>
+          <li><a href="/projects/sel4bench/">seL4bench</a></li>
+          <li><a href="/projects/virtualization/">Virtualisation</a></li>
+          <li><a href="/projects/buildsystem/">Build System</a></li>
+          <li><a href="/projects/sel4webserver/">Example system: seL4webserver</a></li>
+    </ul>
+    </div>
+</div>
+<div class="flex-grid" >
   <div class="col">
     <h1><a href="/Tutorials/">Tutorials</a></h1>
   	<p>Tutorials and other material to learn about seL4.</p>
-    <ul>
-      <li>Getting started</li>
-      <ul>
-        <li><a href="/Tutorials/GettingStarted/about-seL4">About seL4</a></li>
-        <li><a href="/Tutorials/GettingStarted/microkit">Using the seL4 Microkit tutorial to get started with seL4</a></li>
-      </ul>
-      <li>The seL4 kernel</li>
-      <ul>
-        <li><a href="/Tutorials/seL4Kernel/overview">Overview</a></li>
-        <li><a href="Tutorials/seL4Kernel/setting-up">Setting up your machine</a></li>
-        <li><a href="Tutorials/seL4Kernel/hello-world">Hello world</a></li>
-        <li><a href="Tutorials/seL4Kernel/capabilities">Capabilities</a></li>
-        <li><a href="Tutorials/seL4Kernel/untyped">Untyped</a></li>
-        <li><a href="Tutorials/seL4Kernel/mapping">Mapping</a></li>
-        <li><a href="Tutorials/seL4Kernel/threads">Threads</a></li>
-        <li><a href="Tutorials/seL4Kernel/ipc">IPC</a></li>
-        <li><a href="Tutorials/seL4Kernel/notifications">Notifications</a></li>
-        <li><a href="Tutorials/seL4Kernel/interrupts">Interrupts</a></li>
-        <li><a href="Tutorials/seL4Kernel/faults">Fault Handling</a></li>
-      </ul>
-      <li>MCS</li>
-      <ul>
-        <li><a href="Tutorials/MCS/mcs-extensions">MCS Extensions</a></li>
-      </ul>
-      <li>Dynamic libraries</li>
-      <ul>
-        <li><a href="Tutorials/DynamicLibraries/initialisation">Initialisation & threading</a></li>
-        <li><a href="Tutorials/DynamicLibraries/ipc">IPC</a></li>
-        <li><a href="Tutorials/DynamicLibraries/processes">Processes & Elf loading</a></li>
-        <li><a href="Tutorials/DynamicLibraries/timer">Timer</a></li>
-      </ul>
-      <li>CAmkES</li>
-      <ul>
-        <li><a href="Tutorials/CAmkES/hello-camkes">Hello CAmkES</a></li>
-        <li><a href="Tutorials/CAmkES/camkes1">CAmkES 1</a></li>
-        <li><a href="Tutorials/CAmkES/camkes2">CAmkES 2</a></li>
-        <li><a href="Tutorials/CAmkES/camkes3">CAmkES 3</a></li>
-        <li><a href="Tutorials/CAmkES/camkes-vm">CAmkES VM</a></li>
-        <li><a href="Tutorials/CAmkES/camkes-cross-vm">CAmkES Cross VM Connectors</a></li>
-      </ul>
-      <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>
-      <li><a href= "https://github.com/seL4/rust-sel4">Rust</a></li>
-      <li>Resources</li>
-      <ul>
-        <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
-        <li><a href= "/projects/sel4/api-doc.html">API references</a></li>
-        <li><a href="Tutorials/Resources/how-to"><em>How to:</em> A quick solutions guide</a></li>
-      </ul>
-    </ul>
   </div>
+  <div class="col">
+    <h1><a href="Tutorials/Resources/how-to"><em>How to:</em> A quick solutions guide</a></h1>
+    <p>Links to tutorial solutions as quick references for seL4 calls and methods.</p>
+  </div>
+  <div class="col">
+    <h1><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></h1>
+  </div>
+</div>
