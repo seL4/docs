@@ -284,4 +284,3 @@ structure of ADL: it's key to understanding CAmkES. And well done on
 writing your first CAmkES application.
 
 Next tutorial: <a href="camkes2">CAmkES 2: Events</a>
-
