@@ -5,9 +5,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Getting Started
+# Working with seL4
 
-This page is a quick start for working with seL4 and its ecosystem.
+This page provides an overview on working with seL4 and its ecosystem.
 
 ## Background and terminology
 
