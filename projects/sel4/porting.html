@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-03-25 03:15:32 +0000 -->
+<!-- Page last generated 2024-03-25 10:35:14 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -313,82 +313,206 @@
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
     <h1 id="porting-sel4-to-a-new-platform">Porting seL4 to a new platform</h1>
 
+<p>This section covers porting seL4 to a new ARM or RISC-V platform. You can check the list of supported seL4 platforms <a href="https://docs.sel4.systems/Hardware/">here</a>.</p>
+
 <h2 id="setup">Setup</h2>
 
 <p>In order to load the seL4 image (via some means) it is important to have a working bootloader.
-We tend to use <a href="https://www.denx.de/wiki/U-Boot">U-boot</a> as it is open source, reliable and supports many different architectures.</p>
+We tend to use <a href="https://www.denx.de/wiki/U-Boot">U-Boot</a> as it is open source, reliable and supports many different architectures.</p>
 
-<p>For initial setup you can follow the instructions on the UNSW advanced operating systems website regarding <a href="https://www.cse.unsw.edu.au/~cs9242/19/project/linux.shtml">setting up a tftp server</a>.</p>
+<p>There are a variety of ways of loading an seL4 image from U-Boot such as eMMC, TFTP, and USB.</p>
 
-<p>Once you get U-boot up and running it is a good idea (if the platform is supported) to flash a
-Linux image onto the dev board. This way you can find the correct address to load the image into memory.
+<h3 id="tftp-setup">TFTP setup</h3>
+
+<p>For setting up a TFTP server to transfer images over the network, you can follow the
+<a href="https://www.cse.unsw.edu.au/~cs9242/19/project/linux.shtml">UNSW Advanced Operating Systems course guide</a>.</p>
+
+<p>Once you get U-Boot up and running it is a good idea (if the platform is supported) to flash a
+Linux image onto the board. This way you can find the correct address to load the image into memory.
 This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.</p>
 
-<p>Once you have found the correct address to load, you can use the command <code class="language-plaintext highlighter-rouge">bootcmd="tftpboot 0x20000000 sel4_image &amp;&amp; go 0x20000000"</code>
-(using 0x20000000 as an example) followed by <code class="language-plaintext highlighter-rouge">saveenv</code> to save the starting address onto the boards flash memory.
-You will also need to set the ‘ipaddr’ and ‘serverip’ details can be found in the link above.</p>
+<p>Once you have found the correct address to load, declare the boot command (where address 0x20000000 as an example):</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">bootcmd</span><span class="o">=</span><span class="s2">"tftpboot 0x20000000 /path/to/image &amp;&amp; go 0x20000000"</span>
+saveenv
+</code></pre></div></div>
+
+<p>For TFTP, you will also need to set some U-Boot envrionment variables:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv ipaddr &lt;BOARD ADDRESS&gt;
+setenv serverip &lt;SERVER ADDRESS&gt;
+saveenv
+</code></pre></div></div>
+
+<h3 id="emmcsd-card-setup">eMMC/SD card setup</h3>
+
+<p>We can load an image with the following command (using <code class="language-plaintext highlighter-rouge">0x20000000</code> as an example):</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x20000000 /path/to/image
+</code></pre></div></div>
+
+<p>You can find more details in the <a href="https://docs.u-boot.org/en/latest/usage/cmd/fatload.html">U-Boot documentation</a>.</p>
 
 <h2 id="sel4">seL4</h2>
 
-<p>In order to have a successful port of seL4 to your target ARM platform you will need to go through the following steps.</p>
+<p>In order to have a successful port of seL4 to your target ARM or RISC-V platform you will need to go through the following steps.</p>
 
-<h3 id="dts">DTS</h3>
+<h3 id="device-tree">Device Tree</h3>
 
-<p>Look for DTS and drivers inside the <a href="https://github.com/torvalds/linux">Linux repository</a>, normally they will be supported. If they are supported clone Linux and modify the <code class="language-plaintext highlighter-rouge">update-dts.sh</code> to add your target. Run the script located in <code class="language-plaintext highlighter-rouge">kernel/tools/dts/update-dts.sh</code> at the cloned Linux repository. This will create a “platform.dts” file from Linux inside the dts folder in the kernel. You may need to add device nodes depending on what Linux uses and what is required by seL4. For example, in the port of the Rockpro64 a memory node and an extra timer node were needed so these had to be defined manually.</p>
+<p>Device Trees are used by ARM and RISC-V platforms to describe the hardware platform.
+seL4 makes use of Device Trees at build time, which is why acquiring a Device Tree Source (DTS)
+for your platform is one of the first steps.</p>
+
+<p>seL4 relies on the DTS for the location and size of main memory as well as information
+about certain devices used by the kernel such as the timer. In debug mode, seL4 also
+makes use of the default serial device for debug output.</p>
+
+<p>Typically the Device Tree Source will be included in the
+<a href="https://github.com/torvalds/linux">Linux kernel source</a>, from there you can decompile
+the device tree blob (DTB) from building the Linux kernel to get the Device Tree that
+Linux uses.</p>
+
+<p>You can compile the Linux Device Tree Sources into a final Device Tree Blob with:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nv">ARCH</span><span class="o">=</span>&lt;arm/arm64/riscv&gt; <span class="nv">CROSS_COMPILE</span><span class="o">=</span>&lt;TOOLCHAIN&gt; defconfig
+make <span class="nv">ARCH</span><span class="o">=</span>&lt;arm/arm64/riscv&gt; <span class="nv">CROSS_COMPILE</span><span class="o">=</span>&lt;TOOLCHAIN&gt; dtbs
+</code></pre></div></div>
+
+<p>The DTBs can be found in <code class="language-plaintext highlighter-rouge">arch/&lt;ARCH&gt;/boots/dts/</code>.</p>
+
+<p>The following command allows you to decompile the DTB:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtc <span class="nt">-I</span> dtb <span class="nt">-O</span> dts /path/to/dtb <span class="nt">-o</span> linux.dts
+</code></pre></div></div>
+
+<p>It should be noted that you may need to add device nodes depending on what Linux uses
+and what is required by seL4. For example, some platforms do not include a node for
+main memory in the Linux Device Tree. This is because Linux can get
+this information at run-time from a previous bootloader. This is not the case for seL4
+as it consumes the Device Tree at build-time.</p>
+
+<p>In the seL4 source, each platform has an overlay DTS that is responsible for dealing
+with seL4-specific device nodes. Below is an example
+(from the <a href="https://github.com/seL4/seL4/blob/master/src/plat/rockpro64/overlay-rockpro64.dts">ROCKPro64</a>):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ {
+    chosen {
+        seL4,elfloader-devices =
+            "serial2",
+            &amp;{/psci},
+            &amp;{/timer};
+        seL4,kernel-devices =
+            "serial2",
+            &amp;{/interrupt-controller@fee00000},
+            &amp;{/timer};
+    };
+};
+</code></pre></div></div>
+
+<p>These overlay files give a good idea of what nodes seL4 requires in the DTS other than
+main memory.</p>
+
+<p>You will need to create a similar overlay DTS in <code class="language-plaintext highlighter-rouge">src/plat/&lt;platform&gt;/overlay-&lt;platform&gt;.dts</code>
+as part of the platform port.</p>
 
 <h3 id="hardware-generation-script">Hardware generation script</h3>
 
-<p>Depending on your platform and the way the DTS is defined you may need to modify the hardware_gen.py script.
-From the above example the Rockpro64 needed a memory node so that this script could define working memory.
-Other gotchas could include interrupt cells, interrupt numbers being mapped wrongly, or incorrect addresses.
-Also serial and timer drivers will need to be added to the kernel if they don’t already exist. You can check this through
-the DTS device strings and compare to the hardware.yml file in <code class="language-plaintext highlighter-rouge">kernel/tools/hardware.yml</code>. If needed add the required drivers in <code class="language-plaintext highlighter-rouge">kernel/drivers/</code>.</p>
+<p>Depending on your platform and the way the DTS is defined you may need to modify the
+<code class="language-plaintext highlighter-rouge">seL4/tools/hardware_gen.py</code> script.</p>
+
+<p>From the above example the ROCKPro64 needed a memory node so that this script could
+define working memory. Other gotchas could include interrupt cells, interrupt numbers being
+mapped wrongly, or incorrect addresses. Also serial and timer drivers will need to be added
+to the kernel if they don’t already exist. You can check this through the DTS device strings
+and compare to the <code class="language-plaintext highlighter-rouge">seL4/tools/hardware.yml</code> file.</p>
+
+<p>If needed, add the required drivers in <code class="language-plaintext highlighter-rouge">seL4/src/drivers/</code> and <code class="language-plaintext highlighter-rouge">seL4/include/drivers/</code>.</p>
 
 <h3 id="kernel">Kernel</h3>
 
-<p>You will need to add <code class="language-plaintext highlighter-rouge">libsel4/sel4_plat_include/&lt;platform&gt;/sel4/plat/api/constants.h</code> and add sel4_UserTop depending on what you support. Look in the other platform files for examples similar to your platform.</p>
+<p>You will need to add <code class="language-plaintext highlighter-rouge">seL4/libsel4/sel4_plat_include/&lt;platform&gt;/sel4/plat/api/constants.h</code>.
+Depending on your platform, this is either empty or requires defining the value for <code class="language-plaintext highlighter-rouge">seL4_UserTop</code>.
+Look in the other platform files for examples similar to your platform.</p>
 
-<h3 id="cmake-build-system">CMake-build system</h3>
+<p>You will need to add a CMake configuration file for the platform at <code class="language-plaintext highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>.
+It is best to base the contents of this file off of other platforms of the same architecture.</p>
 
-<p>You will need to modify the build system in two places. Firstly in the kernel’s platform folder, you define <code class="language-plaintext highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>, again you can look at other platforms for examples.
-Secondly, you will need to add ‘KernelPlatform’ to the cmake and elf-loader tools. You can do this by editing
-<code class="language-plaintext highlighter-rouge">tools/cmake-tool/helpers/application_settings.cmake</code> and <code class="language-plaintext highlighter-rouge">tools/elfloader-tool/CMakeLists.txt</code>.</p>
+<h2 id="testing-your-sel4-port">Testing your seL4 port</h2>
+
+<p>In order to sanity check your port of seL4, it is a good idea to get
+<a href="https://docs.sel4.systems/projects/sel4test/">the seL4test project</a> running and passing.</p>
 
 <h3 id="elf-loader">ELF-loader</h3>
 
-<p>You will need to add directories and files <code class="language-plaintext highlighter-rouge">tools/elfloader-tool/src/plat/&lt;platform&gt;/sys_fputc.c</code> and
-<code class="language-plaintext highlighter-rouge">tools/elfloader-tool/include/plat/&lt;platform&gt;/platform.h</code> which will provide a simple implementation of putchar with a physical address for uart for the elf loader to use.</p>
+<p>Before we can run sel4test, we need to have seL4 booting first.</p>
 
-<h2 id="sel4-test">seL4 test</h2>
+<p>Although we use U-Boot as a bootloader, there are additional steps needed to initialise the
+hardware and setup system images before we can boot seL4. This is the purpose of the
+<a href="https://docs.sel4.systems/projects/elfloader/">ELF-loader</a>.</p>
 
-<p>seL4test needs user level serial and timer drivers to run. Add these drivers and the following files to libplatsupport in
-order to get the test suite running. The directory structure and files will look something like the following. Some of these
-files may not have anything in them but include them anyway to keep the build system happy.</p>
+<p>The code for the ELF-loader can be found in the <code class="language-plaintext highlighter-rouge">elfloader-tool</code> directory at the root of
+the <a href="https://github.com/seL4/seL4_tools">seL4_tools</a> repository.</p>
 
-<p>Use the other platforms as examples; generally you will have to configure the timer driver by reading the manual, it may have its
-own unique programming sequence and can sometimes be a bit tricky.</p>
+<p>Depending on your platform, you may have to make changes to the ELF-loader, which is
+responsible for loading the kernel and any user-programs. The ELF-loader outputs to the
+serial, so needs to be able to access the UART.</p>
 
-<p>You can find the physical addresses and interrupt numbers for each device in its platform reference manual and copy them into the right places.</p>
+<p>On RISC-V, outputting to UART is done via a call to the SBI layer so no changes are necessary.</p>
 
-<p><code class="language-plaintext highlighter-rouge">libplatsupport/plat_include/&lt;platform&gt;/</code>
-	-<code class="language-plaintext highlighter-rouge">clock.h</code>
-	-<code class="language-plaintext highlighter-rouge">gpio.h</code>
-	-<code class="language-plaintext highlighter-rouge">i2c.h</code>
-	-<code class="language-plaintext highlighter-rouge">mux.h</code>
-	-<code class="language-plaintext highlighter-rouge">serial.h</code>
-	-<code class="language-plaintext highlighter-rouge">timer.h</code>
-<code class="language-plaintext highlighter-rouge">libplatsupport/src/plat/&lt;platform&gt;/</code>
-	-<code class="language-plaintext highlighter-rouge">chardev.c</code>
-	-<code class="language-plaintext highlighter-rouge">ltimer.c</code>
-	-<code class="language-plaintext highlighter-rouge">serial.c</code>
-	-<code class="language-plaintext highlighter-rouge">timer.c</code></p>
+<p>On ARM, there are a variety of existing UART drivers in <code class="language-plaintext highlighter-rouge">tools/elfloader-tool/src/drivers/uart/</code>.
+If the default serial is not supported by any of these drivers, you will have to
+provide a simple putchar implementation.</p>
+
+<p>If the system image that is produced by the ELF-loader build system needs be a particular file
+format (e.g binary or EFI) or needs to start at a particular physical address, you can
+configure the default platform options in <code class="language-plaintext highlighter-rouge">seL4_tools/cmake-tool/helpers/application_settings.cmake</code>.</p>
+
+<h3 id="sel4test">seL4test</h3>
+
+<p>seL4test needs user level serial and timer drivers to run. Add these drivers and the following
+files to <a href="https://github.com/seL4/util_libs/tree/master/libplatsupport">libplatsupport</a>
+in order to get the test suite running. The directory structure and
+files will look something like the following. Some of these files may not have anything in
+them but include them anyway to keep the build system happy.</p>
+
+<p>Use the other platforms as examples; generally you will have to configure the timer driver by
+reading the manual, it may have its own unique programming sequence and can sometimes be a bit tricky.</p>
+
+<p>If the technical reference manual does not contain enough detail, you may be able to gain more
+information by looking at the respective Linux driver for the device. This can be done by searching
+for the value of the ‘compatible’ field that is on each device node in a DTS in the Linux source code.</p>
+
+<p>You can find the physical addresses and interrupt numbers for each device in its platform reference
+manual and copy them into the right places.</p>
+
+<p><code class="language-plaintext highlighter-rouge">util_libs/libplatsupport/plat_include/&lt;platform&gt;/</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">clock.h</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gpio.h</code></li>
+  <li><code class="language-plaintext highlighter-rouge">i2c.h</code></li>
+  <li><code class="language-plaintext highlighter-rouge">mux.h</code></li>
+  <li><code class="language-plaintext highlighter-rouge">serial.h</code></li>
+  <li><code class="language-plaintext highlighter-rouge">timer.h</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">util_libs/libplatsupport/src/plat/&lt;platform&gt;/</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">chardev.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ltimer.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">serial.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">timer.c</code></li>
+</ul>
+
+<h3 id="sel4test-configurations">sel4test configurations</h3>
+
+<p>The default configuration of seL4 in sel4test is non-MCS, single-core, with no hypervisor mode.</p>
+
+<p>After confirming that the default configuration successfully runs (in both debug and release mode),
+it is a good idea to test the more complex configurations with your port as well.</p>
 
 <h3 id="gotchas">Gotchas</h3>
 
 <p>Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is
 to shorten memory regions in DTS memory nodes to check you are touching the correct area.</p>
 
-<p>Once you have succeeded with your port and have seL4 test passing in release mode, you can add an entry to the CHANGES file describing the platform you added and submit a pull request on the seL4 github.</p>
+<h2 id="contributing">Contributing</h2>
+
+<p>Once you have a working port that passes seL4test, see the guides for [contributing in general]
+and <a href="https://docs.sel4.systems/processes/contributing.html">contributing kernel changes</a>.</p>
 
   </div>
 
@@ -835,10 +959,10 @@ We occasionally pre-release experimental branches for community feedback and ava
         </li>
         
           <li>
-            Site last updated: Fri Mar 15 15:07:51 2024 +0100 983ea6eebc
+            Site last updated: Mon Mar 25 21:33:10 2024 +1100 d8e0e291c3
           </li>
           <li>
-                Page last updated: Thu Jun 1 09:12:08 2023 +1000 f8d4139f9a
+                Page last updated: Mon Mar 25 21:33:10 2024 +1100 d8e0e291c3
           </li>
         
       </ul>
