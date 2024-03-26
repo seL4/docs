@@ -33,7 +33,7 @@ architecture.
 The main thing is to:
 
 * follow the [platform porting guide](/projects/sel4/porting);
-* follow the guidelines to [become a platform owner](/projects/seL4/platf-owner.html).
+* follow the guidelines to [become a platform owner](/projects/sel4/platf-owner.html).
 
 Questions, discussion, and sharing of work in progress during this stage are
 welcome.
