@@ -133,8 +133,9 @@ It is best to base the contents of this file off of other platforms of the same 
 
 ## Testing your seL4 port
 
-In order to sanity check your port of seL4, it is a good idea to get
-[the seL4test project](https://docs.sel4.systems/projects/sel4test/) running and passing.
+When you contribute your port to seL4, sel4test must execute successfully and so the next
+step to check that your port works would be to get
+[the seL4test project](https://docs.sel4.systems/projects/sel4test/) working.
 
 ### ELF-loader
 
