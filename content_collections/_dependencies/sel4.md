@@ -80,7 +80,7 @@ sudo apt-get install texlive texlive-latex-extra texlive-fonts-extra
 
 ##### For Debian Bullseye or later
 
-The dependencies listed in our docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the file here:
+The dependencies listed in our Docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the file here:
 
 * [Base Tools](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/base_tools.sh)
 * [seL4](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/sel4.sh)
