@@ -78,28 +78,13 @@ sudo apt-get install texlive texlive-latex-extra texlive-fonts-extra
 
 #### Debian
 
-##### For Debian Stretch or later
+##### For Debian Bullseye or later
 
-The dependencies listed in our docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
+The dependencies listed in our Docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the file here:
 
-* [Base Tools Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile)
-* [seL4 Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile)
+* [Base Tools](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/base_tools.sh)
+* [seL4](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/sel4.sh)
 * [LaTeX](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/apply-tex.sh)
-
-The version of `cmake` in Debian *stretch* is too old to build seL4 projects (*buster* and later are OK).  If you are on *stretch*, install `cmake` from stretch-backports:
-
-Add the *stretch-backports* repository like this (substitute a local mirror for `ftp.debian.org` if you like)
-
-```sh
-sudo sh -c "echo 'deb http://ftp.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list"
-```
-
-Then install `cmake` with
-
-```sh
-sudo apt-get update
-sudo apt-get -t stretch-backports install cmake
-```
 
 ### Python Dependencies
 
