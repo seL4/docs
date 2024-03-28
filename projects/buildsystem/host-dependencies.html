@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-03-28 03:15:28 +0000 -->
+<!-- Page last generated 2024-03-28 12:39:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -327,28 +327,15 @@
 
 <h4 id="debian">Debian</h4>
 
-<h5 id="for-debian-stretch-or-later">For Debian Stretch or later</h5>
+<h5 id="for-debian-bullseye-or-later">For Debian Bullseye or later</h5>
 
-<p>The dependencies listed in our docker files <a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles">repository</a> will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:</p>
+<p>The dependencies listed in our Docker files <a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles">repository</a> will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the file here:</p>
 
 <ul>
-  <li><a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile">Base Tools Dockerfile</a></li>
-  <li><a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile">seL4 Dockerfile</a></li>
+  <li><a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/base_tools.sh">Base Tools</a></li>
+  <li><a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/sel4.sh">seL4</a></li>
   <li><a href="https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/apply-tex.sh">LaTeX</a></li>
 </ul>
-
-<p>The version of <code class="language-plaintext highlighter-rouge">cmake</code> in Debian <em>stretch</em> is too old to build seL4 projects (<em>buster</em> and later are OK).  If you are on <em>stretch</em>, install <code class="language-plaintext highlighter-rouge">cmake</code> from stretch-backports:</p>
-
-<p>Add the <em>stretch-backports</em> repository like this (substitute a local mirror for <code class="language-plaintext highlighter-rouge">ftp.debian.org</code> if you like)</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s2">"echo 'deb http://ftp.debian.org/debian stretch-backports main' &gt; /etc/apt/sources.list.d/backports.list"</span>
-</code></pre></div></div>
-
-<p>Then install <code class="language-plaintext highlighter-rouge">cmake</code> with</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nt">-t</span> stretch-backports <span class="nb">install </span>cmake
-</code></pre></div></div>
 
 <h3 id="python-dependencies">Python Dependencies</h3>
 
@@ -658,7 +645,7 @@ statements.</p>
 <li class="toc-entry toc-h4"><a href="#ubuntu">Ubuntu</a></li>
 <li class="toc-entry toc-h4"><a href="#debian">Debian</a>
 <ul>
-<li class="toc-entry toc-h5"><a href="#for-debian-stretch-or-later">For Debian Stretch or later</a></li>
+<li class="toc-entry toc-h5"><a href="#for-debian-bullseye-or-later">For Debian Bullseye or later</a></li>
 </ul>
 </li>
 </ul>
@@ -806,7 +793,7 @@ statements.</p>
         </li>
         
           <li>
-            Site last updated: Tue Mar 26 11:20:38 2024 +0100 716f56bda5
+            Site last updated: Thu Mar 28 08:37:40 2024 -0400 03d2420c01
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17
