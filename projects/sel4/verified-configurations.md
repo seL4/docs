@@ -65,8 +65,8 @@ address translation for devices (System MMU or IOMMU), debug/profiling
 interfaces, or the kernel startup at boot.
 
 The proofs for RISCV64\_MCS/ARM\_MCS (mixed-criticality extensions to real-time
-seL4 features), as well as proofs for AARCH64 are in progress. Refer to the
-[roadmap](/projects/roadmap.html) for status and upcoming features.
+seL4 features), as well as security proofs for AARCH64 are in progress. Refer to
+the [roadmap](/projects/roadmap.html) for status and upcoming features.
 
 ## ARM Sabre Lite
 
@@ -121,7 +121,7 @@ Mixed-Criticality-Systems API | Yes
 | Platform | Tegra X2 (Jetson TX2)
 | Floating-point support | Yes
 | Hypervisor mode | Yes
-| **Verified properties** | in progress
+| **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
 ## RISCV64
 
