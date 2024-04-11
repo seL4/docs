@@ -41,7 +41,6 @@ they should be located in the root directory of this partition.
 |Stage |Filename |Description |Source|
 |-|-|-|-|
 |FSBL |- |Mounts SD and loads SSBL |ROM |
-|SSBL |bootcode.bin|Loads GPU firmware and boots GPU|<https://github.com/raspberrypi/firmware/tree/master/boot/bootcode.bin> |
 |GPU firmware |start4.elf |Loads CPU bootloader and boots CPU |<https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf> |
 |Usually the Linux kernel, but could also be U-Boot |u-boot.bin |U-Boot binary| Compiled using the instructions above |
 ||config.txt|U-Boot parameters |Add `arm_64bit=1` and `kernel=u-boot.bin` to the bottom of `config.txt` |
