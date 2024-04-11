@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-04-11 03:14:58 +0000 -->
+<!-- Page last generated 2024-04-11 07:43:28 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -177,16 +177,16 @@ they should be located in the root directory of this partition.</p>
       <td>ROM</td>
     </tr>
     <tr>
-      <td>SSBL</td>
-      <td>bootcode.bin</td>
-      <td>Loads GPU firmware and boots GPU</td>
-      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/bootcode.bin">https://github.com/raspberrypi/firmware/tree/master/boot/bootcode.bin</a></td>
-    </tr>
-    <tr>
       <td>GPU firmware</td>
       <td>start4.elf</td>
       <td>Loads CPU bootloader and boots CPU</td>
       <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf">https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf</a></td>
+    </tr>
+    <tr>
+      <td>Additional GPU firmware</td>
+      <td>fixup4.dat</td>
+      <td>Fixes memory locations used in start4.elf</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/fixup4.dat">https://github.com/raspberrypi/firmware/tree/master/boot/fixup4.dat</a></td>
     </tr>
     <tr>
       <td>Usually the Linux kernel, but could also be U-Boot</td>
@@ -198,7 +198,7 @@ they should be located in the root directory of this partition.</p>
       <td> </td>
       <td>config.txt</td>
       <td>U-Boot parameters</td>
-      <td>Add <code class="language-plaintext highlighter-rouge">arm_64bit=1</code>, <code class="language-plaintext highlighter-rouge">kernel=u-boot.bin</code>, and <code class="language-plaintext highlighter-rouge">dtoverlay=disable-bt</code> to the bottom of <code class="language-plaintext highlighter-rouge">config.txt</code></td>
+      <td>Add <code class="language-plaintext highlighter-rouge">arm_64bit=1</code> and <code class="language-plaintext highlighter-rouge">kernel=u-boot.bin</code> to the bottom of <code class="language-plaintext highlighter-rouge">config.txt</code></td>
     </tr>
     <tr>
       <td> </td>
@@ -304,10 +304,10 @@ go 0x10000000
         </li>
         
           <li>
-            Site last updated: Tue Apr 9 09:27:33 2024 +0100 796c552862
+            Site last updated: Thu Apr 11 17:41:25 2024 +1000 e9e628315e
           </li>
           <li>
-                Page last updated: Wed Oct 18 23:45:08 2023 +1100 fb0be1d098
+                Page last updated: Thu Apr 11 17:41:25 2024 +1000 e9e628315e
           </li>
         
       </ul>
