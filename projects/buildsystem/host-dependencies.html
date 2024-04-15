@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-04-14 03:39:58 +0000 -->
+<!-- Page last generated 2024-04-15 04:01:27 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -403,25 +403,26 @@ pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 
 <h2 id="proof-dependencies">Proof Dependencies</h2>
 
-<h3 id="linux-packages---debian">Linux Packages - Debian</h3>
+<h3 id="linux-packages---debian-bullseye">Linux Packages - Debian Bullseye</h3>
 
-<p>On <strong>Buster</strong> or <strong>Bullseye</strong>, to run all proofs against the
-<strong>ARMv7-A</strong> architecture you will need to install the following packages:</p>
+<p>On <strong>Debian Bullseye</strong>, to run all proofs you will need to install the following
+packages:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
     python3 python3-pip python3-dev <span class="se">\</span>
-    gcc-arm-none-eabi build-essential libxml2-utils ccache <span class="se">\</span>
+    gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-unknown-elf <span class="se">\</span>
+    build-essential libxml2-utils ccache <span class="se">\</span>
     ncurses-dev librsvg2-bin device-tree-compiler cmake <span class="se">\</span>
     ninja-build curl zlib1g-dev texlive-fonts-recommended <span class="se">\</span>
     texlive-latex-extra texlive-metapost texlive-bibtex-extra <span class="se">\</span>
     rsync
 </code></pre></div></div>
 
-<p>There is no package for the MLton compiler on Buster or Bullseye, so you will
-need to install it from the <a href="http://www.mlton.org">MLton website</a>.</p>
+<p>There is no package for the MLton compiler on Bullseye, so you will need to
+install it from the <a href="http://www.mlton.org">MLton website</a>.</p>
 
-<p>The Haskell Stack package is unavailable on Bullseye and out-of-date on Buster,
-so you will need to install it from the <a href="https://docs.haskellstack.org/en/stable/">Haskell Stack
+<p>The Haskell Stack package is unavailable on Bullseye, so you will need to
+install it from the <a href="https://docs.haskellstack.org/en/stable/">Haskell Stack
 website</a>.</p>
 
 <p>Continue with the <a href="#python">python setup step</a> below.</p>
@@ -430,12 +431,12 @@ website</a>.</p>
 
 <p>These instructions are intended for Ubuntu LTS versions 20.04, and 22.04.</p>
 
-<p>To run all proofs against the <strong>ARMv7-A</strong> architecture you will need to install
-the following packages:</p>
+<p>To run all proofs you will need to install the following packages:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
     python3 python3-pip python3-dev <span class="se">\</span>
-    gcc-arm-none-eabi build-essential libxml2-utils ccache <span class="se">\</span>
+    gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-10-riscv64-linux-gnu <span class="se">\</span>
+    build-essential libxml2-utils ccache <span class="se">\</span>
     ncurses-dev librsvg2-bin device-tree-compiler cmake <span class="se">\</span>
     ninja-build curl zlib1g-dev texlive-fonts-recommended <span class="se">\</span>
     texlive-latex-extra texlive-metapost texlive-bibtex-extra <span class="se">\</span>
@@ -671,7 +672,7 @@ statements.</p>
 </li>
 <li class="toc-entry toc-h2"><a href="#proof-dependencies">Proof Dependencies</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#linux-packages---debian">Linux Packages - Debian</a></li>
+<li class="toc-entry toc-h3"><a href="#linux-packages---debian-bullseye">Linux Packages - Debian Bullseye</a></li>
 <li class="toc-entry toc-h3"><a href="#linux-packages---ubuntu">Linux Packages - Ubuntu</a></li>
 <li class="toc-entry toc-h3"><a href="#macos-packages">macOS packages</a></li>
 <li class="toc-entry toc-h3"><a href="#python">Python</a></li>
