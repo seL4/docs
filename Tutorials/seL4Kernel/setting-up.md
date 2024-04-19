@@ -7,7 +7,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 
 # Setting up your machine
 **Overview**
-- Set up your machine - install dependencies required to run seL4
+- Set up your machine - install dependencies required to run seL4``
 - Run seL4test on a simulator
 - Gain awareness of terminology used for seL4
 
