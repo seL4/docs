@@ -163,11 +163,10 @@ thread.
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
     sel4utils_process_t new_process;
-
     sel4utils_process_config_t config = process_config_default_simple(&simple, APP_IMAGE_NAME, APP_PRIORITY);
     error = sel4utils_configure_process_custom(&new_process, &vka, &vspace, config);
     ZF_LOGF_IFERR(error, "Failed to spawn a new thread.\n"
-                  "\tsel4utils_configure_process expands an ELF file into our VSpace.\n"
+"\tsel4utils_configure_process expands an ELF file into our VSpace.\n"
                   "\tBe sure you've properly configured a VSpace manager using sel4utils_bootstrap_vspace_with_bootinfo.\n"
                   "\tBe sure you've passed the correct component name for the new thread!\n");
 ```
@@ -267,7 +266,6 @@ free slot that the VKA library found for us.
 ```c
     new_ep_cap = sel4utils_mint_cap_to_process(&new_process, ep_cap_path,
                                                seL4_AllRights, EP_BADGE);
-
     ZF_LOGF_IF(new_ep_cap == 0, "Failed to mint a badged copy of the IPC endpoint into the new thread's CSpace.\n"
                "\tsel4utils_mint_cap_to_process takes a cspacepath_t: double check what you passed.\n");
 ```
@@ -324,7 +322,6 @@ communicate with us, we can let it run. Complete this step and proceed.
     char string_args[argc][WORD_STRING_SIZE];
     char* argv[argc];
     sel4utils_create_word_args(string_args, argv, argc, new_ep_cap);
-
     error = sel4utils_spawn_process_v(&new_process, &vka, &vspace, argc, (char**) &argv, 1);
     ZF_LOGF_IFERR(error, "Failed to spawn and start the new thread.\n"
                   "\tVerify: the new thread is being executed in the root thread's VSpace.\n"
@@ -374,7 +371,6 @@ Then we verify the fidelity of the data that was transmitted.
    /* make sure it is what we expected */
     ZF_LOGF_IF(sender_badge != EP_BADGE,
                "The badge we received from the new thread didn't match our expectation.\n");
-
     ZF_LOGF_IF(seL4_MessageInfo_get_length(tag) != 1,
                "Response data from the new process was not the length expected.\n"
                "\tHow many registers did you set with seL4_SetMR within the new process?\n");

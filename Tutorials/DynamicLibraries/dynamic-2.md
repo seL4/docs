@@ -609,7 +609,6 @@ Complete them and proceed to the next step.
 ```c
     ZF_LOGF_IF(sender_badge != EP_BADGE,
                "Badge on the endpoint was not what was expected.\n");
-
     ZF_LOGF_IF(seL4_MessageInfo_get_length(tag) != 1,
                "Length of the data send from root thread was not what was expected.\n"
                "\tHow many registers did you set with seL4_SetMR, within the root thread?\n");

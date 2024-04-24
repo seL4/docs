@@ -162,7 +162,7 @@ assembly {
 ```
 </details>
 
-### Add a connection
+**### Add a connection**
 **Exercise** Now add a connection from `client.hello` to `echo.hello`.
 
 ```

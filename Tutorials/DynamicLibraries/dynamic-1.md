@@ -130,6 +130,7 @@ You need to initialize it with some default state before using it.
 ```
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
+
 ```c
     simple_default_init_bootinfo(&simple, info);
 ```
@@ -436,11 +437,11 @@ On successful completion this task, the output should not change.
      * hint 2: we want the new thread to run the function "thread_2"
      */
 ```
+
 <details markdown='1'>
 <summary style="display:list-item"><em>Quick solution</em></summary>
 ```c
     sel4utils_set_instruction_pointer(&regs, (seL4_Word)thread_2);
-
 ```
 </details>
 

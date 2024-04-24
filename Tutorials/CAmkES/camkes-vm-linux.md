@@ -20,7 +20,6 @@ You will become familiar with:
 # For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/#get-the-code
 #
 # Follow these instructions to initialise the tutorial
-# initialising the build directory with a tutorial exercise
 ./init --tut camkes-vm-linux
 # building the tutorial exercise
 cd camkes-vm-linux
