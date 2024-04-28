@@ -35,7 +35,7 @@ Code should compile without warnings, with `-Wall`.
 ### Automatic formatting
 
 For automatic formatting of C code, we use
-[astyle](http://astyle.sourceforge.net/), version 2.05.1, with the
+[astyle](http://astyle.sourceforge.net/), version 3.1, with the
 settings declared in our
 [astylerc](https://github.com/seL4/seL4_tools/blob/master/misc/astylerc).
 
