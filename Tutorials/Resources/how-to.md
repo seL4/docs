@@ -62,7 +62,7 @@ seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
  - [Handle a thread fault](../seL4Kernel/fault-handlers#handling-a-thread-fault)
  - [Resume a faulting thread](../seL4Kernel/fault-handlers#resuming-a-faulting-thread)
 
-## [MCS Extensions](../MCS/mcs-extensions)
+## [MCS Extensions](../MCS/mcs)
  - [Set up a periodic thread](../MCS/mcs-extensionsperiodic-threads)
  - [Unbind a scheduling context](../MCS/mcs-extensionsunbinding-scheduling-contexts)
  - [Experiment with sporadic tasks](../MCS/mcs-extensionssporadic-threads)
