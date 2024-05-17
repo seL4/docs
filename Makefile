@@ -117,11 +117,11 @@ _repos/tutes:
 	cp /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/hello-camkes-timer/hello-camkes-timer.md /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-camkes-timer/hello-camkes-timer.md
 
 
-/Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-camkes-vm-crossvm/hello-camkes-vm-crossvm.md: /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/hello-camkes-vm-crossvm/hello-camkes-vm-crossvm.md
-	cp /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/hello-camkes-vm-crossvm/hello-camkes-vm-crossvm.md /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-camkes-vm-crossvm/hello-camkes-vm-crossvm.md
+/Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/camkes-vm-crossvm/camkes-vm-crossvm.md: /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/camkes-vm-crossvm/camkes-vm-crossvm.md
+	cp /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/camkes-vm-crossvm/camkes-vm-crossvm.md /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/camkes-vm-crossvm/camkes-vm-crossvm.md
 
-/Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-camkes-vm-linux/hello-camkes-vm-linux.md: /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/hello-camkes-vm-linux/hello-camkes-vm-linux.md
-	cp /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/hello-camkes-vm-linux/hello-camkes-vm-linux.md /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-camkes-vm-linux/hello-camkes-vm-linux.md
+/Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/camkes-vm-linux/camkes-vm-linux.md: /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/camkes-vm-linux/camkes-vm-linux.md
+	cp /Users/birgitbrecknell/seL4-Foundation/tutorials/tutorials/camkes-vm-linux/camkes-vm-linux.md /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/camkes-vm-linux/camkes-vm-linux.md
 
 
 all: /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-world/hello-world.md \
