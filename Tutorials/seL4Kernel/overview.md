@@ -23,7 +23,7 @@ architecture.  Suggested resources for these include:
 	- [Instruction Set Architecture (wikipedia)](https://en.wikipedia.org/wiki/Instruction_set_architecture)
 
 <h2>Resources</h2>
-We recommend having access to the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 manual<a/> and the <a href="../projects/sel4/api-doc.html">API references</a>.
+We recommend having access to the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 manual<a/> and the <a href="../../projects/sel4/api-doc.html">API references</a>.
 
 The <a href="../Resources/how-to">How to</a> page provides links to tutorial solutions as quick references for seL4 calls and methods.
 
