@@ -15,7 +15,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
     After completing the Microkit tutorial, go to <a href="../seL4Kernel/overview">seL4 kernel tutorials</a> for a deep dive into seL4 concepts.
 </p>
 <p>
-    Go to the <a target="_blank" href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit tutorial</a>
+    Go to the <a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit tutorial</a>
 </p>
 <p>
     Next tutorial: <a href="../seL4Kernel/overview">seL4 kernel tutorials</a>
