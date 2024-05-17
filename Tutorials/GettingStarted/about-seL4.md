@@ -20,7 +20,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 memory object, which allocates the memory for the object, initialises it, and returns a capability to the new object.
 </p>
 <p>
-    <em>Virtual address spaces</em> are formed by explicit manipulation of virtual-memoryrelated kernel objects: PageDirectories, PageTables, ASIDPools and Frames (mappable physical memory). As such, address spaces have no kernel-defined structure (except for a protected region reserved for the seL4 kernel itself). Whether the userlevel system is Exokernel like, a multi-server, or a para-virtualised monolithic OS is determined by user-level via a <em>map</em> and <em>unmap</em> interface to Frames and PageTables. The distribution of authority to the kernel virtual memory (VM) objects ultimately determines the scope of influence over virtual and physical memory.
+    <em>Virtual address spaces</em> are formed by explicit manipulation of virtual-memory related kernel objects: PageDirectories, PageTables, ASIDPools and Frames (mappable physical memory). As such, address spaces have no kernel-defined structure (except for a protected region reserved for the seL4 kernel itself). Whether the userlevel system is Exokernel like, a multi-server, or a para-virtualised monolithic OS is determined by user-level via a <em>map</em> and <em>unmap</em> interface to Frames and PageTables. The distribution of authority to the kernel virtual memory (VM) objects ultimately determines the scope of influence over virtual and physical memory.
 </p>
 <p>
     <em>Threads</em> are the active entity in seL4. By associating a CNode and a virtual address space with a thread, user-level policies create high-level abstractions, such as processes or virtual machines.
