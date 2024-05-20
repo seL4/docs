@@ -232,28 +232,6 @@ That's it! seL4 is running.
 
 To quit QEMU: `Ctrl+a, x`
 
-# Tutorials
-## Python Dependencies
-Additional python dependencies are required to build [tutorials](ReworkedTutorials). To install you can run:
-```
-pip install --user aenum
-pip install --user pyelftools
-```
-*Hint:* This step only needs to be done once, i.e. before doing your first tutorial
-
-## Get the code
-All tutorials are in the <a href="https://github.com/seL4/sel4-tutorials-manifest">sel4-tutorials-manifest</a>. Get the code with:
-```
-mkdir sel4-tutorials-manifest
-cd sel4-tutorials-manifest
-repo init -u https://github.com/seL4/sel4-tutorials-manifest
-repo sync
-```
-
-`repo sync` may take a few moments to run
-
-*Hint:* The **Get the code** step only needs to be done once, i.e. before doing your first tutorial.
-
 <p>
-    Next tutorial: <a href="hello-world">Hello world</a>
+    Next: <a href="get-the-tutorials">Get the tutorials</a>
 </p>
