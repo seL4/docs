@@ -88,7 +88,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 | - | - | - | - | - | - | - | - | - |
 {%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}
-{%- if page.arm_hardware and page.Maintained != "No"" -%}
+{%- if page.arm_hardware and page.Maintained != "No" -%}
 | [{{ page.platform }}]({{page.url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
 {% endif %}
 {%- endfor %}
