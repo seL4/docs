@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-05-20 15:49:26 +0000 -->
+<!-- Page last generated 2024-05-20 23:45:43 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -306,83 +306,138 @@
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
-<h1 id="sel4-documentation-site">seL4 Documentation site.</h1>
+<h1 id="sel4-documentation-site">seL4 Documentation site</h1>
 
-<p>These are the sources for the seL4 Documentation site located at &lt;&gt;.
-It is for cooperatively developing and sharing documentation on <a href="https://sel4.systems">seL4</a>.</p>
+<p>These are the sources for the seL4 Documentation site located at
+&lt;&gt;. It is for cooperatively developing and sharing
+documentation on <a href="https://sel4.systems">seL4</a>.</p>
 
-<p>See <a href="processes/docs-contributing.md">CONTRIBUTING.md</a> for information on how to contribute. <em>TL;DR click edit on the page in GitHub, make your changes and then submit a pull request.</em></p>
+<p>See <a href="processes/docs-contributing.md">CONTRIBUTING.md</a> for information on how to
+contribute. <em>TL;DR click edit on the page in GitHub, make your changes and then
+submit a pull request.</em></p>
 
-<p>Ask on the <a href="https://lists.sel4.systems/postorius/lists/">mailing list</a> or open an issue if something doesn’t make sense.</p>
+<p>Ask on the <a href="https://lists.sel4.systems/postorius/lists/">mailing list</a> or open an issue if something doesn’t
+make sense.</p>
 
-<p>We’ve tried to make sure the hosted site is <a href="https://www.w3.org/TR/WCAG20/">WCAG 2.0 AA</a> compliant.  Please let us know if we have missed something.  <a href="#wcag-2.0-aa-conformance">This is how we test it.</a></p>
+<p>We’ve tried to make sure the hosted site is <a href="https://www.w3.org/TR/WCAG20/">WCAG 2.0
+AA</a> compliant.  Please let us know if we have
+missed something.</p>
 
-<h2 id="diagnosing-a-problem">Diagnosing a problem</h2>
+<h2 id="building-the-site">Building the site</h2>
 
-<p>Our documentation is contained in a collection of Markdown files stored in this repository.
-We use <a href="https://jekyllrb.com/">Jekyll</a> to generate a static html website that is then hosted on GitHub pages.
-Our continuous integration is configured to regenerate and update the live site whenever a pull request is merged.
-There is a timestamp in the source that indicates when it was last generated.  Additionally, each page has a timestamp and revision hash from when it was last updated located in the footer based on the git history.</p>
+<h3 id="install">Install</h3>
 
-<p>Our markdown pages are rendered using <a href="https://kramdown.gettalong.org/">Kramdown</a>, a ruby based markdown converter that is configured
-to interpret the markdown files (.md) as GitHub flavoured markdown (GFM).  We are currently using the <code class="language-plaintext highlighter-rouge">jekyll-theme-bootstrap</code> theme
-that provides a sass implementation of bootstrap.  Our custom styling is contained in <code class="language-plaintext highlighter-rouge">assets/css/style.scss</code>.  <code class="language-plaintext highlighter-rouge">HTML</code> templates are in either _layouts or _includes.</p>
+<h4 id="submodules">Submodules</h4>
 
-<h3 id="requirements">Requirements</h3>
+<p>You need to run this only once after you have cloned this the repo.</p>
 
-<h4 id="building-the-site">Building the site</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git submodule init
+git submodule update
+</code></pre></div></div>
 
-<ul>
-  <li>ruby-bundler must be installed</li>
-</ul>
+<h4 id="ruby">Ruby</h4>
+
+<p>We recommend using <a href="https://github.com/rbenv/rbenv">rbenv</a> to install the
+correct Ruby version.</p>
+
+<p>On Mac:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>homebrew <span class="nb">install </span>ruby-build rbenv
+<span class="c"># follow the instructions this command shows, and start a new shell afterwards</span>
+rbenv init
+<span class="c"># in the docs directory (root of this repo):</span>
+rebenv <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>On Linux:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>rbenv
+<span class="c"># follow the instructions this command shows, and start a new shell afterwards</span>
+rbenv init
+<span class="c"># in the docs directory (root of this repo):</span>
+rebenv <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>After these, you should be able to forget about <code class="language-plaintext highlighter-rouge">rbenv</code>, the <code class="language-plaintext highlighter-rouge">Makefile</code> will now
+see the correct Ruby version.</p>
+
+<h4 id="python">Python</h4>
+
+<p>The build is tested with Python 3.9. More recent versions are likely to work as
+well. After installing Python via e.g. <code class="language-plaintext highlighter-rouge">homebrew</code> or <code class="language-plaintext highlighter-rouge">apt</code>, you can install the
+Python build dependencies with:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> camkes-deps
+</code></pre></div></div>
 
 <h4 id="linters">Linters</h4>
 
-<p>Linting checks require the linters to be installed.</p>
+<p>If you are using the lint checks, they require <code class="language-plaintext highlighter-rouge">tidy</code> and <code class="language-plaintext highlighter-rouge">liquid-linter</code>. If
+you just want to build the site, you can skip these.</p>
 
 <ul>
   <li>HTML output checking using <code class="language-plaintext highlighter-rouge">tidy</code>: <code class="language-plaintext highlighter-rouge">make check_html_output</code></li>
   <li>Liquid syntax checking using <code class="language-plaintext highlighter-rouge">liquid-linter</code>: <code class="language-plaintext highlighter-rouge">make check_liquid_syntax</code></li>
 </ul>
 
-<h3 id="building-the-docsite">Building the docsite</h3>
+<h3 id="build">Build</h3>
 
 <p>To build and host locally:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git submodule init
-git submodule update
 
-# If this doesn't work see: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
-bundle install
-
-make serve
-#   Server address: http://127.0.0.1:4000/
-#   Server running... press ctrl-c to stop.
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make serve
+<span class="c">#   Server address: http://127.0.0.1:4000/</span>
+<span class="c">#   Server running... press ctrl-c to stop.</span>
 </code></pre></div></div>
-<p>Or with docker:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make docker_build
-make docker_serve
+
+<p>Or using Docker (you need <a href="https://docs.docker.com/get-docker/">Docker
+installed</a> and running for this):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make docker_serve
 </code></pre></div></div>
 
 <h3 id="makefile-and-jekyll_envproduction-version">Makefile and JEKYLL_ENV=production version</h3>
 
-<p>Jekyll provides an environment flag for providing some content only in a production environment.</p>
+<p>Jekyll environment flags can be used to provide some content only in a
+production environment.</p>
 
-<p>One way we use this is to show data generated by rules in the Makefile and saved in _data/generated.yml.
-If you want to serve the site locally in production mode there are make rules for this.  You will need
-to call the make rule to generate the _data/generated.yml also.</p>
+<p>One way we use this is to show data generated by rules in the Makefile and saved
+in <code class="language-plaintext highlighter-rouge">\_data/generated.yml</code>. If you want to serve the site locally in production
+mode there are <code class="language-plaintext highlighter-rouge">make</code> rules for this.  You will need to call the make rule to
+generate the <code class="language-plaintext highlighter-rouge">\_data/generated.yml</code> also.</p>
 
-<h2 id="quick-compliance-style-and-formatting-checks">Quick compliance, style and formatting checks</h2>
+<h2 id="how-the-site-is-set-up">How the site is set up</h2>
+
+<p>Our documentation is contained in a collection of Markdown files stored in this
+repository. We use <a href="https://jekyllrb.com/">Jekyll</a> to generate a static html
+website that is then hosted on GitHub pages. Our continuous integration is
+configured to regenerate and update the live site whenever a pull request is
+merged. There is a timestamp in the source that indicates when it was last
+generated.  Additionally, each page has a timestamp and revision hash from when
+it was last updated located in the footer based on the git history.</p>
+
+<p>The markdown pages are rendered using
+<a href="https://kramdown.gettalong.org/">Kramdown</a>, a ruby-based markdown converter
+that is configured to interpret the markdown files (<code class="language-plaintext highlighter-rouge">.md</code>) as GitHub flavoured
+markdown.  We are currently using the <code class="language-plaintext highlighter-rouge">jekyll-theme-bootstrap</code> theme that
+provides a sass implementation of bootstrap.  Our custom styling is contained in
+<code class="language-plaintext highlighter-rouge">assets/css/style.scss</code>.  <code class="language-plaintext highlighter-rouge">HTML</code> templates are in either <code class="language-plaintext highlighter-rouge">\_layouts</code> or
+<code class="language-plaintext highlighter-rouge">\_includes</code>.</p>
+
+<h2 id="compliance-style-and-formatting-checks">Compliance, style and formatting checks</h2>
 
 <h3 id="wcag-20-aa-conformance">WCAG 2.0 AA conformance</h3>
 
-<p>There is a make rule to check conformance to all testable statements from the guidelines. <code class="language-plaintext highlighter-rouge">make check_conformance</code>.
-It requires the site to be hosted locally (using <code class="language-plaintext highlighter-rouge">make serve</code>) and a local server of
-<a href="https://github.com/paypal/AATT">Automated Accessibility Testing Tool (AATT)</a>.</p>
+<p>There is a make rule to check conformance to all testable statements from the
+guidelines. <code class="language-plaintext highlighter-rouge">make check_conformance</code>. It requires the site to be hosted locally
+(using <code class="language-plaintext highlighter-rouge">make serve</code>) and a local server of <a href="https://github.com/paypal/AATT">Automated Accessibility Testing Tool
+(AATT)</a>.</p>
 
-<p><code class="language-plaintext highlighter-rouge">make check_conformance</code> will output a file named <code class="language-plaintext highlighter-rouge">conformance_results.xml</code> which is a junit testsuite output file that will
-contain a testcase for each generated html file of the site.  A make rule <code class="language-plaintext highlighter-rouge">make check_conformance_errors</code> will grep for failing testcases
-and output the html page name.  The idea here is to detect if any pages are failing and then manually using the AATT tool’s webinterface
-to check what parts of the page violate the guidelines.</p>
+<p><code class="language-plaintext highlighter-rouge">make check_conformance</code> will output a file named <code class="language-plaintext highlighter-rouge">conformance_results.xml</code>
+which is a junit test suite output file that will contain a test case for each
+generated html file of the site.  A make rule <code class="language-plaintext highlighter-rouge">make check_conformance_errors</code>
+will grep for failing test cases and output the html page name.  The idea here is
+to detect if any pages are failing and then manually using the AATT tool’s
+web interface to check what parts of the page violate the guidelines.</p>
 
 
   </div>
@@ -397,19 +452,22 @@ to check what parts of the page violate the guidelines.</p>
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
     <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#diagnosing-a-problem">Diagnosing a problem</a>
+<li class="toc-entry toc-h2"><a href="#building-the-site">Building the site</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#requirements">Requirements</a>
+<li class="toc-entry toc-h3"><a href="#install">Install</a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#building-the-site">Building the site</a></li>
+<li class="toc-entry toc-h4"><a href="#submodules">Submodules</a></li>
+<li class="toc-entry toc-h4"><a href="#ruby">Ruby</a></li>
+<li class="toc-entry toc-h4"><a href="#python">Python</a></li>
 <li class="toc-entry toc-h4"><a href="#linters">Linters</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h3"><a href="#building-the-docsite">Building the docsite</a></li>
+<li class="toc-entry toc-h3"><a href="#build">Build</a></li>
 <li class="toc-entry toc-h3"><a href="#makefile-and-jekyll_envproduction-version">Makefile and JEKYLL_ENV=production version</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#quick-compliance-style-and-formatting-checks">Quick compliance, style and formatting checks</a>
+<li class="toc-entry toc-h2"><a href="#how-the-site-is-set-up">How the site is set up</a></li>
+<li class="toc-entry toc-h2"><a href="#compliance-style-and-formatting-checks">Compliance, style and formatting checks</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#wcag-20-aa-conformance">WCAG 2.0 AA conformance</a></li>
 </ul>
@@ -495,7 +553,7 @@ to check what parts of the page violate the guidelines.</p>
         </li>
         
           <li>
-            Site last updated: Mon May 20 16:47:24 2024 +0100 03ca1a889d
+            Site last updated: Tue May 21 09:41:44 2024 +1000 4a75e42528
           </li>
           <li>
                 Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17
