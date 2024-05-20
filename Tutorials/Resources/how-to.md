@@ -7,6 +7,9 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 # <em>How to:</em> A quick solutions guide
 This guide provides links to tutorial solutions as quick references for seL4 calls and methods.
 
+[//]: # (<html><a href="no-javascript.html" title="Get some foo!">Show me some foo</a></html>)
+
+
 ## The seL4 kernel
 
 ### [Capabilities](../seL4Kernel/capabilities)
