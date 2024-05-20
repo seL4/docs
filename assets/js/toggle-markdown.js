@@ -1,4 +1,4 @@
-// Open all solutions if previous link was how-to page
+// Expand all solutions if previous link was how-to page
 
 let text = document.referrer;
 let result = text.includes("Tutorials/Resources/how-to");
