@@ -63,6 +63,16 @@ rebenv install
 After these, you should be able to forget about `rbenv`, the `Makefile` will now
 see the correct Ruby version.
 
+#### Python
+
+The build is tested with Python 3.9. More recent versions are likely to work as
+well. After installing Python via e.g. `homebrew` or `apt`, you can install the
+Python build dependencies with:
+
+```sh
+pip3 install --user camkes-deps
+```
+
 #### Linters
 
 If you are using the lint checks, they require `tidy` and `liquid-linter`. If
