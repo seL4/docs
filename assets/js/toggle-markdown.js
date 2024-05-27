@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright 2024 seL4 Project a Series of LF Projects, LLC.
+
 // Expand all solutions if previous link was how-to page
 
 let text = document.referrer;
