@@ -1,7 +1,7 @@
 # Copyright 2020 seL4 Project a Series of LF Projects, LLC.
 # SPDX-License-Identifier: BSD-2-Clause
 
-default: serve
+default: serve --trace
 
 .PHONY: ruby_deps
 ruby_deps: Gemfile Gemfile.lock
@@ -51,7 +51,7 @@ _repos/tutes:
 _repos/tutes/%.md: _repos/sel4proj/sel4-tutorials/tutorials/% _repos/tutes
 	PYTHONPATH=_repos/sel4/capdl/python-capdl-tool _repos/sel4proj/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
 
-TUTORIALS:= $(filter-out index.md,$(notdir $(wildcard Tutorials/*.md)))
+TUTORIALS:= $(filter-out index.md overview.md setting-up.md get-the-tutorials.md,$(notdir $(wildcard Tutorials/seL4Kernel/*.md Tutorials/CAmkES/*.md Tutorials/DynamicLibraries/*.md Tutorials/MCS/*.md)))
 tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
 _generate_api_pages: $(REPOSITORIES)
