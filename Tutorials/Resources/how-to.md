@@ -14,7 +14,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
  - [Calculate the size of a CSpace](../seL4Kernel/capabilities#how-big-is-your-cspace)
  - [Copy a capability between CSlots](../seL4Kernel/capabilities#copy-a-capability-between-cslots)
  - [Delete a capability](../seL4Kernel/capabilities#how-do-you-delete-capabilities)
- - [Suspend a thread](../seL4Kernel/capabilities#invoking-capabilities)
+ - [Suspend a thread](../seL4Kernel/capabilities#suspend-a-thread)
 
 ### [Untyped](../seL4Kernel/untyped)
 
@@ -39,8 +39,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
 - [Resolve a fault](../seL4Kernel/threads#resolving-a-fault)
 
 ### [IPC](../seL4Kernel/ipc)
- - [Use capability transfer to send the badged capability](
-seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
+ - [Use capability transfer to send the badged capability](../seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
  - [Get a message](../seL4Kernel/ipc#get-a-message)
  - [Reply and wait](../seL4Kernel/ipc#reply-and-wait)
  - [Save a reply and store reply capabilities](../seL4Kernel/ipc#save-a-reply-and-store-reply-capabilities)
@@ -63,11 +62,11 @@ seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
  - [Resume a faulting thread](../seL4Kernel/fault-handlers#resuming-a-faulting-thread)
 
 ## [MCS Extensions](../MCS/mcs)
- - [Set up a periodic thread](../MCS/mcs-extensionsperiodic-threads)
- - [Unbind a scheduling context](../MCS/mcs-extensionsunbinding-scheduling-contexts)
- - [Experiment with sporadic tasks](../MCS/mcs-extensionssporadic-threads)
- - [Use passive servers](../MCS/mcs-extensionspassive-servers)
- - [Configure fault endpoints](../MCS/mcs-extensionsconfiguring-a-fault-endpoint-on-the-mcs-kernel)
+ - [Set up a periodic thread](../MCS/mcs#periodic-threads)
+ - [Unbind a scheduling context](../MCS/mcs#unbinding-scheduling-contexts)
+ - [Experiment with sporadic tasks](../MCS/mcs#sporadic-threads)
+ - [Use passive servers](../MCS/mcs#passive-servers)
+ - [Configure fault endpoints](../MCS/mcs#configuring-a-fault-endpoint-on-the-mcs-kernel)
 
 ## [Dynamic libraries](../DynamicLibraries/dynamic-1)
 
@@ -83,8 +82,10 @@ seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
   - [Configure the new TCB](../DynamicLibraries/dynamic-1#configure-the-new-tcb)
   - [Name the new TCB](../DynamicLibraries/dynamic-1#name-the-new-tcb)
   - [Set the instruction pointer](../DynamicLibraries/dynamic-1#set-the-instruction-pointer)
+  - [Set the stack pointer](../DynamicLibraries/dynamic-1#set-the-stack-pointer)
   - [Write the registers](../DynamicLibraries/dynamic-1#write-the-registers)
   - [Start the new thread](../DynamicLibraries/dynamic-1#start-the-new-thread)
+  - [Print](../DynamicLibraries/dynamic-1#print-something)
 
 ### [IPC](../DynamicLibraries/dynamic-2)
   - [Allocate an IPC buffer](../DynamicLibraries/dynamic-2#allocate-an-ipc-buffer)
@@ -118,7 +119,7 @@ seL4Kernel/ipc#use-capability-transfer-to-send-the-badged-capability)
   - [Handle an interrupt](../DynamicLibraries/dynamic-4#handle-the-interrupt)
   - [Destroy a timer](../DynamicLibraries/dynamic-4#destroy-the-timer)
 
-## [CAmkES](../CAmkES/)
+## [CAmkES](../CAmkES/hello-camkes-0)
 
 ### [A basic CAmkES application](../CAmkES/hello-camkes-1)
   - [Define instance in the composition section of the ADL](../CAmkES/hello-camkes-1#define-instance-in-the-composition-section-of-the-adl)
