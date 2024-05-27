@@ -10,7 +10,3 @@ if (result==true){
         console.log(e.hasAttribute('open'))
       })
 }
-
-
-
-
