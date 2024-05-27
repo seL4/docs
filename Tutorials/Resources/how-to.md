@@ -133,6 +133,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
 
 ### [Events in CAmkES](../CAmkES/hello-camkes-2)
   - [Specify an events interface](../CAmkES/hello-camkes-2#specify-an-events-interface)
+  - [Add connections](../CAmkES/hello-camkes-2#add-connections)
   - [Wait for data to become available](../CAmkES/hello-camkes-2#wait-for-data-to-become-available)
   - [Signal that data is available](../CAmkES/hello-camkes-2#signal-that-data-is-available)
   - [Register a callback handler](../CAmkES/hello-camkes-2#register-a-callback-handler)
@@ -162,6 +163,8 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Instantiate a TimerDTB component](../CAmkES/hello-camkes-timer#instantiate-a-timerdtb-component)
   - [Connect interfaces using the seL4DTBHardware connector](../CAmkES/hello-camkes-timer#connect-interfaces-using-the-sel4dtbhardware-connector)
   - [Configure the TimerDTB component](../CAmkES/hello-camkes-timer#configure-the-timerdtb-component)
+  - [Handle the interrupt](../CAmkES/hello-camkes-timer#handle-the-interrupt)
+  - [Stop the timer](../CAmkES/hello-camkes-timer#stop-the-timer)
 
 ### [CAmkES VM Linux](../CAmkES/camkes-vm-linux)
   - [Add a program](../CAmkES/camkes-vm-linux#adding-a-program)

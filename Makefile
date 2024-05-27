@@ -127,6 +127,7 @@ _repos/tutes:
 all: /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/hello-world/hello-world.md \
     /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/mapping/mapping.md \
     /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/capabilities/capabilities.md \
+    /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/untyped/untyped.md \
     /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/mapping/mapping.md \
     /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/threads/threads.md \
     /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/tutorials/ipc/ipc.md \
@@ -158,7 +159,7 @@ all: /Users/birgitbrecknell/seL4-Foundation/docs/_repos/sel4proj/sel4-tutorials/
 _repos/tutes/%.md: _repos/sel4proj/sel4-tutorials/tutorials/% _repos/tutes
 	PYTHONPATH=_repos/sel4/capdl/python-capdl-tool _repos/sel4proj/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
 
-TUTORIALS:= $(filter-out index.md overview.md setting-up.md,$(notdir $(wildcard Tutorials/seL4Kernel/*.md Tutorials/CAmkES/*.md Tutorials/DynamicLibraries/*.md Tutorials/MCS/*.md)))
+TUTORIALS:= $(filter-out index.md overview.md setting-up.md get-the-tutorials.md,$(notdir $(wildcard Tutorials/seL4Kernel/*.md Tutorials/CAmkES/*.md Tutorials/DynamicLibraries/*.md Tutorials/MCS/*.md)))
 tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
 _generate_api_pages: $(REPOSITORIES)
