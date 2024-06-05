@@ -40,24 +40,24 @@ git submodule update
 We recommend using [rbenv](https://github.com/rbenv/rbenv) to install the
 correct Ruby version.
 
-On Mac:
+On Mac, using [homebrew](https://brew.sh):
 
 ```sh
-homebrew install ruby-build rbenv
+brew install ruby-build rbenv
 # follow the instructions this command shows, and start a new shell afterwards
 rbenv init
 # in the docs directory (root of this repo):
-rebenv install
+rbenv install
 ```
 
-On Linux:
+On apt-based Linux distributions (e.g. Ubuntu, Debian):
 
 ```sh
 apt install rbenv
 # follow the instructions this command shows, and start a new shell afterwards
 rbenv init
 # in the docs directory (root of this repo):
-rebenv install
+rbenv install
 ```
 
 After these, you should be able to forget about `rbenv`, the `Makefile` will now
