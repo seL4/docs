@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-06-16 03:15:04 +0000 -->
+<!-- Page last generated 2024-06-17 03:19:07 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -662,7 +662,7 @@ external project and add it to the overlay.</p>
 <span class="nf">GetDefaultLinuxMd5</span><span class="p">(</span>linux_md5<span class="p">)</span>
 <span class="c1"># Download and Configure our Linux sources</span>
 <span class="nf">DownloadLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_md5</span><span class="si">}</span> vm_linux_extract_dir download_vm_linux<span class="p">)</span>
-<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/32/config"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>linux_config <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/32/config.backup-singlecore"</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span>linux_symvers <span class="s2">"</span><span class="si">${</span><span class="nv">CAMKES_VM_LINUX_DIR</span><span class="si">}</span><span class="s2">/linux_configs/</span><span class="si">${</span><span class="nv">linux_major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">linux_minor</span><span class="si">}</span><span class="s2">/32/Module.symvers"</span><span class="p">)</span>
 <span class="nf">ConfigureLinux</span><span class="p">(</span><span class="si">${</span><span class="nv">vm_linux_extract_dir</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_config</span><span class="si">}</span> <span class="si">${</span><span class="nv">linux_symvers</span><span class="si">}</span> configure_vm_linux
     DEPENDS download_vm_linux
@@ -745,7 +745,7 @@ Add a new function at the top of the file:</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vm_reg_new_vmcall_handler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vm</span><span class="p">,</span> <span class="n">poke_handler</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// &lt;--- added</span>
 
 <span class="cm">/* Now go run the event loop */</span>
-<span class="n">vmm_run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vm</span><span class="p">);</span>
+<span class="n">vm_run</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vm</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Rebuild the project and try out the hypercall + module:</p>

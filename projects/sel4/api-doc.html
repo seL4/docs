@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-06-16 03:15:04 +0000 -->
+<!-- Page last generated 2024-06-17 03:19:07 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7618,7 +7618,7 @@ serviced.</p>
 <h4 id="acknowledge-virtual-ppi-irq">Acknowledge Virtual PPI IRQ</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_VCPU_AckVPPI</code></p>
 
-<p>Acknowledge a PPI IRQ previously forwarded from a VPPIEvent fault</p>
+<p>Acknowledge a PPI IRQ previously forwarded from a VPPIEvent fault.</p>
 
 <table>
   <thead>
@@ -7672,7 +7672,7 @@ serviced.</p>
 <h4 id="inject-irq">Inject IRQ</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_VCPU_InjectIRQ</code></p>
 
-<p>Inject an IRQ to a virtual CPU</p>
+<p>Inject an IRQ to a virtual CPU.</p>
 
 <table>
   <thead>
@@ -7706,7 +7706,7 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">index</code></td>
-      <td>IRQ index</td>
+      <td>VGIC list register</td>
     </tr>
   </tbody>
 </table>
@@ -7723,7 +7723,7 @@ serviced.</p>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">index</code>  is in use.</td>
+      <td>The <code class="language-plaintext highlighter-rouge">index</code>  is in use and not yet handled by the guest.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
@@ -7740,12 +7740,12 @@ serviced.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
+<p><strong>Description:</strong> Used to queue IRQs towards the VCPU. Writes <code class="language-plaintext highlighter-rouge">ICH_LRn_EL2</code> for GICv3 or <code class="language-plaintext highlighter-rouge">LRn</code> for GICv2, where <code class="language-plaintext highlighter-rouge">n</code> is determined by <code class="language-plaintext highlighter-rouge">index</code>. The list register becomes available again when the guest acknowledges the injected interrupt.</p>
 
 <h4 id="read-registers-1">Read Registers</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline seL4_ARM_VCPU_ReadRegs_t seL4_ARM_VCPU_ReadRegs</code></p>
 
-<p>Read a virtual CPU register</p>
+<p>Read a virtual CPU register.</p>
 
 <table>
   <thead>
@@ -7762,14 +7762,14 @@ serviced.</p>
       <td>Capability to the VCPU being operated on.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">seL4_VCPUReg</code></td>
       <td><code class="language-plaintext highlighter-rouge">field</code></td>
       <td>Register to read from a VCPU</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Return value:</strong> <em>TODO</em></p>
+<p><strong>Return value:</strong> A <code class="language-plaintext highlighter-rouge">seL4_ARM_VCPU_ReadRegs_t</code> struct that contains a                 <code class="language-plaintext highlighter-rouge">seL4_Word value</code>, which holds the value of the system register,                 and <code class="language-plaintext highlighter-rouge">int error</code>, which will be non-zero when an error occurred.</p>
 
 <table>
   <thead>
@@ -7794,12 +7794,12 @@ serviced.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
+<p><strong>Description:</strong> Provides a way to read EL1 system registers, as well as <code class="language-plaintext highlighter-rouge">VMPIDR_EL2</code>.</p>
 
 <h4 id="set-tcb-1">Set TCB</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_VCPU_SetTCB</code></p>
 
-<p>Bind a TCB to a virtual CPU</p>
+<p>Bind a TCB to a virtual CPU.</p>
 
 <table>
   <thead>
@@ -7849,7 +7849,7 @@ serviced.</p>
 <h4 id="write-registers-2">Write Registers</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_VCPU_WriteRegs</code></p>
 
-<p>Write a virtual CPU register</p>
+<p>Write a virtual CPU register.</p>
 
 <table>
   <thead>
@@ -7866,7 +7866,7 @@ serviced.</p>
       <td>Capability to the VCPU being operated on.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">seL4_VCPUReg</code></td>
       <td><code class="language-plaintext highlighter-rouge">field</code></td>
       <td>Register ID to write to a VCPU</td>
     </tr>
@@ -7903,7 +7903,7 @@ serviced.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> TODO</p>
+<p><strong>Description:</strong> Provides a way to write EL1 system registers, as well as <code class="language-plaintext highlighter-rouge">VMPIDR_EL2</code>.</p>
 <h3 id="sel4_irqcontrol-2">seL4_IRQControl</h3>
 
 <h4 id="get-irq-handler-smp">Get IRQ Handler (SMP)</h4>
