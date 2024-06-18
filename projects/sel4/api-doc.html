@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-06-17 03:19:07 +0000 -->
+<!-- Page last generated 2024-06-18 03:15:17 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -501,7 +501,7 @@
 <h3 id="poll">Poll</h3>
 <p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_Poll</code></p>
 
-<p>Perform a non-blocking recv on a notification object.</p>
+<p>Perform a non-blocking receive on a notification object.</p>
 
 <table>
   <thead>
@@ -777,7 +777,7 @@
 
 <p><strong>Return value:</strong> A <code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code> error if <code class="language-plaintext highlighter-rouge">frame_cptr</code> is not valid and couldn’t set the buffer.</p>
 
-<p><strong>Description:</strong> Provide a large frame object for the kernel to use as a log-buffer. The object must not be device memory, and must be seL4_LargePageBits in size.</p>
+<p><strong>Description:</strong> Provide a large frame object for the kernel to use as a log-buffer. The object must not be device memory, and must be <code class="language-plaintext highlighter-rouge">seL4_LargePageBits</code> in size.</p>
 
 <h3 id="null-syscall">Null Syscall</h3>
 <p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_BenchmarkNullSyscall</code></p>
@@ -928,7 +928,7 @@
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_CALL_CONTROL_ENTRY_MR</code> New value for the VM Entry Controls</li>
 </ul>
 
-<p>On return these same three message registers will be filled with the values at the point that the privlidged mode ceased executing. If this function returns with <code class="language-plaintext highlighter-rouge">SEL4_VMENTER_RESULT_FAULT</code> then the following additional message registers will be filled out</p>
+<p>On return these same three message registers will be filled with the values at the point that the privileged mode ceased executing. If this function returns with <code class="language-plaintext highlighter-rouge">SEL4_VMENTER_RESULT_FAULT</code> then the following additional message registers will be filled out</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_REASON_MR</code></li>
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_QUALIFICATION_MR</code></li>
@@ -953,7 +953,7 @@
 <h4 id="cancel-badged-sends">Cancel Badged Sends</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_CNode_CancelBadgedSends</code></p>
 
-<p>The cancel badged sends method is intend to allow for the reuse of badges by an
+<p>The cancel badged sends method is intended to allow for the reuse of badges by an
 authority. When used with a badged endpoint capability it
 will cancel any outstanding send operations for that endpoint and badge.
 This operation has no effect on un-badged or other objects.</p>
@@ -1757,7 +1757,7 @@ pivot slot to the destination slot and the capability in the source slot to the 
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
   </tbody>
 </table>
@@ -1952,7 +1952,7 @@ a signal arrives, the passive thread will receive the scheduling context and pos
 until it waits on the notification object again.</p>
 
 <p>This operation will fail for notification objects if the scheduling context is already
-bound to a notification object, and for thread objects if the the scheduling context is
+bound to a notification object, and for thread objects if the scheduling context is
 already bound to a thread.</p>
 
 <table>
@@ -2071,7 +2071,7 @@ the scheduling context will be returned to the thread that it was originally bou
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_CPtr</code></td>
       <td><code class="language-plaintext highlighter-rouge">cap</code></td>
-      <td>Capability to a notification that is bound to the scheduling context or capability to a tcb that is bound to this scheduling context or has received it through scheduling context donation.</td>
+      <td>Capability to a notification that is bound to the scheduling context or capability to a TCB that is bound to this scheduling context or has received it through scheduling context donation.</td>
     </tr>
   </tbody>
 </table>
@@ -4964,7 +4964,7 @@ and fault handler.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
   </tbody>
 </table>
@@ -6289,7 +6289,7 @@ and fault handler.</p>
 <h4 id="assign-vspace">Assign VSpace</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CB_AssignVspace</code></p>
 
-<p>Assigning a vspace to a context bank.</p>
+<p>Assigning a VSpace to a context bank.</p>
 
 <table>
   <thead>
@@ -6470,7 +6470,7 @@ and fault handler.</p>
 <h4 id="unassign-vspace">Unassign VSpace</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_CB_UnassignVspace</code></p>
 
-<p>Unassigning a vspace to a context bank.</p>
+<p>Unassigning a VSpace to a context bank.</p>
 
 <table>
   <thead>
@@ -6549,7 +6549,7 @@ and fault handler.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
   </tbody>
 </table>
@@ -6803,7 +6803,7 @@ and fault handler.</p>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_Page_CleanInvalidate_Data</code></p>
 
 <p>Clean and invalidates the cache range within the given page. The range will be flushed out to RAM.
-The start and end are relative to the page being serviced.</p>
+The start and end offsets are relative to the page being serviced.</p>
 
 <table>
   <thead>
@@ -6907,7 +6907,7 @@ The start and end are relative to the page being serviced.</p>
 <h4 id="invalidate-data">Invalidate Data</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_Page_Invalidate_Data</code></p>
 
-<p>Invalidates the cache range within the given page. The start and end are relative to the page being serviced
+<p>Invalidates the cache range within the given page. The start and end offsets are relative to the page being serviced
 and should be aligned to a cache line boundary where possible.
 An additional clean is performed on the outer cache lines if the start and end are
 not aligned, to clean out the bytes between the requested and the cache line boundary.</p>
@@ -7117,14 +7117,14 @@ not aligned, to clean out the bytes between the requested and the cache line bou
   </tbody>
 </table>
 
-<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="language-plaintext highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability.</p>
+<p><strong>Description:</strong> Takes a VSpace capability as an argument and installs a reference to the given <code class="language-plaintext highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability.</p>
 
 <h4 id="unify-instruction">Unify Instruction</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_Page_Unify_Instruction</code></p>
 
 <p>Unify Instruction Cache. Cleans data lines to point of unification, invalidate
 corresponding instruction lines to point of unification, then invalidates branch
-predictors. The start and end are relative to the page being
+predictors. The start and end offsets are relative to the page being
 serviced.</p>
 
 <table>
@@ -7299,7 +7299,7 @@ serviced.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the invoked <code class="language-plaintext highlighter-rouge">PageTable</code> in the VSpace according to the provided virtual address.</p>
+<p><strong>Description:</strong> Takes a VSpace capability as an argument, and installs a reference to the page table in the VSpace at the provided virtual address.</p>
 
 <h4 id="unmap-10">Unmap</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_PageTable_Unmap</code></p>
@@ -7571,7 +7571,7 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
   </tbody>
 </table>
@@ -7948,12 +7948,12 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
       <td><code class="language-plaintext highlighter-rouge">target</code></td>
-      <td>Indicates the target core ID to which this irq will be sent.</td>
+      <td>Indicates the target core ID to which this IRQ will be sent.</td>
     </tr>
   </tbody>
 </table>
@@ -8041,7 +8041,7 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
   </tbody>
 </table>
@@ -8352,7 +8352,7 @@ serviced.</p>
 <h4 id="smc-call">SMC Call</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_SMC_Call</code></p>
 
-<p>Tell the microkernel to make the real SMC call.</p>
+<p>Tell the kernel to make the real SMC call.</p>
 
 <table>
   <thead>
@@ -8383,7 +8383,7 @@ serviced.</p>
 
 <p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
 
-<p><strong>Description:</strong> Takes x0-x7 as arguments to an SMC call which are defined as a seL4_ARM_SMCContext struct. The microkernel makes the SMC call and then returns the results as a new seL4_ARM_SMCContext.</p>
+<p><strong>Description:</strong> Takes x0-x7 as arguments to an SMC call which are defined as a seL4_ARM_SMCContext struct. The kernel makes the SMC call and then returns the results as a new seL4_ARM_SMCContext.</p>
 <h3 id="sel4_arm_vspace">seL4_ARM_VSpace</h3>
 
 <h4 id="clean-data-2">Clean Data</h4>
@@ -8693,7 +8693,7 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
       <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td>Number of bits of dest_index to resolve to find the destination slot.</td>
+      <td>Number of bits of index to resolve to find the destination slot.</td>
     </tr>
   </tbody>
 </table>
