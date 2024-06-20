@@ -97,8 +97,10 @@ Communication about what is being developed can occur on any of the channels lis
 In particular:
 
 - The *devel* mailing list, seL4 Mattermost and seL4 Discourse are for general development discussions.
-- Discussions about proposed changes can reach a point where an [RFC](/processes/rfc-process) is created.
-  Further discussion then happens on the [RFC](https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100) site.
+- Discussions about proposed changes can reach a point where an
+  [RFC](/processes/rfc-process) is created. Further discussion then happens on
+  the RFC pull requests in the
+  [RFC repository](https://github.com/seL4/rfcs/pulls?q=is%3Aopen+is%3Apr+-label%3Anot-rfc+).
 - GitHub issue and Pull-request comment sections can also be used.
 
 The [seL4 development and verification
@@ -111,11 +113,14 @@ projects that someone has committed to deliver.
 We use the following communication mechanisms:
 
 - [Mailing lists](emails): For email-based discussions, for asking for help, reporting issues or general seL4 communication.
-- [seL4 Discourse (seL4um)](https://sel4.discourse.group/): Forum for seL4. Attempting to build up useful knowledge-base.
-- [seL4 Mattermost](https://mattermost.trustworthy.systems/sel4-external/). seL4 chat platform (Signup link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
-- GitHub issues: Reporting issues or creating pull requests on repositories located at [seL4](https://github.com/seL4) or [seL4Proj](https://github.com/seL4proj) organisations.
-- [seL4 Jira](https://sel4.atlassian.net): for issue tracking on seL4, CAmkES, and formal verification, and for reading and creating [RFCs](rfc-process)
+- [seL4 Discourse forum](https://sel4.discourse.group/): Forum for seL4. Attempting to build up useful knowledge-base.
+- [seL4 Mattermost](https://mattermost.trustworthy.systems/sel4-external/). seL4 chat platform (Sign-up link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
+- GitHub issues: Reporting issues or creating pull requests on repositories
+  located in the [seL4 GitHub org](https://github.com/seL4).
+- [RFCs](https://github.com/seL4/rfcs): for reading and creating new seL4 features or larger ecosystem changes.
 - [Websites](websites): Websites containing information about seL4.
+- [seL4 Jira](https://sel4.atlassian.net): archive for old issue tracking on
+  seL4, CAmkES, and formal verification before GitHub development.
 
 
 ## Contributing
