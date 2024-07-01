@@ -47,6 +47,20 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
         </li>
 {% endfor %}
 
+{% if project.sdk_downloads %}
+<h3>SDK downloads</h3>
+  {% for release in project.sdk_downloads %}
+    <h4>{{ release.version }}</h4>
+    {% for sdk in release.sdks %}
+      <li>
+          <a class="" href="{{ sdk.url }}">
+              {{ sdk.label }}
+            </a>
+      </li>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
 {% assign release_where_exp = "item.url contains '/releases/" | append: project.name | append: "/'" %}
 {% assign releases = site['releases'] | where_exp:"item", release_where_exp %}
 {% comment %}
