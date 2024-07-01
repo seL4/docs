@@ -83,6 +83,20 @@ Because of this we need to split the list into two before sorting.
 
 {% endif %}
 
+{% if project.sdk_downloads %}
+<h3>SDK downloads</h3>
+  {% for release in project.sdk_downloads %}
+    <h4>{{ release.version }}</h4>
+    {% for sdk in release.sdks %}
+      <li>
+          <a href="{{ sdk.url }}">
+              {{ sdk.label }}
+            </a>
+      </li>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
 {% assign update_where_exp = "item.url contains '/updates/" | append: project.name | append: "/'" %}
 {% assign updates = site['updates'] | where_exp:"item", update_where_exp %}
 {% for update in updates | sort: "date" %}
