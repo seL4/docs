@@ -99,6 +99,31 @@ file kernel.elf
 # kernel.elf: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
 ```
 
+## Installing
+
+The build directory contains many more artefacts than needed to use a standalone kernel build.
+
+If you have used `-DCMAKE_INSTALL_PREFIX=<install dir>` when configuring CMake and then run `cmake --install <build dir>`,
+you can have all the install artefacts placed in `<install dir>`. The directory structure is the following:
+
+```none
+├── bin/
+│   └── kernel.elf
+├── libsel4/
+|   ├── include/
+|   |   └── ...
+|   |   └── kernel/
+|   |       └── ...
+|   |       └── gen_config.json
+|   └── src/
+├── support/
+|   └── kernel.dtb
+|   └── platform_gen.json
+|   └── platform_gen.yaml
+```
+
+Note that the contents of the `support/` directory may differ depending on the target architecture.
+
 ## Why use stand alone build?
 
 It is non-trivial to take a standalone kernel.elf and use it in another build environment.  This is because the system configuration is not exported with the kernel.elf and so a different build environment will need to know exactly how the kernel was configured so that bootloaders and userlevel applications can be configured in a compatible way.  Using the CMake scripts provided in seL4_tools and importing the kernel into an existing CMake project hierarchy will ensure that the system configuration is properly shared with other parts of the project.
