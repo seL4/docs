@@ -53,9 +53,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 Sort sorts by string sorting so a version of 2.3.0 is higher than 10.0.0.
 Because of this we need to split the list into two before sorting.
 {% endcomment %}
-{% assign releases_1 = releases | where_exp:"item", "item.version_digits != 2" | sort: "version"  %}
+{% assign releases_1 = releases | where_exp:"item", "item.version_digits != 2" | sort: "version" %}
 {% assign releases_2 = releases | where_exp:"item", "item.version_digits == 2" | sort: "version" %}
-{% assign releases =  releases_1 | concat: releases_2 %}
+{% assign releases =  releases_1 | concat: releases_2 | reverse %}
 {% if project.name != 'sel4' %}
   {% for release in releases %}
       {% if forloop.first == true %}
