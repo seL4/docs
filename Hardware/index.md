@@ -135,7 +135,7 @@ starting from scratch on a new platform port.
 | - | - | - | - | - | - | - | - | - |
 {%- assign sorted = site.pages | sort: 'platform'%}
 {% for page in sorted %}
-{%- if page.arm_hardware and page.Maintained == "No"" -%}
+{%- if page.arm_hardware and page.Maintained == "No" -%}
 | <span style="color:grey">[{{ page.platform }}]({{page.url}})</span> (**unmaintained**) | <span style="color:grey">{{ page.soc}}</span> | <span style="color:grey">{{ page.cpu }}</span> | <span style="color:grey">{{ page.arch }}</span> | <span style="color:grey">{{ page.virtualization }}</span> | <span style="color:grey">{{ page.iommu}}</span> | <span style="color:grey">{{ page.Status }}</span> | <span style="color:grey">{{ page.Contrib }}</span> |
 {% endif %}
 {%- endfor %}
