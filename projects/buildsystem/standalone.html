@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2024-07-02 01:40:27 +0000 -->
+<!-- Page last generated 2024-07-02 03:00:25 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -394,13 +394,37 @@
 <span class="c"># kernel.elf: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped</span>
 </code></pre></div></div>
 
+<h2 id="installing">Installing</h2>
+
+<p>The build directory contains many more artefacts than needed to use a standalone kernel build.</p>
+
+<p>If you have used <code class="language-plaintext highlighter-rouge">-DCMAKE_INSTALL_PREFIX=&lt;install dir&gt;</code> when configuring CMake and then run <code class="language-plaintext highlighter-rouge">cmake --install &lt;build dir&gt;</code>,
+you can have all the install artefacts placed in <code class="language-plaintext highlighter-rouge">&lt;install dir&gt;</code>. The directory structure is the following:</p>
+
+<pre><code class="language-none">├── bin/
+│   └── kernel.elf
+├── libsel4/
+|   ├── include/
+|   |   └── ...
+|   |   └── kernel/
+|   |       └── ...
+|   |       └── gen_config.json
+|   └── src/
+├── support/
+|   └── kernel.dtb
+|   └── platform_gen.json
+|   └── platform_gen.yaml
+</code></pre>
+
+<p>Note that the contents of the <code class="language-plaintext highlighter-rouge">support/</code> directory may differ depending on the target architecture.</p>
+
 <h2 id="why-use-stand-alone-build">Why use stand alone build?</h2>
 
 <p>It is non-trivial to take a standalone kernel.elf and use it in another build environment.  This is because the system configuration is not exported with the kernel.elf and so a different build environment will need to know exactly how the kernel was configured so that bootloaders and userlevel applications can be configured in a compatible way.  Using the CMake scripts provided in seL4_tools and importing the kernel into an existing CMake project hierarchy will ensure that the system configuration is properly shared with other parts of the project.</p>
 
-<p>However sometimes a standalone build is required when the kernel is being used in a different environment that doesn’t use a CMake based build system.  One example of this is the verification project, L4V, that uses the stand alone build to poroduce the source and binary artifacts that the verification is performed on.</p>
+<p>However sometimes a standalone build is required when the kernel is being used in a different environment that doesn’t use a CMake based build system.  One example of this is the verification project, L4V, that uses the stand alone build to produce the source and binary artifacts that the verification is performed on.</p>
 
-<p>Other use cases include projects that want to build a non-C roottask, or projects that are already sophisticated enough to manage the different configuration settings that the kernel requires.  In these scenarios, it would be expected that these projects provide their own Configuration.cmake files that have correct configurations.</p>
+<p>Other use cases include projects that want to build a non-C root task, or projects that are already sophisticated enough to manage the different configuration settings that the kernel requires.  In these scenarios, it would be expected that these projects provide their own Configuration.cmake files that have correct configurations.</p>
 
   </div>
 
@@ -513,10 +537,10 @@
         </li>
         
           <li>
-            Site last updated: Tue Jul 2 11:38:52 2024 +1000 211aac9367
+            Site last updated: Tue Jul 2 12:58:52 2024 +1000 d66da26e94
           </li>
           <li>
-                Page last updated: Thu Dec 1 11:02:14 2022 +1100 5446a1befb
+                Page last updated: Tue Jul 2 12:58:52 2024 +1000 d66da26e94
           </li>
         
       </ul>
