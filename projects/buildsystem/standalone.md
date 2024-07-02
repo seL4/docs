@@ -99,10 +99,35 @@ file kernel.elf
 # kernel.elf: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
 ```
 
+## Installing
+
+The build directory contains many more artefacts than needed to use a standalone kernel build.
+
+If you have used `-DCMAKE_INSTALL_PREFIX=<install dir>` when configuring CMake and then run `cmake --install <build dir>`,
+you can have all the install artefacts placed in `<install dir>`. The directory structure is the following:
+
+```none
+├── bin/
+│   └── kernel.elf
+├── libsel4/
+|   ├── include/
+|   |   └── ...
+|   |   └── kernel/
+|   |       └── ...
+|   |       └── gen_config.json
+|   └── src/
+├── support/
+|   └── kernel.dtb
+|   └── platform_gen.json
+|   └── platform_gen.yaml
+```
+
+Note that the contents of the `support/` directory may differ depending on the target architecture.
+
 ## Why use stand alone build?
 
 It is non-trivial to take a standalone kernel.elf and use it in another build environment.  This is because the system configuration is not exported with the kernel.elf and so a different build environment will need to know exactly how the kernel was configured so that bootloaders and userlevel applications can be configured in a compatible way.  Using the CMake scripts provided in seL4_tools and importing the kernel into an existing CMake project hierarchy will ensure that the system configuration is properly shared with other parts of the project.
 
-However sometimes a standalone build is required when the kernel is being used in a different environment that doesn't use a CMake based build system.  One example of this is the verification project, L4V, that uses the stand alone build to poroduce the source and binary artifacts that the verification is performed on.
+However sometimes a standalone build is required when the kernel is being used in a different environment that doesn't use a CMake based build system.  One example of this is the verification project, L4V, that uses the stand alone build to produce the source and binary artifacts that the verification is performed on.
 
-Other use cases include projects that want to build a non-C roottask, or projects that are already sophisticated enough to manage the different configuration settings that the kernel requires.  In these scenarios, it would be expected that these projects provide their own Configuration.cmake files that have correct configurations.
+Other use cases include projects that want to build a non-C root task, or projects that are already sophisticated enough to manage the different configuration settings that the kernel requires.  In these scenarios, it would be expected that these projects provide their own Configuration.cmake files that have correct configurations.
