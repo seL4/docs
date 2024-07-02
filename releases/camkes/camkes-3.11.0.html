@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--
+     SPDX-License-Identifier: CC-BY-SA-4.0
+     SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+-->
+<!-- Page last generated 2024-07-02 01:36:32 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>camkes-3.11.0 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><script defer data-domain="docs.sel4.systems"
+	    src="https://analytics.sel4.systems/js/script.js"></script></head>
+
+  <body class="container-fluid">
+
+    
+
+
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="https://sel4.systems" class="skip-icon">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/processes">Contributing</a></h2>
+        <h2><a href="/projects">Projects</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  
+<div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+            </a>
+            <meta property="position" content="1" />
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/camkes">
+              <span property="name"><b>CAmkES Releases</b></span>
+            </a>
+            <meta property="position" content="2" />
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">camkes-3.11.0</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/sel4/13.0.0"><b>seL4-13.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/microkit/1.3.0"><b>microkit-1.3.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/camkes/camkes-3.11.0"><b>camkes-3.11.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/capdl/0.3.0"><b>capDL-0.3.0</b></a></li>
+      </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    
+
+
+<div class="sidebar">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  </div>
+  <div class="content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="camkes-version-camkes-3110-release">CAmkES Version camkes-3.11.0 Release</h1>
+
+<h4 id="2024-07-01">2024-07-01</h4>
+
+<p>Announcing the release of <code class="language-plaintext highlighter-rouge">camkes-3.11.0</code>, using seL4 version 13.0.0.</p>
+
+<h3 id="changes">Changes</h3>
+
+<h4 id="addedremoved">Added/Removed</h4>
+
+<ul>
+  <li>Added support for SMC capabilities</li>
+  <li>Allow camkes components to know affinity; add build time error check for affinity</li>
+  <li>dataport: Add getter for frame size</li>
+  <li><code class="language-plaintext highlighter-rouge">libsel4camkes</code>: expose <code class="language-plaintext highlighter-rouge">get_virtqueue_channel</code></li>
+  <li>Added RISC-V in <code class="language-plaintext highlighter-rouge">is_64_bit_arch()</code></li>
+  <li>Added helpers <code class="language-plaintext highlighter-rouge">is_arch_arm()</code> and <code class="language-plaintext highlighter-rouge">is_arch_riscv()</code></li>
+  <li>Added an additional parameter with the current architectures for the macros
+<code class="language-plaintext highlighter-rouge">parse_dtb_node_interrupts()</code> and <code class="language-plaintext highlighter-rouge">global_endpoint_badges()</code>.</li>
+  <li>Added support for C++ source files in CAmkES components</li>
+  <li>parser: Support address translation ranges</li>
+  <li><code class="language-plaintext highlighter-rouge">serial:</code> add config options for different ports</li>
+  <li>Extended DTB interrupt property parsing to support either one value or three
+values per interrupt. For three values, ignore the first value on RISC-V.</li>
+  <li>Add vulnerability reporting policy</li>
+  <li>Name frames in a region for easy sorting: When generating a set of frames to
+cover a region, use as many digits as necessary so that the capDL tool, when
+it sorts alphabetically, will still leave frames that are meant to be
+contiguous contiguous.</li>
+  <li>Remove references to and support of ARMv6 and the <code class="language-plaintext highlighter-rouge">kzm</code> platform</li>
+</ul>
+
+<h4 id="fixed">Fixed</h4>
+
+<ul>
+  <li>component.simple: fix mismatched type size, which may cause data overflow when
+<code class="language-plaintext highlighter-rouge">CONFIG_WORD_SIZE</code> is 64. Use the <code class="language-plaintext highlighter-rouge">CLZL()</code> macro to correctly handle the
+specified <code class="language-plaintext highlighter-rouge">CONFIG_WORD_SIZE</code>.</li>
+  <li>parser,fdtQueryEngine: Fix parser bug with DTB queries</li>
+  <li>Make sure fault handler and control run on same core as component</li>
+  <li>Improve error messages</li>
+  <li>cmake: add missing parameter <code class="language-plaintext highlighter-rouge">DTB_FILE_PATH</code></li>
+  <li>fix <code class="language-plaintext highlighter-rouge">CAMKES_ROOT_DTS_FILE_PATH</code> check</li>
+  <li>serial: rename Serial.camkes files. This fixes an “unknown reference to
+‘Serial’” issue seen on MacOS.</li>
+  <li>Fix IOAPIC vs MSI check in <code class="language-plaintext highlighter-rouge">irq.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">component.common:</code> align morecore region to 0x1000. This region is used for
+mmap and brk allocations. If the 4k implementation alignment assumption isn’t
+obeyed then memory errors are possible.</li>
+  <li>Avoid printing internal debug info</li>
+  <li>Consistently use CONFIG_PLAT in <code class="language-plaintext highlighter-rouge">camkes_sys_uname()</code> for all architectures.</li>
+  <li>More robust catching of <code class="language-plaintext highlighter-rouge">objcopy</code> errors during build</li>
+  <li>parser: fix attribute_reference regex</li>
+  <li>python: sanitize number formatting</li>
+</ul>
+
+<h4 id="dependencies-tests-docs">Dependencies, Tests, Docs</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">libsel4camkes</code>: Add markdown documentation</li>
+  <li>parser: Add unit test for range translations</li>
+  <li>Add CAmkES unit and app tests to GitHub CI</li>
+  <li>Make more CAmkES tests available on pull requests</li>
+  <li>Small tutorial fixes</li>
+  <li>Improve thread priority description in docs</li>
+  <li>Remove unused python dependencies</li>
+  <li>Replace obsolete <code class="language-plaintext highlighter-rouge">orderedset</code> python dependency with maintained <code class="language-plaintext highlighter-rouge">ordered_set</code></li>
+  <li>Update <code class="language-plaintext highlighter-rouge">camkes-deps</code> description and instructions</li>
+  <li><code class="language-plaintext highlighter-rouge">camkes-deps</code>: set minimum <code class="language-plaintext highlighter-rouge">jinja2</code> version</li>
+</ul>
+
+<h3 id="upgrade-notes">Upgrade Notes</h3>
+
+<ul>
+  <li>No special upgrade requirements.</li>
+</ul>
+
+<h2 id="full-changelog">Full changelog</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">git log camkes-3.10.0..camkes-3.11.0</code> in
+<a href="https://github.com/seL4/camkes-tool">https://github.com/seL4/camkes-tool</a></p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the
+<a href="https://github.com/seL4/camkes-tool/blob/camkes-3.11.0/docs/index.md">documentation</a>
+or ask on the mailing list!</p>
+
+
+  </div>
+
+
+
+
+
+
+
+  
+  
+<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+    <ul class="section-nav">
+    	<h2> CAmkES </h2> 
+        <li>
+          
+          <a style="" class="" href="/projects/camkes/">
+            Documentation homepage
+          </a>
+        </li>
+
+
+        <li>
+          
+          <a style="" class="" href="/projects/camkes/status.html">
+            Status
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <h3>Useful URLs</h3>
+    
+        <li>
+          <a style="" class="" href="/projects/camkes/manual.html">
+            CAmkES Manual
+          </a>
+        </li>
+
+    
+        <li>
+          <a style="" class="" href="https://trustworthy.systems/projects/TS/camkes.pml">
+            Trustworthy Systems CAmkES project
+          </a>
+        </li>
+
+
+
+
+
+    
+        <h3>Repositories</h3>
+    
+        <li>
+          <a class="" href="https://github.com/sel4/camkes-tool">
+            camkes-tool
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4/camkes">
+            camkes
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4/camkes-manifest">
+            camkes-manifest
+          </a>
+        </li>
+
+    
+        <li>
+          <a class="" href="https://github.com/sel4proj/global-components">
+            global-components
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+  
+      
+          <h3>Releases</h3>
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-2.0.0.html">
+              camkes-2.0.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-2.1.0.html">
+              camkes-2.1.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-2.2.0.html">
+              camkes-2.2.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-2.3.0.html">
+              camkes-2.3.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-2.3.1.html">
+              camkes-2.3.1
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.0.0.html">
+              camkes-3.0.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.1.0.html">
+              camkes-3.1.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.10.0.html">
+              camkes-3.10.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style=" font-weight: bold; " href="/releases/camkes/camkes-3.11.0.html">
+              camkes-3.11.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.2.0.html">
+              camkes-3.2.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.3.0.html">
+              camkes-3.3.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.4.0.html">
+              camkes-3.4.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.5.0.html">
+              camkes-3.5.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.6.0.html">
+              camkes-3.6.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.7.0.html">
+              camkes-3.7.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.8.0.html">
+              camkes-3.8.0
+            </a>
+          </li>
+  
+      
+          <li>
+            <a style="" href="/releases/camkes/camkes-3.9.0.html">
+              camkes-3.9.0
+            </a>
+          </li>
+  
+
+
+
+
+
+    </ul>
+
+</div>
+
+
+</div>
+
+    </main>
+    
+
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Tue Jul 2 11:35:00 2024 +1000 16ce9535e3
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/camkes/camkes-3.11.0.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/camkes/camkes-3.11.0.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>

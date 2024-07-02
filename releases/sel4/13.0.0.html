@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<!--
+     SPDX-License-Identifier: CC-BY-SA-4.0
+     SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+-->
+<!-- Page last generated 2024-07-02 01:36:32 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 13.0.0 | seL4 docs</title>
+
+    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <!-- Font awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Pygments syntax highlighting  -->
+    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><script defer data-domain="docs.sel4.systems"
+	    src="https://analytics.sel4.systems/js/script.js"></script></head>
+
+  <body class="container-fluid">
+
+    
+
+
+
+<header>
+  <ul class="row menu">
+    <li class="col-xs-12 col-md-2" >
+            <a href="https://sel4.systems" class="skip-icon">
+              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
+            </a>
+    </li>
+    <li class="col-xs-12 col-md-10 menu">
+      <nav aria-label="Banner links">
+        <h2><a href="/GettingStarted">Getting Started</a></h2>
+        <h2><a href="/processes">Contributing</a></h2>
+        <h2><a href="/projects">Projects</a></h2>
+        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
+      </nav>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  
+<div class="breadcrumbs bootstrap hidden-sm-down">
+  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
+    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
+      
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/">
+              <span property="name"><b>seL4 Docs</b></span>
+            </a>
+            <meta property="position" content="1" />
+        </li>
+      
+        
+
+        
+
+        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <a property="item" typeof="WebPage" href="/releases/sel4">
+              <span property="name"><b>seL4 releases</b></span>
+            </a>
+            <meta property="position" content="2" />
+        </li>
+      
+        
+
+        
+          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
+            <span property="name">seL4 13.0.0</span>
+            <meta property="position" content="3" /></li>
+          
+    </ol>
+  </nav>
+  <nav class="sel-version" aria-label="Current Versions">
+    <ol class="list-unstyled">
+      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
+        Current versions:</li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/sel4/13.0.0"><b>seL4-13.0.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/microkit/1.3.0"><b>microkit-1.3.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/camkes/camkes-3.11.0"><b>camkes-3.11.0</b></a></li>
+      <li class="list-unstyled text-right">
+      <a href="/releases/capdl/0.3.0"><b>capDL-0.3.0</b></a></li>
+      </ol>
+  </nav>
+  <div class='clear'></div>
+</div>
+
+
+</header>
+
+    <main>
+      <div class="row">
+  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+    
+
+
+<div class="sidebar">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  </div>
+  <div class="content col-sm-8 col-md-6 col-lg-7 main">
+    <h1 id="sel4-version-1300-release">seL4 Version 13.0.0 Release</h1>
+
+<h4 id="2024-07-01">2024-07-01</h4>
+
+<p>Announcing the release of <code class="language-plaintext highlighter-rouge">seL4 13.0.0</code>. This release has security-relevant fixes that affect
+configurations or areas of the kernel that have not been formally verified. It is recommended
+to upgrade.</p>
+
+<p>This is a breaking release.</p>
+
+<h3 id="security-relevant-changes">Security-relevant Changes</h3>
+
+<ul>
+  <li>
+    <p>Fixed a kernel-crashing NULL pointer dereference when injecting an IRQ for a non-associated VCPU on SMP
+configurations. This can be triggered from user-level by any thread that has access to or can create non-associated
+VCPU objects. While HYP+SMP is not a verified configuration and is not thoroughly tested, it is generally assumed to
+be working. If you are using this configuration, it is strongly recommended to upgrade.</p>
+
+    <ul>
+      <li>Affected configurations: only unverified HYP+SMP configurations on Arm platforms are affected.</li>
+      <li>Affected versions: seL4 versions 12.0.0 and 12.1.0.</li>
+      <li>Exploitability: Any thread that can create or that has access to an unassociated VCPU can cause the crash. In static
+systems, only the system initialiser thread can create VCPUs and the standard capDL system initialiser will not
+trigger the issue. VMMs could have the authority to dissociate an existing VCPU from a TCB if they have both
+capabilities. That is, a malicious VMM could cause a crash, but generally VMMs are trusted, albeit not verified
+code. Guest VMs generally do not have sufficient authority to exploit this vulnerability.</li>
+      <li>Severity: Critical. This crashes the entire system.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Fixed a kernel-crashing cache maintenance operation on AArch64 (Armv8). On AArch64, when seL4 runs in EL1 the kernel
+would fault with a data abort in <code class="language-plaintext highlighter-rouge">seL4_ARM_Page_Invalidate_Data</code> and <code class="language-plaintext highlighter-rouge">seL4_ARM_VSpace_Invalidate_Data</code> when the user
+requested a <code class="language-plaintext highlighter-rouge">dc ivac</code> cache maintenance operation on a page that is not mapped writeable. If you are using seL4 in EL1
+on AArch64, it is strongly recommended to upgrade.</p>
+
+    <ul>
+      <li>Affected configurations: unverified AArch64 configurations of seL4 with hypervisor extensions off (kernel runs in
+EL1). AArch32 configurations and configurations where seL4 runs in EL2 are not affected.</li>
+      <li>Affected versions: all previous versions since 5.0.0</li>
+      <li>Exploitability: Any thread that has a VSpace capability or page capability to a page that is not mapped writable can
+cause the data abort. Most Microkit and CAmkES systems do not give their component access to these capabilities, but any component with Untyped capabilities could create threads with enough capabilities to trigger the issue.</li>
+      <li>Severity: Critical. This crashes the system.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Fixed a cache issue on Arm where cleared memory was not flushed to RAM, but only to the point of unification. This
+means that uncached access was able to still see old memory content.</p>
+
+    <ul>
+      <li>Affected configurations: Arm platforms that distinguish flushing to PoU from flushing to RAM</li>
+      <li>Affected versions: all previous versions since 4.0.0</li>
+      <li>Exploitability: Low. The issue is trivially observable by mapping the same frame as cached and uncached.
+However, it is unlikely to be exploitable in a real system, because re-using memory over security boundaries
+is already excluded, so information leakage happens only within the same domain.</li>
+      <li>Severity: Medium. It breaks functional correctness in the sense that a cleared frame may not yet be cleared when
+viewed as uncached. It does not break any functional kernel behaviour.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="platforms">Platforms</h3>
+
+<ul>
+  <li>Added support for the ARM Cortex A55</li>
+  <li>Added support for the imx8mp-evk platform</li>
+  <li>Added support for additional RPI4 variants</li>
+  <li>Added support for the Odroid C4</li>
+  <li>Added support for the Avnet MaaXBoard</li>
+  <li>Added support for arm_hyp on qemu-arm-virt platfrom with cortex-a15 CPU</li>
+  <li>Added support for qemu-riscv-virt</li>
+  <li>Added support for the Pine64 Star64</li>
+  <li>Added support for the TQMa8XQP 1GiB module</li>
+  <li>Remove imx31/kzm platform support. This platform is being removed as it is sufficiently old and unused.</li>
+  <li>Remove ARM1136JF_S and ARMv6 support. This architecture version is being removed as it is sufficiently old and
+unused. See <a href="https://sel4.github.io/rfcs/implemented/0080-remove-armv6-support.html">RFC-8</a>.</li>
+  <li>Remove ARMv6 specific configs: <code class="language-plaintext highlighter-rouge">KernelGlobalsFrame</code> and <code class="language-plaintext highlighter-rouge">KernelDangerousCodeInjectionOnUndefInstr</code>. This removes the
+constant <code class="language-plaintext highlighter-rouge">seL4_GlobalsFrame</code> from libsel4 as well as the IPC buffer in GlobalsFrame caveat from CAVEATS.md</li>
+  <li>rpi3+rpi4: Mark first memory page as reserved</li>
+</ul>
+
+<h4 id="arm">Arm</h4>
+
+<ul>
+  <li>Enabled access to <code class="language-plaintext highlighter-rouge">seL4_VCPUReg_VMPIDR</code> and <code class="language-plaintext highlighter-rouge">seL4_VCPUReg_VMPIDR_EL2</code> for all hypervisor configurations. Previously
+this register was only accessible for SMP kernel configurations. Non-SMP configurations can still require access when
+wanting to control the value of <code class="language-plaintext highlighter-rouge">MPIDR</code> that the guest reads. Note that the initial value for new seL4_ARM_VCPUs for
+this register is 0 which isn’t a legal value for <code class="language-plaintext highlighter-rouge">MPIDR_EL1</code> on AArch64. It may be necessary for the register to be
+explicitly initialized by user level before launching a thread associated with the new seL4_ARM_VCPU.</li>
+  <li>Allow changing the VCPU of active thread: call <code class="language-plaintext highlighter-rouge">vcpu_switch</code> in <code class="language-plaintext highlighter-rouge">associateVCPUTCB</code>. This guarantees that the correct
+VCPU will be activated when the kernel finishes execution. Previously, changing the VCPU of the current thread would
+result in no VCPU being active.</li>
+  <li>benchmarking: use write-through kernel log buffer</li>
+  <li>arm_hyp: Access <code class="language-plaintext highlighter-rouge">SPSR</code> via non-banked instructions</li>
+  <li><code class="language-plaintext highlighter-rouge">generic_timer</code>: force timer to de-assert IRQ.</li>
+  <li>No special handling for edge-triggered IRQs.
+    <ul>
+      <li>Clearing the pending state only has an effect if the IRQ state is active-and-pending, which happens for
+  edge-triggered interrupts if another edge happens on the IRQ line for the currently active interrupt. This window is
+  small enough to ignore, at worst user space will get another notification, which is harmless.</li>
+    </ul>
+
+    <p>If unnecessary notifications are unwanted, the pending state should be cleared during <code class="language-plaintext highlighter-rouge">seL4_IRQHandler_Ack()</code>, as
+  that covers a much bigger window. However, edge-triggered interrupts are not expected to happen often. Making all
+  interrupt handling slightly faster and the code simpler is the better trade-off.</p>
+  </li>
+  <li>Make write-only mapping message consistent. There is a warning when creating a write-only mapping on AArch32/AArch64.
+This message is now the same in all variants.</li>
+</ul>
+
+<h5 id="aarch32">AArch32</h5>
+
+<ul>
+  <li>Implement <code class="language-plaintext highlighter-rouge">KernelArmExportPTMRUser</code> and <code class="language-plaintext highlighter-rouge">KernelArmExportVTMRUser</code> options for Arm generic timer use access on AArch32.</li>
+  <li>AArch32 VM fault messages now deliver original (untranslated) faulting IP in a hypervisor context, matching
+AArch64 behaviour.</li>
+  <li>Fix single stepping on ARMv7</li>
+  <li>TLB: only perform TLB lockdown for Cortex A8.
+    <ul>
+      <li>The code previously used the same instructions for Cortex A8 and A9, but the Cortex A8 instructions are undocumented
+for A9, and A9 provides a slightly different TLB interface. As far as we can tell, the instructions were simply
+ignored by the supported A8 platforms, so there was no current correctness issue. Since the instructions had no
+effect, we removed A9 TLB lockdown support. This potential issue was discovered and reported by the UK’s National
+Cyber Security Centre (NCSC).</li>
+    </ul>
+  </li>
+  <li>TLB: guard TLB lockdown count.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">lockTLBEntry</code> uses the global <code class="language-plaintext highlighter-rouge">tlbLockCount</code> as input without checking bounds. This is fine, because the function
+is called at most 2 times per core, but this is only apparent when checking the entire possible calling context.
+Make this bound obvious locally by doing nothing if the function is called with values of <code class="language-plaintext highlighter-rouge">tlbLockCount</code> of 2 or
+greater. This is safe, because TLB lockdown is a performance change only. Also add an assert for debug mode, because
+we want to know if calling context ever changes. This potential issue was reported by The UK’s National Cyber
+Security Centre (NCSC).</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="aarch64">AArch64</h5>
+
+<ul>
+  <li>Add <code class="language-plaintext highlighter-rouge">AARCH64_verified.cmake</code> config for functional correctness on AArch64</li>
+  <li>Rename libsel4 config option <code class="language-plaintext highlighter-rouge">AARCH64_VSPACE_S2_START_L1</code> to <code class="language-plaintext highlighter-rouge">CONFIG_AARCH64_VSPACE_S2_START_L1</code> to be namespace
+compliant.</li>
+  <li>Added SMC Capability (<code class="language-plaintext highlighter-rouge">smc_cap</code>) and SMC forwarding for AArch64 platforms. See
+<a href="https://sel4.github.io/rfcs/implemented/0090-smc-cap.html">RFC-9</a>.</li>
+  <li>Remove VSpace object types in AArch64: <code class="language-plaintext highlighter-rouge">seL4_ARM_PageDirectory</code> and <code class="language-plaintext highlighter-rouge">seL4_ARM_PageUpperDirectory</code>. See also the
+corresponding <a href="https://sel4.github.io/rfcs/implemented/0100-refactor-aarch64-vspace.html">RFC</a>. The functionality
+previously provided by these types will be provided by the existing <code class="language-plaintext highlighter-rouge">seL4_ARM_PageTable</code> object type. This allows for
+a simpler API and enables a smaller kernel implementation that will be easier to verify. libsel4 provides a source
+compatibility translation that maps the old libsel4 names and constants the new ones in
+<code class="language-plaintext highlighter-rouge">&lt;sel4/sel4_arch/deprecated.h&gt;</code>. There are some exceptional cases where kernel behavior has changed:
+    <ul>
+      <li>A Page directory and page table are now the same kind of object and can be mapped at any page table level.
+If the lookup for the provided address stops at a slot that can map a page directory, it will map the object as a
+page directory. If there already is a page directory mapped, the lookup will proceed to the next level and it will
+map as a page table instead of returning an error.</li>
+    </ul>
+  </li>
+  <li>Removed user address space reserved slots restriction on 40bit PA platforms when KernelArmHypervisorSupport is set.
+This change is reflected in the definition of the seL4_UserTop constant that holds the largest user virtual address.</li>
+  <li>Added support for GICv3 virtualization, tested on iMX8QXP</li>
+  <li>Implemented a signal fastpath on AArch64. Must be enabled explicitly with the <code class="language-plaintext highlighter-rouge">KernelSignalFastpath</code> config option.</li>
+  <li>Implemented a virtual memory fault fastpath on AArch64. Must be enabled explicitly with the <code class="language-plaintext highlighter-rouge">KernelExceptionFastpath</code> config option.</li>
+  <li>Add option <code class="language-plaintext highlighter-rouge">KernelAArch64UserCacheEnable</code> for user cache maintenance.
+    <ul>
+      <li>
+        <p>Enables user level access to <code class="language-plaintext highlighter-rouge">DC CVAU</code>, <code class="language-plaintext highlighter-rouge">DC CIVAC</code>, <code class="language-plaintext highlighter-rouge">DC CVAC</code>, and <code class="language-plaintext highlighter-rouge">IC IVAU</code> which are cache maintenance operations
+for the data caches and instruction caches underlying Normal memory and also access to the read-only cache-type
+register <code class="language-plaintext highlighter-rouge">CTR_EL0</code> that provides cache type information. The ArmV8-A architecture allows access from EL0 as fast
+cache maintenance operations improves DMA performance in user-level device drivers.</p>
+
+        <p>These instructions are a subset of the available cache maintenance instructions as they can only address lines by
+virtual address (VA). They also require that the VA provided refers to a valid mapping with at least read
+permissions. This corresponds to lines that the EL0 could already affect via regular operation and so it’s not
+expected to break any cache-partitioning scheme.</p>
+
+        <p>The config option allows this policy to be selected for a particular kernel configuration, but it is default enabled
+as this has been the existing behavior for current aarch64,hyp configurations and have not been explicitly disabled
+in non-hyp configurations.</p>
+      </li>
+    </ul>
+  </li>
+  <li>make error reporting consistent: Report the VSpace cap (1) as invalid, instead of the frame cap (0) in
+<code class="language-plaintext highlighter-rouge">ARMFrameInvocation</code> to stay consistent with the other architectures.</li>
+  <li>vcpu: only trap WFx instructions from VCPUs. When <code class="language-plaintext highlighter-rouge">KernelArmDisableWFIWFETraps</code> is disabled (trapping of WFI/WFE is
+enabled), the kernel traps WFx instructions from both native and vCPU threads. This change brings the code in line
+with the config description.</li>
+</ul>
+
+<h4 id="risc-v">RISC-V</h4>
+
+<ul>
+  <li>Remove the ability for user-space on RISC-V platforms to access the core-local interrupt controller (CLINT). The
+CLINT contains memory-mapped registers that the kernel depends on for timer interrupts and hence should not be
+accessible by user-space.</li>
+  <li>Add configuration option <code class="language-plaintext highlighter-rouge">KernelRiscvUseClintMtime</code> for faster access of hardware timestamp on RISC-V platforms.
+The configuration option is not enabled by default as it requires access to the CLINT which depends on the platform
+and whether the M-mode firmware allows S-mode to access the CLINT. For example, newer versions of OpenSBI (1.0 and above)
+do not allow direct access of the CLINT.</li>
+  <li>Rename object interface files <code class="language-plaintext highlighter-rouge">include/interfaces/sel4.xml</code>, <code class="language-plaintext highlighter-rouge">arch_include/*/interfaces/sel4arch.xml</code>, and
+<code class="language-plaintext highlighter-rouge">sel4_arch_include/*/interfaces/sel4arch.xml</code> to <code class="language-plaintext highlighter-rouge">include/interfaces/object-api.xml</code>,
+<code class="language-plaintext highlighter-rouge">arch_include/*/interfaces/object-api-arch.xml</code>, and <code class="language-plaintext highlighter-rouge">sel4_arch_include/*/interfaces/object-api-sel4-arch.xml</code>,
+respectively.</li>
+  <li>Improve PLIC driver API and documentation</li>
+  <li>Fix <code class="language-plaintext highlighter-rouge">getMaxUsToTicks</code> function tor return time instead of ticks.</li>
+  <li>Improve RISC-V PTE compliance: keep D, A, and U bits cleared.</li>
+</ul>
+
+<h4 id="intel">Intel</h4>
+
+<ul>
+  <li>libsel4: add enum for EPT attributes.</li>
+  <li>VTX: fix EPT cache attribute setting. Previously the only effectively possible value was <code class="language-plaintext highlighter-rouge">EPTWriteBack</code>.</li>
+  <li>Add kernel support for 64-bit VMs</li>
+  <li>Provide <code class="language-plaintext highlighter-rouge">CONFIG_X86_64_VTX_64BIT_GUESTS</code> for 64-bit VM support</li>
+  <li>Only access real IOAPIC registers. IOAPICS can have varying numbers of lines attached. The actual number can be
+accessed in the top 16 bits of the version register. Rather than assuming fixed 24 lines per IRQ, read the actual
+number and use that.</li>
+</ul>
+
+<h4 id="mcs">MCS</h4>
+
+<ul>
+  <li>Rename <code class="language-plaintext highlighter-rouge">seL4_TimeoutMsg</code> to <code class="language-plaintext highlighter-rouge">seL4_Timeout_Msg</code> to make it consistent with the naming of other messages.</li>
+  <li>Correct the minimum size of a scheduling context. This changes the value of <code class="language-plaintext highlighter-rouge">seL4_MinSchedContextBits</code>.</li>
+  <li>Correct check for message length in <code class="language-plaintext highlighter-rouge">SchedControl_ConfigureFlags</code></li>
+  <li>Allow lazy SchedContext rebind. Before, binding a scheduling context to a TCB was not allowed if the SC was bound to a
+notification object. Also, binding an SC to a notification was not allowed if that scheduling context was already
+bound to a TCB. Without these restriction it is much easier to move scheduling contexts around: In effect having a SC
+bound on both the TCB and a notification acts as if the thread is running on a donated SC which will be returned when
+the tasks calls <code class="language-plaintext highlighter-rouge">Recv</code>/<code class="language-plaintext highlighter-rouge">Wait</code>, which is done by <code class="language-plaintext highlighter-rouge">maybeReturnSchedContext()</code>.</li>
+  <li>Only charge budgets for non-idle thread SCs</li>
+  <li>ARM+MCS: Introduce <code class="language-plaintext highlighter-rouge">TIMER_OVERHEAD_TICKS</code>. For ARM currently <code class="language-plaintext highlighter-rouge">TIMER_PRECISION</code> exists, but that is in microseconds and
+not fine-grained enough. <code class="language-plaintext highlighter-rouge">TIMER_OVERHEAD_TICKS</code> is needed to make periodic tasks synchronous with the system clock. If
+this value is non-zero every period will be extended with the overhead of taking an interrupt and reading the system
+clock. To avoid this drift, the configured value should be set to at least the average overhead.</li>
+  <li>SMP: Do not use cross-node <code class="language-plaintext highlighter-rouge">ksCurTime</code> assuming they are in sync (which they are not), instead use
+<code class="language-plaintext highlighter-rouge">NODE_STATE(ksCurTime)</code>.</li>
+  <li>SMP: Add clock synchronisation test on boot</li>
+  <li>SMP: Fix scheduling context use-after-free</li>
+</ul>
+
+<h4 id="other-changes">Other Changes</h4>
+
+<ul>
+  <li>boot: Introduce <code class="language-plaintext highlighter-rouge">seL4_BootInfoFrameSize</code> and <code class="language-plaintext highlighter-rouge">seL4_BootInfoFrameBits</code> for user land so there is no longer a need to
+hard-code a 4 KiByte assumption. Remove <code class="language-plaintext highlighter-rouge">BI_FRAME_SIZE_BITS</code>.</li>
+  <li>Fix: Don’t clobber msgInfo register in <code class="language-plaintext highlighter-rouge">PageGetAddress</code>, <code class="language-plaintext highlighter-rouge">ASIDControlInvocation</code>, <code class="language-plaintext highlighter-rouge">ARMCBInvocation</code>,
+<code class="language-plaintext highlighter-rouge">A32PageDirectoryGetStatusBits</code>, <code class="language-plaintext highlighter-rouge">X86PortIn</code>, <code class="language-plaintext highlighter-rouge">WriteVMCS</code>, <code class="language-plaintext highlighter-rouge">ReadVMCS</code>, <code class="language-plaintext highlighter-rouge">ConfigureSingleStepping</code>, and <code class="language-plaintext highlighter-rouge">GetBreakpoint</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">libsel4</code>: Make <code class="language-plaintext highlighter-rouge">bootinfo</code> consistent. Some slot positions in the rootnode would depend on configuration. However that
+makes it difficult to add new root caps, especially if multiple caps only exist based on configuration. Make all caps
+always there, but null if not configured.</li>
+  <li><code class="language-plaintext highlighter-rouge">libsel4</code>: Eliminate unnamed enums</li>
+  <li>Improved consistency and completeness of user manual</li>
+  <li>Added manual for bitfield generator</li>
+  <li><code class="language-plaintext highlighter-rouge">bitfield_gen</code>: allow non-contiguous tag fields. A tagged union can now optionally use multiple fields to indicate the
+tag. These are called “sliced” tags in the code. The tag fields have to be at the same position and width in each
+block of the tagged unions, and all tag fields have to be within the same word. See the manual for details.</li>
+  <li>Make <code class="language-plaintext highlighter-rouge">CONFIG_PRINTING</code> and <code class="language-plaintext highlighter-rouge">CONFIG_DEBUG_BUILD</code> usable independently from each other</li>
+  <li>Overall debug printing improvements</li>
+  <li>Fix invisible chars due to ANSI escape codes. On terminals with black background some debug output was invisible due
+to black foreground colour. Use bold instead.</li>
+  <li>Rename libsel4 config option <code class="language-plaintext highlighter-rouge">ENABLE_SMP_SUPPORT</code> to <code class="language-plaintext highlighter-rouge">CONFIG_ENABLE_SMP_SUPPORT</code> to be namespace compliant.</li>
+  <li>Removed obsolete define <code class="language-plaintext highlighter-rouge">HAVE_AUTOCONF</code></li>
+  <li>Remove userError from <code class="language-plaintext highlighter-rouge">seL4_ReplyRecv</code> path, because it too often incorrectly warns about legitimate operations</li>
+  <li>Update GDB macros</li>
+  <li>Add support for <code class="language-plaintext highlighter-rouge">cmake --install &lt;dir&gt;</code> for final build and config artefacts</li>
+  <li><code class="language-plaintext highlighter-rouge">cmake</code>: support supplying custom device trees overrides</li>
+  <li><code class="language-plaintext highlighter-rouge">cmake</code>: provide <code class="language-plaintext highlighter-rouge">gen_config.json</code> with kernel config settings</li>
+  <li>Provide <code class="language-plaintext highlighter-rouge">platform_gen.json</code> in addition to <code class="language-plaintext highlighter-rouge">platform_gen.yaml</code></li>
+  <li>Allow build with GNU <code class="language-plaintext highlighter-rouge">binutils</code> &gt;= 2.38</li>
+  <li>Allow compilation with clang 12</li>
+  <li><code class="language-plaintext highlighter-rouge">cmake</code>: detect x86 cross-compiler for Arm host (e.g. on Apple M1)</li>
+  <li>Consistently use <code class="language-plaintext highlighter-rouge">/usr/bin/env</code> for bash/sh invocations</li>
+  <li>Require Python 3 consistently everywhere</li>
+  <li>Improved support for compiling on MacOS</li>
+  <li>General minor build system improvements and clean-up</li>
+  <li>Set up automated tests for CI and GitHub pull requests on seL4</li>
+  <li>Add vulnerability disclosure policy</li>
+</ul>
+
+<h3 id="upgrade-notes">Upgrade Notes</h3>
+
+<ul>
+  <li>The change in <code class="language-plaintext highlighter-rouge">seL4_MinSchedContextBits</code> can lead to failure where code previously created
+scheduling contexts with size <code class="language-plaintext highlighter-rouge">seL4_MinSchedContextBits</code> and expected more than the 2 minimum
+refills to be available for that size. Either use a larger size (the previous value 8 of
+<code class="language-plaintext highlighter-rouge">seL4_MinSchedContextBits</code>) in retyping, or request fewer refills.</li>
+</ul>
+
+<h2 id="full-changelog">Full changelog</h2>
+
+<p>Refer to the git log in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="language-plaintext highlighter-rouge">git log 12.1.0..13.0.0</code></p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf">13.0.0 manual</a> included in the release or ask on the mailing list!</p>
+
+
+  </div>
+
+
+
+
+
+
+
+  
+  
+<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+  
+    <ul class="section-nav">
+    	<h2> seL4 </h2> 
+        <li>
+          
+          <a style="" class="" href="/projects/sel4/">
+            Documentation homepage
+          </a>
+        </li>
+
+
+
+
+        <li>
+          
+          <a style="" class="" href="/projects/sel4/status.html">
+            Status
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <h3>Repositories</h3>
+    
+        <li>
+          <a class="" href="https://github.com/seL4/sel4">
+            sel4
+          </a>
+        </li>
+
+
+
+
+
+
+
+
+
+<h3>Releases</h3>
+<h4> Master (verified kernel) </h4>
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/2.0.0.html">
+          seL4 2.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/2.1.0.html">
+          seL4 2.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-2.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.0.0.html">
+          seL4 3.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.0.1.html">
+          seL4 3.0.1
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.0.1.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.1.0.html">
+          seL4 3.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/3.2.0.html">
+          seL4 3.2.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-3.2.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/4.0.0.html">
+          seL4 4.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-4.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.0.0.html">
+          seL4 5.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.1.0.html">
+          seL4 5.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.2.0.html">
+          seL4 5.2.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/6.0.0.html">
+          seL4 6.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/7.0.0.html">
+          seL4 7.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/8.0.0.html">
+          seL4 8.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-8.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/9.0.0.html">
+          seL4 9.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/9.0.1.html">
+          seL4 9.0.1
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.0.0.html">
+          seL4 10.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.1.0.html">
+          seL4 10.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.1.1.html">
+          seL4 10.1.1
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/11.0.0.html">
+          seL4 11.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-11.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/12.0.0.html">
+          seL4 12.0.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-12.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/12.1.0.html">
+          seL4 12.1.0
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-12.1.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+    
+      <li>
+        <a style=" font-weight: bold; " href="/releases/sel4/13.0.0.html">
+          seL4 13.0.0
+        </a> (<a style=" font-weight: bold; " href="http://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf">manual</a>)
+      </li>
+
+    
+
+
+
+<h4>Experimental Branches</h4>
+
+We occasionally pre-release experimental branches for community feedback and availability.
+<h5>Mixed Criticality Support (MCS) / Realtime </h5>
+
+    
+      <li>
+        <a style="" href="/releases/sel4/0.0.1-rt-dev.html">
+          seL4 0.0.1-rt-dev
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf">manual</a>)
+      </li>
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/1.0.0-rt-dev.html">
+          seL4 1.0.0-rt-dev
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/5.2.0-mcs.html">
+          seL4 5.2.0-mcs
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/9.0.0-mcs.html">
+          seL4 9.0.0-mcs
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-9.0.0-mcs.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+      <li>
+        <a style="" href="/releases/sel4/10.1.1-mcs.html">
+          seL4 10.1.1-mcs
+        </a> (<a style="" href="http://sel4.systems/Info/Docs/seL4-manual-10.1.1-mcs.pdf">manual</a>)
+      </li>
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+    </ul>
+
+</div>
+
+
+</div>
+
+    </main>
+    
+
+
+<footer class="site-footer">
+
+  <h2 class="footer-heading">seL4 docs</h2>
+
+  <div class="footer-col-wrapper">
+
+    <div class="col-md-2">
+      
+
+
+
+<ul class="social-media-list">
+  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
+</ul>
+
+    </div>
+
+    <div class="col-md-8">
+      <ul class="list-unstyled">
+        <li>
+          This site is for displaying seL4 related documentation.  Pull requests are welcome.
+        </li>
+        
+          <li>
+            Site last updated: Tue Jul 2 11:35:00 2024 +1000 16ce9535e3
+          </li>
+          <li>
+          </li>
+        
+      </ul>
+    </div>
+    <div class="col-md-2">
+<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/sel4/13.0.0.md">View page on GitHub</a>
+      <br />
+      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/sel4/13.0.0.md">Edit page on GitHub</a>
+      <br />
+      <a href="/sitemap">Sitemap</a>
+    </div>
+
+  </div>
+
+</footer>
+
+  </body>
+</html>
