@@ -8,44 +8,41 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Release Process
 
-This page outlines how we make [seL4 and its associated ecosystem](/MaintainedRepositories) available to external developers. The goals of this process are as follows:
+This page outlines how [seL4 and associated
+repositories](/MaintainedRepositories) are released. The goals of this process
+are as follows:
 
-- provide a current up to date version of our libraries and applications,
+- provide a current up to date version of libraries and applications,
 - allow developers to decide when to upgrade between versions, i.e choose when breakage happens,
 - and provide libraries and apps compatible with each released version.
 
-Currently, we do not guarantee maintenance of previous releases, or individually version libraries,
-projects and applications.
+Currently, we do not guarantee maintenance of previous releases, or individually
+version libraries, projects and applications.
 
 ## Terminology
 
-- Sources: source code for everything
 - Kernel: the seL4 microkernel source repository
 - Libraries: user level libraries that run on seL4
 - Applications: applications that run on seL4
 - Projects: a collection of applications, libraries, kernel, denoted by a repo manifest
-- CAmkES: the CAmkES tool repository
 - Proofs: the formal proofs about seL4 in the l4v repository.
-
-## Sources
-
-We make a lot of source code available in the spirit of open source,
-however we do not guarantee that all source provided is
-maintained and tested.
-
-A list of maintained projects, libraries and applications can be found [here](/MaintainedRepositories).
-
 
 ## Releases
 
 We have two release channels:
 
-- **Bleeding edge**: These happen whenever any of our maintained project code is updated and the tests for it are passing
-- **Versioned releases**: Versioned releases of the kernel and the CAmkES tool.  These happen less frequently.
+- **Bleeding edge**: These happen whenever any of our maintained project code is
+  updated and the tests for it are passing
+- **Versioned releases**: Versioned releases of the kernel, proofs, CAmkES,
+  Microkit, capDL and Rust support. These happen less frequently.
 
-Bleeding edge releases happen every time the code is updated and it passes the test suites and
-proofs. Working on the bleeding edge means that API changes occur often, and you may get cut. Whenever any of the sources tracked by the manifests in the following repositories are updated and the
-regression tests pass, an updated version of the corresponding `default.xml` manifest will automatically be committed to the repo indicating which version combination is confirmed to work.
+Bleeding edge releases happen every time the code is updated and it passes the
+test suites and proofs. Working on the bleeding edge means that API changes
+occur often and user-level dependencies may break without warning. Whenever any
+of the sources tracked by the manifests in the repositories below are
+updated and the regression tests pass, an updated version of the corresponding
+`default.xml` manifest will automatically be committed to the repo indicating
+which version combination is confirmed to work.
 
 ### Which release should you use?
 
@@ -71,17 +68,16 @@ be reported to the relevant GitHub issue tracker or posted on the
 
 ### Version Numbers
 
-For versioned releases, seL4 and CAmkES/capDL have different policies.
+For versioned releases, seL4 and Microkit/CAmkES/capDL have different policies.
 
-**seL4** follows [semantic versioning](http://semver.org/). In
-short:
+**seL4**, **Microkit**, and **rust-sel4** follow [semantic
+versioning](http://semver.org/). In short:
 
-"Given a version number MAJOR.MINOR.PATCH, increment the:
+Given a version number MAJOR.MINOR.PATCH, increment the:
 
-- MAJOR version when you make incompatible API changes,
-- MINOR version when you add functionality in a backwards-compatible
-      manner, and
-- PATCH version when you make backwards-compatible bug fixes."
+- MAJOR version when you make incompatible API changes;
+- MINOR version when you add functionality in a backwards-compatible manner;
+- PATCH version when you make backwards-compatible bug fixes.
 
 seL4 versions are tagged in git.
 
@@ -90,7 +86,8 @@ seL4 versions are tagged in git.
 MAJOR.MINOR.PATCH:
 
 - MAJOR: A big rewrite
-- MINOR: The actual release number, increased when seL4 is released or there are source/binary incompatible CAmkES updates
+- MINOR: The actual release number, increased when seL4 is released or there are
+         source/binary incompatible CAmkES updates
 - PATCH: Small bug fixes that are backwards compatible.
 
 ### Library Compatibility
@@ -110,23 +107,28 @@ of the kernel and latest version of libraries.
 
 Each project repository above contains several manifest files:
 
-- `default.xml` specifies pinned revisions of the source that are updated every time a new *bleeding
-  edge* release is pushed. These manifests should always compile and pass tests if the correct build
-  configurations are used.
-- `master.xml` specifies the tip of each repository in a project. These aren't guaranteed to work, and may contain combinations of repositories that have not been tested together.
+- `default.xml` specifies pinned revisions of the source that are updated every
+  time a new *bleeding edge* release is pushed. These manifests should always
+  compile and pass tests if the correct build configurations are used.
+- `master.xml` specifies the tip of each repository in a project. These aren't
+  guaranteed to work, and may contain combinations of repositories that have not
+  been tested together.
 
-`default.xml` is tagged at each released version. To obtain the manifest for a specific kernel
-version checkout the corresponding X.Y.z tag. Our previous process created an `X.Y.z.xml` manifest
-for each release, but this is no longer the case.
+`default.xml` is tagged at each released version. To obtain the manifest for a
+specific kernel version check out the corresponding X.Y.z tag. Our previous
+process created an `X.Y.z.xml` manifest for each release, but this is no longer
+the case.
 
 ### Proofs/Verification manifests
 
-The verification-manifest project contains a `${SEL4_VERSION}.xml` containing revisions which correspond to a version of the proofs that pass for the released version of the kernel
+The verification-manifest project contains a `${SEL4_VERSION}.xml` containing
+revisions which correspond to a version of the proofs that pass for the released
+version of the kernel
 
 ### Versioned manifests
 
-The following projects manifest repositories are maintained, meaning both bleeding edge and
-versioned releases are available:
+The following projects manifest repositories are maintained, meaning both
+bleeding edge and versioned releases are available:
 
 {% for project in site.data.maintained.github %}
 	{% for repo in project.repo_projects %}
