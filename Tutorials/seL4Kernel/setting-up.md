@@ -51,7 +51,7 @@ sudo usermod -aG docker $(whoami)
 
 ## Google's Repo tool
 
-The primary way of obtaining and managing seL4 project source is through the use of Google's Repo tool.
+The primary way of obtaining and managing seL4 project sources is through the use of Google's Repo tool.
 
 To install run:
 ```sh
