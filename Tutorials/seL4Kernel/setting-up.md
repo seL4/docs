@@ -180,7 +180,7 @@ echo $'alias container=\'make -C //home/jblogs/seL4-CAmkES-L4v-dockerfiles user 
 
 This then allows you to run `container` from any directory.
 
-*Reminder:* Restart Ubuntu or run a new terminal for the changes in `.bashrc` to take effect.
+*Reminder:* start a new terminal for the changes in `.bashrc` to take effect or run `source ~/.bashrc`.
 
 
 ## An example workflow
