@@ -187,7 +187,7 @@ This then allows you to run `container` from any directory.
 
 A good workflow is to run two terminals:
 
- - Terminal A is just a normal terminal, and is used for git operations, editing (e.g., vim, emacs), and other normal operations.
+ - Terminal A is just a normal terminal, and is used for git operations, editing (e.g., vim, emacs, vscode), and other non-build operations.
  - Terminal B is running in a container, and is only used for compilation.
 
 This gives you the flexibility to use all the normal tools you are used to, while having the seL4 dependencies separated from your machine.
