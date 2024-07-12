@@ -59,7 +59,7 @@ This documentation site is for cooperatively developing and sharing documentatio
 </div>
 <div class="flex-grid" >
   <div class="col">
-    <h1><a href="/Tutorials/">Tutorials</a></h1>
+    <h1><a href="/tutorials/">Tutorials</a></h1>
     <p>Tutorials and other material to learn about seL4.</p>
   </div>
   <div class="col">

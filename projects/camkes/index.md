@@ -58,7 +58,7 @@ ninja
 
 
 To learn about developing your own CAmkES application, read the
-[Tutorials#CAmkES_tutorials](/Tutorials#camkes-tutorials).
+[Tutorials#CAmkES_tutorials](/tutorials#camkes-tutorials).
 
 ## Camkes Terminology/Glossary
 

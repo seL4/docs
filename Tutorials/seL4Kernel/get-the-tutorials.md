@@ -1,11 +1,12 @@
 ---
 toc: true
+title: Getting the tutorials
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Tutorials
+# Getting the tutorials
 ## Python Dependencies
 Additional python dependencies are required to build [tutorials](ReworkedTutorials). To install you can run:
 ```

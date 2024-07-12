@@ -8,6 +8,10 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 <h1>Overview</h1>
 We have developed a series of tutorials to on seL4 concepts. These assume a basic understanding of seL4, e.g. by having done the <a href="../GettingStarted/microkit">Microkit tutorial</a>.
 
+Recommended reading:
+- the [seL4 white paper](https://sel4.systems/About/seL4-whitepaper.pdf)
+
+
 <h2>Prerequisites</h2>
 Note that all of these tutorials require C programming
 experience and some understanding of operating systems and computer
