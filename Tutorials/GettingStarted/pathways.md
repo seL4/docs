@@ -28,36 +28,38 @@ Goals:
 - to build systems based on seL4
 - to know which tools are available to build systems, and how to use those tools
 - to build trustworthy systems
-- 
-Follow these tutorials:
-Recommended tutorials
+
+Recommended tutorials:
 - [Setting up your machine](../seL4Kernel/setting-up)
 - [Getting the tutorials](../seL4Kernel/get-the-tutorials.md)
 - [Hello world](../seL4Kernel/hello-world.md)
+- [MCS](../MCS/mcs.md)
+- The CAmkES tutorials beginning with [Hello CAmkES](../CAmkES/hello-camkes-0.md)
+- Virtualisation tutorials 
+  - [CAmkES VM](../CAmkES/camkes-vm-linux) using Linux as a guest in the CAmkES VM; and
+  - [CAmkES Cross-VM communication](../CAmkES/camkes-vm-crossvm.md) walkthrough of adding communication between Linux guests in separate VMs
 
+
+### Platform Development
+Goals:
+- to contribute to development of the seL4 (user-level) platform
+- to develop operating system services and device drivers
+- to develop seL4-based frameworks and operating systems
+
+Recommended tutorials:
+- [Setting up your machine](../seL4Kernel/setting-up)
+- [Getting the tutorials](../seL4Kernel/get-the-tutorials.md)
+- [Hello world](../seL4Kernel/hello-world.md)
+- [M]
 **up to here**
 
-seL4 overview
-Introduction tutorial
-CAmkES tutorials
-Virtualisation tutorials
-MCS tutorial
 
-Platform Development
-Goal:
-
-You want to contribute to development of the seL4 (user-level) platform.
-You want to develop operating system services and device drivers.
-You want to develop seL4-based frameworks and operating systems.
-Follow these tutorials:
-
-seL4 overview
-Introduction tutorial
 seL4 mechanisms tutorial
 Rapid prototyping tutorials
 CAmkES tutorials
 Virtualisation tutorial
 MCS tutorial
+
 Kernel Development
 Goal:
 
