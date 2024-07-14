@@ -173,7 +173,7 @@ You can find a long list of seL4 publications here:
 ### Forums
 
 - [Discourse forum](https://sel4.discourse.group/)
-- [Mattermost channel](https://mattermost.trustworthy.systems/sel4-external/channels/web-doc-revamp)
+- [Mattermost channel](https://mattermost.trustworthy.systems/sel4-external/)
 
 ### Mailing lists
 
