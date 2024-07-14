@@ -14,7 +14,7 @@ We have developed a series of tutorials to introduce seL4 and developing systems
 ## List of tutorials
 The tutorials are split into a number of broad categories, and have been designed around developer needs.
 
-- The [seL4 tutorials](seL4/overview.md) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples. 
+- The [seL4 tutorials](seL4/overview.md) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples.
  
 - [MCS](MCS/mcs) introduces seL4 MCS extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
 

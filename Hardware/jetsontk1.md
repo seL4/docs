@@ -23,7 +23,7 @@ seL4. We will explain how to run seL4 on the Tegra.
 
 ### Pre-Requisites
 * One Tegra Board. See [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html)
-* The development environment fully working.  See [Working with seL4](/Working-with-seL4)
+* The development environment fully working.  See [Resources](/Resources)
 
 ## Getting Started
  To get started, check out the

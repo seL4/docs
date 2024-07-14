@@ -14,7 +14,7 @@ and for a Linux host machine. May work on Mac host machine, won't work
 for Windows host (although general idea should be similar).
 
 This guide assumes that your project is all set up and configured to
-build for x86. Read [Working with seL4](/Working-with-seL4) otherwise.
+build for x86. Read [Resources](/Resources) otherwise.
 
 ## Setting up a VM
 

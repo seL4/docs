@@ -37,7 +37,7 @@ It is assumed that
  * CMake of an appropriate version is installed
  * You are using the Ninja CMake generator
  * You understand how to checkout projects using the repo tool as described on the
-   [Working with seL4](/Working-with-seL4) page
+   [Resources](/Resources) page
  * You have the [required dependencies](/HostDependencies) installed to build your project.
 
 

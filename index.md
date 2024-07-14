@@ -12,18 +12,18 @@ This documentation site is for cooperatively developing and sharing documentatio
 </div>
 
 
- <div class="flex-grid">
+<div class="flex-grid">
   <div class="col">
-   <h1><a href="/Working-with-seL4">Working with seL4</a></h1>
+   <h1><a href="/Resources">Resources</a></h1>
 	<p>Information about working with seL4 and its ecosystem</p>
 	<ul>
-	<li><a href="/Working-with-seL4#background-and-terminology">seL4 Background</a></li>
+	<li><a href="/Resources#background-and-terminology">seL4 Background</a></li>
 	<li><a href="/MaintainedRepositories">The source code</a></li>
 	<li><a href="/projects/sel4/documentation.html">Documentation</a></li>
 	<li><a href="/projects/sel4/frequently-asked-questions.html">Frequently Asked Questions (FAQ)</a></li>
 	<li><a href="/projects/roadmap.html">Roadmap</a></li>
 	<li><a href="/projects/buildsystem/host-dependencies.html">Build dependencies</a></li>
-	<li><a href="/Working-with-seL4#running-sel4">Building and Running seL4</a></li>
+	<li><a href="/Resources#running-sel4">Building and Running seL4</a></li>
 	<li><a href="/Hardware">Supported platforms</a></li>
 	<li><a href="/projects/sel4/verified-configurations.html">Verification targets and claims</a></li>
 	</ul>
@@ -41,6 +41,8 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="/processes/style-guide.html">Style Guide</a></li>
 	</ul>
   </div>
+</div>
+<div class="flex-grid">
   <div class="col ">
     <h1><a href="/projects/">Projects</a></h1>
     <p>List and details of all the projects that make up the seL4 platform.</p>
@@ -56,17 +58,20 @@ This documentation site is for cooperatively developing and sharing documentatio
           <li><a href="/projects/sel4webserver/">Example system: seL4webserver</a></li>
     </ul>
     </div>
-</div>
-<div class="flex-grid" >
   <div class="col">
     <h1><a href="/tutorials/">Tutorials</a></h1>
     <p>Tutorials and other material to learn about seL4.</p>
-  </div>
-  <div class="col">
-    <h1><a href="Tutorials/Resources/how-to"><em>How to:</em> A quick solutions guide</a></h1>
-    <p>Links to tutorial solutions as quick references for seL4 calls and methods.</p>
-  </div>
-  <div class="col">
-    <h1><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></h1>
+    <ul>
+        <li><a href="/tutorials/">Overview</a></li>
+        <li><a href="/tutorials/seL4/overview">seL4</a></li>
+        <li><a href="/tutorials/MCS/mcs">MCS</a></li>
+        <li><a href="/tutorials/DynamicLibraries/dynamic-1">Dynamic Libraries</a></li>
+        <li><a href="/tutorials/CAmkES/hello-camkes-0">CAmkES</a></li>
+        <li><a href="Tutorials/Resources/how-to"><em>How to:</em> A quick solutions guide to the tutorials</a></li>
+        <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+        <li><a href="/projects/sel4/api-doc">API reference</a></li>
+        <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>
+        <li><a href="https://github.com/seL4/rust-sel4">Rust</a></li>
+    </ul>
   </div>
 </div>
