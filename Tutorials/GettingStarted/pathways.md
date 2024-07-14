@@ -13,26 +13,26 @@ The tutorials can be approached in a number of different ways. Our recommended a
 Alternate pathways through the tutorials depend on development goals.
 
 ### Evaluation
-Goals:
+Goals
 - to understand seL4 and its benefits
 - to learn how to use seL4 to develop trustworthy systems
 - to see, compile, and run some code
 
 Recommended tutorials
-- [Setting up your machine](../seL4Kernel/setting-up)
-- [Getting the tutorials](../seL4Kernel/get-the-tutorials.md)
-- [Hello world](../seL4Kernel/hello-world.md)
+- [Setting up your machine](../seL4/setting-up)
+- [Getting the tutorials](../seL4/get-the-tutorials.md)
+- [Hello world](../seL4/hello-world.md)
 
 ### System Building
-Goals:
+Goals
 - to build systems based on seL4
 - to know which tools are available to build systems, and how to use those tools
 - to build trustworthy systems
 
-Recommended tutorials:
-- [Setting up your machine](../seL4Kernel/setting-up)
-- [Getting the tutorials](../seL4Kernel/get-the-tutorials.md)
-- [Hello world](../seL4Kernel/hello-world.md)
+Recommended tutorials
+- [Setting up your machine](../seL4/setting-up)
+- [Getting the tutorials](../seL4/get-the-tutorials.md)
+- [Hello world](../seL4/hello-world.md)
 - [MCS](../MCS/mcs.md)
 - The CAmkES tutorials beginning with [Hello CAmkES](../CAmkES/hello-camkes-0.md)
 - Virtualisation tutorials 
@@ -41,42 +41,27 @@ Recommended tutorials:
 
 
 ### Platform Development
-Goals:
+Goals
 - to contribute to development of the seL4 (user-level) platform
 - to develop operating system services and device drivers
 - to develop seL4-based frameworks and operating systems
 
-Recommended tutorials:
-- [Setting up your machine](../seL4Kernel/setting-up)
-- [Getting the tutorials](../seL4Kernel/get-the-tutorials.md)
-- [Hello world](../seL4Kernel/hello-world.md)
-- [M]
-**up to here**
+Recommended tutorials
+To gain a comprehensive understanding of seL4, we recommend that you go through all the tutorials in the order listed in the default pathway.
 
 
-seL4 mechanisms tutorial
-Rapid prototyping tutorials
-CAmkES tutorials
-Virtualisation tutorial
-MCS tutorial
+### Kernel Development
+Goals
+- to contribute to the seL4 kernel itself
+- to port seL4 to a new platform
+- to add new features to the kernel
 
-Kernel Development
-Goal:
+Recommended reading
+- [Contributing to kernel code](../../projects/sel4/kernel-contribution)
 
-You want to contribute to the seL4 kernel itself.
-You want to port seL4 to a new platform.
-You want to add new features to the kernel.
-Read this first:
-
-Contributing to kernel code
-Then follow these tutorials:
-
-seL4 overview
-Introduction tutorial
-seL4 mechanisms tutorial
-MCS tutorial
-
+Recommended tutorials
+- Follow the tutorial in the default pathway up to and including MCS.
 
 <p>
-     Next tutorial: <a href="../seL4Kernel/overview">seL4 kernel tutorials</a>
+     Next tutorial: <a href="../seL4/overview">seL4 tutorials</a>
 </p>
