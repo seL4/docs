@@ -35,7 +35,7 @@ Recommended tutorials
 - [Hello world](../seL4/hello-world.md)
 - [MCS](../MCS/mcs.md)
 - The CAmkES tutorials beginning with [Hello CAmkES](../CAmkES/hello-camkes-0.md)
-- Virtualisation tutorials 
+- Virtualisation tutorials
   - [CAmkES VM](../CAmkES/camkes-vm-linux) using Linux as a guest in the CAmkES VM; and
   - [CAmkES Cross-VM communication](../CAmkES/camkes-vm-crossvm.md) walkthrough of adding communication between Linux guests in separate VMs
 
