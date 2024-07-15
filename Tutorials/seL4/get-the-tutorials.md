@@ -8,10 +8,9 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 
 # Getting the tutorials
 ## Python Dependencies
-Additional python dependencies are required to build [tutorials](ReworkedTutorials). To install you can run:
+Additional python and CAmkES dependencies are required to build [tutorials](ReworkedTutorials). To install you can run:
 ```
-pip install --user aenum
-pip install --user pyelftools
+pip3 install --user aenum pyelftools camkes-deps
 ```
 *Hint:* This step only needs to be done once, i.e. before doing your first tutorial
 
