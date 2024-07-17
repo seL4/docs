@@ -19,9 +19,9 @@ Goals
 - to see, compile, and run some code
 
 Recommended tutorials
-- [Setting up your machine](../seL4/setting-up)
-- [Getting the tutorials](../seL4/get-the-tutorials.md)
-- [Hello world](../seL4/hello-world.md)
+- [Setting up your machine](setting-up.md)
+- [Getting the tutorials](get-the-tutorials.md)
+- [Hello world](hello-world.md)
 
 ### System Building
 Goals
@@ -30,14 +30,14 @@ Goals
 - to build trustworthy systems
 
 Recommended tutorials
-- [Setting up your machine](../seL4/setting-up)
-- [Getting the tutorials](../seL4/get-the-tutorials.md)
-- [Hello world](../seL4/hello-world.md)
-- [MCS](../MCS/mcs.md)
-- The CAmkES tutorials beginning with [Hello CAmkES](../CAmkES/hello-camkes-0.md)
+- [Setting up your machine](setting-up.md)
+- [Getting the tutorials](get-the-tutorials.md)
+- [Hello world](hello-world.md)
+- [MCS](mcs.md)
+- The CAmkES tutorials beginning with [Hello CAmkES](hello-camkes-0.md)
 - Virtualisation tutorials
   - [CAmkES VM](../CAmkES/camkes-vm-linux) using Linux as a guest in the CAmkES VM; and
-  - [CAmkES Cross-VM communication](../CAmkES/camkes-vm-crossvm.md) walkthrough of adding communication between Linux guests in separate VMs
+  - [CAmkES Cross-VM communication](camkes-vm-crossvm.md) walkthrough of adding communication between Linux guests in separate VMs
 
 
 ### Platform Development
@@ -63,5 +63,5 @@ Recommended tutorials
 - Follow the tutorial in the default pathway up to and including MCS.
 
 <p>
-     Next tutorial: <a href="../seL4/overview">seL4 tutorials</a>
+     Next tutorial: <a href="seL4-overview">seL4 tutorials</a>
 </p>

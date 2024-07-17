@@ -27,5 +27,5 @@ architecture.  Suggested resources for these include:
 	- [COMP3231 at UNSW](http://www.cse.unsw.edu.au/~cs3231)
 
 <p>
-    Next tutorial: <a href="../seL4/setting-up">Setting up your machine</a>
+    Next tutorial: <a href="setting-up">Setting up your machine</a>
 </p>

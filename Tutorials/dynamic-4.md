@@ -11,4 +11,4 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% include tutorial.md %}
 
 
-Next tutorial: <a href="../CAmkES/hello-camkes-0">Hello CAmkES</a>
+Next tutorial: <a href="hello-camkes-0">Hello CAmkES</a>

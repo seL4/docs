@@ -11,4 +11,4 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% include tutorial.md %}
 
 
-Next tutorial: <a href="../DynamicLibraries/dynamic-1">Dynamic libraries</a>
+Next tutorial: <a href="dynamic-1">Dynamic libraries</a>

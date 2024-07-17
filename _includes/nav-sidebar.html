@@ -48,56 +48,54 @@ executed for production builds. This is all so the project links can be sorted
 
     {% assign url = "/projects/" | append: new_project[0].name | append: '/' %}
         <li class="{% if page_url[2] == new_project[0].name %}active{% endif %}">
-            <a class="" href="../{{url}}">{{new_project[0].display_name}}</a>
+            <a class="" href="../{{url}}/tutorials/">{{new_project[0].display_name}}</a>
         <li>
   {% endfor %}
     </ul>
 {% endif %}
 
 {% if page_url[1] == "tutorials" %}
-  {% if page_url[2] contains "" %}
-    {% assign url = "../" %}
-  {% endif %}
+  {% assign url = "/tutorials" %}
   <ul class="nav nav-sidebar">
     <li>Getting started</li>
     <ul>
-      <li><a href="{{url}}GettingStarted/overview">Overview of tutorials</a></li>
-      <li><a href="{{url}}GettingStarted/pathways">Tutorial pathways</a></li>
+      <li><a href="{{url}}/tutorials/">Overview of tutorials</a></li>
+      <li><a href="{{url}}/tutorials/pathways">Tutorial pathways</a></li>
     </ul>
     <li>seL4</li>
     <ul>
-      <li><a href="{{url}}seL4/overview">Overview</a></li>
-      <li><a href="{{url}}seL4/setting-up">Setting up your machine</a></li>
-      <li><a href="{{url}}seL4/get-the-tutorials">Getting the tutorials</a></li>
-      <li><a href="{{url}}seL4/hello-world">Hello world</a></li>
-      <li><a href="{{url}}seL4/capabilities">Capabilities</a></li>
-      <li><a href="{{url}}seL4/untyped">Untyped</a></li>
-      <li><a href="{{url}}seL4/mapping">Mapping</a></li>
-      <li><a href="{{url}}seL4/threads">Threads</a></li>
-      <li><a href="{{url}}seL4/ipc">IPC</a></li>
-      <li><a href="{{url}}seL4/notifications">Notifications</a></li>
-      <li><a href="{{url}}seL4/interrupts">Interrupts</a></li>
-      <li><a href="{{url}}seL4/fault-handlers">Fault Handling</a></li>
+      <li><a href="{{url}}/tutorials/sel4-overview">Overview</a></li>
+      <li><a href="{{url}}/tutorials/setting-up">Setting up your machine</a></li>
+      <li><a href="{{url}}/tutorials/get-the-tutorials">Getting the tutorials</a></li>
+      <li><a href="{{url}}/tutorials/hello-world">Hello world</a></li>
+      <li><a href="{{url}}/tutorials/capabilities">Capabilities</a></li>
+      <li><a href="{{url}}/tutorials/untyped">Untyped</a></li>
+      <li><a href="{{url}}/tutorials/mapping">Mapping</a></li>
+      <li><a href="{{url}}/tutorials/threads">Threads</a></li>
+      <li><a href="{{url}}/tutorials/ipc">IPC</a></li>
+      <li><a href="{{url}}/tutorials/notifications">Notifications</a></li>
+      <li><a href="{{url}}/tutorials/interrupts">Interrupts</a></li>
+      <li><a href="{{url}}/tutorials/fault-handlers">Fault Handling</a></li>
     </ul>
     <li>MCS</li>
     <ul>
-      <li><a href="{{url}}MCS/mcs">MCS Extensions</a></li>
+      <li><a href="{{url}}/tutorials/mcs">MCS Extensions</a></li>
     </ul>
     <li>Dynamic libraries</li>
     <ul>
-      <li><a href="{{url}}DynamicLibraries/dynamic-1">Initialisation & threading</a></li>
-      <li><a href="{{url}}DynamicLibraries/dynamic-2">IPC</a></li>
-      <li><a href="{{url}}DynamicLibraries/dynamic-3">Processes & Elf loading</a></li>
-      <li><a href="{{url}}DynamicLibraries/dynamic-4">Timer</a></li>
+      <li><a href="{{url}}/tutorials/dynamic-1">Initialisation & threading</a></li>
+      <li><a href="{{url}}/tutorials/dynamic-2">IPC</a></li>
+      <li><a href="{{url}}/tutorials/dynamic-3">Processes & Elf loading</a></li>
+      <li><a href="{{url}}/tutorials/dynamic-4">Timer</a></li>
     </ul>
     <li>CAmkES</li>
     <ul>
-      <li><a href="{{url}}CAmkES/hello-camkes-0">Hello CAmkES</a></li>
-      <li><a href="{{url}}CAmkES/hello-camkes-1">CAmkES 1: Introduction to CAmkES</a></li>
-      <li><a href="{{url}}CAmkES/hello-camkes-2">CAmkES 2: Events</a></li>
-      <li><a href="{{url}}CAmkES/hello-camkes-timer">CAmkES 3: Timer</a></li>
-      <li><a href="{{url}}CAmkES/camkes-vm-linux">CAmkES VM</a></li>
-      <li><a href="{{url}}CAmkES/camkes-vm-crossvm">CAmkES Cross VM Connectors</a></li>
+      <li><a href="{{url}}/tutorials/hello-camkes-0">Hello CAmkES</a></li>
+      <li><a href="{{url}}/tutorials/hello-camkes-1">CAmkES 1: Introduction to CAmkES</a></li>
+      <li><a href="{{url}}/tutorials/hello-camkes-2">CAmkES 2: Events</a></li>
+      <li><a href="{{url}}/tutorials/hello-camkes-timer">CAmkES 3: Timer</a></li>
+      <li><a href="{{url}}/tutorials/camkes-vm-linux">CAmkES VM</a></li>
+      <li><a href="{{url}}/tutorials/camkes-vm-crossvm">CAmkES Cross VM Connectors</a></li>
     </ul>
     <li>Microkit</li>
     <ul>
@@ -111,9 +109,9 @@ executed for production builds. This is all so the project links can be sorted
     <ul>
       <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
       <li><a href= "/projects/sel4/api-doc.html">API references</a></li>
-      <li><a href="{{url}}Resources/how-to"><em>How to:</em> A quick solutions guide</a></li>
-      <li><a href="{{url}}../projects/sel4-tutorials/debugging-guide">Debugging guide</a></li>
-      <li><a href="{{url}}../Resources#contact">Contact</a></li>
+      <li><a href="{{url}}/Resources/how-to"><em>How to:</em> A quick solutions guide</a></li>
+      <li><a href="../projects/sel4-tutorials/debugging-guide">Debugging guide</a></li>
+      <li><a href="../Resources#contact">Contact</a></li>
     </ul>
   </ul>
 {% endif %}

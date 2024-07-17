@@ -81,7 +81,7 @@ Hello, welcome to the seL4/CAmkES/L4v docker build environment
 ```
 
 ### Mapping a container
-To run the container from other directories (e.g. starting a container for the [Hello World](hello-world) tutorial, which we'll do next), you can setup a bash alias such as this:
+To run the container from other directories (e.g. starting a container for the [Hello World](hello-world.md) tutorial, which we'll do next), you can setup a bash alias such as this:
 
 ```bash
 echo $'alias container=\'make -C /<path>/<to>/seL4-CAmkES-L4v-dockerfiles user HOST_DIR=$(pwd)\'' >> ~/.bashrc
