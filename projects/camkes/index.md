@@ -30,7 +30,7 @@ The development framework provides:
 
 ## Get Camkes
 
-- Make sure that you already have the tools to [build seL4 and Camkes](/GettingStarted#setting-up-your-machine).
+- Make sure that you already have the tools to [build seL4 and Camkes](/Resources#setting-up-your-machine).
 - Download Camkes:
 
 ```
