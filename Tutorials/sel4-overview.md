@@ -12,7 +12,7 @@ While doing these tutorials, we recommend having access to the
 - [seL4 white paper](https://sel4.systems/About/seL4-whitepaper.pdf)
 - the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 manual<a/>
 - the <a href="../../projects/sel4/api-doc.html">API references</a>
-- the [How to page](../Resources/how-to), which provides links to tutorial solutions as quick references for seL4 calls and methods
+- the [How to page](how-to), which provides links to tutorial solutions as quick references for seL4 calls and methods
 
 **Recommended reading**
 

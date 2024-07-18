@@ -67,7 +67,7 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="/tutorials/mcs">MCS</a></li>
         <li><a href="/tutorials/dynamic-1">Dynamic Libraries</a></li>
         <li><a href="/tutorials/hello-camkes-0">CAmkES</a></li>
-        <li><a href="Tutorials/Resources/how-to"><em>How to:</em> A quick solutions guide to the tutorials</a></li>
+        <li><a href="/tutorials/how-to"><em>How to:</em> A quick solutions guide to the tutorials</a></li>
         <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
         <li><a href="/projects/sel4/api-doc">API reference</a></li>
         <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>

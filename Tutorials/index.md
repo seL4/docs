@@ -11,13 +11,13 @@ We have developed a series of tutorials to introduce seL4 and developing systems
 ## List of tutorials
 The tutorials are split into a number of broad categories, and have been designed around developer needs.
 
-- The [seL4 tutorials](../sel4-overview) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples.
+- The [seL4 tutorials](sel4-overview) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples.
 
-- [MCS](../MCS/mcs) introduces seL4 MCS extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
+- [MCS](mcs) introduces seL4 MCS extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
 
-- [Dynamic Libraries](../DynamicLibraries/dynamic-1) provides walkthroughs and exercises for using the dynamic libraries provided in `seL4_libs`, which were developed for rapidly prototyping systems on seL4.
+- [Dynamic Libraries](dynamic-1) provides walkthroughs and exercises for using the dynamic libraries provided in `seL4_libs`, which were developed for rapidly prototyping systems on seL4.
 
-- [CAmkES](../CAmkES/hello-camkes-0) generates the glue code for interacting with seL4 and is designed for building high-assurance, static systems. These tutorials demonstrate how to configure static systems through components.
+- [CAmkES](hello-camkes-0) generates the glue code for interacting with seL4 and is designed for building high-assurance, static systems. These tutorials demonstrate how to configure static systems through components.
 
 - [Microkit](https://trustworthy.systems/projects/microkit/tutorial/) enables system designers to create static software systems based on the seL4 microkernel. We recommend this as a potential introduction to seL4, bearing in mind that the Microkit hides many of the seL4 mechanisms - it is designed that way, to make building on top of seL4 easier.
 
@@ -27,7 +27,7 @@ The tutorials are split into a number of broad categories, and have been designe
 Additional resources to assist with learning:
 - The [seL4 manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
 - [API references](../../projects/sel4/api-doc)
-- The [How to](../Resources/how-to) page provides links to tutorial solutions as quick references for seL4 calls and methods.
+- The [How to](how-to) page provides links to tutorial solutions as quick references for seL4 calls and methods.
 - The [seL4 white paper](https://sel4.systems/About/seL4-whitepaper.pdf)
 - [FAQs](../../projects/sel4/frequently-asked-questions)
 - [Debugging guide](../../projects/sel4-tutorials/debugging-guide)
