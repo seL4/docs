@@ -11,5 +11,4 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 
 {% include tutorial.md %}
 
-
 Next tutorial: <a href="untyped">Untyped</a>
