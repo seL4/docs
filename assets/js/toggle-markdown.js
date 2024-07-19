@@ -4,7 +4,7 @@
 // Expand all solutions if previous link was how-to page
 
 let text = document.referrer;
-let result = text.includes("tutorials/Resources/how-to");
+let result = text.includes("tutorials/how-to");
 
 if (result==true){
     document.body.querySelectorAll('details')
