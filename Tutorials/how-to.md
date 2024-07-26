@@ -128,7 +128,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Define an instance in the composition section of the ADL](hello-camkes-1.md#define-an-instance-in-the-composition-section-of-the-adl)
   - [Add a connection](hello-camkes-1.md#add-a-connection)
   - [Define an interface](hello-camkes-1.md#define-an-interface)
-  - [Implement a RPC function](hello-camkes-1.md#implement-a-rpc-function)
+  - [Implement an RPC function](hello-camkes-1.md#implement-a-rpc-function)
   - [Invoke a RPC function](hello-camkes-1.md#invoke-a-rpc-function)
 
 ### [Events in CAmkES](hello-camkes-2.md)
@@ -158,7 +158,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Acknowledge an interrupt](hello-camkes-timer.md#acknowledge-an-interrupt)
   - [Get a timer handler](hello-camkes-timer.md#get-a-timer-handler)
   - [Start a timer](hello-camkes-timer.md#start-a-timer)
-  - [Implement a RPC interface](hello-camkes-timer.md#implement-a-rpc-interface)
+  - [Implement an RPC interface](hello-camkes-timer.md#implement-a-rpc-interface)
   - [Set a timer interrupt](hello-camkes-timer.md#set-a-timer-interrupt)
   - [Instantiate a TimerDTB component](hello-camkes-timer.md#instantiate-a-timerdtb-component)
   - [Connect interfaces using the seL4DTBHardware connector](hello-camkes-timer.md#connect-interfaces-using-the-sel4dtbhardware-connector)
