@@ -7,7 +7,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Resources
 
-This page provides an overview on working with seL4 and its ecosystem.
+This page provides an overview of working with seL4 and its ecosystem.
 
 ## Background and terminology
 
