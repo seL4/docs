@@ -1,7 +1,7 @@
 # Copyright 2020 seL4 Project a Series of LF Projects, LLC.
 # SPDX-License-Identifier: BSD-2-Clause
 
-default: serve --trace
+default: serve
 
 .PHONY: ruby_deps
 ruby_deps: Gemfile Gemfile.lock
