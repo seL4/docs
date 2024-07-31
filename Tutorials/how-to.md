@@ -73,7 +73,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
 
 ## [Dynamic libraries](dynamic-1.md)
 
-### [Initiliasation & threading](dynamic-1.md)
+### [Initialisation  & threading](dynamic-1.md)
   - [Obtain BootInfo](dynamic-1.md#obtain-bootinfo)
   - [Initialise simple](dynamic-1.md#initialise-simple)
   - [Use simple to print BootInfo](dynamic-1.md#use-simple-to-print-bootinfo)
@@ -108,7 +108,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
 ### [Processes & Elf loading](dynamic-3.md)
   - [Create a VSpace object](dynamic-3.md#virtual-memory-management)
   - [Configure a process](dynamic-3.md#configure-a-process)
-  - [Get a cspacepath](dynamic-3.md#get-a-cspacepath)
+  - [Get a CSpace path](dynamic-3.md#get-a-cspacepath)
   - [Badge a capability](dynamic-3.md#badge-a-capability)
   - [Spawn a process](dynamic-3.md#spawn-a-process)
   - [Receive a message](dynamic-3.md#receive-a-message)
