@@ -13,7 +13,7 @@ The tutorials are split into a number of broad categories, and have been designe
 
 - The [seL4 tutorials](sel4-overview) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples.
 
-- [MCS](mcs) introduces seL4 MCS extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
+- [MCS](mcs) introduces seL4 Mixed-Criticality System extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
 
 - [Dynamic Libraries](dynamic-1) provides walkthroughs and exercises for using the dynamic libraries provided in `seL4_libs`, which were developed for rapidly prototyping systems on seL4.
 
