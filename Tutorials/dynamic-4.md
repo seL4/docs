@@ -1,8 +1,8 @@
 ---
 toc: true
-title: Dynamic Libraries 4
-tutorial: dynamic-4
-tutorial-order: dynamic-4
+title: Libraries 4
+tutorial: libraries-4
+tutorial-order: libraries-4
 layout: tutorial
 description: IPC with seL4_libs.
 SPDX-License-Identifier: CC-BY-SA-4.0

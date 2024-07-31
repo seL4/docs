@@ -15,7 +15,7 @@ The tutorials are split into a number of broad categories, and have been designe
 
 - [MCS](mcs) introduces seL4 Mixed-Criticality System extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
 
-- [Dynamic Libraries](dynamic-1) provides walkthroughs and exercises for using the dynamic libraries provided in `seL4_libs`, which were developed for rapidly prototyping systems on seL4.
+- [Libraries](libraries-1) provides walkthroughs and exercises for using the libraries provided in `seL4_libs`, which were developed for rapidly prototyping systems on seL4.
 
 - [CAmkES](hello-camkes-0) generates the glue code for interacting with seL4 and is designed for building high-assurance, static systems. These tutorials demonstrate how to configure static systems through components.
 
