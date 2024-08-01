@@ -1,0 +1,28 @@
+{% comment %}
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
+{% endcomment %}
+
+<div class="sidebar">
+  <ul class="nav nav-sidebar tutorial-sidebar">
+{%- for item in site.data.tutorials-sidebar -%}
+{%-   case item.type -%}
+{%-     when "header" %}
+    <li class="nav-section">{{ item. name}}</li>
+{%-     when "file" -%}
+{%-       assign url = "/Tutorials/" | append: item.file | relative_url %}
+      <li><a href="{{ url }}">{{ item.name }}</a></li>
+{%-     when "url" %}
+      <li><a href="{{ item.url | relative_url }}">{{ item.name }}</a></li>
+{%-     when "include" -%}
+{%-       assign components = site.data.projects["sel4-tutorials"].components -%}
+{%-       for component in components -%}
+{%-         if component.section == item.name -`%}
+{%-           assign url = "/Tutorials/" | append: component.name | relative_url %}
+      <li><a href="{{ url }}">{{ component.display_name }}</a></li>
+{%-         endif -%}
+{%-       endfor -%}
+{%-   endcase -%}
+{%- endfor %}
+  </ul>
+</div>
