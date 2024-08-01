@@ -23,8 +23,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
     {% include tutorials-sidebar.html %}
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
+
     {{ content }}
 
+<p style="text-align: right;">
 {%  assign page_file = page.url | split: '/' | last | remove: ".html" -%}
 {%- assign found = false -%}
 {%- for item in all_tutes -%}
@@ -63,6 +65,19 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {%-     endcase -%}
 {%-   endif -%}
 {%- endfor %}
+</p>
+
+{% if page.tutorial -%}
+  {%- capture path -%}
+  {{page.tutorial}}/{{page.tutorial}}.md
+  {%- endcapture -%}
+
+  {%- assign repo_url = 'https://github.com/sel4/sel4-tutorials' -%}
+  {%- assign view_url = repo_url | append: '/blob/master/tutorials/' | append: path -%}
+  {%- assign edit_url = repo_url | append: '/edit/master/tutorials/' | append: path -%}
+    <hr>
+    <p><em>Tutorial included from <a href="{{view_url}}">github repo</a> <a href="{{edit_url}}">edit</a></em></p>
+{%- endif %}
   </div>
 
   {% if page.toc %}
