@@ -1,7 +1,7 @@
 ---
 toc: true
 title: Libraries 2
-tutorial: libraries-2
+tutorial: dynamic-2
 tutorial-order: libraries-2
 layout: tutorial
 description: IPC with seL4_libs.

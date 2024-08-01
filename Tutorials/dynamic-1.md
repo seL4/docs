@@ -1,7 +1,7 @@
 ---
 toc: true
 title: Libraries 1
-tutorial: libraries-1
+tutorial: dynamic-1
 tutorial-order: libraries-1
 layout: tutorial
 description: system initialisation & threading with seL4_libs.
