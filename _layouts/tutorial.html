@@ -12,18 +12,6 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
     {{ content }}
   </div>
 
-{% assign url = page.url | split: "/" %}
-{% capture project_name %}
-{% if page.project %}
-{{page.project}}
-{% elsif url[1] == "projects" %}
-{{url[2]}}
-{% endif %}
-{% endcapture %}
-
-{% assign project_name = project_name | strip %}
-{% assign project = site.data.projects[project_name] %}
-
   {% if page.toc %}
     {% include toc-sidebar.html %}
   {% endif %}
