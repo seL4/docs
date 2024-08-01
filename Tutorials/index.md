@@ -3,8 +3,9 @@ toc: true
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
+redirect_from: /projects/sel4-tutorials/
 ---
-# Overview
+# Tutorials Overview
 
 We have developed a series of tutorials to introduce seL4 and developing systems on seL4.
 
