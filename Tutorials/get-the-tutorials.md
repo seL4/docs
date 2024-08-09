@@ -12,7 +12,7 @@ The CAmkES python dependencies are required to build the [tutorials](ReworkedTut
 ```
 pip3 install --user camkes-deps
 ```
-*Hint:* This step only needs to be done once, i.e. before doing your first tutorial
+*Hint:* This step only needs to be done once, i.e. before doing your first tutorial.
 
 ## Get the code
 All tutorials are in the <a href="https://github.com/seL4/sel4-tutorials-manifest">sel4-tutorials-manifest</a>. Get the code with:
