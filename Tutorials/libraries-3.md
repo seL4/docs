@@ -1,7 +1,7 @@
 ---
 toc: true
 title: Libraries 3
-tutorial: dynamic-3
+tutorial: libraries-3
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
