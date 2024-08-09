@@ -5,9 +5,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Getting Started
+# Resources
 
-This page is a quick start for working with seL4 and its ecosystem.
+This page provides an overview of working with seL4 and its ecosystem.
 
 ## Background and terminology
 
@@ -168,7 +168,12 @@ You can find a long list of seL4 publications here:
 - [seL4 is free: What does this mean for you? (2015)](https://www.youtube.com/watch?v=lRndE7rSXiI).
 - [From L3 to seL4: What have we learned in 20 years of L4 microkernels? (2014)](https://www.youtube.com/watch?v=RdoaFc5-1Rk).
 
-## Get Help
+## Contact
+
+### Forums
+
+- [Discourse forum](https://sel4.discourse.group/)
+- [Mattermost channel](https://mattermost.trustworthy.systems/sel4-external/)
 
 ### Mailing lists
 

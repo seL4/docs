@@ -35,9 +35,9 @@ the actual build.
 It is assumed that
 
  * CMake of an appropriate version is installed
- * You are using the Ninja CMake generator 
+ * You are using the Ninja CMake generator
  * You understand how to checkout projects using the repo tool as described on the
-   [Getting started](/GettingStarted) page
+   [Resources](/Resources) page
  * You have the [required dependencies](/HostDependencies) installed to build your project.
 
 

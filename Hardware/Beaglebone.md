@@ -27,7 +27,7 @@ a community-supported port.
 
 ### Requirements
 We suggest using the `arm-linux-gnueabi-` cross-compilers. Use
-[the instructions on getting a toolchain](/GettingStarted#getting-cross-compilers).
+[the instructions on getting a toolchain](/Resources#getting-cross-compilers).
 
 ### Building
 
