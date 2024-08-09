@@ -59,15 +59,15 @@ This documentation site is for cooperatively developing and sharing documentatio
     </ul>
     </div>
   <div class="col">
-    <h1><a href="/tutorials/">Tutorials</a></h1>
+    <h1><a href="/Tutorials/">Tutorials</a></h1>
     <p>Tutorials and other material to learn about seL4.</p>
     <ul>
-        <li><a href="/tutorials/">Overview</a></li>
-        <li><a href="/tutorials/sel4-overview">seL4</a></li>
-        <li><a href="/tutorials/mcs">MCS</a></li>
-        <li><a href="/tutorials/libraries-1">Libraries</a></li>
-        <li><a href="/tutorials/hello-camkes-0">CAmkES</a></li>
-        <li><a href="/tutorials/how-to"><em>How to:</em> A quick solutions guide to the tutorials</a></li>
+        <li><a href="/Tutorials/">Overview</a></li>
+        <li><a href="/Tutorials/sel4-overview">seL4</a></li>
+        <li><a href="/Tutorials/mcs">MCS</a></li>
+        <li><a href="/Tutorials/libraries-1">Libraries</a></li>
+        <li><a href="/Tutorials/hello-camkes-0">CAmkES</a></li>
+        <li><a href="/Tutorials/how-to"><em>How to:</em> A quick solutions guide to the tutorials</a></li>
         <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
         <li><a href="/projects/sel4/api-doc">API reference</a></li>
         <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>
