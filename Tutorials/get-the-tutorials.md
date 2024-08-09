@@ -15,7 +15,7 @@ pip3 install --user camkes-deps
 *Hint:* This step only needs to be done once, i.e. before doing your first tutorial.
 
 ## Get the code
-All tutorials are in the <a href="https://github.com/seL4/sel4-tutorials-manifest">sel4-tutorials-manifest</a>. Get the code with:
+All code for the tutorials is described in the <a href="https://github.com/seL4/sel4-tutorials-manifest">sel4-tutorials-manifest</a>. Get the code with:
 ```
 mkdir sel4-tutorials-manifest
 cd sel4-tutorials-manifest
