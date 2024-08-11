@@ -20,7 +20,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 - `hello-camkes-timer`: Use device tree for binding timer component to device and update tutorial.
 - `hello-camkes-timer`: Add part-2 to tutorial for describing how to use new seL4DTBHardware camkes connector.
 - `camkes-vm-crossvm`: Add error message if build configuration is incorrect.
-- `libraries-4`: Remove duplicate vspace init function.
+- `dynamic-4`: Remove duplicate vspace init function.
 - `hello-camkes-2`: Fix error in hint in task 8.
 - Refactor tutorial build system to better match typical usage in other project. Previously the tutorials indicated
   that their build scripts shouldn't be used outside of the tutorial project, but this is no longer the case.
