@@ -63,5 +63,5 @@ Recommended tutorials
 - Follow the tutorial in the default pathway up to and including MCS.
 
 <p>
-     Next tutorial: <a href="seL4-overview">seL4 tutorials</a>
+     Next tutorial: <a href="setting-up">Setting up your machine</a>
 </p>

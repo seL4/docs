@@ -63,7 +63,6 @@ This documentation site is for cooperatively developing and sharing documentatio
     <p>Tutorials and other material to learn about seL4.</p>
     <ul>
         <li><a href="/Tutorials/">Overview</a></li>
-        <li><a href="/Tutorials/sel4-overview">seL4</a></li>
         <li><a href="/Tutorials/mcs">MCS</a></li>
         <li><a href="/Tutorials/libraries-1">Libraries</a></li>
         <li><a href="/Tutorials/hello-camkes-0">CAmkES</a></li>

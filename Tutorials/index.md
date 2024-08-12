@@ -5,14 +5,14 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 redirect_from: /projects/sel4-tutorials/
 ---
-# Tutorials Overview
+# Overview
 
 We have developed a series of tutorials to introduce seL4 and developing systems on seL4.
 
 ## List of tutorials
 The tutorials are split into a number of broad categories, and have been designed around developer needs.
 
-- The [seL4 tutorials](sel4-overview) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples.
+- The [seL4 tutorials](setting-up.md) are for people keen to learn about the base mechanisms provided by the seL4 kernel. The kernel API is explained with short exercises that show basic examples.
 
 - [MCS](mcs) introduces seL4 Mixed-Criticality System extensions, which are detailed in this [paper](https://trustworthy.systems/publications/full_text/Lyons_MAH_18.pdf) and [PhD](https://github.com/pingerino/phd/blob/master/phd.pdf).
 
@@ -23,6 +23,18 @@ The tutorials are split into a number of broad categories, and have been designe
 - [Microkit](https://trustworthy.systems/projects/microkit/tutorial/) enables system designers to create static software systems based on the seL4 microkernel. We recommend this as a potential introduction to seL4, bearing in mind that the Microkit hides many of the seL4 mechanisms - it is designed that way, to make building on top of seL4 easier.
 
 - [Rust](https://github.com/seL4/rust-sel4) allows people to write safer user-level code on top of seL4 without needing full formal verification, with a language that is receiving increasing interest and that aligns extremely well with security and safety critical embedded systems programming.
+
+**Recommended reading**
+
+Note that all of these tutorials require C programming
+experience and some understanding of operating systems and computer
+architecture.  Suggested resources for these include:
+
+- C programming language
+	- [C tutorial](https://www.cprogramming.com/tutorial/c-tutorial.html)
+- Operating Systems:
+	- [Modern Operating Systems (book)](https://www.amazon.com/Modern-Operating-Systems-Andrew-Tanenbaum/dp/013359162X)
+	- [COMP3231 at UNSW](http://www.cse.unsw.edu.au/~cs3231)
 
 ## Resources
 Additional resources to assist with learning:
