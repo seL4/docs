@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Microkit | seL4 docs</title>
+    <title>1.4.1 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -65,20 +65,9 @@
         
 
         
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/projects/">
-              <span property="name"><b>Projects</b></span>
-            </a>
-            <meta property="position" content="2" />
-        </li>
-      
-        
-
-        
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Microkit</span>
-            <meta property="position" content="3" /></li>
+            <span property="name">1.4.1</span>
+            <meta property="position" content="2" /></li>
           
     </ol>
   </nav>
@@ -124,170 +113,6 @@
 
 
 
-    <ul class="nav nav-sidebar">
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4/">seL4</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/l4v/">L4.verified</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/camkes/">CAmkES</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/capdl/">CapDL</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/elfloader/">Elfloader</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/buildsystem/">seL4 Buildsystem</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/user_libs/">user_libs</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4runtime/">The seL4 run-time</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4-tutorials/">seL4 tutorials</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4webserver/">seL4webserver</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4test/">seL4Test</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4bench/">sel4bench</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/camkes-vm/">camkes-vm</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/virtualization/">Virtualization</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/dockerfiles/">Dockerfiles</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/sel4_tools/">seL4_tools</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/docsite/">seL4 Documentation website</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="active">
-            <a class="" href="/projects/microkit/">Microkit</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/hardware_hacks/">Hardware Hacks</a>
-        <li>
-  
-    
-    
-
-    
-        <li class="">
-            <a class="" href="/projects/rust/">Rust</a>
-        <li>
-  
-    </ul>
-
 
 
 
@@ -296,30 +121,50 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="the-sel4-microkit">The seL4 Microkit</h1>
+    <h1 id="microkit-release-141">Microkit Release 1.4.1</h1>
 
-<p>The seL4 Microkit is an operating system framework on top of seL4 provides a small set of simple abstractions that ease the design and implementation of statically structured systems on seL4, while still leveraging the kernel’s benefits of security and performance.</p>
+<h4 id="2024-08-16">2024-08-16</h4>
 
-<p>The Microkit is distributed as an SDK that integrates with the build system of your choice, significantly reducing the barrier to entry for new users of seL4.</p>
+<p>This release contains various bug fixes. It does not include any new features.</p>
 
-<h2 id="more-information">More information</h2>
 <ul>
-  <li>
-    <p><a href="https://github.com/sel4/microkit">Microkit GitHub repository</a></p>
+  <li>Fixed two bugs in the tool that lead to initialisation failure on larger Microkit systems.</li>
+  <li>Disabled the <code class="language-plaintext highlighter-rouge">KernelArmVtimerUpdateVOffset</code> kernel configuration option by default.
+    <ul>
+      <li>This is necessary for Microkit VMs where they rely on knowing the actual surpassed time.
+More details are in the <a href="https://github.com/seL4/microkit/pull/202">pull request</a>.</li>
+    </ul>
   </li>
-  <li>
-    <p><a href="https://github.com/seL4/microkit/blob/main/docs/manual.md">Microkit user manual</a></p>
+  <li>Enabled FPU for QEMU RISC-V virt and Pine64 Star64.
+    <ul>
+      <li>libmicrokit builds with hardware floating point enabled and, while it does not use the FPU,
+it means that every object linked with libmicrokit must also build with hardware floating
+point enabled. Previously using floating point operations would caused a crash in user-space.</li>
+    </ul>
   </li>
-  <li>
-    <p><a href="https://trustworthy.systems/projects/microkit/tutorial">Microkit tutorial</a></p>
+  <li>Fixed the loader link address for the MaaXBoard.
+    <ul>
+      <li>This does mean that if you target the MaaxBoard you will have to loader Microkit images at
+a different address. See the manual for details.</li>
+    </ul>
   </li>
-  <li>
-    <p><a href="https://github.com/seL4/microkit/issues/61">Microkit development roadmap</a></p>
-  </li>
-  <li>
-    <p><a href="https://trustworthy.systems/projects/microkit">Trustworthy Systems Microkit project</a></p>
-  </li>
+  <li>Added error checking for overlapping memory regions.</li>
+  <li>Included every TCB register in the monitor logs when a fault occurs.</li>
+  <li>Made the tool compile from source with a Rust version lower that 1.79.0.</li>
+  <li>Specified a minimum Rust version for the tool (1.73.0).</li>
+  <li>Fixed typo in the <code class="language-plaintext highlighter-rouge">--help</code> output of the tool.</li>
+  <li>Minor README fixes.</li>
+  <li>Updated PyYAML dependency in requirements.txt to 6.0.2 (from 6.0).</li>
 </ul>
+
+<h2 id="full-changelog">Full changelog</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">git log 1.4.0..1.4.1</code> in <a href="https://github.com/seL4/microkit/">https://github.com/seL4/microkit/</a></p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the <a href="https://github.com/seL4/microkit/blob/main/docs/manual.md">documentation</a>
+or ask on the mailing list!</p>
 
 
   </div>
@@ -338,7 +183,7 @@
     	<h2> Microkit </h2> 
         <li>
           
-          <a style=" font-weight: bold; " class="" href="/projects/microkit/">
+          <a style="" class="" href="/projects/microkit/">
             Documentation homepage
           </a>
         </li>
@@ -418,7 +263,7 @@
           <h3>Releases</h3>
       
           <li>
-            <a style="" href="/releases/microkit/1.4.1.html">
+            <a style=" font-weight: bold; " href="/releases/microkit/1.4.1.html">
               1.4.1
             </a>
           </li>
@@ -548,15 +393,14 @@
             Site last updated: Mon Aug 19 07:43:04 2024 +0200 0fbc0d8f0a
           </li>
           <li>
-                Page last updated: Mon Oct 23 14:16:33 2023 +1100 827111ddcf
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/projects/microkit/index.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/microkit/1.4.1.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/projects/microkit/index.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/1.4.1.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
