@@ -7,6 +7,3 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 {% include tutorial.md %}
-
-
-Next tutorial: <a href="hello-camkes-1">CAmkES 1: Introduction to CAmkES</a>
