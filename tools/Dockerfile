@@ -16,8 +16,7 @@ RUN apt-get update -q \
         python3-pyelftools \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
-    && pip3 install setuptools \
-    && pip3 install aenum sortedcontainers pyyaml pyaml future camkes-deps \
+    && pip3 install setuptools camkes-deps \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Init bundle dependencies

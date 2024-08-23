@@ -7,7 +7,6 @@
 
 import os
 import sys
-import subprocess
 import random
 import time
 
@@ -15,7 +14,7 @@ import time
 
 vm_num = 4
 vm_name = 'seL4vmw'
-vm_gui = False if not "-gui" in sys.argv else True
+vm_gui = False if "-gui" not in sys.argv else True
 vm_leave_on = False
 
 # Variables
@@ -33,7 +32,7 @@ print("seL4 VMWare Development Environment Script")
 
 def xc(cmd, allow_fail=False):
     ret = os.system(cmd)
-    if ret != 0 and allow_fail == False:
+    if ret != 0 and not allow_fail:
         print("### ERROR: command %s failed. Exiting." % cmd)
         sys.exit(1)
 
@@ -115,7 +114,7 @@ def main():
     VMoff()
 
     # Copy the files into VMDK.
-    if vm_leave_on == False:
+    if not vm_leave_on:
         xc('rm -rf %s > /dev/null' % mnt_dir, True)
         xc('mkdir %s' % mnt_dir)
         xc('vmware-mount %s %s' % (vmdk_file, mnt_dir))
@@ -129,7 +128,6 @@ def main():
 
     print("waiting 1 seconds for VM to boot...")
     time.sleep(1)
-    #xc('less -r +F %s' % vcom_file, True);
     xc('tail -F %s' % vcom_file, True)
 
     VMoff()
