@@ -18,7 +18,7 @@ To install run:
 ```
 
 <details markdown='1'>
-<summary style="display:list-item">More on Repo</summary>
+<summary>More on Repo</summary>
 <br>
 [More details about on installing Repo](https://source.android.com/setup/develop#installing-repo).
 
@@ -44,7 +44,7 @@ sudo usermod -aG docker $(whoami)
 ```
 
 <details markdown='1'>
-  <summary style="display:list-item">More on Docker</summary>
+  <summary>More on Docker</summary>
   <br>
 
   **Available images**
