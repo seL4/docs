@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Libraries 4
+title: Libraries timer tutorial
 tutorial: libraries-4
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0

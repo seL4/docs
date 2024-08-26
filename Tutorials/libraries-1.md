@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Libraries 1
+title: Libraries initialisation & threading
 tutorial: libraries-1
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0

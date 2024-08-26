@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Libraries 3
+title: Libraries processes & ELF loading
 tutorial: libraries-3
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0

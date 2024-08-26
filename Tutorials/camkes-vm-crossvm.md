@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Camkes Cross-VM communication
+title: Camkes cross-VM connectors
 tutorial: camkes-vm-crossvm
 tutorial-order: vm-2
 layout: tutorial

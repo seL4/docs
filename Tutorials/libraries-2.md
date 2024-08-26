@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Libraries 2
+title: Libraries IPC
 tutorial: libraries-2
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0

@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Camkes 3
+title: CAmkES timer tutorial
 tutorial: hello-camkes-timer
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0

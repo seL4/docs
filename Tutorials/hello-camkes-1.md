@@ -1,6 +1,6 @@
 ---
 toc: true
-title: Camkes 1
+title: Introduction to CAmkES
 tutorial: hello-camkes-1
 layout: tutorial
 SPDX-License-Identifier: CC-BY-SA-4.0
