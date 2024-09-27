@@ -152,6 +152,3 @@ That's it! seL4 is running.
 
 To quit QEMU: `Ctrl+a, x`
 
-<p>
-    Next: <a href="get-the-tutorials">Get the tutorials</a>
-</p>
