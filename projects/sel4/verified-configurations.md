@@ -24,7 +24,7 @@ currently constituting: ARM, ARM\_HYP, ARM\_MCS, AARCH64, RISCV64, RISCV64\_MCS,
 
 Please consult [Frequently Asked
 Questions](/FrequentlyAskedQuestions), as well as the [proof and
-assumptions page](http://sel4.systems/Info/FAQ/proof.pml) for a better
+assumptions page](http://sel4.systems/Info/FAQ/proof.html) for a better
 understanding of the intersection of verification and seL4.
 
 ## Examining and Building Verified Configurations
