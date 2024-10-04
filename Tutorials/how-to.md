@@ -9,17 +9,16 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
 
 [//]: # (<html><a href="no-javascript.html" title="Get some foo!">Show me some foo</a></html>)
 
-
 ## The seL4 kernel
 
-### [Capabilities](capabilities.md)
+### [Capabilities](capabilities?tut_expand)
 
  - [Calculate the size of a CSpace](capabilities.md#how-big-is-your-cspace)
  - [Copy a capability between CSlots](capabilities.md#copy-a-capability-between-cslots)
  - [Delete a capability](capabilities.md#how-do-you-delete-capabilities)
  - [Suspend a thread](capabilities.md#suspend-a-thread)
 
-### [Untyped](untyped.md)
+### [Untyped](untyped?tut_expand)
 
  - [Create an untyped capability](untyped.md#create-an-untyped-capability)
  - [Create a TCB object](untyped.md#create-a-tcb-object)
@@ -27,13 +26,13 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
  - [Create a notification object](untyped.md#create-a-notification-object)
  - [Delete an object](untyped.md#delete-the-objects)
 
-### [Mapping](mapping.md)
+### [Mapping](mapping?tut_expand)
 - [Map a page directory](mapping.md#map-a-page-directory)
 - [Map a page table](mapping.md#map-a-page-table)
 - [Remap a page](mapping.md#remap-a-page)
 - [Unmap a page](mapping.md#unmapping-pages)
 
-### [Threads](threads.md)
+### [Threads](threads?tut_expand)
 - [Configure a TCB](threads.md#configure-a-tcb)
 - [Change the priority of a thread](threads.md#change-priority-via-sel4_tcb_setpriority)
 - [Set initial register state](threads.md#set-initial-register-state)
@@ -41,39 +40,39 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
 - [Set the arguments of a thread](threads.md#passing-arguments)
 - [Resolve a fault](threads.md#resolving-a-fault)
 
-### [IPC](ipc.md)
+### [IPC](ipc?tut_expand)
  - [Use capability transfer to send the badged capability](ipc.md#use-capability-transfer-to-send-the-badged-capability)
  - [Get a message](ipc.md#get-a-message)
  - [Reply and wait](ipc.md#reply-and-wait)
  - [Save a reply and store reply capabilities](ipc.md#save-a-reply-and-store-reply-capabilities)
 
-### [Notifications](notifications.md)
+### [Notifications](notifications?tut_expand)
  - [Set up shared memory](notifications.md#set-up-shared-memory)
  - [Signalling](notifications.md#signal-the-producers-to-go)
  - [Differentiate signals](notifications.md#differentiate-signals)
 
-### [Interrupts](interrupts.md)
+### [Interrupts](interrupts?tut_expand)
  - [Invoke IRQ control](interrupts.md#invoke-irq-control)
  - [Set NTFN](interrupts.md#set-ntfn)
  - [Acknowledge an interrupt](interrupts.md#acknowledge-an-interrupt)
 
-### [Fault handling](fault-handlers.md)
+### [Fault handling](fault-handlers?tut_expand)
  - [Set up an endpoint for thread fault IPC messages](fault-handlers.md#setting-up-the-endpoint-to-be-used-for-thread-fault-ipc-messages)
  - [Receive an IPC message from the kernel](fault-handlers.md#receiving-the-ipc-message-from-the-kernel)
  - [Get information about a thread fault](fault-handlers.md#finding-out-information-about-the-generated-thread-fault)
  - [Handle a thread fault](fault-handlers.md#handling-a-thread-fault)
  - [Resume a faulting thread](fault-handlers.md#resuming-a-faulting-thread)
 
-## [MCS Extensions](mcs.md)
+## [MCS Extensions](mcs?tut_expand)
  - [Set up a periodic thread](mcs.md#periodic-threads)
  - [Unbind a scheduling context](mcs.md#unbinding-scheduling-contexts)
  - [Experiment with sporadic tasks](mcs.md#sporadic-threads)
  - [Use passive servers](mcs.md#passive-servers)
  - [Configure fault endpoints](mcs.md#configuring-a-fault-endpoint-on-the-mcs-kernel)
 
-## [Dynamic libraries](libraries-1.md)
+## [Dynamic libraries](libraries-1?tut_expand)
 
-### [Initialisation  & threading](libraries-1.md)
+### [Initialisation  & threading](libraries-1?tut_expand)
   - [Obtain BootInfo](libraries-1.md#obtain-bootinfo)
   - [Initialise simple](libraries-1.md#initialise-simple)
   - [Use simple to print BootInfo](libraries-1.md#use-simple-to-print-bootinfo)
@@ -90,7 +89,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Start the new thread](libraries-1.md#start-the-new-thread)
   - [Print](libraries-1.md#print-something)
 
-### [IPC](libraries-2.md)
+### [IPC](libraries-2?tut_expand)
   - [Allocate an IPC buffer](libraries-2.md#allocate-an-ipc-buffer)
   - [Allocate a page table](libraries-2.md#allocate-a-page-table)
   - [Map a page table](libraries-2.md#map-a-page-table)
@@ -105,7 +104,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Write the message registers](libraries-2.md#write-the-message-registers)
   - [Reply to a message](libraries-2.md#reply-to-a-message)
 
-### [Processes & Elf loading](libraries-3.md)
+### [Processes & Elf loading](libraries-3?tut_expand)
   - [Create a VSpace object](libraries-3.md#virtual-memory-management)
   - [Configure a process](libraries-3.md#configure-a-process)
   - [Get a CSpace path](libraries-3.md#get-a-cspacepath)
@@ -115,23 +114,23 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Send a reply](libraries-3.md#send-a-reply)
   - [Initiate communications by using seL4_Call](libraries-3.md#client-call)
 
-### [Timer](libraries-4.md)
+### [Timer](libraries-4?tut_expand)
   - [Allocate a notification object](libraries-4.md#allocate-a-notification-object)
   - [Initialise a timer](libraries-4.md#initialise-the-timer)
   - [Use a timer](libraries-4.md#use-the-timer)
   - [Handle an interrupt](libraries-4.md#handle-the-interrupt)
   - [Destroy a timer](libraries-4.md#destroy-the-timer)
 
-## [CAmkES](hello-camkes-0.md)
+## [CAmkES](hello-camkes-0?tut_expand)
 
-### [A basic CAmkES application](hello-camkes-1.md)
+### [A basic CAmkES application](hello-camkes-1?tut_expand)
   - [Define an instance in the composition section of the ADL](hello-camkes-1.md#define-an-instance-in-the-composition-section-of-the-adl)
   - [Add a connection](hello-camkes-1.md#add-a-connection)
   - [Define an interface](hello-camkes-1.md#define-an-interface)
   - [Implement an RPC function](hello-camkes-1.md#implement-a-rpc-function)
   - [Invoke a RPC function](hello-camkes-1.md#invoke-a-rpc-function)
 
-### [Events in CAmkES](hello-camkes-2.md)
+### [Events in CAmkES](hello-camkes-2?tut_expand)
   - [Specify an events interface](hello-camkes-2.md#specify-an-events-interface)
   - [Add connections](hello-camkes-2.md#add-connections)
   - [Wait for data to become available](hello-camkes-2.md#wait-for-data-to-become-available)
@@ -149,7 +148,7 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Restrict access to dataports](hello-camkes-2.md#restrict-access-to-dataports)
   - [Test the read and write permissions on the dataport](hello-camkes-2.md#test-the-read-and-write-permissions-on-the-dataport)
 
-### [CAmkES Timer](hello-camkes-timer.md)
+### [CAmkES Timer](hello-camkes-timer?tut_expand)
   - [Instantiate a Timer and Timerbase](hello-camkes-timer.md#instantiate-a-timer-and-timerbase)
   - [Connect a timer driver component](hello-camkes-timer.md#connect-a-timer-driver-component)
   - [Configure a timer hardware component instance](hello-camkes-timer.md#configure-a-timer-hardware-component-instance)
@@ -166,12 +165,12 @@ This guide provides links to tutorial solutions as quick references for seL4 cal
   - [Handle the interrupt](hello-camkes-timer.md#handle-the-interrupt)
   - [Stop the timer](hello-camkes-timer.md#stop-the-timer)
 
-### [CAmkES VM Linux](camkes-vm-linux.md)
+### [CAmkES VM Linux](camkes-vm-linux?tut_expand)
   - [Add a program](camkes-vm-linux.md#adding-a-program)
   - [Add a kernel module](camkes-vm-linux.md#adding-a-kernel-module)
   - [Create a hypercall](camkes-vm-linux.md#creating-a-hypercall)
 
-### [CAmkeES Cross VM Connectors](camkes-vm-crossvm.md)
+### [CAmkeES Cross VM Connectors](camkes-vm-crossvm?tut_expand)
   - [Add modules to the guest](camkes-vm-crossvm.md#add-modules-to-the-guest)
   - [Define interfaces in the VMM](camkes-vm-crossvm.md#define-interfaces-in-the-vmm)
   - [Define the component interface](camkes-vm-crossvm.md#define-the-component-interface)

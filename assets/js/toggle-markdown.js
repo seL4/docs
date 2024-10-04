@@ -1,15 +1,11 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Copyright 2024 seL4 Project a Series of LF Projects, LLC.
 
-// Expand all solutions if previous link was how-to page
+// Expand all solutions
+let param = new URLSearchParams(window.location.search);
 
-let text = document.referrer;
-let result = text.includes("Tutorials/how-to");
-
-if (result==true){
-    document.body.querySelectorAll('details')
-      .forEach((e) => {(e.hasAttribute('open')) ?
-        e.removeAttribute('open') : e.setAttribute('open',true);
-        console.log(e.hasAttribute('open'))
-      })
+if (param.has('tut_expand')) {
+        document.body.querySelectorAll('details').forEach((e) => {
+        e.setAttribute('open', true);
+    })
 }
