@@ -213,4 +213,4 @@ If you are interested in proof contributions the main things to do are to:
 
 - [Learn](http://proofcraft.org/blog/proof-engineer-reading.html) about the [Isabelle theorem prover](http://isabelle.in.tum.de/).
 - Review the [proofs themselves](https://github.com/seL4/l4v/).
-- [Contact us](https://sel4.systems/contact/home.pml) to discuss the possibilities.
+- [Contact us](https://sel4.systems/contact/) to discuss the possibilities.

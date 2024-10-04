@@ -324,7 +324,7 @@ system is configured.
 
 For a more in-depth description, see the
 [proof and assumptions
-page](https://sel4.systems/Info/FAQ/proof.pml).
+page](https://sel4.systems/Info/FAQ/proof.html).
 
 ### How do I leverage seL4's formal proofs?
  The seL4 proofs are just

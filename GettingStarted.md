@@ -71,7 +71,7 @@ on specifically configured platforms. These claims do not automatically
 transfer to other platforms, other seL4 configurations, or custom seL4
 versions. Please consult [Frequently Asked
 Questions](FrequentlyAskedQuestions), as well as the [proof and
-assumptions page](http://sel4.systems/Info/FAQ/proof.pml) for a better
+assumptions page](http://sel4.systems/Info/FAQ/proof.html) for a better
 understanding of the intersection of verification and seL4.
 
 ### Setting up your machine
