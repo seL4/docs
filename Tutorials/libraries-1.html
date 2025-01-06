@@ -3,13 +3,13 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-01-06 03:18:28 +0000 -->
+<!-- Page last generated 2025-01-06 07:53:34 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dynamic Libraries 1 | seL4 docs</title>
+    <title>Libraries initialisation & threading | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -36,10 +36,10 @@
     </li>
     <li class="col-xs-12 col-md-10 menu">
       <nav aria-label="Banner links">
-        <h2><a href="/GettingStarted">Getting Started</a></h2>
-        <h2><a href="/processes">Contributing</a></h2>
-        <h2><a href="/projects">Projects</a></h2>
-        <h2><a href="/Tutorials">Tutorials</a></h2>
+        <h2><a href="/Resources" />Resources</h2>
+        <h2><a href="/processes" />Contributing</a></h2>
+        <h2><a href="/Projects" />Projects</h2>
+        <h2><a href="/Tutorials" />Tutorials</h2>
         <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
       </nav>
     </li>
@@ -77,7 +77,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Dynamic Libraries 1</span>
+            <span property="name">Libraries initialisation & threading</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -107,157 +107,62 @@
   <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
     
 
-
 <div class="sidebar">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <ul class="nav nav-sidebar">
-  
-  
-        <li class="">
-            <a class="" href="/Tutorials/hello-world.html">Hello, World!</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/hello-camkes-0.html">Camkes</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/hello-camkes-1.html">Camkes 1</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/hello-camkes-2.html">Camkes 2</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/hello-camkes-timer.html">Camkes 3</a>
-        <li>
-  
-        <li class="active">
-            <a class="" href="/Tutorials/dynamic-1.html">Dynamic Libraries 1</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/dynamic-2.html">Dynamic Libraries 2</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/dynamic-3.html">Dynamic Libraries 3</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/dynamic-4.html">Dynamic Libraries 4</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/mcs.html">MCS</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/capabilities.html">Capabilities</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/untyped.html">Untyped</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/mapping.html">Mapping</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/threads.html">Threads</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/ipc.html">IPC</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/notifications.html">Notifications</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/interrupts.html">Interrupts</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/fault-handlers.html">Faults</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/camkes-vm-linux.html">Camkes VM Linux</a>
-        <li>
-  
-        <li class="">
-            <a class="" href="/Tutorials/camkes-vm-crossvm.html">Camkes Cross-VM communication</a>
-        <li>
-  
-    </ul>
-
+  <ul class="nav nav-sidebar tutorial-sidebar">
+    <li class="nav-section">Getting started</li>
+      <li><a href="/Tutorials/">Overview</a></li>
+      <li><a href="/Tutorials/pathways">Tutorial pathways</a></li>
+    <li class="nav-section">seL4</li>
+      <li><a href="/Tutorials/setting-up">Setting up your machine</a></li>
+      <li><a href="/Tutorials/get-the-tutorials">Getting the tutorials</a></li>
+      <li><a href="/Tutorials/hello-world">Hello world</a></li>
+      <li><a href="/Tutorials/capabilities">Capabilities</a></li>
+      <li><a href="/Tutorials/untyped">Untyped</a></li>
+      <li><a href="/Tutorials/mapping">Mapping</a></li>
+      <li><a href="/Tutorials/threads">Threads</a></li>
+      <li><a href="/Tutorials/ipc">IPC</a></li>
+      <li><a href="/Tutorials/notifications">Notifications</a></li>
+      <li><a href="/Tutorials/interrupts">Interrupts</a></li>
+      <li><a href="/Tutorials/fault-handlers">Fault handling</a></li>
+      <li><a href="/Tutorials/mcs">MCS extensions</a></li>
+    <li class="nav-section">C Libraries</li>
+      <li><a href="/Tutorials/libraries-1">Initialisation &amp; threading</a></li>
+      <li><a href="/Tutorials/libraries-2">IPC</a></li>
+      <li><a href="/Tutorials/libraries-3">Processes &amp; Elf loading</a></li>
+      <li><a href="/Tutorials/libraries-4">Timer</a></li>
+    <li class="nav-section">Microkit</li>
+      <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Tutorial</a></li>
+    <li class="nav-section">CAmkES</li>
+      <li><a href="/Tutorials/hello-camkes-0">Hello CAmkES</a></li>
+      <li><a href="/Tutorials/hello-camkes-1">Introduction to CAmkES</a></li>
+      <li><a href="/Tutorials/hello-camkes-2">Events in CAmkES</a></li>
+      <li><a href="/Tutorials/hello-camkes-timer">CAmkES timer tutorial</a></li>
+      <li><a href="/Tutorials/camkes-vm-linux">CAmkES VM</a></li>
+      <li><a href="/Tutorials/camkes-vm-crossvm">CAmkES cross-VM connectors</a></li>
+    <li class="nav-section">Rust</li>
+      <li><a href="https://github.com/seL4/rust-sel4">GitHub</a></li>
+    <li class="nav-section">Resources</li>
+      <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
+      <li><a href="/projects/sel4/api-doc.html">seL4 API reference</a></li>
+      <li><a href="/Tutorials/how-to">How to: a quick solutions guide</a></li>
+      <li><a href="/projects/sel4-tutorials/debugging-guide">Debugging guide</a></li>
+      <li><a href="/Resources#contact">Help contacts</a></li>
+  </ul>
 </div>
 
-
   </div>
-  <div class="col-sm-8 col-md-9 col-lg-8 main">
+  <div class="content col-sm-8 col-md-6 col-lg-7 main">
+
     
-      <nav aria-label="Table of Contents">
-        <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#outcomes">Outcomes:</a></li>
-<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
-<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#obtain-bootinfo">Obtain BootInfo</a></li>
-<li class="toc-entry toc-h3"><a href="#initialise-simple">Initialise simple</a></li>
-<li class="toc-entry toc-h3"><a href="#use-simple-to-print-bootinfo">Use simple to print BootInfo</a></li>
-<li class="toc-entry toc-h3"><a href="#initialise-an-allocator">Initialise an allocator</a></li>
-<li class="toc-entry toc-h3"><a href="#obtain-a-generic-allocation-interface-vka">Obtain a generic allocation interface (vka)</a></li>
-<li class="toc-entry toc-h3"><a href="#find-the-cspace-root-cap">Find the CSpace root cap</a></li>
-<li class="toc-entry toc-h3"><a href="#find-the-vspace-root-cap">Find the VSpace root cap</a></li>
-<li class="toc-entry toc-h3"><a href="#allocate-a-tcb-object">Allocate a TCB Object</a></li>
-<li class="toc-entry toc-h3"><a href="#configure-the-new-tcb">Configure the new TCB</a></li>
-<li class="toc-entry toc-h3"><a href="#name-the-new-tcb">Name the new TCB</a></li>
-<li class="toc-entry toc-h3"><a href="#set-the-instruction-pointer">Set the instruction pointer</a></li>
-<li class="toc-entry toc-h3"><a href="#set-the-stack-pointer">Set the stack pointer</a></li>
-<li class="toc-entry toc-h3"><a href="#write-the-registers">Write the registers</a></li>
-<li class="toc-entry toc-h3"><a href="#start-the-new-thread">Start the new thread</a></li>
-<li class="toc-entry toc-h3"><a href="#print-something">Print something</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#links-to-source">Links to source</a></li>
-<li class="toc-entry toc-h2"><a href="#getting-help">Getting help</a></li>
-</ul>
-      </nav>
-    
-    <div class="content">
-      
 <!--
   Copyright 2017, Data61, CSIRO (ABN 41 687 119 230)
 
   SPDX-License-Identifier: BSD-2-Clause
 -->
 
-<h1 id="sel4-dynamic-libraries-initialisation--threading">seL4 Dynamic Libraries: initialisation &amp; threading</h1>
+<h1 id="sel4-libraries-initialisation--threading">seL4 Libraries: Initialisation &amp; Threading</h1>
 
-<p>This tutorial provides code examples and exercises for using the dynamic libraries
+<p>This tutorial provides code examples and exercises for using the libraries
 found in <a href="https://github.com/seL4/seL4_libs"><code class="language-plaintext highlighter-rouge">seL4_libs</code></a> to bootstrap a system and start a thread.</p>
 
 <p>The tutorial is useful in that
@@ -267,22 +172,13 @@ it addresses conceptual problems for two different types of developers:</p>
   <li>Experienced kernel developers whose minds are pre-programmed to
     think in terms of “One address space equals one process”, and
     begins to introduce the seL4 CSpace vs VSpace model.</li>
-  <li>New kernel developers, for whom the tutorial will prompt them on
-    what to read about.</li>
+  <li>New kernel developers, for whom the tutorial will provide prompts on what to read.</li>
 </ul>
 
 <p>Don’t gloss over the globals declared before <code class="language-plaintext highlighter-rouge">main()</code> – they’re declared
 for your benefit so you can grasp some of the basic data structures.</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
-
-<ol>
-  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
-  <li><a href="https://docs.sel4.systems/Tutorials/hello-world">Hello world</a></li>
-</ol>
-
-<h2 id="outcomes">Outcomes:</h2>
-
+<p>Outcomes:</p>
 <ul>
   <li>Understand the kernel’s startup procedure.</li>
   <li>Understand that the kernel centers around certain objects and
@@ -298,17 +194,42 @@ for your benefit so you can grasp some of the basic data structures.</p>
       must fill these out.</li>
 </ul>
 
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
+  <li><a href="/Tutorials/hello-world">Hello world tutorial</a></li>
+</ol>
+
 <h2 id="initialising">Initialising</h2>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/#get-the-code</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
 <span class="c"># Follow these instructions to initialise the tutorial</span>
 <span class="c"># initialising the build directory with a tutorial exercise</span>
-./init <span class="nt">--tut</span> dynamic-1
+./init <span class="nt">--tut</span> libraries-1
 <span class="c"># building the tutorial exercise</span>
-<span class="nb">cd </span>dynamic-1_build
+<span class="nb">cd </span>libraries-1_build
 ninja
 </code></pre></div></div>
+
+<details>
+  <summary><em>Hint:</em> tutorial solutions</summary>
+  <p><br />
+All tutorials come with complete solutions. To get solutions run:</p>
+
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
+<span class="c">#</span>
+<span class="c"># Follow these instructions to initialise the tutorial</span>
+<span class="c"># initialising the build directory with a tutorial exercise</span>
+./init <span class="nt">--solution</span> <span class="nt">--tut</span> libraries-1
+<span class="c"># building the tutorial exercise</span>
+<span class="nb">cd </span>libraries-1_build
+ninja
+</code></pre></div>  </div>
+
+  <p>Answers are also available in drop down menus under each section.</p>
+</details>
 
 <h2 id="exercises">Exercises</h2>
 
@@ -346,8 +267,16 @@ It also sets up the IPC buffer so that it can perform some syscalls such as <cod
      */</span>
 <span class="err">}</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">info</span> <span class="o">=</span> <span class="n">platsupport_get_bootinfo</span><span class="p">();</span>
+</code></pre></div>  </div>
+</details>
+
 <p>On success, you should see the following:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dynamic-1: main@main.c:124 [Cond failed: allocman == NULL]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libraries-1: main@main.c:124 [Cond failed: allocman == NULL]
 	Failed to initialize alloc manager.
 	Memory pool sufficiently sized?
 	Memory pool pointer valid?
@@ -369,7 +298,12 @@ You need to initialize it with some default state before using it.</p>
 </code></pre></div>    </div>
   </li>
 </ul>
+<details>
+  <summary><em>Quick solution</em></summary>
 
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">simple_default_init_bootinfo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="n">info</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
 <p>On successful completion of this task, the output should not change.</p>
 
 <h3 id="use-simple-to-print-bootinfo">Use simple to print BootInfo</h3>
@@ -382,7 +316,15 @@ You need to initialize it with some default state before using it.</p>
      * void simple_print(simple_t *simple);
      * @param simple Pointer to simple interface.
      */</span>
+
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">simple_print</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
 
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h">https://github.com/seL4/seL4_libs/blob/master/libsel4simple/include/simple/simple.h</a></li>
@@ -400,7 +342,7 @@ userImagePaging: [12 --&gt; 15)
 untypeds:        [316 --&gt; 406)
 Initial thread domain: 0
 Initial thread cnode size:
-dynamic-1: main@main.c:126 [Cond failed: allocman == NULL]
+libraries-1: main@main.c:126 [Cond failed: allocman == NULL]
 </code></pre></div></div>
 
 <h3 id="initialise-an-allocator">Initialise an allocator</h3>
@@ -428,9 +370,18 @@ step.</p>
      * @return returns NULL on error
      */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">allocman</span> <span class="o">=</span> <span class="n">bootstrap_use_current_simple</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="n">ALLOCATOR_STATIC_POOL_SIZE</span><span class="p">,</span> <span class="n">allocator_mem_pool</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>The output should now be as follows:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "dynamic-1" @401303]: Attempted to invoke a null cap #0.&gt;&gt;
-dynamic-1: main@main.c:199 [Err seL4_InvalidCapability]:
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "libraries-1" @401303]: Attempted to invoke a null cap #0.&gt;&gt;
+libraries-1: main@main.c:199 [Err seL4_InvalidCapability]:
 	Failed to set the priority for the new TCB object.
 </code></pre></div></div>
 
@@ -456,6 +407,13 @@ and the VKA library simplifies this for you, among other things.</p>
      */</span>
 </code></pre></div></div>
 
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">allocman_make_vka</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="n">allocman</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>On successful completion this task, the output should not change.</p>
 
 <h3 id="find-the-cspace-root-cap">Find the CSpace root cap</h3>
@@ -469,6 +427,14 @@ and the VKA library simplifies this for you, among other things.</p>
      */</span>
     <span class="n">seL4_CPtr</span> <span class="n">cspace_cap</span><span class="p">;</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">cspace_cap</span> <span class="o">=</span> <span class="n">simple_get_cnode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>This is where the differences between seL4 and contemporary kernels
 begin to start playing out. Every kernel-object that you “retype” will
 be handed to you using a capability reference. The seL4 kernel keeps
@@ -502,7 +468,16 @@ a CSpace.</p>
      * @return The vspace (PD) backing the simple interface. no failure.
      */</span>
     <span class="n">seL4_CPtr</span> <span class="n">pd_cap</span><span class="p">;</span>
+
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">pd_cap</span> <span class="o">=</span> <span class="n">simple_get_pd</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>Just as in the previous step, you were made to grab a reference to the
 root of your thread’s CSpace, now you’re being made to grab a reference
 to the root of your thread’s VSpace.</p>
@@ -524,6 +499,14 @@ to the root of your thread’s VSpace.</p>
      */</span>
     <span class="n">vka_object_t</span> <span class="n">tcb_object</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">vka_alloc_tcb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tcb_object</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>In order to manage the threads that are created in seL4, the seL4 kernel
 keeps track of TCB (Thread Control Block) objects. Each of these
 represents a schedulable executable resource. Unlike other contemporary
@@ -562,6 +545,14 @@ output:</p>
      * hint 4: we don't need an IPC buffer frame or address yet
      */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Configure</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span>  <span class="n">cspace_cap</span><span class="p">,</span> <span class="n">seL4_NilData</span><span class="p">,</span> <span class="n">pd_cap</span><span class="p">,</span> <span class="n">seL4_NilData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>You must create a new VSpace for your new thread if you need it to
 execute in its own isolated address space, and tell the kernel which
 VSpace you plan for the new thread to execute in. This opens up the
@@ -589,6 +580,14 @@ everytime there is a kernel timer tick.</p>
     <span class="cm">/* TASK 10: give the new thread a name */</span>
     <span class="cm">/* hint: we've done thread naming before */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">NAME_THREAD</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="s">"libraries-1: thread_2"</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>This is a convenience function – sets a name string for the TCB object.</p>
 
 <p>On successful completion this task, the output should not change.</p>
@@ -609,6 +608,14 @@ everytime there is a kernel timer tick.</p>
      * hint 2: we want the new thread to run the function "thread_2"
      */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="n">thread_2</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>Pay attention to the line that precedes this particular task – the line
 that zeroes out a new “seL4_UserContext” object. As we previously
 explained, seL4 requires you to fill out the Thread Control Block
@@ -632,6 +639,14 @@ your new thread through its registers.</p>
      * hint 2: remember the stack grows down!
      */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="n">thread_2_stack_top</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>This TASK is just some pointer arithmetic. The cautionary note that the
 stack grows down is meant to make you think about the arithmetic.
 Processor stacks push new values toward decreasing addresses, so give it
@@ -656,6 +671,14 @@ some thought.</p>
      * @return 0 on success
      */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>As explained above, we’ve been filling out our new thread’s TCB for the
 last few operations, so now we’re writing the values we’ve chosen, to
 the TCB object in the kernel.</p>
@@ -674,6 +697,14 @@ the TCB object in the kernel.</p>
      * @return 0 on success
      */</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Resume</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>Finally, we tell the kernel that our new thread is runnable. From here,
 the kernel itself will choose when to run the thread based on the
 priority we gave it, and according to the kernel’s configured scheduling
@@ -690,6 +721,14 @@ policy.</p>
     <span class="cm">/* hint: printf() */</span>
 <span class="err">}</span>
 </code></pre></div></div>
+
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"thread_2: hallo wereld</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</code></pre></div>  </div>
+</details>
+
 <p>For the sake of confirmation that our new thread was executed by the
 kernel successfully, we cause it to print something to the screen.</p>
 
@@ -712,28 +751,49 @@ kernel successfully, we cause it to print something to the screen.</p>
 
 <p>That’s it for this tutorial.</p>
 
-<hr />
-<h2 id="getting-help">Getting help</h2>
-<p>Stuck? See the resources below.</p>
-<ul>
-  <li><a href="https://docs.sel4.systems/FrequentlyAskedQuestions">FAQ</a></li>
-  <li><a href="http://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
-  <li><a href="https://docs.sel4.systems/DebuggingGuide.html">Debugging guide</a></li>
-  <li><a href="https://sel4.discourse.group">seL4 Discourse forum</a></li>
-  <li><a href="https://lists.sel4.systems/postorius/lists/devel.sel4.systems/">Developer’s mailing list</a></li>
-  <li><a href="https://mattermost.trustworthy.systems/sel4-external/">Mattermost Channel</a></li>
-</ul>
-
-<hr />
-
-<p><em>Tutorial included from <a href="https://github.com/sel4/sel4-tutorials/blob/master/tutorials/
-dynamic-1/dynamic-1.md">github repo</a> <a href="https://github.com/sel4/sel4-tutorials/edit/master/tutorials/
-dynamic-1/dynamic-1.md">edit</a></em></p>
 
 
-    </div>
+<p style="text-align: right;">
+
+      Next: <a href="/Tutorials/libraries-2">IPC</a>
+</p>
+
+<hr>
+    <p><em>Tutorial included from <a href="https://github.com/sel4/sel4-tutorials/blob/master/tutorials/libraries-1/libraries-1.md">github repo</a> <a href="https://github.com/sel4/sel4-tutorials/edit/master/tutorials/libraries-1/libraries-1.md">edit</a></em></p>
   </div>
+
+  
+    
+<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#exercises">Exercises</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#obtain-bootinfo">Obtain BootInfo</a></li>
+<li class="toc-entry toc-h3"><a href="#initialise-simple">Initialise simple</a></li>
+<li class="toc-entry toc-h3"><a href="#use-simple-to-print-bootinfo">Use simple to print BootInfo</a></li>
+<li class="toc-entry toc-h3"><a href="#initialise-an-allocator">Initialise an allocator</a></li>
+<li class="toc-entry toc-h3"><a href="#obtain-a-generic-allocation-interface-vka">Obtain a generic allocation interface (vka)</a></li>
+<li class="toc-entry toc-h3"><a href="#find-the-cspace-root-cap">Find the CSpace root cap</a></li>
+<li class="toc-entry toc-h3"><a href="#find-the-vspace-root-cap">Find the VSpace root cap</a></li>
+<li class="toc-entry toc-h3"><a href="#allocate-a-tcb-object">Allocate a TCB Object</a></li>
+<li class="toc-entry toc-h3"><a href="#configure-the-new-tcb">Configure the new TCB</a></li>
+<li class="toc-entry toc-h3"><a href="#name-the-new-tcb">Name the new TCB</a></li>
+<li class="toc-entry toc-h3"><a href="#set-the-instruction-pointer">Set the instruction pointer</a></li>
+<li class="toc-entry toc-h3"><a href="#set-the-stack-pointer">Set the stack pointer</a></li>
+<li class="toc-entry toc-h3"><a href="#write-the-registers">Write the registers</a></li>
+<li class="toc-entry toc-h3"><a href="#start-the-new-thread">Start the new thread</a></li>
+<li class="toc-entry toc-h3"><a href="#print-something">Print something</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#links-to-source">Links to source</a></li>
+</ul>
 </div>
+
+  
+</div>
+<script src="/assets/js/toggle-markdown.js"></script>
 
     </main>
     
@@ -763,18 +823,18 @@ dynamic-1/dynamic-1.md">edit</a></em></p>
         </li>
         
           <li>
-            Site last updated: Fri Oct 4 12:39:11 2024 +1000 d43fdca5a6
+            Site last updated: Mon Jan 6 18:52:01 2025 +1100 df31e5ccb8
           </li>
           <li>
-                Page last updated: Mon Nov 30 09:25:37 2020 +1100 977ed44f17
+                Page last updated: Mon Jan 6 18:52:01 2025 +1100 df31e5ccb8
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/Tutorials/dynamic-1.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/Tutorials/libraries-1.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/Tutorials/dynamic-1.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/Tutorials/libraries-1.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
