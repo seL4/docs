@@ -51,7 +51,10 @@ _repos/tutes:
 _repos/tutes/%.md: _repos/sel4proj/sel4-tutorials/tutorials/% _repos/tutes
 	PYTHONPATH=_repos/sel4/capdl/python-capdl-tool _repos/sel4proj/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
 
-TUTORIALS:= $(filter-out index.md,$(notdir $(wildcard Tutorials/*.md)))
+# Make tutorials
+# Filter out index.md; get-the-tutorials.md; how-to.md pathways.md; setting-up.md
+# which are docsite pages, and not in the tutorials repo
+TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md,$(notdir $(wildcard Tutorials/*.md)))
 tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
 _generate_api_pages: $(REPOSITORIES)

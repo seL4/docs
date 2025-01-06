@@ -20,10 +20,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 The [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) is a affordable embedded system developed by NVIDIA. It runs
 seL4. We will explain how to run seL4 on the Tegra.
- 
+
 ### Pre-Requisites
 * One Tegra Board. See [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html)
-* The development environment fully working.  See [Getting started](/GettingStarted)
+* The development environment fully working.  See [Resources](/Resources)
 
 ## Getting Started
  To get started, check out the
@@ -94,7 +94,7 @@ to boot in nonsecure (HYP)
 mode. This also enables kvm if you boot Linux.
 
 To go back to secure mode booting do
-``` 
+```
 setenv bootm_boot_mode sec
 saveenv
 ```

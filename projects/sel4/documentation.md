@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 - [Technical overview paper](https://trustworthy.systems/publications/nictaabstracts/Klein_AEMSKH_14.abstract)
 - [L4 Microkernels: The Lessons from 20 Years of Research and Deployment](https://trustworthy.systems/publications/nictaabstracts/Heiser_Elphinstone_16.abstract),
   a retrospective explaining how we got to where we are;
-- [Getting started](/GettingStarted)
+- [Resources](/Resources)
 - [Trustworthy Systems seL4
       research project pages](https://trustworthy.systems/projects/seL4/)
 - [UNSW Advanced OS lecture slides](https://www.cse.unsw.edu.au/~cs9242/14/lectures/), especialy the Introduction and

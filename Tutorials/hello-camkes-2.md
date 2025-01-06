@@ -1,11 +1,10 @@
 ---
 toc: true
-title: Camkes 2
+title: Events in CAmkES
 tutorial: hello-camkes-2
-tutorial-order: camkes-2
-description: an introduction to Camkes concepts.
+layout: tutorial
+description: an introduction to CAmkES concepts
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 {% include tutorial.md %}
-
