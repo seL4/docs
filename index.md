@@ -67,6 +67,8 @@ This documentation site is for cooperatively developing and sharing documentatio
 	<li><a href="/Tutorials#how-to-use-the-tutorials">Tutorial overview</a></li>
 	<li><a href="/Tutorials#introduction-tutorial">Introduction (hello world)</a></li>
 	<li><a href="/Tutorials#sel4-mechanisms-tutorials">seL4 mechanisms</a></li>
+        <!-- We're linking outside the docs site, so open the Microkit tutorial in a new tab. -->
+	<li><a href="https://trustworthy.systems/projects/microkit/tutorial" target="_blank"/>seL4 Microkit</a></li>
 	<li><a href="/Tutorials#camkes-tutorials">CAmkES</a></li>
 	<li><a href="/Tutorials#rapid-prototyping-tutorials">Rapid prototyping</a></li>
 	<li><a href="/Tutorials#virtual-machines">Virtual machines</a></li>
