@@ -627,7 +627,7 @@ There are two recommended ways to do this.
       processes, but is generally more low-level.
 
 For build instructions, and how to get started, see the
-[Getting started](/GettingStarted) page.
+[Resources](/Resources) page.
 Also, UNSW's [Advanced Operating Systems course](https://www.cse.unsw.edu.au/~cs9242) has an extensive project component that
 builds an OS on top of seL4. If you have access to an [Odroid-C2](https://www.hardkernel.com/shop/odroid-c2/),
 you should be able to do the project work yourself as a way of

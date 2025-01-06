@@ -6,7 +6,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # Suggested Projects
 
 
-After trying the existing projects (especially those listed on [Getting started](GettingStarted))
+After trying the existing projects (e.g. the [Tutorials](Tutorials))
 a good way to learn the intricacies of programming on
 top of seL4 is to do the exercises in the
 [UNSW Advanced

@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
       <ul class="nav nav-sidebar">
   {% for entry in item.subfolderitems %}
         <li class="{% if page.url == entry.url %}active{% endif %}">
-          <a class="" href="{{ entry.url }}">
+          <a class="" href="{{ entry.url | relative_url }}">
             {{ entry.page }}
           </a>
         </li>
@@ -49,20 +49,9 @@ executed for production builds. This is all so the project links can be sorted
     {% assign url = "/projects/" | append: new_project[0].name | append: '/' %}
         <li class="{% if page_url[2] == new_project[0].name %}active{% endif %}">
             <a class="" href="{{url}}">{{new_project[0].display_name}}</a>
-        <li>
+        </li>
   {% endfor %}
     </ul>
 {% endif %}
 
-
-{% if page_url[1] == "Tutorials" %}
-    <ul class="nav nav-sidebar">
-  {% assign tutorials = site.pages | where_exp: 'page', 'page.tutorial' | sort: 'tutorial-order' %}
-  {% for t in tutorials %}
-        <li class="{% if page.url == t.url %}active{% endif %}">
-            <a class="" href="{{t.url}}">{{t.title}}</a>
-        <li>
-  {% endfor %}
-    </ul>
-{% endif %}
 </div>
