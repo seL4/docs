@@ -8,7 +8,7 @@ virtualization: "No"
 iommu: "No"
 soc: Exynos4412
 cpu: Cortex-A9
-Status: Unverified
+Status: "[Verified](/projects/sel4/verified-configurations.html#exynos4)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0

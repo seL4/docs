@@ -9,7 +9,7 @@ virtualization: ARM HYP
 iommu: SMMU
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
-Status: Unverified
+Status: "[Verified](/projects/sel4/verified-configurations.html#tk1)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0

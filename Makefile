@@ -91,7 +91,7 @@ docker_build:
 # --host 0.0.0.0 serves on all interfaces, so that docker can export
 # the connection; also works locally
 serve: build
-	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve --host 0.0.0.0
+	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 build: generate_api ruby_deps $(REPOSITORIES)
 	$(MAKE) tutorials
