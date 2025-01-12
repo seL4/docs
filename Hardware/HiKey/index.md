@@ -8,7 +8,7 @@ virtualization: ARM HYP
 iommu: "No"
 soc: Kirin 620
 cpu: Cortex-A53
-Status: Unverified
+Status: "[Verified](/projects/sel4/verified-configurations.html#hikey)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0

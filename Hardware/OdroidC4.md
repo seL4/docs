@@ -9,7 +9,7 @@ virtualization: "Yes"
 iommu: "No"
 soc: Amlogic S905X3
 cpu: Cortex-A55
-Status: Unverified
+Status: "[FC complete, Integrity ongoing](/projects/sel4/verified-configurations.html#odroidc4)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
