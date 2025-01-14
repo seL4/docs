@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-01-14 03:15:08 +0000 -->
+<!-- Page last generated 2025-01-14 04:58:12 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -241,12 +241,19 @@ understanding of the intersection of verification and seL4.</p>
 
 <p>Current verified configurations can be found in seL4 sources in the
 <code class="language-plaintext highlighter-rouge">configs</code> folder:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>configs/<span class="k">*</span>_verified.cmake
-<span class="c"># AARCH64_verified.cmake         ARM_verified.cmake</span>
-<span class="c"># ARM_HYP_exynos5_verified.cmake RISCV64_MCS_verified.cmake</span>
-<span class="c"># ARM_HYP_verified.cmake         RISCV64_verified.cmake</span>
-<span class="c"># ARM_MCS_verified.cmake         X64_verified.cmake</span>
-<span class="c"># ARM_imx8mm_verified.cmake</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>configs/
+<span class="nb">ls</span> <span class="k">*</span>_verified.cmake
+<span class="c"># AARCH64_bcm2711_verified.cmake    ARM_exynos5410_verified.cmake</span>
+<span class="c"># AARCH64_hikey_verified.cmake      ARM_exynos5422_verified.cmake</span>
+<span class="c"># AARCH64_odroidc2_verified.cmake   ARM_hikey_verified.cmake</span>
+<span class="c"># AARCH64_odroidc4_verified.cmake   ARM_imx8mm_verified.cmake</span>
+<span class="c"># AARCH64_verified.cmake            ARM_tk1_verified.cmake</span>
+<span class="c"># AARCH64_zynqmp_verified.cmake     ARM_verified.cmake</span>
+<span class="c"># ARM_HYP_exynos5410_verified.cmake ARM_zynq7000_verified.cmake</span>
+<span class="c"># ARM_HYP_exynos5_verified.cmake    ARM_zynqmp_verified.cmake</span>
+<span class="c"># ARM_HYP_verified.cmake            RISCV64_MCS_verified.cmake</span>
+<span class="c"># ARM_MCS_verified.cmake            RISCV64_verified.cmake</span>
+<span class="c"># ARM_exynos4_verified.cmake        X64_verified.cmake</span>
 </code></pre></div></div>
 
 <p>To obtain specific source code and build for a given configuration (e.g.
@@ -286,7 +293,7 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
     </tr>
     <tr>
       <td>Architecture</td>
-      <td>ARMv7</td>
+      <td>ARMv7, 32 bit</td>
     </tr>
     <tr>
       <td>Platform</td>
@@ -307,7 +314,193 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
   </tbody>
 </table>
 
-<h2 id="arm-imx8mm-evk">ARM IMX8MM-EVK</h2>
+<h2 id="exynos4">ARM Exynos 4</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_exynos4_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7, 32 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>exynos4</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm-exynos-5">ARM Exynos 5</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_exynos5410_verified.cmake</code> and <code class="language-plaintext highlighter-rouge">ARM_exynos5422_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7, 32 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>exynos5410 and exynos5422</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm-hikey">ARM Hikey</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_hikey_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7, 32 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>hikey</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="tk1">ARM TK1</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_tk1_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7, 32 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>Jetson TK1</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="zynq7000">ARM Zynq7000</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_zynq7000_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7, 32 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>zynq7000</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="arm-zynqmp">ARM ZynqMP</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_zynqmp_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv7, 32 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>zcu102 and zcu106 in 32 bit mode</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="imx8mm">ARM IMX8MM-EVK</h2>
 
 <table>
   <tbody>
@@ -317,7 +510,7 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
     </tr>
     <tr>
       <td>Architecture</td>
-      <td>ARMv7</td>
+      <td>ARMv7, 32 bit</td>
     </tr>
     <tr>
       <td>Platform</td>
@@ -348,7 +541,7 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
     </tr>
     <tr>
       <td>Architecture</td>
-      <td>ARMv7</td>
+      <td>ARMv7, 32 bit</td>
     </tr>
     <tr>
       <td>Platform</td>
@@ -375,11 +568,11 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
   <tbody>
     <tr>
       <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_HYP_exynos5_verified.cmake</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ARM_HYP_exynos5_verified.cmake</code> and <code class="language-plaintext highlighter-rouge">ARM_HYP_exynos5410_verified.cmake</code></td>
     </tr>
     <tr>
       <td>Architecture</td>
-      <td>ARMv7</td>
+      <td>ARMv7, 32 bit</td>
     </tr>
     <tr>
       <td>Platform</td>
@@ -410,7 +603,7 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
     </tr>
     <tr>
       <td>Architecture</td>
-      <td>ARMv7</td>
+      <td>ARMv7, 32 bit</td>
     </tr>
     <tr>
       <td>Platform</td>
@@ -445,11 +638,166 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
     </tr>
     <tr>
       <td>Architecture</td>
-      <td>ARMv8</td>
+      <td>ARMv8, 64 bit</td>
     </tr>
     <tr>
       <td>Platform</td>
       <td>Tegra X2 (Jetson TX2)</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="bcm2711">AARCH64 RPI4</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">AARCH64_bcm2711_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv8, 64 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>bcm2711 (Raspberry PI 4)</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="hikey">AARCH64 Hikey</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">AARCH64_hikey_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv8, 64 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>hikey</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="odroidc2">AARCH64 Odroid C2</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">AARCH64_odroidc2_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv8, 64 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>odroidc2</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="odroidc4">AARCH64 Odroid C4</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">AARCH64_odroidc4_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv8, 64 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>odroidc4</td>
+    </tr>
+    <tr>
+      <td>Floating-point support</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Hypervisor mode</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><strong>Verified properties</strong></td>
+      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="zynqmp">AARCH64 ZynqMP</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>File</td>
+      <td><code class="language-plaintext highlighter-rouge">AARCH64_zynqmp_verified.cmake</code></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>ARMv8, 64 bit</td>
+    </tr>
+    <tr>
+      <td>Platform</td>
+      <td>zynqmp (zcu102 and zcu106)</td>
     </tr>
     <tr>
       <td>Floating-point support</td>
@@ -578,11 +926,22 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#arm-sabre-lite">ARM Sabre Lite</a></li>
-<li class="toc-entry toc-h2"><a href="#arm-imx8mm-evk">ARM IMX8MM-EVK</a></li>
+<li class="toc-entry toc-h2"><a href="#exynos4">ARM Exynos 4</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-exynos-5">ARM Exynos 5</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-hikey">ARM Hikey</a></li>
+<li class="toc-entry toc-h2"><a href="#tk1">ARM TK1</a></li>
+<li class="toc-entry toc-h2"><a href="#zynq7000">ARM Zynq7000</a></li>
+<li class="toc-entry toc-h2"><a href="#arm-zynqmp">ARM ZynqMP</a></li>
+<li class="toc-entry toc-h2"><a href="#imx8mm">ARM IMX8MM-EVK</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_hyp-tk1">ARM_HYP TK1</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_hyp-exynos5">ARM_HYP Exynos5</a></li>
 <li class="toc-entry toc-h2"><a href="#arm_mcs">ARM_MCS</a></li>
 <li class="toc-entry toc-h2"><a href="#aarch64">AARCH64</a></li>
+<li class="toc-entry toc-h2"><a href="#bcm2711">AARCH64 RPI4</a></li>
+<li class="toc-entry toc-h2"><a href="#hikey">AARCH64 Hikey</a></li>
+<li class="toc-entry toc-h2"><a href="#odroidc2">AARCH64 Odroid C2</a></li>
+<li class="toc-entry toc-h2"><a href="#odroidc4">AARCH64 Odroid C4</a></li>
+<li class="toc-entry toc-h2"><a href="#zynqmp">AARCH64 ZynqMP</a></li>
 <li class="toc-entry toc-h2"><a href="#riscv64">RISCV64</a></li>
 <li class="toc-entry toc-h2"><a href="#riscv64_mcs">RISCV64_MCS</a></li>
 <li class="toc-entry toc-h2"><a href="#x64">X64</a></li>
@@ -922,10 +1281,10 @@ the <a href="/projects/roadmap.html">roadmap</a> for status and upcoming feature
         </li>
         
           <li>
-            Site last updated: Mon Jan 6 18:52:01 2025 +1100 df31e5ccb8
+            Site last updated: Tue Jan 14 15:56:06 2025 +1100 f28f1dfa66
           </li>
           <li>
-                Page last updated: Fri Oct 4 12:39:11 2024 +1000 d43fdca5a6
+                Page last updated: Tue Jan 14 15:56:06 2025 +1100 f28f1dfa66
           </li>
         
       </ul>
