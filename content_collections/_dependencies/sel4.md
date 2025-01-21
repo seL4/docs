@@ -91,8 +91,9 @@ The dependencies listed in our Docker files [repository](https://github.com/seL4
 Regardless of your Linux distribution, python dependencies are required to build seL4, the manual and its proofs. To install you can run:
 
 ```sh
-pip3 install --user setuptools
-pip3 install --user sel4-deps
+pip3 install --user setuptools sel4-deps
 ```
 
 (Some distributions use `pip` for python3, others use `pip3`.  Use the Python 3 version for your distribution)
+
+{% include pip-instructions.md deps="sel4-deps" %}
