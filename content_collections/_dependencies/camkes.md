@@ -16,6 +16,13 @@ The Python dependencies required by the CAmkES build toolchain can be installed 
 pip3 install --user camkes-deps
 ```
 
+If you get an error saying the Python 'environment is externally managed' follow the below instructions:
+```sh
+python3 -m venv venv
+./venv/bin/pip install camkes-deps
+source ./venv/bin/activate
+```
+
 ### Haskell Dependencies
 
 The CAmkES build toolchain additionally requires Haskell. You can install the [Haskell stack](https://haskellstack.org) on your distribution by running:
