@@ -10,9 +10,17 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 # Getting the tutorials
 ## Python Dependencies
 The CAmkES python dependencies are required to build the [tutorials](ReworkedTutorials). To install you can run:
-```
+```sh
 pip3 install --user camkes-deps
 ```
+
+If you get an error saying the Python 'environment is externally managed' follow the below instructions:
+```sh
+python3 -m venv venv
+./venv/bin/pip install camkes-deps
+source ./venv/bin/activate
+```
+
 *Hint:* This step only needs to be done once, i.e. before doing your first tutorial.
 
 ## Get the code
