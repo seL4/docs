@@ -7,13 +7,17 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Getting the tutorials
 ## Python Dependencies
+
+*Hint:* This step only needs to be done once, i.e. before doing your first tutorial.
+
 The CAmkES python dependencies are required to build the [tutorials](ReworkedTutorials). To install you can run:
-```
+
+```sh
 pip3 install --user camkes-deps
 ```
-*Hint:* This step only needs to be done once, i.e. before doing your first tutorial.
+
+{% include pip-instructions.md %}
 
 ## Get the code
 All code for the tutorials is described in the <a href="https://github.com/seL4/sel4-tutorials-manifest">sel4-tutorials-manifest</a>. Get the code with:

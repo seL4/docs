@@ -16,6 +16,8 @@ The Python dependencies required by the CAmkES build toolchain can be installed 
 pip3 install --user camkes-deps
 ```
 
+{% include pip-instructions.md %}
+
 ### Haskell Dependencies
 
 The CAmkES build toolchain additionally requires Haskell. You can install the [Haskell stack](https://haskellstack.org) on your distribution by running:
