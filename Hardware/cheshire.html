@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ariane | seL4 docs</title>
+    <title>Cheshire | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -77,7 +77,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">Ariane</span>
+            <span property="name">Cheshire</span>
             <meta property="position" content="3" /></li>
           
     </ol>
@@ -131,10 +131,13 @@
   <div class="col-sm-8 col-md-9 col-lg-8 main">
     
     <div class="content">
-      <h1 id="ariane">Ariane</h1>
+      <h1 id="cheshire">Cheshire</h1>
 
-<p>Ariane is a 6-stage RISC-V CPU. For details, refer to
-<a href="https://github.com/pulp-platform/ariane">https://github.com/pulp-platform/ariane</a></p>
+<p>Cheshire is a 6-stage RISC-V CPU. For details, refer to
+<a href="https://github.com/pulp-platform/cheshire">https://github.com/pulp-platform/cheshire</a></p>
+
+<p>seL4 currently only provides Cheshire support for the <a href="https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual">Genesys 2
+board</a>.</p>
 
 <h2 id="building-the-gcc-toolchain">Building the GCC toolchain</h2>
 
@@ -165,7 +168,7 @@
 repo <span class="nb">sync
 mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ariane <span class="nt">-DRISCV64</span><span class="o">=</span>1
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>cheshire <span class="nt">-DRISCV64</span><span class="o">=</span>1
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -176,25 +179,91 @@ ninja
 <p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
 <h2 id="running-sel4test">Running seL4test</h2>
-<p>Ariane only provides support for the <a href="https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual">Genesys 2
-board</a></p>
+
+<p>Synthesising hardware for the Genesys 2 requires a Vivado Enterprise license.
+Unfortunately there are no prebuilt bitstreams available. Vivado 2023.2 is recommended.</p>
 
 <ol>
   <li>
-    <p>Compile the bitstream from source or download the pre-build bitstream from
-<a href="https://github.com/pulp-platform/ariane/releases">here</a>.</p>
-  </li>
-  <li>Prepare the SD card
-    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>sgdisk <span class="nt">--clear</span> <span class="nt">--new</span><span class="o">=</span>1:2048:67583 <span class="nt">--new</span><span class="o">=</span>2 <span class="nt">--typecode</span><span class="o">=</span>1:3000 <span class="nt">--typecode</span><span class="o">=</span>2:8300 /dev/sdX
-<span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>images/sel4test-driver-image-riscv-ariane <span class="nv">of</span><span class="o">=</span>/dev/sdX1
+    <p>Synthesise the bitstream from source following the instructions from the <a href="https://pulp-platform.github.io/cheshire/tg/xilinx/">Cheshire
+ Manual</a>. Follow setup instructions then run</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make chs-xilinx-genesys2
 </code></pre></div>    </div>
-    <p>Note that the “sgdisk” command above also creates a second partition for
-Linux rootfs, you could download a pre-build Linux kernel from
-<a href="https://github.com/pulp-platform/ariane-sdk/releases">here</a> to verify that
-the FPGA is working correctly.</p>
   </li>
-  <li>Booting from the SD card and observing the output from the UART port.</li>
+  <li>
+    <p>Program the FPGA using the Vivado Hardware Manager. Open the hardware manager GUI and choose
+<code class="language-plaintext highlighter-rouge">/path/to/cheshire/target/xilinx/out/cheshire.genesys2.bit</code> as the bitstream file in the “Program
+Device” dialog.</p>
+  </li>
+  <li>Prepare a device tree blob for OpenSBI.
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make sw/boot/cheshire.genesys2.dtb
+</code></pre></div>    </div>
+  </li>
+  <li>In a new terminal, connect an OpenOCD session to the board over the JTAG micro-USB port.
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openocd <span class="nt">-f</span> /path/to/cheshire/util/openocd.genesys2.tcl
+</code></pre></div>    </div>
+  </li>
+  <li>In another terminal, connect to OpenOCD using GDB from the RISC-V toolchain.
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>riscv64-unknown-elf-gdb <span class="nt">--eval-command</span> <span class="s2">"target extended-remote localhost:3333"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Use GDB to reset the board, then load the DTB, load OpenSBI and allow it to run.
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Reset CPU and halt</span>
+<span class="o">(</span>gdb<span class="o">)</span> monitor reset halt
+
+<span class="c"># Load DTB to 0x70000000</span>
+<span class="o">(</span>gdb<span class="o">)</span> restore /path/to/cheshire.dtb binary 0x70000000
+
+<span class="c"># Set location of DTB and hart ID for OpenSBI when it boots. This step is normally</span>
+<span class="c"># performed by the zero stage bootloader.</span>
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> <span class="nv">$a0</span><span class="o">=</span>0x70000000
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">set</span> <span class="nv">$a1</span><span class="o">=</span>0
+
+<span class="c"># Load OpenSBI and run</span>
+<span class="o">(</span>gdb<span class="o">)</span> load /path/to/opensbi
+
+<span class="c"># Run OpenSBI to allow it to do preliminary setup</span>
+<span class="o">(</span>gdb<span class="o">)</span> c
+<span class="o">(</span>CTRL+C<span class="o">)</span> <span class="c"># Stop running once SBI prints "Running test payload"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Finally, load the seL4test binary, set the PC and run.
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> restore /path/to/sel4test-driver-image-riscv-cheshire binary 0x80200000
+<span class="o">(</span>gdb<span class="o">)</span> j <span class="k">*</span>0x80200000
+</code></pre></div>    </div>
+  </li>
 </ol>
+
+<h3 id="notes">Notes</h3>
+
+<p>This process can be expedited by using a GDB command file. If you paste the below into a file, it
+may be used as <code class="language-plaintext highlighter-rouge">riscv64-unknown-elf-gdb --command=/path/to/run_sel4test.gdb</code> to complete step 6
+and 7, up to the final jump which must be done manually:
+   <code class="language-plaintext highlighter-rouge">run_sel4test.gdb</code></p>
+<pre><code class="language-gdb">   target extended-remote localhost:3333
+   monitor reset halt
+   restore /path/to/cheshire.dtb binary 0x70000000
+   set $a0=0x70000000
+   set $a1=0
+   restore /path/to/sel4test-driver-image-riscv-cheshire binary 0x80200000
+   load /path/to/opensbi
+   c
+</code></pre>
+
+<p>Finish with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   (gdb) j *0x80200000
+</code></pre></div></div>
+
+<p>If you encounter issues such as OpenOCD failing to connect, you should attempt to reset the JTAG
+connection with <code class="language-plaintext highlighter-rouge">lsusb</code>. The JTAG device should have a name similar to <code class="language-plaintext highlighter-rouge">Future Technology Devices
+International, Ltd FT2232C/D/H Dual UART/FIFO IC</code>. Note the <code class="language-plaintext highlighter-rouge">Bus XXX Device YYY</code> next to the
+device and reset it with</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nb">sudo </span>usbreset XXX/YYY
+</code></pre></div></div>
+
+<p>Note: while it is possible to boot via u-boot as with most other platforms supported, it is easier and
+far faster to follow the following steps to boot with GDB.</p>
 
     </div>
   </div>
@@ -231,15 +300,15 @@ the FPGA is working correctly.</p>
             Site last updated: Tue Feb 4 17:12:03 2025 +1100 29d9670d73
           </li>
           <li>
-                Page last updated: Tue Dec 19 12:55:38 2023 +0100 cb5305c9cb
+                Page last updated: Tue Feb 4 17:12:03 2025 +1100 29d9670d73
           </li>
         
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/Hardware/ariane.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/Hardware/cheshire.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/Hardware/ariane.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/Hardware/cheshire.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
