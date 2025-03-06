@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>1.3.0 | seL4 docs</title>
+    <title>2.0.0 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -66,7 +66,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">1.3.0</span>
+            <span property="name">2.0.0</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -118,45 +118,64 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="microkit-release-130">Microkit Release 1.3.0</h1>
+    <h1 id="microkit-release-200">Microkit Release 2.0.0</h1>
 
-<h4 id="2024-07-01">2024-07-01</h4>
+<h4 id="2025-03-06">2025-03-06</h4>
 
-<p>Announcing the release of 1.3.0, using seL4 version 13.0.0.</p>
+<p>This release contains various bug fixes, quality-of-life changes, features, and
+new board support.</p>
 
-<p>This release represents the first release since the seL4 Microkit was adopted by the
-seL4 Foundation.</p>
+<p>This is a major version bump due to a breaking change. Below the release notes,
+there is a section on how to upgrade from Microkit 1.4.1.</p>
 
-<p>This release has no breaking changes.</p>
-
-<p>You can find the pre-built SDK <a href="https://github.com/seL4/microkit/releases/tag/1.3.0">here</a>.</p>
-
-<h3 id="features-added">Features added</h3>
+<h3 id="features">Features</h3>
 
 <ul>
-  <li>Added support for ‘passive’ protection domains.</li>
-  <li>Added protection domain hierarchy allowing PDs to manage faults caused by child PDs
-and control their execution.</li>
-  <li>Added virtualisation support and a new ‘virtual machine’ abstraction that allows
-users to create systems with guest operating systems (such as Linux).</li>
-  <li>Add the ability to specify the type of IRQ trigger on IRQ elements in the SDF. Previously
-all IRQs were registered as level triggered, now users are given the option of specifying
-an IRQ as ‘edge’ triggered which is needed for writing certain device drivers.</li>
-  <li>Added support for building the Microkit SDK on macOS. If you are on macOS, you can now develop
-with Microkit without Docker or a virtual machine.</li>
-</ul>
-
-<h3 id="other-changes">Other changes</h3>
-
-<ul>
-  <li>
-    <p>Rewrote the Microkit tool from Python to Rust. This is meant to be a purely internal
-change and should not affect the use of the tool at all. This does however introduce
-a new dependency on Rust. See the README for building the new tool from source.</p>
-
+  <li>Add support for virtual machines with multiple vCPUs.</li>
+  <li>Add support for ARM platforms to use SMC forwarding.
     <ul>
-      <li>This was done primarily to decrease 3rd party dependencies and make it easier to build
-the Microkit SDK from source.</li>
+      <li>Note that this requires a kernel option to be set that right now is not
+set by default on any ARM platforms in Microkit.</li>
+    </ul>
+  </li>
+  <li>Allow tool to target Linux AArch64 hosts, also available as a pre-built SDK
+starting in this release.</li>
+  <li>Increase max PD name length to 64 characters (from 16).</li>
+  <li>Add Nix flake for Nix users who want to build from source and not depend on
+the pre-built SDK.</li>
+  <li>Allow specifying whether a channel end can notify the other.</li>
+  <li>Memory Regions now default to the largest possible page size for the MR’s size
+and alignment of virtual addresses of its mappings.
+    <ul>
+      <li>This is transparent to users, but can lead to improved performance and
+memory usage.</li>
+    </ul>
+  </li>
+  <li>Utilise kernel API for naming threads in debug mode.
+    <ul>
+      <li>Helps debugging any kernel error prints in certain cases.</li>
+    </ul>
+  </li>
+  <li>Monitor fault handling now prints if a virtual memory exception was likely due
+to a PD stack overflow.</li>
+  <li>Monitor fault handling now decodes user-exceptions likely caused by LLVM’s
+UBSAN and prints appropriate debug output (only on AArch64).</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">setvar_size</code> attribute for MR mappings, similar to <code class="language-plaintext highlighter-rouge">setvar_vaddr</code>.</li>
+  <li>Add a new ‘Internals’ section in the manual to document how the Microkit
+actually works.</li>
+  <li>libmicrokit APIs for notifying, IRQ acking and performing PPCs now print
+errors when an invalid channel is used in debug mode.
+    <ul>
+      <li>Previously this lead to a kernel error print that was not that useful from
+within a Microkit environment.</li>
+    </ul>
+  </li>
+  <li>System images are now relocatable.
+    <ul>
+      <li>Previously they required loading at particular address within physical
+memory, the Microkit loader will now relocate itself if loaded at a
+different range of physical memory. This can make the boot-loading process
+of Microkit images less fragile.</li>
     </ul>
   </li>
 </ul>
@@ -164,32 +183,109 @@ the Microkit SDK from source.</li>
 <h3 id="bug-fixes">Bug fixes</h3>
 
 <ul>
-  <li>Fixed the libmicrokit linker script to work with the LLVM linker, LLD. This means that non-GCC
-build systems can link with libmicrokit.</li>
-  <li>Removed compiler provided includes (such as stdint.h and stdbool.h) from libmicrokit. This means
-that the libmicrokit header no longer depends on any system provided headers, making the SDK
-more self-contained.</li>
-  <li>Various fixes and improvements to the manual.</li>
-  <li>Various other bug-fixes and error message improvements to the Microkit tool.</li>
+  <li>Allow mapping in ‘null’ page. Necessary for virtual machines with guest memory
+that starts at guest physical address zero.</li>
+  <li>More error checking for invalid mappings (e.g virtual address outside of valid
+range).</li>
+  <li>Re-add warning for unused memory regions.
+    <ul>
+      <li>This is a bug fix since it used to be part of the tool before it was rewritten.</li>
+    </ul>
+  </li>
+  <li>Actually enforce the PPC priority rule that PPC is only allowed to PDs of higher
+priority.
+    <ul>
+      <li>Note that to fix this in the tool, we had to introduce a breaking change
+in the SDF. See upgrade notes for details.</li>
+    </ul>
+  </li>
+  <li>Fix a bug with kernel boot emulation that would sometimes occur when using
+the release mode of the kernel.</li>
+  <li>Fix the GIC device addresses the loader was using for QEMU during
+initialisation.</li>
+  <li>Fixed a bug preventing allocating a MR at certain fixed physical addresses.</li>
+  <li>Better error reporting when allocation of a memory region fails.</li>
+  <li>Fix allocation of Scheduling Context objects, previously we were allocating
+more than necessary.</li>
 </ul>
 
 <h3 id="board-support">Board support</h3>
 
-<p>This release adds support for the following platforms:</p>
-
 <ul>
-  <li>Avnet MaaXBoard</li>
-  <li>HardKernel Odroid-C2</li>
-  <li>HardKernel Odroid-C4</li>
-  <li>NXP i.MX8MM-EVK</li>
-  <li>NXP i.MX8MQ-EVK</li>
-  <li>QEMU virt (AArch64)</li>
-  <li>Xilinx ZCU102</li>
+  <li>i.MX8MP-EVK</li>
+  <li>Pine64 RockPro64</li>
+  <li>Ariane (aka CVA6)</li>
+  <li>Cheshire</li>
+  <li>Raspberry Pi 4B</li>
 </ul>
+
+<h3 id="upgrade-notes">Upgrade notes</h3>
+
+<p>There is a single breaking change in this release, it affects any
+System Description Files (SDF) that make use of channels with PPCs.</p>
+
+<p>This was done for two reasons:</p>
+
+<ol>
+  <li>It allows the tool to statically check and enforce the existing rule that a
+PD that performs a PPC must be lower priority that the PD it is calling into.</li>
+  <li>It allows finer granularity on the channel ends. For example, previously
+all channels allowed notifies either way, now that decision is up to the
+user. The default behaviour remains the same, both ends are allowed to
+notify each other.</li>
+</ol>
+
+<p>To upgrade, follow these steps:</p>
+
+<ol>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">pp</code> attribute from any PDs that have it.</li>
+  <li>Go to each channel with the PD that had the <code class="language-plaintext highlighter-rouge">pp</code> attribute. Set <code class="language-plaintext highlighter-rouge">pp="true"</code>
+on the end of the channel for the PD that is <em>performing</em> the PPC.</li>
+</ol>
+
+<p>Below is an example of upgrading a system that utilises PPCs.</p>
+
+<p>From Microkit 1.4.1:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;protection_domain</span> <span class="na">name=</span><span class="s">"server"</span> <span class="na">priority=</span><span class="s">"254"</span> <span class="na">pp=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;program_image</span> <span class="na">path=</span><span class="s">"server.elf"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/protection_domain&gt;</span>
+<span class="nt">&lt;protection_domain</span> <span class="na">name=</span><span class="s">"client"</span> <span class="na">priority=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;program_image</span> <span class="na">path=</span><span class="s">"client.elf"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/protection_domain&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;end</span> <span class="na">pd=</span><span class="s">"server"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;end</span> <span class="na">pd=</span><span class="s">"client"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+</code></pre></div></div>
+
+<p>To Microkit 2.0.0:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;protection_domain</span> <span class="na">name=</span><span class="s">"server"</span> <span class="na">priority=</span><span class="s">"254"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;program_image</span> <span class="na">path=</span><span class="s">"server.elf"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/protection_domain&gt;</span>
+<span class="nt">&lt;protection_domain</span> <span class="na">name=</span><span class="s">"client"</span> <span class="na">priority=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;program_image</span> <span class="na">path=</span><span class="s">"client.elf"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/protection_domain&gt;</span>
+<span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;end</span> <span class="na">pd=</span><span class="s">"server"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;end</span> <span class="na">pd=</span><span class="s">"client"</span> <span class="na">pp=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+</code></pre></div></div>
+
+<p>Depending on your use-case you may also want to specify what end is allowed
+to notify as well. For example, if the only communication between <code class="language-plaintext highlighter-rouge">server</code>
+and <code class="language-plaintext highlighter-rouge">client</code> was PPC, you may want the channel to be the following:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;channel&gt;</span>
+    <span class="nt">&lt;end</span> <span class="na">pd=</span><span class="s">"server"</span> <span class="na">notify=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;end</span> <span class="na">pd=</span><span class="s">"client"</span> <span class="na">notify=</span><span class="s">"false"</span> <span class="na">pp=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/channel&gt;</span>
+</code></pre></div></div>
+
+<p>You can find all the details in the
+<a href="https://github.com/seL4/microkit/blob/2.0.0/docs/manual.md#channel">channel section of the manual</a>.</p>
 
 <h2 id="full-changelog">Full changelog</h2>
 
-<p>Use <code class="language-plaintext highlighter-rouge">git log 59f3d7ecea21068281210e7dc91f66155dff9cc9..1.3.0</code> in <a href="https://github.com/seL4/microkit/">https://github.com/seL4/microkit/</a></p>
+<p>Use <code class="language-plaintext highlighter-rouge">git log 1.4.1..2.0.0</code> in <a href="https://github.com/seL4/microkit/">https://github.com/seL4/microkit/</a></p>
 
 <h2 id="more-details">More details</h2>
 
@@ -293,7 +389,7 @@ or ask on the mailing list!</p>
           <h3>Releases</h3>
       
           <li>
-            <a style="" href="/releases/microkit/2.0.0.html">
+            <a style=" font-weight: bold; " href="/releases/microkit/2.0.0.html">
               2.0.0
             </a>
           </li>
@@ -314,7 +410,7 @@ or ask on the mailing list!</p>
   
       
           <li>
-            <a style=" font-weight: bold; " href="/releases/microkit/1.3.0.html">
+            <a style="" href="/releases/microkit/1.3.0.html">
               1.3.0
             </a>
           </li>
@@ -462,9 +558,9 @@ or ask on the mailing list!</p>
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/microkit/1.3.0.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/microkit/2.0.0.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/1.3.0.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/2.0.0.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
