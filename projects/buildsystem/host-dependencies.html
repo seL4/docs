@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-03-19 03:20:57 +0000 -->
+<!-- Page last generated 2025-03-19 03:37:01 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -334,11 +334,32 @@
 
 <p>Regardless of your Linux distribution, python dependencies are required to build seL4, the manual and its proofs. To install you can run:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> setuptools
-pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> setuptools sel4-deps
 </code></pre></div></div>
 
 <p>(Some distributions use <code class="language-plaintext highlighter-rouge">pip</code> for python3, others use <code class="language-plaintext highlighter-rouge">pip3</code>.  Use the Python 3 version for your distribution)</p>
+
+<details>
+  <summary>Error: Python environment is externally managed</summary>
+  <div>
+
+    <p>Some Linux distributions have changed how Python is managed. If you get an error
+saying the Python ‘environment is externally managed’ follow the instructions
+below. The first two steps are needed only once for setup.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> venv seL4-venv
+./seL4-venv/bin/pip <span class="nb">install </span>sel4-deps
+</code></pre></div>    </div>
+
+    <p>The following step is needed every time you start using the build environment
+in a new shell.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ./seL4-venv/bin/activate
+</code></pre></div>    </div>
+
+    <p>It is not important where the <code class="language-plaintext highlighter-rouge">seL4-venv</code> directory is located.</p>
+  </div>
+</details>
 
 <h2 id="camkes-build-dependencies">CAmkES Build Dependencies</h2>
 
@@ -350,6 +371,28 @@ pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> camkes-deps
 </code></pre></div></div>
+
+<details>
+  <summary>Error: Python environment is externally managed</summary>
+  <div>
+
+    <p>Some Linux distributions have changed how Python is managed. If you get an error
+saying the Python ‘environment is externally managed’ follow the instructions
+below. The first two steps are needed only once for setup.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> venv seL4-venv
+./seL4-venv/bin/pip <span class="nb">install </span>camkes-deps
+</code></pre></div>    </div>
+
+    <p>The following step is needed every time you start using the build environment
+in a new shell.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ./seL4-venv/bin/activate
+</code></pre></div>    </div>
+
+    <p>It is not important where the <code class="language-plaintext highlighter-rouge">seL4-venv</code> directory is located.</p>
+  </div>
+</details>
 
 <h3 id="haskell-dependencies">Haskell Dependencies</h3>
 
@@ -789,7 +832,7 @@ statements.</p>
         </li>
         
           <li>
-            Site last updated: Mon Mar 17 11:44:11 2025 +1100 3592151e77
+            Site last updated: Wed Mar 19 14:35:11 2025 +1100 988912e5c9
           </li>
           <li>
                 Page last updated: Mon Sep 23 12:58:08 2024 +0200 7c251159a6
