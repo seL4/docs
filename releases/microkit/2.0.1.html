@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>1.4.1 | seL4 docs</title>
+    <title>2.0.1 | seL4 docs</title>
 
     <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
@@ -66,7 +66,7 @@
 
         
           <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">1.4.1</span>
+            <span property="name">2.0.1</span>
             <meta property="position" content="2" /></li>
           
     </ol>
@@ -118,45 +118,26 @@
 
   </div>
   <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="microkit-release-141">Microkit Release 1.4.1</h1>
+    <h1 id="microkit-release-201">Microkit Release 2.0.1</h1>
 
-<h4 id="2024-08-16">2024-08-16</h4>
+<h4 id="2025-03-20">2025-03-20</h4>
 
 <p>This release contains various bug fixes. It does not include any new features.</p>
 
 <ul>
-  <li>Fixed two bugs in the tool that lead to initialisation failure on larger Microkit systems.</li>
-  <li>Disabled the <code class="language-plaintext highlighter-rouge">KernelArmVtimerUpdateVOffset</code> kernel configuration option by default.
-    <ul>
-      <li>This is necessary for Microkit VMs where they rely on knowing the actual surpassed time.
-More details are in the <a href="https://github.com/seL4/microkit/pull/202">pull request</a>.</li>
-    </ul>
-  </li>
-  <li>Enabled FPU for QEMU RISC-V virt and Pine64 Star64.
-    <ul>
-      <li>libmicrokit builds with hardware floating point enabled and, while it does not use the FPU,
-it means that every object linked with libmicrokit must also build with hardware floating
-point enabled. Previously using floating point operations would cause a crash in user-space.</li>
-    </ul>
-  </li>
-  <li>Fixed the loader link address for the MaaXBoard.
-    <ul>
-      <li>This does mean that if you target the MaaxBoard you will have to load Microkit images at
-a different address. See the manual for details.</li>
-    </ul>
-  </li>
-  <li>Added error checking for overlapping memory regions.</li>
-  <li>Included every TCB register in the monitor logs when a fault occurs.</li>
-  <li>Made the tool compile from source with a Rust version lower that 1.79.0.</li>
-  <li>Specified a minimum Rust version for the tool (1.73.0).</li>
-  <li>Fixed typo in the <code class="language-plaintext highlighter-rouge">--help</code> output of the tool.</li>
-  <li>Minor README fixes.</li>
-  <li>Updated PyYAML dependency in requirements.txt to 6.0.2 (from 6.0).</li>
+  <li>Fixed a regression introduced in 2.0.0 when using channel numbers greater than 32.</li>
+  <li>Fixed building SDK on Linux AArch64 hosts.</li>
+  <li>Fixed loader output to always output return character before newline.</li>
+  <li>Fixed loader to initialise UART for QEMU virt AArch64 to silence warnings
+when using <code class="language-plaintext highlighter-rouge">-d guest_errors</code>.</li>
+  <li>Report error when user-specified PD mappings overlap with it’s own ELF
+or stack region.</li>
+  <li>Included kernel bug-fix that prevented Raspberry Pi 4B booting correctly.</li>
 </ul>
 
 <h2 id="full-changelog">Full changelog</h2>
 
-<p>Use <code class="language-plaintext highlighter-rouge">git log 1.4.0..1.4.1</code> in <a href="https://github.com/seL4/microkit/">https://github.com/seL4/microkit/</a></p>
+<p>Use <code class="language-plaintext highlighter-rouge">git log 2.0.0..2.0.1</code> in <a href="https://github.com/seL4/microkit/">https://github.com/seL4/microkit/</a></p>
 
 <h2 id="more-details">More details</h2>
 
@@ -260,7 +241,7 @@ or ask on the mailing list!</p>
           <h3>Releases</h3>
       
           <li>
-            <a style="" href="/releases/microkit/2.0.1.html">
+            <a style=" font-weight: bold; " href="/releases/microkit/2.0.1.html">
               2.0.1
             </a>
           </li>
@@ -274,7 +255,7 @@ or ask on the mailing list!</p>
   
       
           <li>
-            <a style=" font-weight: bold; " href="/releases/microkit/1.4.1.html">
+            <a style="" href="/releases/microkit/1.4.1.html">
               1.4.1
             </a>
           </li>
@@ -463,9 +444,9 @@ or ask on the mailing list!</p>
       </ul>
     </div>
     <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/microkit/1.4.1.md">View page on GitHub</a>
+<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/microkit/2.0.1.md">View page on GitHub</a>
       <br />
-      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/1.4.1.md">Edit page on GitHub</a>
+      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/2.0.1.md">Edit page on GitHub</a>
       <br />
       <a href="/sitemap">Sitemap</a>
     </div>
