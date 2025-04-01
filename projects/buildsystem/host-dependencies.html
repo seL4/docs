@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-03-31 03:27:11 +0000 -->
+<!-- Page last generated 2025-04-01 03:30:08 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -509,6 +509,28 @@ brew <span class="nb">install </span>riscv-tools
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--upgrade</span> pip
 pip3 <span class="nb">install</span> <span class="nt">--user</span> sel4-deps
 </code></pre></div></div>
+
+<details>
+  <summary>Error: Python environment is externally managed</summary>
+  <div>
+
+    <p>Some Linux distributions have changed how Python is managed. If you get an error
+saying the Python ‘environment is externally managed’ follow the instructions
+below. The first two steps are needed only once for setup.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> venv seL4-venv
+./seL4-venv/bin/pip <span class="nb">install </span>sel4-deps
+</code></pre></div>    </div>
+
+    <p>The following step is needed every time you start using the build environment
+in a new shell.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ./seL4-venv/bin/activate
+</code></pre></div>    </div>
+
+    <p>It is not important where the <code class="language-plaintext highlighter-rouge">seL4-venv</code> directory is located.</p>
+  </div>
+</details>
 
 <h3 id="haskell-stack">Haskell Stack</h3>
 
