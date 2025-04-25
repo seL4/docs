@@ -19,9 +19,9 @@ This documentation site is for cooperatively developing and sharing documentatio
 	<ul>
 	<li><a href="/Resources#background-and-terminology">seL4 Background</a></li>
 	<li><a href="/MaintainedRepositories">The source code</a></li>
-	<li><a href="/projects/sel4/documentation.html">Documentation</a></li>
-	<li><a href="/projects/sel4/frequently-asked-questions.html">Frequently Asked Questions (FAQ)</a></li>
-	<li><a href="/projects/roadmap.html">Roadmap</a></li>
+	<li><a href="https://sel4.systems/Learn/">Documentation</a></li>
+	<li><a href="https://sel4.systems/About/FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+	<li><a href="https://sel4.systems/roadmap.html">Roadmap</a></li>
 	<li><a href="/projects/buildsystem/host-dependencies.html">Build dependencies</a></li>
 	<li><a href="/Resources#running-sel4">Building and Running seL4</a></li>
 	<li><a href="/Hardware">Supported platforms</a></li>
@@ -29,16 +29,17 @@ This documentation site is for cooperatively developing and sharing documentatio
 	</ul>
   </div>
   <div class="col">
-   <h1><a href="/processes/">Contributing</a></h1>
+   <h1><a href="https://sel4.systems/Contribute/">Contributing</a></h1>
 	<p>Information about how to contribute to the seL4 platform and documentation.</p>
         <ul>
-        <li><a href="/processes/conduct.html">Code of Conduct</a></li>
-        <li><a href="/processes#development-processes">Development process</a></li>
-        <li><a href="/processes/roles.html">Roles</a></li>
-        <li><a href="/processes/contributing.html">Contribution process</a></li>
+        <li><a href="https://sel4.systems/Contribute/conduct.html">Code of Conduct</a></li>
+        <li><a href="https://sel4.systems/Contribute/roles.html">Roles</a></li>
+        <li><a href="https://sel4.systems/Contribute/">Contribution process</a></li>
         <li><a href="/processes/release-process.html">Release process</a></li>
-        <li><a href="/processes/rfc-process.html">Request For Comment (RFC) process</a></li>
-        <li><a href="/processes/style-guide.html">Style Guide</a></li>
+        <li><a href="https://sel4.systems/Contribute/rfc-process.html">RFC process</a></li>
+        <li><a href="https://sel4.systems/Contribute/style.html">Coding Conventions</a></li>
+        <li><a href="https://sel4.systems/Contribute/pull-requests.html">Pull Request Guide</a></li>
+        <li><a href="https://sel4.systems/Contribute/git-conventions.html">Git Conventions</a></li>
 	</ul>
   </div>
 </div>
@@ -70,7 +71,7 @@ This documentation site is for cooperatively developing and sharing documentatio
         <li><a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a></li>
         <li><a href="/projects/sel4/api-doc">API reference</a></li>
         <li><a href="https://trustworthy.systems/projects/microkit/tutorial/">Microkit</a></li>
-        <li><a href="https://github.com/seL4/rust-sel4">Rust</a></li>
+        <li><a href="https://github.com/seL4/rust-sel4/">Rust</a></li>
     </ul>
   </div>
 </div>

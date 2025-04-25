@@ -109,4 +109,4 @@ the Trustworthy Systems group at UNSW for the foreseeable future, as this
 not only requires a good understanding of the kernel design and
 implementation, but also a good understanding of what is feasible to verify.
 Several of these internal projects are reasonably mature and will be
-published soon, see also the [seL4 roadmap](/projects/roadmap.html).
+published soon, see also the [seL4 roadmap](https://sel4.systems/roadmap.html).

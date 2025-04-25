@@ -38,7 +38,7 @@ cd seL4-CAmkES-L4v-dockerfiles
 make user
 ```
 
-This will give you a terminal inside a container that has all the relevant tools to build, simulate, and test seL4 & Camkes programs. 
+This will give you a terminal inside a container that has all the relevant tools to build, simulate, and test seL4 & Camkes programs.
 
 The first time you run this, docker will fetch the relevant images, which may take a while.
 
@@ -65,7 +65,7 @@ container
 to start the container in the current directory you are in.
 
 ## An example workflow:
-A good workflow is to run two terminals: 
+A good workflow is to run two terminals:
 
  - terminal A is just a normal terminal, and is used for git operations, editing (e.g., vim, emacs), and other normal operations.
  - terminal B is running in a container, and is only used for compilation.
@@ -92,7 +92,7 @@ jblogs@host:~$ cd ~/seL4test
 jblogs@host:~/seL4test$ container  # using the bash alias defined above
 jblogs@in-container:/host$ mkdir build-x86
 jblogs@in-container:/host$ cd build-x86
-jblogs@in-container:/host/build-x86$ ../init-build.sh -DPLATFORM=x86_64 -DSIMULATION=TRUE 
+jblogs@in-container:/host/build-x86$ ../init-build.sh -DPLATFORM=x86_64 -DSIMULATION=TRUE
 jblogs@in-container:/host/build-x86$ ninja
 ```
 
@@ -114,5 +114,5 @@ The CI software always uses the `latest` docker image, but images are also tagge
 
 You can find the dockerfiles and supporting Makefile [here](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles)
 
-Pull-requests and issues are [welcome](https://docs.sel4.systems/Contributing).
-    
+Pull-requests and issues are [welcome](https://sel4.systems/Contribute/).
+

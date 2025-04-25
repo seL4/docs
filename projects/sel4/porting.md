@@ -208,5 +208,6 @@ to shorten memory regions in DTS memory nodes to check you are touching the corr
 
 ## Contributing
 
-Once you have a working port that passes seL4test, see the guides for [contributing in general]
-and [contributing kernel changes](https://docs.sel4.systems/processes/contributing.html).
+Once you have a working port that passes seL4test, see the guides for
+[contributing in general](https://sel4.systems/Contribute/)
+and [contributing kernel changes](https://docs.sel4.systems/projects/sel4/kernel-contribution.html).
