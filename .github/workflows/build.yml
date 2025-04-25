@@ -18,7 +18,7 @@ on:
 jobs:
   build:
     name: Site
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
       with:
@@ -45,7 +45,7 @@ jobs:
             github.event_name == 'workflow_dispatch') }}
     needs: build
     name: 'Deploy'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
       with:
