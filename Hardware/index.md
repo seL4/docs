@@ -54,7 +54,7 @@ commitment, to a degree depending on the nature of the contribution.
   implications and expectations detailed in our [guidelines for contributing
   kernel code](../projects/sel4/kernel-contribution.html));
 
-* You can check the [roadmap](../projects/roadmap.html) for any planned
+* You can check the [roadmap](https://sel4.systems/roadmap.html) for any planned
   contributions, from the seL4 Foundation or larger community, such on any new
   architecture ports, new large formal verifications, or large or fundamental
   new features;

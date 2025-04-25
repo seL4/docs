@@ -73,7 +73,7 @@ interfaces, or the kernel startup at boot.
 
 The proofs for RISCV64\_MCS/ARM\_MCS (mixed-criticality extensions to real-time
 seL4 features), as well as security proofs for AARCH64 are in progress. Refer to
-the [roadmap](/projects/roadmap.html) for status and upcoming features.
+the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming features.
 
 ## ARM Sabre Lite
 

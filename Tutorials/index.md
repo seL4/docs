@@ -43,7 +43,7 @@ Additional resources to assist with learning:
 - [API references](../../projects/sel4/api-doc)
 - The [How to](how-to) page provides links to tutorial solutions as quick references for seL4 calls and methods.
 - The [seL4 white paper](https://sel4.systems/About/seL4-whitepaper.pdf)
-- [FAQs](../../projects/sel4/frequently-asked-questions)
+- [FAQs](https://sel4.systems/About/FAQ.html)
 - [Debugging guide](../../projects/sel4-tutorials/debugging-guide)
 - [Contact](../../Resources#contact)
 

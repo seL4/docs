@@ -17,7 +17,7 @@ To establish a usable development environment it is important to install your di
 
 These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 
-> As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.
+> As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/processes/docs-contributing.html) to the page.
 
 **Base dependencies**
 

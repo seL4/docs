@@ -49,7 +49,7 @@ this port (e.g. with regression testing) so that it continues to be
 updated and work as seL4 evolves.
 
 Once the code is ready for submission follow the
-[Contribution Guidelines](/processes/contributing.html) to submit the changes.
+[Contribution Guidelines](https://sel4.systems/Contribute/) to submit the changes.
 
 ## Architecture features
 
@@ -68,7 +68,7 @@ start an initial discussion on one of our [communication channels](https://sel4.
 to check if such a feature is not already being worked on, if it is considered
 appropriate to include in the kernel, etc.
 
-Then start a [Request For Comment (RFC)](/processes/rfc-process)
+Then start a [Request For Comment (RFC)](https://sel4.systems/Contribute/rfc-process.html)
 describing your design and plans, and engage in discussion with others
 about this.  The goal is to get feedback into specific design
 decisions, as well as to get agreement on the general direction and
@@ -101,7 +101,7 @@ for how to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.
 
 Once the implementation is complete follow the [Contribution
-Guidelines](processes/contributing.html) for submitting changes.
+Guidelines](https://sel4.systems/Contribute/) for submitting changes.
 
 ## Architecture Ports
 
@@ -148,7 +148,7 @@ for how to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.
 
 Once the implementation is complete follow the [Contribution
-Guidelines](processes/contributing.html) for submitting changes.
+Guidelines](https://sel4.systems/Contribute/) for submitting changes.
 
 ## Kernel Features
 
@@ -172,7 +172,7 @@ not already being worked on, if it is considered appropriate to
 include in the kernel, known issues and challenges with such features,
 etc.
 
-Then start a [Request For Comment (RFC)](/processes/rfc-process)
+Then start a [Request For Comment (RFC)](https://sel4.systems/Contribute/rfc-process.html)
 describing your design and plans, and engage in discussion with others
 about this.  The goal is to get feedback into specific design
 decisions, as well as to get agreement on the general direction and
@@ -201,7 +201,7 @@ plans of how to ensure that it works on all supported platforms (where
 possible).
 
 Once the implementation is complete follow the [Contribution
-Guidelines](processes/contributing.html) for submitting changes.
+Guidelines](https://sel4.systems/Contribute/) for submitting changes.
 
 ## Proof Contributions
 
