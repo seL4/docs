@@ -3,6 +3,9 @@ toc: true
 title: Tutorials
 layout: tutorial
 description: overview of seL4 and related tutorials
+redirect_from:
+  - /projects/sel4-tutorials.html
+  - /projects/sel4-tutorials/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
