@@ -1,0 +1,68 @@
+---
+regenerate: true
+layout: none
+---
+/*
+ * Copyright 2020 seL4 Project a Series of LF Projects, LLC.
+ * SPDX-License-Identifier: GPL-2.0-only
+ */
+
+@import "tailwindcss";
+@import "../../_includes/theme.css";
+@import "../../_includes/highlight.css";
+
+@plugin "@tailwindcss/typography";
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  html {
+    font-family: "Roboto", system-ui, sans-serif;
+  }
+}
+
+@utility text-dark {
+  @apply text-darkcol dark:text-darkcol_inv;
+}
+
+@utility text-light {
+  @apply text-lightcol dark:text-lightcol_inv;
+}
+
+@utility text-lighter {
+  @apply text-lightercol dark:text-lightercol_inv;
+}
+
+@utility text-sm-base {
+  @apply text-sm sm:text-base;
+}
+
+@utility theprose-nodark {
+  @apply prose lg:prose-lg max-w-(--breakpoint-md)
+         prose-pre:bg-slate-800
+         prose-p:leading-7 prose-li:leading-7
+         prose-li:marker:text-lightercol
+         prose-li:[li_li]:my-1.5;
+}
+
+@utility theprose {
+  @apply theprose-nodark dark:prose-invert
+         prose-li:dark:marker:text-lightercol_inv;
+}
+
