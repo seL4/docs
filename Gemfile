@@ -13,9 +13,14 @@ source "https://rubygems.org"
 # Happy Jekylling!
 gem "jekyll"
 
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
-# gem "github-pages", group: :jekyll_plugins
+# Other dependencies
+gem "html-proofer", "~>4"
+
+# Ruby 3.3 warns about these being moved out of std lib and recommends adding
+# them here:
+gem "base64"
+gem "csv"
+gem "bigdecimal"
 
 # If you have any plugins, put them here!
 # Look here for supported github plugins: https://pages.github.com/versions/
@@ -27,10 +32,9 @@ group :jekyll_plugins do
   gem 'jekyll-toc'
   gem 'jekyll-redirect-from'
   gem 'jekyll-remote-theme'
+  gem "jekyll-postcss-v2"
+  gem "jekyll-inline-svg"
 end
-
-gem 'sass-embedded', '<=1.53'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
