@@ -26,15 +26,6 @@ missed something.
 
 ### Install
 
-#### Submodules
-
-You need to run this only once after you have cloned this the repo.
-
-```sh
-git submodule init
-git submodule update
-```
-
 #### Ruby
 
 We recommend using [rbenv](https://github.com/rbenv/rbenv) to install the
@@ -121,10 +112,7 @@ it was last updated located in the footer based on the git history.
 The markdown pages are rendered using
 [Kramdown](https://kramdown.gettalong.org/), a ruby-based markdown converter
 that is configured to interpret the markdown files (`.md`) as GitHub flavoured
-markdown.  We are currently using the `jekyll-theme-bootstrap` theme that
-provides a sass implementation of bootstrap.  Our custom styling is contained in
-`assets/css/style.scss`.  `HTML` templates are in either `\_layouts` or
-`\_includes`.
+markdown.
 
 ## Compliance, style and formatting checks
 
