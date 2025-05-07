@@ -2,22 +2,13 @@
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% endcomment %}
-{% comment %}
-This file was inspired by the file of the same name in the minima template.
-{% endcomment %}
-
-<footer class="site-footer">
-
-  <h2 class="footer-heading">{{ site.title | escape }}</h2>
-
-  <div class="footer-col-wrapper">
-
-    <div class="col-md-2">
+<footer class="bg-gray-800 text-gray-500 pt-10 pb-12">
+  <div class="grid grid-cols-12">
+    <div class="col-span-2 pl-6">
       {% include social.html %}
     </div>
-
-    <div class="col-md-8">
-      <ul class="list-unstyled">
+    <div class="col-span-8">
+      <ul>
         <li>
           {{ site.description | escape }}
         </li>
@@ -35,7 +26,7 @@ This file was inspired by the file of the same name in the minima template.
         {% endif %}
       </ul>
     </div>
-    <div class="col-md-2">
+    <div class="col-span-2">
 {% comment %}
 Collection pages set their absolute path variable relative to the site.collections_dir property.
 To provide a URL to this page in the GitHub repository, we need to amend the path.
@@ -43,13 +34,9 @@ To provide a URL to this page in the GitHub repository, we need to amend the pat
 {%- capture src_path -%}
 {% if page.collection %}{{site.collections_dir}}/{{page.path}}{% else %}{{page.path}}{% endif %}
 {%- endcapture -%}
-      <a href="{{site.git_repo | append: '/blob/master/' | append: src_path}}">View page on GitHub</a>
-      <br />
       <a href="{{site.git_repo | append: '/edit/master/' | append: src_path}}">Edit page on GitHub</a>
-      <br />
+      <br>
       <a href="/sitemap">Sitemap</a>
     </div>
-
   </div>
-
 </footer>
