@@ -23,12 +23,9 @@ baseurl: "" # the subpath of your site, e.g. /blog
 git_repo: https://github.com/seL4/docs
 url: "https://docs.sel4.systems"
 static_url: "https://docs.sel4.systems"
-google_analytics: UA-117737473-2
 
 description: "This site is for displaying seL4 related documentation.  Pull requests are welcome."
-github_username:
-  - "sel4"
-  - "sel4proj"
+github_username: "sel4"
 
 collections_dir: content_collections
 
@@ -69,8 +66,7 @@ defaults:
       type: "pages"
     values:
       layout: "project"
-  -
-    scope:
+  - scope:
       path: ""
     values:
       layout: "default"
@@ -80,10 +76,6 @@ defaults:
 # Themes and plugins transparently add files to the site project.  To see what plugins
 # are being used run `bundle show`.  To see what files are contributed by each plugin:
 #  ls `bundle show $plugin_name`
-# The jekyll-theme-bootstrap dependency probably contributes the most files to site generation, so it would
-# be the first place to look if something weird is happening with layout/theming.
-# This theme provides a sass port of bootstrap that is imported using our assets/css/style.scss file.
-remote_theme: matrixfox/jekyll-theme-bootstrap@v0.0.5
 markdown: Kramdown
 
 plugins:
@@ -99,7 +91,11 @@ plugins:
   - jekyll-toc
   # Allow multiple urls to redirect to a single page
   - jekyll-redirect-from
-  - jekyll-remote-theme
+  # For tailwind postcss
+  - jekyll-postcss-v2
+  # For icons
+  - jekyll-inline-svg
+
 
 toc:
     min_level: 2 # default: 1
@@ -124,8 +120,12 @@ exclude:
   - dependencies
   - Makefile
   - README.md
-  - LICENSE.txt
+  - LICENSES/
   - tools/
-  - assets/css/highlighting/demos
-  - assets/css/highlighting/tools
-  - assets/css/highlighting/index.html
+  - package.json
+  - postcss.config.js
+  - package-lock.json
+  - node_modules/
+  - "**/*.license"
+  - .github/
+  - .reuse/
