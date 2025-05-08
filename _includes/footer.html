@@ -2,41 +2,20 @@
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% endcomment %}
-<footer class="bg-gray-800 text-gray-500 pt-10 pb-12">
-  <div class="grid grid-cols-12">
-    <div class="col-span-2 pl-6">
-      {% include social.html %}
-    </div>
-    <div class="col-span-8">
-      <ul>
-        <li>
-          {{ site.description | escape }}
-        </li>
-        {% if jekyll.environment == "production" %}
-          <li>
-            Site last updated: {{ site.data.generated.date }}
-          </li>
-          <li>
-            {%- for member in site.data.generated.timestamps %}
-              {%- if page.path == member.page %}
-                Page last updated: {{ member.date }}
-              {%- endif %}
-            {%- endfor %}
-          </li>
-        {% endif %}
-      </ul>
-    </div>
-    <div class="col-span-2">
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-sm font-semibold text-lighter">
+  <a href="{{ '/sitemap.html' | relative_url }}"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <div class="flex-1"></div>
 {% comment %}
 Collection pages set their absolute path variable relative to the site.collections_dir property.
 To provide a URL to this page in the GitHub repository, we need to amend the path.
 {% endcomment %}
-{%- capture src_path -%}
-{% if page.collection %}{{site.collections_dir}}/{{page.path}}{% else %}{{page.path}}{% endif %}
-{%- endcapture -%}
-      <a href="{{site.git_repo | append: '/edit/master/' | append: src_path}}">Edit page on GitHub</a>
-      <br>
-      <a href="/sitemap">Sitemap</a>
-    </div>
-  </div>
+{%- if page.collection -%}
+{%-  assign src_path = site.collections_dir | append: "/" | append: page.path -%}
+{%- else -%}
+{%-  assign src_path = page.path -%}
+{%- endif -%}
+  <a href="{{site.git_repo | append: '/edit/master/' | append: src_path}}"
+     class="flex-none  hover:text-light hover:underline">Edit page on GitHub</a>
 </footer>

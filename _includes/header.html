@@ -1,23 +1,26 @@
 {% comment %}
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
-
-This header is responsible for the seL4 logo and top h2 links.
 {% endcomment %}
-<header>
-  <ul class="grid grid-cols-2 items-center px-10">
-    <li>
-            <a href="{{ '/' | relative_url }}">
-              <img src="/assets/logo-text-white.svg" alt="seL4 logo" />
-            </a>
-    </li>
-    <li>
-      <nav>
-        <iframe title="DuckDuckGo search bar"
-                src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems"
-                class="overflow-hidden mb-2 h-9 rounded-lg border-0 float-right"></iframe>
-      </nav>
-    </li>
-  </ul>
-  <div class="clear"></div>
+<header class="h-[3.5rem] w-full border-b-1 bordercol flex flex-row items-center gap-4 py-2">
+  <div class="flex-1"></div>
+  <a href="https://sel4.systems/TODO"
+     class="text-lighter hover:text-light hover:underline text-sm font-semibold">
+    Contact
+  </a>
+  <a href="https://sel4.systems/TODO"
+     class="text-lighter hover:text-light hover:underline text-sm font-semibold">
+    Support
+  </a>
+  <!-- github button -->
+  <a href="https://github.com/seL4"
+     class="mr-4 md:mr-0 px-3 pt-1 pb-2 block text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+    <span class="sr-only">seL4 on GitHub</span>
+    {% svg _icons/other/github.svg class="w-5 h-5 lg:w-6 lg:h-6" %}
+  </a>
+  <!-- main site button -->
+  <a href="https://sel4.systems"
+     class="button-outline md:h-8 lg:h-9 md:text-xs lg:text-sm mr-2 lg:mr-6">Main Site
+    {% svg _icons/other/external.svg class="inline-icon" %}
+  </a>
 </header>

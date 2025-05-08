@@ -1,0 +1,68 @@
+{% comment %}
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+{% endcomment %}
+{% assign page_url = page.url | split: "/" %}
+
+<a href="{{ '/' | relative_url }}">
+  <img src="/assets/logo-text-white.svg" alt="seL4 logo"
+       class="mx-auto mt-4 mb-10">
+</a>
+
+<ul class="px-4 my-10">
+{% for item in site.data.sidebar.toc %}
+{% if item.divider %}
+<li class="-mt-2">&nbsp;</li>
+{% else %}
+{% assign page_in_list = item.subfolderitems | where: "url", page.url | size %}
+{% if page_in_list == 1 %}
+{%   assign active_title="font-bold" %}
+{%   assign maybe_rotate="" %}
+{%   assign maybe_on="on" %}
+{% else %}
+{%   assign active_title="" %}
+{%   assign maybe_rotate="rotate-270" %}
+{%   assign maybe_on="" %}
+{% endif %}
+  <li class="mt-1 mb-2">
+    <div class="{{active_title}} mb-1 menu-title hover:text-hi">
+      {% svg _icons/chevron-down-mini.svg class="menu-chevron h-5 w-5 mb-1 -mr-0.5 inline cursor-pointer {{maybe_rotate}}" %}
+      <span class="cursor-pointer">{{ item.title }}</span>
+    </div>
+    <ul class="menu-content ml-6 pl-3 border-l-1 bordercol {{maybe_on}}">
+  {% for entry in item.subfolderitems %}
+    {% if entry.title %}
+      <li>
+        <div class="text-sm {{active_title}} menu-title text-light hover:text-hi">
+          {% svg _icons/chevron-down-mini.svg class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer {{maybe_rotate}}" %}
+          <span class="cursor-pointer">{{ entry.title }}</span>
+        </div>
+        <ul class="menu-content ml-3 pl-3 border-l-1 bordercol {{maybe_on}}">
+          {% for subentry in entry.subfolderitems %}
+            {% if page.url == entry.url %}
+            {%   assign active_item="font-bold text-hi" %}
+            {% else %}
+            {%   assign active_item="text-light" %}
+            {% endif %}
+            <li class="{{active_item}} text-sm leading-5 hover:text-hi">
+              <a href="{{ subentry.url | relative_url }}">{{ subentry.page }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      {% if page.url == entry.url %}
+      {%   assign active_item="font-bold text-hi" %}
+      {% else %}
+      {%   assign active_item="text-light" %}
+      {% endif %}
+        <li class="{{active_item}} text-sm leading-6 hover:text-hi">
+          <a href="{{ entry.url | relative_url }}">{{ entry.page }}</a>
+        </li>
+    {% endif %}
+  {% endfor %}
+    </ul>
+  </li>
+{% endif %}
+{% endfor %}
+</ul>
