@@ -22,6 +22,7 @@ Use a query string with the time of the last build to cache bust site CSS file.
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 
     <script defer src="{{ '/assets/js/menu.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/sidebar.js' | relative_url }}"></script>
 
   {%- if jekyll.environment == 'production' -%}
     <script defer data-domain="docs.sel4.systems"
@@ -29,9 +30,15 @@ Use a query string with the time of the last build to cache bust site CSS file.
   {%- endif -%}
   </head>
   <body class="flex flex-row h-screen dark:bg-darkblue bg-white text-dark">
-    <div class="flex-none w-70 bg-gradient-to-b border-gradient pr-px">
-      <div class="overflow-y-auto pr-1 std-bg min-h-full">
+    <div id="sidebar" class="flex-none w-(--sidebar-width) flex flex-row">
+      <div class="flex-1 overflow-y-auto bg-std min-h-full">
         {% include sidebar.html %}
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gradient-to-b border-gradient w-px overflow-visible">
+        <div class="absolute -right-[calc(0.25rem-1px)] top-[calc(50%-0.5rem)]
+                    h-4 w-1 bg-gray-300 dark:bg-gray-700"></div>
       </div>
     </div>
     <div class="flex-1">
