@@ -29,10 +29,20 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
       {% svg _icons/chevron-down-mini.svg class="menu-chevron h-5 w-5 mb-1 -mr-0.5 inline cursor-pointer {{maybe_rotate}}" %}
       <span class="cursor-pointer">{{ item.title }}</span>
     </div>
-    <ul class="menu-content ml-6 pl-3 border-l-1 bordercol {{maybe_on}}">
+    <ul class="menu-content ml-6 {{maybe_on}}">
   {% for entry in item.subfolderitems %}
     {% if entry.title %}
-      <li>
+      {% assign page_in_sublist = entry.subfolderitems | where: "url", page.url | size %}
+      {% if page_in_sublist == 1 %}
+      {%   assign active_title="font-bold" %}
+      {%   assign maybe_rotate="" %}
+      {%   assign maybe_on="on" %}
+      {% else %}
+      {%   assign active_title="" %}
+      {%   assign maybe_rotate="rotate-270" %}
+      {%   assign maybe_on="" %}
+      {% endif %}
+      <li class="pl-3 border-l-1 bordercol">
         <div class="text-sm {{active_title}} menu-title text-light hover:text-hi">
           {% svg _icons/chevron-down-mini.svg class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer {{maybe_rotate}}" %}
           <span class="cursor-pointer">{{ entry.title }}</span>
@@ -52,11 +62,11 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
       </li>
     {% else %}
       {% if page.url == entry.url %}
-      {%   assign active_item="font-bold text-hi" %}
+      {%   assign active_item="font-bold text-hi border-f_green-500" %}
       {% else %}
-      {%   assign active_item="text-light" %}
+      {%   assign active_item="text-light bordercol" %}
       {% endif %}
-        <li class="{{active_item}} text-sm leading-6 hover:text-hi">
+        <li class="{{active_item}} pl-3 border-l-1 text-sm leading-6 hover:text-hi">
           <a href="{{ entry.url | relative_url }}">{{ entry.page }}</a>
         </li>
     {% endif %}
