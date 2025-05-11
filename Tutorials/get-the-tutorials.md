@@ -31,7 +31,3 @@ repo sync
 `repo sync` may take a few moments to run
 
 *Hint:* The **Get the code** step only needs to be done once, i.e. before doing your first tutorial.
-
-<p>
-    Next: <a href="hello-world">Hello world</a>
-</p>
