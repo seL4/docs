@@ -30,25 +30,25 @@ For the verification status of all platforms, see [Hardware](/Hardware).
 
 | Feature                        | Hardware                          | Verification status | Available From      |
 | -                              | -                                 | -                   | -                   |
-| AARCH64 RPI3                   | [RPI3](/Hardware/Rpi3)            | No                  | [10.1.0](seL4_10.1.0) |
-| TX2 support (Aarch64 only)     | [TX2](/Hardware/JetsonTX2)        | No                  | [10.1.0](seL4_10.1.0) |
-| Support for more than 1 VM     | ARM                               | No                  | [10.1.0](seL4_10.1.0) |
-| 32-bit RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [10.0.0](seL4_10.0.0) |
-| 64-bit RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [9.0.1](seL4_9.0.1) |
-| Meltdown mitigation            | x86                               | No                  | [9.0.0](seL4_9.0.0) |
-| Spectre mitigation             | x86                               | No                  | [9.0.0](seL4_9.0.0) |
-| Zynq UltraScale+ MPSoC         | Xilinx ZCU102, ARMv8a, Cortex A53 | No                  | [8.0.0](seL4_8.0.0) |
-| Multiboot2 support             | x86                               | No                  | [8.0.0](seL4_8.0.0) |
-| CMake based build system       | all                               | N/A                 | [7.0.0](seL4_7.0.0) |
-| ARM 32-bit SMP                 | [Sabre](/Hardware/sabreLite)      | No                  | [6.0.0](seL4_6.0.0) |
-| ARMv7 32-bit FPU support       | ARM                               | No                  | [6.0.0](seL4_6.0.0) |
-| ARM 64-bit support             | Aarch64                           | No                  | [5.0.0](seL4_5.0.0) |
-| 64-bit x86 support             | x86\_64                           | No                  | [4.0.0](seL4_4.0.0) |
-| Raspberry Pi 3 support         | [RPI3](/Hardware/Rpi3)            | No                  | [4.0.0](seL4_4.0.0) |
-| ARM Hypervisor initial support | ARM                               | FC                  | [3.2.0](seL4_3.2.0) |
-| First ARMv8 support            | [HiKey](/Hardware/HiKey)          | No                  | [3.1.0](seL4_3.1.0) |
-| NVIDIA Tegra K1 support        | [TK1](/Hardware/jetsontk1)        | No                  | [3.0.1](seL4_3.0.1) |
-| Notification binding           | all                               | Yes                 | [2.0.0](seL4_2.0.0) |
+| AARCH64 RPI3                   | [RPI3](/Hardware/Rpi3)            | No                  | [10.1.0](10.1.0) |
+| TX2 support (Aarch64 only)     | [TX2](/Hardware/JetsonTX2)        | No                  | [10.1.0](10.1.0) |
+| Support for more than 1 VM     | ARM                               | No                  | [10.1.0](10.1.0) |
+| 32-bit RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [10.0.0](10.0.0) |
+| 64-bit RISC-V architecture support    | RISC-V (Spike simulation target)  | No                  | [9.0.1](9.0.1) |
+| Meltdown mitigation            | x86                               | No                  | [9.0.0](9.0.0) |
+| Spectre mitigation             | x86                               | No                  | [9.0.0](9.0.0) |
+| Zynq UltraScale+ MPSoC         | Xilinx ZCU102, ARMv8a, Cortex A53 | No                  | [8.0.0](8.0.0) |
+| Multiboot2 support             | x86                               | No                  | [8.0.0](8.0.0) |
+| CMake based build system       | all                               | N/A                 | [7.0.0](7.0.0) |
+| ARM 32-bit SMP                 | [Sabre](/Hardware/sabreLite)      | No                  | [6.0.0](6.0.0) |
+| ARMv7 32-bit FPU support       | ARM                               | No                  | [6.0.0](6.0.0) |
+| ARM 64-bit support             | Aarch64                           | No                  | [5.0.0](5.0.0) |
+| 64-bit x86 support             | x86\_64                           | No                  | [4.0.0](4.0.0) |
+| Raspberry Pi 3 support         | [RPI3](/Hardware/Rpi3)            | No                  | [4.0.0](4.0.0) |
+| ARM Hypervisor initial support | ARM                               | FC                  | [3.2.0](3.2.0) |
+| First ARMv8 support            | [HiKey](/Hardware/HiKey)          | No                  | [3.1.0](3.1.0) |
+| NVIDIA Tegra K1 support        | [TK1](/Hardware/jetsontk1)        | No                  | [3.0.1](3.0.1) |
+| Notification binding           | all                               | Yes                 | [2.0.0](2.0.0) |
 
 ## Master (verified kernel)
 {% assign coll = site['releases'] | where: "project", "sel4" %}
