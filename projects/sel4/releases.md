@@ -1,6 +1,6 @@
 ---
 title: seL4 releases
-permalink: /releases/sel4
+permalink: /releases/seL4.html
 redirect_from:
   - /sel4_release
 SPDX-License-Identifier: CC-BY-SA-4.0
