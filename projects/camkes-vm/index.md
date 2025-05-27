@@ -2,7 +2,6 @@
 toc: true
 redirect_from:
   - /VM/CAmkESX86VM
-layout: project
 project: camkes-vm
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
@@ -97,7 +96,7 @@ to
 ```cmake
 AddToFileServer("rootfs.cpio" <ROOTFS_FILENAME>)
 ```
-where `<ROOTFS_FILENAME>` is replaced with the filename of the rootfs file you 
+where `<ROOTFS_FILENAME>` is replaced with the filename of the rootfs file you
 added in `projects/vm/minimal`.
 
 Since we'll be using a real hard drive, we need to change the boot
@@ -118,7 +117,7 @@ Enter 'help' for a list of built-in commands.
 
 You should get dropped into a shell inside the root filesystem. You can
 run commands from here:
-``` 
+```
 (initramfs) pwd
 /
 (initramfs) ls
@@ -151,9 +150,9 @@ configuration {
         {"start":0x4080, "end":0x4088, "pci_device":0x1f, "name":"SATA"},
         {"start":0x4060, "end":0x4080, "pci_device":0x1f, "name":"SATA"},
     ];
-    
-    vm0_config.pci_devices = [ 
-        {   
+
+    vm0_config.pci_devices = [
+        {
             "name":"SATA",
             "bus":0,
             "dev":0x1f,
@@ -162,10 +161,10 @@ configuration {
             "memory":[
                 {"paddr":0xc0713000, "size":0x800, "page_bits":12},
             ],
-        },  
+        },
     ];
 
-    vm0_config.irqs = [ 
+    vm0_config.irqs = [
         {"name":"SATA", "source":19, "level_trig":1, "active_low":1, "dest":11},
     ];
 }
@@ -178,27 +177,27 @@ configuration {
 
     vm0_config.pci_devices_iospace = 1
 
-    vm0_config.ioports = [ 
+    vm0_config.ioports = [
         {"start":0x4080, "end":0x4090, "pci_device":0x1f, "name":"SATA"},
         {"start":0x4090, "end":0x40a0, "pci_device":0x1f, "name":"SATA"},
         {"start":0x40b0, "end":0x40b8, "pci_device":0x1f, "name":"SATA"},
         {"start":0x40b8, "end":0x40c0, "pci_device":0x1f, "name":"SATA"},
         {"start":0x40c8, "end":0x40cc, "pci_device":0x1f, "name":"SATA"},
         {"start":0x40cc, "end":0x40d0, "pci_device":0x1f, "name":"SATA"},
-    ];  
+    ];
 
-    vm0_config.pci_devices = [ 
-        {   
+    vm0_config.pci_devices = [
+        {
             "name":"SATA",
             "bus":0,
             "dev":0x1f,
             "fun":2,
             "irq":"SATA",
             "memory":[],
-        },  
-    ];  
+        },
+    ];
 
-    vm0_config.irqs = [ 
+    vm0_config.irqs = [
         {"name":"SATA", "source":19, "level_trig":1, "active_low":1, "dest":11},
     ];
 }
@@ -208,7 +207,7 @@ Now rebuild and run:
 ```
 Ubuntu 16.04.1 LTS ertos-CMA34CR ttyS0
 
-ertos-CMA34CR login: 
+ertos-CMA34CR login:
 ```
 
 You should be able to log in and use the system largely as normal.
@@ -223,7 +222,7 @@ $ ip addr
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
+    inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 2: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1
     link/sit 0.0.0.0 brd 0.0.0.0
@@ -246,7 +245,7 @@ vm0_config.ioports = [
 ];
 
 vm0_config.pci_devices = [
-    {   
+    {
         "name":"SATA",
         "bus":0,
         "dev":0x1f,
@@ -283,17 +282,17 @@ $ ip addr
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
+    inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 2: enp0s2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
     link/ether 00:d0:81:09:0c:7d brd ff:ff:ff:ff:ff:ff
     inet 10.13.1.87/23 brd 10.13.1.255 scope global dynamic enp0s2
        valid_lft 14378sec preferred_lft 14378sec
-    inet6 2402:1800:4000:1:90b3:f9d:ae22:33b7/64 scope global temporary dynamic 
+    inet6 2402:1800:4000:1:90b3:f9d:ae22:33b7/64 scope global temporary dynamic
        valid_lft 86390sec preferred_lft 14390sec
-    inet6 2402:1800:4000:1:aa67:5925:2cbc:928f/64 scope global mngtmpaddr noprefixroute dynamic 
+    inet6 2402:1800:4000:1:aa67:5925:2cbc:928f/64 scope global mngtmpaddr noprefixroute dynamic
        valid_lft 86390sec preferred_lft 14390sec
-    inet6 fe80::cc47:129d:bdff:a2da/64 scope link 
+    inet6 fe80::cc47:129d:bdff:a2da/64 scope link
        valid_lft forever preferred_lft forever
 3: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN group default qlen 1
     link/sit 0.0.0.0 brd 0.0.0.0

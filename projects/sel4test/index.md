@@ -2,7 +2,7 @@
 toc: true
 redirect_from:
   - /seL4Test
-layout: project
+
 project: sel4test
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.

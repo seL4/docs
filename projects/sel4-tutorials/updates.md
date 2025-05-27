@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/sel4-tutorials
 project: sel4-tutorials
 SPDX-License-Identifier: CC-BY-SA-4.0

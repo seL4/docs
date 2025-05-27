@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/sel4runtime
 project: sel4runtime
 SPDX-License-Identifier: CC-BY-SA-4.0

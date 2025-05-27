@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/sel4bench
 project: sel4bench
 SPDX-License-Identifier: CC-BY-SA-4.0

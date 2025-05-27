@@ -1,5 +1,4 @@
 ---
-layout: project
 permalink: /updates/buildsystem
 project: buildsystem
 SPDX-License-Identifier: CC-BY-SA-4.0

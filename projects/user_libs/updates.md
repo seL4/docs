@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/user_libs
 project: user_libs
 SPDX-License-Identifier: CC-BY-SA-4.0

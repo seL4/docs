@@ -1,7 +1,7 @@
 ---
 title: The seL4 run-time
 toc: true
-layout: project
+
 project: sel4runtime
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.

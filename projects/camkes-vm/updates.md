@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/camkes-vm
 project: camkes-vm
 SPDX-License-Identifier: CC-BY-SA-4.0

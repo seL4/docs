@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/sel4test
 project: sel4test
 SPDX-License-Identifier: CC-BY-SA-4.0

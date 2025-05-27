@@ -1,5 +1,5 @@
 ---
-layout: project
+
 permalink: /updates/sel4webserver
 project: sel4webserver
 SPDX-License-Identifier: CC-BY-SA-4.0

@@ -1,5 +1,4 @@
 ---
-layout: collection
 title: seL4 releases
 permalink: /releases/sel4
 redirect_from:

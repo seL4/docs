@@ -1,5 +1,4 @@
 ---
-layout: collection
 title: CAmkES Releases
 permalink: /releases/camkes
 redirect_from:
