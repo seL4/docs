@@ -37,6 +37,12 @@ layout: none
   }
 }
 
+@custom-variant prose-inline-code {
+  & :is(:where(code:not(pre > code)):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+    @slot;
+  }
+}
+
 @utility bordercol {
   @apply border-gray-200 dark:border-gray-700;
 }
@@ -86,7 +92,14 @@ layout: none
          prose-h3:dark:bg-darkblue
          prose-h1:mb-3
          prose-h2:pb-3
-         prose-h2:pb-4;
+         prose-h2:pb-4
+         prose-inline-code:bg-gray-200
+         prose-inline-code:font-medium
+         prose-inline-code:rounded
+         prose-inline-code:px-1
+         prose-inline-code:pb-px
+         prose-inline-code:after:content-['']
+         prose-inline-code:before:content-[''];
 }
 
 @utility theprose {
