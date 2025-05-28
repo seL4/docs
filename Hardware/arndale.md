@@ -11,6 +11,7 @@ cpu: Cortex-A15
 Status: Unverified
 Contrib: Data61
 Maintained: "No"
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -37,12 +38,12 @@ For BL1 from the Android tree:
 |-|-|-|
 |BL1 |1 | |
 |BL2 (uboot-module)|31 (8k) | |
-|u-boot |63 |(24k) | 
+|u-boot |63 |(24k) |
 |!TrustZone |719 | |
 
 For BL1 from
 <https://wiki.linaro.org/Boards/Arndale/Setup/EnterpriseUbuntuServer?action=AttachFile&do=view&target=arndale-bl1.img>
- 
+
 
 |Key|Position (block)|file|
 |-|-|-|

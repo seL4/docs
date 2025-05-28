@@ -12,6 +12,7 @@ Contrib: "Data61, [Hesham Almatary](https://github.com/heshamelmatary)"
 Maintained: "seL4 Foundation"
 redirect_from:
   - /Hardware/RISCV
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

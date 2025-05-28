@@ -11,6 +11,7 @@ cpu: Cortex-A9
 Status: "[Verified](/projects/sel4/verified-configurations.html#exynos4)"
 Contrib: Data61
 Maintained: seL4 Foundation
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -23,7 +24,7 @@ Exynos4412 board.
 ## Client setup
 #### Hardware requirements:
 1. 5V power supply
-1. RS232 or USB to UART converter 
+1. RS232 or USB to UART converter
 1. USB OTG cable
 
 Note: The USB-UART converter that is shipped with the board requires a
@@ -105,12 +106,12 @@ Follow these steps to boot your program:
 To boot using fastboot:
 
   1.  At the u-boot prompt, type fastboot
- 
+
   1. On the client machine, run sudo fastboot devices to ensure that the device has been recognised. The device should have the label "SMDKEXYNOS-01".
- 
+
       1.  NOTE: fastboot fails silently if you do not have permissions
           to access the device. Try running with sudo.
- 
+
   1.  On the client machine, run fastboot boot sel4-uImage
 
 To boot from mmc:

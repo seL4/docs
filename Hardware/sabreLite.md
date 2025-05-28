@@ -12,6 +12,7 @@ cpu: Cortex-A9
 Status: "[Verified](/projects/sel4/verified-configurations.html#arm-sabre-lite)"
 Contrib: Data61
 Maintained: seL4 Foundation
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -61,11 +62,11 @@ USB-TTY converter has locked up.
 
 Now you are ready to load your image into memory and execute:
 ```bash
-$ lsusb 
-.... 
+$ lsusb
+....
 Bus 001 Device 019: ID
 15a2:0054 Freescale Semiconductor, Inc.
-.... 
+....
 $ sudo ./imx_usb image_file
 ```
 The image file that is used will typically be named
@@ -84,10 +85,10 @@ u-boot.bin
 
 Now you are ready to load your image into memory and execute:
 ```bash
-$ lsusb 
+$ lsusb
 ....
 Bus 001 Device 019: ID 15a2:0054 Freescale Semiconductor, Inc.
-.... 
+....
 $ sudo ./imx_usb image_file
 ```
 
@@ -123,7 +124,7 @@ Lite. The ones for Android support Fastboot; the mainline ones do not.
 
 We use the one from
 <git://github.com/boundarydevices/u-boot-2009-08.git> with these patches
-applied: 
+applied:
 
 |Name |Purpose |
 |-|-|
@@ -161,7 +162,7 @@ ext2load mmc 1:1 12000000 u-boot.bin
 # Initialise the SPI flash subsystem
 sf probe | sf probe 1
 
-# Erase 0x100000 bytes from the SPI flash starting at address 0x00000000 
+# Erase 0x100000 bytes from the SPI flash starting at address 0x00000000
 # This covers both U-Boot and its saved environment.
 sf erase 0 0x100000
 
@@ -171,7 +172,7 @@ sf write 0x12000000 0 ${filesize}
 
 # Ensure that the boot select switches are set appropriately, then reboot the Sabrelite
 ```
-## Booting seL4 applications 
+## Booting seL4 applications
 This assumes that the U-Boot version above is installed in SPI flash.
 
 |Command|Operation|

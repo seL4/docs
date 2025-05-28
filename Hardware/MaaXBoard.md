@@ -12,6 +12,7 @@ cpu: Cortex-A53 Quad 1.5 GHz
 Status: Unverified
 Contrib: "[Capgemini Engineering](https://capgemini-engineering.com)"
 Maintained: "[Capgemini Engineering](https://capgemini-engineering.com)"
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2022 seL4 Project a Series of LF Projects, LLC.
 ---

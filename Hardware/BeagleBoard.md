@@ -11,6 +11,7 @@ cpu: Cortex-A8
 Status: Unverified
 Contrib: Data61
 Maintained: seL4 Foundation
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -101,7 +102,7 @@ it thinks is a "modem", and then give you a good old console to work
 with. You are now in the bootloader, U-Boot, of the \~BeagleBoard. You
 can type commands here and it'll display the results.
 
-Some quick useful commands: 
+Some quick useful commands:
 
 |Command|Description|
 |-|-|
@@ -121,12 +122,12 @@ Some quick useful commands:
 Which after a few minutes should give you:
 
 Now, the ELF image we
-boot into is the `sel4test-driver-image-arm-omap3` file. 
+boot into is the `sel4test-driver-image-arm-omap3` file.
 Copy that file onto the sdcard (the boot loader will be able to load images into RAM from a FAT image: there is no need to do an image copy). If your SD card is not formatted, just format it using FAT32.
 Plug the SD card back into the BeagleBoard and reset the board by pressing the `S2` (reset) button.
 
 ### To run the image:
-``` 
+```
 mmc init
 mmcinfo
 fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-omap3
@@ -135,7 +136,7 @@ bootelf ${loadaddr}
 where loadaddr
 is some address, in this example defined as an environment variable.
 
-Note: by default, the image produced is relocated to run at address 0x82000000. If you want to change the address, you need to modify the file `projects/tools/elfloader-tool/gen_boot_image.sh` (look for the omap3 case). For the Beaglebone Black Rev A5, RAM is from address 0x80000000 - 0x9FFFFFFF. 
+Note: by default, the image produced is relocated to run at address 0x82000000. If you want to change the address, you need to modify the file `projects/tools/elfloader-tool/gen_boot_image.sh` (look for the omap3 case). For the Beaglebone Black Rev A5, RAM is from address 0x80000000 - 0x9FFFFFFF.
 
 Depending on the uBoot version present on the Beaglebone, the `bootelf` command might not be present. You can use the `go` command instead. I.e.:
 ```

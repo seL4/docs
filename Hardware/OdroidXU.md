@@ -11,6 +11,7 @@ cpu: Cortex-A15
 Status: "[Verified](/projects/sel4/verified-configurations.html#arm_hyp-exynos-5)"
 Contrib: Data61
 Maintained: seL4 Foundation
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

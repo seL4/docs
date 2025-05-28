@@ -11,6 +11,7 @@ cpu: Cortex-A15
 Status: "[FC with HYP, no SMMU](/projects/sel4/verified-configurations.html#arm_hyp-tk1)"
 Contrib: Data61
 Maintained: seL4 Foundation
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -71,7 +72,7 @@ are also valid for booting from MMC.
 
 ## Serial Connection
  The serial port is at 1V8 levels on J8, as
-follows: (pin one is farthest from the ground hole) 
+follows: (pin one is farthest from the ground hole)
 
 |Pin|Function|Direction|
 |-|-|-|
@@ -130,7 +131,7 @@ and on your host:
   (if the -e option isn't supported you
   can add -R to the above command or ignore it and manually Ctrl-C out
   of dfu in u-boot on the TK1-SOM)
-  
+
 
 This will load the `sel4test-driver-image-arm-tk1` file onto the TK1-SOM
 at address `$loadaddr`. You can then run it in uboot with
@@ -157,8 +158,8 @@ the other port too. Use a FAT32 or ext2 partition on the storage; put
 your image on it. You can either use a syslinux-style menu, or can boot
 directly.
 ```
-usb start 
-fatload usb 0:1 ${loadaddr} sel4test-image-arm 
+usb start
+fatload usb 0:1 ${loadaddr} sel4test-image-arm
 bootelf ${loadaddr}
 ```
 

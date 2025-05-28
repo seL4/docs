@@ -12,6 +12,7 @@ cpu: Cortex-A53 Quad 1.5 GHz
 Status: Unverified
 Contrib: Data61
 Maintained: seL4 Foundation
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

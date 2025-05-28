@@ -11,6 +11,7 @@ cpu: Cortex-A53
 Status: Unverified
 Contrib: "[DornerWorks](https://dornerworks.com)"
 Maintained: "[DornerWorks](https://dornerworks.com)"
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
