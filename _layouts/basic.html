@@ -41,10 +41,18 @@ Use a query string with the time of the last build to cache bust site CSS file.
     </div>
     <div class="flex-1">
       {% include header.html %}
-      <div class="h-[calc(100%-3rem)] flex flex-col max-w-full overflow-y-auto overflow-x-auto">
-        <main class="flex-1 mx-8 my-12" id="page-top">
+      <div class="h-[calc(100%-3rem)] flex flex-col max-w-full overflow-y-auto">
+        <main class="flex-1 ml-12 mr-12 lg:mr-70 my-12 max-w-full
+                     lg:max-w-[calc(100%-22rem)] overflow-x-auto" id="page-top">
           {{ content }}
         </main>
+        {%- if page.toc %}
+        <nav class="hidden lg:block absolute top-16 right-0 mt-10 pl-4 mr-6 w-60
+                    h-[calc(100%-10rem)] overflow-y-auto std-bg">
+          <div class="font-semibold mb-4 text-base text-dark">On this page</div>
+          {{ content | toc_only }}
+        </nav>
+        {% endif -%}
         {% include footer.html %}
       </div>
     </div>
