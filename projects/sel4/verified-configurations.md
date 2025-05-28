@@ -75,7 +75,7 @@ The proofs for RISCV64\_MCS/ARM\_MCS (mixed-criticality extensions to real-time
 seL4 features), as well as security proofs for AARCH64 are in progress. Refer to
 the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming features.
 
-## ARM Sabre Lite
+### ARM Sabre Lite
 
 | File | `ARM_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -84,7 +84,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-## ARM Exynos 4
+### ARM Exynos 4
 {: #exynos4}
 
 | File | `ARM_exynos4_verified.cmake`
@@ -94,7 +94,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-## ARM Exynos 5
+### ARM Exynos 5
 
 | File | `ARM_exynos5410_verified.cmake` and `ARM_exynos5422_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -103,7 +103,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-## ARM Hikey
+### ARM Hikey
 
 | File | `ARM_hikey_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -112,7 +112,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-## ARM TK1
+### ARM TK1
 {: #tk1}
 
 | File | `ARM_tk1_verified.cmake`
@@ -122,7 +122,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-## ARM Zynq7000
+### ARM Zynq7000
 {: #zynq7000}
 
 | File | `ARM_zynq7000_verified.cmake`
@@ -133,7 +133,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
 
-## ARM ZynqMP
+### ARM ZynqMP
 
 | File | `ARM_zynqmp_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -142,7 +142,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-## ARM IMX8MM-EVK
+### ARM IMX8MM-EVK
 {: #imx8mm}
 
 | File | `ARM_imx8mm_verified.cmake`
@@ -152,7 +152,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path
 
-## ARM\_HYP TK1
+### ARM\_HYP TK1
 
 File | `ARM_HYP_verified.cmake`
 Architecture | ARMv7, 32 bit
@@ -161,7 +161,7 @@ Floating-point support | No
 Hypervisor mode | Yes
 **Verified properties** | functional correctness, incl fast path
 
-## ARM\_HYP Exynos5
+### ARM\_HYP Exynos5
 
 File | `ARM_HYP_exynos5_verified.cmake` and `ARM_HYP_exynos5410_verified.cmake`
 Architecture | ARMv7, 32 bit
@@ -170,7 +170,7 @@ Floating-point support | No
 Hypervisor mode | Yes
 **Verified properties** | functional correctness, incl fast path
 
-## ARM\_MCS
+### ARM\_MCS
 
 File | `ARM_MCS_verified.cmake`
 Architecture | ARMv7, 32 bit
@@ -180,7 +180,7 @@ Hypervisor mode | No
 Mixed-Criticality-Systems API | Yes
 **Verified properties** | in progress (design-level functional correctness completed)
 
-## AARCH64
+### AARCH64
 
 | File | `AARCH64_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -189,7 +189,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-## AARCH64 RPI4
+### AARCH64 RPI4
 {: #bcm2711}
 
 | File | `AARCH64_bcm2711_verified.cmake`
@@ -199,7 +199,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-## AARCH64 Hikey
+### AARCH64 Hikey
 {: #hikey}
 
 | File | `AARCH64_hikey_verified.cmake`
@@ -209,7 +209,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-## AARCH64 Odroid C2
+### AARCH64 Odroid C2
 {: #odroidc2}
 
 | File | `AARCH64_odroidc2_verified.cmake`
@@ -219,7 +219,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-## AARCH64 Odroid C4
+### AARCH64 Odroid C4
 {: #odroidc4}
 
 | File | `AARCH64_odroidc4_verified.cmake`
@@ -229,7 +229,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-## AARCH64 ZynqMP
+### AARCH64 ZynqMP
 {: #zynqmp}
 
 | File | `AARCH64_zynqmp_verified.cmake`
@@ -239,7 +239,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-## RISCV64
+### RISCV64
 
 File | `RISCV64_verified.cmake`
 Architecture | RISC-V 64-bit
@@ -248,7 +248,7 @@ Floating-point support | No
 Hypervisor mode | No
 **Verified properties** | functional correctness, integrity (access control), confidentiality (information flow); verification of fast path in progress
 
-## RISCV64\_MCS
+### RISCV64\_MCS
 
 File | `RISCV64_MCS_verified.cmake`
 Architecture | RISC-V 64-bit
@@ -258,7 +258,7 @@ Hypervisor mode | No
 Mixed-Criticality-Systems API | Yes
 **Verified properties** | C verification in progress (design-level functional correctness completed)
 
-## X64
+### X64
 
 File | `X64_verified.cmake`
 Architecture/Platform | x86 64-bit
