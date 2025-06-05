@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # CapDL
 
 CapDL is the "Capability Distribution Language". It's used to describe
-the kernel objects a seL4 application needs, and how capabilities to
+the kernel objects an seL4 application needs, and how capabilities to
 those objects will be distributed.
 
 All CapDL-related projects are in this repo:

@@ -53,7 +53,7 @@ If the platform does not support qemu, the script will output
     Unsupported platform or architecture for simulation
 ```
 
-When simulating a seL4 system in Qemu, you should see output that is
+When simulating an seL4 system in Qemu, you should see output that is
 directed to the (emulated) UART device on your terminal:
 ```
 ELF-loader started on CPU: ARM Ltd. ARMv6 Part: 0xb36 r1p3
@@ -87,7 +87,7 @@ inspect CPU or device state, read and write memory, and single-step
 execution. More information about this functionality is available in the
 [Qemu documentation](https://qemu-project.gitlab.io/qemu/system/monitor.html).
 
-When debugging a seL4 project, the Qemu debugger is inherently limited.
+When debugging an seL4 project, the Qemu debugger is inherently limited.
 It has no understanding of your source code, so it is difficult to
 relate what you are seeing back to the C code you compiled. It is
 possible to get a richer debugging environment by connecting GDB to

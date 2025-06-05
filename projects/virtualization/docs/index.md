@@ -42,7 +42,7 @@ See below for usage documentation on various libsel4vmmplatsupport interfaces:
 * [sel4vmmplatsupport/guest_memory_util.h](api/libsel4vmmplatsupport_guest_memory_util): Provides various utilities and helpers for using the libsel4vm guest memory interface
 * [sel4vmmplatsupport/guest_vcpu_util.h](api/libsel4vmmplatsupport_guest_vcpu_util): Provides abstractions and helpers for managing libsel4vm vcpus
 * [sel4vmmplatsupport/ioports.h](api/libsel4vmmplatsupport_ioports): Useful abstraction for initialising, registering and handling ioport events for a guest VM instance
-* [sel4vmmplatsupport/drivers/cross_vm_connection.h](api/libsel4vmmplatsupport_cross_vm_connection): Facilitates the creation of communication channels between VM's and other components on a seL4-based system
+* [sel4vmmplatsupport/drivers/cross_vm_connection.h](api/libsel4vmmplatsupport_cross_vm_connection): Facilitates the creation of communication channels between VM's and other components on an seL4-based system
 * [sel4vmmplatsupport/drivers/pci.h](api/libsel4vmmplatsupport_pci): Interface presents a VMM PCI Driver, which manages the host's PCI devices, and handles guest OS PCI config space read & writes
 * [sel4vmmplatsupport/drivers/pci_helper.h](api/libsel4vmmplatsupport_pci_helper): This interface presents a series of helpers when using the VMM PCI Driver
 * [sel4vmmplatsupport/drivers/virtio_con.h](api/libsel4vmmplatsupport_virtio_con): This interface provides the ability to initalise a VMM virtio console driver

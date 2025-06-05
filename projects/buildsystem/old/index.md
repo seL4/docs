@@ -58,7 +58,7 @@ code and tools related to the project):
  Prior to building a project you need to
 specify a configuration (settings, components, etc.) that you want to
 build. Kconfig is a tool for simplifying and automating this process. In
-a seL4 project you can enter make menuconfig in the top level directory
+an seL4 project you can enter make menuconfig in the top level directory
 to be presented with a terminal menu for choosing which components to
 build. Note that you will need the package libncurses5-dev installed to
 display terminal menus. It is possible to select a configuration without

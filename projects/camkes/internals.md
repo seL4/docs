@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ## Overview
 
 
-From the top, the CAmkES tool (typically found in "tools/camkes/camkes.sh") is a program that generates a **single** file that makes up part of the source of a seL4 application. There are a variety of types of files it can generate:
+From the top, the CAmkES tool (typically found in "tools/camkes/camkes.sh") is a program that generates a **single** file that makes up part of the source of an seL4 application. There are a variety of types of files it can generate:
 
 - a capdl spec describing the cap distribution of the entire
         CAmkES spec

@@ -16,7 +16,7 @@ For new project development, see [incorporating the build system](/Developing/Bu
 
 #### Basic build initialisation
 
-In the root directory of a seL4-based project, first create a separate build
+In the root directory of an seL4-based project, first create a separate build
 directory for the output binaries, then initialize CMake:
 
 ```sh

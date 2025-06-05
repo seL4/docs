@@ -9,7 +9,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 This page is a quick write up of how we used a logic analyzer to help
 solve a message loss issue when using a CAN bus. We had two TK1-SOMs
 connected together on a CAN bus. One of them runs Linux natively and the
-other runs a seL4 CAmkES application that receives CAN frames and then
+other runs an seL4 CAmkES application that receives CAN frames and then
 prints them out. We found that although the CAmkES application could
 correctly receive and reply to individual CAN frames, when frames were
 being received at the maximum rate of the bus the CAmkES application
