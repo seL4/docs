@@ -21,7 +21,7 @@ Using seL4 version 11.0.0
     to communicate without the ability for capability transfer, however this only supports a single sender and single
     receiver.
 * Better support for configuring components with a provided devicetree.
-  - This support includes adding a seL4DTBHardware connector that can be used instead of seL4HardwareMMIO and
+  - This support includes adding an seL4DTBHardware connector that can be used instead of seL4HardwareMMIO and
   seL4HardwareInterrupt and can be used to extract IRQs and MMIO register information out of the devicetree node rather
   than specifying the info directly. This connector can also be used to access a devicetree within a component for
   querying further device information. There is also a connector seL4VMDTBPassthrough that can be used for specifying
