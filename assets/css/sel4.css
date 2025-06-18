@@ -37,6 +37,18 @@ layout: none
   }
 }
 
+@utility arrow-link {
+  @apply text-sm font-semibold text-f_green-600;
+}
+
+.arrow-link::after {
+  content: ' →';
+}
+
+@utility a-underline {
+  @apply [&_a]:underline;
+}
+
 @custom-variant prose-inline-code {
   & :is(:where(code:not(pre > code)):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
     @slot;
