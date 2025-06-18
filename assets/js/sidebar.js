@@ -14,9 +14,11 @@
     var body = document.querySelector("body");
     var sidebar = document.getElementById("sidebar");
     var sidebarResizeHandle = document.getElementById("sidebar-handle");
+    var sidebarToggle = document.getElementById("burger");
     var firstContact = null;
 
     sidebarResizeHandle.addEventListener('mousedown', initResize, false);
+    sidebarToggle.addEventListener('click', toggleSidebar, false);
 
     function initResize(e) {
         e.preventDefault();
@@ -34,6 +36,22 @@
         body.classList.remove('sidebar-resizing');
         window.removeEventListener('mousemove', resize, false);
         window.removeEventListener('mouseup', stopResize, false);
+    }
+    function toggleSidebar() {
+        if (sidebar.classList.contains('hidden')) {
+            showSidebar();
+        } else {
+            hideSidebar();
+        }
+    }
+    function showSidebar() {
+        sidebar.classList.remove('hidden');
+        sidebar.classList.add('flex');
+    }
+    function hideSidebar() {
+        sidebar.classList.add('hidden');
+        sidebar.classList.remove('flex');
+        sidebar.classList.remove('lg:flex');
     }
 
     document.addEventListener('touchstart', function (e) {
