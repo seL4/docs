@@ -54,6 +54,23 @@ rbenv install
 After these, you should be able to forget about `rbenv`, the `Makefile` will now
 see the correct Ruby version.
 
+#### Node/JS
+
+The doc site needs `node` version 20 or later at build time. The default
+`node` and `npm` of recent distribution should work fine:
+
+```sh
+apt install node
+```
+
+or on Mac:
+
+```sh
+brew install node
+```
+
+The Makefile does the rest of the JS dependency installation.
+
 #### Python
 
 The build is tested with Python 3.9. More recent versions are likely to work as
