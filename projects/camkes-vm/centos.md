@@ -1,4 +1,5 @@
 ---
+parent: /projects/camkes-vm/
 toc: true
 redirect_from:
   - /VM/CAmkESVMCentOS

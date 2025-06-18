@@ -1,4 +1,5 @@
 ---
+parent: /projects/camkes/
 redirect_from:
   - /seL4SharedDataWithCaps
 SPDX-License-Identifier: CC-BY-SA-4.0

@@ -1,4 +1,5 @@
 ---
+parent: /projects/camkes/
 redirect_from:
   - /CAmkESCLI
 SPDX-License-Identifier: CC-BY-SA-4.0

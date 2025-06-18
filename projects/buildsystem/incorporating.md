@@ -1,4 +1,5 @@
 ---
+parent: /projects/buildsystem/
 redirect_from:
   - /Developing/Building/Incorporating
 SPDX-License-Identifier: CC-BY-SA-4.0

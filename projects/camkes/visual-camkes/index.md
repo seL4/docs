@@ -1,4 +1,5 @@
 ---
+parent: /projects/camkes/
 toc: true
 redirect_from:
   - /VisualCAmkES/

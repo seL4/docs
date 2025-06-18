@@ -1,4 +1,5 @@
 ---
+parent: /projects/camkes-vm/
 title: ZeroMQ examples
 toc: true
 SPDX-License-Identifier: CC-BY-SA-4.0
