@@ -38,10 +38,10 @@
         window.removeEventListener('mouseup', stopResize, false);
     }
     function toggleSidebar() {
-        if (sidebar.classList.contains('hidden')) {
-            showSidebar();
-        } else {
+        if (sidebar.classList.contains('lg:flex')) {
             hideSidebar();
+        } else {
+            showSidebar();
         }
     }
     function showSidebar() {
