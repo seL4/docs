@@ -24,6 +24,19 @@ Use a query string with the time of the last build to cache bust site CSS file.
     <script defer src="{{ '/assets/js/menu.js' | relative_url }}"></script>
     <script defer src="{{ '/assets/js/sidebar.js' | relative_url }}"></script>
 
+  {%- if page.mathjax %}
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  {% endif -%}
+
   {%- if jekyll.environment == 'production' -%}
     <script defer data-domain="docs.sel4.systems"
             src="https://analytics.sel4.systems/js/script.js"></script>
