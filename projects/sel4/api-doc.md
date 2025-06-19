@@ -7,8 +7,10 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# API Reference
-_Note: This page is auto-generated from the libsel4 API_
+# seL4 API Reference
+
+This is the C API reference for the seL4 kernel, available in the library
+`libsel4`.
 
 ## System Calls
 ------
