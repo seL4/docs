@@ -5,4 +5,4 @@ SPDX-FileCopyrightText: 2025 Ivan Velickovic
 ---
 
 {% include include_external_markdown.md
-           file="_repos/au-ts/microkit_tutorial/website/src/welcome.md" %}
+           file="_processed/microkit-tutorial/welcome.md" %}

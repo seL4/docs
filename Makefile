@@ -57,6 +57,18 @@ _repos/tutes/%.md: _repos/sel4proj/sel4-tutorials/tutorials/% _repos/tutes
 TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md,$(notdir $(wildcard Tutorials/*.md)))
 tutorials: ${TUTORIALS:%=_repos/tutes/%}
 
+PROCESS_MDBOOK = _scripts/process-mdbook.py
+MICROKIT_TUT_DST = _processed/microkit-tutorial
+MICROKIT_TUT_SRC = _repos/au-ts/microkit_tutorial/website/src
+MICROKIT_TUT_SRC_FILES = $(wildcard $(MICROKIT_TUT_SRC)/*.md)
+MICROKIT_TUT_DST_FILES = $(patsubst $(MICROKIT_TUT_SRC)/%, $(MICROKIT_TUT_DST)/%, $(MICROKIT_TUT_SRC_FILES))
+
+$(MICROKIT_TUT_DST)/%.md: $(MICROKIT_TUT_SRC)/%.md
+	@echo "$<  ==>  $@"
+	@$(PROCESS_MDBOOK) $< $(dir $@)
+
+microkit-tutorial: $(MICROKIT_TUT_DST_FILES)
+
 _generate_api_pages: $(REPOSITORIES)
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
@@ -93,7 +105,7 @@ docker_build:
 serve: build
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
-build: generate_api ruby_deps $(REPOSITORIES)
+build: generate_api ruby_deps microkit-tutorial $(REPOSITORIES)
 	$(MAKE) tutorials
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
