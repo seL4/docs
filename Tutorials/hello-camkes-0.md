@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Hello CAmkES
 tutorial: hello-camkes-0
 layout: tutorial

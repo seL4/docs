@@ -1,5 +1,4 @@
 ---
-toc: true
 redirect_from:
   - /CAmkES/
 project: camkes

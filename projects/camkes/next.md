@@ -1,5 +1,4 @@
 ---
-toc: true
 redirect_from:
   - /CAmkESNext
 SPDX-License-Identifier: CC-BY-SA-4.0

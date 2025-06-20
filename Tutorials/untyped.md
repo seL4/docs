@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Untyped
 tutorial: untyped
 layout: tutorial

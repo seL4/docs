@@ -1,5 +1,4 @@
 ---
-toc: true
 redirect_from:
   - /Developing/Building/OldBuildSystem
 SPDX-License-Identifier: CC-BY-SA-4.0
@@ -37,7 +36,7 @@ code and tools related to the project):
 
 - **[Makefile](#makefile)** - Top-level build specialisation
 - **[Makefile.flags](#makefileflags)** - Top-level build
-      tuning 
+      tuning
 - **tools/common/**
     -   **[common.mk](#commonmk)** - Boiler plate for building
         applications/libraries
@@ -53,7 +52,7 @@ code and tools related to the project):
         system tuning
     -   **kbuild/*** - Kbuild from the Linux source tree. For
         documentation, refer to the Kbuild mailing list.
- 
+
 ### Build configuration
  Prior to building a project you need to
 specify a configuration (settings, components, etc.) that you want to
@@ -155,7 +154,7 @@ include common.mk. It will typically look something like the following:
 ```make
 TARGETS := $(notdir $(SOURCE_DIR)).bin
 
-CFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/*.c)) 
+CFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/src/*.c))
 ASMFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard $(SOURCE_DIR)/crt/arch-$(ARCH)/crt0.S))
 
 LIBS := sel4c sel4 sel4rootserver sel4platsupport
@@ -181,10 +180,10 @@ application dependencies, **libs/Kbuild** describes top-level library
 dependencies. Similarly, it fills the variable libs-y with the libraries
 to be built. A typical libs/Kbuild would look like:
 ```make
-libs-$(CONFIG_LIB_FOO) += libfoo 
+libs-$(CONFIG_LIB_FOO) += libfoo
 libs-$(CONFIG_LIB_BAR) += libbar
 
-libfoo: common 
+libfoo: common
 libbar: common libfoo
 ```
 
@@ -195,14 +194,14 @@ configuration and then include common.mk. Note that by using generic
 environment variables you can often use the following template with no
 modification for your library:
 ```make
-# Library archive(s) that will be built. 
+# Library archive(s) that will be built.
 TARGETS := $(notdir ${SOURCE_DIR}).a
 
-# Source files required to build the target. 
+# Source files required to build the target.
 CFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.c))
 ASMFILES := $(patsubst $(SOURCE_DIR)/%,%,$(wildcard ${SOURCE_DIR}/src/*.S))
 
-# Header files/directories this library provides. 
+# Header files/directories this library provides.
 HDRFILES := $(wildcard ${SOURCE_DIR}/include/*)
 
 include $(SEL4_COMMON)/common.mk
@@ -223,12 +222,12 @@ project.mk) or provide some external targets of your own (after
 including project.mk). You will most likely just want to mimic the
 content of the file from the reference examples:
 ```make
-# app-images is provided in project.mk. 
+# app-images is provided in project.mk.
 all: app-images
 
 include tools/common/project.mk
 
-# Extra project-specific targets. simulate-kzm: 
+# Extra project-specific targets. simulate-kzm:
 qemu-arm -nographic -M kzm -kernel images/hello-image-arm-imx31
 ```
 
@@ -349,7 +348,7 @@ config MOO
 or as:
 
 ```
-config FOO 
+config FOO
     bool "foo"
     select BAR
 
@@ -413,7 +412,7 @@ sel4libs-$(CONFIG_LIB_FOO) += libfoo
 sel4libs-$(CONFIG_LIB_BAR) += libbar
 ...
 
-libs-y += $(sel4libs-y) 
+libs-y += $(sel4libs-y)
 ...
 ```
 please update it to remove sel4libs-y:

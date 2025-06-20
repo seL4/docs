@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Faults
 tutorial: fault-handlers
 layout: tutorial

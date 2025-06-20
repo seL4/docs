@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Hello, World!
 tutorial: hello-world
 layout: tutorial

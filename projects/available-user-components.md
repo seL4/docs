@@ -1,5 +1,4 @@
 ---
-toc: true
 layout: api
 redirect_from:
   - /UserlandComponents

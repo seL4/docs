@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Mapping
 tutorial: mapping
 layout: tutorial

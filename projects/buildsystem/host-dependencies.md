@@ -1,5 +1,4 @@
 ---
-toc: true
 redirect_from:
   - /HostDependencies
 SPDX-License-Identifier: CC-BY-SA-4.0

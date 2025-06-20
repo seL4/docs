@@ -1,7 +1,6 @@
 ---
 title: Project Status
 project: sel4
-toc: true
 permalink: /projects/sel4/status.html
 redirect_from:
   - status/sel4.html

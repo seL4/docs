@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Tutorials
 layout: tutorial
 description: overview of seL4 and related tutorials

@@ -1,6 +1,5 @@
 ---
 parent: /projects/camkes/
-toc: true
 redirect_from:
   - /CAmkESDifferences
 SPDX-License-Identifier: CC-BY-SA-4.0
@@ -28,7 +27,7 @@ baz.qux = "hello";
 crazy.stuff = { "key" : ["polymorphic", 42, "list",
                  {"hello":true} ] };
 
-// appropriate numeric type 
+// appropriate numeric type
 arithmetic.expressions = 1 << (2 ** 2) == 3 ? -2 : 0x9;
 ```
 
@@ -211,21 +210,21 @@ sub-component:
 ```c
 component Serial {
 
-  // interface of this component 
+  // interface of this component
   provides UartIface serial;
- 
+
   composition {
- 
+
     // internal components
     component UartDevice uart_device;
     component UartDriver uart_driver;
 
     // internal connection
     connection seL4HardwareMMIO conn(from uart_device.regs, to uart_driver.regs);
-  
+
     // export interface of driver component as interface of this component
     connection ExportRPC exp(from uart_driver.uart, to serial);
- 
+
   }
 }
 ```
@@ -237,9 +236,9 @@ component Serial {
 
   // interface of this component
   provides UartIface serial;
- 
+
   composition {
- 
+
     // internal components
     component UartDevice uart_device;
     component UartDriver uart_driver;
@@ -249,7 +248,7 @@ component Serial {
 
     // export interface of driver component as interface of this component
     export uart_driver.uart -> serial;
- 
+
   }
 }
 ```

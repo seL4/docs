@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Notifications
 tutorial: notifications
 layout: tutorial

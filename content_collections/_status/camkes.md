@@ -1,7 +1,6 @@
 ---
 title: Project Status
 project: camkes
-toc: true
 permalink: projects/camkes/status.html
 redirect_from:
   - status/camkes.html

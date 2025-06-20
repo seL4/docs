@@ -1,5 +1,4 @@
 ---
-toc: true
 title: MCS
 tutorial: mcs
 layout: tutorial

@@ -1,6 +1,5 @@
 ---
 title: Elfloader
-toc: true
 project: elfloader
 
 SPDX-License-Identifier: CC-BY-SA-4.0

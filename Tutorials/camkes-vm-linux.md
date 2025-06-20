@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Camkes VM Linux
 tutorial: camkes-vm-linux
 tutorial-order: vm-1

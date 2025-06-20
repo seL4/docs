@@ -1,5 +1,4 @@
 ---
-toc: true
 redirect_from:
   - /VM/CAmkESX86VM
 project: camkes-vm

@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Capabilities
 tutorial: capabilities
 layout: tutorial

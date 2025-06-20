@@ -1,5 +1,4 @@
 ---
-toc: true
 layout: tutorial
 description: guide to machine set-up for tutorials
 SPDX-License-Identifier: CC-BY-SA-4.0

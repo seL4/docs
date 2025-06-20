@@ -1,6 +1,5 @@
 ---
 title: The seL4 run-time
-toc: true
 
 project: sel4runtime
 SPDX-License-Identifier: CC-BY-SA-4.0

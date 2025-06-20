@@ -1,6 +1,5 @@
 ---
 parent: /projects/camkes-vm/
-toc: true
 redirect_from:
   - /VM/CAmkESVMCentOS
 SPDX-License-Identifier: CC-BY-SA-4.0

@@ -1,5 +1,4 @@
 ---
-toc: true
 arm_hardware: true
 cmake_plat: tk1
 xcompiler_arg: -DAARCH32=1

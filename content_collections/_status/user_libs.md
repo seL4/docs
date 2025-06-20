@@ -1,7 +1,6 @@
 ---
 title: Project Status
 project: user_libs
-toc: true
 permalink: projects/user_libs/status.html
 redirect_from:
   - status/user_libs.html

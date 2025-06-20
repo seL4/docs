@@ -1,5 +1,4 @@
 ---
-toc: true
 arm_hardware: true
 cmake_plat: imx8mq-evk
 xcompiler_arg: -DAARCH64=1

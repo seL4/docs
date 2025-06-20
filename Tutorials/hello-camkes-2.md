@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Events in CAmkES
 tutorial: hello-camkes-2
 layout: tutorial

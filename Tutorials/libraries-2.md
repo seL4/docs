@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Libraries IPC
 tutorial: libraries-2
 layout: tutorial

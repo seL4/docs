@@ -1,5 +1,4 @@
 ---
-toc: true
 title: CAmkES timer tutorial
 tutorial: hello-camkes-timer
 layout: tutorial

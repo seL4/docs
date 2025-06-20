@@ -1,5 +1,4 @@
 ---
-toc: true
 arm_hardware: true
 cmake_plat: rockpro64
 xcompiler_arg: -DAARCH64=1

@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Interrupts
 tutorial: interrupts
 layout: tutorial

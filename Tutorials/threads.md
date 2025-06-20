@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Threads
 tutorial: threads
 layout: tutorial

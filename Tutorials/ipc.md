@@ -1,5 +1,4 @@
 ---
-toc: true
 title: IPC
 tutorial: ipc
 layout: tutorial

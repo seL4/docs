@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Pathways
 layout: tutorial
 description: pathways through tutorials depending on learning objectives

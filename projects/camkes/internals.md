@@ -1,6 +1,5 @@
 ---
 parent: /projects/camkes/
-toc: true
 redirect_from:
   - /CAmkESInternals
 SPDX-License-Identifier: CC-BY-SA-4.0

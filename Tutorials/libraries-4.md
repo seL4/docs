@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Libraries timer tutorial
 tutorial: libraries-4
 layout: tutorial

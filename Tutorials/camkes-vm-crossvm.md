@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Camkes cross-VM connectors
 tutorial: camkes-vm-crossvm
 description: walkthrough of adding communication between Linux guests in separate VMs

@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Getting the tutorials
 layout: tutorial
 description: steps and code for getting tutorials

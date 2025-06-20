@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Libraries initialisation & threading
 tutorial: libraries-1
 layout: tutorial

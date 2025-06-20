@@ -1,5 +1,4 @@
 ---
-toc: true
 title: Libraries processes & ELF loading
 tutorial: libraries-3
 layout: tutorial

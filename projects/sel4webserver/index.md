@@ -1,6 +1,5 @@
 ---
 title: seL4webserver reference application
-toc: true
 
 project: sel4webserver
 SPDX-License-Identifier: CC-BY-SA-4.0
