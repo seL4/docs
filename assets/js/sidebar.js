@@ -79,3 +79,38 @@
         }
     }, { passive: true });
 })();
+
+
+(function tabs() {
+    var tabGroups = document.querySelectorAll('.tab-group');
+
+    tabGroups.forEach(function (group) {
+        var children = group.children;
+        children[2].classList.add('active'); // Activate the first tab by default
+        children[3].classList.remove('hidden'); // Show the first tab
+    });
+
+    var tabButtons = document.querySelectorAll('.tab-header');
+    tabButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var content = button.nextElementSibling;
+
+            var group = button.parentElement;
+            var tabs = [];
+
+            for (const child of group.children) {
+                if (child.classList.contains('tab-header')) {
+                    tabs.push(child);
+                }
+            };
+
+            tabs.forEach(function (tab) {
+                tab.classList.remove('active');
+                tab.nextElementSibling.classList.add('hidden');
+            });
+
+            button.classList.add('active');
+            content.classList.remove('hidden');
+        });
+    });
+})();
