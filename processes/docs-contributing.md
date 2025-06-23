@@ -5,14 +5,14 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Contributing
+# Contributing to the seL4 documentation
 
 Thank you for considering helping improve the seL4 documentation.
 
 This page is about contributing to the [documentation site][docsite].  For contributing to other parts of the seL4 ecosystem,
 visit our main [contributing page][contribute].
 
-[docsite]: https://docs.sel4.systems
+[docsite]: ../
 [contribute]: https://sel4.systems/Contribute/
 
 We believe that documentation is important for any project and appreciate any contributions that improves it.
