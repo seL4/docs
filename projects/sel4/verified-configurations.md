@@ -10,7 +10,22 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 This page describes which architecture/platform/configuration
 combinations of seL4 have verified properties, which configurations
 possess which properties, and how to obtain an seL4 version for a
-specified configuration.
+specified configuration. For an overview of these properties and
+their explanations, please see the [verification page on the seL4
+website](https://sel4.systems/Verification/).
+
+The formal proofs for seL4 are hosted at <https://github.com/seL4/l4v>.  They
+are written in the [Isabelle/HOL](http://isabelle.in.tum.de) theorem prover, and
+some familiarity with this tool is required to understand them. There are many
+learning resources available for Isabelle -- see the Isabelle website for
+tutorials and reference manuals, and [this
+blog](http://proofcraft.org/blog/proof-engineer-reading.html) post for a list of
+what you'd need to really get deep into the proofs.  The repository [README
+file](https://github.com/seL4/l4v/blob/master/README.md) shows which proofs are
+where, and how to set up your machine to run them. You can run and check that
+the proofs work for a specific version of seL4 without a deep understanding of
+their content -- that is one of the advantages of machine-checked proofs.
+
 
 At this time, verification of seL4 remains a more time-intensive process
 than software development. Consequently, while seL4 has been ported to
