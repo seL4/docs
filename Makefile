@@ -134,9 +134,14 @@ preview: build
 .PHONY: clean
 clean:
 	rm -rf _site
-	rm -rf _repos
+	rm -rf _preview
 	rm -rf _data/generated.yml
-	rm -rf .sass-cache/
+	rm -rf _processed/microkit-tutorial
+
+.PHONY: repoclean
+repoclean: clean
+	rm -rf _repos
+
 # Check conformance for Web Content Accessibility Guidelines (WCAG) 2.0, AA
 # This relies on Automated Accessibility Testing Tool (AATT) (https://github.com/paypal/AATT)
 # to be running and listening on http://localhose:3000
