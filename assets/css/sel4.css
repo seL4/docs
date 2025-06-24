@@ -87,13 +87,8 @@ layout: none
   @apply text-sm sm:text-base;
 }
 
-@utility theprose-nodark {
-  @apply prose prose-sm lg:prose-base max-w-(--breakpoint-md)
-         prose-pre:bg-slate-800
-         prose-p:leading-5 prose-li:leading-5 lg:prose-p:leading-6 lg:prose-li:leading-6
-         prose-li:marker:text-lightercol
-         prose-li:[li_li]:my-1.5
-         prose-h1:sticky prose-h1:top-0
+@utility prose-sticky-headers {
+  @apply prose-h1:sticky prose-h1:top-0
          prose-h2:sticky prose-h2:top-0
          prose-h3:sticky prose-h3:top-0
          prose-h4:sticky prose-h4:top-0
@@ -104,7 +99,15 @@ layout: none
          prose-h1:mb-3
          prose-h2:pb-3
          prose-h3:pb-4
-         prose-h4:pb-4
+         prose-h4:pb-4;
+}
+
+@utility theprose-nodark {
+  @apply prose prose-sm lg:prose-base max-w-(--breakpoint-md)
+         prose-pre:bg-slate-800
+         prose-p:leading-5 prose-li:leading-5 lg:prose-p:leading-6 lg:prose-li:leading-6
+         prose-li:marker:text-lightercol
+         prose-li:[li_li]:my-1.5
          prose-inline-code:bg-gray-200
          prose-inline-code:border-gray-300
          prose-inline-code:text-f_neutral-800

@@ -1,5 +1,4 @@
 ---
-layout: api
 redirect_from:
   - /UserlandComponents
 SPDX-License-Identifier: CC-BY-SA-4.0

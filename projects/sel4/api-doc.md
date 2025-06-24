@@ -1,6 +1,6 @@
 ---
-toc: true
 layout: api
+toc: true
 redirect_from:
   - /ApiDoc
 SPDX-License-Identifier: CC-BY-SA-4.0
