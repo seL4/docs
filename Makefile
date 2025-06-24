@@ -77,21 +77,32 @@ microkit-tutorial: $(MICROKIT_TUT_DST_FILES)
 _generate_api_pages: $(REPOSITORIES)
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
+LIBSEL4VM_SRC = _repos/sel4proj/sel4_projects_libs/libsel4vm/docs
+LIBSEL4VM_DST = projects/virtualization/docs/api
+LIBSEL4VM_SRC_FILES = $(wildcard $(LIBSEL4VM_SRC)/libsel4vm_*.md)
+LIBSEL4VM_DST_FILES = $(patsubst $(LIBSEL4VM_SRC)/%, $(LIBSEL4VM_DST)/%, $(LIBSEL4VM_SRC_FILES))
+
+$(LIBSEL4VM_DST)/%.md: $(LIBSEL4VM_SRC)/%.md
+	@echo "$<  ==>  $@"
+	@tools/gen_markdown_api_doc.py -f $< -o $@ -p libsel4vm.html
+
+$(LIBSEL4VM_DST):
+	mkdir -p $(LIBSEL4VM_DST)
+
+# same destination dir as libsel4vm
+LIBSEL4VMM_SRC = _repos/sel4proj/sel4_projects_libs/libsel4vmmplatsupport/docs
+LIBSEL4VMM_SRC_FILES = $(wildcard $(LIBSEL4VMM_SRC)/libsel4vmmplatsupport_*.md)
+LIBSEL4VMM_DST_FILES = $(patsubst $(LIBSEL4VMM_SRC)/%, $(LIBSEL4VM_DST)/%, $(LIBSEL4VMM_SRC_FILES))
+
+$(LIBSEL4VM_DST)/%.md: $(LIBSEL4VMM_SRC)/%.md
+	@echo "$<  ==>  $@"
+	@tools/gen_markdown_api_doc.py -f $< -o $@ -p libsel4vmm.html
+
 .PHONY: generate_libsel4vm_api
-generate_libsel4vm_api: $(REPOSITORIES)
-	mkdir -p projects/virtualization/docs/api && \
-		for i in `ls _repos/sel4proj/sel4_projects_libs/libsel4vm/docs/libsel4vm_*`; \
-		do \
-			tools/gen_markdown_api_doc.py -f $$i -o projects/virtualization/docs/api/`basename $$i`; \
-		done;
+generate_libsel4vm_api: $(REPOSITORIES) $(LIBSEL4VM_DST) $(LIBSEL4VM_DST_FILES)
 
 .PHONY: generate_libsel4vmmplatsupport_api
-generate_libsel4vmmplatsupport_api: $(REPOSITORIES)
-	mkdir -p projects/virtualization/docs/api && \
-		for i in `ls _repos/sel4proj/sel4_projects_libs/libsel4vmmplatsupport/docs/libsel4vmmplatsupport_*`; \
-		do \
-			tools/gen_markdown_api_doc.py -f $$i -o projects/virtualization/docs/api/`basename $$i`; \
-		done;
+generate_libsel4vmmplatsupport_api: $(REPOSITORIES) $(LIBSEL4VM_DST) $(LIBSEL4VMM_DST_FILES)
 
 .PHONY: generate_api
 generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplatsupport_api
@@ -137,6 +148,7 @@ clean:
 	rm -rf _preview
 	rm -rf _data/generated.yml
 	rm -rf _processed/microkit-tutorial
+	rm -rf projects/virtualization/docs/api
 
 .PHONY: repoclean
 repoclean: clean
