@@ -40,10 +40,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {%-   assign maybe_rotate="rotate-270" -%}
 {%-   assign maybe_on="" -%}
 {%- endif %}
-  <li class="mt-1 mb-2">
-    <div class="{{active_title}} mb-1 menu-title hover:text-hi">
-      {% svg _icons/chevron-down-mini.svg class="menu-chevron h-5 w-5 mb-1 -mr-0.5 inline cursor-pointer {{maybe_rotate}}" %}
-      <span class="cursor-pointer">{{ item.title }}</span>
+  <li class="mt-1">
+    <div class="{{active_title}} mb-1 menu-title hover:text-hi leading-none">
+      {% svg _icons/chevron-down-mini.svg class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer {{maybe_rotate}}" %}
+      <span class="cursor-pointer text-sm">{{ item.title }}</span>
     </div>
     <ul class="menu-content ml-6 {{maybe_on}}">
   {%- for entry in item.subfolderitems -%}
