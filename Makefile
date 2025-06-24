@@ -102,16 +102,24 @@ docker_build:
 
 # --host 0.0.0.0 serves on all interfaces, so that docker can export
 # the connection; also works locally
-serve: build
+.PHONY: serve
+serve: generate
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
-build: generate_api ruby_deps microkit-tutorial $(REPOSITORIES)
-	$(MAKE) tutorials
+.PHONY: generate
+generate: generate_api ruby_deps microkit-tutorial tutorials $(REPOSITORIES)
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
-	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll build
 
+.PHONY: build
+build: generate
+	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll build $(BUILD_OPTS)
+
+.PHONY: preview
+preview: JEKYLL_ENV := production
+preview: BUILD_OPTS := --config "_config.yml,_preview.yml" $(BUILD_OPTS)
+preview: build
 
 clean:
 	rm -rf _site
