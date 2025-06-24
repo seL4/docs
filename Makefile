@@ -1,6 +1,7 @@
 # Copyright 2020 seL4 Project a Series of LF Projects, LLC.
 # SPDX-License-Identifier: BSD-2-Clause
 
+.PHONY: default
 default: serve
 
 .PHONY: ruby_deps
@@ -24,6 +25,7 @@ FILE_NAME=_data/generated.yml
 
 UPDATE_DATE:= $(shell git log -1 --format='%cd %h')
 FILES:= $(shell find . -iname "*.md" | grep -ve "./README.md" | grep -ve "^./_repos/"| sed 's/.\///')
+
 .PHONY: _data/generated.yml
 _data/generated.yml:
 	echo "date: $(UPDATE_DATE)" > $(FILE_NAME)
@@ -32,8 +34,9 @@ _data/generated.yml:
 		echo "  - page: $$i" >> $(FILE_NAME) &&\
 		echo "    date: `git log -1 --format='%cd %h' -- $$i`" >> $(FILE_NAME); \
 	done
-generate_data_files: _data/generated.yml
 
+.PHONY: generate_data_files
+generate_data_files: _data/generated.yml
 
 # Adding a git URL here and appending the directory name to REPOSITORY_LIST will
 # add a rule for checking out the repository under _repos/$(REPO_NAME)
@@ -67,11 +70,14 @@ $(MICROKIT_TUT_DST)/%.md: $(MICROKIT_TUT_SRC)/%.md
 	@echo "$<  ==>  $@"
 	@$(PROCESS_MDBOOK) $< $(dir $@)
 
+.PHONY: microkit-tutorial
 microkit-tutorial: $(MICROKIT_TUT_DST_FILES)
 
+.PHONY: _generate_api_pages
 _generate_api_pages: $(REPOSITORIES)
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
+.PHONY: generate_libsel4vm_api
 generate_libsel4vm_api: $(REPOSITORIES)
 	mkdir -p projects/virtualization/docs/api && \
 		for i in `ls _repos/sel4proj/sel4_projects_libs/libsel4vm/docs/libsel4vm_*`; \
@@ -79,6 +85,7 @@ generate_libsel4vm_api: $(REPOSITORIES)
 			tools/gen_markdown_api_doc.py -f $$i -o projects/virtualization/docs/api/`basename $$i`; \
 		done;
 
+.PHONY: generate_libsel4vmmplatsupport_api
 generate_libsel4vmmplatsupport_api: $(REPOSITORIES)
 	mkdir -p projects/virtualization/docs/api && \
 		for i in `ls _repos/sel4proj/sel4_projects_libs/libsel4vmmplatsupport/docs/libsel4vmmplatsupport_*`; \
@@ -86,6 +93,7 @@ generate_libsel4vmmplatsupport_api: $(REPOSITORIES)
 			tools/gen_markdown_api_doc.py -f $$i -o projects/virtualization/docs/api/`basename $$i`; \
 		done;
 
+.PHONY: generate_api
 generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplatsupport_api
 
 # Rules for local serving of the site using jekyll.
@@ -94,9 +102,11 @@ generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplat
 # The _production versions require `generate_data_files` to have been run separately.
 JEKYLL_ENV:=development
 DOCKER_IMG:=docs_builder
+.PHONY: docker_serve
 docker_serve: docker_build
 	docker run -p 4000:4000 -v $(PWD):/docs -w /docs -it $(DOCKER_IMG) bash -c 'make serve JEKYLL_ENV=$(JEKYLL_ENV)'
 
+.PHONY: docker_build
 docker_build:
 	docker build -t $(DOCKER_IMG) tools/
 
@@ -121,6 +131,7 @@ preview: JEKYLL_ENV := production
 preview: BUILD_OPTS := --config "_config.yml,_preview.yml" $(BUILD_OPTS)
 preview: build
 
+.PHONY: clean
 clean:
 	rm -rf _site
 	rm -rf _repos
@@ -130,9 +141,11 @@ clean:
 # This relies on Automated Accessibility Testing Tool (AATT) (https://github.com/paypal/AATT)
 # to be running and listening on http://localhose:3000
 # The resulting conformance_results.xml file can be viewed with `make check_conformance_errors` or using a junit xml viewer
+.PHONY: check_conformance
 check_conformance: build
 	find _site -iname "*.html"| sed "s/_site.//" | python tools/testWCAG.py > conformance_results.xml
 
+.PHONY: check_conformance_errors
 check_conformance_errors: conformance_results.xml
 	grep -B1 'type="failure"' conformance_results.xml || true
 
@@ -144,6 +157,7 @@ LIQUID_LINTER_CMDLINE := liquid-linter $(LIQUID_CUSTOM_TAGS:%=--custom-tag %)
 # If it is complaining about unknown custom tags -> add them to the list above.
 # Requires `liquid-linter` to be installed.
 # git ls-files won't list any files that are untracked
+.PHONY: check_liquid_syntax
 check_liquid_syntax:
 	git ls-files "*.html" | xargs $(LIQUID_LINTER_CMDLINE)
 	git ls-files "*.md" | xargs $(LIQUID_LINTER_CMDLINE)
@@ -151,5 +165,6 @@ check_liquid_syntax:
 # Output html checking using tidy.
 # Any warnings or errors will be printed to stdout
 # Requires `tidy` to be installed.
+.PHONY: check_html_output
 check_html_output: build
 	find _site/ -iname "*.html"| xargs -l tidy -q --drop-empty-elements n -e
