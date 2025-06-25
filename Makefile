@@ -2,7 +2,20 @@
 # SPDX-License-Identifier: BSD-2-Clause
 
 .PHONY: default
-default: serve
+default: help
+
+.PHONY: help
+help:
+	@echo "Makefile for the seL4 docsite"
+	@echo "Available targets:"
+	@echo "  serve                    - Serve a preview the site locally using Jekyll"
+	@echo "  build                    - Build the site for production in _site"
+	@echo "  preview                  - Build the site for externally hosted preview in _preview"
+	@echo "  docker_serve             - Serve a preview of the site using Docker"
+	@echo "  docker_build             - Build the site using Docker"
+	@echo "  check_conformance_errors - Check for conformance and show errors"
+	@echo "  check_liquid_syntax      - Check the liquid syntax of the templates"
+	@echo "  check_html_output        - Check the HTML output using tidy"
 
 .PHONY: ruby_deps
 ruby_deps: Gemfile Gemfile.lock
