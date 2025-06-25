@@ -48,17 +48,22 @@ $(REPOSITORIES):
 	mkdir -p $@
 	git clone --depth=1 https://github.com/$(@:_repos/%=%) $@
 
-_repos/tutes:
+TUTES_DST = _processed/tutes
+TUTES_REPO = _repos/sel4proj/sel4-tutorials
+
+$(TUTES_DST):
 	mkdir -p $@
 
-_repos/tutes/%.md: _repos/sel4proj/sel4-tutorials/tutorials/% _repos/tutes
-	PYTHONPATH=_repos/sel4/capdl/python-capdl-tool _repos/sel4proj/sel4-tutorials/template.py --docsite --out-dir _repos/tutes --tut-file $</$(@F)
+$(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/%
+	@echo "$<  ==>  $@"
+	@PYTHONPATH=_repos/sel4/capdl/python-capdl-tool \
+	$(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $</$(@F)
 
 # Make tutorials
 # Filter out index.md; get-the-tutorials.md; how-to.md pathways.md; setting-up.md
 # which are docsite pages, and not in the tutorials repo
 TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md,$(notdir $(wildcard Tutorials/*.md)))
-tutorials: ${TUTORIALS:%=_repos/tutes/%}
+tutorials: $(TUTES_DST) ${TUTORIALS:%=$(TUTES_DST)/%}
 
 PROCESS_MDBOOK = _scripts/process-mdbook.py
 MICROKIT_TUT_DST = _processed/microkit-tutorial
@@ -148,6 +153,7 @@ clean:
 	rm -rf _preview
 	rm -rf _data/generated.yml
 	rm -rf _processed/microkit-tutorial
+	rm -rf _processed/tutes
 	rm -rf projects/virtualization/docs/api
 
 .PHONY: repoclean
