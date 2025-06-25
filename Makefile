@@ -75,7 +75,7 @@ $(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/%
 # Make tutorials
 # Filter out index.md; get-the-tutorials.md; how-to.md pathways.md; setting-up.md
 # which are docsite pages, and not in the tutorials repo
-TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md,$(notdir $(wildcard Tutorials/*.md)))
+TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md seL4-end.md,$(notdir $(wildcard Tutorials/*.md)))
 tutorials: $(TUTES_DST) ${TUTORIALS:%=$(TUTES_DST)/%}
 
 PROCESS_MDBOOK = _scripts/process-mdbook.py
