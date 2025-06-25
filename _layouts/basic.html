@@ -54,7 +54,13 @@ Use a query string with the time of the last build to cache bust site CSS file.
     </div>
     <div class="flex-1">
       {% include header.html %}
-      <div class="grid grid-cols-1 xl:grid-cols-[4rem_auto_4rem] h-[calc(100%-3rem)]">
+      {% if page.prev or page.next -%}
+      {%-   assign has_nav = true %}
+      {%- else %}
+      {%-   assign has_nav = false %}
+      {%- endif -%}
+      <div class="grid grid-cols-1 {% if has_nav %}xl:grid-cols-[4rem_auto_4rem]{% endif %} h-[calc(100%-3rem)]">
+        {% if has_nav -%}
         <div class="hidden xl:flex relative {% if page.prev %}hover:bg-gray-100{% endif %} items-center justify-center">
           {%- if page.prev %}
           <a href="{{ page.prev}}" class="mx-auto my-auto text-lighter">
@@ -63,6 +69,7 @@ Use a query string with the time of the last build to cache bust site CSS file.
           </a>
           {% endif -%}
         </div>
+        {% endif -%}
         <div class="flex flex-col max-w-full overflow-y-auto">
           <div class="flex-1 max-w-full
                       {%-if page.toc %} lg:mr-66 lg:max-w-[calc(100%-11rem)]{%endif-%}">
@@ -95,6 +102,7 @@ Use a query string with the time of the last build to cache bust site CSS file.
           {% endif -%}
           {% include footer.html %}
         </div>
+        {% if has_nav -%}
         <div class="hidden xl:flex relative {% if page.next %}hover:bg-gray-100{% endif %} flex items-center justify-center">
           {%- if page.next %}
           <a href="{{ page.next }}" class="mx-auto my-auto text-lighter">
@@ -103,6 +111,7 @@ Use a query string with the time of the last build to cache bust site CSS file.
           </a>
           {% endif -%}
         </div>
+        {% endif -%}
       </div>
     </div>
   </body>
