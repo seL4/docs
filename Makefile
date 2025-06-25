@@ -18,8 +18,16 @@ help:
 	@echo "  check_html_output        - Check the HTML output using tidy"
 
 .PHONY: ruby_deps
-ruby_deps: Gemfile Gemfile.lock
+ruby_deps: .jekyll-cache/ruby_deps
+
+.jekyll-cache/ruby_deps: Gemfile Gemfile.lock
 	bundle install
+	@mkdir -p .jekyll-cache/
+	@touch $@
+
+.npm_deps: package.json package-lock.json
+	npm install
+	@touch $@
 
 # The following rules generate a yaml file that contains file modification metadata
 # provided by git.  The format is:
@@ -146,7 +154,7 @@ serve: generate
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 .PHONY: generate
-generate: generate_api ruby_deps microkit-tutorial tutorials $(REPOSITORIES)
+generate: generate_api ruby_deps .npm_deps microkit-tutorial tutorials $(REPOSITORIES)
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
