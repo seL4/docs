@@ -6,6 +6,8 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 mathjax: true
 ---
 
+# Microkit User Manual (v2.0.1)
+
 ## Introduction
 
 The seL4 Microkit is a small and simple operating system (OS) built on the seL4 microkernel.
