@@ -61,7 +61,7 @@ Use a query string with the time of the last build to cache bust site CSS file.
       {%- endif -%}
       <div class="grid grid-cols-1 {% if has_nav %}xl:grid-cols-[4rem_auto_4rem]{% endif %} h-[calc(100%-3rem)]">
         {% if has_nav -%}
-        <div class="hidden xl:flex relative {% if page.prev %}hover:bg-gray-100{% endif %} items-center justify-center">
+        <div class="hidden xl:flex relative {% if page.prev %}hover:bg-gray-100 dark:hover:bg-gray-800{% endif %} items-center justify-center">
           {%- if page.prev %}
           <a href="{{ page.prev}}" class="mx-auto my-auto text-lighter">
             {% svg _icons/chevron-left.svg class="h-7 w-7 stroke-3" %}
@@ -103,7 +103,7 @@ Use a query string with the time of the last build to cache bust site CSS file.
           {% include footer.html %}
         </div>
         {% if has_nav -%}
-        <div class="hidden xl:flex relative {% if page.next %}hover:bg-gray-100{% endif %} flex items-center justify-center">
+        <div class="hidden xl:flex relative {% if page.next %}hover:bg-gray-100 dark:hover:bg-gray-800{% endif %} flex items-center justify-center">
           {%- if page.next %}
           <a href="{{ page.next }}" class="mx-auto my-auto text-lighter">
             {% svg _icons/chevron-right.svg class="h-7 w-7 stroke-3" %}
