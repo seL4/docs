@@ -37,6 +37,7 @@
         window.removeEventListener('mousemove', resize, false);
         window.removeEventListener('mouseup', stopResize, false);
     }
+
     function toggleSidebar() {
         if (sidebar.classList.contains('lg:flex')) {
             hideSidebar();
@@ -47,6 +48,7 @@
     function showSidebar() {
         sidebar.classList.remove('hidden');
         sidebar.classList.add('flex');
+        sidebar.classList.add('lg:flex');
     }
     function hideSidebar() {
         sidebar.classList.add('hidden');
