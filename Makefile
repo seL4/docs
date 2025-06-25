@@ -86,7 +86,7 @@ $(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/%
 TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md seL4-end.md,$(notdir $(wildcard Tutorials/*.md)))
 tutorials: $(TUTES_DST) ${TUTORIALS:%=$(TUTES_DST)/%}
 
-PROCESS_MDBOOK = _scripts/process-mdbook.py
+PROCESS_MDBOOK = tools/process-mdbook.py
 MICROKIT_TUT_DST = _processed/microkit-tutorial
 MICROKIT_TUT_SRC = _repos/au-ts/microkit_tutorial/website/src
 MICROKIT_TUT_SRC_FILES = $(wildcard $(MICROKIT_TUT_SRC)/*.md)
