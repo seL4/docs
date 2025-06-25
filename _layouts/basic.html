@@ -55,11 +55,28 @@ Use a query string with the time of the last build to cache bust site CSS file.
     <div class="flex-1">
       {% include header.html %}
       <div class="h-[calc(100%-3rem)] flex flex-col max-w-full overflow-y-auto">
-        <main class="flex-1 ml-12 mr-12 my-12 max-w-full
-                     {%-if page.toc %} lg:mr-70 lg:max-w-[calc(100%-22rem)]{%endif-%}
-                     overflow-x-auto" id="page-top">
-          {{ content }}
-        </main>
+        <div class="flex-1 max-w-full
+                    {%-if page.toc %} lg:mr-70 lg:max-w-[calc(100%-22rem)]{%endif-%}">
+          <main class="ml-12 mr-12 my-12
+                      overflow-x-auto" id="page-top">
+            {{ content }}
+          </main>
+          {% if page.prev or page.next -%}
+          <nav class="flex flex-row justify-between items-center mb-12 text-light">
+            {% if page.prev -%}
+            <a href="{{ page.prev }}" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 ml-12">
+              {% svg _icons/chevron-left.svg class="h-7 w-7 stroke-3" %}
+            </a>
+            {% endif -%}
+            <div class="flex-1"></div>
+            {% if page.next -%}
+            <a href="{{ page.next }}" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 mr-12">
+              {% svg _icons/chevron-right.svg class="h-7 w-7 stroke-3" %}
+            </a>
+            {% endif -%}
+          </nav>
+          {%- endif %}
+        </div>
         {%- if page.toc %}
         <nav class="hidden lg:block absolute top-16 right-0 mt-8 pl-4 pr-2 mr-6 w-60
                     h-[calc(100%-10rem)] overflow-y-auto std-bg">
