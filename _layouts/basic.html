@@ -54,37 +54,55 @@ Use a query string with the time of the last build to cache bust site CSS file.
     </div>
     <div class="flex-1">
       {% include header.html %}
-      <div class="h-[calc(100%-3rem)] flex flex-col max-w-full overflow-y-auto">
-        <div class="flex-1 max-w-full
-                    {%-if page.toc %} lg:mr-70 lg:max-w-[calc(100%-22rem)]{%endif-%}">
-          <main class="ml-12 mr-12 my-12
-                      overflow-x-auto" id="page-top">
-            {{ content }}
-          </main>
-        </div>
-        {% if page.prev or page.next -%}
-        <nav class="flex flex-row justify-between items-center mb-12 text-light">
-          {% if page.prev -%}
-          <a href="{{ page.prev }}" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 ml-12">
+      <div class="grid grid-cols-1 xl:grid-cols-[4rem_auto_4rem] h-[calc(100%-3rem)]">
+        <div class="hidden xl:flex relative {% if page.prev %}hover:bg-gray-100{% endif %} items-center justify-center">
+          {%- if page.prev %}
+          <a href="{{ page.prev}}" class="mx-auto my-auto text-lighter">
             {% svg _icons/chevron-left.svg class="h-7 w-7 stroke-3" %}
+            <span class="absolute inset-0"></span>
           </a>
           {% endif -%}
-          <div class="flex-1"></div>
-          {% if page.next -%}
-          <a href="{{ page.next }}" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 mr-12">
+        </div>
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div class="flex-1 max-w-full
+                      {%-if page.toc %} lg:mr-66 lg:max-w-[calc(100%-11rem)]{%endif-%}">
+            <main class="mx-6 md:mx-10 lg:mx-12 my-12
+                        overflow-x-auto" id="page-top">
+              {{ content }}
+            </main>
+          </div>
+          {% if page.prev or page.next -%}
+          <nav class="flex xl:hidden flex-row justify-between items-center mb-12 text-lighter">
+            {% if page.prev -%}
+            <a href="{{ page.prev }}" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 ml-12">
+              {% svg _icons/chevron-left.svg class="h-5 w-5 stroke-2 md:h-7 md:w-7 md:stroke-3" %}
+            </a>
+            {% endif -%}
+            <div class="flex-1"></div>
+            {% if page.next -%}
+            <a href="{{ page.next }}" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 mr-12">
+              {% svg _icons/chevron-right.svg class="h-5 w-5 stroke-2 md:h-7 md:w-7 md:stroke-3" %}
+            </a>
+            {% endif -%}
+          </nav>
+          {%- endif %}
+          {%- if page.toc %}
+          <nav class="hidden lg:block absolute top-16 right-0 mt-8 pl-4 pr-2 mr-6 w-60
+                      h-[calc(100%-10rem)] overflow-y-auto std-bg">
+            <div class="font-semibold mb-4 text-base text-dark">On this page</div>
+            {{ content | toc_only }}
+          </nav>
+          {% endif -%}
+          {% include footer.html %}
+        </div>
+        <div class="hidden xl:flex relative {% if page.next %}hover:bg-gray-100{% endif %} flex items-center justify-center">
+          {%- if page.next %}
+          <a href="{{ page.next }}" class="mx-auto my-auto text-lighter">
             {% svg _icons/chevron-right.svg class="h-7 w-7 stroke-3" %}
+            <span class="absolute inset-0"></span>
           </a>
           {% endif -%}
-        </nav>
-        {%- endif %}
-        {%- if page.toc %}
-        <nav class="hidden lg:block absolute top-16 right-0 mt-8 pl-4 pr-2 mr-6 w-60
-                    h-[calc(100%-10rem)] overflow-y-auto std-bg">
-          <div class="font-semibold mb-4 text-base text-dark">On this page</div>
-          {{ content | toc_only }}
-        </nav>
-        {% endif -%}
-        {% include footer.html %}
+        </div>
       </div>
     </div>
   </body>
