@@ -1,5 +1,7 @@
 ---
 title: Microkit Tutorial - Setting Up
+prev: welcome.html
+next: part1.html
 SPDX-License-Identifier: CC-BY-NC-SA-4.0
 SPDX-FileCopyrightText: 2025 Ivan Velickovic
 ---
