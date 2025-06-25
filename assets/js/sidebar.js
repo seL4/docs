@@ -96,18 +96,12 @@
             var content = button.nextElementSibling;
 
             var group = button.parentElement;
-            var tabs = [];
+            var tabs = group.getElementsByClassName('tab-header');
 
-            for (const child of group.children) {
-                if (child.classList.contains('tab-header')) {
-                    tabs.push(child);
-                }
-            };
-
-            tabs.forEach(function (tab) {
+            for (let tab of tabs) {
                 tab.classList.remove('active');
                 tab.nextElementSibling.classList.add('hidden');
-            });
+            };
 
             button.classList.add('active');
             content.classList.remove('hidden');
