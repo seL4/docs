@@ -96,8 +96,11 @@ $(MICROKIT_TUT_DST)/%.md: $(MICROKIT_TUT_SRC)/%.md
 	@echo "$<  ==>  $@"
 	@$(PROCESS_MDBOOK) $< $(dir $@)
 
+_data/microkit_tutorial.yml: $(MICROKIT_TUT_SRC)/../build.sh
+	@tools/mk_tutorial_vars.sh $< $@
+
 .PHONY: microkit-tutorial
-microkit-tutorial: $(MICROKIT_TUT_DST_FILES)
+microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
 .PHONY: _generate_api_pages
 _generate_api_pages: $(REPOSITORIES)
@@ -176,6 +179,7 @@ clean:
 	rm -rf _processed/microkit-tutorial
 	rm -rf _processed/tutes
 	rm -rf projects/virtualization/docs/api
+	rm -f _data/microkit_tutorial.yml
 
 .PHONY: repoclean
 repoclean: clean

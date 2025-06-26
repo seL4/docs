@@ -7,6 +7,7 @@
 #  - execute `{{#include "path/to/file.md"}}` directives
 #  - convert tab directives Jekyll includes used in the docsite
 #  - convert <details> to <details markdown="1">
+#  - convert {{variable}} to {{site.data.microkit_tutorial.variable}}
 
 import os
 import re
@@ -59,6 +60,10 @@ def process_mdbook(input_file, output_dir):
 
     # Convert <details> to <details markdown="1">
     content = re.sub(r'<details>', r'<details markdown="1">', content)
+
+    # Convert {{variable}} to {{site.data.microkit_tutorial.variable}}
+    pat = re.compile(r'{{([a-zA-Z0-9_]+)}}')
+    content = re.sub(pat, r'{{site.data.microkit_tutorial.\1}}', content)
 
     # Write processed content
     output_file = os.path.join(output_dir, os.path.basename(input_file))
