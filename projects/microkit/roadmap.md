@@ -45,4 +45,13 @@ This is being actively worked on.
 
 ### PD templates {#templates}
 
-TODO
+Microkit systems have a 'static architecture', each PD declares what resources it needs at
+build-time. This restriction provides useful properties but can be too limiting for certain
+systems.
+
+PD templates aim to allow PDs to be loaded at run-time and claim different resources. The
+total potential resources any PD might have at a given time is still known at build-time,
+but this allows some flexibilty particularly when doing something like live-upgrading a
+system.
+
+This feature is still in the somewhat early stages so is unlikely to be available soon.
