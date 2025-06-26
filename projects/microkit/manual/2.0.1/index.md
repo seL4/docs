@@ -8,6 +8,9 @@ mathjax: true
 
 # Microkit User Manual (v2.0.1)
 
+This is a web version of the manual, you can find a PDF [here](microkit_user_manual.pdf) as well as in the
+SDK at `doc/microkit_user_manual.pdf`.
+
 ## Introduction
 
 The seL4 Microkit is a small and simple operating system (OS) built on the seL4 microkernel.

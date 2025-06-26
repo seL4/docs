@@ -27,7 +27,7 @@ your choice, significantly reducing the barrier to entry for new users of seL4.
      icon="book-open"
      title="Manual"
      body="User's manual for the Microkit SDK."
-     link="/projects/microkit/manual/current/"
+     link="/projects/microkit/manual/latest/"
   %}
 
   {% include card.html
