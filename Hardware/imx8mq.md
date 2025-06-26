@@ -2,7 +2,7 @@
 arm_hardware: true
 cmake_plat: imx8mq-evk
 xcompiler_arg: -DAARCH64=1
-platform: imx8mq
+platform: Imx8mq
 arch: ARMv8A
 virtualization: "No"
 iommu: "No"
