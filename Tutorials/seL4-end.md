@@ -24,6 +24,12 @@ You might want to check out some of the following tutorials as well.
      link="/Tutorials/libraries-1.html"
   %}
   {% include card.html
+     icon="other/rust-logo-blk"
+     title="Rust on seL4 tutorial"
+     body="Tutorial on running the Rust language on seL4."
+     link="/todo.html"
+  %}
+  {% include card.html
      icon="puzzle-piece"
      title="CAmkES tutorial"
      body="Tutorials for the CAmkES component framework."
