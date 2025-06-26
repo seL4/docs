@@ -59,15 +59,17 @@ _data/generated.yml:
 .PHONY: generate_data_files
 generate_data_files: _data/generated.yml
 
-# Adding a git URL here and appending the directory name to REPOSITORY_LIST will
-# add a rule for checking out the repository under _repos/$(REPO_NAME)
 GIT_REPOS:=$(shell (cd _data/projects && for i in `ls`; do cat $$i | ../../tools/get_repos.py ; done) | sort -u)
-REPOSITORY_LIST = sel4 sel4-tutorials capdl
 REPOSITORIES = $(GIT_REPOS:%=_repos/%)
 
 $(REPOSITORIES):
 	mkdir -p $@
 	git clone --depth=1 https://github.com/$(@:_repos/%=%) $@
+
+.PHONY: repos
+repos: $(REPOSITORIES)
+
+# Tutorials
 
 TUTES_DST = _processed/tutes
 TUTES_REPO = _repos/sel4proj/sel4-tutorials
@@ -75,23 +77,32 @@ TUTES_REPO = _repos/sel4proj/sel4-tutorials
 $(TUTES_DST):
 	mkdir -p $@
 
+# the prereq pattern %/%.md is not allowed, but */%.md is sufficient here
 $(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/*/%.md
 	@echo "$<  ==>  $@"
 	@PYTHONPATH=_repos/sel4/capdl/python-capdl-tool \
-	$(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $<
+	  $(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $<
 
-# Make tutorials
-# Filter out index.md; get-the-tutorials.md; how-to.md pathways.md; setting-up.md
-# which are docsite pages, and not in the tutorials repo
+# Filter out files that are docsite pages and not in the tutorials repo
 TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md seL4-end.md,$(notdir $(wildcard Tutorials/*.md)))
 .PHONY: tutorials
 tutorials: $(TUTES_DST) ${TUTORIALS:%=$(TUTES_DST)/%}
 
 PROCESS_MDBOOK = tools/process-mdbook.py
 MICROKIT_TUT_DST = _processed/microkit-tutorial
-MICROKIT_TUT_SRC = _repos/au-ts/microkit_tutorial/website/src
-MICROKIT_TUT_SRC_FILES = $(wildcard $(MICROKIT_TUT_SRC)/*.md)
-MICROKIT_TUT_DST_FILES = $(patsubst $(MICROKIT_TUT_SRC)/%, $(MICROKIT_TUT_DST)/%, $(MICROKIT_TUT_SRC_FILES))
+MICROKIT_TUT_DOC = projects/microkit/tutorial
+MICROKIT_TUT_REPO = _repos/au-ts/microkit_tutorial
+MICROKIT_TUT_SRC = $(MICROKIT_TUT_REPO)/website/src
+# wildcard on files in this repo under projects/microkit to avoid empty wildcard
+# when _repos does not exist yet
+MICROKIT_TUT_DOC_FILES = $(wildcard $(MICROKIT_TUT_DOC)/*.md)
+MICROKIT_TUT_SRC_FILES = $(patsubst $(MICROKIT_TUT_DOC)/%, $(MICROKIT_TUT_SRC)/%, $(MICROKIT_TUT_DOC_FILES))
+MICROKIT_TUT_DST_FILES = $(patsubst $(MICROKIT_TUT_DOC)/%, $(MICROKIT_TUT_DST)/%, $(MICROKIT_TUT_DOC_FILES))
+
+# Make sure `make` knows how to build $(MICROKIT_TUT_DST)/%.md if _repos does not exist yet.
+# It is not enough for the repos to be cloned before the rule fires -- the implicit rule will only
+# fire if it has a complete path to the source when the Makefile is first invoked.
+$(MICROKIT_TUT_SRC_FILES) $(MICROKIT_TUT_SRC)/../build.sh: $(MICROKIT_TUT_REPO)
 
 $(MICROKIT_TUT_DST)/%.md: $(MICROKIT_TUT_SRC)/%.md
 	@echo "$<  ==>  $@"
@@ -104,35 +115,81 @@ _data/microkit_tutorial.yml: $(MICROKIT_TUT_SRC)/../build.sh
 microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
 .PHONY: _generate_api_pages
-_generate_api_pages: $(REPOSITORIES)
+_generate_api_pages: _repos/sel4/sel4
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
-LIBSEL4VM_SRC = _repos/sel4proj/sel4_projects_libs/libsel4vm/docs
+PROJECT_LIBS_REPO = _repos/sel4proj/sel4_projects_libs
+LIBSEL4VM_SRC = $(PROJECT_LIBS_REPO)/libsel4vm/docs
 LIBSEL4VM_DST = projects/virtualization/docs/api
-LIBSEL4VM_SRC_FILES = $(wildcard $(LIBSEL4VM_SRC)/libsel4vm_*.md)
-LIBSEL4VM_DST_FILES = $(patsubst $(LIBSEL4VM_SRC)/%, $(LIBSEL4VM_DST)/%, $(LIBSEL4VM_SRC_FILES))
+# Does not use wildcard, because _repos may not exist yet and the wildcard would then be empty.
+LIBSEL4VM_FILES = \
+  libsel4vm_arm_guest_vm.md \
+  libsel4vm_boot.md \
+  libsel4vm_guest_arm_context.md \
+  libsel4vm_guest_iospace.md \
+  libsel4vm_guest_irq_controller.md \
+  libsel4vm_guest_memory_helpers.md \
+  libsel4vm_guest_memory.md \
+  libsel4vm_guest_ram.md \
+  libsel4vm_guest_vcpu_fault.md \
+  libsel4vm_guest_vm_util.md \
+  libsel4vm_guest_vm.md \
+  libsel4vm_guest_x86_context.md \
+  libsel4vm_x86_guest_vm.md \
+  libsel4vm_x86_ioports.md \
+  libsel4vm_x86_vmcall.md
+LIBSEL4VM_SRC_FILES = $(patsubst %, $(LIBSEL4VM_SRC)/%, $(LIBSEL4VM_FILES))
+LIBSEL4VM_DST_FILES = $(patsubst %, $(LIBSEL4VM_DST)/%, $(LIBSEL4VM_FILES))
+
+$(LIBSEL4VM_SRC_FILES): $(PROJECT_LIBS_REPO)
 
 $(LIBSEL4VM_DST)/%.md: $(LIBSEL4VM_SRC)/%.md
 	@echo "$<  ==>  $@"
 	@tools/gen_markdown_api_doc.py -f $< -o $@ -p libsel4vm.html
 
 $(LIBSEL4VM_DST):
-	mkdir -p $(LIBSEL4VM_DST)
+	mkdir -p $@
 
+.PHONY: generate_libsel4vm_api
+generate_libsel4vm_api: $(LIBSEL4VM_DST) $(LIBSEL4VM_DST_FILES)
+
+LIBSEL4VMM_SRC = $(PROJECT_LIBS_REPO)/libsel4vmmplatsupport/docs
+# Does not use wildcard, because _repos may not exist yet and the wildcard would then be empty.
+LIBSEL4VMM_FILES = \
+  libsel4vmmplatsupport_arm_ac_device.md \
+  libsel4vmmplatsupport_arm_generic_forward_device.md \
+  libsel4vmmplatsupport_arm_guest_boot_init.md \
+  libsel4vmmplatsupport_arm_guest_reboot.md \
+  libsel4vmmplatsupport_arm_guest_vcpu_fault.md \
+  libsel4vmmplatsupport_arm_guest_vcpu_util.md \
+  libsel4vmmplatsupport_arm_vpci.md \
+  libsel4vmmplatsupport_arm_vusb.md \
+  libsel4vmmplatsupport_cross_vm_connection.md \
+  libsel4vmmplatsupport_device_utils.md \
+  libsel4vmmplatsupport_device.md \
+  libsel4vmmplatsupport_guest_image.md \
+  libsel4vmmplatsupport_guest_memory_util.md \
+  libsel4vmmplatsupport_guest_vcpu_util.md \
+  libsel4vmmplatsupport_ioports.md \
+  libsel4vmmplatsupport_pci_helper.md \
+  libsel4vmmplatsupport_pci.md \
+  libsel4vmmplatsupport_virtio_con.md \
+  libsel4vmmplatsupport_virtio_net.md \
+  libsel4vmmplatsupport_x86_acpi.md \
+  libsel4vmmplatsupport_x86_guest_boot_init.md \
+  libsel4vmmplatsupport_x86_vmm_pci_helper.md
+LIBSEL4VMM_SRC_FILES = $(patsubst %, $(LIBSEL4VMM_SRC)/%, $(LIBSEL4VMM_FILES))
 # same destination dir as libsel4vm
-LIBSEL4VMM_SRC = _repos/sel4proj/sel4_projects_libs/libsel4vmmplatsupport/docs
-LIBSEL4VMM_SRC_FILES = $(wildcard $(LIBSEL4VMM_SRC)/libsel4vmmplatsupport_*.md)
-LIBSEL4VMM_DST_FILES = $(patsubst $(LIBSEL4VMM_SRC)/%, $(LIBSEL4VM_DST)/%, $(LIBSEL4VMM_SRC_FILES))
+LIBSEL4VMM_DST_FILES = $(patsubst %, $(LIBSEL4VM_DST)/%, $(LIBSEL4VMM_FILES))
+
+$(LIBSEL4VMM_SRC_FILES): $(PROJECT_LIBS_REPO)
 
 $(LIBSEL4VM_DST)/%.md: $(LIBSEL4VMM_SRC)/%.md
 	@echo "$<  ==>  $@"
 	@tools/gen_markdown_api_doc.py -f $< -o $@ -p libsel4vmm.html
 
-.PHONY: generate_libsel4vm_api
-generate_libsel4vm_api: $(REPOSITORIES) $(LIBSEL4VM_DST) $(LIBSEL4VM_DST_FILES)
-
 .PHONY: generate_libsel4vmmplatsupport_api
-generate_libsel4vmmplatsupport_api: $(REPOSITORIES) $(LIBSEL4VM_DST) $(LIBSEL4VMM_DST_FILES)
+generate_libsel4vmmplatsupport_api: $(LIBSEL4VM_DST) $(LIBSEL4VMM_DST_FILES)
 
 .PHONY: generate_api
 generate_api: _generate_api_pages generate_libsel4vm_api generate_libsel4vmmplatsupport_api
@@ -158,7 +215,7 @@ serve: generate
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 .PHONY: generate
-generate: generate_api ruby_deps .npm_deps microkit-tutorial tutorials $(REPOSITORIES)
+generate: repos ruby_deps .npm_deps generate_api microkit-tutorial tutorials
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
