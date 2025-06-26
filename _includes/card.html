@@ -31,7 +31,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
       {{ include.body }}
     </div>
     {%- if include.no_link_text and include.link %}
-      <a href="{{ include.link }}">
+      <a href="{{ include.link | relative_url }}">
         <span class="sr-only">Link to {{ include.title }}</span>
         <span class="absolute inset-0"></span>
       </a>
@@ -39,7 +39,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
     {%- unless include.no_link_text %}
     {%-   if include.link %}
     <div class="px-6 mt-1 pb-5 {{ include.link_class }}">
-      <a href="{{ include.link }}" class="arrow-link">{{ link_text }}
+      <a href="{{ include.link | relative_url }}" class="arrow-link">{{ link_text }}
         <span class="absolute inset-0"></span>
       </a>
     </div>
