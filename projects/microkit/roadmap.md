@@ -13,9 +13,8 @@ This page talks about major features, for smaller improvements or
 bugs see [GitHub issues](https://github.com/seL4/microkit/issues).
 
 If you have a particular feature that is not listed here or need clarity
-on its status, the best thing to do is contact
-the developers by emailing `microkit@trustworthy.systems` or [opening an
-issue on GitHub](https://github.com/seL4/microkit/issues).
+on its status, please [open an issue on GitHub](https://github.com/seL4/microkit/issues)
+or [contact the developers](https://sel4.systems/support.html).
 
 | Feature | Current status | Timeline | Availability |
 |-----------------------------------------------------------|
