@@ -75,10 +75,10 @@ TUTES_REPO = _repos/sel4proj/sel4-tutorials
 $(TUTES_DST):
 	mkdir -p $@
 
-$(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/%
+$(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/*/%.md
 	@echo "$<  ==>  $@"
 	@PYTHONPATH=_repos/sel4/capdl/python-capdl-tool \
-	$(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $</$(@F)
+	$(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $<
 
 # Make tutorials
 # Filter out index.md; get-the-tutorials.md; how-to.md pathways.md; setting-up.md
