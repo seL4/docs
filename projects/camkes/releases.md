@@ -10,5 +10,5 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% assign coll = site['releases'] | where: "project", "camkes" %}
 
 {% for release in coll reversed %}
-- [{{ release.title }}]({{ release.url }}) {% if forloop.first %}(current){% endif %}
+- [{{ release.title }}]({{ release.url }}) {% if forloop.first %}(latest){% endif %}
 {% endfor %}

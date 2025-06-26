@@ -57,7 +57,7 @@ Because of this we need to split the list into two before sorting.
 {% for release in releases reversed %}
 {%   if release.variant != "mcs" %}
 - [{{ release.title }}]({{ release.url }})
-([manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf)) {% if forloop.first %}(current){% endif %}
+([manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf)) {% if forloop.first %}(latest){% endif %}
 {%   endif %}
 {% endfor %}
 
