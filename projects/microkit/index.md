@@ -18,22 +18,22 @@ your choice, significantly reducing the barrier to entry for new users of seL4.
 
   {% include card.html
      icon="arrow-right-end-on-rectangle"
-     title="Microkit Tutorial"
-     body="Getting started with Microkit. Build a small Wordle server and use a VM on Microkit."
+     title="Tutorial"
+     body="Learn how to use Microkit and its concepts to make a system."
      link="/projects/microkit/tutorial/welcome.html"
   %}
 
   {% include card.html
      icon="book-open"
-     title="Microkit Manual"
-     body="User's manual for the Microkit SDK"
+     title="Manual"
+     body="User's manual for the Microkit SDK."
      link="/projects/microkit/manual/current/"
   %}
 
   {% include card.html
      icon="arrow-down-tray"
-     title="Microkit Releases"
-     body="Get the code"
+     title="Releases"
+     body="SDK downloads and release notes."
      link="/projects/microkit/releases.html"
   %}
 
