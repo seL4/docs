@@ -39,7 +39,8 @@ expects. We are working on addressing this.
 
 seL4 supports running on multiple cores, however there are no verified multi-core configurations.
 As verified multi-core is a while away, one strategy to get a multi-core system working with
-single-core seL4 is to run an instance of seL4 on each core.
+single-core seL4 is to run an instance of seL4 on each core. This feature requires a number of internal
+changes but should be mostly transparent to the user.
 
 This is being actively worked on.
 
