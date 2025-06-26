@@ -6,10 +6,12 @@
 # Process mdbook .md files to
 #  - execute `{{#include "path/to/file.md"}}` directives
 #  - convert tab directives Jekyll includes used in the docsite
+#  - convert <details> to <details markdown="1">
 
 import os
 import re
 import argparse
+
 
 def inclusion_content(input_path, match):
     include_path = match.group(1)
@@ -31,6 +33,7 @@ def inclusion_content(input_path, match):
     else:
         print(f'Include file {include_path} not found in {input_path}')
         return f'<!-- Include file {include_path} not found -->'
+
 
 def process_mdbook(input_file, output_dir):
     if not os.path.exists(output_dir):
@@ -54,10 +57,14 @@ def process_mdbook(input_file, output_dir):
     pat = re.compile(r'{{#tab name="([^"]+)"[ ]*}}')
     content = re.sub(pat, r'{% include tab.html title="\1" %}', content)
 
+    # Convert <details> to <details markdown="1">
+    content = re.sub(r'<details>', r'<details markdown="1">', content)
+
     # Write processed content
     output_file = os.path.join(output_dir, os.path.basename(input_file))
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(content)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process mdbook .md files for includes and tabs.')
