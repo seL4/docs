@@ -8,7 +8,8 @@ virtualization: "No"
 iommu: "No"
 soc: Exynos4412
 cpu: Cortex-A9
-Status: "[Verified](/projects/sel4/verified-configurations.html#exynos4)"
+Status: "Verified"
+verified: exynos4
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

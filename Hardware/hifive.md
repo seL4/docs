@@ -7,7 +7,8 @@ arch: RV64IMAC, RV64GC
 virtualization: "No"
 iommu: "No"
 simulation_target: false
-Status: "[Verified](/projects/sel4/verified-configurations.html#riscv64)"
+Status: "Verified"
+verified: riscv64
 Contrib: "Data61"
 Maintained: "seL4 Foundation"
 soc: Freedom U540

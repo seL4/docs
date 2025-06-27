@@ -9,7 +9,8 @@ virtualization: "No"
 iommu: "No"
 soc: i.MX6
 cpu: Cortex-A9
-Status: "[Verified](/projects/sel4/verified-configurations.html#arm-sabre-lite)"
+Status: "Verified"
+verified: arm-sabre-lite
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

@@ -8,7 +8,8 @@ virtualization: "No"
 iommu: "No"
 soc: Amlogic S905
 cpu: Cortex-A53
-Status: "[FC complete, Integrity ongoing](/projects/sel4/verified-configurations.html#odroidc2)"
+Status: "FC complete, Integrity ongoing"
+verified: odroidc2
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

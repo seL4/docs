@@ -8,7 +8,8 @@ virtualization: "No"
 iommu: "No"
 soc: IMX8MM-EVK
 cpu: Cortex-A53 Quad 1.8 GHz
-Status: "[FC](/projects/sel4/verified-configurations.html#imx8mm)"
+Status: "FC"
+verified: imx8mm
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

@@ -8,7 +8,8 @@ virtualization: ARM HYP
 iommu: SMMU
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
-Status: "[Verified](/projects/sel4/verified-configurations.html#tk1)"
+Status: "Verified"
+verified: tk1
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

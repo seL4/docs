@@ -8,7 +8,8 @@ virtualization: ARM HYP
 iommu: "No"
 soc: BCM2711
 cpu: Cortex-A72
-Status: "[FC complete, Integrity ongoing](/projects/sel4/verified-configurations.html#bcm2711)"
+Status: "FC complete, Integrity ongoing"
+verified: bcm2711
 Contrib: "[Hensoldt](https://hensoldt-cyber.com) and [ARM Research IceCap](https://gitlab.com/arm-research/security/icecap/icecap)"
 Maintained: "[Hensoldt](https://hensoldt-cyber.com)"
 parent: /Hardware/

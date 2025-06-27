@@ -89,7 +89,13 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 {%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}
 {%- if page.arm_hardware and page.Maintained != "No" -%}
-| [{{ page.platform }}]({{page.url| relative_url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
+{%-   if page.verified -%}
+{%-    assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
+{%-    assign status = "[" | append: page.Status | append: "](" | append: link | append: ")" %}
+{%-   else -%}
+{%-    assign status = page.Status -%}
+{%-   endif -%}
+| [{{ page.platform }}]({{page.url| relative_url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ status }} | {{ page.Contrib }} | {{page.Maintained}} |
 {% endif %}
 {%- endfor %}
 
@@ -102,7 +108,13 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 | -        |  -         | -              | -    | -    | -              | -                   | -              | -             |
 {% for page in sorted %}
 {%- if page.riscv_hardware -%}
-| [{{ page.platform }}]({{page.url | relative_url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.Status }} | {{ page.Contrib }} | {{ page.Maintained }} |
+{%-   if page.verified -%}
+{%-    assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
+{%-    assign status = "[" | append: page.Status | append: "](" | append: link | append: ")" %}
+{%-   else -%}
+{%-    assign status = page.Status -%}
+{%-   endif -%}
+| [{{ page.platform }}]({{page.url | relative_url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ status }} | {{ page.Contrib }} | {{ page.Maintained }} |
 {% endif %}
 {%- endfor %}
 
@@ -115,7 +127,7 @@ We support PC99-style Intel Architecture Platforms.
 | [PC99 (32-bit)](IA32.html) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
 | [PC99 (64-bit)](IA32.html) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
 
-[X64]: /projects/sel4/verified-configurations.html#x64
+[X64]: {{ '/projects/sel4/verified-configurations.html#x64' | relative_url }}
 
 
 ---
@@ -136,6 +148,6 @@ starting from scratch on a new platform port.
 {%- assign sorted = site.pages | sort: 'platform'%}
 {% for page in sorted %}
 {%- if page.arm_hardware and page.Maintained == "No" -%}
-| <span style="color:grey">[{{ page.platform }}]({{page.url}})</span> (**unmaintained**) | <span style="color:grey">{{ page.soc}}</span> | <span style="color:grey">{{ page.cpu }}</span> | <span style="color:grey">{{ page.arch }}</span> | <span style="color:grey">{{ page.virtualization }}</span> | <span style="color:grey">{{ page.iommu}}</span> | <span style="color:grey">{{ page.Status }}</span> | <span style="color:grey">{{ page.Contrib }}</span> |
+| <span style="color:grey">[{{ page.platform }}]({{page.url | relative_url}})</span> (**unmaintained**) | <span style="color:grey">{{ page.soc}}</span> | <span style="color:grey">{{ page.cpu }}</span> | <span style="color:grey">{{ page.arch }}</span> | <span style="color:grey">{{ page.virtualization }}</span> | <span style="color:grey">{{ page.iommu}}</span> | <span style="color:grey">{{ page.Status }}</span> | <span style="color:grey">{{ page.Contrib }}</span> |
 {% endif %}
 {%- endfor %}

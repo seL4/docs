@@ -8,7 +8,8 @@ virtualization: ARM HYP
 iommu: limited SMMU
 soc: Exynos5
 cpu: Cortex-A15
-Status: "[Verified](/projects/sel4/verified-configurations.html#arm_hyp-exynos-5)"
+Status: "Verified"
+verified: arm_hyp-exynos-5
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/
