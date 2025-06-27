@@ -71,9 +71,9 @@ Use a query string with the time of the last build to cache bust site CSS file.
         </div>
         {% endif -%}
         <div class="flex flex-col max-w-full overflow-y-auto">
-          <div class="flex-1 max-w-full
-                      {%-if page.toc %} lg:mr-66 lg:max-w-[calc(100%-11rem)]{%endif-%}">
-            <main class="mx-6 md:mx-10 lg:mx-12 my-12
+          <div id="main-div" class="flex-1 max-w-full
+                      {%-if page.toc %} mr-0 sm:mr-8 xl:mr-64 {%endif-%}">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
                         overflow-x-auto" id="page-top">
               {{ content }}
             </main>
@@ -94,10 +94,22 @@ Use a query string with the time of the last build to cache bust site CSS file.
           </nav>
           {%- endif %}
           {%- if page.toc %}
-          <nav class="hidden lg:block absolute top-16 right-0 mt-8 pl-4 pr-2 mr-6 w-60
-                      h-[calc(100%-10rem)] overflow-y-auto std-bg">
-            <div class="font-semibold mb-4 text-base text-dark">On this page</div>
+          <div id="toc-open" class="absolute top-20 right-8 text-light hidden sm:block">
+            {% svg _icons/ellipsis-vertical.svg class="h-5 w-5 stroke-2 cursor-pointer" %}
+          </div>
+          <nav id="the-toc"
+               class="hidden xl:block absolute top-12 right-0 mt-8 pr-2 mr-6 w-60 h-[calc(100%-12rem)]
+                      std-bg">
+            <div class="pl-4 font-semibold mb-4 text-base text-dark relative">
+              On this page
+              <div id="toc-close" class="absolute top-1 right-1 text-light">
+              {% svg _icons/x-mark.svg class="h-4 w-4 stroke-2 cursor-pointer" %}
+              </div>
+            </div>
+            <div class="pl-4 border-l bordercol overflow-y-auto max-h-full pb-2">
             {{ content | toc_only }}
+            </div>
+            <div class="h-22"></div>
           </nav>
           {% endif -%}
           {% include footer.html %}
