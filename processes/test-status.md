@@ -14,7 +14,7 @@ on the main branch.
 ## Main Tests
 
 <span class="plain-links">[![seL4Test](https://github.com/seL4/seL4/actions/workflows/sel4test-deploy.yml/badge.svg?branch=master)](https://github.com/seL4/seL4/actions/workflows/sel4test-deploy.yml?query=branch%3Amaster)</span>
-<span class="plain-links">[![Proofs](https://github.com/seL4/l4v/actions/workflows/proof-deploy.yml/badge.svg)](https://github.com/seL4/l4v/actions/workflows/proof-deploy.yml?query=branch%3Amaster)</span>
+<span class="plain-links">[![Proofs](https://github.com/seL4/l4v/actions/workflows/proof-deploy.yml/badge.svg?branch=master)](https://github.com/seL4/l4v/actions/workflows/proof-deploy.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![Proof Sync](https://github.com/seL4/seL4/actions/workflows/preprocess-deploy.yml/badge.svg?branch=master)](https://github.com/seL4/seL4/actions/workflows/preprocess-deploy.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![seL4Bench](https://github.com/seL4/sel4bench/actions/workflows/sel4bench.yml/badge.svg?branch=master)](https://github.com/seL4/sel4bench/actions/workflows/sel4bench.yml?query=branch%3Amaster)</span>
 <span class="plain-links">[![CAmkES](https://github.com/seL4/camkes-tool/actions/workflows/camkes-deploy.yml/badge.svg?branch=master)](https://github.com/seL4/camkes-tool/actions/workflows/camkes-deploy.yml?query=branch%3Amaster)</span>
