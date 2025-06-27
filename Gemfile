@@ -34,6 +34,7 @@ group :jekyll_plugins do
   gem 'jekyll-remote-theme'
   gem "jekyll-postcss-v2"
   gem "jekyll-inline-svg"
+  gem "jekyll-gfm-admonitions"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
