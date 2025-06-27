@@ -22,7 +22,7 @@ Because of this we need to split the list into two before sorting.
 
 {% for release in releases reversed -%}
 
-- Release [{{ release.title }}]({{ release.url }}) {% if forloop.first %}(latest){% endif %}
+- Release [{{ release.title }}]({{ release.url | relative_url }}) {% if forloop.first %}(latest){% endif %}
 {%- assign sdks = sdk_downloads | where: "version", release.title %}
 {%- assign sdks = sdks[0] %}
 {%-  for sdk in sdks.sdks %}
