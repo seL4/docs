@@ -1,0 +1,32 @@
+{% unless include.html -%}
+{% assign md = 'markdown="1"' -%}
+{% endunless -%}
+{% assign kind = include.kind | default: "Note" -%}
+{% if kind == "Note" -%}
+{%  assign icon = "information-circle" -%}
+{%  assign bcolour = "border-blue-500" -%}
+{%  assign tcolour = "text-blue-400" -%}
+{% elsif kind == "Warning" -%}
+{%  assign icon = "exclamation-triangle" -%}
+{%  assign bcolour = "border-yellow-500" -%}
+{%  assign tcolour = "text-yellow-400" -%}
+{% elsif kind == "Caution" -%}
+{%  assign icon = "shield-exclamation" -%}
+{%  assign bcolour = "border-red-500" -%}
+{%  assign tcolour = "text-red-400" -%}
+{% elsif kind == "Important" -%}
+{%  assign icon = "exclamation-circle" -%}
+{%  assign bcolour = "border-violet-500" -%}
+{%  assign tcolour = "text-violet-400" -%}
+{% elsif kind == "Tip" -%}
+{%  assign icon = "light-bulb" -%}
+{%  assign bcolour = "border-f_green-500" -%}
+{%  assign tcolour = "text-logogreen" -%}
+{% endif -%}
+{% assign icon = "_icons/" | append: icon | append: ".svg" -%}
+<div class="border-l-4 {{bcolour}} pl-6">
+  <div class="{{tcolour}}">
+    {% svg {{icon}} class="h-5 w-5 inline -mt-0.5 mr-1" %}
+    {{ kind }}
+  </div>
+  <div {{md}}>
