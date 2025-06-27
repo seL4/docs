@@ -5,6 +5,7 @@ redirect_from:
   - /camkes_release/CAmkES_3.5.0.html
 title: camkes-3.5.0
 project: camkes
+parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -14,7 +15,7 @@ Announcing the release of `camkes-3.5.0` with the following changes:
 
 camkes-3.5.0 2018-05-28
 Using seL4 version 10.0.0
-  
+
 This release is the last release with official support for Kbuild based projects.
 This release and future releases use CMake as the build system for building applications.
 

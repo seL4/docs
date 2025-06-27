@@ -5,6 +5,7 @@ redirect_from:
   - /camkes_release/CAmkES_3.0.0.html
 title: camkes-3.0.0
 project: camkes
+parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -29,7 +30,7 @@ Hopefully most people will be in this category. Now that we've
 stable tag with all the features of "CAmkES Next", without the risk of
 api breaking changes. If you use repo, your manifest probably has a line
 resembling:
-```xml 
+```xml
 <project name="camkes-tool.git" path="tools/camkes" revision="next">
 ```
 

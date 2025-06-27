@@ -5,6 +5,7 @@ redirect_from:
   - /camkes_release/Camkes_3.7.0.html
 title: camkes-3.7.0
 project: camkes
+parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -14,7 +15,7 @@ Announcing the release of `camkes-3.7.0` with the following changes:
 
 camkes-3.7.0 2018-11-12
 Using seL4 version 10.1.1
-  
+
 ## Changes
 
 

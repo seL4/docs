@@ -5,6 +5,7 @@ redirect_from:
   - /camkes_release/CAmkES_3.2.0.html
 title: camkes-3.2.0
 project: camkes
+parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -36,7 +37,7 @@ Using seL4 version 8.0.0
     <https://github.com/seL4/camkes/tree/master/apps/rumprun_hello>
     <https://github.com/seL4/camkes/tree/master/apps/rumprun_pthreads>
     <https://github.com/seL4/camkes/tree/master/apps/rumprun_rust>
-    
+
     More information about the Rumprun unikernel on seL4 can be
     found here:
     <https://research.csiro.au/tsblog/using-rump-kernels-to-run-unmodified-netbsd-drivers-on-sel4/>
@@ -72,7 +73,7 @@ functionality is required, hold off upgrading until this issue is fixed.
 
 - ADL files: ADL syntax changes in this release should not break
         any existing ADL files.
-- 
+-
 
         Templates:
 

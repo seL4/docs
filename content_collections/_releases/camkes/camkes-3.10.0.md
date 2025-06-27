@@ -2,6 +2,7 @@
 version: camkes-3.10.0
 title: camkes-3.10.0
 project: camkes
+parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2021 seL4 Project a Series of LF Projects, LLC.
 ---

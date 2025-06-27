@@ -2,6 +2,7 @@
 version: camkes-3.9.0
 title: camkes-3.9.0
 project: camkes
+parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -11,7 +12,7 @@ Announcing the release of `camkes-3.9.0` with the following changes:
 
 camkes-3.9.0 2020-10-26
 Using seL4 version 12.0.0
-  
+
 ## Changes
 
 Below is a lightly edited list of all PRs merged into master for this release.

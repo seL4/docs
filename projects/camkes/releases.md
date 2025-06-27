@@ -1,6 +1,6 @@
 ---
 title: CAmkES Releases
-permalink: /releases/camkes
+permalink: /releases/camkes.html
 redirect_from:
   - /camkes_release
 SPDX-License-Identifier: CC-BY-SA-4.0
