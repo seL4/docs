@@ -25,13 +25,17 @@ The following instructions describe how to set up the required dependencies on
 your local OS. This page assumes you are building in a Linux OS. We however
 encourage site
 [contributions](https://docs.sel4.systems/processes/docs-contributing.html) for
-building in alternative OSes (e.g. macOS).
+build instructions in other OSes (e.g. macOS).
 
 ## Ubuntu
 
 These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 
-> As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/processes/docs-contributing.html) to the page.
+{% include note.html %}
+If you discover any missing dependencies and packages we welcome new
+[contributions](https://docs.sel4.systems/processes/docs-contributing.html) to
+the page.
+{% include endnote.html %}
 
 ### Base dependencies
 
