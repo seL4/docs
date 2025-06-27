@@ -1,7 +1,7 @@
 ---
 title: Microkit Tutorial - Virtual machines
-prev: part3.html
-next: end.html
+nav_prev: part3.html
+nav_next: end.html
 SPDX-License-Identifier: CC-BY-NC-SA-4.0
 SPDX-FileCopyrightText: 2025 Ivan Velickovic
 ---

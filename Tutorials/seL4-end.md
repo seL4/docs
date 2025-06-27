@@ -1,7 +1,7 @@
 ---
 title: End of seL4 Tutorial
 layout: tutorial
-prev: mcs.html
+nav_prev: mcs.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

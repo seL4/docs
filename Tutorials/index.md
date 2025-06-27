@@ -50,5 +50,5 @@ Additional resources to assist with learning:
 - [Contact](../../Resources#contact)
 
 <p>
-    Next: <a href="pathways">Pathways through the tutorials</a>
+    nav_next: <a href="pathways">Pathways through the tutorials</a>
 </p>

@@ -1,7 +1,7 @@
 ---
 title: Microkit Tutorial - Serial server
-prev: part0.html
-next: part2.html
+nav_prev: part0.html
+nav_next: part2.html
 SPDX-License-Identifier: CC-BY-NC-SA-4.0
 SPDX-FileCopyrightText: 2025 Ivan Velickovic
 ---
