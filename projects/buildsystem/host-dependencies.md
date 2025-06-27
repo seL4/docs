@@ -5,24 +5,44 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Host Dependencies
+# Setting up your machine to build seL4
 
-This page describes how to set up your host machine to build and run seL4 and its supported projects. To compile and use seL4 you can either:
+This page describes how to set up your development host machine for building and
+running the seL4 kernel. There are additional steps if you are planning to use
+[CAmkES](/projects/camkes/setting-up.html) or [Rust](todo.html) on top of seL4.
 
-* *Recommended:* Use Docker to isolate the dependencies from your machine. Detailed instructions for using Docker for building seL4, Camkes, and L4v can be found [here](/projects/dockerfiles/).
-* Install the following dependencies on your local OS
+{% include seL4-deps.md %}
 
-The following instructions describe how to set up the required dependencies on your local OS. This page assumes you are building in a Linux OS. We however encourage site [contributions](https://docs.sel4.systems/processes/docs-contributing.html) for building in alternative OSes (e.g. macOS).
+## Test
 
-## Get Google's Repo tool
+To test whether your build environment works, we recommend running the seL4 test
+suite in `quemu`. For instance:
 
-The primary way of obtaining and managing seL4 project source is through the use of Google's repo tool. To get repo, follow the instructions described in the section “Install” [here](https://gerrit.googlesource.com/git-repo#install).
+```sh
+# target directory
+mkdir sel4test
+cd sel4test
 
-See the [RepoCheatsheet](repo-cheatsheet) page for a quick explanation of how we use Repo.
+# get the sources
+repo init -u https://github.com/seL4/sel4test-manifest.git
+repo sync
 
-{% assign items = site.dependencies | sort: 'order_priority' %}
-{% for project in items %}
+# create build directory
+mkdir build
+cd build
 
-{{ project.content }}
+# configure build
+../init-build.sh -DSIMULATION=TRUE -DAARCH32=TRUE -DPLATFORM=sabre
 
-{% endfor %}
+# build
+ninja
+
+# run
+./simulate
+```
+
+This should start `qemu` and run a series of tests. Don't worry if error
+messages appear, they are explicit tests for errors.
+
+An output of `All is well in the universe` at the end indicates a successful
+test run. To exit `qemu`, press `Ctrl-a`, then `x`.
