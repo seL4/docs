@@ -21,7 +21,7 @@ or [contact the developers](https://sel4.systems/support.html).
 | Multi-core support | Working state, needs cleanup for merging. | Q3'25 | [Branch 'smp'](https://github.com/seL4/microkit/tree/smp) |
 | [x86 support](#x86) | Actively worked on | Q4'25 | [PR #244](https://github.com/seL4/microkit/pull/244) |
 | [Multi-kernel support](#multikernel) | Actively worked on. | Q4'25 | N/A |
-| [PD templates](#templates) | Initial work explored, requires more experimentation and development. | TODO | N/A |
+| [PD templates](#templates) | Initial work explored, requires more experimentation and development. | Q1'26 | N/A |
 
 ## Feature details
 
