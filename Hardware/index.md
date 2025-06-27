@@ -89,7 +89,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms.
 {%- assign sorted = site.pages | sort: 'platform' %}
 {% for page in sorted %}
 {%- if page.arm_hardware and page.Maintained != "No" -%}
-| [{{ page.platform }}]({{page.url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
+| [{{ page.platform }}]({{page.url| relative_url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ page.Status }} | {{ page.Contrib }} | {{page.Maintained}} |
 {% endif %}
 {%- endfor %}
 
@@ -102,7 +102,7 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 | -        |  -         | -              | -    | -    | -              | -                   | -              | -             |
 {% for page in sorted %}
 {%- if page.riscv_hardware -%}
-| [{{ page.platform }}]({{page.url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.Status }} | {{ page.Contrib }} | {{ page.Maintained }} |
+| [{{ page.platform }}]({{page.url | relative_url}}) | {% if page.simulation_target %}Yes{% else %}No{% endif %} | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.Status }} | {{ page.Contrib }} | {{ page.Maintained }} |
 {% endif %}
 {%- endfor %}
 
@@ -112,8 +112,8 @@ We support PC99-style Intel Architecture Platforms.
 
 | Platform              | Arch | Virtualisation | IOMMU | Verification Status                  | Contributed by | Maintained by |
 | -                     |  -   | -              | -     | -                                    | -              | -             |
-| [PC99 (32-bit)](IA32) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
-| [PC99 (64-bit)](IA32) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
+| [PC99 (32-bit)](IA32.html) | x86  | VT-X           | VT-D  | Unverified                           | Data61         | seL4 Foundation        |
+| [PC99 (64-bit)](IA32.html) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] | Data61         | seL4 Foundation        |
 
 [X64]: /projects/sel4/verified-configurations.html#x64
 
