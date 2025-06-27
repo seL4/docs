@@ -1,5 +1,4 @@
 ---
-title: Tutorials
 layout: tutorial
 description: overview of seL4 and related tutorials
 redirect_from:
@@ -8,7 +7,8 @@ redirect_from:
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
-# Overview
+
+# Tutorial Overview
 
 We have developed a series of tutorials to introduce seL4 and developing systems on seL4.
 

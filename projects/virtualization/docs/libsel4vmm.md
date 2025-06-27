@@ -1,5 +1,4 @@
 ---
-title: VMM library API documentation
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -10,6 +9,7 @@ See below for usage documentation on various libsel4vmmplatsupport interfaces.
 These are not specific to CAmkES but are mostly used in CAmkES.
 
 ### Common Interfaces
+
 * [sel4vmmplatsupport/device.h](api/libsel4vmmplatsupport_device): Provides a series of datastructures and helpers to manage VMM devices.
 * [sel4vmmplatsupport/device_utils.h](api/libsel4vmmplatsupport_device_utils): Provides various helpers to establish different types devices for a given VM instance
 * [sel4vmmplatsupport/guest_image.h](api/libsel4vmmplatsupport_guest_image): Provides general utilites to load guest vm images (e.g. kernel, initrd, modules)

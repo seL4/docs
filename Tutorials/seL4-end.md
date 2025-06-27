@@ -1,10 +1,11 @@
 ---
-title: End of seL4 Tutorial
 layout: tutorial
 nav_prev: mcs.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+
+# End of the seL4 Tutorial
 
 ## That's all for the seL4 kernel tutorial.
 

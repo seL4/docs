@@ -1,5 +1,4 @@
 ---
-title: Microkit User Manual (v2.0.1)
 toc: true
 Copyright: 2021, Breakaway Consulting Pty. Ltd.
 SPDX-License-Identifier: CC-BY-SA-4.0

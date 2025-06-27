@@ -1,5 +1,4 @@
 ---
-title: Project Status
 project: sel4test
 permalink: projects/sel4test/status.html
 redirect_from:

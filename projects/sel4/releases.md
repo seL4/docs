@@ -1,5 +1,4 @@
 ---
-title: seL4 releases
 permalink: /releases/seL4.html
 redirect_from:
   - /sel4_release

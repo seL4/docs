@@ -1,5 +1,4 @@
 ---
-title: Project Status
 project: camkes
 permalink: projects/camkes/status.html
 redirect_from:

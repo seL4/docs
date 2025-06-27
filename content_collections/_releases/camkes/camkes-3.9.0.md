@@ -1,6 +1,5 @@
 ---
 version: camkes-3.9.0
-title: camkes-3.9.0
 project: camkes
 parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0

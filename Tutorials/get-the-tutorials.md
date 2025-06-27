@@ -1,5 +1,4 @@
 ---
-title: Getting the tutorials
 layout: tutorial
 description: steps and code for getting tutorials
 nav_next: hello-world.html
@@ -7,6 +6,8 @@ nav_prev: setting-up.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 ---
+
+# Getting the tutorials
 
 ## Python Dependencies
 

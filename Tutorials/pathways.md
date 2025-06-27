@@ -1,12 +1,12 @@
 ---
-title: Pathways
 layout: tutorial
 description: pathways through tutorials depending on learning objectives
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Pathways through tutorials
+# Pathways through the seL4 tutorials
+
 The tutorials can be approached in a number of different ways. Our recommended approach for newcomers is to begin the [Microkit](https://trustworthy.systems/projects/microkit/tutorial/), bearing in mind that the Microkit hides many of the seL4 mechanisms - it is designed that way, to make building on top of seL4 easier. Having built a small system on top of seL4, the developer can delve into the concepts in the order list in the navigation bar to the left.
 
 ## Alternate pathways

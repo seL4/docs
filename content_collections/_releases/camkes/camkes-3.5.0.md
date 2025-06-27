@@ -3,7 +3,6 @@ version: camkes-3.5.0
 redirect_from:
   - /camkes_release/CAmkES_3.5.0/
   - /camkes_release/CAmkES_3.5.0.html
-title: camkes-3.5.0
 project: camkes
 parent: /releases/camkes.html
 SPDX-License-Identifier: CC-BY-SA-4.0

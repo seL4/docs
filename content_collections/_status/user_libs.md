@@ -1,5 +1,4 @@
 ---
-title: Project Status
 project: user_libs
 permalink: projects/user_libs/status.html
 redirect_from:
