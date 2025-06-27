@@ -1,0 +1,43 @@
+{%- comment %}
+Copyright 2025 Proofcraft Pty Ltd
+SPDX-License-Identifier: CC-BY-SA-4.0
+{% endcomment -%}
+{% capture info %}
+  <div class="flex flex-row gap-y-2 flex-wrap mx-auto">
+    {% if include.rust %}
+    <div class="text-xs md:text-sm py-0.5 px-6 rounded-sm border-dotted border-1 border-gray-200 dark:border-gray-400 text-gray-400 flex-none basis-auto mx-auto text-center">
+      Rust
+    </div>
+    {% endif %}
+    {% if include.C %}
+    <div class="text-xs md:text-sm py-0.5 px-8 rounded-sm border-dotted border-1 border-gray-200 dark:border-gray-400 text-gray-400 flex-none basis-auto mx-auto text-center">
+      C
+    </div>
+    {% endif %}
+    {% if include.mkit %}
+    <div class="text-xs md:text-sm py-0.5 px-4 rounded-sm border-dotted border-1 border-gray-200 dark:border-gray-400 text-gray-400 flex-none basis-auto mx-auto text-center">
+      Microkit
+    </div>
+    {% endif %}
+    {% if include.camkes %}
+    <div class="text-xs md:text-sm py-0.5 px-4 rounded-sm border-dotted border-1 border-gray-200 dark:border-gray-400 text-gray-400 flex-none basis-auto mx-auto text-center">
+      CAmkES
+    </div>
+    {% endif %}
+  </div>
+  <div class="py-0.5 text-sm font-semibold text-f_green-600 text-center mt-6 mr-2">
+    Learn more
+    &nbsp;
+    {% svg _icons/other/external.svg class="inline-icon" %}
+  </div>
+{% endcapture -%}
+{%- include card.html
+    title = include.title
+    link = include.link
+    icon = include.icon
+    center = include.center
+    class = include.class
+    no_link_text = true
+    body = include.body
+    info = info
+-%}
