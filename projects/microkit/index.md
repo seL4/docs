@@ -33,7 +33,7 @@ your choice, significantly reducing the barrier to entry for new users of seL4.
      icon="arrow-down-tray"
      title="Releases"
      body="SDK downloads and release notes."
-     link="/projects/microkit/releases.html"
+     link="/releases/microkit.html"
   %}
 
   {% include card.html

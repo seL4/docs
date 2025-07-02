@@ -1,4 +1,5 @@
 ---
+permalink: /releases/microkit.html
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 ---
