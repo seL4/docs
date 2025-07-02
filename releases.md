@@ -1,6 +1,8 @@
 ---
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
+redirect_from:
+  - processes/release-process.html
 ---
 
 # Releases
