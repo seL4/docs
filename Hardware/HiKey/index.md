@@ -4,8 +4,8 @@ cmake_plat: hikey
 xcompiler_arg: -DAARCH64=1
 platform: HiKey
 arch: ARMv8A
-virtualization: ARM HYP
-iommu: "No"
+virtualization: "yes"
+iommu: "no"
 soc: Kirin 620
 cpu: Cortex-A53
 Status: "[Verified](/projects/sel4/verified-configurations.html#hikey)"

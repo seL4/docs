@@ -4,8 +4,8 @@ cmake_plat: tx1
 xcompiler_arg: -DAARCH64=1
 platform: TX1
 arch: ARMv8A, AArch64 only
-virtualization: ARM HYP
-iommu: SMMU
+virtualization: "yes"
+iommu: "yes"
 soc: NVIDIA Tegra X1
 cpu: Cortex-A57 Quad
 Status: Unverified

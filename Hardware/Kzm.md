@@ -4,8 +4,8 @@ cmake_plat: kzm
 xcompiler_arg: -DAARCH32=1
 platform: KZM
 arch: ARMv6A
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 soc: i.MX31
 cpu: ARM1136J
 Status: Unverified

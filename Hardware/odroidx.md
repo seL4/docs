@@ -4,8 +4,8 @@ cmake_plat: exynos4
 xcompiler_arg: -DAARCH32=1
 platform: OdroidX
 arch: ARMv7A
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 soc: Exynos4412
 cpu: Cortex-A9
 Status: "Verified"

@@ -4,8 +4,8 @@ cmake_plat: tk1
 xcompiler_arg: -DAARCH32=1
 platform: TK1
 arch: ARMv7A
-virtualization: ARM HYP
-iommu: SMMU
+virtualization: "yes"
+iommu: "yes"
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
 Status: "Verified"

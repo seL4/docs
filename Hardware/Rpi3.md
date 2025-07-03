@@ -4,8 +4,8 @@ cmake_plat: rpi3
 xcompiler_arg: -DAARCH32=1
 platform: Raspberry Pi 3-b
 arch: ARMv8A
-virtualization: ARM HYP
-iommu: "No"
+virtualization: "yes"
+iommu: "no"
 soc: BCM2837
 cpu: Cortex-A53
 Status: Unverified

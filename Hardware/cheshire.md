@@ -4,8 +4,8 @@ cmake_plat: cheshire
 xcompiler_arg: -DRISCV64=1
 platform: Cheshire
 arch: RV64IMAFDC
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 simulation_target: false
 Status: "Unverified"
 Contrib: "UNSW"

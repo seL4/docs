@@ -4,8 +4,8 @@ cmake_plat: exynos5410
 xcompiler_arg: -DAARCH32=1
 platform: OdroidXU
 arch: ARMv7A
-virtualization: ARM HYP
-iommu: limited SMMU
+virtualization: "yes"
+iommu: limited
 soc: Exynos5
 cpu: Cortex-A15
 Status: "FC with HYP, no SMMU"

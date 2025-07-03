@@ -4,8 +4,8 @@ cmake_plat: hifive
 xcompiler_arg: -DRISCV64=1
 platform: HiFive Unleashed
 arch: RV64IMAC, RV64GC
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 simulation_target: false
 Status: "Verified"
 verified: riscv64

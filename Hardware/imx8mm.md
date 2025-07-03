@@ -4,8 +4,8 @@ cmake_plat: imx8mm-evk
 xcompiler_arg: -DAARCH64=1
 platform: Imx8mm
 arch: ARMv8A, AArch64
-virtualization: "No"
-iommu: "No"
+virtualization: "yes"
+iommu: "no"
 soc: IMX8MM-EVK
 cpu: Cortex-A53 Quad 1.8 GHz
 Status: "FC"

@@ -5,7 +5,7 @@ xcompiler_arg: -DAARCH64=1
 platform: Odroid-C4
 arch: ARMv8A, AArch64 only
 virtualization: "Yes"
-iommu: "No"
+iommu: "no"
 soc: Amlogic S905X3
 cpu: Cortex-A55
 Status: "FC complete, Integrity ongoing"

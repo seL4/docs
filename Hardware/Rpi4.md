@@ -4,8 +4,8 @@ cmake_plat: rpi4
 xcompiler_arg: -DAARCH64=1 -DRPI4_MEMORY=<1024,2048,4096,8192>
 platform: Raspberry Pi 4B
 arch: ARMv8A
-virtualization: ARM HYP
-iommu: "No"
+virtualization: "yes"
+iommu: "no"
 soc: BCM2711
 cpu: Cortex-A72
 Status: "FC complete, Integrity ongoing"

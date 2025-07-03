@@ -4,8 +4,8 @@ cmake_plat: am335x-boneblack
 xcompiler_arg: -DAARCH32=1
 platform: BeagleBone Black / Blue
 arch: ARMv7A
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 soc: AM335x
 cpu: Cortex-A8
 Status: Unverified

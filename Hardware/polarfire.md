@@ -4,8 +4,8 @@ cmake_plat: polarfire
 xcompiler_arg: -DSel4testAllowSettingsOverride=True -DElfloaderImage=binary -DKernelVerificationBuild=OFF
 platform: Microchip PolarFire Icicle Kit
 arch: RV64IMAC, RV64GC
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 simulation_target: false
 Status: Unverified
 Contrib: "[DornerWorks](https://dornerworks.com)"
