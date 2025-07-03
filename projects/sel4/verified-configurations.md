@@ -179,7 +179,7 @@ Hypervisor mode | Yes
 
 File | `ARM_HYP_exynos5_verified.cmake` and `ARM_HYP_exynos5410_verified.cmake`
 Architecture | ARMv7, 32 bit
-Platform | Odroid XU4
+Platform | Odroid XU and Odroid XU4
 Floating-point support | No
 Hypervisor mode | Yes
 **Verified properties** | functional correctness, incl fast path
