@@ -8,8 +8,8 @@ virtualization: "no"
 iommu: "no"
 simulation_target: false
 Status: Unverified
-Contrib: "[DornerWorks](https://dornerworks.com)"
-Maintained: "[DornerWorks](https://dornerworks.com)"
+Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
+Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 soc: PolarFire SoC FPGA
 cpu: U54-MC, E51
 parent: /Hardware/
@@ -21,6 +21,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 Polarfire Icicle Kit is a RISC-V development board by Microchip. Check
 [here](https://www.microchip.com/en-us/development-tool/MPFS-ICICLE-KIT-ES) for details.
+
+{% include hw-info.html %}
 
 Microchip maintains online material, including designs and documentation
 [here](https://www.microchip.com/en-us/products/fpgas-and-plds/system-on-chip-fpgas/polarfire-soc-fpgas#documentation).

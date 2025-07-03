@@ -1,0 +1,26 @@
+{%- comment %}
+Copyright 2025 Proofcraft Pty Ltd
+SPDX-License-Identifier: CC-BY-SA-4.0
+{% endcomment -%}
+<div class="grid grid-cols-[14rem_auto]">
+<div>Platform:</div> <div>{{ page.platform }}</div>
+{% if page.simulation_target -%}
+<div>Simulation platform:</div> <div>yes</div>
+{%- endif %}
+<div>Architecture:</div> <div>{{ page.arch }}</div>
+{% if page.soc -%}
+<div>System-on-chip:</div> <div>{{ page.soc }}</div>
+{%- endif %}
+{% if page.CPU -%}
+<div>CPU:</div> <div>{{ page.cpu }}</div>
+{%- endif %}
+
+<div>seL4 virtualisation support:</div>
+<div>{{ page.virtualization }}</div>
+
+<div>seL4 SMMU support:</div>
+<div>{{ page.iommu }}</div>
+
+<div>Contributed by:</div> <div>{{ page.Contrib }}</div>
+<div>Maintained by:</div> <div>{{ page.Maintained }}</div>
+</div>

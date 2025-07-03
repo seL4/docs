@@ -17,18 +17,24 @@ parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+
 # Sabre Lite
 
 For board details see
 [Sabre Lite](https://boundarydevices.com/product/bd-sl-i-mx6/)
 
-# Booting on the Sabre Lite
-## Hardware Requirements
+{% include hw-info.html %}
+
+## Booting on the Sabre Lite
+
+### Hardware Requirements
+
 * 5V/3A power supply
 * RS232 cable (or USB-RS232 adapter)
 * USB OTG cable for Fastboot or Ethernet cable for TFTPboot
 
-## Board Setup
+### Board Setup
+
  The SabreLite can be configured to boot from either
 USB or SPI flash. USB booting is typically only used when there is a
 failure in the SPI flash resident bootloader. One may use USB boot to
@@ -38,15 +44,18 @@ SPI flash contains a simple boot loader that will can boot from either
 SPI flash, or from an image starting at block 2 of the SD or μSD card
 depending on which boot loader has been flashed.
 
-## Booting U-Boot from USB
+### Booting U-Boot from USB
+
  USB booting offers a back door into the
 system. This method is usually only used to reprogram the SPI flash boot
 program.
 
 You will first need to acquire and compile the IMX USB loader tool from
+
 ```bash
 git clone git://github.com/boundarydevices/imx_usb_loader.git
 ```
+
 NOTE 1: The Element14 Sabrelite platform has its DIP switch mounted
 incorrectly.
 
@@ -62,6 +71,7 @@ USB-TTY converter has locked up.
   5.  Power up the device.
 
 Now you are ready to load your image into memory and execute:
+
 ```bash
 $ lsusb
 ....
@@ -70,11 +80,13 @@ Bus 001 Device 019: ID
 ....
 $ sudo ./imx_usb image_file
 ```
+
 The image file that is used will typically be named
 u-boot.bin
 
-## Booting U-Boot from SPI Flash
- To boot from SPI flash:
+### Booting U-Boot from SPI Flash
+
+To boot from SPI flash:
 
   1.  Move the DIP switch nearest the Ethernet port to the OFF position
   2.  Move the DIP switch farthest from the Ethernet port to the OFF
@@ -85,6 +97,7 @@ u-boot.bin
   5.  Power up the device.
 
 Now you are ready to load your image into memory and execute:
+
 ```bash
 $ lsusb
 ....
@@ -96,30 +109,23 @@ $ sudo ./imx_usb image_file
 The image file that is used will typically be named
 u-boot.bin
 
-## Booting U-Boot from SPI Flash
- To boot from SPI flash:
+### SD and μSD cards
 
-  1.  Move the DIP switch nearest the Ethernet port to the OFF position
-  2.  Move the DIP switch farthest from the Ethernet port to the OFF
-      position
-  3.  Connect the RS232 port to your computer and open minicom.
-  4.  Insert an SD or μSD card depending on which boot loader is
-      resident in SPI flash
-  5.  Power up the device.
-
-## SD and μSD cards
- To boot U-Boot from an SD or μSD card, one must
+To boot U-Boot from an SD or μSD card, one must
 install the appropriate boot loader into SPI flash. The method and boot
 loader images are provided in the SPI flash programming section. U-Boot
 must be located at block 2 of the SD or μSD card. This can be achieved
 with the following command, assuming that the SD or μSD device is
 `/dev/sdb`.
+
 ```bash
 dd if=u-boot.bin of=/dev/sdb seek=2 bs=512; sync
 ```
 
-## U-Boot for the Sabre Lite
-### Obtaining and Building
+### U-Boot for the Sabre Lite
+
+#### Obtaining and Building
+
 There are many versions of U-Boot available for the Sabre
 Lite. The ones for Android support Fastboot; the mainline ones do not.
 
@@ -140,6 +146,7 @@ Prebuilt:
 The prebuilt version is for booting from SPI.
 
 To obtain and build U-Boot, do:
+
 ```bash
 git clone git://github.com/boundarydevices/u-boot-2009-08.git
 cd u-boot-2009-08
@@ -150,9 +157,12 @@ make mx6q_sabrelite_android_config
 make all
 ls -l u-boot.bin
 ```
-### Installing U-Boot to SPI Flash
+
+#### Installing U-Boot to SPI Flash
+
 To install U-Boot, put u-boot.bin onto the first partition (either FAT16 or
 EXT2) of an SD card, boot into U-Boot then do this at the U-Boot prompt:
+
 ```bash
 # Initialise the SD card. Replace 1 with 0 for standard SD
 mmc dev 1
@@ -173,7 +183,9 @@ sf write 0x12000000 0 ${filesize}
 
 # Ensure that the boot select switches are set appropriately, then reboot the Sabrelite
 ```
+
 ## Booting seL4 applications
+
 This assumes that the U-Boot version above is installed in SPI flash.
 
 |Command|Operation|

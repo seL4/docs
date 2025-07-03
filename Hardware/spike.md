@@ -8,7 +8,7 @@ virtualization: "no"
 iommu: "no"
 simulation_target: true
 Status: "Unverified"
-Contrib: "Data61, [Hesham Almatary](https://github.com/heshamelmatary)"
+Contrib: 'Data61, <a href="https://github.com/heshamelmatary">Hesham Almatary</a>'
 Maintained: "seL4 Foundation"
 redirect_from:
   - /Hardware/RISCV
@@ -19,11 +19,14 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Spike
 
+{% include hw-info.html %}
+
 ## Building the GCC toolchain
 
 {% include risc-v.md %}
 
 ## Getting the Simulator
+
 You can use either [RISC-V ISA
 Simulator](https://github.com/riscv/riscv-isa-sim) or QEMU >= v4.2 shipped with
 your Linux distribution.

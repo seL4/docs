@@ -19,10 +19,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Odroid-C2
 
-The Odroid-C2 is a single board computer based on the Amlogic S905
-System-on-Chip.
+The [Odroid-C2](https://wiki.odroid.com/odroid-c2/odroid-c2) is a single board
+computer based on the Amlogic S905 System-on-Chip.
 
-<https://wiki.odroid.com/odroid-c2/odroid-c2>
+{% include hw-info.html %}
 
 Only 64-bit mode is supported both with and without SMP. Hypervisor
 support has not been tested.

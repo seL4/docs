@@ -22,6 +22,8 @@ This page contains info about building seL4 on
 [BeagleBone Black](https://beagleboard.org/black) and
 [BeagleBone Blue](https://beagleboard.org/blue).
 
+{% include hw-info.html %}
+
 ## Building for the BeagleBone Black / Blue
 These instructions were written by Tim Newsham. The BeagleBone is
 a community-supported port.

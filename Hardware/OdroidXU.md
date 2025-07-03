@@ -23,6 +23,8 @@ This page provides info on the
 [Odroid-XU](https://www.hardkernel.com/shop/odroid-xu/)
 Exynos 5 board
 
+{% include hw-info.html %}
+
 seL4 assumes that one boots in HYP mode. To do this, one needs a new
 signed bootloader.
 

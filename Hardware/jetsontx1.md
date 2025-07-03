@@ -15,8 +15,12 @@ parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+
 # Jetson TX1
- The Jetson TX1 is a multimedia and DSP board with a highly
+
+{% include hw-info.html %}
+
+The Jetson TX1 is a multimedia and DSP board with a highly
 optimized 64-bit memory controller which supports low latency accesses
 from the CPU, high bandwidth accesses from the GPU and bounded latency
 accesses from real-time devices such as the display.

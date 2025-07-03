@@ -23,7 +23,8 @@ This page provides info on the
 [Odroid-XU4](https://www.hardkernel.com/shop/odroid-xu4-special-price/)
 Exynos 5 board
 
-### Get and build sel4test
+{% include hw-info.html %}
+
+## Get and build sel4test
 
 {% include sel4test.md %}
-

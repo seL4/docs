@@ -18,7 +18,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # HiKey
 
-### Pre-Requisites
+{% include hw-info.html %}
+
+## Pre-Requisites
 
 
 - One HiKey Board. See
@@ -26,8 +28,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 - Fully working development environment. See
         [Resources](/Resources)
 
-### Getting Started
- The Hikey board is based around the
+## Getting Started
+
+The Hikey board is based around the
 [HiSilicon Kirin 620](https://github.com/96boards/documentation/blob/master/consumer/hikey/hardware-docs/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf) eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
 Toe start using 32-bit seL4 follow the below instructions. They will
 walk you step by step beginning from the source files and ultimately
@@ -41,7 +44,8 @@ cd hikey-flash
 ```
 
 ## 2. Custom toolchains
- The cross-toolchains GCC 4.9 for Aarch64 and
+
+The cross-toolchains GCC 4.9 for Aarch64 and
 gnueabihf are required to flash the Hikey. If versions of GCC 5, or
 higher, are installed the following steps must be taken as GCC5 is not
 backwards compatible. Otherwise skip to the next Section.
@@ -88,7 +92,9 @@ gedit LinaroPkg/platforms.config
 BUILDFLAGS=-DSERIAL_BASE=0xF8015000
 ATF_BUILDFLAGS=CONSOLE_BASE=PL011_UART0_BASE CRASH_CONSOLE_BASE=PL011_UART0_BASE
 ```
+
 ## 5. Patching the UEFI for the Hikey
+
 Obtain the patch from [edk2.patch](edk2.patch) and follow the below steps.
 
 ```bash
@@ -98,6 +104,7 @@ patch -p1 < ~/Downloads/edk2.patch
 ```
 
 ## 6.Modifying the firmware
+
 If settings are required
 to be changed while in EL3 then the file in
 arm-trusted-firmware/bl1/bl1_main.c can be modified. To disable the
@@ -110,11 +117,13 @@ patch -p5 < ~/Downloads/bl1_main.patch
 ```
 
 ## 7. Modifying the UEFI
+
 If settings are required to
 be changed while in EL2 then the file in
 linaro-edk2/MdeModulePkg/Application/noboot/efi-stub.S can be modified.
 To disable the prefetcher obtain the patch file from
 [efi-stub.patch](efi-stub.patch) follow the below steps.
+
 ```bash
  cd
 linaro-edk2/MdeModulePkg/Application/noboot patch -p7 <
@@ -123,6 +132,7 @@ hikey-flash
 ```
 
 ## 8. Building the UEFI for the Hikey
+
 ```bash
 export AARCH64_TOOLCHAIN=GCC49
 export EDK2_DIR=${PWD}/linaro-edk2
@@ -154,9 +164,11 @@ python gen_loader.py -o ptable-linux.img --img_prm_ptable=prm_ptable.img
 ```
 
 ## 9. Boot Image
- Obtain the boot image from
+
+Obtain the boot image from
 <https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz>
 and follow the below commands.
+
 ```bash
 gunzip *.img.gz
 
@@ -171,8 +183,10 @@ sudo umount boot-fat
 ```
 
 ## 10. Minicom
-Install and configure minicom. Two terminals are required for the commands. If minicom is already installed and
-configured skip the next Section.
+
+Install and configure minicom. Two terminals are required for the commands. If
+minicom is already installed and configured skip the next Section.
+
 ```bash
 # In the first terminal
 cd /dev/
@@ -192,7 +206,6 @@ sudo minicom -s
   4.  Press 'esc' twice and select Save setup as dfl
 
 ## 11. Flash the firmware
-
 
   1.  Turn off the power to the board if it is on.
   2.  Connect UART0 to a USB port if it is not connected already.

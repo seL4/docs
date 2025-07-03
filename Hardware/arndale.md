@@ -23,6 +23,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 seL4 supports the the [Arndale](http://www.arndaleboard.org/wiki/index.php/Main_Page)
   dual core A15 ARM development board.
 
+{% include hw-info.html %}
+
 ## Client setup
 
 ### Hardware requirements:

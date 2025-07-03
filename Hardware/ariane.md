@@ -21,6 +21,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 Ariane is a 6-stage RISC-V CPU. For details, refer to
 [https://github.com/pulp-platform/ariane](https://github.com/pulp-platform/ariane)
 
+{% include hw-info.html %}
+
 ## Building the GCC toolchain
 
 {% include risc-v.md %}

@@ -9,13 +9,16 @@ iommu: "no"
 soc: i.MX8MQ
 cpu: Cortex-A53 Quad 1.5 GHz
 Status: Unverified
-Contrib: "[Capgemini Engineering](https://capgemini-engineering.com)"
-Maintained: "[Capgemini Engineering](https://capgemini-engineering.com)"
+Contrib: '<a href="https://capgemini-engineering.com">Capgemini Engineering</a>"'
+Maintained: '<a href="https://capgemini-engineering.com">Capgemini Engineering</a>"'
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2022 seL4 Project a Series of LF Projects, LLC.
 ---
+
 # Avnet MaaXBoard
+
+{% include hw-info.html %}
 
 ## Building seL4test
 

@@ -10,8 +10,8 @@ soc: BCM2711
 cpu: Cortex-A72
 Status: "FC complete, Integrity ongoing"
 verified: bcm2711
-Contrib: "[Hensoldt](https://hensoldt-cyber.com) and [ARM Research IceCap](https://gitlab.com/arm-research/security/icecap/icecap)"
-Maintained: "[Hensoldt](https://hensoldt-cyber.com)"
+Contrib: '<a href="https://hensoldt-cyber.com">Hensoldt</a> and <a href="https://gitlab.com/arm-research/security/icecap/icecap">ARM Research IceCap</a>'
+Maintained: seL4 Foundation
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
@@ -19,7 +19,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Raspberry Pi 4 Model B
 
+{% include hw-info.html %}
+
 ## Serial connection
+
 Serial TX and RX are located at GPIO pins 14 and 15 respectively.
 
 ## U-Boot

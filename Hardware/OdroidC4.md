@@ -4,7 +4,7 @@ cmake_plat: odroidc4
 xcompiler_arg: -DAARCH64=1
 platform: Odroid-C4
 arch: ARMv8A, AArch64 only
-virtualization: "Yes"
+virtualization: "yes"
 iommu: "no"
 soc: Amlogic S905X3
 cpu: Cortex-A55
@@ -19,10 +19,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Odroid-C4
 
-The Odroid-C4 is a single board computer based on the Amlogic S905X3
-System-on-Chip.
+The [Odroid-C4](https://wiki.odroid.com/odroid-c4/odroid-c4) is a single board
+computer based on the Amlogic S905X3 System-on-Chip.
 
-<https://wiki.odroid.com/odroid-c4/odroid-c4>
+{% include hw-info.html %}
 
 Note that only 64-bit mode is supported.
 

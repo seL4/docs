@@ -8,16 +8,19 @@ virtualization: "no"
 iommu: "no"
 simulation_target: false
 Status: Unverified
-Contrib: DornerWorks
-Maintained: DornerWorks
+Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
+Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 cpu: Rocket
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+
 # Rocketchip FPGA mapped to Zynq ZCU102
 
 This rocketchip implementation will run on the ZCU102 FPGA fabric.
+
+{% include hw-info.html %}
 
 ## Building the GCC toolchain
 

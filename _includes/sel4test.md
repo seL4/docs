@@ -16,7 +16,7 @@ mkdir cbuild
 cd cbuild
 ../init-build.sh -DPLATFORM={{ page.cmake_plat }} {{page.xcompiler_arg}}
 # The default cmake wrapper sets up a default configuration for the target platform.
-# To change individual settings, run `ccmake` and change the configuration
+# To change individual settings, run `ccmake .` and change the configuration
 # parameters to suit your needs.
 ninja
 

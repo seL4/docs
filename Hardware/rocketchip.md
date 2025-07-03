@@ -15,12 +15,15 @@ parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+
 # Rocketchip FPGA mapped to Zynq ZC706
 
 The current rocketchip implementation only tested on ZC706 FPGA, it should work
 for other Zynq FPGAs. Refer to
 [https://github.com/ucb-bar/fpga-zynq](https://github.com/ucb-bar/fpga-zynq) for
 details.
+
+{% include hw-info.html %}
 
 ## Building the GCC toolchain
 

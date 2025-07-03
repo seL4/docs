@@ -18,6 +18,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Raspberry PI 3 Model B and Model B+
 
+{% include hw-info.html %}
+
 This is an experimental port and is not guaranteed to work.
 
 ## Hardware

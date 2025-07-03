@@ -23,6 +23,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 HiFive Unleashed is a RISC-V development board by SiFive. Check
 [here](https://www.sifive.com/boards/hifive-unleashed) for details.
 
+{% include hw-info.html %}
+
 ## Building the GCC toolchain
 
 {% include risc-v.md %}

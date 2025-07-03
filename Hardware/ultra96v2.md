@@ -9,8 +9,8 @@ iommu: "yes"
 soc: Zynq UltraScale+ MPSoC
 cpu: Cortex-A53
 Status: Unverified
-Contrib: "[DornerWorks](https://dornerworks.com)"
-Maintained: "[DornerWorks](https://dornerworks.com)"
+Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
+Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
@@ -18,13 +18,16 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Ultra96v2
 
-The board is an Avnet Ultra96v2, which is a low-cost Zynq MPSoC development platform developed by
+The Avnet Ultra96v2 is a low-cost Zynq MPSoC development platform developed by
 AVNET.
+
+{% include hw-info.html %}
 
 AVNET maintains online material, including designs and documentation
 [here](https://www.avnet.com/wps/portal/us/products/new-product-introductions/npi/aes-ultra96-v2/).
 
 ## Building
+
 ### seL4test
 
 {% include sel4test.md %}

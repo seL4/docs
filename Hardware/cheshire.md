@@ -21,6 +21,8 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 Cheshire is a 6-stage RISC-V CPU. For details, refer to
 [https://github.com/pulp-platform/cheshire](https://github.com/pulp-platform/cheshire)
 
+{% include hw-info.html %}
+
 seL4 currently only provides Cheshire support for the [Genesys 2
 board](https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual).
 
