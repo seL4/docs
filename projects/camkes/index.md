@@ -63,6 +63,17 @@ To learn about developing your own CAmkES application, read the
 
 Can be found [here](terminology).
 
+
+## CAmkES Features
+
+Information about CAmkES features can be found [here](features.html).
+
+
+## CAmkES Components
+
+Information about CAmkES components can be found [here](components.html).
+
+
 ## CAmkES VM
 
 
