@@ -7,7 +7,11 @@ SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 # Microkit releases
 
 This page documents tagged releases of the seL4 [Microkit](./) and their
-corresponding SDK downloads.
+corresponding SDK downloads and GPG signatures.
+
+The downloads are signed by Ivan Velickovic <i.velickovic@unsw.edu.au> with the
+key fingerprint `EFC6 142C FE61 C255 B4CD  E959 6FBD 87E8 4FA8 89BB`. The key
+is available from <https://keys.openpgp.org/>.
 
 {% assign coll = site['releases'] | where: "project", "microkit" %}
 {% comment %}
@@ -26,7 +30,7 @@ Because of this we need to split the list into two before sorting.
 {%- assign sdks = sdk_downloads | where: "version", release.title %}
 {%- assign sdks = sdks[0] %}
 {%-  for sdk in sdks.sdks %}
-  - [{{ sdk.label }}]({{sdk.url}})
+  - [{{ sdk.label }}]({{sdk.url}}) [[sig]({{sdk.url}}.asc)]
 {%-   endfor %}
 
 {% endfor %}
