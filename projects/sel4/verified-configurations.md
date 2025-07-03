@@ -33,13 +33,10 @@ multiple architectures, and its build system allows further
 configuration of internal and hardware features, verified configurations
 are necessarily both less numerous and more specific.
 
-These configurations are also referred to as *verification platforms*,
-currently constituting: ARM, ARM\_HYP, ARM\_MCS, AARCH64, RISCV64, RISCV64\_MCS, X64
-
 Please consult [Frequently Asked
-Questions](/FrequentlyAskedQuestions), as well as the [proof and
-assumptions page](http://sel4.systems/Info/FAQ/proof.html) for a better
-understanding of the intersection of verification and seL4.
+Questions](https://sel4.systems/About/FAQ.html), as well as the [verification
+page](https://sel4.systems/Verification/) on the seL4 website for a better
+understanding of the intersection of formal verification and seL4.
 
 ## Examining and Building Verified Configurations
 
