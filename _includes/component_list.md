@@ -15,7 +15,6 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
             <th>{{list | capitalize}}</th>
             <th>Description</th>
             <th>Status</th>
-            <th>Maintained by</th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +28,6 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
             <td>{% include cond-wrap-link.md text=display_text link=link_text %}</td>
             <td>{{component.description}}</td>
             <td>{{component.status}}</td>
-            <td>{{component.maintainer}}</td>
         </tr>
   {%- else %}
     {%- if forloop.first == true and ignore_title_row == false %}
