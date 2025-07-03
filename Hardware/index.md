@@ -6,7 +6,7 @@ wide: true
 
 # Supported platforms
 
-seL4 is available on 3 major hardware architectures, [ARM](#arm),
+seL4 is available on 3 major hardware architectures, [Arm](#arm),
 [RISC-V](#risc-v) and [x86](#x86), for a number of platforms with varying
 hardware features.
 
@@ -27,11 +27,11 @@ the platform and are noted in the *Verification Status* column as follows:
 
 More information can be found on the [Verified Configurations](../projects/sel4/verified-configurations.md) page.
 
-## ARM
+## Arm
 
-seL4 has support for select ARMv7 and ARMv8 Platforms.
-
-* [General info on ARM Platforms](GeneralARM)
+seL4 has support for select ARMv7 and ARMv8 Platforms. In addition to the page
+with [general instructions how to run seL4 on Arm](GeneralARM.html), each board
+page may have additional instructions for running seL4 on it.
 
 | Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | SMMU              | Verification Status   |
 | - | - | - | - | - | - | - |
@@ -69,7 +69,7 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 
 ## x86
 
-We support PC99-style Intel Architecture Platforms.
+seL4 supports PC99-style Intel Architecture Platforms.
 
 | Platform              | Arch | Virtualisation | IOMMU | Verification Status                  |
 | -                     |  -   | -              | -     | -                                    |
@@ -81,11 +81,10 @@ We support PC99-style Intel Architecture Platforms.
 
 ### Simulating seL4
 
-Running seL4 in a simulator is a quick way to test it out and iteratively develop software.
-Note that feature support is then limited by the simulator.
-See [Running It](/seL4Test#RunningIt) for how to run seL4 using Qemu.
-
-You can also [run seL4 on VMware](VMware).
+Running seL4 in a simulator is a quick way to test it out and iteratively
+develop software. Note that feature support is then limited by the simulator.
+See the [simulation instructions for
+sel4test](/projects/sel4test/#running-it) for how to run seL4 using Qemu.
 
 ### Not in the lists above?
 
