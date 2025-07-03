@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-02 03:36:13 +0000 -->
+<!-- Page last generated 2025-07-03 03:35:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -695,7 +695,7 @@ echo and client, communicating over a single interface.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>build
 <span class="nb">cd </span>build
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>sabre <span class="nt">-DCAMKES_APP</span><span class="o">=</span>simple <span class="nt">-DSIMULATE</span><span class="o">=</span>1
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>sabre <span class="nt">-DCAMKES_APP</span><span class="o">=</span>simple <span class="nt">-DSIMULATION</span><span class="o">=</span>1
 ninja
 </code></pre></div></div>
 
@@ -728,7 +728,7 @@ echo is providing is described in apps/simple/interfaces/Simple.idl4.</p>
 <p>If you want to run this example on IA32, repeat the above procedure with a new build
 directory, replacing the configuration line with the following:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ia32 <span class="nt">-DCAMKES_APP</span><span class="o">=</span>simple <span class="nt">-DSIMULATE</span><span class="o">=</span>1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ia32 <span class="nt">-DCAMKES_APP</span><span class="o">=</span>simple <span class="nt">-DSIMULATION</span><span class="o">=</span>1
 </code></pre></div></div>
 
 <h4 id="creating-an-application">Creating An Application</h4>
@@ -3733,7 +3733,7 @@ of use. The low-level parsers are:</p>
 it. This “parser” is really just a more full featured version of the <code class="language-plaintext highlighter-rouge">open</code>
 call.</li>
   <li><strong>Stage 1</strong> Parses input using <code class="language-plaintext highlighter-rouge">plyplus</code>. Note that this is where the CAmkES
-grammer (camkes/parser/camkes.g) comes into play.</li>
+grammar (camkes/parser/camkes.g) comes into play.</li>
   <li><strong>Stage 2</strong> Resolves <code class="language-plaintext highlighter-rouge">import</code> statements. This parser repeatedly calls back
 into the stage 1 parser to parse further sources. Note that from here on,
 <code class="language-plaintext highlighter-rouge">import</code> statements do not appear in the AST.</li>
@@ -3748,7 +3748,7 @@ component instances into a single address space. This stage removes groups
 from the AST, assigning the same address space to their contained instances.</li>
   <li><strong>Stage 6</strong> Combines multiple assemblies. It is possible for more than one
 <code class="language-plaintext highlighter-rouge">assembly</code> block to be specified in a CAmkES input specification, in which
-case the intended assembly is the concatentaion of all of them. This stage
+case the intended assembly is the concatenation of all of them. This stage
 performs that concatenation.</li>
   <li><strong>Stage 7</strong> Flattens component hierarchies. Component instances that are
 nested inside other components are hoisted to the top-level assembly by this
