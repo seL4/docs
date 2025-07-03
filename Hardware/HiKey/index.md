@@ -8,7 +8,8 @@ virtualization: "yes"
 iommu: "no"
 soc: Kirin 620
 cpu: Cortex-A53
-Status: "[Verified](/projects/sel4/verified-configurations.html#hikey)"
+Status: Verified
+verified: hikey
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

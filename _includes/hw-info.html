@@ -21,6 +21,15 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 <div>seL4 SMMU support:</div>
 <div>{{ page.iommu }}</div>
 
+<div>Verification status:</div>
+{%- if page.verified -%}
+{%-  assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
+{%-  assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: "</a>" %}
+{%- else -%}
+{%-  assign status = page.Status -%}
+{%- endif -%}
+<div>{{status}}</div>
+
 <div>Contributed by:</div> <div>{{ page.Contrib }}</div>
 <div>Maintained by:</div> <div>{{ page.Maintained }}</div>
 </div>
