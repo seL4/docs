@@ -11,7 +11,7 @@ scenarios. Many of these options are only expected to used during application or
 development and may not be suitable for a final release deployment that wants to leverage
 seL4's full capabilities.
 
-*Due to the experimental nature of many of the options, there may be undocumented incompatabilities
+*Due to the experimental nature of many of the options, there may be undocumented incompatibilities
 when trying to configure several options together. seL4test, seL4bench or other user level examples
 can be used to test a baseline level of configuration correctness.*
 
