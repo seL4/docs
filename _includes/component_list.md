@@ -22,12 +22,17 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
         <tr>
             <th>{{list | capitalize}}</th>
             <th>Description</th>
+            {%- unless include.no_status %}
             <th>{{status}}</th>
+            {%- endunless %}
         </tr>
     </thead>
     <tbody>
     {%- endif %}
     {%- if include.type and include.type != component.component_type -%}
+        {%- continue %}
+    {%- endif %}
+    {%- if include.filter and component.status != include.filter %}
         {%- continue %}
     {%- endif %}
 {%- capture link_text %}{{component.display_name_url}}{% endcapture %}
@@ -37,7 +42,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
             <td class="prose-p:m-0 prose-p:p-0">
               {{component.description | markdownify}}
             </td>
+            {%- unless include.no_status %}
             <td>{{component.status}}</td>
+            {%- endunless %}
         </tr>
   {%- else %}
     {%- if forloop.first == true and ignore_title_row == false %}
