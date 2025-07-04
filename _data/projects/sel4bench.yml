@@ -20,68 +20,81 @@ components:
     status: "active"
     component_type: sel4bench-driver
   - name: fault
-    display_name: Fault benchmarks
-    description: "Application to benchmark seL4 faults without modification to the kernel"
+    display_name: Fault
+    description: "Fault delivery, measured from user space"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: hardware
-    display_name: Hardware benchmarks
-    description: "Application to benchmark hardware-related operations"
+    display_name: Hardware
+    description: "Hardware-related seL4 operations"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: ipc
-    display_name: IPC benchmarks
-    description: "Application to benchmark seL4 IPC"
+    display_name: IPC
+    description: "A benchmark of the kernel IPC path"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: irq
-    display_name: IRQ kernel-mode benchmarks
-    description: "Application to benchmark seL4 IRQs from inside the kernel"
+    display_name: IRQ
+    description: "The IRQ path, measured from inside the kernel."
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: irquser
-    display_name: IRQ user-mode benchmarks
-    description: "Application to benchmark seL4 IRQs without modification to the kernel"
+    display_name: IRQ user
+    description: "The IRQ path, measured from user space."
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: page_mapping
-    display_name: Page mapping benchmarks
-    description: "Application to benchmark seL4 mapping a series of pages"
+    display_name: Page mapping
+    description: "Performance of mapping a series of pages"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: schedule
-    display_name: Scheduler benchmarks
-    description: "Application to benchmark seL4 scheduler without modification to the kernel"
+    display_name: Scheduler
+    description: 'Benchmark for scheduling decisions,
+      using a producer/consumer pattern between two notification objects.
+      Also measures `seL4_Yield()`.'
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: signal
-    display_name: Signal benchmarks
-    description: "Application to benchmark seL4 signals without modification to the kernel"
+    display_name: Signal
+    description: "The seL4 signal operation, measured from user space"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: smp
-    display_name: SMP benchmarks
-    description: "Application to benchmark SMP operations and IPC"
+    display_name: SMP
+    description: "Intra-core IPC round-trip benchmark to measure overhead of
+      kernel synchronization on IPC throughput."
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: sync
-    display_name: Synchronisation library benchmarks
-    description: "Application to benchmark the seL4 sync library"
+    display_name: Synchronisation library
+    description: "Measuring the user-level seL4 sync library"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
   - name: vcpu
-    display_name: Aarch64 VCPU benchmarks
-    description: "Application to benchmark seL4 VCPU performance"
+    display_name: Aarch64 VCPU
+    description: "seL4 VCPU performance, including
+       privilege escalation from EL1 to EL2 with `HVC`,
+       privilege de-escalation from EL2 to EL1 with `ERET`,
+       null invocation of the EL2 kernel using `HVC`,
+       cost of `seL4_Call()` from an EL1 guest thread to a native seL4
+       thread, and
+       cost of an `seL4_Reply()` from an seL4 native thread to an EL1
+       guest thread. See the sel4bench repository
+       [README](https://github.com/seL4/sel4bench)
+       for instructions.
+      "
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4bench-application
@@ -113,49 +126,49 @@ components:
 
 configurations:
   - name: RELEASE
-    display_name: "RELEASE (BOOL)"
+    display_name: "RELEASE"
     description: "Performance optimized build"
     maintainer: "seL4 Foundation"
     status: "(Default: ON)"
     component_type: sel4test-option
   - name: HARDWARE
-    display_name: "HARDWARE (BOOL)"
+    display_name: "HARDWARE"
     description: "Configuration for sel4bench hardware app"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: FAULT
-    display_name: "FAULT (BOOL)"
+    display_name: "FAULT"
     description: "Configuration sel4bench fault app"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: VCPU
-    display_name: "VCPU (BOOL)"
+    display_name: "VCPU"
     description: "Whether or not to run the VCPU benchmarks"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: SMP
-    display_name: "SMP (BOOL)"
+    display_name: "SMP"
     description: "Configuration sel4bench smp app"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: PLATFORM
-    display_name: "PLATFORM (STRING)"
+    display_name: "PLATFORM"
     description: "Platform to test"
     maintainer: "seL4 Foundation"
     status: "(Default: x86_64)"
     component_type: sel4test-option
   - name: FASTPATH
-    display_name: "FASTPATH (BOOL)"
+    display_name: "FASTPATH"
     description: "Turn fastpath on or off"
     maintainer: "seL4 Foundation"
     status: "(Default: ON)"
     component_type: sel4test-option
   - name: ARM_HYP
-    display_name: "ARM_HYP (BOOL)"
+    display_name: "ARM_HYP"
     description: "ARM EL2 hypervisor features on or off"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"

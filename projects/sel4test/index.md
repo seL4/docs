@@ -24,10 +24,12 @@ Sources:
 First make sure you have [set up your
 machine](../buildsystem/host-dependencies.html). Then run the following.
 
+{%- assign manifest = "https://github.com/seL4/sel4test-manifest.git" %}
+
 ```bash
 mkdir sel4test
 cd sel4test
-repo init -u https://github.com/seL4/sel4test-manifest.git
+repo init -u {{manifest}}
 repo sync
 ls
 # apps/ CMakeLists.txt init-build.sh kernel libs/ projects/ tools/
@@ -36,21 +38,21 @@ ls
 This clones the seL4 kernel, the test suite, some libraries used by the
 tests, and some tools used in the build process. By default, the current
 master branch of the kernel is cloned. To clone a specific version of
-the kernel and compatible libraries and tools, replace the
+the kernel and compatible libraries and tools, replace the line
 
 ```bash
-repo init
+repo init {{manifest}}
 ```
 
-line above with e.g.:
+above with e.g.:
 
 ```bash
-repo init -u https://github.com/seL4/sel4test-manifest.git -b refs/tags/{{site.sel4}}
+repo init -u {{manifest}} -b refs/tags/{{site.sel4}}
 ```
 
 In this example we clone version {{site.sel4}} of the kernel. For more
 information on version numbers, see the [release page](../../releases.html) and
-the list of [seL4 releases](../../releases/seL4.html)
+the list of [seL4 releases](../../releases/seL4.html).
 
 ## Building seL4test
 
@@ -61,7 +63,7 @@ which ones these are and their corresponding CMake configuration arguments, see
 the [Supported Platforms](/Hardware) page.
 
 To start a build with a specific configuration we can create a new subdirectory
-from the project root and initialise it with CMake:
+from the project root and initialise it with `init-build`:
 
 ```bash
 # create build directory
@@ -188,9 +190,10 @@ the kernel, including configuring for cross compilation (e.g., targeting Arm or
 RISC-V on an x86 build machine), see the page on seL4's [CMake Build
 System](/projects/buildsystem/using.html).
 
-## Architecture
+## Implementation
 
-This section gives an overview of the basic architecture of the test driver.
+This section gives a short overview of the implementation architecture of the
+test suite.
 
 ### Test runner
 
