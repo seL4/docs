@@ -7,7 +7,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Porting seL4 to a new platform
 
-This section covers porting seL4 to a new ARM or RISC-V platform. You can check the list of supported seL4 platforms [here](https://docs.sel4.systems/Hardware/).
+This section covers porting seL4 to a new ARM or RISC-V platform. You can check the list of supported seL4 platforms [here](/Hardware/).
 
 ## Setup
 
@@ -135,7 +135,7 @@ It is best to base the contents of this file off of other platforms of the same 
 
 When you contribute your port to seL4, sel4test must execute successfully and so the next
 step to check that your port works would be to get
-[the seL4test project](https://docs.sel4.systems/projects/sel4test/) working.
+[the seL4test project](/projects/sel4test/) working.
 
 ### ELF-loader
 
@@ -143,7 +143,7 @@ Before we can run sel4test, we need to have seL4 booting first.
 
 Although we use U-Boot as a bootloader, there are additional steps needed to initialise the
 hardware and setup system images before we can boot seL4. This is the purpose of the
-[ELF-loader](https://docs.sel4.systems/projects/elfloader/).
+[ELF-loader](/projects/elfloader/).
 
 The code for the ELF-loader can be found in the `elfloader-tool` directory at the root of
 the [seL4_tools](https://github.com/seL4/seL4_tools) repository.
@@ -210,4 +210,4 @@ to shorten memory regions in DTS memory nodes to check you are touching the corr
 
 Once you have a working port that passes seL4test, see the guides for
 [contributing in general](https://sel4.systems/Contribute/)
-and [contributing kernel changes](https://docs.sel4.systems/projects/sel4/kernel-contribution.html).
+and [contributing kernel changes](/projects/sel4/kernel-contribution.html).
