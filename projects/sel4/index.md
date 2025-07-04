@@ -17,6 +17,11 @@ site][sel4.systems], which also contains other sources of learning, such as
 
 We welcome contributions to seL4. Please see [how to contribute][contribute].
 
+The seL4 kernel itself is open source and [licensed][license] under the GPL,
+version 2. Application code, operating system components, and drivers can have
+any license, proprietary or open source. The GPL propagation clause of the
+kernel license stops at the kernel/user code boundary.
+
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-24 gap-x-12 lg:gap-x-20 px-10 py-8 md:py-12 not-prose">
 
@@ -66,6 +71,8 @@ We welcome contributions to seL4. Please see [how to contribute][contribute].
 </div>
 
 
+To build the seL4 kernel, please follow the [set up instructions][build].
+
 If you believe you have found a security vulnerability in seL4 or related
 software, we ask you to follow our [vulnerability disclosure policy][VDP].
 
@@ -74,6 +81,8 @@ software, we ask you to follow our [vulnerability disclosure policy][VDP].
 [about]: https://sel4.systems/About/
 [verification]: https://sel4.systems/Verification/
 [sel4.systems]: https://sel4.systems/
+
+[license]: https://sel4.systems/Legal/license.html
 
 [Microkit]: /projects/microkit/
 [CAmkES]: /projects/camkes/
@@ -86,4 +95,6 @@ software, we ask you to follow our [vulnerability disclosure policy][VDP].
 [courses]: https://sel4.systems/Research/courses.html
 [FAQ]: https://sel4.systems/About/FAQ.html
 
+
+[build]: /projects/buildsystem/host-dependencies.html
 [VDP]: https://github.com/seL4/seL4/blob/master/SECURITY.md
