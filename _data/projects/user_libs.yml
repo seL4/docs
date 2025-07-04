@@ -282,17 +282,18 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported on arm but currently relies on each instruction taking a constant amount of time"
     component_type: user-driver-other
-  - name: arch/arm/dma330.c
-    display_name: "arch/arm/dma330.c"
-    description: "ARM PL-330 (DMA-330) DMA controller"
-    maintainer: "seL4 Foundation"
-    status: "Unused currently"
-    component_type: user-driver-other
+  # FIXME: commented out, should use filter
+  # - name: arch/arm/dma330.c
+  #   display_name: "arch/arm/dma330.c"
+  #   description: "ARM PL-330 (DMA-330) DMA controller"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Unused currently"
+  #   component_type: user-driver-other
   - name: arch/arm/i2c_bitbang.c
     display_name: "arch/arm/i2c_bitbang.c"
     description: "Transforms a GPIO interface into an I2C bitbang interface"
     maintainer: "seL4 Foundation"
-    status: "Currently used by libusbdrivers (but libusbdrivers itself isn't heavily used)"
+    status: "Currently used by libusbdrivers."
     component_type: user-driver-i2c
   - name: local_time_manager.c
     display_name: "local_time_manager.c"
@@ -448,7 +449,7 @@ components:
     display_name: "plat/tk1/i2c.c"
     description: "tk1 nvidia,tegra124-i2c I2C driver"
     maintainer: "seL4 Foundation"
-    status: "Supported on tk1 platform"
+    status: "Supported on tk1 platform."
     component_type: user-driver-i2c
   - name: plat/tk1/gpio.c
     display_name: "plat/tk1/gpio.c"
@@ -456,27 +457,21 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported on i2c platform."
     component_type: user-driver-gpio
-  - name: plat/imx31/serial.c
-    display_name: "plat/imx31/serial.c"
-    description: "i.MX31 fsl,imx31-uart serial driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on kzm platform."
-    component_type: user-driver-serial
   - name: plat/fvp/serial.c
     display_name: "plat/fvp/serial.c"
     description: "fvp arm,pl011 serial driver"
     maintainer: "seL4 Foundation"
-    status: "This driver is a copy-paste from the pl011 driver for the hikey platform. They should be merged."
+    status: "Derived from the pl011 driver for the hikey platform."
     component_type: user-driver-serial
   - name: plat/fvp/sp804.c
     display_name: "plat/fvp/sp804.c"
     description: "fvp arm,sp804 timer driver"
     maintainer: "seL4 Foundation"
-    status: "This driver is a copy-paste from the sp804 driver for the hikey platform. They should be merged."
+    status: "Derived from the sp804 driver for the hikey platform."
     component_type: user-driver-timer
   - name: plat/fvp/ltimer.c
     display_name: "plat/fvp/ltimer.c"
-    description: "fvp ltimer implementation using 2 sp804 timers"
+    description: "fvp ltimer implementation using 2 sp804 timers."
     maintainer: "seL4 Foundation"
     status: "Supported on fvp platform."
     component_type: user-driver-ltimer
@@ -496,7 +491,7 @@ components:
     display_name: "plat/hikey/serial.c"
     description: "hikey arm,pl011 Serial driver"
     maintainer: "seL4 Foundation"
-    status: "Supported on Hikey platform. Could likely be made available for any platform."
+    status: "Supported on Hikey platform. Could likely be extended to other platforms."
     component_type: user-driver-serial
   - name: plat/hikey/ltimer.c
     display_name: "plat/hikey/ltimer.c"
@@ -508,38 +503,39 @@ components:
     display_name: "plat/hikey/rtc.c"
     description: "hikey arm,pl031 RTC driver"
     maintainer: "seL4 Foundation"
-    status: "Supported on Hikey platform. Could likely be made available for any platform."
+    status: "Supported on Hikey platform. Could likely be extended to other platforms."
     component_type: user-driver-timer
   - name: plat/hikey/dmt.c
     display_name: "plat/hikey/dmt.c"
     description: "hikey arm,sp804 timer driver"
     maintainer: "seL4 Foundation"
-    status: "Supported on Hikey platform. Could likely be made available for any platform."
+    status: "Supported on Hikey platform. Could likely be extended to other platforms."
     component_type: user-driver-timer
   - name: plat/qemu-arm-virt/serial.c
     display_name: "plat/qemu-arm-virt/serial.c"
     description: "qemu-arm-virt arm,pl011 serial driver"
     maintainer: "seL4 Foundation"
-    status: "This driver is a copy-paste from the pl011 driver for the hikey platform. They should be merged."
+    status: "Derived from the pl011 driver for the hikey platform."
     component_type: user-driver-serial
-  - name: plat/apq8064/timer.c
-    display_name: "plat/apq8064/timer.c"
-    description: "apq8064 timer driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
-    component_type: user-driver-timer
-  - name: plat/apq8064/serial.c
-    display_name: "plat/apq8064/serial.c"
-    description: "apq8064 qcom,gsbi-v1.0.0 serial driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
-    component_type: user-driver-serial
-  - name: plat/apq8064/clock.c
-    display_name: "plat/apq8064/clock.c"
-    description: "apq8064 qcom,gcc-apq8064 clock subsystem driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
-    component_type: user-driver-clock
+  # FIXME: commented out for now, should use a filter instead
+  # - name: plat/apq8064/timer.c
+  #   display_name: "plat/apq8064/timer.c"
+  #   description: "apq8064 timer driver"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
+  #   component_type: user-driver-timer
+  # - name: plat/apq8064/serial.c
+  #   display_name: "plat/apq8064/serial.c"
+  #   description: "apq8064 qcom,gsbi-v1.0.0 serial driver"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
+  #   component_type: user-driver-serial
+  # - name: plat/apq8064/clock.c
+  #   display_name: "plat/apq8064/clock.c"
+  #   description: "apq8064 qcom,gcc-apq8064 clock subsystem driver"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
+  #   component_type: user-driver-clock
   - name: plat/hifive/pwm.c
     display_name: "plat/hifive/pwm.c"
     description: "hifive sifive,pwm0 timer driver"
@@ -598,7 +594,7 @@ components:
     display_name: "plat/pc99/pit.c"
     description: "PIT driver for the PIT (Programmable Interval Timer) on the pc99 platform"
     maintainer: "seL4 Foundation"
-    status: "active"
+    status: "Supported on pc99 platform"
     component_type: user-driver-timer
   - name: plat/pc99/rtc.c
     display_name: "plat/pc99/rtc.c"
@@ -624,30 +620,31 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported on omap3 platform"
     component_type: user-driver-serial
-  - name: plat/omap3/mux.c
-    display_name: "plat/omap3/mux.c"
-    description: "omap3 ti,omap3-padconf pin controller driver"
-    maintainer: "seL4 Foundation"
-    status: "Non-functional skeleton implementation, supported on omap3 platform"
-    component_type: user-driver-pinmux
-  - name: plat/omap3/clock.c
-    display_name: "plat/omap3/clock.c"
-    description: "omap3 ti,omap3-cm clock controller driver"
-    maintainer: "seL4 Foundation"
-    status: "Non-functional skeleton implementation, supported on omap3 platform"
-    component_type: user-driver-clock
-  - name: plat/rocketchip/serial.c
-    display_name: "plat/rocketchip/serial.c"
-    description: "Empty driver implementation for the serial device on the rocketchip platform."
-    maintainer: "seL4 Foundation"
-    status: "Non-functional skeleton implementation, supported on rocketchip platform"
-    component_type: user-driver-serial
-  - name: plat/rocketchip/chardev.c
-    display_name: "plat/rocketchip/chardev.c"
-    description: "Empty chardev implementation for the rocketchip platform."
-    maintainer: "seL4 Foundation"
-    status: "Non-functional skeleton implementation, supported on rocketchip platform"
-    component_type: user-driver-serial
+  # FIXME: commented out, should use a filter instead
+  # - name: plat/omap3/mux.c
+  #   display_name: "plat/omap3/mux.c"
+  #   description: "omap3 ti,omap3-padconf pin controller driver"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Non-functional skeleton implementation, supported on omap3 platform"
+  #   component_type: user-driver-pinmux
+  # - name: plat/omap3/clock.c
+  #   display_name: "plat/omap3/clock.c"
+  #   description: "omap3 ti,omap3-cm clock controller driver"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Non-functional skeleton implementation, supported on omap3 platform"
+  #   component_type: user-driver-clock
+  # - name: plat/rocketchip/serial.c
+  #   display_name: "plat/rocketchip/serial.c"
+  #   description: "Empty driver implementation for the serial device on the rocketchip platform."
+  #   maintainer: "seL4 Foundation"
+  #   status: "Non-functional skeleton implementation, supported on rocketchip platform"
+  #   component_type: user-driver-serial
+  # - name: plat/rocketchip/chardev.c
+  #   display_name: "plat/rocketchip/chardev.c"
+  #   description: "Empty chardev implementation for the rocketchip platform."
+  #   maintainer: "seL4 Foundation"
+  #   status: "Non-functional skeleton implementation, supported on rocketchip platform"
+  #   component_type: user-driver-serial
   - name: plat/imx6/mux.c
     display_name: "plat/imx6/mux.c"
     description: "i.MX6 fsl,imx6q-iomuxc IO MUX driver"
@@ -816,12 +813,13 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported on ZYNQ SoCs"
     component_type: user-driver-serial
-  - name: mach/zynq/mux.c
-    display_name: "mach/zynq/mux.c"
-    description: "Pinmux drivers for the pin controller in the ZYNQ SoCs"
-    maintainer: "seL4 Foundation"
-    status: "Non-functional skeleton implementation, supported on ZYNQ SoCs"
-    component_type: user-driver-pinmux
+  # FIXME: commented out, should use a filter instead
+  # - name: mach/zynq/mux.c
+  #   display_name: "mach/zynq/mux.c"
+  #   description: "Pinmux drivers for the pin controller in the ZYNQ SoCs"
+  #   maintainer: "seL4 Foundation"
+  #   status: "Non-functional skeleton implementation, supported on ZYNQ SoCs"
+  #   component_type: user-driver-pinmux
   - name: mach/zynq/ltimer.c
     display_name: "mach/zynq/ltimer.c"
     description: "ltimer implementation for the ZYNQ platforms using TTC timers"
@@ -873,12 +871,6 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported"
     component_type: user-driver-other
-  - name: src/plat/am335x
-    display_name: "src/plat/am335x/*"
-    description: "Ethernet driver for the am335x platform"
-    maintainer: "seL4 Foundation"
-    status: "Bitrotted, based off the lwIP stack"
-    component_type: user-driver-ethernet
   - name: src/plat/imx6
     display_name: "src/plat/imx6/*"
     description: "Ethernet driver for the i.MX6 platform based off on U-Boot's implementation"
