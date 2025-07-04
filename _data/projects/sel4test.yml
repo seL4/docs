@@ -57,80 +57,86 @@ components:
 
 configurations:
   - name: SIMULATION
-    display_name: "SIMULATION (BOOL)"
+    display_name: "SIMULATION"
     description: "Include only simulation compatible tests"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: RELEASE
-    display_name: "RELEASE (BOOL)"
+    display_name: "RELEASE"
     description: "Performance optimized build"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: VERIFICATION
-    display_name: "VERIFICATION (BOOL)"
+    display_name: "VERIFICATION"
     description: "Only verification friendly kernel features"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: BAMBOO
-    display_name: "BAMBOO (BOOL)"
-    description: "Enable machine parseable output"
+    display_name: "BAMBOO"
+    description: "Enable machine parseable xml output"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: DOMAINS
-    display_name: "DOMAINS (BOOL)"
+    display_name: "DOMAINS"
     description: "Test multiple domains"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: SMP
-    display_name: "SMP (BOOL)"
+    display_name: "SMP"
     description: "(if supported) Test SMP kernel"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: NUM_NODES
-    display_name: "NUM_NODES (STRING)"
-    description: "(if SMP) the number of nodes)"
+    display_name: "NUM_NODES"
+    description: "(if SMP) The number of nodes"
     maintainer: "seL4 Foundation"
     status: "(Default: 4)"
     component_type: sel4test-option
   - name: PLATFORM
-    display_name: "PLATFORM (STRING)"
+    display_name: "PLATFORM"
     description: "Platform to test"
     maintainer: "seL4 Foundation"
     status: "(Default: x86_64)"
     component_type: sel4test-option
   - name: ARM_HYP
-    display_name: "ARM_HYP (BOOL)"
+    display_name: "ARM_HYP"
     description: "Hyp mode for ARM platforms"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: MCS
-    display_name: "MCS (BOOL)"
+    display_name: "MCS"
     description: "MCS kernel"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
   - name: KernelSel4Arch
-    display_name: "KernelSel4Arch (STRING)"
+    display_name: "KernelSel4Arch"
     description: "aarch32, aarch64, arm_hyp, ia32, x86_64, riscv32, riscv64"
     maintainer: "seL4 Foundation"
-    status: "(Default: Usually set by PLATFORM)"
+    status: "(Default: set by PLATFORM)"
     component_type: sel4test-option
   - name: LibSel4TestPrinterRegex
-    display_name: "LibSel4TestPrinterRegex (STRING)"
+    display_name: "LibSel4TestPrinterRegex"
     description: "A POSIX regex pattern used to filter tests"
     maintainer: "seL4 Foundation"
     status: "(Default: .*)"
     component_type: sel4test-option
   - name: LibSel4TestPrinterHaltOnTestFailure
-    display_name: "LibSel4TestPrinterHaltOnTestFailure (BOOL)"
+    display_name: "LibSel4TestPrinterHaltOnTestFailure"
     description: "Halt on the first test failure"
+    maintainer: "seL4 Foundation"
+    status: "(Default: OFF)"
+    component_type: sel4test-option
+  - name: Sel4testAllowSettingsOverride
+    display_name: "Sel4testAllowSettingsOverride"
+    description: "Do not use meta options above, expect manual user config settings for the kernel instead"
     maintainer: "seL4 Foundation"
     status: "(Default: OFF)"
     component_type: sel4test-option
