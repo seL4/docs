@@ -39,7 +39,9 @@
     }
 
     function toggleSidebar() {
-        if (sidebar.classList.contains('lg:flex')) {
+        let small = window.matchMedia("(width < 64rem)");
+        if ((sidebar.classList.contains('lg:flex') && !small.matches) ||
+            (sidebar.classList.contains('flex') && small.matches)) {
             hideSidebar();
         } else {
             showSidebar();
