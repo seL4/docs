@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-04 03:34:49 +0000 -->
+<!-- Page last generated 2025-07-05 03:32:29 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -218,7 +218,7 @@
 ninja
 </code></pre></div></div>
 
-<p>This step creates two new directories in <code class="language-plaintext highlighter-rouge">sel4-tutorials-manifest</code>, namely <code class="language-plaintext highlighter-rouge">hello-world</code> and <code class="language-plaintext highlighter-rouge">hello-world_build</code></p>
+<p>This step creates two new directories in <code class="language-plaintext highlighter-rouge">tutorials/</code>, namely <code class="language-plaintext highlighter-rouge">hello-world</code> and <code class="language-plaintext highlighter-rouge">hello-world_build</code></p>
 
 <details>
 
@@ -242,7 +242,7 @@ ninja
 
 <h3 id="build-the-program">Build the program</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd sel4-tutorials-manifest/hello-world_build
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd tutorials/hello-world_build
 </code></pre></div></div>
 
 <p>Next, build the program in Terminal B using ninja</p>
@@ -280,7 +280,7 @@ because the program hasn’t properly cleaned up after itself yet. (This will co
 <h2 id="looking-at-the-sources">Looking at the sources</h2>
 <p>To look at the sources, open a new terminal, Terminal A:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd sel4-tutorials-manifest/hello-world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd tutorials/hello-world
 ls
 </code></pre></div></div>
 
@@ -330,7 +330,7 @@ ls
     muslc utils sel4tutorials
     sel4muslcsys sel4platsupport sel4utils sel4debug<span class="p">)</span>
 
-<span class="c1"># Tell the build system that this application is the root task. </span>
+<span class="c1"># Tell the build system that this application is the root task.</span>
 <span class="nb">include</span><span class="p">(</span>rootserver<span class="p">)</span>
 <span class="nf">DeclareRootserver</span><span class="p">(</span>hello-world<span class="p">)</span>
 
@@ -338,7 +338,7 @@ ls
 
 <h3 id="mainc"><code class="language-plaintext highlighter-rouge">main.c</code></h3>
 
-<p>The main C is a very typical C file. For a basic root server application, the only requirement is that 
+<p>The main C is a very typical C file. For a basic root server application, the only requirement is that
 a <code class="language-plaintext highlighter-rouge">main</code> function is provided.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
