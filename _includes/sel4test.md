@@ -8,7 +8,7 @@ This include generates commands for checking out and building sel4test for a par
 The platform defines what config it uses, and if it specifies a simulation target, then a simulation command will be added.
 {% endcomment %}
 
-Checkout the sel4test project using repo as per [seL4Test](/seL4Test)
+Checkout the sel4test project using repo as per [seL4Test]
 ```bash
 repo init -u https://github.com/seL4/sel4test-manifest.git
 repo sync
@@ -36,3 +36,5 @@ If you plan to use the ./simulate script, please be sure to add the
 {%- endif %}
 
 Generated binaries can be found in the `images/` directory.
+
+[seL4Test]: {{ '/projects/sel4test/' | relative_url }}
