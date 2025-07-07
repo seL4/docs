@@ -102,7 +102,7 @@ ninja
 
 ### IA32 Example
 
-We will now build seL4test for IA32, to run on the Qemu simulator.
+We will now build seL4test for IA32, to run on the QEMU simulator.
 
 Passing `-DSIMULATION=TRUE` to CMake produces a script to simulate our release
 IA32 build. The following commands will configure our CMake build:
@@ -119,7 +119,7 @@ Build it:
 ninja
 ```
 
-Executing the following commands will run Qemu and point it towards the image we
+Executing the following commands will run QEMU and point it towards the image we
 just built:
 
 ```bash
@@ -143,7 +143,7 @@ Test BIND0003 passed
 ...
 ```
 
-To exit Qemu, press `Ctrl-a`, then `x`. The text `All is well in the
+To exit QEMU, press `Ctrl-a`, then `x`. The text `All is well in the
 universe` indicates a successful build.
 
 ## Testing a Customised Kernel

@@ -22,12 +22,12 @@ Debug builds enable helpful features for debugging including:
 - compile- and run-time asserts,
 - the kernel will print out error messages when invocations fail.
 
-## Qemu
+## QEMU
 
-[Qemu](http://www.qemu.org/) is a simulator that provides software emulation of
+[QEMU](http://www.qemu.org/) is a simulator that provides software emulation of
 a hardware platform. It is useful for developing and debugging embedded software
 when you do not have access to the target platform. Even if you do have the
-target hardware, Qemu can shorten your edit-compile-debug cycle. Be aware that
+target hardware, QEMU can shorten your edit-compile-debug cycle. Be aware that
 it is not cycle-accurate and cannot emulate every device, so sometimes you have
 no alternative than to debug on real hardware.
 
@@ -43,13 +43,13 @@ cd build_dir
 ./simulate
 ```
 
-If the platform does not support qemu, the script will output
+If the platform does not support QEMU, the script will output
 
 ```bash
     Unsupported platform or architecture for simulation
 ```
 
-When simulating an seL4 system in Qemu, you should see output that is
+When simulating an seL4 system in QEMU, you should see output that is
 directed to the (emulated) UART device on your terminal:
 
 ```log
@@ -73,31 +73,31 @@ seL4 Test
 ...
 ```
 
-To exit from Qemu, type the sequence Ctrl+"a", then "x". Note that you
+To exit from QEMU, type the sequence Ctrl+"a", then "x". Note that you
 can exit at any point; you do not need to wait for the system to finish
-or reach some stable state. If you exit Qemu while a system is running,
+or reach some stable state. If you exit QEMU while a system is running,
 it will simply be terminated.
 
-Qemu has some powerful debugging features built in. You can type
-Ctrl+"a", then "c" to switch to the Qemu monitor. From here you can
+QEMU has some powerful debugging features built in. You can type
+Ctrl+"a", then "c" to switch to the QEMU monitor. From here you can
 inspect CPU or device state, read and write memory, and single-step
 execution. More information about this functionality is available in the
-[Qemu documentation](https://qemu-project.gitlab.io/qemu/system/monitor.html).
+[QEMU documentation](https://qemu-project.gitlab.io/qemu/system/monitor.html).
 
-When debugging an seL4 project, the Qemu debugger is inherently limited.
+When debugging an seL4 project, the QEMU debugger is inherently limited.
 It has no understanding of your source code, so it is difficult to
 relate what you are seeing back to the C code you compiled. It is
 possible to get a richer debugging environment by connecting GDB to
-Qemu.
+QEMU.
 
-### Using GDB with Qemu
+### Using GDB with QEMU
 
 [GDB](https://www.gnu.org/s/gdb/) is a debugger commonly used
 in C application development. Though not as seamless as debugging a
 native Linux application, it is possible to use GDB to debug within
-Qemu's emulated environment.
+QEMU's emulated environment.
 
-Start Qemu with the extra options "-S" (pause execution on start) and
+Start QEMU with the extra options "-S" (pause execution on start) and
 "-s" (start a GDB server on TCP port 1234):
 
 ```bash
@@ -127,7 +127,7 @@ CROSS_COMPILER_PREFIX:UNINITIALIZED=arm-none-eabi-
 ```
 
 At the GDB prompt, enter "target remote :1234" to connect to the server
-Qemu is hosting:
+QEMU is hosting:
 
 ```gdb
 Reading symbols from kernel/kernel.elf...done.
@@ -145,7 +145,7 @@ the GDB prompt:
 Breakpoint 1 at 0xf0011248: file kernel/src/machine/io.c, line 269.
 ```
 
-We can now start Qemu running and wait until we hit the breakpoint. To
+We can now start QEMU running and wait until we hit the breakpoint. To
 do this, type "cont" at the GDB prompt:
 
 ```gdb
@@ -157,7 +157,7 @@ Breakpoint 1, kprintf (format=0xf0428000 "") at kernel/src/machine/io.c:269
 ```
 
 Note that some output has appeared in the other terminal window running
-Qemu as it has partially executed. It may be surprising to see that some
+QEMU as it has partially executed. It may be surprising to see that some
 printing somehow happened without our breakpoint triggering. The reason
 for this is that output we're seeing is from the ELF loader that runs
 prior to the kernel. GDB does not know the address of its print function
@@ -186,14 +186,14 @@ gdb.
 The steps for debugging a user-space application on seL4 are identical to
 the ones we have just seen, except that we pass GDB a symbol table for
 user-space rather than the kernel. For example, using the same `sel4test`
-environment we start Qemu in the same way but start GDB with the `sel4test`
+environment we start QEMU in the same way but start GDB with the `sel4test`
 binary:
 
 ```bash
 ${CROSS_COMPILER_PREFIX}gdb projects/sel4test/apps/sel4test-driver/sel4test-driver
 ```
 
-After connecting to Qemu, we can instruct GDB to break on the user space
+After connecting to QEMU, we can instruct GDB to break on the user space
 `printf` function:
 
 ```gdb
@@ -217,7 +217,7 @@ Breakpoint 1, printf (fmt=0x363e8 "%s") at libs/libmuslc/src/stdio/printf.c:9
 (gdb)
 ```
 
-If you examine the terminal window running Qemu at this point, you will
+If you examine the terminal window running QEMU at this point, you will
 note that we see an extra bit of output from the kernel. The kernel's
 print functionality is unaffected, but GDB has stopped execution the
 first time user space called `printf`.

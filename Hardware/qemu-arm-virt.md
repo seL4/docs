@@ -4,11 +4,11 @@ simulation_target: true
 simulation_only: true
 xcompiler_arg: '-DSIMULATION=1'
 cmake_plat: qemu-arm-virt
-platform: Qemu Arm Virt
+platform: QEMU Arm Virt
 arch: ARMv7A, ARMv8A
 virtualization: "yes"
 iommu: "no"
-soc: Qemu
+soc: QEMU
 cpu: Multiple
 Status: "N/A"
 Contrib: Data61
@@ -18,9 +18,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2025 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Qemu Arm virtual platform
+# QEMU Arm virtual platform
 
-This is a simulation-only target for running the Arm version of seL4 on the [Qemu]
+This is a simulation-only target for running the Arm version of seL4 on the [QEMU]
 simulator with and without virtualisation support.
 
 {% include hw-info.html %}
@@ -39,5 +39,5 @@ See the [machine setup] instructions for how to install build dependencies.
 
 {% include sel4test.md %}
 
-[Qemu]: https://www.qemu.org
+[QEMU]: https://www.qemu.org
 [machine setup]: {{ '/projects/buildsystem/host-dependencies.html' | relative_url }}
