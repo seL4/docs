@@ -3,7 +3,7 @@ arm_hardware: true
 cmake_plat: odroidc2
 xcompiler_arg: -DAARCH64=1
 platform: Odroid-C2
-arch: ARMv8A, AArch64 only
+arch: ARMv8A, AArch64
 virtualization: "yes"
 iommu: "no"
 soc: Amlogic S905
