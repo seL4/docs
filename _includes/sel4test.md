@@ -20,16 +20,17 @@ cd cbuild
 # parameters to suit your needs.
 ninja
 
+{%- if page.simulation_target and page.simulation_only == false %}
+# This platform is a simulation target. This script should work to run the
+# generated image if you also use -DSIMULATION=1 for init-build above:
+{%- endif %}
 {%- if page.simulation_target %}
-# If your target binaries can be executed in an emulator/simulator, and if
-# our build system happens to support that target emulator, then this script
-# might work for you:
 ./simulate
 {%- endif %}
 
 ```
 
-{%- if page.simulation_target %}
+{%- if page.simulation_target and page.simulation_only == false %}
 If you plan to use the ./simulate script, please be sure to add the
 `-DSIMULATION=1` argument when running cmake.
 {%- endif %}

@@ -1,5 +1,6 @@
 ---
 simulation_target: true
+simulation_only: false
 cmake_plat: kzm
 xcompiler_arg: -DAARCH32=1
 platform: KZM
