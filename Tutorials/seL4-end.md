@@ -28,7 +28,7 @@ You might want to check out some of the following tutorials as well.
      icon="other/rust-logo-blk"
      title="Rust on seL4 tutorial"
      body="Tutorial on running the Rust language on seL4."
-     link="/todo.html"
+     link="/projects/rust/tutorial"
   %}
   {% include card.html
      icon="puzzle-piece"
