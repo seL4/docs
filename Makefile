@@ -86,7 +86,9 @@ $(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/*/%.md
 	  $(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $<
 
 # Filter out files that are docsite pages and not in the tutorials repo
-TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to.md pathways.md setting-up.md seL4-end.md,$(notdir $(wildcard Tutorials/*.md)))
+TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to-seL4.md how-to-CAmkES.md \
+                         how-to-libs.md pathways.md setting-up.md seL4-end.md,\
+												 $(notdir $(wildcard Tutorials/*.md)))
 .PHONY: tutorials
 tutorials: $(TUTES_DST) ${TUTORIALS:%=$(TUTES_DST)/%}
 
