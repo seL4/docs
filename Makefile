@@ -16,6 +16,8 @@ help:
 	@echo "  check_conformance_errors - Check for conformance and show errors"
 	@echo "  check_liquid_syntax      - Check the liquid syntax of the templates"
 	@echo "  check_html_output        - Check the HTML output using tidy"
+	@echo "  checklinks               - Runs html-proofer to check for broken links."
+	@echo "  validate                 - Runs html5validator to check for HTML5 compliance."
 
 .PHONY: ruby_deps
 ruby_deps: .jekyll-cache/ruby_deps
@@ -274,3 +276,38 @@ check_liquid_syntax:
 .PHONY: check_html_output
 check_html_output: build
 	find _site/ -iname "*.html"| xargs -l tidy -q --drop-empty-elements n -e
+
+# list of URL regexps to ignore when checking links
+# font preload/preconnect URLS give 404 on link check, but work;
+# twitter ignored because of rate limiting;
+# query links on github work, but don't seem to check;
+# rtx.com produces 403 from GitHub;
+IGNORE_URLS  = fonts.gstatic.com
+IGNORE_URLS += fonts.googleapis.com
+IGNORE_URLS += github.com.seL4.rfcs.pulls\?q
+IGNORE_URLS += https://github.com/seL4/.*/edit/
+
+sep:= /,/
+empty:=
+space:= $(empty) $(empty)
+IGNORE_EXP:= $(subst $(space),$(sep),$(IGNORE_URLS))
+
+HTMLPROOFEROPT := --swap-urls '^https\://docs.sel4.systems:http\://localhost\:4000'
+HTMLPROOFEROPT += --enforce-https=false --only-4xx --disable-external=false
+HTMLPROOFEROPT += --ignore-urls '/$(IGNORE_EXP)/'
+
+checklinks: build
+	@bundle exec htmlproofer $(HTMLPROOFEROPT) _site
+
+validate:
+# ignore errors from inline SVG files
+	@html5validator --root _site \
+					--ignore 'is not a "color" value' \
+							 'not allowed on element "svg"' \
+							 'The "font" element is obsolete' \
+							 'xmlns:svg' \
+							 'sodipodi:namedview'
+
+update:
+	bundle update
+	npm update
