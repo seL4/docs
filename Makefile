@@ -118,6 +118,17 @@ _data/microkit_tutorial.yml: $(MICROKIT_TUT_SRC)/../build.sh
 .PHONY: microkit-tutorial
 microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
+RUST_TUT_REPO = _repos/coliasgroup/sel4-rust-tutorial
+RUST_TUT_BUILD = $(RUST_TUT_REPO)/book/build
+RUST_TUT_DST = projects/rust/tutorial
+
+.PHONY: rust-tutorial
+rust-tutorial: $(RUST_TUT_REPO)
+	cd $(RUST_TUT_REPO) && make for-docsite
+	rm -rf $(RUST_TUT_DST)
+	mkdir -p $(dir $(RUST_TUT_DST))
+	cp -rL $(RUST_TUT_BUILD) $(RUST_TUT_DST)
+
 .PHONY: _generate_api_pages
 _generate_api_pages: _repos/sel4/sel4
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
@@ -219,7 +230,7 @@ serve: generate
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 .PHONY: generate
-generate: repos ruby_deps .npm_deps generate_api microkit-tutorial tutorials
+generate: repos ruby_deps .npm_deps generate_api microkit-tutorial rust-tutorial tutorials
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
@@ -241,6 +252,7 @@ clean:
 	rm -rf _processed/microkit-tutorial
 	rm -rf _processed/tutes
 	rm -rf projects/virtualization/docs/api
+	rm -rf $(RUST_TUT_DST)
 	rm -f _data/microkit_tutorial.yml
 
 .PHONY: repoclean
