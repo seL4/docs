@@ -10,6 +10,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 This page describes how to set up your development host machine for building and
 running the seL4 kernel. There are additional steps if you are planning to use
 [CAmkES](/projects/camkes/setting-up.html) or [Rust](todo.html) on top of seL4.
+You do not need this step if you are using the Microkit, because it comes with
+pre-compiled seL4 binaries.
 
 {% include seL4-deps.md %}
 
