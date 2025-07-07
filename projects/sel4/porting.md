@@ -116,11 +116,18 @@ Depending on your platform and the way the DTS is defined you may need to modify
 
 From the above example the ROCKPro64 needed a memory node so that this script could
 define working memory. Other gotchas could include interrupt cells, interrupt numbers being
-mapped wrongly, or incorrect addresses. Also serial and timer drivers will need to be added
-to the kernel if they don't already exist. You can check this through the DTS device strings
-and compare to the `seL4/tools/hardware.yml` file.
+mapped wrongly, or incorrect addresses.
 
-If needed, add the required drivers in `seL4/src/drivers/` and `seL4/include/drivers/`.
+The kernel also expects drivers for:
+* the timer device
+* the serial device
+* the interrupt controller
+* the IOMMU if the kernel is being built with IOMMU support.
+
+You can check all the supported drivers in `seL4/tools/hardware.yml`.
+
+If the platform has devices that do not already have corresponding drivers, you can add
+them in `seL4/src/drivers/` and `seL4/include/drivers/`.
 
 ### Kernel
 
