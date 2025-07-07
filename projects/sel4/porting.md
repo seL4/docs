@@ -7,7 +7,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Porting seL4 to a new platform
 
-This section covers porting seL4 to a new ARM or RISC-V platform. You can check the list of supported seL4 platforms [here](/Hardware/).
+This section covers porting seL4 to a new ARM or RISC-V platform if it is not
+already covered in the list of [supported seL4 platforms](/Hardware/).
 
 ## Setup
 
@@ -26,12 +27,14 @@ Linux image onto the board. This way you can find the correct address to load th
 This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.
 
 Once you have found the correct address to load, declare the boot command (where address 0x20000000 as an example):
+
 ```sh
 bootcmd="tftpboot 0x20000000 /path/to/image && go 0x20000000"
 saveenv
 ```
 
-For TFTP, you will also need to set some U-Boot envrionment variables:
+For TFTP, you will also need to set some U-Boot environment variables:
+
 ```sh
 setenv ipaddr <BOARD ADDRESS>
 setenv serverip <SERVER ADDRESS>
@@ -41,6 +44,7 @@ saveenv
 ### eMMC/SD card setup
 
 We can load an image with the following command (using `0x20000000` as an example):
+
 ```sh
 fatload mmc 0 0x20000000 /path/to/image
 ```
@@ -61,12 +65,13 @@ seL4 relies on the DTS for the location and size of main memory as well as infor
 about certain devices used by the kernel such as the timer. In debug mode, seL4 also
 makes use of the default serial device for debug output.
 
-Typically the Device Tree Source will be included in the
+Often the Device Tree Source will be included in the
 [Linux kernel source](https://github.com/torvalds/linux), from there you can decompile
 the device tree blob (DTB) from building the Linux kernel to get the Device Tree that
 Linux uses.
 
 You can compile the Linux Device Tree Sources into a final Device Tree Blob with:
+
 ```sh
 make ARCH=<arm/arm64/riscv> CROSS_COMPILE=<TOOLCHAIN> defconfig
 make ARCH=<arm/arm64/riscv> CROSS_COMPILE=<TOOLCHAIN> dtbs
@@ -75,6 +80,7 @@ make ARCH=<arm/arm64/riscv> CROSS_COMPILE=<TOOLCHAIN> dtbs
 The DTBs can be found in `arch/<ARCH>/boots/dts/`.
 
 The following command allows you to decompile the DTB:
+
 ```sh
 dtc -I dtb -O dts /path/to/dtb -o linux.dts
 ```
@@ -88,7 +94,8 @@ as it consumes the Device Tree at build-time.
 In the seL4 source, each platform has an overlay DTS that is responsible for dealing
 with seL4-specific device nodes. Below is an example
 (from the [ROCKPro64](https://github.com/seL4/seL4/blob/master/src/plat/rockpro64/overlay-rockpro64.dts)):
-```
+
+```dts
 / {
     chosen {
         seL4,elfloader-devices =
@@ -119,6 +126,7 @@ define working memory. Other gotchas could include interrupt cells, interrupt nu
 mapped wrongly, or incorrect addresses.
 
 The kernel also expects drivers for:
+
 * the timer device
 * the serial device
 * the interrupt controller
@@ -188,6 +196,7 @@ You can find the physical addresses and interrupt numbers for each device in its
 manual and copy them into the right places.
 
 `util_libs/libplatsupport/plat_include/<platform>/`
+
 * `clock.h`
 * `gpio.h`
 * `i2c.h`
@@ -196,6 +205,7 @@ manual and copy them into the right places.
 * `timer.h`
 
 `util_libs/libplatsupport/src/plat/<platform>/`
+
 * `chardev.c`
 * `ltimer.c`
 * `serial.c`
@@ -217,4 +227,4 @@ to shorten memory regions in DTS memory nodes to check you are touching the corr
 
 Once you have a working port that passes seL4test, see the guides for
 [contributing in general](https://sel4.systems/Contribute/)
-and [contributing kernel changes](/projects/sel4/kernel-contribution.html).
+and [contributing kernel changes](kernel-contribution.html).
