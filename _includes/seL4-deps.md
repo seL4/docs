@@ -17,15 +17,14 @@ how we use repo.
 
 To compile and use seL4 you can either:
 
-* *Recommended:* follow the [instructions here](/projects/dockerfiles/) to use
-  Docker for isolating the dependencies from your machine, or
+* *Recommended:* follow the [instructions here][docker] to use Docker for
+  isolating the dependencies from your machine, or
 * install the build dependencies below on your local OS
 
 The following instructions describe how to set up the required dependencies on
 your local OS. This page assumes you are building in a Linux OS. We however
-encourage site
-[contributions](https://docs.sel4.systems/processes/docs-contributing.html) for
-build instructions in other OSes (e.g. macOS).
+encourage site [contributions] for build instructions in other OSes (e.g.
+macOS).
 
 ## Ubuntu
 
@@ -33,8 +32,7 @@ These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 
 {% include note.html %}
 If you discover any missing dependencies and packages we welcome new
-[contributions](https://docs.sel4.systems/processes/docs-contributing.html) to
-the page.
+[contributions] to the page. You can [edit this section directly on GitHub][edit].
 {% include endnote.html %}
 
 ### Base dependencies
@@ -117,3 +115,7 @@ pip3 install --user setuptools sel4-deps
 (Some distributions use `pip` for python3, others use `pip3`.  Use the Python 3 version for your distribution)
 
 {% include pip-instructions.md deps="sel4-deps" %}
+
+[edit]: https://github.com/seL4/docs/edit/master/_includes/seL4-deps.md
+[contributions]: {{ '/processes/docs-contributing.html' | relative_url }}
+[docker]: {{ '/projects/dockerfiles/' | relative_url }}
