@@ -1,4 +1,5 @@
 ---
+archive: true
 redirect_from:
   - /LevelConverter
 SPDX-License-Identifier: CC-BY-SA-4.0

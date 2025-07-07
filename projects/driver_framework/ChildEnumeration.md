@@ -1,4 +1,5 @@
 ---
+archive: true
 redirect_from:
   - /seL4DriverAPI/ChildEnumeration
 SPDX-License-Identifier: CC-BY-SA-4.0

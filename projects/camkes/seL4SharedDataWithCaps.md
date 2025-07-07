@@ -1,4 +1,5 @@
 ---
+archive: true
 parent: /projects/camkes/
 redirect_from:
   - /seL4SharedDataWithCaps

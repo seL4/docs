@@ -1,4 +1,5 @@
 ---
+archive: true
 simulation_target: true
 simulation_only: false
 cmake_plat: kzm
