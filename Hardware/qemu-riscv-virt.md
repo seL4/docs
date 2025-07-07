@@ -32,6 +32,9 @@ The values `riscv64` and `riscv32` are supported for `KernelSel4Arch`.
 
 ## Running seL4 test
 
+See the [machine setup] instructions for how to install build dependencies.
+
 {% include sel4test.md %}
 
 [Qemu]: https://www.qemu.org
+[machine setup]: {{ '/projects/buildsystem/host-dependencies.html' | relative_url }}

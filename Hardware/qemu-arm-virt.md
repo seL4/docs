@@ -35,6 +35,9 @@ Supported values for the optional build parameter `ARM_CPU` are: `cortex-a7`,
 
 ## Running seL4 test
 
+See the [machine setup] instructions for how to install build dependencies.
+
 {% include sel4test.md %}
 
 [Qemu]: https://www.qemu.org
+[machine setup]: {{ '/projects/buildsystem/host-dependencies.html' | relative_url }}
