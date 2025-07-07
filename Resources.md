@@ -46,7 +46,7 @@ A subset of available projects are described below, for a full list see the [lis
 - [CAmkES](https://github.com/seL4/camkes-manifest), a
       component architecture for embedded systems based on seL4. See the
       CAmkES pages for more documentation about CAmkES.
-- [x86 Camkes VMM](https://github.com/seL4/camkes-vm-examples-manifest) a
+- [x86 CAmkES VMM](https://github.com/seL4/camkes-vm-examples-manifest) a
       component-based virtual machine monitor for ia32 platforms using
       Intel VT-X and VT-D extensions.
 

@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Using Docker for seL4, Microkit, and Camkes
+# Using Docker for seL4, Microkit, and CAmkES
 
 This page provides instructions on how to quickly set up your machine for
 building the seL4 kernel and related projects.

@@ -238,6 +238,6 @@ the system. This can only be used once in a project and does the following:
 
 #### Other provided helpers
 
-Projects such as [Camkes](/CAmkES), the [Camkes x86 VMM](/CAmkESVM), and [Rumprun](https://github.com/seL4/rumprun-sel4-demoapps) may provide additional helper functions
+Projects such as [CAmkES](/CAmkES), the [CAmkES x86 VMM](/CAmkESVM), and [Rumprun](https://github.com/seL4/rumprun-sel4-demoapps) may provide additional helper functions
 to allow applications to configure themselves. Generally helper scripts will be called some variant
 of `helpers.cmake`, and should be included in any CMake scripts that use them.

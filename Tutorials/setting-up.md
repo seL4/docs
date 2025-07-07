@@ -71,7 +71,7 @@ cd seL4-CAmkES-L4v-dockerfiles
 make user
 ```
 
-This will give you a terminal inside a container that has all the relevant tools to build, simulate, and test seL4 & Camkes programs.
+This will give you a terminal inside a container that has all the relevant tools to build, simulate, and test seL4 & CAmkES programs.
 
 The first time you run this, docker will fetch the relevant images, which may take a while.
 

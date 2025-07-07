@@ -19,7 +19,7 @@ page](/examples.html).
 {% include component_list.md project='camkes' type='camkes-component' %}
 
 
-## Camkes Connectors
+## CAmkES Connectors
 
 {% include component_list.md project='camkes' type='camkes-connector' %}
 

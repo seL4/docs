@@ -1,5 +1,5 @@
 ---
-title: Camkes cross-VM connectors
+title: CAmkES cross-VM connectors
 tutorial: camkes-vm-crossvm
 layout: tutorial
 description: walkthrough of adding communication between Linux guests in separate VMs

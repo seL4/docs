@@ -26,10 +26,10 @@ The development framework provides:
       glue code to build a complete, bootable, system image
 - full integration in the seL4 environment and build system
 
-## Get Camkes
+## Get CAmkES
 
-- Make sure that you already have the tools to [build seL4 and Camkes](/Resources#setting-up-your-machine).
-- Download Camkes:
+- Make sure that you already have the tools to [build seL4 and CAmkES](/Resources#setting-up-your-machine).
+- Download CAmkES:
 
 ```
 mkdir camkes-project
@@ -58,7 +58,7 @@ ninja
 To learn about developing your own CAmkES application, read the
 [Tutorials#CAmkES_tutorials](/tutorials#camkes-tutorials).
 
-## Camkes Terminology/Glossary
+## CAmkES Terminology/Glossary
 
 
 Can be found [here](terminology).
