@@ -13,15 +13,9 @@ the TK1-SOM. It provides **two CAN buses** implemented with MCP2515
 (on the TK1-SOM's SPI bus) and voltage conversion for the two serial
 ports.
 
-<style>
-div.content img {
-  width:20%;
-}
-</style>
-
-![Top of board](top.jpg)
-![Bottom of board](bottom.jpg)
-![Side view of mounted stack](side.jpg)
+<img alt="Top of board" src="top.jpg" class="w-1/5">
+<img alt="Bottom of board" src="bottom.jpg" class="w-1/5">
+<img alt="Side view of mounted stack" src="side.jpg" class="w-1/5">
 
 ## Mounting
  The board attaches to the bottom of a TK1-SOM via the

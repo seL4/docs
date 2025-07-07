@@ -126,9 +126,10 @@ Architecture ports also have significant impact on verification.
 For these reasons, it is critical to first engage in discussion before
 commencing on such a port.
 
-Start an initial discussion on one of our [communication channels](Contact Us)
-to check if such a port is already being worked on, whether there are known challenges with such a port, etc.  After initial discussion, start a [Request For
-Comment (RFC)](RFC) describing your design and plans.
+Start an initial discussion on one of our [communication channels][contact] to
+check if such a port is already being worked on, whether there are known
+challenges with such a port, etc.  After initial discussion, start a [Request
+For Comment (RFC)](RFC) describing your design and plans.
 
 Once there is agreement on the general suitability of and design of
 the port, then go on to implementing it.  Discussion, revisions of
@@ -180,7 +181,7 @@ design (considering the fit with the overall philosophy and
 architecture of the kernel, performance impacts, verification impacts,
 etc).
 
-It is particulary important to consider how such a kernel feature will
+It is particularly important to consider how such a kernel feature will
 affect, and be affected on, all the kernel ports, how it will affect
 user-level components and systems, and how it will impact key properties such as security.
 
@@ -195,7 +196,7 @@ to support this port (e.g. with regression testing) so that it
 continues to be updated and work as seL4 evolves.
 
 This is particularly important for features that span all the kernel
-ports and need to be tested on all the supported platfroms.  It is not
+ports and need to be tested on all the supported platforms.  It is not
 sufficient to implement a kernel feature on a single platform, with no
 plans of how to ensure that it works on all supported platforms (where
 possible).
@@ -205,12 +206,18 @@ Guidelines](https://sel4.systems/Contribute/) for submitting changes.
 
 ## Proof Contributions
 
-Contributing to the seL4 proofs requires a different skill set than contributing to the code, and so far we have not had many community contributions to the proofs.
+Contributing to the seL4 proofs requires a different skill set than contributing
+to the code, and so far we have not had many community contributions to the
+proofs.
 
-As a result, our infrastructure for proof contributions is not as mature as that for code contributions.
+As a result, our infrastructure for proof contributions is not as mature as that
+for code contributions.
 
 If you are interested in proof contributions the main things to do are to:
 
-- [Learn](http://proofcraft.org/blog/proof-engineer-reading.html) about the [Isabelle theorem prover](http://isabelle.in.tum.de/).
-- Review the [proofs themselves](https://github.com/seL4/l4v/).
-- [Contact us](https://sel4.systems/contact/) to discuss the possibilities.
+* [Learn](http://proofcraft.org/blog/proof-engineer-reading.html) about the
+  [Isabelle theorem prover](http://isabelle.in.tum.de/).
+* Review the [proofs themselves](https://github.com/seL4/l4v/).
+* [Contact us][contact] to discuss the possibilities.
+
+[contact]: https://sel4.systems/contact/

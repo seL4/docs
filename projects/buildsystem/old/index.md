@@ -64,7 +64,7 @@ display terminal menus. It is possible to select a configuration without
 using the terminal menus, but techniques for doing this are not
 discussed on this page.
 
-<img style="width:600" src="menuconfig.png" alt="The menu config interface" />
+<img style="width:600px" src="menuconfig.png" alt="The menu config interface" />
 
 Use arrow keys and Enter to navigate the menu, Space bar to
 select/deselect items and Esc-Esc to return to the parent level in the

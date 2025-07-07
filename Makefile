@@ -306,7 +306,14 @@ validate:
 							 'not allowed on element "svg"' \
 							 'The "font" element is obsolete' \
 							 'xmlns:svg' \
-							 'sodipodi:namedview'
+							 'sodipodi:namedview' \
+							 'xmlns:inkscape' \
+							 'sodipodi:role' \
+							 'inkscape:label' \
+							 'inkscape:groupmode' \
+							 'xmlns:sodipodi' \
+							 'Element "g" not allowed as child of element "clipPath"' \
+							 'error: Duplicate ID "layer1".'
 
 update:
 	bundle update
