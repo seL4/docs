@@ -127,9 +127,9 @@ mapped wrongly, or incorrect addresses.
 
 The kernel also expects drivers for:
 
-* the timer device
-* the serial device
-* the interrupt controller
+* the timer device.
+* the serial device.
+* the interrupt controller.
 * the IOMMU if the kernel is being built with IOMMU support.
 
 You can check all the supported drivers in `seL4/tools/hardware.yml`.
