@@ -66,7 +66,7 @@ REPOSITORIES = $(GIT_REPOS:%=_repos/%)
 
 $(REPOSITORIES):
 	mkdir -p $@
-	git clone --depth=1 https://github.com/$(@:_repos/%=%) $@
+	git clone --depth=1 --recursive https://github.com/$(@:_repos/%=%) $@
 
 .PHONY: repos
 repos: $(REPOSITORIES)
