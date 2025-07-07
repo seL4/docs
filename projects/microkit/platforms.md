@@ -14,15 +14,7 @@ on [Board Support Packages](manual/latest/#bsps) in the Microkit manual.
 | -        |  -             | -    | -    |
 
 {%- for p in platforms %}
-{%-   for p_content in p %}
-{%-   if p_content.cmake_plat %}
-{%-     assign cmake_plat = p_content.cmake_plat %}
-{%-     break %}
-{%-   else %}
-{%-     assign name = p_content %}
-{%-   endif %}
-{%-   endfor %}
-{%-   assign pages = site.pages | where: "cmake_plat", cmake_plat %}
+{%-   assign pages = site.pages | where: "cmake_plat", p.cmake_plat %}
 {%-   if pages.size == 1 %}
 {%-     assign pg = pages[0] %}
 {%-     assign display_name = pg.platform %}
@@ -30,12 +22,12 @@ on [Board Support Packages](manual/latest/#bsps) in the Microkit manual.
 {%-     assign cpu = pg.cpu %}
 {%-     assign arch = pg.arch %}
 {%-   else %}
-{%-     assign display_name = name %}
+{%-     assign display_name = p.name %}
 {%-     assign soc = "" %}
 {%-     assign cpu = "" %}
 {%-     assign arch = "" %}
 {%-    endif %}
-| [{{ display_name }}](manual/latest/#{{name}}) | {{ soc }} | {{ cpu }} | {{ arch }} |
+| [{{ display_name }}](manual/latest/#{{p.name}}) | {{ soc }} | {{ cpu }} | {{ arch }} |
 {%- endfor %}
 
 ## Not in the list above?
