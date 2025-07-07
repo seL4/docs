@@ -1,6 +1,7 @@
 ---
 redirect_from:
   - /Developing/Building/Using
+parent: /projects/buildsystem/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -126,7 +127,7 @@ Projects may provide cache script files which each contain the cache
 settings necessary to configure a single feature or option. By combining
 multiple `.cmake` files, a project can be initialised in a specific way.
 Cache script configurations are provided
-by passing `-C <file>` to `cmake` when initialising the build directory. 
+by passing `-C <file>` to `cmake` when initialising the build directory.
 For example, given a typical project structure,
 one might invoke `cmake` or `init-build.sh` with several of
 cache scripts as arguments.
