@@ -1,4 +1,5 @@
 ---
+parent: /projects/microkit/manual/latest/
 toc: true
 Copyright: 2021, Breakaway Consulting Pty. Ltd.
 SPDX-License-Identifier: CC-BY-SA-4.0
