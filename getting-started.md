@@ -8,12 +8,12 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ## Building Systems on seL4
 
 The quickest and easiest way to get started with building a system on top of
-seL4 is the seL4 Microkit. We recommend to
+seL4 is the seL4 Microkit. We recommend to:
 
 - start with the [tutorial](projects/microkit/tutorial/welcome.html),
 - check out the Microkit examples on the [examples page],
 - look at the [manual](projects/microkit/manual/latest/) to get a full overview, and
-- check the [supported platforms](projects/microkit/supported-platforms.html)
+- check the [supported platforms](projects/microkit/platforms.html)
   to see what hardware you can run on.
 
 The Microkit is for systems with a statically described software architecture.
@@ -45,21 +45,28 @@ the main website.
 ## Writing Rust on seL4
 
 The Rust programming language is a great fit for writing applications on top of
-seL4. Check out
+seL4. Check out:
 
-- the [Rust support for seL4](/projects/rust/)
-- examples tagged with Rust on the seL4 [examples page]
+- the [Rust support for seL4](/projects/rust/), and
+- examples tagged with Rust on the seL4 [examples page].
 
-## I just want build instructions and tests
+## Build instructions and tests
 
-[This way, please](projects/buildsystem/host-dependencies.html).
+If you just want instructions for building and running the seL4 kernel, check
+the page on [setting up your
+machine](projects/buildsystem/host-dependencies.html).
 
 ## The proofs
 
 seL4's claim to fame is that it is formally verified. These formal proofs are
 available in the [l4v](https://github.com/seL4/l4v/) repository with their own
 setup and build instructions. See the [verification pages] on the main website
-for an overview of the proofs.
+for an overview of the proofs, and check the [Verified
+Configurations](/projects/sel4/verified-configurations.html) to know which
+architecture/platform/configuration combinations of seL4 have verified
+properties.
+
+
 
 [verification pages]: https://sel4.systems/Verification/
 
@@ -68,8 +75,8 @@ for an overview of the proofs.
 Check out the navigation on the left for the main content of this documentation
 site.
 
-If you have questions there is always the [New to seL4][new] section on seL4
-discourse and the general seL4 community [help and support][support] channels.
+If you have questions, you can head to the [New to seL4][new] section on seL4
+discourse or the general seL4 community [help and support][support] channels.
 
 [new]: https://sel4.discourse.group/c/new-to-sel4/
 [support]: https://sel4.systems/support.html
