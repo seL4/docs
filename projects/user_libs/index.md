@@ -32,6 +32,9 @@ and [libplatsupport](#libplatsupport).
 OS independent low-level utilities in the repositories [util_libs] and
 [projects_libs]. New libraries should go into `project_libs`.
 
+[util_libs]: https://github.com/seL4/util_libs
+[projects_libs]: https://github.com/seL4/projects_libs
+
 ### util_libs
 
 Sources: <https://github.com/seL4/util_libs>
@@ -48,9 +51,9 @@ Sources: <https://github.com/seL4/projects_libs>
 
 ## seL4-specific libraries
 
-### seL4_libs
-
 Basic libraries with abstractions for interacting with seL4 from C.
+
+### seL4_libs
 
 Sources: <https://github.com/seL4/seL4_libs>
 
