@@ -4,14 +4,15 @@ cmake_plat: star64
 xcompiler_arg: -DRISCV64=1 -DUseRiscVOpenSBI=OFF
 platform: Pine64 Star64
 arch: RV64GBC, RV64IMAC, RV32IMAFBC
-virtualization: "No"
-iommu: "No"
+virtualization: "no"
+iommu: "no"
 simulation_target: false
 Status: "Unverified"
 Contrib: "Community"
 Maintained: "seL4 Foundation"
 soc: StarFive JH7110
-cpu:  U74-MC, E24
+cpu: U74-MC, E24
+parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -19,7 +20,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # Pine64 Star64
 
 The Star64 is a RISC-V SBC by Pine64 based on the StarFive JH7110 SoC. Check
-[here](https://wiki.pine64.org/wiki/STAR64) for details.
+the [Pine64 Wiki](https://wiki.pine64.org/wiki/STAR64) for details.
+
+{% include hw-info.html %}
 
 The StarFive JH7110 SoC is comprised of the SiFive U74-MC (four 64-bit U74
 cores and one 64-bit S7 core) and one SiFive E24 32-bit core. Note that by
@@ -44,7 +47,7 @@ From U-Boot proper you can then load and start an seL4 image, see below for deta
 
 ## Booting via microSD card
 
-```
+```sh
 fatload mmc 1 0x60000000 sel4test-driver-image-riscv-star64
 go 0x60000000
 ```
@@ -54,7 +57,7 @@ go 0x60000000
 If you have setup a TFTP server, enter the following commands on the U-Boot console
 to load an image via the network.
 
-```
+```sh
 dhcp
 tftpboot 0x60000000 <YOUR_TFTP_SERVER_IP_ADDRESS>:sel4test-driver-image-riscv-star64
 go 0x60000000
@@ -73,7 +76,7 @@ The boot process of this bootable image is the same as the SPI flash booting
 process. Unfortunately, at the time of writing, U-Boot does not support booting
 in M-Mode which means U-Boot must be loaded by an SBI in S-Mode.
 
-### Acquring sources
+### Acquiring sources
 
 At the time of writing, mainline U-Boot does not support the Pine64 Star64, hence
 if you want to built it yourself, there is a patch to apply available on a fork of
@@ -114,6 +117,7 @@ Now we need to take the payload and turn it into a Flattened uImage Tree (FIT) f
 to load.
 
 First we'll need an ITS file to describe the FIT:
+
 ```sh
 /dts-v1/;
 
@@ -146,6 +150,7 @@ First we'll need an ITS file to describe the FIT:
 ```
 
 Now, invoke the `mkimage` tool to generate the FIT.
+
 ```sh
 mkimage -f <ITS_FILE> -A riscv -O u-boot -T firmware opensbi_uboot_fit.img
 ```
@@ -154,12 +159,14 @@ mkimage -f <ITS_FILE> -A riscv -O u-boot -T firmware opensbi_uboot_fit.img
 
 First we need to compile a small tool that adds the SPL header to the U-Boot
 SPL image.
+
 ```sh
 cd soft_3rdpart/spl_tool
 make
 ```
 
 Now invoke the tool on the U-Boot SPL image:
+
 ```sh
 spl_tool -c -f u-boot/spl/u-boot-spl.bin
 ```
@@ -173,7 +180,8 @@ the `genimage` tool is used.
 
 First, we'll need the configuration file. Note that you will have to change the
 paths to match where you build each binary.
-```
+
+```conf
 image sdcard.img {
     hdimage {
         gpt = true
@@ -197,6 +205,7 @@ image sdcard.img {
 
 Now we can pass this configuration, a temporary directory path, and a root
 directory path to the genimage tool.
+
 ```sh
 # genimage expects these directories to exist before invoking it
 mkdir -p temp
