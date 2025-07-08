@@ -111,12 +111,14 @@ into a binary file using objcopy.
 
 {% include sel4test.md %}
 
+<!--
 ### From SD card
 
 \<TODO>
 
 ### Fastboot
 \<TODO> Currently not working...
+-->
 
 ### tftpboot
  At the U-Boot prompt, type print to see the list of
