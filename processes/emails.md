@@ -18,6 +18,6 @@ Private mailing lists have a restricted set of receivers.
 ## Private mailing lists
 
 - [moderation@sel4.systems](mailto:moderation@sel4.systems): For requests or queries about community moderation.
-  See [seL4 Code of Conduct](/Conduct).
+  See [seL4 Code of Conduct](https://sel4.systems/Contribute/conduct.html).
 - [webmaster@sel4.systems](mailto:webmaster@sel4.systems): For website issues.
 - [support@sel4.systems](mailto:support@sel4.systems): For enquiries about professional (paid-for) support contracts.

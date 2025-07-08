@@ -13,7 +13,7 @@ This page is about contributing to the [documentation site][docsite].  For contr
 visit our main [contributing page][contribute].
 
 [docsite]: https://docs.sel4.systems
-[contribute]: https://docs.sel4.systems/processes/
+[contribute]: https://sel4.systems/Contribute/
 
 We believe that documentation is important for any project and appreciate any contributions that improves it.
 The sort of contributions that we are looking for are:
@@ -34,27 +34,27 @@ For reporting issues about a particular project, please use the relevant reposit
 
 As a reminder, all contributors are expected to follow our [Code of Conduct][conduct].
 
-[conduct]: https://docs.sel4.systems/Conduct
+[conduct]: https://sel4.systems/Contribute/conduct.html
 
 
 ## Your First Contribution
 
 You have noticed something that is wrong with some documentation on the site.  GitHub makes it pretty easy to edit Markdown files without having to leave the browser. By clicking edit on the relevant file, making your change and then submitting a pull request someone can then review you change and merge it which will result in the update appearing on the website.
 
-More detailed changes can be achieved by checking out the repository and editing locally, followed by commiting and making a pull request manually.  The README.md describes how to host the site locally so that you can see how your changes are presented.
+More detailed changes can be achieved by checking out the repository and editing locally, followed by committing and making a pull request manually.  The README.md describes how to host the site locally so that you can see how your changes are presented.
 
 Contributions that are most helpful to us at the moment are:
 
 - Identifying which pages contain stale documentation.  Filing an issue in the issue tracker will let us know that something is broken or old.
 - Identifying areas where there is missing documentation or it is confusing
-- Fixing any syntax errors left over from our migration from the old <http://wiki.sel4.systems> site.
+- Fixing any syntax errors left over from our migration from the old wiki site.
 
 
 ## Submitting a contribution
 
-Contributions can be submitted by pull requests at <https://www.github.com/sel4proj/docs>.
+Contributions can be submitted by pull requests at <https://www.github.com/seL4/docs>.
 
-Please try and follow the git commit style guide: <http://chris.beams.io/posts/git-commit/>
+Please follow the [git commit style guide](https://sel4.systems/Contribute/git-conventions.html).
 
 ### Style
 

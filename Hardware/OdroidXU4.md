@@ -5,10 +5,10 @@ xcompiler_arg: -DAARCH32=1
 platform: OdroidXU4
 arch: ARMv7A
 virtualization: ARM HYP
-iommu: limited System MMU
+iommu: limited SMMU
 soc: Exynos5
 cpu: Cortex-A15
-Status: Unverified
+Status: "[FC with HYP, no SMMU](/projects/sel4/verified-configurations.html#arm_hyp-exynos5)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0

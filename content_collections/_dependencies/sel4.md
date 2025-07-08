@@ -15,11 +15,9 @@ To establish a usable development environment it is important to install your di
 
 #### Ubuntu
 
-These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.
+These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 
-> *Note for Ubuntu 18.04: we require a minimum CMake version of 3.12.0 while Ubuntu 18.04 contains 3.10.2.  In order to correct this, a custom installation of CMake may be required which can be downloaded from: [https://cmake.org/download/](https://cmake.org/download/)*
-
-> As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/DocsContributing) to the page.
+> As dependencies and packages may be frequently changed, deprecated or updated these instructions may become out of date. If you discover any missing dependencies and packages we welcome new [contributions](https://docs.sel4.systems/processes/docs-contributing.html) to the page.
 
 **Base dependencies**
 
@@ -37,20 +35,6 @@ sudo apt-get install cmake ccache ninja-build cmake-curses-gui
 sudo apt-get install libxml2-utils ncurses-dev
 sudo apt-get install curl git doxygen device-tree-compiler
 sudo apt-get install u-boot-tools
-```
-
-For Ubuntu 18.04:
-
-```sh
-sudo apt-get install python-dev python-pip python3-dev python3-pip
-sudo apt-get install protobuf-compiler python-protobuf
-sudo apt-get install gcc-8 g++-8
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
-```
-
-For Ubuntu 20.04 and 22.04:
-
-```sh
 sudo apt-get install python3-dev python3-pip python-is-python3
 sudo apt-get install protobuf-compiler python3-protobuf
 ```
@@ -94,39 +78,22 @@ sudo apt-get install texlive texlive-latex-extra texlive-fonts-extra
 
 #### Debian
 
-##### For Debian Stretch or later
+##### For Debian Bullseye or later
 
-The dependencies listed in our docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the:
+The dependencies listed in our Docker files [repository](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles) will work for a Debian installation. You can refer to this repository for an up-to-date list of base build dependencies. Specifically refer to the dependencies listed in the file here:
 
-* [Base Tools Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/base_tools.dockerfile)
-* [seL4 Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/sel4.dockerfile)
+* [Base Tools](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/base_tools.sh)
+* [seL4](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/sel4.sh)
 * [LaTeX](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/apply-tex.sh)
-
-The version of `cmake` in Debian *stretch* is too old to build seL4 projects (*buster* and later are OK).  If you are on *stretch*, install `cmake` from stretch-backports:
-
-Add the *stretch-backports* repository like this (substitute a local mirror for `ftp.debian.org` if you like)
-
-```sh
-sudo sh -c "echo 'deb http://ftp.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list"
-```
-
-Then install `cmake` with
-
-```sh
-sudo apt-get update
-sudo apt-get -t stretch-backports install cmake
-```
 
 ### Python Dependencies
 
 Regardless of your Linux distribution, python dependencies are required to build seL4, the manual and its proofs. To install you can run:
 
 ```sh
-pip3 install --user setuptools
-pip3 install --user sel4-deps
-# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
-pip install --user setuptools
-pip install --user sel4-deps
+pip3 install --user setuptools sel4-deps
 ```
 
-(Some distributions use `pip` for python3 and `pip2` for python2; others uses `pip` for python2 and `pip3` for python3.  Use the Python 3 version for your distribution)
+(Some distributions use `pip` for python3, others use `pip3`.  Use the Python 3 version for your distribution)
+
+{% include pip-instructions.md deps="sel4-deps" %}

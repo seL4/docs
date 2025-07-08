@@ -67,13 +67,13 @@ This all needs to be deployed on hardware components. The [Supported Platforms](
 ### How we choose what we work on
 
 Primarily, what we work on gets prioritised by externally funded projects and what is long-term strategic.
-The strategic roadmap can be found on the [seL4 development and verification roadmap](/projects/roadmap.html) page.
+The strategic roadmap can be found on the [seL4 development and verification roadmap](https://sel4.systems/roadmap.html) page.
 
 Some priority is also given to the maintained projects and repositories which involves responding to
 breakages and reported issues as they arise.  Raising a GitHub issue on a relevant repository is the best way to get an issue
 acknowledged. Alternatively, the *devel* mailing list or the seL4 Mattermost can be used to ask about potential issues.
 
-Additionally, the [RFC process](/processes/rfc-process) is intended as a way to provide input on
+Additionally, the [RFC process](https://sel4.systems/Contribute/rfc-process.html) is intended as a way to provide input on
 longer-term priorities as well as a way to promote a collaborative design process on new kernel features
 before larger effort is invested into their development. More information is provided on the RFC page above.
 
@@ -97,12 +97,14 @@ Communication about what is being developed can occur on any of the channels lis
 In particular:
 
 - The *devel* mailing list, seL4 Mattermost and seL4 Discourse are for general development discussions.
-- Discussions about proposed changes can reach a point where an [RFC](/processes/rfc-process) is created.
-  Further discussion then happens on the [RFC](https://sel4kernel.atlassian.net/secure/Dashboard.jspa?selectPageId=10100) site.
+- Discussions about proposed changes can reach a point where an
+  [RFC](https://sel4.systems/Contribute/rfc-process.html) is created. Further discussion then happens on
+  the RFC pull requests in the
+  [RFC repository](https://github.com/seL4/rfcs/pulls?q=is%3Aopen+is%3Apr+-label%3Anot-rfc+).
 - GitHub issue and Pull-request comment sections can also be used.
 
 The [seL4 development and verification
-roadmap](/projects/roadmap.html) page lists major features and
+roadmap](https://sel4.systems/roadmap.html) page lists major features and
 projects that someone has committed to deliver.
 
 
@@ -111,23 +113,25 @@ projects that someone has committed to deliver.
 We use the following communication mechanisms:
 
 - [Mailing lists](emails): For email-based discussions, for asking for help, reporting issues or general seL4 communication.
-- [seL4 Discourse (seL4um)](https://sel4.discourse.group/): Forum for seL4. Attempting to build up useful knowledge-base.
-- [seL4 Mattermost](https://mattermost.trustworthy.systems/sel4-external/). seL4 chat platform (Signup link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
-- GitHub issues: Reporting issues or creating pull requests on repositories located at [seL4](https://github.com/seL4) or [seL4Proj](https://github.com/seL4proj) organisations.
-- [seL4 Jira](https://sel4.atlassian.net): for issue tracking on seL4, CAmkES, and formal verification, and for reading and creating [RFCs](rfc-process)
+- [seL4 Discourse forum](https://sel4.discourse.group/): Forum for seL4. Attempting to build up useful knowledge-base.
+- [seL4 Mattermost](https://mattermost.trustworthy.systems/sel4-external/). seL4 chat platform (Sign-up link can be found on [seL4 Discourse](https://sel4.discourse.group/t/sel4-mattermost-sign-up-link/125) with a valid account).
+- GitHub issues: Reporting issues or creating pull requests on repositories
+  located in the [seL4 GitHub org](https://github.com/seL4).
+- [RFCs](https://github.com/seL4/rfcs): for reading and creating new seL4 features or larger ecosystem changes.
 - [Websites](websites): Websites containing information about seL4.
+- [seL4 Jira](https://sel4.atlassian.net): archive for old issue tracking on
+  seL4, CAmkES, and formal verification before GitHub development.
 
 
 ## Contributing
 
 We welcome your contributions to code, documentation and this website.
-To ensure a collaborative environment, we expect all contributions and interactions to fall within our [Code of Conduct](/Conduct).
+To ensure a collaborative environment, we expect all contributions and interactions to fall within our [Code of Conduct](https://sel4.systems/Contribute/conduct.html).
 
 In addition to following the development process that is outset below, most of the software projects generally follow the following conventions:
-- [Style Guide](/StyleGuide)
-- [Git Conventions](/GitConventions)
-- [Pull requests](/CodeReview)
+- [Coding Conventions](https://sel4.systems/Contribute/style.html)
+- [Git Conventions](https://sel4.systems/Contribute/git-conventions.html)
+- [Pull Requests](https://sel4.systems/Contribute/pull-requests.html)
 
 Additionally, each project may have a slightly augmented processes for contributing:
 - [docs.sel4.systems](docs-contributing)
-- [seL4 Proofs](https://github.com/seL4/l4v/blob/master/CONTRIBUTING.md)

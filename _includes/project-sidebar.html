@@ -53,9 +53,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 Sort sorts by string sorting so a version of 2.3.0 is higher than 10.0.0.
 Because of this we need to split the list into two before sorting.
 {% endcomment %}
-{% assign releases_1 = releases | where_exp:"item", "item.version_digits != 2" | sort: "version"  %}
+{% assign releases_1 = releases | where_exp:"item", "item.version_digits != 2" | sort: "version" %}
 {% assign releases_2 = releases | where_exp:"item", "item.version_digits == 2" | sort: "version" %}
-{% assign releases =  releases_1 | concat: releases_2 %}
+{% assign releases =  releases_1 | concat: releases_2 | reverse %}
 {% if project.name != 'sel4' %}
   {% for release in releases %}
       {% if forloop.first == true %}
@@ -69,9 +69,7 @@ Because of this we need to split the list into two before sorting.
   {% endfor %}
 {% else %}
 <h3>Releases</h3>
-<h4> Master (verified kernel) </h4>
-
-{% for release in releases  %}
+{% for release in releases %}
     {% if release.variant != "mcs" %}
       <li>
         <a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="{{ release.url }}">
@@ -83,21 +81,20 @@ Because of this we need to split the list into two before sorting.
 
 {% endfor %}
 
-<h4>Experimental Branches</h4>
+{% endif %}
 
-We occasionally pre-release experimental branches for community feedback and availability.
-<h5>Mixed Criticality Support (MCS) / Realtime </h5>
-{% for release in releases  %}
-    {% if release.variant == "mcs" %}
+{% if project.sdk_downloads %}
+<h3>SDK downloads</h3>
+  {% for release in project.sdk_downloads %}
+    <h4>{{ release.version }}</h4>
+    {% for sdk in release.sdks %}
       <li>
-        <a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="{{ release.url }}">
-          {{ release.title }}
-        </a> (<a style="{% if release.url == page.url %} font-weight: bold; {%endif%}" href="http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf">manual</a>)
+          <a href="{{ sdk.url }}">
+              {{ sdk.label }}
+            </a>
       </li>
-    {% endif %}
-
-{% endfor %}
-
+    {% endfor %}
+  {% endfor %}
 {% endif %}
 
 {% assign update_where_exp = "item.url contains '/updates/" | append: project.name | append: "/'" %}

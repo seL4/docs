@@ -5,16 +5,16 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Getting Started
+# Resources
 
-This page is a quick start for working with seL4 and its ecosystem.
+This page provides an overview of working with seL4 and its ecosystem.
 
 ## Background and terminology
 
 ### Sources
 
 Code and proofs are available on [GitHub](https://github.com/seL4), under standard
-[open-source licenses](/processes/licenses).
+[open-source licenses](https://sel4.systems/Legal/license.html).
 
 There are [many repositories](/MaintainedRepositories).
 Of the most significant are:
@@ -71,7 +71,7 @@ on specifically configured platforms. These claims do not automatically
 transfer to other platforms, other seL4 configurations, or custom seL4
 versions. Please consult [Frequently Asked
 Questions](FrequentlyAskedQuestions), as well as the [proof and
-assumptions page](http://sel4.systems/Info/FAQ/proof.pml) for a better
+assumptions page](http://sel4.systems/Info/FAQ/proof.html) for a better
 understanding of the intersection of verification and seL4.
 
 ### Setting up your machine
@@ -168,7 +168,12 @@ You can find a long list of seL4 publications here:
 - [seL4 is free: What does this mean for you? (2015)](https://www.youtube.com/watch?v=lRndE7rSXiI).
 - [From L3 to seL4: What have we learned in 20 years of L4 microkernels? (2014)](https://www.youtube.com/watch?v=RdoaFc5-1Rk).
 
-## Get Help
+## Contact
+
+### Forums
+
+- [Discourse forum](https://sel4.discourse.group/)
+- [Mattermost channel](https://mattermost.trustworthy.systems/sel4-external/)
 
 ### Mailing lists
 

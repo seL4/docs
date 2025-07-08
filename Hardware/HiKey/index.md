@@ -8,7 +8,7 @@ virtualization: ARM HYP
 iommu: "No"
 soc: Kirin 620
 cpu: Cortex-A53
-Status: Unverified
+Status: "[Verified](/projects/sel4/verified-configurations.html#hikey)"
 Contrib: Data61
 Maintained: seL4 Foundation
 SPDX-License-Identifier: CC-BY-SA-4.0
@@ -23,7 +23,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 - One HiKey Board. See
         [Hikey 96Board](http://www.96boards.org/products/ce/hikey/)
 - Fully working development environment. See
-        [Getting started](/GettingStarted)
+        [Resources](/Resources)
 
 ### Getting Started
  The Hikey board is based around the
@@ -87,12 +87,12 @@ gedit LinaroPkg/platforms.config
 BUILDFLAGS=-DSERIAL_BASE=0xF8015000
 ATF_BUILDFLAGS=CONSOLE_BASE=PL011_UART0_BASE CRASH_CONSOLE_BASE=PL011_UART0_BASE
 ```
-## 5. Patching the UEFI for the Hikey 
+## 5. Patching the UEFI for the Hikey
 Obtain the patch from [edk2.patch](edk2.patch) and follow the below steps.
 
 ```bash
-cd linaro-edk2 
-patch -p1 < ~/Downloads/edk2.patch 
+cd linaro-edk2
+patch -p1 < ~/Downloads/edk2.patch
 # Then return to the main directory hikey-flash
 ```
 
@@ -206,8 +206,8 @@ sudo minicom -s
   7.  Three terminals are then required for the following commands
 
 ```bash
-# In the first terminal 
-ls 
+# In the first terminal
+ls
 # Note the next ttyUSBY that is observed, in addition to the current ttyUSBX
 
 # In the third terminal

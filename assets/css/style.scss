@@ -79,7 +79,7 @@ ul.menu li>ul {
 }
 
 
-// This styles the toc 
+// This styles the toc
 .section-nav {
   background-color: #FFF;
   margin: 5px 0;
@@ -188,7 +188,7 @@ div.breadcrumbs.bootstrap .breadcrumb-item + .breadcrumb-item:hover::before {
  * Site footer
  */
 
- 
+
 /**
  * Clearfix
  */
@@ -252,9 +252,23 @@ h2 a,
   background-color: #428bca;
 }
 
+.tutorial-sidebar li {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.tutorial-sidebar li > a {
+  padding-bottom: 0.5ex;
+  padding-top: 0.5ex;
+}
+
+li.nav-section {
+  padding-top: 1ex;
+  font-weight: bold;
+}
+
 /* This adds a unicode character corresponding to .fa-external-link-alt from fontawesome
    to every external link */
-a[href*="//"]:not([href*="{{site.url}}"],.skip-icon):after {
+a[href*="//"]:not([href*="sel4.systems"],.skip-icon):after {
   display:inline-block;
   font-style:normal;
   font-variant:normal;
@@ -266,7 +280,7 @@ a[href*="//"]:not([href*="{{site.url}}"],.skip-icon):after {
   content: " \f35d";
 }
 
-.plain-links a[href*="//"]:not([href*="{{site.url}}"],.skip-icon):after {
+.plain-links a[href*="//"]:not([href*="sel4.systems"],.skip-icon):after {
   display: none;
 }
 
@@ -290,4 +304,15 @@ a[href*="//"]:not([href*="{{site.url}}"],.skip-icon):after {
 }
 .flex-grid-thirds .col {
   width: 32%;
+}
+
+/* tutorials solutions boxes */
+details {
+  padding-bottom: 20px;
+}
+summary {
+    display:list-item;
+}
+details > summary {
+  cursor: pointer;
 }

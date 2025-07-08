@@ -18,20 +18,23 @@ on:
 jobs:
   build:
     name: Site
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
+        fetch-depth: 0
         submodules: true
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: 3.9
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
     - run: pip3 install -U camkes-deps
     - run: sudo apt-get install doxygen
-    - run: sudo gem install bundler
     - run: make build JEKYLL_ENV=production
     - run: tar -cvf site.tar _site/
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: site
         path: site.tar
@@ -42,15 +45,15 @@ jobs:
             github.event_name == 'workflow_dispatch') }}
     needs: build
     name: 'Deploy'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         ref: gh-pages
         token: ${{ secrets.GH_TOKEN }}
     # for removing files, we need to start fresh; this does not remove dot-files
     - run: rm -rf *
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: site
     - run: tar -xvf site.tar

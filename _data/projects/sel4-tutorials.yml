@@ -12,6 +12,10 @@ repositories:
   - org: sel4proj
     repo: sel4-tutorials-manifest
 
+# The order of the components list determines the order of the tutorials in the
+# tutorial nav side bar. The field section is used there to include groups of
+# tutorials.
+
 components:
   - name: hello-world
     display_name: "Hello world"
@@ -19,120 +23,160 @@ components:
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
-  - name: hello-camkes-0
-    display_name: "CAmkES"
-    description: "The first CAmkES application to run"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: hello-camkes-1
-    display_name: "CAmkES 1"
-    description: "CAmkES ADL and RPC interface tutorial"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: hello-camkes-2
-    display_name: "CAmkES 2"
-    description: "CAmkES event and dataport tutorial"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: hello-camkes-timer
-    display_name: "CAmkES timer"
-    description: "CAmkES tutorial for accessing hardware"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: dynamic-1
-    display_name: "Dynamic Libraries 1"
-    description: "Initialisation and threading tutorial"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: dynamic-2
-    display_name: "Dynamic Libraries 2"
-    description: "seL4 IPC and userspace paging management tutorial"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: dynamic-3
-    display_name: "Dynamic Libraries 3"
-    description: "Processes and ELF loading tutorial"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: dynamic-4
-    display_name: "Dynamic Libraries 4"
-    description: "Tutorial for using device drivers"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
-  - name: mcs
-    display_name: "MCS"
-    description: "MCS extension tutorial"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: sel4-tutorials-application
+    section: sel4
+
   - name: capabilities
     display_name: "Capabilities"
     description: "seL4 capabilities tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: untyped
     display_name: "Untyped"
     description: "Physical memory management tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: mapping
     display_name: "Mapping"
     description: "Virtual memory management tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: threads
     display_name: "Threads"
     description: "Threads on seL4 tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: ipc
     display_name: "IPC"
     description: "seL4 IPC tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: notifications
-    display_name: "Notification"
+    display_name: "Notifications"
     description: "seL4 notification tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: interrupts
     display_name: "Interrupts"
     description: "Tutorial for accessing interrupts on seL4"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
   - name: fault-handlers
     display_name: "Fault handling"
     description: "Fault handling tutorial"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: sel4
+
+  - name: mcs
+    display_name: "MCS extensions"
+    description: "MCS extension tutorial"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: sel4
+
+  - name: libraries-1
+    display_name: "Initialisation &amp; threading"
+    description: "Initialisation and threading tutorial"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: libraries
+
+  - name: libraries-2
+    display_name: "IPC"
+    description: "seL4 IPC and userspace paging management tutorial"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: libraries
+
+  - name: libraries-3
+    display_name: "Processes &amp; Elf loading"
+    description: "Processes and ELF loading tutorial"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: libraries
+
+  - name: libraries-4
+    display_name: "Timer"
+    description: "Tutorial for using device drivers"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: libraries
+
+  - name: hello-camkes-0
+    display_name: "Hello CAmkES"
+    description: "The first CAmkES application to run"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: camkes
+
+  - name: hello-camkes-1
+    display_name: "Introduction to CAmkES"
+    description: "CAmkES ADL and RPC interface tutorial"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: camkes
+
+  - name: hello-camkes-2
+    display_name: "Events in CAmkES"
+    description: "CAmkES event and dataport tutorial"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: camkes
+
+  - name: hello-camkes-timer
+    display_name: "CAmkES timer tutorial"
+    description: "CAmkES tutorial for accessing hardware"
+    maintainer: "seL4 Foundation"
+    status: "active"
+    component_type: sel4-tutorials-application
+    section: camkes
+
   - name: camkes-vm-linux
-    display_name: "CAmkES VM Linux"
+    display_name: "CAmkES VM"
     description: "Tutorial for creating VM guests and applications on seL4 using CAmkES"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: camkes
+
   - name: camkes-vm-crossvm
-    display_name: "CAmkES cross-VM communication"
-    description: "Tutorial for using cross virtual machine connector"
+    display_name: "CAmkES cross-VM connectors"
+    description: "Tutorial for using cross virtual machine connectors"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: sel4-tutorials-application
+    section: camkes
+
   - name: libsel4tutorials
     display_name: "libsel4tutorials"
     description: "Utility Library for doing seL4 tutorials"

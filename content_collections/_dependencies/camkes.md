@@ -14,9 +14,9 @@ The Python dependencies required by the CAmkES build toolchain can be installed 
 
 ```sh
 pip3 install --user camkes-deps
-# Currently we duplicate dependencies for python2 and python3 as a python3 upgrade is in process
-pip install --user camkes-deps
 ```
+
+{% include pip-instructions.md %}
 
 ### Haskell Dependencies
 
@@ -33,7 +33,7 @@ sudo apt-get install haskell-stack
 
 ####  Ubuntu
 
-These instructions are intended for Ubuntu LTS versions 18.04, 20.04, and 22.04.
+These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 
 Install the following packages:
 
