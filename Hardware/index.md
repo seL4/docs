@@ -117,25 +117,3 @@ commitment, to a degree depending on the nature of the contribution.
   should follow our [guidelines for contributing kernel
   code](../projects/sel4/kernel-contribution.html), which details the
   implications and expectations.
-
----
-
-<div class="prose-p:text-lighter prose-td:text-lighter prose-th:text-light prose-h2:text-lighter prose-a:text-lighter" markdown="1">
-
-## Unmaintained platforms
-
-Unmaintained platforms are platforms for which code has been contributed, but
-this code is not or no longer tested and is unlikely to work. We list these
-here, because bringing an unmaintained platform up may be faster and easier than
-starting from scratch on a new platform port.
-
-| Platform | System-on-chip | Core | Arch | Virtualisation | SMMU |
-| - | - | - | - | - | - | - |
-{%- assign sorted = site.pages | sort: 'platform'%}
-{% for page in sorted %}
-{%- if page.arm_hardware and page.Maintained == "No" -%}
-| [{{ page.platform }}]({{page.url | relative_url}}) (unmaintained) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} |
-{% endif %}
-{%- endfor %}
-
-</div>
