@@ -1,6 +1,7 @@
 ---
 project: sel4webserver
 title: "camkes-3.8.x-compatible"
+archive: true
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
