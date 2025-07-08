@@ -23,7 +23,8 @@ sheet](https://www.nxp.com/docs/en/fact-sheet/IMX8MQUADEVKFS.pdf>).
 
 {% include hw-info.html %}
 
-The seL4 i.MX8 port currently only supports running the board in AArch64 mode.
+The seL4 i.MX8M Quad port currently only supports running the board in AArch64
+mode.
 
 ## Building seL4test
 
