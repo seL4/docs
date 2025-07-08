@@ -2,8 +2,8 @@
 arm_hardware: true
 cmake_plat: imx8mq-evk
 xcompiler_arg: -DAARCH64=1
-platform: Imx8mq
-arch: ARMv8A
+platform: i.MX8M Quad
+arch: ARMv8A, AArch64
 virtualization: "yes"
 iommu: "no"
 soc: MCIMX8M-EVKB
@@ -16,9 +16,14 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Imx8mq
+# i.MX8M Quad
+
+See also the the NXP [i.MX8M Quad fact
+sheet](https://www.nxp.com/docs/en/fact-sheet/IMX8MQUADEVKFS.pdf>).
 
 {% include hw-info.html %}
+
+The seL4 i.MX8 port currently only supports running the board in AArch64 mode.
 
 ## Building seL4test
 
