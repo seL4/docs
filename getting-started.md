@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Getting Started
 
-## Build Systems on seL4
+## Building Systems on seL4
 
 The quickest and easiest way to get started with building a system on top of
 seL4 is the seL4 Microkit. We recommend to
@@ -27,7 +27,7 @@ ecosystem has to offer.
 [seL4 manual]: projects/sel4/manual.html
 [API reference]: projects/sel4/api-doc.html
 
-## Learn about seL4
+## Learning about seL4
 
 If you are planning to write a dynamic system or you want to learn about seL4
 itself, we recommend to:
@@ -42,7 +42,7 @@ If you are looking for deeper background reading material, you might be
 interested in the selection of [research publications on seL4][publications] on
 the main website.
 
-## Write Rust on seL4
+## Writing Rust on seL4
 
 The Rust programming language is a great fit for writing applications on top of
 seL4. Check out
