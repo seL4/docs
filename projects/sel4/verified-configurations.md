@@ -90,7 +90,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 
 | File | `ARM_verified.cmake`
 | Architecture | ARMv7, 32 bit
-| Platform | i.MX 6 (Sabre Lite)
+| Platform | i.MX6 (Sabre Lite)
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
@@ -100,7 +100,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 
 | File | `ARM_exynos4_verified.cmake`
 | Architecture | ARMv7, 32 bit
-| Platform | exynos4
+| Platform | Exynos4412
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
@@ -109,7 +109,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 
 | File | `ARM_exynos5410_verified.cmake` and `ARM_exynos5422_verified.cmake`
 | Architecture | ARMv7, 32 bit
-| Platform | exynos5410 and exynos5422
+| Platform | Exynos5410 and Exynos5422
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
@@ -118,7 +118,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 
 | File | `ARM_hikey_verified.cmake`
 | Architecture | ARMv7, 32 bit
-| Platform | hikey
+| Platform | HiKey
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
@@ -138,7 +138,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 
 | File | `ARM_zynq7000_verified.cmake`
 | Architecture | ARMv7, 32 bit
-| Platform | zynq7000
+| Platform | Zynq7000
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
@@ -148,7 +148,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 
 | File | `ARM_zynqmp_verified.cmake`
 | Architecture | ARMv7, 32 bit
-| Platform | zcu102 and zcu106 in 32 bit mode
+| Platform | ZCU102 and ZCU106 in 32 bit mode
 | Floating-point support | No
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
@@ -205,7 +205,7 @@ Mixed-Criticality-Systems API | Yes
 
 | File | `AARCH64_bcm2711_verified.cmake`
 | Architecture | ARMv8, 64 bit
-| Platform | bcm2711 (Raspberry PI 4)
+| Platform | BMC2711 (Raspberry Pi 4)
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
@@ -215,7 +215,7 @@ Mixed-Criticality-Systems API | Yes
 
 | File | `AARCH64_hikey_verified.cmake`
 | Architecture | ARMv8, 64 bit
-| Platform | hikey
+| Platform | HiKey
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
@@ -225,7 +225,7 @@ Mixed-Criticality-Systems API | Yes
 
 | File | `AARCH64_odroidc2_verified.cmake`
 | Architecture | ARMv8, 64 bit
-| Platform | odroidc2
+| Platform | OdroidC2
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
@@ -235,7 +235,7 @@ Mixed-Criticality-Systems API | Yes
 
 | File | `AARCH64_odroidc4_verified.cmake`
 | Architecture | ARMv8, 64 bit
-| Platform | odroidc4
+| Platform | OdroidC4
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
@@ -245,7 +245,7 @@ Mixed-Criticality-Systems API | Yes
 
 | File | `AARCH64_zynqmp_verified.cmake`
 | Architecture | ARMv8, 64 bit
-| Platform | zynqmp (zcu102 and zcu106)
+| Platform | ZynqMP (ZCU102 and ZCU106)
 | Floating-point support | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
@@ -272,7 +272,7 @@ Mixed-Criticality-Systems API | Yes
 ### X64
 
 File | `X64_verified.cmake`
-Architecture/Platform | x86 64-bit
+Architecture/Platform | X86 64-bit
 Floating-point support | Yes
 Hypervisor mode | No
 **Verified properties** | functional correctness, no fast path
