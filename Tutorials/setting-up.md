@@ -8,6 +8,11 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Setting up your machine
 
+## Welcome to the seL4 tutorials!
+
+The first step is to set up your machine with the development tools that the
+tutorials will use.
+
 ## Google's Repo tool
 
 The primary way of obtaining and managing seL4 project sources is through the use of Google's Repo tool.
@@ -27,6 +32,7 @@ To install run:
 </details>
 
 ## Docker
+
 To compile and use seL4, it is recommended that you use Docker to isolate the dependencies from your machine.
 
 These instructions assume you are using Debian (or a derivative, such as Ubuntu), and are using Bash for your shell. However, it should be informative enough for users of other distros/shells to adapt.
@@ -36,7 +42,10 @@ These instructions are intended for Ubuntu LTS versions 20.04 and 22.04.
 To begin, you will need at least these two programs:
 
  * make (`sudo apt install make`)
- * docker (See [here](https://get.docker.com) or [here](https://docs.docker.com/engine/installation) for installation instructions)
+ * docker (See [Docker Engine
+   Installation](https://docs.docker.com/engine/installation) for installation
+   instructions or the [get.docker.com](https://get.docker.com) script.
+   You can also install [Docker Desktop](https://docs.docker.com/get-started/get-docker/)).
 
 For convenience, add your account to the docker group:
 
