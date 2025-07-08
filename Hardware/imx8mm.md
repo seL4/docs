@@ -3,8 +3,8 @@ arm_hardware: true
 cmake_plat: imx8mm-evk
 xcompiler_arg: -DAARCH64=1
 platform: i.MX8M Mini
-arch: ARMv8A, AArch64
-virtualization: "yes"
+arch: ARMv8A
+virtualization: "no"
 iommu: "no"
 soc: IMX8MM-EVK
 cpu: Cortex-A53 Quad 1.8 GHz
@@ -22,8 +22,6 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 See also the NXP [i.MX8M Mini web page](https://www.nxp.com/products/i.MX8MMINI).
 
 {% include hw-info.html %}
-
-The seL4 i.MX8 port currently only supports running the board in AArch64 mode.
 
 ## Building seL4test
 
