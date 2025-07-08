@@ -27,7 +27,8 @@ seL4.
 ### Pre-Requisites
 
 * One Tegra Board. See [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html)
-* A working development environment. See [Resources](/Resources)
+* A working development environment. See the [set up
+  instructions](/projects/buildsystem/host-dependencies.html).
 
 ## Getting Started
  To get started, check out the

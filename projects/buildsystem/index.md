@@ -33,10 +33,10 @@ the actual build.
 
 It is assumed that
 
- * CMake of an appropriate version is installed
- * You are using the Ninja CMake generator
+ * CMake of an appropriate version is installed.
+ * You are using the Ninja CMake generator.
  * You understand how to checkout projects using the repo tool as described on the
-   [Resources](/Resources) page
+   [set up instructions](/projects/buildsystem/host-dependencies.html) page.
  * You have the [required dependencies](/HostDependencies) installed to build your project.
 
 

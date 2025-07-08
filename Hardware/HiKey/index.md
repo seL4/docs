@@ -27,7 +27,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 - One HiKey Board. See
         [Hikey 96Board](http://www.96boards.org/products/ce/hikey/)
 - Fully working development environment. See
-        [Resources](/Resources)
+        the [set up instructions](/projects/buildsystem/host-dependencies.html) page.
 
 ## Getting Started
 
