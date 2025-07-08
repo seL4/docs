@@ -5,18 +5,14 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Benchmarking seL4
-
-## Benchmarking project
- There is a set of microbenchmarks for seL4
-available, see the
-[sel4bench-manifest](https://github.com/seL4/sel4bench-manifest).
-
 # Benchmarking Tools
 
 
 We have developed a set of tools which can be used to analyse kernel and
-workload performance.
+workload performance. See the
+[sel4bench-manifest](https://github.com/seL4/sel4bench-manifest) for the set of
+microbenchmarks for seL4.
+
 
 ## CPU Utilisation
  Threads (including the idle thread) and the overall system time (in cycles) can
