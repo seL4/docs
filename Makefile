@@ -71,6 +71,23 @@ $(REPOSITORIES):
 .PHONY: repos
 repos: $(REPOSITORIES)
 
+MICROKIT_VERSION=1.4.1
+VENDOR_SEL4 = vendor/seL4
+VENDOR_MICROKIT = vendor/microkit/sdk
+
+.PHONY: sdk
+sdk: $(VENDOR_SEL4) $(VENDOR_MICROKIT)
+
+# it is fine to use the Linux version on Mac, we're not going to run any binaries
+$(VENDOR_MICROKIT):
+	mkdir -p $@
+	curl -L https://github.com/seL4/microkit/releases/download/$(MICROKIT_VERSION)/microkit-sdk-$(MICROKIT_VERSION)-linux-x86-64.tar.gz | tar -xzf - -C $@ --strip-components=1
+
+MK_BOARD = board/qemu_virt_aarch64/debug
+$(VENDOR_SEL4): $(VENDOR_MICROKIT)
+	mkdir -p $@
+	ln -s ../../$</$(MK_BOARD)/ $@/libsel4
+
 # Tutorials
 
 TUTES_DST = _processed/tutes
@@ -120,11 +137,15 @@ microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
 RUST_TUT_REPO = _repos/coliasgroup/sel4-rust-tutorial
 RUST_TUT_BUILD = $(RUST_TUT_REPO)/book/build
-RUST_TUT_DST = projects/rust/tutorial
+RUST_TUT_DST = _processed/rust/tutorial
+RUST_TUT_FINAL_DST = projects/rust/tutorial
 
 .PHONY: rust-tutorial
 rust-tutorial: $(RUST_TUT_REPO)
-	cd $(RUST_TUT_REPO) && make for-docsite
+	cd $(RUST_TUT_REPO) && \
+	SEL4_PREFIX="${CURDIR}/$(VENDOR_SEL4)" \
+	SEL4_INCLUDE_DIRS="${CURDIR}/$(VENDOR_MICROKIT)/$(MK_BOARD)/include" \
+	make for-docsite
 	rm -rf $(RUST_TUT_DST)
 	mkdir -p $(dir $(RUST_TUT_DST))
 	cp -rL $(RUST_TUT_BUILD) $(RUST_TUT_DST)
@@ -227,6 +248,7 @@ docker_build:
 # the connection; also works locally
 .PHONY: serve
 serve: generate
+	rsync -a $(RUST_TUT_DST) _site/$(RUST_TUT_FINAL_DST)
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 .PHONY: generate
@@ -235,13 +257,17 @@ ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
 
+JEKYLL_OUT = _site
+
 .PHONY: build
 build: generate
+	rsync -a $(RUST_TUT_DST) $(JEKYLL_OUT)/$(RUST_TUT_FINAL_DST)
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll build $(BUILD_OPTS)
 
 .PHONY: preview
 preview: JEKYLL_ENV := production
 preview: BUILD_OPTS := --config "_config.yml,_preview.yml" $(BUILD_OPTS)
+preview: JEKYLL_OUT := _preview
 preview: build
 
 .PHONY: clean
