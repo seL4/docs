@@ -119,14 +119,18 @@
     var tocClose = document.getElementById('toc-close');
     var mainDiv = document.getElementById('main-div');
 
-    tocClose.addEventListener('click', function () {
-        toc.classList.add('hidden');
-        toc.classList.remove('xl:block');
-        mainDiv.classList.remove('sm:mr-64');
-        mainDiv.classList.remove('xl:mr-64');
-    });
-    tocOpen.addEventListener('click', function () {
-        toc.classList.remove('hidden');
-        mainDiv.classList.add('sm:mr-64');
-    });
+    if (tocClose) {
+        tocClose.addEventListener('click', function () {
+            toc.classList.add('hidden');
+            toc.classList.remove('xl:block');
+            mainDiv.classList.remove('sm:mr-64');
+            mainDiv.classList.remove('xl:mr-64');
+        });
+    }
+    if (tocOpen) {
+        tocOpen.addEventListener('click', function () {
+            toc.classList.remove('hidden');
+            mainDiv.classList.add('sm:mr-64');
+        });
+    }
 })();
