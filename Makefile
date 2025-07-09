@@ -61,7 +61,7 @@ _data/generated.yml:
 .PHONY: generate_data_files
 generate_data_files: _data/generated.yml
 
-GIT_REPOS:=$(shell (cd _data/projects && for i in `ls`; do cat $$i | ../../tools/get_repos.py ; done) | sort -u)
+GIT_REPOS:=$(shell (cd _data/projects && for i in `ls *.yml`; do cat $$i | ../../tools/get_repos.py ; done) | sort -u)
 REPOSITORIES = $(GIT_REPOS:%=_repos/%)
 
 $(REPOSITORIES):
