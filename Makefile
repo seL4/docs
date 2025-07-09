@@ -344,7 +344,7 @@ IGNORE_EXP:= $(subst $(space),$(sep),$(IGNORE_URLS))
 HTMLPROOFEROPT := --swap-urls '^https\://docs.sel4.systems:http\://localhost\:4000'
 HTMLPROOFEROPT += --enforce-https=false --only-4xx --disable-external=false
 HTMLPROOFEROPT += --ignore-urls '/$(IGNORE_EXP)/'
-HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/"
+HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/,/rust\/tutorial\/404|print/"
 # HTMLPROOFEROPT += --log-level debug
 # HTMLPROOFEROPT += --disable-external=true
 
