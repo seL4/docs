@@ -77,10 +77,11 @@ For building the Rust tutorials we need `cargo`. The easiest way to get Rust
 installed is via <https://rustup.rs>. Follow the instructions there. A default
 install for your platform will work for the doc site.
 
-You can test if `cargo` is available after the installation by trying
+We also need `mdbook`, which you can install with `cargo` after the installation
+above is complete:
 
 ```sh
-cargo --version
+cargo install mdbook
 ```
 
 #### Python
