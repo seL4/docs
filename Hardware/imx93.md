@@ -9,7 +9,7 @@ iommu: "no"
 soc: i.MX93
 cpu: Cortex-A55
 Status: Unverified
-Contrib: Indan Zupancic, Proofcraft
+Contrib: Indan Zupanc&#780;ic&#780;, Proofcraft
 Maintained: seL4 Foundation
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
