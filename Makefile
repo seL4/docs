@@ -140,8 +140,7 @@ RUST_TUT_BUILD = $(RUST_TUT_REPO)/book/build
 RUST_TUT_DST = _processed/rust/tutorial
 RUST_TUT_FINAL_DST = projects/rust/tutorial
 
-.PHONY: rust-tutorial
-rust-tutorial: $(RUST_TUT_REPO) $(VENDOR_SEL4)
+$(RUST_TUT_DST): $(RUST_TUT_REPO) $(VENDOR_SEL4)
 	cd $(RUST_TUT_REPO) && \
 	SEL4_PREFIX="${CURDIR}/$(VENDOR_SEL4)" \
 	SEL4_INCLUDE_DIRS="${CURDIR}/$(VENDOR_MICROKIT)/$(MK_BOARD)/include" \
@@ -149,6 +148,9 @@ rust-tutorial: $(RUST_TUT_REPO) $(VENDOR_SEL4)
 	rm -rf $(RUST_TUT_DST)
 	mkdir -p $(dir $(RUST_TUT_DST))
 	cp -rL $(RUST_TUT_BUILD) $(RUST_TUT_DST)
+
+.PHONY: rust-tutorial
+rust-tutorial: $(RUST_TUT_DST)
 
 .PHONY: _generate_api_pages
 _generate_api_pages: _repos/sel4/sel4
