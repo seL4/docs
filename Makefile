@@ -141,7 +141,7 @@ RUST_TUT_DST = _processed/rust/tutorial
 RUST_TUT_FINAL_DST = projects/rust/tutorial
 
 .PHONY: rust-tutorial
-rust-tutorial: $(RUST_TUT_REPO)
+rust-tutorial: $(RUST_TUT_REPO) $(VENDOR_SEL4)
 	cd $(RUST_TUT_REPO) && \
 	SEL4_PREFIX="${CURDIR}/$(VENDOR_SEL4)" \
 	SEL4_INCLUDE_DIRS="${CURDIR}/$(VENDOR_MICROKIT)/$(MK_BOARD)/include" \
