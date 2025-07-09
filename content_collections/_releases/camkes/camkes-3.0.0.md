@@ -62,8 +62,7 @@ guarantee that it won't change in breaking ways in the future.
 ### I was using the "master" branch, and want to migrate
 
 
-There's a guide on the changes introduces by this version here:
-[CAmkESDifferences](../CAmkESDifferences)
+There's a guide on the changes introduces by this version [here](/projects/camkes/differences).
 
 ### I was using the "master" branch, and don't want to migrate
 
@@ -90,7 +89,7 @@ You don't have to do anything. Your project will continue to work.
 
 
 CAmkES dependencies have changed. For a definitive (maintained) list,
-see: [CAmkES#build-dependencies](/CAmkES/#build-dependencies)
+see: [CAmkES](/CAmkES/).
 
 ## New Features
 
@@ -109,14 +108,14 @@ instructions,
 Previously, the values of settings (in "configuration" blocks) were
 strings under the hood. Now they are stored as a value of the
 appropriate (python) type, determined during parsing.
-[Read more.](../CAmkESDifferences#rich-types-for-settings)
+[Read more.](/projects/camkes/differences#rich-types-for-settings)
 
 ### Parametrised Buf Type
 
 
 The "Buf" type for dataports can now be optionally parametrised with the
 dataport's size in bytes.
-[Read more.](../CAmkESDifferences#parametrised-buf-type)
+[Read more.](/projects/camkes/differences#parametrised-buf-type)
 
 ### The seL4Asynch connector has been renamed to seL4Notification
 
@@ -145,7 +144,7 @@ types resemble structs and arrays in C.
 
 The syntax for declaring that a component exports an interface from one
 of it sub-components has changed.
-[See an example.](../CAmkESDifferences#hierarchical-components)
+[See an example.](/projects/camkes/differences#hierarchical-components)
 
 ### Binary Semaphores
 
