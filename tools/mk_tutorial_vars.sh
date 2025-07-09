@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# Copyright 2025 Proofcraft Pty Ltd
+# SPDX-License-Identifier: BSD-2-Clause
 
 # Generate _data/microkit_tutorial.yml from microkit_tutorial repo
 #
