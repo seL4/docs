@@ -71,6 +71,18 @@ brew install node
 
 The Makefile does the rest of the JS dependency installation.
 
+#### Rust
+
+For building the Rust tutorials we need `cargo`. The easiest way to get Rust
+installed is via <https://rustup.rs>. Follow the instructions there. A default
+install for your platform will work for the doc site.
+
+You can test if `cargo` is available after the installation by trying
+
+```sh
+cargo --version
+```
+
 #### Python
 
 The build is tested with Python 3.9. More recent versions are likely to work as
