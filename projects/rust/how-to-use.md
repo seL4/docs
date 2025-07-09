@@ -1,6 +1,4 @@
 ---
-parent: /projects/rust/
-
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -12,7 +10,7 @@ Using these crates requires a compatible Rust toolchain. See the project's [rust
 These crates are not yet hosted on [crates.io](https://crates.io). Use them either as Git or path
 Cargo dependencies.
 
-### Environment Variables
+## Environment Variables
 
 Some of these crates depend, at build time, on external components and configuration. In all cases,
 information for locating these dependencies is passed to the dependant crates via environment
@@ -29,9 +27,9 @@ the crates which use them:
 - `sel4-kernel-loader` uses `$SEL4_KERNEL` (defaulting to `$SEL4_PREFIX/bin/kernel.elf` if
   `$SEL4_PREFIX` is set) which must contain the path of the seL4 kernel (as an ELF executable).
 
-### Language Runtime Crates
+## Language Runtime Crates
 
-Two language runtime crates, one for root tasks and another for Microkit protection domains, provide runtime elements such as an entrypoint, thread-local storage, panic handling, a stack, and a heap. See their API docs (linked below) for information on how to use them.
+Two language runtime crates, one for root tasks and another for Microkit protection domains, provide runtime elements such as an entry point, thread-local storage, panic handling, a stack, and a heap. See their API docs (linked below) for information on how to use them.
 
 - [`sel4-root-task`](./crates/sel4-root-task): A runtime for root tasks that supports thread-local
 storage and unwinding, and provides a global allocator.
@@ -41,11 +39,11 @@ Microkit](../microkit) protection domains, including an implementation of
 libmicrokit and abstractions for IPC.
 [rustdoc](https://sel4.github.io/rust-sel4/views/aarch64-microkit/aarch64-sel4-microkit/doc/sel4_microkit/index.html)
 
-### Choosing a `--target` argument for `rustc` {#target-spec}
+## Choosing a `--target` argument for `rustc` {#target-spec}
 
 `rustc`'s baremetal builtin target triples (e.g. `aarch64-unknown-none`) will suffice, but we provide a collection of [custom target specifications](https://doc.rust-lang.org/beta/rustc/targets/custom.html) that are tuned specifically for use in seL4 userspace, and that cover a range of language runtime configurations. See [the source directory that contains them](https://github.com/seL4/rust-sel4/tree/main/support/targets#readme) for more information.
 
-### Demos
+## Demos
 
 These demos provide concrete examples of how to integrate these crates into a seL4-based project:
 
