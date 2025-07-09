@@ -75,7 +75,3 @@ List of gotchas and easy mistakes that can be made when using cmake
 
  * Configuration files passed to to cmake with `-C` *must* end in `.cmake`, otherwise CMake will silently throw
    away your file
-
-## Old build system
-
-We used to use a Kbuild based build system. Old documentation for it can be found [here](/Developing/Building/OldBuildSystem/).

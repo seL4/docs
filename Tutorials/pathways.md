@@ -36,7 +36,7 @@ Recommended tutorials
 - [MCS](mcs.md)
 - The CAmkES tutorials beginning with [Hello CAmkES](hello-camkes-0.md)
 - Virtualisation tutorials
-  - [CAmkES VM](../CAmkES/camkes-vm-linux) using Linux as a guest in the CAmkES VM; and
+  - [CAmkES VM](../camkes-vm-linux) using Linux as a guest in the CAmkES VM; and
   - [CAmkES Cross-VM communication](camkes-vm-crossvm.md) walkthrough of adding communication between Linux guests in separate VMs
 
 
@@ -57,7 +57,7 @@ Goals
 - to add new features to the kernel
 
 Recommended reading
-- [Contributing to kernel code](../../projects/sel4/kernel-contribution)
+- [Contributing to kernel code](/projects/sel4/kernel-contribution.html)
 
 Recommended tutorials
 - Follow the tutorial in the default pathway up to and including MCS.

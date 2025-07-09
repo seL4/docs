@@ -70,7 +70,7 @@ presented as a USB storage device to your host. In the default
 partitioning (as it comes from Colorado Engineering) partition 1 on the
 device is the UBUNTU root partition.
 
-The [instructions for booting from SD](../GeneralARM#sd)
+The [instructions for booting from SD](../GeneralARM#booting-from-sd-card)
 are also valid for booting from MMC.
 
 ## Serial Connection

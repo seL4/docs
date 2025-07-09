@@ -10,7 +10,7 @@ Google's `repo` tool. To start with, get repo by following the
 instructions in the section “Install” on the [repo
 site](https://gerrit.googlesource.com/git-repo#install).
 
-See the [repo cheatsheet](repo-cheatsheet.html) page for a quick explanation of
+See the [repo cheatsheet](/projects/buildsystem/repo-cheatsheet.html) page for a quick explanation of
 how we use repo.
 
 ## Docker or native
