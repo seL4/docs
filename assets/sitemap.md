@@ -15,11 +15,11 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 ## Pages
 
-{%- assign site_pages = site.html_pages | where_exp:'doc','doc.sitemap != false' | where_exp:'doc','doc.url != "/404.html"' %}
+{%- assign site_pages = site.html_pages | where_exp:'doc','doc.sitemap != false' %}
 {% assign pages = pages | concat: site_pages | sort: "url" %}
 {%- for page in pages %}
   {%- unless page.archive %}
-- [{{ page.url }}]({{ page.url | replace:'/index.html','/' }}) -- {{ page.title }}
+- [{{ page.url }}]({{ page.url | replace:'/index.html','/' | relative_url }}) -- {{ page.title }}
   {%- endunless %}
 {%- endfor %}
 
@@ -27,6 +27,6 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 {%- for page in pages %}
   {%- if page.archive %}
-- [{{ page.url }}]({{ page.url | replace:'/index.html','/' }}) -- {{ page.title }}
+- [{{ page.url }}]({{ page.url | replace:'/index.html','/' | relative_url }}) -- {{ page.title }}
   {%- endif %}
 {%- endfor %}
