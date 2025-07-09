@@ -248,7 +248,6 @@ docker_build:
 # the connection; also works locally
 .PHONY: serve
 serve: generate
-	rsync -a $(RUST_TUT_DST) _site/$(RUST_TUT_FINAL_DST)
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 .PHONY: generate
@@ -256,12 +255,13 @@ generate: repos ruby_deps .npm_deps generate_api microkit-tutorial rust-tutorial
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
+	mkdir -p $(JEKYLL_OUT)/$(RUST_TUT_FINAL_DST)
+	rsync -a $(RUST_TUT_DST)/ $(JEKYLL_OUT)/$(RUST_TUT_FINAL_DST)/
 
 JEKYLL_OUT = _site
 
 .PHONY: build
 build: generate
-	rsync -a $(RUST_TUT_DST) $(JEKYLL_OUT)/$(RUST_TUT_FINAL_DST)
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll build $(BUILD_OPTS)
 
 .PHONY: preview
