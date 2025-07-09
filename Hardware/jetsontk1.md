@@ -2,7 +2,7 @@
 arm_hardware: true
 cmake_plat: tk1
 xcompiler_arg: -DAARCH32=1
-platform: TK1
+platform: Jetson TK1
 arch: ARMv7A
 virtualization: "yes"
 iommu: "yes"
@@ -19,37 +19,38 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Jetson TK1
 
-The [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html) is a affordable embedded system developed by NVIDIA. It runs
-seL4.
+The [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html)
+is a affordable embedded system developed by NVIDIA.
 
 {% include hw-info.html %}
 
-### Pre-Requisites
+## Pre-Requisites
 
 * One Tegra Board. See [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html)
 * A working development environment. See the [set up
   instructions](/projects/buildsystem/host-dependencies.html).
 
 ## Getting Started
- To get started, check out the
-[NVIDIA developer
-page](https://developer.nvidia.com/embedded-computing), make sure your board is correctly configured and plugged.
+
+ To get started, check out the [NVIDIA developer
+page](https://developer.nvidia.com/embedded-computing), make sure your board is
+correctly configured and plugged.
 
 ## Build your first seL4 system
 
 {% include sel4test.md %}
 
 ## Load the binary
- You need to be able to see output from the serial
-console on the Tegra. Connect the serial port to your computer with a
-serial cable, either a USB->RS232 converter, or if your computer has
-a serial port, connect to it.
+
+You need to be able to see output from the serial console on the Tegra. Connect
+the serial port to your computer with a serial cable, either a USB->RS232
+converter, or if your computer has a serial port, connect to it.
 
 Once you have the wires in place, you can connect to the console via
 `screen` (or you can use minicom or another serial console program). In
 the following, we assume that the Tegra is connected to `/dev/ttyUSB0`.
 
-```
+```sh
 screen /dev/ttyUSB0 115200
 ```
 
@@ -62,13 +63,13 @@ following command will then scan the PCI bus and enable the ethernet,
 and then ask to get an address via the DHCP and get `sel4.img` file from
 the TFTP server at `192.168.1.1`.
 
-```
+```sh
 pci enum dhcp ${loadaddr} 192.168.1.1:sel4.img
 ```
 
 Then, let's start the program.
 
-```
+```sh
 bootefi ${loadaddr}
 ```
 
@@ -91,19 +92,23 @@ variable.
 
 Do
 
-```
+```sh
 setenv bootm_boot_mode nonsec
 saveenv
 ```
+
 to boot in nonsecure (HYP)
 mode. This also enables kvm if you boot Linux.
 
 To go back to secure mode booting do
-```
+
+```sh
 setenv bootm_boot_mode sec
 saveenv
 ```
+
 ## Getting the sources
+
 ```bash
 mkdir tegra-u-boot-flasher
 cd tegra-u-boot-flasher
@@ -112,33 +117,38 @@ repo sync
 ```
 
 ## Building
- To build the sources, build the necessary tools first.
 
-Install autoconf, pkg-config, flex, bison, libcrypto++-dev and
-libusb-1.0.0-dev for your distribution. On Debian or Ubuntu you can do:
-```
+To build the sources, build the necessary tools first.
+
+Install autoconf, pkg-config, flex, bison, libcrypto++-dev and libusb-1.0.0-dev
+for your distribution. On Debian or Ubuntu you can do:
+
+```sh
 sudo apt-get update
 sudo apt-get install build-essential autoconf pkg-config flex bison libcrypto++-dev libusb-1.0.0-dev gcc-arm-linux-gnueabi
 ```
 
 Then do:
+
 ```bash
 cd scripts
 ./build-tools build
 ```
 
 Then, in the script directory, build everything.
+
 ```bash
 ./build --socs tegra124 --boards jetson-tk1 build
 ```
 
 ## Flashing
- To flash, attach the Jetson board's OTG USB port to a USB
-port on your machine. Hold down the FORCE RECOVERY button while pressing
-the RESET button next to it; release FORCE RECOVERY a second or two
-after releasing the reset button
+
+To flash, attach the Jetson board's OTG USB port to a USB port on your machine.
+Hold down the FORCE RECOVERY button while pressing the RESET button next to it;
+release FORCE RECOVERY a second or two after releasing the reset button
 
 Then issue:
+
 ```bash
 ./tegra-uboot-flasher flash jetson-tk1
 ```
@@ -146,8 +156,8 @@ Then issue:
 The board should now be updated.
 
 ## Running Linux with the new U-Boot
- To boot Linux in non-secure
-mode, build the kernel with the Power-State Coordination Interface
-(PSCI) enabled (`CONFIG_ARM_PSCI=y`, in Kernel Features menu)and
-CPU-Idle PM support disabled (`CONFIG_CPU_IDLE is not set` in CPU Power
+
+To boot Linux in non-secure mode, build the kernel with the Power-State
+Coordination Interface (PSCI) enabled (`CONFIG_ARM_PSCI=y`, in Kernel Features
+menu)and CPU-Idle PM support disabled (`CONFIG_CPU_IDLE is not set` in CPU Power
 Management->CPU Idle). Without these changes the kernel will hang.
