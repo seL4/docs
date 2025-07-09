@@ -1,5 +1,4 @@
 ---
-title: Rust
 project: rust
 
 redirect_from:
@@ -20,8 +19,6 @@ seL4 officially supports the use of Rust in userspace. This support entails:
 - Custom `rustc` target specifications for seL4 userspace ([JSON and docs](https://github.com/seL4/rust-sel4/tree/main/support/targets#readme))
 - Many more crates for use in seL4 userspace
 
-The development and maintenance of Rust support for seL4 userspace is funded and managed by the sel4 Foundation. All of this work happens in one GitHub repository: [seL4/rust-sel4](https://github.com/sel4/rust-sel4).
-
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-24 gap-x-12 lg:gap-x-20 px-10 py-8 md:py-12 not-prose">
 
   {% include card.html
@@ -39,6 +36,13 @@ The development and maintenance of Rust support for seL4 userspace is funded and
   %}
 
   {% include card.html
+     icon="document-magnifying-glass"
+     title="How to use"
+     body="How to use the seL4 rust crates."
+     link="/projects/rust/how-to-use.html"
+  %}
+
+  {% include card.html
      icon="other/github"
      title="Sources"
      body="Repository for development and collaboration on Rust support in seL4 userspace."
@@ -46,3 +50,7 @@ The development and maintenance of Rust support for seL4 userspace is funded and
   %}
 
 </div>
+
+The development and maintenance of Rust support for seL4 userspace is funded and
+managed by the seL4 Foundation. All of this work happens in one GitHub
+repository: [seL4/rust-sel4](https://github.com/sel4/rust-sel4).
