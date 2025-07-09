@@ -7,7 +7,7 @@ default: help
 .PHONY: help
 help:
 	@echo "Makefile for the seL4 docsite"
-	@echo "Available targets:"
+	@echo "Useful targets:"
 	@echo "  serve                    - Serve a preview the site locally using Jekyll"
 	@echo "  build                    - Build the site for production in _site"
 	@echo "  preview                  - Build the site for externally hosted preview in _preview"
@@ -258,6 +258,13 @@ clean:
 .PHONY: repoclean
 repoclean: clean
 	rm -rf _repos
+
+.PHONY: realclean
+realclean: repoclean
+	rm -rf .jekyll-cache
+	rm -rf vendor
+	rm -rf node_modules
+	rm -f .npm_deps
 
 # Check conformance for Web Content Accessibility Guidelines (WCAG) 2.0, AA
 # This relies on Automated Accessibility Testing Tool (AATT) (https://github.com/paypal/AATT)
