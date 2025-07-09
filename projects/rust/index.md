@@ -28,7 +28,7 @@ The development and maintenance of Rust support for seL4 userspace is funded and
      icon="arrow-right-end-on-rectangle"
      title="Tutorial"
      body="Learn how to use Rust in seL4 userspace."
-     link="/projects/rust/tutorial"
+     link="/projects/rust/tutorial/introduction.html"
   %}
 
   {% include card.html

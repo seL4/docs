@@ -28,10 +28,9 @@ develop systems on seL4. They are split into the following categories.
   superseded by Microkit and we recommend starting with the [Microkit tutorial]
   instead if you are starting a new project.
 
-- [Rust on seL4](todo.html) allows people to write safer user-level code on top
-  of seL4 without needing full formal verification, with a language that is
-  receiving increasing interest and that aligns well with security and safety
-  critical embedded systems programming.
+- The [Rust on seL4 tutorial] introduces the basic Rust crates for seL4 and
+  shows how to get started writing root tasks and Microkit components in the
+  Rust programming language.
 
 - The [C library tutorials](libraries-1) provide walkthroughs and exercises for
   using the libraries provided in `seL4_libs`. These libraries were developed
@@ -39,7 +38,7 @@ develop systems on seL4. They are split into the following categories.
   code, but for experimenting with the seL4 API.
 
 [Microkit tutorial]: {% link projects/microkit/tutorial/welcome.md %}
-
+[Rust on seL4 tutorial]: ../projects/rust/tutorial/introduction.html
 
 ## Recommended reading
 
