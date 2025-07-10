@@ -80,7 +80,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM Exynos 4 {: #exynos4}
+### ARM Exynos 4 {#exynos4}
 
 | File | `ARM_exynos4_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -107,7 +107,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM TK1 {: #tk1}
+### ARM TK1 {#tk1}
 
 | File | `ARM_tk1_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -116,7 +116,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM Zynq7000 {: #zynq7000}
+### ARM Zynq7000 {#zynq7000}
 
 | File | `ARM_zynq7000_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -135,7 +135,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM IMX8MM-EVK {: #imx8mm}
+### ARM IMX8MM-EVK {#imx8mm}
 
 | File | `ARM_imx8mm_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -181,7 +181,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 RPI4 {: #bcm2711}
+### AARCH64 RPI4 {#bcm2711}
 
 | File | `AARCH64_bcm2711_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -190,7 +190,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 Hikey {: #hikey}
+### AARCH64 Hikey {#hikey}
 
 | File | `AARCH64_hikey_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -199,7 +199,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 Odroid C2 {: #odroidc2}
+### AARCH64 Odroid C2 {#odroidc2}
 
 | File | `AARCH64_odroidc2_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -208,7 +208,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 Odroid C4 {: #odroidc4}
+### AARCH64 Odroid C4 {#odroidc4}
 
 | File | `AARCH64_odroidc4_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -217,7 +217,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 ZynqMP {: #zynqmp}
+### AARCH64 ZynqMP {#zynqmp}
 
 | File | `AARCH64_zynqmp_verified.cmake`
 | Architecture | ARMv8, 64 bit
