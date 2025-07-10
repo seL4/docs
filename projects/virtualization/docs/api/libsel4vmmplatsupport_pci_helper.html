@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-09 03:37:15 +0000 -->
+<!-- Page last generated 2025-07-10 03:36:32 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -411,7 +411,7 @@ the creation of pci device entries and accessors the their configuration spaces.
   <li>Returns 0</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-vmm_pci_mem_device_readcookie-offset-size-result">Function <code class="language-plaintext highlighter-rouge">vmm_pci_mem_device_read(cookie, offset, size, result)</code></h3>
 
@@ -432,7 +432,7 @@ the creation of pci device entries and accessors the their configuration spaces.
   <li>0 if success, -1 if error</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-vmm_pci_mem_device_writecookie-offset-size-value">Function <code class="language-plaintext highlighter-rouge">vmm_pci_mem_device_write(cookie, offset, size, value)</code></h3>
 
@@ -453,7 +453,7 @@ the creation of pci device entries and accessors the their configuration spaces.
   <li>0 if success, -1 if error</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-define_pci_host_bridgebridge">Function <code class="language-plaintext highlighter-rouge">define_pci_host_bridge(bridge)</code></h3>
 
@@ -469,7 +469,7 @@ the creation of pci device entries and accessors the their configuration spaces.
 
 <p>No return</p>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-vmm_pci_create_passthroughaddr-config">Function <code class="language-plaintext highlighter-rouge">vmm_pci_create_passthrough(addr, config)</code></h3>
 
@@ -489,7 +489,7 @@ you will almost certainly want to rebase io memory</p>
   <li><code class="language-plaintext highlighter-rouge">vmm_pci_entry_t</code> for passthrough device</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-vmm_pci_create_bar_emulationexisting-num_bars-bars">Function <code class="language-plaintext highlighter-rouge">vmm_pci_create_bar_emulation(existing, num_bars, bars)</code></h3>
 
@@ -509,7 +509,7 @@ you will almost certainly want to rebase io memory</p>
   <li><code class="language-plaintext highlighter-rouge">vmm_pci_entry_t</code> for emulated bar device</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-vmm_pci_create_irq_emulationexisting-irq">Function <code class="language-plaintext highlighter-rouge">vmm_pci_create_irq_emulation(existing, irq)</code></h3>
 
@@ -528,7 +528,7 @@ you will almost certainly want to rebase io memory</p>
   <li><code class="language-plaintext highlighter-rouge">vmm_pci_entry_t</code> for emulated irq device</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="function-vmm_pci_create_cap_emulationexisting-num_caps-cap-num_ranges-range_starts-range_ends">Function <code class="language-plaintext highlighter-rouge">vmm_pci_create_cap_emulation(existing, num_caps, cap, num_ranges, range_starts, range_ends)</code></h3>
 
@@ -552,7 +552,7 @@ ranges of the capability space that should be directly disallowed. Assumes a typ
   <li><code class="language-plaintext highlighter-rouge">vmm_pci_entry_t</code> with an emulated capability space</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h2 id="structs">Structs</h2>
 
@@ -601,7 +601,7 @@ a nice skeleton</p>
   <li><code class="language-plaintext highlighter-rouge">caps {void *}</code></li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="struct-vmm_pci_bar">Struct <code class="language-plaintext highlighter-rouge">vmm_pci_bar</code></h3>
 
@@ -615,7 +615,7 @@ a nice skeleton</p>
   <li><code class="language-plaintext highlighter-rouge">size_bits {size_t}</code>: Size of PCI bar in bits</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="struct-pci_bar_emulation">Struct <code class="language-plaintext highlighter-rouge">pci_bar_emulation</code></h3>
 
@@ -632,7 +632,7 @@ the guest OS over-writing elements in the configuration space</p>
   <li><code class="language-plaintext highlighter-rouge">bar_writes {uint32_t}</code>: Most recent write to each PCI bar in the configuration space. This avoids</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="struct-pci_irq_emulation">Struct <code class="language-plaintext highlighter-rouge">pci_irq_emulation</code></h3>
 
@@ -646,7 +646,7 @@ IRQ line accesses in an entries configuration space</p>
   <li><code class="language-plaintext highlighter-rouge">irq {int}</code>: IRQ line value in PCI entry</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="struct-pci_passthrough_device">Struct <code class="language-plaintext highlighter-rouge">pci_passthrough_device</code></h3>
 
@@ -659,7 +659,7 @@ IRQ line accesses in an entries configuration space</p>
   <li><code class="language-plaintext highlighter-rouge">config {vmm_pci_config_t}</code>: Ops for accessing config space</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <h3 id="struct-pci_cap_emulation">Struct <code class="language-plaintext highlighter-rouge">pci_cap_emulation</code></h3>
 
@@ -677,7 +677,7 @@ capabilities in an entries configuration space.</p>
   <li><code class="language-plaintext highlighter-rouge">ignore_end {uint8_t *}</code>: Array of ending idexes of ignored capabilities range</li>
 </ul>
 
-<p>Back to <a href="#module-pcih">interface description</a>.</p>
+<p>Back to <a href="#interface-pcih">interface description</a>.</p>
 
 <p>Back to <a href="#">top</a>.</p>
 
