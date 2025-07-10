@@ -8,7 +8,7 @@ platform: QEMU Arm Virt
 arch: ARMv7A, ARMv8A
 virtualization: "yes"
 iommu: "no"
-soc: QEMU
+soc: virt
 cpu: Multiple
 Status: "N/A"
 Contrib: Data61
@@ -20,8 +20,8 @@ SPDX-FileCopyrightText: 2025 seL4 Project a Series of LF Projects, LLC.
 
 # QEMU Arm virtual platform
 
-This is a simulation-only target for running the Arm version of seL4 on the [QEMU]
-simulator with and without virtualisation support.
+This is a simulation-only target for running the Arm version of seL4 on the
+[QEMU] simulator with the [virt] platform.
 
 {% include hw-info.html %}
 
@@ -40,4 +40,5 @@ See the [machine setup] instructions for how to install build dependencies.
 {% include sel4test.md %}
 
 [QEMU]: https://www.qemu.org
+[virt]: https://www.qemu.org/docs/master/system/arm/virt.html
 [machine setup]: {{ '/projects/buildsystem/host-dependencies.html' | relative_url }}

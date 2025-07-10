@@ -8,7 +8,7 @@ platform: QEMU RISC-V
 arch: RV32GC, RV64IMAC
 virtualization: "no"
 iommu: "no"
-soc: QEMU
+soc: virt
 cpu: rv32, rv64
 Status: "N/A"
 Contrib: Data61
@@ -21,8 +21,7 @@ SPDX-FileCopyrightText: 2025 seL4 Project a Series of LF Projects, LLC.
 # QEMU RISC-V virtual platform
 
 This is a simulation-only target for running the RISC-V version of seL4 on the
-[QEMU] simulator. The target does currently not provide seL4 virtualisation
-support.
+[QEMU] simulator with the [virt] platform.
 
 {% include hw-info.html %}
 
@@ -37,4 +36,5 @@ See the [machine setup] instructions for how to install build dependencies.
 {% include sel4test.md %}
 
 [QEMU]: https://www.qemu.org
+[virt]: https://www.qemu.org/docs/master/system/riscv/virt.html
 [machine setup]: {{ '/projects/buildsystem/host-dependencies.html' | relative_url }}
