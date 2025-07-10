@@ -5,6 +5,7 @@ redirect_from:
   - /camkes_release/CAmkES_3.0.0.html
 project: camkes
 parent: /releases/camkes.html
+seL4: 5.2.0
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

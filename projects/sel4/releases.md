@@ -55,8 +55,8 @@ Because of this we need to split the list into two before sorting.
 
 {% for release in releases reversed %}
 {%   if release.variant != "mcs" %}
-- [{{ release.title }}]({{ release.url | relative_url }})
-([manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf)) {% if forloop.first %}(latest){% endif %}
+- seL4 Release [{{ release.title }}]({{ release.url | relative_url }}),
+  with [PDF manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf) {% if forloop.first %}(latest){% endif %}
 {%   endif %}
 {% endfor %}
 
@@ -66,7 +66,7 @@ As of seL4 version 11.0.0, the MCS features are included in the main kernel rele
 
 {% for release in releases reversed %}
 {%   if release.variant == "mcs" %}
-- [{{ release.title }}]({{ release.url | relative_url }})
-([manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf))
+- seL4 Release [{{ release.title }}]({{ release.url | relative_url }}),
+  corresponding [PDF manual](http://sel4.systems/Info/Docs/seL4-manual-{{ release.version }}.pdf)
 {%   endif %}
 {% endfor %}

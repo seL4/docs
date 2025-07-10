@@ -2,6 +2,8 @@
 version: camkes-3.10.0
 project: camkes
 parent: /releases/camkes.html
+version_digits: 2
+seL4: 12.1.0
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2021 seL4 Project a Series of LF Projects, LLC.
 ---
