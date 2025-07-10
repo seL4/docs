@@ -9,19 +9,23 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 {%- if page.project == 'sel4' %}
 {%-   assign project = 'seL4' %}
+{%-   assign project_url = 'seL4' %}
 {%- elsif page.project == 'camkes' %}
 {%-   assign project = 'CAmkES' %}
+{%-   assign project_url = 'camkes' %}
 {%- elsif page.project == 'microkit' %}
 {%-   assign project = 'Microkit' %}
+{%-   assign project_url = 'microkit' %}
 {%- elsif page.project == 'capdl' %}
 {%-   assign project = 'capDL' %}
+{%-   assign project_url = 'capDL' %}
 {%- else %}
 {%-   assign project = 'none' %}
 {%- endif %}
 {%- unless project == 'none' %}
 <h2>Other releases</h2>
 <p>
-  See the <a href="{{ '/releases/' | append: page.project | append: '.html' | relative_url }}">
+  See the <a href="{{ '/releases/' | append: project_url | append: '.html' | relative_url }}">
     full list of {{project}} releases.</a>
 </p>
 {%- endunless %}
