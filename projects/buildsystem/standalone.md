@@ -5,42 +5,51 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# Stand-alone seL4 builds
+# Standalone seL4 builds
 
-<!--excerpt-->
+This page contains documentation for building the seL4 kernel as a standalone
+binary without any user-level system image or any loaders that run before the
+kernel. This is typically used when a project wants to fully control the
+user-level image and pre-kernel initialisation. The only standalone kernel
+builds the seL4 Foundation currently maintains are for verified configurations.
+This page assumes familiarity with using `cmake`.
 
-This page contains documentation for building the seL4 kernel standalone --- without a userlevel or any loaders that run before the kernel. This is typically used for verification or where a project wants to fully control userlevel and prekernel initialisation. We only maintain verification configurations for kernel only builds.  This page assumes familiarity with using the seL4 project build system and builds upon the previous documentation.
-
-<!--excerpt-->
-
-_Note: it is assumed that you know what to do with a generated kernel.elf binary.  For an explanation see at the bottom of the page._
+{% include note.html %}
+This text assumes that you know what to do with a generated `kernel.elf` binary.
+For an explanation see at the bottom of the page.
+{% include endnote.html %}
 
 ## Building a kernel standalone
 
 ### Initialising build directory with existing configuration
 
-Building the kernel standalone requires initialising a cmake build directory using the seL4 repo as the root CMake project:
+Building the kernel standalone requires initialising a CMake build directory
+using the seL4 repo as the root CMake project:
+
 ```none
 ├── seL4/
 │   └── CMakeLists.txt
-├── build/ # Current directory
+├── build/
 ```
 
 The build directory is initialised as follows:
+
 ```sh
+cd build/
 cmake -DCROSS_COMPILER_PREFIX= -DCMAKE_TOOLCHAIN_FILE=../seL4/gcc.cmake -G Ninja -C ../seL4/configs/X64_verified.cmake ../seL4/
 ```
-We use the X64_verified.cmake file for configuration values.
 
-To find available verification configurations:
+The example uses the `X64_verified.cmake` file for configuration values.
+
+To find available verified configurations:
 
 ```sh
 ls ../seL4/configs/*.cmake
 # ../seL4/configs/ARM_HYP_verified.cmake  ../seL4/configs/X64_verified.cmake
-# ../seL4/configs/ARM_verified.cmake
+# etc
 ```
 
-A typical verification configuration (`cat ../seL4/configs/X64_verified.cmake`):
+A typical verified configuration (`cat ../seL4/configs/X64_verified.cmake`):
 
 ```cmake
 #!/usr/bin/env -S cmake -P
@@ -71,40 +80,49 @@ set(KernelMaxNumBootinfoUntypedCaps 50 CACHE STRING "")
 set(KernelFSGSBase "inst" CACHE STRING "")
 ```
 
-At this point you could use `ccmake ../seL4` to browse the configuration.
+At this point you could use `ccmake .` to browse the configuration.
 
 ### Building the kernel target
 
-The kernel target needs to be specified to `ninja` otherwise it won't be built.
+To build the kernel target, run
 
 ```sh
 ninja kernel.elf
 ```
 
 Looking in the build directory:
+
 ```sh
 ls
-# autoconf                 gen_config       kernel_all_pp.c                      kernel.elf
-# build.ninja              generated        kernel_all_pp_prune.c                linker.lds_pp
-# circular_includes_valid  generated_prune  kernel_all_pp_prune_wrapper_temp.c   linker_ld_wrapper_temp.c
-# CMakeCache.txt           gen_headers      kernel_bf_gen_target_111_pbf_temp.c  rules.ninja
-# CMakeFiles               kernel_all.c     kernel_bf_gen_target_11_pbf_temp.c
-# cmake_install.cmake      kernel_all.i     kernel_bf_gen_target_1_pbf_temp.c
+# autoconf                            generated                           kernel_bf_gen_target_11_pbf_temp.c
+# build.ninja                         generated_prune                     kernel_bf_gen_target_111_pbf_temp.c
+# circular_includes_valid             kernel_all_copy.c                   kernel.elf
+# cmake_install.cmake                 kernel_all_pp_prune_wrapper_temp.c  libsel4
+# CMakeCache.txt                      kernel_all_pp_prune.c               linker_ld_wrapper_temp.c
+# CMakeFiles                          kernel_all.c                        linker.lds_pp
+# gen_config                          kernel_all.i
+# gen_headers                         kernel_bf_gen_target_1_pbf_temp.c
 ```
 
-The kernel.elf can now be used in other build environments.
+The `kernel.elf` can now be used in other build environments.
 
 ```sh
 file kernel.elf
 # kernel.elf: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
 ```
 
+Note the directory `gen_config/` which contains configuration info for this
+build as `.h`, `.json` and `.yaml` files for use in further build stages or
+other build systems.
+
 ## Installing
 
-The build directory contains many more artefacts than needed to use a standalone kernel build.
+The build directory contains many more artefacts than needed to use a standalone
+kernel build.
 
-If you have used `-DCMAKE_INSTALL_PREFIX=<install dir>` when configuring CMake and then run `cmake --install <build dir>`,
-you can have all the install artefacts placed in `<install dir>`. The directory structure is the following:
+If you have used `-DCMAKE_INSTALL_PREFIX=<install dir>` when configuring CMake
+and then run `cmake --install <build dir>`, you can have all the install
+artefacts placed in `<install dir>`. The directory structure is the following:
 
 ```none
 ├── bin/
@@ -116,18 +134,18 @@ you can have all the install artefacts placed in `<install dir>`. The directory 
 |   |       └── ...
 |   |       └── gen_config.json
 |   └── src/
-├── support/
-|   └── kernel.dtb
-|   └── platform_gen.json
-|   └── platform_gen.yaml
 ```
-
-Note that the contents of the `support/` directory may differ depending on the target architecture.
 
 ## Why use stand alone build?
 
-It is non-trivial to take a standalone kernel.elf and use it in another build environment.  This is because the system configuration is not exported with the kernel.elf and so a different build environment will need to know exactly how the kernel was configured so that bootloaders and userlevel applications can be configured in a compatible way.  Using the CMake scripts provided in seL4_tools and importing the kernel into an existing CMake project hierarchy will ensure that the system configuration is properly shared with other parts of the project.
+For CMake-based build environments, the standalone build is usually not needed.
 
-However sometimes a standalone build is required when the kernel is being used in a different environment that doesn't use a CMake based build system.  One example of this is the verification project, L4V, that uses the stand alone build to produce the source and binary artifacts that the verification is performed on.
+However, the standalone build is useful when the kernel is being used in a
+different environment that does not use CMake. One example for this is the
+[Microkit](../microkit/) which comes with pre-built kernel binaries and config
+information. Another example is the formal verification project which uses the
+standalone build to produce the source and binary artefacts that the
+verification is performed on.
 
-Other use cases include projects that want to build a non-C root task, or projects that are already sophisticated enough to manage the different configuration settings that the kernel requires.  In these scenarios, it would be expected that these projects provide their own Configuration.cmake files that have correct configurations.
+Other use cases include projects that want to build a non-C root task, for
+instance in the [Rust support](../rust/).
