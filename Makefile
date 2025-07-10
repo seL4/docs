@@ -287,7 +287,7 @@ clean:
 	rm -rf _processed/microkit-tutorial
 	rm -rf _processed/tutes
 	rm -rf projects/virtualization/docs/api
-	rm -rf $(RUST_TUT_DST)
+	rm -rf $(RUST_TUT_DST) $(RUST_TUT_FINAL_DST)
 	rm -f _data/microkit_tutorial.yml
 
 .PHONY: repoclean
