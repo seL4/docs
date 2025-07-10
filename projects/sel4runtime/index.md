@@ -1,11 +1,12 @@
 ---
 title: The seL4 run-time
-
+repo: 'sel4proj/sel4runtime'
+include_file: README.md
 project: sel4runtime
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
-{% include include_github_repo_markdown.md repo='sel4proj/sel4runtime' file='README.md' %}
 
+{% include include_github_repo_markdown.md  %}
 
-{% include include_github_repo_markdown.md repo='sel4proj/sel4runtime' file='crt/README.md' indent_headings=true %}
+{% include include_github_repo_markdown.md file= 'crt/README.md' indent_headings=true %}

@@ -1,4 +1,6 @@
 ---
+repo: seL4/seL4
+include_file: tools/bitfield_gen.md
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
@@ -13,8 +15,7 @@ The code for this tool is available in the [seL4 repository] in the [tools]
 directory. This page contains the manual of the bitfield generator. The manual
 sources are also available for the [tools] directory.
 
-{% include include_github_repo_markdown.md
-           repo='sel4/sel4' file='tools/bitfield_gen.md' indent_headings=1 %}
+{% include include_github_repo_markdown.md indent_headings=1 %}
 
 [seL4 repository]: https://github.com/seL4/seL4/
 [tools]: https://github.com/seL4/seL4/blob/master/tools/

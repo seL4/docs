@@ -2,12 +2,17 @@
 redirect_from:
   - /VM/CAmkESX86VM
 project: camkes-vm
+repo: seL4/camkes-vm-examples
+include_file: README.md
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
+
 # CAmkES VMM
 
-{% include include_github_repo_markdown.md repo='sel4/camkes-vm-examples' file='README.md' %}
+{% include include_github_repo_markdown.md %}
+
+<!-- FIXME: include the below in the README or pull more of the README over here -->
 
 ## CAmkES x86 VM
 

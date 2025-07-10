@@ -9,15 +9,23 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
   <a href="{{ '/processes/test-status.html' | relative_url }}"
      class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
   <div class="flex-1"></div>
-{% comment %}
-Collection pages set their absolute path variable relative to the site.collections_dir property.
-To provide a URL to this page in the GitHub repository, we need to amend the path.
-{% endcomment %}
-{%- if page.collection -%}
-{%-  assign src_path = site.collections_dir | append: "/" | append: page.path -%}
-{%- else -%}
-{%-  assign src_path = page.path -%}
-{%- endif -%}
-  <a href="{{site.git_repo | append: '/edit/master/' | append: src_path}}"
-     class="flex-none  hover:text-light hover:underline">Edit page on GitHub</a>
+{%- if page.include_file %}
+{%-   assign edit_url = 'https://github.com/' | append: page.repo |
+                         append: '/edit/master/' | append: page.include_file %}
+{%-   assign included = 'included' %}
+{%- else %}
+{%- comment %}
+      Collection pages set their absolute path variable relative to the site.collections_dir property.
+      To provide a URL to this page in the GitHub repository, we need to amend the path.
+{%- endcomment %}
+{%-   if page.collection -%}
+{%-    assign src_path = site.collections_dir | append: "/" | append: page.path -%}
+{%-   else -%}
+{%-    assign src_path = page.path -%}
+{%-   endif -%}
+{%-   assign edit_url = site.git_repo | append: '/edit/master/' | append: src_path %}
+{%-   assign included = '' %}
+{%- endif %}
+<a href="{{edit_url}}" class="flex-none  hover:text-light hover:underline">Edit
+   {{included}} page on GitHub</a>
 </footer>
