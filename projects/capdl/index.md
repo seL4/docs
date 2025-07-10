@@ -26,11 +26,15 @@ future states of the system are possible. This allows formal reasoning tools to,
 directly from a capDL specification, decide questions such as
 *"Can component X ever gain access to resource Y in the future?"*.
 
-The next few sections give an overview of the tools and libraries that are
-available and show and [example capDL specification](#example-spec).
+The next few sections give an overview of the [tools and
+libraries](#capdl-translator) that are available and show an [example capDL
+specification](#example-spec).
 
 Sources for the capDL tools and libraries are available here:
 <https://github.com/sel4/capdl>
+
+See the research paper by [Kuz et al (2010)] for more in-depth information on
+the purpose and design of capDL.
 
 ## capDL Translator
 
@@ -132,3 +136,5 @@ caps {
 
 }
 ```
+
+[Kuz et al (2010)]: https://trustworthy.systems/publications/nicta_full_text/3679.pdf "capDL: A language for describing capability-based systems"
