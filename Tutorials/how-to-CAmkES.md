@@ -56,7 +56,7 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Connect interfaces using the seL4DTBHardware connector]({{ url }}#connect-interfaces-using-the-sel4dtbhardware-connector)
 - [Configure the TimerDTB component]({{ url }}#configure-the-timerdtb-component)
 - [Handle the interrupt]({{ url }}#handle-the-interrupt)
-- [Stop the timer]({{ url }}#stop-the-timer)
+- [Stop the timer]({{ url }}#stop-a-timer-1)
 
 {% assign url = "camkes-vm-linux?tut_expand" %}
 
