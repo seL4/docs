@@ -119,7 +119,7 @@ If attributes are ommitted, the values from the default element will be used ins
 </manifest>
 ```
 
-A pinned manifest uses pinned git revisions for all of its repositories. It is good practice to create a pinned manifest that refers to a working version of a project. For projects that we maintain, we provide at least two manifests: default.xml and master.xml (See [ReleaseProcess](/ReleaseProcess) for more information about what manifests we make available).
+A pinned manifest uses pinned git revisions for all of its repositories. It is good practice to create a pinned manifest that refers to a working version of a project. For projects that we maintain, we provide at least two manifests: default.xml and master.xml See the [Releases](/releases.html) page for more information about what manifests we make available.
 
 ## Commands
 
