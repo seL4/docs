@@ -32,12 +32,6 @@ RUN curl -sSf https://sh.rustup.rs \
 
 ENV PATH=/root/.cargo/bin:$PATH
 
-RUN mkdir -p /opt/microkit/sdk \
-    && curl -L https://github.com/seL4/microkit/releases/download/1.4.1/microkit-sdk-1.4.1-linux-x86-64.tar.gz \
-        | tar -xzf - -C /opt/microkit/sdk --strip-components=1
-
-RUN mkdir -p /opt/seL4 && ln -s /opt/microkit/sdk/board/qemu_virt_aarch64/debug/ /opt/seL4/libsel4
-
 RUN git config --global --add safe.directory '/docs'
 
 # Jekyll will be serving on 127.0.0.1:4000
