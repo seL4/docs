@@ -148,6 +148,7 @@ $(RUST_TUT_DST): $(RUST_TUT_REPO) $(VENDOR_SEL4)
 	rm -rf $(RUST_TUT_DST)
 	mkdir -p $(dir $(RUST_TUT_DST))
 	cp -rL $(RUST_TUT_BUILD) $(RUST_TUT_DST)
+	tools/inject_backlink.sh $(RUST_TUT_DST)
 
 .PHONY: rust-tutorial
 rust-tutorial: $(RUST_TUT_DST)
