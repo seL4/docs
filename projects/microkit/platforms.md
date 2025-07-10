@@ -11,7 +11,7 @@ on [Board Support Packages](manual/latest/#bsps) in the Microkit manual.
 Microkit currently supports [Arm](#arm) AArch64 and [RISC-V](#risc-v) boards. x64
 support is on the [roadmap](roadmap.html).
 
-{%- assign platforms = site.data.projects.microkit.platforms.platforms %}
+{%- assign platforms = site.data.projects.microkit-data.platforms.platforms %}
 
 ## Arm
 
