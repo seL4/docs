@@ -8,15 +8,28 @@ SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 The following platforms are supported by the seL4 Microkit. See also the section
 on [Board Support Packages](manual/latest/#bsps) in the Microkit manual.
 
+Microkit currently support [Arm](#arm) AArch64 and [RISC-V](#risc-v) boards. x64
+support is on the [roadmap](roadmap.html).
+
 {%- assign platforms = site.data.projects.microkit.platforms.platforms %}
+
+## Arm
 
 | Platform | System-on-chip | Core | Arch |
 | -        |  -             | -    | -    |
 
+{%- assign has_upcoming = false %}
 {%- for p in platforms %}
+{%-   if p.since == 'dev' %}
+{%-     assign has_upcoming = true %}
+{%-     continue %}
+{%-   endif %}
 {%-   assign pages = site.pages | where: "cmake_plat", p.cmake_plat %}
 {%-   if pages.size == 1 %}
 {%-     assign pg = pages[0] %}
+{%-     if pg.arm_hardware != true %}
+{%-       continue %}
+{%-     endif %}
 {%-     assign display_name = pg.platform %}
 {%-     assign soc = pg.soc %}
 {%-     assign cpu = pg.cpu %}
@@ -29,6 +42,65 @@ on [Board Support Packages](manual/latest/#bsps) in the Microkit manual.
 {%-    endif %}
 | [{{ display_name }}](manual/latest/#{{p.name}}) | {{ soc }} | {{ cpu }} | {{ arch }} |
 {%- endfor %}
+
+## RISC-V
+
+| Platform | System-on-chip | Core | Arch |
+| -        |  -             | -    | -    |
+
+{%- for p in platforms %}
+{%-   if p.since == 'dev' %}
+{%-     assign has_upcoming = true %}
+{%-     continue %}
+{%-   endif %}
+{%-   assign pages = site.pages | where: "cmake_plat", p.cmake_plat %}
+{%-   if pages.size == 1 %}
+{%-     assign pg = pages[0] %}
+{%-     if pg.riscv_hardware != true %}
+{%-       continue %}
+{%-     endif %}
+{%-     assign display_name = pg.platform %}
+{%-     assign soc = pg.soc %}
+{%-     assign cpu = pg.cpu %}
+{%-     assign arch = pg.arch %}
+{%-   else %}
+{%-     assign display_name = p.name %}
+{%-     assign soc = "" %}
+{%-     assign cpu = "" %}
+{%-     assign arch = "" %}
+{%-    endif %}
+| [{{ display_name }}](manual/latest/#{{p.name}}) | {{ soc }} | {{ cpu }} | {{ arch }} |
+{%- endfor %}
+
+{%- if has_upcoming %}
+
+## Upcoming in the next release
+
+| Platform | System-on-chip | Core | Arch |
+| -        |  -             | -    | -    |
+
+{%- for p in platforms %}
+{%-   if p.since != 'dev' %}
+{%-     continue %}
+{%-   endif %}
+{%-   assign pages = site.pages | where: "cmake_plat", p.cmake_plat %}
+{%-   if pages.size == 1 %}
+{%-     assign pg = pages[0] %}
+{%-     assign url = pg.url | relative_url %}
+{%-     assign display_name = '[' | append: pg.platform | append: '](' | append: url | append: ')' %}
+{%-     assign soc = pg.soc %}
+{%-     assign cpu = pg.cpu %}
+{%-     assign arch = pg.arch %}
+{%-   else %}
+{%-     assign display_name = p.name %}
+{%-     assign soc = "" %}
+{%-     assign cpu = "" %}
+{%-     assign arch = "" %}
+{%-    endif %}
+| {{ display_name }} | {{ soc }} | {{ cpu }} | {{ arch }} |
+{%- endfor %}
+
+{%- endif %}
 
 ## Not in the list above?
 
