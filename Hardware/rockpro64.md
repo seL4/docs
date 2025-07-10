@@ -90,9 +90,6 @@ Significance of 0x2080000 being where seL4 image is loaded by U-Boot.
 
 Convert `boot.scr` to a uImage using `mkimage -A arm -T script -C none -n boot.scr -d boot.scr boot.scr.uimg`. Ensure `boot.scr.uimg` is in the TFTP root and `boot.scr` is removed.
 
-### Building things
-
-Ensure your `tools/seL4` has the appropriate commit (TODO)
 
 ## Setting up with UEFI, SD card
 
