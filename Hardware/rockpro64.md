@@ -2,7 +2,7 @@
 arm_hardware: true
 cmake_plat: rockpro64
 xcompiler_arg: -DAARCH64=1
-platform: Rockpro64
+platform: ROCKPro64
 arch: ARMv8A, AArch64
 virtualization: "yes"
 iommu: "no"
@@ -16,7 +16,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
-# RockPro64
+# ROCKPro64
 
 {% include hw-info.html %}
 
@@ -37,7 +37,7 @@ If you have a "dirty" (any previously used) SPI flash, first:
 
 Then, to flash the actual image:
 1. Get https://github.com/sigmaris/u-boot/releases/download/v2020.01-ci/flash_spi.img.gz and write it to an SD card.
-2. Put the SD card into the rockpro64 and boot. Wait for completion (seen over serial or when white LED becomes stable).
+2. Put the SD card into the ROCKPro64 and boot. Wait for completion (seen over serial or when white LED becomes stable).
 3. Remove the SD card.
 4. Reset and observe U-Boot come up.
 
@@ -50,7 +50,7 @@ I assume you have:
 - setup a DHCP server
 - linked the TFTP and DHCP servers appropriately
 
-Luckily the U-Boot defconfig for rockpro64 includes UEFI support. We are not using EDK2 because no stable and tested implementations exist for rockpro64.
+Luckily the U-Boot defconfig for ROCKPro64 includes UEFI support. We are not using EDK2 because no stable and tested implementations exist for ROCKPro64.
 
 Copy your seL4 image to the TFTP root under the name `sel4img` (or any other name of your choosing but you will have to adjust following commands).
 
