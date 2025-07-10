@@ -1,6 +1,7 @@
 ---
 repo: seL4/seL4
 include_file: tools/bitfield_gen.md
+toc: true
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
