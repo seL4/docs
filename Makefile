@@ -346,6 +346,7 @@ HTMLPROOFEROPT := --swap-urls '^https\://docs.sel4.systems:http\://localhost\:40
 HTMLPROOFEROPT += --enforce-https=false --only-4xx --disable-external=false
 HTMLPROOFEROPT += --ignore-urls '/$(IGNORE_EXP)/'
 HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/,/rust\/tutorial\/404|print/"
+HTMLPROOFEROPT += --assume-extension ""
 # HTMLPROOFEROPT += --log-level debug
 # HTMLPROOFEROPT += --disable-external=true
 
