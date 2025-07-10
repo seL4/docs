@@ -7,41 +7,25 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Verified Configurations
 
-This page describes which architecture/platform/configuration
-combinations of seL4 have verified properties, which configurations
-possess which properties, and how to obtain an seL4 version for a
-specified configuration. For an overview of these properties and
-their explanations, please see the [verification page on the seL4
-website](https://sel4.systems/Verification/).
+This page describes which architecture/platform/configuration combinations of
+seL4 have verified properties, which configurations possess which properties,
+and how to obtain an seL4 version for a specified configuration. For an overview
+of these properties and their explanations, please see the [verification page on
+the seL4 website](https://sel4.systems/Verification/). The [Frequently Asked
+Questions](https://sel4.systems/About/FAQ.html#verification) also as a section
+on the formal verification of seL4.
 
 The formal proofs for seL4 are hosted at <https://github.com/seL4/l4v>.  They
-are written in the [Isabelle/HOL](http://isabelle.in.tum.de) theorem prover, and
-some familiarity with this tool is required to understand them. There are many
-learning resources available for Isabelle -- see the Isabelle website for
-tutorials and reference manuals, and [this
-blog](http://proofcraft.org/blog/proof-engineer-reading.html) post for a list of
-what you'd need to really get deep into the proofs.  The repository [README
-file](https://github.com/seL4/l4v/blob/master/README.md) shows which proofs are
-where, and how to set up your machine to run them. You can run and check that
-the proofs work for a specific version of seL4 without a deep understanding of
-their content -- that is one of the advantages of machine-checked proofs.
-
-
-At this time, verification of seL4 remains a more time-intensive process
-than software development. Consequently, while seL4 has been ported to
-multiple architectures, and its build system allows further
-configuration of internal and hardware features, verified configurations
-are necessarily both less numerous and more specific.
-
-Please consult [Frequently Asked
-Questions](https://sel4.systems/About/FAQ.html), as well as the [verification
-page](https://sel4.systems/Verification/) on the seL4 website for a better
-understanding of the intersection of formal verification and seL4.
+are written in the [Isabelle/HOL](http://isabelle.in.tum.de) theorem prover. See
+the [README](https://github.com/seL4/l4v/) file in the l4v repository for build
+and setup instructions if you want to run and check the proofs against a
+specific version and configuration of seL4.
 
 ## Examining and Building Verified Configurations
 
 Current verified configurations can be found in seL4 sources in the
 `configs` folder:
+
 ```sh
 cd configs/
 ls *_verified.cmake
@@ -60,6 +44,7 @@ ls *_verified.cmake
 
 To obtain specific source code and build for a given configuration (e.g.
 ARM) in a build directory:
+
 ```sh
 mkdir build
 cd build
@@ -95,8 +80,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM Exynos 4
-{: #exynos4}
+### ARM Exynos 4 {: #exynos4}
 
 | File | `ARM_exynos4_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -123,8 +107,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM TK1
-{: #tk1}
+### ARM TK1 {: #tk1}
 
 | File | `ARM_tk1_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -133,8 +116,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM Zynq7000
-{: #zynq7000}
+### ARM Zynq7000 {: #zynq7000}
 
 | File | `ARM_zynq7000_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -153,8 +135,7 @@ the [roadmap](https://sel4.systems/roadmap.html) for status and upcoming feature
 | Hypervisor mode | No
 | **Verified properties** | functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation
 
-### ARM IMX8MM-EVK
-{: #imx8mm}
+### ARM IMX8MM-EVK {: #imx8mm}
 
 | File | `ARM_imx8mm_verified.cmake`
 | Architecture | ARMv7, 32 bit
@@ -200,8 +181,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 RPI4
-{: #bcm2711}
+### AARCH64 RPI4 {: #bcm2711}
 
 | File | `AARCH64_bcm2711_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -210,8 +190,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 Hikey
-{: #hikey}
+### AARCH64 Hikey {: #hikey}
 
 | File | `AARCH64_hikey_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -220,8 +199,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 Odroid C2
-{: #odroidc2}
+### AARCH64 Odroid C2 {: #odroidc2}
 
 | File | `AARCH64_odroidc2_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -230,8 +208,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 Odroid C4
-{: #odroidc4}
+### AARCH64 Odroid C4 {: #odroidc4}
 
 | File | `AARCH64_odroidc4_verified.cmake`
 | Architecture | ARMv8, 64 bit
@@ -240,8 +217,7 @@ Mixed-Criticality-Systems API | Yes
 | Hypervisor mode | Yes
 | **Verified properties** | functional correctness, incl fast path completed; integrity proof in progress
 
-### AARCH64 ZynqMP
-{: #zynqmp}
+### AARCH64 ZynqMP {: #zynqmp}
 
 | File | `AARCH64_zynqmp_verified.cmake`
 | Architecture | ARMv8, 64 bit
