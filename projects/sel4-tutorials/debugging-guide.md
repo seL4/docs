@@ -7,6 +7,11 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Debugging guide
 
+This guide is for debugging the seL4 kernel itself, for instance during
+development of new features. See [Debugging user
+space](debugging-userspace.html) for how to debug user-level code on top of
+seL4.
+
 ## Compiler Settings
 
 Ensure that the build directory you are building in is not a release build. To
