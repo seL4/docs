@@ -1,5 +1,6 @@
 ---
 arm_hardware: true
+archive: true
 cmake_plat: hikey
 xcompiler_arg: -DAARCH64=1
 platform: HiKey
@@ -11,13 +12,18 @@ cpu: Cortex-A53
 Status: Verified
 verified: hikey
 Contrib: Data61
-Maintained: seL4 Foundation
+Maintained: "No"
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # HiKey
+
+{% include note.html kind="Warning" %}
+This board is currently not in the seL4 hardware regression test.
+These instructions may be out of date.
+{% include endnote.html %}
 
 {% include hw-info.html %}
 
@@ -31,11 +37,11 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 ## Getting Started
 
-The Hikey board is based around the
-[HiSilicon Kirin 620](https://github.com/96boards/documentation/blob/master/consumer/hikey/hardware-docs/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf) eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz.
-Toe start using 32-bit seL4 follow the below instructions. They will
-walk you step by step beginning from the source files and ultimately
-running an image.
+The Hikey board is based around the [HiSilicon Kirin
+620](https://github.com/96boards/documentation/blob/master/consumer/hikey/hikey620/hardware-docs/Hi6220V100_Multi-Mode_Application_Processor_Function_Description.pdf)
+eight-core ARM Cortex-A53 64-bit !SoC running at 1.2GHz. Toe start using 32-bit
+seL4 follow the below instructions. They will walk you step by step beginning
+from the source files and ultimately running an image.
 
 ## 1. Creating a directory
 
@@ -111,6 +117,7 @@ to be changed while in EL3 then the file in
 arm-trusted-firmware/bl1/bl1_main.c can be modified. To disable the
 prefetcher obtain the patch file from
 [bl1_main.patch](bl1_main.patch) and follow the below steps.
+
 ```bash
 cd arm-trusted-firmware/bl1
 patch -p5 < ~/Downloads/bl1_main.patch
@@ -166,8 +173,12 @@ python gen_loader.py -o ptable-linux.img --img_prm_ptable=prm_ptable.img
 
 ## 9. Boot Image
 
+{% include note.html %}
+96boards does no longer seem to provide the release binary below.
+{% include endnote.html %}
+
 Obtain the boot image from
-<https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz>
+`https://builds.96boards.org/releases/hikey/linaro/debian/latest/boot-fat.uefi.img.gz`
 and follow the below commands.
 
 ```bash
@@ -201,7 +212,7 @@ sudo minicom -s
 
   1.  Use the arrow keys to scroll down to Serial port setup and press
       enter
-  2.  Press 'a' to start editting the Serial Device
+  2.  Press 'a' to start editing the Serial Device
   3.  Rename the serial device to /dev/ttyUSBX where X is the observed
       number
   4.  Press 'esc' twice and select Save setup as dfl
@@ -213,8 +224,7 @@ sudo minicom -s
   3.  Connect the Hikey board with a USB to micro USB cable.
   4.  Connect pins 1&2 (AUTO PWR) and 3&4 (BOOT SEL) on the
       J15 header. The pins are silk screened onto the PCB, otherwise
-      see page 8 of
-      <https://www.96boards.org/wp-content/uploads/2015/02/HiKey_User_Guide_Rev0.2.pdf>.
+      see page the [Hikey user manual](https://www.96boards.org/documentation/consumer/hikey/hikey620/hardware-docs/hardware-user-manual.md.html#board-overview).
   5.  Obtain the Hikey flash recovery tool from
       <https://raw.githubusercontent.com/96boards/burn-boot/master/hisi-idt.py>
   6.  Turn the power on the to Hikey
@@ -265,5 +275,4 @@ fastboot boot images/sel4test-driver-image-arm-hikey -c mode=32bit
 - If the UEFI loader is modified then only Section 9 and from
       Section 11 onward need to be completed
 
-Other instructions can be viewed at
-[see this](https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi).
+Other instructions can be viewed here: <https://github.com/96boards/documentation/wiki/HiKeyUEFI#run-fastboot-from-uefi>
