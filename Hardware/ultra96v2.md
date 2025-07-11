@@ -23,8 +23,7 @@ AVNET.
 
 {% include hw-info.html %}
 
-AVNET maintains online material, including designs and documentation
-[here](https://www.avnet.com/wps/portal/us/products/new-product-introductions/npi/aes-ultra96-v2/).
+AVNET maintains online material, including [designs and documentation](https://www.avnet.com/americas/product/avnet-engineering-services/aes-ultra96-v2-i-g/evolve-42136369/).
 
 ## Building
 

@@ -19,7 +19,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # i.MX8M Quad
 
 See also the the NXP [i.MX8M Quad fact
-sheet](https://www.nxp.com/docs/en/fact-sheet/IMX8MQUADEVKFS.pdf>).
+sheet](https://www.nxp.com/docs/en/fact-sheet/IMX8MQUADEVKFS.pdf).
 
 {% include hw-info.html %}
 

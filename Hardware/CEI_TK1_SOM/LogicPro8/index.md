@@ -5,8 +5,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Using the Saleae Logic Pro 8 to debug a CAN bus
- 
-# Introduction
+
+## Introduction
+
 This page is a quick write up of how we used a logic analyzer to help
 solve a message loss issue when using a CAN bus. We had two TK1-SOMs
 connected together on a CAN bus. One of them runs Linux natively and the
@@ -24,7 +25,8 @@ site. Information about the TK1-SOM daughter board that we use is
 <img style="width: 50%" src="setup.JPG" alt="Photo of CAN connected between two TK1-SOMs" />
 
 ## Setup
- Each of the TK1-SOMs have a daughter board with a MCP25625
+
+Each of the TK1-SOMs have a daughter board with a MCP25625
 CAN controller on them that can communicate with the processor over SPI.
 When a controller receives a CAN message it notifies the processor by
 interrupting it over a GPIO line. The processor then reads the CAN
@@ -78,7 +80,6 @@ the message that was sent.
 
 ### Connecting to SPI
 
-
 We now connect to the SPI bus. To do this we need to measure the CLK,
 MOSI and MISO. (These pins can be found at the bottom of the schematic).
 We connect the probe to them as follows:
@@ -104,11 +105,12 @@ can see both CAN messages and SPI messages that were sent.
 <img style="width: 50%" src="logic7.png" alt="Screenshot of Logic software: SPI Sample result, Zoomed in" />
 
 ### GPIO Interrupt line
- We finally connect the probe to the
+
+We finally connect the probe to the
 interrupt line. The daughter board configures the CAN controller to
 interrupt over GPIO3 which is exposed as Pin 4 on pinout J5 as described
 in the
-[TK1-SOM Reference guide](http://coloradoengineering.com/wp-content/uploads/2016/12/Reference-Guide_FINAL.pdf). This is at the back of the TK1 relative to our
+[TK1-SOM Reference guide](https://coloradoengineering.com/wp-content/uploads/2021/04/Reference-Guide_FINAL-4.pdf). This is at the back of the TK1 relative to our
 setup and we connect the probe as shown:
 
 <img style="width: 50%" src="gpio.JPG" alt="Photo of attaching Saleae to GPIO interrupt" />

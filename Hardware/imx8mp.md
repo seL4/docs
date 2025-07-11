@@ -19,7 +19,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # i.MX8M Plus
 
 See also the NXP [i.MX8M Plus product
-page](https://www.nxp.com/design/design-center/development-boards-and-designs/8MPLUSLPD4-EVK>).
+page](https://www.nxp.com/design/design-center/development-boards-and-designs/8MPLUSLPD4-EVK).
 
 {% include hw-info.html %}
 

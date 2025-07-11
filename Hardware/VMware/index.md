@@ -7,12 +7,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # seL4 on VMware
 
 
-This is a quick guide on how to run seL4 x86 on VMWare
-[Workstation](http://www.vmware.com/au/products/workstation) /
-[Player](https://www.vmware.com/go/downloadplayer). Written
-based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6
-and for a Linux host machine. May work on Mac host machine, won't work
-for Windows host (although general idea should be similar).
+This is a quick guide on how to run seL4 x86 on VMWare Workstation/Player.
+Written based on decently up-to-date versions Workstation 9 & 10 Player 5 & 6
+and for a Linux host machine. May work on Mac host machine, won't work for
+Windows host (although general idea should be similar).
 
 This guide assumes that your project is all set up and configured to build for
 x86. Read the [set up

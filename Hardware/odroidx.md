@@ -19,11 +19,16 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Odroid-X
 
-seL4 supports the
-[Odroid-X](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G135235611947)
-Exynos4412 board.
+seL4 supports the Odroid-X Exynos4412 board.
 
 {% include hw-info.html %}
+
+&nbsp;
+
+{% include note.html  %}
+This board is discontinued by the manufacturer. The instructions here are
+provided to keep existing setups working.
+{% include endnote.html %}
 
 ## Client setup
 
@@ -48,30 +53,11 @@ Open minicom on `/dev/ttyUSB*` and set the serial port settings to: `115200N1`
 
 You may also like to set up a udev rule for Fastboot:
 
-```
+```none
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0002", MODE="660", GROUP="dialout"
 ```
 
-<!--
-## SD card setup
-
-An image file can be found here: TODO Add sd image
-
-This image contains both U-Boot and Android. This should set up SD card
-partitions properly. seL4 image can be uploaded via Fastboot.
-
-To prepare the SD card, run
-
-```bash
-$ sudo dd if=<image file> of=</dev/sdx>
-```
-
-Where `sdx` is the device that is associated with your SD card.
--->
-
 ### U-Boot
-
-<!-- TODO: Uboot source? -->
 
 U-Boot must reside at a magical offset in a special partition of the SD
 card. To copy U-Boot and the other boot loaders to the SD card:
@@ -101,12 +87,6 @@ QNX expects to be ELF-loaded. The alternative is to convert our ELF file
 into a binary file using objcopy.
 
 ## Booting
-
-Fastboot will be used to upload images to the device. The
-tool can be found here: or here: you can clone and build the tool from
-source
-
-<!-- TODO: add fastboot link -->
 
 Follow these steps to boot your program:
 
@@ -138,9 +118,4 @@ To boot from mmc:
 
 ## References
 
-<http://www.hardkernel.com/renewal_2011/products/prdt_info.php>
-
-<http://dev.odroid.com/projects/odroid-xq/#s-2.2.1> <!-- <- This should be replaced with the official Samsung exynos4412 "User manual" -->
-
-[Android - uboot
-sources and instructions](http://dev.odroid.com/projects/ics/#s-6.2)
+<https://wiki.postmarketos.org/wiki/Samsung_Exynos_4>
