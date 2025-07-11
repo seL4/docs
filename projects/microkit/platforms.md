@@ -100,6 +100,6 @@ support is on the [roadmap](roadmap.html).
 ## Not in the list above?
 
 See the section on [adding platform
-support](manual/latest#adding-platform-support) for how to add a new platform to
+support](manual/latest/#adding-platform-support) for how to add a new platform to
 Microkit. To add a platform to Microkit it must be supported by seL4 first. See
 the seL4 page on [supported platforms](../../Hardware/#not-in-the-lists-above) for options on that.

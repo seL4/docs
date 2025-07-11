@@ -8,7 +8,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 This guide provides links to the seL4 tutorial solutions as a quick references
 for seL4 calls and methods.
 
-{% assign url = "capabilities?tut_expand" %}
+{% assign url = "capabilities.html?tut_expand" %}
 
 ## [Capabilities]({{ url }})
 
@@ -17,7 +17,7 @@ for seL4 calls and methods.
 - [Delete a capability]({{ url }}#how-do-you-delete-capabilities)
 - [Suspend a thread]({{ url }}#suspend-a-thread)
 
-{% assign url = "untyped?tut_expand" %}
+{% assign url = "untyped.html?tut_expand" %}
 
 ## [Untyped]({{ url }})
 
@@ -27,7 +27,7 @@ for seL4 calls and methods.
 - [Create a notification object]({{ url }}#create-a-notification-object)
 - [Delete an object]({{ url }}#delete-the-objects)
 
-{% assign url = "mapping?tut_expand" %}
+{% assign url = "mapping.html?tut_expand" %}
 
 ## [Mapping]({{ url }})
 
@@ -36,7 +36,7 @@ for seL4 calls and methods.
 - [Remap a page]({{ url }}#remap-a-page)
 - [Unmap a page]({{ url }}#unmapping-pages)
 
-{% assign url = "threads?tut_expand" %}
+{% assign url = "threads.html?tut_expand" %}
 
 ## [Threads]({{ url }})
 
@@ -47,7 +47,7 @@ for seL4 calls and methods.
 - [Set the arguments of a thread]({{ url }}#passing-arguments)
 - [Resolve a fault]({{ url }}#resolving-a-fault)
 
-{% assign url = "ipc?tut_expand" %}
+{% assign url = "ipc.html?tut_expand" %}
 
 ## [IPC]({{ url }})
 
@@ -56,7 +56,7 @@ for seL4 calls and methods.
 - [Reply and wait]({{ url }}#reply-and-wait)
 - [Save a reply and store reply capabilities]({{ url }}#save-a-reply-and-store-reply-capabilities)
 
-{% assign url = "notifications?tut_expand" %}
+{% assign url = "notifications.html?tut_expand" %}
 
 ## [Notifications]({{ url }})
 
@@ -64,7 +64,7 @@ for seL4 calls and methods.
 - [Signalling]({{ url }}#signal-the-producers-to-go)
 - [Differentiate signals]({{ url }}#differentiate-signals)
 
-{% assign url = "interrupts?tut_expand" %}
+{% assign url = "interrupts.html?tut_expand" %}
 
 ## [Interrupts]({{ url }})
 
@@ -72,7 +72,7 @@ for seL4 calls and methods.
 - [Set NTFN]({{ url }}#set-ntfn)
 - [Acknowledge an interrupt]({{ url }}#acknowledge-an-interrupt)
 
-{% assign url = "fault-handlers?tut_expand" %}
+{% assign url = "fault-handlers.html?tut_expand" %}
 
 ### [Fault handling]({{ url }})
 
@@ -82,7 +82,7 @@ for seL4 calls and methods.
 - [Handle a thread fault]({{ url }}#handling-a-thread-fault)
 - [Resume a faulting thread]({{ url }}#resuming-a-faulting-thread)
 
-{% assign url = "mcs?tut_expand" %}
+{% assign url = "mcs.html?tut_expand" %}
 
 ## [MCS]({{ url }})
 

@@ -8,9 +8,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 This guide provides links to tutorial solutions as quick references for the seL4
 C prototyping libraries.
 
-[//]: # (<html><a href="no-javascript.html" title="Get some foo!">Show me some foo</a></html>)
-
-{% assign url = "libraries-1?tut_expand" %}
+{% assign url = "libraries-1.html?tut_expand" %}
 
 ## [Initialisation  & threading]({{ url }})
 
@@ -30,7 +28,7 @@ C prototyping libraries.
 - [Start the new thread]({{ url }}#start-the-new-thread)
 - [Print]({{ url }}#print-something)
 
-{% assign url = "libraries-2?tut_expand" %}
+{% assign url = "libraries-2.html?tut_expand" %}
 
 ## [IPC]({{ url }})
 
@@ -48,7 +46,7 @@ C prototyping libraries.
 - [Write the message registers]({{ url }}#write-the-message-registers)
 - [Reply to a message]({{ url }}#reply-to-a-message)
 
-{% assign url = "libraries-3?tut_expand" %}
+{% assign url = "libraries-3.html?tut_expand" %}
 
 ## [Processes & Elf loading]({{ url }})
 
@@ -61,7 +59,7 @@ C prototyping libraries.
 - [Send a reply]({{ url }}#send-a-reply)
 - [Initiate communications by using seL4_Call]({{ url }}#client-call)
 
-{% assign url = "libraries-4?tut_expand" %}
+{% assign url = "libraries-4.html?tut_expand" %}
 
 ## [Timer]({{ url }})
 

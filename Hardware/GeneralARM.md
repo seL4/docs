@@ -23,7 +23,7 @@ applications have two parts: treat the "kernel" part as a kernel, and the
 image (e.g., seL4test for some platforms) treat it like a kernel.
 
 Detailed instructions differ from board to board. See the [Supported
-Platforms](index) page for links to board-specific instructions.
+Platforms](index.html) page for links to board-specific instructions.
 
 ## Fastboot
 

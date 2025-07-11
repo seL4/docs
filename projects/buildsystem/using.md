@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 <!--excerpt-->
 
 This page contains documentation for how to interact with and build a project that is using this build system.
-For new project development, see [incorporating the build system](/Developing/Building/Incorporating).
+For new project development, see [incorporating the build system](/projects/buildsystem/incorporating.html).
 
 <!--excerpt-->
 
@@ -171,11 +171,11 @@ These options are as follows:
 * `-DSIMULATION`: Set to `0` or `1`: This produces a build of the project which
    is suited for running in an emulator such as QEMU.
 
-Both the [seL4test](/seL4Test) and [seL4bench](https://github.com/seL4/sel4bench-manifest) projects follow this form.
+Both the [seL4test](/projects/sel4test/) and [seL4bench](/projects/sel4bench/) projects follow this form.
 
 #### [sel4test](https://github.com/seL4/sel4test) example:
 
-For more information on configuring, building and running the sel4test suite, please see the [main page on seL4test](../../seL4Test).
+For more information on configuring, building and running the sel4test suite, please see the [main page on seL4test](/projects/sel4test/).
 
 ### Cross compiling:
 

@@ -21,7 +21,7 @@ develop systems on seL4. They are split into the following categories.
   base mechanisms provided by the seL4 kernel. It explains the kernel API with
   short exercises that show basic usage examples.
 
-- The [CAmkES tutorial](hello-camkes-0) introduces the CAmkES component platform
+- The [CAmkES tutorial](hello-camkes-0.html) introduces the CAmkES component platform
   on top of seL4. CAmkES provides abstractions for component on top of seL4 and
   communication glue code between them. It is designed for building
   high-assurance systems with a static software architecture. CAmkES is being
@@ -32,7 +32,7 @@ develop systems on seL4. They are split into the following categories.
   shows how to get started writing root tasks and Microkit components in the
   Rust programming language.
 
-- The [C library tutorials](libraries-1) provide walkthroughs and exercises for
+- The [C library tutorials](libraries-1.html) provide walkthroughs and exercises for
   using the libraries provided in `seL4_libs`. These libraries were developed
   for rapidly prototyping systems on seL4. They are not meant for production
   code, but for experimenting with the seL4 API.
@@ -57,7 +57,7 @@ resources for these topics include:
 Additional learning resources that may be helpful:
 
 - The [seL4 manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
-- The [seL4 API reference](/projects/sel4/api-doc)
+- The [seL4 API reference](/projects/sel4/api-doc.html)
 - The How-to pages for [seL4](how-to-seL4.html), [CAmkES](how-to-CAmkES.html),
   and [C libraries](how-to-libs.html) provide links to tutorial solutions as
   quick reference.

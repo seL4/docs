@@ -8,7 +8,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # CAmkES
 
- CAmkES (component architecture for microkernel-based embedded
+CAmkES (component architecture for microkernel-based embedded
 systems) is a software development and runtime framework for quickly and
 reliably building microkernel-based multiserver (operating) systems. It
 follows a component-based software engineering approach to software
@@ -61,7 +61,7 @@ To learn about developing your own CAmkES application, read the
 ## CAmkES Terminology/Glossary
 
 
-Can be found [here](terminology).
+Can be found [here](terminology.md).
 
 
 ## CAmkES Features
@@ -77,30 +77,22 @@ Information about CAmkES components can be found [here](components.html).
 ## CAmkES VM
 
 
-Information about the x86 camkes vm can be found [here](/VM/CAmkESX86VM).
+Information about the x86 camkes vm can be found [here](/projects/virtualization/index.md).
 
 ## Visual CAmkES
 
 
 CAmkES comes with a tool for visualising the components and connections
-making up an application. For more info, see [here](visual-camkes).
-
-## Changes in CAmkES 3
-
-
-The current version of CAmkES introduces a number of syntactic and
-functional changes. For details about what's changed, see
-[here](differences).
+making up an application. For more info, see [here](visual-camkes/).
 
 ## Internals
 
-
 Here's some information about the internals of the CAmkES tool:
-[CAmkESInternals](internals)
+[CAmkESInternals](internals.md)
 
 ## Command Line Interface
 
 
 There is an experimental command line interface for managing CAmkES
-projects. Read more: [CAmkESCLI](cli)
+projects. Read more: [CAmkESCLI](cli.md)
 

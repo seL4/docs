@@ -27,28 +27,28 @@ based on the NVIDIA Tegra K1. Details and ordering are at
 ## Hardware modifications and Daughterboards
 
 
-[Adding some missing connectors](Tk1SomMods) makes this board a
+[Adding some missing connectors](Tk1SomMods/) makes this board a
 bit easier to use.
 
 We have also developed 2 daughterboards for the TK1-SOM
 
-- a [CAN daughterboard](CANBoard), that adds two CAN
+- a [CAN daughterboard](CANBoard/), that adds two CAN
         controllers on the SPI bus
-- an [I/O daughterboard](DaughterBoard) that adds CAN
+- an [I/O daughterboard](DaughterBoard/) that adds CAN
         controllers, various sensors and power management
 
 ## U-Boot
 
 Upstream U-Boot now supports this board.
 
-Follow the instructions for the [Jetson TK1](../jetsontk1#flash-u-boot), however:
+Follow the instructions for the [Jetson TK1](../jetsontk1.html#flash-u-boot), however:
 
 - use <https://github.com/wom-bat/tegra-uboot-flasher-manifests>
         as the URL for repo
 - don't apply the patch to increase the console buffer size
 - use cei-tk1-som (instead of jetson-tk1) as the board ID
 
-As with the [Jetson](../jetsontk1) with this u-boot, set the
+As with the [Jetson](../jetsontk1.html) with this u-boot, set the
 environment variable bootm_boot_mode to nonsec In this boot mode, the
 standard Linux kernel will not boot: recompile with CONFIG_ARM_PSCI on
 and CONFIG_CPU_IDLE off.
@@ -70,7 +70,7 @@ presented as a USB storage device to your host. In the default
 partitioning (as it comes from Colorado Engineering) partition 1 on the
 device is the UBUNTU root partition.
 
-The [instructions for booting from SD](../GeneralARM#booting-from-sd-card)
+The [instructions for booting from SD](../GeneralARM.html#booting-from-sd-card)
 are also valid for booting from MMC.
 
 ## Serial Connection

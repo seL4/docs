@@ -37,7 +37,7 @@ It is assumed that
  * You are using the Ninja CMake generator.
  * You understand how to checkout projects using the repo tool as described on the
    [set up instructions](/projects/buildsystem/host-dependencies.html) page.
- * You have the [required dependencies](/HostDependencies) installed to build your project.
+ * You have the [required dependencies](/projects/buildsystem/host-dependencies.html) installed to build your project.
 
 
 {% comment %}
@@ -56,15 +56,15 @@ This liquid templating pulls an excerpt out of the child documentation pages to 
 {% endcase %}
 {% endfor %}
 
-## [Configuring and building seL4 projects](/Developing/Building/Using)
+## [Configuring and building seL4 projects](/projects/buildsystem/using.html)
 
 > {{ using[1] | strip }}
 
-## [Incorporating the build system into a project](/Developing/Building/Incorporating)
+## [Incorporating the build system into a project](/projects/buildsystem/incorporating.html)
 
 > {{ incorporating[1] | strip }}
 
-## [Kernel standalone builds](/Developing/Building/seL4Standalone)
+## [Kernel standalone builds](/projects/buildsystem/standalone.html)
 
 > {{ seL4Standalone[1] | strip}}
 

@@ -28,7 +28,7 @@ To install run:
 <br>
 [More details about on installing Repo](https://source.android.com/setup/develop#installing-repo).
 
-[seL4 Repo cheatsheet](../projects/buildsystem/repo-cheatsheet)
+[seL4 Repo cheatsheet](../projects/buildsystem/repo-cheatsheet.html)
 </details>
 
 ## Docker

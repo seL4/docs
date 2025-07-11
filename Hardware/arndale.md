@@ -18,7 +18,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Arndale
 
-**Note: This board is not being regression tested, but has same SoC as [Odroid-XU](/Hardware/OdroidXU) (which is tested).**
+{% include note.html %}
+This board is not being regression tested, but has same SoC as [Odroid-XU](/Hardware/OdroidXU.html) (which is tested).
+{% include endnote.html %}
 
 seL4 supports the the [Arndale](http://www.arndaleboard.org/wiki/index.php/Main_Page)
   dual core A15 ARM development board.

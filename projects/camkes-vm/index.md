@@ -18,9 +18,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 ### Prerequisites
 
-* Get the dependencies for building CAmkES by following
-the instructions [here](/projects/camkes/setting-up.html)
-* Your host machine has to have a CPU that supports Vt-x virtualization
+- Get the dependencies for building CAmkES by following [the setup instructions]
+  (/projects/camkes/setting-up.html)
+- Your host machine has to have a CPU that supports Vt-x virtualization
  (for Intel CPUs), or AMD-V (for AMD CPUs, but that wasn't tested). Any
   newer i7 core should have Vt-x. Note that you might have to enable it
   first from BIOS. You can always check by `lscpu` and look for **vmx** flag.
@@ -39,15 +39,15 @@ Use the following tutorials to learn about the VM:
 
 ### Examples
 
-- [Centos](centos)
-- [zmq_samples](zmq-samples)
+- [Centos](centos.md)
+- [zmq_samples](zmq-samples.md)
 
 
 ### Booting from hard drive
 
 
 These instructions are for ubuntu. For CentOS instructions, see
-[CAmkES VM CentOS](centos).
+[CAmkES VM CentOS](centos.md).
 
 So far we've only run a tiny linux on a ram disk. What if we want to run
 Ubuntu booting off a hard drive? This section will explain the changes

@@ -7,7 +7,7 @@ SPDX-FileCopyrightText: 2024 seL4 Project a Series of LF Projects, LLC.
 
 This guide provides links to CAmkES tutorial solutions as quick how-to reference guide.
 
-{% assign url = "hello-camkes-1?tut_expand" %}
+{% assign url = "hello-camkes-1.html?tut_expand" %}
 
 ## [A basic CAmkES application]({{ url }})
 
@@ -17,7 +17,7 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Implement an RPC function]({{ url }}#implement-a-rpc-function)
 - [Invoke a RPC function]({{ url }}#invoke-a-rpc-function)
 
-{% assign url = "hello-camkes-2?tut_expand" %}
+{% assign url = "hello-camkes-2.html?tut_expand" %}
 
 ## [Events in CAmkES]({{ url }})
 
@@ -38,7 +38,7 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Restrict access to dataports]({{ url }}#restrict-access-to-dataports)
 - [Test the read and write permissions on the dataport]({{ url }}#test-the-read-and-write-permissions-on-the-dataport)
 
-{% assign url = "hello-camkes-timer?tut_expand" %}
+{% assign url = "hello-camkes-timer.html?tut_expand" %}
 
 ## [CAmkES Timer]({{ url }})
 
@@ -58,7 +58,7 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Handle the interrupt]({{ url }}#handle-the-interrupt)
 - [Stop the timer]({{ url }}#stop-a-timer-1)
 
-{% assign url = "camkes-vm-linux?tut_expand" %}
+{% assign url = "camkes-vm-linux.html?tut_expand" %}
 
 ## [CAmkES VM Linux]({{ url }})
 
@@ -66,7 +66,7 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Add a kernel module]({{ url }}#adding-a-kernel-module)
 - [Create a hypercall]({{ url }}#creating-a-hypercall)
 
-{% assign url = "camkes-vm-crossvm?tut_expand" %}
+{% assign url = "camkes-vm-crossvm.html?tut_expand" %}
 
 ## [CAmkeES Cross VM Connectors]({{ url }})
 

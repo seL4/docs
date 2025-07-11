@@ -16,7 +16,7 @@ and desired customisation. This is reflected in the split of CMake files spread 
 
 <!--excerpt-->
 
-### Basic structure
+#### Basic structure
 
 The build system is in two pieces. One piece is in the [seL4 kernel repository](https://github.com/seL4/seL4), which contains the
 compiler toolchain and flags settings as well as helpers for generating configurations. The other piece is in
@@ -30,7 +30,7 @@ The `cmake-tool` directory has the following files of interest:
 
  * `default-CMakeLists.txt`: An example `CMakeLists.txt` file, which could be used as the `CMakeLists.txt` file in
    the top-level directory of a project. Simply, this file includes `all.cmake`, under the assumption of a directory structure
-   where the `cmake-tool` repository is in a directory named `tools`. To use this file, [project manifests](/RepoCheatsheet) are
+   where the `cmake-tool` repository is in a directory named `tools`. To use this file, [project manifests](/projects/buildsystem/repo-cheatsheet.html) are
    expected to create a symbolic link to this file, named `CMakeLists.txt`, at the top-level project directory.
  * `all.cmake`: A wrapper that includes `base.cmake`, `projects.cmake` and
    `configuration.cmake`. This file can be used by projects which do not alter these three files.
