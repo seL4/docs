@@ -25,10 +25,12 @@ This page contains info about building seL4 on
 {% include hw-info.html %}
 
 ## Building for the BeagleBone Black / Blue
+
 These instructions were written by Tim Newsham. The BeagleBone is
 a community-supported port.
 
 ### Requirements
+
 We suggest using the `arm-linux-gnueabi-` cross-compilers. Use
 [the instructions on getting a toolchain](/projects/buildsystem/host-dependencies.html).
 
@@ -57,9 +59,9 @@ For BeagleBone Blue, substitute `am335x-boneblack` with `am335x-boneblue`.
 ### Interacting with U-Boot
 
 Connect a serial adapter between your development box and the BeagleBone. Use
-a serial program such as picocom or screen to connect to the serial port:
+a serial program such as `picocom` or `screen` to connect to the serial port:
 
-```
+```sh
 picocom /dev/ttyUSB0 -b 115200
 ```
 
@@ -73,7 +75,7 @@ to a FAT32 partition the microSD card and insert the card in the BeagleBone.
 
 At the U-Boot prompt, enter the following to load and run the image:
 
-```
+```none
 fatload mmc 0 ${loadaddr} sel4test-driver-image-arm-am335x
 bootm ${loadaddr}
 ```
@@ -81,21 +83,21 @@ bootm ${loadaddr}
 #### Booting from TFTP
 
 To boot over Ethernet, configure your DHCP server to provide a DHCP lease and
-to specify sel4test as the boot file.
+to specify the `sel4test` image as the boot file.
 Configure a TFTP server to serve the `sel4test-driver-image-arm-am335x` file.
 
 For BeagleBone Black, plug in an Ethernet cable. For BeagleBone Blue, make sure
 a microUSB cable is plugged in and connected to a computer running a DHCP
 server. Then, at the U-Boot prompt enter:
 
-```
+```none
 dhcp
 bootm ${loadaddr}
 ```
 
 To load an alternate image from the TFTP server at 1.2.3.4, use:
 
-```
+```none
 dhcp ${loadaddr} 1.2.3.4:refos-image-arm-am335x
 bootm ${loadaddr}
 ```
