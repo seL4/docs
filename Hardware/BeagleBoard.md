@@ -23,8 +23,9 @@ This page documents booting seL4 on the
 
 {% include hw-info.html %}
 
-See [Tim Newsham's post](http://sel4.systems/pipermail/devel/2014-August/000030.html)
-on the mailing list for one user's experience.
+See also [Tim Newsham's
+post](https://lists.sel4.systems/hyperkitty/list/devel@sel4.systems/message/AHWTG4D3W6OYF4QPUILMBTU4COP4KH4A/)
+on the mailing list for his experience with running seL4 on this board.
 
 ## Preparing your SD card
 
@@ -88,7 +89,7 @@ minicom ttyS0
 
 If you get permissions errors you need to add yourself to the
 appropriate group. Find out which group on your machine has access to
-the serial ports (on Debian, it's usually dialout):
+the serial ports (on Debian, it's usually `dialout`):
 
 ```bash
 $ ls -l /dev/ttyUSB0
@@ -105,7 +106,7 @@ sudo usermod -G dialout -a your_login_name
 
 Now minicom should connect to what it thinks is a "modem", and then give you a
 good old console to work with. You are now in the bootloader, U-Boot, of the
-\~BeagleBoard. You can type commands here and it'll display the results.
+BeagleBoard. You can type commands here and it'll display the results.
 
 Some quick useful commands:
 
@@ -135,7 +136,7 @@ ELF/image itself, or loaded to non-existent memory address (0x81000000 works
 fine, but 0x90000000 won't work on the original Beagle Board since there's no
 RAM there).
 
-```
+```none
 dfu-util -D sel4test-image-arm
 ```
 
@@ -151,7 +152,7 @@ RAM from a FAT image: there is no need to do an image copy). If your SD card is
 not formatted, just format it using FAT32. Plug the SD card back into the
 BeagleBoard and reset the board by pressing the `S2` (reset) button.
 
-### To run the image:
+### To run the image
 
 ```uboot
 mmc init
