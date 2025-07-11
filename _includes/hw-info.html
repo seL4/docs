@@ -30,9 +30,13 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 {%- endif -%}
 <div>{{status}}</div>
 
+{% if page.cmake_plat -%}
 <div>seL4 cmake platform name:</div>
 <div><code>{{ page.cmake_plat }}</code></div>
+{%- endif %}
 
 <div>Contributed by:</div> <div>{{ page.Contrib }}</div>
+{% unless page.Maintained == "No" or page.archive %}
 <div>Maintained by:</div> <div>{{ page.Maintained }}</div>
+{% endunless %}
 </div>
