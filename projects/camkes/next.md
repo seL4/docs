@@ -1,15 +1,21 @@
 ---
 redirect_from:
   - /CAmkESNext
+archive: true
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # CAmkES Next
 
-
-CAmkES Next refers to the "next" branch of camkes-tools. It is the
+CAmkES Next refers to the `next` branch of camkes-tools. It is the
 active development branch of camkes.
+
+{% include note.html %}
+This branch was used before the release of CAmkES 3. The current development
+branch is `master` and contains all previous work from the `next` branch. The
+latest release is {{site.camkes}}.
+{% include endnote.html %}
 
 Github: <https://github.com/seL4/camkes-tool/tree/next>
 

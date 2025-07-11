@@ -72,3 +72,27 @@ Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/camk
 {% include endtab.html %}
 
 {% include endtabs.html %}
+
+
+### CAmkES repository collection checkout
+
+To check out a consistent collection of CAmkEs, tools, libraries, and kernel
+from the `camkes-manifest` repository, run the following:
+
+```sh
+mkdir camkes-project
+cd camkes-project
+repo init -u https://github.com/seL4/camkes-manifest.git
+repo sync
+```
+
+To run a simple demo example:
+
+```sh
+cd camkes-project
+mkdir build
+cd build
+../init-build.sh -DPLATFORM=sabre -DAARCH32=1 -DCAMKES_APP=adder -DSIMULATION=1
+ninja
+./simulate
+```
