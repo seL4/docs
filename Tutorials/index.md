@@ -57,12 +57,12 @@ resources for these topics include:
 Additional learning resources that may be helpful:
 
 - The [seL4 manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
-- The [seL4 API reference](/projects/sel4/api-doc.html)
+- The [seL4 API reference](../projects/sel4/api-doc.html)
 - The How-to pages for [seL4](how-to-seL4.html), [CAmkES](how-to-CAmkES.html),
   and [C libraries](how-to-libs.html) provide links to tutorial solutions as
   quick reference.
 - The [seL4 white paper](https://sel4.systems/About/seL4-whitepaper.pdf) for a
   high-level overview of what seL4 is and what it can do.
 - [FAQs](https://sel4.systems/About/FAQ.html)
-- [Debugging guide](/projects/sel4-tutorials/debugging-guide.html)
+- [Debugging guide](../projects/sel4-tutorials/debugging-guide.html)
 - [Help &amp; Support](https://sel4.systems/support.html)

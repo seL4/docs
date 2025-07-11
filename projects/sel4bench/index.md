@@ -58,7 +58,7 @@ version numbers, see the [release page](../../releases.html) and the list of
 
 The CMake build environment supports a number of platforms. For information on
 which ones these are and their corresponding CMake configuration arguments, see
-the [Supported Platforms](/Hardware) page.
+the [Supported Platforms](../../Hardware) page.
 
 For the available meta configuration options, see [below](#configuration-options).
 

@@ -60,7 +60,7 @@ the list of [seL4 releases](../../releases/seL4.html).
 
 The CMake build environment supports a number of platforms. For information on
 which ones these are and their corresponding CMake configuration arguments, see
-the [Supported Platforms](/Hardware) page.
+the [Supported Platforms](../../Hardware) page.
 
 To start a build with a specific configuration we can create a new subdirectory
 from the project root and initialise it with `init-build`:
@@ -188,7 +188,7 @@ below.
 For an overview of the CMake build system and further configuration options for
 the kernel, including configuring for cross compilation (e.g., targeting Arm or
 RISC-V on an x86 build machine), see the page on seL4's [CMake Build
-System](/projects/buildsystem/using.html).
+System](../buildsystem/using.html).
 
 ## Implementation
 

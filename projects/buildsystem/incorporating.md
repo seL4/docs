@@ -278,7 +278,7 @@ all the files in `helpers/`. Notable functions are:
 - `ApplyCommonReleaseVerificationSettings(release, verification)`: Sets flags
   for different combinations of 'release' (performance optimised builds) and
   'verification' (verification friendly features) builds. Please see [meta
-  configuration options](using.html#Meta-configuration-options) for more detail
+  configuration options](using.html#meta-configuration-options) for more detail
   on these options.
 
 ### Other provided helpers

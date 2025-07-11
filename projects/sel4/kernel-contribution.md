@@ -6,8 +6,8 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 # Contributing to kernel code
 
 If the platform, architecture, feature that you are after is not listed on the
-[Supported Platforms page](/Hardware/), and if, from your available
-[options](/Hardware/index.html#not-in-the-lists-above), you choose to contribute
+[Supported Platforms page](../../Hardware/), and if, from your available
+[options](../../Hardware/index.html#not-in-the-lists-above), you choose to contribute
 the port or feature yourself, here are the guidelines for it.
 
 There four classes of kernel contributions:

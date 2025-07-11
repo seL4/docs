@@ -10,7 +10,7 @@ Google's `repo` tool. To start with, get repo by following the
 instructions in the section “Install” on the [repo
 site](https://gerrit.googlesource.com/git-repo#install).
 
-See the [repo cheatsheet](/projects/buildsystem/repo-cheatsheet.html) page for a quick explanation of
+See the [repo cheatsheet] page for a quick explanation of
 how we use repo.
 
 ## Docker or native
@@ -117,5 +117,6 @@ pip3 install --user setuptools sel4-deps
 {% include pip-instructions.md deps="sel4-deps" %}
 
 [edit]: https://github.com/seL4/docs/edit/master/_includes/seL4-deps.md
+[repo-cheatsheet]: {{ '/projects/buildsystem/repo-cheatsheet.html' | relative_url }}
 [contributions]: {{ '/processes/docs-contributing.html' | relative_url }}
 [docker]: {{ '/projects/dockerfiles/' | relative_url }}

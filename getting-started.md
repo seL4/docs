@@ -47,7 +47,7 @@ the main website.
 The Rust programming language is a great fit for writing applications on top of
 seL4. Check out:
 
-- the [Rust support for seL4](/projects/rust/), and
+- the [Rust support for seL4](projects/rust/), and
 - examples tagged with Rust on the seL4 [examples page].
 
 ## Build instructions and tests
@@ -62,7 +62,7 @@ seL4's claim to fame is that it is formally verified. These formal proofs are
 available in the [l4v](https://github.com/seL4/l4v/) repository with their own
 setup and build instructions. See the [verification pages] on the main website
 for an overview of the proofs, and check the [Verified
-Configurations](/projects/sel4/verified-configurations.html) to know which
+Configurations](projects/sel4/verified-configurations.html) to know which
 architecture/platform/configuration combinations of seL4 have verified
 properties.
 

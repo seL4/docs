@@ -55,7 +55,7 @@ Notably ``kernel.elf`` is the kernel binary, and ``kernel_all_pp.c`` is
 the kernel source code after preprocessing, which is used as the basis
 for verification efforts.
 
-Also see [standalone seL4 builds](/projects/buildsystem/standalone.md) for
+Also see [standalone seL4 builds](../buildsystem/standalone.md) for
 general guidelines on generating an seL4 binary and build system information
 from an existing configuration.
 

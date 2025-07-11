@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 ## Example Applications
 
 Most of these examples can be found on the [examples & demos
-page](/examples.html).
+page](../../examples.html).
 
 {% include component_list.md project='camkes' type='camkes-application' %}
 

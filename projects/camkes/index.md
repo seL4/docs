@@ -45,7 +45,7 @@ The following additional resources are available:
 ## Get CAmkES
 
 - Make sure that you already have the tools to [build seL4 and
-  CAmkES](/projects/buildsystem/host-dependencies.html).
+  CAmkES](../buildsystem/host-dependencies.html).
 - Download CAmkES:
 
 ```sh

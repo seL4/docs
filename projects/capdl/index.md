@@ -71,7 +71,7 @@ See also the separate [capDL loader page](c-loader-app.html).
 This library is useful for building up a representation of a capDL state
 programmatically in memory and then writing that as a specification to disk. It
 allows the programmer to incrementally add information about kernel objects and
-capability distribution. The library is used by [CAmkES](/CAmkES/) to build up a
+capability distribution. The library is used by [CAmkES](../camkes/) to build up a
 spec describing the entire system, covering all components and connections.
 
 See the repository [README]({{page.repo_link}}/python-capdl-tool/README.md)

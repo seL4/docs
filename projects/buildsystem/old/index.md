@@ -8,7 +8,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Our old deprecated Build System
 
-_For the new build system see [Building](/Developing/Building)._
+_For the new build system see the [build system overview](../)._
 
 ## Anatomy of the Build System
  The following files are the components

@@ -19,7 +19,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ### Prerequisites
 
 - Get the dependencies for building CAmkES by following [the setup instructions]
-  (/projects/camkes/setting-up.html)
+  (../camkes/setting-up.html)
 - Your host machine has to have a CPU that supports Vt-x virtualization
  (for Intel CPUs), or AMD-V (for AMD CPUs, but that wasn't tested). Any
   newer i7 core should have Vt-x. Note that you might have to enable it

@@ -19,12 +19,10 @@ latest release is {{site.camkes}}.
 
 Github: <https://github.com/seL4/camkes-tool/tree/next>
 
-Main CAmkES page: [CAmkES](/CAmkES)
+Main CAmkES page: [CAmkES](./)
 
 Summary of differences between CAmkES next and CAmkES master:
-[differences](/projects/camkes/differences.html)
-
-VisualCAmkes, a GUI tool to view a CAmkES system: [VisualCAmkES](/VisualCAmkES/)
+[differences](differences.html)
 
 ## Setting up your machine
 

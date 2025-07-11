@@ -6,7 +6,7 @@ SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 
 # Microkit releases
 
-This page documents tagged releases of the seL4 [Microkit](/projects/microkit/) and their
+This page documents tagged releases of the seL4 [Microkit](../projects/microkit/) and their
 corresponding SDK downloads and GPG signatures.
 
 The downloads are signed by Ivan Velickovic <i.velickovic@unsw.edu.au> with the

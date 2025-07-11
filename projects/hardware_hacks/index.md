@@ -39,4 +39,4 @@ A few machines already have a base-management-controller; if they have
 it we use it.
 
 One machine, the CMA34D, needed some extras; they are documented on
-[CMA34DBMC](/CMA34DBMC).
+[CMA34DBMC](../../CMA34DBMC/).
