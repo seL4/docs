@@ -329,24 +329,33 @@ check_html_output: build
 
 # list of URL regexps to ignore when checking links
 # font preload/preconnect URLS give 404 on link check, but work;
-# twitter ignored because of rate limiting;
-# query links on github work, but don't seem to check;
-# rtx.com produces 403 from GitHub;
 IGNORE_URLS  = fonts.gstatic.com
 IGNORE_URLS += fonts.googleapis.com
+# avoid spamming GitHub too much
 IGNORE_URLS += github.com.seL4.rfcs.pulls\?q
 IGNORE_URLS += https://github.com/seL4/.*/edit/
-IGNORE_URLS += ".*sel4_microkit_base.*"
+# fail even though they work manually
+IGNORE_URLS += https://dl.acm.org/citation.cfm\?id=917665
+IGNORE_URLS += https://www.avnet.com/americas/product/avnet-engineering-services/aes-ultra96-v2-i-g/evolve-42136369/
+IGNORE_URLS += https://www.microchip.com/en-us/products/fpgas-and-plds/fpga-and-soc-design-tools/soc-fpga/softconsole
+IGNORE_URLS += https://wiki.odroid.com/odroid-c2/odroid-c2
+IGNORE_URLS += https://wiki.odroid.com/odroid-c4/odroid-c4
+IGNORE_URLS += http://ww1.microchip.com/downloads/en/DeviceDoc/9514.pdf
+IGNORE_URLS += https://digilent.com/reference/programmable-logic/genesys-2/reference-manual
+IGNORE_URLS += https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual
+IGNORE_URLS += https://www.microchip.com/en-us/development-tool/MPFS-ICICLE-KIT-ES
+IGNORE_URLS += https://www.microchip.com/en-us/products/fpgas-and-plds/system-on-chip-fpgas/polarfire-soc-fpgas.*
 
 sep:= /,/
 empty:=
 space:= $(empty) $(empty)
+IGNORE_URLS:= $(subst /,\/,$(IGNORE_URLS))
 IGNORE_EXP:= $(subst $(space),$(sep),$(IGNORE_URLS))
 
 HTMLPROOFEROPT := --swap-urls '^https\://docs.sel4.systems:http\://localhost\:4000'
 HTMLPROOFEROPT += --enforce-https=false --only-4xx --disable-external=false
 HTMLPROOFEROPT += --ignore-urls '/$(IGNORE_EXP)/'
-HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/,/rust\/tutorial\/404|print/,/projects.rust.tutorial.microkit.shared-memory.*/"
+HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/,/rust\/tutorial\/404|print/,/projects.rust.tutorial.microkit.shared-memory.*/,/tutorial.root-task.spawn-thread.html/"
 HTMLPROOFEROPT += --assume-extension ""
 HTMLPROOFEROPT += --ignore-status-codes 429
 # HTMLPROOFEROPT += --log-level debug
