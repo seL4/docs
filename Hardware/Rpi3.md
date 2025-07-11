@@ -18,13 +18,15 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # Raspberry PI 3 Model B and Model B+
 
-{% include hw-info.html %}
-
+{% include note.html %}
 This is an experimental port and is not guaranteed to work.
+{% include endnote.html %}
+
+{% include hw-info.html %}
 
 ## Hardware
 
-[RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf](https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/RPI-3B-V1_2-SCHEMATIC-REDUCED.pdf)
+[raspberry-pi-3-b-reduced-schematics.pdf](https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-reduced-schematics.pdf)
 
 |Feature |Part |Datasheet |
 |-|-|-|
