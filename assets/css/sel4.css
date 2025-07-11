@@ -135,16 +135,23 @@ layout: none
          prose-inline-code:px-1.5
          prose-inline-code:pb-px
          prose-inline-code:after:content-none
-         prose-inline-code:before:content-none
-         prose-img:[&[src$=svg]]:p-3
+         prose-inline-code:before:content-none;
+}
+
+@utility theprose-imgs {
+  @apply prose-img:[&[src$=svg]]:p-3
          prose-img:[&[src$=svg]]:lg:p-6
          prose-img:[&[src$=svg]]:rounded-lg
          prose-img:[&[src$=svg]]:bg-white;
 }
 
-@utility theprose {
+@utility theprose-noimg {
   @apply theprose-nodark dark:prose-invert
          prose-li:dark:marker:text-lightercol_inv
+}
+
+@utility theprose {
+  @apply theprose-noimg theprose-imgs
          prose-img:dark:[&[src$=svg]]:bg-gray-100;
 }
 
