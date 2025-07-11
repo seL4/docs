@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 {% capture file %}
 {% include_absolute {{include.file}} %}
 {% endcapture %}
-{% assign file = file | replace: site.static_url, '' %}
+{% assign file = file | replace: site.static_url, site.baseurl %}
 {% assign file = file | replace: '.md)', '.html)' %}
 
 {% if include.indent_headings %}
