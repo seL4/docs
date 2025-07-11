@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-10 03:36:32 +0000 -->
+<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1489,7 +1489,7 @@ are described below and usage should be reasonably straightforward. To import
 any of these modules the top-level directory of this distribution should be in
 your <code class="language-plaintext highlighter-rouge">PYTHONPATH</code> environment variable. The available modules are:</p>
 
-<p><strong><a href="#camkes.ast">camkes.ast</a></strong></p>
+<p><strong><a href="#camkesast">camkes.ast</a></strong></p>
 
 <blockquote>
   <p>Definitions of objects that can appear in the result of parsing a CAmkES
@@ -1504,12 +1504,12 @@ your <code class="language-plaintext highlighter-rouge">PYTHONPATH</code> enviro
   module.</p>
 </blockquote>
 
-<p><strong><a href="#camkes.parser">camkes.parser</a></strong></p>
+<p><strong><a href="#camkesparser">camkes.parser</a></strong></p>
 
 <blockquote>
   <p>To parse an input specification in memory or to do post-processing
   manipulations on a specification-derived AST you will need to import this
-  module. The <a href="#runner">runner</a> imports this module to perform its job.</p>
+  module. The runner imports this module to perform its job.</p>
 </blockquote>
 
 <p><strong>camkes.runner</strong></p>
@@ -1519,7 +1519,7 @@ your <code class="language-plaintext highlighter-rouge">PYTHONPATH</code> enviro
   need to import it.</p>
 </blockquote>
 
-<p><strong><a href="#camkes.templates">camkes.templates</a></strong></p>
+<p><strong><a href="#camkestemplates">camkes.templates</a></strong></p>
 
 <blockquote>
   <p>If you need to lookup builtin templates you will need to import this module.
@@ -1548,7 +1548,7 @@ reference so that you still only end up with a single copy of the entity, but
 multiple pointers to it.</p>
 
 <p>If you are not using the default CAmkES parser, but are assembling your own
-from the <a href="#camkes.parser">parser module</a>, it is important to note that objects
+from the <a href="#camkesparser">parser module</a>, it is important to note that objects
 of the classes in the AST module are only created in the stage 3 parser. If you
 are inspecting the output of any low-level parser prior to stage 3, you will
 not see objects from camkes.ast.</p>
@@ -3413,8 +3413,8 @@ examples of existing templates in camkes/templates/.</p>
 
 <p>The remainder of this section gives advice for people intending to implement
 their own templates or modify existing templates. If you are attempting to
-modify the template environment itself, you should instead refer to the
-<a href="#template-environment">Template Environment</a> section.</p>
+modify the template context itself, you should instead refer to the
+<a href="#template-context">Template Context</a> section.</p>
 
 <h3 id="template-writing">Template Writing</h3>
 
@@ -3438,9 +3438,9 @@ to the component instance being instantiated. In certain general “top-level”
 templates, there is no particular “subject.” In these templates, for example
 <code class="language-plaintext highlighter-rouge">camkes-gen.cmake</code>, <code class="language-plaintext highlighter-rouge">me</code> will be <code class="language-plaintext highlighter-rouge">None</code>.</p>
 
-<p>The template environment is a limited subset of Python. It is relatively easy
+<p>The template context is a limited subset of Python. It is relatively easy
 to extend, and if you intend to do this you can see how in the
-<a href="#template-environment">Template Environment</a> section. Some statements in
+<a href="#template-context">Template Context</a> section. Some statements in
 Python could not be cleanly exposed and so have instead become functions. In
 particular, be aware of quirks in assertions, lambdas and exceptions. <code class="language-plaintext highlighter-rouge">assert</code>
 is available as a function. So instead of writing <code class="language-plaintext highlighter-rouge">assert foo == 1</code> you would
@@ -3706,7 +3706,7 @@ may help you when grepping and whatnot. They mean:</p>
   <li>camkes/parser/*</li>
 </ul>
 
-<p>The previous section, <a href="#camkes.parser">camkes.parser</a>, describes the high-level
+<p>The previous section, <a href="#camkesparser">camkes.parser</a>, describes the high-level
 interface to the CAmkES parser. This parser is assembled from a pipeline of
 lower-level parsers. These are each described as a “stage” in parsing. To
 understand them, it is necessary to understand a few variants of Abstract
@@ -3721,7 +3721,7 @@ data and a set of read files.</li>
 information about their original source data and the file they came from.</li>
   <li><strong>Lifted AST</strong> This is the most abstract programmatic representation of an
 input specification and the form developers will come to be most familiar
-with. It is a tree of objects from <a href="#camkes.ast">camkes.ast</a>.</li>
+with. It is a tree of objects from <a href="#camkesast">camkes.ast</a>.</li>
 </ul>
 
 <p>The various low-level parsers are each responsible for a specific AST
@@ -3738,7 +3738,7 @@ grammar (camkes/parser/camkes.g) comes into play.</li>
 into the stage 1 parser to parse further sources. Note that from here on,
 <code class="language-plaintext highlighter-rouge">import</code> statements do not appear in the AST.</li>
   <li><strong>Stage 3</strong> Lifts the <code class="language-plaintext highlighter-rouge">plyplus</code> AST into the objects of
-<a href="#camkes.ast">camkes.ast</a>. This is generally the most intensive parse phase
+<a href="#camkesast">camkes.ast</a>. This is generally the most intensive parse phase
 and inherently the most fragile as it encodes much of the semantics of the
 CAmkES input language.</li>
   <li><strong>Stage 4</strong> Resolves semantic references. From here on, no
