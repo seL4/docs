@@ -6,8 +6,8 @@ xcompiler_arg: '-DSIMULATION=1'
 cmake_plat: qemu-arm-virt
 platform: QEMU Arm Virt
 arch: ARMv7A, ARMv8A
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: virt
 cpu: Multiple
 Status: "N/A"

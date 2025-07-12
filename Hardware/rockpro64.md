@@ -4,8 +4,8 @@ cmake_plat: rockpro64
 xcompiler_arg: -DAARCH64=1
 platform: ROCKPro64
 arch: ARMv8A, AArch64
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: RK3399 hexa-core
 cpu: Cortex-A53 Quad 1.8 GHz
 Status: Unverified

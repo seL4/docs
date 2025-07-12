@@ -5,13 +5,13 @@ cmake_plat: exynos5250
 xcompiler_arg: -DAARCH32=1
 platform: Arndale
 arch: ARMv7A
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: Exynos5
 cpu: Cortex-A15
 Status: Unverified
 Contrib: Data61
-Maintained: "No"
+Maintained: false
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

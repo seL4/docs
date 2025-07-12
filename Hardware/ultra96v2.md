@@ -4,8 +4,8 @@ xcompiler_arg: -DAARCH64=1
 arm_hardware: true
 platform: Ultra96v2 Evaluation Kit
 arch: ARMv8A
-virtualization: "yes"
-iommu: "yes"
+virtualization: true
+iommu: true
 soc: Zynq UltraScale+ MPSoC
 cpu: Cortex-A53
 Status: Unverified

@@ -5,14 +5,14 @@ cmake_plat: hikey
 xcompiler_arg: -DAARCH64=1
 platform: HiKey
 arch: ARMv8A
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: Kirin 620
 cpu: Cortex-A53
 Status: Verified
 verified: hikey
 Contrib: Data61
-Maintained: "No"
+Maintained: false
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.

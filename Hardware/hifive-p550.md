@@ -4,8 +4,8 @@ cmake_plat: hifive-p550
 xcompiler_arg: -DRISCV64=1
 platform: HiFive Premier P550
 arch: RV64GC
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 simulation_target: false
 Status: "Unverified"
 Contrib: "Community"

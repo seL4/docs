@@ -4,8 +4,8 @@ cmake_plat: maaxboard
 xcompiler_arg: -DAARCH64=1
 platform: Avnet MaaXBoard
 arch: ARMv8A
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: i.MX8MQ
 cpu: Cortex-A53 Quad 1.5 GHz
 Status: Unverified

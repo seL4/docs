@@ -4,8 +4,8 @@ cmake_plat: spike
 xcompiler_arg: -DRISCV64=1
 platform: Spike
 arch: RV32GC, RV64IMAFDC
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 simulation_target: true
 Status: "Unverified"
 Contrib: 'Data61, <a href="https://github.com/heshamelmatary">Hesham Almatary</a>'

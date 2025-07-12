@@ -4,8 +4,8 @@ cmake_plat: ariane
 xcompiler_arg: -DRISCV64=1
 platform: Ariane
 arch: RV64IMAC
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 simulation_target: false
 Status: "Unverified"
 Contrib: "Data61"

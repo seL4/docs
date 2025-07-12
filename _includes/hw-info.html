@@ -2,39 +2,58 @@
 Copyright 2025 Proofcraft Pty Ltd
 SPDX-License-Identifier: CC-BY-SA-4.0
 {% endcomment -%}
-<table class="table-auto">
+<table class="max-w-md">
 <tbody>
 <tr>
-<td>Platform:</td> <td>{{ page.platform }}</td>
+<td>Platform</td> <td class="font-semibold">{{ page.platform }}</td>
 </tr>
 {% if page.simulation_target -%}
 <tr>
-<td>Simulation platform:</td> <td>yes</td>
+<td>Simulation platform</td> <td>yes</td>
 </tr>
 {%- endif %}
 <tr>
-<td>Architecture:</td> <td>{{ page.arch }}</td>
+<td>Architecture</td> <td>{{ page.arch }}</td>
 </tr>
 {% if page.soc -%}
 <tr>
-<td>System-on-chip:</td> <td>{{ page.soc }}</td>
+<td>System-on-chip</td> <td>{{ page.soc }}</td>
 </tr>
 {%- endif %}
 {% if page.cpu -%}
 <tr>
-<td>CPU:</td> <td>{{ page.cpu }}</td>
+<td>CPU</td> <td>{{ page.cpu }}</td>
 </tr>
 {%- endif %}
 <tr>
-<td>seL4 virtualisation support:</td>
-<td>{{ page.virtualization }}</td>
+<td>seL4 virtualisation support</td>
+<td>
+{%- if page.virtualization %}
+{% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
+{%- else %}
+<span class="pl-0.5">&ndash;</span>
+{%- endif %}
+</td>
 </tr>
 <tr>
-<td>seL4 SMMU support:</td>
-<td>{{ page.iommu }}</td>
+<td>seL4 SMMU support</td>
+<td>
+{%- if page.iommu %}
+{%-   if page.iommu == "limited" %}
+{%-     assign color="text-yellow-500" %}
+{%-     assign text="limited support" %}
+{%-   else %}
+{%-     assign color="text-f_green-500 dark:text-logogreen" %}
+{%-     assign text="" %}
+{%-   endif %}
+<span class="{{color}}">{% svg _icons/check.svg class="inline-icon stroke-3" %} {{text}}</span>
+{%- else %}
+<span class="pl-0.5">&ndash;</span>
+{%- endif %}
+</td>
 </tr>
 <tr>
-<td>Verification status:</td>
+<td>Verification status</td>
 {%- if page.verified -%}
 {%-  assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
 {%-  assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: "</a>" %}
@@ -45,16 +64,16 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 </tr>
 {% if page.cmake_plat -%}
 <tr>
-<td>seL4 cmake platform name:</td>
+<td>seL4 cmake platform name</td>
 <td><code>{{ page.cmake_plat }}</code></td>
 </tr>
 {%- endif %}
 <tr>
-<td>Contributed by:</td> <td>{{ page.Contrib }}</td>
+<td>Contributed by</td> <td>{{ page.Contrib }}</td>
 </tr>
-{% unless page.Maintained == "No" or page.archive %}
+{% unless page.Maintained == false or page.archive %}
 <tr>
-<td>Maintained by:</td> <td>{{ page.Maintained }}</td>
+<td>Maintained by</td> <td>{{ page.Maintained }}</td>
 </tr>
 {% endunless %}
 </tbody>

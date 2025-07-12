@@ -4,8 +4,8 @@ cmake_plat: tx2
 xcompiler_arg: -DAARCH64=1
 platform: TX2
 arch: ARMv8A, AArch64 only
-virtualization: "yes"
-iommu: "yes"
+virtualization: true
+iommu: true
 soc: NVIDIA Tegra X2
 cpu: Cortex-A57 Quad, Dual NVIDIA Denver
 Status: "FC complete, Integrity ongoing"

@@ -6,8 +6,8 @@ xcompiler_arg: '-DSIMULATION=1'
 cmake_plat: qemu-riscv-virt
 platform: QEMU RISC-V
 arch: RV32GC, RV64IMAC
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 soc: virt
 cpu: rv32, rv64
 Status: "N/A"

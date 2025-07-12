@@ -4,7 +4,7 @@ cmake_plat: exynos5422
 xcompiler_arg: -DAARCH32=1
 platform: OdroidXU4
 arch: ARMv7A
-virtualization: "yes"
+virtualization: true
 iommu: limited
 soc: Exynos5
 cpu: Cortex-A15

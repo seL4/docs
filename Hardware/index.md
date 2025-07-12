@@ -33,39 +33,101 @@ seL4 has support for select ARMv7 and ARMv8 Platforms. In addition to the page
 with [general instructions how to run seL4 on Arm](GeneralARM.html), each board
 page may have additional instructions for running seL4 on it.
 
-| Platform                                      | System-on-chip            | Core             | Arch  | Virtualisation | SMMU              | Verification Status   |
-| - | - | - | - | - | - | - |
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>System-on-chip</th>
+      <th>Core</th>
+      <th>Arch</th>
+      <th>Virtualisation</th>
+      <th>SMMU</th>
+      <th>Verification Status</th>
+    </tr>
+  </thead>
+  <tbody>
 {%- assign sorted = site.pages | sort: 'platform' %}
-{% for page in sorted %}
-{%- if page.arm_hardware and page.Maintained != "No" -%}
+{%- for page in sorted %}
+{%- if page.arm_hardware and page.Maintained -%}
 {%-   if page.verified -%}
 {%-    assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
-{%-    assign status = "[" | append: page.Status | append: "](" | append: link | append: ")" %}
+{%-    assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: '</a>' %}
 {%-   else -%}
 {%-    assign status = page.Status -%}
-{%-   endif -%}
-| [{{ page.platform }}]({{page.url| relative_url}}) | {{ page.soc}} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ page.iommu}} | {{ status }} |
-{% endif %}
+{%-   endif %}
+    <tr>
+      <td><a href="{{page.url| relative_url}}">{{ page.platform }}</a></td>
+      <td>{{ page.soc}}</td>
+      <td>{{ page.cpu }}</td>
+      <td>{{ page.arch }}</td>
+      <td class="text-center">
+{%- if page.virtualization %}
+        {% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
+{%- else %}
+        &ndash;
+{%- endif %}
+      </td>
+      <td class="text-center">
+{%- if page.iommu %}
+{%-   if page.iommu == "limited" %}
+{%-     assign color="text-yellow-500" %}
+{%-   else %}
+{%-     assign color="text-f_green-500 dark:text-logogreen" %}
+{%-   endif %}
+        {% svg _icons/check.svg class="inline-icon stroke-3 {{color}}" %}
+{%- else %}
+        &ndash;
+{%- endif %}
+      </td>
+      <td>{{ status }}</td>
+    </tr>
+{%- endif %}
 {%- endfor %}
-
+  </tbody>
+</table>
 
 ## RISC-V
 
 We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
-| Platform | System-on-chip | Core | Arch | Virtualisation | Verification Status |
-| -        |  -             | -    | -    | -              | -                   |
-{% for page in sorted %}
-{%- if page.riscv_hardware -%}
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>System-on-chip</th>
+      <th>Core</th>
+      <th>Arch</th>
+      <!-- th>Virtualisation</th -->
+      <th>Verification Status</th>
+    </tr>
+  </thead>
+  <tbody>
+{%- for page in sorted %}
+{%- if page.riscv_hardware and page.Maintained -%}
 {%-   if page.verified -%}
 {%-    assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
-{%-    assign status = "[" | append: page.Status | append: "](" | append: link | append: ")" %}
+{%-    assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: '</a>' %}
 {%-   else -%}
 {%-    assign status = page.Status -%}
-{%-   endif -%}
-| [{{ page.platform }}]({{page.url | relative_url}}) | {{ page.soc }} | {{ page.cpu }} | {{ page.arch }} | {{ page.virtualization }} | {{ status }} |
-{% endif %}
+{%-   endif %}
+    <tr>
+      <td><a href="{{page.url| relative_url}}">{{ page.platform }}</a></td>
+      <td>{{ page.soc}}</td>
+      <td>{{ page.cpu }}</td>
+      <td>{{ page.arch }}</td>
+      <!-- td class="text-center">
+{%- if page.virtualization %}
+        {% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
+{%- else %}
+        &ndash;
+{%- endif %}
+      </td -->
+      <td>{{ status }}</td>
+    </tr>
+{%- endif %}
 {%- endfor %}
+  </tbody>
+</table>
 
 ## x86
 

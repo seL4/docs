@@ -6,8 +6,8 @@ cmake_plat: sabre
 xcompiler_arg: -DAARCH32=1
 platform: Sabre Lite
 arch: ARMv7A
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 soc: i.MX6
 cpu: Cortex-A9
 Status: "Verified"

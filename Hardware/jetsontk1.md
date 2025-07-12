@@ -4,8 +4,8 @@ cmake_plat: tk1
 xcompiler_arg: -DAARCH32=1
 platform: Jetson TK1
 arch: ARMv7A
-virtualization: "yes"
-iommu: "yes"
+virtualization: true
+iommu: true
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
 Status: "Verified"

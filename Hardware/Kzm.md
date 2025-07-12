@@ -6,13 +6,13 @@ cmake_plat: kzm
 xcompiler_arg: -DAARCH32=1
 platform: KZM
 arch: ARMv6A
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 soc: i.MX31
 cpu: ARM1136J
 Status: Unverified
 Contrib: Data61
-Maintained: "No"
+Maintained: false
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---

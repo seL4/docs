@@ -4,8 +4,8 @@ cmake_plat: imx93
 xcompiler_arg: -DAARCH64=1
 platform: i.MX93 EVK
 arch: ARMv8A, AArch64
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: i.MX93
 cpu: Cortex-A55
 Status: Unverified

@@ -4,8 +4,8 @@ cmake_plat: tqma8xqp1gb
 xcompiler_arg: -DAARCH64=1
 platform: TQMa8XQP 1GB
 arch: ARMv8A, AArch64
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 soc: i.MX8X Quad Plus
 cpu: Cortex-A35
 Status: Unverified

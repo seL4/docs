@@ -4,8 +4,8 @@ cmake_plat: odroidc2
 xcompiler_arg: -DAARCH64=1
 platform: Odroid-C2
 arch: ARMv8A, AArch64
-virtualization: "yes"
-iommu: "no"
+virtualization: true
+iommu: false
 soc: Amlogic S905
 cpu: Cortex-A53
 Status: "FC complete, Integrity ongoing"

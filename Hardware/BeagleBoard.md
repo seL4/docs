@@ -4,8 +4,8 @@ cmake_plat: omap3
 xcompiler_arg: -DAARCH32=1
 platform: BeagleBoard
 arch: ARMv7A
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 soc: OMAP3
 cpu: Cortex-A8
 Status: Unverified

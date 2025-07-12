@@ -4,8 +4,8 @@ cmake_plat: rocketchip
 xcompiler_arg: -DRISCV64=1
 platform: Rocketchip
 arch: RV64IMAFDC
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 simulation_target: false
 Status: Unverified
 Contrib: Data61

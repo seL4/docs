@@ -4,8 +4,8 @@ cmake_plat: star64
 xcompiler_arg: -DRISCV64=1 -DUseRiscVOpenSBI=OFF
 platform: Pine64 Star64
 arch: RV64GBC, RV64IMAC, RV32IMAFBC
-virtualization: "no"
-iommu: "no"
+virtualization: false
+iommu: false
 simulation_target: false
 Status: "Unverified"
 Contrib: "Community"
