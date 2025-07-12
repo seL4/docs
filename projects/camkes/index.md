@@ -28,7 +28,7 @@ The development framework provides:
 ## Overview
 
 To get started with CAmkES we recommend following the [CAmkES
-tutorial](../../Tutorials/hello-camkes-0.html)
+tutorial](../../Tutorials/hello-camkes-0.html).
 
 The following additional resources are available:
 
