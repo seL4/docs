@@ -9,7 +9,8 @@ seL4: 10.1.0
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
-# Camkes Version camkes-3.6.0 Release
+
+# CAmkES Version camkes-3.6.0 Release
 
 Announcing the release of `camkes-3.6.0` with the following changes:
 
@@ -20,12 +21,12 @@ Using seL4 version 10.1.0
 
 * AARCH64 is now supported.
 * CakeML components are now supported.
-* Added `query` type to Camkes ADL to allow for querying plugins for component configuration values.
+* Added `query` type to CAmkES ADL to allow for querying plugins for component configuration values.
 * Components can now make dtb queries to parse device information from dts files.
 * Component definitions for serial and timer added on exynos5422, exynos5410, pc99.
 * Preliminary support for Isabelle verification of generated capDL.
     - See cdl-refine-tests/README for more information
-* Simplify and refactor the alignment and section linking policy for generated Camkes binaries.
+* Simplify and refactor the alignment and section linking policy for generated CAmkES binaries.
 * Dataports are now required to declare their size in the ADL.
 * Templates now use seL4_IRQHandler instead of seL4_IRQControl, which is consistent with the seL4 API.
     - This change is BREAKING.

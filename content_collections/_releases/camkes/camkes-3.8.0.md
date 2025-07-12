@@ -36,10 +36,10 @@ Using seL4 version 11.0.0
 * Port libsel4camkes environments to the sel4runtime
 * CAmkES can be used on any seL4 platform that uses a camkes supported seL4 architecture (x86, Arm, RISC-V)
 * By default the C preprocessor will be run over CAmkES ADL files
-  - The Camkes syntax excludes lines starting with `#` due to the integration of CPP. This can sometimes cause
+  - The CAmkES syntax excludes lines starting with `#` due to the integration of CPP. This can sometimes cause
     confusion where #ifdef is used but the CPP isn't configured to run. Projects are still able to disable the CPP.
 * capDL Static initialisation
-  - Using the capDL support for static allocation of objects from an Untyped list, Camkes supports generating specs
+  - Using the capDL support for static allocation of objects from an Untyped list, CAmkES supports generating specs
     with all objects preallocated. This can then be loaded by a static loader.
   - This is only supported on Arm by setting CAmkESCapDLStaticAlloc=ON.
 * Use large pages for dataports if able

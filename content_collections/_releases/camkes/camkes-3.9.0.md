@@ -22,7 +22,7 @@ Below is a lightly edited list of all PRs merged into master for this release.
 * Add `uint64_t` and `int64_t` types to language.
     - This introduced two new data types into the CAmkES language to support larger types.
 * Remove `elf.h`, now defined in sel4runtime.
-* Camkes,rumprun: fix tls management implementation:
+* CAmkES,rumprun: fix tls management implementation:
     - `.tdata*` and `.tbss*` linker symbol declarations are suppressed until the final link step.
 * Fix `generate_seL4_SignalRecv` in `Context.py` and update `rpc-connector.c` template accordingly.
     - `seL4SignalRecv` only exists on MCS, split the two calls for compatibility.
@@ -42,12 +42,12 @@ Below is a lightly edited list of all PRs merged into master for this release.
     - When calling `register_shared_variable` from a component context the label needs to be provided.
 * Add `seL4DTBHW` connector. This connector variant is similar to `seL4DTBHardware`, but takes a hardware component on the from end.
 * `seL4DTBHardware` bug fix, use global interface name. This prevents the allocator from throwing an error when the same interface name is used in a different component.
-* Camkes connector extensions + DMA improvements:
+* CAmkES connector extensions + DMA improvements:
     - libsel4camkes: Implement DMA cache for Arm
     - component.common.c: Support additional DMA setting. Allow setting the cache and base paddr value of the DMA pool.
     - Add single_threaded attribute which when set adds the `seL4SingleThreadedComponent` templates.
     - Allow connectors to declare CMake libraries for each end of the connection. This allows a connector to have most of its implementation in a library and only use the template for initialisation and configuration.
-    - camkes-gen.cmake: Create component target stub. This is equivalent to creating a Component with no customization but would still contain things based on its Camkes definition, such as connector artifacts.
+    - camkes-gen.cmake: Create component target stub. This is equivalent to creating a Component with no customization but would still contain things based on its CAmkES definition, such as connector artifacts.
 * Component.common.c: Move init() to C constructor
     - Connectors that don't use threads use runtime constructors for their initialisation.
 * Libsel4camkes: camkes_call_hardware_init_modules
@@ -82,7 +82,7 @@ values based on a full system composition.
 * Add `msgqueue` mechanism which allows componets to sent messages. This is essentially another layer ontop of the virtqueue functionality.
 * Accept Red Hat ARM cross-compilers in `check_deps.py`.
 * Simplify the logic for combining the connections in the stage9 parser. This improves processing times.
-* Camkes-tool:
+* `camkes-tool`:
     - Add priority to muslc so that its initialsation comes after camkes. This relates to recent changes in sel4runtime.
     - Add an interface `dataport_caps` for accessing dataport caps that is used by the seL4SharedDataWithCaps template.
 * Tools: define `camkes_tool_processing` when running the C preprocessor.
