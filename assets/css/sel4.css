@@ -117,6 +117,10 @@ layout: none
          prose-h4:pb-4;
 }
 
+@utility border-l-light {
+  @apply border-l-3 pl-4 border-gray-200 dark:border-gray-700;
+}
+
 @utility theprose-nodark {
   @apply prose prose-sm lg:prose-base max-w-(--breakpoint-md)
          prose-pre:bg-slate-800
@@ -135,7 +139,8 @@ layout: none
          prose-inline-code:px-1.5
          prose-inline-code:pb-px
          prose-inline-code:after:content-none
-         prose-inline-code:before:content-none;
+         prose-inline-code:before:content-none
+         [&_details]:border-l-light;
 }
 
 @utility theprose-imgs {
