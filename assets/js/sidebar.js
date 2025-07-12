@@ -90,8 +90,9 @@
 
     tabGroups.forEach(function (group) {
         var children = group.children;
-        children[2].classList.add('active'); // Activate the first tab by default
-        children[3].classList.remove('hidden'); // Show the first tab
+        console.log(children[1]);
+        children[1].classList.add('active'); // Activate the first tab by default
+        children[2].classList.remove('hidden'); // Show the first tab
     });
 
     var tabButtons = document.querySelectorAll('.tab-header');
@@ -100,11 +101,14 @@
             var content = button.nextElementSibling;
 
             var group = button.parentElement;
-            var tabs = group.getElementsByClassName('tab-header');
+            var children = group.children;
 
-            for (let tab of tabs) {
-                tab.classList.remove('active');
-                tab.nextElementSibling.classList.add('hidden');
+            for (let tab of children) {
+                if (tab.classList.contains('tab-header')) {
+                    console.log('deactivating tab', tab);
+                    tab.classList.remove('active');
+                    tab.nextElementSibling.classList.add('hidden');
+                }
             };
 
             button.classList.add('active');
