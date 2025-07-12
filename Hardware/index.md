@@ -33,6 +33,7 @@ seL4 has support for select ARMv7 and ARMv8 Platforms. In addition to the page
 with [general instructions how to run seL4 on Arm](GeneralARM.html), each board
 page may have additional instructions for running seL4 on it.
 
+<div class="overflow-x-auto">
 <table>
   <thead>
     <tr>
@@ -85,11 +86,13 @@ page may have additional instructions for running seL4 on it.
 {%- endfor %}
   </tbody>
 </table>
+</div>
 
 ## RISC-V
 
 We currently provide support for some of the RISC-V platforms. Support for the hypervisor extension is yet to be mainlined.
 
+<div class="overflow-x-auto">
 <table>
   <thead>
     <tr>
@@ -128,6 +131,7 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 {%- endfor %}
   </tbody>
 </table>
+</div>
 
 ## x86
 
