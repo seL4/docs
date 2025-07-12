@@ -24,7 +24,12 @@ toc: true
 parent: "/projects/virtualization/docs/{1}"
 ---
 
+{{% capture file %}}
 {{% include_absolute {2} %}}
+{{% endcapture %}}
+{{% assign file = file | replace: '[top](#)', '[top](#page-top)' %}}
+
+{{{{ file }}}}
 '''.format(title, args.parent, args.file)
 with open(args.output, "w") as output_file:
     output_file.write(output)
