@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -175,8 +175,8 @@
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/capabilities">Capabilities tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities.html">Capabilities tutorial</a></li>
 </ol>
 
 <h2 id="initialising">Initialising</h2>
@@ -218,13 +218,13 @@ ninja
   <summary>Get CapDL</summary>
   <p>The capDL loader parses
 a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="https://docs.sel4.systems/CAmkES/">CAmkES</a> projects
+It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
 but we also use it in the tutorials to reduce redundant code.
 The program that you construct will end up with its own CSpace and VSpace, which are separate
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
 in applications loaded by the capDL loader.</p>
 
-  <p>More information about CapDL projects can be found <a href="https://docs.sel4.systems/CapDL.html">here</a>.</p>
+  <p>More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.</p>
 
   <p>For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
@@ -260,7 +260,7 @@ does the same, except it sends the reply and blocks on the provided endpoint in 
 
 <p>Since TCBs have a single space to store a reply capability, if servers need to service multiple
 requests (e.g saving requests to reply at a later time, after hardware operations have been completed),
-<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code></a> can be used to save
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#save-caller"><code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code></a> can be used to save
 the reply capability to an empty slot in the receivers CSpace.</p>
 
 <h3 id="ipc-buffer">IPC Buffer</h3>
@@ -329,8 +329,8 @@ It contains the following fields:</p>
 
 <p>Along with the message the kernel additionally delivers the badge of the endpoint capability
 that the sender invoked to send the message. Endpoints can be badged using
-<a href="https://docs.sel4.systems/ApiDoc.html#mint"><code class="language-plaintext highlighter-rouge">seL4_CNode_Mint</code></a> or
- <a href="https://docs.sel4.systems/ApiDoc.html#mutate"><code class="language-plaintext highlighter-rouge">seL4_CNode_Mutate</code></a>. Once an endpoint is badged,
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#mint"><code class="language-plaintext highlighter-rouge">seL4_CNode_Mint</code></a> or
+ <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#mutate"><code class="language-plaintext highlighter-rouge">seL4_CNode_Mutate</code></a>. Once an endpoint is badged,
 the badge of the endpoint is transferred to any receiver that receives messages on that endpoint.
 The code example below demonstrates this:</p>
 
@@ -506,7 +506,7 @@ lazy
 
 <p><strong>Exercise</strong> Currently each client is scheduled for its full timeslice until it is preempted. Alter
 your server to only print one message from each client, alternating. You will need to use
-<a href="https://docs.sel4.systems/ApiDoc.html#save-caller"><code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code></a>  to save the reply
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#save-caller"><code class="language-plaintext highlighter-rouge">seL4_CNode_SaveCaller</code></a>  to save the reply
 capability for each sender. You can use <code class="language-plaintext highlighter-rouge">free_slot</code> to store the reply capabilities.</p>
 
 <details>

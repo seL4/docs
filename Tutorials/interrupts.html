@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -173,8 +173,8 @@
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/notifications">Notifications tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/notifications.html">Notifications tutorial</a></li>
 </ol>
 
 <h1 id="initialising">Initialising</h1>
@@ -216,13 +216,13 @@ ninja
   <summary>Get CapDL</summary>
   <p>The capDL loader parses
 a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="https://docs.sel4.systems/CAmkES/">Camkes</a> projects
+It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
 but we also use it in the tutorials to reduce redundant code.
 The program that you construct will end up with its own CSpace and VSpace, which are separate
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
 in applications loaded by the capDL loader.
 <br />
-More information about CapDL projects can be found <a href="https://docs.sel4.systems/CapDL.html">here</a>.
+More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.
 <br />
 For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
@@ -251,9 +251,9 @@ error <span class="o">=</span> seL4_IRQControl_Get<span class="o">(</span>seL4_I
 dependent, including:</p>
 
 <ul>
-  <li><a href="https://docs.sel4.systems/ApiDoc.html#get-io-apic"><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetIOAPIC</code></a> (x86)</li>
-  <li><a href="https://docs.sel4.systems/ApiDoc.html#get-msi"><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetMSI</code></a> (x86)</li>
-  <li><a href="https://docs.sel4.systems/ApiDoc.html#gettrigger"><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetTrigger</code></a> (ARM)</li>
+  <li><a href="https://docs.sel4.systems/projects/sel4/api-doc.html#get-io-apic-handler"><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetIOAPIC</code></a> (x86)</li>
+  <li><a href="https://docs.sel4.systems/projects/sel4/api-doc.html#get-msi-handler"><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetMSI</code></a> (x86)</li>
+  <li><a href="https://docs.sel4.systems/projects/sel4/api-doc.html#get-irq-handler-with-trigger-type"><code class="language-plaintext highlighter-rouge">seL4_IRQControl_GetTrigger</code></a> (ARM)</li>
 </ul>
 
 <h3 id="receiving-interrupts">Receiving interrupts</h3>
@@ -267,22 +267,22 @@ with the IRQHandler capability for that irq, as follows:</p>
 an interrupt occurs. To handle multiple interrupts on the same notification object, you
 can set different badges on the notification capabilities bound to each IRQHandler.
  When an interrupt arrives,
-the badge of the notification object bound to that IRQHandler is bitwise orred with the data
+the badge of the notification object bound to that IRQHandler is bitwise or-ed with the data
 word in the notification object.
 Recall the badging technique for differentiating signals from the
- <a href="/Tutorials/notifications">notification tutorial</a>.</p>
+ <a href="https://docs.sel4.systems/Tutorials/notifications.html">notification tutorial</a>.</p>
 
 <p>Interrupts can be polled for using <code class="language-plaintext highlighter-rouge">seL4_Poll</code> or waited for using <code class="language-plaintext highlighter-rouge">seL4_Wait</code>. Either system
 call results in the data word of the notification object being delivered as the badge of the
 message, and the data word cleared.</p>
 
-<p><a href="https://docs.sel4.systems/ApiDoc.html#clear"><code class="language-plaintext highlighter-rouge">seL4_IRQHandler_Clear</code></a> can be used to unbind
+<p><a href="https://docs.sel4.systems/projects/sel4/api-doc.html#clear"><code class="language-plaintext highlighter-rouge">seL4_IRQHandler_Clear</code></a> can be used to unbind
 the notification from an IRQHandler.</p>
 
 <h3 id="handling-interrupts">Handling interrupts</h3>
 
 <p>Once an interrupt is received and processed by the software, you can unmask the interrupt
-using <a href="https://docs.sel4.systems/ApiDoc.html#ack"><code class="language-plaintext highlighter-rouge">seL4_IRQHandler_Ack</code></a> on the IRQHandler.
+using <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#acknowledge"><code class="language-plaintext highlighter-rouge">seL4_IRQHandler_Ack</code></a> on the IRQHandler.
 seL4 will not deliver any further interrupts after an IRQ is raised until that IRQHandler
 has been acked.</p>
 

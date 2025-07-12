@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -177,9 +177,9 @@
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/capabilities">Capabilities tutorial</a></li>
-  <li><a href="/Tutorials/ipc">IPC tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities.html">Capabilities tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/ipc.html">IPC tutorial</a></li>
 </ol>
 
 <h2 id="initialising">Initialising</h2>
@@ -220,13 +220,13 @@ ninja
   <summary>Get CapDL</summary>
   <p>The capDL loader parses
 a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="https://docs.sel4.systems/CAmkES/">Camkes</a> projects
+It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
 but we also use it in the tutorials to reduce redundant code.
 The program that you construct will end up with its own CSpace and VSpace, which are separate
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
 in applications loaded by the capDL loader.
 <br />
-More information about CapDL projects can be found <a href="https://docs.sel4.systems/CapDL.html">here</a>.
+More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.
 <br />
 For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
@@ -237,7 +237,7 @@ For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</
 order to rectify an anomalous condition in the current thread and then return to
 the previous instruction stream.</p>
 
-<p>In seL4, faults are modeled as separately programmer-designated “fault handler”
+<p>In seL4, faults are modelled as separately programmer-designated “fault handler”
 threads. In monolithic kernels, faults are not usually delivered to a userspace
 handler, but they are handled by the monolithic kernel itself.</p>
 
@@ -311,7 +311,7 @@ the Master version of the seL4 kernel:</p>
 
 <p>When a fault is generated, the kernel will deliver an IPC message across the
 fault endpoint. This IPC message contains information that tells the fault
-handler why the fault occured as well as surrounding contextual information
+handler why the fault occurred as well as surrounding contextual information
 about the fault which might help the fault handler to rectify the anomaly.</p>
 
 <p>Each anomaly has its own message format because the information needed to
@@ -341,11 +341,11 @@ kernel’s cap to the fault endpoint object.</p>
 is delivered to the receiver just the same way it is delivered for any other
 IPC where there is a badge on the sender’s cap.</p>
 
-<p>A keen reader would probably have realized that this means that a badge on the
+<p>A keen reader would probably have realised that this means that a badge on the
 kernel’s cap to a fault endpoint can be used to distinguish fault messages
 from different faulting threads, such that a single handler can handle
 faults from multiple threads. Please see the
-<a href="/Tutorials/ipc">IPC Tutorial</a> for a refresher on how
+<a href="https://docs.sel4.systems/Tutorials/ipc.html">IPC Tutorial</a> for a refresher on how
 badged fault endpoints work.</p>
 
 <h3 id="differences-between-mcs-and-master-kernel">Differences between MCS and Master kernel</h3>
@@ -356,7 +356,7 @@ cap to a fault endpoint, between the master and MCS kernels.</p>
 <p>Regardless though, on both versions of the kernel, to inform the kernel of the
 fault endpoint for a thread, call the usual <code class="language-plaintext highlighter-rouge">seL4_TCB_SetSpace()</code>.</p>
 
-<p>See the <a href="/Tutorials/mcs.html">MCS tutorial</a> for more information.</p>
+<p>See the <a href="https://docs.sel4.systems/Tutorials/mcs.html">MCS tutorial</a> for more information.</p>
 
 <h2 id="exercises">Exercises</h2>
 
@@ -430,7 +430,7 @@ enables handlers to identify the faulters they are handling.</p>
 </code></pre></div></div>
 
 <p>Since we are using the Master kernel, you will also need to copy the badged cap
-into the <code class="language-plaintext highlighter-rouge">faulter</code>’s CSpace (See the <a href="/Tutorials/mcs.html">MCS tutorial</a>
+into the <code class="language-plaintext highlighter-rouge">faulter</code>’s CSpace (See the <a href="https://docs.sel4.systems/Tutorials/mcs.html">MCS tutorial</a>
 for an explanation of the differences between the Master and MCS kernel when
 configuring fault endpoints):</p>
 

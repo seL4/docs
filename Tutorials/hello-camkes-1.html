@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -174,12 +174,12 @@ well-defined, static system.</li>
   <li>Become acquainted with the basics of creating a practical CAmkES application.</li>
 </ol>
 
-<p>Use this <a href="https://github.com/seL4/sel4-tutorials/blob/master/docs/CAmkESTutorial.pdf">slide presentation</a> to guide you through the tutorials <a href="/Tutorials/hello-camkes-0">0</a>, <a href="/Tutorials/hello-camkes-1">1</a> and <a href="/Tutorials/hello-camkes-2">2</a>.</p>
+<p>Use this <a href="https://github.com/seL4/sel4-tutorials/blob/master/docs/CAmkESTutorial.pdf">slide presentation</a> to guide you through the tutorials <a href="https://docs.sel4.systems/Tutorials/hello-camkes-0.html">0</a>, <a href="https://docs.sel4.systems/Tutorials/hello-camkes-1.html">1</a> and <a href="https://docs.sel4.systems/Tutorials/hello-camkes-2.html">2</a>.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/hello-camkes-0">CAmkES hello world tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-0.html">CAmkES hello world tutorial</a></li>
 </ol>
 
 <h2 id="initialising">Initialising</h2>
@@ -231,7 +231,7 @@ the following camkes file:</p>
 </ul>
 
 <p>Find the Component manual section here:
-<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#component</a></p>
+<a href="https://docs.sel4.systems/projects/camkes/manual.html#component">https://docs.sel4.systems/projects/camkes/manual.html#component</a></p>
 
 <h3 id="connections">Connections</h3>
 
@@ -244,7 +244,7 @@ we are using synchronous IPC. In implementation terms, this boils down
 to the <code class="language-plaintext highlighter-rouge">seL4_Call</code> syscall on seL4.</p>
 
 <p>Find the “Connection” keyword manual section here:
-<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#connection</a></p>
+<a href="https://docs.sel4.systems/projects/camkes/manual.html#connection">https://docs.sel4.systems/projects/camkes/manual.html#connection</a></p>
 
 <h3 id="interfaces">Interfaces</h3>
 
@@ -271,7 +271,7 @@ Procedure interface may be found here:
 <code class="language-plaintext highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.idl4</code></p>
 
 <p>Find the “Procedure” keyword definition here:
-<a href="https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure">https://github.com/seL4/camkes-tool/blob/master/docs/index.md#procedure</a></p>
+<a href="https://docs.sel4.systems/projects/camkes/manual.html#procedure">https://docs.sel4.systems/projects/camkes/manual.html#procedure</a></p>
 
 <h3 id="component-source">Component source</h3>
 
@@ -345,7 +345,7 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="cm">/* hint 1: use seL4RPCCall as the connector (or you could use seL4RPC if you prefer)
          * hint 2: look at
-         * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+         * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
          */</span>
 </code></pre></div></div>
 
@@ -364,7 +364,7 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
 <span class="n">procedure</span> <span class="n">HelloSimple</span> <span class="p">{</span>
     <span class="cm">/* TODO define RPC functions */</span>
     <span class="cm">/* hint 1: define at least one function that takes a string as input parameter. call it say_hello. no return value
-     * hint 2: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+     * hint 2: look at https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
      */</span>
 </code></pre></div></div>
 
@@ -386,7 +386,7 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
  * hint 4: so the function would be: hello_say_hello()
  * hint 5: the CAmkES 'string' type maps to 'const char *' in C
  * hint 6: make the function print out a mesage using printf
- * hint 7: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+ * hint 7: look at https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
  */</span>
 </code></pre></div></div>
 
@@ -410,7 +410,7 @@ void hello_say_hello(const char *str) {
      * hint 2: the interfaces available are defined by the component, e.g. in hello-1.camkes
      * hint 3: the function name is defined by the interface definition, e.g. in interfaces/HelloSimple.idl4
      * hint 4: so the function would be:  hello_say_hello()
-     * hint 5: look at https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+     * hint 5: look at https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
      */</span>
 </code></pre></div></div>
 

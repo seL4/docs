@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -175,8 +175,8 @@
 
 <h2 id="prerequisites">Prerequisites</h2>
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/hello-camkes-timer">CAmkES timer tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-timer.html">CAmkES timer tutorial</a></li>
 </ol>
 
 <h2 id="capdl-loader">CapDL Loader</h2>
@@ -188,13 +188,13 @@
   <summary>Get CapDL</summary>
   <p>The capDL loader parses
 a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="https://docs.sel4.systems/CAmkES/">Camkes</a> projects
+It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
 but we also use it in the tutorials to reduce redundant code.
 The program that you construct will end up with its own CSpace and VSpace, which are separate
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
 in applications loaded by the capDL loader.
 <br />
-More information about CapDL projects can be found <a href="https://docs.sel4.systems/CapDL.html">here</a>.
+More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.
 <br />
 For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
@@ -325,7 +325,7 @@ strings specifying:</p>
 <ul>
   <li>boot arguments to the guest Linux,</li>
   <li>the name of the guest Linux kernel image file,</li>
-  <li>and the name of the guest Linux initrd file (the root filesystem to use during system initialization).</li>
+  <li>and the name of the guest Linux initrd file (the root filesystem to use during system initialisation).</li>
 </ul>
 
 <p>The kernel command-line is defined in the <code class="language-plaintext highlighter-rouge">VM_GUEST_CMDLINE</code> macro. The kernel image
@@ -335,7 +335,7 @@ linked into the VMM. In the simple configuration for thie tutorial, the VMM uses
 the <code class="language-plaintext highlighter-rouge">bzimage</code> and <code class="language-plaintext highlighter-rouge">rootfs.cpio</code> names to find the appropriate files
 in this archive.</p>
 
-<p>To see how the <code class="language-plaintext highlighter-rouge">Init</code> component and CPIO archive are definied within the build system,
+<p>To see how the <code class="language-plaintext highlighter-rouge">Init</code> component and CPIO archive are defined within the build system,
 look at the app’s <code class="language-plaintext highlighter-rouge">CMakeList.txt</code>:</p>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>

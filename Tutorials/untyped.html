@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -174,8 +174,8 @@
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/capabilities">Capabilities tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities.html">Capabilities tutorial</a></li>
 </ol>
 
 <h2 id="initialising">Initialising</h2>
@@ -248,7 +248,7 @@ shows how to print out the initial untyped capabilities provided from <code clas
 <h3 id="retyping">Retyping</h3>
 
 <p>Untyped capabilities have a single invocation:
-<a href="https://docs.sel4.systems/ApiDoc.html#retype">seL4_Untyped_Retype</a> which is
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#retype">seL4_Untyped_Retype</a> which is
 used to create a new capability (and potentially object) from an untyped
 capability. Specifically, the new capability created by a retype invocation
 provides access to a subset of the memory range of the original capability,
@@ -328,7 +328,7 @@ in bytes by taking 2<sup><code class="language-plaintext highlighter-rouge">size
 <h4 id="root-node_index--node_depth">Root, node_index &amp; node_depth</h4>
 
 <p>The <code class="language-plaintext highlighter-rouge">root</code>, <code class="language-plaintext highlighter-rouge">node_index</code> and <code class="language-plaintext highlighter-rouge">node_depth</code> parameters are used to specify the CNode in which to place the new capabilities.
-Depending on the <code class="language-plaintext highlighter-rouge">depth</code> parameter, the CSlot to use is addressed by invocation or by direct addressing (see the <a href="/Tutorials/capabilities.html">capabilities tutorial</a> for an explanation of those terms).</p>
+Depending on the <code class="language-plaintext highlighter-rouge">depth</code> parameter, the CSlot to use is addressed by invocation or by direct addressing (see the <a href="https://docs.sel4.systems/Tutorials/capabilities.html">capabilities tutorial</a> for an explanation of those terms).</p>
 
 <p>In the example above, <code class="language-plaintext highlighter-rouge">node_depth</code> is set to 0, which means invocation addressing is used: the <code class="language-plaintext highlighter-rouge">root</code> parameter is
 looked up implicitly using the CSpace root of the current thread at a depth of <code class="language-plaintext highlighter-rouge">seL4_WordBits</code>. So the example code

@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -191,8 +191,8 @@ ninja
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
-  <li><a href="https://docs.sel4.systems/HostDependencies">Set up your machine</a>.</li>
-  <li><a href="/Tutorials/hello-camkes-2">Camkes 2</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a>.</li>
+  <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-2.html">CAmkES 2</a></li>
 </ol>
 
 <h2 id="capdl-loader">CapDL Loader</h2>
@@ -204,13 +204,13 @@ ninja
   <summary>Get CapDL</summary>
   <p>The capDL loader parses
 a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="https://docs.sel4.systems/CAmkES/">Camkes</a> projects
+It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
 but we also use it in the tutorials to reduce redundant code.
 The program that you construct will end up with its own CSpace and VSpace, which are separate
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
 in applications loaded by the capDL loader.
 <br />
-More information about CapDL projects can be found <a href="https://docs.sel4.systems/CapDL.html">here</a>.
+More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.
 <br />
 For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
@@ -274,7 +274,7 @@ wish to call your driver something else, you’ll have to change these lines.</p
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 1: component instances */
     /* hint 1: one hardware component and one driver component
         * hint 2: look at
-        * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+        * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
         */
 </code></pre></div></div>
 
@@ -297,7 +297,7 @@ registers. The other represents an interrupt.</p>
     /* hint 1: use seL4HardwareMMIO to connect device memory
         * hint 2: use seL4HardwareInterrupt to connect interrupt
         * hint 3: look at
-        * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+        * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
         */
 </code></pre></div></div>
 
@@ -319,7 +319,7 @@ must both be configured.</p>
     /* Timer and Timerbase:
         * hint 1: find out the device memory address and IRQ number from the hardware data sheet
         * hint 2: look at
-        * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#hardware-components
+        * https://docs.sel4.systems/projects/camkes/manual.html#hardware-components
         */
 </code></pre></div></div>
 
@@ -461,7 +461,7 @@ need to implement is called <code class="language-plaintext highlighter-rouge">h
     * hint 4: so the function would be: hello_sleep()
     * hint 5: the camkes 'int' type maps to 'int' in c
     * hint 6: invoke a function in supplied driver the to set up the timer
-    * hint 7: look at https://github.com/sel4/camkes-tool/blob/master/docs/index.md#creating-an-application
+    * hint 7: look at https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
     */</span>
 </code></pre></div></div>
 <details>
@@ -530,7 +530,7 @@ lines if necessary.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 2, TASK 1: component instances */
     /* hint 1: a single TimerDTB component
     * hint 2: look at
-    * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+    * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
     */
 </code></pre></div></div>
 
@@ -552,7 +552,7 @@ connector.</p>
     /* hint 1: connect the dummy_source and timer interfaces
     * hint 2: the dummy_source should be the 'from' end
     * hint 3: look at
-    * https://github.com/seL4/camkes-tool/blob/master/docs/index.md#creating-an-application
+    * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
     */
 </code></pre></div></div>
 

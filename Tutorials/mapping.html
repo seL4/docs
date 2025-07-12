@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-11 03:41:34 +0000 -->
+<!-- Page last generated 2025-07-12 03:39:52 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -167,8 +167,8 @@
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
-  <li><a href="/Tutorials/setting-up">Set up your machine</a></li>
-  <li><a href="/Tutorials/capabilities">Capabilities tutorial</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
+  <li><a href="https://docs.sel4.systems/Tutorials/capabilities.html">Capabilities tutorial</a></li>
 </ol>
 
 <h2 id="initialising">Initialising</h2>
@@ -353,7 +353,7 @@ main@main.c:34 [Cond failed: error != seL4_NoError]
 paging structures. The value corresponds to the <code class="language-plaintext highlighter-rouge">libsel4</code> constant <code class="language-plaintext highlighter-rouge">SEL4_MAPPING_LOOKUP_NO_PD</code> which is
 the number of bits in the virtual address that could not be resolved due to missing paging structures.</p>
 
-<p><strong>Exercise</strong> Map in the <code class="language-plaintext highlighter-rouge">pd</code> structure using (<code class="language-plaintext highlighter-rouge">seL4_PageDirectory_Map</code>)[https://docs.sel4.systems/ApiDoc.html#map-5].</p>
+<p><strong>Exercise</strong> Map in the <code class="language-plaintext highlighter-rouge">pd</code> structure using (<code class="language-plaintext highlighter-rouge">seL4_PageDirectory_Map</code>)[https://docs.sel4.systems/projects/sel4/api-doc.html#map-5].</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO map a page directory object</span>
 </code></pre></div></div>
@@ -377,7 +377,7 @@ main@main.c:34 [Cond failed: error != seL4_NoError]
 <p>Note that in the above output, the number of failed bits has changed from <code class="language-plaintext highlighter-rouge">30</code> to <code class="language-plaintext highlighter-rouge">21</code>: this is because another
 9 bits could be resolved from the newly mapped page directory.</p>
 
-<p><strong>Exercise</strong> Map in the <code class="language-plaintext highlighter-rouge">pt</code> structure using <a href="https://docs.sel4.systems/ApiDoc.html#map-6"><code class="language-plaintext highlighter-rouge">seL4_PageTable_Map</code></a>.</p>
+<p><strong>Exercise</strong> Map in the <code class="language-plaintext highlighter-rouge">pt</code> structure using <a href="https://docs.sel4.systems/projects/sel4/api-doc.html#map-6"><code class="language-plaintext highlighter-rouge">seL4_PageTable_Map</code></a>.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO map a page table object</span>
 </code></pre></div></div>
@@ -417,7 +417,7 @@ that the fault occured on (address).</p>
 <h3 id="remap-a-page">Remap a page</h3>
 
 <p><strong>Exercise</strong> Fix the fault by remapping the page with <code class="language-plaintext highlighter-rouge">seL4_ReadWrite</code> permissions, using the
-<a href="https://docs.sel4.systems/ApiDoc.html#map-4">seL4_X86_Page_Map</a> invocation.</p>
+<a href="https://docs.sel4.systems/projects/sel4/api-doc.html#map-4">seL4_X86_Page_Map</a> invocation.</p>
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO remap the page</span>
 </code></pre></div></div>
 
