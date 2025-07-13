@@ -14,6 +14,7 @@ RUN apt-get update -q \
         python3-sh \
         python3-pip \
         python3-pyelftools \
+        rsync \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
     && pip3 install setuptools camkes-deps \
