@@ -135,13 +135,18 @@ _data/microkit_tutorial.yml: $(MICROKIT_TUT_SRC)/../build.sh
 .PHONY: microkit-tutorial
 microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
+VENDOR_CARGO = vendor/cargo
+$(VENDOR_CARGO):
+	cargo install mdbook@0.4.36 --root $@
+
 RUST_TUT_REPO = _repos/coliasgroup/sel4-rust-tutorial
 RUST_TUT_BUILD = $(RUST_TUT_REPO)/book/build
 RUST_TUT_DST = _processed/rust/tutorial
 RUST_TUT_FINAL_DST = projects/rust/tutorial
 
-$(RUST_TUT_DST): $(RUST_TUT_REPO) $(VENDOR_SEL4)
+$(RUST_TUT_DST): $(RUST_TUT_REPO) $(VENDOR_SEL4) $(VENDOR_CARGO)
 	cd $(RUST_TUT_REPO) && \
+	PATH="$(CURDIR)/$(VENDOR_CARGO)/bin:$(PATH)" \
 	MICROKIT_SDK="$(CURDIR)/$(VENDOR_MICROKIT)" \
 	SEL4_PREFIX="${CURDIR}/$(VENDOR_SEL4)" \
 	SEL4_INCLUDE_DIRS="${CURDIR}/$(VENDOR_MICROKIT)/$(MK_BOARD)/include" \
