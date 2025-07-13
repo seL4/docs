@@ -39,7 +39,7 @@ RUN mkdir -p /opt/microkit/sdk \
 
 RUN mkdir -p /opt/seL4 && ln -s /opt/microkit/sdk/board/qemu_virt_aarch64/debug/ /opt/seL4/libsel4
 
-RUN git config --global --add safe.directory '*'
+RUN git config --global --add safe.directory '/docs'
 
 # Jekyll will be serving on 127.0.0.1:4000
 EXPOSE 4000
