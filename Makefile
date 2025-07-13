@@ -71,23 +71,6 @@ $(REPOSITORIES):
 .PHONY: repos
 repos: $(REPOSITORIES)
 
-MICROKIT_VERSION=1.4.1
-VENDOR_SEL4 = vendor/seL4
-VENDOR_MICROKIT = vendor/microkit/sdk
-
-.PHONY: sdk
-sdk: $(VENDOR_SEL4) $(VENDOR_MICROKIT)
-
-# it is fine to use the Linux version on Mac, we're not going to run any binaries
-$(VENDOR_MICROKIT):
-	mkdir -p $@
-	curl -L https://github.com/seL4/microkit/releases/download/$(MICROKIT_VERSION)/microkit-sdk-$(MICROKIT_VERSION)-linux-x86-64.tar.gz | tar -xzf - -C $@ --strip-components=1
-
-MK_BOARD = board/qemu_virt_aarch64/debug
-$(VENDOR_SEL4): $(VENDOR_MICROKIT)
-	mkdir -p $@
-	ln -s ../../$</$(MK_BOARD)/ $@/libsel4
-
 # Tutorials
 
 TUTES_DST = _processed/tutes
@@ -135,22 +118,16 @@ _data/microkit_tutorial.yml: $(MICROKIT_TUT_SRC)/../build.sh
 .PHONY: microkit-tutorial
 microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
-VENDOR_CARGO = vendor/cargo
-$(VENDOR_CARGO):
-	cargo install mdbook@0.4.36 --root $@
-
 RUST_TUT_REPO = _repos/coliasgroup/sel4-rust-tutorial
-RUST_TUT_BUILD = $(RUST_TUT_REPO)/book/build
+RUST_TUT_BOOK = $(RUST_TUT_REPO)/book
+RUST_TUT_BUILD = $(RUST_TUT_BOOK)/build
 RUST_TUT_DST = _processed/rust/tutorial
 RUST_TUT_FINAL_DST = projects/rust/tutorial
 
-$(RUST_TUT_DST): $(RUST_TUT_REPO) $(VENDOR_SEL4) $(VENDOR_CARGO)
-	cd $(RUST_TUT_REPO) && \
-	PATH="$(CURDIR)/$(VENDOR_CARGO)/bin:$(PATH)" \
-	MICROKIT_SDK="$(CURDIR)/$(VENDOR_MICROKIT)" \
-	SEL4_PREFIX="${CURDIR}/$(VENDOR_SEL4)" \
-	SEL4_INCLUDE_DIRS="${CURDIR}/$(VENDOR_MICROKIT)/$(MK_BOARD)/include" \
-	make for-docsite
+$(RUST_TUT_DST): $(RUST_TUT_REPO)
+	SITE_URL="/projects/rust/tutorial/" \
+	RUSTDOC_URL="https://coliasgroup.github.io/seL4-rust-tutorial/rustdoc" \
+		make -C $(RUST_TUT_BOOK) build
 	rm -rf $(RUST_TUT_DST)
 	mkdir -p $(dir $(RUST_TUT_DST))
 	cp -rL $(RUST_TUT_BUILD) $(RUST_TUT_DST)
