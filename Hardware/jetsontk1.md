@@ -28,7 +28,7 @@ is a affordable embedded system developed by NVIDIA.
 
 * One Tegra Board. See [Jetson TK1](http://www.nvidia.com/object/jetson-tk1-embedded-dev-kit.html)
 * A working development environment. See the [set up
-  instructions](/projects/buildsystem/host-dependencies.html).
+  instructions](../projects/buildsystem/host-dependencies.html).
 
 ## Getting Started
 

@@ -32,7 +32,7 @@ a community-supported port.
 ### Requirements
 
 We suggest using the `arm-linux-gnueabi-` cross-compilers. Use
-[the instructions on getting a toolchain](/projects/buildsystem/host-dependencies.html).
+[the instructions on getting a toolchain](../projects/buildsystem/host-dependencies.html).
 
 ### Building
 

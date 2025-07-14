@@ -35,7 +35,7 @@ The `cmake-tool` directory has the following files of interest:
   Simply, this file includes `all.cmake`, under the assumption of a directory
   structure where the `cmake-tool` repository is in a directory named `tools`.
   To use this file, [project
-  manifests](/projects/buildsystem/repo-cheatsheet.html) are expected to create
+  manifests](repo-cheatsheet.html) are expected to create
   a symbolic link to this file, named `CMakeLists.txt`, at the top-level project
   directory.
 - `all.cmake`: A wrapper that includes `base.cmake`, `projects.cmake` and
@@ -283,7 +283,7 @@ all the files in `helpers/`. Notable functions are:
 
 ### Other provided helpers
 
-Projects such as [CAmkES](/CAmkES), the [CAmkES x86 VMM](/projects/camkes-vm/),
+Projects such as [CAmkES](../camkes/), the [CAmkES x86 VMM](../camkes-vm/),
 and [Rumprun](https://github.com/seL4/rumprun-sel4-demoapps) may provide
 additional helper functions to allow applications to configure themselves.
 Generally helper scripts will be called some variant of `helpers.cmake`, and

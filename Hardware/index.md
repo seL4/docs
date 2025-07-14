@@ -150,7 +150,7 @@ seL4 supports PC99-style Intel Architecture Platforms.
 Running seL4 in a simulator is a quick way to test it out and iteratively
 develop software. Note that feature support is then limited by the simulator.
 See the QEMU [Arm](qemu-arm-virt.html) and [RISCV](qemu-riscv-virt.html) targets
-and the [simulation instructions for sel4test](/projects/sel4test/#running-it)
+and the [simulation instructions for sel4test](../projects/sel4test/#running-it)
 for x86 for how to run seL4 using QEMU.
 
 ### Not in the lists above?

@@ -14,7 +14,7 @@ Windows host (although general idea should be similar).
 
 This guide assumes that your project is all set up and configured to build for
 x86. Read the [set up
-instructions](/projects/buildsystem/host-dependencies.html) otherwise.
+instructions](../../projects/buildsystem/host-dependencies.html) otherwise.
 
 ## Setting up a VM
 

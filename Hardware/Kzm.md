@@ -22,4 +22,4 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 **Support for this platform has since been removed**
 
 The KZM is deprecated, ARMv11 Hardware which was used for the original seL4 verification. The latest
-verification platform is the [SabreLite](/Hardware/sabreLite.html).
+verification platform is the [SabreLite](sabreLite.html).

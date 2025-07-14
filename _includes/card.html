@@ -11,7 +11,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 <div class="grid grid-cols-1 relative group {{ include.class }} {{centering}}">
   {% if include.icon %}
   <div class="absolute left-1/2">
-    {% if include.link %}<a href="{{ include.link }}">{% endif %}
+    {% if include.link %}<a href="{{ include.link | relative_url }}">{% endif %}
     <div class="absolute {{ icon_colour }} -top-8 left-1/2 -ml-8 p-4 rounded-full shadow-md">
       {% svg "{{icon}}" class="h-8 w-8" %}
     </div>
