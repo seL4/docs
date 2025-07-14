@@ -19,7 +19,7 @@ seL4 officially supports the use of Rust in userspace. This support entails:
 - Custom `rustc` target specifications for seL4 userspace ([JSON and docs](https://github.com/seL4/rust-sel4/tree/main/support/targets#readme))
 - Many more crates for use in seL4 userspace
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-y-24 gap-x-12 lg:gap-x-20 px-10 py-8 md:py-12 not-prose">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-20 px-10 py-8 md:py-12 not-prose">
 
   {% include card.html
      icon="arrow-right-end-on-rectangle"

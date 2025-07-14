@@ -11,7 +11,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 You might want to check out some of the following tutorials as well.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-y-24 gap-x-12 lg:gap-x-20 px-10 pt-8 py-12 sm:py-20 not-prose">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-20 px-10 pt-8 py-12 sm:py-20 not-prose">
   {% include card.html
      icon="puzzle-piece"
      title="Microkit tutorial"
