@@ -30,11 +30,13 @@ Hopefully most people will be in this category. Now that we've
 stable tag with all the features of "CAmkES Next", without the risk of
 api breaking changes. If you use repo, your manifest probably has a line
 resembling:
+
 ```xml
 <project name="camkes-tool.git" path="tools/camkes" revision="next">
 ```
 
 Change it to:
+
 ```xml
 <project name="camkes-tool.git" path="tools/camkes" revision="refs/tags/camkes-3.0.0">
 ```
@@ -48,11 +50,13 @@ You need to switch to the "master" branch. The "next" branch will
 continue to exist for a time for compatibility, but will no longer
 receive updates. If you use repo, your manifest probably has a line
 resembling:
+
 ```xml
 <project name="camkes-tool.git" path="tools/camkes" revision="next">
 ```
 
 Change it to:
+
 ```xml
 <project name="camkes-tool.git" path="tools/camkes">
 ```
@@ -72,11 +76,13 @@ That's fine! All the old versions of CAmkES will continue to be
 available. The latest release of this branch is
 [camkes-2.3.1](https://github.com/seL4/camkes-tool/releases/tag/camkes-2.3.1).
 If you use repo, your manifest probably had a line resembling:
+
 ```xml
 <project name="camkes-tool.git" path="tools/camkes">
 ```
 
 Change it to:
+
 ``` <project name="camkes-tool.git" path="tools/camkes"
 revision="refs/tags/camkes-2.3.1">
 ```
