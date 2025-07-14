@@ -32,8 +32,6 @@ RUN curl -sSf https://sh.rustup.rs \
 
 ENV PATH=/root/.cargo/bin:$PATH
 
-RUN cargo install mdbook@0.4.36
-
 RUN mkdir -p /opt/microkit/sdk \
     && curl -L https://github.com/seL4/microkit/releases/download/1.4.1/microkit-sdk-1.4.1-linux-x86-64.tar.gz \
         | tar -xzf - -C /opt/microkit/sdk --strip-components=1
