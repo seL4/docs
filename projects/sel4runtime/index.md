@@ -1,6 +1,6 @@
 ---
 title: The seL4 run-time
-repo: 'sel4proj/sel4runtime'
+repo: 'sel4/sel4runtime'
 include_file: README.md
 project: sel4runtime
 SPDX-License-Identifier: CC-BY-SA-4.0

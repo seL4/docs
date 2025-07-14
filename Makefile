@@ -74,7 +74,7 @@ repos: $(REPOSITORIES)
 # Tutorials
 
 TUTES_DST = _processed/tutes
-TUTES_REPO = _repos/sel4proj/sel4-tutorials
+TUTES_REPO = _repos/sel4/sel4-tutorials
 
 $(TUTES_DST):
 	mkdir -p $@
@@ -140,7 +140,7 @@ rust-tutorial: $(RUST_TUT_DST)
 _generate_api_pages: _repos/sel4/sel4
 	$(MAKE) markdown -C _repos/sel4/sel4/manual
 
-PROJECT_LIBS_REPO = _repos/sel4proj/sel4_projects_libs
+PROJECT_LIBS_REPO = _repos/sel4/sel4_projects_libs
 LIBSEL4VM_SRC = $(PROJECT_LIBS_REPO)/libsel4vm/docs
 LIBSEL4VM_DST = projects/virtualization/docs/api
 # Does not use wildcard, because _repos may not exist yet and the wildcard would then be empty.
