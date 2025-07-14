@@ -15,9 +15,8 @@ if [ ! -d "$1" ]; then
     exit 1
 fi
 
+TOC="$1/toc.js"
+
 LINK='<li style="margin-top: 3rem;" class="part-title"><a href="../">Back to seL4 docsite</a>'
 
-for FILE in "$1"/*.html "$1"/root-task/*.html "$1"/microkit/*.html; do
-  echo "injecting backlink: $FILE"
-  sed -i .bak "s|</li></ol>|</li>${LINK}</ol>|" "$FILE"
-done
+sed -i .bak "s|</li></ol>|</li>${LINK}</ol>|" "$TOC"
