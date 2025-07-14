@@ -17,7 +17,7 @@ seL4 officially supports the use of Rust in userspace. This support entails:
 - A runtime for [seL4 Microkit](../microkit) protection domains
   ([source](https://github.com/seL4/rust-sel4/tree/main/crates/sel4-microkit))
 - Custom `rustc` target specifications for seL4 userspace ([JSON and docs](https://github.com/seL4/rust-sel4/tree/main/support/targets#readme))
-- Many more crates for use in seL4 userspace
+- Many more crates for use in seL4 userspace ([Sources](https://github.com/seL4/rust-sel4/tree/main/crates/))
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-20 px-10 py-8 md:py-12 not-prose">
 
