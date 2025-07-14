@@ -14,8 +14,8 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Define an instance in the composition section of the ADL]({{ url }}#define-an-instance-in-the-composition-section-of-the-adl)
 - [Add a connection]({{ url }}#add-a-connection)
 - [Define an interface]({{ url }}#define-an-interface)
-- [Implement an RPC function]({{ url }}#implement-a-rpc-function)
-- [Invoke a RPC function]({{ url }}#invoke-a-rpc-function)
+- [Implement an RPC function]({{ url }}#implement-an-rpc-function)
+- [Invoke an RPC function]({{ url }}#invoke-an-rpc-function)
 
 {% assign url = "hello-camkes-2.html?tut_expand" %}
 
@@ -50,7 +50,7 @@ This guide provides links to CAmkES tutorial solutions as quick how-to reference
 - [Acknowledge an interrupt]({{ url }}#acknowledge-an-interrupt)
 - [Get a timer handler]({{ url }}#get-a-timer-handler)
 - [Start a timer]({{ url }}#start-a-timer)
-- [Implement an RPC interface]({{ url }}#implement-a-rpc-interface)
+- [Implement an RPC interface]({{ url }}#implement-an-rpc-interface)
 - [Set a timer interrupt]({{ url }}#set-a-timer-interrupt)
 - [Instantiate a TimerDTB component]({{ url }}#instantiate-a-timerdtb-component)
 - [Connect interfaces using the seL4DTBHardware connector]({{ url }}#connect-interfaces-using-the-sel4dtbhardware-connector)
