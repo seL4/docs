@@ -25,11 +25,15 @@ pins:
 
 (From right-to-left on the TK1 GPIO header we have GPIO0, GPIO1, GPIO2)
 
-NOTE: On the seL4 side, this may not be necessary as it will be able to
+{% include note.html %}
+On the seL4 side, this may not be necessary as it will be able to
 use GPIO-based chipselects.
+{% include endnote.html %}
 
-NOTE2: Justification for GPIO chipselects is that we have 2 CAN nodes
+{% include note.html %}
+Justification for GPIO chipselects is that we have 2 CAN nodes
 and only 1 HW chipselect, so had to do it this way.
+{% include endnote.html %}
 
 ## Option 1. Use our Linux image
 Grab the image at [tk1_can.img.gz] ([md5]). Make sure to verify against the
@@ -107,12 +111,14 @@ Get it here: [mcp251x.c](mcp251x.c)
 
 You want to replace the file in drivers/net/can/mcp251x.c
 
-NOTE: this is NOT the same as the file in mainline kernel, it has a hack
+{% include note.html %}
+This is NOT the same as the file in mainline kernel, it has a hack
 that fixes a problem I had with the device tree not recognising clock
 nodes.
 
 This means that this file will only work with an MCP251X that has a
 20MHz crystal!
+{% include endnote.html %}
 
 I've also added a lot of debugging information to the driver so that
 dmesg is a bit more helpful.

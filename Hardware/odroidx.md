@@ -27,7 +27,8 @@ seL4 supports the Odroid-X Exynos4412 board.
 
 {% include note.html  %}
 This board is discontinued by the manufacturer. The instructions here are
-provided to keep existing setups working.
+provided to keep existing setups working. See support for other more recent
+Odroid boards on [Supported platforms](./).
 {% include endnote.html %}
 
 ## Client setup
@@ -38,8 +39,10 @@ provided to keep existing setups working.
 1. RS232 or USB to UART converter
 1. USB OTG cable
 
-Note: The USB-UART converter that is shipped with the board requires a
+{% include note.html %}
+The USB-UART converter that is shipped with the board requires a
 Linux kernel version > 3.2
+{% include endnote.html %}
 
 ### Serial port setup
 
@@ -104,10 +107,9 @@ To boot using fastboot:
   1.  At the u-boot prompt, type fastboot
 
   2. On the client machine, run sudo fastboot devices to ensure that the device
-     has been recognised. The device should have the label "SMDKEXYNOS-01".
-
-      NOTE: fastboot fails silently if you do not have permissions
-      to access the device. Try running with sudo.
+     has been recognised. The device should have the label `SMDKEXYNOS-01`.
+     Note that fastboot fails silently if you do not have permissions to access
+     the device. In that case, try running with `sudo`.
 
   3.  On the client machine, run fastboot boot sel4-uImage
 

@@ -49,14 +49,20 @@ with TK1" />
  Going from a TK1-SOM, a pixhawk/IRIS
 and a daughterboard to a functioning system requires:
 
-- [Mounting the TK1 to the daughterboard](#mounting-the-tk1-to-the-daughterboard)
-- [Jumpering the UART level translators](#jumpering-the-uart-level-translators)
-- [Jumpering the RESET button](#jumpering-the-reset-button)
-- [Attaching the pixhawk power cable](#attaching-the-pixhawk-power-cable)
-- [Attaching the CAN bus cable](#attaching-the-can-bus-cable)
-- [Attaching the telemetry cable](#attaching-the-telemetry-cable)
-- [Connecting the power harness](#connecting-the-power-harness)
-- [Connecting the battery **OR** Connecting the external PSU](#connecting-the-battery-or-external-psu)
+- [Technical documentation](#technical-documentation)
+- [Connecting the Daughterboard](#connecting-the-daughterboard)
+  - [Mounting the TK1 to the daughterboard](#mounting-the-tk1-to-the-daughterboard)
+  - [Jumpering the UART level translators](#jumpering-the-uart-level-translators)
+  - [Jumpering the RESET button](#jumpering-the-reset-button)
+  - [Attaching the pixhawk power cable](#attaching-the-pixhawk-power-cable)
+  - [Attaching the CAN bus cable](#attaching-the-can-bus-cable)
+  - [Attaching the telemetry cable](#attaching-the-telemetry-cable)
+  - [Connecting the power harness](#connecting-the-power-harness)
+  - [Connecting the battery OR external PSU](#connecting-the-battery-or-external-psu)
+  - [Everything connected](#everything-connected)
+  - [Debugging output and finding grounds](#debugging-output-and-finding-grounds)
+- [Errata](#errata)
+  - [Technical errata for R3A, to be fixed next revision](#technical-errata-for-r3a-to-be-fixed-next-revision)
 
 ### Mounting the TK1 to the daughterboard
  Before mounting the
@@ -81,7 +87,8 @@ Firmly press both of the TK1 halves into their sockets. Try to use
 unpopulated parts of the PCB as 'finger positions' to avoid damaging
 components or connectors.
 
-Note: Standoffs can optionally be added in this step for extra support
+{% include note.html %}
+Standoffs can optionally be added in this step for extra support
 (the friction fit supplied by the TK1 connectors should be more than
 sufficient in most cases). Each module has a single standoff point for
 an M2.5 screw, bolt, and standoff:
@@ -89,6 +96,7 @@ an M2.5 screw, bolt, and standoff:
 <img style="width: 50%" src="standoff.jpg" alt="Standoff fitted" />
 
 The end result should look like the image under [With TK1](#with-tk1) near the top of this page
+{% include endnote.html %}
 
 ### Jumpering the UART level translators
  For the daughterboard to do
@@ -146,11 +154,13 @@ Your end result is:
 
 <img style="width: 50%" src="reset_jumpered.jpg" alt="Reset pin jumpered" />
 
-Note: As this reset switch is just a momentary short to ground, it is
+{% include note.html %}
+As this reset switch is just a momentary short to ground, it is
 very easy to make your own reset switch that may be larger or more
 conveniently mounted elsewhere on the quadcopter. Essentially you just
 need a momentary switch between the TK1 pin and ground - the signal is
 debounced etc on the TK1.
+{% include endnote.html %}
 
 ### Attaching the pixhawk power cable
  --(The pixhawk power cable is

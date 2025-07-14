@@ -63,11 +63,14 @@ settings), **use a 1V8 USB-TTL cable** and plug it straight into the
 TK1 as usual. This will be fixed in a future revision.
 
 ## TK1 SOC Connections
- Useful for writing drivers - this is a list of
+
+Useful for writing drivers - this is a list of
 which pins on the board correspond to which SOC pins:
 
-Note: All I2C signals operate at 3V3 on their 0.1" headers, except
+{% include note.html %}
+All I2C signals operate at 3V3 on their 0.1" headers, except
 I2C_CAM which is selectable from 1V8<->3V3 in software.
+{% include endnote.html %}
 
 |  PIN         |  BALL   |  PERIPHERAL ID   |
 |--------------|---------|------------------|

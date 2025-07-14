@@ -37,36 +37,43 @@ board](https://reference.digilentinc.com/reference/programmable-logic/genesys-2/
 ## Running seL4test
 
 Synthesising hardware for the Genesys 2 requires a Vivado Enterprise license.
-Unfortunately there are no prebuilt bitstreams available. Vivado 2023.2 is recommended.
+Unfortunately there are no prebuilt bitstreams available. Vivado 2023.2 is
+recommended.
 
-1. Synthesise the bitstream from source following the instructions from the [Cheshire
- Manual](https://pulp-platform.github.io/cheshire/tg/xilinx/). Follow setup instructions then run
+1. Synthesise the bitstream from source following the instructions from the
+   [Cheshire Manual](https://pulp-platform.github.io/cheshire/tg/xilinx/).
+   Follow setup instructions then run
 
-   ```
+   ```sh
    make chs-xilinx-genesys2
    ```
 
-2. Program the FPGA using the Vivado Hardware Manager. Open the hardware manager GUI and choose
-`/path/to/cheshire/target/xilinx/out/cheshire.genesys2.bit` as the bitstream file in the "Program
-Device" dialog.
+2. Program the FPGA using the Vivado Hardware Manager. Open the hardware manager
+   GUI and choose `/path/to/cheshire/target/xilinx/out/cheshire.genesys2.bit` as
+   the bitstream file in the "Program Device" dialog.
 
 3. Prepare a device tree blob for OpenSBI.
+
    ```sh
    make sw/boot/cheshire.genesys2.dtb
    ```
 
-4. In a new terminal, connect an OpenOCD session to the board over the JTAG micro-USB port.
+4. In a new terminal, connect an OpenOCD session to the board over the JTAG
+   micro-USB port.
+
    ```sh
    openocd -f /path/to/cheshire/util/openocd.genesys2.tcl
    ```
 
 5. In another terminal, connect to OpenOCD using GDB from the RISC-V toolchain.
+
    ```sh
    riscv64-unknown-elf-gdb --eval-command "target extended-remote localhost:3333"
    ```
 
 6. Use GDB to reset the board, then load the DTB, load OpenSBI and allow it to run.
-   ```sh
+
+   ```gdb
    # Reset CPU and halt
    (gdb) monitor reset halt
 
@@ -87,41 +94,52 @@ Device" dialog.
    ```
 
 7. Finally, load the seL4test binary, set the PC and run.
-   ```sh
+
+   ```gdb
    (gdb) restore /path/to/sel4test-driver-image-riscv-cheshire binary 0x80200000
    (gdb) j *0x80200000
    ```
 
-### Notes
+## Booting via GDB
 
-This process can be expedited by using a GDB command file. If you paste the below into a file, it
-may be used as `riscv64-unknown-elf-gdb --command=/path/to/run_sel4test.gdb` to complete step 6
-and 7, up to the final jump which must be done manually:
-   `run_sel4test.gdb`
-   ```gdb
-   target extended-remote localhost:3333
-   monitor reset halt
-   restore /path/to/cheshire.dtb binary 0x70000000
-   set $a0=0x70000000
-   set $a1=0
-   restore /path/to/sel4test-driver-image-riscv-cheshire binary 0x80200000
-   load /path/to/opensbi
-   c
-   ```
+{% include note.html %}
+While it is possible to boot via u-boot as with most other platforms supported,
+it is easier and far faster to follow the following steps to boot with GDB.
+{% include endnote.html %}
+
+This process can be expedited by using a GDB command file. If you paste the
+below into a file, it may be used as `riscv64-unknown-elf-gdb
+--command=/path/to/run_sel4test.gdb` to complete step 6 and 7, up to the final
+jump which must be done manually:
+
+
+`run_sel4test.gdb`
+
+```gdb
+target extended-remote localhost:3333
+monitor reset halt
+restore /path/to/cheshire.dtb binary 0x70000000
+set $a0=0x70000000
+set $a1=0
+restore /path/to/sel4test-driver-image-riscv-cheshire binary 0x80200000
+load /path/to/opensbi
+c
+```
 
 Finish with
-```
+
+```gdb
    (gdb) j *0x80200000
 ```
 
-If you encounter issues such as OpenOCD failing to connect, you should attempt to reset the JTAG
-connection with `lsusb`. The JTAG device should have a name similar to `Future Technology Devices
-International, Ltd FT2232C/D/H Dual UART/FIFO IC`. Note the `Bus XXX Device YYY` next to the
-device and reset it with
-   ```sh
-   sudo usbreset XXX/YYY
-   ```
+## Notes
 
+If you encounter issues such as OpenOCD failing to connect, you should attempt
+to reset the JTAG connection with `lsusb`. The JTAG device should have a name
+similar to `Future Technology Devices International, Ltd FT2232C/D/H Dual UART/FIFO IC`.
+Note the `Bus XXX Device YYY` next to the device and reset it
+with
 
-Note: while it is possible to boot via u-boot as with most other platforms supported, it is easier and
-far faster to follow the following steps to boot with GDB.
+```sh
+sudo usbreset XXX/YYY
+```

@@ -8,12 +8,13 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 ## Adding a second UART connector
 
+### The issue
 
-### The issue:
-Note: if you are using our
-[IO-Daughterboard](../DaughterBoard) , this is uneccessary;
+{% include note.html %}
+If you are using our [IO-Daughterboard](../DaughterBoard/), this is unnecessary;
 instead a straight-line passthrough jumper is used to hook up to level
 converters on the daughterboard.
+{% include endnote.html %}
 
 The TK1-SOM has a secondary UART connection, however it's a bit of a
 pain to get to as a normal jumper won't fit sandwiched between the
@@ -23,8 +24,7 @@ because of the fan & heatsink (below right).
 <img style="width: 30%" src="jumper.jpg" alt="jumper" title="jumper" />
 <img style="width: 30%" src="heatsink.jpg" alt="heatsink" title="heatsink" />
 
-### What it looks like:
-
+### What it looks like
 
 Viewed from the bottom of the CPU board, the secondary UART is the 4
 unpopulated pins just under the ethernet jack pins (see below):
@@ -32,7 +32,8 @@ unpopulated pins just under the ethernet jack pins (see below):
 <img style="width: 30%" src="connector.jpg" alt="connector" title="connector" />
 
 ### Right-angle connectors?
- Initially I looked at normal right-angle
+
+Initially I looked at normal right-angle
 0.1" headers, but they don't fit in either direction!
 
 <img style="width: 30%" src="clearance.jpg" alt="clearance" title="clearance" />
