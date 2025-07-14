@@ -18,28 +18,28 @@ can be used to test a baseline level of configuration correctness.*
 
 ## Generic configuration options
 
-{% include component_list.md project='sel4' list='configurations' type='generic' code=true status="Value" %}
+{% include config_list.md project='sel4' type='generic' %}
 
 ## Scheduling configuration options
 
-{% include component_list.md project='sel4' list='configurations' type='scheduling' code=true status="Value" %}
+{% include config_list.md project='sel4' type='scheduling' %}
 
 ## Debug configuration options
 
-{% include component_list.md project='sel4' list='configurations' type='debug' code=true status="Value" %}
+{% include config_list.md project='sel4' type='debug' %}
 
 ## Performance analysis and profiling configuration options
 
-{% include component_list.md project='sel4' list='configurations' type='profiling' code=true status="Value" %}
+{% include config_list.md project='sel4' type='profiling' %}
 
 ## Target hardware architecture/platform options
 
-{% include component_list.md project='sel4' list='configurations' type='platform' code=true status="Value" %}
+{% include config_list.md project='sel4' type='platform' %}
 
 ### Arm
 
-{% include component_list.md project='sel4' list='configurations' type='platform-arm' code=true status="Value" %}
+{% include config_list.md project='sel4' type='platform-arm' %}
 
 ### x86
 
-{% include component_list.md project='sel4' list='configurations' type='platform-x86' code=true status="Value" %}
+{% include config_list.md project='sel4' type='platform-x86' %}

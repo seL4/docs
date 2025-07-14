@@ -181,9 +181,7 @@ easier to configure a build of seL4test that enables the right coverage of
 tests, seL4test provides a selection of meta-configuration options, listed
 below.
 
-{% include component_list.md
-           project='sel4test' list='configurations'
-           status='Value' code='true' %}
+{% include config_list.md project='sel4test' %}
 
 For an overview of the CMake build system and further configuration options for
 the kernel, including configuring for cross compilation (e.g., targeting Arm or
@@ -209,7 +207,7 @@ expected set of system resources required for it to run. There are currently two
 test environments, listed below. It is possible to define more, for instance for
 different system dependencies of the tests.
 
-{% include component_list.md project='sel4test' type='test-environment' no_status=true %}
+{% include component_list.md project='sel4test' type='test-environment' no_status=true code=false %}
 
 
 ### Test declarations

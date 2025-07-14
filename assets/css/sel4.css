@@ -121,25 +121,29 @@ layout: none
   @apply border-l-3 pl-4 border-gray-200 dark:border-gray-700;
 }
 
+@utility code-span {
+  @apply bg-gray-200
+         border-gray-300
+         text-f_neutral-800
+         dark:bg-gray-800
+         dark:border-gray-700
+         dark:text-f_neutral-200
+         border-1
+         font-normal
+         rounded-lg
+         px-1.5
+         pb-px
+         after:content-none
+         before:content-none;
+}
+
 @utility theprose-nodark {
   @apply prose prose-sm lg:prose-base max-w-(--breakpoint-md)
          prose-pre:bg-slate-800
          prose-p:leading-5 prose-li:leading-5 lg:prose-p:leading-6 lg:prose-li:leading-6
          prose-li:marker:text-lightercol
          prose-li:[li_li]:my-1.5
-         prose-inline-code:bg-gray-200
-         prose-inline-code:border-gray-300
-         prose-inline-code:text-f_neutral-800
-         prose-inline-code:dark:bg-gray-800
-         prose-inline-code:dark:border-gray-700
-         prose-inline-code:dark:text-f_neutral-200
-         prose-inline-code:border-1
-         prose-inline-code:font-normal
-         prose-inline-code:rounded-lg
-         prose-inline-code:px-1.5
-         prose-inline-code:pb-px
-         prose-inline-code:after:content-none
-         prose-inline-code:before:content-none
+         prose-inline-code:code-span
          prose-h4:text-[1.1em]
          [&_details]:border-l-light;
 }

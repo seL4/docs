@@ -94,7 +94,8 @@ space_ means that the benchmark is not instrumenting the kernel. This means it
 measures unmodified kernel code, but may consequently have lower precision
 than some of the other benchmarks.
 
-{% include component_list.md project='sel4bench' type='sel4bench-application' no_status=true %}
+{% include config_list.md project='sel4bench' list='components'
+           type='sel4bench-application' code=false no_status=true %}
 
 ## Configuration Options
 
@@ -103,8 +104,7 @@ reported by the benchmarks. Some benchmarks will only work in certain
 configurations. To make it easier to configure a build of seL4bench that has the
 right configuration values set, use the meta-configuration options listed below.
 
-{% include component_list.md
-           project='sel4bench' list='configurations' status='Value' code=true %}
+{% include config_list.md project='sel4bench' %}
 
 ## Implementation
 
