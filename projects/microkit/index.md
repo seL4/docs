@@ -13,7 +13,7 @@ security and performance.
 The Microkit is distributed as an SDK that integrates with the build system of
 your choice, significantly reducing the barrier to entry for new users of seL4.
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-20 px-10 py-8 md:py-12 not-prose">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12 md:gap-x-20 px-2 sm:px-10 py-8 md:py-12 not-prose">
 
   {% include card.html
      icon="arrow-right-end-on-rectangle"
