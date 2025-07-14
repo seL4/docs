@@ -67,7 +67,7 @@ The dependencies listed in our docker files
 a Debian Bullseye installation or later. You can refer to this repository for an
 up-to-date list of base build dependencies. Specifically refer to the
 dependencies listed in the [CAmkES
-Dockerfile](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/camkes.dockerfile).
+docker setup](https://github.com/seL4/seL4-CAmkES-L4v-dockerfiles/blob/master/scripts/camkes.sh).
 
 {% include endtab.html %}
 
