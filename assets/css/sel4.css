@@ -13,6 +13,8 @@ layout: none
 
 @plugin "@tailwindcss/typography";
 
+@custom-variant has-hover (@media (hover: hover));
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -222,3 +224,8 @@ summary {
   }
 }
 
+@utility code-copy {
+  @apply absolute top-2 right-2 px-1 bg-gray-100/10 hover:bg-gray-100/40 rounded
+         text-gray-300 has-hover:hidden group-hover:block
+         text-tiny font-sans cursor-pointer;
+}
