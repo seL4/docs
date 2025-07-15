@@ -328,6 +328,36 @@ IGNORE_URLS += https://digilent.com/reference/programmable-logic/genesys-2/refer
 IGNORE_URLS += https://reference.digilentinc.com/reference/programmable-logic/genesys-2/reference-manual
 IGNORE_URLS += https://www.microchip.com/en-us/development-tool/MPFS-ICICLE-KIT-ES
 IGNORE_URLS += https://www.microchip.com/en-us/products/fpgas-and-plds/system-on-chip-fpgas/polarfire-soc-fpgas.*
+IGNORE_URLS += https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/ek-z7-zc706-g.html
+IGNORE_URLS += https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/ek-u1-zcu102-g.html
+IGNORE_URLS += https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/zcu106.html
+# link checker complains about missing #target, but it exists and works
+IGNORE_URLS += https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html
+# link checker chrashes on #target reference for PPF in rust tutorial
+IGNORE_URLS += https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf
+
+# GitHub links with dynamic internal targets such as #L12 fail in the target link check
+# The #target is interpreted as comment by "make", which is what we want -- the link checker has no option
+# to ignore specific targets, but we still want to know what the original target was.
+IGNORE_URLS += https://github.com/seL4/seL4/blob/master/libsel4/sel4_arch_include/ia32/sel4/sel4_arch/syscalls.h#L621
+IGNORE_URLS += https://github.com/seL4/seL4/blob/master/libsel4/mode_include/32/sel4/shared_types.bf#L11
+IGNORE_URLS += https://github.com/seL4/seL4/blob/master/src/arch/arm/config.cmake#L21
+IGNORE_URLS += https://github.com/seL4/seL4/blob/master/src/arch/x86/config.cmake#L15
+IGNORE_URLS += https://github.com/seL4/seL4/blob/master/src/arch/riscv/config.cmake#L15
+IGNORE_URLS += https://github.com/sel4/camkes-vm-apps/blob/master/apps/Arm/vm_minimal/tx2/devices.camkes#L40
+IGNORE_URLS += https://github.com/seL4/camkes-vm-examples/blob/master/apps/x86/optiplex9020/optiplex9020.camkes#L46
+IGNORE_URLS += https://github.com/u-boot/u-boot/blob/8937bb265a7f2251c1bd999784a4ef10e9c6080d/board/xilinx/zynqmp/zynqmp.c#L234
+IGNORE_URLS += https://github.com/u-boot/u-boot/blob/8937bb265a7f2251c1bd999784a4ef10e9c6080d/board/xilinx/zynqmp/zynqmp.c#L234
+IGNORE_URLS += https://github.com/seL4/microkit/blob/main/docs/manual.md#limits
+IGNORE_URLS += https://github.com/seL4/rust-sel4/blob/main//support/targets#readme
+IGNORE_URLS += https://github.com/seL4/rust-sel4/tree/main/support/targets#readme
+IGNORE_URLS += https://github.com/seL4/microkit/blob/b8cf3094ba08b37198b1943ec832c3a1168f4409/libmicrokit/include/microkit.h#L14C22-L14C38
+IGNORE_URLS += https://github.com/seL4/microkit/blob/b8cf3094ba08b37198b1943ec832c3a1168f4409/libmicrokit/include/microkit.h#L16C28-L16C44
+IGNORE_URLS += https://github.com/coliasgroup/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/docker/Dockerfile#L94-L108
+IGNORE_URLS += https://github.com/coliasgroup/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/mk/root-task.mk#L31-L36
+IGNORE_URLS += https://github.com/coliasgroup/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/.cargo/config.toml#L8
+IGNORE_URLS += https://github.com/seL4/seL4/blob/b63043c41a5db1f64253ea98b104eab54c256c56/include/benchmark/benchmark.h#L63
+IGNORE_URLS += https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator
 
 sep:= /,/
 empty:=
@@ -336,9 +366,9 @@ IGNORE_URLS:= $(subst /,\/,$(IGNORE_URLS))
 IGNORE_EXP:= $(subst $(space),$(sep),$(IGNORE_URLS))
 
 HTMLPROOFEROPT := --swap-urls '^https\://docs.sel4.systems:http\://localhost\:4000'
-HTMLPROOFEROPT += --enforce-https=false --only-4xx --disable-external=false
+HTMLPROOFEROPT += --enforce-https=false --disable-external=false
 HTMLPROOFEROPT += --ignore-urls '/$(IGNORE_EXP)/'
-HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/,/rust\/tutorial\/404|print/,/projects.rust.tutorial.microkit.shared-memory.*/,/tutorial.root-task.spawn-thread.html/"
+HTMLPROOFEROPT += --ignore-files "/.*rustdoc.*/,/rust\/tutorial\/404|print/,/projects.rust.tutorial.microkit.shared-memory.*/"
 HTMLPROOFEROPT += --assume-extension ""
 HTMLPROOFEROPT += --ignore-status-codes 429
 # HTMLPROOFEROPT += --log-level debug
