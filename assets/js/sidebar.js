@@ -90,7 +90,6 @@
 
     tabGroups.forEach(function (group) {
         var children = group.children;
-        console.log(children[1]);
         children[1].classList.add('active'); // Activate the first tab by default
         children[2].classList.remove('hidden'); // Show the first tab
     });
@@ -105,7 +104,6 @@
 
             for (let tab of children) {
                 if (tab.classList.contains('tab-header')) {
-                    console.log('deactivating tab', tab);
                     tab.classList.remove('active');
                     tab.nextElementSibling.classList.add('hidden');
                 }
