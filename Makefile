@@ -118,7 +118,7 @@ _data/microkit_tutorial.yml: $(MICROKIT_TUT_SRC)/../build.sh
 .PHONY: microkit-tutorial
 microkit-tutorial: $(MICROKIT_TUT_DST_FILES) _data/microkit_tutorial.yml
 
-RUST_TUT_REPO = _repos/coliasgroup/sel4-rust-tutorial
+RUST_TUT_REPO = _repos/sel4/sel4-rust-tutorial
 RUST_TUT_BOOK = $(RUST_TUT_REPO)/book
 RUST_TUT_BUILD = $(RUST_TUT_BOOK)/build
 RUST_TUT_DST = _processed/rust/tutorial
@@ -126,7 +126,7 @@ RUST_TUT_FINAL_DST = projects/rust/tutorial
 
 $(RUST_TUT_DST): $(RUST_TUT_REPO)
 	SITE_URL="/projects/rust/tutorial/" \
-	RUSTDOC_URL="https://coliasgroup.github.io/seL4-rust-tutorial/rustdoc" \
+	RUSTDOC_URL="https://sel4.github.io/seL4-rust-tutorial/rustdoc" \
 		make -C $(RUST_TUT_BOOK) build
 	rm -rf $(RUST_TUT_DST)
 	mkdir -p $(dir $(RUST_TUT_DST))
@@ -353,9 +353,9 @@ IGNORE_URLS += https://github.com/seL4/rust-sel4/blob/main//support/targets#read
 IGNORE_URLS += https://github.com/seL4/rust-sel4/tree/main/support/targets#readme
 IGNORE_URLS += https://github.com/seL4/microkit/blob/b8cf3094ba08b37198b1943ec832c3a1168f4409/libmicrokit/include/microkit.h#L14C22-L14C38
 IGNORE_URLS += https://github.com/seL4/microkit/blob/b8cf3094ba08b37198b1943ec832c3a1168f4409/libmicrokit/include/microkit.h#L16C28-L16C44
-IGNORE_URLS += https://github.com/coliasgroup/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/docker/Dockerfile#L94-L108
-IGNORE_URLS += https://github.com/coliasgroup/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/mk/root-task.mk#L31-L36
-IGNORE_URLS += https://github.com/coliasgroup/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/.cargo/config.toml#L8
+IGNORE_URLS += https://github.com/seL4/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/docker/Dockerfile#L94-L108
+IGNORE_URLS += https://github.com/seL4/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/mk/root-task.mk#L31-L36
+IGNORE_URLS += https://github.com/seL4/seL4-rust-tutorial-code/blob/42d026476c7da08aa84ce17b99ab56dae37ff227/.cargo/config.toml#L8
 IGNORE_URLS += https://github.com/seL4/seL4/blob/b63043c41a5db1f64253ea98b104eab54c256c56/include/benchmark/benchmark.h#L63
 IGNORE_URLS += https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#cache-accelerator
 
