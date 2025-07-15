@@ -137,14 +137,14 @@ volatile pointers for accessing shared memory. This is no longer the
 case, and components with dataport interfaces connected with
 seL4SharedData must explicitly insert barriers around dataport access to
 ensure the desired memory access ordering.
-[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-dataports)
+[Read more in the manual.](../../projects/camkes/manual.html#an-example-of-dataports)
 
 ### Custom Attribute Types
 
 
 You can now define custom types for attributes in CAmkES ADL. Custom
 types resemble structs and arrays in C.
-[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#an-example-of-structs-and-arrays-for-collections)
+[Read more in the manual.](../../projects/camkes/manual.html#an-example-of-structs-and-arrays-for-collections)
 
 ### Hierarchical Component Syntax Change
 
@@ -158,7 +158,7 @@ of it sub-components has changed.
 
 Binary Semaphores have been added as a new synchronization primitive.
 This is in addition to the existing primitives: semaphores and mutexes.
-[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#synchronization-primitives)
+[Read more in the manual.](../../projects/camkes/manual.html#synchronization-primitives)
 
 ### Cache Accelerator
 
@@ -181,4 +181,4 @@ python2 and python3.
 The internals of the CAmkES parser have been rewritten to be easier to
 read and maintain. The parser is structured as a pipeline of
 transformations.
-[Read more in the manual.](https://github.com/seL4/camkes-tool/blob/camkes-3.0.0/docs/index.md#parser-internals)
+[Read more in the manual.](../../projects/camkes/manual.html#parser-internals)

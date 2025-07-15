@@ -52,8 +52,7 @@ Using seL4 version 8.0.0
 - Added "hardware_cached" attribute to hardware dataports
 
     This feature had been added to camkes-2.x.x but hadn't been
-    forward ported to camkes-3.x.x. documentation:
-    <https://github.com/seL4/camkes-tool/blob/master/docs/index.md#cached-hardware-dataports>
+    forward ported to camkes-3.x.x. Documentation in the [manual](../../projects/camkes/manual.html#cached-hardware-dataports)
 
 # Known issues
 
