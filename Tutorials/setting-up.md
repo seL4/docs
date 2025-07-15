@@ -25,8 +25,8 @@ To install run:
 
 <details markdown='1'>
 <summary>More on Repo</summary>
-<br>
-[More details about on installing Repo](https://source.android.com/setup/develop#installing-repo).
+
+[More details about on installing Repo](https://gerrit.googlesource.com/git-repo#install).
 
 [seL4 Repo cheatsheet](../projects/buildsystem/repo-cheatsheet.html)
 </details>
@@ -55,7 +55,6 @@ sudo usermod -aG docker $(whoami)
 
 <details markdown='1'>
   <summary>More on Docker</summary>
-  <br>
 
   **Available images**
 
