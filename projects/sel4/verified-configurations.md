@@ -16,7 +16,7 @@ Questions](https://sel4.systems/About/FAQ.html#verification) also as a section
 on the formal verification of seL4.
 
 The formal proofs for seL4 are hosted at <https://github.com/seL4/l4v>.  They
-are written in the [Isabelle/HOL](http://isabelle.in.tum.de) theorem prover. See
+are written in the [Isabelle/HOL](https://isabelle.in.tum.de) theorem prover. See
 the [README](https://github.com/seL4/l4v/) file in the l4v repository for build
 and setup instructions if you want to run and check the proofs against a
 specific version and configuration of seL4.
