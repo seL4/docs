@@ -18,9 +18,9 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 # TK1 som
 
-The TK1-SOM from Colorado engineering is a small form-factor system
-based on the NVIDIA Tegra K1. Details and ordering are at
-<https://tk1som.com/products/tk1-som>
+The [TK1-SOM from Colorado
+engineering](https://coloradoengineering.com/products/tk1-som-2gb/) is a small
+form-factor system based on the NVIDIA Tegra K1.
 
 {% include hw-info.html %}
 
