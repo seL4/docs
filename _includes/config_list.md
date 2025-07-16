@@ -56,7 +56,7 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
   <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
 {%- capture link_text %}{{component.display_name_url}}{% endcapture %}
 {%- capture display_text %}{{code}}{{component.display_name}}{{endcode}}{% endcapture %}
-    <span class="font-semibold">{% include cond-wrap-link.md text=display_text link=link_text %}</span>
+    <div class="font-semibold">{% include cond-wrap-link.md text=display_text link=link_text %}</div>
   </div>
   <div class="prose-p:m-0 prose-p:p-0">
     {{component.description | markdownify}}
