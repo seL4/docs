@@ -139,8 +139,8 @@ seL4 supports PC99-style Intel Architecture Platforms.
 
 | Platform              | Arch | Virtualisation | IOMMU | Verification Status                  |
 | -                     |  -   | -              | -     | -                                    |
-| [PC99 (32-bit)](IA32.html) | x86  | VT-X           | VT-D  | Unverified                        |
-| [PC99 (64-bit)](IA32.html) | x64  | VT-X           | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] |
+| [PC99 (32-bit)](IA32.html) | x86  | VT-X      | VT-D  | Unverified                        |
+| [PC99 (64-bit)](X64.html)  | x64  | VT-X      | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] |
 
 [X64]: {{ '/projects/sel4/verified-configurations.html#x64' | relative_url }}
 

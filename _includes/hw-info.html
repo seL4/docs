@@ -36,7 +36,12 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 </td>
 </tr>
 <tr>
-<td>seL4 SMMU support</td>
+{%- if page.platform == "PC99" %}
+{%- assign SMMU = "IOMMU (VT-d)" %}
+{%- else %}
+{%- assign SMMU = "SMMU" %}
+{%- endif %}
+<td>seL4 {{SMMU}} support</td>
 <td>
 {%- if page.iommu %}
 {%-   if page.iommu == "limited" %}
