@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Spawning a Task (Challenge) - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="spawning-a-task-challenge"><a class="header" href="#spawning-a-task-challenge">Spawning a Task (Challenge)</a></h1>
+<p>This final chapter of Part I contains a more open-ended and challenging exercise.
+We start with an example that spawns an entire new process, which, in the context of low-level seL4 userspace, is often called a <em>task</em>:</p>
+<pre><code>cd workspaces/root-task/spawn-task
+make simulate
+</code></pre>
+<p>Similarly to what we saw in <a href="spawn-thread.html">Chapter 6 (Spawning a Thread)</a>, the code in this example is more low-level and complex compared to what you have seen in code that leverages <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h"><code>&lt;sel4utils/process.h&gt;</code></a>.
+Again, our code here is more like spawning a task using <code>&lt;sel4/sel4.h&gt;</code> alone.</p>
+<p>This example consists of two programs.
+The <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/src/main.rs"><code>spawn-task</code></a> crate is the root task, and the <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/child/src/main.rs"><code>spawn-task-child</code></a> crate is the child task.</p>
+<p>The child task does not spawn in any standard sort of environment, so is includes its own ad-hoc Rust language runtime in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/child/src/runtime.rs">child/src/runtime.rs</a>, complete with thread-local storage, a global heap allocator, and exception handling.
+This runtime is built using a few Rust langauge runtime building block crates:</p>
+<ul>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_runtime_common/index.html"><code>sel4-runtime-common</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_initialize_tls/index.html"><code>sel4-initialize-tls</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_dlmalloc/index.html"><code>sel4-dlmalloc</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_stack/index.html"><code>sel4-stack</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_panicking/index.html"><code>sel4-panicking</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_panicking_env/index.html"><code>sel4-panicking-env</code></a></li>
+</ul>
+<p>This minimal, ad-hoc language runtime is a neat, instructive piece of code.
+It shows how one can build a new Rust language runtime out of the building blocks provided by the <a href="https://github.com/seL4/rust-sel4">rust-sel4</a> project.</p>
+<p>Explore the <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/src">root task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/child/src">child task</a>.</p>
+<p>Right now, all the child task does is send a test message over an endpoint back to the root task.
+The challenge in this chapter, <a href="#step-7e-challenge">step 7.E</a>, is to extend the root task so that it sets up the child task to be able to interact with the serial device, and to extend the child task to implement the same echo loop as in [./serial-device.html#step-5h].
+Steps <a href="#step-7a">7.A</a>, <a href="#step-7b">7.B</a>, <a href="#step-7c">7.C</a>, and <a href="#step-7d">7.D</a>, which are not exercises, make some incremental extensions towards those goals to help you get started.</p>
+<h2 id="step-7a"><a class="header" href="#step-7a">Step 7.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('73b4d16c157a57c029da1b8e47ea94748a1a08d8')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/73b4d16c157a57c029da1b8e47ea94748a1a08d8"> <i class="fa fa-github"></i> </a></a></h2>
+<p>This step extends the <code>ObjectAllocator</code> type in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/bb8a992c4b3944f2a93fdd303921d4dba2002b4e/workspaces/root-task/spawn-task/src/object_allocator.rs">workspaces/root-task/spawn-task/src/object_allocator.rs after 7.B</a> with the <code>recklessly_allocate_at()</code> method.
+This method allocates an object according to the <code>blueprint</code> parameter at the given physical address <code>paddr</code>.
+Instead of just allocating the object from the largest kernel untyped like the <code>allocate()</code> method does, this method searches through the bootinfo to find the initial untyped capability whose corresponding untyped object contains <code>paddr</code>, allocates dummy objects from this untyped object until its watermark reaches <code>paddr</code>, and then allocates the desired object.
+<code>recklessly_allocate_at()</code>'s procedure is similar to that which we followed in <a href="./serial-device.html#step-5c">step 5.C</a>.</p>
+<p>This implementation is "reckless" because it modifies the state of the untyped capability it allocates from (allocating from it and changing its watermark) without keeping track of having done so.
+So, subsequent calls for <code>paddr</code>s contained in the same initial untyped would fail or, worse, misbehave.
+However, we expect to only need to call it once, so we are okay with this caveat.</p>
+<p>In <a href="#step-7e-challenge">step 7.E</a>, you be able to use this method to allocate the serial device MMIO register frame.</p>
+<h2 id="step-7b"><a class="header" href="#step-7b">Step 7.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('bb8a992c4b3944f2a93fdd303921d4dba2002b4e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/bb8a992c4b3944f2a93fdd303921d4dba2002b4e"> <i class="fa fa-github"></i> </a></a></h2>
+<p>This step extends the <code>create_child_vspace()</code> function in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/73b4d16c157a57c029da1b8e47ea94748a1a08d8/workspaces/root-task/spawn-task/src/child_vspace.rs">workspaces/root-task/spawn-task/src/child_vspace.rs after 7.A</a> to take an <code>extra_frames</code> parameter.
+<code>create_child_vspace()</code> now maps these extra frames into the child task's address space, after the end of the program image, and after the IPC buffer frame.</p>
+<p>In <a href="#step-7e-challenge">step 7.E</a>, you be able to use this parameter to pass in the serial device MMIO register frame to mapped into the child task's address space.</p>
+<h2 id="step-7c"><a class="header" href="#step-7c">Step 7.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('a402baec43efdd31a8dcfc70cc152da039dcc516')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/a402baec43efdd31a8dcfc70cc152da039dcc516"> <i class="fa fa-github"></i> </a></a></h2>
+<p>This step simply copies the <code>Device</code> type from <a href="./serial-device.html">chapter 5</a> into the child task.</p>
+<p>In <a href="#step-7e-challenge">step 7.E</a>, you be able to use this type to interact with the serial device's MMIO registers, just like we as part of <a href="./serial-device.html#step-5e-exercise">step 5.E</a>.</p>
+<h2 id="step-7d"><a class="header" href="#step-7d">Step 7.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e5cb0e8d6e27889e5801ac04189972cdf953cdaf')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e5cb0e8d6e27889e5801ac04189972cdf953cdaf"> <i class="fa fa-github"></i> </a></a></h2>
+<p>This step just adds the <code>SERIAL_DEVICE_MMIO_PADDR</code> and <code>SERIAL_DEVICE_IRQ</code> constants from <a href="./serial-device.html">chapter 5</a> to the root task.</p>
+<h2 id="step-7e-challenge"><a class="header" href="#step-7e-challenge">Step 7.E (challenge)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ddfc44092299c6dfbc9f214e3144f7e201cc6971')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ddfc44092299c6dfbc9f214e3144f7e201cc6971"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong>
+Extend the root task so that it sets up the child task to be able to interact with the serial device, and extend the child task to implement the same echo loop as in [./serial-device.html#step-5h-exercise].</p>
+<div class="step-hint">
+    <details>
+        <summary>
+            Hint for the root task (click to expand)
+        </summary>
+<p>Try following this sequence of sub-steps:</p>
+<ul>
+<li>
+<p>Allocate <code>serial_device_frame_cap: sel4::cap::Granule</code> using <code>object_allocator.recklessly_allocate_at()</code>.</p>
+</li>
+<li>
+<p>Map <code>serial_device_frame_cap</code> into the child task's address space using <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter.</p>
+</li>
+<li>
+<p>Similarly to how we did so in steps <a href="./serial-device.html#step-5f-exercise">5.F</a> and <a href="./serial-device.html#step-5g-exercise">5.G</a>, obtain <code>irq_handler_cap: sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code> (<code>object_allocator.allocate_slot()</code> might come in handy), allocate <code>irq_nfn_cap: sel4::cap::Notification</code>, and associate <code>irq_nfn_cap</code> with <code>SERIAL_DEVICE_IRQ</code> using <code>irq_handler_cap</code>.</p>
+</li>
+<li>
+<p>Copy <code>irq_handler_cap</code> and <code>irq_nfn_cap</code> into the child task's CSpace in a similar way to how <code>child_tcb</code> and <code>inter_task_ep</code> are copied.</p>
+  </details>
+</li>
+</ul>
+</div>
+<p></p>
+<div class="step-hint">
+    <details>
+        <summary>
+            Hint for the child task (click to expand)
+        </summary>
+<p>Try following this sequence of sub-steps:</p>
+<ul>
+<li>
+<p>Declare constants <code>IRQ_HANDLER: sel4::cap::IrqHandler</code> and <code>IRQ_NFN: sel4::cap::Notification</code> after <code>OWN_TCB</code> and <code>INTRA_TASK_EP</code>.</p>
+</li>
+<li>
+<p>Obtain the virtual address of the serial device MMIO frame with <code>addr_of_page_beyond_image(1)</code> (recall how <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter works).</p>
+</li>
+<li>
+<p>Initialize the serial device with <code>Device::new()</code> and <code>Device::init()</code> (as we did for part of <a href="./serial-device.html#step-5e-exercise">step 5.E</a>), and use the serial device just like we did in <a href="./serial-device.html#step-5h-exercise">step 5.H</a>.</p>
+  </details>
+</li>
+</ul>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../root-task/spawn-thread.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../microkit/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../root-task/spawn-thread.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../microkit/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

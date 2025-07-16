@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<!-- Page last generated 2025-07-16 05:32:53 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The seL4 Bitfield Generator | seL4 docs</title>
+
+    <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/bfgen.html">
+    <link href="/assets/css/sel4.css?v=1752643973" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <script defer src="/assets/js/menu.js"></script>
+    <script defer src="/assets/js/sidebar.js"></script><script defer data-domain="docs.sel4.systems"
+            src="https://analytics.sel4.systems/js/script.js"></script></head>
+  <body class="flex flex-row h-screen std-bg text-dark">
+    <div id="sidebar" class="hidden lg:flex flex-none w-(--sidebar-width) flex-row bg-f_neutral-50 dark:bg-gray-900">
+      <div class="flex-1 overflow-y-auto min-h-full">
+        <a href="/">
+  <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="84.224365mm" height="32.530689mm" viewBox="0 0 84.224367 32.530689" version="1.1" id="svg5" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="sel4-docs.svg" inkscape:export-filename="C:\Users\Birgit Brecknell\Documents\seL4 Foundation\seL4 Summit 2022\sel4_summit_v02.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" class="px-4 w-50 h-20 mx-auto mt-4 mb-10">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" inkscape:zoom="1.8116734" inkscape:cx="193.19155" inkscape:cy="87.764163" inkscape:window-width="1392" inkscape:window-height="1099" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="g18" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" showguides="true" inkscape:guide-bbox="true" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1"/>
+  <defs id="defs2">
+    <rect x="680.69342" y="102.26014" width="15.612235" height="115.53054" id="rect9649"/>
+    <style id="style824">.cls-1,.cls-2,.cls-3{fill:#96ca4f;}.cls-2,.cls-3{stroke:#96ca4f;stroke-miterlimit:8;}.cls-3{stroke-width:0.25px;}</style>
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
+      <g inkscape:label="Clip" id="use15">
+        <path d="m 39.66384,47.73588 h 1.324364 q 0.447983,0 0.68299,0.06854 0.315791,0.09302 0.541007,0.330479 0.225215,0.237455 0.342719,0.582623 0.117503,0.342719 0.117503,0.847005 0,0.443087 -0.110159,0.763774 -0.13464,0.391679 -0.384335,0.63403 -0.188496,0.1836 -0.509183,0.286416 -0.239903,0.07589 -0.641374,0.07589 H 39.66384 Z m 0.724606,0.607103 v 2.377001 h 0.541006 q 0.303551,0 0.438191,-0.03427 0.176255,-0.04406 0.291311,-0.149327 0.117504,-0.105264 0.190944,-0.345168 0.07344,-0.242351 0.07344,-0.65851 0,-0.416159 -0.07344,-0.638926 -0.07344,-0.222767 -0.205632,-0.347615 -0.132192,-0.124848 -0.335375,-0.168912 -0.151776,-0.03427 -0.594862,-0.03427 z m 2.751544,1.209308 q 0,-0.54835 0.164016,-0.920445 0.122399,-0.274175 0.332927,-0.492047 0.212975,-0.217871 0.465118,-0.323135 0.335375,-0.141984 0.773566,-0.141984 0.79315,0 1.268061,0.492047 0.477358,0.492047 0.477358,1.368428 0,0.869038 -0.472462,1.361085 -0.472463,0.489598 -1.263165,0.489598 -0.800494,0 -1.272956,-0.48715 -0.472463,-0.489599 -0.472463,-1.346397 z m 0.746638,-0.02448 q 0,0.609551 0.281519,0.925342 0.281519,0.313343 0.714814,0.313343 0.433295,0 0.709918,-0.310895 0.279072,-0.313343 0.279072,-0.937582 0,-0.616894 -0.271728,-0.920445 -0.269279,-0.303551 -0.717262,-0.303551 -0.447983,0 -0.722158,0.308447 -0.274175,0.305999 -0.274175,0.925341 z m 5.596112,0.477359 0.702574,0.222767 q -0.161567,0.587519 -0.538558,0.873934 -0.374543,0.283967 -0.95227,0.283967 -0.714814,0 -1.175036,-0.48715 -0.460223,-0.489599 -0.460223,-1.336605 0,-0.895965 0.462671,-1.39046 0.46267,-0.496943 1.216652,-0.496943 0.658511,0 1.069773,0.389231 0.2448,0.230112 0.367199,0.660959 l -0.717262,0.171359 q -0.06365,-0.279071 -0.266831,-0.440639 -0.200735,-0.161567 -0.489599,-0.161567 -0.399022,0 -0.648718,0.286415 -0.247247,0.286415 -0.247247,0.927789 0,0.680542 0.244799,0.969406 0.2448,0.288863 0.636478,0.288863 0.288864,0 0.496943,-0.1836 0.20808,-0.183599 0.298655,-0.577726 z m 1.140766,0.151776 0.705022,-0.06854 q 0.06365,0.354959 0.257039,0.521422 0.19584,0.166464 0.526319,0.166464 0.350063,0 0.526318,-0.14688 0.178704,-0.149327 0.178704,-0.347615 0,-0.127295 -0.07589,-0.215423 -0.07344,-0.09058 -0.259487,-0.156672 -0.127296,-0.04406 -0.580175,-0.156671 -0.582622,-0.144432 -0.81763,-0.354959 -0.330479,-0.296208 -0.330479,-0.722158 0,-0.274176 0.154224,-0.511631 0.156671,-0.239903 0.447983,-0.364751 0.293759,-0.124848 0.70747,-0.124848 0.675646,0 1.015917,0.296208 0.342719,0.296207 0.359855,0.790701 l -0.724606,0.03182 q -0.04651,-0.276623 -0.200735,-0.396575 -0.151776,-0.122399 -0.457775,-0.122399 -0.315791,0 -0.494495,0.129743 -0.115056,0.08323 -0.115056,0.222768 0,0.127295 0.107712,0.217871 0.137088,0.115056 0.665854,0.239904 0.528767,0.124847 0.78091,0.259487 0.254591,0.132191 0.396575,0.364751 0.144432,0.230111 0.144432,0.570382 0,0.308447 -0.17136,0.577727 -0.171359,0.269279 -0.484703,0.401471 -0.313343,0.129743 -0.780909,0.129743 -0.680542,0 -1.045293,-0.313343 -0.364751,-0.315791 -0.435743,-0.917997 z" id="path16" style="font-weight:bold;font-stretch:condensed;font-size:5.01349px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;stroke-width:0.264583" transform="scale(1.0680757,0.9362632)" aria-label="DOCS"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-11.065137,-18.670029)">
+    <g id="g18">
+      <text xml:space="preserve" transform="scale(0.26458333)" id="text9647" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9649);display:inline;fill:#000000;fill-opacity:1;stroke:none"/>
+      <g id="Layer_2" data-name="Layer 2" transform="matrix(0.5563179,0,0,0.5563179,-0.00218815,0)">
+        <path class="cls-1" d="M 169.29,64.52 V 41.46 h -11.1 l -19.38,23.1 h -5.43 v -28.5 h -10.85 v 28.5 h -5.6 c 0,-0.53 0.08,-1.14 0.08,-1.88 V 62 h -6.77 v 1.94 a 6.32,6.32 0 0 1 -0.37,2.63 1.68,1.68 0 0 1 -1.66,0.88 1.5,1.5 0 0 1 -1.42,-0.71 5,5 0 0 1 -0.32,-2.33 V 58.73 H 117 V 56 a 13,13 0 0 0 -0.85,-5.23 6.31,6.31 0 0 0 -2.92,-2.88 11.68,11.68 0 0 0 -5.43,-1.11 11.49,11.49 0 0 0 -4.76,0.93 5.75,5.75 0 0 0 -2.88,2.57 10.54,10.54 0 0 0 -0.89,4.76 v 7 a 20,20 0 0 0 0.13,2.5 h -3 c 0,-0.28 0,-0.56 0,-0.87 a 5.84,5.84 0 0 0 -1,-3.71 12.59,12.59 0 0 0 -4.47,-2.8 22,22 0 0 1 -3.6,-1.84 3,3 0 0 1 -1.22,-1.32 6,6 0 0 1 -0.19,-1.77 2.32,2.32 0 0 1 0.45,-1.52 1.7,1.7 0 0 1 1.39,-0.58 1.5,1.5 0 0 1 1.49,0.71 5.86,5.86 0 0 1 0.25,2.32 v 1.3 h 6.27 V 53 a 11.15,11.15 0 0 0 -0.2,-2.55 3.72,3.72 0 0 0 -1.08,-1.63 6.68,6.68 0 0 0 -2.67,-1.49 14.3,14.3 0 0 0 -4.38,-0.58 13.32,13.32 0 0 0 -4.54,0.71 5,5 0 0 0 -2.63,1.92 7.84,7.84 0 0 0 -0.78,4 6.85,6.85 0 0 0 0.73,3.28 c 0.47,0.89 1.88,1.93 4.17,3.09 3.84,1.92 4.6,2.43 4.85,2.66 a 3.55,3.55 0 0 1 0.59,2.49 3,3 0 0 1 -0.46,2 A 2,2 0 0 1 87.8,67.45 1.5,1.5 0 0 1 86.3,66.6 6.54,6.54 0 0 1 86,63.87 v -2 h -6.29 v 1.62 c 0,0.38 0,0.72 0,1.05 h -6 a 25.58,25.58 0 1 0 0,8.83 H 158 v 8.42 h 11.33 v -8.4 h 5 V 64.52 Z M 38.89,75.1 A 6.1,6.1 0 1 1 45,69 6.1,6.1 0 0 1 38.89,75.1 Z m 67.54,-20.86 a 7.57,7.57 0 0 1 0.24,-2.68 c 0.15,-0.34 0.53,-0.75 1.48,-0.75 a 1.36,1.36 0 0 1 1.35,0.84 7.39,7.39 0 0 1 0.25,2.59 v 2.23 h -3.32 z M 158,64.52 h -9.62 L 158,52.22 Z" transform="translate(-3.04,-2.5)" id="path858"/>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.61839px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="48.089367" y="45.416836" id="text16" transform="scale(0.93916555,1.064775)"><tspan sodipodi:role="line" id="tspan16" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="48.089367" y="45.416836">D</tspan></text>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="54.558205" y="48.250385" id="text16-9"><tspan sodipodi:role="line" id="tspan16-1" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="54.558205" y="48.250385">O</tspan></text>
+      <g id="g1" transform="matrix(1.1426343,0,0,1.1426343,24.136464,-10.044912)" style="stroke-width:1.67137">
+        <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:7.7611px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.442217;stroke-opacity:1" x="44.508698" y="51.014606" id="text16-5"><tspan sodipodi:role="line" id="tspan16-8" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.442217" x="44.508698" y="51.014606">S</tspan></text>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.505292;stroke-opacity:1" x="65.022789" y="48.250385" id="text17"><tspan sodipodi:role="line" id="tspan17" style="stroke-width:0.505292" x="65.022789" y="48.250385">C</tspan></text>
+    </g>
+  </g>
+</svg>
+</a>
+
+<ul class="px-4 my-10 ext-links">
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Getting Started</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/getting-started.html">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/">Tutorials</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/dockerfiles/">Setting up with Docker</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/repo-cheatsheet.html">Repo manifest cheat sheet</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class="font-bold mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer ">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">The seL4 Kernel</span>
+    </div>
+    <ul class="menu-content ml-6 on">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/host-dependencies.html">Setting up</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/setting-up.html">Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/get-the-tutorials.html">Getting the tutorials</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-world.html">Hello world</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/capabilities.html">Capabilities</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/untyped.html">Untyped</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mapping.html">Mapping</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/threads.html">Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/ipc.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/notifications.html">Notifications</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/interrupts.html">Interrupts</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/fault-handlers.html">Fault handling</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mcs.html">MCS</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/seL4-end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-seL4.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/api-doc.html">API docs</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Hardware/">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/verified-configurations.html">Verified configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/configurations.html">Configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/standalone.html">Standalone seL4 builds</a>
+        </li>
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/bfgen.html">Bitfield generator</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Testing &amp; benchmarking</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4test/">seL4test</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-guide.html">Debugging guide</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-userspace.html">Debugging user space</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4bench/">sel4bench</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/benchmarking-guide.html">Benchmarking guide</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/porting.html">Porting to a new platform</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/seL4.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/seL4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Microkit</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/welcome.html">Welcome</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part0.html">Part 0 - Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part1.html">Part 1 - Serial server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part2.html">Part 2 - Client</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part3.html">Part 3 - Wordle server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part4.html">Part 4 - Virtual machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/manual/latest/">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/roadmap.html">Roadmap</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/platforms.html">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/microkit.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/microkit">Sources</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">CAmkES</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-0.html">Hello CAmkES</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-1.html">Introduction</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-2.html">Events</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-timer.html">Timer</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-linux.html">Virtual Machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-crossvm.html">Cross-VM connectors</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-CAmkES.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/hardware.html">Supported platforms</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Virtualisation</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/camkes-vm/">CAmkES VM</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vm.html">VM library</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vmm.html">VMM library</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/camkes.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/camkes-tool/">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">C support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4runtime/">C runtime</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/user_libs/">User-level libraries</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/">Build System</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-1.html">Init & Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-2.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-3.html">ELF loading & Processes</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-4.html">Timer</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-libs.html">How-to</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Rust support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/how-to-use.html">How to use</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/tutorial/introduction.html">Tutorial</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://sel4.github.io/rust-sel4/">API</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/supported-configurations.html">Supported configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/releases.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/rust-sel4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">ELF loader</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/elfloader/">ELF loader for C</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">capDL</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/lang-spec.html">Language Spec</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/c-loader-app.html">capDL loader (C)</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/capDL.html">Releases</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Examples &amp; demos</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/examples.html">Overview</a>
+        </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gray-200 dark:bg-gray-700 w-px">
+      </div>
+    </div>
+    <div class="flex-1">
+      
+<div class="w-full pb-px bg-gray-200 dark:bg-gray-700">
+  <header class="h-[2rem] sm:h-[2.5rem] lg:h-[3.5rem] w-full flex flex-row items-center gap-2 md:gap-4 md:py-2 std-bg">
+    <div id="burger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="text-dark ml-3 mr-0 sm:mr-3 lg:mx-4 w-4 h-4 lg:w-6 lg:h-6 cursor-pointer">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </div>
+    <div class="flex-1"></div>
+    <a href="/releases.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Releases
+    </a>
+    <a href="https://sel4.systems/Contribute/"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contribute
+    </a>
+    <a href="https://sel4.systems/contact.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contact
+    </a>
+    <a href="https://sel4.systems/support.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Support
+    </a>
+    <!-- main site button -->
+    <a href="https://sel4.systems"
+      class="flex-none button-outline ml-0 text-tiny px-2 py-0.5 sm:px-3 sm:py-1 h-4 sm:h-6 md:py-2 md:h-8 lg:h-9 md:text-xs lg:text-sm mr-0 md:mr-4">Main Site
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" data-slot="icon" class="hidden sm:inline-icon">
+<path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+    </a>
+    <!-- github button -->
+    <a href="https://github.com/seL4"
+      class="mr-2 lg:mr-6 px-0 sm:px-3 pt-2 sm:pt-1 pb-2 block text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+      <span class="sr-only">seL4 on GitHub</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+    </a>
+  </header>
+</div>
+
+      <div class="grid grid-cols-1  h-[calc(100%-3rem)]">
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div id="main-div" class="flex-1 max-w-full mr-0 sm:mr-8 xl:mr-64 ">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
+                        overflow-x-auto" id="page-top">
+
+              <div class="theprose mx-auto  ext-links">
+  <h1 id="the-sel4-bitfield-generator">The seL4 Bitfield Generator</h1>
+
+<p>The seL4 kernel code and the libsel4 library use the so-called bitfield
+generator to automatically produce code and formal proofs for tagged unions and
+structs of bitfields from a higher-level specification.</p>
+
+<p>The code for this tool is available in the <a href="https://github.com/seL4/seL4/">seL4 repository</a> in the <a href="https://github.com/seL4/seL4/blob/master/tools/">tools</a>
+directory. This page contains the manual of the bitfield generator. The manual
+sources are also available for the <a href="https://github.com/seL4/seL4/blob/master/tools/">tools</a> directory.</p>
+
+<!--
+  Copyright 2023 Proofcraft Pty Ltd
+  SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
+<h2 id="bitfield-generator-manual">Bitfield Generator Manual</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>The tool <code class="language-plaintext highlighter-rouge">bitfield_gen.py</code> in the <code class="language-plaintext highlighter-rouge">seL4/tools/</code> directory generates bitfield
+accessor code in C with formal specifications and proofs in Isabelle/HOL.</p>
+
+<p>It takes specifications of bitfield layouts in memory such as the following</p>
+
+<pre><code class="language-bf_gen">block VMFault {
+    field     address           32
+
+    field     FSR               5
+    padding                     7
+    field     instructionFault  1
+    padding                     15
+    field     seL4_FaultType    4
+}
+</code></pre>
+
+<p>and generates a C struct with constructor and getter/setter functions with
+call-by-value and call-by-pointer semantics. It also, separately, generates a
+corresponding data type definition in Isabelle/HOL with corresponding functions
+in HOL for that data type, as well as proofs that the generated C code correctly
+implements these functions. This includes absence of undefined behaviour in C.</p>
+
+<p>The purpose of the tool is to provide bit-level access to structures in memory
+with precise, deterministic and reliable layout semantics, with proofs of
+correctness, and without the need for manual masking and shifting operations.
+The C standard leaves C bitfields too underspecified to be fit for that purpose.</p>
+
+<p>In addition to <a href="#blocks">basic blocks</a> of bitfields such as above, the tool
+supports <a href="#tagged-unions">tagged unions</a> and various layout options for these
+blocks.</p>
+
+<h3 id="bit-field-generator-by-example">Bit Field Generator by Example</h3>
+
+<p>This section walks through the features of the bitfield specification languages
+by example. The <a href="#syntax-reference">full syntax</a> is described in the next
+section for reference.</p>
+
+<h4 id="blocks">Blocks</h4>
+
+<p>The basic concepts of the specification languages are blocks which contain a
+list of fields. The example used in the introduction declares a block with
+name <code class="language-plaintext highlighter-rouge">VMFault</code>, which contains four fields and two padding entries:</p>
+
+<pre><code class="language-bf_gen">block VMFault {
+    field     address           32
+
+    field     FSR               5
+    padding                     7
+    field     instructionFault  1
+    padding                     15
+    field     seL4_FaultType    4
+}
+</code></pre>
+
+<p>This will generate a type <code class="language-plaintext highlighter-rouge">VMFault_t</code> in C. Assuming that the word size of the
+underlying architecture is 32 bits, this <code class="language-plaintext highlighter-rouge">VMFault_t</code> type will have a size of
+two machine words. The sizes of the content and padding fields in a block must
+add up to a multiple of the machine word size.</p>
+
+<p>The bits in the block are laid out in memory in the order they are mentioned in
+the specification. That is, the left-most 32 bits (i.e. bits 63 to 32) of
+<code class="language-plaintext highlighter-rouge">VMFault</code> will correspond to the <code class="language-plaintext highlighter-rouge">address</code> field, the next 5 bits to <code class="language-plaintext highlighter-rouge">FSR</code>, the
+next 7 bits are inaccessible padding which is set to 0 on creation of the
+bitfield, then one bit for <code class="language-plaintext highlighter-rouge">instructionFault</code>, 15 bits of padding, and finally 4
+bits (bits 0 to 3 of the entire type) for <code class="language-plaintext highlighter-rouge">seL4_FaultType</code>.</p>
+
+<p>The following diagram corresponds to the block specification above.</p>
+
+<pre><code class="language-bf_dia">   │------------------------  address  ----------------------------│
+   ┌─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┐
+   │                                                               │ ..
+   └─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┘
+   63                                                             32
+
+                     instruction fault                  seL4_FaultType
+   │-- FSR --│             │-|                             │-------|
+   ┌─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┐
+.. │         │             │ │                             │       │
+   └─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┘
+    31      27              19                              3     0
+</code></pre>
+
+<p>For creating new values of the type <code class="language-plaintext highlighter-rouge">VMFault</code>, the generator will provide a
+function <code class="language-plaintext highlighter-rouge">VMFault</code> that takes an argument of the word size of the machine for
+the value of each field – for the example above, this is <code class="language-plaintext highlighter-rouge">uint32_t</code></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">VMFault_t</span> <span class="nf">VMFault</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">address</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">FSR</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">instructionFault</span><span class="p">,</span>
+                  <span class="kt">uint32_t</span> <span class="n">seL4_FaultType</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Values that do not fit in the bit size of the target field will be cut off
+accordingly, i.e., as if using <code class="language-plaintext highlighter-rouge">val &amp; mask(size)</code>.</p>
+
+<p>To read the value of each field, the generator will provide the following
+functions:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nf">VMFault_get_address</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">VMFault_get_FSR</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">VMFault_get_instructionFault</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">VMFault_get_seL4_FaultType</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>For setting one of the fields in an existing value of type <code class="language-plaintext highlighter-rouge">VMFault_t</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">VMFault_t</span> <span class="nf">VMFault_set_address</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">address</span><span class="p">);</span>
+<span class="n">VMFault_t</span> <span class="nf">VMFault_set_FSR</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">FSR</span><span class="p">);</span>
+<span class="n">VMFault_t</span> <span class="nf">VMFault_set_instructionFault</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">instructionFault</span><span class="p">);</span>
+<span class="n">VMFault_t</span> <span class="nf">VMFault_set_seL4_FaultType</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">seL4_FaultType</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>All of the above (constructor, getter, setter) are pure functions without side
+effects or dependency on global state. They do contain <code class="language-plaintext highlighter-rouge">assert</code> statements that
+are in effect in debug configurations. The generator declares all of them as
+<code class="language-plaintext highlighter-rouge">static inline CONST</code> to enable corresponding compiler optimisations.</p>
+
+<p>Often we expect such bitfields to be accessed via pointers, e.g. as part of a
+buffer or a larger struct in memory or for instance a page table. Therefore the
+generator also produces getter/setter functions with pointer access:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nf">VMFault_ptr_get_address</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">VMFault_ptr_get_FSR</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">VMFault_ptr_get_instructionFault</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">);</span>
+<span class="kt">uint32_t</span> <span class="nf">VMFault_ptr_get_seL4_FaultType</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>These are declared <code class="language-plaintext highlighter-rouge">PURE</code>, but not <code class="language-plaintext highlighter-rouge">CONST</code>, since they depend on global state.</p>
+
+<p>The pointer set functions are:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">VMFault_set_address</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">address</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">VMFault_set_FSR</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">FSR</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">VMFault_set_instructionFault</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">instructionFault</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">VMFault_set_seL4_FaultType</span><span class="p">(</span><span class="n">VMFault_t</span> <span class="o">*</span><span class="n">vm_fault</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">seL4_FaultType</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>These are neither <code class="language-plaintext highlighter-rouge">PURE</code> nor <code class="language-plaintext highlighter-rouge">CONST</code>, but still declared as <code class="language-plaintext highlighter-rouge">static inline</code>.</p>
+
+<blockquote>
+  <p>Note that the generator has a command line option <code class="language-plaintext highlighter-rouge">--prune</code> to skip functions
+that are not used, and the seL4 build system makes use of that option. That
+means, not necessarily all of the combinations above will appear in the
+generated files for seL4, only the ones that are actually used in the rest of
+the code.</p>
+</blockquote>
+
+<h4 id="field-high">Field High</h4>
+
+<p>The usual access patterns for fields is that if we provide e.g. a value of 5 to
+a setter function, we expect a corresponding 8-bit field to be set to the bit
+pattern <code class="language-plaintext highlighter-rouge">0000 0101</code>.</p>
+
+<p>In general, on a 32-bit architecture, we are providing a 32-bit value to store
+in an n-bit field. One way of looking at this is that we know the top 32-n bits
+of the value are always 0.</p>
+
+<p>Sometimes we instead know that the <em>bottom</em> n bits of the value we provide are</p>
+<ol>
+  <li>This can happen for instance when we want to store an address that is always
+aligned to a page boundary, as it would in a page table entry. This means we are
+interested in the high bits of the address. The <code class="language-plaintext highlighter-rouge">field_high</code> tag allows us to
+store only the significant high bits of such addresses.</li>
+</ol>
+
+<p>For instance the base pointer stored in a page table cap in seL4 for 32-bit
+RISC-V is such a case:</p>
+
+<pre><code class="language-bf_gen">block page_table_cap {
+    field       capPTMappedASID     9
+    field_high  capPTBasePtr        20
+    padding                         3
+
+    padding                         7
+    field       capPTIsMapped       1
+    field_high  capPTMappedAddress  20
+    field       capType             4
+}
+</code></pre>
+
+<p>The generated access methods of the <code class="language-plaintext highlighter-rouge">field_high capPTBasePtr</code> have the same type
+as the ones for <code class="language-plaintext highlighter-rouge">field</code>, but only the top 20 bits of the provided value will be
+stored in the setter methods as opposed to the bottom 20 bits for normal fields.</p>
+
+<p>The getter methods will automatically correctly return a value that has the top
+20 bits set to the stored value and the bottom 12 bits set to 0. That is, getter
+and setter remain inverses of each other as long as the values provided to the
+setter have the bottom 12 bits set to 0.</p>
+
+<p>On most 64-bit architectures, the top bits of pointers are also determined,
+because not all 64 bits are available (e.g. only 48 of them on x64). The
+generator assumes <code class="language-plaintext highlighter-rouge">field_high</code> values to be used for pointers and to need to store
+only the significant bits of the pointer, along with potential sign extension.
+See the <a href="#architecture-parameters-and-canonical-pointers">Architecture Parameters</a> section below for details.</p>
+
+<p>For instance, if the platform is declared to have base 64 and 48 significant
+bits, and we have a pointer that we know is aligned to 12 bits, we need to store
+only 48-12 = 36 bits to recreate the correct original pointer value. That means
+if we declare</p>
+
+<pre><code class="language-bf_gen">block store_more {
+    field       some_info  16
+    field_high  ptr        36
+    field       other_info 12
+}
+</code></pre>
+
+<p>we can store a 12-aligned pointer with <code class="language-plaintext highlighter-rouge">sm = store_more_set_ptr(sm, p)</code> and
+extract it again with <code class="language-plaintext highlighter-rouge">p = store_more_get_ptr(sm)</code> without losing information.
+This means, we can store 28 bits of additional information in the space that
+would be taken up by a single pointer. For this it does not matter where in the
+<code class="language-plaintext highlighter-rouge">store_more</code> block the <code class="language-plaintext highlighter-rouge">ptr</code> field is declared, just that it is a <code class="language-plaintext highlighter-rouge">field_high</code>
+that stores 36 bits (on a 64 bit base platform with 48 significant bits).</p>
+
+<h4 id="visible-field-order">Visible Field Order</h4>
+
+<p>Sometimes it is useful for the constructor to take its arguments in a particular
+order that is different from the field layout order in memory. It is possible to
+specify such an order, enumerating the constructor field order in parentheses
+after the block name:</p>
+
+<pre><code class="language-bf_gen">block page_table_cap(capPTBasePtr, capPTMappedASID) {
+    field       capPTMappedASID     9
+    field_high  capPTBasePtr        20
+    padding                         3
+}
+</code></pre>
+
+<p>All fields must be enumerated, including the tag field in tagged unions
+described in the <a href="#tagged-unions">next section</a>.</p>
+
+<p>Only the constructor is affected, the memory layout as well as getters and
+setters remain the same.</p>
+
+<h4 id="tagged-unions">Tagged Unions</h4>
+
+<p>Multiple blocks that share a type field can be aggregated as a type in C into a
+tagged union. For example to express an algebraic data type such as the
+following</p>
+
+<div class="language-isabelle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">datatype</span><span class="w"> </span><span class="n">cap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NullCap</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ObjectCap</span><span class="w"> </span><span class="o">(</span><span class="n">ref</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">"20 word"</span><span class="o">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>in C, one might specify the following:</p>
+
+<pre><code class="language-bf_gen">block null_cap {
+    padding    28
+    cap_type    4
+}
+
+block object_cap {
+    field ref  20
+    padding     8
+    cap_type    4
+}
+
+tagged_union cap cap_type {
+    tag null_cap     0
+    tag object_cap   1
+}
+</code></pre>
+
+<blockquote>
+  <p>Note that both of the block declarations for <code class="language-plaintext highlighter-rouge">null_cap</code> and <code class="language-plaintext highlighter-rouge">object_cap</code> contain
+a field with the name <code class="language-plaintext highlighter-rouge">cap_type</code> at the same bit position with the same size,
+and that all blocks have the same size. We will later relax the size of the tag
+field, but the tool does require all blocks in a tagged union to be of the same
+size and the tag field to always be at the same position.</p>
+</blockquote>
+
+<p>The fragment <code class="language-plaintext highlighter-rouge">tagged_union cap cap_type</code> means that we want the generator to
+produce a C type <code class="language-plaintext highlighter-rouge">cap_t</code> that is a tagged union, and that we want to use
+<code class="language-plaintext highlighter-rouge">cap_type</code> as the tag field that distinguishes which variant of the union we are
+operating on.</p>
+
+<p>Listing <code class="language-plaintext highlighter-rouge">tag null_cap 0</code> means that we want the block <code class="language-plaintext highlighter-rouge">null_cap</code> to be part of
+the tagged union and that the value <code class="language-plaintext highlighter-rouge">0</code> in field <code class="language-plaintext highlighter-rouge">cap_type</code> will indicate that
+the rest of the fields are <code class="language-plaintext highlighter-rouge">null_cap</code> fields. Similarly <code class="language-plaintext highlighter-rouge">tag object_cap 1</code>
+means that a value of <code class="language-plaintext highlighter-rouge">1</code> in the tag field makes the fields of the block
+<code class="language-plaintext highlighter-rouge">object_cap</code> available.</p>
+
+<p>This mapping must be unique, i.e., it is an error for a block to be mentioned in
+more than one tagged union.</p>
+
+<p>If a block is mentioned in a tagged union, its memory layout stays the same as
+before, but the code that is generated for it changes types to represent the
+tagged union instead. All getters and setters for the block will be prefixed
+with the name of the union, and instead of the block type, they will take and
+return the union type instead (e.g. <code class="language-plaintext highlighter-rouge">cap_t</code> instead of <code class="language-plaintext highlighter-rouge">object_cap_t</code> or
+<code class="language-plaintext highlighter-rouge">null_cap_t</code>). The tag field will be omitted from the constructor, because it is
+determined by the constructor name, and no setter methods for the tag field will
+be generated. Instead there will be a generic getter function for the tag field
+which does not need to know which variant of the type it is presented with. It
+returns an enum whose names correspond to the block names and whose values
+correspond to the associated tag values.</p>
+
+<p>For instance for the specification above, we will get:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// variant tags:</span>
+<span class="k">enum</span> <span class="n">cap_tag</span> <span class="p">{</span>
+    <span class="n">cap_null_cap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">cap_object_cap</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">};</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="n">cap_tag</span> <span class="n">cap_tag_t</span><span class="p">;</span>
+
+<span class="c1">// discrimator:</span>
+<span class="n">cap_tag_t</span> <span class="nf">cap_get_cap_type</span><span class="p">(</span><span class="n">cap_t</span> <span class="n">cap</span><span class="p">);</span>
+
+<span class="c1">// constructors:</span>
+<span class="n">cap_t</span> <span class="nf">cap_null_cap_new</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="n">cap_t</span> <span class="nf">cap_object_cap_new</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">ref</span><span class="p">);</span>
+
+<span class="c1">// getters and setters for object_cap variant:</span>
+<span class="kt">uint64_t</span> <span class="nf">cap_object_cap_get_ref</span><span class="p">(</span><span class="n">cap_t</span> <span class="n">cap</span><span class="p">);</span>
+<span class="n">cap_t</span> <span class="nf">cap_object_cap_set_ref</span><span class="p">(</span><span class="n">cap_t</span> <span class="n">cap</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">ref</span><span class="p">);</span>
+
+<span class="kt">uint64_t</span> <span class="nf">cap_object_cap_ptr_get_ref</span><span class="p">(</span><span class="n">cap_t</span> <span class="o">*</span><span class="n">cap</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">cap_object_cap_ptr_set_ref</span><span class="p">(</span><span class="n">cap_t</span> <span class="o">*</span><span class="n">cap</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">ref</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The getter names are constructed as <code class="language-plaintext highlighter-rouge">&lt;union&gt;_&lt;block&gt;_get_&lt;field&gt;</code>. Setters and
+pointer versions have names with <code class="language-plaintext highlighter-rouge">set</code>, <code class="language-plaintext highlighter-rouge">ptr_get</code>, and <code class="language-plaintext highlighter-rouge">ptr_set</code> respectively.
+All functions for the tagged union <code class="language-plaintext highlighter-rouge">cap</code> will start with <code class="language-plaintext highlighter-rouge">cap_</code>.</p>
+
+<blockquote>
+  <p>It is a runtime error to use a getter or setter function on the wrong block
+variant. That means it is the caller’s responsibility to know or check which
+variant a value of <code class="language-plaintext highlighter-rouge">cap_t</code> represents before using e.g.
+<code class="language-plaintext highlighter-rouge">cap_object_cap_get_ref()</code> on it. The tool generates <code class="language-plaintext highlighter-rouge">assert</code> statements in the
+getters and setters. Common idioms are to check the tag in a <code class="language-plaintext highlighter-rouge">switch</code> or <code class="language-plaintext highlighter-rouge">if</code>
+statement and work on the contents accordingly.</p>
+</blockquote>
+
+<h4 id="advanced-tag-fields">Advanced Tag Fields</h4>
+
+<h5 id="tag-slices">Tag Slices</h5>
+
+<p>Occasionally the tag value for a tagged union cannot be encoded in a single
+field of a block, for instance when the hardware prescribes using e.g. bits 0
+and 5..6 for the type of a structure and bits 1..4 for something else.</p>
+
+<p>An example would be the following</p>
+
+<pre><code class="language-bf_gen">block null {
+    padding     25
+    field typ_h  2
+    padding      4
+    field typ_l  1
+}
+
+block content {
+    padding     25
+    field typ_h  2
+    field some   4
+    field typ_l  1
+}
+
+tagged_union example ex_type(typ_h, typ_l) {
+    null    (0,0)
+    content (2,0)
+}
+</code></pre>
+
+<p>Instead of a single tag field, the <code class="language-plaintext highlighter-rouge">example</code> union has two tag fields. We also
+say that the tag <code class="language-plaintext highlighter-rouge">ex_type</code> has two <em>slices</em> <code class="language-plaintext highlighter-rouge">typ_h</code> and <code class="language-plaintext highlighter-rouge">typ_l</code>. The same
+restrictions as for normal tags apply: they must fit the tag values and all tag
+slice fields must be mentioned in all blocks of the union.</p>
+
+<p>The fragment <code class="language-plaintext highlighter-rouge">ex_type(typ_h, typ_l)</code> means that we want the discriminator
+function to be called <code class="language-plaintext highlighter-rouge">example_get_ex_type</code> and that the tag is made up of the
+two fields <code class="language-plaintext highlighter-rouge">(typ_h, typ_l)</code>. Any positive number of fields is allowed. The
+generated enumeration will still be called <code class="language-plaintext highlighter-rouge">example_tag</code> as it would be for a
+single tag, and it will still contain a name for each alternative bound to a
+value unique for that variant. (The values consist of the concatenation of the
+bit pattern of the tag slice values).</p>
+
+<p>Similarly to a single tag field, the tool will not generate getters and setters
+for any of the tag fields mentioned in the union specification.</p>
+
+<p>The values in the <code class="language-plaintext highlighter-rouge">null (0,0)</code> and <code class="language-plaintext highlighter-rouge">content (2,0)</code> are positional, i.e., the
+example assigns the bit pattern <code class="language-plaintext highlighter-rouge">0b10</code> in field <code class="language-plaintext highlighter-rouge">typ_h</code> and <code class="language-plaintext highlighter-rouge">0</code> in field <code class="language-plaintext highlighter-rouge">typ_l</code>
+to mean the <code class="language-plaintext highlighter-rouge">content</code> block and <code class="language-plaintext highlighter-rouge">0</code> in both to mean the <code class="language-plaintext highlighter-rouge">null</code> block.</p>
+
+<h5 id="masks">Masks</h5>
+
+<p>The restriction that all tag fields have to have the same size can be relaxed
+slightly. One can declare multiple possible tag sizes together with a bit mask
+each that determines which of these sizes applies.</p>
+
+<p>Say for instance that we have more than 16 different <code class="language-plaintext highlighter-rouge">cap</code> types, and that some
+of the <code class="language-plaintext highlighter-rouge">cap</code> alternatives only have 4 bits of storage left to store the cap tag,
+but others have further bits available, e.g. 8. We can declare a bit mask that
+determines if the tag size is 4 or 8 and use the size 4 tags in the blocks that
+have fewer bits left.</p>
+
+<p>The following example achieves this:</p>
+
+<pre><code class="language-bf_gen">block null_cap {
+    padding    24
+    cap_type    8
+}
+
+block object_cap {
+    field ref  28
+    cap_type    4
+}
+
+tagged_union cap cap_type {
+    mask 4 0x0e
+    mask 8 0x0e
+    tag null_cap    15
+    tag object_cap   1
+}
+</code></pre>
+
+<p>The block <code class="language-plaintext highlighter-rouge">null_cap</code> has an 8-bit tag field and the block <code class="language-plaintext highlighter-rouge">object_cap</code> has a
+4-bit tag field of the same name. Note that both still must start at the same
+bit positions.</p>
+
+<p>The declarations <code class="language-plaintext highlighter-rouge">mask 4 0x0e</code> and <code class="language-plaintext highlighter-rouge">mask 8 0x0e</code> are read from the smallest to
+the largest mask size. <code class="language-plaintext highlighter-rouge">mask 4 0x0e</code> declares that the default tag size is 4
+bits wide, but if the bits <code class="language-plaintext highlighter-rouge">0b1110</code> (0x0e) are set, i.e. if <code class="language-plaintext highlighter-rouge">tag_value &amp; 0x0e ==
+0x0e</code>, then the next larger mask will be used. This means values 0 to 13 are
+using 4 bit tags, 14 and 15 are using 8 bit tags, and all 8 bit tag values must
+have at least the bits 1, 2, and 3 set.</p>
+
+<p>Since there is no larger mask size after 8 in the example, the mask value there
+is not important. However, the generator expects the mask of each larger level
+to have at least all bits set that the masks of all smaller sizes have set, so
+we chose the same value <code class="language-plaintext highlighter-rouge">0x0e</code> in the example. If we had another level, e.g. 16
+bits wide afterwards, we might have chosen <code class="language-plaintext highlighter-rouge">0b11110</code> (0x1e) for the mask value
+at 8 bit.</p>
+
+<p>The sub mask inclusion means that the generator can check mask sizes
+consecutively. I.e. if <code class="language-plaintext highlighter-rouge">tag_value &amp; 0xe != 0xe</code>, we always know it is a 4 bit
+tag, no matter how many other tag sizes are declared.</p>
+
+<p>The tag mask value declared for each alternative in the tagged union must fit
+the mask for the size of the tag field in the block. Remember that with <code class="language-plaintext highlighter-rouge">mask 4
+ 0x0e</code> the <code class="language-plaintext highlighter-rouge">0x0e</code> bit pattern means that size 4 does <em>not</em> apply, and instead
+the next larger size applies. So in the example, because <code class="language-plaintext highlighter-rouge">object_cap</code> has a
+4-bit tag field, <code class="language-plaintext highlighter-rouge">object_cap</code> must have a tag value where the bits <code class="language-plaintext highlighter-rouge">0x0e</code> are
+not all set (e.g. 1 is a legal value). Conversely, <code class="language-plaintext highlighter-rouge">null_cap</code> has an 8-bit tag,
+and so at least the bits <code class="language-plaintext highlighter-rouge">0x0e</code> must all be set in the tag value (e.g. 14 or 15
+works, as does 255, but not 1).</p>
+
+<p>Masks and tag slices are mutually exclusive, i.e. only one of these can be used
+for any particular tagged union.</p>
+
+<h4 id="raw-value-access">Raw Value Access</h4>
+
+<p>The C representation of blocks, whether in a tagged union or not, is a struct
+containing an array of the architecture word type (<code class="language-plaintext highlighter-rouge">uint32</code> or <code class="language-plaintext highlighter-rouge">uint64</code>) of the
+length computed from the number and width of fields in the block. Given that the
+memory layout is fully specified it is possible to operate on these raw values
+directly without breaking the semantics of the generated functions.</p>
+
+<p>This is usually neither recommended nor necessary, and for code undergoing
+formal verification strongly discouraged, because it introduces additional
+verification overhead.</p>
+
+<p>However, one special case is occasionally convenient: when initialising an area
+of memory with 0, and reinterpreting that memory as a bitfield structure, we are
+guaranteed to get a value where all fields are 0. Similarly, returning an all-0
+struct from a function instead of calling the constructor with only 0 parameters
+may be acceptable, although one should check the generated assembly if the
+compiler was not able to optimise the constructor away – if it does then the
+constructor form is clearer and easier to use in proofs.</p>
+
+<p>The tool will not access padding fields, but is not guaranteed to preserve them
+when copying. Writing/reading padding fields is not guaranteed to be stable.</p>
+
+<h4 id="architecture-parameters-and-canonical-pointers">Architecture Parameters and Canonical Pointers</h4>
+
+<p>The tool supports architectures with 32 and 64 bit word sizes. The command</p>
+
+<pre><code class="language-bf_gen">base 32
+</code></pre>
+
+<p>selects a 32 bit native word size. The declaration covers all subsequent blocks
+and unions in the specification. It is possible to give multiple declarations,
+each covering the subsequent blocks and unions, but it rarely makes sense to
+pick any other value than the word size of the architecture.</p>
+
+<p>Many 64 bit architectures have the concept of canonical pointers where not all
+64 bits of the available space are usable for pointers, but only for example 48
+bits. In this setting a pointer value would be canonical if and only if all top
+bits are set when bit 47 (counting from 0) is set. This is equivalent to sign
+extension, i.e. treating bit 47 as the sign bit and extending that sign bit up
+to bit 63.</p>
+
+<p>A potential use for this is for kernel pointers to always have bit 47 set (and
+all bits above) and for user pointers to always have bit 47 unset (and all bits
+above).</p>
+
+<p>The bitfield generator allows specifying this canonical bit and whether the top
+bits for pointers should be sign extended or not like this:</p>
+
+<pre><code class="language-bf_gen">base 64(48,1)
+</code></pre>
+
+<p>This means: word size is 64, pointers are 48 bits <code class="language-plaintext highlighter-rouge">[0..47]</code>, and bit 48 and
+above should be set to 1 if bit 47 is set.</p>
+
+<p>This only affects <code class="language-plaintext highlighter-rouge">field_high</code> fields which are assumed to be pointers.</p>
+
+<pre><code class="language-bf_gen">base 64(48,0)
+</code></pre>
+
+<p>means word size is 64, pointers are at most 48 bits, and no sign extension. This
+is currently equivalent to just <code class="language-plaintext highlighter-rouge">base 64</code>.</p>
+
+<p>It may make sense to use the <code class="language-plaintext highlighter-rouge">base</code> command multiple times for the sign
+extension case. For instance, if the intention is to usually store pointers on
+x64, one would declare <code class="language-plaintext highlighter-rouge">base 64(48,1)</code>, but if there is a specific block that
+wants to not store a pointer, but some other value as <code class="language-plaintext highlighter-rouge">field_high</code>, one could
+declare <code class="language-plaintext highlighter-rouge">base 64</code> just before and <code class="language-plaintext highlighter-rouge">base 64(48,1)</code> again just after that block.</p>
+
+<h3 id="syntax-reference">Syntax Reference</h3>
+
+<h4 id="lexical-structure">Lexical Structure</h4>
+
+<p>The generator distinguishes identifiers, integer literals, comments, white
+space, keywords, and operators. Keywords and operators are shown inline in the
+grammar in the next section. The rest are defined below.</p>
+
+<p>A multi-character ident must start with a letter or underscore, followed by
+letters, underscores or numbers. A one-character ident must consist of one
+letter. Letters are Latin letters <code class="language-plaintext highlighter-rouge">[a-z]</code> and <code class="language-plaintext highlighter-rouge">[A-Z]</code>, digits are <code class="language-plaintext highlighter-rouge">[0-9]</code>.</p>
+
+<pre><code class="language-bnf">IDENT ::= [A-Za-z_][a-zA-Z0-9_]+ | [A-Za-z]
+</code></pre>
+
+<p>In addition to the regular expression above, identifiers that consist only of
+underscores are invalid. Valid examples are <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">a_20</code>, <code class="language-plaintext highlighter-rouge">_a_20_b</code>. Invalid
+examples are <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">_</code>, <code class="language-plaintext highlighter-rouge">0a</code> or <code class="language-plaintext highlighter-rouge">0_a</code>.</p>
+
+<p>Integer literals can be decimal, octal, hex, or binary, followed by an optional
+<code class="language-plaintext highlighter-rouge">l</code> or <code class="language-plaintext highlighter-rouge">L</code> specifier.</p>
+
+<pre><code class="language-bnf">INTLIT ::= (  [1-9][0-9]*
+            | 0[oO]?[0-7]+
+            | 0[xX][0-9a-fA-F]+
+            | 0[bB][01]+
+            | 0 ) [lL]?'
+</code></pre>
+
+<p>Valid examples are <code class="language-plaintext highlighter-rouge">15</code>, <code class="language-plaintext highlighter-rouge">017</code>, <code class="language-plaintext highlighter-rouge">0o17</code>, <code class="language-plaintext highlighter-rouge">0x0F</code>, <code class="language-plaintext highlighter-rouge">0xF</code>, <code class="language-plaintext highlighter-rouge">0XF</code>, <code class="language-plaintext highlighter-rouge">0b1111</code>, <code class="language-plaintext highlighter-rouge">0</code>,
+<code class="language-plaintext highlighter-rouge">0l</code>, and <code class="language-plaintext highlighter-rouge">15L</code>. Invalid examples are <code class="language-plaintext highlighter-rouge">10A0</code>, <code class="language-plaintext highlighter-rouge">0xFG0</code>, <code class="language-plaintext highlighter-rouge">0b20</code>, <code class="language-plaintext highlighter-rouge">090</code>.</p>
+
+<p>Comments start with <code class="language-plaintext highlighter-rouge">--</code> or with <code class="language-plaintext highlighter-rouge">#</code> and go until the end of the line. There
+are no block comments.</p>
+
+<pre><code class="language-bf_gen">-- this is a valid comment
+### as is this
+</code></pre>
+
+<p>Whitespace are spaces and tab characters. They delimit other tokens. Consecutive
+whitespace is ignored.</p>
+
+<h4 id="syntactic-structure">Syntactic Structure</h4>
+
+<pre><code class="language-ebnf">spec :== ( base | block | tagged_union )*
+
+base ::= "base" ("32"|"64") canonical_spec?
+canonical_spec ::= "(" INTLIT "," ("0"|"1") ")"
+
+block ::= "block" IDENT visible_order_spec_opt? "{" fields "}"
+visible_order_spec_opt ::= "(" visible_order_spec? ")"
+visible_order_spec ::= IDENT ("," IDENT)*
+fields ::= ( "field" IDENT INTLIT | "field_high" IDENT INTLIT | "padding" INTLIT )*
+
+tagged_union ::= "tagged_union" IDENT IDENT tag_slices? "{" masks tags "}"
+
+tag_slices ::= "(" IDENT ("," IDENT)* ")"
+masks ::= ( "mask" INTLIT INTLIT )*
+tags ::= ( "tag" IDENT tag_value )*
+tag_value ::= INTLIT | "(" INTLIT ( "," INTLIT )* ")"
+</code></pre>
+
+<p>Forward references to names that are declared later in the file are allowed.</p>
+
+<h4 id="restrictions">Restrictions</h4>
+
+<p>The following restrictions are not represented by the grammar in the previous
+section, but will be checked by the generator.</p>
+
+<ul>
+  <li>the canonical bit must be smaller than the <code class="language-plaintext highlighter-rouge">base</code> size</li>
+  <li>field sizes must not be larger than the <code class="language-plaintext highlighter-rouge">base</code> size</li>
+  <li>the field sizes in a block must add up to multiples of the <code class="language-plaintext highlighter-rouge">base</code> size</li>
+  <li>all identifiers mentioned as tags in a union must be blocks</li>
+  <li>all blocks in a tagged union must have the same size</li>
+  <li>all blocks in a tagged union must mention the tag field(s)</li>
+  <li>all blocks in a tagged union must have the tag field(s) at the same bit
+position</li>
+  <li>all blocks in a tagged union must have tag fields of one of the sizes declared
+in the union, or if no mask size is declared, the tag fields must all be of
+the same size.</li>
+  <li>each block can be used in at most one tagged union</li>
+  <li>visible_order_spec must enumerate all fields if used</li>
+  <li>tag values must fit into the size of the tag fields</li>
+  <li>tag values must not be larger than an <code class="language-plaintext highlighter-rouge">int</code> of the underlying platform,
+because they will be used in an <code class="language-plaintext highlighter-rouge">enum</code> in C.</li>
+</ul>
+
+<h3 id="correctness">Correctness</h3>
+
+<p>Since the tool generates both the implementation and the specification, the
+question arises what kind of correctness property we gain. Even if the generated
+proofs are checked for correctness by Isabelle/HOL, they could still be
+expressing properties that are not useful or specify behaviour that we do not
+want the code to have. What we do know after Isabelle/HOL has checked the proofs
+is that the code implements the generated specification and that the generated C
+code is free from undefined behaviour.</p>
+
+<p>To gain confidence that the generated specification is meaningful and itself has
+the right properties it needs human inspection or it needs to be used in further
+proofs. In the seL4 verification both are the case. In particular, the generated
+specification together with the generated implementation proofs are the
+interface that the C verification uses when it encounters bitfield functions. If
+the generated specifications are trivial, not useful, wrong, or do not express
+the behaviour of the generated C (e.g. if the generated correctness proof was
+trivial), these proofs could not succeed, because the specification would then
+not provide the needed semantics of the code (e.g. that loading a value after
+storing it does not lose information). If the specification provides strong
+enough properties to make the rest of the C verification succeed, we know that
+the specification is strong enough for our needs, even though it might still be
+missing additional facts or properties that the generated C code might have.
+This is sufficient for strong functional correctness.</p>
+
+<h3 id="limitations">Limitations</h3>
+
+<p>The tool does not currently support proofs for all combinations of pointer
+access functions for variants, but it does support all those that are used in
+seL4. If proof support for new combinations is needed, the tool could be
+extended relatively easily.</p>
+
+<h3 id="command-line">Command Line</h3>
+
+<h4 id="usage">Usage</h4>
+
+<p>The tool can be invoked from the command line as follows</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bitfield_gen.py <span class="o">[</span>options] &lt;input.bf&gt; &lt;outfile&gt;
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">&lt;input.bf&gt;</code> is a bitfield specification file as described in this manual.
+If no file is given, the tool reads from <code class="language-plaintext highlighter-rouge">stdin</code>, and if no output file is given,
+the tool prints to <code class="language-plaintext highlighter-rouge">stdout</code>.</p>
+
+<p>By default, the output is generated C code. See options below for how to
+additionally produce Isabelle/HOL theory files for specifications and proofs.</p>
+
+<h4 id="options">Options</h4>
+
+<p><code class="language-plaintext highlighter-rouge">-h, --help</code>:<br />
+    Show help message and exit.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--environment={seL4,libseL4}</code>:<br />
+    Whether to produce code for the <code class="language-plaintext highlighter-rouge">seL4</code> or <code class="language-plaintext highlighter-rouge">libseL4</code> environment. This
+    influences which header files are included, what statement to use for
+    <code class="language-plaintext highlighter-rouge">assert</code>, what type names <code class="language-plaintext highlighter-rouge">uint32</code> etc have, and how a function is declared
+    inline. The values are determined by the <code class="language-plaintext highlighter-rouge">INCLUDES</code>, <code class="language-plaintext highlighter-rouge">ASSERTS</code>, <code class="language-plaintext highlighter-rouge">INLINE</code>,
+    and <code class="language-plaintext highlighter-rouge">TYPES</code> dictionaries in the generator source.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--hol_defs</code>:<br />
+    Produce Isabelle/HOL theory files with specifications and definitions.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--hol_proofs</code>:<br />
+    Produce Isabelle/HOL theory files with proofs, assuming specification
+    and definition files exist. Requires the <code class="language-plaintext highlighter-rouge">--umm_types</code> option.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--sorry_lemmas</code>:<br />
+    When producing proofs, only state lemmas, but do not prove them. This
+    requires explicitly setting <code class="language-plaintext highlighter-rouge">quick_and_dirty</code> in Isabelle and
+    is useful for reducing processing time during other proof development.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--prune=&lt;file&gt;</code>:<br />
+    Append <code class="language-plaintext highlighter-rouge">&lt;file&gt;</code> to the list of files with pruning information, which contain
+    the names of bitfield functions that are used in the client code base. The
+    option can be used multiple times. If this option is used, the generator
+    will only produce the functions that are listed in one of these files. This
+    is useful to reduce code size, processing time, and especially proof
+    processing time drastically. It does make it harder to discover which
+    functions are generated by the tool, so if that is important, consider
+    leaving this option off until proofs are needed.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--toplevel=&lt;type&gt;</code>:<br />
+    Append Isabelle/HOL <code class="language-plaintext highlighter-rouge">&lt;type&gt;</code> name to the list of top-level heap types. The
+    proofs will generate appropriate frame conditions for all of these top-level
+    heap types. The option can be used multiple times.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--umm_types=&lt;file&gt;</code>:<br />
+    Path to the file <code class="language-plaintext highlighter-rouge">umm_types.txt</code> which contains dependency information
+    between the top-level heap types (e.g. which structs contain which other
+    structs or type fields). The file can be generated using
+    <code class="language-plaintext highlighter-rouge">spec/cspec/mk_umm_types.py</code> in the <a href="https://github.com/seL4/l4v">l4v</a> repository. (UMM = unified memory
+    model).</p>
+
+<p><code class="language-plaintext highlighter-rouge">--cspec-dir=&lt;dir&gt;</code>:<br />
+    Location of the <code class="language-plaintext highlighter-rouge">cspec</code> directory containing the theory file
+    <code class="language-plaintext highlighter-rouge">KernelState_C</code>. This is specific to the seL4 proof setup.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--thy-output-path=&lt;path&gt;</code>:<br />
+    Where to put the generated theory files.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--skip_modifies</code>:<br />
+    Do not emit “modifies” proofs. These proofs state and show which global
+    state is modified by each generated function. They are weaker versions
+    of the full specifications and may not be needed if the full specifications
+    are always used instead.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--showclasses</code>:<br />
+    Print the parsed classes and fields.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--debug</code>:<br />
+    Print debug information during code and proof generation.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--from_file=&lt;FROM_FILE&gt;</code>:<br />
+    Original source file before preprocessing. Use this to produce a
+    <code class="language-plaintext highlighter-rouge">Generated from FROM_FILE</code> comment in the output.</p>
+
+<h4 id="sel4-build">seL4 build</h4>
+
+<p>In the seL4 build system, <code class="language-plaintext highlighter-rouge">.bf</code> files are usually first passed through the C
+preprocessor to process <code class="language-plaintext highlighter-rouge">#include</code> and <code class="language-plaintext highlighter-rouge">#ifdef</code> statements, as well as perform
+macro expansion, which are currently not part of the bitfield specification
+language.</p>
+
+<p>The source files containing C preprocessor macros and includes are called <code class="language-plaintext highlighter-rouge">.bf</code>.
+There are the following main files in seL4:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">include/structures_32.bf</code> and <code class="language-plaintext highlighter-rouge">include/structures_64.bf</code> contain generic
+kernel objects and capabilities for 32 and 64 bit systems</li>
+  <li><code class="language-plaintext highlighter-rouge">include/arch/**/object/structures.bf</code> contain architecture dependent object
+and capability definitions.</li>
+  <li>some <code class="language-plaintext highlighter-rouge">plat/**</code> directories contain <code class="language-plaintext highlighter-rouge">hardware.bf</code> files for hardware structures.</li>
+  <li><code class="language-plaintext highlighter-rouge">libseL4</code> contains some bitfield definitions that are shared with the kernel in
+<code class="language-plaintext highlighter-rouge">libsel4/sel4_arch_include/*/sel4/sel4_arch/types.bf</code>,
+<code class="language-plaintext highlighter-rouge">libsel4/arch_include/*/sel4/arch/shared_types.bf</code>, and
+<code class="language-plaintext highlighter-rouge">libsel4/mode_include/*32*/sel4/shared_types.bf</code>.</li>
+</ul>
+
+<p>The generated C code contains a comment which <code class="language-plaintext highlighter-rouge">.bf</code> include hierarchy the
+definitions are coming from.</p>
+
+<p>The generated code can be found in a build directory under the <code class="language-plaintext highlighter-rouge">generated</code>
+directory, where e.g. <code class="language-plaintext highlighter-rouge">structures_gen.h</code> will have been generated from
+<code class="language-plaintext highlighter-rouge">structures.bf.pbf</code>, which in turn is the preprocessed source of
+<code class="language-plaintext highlighter-rouge">structures.bf</code>.</p>
+
+<p>Note that the seL4 build uses the <code class="language-plaintext highlighter-rouge">--prune</code> option, which means that the
+generator will only produce functions that are mentioned in the rest of the seL4
+sources. To generate a function that is not yet mentioned, simply use a
+supported function name pattern in the source (e.g. <code class="language-plaintext highlighter-rouge">&lt;block&gt;_get_&lt;field&gt;</code>) and
+the generator will supply it. To discover which functions can be generated,
+either use the name template descriptions in this manual or consider temporarily
+removing the <code class="language-plaintext highlighter-rouge">--prune</code> option in the <code class="language-plaintext highlighter-rouge">cmake</code> build to look at the generated
+sources. This should only be done when no proofs are required, because it will
+drastically increase proof processing time.</p>
+
+<!--
+TODO:
+
+- semantics (Isabelle?)
+-->
+
+
+</div>
+
+            </main>
+          </div>
+          
+          <div id="toc-open" class="absolute top-20 right-8 text-light hidden sm:block cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-5 w-5 stroke-2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"/>
+</svg>
+          </div>
+          <nav id="the-toc"
+               class="hidden xl:block absolute top-12 right-0 mt-8 pr-2 mr-6 w-60 h-[calc(100%-12rem)]
+                      std-bg">
+            <div class="pl-4 font-semibold mb-4 text-base text-dark relative">
+              On this page
+              <div id="toc-close" class="absolute top-1 right-1 text-light cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-4 w-4 stroke-2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+              </div>
+            </div>
+            <div class="pl-4 border-l bordercol overflow-y-auto max-h-full pb-2">
+            <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#bitfield-generator-manual">Bitfield Generator Manual</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h3"><a href="#bit-field-generator-by-example">Bit Field Generator by Example</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#blocks">Blocks</a></li>
+<li class="toc-entry toc-h4"><a href="#field-high">Field High</a></li>
+<li class="toc-entry toc-h4"><a href="#visible-field-order">Visible Field Order</a></li>
+<li class="toc-entry toc-h4"><a href="#tagged-unions">Tagged Unions</a></li>
+<li class="toc-entry toc-h4"><a href="#advanced-tag-fields">Advanced Tag Fields</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#tag-slices">Tag Slices</a></li>
+<li class="toc-entry toc-h5"><a href="#masks">Masks</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h4"><a href="#raw-value-access">Raw Value Access</a></li>
+<li class="toc-entry toc-h4"><a href="#architecture-parameters-and-canonical-pointers">Architecture Parameters and Canonical Pointers</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#syntax-reference">Syntax Reference</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#lexical-structure">Lexical Structure</a></li>
+<li class="toc-entry toc-h4"><a href="#syntactic-structure">Syntactic Structure</a></li>
+<li class="toc-entry toc-h4"><a href="#restrictions">Restrictions</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#correctness">Correctness</a></li>
+<li class="toc-entry toc-h3"><a href="#limitations">Limitations</a></li>
+<li class="toc-entry toc-h3"><a href="#command-line">Command Line</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#usage">Usage</a></li>
+<li class="toc-entry toc-h4"><a href="#options">Options</a></li>
+<li class="toc-entry toc-h4"><a href="#sel4-build">seL4 build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </div>
+            <div class="h-22"></div>
+          </nav>
+          
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-xs lg:text-sm font-semibold text-lighter">
+  <a href="/sitemap.html"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <a href="/processes/test-status.html"
+     class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
+  <div class="flex-1"></div>
+<a href="https://github.com/seL4/seL4/edit/master/tools/bitfield_gen.md" class="flex-none  hover:text-light hover:underline">Edit
+   included page on GitHub</a>
+</footer>
+
+        </div>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,124 +1,529 @@
 <!DOCTYPE html>
-<!--
-     SPDX-License-Identifier: CC-BY-SA-4.0
-     SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
--->
-<!-- Page last generated 2025-07-16 03:41:13 +0000 -->
+<!-- Page last generated 2025-07-16 05:32:53 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>1.3.0 | seL4 docs</title>
 
-    <!-- Our stylesheet and theme stylesheet.  Contains bootstrap. -->
-    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
-    <!-- Font awesome -->
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <!-- Pygments syntax highlighting  -->
-    <link rel="stylesheet" href="/assets/css/highlighting/trac.css" type="text/css">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"><script defer data-domain="docs.sel4.systems"
-	    src="https://analytics.sel4.systems/js/script.js"></script></head>
+    <link rel="canonical" href="https://docs.sel4.systems/releases/microkit/1.3.0.html">
+    <link href="/assets/css/sel4.css?v=1752643973" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 
-  <body class="container-fluid">
+    <script defer src="/assets/js/menu.js"></script>
+    <script defer src="/assets/js/sidebar.js"></script><script defer data-domain="docs.sel4.systems"
+            src="https://analytics.sel4.systems/js/script.js"></script></head>
+  <body class="flex flex-row h-screen std-bg text-dark">
+    <div id="sidebar" class="hidden lg:flex flex-none w-(--sidebar-width) flex-row bg-f_neutral-50 dark:bg-gray-900">
+      <div class="flex-1 overflow-y-auto min-h-full">
+        <a href="/">
+  <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="84.224365mm" height="32.530689mm" viewBox="0 0 84.224367 32.530689" version="1.1" id="svg5" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="sel4-docs.svg" inkscape:export-filename="C:\Users\Birgit Brecknell\Documents\seL4 Foundation\seL4 Summit 2022\sel4_summit_v02.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" class="px-4 w-50 h-20 mx-auto mt-4 mb-10">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" inkscape:zoom="1.8116734" inkscape:cx="193.19155" inkscape:cy="87.764163" inkscape:window-width="1392" inkscape:window-height="1099" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="g18" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" showguides="true" inkscape:guide-bbox="true" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1"/>
+  <defs id="defs2">
+    <rect x="680.69342" y="102.26014" width="15.612235" height="115.53054" id="rect9649"/>
+    <style id="style824">.cls-1,.cls-2,.cls-3{fill:#96ca4f;}.cls-2,.cls-3{stroke:#96ca4f;stroke-miterlimit:8;}.cls-3{stroke-width:0.25px;}</style>
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
+      <g inkscape:label="Clip" id="use15">
+        <path d="m 39.66384,47.73588 h 1.324364 q 0.447983,0 0.68299,0.06854 0.315791,0.09302 0.541007,0.330479 0.225215,0.237455 0.342719,0.582623 0.117503,0.342719 0.117503,0.847005 0,0.443087 -0.110159,0.763774 -0.13464,0.391679 -0.384335,0.63403 -0.188496,0.1836 -0.509183,0.286416 -0.239903,0.07589 -0.641374,0.07589 H 39.66384 Z m 0.724606,0.607103 v 2.377001 h 0.541006 q 0.303551,0 0.438191,-0.03427 0.176255,-0.04406 0.291311,-0.149327 0.117504,-0.105264 0.190944,-0.345168 0.07344,-0.242351 0.07344,-0.65851 0,-0.416159 -0.07344,-0.638926 -0.07344,-0.222767 -0.205632,-0.347615 -0.132192,-0.124848 -0.335375,-0.168912 -0.151776,-0.03427 -0.594862,-0.03427 z m 2.751544,1.209308 q 0,-0.54835 0.164016,-0.920445 0.122399,-0.274175 0.332927,-0.492047 0.212975,-0.217871 0.465118,-0.323135 0.335375,-0.141984 0.773566,-0.141984 0.79315,0 1.268061,0.492047 0.477358,0.492047 0.477358,1.368428 0,0.869038 -0.472462,1.361085 -0.472463,0.489598 -1.263165,0.489598 -0.800494,0 -1.272956,-0.48715 -0.472463,-0.489599 -0.472463,-1.346397 z m 0.746638,-0.02448 q 0,0.609551 0.281519,0.925342 0.281519,0.313343 0.714814,0.313343 0.433295,0 0.709918,-0.310895 0.279072,-0.313343 0.279072,-0.937582 0,-0.616894 -0.271728,-0.920445 -0.269279,-0.303551 -0.717262,-0.303551 -0.447983,0 -0.722158,0.308447 -0.274175,0.305999 -0.274175,0.925341 z m 5.596112,0.477359 0.702574,0.222767 q -0.161567,0.587519 -0.538558,0.873934 -0.374543,0.283967 -0.95227,0.283967 -0.714814,0 -1.175036,-0.48715 -0.460223,-0.489599 -0.460223,-1.336605 0,-0.895965 0.462671,-1.39046 0.46267,-0.496943 1.216652,-0.496943 0.658511,0 1.069773,0.389231 0.2448,0.230112 0.367199,0.660959 l -0.717262,0.171359 q -0.06365,-0.279071 -0.266831,-0.440639 -0.200735,-0.161567 -0.489599,-0.161567 -0.399022,0 -0.648718,0.286415 -0.247247,0.286415 -0.247247,0.927789 0,0.680542 0.244799,0.969406 0.2448,0.288863 0.636478,0.288863 0.288864,0 0.496943,-0.1836 0.20808,-0.183599 0.298655,-0.577726 z m 1.140766,0.151776 0.705022,-0.06854 q 0.06365,0.354959 0.257039,0.521422 0.19584,0.166464 0.526319,0.166464 0.350063,0 0.526318,-0.14688 0.178704,-0.149327 0.178704,-0.347615 0,-0.127295 -0.07589,-0.215423 -0.07344,-0.09058 -0.259487,-0.156672 -0.127296,-0.04406 -0.580175,-0.156671 -0.582622,-0.144432 -0.81763,-0.354959 -0.330479,-0.296208 -0.330479,-0.722158 0,-0.274176 0.154224,-0.511631 0.156671,-0.239903 0.447983,-0.364751 0.293759,-0.124848 0.70747,-0.124848 0.675646,0 1.015917,0.296208 0.342719,0.296207 0.359855,0.790701 l -0.724606,0.03182 q -0.04651,-0.276623 -0.200735,-0.396575 -0.151776,-0.122399 -0.457775,-0.122399 -0.315791,0 -0.494495,0.129743 -0.115056,0.08323 -0.115056,0.222768 0,0.127295 0.107712,0.217871 0.137088,0.115056 0.665854,0.239904 0.528767,0.124847 0.78091,0.259487 0.254591,0.132191 0.396575,0.364751 0.144432,0.230111 0.144432,0.570382 0,0.308447 -0.17136,0.577727 -0.171359,0.269279 -0.484703,0.401471 -0.313343,0.129743 -0.780909,0.129743 -0.680542,0 -1.045293,-0.313343 -0.364751,-0.315791 -0.435743,-0.917997 z" id="path16" style="font-weight:bold;font-stretch:condensed;font-size:5.01349px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;stroke-width:0.264583" transform="scale(1.0680757,0.9362632)" aria-label="DOCS"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-11.065137,-18.670029)">
+    <g id="g18">
+      <text xml:space="preserve" transform="scale(0.26458333)" id="text9647" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9649);display:inline;fill:#000000;fill-opacity:1;stroke:none"/>
+      <g id="Layer_2" data-name="Layer 2" transform="matrix(0.5563179,0,0,0.5563179,-0.00218815,0)">
+        <path class="cls-1" d="M 169.29,64.52 V 41.46 h -11.1 l -19.38,23.1 h -5.43 v -28.5 h -10.85 v 28.5 h -5.6 c 0,-0.53 0.08,-1.14 0.08,-1.88 V 62 h -6.77 v 1.94 a 6.32,6.32 0 0 1 -0.37,2.63 1.68,1.68 0 0 1 -1.66,0.88 1.5,1.5 0 0 1 -1.42,-0.71 5,5 0 0 1 -0.32,-2.33 V 58.73 H 117 V 56 a 13,13 0 0 0 -0.85,-5.23 6.31,6.31 0 0 0 -2.92,-2.88 11.68,11.68 0 0 0 -5.43,-1.11 11.49,11.49 0 0 0 -4.76,0.93 5.75,5.75 0 0 0 -2.88,2.57 10.54,10.54 0 0 0 -0.89,4.76 v 7 a 20,20 0 0 0 0.13,2.5 h -3 c 0,-0.28 0,-0.56 0,-0.87 a 5.84,5.84 0 0 0 -1,-3.71 12.59,12.59 0 0 0 -4.47,-2.8 22,22 0 0 1 -3.6,-1.84 3,3 0 0 1 -1.22,-1.32 6,6 0 0 1 -0.19,-1.77 2.32,2.32 0 0 1 0.45,-1.52 1.7,1.7 0 0 1 1.39,-0.58 1.5,1.5 0 0 1 1.49,0.71 5.86,5.86 0 0 1 0.25,2.32 v 1.3 h 6.27 V 53 a 11.15,11.15 0 0 0 -0.2,-2.55 3.72,3.72 0 0 0 -1.08,-1.63 6.68,6.68 0 0 0 -2.67,-1.49 14.3,14.3 0 0 0 -4.38,-0.58 13.32,13.32 0 0 0 -4.54,0.71 5,5 0 0 0 -2.63,1.92 7.84,7.84 0 0 0 -0.78,4 6.85,6.85 0 0 0 0.73,3.28 c 0.47,0.89 1.88,1.93 4.17,3.09 3.84,1.92 4.6,2.43 4.85,2.66 a 3.55,3.55 0 0 1 0.59,2.49 3,3 0 0 1 -0.46,2 A 2,2 0 0 1 87.8,67.45 1.5,1.5 0 0 1 86.3,66.6 6.54,6.54 0 0 1 86,63.87 v -2 h -6.29 v 1.62 c 0,0.38 0,0.72 0,1.05 h -6 a 25.58,25.58 0 1 0 0,8.83 H 158 v 8.42 h 11.33 v -8.4 h 5 V 64.52 Z M 38.89,75.1 A 6.1,6.1 0 1 1 45,69 6.1,6.1 0 0 1 38.89,75.1 Z m 67.54,-20.86 a 7.57,7.57 0 0 1 0.24,-2.68 c 0.15,-0.34 0.53,-0.75 1.48,-0.75 a 1.36,1.36 0 0 1 1.35,0.84 7.39,7.39 0 0 1 0.25,2.59 v 2.23 h -3.32 z M 158,64.52 h -9.62 L 158,52.22 Z" transform="translate(-3.04,-2.5)" id="path858"/>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.61839px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="48.089367" y="45.416836" id="text16" transform="scale(0.93916555,1.064775)"><tspan sodipodi:role="line" id="tspan16" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="48.089367" y="45.416836">D</tspan></text>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="54.558205" y="48.250385" id="text16-9"><tspan sodipodi:role="line" id="tspan16-1" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="54.558205" y="48.250385">O</tspan></text>
+      <g id="g1" transform="matrix(1.1426343,0,0,1.1426343,24.136464,-10.044912)" style="stroke-width:1.67137">
+        <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:7.7611px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.442217;stroke-opacity:1" x="44.508698" y="51.014606" id="text16-5"><tspan sodipodi:role="line" id="tspan16-8" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.442217" x="44.508698" y="51.014606">S</tspan></text>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.505292;stroke-opacity:1" x="65.022789" y="48.250385" id="text17"><tspan sodipodi:role="line" id="tspan17" style="stroke-width:0.505292" x="65.022789" y="48.250385">C</tspan></text>
+    </g>
+  </g>
+</svg>
+</a>
 
-    
-
-
-
-<header>
-  <ul class="row menu">
-    <li class="col-xs-12 col-md-2" >
-            <a href="https://sel4.systems" class="skip-icon">
-              <img class="img-responsive" src="/assets/logo-text-white.svg" alt="seL4 logo" />
-            </a>
-    </li>
-    <li class="col-xs-12 col-md-10 menu">
-      <nav aria-label="Banner links">
-        <h2><a href="/Resources">Resources</a></h2>
-        <h2><a href="https://sel4.systems/Contribute/">Contributing</a></h2>
-        <h2><a href="/projects">Projects</a></h2>
-        <h2><a href="/Tutorials">Tutorials</a></h2>
-        <iframe title="DuckDuckGo search bar" src="https://duckduckgo.com/search.html?site=docs.sel4.systems&prefill=Search%20sel4.systems" style="overflow:hidden;margin-bottom:10px; padding:0;height:40px;float:right;border-width: 0px"></iframe>
-      </nav>
-    </li>
-  </ul>
-  <div class="clear"></div>
-  
-<div class="breadcrumbs bootstrap hidden-sm-down">
-  <nav class="sel-breadcrumb" aria-label="Breadcrumb" >
-    <ol class=" list-unstyled" vocab="http://schema.org/" typeof="BreadcrumbList">
-      
-      
-        
-
-        
-
-        <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <a property="item" typeof="WebPage" href="/">
-              <span property="name"><b>seL4 Docs</b></span>
-            </a>
-            <meta property="position" content="1" />
+<ul class="px-4 my-10 ext-links">
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Getting Started</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/getting-started.html">Overview</a>
         </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/">Tutorials</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/dockerfiles/">Setting up with Docker</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/repo-cheatsheet.html">Repo manifest cheat sheet</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">The seL4 Kernel</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/host-dependencies.html">Setting up</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/setting-up.html">Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/get-the-tutorials.html">Getting the tutorials</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-world.html">Hello world</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/capabilities.html">Capabilities</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/untyped.html">Untyped</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mapping.html">Mapping</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/threads.html">Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/ipc.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/notifications.html">Notifications</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/interrupts.html">Interrupts</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/fault-handlers.html">Fault handling</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mcs.html">MCS</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/seL4-end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-seL4.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/api-doc.html">API docs</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Hardware/">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/verified-configurations.html">Verified configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/configurations.html">Configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/standalone.html">Standalone seL4 builds</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/bfgen.html">Bitfield generator</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Testing &amp; benchmarking</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4test/">seL4test</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-guide.html">Debugging guide</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-userspace.html">Debugging user space</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4bench/">sel4bench</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/benchmarking-guide.html">Benchmarking guide</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/porting.html">Porting to a new platform</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/seL4.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/seL4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class="font-bold mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer ">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Microkit</span>
+    </div>
+    <ul class="menu-content ml-6 on">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/welcome.html">Welcome</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part0.html">Part 0 - Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part1.html">Part 1 - Serial server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part2.html">Part 2 - Client</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part3.html">Part 3 - Wordle server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part4.html">Part 4 - Virtual machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/manual/latest/">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/roadmap.html">Roadmap</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/platforms.html">Supported platforms</a>
+        </li>
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/microkit.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/microkit">Sources</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">CAmkES</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-0.html">Hello CAmkES</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-1.html">Introduction</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-2.html">Events</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-timer.html">Timer</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-linux.html">Virtual Machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-crossvm.html">Cross-VM connectors</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-CAmkES.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/hardware.html">Supported platforms</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Virtualisation</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/camkes-vm/">CAmkES VM</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vm.html">VM library</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vmm.html">VMM library</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/camkes.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/camkes-tool/">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">C support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4runtime/">C runtime</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/user_libs/">User-level libraries</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/">Build System</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-1.html">Init & Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-2.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-3.html">ELF loading & Processes</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-4.html">Timer</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-libs.html">How-to</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Rust support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/how-to-use.html">How to use</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/tutorial/introduction.html">Tutorial</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://sel4.github.io/rust-sel4/">API</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/supported-configurations.html">Supported configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/releases.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/rust-sel4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">ELF loader</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/elfloader/">ELF loader for C</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">capDL</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/lang-spec.html">Language Spec</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/c-loader-app.html">capDL loader (C)</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/capDL.html">Releases</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Examples &amp; demos</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/examples.html">Overview</a>
+        </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gray-200 dark:bg-gray-700 w-px">
+      </div>
+    </div>
+    <div class="flex-1">
       
-        
-
-        
-          <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-            <span property="name">1.3.0</span>
-            <meta property="position" content="2" /></li>
-          
-    </ol>
-  </nav>
-  <nav class="sel-version" aria-label="Current Versions">
-    <ol class="list-unstyled">
-      <li class="list-unstyled text-right" style="margin-left:auto; padding:0rem 0rem;">
-        Current versions:</li>
-      <li class="list-unstyled text-right">
-      <a href="/releases/sel4/13.0.0"><b>seL4-13.0.0</b></a></li>
-      <li class="list-unstyled text-right">
-      <a href="/releases/microkit/2.0.1"><b>microkit-2.0.1</b></a></li>
-      <li class="list-unstyled text-right">
-      <a href="/releases/camkes/camkes-3.11.0"><b>camkes-3.11.0</b></a></li>
-      <li class="list-unstyled text-right">
-      <a href="/releases/capdl/0.3.0"><b>capDL-0.3.0</b></a></li>
-      </ol>
-  </nav>
-  <div class='clear'></div>
+<div class="w-full pb-px bg-gray-200 dark:bg-gray-700">
+  <header class="h-[2rem] sm:h-[2.5rem] lg:h-[3.5rem] w-full flex flex-row items-center gap-2 md:gap-4 md:py-2 std-bg">
+    <div id="burger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="text-dark ml-3 mr-0 sm:mr-3 lg:mx-4 w-4 h-4 lg:w-6 lg:h-6 cursor-pointer">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </div>
+    <div class="flex-1"></div>
+    <a href="/releases.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Releases
+    </a>
+    <a href="https://sel4.systems/Contribute/"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contribute
+    </a>
+    <a href="https://sel4.systems/contact.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contact
+    </a>
+    <a href="https://sel4.systems/support.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Support
+    </a>
+    <!-- main site button -->
+    <a href="https://sel4.systems"
+      class="flex-none button-outline ml-0 text-tiny px-2 py-0.5 sm:px-3 sm:py-1 h-4 sm:h-6 md:py-2 md:h-8 lg:h-9 md:text-xs lg:text-sm mr-0 md:mr-4">Main Site
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" data-slot="icon" class="hidden sm:inline-icon">
+<path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+    </a>
+    <!-- github button -->
+    <a href="https://github.com/seL4"
+      class="mr-2 lg:mr-6 px-0 sm:px-3 pt-2 sm:pt-1 pb-2 block text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+      <span class="sr-only">seL4 on GitHub</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+    </a>
+  </header>
 </div>
 
+      <div class="grid grid-cols-1  h-[calc(100%-3rem)]">
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div id="main-div" class="flex-1 max-w-full">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
+                        overflow-x-auto" id="page-top">
 
-</header>
-
-    <main>
-      <div class="row">
-  <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
-    
-
-
-<div class="sidebar">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-  </div>
-  <div class="content col-sm-8 col-md-6 col-lg-7 main">
-    <h1 id="microkit-release-130">Microkit Release 1.3.0</h1>
+              <div class="theprose mx-auto ext-links">
+<h1 id="microkit-release-130">Microkit Release 1.3.0</h1>
 
 <h4 id="2024-07-01">2024-07-01</h4>
 
@@ -196,316 +601,29 @@ more self-contained.</li>
 <p>See the <a href="https://github.com/seL4/microkit/blob/main/docs/manual.md">documentation</a>
 or ask on the mailing list!</p>
 
+<h2>Other releases</h2>
+<p>
+  See the <a href="/releases/microkit.html">
+    full list of Microkit releases.</a>
+</p>
+</div>
 
-  </div>
-
-
-
-
-
-
-
-  
-  
-<div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
-  
-    <ul class="section-nav">
-    	<h2> Microkit </h2> 
-        <li>
+            </main>
+          </div>
           
-          <a style="" class="" href="/projects/microkit/">
-            Documentation homepage
-          </a>
-        </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-        <h3>Useful URLs</h3>
-    
-        <li>
-          <a style="" class="" href="https://github.com/seL4/microkit/blob/main/docs/manual.md">
-            Microkit user manual
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" class="" href="https://trustworthy.systems/projects/microkit/tutorial">
-            Microkit tutorial
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" class="" href="https://github.com/seL4/microkit/issues/61">
-            Microkit development roadmap
-          </a>
-        </li>
-
-    
-        <li>
-          <a style="" class="" href="https://trustworthy.systems/projects/microkit">
-            Trustworthy Systems Microkit project
-          </a>
-        </li>
-
-
-
-
-
-    
-        <h3>Repositories</h3>
-    
-        <li>
-          <a class="" href="https://github.com/sel4/microkit">
-            microkit
-          </a>
-        </li>
-
-    
-        <li>
-          <a class="" href="https://github.com/au-ts/microkit_tutorial">
-            microkit_tutorial
-          </a>
-        </li>
-
-
-
-
-
-
-
-
-
-  
-      
-          <h3>Releases</h3>
-      
-          <li>
-            <a style="" href="/releases/microkit/2.0.1.html">
-              2.0.1
-            </a>
-          </li>
-  
-      
-          <li>
-            <a style="" href="/releases/microkit/2.0.0.html">
-              2.0.0
-            </a>
-          </li>
-  
-      
-          <li>
-            <a style="" href="/releases/microkit/1.4.1.html">
-              1.4.1
-            </a>
-          </li>
-  
-      
-          <li>
-            <a style="" href="/releases/microkit/1.4.0.html">
-              1.4.0
-            </a>
-          </li>
-  
-      
-          <li>
-            <a style=" font-weight: bold; " href="/releases/microkit/1.3.0.html">
-              1.3.0
-            </a>
-          </li>
-  
-
-
-
-<h3>SDK downloads</h3>
-  
-    <h4>2.0.1</h4>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-linux-x86-64.tar.gz">
-              microkit-sdk-2.0.1-linux-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-linux-aarch64.tar.gz">
-              microkit-sdk-2.0.1-linux-aarch64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-macos-x86-64.tar.gz">
-              microkit-sdk-2.0.1-macos-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-macos-aarch64.tar.gz">
-              microkit-sdk-2.0.1-macos-aarch64.tar.gz
-            </a>
-      </li>
-    
-  
-    <h4>2.0.0</h4>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.0/microkit-sdk-2.0.0-linux-x86-64.tar.gz">
-              microkit-sdk-2.0.0-linux-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.0/microkit-sdk-2.0.0-linux-aarch64.tar.gz">
-              microkit-sdk-2.0.0-linux-aarch64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.0/microkit-sdk-2.0.0-macos-x86-64.tar.gz">
-              microkit-sdk-2.0.0-macos-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/2.0.0/microkit-sdk-2.0.0-macos-aarch64.tar.gz">
-              microkit-sdk-2.0.0-macos-aarch64.tar.gz
-            </a>
-      </li>
-    
-  
-    <h4>1.4.1</h4>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.4.1/microkit-sdk-1.4.1-linux-x86-64.tar.gz">
-              microkit-sdk-1.4.1-linux-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.4.1/microkit-sdk-1.4.1-macos-x86-64.tar.gz">
-              microkit-sdk-1.4.1-macos-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.4.1/microkit-sdk-1.4.1-macos-aarch64.tar.gz">
-              microkit-sdk-1.4.1-macos-aarch64.tar.gz
-            </a>
-      </li>
-    
-  
-    <h4>1.4.0</h4>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.4.0/microkit-sdk-1.4.0-linux-x86-64.tar.gz">
-              microkit-sdk-1.4.0-linux-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.4.0/microkit-sdk-1.4.0-macos-x86-64.tar.gz">
-              microkit-sdk-1.4.0-macos-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.4.0/microkit-sdk-1.4.0-macos-aarch64.tar.gz">
-              microkit-sdk-1.4.0-macos-aarch64.tar.gz
-            </a>
-      </li>
-    
-  
-    <h4>1.3.0</h4>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.3.0/microkit-sdk-1.3.0-linux-x86-64.tar.gz">
-              microkit-sdk-1.3.0-linux-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.3.0/microkit-sdk-1.3.0-macos-x86-64.tar.gz">
-              microkit-sdk-1.3.0-macos-x86-64.tar.gz
-            </a>
-      </li>
-    
-      <li>
-          <a href="https://github.com/seL4/microkit/releases/download/1.3.0/microkit-sdk-1.3.0-macos-aarch64.tar.gz">
-              microkit-sdk-1.3.0-macos-aarch64.tar.gz
-            </a>
-      </li>
-    
-  
-
-
-
-
-
-    </ul>
-
-</div>
-
-
-</div>
-
-    </main>
-    
-
-
-<footer class="site-footer">
-
-  <h2 class="footer-heading">seL4 docs</h2>
-
-  <div class="footer-col-wrapper">
-
-    <div class="col-md-2">
-      
-
-
-
-<ul class="social-media-list">
-  <li><a href="https://github.com/sel4"><i class="fab fa-github"></i> <span class="username">sel4</span></a></li><li><a href="https://github.com/sel4proj"><i class="fab fa-github"></i> <span class="username">sel4proj</span></a></li>
-</ul>
-
-    </div>
-
-    <div class="col-md-8">
-      <ul class="list-unstyled">
-        <li>
-          This site is for displaying seL4 related documentation.  Pull requests are welcome.
-        </li>
-        
-          <li>
-            Site last updated: Sat May 24 11:34:27 2025 +0100 9f8ce8e821
-          </li>
-          <li>
-          </li>
-        
-      </ul>
-    </div>
-    <div class="col-md-2">
-<a href="https://github.com/seL4/docs/blob/master/content_collections/_releases/microkit/1.3.0.md">View page on GitHub</a>
-      <br />
-      <a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/1.3.0.md">Edit page on GitHub</a>
-      <br />
-      <a href="/sitemap">Sitemap</a>
-    </div>
-
-  </div>
-
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-xs lg:text-sm font-semibold text-lighter">
+  <a href="/sitemap.html"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <a href="/processes/test-status.html"
+     class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
+  <div class="flex-1"></div>
+<a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/microkit/1.3.0.md" class="flex-none  hover:text-light hover:underline">Edit
+    page on GitHub</a>
 </footer>
 
+        </div>
+        </div>
+    </div>
   </body>
 </html>

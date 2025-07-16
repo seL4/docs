@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hello, World! - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="hello-world"><a class="header" href="#hello-world">Hello, World!</a></h1>
+<p>Run the hello world example:</p>
+<pre><code>cd workspaces/root-task/hello-world
+make simulate
+</code></pre>
+<p>Press <code>ctrl-a x</code> to exit QEMU.</p>
+<p>Here is its source:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/6a0418982760bc2e9c0fc6fe91cdc614757d0195/workspaces/root-task/hello-world/src/main.rs#L7-L17">hello-world/src/main.rs:7:17</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use sel4_root_task::root_task;
+
+#[root_task]
+fn main(_bootinfo: &amp;sel4::BootInfoPtr) -&gt; ! {
+    sel4::debug_println!("Hello, World!");
+
+    sel4::init_thread::suspend_self()
+}
+</code></pre>
+</div>
+</div>
+<p>The Rust standard library is divided into three layers:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/core/"><code>core</code></a>: dependency-free foundation</li>
+<li><a href="https://doc.rust-lang.org/alloc/"><code>alloc</code></a>: implements heap-backed data structures, but requires a runtime that provides a heap allocator</li>
+<li><a href="https://doc.rust-lang.org/std/"><code>std</code></a> includes <code>core</code> and <code>alloc</code>, and adds APIs that depend on OS services such as networking and filesystems</li>
+</ul>
+<p>The high-level <code>std</code> doesn't support the low-level seL4 root task target.
+<a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>#![no_std]</code></a> declares that this crate does not depend on <code>std</code>, and prevents rustc from automatically importing it.</p>
+<p>Our language runtime will handle the program's entrypoint differently than a typical Rust program.
+<a href="https://doc.rust-lang.org/reference/crates-and-source-files.html#the-no_main-attribute"><code>#![no_main]</code></a> informs rustc of this fact.</p>
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html"><code>sel4</code> crate</a> binds the seL4 API.
+It is generated from source (<code>.xml</code>, <code>.bf</code>, and <code>.h</code>) in <code>libsel4</code>.
+We will cover the contents of this crate in future chapters.</p>
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/index.html"><code>sel4_root_task</code> crate</a> implements a Rust language runtime for the root task environment.</p>
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/attr.root_task.html"><code>#[root_task]</code></a> attribute macro declares a function to be the root task's entrypoint.
+The entrypoint function must have a signature of the form:</p>
+<pre><code class="language-rust ignore">fn(&amp;sel4::BootInfoPtr) -&gt; T
+where
+    T: sel4_root_task::Termination</code></pre>
+<p>(Rustdoc for <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.BootInfoPtr.html"><code>BootInfoPtr</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/trait.Termination.html"><code>Termination</code></a>)</p>
+<p>The root task has no way to exit, so, to terminate cleanly, it must suspend its own thread.
+<code>sel4::init_thread::suspend_self()</code> does exactly this.</p>
+<h2 id="step-2a-exercise"><a class="header" href="#step-2a-exercise">Step 2.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('57db641a576be7b543c6d0655b0470b1c800d713')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/57db641a576be7b543c6d0655b0470b1c800d713"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Cause a panic.</p>
+<h2 id="step-2b-exercise"><a class="header" href="#step-2b-exercise">Step 2.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e747327f84222e3d3d3643c1ecb7dc15199fc05e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e747327f84222e3d3d3643c1ecb7dc15199fc05e"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Catch the panic using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/panicking/fn.catch_unwind.html"><code>sel4_root_task::panicking::catch_unwind()</code></a>.</p>
+<h2 id="step-2c-exercise"><a class="header" href="#step-2c-exercise">Step 2.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('eadf1d91c520decd24164de6e650345428eb6c4c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/eadf1d91c520decd24164de6e650345428eb6c4c"> <i class="fa fa-github"></i> </a></a></h2>
+<p>You can set a custom panic hook with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/panicking/type.PanicHook.html"><code>sel4_root_task::panicking::PanicHook</code></a>.
+The default hook just prints the panic's <code>ExternalPanicInfo</code>.</p>
+<p><strong>Exercise:</strong> Set a custom panic hook.</p>
+<h2 id="step-2d-exercise"><a class="header" href="#step-2d-exercise">Step 2.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e47556acc781e682fcd69fb0e3bce9eda06c543b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e47556acc781e682fcd69fb0e3bce9eda06c543b"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Cause a stack overflow.</p>
+<h2 id="step-2e-exercise"><a class="header" href="#step-2e-exercise">Step 2.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f0f50266033bae0848bfc04d99400611d7c9164b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f0f50266033bae0848bfc04d99400611d7c9164b"> <i class="fa fa-github"></i> </a></a></h2>
+<p>The <code>#[root_task]</code> attribute macro accepts a named <code>stack_size</code> parameter, which can be any expression of type <code>usize</code> and whose value is interpreted as the root task's initial thread's stack size, in bytes.
+For example:</p>
+<pre><code class="language-rust ignore">#[root_task(stack_size = 13 * 37)]</code></pre>
+<p>The default stack size is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/constant.DEFAULT_STACK_SIZE.html"><code>sel4_root_task::DEFAULT_STACK_SIZE</code></a>.</p>
+<p><strong>Exercise:</strong> Adjust the root task's initial thread's stack size to prevent the stack overflow you just caused.</p>
+<h2 id="step-2f-exercise"><a class="header" href="#step-2f-exercise">Step 2.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('09bd92fb5dc403d66f660fc470fbb769a93cc9f6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/09bd92fb5dc403d66f660fc470fbb769a93cc9f6"> <i class="fa fa-github"></i> </a></a></h2>
+<p>By default, the <code>sel4_root_task</code> runtime does not include a heap.
+Any attempt to use the <code>alloc</code> crate will result in a link-time failure.</p>
+<p>The <code>#[root_task]</code> attribute macro accepts a <code>heap_size</code> parameter, which can be any expression of type <code>usize</code> and whose value is interpreted as the root task's heap size, in bytes.
+Note that <code>heap_size</code> must come after <code>stack_size</code> in the case where both are present.
+For example:</p>
+<pre><code class="language-rust ignore">#[root_task(heap_size = 0xf00d)]</code></pre>
+<p>or</p>
+<pre><code class="language-rust ignore">#[root_task(stack_size = 13 * 37, heap_size = 0xf00d)]</code></pre>
+<p><strong>Exercise:</strong> Add a heap and use it.</p>
+<h2 id="step-2g"><a class="header" href="#step-2g">Step 2.G   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('321b5ac58e8d0f683ec97b51260fb652dc59af3d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/321b5ac58e8d0f683ec97b51260fb652dc59af3d"> <i class="fa fa-github"></i> </a></a></h2>
+<p>The <code>sel4_logging</code> crate builds on top of the <a href="https://docs.rs/log/latest/log/">log</a> crate to add utilities for initializing simple loggers in minimal environments, such as a seL4 root task.
+This step demonstrates one way to initialize a logger using this crate:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/321b5ac58e8d0f683ec97b51260fb652dc59af3d/workspaces/root-task/hello-world/src/main.rs#L17-L20">hello-world/src/main.rs:17:20 after 2.G</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">static LOGGER: Logger = LoggerBuilder::const_default()
+    .level_filter(LevelFilter::Info)
+    .write(|s| sel4::debug_print!("{}", s))
+    .build();
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/321b5ac58e8d0f683ec97b51260fb652dc59af3d/workspaces/root-task/hello-world/src/main.rs#L41">hello-world/src/main.rs:41 after 2.G</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    LOGGER.set().unwrap();
+</code></pre>
+</div>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../root-task/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../root-task/kernel-objects.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../root-task/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../root-task/kernel-objects.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

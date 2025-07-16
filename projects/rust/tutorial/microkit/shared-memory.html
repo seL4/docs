@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Shared Memory - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="shared-memory"><a class="header" href="#shared-memory">Shared Memory</a></h1>
+<p>This chapter covers interacting with shared memory from protection domains written in Rust.
+Navigate to and run the example:</p>
+<pre><code>cd workspaces/microkit/shared-memory
+make simulate
+</code></pre>
+<p>The example system description specifies two protection domains which share two memory regions:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-xml">&lt;system&gt;
+    &lt;memory_region name="region_a" size="0x1_000" /&gt;
+
+    &lt;memory_region name="region_b" size="0x1_000" /&gt;
+
+    &lt;protection_domain name="client" priority="100"&gt;
+        &lt;program_image path="microkit-shared-memory-client.elf" /&gt;
+        &lt;map mr="region_a" vaddr="0x2_000_000" perms="rw" cached="true" setvar_vaddr="region_a_vaddr" /&gt;
+        &lt;map mr="region_b" vaddr="0x2_400_000" perms="rw" cached="true" setvar_vaddr="region_b_vaddr" /&gt;
+    &lt;/protection_domain&gt;
+
+    &lt;protection_domain name="server" priority="200"&gt;
+        &lt;program_image path="microkit-shared-memory-server.elf" /&gt;
+        &lt;map mr="region_a" vaddr="0x2_000_000" perms="r" cached="true" setvar_vaddr="region_a_vaddr" /&gt;
+        &lt;map mr="region_b" vaddr="0x2_400_000" perms="r" cached="true" setvar_vaddr="region_b_vaddr" /&gt;
+    &lt;/protection_domain&gt;
+
+    &lt;channel&gt;
+        &lt;end pd="client" id="13" pp="true" /&gt;
+        &lt;end pd="server" id="37" /&gt;
+    &lt;/channel&gt;
+&lt;/system&gt;
+
+</code></pre>
+</div>
+</div>
+<p>The Microkit tool will inject memory region virtual addresses into protection domain images according to the <code>setvar_vaddr</code> attribute values.
+For example, the virtual address of the mapping of <code>region_a</code> into the <code>client</code> protection domain will be injected into the <code>microkit-shared-memory-client.elf</code> image at the location specified by then <code>region_a_vaddr</code> symbol.</p>
+<p>In the case of Rust, declaring a symbol that the Microkit tool can patch requires a bit more intentionality than in the C case.
+The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/macro.var.html"><code>sel4_microkit::var!</code></a> macro is provided to declare such symbols.</p>
+<p>The <code>var!</code> macro's <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/src/sel4_microkit_base/symbols.rs.html#55-67">implementation</a> is just a few lines of code.
+We want to express this symbol as a global variable that does not change at runtime, but which cannot be assumed to have the value we assign it at compile time, and which must not be optimized away.
+The near-trivial
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_immutable_cell/struct.ImmutableCell.html"><code>sel4_immutable_cell::ImmutableCell</code></a> type encapsulates this pattern.
+The <code>#[no_mangle]</code> attribute instructs the compiler to use the name of the variable as the name of the symbol.
+This is the default in C, but not Rust.
+We direct the compiler to put this symbol in the <code>.data</code> section with <code>#[link_section = ".data"]</code> to ensure that space is allocated for it in the ELF file itself, not just the program image it describes.</p>
+<p>So far, the example protection domains just store pointers to the shared memory regions in their handler state:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
+    debug_println!("client: initializing");
+
+    let region_a = *var!(region_a_vaddr: usize = 0);
+    let region_b = *var!(region_b_vaddr: usize = 0);
+
+    debug_println!("client: region_a = {region_a:#x?}");
+    debug_println!("client: region_b = {region_b:#x?}");
+
+    let _ = SERVER.pp_call(MessageInfo::default());
+
+    debug_println!("TEST_PASS");
+
+    NullHandler::new()
+}
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
+    debug_println!("server: initializing");
+
+    let region_a = *var!(region_a_vaddr: usize = 0);
+    let region_b = *var!(region_b_vaddr: usize = 0);
+
+    debug_println!("server: region_a = {region_a:#x?}");
+    debug_println!("server: region_b = {region_b:#x?}");
+
+    HandlerImpl { region_a, region_b }
+}
+
+struct HandlerImpl {
+    region_a: usize,
+    region_b: usize,
+}
+
+impl Handler for HandlerImpl {
+    type Error = Infallible;
+
+    fn protected(
+        &amp;mut self,
+        channel: Channel,
+        _msg_info: MessageInfo,
+    ) -&gt; Result&lt;MessageInfo, Self::Error&gt; {
+        assert_eq!(channel, CLIENT);
+
+        Ok(MessageInfo::default())
+    }
+}
+</code></pre>
+</div>
+</div>
+<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5e3db5a4dcd15f753d94c08b6900c2d1ab694a52')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5e3db5a4dcd15f753d94c08b6900c2d1ab694a52"> <i class="fa fa-github"></i> </a></a></h2>
+<p>Let's assign types to these shared memory regions.
+We can define our types in a crate that both the client and server can use:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5e3db5a4dcd15f753d94c08b6900c2d1ab694a52/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">use zerocopy::{FromBytes, IntoBytes};
+
+pub const REGION_A_SIZE: usize = 1337;
+
+#[repr(C)]
+#[derive(IntoBytes, FromBytes)]
+pub struct RegionB {
+    pub field_1: u64,
+    pub foo: [u16; 16],
+}
+</code></pre>
+</div>
+</div>
+<p>Suppose <code>region_a: [u8; REGION_A_SIZE]</code> and <code>region_b: RegionB</code>.
+You could just turn the virtual addresses we get in our <code>var!</code> symbols into pointers and start interacting with the shared memory regions with <code>unsafe</code> <code>ptr::*</code> operations, but we can leverage the Rust type system to come up with a solution that only requires <code>unsafe</code> at initialization time.</p>
+<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d5e2458ae4c2eab978c8d6e5113e8fc3d1c32cb2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d5e2458ae4c2eab978c8d6e5113e8fc3d1c32cb2"> <i class="fa fa-github"></i> </a></a></h2>
+<p>The
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
+crate provides a way for you to declare a memory region's type and bounds, along with the memory access operations that can safely be used on it, so that you can access it without <code>unsafe</code> code.
+That initial declaration is, however, <code>unsafe</code>.</p>
+<p>The
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
+is a thin wrapper around the
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4_abstract_ptr</code></a>
+crate, instantiating its abstract pointer types with memory access operations suitable for memory that is shared with another protection domain.</p>
+<p>The
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/macro.memory_region_symbol.html"><code>sel4_microkit::memory_region_symbol!</code></a>
+macro is like the <code>sel4_microkit::var!</code> macro, except specialized for shared memory region virtual address symbols.
+For one, the underlying symbol is always of type <code>usize</code> and the macro returns a value of type <code>NonNull&lt;_&gt;</code>.
+<code>memory_region_symbol!</code> has a few additional features.
+For example, <code>memory_region_symbol!(foo: *mut [u8] n = BAR)</code> returns a <code>NonNull&lt;[u8]&gt;</code> with a runtime slice length of <code>BAR</code>.</p>
+<p>See this step's diff for how to put this all together.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../microkit/ipc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../microkit/ipc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

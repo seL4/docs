@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>IPC - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="ipc"><a class="header" href="#ipc">IPC</a></h1>
+<p>This chapter covers making and handling protected procedure calls in protection domains written in Rust.
+Navigate to and run the example:</p>
+<pre><code>cd workspaces/microkit/ipc
+make simulate
+</code></pre>
+<p>The example system description specifies two protection domains, with a channel between them:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/ipc.system#L7-L20">ipc.system:7:20</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-xml">&lt;system&gt;
+    &lt;protection_domain name="client" priority="100"&gt;
+        &lt;program_image path="microkit-ipc-client.elf" /&gt;
+    &lt;/protection_domain&gt;
+
+    &lt;protection_domain name="server" priority="200"&gt;
+        &lt;program_image path="microkit-ipc-server.elf" /&gt;
+    &lt;/protection_domain&gt;
+
+    &lt;channel&gt;
+        &lt;end pd="client" id="13" pp="true" /&gt;
+        &lt;end pd="server" id="37" /&gt;
+    &lt;/channel&gt;
+&lt;/system&gt;
+
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/pds/client/src/main.rs#L14-L36">pds/client/src/main.rs:14:36</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">const SERVER: Channel = Channel::new(13);
+
+#[protection_domain]
+fn init() -&gt; impl Handler {
+    debug_println!("client: initializing");
+    HandlerImpl
+}
+
+struct HandlerImpl;
+
+impl Handler for HandlerImpl {
+    type Error = Infallible;
+
+    fn notified(&amp;mut self, channels: ChannelSet) -&gt; Result&lt;(), Self::Error&gt; {
+        debug_println!("client: notified by {}", channels.display());
+
+        if channels.contains(SERVER) {
+            debug_println!("client: TEST_PASS");
+        }
+
+        Ok(())
+    }
+}
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/pds/server/src/main.rs#L12-L39">pds/server/src/main.rs:12:39</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">const CLIENT: Channel = Channel::new(37);
+
+#[protection_domain]
+fn init() -&gt; impl Handler {
+    debug_println!("server: initializing");
+
+    debug_println!("server: notifying client");
+
+    CLIENT.notify();
+
+    HandlerImpl
+}
+
+struct HandlerImpl;
+
+impl Handler for HandlerImpl {
+    type Error = Infallible;
+
+    fn protected(
+        &amp;mut self,
+        channel: Channel,
+        msg_info: MessageInfo,
+    ) -&gt; Result&lt;MessageInfo, Self::Error&gt; {
+        debug_println!("server: called by {:?}", channel);
+
+        todo!()
+    }
+}
+</code></pre>
+</div>
+</div>
+<p>The
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/struct.Channel.html"><code>Channel</code></a> type is the Rust equivalent of the
+<a href="https://github.com/seL4/microkit/blob/b8cf3094ba08b37198b1943ec832c3a1168f4409/libmicrokit/include/microkit.h#L14C22-L14C38">microkit_channel</a>
+type alias in <code>libmicrokit</code>.
+Note how the functionality corresponding to <code>libmicrokit</code>'s <code>microkit_notify</code>, <code>microkit_irq_ack</code>, and <code>microkit_ppcall</code> is implemented in methods for <code>Channel</code>.</p>
+<p>The
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/struct.MessageInfo.html"><code>MessageInfo</code></a> type is the Rust equivalent of the
+<a href="https://github.com/seL4/microkit/blob/b8cf3094ba08b37198b1943ec832c3a1168f4409/libmicrokit/include/microkit.h#L16C28-L16C44">microkit_msginfo</a>
+type alias in <code>libmicrokit</code>.
+Just as <code>microkit_msginfo</code> is an alias for <code>seL4_MessageInfo_t</code>, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/struct.MessageInfo.html"><code>sel4_microkit::MessageInfo</code></a> is just a thin wrapper around <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.</p>
+<p><code>libmicrokit</code> has <code>microkit_mr_set()</code> and <code>microkit_mr_get()</code> for interacting with the IPC buffer.
+In the <code>sel4_microkit</code> crate, we have
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/fn.get_mr.html"><code>get_mr()</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/fn.set_mr.html"><code>set_mr()</code></a>
+,
+but we also have
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/fn.with_msg_regs.html"><code>with_msg_regs()</code></a>,
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/fn.with_msg_regs_mut.html"><code>with_msg_regs_mut()</code></a>,
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/fn.with_msg_bytes.html"><code>with_msg_bytes()</code></a>, and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/fn.with_msg_bytes_mut.html"><code>with_msg_bytes_mut()</code></a>,
+which use
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer()</code></a> and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut()</code></a> under the hood.</p>
+<h2 id="step-10a-exercise"><a class="header" href="#step-10a-exercise">Step 10.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bd4b3a57ec358e3c50a61a63c27ecbc6593d160')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bd4b3a57ec358e3c50a61a63c27ecbc6593d160"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong>
+In the client's <code>notified()</code> handler, make a protected procedure call to the server using <code>SERVER.pp_call()</code>.
+Handle the call in the server's <code>protected()</code> handler.
+Include data in the message using <code>sel4_microkit::with_msg_regs{,_mut}</code>.</p>
+<p><strong>Exercise (optional):</strong>
+Send something more interesting over IPC using
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes"><code>msg_bytes</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes_mut"><code>msg_bytes_mut</code></a>
+.
+For example, the <a href="https://docs.rs/zerocopy/latest/zerocopy/"><code>zerocopy</code> crate</a> can be used to view certain types as bytes and vice versa, and the lightweight <a href="https://docs.rs/postcard/latest/postcard/"><code>postcard</code> crate</a> can be used to serialize and deserialize a wider range of types using <a href="https://serde.rs/"><code>serde</code></a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../microkit/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../microkit/shared-memory.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../microkit/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../microkit/shared-memory.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

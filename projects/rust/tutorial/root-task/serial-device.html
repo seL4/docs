@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Using a Serial Device - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="using-a-serial-device"><a class="header" href="#using-a-serial-device">Using a Serial Device</a></h1>
+<p>In this chapter, we will build a root task that interacts with a serial device.
+Start by navigating to and running this chapter's example, which, so far, doesn't do anything interesting.</p>
+<pre><code>cd workspaces/root-task/serial-device
+make simulate
+</code></pre>
+<p>The module at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/device.rs">device.rs</a> implements a higher-level interface over the serial device's MMIO registers, whose physical base address is:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/main.rs#L16-L16">workspaces/root-task/serial-device/src/main.rs:16:16</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">const SERIAL_DEVICE_MMIO_PADDR: usize = 0x0900_0000;
+</code></pre>
+</div>
+</div>
+<p>Our first goal will be to map the serial device's MMIO registers into the root task's address space.</p>
+<p>After that, we will set up the root task's access to the serial device's interrupt, whose value is:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/main.rs#L18-L18">workspaces/root-task/serial-device/src/main.rs:18:18</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">const SERIAL_DEVICE_IRQ: usize = 33;
+</code></pre>
+</div>
+</div>
+<p>Finally, we will implement a simple loop that echoes serial input to serial output.</p>
+<h2 id="step-5a"><a class="header" href="#step-5a">Step 5.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4ca8d20363654314ea477148a2c0c45d0c3cbd5e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4ca8d20363654314ea477148a2c0c45d0c3cbd5e"> <i class="fa fa-github"></i> </a></a></h2>
+<p>First, add some familiar snippets that we will use for allocating CSlots and kernel objects:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4ca8d20363654314ea477148a2c0c45d0c3cbd5e/workspaces/root-task/serial-device/src/main.rs#L34-L44">workspaces/root-task/serial-device/src/main.rs:34:44 after 5.A</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn find_largest_kernel_untyped(bootinfo: &amp;sel4::BootInfo) -&gt; sel4::cap::Untyped {
+    let (ut_ix, _desc) = bootinfo
+        .untyped_list()
+        .iter()
+        .enumerate()
+        .filter(|(_i, desc)| !desc.is_device())
+        .max_by_key(|(_i, desc)| desc.size_bits())
+        .unwrap();
+
+    bootinfo.untyped().index(ut_ix).cap()
+}
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4ca8d20363654314ea477148a2c0c45d0c3cbd5e/workspaces/root-task/serial-device/src/main.rs#L22-L27">workspaces/root-task/serial-device/src/main.rs:22:27 after 5.A</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let mut empty_slots = bootinfo
+        .empty()
+        .range()
+        .map(sel4::init_thread::Slot::&lt;sel4::cap_type::Unspecified&gt;::from_index);
+
+    let largest_kernel_ut = find_largest_kernel_untyped(bootinfo);
+</code></pre>
+</div>
+</div>
+<h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('1d4e99587abf6cdd57593e796ff932898e66bc58')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/1d4e99587abf6cdd57593e796ff932898e66bc58"> <i class="fa fa-github"></i> </a></a></h2>
+<p><code>largest_kernel_ut</code> will be useful for allocating kernel objects whose backing physical addresses don't matter to us, but we must allocate the frame which contains the serial device's MMIO registers at a particular physicall address (<code>SERIAL_DEVICE_MMIO_PADDR</code>).
+Furthermore, the seL4 API distinguishes between <em>general purpose untyped</em> and <em>device untyped</em>. General purpose untyped is backed by normal memory, and can be used to create any type of object. Device untyped is not backed by normal memory, and can only be used to create frames.
+See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
+So, we must allocate the serial device MMIO frame from the particular initial device untyped that contains <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
+<p><strong>Exercice:</strong> Identify this initial untyped in the <code>bootinfo</code>. We will need a corresponding <code>sel4::cap::Untyped</code> along with the untyped's physical address (or <code>sel4::UntypedDesc</code>, which contains the physical address) for the next step.</p>
+<h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('37c98443e92fdf315918fba8b9705eef2dadf512')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/37c98443e92fdf315918fba8b9705eef2dadf512"> <i class="fa fa-github"></i> </a></a></h2>
+<p>The untyped we've identified contains the frame we are targeting, but that frame may be somewhere in the middle of the region of device memory the untyped covers.
+To allocate the frame at <code>SERIAL_DEVICE_MMIO_PADDR</code>, we must allocate dummy objects from this untyped until its watermark is at <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
+<p>This <code>trim_untyped</code> function takes the untyped capability, its physical address, the desired physical address, and two empty slots for temporarily holding dummy objects.
+We need two slots because the kernel resets an untyped's watermark if it has no live children.
+So, we must always keep one child around so that our progress on advancing the watermark is never lost.</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37c98443e92fdf315918fba8b9705eef2dadf512/workspaces/root-task/serial-device/src/main.rs#L43-L49">workspaces/root-task/serial-device/src/main.rs:43:49 after 5.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    trim_untyped(
+        device_ut_cap,
+        device_ut_desc.paddr(),
+        SERIAL_DEVICE_MMIO_PADDR,
+        empty_slots.next().unwrap(),
+        empty_slots.next().unwrap(),
+    );
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37c98443e92fdf315918fba8b9705eef2dadf512/workspaces/root-task/serial-device/src/main.rs#L68-L97">workspaces/root-task/serial-device/src/main.rs:68:97 after 5.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn trim_untyped(
+    ut: sel4::cap::Untyped,
+    ut_paddr: usize,
+    target_paddr: usize,
+    free_slot_a: sel4::init_thread::Slot,
+    free_slot_b: sel4::init_thread::Slot,
+) {
+    let rel_a = sel4::init_thread::slot::CNODE
+        .cap()
+        .absolute_cptr(free_slot_a.cptr());
+    let rel_b = sel4::init_thread::slot::CNODE
+        .cap()
+        .absolute_cptr(free_slot_b.cptr());
+    let mut cur_paddr = ut_paddr;
+    while cur_paddr != target_paddr {
+        let size_bits = (target_paddr - cur_paddr).ilog2().try_into().unwrap();
+        ut.untyped_retype(
+            &amp;sel4::ObjectBlueprint::Untyped { size_bits },
+            &amp;sel4::init_thread::slot::CNODE
+                .cap()
+                .absolute_cptr_for_self(),
+            free_slot_b.index(),
+            1,
+        )
+        .unwrap();
+        rel_a.delete().unwrap();
+        rel_a.move_(&amp;rel_b).unwrap();
+        cur_paddr += 1 &lt;&lt; size_bits;
+    }
+}
+</code></pre>
+</div>
+</div>
+<h2 id="step-5d"><a class="header" href="#step-5d">Step 5.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e53700e1f3e3422f8dae8bfa5e51082021ff5a8d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e53700e1f3e3422f8dae8bfa5e51082021ff5a8d"> <i class="fa fa-github"></i> </a></a></h2>
+<p><code>device_ut_cap</code> is now primed; the physical address of the next allocation will be <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
+<p><strong>Exercise:</strong> Allocate a small frame object (<code>sel4::cap_type::Granule</code>) from <code>device_ut_cap</code>.</p>
+<p>If your <code>sel4::cap::Granule</code> is called <code>serial_device_frame_cap</code>, then the following assertion should succeed:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/e53700e1f3e3422f8dae8bfa5e51082021ff5a8d/workspaces/root-task/serial-device/src/main.rs#L70-L73">workspaces/root-task/serial-device/src/main.rs:70:73 after 5.D</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    assert_eq!(
+        serial_device_frame_cap.frame_get_address().unwrap(),
+        SERIAL_DEVICE_MMIO_PADDR
+    );
+</code></pre>
+</div>
+</div>
+<h2 id="step-5e-exercise"><a class="header" href="#step-5e-exercise">Step 5.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f777327b2723bd850a1fe35ae2679e668d09ed2b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f777327b2723bd850a1fe35ae2679e668d09ed2b"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Using code from <a href="./address-space.html#step-4b">Step 4.B</a>, <a href="./address-space.html#step-4c">Step 4.C</a>, and <a href="./address-space.html#step-4d-exercise">Step 4.D</a>, map <code>serial_device_frame_cap</code> into the root task's virtual address space.</p>
+<p>You should now be able interact with the serial device's MMIO registers.
+Try printing "Hello, World!" to the serial console with something like:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/f777327b2723bd850a1fe35ae2679e668d09ed2b/workspaces/root-task/serial-device/src/main.rs#L102-L108">workspaces/root-task/serial-device/src/main.rs:102:108 after 5.E</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let serial_device = unsafe { Device::new(serial_device_mmio_page_addr.cast()) };
+
+    serial_device.init();
+
+    for c in b"Hello, World!\n" {
+        serial_device.put_char(*c);
+    }
+</code></pre>
+</div>
+</div>
+<p>where <code>serial_device_mmio_page_addr: *mut _</code> is a pointer to where the MMIO registers are mapped in the root task's virtual address space.</p>
+<h2 id="step-5f-exercise"><a class="header" href="#step-5f-exercise">Step 5.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('821f5c9d6e6b0e0f8d01f8cbc51e27e1e9090b38')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/821f5c9d6e6b0e0f8d01f8cbc51e27e1e9090b38"> <i class="fa fa-github"></i> </a></a></h2>
+<p>Interrupts are delivered to userspace via notifications.
+A <code>IRQHandler</code> capability represents the authority to manage a particular interrupt.
+Specifically, an <code>IRQHandler</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html"><code>sel4::cap::IrqHandler</code></a>) has the following methods:</p>
+<ul>
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_SetNotification()</code></a>:
+Associate the interrupt with the given notification. Userspace can call <code>seL4_Wait()</code> or <code>seL4_Poll()</code> on this notification to receive the interrupt.</li>
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Clear()</code></a>:
+Disassociate the notification associated with this interrupts.</li>
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Ack()</code></a>:
+Tell the kernel to pass on acknowledgement of this interrupt to the interrupt controller.</li>
+</ul>
+<p>The Rust bindings for these methods are:</p>
+<ul>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_set_notification"><code>sel4::cap::IrqHandler::irq_handler_set_notification()</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_clear"><code>sel4::cap::IrqHandler::irq_handler_clear()</code></a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_ack"><code>sel4::cap::IrqHandler::irq_handler_ack()</code></a></li>
+</ul>
+<p>The root task spawns with a special <code>IRQControl</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqControl.html"><code>sel4::cap::IrqControl</code></a>) which can be used to create <code>IRQHandler</code> capabilities with <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.3.1"><code>seL4_IRQControl_Get()</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqControl.html#method.irq_control_get"><code>sel4::cap::IrqControl::irq_control_get()</code></a>).</p>
+<p>The intent behind this API is that a highly-privileged component will hold an <code>IRQControl</code> capability, which it will use to distribute more finely-grained <code>IRQHandler</code> capabilities to less privileged components for the interrupts they will manage.</p>
+<p>The root task can access its <code>IRQControl</code> capability with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/init_thread/slot/constant.IRQ_CONTROL.html"><code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code></a></p>
+<p><strong>Exercise:</strong> Use <code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code> to create a <code>sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code>.</p>
+<h2 id="step-5g-exercise"><a class="header" href="#step-5g-exercise">Step 5.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4c70bab21f52c4d61408b37adc556f5377e93625')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4c70bab21f52c4d61408b37adc556f5377e93625"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Create a notification object from <code>largest_kernel_ut</code> and associate it with the <code>IRQHandler</code> you just created using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_set_notification"><code>sel4::cap::IrqHandler::irq_handler_set_notification()</code></a>.</p>
+<h2 id="step-5h-exercise"><a class="header" href="#step-5h-exercise">Step 5.H (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8c646af48d71fc0bb9d5a6a9d4ef17b624b07ed0')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8c646af48d71fc0bb9d5a6a9d4ef17b624b07ed0"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Use <code>serial_device: Device</code>, your <code>IRQHandler</code>, and the notification you associated with the interrupt to write a loop that echoes serial input to serial output.</p>
+<p>Use <code>serial_device.clear_all_interrupts()</code> and <code>irq_handler_cap.irq_handler_ack()</code> in sequence to clear the interrupt at the device and interrupt controller levels respectively.
+Note that you should do this at the beginning of the loop in case your loop enters with an interrupt already pending.</p>
+<p>Use <code>irq_notification_cap.wait()</code> to wait for hte interrupt.</p>
+<p>Use <code>serial_device.get_char()</code> and <code>serial_device.put_char()</code> to read and write data.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../root-task/address-space.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../root-task/spawn-thread.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../root-task/address-space.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../root-task/spawn-thread.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modifying the Address Space - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="modifying-the-address-space"><a class="header" href="#modifying-the-address-space">Modifying the Address Space</a></h1>
+<p>This chapter will focus on using the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.7">seL4 virtual address space (VSpace) APIs</a> to manipulate the root task's own address space.
+Start by navigating to and running this chapter's example, which, so far, is empty.</p>
+<pre><code>cd workspaces/root-task/address-space
+make simulate
+</code></pre>
+<p>In seL4, each thread is associated with a virtual address space (VSpace).
+A VSpace is comprised of a tree of translation tables mapping virtual addresses into physical frames of memory.
+VSpaces are represented by their root translation structures.
+While the high-level virtual address space API concepts are architecture-independent, the specific kernel object types for a given architecture mirror that architecture's paging structures.
+That said, all architectures share two object types:</p>
+<ul>
+<li>The top-level paging structure, called a VSpace, which is used to represent a virtual address space.
+In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html"><code>sel4</code> crate</a>, the corresponding <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/trait.CapType.html"><code>sel4::CapType</code></a> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap_type/struct.VSpace.html"><code>sel4::cap_type::VSpace</code></a> (note that, for some architectures, this is a type alias).</li>
+<li>Frames of physical memory. The set of possible frames sizes is architecture-dependant.
+See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.7.1.3">seL4 Reference Manual § 7.1.3 (Page)</a>.
+In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html"><code>sel4</code> crate</a>, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap_type/struct.VSpace.html"><code>sel4::cap_type::Granule</code></a> is an alias for the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/trait.CapType.html"><code>sel4::CapType</code></a> corresponding to the smallest frame object type.</li>
+</ul>
+<p>The root task is provided with capabilites for the objects comprising its own virtual address space.
+The locations of these capabilities in the root task's CSpace is provided in the <code>BootInfo</code> struct.
+Our goal for this chapter will be to create a frame object and experiment with mapping it into the root task's own address space.</p>
+<h2 id="step-4a-exercise"><a class="header" href="#step-4a-exercise">Step 4.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5d99552dd1bcd7b6e0888395e5d5b0f87db57edc')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5d99552dd1bcd7b6e0888395e5d5b0f87db57edc"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Using code snippets from <a href="kernel-objects.html">Chapter 3 (Allocating Kernel Objects)</a>, create a frame object. We seek a value <code>frame: sel4::cap::Granule</code> (which can also be written as <code>frame: sel4::Cap&lt;sel4::cap_type::Granule&gt;</code>).</p>
+<p>Note that, after importing the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/trait.CapTypeForObjectOfFixedSize.html"><code>sel4::CapTypeForObjectOfFixedSize</code></a> trait, you can express the appropriate <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/enum.ObjectBlueprint.html"><code>sel4::ObjectBlueprint</code></a> as <code>sel4::cap_type::Granule::object_blueprint()</code>.</p>
+<h2 id="step-4b"><a class="header" href="#step-4b">Step 4.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bd71a7d432c19e080bd2dab9b0a9ebe3898935a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a"> <i class="fa fa-github"></i> </a></a></h2>
+<p>In order to avoid interacting with intermediate translation structures, let's reserve an aligned granule-sized region in the root task's program image that we can use for our experiment:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a/workspaces/root-task/address-space/src/main.rs#L15-L20">workspaces/root-task/address-space/src/main.rs:15:20 after 4.B</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">const GRANULE_SIZE: usize = sel4::FrameObjectType::GRANULE.bytes(); // 4096
+
+#[repr(C, align(4096))]
+struct PagePlaceholder(#[allow(dead_code)] [u8; GRANULE_SIZE]);
+
+static mut PAGE_A: PagePlaceholder = PagePlaceholder([0xee; GRANULE_SIZE]);
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a/workspaces/root-task/address-space/src/main.rs#L46-L49">workspaces/root-task/address-space/src/main.rs:46:49 after 4.B</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let page_a_addr = ptr::addr_of!(PAGE_A).cast::&lt;u8&gt;();
+    sel4::debug_println!("PAGE_A: {page_a_addr:#x?}");
+    assert_eq!(page_a_addr as usize % GRANULE_SIZE, 0);
+    assert_eq!(unsafe { page_a_addr.read() }, 0xee);
+</code></pre>
+</div>
+</div>
+<p>This reservation covers exactly one page in the root task's virtual address space.</p>
+<h2 id="step-4c"><a class="header" href="#step-4c">Step 4.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('9880c4714f9b7aad818cd4d519359920d0ef9535')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/9880c4714f9b7aad818cd4d519359920d0ef9535"> <i class="fa fa-github"></i> </a></a></h2>
+<p>Let's unmap the page in the root task image that initially backs our reserved region. This will give us a hole in the root task VSpace, which we can use for our experiment.</p>
+<p>This function determines the slot in the root task's CSpace of the page capability corresponding to the page in the root task's VSpace which contains the given address:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9880c4714f9b7aad818cd4d519359920d0ef9535/workspaces/root-task/address-space/src/main.rs#L73-L84">workspaces/root-task/address-space/src/main.rs:73:84 after 4.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn get_user_image_frame_slot(
+    bootinfo: &amp;sel4::BootInfo,
+    addr: usize,
+) -&gt; sel4::init_thread::Slot&lt;sel4::cap_type::Granule&gt; {
+    extern "C" {
+        static __executable_start: usize;
+    }
+    let user_image_addr = ptr::addr_of!(__executable_start) as usize;
+    bootinfo
+        .user_image_frames()
+        .index(addr / GRANULE_SIZE - user_image_addr / GRANULE_SIZE)
+}
+</code></pre>
+</div>
+</div>
+<p><code>__executable_start</code> is defined by the linker.
+We can use it, along with <code>addr</code>, to identify the offset into <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.BootInfo.html#method.user_image_frames"><code>bootinfo.user_image_frames()</code></a> of the capability we are after.</p>
+<p>Use the <code>get_user_image_frame_slot()</code> function to find the capability corresponding to the frame backing our reserved region, and unmap that frame, leaving a hole in the root task's virtual address space.
+Try to access that region, and observe a page fault:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9880c4714f9b7aad818cd4d519359920d0ef9535/workspaces/root-task/address-space/src/main.rs#L51-L54">workspaces/root-task/address-space/src/main.rs:51:54 after 4.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let page_a_slot = get_user_image_frame_slot(bootinfo, page_a_addr as usize);
+    page_a_slot.cap().frame_unmap().unwrap();
+
+    unsafe { page_a_addr.read() };
+</code></pre>
+</div>
+</div>
+<h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4c165ad9826a38c68ee4f3d14f87c2d59172461c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4c165ad9826a38c68ee4f3d14f87c2d59172461c"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
+<p>Here are some hints for the parameters of <code>.frame_map()</code>:</p>
+<ul>
+<li><code>vspace</code>: A capability for the root task's VSpace can be expressed using <code>sel4::init_thread::slot::VSPACE.cap()</code>.</li>
+<li><code>rights</code>: <code>sel4::CapRights::read_write()</code> are the most permissive rights, and will work for our purposes.</li>
+<li><code>attrs</code>: <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>sel4::VmAttributes::default()</code></a> will work here.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../root-task/kernel-objects.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../root-task/serial-device.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../root-task/kernel-objects.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../root-task/serial-device.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

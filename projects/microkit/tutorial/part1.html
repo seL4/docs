@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<!-- Page last generated 2025-07-16 05:32:53 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Microkit Tutorial - Serial server | seL4 docs</title>
+
+    <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/tutorial/part1.html">
+    <link href="/assets/css/sel4.css?v=1752643973" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <script defer src="/assets/js/menu.js"></script>
+    <script defer src="/assets/js/sidebar.js"></script><script defer data-domain="docs.sel4.systems"
+            src="https://analytics.sel4.systems/js/script.js"></script></head>
+  <body class="flex flex-row h-screen std-bg text-dark">
+    <div id="sidebar" class="hidden lg:flex flex-none w-(--sidebar-width) flex-row bg-f_neutral-50 dark:bg-gray-900">
+      <div class="flex-1 overflow-y-auto min-h-full">
+        <a href="/">
+  <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="84.224365mm" height="32.530689mm" viewBox="0 0 84.224367 32.530689" version="1.1" id="svg5" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="sel4-docs.svg" inkscape:export-filename="C:\Users\Birgit Brecknell\Documents\seL4 Foundation\seL4 Summit 2022\sel4_summit_v02.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" class="px-4 w-50 h-20 mx-auto mt-4 mb-10">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" inkscape:zoom="1.8116734" inkscape:cx="193.19155" inkscape:cy="87.764163" inkscape:window-width="1392" inkscape:window-height="1099" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="g18" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" showguides="true" inkscape:guide-bbox="true" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1"/>
+  <defs id="defs2">
+    <rect x="680.69342" y="102.26014" width="15.612235" height="115.53054" id="rect9649"/>
+    <style id="style824">.cls-1,.cls-2,.cls-3{fill:#96ca4f;}.cls-2,.cls-3{stroke:#96ca4f;stroke-miterlimit:8;}.cls-3{stroke-width:0.25px;}</style>
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
+      <g inkscape:label="Clip" id="use15">
+        <path d="m 39.66384,47.73588 h 1.324364 q 0.447983,0 0.68299,0.06854 0.315791,0.09302 0.541007,0.330479 0.225215,0.237455 0.342719,0.582623 0.117503,0.342719 0.117503,0.847005 0,0.443087 -0.110159,0.763774 -0.13464,0.391679 -0.384335,0.63403 -0.188496,0.1836 -0.509183,0.286416 -0.239903,0.07589 -0.641374,0.07589 H 39.66384 Z m 0.724606,0.607103 v 2.377001 h 0.541006 q 0.303551,0 0.438191,-0.03427 0.176255,-0.04406 0.291311,-0.149327 0.117504,-0.105264 0.190944,-0.345168 0.07344,-0.242351 0.07344,-0.65851 0,-0.416159 -0.07344,-0.638926 -0.07344,-0.222767 -0.205632,-0.347615 -0.132192,-0.124848 -0.335375,-0.168912 -0.151776,-0.03427 -0.594862,-0.03427 z m 2.751544,1.209308 q 0,-0.54835 0.164016,-0.920445 0.122399,-0.274175 0.332927,-0.492047 0.212975,-0.217871 0.465118,-0.323135 0.335375,-0.141984 0.773566,-0.141984 0.79315,0 1.268061,0.492047 0.477358,0.492047 0.477358,1.368428 0,0.869038 -0.472462,1.361085 -0.472463,0.489598 -1.263165,0.489598 -0.800494,0 -1.272956,-0.48715 -0.472463,-0.489599 -0.472463,-1.346397 z m 0.746638,-0.02448 q 0,0.609551 0.281519,0.925342 0.281519,0.313343 0.714814,0.313343 0.433295,0 0.709918,-0.310895 0.279072,-0.313343 0.279072,-0.937582 0,-0.616894 -0.271728,-0.920445 -0.269279,-0.303551 -0.717262,-0.303551 -0.447983,0 -0.722158,0.308447 -0.274175,0.305999 -0.274175,0.925341 z m 5.596112,0.477359 0.702574,0.222767 q -0.161567,0.587519 -0.538558,0.873934 -0.374543,0.283967 -0.95227,0.283967 -0.714814,0 -1.175036,-0.48715 -0.460223,-0.489599 -0.460223,-1.336605 0,-0.895965 0.462671,-1.39046 0.46267,-0.496943 1.216652,-0.496943 0.658511,0 1.069773,0.389231 0.2448,0.230112 0.367199,0.660959 l -0.717262,0.171359 q -0.06365,-0.279071 -0.266831,-0.440639 -0.200735,-0.161567 -0.489599,-0.161567 -0.399022,0 -0.648718,0.286415 -0.247247,0.286415 -0.247247,0.927789 0,0.680542 0.244799,0.969406 0.2448,0.288863 0.636478,0.288863 0.288864,0 0.496943,-0.1836 0.20808,-0.183599 0.298655,-0.577726 z m 1.140766,0.151776 0.705022,-0.06854 q 0.06365,0.354959 0.257039,0.521422 0.19584,0.166464 0.526319,0.166464 0.350063,0 0.526318,-0.14688 0.178704,-0.149327 0.178704,-0.347615 0,-0.127295 -0.07589,-0.215423 -0.07344,-0.09058 -0.259487,-0.156672 -0.127296,-0.04406 -0.580175,-0.156671 -0.582622,-0.144432 -0.81763,-0.354959 -0.330479,-0.296208 -0.330479,-0.722158 0,-0.274176 0.154224,-0.511631 0.156671,-0.239903 0.447983,-0.364751 0.293759,-0.124848 0.70747,-0.124848 0.675646,0 1.015917,0.296208 0.342719,0.296207 0.359855,0.790701 l -0.724606,0.03182 q -0.04651,-0.276623 -0.200735,-0.396575 -0.151776,-0.122399 -0.457775,-0.122399 -0.315791,0 -0.494495,0.129743 -0.115056,0.08323 -0.115056,0.222768 0,0.127295 0.107712,0.217871 0.137088,0.115056 0.665854,0.239904 0.528767,0.124847 0.78091,0.259487 0.254591,0.132191 0.396575,0.364751 0.144432,0.230111 0.144432,0.570382 0,0.308447 -0.17136,0.577727 -0.171359,0.269279 -0.484703,0.401471 -0.313343,0.129743 -0.780909,0.129743 -0.680542,0 -1.045293,-0.313343 -0.364751,-0.315791 -0.435743,-0.917997 z" id="path16" style="font-weight:bold;font-stretch:condensed;font-size:5.01349px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;stroke-width:0.264583" transform="scale(1.0680757,0.9362632)" aria-label="DOCS"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-11.065137,-18.670029)">
+    <g id="g18">
+      <text xml:space="preserve" transform="scale(0.26458333)" id="text9647" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9649);display:inline;fill:#000000;fill-opacity:1;stroke:none"/>
+      <g id="Layer_2" data-name="Layer 2" transform="matrix(0.5563179,0,0,0.5563179,-0.00218815,0)">
+        <path class="cls-1" d="M 169.29,64.52 V 41.46 h -11.1 l -19.38,23.1 h -5.43 v -28.5 h -10.85 v 28.5 h -5.6 c 0,-0.53 0.08,-1.14 0.08,-1.88 V 62 h -6.77 v 1.94 a 6.32,6.32 0 0 1 -0.37,2.63 1.68,1.68 0 0 1 -1.66,0.88 1.5,1.5 0 0 1 -1.42,-0.71 5,5 0 0 1 -0.32,-2.33 V 58.73 H 117 V 56 a 13,13 0 0 0 -0.85,-5.23 6.31,6.31 0 0 0 -2.92,-2.88 11.68,11.68 0 0 0 -5.43,-1.11 11.49,11.49 0 0 0 -4.76,0.93 5.75,5.75 0 0 0 -2.88,2.57 10.54,10.54 0 0 0 -0.89,4.76 v 7 a 20,20 0 0 0 0.13,2.5 h -3 c 0,-0.28 0,-0.56 0,-0.87 a 5.84,5.84 0 0 0 -1,-3.71 12.59,12.59 0 0 0 -4.47,-2.8 22,22 0 0 1 -3.6,-1.84 3,3 0 0 1 -1.22,-1.32 6,6 0 0 1 -0.19,-1.77 2.32,2.32 0 0 1 0.45,-1.52 1.7,1.7 0 0 1 1.39,-0.58 1.5,1.5 0 0 1 1.49,0.71 5.86,5.86 0 0 1 0.25,2.32 v 1.3 h 6.27 V 53 a 11.15,11.15 0 0 0 -0.2,-2.55 3.72,3.72 0 0 0 -1.08,-1.63 6.68,6.68 0 0 0 -2.67,-1.49 14.3,14.3 0 0 0 -4.38,-0.58 13.32,13.32 0 0 0 -4.54,0.71 5,5 0 0 0 -2.63,1.92 7.84,7.84 0 0 0 -0.78,4 6.85,6.85 0 0 0 0.73,3.28 c 0.47,0.89 1.88,1.93 4.17,3.09 3.84,1.92 4.6,2.43 4.85,2.66 a 3.55,3.55 0 0 1 0.59,2.49 3,3 0 0 1 -0.46,2 A 2,2 0 0 1 87.8,67.45 1.5,1.5 0 0 1 86.3,66.6 6.54,6.54 0 0 1 86,63.87 v -2 h -6.29 v 1.62 c 0,0.38 0,0.72 0,1.05 h -6 a 25.58,25.58 0 1 0 0,8.83 H 158 v 8.42 h 11.33 v -8.4 h 5 V 64.52 Z M 38.89,75.1 A 6.1,6.1 0 1 1 45,69 6.1,6.1 0 0 1 38.89,75.1 Z m 67.54,-20.86 a 7.57,7.57 0 0 1 0.24,-2.68 c 0.15,-0.34 0.53,-0.75 1.48,-0.75 a 1.36,1.36 0 0 1 1.35,0.84 7.39,7.39 0 0 1 0.25,2.59 v 2.23 h -3.32 z M 158,64.52 h -9.62 L 158,52.22 Z" transform="translate(-3.04,-2.5)" id="path858"/>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.61839px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="48.089367" y="45.416836" id="text16" transform="scale(0.93916555,1.064775)"><tspan sodipodi:role="line" id="tspan16" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="48.089367" y="45.416836">D</tspan></text>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="54.558205" y="48.250385" id="text16-9"><tspan sodipodi:role="line" id="tspan16-1" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="54.558205" y="48.250385">O</tspan></text>
+      <g id="g1" transform="matrix(1.1426343,0,0,1.1426343,24.136464,-10.044912)" style="stroke-width:1.67137">
+        <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:7.7611px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.442217;stroke-opacity:1" x="44.508698" y="51.014606" id="text16-5"><tspan sodipodi:role="line" id="tspan16-8" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.442217" x="44.508698" y="51.014606">S</tspan></text>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.505292;stroke-opacity:1" x="65.022789" y="48.250385" id="text17"><tspan sodipodi:role="line" id="tspan17" style="stroke-width:0.505292" x="65.022789" y="48.250385">C</tspan></text>
+    </g>
+  </g>
+</svg>
+</a>
+
+<ul class="px-4 my-10 ext-links">
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Getting Started</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/getting-started.html">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/">Tutorials</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/dockerfiles/">Setting up with Docker</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/repo-cheatsheet.html">Repo manifest cheat sheet</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">The seL4 Kernel</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/host-dependencies.html">Setting up</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/setting-up.html">Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/get-the-tutorials.html">Getting the tutorials</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-world.html">Hello world</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/capabilities.html">Capabilities</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/untyped.html">Untyped</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mapping.html">Mapping</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/threads.html">Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/ipc.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/notifications.html">Notifications</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/interrupts.html">Interrupts</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/fault-handlers.html">Fault handling</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mcs.html">MCS</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/seL4-end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-seL4.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/api-doc.html">API docs</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Hardware/">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/verified-configurations.html">Verified configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/configurations.html">Configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/standalone.html">Standalone seL4 builds</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/bfgen.html">Bitfield generator</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Testing &amp; benchmarking</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4test/">seL4test</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-guide.html">Debugging guide</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-userspace.html">Debugging user space</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4bench/">sel4bench</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/benchmarking-guide.html">Benchmarking guide</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/porting.html">Porting to a new platform</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/seL4.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/seL4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class="font-bold mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer ">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Microkit</span>
+    </div>
+    <ul class="menu-content ml-6 on">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm font-bold menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer ">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 on">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/welcome.html">Welcome</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part0.html">Part 0 - Setting up</a>
+            </li>
+            <li class="text-hi border-f_green-500 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part1.html">Part 1 - Serial server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part2.html">Part 2 - Client</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part3.html">Part 3 - Wordle server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part4.html">Part 4 - Virtual machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/manual/latest/">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/roadmap.html">Roadmap</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/platforms.html">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/microkit.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/microkit">Sources</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">CAmkES</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-0.html">Hello CAmkES</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-1.html">Introduction</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-2.html">Events</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-timer.html">Timer</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-linux.html">Virtual Machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-crossvm.html">Cross-VM connectors</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-CAmkES.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/hardware.html">Supported platforms</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Virtualisation</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/camkes-vm/">CAmkES VM</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vm.html">VM library</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vmm.html">VMM library</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/camkes.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/camkes-tool/">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">C support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4runtime/">C runtime</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/user_libs/">User-level libraries</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/">Build System</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-1.html">Init & Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-2.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-3.html">ELF loading & Processes</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-4.html">Timer</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-libs.html">How-to</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Rust support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/how-to-use.html">How to use</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/tutorial/introduction.html">Tutorial</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://sel4.github.io/rust-sel4/">API</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/supported-configurations.html">Supported configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/releases.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/rust-sel4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">ELF loader</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/elfloader/">ELF loader for C</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">capDL</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/lang-spec.html">Language Spec</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/c-loader-app.html">capDL loader (C)</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/capDL.html">Releases</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Examples &amp; demos</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/examples.html">Overview</a>
+        </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gray-200 dark:bg-gray-700 w-px">
+      </div>
+    </div>
+    <div class="flex-1">
+      
+<div class="w-full pb-px bg-gray-200 dark:bg-gray-700">
+  <header class="h-[2rem] sm:h-[2.5rem] lg:h-[3.5rem] w-full flex flex-row items-center gap-2 md:gap-4 md:py-2 std-bg">
+    <div id="burger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="text-dark ml-3 mr-0 sm:mr-3 lg:mx-4 w-4 h-4 lg:w-6 lg:h-6 cursor-pointer">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </div>
+    <div class="flex-1"></div>
+    <a href="/releases.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Releases
+    </a>
+    <a href="https://sel4.systems/Contribute/"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contribute
+    </a>
+    <a href="https://sel4.systems/contact.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contact
+    </a>
+    <a href="https://sel4.systems/support.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Support
+    </a>
+    <!-- main site button -->
+    <a href="https://sel4.systems"
+      class="flex-none button-outline ml-0 text-tiny px-2 py-0.5 sm:px-3 sm:py-1 h-4 sm:h-6 md:py-2 md:h-8 lg:h-9 md:text-xs lg:text-sm mr-0 md:mr-4">Main Site
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" data-slot="icon" class="hidden sm:inline-icon">
+<path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+    </a>
+    <!-- github button -->
+    <a href="https://github.com/seL4"
+      class="mr-2 lg:mr-6 px-0 sm:px-3 pt-2 sm:pt-1 pb-2 block text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+      <span class="sr-only">seL4 on GitHub</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+    </a>
+  </header>
+</div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-[4rem_auto_4rem] h-[calc(100%-3rem)]">
+        <div class="hidden xl:flex relative hover:bg-gray-100 dark:hover:bg-gray-800 items-center justify-center">
+          <a href="part0.html" class="mx-auto my-auto text-lighter">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-7 w-7 stroke-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+</svg>
+            <span class="absolute inset-0"></span>
+          </a>
+          </div>
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div id="main-div" class="flex-1 max-w-full">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
+                        overflow-x-auto" id="page-top">
+
+              <div class="theprose mx-auto  ext-links">
+  
+<h1 id="part-1---serial-server">Part 1 - Serial server</h1>
+
+<p>Since seL4 is a micro-kernel, a lot of functionality you would typically expect
+from a kernel is deliberately not implemented. One example of this is something as simple
+as outputting and inputting characters via a terminal. There are no <code class="language-plaintext highlighter-rouge">write</code> or <code class="language-plaintext highlighter-rouge">read</code> system calls
+like on Linux or macOS. While there is a way to output characters to the terminal via seL4,
+it is strictly for when debugging/developing.</p>
+
+<p>This means that if we want to build a system like Wordle, which takes user-input
+and displays the game results via the serial connection, we first need a driver for the serial
+connection.</p>
+
+<p>In this first part, you will learn all the pieces that go to make a driver on top of
+seL4. This driver will act as a “server” that clients (in this case the Wordle client)
+will send data to. The serial server then is the one actually talking to the serial
+device. The serial device that we will be using is called a Universal Asynchronous Receiver-Transmitter (UART).</p>
+
+<p>Below is a diagram of what we will end up with by the end of this part<sup id="fnref:mmio"><a href="#fn:mmio" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>:</p>
+
+<!-- In implementing Wordle we will need to be able to both receive serial input and produce serial output. This is so we can have a client that receives characters on input and outputs an ASCII interface for the player to use. Our initial goal will be to have a "serial server" that will facilitate reading and writing characters using the UART. -->
+
+<!-- ![Serial server architecture diagram](assets/part1/overview.svg) -->
+
+<p><img height="350" src="assets/part1/overview.svg" alt="Serial server overview" /></p>
+
+<h2 id="creating-a-serial-server">Creating a serial server</h2>
+
+<h3 id="system-description-example">System description example</h3>
+
+<p>In Microkit, you describe the architecture of the system you are building in a file we refer to as the “system description”. This file is written in the XML format. Below is an example of a very simple “hello world!” system you could create. It contains a single protection domain that will print out “hello, world!” when it executes. You can see here we define a <code class="language-plaintext highlighter-rouge">&lt;protection_domain&gt;</code>, with the program image being some code that we have compiled to <code class="language-plaintext highlighter-rouge">hello_world.elf</code>.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;system&gt;</span>
+    <span class="nt">&lt;protection_domain</span> <span class="na">name=</span><span class="s">"hello_world"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;program_image</span> <span class="na">path=</span><span class="s">"hello_world.elf"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/protection_domain&gt;</span>
+<span class="nt">&lt;/system&gt;</span>
+</code></pre></div></div>
+
+<p>Before making our own system description, let’s first understand what a protection domain actually is.</p>
+
+<h3 id="protection-domains-pds">Protection Domains (PDs)</h3>
+
+<p>A protection domain is similar to a “process” on typical UNIX systems. However, by default a protection domain
+cannot do much except execute its code.</p>
+
+<p>A protection domain is an abstraction created by Microkit and is made up of various seL4 primitives. The main ones are:</p>
+<ul>
+  <li>A thread-control-block (TCB), because in order to actually have a thread of execution, seL4 needs to create a thread.</li>
+  <li>A virtual address-space, known as a VSpace. This is what memory the kernel allows the PD to access. By default all that
+is in the VSpace is the ELF<sup id="fnref:elf"><a href="#fn:elf" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> of the PD, so it can execute its own code, and nothing else.</li>
+  <li>A capability space, known as a CSpace. Each protection domain has its own CSpace which is a data structure that holds all the capabilities
+that a PD has access to.</li>
+</ul>
+
+<p>As you can see, there is not lot a PD can actually do by default. And this is <strong>intentional</strong>. We do not want PDs
+to be able to access anything unless we explicitly allow it. This is allowed by the capability system, as all resources
+in seL4 are modelled by capabilities. If a PD does not have the capability to some resource, seL4 does not allow it to use it!</p>
+
+<details>
+  <summary>What is a capability? (click to expand)</summary>
+  <p>Whenever you open a file on UNIX-like operating systems, the kernel gives you a file-descriptor. A unique token that
+  is used to refer to that file from now on. Say if you want to read or write or close the file, you have to use the
+  file-descriptor. You can think of capabilities as similar to file-descriptors except that it is for every kind of
+  object in seL4. For example if you wanted a thread to have access to a certain page of memory, it must have the
+  capability to that page. If you want multiple threads to communicate (as we’ll see later), each thread must
+  also have capabilities to the communication objects (such as Endpoints and Notifications in seL4).</p>
+</details>
+
+<h4 id="entry-points">Entry points</h4>
+
+<p>Although a protection domain is somewhat analogous to a process, it has a considerably different program structure and life-cycle. A process on a typical operating system will have a <code class="language-plaintext highlighter-rouge">main</code> function which is invoked by the system when the process is created. When the main function returns the process is destroyed. By comparison a protection domain has three entry points: <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">notified</code> and, optionally, <code class="language-plaintext highlighter-rouge">protected</code>.</p>
+
+<p>When a Microkit system is booted, all PDs in the system execute the <code class="language-plaintext highlighter-rouge">init</code> entry point, and then the Microkit library (<code class="language-plaintext highlighter-rouge">libmicrokit</code>) that
+each PD is linked with waits for events to come in. This diagram shows the control flow of a PD:</p>
+
+<p><img height="250" src="assets/part1/event_loop.svg" alt="Serial server overview" /></p>
+
+<p>Here is a description of the <code class="language-plaintext highlighter-rouge">protection_domain</code> element:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: a unique name for the protection domain.</li>
+  <li><code class="language-plaintext highlighter-rouge">priority</code>: (optional) the priority of the protection domain (integer 0 to 254), defaults to 0 which is the lowest possible priority. The priority dictates which order PDs will run in. For example if there are two PDs that are both schedulable (i.e. are ready to run) then seL4
+will run the higher priority one first.</li>
+  <li><code class="language-plaintext highlighter-rouge">budget</code>: (optional) the PD’s budget in microseconds; defaults to 1,000.</li>
+  <li><code class="language-plaintext highlighter-rouge">period</code>: (optional) the PD’s period in microseconds; must not be smaller than the budget; defaults to the budget.</li>
+</ul>
+
+<details>
+  <summary>What are budgets and periods?</summary>
+  <p>While not the focus of this tutorial, budgets and periods allow those making systems on seL4 to specify how long a thread runs
+for a given amount of time. For example, if there was a thread with 100ms of budget and 300ms of period, that means that the
+thread is allowed to run for (at most) 100ms every 300ms of CPU time.</p>
+
+  <p>If you are interested, there is more information in the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 reference manual</a>.</p>
+</details>
+
+<h3 id="serial-server-protection-domain">Serial server protection domain</h3>
+
+<p>Now that you have some understanding of how protection domains work and are specified, your task is to:</p>
+<ul>
+  <li>Edit the system description (<code class="language-plaintext highlighter-rouge">wordle.system</code>) to specify a protection domain for the serial server.
+    <ul>
+      <li>The name of the program image produced by the Makefile is <code class="language-plaintext highlighter-rouge">serial_server.elf</code>.</li>
+      <li><strong>All</strong> values in the XML description are surrounded by quotes, for example, <code class="language-plaintext highlighter-rouge">&lt;protection_domain name="pd" priority="254" /&gt;</code>.</li>
+    </ul>
+  </li>
+  <li>Since this PD is a <em>server</em> rather than a client, it should have a higher priority than the client.</li>
+</ul>
+
+<h4 id="building">Building</h4>
+
+<p>If we build part 1 and then look inside the build directory:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run these commands inside the "microkit_tutorial" directory</span>
+<span class="nv">$ </span><span class="nb">cd </span>tutorial
+<span class="c"># If you are working on native macOS, `make` may be installed as `gmake` instead.</span>
+<span class="nv">$ </span>make part1
+<span class="nv">$ </span><span class="nb">ls </span>build
+serial_server.elf serial_server.o loader.img report.txt
+</code></pre></div></div>
+
+<p>We can see that when we run <code class="language-plaintext highlighter-rouge">make part1</code>, the file <code class="language-plaintext highlighter-rouge">serial_server.c</code> gets compiled into <code class="language-plaintext highlighter-rouge">serial_server.elf</code>. That is why the name of the program image in the system description file is <code class="language-plaintext highlighter-rouge">serial_server.elf</code>.</p>
+
+<p>After compiling all the code, the <code class="language-plaintext highlighter-rouge">microkit</code> tool takes our ELFs and system description file
+and produces <code class="language-plaintext highlighter-rouge">loader.img</code>, a binary containing everything that we then give to QEMU to load.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">report.txt</code> file contains details about the system that can be useful when debugging, but
+for this tutorial, you do not need to look at it.</p>
+
+<!-- If you are building for a platform other than QEMU, you can specify the board by doing something like: `make part1 BOARD=rpi3b`. Another option is to edit the Makefile and change the default platform to what you are using. -->
+
+<!-- <details markdown="1"><summary>Explanation of the Makefile</summary> -->
+
+<!-- * If you look inside the Makefile, most of it is fairly standard in order to compile and link each PD ELF. You'll see that the last command that gets run is an invocation of the `microkit` tool that comes with the SDK. It is this tool that takes in the ELF files for the PDs along with a system description and produces a raw image that you can boot from and have your system start. -->
+<!-- </details> -->
+
+<!-- I'll also make a note about the report file, `report.txt`. This report file is worth taking a brief look at as it contains a breakdown of the system. It can be especially helpful when debugging. -->
+
+<h4 id="running">Running</h4>
+
+<p>In order to actually run the system, we will be using the <a href="https://www.qemu.org/">QEMU</a> emulator which allows us to essentially create
+virtual hardware that we then run seL4 on.</p>
+
+<p>You can emulate the system using the provided Makefile with:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make run
+</code></pre></div></div>
+
+<p>To exit QEMU, press <code class="language-plaintext highlighter-rouge">CTRL + a</code> then <code class="language-plaintext highlighter-rouge">x</code>.</p>
+
+<details>
+  <summary>Explanation of the QEMU command</summary>
+
+  <p>The full command that is actually being run by make is:</p>
+
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-aarch64 <span class="nt">-machine</span> virt,virtualization<span class="o">=</span>on <span class="se">\</span>
+    <span class="nt">-cpu</span> cortex-a53 <span class="se">\</span>
+    <span class="nt">-serial</span> mon:stdio <span class="se">\</span>
+    <span class="nt">-device</span> loader,file<span class="o">=</span>build/loader.img,addr<span class="o">=</span>0x70000000,cpu-num<span class="o">=</span>0 <span class="se">\</span>
+    <span class="nt">-m</span> <span class="nv">size</span><span class="o">=</span>1G <span class="se">\</span>
+    <span class="nt">-nographic</span> <span class="se">\</span>
+    <span class="nt">-netdev</span> user,id<span class="o">=</span>mynet0 <span class="se">\</span>
+    <span class="nt">-device</span> virtio-net-device,netdev<span class="o">=</span>mynet0,mac<span class="o">=</span>52:55:00:d1:55:01
+</code></pre></div>  </div>
+
+  <p>For those not overly familiar with QEMU, I will break down the arguments.</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">-machine virt,virtualization=on -cpu cortex-a53</code>: This just specifies the board we are emulating, in this case we are using QEMU’s AArch64 “virt” board which has no physical counterpart, and we’re specifying to use one ARM Cortex-A53 CPU. The <code class="language-plaintext highlighter-rouge">virtualization=on</code> is for part 4 of the tutorial, where we run virtual machines on top of seL4.</li>
+    <li><code class="language-plaintext highlighter-rouge">-serial mon:stdio</code>: Send virtual serial output and QEMU’s monitor output onto <code class="language-plaintext highlighter-rouge">stdio</code>.</li>
+    <li><code class="language-plaintext highlighter-rouge">-device loader,file=build/loader.img,addr=0x70000000,cpu-num=0</code>: QEMU won’t know how to automatically load this image. Typically with seL4 projects the image is passed via the <code class="language-plaintext highlighter-rouge">-kernel</code> flag, however, in this case we have to make the address that the Microkit bootloader is expecting to be loaded at explicit. This is because we are giving QEMU a “raw image”. More information is <a href="https://qemu-project.gitlab.io/qemu/system/generic-loader.html" target="_blank">here</a>.</li>
+    <li><code class="language-plaintext highlighter-rouge">-m size=1G</code>: Have 1G of RAM. This is plenty for this tutorial, but depending on what you’re doing, might need to be increased.</li>
+    <li><code class="language-plaintext highlighter-rouge">-nographic</code>: Disable all graphical output to use QEMU just on the command line.</li>
+    <li><code class="language-plaintext highlighter-rouge">-netdev user,id=mynet0 -device virtio-net-device,netdev=mynet0,mac=52:55:00:d1:55:01</code>: Enables networking for part 4 of the tutorial.</li>
+  </ul>
+</details>
+
+<p>If you’ve done everything correctly, you should see the following output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MON|ERROR: received message 0x00000006  badge: 0x0000000000000001  tcb cap: 0x8000000000000006
+MON|ERROR: faulting PD: serial_server
+MON|ERROR: Registers:
+MON|ERROR: pc : 0x00000000002000e8
+MON|ERROR: spsr : 0x0000000000000040
+MON|ERROR: x0 : 0x0000000000000050
+MON|ERROR: x1 : 0x0000000000000038
+MON|ERROR: x2 : 0x0000000000000000
+MON|ERROR: x3 : 0x0000000000000000
+MON|ERROR: x4 : 0x0000000000000000
+MON|ERROR: x5 : 0x0000000000000000
+MON|ERROR: x6 : 0x0000000000000000
+MON|ERROR: x7 : 0x0000000000000000
+MON|ERROR: VMFault: ip=0x00000000002000e8  fault_addr=0x0000000000000038  fsr=0x0000000092000046  (data fault)
+MON|ERROR:    ec: 0x00000024  Data Abort from a lower Exception level   il: 1   iss: 0x00000046
+MON|ERROR:    dfsc = translation fault, level 2 (0x00000006) -- write not read
+</code></pre></div></div>
+
+<p>When we start the system we get a bunch of error printing, what has happened?</p>
+
+<p>Remember that by default a protection domain does not have access to any memory other than its own code
+(as well as any global data and the stack region).</p>
+
+<p>If we look at <code class="language-plaintext highlighter-rouge">serial_server.c</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">uart_handle_irq</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">REG_PTR</span><span class="p">(</span><span class="n">uart_base_vaddr</span><span class="p">,</span> <span class="n">UARTICR</span><span class="p">)</span> <span class="o">=</span> <span class="mh">0x7f0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">uart_put_str</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">uart_put_char</span><span class="p">(</span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+        <span class="n">str</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>You will see that it tries to access the UART hardware when it calls <code class="language-plaintext highlighter-rouge">uart_init()</code>, which it doesn’t have access to! What happens
+is that seL4 gets a “virtual memory fault” and delivers this to something called the monitor which
+then prints out the errors you are seeing with <code class="language-plaintext highlighter-rouge">MON|ERROR</code>. The monitor acts as the initial task and default fault-handler for Microkit.</p>
+
+<p>So how do we prevent the virtual memory fault from happening? We need to give the serial server access to the UART.</p>
+
+<h2 id="accessing-the-uart">Accessing the UART</h2>
+
+<p>Our serial driver will be useless unless it can actually access the UART device registers. We
+cannot just access the physical address of the UART device since the driver is a user-space
+program (Protection Domain) and so has its own virtual address space.
+This means we will need to map in the physical address into our PD’s virtual address space.
+Microkit provides an abstraction for this, it is called “Memory Regions”.</p>
+
+<h3 id="memory-regions-mrs">Memory Regions (MRs)</h3>
+
+<p>We can create memory regions at a specific physical address, or somewhere in RAM, that we can then map into the address space of whichever PD we want to have access to it. Here is a full description of the <code class="language-plaintext highlighter-rouge">memory_region</code> element which you would use to create a memory region:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the memory region</li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: Size of the memory region in bytes (must be a multiple of the page size)</li>
+  <li><code class="language-plaintext highlighter-rouge">page_size</code>: (optional) Size of the pages used in the memory region; must be a supported page size if provided. Defaults to the largest page size for the target architecture that the memory region is aligned to.</li>
+  <li><code class="language-plaintext highlighter-rouge">phys_addr</code>: (optional) The physical address for the start of the memory region (must be a multiple of the page size).</li>
+</ul>
+
+<p>In order to access the memory region from a PD, it needs to be mapped using the <code class="language-plaintext highlighter-rouge">map</code> element:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mr</code>: Identifies the memory region to map.</li>
+  <li><code class="language-plaintext highlighter-rouge">vaddr</code>: Identifies the virtual address at which to map the memory region to.</li>
+  <li><code class="language-plaintext highlighter-rouge">perms</code>: Identifies the permissions with which to map the memory region with. Can be any combination of r (read), w (write), and x (eXecute).</li>
+  <li><code class="language-plaintext highlighter-rouge">cached</code>: Determines if region is mapped with caching enabled or disabled. Defaults to true.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_vaddr</code>: Specifies a symbol in the program image. This symbol will be rewritten with the virtual address of the memory region.</li>
+</ul>
+
+<h4 id="example">Example</h4>
+
+<p>Here is an example of how the system description would look for a driver for a real time clock (RTC) device.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;system&gt;</span>
+    <span class="c">&lt;!-- Define a page sized region for accessing the "real-time clock" --&gt;</span>
+    <span class="nt">&lt;memory_region</span> <span class="na">name=</span><span class="s">"rtc"</span> <span class="na">size=</span><span class="s">"0x1000"</span> <span class="na">phys_addr=</span><span class="s">"0x9010000"</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;protection_domain</span> <span class="na">name=</span><span class="s">"timer_driver"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;program_image</span> <span class="na">path=</span><span class="s">"timer_driver.elf"</span> <span class="nt">/&gt;</span>
+        <span class="c">&lt;!--
+            Map in the "rtc" region that corresponds to the physical address
+            of the real time clock. The Microkit tool will set the value of
+            the variable "rtc_base_vaddr" to the virtual address of the mapping
+            when compiling the final `loader.img` image
+         --&gt;</span>
+        <span class="nt">&lt;map</span> <span class="na">mr=</span><span class="s">"rtc"</span> <span class="na">vaddr=</span><span class="s">"0x2000000"</span> <span class="na">perms=</span><span class="s">"rw"</span> <span class="na">cached=</span><span class="s">"false"</span>
+            <span class="na">setvar_vaddr=</span><span class="s">"rtc_base_vaddr"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/protection_domain&gt;</span>
+<span class="nt">&lt;/system&gt;</span>
+</code></pre></div></div>
+
+<h3 id="mapping-in-the-uart-device">Mapping in the UART device</h3>
+
+<p>From reading the above example and referring to the description of the <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">memory_region</code> elements, you should be able to create the mapping to the UART for the serial server.</p>
+
+<p>Note that:</p>
+<ul>
+  <li>With QEMU, we’ll be using a PL011 UART which has a physical address of <code class="language-plaintext highlighter-rouge">0x9000000</code>.</li>
+  <li>You only need to map in a single 4KiB page.</li>
+  <li>Microkit places the code of a PD starting at <code class="language-plaintext highlighter-rouge">0x200000</code> in it’s virtual address space. This means that the address to place the mapping for the UART should be below this, or significantly higher to avoid overlapping (e.g. <code class="language-plaintext highlighter-rouge">0x4000000</code>) with the code of the PD.</li>
+  <li>You can use <code class="language-plaintext highlighter-rouge">setvar_vaddr</code> to initialise a symbol in the code to the specified virtual address. The UART driver provided expects a <code class="language-plaintext highlighter-rouge">uintptr_t uart_base_vaddr</code> variable to be set to the virtual address of the UART mapping.</li>
+  <li>Since we are doing memory mapped I/O, we do not want to enable caching on the mapping.</li>
+</ul>
+
+<p>Your task now is to:</p>
+<ul>
+  <li>Map in the UART to the serial server PD with both read and write permissions.</li>
+  <li>Run the system and check to see if the <code class="language-plaintext highlighter-rouge">SERIAL SERVER: starting</code> appears.</li>
+</ul>
+
+<h3 id="interrupt-handling">Interrupt handling</h3>
+
+<p>An interrupt request (IRQ) is a signal from a hardware device (e.g. the UART serial device) that tells software that some event
+has happened. In the case of the UART device, every time we input a character, the device will deliver an interrupt to
+seL4. In seL4, it decodes the signal and then sends the interrupt as a notification to user-space. In our system we want
+this interrupt to go to the serial server so that it can handle the interrupt.</p>
+
+<p>In the serial server code (<code class="language-plaintext highlighter-rouge">serial_server.c</code>) you will see the <code class="language-plaintext highlighter-rouge">notified(microkit_channel ch)</code> entry point. What we want to
+happen is that whenever we get an interrupt form the UART the <code class="language-plaintext highlighter-rouge">notified</code> entry point is executed. Then we can handle the interrupt and once <code class="language-plaintext highlighter-rouge">notified</code>
+finishes, the PD will go back to waiting to receive more events (such as more interrupts).</p>
+
+<p>In the Microkit system description, we need to register these interrupts and associate them with a certain PD. This is because like with memory, IRQs are also modelled by capabilities meaning that we need to have the capability to a certain interrupt, before it can be delivered to a PD by seL4.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element is a child element of <code class="language-plaintext highlighter-rouge">protection_domain</code> (just like <code class="language-plaintext highlighter-rouge">program_image</code>), and has the following attributes:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">irq</code>: The interrupt number.</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier, an integer from 0 to 62<sup id="fnref:limits"><a href="#fn:limits" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>.</li>
+</ul>
+
+<p>The channel identifier is what’s used by a PD to distinguish a particular interrupt from other interrupts or other notification sources.
+For example, if you had <code class="language-plaintext highlighter-rouge">&lt;irq id="0" irq="20" /&gt;</code> this would mean that whenever we get the interrupt number <code class="language-plaintext highlighter-rouge">20</code> from the hardware, the
+<code class="language-plaintext highlighter-rouge">notified(microkit_channel ch)</code> function will be entered, where the value of the <code class="language-plaintext highlighter-rouge">ch</code> parameter is <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<p>Your task now is to:</p>
+<ul>
+  <li>Specify the interrupt for serial input in the system description.
+    <ul>
+      <li>For the QEMU platform, the IRQ number is 33<sup id="fnref:irq"><a href="#fn:irq" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>.
+  <!-- * For the Raspberry Pi 3, the IRQ number is 93. --></li>
+    </ul>
+  </li>
+  <li>Inspect the serial server code (<code class="language-plaintext highlighter-rouge">serial_server.c</code>) and complete the <code class="language-plaintext highlighter-rouge">notified</code> entry point. When receiving the UART interrupt, do the following:
+    <ol>
+      <li>Get the character that has been inputted via the keyboard with the <code class="language-plaintext highlighter-rouge">int uart_get_char()</code> function.</li>
+      <li>Print out the character using the <code class="language-plaintext highlighter-rouge">void uart_put_char(int ch)</code> function.</li>
+      <li>Call the function <code class="language-plaintext highlighter-rouge">void uart_handle_irq()</code> for the driver to handle the IRQ.</li>
+      <li>Call the libmicrokit function <code class="language-plaintext highlighter-rouge">void microkit_irq_ack(microkit_channel ch)</code>, in order to acknowledge the IRQ.
+        <ul>
+          <li>Why do we need to acknowledge the IRQ? What this does is tell seL4 that we have finished handling
+the IRQ and are ready to receive another one. If we do not acknowledge it, we will never receive
+another UART IRQ again!</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<p>Now we can check to see that we are actually receiving interrupts. When you input a character, it should be printing as well. If that is working, you can move on to <a href="part2.html">the next exercise</a>.</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:mmio">
+      <p>MMIO stands for “Memory Mapped Input/Output”. It is a way of interacting with certain hardware via memory, in this case the UART device. <a href="#fnref:mmio" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:elf">
+      <p>ELF stands for Executable and Linkable Format, it is just a standard format to compile programs into. <a href="#fnref:elf" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:limits">
+      <p>You might find this number a bit unexpected, as it is not a power of two. You can
+    find more details in the Microkit manual <a href="https://github.com/seL4/microkit/blob/main/docs/manual.md#limits">here</a>. <a href="#fnref:limits" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:irq">
+      <p>You may be wondering how we know this number. On ARM and RISC-V platforms, there are two main ways to
+    find out the IRQ number for a specific hardware device. One is via official documentation like a
+    ‘Technical Reference Manual’, the other is by inspecting something called the Device Tree Source. This
+    is a file associated with a particular hardware platform, like the QEMU platform or a particular Raspberry Pi
+    model for example. These ‘Device Trees’ contain information such as what the physical address is of a device,
+    and what interrupt number(s) it uses. It should be noted that when registering an IRQ with Microkit/seL4, you
+    must have the <strong>CPU observable</strong> number, which may not be the same number as the one in the DTS. For example, on
+    ARM peripheral devices (such as UARTs) are offset by 32. In our case, the DTS says the UART devices has an IRQ
+    with number 1, which means that when we want to use it in Microkit/seL4, it becomes 33. <a href="#fnref:irq" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+
+            </main>
+          </div>
+          <nav class="flex xl:hidden flex-row justify-between items-center mb-12 text-lighter">
+            <a href="part0.html" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 ml-12">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-5 w-5 stroke-2 md:h-7 md:w-7 md:stroke-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+</svg>
+            </a>
+            <div class="flex-1"></div>
+            <a href="part2.html" class="flex-none bg-gray-100 dark:bg-gray-800 rounded py-3 px-5 mr-12">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-5 w-5 stroke-2 md:h-7 md:w-7 md:stroke-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+</svg>
+            </a>
+            </nav>
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-xs lg:text-sm font-semibold text-lighter">
+  <a href="/sitemap.html"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <a href="/processes/test-status.html"
+     class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
+  <div class="flex-1"></div>
+<a href="https://github.com/seL4/docs/edit/master/projects/microkit/tutorial/part1.md" class="flex-none  hover:text-light hover:underline">Edit
+    page on GitHub</a>
+</footer>
+
+        </div>
+        <div class="hidden xl:flex relative hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center">
+          <a href="part2.html" class="mx-auto my-auto text-lighter">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-7 w-7 stroke-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+</svg>
+            <span class="absolute inset-0"></span>
+          </a>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>

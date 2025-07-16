@@ -1,0 +1,379 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Spawning a Thread - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="spawning-a-thread"><a class="header" href="#spawning-a-thread">Spawning a Thread</a></h1>
+<p>In this chapter, we will explore IPC through an example that spawns a secondary thread.
+This example starts with a more interesting program than the other examples we've worked with so far.
+It spawns a secondary thread, and then interacts with it using a notification.</p>
+<p>Navigate to and run the example:</p>
+<pre><code>cd workspaces/root-task/spawn-thread
+make simulate
+</code></pre>
+<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
+If you're used to using <a href="https://github.com/seL4/seL4_libs">seL4_libs</a>, you may notice that our Rust code here is much more low-level and verbose.
+That is because we aren't using any higher-level seL4-related libraries such as
+<a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/thread.h"><code>&lt;sel4utils/thread.h&gt;</code></a>.
+Our code is more like spawning a thread using <code>&lt;sel4/sel4.h&gt;</code> alone.
+Note, though, that our code does depend on a few Rust language runtime building block crates such as
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_initialize_tls/index.html"><code>sel4-initialize-tls</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_stack/index.html"><code>sel4-stack</code></a>
+.</p>
+<p>The exercises in this chapter are only concerned with the following two functions, which run concurrently:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_nfn: sel4::cap::Notification) {
+    sel4::debug_println!("In secondary thread");
+
+    inter_thread_nfn.signal();
+}
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_nfn: sel4::cap::Notification) {
+    sel4::debug_println!("In primary thread");
+
+    inter_thread_nfn.wait();
+}
+</code></pre>
+</div>
+</div>
+<p><code>secondary_thread_main()</code> runs in the secondary thread, and <code>interact_with_secondary_thread()</code> runs in the secondary thread.</p>
+<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('c4acc79f48ccdfb280444c9b41280893b6c810dd')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/c4acc79f48ccdfb280444c9b41280893b6c810dd"> <i class="fa fa-github"></i> </a></a></h2>
+<p>In this step, we introduce IPC between <code>secondary_thread_main()</code> and <code>interact_with_secondary_thread</code> by changing</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>inter_thread_nfn: sel4::cap::Notification
+<span class="boring">}</span></code></pre></pre>
+<p>to</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>inter_thread_ep: sel4::cap::Endpoint
+<span class="boring">}</span></code></pre></pre>
+<p>Before, the two sides of the notification communicated via
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>inter_thread_nfn.signal()</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>inter_thread_nfn.wait()</code></a>.</p>
+<p>Now, communication over this IPC endpoint will happen by
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>inter_thread_ep.send()</code></a> and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>inter_thread_ep.recv()</code></a>
+.</p>
+<!-- , as described in
+[seL4 Reference Manual § 4.2 (Endpoints)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2). -->
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
+<code>send()</code> and <code>recv()</code> block until the two sides of the object rendezvous, at which point a message is passed from the sender to the receiver.
+This message may contain data and capabilities.</p>
+<p>Each thread is associated with a special page of memory called an IPC buffer.
+The sender populates its own IPC buffer with data and/or CPtrs, and then calls <code>send()</code> with a metadata value called the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.
+The kernel copies data from the sender's IPC buffer into that of the receiver, and/or capabilities from the sender's CSpace into that of the receiver.
+The kernel uses the <code>MessageInfo</code> to determine how much data to copy between the two IPC buffers
+(the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.length"><code>length</code></a> field)
+and how many CPtrs to read from the IPC buffers for copying betwen CSpaces
+(the
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.caps_unwrapped"><code>caps_unwrapped</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.extra_caps"><code>extra_caps</code></a>
+fields).
+Finally, the kernel passes the <code>MessageInfo</code>, and control, to the receiver.</p>
+<p>In Rust, the sender and receiver can interact with their own IPC buffer using
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>.
+Message data is held in the message registers (an array of machine words), which is a field of the IPC buffer (
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_regs"><code>msg_regs</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_regs_mut"><code>msg_regs_mut</code></a>
+).
+The <code>length</code> field of the <code>MessageInfo</code> specifies how many message registers will be copied into the receiver's IPC buffer.</p>
+<p>One can also view the message registers as an array of bytes using
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes"><code>msg_bytes</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes_mut"><code>msg_bytes_mut</code></a>.
+In this case, one rounds the length of their message up to the nearest multiple of the machine word size when computing the message length for the <code>MessageInfo</code>.</p>
+<p>The <code>MessageInfo</code> also includes a few bits of data called a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.label"><code>label</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.label_width"><code>label_width</code></a> bits wide) that is not interpreted by the kernel.</p>
+<p>In Rust, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfoBuilder.html"><code>MessageInfoBuilder</code></a> type is a clear and concise way to construct a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.</p>
+<p>In Rust, to smooth out differences between the mixed-criticality and legacy kernel schedulers, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a> always takes a <code>reply_authority</code> argument.
+Under legacy scheduler configurations, which is what this text uses, this argument can be of type <code>()</code>.</p>
+<p>Taking all of this together, let's use our IPC endpoint to send an empty message:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/c4acc79f48ccdfb280444c9b41280893b6c810dd/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_ep: sel4::cap::Endpoint) {
+    sel4::debug_println!("In secondary thread");
+
+    inter_thread_ep.send(sel4::MessageInfoBuilder::default().label(123).build());
+}
+</code></pre>
+</div>
+</div>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/c4acc79f48ccdfb280444c9b41280893b6c810dd/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_ep: sel4::cap::Endpoint) {
+    sel4::debug_println!("In primary thread");
+
+    let (msg_info, _badge) = inter_thread_ep.recv(());
+
+    assert_eq!(msg_info.label(), 123);
+}
+</code></pre>
+</div>
+</div>
+<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b8d896bce9c35f6d479435c93240c766d74c9bd7')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b8d896bce9c35f6d479435c93240c766d74c9bd7"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong> use
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
+and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
+to send a message with some data.</p>
+<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('968473d5d4d0fd205a7f5162be1477ea337ff4fa')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/968473d5d4d0fd205a7f5162be1477ea337ff4fa"> <i class="fa fa-github"></i> </a></a></h2>
+<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
+<p><strong>Exercise:</strong> Change the</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>inter_thread_ep.send()
+<span class="boring">}</span></code></pre></pre>
+<p>in <code>secondary_thread_main()</code> to</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>inter_thread_ep.call()
+<span class="boring">}</span></code></pre></pre>
+<p>and modify <code>interact_with_secondary_thread()</code> to <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.reply.html"><code>sel4::reply</code></a> with a message.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../root-task/serial-device.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../root-task/spawn-task.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../root-task/serial-device.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../root-task/spawn-task.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

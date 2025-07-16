@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Setup - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
+<p>This tutorial is presented as a linear series of patches to <a href="https://github.com/seL4/seL4-rust-tutorial-code">https://github.com/seL4/seL4-rust-tutorial-code</a>, starting at commit <code>d27fd3f560e4</code>, and ending with commit <code>b886a72fdfec</code>.
+Each patch, or step, as we shall call them, is an instructive modification to a code example.
+You are encouraged (but by no means required) to attempt those marked as exercises in this text on your own.
+Note that while most step patches include tests, the reader is not expected to write tests for exercises themselves.</p>
+<p>Clone the repository and checkout the starting commit:</p>
+<pre><code>git clone https://github.com/seL4/seL4-rust-tutorial-code
+cd seL4-rust-tutorial-code
+git checkout d27fd3f560e4
+</code></pre>
+<p>Observe the steps ahead:</p>
+<pre><code>git log d27fd3f560e4..b886a72fdfec
+</code></pre>
+<p>Each step header contains two icons.
+Clicking the clipboard copies the commit hash corresponding to the step to the clipboard.
+The GitHub icon is a link to the commit on GitHub.</p>
+<p>Use any Git workflow that works for you.
+For example, you could cherry-pick the steps that are not marked as exercises after examining and understanding them, and then attempt the exercises on your own, using those step commits as hints when necessary.</p>
+<h3 id="docker"><a class="header" href="#docker">Docker</a></h3>
+<p>We will work inside of a Docker container built with <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/docker/Dockerfile">docker/Dockerfile</a>.
+This Dockerfile installs some build-time dependencies, and then builds seL4, <a href="https://github.com/seL4/microkit">seL4 Microkit</a>, and some additional programs and tools.</p>
+<p>Build the image:</p>
+<pre><code>make -C docker build
+</code></pre>
+<p>Run a container in the background:</p>
+<pre><code>make -C docker run
+</code></pre>
+<p>Start a shell inside the container:</p>
+<pre><code>make -C docker exec
+</code></pre>
+<p>The rest of this text assumes that you are in a shell inside the container.</p>
+<h3 id="two-workspaces"><a class="header" href="#two-workspaces">Two Workspaces</a></h3>
+<p>To simplify our Cargo invocations, this repository's Rust code has been divided between two distinct workspaces: <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/root-task">workspaces/root-task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/microkit">workspaces/microkit</a>.
+Both are subject to the top-level <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.cargo/config.toml">.cargo/config.toml</a>, whereas <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/root-task/.cargo/config.toml">workspaces/root-task/.cargo/config.toml</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/microkit/.cargo/config.toml">workspaces/microkit/.cargo/config.toml</a> each apply to only one.
+These workspace-specific <code>config.toml</code> files demonstrate all that is required to configure the crates in the <a href="https://github.com/seL4/rust-sel4">rust-sel4</a> project:</p>
+<ul>
+<li>An environment variable pointing at <code>libsel4</code> (which includes the kernel configuration).
+See <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html#building">the relevant crate docs</a> for information on this environment variable.</li>
+<li>A reference to a custom rustc <a href="https://docs.rust-embedded.org/embedonomicon/custom-target.html">target specification</a> (the location of the target specification is given at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.cargo/config.toml#L8">.cargo/config.toml:8</a>, which refers to <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/target-specs">target-specs</a>).</li>
+</ul>
+<h3 id="vscode--dev-containers"><a class="header" href="#vscode--dev-containers">VSCode + Dev Containers</a></h3>
+<p>If you want help from <a href="https://rust-analyzer.github.io/">rust-analyzer</a>, the Rust Language Server, you can use <a href="https://code.visualstudio.com/docs/devcontainers/tutorial">VSCode with the Dev Containers extension</a>.
+This will enable you to run VSCode inside of the container you just built, which contains the seL4 build artifacts that rust-analyzer will require to analyzer your code.</p>
+<p>This repository provides a separate Dev Container configuration for each workspace:</p>
+<ul>
+<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.devcontainer/root-task/devcontainer.json">.devcontainer/root-task/devcontainer.json</a></li>
+<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.devcontainer/microkit/devcontainer.json">.devcontainer/microkit/devcontainer.json</a></li>
+</ul>
+<p>To work in a particular workspace, open this repository in VSCode, run <code>&gt; Dev Containers: Reopen in Container</code>, and select the corresponding configuration.
+You should now be able to use the rust-analyzer VSCode extension normally for the code in the selected workspace.</p>
+<h3 id="rustdoc"><a class="header" href="#rustdoc">Rustdoc</a></h3>
+<p>Rustdoc for the rust-sel4 project is hosted here:</p>
+<p><a href="https://sel4.github.io/rust-sel4/">https://sel4.github.io/rust-sel4/</a></p>
+<p>However, for the sake of consistency, rustdoc for the particular configurations studied in this text are hosted here too.
+There is one set of rustdoc for each of the two workspace configurations mentioned in <a href="#two-workspaces">Two Workspaces</a>.
+Rustdoc does not generate an index page, but you can navigate across crates within a workspace configuration using the sidebar present on top-level rustdoc page for any module.</p>
+<ul>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html">Rustdoc for Part I</a></li>
+<li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/index.html">Rustdoc for Part II</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="root-task/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="root-task/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>

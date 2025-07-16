@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<!-- Page last generated 2025-07-16 05:32:53 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>seL4 Configurations | seL4 docs</title>
+
+    <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/configurations.html">
+    <link href="/assets/css/sel4.css?v=1752643973" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <script defer src="/assets/js/menu.js"></script>
+    <script defer src="/assets/js/sidebar.js"></script><script defer data-domain="docs.sel4.systems"
+            src="https://analytics.sel4.systems/js/script.js"></script></head>
+  <body class="flex flex-row h-screen std-bg text-dark">
+    <div id="sidebar" class="hidden lg:flex flex-none w-(--sidebar-width) flex-row bg-f_neutral-50 dark:bg-gray-900">
+      <div class="flex-1 overflow-y-auto min-h-full">
+        <a href="/">
+  <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="84.224365mm" height="32.530689mm" viewBox="0 0 84.224367 32.530689" version="1.1" id="svg5" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="sel4-docs.svg" inkscape:export-filename="C:\Users\Birgit Brecknell\Documents\seL4 Foundation\seL4 Summit 2022\sel4_summit_v02.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" class="px-4 w-50 h-20 mx-auto mt-4 mb-10">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" inkscape:zoom="1.8116734" inkscape:cx="193.19155" inkscape:cy="87.764163" inkscape:window-width="1392" inkscape:window-height="1099" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="g18" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" showguides="true" inkscape:guide-bbox="true" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1"/>
+  <defs id="defs2">
+    <rect x="680.69342" y="102.26014" width="15.612235" height="115.53054" id="rect9649"/>
+    <style id="style824">.cls-1,.cls-2,.cls-3{fill:#96ca4f;}.cls-2,.cls-3{stroke:#96ca4f;stroke-miterlimit:8;}.cls-3{stroke-width:0.25px;}</style>
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
+      <g inkscape:label="Clip" id="use15">
+        <path d="m 39.66384,47.73588 h 1.324364 q 0.447983,0 0.68299,0.06854 0.315791,0.09302 0.541007,0.330479 0.225215,0.237455 0.342719,0.582623 0.117503,0.342719 0.117503,0.847005 0,0.443087 -0.110159,0.763774 -0.13464,0.391679 -0.384335,0.63403 -0.188496,0.1836 -0.509183,0.286416 -0.239903,0.07589 -0.641374,0.07589 H 39.66384 Z m 0.724606,0.607103 v 2.377001 h 0.541006 q 0.303551,0 0.438191,-0.03427 0.176255,-0.04406 0.291311,-0.149327 0.117504,-0.105264 0.190944,-0.345168 0.07344,-0.242351 0.07344,-0.65851 0,-0.416159 -0.07344,-0.638926 -0.07344,-0.222767 -0.205632,-0.347615 -0.132192,-0.124848 -0.335375,-0.168912 -0.151776,-0.03427 -0.594862,-0.03427 z m 2.751544,1.209308 q 0,-0.54835 0.164016,-0.920445 0.122399,-0.274175 0.332927,-0.492047 0.212975,-0.217871 0.465118,-0.323135 0.335375,-0.141984 0.773566,-0.141984 0.79315,0 1.268061,0.492047 0.477358,0.492047 0.477358,1.368428 0,0.869038 -0.472462,1.361085 -0.472463,0.489598 -1.263165,0.489598 -0.800494,0 -1.272956,-0.48715 -0.472463,-0.489599 -0.472463,-1.346397 z m 0.746638,-0.02448 q 0,0.609551 0.281519,0.925342 0.281519,0.313343 0.714814,0.313343 0.433295,0 0.709918,-0.310895 0.279072,-0.313343 0.279072,-0.937582 0,-0.616894 -0.271728,-0.920445 -0.269279,-0.303551 -0.717262,-0.303551 -0.447983,0 -0.722158,0.308447 -0.274175,0.305999 -0.274175,0.925341 z m 5.596112,0.477359 0.702574,0.222767 q -0.161567,0.587519 -0.538558,0.873934 -0.374543,0.283967 -0.95227,0.283967 -0.714814,0 -1.175036,-0.48715 -0.460223,-0.489599 -0.460223,-1.336605 0,-0.895965 0.462671,-1.39046 0.46267,-0.496943 1.216652,-0.496943 0.658511,0 1.069773,0.389231 0.2448,0.230112 0.367199,0.660959 l -0.717262,0.171359 q -0.06365,-0.279071 -0.266831,-0.440639 -0.200735,-0.161567 -0.489599,-0.161567 -0.399022,0 -0.648718,0.286415 -0.247247,0.286415 -0.247247,0.927789 0,0.680542 0.244799,0.969406 0.2448,0.288863 0.636478,0.288863 0.288864,0 0.496943,-0.1836 0.20808,-0.183599 0.298655,-0.577726 z m 1.140766,0.151776 0.705022,-0.06854 q 0.06365,0.354959 0.257039,0.521422 0.19584,0.166464 0.526319,0.166464 0.350063,0 0.526318,-0.14688 0.178704,-0.149327 0.178704,-0.347615 0,-0.127295 -0.07589,-0.215423 -0.07344,-0.09058 -0.259487,-0.156672 -0.127296,-0.04406 -0.580175,-0.156671 -0.582622,-0.144432 -0.81763,-0.354959 -0.330479,-0.296208 -0.330479,-0.722158 0,-0.274176 0.154224,-0.511631 0.156671,-0.239903 0.447983,-0.364751 0.293759,-0.124848 0.70747,-0.124848 0.675646,0 1.015917,0.296208 0.342719,0.296207 0.359855,0.790701 l -0.724606,0.03182 q -0.04651,-0.276623 -0.200735,-0.396575 -0.151776,-0.122399 -0.457775,-0.122399 -0.315791,0 -0.494495,0.129743 -0.115056,0.08323 -0.115056,0.222768 0,0.127295 0.107712,0.217871 0.137088,0.115056 0.665854,0.239904 0.528767,0.124847 0.78091,0.259487 0.254591,0.132191 0.396575,0.364751 0.144432,0.230111 0.144432,0.570382 0,0.308447 -0.17136,0.577727 -0.171359,0.269279 -0.484703,0.401471 -0.313343,0.129743 -0.780909,0.129743 -0.680542,0 -1.045293,-0.313343 -0.364751,-0.315791 -0.435743,-0.917997 z" id="path16" style="font-weight:bold;font-stretch:condensed;font-size:5.01349px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;stroke-width:0.264583" transform="scale(1.0680757,0.9362632)" aria-label="DOCS"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-11.065137,-18.670029)">
+    <g id="g18">
+      <text xml:space="preserve" transform="scale(0.26458333)" id="text9647" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9649);display:inline;fill:#000000;fill-opacity:1;stroke:none"/>
+      <g id="Layer_2" data-name="Layer 2" transform="matrix(0.5563179,0,0,0.5563179,-0.00218815,0)">
+        <path class="cls-1" d="M 169.29,64.52 V 41.46 h -11.1 l -19.38,23.1 h -5.43 v -28.5 h -10.85 v 28.5 h -5.6 c 0,-0.53 0.08,-1.14 0.08,-1.88 V 62 h -6.77 v 1.94 a 6.32,6.32 0 0 1 -0.37,2.63 1.68,1.68 0 0 1 -1.66,0.88 1.5,1.5 0 0 1 -1.42,-0.71 5,5 0 0 1 -0.32,-2.33 V 58.73 H 117 V 56 a 13,13 0 0 0 -0.85,-5.23 6.31,6.31 0 0 0 -2.92,-2.88 11.68,11.68 0 0 0 -5.43,-1.11 11.49,11.49 0 0 0 -4.76,0.93 5.75,5.75 0 0 0 -2.88,2.57 10.54,10.54 0 0 0 -0.89,4.76 v 7 a 20,20 0 0 0 0.13,2.5 h -3 c 0,-0.28 0,-0.56 0,-0.87 a 5.84,5.84 0 0 0 -1,-3.71 12.59,12.59 0 0 0 -4.47,-2.8 22,22 0 0 1 -3.6,-1.84 3,3 0 0 1 -1.22,-1.32 6,6 0 0 1 -0.19,-1.77 2.32,2.32 0 0 1 0.45,-1.52 1.7,1.7 0 0 1 1.39,-0.58 1.5,1.5 0 0 1 1.49,0.71 5.86,5.86 0 0 1 0.25,2.32 v 1.3 h 6.27 V 53 a 11.15,11.15 0 0 0 -0.2,-2.55 3.72,3.72 0 0 0 -1.08,-1.63 6.68,6.68 0 0 0 -2.67,-1.49 14.3,14.3 0 0 0 -4.38,-0.58 13.32,13.32 0 0 0 -4.54,0.71 5,5 0 0 0 -2.63,1.92 7.84,7.84 0 0 0 -0.78,4 6.85,6.85 0 0 0 0.73,3.28 c 0.47,0.89 1.88,1.93 4.17,3.09 3.84,1.92 4.6,2.43 4.85,2.66 a 3.55,3.55 0 0 1 0.59,2.49 3,3 0 0 1 -0.46,2 A 2,2 0 0 1 87.8,67.45 1.5,1.5 0 0 1 86.3,66.6 6.54,6.54 0 0 1 86,63.87 v -2 h -6.29 v 1.62 c 0,0.38 0,0.72 0,1.05 h -6 a 25.58,25.58 0 1 0 0,8.83 H 158 v 8.42 h 11.33 v -8.4 h 5 V 64.52 Z M 38.89,75.1 A 6.1,6.1 0 1 1 45,69 6.1,6.1 0 0 1 38.89,75.1 Z m 67.54,-20.86 a 7.57,7.57 0 0 1 0.24,-2.68 c 0.15,-0.34 0.53,-0.75 1.48,-0.75 a 1.36,1.36 0 0 1 1.35,0.84 7.39,7.39 0 0 1 0.25,2.59 v 2.23 h -3.32 z M 158,64.52 h -9.62 L 158,52.22 Z" transform="translate(-3.04,-2.5)" id="path858"/>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.61839px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="48.089367" y="45.416836" id="text16" transform="scale(0.93916555,1.064775)"><tspan sodipodi:role="line" id="tspan16" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="48.089367" y="45.416836">D</tspan></text>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="54.558205" y="48.250385" id="text16-9"><tspan sodipodi:role="line" id="tspan16-1" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="54.558205" y="48.250385">O</tspan></text>
+      <g id="g1" transform="matrix(1.1426343,0,0,1.1426343,24.136464,-10.044912)" style="stroke-width:1.67137">
+        <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:7.7611px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.442217;stroke-opacity:1" x="44.508698" y="51.014606" id="text16-5"><tspan sodipodi:role="line" id="tspan16-8" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.442217" x="44.508698" y="51.014606">S</tspan></text>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.505292;stroke-opacity:1" x="65.022789" y="48.250385" id="text17"><tspan sodipodi:role="line" id="tspan17" style="stroke-width:0.505292" x="65.022789" y="48.250385">C</tspan></text>
+    </g>
+  </g>
+</svg>
+</a>
+
+<ul class="px-4 my-10 ext-links">
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Getting Started</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/getting-started.html">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/">Tutorials</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/dockerfiles/">Setting up with Docker</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/repo-cheatsheet.html">Repo manifest cheat sheet</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class="font-bold mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer ">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">The seL4 Kernel</span>
+    </div>
+    <ul class="menu-content ml-6 on">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/host-dependencies.html">Setting up</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/setting-up.html">Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/get-the-tutorials.html">Getting the tutorials</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-world.html">Hello world</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/capabilities.html">Capabilities</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/untyped.html">Untyped</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mapping.html">Mapping</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/threads.html">Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/ipc.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/notifications.html">Notifications</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/interrupts.html">Interrupts</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/fault-handlers.html">Fault handling</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mcs.html">MCS</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/seL4-end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-seL4.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/api-doc.html">API docs</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Hardware/">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/verified-configurations.html">Verified configurations</a>
+        </li>
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/configurations.html">Configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/standalone.html">Standalone seL4 builds</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/bfgen.html">Bitfield generator</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Testing &amp; benchmarking</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4test/">seL4test</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-guide.html">Debugging guide</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-userspace.html">Debugging user space</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4bench/">sel4bench</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/benchmarking-guide.html">Benchmarking guide</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/porting.html">Porting to a new platform</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/seL4.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/seL4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Microkit</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/welcome.html">Welcome</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part0.html">Part 0 - Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part1.html">Part 1 - Serial server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part2.html">Part 2 - Client</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part3.html">Part 3 - Wordle server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part4.html">Part 4 - Virtual machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/manual/latest/">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/roadmap.html">Roadmap</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/platforms.html">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/microkit.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/microkit">Sources</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">CAmkES</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-0.html">Hello CAmkES</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-1.html">Introduction</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-2.html">Events</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-timer.html">Timer</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-linux.html">Virtual Machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-crossvm.html">Cross-VM connectors</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-CAmkES.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/hardware.html">Supported platforms</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Virtualisation</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/camkes-vm/">CAmkES VM</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vm.html">VM library</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vmm.html">VMM library</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/camkes.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/camkes-tool/">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">C support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4runtime/">C runtime</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/user_libs/">User-level libraries</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/">Build System</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-1.html">Init & Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-2.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-3.html">ELF loading & Processes</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-4.html">Timer</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-libs.html">How-to</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Rust support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/how-to-use.html">How to use</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/tutorial/introduction.html">Tutorial</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://sel4.github.io/rust-sel4/">API</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/supported-configurations.html">Supported configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/releases.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/rust-sel4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">ELF loader</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/elfloader/">ELF loader for C</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">capDL</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/lang-spec.html">Language Spec</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/c-loader-app.html">capDL loader (C)</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/capDL.html">Releases</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Examples &amp; demos</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/examples.html">Overview</a>
+        </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gray-200 dark:bg-gray-700 w-px">
+      </div>
+    </div>
+    <div class="flex-1">
+      
+<div class="w-full pb-px bg-gray-200 dark:bg-gray-700">
+  <header class="h-[2rem] sm:h-[2.5rem] lg:h-[3.5rem] w-full flex flex-row items-center gap-2 md:gap-4 md:py-2 std-bg">
+    <div id="burger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="text-dark ml-3 mr-0 sm:mr-3 lg:mx-4 w-4 h-4 lg:w-6 lg:h-6 cursor-pointer">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </div>
+    <div class="flex-1"></div>
+    <a href="/releases.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Releases
+    </a>
+    <a href="https://sel4.systems/Contribute/"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contribute
+    </a>
+    <a href="https://sel4.systems/contact.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contact
+    </a>
+    <a href="https://sel4.systems/support.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Support
+    </a>
+    <!-- main site button -->
+    <a href="https://sel4.systems"
+      class="flex-none button-outline ml-0 text-tiny px-2 py-0.5 sm:px-3 sm:py-1 h-4 sm:h-6 md:py-2 md:h-8 lg:h-9 md:text-xs lg:text-sm mr-0 md:mr-4">Main Site
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" data-slot="icon" class="hidden sm:inline-icon">
+<path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+    </a>
+    <!-- github button -->
+    <a href="https://github.com/seL4"
+      class="mr-2 lg:mr-6 px-0 sm:px-3 pt-2 sm:pt-1 pb-2 block text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+      <span class="sr-only">seL4 on GitHub</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+    </a>
+  </header>
+</div>
+
+      <div class="grid grid-cols-1  h-[calc(100%-3rem)]">
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div id="main-div" class="flex-1 max-w-full">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
+                        overflow-x-auto" id="page-top">
+
+              <div class="theprose mx-auto max-w-6xl ext-links">
+  <h1 id="sel4-configurations">seL4 Configurations</h1>
+
+<p>seL4 has several different options available for configuring seL4 to execute in different
+scenarios. Many of these options are only expected to used during application or kernel
+development and may not be suitable for a final release deployment that wants to leverage
+seL4’s full capabilities.</p>
+
+<p><em>Due to the experimental nature of many of the options, there may be undocumented incompatibilities
+when trying to configure several options together. seL4test, seL4bench or other user level examples
+can be used to test a baseline level of configuration correctness.</em></p>
+
+<h2 id="generic-configuration-options">Generic configuration options</h2>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelVerificationBuild</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>When enabled this configuration option prevents the usage of any other options that would compromise the verification story of the kernel. Enabling this option does NOT imply you are using a verified kernel.</p>
+
+            </td>
+            <td>Always set. (Default: ON)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIsMCS</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable MCS feature for seL4.</p>
+
+            </td>
+            <td>Available on all MCS supported platforms (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelRootCNodeSizeBits</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Root CNode Size (2^n slots) The acceptable range is 12-27 and 12-26, for 32-bit and 64-bit respectively. The root CNode needs at least enough space to contain up to BI_CAP_DYN_START.</p>
+
+            </td>
+            <td>Always set (Default: 12)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelRetypeFanOutLimit</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Maximum number of objects that can be created in a single Retype() invocation.</p>
+
+            </td>
+            <td>Always set. (Default: 256)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumBootinfoUntypedCaps</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Max number of untyped capabilities given to initial boot thread. Additional caps won’t be handed to the system.</p>
+
+            </td>
+            <td>Always set. (Default: 230 caps)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelVerificationBuild</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>When enabled this configuration option prevents the usage of any other options that would compromise the verification story of the kernel. Enabling this option does NOT imply you are using a verified kernel.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: ON)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIsMCS</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable MCS feature for seL4.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Available on all MCS supported platforms (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelRootCNodeSizeBits</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Root CNode Size (2^n slots) The acceptable range is 12-27 and 12-26, for 32-bit and 64-bit respectively. The root CNode needs at least enough space to contain up to BI_CAP_DYN_START.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set (Default: 12)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelRetypeFanOutLimit</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Maximum number of objects that can be created in a single Retype() invocation.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 256)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumBootinfoUntypedCaps</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Max number of untyped capabilities given to initial boot thread. Additional caps won’t be handed to the system.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 230 caps)
+  </div></div>
+
+<h2 id="scheduling-configuration-options">Scheduling configuration options</h2>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelTimerTickMS</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Kernel timer tick period in milliseconds.</p>
+
+            </td>
+            <td>Only available on non-MCS kernels. (Default: 2 milliseconds)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelTimeSlice</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Number of kernel timer ticks until a thread is preempted.</p>
+
+            </td>
+            <td>Only available on non-MCS kernels. (Default: 5 ticks)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelBootThreadTimeSlice</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Budget of booth thread: Number of milliseconds until the boot thread is preempted.</p>
+
+            </td>
+            <td>Available on all MCS supported platforms. (Default: 5 milliseconds)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumWorkUnitsPerPreemption</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Maximum number of work units (delete/revoke iterations) until the kernel checks for pending interrupts (and preempts the currently running syscall if interrupts are pending).</p>
+
+            </td>
+            <td>Always set. (Default: 100)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelResetChunkBits</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Maximum size in bits of chunks of memory to zero before checking a preemption point.</p>
+
+            </td>
+            <td>Always set. (Default: 8 bits)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelNumDomains</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The number of scheduler domains in the system</p>
+
+            </td>
+            <td>Always set. (Default: 1 domain)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDomainSchedule</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>A C file providing the symbols ksDomSchedule and ksDomeScheudleLength to be linked with the kernel as a scheduling configuration.</p>
+
+            </td>
+            <td>Always set. (Default: src/config/default_domain.c)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelNumPriorities</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The number of priority levels per domain.</p>
+
+            </td>
+            <td>Always set, Valid range 1-256. (Default: 256)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelWcetScale</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Multiplier to scale kernel WCET estimate by: the kernel WCET estimate  is used to ensure a thread has enough budget to get in and out of the  kernel. When running in a simulator the WCET estimate, which is tuned  for hardware, may not be sufficient. This option provides a hacky knob that can be fiddled with when running inside a simulator.</p>
+
+            </td>
+            <td>Enabled if KernelIsMCS. (Default: 1)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelTimerTickMS</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Kernel timer tick period in milliseconds.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Only available on non-MCS kernels. (Default: 2 milliseconds)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelTimeSlice</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Number of kernel timer ticks until a thread is preempted.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Only available on non-MCS kernels. (Default: 5 ticks)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelBootThreadTimeSlice</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Budget of booth thread: Number of milliseconds until the boot thread is preempted.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Available on all MCS supported platforms. (Default: 5 milliseconds)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumWorkUnitsPerPreemption</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Maximum number of work units (delete/revoke iterations) until the kernel checks for pending interrupts (and preempts the currently running syscall if interrupts are pending).</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 100)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelResetChunkBits</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Maximum size in bits of chunks of memory to zero before checking a preemption point.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 8 bits)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelNumDomains</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The number of scheduler domains in the system</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 1 domain)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDomainSchedule</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>A C file providing the symbols ksDomSchedule and ksDomeScheudleLength to be linked with the kernel as a scheduling configuration.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: src/config/default_domain.c)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelNumPriorities</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The number of priority levels per domain.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set, Valid range 1-256. (Default: 256)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelWcetScale</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Multiplier to scale kernel WCET estimate by: the kernel WCET estimate  is used to ensure a thread has enough budget to get in and out of the  kernel. When running in a simulator the WCET estimate, which is tuned  for hardware, may not be sufficient. This option provides a hacky knob that can be fiddled with when running inside a simulator.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Enabled if KernelIsMCS. (Default: 1)
+  </div></div>
+
+<h2 id="debug-configuration-options">Debug configuration options</h2>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugBuild</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable debug facilities (symbols and assertions) in the kernel</p>
+
+            </td>
+            <td>Disabled if KernelVerificationBuild is set. (Default: ON)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">HardwareDebugAPI</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Builds the kernel with support for a userspace debug API, which can allows userspace processes to set breakpoints, watchpoints and to single-step through thread execution.</p>
+
+            </td>
+            <td>Requires platform support. (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelPrinting</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Allow the kernel to print out messages to the serial console during bootup and execution.</p>
+
+            </td>
+            <td>Disabled if KernelVerificationBuild is set. (Default: Set to initial value of KernelDebugBuild)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIRQReporting</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>seL4 does not properly check for and handle spurious interrupts. This can result in unnecessary output from the kernel during debug builds. If you are CERTAIN these messages are benign then use this config to turn them off.</p>
+
+            </td>
+            <td>Enabled if KernelPrinting is set. (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelColourPrinting</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>In debug mode, seL4 prints diagnostic messages to its serial output describing, e.g., the cause of system call errors. This setting determines whether ANSI escape codes are applied to colour code these error messages. You may wish to disable this setting if your serial output is redirected to a file or pipe.</p>
+
+            </td>
+            <td>Enabled if KernelPrinting is set. (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelUserStackTraceLength</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>On a double fault the kernel can try and print out the users stack to aid debugging. This option determines how many words of stack should be printed.</p>
+
+            </td>
+            <td>Enabled if KernelPrinting is set. (Default: 16)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisablePrefetchers</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher. On the cortex a53 this disables the L1 Data prefetcher.</p>
+
+            </td>
+            <td>Available if KernelArchX86 OR KernelPlatformHikey is set. (Default: Off)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugBuild</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable debug facilities (symbols and assertions) in the kernel</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Disabled if KernelVerificationBuild is set. (Default: ON)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">HardwareDebugAPI</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Builds the kernel with support for a userspace debug API, which can allows userspace processes to set breakpoints, watchpoints and to single-step through thread execution.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Requires platform support. (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelPrinting</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Allow the kernel to print out messages to the serial console during bootup and execution.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Disabled if KernelVerificationBuild is set. (Default: Set to initial value of KernelDebugBuild)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIRQReporting</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>seL4 does not properly check for and handle spurious interrupts. This can result in unnecessary output from the kernel during debug builds. If you are CERTAIN these messages are benign then use this config to turn them off.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Enabled if KernelPrinting is set. (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelColourPrinting</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>In debug mode, seL4 prints diagnostic messages to its serial output describing, e.g., the cause of system call errors. This setting determines whether ANSI escape codes are applied to colour code these error messages. You may wish to disable this setting if your serial output is redirected to a file or pipe.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Enabled if KernelPrinting is set. (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelUserStackTraceLength</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>On a double fault the kernel can try and print out the users stack to aid debugging. This option determines how many words of stack should be printed.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Enabled if KernelPrinting is set. (Default: 16)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisablePrefetchers</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher. On the cortex a53 this disables the L1 Data prefetcher.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Available if KernelArchX86 OR KernelPlatformHikey is set. (Default: Off)
+  </div></div>
+
+<h2 id="performance-analysis-and-profiling-configuration-options">Performance analysis and profiling configuration options</h2>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFastpath</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable IPC fastpath.  Can be disabled for performance analyses.</p>
+
+            </td>
+            <td>Always set. (Default: ON)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFPUMaxRestoresSinceSwitch</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>This option is a heuristic to attempt to detect when the FPU is no longer in use, allowing the kernel to save the FPU state out so that the FPU does not have to be enabled/disabled every thread switch. Every time we restore a thread and there is active FPU state, we increment this setting and if it exceeds this threshold we switch to the NULL state.</p>
+
+            </td>
+            <td>Only set if the system is using the FPU. (Default: 64 switches)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelBenchmarks</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable benchamrks including logging and tracing info. Setting this value &gt; 1 enables a 1MB log buffer and functions for extracting data from it at user level. NOTE this is only tested on the sabre and will not work on platforms with &lt; 512mb memory. This is not fully implemented for x86.<br /> <strong>none</strong> -&gt; No Benchmarking features enabled.<br /> <strong>generic</strong> -&gt; Enable global benchmarks config variable with no specific features.<br /> <strong>track_kernel_entries</strong> -&gt; Log kernel entries information including timing, number of invocations and arguments for system calls, interrupts, user faults and VM faults.<br /> <strong>tracepoints</strong> -&gt; Enable manually inserted tracepoints that the kernel will track time consumed between.<br /> <strong>track_utilisation</strong> -&gt; Enable the kernel to track each thread’s utilisation time.</p>
+
+            </td>
+            <td>Disabled if KernelVerificationBuild is set. (Default: None)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumTracePoints</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The maximum number of different trace point identifiers which can be used. Use <code class="language-plaintext highlighter-rouge">TRACE_POINT_START(k)</code> and <code class="language-plaintext highlighter-rouge">TRACE_POINT_STOP(k)</code> macros for recording data, where k is an integer between 0 and this value - 1</p>
+
+            </td>
+            <td>Requires KernelBenchmarksTracepoints is set. (Default: 1)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelOptimisation</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Select the kernel optimisation level. This should only be changed as part of performance analysis. -O2 is required for normal use.</p>
+
+            </td>
+            <td>Always set. (Default: -O2)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFWholeProgram</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable -fwhole-program when linking kernel. This should work modulo gcc bugs, which are not uncommon with -fwhole-program. Consider this feature experimental!</p>
+
+            </td>
+            <td>Always set. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDangerousCodeInjection</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Adds a system call that allows users to specify code to be run in kernel mode. Useful for profiling.</p>
+
+            </td>
+            <td>Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelPlatformHikey;NOT KernelSkimWindow. (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelStackBits</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>This describes the log2 size of the kernel stack. Great care should be taken as there is no guard below the stack so setting this too small will cause random memory corruption</p>
+
+            </td>
+            <td>Always set. (Default: 12 bits)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFastpath</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable IPC fastpath.  Can be disabled for performance analyses.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: ON)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFPUMaxRestoresSinceSwitch</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>This option is a heuristic to attempt to detect when the FPU is no longer in use, allowing the kernel to save the FPU state out so that the FPU does not have to be enabled/disabled every thread switch. Every time we restore a thread and there is active FPU state, we increment this setting and if it exceeds this threshold we switch to the NULL state.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Only set if the system is using the FPU. (Default: 64 switches)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelBenchmarks</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable benchamrks including logging and tracing info. Setting this value &gt; 1 enables a 1MB log buffer and functions for extracting data from it at user level. NOTE this is only tested on the sabre and will not work on platforms with &lt; 512mb memory. This is not fully implemented for x86.<br /> <strong>none</strong> -&gt; No Benchmarking features enabled.<br /> <strong>generic</strong> -&gt; Enable global benchmarks config variable with no specific features.<br /> <strong>track_kernel_entries</strong> -&gt; Log kernel entries information including timing, number of invocations and arguments for system calls, interrupts, user faults and VM faults.<br /> <strong>tracepoints</strong> -&gt; Enable manually inserted tracepoints that the kernel will track time consumed between.<br /> <strong>track_utilisation</strong> -&gt; Enable the kernel to track each thread’s utilisation time.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Disabled if KernelVerificationBuild is set. (Default: None)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumTracePoints</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The maximum number of different trace point identifiers which can be used. Use <code class="language-plaintext highlighter-rouge">TRACE_POINT_START(k)</code> and <code class="language-plaintext highlighter-rouge">TRACE_POINT_STOP(k)</code> macros for recording data, where k is an integer between 0 and this value - 1</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Requires KernelBenchmarksTracepoints is set. (Default: 1)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelOptimisation</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Select the kernel optimisation level. This should only be changed as part of performance analysis. -O2 is required for normal use.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: -O2)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFWholeProgram</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable -fwhole-program when linking kernel. This should work modulo gcc bugs, which are not uncommon with -fwhole-program. Consider this feature experimental!</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDangerousCodeInjection</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Adds a system call that allows users to specify code to be run in kernel mode. Useful for profiling.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelPlatformHikey;NOT KernelSkimWindow. (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelStackBits</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>This describes the log2 size of the kernel stack. Great care should be taken as there is no guard below the stack so setting this too small will cause random memory corruption</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 12 bits)
+  </div></div>
+
+<h2 id="target-hardware-architectureplatform-options">Target hardware architecture/platform options</h2>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelPlatform</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Hardware platform to target. This setting influences other kernel configuration values.</p>
+
+            </td>
+            <td>See <a href="/Hardware/">list of supported platforms.</a></td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSel4Arch</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Architecture mode for building the kernel.</p>
+
+            </td>
+            <td>Supported values: (aarch32, aarch64, arm_hyp, riscv32, riscv64, x86_64, ia32).</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelHaveFPU</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Set if the platform and toolchain supports floating point unit.</p>
+
+            </td>
+            <td>Set on x86, Unset on RISC-V, toolchain + verirification dependent on Arm</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumNodes</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Max number of CPU cores to boot.</p>
+
+            </td>
+            <td>Always set. (Default: 1 node)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelPlatform</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Hardware platform to target. This setting influences other kernel configuration values.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      See <a href="/Hardware/">list of supported platforms.</a>
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSel4Arch</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Architecture mode for building the kernel.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Supported values: (aarch32, aarch64, arm_hyp, riscv32, riscv64, x86_64, ia32).
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelHaveFPU</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Set if the platform and toolchain supports floating point unit.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Set on x86, Unset on RISC-V, toolchain + verirification dependent on Arm
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumNodes</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Max number of CPU cores to boot.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Always set. (Default: 1 node)
+  </div></div>
+
+<h3 id="arm">Arm</h3>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableL2Cache</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Do not enable the L2 cache on startup for debugging purposes.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableL1ICache</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Do not enable the L1 instruction cache on startup for debugging purposes.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableL1DCache</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Do not enable the L1 data cache on startup for debugging purposes.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableBranchPrediction</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Do not enable branch prediction (also called program flow control) on startup for debugging purposes. This makes execution time more deterministic at the expense of dramatically decreasing performance.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmHypervisorSupport</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Utilise Arm virtualisation extensions to build the kernel as a hypervisor.</p>
+
+            </td>
+            <td>Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmHypervisorSupport</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Utilise Arm virtualisation extensions to build the kernel as a hypervisor.</p>
+
+            </td>
+            <td>Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmHypEnableVCPUCP14SaveAndRestore</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The kernel does not save or restore VCPUs’ CP14 accesses. As a result, accessing VPU threads’ CP14 context triggers a trap, which allows the kernel to intercept the access and deliver it as a fault message to the VM monitor.</p>
+
+            </td>
+            <td>Arm option. (Default: ON)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmErrata430973</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable a workaround for 430973 Cortex-A8 (r1p0..r1p2) erratum An error occurs if an instruction contains Arm/Thumb interworking branch that is replaced by a different instruction from the same virtual address.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmErrata773022</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable a workaround for 773022 Cortex-A15 (r0p0..r0p4) erratum. An error occurs on rare sequences of instructions which results on the loop buffer delivering incorrect instructions. The workaround is to disable the loop buffer.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmSMMU</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable the System MMU on the Tegra TK1 SoC.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmEnableA9Prefetcher</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable the prefetcher on Arm Cortex-A9 core. The Cortex-A9 has L1 and L2 prefetchers, which are disabled by default. This config option enables those prefetchers, requiring the kernel to be executed in the secure mode. Arm document indicates that the bit used for enabling those prefetchers is no longer supported from version r4p1 of the Cortex-A9. However, the correctness of that is uncertain.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmExportPMUUser</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Grant user access to the performance monitoring unit. While useful for benchmarking, this option opens the possibility of timing channels.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmDisableWFIWFETraps</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Disable the trapping of WFI  and WFE instructions by configuring the Hyp Configuration Registor (HCR) of a VCPU.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelARMSMMUInterruptEnable</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable system MMU (SMMU) interrupts.  System MMU interrupts currently only serve for debugging purpose because they are not forwarded to user level. Enabling this will cause some SMMU fault types to print out a message in the kernel. High frequency faults can result in all time spent in the kernel printing fault messages.</p>
+
+            </td>
+            <td>Arm option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelAArch32FPUEnableContextSwitch</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Enable hardware VFP and SIMD context switch. This enables the VFP and SIMD context switch on platforms with hardware support, allowing the user to execute hardware VFP and SIMD operations in a multithreading environment, instead of relying on software emulation of FPU/VFP from the C library (e.g. mfloat-abi=soft).</p>
+
+            </td>
+            <td>Arm option. (Default: ON)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableL2Cache</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Do not enable the L2 cache on startup for debugging purposes.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableL1ICache</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Do not enable the L1 instruction cache on startup for debugging purposes.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableL1DCache</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Do not enable the L1 data cache on startup for debugging purposes.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisableBranchPrediction</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Do not enable branch prediction (also called program flow control) on startup for debugging purposes. This makes execution time more deterministic at the expense of dramatically decreasing performance.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmHypervisorSupport</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Utilise Arm virtualisation extensions to build the kernel as a hypervisor.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmHypervisorSupport</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Utilise Arm virtualisation extensions to build the kernel as a hypervisor.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: the value of ARM_HYP (TRUE or FALSE))
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmHypEnableVCPUCP14SaveAndRestore</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The kernel does not save or restore VCPUs’ CP14 accesses. As a result, accessing VPU threads’ CP14 context triggers a trap, which allows the kernel to intercept the access and deliver it as a fault message to the VM monitor.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: ON)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmErrata430973</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable a workaround for 430973 Cortex-A8 (r1p0..r1p2) erratum An error occurs if an instruction contains Arm/Thumb interworking branch that is replaced by a different instruction from the same virtual address.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmErrata773022</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable a workaround for 773022 Cortex-A15 (r0p0..r0p4) erratum. An error occurs on rare sequences of instructions which results on the loop buffer delivering incorrect instructions. The workaround is to disable the loop buffer.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmSMMU</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable the System MMU on the Tegra TK1 SoC.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmEnableA9Prefetcher</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable the prefetcher on Arm Cortex-A9 core. The Cortex-A9 has L1 and L2 prefetchers, which are disabled by default. This config option enables those prefetchers, requiring the kernel to be executed in the secure mode. Arm document indicates that the bit used for enabling those prefetchers is no longer supported from version r4p1 of the Cortex-A9. However, the correctness of that is uncertain.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmExportPMUUser</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Grant user access to the performance monitoring unit. While useful for benchmarking, this option opens the possibility of timing channels.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelArmDisableWFIWFETraps</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Disable the trapping of WFI  and WFE instructions by configuring the Hyp Configuration Registor (HCR) of a VCPU.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelARMSMMUInterruptEnable</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable system MMU (SMMU) interrupts.  System MMU interrupts currently only serve for debugging purpose because they are not forwarded to user level. Enabling this will cause some SMMU fault types to print out a message in the kernel. High frequency faults can result in all time spent in the kernel printing fault messages.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelAArch32FPUEnableContextSwitch</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Enable hardware VFP and SIMD context switch. This enables the VFP and SIMD context switch on platforms with hardware support, allowing the user to execute hardware VFP and SIMD operations in a multithreading environment, instead of relying on software emulation of FPU/VFP from the C library (e.g. mfloat-abi=soft).</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Arm option. (Default: ON)
+  </div></div>
+
+<h3 id="x86">x86</h3>
+
+<table class="hidden sm:block">
+    <thead>
+        <tr>
+            <th>Configurations</th>
+            <th>Description</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86MicroArch</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Select the x86 micro architecture.</p>
+
+            </td>
+            <td>x86 Option. Supported values:nehalem, generic, westmere, sandy, ivy, haswell, broadwell, skylake. (Default: nehalem)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIRQController</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Select the IRQ controller seL4 will use. Code for others may still be included if needed to disable at run time.</p>
+
+            </td>
+            <td>x86 Option. Supported values: PIC, IOAPIC. (Default: IOAPIC)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumIOAPIC</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Configure the maximum number of IOAPIC controllers that can be supported. SeL4 will detect IOAPICs regardless of whether the IOAPIC will actually be used as the final IRQ controller.</p>
+
+            </td>
+            <td>x86 Option. (Default: 1)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelLAPICMode</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Select the mode local APIC will use: XAPIC, X2APIC</p>
+
+            </td>
+            <td>x86 Option. Not all machines support X2APIC mode (Default: XAPIC)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelUseLogcalIDs</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Use logical IDs to broadcast IPI between cores. Not all machines support logical IDs. In xAPIC mode only 8 cores can be addressed using logical IDs.</p>
+
+            </td>
+            <td>x86 Option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelCacheLnSz</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Define cache line size for x86.</p>
+
+            </td>
+            <td>x86 Option. (Default: 64)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelVTX</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>VT-x support compiled into the kernel.</p>
+
+            </td>
+            <td>x86 Option. (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIOMMU</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>IOMMU support for VT-d enabled chipset.</p>
+
+            </td>
+            <td>x86 Option. (Default: ON)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxRMRREntries</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Sets the maximum number of Reserved Memory Region Reporting structures we support recording from the ACPI tables. These structures are used for setting up passthrouh IOMMU mappings for legacy devices.</p>
+
+            </td>
+            <td>x86 Option. (Default: 32)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxVPIDs</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The kernel maintains a mapping of 16-bit VPIDs to VCPUs. This option should be sized as small as possible to save memory, but be at least the number of VCPUs that will be run for optimum performance.</p>
+
+            </td>
+            <td>x86 Option. (Default: 1024)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelHugePage</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Add support for 1GB huge page.</p>
+
+            </td>
+            <td>x86 Option. Not all recent processor models support this feature (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSupportPCID</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Add support for PCIDs (aka hardware ASIDs).</p>
+
+            </td>
+            <td>x86_64 Option. Not all recent processor models support this feature (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSyscall</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Which syscall method that the kernel supports. This config should be set to the most efficient one that is support by the hardware the system will run on.</p>
+
+            </td>
+            <td>x86 Option. The kernel only ever supports one method at a time: syscall, sysenter (Default: syscall)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFPU</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Choose the method that FPU state is stored in. This directly affects the method used to save and restore it. <br /> <strong>FXSAVE</strong> -&gt; This chooses the legacy 512-byte region used by the fxsave and fxrstor functions<br /> <strong>XSAVE</strong> -&gt; This chooses the variable xsave region, and enables the ability to use any of the xsave variants to save and restore. The actual size of the region is dependent on the features enabled.</p>
+
+            </td>
+            <td>x86 Option. (Default: XSAVE)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelXSave</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The XSAVE area supports multiple instructions to save and restore to it. These instructions are dependent upon specific CPU support. See Chapter 13 of Volume 1 of the Intel Architectures SOftware Developers Manual for discussion on the init and modified optimizations.<br /> <strong>XSAVE</strong> -&gt; Original XSAVE instruction. This is the only XSAVE instruction that is guaranteed to exist if XSAVE is present<br /> <strong>XSAVEC</strong> -&gt; Save state with compaction. This compaction has to do with minimizing the total size of XSAVE buffer, if using non contiguous features, XSAVEC will attempt to use the init optimization when saving <br /> <strong>XSAVEOPT</strong> -&gt; Save state taking advantage of both the init optimization and modified optimization<br /> <strong>XSAVES</strong> -&gt; Save state taking advantage of the modified optimization. This instruction is only available in OS code, and is the preferred save method if it exists.</p>
+
+            </td>
+            <td>x86 Option. (Default: XSAVEOPT)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelXSaveFeatureSet</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>XSAVE can save and restore the state for various features through the use of the feature mask. This config option represents the feature mask that we want to support. The CPU must support all bits in this feature mask. Current known bits are <br /> 0 - FPU <br /> 1 - SSE <br /> 2 - AVX <br /> FPU and SSE is guaranteed to exist if XSAVE exists.</p>
+
+            </td>
+            <td>x86 Option. (Default: 3)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFSGSBase</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>There are three ways to to set FS/GS base addresses: IA32_FS/GS_GDT, IA32_FS/GS_BASE_MSR, and fsgsbase instructions. IA32_FS/GS_GDT and IA32_FS/GS_BASE_MSR are availble for 32-bit. IA32_FS/GS_BASE_MSR and fsgsbase instructions are available for 64-bit.</p>
+
+            </td>
+            <td>x86 Option. (Default x86_64: fsgsbase, ia32: gdt)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXMode</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The type of graphics mode to request from the boot loader. This is encoded into the multiboot header and is merely a hint, the boot loader is free to ignore or set some other mode</p>
+
+            </td>
+            <td>x86 Option. Options: none, text, linear (Default: none)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXDepth</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The bits per pixel of the linear graphics mode ot request. Value of zero indicates no preference.</p>
+
+            </td>
+            <td>x86 Option. (Default: 32)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXWidth</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The width of the graphics mode to request. For a linear graphics mode this is the number of pixels. For a text mode this is the number of characters, value of zero indicates no preference.</p>
+
+            </td>
+            <td>x86 Option. (Default: 0)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXHeight</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>The height of the graphics mode to request. For a linear graphics mode this is the number of pixels. For a text mode this is the number of characters, value of zero indicates no preference.</p>
+
+            </td>
+            <td>x86 Option. (Default: 0)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultiboot1Header</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Inserts a header that indicates to the bootloader that the kernel supports a multiboot 1 boot header</p>
+
+            </td>
+            <td>x86 Option. (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultiboot2Header</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Inserts a header that indicates to the bootloader that the kernel supports a multiboot 2 boot header. This is can be enabled together with a multiboot 1 header and the boot loader may use either one</p>
+
+            </td>
+            <td>x86 Option. (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSkimWindow</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Prevent against the Meltdown vulnerability by using a reduced Static Kernel Image and Micro-state window instead of having all kernel state in the kernel window. This only needs to be enabled if deploying to a vulnerable processor</p>
+
+            </td>
+            <td>x86_64 Option. (Default: On)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelExportPMCUser</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Grant user access to the Performance Monitoring Counters. This allows the user to read performance counters, although not control what the counters are and whether or not they are counting. Nevertheless whilst this is useful for evalulating performance this option opens timing and covert channels.</p>
+
+            </td>
+            <td>x86 Option. (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelExportPMCUser</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Grant user access to the Performance Monitoring Counters. This allows the user to read performance counters, although not control what the counters are and whether or not they are counting. Nevertheless whilst this is useful for evalulating performance this option opens timing and covert channels.</p>
+
+            </td>
+            <td>x86 Option. (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86DangerousMSR</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>rdmsr/wrmsr kernel interface. Provides a syscall interface for reading and writing arbitrary MSRs. This is extremely dangerous as no checks are performed and exists to aid debugging and benchmarking.</p>
+
+            </td>
+            <td>x86 Option. (Default: Off)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86IBRSMode</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Indirect Branch Restricted Speculation mode Used to prevent a user from manipulating the branch predictor to manipulate speculative execution of other processes. On current processors IBRS has a prohibitive performance penalty and it is recommended that it be disabled such that software mitigations are used instead. Software mitigation is done by disabling jump tables (the only form of indirect jump in seL4 except for ‘ret’) and flushing the RSB on vmexit. Flushing the RSB at other times is not needed as seL4 does not switch kernel stacks and so is not vulnerable to RSB underflow. The STIBP is essentially software mitigation but enables the single thread isolation for branch predictions. This is only needed if attempting to protect user level process from each other in a multicore environment.</p>
+
+            </td>
+            <td>x86 Option. (Default: ibrs_none)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86IBPBOnContextSwitch</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Performs a IBPB on every context switch to prevent Spectre attacks between user processes. This is extremely expensive and is recommended you only turn this on if absolutely necessary. Note that in a multicore environment you should also enable STIBP to prevent other cores retraining the branch predictor even after context switch.</p>
+
+            </td>
+            <td>x86 Option. (Default: OFF)</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86RSBOnContextSwitch</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>Flushes the RSB on context switch to prevent Spectre attacks between user processes. Whilst not nearly as expensive as an IBPB it is not enabled by default as it is largely pointless to flush the RSB without also doing an IBPB as the RSB is already a harder attack vector.</p>
+
+            </td>
+            <td>x86 Option. (Default: OFF)</td>
+        </tr></tbody>
+</table>
+
+<div class="text-sm sm:hidden">
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86MicroArch</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Select the x86 micro architecture.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. Supported values:nehalem, generic, westmere, sandy, ivy, haswell, broadwell, skylake. (Default: nehalem)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIRQController</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Select the IRQ controller seL4 will use. Code for others may still be included if needed to disable at run time.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. Supported values: PIC, IOAPIC. (Default: IOAPIC)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxNumIOAPIC</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Configure the maximum number of IOAPIC controllers that can be supported. SeL4 will detect IOAPICs regardless of whether the IOAPIC will actually be used as the final IRQ controller.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 1)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelLAPICMode</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Select the mode local APIC will use: XAPIC, X2APIC</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. Not all machines support X2APIC mode (Default: XAPIC)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelUseLogcalIDs</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Use logical IDs to broadcast IPI between cores. Not all machines support logical IDs. In xAPIC mode only 8 cores can be addressed using logical IDs.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelCacheLnSz</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Define cache line size for x86.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 64)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelVTX</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>VT-x support compiled into the kernel.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelIOMMU</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>IOMMU support for VT-d enabled chipset.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: ON)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxRMRREntries</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Sets the maximum number of Reserved Memory Region Reporting structures we support recording from the ACPI tables. These structures are used for setting up passthrouh IOMMU mappings for legacy devices.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 32)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMaxVPIDs</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The kernel maintains a mapping of 16-bit VPIDs to VCPUs. This option should be sized as small as possible to save memory, but be at least the number of VCPUs that will be run for optimum performance.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 1024)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelHugePage</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Add support for 1GB huge page.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. Not all recent processor models support this feature (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSupportPCID</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Add support for PCIDs (aka hardware ASIDs).</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86_64 Option. Not all recent processor models support this feature (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSyscall</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Which syscall method that the kernel supports. This config should be set to the most efficient one that is support by the hardware the system will run on.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. The kernel only ever supports one method at a time: syscall, sysenter (Default: syscall)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFPU</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Choose the method that FPU state is stored in. This directly affects the method used to save and restore it. <br /> <strong>FXSAVE</strong> -&gt; This chooses the legacy 512-byte region used by the fxsave and fxrstor functions<br /> <strong>XSAVE</strong> -&gt; This chooses the variable xsave region, and enables the ability to use any of the xsave variants to save and restore. The actual size of the region is dependent on the features enabled.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: XSAVE)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelXSave</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The XSAVE area supports multiple instructions to save and restore to it. These instructions are dependent upon specific CPU support. See Chapter 13 of Volume 1 of the Intel Architectures SOftware Developers Manual for discussion on the init and modified optimizations.<br /> <strong>XSAVE</strong> -&gt; Original XSAVE instruction. This is the only XSAVE instruction that is guaranteed to exist if XSAVE is present<br /> <strong>XSAVEC</strong> -&gt; Save state with compaction. This compaction has to do with minimizing the total size of XSAVE buffer, if using non contiguous features, XSAVEC will attempt to use the init optimization when saving <br /> <strong>XSAVEOPT</strong> -&gt; Save state taking advantage of both the init optimization and modified optimization<br /> <strong>XSAVES</strong> -&gt; Save state taking advantage of the modified optimization. This instruction is only available in OS code, and is the preferred save method if it exists.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: XSAVEOPT)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelXSaveFeatureSet</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>XSAVE can save and restore the state for various features through the use of the feature mask. This config option represents the feature mask that we want to support. The CPU must support all bits in this feature mask. Current known bits are <br /> 0 - FPU <br /> 1 - SSE <br /> 2 - AVX <br /> FPU and SSE is guaranteed to exist if XSAVE exists.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 3)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelFSGSBase</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>There are three ways to to set FS/GS base addresses: IA32_FS/GS_GDT, IA32_FS/GS_BASE_MSR, and fsgsbase instructions. IA32_FS/GS_GDT and IA32_FS/GS_BASE_MSR are availble for 32-bit. IA32_FS/GS_BASE_MSR and fsgsbase instructions are available for 64-bit.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default x86_64: fsgsbase, ia32: gdt)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXMode</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The type of graphics mode to request from the boot loader. This is encoded into the multiboot header and is merely a hint, the boot loader is free to ignore or set some other mode</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. Options: none, text, linear (Default: none)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXDepth</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The bits per pixel of the linear graphics mode ot request. Value of zero indicates no preference.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 32)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXWidth</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The width of the graphics mode to request. For a linear graphics mode this is the number of pixels. For a text mode this is the number of characters, value of zero indicates no preference.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 0)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultibootGFXHeight</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>The height of the graphics mode to request. For a linear graphics mode this is the number of pixels. For a text mode this is the number of characters, value of zero indicates no preference.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: 0)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultiboot1Header</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Inserts a header that indicates to the bootloader that the kernel supports a multiboot 1 boot header</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelMultiboot2Header</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Inserts a header that indicates to the bootloader that the kernel supports a multiboot 2 boot header. This is can be enabled together with a multiboot 1 header and the boot loader may use either one</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelSkimWindow</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Prevent against the Meltdown vulnerability by using a reduced Static Kernel Image and Micro-state window instead of having all kernel state in the kernel window. This only needs to be enabled if deploying to a vulnerable processor</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86_64 Option. (Default: On)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelExportPMCUser</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Grant user access to the Performance Monitoring Counters. This allows the user to read performance counters, although not control what the counters are and whether or not they are counting. Nevertheless whilst this is useful for evalulating performance this option opens timing and covert channels.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelExportPMCUser</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Grant user access to the Performance Monitoring Counters. This allows the user to read performance counters, although not control what the counters are and whether or not they are counting. Nevertheless whilst this is useful for evalulating performance this option opens timing and covert channels.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86DangerousMSR</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>rdmsr/wrmsr kernel interface. Provides a syscall interface for reading and writing arbitrary MSRs. This is extremely dangerous as no checks are performed and exists to aid debugging and benchmarking.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: Off)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86IBRSMode</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Indirect Branch Restricted Speculation mode Used to prevent a user from manipulating the branch predictor to manipulate speculative execution of other processes. On current processors IBRS has a prohibitive performance penalty and it is recommended that it be disabled such that software mitigations are used instead. Software mitigation is done by disabling jump tables (the only form of indirect jump in seL4 except for ‘ret’) and flushing the RSB on vmexit. Flushing the RSB at other times is not needed as seL4 does not switch kernel stacks and so is not vulnerable to RSB underflow. The STIBP is essentially software mitigation but enables the single thread isolation for branch predictions. This is only needed if attempting to protect user level process from each other in a multicore environment.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: ibrs_none)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86IBPBOnContextSwitch</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Performs a IBPB on every context switch to prevent Spectre attacks between user processes. This is extremely expensive and is recommended you only turn this on if absolutely necessary. Note that in a multicore environment you should also enable STIBP to prevent other cores retraining the branch predictor even after context switch.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: OFF)
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelX86RSBOnContextSwitch</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>Flushes the RSB on context switch to prevent Spectre attacks between user processes. Whilst not nearly as expensive as an IBPB it is not enabled by default as it is largely pointless to flush the RSB without also doing an IBPB as the RSB is already a harder attack vector.</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      x86 Option. (Default: OFF)
+  </div></div>
+
+
+</div>
+
+            </main>
+          </div>
+          
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-xs lg:text-sm font-semibold text-lighter">
+  <a href="/sitemap.html"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <a href="/processes/test-status.html"
+     class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
+  <div class="flex-1"></div>
+<a href="https://github.com/seL4/docs/edit/master/projects/sel4/configurations.md" class="flex-none  hover:text-light hover:underline">Edit
+    page on GitHub</a>
+</footer>
+
+        </div>
+        </div>
+    </div>
+  </body>
+</html>

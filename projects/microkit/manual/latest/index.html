@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<!-- Page last generated 2025-07-16 05:32:53 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Microkit User Manual (v2.0.1) | seL4 docs</title>
+
+    <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/manual/latest/">
+    <link href="/assets/css/sel4.css?v=1752643973" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <script defer src="/assets/js/menu.js"></script>
+    <script defer src="/assets/js/sidebar.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  <script defer data-domain="docs.sel4.systems"
+            src="https://analytics.sel4.systems/js/script.js"></script></head>
+  <body class="flex flex-row h-screen std-bg text-dark">
+    <div id="sidebar" class="hidden lg:flex flex-none w-(--sidebar-width) flex-row bg-f_neutral-50 dark:bg-gray-900">
+      <div class="flex-1 overflow-y-auto min-h-full">
+        <a href="/">
+  <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="84.224365mm" height="32.530689mm" viewBox="0 0 84.224367 32.530689" version="1.1" id="svg5" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="sel4-docs.svg" inkscape:export-filename="C:\Users\Birgit Brecknell\Documents\seL4 Foundation\seL4 Summit 2022\sel4_summit_v02.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" class="px-4 w-50 h-20 mx-auto mt-4 mb-10">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" inkscape:zoom="1.8116734" inkscape:cx="193.19155" inkscape:cy="87.764163" inkscape:window-width="1392" inkscape:window-height="1099" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="g18" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" showguides="true" inkscape:guide-bbox="true" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1"/>
+  <defs id="defs2">
+    <rect x="680.69342" y="102.26014" width="15.612235" height="115.53054" id="rect9649"/>
+    <style id="style824">.cls-1,.cls-2,.cls-3{fill:#96ca4f;}.cls-2,.cls-3{stroke:#96ca4f;stroke-miterlimit:8;}.cls-3{stroke-width:0.25px;}</style>
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
+      <g inkscape:label="Clip" id="use15">
+        <path d="m 39.66384,47.73588 h 1.324364 q 0.447983,0 0.68299,0.06854 0.315791,0.09302 0.541007,0.330479 0.225215,0.237455 0.342719,0.582623 0.117503,0.342719 0.117503,0.847005 0,0.443087 -0.110159,0.763774 -0.13464,0.391679 -0.384335,0.63403 -0.188496,0.1836 -0.509183,0.286416 -0.239903,0.07589 -0.641374,0.07589 H 39.66384 Z m 0.724606,0.607103 v 2.377001 h 0.541006 q 0.303551,0 0.438191,-0.03427 0.176255,-0.04406 0.291311,-0.149327 0.117504,-0.105264 0.190944,-0.345168 0.07344,-0.242351 0.07344,-0.65851 0,-0.416159 -0.07344,-0.638926 -0.07344,-0.222767 -0.205632,-0.347615 -0.132192,-0.124848 -0.335375,-0.168912 -0.151776,-0.03427 -0.594862,-0.03427 z m 2.751544,1.209308 q 0,-0.54835 0.164016,-0.920445 0.122399,-0.274175 0.332927,-0.492047 0.212975,-0.217871 0.465118,-0.323135 0.335375,-0.141984 0.773566,-0.141984 0.79315,0 1.268061,0.492047 0.477358,0.492047 0.477358,1.368428 0,0.869038 -0.472462,1.361085 -0.472463,0.489598 -1.263165,0.489598 -0.800494,0 -1.272956,-0.48715 -0.472463,-0.489599 -0.472463,-1.346397 z m 0.746638,-0.02448 q 0,0.609551 0.281519,0.925342 0.281519,0.313343 0.714814,0.313343 0.433295,0 0.709918,-0.310895 0.279072,-0.313343 0.279072,-0.937582 0,-0.616894 -0.271728,-0.920445 -0.269279,-0.303551 -0.717262,-0.303551 -0.447983,0 -0.722158,0.308447 -0.274175,0.305999 -0.274175,0.925341 z m 5.596112,0.477359 0.702574,0.222767 q -0.161567,0.587519 -0.538558,0.873934 -0.374543,0.283967 -0.95227,0.283967 -0.714814,0 -1.175036,-0.48715 -0.460223,-0.489599 -0.460223,-1.336605 0,-0.895965 0.462671,-1.39046 0.46267,-0.496943 1.216652,-0.496943 0.658511,0 1.069773,0.389231 0.2448,0.230112 0.367199,0.660959 l -0.717262,0.171359 q -0.06365,-0.279071 -0.266831,-0.440639 -0.200735,-0.161567 -0.489599,-0.161567 -0.399022,0 -0.648718,0.286415 -0.247247,0.286415 -0.247247,0.927789 0,0.680542 0.244799,0.969406 0.2448,0.288863 0.636478,0.288863 0.288864,0 0.496943,-0.1836 0.20808,-0.183599 0.298655,-0.577726 z m 1.140766,0.151776 0.705022,-0.06854 q 0.06365,0.354959 0.257039,0.521422 0.19584,0.166464 0.526319,0.166464 0.350063,0 0.526318,-0.14688 0.178704,-0.149327 0.178704,-0.347615 0,-0.127295 -0.07589,-0.215423 -0.07344,-0.09058 -0.259487,-0.156672 -0.127296,-0.04406 -0.580175,-0.156671 -0.582622,-0.144432 -0.81763,-0.354959 -0.330479,-0.296208 -0.330479,-0.722158 0,-0.274176 0.154224,-0.511631 0.156671,-0.239903 0.447983,-0.364751 0.293759,-0.124848 0.70747,-0.124848 0.675646,0 1.015917,0.296208 0.342719,0.296207 0.359855,0.790701 l -0.724606,0.03182 q -0.04651,-0.276623 -0.200735,-0.396575 -0.151776,-0.122399 -0.457775,-0.122399 -0.315791,0 -0.494495,0.129743 -0.115056,0.08323 -0.115056,0.222768 0,0.127295 0.107712,0.217871 0.137088,0.115056 0.665854,0.239904 0.528767,0.124847 0.78091,0.259487 0.254591,0.132191 0.396575,0.364751 0.144432,0.230111 0.144432,0.570382 0,0.308447 -0.17136,0.577727 -0.171359,0.269279 -0.484703,0.401471 -0.313343,0.129743 -0.780909,0.129743 -0.680542,0 -1.045293,-0.313343 -0.364751,-0.315791 -0.435743,-0.917997 z" id="path16" style="font-weight:bold;font-stretch:condensed;font-size:5.01349px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;stroke-width:0.264583" transform="scale(1.0680757,0.9362632)" aria-label="DOCS"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-11.065137,-18.670029)">
+    <g id="g18">
+      <text xml:space="preserve" transform="scale(0.26458333)" id="text9647" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9649);display:inline;fill:#000000;fill-opacity:1;stroke:none"/>
+      <g id="Layer_2" data-name="Layer 2" transform="matrix(0.5563179,0,0,0.5563179,-0.00218815,0)">
+        <path class="cls-1" d="M 169.29,64.52 V 41.46 h -11.1 l -19.38,23.1 h -5.43 v -28.5 h -10.85 v 28.5 h -5.6 c 0,-0.53 0.08,-1.14 0.08,-1.88 V 62 h -6.77 v 1.94 a 6.32,6.32 0 0 1 -0.37,2.63 1.68,1.68 0 0 1 -1.66,0.88 1.5,1.5 0 0 1 -1.42,-0.71 5,5 0 0 1 -0.32,-2.33 V 58.73 H 117 V 56 a 13,13 0 0 0 -0.85,-5.23 6.31,6.31 0 0 0 -2.92,-2.88 11.68,11.68 0 0 0 -5.43,-1.11 11.49,11.49 0 0 0 -4.76,0.93 5.75,5.75 0 0 0 -2.88,2.57 10.54,10.54 0 0 0 -0.89,4.76 v 7 a 20,20 0 0 0 0.13,2.5 h -3 c 0,-0.28 0,-0.56 0,-0.87 a 5.84,5.84 0 0 0 -1,-3.71 12.59,12.59 0 0 0 -4.47,-2.8 22,22 0 0 1 -3.6,-1.84 3,3 0 0 1 -1.22,-1.32 6,6 0 0 1 -0.19,-1.77 2.32,2.32 0 0 1 0.45,-1.52 1.7,1.7 0 0 1 1.39,-0.58 1.5,1.5 0 0 1 1.49,0.71 5.86,5.86 0 0 1 0.25,2.32 v 1.3 h 6.27 V 53 a 11.15,11.15 0 0 0 -0.2,-2.55 3.72,3.72 0 0 0 -1.08,-1.63 6.68,6.68 0 0 0 -2.67,-1.49 14.3,14.3 0 0 0 -4.38,-0.58 13.32,13.32 0 0 0 -4.54,0.71 5,5 0 0 0 -2.63,1.92 7.84,7.84 0 0 0 -0.78,4 6.85,6.85 0 0 0 0.73,3.28 c 0.47,0.89 1.88,1.93 4.17,3.09 3.84,1.92 4.6,2.43 4.85,2.66 a 3.55,3.55 0 0 1 0.59,2.49 3,3 0 0 1 -0.46,2 A 2,2 0 0 1 87.8,67.45 1.5,1.5 0 0 1 86.3,66.6 6.54,6.54 0 0 1 86,63.87 v -2 h -6.29 v 1.62 c 0,0.38 0,0.72 0,1.05 h -6 a 25.58,25.58 0 1 0 0,8.83 H 158 v 8.42 h 11.33 v -8.4 h 5 V 64.52 Z M 38.89,75.1 A 6.1,6.1 0 1 1 45,69 6.1,6.1 0 0 1 38.89,75.1 Z m 67.54,-20.86 a 7.57,7.57 0 0 1 0.24,-2.68 c 0.15,-0.34 0.53,-0.75 1.48,-0.75 a 1.36,1.36 0 0 1 1.35,0.84 7.39,7.39 0 0 1 0.25,2.59 v 2.23 h -3.32 z M 158,64.52 h -9.62 L 158,52.22 Z" transform="translate(-3.04,-2.5)" id="path858"/>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.61839px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="48.089367" y="45.416836" id="text16" transform="scale(0.93916555,1.064775)"><tspan sodipodi:role="line" id="tspan16" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="48.089367" y="45.416836">D</tspan></text>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="54.558205" y="48.250385" id="text16-9"><tspan sodipodi:role="line" id="tspan16-1" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="54.558205" y="48.250385">O</tspan></text>
+      <g id="g1" transform="matrix(1.1426343,0,0,1.1426343,24.136464,-10.044912)" style="stroke-width:1.67137">
+        <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:7.7611px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.442217;stroke-opacity:1" x="44.508698" y="51.014606" id="text16-5"><tspan sodipodi:role="line" id="tspan16-8" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.442217" x="44.508698" y="51.014606">S</tspan></text>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.505292;stroke-opacity:1" x="65.022789" y="48.250385" id="text17"><tspan sodipodi:role="line" id="tspan17" style="stroke-width:0.505292" x="65.022789" y="48.250385">C</tspan></text>
+    </g>
+  </g>
+</svg>
+</a>
+
+<ul class="px-4 my-10 ext-links">
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Getting Started</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/getting-started.html">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/">Tutorials</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/dockerfiles/">Setting up with Docker</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/repo-cheatsheet.html">Repo manifest cheat sheet</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">The seL4 Kernel</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/host-dependencies.html">Setting up</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/setting-up.html">Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/get-the-tutorials.html">Getting the tutorials</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-world.html">Hello world</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/capabilities.html">Capabilities</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/untyped.html">Untyped</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mapping.html">Mapping</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/threads.html">Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/ipc.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/notifications.html">Notifications</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/interrupts.html">Interrupts</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/fault-handlers.html">Fault handling</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mcs.html">MCS</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/seL4-end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-seL4.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/api-doc.html">API docs</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Hardware/">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/verified-configurations.html">Verified configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/configurations.html">Configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/standalone.html">Standalone seL4 builds</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/bfgen.html">Bitfield generator</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Testing &amp; benchmarking</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4test/">seL4test</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-guide.html">Debugging guide</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-userspace.html">Debugging user space</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4bench/">sel4bench</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/benchmarking-guide.html">Benchmarking guide</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/porting.html">Porting to a new platform</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/seL4.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/seL4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class="font-bold mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer ">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Microkit</span>
+    </div>
+    <ul class="menu-content ml-6 on">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/welcome.html">Welcome</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part0.html">Part 0 - Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part1.html">Part 1 - Serial server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part2.html">Part 2 - Client</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part3.html">Part 3 - Wordle server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part4.html">Part 4 - Virtual machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/manual/latest/">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/roadmap.html">Roadmap</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/platforms.html">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/microkit.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/microkit">Sources</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">CAmkES</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-0.html">Hello CAmkES</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-1.html">Introduction</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-2.html">Events</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-timer.html">Timer</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-linux.html">Virtual Machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-crossvm.html">Cross-VM connectors</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-CAmkES.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/hardware.html">Supported platforms</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Virtualisation</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/camkes-vm/">CAmkES VM</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vm.html">VM library</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vmm.html">VMM library</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/camkes.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/camkes-tool/">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">C support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4runtime/">C runtime</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/user_libs/">User-level libraries</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/">Build System</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-1.html">Init & Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-2.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-3.html">ELF loading & Processes</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-4.html">Timer</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-libs.html">How-to</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Rust support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/how-to-use.html">How to use</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/tutorial/introduction.html">Tutorial</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://sel4.github.io/rust-sel4/">API</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/supported-configurations.html">Supported configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/releases.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/rust-sel4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">ELF loader</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/elfloader/">ELF loader for C</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">capDL</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/lang-spec.html">Language Spec</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/c-loader-app.html">capDL loader (C)</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/capDL.html">Releases</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Examples &amp; demos</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/examples.html">Overview</a>
+        </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gray-200 dark:bg-gray-700 w-px">
+      </div>
+    </div>
+    <div class="flex-1">
+      
+<div class="w-full pb-px bg-gray-200 dark:bg-gray-700">
+  <header class="h-[2rem] sm:h-[2.5rem] lg:h-[3.5rem] w-full flex flex-row items-center gap-2 md:gap-4 md:py-2 std-bg">
+    <div id="burger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="text-dark ml-3 mr-0 sm:mr-3 lg:mx-4 w-4 h-4 lg:w-6 lg:h-6 cursor-pointer">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </div>
+    <div class="flex-1"></div>
+    <a href="/releases.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Releases
+    </a>
+    <a href="https://sel4.systems/Contribute/"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contribute
+    </a>
+    <a href="https://sel4.systems/contact.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contact
+    </a>
+    <a href="https://sel4.systems/support.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Support
+    </a>
+    <!-- main site button -->
+    <a href="https://sel4.systems"
+      class="flex-none button-outline ml-0 text-tiny px-2 py-0.5 sm:px-3 sm:py-1 h-4 sm:h-6 md:py-2 md:h-8 lg:h-9 md:text-xs lg:text-sm mr-0 md:mr-4">Main Site
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" data-slot="icon" class="hidden sm:inline-icon">
+<path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+    </a>
+    <!-- github button -->
+    <a href="https://github.com/seL4"
+      class="mr-2 lg:mr-6 px-0 sm:px-3 pt-2 sm:pt-1 pb-2 block text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+      <span class="sr-only">seL4 on GitHub</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+    </a>
+  </header>
+</div>
+
+      <div class="grid grid-cols-1  h-[calc(100%-3rem)]">
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div id="main-div" class="flex-1 max-w-full mr-0 sm:mr-8 xl:mr-64 ">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
+                        overflow-x-auto" id="page-top">
+
+              <div class="theprose mx-auto  ext-links">
+  <h1 id="microkit-user-manual-v201">Microkit User Manual (v2.0.1)</h1>
+
+<p>This is a web version of the manual, you can find a PDF <a href="/projects/microkit/manual/latest/microkit_user_manual.pdf">here</a> as well as in the
+SDK at <code class="language-plaintext highlighter-rouge">doc/microkit_user_manual.pdf</code>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The seL4 Microkit is a small and simple operating system (OS) built on the seL4 microkernel.
+Microkit is designed for building system with a <em>static architecture</em>.
+A static architecture is one where system resources are assigned up-front at system initialisation time.</p>
+
+<h3 id="purpose">Purpose</h3>
+
+<p>The Microkit is intended to:</p>
+
+<ul>
+  <li>provide a small and simple OS for a wide range of IoT, cyberphysical and other embedded use cases;</li>
+  <li>provide a reasonable degree of application portability appropriate for the targeted use cases;</li>
+  <li>make seL4-based systems easy to develop and deploy within the target areas;</li>
+  <li>leverage seL4’s strong isolation properties to support a near-minimal <em>trusted computing base</em> (TCB);</li>
+  <li>retain seL4’s trademark performance for systems built with it;</li>
+  <li>be, in principle, amenable to formal analysis of system safety and security properties (although such analysis is beyond the initial scope).</li>
+</ul>
+
+<h3 id="overview">Overview</h3>
+
+<p>A Microkit system is built from a set of individual programs that are isolated from each other, and the system, in <em>protection domains</em>.
+Protection domains can interact by calling <em>protected procedures</em> or sending <em>notifications</em>.</p>
+
+<p>Microkit is distributed as a software development kit (SDK).
+The SDK includes the tools, libraries and binaries required to build a Microkit system.
+The Microkit source is also available which allows you to customize or extend Microkit and produce your own SDK.</p>
+
+<p>To build a Microkit system you will write some programs that use <code class="language-plaintext highlighter-rouge">libmicrokit</code>.
+Microkit programs are a little different to a typical process on a Linux-like operating system.
+Rather than a single <code class="language-plaintext highlighter-rouge">main</code> entry point, a program has four distinct entry points: <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">notified</code> and, potentially, <code class="language-plaintext highlighter-rouge">protected</code>, <code class="language-plaintext highlighter-rouge">fault</code>.</p>
+
+<p>The individual programs are combined to produce a single bootable <em>system image</em>.
+The format of the image is suitable for loading by the target board’s bootloader.
+The Microkit tool, which is provided as part of the SDK, is used to generate the system image.</p>
+
+<p>The Microkit tool takes a <em>system description</em> as input.
+The system description is an XML file that specifies all the objects that make up the system.</p>
+
+<p><em>Note</em>: Microkit does <strong>not</strong> impose any specific build system; you are free to choose the build system that works best for you.</p>
+
+<h3 id="document-structure">Document Structure</h3>
+
+<p>The <a href="#concepts">Concepts</a> chapter describes the various concepts that make up Microkit.
+It is recommended that you familiarise yourself with these concepts before trying to build a system.</p>
+
+<p>The <a href="#sdk">SDK</a> chapter describes the software development kit, including its components and system requirements for use.</p>
+
+<p>The <a href="#tool">Microkit tool</a> chapter describes the host system tool used for generating a system image from the system description and user-programs.</p>
+
+<p>The <a href="#libmicrokit">libmicrokit</a> chapter describes the interfaces to the Microkit library.</p>
+
+<p>The <a href="#sysdesc">System Description File</a> chapter describes the format of the system description XML file.</p>
+
+<p>The <a href="#bsps">Board Support Packages</a> chapter describes each of the board support packages included in the SDK.</p>
+
+<p>The <a href="#rationale">Rationale</a> chapter documents the rationale for some of the key design choices of in Microkit.</p>
+
+<p>The <a href="#internals">Internals</a> chapter documents some of the internal details for how Microkit works.</p>
+
+<h2 id="concepts">Concepts</h2>
+
+<p>This chapter describes the key concepts provided by Microkit.</p>
+
+<p>As with any set of concepts there are words that take on special meanings.
+This document attempts to clearly describe all of these terms, however as the concepts are inter-related it is sometimes necessary to use a term prior to its formal introduction.</p>
+
+<ul>
+  <li><a href="#system">system</a></li>
+  <li><a href="#pd">protection domain (PD)</a></li>
+  <li><a href="#vm">virtual machine (VM)</a></li>
+  <li><a href="#mr">memory region</a></li>
+  <li><a href="#channels">channel</a></li>
+  <li><a href="#pp">protected procedure</a></li>
+  <li><a href="#notification">notification</a></li>
+  <li><a href="#irq">interrupt</a></li>
+  <li><a href="#fault">fault</a></li>
+</ul>
+
+<h3 id="system">System</h3>
+
+<p>At the most basic level Microkit provides the platform for running a <em>system</em> on a specific board.
+As a <em>user</em> of Microkit you use the platform to create a software system that implements your use case.
+The system is described in a declarative configuration file, and the Microkit tool takes this system description as an input and produces an appropriate system image that can be loaded on the target board.</p>
+
+<p>The key elements that make up a system are <em>protection domains</em>, <em>memory regions</em> and <em>channels</em>.</p>
+
+<h3 id="pd">Protection Domains</h3>
+
+<p>A <strong>protection domain</strong> (PD) is the fundamental runtime abstraction in Microkit.
+It is analogous, but very different in detail, to a process on a UNIX system.</p>
+
+<p>A PD provides a thread of control that executes within a fixed virtual address space.
+The isolation provided by the virtual address space is enforced by the underlying hardware MMU.</p>
+
+<p>The virtual address space for a PD has mappings for the PD’s <em>program image</em> along with any memory regions that the PD can access.
+The program image is an ELF file containing the code and data which implements the isolated component.</p>
+
+<p>Microkit supports a maximum of 63 protection domains.</p>
+
+<h4 id="entry-points">Entry points</h4>
+
+<p>Although a protection domain is somewhat analogous to a process, it has a considerably different program structure and life-cycle.
+A process on a typical operating system will have a <code class="language-plaintext highlighter-rouge">main</code> function which is invoked by the system when the process is created.
+When the <code class="language-plaintext highlighter-rouge">main</code> function returns the process is destroyed.</p>
+
+<p>By comparison a protection domain has up to four entry points:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">notified</code> which are required.</li>
+  <li><code class="language-plaintext highlighter-rouge">protected</code> which is optional.</li>
+  <li><code class="language-plaintext highlighter-rouge">fault</code> which is required if the PD has children.</li>
+</ul>
+
+<p>When a Microkit system is booted, all PDs in the system execute the <code class="language-plaintext highlighter-rouge">init</code> entry point.</p>
+
+<p>A PD will not execute any other entry point until <code class="language-plaintext highlighter-rouge">init</code> has finished.</p>
+
+<p>If a PD is currently executing an entry point, it will not execute any other entry point
+until the current entry point has finished.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">notified</code> entry point will be invoked whenever the protection domain receives a <em>notification</em> on a <em>channel</em>.
+The <code class="language-plaintext highlighter-rouge">protected</code> entry point is invoked when a PD’s <em>protected procedure</em> is called by another PD.
+A PD does not have to provide a protected procedure, therefore the <code class="language-plaintext highlighter-rouge">protected</code> entry point is optional.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">fault</code> entry point is invoked when a PD that is a child of another PD causes a fault.
+A PD does not have to have child PDs, therefore the <code class="language-plaintext highlighter-rouge">fault</code> entry point is only required for a parent PD.</p>
+
+<p>These entry points are described in more detail in subsequent sections.</p>
+
+<p><strong>Note:</strong> The processing of <code class="language-plaintext highlighter-rouge">init</code> entry points is <strong>not</strong> synchronised across protection domains.
+Specifically, it is possible for a high priority PD’s <code class="language-plaintext highlighter-rouge">notified</code> or <code class="language-plaintext highlighter-rouge">protected</code> entry point to be called prior to the completion of a low priority PD’s <code class="language-plaintext highlighter-rouge">init</code> entry point.</p>
+
+<p>The overall computational model for a Microkit system is a set of isolated components reacting to incoming events.</p>
+
+<h4 id="scheduling">Scheduling</h4>
+
+<p>The PD has a number of scheduling attributes that are configured in the system description:</p>
+
+<ul>
+  <li>priority (0 – 254)</li>
+  <li>period (microseconds)</li>
+  <li>budget (microseconds)</li>
+  <li>passive (boolean)</li>
+</ul>
+
+<p>The budget and period bound the fraction of CPU time that a PD can consume.
+Specifically, the <strong>budget</strong> specifies the amount of time for which the PD is allowed to execute.
+Once the PD has consumed its budget, it is no longer runnable until the budget is replenished; replenishment happens once every <strong>period</strong> and resets the budget to its initial value.
+This means that the maximum fraction of CPU time the PD can consume is $\frac{budget}{period}$.</p>
+
+<p>The budget cannot be larger than the period.
+A budget that equals the period (aka. a “full” budget) behaves like a traditional time slice: After executing for a full period, the PD is preempted and put at the end of the scheduling queue of its priority. In other words, PDs with equal priorities and full budgets are scheduled round-robin with a time slice defined by the period.</p>
+
+<p>The <strong>priority</strong> determines which of the runnable PDs to schedule. A PD is runnable if one of its entry points has been invoked and it has budget remaining in the current period.
+Runnable PDs of the same priority are scheduled in a round-robin manner.</p>
+
+<p><strong>Passive</strong> determines whether the PD is passive. A passive PD will have its scheduling context revoked after initialisation and then bound instead to the PD’s notification object. This means the PD will be scheduled on receiving a notification, whereby it will run on the notification’s scheduling context. When the PD receives a <em>protected procedure</em> by another PD or a <em>fault</em> caused by a child PD, the passive PD will run on the scheduling context of the callee.</p>
+
+<h3 id="vm">Virtual Machines</h3>
+
+<p>A <em>virtual machine</em> (VM) is a runtime abstraction for running guest operating systems in Microkit. It is similar
+to a protection domain in that it provides a thread of control that executes within an isolated virtual address space.</p>
+
+<p>The main difference between a VM and a PD is that VMs have a higher privilege level such that they may function as a
+guest operations and have their own user-space programs at a separate exception level.</p>
+
+<p>The virtual machine is always a child of a PD. Exceptions caused by the virtual machine are delivered to the parent PD
+through the <code class="language-plaintext highlighter-rouge">fault</code> entry point.</p>
+
+<p>Each virtual machine has a number of ‘virtual CPU’s associated with it. Each virtual CPU (vCPU) that belongs to a
+virtual machine has its own thread of execution. A vCPU also has an identifier which is used to know which vCPU caused
+the invocation of the <code class="language-plaintext highlighter-rouge">fault</code> entry point.</p>
+
+<p>The parent PD is responsible for starting and managing the virtual machine. Microkit provides the abstractions in
+order to manage the virtual machine through seL4 but there is typically a non-trivial amount
+of supporting code/infrastructure to properly start and manage a VM.</p>
+
+<p>To keep the (potentially untrusted) virtual machine isolated from the rest of the system, Microkit enforces that a
+protection domain can only ever manage a single virtual machine.</p>
+
+<h3 id="mr">Memory Regions</h3>
+
+<p>A <em>memory region</em> is a contiguous range of physical memory.
+A memory region may have a <em>fixed</em> physical address.
+For memory regions without a fixed physical address, the physical address is allocated as part of the build process.
+Typically, memory regions with a fixed physical address represent memory-mapped device registers.</p>
+
+<p>Memory regions that are within main memory are zero-initialised.</p>
+
+<p>The size of a memory region must be a multiple of a supported page size.
+The supported page sizes are architecture dependent.
+For example, on AArch64 architectures, Microkit support 4KiB and 2MiB pages.
+The page size for a memory region may be specified explicitly in the system description.
+If page size is not specified, the smallest supported page size is used.</p>
+
+<p><em>Note:</em> The page size also restricts the alignment of the memory region’s physical address.
+A fixed physical address must be a multiple of the specified page size.</p>
+
+<p>A memory region can be <em>mapped</em> into one or more protection domains.
+The mapping has a number of attributes, which include:</p>
+
+<ul>
+  <li>the virtual address at which the region is mapped in the PD</li>
+  <li>caching attributes (mostly relevant for device memory)</li>
+  <li>permissions (read, write and execute)</li>
+</ul>
+
+<p><strong>Note:</strong> When a memory region is mapped into multiple protection
+domains, the attributes used for different mappings may vary.</p>
+
+<h3 id="channels">Channels</h3>
+
+<p>A <em>channel</em> enables two protection domains to interact using protected procedures or notifications.
+Each connects exactly two PDs; there are no multi-party channels.</p>
+
+<p>When a channel is created between two PDs, a <em>channel identifier</em> is configured for each PD.
+The <em>channel identifier</em> is used by the PD to reference the channel.
+Each PD can refer to the channel with a different identifier.
+For example if PDs <strong>A</strong> and <strong>B</strong> are connected by a channel, <strong>A</strong> may refer to the channel using an identifier of <strong>37</strong> while <strong>B</strong> may use <strong>42</strong> to refer to the same channel.</p>
+
+<p><strong>Note:</strong> There is no way for a PD to directly refer to another PD in the system.
+PDs can only refer to other PDs indirectly if there is a channel between them.
+In this case, the channel identifier is effectively a proxy identifier for the other PD.
+So, to extend the prior example, <strong>A</strong> can indirectly refer to <strong>B</strong> via the channel identifier <strong>37</strong>.
+Similarly, <strong>B</strong> can refer to <strong>A</strong> via the channel identifier <strong>42</strong>.</p>
+
+<p>The system supports a maximum of 63 channels and interrupts per protection domain.</p>
+
+<h4 id="pp">Protected procedures</h4>
+
+<p>A protection domain may provide a <em>protected procedure</em> (PP) which can be invoked from another protection domain.
+Up to 64 words of data may be passed as arguments when calling a protected procedure.
+The protected procedure return value may also be up to 64 words.</p>
+
+<p>When a protection domain calls a protected procedure, the procedure executes within the context of the providing protection domain.</p>
+
+<p>A protected call is only possible if the callee has strictly higher priority than the caller.
+Transitive calls are possible, and as such a PD may call a <em>protected procedure</em> in another PD from a <code class="language-plaintext highlighter-rouge">protected</code> entry point.
+However the overall call graph between PDs must form a directed, acyclic graph.
+It follows that a PD can not call itself, even indirectly.
+For example, <code class="language-plaintext highlighter-rouge">A calls B calls C</code> is valid (subject to the priority constraint), while <code class="language-plaintext highlighter-rouge">A calls B calls A</code> is not valid.</p>
+
+<p>When a protection domain is called, the <code class="language-plaintext highlighter-rouge">protected</code> entry point is invoked.
+The control returns to the caller when the <code class="language-plaintext highlighter-rouge">protected</code> entry point returns.</p>
+
+<p>The caller is blocked until the callee returns.
+Protected procedures must execute in bounded time.
+It is intended that a future version of Microkit will enforce this condition through static analysis.
+In the present version the caller must trust the callee to conform.</p>
+
+<p>In general, PPs are provided by services for use by clients that trust the protection domain to provide that service.</p>
+
+<p>To call a PP, a PD calls <code class="language-plaintext highlighter-rouge">microkit_ppcall</code> passing the channel identifier and a <em>message</em> structure.
+A <em>message</em> structure is returned from this function.</p>
+
+<p>When a PD’s protected procedure is invoked, the <code class="language-plaintext highlighter-rouge">protected</code> entry point is invoked with the channel identifier and message structure passed as arguments.
+The <code class="language-plaintext highlighter-rouge">protected</code> entry point must return a message structure.</p>
+
+<h4 id="notification">Notifications</h4>
+
+<p>A notification is a (binary) semaphore-like synchronisation mechanism.
+For example, a PD can <em>notify</em> another PD to indicate availability of data in a shared memory region if they share a channel.</p>
+
+<p>To notify another PD, a PD calls <code class="language-plaintext highlighter-rouge">microkit_notify</code>, passing the channel identifier.
+When a PD receives a notification, the <code class="language-plaintext highlighter-rouge">notified</code> entry point is invoked with the appropriate channel identifier passed as an argument.</p>
+
+<p>Unlike protected procedures, notifications can be sent in either direction on a channel regardless of priority.</p>
+
+<p><strong>Note:</strong> Notifications provide a mechanism for synchronisation between PDs, however this is not a blocking operation.
+If a PD notifies another PD, that PD will become scheduled to run (if it is not already), but the current PD does <strong>not</strong> block.
+Of course, if the notified PD has a higher priority than the current PD, then the current PD will be preempted (but not blocked) by the other PD.</p>
+
+<p>Depending on the scheduling, one PD could notify another multiple times without it being scheduled, resulting
+in a single execution of the <code class="language-plaintext highlighter-rouge">notified</code> entry point. For example, if PD A notifies PD B three times on the
+same channel without PD B ever executing, once PD B is scheduled it would only see one notification and hence
+only enter <code class="language-plaintext highlighter-rouge">notified</code> once for that channel.</p>
+
+<h3 id="irq">Interrupts</h3>
+
+<p>Hardware interrupts can be used to notify a protection domain.
+The system description specifies if a protection domain receives notifications for any hardware interrupt sources.
+Each hardware interrupt is assigned a channel identifier.
+In this way the protection domain can distinguish the hardware interrupt from other notifications.
+A specific hardware interrupt can only be associated with at most one protection domain. It should be noted that once a
+hardware interrupt has been received, it will not be received again until <code class="language-plaintext highlighter-rouge">microkit_irq_ack</code> is called. The seL4 kernel
+will mask the hardware interrupt until it has been acknowledged.</p>
+
+<p>Microkit does not provides timers, nor any <em>sleep</em> API.
+After initialisation, activity in the system is initiated by an interrupt causing a <code class="language-plaintext highlighter-rouge">notified</code> entry point to be invoked.
+That notified function may in turn notify or call other protection domains that cause other system activity, but eventually all activity indirectly initiated from that interrupt will complete, at which point the system is inactive again until another interrupt occurs.</p>
+
+<h3 id="fault">Faults</h3>
+
+<p>Faults such as an invalid memory access or illegal instruction are delivered to the seL4 kernel which then forwards them to
+a designated ‘fault handler’. By default, all faults caused by protection domains go to the system fault handler which
+simply prints out details about the fault in a debug configuration.</p>
+
+<p>When a protection domain is a child of another protection domain, the designated fault handler for the child is the parent
+protection domain. The same applies for a virtual machine.</p>
+
+<p>This means that whenever a fault is caused by a child, it will be delivered to the parent PD instead of the system fault
+handler via the <code class="language-plaintext highlighter-rouge">fault</code> entry point. It is then up to the parent to decide how the fault is handled.</p>
+
+<p>The default system fault handler (aka the monitor) has the highest priority and so will
+execute and handle faults immediately after they occur. For child PDs that have their faults
+delivered to another PD, the fault being handled depends on when the parent PD is scheduled.</p>
+
+<h2 id="sdk">SDK</h2>
+
+<p>Microkit is distributed as a software development kit (SDK).</p>
+
+<p>The SDK includes support for one or more <em>boards</em>.
+Three <em>configurations</em> are supported for each board: <em>debug</em>, <em>release</em>, and <em>benchmark</em>.
+See <a href="#config">the Configurations section</a> for more details.</p>
+
+<p>The SDK contains:</p>
+
+<ul>
+  <li>Microkit user manual (this document)</li>
+  <li>Microkit tool</li>
+</ul>
+
+<p>Additionally, for each supported board configuration the following are provided:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">libmicrokit</code></li>
+  <li><code class="language-plaintext highlighter-rouge">loader.elf</code></li>
+  <li><code class="language-plaintext highlighter-rouge">kernel.elf</code></li>
+  <li><code class="language-plaintext highlighter-rouge">monitor.elf</code></li>
+</ul>
+
+<p>There are also examples provided in the <code class="language-plaintext highlighter-rouge">example</code> directory.</p>
+
+<p>The Microkit SDK does <strong>not</strong> provide, nor require, any specific build system.
+The user is free to build their system using whatever build system is deemed most appropriate for their specific use case.</p>
+
+<p>The Microkit tool should be invoked by the system build process to transform a system description (and any referenced program images) into an image file which can be loaded by the target board’s bootloader.</p>
+
+<p>The ELF files provided as program images should be standard ELF files and have been linked against the provided libmicrokit.</p>
+
+<h3 id="config">Configurations</h3>
+
+<h3 id="debug">Debug</h3>
+
+<p>The <em>debug</em> configuration includes a debug build of the seL4 kernel to allow console debug output using the kernel’s UART driver.</p>
+
+<h3 id="release">Release</h3>
+
+<p>The <em>release</em> configuration is a release build of the seL4 kernel and is intended for production builds. The loader, monitor, and
+kernel do <em>not</em> perform any serial output.</p>
+
+<h3 id="benchmark">Benchmark</h3>
+
+<p>The <em>benchmark</em> configuration uses a build of the seL4 kernel that exports the hardware’s performance monitoring unit (PMU) to PDs.
+The kernel also tracks information about CPU utilisation. This benchmark configuration exists due a limitation of the seL4 kernel
+and is intended to be removed once <a href="https://github.com/seL4/rfcs/pull/22">RFC-16 is implemented</a>.</p>
+
+<h3 id="system-requirements">System Requirements</h3>
+
+<p>The Microkit tool requires Linux (x86-64 or AArch64), macOS (x86-64 or AArch64).</p>
+
+<p>On Linux, the Microkit tool is statically linked and should run on any distribution.</p>
+
+<p>On macOS, the Microkit tool should run on macOS 10.12 (Sierra) or higher.</p>
+
+<p>The Microkit tool does not depend on any additional system binaries.</p>
+
+<h2 id="tool">Microkit Tool</h2>
+
+<p>The Microkit tool is available in <code class="language-plaintext highlighter-rouge">bin/microkit</code>.</p>
+
+<p>The Microkit tool takes as input a system description.
+The format of the system description is described in a subsequent chapter.</p>
+
+<p>Usage:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [-o OUTPUT] [-r REPORT] --board [BOARD] --config CONFIG
+         [--search-path [SEARCH_PATH ...]] system
+</code></pre></div></div>
+
+<p>The path to the system description file, board to build the system for, and configuration to build for must be provided.</p>
+
+<p>The search paths provided tell the tool where to find any program images specified in the system description file.</p>
+
+<p>In the case of errors, a diagnostic message shall be output to <code class="language-plaintext highlighter-rouge">stderr</code> and a non-zero code returned.</p>
+
+<p>In the case of success, a loadable image file and a report shall be produced.
+The output paths for these can be specified by <code class="language-plaintext highlighter-rouge">-o</code> and <code class="language-plaintext highlighter-rouge">-r</code> respectively.
+The default output paths are <code class="language-plaintext highlighter-rouge">loader.img</code> and <code class="language-plaintext highlighter-rouge">report.txt</code>.</p>
+
+<p>The loadable image will be a binary that can be loaded by the board’s bootloader.</p>
+
+<p>The report is a plain text file describing important information about the system.
+The report can be useful when debugging potential system problems.
+This report does not have a fixed format and may change between versions.
+It is not intended to be machine readable.</p>
+
+<h2 id="language-support">Language Support</h2>
+
+<p>There are native APIs for C/C++ and Rust.</p>
+
+<p><a href="#libmicrokit">libmicrokit</a> exports a C API and so can be used in any language
+that supports C FFI.</p>
+
+<p>For Rust, native bindings exist but are not included in the SDK itself. They are
+available at <a href="https://github.com/seL4/rust-sel4">rust-sel4</a>.</p>
+
+<h2 id="libmicrokit">libmicrokit</h2>
+
+<p>All program images should link against <code class="language-plaintext highlighter-rouge">libmicrokit.a</code>.</p>
+
+<p>The library provides the C runtime for the protection domain, along with interfaces for the Microkit APIs.</p>
+
+<p>The component must provide the following functions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void init(void);
+void notified(microkit_channel ch);
+</code></pre></div></div>
+
+<p>If the protection domain provides a protected procedure it must also implement:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit_msginfo protected(microkit_channel ch, microkit_msginfo msginfo);
+</code></pre></div></div>
+
+<p>If the protection domain has children it must also implement:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seL4_Bool fault(microkit_child child, microkit_msginfo msginfo,
+                microkit_msginfo *reply_msginfo);
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">libmicrokit</code> provides the following functions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo);
+void microkit_notify(microkit_channel ch);
+microkit_msginfo microkit_msginfo_new(seL4_Word label, seL4_Uint16 count);
+seL4_Word microkit_msginfo_get_label(microkit_msginfo msginfo);
+seL4_Word microkit_msginfo_get_count(microkit_msginfo msginfo);
+void microkit_irq_ack(microkit_channel ch);
+void microkit_deferred_notify(microkit_channel ch);
+void microkit_deferred_irq_ack(microkit_channel ch);
+void microkit_pd_restart(microkit_child pd, seL4_Word entry_point);
+void microkit_pd_stop(microkit_child pd);
+void microkit_mr_set(seL4_Uint8 mr, seL4_Word value);
+seL4_Word microkit_mr_get(seL4_Uint8 mr);
+void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point);
+void microkit_vcpu_stop(microkit_child vcpu);
+void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,
+                                  seL4_Uint8 priority, seL4_Uint8 group,
+                                  seL4_Uint8 index);
+void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq);
+seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg);
+void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value);
+void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response);
+</code></pre></div></div>
+
+<h3 id="void-initvoid"><code class="language-plaintext highlighter-rouge">void init(void)</code></h3>
+
+<p>Every PD must expose an <code class="language-plaintext highlighter-rouge">init</code> entry point.
+This is called by the system at boot time.</p>
+
+<h3 id="void-notifiedmicrokit_channel-ch"><code class="language-plaintext highlighter-rouge">void notified(microkit_channel ch)</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">notified</code> entry point is called by the system when a PD has received a notification on a channel.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ch</code> identifies the channel which has been notified (and indirectly the PD that performed the notification).</p>
+
+<p><strong>Note:</strong> <code class="language-plaintext highlighter-rouge">ch</code> could identify an interrupt.</p>
+
+<p>Channel identifiers are specified in the system configuration.</p>
+
+<h3 id="microkit_msginfo-protectedmicrokit_channel-ch-microkit_msginfo-msginfo"><code class="language-plaintext highlighter-rouge">microkit_msginfo protected(microkit_channel ch, microkit_msginfo msginfo)</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">protected</code> entry point is optional.
+This is invoked when another PD calls <code class="language-plaintext highlighter-rouge">microkit_ppcall</code> on a channel shared with the PD.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ch</code> argument identifies the channel on which the PP was invoked.
+Indirectly this identifies the PD performing the call.
+Channel identifiers are specified in the system configuration.
+<strong>Note:</strong> The channel argument is passed by the system and is unforgeable.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">msginfo</code> argument is the argument passed to the PP and is provided by the calling PD.
+The contents of the message is up to a pre-arranged protocol between the PDs.
+The message contents are opaque to the system.
+Note: The message is <em>copied</em> from the caller.</p>
+
+<p>The returned <code class="language-plaintext highlighter-rouge">microkit_msginfo</code> is the return value of the protected procedure.
+As with arguments, this is <em>copied</em> to the caller.</p>
+
+<h3 id="sel4_bool-faultmicrokit_child-child-microkit_msginfo-msginfo-microkit_msginfo-reply_msginfo"><code class="language-plaintext highlighter-rouge">seL4_Bool fault(microkit_child child, microkit_msginfo msginfo, microkit_msginfo *reply_msginfo)</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">fault</code> entry point being invoked depends on whether the given PD has children.
+It is invoked when a child PD or VM causes a fault.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">child</code> argument identifies the child that caused the fault.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">msginfo</code> argument is given by the seL4 kernel when a fault occurs and contains information
+as to what fault occurred.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">reply_msginfo</code> argument is given by libmicrokit and can be used to reply to the fault.</p>
+
+<p>The returned <code class="language-plaintext highlighter-rouge">seL4_Bool</code> is whether or not to reply to the fault with the message <code class="language-plaintext highlighter-rouge">reply_msginfo</code>.
+Returning <code class="language-plaintext highlighter-rouge">seL4_True</code> will reply to the fault. Returning <code class="language-plaintext highlighter-rouge">seL4_False</code> will not reply to the fault.</p>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">microkit_msginfo_get_label</code> on <code class="language-plaintext highlighter-rouge">msginfo</code> to deduce what kind of fault happened
+(for example, whether it was a user exception or a virtual memory fault).</p>
+
+<p>Whether or not you reply to the fault depends on the type of fault that has occurred and how you want
+to handle it.</p>
+
+<p>To find the full list of possible faults that could occur and details regarding to replying to a particular
+kind of fault, please see the ‘Faults’ section of the
+<a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 reference manual</a>.</p>
+
+<h3 id="microkit_msginfo-microkit_ppcallmicrokit_channel-ch-microkit_msginfo-msginfo"><code class="language-plaintext highlighter-rouge">microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo)</code></h3>
+
+<p>Performs a call to a protected procedure in a different PD.
+The <code class="language-plaintext highlighter-rouge">ch</code> argument identifies the protected procedure to be called.
+<code class="language-plaintext highlighter-rouge">msginfo</code> is passed as argument to the protected procedure.
+Channel identifiers are specified in the system configuration.</p>
+
+<p>The protected procedure’s return data is returned in the <code class="language-plaintext highlighter-rouge">microkit_msginfo</code>.</p>
+
+<h3 id="void-microkit_notifymicrokit_channel-ch"><code class="language-plaintext highlighter-rouge">void microkit_notify(microkit_channel ch)</code></h3>
+
+<p>Notify the channel <code class="language-plaintext highlighter-rouge">ch</code>.
+Channel identifiers are specified in the system configuration.</p>
+
+<h3 id="void-microkit_irq_ackmicrokit_channel-ch"><code class="language-plaintext highlighter-rouge">void microkit_irq_ack(microkit_channel ch)</code></h3>
+
+<p>Acknowledge the interrupt identified by the specified channel.</p>
+
+<h3 id="void-microkit_deferred_notifymicrokit_channel-ch"><code class="language-plaintext highlighter-rouge">void microkit_deferred_notify(microkit_channel ch)</code></h3>
+
+<p>The same as <code class="language-plaintext highlighter-rouge">microkit_notify</code> but will instead not actually perform the notify until
+the entry point where <code class="language-plaintext highlighter-rouge">microkit_deferred_notify</code> was called returns.</p>
+
+<p>It is important to note that only a single ‘deferred’ API call can be made within the
+same entry point.</p>
+
+<p>The purpose of this API is for performance critical code as this API saves
+a kernel system call.</p>
+
+<h3 id="void-microkit_deferred_irq_ackmicrokit_channel-ch"><code class="language-plaintext highlighter-rouge">void microkit_deferred_irq_ack(microkit_channel ch)</code></h3>
+
+<p>The same as <code class="language-plaintext highlighter-rouge">microkit_irq_ack</code> but will instead not actually perform the IRQ acknowledge
+until the entry point where <code class="language-plaintext highlighter-rouge">microkit_deferred_irq_ack</code> was called returns.</p>
+
+<p>It is important to note that only a single ‘deferred’ API call can be made within the
+same entry point.</p>
+
+<p>The purpose of this API is for performance critical code as this API saves
+a kernel system call.</p>
+
+<h3 id="void-microkit_pd_restartmicrokit_child-pd-uintptr_t-entry_point"><code class="language-plaintext highlighter-rouge">void microkit_pd_restart(microkit_child pd, uintptr_t entry_point)</code></h3>
+
+<p>Restart the execution of a child protection domain with ID <code class="language-plaintext highlighter-rouge">pd</code> at the given <code class="language-plaintext highlighter-rouge">entry_point</code>.
+This will set the program counter of the child protection domain to <code class="language-plaintext highlighter-rouge">entry_point</code>.</p>
+
+<h3 id="void-microkit_pd_stopmicrokit_child-pd"><code class="language-plaintext highlighter-rouge">void microkit_pd_stop(microkit_child pd)</code></h3>
+
+<p>Stop the execution of the child protection domain with ID <code class="language-plaintext highlighter-rouge">pd</code>.</p>
+
+<h3 id="microkit_msginfo-microkit_msginfo_newuint64_t-label-uint16_t-count"><code class="language-plaintext highlighter-rouge">microkit_msginfo microkit_msginfo_new(uint64_t label, uint16_t count)</code></h3>
+
+<p>Creates a new message structure.</p>
+
+<p>The message can be passed to <code class="language-plaintext highlighter-rouge">microkit_ppcall</code> or returned from <code class="language-plaintext highlighter-rouge">protected</code>.</p>
+
+<h3 id="uint64_t-microkit_msginfo_get_labelmicrokit_msginfo-msginfo"><code class="language-plaintext highlighter-rouge">uint64_t microkit_msginfo_get_label(microkit_msginfo msginfo)</code></h3>
+
+<p>Returns the label from a message.</p>
+
+<h3 id="uint64_t-microkit_msginfo_get_countmicrokit_msginfo-msginfo"><code class="language-plaintext highlighter-rouge">uint64_t microkit_msginfo_get_count(microkit_msginfo msginfo)</code></h3>
+
+<p>Returns the count of message registers in the message.</p>
+
+<h3 id="uint64_t-microkit_mr_getuint8_t-mr"><code class="language-plaintext highlighter-rouge">uint64_t microkit_mr_get(uint8_t mr)</code></h3>
+
+<p>Get a message register.</p>
+
+<h3 id="void-microkit_mr_setuint8_t-mr-uint64_t-value"><code class="language-plaintext highlighter-rouge">void microkit_mr_set(uint8_t mr, uint64_t value)</code></h3>
+
+<p>Set a message register.</p>
+
+<h3 id="void-microkit_vcpu_restartmicrokit_child-vcpu-sel4_word-entry_point"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point)</code></h3>
+
+<p>Restart the execution of a VM’s virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> at the given <code class="language-plaintext highlighter-rouge">entry point</code>.
+This will set the program counter of the vCPU to <code class="language-plaintext highlighter-rouge">entry_point</code>.</p>
+
+<h3 id="void-microkit_vcpu_stopmicrokit_child-vcpu"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_stop(microkit_child vcpu)</code></h3>
+
+<p>Stop the execution of the VM’s virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>.</p>
+
+<h3 id="void-microkit_vcpu_arm_inject_irqmicrokit_child-vcpu-sel4_uint16-irq">`void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,</h3>
+<p>seL4_Uint8 priority, seL4_Uint8 group,
+seL4_Uint8 index)`</p>
+
+<p>Inject a virtual ARM interrupt for a virtual CPU <code class="language-plaintext highlighter-rouge">vcpu</code> with IRQ number <code class="language-plaintext highlighter-rouge">irq</code>.
+The <code class="language-plaintext highlighter-rouge">priority</code> (0-31) determines what ARM GIC (generic interrupt controller)
+priority level the virtual IRQ will be injected as. The <code class="language-plaintext highlighter-rouge">group</code> determines whether
+the virtual IRQ will be injected into secure world (1) or non-secure world (0).
+The <code class="language-plaintext highlighter-rouge">index</code> is the index of the virtual GIC list register.</p>
+
+<h3 id="void-microkit_vcpu_arm_ack_vppimicrokit_child-vcpu-sel4_word-irq"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq)</code></h3>
+
+<p>Acknowledge a ARM virtual Private Peripheral Interrupt (PPI) with IRQ number <code class="language-plaintext highlighter-rouge">irq</code>
+for a VM’s vCPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>.</p>
+
+<h3 id="sel4_word-microkit_vcpu_arm_read_regmicrokit_child-vcpu-sel4_word-reg"><code class="language-plaintext highlighter-rouge">seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg)</code></h3>
+
+<p>Read a register for a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>. The <code class="language-plaintext highlighter-rouge">reg</code> argument is the index of the
+register that is read. The list of registers is defined by the enum <code class="language-plaintext highlighter-rouge">seL4_VCPUReg</code>
+in the seL4 source code.</p>
+
+<h3 id="void-microkit_vcpu_arm_write_regmicrokit_child-vcpu-sel4_word-reg-sel4_word-value"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value)</code></h3>
+
+<p>Write to a register for a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>. The <code class="language-plaintext highlighter-rouge">reg</code> argument is the index of the
+register that is written to. The <code class="language-plaintext highlighter-rouge">value</code> argument is what the register will be set to.
+The list of registers is defined by the enum <code class="language-plaintext highlighter-rouge">seL4_VCPUReg</code> in the seL4 source code.</p>
+
+<h3 id="void-microkit_arm_smc_callsel4_arm_smccontext-args-sel4_arm_smccontext-response"><code class="language-plaintext highlighter-rouge">void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response)</code></h3>
+
+<p>This API is available only on ARM and only when seL4 has been configured to enable the
+<code class="language-plaintext highlighter-rouge">KernelAllowSMCCalls</code> option.</p>
+
+<p>The API takes in arguments for a Secure Monitor Call which will be performed by seL4. Any
+response values will be placed into the <code class="language-plaintext highlighter-rouge">response</code> structure.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">seL4_ARM_SMCContext</code> structure contains fields for registers x0 to x7.</p>
+
+<h2 id="sysdesc">System Description File</h2>
+
+<p>This section describes the format of the System Description File (SDF).</p>
+
+<p>The system description file is an XML file that is provided as input to the
+<code class="language-plaintext highlighter-rouge">microkit</code> tool.</p>
+
+<p>The root element of the XML file is <code class="language-plaintext highlighter-rouge">system</code>.</p>
+
+<p>Within the <code class="language-plaintext highlighter-rouge">system</code> root element the following child elements are supported:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">protection_domain</code></li>
+  <li><code class="language-plaintext highlighter-rouge">memory_region</code></li>
+  <li><code class="language-plaintext highlighter-rouge">channel</code></li>
+</ul>
+
+<h3 id="protection_domain"><code class="language-plaintext highlighter-rouge">protection_domain</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">protection_domain</code> element describes a protection domain.</p>
+
+<p>It supports the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the protection domain</li>
+  <li><code class="language-plaintext highlighter-rouge">priority</code>: The priority of the protection domain (integer 0 to 254).</li>
+  <li><code class="language-plaintext highlighter-rouge">budget</code>: (optional) The PD’s budget in microseconds; defaults to 1,000.</li>
+  <li><code class="language-plaintext highlighter-rouge">period</code>: (optional) The PD’s period in microseconds; must not be smaller than the budget; defaults to the budget.</li>
+  <li><code class="language-plaintext highlighter-rouge">passive</code>: (optional) Indicates that the protection domain will be passive and thus have its scheduling context removed after initialisation; defaults to false.</li>
+  <li><code class="language-plaintext highlighter-rouge">stack_size</code>: (optional) Number of bytes that will be used for the PD’s stack.
+Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 4KiB.</li>
+  <li><code class="language-plaintext highlighter-rouge">smc</code>: (optional, only on ARM) Allow the PD to give an SMC call for the kernel to perform. Only available when the kernel has been configured with <code class="language-plaintext highlighter-rouge">KernelAllowSMCCalls</code>. Defaults to false.</li>
+</ul>
+
+<p>Additionally, it supports the following child elements:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">program_image</code>: (exactly one) Describes the program image for the protection domain.</li>
+  <li><code class="language-plaintext highlighter-rouge">map</code>: (zero or more) Describes mapping of memory regions into the protection domain.</li>
+  <li><code class="language-plaintext highlighter-rouge">irq</code>: (zero or more) Describes hardware interrupt associations.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar</code>: (zero or more) Describes variable rewriting.</li>
+  <li><code class="language-plaintext highlighter-rouge">protection_domain</code>: (zero or more) Describes a child protection domain.</li>
+  <li><code class="language-plaintext highlighter-rouge">virtual_machine</code>: (zero or one) Describes a child virtual machine.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">program_image</code> element has a single <code class="language-plaintext highlighter-rouge">path</code> attribute describing the path to an ELF file.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">map</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mr</code>: Identifies the memory region to map.</li>
+  <li><code class="language-plaintext highlighter-rouge">vaddr</code>: Identifies the virtual address at which to map the memory region.</li>
+  <li><code class="language-plaintext highlighter-rouge">perms</code>: Identifies the permissions with which to map the memory region. Can be a combination of <code class="language-plaintext highlighter-rouge">r</code> (read), <code class="language-plaintext highlighter-rouge">w</code> (write), and <code class="language-plaintext highlighter-rouge">x</code> (eXecute), with the exception of a write-only mapping (just <code class="language-plaintext highlighter-rouge">w</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">cached</code>: (optional) Determines if mapped with caching enabled or disabled. Defaults to <code class="language-plaintext highlighter-rouge">true</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_vaddr</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the virtual address of the memory region.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_size</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the size of the memory region.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">irq</code>: The hardware interrupt number.</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
+  <li><code class="language-plaintext highlighter-rouge">trigger</code>: (optional) Whether the IRQ is edge triggered (“edge”) or level triggered (“level”). Defaults to “level”.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">setvar</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">symbol</code>: Name of a symbol in the ELF file.</li>
+  <li><code class="language-plaintext highlighter-rouge">region_paddr</code>: Name of an MR. The symbol’s value shall be updated to this MR’s physical address.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">protection_domain</code> element has the same attributes as any other protection domain as well as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The ID of the child for the parent to refer to.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">virtual_machine</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the virtual machine</li>
+  <li><code class="language-plaintext highlighter-rouge">priority</code>: The priority of the virtual machine (integer 0 to 254).</li>
+  <li><code class="language-plaintext highlighter-rouge">budget</code>: (optional) The VM’s budget in microseconds; defaults to 1,000.</li>
+  <li><code class="language-plaintext highlighter-rouge">period</code>: (optional) The VM’s period in microseconds; must not be smaller than the budget; defaults to the budget.</li>
+</ul>
+
+<p>Additionally, it supports the following child elements:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vcpu</code>: (one or more) Describes the virtual CPU that will be tied to the virtual machine.</li>
+  <li><code class="language-plaintext highlighter-rouge">map</code>: (zero or more) Describes mapping of memory regions into the virtual machine.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">vcpu</code> element has a single <code class="language-plaintext highlighter-rouge">id</code> attribute defining the identifier used for the virutal machine’s vCPU.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">map</code> element has the same attributes as the protection domain with the exception of <code class="language-plaintext highlighter-rouge">setvar_vaddr</code>.</p>
+
+<h3 id="memory_region"><code class="language-plaintext highlighter-rouge">memory_region</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">memory_region</code> element describes a memory region.</p>
+
+<p>It supports the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the memory region</li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: Size of the memory region in bytes (must be a multiple of the page size)</li>
+  <li><code class="language-plaintext highlighter-rouge">page_size</code>: (optional) Size of the pages used in the memory region; must be a supported page size if provided. Defaults to the largest page size for the target architecture that the memory region is aligned to.</li>
+  <li><code class="language-plaintext highlighter-rouge">phys_addr</code>: (optional) The physical address for the start of the memory region (must be a multiple of the page size).</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">memory_region</code> element does not support any child elements.</p>
+
+<h4 id="page-sizes-by-architecture">Page sizes by architecture</h4>
+
+<p>Below are the available page sizes for each architecture that Microkit supports.</p>
+
+<h5 id="aarch64">AArch64</h5>
+
+<ul>
+  <li>0x1000 (4KiB)</li>
+  <li>0x200000 (2MiB)</li>
+</ul>
+
+<h5 id="risc-v-64-bit">RISC-V 64-bit</h5>
+
+<ul>
+  <li>0x1000 (4KiB)</li>
+  <li>0x200000 (2MiB)</li>
+</ul>
+
+<h3 id="channel"><code class="language-plaintext highlighter-rouge">channel</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">channel</code> element has exactly two <code class="language-plaintext highlighter-rouge">end</code> children elements for specifying the two PDs associated with the channel.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">end</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pd</code>: Name of the protection domain for this end.</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: Channel identifier in the context of the named protection domain. Must be at least 0 and less than 63.</li>
+  <li><code class="language-plaintext highlighter-rouge">pp</code>: (optional) Indicates that the protection domain for this end can perform a protected procedure call to the other end; defaults to false.
+      Protected procedure calls can only be to PDs of strictly higher priority.</li>
+  <li><code class="language-plaintext highlighter-rouge">notify</code>: (optional) Indicates that the protection domain for this end can send a notification to the other end; defaults to true.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">id</code> is passed to the PD in the <code class="language-plaintext highlighter-rouge">notified</code> and <code class="language-plaintext highlighter-rouge">protected</code> entry points.
+The <code class="language-plaintext highlighter-rouge">id</code> should be passed to the <code class="language-plaintext highlighter-rouge">microkit_notify</code> and <code class="language-plaintext highlighter-rouge">microkit_ppcall</code> functions.</p>
+
+<h2 id="bsps">Board Support Packages</h2>
+
+<p>This chapter describes the board support packages that are available in the SDK.</p>
+
+<h3 id="ariane">Ariane (CVA6)</h3>
+
+<p>Initial support is available for the CVA6 (formerly Ariane) core design
+on the Digilent Genesys2 board. CVA6 is an open-source RISC-V (rv64i) processor.</p>
+
+<p>Microkit support expects that a compatible RISC-V SBI (e.g OpenSBI) has executed before
+jumping to the beginning of the loader image.</p>
+
+<p>Note that the loader link address is 0x90000000 and this is where the binary must
+be located and where OpenSBI (or U-Boot) should begin execution.</p>
+
+<p>You may compile OpenSBI with the Microkit image as a payload, or alternately install
+OpenSBI (with U-Boot optionally) to the SD card.</p>
+
+<p>If you are booting from U-Boot, use the following command to start the system image:
+    =&gt; go 0x90000000</p>
+
+<p>Note that the OpenSBI version from the CVA6 SDK at the time of writing has issues when
+booting. It is recommended to use the mainline OpenSBI.</p>
+
+<h3 id="cheshire">Cheshire</h3>
+
+<p>Support is available for <a href="https://github.com/pulp-platform/cheshire">Cheshire</a>.
+It is an SoC design based on the CVA6 core, implementing a 64-bit RISC-V CPU.</p>
+
+<p>Microkit outputs a raw binary for this device. Several steps are required in order to boot.</p>
+
+<p>A custom version of OpenSBI is required. It can be found
+<a href="https://github.com/pulp-platform/opensbi/tree/cheshire">here</a>.
+Build the firmware payload using platform <code class="language-plaintext highlighter-rouge">fpga/cheshire</code>.</p>
+
+<h4 id="using-u-boot">Using U-Boot</h4>
+
+<p>With a system pre-configured with the Cheshire ZSBL, OpenSBI and U-boot:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x90000000
+</code></pre></div></div>
+
+<h4 id="raw-systerm-with-no-bootloader">Raw systerm with no bootloader</h4>
+
+<p>Without any firmware present on the SD card, it is still possible to boot Cheshire with a Microkit system.</p>
+
+<p>Using a GDB prompt via openOCD:</p>
+
+<ol>
+  <li>
+    <p>Reset board</p>
+
+    <p>=&gt; monitor reset halt</p>
+  </li>
+  <li>
+    <p>Load a device tree blob (DTS available in Cheshire repo or seL4) to memory and set the a0 and a1 registers to point at it:</p>
+
+    <blockquote>
+      <p>restore /path/to/cheshire.dtb binary 0xa0000000</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>(tell OpenSBI where DTB is)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; set $a0=0xa0000000
+</code></pre></div></div>
+
+<p>(tell OpenSBI that the default hart is #0)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; set $a1=0
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Load OpenSBI</p>
+
+    <blockquote>
+      <p>load /path/to/opensbi/fw_payload.elf</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Allow OpenSBI to boot, and interrupt it once the line <code class="language-plaintext highlighter-rouge">Test payload running</code> is emitted on serial.</p>
+
+    <blockquote>
+      <p>continue</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>(wait for output)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; (Ctrl+C)
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Load Microkit image and execute</p>
+
+    <blockquote>
+      <p>restore /path/to/loader.img binary 0x90000000</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>(execute)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; continue
+</code></pre></div></div>
+
+<h3 id="imx8mm_evk">i.MX8MM-EVK</h3>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
+</code></pre></div></div>
+
+<h3 id="imx8mp_evk">i.MX8MP-EVK</h3>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
+</code></pre></div></div>
+
+<h3 id="imx8mq_evk">i.MX8MQ-EVK</h3>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
+</code></pre></div></div>
+
+<h3 id="maaxboard">MaaXBoard</h3>
+
+<p>The MaaXBoard is a low-cost ARM SBC based on the NXP i.MX8MQ system-on-chip.</p>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x50000000
+</code></pre></div></div>
+
+<h3 id="odroidc2">Odroid-C2</h3>
+
+<p>The HardKernel Odroid-C2 is an ARM SBC based on the Amlogic Meson S905 system-on-chip. It
+should be noted that the Odroid-C2 is no longer available for purchase but its successor,
+the Odroid-C4, is readily available at the time of writing.</p>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x20000000
+</code></pre></div></div>
+
+<h3 id="odroidc4">Odroid-C4</h3>
+
+<p>The HardKernel Odroid-C4 is an ARM SBC based on the Amlogic Meson S905X3 system-on-chip.</p>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x20000000
+</code></pre></div></div>
+
+<h3 id="qemu_virt_aarch64">QEMU virt (AArch64)</h3>
+
+<p>Support is available for the virtual AArch64 QEMU platform. This is a platform that is not based
+on any specific SoC or hardware platform and is intended for simulating systems for
+development or testing.</p>
+
+<p>It should be noted that the platform support is configured with 2GB of main memory and a single
+Cortex-A53 CPU.</p>
+
+<p>You can use the following command to simulate a Microkit system:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-system-aarch64 \
+    -machine virt,virtualization=on \
+    -cpu cortex-a53 \
+    -nographic \
+    -serial mon:stdio \
+    -device loader,file=[SYSTEM IMAGE],addr=0x70000000,cpu-num=0 \
+    -m size=2G
+</code></pre></div></div>
+
+<p>You can find more about the QEMU virt platform in the
+<a href="https://www.qemu.org/docs/master/system/target-arm.html">QEMU documentation</a>.</p>
+
+<h3 id="qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</h3>
+
+<p>Support is available for the virtual RISC-V (64-bit) QEMU platform.
+This is a platform that is not based on any specific SoC or hardware platform
+and is intended for simulating systems for development or testing.</p>
+
+<p>It should be noted that the platform support is configured with 2GB of main memory.</p>
+
+<p>You can use the following command to simulate a Microkit system:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-system-riscv64 \
+    -machine virt \
+    -nographic \
+    -serial mon:stdio \
+    -kernel [SYSTEM IMAGE] \
+    -m size=2G
+</code></pre></div></div>
+
+<p>QEMU will start the system image using its packaged version of OpenSBI.</p>
+
+<p>You can find more about the QEMU virt platform in the
+<a href="https://www.qemu.org/docs/master/system/target-riscv.html">QEMU documentation</a>.</p>
+
+<h3 id="rpi4b_1gb">Raspberry Pi 4B</h3>
+
+<p>Support is available for the Raspberry Pi 4 Model B. There are multiple models of the
+Rasberry Pi 4B that have different amounts of RAM, we target the 1GB model in Microkit.
+If you require more than 1GB, please file an issue or pull request to add support for
+models with larger amounts of memory.</p>
+
+<p>For initial board setup, please see the instructions on the
+<a href="https://docs.sel4.systems/Hardware/Rpi4.html">seL4 website</a>.</p>
+
+<p>When getting into the U-Boot console you want to load the Microkit binary image to
+address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
+
+<p>For example, if you were to load the image via the MMC you would run the following
+U-Boot commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> =&gt; fatload mmc 0 0x10000000 &lt;SYSTEM IMAGE&gt;
+ =&gt; go 0x10000000
+</code></pre></div></div>
+
+<h3 id="rockpro64">Pine64 ROCKPro64</h3>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x30000000
+</code></pre></div></div>
+
+<h3 id="star64">Pine64 Star64</h3>
+
+<p>Support is available for the Pine64 Star64 platform which is based on the
+StarFive JH7110 SoC.</p>
+
+<p>The platform has a 4GB and 8GB model, we assume the 4GB model.</p>
+
+<p>The default boot flow of the Star64 is:</p>
+<ol>
+  <li>OpenSBI</li>
+  <li>U-Boot</li>
+  <li>Operating System</li>
+</ol>
+
+<p>This means that the system image that Microkit produces does not need to be explicitly
+packaged with an SBI implementation such as OpenSBI.</p>
+
+<p>To execute the system image produced by Microkit, execute the following command in U-Boot:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x60000000
+</code></pre></div></div>
+
+<h3 id="tqma8xqp1gb">TQMa8XQP 1GB</h3>
+
+<p>The TQMa8XQP is a system-on-module designed by TQ-Systems GmbH.
+The modules incorporates an NXP i.MX8X Quad Plus system-on-chip and 1GiB ECC memory.</p>
+
+<p>TQ-Systems provide the MBa8Xx carrier board for development purposes.
+The instructions provided assume the use of the MBa8Xx carrier board.
+If you are using a different carrier board please refer to the appropriate documentation.</p>
+
+<p>Note: There are different configured of the TQMa8Xx board which include different NXP SoCs
+and different memory configurations. Such modules are not supported.</p>
+
+<p>The MBa8Xx provides access to the TQMa8XQP UART via UART-USB bridge.
+To access the UART connect a USB micro cable to port <strong>X13</strong>.
+The UART-USB bridge supports 4 individual UARTs; the UART is connected to the 2nd port.</p>
+
+<p>By default the SoM will autoboot using U-Boot.
+Hit any key during the boot process to stop the autoboot.</p>
+
+<p>A new board will autoboot to Linux.
+You will likely want to disable autoboot:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; env set bootdelay -1
+=&gt; env save
+</code></pre></div></div>
+
+<p>The board can be reset by pressing switch <strong>S4</strong> (located next to the Ethernet port).
+Alternatively, you can use the <code class="language-plaintext highlighter-rouge">reset</code> command from the U-Boot prompt.</p>
+
+<p>During development the most convenient way to boot a Microkit image is via network booting.
+U-Boot support booting via the <em>tftp</em> protocol.
+To support this you’ll want to configure the network.
+U-Boot supports DHCP, however it is often more reliable to explicitly set an IP address.
+For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; env set ipaddr 10.1.1.2
+=&gt; env set netmask 255.255.255.0
+=&gt; env set serverip 10.1.1.1
+=&gt; env save
+</code></pre></div></div>
+
+<p>To use tftp you also need to set the file to load and the memory address to load it to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; env set bootfile loader.img
+=&gt; env set loadaddr 0x80280000
+=&gt; env save
+</code></pre></div></div>
+
+<p>The system image generated by the Microkit tool is a raw binary file.</p>
+
+<p>An example sequence of commands for booting is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; tftpboot
+=&gt; dcache flush
+=&gt; icache flush
+=&gt; go ${loadaddr}
+</code></pre></div></div>
+
+<p>Rather than typing these each time you can create a U-Boot script:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; env set microkit 'tftpboot; dcache flush; icache flush; go ${loadaddr}'
+=&gt; env save
+=&gt; run microkit
+</code></pre></div></div>
+
+<p>When debugging is enabled the kernel will use the same UART as U-Boot.</p>
+
+<h3 id="zcu102">ZCU102</h3>
+
+<p>The ZCU102 can run on a physical board or on an appropriate QEMU based emulator.</p>
+
+<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x40000000
+</code></pre></div></div>
+
+<p>For simulating the ZCU102 using QEMU, use the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-system-aarch64 \
+   -m size=4G  \
+   -machine xlnx-zcu102,virtualization=on \
+   -nographic \
+   -device loader,file=[SYSTEM IMAGE],addr=0x40000000,cpu-num=0 \
+   -serial mon:stdio
+</code></pre></div></div>
+
+<p>It should be noted that when using U-Boot to load and run a Microkit system image,
+that there may be additional setup needed.</p>
+
+<p>For the ZynqMP class of platforms, which the ZCU102 is apart of, U-Boot does not start
+the Microkit system Exception Level 2 (EL2) which is necessary for Microkit to start
+(this is because seL4 is configured as a hypervisor).</p>
+
+<p>You can see that when using the <code class="language-plaintext highlighter-rouge">go</code> command, U-Boot is
+<a href="https://github.com/u-boot/u-boot/blob/8937bb265a7f2251c1bd999784a4ef10e9c6080d/board/xilinx/zynqmp/zynqmp.c#L234">unconditionally always dropping down to EL1</a>.</p>
+
+<p>To avoid this behaviour, the call to <code class="language-plaintext highlighter-rouge">armv8_switch_to_el1</code> should be replaced with
+<code class="language-plaintext highlighter-rouge">armv8_switch_to_el2</code> in this <code class="language-plaintext highlighter-rouge">do_go_exec</code> function.</p>
+
+<h3 id="adding-platform-support">Adding Platform Support</h3>
+
+<p>The following section is a guide for adding support for a new platform to Microkit.</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>Before you can start with adding platform support to Microkit, the platform must be supported by the seL4 kernel.
+You can find information on how to do so <a href="https://docs.sel4.systems/projects/sel4/porting.html">here</a>.</p>
+
+<h4 id="getting-microkit-components-working">Getting Microkit Components Working</h4>
+
+<p>The first step to adding Microkit support is to modify the <code class="language-plaintext highlighter-rouge">build_sdk.py</code> script in order to build the required
+artefacts for the new platform. This involves adding to the <code class="language-plaintext highlighter-rouge">SUPPORTED_BOARDS</code> list with the <code class="language-plaintext highlighter-rouge">BoardInfo</code> options
+containing the platform specific attributes. This should be fairly self-explanatory by looking at the existing
+entries with the exception of the <code class="language-plaintext highlighter-rouge">loader_link_address</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">loader_link_address</code> parameter specifies the physical address of where the bootloader for Microkit (which
+is responsible for setting up the system before seL4 starts) is going to be loaded. This address needs to
+match where in main memory the final system image is actually loaded (e.g where a previous bootloader such as U-Boot
+loads the image to). This means that the address is restricted to the platform’s main memory region.</p>
+
+<p>The other component of Microkit that is platform dependent is the loader itself. The loader will attempt to access
+the UART for debug output which requires a basic <code class="language-plaintext highlighter-rouge">putc</code> implementation. The UART device used in the loader should be
+the same as what is used for the seL4 kernel debug output.</p>
+
+<p>It should be noted that on RISC-V platforms, the SBI will be used for <code class="language-plaintext highlighter-rouge">putc</code> so no porting is necessary.</p>
+
+<p>Once you have patched the loader and the SDK build script, there should be no other changes required to have a working
+platform port. It is a good idea at this point to boot a hello world system to confirm the port is working.</p>
+
+<p>If there are issues with porting the platform, please <a href="https://github.com/sel4/microkit">open an issue on GitHub</a>.</p>
+
+<h4 id="contributing-platform-support">Contributing Platform Support</h4>
+
+<p>Once you believe that the port works, you can <a href="https://github.com/seL4/microkit/pulls">open a pull request</a> with required
+changes as well as documentation in the manual about the platform and how to run Microkit images on it.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>This section describes the rationales driving the Microkit design choices.</p>
+
+<h3 id="overview-1">Overview</h3>
+
+<p>The seL4 microkernel provides a set of powerful and flexible mechanisms that can be used for building almost arbitrary systems.
+While minimising constraints on the nature of system designs and scope of deployments, this flexibility makes it challenging to design the best system for a particular use case, requiring extensive seL4 experience from developers.</p>
+
+<p>The Microkit addresses this challenge by constraining the
+system architecture to one that provides enough features and power for
+its target usage class (IoT, cyberphysical and other embedded systems
+with a static architecture), enabling a much simpler set of developer-visible abstractions.</p>
+
+<h3 id="protection-domains">Protection Domains</h3>
+
+<p>PDs are single-threaded to keep the programming model and implementations simple, and because this serves the needs of most present use cases in the target domains.
+Extending the model to multithreaded applications (clients) is straightforward and can be done if needed.
+Extending to multithreaded services is possible but  requires additional infrastructure for which we see no need in the near future.</p>
+
+<h3 id="protected-procedure-priorities">Protected Procedure Priorities</h3>
+
+<p>The restriction of only calling to higher priority prevents deadlocks and reflects the notion that the callee operates on behalf of the caller, and it should not be possible to preempt execution of the callee unless the caller could be preempted as well.</p>
+
+<p>This greatly simplifies reasoning about real-time properties in the system; in particular, it means that PPs can be used to implement <em>resource servers</em>, where shared resources are encapsulated in a component that ensures mutual exclusion, while avoiding unbounded priority inversions through the <em>immediate priority ceiling protocol</em>.</p>
+
+<p>While it would be possible to achieve the same by allowing PPs between PDs of the same priority, this would be much harder to statically analyse for loop-freedom (and thus deadlock-freedom).
+The drawback is that we waste a part of the priority space where a logical entity is split into multiple PDs, eg to separate out a particularly critical component to formally verify it, when the complete entity would be too complex for formal verification.
+For the kinds of systems targeted by the Microkit, this reduction of the usable priority space is unlikely to cause problems.</p>
+
+<h3 id="protected-procedure-argument-size">Protected Procedure Argument Size</h3>
+
+<p>The limitation on the size of by-value arguments is forced by the (architecture-dependent) limits on the payload size of the underlying seL4 operations, as well as by efficiency considerations.
+The protected procedure payload should be considered as analogous to function arguments in the C language; similar limitations exist in the C ABIs (Application Binary Interfaces) of various platforms.</p>
+
+<h3 id="limits">Limits</h3>
+
+<p>The limitation on the number of protection domains in the system is relatively arbitrary.
+Based on experience with the system and the types of systems being built it is possible for this to be increased in the future.</p>
+
+<p>The limitation on the number of channels for a protection domain is based on the size of the notification word in seL4.
+Changing this to be larger than 64 would most likely require changes to seL4. The reason for why the limit is not a
+power of two is due to part of the notification word being for internal libmicrokit use.</p>
+
+<h2 id="internals">Internals</h2>
+
+<p>The following section describes internal details for how the Microkit works
+and all the components of Microkit. As a user of Microkit, it is not necessary
+know this information, however, there is no harm in having a greater
+understanding of the tools that you are using.</p>
+
+<p><img src="/projects/microkit/manual/latest/assets/microkit_flow.svg" alt="Microkit flow" /></p>
+
+<p>The diagram above aims to show the general flow of a Microkit system from
+build-time to run-time.</p>
+
+<p>The user provides the SDF (System Description File) and the ELFs that
+correspond to PD program images to the Microkit tool which is responsible to
+for packaging everything together into a single bootable image for the target
+platform.</p>
+
+<p>This final image contains a couple different things:</p>
+
+<ul>
+  <li>the Microkit loader</li>
+  <li>seL4</li>
+  <li>the Monitor (and associated invocation data)</li>
+  <li>the images for all the user’s PDs</li>
+</ul>
+
+<p>When booting the image, the Microkit loader starts, jumps to the kernel, which
+starts the monitor, which then sets up the entire system and starts all the PDs.</p>
+
+<p>Now, we will go into a bit more detail about each of these stages of the
+booting process as well as what exactly the Microkit tool is doing.</p>
+
+<h3 id="loader">Loader</h3>
+
+<p>The loader starts first, it has two main jobs:</p>
+
+<ol>
+  <li>Unpack all the parts of the system (kernel, monitor, PD images, etc) into
+their expected locations within main memory.</li>
+  <li>Finish initialising the hardware such that the rest of the system can start.</li>
+</ol>
+
+<p>Unpacking the system image is fairly straight-forward, as all the information
+about what parts of the system image need to go where is figured out by the
+tool and embedded into the loader at build-time so when it starts it just goe
+through an array and copies data into the right locations.</p>
+
+<p>Before the Microkit loader starts, there would most likely have been some other
+bootloader such as U-Boot or firmware on the target that did its own hardware
+initialisation before starting Microkit.</p>
+
+<p>However, there are certain things that seL4 expects to be initialised
+that will not be done by a previous booting stage, such as:</p>
+
+<ul>
+  <li>changing to the right exception level</li>
+  <li>enabling the MMU (seL4 expects the MMU to be on when it starts)</li>
+  <li>interrupt controller setup</li>
+</ul>
+
+<p>Once this is all completed, the loader jumps to seL4 which starts executing.
+The loader will never be executed again.</p>
+
+<h3 id="monitor">Monitor</h3>
+
+<p>Once the kernel has done its own initialisation, it will begin the
+‘initial task’. On seL4, this is a thread that contains all the initial
+capabilities to resources that are used to setup the rest of the system.</p>
+
+<p>Within a Microkit environment, we call the initial task the ‘monitor’.</p>
+
+<p>The monitor has two main jobs:</p>
+
+<ol>
+  <li>Setup all system resources (memory regions, channels, interrupts) and start
+the user’s protection domains.</li>
+  <li>Receive any faults caused by protection domains crashing or causing
+exceptions.</li>
+</ol>
+
+<p>At build-time, the Microkit tool embeds all the system calls that the monitor
+needs to make in order to setup the user’s system. More details about <em>how</em>
+this is done is in the section on the Microkit tool below. But from the
+monitor’s perspective, it just iterates over an array of system calls to make
+and performs each one.</p>
+
+<p>After the system has been setup, the monitor goes to sleep and waits for any
+faults from protection domains. On debug mode, this results in a message about
+which PD caused an exception and details on the PD’s state at the time of the fault.</p>
+
+<p>Other than printing fault details, the monitor does not do anything to handle
+the fault, it will simply go back to sleep waiting for any other faults.</p>
+
+<h3 id="libmicrokit_internals">libmicrokit</h3>
+
+<p>Unlike the previous sections, libmicrokit is not its own program but it is worth
+a mention since it makes up the core of each protection domain in a system.</p>
+
+<p>When each PD starts, we enter libmicrokit’s starting point which does some initial
+setup and calls the <code class="language-plaintext highlighter-rouge">init</code> entry point specified by the user. Once that completes,
+the PD will enter libmicrokit’s event handler which sleeps until it receives events.</p>
+
+<p>These events could be notifies (from other PDs or from an interrupt), PPCs, and faults.
+For each event, the appropriate user-specified entry point is called and then when it
+returns the PD goes back to sleep, waiting on any more events.</p>
+
+<h3 id="microkit-tool">Microkit tool</h3>
+
+<p>The Microkit tool’s ultimate job is to take in the description of the user’s system,
+the SDF, and convert into an seL4 system that boots and executes.</p>
+
+<p>There are obvious steps such as parsing the SDF and PD ELFs but the majority of
+the work done by the tool is converting the system description into a list of
+seL4 system calls that need to happen.</p>
+
+<p>In order to do this however, the Microkit tool needs to perform o a decent amount of
+‘emulation’ to know exactly what system calls and with which arguments to make.
+This requires keeping track of what memory is allocated and where, the layout of
+each capability space, what the initial untypeds list will look like, etc.</p>
+
+<p>While this is non-trivial to do, it comes with the useful property that if the tool
+produces a valid image, there should be no errors upon initialising the system
+If there are any errors with configuring the system (e.g running out of memory),
+they will be caught at build-time. This can only reasonably be done due to the
+static-architecture of Microkit systems.</p>
+
+</div>
+
+            </main>
+          </div>
+          
+          <div id="toc-open" class="absolute top-20 right-8 text-light hidden sm:block cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-5 w-5 stroke-2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"/>
+</svg>
+          </div>
+          <nav id="the-toc"
+               class="hidden xl:block absolute top-12 right-0 mt-8 pr-2 mr-6 w-60 h-[calc(100%-12rem)]
+                      std-bg">
+            <div class="pl-4 font-semibold mb-4 text-base text-dark relative">
+              On this page
+              <div id="toc-close" class="absolute top-1 right-1 text-light cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-4 w-4 stroke-2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg>
+              </div>
+            </div>
+            <div class="pl-4 border-l bordercol overflow-y-auto max-h-full pb-2">
+            <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#introduction">Introduction</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#purpose">Purpose</a></li>
+<li class="toc-entry toc-h3"><a href="#overview">Overview</a></li>
+<li class="toc-entry toc-h3"><a href="#document-structure">Document Structure</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#concepts">Concepts</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#system">System</a></li>
+<li class="toc-entry toc-h3"><a href="#pd">Protection Domains</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#entry-points">Entry points</a></li>
+<li class="toc-entry toc-h4"><a href="#scheduling">Scheduling</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#vm">Virtual Machines</a></li>
+<li class="toc-entry toc-h3"><a href="#mr">Memory Regions</a></li>
+<li class="toc-entry toc-h3"><a href="#channels">Channels</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#pp">Protected procedures</a></li>
+<li class="toc-entry toc-h4"><a href="#notification">Notifications</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#irq">Interrupts</a></li>
+<li class="toc-entry toc-h3"><a href="#fault">Faults</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#sdk">SDK</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#config">Configurations</a></li>
+<li class="toc-entry toc-h3"><a href="#debug">Debug</a></li>
+<li class="toc-entry toc-h3"><a href="#release">Release</a></li>
+<li class="toc-entry toc-h3"><a href="#benchmark">Benchmark</a></li>
+<li class="toc-entry toc-h3"><a href="#system-requirements">System Requirements</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#tool">Microkit Tool</a></li>
+<li class="toc-entry toc-h2"><a href="#language-support">Language Support</a></li>
+<li class="toc-entry toc-h2"><a href="#libmicrokit">libmicrokit</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#void-initvoid">void init(void)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-notifiedmicrokit_channel-ch">void notified(microkit_channel ch)</a></li>
+<li class="toc-entry toc-h3"><a href="#microkit_msginfo-protectedmicrokit_channel-ch-microkit_msginfo-msginfo">microkit_msginfo protected(microkit_channel ch, microkit_msginfo msginfo)</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_bool-faultmicrokit_child-child-microkit_msginfo-msginfo-microkit_msginfo-reply_msginfo">seL4_Bool fault(microkit_child child, microkit_msginfo msginfo, microkit_msginfo *reply_msginfo)</a></li>
+<li class="toc-entry toc-h3"><a href="#microkit_msginfo-microkit_ppcallmicrokit_channel-ch-microkit_msginfo-msginfo">microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_notifymicrokit_channel-ch">void microkit_notify(microkit_channel ch)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_irq_ackmicrokit_channel-ch">void microkit_irq_ack(microkit_channel ch)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_deferred_notifymicrokit_channel-ch">void microkit_deferred_notify(microkit_channel ch)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_deferred_irq_ackmicrokit_channel-ch">void microkit_deferred_irq_ack(microkit_channel ch)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_pd_restartmicrokit_child-pd-uintptr_t-entry_point">void microkit_pd_restart(microkit_child pd, uintptr_t entry_point)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_pd_stopmicrokit_child-pd">void microkit_pd_stop(microkit_child pd)</a></li>
+<li class="toc-entry toc-h3"><a href="#microkit_msginfo-microkit_msginfo_newuint64_t-label-uint16_t-count">microkit_msginfo microkit_msginfo_new(uint64_t label, uint16_t count)</a></li>
+<li class="toc-entry toc-h3"><a href="#uint64_t-microkit_msginfo_get_labelmicrokit_msginfo-msginfo">uint64_t microkit_msginfo_get_label(microkit_msginfo msginfo)</a></li>
+<li class="toc-entry toc-h3"><a href="#uint64_t-microkit_msginfo_get_countmicrokit_msginfo-msginfo">uint64_t microkit_msginfo_get_count(microkit_msginfo msginfo)</a></li>
+<li class="toc-entry toc-h3"><a href="#uint64_t-microkit_mr_getuint8_t-mr">uint64_t microkit_mr_get(uint8_t mr)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_mr_setuint8_t-mr-uint64_t-value">void microkit_mr_set(uint8_t mr, uint64_t value)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_restartmicrokit_child-vcpu-sel4_word-entry_point">void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_stopmicrokit_child-vcpu">void microkit_vcpu_stop(microkit_child vcpu)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_inject_irqmicrokit_child-vcpu-sel4_uint16-irq">`void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_ack_vppimicrokit_child-vcpu-sel4_word-irq">void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq)</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_word-microkit_vcpu_arm_read_regmicrokit_child-vcpu-sel4_word-reg">seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_write_regmicrokit_child-vcpu-sel4_word-reg-sel4_word-value">void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_arm_smc_callsel4_arm_smccontext-args-sel4_arm_smccontext-response">void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response)</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#sysdesc">System Description File</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#protection_domain">protection_domain</a></li>
+<li class="toc-entry toc-h3"><a href="#memory_region">memory_region</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#page-sizes-by-architecture">Page sizes by architecture</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#aarch64">AArch64</a></li>
+<li class="toc-entry toc-h5"><a href="#risc-v-64-bit">RISC-V 64-bit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#channel">channel</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#bsps">Board Support Packages</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#ariane">Ariane (CVA6)</a></li>
+<li class="toc-entry toc-h3"><a href="#cheshire">Cheshire</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#using-u-boot">Using U-Boot</a></li>
+<li class="toc-entry toc-h4"><a href="#raw-systerm-with-no-bootloader">Raw systerm with no bootloader</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#imx8mm_evk">i.MX8MM-EVK</a></li>
+<li class="toc-entry toc-h3"><a href="#imx8mp_evk">i.MX8MP-EVK</a></li>
+<li class="toc-entry toc-h3"><a href="#imx8mq_evk">i.MX8MQ-EVK</a></li>
+<li class="toc-entry toc-h3"><a href="#maaxboard">MaaXBoard</a></li>
+<li class="toc-entry toc-h3"><a href="#odroidc2">Odroid-C2</a></li>
+<li class="toc-entry toc-h3"><a href="#odroidc4">Odroid-C4</a></li>
+<li class="toc-entry toc-h3"><a href="#qemu_virt_aarch64">QEMU virt (AArch64)</a></li>
+<li class="toc-entry toc-h3"><a href="#qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</a></li>
+<li class="toc-entry toc-h3"><a href="#rpi4b_1gb">Raspberry Pi 4B</a></li>
+<li class="toc-entry toc-h3"><a href="#rockpro64">Pine64 ROCKPro64</a></li>
+<li class="toc-entry toc-h3"><a href="#star64">Pine64 Star64</a></li>
+<li class="toc-entry toc-h3"><a href="#tqma8xqp1gb">TQMa8XQP 1GB</a></li>
+<li class="toc-entry toc-h3"><a href="#zcu102">ZCU102</a></li>
+<li class="toc-entry toc-h3"><a href="#adding-platform-support">Adding Platform Support</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-entry toc-h4"><a href="#getting-microkit-components-working">Getting Microkit Components Working</a></li>
+<li class="toc-entry toc-h4"><a href="#contributing-platform-support">Contributing Platform Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#rationale">Rationale</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#overview-1">Overview</a></li>
+<li class="toc-entry toc-h3"><a href="#protection-domains">Protection Domains</a></li>
+<li class="toc-entry toc-h3"><a href="#protected-procedure-priorities">Protected Procedure Priorities</a></li>
+<li class="toc-entry toc-h3"><a href="#protected-procedure-argument-size">Protected Procedure Argument Size</a></li>
+<li class="toc-entry toc-h3"><a href="#limits">Limits</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#internals">Internals</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#loader">Loader</a></li>
+<li class="toc-entry toc-h3"><a href="#monitor">Monitor</a></li>
+<li class="toc-entry toc-h3"><a href="#libmicrokit_internals">libmicrokit</a></li>
+<li class="toc-entry toc-h3"><a href="#microkit-tool">Microkit tool</a></li>
+</ul>
+</li>
+</ul>
+            </div>
+            <div class="h-22"></div>
+          </nav>
+          
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-xs lg:text-sm font-semibold text-lighter">
+  <a href="/sitemap.html"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <a href="/processes/test-status.html"
+     class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
+  <div class="flex-1"></div>
+<a href="https://github.com/seL4/docs/edit/master/projects/microkit/manual/latest/index.md" class="flex-none  hover:text-light hover:underline">Edit
+    page on GitHub</a>
+</footer>
+
+        </div>
+        </div>
+    </div>
+  </body>
+</html>

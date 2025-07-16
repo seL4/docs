@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Allocating Kernel Objects - Using Rust in seL4 Userspace</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../assets/sel4-rust-tutorial.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Using Rust in seL4 Userspace</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/seL4/seL4-rust-tutorial" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+    Copyright 2024, Colias Group, LLC
+
+    SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+<h1 id="allocating-kernel-objects"><a class="header" href="#allocating-kernel-objects">Allocating Kernel Objects</a></h1>
+<p>Start by navigating to and running this chapter's example, which, so far, is empty.</p>
+<pre><code>cd workspaces/root-task/kernel-objects
+make simulate
+</code></pre>
+<p>Userspace operates the seL4 kernel by creating, managing, and accessing kernel objects via references called <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.1"><em>capabilites</em></a>.
+See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.3">seL4 Reference Manual § 2.3 (Kernel Objects)</a> for an outline of the core types of kernel objects.</p>
+<p>In the context of seL4, a capability is a granular, unforgeable token of authority that references a kernel object and carries access rights that limit what the user of a cabability can do with the referenced kernel object.
+In general, a system call in seL4 amounts to refering to a cabability and an action on the kernel object the cabability points to.
+This is called <em>invoking a capability</em>.</p>
+<!-- As elaborated in [seL4 Reference Manual § 2.3 (Kernel Objects)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.3), the core kernel object types are:
+- CNode: a table containing capabilites, used to construct so-called capability spaces, which are assigned to threads. When making a syscall, a thread refers to capabilities in its capability space to in turn refer to kernel objects.
+- Thread control block: the state associated with a thread's execution context. Used to control a thread.
+- Scheduling context (only relevent to certain kernel configurations, not covered here): represents access to a CPU, used for scheduling.
+- Endpoint: synchronous IPC endpoint, for message-passing between threads.
+- Reply object (only relevent to certain kernel configurations, not covered here): tracks scheduling information accross IPC endpoint calls.
+- Notification object: asynchronous signalling mechanism. -->
+<p>Just as each thread is associated with a virtual address space which the hardware uses to translate virtual memory addresses into locations in physical memory, each seL4 thread is also assocated with a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.3">capability space</a> (<em>CSpace</em>) which the kernel uses to translate so-called <em>capability pointers</em> (<em>CPointers</em> or <em>CPtrs</em>) into locations (slots) in the kernel's capability tables called <em>CNodes</em>.</p>
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.CPtr.html"><code>sel4::CPtr</code></a> type is a wrapper around a machine word.
+The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html"><code>sel4::Cap&lt;T&gt;</code></a> type wraps a <code>CPtr</code> associated with the current thread's CSpace, and thus points to a particular capability slot within the kernel.
+It is paramterized by a capability type <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/trait.CapType.html"><code>T: sel4::CapType</code></a>, representing the type of capability in that slot.
+It is up to the crate user to ensure that <code>Cap</code>'s are valid and well-typed in the current thread.</p>
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/index.html"><code>sel4::cap</code></a> module contains aliases of the form <code>sel4::Cap&lt;sel4::cap_type::*&gt;</code>.</p>
+<p>Depending on the <code>Cap</code>'s type <code>T</code>, a <code>Cap</code> has a number of methods available, which correspond to invocations for that capability type.
+For example, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.tcb_resume"><code>sel4::Cap::tcb_resume()</code></a> is available when <code>T</code> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap_type/struct.Tcb.html"><code>sel4::cap_type::Tcb</code></a>.</p>
+<h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4e6e91719a3c19a37fecbeff55d0d28b15eebaf3')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4e6e91719a3c19a37fecbeff55d0d28b15eebaf3"> <i class="fa fa-github"></i> </a></a></h2>
+<p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
+<em>Untyped memory</em> is the name of the object type for free memory.
+At boot time, the root task is granted untyped memory capabilities for all of the system's memory, except for the memory used for the kernel and the root task's own resources.</p>
+<p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4e6e91719a3c19a37fecbeff55d0d28b15eebaf3/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    sel4::debug_println!("untyped:");
+    for ut_desc in bootinfo.untyped_list() {
+        sel4::debug_println!(
+            "    paddr: {:#016x?}, size bits: {:02?}, is device: {:?}",
+            ut_desc.paddr(),
+            ut_desc.size_bits(),
+            ut_desc.is_device()
+        );
+    }
+</code></pre>
+</div>
+</div>
+<p>Sample output:</p>
+<pre><code>untyped:
+    paddr: 0x00000000000000, size bits: 27, is device: true
+    paddr: 0x00000008001000, size bits: 12, is device: true
+    paddr: 0x00000008002000, size bits: 13, is device: true
+    paddr: 0x00000008004000, size bits: 14, is device: true
+    paddr: 0x00000008008000, size bits: 15, is device: true
+    paddr: 0x00000008011000, size bits: 12, is device: true
+    paddr: 0x00000008012000, size bits: 13, is device: true
+    ...
+</code></pre>
+<p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.UntypedDesc.html#method.size_bits"><code>sel4::UntypedDesc::size_bits()</code></a> returns the log base 2 of the size of the region of memory described by the descriptor.</p>
+<p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.UntypedDesc.html#method.is_device"><code>sel4::UntypedDesc::is_device()</code></a> returns whether the region is device memory or kernel memory.
+Device memory can only be used for creating frames, whereas kernel memory has no such restrictions.</p>
+<h2 id="step-3b"><a class="header" href="#step-3b">Step 3.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('be68b6a66ed494d58f7da13c23abf247c06fea6d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/be68b6a66ed494d58f7da13c23abf247c06fea6d"> <i class="fa fa-github"></i> </a></a></h2>
+<p>Add a function that finds the largest untyped region passed to the root task:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/be68b6a66ed494d58f7da13c23abf247c06fea6d/workspaces/root-task/kernel-objects/src/main.rs#L32-L42">workspaces/root-task/kernel-objects/src/main.rs:32:42 after 3.B</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">fn find_largest_kernel_untyped(bootinfo: &amp;sel4::BootInfo) -&gt; sel4::cap::Untyped {
+    let (ut_ix, _desc) = bootinfo
+        .untyped_list()
+        .iter()
+        .enumerate()
+        .filter(|(_i, desc)| !desc.is_device())
+        .max_by_key(|(_i, desc)| desc.size_bits())
+        .unwrap();
+
+    bootinfo.untyped().index(ut_ix).cap()
+}
+</code></pre>
+</div>
+</div>
+<p>The expression <code>bootinfo.untyped().index(ut_ix).cap()</code> indexes into <code>bootinfo.untyped(): SlotRegion&lt;Untyped&gt;</code> to retrieve a <code>Slot&lt;Untyped&gt;</code>, which can be turned into a <code>Cap&lt;Untyped&gt; (= cap::Untyped)</code>.</p>
+<h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('872f1a25a27afb8b68a98c270fec80c64a1e20e4')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/872f1a25a27afb8b68a98c270fec80c64a1e20e4"> <i class="fa fa-github"></i> </a></a></h2>
+<p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">Notification</a> object.</p>
+<p>We already know how to refer to a capability in the current thread's CSpace: a CPtr.
+However, some capability invocations allow us to refer to a capability slot in any CSpace whose root CNode is present in the current thread's CSpace.
+In these cases, we must provide:</p>
+<ul>
+<li>A CPtr, interpreted in the context of the current thread's CSpace, which points to the target CSpace's root CNode</li>
+<li>A CPtr, interpreted in the context of the target CSpace, which points to the target capability slot</li>
+<li>A depth, which is the number of bits of the second CPtr to interpret. This allows for the second CPtr to point to a CNode. Why this is necessary is outside the scope of this tutorial, but you can read about it in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (CSpace Addressing)</a>.</li>
+</ul>
+<p>Consider, for example, the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.1.4"><code>seL4_CNode_Mint</code></a> capability invocation.
+<code>dest_*</code> and <code>src_*</code> are both capability slots addressed in this way.</p>
+<p>This more flexible method of capability slot addressing is encapsulated in the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.AbsoluteCPtr.html"><code>sel4::AbsoluteCPtr</code></a> type.</p>
+<p>The <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.9.1"><code>seL4_Untyped_Retype</code></a> method is used for allocating new objects from an untyped object.
+The <code>_service</code> parameter is the address of the untyped object as a normal CPtr.
+<code>root</code>, <code>node_index</code>, and <code>node_depth</code> address, in the more flexible way outlined above, the destination CNode into which capabilities for the new objects will be inserted.
+<code>node_offset</code> and <code>num_objects</code> specify a range of slots within the selected CNode for the new capabilites (and, simultaneously, the number of new objects that will be created).</p>
+<p><code>type</code> and <code>size_bits</code> specify the shape of the new object(s)
+Note that <code>size_bits</code> is relevant for only certain object types (see <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.2.4.2">seL4 Reference Manual § 2.4.2 (Summary of Object Sizes)</a> for more information).
+This shape information is encapsulated in the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/enum.ObjectBlueprint.html"><code>sel4::ObjectBlueprint</code></a> type.</p>
+<p>Multiple kernel objects can be allocated from a single unytped object.
+For each untyped object, the kernel maintains a watermark which tracks how much of the untyped object has been used up for object allocation.
+<code>seL4_Untyped_Retype</code> aligns the watermark to the desired object type's size, and then advances it according to the object type size and number of objects.
+This process is detailed in the fourth paragraph of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.2.4.1">seL4 Reference Manual § 2.4.1 (Reusing Memory)</a>.</p>
+<p>Let us now work towards calling <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Untyped.html#method.untyped_retype"><code>sel4::cap::Untyped::untyped_retype()</code></a> on our previously acquired <code>largest_kernel_ut</code>.
+We wish to allocate one notification object and insert a capability for it into a free slot in the current thread's own CSpace.
+More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread's own CSpace's root CNode, and an index into that CNode for a free slot.</p>
+<p>The CPtr for the initial thread's own CSpace root is a constant:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L27-L27">workspaces/root-task/kernel-objects/src/main.rs:27:27 after 3.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let cnode = sel4::init_thread::slot::CNODE.cap();
+</code></pre>
+</div>
+</div>
+<p><code>bootinfo</code> can tell us about a range of empty slots in this CSpace.
+We can leverage the fact that Rust's <code>Range&lt;T&gt;</code> type is an iterator for certain <code>T</code> to allocate slots in an ergonomic way:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L29-L33">workspaces/root-task/kernel-objects/src/main.rs:29:33 after 3.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let mut empty_slots = bootinfo
+        .empty()
+        .range()
+        .map(sel4::init_thread::Slot::from_index);
+    let notification_slot = empty_slots.next().unwrap();
+</code></pre>
+</div>
+</div>
+<p>The {{#rustdoc_link root-task sel4/cap/type.CNode.html#method.absolute_cptr_for_self<code>sel4::cap::CNode::absolute_cptr_for_self()</code>}}  method elaborates a <code>sel4::cap::Cnode</code> into a <code>sel4::AbsoluteCPtr</code>.
+Interestingly, there are two ways to do this, but the current implementation is just to use a depth of zero.</p>
+<p>Now we can invoke our untyped capability to allocate a notification object:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L36-L43">workspaces/root-task/kernel-objects/src/main.rs:36:43 after 3.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    largest_kernel_ut
+        .untyped_retype(
+            &amp;sel4::ObjectBlueprint::Notification,
+            &amp;cnode.absolute_cptr_for_self(),
+            notification_slot.index(),
+            1,
+        )
+        .unwrap();
+</code></pre>
+</div>
+</div>
+<p>Now that we know that <code>notification_slot</code> contains a notification capability, we can cast it and get a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html"><code>sel4::cap::Notification</code></a>:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L45-L47">workspaces/root-task/kernel-objects/src/main.rs:45:47 after 3.C</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">    let notification = notification_slot
+        .downcast::&lt;sel4::cap_type::Notification&gt;()
+        .cap();
+</code></pre>
+</div>
+</div>
+<h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('681fb5c21086ca3da70db911144212f0bd36fa26')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/681fb5c21086ca3da70db911144212f0bd36fa26"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong>: Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>sel4::cap::Notification::signal()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>sel4::cap::Notification::wait()</code></a> to signal and then wait on the notification.</p>
+<h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('0f52649ab1d390861aa8c830aa0cfc57d15224c8')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/0f52649ab1d390861aa8c830aa0cfc57d15224c8"> <i class="fa fa-github"></i> </a></a></h2>
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
+When that capability is used to signal the notification, the notification's word-sized state is bit-wise <code>or</code>ed with the capability's badge.
+A wait call on the notification returns and clears the notification's state, provided that a signal call has occurred since the last wait call.</p>
+<p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.AbsoluteCPtr.html#method.mint"><code>sel4::AbsoluteCPtr::mint()</code></a> mints a new capability from an existing capability, updatings its access rights and badge.</p>
+<p><strong>Exercise:</strong>: Allocate a new empty slot in the current CNode.</p>
+<p>A slot in the root task's CSpace (i.e. a value of type <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/init_thread/struct.Slot.html"><code>sel4::init_thread::Slot</code></a>) can be turned into an <code>sel4::AbsoluteCPtr</code> using {{#rustdoc_link root-task sel4/cap/type.CNode.html#method.absolute_cptr<code>sel4::CNode::absolute_cptr()</code>}}:</p>
+<div class="fragment-with-gh-link">
+<div class="fragment-with-gh-link-link">
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/0f52649ab1d390861aa8c830aa0cfc57d15224c8/workspaces/root-task/kernel-objects/src/main.rs#L63-L63">workspaces/root-task/kernel-objects/src/main.rs:63:63 after 3.E</a></code></pre>
+</div>
+<div class="fragment-with-gh-link-fragment">
+<pre><code class="language-rust ignore">            &amp;cnode.absolute_cptr(notification_slot.cptr()),
+</code></pre>
+</div>
+</div>
+<p><strong>Exercise:</strong>: Mint a capability based on the capability in <code>notification_slot</code> into your newly allocated slot. Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.CapRights.html#method.all"><code>sel4::CapRights::all()</code></a> for the <code>rights</code> parameter, and specify a non-zero badge value.</p>
+<p><strong>Exercise:</strong>: Signal the notification using your newly minted badged capability. Using the return value of <code>sel4::Notification::wait()</code>, compare the badge value it returns with the badge you used to mint the capability.</p>
+<h2 id="step-3f-exercise"><a class="header" href="#step-3f-exercise">Step 3.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7dc10271914f7a05e682fe9a834a24d2c063d86c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7dc10271914f7a05e682fe9a834a24d2c063d86c"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong>: <code>sel4::CapRights::all()</code> is overly-permissive. Use the overly-restrictive <code>sel4::CapRights::none()</code> instead and watch the program fail.</p>
+<h2 id="step-3g-exercise"><a class="header" href="#step-3g-exercise">Step 3.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b93bd0cd8304da64bcd722db3f48a68726445b15')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b93bd0cd8304da64bcd722db3f48a68726445b15"> <i class="fa fa-github"></i> </a></a></h2>
+<p><strong>Exercise:</strong>: Now use the minimum rights necessary for the program to run.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../root-task/hello-world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../root-task/address-space.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../root-task/hello-world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../root-task/address-space.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../assets/sel4-rust-tutorial.js"></script>
+
+
+    </div>
+    </body>
+</html>
