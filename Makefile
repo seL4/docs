@@ -75,22 +75,63 @@ repos: $(REPOSITORIES)
 
 TUTES_DST = _processed/tutes
 TUTES_REPO = _repos/sel4/sel4-tutorials
+TUTES_SRC = $(TUTES_REPO)/tutorials
 
 $(TUTES_DST):
 	mkdir -p $@
 
-# the prereq pattern %/%.md is not allowed, but */%.md is sufficient here
-$(TUTES_DST)/%.md: $(TUTES_REPO)/tutorials/*/%.md
+TUTORIAL_FILES := \
+	hello-world \
+	capabilities \
+	untyped \
+	ipc \
+	interrupts \
+	mapping \
+	threads \
+	notifications \
+	mcs \
+	fault-handlers \
+	hello-camkes-0 \
+	hello-camkes-1 \
+	hello-camkes-2 \
+	hello-camkes-timer \
+	camkes-vm-crossvm \
+	camkes-vm-linux \
+	libraries-1 \
+	libraries-2 \
+	libraries-3 \
+	libraries-4
+
+$(TUTES_DST)/hello-world.md: $(TUTES_SRC)/hello-world/hello-world.md
+$(TUTES_DST)/capabilities.md: $(TUTES_SRC)/capabilities/capabilities.md
+$(TUTES_DST)/untyped.md: $(TUTES_SRC)/untyped/untyped.md
+$(TUTES_DST)/ipc.md: $(TUTES_SRC)/ipc/ipc.md
+$(TUTES_DST)/mapping.md: $(TUTES_SRC)/mapping/mapping.md
+$(TUTES_DST)/threads.md: $(TUTES_SRC)/threads/threads.md
+$(TUTES_DST)/notifications.md: $(TUTES_SRC)/notifications/notifications.md
+$(TUTES_DST)/mcs.md: $(TUTES_SRC)/mcs/mcs.md
+$(TUTES_DST)/fault-handlers.md: $(TUTES_SRC)/fault-handlers/fault-handlers.md
+$(TUTES_DST)/hello-camkes-0.md: $(TUTES_SRC)/hello-camkes-0/hello-camkes-0.md
+$(TUTES_DST)/hello-camkes-1.md: $(TUTES_SRC)/hello-camkes-1/hello-camkes-1.md
+$(TUTES_DST)/hello-camkes-2.md: $(TUTES_SRC)/hello-camkes-2/hello-camkes-2.md
+$(TUTES_DST)/hello-camkes-timer.md: $(TUTES_SRC)/hello-camkes-timer/hello-camkes-timer.md
+$(TUTES_DST)/camkes-vm-crossvm.md: $(TUTES_SRC)/camkes-vm-crossvm/camkes-vm-crossvm.md
+$(TUTES_DST)/camkes-vm-linux.md: $(TUTES_SRC)/camkes-vm-linux/camkes-vm-linux.md
+$(TUTES_DST)/interrupts.md: $(TUTES_SRC)/interrupts/interrupts.md
+$(TUTES_DST)/libraries-1.md: $(TUTES_SRC)/libraries-1/libraries-1.md
+$(TUTES_DST)/libraries-2.md: $(TUTES_SRC)/libraries-2/libraries-2.md
+$(TUTES_DST)/libraries-3.md: $(TUTES_SRC)/libraries-3/libraries-3.md
+$(TUTES_DST)/libraries-4.md: $(TUTES_SRC)/libraries-4/libraries-4.md
+
+TUTORIALS := $(TUTORIAL_FILES:%=$(TUTES_DST)/%.md)
+$(TUTORIALS):
+	@if [ -z "$<" ]; then echo "No dependency specified for $@"; exit 1; fi
 	@echo "$<  ==>  $@"
 	@PYTHONPATH=_repos/sel4/capdl/python-capdl-tool \
 	  $(TUTES_REPO)/template.py --docsite --out-dir $(TUTES_DST) --tut-file $<
 
-# Filter out files that are docsite pages and not in the tutorials repo
-TUTORIALS:= $(filter-out index.md get-the-tutorials.md how-to-seL4.md how-to-CAmkES.md \
-                         how-to-libs.md pathways.md setting-up.md seL4-end.md,\
-												 $(notdir $(wildcard Tutorials/*.md)))
 .PHONY: tutorials
-tutorials: $(TUTES_DST) ${TUTORIALS:%=$(TUTES_DST)/%}
+tutorials: $(TUTES_DST) $(TUTORIALS)
 
 PROCESS_MDBOOK = tools/process-mdbook.py
 MICROKIT_TUT_DST = _processed/microkit-tutorial
