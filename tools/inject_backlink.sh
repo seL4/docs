@@ -19,4 +19,4 @@ TOC="$1/toc.js"
 
 LINK='<li style="margin-top: 3rem;" class="part-title"><a href="../">Back to seL4 docsite</a>'
 
-sed -i .bak "s|</li></ol>|</li>${LINK}</ol>|" "$TOC"
+sed -i.bak "s|</li></ol>|</li>${LINK}</ol>|" "$TOC"
