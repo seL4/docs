@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-15 03:42:43 +0000 -->
+<!-- Page last generated 2025-07-16 03:41:13 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -213,8 +213,8 @@ ninja
 
 <details>
   <summary><em>Hint:</em> tutorial solutions</summary>
-  <p><br />
-All tutorials come with complete solutions. To get solutions run:</p>
+
+  <p>All tutorials come with complete solutions. To get solutions run:</p>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
@@ -235,7 +235,7 @@ ninja
 
 <p>When you first run this tutorial, you should see the following output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<pre><code class="language-log">Booting all finished, dropped to user space
 Node 0 of 1
 IOPT levels:     4294967295
 IPC buffer:      0x57f000
@@ -248,8 +248,8 @@ Initial thread domain: 0
 Initial thread cnode size: 12
 libraries-3: vspace_reserve_range_aligned@vspace.h:621 Not implemented
 libraries-3: main@main.c:117 [Cond failed: virtual_reservation.res == NULL]
-	Failed to reserve a chunk of memory.
-</code></pre></div></div>
+    Failed to reserve a chunk of memory.
+</code></pre>
 
 <h3 id="virtual-memory-management">Virtual memory management</h3>
 
@@ -291,13 +291,14 @@ function may seem tedious, it’s doing some important things.</p>
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">sel4utils_bootstrap_vspace_with_bootinfo_leaky</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vspace</span><span class="p">,</span>
                                                            <span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="n">simple_get_pd</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="n">info</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, you should see a different error:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [handleUnknownSyscall/106 T0xffffff801ffb5400 "libraries-3" @40139e]: SysDebugNameThread: cap is not a TCB, halting&gt;&gt;
+<pre><code class="language-log">&lt;&lt;seL4(CPU 0) [handleUnknownSyscall/106 T0xffffff801ffb5400 "libraries-3" @40139e]: SysDebugNameThread: cap is not a TCB, halting&gt;&gt;
 halting...
-</code></pre></div></div>
+</code></pre>
 
 <h3 id="configure-a-process">Configure a process</h3>
 
@@ -335,14 +336,15 @@ thread.</p>
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">sel4utils_process_config_t</span> <span class="n">config</span> <span class="o">=</span> <span class="n">process_config_default_simple</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="n">APP_IMAGE_NAME</span><span class="p">,</span> <span class="n">APP_PRIORITY</span><span class="p">);</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">sel4utils_configure_process_custom</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_process</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vspace</span><span class="p">,</span> <span class="n">config</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, you should see a different error:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> libraries-3: main@main.c:196 [Cond failed: new_ep_cap == 0]
-	Failed to mint a badged copy of the IPC endpoint into the new thread's CSpace.
-	sel4utils_mint_cap_to_process takes a cspacepath_t: double check what you passed.
-</code></pre></div></div>
+<pre><code class="language-log"> libraries-3: main@main.c:196 [Cond failed: new_ep_cap == 0]
+    Failed to mint a badged copy of the IPC endpoint into the new thread's CSpace.
+    sel4utils_mint_cap_to_process takes a cspacepath_t: double check what you passed.
+</code></pre>
 
 <h3 id="get-a-cspacepath">Get a <code class="language-plaintext highlighter-rouge">cspacepath</code></h3>
 
@@ -396,6 +398,7 @@ wouldn’t know who was whom.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">vka_cspace_make_path</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="n">ep_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ep_cap_path</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, the output should not change.</p>
@@ -432,15 +435,16 @@ free slot that the VKA library found for us.</p>
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">new_ep_cap</span> <span class="o">=</span> <span class="n">sel4utils_mint_cap_to_process</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_process</span><span class="p">,</span> <span class="n">ep_cap_path</span><span class="p">,</span>
                                                <span class="n">seL4_AllRights</span><span class="p">,</span> <span class="n">EP_BADGE</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, the output should look something like:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
+<pre><code class="language-log">NEW CAP SLOT: 6ac.
 main: hello world
 libraries-3: main@main.c:247 [Cond failed: sender_badge != EP_BADGE]
-	The badge we received from the new thread didn't match our expectation
-</code></pre></div></div>
+    The badge we received from the new thread didn't match our expectation
+</code></pre>
 
 <h3 id="spawn-a-process">Spawn a process</h3>
 
@@ -488,19 +492,20 @@ communicate with us, we can let it run. Complete this step and proceed.</p>
 
     <span class="n">error</span> <span class="o">=</span> <span class="n">sel4utils_spawn_process_v</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_process</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vspace</span><span class="p">,</span> <span class="n">argc</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span><span class="o">**</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, you should be able to see the second process running. The output should
 be as follows:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NEW CAP SLOT: 6ac.
+<pre><code class="language-log">NEW CAP SLOT: 6ac.
 process_2: hey hey hey
 main@app.c:67 [Cond failed: msg != ~MSG_DATA]
-	Unexpected response from root thread.
+    Unexpected response from root thread.
 main: hello world
 libraries-3: main@main.c:255 [Cond failed: sender_badge != EP_BADGE]
-	The badge we received from the new thread didn't match our expectation.
-</code></pre></div></div>
+    The badge we received from the new thread didn't match our expectation.
+</code></pre>
 
 <h3 id="receive-a-message">Receive a message</h3>
 
@@ -530,6 +535,7 @@ Then we verify the fidelity of the data that was transmitted.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">tag</span> <span class="o">=</span> <span class="n">seL4_Recv</span><span class="p">(</span><span class="n">ep_cap_path</span><span class="p">.</span><span class="n">capPtr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sender_badge</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, the badge error should no longer be visible.</p>
@@ -563,6 +569,7 @@ message sent by the new thread.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_ReplyRecv</span><span class="p">(</span><span class="n">ep_cap_path</span><span class="p">.</span><span class="n">capPtr</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sender_badge</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, the output should not change.</p>
@@ -598,13 +605,14 @@ that was sent, and that’s the end.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">tag</span> <span class="o">=</span> <span class="n">seL4_Call</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="n">tag</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 <p>On success, you should see the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>process_2: hey hey hey
+<pre><code class="language-log">process_2: hey hey hey
 main: got a message 0x6161 from 0x61
 process_2: got a reply: 0xffffffffffff9e9e
-</code></pre></div></div>
+</code></pre>
 
 <p>That’s it for this tutorial.</p>
 

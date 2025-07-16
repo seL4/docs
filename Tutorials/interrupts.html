@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-15 03:42:43 +0000 -->
+<!-- Page last generated 2025-07-16 03:41:13 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -161,9 +161,11 @@
 -->
 
 <h1 id="interrupts">Interrupts</h1>
+
 <p>This tutorial covers seL4 interrupts.</p>
 
 <p>You will learn:</p>
+
 <ol>
   <li>The purpose of the IRQControl capability.</li>
   <li>How to obtain capabilities for specific interrupts.</li>
@@ -191,8 +193,8 @@ ninja
 
 <details>
   <summary><em>Hint:</em> tutorial solutions</summary>
-  <p><br />
-All tutorials come with complete solutions. To get solutions run:</p>
+
+  <p>All tutorials come with complete solutions. To get solutions run:</p>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
@@ -207,24 +209,24 @@ ninja
   <p>Answers are also available in drop down menus under each section.</p>
 </details>
 
-<h2 id="capdl-loader">CapDL Loader</h2>
+<h2 id="capdl-loader">capDL Loader</h2>
 
 <p>This tutorial uses the <em>capDL loader</em>, a root task which allocates statically
  configured objects and capabilities.</p>
 
 <details>
-  <summary>Get CapDL</summary>
+  <summary>Get capDL</summary>
   <p>The capDL loader parses
 a static description of the system and the relevant ELF binaries.
 It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
 but we also use it in the tutorials to reduce redundant code.
 The program that you construct will end up with its own CSpace and VSpace, which are separate
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
-in applications loaded by the capDL loader.
-<br />
-More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.
-<br />
-For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
+in applications loaded by the capDL loader.</p>
+
+  <p>More information about capDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.</p>
+
+  <p>For this tutorial clone the <a href="https://github.com/sel4/capdl">capDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
 
 <h2 id="background">Background</h2>
@@ -243,8 +245,8 @@ irq capabilities being removed.</p>
 invoking the IRQControl capability, with architecture specific parameters. Below is an
 example of obtaining an IRQHandler.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Get a capability <span class="k">for </span>irq number 7 and place it <span class="k">in </span>cslot 10 <span class="k">in </span>a single-level cspace.
-error <span class="o">=</span> seL4_IRQControl_Get<span class="o">(</span>seL4_IRQControl, 7, cspace_root, 10, seL4_WordBits<span class="o">)</span><span class="p">;</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Get a capability for irq number 7 and place it in cslot 10 in a single-level cspace.</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">seL4_IRQControl_Get</span><span class="p">(</span><span class="n">seL4_IRQControl</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">cspace_root</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">seL4_WordBits</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>There are a variety of different invocations to obtain irq capabilities which are hardware
@@ -260,7 +262,8 @@ dependent, including:</p>
 
 <p>Interrupts are received by registering a capability to a notification object
 with the IRQHandler capability for that irq, as follows:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seL4_IRQHandler_SetNotification<span class="o">(</span>irq_handler, notification<span class="o">)</span><span class="p">;</span>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seL4_IRQHandler_SetNotification</span><span class="p">(</span><span class="n">irq_handler</span><span class="p">,</span> <span class="n">notification</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>On success, this call will result in signals being delivered to the notification object when
@@ -298,12 +301,12 @@ makes a single request.</p>
 
 <p>On successful initialisation of the tutorial, you will see the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client: hey hey hey
+<pre><code class="language-log">timer client: hey hey hey
 timer: got a message from 61 to sleep 2 seconds
 &lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xe8265600 "tcb_timer" @84e4]: Attempted to invoke a null cap #9.&gt;&gt;
 main@timer.c:78 [Cond failed: error]
 	Failed to ack irq
-</code></pre></div></div>
+</code></pre>
 
 <p>The timer driver we are using emits an interrupt in the <code class="language-plaintext highlighter-rouge">TTC0_TIMER1_IRQ</code> number.</p>
 
@@ -312,8 +315,8 @@ main@timer.c:78 [Cond failed: error]
 <p><strong>Exercise</strong> Invoke <code class="language-plaintext highlighter-rouge">irq_control</code>, which contains the <code class="language-plaintext highlighter-rouge">seL4_IRQControl</code> capability,
 the place the <code class="language-plaintext highlighter-rouge">IRQHandler</code> capability for <code class="language-plaintext highlighter-rouge">TTC0_TIMER1_IRQ</code> into the <code class="language-plaintext highlighter-rouge">irq_handler</code> CSlot.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* TODO invoke irq_control to put the interrupt for TTC0_TIMER1_IRQ in
-       cslot irq_handler (depth is seL4_WordBits) */
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* TODO invoke irq_control to put the interrupt for TTC0_TIMER1_IRQ in
+       cslot irq_handler (depth is seL4_WordBits) */</span>
 
 </code></pre></div></div>
 
@@ -330,16 +333,17 @@ the place the <code class="language-plaintext highlighter-rouge">IRQHandler</cod
 <p>On success, you should see the following output, without the error message that occurred earlier,
 as the irq_handle capability is now valid:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undelivered IRQ: 42
-</code></pre></div></div>
+<pre><code class="language-log">Undelivered IRQ: 42
+</code></pre>
 
 <p>This is a warning message from the kernel that an IRQ was recieved for irq number 42, but no
 notification capability is set to sent a signal to.</p>
 
 <h3 id="set-ntfn">Set NTFN</h3>
+
 <p><strong>Exercise</strong> Now set the notification capability (<code class="language-plaintext highlighter-rouge">ntfn</code>) by invoking the irq handler.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     /* TODO set ntfn as the notification for irq_handler */
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="cm">/* TODO set ntfn as the notification for irq_handler */</span>
 
 </code></pre></div></div>
 
@@ -355,8 +359,8 @@ notification capability is set to sent a signal to.</p>
 
 <p>Now the output will be:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tick
-</code></pre></div></div>
+<pre><code class="language-log">Tick
+</code></pre>
 
 <p>Only one interrupt is delivered, as the interrupt has not been acknowledged. The timer driver is
 programmed to emit an interrupt every millisecond, so we need to count 2000 interrupts
@@ -366,7 +370,7 @@ before replying to the client.</p>
 
 <p><strong>Exercise</strong> Acknowledge the interrupt after handling it in the timer driver.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        /* TODO ack the interrupt */
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="cm">/* TODO ack the interrupt */</span>
 
 </code></pre></div></div>
 
@@ -382,8 +386,8 @@ before replying to the client.</p>
 
 <p>Now the timer interrupts continue to come in, and the reply is delivered to the client.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timer client wakes up
-</code></pre></div></div>
+<pre><code class="language-log">timer client wakes up
+</code></pre>
 
 <p>That’s it for this tutorial.</p>
 
@@ -403,7 +407,7 @@ before replying to the client.</p>
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
     <ul id="toc" class="section-nav">
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#capdl-loader">CapDL Loader</a></li>
+<li class="toc-entry toc-h2"><a href="#capdl-loader">capDL Loader</a></li>
 <li class="toc-entry toc-h2"><a href="#background">Background</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#irqcontrol">IRQControl</a></li>

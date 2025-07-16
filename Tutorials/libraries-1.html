@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-15 03:42:43 +0000 -->
+<!-- Page last generated 2025-07-16 03:41:13 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -179,9 +179,10 @@ it addresses conceptual problems for two different types of developers:</p>
 for your benefit so you can grasp some of the basic data structures.</p>
 
 <p>Outcomes:</p>
+
 <ul>
   <li>Understand the kernel’s startup procedure.</li>
-  <li>Understand that the kernel centers around certain objects and
+  <li>Understand that the kernel centres around certain objects and
       capabilities to those objects.</li>
   <li>Understand that libraries exist to automate the very
       fine-grained nature of the seL4 API, and get a rough idea of
@@ -215,8 +216,8 @@ ninja
 
 <details>
   <summary><em>Hint:</em> tutorial solutions</summary>
-  <p><br />
-All tutorials come with complete solutions. To get solutions run:</p>
+
+  <p>All tutorials come with complete solutions. To get solutions run:</p>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
@@ -235,10 +236,10 @@ ninja
 
 <p>When you first run the tutorial, you should see the following output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
+<pre><code class="language-log">Booting all finished, dropped to user space
 main@main.c:89 [Cond failed: info == NULL]
 Failed to get bootinfo.
-</code></pre></div></div>
+</code></pre>
 
 <h3 id="obtain-bootinfo">Obtain BootInfo</h3>
 
@@ -265,7 +266,6 @@ It also sets up the IPC buffer so that it can perform some syscalls such as <cod
      * seL4_BootInfo* platsupport_get_bootinfo(void);
      * @return Pointer to the bootinfo, NULL on failure
      */</span>
-<span class="err">}</span>
 </code></pre></div></div>
 
 <details>
@@ -273,36 +273,41 @@ It also sets up the IPC buffer so that it can perform some syscalls such as <cod
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">info</span> <span class="o">=</span> <span class="n">platsupport_get_bootinfo</span><span class="p">();</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On success, you should see the following:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libraries-1: main@main.c:124 [Cond failed: allocman == NULL]
-	Failed to initialize alloc manager.
-	Memory pool sufficiently sized?
-	Memory pool pointer valid?
-</code></pre></div></div>
+
+<pre><code class="language-log">libraries-1: main@main.c:124 [Cond failed: allocman == NULL]
+    Failed to initialize alloc manager.
+    Memory pool sufficiently sized?
+    Memory pool pointer valid?
+</code></pre>
 
 <h3 id="initialise-simple">Initialise simple</h3>
 
 <p><code class="language-plaintext highlighter-rouge">libsel4simple</code> provides an abstraction for the boot environment of a thread.
-You need to initialize it with some default state before using it.</p>
+You need to initialise it with some default state before using it.</p>
+
 <ul>
-  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h">https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h</a>
-    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
- <span class="cm">/* TASK 2: initialise simple object */</span>
- <span class="cm">/* hint: simple_default_init_bootinfo()
-  * void simple_default_init_bootinfo(simple_t *simple, seL4_BootInfo *bi);
-  * @param simple Structure for the simple interface object. This gets initialised.
-  * @param bi Pointer to the bootinfo describing what resources are available
-  */</span>
-</code></pre></div>    </div>
-  </li>
+  <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h">https://github.com/seL4/seL4_libs/blob/master/libsel4simple-default/include/simple-default/simple-default.h</a></li>
 </ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+   <span class="cm">/* TASK 2: initialise simple object */</span>
+   <span class="cm">/* hint: simple_default_init_bootinfo()
+    * void simple_default_init_bootinfo(simple_t *simple, seL4_BootInfo *bi);
+    * @param simple Structure for the simple interface object. This gets initialised.
+    * @param bi Pointer to the bootinfo describing what resources are available
+    */</span>
+</code></pre></div></div>
+
 <details>
   <summary><em>Quick solution</em></summary>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">simple_default_init_bootinfo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="n">info</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 <p>On successful completion of this task, the output should not change.</p>
 
@@ -324,6 +329,7 @@ You need to initialize it with some default state before using it.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">simple_print</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <ul>
@@ -332,7 +338,7 @@ You need to initialize it with some default state before using it.</p>
 
 <p>The error message should remain, but your output should now also contain something like:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Node 0 of 1
+<pre><code class="language-log">Node 0 of 1
 IOPT levels:     4294967295
 IPC buffer:      0x52c000
 Empty slots:     [406 --&gt; 4096)
@@ -343,7 +349,7 @@ untypeds:        [316 --&gt; 406)
 Initial thread domain: 0
 Initial thread cnode size:
 libraries-1: main@main.c:126 [Cond failed: allocman == NULL]
-</code></pre></div></div>
+</code></pre>
 
 <h3 id="initialise-an-allocator">Initialise an allocator</h3>
 
@@ -356,6 +362,7 @@ don’t go through that procedure, but you’ll encounter it later. For now,
 use the allocman and VKA allocation system. The allocman library
 requires some initial memory to bootstrap its metadata. Complete this
 step.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/bootstrap.h">https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/bootstrap.h</a></li>
 </ul>
@@ -376,14 +383,15 @@ step.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">allocman</span> <span class="o">=</span> <span class="n">bootstrap_use_current_simple</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">,</span> <span class="n">ALLOCATOR_STATIC_POOL_SIZE</span><span class="p">,</span> <span class="n">allocator_mem_pool</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>The output should now be as follows:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "libraries-1" @401303]: Attempted to invoke a null cap #0.&gt;&gt;
+<pre><code class="language-log">&lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff801ffb5400 "libraries-1" @401303]: Attempted to invoke a null cap #0.&gt;&gt;
 libraries-1: main@main.c:199 [Err seL4_InvalidCapability]:
-	Failed to set the priority for the new TCB object.
-</code></pre></div></div>
+    Failed to set the priority for the new TCB object.
+</code></pre>
 
 <h3 id="obtain-a-generic-allocation-interface-vka">Obtain a generic allocation interface (vka)</h3>
 
@@ -394,6 +402,7 @@ seL4 considers all memory that hasn’t been explicitly earmarked for a
 purpose to be “untyped”, and in order to repurpose any memory into a
 useful object, you must give it an seL4-specific type. This is retyping,
 and the VKA library simplifies this for you, among other things.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/vka.h">https://github.com/seL4/seL4_libs/blob/master/libsel4allocman/include/allocman/vka.h</a></li>
 </ul>
@@ -412,6 +421,7 @@ and the VKA library simplifies this for you, among other things.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">allocman_make_vka</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="n">allocman</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>On successful completion this task, the output should not change.</p>
@@ -433,6 +443,7 @@ and the VKA library simplifies this for you, among other things.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">cspace_cap</span> <span class="o">=</span> <span class="n">simple_get_cnode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>This is where the differences between seL4 and contemporary kernels
@@ -476,6 +487,7 @@ a CSpace.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">pd_cap</span> <span class="o">=</span> <span class="n">simple_get_pd</span><span class="p">(</span><span class="o">&amp;</span><span class="n">simple</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>Just as in the previous step, you were made to grab a reference to the
@@ -505,6 +517,7 @@ to the root of your thread’s VSpace.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">vka_alloc_tcb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vka</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tcb_object</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>In order to manage the threads that are created in seL4, the seL4 kernel
@@ -521,10 +534,12 @@ still manually fill it out.</p>
 
 <p>After completing this task, the errors should disappear, and you should see the following
 output:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main: hello world
-</code></pre></div></div>
+
+<pre><code class="language-log">main: hello world
+</code></pre>
 
 <h3 id="configure-the-new-tcb">Configure the new TCB</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
    <span class="cm">/* TASK 9: initialise the new TCB */</span>
     <span class="cm">/* hint 1: seL4_TCB_Configure()
@@ -551,6 +566,7 @@ output:</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Configure</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="n">seL4_CapNull</span><span class="p">,</span>  <span class="n">cspace_cap</span><span class="p">,</span> <span class="n">seL4_NilData</span><span class="p">,</span> <span class="n">pd_cap</span><span class="p">,</span> <span class="n">seL4_NilData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>You must create a new VSpace for your new thread if you need it to
@@ -569,6 +585,7 @@ main thread’s CSpace and VSpace.</p>
 will give your new thread the same priority as the current thread, allowing it
 to be run the next time the seL4 scheduler is invoked.  The seL4 scheduler is invoked
 everytime there is a kernel timer tick.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml">https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml</a></li>
 </ul>
@@ -576,6 +593,7 @@ everytime there is a kernel timer tick.</p>
 <p>On successful completion this task, the output should not change.</p>
 
 <h3 id="name-the-new-tcb">Name the new TCB</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 10: give the new thread a name */</span>
     <span class="cm">/* hint: we've done thread naming before */</span>
@@ -586,6 +604,7 @@ everytime there is a kernel timer tick.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">NAME_THREAD</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="s">"libraries-1: thread_2"</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>This is a convenience function – sets a name string for the TCB object.</p>
@@ -593,6 +612,7 @@ everytime there is a kernel timer tick.</p>
 <p>On successful completion this task, the output should not change.</p>
 
 <h3 id="set-the-instruction-pointer">Set the instruction pointer</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/*
      * set start up registers for the new thread:
@@ -614,6 +634,7 @@ everytime there is a kernel timer tick.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="n">thread_2</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>Pay attention to the line that precedes this particular task – the line
@@ -623,12 +644,15 @@ manually. That includes the new thread’s initial register contents. You
 can set the value of the stack pointer, the instruction pointer, and if
 you want to get a little creative, you can pass some initial data to
 your new thread through its registers.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h</a></li>
 </ul>
 
 <p>On successful completion this task, the output should not change.</p>
+
 <h3 id="set-the-stack-pointer">Set the stack pointer</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 12: set stack pointer for the new thread */</span>
     <span class="cm">/* hint 1: sel4utils_set_stack_pointer()
@@ -645,12 +669,14 @@ your new thread through its registers.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="n">thread_2_stack_top</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>This TASK is just some pointer arithmetic. The cautionary note that the
 stack grows down is meant to make you think about the arithmetic.
 Processor stacks push new values toward decreasing addresses, so give it
 some thought.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h">https://github.com/seL4/seL4_libs/blob/master/libsel4utils/sel4_arch_include/x86_64/sel4utils/sel4_arch/util.h</a></li>
 </ul>
@@ -658,6 +684,7 @@ some thought.</p>
 <p>On successful completion this task, the output should not change.</p>
 
 <h3 id="write-the-registers">Write the registers</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 13: actually write the TCB registers.  We write 2 registers:
      * instruction pointer is first, stack pointer is second. */</span>
@@ -677,11 +704,13 @@ some thought.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>As explained above, we’ve been filling out our new thread’s TCB for the
 last few operations, so now we’re writing the values we’ve chosen, to
 the TCB object in the kernel.</p>
+
 <ul>
   <li><a href="https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml">https://github.com/seL4/seL4/blob/master/libsel4/include/interfaces/sel4.xml</a></li>
 </ul>
@@ -689,6 +718,7 @@ the TCB object in the kernel.</p>
 <p>On successful completion this task, the output should not change.</p>
 
 <h3 id="start-the-new-thread">Start the new thread</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 14: start the new thread running */</span>
     <span class="cm">/* hint: seL4_TCB_Resume()
@@ -703,6 +733,7 @@ the TCB object in the kernel.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_Resume</span><span class="p">(</span><span class="n">tcb_object</span><span class="p">.</span><span class="n">cptr</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>Finally, we tell the kernel that our new thread is runnable. From here,
@@ -715,11 +746,12 @@ policy.</p>
 </ul>
 
 <p>On successful completion this task, the output should not change.</p>
+
 <h3 id="print-something">Print something</h3>
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     <span class="cm">/* TASK 15: print something */</span>
     <span class="cm">/* hint: printf() */</span>
-<span class="err">}</span>
 </code></pre></div></div>
 
 <details>
@@ -727,6 +759,7 @@ policy.</p>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">printf</span><span class="p">(</span><span class="s">"thread_2: hallo wereld</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>For the sake of confirmation that our new thread was executed by the

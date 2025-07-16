@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-15 03:42:43 +0000 -->
+<!-- Page last generated 2025-07-16 03:41:13 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -176,18 +176,6 @@ CAmkES connector to initialise hardware resources automatically for you.</p>
 hardware details. The solutions to the second part are also included, albeit
 commented out.</p>
 
-<h2 id="initialising">Initialising</h2>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
-<span class="c">#</span>
-<span class="c"># Follow these instructions to initialise the tutorial</span>
-<span class="c"># initialising the build directory with a tutorial exercise</span>
-./init <span class="nt">--tut</span> hello-camkes-timer
-<span class="c"># building the tutorial exercise</span>
-<span class="nb">cd </span>hello-camkes-timer_build
-ninja
-</code></pre></div></div>
-
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ol>
@@ -195,27 +183,29 @@ ninja
   <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-2.html">CAmkES 2</a></li>
 </ol>
 
-<h2 id="capdl-loader">CapDL Loader</h2>
+<h2 id="capdl-loader">capDL Loader</h2>
 
 <p>This tutorial uses the <em>capDL loader</em>, a root task which allocates statically
  configured objects and capabilities.</p>
 
 <details>
-  <summary>Get CapDL</summary>
-  <p>The capDL loader parses
-a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects
-but we also use it in the tutorials to reduce redundant code.
-The program that you construct will end up with its own CSpace and VSpace, which are separate
-from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
-in applications loaded by the capDL loader.
-<br />
-More information about CapDL projects can be found <a href="https://docs.sel4.systems/projects/capdl/">here</a>.
-<br />
-For this tutorial clone the <a href="https://github.com/sel4/capdl">CapDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
+  <summary>Get capDL</summary>
+  <p>The capDL loader parses a static description of the system and the relevant ELF
+binaries. It is primarily used in
+<a href="https://docs.sel4.systems/projects/camkes/">CAmkES</a> projects but we also use it
+in the tutorials to reduce redundant code. The program that you construct will
+end up with its own CSpace and VSpace, which are separate from the root task,
+meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning in applications
+loaded by the capDL loader.</p>
+
+  <p>More information about capDL projects can be found
+<a href="https://docs.sel4.systems/projects/capdl/">here</a>.</p>
+
+  <p>For this tutorial clone the <a href="https://github.com/sel4/capdl">capDL repo</a>. This
+can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 </details>
 
-<h2 id="initialising-1">Initialising</h2>
+<h2 id="initialising">Initialising</h2>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
@@ -229,8 +219,8 @@ ninja
 
 <details>
   <summary><em>Hint:</em> tutorial solutions</summary>
-  <p><br />
-All tutorials come with complete solutions. To get solutions run:</p>
+
+  <p>All tutorials come with complete solutions. To get solutions run:</p>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
@@ -247,14 +237,13 @@ ninja
 <h2 id="exercises---part-1">Exercises - Part 1</h2>
 
 <h3 id="instantiate-a-timer-and-timerbase">Instantiate a Timer and Timerbase</h3>
+
 <p>Start in <code class="language-plaintext highlighter-rouge">hello-camkes-timer.camkes</code>.</p>
 
-<p>Instantiate some components. You’re already given one component instance</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">client</code>. You need to instantiate additional components, a timer driver and
+<p>Instantiate some components. You’re already given one component instance
+— <code class="language-plaintext highlighter-rouge">client</code>. You need to instantiate additional components, a timer driver and
 a component instance representing the timer hardware itself. Look
-in <code class="language-plaintext highlighter-rouge">components/Timer/Timer.camkes</code> for the definitions of the components.</li>
-</ul>
+in <code class="language-plaintext highlighter-rouge">components/Timer/Timer.camkes</code> for the definitions of the components.</p>
 
 <p>Once you open the file, you will notice three different components. The <code class="language-plaintext highlighter-rouge">Timer</code>
 and <code class="language-plaintext highlighter-rouge">Timerbase</code> components represents the timer driver and the timer hardware
@@ -271,69 +260,74 @@ timer.hello);</code> and <code class="language-plaintext highlighter-rouge">time
 file. They assume that the name of the timer ‘‘driver’’ will be <code class="language-plaintext highlighter-rouge">timer</code>. If you
 wish to call your driver something else, you’ll have to change these lines.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 1: component instances */
-    /* hint 1: one hardware component and one driver component
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 1: component instances */</span>
+    <span class="cm">/* hint 1: one hardware component and one driver component
         * hint 2: look at
         * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
-        */
+        */</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 1: component instances */
-    component Timerbase timerbase;
-    component Timer timer;
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 1: component instances */</span>
+    <span class="n">component</span> <span class="n">Timerbase</span> <span class="n">timerbase</span><span class="p">;</span>
+    <span class="n">component</span> <span class="n">Timer</span> <span class="n">timer</span><span class="p">;</span>
 </code></pre></div>  </div>
 </details>
 
 <h3 id="connect-a-timer-driver-component">Connect a timer driver component</h3>
+
 <p>Connect the timer driver component (<code class="language-plaintext highlighter-rouge">Timer</code>) to the timer hardware component
 (<code class="language-plaintext highlighter-rouge">Timerbase</code>). The timer hardware component exposes two interfaces which must
 be connected to the timer driver. One of these represents memory-mapped
 registers. The other represents an interrupt.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 2: connections */
-    /* hint 1: use seL4HardwareMMIO to connect device memory
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 2: connections */</span>
+    <span class="cm">/* hint 1: use seL4HardwareMMIO to connect device memory
         * hint 2: use seL4HardwareInterrupt to connect interrupt
         * hint 3: look at
         * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
-        */
+        */</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 2: connections */
-    connection seL4HardwareMMIO timer_mem(from timer.reg, to timerbase.reg);
-    connection seL4HardwareInterrupt timer_irq(from timerbase.irq, to timer.irq);
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 2: connections */</span>
+    <span class="n">connection</span> <span class="n">seL4HardwareMMIO</span> <span class="nf">timer_mem</span><span class="p">(</span><span class="n">from</span> <span class="n">timer</span><span class="p">.</span><span class="n">reg</span><span class="p">,</span> <span class="n">to</span> <span class="n">timerbase</span><span class="p">.</span><span class="n">reg</span><span class="p">);</span>
+    <span class="n">connection</span> <span class="n">seL4HardwareInterrupt</span> <span class="nf">timer_irq</span><span class="p">(</span><span class="n">from</span> <span class="n">timerbase</span><span class="p">.</span><span class="n">irq</span><span class="p">,</span> <span class="n">to</span> <span class="n">timer</span><span class="p">.</span><span class="n">irq</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="configure-a-timer-hardware-component-instance">Configure a timer hardware component instance</h3>
+
 <p>Configure the timer hardware component instance with device-specific info. The
 physical address of the timer’s memory-mapped registers, and its IRQ number
 must both be configured.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 3: hardware resources */
-    /* Timer and Timerbase:
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 3: hardware resources */</span>
+    <span class="cm">/* Timer and Timerbase:
         * hint 1: find out the device memory address and IRQ number from the hardware data sheet
         * hint 2: look at
         * https://docs.sel4.systems/projects/camkes/manual.html#hardware-components
-        */
+        */</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 1, TASK 3: hardware resources */
-    timerbase.reg_paddr = 0xF8001000;   // paddr of mmio registers
-    timerbase.reg_size = 0x1000;        // size of mmio registers
-    timerbase.irq_irq_number = 42;      // timer irq number
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 3: hardware resources */</span>
+    <span class="n">timerbase</span><span class="p">.</span><span class="n">reg_paddr</span> <span class="o">=</span> <span class="mh">0xF8001000</span><span class="p">;</span>   <span class="c1">// paddr of mmio registers</span>
+    <span class="n">timerbase</span><span class="p">.</span><span class="n">reg_size</span> <span class="o">=</span> <span class="mh">0x1000</span><span class="p">;</span>        <span class="c1">// size of mmio registers</span>
+    <span class="n">timerbase</span><span class="p">.</span><span class="n">irq_irq_number</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>      <span class="c1">// timer irq number</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="call-into-a-supplied-driver-to-handle-the-interrupt">Call into a supplied driver to handle the interrupt</h3>
+
 <p>Now open <code class="language-plaintext highlighter-rouge">components/Timer/src/timer.c</code>.</p>
 
 <p>We’ll start by completing the <code class="language-plaintext highlighter-rouge">irq_handle</code> function, which is called in
@@ -362,9 +356,11 @@ inform the driver that an interrupt has occurred.</p>
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 4: call into the supplied driver to handle the interrupt. */</span>
     <span class="n">timer_handle_irq</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="stop-a-timer">Stop a timer</h3>
+
 <p>Stop the timer from running. The <code class="language-plaintext highlighter-rouge">timer_stop</code> function will be helpful here.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 5: stop the timer. */</span>
@@ -378,9 +374,11 @@ inform the driver that an interrupt has occurred.</p>
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 1, TASK 5: stop the timer. */</span>
     <span class="n">timer_stop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="acknowledge-an-interrupt">Acknowledge an interrupt</h3>
+
 <p>The interrupt now needs to be acknowledged.</p>
 
 <p>CAmkES generates the seL4-specific code for ack-ing an interrupt and provides a
@@ -399,9 +397,11 @@ connected with <code class="language-plaintext highlighter-rouge">seL4HardwareIn
     <span class="n">error</span> <span class="o">=</span> <span class="n">irq_acknowledge</span><span class="p">();</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"failed to acknowledge interrupt"</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="get-a-timer-handler">Get a timer handler</h3>
+
 <p>Now we’ll complete <code class="language-plaintext highlighter-rouge">hello__init</code> - a function which is called once
 before the component’s interfaces start running.</p>
 
@@ -422,9 +422,11 @@ handle to the driver in the global variable <code class="language-plaintext high
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">timer_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">,</span> <span class="n">DEFAULT_TIMER_ID</span><span class="p">,</span> <span class="n">reg</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="start-a-timer">Start a timer</h3>
+
 <p>After initialising the timer, we now need to start the timer. Do so by calling
 <code class="language-plaintext highlighter-rouge">timer_start</code> and passing the handle to the driver.</p>
 
@@ -440,9 +442,11 @@ handle to the driver in the global variable <code class="language-plaintext high
     <span class="n">error</span> <span class="o">=</span> <span class="n">timer_start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
-<h3 id="implement-a-rpc-interface">Implement a RPC interface</h3>
+<h3 id="implement-an-rpc-interface">Implement an RPC interface</h3>
+
 <p>Note that this task is to understand the existing code. You won’t have
 to modify anything for this task.</p>
 
@@ -464,6 +468,7 @@ need to implement is called <code class="language-plaintext highlighter-rouge">h
     * hint 7: look at https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
     */</span>
 </code></pre></div></div>
+
 <details>
   <summary><em>Quick solution</em></summary>
 
@@ -471,9 +476,11 @@ need to implement is called <code class="language-plaintext highlighter-rouge">h
 <span class="kt">void</span> <span class="nf">hello_sleep</span><span class="p">(</span><span class="kt">int</span> <span class="n">sec</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="set-a-timer-interrupt">Set a timer interrupt</h3>
+
 <p>Tell the timer to interrupt after the given number of seconds. The
 <code class="language-plaintext highlighter-rouge">timer_set_timeout</code> function from the included driver will help. Note that it
 expects its time argument to be given in nanoseconds.</p>
@@ -491,6 +498,7 @@ expects its time argument to be given in nanoseconds.</p>
     <span class="n">error</span> <span class="o">=</span> <span class="n">timer_set_timeout</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">,</span> <span class="n">sec</span> <span class="o">*</span> <span class="n">NS_IN_SECOND</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
     <span class="n">assert</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <p>Note the existing code in <code class="language-plaintext highlighter-rouge">hello_sleep</code>. It waits on a binary semaphore.
@@ -500,10 +508,11 @@ the function to return after the delay.</p>
 
 <p>Expect the following output with a 2 second delay between the last 2
 lines:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting the client
+
+<pre><code class="language-log">Starting the client
 ------Sleep for 2 seconds------
 After the client: wakeup
-</code></pre></div></div>
+</code></pre>
 
 <h2 id="exercises---part-2">Exercises - Part 2</h2>
 
@@ -512,14 +521,15 @@ hardware component to initialise hardware resources, this part of the tutorial
 will teach you how to use the <code class="language-plaintext highlighter-rouge">seL4DTBHardware</code> connector to do that
 automatically.</p>
 
-<p>The connector requires a devicetree blob which describes an ARM platform.
+<p>The connector requires a device tree blob which describes an ARM platform.
 Additionally, the blob’s interrupt fields also need to follow the same format
-of the ARM GIC v1 and v2. There are devicetree source files bundled with the
+of the ARM GIC v1 and v2. There are device tree source files bundled with the
 kernel, look in the <code class="language-plaintext highlighter-rouge">tools/dts/</code> folder of the kernel sources. If a suitable
-devicetree blob is not available for your platform, then do not proceed with
+device tree blob is not available for your platform, then do not proceed with
 the tutorial.</p>
 
 <h3 id="instantiate-a-timerdtb-component">Instantiate a TimerDTB component</h3>
+
 <p>Navigate to the <code class="language-plaintext highlighter-rouge">hello-camkes-timer.camkes</code> file.</p>
 
 <p>Remove the <code class="language-plaintext highlighter-rouge">Timerbase</code> and <code class="language-plaintext highlighter-rouge">Timer</code> component instantiations and instantiate a
@@ -527,75 +537,81 @@ the tutorial.</p>
 hello_timer(from client.hello, to timer.hello);</code> and <code class="language-plaintext highlighter-rouge">timer.sem_value = 0;</code>
 lines if necessary.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 2, TASK 1: component instances */
-    /* hint 1: a single TimerDTB component
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 1: component instances */</span>
+    <span class="cm">/* hint 1: a single TimerDTB component
     * hint 2: look at
     * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
-    */
+    */</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 2, TASK 1: component instances */
-    //uncomment the line below
-//    component TimerDTB timer;
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 1: component instances */</span>
+    <span class="c1">//uncomment the line below</span>
+<span class="c1">//    component TimerDTB timer;</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="connect-interfaces-using-the-sel4dtbhardware-connector">Connect interfaces using the seL4DTBHardware connector</h3>
+
 <p>Remove the <code class="language-plaintext highlighter-rouge">seL4HardwareMMIO</code> and <code class="language-plaintext highlighter-rouge">seL4HardwareInterrupt</code> connections. Connect
 the two interfaces inside the <code class="language-plaintext highlighter-rouge">TimerDTB</code> component with the <code class="language-plaintext highlighter-rouge">seL4DTBHardware</code>
 connector.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 2, TASK 2: connections */
-    /* hint 1: connect the dummy_source and timer interfaces
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 2: connections */</span>
+    <span class="cm">/* hint 1: connect the dummy_source and timer interfaces
     * hint 2: the dummy_source should be the 'from' end
     * hint 3: look at
     * https://docs.sel4.systems/projects/camkes/manual.html#creating-an-application
-    */
+    */</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      /* Part 2, TASK 2: connections */
-      // uncomment the line below
-//    connection seL4DTBHardware timer_dtb(from timer.dummy_source, to timer.tmr);
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="cm">/* Part 2, TASK 2: connections */</span>
+      <span class="c1">// uncomment the line below</span>
+<span class="c1">//    connection seL4DTBHardware timer_dtb(from timer.dummy_source, to timer.tmr);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="configure-the-timerdtb-component">Configure the TimerDTB component</h3>
+
 <p>Before opening <code class="language-plaintext highlighter-rouge">components/Timer/Timer.camkes</code>, remove the <code class="language-plaintext highlighter-rouge">Timerbase</code> settings
 inside the configurations block.</p>
 
 <p>Configure the <code class="language-plaintext highlighter-rouge">TimerDTB</code> component to pass in the correct DTB path to a timer
 to the connector and also initialise the interrupt resources for the timer.
-This will allow the connector to read a device node from the devicetree blob
+This will allow the connector to read a device node from the device tree blob
 and grab the necessary data to initialise hardware resources. More
 specifically, it reads the registers field and optionally the interrupts field
 to allocate memory and interrupts.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Part 2, TASK 3: hardware resources */
-    /* TimerDTB:
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 3: hardware resources */</span>
+    <span class="cm">/* TimerDTB:
      * hint 1: look in the DTB/DTS for the path of a timer
      * hint 2: set the 'dtb' setting for the tmr interface in the TimerDTB component,
      *         e.g. foo.dtb = dtb({"path" : "/bar"});
      * hint 3: set the 'generate_interrupts' setting to 1
-     */
+     */</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     /* Part 2, TASK 3: hardware resources */
-     // uncomment the lines below
-//    tmr.dtb = dtb({"path" : "/amba/timer@f8001000"});   // path of the timer in the DTB
-//    tmr.generate_interrupts = 1;                        // tell seL4DTBHardware to init interrupts
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="cm">/* Part 2, TASK 3: hardware resources */</span>
+     <span class="c1">// uncomment the lines below</span>
+<span class="c1">//    tmr.dtb = dtb({"path" : "/amba/timer@f8001000"});   // path of the timer in the DTB</span>
+<span class="c1">//    tmr.generate_interrupts = 1;                        // tell seL4DTBHardware to init interrupts</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="handle-the-interrupt">Handle the interrupt</h3>
+
 <p>Move to <code class="language-plaintext highlighter-rouge">components/TimerDTB/src/timerdtb.c</code>.</p>
 
 <p>Similar to part one, we’ll start with the <code class="language-plaintext highlighter-rouge">tmr_irq_handle</code> function. This
@@ -627,9 +643,11 @@ included driver in <code class="language-plaintext highlighter-rouge">timer_driv
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 4: call into the supplied driver to handle the interrupt. */</span>
     <span class="n">timer_handle_irq</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="stop-a-timer-1">Stop a timer</h3>
+
 <p>Stop the timer from running. The <code class="language-plaintext highlighter-rouge">timer_stop</code> function will be helpful here.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 5: stop the timer. */</span>
@@ -643,9 +661,11 @@ included driver in <code class="language-plaintext highlighter-rouge">timer_driv
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Part 2, TASK 5: stop the timer. */</span>
     <span class="n">timer_stop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer_drv</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="acknowledge-the-interrupt">Acknowledge the interrupt</h3>
+
 <p>Again, the interrupt now has to be acknowledged.</p>
 
 <p>For the <code class="language-plaintext highlighter-rouge">seL4DTBHardware</code> connector, CAmkES also generates and provides a
@@ -668,6 +688,7 @@ you wish to acknowledge.</p>
     <span class="n">error</span> <span class="o">=</span> <span class="n">tmr_irq_acknowledge</span><span class="p">(</span><span class="n">irq</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"failed to acknowledge interrupt"</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="task-7---10">TASK 7 - 10</h3>
@@ -691,10 +712,9 @@ you wish to acknowledge.</p>
     
 <div class="sidebar-toc hidden-xs hidden-sm col-md-3 col-lg-3">
     <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h2"><a href="#capdl-loader">CapDL Loader</a></li>
-<li class="toc-entry toc-h2"><a href="#initialising-1">Initialising</a></li>
+<li class="toc-entry toc-h2"><a href="#capdl-loader">capDL Loader</a></li>
+<li class="toc-entry toc-h2"><a href="#initialising">Initialising</a></li>
 <li class="toc-entry toc-h2"><a href="#exercises---part-1">Exercises - Part 1</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#instantiate-a-timer-and-timerbase">Instantiate a Timer and Timerbase</a></li>
@@ -705,7 +725,7 @@ you wish to acknowledge.</p>
 <li class="toc-entry toc-h3"><a href="#acknowledge-an-interrupt">Acknowledge an interrupt</a></li>
 <li class="toc-entry toc-h3"><a href="#get-a-timer-handler">Get a timer handler</a></li>
 <li class="toc-entry toc-h3"><a href="#start-a-timer">Start a timer</a></li>
-<li class="toc-entry toc-h3"><a href="#implement-a-rpc-interface">Implement a RPC interface</a></li>
+<li class="toc-entry toc-h3"><a href="#implement-an-rpc-interface">Implement an RPC interface</a></li>
 <li class="toc-entry toc-h3"><a href="#set-a-timer-interrupt">Set a timer interrupt</a></li>
 </ul>
 </li>

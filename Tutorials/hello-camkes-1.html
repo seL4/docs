@@ -3,7 +3,7 @@
      SPDX-License-Identifier: CC-BY-SA-4.0
      SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 -->
-<!-- Page last generated 2025-07-15 03:42:43 +0000 -->
+<!-- Page last generated 2025-07-16 03:41:13 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -162,11 +162,11 @@
 
 <h1 id="introduction-to-camkes">Introduction to CAmkES</h1>
 
-<p>This tutorial is an introduction to
-CAmkES: bootstrapping a basic static CAmkES application, describing its
-components, and linking them together.</p>
+<p>This tutorial is an introduction to CAmkES: bootstrapping a basic static CAmkES
+application, describing its components, and linking them together.</p>
 
 <p>Outcomes:</p>
+
 <ol>
   <li>Understand the structure of a CAmkES application, as a described,
 well-defined, static system.</li>
@@ -177,6 +177,7 @@ well-defined, static system.</li>
 <p>Use this <a href="https://github.com/seL4/sel4-tutorials/blob/master/docs/CAmkESTutorial.pdf">slide presentation</a> to guide you through the tutorials <a href="https://docs.sel4.systems/Tutorials/hello-camkes-0.html">0</a>, <a href="https://docs.sel4.systems/Tutorials/hello-camkes-1.html">1</a> and <a href="https://docs.sel4.systems/Tutorials/hello-camkes-2.html">2</a>.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
+
 <ol>
   <li><a href="https://docs.sel4.systems/Tutorials/setting-up.html">Set up your machine</a></li>
   <li><a href="https://docs.sel4.systems/Tutorials/hello-camkes-0.html">CAmkES hello world tutorial</a></li>
@@ -196,8 +197,8 @@ ninja
 
 <details>
   <summary><em>Hint:</em> tutorial solutions</summary>
-  <p><br />
-All tutorials come with complete solutions. To get solutions run:</p>
+
+  <p>All tutorials come with complete solutions. To get solutions run:</p>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># For instructions about obtaining the tutorial sources see https://docs.sel4.systems/Tutorials/get-the-tutorials</span>
 <span class="c">#</span>
@@ -217,51 +218,51 @@ ninja
 
 <h3 id="components">Components</h3>
 
-<p><em>Components</em> are logical
-groupings of code and resources. They communicate with other component
-instances via well-defined interfaces which must be statically defined,
-over communication channels. This tutorial will lead you through the
-construction of a CAmkES application with two components: an Echo
-server, and its Client that makes calls to it. These components are
-defined when you initialise your build repository, found in
-the following camkes file:</p>
+<p><em>Components</em> are logical groupings of code and resources. They communicate with
+other component instances via well-defined interfaces which must be statically
+defined, over communication channels. This tutorial will lead you through the
+construction of a CAmkES application with two components: an Echo server, and
+its Client that makes calls to it. These components are defined when you
+initialise your build repository, found in the following camkes file:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">hello-camkes-1/hello-1.camkes</code></li>
 </ul>
 
-<p>Find the Component manual section here:
-<a href="https://docs.sel4.systems/projects/camkes/manual.html#component">https://docs.sel4.systems/projects/camkes/manual.html#component</a></p>
+<p>See also the <a href="https://docs.sel4.systems/projects/camkes/manual.html#component">Component
+definition</a> in
+the CAmkES manual.</p>
 
 <h3 id="connections">Connections</h3>
 
-<p>The second fundamental component of CAmkES applications
-is the <em>Connection</em>: a connection is the representation of a method of
-communication between two software components in CAmkES. The underlying
-implementation may be shared memory, synchronous IPC, notifications or
-some other implementation-provided means. In this particular tutorial,
-we are using synchronous IPC. In implementation terms, this boils down
-to the <code class="language-plaintext highlighter-rouge">seL4_Call</code> syscall on seL4.</p>
+<p>The second fundamental component of CAmkES applications is the <em>Connection</em>: a
+connection is the representation of a method of communication between two
+software components in CAmkES. The underlying implementation may be shared
+memory, synchronous IPC, notifications or some other implementation-provided
+means. In this particular tutorial, we are using synchronous IPC. In
+implementation terms, this boils down to the <code class="language-plaintext highlighter-rouge">seL4_Call</code> syscall on seL4.</p>
 
-<p>Find the “Connection” keyword manual section here:
-<a href="https://docs.sel4.systems/projects/camkes/manual.html#connection">https://docs.sel4.systems/projects/camkes/manual.html#connection</a></p>
+<p>See also the <a href="https://docs.sel4.systems/projects/camkes/manual.html#connection">Connection
+keyword</a> in
+the CAmkES manual.</p>
 
 <h3 id="interfaces">Interfaces</h3>
 
-<p>All communications over a CAmkES connection must be well
-defined: static systems’ communications should be able to be reasoned
-about at build time. All the function calls which will be delivered over
-a communication channel then, also are well defined, and logically
-grouped so as to provide clear directional understanding of all
-transmissions over a connection. Components are connected together in
-CAmkES, yes – but the interfaces that are exposed over each connection
-for calling by other components, are also described.</p>
+<p>All communications over a CAmkES connection must be well defined: static
+systems’ communications should be able to be reasoned about at build time. All
+the function calls which will be delivered over a communication channel then,
+also are well defined, and logically grouped so as to provide clear directional
+understanding of all transmissions over a connection. Components are connected
+together in CAmkES, yes — but the interfaces that are exposed over each
+connection for calling by other components, are also described.</p>
 
-<p>There are different
-kinds of interfaces:
--Dataports,
--Procedural interfaces,
--and Notifications.</p>
+<p>There are different kinds of interfaces:</p>
+
+<ul>
+  <li>Dataports,</li>
+  <li>Procedural interfaces,</li>
+  <li>and Notifications.</li>
+</ul>
 
 <p>This tutorial will lead you through the construction of a Procedural
 interface, which is an interface over which function calls are made
@@ -270,16 +271,16 @@ kind of interface in CAmkES is <code class="language-plaintext highlighter-rouge
 Procedure interface may be found here:
 <code class="language-plaintext highlighter-rouge">hello-camkes-1/interfaces/HelloSimple.idl4</code></p>
 
-<p>Find the “Procedure” keyword definition here:
-<a href="https://docs.sel4.systems/projects/camkes/manual.html#procedure">https://docs.sel4.systems/projects/camkes/manual.html#procedure</a></p>
+<p>See also the <a href="https://docs.sel4.systems/projects/camkes/manual.html#procedure">Procedure
+keyword</a> in the
+CAmkES manual.</p>
 
 <h3 id="component-source">Component source</h3>
 
-<p>Based on the ADL, CAmkES generates boilerplate which
-conforms to your system’s architecture, and enables you to fill in the
-spaces with your program’s logic. The two generated files in this
-tutorial application are, in accordance with the Components we have
-defined:</p>
+<p>Based on the ADL, CAmkES generates boilerplate which conforms to your system’s
+architecture, and enables you to fill in the spaces with your program’s logic.
+The two generated files in this tutorial application are, in accordance with the
+Components we have defined:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">hello-camkes-1/components/Echo/src/echo.c</code></li>
@@ -306,8 +307,8 @@ instances of functions in an Interface with the Interface-instance’s
 name. In the dual-function NIC device’s case, it might have a
 <code class="language-plaintext highlighter-rouge">provides &lt;INTERFACE_NAME&gt; serial</code> and a <code class="language-plaintext highlighter-rouge">provides &lt;INTERFACE_NAME&gt; nic</code>.
 When a caller wants to call for the NIC-send, it would call,
-nic_send(), and when a caller wants to invoke the Serial-send, it would
-call, “serial_send()”.</p>
+<code class="language-plaintext highlighter-rouge">nic_send()</code>, and when a caller wants to invoke the Serial-send, it would
+call, <code class="language-plaintext highlighter-rouge">serial_send()</code>.</p>
 
 <p>So if the <code class="language-plaintext highlighter-rouge">Hello</code> interface is provided once by <code class="language-plaintext highlighter-rouge">Echo</code> as <code class="language-plaintext highlighter-rouge">a</code>, you would
 call for the <code class="language-plaintext highlighter-rouge">a</code> instance of Echo’s <code class="language-plaintext highlighter-rouge">Hello</code> by calling for <code class="language-plaintext highlighter-rouge">a_hello()</code>.
@@ -322,21 +323,22 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
 <p><strong>Exercise</strong> First modify <code class="language-plaintext highlighter-rouge">hello-1.camkes</code>. Define instances of <code class="language-plaintext highlighter-rouge">Echo</code> and <code class="language-plaintext highlighter-rouge">Client</code> in the
 <code class="language-plaintext highlighter-rouge">composition</code> section of the ADL.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assembly {
-    composition {
-         component EmptyComponent empty;
-         // TODO define an Echo and a Client component
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assembly</span> <span class="p">{</span>
+    <span class="n">composition</span> <span class="p">{</span>
+         <span class="n">component</span> <span class="n">EmptyComponent</span> <span class="n">empty</span><span class="p">;</span>
+         <span class="c1">// TODO define an Echo and a Client component</span>
 </code></pre></div></div>
 
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assembly {
-    composition {
-         component EmptyComponent empty;
-         component Client client;
-         component Echo echo;
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assembly</span> <span class="p">{</span>
+    <span class="n">composition</span> <span class="p">{</span>
+         <span class="n">component</span> <span class="n">EmptyComponent</span> <span class="n">empty</span><span class="p">;</span>
+         <span class="n">component</span> <span class="n">Client</span> <span class="n">client</span><span class="p">;</span>
+         <span class="n">component</span> <span class="n">Echo</span> <span class="n">echo</span><span class="p">;</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="add-a-connection">Add a connection</h3>
@@ -354,6 +356,7 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">connection</span> <span class="n">seL4RPCCall</span> <span class="nf">hello_con</span><span class="p">(</span><span class="n">from</span> <span class="n">client</span><span class="p">.</span><span class="n">hello</span><span class="p">,</span> <span class="n">to</span> <span class="n">echo</span><span class="p">.</span><span class="n">hello</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h3 id="define-an-interface">Define an interface</h3>
@@ -371,11 +374,13 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    void say_hello(in string str);
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">void</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">in</span> <span class="n">string</span> <span class="n">str</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
-<h3 id="implement-a-rpc-function">Implement a RPC function</h3>
+<h3 id="implement-an-rpc-function">Implement an RPC function</h3>
+
 <p><strong>Exercise</strong> Implement the RPC hello function.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Implement the RPC function. */</span>
@@ -393,14 +398,15 @@ the second one was named <code class="language-plaintext highlighter-rouge">a2</
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* Implement the RPC function. */
-void hello_say_hello(const char *str) {
-    printf("Component %s saying: %s\n", get_instance_name(), str);
-}
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Implement the RPC function. */</span>
+<span class="kt">void</span> <span class="nf">hello_say_hello</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Component %s saying: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">get_instance_name</span><span class="p">(),</span> <span class="n">str</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>  </div>
+
 </details>
 
-<h3 id="invoke-a-rpc-function">Invoke a RPC function</h3>
+<h3 id="invoke-an-rpc-function">Invoke an RPC function</h3>
 
 <p><strong>Exercise</strong> Invoke the RPC function in <code class="language-plaintext highlighter-rouge">components/Client/src/client.c</code>.</p>
 
@@ -417,17 +423,16 @@ void hello_say_hello(const char *str) {
 <details>
   <summary><em>Quick solution</em></summary>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /* Invoke the RPC function */
-    char *shello = "hello world";
-    hello_say_hello(shello);
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/* Invoke the RPC function */</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">shello</span> <span class="o">=</span> <span class="s">"hello world"</span><span class="p">;</span>
+    <span class="n">hello_say_hello</span><span class="p">(</span><span class="n">shello</span><span class="p">);</span>
 </code></pre></div>  </div>
+
 </details>
 
 <h2 id="done">Done</h2>
 
-<p>Now build and run the project, if it compiles: Congratulations! Be sure to read up on the keywords and
-structure of ADL: it’s key to understanding CAmkES. And well done on
-writing your first CAmkES application.</p>
+<p>Now build and run the project. If it compiles: Congratulations!</p>
 
 
 
@@ -459,8 +464,8 @@ writing your first CAmkES application.</p>
 <li class="toc-entry toc-h3"><a href="#define-an-instance-in-the-composition-section-of-the-adl">Define an instance in the composition section of the ADL</a></li>
 <li class="toc-entry toc-h3"><a href="#add-a-connection">Add a connection</a></li>
 <li class="toc-entry toc-h3"><a href="#define-an-interface">Define an interface</a></li>
-<li class="toc-entry toc-h3"><a href="#implement-a-rpc-function">Implement a RPC function</a></li>
-<li class="toc-entry toc-h3"><a href="#invoke-a-rpc-function">Invoke a RPC function</a></li>
+<li class="toc-entry toc-h3"><a href="#implement-an-rpc-function">Implement an RPC function</a></li>
+<li class="toc-entry toc-h3"><a href="#invoke-an-rpc-function">Invoke an RPC function</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#done">Done</a></li>
