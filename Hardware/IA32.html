@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-07-16 06:20:57 +0000 -->
+<!-- Page last generated 2025-07-16 23:54:39 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PC99 | seL4 docs</title>
+    <title>PC99 (32-bit) | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Hardware/IA32.html">
-    <link href="/assets/css/sel4.css?v=1752646857" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1752710079" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -523,10 +523,56 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="pc99">PC99</h1>
+  <h1 id="pc99-32-bit">PC99 (32-bit)</h1>
 
-<p>seL4 runs on 32-bit ia32 and 64-bit x64 machines, on qemu and on
-hardware.</p>
+<p>seL4 runs on 32-bit ia32 and 64-bit x64 machines, on QEMU and on hardware.</p>
+
+<table class="max-w-md">
+<tbody>
+<tr>
+<td>Platform</td> <td class="font-semibold">PC99</td>
+</tr>
+<tr>
+<td>Simulation platform</td> <td>yes</td>
+</tr>
+<tr>
+<td>Architecture</td> <td>x86</td>
+</tr>
+
+
+<tr>
+<td>seL4 virtualisation support</td>
+<td>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
+</td>
+</tr>
+<tr>
+<td>seL4 IOMMU (VT-d) support</td>
+<td>
+<span class="text-f_green-500 dark:text-logogreen"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg> </span>
+</td>
+</tr>
+<tr>
+<td>Verification status</td><td>Unverified</td>
+</tr>
+<tr>
+<td>seL4 CMake platform name</td>
+<td><code>ia32</code></td>
+</tr>
+<tr>
+<td>Contributed by</td> <td>Data61</td>
+</tr>
+
+<tr>
+<td>Maintained by</td> <td>seL4 Foundation</td>
+</tr>
+
+</tbody>
+</table>
 
 <h2 id="simulation">Simulation</h2>
 
@@ -535,7 +581,7 @@ hardware.</p>
 repo <span class="nb">sync
 mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>x86_64 
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ia32 
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake .` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -550,9 +596,6 @@ ninja
 
 <p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
-<p>Please substitute <code class="language-plaintext highlighter-rouge">-DPLATFORM=ia32</code> in place of <code class="language-plaintext highlighter-rouge">-DPLATFORM=x86_64</code> if you would
-prefer to build 32-bit binaries.</p>
-
 <h2 id="real-hardware">Real Hardware</h2>
 
 <p>When running on real hardware console output will be over serial. You will need
@@ -561,7 +604,7 @@ to plug a serial cable into your machine to see any output.</p>
 <p>The build system produces a multiboot compliant image for x86; a grub2
 stanza is here, but we usually boot via PXE for convenience.</p>
 
-<pre><code class="language-grub2">menuentry "Load seL4 VM" --class os {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry "Load seL4 VM" --class os {
     load_video
     insmod gzio
     insmod part_msdos
@@ -570,7 +613,7 @@ stanza is here, but we usually boot via PXE for convenience.</p>
     multiboot /boot/sel4kernel
     module /boot/sel4rootserver
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>Booting via PXEBOOT using
 <a href="http://www.syslinux.org/wiki/index.php?title=PXELINUX">syslinux PXELINUX</a> requires setting up a tftp and dhcp server on the network
@@ -581,7 +624,7 @@ that then can load seL4. The configuration for pxelinux.cfg/default is
 provided below.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label seL4
-        kernel mboot.c32
+        kernel mboot.32
         append kernel-ia32-pc99 --- apps-ia32-pc99
 </code></pre></div></div>
 
@@ -612,6 +655,7 @@ umount /mnt
 <p>Use <code class="language-plaintext highlighter-rouge">fdisk</code> to make sure the first partition is bootable.</p>
 
 <p>And you’re done. Output will come on the serial port</p>
+
 
 </div>
 

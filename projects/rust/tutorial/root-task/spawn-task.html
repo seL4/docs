@@ -223,46 +223,28 @@ However, we expect to only need to call it once, so we are okay with this caveat
 <p><strong>Exercise:</strong>
 Extend the root task so that it sets up the child task to be able to interact with the serial device, and extend the child task to implement the same echo loop as in [./serial-device.html#step-5h-exercise].</p>
 <div class="step-hint">
-    <details>
-        <summary>
-            Hint for the root task (click to expand)
-        </summary>
-<p>Try following this sequence of sub-steps:</p>
-<ul>
-<li>
-<p>Allocate <code>serial_device_frame_cap: sel4::cap::Granule</code> using <code>object_allocator.recklessly_allocate_at()</code>.</p>
-</li>
-<li>
-<p>Map <code>serial_device_frame_cap</code> into the child task's address space using <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter.</p>
-</li>
-<li>
-<p>Similarly to how we did so in steps <a href="./serial-device.html#step-5f-exercise">5.F</a> and <a href="./serial-device.html#step-5g-exercise">5.G</a>, obtain <code>irq_handler_cap: sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code> (<code>object_allocator.allocate_slot()</code> might come in handy), allocate <code>irq_nfn_cap: sel4::cap::Notification</code>, and associate <code>irq_nfn_cap</code> with <code>SERIAL_DEVICE_IRQ</code> using <code>irq_handler_cap</code>.</p>
-</li>
-<li>
-<p>Copy <code>irq_handler_cap</code> and <code>irq_nfn_cap</code> into the child task's CSpace in a similar way to how <code>child_tcb</code> and <code>inter_task_ep</code> are copied.</p>
-  </details>
-</li>
-</ul>
+<details>
+    <summary>
+        Hint for the root task (click to expand)
+    </summary>
+<p>Try following this sequence of sub-steps:
+- Allocate <code>serial_device_frame_cap: sel4::cap::Granule</code> using <code>object_allocator.recklessly_allocate_at()</code>.
+- Map <code>serial_device_frame_cap</code> into the child task's address space using <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter.
+- Similarly to how we did so in steps <a href="./serial-device.html#step-5f-exercise">5.F</a> and <a href="./serial-device.html#step-5g-exercise">5.G</a>, obtain <code>irq_handler_cap: sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code> (<code>object_allocator.allocate_slot()</code> might come in handy), allocate <code>irq_nfn_cap: sel4::cap::Notification</code>, and associate <code>irq_nfn_cap</code> with <code>SERIAL_DEVICE_IRQ</code> using <code>irq_handler_cap</code>.
+- Copy <code>irq_handler_cap</code> and <code>irq_nfn_cap</code> into the child task's CSpace in a similar way to how <code>child_tcb</code> and <code>inter_task_ep</code> are copied.</p>
+</details>
 </div>
 <p></p>
 <div class="step-hint">
-    <details>
-        <summary>
-            Hint for the child task (click to expand)
-        </summary>
-<p>Try following this sequence of sub-steps:</p>
-<ul>
-<li>
-<p>Declare constants <code>IRQ_HANDLER: sel4::cap::IrqHandler</code> and <code>IRQ_NFN: sel4::cap::Notification</code> after <code>OWN_TCB</code> and <code>INTRA_TASK_EP</code>.</p>
-</li>
-<li>
-<p>Obtain the virtual address of the serial device MMIO frame with <code>addr_of_page_beyond_image(1)</code> (recall how <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter works).</p>
-</li>
-<li>
-<p>Initialize the serial device with <code>Device::new()</code> and <code>Device::init()</code> (as we did for part of <a href="./serial-device.html#step-5e-exercise">step 5.E</a>), and use the serial device just like we did in <a href="./serial-device.html#step-5h-exercise">step 5.H</a>.</p>
-  </details>
-</li>
-</ul>
+<details>
+    <summary>
+        Hint for the child task (click to expand)
+    </summary>
+<p>Try following this sequence of sub-steps:
+- Declare constants <code>IRQ_HANDLER: sel4::cap::IrqHandler</code> and <code>IRQ_NFN: sel4::cap::Notification</code> after <code>OWN_TCB</code> and <code>INTRA_TASK_EP</code>.
+- Obtain the virtual address of the serial device MMIO frame with <code>addr_of_page_beyond_image(1)</code> (recall how <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter works).
+- Initialize the serial device with <code>Device::new()</code> and <code>Device::init()</code> (as we did for part of <a href="./serial-device.html#step-5e-exercise">step 5.E</a>), and use the serial device just like we did in <a href="./serial-device.html#step-5h-exercise">step 5.H</a>.</p>
+</details>
 </div>
 
                     </main>

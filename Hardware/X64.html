@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>5.0.0 | seL4 docs</title>
+    <title>PC99 (64-bit) | seL4 docs</title>
 
-    <link rel="canonical" href="https://docs.sel4.systems/releases/sel4/5.0.0.html">
+    <link rel="canonical" href="https://docs.sel4.systems/Hardware/X64.html">
     <link href="/assets/css/sel4.css?v=1752710079" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,7 +143,7 @@
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/manual.html">Manual</a>
         </li>
-        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/Hardware/">Supported platforms</a>
         </li>
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
@@ -189,7 +189,7 @@
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/porting.html">Porting to a new platform</a>
         </li>
-        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/releases/seL4.html">Releases</a>
         </li>
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
@@ -522,68 +522,141 @@
             <main class="mx-6 md:mx-10 xl:mx-12 my-12
                         overflow-x-auto" id="page-top">
 
-              <div class="theprose mx-auto ext-links">
-<h1 id="introducing-sel4-500">Introducing seL4 5.0.0</h1>
-<p>Announcing the release of <code class="language-plaintext highlighter-rouge">seL4 5.0.0</code>
-with the following changes:</p>
+              <div class="theprose mx-auto  ext-links">
+  <h1 id="pc99-64-bit">PC99 (64-bit)</h1>
 
-<p>Below are the changes to the seL4 ABI and API:</p>
+<p>seL4 runs on 32-bit ia32 and 64-bit x64 machines, on QEMU and on hardware.</p>
 
-<h2 id="generic-changes">Generic changes:</h2>
+<table class="max-w-md">
+<tbody>
+<tr>
+<td>Platform</td> <td class="font-semibold">PC99</td>
+</tr>
+<tr>
+<td>Simulation platform</td> <td>yes</td>
+</tr>
+<tr>
+<td>Architecture</td> <td>x64</td>
+</tr>
 
-<ul>
-  <li>Add missing case to <code class="language-plaintext highlighter-rouge">seL4_getFault</code> (<code class="language-plaintext highlighter-rouge">seL4_Fault_DebugException</code>)</li>
-  <li>Explicitly pack bootinfo data structures</li>
-  <li>Modify <code class="language-plaintext highlighter-rouge">FinalizeLog</code> syscall - Now returns a number of entries in the log</li>
-  <li>Extend bootinfo to support potentially arbitrary additional structures</li>
-  <li>Deprecate bootinfo management in libsel4 - a replacement, <code class="language-plaintext highlighter-rouge">platsupport_get_bootinfo</code> can be found in <code class="language-plaintext highlighter-rouge">libsel4platsupport</code></li>
-</ul>
 
-<h2 id="x86-specific-changes">x86 specific changes:</h2>
+<tr>
+<td>seL4 virtualisation support</td>
+<td>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
+</td>
+</tr>
+<tr>
+<td>seL4 IOMMU (VT-d) support</td>
+<td>
+<span class="text-f_green-500 dark:text-logogreen"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg> </span>
+</td>
+</tr>
+<tr>
+<td>Verification status</td><td><a href="/projects/sel4/verified-configurations.html#x64">FC (without VT-X, VT-D and fastpath)</a></td>
+</tr>
+<tr>
+<td>seL4 CMake platform name</td>
+<td><code>x64</code></td>
+</tr>
+<tr>
+<td>Contributed by</td> <td>Data61</td>
+</tr>
 
-<ul>
-  <li>Pass VBE information from multiboot through bootinfo</li>
-  <li>Remove PAE support</li>
-</ul>
+<tr>
+<td>Maintained by</td> <td>seL4 Foundation</td>
+</tr>
 
-<h2 id="x86-64-specific-changes">x86-64 specific changes:</h2>
+</tbody>
+</table>
 
-<ul>
-  <li>VT-x related cap and object definitions added</li>
-  <li>seL4_VMEnter syscall added</li>
-</ul>
+<h2 id="simulation">Simulation</h2>
 
-<h2 id="arm-specific-changes">ARM specific changes:</h2>
+<p>Checkout the sel4test project using repo as per <a href="/projects/sel4test/">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo <span class="nb">sync
+mkdir </span>cbuild
+<span class="nb">cd </span>cbuild
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>x64 
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake .` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
+<span class="c"># This platform is a simulation target. This script should work to run the</span>
+<span class="c"># generated image if you also use -DSIMULATION=1 for init-build above:</span>
+./simulate
 
-<ul>
-  <li>ARM-HYP: VCPU interface for manipulating banked registers added</li>
-  <li>plat: added nvidia tx1 support</li>
-  <li>ARM-HYP: Add support for save/restore of debug registers</li>
-  <li>Add aarch64 implementation</li>
-</ul>
+</code></pre></div></div>
+<p>If you plan to use the ./simulate script, please be sure to add the
+<code class="language-plaintext highlighter-rouge">-DSIMULATION=1</code> argument when running cmake.</p>
 
-<h1 id="upgrade-notes">Upgrade notes</h1>
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
-<ul>
-  <li>This release breaks both API and ABI and is not source compatible
-    with the earlier versions.</li>
-</ul>
+<h2 id="real-hardware">Real Hardware</h2>
 
-<h1 id="full-changelog">Full changelog</h1>
+<p>When running on real hardware console output will be over serial. You will need
+to plug a serial cable into your machine to see any output.</p>
 
-<p>Use <code class="language-plaintext highlighter-rouge">git log 4.0.0..5.0.0</code> in <a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a></p>
+<p>The build system produces a multiboot compliant image for x86; a grub2
+stanza is here, but we usually boot via PXE for convenience.</p>
 
-<h1 id="more-details">More details</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>menuentry "Load seL4 VM" --class os {
+    load_video
+    insmod gzio
+    insmod part_msdos
+    insmod ext2
+    set root='(hd0,msdos2)'
+    multiboot /boot/sel4kernel
+    module /boot/sel4rootserver
+}
+</code></pre></div></div>
 
-<p>See the
-<a href="http://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf">5.0.0 manual</a> included in the release for detailed descriptions of the new
-features. Or ask on the mailing list!</p>
+<p>Booting via PXEBOOT using
+<a href="http://www.syslinux.org/wiki/index.php?title=PXELINUX">syslinux PXELINUX</a> requires setting up a tftp and dhcp server on the network
+that the machine you want to boot is connected to. The
+<a href="http://www.syslinux.org/wiki/index.php?title=Download">syslinux</a>
+site has a download for pxelinux which we load over PXEBOOT
+that then can load seL4. The configuration for pxelinux.cfg/default is
+provided below.</p>
 
-<h2>Other releases</h2>
-<p>
-  See the <a href="/releases/seL4.html">
-    full list of seL4 releases.</a>
-</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label seL4
+        kernel mboot.32
+        append kernel-x64-pc99 --- apps-x64-pc99
+</code></pre></div></div>
+
+<h2 id="booting-off-usb-with-syslinux">Booting off USB with syslinux</h2>
+
+<p>Use syslinux to create a bootable USB stick as follows.</p>
+
+<p>Assuming your USB flash drive is at <code class="language-plaintext highlighter-rouge">/dev/sdb</code> with a FAT partition at
+<code class="language-plaintext highlighter-rouge">/dev/sdb1</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>install-mbr /dev/sdb
+syslinux <span class="nt">--install</span> /dev/sdb1
+mount /dev/sdb1 /mnt
+<span class="nb">cp </span>images/sel4test-driver-image-x64-pc99 /mnt/rootserver
+<span class="nb">cp </span>images/kernel-x64-pc99 /mnt/sel4kernel
+<span class="nb">cat</span> <span class="o">&gt;</span> /mnt/syslinux.cfg <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+SERIAL 0 115200
+DEFAULT seL4test
+LABEL seL4test
+    kernel mboot.c32
+    append sel4kernel --- rootserver
+</span><span class="no">EOF
+</span><span class="nb">cp</span> /usr/lib/syslinux/modules/bios/mboot.c32 /mnt
+<span class="nb">cp</span> /usr/lib/syslinux/modules/bios/libcom32.c32 /mnt
+umount /mnt
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">fdisk</code> to make sure the first partition is bootable.</p>
+
+<p>And you’re done. Output will come on the serial port</p>
+
+
 </div>
 
             </main>
@@ -596,7 +669,7 @@ features. Or ask on the mailing list!</p>
   <a href="/processes/test-status.html"
      class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
   <div class="flex-1"></div>
-<a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/sel4/5.0.0.md" class="flex-none  hover:text-light hover:underline">Edit
+<a href="https://github.com/seL4/docs/edit/master/Hardware/X64.md" class="flex-none  hover:text-light hover:underline">Edit
     page on GitHub</a>
 </footer>
 

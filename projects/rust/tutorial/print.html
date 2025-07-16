@@ -930,15 +930,11 @@ and
 <p><code>secondary_thread_main()</code> runs in the secondary thread, and <code>interact_with_secondary_thread()</code> runs in the secondary thread.</p>
 <h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('c4acc79f48ccdfb280444c9b41280893b6c810dd')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/c4acc79f48ccdfb280444c9b41280893b6c810dd"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In this step, we introduce IPC between <code>secondary_thread_main()</code> and <code>interact_with_secondary_thread</code> by changing</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>inter_thread_nfn: sel4::cap::Notification
-<span class="boring">}</span></code></pre></pre>
+<pre><code>inter_thread_nfn: sel4::cap::Notification
+</code></pre>
 <p>to</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>inter_thread_ep: sel4::cap::Endpoint
-<span class="boring">}</span></code></pre></pre>
+<pre><code>inter_thread_ep: sel4::cap::Endpoint
+</code></pre>
 <p>Before, the two sides of the notification communicated via
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>inter_thread_nfn.signal()</code></a>
 and
@@ -1021,15 +1017,11 @@ to send a message with some data.</p>
 <h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('968473d5d4d0fd205a7f5162be1477ea337ff4fa')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/968473d5d4d0fd205a7f5162be1477ea337ff4fa"> <i class="fa fa-github"></i> </a></a></h2>
 <p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
 <p><strong>Exercise:</strong> Change the</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>inter_thread_ep.send()
-<span class="boring">}</span></code></pre></pre>
+<pre><code>inter_thread_ep.send()
+</code></pre>
 <p>in <code>secondary_thread_main()</code> to</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>inter_thread_ep.call()
-<span class="boring">}</span></code></pre></pre>
+<pre><code>inter_thread_ep.call()
+</code></pre>
 <p>and modify <code>interact_with_secondary_thread()</code> to <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.reply.html"><code>sel4::reply</code></a> with a message.</p>
 <div style="break-before: page; page-break-before: always;"></div><!--
     Copyright 2024, Colias Group, LLC
@@ -1084,46 +1076,28 @@ However, we expect to only need to call it once, so we are okay with this caveat
 <p><strong>Exercise:</strong>
 Extend the root task so that it sets up the child task to be able to interact with the serial device, and extend the child task to implement the same echo loop as in [./serial-device.html#step-5h-exercise].</p>
 <div class="step-hint">
-    <details>
-        <summary>
-            Hint for the root task (click to expand)
-        </summary>
-<p>Try following this sequence of sub-steps:</p>
-<ul>
-<li>
-<p>Allocate <code>serial_device_frame_cap: sel4::cap::Granule</code> using <code>object_allocator.recklessly_allocate_at()</code>.</p>
-</li>
-<li>
-<p>Map <code>serial_device_frame_cap</code> into the child task's address space using <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter.</p>
-</li>
-<li>
-<p>Similarly to how we did so in steps <a href="root-task/./serial-device.html#step-5f-exercise">5.F</a> and <a href="root-task/./serial-device.html#step-5g-exercise">5.G</a>, obtain <code>irq_handler_cap: sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code> (<code>object_allocator.allocate_slot()</code> might come in handy), allocate <code>irq_nfn_cap: sel4::cap::Notification</code>, and associate <code>irq_nfn_cap</code> with <code>SERIAL_DEVICE_IRQ</code> using <code>irq_handler_cap</code>.</p>
-</li>
-<li>
-<p>Copy <code>irq_handler_cap</code> and <code>irq_nfn_cap</code> into the child task's CSpace in a similar way to how <code>child_tcb</code> and <code>inter_task_ep</code> are copied.</p>
-  </details>
-</li>
-</ul>
+<details>
+    <summary>
+        Hint for the root task (click to expand)
+    </summary>
+<p>Try following this sequence of sub-steps:
+- Allocate <code>serial_device_frame_cap: sel4::cap::Granule</code> using <code>object_allocator.recklessly_allocate_at()</code>.
+- Map <code>serial_device_frame_cap</code> into the child task's address space using <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter.
+- Similarly to how we did so in steps <a href="root-task/./serial-device.html#step-5f-exercise">5.F</a> and <a href="root-task/./serial-device.html#step-5g-exercise">5.G</a>, obtain <code>irq_handler_cap: sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code> (<code>object_allocator.allocate_slot()</code> might come in handy), allocate <code>irq_nfn_cap: sel4::cap::Notification</code>, and associate <code>irq_nfn_cap</code> with <code>SERIAL_DEVICE_IRQ</code> using <code>irq_handler_cap</code>.
+- Copy <code>irq_handler_cap</code> and <code>irq_nfn_cap</code> into the child task's CSpace in a similar way to how <code>child_tcb</code> and <code>inter_task_ep</code> are copied.</p>
+</details>
 </div>
 <p></p>
 <div class="step-hint">
-    <details>
-        <summary>
-            Hint for the child task (click to expand)
-        </summary>
-<p>Try following this sequence of sub-steps:</p>
-<ul>
-<li>
-<p>Declare constants <code>IRQ_HANDLER: sel4::cap::IrqHandler</code> and <code>IRQ_NFN: sel4::cap::Notification</code> after <code>OWN_TCB</code> and <code>INTRA_TASK_EP</code>.</p>
-</li>
-<li>
-<p>Obtain the virtual address of the serial device MMIO frame with <code>addr_of_page_beyond_image(1)</code> (recall how <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter works).</p>
-</li>
-<li>
-<p>Initialize the serial device with <code>Device::new()</code> and <code>Device::init()</code> (as we did for part of <a href="root-task/./serial-device.html#step-5e-exercise">step 5.E</a>), and use the serial device just like we did in <a href="root-task/./serial-device.html#step-5h-exercise">step 5.H</a>.</p>
-  </details>
-</li>
-</ul>
+<details>
+    <summary>
+        Hint for the child task (click to expand)
+    </summary>
+<p>Try following this sequence of sub-steps:
+- Declare constants <code>IRQ_HANDLER: sel4::cap::IrqHandler</code> and <code>IRQ_NFN: sel4::cap::Notification</code> after <code>OWN_TCB</code> and <code>INTRA_TASK_EP</code>.
+- Obtain the virtual address of the serial device MMIO frame with <code>addr_of_page_beyond_image(1)</code> (recall how <code>create_child_vspace()</code>'s <code>extra_frames</code> parameter works).
+- Initialize the serial device with <code>Device::new()</code> and <code>Device::init()</code> (as we did for part of <a href="root-task/./serial-device.html#step-5e-exercise">step 5.E</a>), and use the serial device just like we did in <a href="root-task/./serial-device.html#step-5h-exercise">step 5.H</a>.</p>
+</details>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><!--
     Copyright 2024, Colias Group, LLC
