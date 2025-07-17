@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-07-17 06:25:43 +0000 -->
+<!-- Page last generated 2025-07-17 08:09:01 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4Test | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4test/">
-    <link href="/assets/css/sel4.css?v=1752733543" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1752739741" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -575,14 +575,23 @@ which ones these are and their corresponding CMake configuration arguments, see
 the <a href="../../Hardware">Supported Platforms</a> page.</p>
 
 <p>To start a build with a specific configuration we can create a new subdirectory
-from the project root and initialise it with <code class="language-plaintext highlighter-rouge">init-build</code>:</p>
+from the project root and initialise it with <code class="language-plaintext highlighter-rouge">init-build</code>. In the example below
+we are using <code class="language-plaintext highlighter-rouge">ia32</code> as the platform, building in release mode, and with
+simulation support switched on.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create build directory</span>
 <span class="nb">mkdir </span>build
 <span class="nb">cd </span>build
 <span class="c"># configure build directory</span>
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>&lt;platform-name&gt; <span class="nt">-DRELEASE</span><span class="o">=[</span>TRUE|FALSE] <span class="nt">-DSIMULATION</span><span class="o">=[</span>TRUE|FALSE]
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ia32 <span class="nt">-DRELEASE</span><span class="o">=</span>TRUE <span class="nt">-DSIMULATION</span><span class="o">=</span>TRUE
 </code></pre></div></div>
+
+<p>The general more form of the last command is</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>&lt;platform-name&gt; <span class="nt">-DRELEASE</span><span class="o">=[</span>TRUE|FALSE] <span class="nt">-DSIMULATION</span><span class="o">=[</span>TRUE|FALSE]
+</code></pre></div></div>
+
+<p>See below for the full list of <a href="#configuration-options">available options</a>.</p>
 
 <p>This configures your build directory with the necessary CMake configuration for
 your chosen platform.</p>
@@ -610,46 +619,43 @@ yourself, this behaviour can be disabled by setting the
 
 <h3 id="ia32-example">IA32 Example</h3>
 
-<p>We will now build seL4test for IA32, to run on the QEMU simulator.</p>
+<p>If you have followed the example instructions above, and <code class="language-plaintext highlighter-rouge">ninja</code> has completed
+successfully, the build will have produced boot images in the <code class="language-plaintext highlighter-rouge">images/</code>
+directory and a <code class="language-plaintext highlighter-rouge">simulate</code> script. It was produced, because we passed
+<code class="language-plaintext highlighter-rouge">-DSIMULATION=TRUE</code> to CMake. The option is available for hardware platforms
+that are marked as “Simulation target: yes” on their platform info page (e.g.
+for <a href="/Hardware/IA32.html">IA32</a>).</p>
 
-<p>Passing <code class="language-plaintext highlighter-rouge">-DSIMULATION=TRUE</code> to CMake produces a script to simulate our release
-IA32 build. The following commands will configure our CMake build:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>ia32_build
-<span class="nb">cd </span>ia32_build
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>ia32 <span class="nt">-DRELEASE</span><span class="o">=</span>TRUE <span class="nt">-DSIMULATION</span><span class="o">=</span>TRUE
-</code></pre></div></div>
-
-<p>Build it:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja
-</code></pre></div></div>
-
-<p>Executing the following commands will run QEMU and point it towards the image we
+<p>Executing the <code class="language-plaintext highlighter-rouge">simulate</code> script will run QEMU and point it towards the image we
 just built:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./simulate
-...
+</code></pre></div></div>
+
+<p>It should produce output such as the following</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 ELF-loading userland images from boot modules:
-<span class="nv">size</span><span class="o">=</span>0x1dd000 <span class="nv">v_entry</span><span class="o">=</span>0x806716f <span class="nv">v_start</span><span class="o">=</span>0x8048000 <span class="nv">v_end</span><span class="o">=</span>0x8225000 <span class="nv">p_start</span><span class="o">=</span>0x21f000 <span class="nv">p_end</span><span class="o">=</span>0x3fc000
-Moving loaded userland images to final location: <span class="nv">from</span><span class="o">=</span>0x21f000 <span class="nv">to</span><span class="o">=</span>0x12e000 <span class="nv">size</span><span class="o">=</span>0x1dd000
-Starting node <span class="c">#0 with APIC ID 0</span>
+size=0x1dd000 v_entry=0x806716f v_start=0x8048000 v_end=0x8225000 p_start=0x21f000 p_end=0x3fc000
+Moving loaded userland images to final location: from=0x21f000 to=0x12e000 size=0x1dd000
+Starting node #0 with APIC ID 0
 Booting all finished, dropped to user space
 ...
-Starting <span class="nb">test </span>18: BIND0001
-Running <span class="nb">test </span>BIND0001 <span class="o">(</span>Test that a bound tcb waiting on a <span class="nb">sync </span>endpoint receives normal <span class="nb">sync </span>ipc and notification notifications.<span class="o">)</span>
+Starting test 18: BIND0001
+Running test BIND0001 (Test that a bound tcb waiting on a sync endpoint receives normal sync ipc and notification notifications.)
 Test BIND0001 passed
-Starting <span class="nb">test </span>19: BIND0002
-Running <span class="nb">test </span>BIND0002 <span class="o">(</span>Test that a bound tcb waiting on its bound notification recieves notifications<span class="o">)</span>
+Starting test 19: BIND0002
+Running test BIND0002 (Test that a bound tcb waiting on its bound notification recieves notifications)
 Test BIND0002 passed
-Starting <span class="nb">test </span>20: BIND0003
-Running <span class="nb">test </span>BIND0003 <span class="o">(</span>Test IPC ordering 1<span class="o">)</span> bound tcb waits on bound notification 2, <span class="nb">true</span><span class="o">)</span> another tcb sends a message<span class="o">)</span>
+Starting test 20: BIND0003
+Running test BIND0003 (Test IPC ordering 1) bound tcb waits on bound notification 2, true) another tcb sends a message)
 Test BIND0003 passed
 ...
 </code></pre></div></div>
 
-<p>To exit QEMU, press <code class="language-plaintext highlighter-rouge">Ctrl-a</code>, then <code class="language-plaintext highlighter-rouge">x</code>. The text <code class="language-plaintext highlighter-rouge">All is well in the
-universe</code> indicates a successful build.</p>
+<p>To exit QEMU, press <code class="language-plaintext highlighter-rouge">Ctrl-a</code>, then <code class="language-plaintext highlighter-rouge">x</code>. In <code class="language-plaintext highlighter-rouge">DEBUG</code> configurations, there will be
+error messages printed for negative tests. These are expected. The text <code class="language-plaintext highlighter-rouge">All is
+well in the universe</code> at the end indicates a successful run.</p>
 
 <h2 id="testing-a-customised-kernel">Testing a Customised Kernel</h2>
 
