@@ -63,15 +63,25 @@ which ones these are and their corresponding CMake configuration arguments, see
 the [Supported Platforms](../../Hardware) page.
 
 To start a build with a specific configuration we can create a new subdirectory
-from the project root and initialise it with `init-build`:
+from the project root and initialise it with `init-build`. In the example below
+we are using `ia32` as the platform, building in release mode, and with
+simulation support switched on.
 
 ```bash
 # create build directory
 mkdir build
 cd build
 # configure build directory
+../init-build.sh -DPLATFORM=ia32 -DRELEASE=TRUE -DSIMULATION=TRUE
+```
+
+The general more form of the last command is
+
+```sh
 ../init-build.sh -DPLATFORM=<platform-name> -DRELEASE=[TRUE|FALSE] -DSIMULATION=[TRUE|FALSE]
 ```
+
+See below for the full list of [available options](#configuration-options).
 
 This configures your build directory with the necessary CMake configuration for
 your chosen platform.
@@ -102,28 +112,23 @@ ninja
 
 ### IA32 Example
 
-We will now build seL4test for IA32, to run on the QEMU simulator.
+If you have followed the example instructions above, and `ninja` has completed
+successfully, the build will have produced boot images in the `images/`
+directory and a `simulate` script. It was produced, because we passed
+`-DSIMULATION=TRUE` to CMake. The option is available for hardware platforms
+that are marked as "Simulation target: yes" on their platform info page (e.g.
+for [IA32](../../Hardware/IA32.md)).
 
-Passing `-DSIMULATION=TRUE` to CMake produces a script to simulate our release
-IA32 build. The following commands will configure our CMake build:
-
-```bash
-mkdir ia32_build
-cd ia32_build
-../init-build.sh -DPLATFORM=ia32 -DRELEASE=TRUE -DSIMULATION=TRUE
-```
-
-Build it:
-
-```bash
-ninja
-```
-
-Executing the following commands will run QEMU and point it towards the image we
+Executing the `simulate` script will run QEMU and point it towards the image we
 just built:
 
 ```bash
 ./simulate
+```
+
+It should produce output such as the following
+
+```
 ...
 ELF-loading userland images from boot modules:
 size=0x1dd000 v_entry=0x806716f v_start=0x8048000 v_end=0x8225000 p_start=0x21f000 p_end=0x3fc000
@@ -143,8 +148,9 @@ Test BIND0003 passed
 ...
 ```
 
-To exit QEMU, press `Ctrl-a`, then `x`. The text `All is well in the
-universe` indicates a successful build.
+To exit QEMU, press `Ctrl-a`, then `x`. In `DEBUG` configurations, there will be
+error messages printed for negative tests. These are expected. The text `All is
+well in the universe` at the end indicates a successful run.
 
 ## Testing a Customised Kernel
 
