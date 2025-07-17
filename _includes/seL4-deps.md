@@ -49,7 +49,7 @@ Additional base dependencies for building seL4 projects on Ubuntu include instal
 ```sh
 sudo apt-get install cmake ccache ninja-build cmake-curses-gui
 sudo apt-get install libxml2-utils ncurses-dev
-sudo apt-get install curl git doxygen device-tree-compiler
+sudo apt-get install curl git doxygen device-tree-compiler xxd
 sudo apt-get install u-boot-tools
 sudo apt-get install python3-dev python3-pip python-is-python3
 sudo apt-get install protobuf-compiler python3-protobuf
