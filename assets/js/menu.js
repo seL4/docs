@@ -27,7 +27,7 @@
 })();
 
 (function initCopyButtons() {
-  const codeBlocks = document.querySelectorAll('div > pre > code');
+  const codeBlocks = document.querySelectorAll('div.highlight > pre:first-child > code:first-child');
 
   for (let codeBlock of codeBlocks) {
     preBlock = codeBlock.parentElement;
