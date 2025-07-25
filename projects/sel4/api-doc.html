@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-07-24 03:43:51 +0000 -->
+<!-- Page last generated 2025-07-25 03:43:43 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1753328631" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1753415023" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -3129,6 +3129,57 @@ Instead, use seL4_TCB_ConfigureSingleStepping to configure single-stepping.</p>
     </tr>
   </tbody>
 </table>
+
+<h4 id="set-feature-flags">Set Feature Flags</h4>
+<p><code class="language-plaintext highlighter-rouge">static inline seL4_TCB_SetFlags_t seL4_TCB_SetFlags</code></p>
+
+<p>Set or clear <code class="language-plaintext highlighter-rouge">seL4_TCBFlag</code> feature flags of the target TCB.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_TCB</code></td>
+      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
+      <td>Capability to the TCB which is being operated on.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">clear</code></td>
+      <td>Bitwise OR’d set of seL4_TCBFlag to clear.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">set</code></td>
+      <td>Bitwise OR’d set of seL4_TCBFlag to set.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> The resulting TCB flags value is returned in the first message register.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> A newly created TCB has all flags cleared. Currently the only flag supported is <code class="language-plaintext highlighter-rouge">seL4_TCBFlag_fpuDisabled</code>. The flags are cleared and set in the given order, i.e. when a flag is both cleared and set, it will be set. Unknown flags are ignored. Use zero for both clear and set to retrieve the current flags value.</p>
 
 <h4 id="set-ipc-buffer">Set IPC Buffer</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_TCB_SetIPCBuffer</code></p>
@@ -9675,6 +9726,7 @@ serviced.</p>
 <li class="toc-entry toc-h4"><a href="#resume">Resume</a></li>
 <li class="toc-entry toc-h4"><a href="#set-breakpoint">Set Breakpoint</a></li>
 <li class="toc-entry toc-h4"><a href="#set-cpu-affinity">Set CPU Affinity</a></li>
+<li class="toc-entry toc-h4"><a href="#set-feature-flags">Set Feature Flags</a></li>
 <li class="toc-entry toc-h4"><a href="#set-ipc-buffer">Set IPC Buffer</a></li>
 <li class="toc-entry toc-h4"><a href="#set-maximum-controlled-priority">Set Maximum Controlled Priority</a></li>
 <li class="toc-entry toc-h4"><a href="#set-priority">Set Priority</a></li>
