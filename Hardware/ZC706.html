@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-07-28 03:46:03 +0000 -->
+<!-- Page last generated 2025-07-28 21:57:02 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Zynq7000 | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Hardware/ZC706.html">
-    <link href="/assets/css/sel4.css?v=1753674363" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1753739822" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -600,128 +600,11 @@ ninja
 
 <p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
-<h2 id="u-boot">U-Boot</h2>
-
-<p>Use the following patch to set up an appropriate u-boot environment and enable elf loading:</p>
-
-<div class="language-patch highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">From 8fb3caeb735b7cb6be409842a3e130a8a4173ad3 Mon Sep 17 00:00:00 2001
-From: Adrian Herrera &lt;adrian.herrera@dsto.defence.gov.au&gt;
-Date: Wed, 5 Nov 2014 09:58:00 +1030
-Subject: [PATCH] Added Zynq ZC70x board for seL4
-</span><span class="err">
-</span><span class="p">Currently only boots from a FAT-formatted SD card; so no network boot yet
----
-</span> boards.cfg                        |  1 +
- include/configs/zynq_zc70x_sel4.h | 60 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 61 insertions(+)
- create mode 100644 include/configs/zynq_zc70x_sel4.h
-<span class="err">
-</span><span class="gh">diff --git a/boards.cfg b/boards.cfg
-index 7beb3c8..960b374 100644
-</span><span class="gd">--- a/boards.cfg
-</span><span class="gi">+++ b/boards.cfg
-</span><span class="p">@@ -384,6 +384,7 @@</span> Active  arm         armv7          u8500       st-ericsson     u8500
- Active  arm         armv7          vf610       freescale       vf610twr            vf610twr                              vf610twr:IMX_CONFIG=board/freescale/vf610twr/imximage.cfg                                                                         Alison Wang &lt;b18965@freescale.com&gt;
- Active  arm         armv7          zynq        xilinx          zynq                zynq_microzed                        -                                                                                                                                  Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
- Active  arm         armv7          zynq        xilinx          zynq                zynq_zc70x                           -                                                                                                                                  Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
-<span class="gi">+Active  arm         armv7          zynq        xilinx          zynq                zynq_zc70x_sel4                      -                                                                                                                                  Adrian Herrera &lt;adrian.herrera@dsto.defence.gov.au&gt;
-</span> Active  arm         armv7          zynq        xilinx          zynq                zynq_zc770_XM010                     zynq_zc770:ZC770_XM010                                                                                                             Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
- Active  arm         armv7          zynq        xilinx          zynq                zynq_zc770_XM011                     zynq_zc770:ZC770_XM011                                                                                                             Michal Simek &lt;michal.simek@xilinx.com&gt;
- Active  arm         armv7          zynq        xilinx          zynq                zynq_zc770_XM012                     zynq_zc770:ZC770_XM012                                                                                                             Michal Simek &lt;monstr@monstr.eu&gt;:Jagannadha Sutradharudu Teki &lt;jaganna@xilinx.com&gt;
-<span class="gh">diff --git a/include/configs/zynq_zc70x_sel4.h b/include/configs/zynq_zc70x_sel4.h
-</span><span class="p">new file mode 100644
-</span><span class="gh">index 0000000..f8bbac5
-</span><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/include/configs/zynq_zc70x_sel4.h
-</span><span class="p">@@ -0,0 +1,60 @@</span>
-<span class="gi">+/*
-+ * (C) Copyright 2013 Xilinx, Inc.
-+ *
-+ * Configuration settings for the Xilinx Zynq ZC702 and ZC706 boards
-+ * See zynq-common.h for Zynq common configs
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0-or-later
-+ */
-+
-+#ifndef __CONFIG_ZYNQ_ZC70X_SEL4_H
-+#define __CONFIG_ZYNQ_ZC70X_SEL4_H
-+
-+#define CONFIG_SYS_SDRAM_SIZE		(1024 * 1024 * 1024)
-+
-+#define CONFIG_ZYNQ_SERIAL_UART1
-+#define CONFIG_ZYNQ_GEM0
-+#define CONFIG_ZYNQ_GEM_PHY_ADDR0	7
-+
-+#define CONFIG_SYS_NO_FLASH
-+
-+#define CONFIG_ZYNQ_SDHCI0
-+#define CONFIG_ZYNQ_USB
-+#define CONFIG_ZYNQ_QSPI
-+#define CONFIG_ZYNQ_I2C0
-+#define CONFIG_ZYNQ_EEPROM
-+
-+#include &lt;configs/zynq-common.h&gt;
-+
-+/* Enable boot from ELF image */
-+#define CONFIG_CMD_ELF
-+
-+/* U-Boot prompt */
-+#if defined(CONFIG_SYS_PROMPT)
-+#undef CONFIG_SYS_PROMPT
-+#endif
-+
-+#define CONFIG_SYS_PROMPT    "zynq-seL4-uboot &gt; "
-+
-+/* Default environment */
-+#if defined(CONFIG_EXTRA_ENV_SETTINGS)
-+#undef CONFIG_EXTRA_ENV_SETTINGS
-+#endif
-+
-+#define CONFIG_EXTRA_ENV_SETTINGS                                           \
-+    "ethaddr=00:0a:35:00:01:22\0"                                           \
-+    "bitstream_image=system.bit.bin\0"                                      \
-+    "boot_image=BOOT.bin\0"                                                 \
-+    "loadbit_addr=0x100000\0"                                               \
-+    "mmc_loadbit_fat=echo Loading bitstream from SD/MMC/eMMC to RAM...;"    \
-+        "mmcinfo &amp;&amp; "                                                       \
-+        "fatload mmc 0 ${loadbit_addr} ${bitstream_image} &amp;&amp; "              \
-+        "fpga load 0 ${loadbit_addr} ${filesize}\0"                         \
-+    "sel4_image=sel4/sel4-image\0"                                          \
-+    "loadsel4_addr=0x2080000\0"                                             \
-+    "sdboot=echo Loading seL4 image from SD/MMC/eMMC to RAM...;"            \
-+        "mmcinfo &amp;&amp; "                                                       \
-+        "fatload mmc 0 ${loadsel4_addr} ${sel4_image} &amp;&amp; "                  \
-+        "bootelf ${loadsel4_addr}\0"
-+
-+#endif /* __CONFIG_ZYNQ_ZC70X_SEL4_H */
-</span><span class="gd">--
-</span><span class="p">1.9.1
-</span></code></pre></div></div>
-
-<p>To get U-boot:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/xilinx/u-boot-xlnx.git
-<span class="nb">cd </span>u-boot-xlnx.git
-patch <span class="nt">-p1</span> &lt; 0001-Added-Zynq-ZC70x-board-for-seL4.patch
-<span class="nb">export </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
-make zynq_zc70x_sel4_config
-make
-</code></pre></div></div>
-
-<p>The u-boot file cannot be booted directly. You must first generate a boot image:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>u-boot u-boot.elf
-<span class="nb">echo</span> <span class="s2">"image: { </span><span class="nv">$PWD</span><span class="s2">/u-boot.elf }"</span> <span class="o">&gt;</span> boot.bif
-/opt/Xilinx/SDK/2014.4/bin/bootgen <span class="nt">-o</span> BOOT.BIN <span class="nt">-w</span> <span class="nt">-image</span> image.bif
-</code></pre></div></div>
-
-<p>To boot from the SD card, make sure that the first partition of the SD card is FAT32 and copy BOOT.bin to the root directory.</p>
-
 <h2 id="development-environment">Development environment</h2>
 
 <h3 id="vivado-sdk">Vivado SDK</h3>
 
-<p>Bitstream generation (ie FPGA code compiler) is not support for ZC706 when using a free license. Other features may still work</p>
+<p>Bitstream generation (ie FPGA code compiler) is not supported for ZC706 when using a free license. Other features may still work</p>
 
 <p>The Vivado SDK provides many features:</p>
 
@@ -752,7 +635,7 @@ make
 
 <p><a href="http://wiki.gentoo.org/wiki/Xilinx_USB_JTAG_Programmers">http://wiki.gentoo.org/wiki/Xilinx_USB_JTAG_Programmers</a></p>
 
-<h4 id="you-will-need">You will need:</h4>
+<p>You will need</p>
 
 <ul>
   <li>xmd (shipped with vivado but can possibly be obtained as a package on its own)</li>
@@ -760,7 +643,9 @@ make
 </ul>
 
 <ol>
-  <li>create a xmd.ini script within the directory that you intend to run xmd from.
+  <li>
+    <p>create a xmd.ini script within the directory that you intend to run xmd from.</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># Connect to the board</span>
   connect arm hw
   <span class="c"># program the fpga with the provided bitstream</span>
@@ -776,14 +661,11 @@ make
   <span class="c"># exit</span>
 </code></pre></div>    </div>
   </li>
-  <li>Run XMD. On my system, the executable is: ‘/opt/Xilinx/SDK/2013.4/bin/lin64/xmd’. XMD will not terminate; leave it open.</li>
-  <li>Next run GDB. On my system, the executable is: ‘/opt/Xilinx/SDK/2013.4/gnu/arm/lin/bin/arm-xilinx-eabi-gdb bootimg.elf’, but any arm-*-gdb should work</li>
-  <li>enter “tar ext localhost:1234” to connect to the GDB server that was started by XMD or the hw_server</li>
+  <li>Run XMD. XMD will not terminate; leave it open.</li>
+  <li>Next run GDB. Any arm-*-gdb should work.</li>
+  <li>Enter “target extended-remote localhost:1234” to connect to the GDB server that was started by XMD or the hw_server</li>
   <li>“c” to start the program!</li>
 </ol>
-
-<p>Version 2013.4 of GDB throws an error about an inaccessible memory address. This is fixed in version 2014.4 of the tools, but also requires 2014.4 of XMD of hw_server.</p>
-
 
 </div>
 
