@@ -71,6 +71,17 @@ $(REPOSITORIES):
 .PHONY: repos
 repos: $(REPOSITORIES)
 
+# Microkit
+
+MICROKIT_REPO = _repos/sel4/microkit
+$(MICROKIT_REPO)/platforms.yml: $(MICROKIT_REPO)
+
+_data/microkit_platforms.yml: $(MICROKIT_REPO)/platforms.yml
+	cp $< $@
+
+.PHONY: microkit
+microkit: _data/microkit_platforms.yml
+
 # Tutorials
 
 TUTES_DST = _processed/tutes
@@ -278,7 +289,7 @@ serve: generate
 	JEKYLL_ENV=$(JEKYLL_ENV) bundle exec jekyll serve
 
 .PHONY: generate
-generate: repos ruby_deps .npm_deps generate_api microkit-tutorial rust-tutorial tutorials
+generate: repos ruby_deps .npm_deps generate_api microkit microkit-tutorial rust-tutorial tutorials
 ifeq ($(JEKYLL_ENV),production)
 	$(MAKE) generate_data_files
 endif
@@ -307,6 +318,7 @@ clean:
 	rm -rf projects/virtualization/docs/api
 	rm -rf $(RUST_TUT_DST) $(RUST_TUT_FINAL_DST)
 	rm -f _data/microkit_tutorial.yml
+	rm -f _data/microkit_platforms.yml
 
 .PHONY: repoclean
 repoclean: clean
