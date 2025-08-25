@@ -1,6 +1,6 @@
 ---
 arm_hardware: true
-cmake_plat: rpi3
+cmake_plat: bcm2837
 xcompiler_arg: -DAARCH32=1
 platform: Raspberry Pi 3-b
 arch: ARMv8A
