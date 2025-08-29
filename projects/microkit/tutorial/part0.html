@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-08-29 03:26:49 +0000 -->
+<!-- Page last generated 2025-08-29 09:06:55 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Microkit Tutorial - Setting Up | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/tutorial/part0.html">
-    <link href="/assets/css/sel4.css?v=1756438009" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1756458415" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -571,6 +571,53 @@
   <div class="tab-content order-3 basis-full hidden overflow-hidden border-l-2 pl-2 border-gray-100 dark:border-gray-800" data-tabname="Linux">
       <div>
 
+      <p>Follow these instructions depending on your machine’s architecture to get
+the Microkit SDK.</p>
+
+      <div class="tab-group flex flex-row flex-wrap max-w-3xl">
+  <div class="order-2 flex-1 basis-full"></div>
+
+<button class="tab-header order-1 mt-2 mr-3 px-5 pt-1.5 rounded-t-lg
+                 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700
+                 font-bold cursor-pointer" data-tabname="x86-64">x86-64</button>
+  <div class="tab-content order-3 basis-full hidden overflow-hidden border-l-2 pl-2 border-gray-100 dark:border-gray-800" data-tabname="x86-64">
+      <div>
+
+            <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># First make a directory for the tutorial</span>
+<span class="nb">mkdir </span>microkit_tutorial
+<span class="nb">cd </span>microkit_tutorial
+<span class="c"># Then download and extract the SDK</span>
+curl <span class="nt">-L</span> https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-linux-x86-64.tar.gz <span class="nt">-o</span> sdk.tar.gz
+<span class="nb">tar </span>xf sdk.tar.gz
+</code></pre></div>            </div>
+
+          </div>
+</div>
+
+
+<button class="tab-header order-1 mt-2 mr-3 px-5 pt-1.5 rounded-t-lg
+                 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700
+                 font-bold cursor-pointer" data-tabname="AArch64">AArch64</button>
+  <div class="tab-content order-3 basis-full hidden overflow-hidden border-l-2 pl-2 border-gray-100 dark:border-gray-800" data-tabname="AArch64">
+      <div>
+
+            <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># First make a directory for the tutorial</span>
+<span class="nb">mkdir </span>microkit_tutorial
+<span class="nb">cd </span>microkit_tutorial
+<span class="c"># Then download and extract the SDK</span>
+curl <span class="nt">-L</span> https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-linux-aarch64.tar.gz <span class="nt">-o</span> sdk.tar.gz
+<span class="nb">tar </span>xf sdk.tar.gz
+</code></pre></div>            </div>
+
+          </div>
+</div>
+
+
+</div>
+
+      <p>Follow these instructions to get the tutorial’s dependencies depending
+on your Linux distribution.</p>
+
       <div class="tab-group flex flex-row flex-wrap max-w-3xl">
   <div class="order-2 flex-1 basis-full"></div>
 
@@ -613,15 +660,6 @@
 
 </div>
 
-      <p>You can get the SDK with:</p>
-      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># First make a directory for the tutorial</span>
-<span class="nb">mkdir </span>microkit_tutorial
-<span class="nb">cd </span>microkit_tutorial
-<span class="c"># Then download and extract the SDK</span>
-curl <span class="nt">-L</span> https://github.com/seL4/microkit/releases/download/2.0.1/microkit-sdk-2.0.1-linux-x86-64.tar.gz <span class="nt">-o</span> sdk.tar.gz
-<span class="nb">tar </span>xf sdk.tar.gz
-</code></pre></div>      </div>
-
     </div>
 </div>
 
@@ -631,11 +669,8 @@ curl <span class="nt">-L</span> https://github.com/seL4/microkit/releases/downlo
   <div class="tab-content order-3 basis-full hidden overflow-hidden border-l-2 pl-2 border-gray-100 dark:border-gray-800" data-tabname="macOS">
       <div>
 
-      <p>You can install the dependencies using <a href="https://brew.sh/">Homebrew</a>:</p>
-
-      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew tap messense/macos-cross-toolchains
-brew <span class="nb">install </span>make qemu aarch64-unknown-linux-gnu
-</code></pre></div>      </div>
+      <p>Follow these instructions depending on your what kind of Mac you have
+to get the Microkit SDK.</p>
 
       <div class="tab-group flex flex-row flex-wrap max-w-3xl">
   <div class="order-2 flex-1 basis-full"></div>
@@ -676,6 +711,12 @@ curl <span class="nt">-L</span> https://github.com/seL4/microkit/releases/downlo
 
 
 </div>
+
+      <p>You can install the tutorial’s dependencies using <a href="https://brew.sh/">Homebrew</a>:</p>
+
+      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew tap messense/macos-cross-toolchains
+brew <span class="nb">install </span>make qemu aarch64-unknown-linux-gnu
+</code></pre></div>      </div>
 
     </div>
 </div>
