@@ -17,22 +17,17 @@ or [contact the developers](https://sel4.systems/support.html).
 
 | Feature | Current status | Timeline | Availability |
 |-----------------------------------------------------------|
-| Multi-core support | Working state, needs cleanup for merging. | Q3'25 | [Branch 'smp'](https://github.com/seL4/microkit/tree/smp) |
-| [x86 support](#x86) | Actively worked on | Q4'25 | [PR #244](https://github.com/seL4/microkit/pull/244) |
-| [Multi-kernel support](#multikernel) | Actively worked on. | Q4'25 | N/A |
+| Multi-core support | Working state, needs cleanup for merging. | Q4'25 | [Branch](https://github.com/seL4/microkit/tree/smp) |
+| [x86 support](#x86) | Merged, available in next release | Q4'25 | [PR #337](https://github.com/seL4/microkit/pull/337) |
+| [Multi-kernel support](#multikernel) | Actively worked on. | Q4'25 | [Branch](https://github.com/au-ts/multikernel-manifest/) |
 | [PD templates](#templates) | Initial work explored, requires more experimentation and development. | Q1'26 | N/A |
 
 ## Feature details
 
 ### x86 support {#x86}
 
-Microkit support AArch64 and RISC-V (64-bit), x86-64 support is being worked on. There
-has been initial work to get x86-64 working however there are some remaining issues that
-need to be resolved before merging is possible.
-
-Most of the current friction with x86 is that, unlike ARM and RISC-V, the hardware layout
-(e.g main memory and devices) is not statically known which is currently what Microkit
-expects. We are working on addressing this.
+x86-64 support is available in the latest Microkit (since [PR #337](https://github.com/au-ts/multikernel-manifest/)),
+but not in an available release. The next release will contain x86-64 support.
 
 ### Multi-kernel support {#multikernel}
 
@@ -41,7 +36,7 @@ As verified multi-core is a while away, one strategy to get a multi-core system 
 single-core seL4 is to run an instance of seL4 on each core. This feature requires a number of internal
 changes but should be mostly transparent to the user.
 
-This is being actively worked on.
+This is being actively worked on, more details can be found [here](https://github.com/au-ts/multikernel-manifest/).
 
 ### PD templates {#templates}
 
