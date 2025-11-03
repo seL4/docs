@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-11-03 00:28:49 +0000 -->
+<!-- Page last generated 2025-11-03 02:13:39 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Microkit roadmap | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/roadmap.html">
-    <link href="/assets/css/sel4.css?v=1762129729" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1762136019" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -548,20 +548,20 @@ or <a href="https://sel4.systems/support.html">contact the developers</a>.</p>
     <tr>
       <td>Multi-core support</td>
       <td>Working state, needs cleanup for merging.</td>
-      <td>Q3’25</td>
-      <td><a href="https://github.com/seL4/microkit/tree/smp">Branch ‘smp’</a></td>
+      <td>Q4’25</td>
+      <td><a href="https://github.com/seL4/microkit/tree/smp">Branch</a></td>
     </tr>
     <tr>
       <td><a href="#x86">x86 support</a></td>
-      <td>Actively worked on</td>
+      <td>Merged, available in next release</td>
       <td>Q4’25</td>
-      <td><a href="https://github.com/seL4/microkit/pull/244">PR #244</a></td>
+      <td><a href="https://github.com/seL4/microkit/pull/337">PR #337</a></td>
     </tr>
     <tr>
       <td><a href="#multikernel">Multi-kernel support</a></td>
       <td>Actively worked on.</td>
       <td>Q4’25</td>
-      <td>N/A</td>
+      <td><a href="https://github.com/au-ts/multikernel-manifest/">Branch</a></td>
     </tr>
     <tr>
       <td><a href="#templates">PD templates</a></td>
@@ -576,13 +576,8 @@ or <a href="https://sel4.systems/support.html">contact the developers</a>.</p>
 
 <h3 id="x86">x86 support</h3>
 
-<p>Microkit support AArch64 and RISC-V (64-bit), x86-64 support is being worked on. There
-has been initial work to get x86-64 working however there are some remaining issues that
-need to be resolved before merging is possible.</p>
-
-<p>Most of the current friction with x86 is that, unlike ARM and RISC-V, the hardware layout
-(e.g main memory and devices) is not statically known which is currently what Microkit
-expects. We are working on addressing this.</p>
+<p>x86-64 support is available in the latest Microkit (since <a href="https://github.com/au-ts/multikernel-manifest/">PR #337</a>),
+but not in an available release. The next release will contain x86-64 support.</p>
 
 <h3 id="multikernel">Multi-kernel support</h3>
 
@@ -591,7 +586,7 @@ As verified multi-core is a while away, one strategy to get a multi-core system 
 single-core seL4 is to run an instance of seL4 on each core. This feature requires a number of internal
 changes but should be mostly transparent to the user.</p>
 
-<p>This is being actively worked on.</p>
+<p>This is being actively worked on, more details can be found <a href="https://github.com/au-ts/multikernel-manifest/">here</a>.</p>
 
 <h3 id="templates">PD templates</h3>
 
