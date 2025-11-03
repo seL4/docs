@@ -26,7 +26,7 @@ or [contact the developers](https://sel4.systems/support.html).
 
 ### x86 support {#x86}
 
-x86-64 support is available in the latest Microkit (since [PR #337](https://github.com/au-ts/multikernel-manifest/)),
+x86-64 support is available in the latest Microkit (since [PR #337](https://github.com/seL4/microkit/pull/337)),
 but not in an available release. The next release will contain x86-64 support.
 
 ### Multi-kernel support {#multikernel}
