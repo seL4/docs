@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-11-18 03:32:53 +0000 -->
+<!-- Page last generated 2025-11-19 03:32:23 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1763436773" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1763523143" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -8462,7 +8462,7 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
       <td><code class="language-plaintext highlighter-rouge">target</code></td>
-      <td>The node ID that will be targeted. 0-7 for GICv2 and 0-31 for GICv3. Targets within that range that are not supported by the hardware will be ignored. For example, on a GICv3 board with 4 CPUs, the capability for target 13 can be created, but signals to it will have no effect.</td>
+      <td>The node ID that will be targeted. 0-7 for GICv2 and the affinity value for GICv3 (concatenation of Aff3+Aff2+Aff1+Aff0 from MPIDR). Targets within that range that are not supported by the hardware will be ignored. For example, on a GICv2 board with 4 CPUs, the capability for target 5 can be created, but signals to it will have no effect.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_CNode</code></td>
