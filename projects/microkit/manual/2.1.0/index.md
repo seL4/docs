@@ -1,40 +1,23 @@
-<!--
-     Copyright 2021, Breakaway Consulting Pty. Ltd.
-     SPDX-License-Identifier: CC-BY-SA-4.0
--->
-
 ---
-title: Microkit User Manual (v2.0.1-dev)
-documentclass: article
-classoption:
-- english
-- 11pt
-- a4paper
-header-includes:
-- \usepackage[makeTitle,copyright]{sel4}
-- \usepackage{titlesec}
-- \newcommand{\sectionbreak}{\clearpage}
-subparagraph: yes
-numbersections: yes
-colorlinks: true
+parent: /projects/microkit/manual/latest/
+toc: true
+SPDX-FileCopyrightText: 2021, Breakaway Consulting Pty. Ltd.
+SPDX-License-Identifier: CC-BY-SA-4.0
+mathjax: true
 ---
 
-\maketitle
-\thispagestyle{empty}
-\clearpage
-\tableofcontents
-\pagenumbering{roman}
-\clearpage
-\pagenumbering{arabic}
-\setcounter{page}{1}
+# Microkit User Manual (v2.1.0)
 
-# Introduction
+This is a web version of the manual, you can find a PDF [here](microkit_user_manual.pdf) as well as in the
+SDK at `doc/microkit_user_manual.pdf`.
+
+## Introduction
 
 The seL4 Microkit is a small and simple operating system (OS) built on the seL4 microkernel.
 Microkit is designed for building system with a *static architecture*.
 A static architecture is one where system resources are assigned up-front at system initialisation time.
 
-## Purpose
+### Purpose
 
 The Microkit is intended to:
 
@@ -45,7 +28,7 @@ The Microkit is intended to:
 * retain seL4's trademark performance for systems built with it;
 * be, in principle, amenable to formal analysis of system safety and security properties (although such analysis is beyond the initial scope).
 
-## Overview
+### Overview
 
 A Microkit system is built from a set of individual programs that are isolated from each other, and the system, in *protection domains*.
 Protection domains can interact by calling *protected procedures* or sending *notifications*.
@@ -71,9 +54,7 @@ The system description is an XML file that specifies all the objects that make u
 
 *Note*: Microkit does **not** impose any specific build system; you are free to choose the build system that works best for you.
 
-\clearpage
-
-## Document Structure
+### Document Structure
 
 The [Concepts](#concepts) chapter describes the various concepts that make up Microkit.
 It is recommended that you familiarise yourself with these concepts before trying to build a system.
@@ -92,7 +73,7 @@ The [Rationale](#rationale) chapter documents the rationale for some of the key 
 
 The [Internals](#internals) chapter documents some of the internal details for how Microkit works.
 
-# Concepts {#concepts}
+## Concepts {#concepts}
 
 This chapter describes the key concepts provided by Microkit.
 
@@ -110,7 +91,7 @@ This document attempts to clearly describe all of these terms, however as the co
 * [fault](#fault)
 * [ioport](#ioport)
 
-## System {#system}
+### System {#system}
 
 At the most basic level Microkit provides the platform for running a *system* on a specific board.
 As a *user* of Microkit you use the platform to create a software system that implements your use case.
@@ -118,7 +99,7 @@ The system is described in a declarative configuration file, and the Microkit to
 
 The key elements that make up a system are *protection domains*, *memory regions* and *channels*.
 
-## Protection Domains {#pd}
+### Protection Domains {#pd}
 
 A **protection domain** (PD) is the fundamental runtime abstraction in Microkit.
 It is analogous, but very different in detail, to a process on a UNIX system.
@@ -131,7 +112,7 @@ The program image is an ELF file containing the code and data which implements t
 
 Microkit supports a maximum of 63 protection domains.
 
-### Entry points
+#### Entry points
 
 Although a protection domain is somewhat analogous to a process, it has a considerably different program structure and life-cycle.
 A process on a typical operating system will have a `main` function which is invoked by the system when the process is created.
@@ -164,7 +145,7 @@ Specifically, it is possible for a high priority PD's `notified` or `protected` 
 
 The overall computational model for a Microkit system is a set of isolated components reacting to incoming events.
 
-### Scheduling
+#### Scheduling
 
 The PD has a number of scheduling attributes that are configured in the system description:
 
@@ -186,7 +167,7 @@ Runnable PDs of the same priority are scheduled in a round-robin manner.
 
 **Passive** determines whether the PD is passive. A passive PD will have its scheduling context revoked after initialisation and then bound instead to the PD's notification object. This means the PD will be scheduled on receiving a notification, whereby it will run on the notification's scheduling context. When the PD receives a *protected procedure* by another PD or a *fault* caused by a child PD, the passive PD will run on the scheduling context of the callee.
 
-## Virtual Machines {#vm}
+### Virtual Machines {#vm}
 
 A *virtual machine* (VM) is a runtime abstraction for running guest operating systems in Microkit. It is similar
 to a protection domain in that it provides a thread of control that executes within an isolated virtual address space.
@@ -208,7 +189,7 @@ of supporting code/infrastructure to properly start and manage a VM.
 To keep the (potentially untrusted) virtual machine isolated from the rest of the system, Microkit enforces that a
 protection domain can only ever manage a single virtual machine.
 
-## Memory Regions {#mr}
+### Memory Regions {#mr}
 
 A *memory region* is a contiguous range of physical memory.
 A memory region may have a *fixed* physical address.
@@ -236,7 +217,7 @@ The mapping has a number of attributes, which include:
 **Note:** When a memory region is mapped into multiple protection
 domains, the attributes used for different mappings may vary.
 
-## Channels {#channels}
+### Channels {#channels}
 
 A *channel* enables two protection domains to interact using protected procedures or notifications.
 Each connects exactly two PDs; there are no multi-party channels.
@@ -254,7 +235,7 @@ Similarly, **B** can refer to **A** via the channel identifier **42**.
 
 The system supports a maximum of 63 channels and interrupts per protection domain.
 
-### Protected procedures {#pp}
+#### Protected procedures {#pp}
 
 A protection domain may provide a *protected procedure* (PP) which can be invoked from another protection domain.
 Up to 64 words of data may be passed as arguments when calling a protected procedure.
@@ -284,7 +265,7 @@ A *message* structure is returned from this function.
 When a PD's protected procedure is invoked, the `protected` entry point is invoked with the channel identifier and message structure passed as arguments.
 The `protected` entry point must return a message structure.
 
-### Notifications {#notification}
+#### Notifications {#notification}
 
 A notification is a (binary) semaphore-like synchronisation mechanism.
 For example, a PD can *notify* another PD to indicate availability of data in a shared memory region if they share a channel.
@@ -303,7 +284,7 @@ in a single execution of the `notified` entry point. For example, if PD A notifi
 same channel without PD B ever executing, once PD B is scheduled it would only see one notification and hence
 only enter `notified` once for that channel.
 
-## Interrupts {#irq}
+### Interrupts {#irq}
 
 Hardware interrupts can be used to notify a protection domain.
 The system description specifies if a protection domain receives notifications for any hardware interrupt sources.
@@ -317,7 +298,7 @@ Microkit does not provides timers, nor any *sleep* API.
 After initialisation, activity in the system is initiated by an interrupt causing a `notified` entry point to be invoked.
 That notified function may in turn notify or call other protection domains that cause other system activity, but eventually all activity indirectly initiated from that interrupt will complete, at which point the system is inactive again until another interrupt occurs.
 
-## Faults {#fault}
+### Faults {#fault}
 
 Faults such as an invalid memory access or illegal instruction are delivered to the seL4 kernel which then forwards them to
 a designated 'fault handler'. By default, all faults caused by protection domains go to the system fault handler which
@@ -333,11 +314,11 @@ The default system fault handler (aka the monitor) has the highest priority and 
 execute and handle faults immediately after they occur. For child PDs that have their faults
 delivered to another PD, the fault being handled depends on when the parent PD is scheduled.
 
-## I/O Ports {#ioport}
+### I/O Ports {#ioport}
 
 I/O ports are x86 mechanisms to access certain physical devices (e.g. PC serial ports or PCI) using the `in` and `out` CPU instructions. The system description specifies if a protection domain have access to certain port address ranges. These accesses will be executed by seL4 and the result returned to protection domains.
 
-# SDK {#sdk}
+## SDK {#sdk}
 
 Microkit is distributed as a software development kit (SDK).
 
@@ -373,18 +354,18 @@ The Microkit tool should be invoked by the system build process to transform a s
 
 The ELF files provided as program images should be standard ELF files and have been linked against the provided `libmicrokit.a`.
 
-## Configurations {#config}
+### Configurations {#config}
 
-### Debug
+#### Debug
 
 The *debug* configuration includes a debug build of the seL4 kernel to allow console debug output using the kernel's UART driver.
 
-### Release
+#### Release
 
 The *release* configuration is a release build of the seL4 kernel and is intended for production builds. The loader, monitor, initialiser and
 kernel do *not* perform any serial output.
 
-#### Proofs
+##### Proofs
 
 The formal verification of seL4 applies to a specific set of seL4 configuration only. This means that making a *release* build
 of a Microkit system does not imply that the seL4 kernel being used is verified.
@@ -398,13 +379,13 @@ You can find more information about what verified seL4 configurations do exist
 
 A roadmap for upcoming verification is available [here](https://sel4.systems/roadmap.html).
 
-### Benchmark
+#### Benchmark
 
 The *benchmark* configuration uses a build of the seL4 kernel that exports the hardware's performance monitoring unit (PMU) to PDs.
 The kernel also tracks information about CPU utilisation. This benchmark configuration exists due a limitation of the seL4 kernel
 and is intended to be removed once [RFC-16 is implemented](https://github.com/seL4/rfcs/pull/22).
 
-### Multi-core (SMP) configurations {#multicore_config}
+#### Multi-core (SMP) configurations {#multicore_config}
 
 The configurations listed above default to using the uni-core configuration of seL4/Microkit.
 Currently we do not want to default to using the multi-core configuration of the kernel so
@@ -418,7 +399,7 @@ On ARM/RISC-V, the number of cores available defaults to the number of cores the
 On x86-64, the number of cores available depends on how many are detected at run-time. Right now
 there is a fixed upper limit, see the board-specific documentation for details.
 
-## System Requirements
+### System Requirements
 
 The Microkit tool requires Linux (x86-64 or AArch64), macOS (x86-64 or AArch64).
 
@@ -428,7 +409,7 @@ On macOS, the Microkit tool should run on macOS 10.12 (Sierra) or higher.
 
 The Microkit tool does not depend on any additional system binaries.
 
-# Microkit Tool {#tool}
+## Microkit Tool {#tool}
 
 The Microkit tool is available in `bin/microkit`.
 
@@ -456,9 +437,9 @@ The report can be useful when debugging potential system problems.
 This report does not have a fixed format and may change between versions.
 It is not intended to be machine readable.
 
-## Image format
+### Image format
 
-### ARM
+#### ARM
 
 On ARM, the Microkit tool will produce either a raw binary that is intended to be loaded and jumped or
 an ELF. By default, the tool will produce a raw binary unless the format is specified using the `--image-type` argument.
@@ -473,7 +454,7 @@ the `autostart` environment variable with `setenv autostart yes` to have the ima
 
 See the board-specific instructions for more details.
 
-### RISC-V
+#### RISC-V
 
 On RISC-V, the Microkit tool can produce either a raw binary that is intended to be loaded and jumped,
 a uImage with the Linux header or an ELF. Typically the tool will produce a uImage by default, for
@@ -486,13 +467,13 @@ it should still work by relocating itself upon boot.
 For the uImage format. You may load this image anywhere in memory along with your platform's DTB, then use
 the `bootm` command in U-Boot. It will copy the loader to the correct location in memory and jump to it.
 
-### x86-64
+#### x86-64
 
 On x86-64, the image format is always ELF, it is expected to be loaded as a Multiboot boot module.
 
 See [x86-64 generic support](#x86_64_generic) for more details.
 
-# Language Support
+## Language Support
 
 There are native APIs for C/C++ and Rust.
 
@@ -502,7 +483,7 @@ that supports C FFI.
 For Rust, native bindings exist but are not included in the SDK itself. They are
 available at [rust-sel4](https://github.com/seL4/rust-sel4).
 
-# libmicrokit {#libmicrokit}
+## libmicrokit {#libmicrokit}
 
 All program images should link against `libmicrokit.a`.
 
@@ -561,12 +542,12 @@ If the protection domain has children it must also implement:
     void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs);
 
 
-## `void init(void)`
+### `void init(void)`
 
 Every PD must expose an `init` entry point.
 This is called by the system at boot time.
 
-## `void notified(microkit_channel ch)`
+### `void notified(microkit_channel ch)`
 
 The `notified` entry point is called by the system when a PD has received a notification on a channel.
 
@@ -576,7 +557,7 @@ The `notified` entry point is called by the system when a PD has received a noti
 
 Channel identifiers are specified in the system configuration.
 
-## `microkit_msginfo protected(microkit_channel ch, microkit_msginfo msginfo)`
+### `microkit_msginfo protected(microkit_channel ch, microkit_msginfo msginfo)`
 
 The `protected` entry point is optional.
 This is invoked when another PD calls `microkit_ppcall` on a channel shared with the PD.
@@ -594,7 +575,7 @@ Note: The message is *copied* from the caller.
 The returned `microkit_msginfo` is the return value of the protected procedure.
 As with arguments, this is *copied* to the caller.
 
-## `seL4_Bool fault(microkit_child child, microkit_msginfo msginfo, microkit_msginfo *reply_msginfo)`
+### `seL4_Bool fault(microkit_child child, microkit_msginfo msginfo, microkit_msginfo *reply_msginfo)`
 
 The `fault` entry point being invoked depends on whether the given PD has children.
 It is invoked when a child PD or VM causes a fault.
@@ -619,7 +600,7 @@ To find the full list of possible faults that could occur and details regarding 
 kind of fault, please see the 'Faults' section of the
 [seL4 reference manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf).
 
-## `microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo)`
+### `microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo)`
 
 Performs a call to a protected procedure in a different PD.
 The `ch` argument identifies the protected procedure to be called.
@@ -628,16 +609,16 @@ Channel identifiers are specified in the system configuration.
 
 The protected procedure's return data is returned in the `microkit_msginfo`.
 
-## `void microkit_notify(microkit_channel ch)`
+### `void microkit_notify(microkit_channel ch)`
 
 Notify the channel `ch`.
 Channel identifiers are specified in the system configuration.
 
-## `void microkit_irq_ack(microkit_channel ch)`
+### `void microkit_irq_ack(microkit_channel ch)`
 
 Acknowledge the interrupt identified by the specified channel.
 
-## `void microkit_deferred_notify(microkit_channel ch)`
+### `void microkit_deferred_notify(microkit_channel ch)`
 
 The same as `microkit_notify` but will instead not actually perform the notify until
 the entry point where `microkit_deferred_notify` was called returns.
@@ -648,7 +629,7 @@ same entry point.
 The purpose of this API is for performance critical code as this API saves
 a kernel system call.
 
-## `void microkit_deferred_irq_ack(microkit_channel ch)`
+### `void microkit_deferred_irq_ack(microkit_channel ch)`
 
 The same as `microkit_irq_ack` but will instead not actually perform the IRQ acknowledge
 until the entry point where `microkit_deferred_irq_ack` was called returns.
@@ -659,47 +640,47 @@ same entry point.
 The purpose of this API is for performance critical code as this API saves
 a kernel system call.
 
-## `void microkit_pd_restart(microkit_child pd, uintptr_t entry_point)`
+### `void microkit_pd_restart(microkit_child pd, uintptr_t entry_point)`
 
 Restart the execution of a child protection domain with ID `pd` at the given `entry_point`.
 This will set the program counter of the child protection domain to `entry_point`.
 
-## `void microkit_pd_stop(microkit_child pd)`
+### `void microkit_pd_stop(microkit_child pd)`
 
 Stop the execution of the child protection domain with ID `pd`.
 
-## `microkit_msginfo microkit_msginfo_new(uint64_t label, uint16_t count)`
+### `microkit_msginfo microkit_msginfo_new(uint64_t label, uint16_t count)`
 
 Creates a new message structure.
 
 The message can be passed to `microkit_ppcall` or returned from `protected`.
 
-## `uint64_t microkit_msginfo_get_label(microkit_msginfo msginfo)`
+### `uint64_t microkit_msginfo_get_label(microkit_msginfo msginfo)`
 
 Returns the label from a message.
 
-## `uint64_t microkit_msginfo_get_count(microkit_msginfo msginfo)`
+### `uint64_t microkit_msginfo_get_count(microkit_msginfo msginfo)`
 
 Returns the count of message registers in the message.
 
-## `uint64_t microkit_mr_get(uint8_t mr)`
+### `uint64_t microkit_mr_get(uint8_t mr)`
 
 Get a message register.
 
-## `void microkit_mr_set(uint8_t mr, uint64_t value)`
+### `void microkit_mr_set(uint8_t mr, uint64_t value)`
 
 Set a message register.
 
-## `void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point)`
+### `void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point)`
 
 Restart the execution of a VM's virtual CPU with ID `vcpu` at the given `entry point`.
 This will set the program counter of the vCPU to `entry_point`.
 
-## `void microkit_vcpu_stop(microkit_child vcpu)`
+### `void microkit_vcpu_stop(microkit_child vcpu)`
 
 Stop the execution of the VM's virtual CPU with ID `vcpu`.
 
-## `void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,
+### `void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,
 seL4_Uint8 priority, seL4_Uint8 group,
 seL4_Uint8 index)`
 
@@ -709,24 +690,24 @@ priority level the virtual IRQ will be injected as. The `group` determines wheth
 the virtual IRQ will be injected into secure world (1) or non-secure world (0).
 The `index` is the index of the virtual GIC list register.
 
-## `void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq)`
+### `void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq)`
 
 Acknowledge a ARM virtual Private Peripheral Interrupt (PPI) with IRQ number `irq`
 for a VM's vCPU with ID `vcpu`.
 
-## `seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg)`
+### `seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg)`
 
 Read a register for a given virtual CPU with ID `vcpu`. The `reg` argument is the index of the
 register that is read. The list of registers is defined by the enum `seL4_VCPUReg`
 in the seL4 source code.
 
-## `void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value)`
+### `void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value)`
 
 Write to a register for a given virtual CPU with ID `vcpu`. The `reg` argument is the index of the
 register that is written to. The `value` argument is what the register will be set to.
 The list of registers is defined by the enum `seL4_VCPUReg` in the seL4 source code.
 
-## `void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response)`
+### `void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response)`
 
 The API takes in arguments for a Secure Monitor Call which will be performed by seL4. Any
 response values will be placed into the `response` structure.
@@ -737,15 +718,15 @@ Note that this API is only available when the PD making the call has been config
 have SMC enabled in the SDF. Note that when the kernel makes the actual SMC, it cannot
 pre-empt the Secure Monitor and therefore any kernel WCET properties are no longer guaranteed.
 
-## `void microkit_x86_ioport_write_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data)`
+### `void microkit_x86_ioport_write_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data)`
 
 Write an 8, 16, or 32 bits value at port address `port_addr` to I/O Port with ID `ioport_id`.
 
-## `seL4_Uint(8|16|32) microkit_x86_ioport_read_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr)`
+### `seL4_Uint(8|16|32) microkit_x86_ioport_read_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr)`
 
 Read an 8, 16, or 32 bits value at port address `port_addr` from I/O Port with ID `ioport_id`.
 
-## `seL4_Word microkit_vcpu_x86_read_vmcs(microkit_child vcpu, seL4_Word field)`
+### `seL4_Word microkit_vcpu_x86_read_vmcs(microkit_child vcpu, seL4_Word field)`
 
 Read a Virtual Machine Control Structure field specified by `field` for a given virtual CPU
 with ID `vcpu` using the `vmread` instruction.
@@ -836,7 +817,7 @@ The following fields can be read from:
 * `VMX_GUEST_CR3`
 * `VMX_GUEST_CR4`
 
-## `void microkit_vcpu_x86_write_vmcs(microkit_child vcpu, seL4_Word field, seL4_Word value)`
+### `void microkit_vcpu_x86_write_vmcs(microkit_child vcpu, seL4_Word field, seL4_Word value)`
 
 Write a Virtual Machine Control Structure field specified by `field` for a given virtual CPU
 with ID `vcpu` using the `vmwrite` instruction. The value may be modified to ensure any bits
@@ -918,7 +899,7 @@ The following fields can be written to:
 * `VMX_GUEST_CR0`
 * `VMX_GUEST_CR4`
 
-## `seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field)`
+### `seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field)`
 
 Read a 64-bit Model Specific Register of a given virtual CPU with ID `vcpu` specified by
 `field` from hardware using the `rdmsr` instruction. The following registers can be written to:
@@ -928,7 +909,7 @@ Read a 64-bit Model Specific Register of a given virtual CPU with ID `vcpu` spec
 * `IA32_CSTAR_MSR`
 * `IA32_FMASK_MSR`
 
-## `void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value)`
+### `void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value)`
 
 Write a 64-bit Model Specific Register of a given virtual CPU with ID `vcpu` specified by
 `field` to hardware using the `wrmsr` instruction. The following registers can be read from:
@@ -938,22 +919,22 @@ Write a 64-bit Model Specific Register of a given virtual CPU with ID `vcpu` spe
 * `IA32_CSTAR_MSR`
 * `IA32_FMASK_MSR`
 
-## `void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word length)`
+### `void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word length)`
 
 Enable I/O port range `[port_addr..port_addr + length)` of I/O Port with ID `ioport_id`
 in the execution environment of a given virtual CPU with ID `vcpu`.
 
-## `void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length)`
+### `void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length)`
 
 Disable I/O port range `[port_addr..port_addr + length)` in the execution environment of a given
 virtual CPU with ID `vcpu`.
 
-## `void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs)`
+### `void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs)`
 
 Write the registers of a given virtual CPU with ID `vcpu`. The `regs` argument is the pointer to
 the struct of registers `seL4_VCPUContext` that are written from.
 
-# System Description File {#sysdesc}
+## System Description File {#sysdesc}
 
 This section describes the format of the System Description File (SDF).
 
@@ -968,7 +949,7 @@ Within the `system` root element the following child elements are supported:
 * `memory_region`
 * `channel`
 
-## `protection_domain`
+### `protection_domain`
 
 The `protection_domain` element describes a protection domain.
 
@@ -1068,7 +1049,7 @@ The `vcpu` element has the following attributes:
 
 The `map` element has the same attributes as the protection domain with the exception of `setvar_vaddr`.
 
-## `memory_region`
+### `memory_region`
 
 The `memory_region` element describes a memory region.
 
@@ -1081,26 +1062,26 @@ It supports the following attributes:
 
 The `memory_region` element does not support any child elements.
 
-### Page sizes by architecture
+#### Page sizes by architecture
 
 Below are the available page sizes for each architecture that Microkit supports.
 
-#### AArch64
+##### AArch64
 
 * 0x1000 (4KiB)
 * 0x200000 (2MiB)
 
-#### RISC-V 64-bit
+##### RISC-V 64-bit
 
 * 0x1000 (4KiB)
 * 0x200000 (2MiB)
 
-#### x86-64
+##### x86-64
 
 * 0x1000 (4KiB)
 * 0x200000 (2MiB)
 
-## `channel`
+### `channel`
 
 The `channel` element has exactly two `end` children elements for specifying the two PDs associated with the channel.
 
@@ -1116,7 +1097,7 @@ The `end` element has the following attributes:
 The `id` is passed to the PD in the `notified` and `protected` entry points.
 The `id` should be passed to the `microkit_notify` and `microkit_ppcall` functions.
 
-# Board Support Packages {#bsps}
+## Board Support Packages {#bsps}
 
 This chapter describes the board support packages that are available in the SDK.
 
@@ -1146,7 +1127,7 @@ The currently supported platforms are:
 * x86_64_generic_vtx
 * zcu102
 
-## Ariane (CVA6) {#ariane}
+### Ariane (CVA6) {#ariane}
 
 Initial support is available for the CVA6 (formerly Ariane) core design
 on the Digilent Genesys2 board. CVA6 is an open-source RISC-V (rv64i) processor.
@@ -1168,7 +1149,7 @@ Where `image_addr` is the load address of the ELF image.
 Note that the OpenSBI version from the CVA6 SDK at the time of writing has issues when
 booting. It is recommended to use the mainline OpenSBI.
 
-## Compulab IOT-GATE-IMX8MPLUS {#imx8mp_iotgate}
+### Compulab IOT-GATE-IMX8MPLUS {#imx8mp_iotgate}
 
 The IOT-GATE-IMX8PLUS is based on the NXP i.MX8MP SoC.
 
@@ -1176,7 +1157,7 @@ Microkit will produce a raw binary file by default, so when using U-Boot run the
 
     => go 0x50000000
 
-## Cheshire {#cheshire}
+### Cheshire {#cheshire}
 
 Support is available for [Cheshire](https://github.com/pulp-platform/cheshire).
 It is an SoC design based on the CVA6 core, implementing a 64-bit RISC-V CPU.
@@ -1213,25 +1194,25 @@ To boot a Microkit image, use a GDB prompt via openOCD per [seL4 Docs](https://d
         (gdb) continue
 
 
-## i.MX8MM-EVK {#imx8mm_evk}
+### i.MX8MM-EVK {#imx8mm_evk}
 
 Microkit will produce a raw binary file by default, so when using U-Boot run the following command:
 
     => go 0x41000000
 
-## i.MX8MP-EVK {#imx8mp_evk}
+### i.MX8MP-EVK {#imx8mp_evk}
 
 Microkit will produce a raw binary file by default, so when using U-Boot run the following command:
 
     => go 0x41000000
 
-## i.MX8MQ-EVK {#imx8mq_evk}
+### i.MX8MQ-EVK {#imx8mq_evk}
 
 Microkit will produce a raw binary file by default, so when using U-Boot run the following command:
 
     => go 0x41000000
 
-## MaaXBoard {#maaxboard}
+### MaaXBoard {#maaxboard}
 
 The MaaXBoard is a low-cost ARM SBC based on the NXP i.MX8MQ system-on-chip.
 
@@ -1239,7 +1220,7 @@ Microkit will produce a raw binary file by default, so when using U-Boot run the
 
     => go 0x50000000
 
-## Odroid-C2 {#odroidc2}
+### Odroid-C2 {#odroidc2}
 
 The HardKernel Odroid-C2 is an ARM SBC based on the Amlogic Meson S905 system-on-chip. It
 should be noted that the Odroid-C2 is no longer available for purchase but its successor,
@@ -1249,7 +1230,7 @@ Microkit will produce a raw binary file by default, so when using U-Boot run the
 
     => go 0x20000000
 
-## Odroid-C4 {#odroidc4}
+### Odroid-C4 {#odroidc4}
 
 The HardKernel Odroid-C4 is an ARM SBC based on the Amlogic Meson S905X3 system-on-chip.
 
@@ -1257,7 +1238,7 @@ Microkit will produce a raw binary file by default, so when using U-Boot run the
 
     => go 0x20000000
 
-## Serengeti {#serengeti}
+### Serengeti {#serengeti}
 
 Serengeti is a fork of the [Cheshire](#cheshire) platform by Trustworthy Systems. More
 information on the hardware platform can be found [here](https://github.com/au-ts/serengeti).
@@ -1267,7 +1248,7 @@ has.
 
 For running on Serengeti, please see [Cheshire](#cheshire) for instructions.
 
-## SiFive Premier P550 {#hifive_p550}
+### SiFive Premier P550 {#hifive_p550}
 
 The SiFive Premier P550 is a development board based on the ESWIN EIC7700X system-on-chip.
 
@@ -1291,7 +1272,7 @@ Now you can load the images into U-Boot at the appropriate addresses, for exampl
 `imgaddr` and `dtbaddr` are arbitrarily chosen addresses in main memory for this platform,
 you can load the image and DTB at another address.
 
-## QEMU virt (AArch64) {#qemu_virt_aarch64}
+### QEMU virt (AArch64) {#qemu_virt_aarch64}
 
 Support is available for the virtual AArch64 QEMU platform. This is a platform that is not based
 on any specific SoC or hardware platform and is intended for simulating systems for
@@ -1317,7 +1298,7 @@ When using the [SMP configurations](#multicore_config) add the `-smp 4` argument
 You can find more about the QEMU virt platform in the
 [QEMU documentation](https://www.qemu.org/docs/master/system/target-arm.html).
 
-## QEMU virt (RISC-V 64-bit) {#qemu_virt_riscv64}
+### QEMU virt (RISC-V 64-bit) {#qemu_virt_riscv64}
 
 Support is available for the virtual RISC-V (64-bit) QEMU platform.
 This is a platform that is not based on any specific SoC or hardware platform
@@ -1343,7 +1324,7 @@ QEMU will start the system image using its packaged version of OpenSBI.
 You can find more about the QEMU virt platform in the
 [QEMU documentation](https://www.qemu.org/docs/master/system/target-riscv.html).
 
-## Raspberry Pi 4B {#rpi4b_1gb}
+### Raspberry Pi 4B {#rpi4b_1gb}
 
 Support is available for the Raspberry Pi 4 Model B. There are multiple models of the
 Raspberry Pi 4B that have different amounts of RAM, we have support for the 1GB,
@@ -1367,13 +1348,13 @@ U-Boot commands:
      => fatload mmc 0 0x10000000 <SYSTEM IMAGE>
      => go 0x10000000
 
-## Pine64 ROCKPro64 {#rockpro64}
+### Pine64 ROCKPro64 {#rockpro64}
 
 Microkit will produce a raw binary file by default, so when using U-Boot run the following command:
 
     => go 0x30000000
 
-## Pine64 Star64 {#star64}
+### Pine64 Star64 {#star64}
 
 Support is available for the Pine64 Star64 platform which is based on the
 StarFive JH7110 SoC.
@@ -1408,7 +1389,7 @@ Now you can load the images into U-Boot at the appropriate addresses, for exampl
 `imgaddr` and `dtbaddr` are arbitrarily chosen addresses in main memory for this platform,
 you can load the image and DTB at another address.
 
-## TQMa8XQP 1GB {#tqma8xqp1gb}
+### TQMa8XQP 1GB {#tqma8xqp1gb}
 
 The TQMa8XQP is a system-on-module designed by TQ-Systems GmbH.
 The modules incorporates an NXP i.MX8X Quad Plus system-on-chip and 1GiB ECC memory.
@@ -1470,7 +1451,7 @@ Rather than typing these each time you can create a U-Boot script:
 
 When debugging is enabled the kernel will use the same UART as U-Boot.
 
-## Ultra96V2 {#ultra96v2}
+### Ultra96V2 {#ultra96v2}
 
 To run the built image on the board, you have to use properly patched U-Boot - please see the section for ZCU102, for the details.
 
@@ -1481,7 +1462,7 @@ ZynqMP> tftpboot 0x40000000 loader.img
 ZynqMP> go 0x40000000
 ```
 
-## x86-64 generic {#x86_64_generic}
+### x86-64 generic {#x86_64_generic}
 
 This board supports x86-64 platforms with generic microarchitecture and no virtualisation.
 
@@ -1521,7 +1502,7 @@ qemu-system-x86_64: Cannot load x86-64 image, give a 32bit one.
 To obtain a bootable ISO image, a Multiboot 2-compliant bootloader must be used. Please refer to your
 bootloader's documentations.
 
-## x86_64 generic {#x86_64_generic_vtx}
+### x86_64 generic {#x86_64_generic_vtx}
 
 This board supports x86-64 platforms with generic microarchitecture and virtualisation.
 
@@ -1540,7 +1521,7 @@ vt-x: not supported
 Consider using the non VT-x configuration: [x86-64 generic](#x86_64_generic), or switch to a x86 emulator that
 emulates Intel VT-x, such as [Bochs](https://bochs.sourceforge.io/).
 
-## ZCU102 {#zcu102}
+### ZCU102 {#zcu102}
 
 The ZCU102 can run on a physical board or on an appropriate QEMU based emulator.
 
@@ -1572,18 +1553,18 @@ You can see that when using the `go` command, U-Boot is
 To avoid this behaviour, the call to `armv8_switch_to_el1` should be replaced with
 `armv8_switch_to_el2` in this `do_go_exec` function.
 
-## Adding Platform Support
+### Adding Platform Support
 
 The following section is a guide for adding support for a new ARM or RISC-V platform to Microkit.
 
-### Prerequisites
+#### Prerequisites
 
 Before you can start with adding platform support to Microkit, the platform must be supported by the seL4 kernel.
 You can find information on how to do so [here](https://docs.sel4.systems/projects/sel4/porting.html).
 
-### Getting Microkit Components Working
+#### Getting Microkit Components Working
 
-#### build_sdk.py
+##### build_sdk.py
 
 The first step to adding Microkit support is to modify the `build_sdk.py` script in order to build the required
 artefacts for the new platform. This involves adding to the `SUPPORTED_BOARDS` list with the `BoardInfo` options
@@ -1595,9 +1576,9 @@ is responsible for setting up the system before seL4 starts) is going to be load
 match where in main memory the final system image is actually loaded (e.g where a previous bootloader such as U-Boot
 loads the image to). This means that the address is restricted to the platform's main memory region.
 
-#### Loader
+##### Loader
 
-##### UART
+###### UART
 
 The other component of Microkit that is platform dependent is the loader itself. The loader will attempt to access
 the UART for debug output which requires a basic `putc` implementation. The UART device used in the loader should be
@@ -1605,7 +1586,7 @@ the same as what is used for the seL4 kernel debug output.
 
 It should be noted that on RISC-V platforms, the SBI will be used for `putc` so no porting is necessary.
 
-##### CPU configuration
+###### CPU configuration
 
 For supporting multi-core systems on Microkit, the loader needs to know the platform-specific CPU identifiers
 that we want to make use of.
@@ -1617,25 +1598,25 @@ For RISC-V platforms, a `hart_ids` array needs to be defined which contains the 
 each CPU. This value can be found by looking at the `reg` field for each CPU in the Device Tree. The first value
 must be the same as `FIRST_HART_ID` defined in seL4.
 
-#### Next steps
+##### Next steps
 
 Once you have patched the loader and the SDK build script, there should be no other changes required to have a working
 platform port. It is a good idea at this point to boot a hello world system to confirm the port is working.
 
 If there are issues with porting the platform, please [open an issue on GitHub](https://github.com/sel4/microkit).
 
-### Contributing Platform Support
+#### Contributing Platform Support
 
 Once you believe that the port works, you can [open a pull request](https://github.com/seL4/microkit/pulls) with required
 changes as well as documentation in the manual about the platform and how to run Microkit images on it.
 
 Please also update the `platforms.yml` file, you can find more information at the top of the file.
 
-# Rationale
+## Rationale
 
 This section describes the rationales driving the Microkit design choices.
 
-## Overview
+### Overview
 
 The seL4 microkernel provides a set of powerful and flexible mechanisms that can be used for building almost arbitrary systems.
 While minimising constraints on the nature of system designs and scope of deployments, this flexibility makes it challenging to design the best system for a particular use case, requiring extensive seL4 experience from developers.
@@ -1645,13 +1626,13 @@ system architecture to one that provides enough features and power for
 its target usage class (IoT, cyberphysical and other embedded systems
 with a static architecture), enabling a much simpler set of developer-visible abstractions.
 
-## Protection Domains
+### Protection Domains
 
 PDs are single-threaded to keep the programming model and implementations simple, and because this serves the needs of most present use cases in the target domains.
 Extending the model to multithreaded applications (clients) is straightforward and can be done if needed.
 Extending to multithreaded services is possible but  requires additional infrastructure for which we see no need in the near future.
 
-## Protected Procedure Priorities
+### Protected Procedure Priorities
 
 The restriction of only calling to higher priority prevents deadlocks and reflects the notion that the callee operates on behalf of the caller, and it should not be possible to preempt execution of the callee unless the caller could be preempted as well.
 
@@ -1661,12 +1642,12 @@ While it would be possible to achieve the same by allowing PPs between PDs of th
 The drawback is that we waste a part of the priority space where a logical entity is split into multiple PDs, eg to separate out a particularly critical component to formally verify it, when the complete entity would be too complex for formal verification.
 For the kinds of systems targeted by the Microkit, this reduction of the usable priority space is unlikely to cause problems.
 
-## Protected Procedure Argument Size
+### Protected Procedure Argument Size
 
 The limitation on the size of by-value arguments is forced by the (architecture-dependent) limits on the payload size of the underlying seL4 operations, as well as by efficiency considerations.
 The protected procedure payload should be considered as analogous to function arguments in the C language; similar limitations exist in the C ABIs (Application Binary Interfaces) of various platforms.
 
-## Limits
+### Limits
 
 The limitation on the number of protection domains in the system is relatively arbitrary.
 Based on experience with the system and the types of systems being built it is possible for this to be increased in the future.
@@ -1675,7 +1656,7 @@ The limitation on the number of channels for a protection domain is based on the
 Changing this to be larger than 64 would most likely require changes to seL4. The reason for why the limit is not a
 power of two is due to part of the notification word being for internal libmicrokit use.
 
-# Internals
+## Internals
 
 The following section describes internal details for how the Microkit works
 and all the components of Microkit. As a user of Microkit, it is not necessary
@@ -1692,7 +1673,7 @@ correspond to PD program images to the Microkit tool which is responsible
 for packaging everything together into a single image for the target
 platform.
 
-### ARM and RISC-V
+#### ARM and RISC-V
 
 The final image is a bootable image which contains a couple different things:
 
@@ -1704,7 +1685,7 @@ When booting the image, the Microkit loader starts, jumps to the kernel, which
 starts the capDL initialiser, which then sets up the entire system and starts
 all the PDs, including the Monitor.
 
-### x86
+#### x86
 
 The tool produces the kernel image and boot module image that contains the capDL initialiser.
 You must bring your own Multiboot 2 compliant bootloader which then loads the kernel and boot module.
@@ -1712,7 +1693,7 @@ You must bring your own Multiboot 2 compliant bootloader which then loads the ke
 Now, we will go into a bit more detail about each of these stages of the
 booting process as well as what exactly the Microkit tool is doing.
 
-## Loader (ARM and RISC-V)
+### Loader (ARM and RISC-V)
 
 The loader starts first, it has two main jobs:
 
@@ -1734,7 +1715,7 @@ that will not be done by a previous booting stage, such as:
 Once this is all completed, the loader jumps to seL4 which starts executing.
 The loader will never be executed again.
 
-## capDL Initialiser
+### capDL Initialiser
 
 Once the kernel has done its own initialisation, it will begin the
 'initial task'. On seL4, this is a thread that contains all the initial
@@ -1753,7 +1734,7 @@ describe what state they need to be in and what capabilities exist to that objec
 - scheduling parameters (Scheduling Context),
 - and so on...
 
-## Monitor
+### Monitor
 
 The Monitor is a special PD that executes at the highest priority. It's job
 is to receive any faults caused by protection domains crashing or causing exceptions.
@@ -1765,7 +1746,7 @@ which PD caused an exception and details on the PD's state at the time of the fa
 Other than printing fault details, the monitor does not do anything to handle
 the fault, it will simply go back to sleep waiting for any other faults.
 
-## libmicrokit {#libmicrokit_internals}
+### libmicrokit {#libmicrokit_internals}
 
 Unlike the previous sections, libmicrokit is not its own program but it is worth
 a mention since it makes up the core of each protection domain in a system.
@@ -1778,7 +1759,7 @@ These events could be notifies (from other PDs or from an interrupt), PPCs, and 
 For each event, the appropriate user-specified entry point is called and then when it
 returns the PD goes back to sleep, waiting on any more events.
 
-## Microkit tool
+### Microkit tool
 
 The Microkit tool's ultimate job is to take in the description of the user's system,
 the SDF, and convert into an seL4 system that boots and executes.
@@ -1787,7 +1768,7 @@ There are obvious steps such as parsing the SDF and PD ELFs. But the majority of
 the work done by the tool is converting the system description into the capDL specification
 then embedding it into the capDL initialiser image.
 
-### ARM & RISC-V specific
+#### ARM & RISC-V specific
 Since the physical memory layout of ARM and RISC-V platforms can be determined at boot
 time by reading the device tree. The Microkit tool goes one step further and statically
 check that the produced capDL specification is bootable on the target board. For example,
