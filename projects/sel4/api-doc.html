@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-11-24 03:41:03 +0000 -->
+<!-- Page last generated 2025-11-25 03:35:17 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1763955663" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1764041717" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -8462,7 +8462,7 @@ serviced.</p>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
       <td><code class="language-plaintext highlighter-rouge">target</code></td>
-      <td>The node ID that will be targeted. 0-7 for GICv2 and the affinity value for GICv3 (concatenation of Aff3+Aff2+Aff1+Aff0 from MPIDR). Targets within that range that are not supported by the hardware will be ignored. For example, on a GICv2 board with 4 CPUs, the capability for target 5 can be created, but signals to it will have no effect.</td>
+      <td>The node ID that will be targeted. 0-7 for GICv2 and the affinity value for GICv3 (concatenation of Aff3+Aff2+Aff1+Aff0 from MPIDR). Targets within that range that are not supported by thde hardware will be not be rejected. For example, on a GICv2 board with 4 CPUs, the capability for target 5 can be created. The result of later signalling this target depends on the hardware implementation.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_CNode</code></td>
@@ -8502,7 +8502,11 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or, SGIs are not supported on this platform.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The SGI target is not supported on this GIC. Note that this only checks architectural limits, not the presence of the target core on the current board.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
@@ -8516,7 +8520,8 @@ serviced.</p>
 </table>
 
 <p><strong>Description:</strong> Create an SGISignal capability and place it in the specific target CSpace slot. The capability can be used to raise an SGI with a specific ID on a specific target core. Currently this feature is supported on GICv2 and GICv3 hardware. Only available on non-SMP configurations.
- The resulting capability can be invoked like a notification capability that supports only signal/send. SGIs can be received by IRQ notification objects on the target core like other IRQs. See also autoref[sec:interrupts].</p>
+ The resulting capability can be invoked like a notification capability that supports only signal/send. SGIs can be received by IRQ notification objects on the target core like other IRQs. See also autoref[sec:interrupts].
+ Note that the kernel only checks architectural limits for SGI IRQ id and target. It does not know whether the corresponding target core exists. Depending on hardware implementation, signalling a non-existent target may create an unrecoverable SError. This means it is the responsibility of the developer to not issue capabilities for targets that do not exist.</p>
 
 <h2 id="aarch32-specific-object-methods">Aarch32-Specific Object Methods</h2>
 
