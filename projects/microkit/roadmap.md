@@ -17,8 +17,8 @@ or [contact the developers](https://sel4.systems/support.html).
 
 | Feature | Current status | Timeline | Availability |
 |-----------------------------------------------------------|
-| Multi-core support | Working state, needs cleanup for merging. | Q4'25 | [Branch](https://github.com/seL4/microkit/tree/smp) |
-| [x86 support](#x86) | Merged, available in next release | Q4'25 | [PR #337](https://github.com/seL4/microkit/pull/337) |
+| Multi-core support | Merged, available in 2.1.0 | Q4'25 | [PR #353](https://github.com/seL4/microkit/pull/353) |
+| [x86 support](#x86) | Merged, available in 2.1.0 | Q4'25 | [PR #337](https://github.com/seL4/microkit/pull/337) |
 | [Multi-kernel support](#multikernel) | Actively worked on. | Q4'25 | [Branch](https://github.com/au-ts/multikernel-manifest/) |
 | [PD templates](#templates) | Initial work explored, requires more experimentation and development. | Q1'26 | N/A |
 
