@@ -10,7 +10,7 @@ virtualization: false
 iommu: false
 soc: virt
 cpu: rv32, rv64
-Status: "N/A"
+verification: []
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

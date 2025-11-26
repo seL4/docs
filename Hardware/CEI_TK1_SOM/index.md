@@ -8,8 +8,7 @@ virtualization: true
 iommu: true
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
-Status: "FC with HYP, no SMMU"
-verified: arm_hyp-tk1
+verification: [ARM_HYP]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

@@ -8,8 +8,7 @@ virtualization: true
 iommu: true
 soc: NVIDIA Tegra X2
 cpu: Cortex-A57 Quad, Dual NVIDIA Denver
-Status: "FC complete, Integrity ongoing"
-verified: aarch64
+verification: [AARCH64]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

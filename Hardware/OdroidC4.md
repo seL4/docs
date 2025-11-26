@@ -8,8 +8,7 @@ virtualization: true
 iommu: false
 soc: Amlogic S905X3
 cpu: Cortex-A55
-Status: "FC complete, Integrity ongoing"
-verified: odroidc4
+verification: [AARCH64]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/
