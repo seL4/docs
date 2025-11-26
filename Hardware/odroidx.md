@@ -8,8 +8,7 @@ virtualization: false
 iommu: false
 soc: Exynos4412
 cpu: Cortex-A9
-Status: "Verified"
-verified: exynos4
+verification: [ARM]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

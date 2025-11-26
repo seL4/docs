@@ -8,8 +8,7 @@ virtualization: false
 iommu: false
 soc: IMX8MM-EVK
 cpu: Cortex-A53 Quad 1.8 GHz
-Status: "FC"
-verified: imx8mm
+verification: [ARM, AARCH64]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

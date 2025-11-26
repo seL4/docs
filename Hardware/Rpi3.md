@@ -8,7 +8,7 @@ virtualization: true
 iommu: false
 soc: BCM2837
 cpu: Cortex-A53
-Status: Unverified
+verification: [ARM]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

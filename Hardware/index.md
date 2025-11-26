@@ -40,27 +40,28 @@ page may have additional instructions for running seL4 on it.
       <th>Platform</th>
       <th>System-on-chip</th>
       <th>Core</th>
-      <th>Arch</th>
       <th>Virtualisation</th>
       <th>SMMU</th>
-      <th>Verification Status</th>
+      <th>Proofs</th>
+      <th>Proof config</th>
     </tr>
   </thead>
   <tbody>
 {%- assign sorted = site.pages | sort: 'platform' %}
 {%- for page in sorted %}
 {%- if page.arm_hardware and page.Maintained -%}
-{%-   if page.verified -%}
-{%-    assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
-{%-    assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: '</a>' %}
-{%-   else -%}
-{%-    assign status = page.Status -%}
-{%-   endif %}
+{%-   assign status = "" %}
+{%-   for config in page.verification -%}
+{%-     assign link = "/projects/sel4/verified-configurations.html#" | append: config | relative_url -%}
+{%-     assign status = status | append: '<a href="' | append: link | append: '">' | append: config | append: '</a>' %}
+{%-     unless forloop.last %}
+{%-       assign status = status | append: ", " %}
+{%-     endunless %}
+{%-   endfor %}
     <tr>
       <td><a href="{{page.url| relative_url}}">{{ page.platform }}</a></td>
       <td>{{ page.soc}}</td>
       <td>{{ page.cpu }}</td>
-      <td>{{ page.arch }}</td>
       <td class="text-center">
 {%- if page.virtualization %}
         {% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
@@ -80,7 +81,17 @@ page may have additional instructions for running seL4 on it.
         &ndash;
 {%- endif %}
       </td>
-      <td>{{ status }}</td>
+      <td>
+{%- if status != "" %}
+        {% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
+{%- elsif page.simulation_only %}
+{%-    assign status = "N/A" %}
+{%- else %}
+{%-    assign status = "&ndash;" %}
+        &ndash;
+{%- endif %}
+      </td>
+      <td>{{status}}</td>
     </tr>
 {%- endif %}
 {%- endfor %}
@@ -101,18 +112,21 @@ We currently provide support for some of the RISC-V platforms. Support for the h
       <th>Core</th>
       <th>Arch</th>
       <!-- th>Virtualisation</th -->
-      <th>Verification Status</th>
+      <th>Proofs</th>
+      <th>Proof config</th>
     </tr>
   </thead>
   <tbody>
 {%- for page in sorted %}
 {%- if page.riscv_hardware and page.Maintained -%}
-{%-   if page.verified -%}
-{%-    assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
-{%-    assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: '</a>' %}
-{%-   else -%}
-{%-    assign status = page.Status -%}
-{%-   endif %}
+{%-   assign status = "" %}
+{%-   for config in page.verification -%}
+{%-     assign link = "/projects/sel4/verified-configurations.html#" | append: config | relative_url -%}
+{%-     assign status = status | append: '<a href="' | append: link | append: '">' | append: config | append: '</a>' %}
+{%-     unless forloop.last %}
+{%-       assign status = status | append: ", " %}
+{%-     endunless %}
+{%-   endfor %}
     <tr>
       <td><a href="{{page.url| relative_url}}">{{ page.platform }}</a></td>
       <td>{{ page.soc}}</td>
@@ -125,7 +139,17 @@ We currently provide support for some of the RISC-V platforms. Support for the h
         &ndash;
 {%- endif %}
       </td -->
-      <td>{{ status }}</td>
+      <td>
+{%- if status != "" %}
+        {% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
+{%- elsif page.simulation_only %}
+{%-    assign status = "N/A" %}
+{%- else %}
+{%-    assign status = "&ndash;" %}
+        &ndash;
+{%- endif %}
+      </td>
+      <td>{{status}}</td>
     </tr>
 {%- endif %}
 {%- endfor %}
@@ -137,12 +161,12 @@ We currently provide support for some of the RISC-V platforms. Support for the h
 
 seL4 supports PC99-style Intel Architecture Platforms.
 
-| Platform              | Arch | Virtualisation | IOMMU | Verification Status                  |
-| -                     |  -   | -              | -     | -                                    |
-| [PC99 (32-bit)](IA32.html) | x86  | VT-X      | VT-D  | Unverified                        |
-| [PC99 (64-bit)](X64.html)  | x64  | VT-X      | VT-D  | [FC (without VT-X, VT-D and fastpath)][X64] |
+| Platform              | Arch | Virtualisation | IOMMU | Proofs | Proof config |
+| -                     |  -   | -              | -     | -      | -            |
+| [PC99 (32-bit)](IA32.html) | x86  | VT-X      | VT-D  | -      | -            |
+| [PC99 (64-bit)](X64.html)  | x64  | VT-X      | VT-D  | yes    | [X64]        |
 
-[X64]: {{ '/projects/sel4/verified-configurations.html#x64' | relative_url }}
+[X64]: {{ '/projects/sel4/verified-configurations.html#X64' | relative_url }}
 
 
 ### Simulating seL4
