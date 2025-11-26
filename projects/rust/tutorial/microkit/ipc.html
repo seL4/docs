@@ -184,7 +184,7 @@ make simulate
 <p>The example system description specifies two protection domains, with a channel between them:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/ipc.system#L7-L20">ipc.system:7:20</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/43e83d6ed3a4476f6794e14faacdb034296bb1fc/workspaces/microkit/ipc/ipc.system#L7-L20">ipc.system:7:20</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-xml">&lt;system&gt;
@@ -207,7 +207,7 @@ make simulate
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/pds/client/src/main.rs#L14-L36">pds/client/src/main.rs:14:36</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/43e83d6ed3a4476f6794e14faacdb034296bb1fc/workspaces/microkit/ipc/pds/client/src/main.rs#L14-L36">pds/client/src/main.rs:14:36</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const SERVER: Channel = Channel::new(13);
@@ -238,7 +238,7 @@ impl Handler for HandlerImpl {
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/pds/server/src/main.rs#L12-L39">pds/server/src/main.rs:12:39</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/43e83d6ed3a4476f6794e14faacdb034296bb1fc/workspaces/microkit/ipc/pds/server/src/main.rs#L12-L39">pds/server/src/main.rs:12:39</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const CLIENT: Channel = Channel::new(37);
@@ -296,7 +296,7 @@ but we also have
 which use
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer()</code></a> and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut()</code></a> under the hood.</p>
-<h2 id="step-10a-exercise"><a class="header" href="#step-10a-exercise">Step 10.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bd4b3a57ec358e3c50a61a63c27ecbc6593d160')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bd4b3a57ec358e3c50a61a63c27ecbc6593d160"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-10a-exercise"><a class="header" href="#step-10a-exercise">Step 10.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('36720280f95480ede80302410ec23dc122b3a6a3')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/36720280f95480ede80302410ec23dc122b3a6a3"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>
 In the client's <code>notified()</code> handler, make a protected procedure call to the server using <code>SERVER.pp_call()</code>.
 Handle the call in the server's <code>protected()</code> handler.

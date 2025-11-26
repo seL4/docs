@@ -196,14 +196,14 @@ In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarc
 <p>The root task is provided with capabilites for the objects comprising its own virtual address space.
 The locations of these capabilities in the root task's CSpace is provided in the <code>BootInfo</code> struct.
 Our goal for this chapter will be to create a frame object and experiment with mapping it into the root task's own address space.</p>
-<h2 id="step-4a-exercise"><a class="header" href="#step-4a-exercise">Step 4.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5d99552dd1bcd7b6e0888395e5d5b0f87db57edc')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5d99552dd1bcd7b6e0888395e5d5b0f87db57edc"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4a-exercise"><a class="header" href="#step-4a-exercise">Step 4.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e731185006daba1038e702786a59c3310f367827')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e731185006daba1038e702786a59c3310f367827"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Using code snippets from <a href="kernel-objects.html">Chapter 3 (Allocating Kernel Objects)</a>, create a frame object. We seek a value <code>frame: sel4::cap::Granule</code> (which can also be written as <code>frame: sel4::Cap&lt;sel4::cap_type::Granule&gt;</code>).</p>
 <p>Note that, after importing the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/trait.CapTypeForObjectOfFixedSize.html"><code>sel4::CapTypeForObjectOfFixedSize</code></a> trait, you can express the appropriate <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/enum.ObjectBlueprint.html"><code>sel4::ObjectBlueprint</code></a> as <code>sel4::cap_type::Granule::object_blueprint()</code>.</p>
-<h2 id="step-4b"><a class="header" href="#step-4b">Step 4.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bd71a7d432c19e080bd2dab9b0a9ebe3898935a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4b"><a class="header" href="#step-4b">Step 4.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b1d99c5317fc8029ac6b5e4ede421cb037597d6c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b1d99c5317fc8029ac6b5e4ede421cb037597d6c"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In order to avoid interacting with intermediate translation structures, let's reserve an aligned granule-sized region in the root task's program image that we can use for our experiment:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a/workspaces/root-task/address-space/src/main.rs#L15-L20">workspaces/root-task/address-space/src/main.rs:15:20 after 4.B</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b1d99c5317fc8029ac6b5e4ede421cb037597d6c/workspaces/root-task/address-space/src/main.rs#L15-L20">workspaces/root-task/address-space/src/main.rs:15:20 after 4.B</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const GRANULE_SIZE: usize = sel4::FrameObjectType::GRANULE.bytes(); // 4096
@@ -217,7 +217,7 @@ static mut PAGE_A: PagePlaceholder = PagePlaceholder([0xee; GRANULE_SIZE]);
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a/workspaces/root-task/address-space/src/main.rs#L46-L49">workspaces/root-task/address-space/src/main.rs:46:49 after 4.B</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b1d99c5317fc8029ac6b5e4ede421cb037597d6c/workspaces/root-task/address-space/src/main.rs#L46-L49">workspaces/root-task/address-space/src/main.rs:46:49 after 4.B</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let page_a_addr = ptr::addr_of!(PAGE_A).cast::&lt;u8&gt;();
@@ -228,12 +228,12 @@ static mut PAGE_A: PagePlaceholder = PagePlaceholder([0xee; GRANULE_SIZE]);
 </div>
 </div>
 <p>This reservation covers exactly one page in the root task's virtual address space.</p>
-<h2 id="step-4c"><a class="header" href="#step-4c">Step 4.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('9880c4714f9b7aad818cd4d519359920d0ef9535')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/9880c4714f9b7aad818cd4d519359920d0ef9535"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4c"><a class="header" href="#step-4c">Step 4.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Let's unmap the page in the root task image that initially backs our reserved region. This will give us a hole in the root task VSpace, which we can use for our experiment.</p>
 <p>This function determines the slot in the root task's CSpace of the page capability corresponding to the page in the root task's VSpace which contains the given address:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9880c4714f9b7aad818cd4d519359920d0ef9535/workspaces/root-task/address-space/src/main.rs#L73-L84">workspaces/root-task/address-space/src/main.rs:73:84 after 4.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff/workspaces/root-task/address-space/src/main.rs#L73-L84">workspaces/root-task/address-space/src/main.rs:73:84 after 4.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn get_user_image_frame_slot(
@@ -257,7 +257,7 @@ We can use it, along with <code>addr</code>, to identify the offset into <a href
 Try to access that region, and observe a page fault:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9880c4714f9b7aad818cd4d519359920d0ef9535/workspaces/root-task/address-space/src/main.rs#L51-L54">workspaces/root-task/address-space/src/main.rs:51:54 after 4.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff/workspaces/root-task/address-space/src/main.rs#L51-L54">workspaces/root-task/address-space/src/main.rs:51:54 after 4.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let page_a_slot = get_user_image_frame_slot(bootinfo, page_a_addr as usize);
@@ -267,7 +267,7 @@ Try to access that region, and observe a page fault:</p>
 </code></pre>
 </div>
 </div>
-<h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4c165ad9826a38c68ee4f3d14f87c2d59172461c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4c165ad9826a38c68ee4f3d14f87c2d59172461c"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7d710b2c0c62b5e16078c96293dd8d0f7437c28f')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7d710b2c0c62b5e16078c96293dd8d0f7437c28f"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
 <p>Here are some hints for the parameters of <code>.frame_map()</code>:</p>
 <ul>

@@ -200,14 +200,14 @@ It is up to the crate user to ensure that <code>Cap</code>'s are valid and well-
 <p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/index.html"><code>sel4::cap</code></a> module contains aliases of the form <code>sel4::Cap&lt;sel4::cap_type::*&gt;</code>.</p>
 <p>Depending on the <code>Cap</code>'s type <code>T</code>, a <code>Cap</code> has a number of methods available, which correspond to invocations for that capability type.
 For example, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.tcb_resume"><code>sel4::Cap::tcb_resume()</code></a> is available when <code>T</code> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap_type/struct.Tcb.html"><code>sel4::cap_type::Tcb</code></a>.</p>
-<h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4e6e91719a3c19a37fecbeff55d0d28b15eebaf3')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4e6e91719a3c19a37fecbeff55d0d28b15eebaf3"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('be4a4d7a927d34d83171b2445dece21583f338ac')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/be4a4d7a927d34d83171b2445dece21583f338ac"> <i class="fa fa-github"></i> </a></a></h2>
 <p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
 <em>Untyped memory</em> is the name of the object type for free memory.
 At boot time, the root task is granted untyped memory capabilities for all of the system's memory, except for the memory used for the kernel and the root task's own resources.</p>
 <p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4e6e91719a3c19a37fecbeff55d0d28b15eebaf3/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/be4a4d7a927d34d83171b2445dece21583f338ac/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    sel4::debug_println!("untyped:");
@@ -236,11 +236,11 @@ At boot time, the root task is granted untyped memory capabilities for all of th
 <p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.UntypedDesc.html#method.size_bits"><code>sel4::UntypedDesc::size_bits()</code></a> returns the log base 2 of the size of the region of memory described by the descriptor.</p>
 <p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.UntypedDesc.html#method.is_device"><code>sel4::UntypedDesc::is_device()</code></a> returns whether the region is device memory or kernel memory.
 Device memory can only be used for creating frames, whereas kernel memory has no such restrictions.</p>
-<h2 id="step-3b"><a class="header" href="#step-3b">Step 3.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('be68b6a66ed494d58f7da13c23abf247c06fea6d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/be68b6a66ed494d58f7da13c23abf247c06fea6d"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3b"><a class="header" href="#step-3b">Step 3.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('06012d1b0fbba7f99dab6933741459aaac2fbf56')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/06012d1b0fbba7f99dab6933741459aaac2fbf56"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Add a function that finds the largest untyped region passed to the root task:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/be68b6a66ed494d58f7da13c23abf247c06fea6d/workspaces/root-task/kernel-objects/src/main.rs#L32-L42">workspaces/root-task/kernel-objects/src/main.rs:32:42 after 3.B</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/06012d1b0fbba7f99dab6933741459aaac2fbf56/workspaces/root-task/kernel-objects/src/main.rs#L32-L42">workspaces/root-task/kernel-objects/src/main.rs:32:42 after 3.B</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn find_largest_kernel_untyped(bootinfo: &amp;sel4::BootInfo) -&gt; sel4::cap::Untyped {
@@ -258,7 +258,7 @@ Device memory can only be used for creating frames, whereas kernel memory has no
 </div>
 </div>
 <p>The expression <code>bootinfo.untyped().index(ut_ix).cap()</code> indexes into <code>bootinfo.untyped(): SlotRegion&lt;Untyped&gt;</code> to retrieve a <code>Slot&lt;Untyped&gt;</code>, which can be turned into a <code>Cap&lt;Untyped&gt; (= cap::Untyped)</code>.</p>
-<h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('872f1a25a27afb8b68a98c270fec80c64a1e20e4')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/872f1a25a27afb8b68a98c270fec80c64a1e20e4"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('296570073ade2dbf235c4a152d18378ee1952112')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/296570073ade2dbf235c4a152d18378ee1952112"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">Notification</a> object.</p>
 <p>We already know how to refer to a capability in the current thread's CSpace: a CPtr.
 However, some capability invocations allow us to refer to a capability slot in any CSpace whose root CNode is present in the current thread's CSpace.
@@ -288,7 +288,7 @@ More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread
 <p>The CPtr for the initial thread's own CSpace root is a constant:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L27-L27">workspaces/root-task/kernel-objects/src/main.rs:27:27 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L27-L27">workspaces/root-task/kernel-objects/src/main.rs:27:27 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let cnode = sel4::init_thread::slot::CNODE.cap();
@@ -299,7 +299,7 @@ More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread
 We can leverage the fact that Rust's <code>Range&lt;T&gt;</code> type is an iterator for certain <code>T</code> to allocate slots in an ergonomic way:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L29-L33">workspaces/root-task/kernel-objects/src/main.rs:29:33 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L29-L33">workspaces/root-task/kernel-objects/src/main.rs:29:33 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let mut empty_slots = bootinfo
@@ -315,7 +315,7 @@ Interestingly, there are two ways to do this, but the current implementation is 
 <p>Now we can invoke our untyped capability to allocate a notification object:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L36-L43">workspaces/root-task/kernel-objects/src/main.rs:36:43 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L36-L43">workspaces/root-task/kernel-objects/src/main.rs:36:43 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    largest_kernel_ut
@@ -332,7 +332,7 @@ Interestingly, there are two ways to do this, but the current implementation is 
 <p>Now that we know that <code>notification_slot</code> contains a notification capability, we can cast it and get a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html"><code>sel4::cap::Notification</code></a>:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L45-L47">workspaces/root-task/kernel-objects/src/main.rs:45:47 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L45-L47">workspaces/root-task/kernel-objects/src/main.rs:45:47 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let notification = notification_slot
@@ -341,9 +341,9 @@ Interestingly, there are two ways to do this, but the current implementation is 
 </code></pre>
 </div>
 </div>
-<h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('681fb5c21086ca3da70db911144212f0bd36fa26')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/681fb5c21086ca3da70db911144212f0bd36fa26"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('fa31ba1228bb1029b10a08a1a74a381c9d385557')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/fa31ba1228bb1029b10a08a1a74a381c9d385557"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>sel4::cap::Notification::signal()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>sel4::cap::Notification::wait()</code></a> to signal and then wait on the notification.</p>
-<h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('0f52649ab1d390861aa8c830aa0cfc57d15224c8')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/0f52649ab1d390861aa8c830aa0cfc57d15224c8"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('cc8cf4ffb1235a0b1daae3c38b67a432880fcef9')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/cc8cf4ffb1235a0b1daae3c38b67a432880fcef9"> <i class="fa fa-github"></i> </a></a></h2>
 <p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
 When that capability is used to signal the notification, the notification's word-sized state is bit-wise <code>or</code>ed with the capability's badge.
 A wait call on the notification returns and clears the notification's state, provided that a signal call has occurred since the last wait call.</p>
@@ -352,7 +352,7 @@ A wait call on the notification returns and clears the notification's state, pro
 <p>A slot in the root task's CSpace (i.e. a value of type <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/init_thread/struct.Slot.html"><code>sel4::init_thread::Slot</code></a>) can be turned into an <code>sel4::AbsoluteCPtr</code> using {{#rustdoc_link root-task sel4/cap/type.CNode.html#method.absolute_cptr<code>sel4::CNode::absolute_cptr()</code>}}:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/0f52649ab1d390861aa8c830aa0cfc57d15224c8/workspaces/root-task/kernel-objects/src/main.rs#L63-L63">workspaces/root-task/kernel-objects/src/main.rs:63:63 after 3.E</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/cc8cf4ffb1235a0b1daae3c38b67a432880fcef9/workspaces/root-task/kernel-objects/src/main.rs#L63-L63">workspaces/root-task/kernel-objects/src/main.rs:63:63 after 3.E</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">            &amp;cnode.absolute_cptr(notification_slot.cptr()),
@@ -361,9 +361,9 @@ A wait call on the notification returns and clears the notification's state, pro
 </div>
 <p><strong>Exercise:</strong>: Mint a capability based on the capability in <code>notification_slot</code> into your newly allocated slot. Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.CapRights.html#method.all"><code>sel4::CapRights::all()</code></a> for the <code>rights</code> parameter, and specify a non-zero badge value.</p>
 <p><strong>Exercise:</strong>: Signal the notification using your newly minted badged capability. Using the return value of <code>sel4::Notification::wait()</code>, compare the badge value it returns with the badge you used to mint the capability.</p>
-<h2 id="step-3f-exercise"><a class="header" href="#step-3f-exercise">Step 3.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7dc10271914f7a05e682fe9a834a24d2c063d86c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7dc10271914f7a05e682fe9a834a24d2c063d86c"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3f-exercise"><a class="header" href="#step-3f-exercise">Step 3.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('df19950c3cdeeb530ba0e51c5d063abfc1a6ef6e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/df19950c3cdeeb530ba0e51c5d063abfc1a6ef6e"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: <code>sel4::CapRights::all()</code> is overly-permissive. Use the overly-restrictive <code>sel4::CapRights::none()</code> instead and watch the program fail.</p>
-<h2 id="step-3g-exercise"><a class="header" href="#step-3g-exercise">Step 3.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b93bd0cd8304da64bcd722db3f48a68726445b15')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b93bd0cd8304da64bcd722db3f48a68726445b15"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3g-exercise"><a class="header" href="#step-3g-exercise">Step 3.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('dcdcd1c4f6a3bc673ea62ae6777e3e456a03de1e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/dcdcd1c4f6a3bc673ea62ae6777e3e456a03de1e"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: Now use the minimum rights necessary for the program to run.</p>
 
                     </main>

@@ -183,7 +183,7 @@ It spawns a secondary thread, and then interacts with it using a notification.</
 <pre><code>cd workspaces/root-task/spawn-thread
 make simulate
 </code></pre>
-<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
+<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
 If you're used to using <a href="https://github.com/seL4/seL4_libs">seL4_libs</a>, you may notice that our Rust code here is much more low-level and verbose.
 That is because we aren't using any higher-level seL4-related libraries such as
 <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/thread.h"><code>&lt;sel4utils/thread.h&gt;</code></a>.
@@ -196,7 +196,7 @@ and
 <p>The exercises in this chapter are only concerned with the following two functions, which run concurrently:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_nfn: sel4::cap::Notification) {
@@ -209,7 +209,7 @@ and
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_nfn: sel4::cap::Notification) {
@@ -221,7 +221,7 @@ and
 </div>
 </div>
 <p><code>secondary_thread_main()</code> runs in the secondary thread, and <code>interact_with_secondary_thread()</code> runs in the secondary thread.</p>
-<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('c4acc79f48ccdfb280444c9b41280893b6c810dd')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/c4acc79f48ccdfb280444c9b41280893b6c810dd"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('47552360f6184b759a490f56d93b4e1885a40179')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/47552360f6184b759a490f56d93b4e1885a40179"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In this step, we introduce IPC between <code>secondary_thread_main()</code> and <code>interact_with_secondary_thread</code> by changing</p>
 <pre><code>inter_thread_nfn: sel4::cap::Notification
 </code></pre>
@@ -275,7 +275,7 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 <p>Taking all of this together, let's use our IPC endpoint to send an empty message:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/c4acc79f48ccdfb280444c9b41280893b6c810dd/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/47552360f6184b759a490f56d93b4e1885a40179/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_ep: sel4::cap::Endpoint) {
@@ -288,7 +288,7 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/c4acc79f48ccdfb280444c9b41280893b6c810dd/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/47552360f6184b759a490f56d93b4e1885a40179/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_ep: sel4::cap::Endpoint) {
@@ -301,13 +301,13 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 </code></pre>
 </div>
 </div>
-<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b8d896bce9c35f6d479435c93240c766d74c9bd7')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b8d896bce9c35f6d479435c93240c766d74c9bd7"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('144d391168ee9b0b467cc9ac79cf8b11fca53fef')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/144d391168ee9b0b467cc9ac79cf8b11fca53fef"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> use
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
 and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
 to send a message with some data.</p>
-<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('968473d5d4d0fd205a7f5162be1477ea337ff4fa')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/968473d5d4d0fd205a7f5162be1477ea337ff4fa"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('47dfa98ddeb9f274b6b2d61b0cdfc9bb0b824922')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/47dfa98ddeb9f274b6b2d61b0cdfc9bb0b824922"> <i class="fa fa-github"></i> </a></a></h2>
 <p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
 <p><strong>Exercise:</strong> Change the</p>
 <pre><code>inter_thread_ep.send()

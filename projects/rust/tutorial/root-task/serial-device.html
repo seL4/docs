@@ -181,10 +181,10 @@ Start by navigating to and running this chapter's example, which, so far, doesn'
 <pre><code>cd workspaces/root-task/serial-device
 make simulate
 </code></pre>
-<p>The module at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/device.rs">device.rs</a> implements a higher-level interface over the serial device's MMIO registers, whose physical base address is:</p>
+<p>The module at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d23932e433547f81bed696954ebdba3dd7151e43/workspaces/root-task/serial-device/src/device.rs">device.rs</a> implements a higher-level interface over the serial device's MMIO registers, whose physical base address is:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/main.rs#L16-L16">workspaces/root-task/serial-device/src/main.rs:16:16</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d23932e433547f81bed696954ebdba3dd7151e43/workspaces/root-task/serial-device/src/main.rs#L16-L16">workspaces/root-task/serial-device/src/main.rs:16:16</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const SERIAL_DEVICE_MMIO_PADDR: usize = 0x0900_0000;
@@ -195,7 +195,7 @@ make simulate
 <p>After that, we will set up the root task's access to the serial device's interrupt, whose value is:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/main.rs#L18-L18">workspaces/root-task/serial-device/src/main.rs:18:18</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d23932e433547f81bed696954ebdba3dd7151e43/workspaces/root-task/serial-device/src/main.rs#L18-L18">workspaces/root-task/serial-device/src/main.rs:18:18</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const SERIAL_DEVICE_IRQ: usize = 33;
@@ -203,11 +203,11 @@ make simulate
 </div>
 </div>
 <p>Finally, we will implement a simple loop that echoes serial input to serial output.</p>
-<h2 id="step-5a"><a class="header" href="#step-5a">Step 5.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4ca8d20363654314ea477148a2c0c45d0c3cbd5e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4ca8d20363654314ea477148a2c0c45d0c3cbd5e"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5a"><a class="header" href="#step-5a">Step 5.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c"> <i class="fa fa-github"></i> </a></a></h2>
 <p>First, add some familiar snippets that we will use for allocating CSlots and kernel objects:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4ca8d20363654314ea477148a2c0c45d0c3cbd5e/workspaces/root-task/serial-device/src/main.rs#L34-L44">workspaces/root-task/serial-device/src/main.rs:34:44 after 5.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c/workspaces/root-task/serial-device/src/main.rs#L34-L44">workspaces/root-task/serial-device/src/main.rs:34:44 after 5.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn find_largest_kernel_untyped(bootinfo: &amp;sel4::BootInfo) -&gt; sel4::cap::Untyped {
@@ -226,7 +226,7 @@ make simulate
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4ca8d20363654314ea477148a2c0c45d0c3cbd5e/workspaces/root-task/serial-device/src/main.rs#L22-L27">workspaces/root-task/serial-device/src/main.rs:22:27 after 5.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c/workspaces/root-task/serial-device/src/main.rs#L22-L27">workspaces/root-task/serial-device/src/main.rs:22:27 after 5.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let mut empty_slots = bootinfo
@@ -238,13 +238,13 @@ make simulate
 </code></pre>
 </div>
 </div>
-<h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('1d4e99587abf6cdd57593e796ff932898e66bc58')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/1d4e99587abf6cdd57593e796ff932898e66bc58"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f7bba62ca19e48c955c376a930482b33680c9085')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f7bba62ca19e48c955c376a930482b33680c9085"> <i class="fa fa-github"></i> </a></a></h2>
 <p><code>largest_kernel_ut</code> will be useful for allocating kernel objects whose backing physical addresses don't matter to us, but we must allocate the frame which contains the serial device's MMIO registers at a particular physicall address (<code>SERIAL_DEVICE_MMIO_PADDR</code>).
 Furthermore, the seL4 API distinguishes between <em>general purpose untyped</em> and <em>device untyped</em>. General purpose untyped is backed by normal memory, and can be used to create any type of object. Device untyped is not backed by normal memory, and can only be used to create frames.
 See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
 So, we must allocate the serial device MMIO frame from the particular initial device untyped that contains <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p><strong>Exercice:</strong> Identify this initial untyped in the <code>bootinfo</code>. We will need a corresponding <code>sel4::cap::Untyped</code> along with the untyped's physical address (or <code>sel4::UntypedDesc</code>, which contains the physical address) for the next step.</p>
-<h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('37c98443e92fdf315918fba8b9705eef2dadf512')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/37c98443e92fdf315918fba8b9705eef2dadf512"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4cf02893afdef7f669a44610ad1190ae3ea62d92')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4cf02893afdef7f669a44610ad1190ae3ea62d92"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The untyped we've identified contains the frame we are targeting, but that frame may be somewhere in the middle of the region of device memory the untyped covers.
 To allocate the frame at <code>SERIAL_DEVICE_MMIO_PADDR</code>, we must allocate dummy objects from this untyped until its watermark is at <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p>This <code>trim_untyped</code> function takes the untyped capability, its physical address, the desired physical address, and two empty slots for temporarily holding dummy objects.
@@ -252,7 +252,7 @@ We need two slots because the kernel resets an untyped's watermark if it has no 
 So, we must always keep one child around so that our progress on advancing the watermark is never lost.</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37c98443e92fdf315918fba8b9705eef2dadf512/workspaces/root-task/serial-device/src/main.rs#L43-L49">workspaces/root-task/serial-device/src/main.rs:43:49 after 5.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4cf02893afdef7f669a44610ad1190ae3ea62d92/workspaces/root-task/serial-device/src/main.rs#L43-L49">workspaces/root-task/serial-device/src/main.rs:43:49 after 5.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    trim_untyped(
@@ -267,7 +267,7 @@ So, we must always keep one child around so that our progress on advancing the w
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37c98443e92fdf315918fba8b9705eef2dadf512/workspaces/root-task/serial-device/src/main.rs#L68-L97">workspaces/root-task/serial-device/src/main.rs:68:97 after 5.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4cf02893afdef7f669a44610ad1190ae3ea62d92/workspaces/root-task/serial-device/src/main.rs#L68-L97">workspaces/root-task/serial-device/src/main.rs:68:97 after 5.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn trim_untyped(
@@ -303,13 +303,13 @@ So, we must always keep one child around so that our progress on advancing the w
 </code></pre>
 </div>
 </div>
-<h2 id="step-5d"><a class="header" href="#step-5d">Step 5.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e53700e1f3e3422f8dae8bfa5e51082021ff5a8d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e53700e1f3e3422f8dae8bfa5e51082021ff5a8d"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5d"><a class="header" href="#step-5d">Step 5.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('6dcf9fb2f5664f0d0998baca42330d24655840d6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/6dcf9fb2f5664f0d0998baca42330d24655840d6"> <i class="fa fa-github"></i> </a></a></h2>
 <p><code>device_ut_cap</code> is now primed; the physical address of the next allocation will be <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p><strong>Exercise:</strong> Allocate a small frame object (<code>sel4::cap_type::Granule</code>) from <code>device_ut_cap</code>.</p>
 <p>If your <code>sel4::cap::Granule</code> is called <code>serial_device_frame_cap</code>, then the following assertion should succeed:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/e53700e1f3e3422f8dae8bfa5e51082021ff5a8d/workspaces/root-task/serial-device/src/main.rs#L70-L73">workspaces/root-task/serial-device/src/main.rs:70:73 after 5.D</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/6dcf9fb2f5664f0d0998baca42330d24655840d6/workspaces/root-task/serial-device/src/main.rs#L70-L73">workspaces/root-task/serial-device/src/main.rs:70:73 after 5.D</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    assert_eq!(
@@ -319,13 +319,13 @@ So, we must always keep one child around so that our progress on advancing the w
 </code></pre>
 </div>
 </div>
-<h2 id="step-5e-exercise"><a class="header" href="#step-5e-exercise">Step 5.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f777327b2723bd850a1fe35ae2679e668d09ed2b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f777327b2723bd850a1fe35ae2679e668d09ed2b"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5e-exercise"><a class="header" href="#step-5e-exercise">Step 5.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4e25cf5953cb4319dc150750619149a0e0d11352')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4e25cf5953cb4319dc150750619149a0e0d11352"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Using code from <a href="./address-space.html#step-4b">Step 4.B</a>, <a href="./address-space.html#step-4c">Step 4.C</a>, and <a href="./address-space.html#step-4d-exercise">Step 4.D</a>, map <code>serial_device_frame_cap</code> into the root task's virtual address space.</p>
 <p>You should now be able interact with the serial device's MMIO registers.
 Try printing "Hello, World!" to the serial console with something like:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/f777327b2723bd850a1fe35ae2679e668d09ed2b/workspaces/root-task/serial-device/src/main.rs#L102-L108">workspaces/root-task/serial-device/src/main.rs:102:108 after 5.E</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4e25cf5953cb4319dc150750619149a0e0d11352/workspaces/root-task/serial-device/src/main.rs#L102-L108">workspaces/root-task/serial-device/src/main.rs:102:108 after 5.E</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let serial_device = unsafe { Device::new(serial_device_mmio_page_addr.cast()) };
@@ -339,7 +339,7 @@ Try printing "Hello, World!" to the serial console with something like:</p>
 </div>
 </div>
 <p>where <code>serial_device_mmio_page_addr: *mut _</code> is a pointer to where the MMIO registers are mapped in the root task's virtual address space.</p>
-<h2 id="step-5f-exercise"><a class="header" href="#step-5f-exercise">Step 5.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('821f5c9d6e6b0e0f8d01f8cbc51e27e1e9090b38')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/821f5c9d6e6b0e0f8d01f8cbc51e27e1e9090b38"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5f-exercise"><a class="header" href="#step-5f-exercise">Step 5.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('0c58190a9f10b6e293ebd2abba5aab315ee07d58')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/0c58190a9f10b6e293ebd2abba5aab315ee07d58"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Interrupts are delivered to userspace via notifications.
 A <code>IRQHandler</code> capability represents the authority to manage a particular interrupt.
 Specifically, an <code>IRQHandler</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html"><code>sel4::cap::IrqHandler</code></a>) has the following methods:</p>
@@ -361,9 +361,9 @@ Tell the kernel to pass on acknowledgement of this interrupt to the interrupt co
 <p>The intent behind this API is that a highly-privileged component will hold an <code>IRQControl</code> capability, which it will use to distribute more finely-grained <code>IRQHandler</code> capabilities to less privileged components for the interrupts they will manage.</p>
 <p>The root task can access its <code>IRQControl</code> capability with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/init_thread/slot/constant.IRQ_CONTROL.html"><code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code></a></p>
 <p><strong>Exercise:</strong> Use <code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code> to create a <code>sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code>.</p>
-<h2 id="step-5g-exercise"><a class="header" href="#step-5g-exercise">Step 5.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4c70bab21f52c4d61408b37adc556f5377e93625')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4c70bab21f52c4d61408b37adc556f5377e93625"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5g-exercise"><a class="header" href="#step-5g-exercise">Step 5.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e53156fcba7a60f73cbfaccac3d0b67653ab1e4b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e53156fcba7a60f73cbfaccac3d0b67653ab1e4b"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Create a notification object from <code>largest_kernel_ut</code> and associate it with the <code>IRQHandler</code> you just created using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_set_notification"><code>sel4::cap::IrqHandler::irq_handler_set_notification()</code></a>.</p>
-<h2 id="step-5h-exercise"><a class="header" href="#step-5h-exercise">Step 5.H (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8c646af48d71fc0bb9d5a6a9d4ef17b624b07ed0')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8c646af48d71fc0bb9d5a6a9d4ef17b624b07ed0"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5h-exercise"><a class="header" href="#step-5h-exercise">Step 5.H (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f8dfc8f98a2bf98a09bc466494d43aef600c830a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f8dfc8f98a2bf98a09bc466494d43aef600c830a"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Use <code>serial_device: Device</code>, your <code>IRQHandler</code>, and the notification you associated with the interrupt to write a loop that echoes serial input to serial output.</p>
 <p>Use <code>serial_device.clear_all_interrupts()</code> and <code>irq_handler_cap.irq_handler_ack()</code> in sequence to clear the interrupt at the device and interrupt controller levels respectively.
 Note that you should do this at the beginning of the loop in case your loop enters with an interrupt already pending.</p>

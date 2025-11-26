@@ -197,17 +197,17 @@ This part does assume that the reader is familiar with the basics of the Microki
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
-<p>This tutorial is presented as a linear series of patches to <a href="https://github.com/seL4/seL4-rust-tutorial-code">https://github.com/seL4/seL4-rust-tutorial-code</a>, starting at commit <code>d27fd3f560e4</code>, and ending with commit <code>b886a72fdfec</code>.
+<p>This tutorial is presented as a linear series of patches to <a href="https://github.com/seL4/seL4-rust-tutorial-code">https://github.com/seL4/seL4-rust-tutorial-code</a>, starting at commit <code>8ca0e1939dc1</code>, and ending with commit <code>5253edc1ed12</code>.
 Each patch, or step, as we shall call them, is an instructive modification to a code example.
 You are encouraged (but by no means required) to attempt those marked as exercises in this text on your own.
 Note that while most step patches include tests, the reader is not expected to write tests for exercises themselves.</p>
 <p>Clone the repository and checkout the starting commit:</p>
 <pre><code>git clone https://github.com/seL4/seL4-rust-tutorial-code
 cd seL4-rust-tutorial-code
-git checkout d27fd3f560e4
+git checkout 8ca0e1939dc1
 </code></pre>
 <p>Observe the steps ahead:</p>
-<pre><code>git log d27fd3f560e4..b886a72fdfec
+<pre><code>git log 8ca0e1939dc1..5253edc1ed12
 </code></pre>
 <p>Each step header contains two icons.
 Clicking the clipboard copies the commit hash corresponding to the step to the clipboard.
@@ -215,7 +215,7 @@ The GitHub icon is a link to the commit on GitHub.</p>
 <p>Use any Git workflow that works for you.
 For example, you could cherry-pick the steps that are not marked as exercises after examining and understanding them, and then attempt the exercises on your own, using those step commits as hints when necessary.</p>
 <h3 id="docker"><a class="header" href="#docker">Docker</a></h3>
-<p>We will work inside of a Docker container built with <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/docker/Dockerfile">docker/Dockerfile</a>.
+<p>We will work inside of a Docker container built with <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/docker/Dockerfile">docker/Dockerfile</a>.
 This Dockerfile installs some build-time dependencies, and then builds seL4, <a href="https://github.com/seL4/microkit">seL4 Microkit</a>, and some additional programs and tools.</p>
 <p>Build the image:</p>
 <pre><code>make -C docker build
@@ -228,21 +228,21 @@ This Dockerfile installs some build-time dependencies, and then builds seL4, <a 
 </code></pre>
 <p>The rest of this text assumes that you are in a shell inside the container.</p>
 <h3 id="two-workspaces"><a class="header" href="#two-workspaces">Two Workspaces</a></h3>
-<p>To simplify our Cargo invocations, this repository's Rust code has been divided between two distinct workspaces: <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/root-task">workspaces/root-task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/microkit">workspaces/microkit</a>.
-Both are subject to the top-level <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.cargo/config.toml">.cargo/config.toml</a>, whereas <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/root-task/.cargo/config.toml">workspaces/root-task/.cargo/config.toml</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/microkit/.cargo/config.toml">workspaces/microkit/.cargo/config.toml</a> each apply to only one.
+<p>To simplify our Cargo invocations, this repository's Rust code has been divided between two distinct workspaces: <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/root-task">workspaces/root-task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/microkit">workspaces/microkit</a>.
+Both are subject to the top-level <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.cargo/config.toml">.cargo/config.toml</a>, whereas <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/root-task/.cargo/config.toml">workspaces/root-task/.cargo/config.toml</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/microkit/.cargo/config.toml">workspaces/microkit/.cargo/config.toml</a> each apply to only one.
 These workspace-specific <code>config.toml</code> files demonstrate all that is required to configure the crates in the <a href="https://github.com/seL4/rust-sel4">rust-sel4</a> project:</p>
 <ul>
 <li>An environment variable pointing at <code>libsel4</code> (which includes the kernel configuration).
 See <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html#building">the relevant crate docs</a> for information on this environment variable.</li>
-<li>A reference to a custom rustc <a href="https://docs.rust-embedded.org/embedonomicon/custom-target.html">target specification</a> (the location of the target specification is given at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.cargo/config.toml#L8">.cargo/config.toml:8</a>, which refers to <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/target-specs">target-specs</a>).</li>
+<li>A reference to a custom rustc <a href="https://docs.rust-embedded.org/embedonomicon/custom-target.html">target specification</a> (the location of the target specification is given at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.cargo/config.toml#L8">.cargo/config.toml:8</a>, which refers to <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/8ca0e1939dc1d1a0d74197c703e48111960c8944/target-specs">target-specs</a>).</li>
 </ul>
 <h3 id="vscode--dev-containers"><a class="header" href="#vscode--dev-containers">VSCode + Dev Containers</a></h3>
 <p>If you want help from <a href="https://rust-analyzer.github.io/">rust-analyzer</a>, the Rust Language Server, you can use <a href="https://code.visualstudio.com/docs/devcontainers/tutorial">VSCode with the Dev Containers extension</a>.
 This will enable you to run VSCode inside of the container you just built, which contains the seL4 build artifacts that rust-analyzer will require to analyzer your code.</p>
 <p>This repository provides a separate Dev Container configuration for each workspace:</p>
 <ul>
-<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.devcontainer/root-task/devcontainer.json">.devcontainer/root-task/devcontainer.json</a></li>
-<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.devcontainer/microkit/devcontainer.json">.devcontainer/microkit/devcontainer.json</a></li>
+<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.devcontainer/root-task/devcontainer.json">.devcontainer/root-task/devcontainer.json</a></li>
+<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.devcontainer/microkit/devcontainer.json">.devcontainer/microkit/devcontainer.json</a></li>
 </ul>
 <p>To work in a particular workspace, open this repository in VSCode, run <code>&gt; Dev Containers: Reopen in Container</code>, and select the corresponding configuration.
 You should now be able to use the rust-analyzer VSCode extension normally for the code in the selected workspace.</p>
@@ -274,7 +274,7 @@ Unlike situations where higher-level seL4-related libraries (such as <a href="ht
 <p>At boot time, the seL4 kernel and root task are loaded into memory by a kind of bootloader stub referred to as a seL4 kernel loader.
 For Part I, we will use the <a href="https://github.com/seL4/rust-sel4/tree/v1.0.0/crates/sel4-kernel-loader">kernel loader from the rust-sel4 project</a>.
 We won't cover how it works or how to use it explicitly in this text.
-It is built at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/docker/Dockerfile#L94-L108">docker/Dockerfile:94:108</a>, and used at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/mk/root-task.mk#L31-L36">mk/root-task.mk:31:36</a>.</p>
+It is built at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/docker/Dockerfile#L94-L108">docker/Dockerfile:94:108</a>, and used at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/mk/root-task.mk#L31-L36">mk/root-task.mk:31:36</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><!--
     Copyright 2024, Colias Group, LLC
 
@@ -289,7 +289,7 @@ make simulate
 <p>Here is its source:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/6a0418982760bc2e9c0fc6fe91cdc614757d0195/workspaces/root-task/hello-world/src/main.rs#L7-L17">hello-world/src/main.rs:7:17</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/105d79a928d50676b1d6cf5b22c2867d99b2345e/workspaces/root-task/hello-world/src/main.rs#L7-L17">hello-world/src/main.rs:7:17</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">#![no_std]
@@ -328,23 +328,23 @@ where
 <p>(Rustdoc for <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.BootInfoPtr.html"><code>BootInfoPtr</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/trait.Termination.html"><code>Termination</code></a>)</p>
 <p>The root task has no way to exit, so, to terminate cleanly, it must suspend its own thread.
 <code>sel4::init_thread::suspend_self()</code> does exactly this.</p>
-<h2 id="step-2a-exercise"><a class="header" href="#step-2a-exercise">Step 2.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('57db641a576be7b543c6d0655b0470b1c800d713')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/57db641a576be7b543c6d0655b0470b1c800d713"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2a-exercise"><a class="header" href="#step-2a-exercise">Step 2.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d5f90b612f1df6b12390fa273560625f957e7869')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d5f90b612f1df6b12390fa273560625f957e7869"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Cause a panic.</p>
-<h2 id="step-2b-exercise"><a class="header" href="#step-2b-exercise">Step 2.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e747327f84222e3d3d3643c1ecb7dc15199fc05e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e747327f84222e3d3d3643c1ecb7dc15199fc05e"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2b-exercise"><a class="header" href="#step-2b-exercise">Step 2.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f524cfa12d1a45b2a85ba969eb1e7f9df90b6105')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f524cfa12d1a45b2a85ba969eb1e7f9df90b6105"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Catch the panic using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/panicking/fn.catch_unwind.html"><code>sel4_root_task::panicking::catch_unwind()</code></a>.</p>
-<h2 id="step-2c-exercise"><a class="header" href="#step-2c-exercise">Step 2.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('eadf1d91c520decd24164de6e650345428eb6c4c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/eadf1d91c520decd24164de6e650345428eb6c4c"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2c-exercise"><a class="header" href="#step-2c-exercise">Step 2.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('2cdabe93442ec8b71a4e77f85334be2145342d2d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/2cdabe93442ec8b71a4e77f85334be2145342d2d"> <i class="fa fa-github"></i> </a></a></h2>
 <p>You can set a custom panic hook with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/panicking/type.PanicHook.html"><code>sel4_root_task::panicking::PanicHook</code></a>.
 The default hook just prints the panic's <code>ExternalPanicInfo</code>.</p>
 <p><strong>Exercise:</strong> Set a custom panic hook.</p>
-<h2 id="step-2d-exercise"><a class="header" href="#step-2d-exercise">Step 2.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e47556acc781e682fcd69fb0e3bce9eda06c543b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e47556acc781e682fcd69fb0e3bce9eda06c543b"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2d-exercise"><a class="header" href="#step-2d-exercise">Step 2.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('25e2e46c7546e67546f0a934af34e863b07bd38e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/25e2e46c7546e67546f0a934af34e863b07bd38e"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Cause a stack overflow.</p>
-<h2 id="step-2e-exercise"><a class="header" href="#step-2e-exercise">Step 2.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f0f50266033bae0848bfc04d99400611d7c9164b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f0f50266033bae0848bfc04d99400611d7c9164b"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2e-exercise"><a class="header" href="#step-2e-exercise">Step 2.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('246b2a2c251d8339c10f77bc5db2b4cb8701a3df')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/246b2a2c251d8339c10f77bc5db2b4cb8701a3df"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The <code>#[root_task]</code> attribute macro accepts a named <code>stack_size</code> parameter, which can be any expression of type <code>usize</code> and whose value is interpreted as the root task's initial thread's stack size, in bytes.
 For example:</p>
 <pre><code class="language-rust ignore">#[root_task(stack_size = 13 * 37)]</code></pre>
 <p>The default stack size is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_root_task/constant.DEFAULT_STACK_SIZE.html"><code>sel4_root_task::DEFAULT_STACK_SIZE</code></a>.</p>
 <p><strong>Exercise:</strong> Adjust the root task's initial thread's stack size to prevent the stack overflow you just caused.</p>
-<h2 id="step-2f-exercise"><a class="header" href="#step-2f-exercise">Step 2.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('09bd92fb5dc403d66f660fc470fbb769a93cc9f6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/09bd92fb5dc403d66f660fc470fbb769a93cc9f6"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2f-exercise"><a class="header" href="#step-2f-exercise">Step 2.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8570547d7fee802a7ec8822503d5cf020a31f24a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8570547d7fee802a7ec8822503d5cf020a31f24a"> <i class="fa fa-github"></i> </a></a></h2>
 <p>By default, the <code>sel4_root_task</code> runtime does not include a heap.
 Any attempt to use the <code>alloc</code> crate will result in a link-time failure.</p>
 <p>The <code>#[root_task]</code> attribute macro accepts a <code>heap_size</code> parameter, which can be any expression of type <code>usize</code> and whose value is interpreted as the root task's heap size, in bytes.
@@ -354,12 +354,12 @@ For example:</p>
 <p>or</p>
 <pre><code class="language-rust ignore">#[root_task(stack_size = 13 * 37, heap_size = 0xf00d)]</code></pre>
 <p><strong>Exercise:</strong> Add a heap and use it.</p>
-<h2 id="step-2g"><a class="header" href="#step-2g">Step 2.G   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('321b5ac58e8d0f683ec97b51260fb652dc59af3d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/321b5ac58e8d0f683ec97b51260fb652dc59af3d"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2g"><a class="header" href="#step-2g">Step 2.G   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('97262c072bf93cfe31b8dede5f843b1592593511')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/97262c072bf93cfe31b8dede5f843b1592593511"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The <code>sel4_logging</code> crate builds on top of the <a href="https://docs.rs/log/latest/log/">log</a> crate to add utilities for initializing simple loggers in minimal environments, such as a seL4 root task.
 This step demonstrates one way to initialize a logger using this crate:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/321b5ac58e8d0f683ec97b51260fb652dc59af3d/workspaces/root-task/hello-world/src/main.rs#L17-L20">hello-world/src/main.rs:17:20 after 2.G</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/97262c072bf93cfe31b8dede5f843b1592593511/workspaces/root-task/hello-world/src/main.rs#L17-L20">hello-world/src/main.rs:17:20 after 2.G</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">static LOGGER: Logger = LoggerBuilder::const_default()
@@ -371,7 +371,7 @@ This step demonstrates one way to initialize a logger using this crate:</p>
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/321b5ac58e8d0f683ec97b51260fb652dc59af3d/workspaces/root-task/hello-world/src/main.rs#L41">hello-world/src/main.rs:41 after 2.G</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/97262c072bf93cfe31b8dede5f843b1592593511/workspaces/root-task/hello-world/src/main.rs#L41">hello-world/src/main.rs:41 after 2.G</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    LOGGER.set().unwrap();
@@ -408,14 +408,14 @@ It is up to the crate user to ensure that <code>Cap</code>'s are valid and well-
 <p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/index.html"><code>sel4::cap</code></a> module contains aliases of the form <code>sel4::Cap&lt;sel4::cap_type::*&gt;</code>.</p>
 <p>Depending on the <code>Cap</code>'s type <code>T</code>, a <code>Cap</code> has a number of methods available, which correspond to invocations for that capability type.
 For example, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.tcb_resume"><code>sel4::Cap::tcb_resume()</code></a> is available when <code>T</code> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap_type/struct.Tcb.html"><code>sel4::cap_type::Tcb</code></a>.</p>
-<h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4e6e91719a3c19a37fecbeff55d0d28b15eebaf3')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4e6e91719a3c19a37fecbeff55d0d28b15eebaf3"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('be4a4d7a927d34d83171b2445dece21583f338ac')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/be4a4d7a927d34d83171b2445dece21583f338ac"> <i class="fa fa-github"></i> </a></a></h2>
 <p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
 <em>Untyped memory</em> is the name of the object type for free memory.
 At boot time, the root task is granted untyped memory capabilities for all of the system's memory, except for the memory used for the kernel and the root task's own resources.</p>
 <p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4e6e91719a3c19a37fecbeff55d0d28b15eebaf3/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/be4a4d7a927d34d83171b2445dece21583f338ac/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    sel4::debug_println!("untyped:");
@@ -444,11 +444,11 @@ At boot time, the root task is granted untyped memory capabilities for all of th
 <p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.UntypedDesc.html#method.size_bits"><code>sel4::UntypedDesc::size_bits()</code></a> returns the log base 2 of the size of the region of memory described by the descriptor.</p>
 <p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.UntypedDesc.html#method.is_device"><code>sel4::UntypedDesc::is_device()</code></a> returns whether the region is device memory or kernel memory.
 Device memory can only be used for creating frames, whereas kernel memory has no such restrictions.</p>
-<h2 id="step-3b"><a class="header" href="#step-3b">Step 3.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('be68b6a66ed494d58f7da13c23abf247c06fea6d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/be68b6a66ed494d58f7da13c23abf247c06fea6d"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3b"><a class="header" href="#step-3b">Step 3.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('06012d1b0fbba7f99dab6933741459aaac2fbf56')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/06012d1b0fbba7f99dab6933741459aaac2fbf56"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Add a function that finds the largest untyped region passed to the root task:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/be68b6a66ed494d58f7da13c23abf247c06fea6d/workspaces/root-task/kernel-objects/src/main.rs#L32-L42">workspaces/root-task/kernel-objects/src/main.rs:32:42 after 3.B</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/06012d1b0fbba7f99dab6933741459aaac2fbf56/workspaces/root-task/kernel-objects/src/main.rs#L32-L42">workspaces/root-task/kernel-objects/src/main.rs:32:42 after 3.B</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn find_largest_kernel_untyped(bootinfo: &amp;sel4::BootInfo) -&gt; sel4::cap::Untyped {
@@ -466,7 +466,7 @@ Device memory can only be used for creating frames, whereas kernel memory has no
 </div>
 </div>
 <p>The expression <code>bootinfo.untyped().index(ut_ix).cap()</code> indexes into <code>bootinfo.untyped(): SlotRegion&lt;Untyped&gt;</code> to retrieve a <code>Slot&lt;Untyped&gt;</code>, which can be turned into a <code>Cap&lt;Untyped&gt; (= cap::Untyped)</code>.</p>
-<h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('872f1a25a27afb8b68a98c270fec80c64a1e20e4')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/872f1a25a27afb8b68a98c270fec80c64a1e20e4"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('296570073ade2dbf235c4a152d18378ee1952112')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/296570073ade2dbf235c4a152d18378ee1952112"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">Notification</a> object.</p>
 <p>We already know how to refer to a capability in the current thread's CSpace: a CPtr.
 However, some capability invocations allow us to refer to a capability slot in any CSpace whose root CNode is present in the current thread's CSpace.
@@ -496,7 +496,7 @@ More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread
 <p>The CPtr for the initial thread's own CSpace root is a constant:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L27-L27">workspaces/root-task/kernel-objects/src/main.rs:27:27 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L27-L27">workspaces/root-task/kernel-objects/src/main.rs:27:27 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let cnode = sel4::init_thread::slot::CNODE.cap();
@@ -507,7 +507,7 @@ More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread
 We can leverage the fact that Rust's <code>Range&lt;T&gt;</code> type is an iterator for certain <code>T</code> to allocate slots in an ergonomic way:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L29-L33">workspaces/root-task/kernel-objects/src/main.rs:29:33 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L29-L33">workspaces/root-task/kernel-objects/src/main.rs:29:33 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let mut empty_slots = bootinfo
@@ -523,7 +523,7 @@ Interestingly, there are two ways to do this, but the current implementation is 
 <p>Now we can invoke our untyped capability to allocate a notification object:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L36-L43">workspaces/root-task/kernel-objects/src/main.rs:36:43 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L36-L43">workspaces/root-task/kernel-objects/src/main.rs:36:43 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    largest_kernel_ut
@@ -540,7 +540,7 @@ Interestingly, there are two ways to do this, but the current implementation is 
 <p>Now that we know that <code>notification_slot</code> contains a notification capability, we can cast it and get a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html"><code>sel4::cap::Notification</code></a>:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/872f1a25a27afb8b68a98c270fec80c64a1e20e4/workspaces/root-task/kernel-objects/src/main.rs#L45-L47">workspaces/root-task/kernel-objects/src/main.rs:45:47 after 3.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/296570073ade2dbf235c4a152d18378ee1952112/workspaces/root-task/kernel-objects/src/main.rs#L45-L47">workspaces/root-task/kernel-objects/src/main.rs:45:47 after 3.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let notification = notification_slot
@@ -549,9 +549,9 @@ Interestingly, there are two ways to do this, but the current implementation is 
 </code></pre>
 </div>
 </div>
-<h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('681fb5c21086ca3da70db911144212f0bd36fa26')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/681fb5c21086ca3da70db911144212f0bd36fa26"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('fa31ba1228bb1029b10a08a1a74a381c9d385557')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/fa31ba1228bb1029b10a08a1a74a381c9d385557"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>sel4::cap::Notification::signal()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>sel4::cap::Notification::wait()</code></a> to signal and then wait on the notification.</p>
-<h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('0f52649ab1d390861aa8c830aa0cfc57d15224c8')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/0f52649ab1d390861aa8c830aa0cfc57d15224c8"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('cc8cf4ffb1235a0b1daae3c38b67a432880fcef9')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/cc8cf4ffb1235a0b1daae3c38b67a432880fcef9"> <i class="fa fa-github"></i> </a></a></h2>
 <p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
 When that capability is used to signal the notification, the notification's word-sized state is bit-wise <code>or</code>ed with the capability's badge.
 A wait call on the notification returns and clears the notification's state, provided that a signal call has occurred since the last wait call.</p>
@@ -560,7 +560,7 @@ A wait call on the notification returns and clears the notification's state, pro
 <p>A slot in the root task's CSpace (i.e. a value of type <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/init_thread/struct.Slot.html"><code>sel4::init_thread::Slot</code></a>) can be turned into an <code>sel4::AbsoluteCPtr</code> using {{#rustdoc_link root-task sel4/cap/type.CNode.html#method.absolute_cptr<code>sel4::CNode::absolute_cptr()</code>}}:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/0f52649ab1d390861aa8c830aa0cfc57d15224c8/workspaces/root-task/kernel-objects/src/main.rs#L63-L63">workspaces/root-task/kernel-objects/src/main.rs:63:63 after 3.E</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/cc8cf4ffb1235a0b1daae3c38b67a432880fcef9/workspaces/root-task/kernel-objects/src/main.rs#L63-L63">workspaces/root-task/kernel-objects/src/main.rs:63:63 after 3.E</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">            &amp;cnode.absolute_cptr(notification_slot.cptr()),
@@ -569,9 +569,9 @@ A wait call on the notification returns and clears the notification's state, pro
 </div>
 <p><strong>Exercise:</strong>: Mint a capability based on the capability in <code>notification_slot</code> into your newly allocated slot. Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.CapRights.html#method.all"><code>sel4::CapRights::all()</code></a> for the <code>rights</code> parameter, and specify a non-zero badge value.</p>
 <p><strong>Exercise:</strong>: Signal the notification using your newly minted badged capability. Using the return value of <code>sel4::Notification::wait()</code>, compare the badge value it returns with the badge you used to mint the capability.</p>
-<h2 id="step-3f-exercise"><a class="header" href="#step-3f-exercise">Step 3.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7dc10271914f7a05e682fe9a834a24d2c063d86c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7dc10271914f7a05e682fe9a834a24d2c063d86c"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3f-exercise"><a class="header" href="#step-3f-exercise">Step 3.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('df19950c3cdeeb530ba0e51c5d063abfc1a6ef6e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/df19950c3cdeeb530ba0e51c5d063abfc1a6ef6e"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: <code>sel4::CapRights::all()</code> is overly-permissive. Use the overly-restrictive <code>sel4::CapRights::none()</code> instead and watch the program fail.</p>
-<h2 id="step-3g-exercise"><a class="header" href="#step-3g-exercise">Step 3.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b93bd0cd8304da64bcd722db3f48a68726445b15')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b93bd0cd8304da64bcd722db3f48a68726445b15"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-3g-exercise"><a class="header" href="#step-3g-exercise">Step 3.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('dcdcd1c4f6a3bc673ea62ae6777e3e456a03de1e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/dcdcd1c4f6a3bc673ea62ae6777e3e456a03de1e"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: Now use the minimum rights necessary for the program to run.</p>
 <div style="break-before: page; page-break-before: always;"></div><!--
     Copyright 2024, Colias Group, LLC
@@ -599,14 +599,14 @@ In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarc
 <p>The root task is provided with capabilites for the objects comprising its own virtual address space.
 The locations of these capabilities in the root task's CSpace is provided in the <code>BootInfo</code> struct.
 Our goal for this chapter will be to create a frame object and experiment with mapping it into the root task's own address space.</p>
-<h2 id="step-4a-exercise"><a class="header" href="#step-4a-exercise">Step 4.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5d99552dd1bcd7b6e0888395e5d5b0f87db57edc')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5d99552dd1bcd7b6e0888395e5d5b0f87db57edc"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4a-exercise"><a class="header" href="#step-4a-exercise">Step 4.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e731185006daba1038e702786a59c3310f367827')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e731185006daba1038e702786a59c3310f367827"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Using code snippets from <a href="root-task/kernel-objects.html">Chapter 3 (Allocating Kernel Objects)</a>, create a frame object. We seek a value <code>frame: sel4::cap::Granule</code> (which can also be written as <code>frame: sel4::Cap&lt;sel4::cap_type::Granule&gt;</code>).</p>
 <p>Note that, after importing the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/trait.CapTypeForObjectOfFixedSize.html"><code>sel4::CapTypeForObjectOfFixedSize</code></a> trait, you can express the appropriate <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/enum.ObjectBlueprint.html"><code>sel4::ObjectBlueprint</code></a> as <code>sel4::cap_type::Granule::object_blueprint()</code>.</p>
-<h2 id="step-4b"><a class="header" href="#step-4b">Step 4.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bd71a7d432c19e080bd2dab9b0a9ebe3898935a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4b"><a class="header" href="#step-4b">Step 4.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b1d99c5317fc8029ac6b5e4ede421cb037597d6c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b1d99c5317fc8029ac6b5e4ede421cb037597d6c"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In order to avoid interacting with intermediate translation structures, let's reserve an aligned granule-sized region in the root task's program image that we can use for our experiment:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a/workspaces/root-task/address-space/src/main.rs#L15-L20">workspaces/root-task/address-space/src/main.rs:15:20 after 4.B</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b1d99c5317fc8029ac6b5e4ede421cb037597d6c/workspaces/root-task/address-space/src/main.rs#L15-L20">workspaces/root-task/address-space/src/main.rs:15:20 after 4.B</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const GRANULE_SIZE: usize = sel4::FrameObjectType::GRANULE.bytes(); // 4096
@@ -620,7 +620,7 @@ static mut PAGE_A: PagePlaceholder = PagePlaceholder([0xee; GRANULE_SIZE]);
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7bd71a7d432c19e080bd2dab9b0a9ebe3898935a/workspaces/root-task/address-space/src/main.rs#L46-L49">workspaces/root-task/address-space/src/main.rs:46:49 after 4.B</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b1d99c5317fc8029ac6b5e4ede421cb037597d6c/workspaces/root-task/address-space/src/main.rs#L46-L49">workspaces/root-task/address-space/src/main.rs:46:49 after 4.B</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let page_a_addr = ptr::addr_of!(PAGE_A).cast::&lt;u8&gt;();
@@ -631,12 +631,12 @@ static mut PAGE_A: PagePlaceholder = PagePlaceholder([0xee; GRANULE_SIZE]);
 </div>
 </div>
 <p>This reservation covers exactly one page in the root task's virtual address space.</p>
-<h2 id="step-4c"><a class="header" href="#step-4c">Step 4.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('9880c4714f9b7aad818cd4d519359920d0ef9535')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/9880c4714f9b7aad818cd4d519359920d0ef9535"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4c"><a class="header" href="#step-4c">Step 4.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Let's unmap the page in the root task image that initially backs our reserved region. This will give us a hole in the root task VSpace, which we can use for our experiment.</p>
 <p>This function determines the slot in the root task's CSpace of the page capability corresponding to the page in the root task's VSpace which contains the given address:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9880c4714f9b7aad818cd4d519359920d0ef9535/workspaces/root-task/address-space/src/main.rs#L73-L84">workspaces/root-task/address-space/src/main.rs:73:84 after 4.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff/workspaces/root-task/address-space/src/main.rs#L73-L84">workspaces/root-task/address-space/src/main.rs:73:84 after 4.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn get_user_image_frame_slot(
@@ -660,7 +660,7 @@ We can use it, along with <code>addr</code>, to identify the offset into <a href
 Try to access that region, and observe a page fault:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9880c4714f9b7aad818cd4d519359920d0ef9535/workspaces/root-task/address-space/src/main.rs#L51-L54">workspaces/root-task/address-space/src/main.rs:51:54 after 4.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8cdc2e62ad4c2fd7ded3d99fccf6457fd67301ff/workspaces/root-task/address-space/src/main.rs#L51-L54">workspaces/root-task/address-space/src/main.rs:51:54 after 4.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let page_a_slot = get_user_image_frame_slot(bootinfo, page_a_addr as usize);
@@ -670,7 +670,7 @@ Try to access that region, and observe a page fault:</p>
 </code></pre>
 </div>
 </div>
-<h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4c165ad9826a38c68ee4f3d14f87c2d59172461c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4c165ad9826a38c68ee4f3d14f87c2d59172461c"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7d710b2c0c62b5e16078c96293dd8d0f7437c28f')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7d710b2c0c62b5e16078c96293dd8d0f7437c28f"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
 <p>Here are some hints for the parameters of <code>.frame_map()</code>:</p>
 <ul>
@@ -689,10 +689,10 @@ Start by navigating to and running this chapter's example, which, so far, doesn'
 <pre><code>cd workspaces/root-task/serial-device
 make simulate
 </code></pre>
-<p>The module at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/device.rs">device.rs</a> implements a higher-level interface over the serial device's MMIO registers, whose physical base address is:</p>
+<p>The module at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d23932e433547f81bed696954ebdba3dd7151e43/workspaces/root-task/serial-device/src/device.rs">device.rs</a> implements a higher-level interface over the serial device's MMIO registers, whose physical base address is:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/main.rs#L16-L16">workspaces/root-task/serial-device/src/main.rs:16:16</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d23932e433547f81bed696954ebdba3dd7151e43/workspaces/root-task/serial-device/src/main.rs#L16-L16">workspaces/root-task/serial-device/src/main.rs:16:16</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const SERIAL_DEVICE_MMIO_PADDR: usize = 0x0900_0000;
@@ -703,7 +703,7 @@ make simulate
 <p>After that, we will set up the root task's access to the serial device's interrupt, whose value is:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/42a455f5fbc3a5fb54c2941946a6f9f0ad47d161/workspaces/root-task/serial-device/src/main.rs#L18-L18">workspaces/root-task/serial-device/src/main.rs:18:18</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d23932e433547f81bed696954ebdba3dd7151e43/workspaces/root-task/serial-device/src/main.rs#L18-L18">workspaces/root-task/serial-device/src/main.rs:18:18</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const SERIAL_DEVICE_IRQ: usize = 33;
@@ -711,11 +711,11 @@ make simulate
 </div>
 </div>
 <p>Finally, we will implement a simple loop that echoes serial input to serial output.</p>
-<h2 id="step-5a"><a class="header" href="#step-5a">Step 5.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4ca8d20363654314ea477148a2c0c45d0c3cbd5e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4ca8d20363654314ea477148a2c0c45d0c3cbd5e"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5a"><a class="header" href="#step-5a">Step 5.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c"> <i class="fa fa-github"></i> </a></a></h2>
 <p>First, add some familiar snippets that we will use for allocating CSlots and kernel objects:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4ca8d20363654314ea477148a2c0c45d0c3cbd5e/workspaces/root-task/serial-device/src/main.rs#L34-L44">workspaces/root-task/serial-device/src/main.rs:34:44 after 5.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c/workspaces/root-task/serial-device/src/main.rs#L34-L44">workspaces/root-task/serial-device/src/main.rs:34:44 after 5.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn find_largest_kernel_untyped(bootinfo: &amp;sel4::BootInfo) -&gt; sel4::cap::Untyped {
@@ -734,7 +734,7 @@ make simulate
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4ca8d20363654314ea477148a2c0c45d0c3cbd5e/workspaces/root-task/serial-device/src/main.rs#L22-L27">workspaces/root-task/serial-device/src/main.rs:22:27 after 5.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fecc1155f265d7bf14f8af5d2bc6fa6b1045e87c/workspaces/root-task/serial-device/src/main.rs#L22-L27">workspaces/root-task/serial-device/src/main.rs:22:27 after 5.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let mut empty_slots = bootinfo
@@ -746,13 +746,13 @@ make simulate
 </code></pre>
 </div>
 </div>
-<h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('1d4e99587abf6cdd57593e796ff932898e66bc58')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/1d4e99587abf6cdd57593e796ff932898e66bc58"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f7bba62ca19e48c955c376a930482b33680c9085')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f7bba62ca19e48c955c376a930482b33680c9085"> <i class="fa fa-github"></i> </a></a></h2>
 <p><code>largest_kernel_ut</code> will be useful for allocating kernel objects whose backing physical addresses don't matter to us, but we must allocate the frame which contains the serial device's MMIO registers at a particular physicall address (<code>SERIAL_DEVICE_MMIO_PADDR</code>).
 Furthermore, the seL4 API distinguishes between <em>general purpose untyped</em> and <em>device untyped</em>. General purpose untyped is backed by normal memory, and can be used to create any type of object. Device untyped is not backed by normal memory, and can only be used to create frames.
 See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
 So, we must allocate the serial device MMIO frame from the particular initial device untyped that contains <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p><strong>Exercice:</strong> Identify this initial untyped in the <code>bootinfo</code>. We will need a corresponding <code>sel4::cap::Untyped</code> along with the untyped's physical address (or <code>sel4::UntypedDesc</code>, which contains the physical address) for the next step.</p>
-<h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('37c98443e92fdf315918fba8b9705eef2dadf512')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/37c98443e92fdf315918fba8b9705eef2dadf512"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4cf02893afdef7f669a44610ad1190ae3ea62d92')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4cf02893afdef7f669a44610ad1190ae3ea62d92"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The untyped we've identified contains the frame we are targeting, but that frame may be somewhere in the middle of the region of device memory the untyped covers.
 To allocate the frame at <code>SERIAL_DEVICE_MMIO_PADDR</code>, we must allocate dummy objects from this untyped until its watermark is at <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p>This <code>trim_untyped</code> function takes the untyped capability, its physical address, the desired physical address, and two empty slots for temporarily holding dummy objects.
@@ -760,7 +760,7 @@ We need two slots because the kernel resets an untyped's watermark if it has no 
 So, we must always keep one child around so that our progress on advancing the watermark is never lost.</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37c98443e92fdf315918fba8b9705eef2dadf512/workspaces/root-task/serial-device/src/main.rs#L43-L49">workspaces/root-task/serial-device/src/main.rs:43:49 after 5.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4cf02893afdef7f669a44610ad1190ae3ea62d92/workspaces/root-task/serial-device/src/main.rs#L43-L49">workspaces/root-task/serial-device/src/main.rs:43:49 after 5.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    trim_untyped(
@@ -775,7 +775,7 @@ So, we must always keep one child around so that our progress on advancing the w
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37c98443e92fdf315918fba8b9705eef2dadf512/workspaces/root-task/serial-device/src/main.rs#L68-L97">workspaces/root-task/serial-device/src/main.rs:68:97 after 5.C</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4cf02893afdef7f669a44610ad1190ae3ea62d92/workspaces/root-task/serial-device/src/main.rs#L68-L97">workspaces/root-task/serial-device/src/main.rs:68:97 after 5.C</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn trim_untyped(
@@ -811,13 +811,13 @@ So, we must always keep one child around so that our progress on advancing the w
 </code></pre>
 </div>
 </div>
-<h2 id="step-5d"><a class="header" href="#step-5d">Step 5.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e53700e1f3e3422f8dae8bfa5e51082021ff5a8d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e53700e1f3e3422f8dae8bfa5e51082021ff5a8d"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5d"><a class="header" href="#step-5d">Step 5.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('6dcf9fb2f5664f0d0998baca42330d24655840d6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/6dcf9fb2f5664f0d0998baca42330d24655840d6"> <i class="fa fa-github"></i> </a></a></h2>
 <p><code>device_ut_cap</code> is now primed; the physical address of the next allocation will be <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p><strong>Exercise:</strong> Allocate a small frame object (<code>sel4::cap_type::Granule</code>) from <code>device_ut_cap</code>.</p>
 <p>If your <code>sel4::cap::Granule</code> is called <code>serial_device_frame_cap</code>, then the following assertion should succeed:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/e53700e1f3e3422f8dae8bfa5e51082021ff5a8d/workspaces/root-task/serial-device/src/main.rs#L70-L73">workspaces/root-task/serial-device/src/main.rs:70:73 after 5.D</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/6dcf9fb2f5664f0d0998baca42330d24655840d6/workspaces/root-task/serial-device/src/main.rs#L70-L73">workspaces/root-task/serial-device/src/main.rs:70:73 after 5.D</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    assert_eq!(
@@ -827,13 +827,13 @@ So, we must always keep one child around so that our progress on advancing the w
 </code></pre>
 </div>
 </div>
-<h2 id="step-5e-exercise"><a class="header" href="#step-5e-exercise">Step 5.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f777327b2723bd850a1fe35ae2679e668d09ed2b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f777327b2723bd850a1fe35ae2679e668d09ed2b"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5e-exercise"><a class="header" href="#step-5e-exercise">Step 5.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4e25cf5953cb4319dc150750619149a0e0d11352')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4e25cf5953cb4319dc150750619149a0e0d11352"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Using code from <a href="root-task/./address-space.html#step-4b">Step 4.B</a>, <a href="root-task/./address-space.html#step-4c">Step 4.C</a>, and <a href="root-task/./address-space.html#step-4d-exercise">Step 4.D</a>, map <code>serial_device_frame_cap</code> into the root task's virtual address space.</p>
 <p>You should now be able interact with the serial device's MMIO registers.
 Try printing "Hello, World!" to the serial console with something like:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/f777327b2723bd850a1fe35ae2679e668d09ed2b/workspaces/root-task/serial-device/src/main.rs#L102-L108">workspaces/root-task/serial-device/src/main.rs:102:108 after 5.E</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4e25cf5953cb4319dc150750619149a0e0d11352/workspaces/root-task/serial-device/src/main.rs#L102-L108">workspaces/root-task/serial-device/src/main.rs:102:108 after 5.E</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    let serial_device = unsafe { Device::new(serial_device_mmio_page_addr.cast()) };
@@ -847,7 +847,7 @@ Try printing "Hello, World!" to the serial console with something like:</p>
 </div>
 </div>
 <p>where <code>serial_device_mmio_page_addr: *mut _</code> is a pointer to where the MMIO registers are mapped in the root task's virtual address space.</p>
-<h2 id="step-5f-exercise"><a class="header" href="#step-5f-exercise">Step 5.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('821f5c9d6e6b0e0f8d01f8cbc51e27e1e9090b38')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/821f5c9d6e6b0e0f8d01f8cbc51e27e1e9090b38"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5f-exercise"><a class="header" href="#step-5f-exercise">Step 5.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('0c58190a9f10b6e293ebd2abba5aab315ee07d58')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/0c58190a9f10b6e293ebd2abba5aab315ee07d58"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Interrupts are delivered to userspace via notifications.
 A <code>IRQHandler</code> capability represents the authority to manage a particular interrupt.
 Specifically, an <code>IRQHandler</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html"><code>sel4::cap::IrqHandler</code></a>) has the following methods:</p>
@@ -869,9 +869,9 @@ Tell the kernel to pass on acknowledgement of this interrupt to the interrupt co
 <p>The intent behind this API is that a highly-privileged component will hold an <code>IRQControl</code> capability, which it will use to distribute more finely-grained <code>IRQHandler</code> capabilities to less privileged components for the interrupts they will manage.</p>
 <p>The root task can access its <code>IRQControl</code> capability with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/init_thread/slot/constant.IRQ_CONTROL.html"><code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code></a></p>
 <p><strong>Exercise:</strong> Use <code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code> to create a <code>sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code>.</p>
-<h2 id="step-5g-exercise"><a class="header" href="#step-5g-exercise">Step 5.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4c70bab21f52c4d61408b37adc556f5377e93625')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4c70bab21f52c4d61408b37adc556f5377e93625"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5g-exercise"><a class="header" href="#step-5g-exercise">Step 5.G (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e53156fcba7a60f73cbfaccac3d0b67653ab1e4b')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e53156fcba7a60f73cbfaccac3d0b67653ab1e4b"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Create a notification object from <code>largest_kernel_ut</code> and associate it with the <code>IRQHandler</code> you just created using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_set_notification"><code>sel4::cap::IrqHandler::irq_handler_set_notification()</code></a>.</p>
-<h2 id="step-5h-exercise"><a class="header" href="#step-5h-exercise">Step 5.H (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8c646af48d71fc0bb9d5a6a9d4ef17b624b07ed0')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8c646af48d71fc0bb9d5a6a9d4ef17b624b07ed0"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-5h-exercise"><a class="header" href="#step-5h-exercise">Step 5.H (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f8dfc8f98a2bf98a09bc466494d43aef600c830a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f8dfc8f98a2bf98a09bc466494d43aef600c830a"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Use <code>serial_device: Device</code>, your <code>IRQHandler</code>, and the notification you associated with the interrupt to write a loop that echoes serial input to serial output.</p>
 <p>Use <code>serial_device.clear_all_interrupts()</code> and <code>irq_handler_cap.irq_handler_ack()</code> in sequence to clear the interrupt at the device and interrupt controller levels respectively.
 Note that you should do this at the beginning of the loop in case your loop enters with an interrupt already pending.</p>
@@ -890,7 +890,7 @@ It spawns a secondary thread, and then interacts with it using a notification.</
 <pre><code>cd workspaces/root-task/spawn-thread
 make simulate
 </code></pre>
-<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
+<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
 If you're used to using <a href="https://github.com/seL4/seL4_libs">seL4_libs</a>, you may notice that our Rust code here is much more low-level and verbose.
 That is because we aren't using any higher-level seL4-related libraries such as
 <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/thread.h"><code>&lt;sel4utils/thread.h&gt;</code></a>.
@@ -903,7 +903,7 @@ and
 <p>The exercises in this chapter are only concerned with the following two functions, which run concurrently:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_nfn: sel4::cap::Notification) {
@@ -916,7 +916,7 @@ and
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/4bc0ad04dd0baa65772186e97381166b802e814b/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_nfn: sel4::cap::Notification) {
@@ -928,7 +928,7 @@ and
 </div>
 </div>
 <p><code>secondary_thread_main()</code> runs in the secondary thread, and <code>interact_with_secondary_thread()</code> runs in the secondary thread.</p>
-<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('c4acc79f48ccdfb280444c9b41280893b6c810dd')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/c4acc79f48ccdfb280444c9b41280893b6c810dd"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('47552360f6184b759a490f56d93b4e1885a40179')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/47552360f6184b759a490f56d93b4e1885a40179"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In this step, we introduce IPC between <code>secondary_thread_main()</code> and <code>interact_with_secondary_thread</code> by changing</p>
 <pre><code>inter_thread_nfn: sel4::cap::Notification
 </code></pre>
@@ -982,7 +982,7 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 <p>Taking all of this together, let's use our IPC endpoint to send an empty message:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/c4acc79f48ccdfb280444c9b41280893b6c810dd/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/47552360f6184b759a490f56d93b4e1885a40179/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_ep: sel4::cap::Endpoint) {
@@ -995,7 +995,7 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/c4acc79f48ccdfb280444c9b41280893b6c810dd/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/47552360f6184b759a490f56d93b4e1885a40179/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_ep: sel4::cap::Endpoint) {
@@ -1008,13 +1008,13 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 </code></pre>
 </div>
 </div>
-<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('b8d896bce9c35f6d479435c93240c766d74c9bd7')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/b8d896bce9c35f6d479435c93240c766d74c9bd7"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('144d391168ee9b0b467cc9ac79cf8b11fca53fef')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/144d391168ee9b0b467cc9ac79cf8b11fca53fef"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> use
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
 and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
 to send a message with some data.</p>
-<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('968473d5d4d0fd205a7f5162be1477ea337ff4fa')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/968473d5d4d0fd205a7f5162be1477ea337ff4fa"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('47dfa98ddeb9f274b6b2d61b0cdfc9bb0b824922')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/47dfa98ddeb9f274b6b2d61b0cdfc9bb0b824922"> <i class="fa fa-github"></i> </a></a></h2>
 <p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
 <p><strong>Exercise:</strong> Change the</p>
 <pre><code>inter_thread_ep.send()
@@ -1037,8 +1037,8 @@ make simulate
 <p>Similarly to what we saw in <a href="root-task/spawn-thread.html">Chapter 6 (Spawning a Thread)</a>, the code in this example is more low-level and complex compared to what you have seen in code that leverages <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/process.h"><code>&lt;sel4utils/process.h&gt;</code></a>.
 Again, our code here is more like spawning a task using <code>&lt;sel4/sel4.h&gt;</code> alone.</p>
 <p>This example consists of two programs.
-The <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/src/main.rs"><code>spawn-task</code></a> crate is the root task, and the <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/child/src/main.rs"><code>spawn-task-child</code></a> crate is the child task.</p>
-<p>The child task does not spawn in any standard sort of environment, so is includes its own ad-hoc Rust language runtime in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/child/src/runtime.rs">child/src/runtime.rs</a>, complete with thread-local storage, a global heap allocator, and exception handling.
+The <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fc68fd5398f38ce05b97e4cc061b460344467f76/workspaces/root-task/spawn-task/src/main.rs"><code>spawn-task</code></a> crate is the root task, and the <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fc68fd5398f38ce05b97e4cc061b460344467f76/workspaces/root-task/spawn-task/child/src/main.rs"><code>spawn-task-child</code></a> crate is the child task.</p>
+<p>The child task does not spawn in any standard sort of environment, so is includes its own ad-hoc Rust language runtime in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fc68fd5398f38ce05b97e4cc061b460344467f76/workspaces/root-task/spawn-task/child/src/runtime.rs">child/src/runtime.rs</a>, complete with thread-local storage, a global heap allocator, and exception handling.
 This runtime is built using a few Rust langauge runtime building block crates:</p>
 <ul>
 <li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_runtime_common/index.html"><code>sel4-runtime-common</code></a></li>
@@ -1050,12 +1050,12 @@ This runtime is built using a few Rust langauge runtime building block crates:</
 </ul>
 <p>This minimal, ad-hoc language runtime is a neat, instructive piece of code.
 It shows how one can build a new Rust language runtime out of the building blocks provided by the <a href="https://github.com/seL4/rust-sel4">rust-sel4</a> project.</p>
-<p>Explore the <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/src">root task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/40312f3193ef51692da43172bb9feab8a200a157/workspaces/root-task/spawn-task/child/src">child task</a>.</p>
+<p>Explore the <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/fc68fd5398f38ce05b97e4cc061b460344467f76/workspaces/root-task/spawn-task/src">root task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/fc68fd5398f38ce05b97e4cc061b460344467f76/workspaces/root-task/spawn-task/child/src">child task</a>.</p>
 <p>Right now, all the child task does is send a test message over an endpoint back to the root task.
 The challenge in this chapter, <a href="root-task/spawn-task.html#step-7e-challenge">step 7.E</a>, is to extend the root task so that it sets up the child task to be able to interact with the serial device, and to extend the child task to implement the same echo loop as in [./serial-device.html#step-5h].
 Steps <a href="root-task/spawn-task.html#step-7a">7.A</a>, <a href="root-task/spawn-task.html#step-7b">7.B</a>, <a href="root-task/spawn-task.html#step-7c">7.C</a>, and <a href="root-task/spawn-task.html#step-7d">7.D</a>, which are not exercises, make some incremental extensions towards those goals to help you get started.</p>
-<h2 id="step-7a"><a class="header" href="#step-7a">Step 7.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('73b4d16c157a57c029da1b8e47ea94748a1a08d8')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/73b4d16c157a57c029da1b8e47ea94748a1a08d8"> <i class="fa fa-github"></i> </a></a></h2>
-<p>This step extends the <code>ObjectAllocator</code> type in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/bb8a992c4b3944f2a93fdd303921d4dba2002b4e/workspaces/root-task/spawn-task/src/object_allocator.rs">workspaces/root-task/spawn-task/src/object_allocator.rs after 7.B</a> with the <code>recklessly_allocate_at()</code> method.
+<h2 id="step-7a"><a class="header" href="#step-7a">Step 7.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('da39134cb72ce122fa805c355b3556d3bcc244d7')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/da39134cb72ce122fa805c355b3556d3bcc244d7"> <i class="fa fa-github"></i> </a></a></h2>
+<p>This step extends the <code>ObjectAllocator</code> type in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/bff68c7a84530004d55a19b9f644d5e08b6b68a0/workspaces/root-task/spawn-task/src/object_allocator.rs">workspaces/root-task/spawn-task/src/object_allocator.rs after 7.B</a> with the <code>recklessly_allocate_at()</code> method.
 This method allocates an object according to the <code>blueprint</code> parameter at the given physical address <code>paddr</code>.
 Instead of just allocating the object from the largest kernel untyped like the <code>allocate()</code> method does, this method searches through the bootinfo to find the initial untyped capability whose corresponding untyped object contains <code>paddr</code>, allocates dummy objects from this untyped object until its watermark reaches <code>paddr</code>, and then allocates the desired object.
 <code>recklessly_allocate_at()</code>'s procedure is similar to that which we followed in <a href="root-task/./serial-device.html#step-5c">step 5.C</a>.</p>
@@ -1063,16 +1063,16 @@ Instead of just allocating the object from the largest kernel untyped like the <
 So, subsequent calls for <code>paddr</code>s contained in the same initial untyped would fail or, worse, misbehave.
 However, we expect to only need to call it once, so we are okay with this caveat.</p>
 <p>In <a href="root-task/spawn-task.html#step-7e-challenge">step 7.E</a>, you be able to use this method to allocate the serial device MMIO register frame.</p>
-<h2 id="step-7b"><a class="header" href="#step-7b">Step 7.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('bb8a992c4b3944f2a93fdd303921d4dba2002b4e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/bb8a992c4b3944f2a93fdd303921d4dba2002b4e"> <i class="fa fa-github"></i> </a></a></h2>
-<p>This step extends the <code>create_child_vspace()</code> function in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/73b4d16c157a57c029da1b8e47ea94748a1a08d8/workspaces/root-task/spawn-task/src/child_vspace.rs">workspaces/root-task/spawn-task/src/child_vspace.rs after 7.A</a> to take an <code>extra_frames</code> parameter.
+<h2 id="step-7b"><a class="header" href="#step-7b">Step 7.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('bff68c7a84530004d55a19b9f644d5e08b6b68a0')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/bff68c7a84530004d55a19b9f644d5e08b6b68a0"> <i class="fa fa-github"></i> </a></a></h2>
+<p>This step extends the <code>create_child_vspace()</code> function in <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/da39134cb72ce122fa805c355b3556d3bcc244d7/workspaces/root-task/spawn-task/src/child_vspace.rs">workspaces/root-task/spawn-task/src/child_vspace.rs after 7.A</a> to take an <code>extra_frames</code> parameter.
 <code>create_child_vspace()</code> now maps these extra frames into the child task's address space, after the end of the program image, and after the IPC buffer frame.</p>
 <p>In <a href="root-task/spawn-task.html#step-7e-challenge">step 7.E</a>, you be able to use this parameter to pass in the serial device MMIO register frame to mapped into the child task's address space.</p>
-<h2 id="step-7c"><a class="header" href="#step-7c">Step 7.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('a402baec43efdd31a8dcfc70cc152da039dcc516')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/a402baec43efdd31a8dcfc70cc152da039dcc516"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-7c"><a class="header" href="#step-7c">Step 7.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7ecc593dba49ab38435d2bb3dc8670a9e89eb767')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7ecc593dba49ab38435d2bb3dc8670a9e89eb767"> <i class="fa fa-github"></i> </a></a></h2>
 <p>This step simply copies the <code>Device</code> type from <a href="root-task/./serial-device.html">chapter 5</a> into the child task.</p>
 <p>In <a href="root-task/spawn-task.html#step-7e-challenge">step 7.E</a>, you be able to use this type to interact with the serial device's MMIO registers, just like we as part of <a href="root-task/./serial-device.html#step-5e-exercise">step 5.E</a>.</p>
-<h2 id="step-7d"><a class="header" href="#step-7d">Step 7.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e5cb0e8d6e27889e5801ac04189972cdf953cdaf')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e5cb0e8d6e27889e5801ac04189972cdf953cdaf"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-7d"><a class="header" href="#step-7d">Step 7.D   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('759ae3735fbec2e2ff49a0b5f2f551d5823a8254')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/759ae3735fbec2e2ff49a0b5f2f551d5823a8254"> <i class="fa fa-github"></i> </a></a></h2>
 <p>This step just adds the <code>SERIAL_DEVICE_MMIO_PADDR</code> and <code>SERIAL_DEVICE_IRQ</code> constants from <a href="root-task/./serial-device.html">chapter 5</a> to the root task.</p>
-<h2 id="step-7e-challenge"><a class="header" href="#step-7e-challenge">Step 7.E (challenge)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ddfc44092299c6dfbc9f214e3144f7e201cc6971')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ddfc44092299c6dfbc9f214e3144f7e201cc6971"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-7e-challenge"><a class="header" href="#step-7e-challenge">Step 7.E (challenge)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('cd788cd87d627ded0136864ad2ef33d9bff012e2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/cd788cd87d627ded0136864ad2ef33d9bff012e2"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>
 Extend the root task so that it sets up the child task to be able to interact with the serial device, and extend the child task to implement the same echo loop as in [./serial-device.html#step-5h-exercise].</p>
 <div class="step-hint">
@@ -1126,7 +1126,7 @@ make simulate
 <p>Here is its source:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/a167640582bb329ccd5ecf0113f0cd8492ab616f/workspaces/microkit/hello-world/pds/hello/src/main.rs#L7-L22">hello-world/pds/hello/src/main.rs:7:22</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/f44922b1a2204315560dae4cd0a63e23275a3a0a/workspaces/microkit/hello-world/pds/hello/src/main.rs#L7-L22">hello-world/pds/hello/src/main.rs:7:22</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">#![no_std]
@@ -1186,7 +1186,7 @@ make simulate
 <p>The example system description specifies two protection domains, with a channel between them:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/ipc.system#L7-L20">ipc.system:7:20</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/43e83d6ed3a4476f6794e14faacdb034296bb1fc/workspaces/microkit/ipc/ipc.system#L7-L20">ipc.system:7:20</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-xml">&lt;system&gt;
@@ -1209,7 +1209,7 @@ make simulate
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/pds/client/src/main.rs#L14-L36">pds/client/src/main.rs:14:36</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/43e83d6ed3a4476f6794e14faacdb034296bb1fc/workspaces/microkit/ipc/pds/client/src/main.rs#L14-L36">pds/client/src/main.rs:14:36</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const SERVER: Channel = Channel::new(13);
@@ -1240,7 +1240,7 @@ impl Handler for HandlerImpl {
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5d7ed9ed19340cff0208953146230e391d7c8a07/workspaces/microkit/ipc/pds/server/src/main.rs#L12-L39">pds/server/src/main.rs:12:39</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/43e83d6ed3a4476f6794e14faacdb034296bb1fc/workspaces/microkit/ipc/pds/server/src/main.rs#L12-L39">pds/server/src/main.rs:12:39</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">const CLIENT: Channel = Channel::new(37);
@@ -1298,7 +1298,7 @@ but we also have
 which use
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer()</code></a> and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut()</code></a> under the hood.</p>
-<h2 id="step-10a-exercise"><a class="header" href="#step-10a-exercise">Step 10.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bd4b3a57ec358e3c50a61a63c27ecbc6593d160')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bd4b3a57ec358e3c50a61a63c27ecbc6593d160"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-10a-exercise"><a class="header" href="#step-10a-exercise">Step 10.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('36720280f95480ede80302410ec23dc122b3a6a3')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/36720280f95480ede80302410ec23dc122b3a6a3"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>
 In the client's <code>notified()</code> handler, make a protected procedure call to the server using <code>SERVER.pp_call()</code>.
 Handle the call in the server's <code>protected()</code> handler.
@@ -1324,7 +1324,7 @@ make simulate
 <p>The example system description specifies two protection domains which share two memory regions:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b4a1a3f9a45ba5475e1dc717f2429c8efa47cf28/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-xml">&lt;system&gt;
@@ -1367,7 +1367,7 @@ We direct the compiler to put this symbol in the <code>.data</code> section with
 <p>So far, the example protection domains just store pointers to the shared memory regions in their handler state:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b4a1a3f9a45ba5475e1dc717f2429c8efa47cf28/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
@@ -1390,7 +1390,7 @@ We direct the compiler to put this symbol in the <code>.data</code> section with
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b4a1a3f9a45ba5475e1dc717f2429c8efa47cf28/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
@@ -1426,12 +1426,12 @@ impl Handler for HandlerImpl {
 </code></pre>
 </div>
 </div>
-<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5e3db5a4dcd15f753d94c08b6900c2d1ab694a52')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5e3db5a4dcd15f753d94c08b6900c2d1ab694a52"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('a1a2a918d6ca50666e11689d51839fdc27d3c66a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/a1a2a918d6ca50666e11689d51839fdc27d3c66a"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Let's assign types to these shared memory regions.
 We can define our types in a crate that both the client and server can use:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5e3db5a4dcd15f753d94c08b6900c2d1ab694a52/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/a1a2a918d6ca50666e11689d51839fdc27d3c66a/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">use zerocopy::{FromBytes, IntoBytes};
@@ -1449,7 +1449,7 @@ pub struct RegionB {
 </div>
 <p>Suppose <code>region_a: [u8; REGION_A_SIZE]</code> and <code>region_b: RegionB</code>.
 You could just turn the virtual addresses we get in our <code>var!</code> symbols into pointers and start interacting with the shared memory regions with <code>unsafe</code> <code>ptr::*</code> operations, but we can leverage the Rust type system to come up with a solution that only requires <code>unsafe</code> at initialization time.</p>
-<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d5e2458ae4c2eab978c8d6e5113e8fc3d1c32cb2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d5e2458ae4c2eab978c8d6e5113e8fc3d1c32cb2"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d652bc7eae4ab8291256b3f8fba4503eb6c4bea5')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d652bc7eae4ab8291256b3f8fba4503eb6c4bea5"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
 crate provides a way for you to declare a memory region's type and bounds, along with the memory access operations that can safely be used on it, so that you can access it without <code>unsafe</code> code.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-11-26 03:35:02 +0000 -->
+<!-- Page last generated 2025-11-26 22:16:35 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Verified Configurations | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/verified-configurations.html">
-    <link href="/assets/css/sel4.css?v=1764128102" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1764195395" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -548,15 +548,21 @@ specific version and configuration of seL4.</p>
 <span class="nb">ls</span> <span class="k">*</span>_verified.cmake
 <span class="c"># AARCH64_bcm2711_verified.cmake    ARM_exynos5410_verified.cmake</span>
 <span class="c"># AARCH64_hikey_verified.cmake      ARM_exynos5422_verified.cmake</span>
-<span class="c"># AARCH64_odroidc2_verified.cmake   ARM_hikey_verified.cmake</span>
-<span class="c"># AARCH64_odroidc4_verified.cmake   ARM_imx8mm_verified.cmake</span>
-<span class="c"># AARCH64_verified.cmake            ARM_tk1_verified.cmake</span>
-<span class="c"># AARCH64_zynqmp_verified.cmake     ARM_verified.cmake</span>
-<span class="c"># ARM_HYP_exynos5410_verified.cmake ARM_zynq7000_verified.cmake</span>
-<span class="c"># ARM_HYP_exynos5_verified.cmake    ARM_zynqmp_verified.cmake</span>
-<span class="c"># ARM_HYP_verified.cmake            RISCV64_MCS_verified.cmake</span>
-<span class="c"># ARM_MCS_verified.cmake            RISCV64_verified.cmake</span>
-<span class="c"># ARM_exynos4_verified.cmake        X64_verified.cmake</span>
+<span class="c"># AARCH64_imx8mm_verified.cmake     ARM_hikey_verified.cmake</span>
+<span class="c"># AARCH64_imx8mq_verified.cmake     ARM_HYP_exynos5_verified.cmake</span>
+<span class="c"># AARCH64_imx93_verified.cmake      ARM_HYP_exynos5410_verified.cmake</span>
+<span class="c"># AARCH64_maaxboard_verified.cmake  ARM_HYP_verified.cmake</span>
+<span class="c"># AARCH64_odroidc2_verified.cmake   ARM_imx8mm_verified.cmake</span>
+<span class="c"># AARCH64_odroidc4_verified.cmake   ARM_MCS_verified.cmake</span>
+<span class="c"># AARCH64_rockpro64_verified.cmake  ARM_omap3_verified.cmake</span>
+<span class="c"># AARCH64_tqma_verified.cmake       ARM_tk1_verified.cmake</span>
+<span class="c"># AARCH64_tx1_verified.cmake        ARM_verified.cmake</span>
+<span class="c"># AARCH64_ultra96v2_verified.cmake  ARM_zynq7000_verified.cmake</span>
+<span class="c"># AARCH64_verified.cmake            ARM_zynqmp_verified.cmake</span>
+<span class="c"># AARCH64_zynqmp_verified.cmake     RISCV64_MCS_verified.cmake</span>
+<span class="c"># ARM_am335x_verified.cmake         RISCV64_verified.cmake</span>
+<span class="c"># ARM_bcm2837_verified.cmake        X64_verified.cmake</span>
+<span class="c"># ARM_exynos4_verified.cmake</span>
 </code></pre></div></div>
 
 <p>To obtain specific source code and build for a given configuration (e.g.
@@ -580,636 +586,177 @@ from an existing configuration.</p>
 <h3 id="unverified-features">Unverified Features</h3>
 
 <p>At present, none of our verified configurations take into account
-address translation for devices (System MMU or IOMMU), debug/profiling
+address translation for devices (System MMU or IOMMU), debug/profiling/printing
 interfaces, or the kernel startup at boot.</p>
 
 <p>The proofs for RISCV64_MCS/ARM_MCS (mixed-criticality extensions to real-time
-seL4 features), as well as security proofs for AARCH64 are in progress. Refer to
-the <a href="https://sel4.systems/roadmap.html">roadmap</a> for status and upcoming features.</p>
+seL4 features), as well as confidentiality proofs for AARCH64 are in progress.
+Refer to the <a href="https://sel4.systems/roadmap.html">roadmap</a> for status and
+upcoming features.</p>
 
-<h3 id="arm-sabre-lite">ARM Sabre Lite</h3>
+<h3 id="ARM">Arm Aarch32 (<code class="language-plaintext highlighter-rouge">ARM</code>)</h3>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>i.MX6 (Sabre Lite)</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<p>Configurations that start with <code class="language-plaintext highlighter-rouge">ARM</code> are verified configurations for the
+AArch23 architecture. Those with <code class="language-plaintext highlighter-rouge">MCS</code> in the name indicate configurations for
+the ongoing MCS verification. Proofs for all other <code class="language-plaintext highlighter-rouge">ARM_*</code> configurations are
+completed.</p>
 
-<h3 id="exynos4">ARM Exynos 4</h3>
+<p>The following features are supported by verification in AArch32 configurations:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_exynos4_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Exynos4412</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>Architecture: ARMv7-A 32-bit, kernel running in EL1</li>
+  <li>Floating point support: No</li>
+  <li>Hypervisor mode: No (<a href="#ARM_HYP">see separate AArch32/Hypervisor configurations</a>)</li>
+</ul>
 
-<h3 id="arm-exynos-5">ARM Exynos 5</h3>
+<p>The following properties are verified:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_exynos5410_verified.cmake</code> and <code class="language-plaintext highlighter-rouge">ARM_exynos5422_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Exynos5410 and Exynos5422</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>C-level functional correctness, including fast path</li>
+  <li>integrity and availability (access control)</li>
+  <li>confidentiality (information flow)</li>
+  <li>binary correctness, covering C functions that have C-level verification</li>
+  <li>model-level functional correctness of the capDL user-level system initialiser/root task</li>
+</ul>
 
-<h3 id="arm-hikey">ARM Hikey</h3>
+<p>The following seL4 AArch32 platforms are supported by verification:</p>
+<ul>
+  <li><a href="/Hardware/BeagleBoard.html">BeagleBoard</a></li>
+  <li><a href="/Hardware/Beaglebone.html">BeagleBone Black / Blue</a></li>
+  <li><a href="/Hardware/jetsontk1.html">Jetson TK1</a></li>
+  <li><a href="/Hardware/odroidx.html">OdroidX</a></li>
+  <li><a href="/Hardware/OdroidXU.html">OdroidXU</a></li>
+  <li><a href="/Hardware/OdroidXU4.html">OdroidXU4</a></li>
+  <li><a href="/Hardware/Rpi3.html">Raspberry Pi 3-b</a></li>
+  <li><a href="/Hardware/sabreLite.html">Sabre Lite</a></li>
+  <li><a href="/Hardware/ZCU106.html">Zynq  ZCU106 Evaluation Kit</a></li>
+  <li><a href="/Hardware/ZCU102.html">Zynq ZCU102 Evaluation Kit</a></li>
+  <li><a href="/Hardware/ZC706.html">Zynq-7000 ZC706 Evaluation Kit</a></li>
+  <li><a href="/Hardware/imx8mm.html">i.MX8M Mini</a></li>
+</ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_hikey_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>HiKey</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="ARM_HYP">Arm Aarch32 in Hypervisor mode (<code class="language-plaintext highlighter-rouge">ARM_HYP</code>)</h3>
 
-<h3 id="tk1">ARM TK1</h3>
+<p>Configurations that start with <code class="language-plaintext highlighter-rouge">ARM_HYP</code> are verified configurations for the
+AArch32 architecture with hypervisor mode enabled. The seL4 kernel runs as
+hypervisor in EL2.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_tk1_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Jetson TK1</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following features are supported by verification in ARM_HYP configurations:</p>
 
-<h3 id="zynq7000">ARM Zynq7000</h3>
+<ul>
+  <li>Architecture: ARMv7-A 32-bit, kernel running in EL2</li>
+  <li>Floating point support: No</li>
+  <li>Hypervisor mode: Yes</li>
+</ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_zynq7000_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Zynq7000</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following properties are verified:</p>
 
-<h3 id="arm-zynqmp">ARM ZynqMP</h3>
+<ul>
+  <li>C-level functional correctness, including fast path</li>
+</ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_zynqmp_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>ZCU102 and ZCU106 in 32 bit mode</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path, integrity (access control), confidentiality (information flow), binary correctness (covers all verified C code), user-level system initialisation</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following seL4 AArch32 platforms with hypervisor mode are supported by
+verification:</p>
+<ul>
+  <li><a href="/Hardware/jetsontk1.html">Jetson TK1</a></li>
+  <li><a href="/Hardware/OdroidXU.html">OdroidXU</a></li>
+  <li><a href="/Hardware/OdroidXU4.html">OdroidXU4</a></li>
+  <li><a href="/Hardware/CEI_TK1_SOM/">TK1-SOM</a></li>
+</ul>
 
-<h3 id="imx8mm">ARM IMX8MM-EVK</h3>
+<h3 id="AARCH64">Arm AArch64 (<code class="language-plaintext highlighter-rouge">AARCH64</code>)</h3>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_imx8mm_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>IMX8MM-EVK</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness incl fast path</td>
-    </tr>
-  </tbody>
-</table>
+<p>Configurations that start with <code class="language-plaintext highlighter-rouge">AARCH64</code> are verified configurations for the
+AArch64 architecture with hypervisor mode enabled. The seL4 kernel runs as
+hypervisor in EL2.</p>
 
-<h3 id="arm_hyp-tk1">ARM_HYP TK1</h3>
+<p>The following features are supported by verification in AARCH64 configurations:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_HYP_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Tegra TK1</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>Architecture: ARMv8-A 64-bit, kernel running in EL2</li>
+  <li>Floating point support: Yes</li>
+  <li>Hypervisor mode: Yes</li>
+</ul>
 
-<h3 id="arm_hyp-exynos5">ARM_HYP Exynos5</h3>
+<p>The following properties are verified:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_HYP_exynos5_verified.cmake</code> and <code class="language-plaintext highlighter-rouge">ARM_HYP_exynos5410_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Odroid XU and Odroid XU4</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>C-level functional correctness, including fast path</li>
+  <li>integrity and availability (access control)</li>
+</ul>
 
-<h3 id="arm_mcs">ARM_MCS</h3>
+<p>Further properties are under development. See also the
+<a href="https://sel4.systems/roadmap.html">roadmap</a> for status and schedule.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">ARM_MCS_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv7, 32 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>i.MX 6 (Sabre Lite)</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Mixed-Criticality-Systems API</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>in progress (design-level functional correctness completed)</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following seL4 AArch64 platforms are supported by verification:</p>
+<ul>
+  <li><a href="/Hardware/MaaXBoard.html">Avnet MaaXBoard</a></li>
+  <li><a href="/Hardware/OdroidC2.html">Odroid-C2</a></li>
+  <li><a href="/Hardware/OdroidC4.html">Odroid-C4</a></li>
+  <li><a href="/Hardware/rockpro64.html">ROCKPro64</a></li>
+  <li><a href="/Hardware/Rpi4.html">Raspberry Pi 4B</a></li>
+  <li><a href="/Hardware/tqma8xqp1gb.html">TQMa8XQP 1GB</a></li>
+  <li><a href="/Hardware/jetsontx1.html">TX1</a></li>
+  <li><a href="/Hardware/JetsonTX2.html">TX2</a></li>
+  <li><a href="/Hardware/ultra96v2.html">Ultra96v2 Evaluation Kit</a></li>
+  <li><a href="/Hardware/ZCU106.html">Zynq  ZCU106 Evaluation Kit</a></li>
+  <li><a href="/Hardware/ZCU102.html">Zynq ZCU102 Evaluation Kit</a></li>
+  <li><a href="/Hardware/imx8mm.html">i.MX8M Mini</a></li>
+  <li><a href="/Hardware/imx8mp.html">i.MX8M Plus</a></li>
+  <li><a href="/Hardware/imx8mq.html">i.MX8M Quad</a></li>
+  <li><a href="/Hardware/imx93.html">i.MX93 EVK</a></li>
+</ul>
 
-<h3 id="aarch64">AARCH64</h3>
+<h3 id="RISCV64">RISC-V 64-bit (<code class="language-plaintext highlighter-rouge">RISCV64</code>)</h3>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">AARCH64_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv8, 64 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>Tegra X2 (Jetson TX2)</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
-    </tr>
-  </tbody>
-</table>
+<p>Configurations that start with <code class="language-plaintext highlighter-rouge">RISCV64</code> are verified configurations for the
+RISC-V 64-bit architecture. Those with <code class="language-plaintext highlighter-rouge">MCS</code> in the name indicate configurations
+for the ongoing MCS verification.</p>
 
-<h3 id="bcm2711">AARCH64 RPI4</h3>
+<p>The following features are supported by verification in RISCV64 configurations:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">AARCH64_bcm2711_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv8, 64 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>BMC2711 (Raspberry Pi 4)</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>Architecture: RISC-V 64 bit</li>
+  <li>Floating point support: No</li>
+  <li>Hypervisor mode: No</li>
+</ul>
 
-<h3 id="hikey">AARCH64 Hikey</h3>
+<p>The following properties are verified:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">AARCH64_hikey_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv8, 64 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>HiKey</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>C-level functional correctness, no fast path</li>
+  <li>integrity and availability (access control)</li>
+  <li>confidentiality (information flow)</li>
+</ul>
 
-<h3 id="odroidc2">AARCH64 Odroid C2</h3>
+<p>The following seL4 RISCV64 platforms are supported by verification:</p>
+<ul>
+  <li><a href="/Hardware/hifive.html">HiFive Unleashed</a></li>
+</ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">AARCH64_odroidc2_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv8, 64 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>OdroidC2</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="X64">Intel x64 (<code class="language-plaintext highlighter-rouge">X64</code>)</h3>
 
-<h3 id="odroidc4">AARCH64 Odroid C4</h3>
+<p>Configurations that start with <code class="language-plaintext highlighter-rouge">X64</code> are verified configurations for the
+RISC-V 64-bit architecture.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">AARCH64_odroidc4_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv8, 64 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>OdroidC4</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following features are supported by verification in X64 configurations:</p>
 
-<h3 id="zynqmp">AARCH64 ZynqMP</h3>
+<ul>
+  <li>Architecture: Intel x64</li>
+  <li>Floating point support: Yes</li>
+  <li>Hypervisor/VT-x mode: No</li>
+</ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">AARCH64_zynqmp_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>ARMv8, 64 bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>ZynqMP (ZCU102 and ZCU106)</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, incl fast path completed; integrity proof in progress</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following properties are verified:</p>
 
-<h3 id="riscv64">RISCV64</h3>
+<ul>
+  <li>C-level functional correctness, no fast path</li>
+</ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">RISCV64_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>RISC-V 64-bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>HiFive</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, integrity (access control), confidentiality (information flow); verification of fast path in progress</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="riscv64_mcs">RISCV64_MCS</h3>
-
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">RISCV64_MCS_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture</td>
-      <td>RISC-V 64-bit</td>
-    </tr>
-    <tr>
-      <td>Platform</td>
-      <td>HiFive</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Mixed-Criticality-Systems API</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>C verification in progress (design-level functional correctness completed)</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="x64">X64</h3>
-
-<table>
-  <tbody>
-    <tr>
-      <td>File</td>
-      <td><code class="language-plaintext highlighter-rouge">X64_verified.cmake</code></td>
-    </tr>
-    <tr>
-      <td>Architecture/Platform</td>
-      <td>X86 64-bit</td>
-    </tr>
-    <tr>
-      <td>Floating-point support</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Hypervisor mode</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td><strong>Verified properties</strong></td>
-      <td>functional correctness, no fast path</td>
-    </tr>
-  </tbody>
-</table>
+<p>The following seL4 X64 platforms are supported by verification:</p>
+<ul>
+  <li><a href="/Hardware/X64.html">PC99</a></li>
+</ul>
 
 </div>
 

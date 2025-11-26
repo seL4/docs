@@ -184,7 +184,7 @@ make simulate
 <p>The example system description specifies two protection domains which share two memory regions:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b4a1a3f9a45ba5475e1dc717f2429c8efa47cf28/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-xml">&lt;system&gt;
@@ -227,7 +227,7 @@ We direct the compiler to put this symbol in the <code>.data</code> section with
 <p>So far, the example protection domains just store pointers to the shared memory regions in their handler state:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b4a1a3f9a45ba5475e1dc717f2429c8efa47cf28/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
@@ -250,7 +250,7 @@ We direct the compiler to put this symbol in the <code>.data</code> section with
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2064faa2051d897948c0fdc8517b7ff5595f7c90/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/b4a1a3f9a45ba5475e1dc717f2429c8efa47cf28/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
@@ -286,12 +286,12 @@ impl Handler for HandlerImpl {
 </code></pre>
 </div>
 </div>
-<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5e3db5a4dcd15f753d94c08b6900c2d1ab694a52')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5e3db5a4dcd15f753d94c08b6900c2d1ab694a52"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('a1a2a918d6ca50666e11689d51839fdc27d3c66a')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/a1a2a918d6ca50666e11689d51839fdc27d3c66a"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Let's assign types to these shared memory regions.
 We can define our types in a crate that both the client and server can use:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/5e3db5a4dcd15f753d94c08b6900c2d1ab694a52/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/a1a2a918d6ca50666e11689d51839fdc27d3c66a/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">use zerocopy::{FromBytes, IntoBytes};
@@ -309,7 +309,7 @@ pub struct RegionB {
 </div>
 <p>Suppose <code>region_a: [u8; REGION_A_SIZE]</code> and <code>region_b: RegionB</code>.
 You could just turn the virtual addresses we get in our <code>var!</code> symbols into pointers and start interacting with the shared memory regions with <code>unsafe</code> <code>ptr::*</code> operations, but we can leverage the Rust type system to come up with a solution that only requires <code>unsafe</code> at initialization time.</p>
-<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d5e2458ae4c2eab978c8d6e5113e8fc3d1c32cb2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d5e2458ae4c2eab978c8d6e5113e8fc3d1c32cb2"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d652bc7eae4ab8291256b3f8fba4503eb6c4bea5')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d652bc7eae4ab8291256b3f8fba4503eb6c4bea5"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
 crate provides a way for you to declare a memory region's type and bounds, along with the memory access operations that can safely be used on it, so that you can access it without <code>unsafe</code> code.

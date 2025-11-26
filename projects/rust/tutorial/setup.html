@@ -176,17 +176,17 @@
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
-<p>This tutorial is presented as a linear series of patches to <a href="https://github.com/seL4/seL4-rust-tutorial-code">https://github.com/seL4/seL4-rust-tutorial-code</a>, starting at commit <code>d27fd3f560e4</code>, and ending with commit <code>b886a72fdfec</code>.
+<p>This tutorial is presented as a linear series of patches to <a href="https://github.com/seL4/seL4-rust-tutorial-code">https://github.com/seL4/seL4-rust-tutorial-code</a>, starting at commit <code>8ca0e1939dc1</code>, and ending with commit <code>5253edc1ed12</code>.
 Each patch, or step, as we shall call them, is an instructive modification to a code example.
 You are encouraged (but by no means required) to attempt those marked as exercises in this text on your own.
 Note that while most step patches include tests, the reader is not expected to write tests for exercises themselves.</p>
 <p>Clone the repository and checkout the starting commit:</p>
 <pre><code>git clone https://github.com/seL4/seL4-rust-tutorial-code
 cd seL4-rust-tutorial-code
-git checkout d27fd3f560e4
+git checkout 8ca0e1939dc1
 </code></pre>
 <p>Observe the steps ahead:</p>
-<pre><code>git log d27fd3f560e4..b886a72fdfec
+<pre><code>git log 8ca0e1939dc1..5253edc1ed12
 </code></pre>
 <p>Each step header contains two icons.
 Clicking the clipboard copies the commit hash corresponding to the step to the clipboard.
@@ -194,7 +194,7 @@ The GitHub icon is a link to the commit on GitHub.</p>
 <p>Use any Git workflow that works for you.
 For example, you could cherry-pick the steps that are not marked as exercises after examining and understanding them, and then attempt the exercises on your own, using those step commits as hints when necessary.</p>
 <h3 id="docker"><a class="header" href="#docker">Docker</a></h3>
-<p>We will work inside of a Docker container built with <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/docker/Dockerfile">docker/Dockerfile</a>.
+<p>We will work inside of a Docker container built with <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/docker/Dockerfile">docker/Dockerfile</a>.
 This Dockerfile installs some build-time dependencies, and then builds seL4, <a href="https://github.com/seL4/microkit">seL4 Microkit</a>, and some additional programs and tools.</p>
 <p>Build the image:</p>
 <pre><code>make -C docker build
@@ -207,21 +207,21 @@ This Dockerfile installs some build-time dependencies, and then builds seL4, <a 
 </code></pre>
 <p>The rest of this text assumes that you are in a shell inside the container.</p>
 <h3 id="two-workspaces"><a class="header" href="#two-workspaces">Two Workspaces</a></h3>
-<p>To simplify our Cargo invocations, this repository's Rust code has been divided between two distinct workspaces: <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/root-task">workspaces/root-task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/microkit">workspaces/microkit</a>.
-Both are subject to the top-level <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.cargo/config.toml">.cargo/config.toml</a>, whereas <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/root-task/.cargo/config.toml">workspaces/root-task/.cargo/config.toml</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/workspaces/microkit/.cargo/config.toml">workspaces/microkit/.cargo/config.toml</a> each apply to only one.
+<p>To simplify our Cargo invocations, this repository's Rust code has been divided between two distinct workspaces: <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/root-task">workspaces/root-task</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/microkit">workspaces/microkit</a>.
+Both are subject to the top-level <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.cargo/config.toml">.cargo/config.toml</a>, whereas <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/root-task/.cargo/config.toml">workspaces/root-task/.cargo/config.toml</a> and <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/workspaces/microkit/.cargo/config.toml">workspaces/microkit/.cargo/config.toml</a> each apply to only one.
 These workspace-specific <code>config.toml</code> files demonstrate all that is required to configure the crates in the <a href="https://github.com/seL4/rust-sel4">rust-sel4</a> project:</p>
 <ul>
 <li>An environment variable pointing at <code>libsel4</code> (which includes the kernel configuration).
 See <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/index.html#building">the relevant crate docs</a> for information on this environment variable.</li>
-<li>A reference to a custom rustc <a href="https://docs.rust-embedded.org/embedonomicon/custom-target.html">target specification</a> (the location of the target specification is given at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.cargo/config.toml#L8">.cargo/config.toml:8</a>, which refers to <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/d27fd3f560e48920d004dd97900ef49449d89441/target-specs">target-specs</a>).</li>
+<li>A reference to a custom rustc <a href="https://docs.rust-embedded.org/embedonomicon/custom-target.html">target specification</a> (the location of the target specification is given at <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.cargo/config.toml#L8">.cargo/config.toml:8</a>, which refers to <a href="https://github.com/seL4/seL4-rust-tutorial-code/tree/8ca0e1939dc1d1a0d74197c703e48111960c8944/target-specs">target-specs</a>).</li>
 </ul>
 <h3 id="vscode--dev-containers"><a class="header" href="#vscode--dev-containers">VSCode + Dev Containers</a></h3>
 <p>If you want help from <a href="https://rust-analyzer.github.io/">rust-analyzer</a>, the Rust Language Server, you can use <a href="https://code.visualstudio.com/docs/devcontainers/tutorial">VSCode with the Dev Containers extension</a>.
 This will enable you to run VSCode inside of the container you just built, which contains the seL4 build artifacts that rust-analyzer will require to analyzer your code.</p>
 <p>This repository provides a separate Dev Container configuration for each workspace:</p>
 <ul>
-<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.devcontainer/root-task/devcontainer.json">.devcontainer/root-task/devcontainer.json</a></li>
-<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d27fd3f560e48920d004dd97900ef49449d89441/.devcontainer/microkit/devcontainer.json">.devcontainer/microkit/devcontainer.json</a></li>
+<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.devcontainer/root-task/devcontainer.json">.devcontainer/root-task/devcontainer.json</a></li>
+<li><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/8ca0e1939dc1d1a0d74197c703e48111960c8944/.devcontainer/microkit/devcontainer.json">.devcontainer/microkit/devcontainer.json</a></li>
 </ul>
 <p>To work in a particular workspace, open this repository in VSCode, run <code>&gt; Dev Containers: Reopen in Container</code>, and select the corresponding configuration.
 You should now be able to use the rust-analyzer VSCode extension normally for the code in the selected workspace.</p>
