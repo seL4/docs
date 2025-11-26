@@ -8,7 +8,7 @@ virtualization: true
 iommu: false
 soc: i.MX93
 cpu: Cortex-A55
-Status: Unverified
+verification: [AARCH64]
 Contrib: Indan Zupanc&#780;ic&#780;, Proofcraft
 Maintained: seL4 Foundation
 parent: /Hardware/

@@ -9,7 +9,7 @@ virtualization: true
 iommu: false
 soc: Exynos5
 cpu: Cortex-A15
-Status: Unverified
+verification: [ARM_HYP]
 Contrib: Data61
 Maintained: false
 SPDX-License-Identifier: CC-BY-SA-4.0

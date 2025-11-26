@@ -7,7 +7,7 @@ arch: RV64GBC, RV64IMAC, RV32IMAFBC
 virtualization: false
 iommu: false
 simulation_target: false
-Status: "Unverified"
+verification: []
 Contrib: "Community"
 Maintained: "seL4 Foundation"
 soc: StarFive JH7110

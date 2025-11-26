@@ -7,7 +7,7 @@ arch: RV64IMAFDC
 virtualization: false
 iommu: false
 simulation_target: false
-Status: Unverified
+verification: []
 Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
 Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 cpu: Rocket

@@ -8,7 +8,7 @@ virtualization: true
 iommu: false
 soc: i.MX8MQ
 cpu: Cortex-A53 Quad 1.5 GHz
-Status: Unverified
+verification: [AARCH64]
 Contrib: '<a href="https://capgemini-engineering.com">Capgemini Engineering</a>"'
 Maintained: '<a href="https://capgemini-engineering.com">Capgemini Engineering</a>"'
 parent: /Hardware/

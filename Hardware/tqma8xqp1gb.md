@@ -8,7 +8,7 @@ virtualization: false
 iommu: false
 soc: i.MX8X Quad Plus
 cpu: Cortex-A35
-Status: Unverified
+verification: [AARCH64]
 Contrib: Breakaway Consulting
 Maintained: seL4 Foundation
 parent: /Hardware/

@@ -8,7 +8,7 @@ virtualization: true
 iommu: true
 soc: NVIDIA Tegra X1
 cpu: Cortex-A57 Quad
-Status: Unverified
+verification: [AARCH64]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

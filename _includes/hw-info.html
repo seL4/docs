@@ -57,14 +57,30 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 {%- endif %}
 </td>
 </tr>
+{%- assign status = "" %}
+{%- for config in page.verification -%}
+{%-   assign link = "/projects/sel4/verified-configurations.html#" | append: config | relative_url -%}
+{%-   assign status = status | append: '<a href="' | append: link | append: '">' | append: config | append: '</a>' %}
+{%-   unless forloop.last %}
+{%-     assign status = status | append: ", " %}
+{%-   endunless %}
+{%- endfor %}
 <tr>
-<td>Verification status</td>
-{%- if page.verified -%}
-{%-  assign link = "/projects/sel4/verified-configurations.html#" | append: page.verified | relative_url -%}
-{%-  assign status = '<a href="' | append: link | append: '">' | append: page.Status | append: "</a>" %}
-{%- else -%}
-{%-  assign status = page.Status -%}
-{%- endif -%}
+<td>Proofs</td>
+<td>
+{%- if status != "" %}
+        {% svg _icons/check.svg class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen" %}
+{%- elsif page.simulation_only %}
+N/A
+{%-    assign status = "N/A" %}
+{%- else %}
+{%-    assign status = "&ndash;" %}
+        &ndash;
+{%- endif %}
+</td>
+</tr>
+<tr>
+<td>Proof configs</td>
 <td>{{status}}</td>
 </tr>
 {% if page.cmake_plat -%}

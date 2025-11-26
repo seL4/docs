@@ -7,7 +7,7 @@ arch: RV64IMAFDC
 virtualization: false
 iommu: false
 simulation_target: false
-Status: Unverified
+verification: []
 Contrib: Data61
 Maintained: seL4 Foundation
 cpu: Rocket

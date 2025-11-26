@@ -8,7 +8,7 @@ virtualization: true
 iommu: true
 soc: Zynq UltraScale+ MPSoC
 cpu: Cortex-A53
-Status: Unverified
+verification: [AARCH64]
 Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
 Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 parent: /Hardware/

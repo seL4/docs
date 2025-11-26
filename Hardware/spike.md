@@ -7,7 +7,7 @@ arch: RV32GC, RV64IMAFDC
 virtualization: false
 iommu: false
 simulation_target: true
-Status: "Unverified"
+verification: []
 Contrib: 'Data61, <a href="https://github.com/heshamelmatary">Hesham Almatary</a>'
 Maintained: "seL4 Foundation"
 redirect_from:

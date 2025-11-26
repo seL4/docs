@@ -8,7 +8,7 @@ virtualization: false
 iommu: false
 soc: AM335x
 cpu: Cortex-A8
-Status: Unverified
+verification: [ARM]
 Contrib: Community
 Maintained: seL4 Foundation
 parent: /Hardware/
