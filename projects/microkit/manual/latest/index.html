@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<!-- Page last generated 2025-11-25 03:35:17 +0000 -->
+<!-- Page last generated 2025-11-26 02:56:06 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Microkit User Manual (v2.0.1) | seL4 docs</title>
+    <title>Microkit User Manual (v2.1.0) | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/manual/latest/">
-    <link href="/assets/css/sel4.css?v=1764041717" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1764125766" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -534,7 +534,7 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="microkit-user-manual-v201">Microkit User Manual (v2.0.1)</h1>
+  <h1 id="microkit-user-manual-v210">Microkit User Manual (v2.1.0)</h1>
 
 <p>This is a web version of the manual, you can find a PDF <a href="/projects/microkit/manual/latest/microkit_user_manual.pdf">here</a> as well as in the
 SDK at <code class="language-plaintext highlighter-rouge">doc/microkit_user_manual.pdf</code>.</p>
@@ -571,9 +571,13 @@ The Microkit source is also available which allows you to customize or extend Mi
 Microkit programs are a little different to a typical process on a Linux-like operating system.
 Rather than a single <code class="language-plaintext highlighter-rouge">main</code> entry point, a program has four distinct entry points: <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">notified</code> and, potentially, <code class="language-plaintext highlighter-rouge">protected</code>, <code class="language-plaintext highlighter-rouge">fault</code>.</p>
 
-<p>The individual programs are combined to produce a single bootable <em>system image</em>.
-The format of the image is suitable for loading by the target board’s bootloader.
-The Microkit tool, which is provided as part of the SDK, is used to generate the system image.</p>
+<p>On ARM and RISC-V, the individual programs are combined to produce a single bootable <em>system image</em>.
+The format of the image is suitable for loading by the target board’s bootloader.</p>
+
+<p>On x86-64, there are two ELF images invovled. One for the seL4 kernel, and one for the initialiser that
+setups up the Microkit system. These are loaded by a Multiboot 2 compliant bootloader.</p>
+
+<p>The Microkit tool, which is provided as part of the SDK, is used to generate the system image(s).</p>
 
 <p>The Microkit tool takes a <em>system description</em> as input.
 The system description is an XML file that specifies all the objects that make up the system.</p>
@@ -595,7 +599,7 @@ It is recommended that you familiarise yourself with these concepts before tryin
 
 <p>The <a href="#bsps">Board Support Packages</a> chapter describes each of the board support packages included in the SDK.</p>
 
-<p>The <a href="#rationale">Rationale</a> chapter documents the rationale for some of the key design choices of in Microkit.</p>
+<p>The <a href="#rationale">Rationale</a> chapter documents the rationale for some of the key design choices of Microkit.</p>
 
 <p>The <a href="#internals">Internals</a> chapter documents some of the internal details for how Microkit works.</p>
 
@@ -616,6 +620,7 @@ This document attempts to clearly describe all of these terms, however as the co
   <li><a href="#notification">notification</a></li>
   <li><a href="#irq">interrupt</a></li>
   <li><a href="#fault">fault</a></li>
+  <li><a href="#ioport">ioport</a></li>
 </ul>
 
 <h3 id="system">System</h3>
@@ -733,7 +738,7 @@ Typically, memory regions with a fixed physical address represent memory-mapped 
 The supported page sizes are architecture dependent.
 For example, on AArch64 architectures, Microkit support 4KiB and 2MiB pages.
 The page size for a memory region may be specified explicitly in the system description.
-If page size is not specified, the smallest supported page size is used.</p>
+If page size is not specified, the largest supported page size is used.</p>
 
 <p><em>Note:</em> The page size also restricts the alignment of the memory region’s physical address.
 A fixed physical address must be a multiple of the specified page size.</p>
@@ -847,6 +852,10 @@ handler via the <code class="language-plaintext highlighter-rouge">fault</code> 
 execute and handle faults immediately after they occur. For child PDs that have their faults
 delivered to another PD, the fault being handled depends on when the parent PD is scheduled.</p>
 
+<h3 id="ioport">I/O Ports</h3>
+
+<p>I/O ports are x86 mechanisms to access certain physical devices (e.g. PC serial ports or PCI) using the <code class="language-plaintext highlighter-rouge">in</code> and <code class="language-plaintext highlighter-rouge">out</code> CPU instructions. The system description specifies if a protection domain have access to certain port address ranges. These accesses will be executed by seL4 and the result returned to protection domains.</p>
+
 <h2 id="sdk">SDK</h2>
 
 <p>Microkit is distributed as a software development kit (SDK).</p>
@@ -865,11 +874,21 @@ See <a href="#config">the Configurations section</a> for more details.</p>
 <p>Additionally, for each supported board configuration the following are provided:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">libmicrokit</code></li>
-  <li><code class="language-plaintext highlighter-rouge">loader.elf</code></li>
-  <li><code class="language-plaintext highlighter-rouge">kernel.elf</code></li>
+  <li><code class="language-plaintext highlighter-rouge">libmicrokit.a</code></li>
+  <li><code class="language-plaintext highlighter-rouge">initialiser.elf</code></li>
   <li><code class="language-plaintext highlighter-rouge">monitor.elf</code></li>
+  <li>seL4 kernel image
+    <ul>
+      <li>On ARM/RISC-V: <code class="language-plaintext highlighter-rouge">sel4.elf</code></li>
+      <li>On x86-64: <code class="language-plaintext highlighter-rouge">sel4_64.elf</code> (64-bit) and <code class="language-plaintext highlighter-rouge">sel4_32.elf</code> (32-bit)</li>
+    </ul>
+  </li>
 </ul>
+
+<p>On ARM and RISC-V, an additional <code class="language-plaintext highlighter-rouge">loader.elf</code> is provided, which acts as the system’s bootloader.</p>
+
+<p>On x86-64, 32-bit/64-bit variants of the kernel are provided as even on 64-bit platforms (e.g QEMU),
+a 32-bit kernel is required.</p>
 
 <p>There are also examples provided in the <code class="language-plaintext highlighter-rouge">example</code> directory.</p>
 
@@ -878,24 +897,52 @@ The user is free to build their system using whatever build system is deemed mos
 
 <p>The Microkit tool should be invoked by the system build process to transform a system description (and any referenced program images) into an image file which can be loaded by the target board’s bootloader.</p>
 
-<p>The ELF files provided as program images should be standard ELF files and have been linked against the provided libmicrokit.</p>
+<p>The ELF files provided as program images should be standard ELF files and have been linked against the provided <code class="language-plaintext highlighter-rouge">libmicrokit.a</code>.</p>
 
 <h3 id="config">Configurations</h3>
 
-<h3 id="debug">Debug</h3>
+<h4 id="debug">Debug</h4>
 
 <p>The <em>debug</em> configuration includes a debug build of the seL4 kernel to allow console debug output using the kernel’s UART driver.</p>
 
-<h3 id="release">Release</h3>
+<h4 id="release">Release</h4>
 
-<p>The <em>release</em> configuration is a release build of the seL4 kernel and is intended for production builds. The loader, monitor, and
+<p>The <em>release</em> configuration is a release build of the seL4 kernel and is intended for production builds. The loader, monitor, initialiser and
 kernel do <em>not</em> perform any serial output.</p>
 
-<h3 id="benchmark">Benchmark</h3>
+<h5 id="proofs">Proofs</h5>
+
+<p>The formal verification of seL4 applies to a specific set of seL4 configuration only. This means that making a <em>release</em> build
+of a Microkit system does not imply that the seL4 kernel being used is verified.</p>
+
+<p>Currently Microkit always uses the MCS configuration of seL4 which is still undergoing verification, scheduled to complete
+for RISC-V in 2026 and AArch64 in 2027. The design proofs for MCS are done but the work to show that the kernel code conforms
+to the design is still undergoing.</p>
+
+<p>You can find more information about what verified seL4 configurations do exist
+<a href="https://docs.sel4.systems/projects/sel4/verified-configurations.html">here</a></p>
+
+<p>A roadmap for upcoming verification is available <a href="https://sel4.systems/roadmap.html">here</a>.</p>
+
+<h4 id="benchmark">Benchmark</h4>
 
 <p>The <em>benchmark</em> configuration uses a build of the seL4 kernel that exports the hardware’s performance monitoring unit (PMU) to PDs.
 The kernel also tracks information about CPU utilisation. This benchmark configuration exists due a limitation of the seL4 kernel
 and is intended to be removed once <a href="https://github.com/seL4/rfcs/pull/22">RFC-16 is implemented</a>.</p>
+
+<h4 id="multicore_config">Multi-core (SMP) configurations</h4>
+
+<p>The configurations listed above default to using the uni-core configuration of seL4/Microkit.
+Currently we do not want to default to using the multi-core configuration of the kernel so
+separate configurations exist for users wanting to use multi-core.</p>
+
+<p>The multi-core configurations are the same as the configurations listed above, except with the
+<em>smp-</em> prefix. For example, <em>smp-debug</em> for the multi-core variant of <em>debug</em>.</p>
+
+<p>On ARM/RISC-V, the number of cores available defaults to the number of cores the target board has.</p>
+
+<p>On x86-64, the number of cores available depends on how many are detected at run-time. Right now
+there is a fixed upper limit, see the board-specific documentation for details.</p>
 
 <h3 id="system-requirements">System Requirements</h3>
 
@@ -916,8 +963,8 @@ The format of the system description is described in a subsequent chapter.</p>
 
 <p>Usage:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [-o OUTPUT] [-r REPORT] --board [BOARD] --config CONFIG
-         [--search-path [SEARCH_PATH ...]] system
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [-o OUTPUT] [-r REPORT] [--capdl-json CAPDL_SPEC] [--image-type {binary,elf,uimage}]
+          --board [BOARD] --config CONFIG [--search-path [SEARCH_PATH ...]] system
 </code></pre></div></div>
 
 <p>The path to the system description file, board to build the system for, and configuration to build for must be provided.</p>
@@ -926,16 +973,51 @@ The format of the system description is described in a subsequent chapter.</p>
 
 <p>In the case of errors, a diagnostic message shall be output to <code class="language-plaintext highlighter-rouge">stderr</code> and a non-zero code returned.</p>
 
-<p>In the case of success, a loadable image file and a report shall be produced.
+<p>In the case of success, a loadable image file and a report shall be produced. The
+type of image is specified by the <code class="language-plaintext highlighter-rouge">--image-type</code> argument.
 The output paths for these can be specified by <code class="language-plaintext highlighter-rouge">-o</code> and <code class="language-plaintext highlighter-rouge">-r</code> respectively.
 The default output paths are <code class="language-plaintext highlighter-rouge">loader.img</code> and <code class="language-plaintext highlighter-rouge">report.txt</code>.</p>
-
-<p>The loadable image will be a binary that can be loaded by the board’s bootloader.</p>
 
 <p>The report is a plain text file describing important information about the system.
 The report can be useful when debugging potential system problems.
 This report does not have a fixed format and may change between versions.
 It is not intended to be machine readable.</p>
+
+<h3 id="image-format">Image format</h3>
+
+<h4 id="arm">ARM</h4>
+
+<p>On ARM, the Microkit tool will produce either a raw binary that is intended to be loaded and jumped or
+an ELF. By default, the tool will produce a raw binary unless the format is specified using the <code class="language-plaintext highlighter-rouge">--image-type</code> argument.</p>
+
+<p>For the raw binary format, there is a specified entry point of the image that is documented in the board-specific
+instructions in this manual, under <a href="#bsps">Board Support Packages</a>. If the image is not loaded at this address
+it should still work by relocating itself upon boot.</p>
+
+<p>This image is expected to be loaded via a previous bootloader, typically U-Boot using the <code class="language-plaintext highlighter-rouge">go</code> command for
+the binary image format and the <code class="language-plaintext highlighter-rouge">bootelf</code> command for ELFs. Note when using <code class="language-plaintext highlighter-rouge">bootelf</code> you may need to set
+the <code class="language-plaintext highlighter-rouge">autostart</code> environment variable with <code class="language-plaintext highlighter-rouge">setenv autostart yes</code> to have the image executed after <code class="language-plaintext highlighter-rouge">bootelf</code>.</p>
+
+<p>See the board-specific instructions for more details.</p>
+
+<h4 id="risc-v">RISC-V</h4>
+
+<p>On RISC-V, the Microkit tool can produce either a raw binary that is intended to be loaded and jumped,
+a uImage with the Linux header or an ELF. Typically the tool will produce a uImage by default, for
+board-specific details see <a href="#bsps">Board Support Packages</a>.</p>
+
+<p>For the raw binary format, there is a specified entry point of the image that is documented in the board-specific
+instructions in this manual, under <a href="#bsps">Board Support Packages</a>. If the image is not loaded at this address
+it should still work by relocating itself upon boot.</p>
+
+<p>For the uImage format. You may load this image anywhere in memory along with your platform’s DTB, then use
+the <code class="language-plaintext highlighter-rouge">bootm</code> command in U-Boot. It will copy the loader to the correct location in memory and jump to it.</p>
+
+<h4 id="x86-64">x86-64</h4>
+
+<p>On x86-64, the image format is always ELF, it is expected to be loaded as a Multiboot boot module.</p>
+
+<p>See <a href="#x86_64_generic">x86-64 generic support</a> for more details.</p>
 
 <h2 id="language-support">Language Support</h2>
 
@@ -993,6 +1075,20 @@ void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq);
 seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg);
 void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value);
 void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response);
+void microkit_x86_ioport_write_8(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data);
+void microkit_x86_ioport_write_16(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data);
+void microkit_x86_ioport_write_32(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data);
+seL4_Uint8 microkit_x86_ioport_read_8(microkit_ioport ioport_id, seL4_Word port_addr);
+seL4_Uint16 microkit_x86_ioport_read_16(microkit_ioport ioport_id, seL4_Word port_addr);
+seL4_Uint32 microkit_x86_ioport_read_32(microkit_ioport ioport_id, seL4_Word port_addr);
+seL4_Word microkit_vcpu_x86_read_vmcs(microkit_child vcpu, seL4_Word field);
+void microkit_vcpu_x86_write_vmcs(microkit_child vcpu, seL4_Word field, seL4_Word value);
+seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field);
+void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value);
+void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id,
+                                     seL4_Word port_addr, seL4_Word length);
+void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length);
+void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs);
 </code></pre></div></div>
 
 <h3 id="void-initvoid"><code class="language-plaintext highlighter-rouge">void init(void)</code></h3>
@@ -1162,13 +1258,238 @@ The list of registers is defined by the enum <code class="language-plaintext hig
 
 <h3 id="void-microkit_arm_smc_callsel4_arm_smccontext-args-sel4_arm_smccontext-response"><code class="language-plaintext highlighter-rouge">void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response)</code></h3>
 
-<p>This API is available only on ARM and only when seL4 has been configured to enable the
-<code class="language-plaintext highlighter-rouge">KernelAllowSMCCalls</code> option.</p>
-
 <p>The API takes in arguments for a Secure Monitor Call which will be performed by seL4. Any
 response values will be placed into the <code class="language-plaintext highlighter-rouge">response</code> structure.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">seL4_ARM_SMCContext</code> structure contains fields for registers x0 to x7.</p>
+
+<p>Note that this API is only available when the PD making the call has been configured to
+have SMC enabled in the SDF. Note that when the kernel makes the actual SMC, it cannot
+pre-empt the Secure Monitor and therefore any kernel WCET properties are no longer guaranteed.</p>
+
+<h3 id="void-microkit_x86_ioport_write_81632microkit_ioport-ioport_id-sel4_word-port_addr-sel4_word-data"><code class="language-plaintext highlighter-rouge">void microkit_x86_ioport_write_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data)</code></h3>
+
+<p>Write an 8, 16, or 32 bits value at port address <code class="language-plaintext highlighter-rouge">port_addr</code> to I/O Port with ID <code class="language-plaintext highlighter-rouge">ioport_id</code>.</p>
+
+<h3 id="sel4_uint81632-microkit_x86_ioport_read_81632microkit_ioport-ioport_id-sel4_word-port_addr"><code class="language-plaintext highlighter-rouge">seL4_Uint(8|16|32) microkit_x86_ioport_read_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr)</code></h3>
+
+<p>Read an 8, 16, or 32 bits value at port address <code class="language-plaintext highlighter-rouge">port_addr</code> from I/O Port with ID <code class="language-plaintext highlighter-rouge">ioport_id</code>.</p>
+
+<h3 id="sel4_word-microkit_vcpu_x86_read_vmcsmicrokit_child-vcpu-sel4_word-field"><code class="language-plaintext highlighter-rouge">seL4_Word microkit_vcpu_x86_read_vmcs(microkit_child vcpu, seL4_Word field)</code></h3>
+
+<p>Read a Virtual Machine Control Structure field specified by <code class="language-plaintext highlighter-rouge">field</code> for a given virtual CPU
+with ID <code class="language-plaintext highlighter-rouge">vcpu</code> using the <code class="language-plaintext highlighter-rouge">vmread</code> instruction.</p>
+
+<p>All the VMCS fields are listed in the seL4 source at <code class="language-plaintext highlighter-rouge">include/arch/x86/arch/object/vcpu.h</code>.</p>
+
+<p>The following fields can be read from:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RIP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RSP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DEBUGCTRL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PAT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_EFER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PERF_GLOBAL_CTRL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE1</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE2</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_INTERRUPTABILITY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ACTIVITY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SMBASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_CS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PREEMPTION_TIMER_VALUE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DR7</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RFLAGS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PENDING_DEBUG_EXCEPTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_ESP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_EIP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_MASK</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_MASK</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_READ_SHADOW</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_READ_SHADOW</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_INSTRUCTION_ERROR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INTERRUPT_INFO</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INTERRUPT_ERROR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IDT_VECTOR_INFO</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IDT_VECTOR_ERROR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INSTRUCTION_LENGTH</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INSTRUCTION_INFO</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_GUEST_PHYSICAL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RCX</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RSI</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RDI</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RIP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_GUEST_LINEAR_ADDRESS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_INTERRUPTION_INFO</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PIN_EXECUTION_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PRIMARY_PROCESSOR_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXCEPTION_BITMAP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXIT_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR4</code></li>
+</ul>
+
+<h3 id="void-microkit_vcpu_x86_write_vmcsmicrokit_child-vcpu-sel4_word-field-sel4_word-value"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_write_vmcs(microkit_child vcpu, seL4_Word field, seL4_Word value)</code></h3>
+
+<p>Write a Virtual Machine Control Structure field specified by <code class="language-plaintext highlighter-rouge">field</code> for a given virtual CPU
+with ID <code class="language-plaintext highlighter-rouge">vcpu</code> using the <code class="language-plaintext highlighter-rouge">vmwrite</code> instruction. The value may be modified to ensure any bits
+that are fixed in the hardware are correct, and that any features required for kernel correctness
+are not disabled.</p>
+
+<p>All the VMCS fields are listed in the seL4 source at <code class="language-plaintext highlighter-rouge">include/arch/x86/arch/object/vcpu.h</code>.</p>
+
+<p>The following fields can be written to:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RIP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RSP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_SELECTOR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DEBUGCTRL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PAT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_EFER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PERF_GLOBAL_CTRL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE1</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE2</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_LIMIT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_ACCESS_RIGHTS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_INTERRUPTABILITY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ACTIVITY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SMBASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_CS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PREEMPTION_TIMER_VALUE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_BASE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DR7</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RFLAGS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PENDING_DEBUG_EXCEPTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_ESP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_EIP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_MASK</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_MASK</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_READ_SHADOW</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_READ_SHADOW</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXCEPTION_BITMAP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_INTERRUPTION_INFO</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_EXCEPTION_ERROR_CODE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PIN_EXECUTION_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PRIMARY_PROCESSOR_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_SECONDARY_PROCESSOR_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXIT_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR4</code></li>
+</ul>
+
+<h3 id="sel4_word-microkit_vcpu_x86_read_msrmicrokit_child-vcpu-sel4_word-field"><code class="language-plaintext highlighter-rouge">seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field)</code></h3>
+
+<p>Read a 64-bit Model Specific Register of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> specified by
+<code class="language-plaintext highlighter-rouge">field</code> from hardware using the <code class="language-plaintext highlighter-rouge">rdmsr</code> instruction. The following registers can be written to:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">IA32_LSTAR_MSR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IA32_STAR_MSR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IA32_CSTAR_MSR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IA32_FMASK_MSR</code></li>
+</ul>
+
+<h3 id="void-microkit_vcpu_x86_write_msrmicrokit_child-vcpu-sel4_word-field-sel4_word-value"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value)</code></h3>
+
+<p>Write a 64-bit Model Specific Register of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> specified by
+<code class="language-plaintext highlighter-rouge">field</code> to hardware using the <code class="language-plaintext highlighter-rouge">wrmsr</code> instruction. The following registers can be read from:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">IA32_LSTAR_MSR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IA32_STAR_MSR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IA32_CSTAR_MSR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IA32_FMASK_MSR</code></li>
+</ul>
+
+<h3 id="void-microkit_vcpu_x86_enable_ioportmicrokit_child-vcpu-microkit_ioport-ioport_id-sel4_word-port_addr-sel4_word-length"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word length)</code></h3>
+
+<p>Enable I/O port range <code class="language-plaintext highlighter-rouge">[port_addr..port_addr + length)</code> of I/O Port with ID <code class="language-plaintext highlighter-rouge">ioport_id</code>
+in the execution environment of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>.</p>
+
+<h3 id="void-microkit_vcpu_x86_disable_ioportmicrokit_child-vcpu-sel4_word-port_addr-sel4_word-length"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length)</code></h3>
+
+<p>Disable I/O port range <code class="language-plaintext highlighter-rouge">[port_addr..port_addr + length)</code> in the execution environment of a given
+virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>.</p>
+
+<h3 id="void-microkit_vcpu_x86_write_regsmicrokit_child-vcpu-sel4_vcpucontext-regs"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs)</code></h3>
+
+<p>Write the registers of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>. The <code class="language-plaintext highlighter-rouge">regs</code> argument is the pointer to
+the struct of registers <code class="language-plaintext highlighter-rouge">seL4_VCPUContext</code> that are written from.</p>
 
 <h2 id="sysdesc">System Description File</h2>
 
@@ -1200,8 +1521,9 @@ response values will be placed into the <code class="language-plaintext highligh
   <li><code class="language-plaintext highlighter-rouge">period</code>: (optional) The PD’s period in microseconds; must not be smaller than the budget; defaults to the budget.</li>
   <li><code class="language-plaintext highlighter-rouge">passive</code>: (optional) Indicates that the protection domain will be passive and thus have its scheduling context removed after initialisation; defaults to false.</li>
   <li><code class="language-plaintext highlighter-rouge">stack_size</code>: (optional) Number of bytes that will be used for the PD’s stack.
-Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 4KiB.</li>
-  <li><code class="language-plaintext highlighter-rouge">smc</code>: (optional, only on ARM) Allow the PD to give an SMC call for the kernel to perform. Only available when the kernel has been configured with <code class="language-plaintext highlighter-rouge">KernelAllowSMCCalls</code>. Defaults to false.</li>
+Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
+  <li><code class="language-plaintext highlighter-rouge">cpu</code>: (optional) set the physical CPU core this PD will run on. Defaults to zero.</li>
+  <li><code class="language-plaintext highlighter-rouge">smc</code>: (optional, only on ARM) Allow the PD to give an SMC call for the kernel to perform.. Defaults to false.</li>
 </ul>
 
 <p>Additionally, it supports the following child elements:</p>
@@ -1228,25 +1550,61 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 4KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_size</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the size of the memory region.</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes:</p>
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes on ARM and RISC-V:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">irq</code>: The hardware interrupt number.</li>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
   <li><code class="language-plaintext highlighter-rouge">trigger</code>: (optional) Whether the IRQ is edge triggered (“edge”) or level triggered (“level”). Defaults to “level”.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier of the IRQ.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes when registering X86_64 IOAPIC interrupts:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
+  <li><code class="language-plaintext highlighter-rouge">pin</code>: IOAPIC pin that generates the interrupt.</li>
+  <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to.</li>
+  <li><code class="language-plaintext highlighter-rouge">ioapic</code>: (optional) Zero based index of the IOAPIC to get the interrupt from. Defaults to 0.</li>
+  <li><code class="language-plaintext highlighter-rouge">level</code>: (optional) Whether the IRQ is level triggered (1) or edge triggered (0). Defaults to level (1).</li>
+  <li><code class="language-plaintext highlighter-rouge">polarity</code>: (optional) Whether the line polarity is high (1) or low (0). Defaults to high (1).</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier of the IRQ.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes when registering X86_64 MSI interrupts:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
+  <li><code class="language-plaintext highlighter-rouge">pcidev</code>: The PCI device address of the device that will generate the interrupt, in BUS:DEV:FUNC notation (e.g. 01:1f:2).</li>
+  <li><code class="language-plaintext highlighter-rouge">handle</code>: Value of the handle programmed into the data portion of the MSI.</li>
+  <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier of the IRQ.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">ioport</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The I/O port identifier. Must be at least 0 and less than 63.</li>
+  <li><code class="language-plaintext highlighter-rouge">addr</code>: The base address of the I/O port.</li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: The size in bytes of the I/O port region.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the I/O port identifier.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_addr</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the base address of the I/O port.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">setvar</code> element has the following attributes:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">symbol</code>: Name of a symbol in the ELF file.</li>
-  <li><code class="language-plaintext highlighter-rouge">region_paddr</code>: Name of an MR. The symbol’s value shall be updated to this MR’s physical address.</li>
+  <li><code class="language-plaintext highlighter-rouge">region_paddr</code>: Name of an MR. The symbol’s value shall be updated to this MR’s physical address.
+                Note that on x86-64 platforms this MR must have a specified physical address.
+                This restriction is due to x86-64 physical memory layout not being known at build-time.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">protection_domain</code> element has the same attributes as any other protection domain as well as:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The ID of the child for the parent to refer to.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the parent program image. This symbol will be rewritten with the ID of the child.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">virtual_machine</code> element has the following attributes:</p>
@@ -1265,7 +1623,12 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 4KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">map</code>: (zero or more) Describes mapping of memory regions into the virtual machine.</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">vcpu</code> element has a single <code class="language-plaintext highlighter-rouge">id</code> attribute defining the identifier used for the virutal machine’s vCPU.</p>
+<p>The <code class="language-plaintext highlighter-rouge">vcpu</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: The vCPU identifier. Must be at least 0 and less than 62.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the vCPU identifier.</li>
+</ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">map</code> element has the same attributes as the protection domain with the exception of <code class="language-plaintext highlighter-rouge">setvar_vaddr</code>.</p>
 
@@ -1302,6 +1665,13 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 4KiB.</li>
   <li>0x200000 (2MiB)</li>
 </ul>
 
+<h5 id="x86-64-1">x86-64</h5>
+
+<ul>
+  <li>0x1000 (4KiB)</li>
+  <li>0x200000 (2MiB)</li>
+</ul>
+
 <h3 id="channel"><code class="language-plaintext highlighter-rouge">channel</code></h3>
 
 <p>The <code class="language-plaintext highlighter-rouge">channel</code> element has exactly two <code class="language-plaintext highlighter-rouge">end</code> children elements for specifying the two PDs associated with the channel.</p>
@@ -1314,6 +1684,7 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 4KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">pp</code>: (optional) Indicates that the protection domain for this end can perform a protected procedure call to the other end; defaults to false.
       Protected procedure calls can only be to PDs of strictly higher priority.</li>
   <li><code class="language-plaintext highlighter-rouge">notify</code>: (optional) Indicates that the protection domain for this end can send a notification to the other end; defaults to true.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">id</code> is passed to the PD in the <code class="language-plaintext highlighter-rouge">notified</code> and <code class="language-plaintext highlighter-rouge">protected</code> entry points.
@@ -1323,6 +1694,34 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
 
 <p>This chapter describes the board support packages that are available in the SDK.</p>
 
+<p>The currently supported platforms are:</p>
+<ul>
+  <li>ariane</li>
+  <li>cheshire</li>
+  <li>hifive_p550</li>
+  <li>imx8mm_evk</li>
+  <li>imx8mp_evk</li>
+  <li>imx8mp_iotgate</li>
+  <li>imx8mq_evk</li>
+  <li>maaxboard</li>
+  <li>odroidc2</li>
+  <li>odroidc4</li>
+  <li>qemu_virt_aarch64</li>
+  <li>qemu_virt_riscv64</li>
+  <li>rockpro64</li>
+  <li>rpi4b_1gb</li>
+  <li>rpi4b_2gb</li>
+  <li>rpi4b_4gb</li>
+  <li>rpi4b_8gb</li>
+  <li>serengeti</li>
+  <li>star64</li>
+  <li>tqma8xqp1gb</li>
+  <li>ultra96v2</li>
+  <li>x86_64_generic</li>
+  <li>x86_64_generic_vtx</li>
+  <li>zcu102</li>
+</ul>
+
 <h3 id="ariane">Ariane (CVA6)</h3>
 
 <p>Initial support is available for the CVA6 (formerly Ariane) core design
@@ -1331,121 +1730,96 @@ on the Digilent Genesys2 board. CVA6 is an open-source RISC-V (rv64i) processor.
 <p>Microkit support expects that a compatible RISC-V SBI (e.g OpenSBI) has executed before
 jumping to the beginning of the loader image.</p>
 
-<p>Note that the loader link address is 0x90000000 and this is where the binary must
-be located and where OpenSBI (or U-Boot) should begin execution.</p>
+<p>Microkit outputs an ELF for this platform.</p>
 
 <p>You may compile OpenSBI with the Microkit image as a payload, or alternately install
 OpenSBI (with U-Boot optionally) to the SD card.</p>
 
-<p>If you are booting from U-Boot, use the following command to start the system image:
-    =&gt; go 0x90000000</p>
+<p>If you are booting from U-Boot, use the following command to start the system image:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; bootelf ${image_addr}
+</code></pre></div></div>
+
+<p>Where <code class="language-plaintext highlighter-rouge">image_addr</code> is the load address of the ELF image.</p>
 
 <p>Note that the OpenSBI version from the CVA6 SDK at the time of writing has issues when
 booting. It is recommended to use the mainline OpenSBI.</p>
+
+<h3 id="imx8mp_iotgate">Compulab IOT-GATE-IMX8MPLUS</h3>
+
+<p>The IOT-GATE-IMX8PLUS is based on the NXP i.MX8MP SoC.</p>
+
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x50000000
+</code></pre></div></div>
 
 <h3 id="cheshire">Cheshire</h3>
 
 <p>Support is available for <a href="https://github.com/pulp-platform/cheshire">Cheshire</a>.
 It is an SoC design based on the CVA6 core, implementing a 64-bit RISC-V CPU.</p>
 
-<p>Microkit outputs a raw binary for this device. Several steps are required in order to boot.</p>
+<p>Microkit outputs an ELF for this platform. Several steps are required in order to boot.</p>
 
 <p>A custom version of OpenSBI is required. It can be found
 <a href="https://github.com/pulp-platform/opensbi/tree/cheshire">here</a>.
 Build the firmware payload using platform <code class="language-plaintext highlighter-rouge">fpga/cheshire</code>.</p>
 
-<h4 id="using-u-boot">Using U-Boot</h4>
-
-<p>With a system pre-configured with the Cheshire ZSBL, OpenSBI and U-boot:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x90000000
-</code></pre></div></div>
-
-<h4 id="raw-systerm-with-no-bootloader">Raw systerm with no bootloader</h4>
-
-<p>Without any firmware present on the SD card, it is still possible to boot Cheshire with a Microkit system.</p>
-
-<p>Using a GDB prompt via openOCD:</p>
+<p>To boot a Microkit image, use a GDB prompt via openOCD per <a href="https://docs.sel4.systems/Hardware/cheshire.html">seL4 Docs</a>:</p>
 
 <ol>
   <li>
     <p>Reset board</p>
 
-    <p>=&gt; monitor reset halt</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (gdb) monitor reset halt
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>Load a device tree blob (DTS available in Cheshire repo or seL4) to memory and set the a0 and a1 registers to point at it:</p>
+    <p>Set the <code class="language-plaintext highlighter-rouge">a0</code> and <code class="language-plaintext highlighter-rouge">a1</code> registers for OpenSBI</p>
 
-    <blockquote>
-      <p>restore /path/to/cheshire.dtb binary 0xa0000000</p>
-    </blockquote>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # tell OpenSBI where DTB is (there is none)
+ (gdb) set $a0=0
+ # tell OpenSBI that the default hart is #0
+ (gdb) set $a1=0
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Load OpenSBI’s FW_JUMP payload targeted at <code class="language-plaintext highlighter-rouge">0x90000000</code>, implicitly setting the program counter.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (gdb) load /path/to/opensbi/fw_jump.elf
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Load the Microkit image:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) restore /path/to/loader.img
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Allow OpenSBI and Microkit to boot:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (gdb) continue
+</code></pre></div>    </div>
   </li>
 </ol>
-
-<p>(tell OpenSBI where DTB is)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; set $a0=0xa0000000
-</code></pre></div></div>
-
-<p>(tell OpenSBI that the default hart is #0)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; set $a1=0
-</code></pre></div></div>
-
-<ol>
-  <li>
-    <p>Load OpenSBI</p>
-
-    <blockquote>
-      <p>load /path/to/opensbi/fw_payload.elf</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>Allow OpenSBI to boot, and interrupt it once the line <code class="language-plaintext highlighter-rouge">Test payload running</code> is emitted on serial.</p>
-
-    <blockquote>
-      <p>continue</p>
-    </blockquote>
-  </li>
-</ol>
-
-<p>(wait for output)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; (Ctrl+C)
-</code></pre></div></div>
-
-<ol>
-  <li>
-    <p>Load Microkit image and execute</p>
-
-    <blockquote>
-      <p>restore /path/to/loader.img binary 0x90000000</p>
-    </blockquote>
-  </li>
-</ol>
-
-<p>(execute)</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; continue
-</code></pre></div></div>
 
 <h3 id="imx8mm_evk">i.MX8MM-EVK</h3>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
 </code></pre></div></div>
 
 <h3 id="imx8mp_evk">i.MX8MP-EVK</h3>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
 </code></pre></div></div>
 
 <h3 id="imx8mq_evk">i.MX8MQ-EVK</h3>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
 </code></pre></div></div>
@@ -1454,7 +1828,7 @@ Build the firmware payload using platform <code class="language-plaintext highli
 
 <p>The MaaXBoard is a low-cost ARM SBC based on the NXP i.MX8MQ system-on-chip.</p>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x50000000
 </code></pre></div></div>
@@ -1465,7 +1839,7 @@ Build the firmware payload using platform <code class="language-plaintext highli
 should be noted that the Odroid-C2 is no longer available for purchase but its successor,
 the Odroid-C4, is readily available at the time of writing.</p>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x20000000
 </code></pre></div></div>
@@ -1474,10 +1848,44 @@ the Odroid-C4, is readily available at the time of writing.</p>
 
 <p>The HardKernel Odroid-C4 is an ARM SBC based on the Amlogic Meson S905X3 system-on-chip.</p>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x20000000
 </code></pre></div></div>
+
+<h3 id="serengeti">Serengeti</h3>
+
+<p>Serengeti is a fork of the <a href="#cheshire">Cheshire</a> platform by Trustworthy Systems. More
+information on the hardware platform can be found <a href="https://github.com/au-ts/serengeti">here</a>.</p>
+
+<p>Right now Serengeti is a superset of Cheshire by offering more peripherals than Cheshire
+has.</p>
+
+<p>For running on Serengeti, please see <a href="#cheshire">Cheshire</a> for instructions.</p>
+
+<h3 id="hifive_p550">SiFive Premier P550</h3>
+
+<p>The SiFive Premier P550 is a development board based on the ESWIN EIC7700X system-on-chip.</p>
+
+<p>Microkit will produce a uImage. To load the image you will need to use
+the <code class="language-plaintext highlighter-rouge">bootm</code> command. <code class="language-plaintext highlighter-rouge">bootm</code> expects an address of where
+the Device Tree Blob (DTB) will be as well as the image.</p>
+
+<p>If you do not have a DTB for this platform you can obtain it from the seL4 source code with:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtc <span class="nt">-I</span> dts <span class="nt">-O</span> dtb seL4/tools/dts/hifive-p550.dts <span class="o">&gt;</span> hifive-p550.dtb
+</code></pre></div></div>
+
+<p>Now you can load the images into U-Boot at the appropriate addresses, for example via TFTP:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; setenv imgaddr "0xB0000000"
+=&gt; setenv dtbaddr "0xA0000000"
+=&gt; tftpboot ${imgaddr} /path/to/loader.img
+=&gt; tftpboot ${dtbaddr} /path/to/hifive-p550.dtb
+=&gt; bootm ${imgaddr} - ${dtbaddr}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">imgaddr</code> and <code class="language-plaintext highlighter-rouge">dtbaddr</code> are arbitrarily chosen addresses in main memory for this platform,
+you can load the image and DTB at another address.</p>
 
 <h3 id="qemu_virt_aarch64">QEMU virt (AArch64)</h3>
 
@@ -1485,8 +1893,10 @@ the Odroid-C4, is readily available at the time of writing.</p>
 on any specific SoC or hardware platform and is intended for simulating systems for
 development or testing.</p>
 
-<p>It should be noted that the platform support is configured with 2GB of main memory and a single
-Cortex-A53 CPU.</p>
+<p>It should be noted that the platform support is configured with 2GB of main memory and the
+Cortex-A53 CPU. seL4 needs to know the memory layout and CPU at build-time so if
+you want to change these parameters (e.g to allow more memory), you will have to change the kernel
+options for <code class="language-plaintext highlighter-rouge">qemu_virt_aarch64</code> in <code class="language-plaintext highlighter-rouge">build_sdk.py</code>.</p>
 
 <p>You can use the following command to simulate a Microkit system:</p>
 
@@ -1499,6 +1909,8 @@ Cortex-A53 CPU.</p>
     -m size=2G
 </code></pre></div></div>
 
+<p>When using the <a href="#multicore_config">SMP configurations</a> add the <code class="language-plaintext highlighter-rouge">-smp 4</code> argument to the QEMU command.</p>
+
 <p>You can find more about the QEMU virt platform in the
 <a href="https://www.qemu.org/docs/master/system/target-arm.html">QEMU documentation</a>.</p>
 
@@ -1508,7 +1920,9 @@ Cortex-A53 CPU.</p>
 This is a platform that is not based on any specific SoC or hardware platform
 and is intended for simulating systems for development or testing.</p>
 
-<p>It should be noted that the platform support is configured with 2GB of main memory.</p>
+<p>It should be noted that the platform support is configured with 2GB of main memory.
+seL4 has a static amount of memory at build-time, if you want allow for more memory,
+you will have to change the kernel options for <code class="language-plaintext highlighter-rouge">qemu_virt_riscv64</code> in <code class="language-plaintext highlighter-rouge">build_sdk.py</code>.</p>
 
 <p>You can use the following command to simulate a Microkit system:</p>
 
@@ -1520,6 +1934,8 @@ and is intended for simulating systems for development or testing.</p>
     -m size=2G
 </code></pre></div></div>
 
+<p>When using the <a href="#multicore_config">SMP configurations</a> add the <code class="language-plaintext highlighter-rouge">-smp 4</code> argument to the QEMU command.</p>
+
 <p>QEMU will start the system image using its packaged version of OpenSBI.</p>
 
 <p>You can find more about the QEMU virt platform in the
@@ -1528,9 +1944,16 @@ and is intended for simulating systems for development or testing.</p>
 <h3 id="rpi4b_1gb">Raspberry Pi 4B</h3>
 
 <p>Support is available for the Raspberry Pi 4 Model B. There are multiple models of the
-Rasberry Pi 4B that have different amounts of RAM, we target the 1GB model in Microkit.
-If you require more than 1GB, please file an issue or pull request to add support for
-models with larger amounts of memory.</p>
+Raspberry Pi 4B that have different amounts of RAM, we have support for the 1GB,
+2GB, 4GB and 8GB models. Because the amount of RAM must be known statically by
+seL4, the Microkit board names differ for each model:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rpi4b_1gb</code> for 1GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi4b_2gb</code> for 2GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi4b_4gb</code> for 4GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi4b_8gb</code> for 8GB of RAM.</li>
+</ul>
 
 <p>For initial board setup, please see the instructions on the
 <a href="https://docs.sel4.systems/Hardware/Rpi4.html">seL4 website</a>.</p>
@@ -1547,7 +1970,7 @@ U-Boot commands:</p>
 
 <h3 id="rockpro64">Pine64 ROCKPro64</h3>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x30000000
 </code></pre></div></div>
@@ -1569,10 +1992,25 @@ StarFive JH7110 SoC.</p>
 <p>This means that the system image that Microkit produces does not need to be explicitly
 packaged with an SBI implementation such as OpenSBI.</p>
 
-<p>To execute the system image produced by Microkit, execute the following command in U-Boot:</p>
+<p>Microkit will produce a uImage. To load the image you will need to use
+the <code class="language-plaintext highlighter-rouge">bootm</code> command. <code class="language-plaintext highlighter-rouge">bootm</code> expects an address of where
+the Device Tree Blob (DTB) will be as well as the image.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x60000000
+<p>If you do not have a DTB for this platform you can obtain it from the seL4 source code with:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtc <span class="nt">-I</span> dts <span class="nt">-O</span> dtb seL4/tools/dts/star64.dts <span class="o">&gt;</span> star64.dtb
 </code></pre></div></div>
+
+<p>Now you can load the images into U-Boot at the appropriate addresses, for example via TFTP:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; setenv imgaddr "0xE0000000"
+=&gt; setenv dtbaddr "0xD0000000"
+=&gt; tftpboot ${imgaddr} /path/to/loader.img
+=&gt; tftpboot ${dtbaddr} /path/to/star64.dtb
+=&gt; bootm ${imgaddr} - ${dtbaddr}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">imgaddr</code> and <code class="language-plaintext highlighter-rouge">dtbaddr</code> are arbitrarily chosen addresses in main memory for this platform,
+you can load the image and DTB at another address.</p>
 
 <h3 id="tqma8xqp1gb">TQMa8XQP 1GB</h3>
 
@@ -1622,7 +2060,7 @@ For example:</p>
 =&gt; env save
 </code></pre></div></div>
 
-<p>The system image generated by the Microkit tool is a raw binary file.</p>
+<p>The system image generated by the Microkit tool by default is a raw binary file.</p>
 
 <p>An example sequence of commands for booting is:</p>
 
@@ -1641,11 +2079,81 @@ For example:</p>
 
 <p>When debugging is enabled the kernel will use the same UART as U-Boot.</p>
 
+<h3 id="ultra96v2">Ultra96V2</h3>
+
+<p>To run the built image on the board, you have to use properly patched U-Boot - please see the section for ZCU102, for the details.</p>
+
+<p>You have to load the binary file into memory and run it:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ZynqMP&gt; tftpboot 0x40000000 loader.img
+...
+ZynqMP&gt; go 0x40000000
+</code></pre></div></div>
+
+<h3 id="x86_64_generic">x86-64 generic</h3>
+
+<p>This board supports x86-64 platforms with generic microarchitecture and no virtualisation.</p>
+
+<p>Up to 16 CPU cores are supported. If your platform’s CPU count exceeds the maximum, the excess CPUs
+are ignored by seL4. This limitation is due to a build-time config option of seL4, to increase the
+limit, see the board configuration in <code class="language-plaintext highlighter-rouge">build_sdk.py</code>.</p>
+
+<p>On x86-64, Microkit produces 3 ELF images in the output directory:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sel4.elf</code>, seL4 kernel (64-bit ELF)</li>
+  <li><code class="language-plaintext highlighter-rouge">sel4_32.elf</code>, seL4 kernel (32-bit ELF)</li>
+  <li>Initial Task image (Multiboot Boot Module ELF)</li>
+</ul>
+
+<p>The filename of the initial task image is specified with the <code class="language-plaintext highlighter-rouge">-o</code> option, and defaults to loader.img.
+Both kernel ELF files are written to the same directory as the initial task image.</p>
+
+<p>Although this target is for x86-64, your bootloader may require a 32-bit kernel ELF.</p>
+
+<p>When using QEMU, you must use the 32-bit kernel ELF, for example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-system-x86_64 \
+	-cpu qemu64,+fsgsbase,+pdpe1gb,+xsaveopt,+xsave \
+	-m "1G" \
+	-display none \
+	-serial mon:stdio \
+	-kernel sel4_32.elf \
+	-initrd loader.img
+</code></pre></div></div>
+
+<p>Unlike Microkit’s <code class="language-plaintext highlighter-rouge">qemu_virt_aarch64</code> and <code class="language-plaintext highlighter-rouge">qemu_virt_riscv64</code>, the amount of memory provided to QEMU
+is configurable at run time with the <code class="language-plaintext highlighter-rouge">-m</code> option, rather than at build time.</p>
+
+<p>QEMU currently does not support 64-bit kernel ELFs and gives the following error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-x86_64: Cannot load x86-64 image, give a 32bit one.
+</code></pre></div></div>
+
+<p>To obtain a bootable ISO image, a Multiboot 2-compliant bootloader must be used. Please refer to your
+bootloader’s documentations.</p>
+
+<h3 id="x86_64_generic_vtx">x86_64 generic</h3>
+
+<p>This board supports x86-64 platforms with generic microarchitecture and virtualisation.</p>
+
+<p>This configuration assumes Intel VT-x support. Currently, only 1 vCPU is supported per virtual machine
+on x86-64.</p>
+
+<p>The boot process is identical to <a href="#x86_64_generic">x86-64 generic</a>.</p>
+
+<p>This configuration exists because some x86 emulators (for example, QEMU on macOS on Apple Silicon) do
+not emulate Intel VT-x.</p>
+
+<p>If you see the following message at boot:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vt-x: not supported
+</code></pre></div></div>
+<p>Consider using the non VT-x configuration: <a href="#x86_64_generic">x86-64 generic</a>, or switch to a x86 emulator that
+emulates Intel VT-x, such as <a href="https://bochs.sourceforge.io/">Bochs</a>.</p>
+
 <h3 id="zcu102">ZCU102</h3>
 
 <p>The ZCU102 can run on a physical board or on an appropriate QEMU based emulator.</p>
 
-<p>Microkit produces a raw binary file, so when using U-Boot you must execute the image using:</p>
+<p>Microkit will produce a raw binary file by default, so when using U-Boot run the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x40000000
 </code></pre></div></div>
@@ -1659,6 +2167,8 @@ For example:</p>
    -device loader,file=[SYSTEM IMAGE],addr=0x40000000,cpu-num=0 \
    -serial mon:stdio
 </code></pre></div></div>
+
+<p>When using the <a href="#multicore_config">SMP configurations</a> add the <code class="language-plaintext highlighter-rouge">-smp 4</code> argument to the QEMU command.</p>
 
 <p>It should be noted that when using U-Boot to load and run a Microkit system image,
 that there may be additional setup needed.</p>
@@ -1675,7 +2185,7 @@ the Microkit system Exception Level 2 (EL2) which is necessary for Microkit to s
 
 <h3 id="adding-platform-support">Adding Platform Support</h3>
 
-<p>The following section is a guide for adding support for a new platform to Microkit.</p>
+<p>The following section is a guide for adding support for a new ARM or RISC-V platform to Microkit.</p>
 
 <h4 id="prerequisites">Prerequisites</h4>
 
@@ -1683,6 +2193,8 @@ the Microkit system Exception Level 2 (EL2) which is necessary for Microkit to s
 You can find information on how to do so <a href="https://docs.sel4.systems/projects/sel4/porting.html">here</a>.</p>
 
 <h4 id="getting-microkit-components-working">Getting Microkit Components Working</h4>
+
+<h5 id="build_sdkpy">build_sdk.py</h5>
 
 <p>The first step to adding Microkit support is to modify the <code class="language-plaintext highlighter-rouge">build_sdk.py</code> script in order to build the required
 artefacts for the new platform. This involves adding to the <code class="language-plaintext highlighter-rouge">SUPPORTED_BOARDS</code> list with the <code class="language-plaintext highlighter-rouge">BoardInfo</code> options
@@ -1694,11 +2206,29 @@ is responsible for setting up the system before seL4 starts) is going to be load
 match where in main memory the final system image is actually loaded (e.g where a previous bootloader such as U-Boot
 loads the image to). This means that the address is restricted to the platform’s main memory region.</p>
 
+<h5 id="loader">Loader</h5>
+
+<h6 id="uart">UART</h6>
+
 <p>The other component of Microkit that is platform dependent is the loader itself. The loader will attempt to access
 the UART for debug output which requires a basic <code class="language-plaintext highlighter-rouge">putc</code> implementation. The UART device used in the loader should be
 the same as what is used for the seL4 kernel debug output.</p>
 
 <p>It should be noted that on RISC-V platforms, the SBI will be used for <code class="language-plaintext highlighter-rouge">putc</code> so no porting is necessary.</p>
+
+<h6 id="cpu-configuration">CPU configuration</h6>
+
+<p>For supporting multi-core systems on Microkit, the loader needs to know the platform-specific CPU identifiers
+that we want to make use of.</p>
+
+<p>For ARM platforms, a <code class="language-plaintext highlighter-rouge">psci_target_cpus</code> array needs to be defined which contains the PSCI <code class="language-plaintext highlighter-rouge">target_cpu</code> value for
+each CPU. This value can be found by looking at the <code class="language-plaintext highlighter-rouge">reg</code> field for each CPU in the Device Tree.</p>
+
+<p>For RISC-V platforms, a <code class="language-plaintext highlighter-rouge">hart_ids</code> array needs to be defined which contains the Hart ID for
+each CPU. This value can be found by looking at the <code class="language-plaintext highlighter-rouge">reg</code> field for each CPU in the Device Tree. The first value
+must be the same as <code class="language-plaintext highlighter-rouge">FIRST_HART_ID</code> defined in seL4.</p>
+
+<h5 id="next-steps">Next steps</h5>
 
 <p>Once you have patched the loader and the SDK build script, there should be no other changes required to have a working
 platform port. It is a good idea at this point to boot a hello world system to confirm the port is working.</p>
@@ -1709,6 +2239,8 @@ platform port. It is a good idea at this point to boot a hello world system to c
 
 <p>Once you believe that the port works, you can <a href="https://github.com/seL4/microkit/pulls">open a pull request</a> with required
 changes as well as documentation in the manual about the platform and how to run Microkit images on it.</p>
+
+<p>Please also update the <code class="language-plaintext highlighter-rouge">platforms.yml</code> file, you can find more information at the top of the file.</p>
 
 <h2 id="rationale">Rationale</h2>
 
@@ -1761,45 +2293,47 @@ and all the components of Microkit. As a user of Microkit, it is not necessary
 know this information, however, there is no harm in having a greater
 understanding of the tools that you are using.</p>
 
-<p><img src="/projects/microkit/manual/latest/assets/microkit_flow.svg" alt="Microkit flow" /></p>
+<p><img src="/projects/microkit/manual/latest/assets/microkit_flow.pdf" alt="Microkit flow" /></p>
 
 <p>The diagram above aims to show the general flow of a Microkit system from
 build-time to run-time.</p>
 
 <p>The user provides the SDF (System Description File) and the ELFs that
-correspond to PD program images to the Microkit tool which is responsible to
-for packaging everything together into a single bootable image for the target
+correspond to PD program images to the Microkit tool which is responsible
+for packaging everything together into a single image for the target
 platform.</p>
 
-<p>This final image contains a couple different things:</p>
+<h4 id="arm-and-risc-v">ARM and RISC-V</h4>
+
+<p>The final image is a bootable image which contains a couple different things:</p>
 
 <ul>
   <li>the Microkit loader</li>
   <li>seL4</li>
-  <li>the Monitor (and associated invocation data)</li>
-  <li>the images for all the user’s PDs</li>
+  <li>the capDL initialiser (and associated capDL specification)</li>
 </ul>
 
 <p>When booting the image, the Microkit loader starts, jumps to the kernel, which
-starts the monitor, which then sets up the entire system and starts all the PDs.</p>
+starts the capDL initialiser, which then sets up the entire system and starts
+all the PDs, including the Monitor.</p>
+
+<h4 id="x86">x86</h4>
+
+<p>The tool produces the kernel image and boot module image that contains the capDL initialiser.
+You must bring your own Multiboot 2 compliant bootloader which then loads the kernel and boot module.</p>
 
 <p>Now, we will go into a bit more detail about each of these stages of the
 booting process as well as what exactly the Microkit tool is doing.</p>
 
-<h3 id="loader">Loader</h3>
+<h3 id="loader-arm-and-risc-v">Loader (ARM and RISC-V)</h3>
 
 <p>The loader starts first, it has two main jobs:</p>
 
 <ol>
-  <li>Unpack all the parts of the system (kernel, monitor, PD images, etc) into
+  <li>Unpack all the parts of the system (kernel and initialiser) into
 their expected locations within main memory.</li>
   <li>Finish initialising the hardware such that the rest of the system can start.</li>
 </ol>
-
-<p>Unpacking the system image is fairly straight-forward, as all the information
-about what parts of the system image need to go where is figured out by the
-tool and embedded into the loader at build-time so when it starts it just goe
-through an array and copies data into the right locations.</p>
 
 <p>Before the Microkit loader starts, there would most likely have been some other
 bootloader such as U-Boot or firmware on the target that did its own hardware
@@ -1817,30 +2351,33 @@ that will not be done by a previous booting stage, such as:</p>
 <p>Once this is all completed, the loader jumps to seL4 which starts executing.
 The loader will never be executed again.</p>
 
-<h3 id="monitor">Monitor</h3>
+<h3 id="capdl-initialiser">capDL Initialiser</h3>
 
 <p>Once the kernel has done its own initialisation, it will begin the
 ‘initial task’. On seL4, this is a thread that contains all the initial
-capabilities to resources that are used to setup the rest of the system.</p>
+capabilities to resources and free memory that are used to setup the rest of the system.</p>
 
-<p>Within a Microkit environment, we call the initial task the ‘monitor’.</p>
+<p>Within a Microkit environment, the ‘initial task’ is the capDL initialiser. Its main
+job is to initialises and starts the system in conformance with the capDL specification.</p>
 
-<p>The monitor has two main jobs:</p>
+<p>At build-time, the Microkit tool embeds the capDL specification that describe
+all kernel objects that needs to be created. Then for each kernel object, the spec
+describe what state they need to be in and what capabilities exist to that object
+(i.e. who has access to this kernel object). For example, the spec would specify the:</p>
+<ul>
+  <li>starting Instruction Pointer (IP), Stack Pointer (SP) and IPC buffer pointer of a Thread Control Block (TCB),</li>
+  <li>page table structure and mapping attributes of an address space (VSpace),</li>
+  <li>interrupts (IRQ),</li>
+  <li>scheduling parameters (Scheduling Context),</li>
+  <li>and so on…</li>
+</ul>
 
-<ol>
-  <li>Setup all system resources (memory regions, channels, interrupts) and start
-the user’s protection domains.</li>
-  <li>Receive any faults caused by protection domains crashing or causing
-exceptions.</li>
-</ol>
+<h3 id="monitor">Monitor</h3>
 
-<p>At build-time, the Microkit tool embeds all the system calls that the monitor
-needs to make in order to setup the user’s system. More details about <em>how</em>
-this is done is in the section on the Microkit tool below. But from the
-monitor’s perspective, it just iterates over an array of system calls to make
-and performs each one.</p>
+<p>The Monitor is a special PD that executes at the highest priority. It’s job
+is to receive any faults caused by protection domains crashing or causing exceptions.</p>
 
-<p>After the system has been setup, the monitor goes to sleep and waits for any
+<p>After the monitor initialises itself, goes to sleep and waits for any
 faults from protection domains. On debug mode, this results in a message about
 which PD caused an exception and details on the PD’s state at the time of the fault.</p>
 
@@ -1865,14 +2402,19 @@ returns the PD goes back to sleep, waiting on any more events.</p>
 <p>The Microkit tool’s ultimate job is to take in the description of the user’s system,
 the SDF, and convert into an seL4 system that boots and executes.</p>
 
-<p>There are obvious steps such as parsing the SDF and PD ELFs but the majority of
-the work done by the tool is converting the system description into a list of
-seL4 system calls that need to happen.</p>
+<p>There are obvious steps such as parsing the SDF and PD ELFs. But the majority of
+the work done by the tool is converting the system description into the capDL specification
+then embedding it into the capDL initialiser image.</p>
 
-<p>In order to do this however, the Microkit tool needs to perform o a decent amount of
-‘emulation’ to know exactly what system calls and with which arguments to make.
-This requires keeping track of what memory is allocated and where, the layout of
-each capability space, what the initial untypeds list will look like, etc.</p>
+<h4 id="arm--risc-v-specific">ARM &amp; RISC-V specific</h4>
+<p>Since the physical memory layout of ARM and RISC-V platforms can be determined at boot
+time by reading the device tree. The Microkit tool goes one step further and statically
+check that the produced capDL specification is bootable on the target board. For example,
+we check that there are no frames outside of device or normal memory, and that there are
+enough memory to create all required kernel objects.</p>
+
+<p>In order to do this however, the Microkit tool needs to emulate how the seL4 kernel boot
+to obtain the list of free untyped objects that the kernel would give to the initial task.</p>
 
 <p>While this is non-trivial to do, it comes with the useful property that if the tool
 produces a valid image, there should be no errors upon initialising the system
@@ -1929,18 +2471,37 @@ static-architecture of Microkit systems.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#irq">Interrupts</a></li>
 <li class="toc-entry toc-h3"><a href="#fault">Faults</a></li>
+<li class="toc-entry toc-h3"><a href="#ioport">I/O Ports</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#sdk">SDK</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#config">Configurations</a></li>
-<li class="toc-entry toc-h3"><a href="#debug">Debug</a></li>
-<li class="toc-entry toc-h3"><a href="#release">Release</a></li>
-<li class="toc-entry toc-h3"><a href="#benchmark">Benchmark</a></li>
+<li class="toc-entry toc-h3"><a href="#config">Configurations</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#debug">Debug</a></li>
+<li class="toc-entry toc-h4"><a href="#release">Release</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#proofs">Proofs</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h4"><a href="#benchmark">Benchmark</a></li>
+<li class="toc-entry toc-h4"><a href="#multicore_config">Multi-core (SMP) configurations</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#system-requirements">System Requirements</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#tool">Microkit Tool</a></li>
+<li class="toc-entry toc-h2"><a href="#tool">Microkit Tool</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#image-format">Image format</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#arm">ARM</a></li>
+<li class="toc-entry toc-h4"><a href="#risc-v">RISC-V</a></li>
+<li class="toc-entry toc-h4"><a href="#x86-64">x86-64</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-entry toc-h2"><a href="#language-support">Language Support</a></li>
 <li class="toc-entry toc-h2"><a href="#libmicrokit">libmicrokit</a>
 <ul>
@@ -1967,6 +2528,15 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#sel4_word-microkit_vcpu_arm_read_regmicrokit_child-vcpu-sel4_word-reg">seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_write_regmicrokit_child-vcpu-sel4_word-reg-sel4_word-value">void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_arm_smc_callsel4_arm_smccontext-args-sel4_arm_smccontext-response">void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_x86_ioport_write_81632microkit_ioport-ioport_id-sel4_word-port_addr-sel4_word-data">void microkit_x86_ioport_write_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data)</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_uint81632-microkit_x86_ioport_read_81632microkit_ioport-ioport_id-sel4_word-port_addr">seL4_Uint(8|16|32) microkit_x86_ioport_read_(8|16|32)(microkit_ioport ioport_id, seL4_Word port_addr)</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_word-microkit_vcpu_x86_read_vmcsmicrokit_child-vcpu-sel4_word-field">seL4_Word microkit_vcpu_x86_read_vmcs(microkit_child vcpu, seL4_Word field)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_write_vmcsmicrokit_child-vcpu-sel4_word-field-sel4_word-value">void microkit_vcpu_x86_write_vmcs(microkit_child vcpu, seL4_Word field, seL4_Word value)</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_word-microkit_vcpu_x86_read_msrmicrokit_child-vcpu-sel4_word-field">seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_write_msrmicrokit_child-vcpu-sel4_word-field-sel4_word-value">void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_enable_ioportmicrokit_child-vcpu-microkit_ioport-ioport_id-sel4_word-port_addr-sel4_word-length">void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word length)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_disable_ioportmicrokit_child-vcpu-sel4_word-port_addr-sel4_word-length">void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_write_regsmicrokit_child-vcpu-sel4_vcpucontext-regs">void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs)</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#sysdesc">System Description File</a>
@@ -1978,6 +2548,7 @@ static-architecture of Microkit systems.</p>
 <ul>
 <li class="toc-entry toc-h5"><a href="#aarch64">AArch64</a></li>
 <li class="toc-entry toc-h5"><a href="#risc-v-64-bit">RISC-V 64-bit</a></li>
+<li class="toc-entry toc-h5"><a href="#x86-64-1">x86-64</a></li>
 </ul>
 </li>
 </ul>
@@ -1988,29 +2559,36 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h2"><a href="#bsps">Board Support Packages</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#ariane">Ariane (CVA6)</a></li>
-<li class="toc-entry toc-h3"><a href="#cheshire">Cheshire</a>
-<ul>
-<li class="toc-entry toc-h4"><a href="#using-u-boot">Using U-Boot</a></li>
-<li class="toc-entry toc-h4"><a href="#raw-systerm-with-no-bootloader">Raw systerm with no bootloader</a></li>
-</ul>
-</li>
+<li class="toc-entry toc-h3"><a href="#imx8mp_iotgate">Compulab IOT-GATE-IMX8MPLUS</a></li>
+<li class="toc-entry toc-h3"><a href="#cheshire">Cheshire</a></li>
 <li class="toc-entry toc-h3"><a href="#imx8mm_evk">i.MX8MM-EVK</a></li>
 <li class="toc-entry toc-h3"><a href="#imx8mp_evk">i.MX8MP-EVK</a></li>
 <li class="toc-entry toc-h3"><a href="#imx8mq_evk">i.MX8MQ-EVK</a></li>
 <li class="toc-entry toc-h3"><a href="#maaxboard">MaaXBoard</a></li>
 <li class="toc-entry toc-h3"><a href="#odroidc2">Odroid-C2</a></li>
 <li class="toc-entry toc-h3"><a href="#odroidc4">Odroid-C4</a></li>
+<li class="toc-entry toc-h3"><a href="#serengeti">Serengeti</a></li>
+<li class="toc-entry toc-h3"><a href="#hifive_p550">SiFive Premier P550</a></li>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_aarch64">QEMU virt (AArch64)</a></li>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</a></li>
 <li class="toc-entry toc-h3"><a href="#rpi4b_1gb">Raspberry Pi 4B</a></li>
 <li class="toc-entry toc-h3"><a href="#rockpro64">Pine64 ROCKPro64</a></li>
 <li class="toc-entry toc-h3"><a href="#star64">Pine64 Star64</a></li>
 <li class="toc-entry toc-h3"><a href="#tqma8xqp1gb">TQMa8XQP 1GB</a></li>
+<li class="toc-entry toc-h3"><a href="#ultra96v2">Ultra96V2</a></li>
+<li class="toc-entry toc-h3"><a href="#x86_64_generic">x86-64 generic</a></li>
+<li class="toc-entry toc-h3"><a href="#x86_64_generic_vtx">x86_64 generic</a></li>
 <li class="toc-entry toc-h3"><a href="#zcu102">ZCU102</a></li>
 <li class="toc-entry toc-h3"><a href="#adding-platform-support">Adding Platform Support</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#prerequisites">Prerequisites</a></li>
-<li class="toc-entry toc-h4"><a href="#getting-microkit-components-working">Getting Microkit Components Working</a></li>
+<li class="toc-entry toc-h4"><a href="#getting-microkit-components-working">Getting Microkit Components Working</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#build_sdkpy">build_sdk.py</a></li>
+<li class="toc-entry toc-h5"><a href="#loader">Loader</a></li>
+<li class="toc-entry toc-h5"><a href="#next-steps">Next steps</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h4"><a href="#contributing-platform-support">Contributing Platform Support</a></li>
 </ul>
 </li>
@@ -2027,10 +2605,17 @@ static-architecture of Microkit systems.</p>
 </li>
 <li class="toc-entry toc-h2"><a href="#internals">Internals</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#loader">Loader</a></li>
+<li class="toc-entry toc-h4"><a href="#arm-and-risc-v">ARM and RISC-V</a></li>
+<li class="toc-entry toc-h4"><a href="#x86">x86</a></li>
+<li class="toc-entry toc-h3"><a href="#loader-arm-and-risc-v">Loader (ARM and RISC-V)</a></li>
+<li class="toc-entry toc-h3"><a href="#capdl-initialiser">capDL Initialiser</a></li>
 <li class="toc-entry toc-h3"><a href="#monitor">Monitor</a></li>
 <li class="toc-entry toc-h3"><a href="#libmicrokit_internals">libmicrokit</a></li>
-<li class="toc-entry toc-h3"><a href="#microkit-tool">Microkit tool</a></li>
+<li class="toc-entry toc-h3"><a href="#microkit-tool">Microkit tool</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#arm--risc-v-specific">ARM &amp; RISC-V specific</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
