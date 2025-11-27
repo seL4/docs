@@ -9,12 +9,12 @@ iommu: false
 simulation_target: false
 verification: []
 Contrib: "Community"
-Maintained: "seL4 Foundation"
+Maintained: "10xEngineers"
 soc: SpacemiT K1
 cpu: X60
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
-SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: 2025 10xEngineers
 ---
 
 # Banana Pi BPI-F3
