@@ -41,6 +41,8 @@ setenv serverip <SERVER ADDRESS>
 saveenv
 ```
 
+The easiest way to find the proper load address is to query the `kernel_addr_r` variable. That's the environment variable specifying the expected address at which the kernel's binary will be found.
+
 ### eMMC/SD card setup
 
 We can load an image with the following command (using `0x20000000` as an example):

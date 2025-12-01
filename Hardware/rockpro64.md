@@ -41,7 +41,7 @@ Then, to flash the actual image:
 3. Remove the SD card.
 4. Reset and observe U-Boot come up.
 
-Compiling u-boot onesself has not been done and has been left as an exercise to the reader if wanted. HINT: https://github.com/sigmaris/u-boot/blob/v2020.01-ci/.azure-pipelines.yml. This fork is used as it resolves a number of issues present in mainline U-Boot and has pre-built images.
+Compiling u-boot by oneself has not been done and has been left as an exercise to the reader if wanted. HINT: https://github.com/sigmaris/u-boot/blob/v2020.01-ci/.azure-pipelines.yml. This fork is used as it resolves a number of issues present in mainline U-Boot and has pre-built images.
 
 ## Setting up with TFTP, DHCP, UEFI (recommended!)
 
