@@ -20,7 +20,7 @@ the Microkit, because it comes with pre-compiled seL4 binaries.
 ## Test
 
 To test whether your build environment works, we recommend running the seL4 test
-suite in `quemu`. For instance:
+suite in `qemu`. For instance:
 
 ```sh
 # target directory
