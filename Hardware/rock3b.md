@@ -1,6 +1,6 @@
 ---
 arm_hardware: true
-cmake_plat: rock3b
+cmake_plat: rk3568
 xcompiler_arg: -DAARCH64=1
 platform: Rock3b
 arch: ARMv8A, AArch64
@@ -8,7 +8,7 @@ virtualization: true
 iommu: false
 soc: RK3568 quad-core
 cpu: Cortex-A55 Quad 2.0 GHz
-Status: "Unverified"
+verification: [AARCH64]
 Contrib: "UNSW"
 Maintained: "UNSW"
 parent: /Hardware/
