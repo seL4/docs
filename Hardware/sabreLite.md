@@ -10,8 +10,7 @@ virtualization: false
 iommu: false
 soc: i.MX6
 cpu: Cortex-A9
-Status: "Verified"
-verified: arm-sabre-lite
+verification: [ARM]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

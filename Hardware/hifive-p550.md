@@ -7,7 +7,7 @@ arch: RV64GC
 virtualization: false
 iommu: false
 simulation_target: false
-Status: "Unverified"
+verification: []
 Contrib: "Community"
 Maintained: "seL4 Foundation"
 soc: ESWIN EIC7700X

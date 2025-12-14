@@ -9,8 +9,7 @@ virtualization: true
 iommu: false
 soc: Kirin 620
 cpu: Cortex-A53
-Status: Verified
-verified: hikey
+verification: [AARCH64]
 Contrib: Data61
 Maintained: false
 parent: /Hardware/

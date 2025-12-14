@@ -8,7 +8,7 @@ virtualization: true
 iommu: false
 soc: RK3399 hexa-core
 cpu: Cortex-A53 Quad 1.8 GHz
-Status: Unverified
+verification: [AARCH64]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

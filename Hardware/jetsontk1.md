@@ -8,8 +8,7 @@ virtualization: true
 iommu: true
 soc: NVIDIA Tegra K1
 cpu: Cortex-A15
-Status: "Verified"
-verified: tk1
+verification: [ARM, ARM_HYP]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

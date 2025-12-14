@@ -8,7 +8,7 @@ virtualization: true
 iommu: false
 soc: MCIMX8M-EVKB
 cpu: Cortex-A53 Quad 1.5 GHz
-Status: Unverified
+verification: [AARCH64]
 Contrib: Data61
 Maintained: seL4 Foundation
 parent: /Hardware/

@@ -10,7 +10,7 @@ virtualization: false
 iommu: false
 soc: i.MX31
 cpu: ARM1136J
-Status: Unverified
+verification: []
 Contrib: Data61
 Maintained: false
 SPDX-License-Identifier: CC-BY-SA-4.0

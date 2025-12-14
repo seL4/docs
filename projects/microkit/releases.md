@@ -26,11 +26,31 @@ Because of this we need to split the list into two before sorting.
 
 {% for release in releases reversed -%}
 
-- Microkit Release [{{ release.title }}]({{ release.url | relative_url }}) {% if forloop.first %}(latest){% endif %}
+## {{ release.title }} {% if forloop.first %}(latest){% endif %}
+
+[Release notes]({{ release.url | relative_url }})
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">OS</th>
+      <th scope="col">Arch</th>
+      <th scope="col">Download</th>
+      <th scope="col">Signature</th>
+    </tr>
+  </thead>
+  <tbody>
 {%- assign sdks = sdk_downloads | where: "version", release.title %}
 {%- assign sdks = sdks[0] %}
 {%-  for sdk in sdks.sdks %}
-  - [{{ sdk.label }}]({{sdk.url}}) [[sig]({{sdk.url}}.asc)]
+    <tr>
+      <th scope="row">{{ sdk.os }}</th>
+      <th scope="row">{{ sdk.arch }}</th>
+      <th scope="row"><a href="{{ sdk.url }}">{{ sdk.label }}</a></th>
+      <th scope="row"><a href="{{ sdk.url }}.asc">sig</a></th>
+    </tr>
 {%-   endfor %}
+  </tbody>
+</table>
 
 {% endfor %}
