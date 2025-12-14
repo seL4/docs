@@ -205,7 +205,7 @@ The following seL4 RISCV64 platforms are supported by verification:
 ### Intel x64 (`X64`) {#X64}
 
 Configurations that start with `X64` are verified configurations for the
-RISC-V 64-bit architecture.
+x86-64 architecture.
 
 The following features are supported by verification in X64 configurations:
 
