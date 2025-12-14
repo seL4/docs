@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>camkes-3.8.x-compatible | seL4 docs</title>
+    <title>Rock3b | seL4 docs</title>
 
-    <link rel="canonical" href="https://docs.sel4.systems/updates/sel4webserver/camkes-3.8.x.html">
+    <link rel="canonical" href="https://docs.sel4.systems/Hardware/rock3b.html">
     <link href="/assets/css/sel4.css?v=1765753305" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,13 +72,13 @@
     </ul>
   </li>
   <li class="mt-1">
-    <div class=" mb-1 menu-title hover:text-hi leading-none">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+    <div class="font-bold mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer ">
   <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
 </svg>
       <span class="cursor-pointer text-sm">The seL4 Kernel</span>
     </div>
-    <ul class="menu-content ml-6 ">
+    <ul class="menu-content ml-6 on">
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/">Overview</a>
         </li>
@@ -143,7 +143,7 @@
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/manual.html">Manual</a>
         </li>
-        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/Hardware/">Supported platforms</a>
         </li>
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
@@ -521,27 +521,179 @@
           <div id="main-div" class="flex-1 max-w-full">
             <main class="mx-6 md:mx-10 xl:mx-12 my-12
                         overflow-x-auto" id="page-top">
-<div class="mx-auto max-w-xl p-4 bg-gray-100 mb-8 dark:bg-gray-800 text-center rounded">
-<p class="text-dark font-semibold text-base sm:text-lg">This page is archived and is no longer receiving updates.</p>
-<p class="text-light text-base sm:text-lg">It remains here because some of the content may still be useful.</p>
-</div>
 
-              <div class="theprose mx-auto ext-links">
-<h1 id="updates-to-sel4webserver-from-camkes-37x-to-camkes-380">Updates to sel4webserver from camkes-3.7.x to camkes-3.8.0</h1>
+              <div class="theprose mx-auto  ext-links">
+  <h1 id="rock3b">Rock3b</h1>
 
-<ul>
-  <li>Created <code class="language-plaintext highlighter-rouge">sel4webserver</code> project containing an seL4 webserver application. Its purpose is to be a reference for implementing applications on seL4.
-    <ul>
-      <li>This project currently builds an odroid-xu4 VM that runs linux and gets some devices passed through to it.</li>
-    </ul>
-  </li>
-  <li>Add <code class="language-plaintext highlighter-rouge">lighttpd</code> module. This module will build and install a static binary of the <code class="language-plaintext highlighter-rouge">lighttpd</code>
-webserver into a VM overlay. It is currently configured to serve a
-static site on port <code class="language-plaintext highlighter-rouge">3000</code> out of <code class="language-plaintext highlighter-rouge">/run/site</code> in the VM.</li>
-  <li>Add <code class="language-plaintext highlighter-rouge">docsite</code> package that downloads, builds and packages a
-<code class="language-plaintext highlighter-rouge">docs.sel4.systems</code> static website. It is intended for being served by the
-<code class="language-plaintext highlighter-rouge">lighttpd</code> webserver added previously.</li>
-</ul>
+<table class="max-w-md">
+<tbody>
+<tr>
+<td>Platform</td> <td class="font-semibold">Rock3b</td>
+</tr>
+
+<tr>
+<td>Architecture</td> <td>ARMv8A, AArch64</td>
+</tr>
+<tr>
+<td>System-on-chip</td> <td>RK3568 quad-core</td>
+</tr>
+<tr>
+<td>CPU</td> <td>Cortex-A55 Quad 2.0 GHz</td>
+</tr>
+<tr>
+<td>seL4 virtualisation support</td>
+<td>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
+</td>
+</tr>
+<tr>
+<td>seL4 SMMU support</td>
+<td>
+<span class="pl-0.5">&ndash;</span>
+</td>
+</tr>
+<tr>
+<td>Proofs</td>
+<td>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
+</td>
+</tr>
+<tr>
+<td>Proof configs</td>
+<td><a href="/projects/sel4/verified-configurations.html#AARCH64">AARCH64</a></td>
+</tr>
+<tr>
+<td>seL4 CMake platform name</td>
+<td><code>rk3568</code></td>
+</tr>
+<tr>
+<td>Contributed by</td> <td>UNSW</td>
+</tr>
+
+<tr>
+<td>Maintained by</td> <td>UNSW</td>
+</tr>
+
+</tbody>
+</table>
+
+<h2 id="obtaining-tpl">Obtaining TPL</h2>
+
+<p>Since some parts of the board are proprietary and need custom binaries, Rockchip provides the binaries that you need to download and include in both the TF-A and U-Boot builds. To obtain them simply execute:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--depth</span> 1 https://github.com/rockchip-linux/rkbin
+</code></pre></div></div>
+
+<h2 id="compiling-tf-a">Compiling TF-A</h2>
+
+<p>ARM Trusted Firmware-A is necessary for the board to boot up properly. It is responsible for setting up all secure peripherals and pieces of the system that the regular user won’t have access to.
+To build it execute:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--depth</span> 1 https://github.com/TrustedFirmware-A/trusted-firmware-a.git
+<span class="nb">cd </span>trusted-firmware-a
+make realclean
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu- <span class="nv">PLAT</span><span class="o">=</span>rk3358
+<span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<h2 id="compiling-u-boot">Compiling U-Boot</h2>
+
+<p>In order to build U-Boot for the Rock3b, we need to first download or build the run the following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/u-boot/u-boot.git u-boot
+<span class="nb">cd </span>u-boot
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu- rock-3b-rk3568_defconfig
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu- <span class="nv">BL31</span><span class="o">=</span>../trusted-firmware-a/build/rk3568/release/bl31/bl31.elf <span class="nv">ROCKCHIP_TPL</span><span class="o">=</span>../rkbin/bin/rk35/rk3568_ddr_1560MHz_v1.13.bin
+</code></pre></div></div>
+
+<p>In the <code class="language-plaintext highlighter-rouge">u-boot</code> directory you should now see the U-Boot image <code class="language-plaintext highlighter-rouge">u-boot.bin</code> indicating that U-Boot has successfully compiled.</p>
+
+<p>More information regarding U-Boot support for the Rock3b can be found <a href="https://docs.u-boot.org/en/latest/board/rockchip/rockchip.html">here</a>.</p>
+
+<h2 id="flashing-the-u-boot-on-the-sd-card">Flashing the U-Boot on the SD-card</h2>
+
+<p>To write an image that boots from a SD card (check your device path!):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>u-boot.bin <span class="nv">of</span><span class="o">=</span>/dev/&lt;device_path&gt; <span class="nv">seek</span><span class="o">=</span>64
+<span class="nb">sync</span>
+</code></pre></div></div>
+
+<h2 id="flashing-the-u-boot-on-the-spi-flash">Flashing the U-Boot on the SPI Flash</h2>
+
+<p>If you want to boot from SPI Flash, you have to put the U-Boot image there first.</p>
+
+<h3 id="preparation-of-the-sd-card">Preparation of the SD-card</h3>
+
+<p>Prepare the SD-card by plugging it into your PC and running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">DEV</span><span class="o">=</span>/dev/&lt;your device name&gt;
+
+<span class="nb">sudo </span>wipefs <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$DEV</span><span class="s2">"</span>
+
+<span class="c"># Partition table + partitions (start at 16MiB to avoid overlapping bootloader areas)</span>
+<span class="nb">sudo </span>parted <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$DEV</span><span class="s2">"</span> mklabel gpt
+<span class="nb">sudo </span>parted <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$DEV</span><span class="s2">"</span> mkpart BOOT fat32 16MiB 256MiB
+<span class="nb">sudo </span>parted <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$DEV</span><span class="s2">"</span> mkpart ROOT ext4 256MiB 100%
+
+<span class="c"># Format</span>
+<span class="nb">sudo </span>mkfs.vfat <span class="nt">-F</span> 32 <span class="nt">-n</span> BOOT <span class="k">${</span><span class="nv">DEV</span><span class="k">}</span>p1
+<span class="nb">sudo </span>mkfs.ext4 <span class="nt">-F</span> <span class="nt">-L</span> ROOT <span class="k">${</span><span class="nv">DEV</span><span class="k">}</span>p2
+
+<span class="c"># Flash the non-SPI image onto SD-card</span>
+<span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>u-boot-rockchip.bin <span class="nv">of</span><span class="o">=</span>/dev/sda <span class="nv">seek</span><span class="o">=</span>64
+
+<span class="c"># Copy the SPI image onto the ext4 partition</span>
+<span class="nb">sudo mkdir</span> <span class="nt">-p</span> sd/
+<span class="nb">sudo </span>mount <span class="k">${</span><span class="nv">DEV</span><span class="k">}</span>p2 sd/
+<span class="nb">sudo cp </span>u-boot-rockchip-spi.bin sd/
+<span class="nb">sync
+sudo </span>umount sd/
+</code></pre></div></div>
+
+<p>Then insert the SD-card into the Rock3b and run following there:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc list
+<span class="c"># ensure you can see you SD-card here</span>
+sf probe
+<span class="c"># ensure you can see the flash registering itself here</span>
+<span class="nb">ls </span>mmc 1:2
+<span class="c"># ensure you can see the u-boot-rockchip-spi.bin here</span>
+
+load mmc 1:2 <span class="nv">$kernel_addr_r</span> u-boot-rockchip-spi.bin
+
+sf update <span class="nv">$fileaddr</span> 0 <span class="nv">$filesize</span>
+</code></pre></div></div>
+
+<p>Poweroff the board, eject the SD-card and observe the board booting from flash.</p>
+
+<h2 id="building-sel4test">Building seL4test</h2>
+
+<p>Checkout the sel4test project using repo as per <a href="/projects/sel4test/">seL4Test</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
+repo <span class="nb">sync
+mkdir </span>cbuild
+<span class="nb">cd </span>cbuild
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rk3568 <span class="nt">-DAARCH64</span><span class="o">=</span>1
+<span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
+<span class="c"># To change individual settings, run `ccmake .` and change the configuration</span>
+<span class="c"># parameters to suit your needs.</span>
+ninja
+
+</code></pre></div></div>
+
+<p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
+
+<h2 id="running-sel4test">Running seL4test</h2>
+
+<p>You have two options of running the seL4test, either run it from the SD-card’s partition or using TFTP. Here the option of running it via TFTP is described.</p>
+
+<p>This assumes the Ethernet cable connected to the board and having a DHCP and TFTP servers running. When the board boots, enter its console and simply type <code class="language-plaintext highlighter-rouge">dhcp</code> to establish the connection and then copy over your image from the TFTP server by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tftp 0x02000000 sel4test-driver-image-arm-rk3568
+go 0x02000000
+</code></pre></div></div>
+
+<p>This will launch seL4tests.</p>
 
 </div>
 
@@ -555,7 +707,7 @@ static site on port <code class="language-plaintext highlighter-rouge">3000</cod
   <a href="/processes/test-status.html"
      class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
   <div class="flex-1"></div>
-<a href="https://github.com/seL4/docs/edit/master/content_collections/_updates/sel4webserver/camkes-3.8.x.md" class="flex-none  hover:text-light hover:underline">Edit
+<a href="https://github.com/seL4/docs/edit/master/Hardware/rock3b.md" class="flex-none  hover:text-light hover:underline">Edit
     page on GitHub</a>
 </footer>
 
