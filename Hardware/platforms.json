@@ -1,0 +1,36 @@
+---
+layout: null
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2025 seL4 International
+---
+
+[
+  [
+    "Arm",
+    [
+{%- assign sorted = site.pages | sort: 'platform' %}
+{%- for page in sorted %}
+{%-   if page.arm_hardware and page.Maintained %}
+      "{{ page.platform }}"{% unless forloop.last %},{% endunless %}
+{%-   endif %}
+{%- endfor %}
+    ]
+  ],
+  [
+    "RISC-V",
+    [
+{%- assign sorted = site.pages | sort: 'platform' %}
+{%- for page in sorted %}
+{%-   if page.riscv_hardware and page.Maintained %}
+      "{{ page.platform }}"{% unless forloop.last %},{% endunless %}
+{%-   endif %}
+{%- endfor %}
+    ]
+  ],
+  [
+    "Intel",
+    [
+      "32 and 64 bit PC-99 machines"
+    ]
+  ]
+]
