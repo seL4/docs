@@ -19,11 +19,6 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 
 # HiKey
 
-{% include note.html kind="Warning" %}
-This board is currently not in the seL4 hardware regression test.
-These instructions may be out of date.
-{% include endnote.html %}
-
 {% include hw-info.html %}
 
 ## Pre-Requisites
