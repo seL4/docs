@@ -1,4 +1,5 @@
 ---
+archive: true
 arm_hardware: true
 cmake_plat: exynos4
 xcompiler_arg: -DAARCH32=1
@@ -10,15 +11,13 @@ soc: Exynos4412
 cpu: Cortex-A9
 verification: [ARM]
 Contrib: Data61
-Maintained: seL4 Foundation
+Maintained: False
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 ---
 
 # Odroid-X
-
-seL4 supports the Odroid-X Exynos4412 board.
 
 {% include hw-info.html %}
 
