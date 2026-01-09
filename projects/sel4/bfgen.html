@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-01-08 03:44:30 +0000 -->
+<!-- Page last generated 2026-01-09 03:44:37 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>The seL4 Bitfield Generator | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/bfgen.html">
-    <link href="/assets/css/sel4.css?v=1767843870" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1767930277" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -687,6 +687,29 @@ generated files for seL4, only the ones that are actually used in the rest of
 the code.</p>
 </blockquote>
 
+<h4 id="expressions">Expressions</h4>
+
+<p>All positions in the specification that allow numbers also allow basic
+arithmetic integer expressions with <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">/</code>, and <code class="language-plaintext highlighter-rouge">%</code>. The commands
+<code class="language-plaintext highlighter-rouge">field</code>, <code class="language-plaintext highlighter-rouge">padding</code>, <code class="language-plaintext highlighter-rouge">field_high</code>, and <code class="language-plaintext highlighter-rouge">field_ptr</code> also allow the constants
+<code class="language-plaintext highlighter-rouge">word_size</code> and <code class="language-plaintext highlighter-rouge">canonical_size</code>. <code class="language-plaintext highlighter-rouge">word_size</code> stands for the number of bits in a
+word, and <code class="language-plaintext highlighter-rouge">canonical_size</code> for the number of canonical bits in a pointer, both
+according most recent <code class="language-plaintext highlighter-rouge">base</code> declaration (see also <a href="#architecture-parameters-and-canonical-pointers">Architecture Parameters</a>).</p>
+
+<p>For example, the <code class="language-plaintext highlighter-rouge">VMFault</code> example from Section <a href="#blocks">Blocks</a> could have
+been written as follows, assuming a <code class="language-plaintext highlighter-rouge">base 32</code> definition for `word_size.</p>
+
+<pre><code class="language-bf_gen">block VMFault {
+    field     address           word_size
+
+    field     FSR               5
+    padding                     7
+    field     instructionFault  1
+    padding                     word_size - (5 + 7 + 1) - 4
+    field     seL4_FaultType    4
+}
+</code></pre>
+
 <h4 id="field-high">Field High</h4>
 
 <p>The usual access patterns for fields is that if we provide e.g. a value of 5 to
@@ -753,6 +776,94 @@ This means, we can store 28 bits of additional information in the space that
 would be taken up by a single pointer. For this it does not matter where in the
 <code class="language-plaintext highlighter-rouge">store_more</code> block the <code class="language-plaintext highlighter-rouge">ptr</code> field is declared, just that it is a <code class="language-plaintext highlighter-rouge">field_high</code>
 that stores 36 bits (on a 64 bit base platform with 48 significant bits).</p>
+
+<h4 id="field-ptr">Field Ptr</h4>
+
+<p>Often we want to store a pointer with some known alignment (i.e. not all bits
+need to be stored), and pad out to a specific overall field size.
+The <code class="language-plaintext highlighter-rouge">field_ptr</code> abbreviation makes this convenient.</p>
+
+<pre><code class="language-bf_gen">block some_block {
+    ...
+    field_ptr(align) some_name size
+    ...
+}
+</code></pre>
+
+<p>stands for “a field <code class="language-plaintext highlighter-rouge">some_name</code> for a pointer with alignment <code class="language-plaintext highlighter-rouge">align</code> padded out
+to <code class="language-plaintext highlighter-rouge">size</code>”. It is an abbreviation for</p>
+
+<pre><code class="language-bf_gen">block some_block {
+    ...
+    padding size - canonical_size + align
+    field_high some_name canonical_size - align
+    ...
+}
+</code></pre>
+
+<p>The <code class="language-plaintext highlighter-rouge">(align)</code> parameter can be left out and is equivalent to <code class="language-plaintext highlighter-rouge">field_ptr(0)</code>. The
+constant <code class="language-plaintext highlighter-rouge">canonical_size</code> in the expression above stands for the number of
+significant bits (the canonical size) of a pointer according to the most recent
+<code class="language-plaintext highlighter-rouge">base</code> definition. For example the long form</p>
+
+<pre><code class="language-bf_gen">base 64(48,1)
+
+block mdb_node {
+    padding 16
+    field_high mdbNext 46
+    field mdbRevocable 1
+    field mdbFirstBadged 1
+
+    field mdbPrev 64
+}
+</code></pre>
+
+<p>can be written more concisely as</p>
+
+<pre><code class="language-bf_gen">base 64(48,1)
+
+block mdb_node {
+    field_ptr(2) mdbNext 62
+    field mdbRevocable 1
+    field mdbFirstBadged 1
+
+    field mdbPrev 64
+}
+</code></pre>
+
+<p>The <code class="language-plaintext highlighter-rouge">field_ptr</code> abbreviation is especially useful for sharing the same block
+definition under different <code class="language-plaintext highlighter-rouge">base</code> declarations, e.g. for different
+architectures. For example, with a <code class="language-plaintext highlighter-rouge">base 64(39,1)</code> the <code class="language-plaintext highlighter-rouge">field_ptr</code> definition
+text remains the same, but expands to a different <code class="language-plaintext highlighter-rouge">field_high</code>/<code class="language-plaintext highlighter-rouge">padding</code>
+combination that achieves the same overall width:</p>
+
+<pre><code class="language-bf_gen">base 64(39,1)
+
+block mdb_node {
+    padding 25
+    field_high mdbNext 37
+    field mdbRevocable 1
+    field mdbFirstBadged 1
+
+    field mdbPrev 64
+}
+</code></pre>
+
+<p>can be also be written as</p>
+
+<pre><code class="language-bf_gen">base 64(39,1)
+
+block mdb_node {
+    field_ptr(2) mdbNext 62
+    field mdbRevocable 1
+    field mdbFirstBadged 1
+
+    field mdbPrev 64
+}
+</code></pre>
+
+<p>This means the same block definition can produce a constant field size while
+correctly accommodating multiple different <code class="language-plaintext highlighter-rouge">base</code> configurations.</p>
 
 <h4 id="visible-field-order">Visible Field Order</h4>
 
@@ -1058,6 +1169,11 @@ x64, one would declare <code class="language-plaintext highlighter-rouge">base 6
 wants to not store a pointer, but some other value as <code class="language-plaintext highlighter-rouge">field_high</code>, one could
 declare <code class="language-plaintext highlighter-rouge">base 64</code> just before and <code class="language-plaintext highlighter-rouge">base 64(48,1)</code> again just after that block.</p>
 
+<p>The <code class="language-plaintext highlighter-rouge">base</code> declaration sets the values of the constants <code class="language-plaintext highlighter-rouge">word_size</code> and
+<code class="language-plaintext highlighter-rouge">canonical_size</code> that can be used in size expressions. For example, after the
+declaration <code class="language-plaintext highlighter-rouge">base 64(48,1)</code>, <code class="language-plaintext highlighter-rouge">word_size</code> will be 64 and <code class="language-plaintext highlighter-rouge">canonical_size</code> 48.
+After <code class="language-plaintext highlighter-rouge">base 32</code>, <code class="language-plaintext highlighter-rouge">word_size</code> and <code class="language-plaintext highlighter-rouge">canonical_size</code> will both be 32.</p>
+
 <h3 id="syntax-reference">Syntax Reference</h3>
 
 <h4 id="lexical-structure">Lexical Structure</h4>
@@ -1105,22 +1221,34 @@ whitespace is ignored.</p>
 <pre><code class="language-ebnf">spec :== ( base | block | tagged_union )*
 
 base ::= "base" ("32"|"64") canonical_spec?
-canonical_spec ::= "(" INTLIT "," ("0"|"1") ")"
+canonical_spec ::= "(" expr "," ("0"|"1") ")"
 
 block ::= "block" IDENT visible_order_spec_opt? "{" fields "}"
 visible_order_spec_opt ::= "(" visible_order_spec? ")"
 visible_order_spec ::= IDENT ("," IDENT)*
-fields ::= ( "field" IDENT INTLIT | "field_high" IDENT INTLIT | "padding" INTLIT )*
+fields ::= ( "field" IDENT expr |
+             "field_high" IDENT expr |
+             "field_ptr" ("(" expr ")")? IDENT expr |
+             "padding" expr )*
 
 tagged_union ::= "tagged_union" IDENT IDENT tag_slices? "{" masks tags "}"
 
-tag_slices ::= "(" IDENT ("," IDENT)* ")"
-masks ::= ( "mask" INTLIT INTLIT )*
+masks ::= ( "mask" expr expr )*
 tags ::= ( "tag" IDENT tag_value )*
-tag_value ::= INTLIT | "(" INTLIT ( "," INTLIT )* ")"
+tag_slices ::= "(" IDENT ("," IDENT)* ")"
+tag_value ::= expr | "(" expr ( "," expr )* ")"
+
+expr ::= expr ("+" | "-" | "*" | "/" | "%") expr
+       | "-" expr | "(" expr ")" | INTLIT
+       | "word_size" | "canonical_size"
 </code></pre>
 
-<p>Forward references to names that are declared later in the file are allowed.</p>
+<p>Forward references to names that are declared later in the file are allowed.
+Multiplicative operators “*”, “/”, “%” bind stronger than “+” and “-“. Binary
+operators are left-associative. Unary minus binds stronger than all of the
+other operators. The constants “word_size” and “canonical_size” are only
+available in “field”, “field_high”, “field_ptr”, and “padding” expressions and
+refer to the most recent corresponding “base” declaration.</p>
 
 <h4 id="restrictions">Restrictions</h4>
 
@@ -1130,6 +1258,8 @@ section, but will be checked by the generator.</p>
 <ul>
   <li>the canonical bit must be smaller than the <code class="language-plaintext highlighter-rouge">base</code> size</li>
   <li>field sizes must not be larger than the <code class="language-plaintext highlighter-rouge">base</code> size</li>
+  <li>all field sizes must be positive</li>
+  <li>all padding sizes must be non-negative</li>
   <li>the field sizes in a block must add up to multiples of the <code class="language-plaintext highlighter-rouge">base</code> size</li>
   <li>all identifiers mentioned as tags in a union must be blocks</li>
   <li>all blocks in a tagged union must have the same size</li>
@@ -1339,7 +1469,9 @@ TODO:
 <li class="toc-entry toc-h3"><a href="#bit-field-generator-by-example">Bit Field Generator by Example</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#blocks">Blocks</a></li>
+<li class="toc-entry toc-h4"><a href="#expressions">Expressions</a></li>
 <li class="toc-entry toc-h4"><a href="#field-high">Field High</a></li>
+<li class="toc-entry toc-h4"><a href="#field-ptr">Field Ptr</a></li>
 <li class="toc-entry toc-h4"><a href="#visible-field-order">Visible Field Order</a></li>
 <li class="toc-entry toc-h4"><a href="#tagged-unions">Tagged Unions</a></li>
 <li class="toc-entry toc-h4"><a href="#advanced-tag-fields">Advanced Tag Fields</a>
