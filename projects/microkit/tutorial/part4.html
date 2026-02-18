@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-02-17 04:00:48 +0000 -->
+<!-- Page last generated 2026-02-18 04:01:31 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Microkit Tutorial - Virtual machines | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/tutorial/part4.html">
-    <link href="/assets/css/sel4.css?v=1771300848" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1771387291" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -684,11 +684,11 @@ udhcpc eth0
 <span class="c"># and then write it to a location that the</span>
 <span class="c"># virtual machine monitor is expecting</span>
 <span class="nb">echo</span> <span class="s2">"Linux user-space: Transfer word to virtual-machine monitor"</span>
-busybox devmem 0x50000000 w <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:0:1<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
-busybox devmem 0x50000001 w <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:1:2<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
-busybox devmem 0x50000002 w <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:2:3<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
-busybox devmem 0x50000003 w <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:3:4<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
-busybox devmem 0x50000004 w <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:4:5<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+busybox devmem 0x50000000 b <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:0:1<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+busybox devmem 0x50000001 b <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:1:2<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+busybox devmem 0x50000002 b <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:2:3<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+busybox devmem 0x50000003 b <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:3:4<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+busybox devmem 0x50000004 b <span class="si">$(</span><span class="nb">printf</span> <span class="s2">"%d"</span> <span class="s2">"'</span><span class="k">${</span><span class="nv">WORD</span>:4:5<span class="k">}</span><span class="s2">"</span><span class="si">)</span>
 <span class="nb">echo</span> <span class="s2">"Linux user-space: Finished"</span>
 </code></pre></div></div>
 
