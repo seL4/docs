@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-03-19 04:02:17 +0000 -->
+<!-- Page last generated 2026-03-20 03:59:20 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>capDL Language Specification | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/capdl/lang-spec.html">
-    <link href="/assets/css/sel4.css?v=1773892937" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1773979160" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -533,7 +533,7 @@
 
 <!-- title: capDL Language Specification -->
 
-<p>This document defines capDL revision 1.0, a language for capability
+<p>This document defines capDL revision 1.1, a language for capability
 distributions.</p>
 
 <h2 id="background-and-purpose">Background and Purpose</h2>
@@ -677,16 +677,27 @@ in section <a href="#modules">Modules</a>.</p>
 
 <h4 id="cdt-declarations">CDT Declarations</h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cdt_decls ::='cdt' '{' cdt_decl* '}'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cdt_decls ::= 'cdt' '{' cdt_decl* '}'
 
   cdt_decl ::= slot_ref '{' ((slot_ref | cdt_decl) ';'?)* '}'
 </code></pre></div></div>
 
+<h4 id="domain-schedule-declarations">Domain Schedule Declarations</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dom_decls ::= 'domains' '{' dom_decl+ '}'
+  dom_decl ::= sched_decl
+             | 'domain_set_start' ':' (number | 'no_start')
+             | 'index_shift' ':' number
+
+  sched_decl ::= 'schedule' ':' '[' sched_item (',' sched_item)* ','? ']'
+  sched_item ::= '(' number ',' number ')'
+</code></pre></div></div>
+
 <h4 id="modules">Modules</h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  arch ::= 'arch' ('ia32' | 'arm11')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  arch ::= 'arch' ('ia32' | 'arm11' | 'x86_64' | 'aarch64' | 'riscv')
 
-  module ::= arch (obj_decls | cap_decls | irq_decls | cdt_decls)+
+  module ::= arch (obj_decls | cap_decls | irq_decls | cdt_decls | dom_decls)+
 </code></pre></div></div>
 
 <h2 id="semantics">Semantics</h2>
@@ -705,6 +716,7 @@ data model.</p>
 <h3 id="data-model">Data Model</h3>
 
 <h4 id="rationale">Rationale</h4>
+
 <p>The purpose of capDL is describing a snapshot of the capability
 distribution in a system running on the seL4 microkernel. For this
 purpose, we need to know which objects exist in the system and which
@@ -739,7 +751,7 @@ architecture the system is intended for.</p>
                   objects :: Map ObjID Object
               }
 
-data Arch = IA32 | ARM11
+data Arch = IA32 | ARM11 | X86_64 | AARCH64 | RISCV
 </code></pre></div></div>
 
 <p>Objects are described by the following data type. We are mainly
@@ -871,7 +883,7 @@ the authority to map/unmap page directories into/from the ASID pool.
 Mapping a frame into a page table for instance, needs the frame cap to
 specify which frame to map with which rights and the PT cap to specify
 in which page table. The IOPorts capability gives access to a set of
-IOPorts on the ia32 architecture. The IOSpaceMasterCap confers the
+IOPorts on the ia32 and x86_64 architectures. The IOSpaceMasterCap confers the
 authority to create IOSpace caps for specific devices. IOSpaceCaps point
 to IODevices and confer the authority to set the root IOPageTable for
 that device. IOPTCaps are the IOMMU analogue to PT and PD caps in normal
@@ -928,7 +940,7 @@ following mappings apply:</p>
 
 <h4 id="module">Module</h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  arch ::= 'arch' ('ia32' | 'arm11')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  arch ::= 'arch' ('ia32' | 'arm11' | 'x86_64' | 'aarch64' | 'riscv')
   module ::= arch (obj_decls | cap_decls)+
 </code></pre></div></div>
 
@@ -1063,6 +1075,44 @@ is specified using the reserved <code class="language-plaintext highlighter-roug
 ASIDControlCap is specified by <code class="language-plaintext highlighter-rouge">asid_control</code> and IOSpaceMasterCap by
 <code class="language-plaintext highlighter-rouge">io_space_master</code>.</p>
 
+<h4 id="domains">Domains</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dom_decls ::= 'domains' '{' dom_decl+ '}'
+  dom_decl ::= sched_decl
+             | 'domain_set_start' ':' (number | 'no_start')
+             | 'index_shift' ':' number
+
+  sched_decl ::= 'schedule' ':' '[' sched_item (',' sched_item)* ','? ']'
+  sched_item ::= '(' number ',' number ')'
+</code></pre></div></div>
+
+<p>The Domain schedule declaration is optional and only required for system
+initialisation, not for reasoning about capability distribution.</p>
+
+<p>The domain schedule list is a list of pairs where the first component is
+the domain and the second component the duration. (0, 0) denotes a schedule
+end marker. At most one domain schedule declaration is accepted.
+See <a href="https://github.com/seL4/rfcs/blob/0200-domain-schedules/src/proposed/0200-domain-schedules.md">RFC-20</a> for detail on domain schedule semantics.</p>
+
+<p>The optional <code class="language-plaintext highlighter-rouge">domain_set_start</code> value (0 if left out) denotes which item of the
+provided domain schedule the initialiser will switch to when initialiser
+execution ends, using the seL4 API <code class="language-plaintext highlighter-rouge">DomainSetStart</code>. At most one start index
+declaration is accepted. A value of <code class="language-plaintext highlighter-rouge">no_start</code> means that the current domain 0
+will keep running and no <code class="language-plaintext highlighter-rouge">DomainSetStart</code> call is performed.</p>
+
+<p>The optional domain <code class="language-plaintext highlighter-rouge">index_shift</code> (value 0 if left out) denotes at which index
+the declared domain schedule should be configured in the kernel. The first entry
+of the domain schedule declaration will be configured at index <code class="language-plaintext highlighter-rouge">index_shift</code>,
+the second at <code class="language-plaintext highlighter-rouge">index_shift + 1</code> and so on. The <code class="language-plaintext highlighter-rouge">domain_set_start</code> value will
+also be shifted and configured as <code class="language-plaintext highlighter-rouge">domain_set_start + index_shift</code> in the
+kernel. At most one shift index declaration is accepted.</p>
+
+<p>If no domain schedule is provided or the kernel is configured with only one
+domain, the initialiser will not configure any domains and not perform any
+domain schedule start. If no schedule is provided but the kernel is configured
+with domain scheduler support, the initial domain will keep running after the
+initialiser ends.</p>
+
 
 </div>
 
@@ -1098,6 +1148,7 @@ ASIDControlCap is specified by <code class="language-plaintext highlighter-rouge
 <li class="toc-entry toc-h4"><a href="#capability-declarations">Capability Declarations</a></li>
 <li class="toc-entry toc-h4"><a href="#irq-declarations">IRQ Declarations</a></li>
 <li class="toc-entry toc-h4"><a href="#cdt-declarations">CDT Declarations</a></li>
+<li class="toc-entry toc-h4"><a href="#domain-schedule-declarations">Domain Schedule Declarations</a></li>
 <li class="toc-entry toc-h4"><a href="#modules">Modules</a></li>
 </ul>
 </li>
@@ -1117,6 +1168,7 @@ ASIDControlCap is specified by <code class="language-plaintext highlighter-rouge
 <li class="toc-entry toc-h4"><a href="#module">Module</a></li>
 <li class="toc-entry toc-h4"><a href="#object-declarations-1">Object Declarations</a></li>
 <li class="toc-entry toc-h4"><a href="#capability-declarations-1">Capability Declarations</a></li>
+<li class="toc-entry toc-h4"><a href="#domains">Domains</a></li>
 </ul>
 </li>
 </ul>
