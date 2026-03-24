@@ -16,8 +16,9 @@ help:
 	@echo "  check_conformance_errors - Check for conformance and show errors"
 	@echo "  check_liquid_syntax      - Check the liquid syntax of the templates"
 	@echo "  check_html_output        - Check the HTML output using tidy"
-	@echo "  checklinks               - Runs html-proofer to check for broken links."
-	@echo "  validate                 - Runs html5validator to check for HTML5 compliance."
+	@echo "  checklinks               - Runs html-proofer to check for broken links"
+	@echo "  validate                 - Runs html5validator to check for HTML5 compliance"
+	@echo "  update_repos             - Pull the latest changes for all git repos under _repos"
 
 .PHONY: ruby_deps
 ruby_deps: .jekyll-cache/ruby_deps
@@ -70,6 +71,13 @@ $(REPOSITORIES):
 
 .PHONY: repos
 repos: $(REPOSITORIES)
+
+.PHONY: update_repos
+update_repos:
+	for repo in $(REPOSITORIES); do \
+		echo "======== updating $$repo"; \
+		(cd $$repo && git pull --rebase); \
+	done
 
 # Microkit
 
