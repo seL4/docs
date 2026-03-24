@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-03-24 04:00:24 +0000 -->
+<!-- Page last generated 2026-03-24 11:14:27 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1774324824" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1774350867" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -1964,6 +1964,128 @@ pivot slot to the destination slot and the capability in the source slot to the 
 
 <h3 id="sel4_domainset">seL4_DomainSet</h3>
 
+<h4 id="scheduleconfigure">ScheduleConfigure</h4>
+<p><code class="language-plaintext highlighter-rouge">static inline int seL4_DomainSet_ScheduleConfigure</code></p>
+
+<p>Modify a domain scheduling entry.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_DomainSet</code></td>
+      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
+      <td>Capability allowing domain configuration.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">index</code></td>
+      <td>The scheduling entry to modify.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Uint8</code></td>
+      <td><code class="language-plaintext highlighter-rouge">domain</code></td>
+      <td>The scheduling entry’s new domain.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Time</code></td>
+      <td><code class="language-plaintext highlighter-rouge">duration</code></td>
+      <td>Timeslice in ticks (kernel ticks for non-MCS, timer ticks for MCS).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">duration</code>  is zero, but  <code class="language-plaintext highlighter-rouge">domain</code>  is not. Or,  <code class="language-plaintext highlighter-rouge">index</code>  points to the starting index, but  <code class="language-plaintext highlighter-rouge">duration</code>  is zero. Or,  <code class="language-plaintext highlighter-rouge">duration</code>  does not fit in 56 bits.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_RangeError</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">index</code>  is not less than  <code class="language-plaintext highlighter-rouge">KernelNumDomainSchedules</code>. Or,  <code class="language-plaintext highlighter-rouge">domain</code>  is not less than  <code class="language-plaintext highlighter-rouge">KernelNumDomains</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> Configure the domain and duration of a scheduling entry. A zero domain and duration means it is an end marker. The domain scheduler will go back to the starting index when reaching an end marker. This makes it possible to configure multiple independent domain schedules and switch between them atomically.
+ The scheduling entry will be modified immediately. However, if the currently active index is modified, the change will not apply until the next time this entry is reached by the domain scheduler.
+ After boot the first scheduling entry has domain zero and maximum duration, all other entries will be end markers.
+ Hence, after initial configuration a call to <code class="language-plaintext highlighter-rouge">seL4_DomainSet_ScheduleSetStart</code> is needed to update the current execution, even when there is no need to actually change the starting index.</p>
+
+<h4 id="schedulesetstart">ScheduleSetStart</h4>
+<p><code class="language-plaintext highlighter-rouge">static inline int seL4_DomainSet_ScheduleSetStart</code></p>
+
+<p>Change the starting index of the domain scheduler.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_DomainSet</code></td>
+      <td><code class="language-plaintext highlighter-rouge">_service</code></td>
+      <td>Capability allowing domain configuration.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
+      <td><code class="language-plaintext highlighter-rouge">index</code></td>
+      <td>The new starting index.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> A return value of <code class="language-plaintext highlighter-rouge">0</code> indicates success. A non-zero value indicates that an error occurred.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Code</th>
+      <th>Possible Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">index</code>  points to an end marker entry.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_RangeError</code></td>
+      <td>The  <code class="language-plaintext highlighter-rouge">index</code>  is not less than  <code class="language-plaintext highlighter-rouge">KernelNumDomainSchedules</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Description:</strong> The domain scheduler starts with the schedule entry indicated by the starting index. When reaching an end marker or the end of the schedules, the scheduler will go back to the starting entry again. The starting index is zero after boot.
+ The currently active scheduling index will be changed to the new starting index immediately, before returning from this system call. This relinquishes all remaining duration of the last schedule.</p>
+
 <h4 id="set">Set</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_DomainSet_Set</code></p>
 
@@ -2012,7 +2134,7 @@ pivot slot to the destination slot and the capability in the source slot to the 
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">domain</code>  is greater than  <code class="language-plaintext highlighter-rouge">CONFIG_NUM_DOMAINS</code>. Or,  <code class="language-plaintext highlighter-rouge">thread</code>  is a CPtr to a capability of the wrong type.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">domain</code>  is greater than  <code class="language-plaintext highlighter-rouge">KernelNumDomains</code>. Or,  <code class="language-plaintext highlighter-rouge">thread</code>  is a CPtr to a capability of the wrong type.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
@@ -9691,6 +9813,8 @@ serviced.</p>
 </li>
 <li class="toc-entry toc-h3"><a href="#sel4_domainset">seL4_DomainSet</a>
 <ul>
+<li class="toc-entry toc-h4"><a href="#scheduleconfigure">ScheduleConfigure</a></li>
+<li class="toc-entry toc-h4"><a href="#schedulesetstart">ScheduleSetStart</a></li>
 <li class="toc-entry toc-h4"><a href="#set">Set</a></li>
 </ul>
 </li>
