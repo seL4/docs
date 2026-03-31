@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-03-31 04:08:58 +0000 -->
+<!-- Page last generated 2026-03-31 05:52:15 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Microkit User Manual (v2.1.0) | seL4 docs</title>
+    <title>Microkit User Manual (2.2.0) | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/manual/latest/">
-    <link href="/assets/css/sel4.css?v=1774930138" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1774936335" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -534,7 +534,7 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="microkit-user-manual-v210">Microkit User Manual (v2.1.0)</h1>
+  <h1 id="microkit-user-manual-220">Microkit User Manual (2.2.0)</h1>
 
 <p>This is a web version of the manual, you can find a PDF <a href="/projects/microkit/manual/latest/microkit_user_manual.pdf">here</a> as well as in the
 SDK at <code class="language-plaintext highlighter-rouge">doc/microkit_user_manual.pdf</code>.</p>
@@ -574,7 +574,7 @@ Rather than a single <code class="language-plaintext highlighter-rouge">main</co
 <p>On ARM and RISC-V, the individual programs are combined to produce a single bootable <em>system image</em>.
 The format of the image is suitable for loading by the target board’s bootloader.</p>
 
-<p>On x86-64, there are two ELF images invovled. One for the seL4 kernel, and one for the initialiser that
+<p>On x86-64, there are two ELF images involved. One for the seL4 kernel, and one for the initialiser that
 setups up the Microkit system. These are loaded by a Multiboot 2 compliant bootloader.</p>
 
 <p>The Microkit tool, which is provided as part of the SDK, is used to generate the system image(s).</p>
@@ -727,10 +727,21 @@ protection domain can only ever manage a single virtual machine.</p>
 
 <h3 id="mr">Memory Regions</h3>
 
-<p>A <em>memory region</em> is a contiguous range of physical memory.
-A memory region may have a <em>fixed</em> physical address.
-For memory regions without a fixed physical address, the physical address is allocated as part of the build process.
-Typically, memory regions with a fixed physical address represent memory-mapped device registers.</p>
+<p>A <em>memory region</em> is a range of memory.</p>
+
+<p>A memory region has a <em>fixed</em> physical address if it either:</p>
+
+<ol>
+  <li>has an explicitly defined physical address, or</li>
+  <li>is a subject of a <code class="language-plaintext highlighter-rouge">setvar</code> element with a <code class="language-plaintext highlighter-rouge">region_paddr</code> attribute
+(See <a href="#sysdesc">System Description File</a>). In this case
+the tool will automatically choose a suitable physical address.</li>
+</ol>
+
+<p>For memory regions without a fixed physical address, it is not guaranteed for
+it to be contiguous in physical memory.</p>
+
+<p>Typically, memory regions with a fixed physical address represent memory-mapped device registers or DMA regions.</p>
 
 <p>Memory regions that are within main memory are zero-initialised.</p>
 
@@ -754,6 +765,16 @@ The mapping has a number of attributes, which include:</p>
 
 <p><strong>Note:</strong> When a memory region is mapped into multiple protection
 domains, the attributes used for different mappings may vary.</p>
+
+<h4 id="prefilling">Prefilling</h4>
+
+<p>A <em>memory region</em> may be prefilled with data from a file at build time
+by specifying the file’s name in the [System Description File]{#sysdesc}.</p>
+
+<p>In this case, specifying the memory region’s size become optional. If
+a size isn’t specified, the memory region will be sized by the length
+of the prefill file, rounded up to the smallest page size or the user
+specified page size.</p>
 
 <h3 id="channels">Channels</h3>
 
@@ -963,7 +984,8 @@ The format of the system description is described in a subsequent chapter.</p>
 
 <p>Usage:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [-o OUTPUT] [-r REPORT] [--capdl-json CAPDL_SPEC] [--image-type {binary,elf,uimage}]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [-o OUTPUT] [-r REPORT]
+          [--capdl-json CAPDL_SPEC] [--image-type {binary,elf,uimage}]
           --board [BOARD] --config CONFIG [--search-path [SEARCH_PATH ...]] system
 </code></pre></div></div>
 
@@ -1075,9 +1097,12 @@ void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq);
 seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg);
 void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value);
 void microkit_arm_smc_call(seL4_ARM_SMCContext *args, seL4_ARM_SMCContext *response);
-void microkit_x86_ioport_write_8(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data);
-void microkit_x86_ioport_write_16(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data);
-void microkit_x86_ioport_write_32(microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word data);
+void microkit_x86_ioport_write_8(microkit_ioport ioport_id,
+                                 seL4_Word port_addr, seL4_Word data);
+void microkit_x86_ioport_write_16(microkit_ioport ioport_id,
+                                  seL4_Word port_addr, seL4_Word data);
+void microkit_x86_ioport_write_32(microkit_ioport ioport_id,
+                                  seL4_Word port_addr, seL4_Word data);
 seL4_Uint8 microkit_x86_ioport_read_8(microkit_ioport ioport_id, seL4_Word port_addr);
 seL4_Uint16 microkit_x86_ioport_read_16(microkit_ioport ioport_id, seL4_Word port_addr);
 seL4_Uint32 microkit_x86_ioport_read_32(microkit_ioport ioport_id, seL4_Word port_addr);
@@ -1087,7 +1112,8 @@ seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field);
 void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value);
 void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id,
                                      seL4_Word port_addr, seL4_Word length);
-void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length);
+void microkit_vcpu_x86_disable_ioport(microkit_child vcpu,
+                                      seL4_Word port_addr, seL4_Word length);
 void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs);
 </code></pre></div></div>
 
@@ -1361,7 +1387,9 @@ with ID <code class="language-plaintext highlighter-rouge">vcpu</code> using the
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_INTERRUPTION_INFO</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PIN_EXECUTION_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PRIMARY_PROCESSOR_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_SECONDARY_PROCESSOR_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXCEPTION_BITMAP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXIT_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR0</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR3</code></li>
@@ -1446,6 +1474,7 @@ are not disabled.</p>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PIN_EXECUTION_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PRIMARY_PROCESSOR_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_SECONDARY_PROCESSOR_CONTROLS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXIT_CONTROLS</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR3</code></li>
   <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR0</code></li>
@@ -1516,7 +1545,7 @@ the struct of registers <code class="language-plaintext highlighter-rouge">seL4_
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the protection domain</li>
-  <li><code class="language-plaintext highlighter-rouge">priority</code>: The priority of the protection domain (integer 0 to 254).</li>
+  <li><code class="language-plaintext highlighter-rouge">priority</code>: The priority of the protection domain (integer 0 to 254). Defaults to 0.</li>
   <li><code class="language-plaintext highlighter-rouge">budget</code>: (optional) The PD’s budget in microseconds; defaults to 1,000.</li>
   <li><code class="language-plaintext highlighter-rouge">period</code>: (optional) The PD’s period in microseconds; must not be smaller than the budget; defaults to the budget.</li>
   <li><code class="language-plaintext highlighter-rouge">passive</code>: (optional) Indicates that the protection domain will be passive and thus have its scheduling context removed after initialisation; defaults to false.</li>
@@ -1535,19 +1564,28 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar</code>: (zero or more) Describes variable rewriting.</li>
   <li><code class="language-plaintext highlighter-rouge">protection_domain</code>: (zero or more) Describes a child protection domain.</li>
   <li><code class="language-plaintext highlighter-rouge">virtual_machine</code>: (zero or one) Describes a child virtual machine.</li>
+  <li><code class="language-plaintext highlighter-rouge">ioport</code>: (zero or more) Describes an I/O port, x86-64 only.</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">program_image</code> element has a single <code class="language-plaintext highlighter-rouge">path</code> attribute describing the path to an ELF file.</p>
+<p>The <code class="language-plaintext highlighter-rouge">program_image</code> element has the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">path</code>: path to an ELF file.</li>
+  <li><code class="language-plaintext highlighter-rouge">path_for_symbols</code>: (optional) path to an ELF that will be used just for searching up and patching symbols rather than
+                    the ELF specified in <code class="language-plaintext highlighter-rouge">path</code>.</li>
+</ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">map</code> element has the following attributes:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">mr</code>: Identifies the memory region to map.</li>
   <li><code class="language-plaintext highlighter-rouge">vaddr</code>: Identifies the virtual address at which to map the memory region.</li>
-  <li><code class="language-plaintext highlighter-rouge">perms</code>: Identifies the permissions with which to map the memory region. Can be a combination of <code class="language-plaintext highlighter-rouge">r</code> (read), <code class="language-plaintext highlighter-rouge">w</code> (write), and <code class="language-plaintext highlighter-rouge">x</code> (eXecute), with the exception of a write-only mapping (just <code class="language-plaintext highlighter-rouge">w</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">perms</code>: Identifies the permissions with which to map the memory region. Can be a combination of <code class="language-plaintext highlighter-rouge">r</code> (read), <code class="language-plaintext highlighter-rouge">w</code> (write), and <code class="language-plaintext highlighter-rouge">x</code> (eXecute), with the exception of a write-only mapping (just <code class="language-plaintext highlighter-rouge">w</code>).
+         Defaults to read-write.</li>
   <li><code class="language-plaintext highlighter-rouge">cached</code>: (optional) Determines if mapped with caching enabled or disabled. Defaults to <code class="language-plaintext highlighter-rouge">true</code>.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_vaddr</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the virtual address of the memory region.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_size</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the size of the memory region.</li>
+  <li><code class="language-plaintext highlighter-rouge">setvar_prefill_size</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the size of the prefilled data.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes on ARM and RISC-V:</p>
@@ -1559,19 +1597,19 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier of the IRQ.</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes when registering X86_64 IOAPIC interrupts:</p>
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes when registering x86-64 IOAPIC interrupts:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
   <li><code class="language-plaintext highlighter-rouge">pin</code>: IOAPIC pin that generates the interrupt.</li>
   <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to.</li>
   <li><code class="language-plaintext highlighter-rouge">ioapic</code>: (optional) Zero based index of the IOAPIC to get the interrupt from. Defaults to 0.</li>
-  <li><code class="language-plaintext highlighter-rouge">level</code>: (optional) Whether the IRQ is level triggered (1) or edge triggered (0). Defaults to level (1).</li>
-  <li><code class="language-plaintext highlighter-rouge">polarity</code>: (optional) Whether the line polarity is high (1) or low (0). Defaults to high (1).</li>
+  <li><code class="language-plaintext highlighter-rouge">trigger</code>: (optional) Whether the IRQ is edge triggered (“edge”) or level triggered (“level”). Defaults to “level”.</li>
+  <li><code class="language-plaintext highlighter-rouge">polarity</code>: (optional) Whether the line polarity is high (“high”) or low (“low”). Defaults to “high”.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier of the IRQ.</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes when registering X86_64 MSI interrupts:</p>
+<p>The <code class="language-plaintext highlighter-rouge">irq</code> element has the following attributes when registering x86-64 MSI interrupts:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
@@ -1640,9 +1678,12 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the memory region</li>
-  <li><code class="language-plaintext highlighter-rouge">size</code>: Size of the memory region in bytes (must be a multiple of the page size)</li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: Size of the memory region in bytes (must be a multiple of the page size). This can
+        be omitted if the memory region is has <code class="language-plaintext highlighter-rouge">prefill_path</code>, the size will be determined by
+        the length of the file given.</li>
   <li><code class="language-plaintext highlighter-rouge">page_size</code>: (optional) Size of the pages used in the memory region; must be a supported page size if provided. Defaults to the largest page size for the target architecture that the memory region is aligned to.</li>
   <li><code class="language-plaintext highlighter-rouge">phys_addr</code>: (optional) The physical address for the start of the memory region (must be a multiple of the page size).</li>
+  <li><code class="language-plaintext highlighter-rouge">prefill_path</code>: (optional) Path to a file containing data that the memory region will be filled with at initialisation.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">memory_region</code> element does not support any child elements.</p>
@@ -1695,6 +1736,7 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
 <p>This chapter describes the board support packages that are available in the SDK.</p>
 
 <p>The currently supported platforms are:</p>
+
 <ul>
   <li>ariane</li>
   <li>cheshire</li>
@@ -1703,12 +1745,14 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
   <li>imx8mp_evk</li>
   <li>imx8mp_iotgate</li>
   <li>imx8mq_evk</li>
+  <li>kria_k26</li>
   <li>maaxboard</li>
   <li>odroidc2</li>
   <li>odroidc4</li>
   <li>qemu_virt_aarch64</li>
   <li>qemu_virt_riscv64</li>
   <li>rockpro64</li>
+  <li>rock3b</li>
   <li>rpi4b_1gb</li>
   <li>rpi4b_2gb</li>
   <li>rpi4b_4gb</li>
@@ -1823,6 +1867,21 @@ Build the firmware payload using platform <code class="language-plaintext highli
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x41000000
 </code></pre></div></div>
+
+<h3 id="kria_k26">Kria K26</h3>
+
+<p>The <a href="https://www.amd.com/en/products/system-on-modules/kria/k26.html">Kria K26</a> is highly similar
+to the ZCU102, with slight differences in memory regions and the base UART controller.</p>
+
+<p>To run the built image on the board, you have to use properly patched U-Boot - please see the <a href="#zcu102">section for ZCU102</a>, for the details.</p>
+
+<p>You have to load the binary file into memory and run it:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ZynqMP&gt; tftpboot 0x40000000 loader.img
+...
+ZynqMP&gt; go 0x40000000
+</code></pre></div></div>
+
+<p>A QEMU emulator is not available for the Kria K26 at this stage.</p>
 
 <h3 id="maaxboard">MaaXBoard</h3>
 
@@ -1974,6 +2033,20 @@ U-Boot commands:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; go 0x30000000
 </code></pre></div></div>
+
+<h3 id="rock3b">Radxa ROCK 3B</h3>
+
+<p>Support is available for the Radxa ROCK 3B platform which is based on the Rockchip RK3568 SoC.</p>
+
+<p>Since the platform relies on some closed-source binary blobs for first stage bootloader and then ARM’s TrustZone A, we need to compile the U-Boot including these images. Detailed instructions on how to do that are available <a href="https://docs.sel4.systems/Hardware/rock3b.html">here</a>.</p>
+
+<p>Once the proper U-Boot image is in place, you can simply load the <code class="language-plaintext highlighter-rouge">loader.img</code> on the board and run it like that (this is assuming you have the TFTP server set up):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; tftp 0x30000000 loader.img
+=&gt; go 0x30000000
+</code></pre></div></div>
+
+<p>For more booting options, please refer to the seL4 <a href="https://docs.sel4.systems/Hardware/rock3b.html">board setup guide</a>.</p>
 
 <h3 id="star64">Pine64 Star64</h3>
 
@@ -2131,12 +2204,14 @@ is configurable at run time with the <code class="language-plaintext highlighter
 <p>To obtain a bootable ISO image, a Multiboot 2-compliant bootloader must be used. Please refer to your
 bootloader’s documentations.</p>
 
-<h3 id="x86_64_generic_vtx">x86_64 generic</h3>
+<h3 id="x86_64_generic_vtx">x86-64 generic (with VT-x)</h3>
 
 <p>This board supports x86-64 platforms with generic microarchitecture and virtualisation.</p>
 
-<p>This configuration assumes Intel VT-x support. Currently, only 1 vCPU is supported per virtual machine
-on x86-64.</p>
+<p>This configuration assumes Intel VT-x support. AMD-V is (at this time) not supported by seL4,
+so running x86-64 virtual machines on Microkit will require an Intel CPU with VT-x.</p>
+
+<p>Currently, only 1 vCPU is supported per virtual machine on x86-64.</p>
 
 <p>The boot process is identical to <a href="#x86_64_generic">x86-64 generic</a>.</p>
 
@@ -2462,7 +2537,11 @@ static-architecture of Microkit systems.</p>
 </ul>
 </li>
 <li class="toc-entry toc-h3"><a href="#vm">Virtual Machines</a></li>
-<li class="toc-entry toc-h3"><a href="#mr">Memory Regions</a></li>
+<li class="toc-entry toc-h3"><a href="#mr">Memory Regions</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#prefilling">Prefilling</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#channels">Channels</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#pp">Protected procedures</a></li>
@@ -2564,6 +2643,7 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#imx8mm_evk">i.MX8MM-EVK</a></li>
 <li class="toc-entry toc-h3"><a href="#imx8mp_evk">i.MX8MP-EVK</a></li>
 <li class="toc-entry toc-h3"><a href="#imx8mq_evk">i.MX8MQ-EVK</a></li>
+<li class="toc-entry toc-h3"><a href="#kria_k26">Kria K26</a></li>
 <li class="toc-entry toc-h3"><a href="#maaxboard">MaaXBoard</a></li>
 <li class="toc-entry toc-h3"><a href="#odroidc2">Odroid-C2</a></li>
 <li class="toc-entry toc-h3"><a href="#odroidc4">Odroid-C4</a></li>
@@ -2573,11 +2653,12 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</a></li>
 <li class="toc-entry toc-h3"><a href="#rpi4b_1gb">Raspberry Pi 4B</a></li>
 <li class="toc-entry toc-h3"><a href="#rockpro64">Pine64 ROCKPro64</a></li>
+<li class="toc-entry toc-h3"><a href="#rock3b">Radxa ROCK 3B</a></li>
 <li class="toc-entry toc-h3"><a href="#star64">Pine64 Star64</a></li>
 <li class="toc-entry toc-h3"><a href="#tqma8xqp1gb">TQMa8XQP 1GB</a></li>
 <li class="toc-entry toc-h3"><a href="#ultra96v2">Ultra96V2</a></li>
 <li class="toc-entry toc-h3"><a href="#x86_64_generic">x86-64 generic</a></li>
-<li class="toc-entry toc-h3"><a href="#x86_64_generic_vtx">x86_64 generic</a></li>
+<li class="toc-entry toc-h3"><a href="#x86_64_generic_vtx">x86-64 generic (with VT-x)</a></li>
 <li class="toc-entry toc-h3"><a href="#zcu102">ZCU102</a></li>
 <li class="toc-entry toc-h3"><a href="#adding-platform-support">Adding Platform Support</a>
 <ul>
