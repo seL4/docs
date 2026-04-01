@@ -183,20 +183,20 @@ It spawns a secondary thread, and then interacts with it using a notification.</
 <pre><code>cd workspaces/root-task/spawn-thread
 make simulate
 </code></pre>
-<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
+<p>Explore <a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fe2766092c03d631cac65c3baea6d5b54d5483e6/workspaces/root-task/spawn-thread/src/main.rs">main.rs</a> at will.
 If you're used to using <a href="https://github.com/seL4/seL4_libs">seL4_libs</a>, you may notice that our Rust code here is much more low-level and verbose.
 That is because we aren't using any higher-level seL4-related libraries such as
 <a href="https://github.com/seL4/seL4_libs/blob/master/libsel4utils/include/sel4utils/thread.h"><code>&lt;sel4utils/thread.h&gt;</code></a>.
 Our code is more like spawning a thread using <code>&lt;sel4/sel4.h&gt;</code> alone.
 Note, though, that our code does depend on a few Rust language runtime building block crates such as
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_initialize_tls/index.html"><code>sel4-initialize-tls</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_initialize_tls/index.html"><code>sel4-initialize-tls</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4_stack/index.html"><code>sel4-stack</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_stack/index.html"><code>sel4-stack</code></a>
 .</p>
 <p>The exercises in this chapter are only concerned with the following two functions, which run concurrently:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fe2766092c03d631cac65c3baea6d5b54d5483e6/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_nfn: sel4::cap::Notification) {
@@ -209,7 +209,7 @@ and
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/2f73cc27eeee18aaf373a298c4d55499d59a1789/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/fe2766092c03d631cac65c3baea6d5b54d5483e6/workspaces/root-task/spawn-thread/src/main.rs#L81-L85">workspaces/root-task/spawn-thread/src/main.rs:81:85</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_nfn: sel4::cap::Notification) {
@@ -221,7 +221,7 @@ and
 </div>
 </div>
 <p><code>secondary_thread_main()</code> runs in the secondary thread, and <code>interact_with_secondary_thread()</code> runs in the secondary thread.</p>
-<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('47552360f6184b759a490f56d93b4e1885a40179')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/47552360f6184b759a490f56d93b4e1885a40179"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6a"><a class="header" href="#step-6a">Step 6.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ede80640630e6d5ef5d3b6aab43d253baba3ae4e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ede80640630e6d5ef5d3b6aab43d253baba3ae4e"> <i class="fa fa-github"></i> </a></a></h2>
 <p>In this step, we introduce IPC between <code>secondary_thread_main()</code> and <code>interact_with_secondary_thread</code> by changing</p>
 <pre><code>inter_thread_nfn: sel4::cap::Notification
 </code></pre>
@@ -229,53 +229,53 @@ and
 <pre><code>inter_thread_ep: sel4::cap::Endpoint
 </code></pre>
 <p>Before, the two sides of the notification communicated via
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>inter_thread_nfn.signal()</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>inter_thread_nfn.signal()</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>inter_thread_nfn.wait()</code></a>.</p>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>inter_thread_nfn.wait()</code></a>.</p>
 <p>Now, communication over this IPC endpoint will happen by
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>inter_thread_ep.send()</code></a> and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>inter_thread_ep.recv()</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>inter_thread_ep.send()</code></a> and
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>inter_thread_ep.recv()</code></a>
 .</p>
 <!-- , as described in
 [seL4 Reference Manual § 4.2 (Endpoints)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2). -->
-<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
 <code>send()</code> and <code>recv()</code> block until the two sides of the object rendezvous, at which point a message is passed from the sender to the receiver.
 This message may contain data and capabilities.</p>
 <p>Each thread is associated with a special page of memory called an IPC buffer.
-The sender populates its own IPC buffer with data and/or CPtrs, and then calls <code>send()</code> with a metadata value called the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.
+The sender populates its own IPC buffer with data and/or CPtrs, and then calls <code>send()</code> with a metadata value called the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.
 The kernel copies data from the sender's IPC buffer into that of the receiver, and/or capabilities from the sender's CSpace into that of the receiver.
 The kernel uses the <code>MessageInfo</code> to determine how much data to copy between the two IPC buffers
-(the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.length"><code>length</code></a> field)
+(the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html#method.length"><code>length</code></a> field)
 and how many CPtrs to read from the IPC buffers for copying betwen CSpaces
 (the
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.caps_unwrapped"><code>caps_unwrapped</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html#method.caps_unwrapped"><code>caps_unwrapped</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.extra_caps"><code>extra_caps</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html#method.extra_caps"><code>extra_caps</code></a>
 fields).
 Finally, the kernel passes the <code>MessageInfo</code>, and control, to the receiver.</p>
 <p>In Rust, the sender and receiver can interact with their own IPC buffer using
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>.
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>.
 Message data is held in the message registers (an array of machine words), which is a field of the IPC buffer (
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_regs"><code>msg_regs</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_regs"><code>msg_regs</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_regs_mut"><code>msg_regs_mut</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_regs_mut"><code>msg_regs_mut</code></a>
 ).
 The <code>length</code> field of the <code>MessageInfo</code> specifies how many message registers will be copied into the receiver's IPC buffer.</p>
 <p>One can also view the message registers as an array of bytes using
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes"><code>msg_bytes</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes"><code>msg_bytes</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes_mut"><code>msg_bytes_mut</code></a>.
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.IpcBuffer.html#method.msg_bytes_mut"><code>msg_bytes_mut</code></a>.
 In this case, one rounds the length of their message up to the nearest multiple of the machine word size when computing the message length for the <code>MessageInfo</code>.</p>
-<p>The <code>MessageInfo</code> also includes a few bits of data called a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.label"><code>label</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html#method.label_width"><code>label_width</code></a> bits wide) that is not interpreted by the kernel.</p>
-<p>In Rust, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfoBuilder.html"><code>MessageInfoBuilder</code></a> type is a clear and concise way to construct a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.</p>
-<p>In Rust, to smooth out differences between the mixed-criticality and legacy kernel schedulers, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a> always takes a <code>reply_authority</code> argument.
+<p>The <code>MessageInfo</code> also includes a few bits of data called a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html#method.label"><code>label</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html#method.label_width"><code>label_width</code></a> bits wide) that is not interpreted by the kernel.</p>
+<p>In Rust, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfoBuilder.html"><code>MessageInfoBuilder</code></a> type is a clear and concise way to construct a <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.MessageInfo.html"><code>MessageInfo</code></a>.</p>
+<p>In Rust, to smooth out differences between the mixed-criticality and legacy kernel schedulers, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a> always takes a <code>reply_authority</code> argument.
 Under legacy scheduler configurations, which is what this text uses, this argument can be of type <code>()</code>.</p>
 <p>Taking all of this together, let's use our IPC endpoint to send an empty message:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/47552360f6184b759a490f56d93b4e1885a40179/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/ede80640630e6d5ef5d3b6aab43d253baba3ae4e/workspaces/root-task/spawn-thread/src/main.rs#L75-L79">workspaces/root-task/spawn-thread/src/main.rs:75:79 after 6.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn secondary_thread_main(inter_thread_ep: sel4::cap::Endpoint) {
@@ -288,7 +288,7 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/47552360f6184b759a490f56d93b4e1885a40179/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/ede80640630e6d5ef5d3b6aab43d253baba3ae4e/workspaces/root-task/spawn-thread/src/main.rs#L81-L87">workspaces/root-task/spawn-thread/src/main.rs:81:87 after 6.A</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn interact_with_secondary_thread(inter_thread_ep: sel4::cap::Endpoint) {
@@ -301,21 +301,21 @@ Under legacy scheduler configurations, which is what this text uses, this argume
 </code></pre>
 </div>
 </div>
-<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('144d391168ee9b0b467cc9ac79cf8b11fca53fef')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/144d391168ee9b0b467cc9ac79cf8b11fca53fef"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-6b-exercise"><a class="header" href="#step-6b-exercise">Step 6.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('004322611003c2543841c034c4af516299c08411')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/004322611003c2543841c034c4af516299c08411"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> use
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.with_ipc_buffer.html"><code>sel4::with_ipc_buffer</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
 to send a message with some data.</p>
-<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('47dfa98ddeb9f274b6b2d61b0cdfc9bb0b824922')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/47dfa98ddeb9f274b6b2d61b0cdfc9bb0b824922"> <i class="fa fa-github"></i> </a></a></h2>
-<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
+<h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('fed3f104e95a8cf4cabcee750f7927ba550a3016')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/fed3f104e95a8cf4cabcee750f7927ba550a3016"> <i class="fa fa-github"></i> </a></a></h2>
+<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
 <p><strong>Exercise:</strong> Change the</p>
 <pre><code>inter_thread_ep.send()
 </code></pre>
 <p>in <code>secondary_thread_main()</code> to</p>
 <pre><code>inter_thread_ep.call()
 </code></pre>
-<p>and modify <code>interact_with_secondary_thread()</code> to <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-unwind/doc/sel4/fn.reply.html"><code>sel4::reply</code></a> with a message.</p>
+<p>and modify <code>interact_with_secondary_thread()</code> to <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.reply.html"><code>sel4::reply</code></a> with a message.</p>
 
                     </main>
 
