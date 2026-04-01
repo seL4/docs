@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 mathjax: true
 ---
 
-# Microkit User Manual (2.2.0)
+# Microkit User Manual (v2.2.0)
 
 This is a web version of the manual, you can find a PDF [here](microkit_user_manual.pdf) as well as in the
 SDK at `doc/microkit_user_manual.pdf`.
