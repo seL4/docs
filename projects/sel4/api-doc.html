@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-04-28 04:26:24 +0000 -->
+<!-- Page last generated 2026-04-29 04:23:07 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1777350384" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1777436587" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -4643,7 +4643,7 @@ and fault handler.</p>
 <h4 id="map">Map</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_EPTPD_Map</code></p>
 
-<p>Map an EPT page directory.</p>
+<p>Map a Page Directory (PD) into a VCPU Extended Page Table.</p>
 
 <table>
   <thead>
@@ -4709,7 +4709,7 @@ and fault handler.</p>
 <h4 id="unmap">Unmap</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_EPTPD_Unmap</code></p>
 
-<p>Unmap an EPT page directory.</p>
+<p>Unmap a Page Directory (PD) from a VCPU Extended Page Table.</p>
 
 <table>
   <thead>
@@ -4758,7 +4758,7 @@ and fault handler.</p>
 <h4 id="map-1">Map</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_EPTPDPT_Map</code></p>
 
-<p>Map an EPT page directory page table.</p>
+<p>Map a Page-Directory Pointers Table (PDPT) into a VCPU Extended Page Table.</p>
 
 <table>
   <thead>
@@ -4824,7 +4824,7 @@ and fault handler.</p>
 <h4 id="unmap-1">Unmap</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_EPTPDPT_Unmap</code></p>
 
-<p>Unmap an EPT page directory page table.</p>
+<p>Unmap a Page-Directory Pointer Table (PDPT) into a VCPU Extended Page Table.</p>
 
 <table>
   <thead>
@@ -4873,7 +4873,7 @@ and fault handler.</p>
 <h4 id="map-2">Map</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_EPTPT_Map</code></p>
 
-<p>Map an EPT page table.</p>
+<p>Map a Page Table (PT) into a VCPU Extended Page Table.</p>
 
 <table>
   <thead>
@@ -4939,7 +4939,7 @@ and fault handler.</p>
 <h4 id="unmap-2">Unmap</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_EPTPT_Unmap</code></p>
 
-<p>Unmap an EPT page table.</p>
+<p>Unmap a Page Table (PT) from a VCPU Extended Page Table.</p>
 
 <table>
   <thead>
@@ -5532,7 +5532,7 @@ and fault handler.</p>
 <h4 id="map-ept">Map EPT</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_Page_MapEPT</code></p>
 
-<p>Map an extended page table.</p>
+<p>Map a page into a VCPU Extended Page Table (EPT).</p>
 
 <table>
   <thead>
@@ -5550,13 +5550,13 @@ and fault handler.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_X86_EPTPML4</code></td>
-      <td><code class="language-plaintext highlighter-rouge">vspace</code></td>
-      <td>Capability to the VSpace which will contain the mapping</td>
+      <td><code class="language-plaintext highlighter-rouge">eptpml4</code></td>
+      <td>Capability to the EPT root which will contain the mapping.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_Word</code></td>
-      <td><code class="language-plaintext highlighter-rouge">vaddr</code></td>
-      <td>Virtual address at which to map page.</td>
+      <td><code class="language-plaintext highlighter-rouge">gpa</code></td>
+      <td>Guest physical address to map the page into.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_CapRights_t</code></td>
@@ -5583,15 +5583,15 @@ and fault handler.</p>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_AlignmentError</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">vaddr</code>  is not aligned to the page size of  <code class="language-plaintext highlighter-rouge">_service</code>.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">gpa</code>  is not aligned to the page size of  <code class="language-plaintext highlighter-rouge">_service</code>.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>A mapping already exists in  <code class="language-plaintext highlighter-rouge">vspace</code>  at  <code class="language-plaintext highlighter-rouge">vaddr</code>.</td>
+      <td>A mapping already exists in  <code class="language-plaintext highlighter-rouge">eptpml4</code>  at  <code class="language-plaintext highlighter-rouge">gpa</code>.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_FailedLookup</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at  <code class="language-plaintext highlighter-rouge">vaddr</code>. Or,  <code class="language-plaintext highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">eptpml4</code>  does not have a paging structure at the required level mapped at  <code class="language-plaintext highlighter-rouge">gpa</code>. Or,  <code class="language-plaintext highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
@@ -5599,7 +5599,7 @@ and fault handler.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidCapability</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  or  <code class="language-plaintext highlighter-rouge">vspace</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is already mapped. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  has an unsupported page size.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  or  <code class="language-plaintext highlighter-rouge">eptpml4</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">eptpml4</code>  is not assigned to an ASID pool. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is already mapped. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  has an unsupported page size.</td>
     </tr>
   </tbody>
 </table>
