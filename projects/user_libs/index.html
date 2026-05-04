@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-05-04 04:29:55 +0000 -->
+<!-- Page last generated 2026-05-04 08:02:54 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>User-level C libraries | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/user_libs/">
-    <link href="/assets/css/sel4.css?v=1777868995" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1777881774" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -2055,14 +2055,6 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
             <td>Supported on the Exynos SoCs</td>
         </tr>
         <tr>
-            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/exynos/ltimer.c</code></pre></td>
-            <td class="prose-p:m-0 prose-p:p-0">
-              <p>ltimer implementation for the Exynos platforms using the PWM timers</p>
-
-            </td>
-            <td>Supported on the Exynos SoCs</td>
-        </tr>
-        <tr>
             <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">src/plat/tx2/mux.c</code></pre></td>
             <td class="prose-p:m-0 prose-p:p-0">
               <p>Pin controller driver for the TX2 MUX based off on NVIDIA’s L4T implementation</p>
@@ -2118,16 +2110,6 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
   </div>
   <div class="prose-p:m-0 prose-p:p-0">
     <p>Pinctrl driver for the pinctrl device in the Exynos SoCs</p>
-
-  </div>
-  <div class="mt-2 text-lighter">
-      Supported on the Exynos SoCs
-  </div>
-  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
-    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/exynos/ltimer.c</code></pre></div>
-  </div>
-  <div class="prose-p:m-0 prose-p:p-0">
-    <p>ltimer implementation for the Exynos platforms using the PWM timers</p>
 
   </div>
   <div class="mt-2 text-lighter">
@@ -2374,12 +2356,28 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
             <td>Supported on pc99 platform</td>
         </tr>
         <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/omap/ltimer.c</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>ltimer implementation for the OMAP platforms using GPT timers</p>
+
+            </td>
+            <td>Supported on OMAP SoCs</td>
+        </tr>
+        <tr>
             <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/imx/ltimer.c</code></pre></td>
             <td class="prose-p:m-0 prose-p:p-0">
               <p>ltimer implementation for the i.MX platforms using a combination of GPT and EPIT timers</p>
 
             </td>
             <td>Supported on i.MX SoCs</td>
+        </tr>
+        <tr>
+            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/exynos/ltimer.c</code></pre></td>
+            <td class="prose-p:m-0 prose-p:p-0">
+              <p>ltimer implementation for the Exynos platforms using the PWM timers</p>
+
+            </td>
+            <td>Supported on the Exynos SoCs</td>
         </tr>
         <tr>
             <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/zynq/ltimer.c</code></pre></td>
@@ -2501,6 +2499,16 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
       Supported on pc99 platform
   </div>
   <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/omap/ltimer.c</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>ltimer implementation for the OMAP platforms using GPT timers</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Supported on OMAP SoCs
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
     <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/imx/ltimer.c</code></pre></div>
   </div>
   <div class="prose-p:m-0 prose-p:p-0">
@@ -2509,6 +2517,16 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
   </div>
   <div class="mt-2 text-lighter">
       Supported on i.MX SoCs
+  </div>
+  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
+    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/exynos/ltimer.c</code></pre></div>
+  </div>
+  <div class="prose-p:m-0 prose-p:p-0">
+    <p>ltimer implementation for the Exynos platforms using the PWM timers</p>
+
+  </div>
+  <div class="mt-2 text-lighter">
+      Supported on the Exynos SoCs
   </div>
   <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
     <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/zynq/ltimer.c</code></pre></div>
@@ -2746,14 +2764,6 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
             <td>Supported on exynos4 platforms. Currently can only be used to enable power for USB PHYs.</td>
         </tr>
         <tr>
-            <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/omap/ltimer.c</code></pre></td>
-            <td class="prose-p:m-0 prose-p:p-0">
-              <p>ltimer implementation for the OMAP platforms using GPT timers</p>
-
-            </td>
-            <td>Supported on OMAP SoCs</td>
-        </tr>
-        <tr>
             <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/exynos/tmu.c</code></pre></td>
             <td class="prose-p:m-0 prose-p:p-0">
               <p>TMU driver for the TMU (Thermal Management Unit) device in the Exynos SoCs</p>
@@ -2919,16 +2929,6 @@ and the seL4-specific parts in <code class="language-plaintext highlighter-rouge
   </div>
   <div class="mt-2 text-lighter">
       Supported on exynos4 platforms. Currently can only be used to enable power for USB PHYs.
-  </div>
-  <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
-    <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/omap/ltimer.c</code></pre></div>
-  </div>
-  <div class="prose-p:m-0 prose-p:p-0">
-    <p>ltimer implementation for the OMAP platforms using GPT timers</p>
-
-  </div>
-  <div class="mt-2 text-lighter">
-      Supported on OMAP SoCs
   </div>
   <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
     <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">mach/exynos/tmu.c</code></pre></div>
