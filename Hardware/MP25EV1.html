@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Porting seL4 to a new platform | seL4 docs</title>
+    <title>STM32MP25 EV1 | seL4 docs</title>
 
-    <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/porting.html">
+    <link rel="canonical" href="https://docs.sel4.systems/Hardware/MP25EV1.html">
     <link href="/assets/css/sel4.css?v=1779193910" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,7 +143,7 @@
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/manual.html">Manual</a>
         </li>
-        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/Hardware/">Supported platforms</a>
         </li>
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
@@ -186,7 +186,7 @@
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
         </li>
-        <li class="text-hi border-f_green-500 pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
           <a href="/projects/sel4/porting.html">Porting to a new platform</a>
         </li>
         <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
@@ -523,231 +523,96 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="porting-sel4-to-a-new-platform">Porting seL4 to a new platform</h1>
+  <h1 id="stm32mp25-ev1">STM32MP25 EV1</h1>
 
-<p>This section covers porting seL4 to a new ARM or RISC-V platform if it is not
-already covered in the list of <a href="../../Hardware/">supported seL4 platforms</a>.</p>
+<p><a href="https://www.st.com/en/evaluation-tools/stm32mp257f-ev1.html">STM32MP25 evaluation board</a></p>
 
-<h2 id="setup">Setup</h2>
+<table class="max-w-md">
+<tbody>
+<tr>
+<td>Platform</td> <td class="font-semibold">STM32MP25 EV1</td>
+</tr>
 
-<p>In order to load the seL4 image (via some means) it is important to have a working bootloader.
-We tend to use <a href="https://www.denx.de/wiki/U-Boot">U-Boot</a> as it is open source, reliable and supports many different architectures.</p>
+<tr>
+<td>Architecture</td> <td>ARMv8A, AArch64</td>
+</tr>
+<tr>
+<td>System-on-chip</td> <td>STM32MP25</td>
+</tr>
+<tr>
+<td>CPU</td> <td>Cortex-A35</td>
+</tr>
+<tr>
+<td>seL4 virtualisation support</td>
+<td>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
+</td>
+</tr>
+<tr>
+<td>seL4 SMMU support</td>
+<td>
+<span class="pl-0.5">&ndash;</span>
+</td>
+</tr>
+<tr>
+<td>Proofs</td>
+<td>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
+</td>
+</tr>
+<tr>
+<td>Proof configs</td>
+<td><a href="/projects/sel4/verified-configurations.html#AARCH64">AARCH64</a></td>
+</tr>
+<tr>
+<td>seL4 CMake platform name</td>
+<td><code>stm32mp2</code></td>
+</tr>
+<tr>
+<td>Contributed by</td> <td>STMicroelectronics</td>
+</tr>
 
-<p>There are a variety of ways of loading an seL4 image from U-Boot such as eMMC, TFTP, and USB.</p>
+<tr>
+<td>Maintained by</td> <td>STMicroelectronics</td>
+</tr>
 
-<h3 id="tftp-setup">TFTP setup</h3>
+</tbody>
+</table>
 
-<p>For setting up a TFTP server to transfer images over the network, you can follow the
-<a href="https://www.cse.unsw.edu.au/~cs9242/19/project/linux.shtml">UNSW Advanced Operating Systems course guide</a>.</p>
+<h2 id="installation">Installation</h2>
 
-<p>Once you get U-Boot up and running it is a good idea (if the platform is supported) to flash a
-Linux image onto the board. This way you can find the correct address to load the image into memory.
-This is also useful for debugging, as you can use the FDT file system to dump addresses from a running system.</p>
+<p>Instructions to boot the board are available on the <a href="https://wiki.st.com/stm32mpu/wiki/STM32MP25_Evaluation_boards_-_Starter_Package#Downloading_the_image_and_flashing_it_on_the_board">Starter package wiki</a>. These notes describe how to create a raw image to flash a Linux boot on a MicroSD card.
+The flash layout uses ext2 partitions, for seL4 only the <code class="language-plaintext highlighter-rouge">bootfs</code> partition is used.</p>
 
-<p>Once you have found the correct address to load, declare the boot command (where address 0x20000000 as an example):</p>
+<h3 id="arm-trusted-firmware-tf-a">ARM Trusted Firmware (TF-A)</h3>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">bootcmd</span><span class="o">=</span><span class="s2">"tftpboot 0x20000000 /path/to/image &amp;&amp; go 0x20000000"</span>
-saveenv
+<p>seL4 uses TF-A to start the AT35-TD BL2 U-boot and a secure monitor to serve RIF accesses. The default configuration enables a system watchdog that causes a reset if not rearmed, which might not be long enough for seL4 components.</p>
+
+<p>If necessary, disable the watchdog in <code class="language-plaintext highlighter-rouge">fdts/stm32mp257f-ev1.dts</code>. Build details are available on the <a href="https://wiki.st.com/stm32mpu/wiki/How_to_configure_TF-A_BL2">How to configure TF-A wiki</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp;iwdg1 {
+        timeout-sec = &lt;32&gt;;
+-       status = "okay";
++       status = "disabled";
+ };
 </code></pre></div></div>
 
-<p>For TFTP, you will also need to set some U-Boot environment variables:</p>
+<h2 id="booting">Booting</h2>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setenv ipaddr &lt;BOARD ADDRESS&gt;
-setenv serverip &lt;SERVER ADDRESS&gt;
-saveenv
+<p>Identify the partition number and verify the seL4 boot binary you just placed on your microSD card.
+Load and boot the image at <code class="language-plaintext highlighter-rouge">0x88000000</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STM32MP&gt; mmc part
+...
+STM32MP&gt; ext2ls mmc 0:8
+...
+STM32MP&gt; ext2load mmc 0:8 0x88000000 loader.img
+STM32MP&gt; go 0x88000000
 </code></pre></div></div>
-
-<p>The easiest way to find the proper load address is to query the <code class="language-plaintext highlighter-rouge">kernel_addr_r</code> variable. That’s the environment variable specifying the expected address at which the kernel’s binary will be found.</p>
-
-<h3 id="emmcsd-card-setup">eMMC/SD card setup</h3>
-
-<p>We can load an image with the following command (using <code class="language-plaintext highlighter-rouge">0x20000000</code> as an example):</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x20000000 /path/to/image
-</code></pre></div></div>
-
-<p>You can find more details in the <a href="https://docs.u-boot.org/en/latest/usage/cmd/fatload.html">U-Boot documentation</a>.</p>
-
-<h2 id="sel4">seL4</h2>
-
-<p>In order to have a successful port of seL4 to your target ARM or RISC-V platform you will need to go through the following steps.</p>
-
-<h3 id="device-tree">Device Tree</h3>
-
-<p>Device Trees are used by ARM and RISC-V platforms to describe the hardware platform.
-seL4 makes use of Device Trees at build time, which is why acquiring a Device Tree Source (DTS)
-for your platform is one of the first steps.</p>
-
-<p>seL4 relies on the DTS for the location and size of main memory as well as information
-about certain devices used by the kernel such as the timer. In debug mode, seL4 also
-makes use of the default serial device for debug output.</p>
-
-<p>Often the Device Tree Source will be included in the
-<a href="https://github.com/torvalds/linux">Linux kernel source</a>, from there you can decompile
-the device tree blob (DTB) from building the Linux kernel to get the Device Tree that
-Linux uses.</p>
-
-<p>You can compile the Linux Device Tree Sources into a final Device Tree Blob with:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nv">ARCH</span><span class="o">=</span>&lt;arm/arm64/riscv&gt; <span class="nv">CROSS_COMPILE</span><span class="o">=</span>&lt;TOOLCHAIN&gt; defconfig
-make <span class="nv">ARCH</span><span class="o">=</span>&lt;arm/arm64/riscv&gt; <span class="nv">CROSS_COMPILE</span><span class="o">=</span>&lt;TOOLCHAIN&gt; dtbs
-</code></pre></div></div>
-
-<p>The DTBs can be found in <code class="language-plaintext highlighter-rouge">arch/&lt;ARCH&gt;/boots/dts/</code>.</p>
-
-<p>The following command allows you to decompile the DTB:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtc <span class="nt">-I</span> dtb <span class="nt">-O</span> dts /path/to/dtb <span class="nt">-o</span> linux.dts
-</code></pre></div></div>
-
-<p>It should be noted that you may need to add device nodes depending on what Linux uses
-and what is required by seL4. For example, some platforms do not include a node for
-main memory in the Linux Device Tree. This is because Linux can get
-this information at run-time from a previous bootloader. This is not the case for seL4
-as it consumes the Device Tree at build-time.</p>
-
-<p>In the seL4 source, each platform has an overlay DTS that is responsible for dealing
-with seL4-specific device nodes. Below is an example
-(from the <a href="https://github.com/seL4/seL4/blob/master/src/plat/rockpro64/overlay-rockpro64.dts">ROCKPro64</a>):</p>
-
-<pre><code class="language-dts">/ {
-    chosen {
-        seL4,elfloader-devices =
-            "serial2",
-            &amp;{/psci},
-            &amp;{/timer};
-        seL4,kernel-devices =
-            "serial2",
-            &amp;{/interrupt-controller@fee00000},
-            &amp;{/timer};
-    };
-};
-</code></pre>
-
-<p>These overlay files give a good idea of what nodes seL4 requires in the DTS other than
-main memory.</p>
-
-<p>You will need to create a similar overlay DTS in <code class="language-plaintext highlighter-rouge">src/plat/&lt;platform&gt;/overlay-&lt;platform&gt;.dts</code>
-as part of the platform port.</p>
-
-<h3 id="hardware-generation-script">Hardware generation script</h3>
-
-<p>Depending on your platform and the way the DTS is defined you may need to modify the
-<code class="language-plaintext highlighter-rouge">seL4/tools/hardware_gen.py</code> script.</p>
-
-<p>From the above example the ROCKPro64 needed a memory node so that this script could
-define working memory. Other gotchas could include interrupt cells, interrupt numbers being
-mapped wrongly, or incorrect addresses.</p>
-
-<p>The kernel also expects drivers for:</p>
-
-<ul>
-  <li>the timer device.</li>
-  <li>the serial device.</li>
-  <li>the interrupt controller.</li>
-  <li>the IOMMU if the kernel is being built with IOMMU support.</li>
-</ul>
-
-<p>You can check all the supported drivers in <code class="language-plaintext highlighter-rouge">seL4/tools/hardware.yml</code>.</p>
-
-<p>If the platform has devices that do not already have corresponding drivers, you can add
-them in <code class="language-plaintext highlighter-rouge">seL4/src/drivers/</code> and <code class="language-plaintext highlighter-rouge">seL4/include/drivers/</code>.</p>
-
-<h3 id="kernel">Kernel</h3>
-
-<p>You will need to add <code class="language-plaintext highlighter-rouge">seL4/libsel4/sel4_plat_include/&lt;platform&gt;/sel4/plat/api/constants.h</code>.
-Depending on your platform, this is either empty or requires defining the value for <code class="language-plaintext highlighter-rouge">seL4_UserTop</code>.
-Look in the other platform files for examples similar to your platform.</p>
-
-<p>You will need to add a CMake configuration file for the platform at <code class="language-plaintext highlighter-rouge">kernel/src/plat/&lt;platform&gt;/config.cmake</code>.
-It is best to base the contents of this file off of other platforms of the same architecture.</p>
-
-<h2 id="testing-your-sel4-port">Testing your seL4 port</h2>
-
-<p>When you contribute your port to seL4, sel4test must execute successfully and so the next
-step to check that your port works would be to get
-<a href="../sel4test/">the seL4test project</a> working.</p>
-
-<h3 id="elf-loader">ELF-loader</h3>
-
-<p>Before we can run sel4test, we need to have seL4 booting first.</p>
-
-<p>Although we use U-Boot as a bootloader, there are additional steps needed to initialise the
-hardware and setup system images before we can boot seL4. This is the purpose of the
-<a href="../elfloader/">ELF-loader</a>.</p>
-
-<p>The code for the ELF-loader can be found in the <code class="language-plaintext highlighter-rouge">elfloader-tool</code> directory at the root of
-the <a href="https://github.com/seL4/seL4_tools">seL4_tools</a> repository.</p>
-
-<p>Depending on your platform, you may have to make changes to the ELF-loader, which is
-responsible for loading the kernel and any user-programs. The ELF-loader outputs to the
-serial, so needs to be able to access the UART.</p>
-
-<p>On RISC-V, outputting to UART is done via a call to the SBI layer so no changes are necessary.</p>
-
-<p>On ARM, there are a variety of existing UART drivers in <code class="language-plaintext highlighter-rouge">tools/elfloader-tool/src/drivers/uart/</code>.
-If the default serial is not supported by any of these drivers, you will have to
-provide a simple putchar implementation.</p>
-
-<p>If the system image that is produced by the ELF-loader build system needs be a particular file
-format (e.g binary or EFI) or needs to start at a particular physical address, you can
-configure the default platform options in <code class="language-plaintext highlighter-rouge">seL4_tools/cmake-tool/helpers/application_settings.cmake</code>.</p>
-
-<h3 id="sel4test">seL4test</h3>
-
-<p>seL4test needs user level serial and timer drivers to run. Add these drivers and the following
-files to <a href="https://github.com/seL4/util_libs/tree/master/libplatsupport">libplatsupport</a>
-in order to get the test suite running. The directory structure and
-files will look something like the following. Some of these files may not have anything in
-them but include them anyway to keep the build system happy.</p>
-
-<p>Use the other platforms as examples; generally you will have to configure the timer driver by
-reading the manual, it may have its own unique programming sequence and can sometimes be a bit tricky.</p>
-
-<p>If the technical reference manual does not contain enough detail, you may be able to gain more
-information by looking at the respective Linux driver for the device. This can be done by searching
-for the value of the ‘compatible’ field that is on each device node in a DTS in the Linux source code.</p>
-
-<p>You can find the physical addresses and interrupt numbers for each device in its platform reference
-manual and copy them into the right places.</p>
-
-<p><code class="language-plaintext highlighter-rouge">util_libs/libplatsupport/plat_include/&lt;platform&gt;/</code></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">clock.h</code></li>
-  <li><code class="language-plaintext highlighter-rouge">gpio.h</code></li>
-  <li><code class="language-plaintext highlighter-rouge">i2c.h</code></li>
-  <li><code class="language-plaintext highlighter-rouge">mux.h</code></li>
-  <li><code class="language-plaintext highlighter-rouge">serial.h</code></li>
-  <li><code class="language-plaintext highlighter-rouge">timer.h</code></li>
-</ul>
-
-<p><code class="language-plaintext highlighter-rouge">util_libs/libplatsupport/src/plat/&lt;platform&gt;/</code></p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">chardev.c</code></li>
-  <li><code class="language-plaintext highlighter-rouge">ltimer.c</code></li>
-  <li><code class="language-plaintext highlighter-rouge">serial.c</code></li>
-  <li><code class="language-plaintext highlighter-rouge">timer.c</code></li>
-</ul>
-
-<h3 id="sel4test-configurations">sel4test configurations</h3>
-
-<p>The default configuration of seL4 in sel4test is non-MCS, single-core, with no hypervisor mode.</p>
-
-<p>After confirming that the default configuration successfully runs (in both debug and release mode),
-it is a good idea to test the more complex configurations with your port as well.</p>
-
-<h3 id="gotchas">Gotchas</h3>
-
-<p>Incorrect address alignment and incorrect memory regions can cause instruction faults. One way to debug this, is
-to shorten memory regions in DTS memory nodes to check you are touching the correct area.</p>
-
-<h2 id="contributing">Contributing</h2>
-
-<p>Once you have a working port that passes seL4test, see the guides for
-<a href="https://sel4.systems/Contribute/">contributing in general</a>
-and <a href="kernel-contribution.html">contributing kernel changes</a>.</p>
 
 </div>
 
@@ -761,7 +626,7 @@ and <a href="kernel-contribution.html">contributing kernel changes</a>.</p>
   <a href="/processes/test-status.html"
      class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
   <div class="flex-1"></div>
-<a href="https://github.com/seL4/docs/edit/master/projects/sel4/porting.md" class="flex-none  hover:text-light hover:underline">Edit
+<a href="https://github.com/seL4/docs/edit/master/Hardware/MP25EV1.md" class="flex-none  hover:text-light hover:underline">Edit
     page on GitHub</a>
 </footer>
 
