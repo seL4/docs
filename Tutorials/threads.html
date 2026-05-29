@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-05-28 05:24:20 +0000 -->
+<!-- Page last generated 2026-05-29 04:40:48 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Threads | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Tutorials/threads.html">
-    <link href="/assets/css/sel4.css?v=1779945860" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1780029648" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -875,7 +875,7 @@ you have at least set the instruction pointer (IP) correctly.</p>
     <span class="c1">// TODO use valid instruction pointer</span>
     <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
     <span class="c1">// TODO use valid stack pointer</span>
-    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
     <span class="c1">// TODO fix parameters to this invocation</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">seL4_CapNull</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
