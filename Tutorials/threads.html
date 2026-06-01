@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-05-31 04:45:28 +0000 -->
+<!-- Page last generated 2026-06-01 04:45:05 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Threads | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Tutorials/threads.html">
-    <link href="/assets/css/sel4.css?v=1780202728" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1780289105" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -539,9 +539,11 @@
 -->
 
 <h1 id="threads">Threads</h1>
+
 <p>This is a tutorial for using threads on seL4.</p>
 
 <p>In this tutorial, you will:</p>
+
 <ol>
   <li>Learn the jargon TCB.</li>
   <li>Learn how to start a thread in the same address space.</li>
@@ -558,24 +560,6 @@
   <li><a href="/Tutorials/capabilities.html">Capabilities tutorial</a></li>
   <li><a href="/Tutorials/mapping.html">Mapping tutorial</a></li>
 </ol>
-
-<h2 id="capdl-loader">capDL Loader</h2>
-
-<p>Previous tutorials have taken place in the root task where the starting CSpace layout is set by the
-seL4 boot protocol. This tutorial uses the <em>capDL loader</em>, a root task which allocates statically
- configured objects and capabilities.</p>
-
-<p>The capDL loader parses
-a static description of the system and the relevant ELF binaries.
-It is primarily used in <a href="/projects/camkes/">CAmkES</a> projects
-but we also use it in the tutorials to reduce redundant code.
-The program that you construct will end up with its own CSpace and VSpace, which are separate
-from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
-in applications loaded by the capDL loader.</p>
-
-<p>More information about capDL projects can be found <a href="/projects/capdl/">here</a>.</p>
-
-<p>For this tutorial clone the <a href="https://github.com/sel4/capdl">capDL repo</a>. This can be added in a directory that is adjacent to the main <code class="language-plaintext highlighter-rouge">tutorials</code> directory.</p>
 
 <h2 id="initialising">Initialising</h2>
 
@@ -615,6 +599,7 @@ ninja
 seL4 are realised by <em>thread control block</em> objects (TCBs), one for each kernel thread.</p>
 
 <p>TCBs contain the following information:</p>
+
 <ul>
   <li>a priority and maximum control priority,</li>
   <li>register state and floating-point context,</li>
@@ -653,23 +638,27 @@ Threads can surrender their current timeslice using the <code class="language-pl
 
 <h4 id="domain-scheduling">Domain scheduling</h4>
 
-<p>In order to provide confidentiality seL4 provides a top-level hierarchical scheduler which
-provides static, cyclical scheduling of scheduling partitions known as domains.  Domains are
-statically configured at compile time with a cyclic schedule, and are non-preemptible resulting in
-completely deterministic scheduling of domains.</p>
+<p>For systems with strict confidentiality requirements, seL4 provides an optional
+top-level hierarchical scheduler with provides static, cyclical scheduling of
+scheduling partitions known as domains. Domains and domain schedules can be
+configured using the <code class="language-plaintext highlighter-rouge">seL4_DomainSet</code> capability, and are non-preemptible
+resulting in completely deterministic scheduling of domains. By default, only
+domain 0 runs and threads start in the domain they were retyped in.</p>
 
-<p>Threads can be assigned to domains, and threads are only scheduled
+<p>Threads can also be manually assigned to domains. Threads are only scheduled
 when their domain is active. Cross-domain IPC is delayed until a domain switch, and
-seL4_Yield between domains is not possible. When there are no threads to run while a
+<code class="language-plaintext highlighter-rouge">seL4_Yield</code> between domains has no effect. When there are no threads to run while a
 domain is scheduled, a domain-specific idle thread will run until a switch occurs.</p>
 
-<p>Assigning a thread to a domain requires access to the <code class="language-plaintext highlighter-rouge">seL4_DomainSet</code> capability. This allows a
-thread to be added to any domain.</p>
+<p>Assigning a thread to a domain requires access to the <code class="language-plaintext highlighter-rouge">seL4_DomainSet</code>
+capability. This allows a thread to be added to any domain.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Set thread's domain */</span>
 <span class="n">seL4_Error</span> <span class="nf">seL4_DomainSet_Set</span><span class="p">(</span><span class="n">seL4_DomainSet</span> <span class="n">_service</span><span class="p">,</span> <span class="n">seL4_Uint8</span> <span class="n">domain</span><span class="p">,</span> <span class="n">seL4_TCB</span> <span class="kr">thread</span><span class="p">);</span>
-
 </code></pre></div></div>
+
+<p>See the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 manual</a> for information
+on how to set up domain schedules.</p>
 
 <h3 id="thread-attributes">Thread Attributes</h3>
 
@@ -695,7 +684,7 @@ fault.</p>
 
 </code></pre></div></div>
 
-<h3 id="capdl-loader-1">capDL Loader</h3>
+<h3 id="capdl-loader">capDL Loader</h3>
 
 <p>Previous tutorials have taken place in the root task where the starting CSpace layout is set by the
 seL4 boot protocol. This tutorial uses a the <em>capDL loader</em>, a root task which allocates statically
@@ -709,7 +698,7 @@ The program that you construct will end up with its own CSpace and VSpace, which
 from the root task, meaning CSlots like <code class="language-plaintext highlighter-rouge">seL4_CapInitThreadVSpace</code> have no meaning
 in applications loaded by the capDL loader.</p>
 
-<p>Information about capDL projects can be found <a href="/projects/capdl/">here</a>.</p>
+<p>More information about capDL can be found on the <a href="/projects/capdl/">seL4 docsite</a>.</p>
 
 <h3 id="configure-a-tcb">Configure a TCB</h3>
 
@@ -718,8 +707,8 @@ in applications loaded by the capDL loader.</p>
 Dumping all tcbs!
 Name                                        State           IP                       Prio    Core
 --------------------------------------------------------------------------------------
-tcb_threads                                running         0x4012ef    254                 0
-idle_thread                                 idle            (nil)   0                   0
+tcb_threads                                running          0x4012ef    254                 0
+idle_thread                                 idle            0           0                   0
 rootserver                                  inactive        0x4024c2    255                 0
 &lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff8008140c00 "tcb_threads" @4012ef]: Attempted to invoke a &gt;
 main@threads.c:42 [Cond failed: result]
@@ -811,6 +800,7 @@ as the current thread. Use the IPC buffer we have provided, but don’t set a fa
 </details>
 
 <p>You should now be getting the following error:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;&lt;seL4(CPU 0) [decodeSetPriority/1035 T0xffffff8008140c00 "tcb_threads" @4012ef]: Set priority: author&gt;
 main@threads.c:51 [Cond failed: result]
 Failed to set the priority for the new TCB object.
@@ -847,10 +837,10 @@ set to the same as the main thread in the next <code class="language-plaintext h
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name                                        State           IP                       Prio    Core
 --------------------------------------------------------------------------------------
-child of: 'tcb_threads'                    inactive        (nil)   254                 0
+child of: 'tcb_threads'                    inactive        0           254                 0
 tcb_threads                                running         0x4012ef    254                 0
-idle_thread                                 idle            (nil)   0                   0
-rootserver                                  inactive        0x4024c2    255                 0
+idle_thread                                 idle           0           0                   0
+rootserver                                  inactive       0x4024c2    255                 0
 &lt;&lt;seL4(CPU 0) [decodeInvocation/530 T0xffffff8008140c00 "tcb_threads" @4012ef]: Attempted to invoke a &gt;
 main@threads.c:57 [Err seL4_InvalidCapability]:
 Failed to write the new thread's register set.
@@ -861,17 +851,35 @@ Failed to write the new thread's register set.
 <p>The TCB is nearly ready to run, except for its initial registers. You need to set the
 program counter and stack pointer to valid values, otherwise your thread will crash immediately.</p>
 
-<p><code class="language-plaintext highlighter-rouge">libsel4utils</code> contains some functions for setting register contents in a platform agnostic manner.
-You can use these methods to set the program counter (instruction pointer) and stack pointer in
-this way.  <em>Note: It is assumed that the stack grows downwards on all platforms.</em></p>
+<p><code class="language-plaintext highlighter-rouge">libsel4utils</code> contains functions for setting the program counter (instruction
+pointer) and stack pointer without mentioning their platform-specific register
+names. We will use these below.</p>
 
-<p><strong>Exercise</strong> Set up the new thread to call the function <code class="language-plaintext highlighter-rouge">new_thread</code>. You can use the debug syscall to verify that
-you have at least set the instruction pointer (IP) correctly.</p>
+<p>We may assume that the stack grows downwards on all platforms, but there is
+still a difference between the calling conventions on Arm and x86-64: On x86-64,
+the compiler expects that a return address has been pushed to the stack when a
+function is called. On Arm, the link register is used instead of the stack for
+this purpose. There is no address to return to for the initial function of a
+thread, and we do not intend to return from the function <code class="language-plaintext highlighter-rouge">new_thread</code>. The
+compiler does not know this, so we simulate a pushed return address by moving
+the stack pointer by one word on x86-64.</p>
+
+<p><strong>Exercise</strong> Set up the new thread to call the function <code class="language-plaintext highlighter-rouge">new_thread</code>. You can
+use the debug syscall to verify that you have at least set the instruction
+pointer (IP) correctly.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_UserContext</span> <span class="n">regs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to read the new thread's register set.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
+    <span class="kt">uintptr_t</span> <span class="n">thread_stack</span> <span class="o">=</span> <span class="n">tcb_stack_top</span><span class="p">;</span>
+    <span class="cm">/* The x86-64 ABI assumes there is a return address pushed on the stack. Arm uses the link register instead. */</span>
+    <span class="cp">#ifdef __x86_64__
+</span>    <span class="cm">/* Since we never return from new_thread, the value of the return address does not matter and
+       we only move the stack pointer. */</span>
+    <span class="n">thread_stack</span> <span class="o">-=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">);</span>
+    <span class="cp">#endif
+</span>
     <span class="c1">// TODO use valid instruction pointer</span>
     <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="nb">NULL</span><span class="p">);</span>
     <span class="c1">// TODO use valid stack pointer</span>
@@ -890,8 +898,16 @@ you have at least set the instruction pointer (IP) correctly.</p>
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to read the new thread's register set.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
+    <span class="kt">uintptr_t</span> <span class="n">new_thread_stack</span> <span class="o">=</span> <span class="n">tcb_stack_top</span><span class="p">;</span>
+    <span class="cm">/* The x86-64 ABI assumes there is a return address pushed on the stack. Arm uses the link register instead. */</span>
+    <span class="cp">#ifdef __x86_64__
+</span>    <span class="cm">/* Since we never return from new_thread, the value of the return address does not matter and
+       we only move the stack pointer. */</span>
+    <span class="n">new_thread_stack</span> <span class="o">-=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">);</span>
+    <span class="cp">#endif
+</span>
     <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span><span class="n">new_thread</span><span class="p">);</span>
-    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="n">tcb_stack_top</span><span class="p">);</span>
+    <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="n">new_thread_stack</span><span class="p">);</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
                   <span class="s">"</span><span class="se">\t</span><span class="s">Did you write the correct number of registers? See arg4.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
@@ -934,20 +950,18 @@ main@threads.c:63 [Err seL4_InvalidCapability]:
 
 <p>You will notice that all of the arguments to the new thread are 0. You can set the arguments by
 using the helper function <code class="language-plaintext highlighter-rouge">sel4utils_arch_init_local_context</code> or by directly manipulating the registers
-for your target architecture.</p>
+for your target architecture. The helper function also takes care of the difference in stack pointers
+between Arm and x86-64, so we can use <code class="language-plaintext highlighter-rouge">tcb_stack_top</code> directly in both cases if we use it.</p>
 
-<p><strong>Exercise</strong> update the values written with <code class="language-plaintext highlighter-rouge">seL4_TCB_WriteRegisters</code> to pass the values 1, 2, 3 as arg1,
-arg2, and arg3 respectively.</p>
+<p><strong>Exercise</strong> pass the values 1, 2, 3 as arg1, arg2, and arg3 respectively.</p>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">seL4_UserContext</span> <span class="n">regs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to read the new thread's register set.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
-     <span class="c1">// use valid instruction pointer</span>
+    <span class="c1">// TODO: find and use sel4utils_arch_init_local_context instead of the following two functions to set up new_thread</span>
     <span class="n">sel4utils_set_instruction_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="p">(</span><span class="n">seL4_Word</span><span class="p">)</span> <span class="n">new_thread</span><span class="p">);</span>
-    <span class="c1">// use valid stack pointer</span>
     <span class="n">sel4utils_set_stack_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">regs</span><span class="p">,</span> <span class="n">tcb_stack_top</span><span class="p">);</span>
-    <span class="c1">// fix parameters to this invocation</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_WriteRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
 
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
@@ -959,7 +973,7 @@ arg2, and arg3 respectively.</p>
   <summary><em>Quick solution</em></summary>
 
   <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="n">UNUSED</span> <span class="n">seL4_UserContext</span> <span class="n">regs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="n">seL4_UserContext</span> <span class="n">regs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
     <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">seL4_TCB_ReadRegisters</span><span class="p">(</span><span class="n">tcb_cap_slot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">seL4_Word</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
     <span class="n">ZF_LOGF_IFERR</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s">"Failed to write the new thread's register set.</span><span class="se">\n</span><span class="s">"</span>
                   <span class="s">"</span><span class="se">\t</span><span class="s">Did you write the correct number of registers? See arg4.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
@@ -982,7 +996,7 @@ The last part of this tutorial is what to do when your thread faults. We provide
 kernel printing a fault message, as the thread you have created does not have a fault handler.</p>
 
 <p>In the output below you can see a cap fault has occurred. The first part of the error is that
-the kernel was unable to send a fault to a fault handler as it is set to <code class="language-plaintext highlighter-rouge">(nil)</code>. The kernel
+the kernel was unable to send a fault to a fault handler as it is set to <code class="language-plaintext highlighter-rouge">0</code>. The kernel
 then prints out the fault it was trying to send. In this case, the fault is a virtual memory fault.
 The new thread has tried to access data at address <code class="language-plaintext highlighter-rouge">0x2</code> which is an invalid and unmapped address.
 The output shows that the program counter of the thread when it faulted was <code class="language-plaintext highlighter-rouge">0x401e66</code>.</p>
@@ -993,7 +1007,7 @@ Additionally, the kernel prints a raw stack dump from the current stack pointer.
 The size of the stack dump is configurable, using the
  <code class="language-plaintext highlighter-rouge">KernelUserStackTraceLength</code> cmake variable.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Caught cap fault in send phase at address (nil)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Caught cap fault in send phase at address 0
 while trying to handle:
 vm fault on data at address 0x2 with status 0x4
 in thread 0xffffff8008140400 "child of: 'tcb_threads'" at address 0x401e66

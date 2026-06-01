@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-05-31 04:45:28 +0000 -->
+<!-- Page last generated 2026-06-01 04:45:05 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>CAmkES VM Linux | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Tutorials/camkes-vm-linux.html">
-    <link href="/assets/css/sel4.css?v=1780202728" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1780289105" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -719,7 +719,7 @@ look at the app’s <code class="language-plaintext highlighter-rouge">CMakeList
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SEL4_TUTORIALS_DIR</span><span class="si">}</span>/settings.cmake<span class="p">)</span>
 <span class="nf">sel4_tutorials_regenerate_tutorial</span><span class="p">(</span><span class="si">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="si">}</span><span class="p">)</span>
 
-<span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.10<span class="p">)</span>
 
 <span class="nb">project</span><span class="p">(</span>vm-app C ASM<span class="p">)</span>
 <span class="nb">include</span><span class="p">(</span>ExternalProject<span class="p">)</span>
@@ -849,7 +849,7 @@ and symvers file (<code class="language-plaintext highlighter-rouge">linux_symve
 </code></pre></div></div>
 <p>Then create a build file for the program at <code class="language-plaintext highlighter-rouge">pkg/hello/CMakeLists.txt</code>:</p>
 
-<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.10<span class="p">)</span>
 
 <span class="nb">project</span><span class="p">(</span>hello C<span class="p">)</span>
 
@@ -958,7 +958,7 @@ associated with the new module, which when written to causes the VMM to print me
 </code></pre></div></div>
 
 <p>Create a <code class="language-plaintext highlighter-rouge">modules/CMakeLists.txt</code> to define the new Linux module with the following content:</p>
-<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.8.2<span class="p">)</span>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.10<span class="p">)</span>
 
 <span class="nb">if</span><span class="p">(</span>NOT MODULE_HELPERS_FILE<span class="p">)</span>
     <span class="nb">message</span><span class="p">(</span>FATAL_ERROR <span class="s2">"MODULE_HELPERS_FILE is not defined"</span><span class="p">)</span>
