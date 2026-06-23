@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-06-22 04:44:57 +0000 -->
+<!-- Page last generated 2026-06-23 04:35:07 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1782103497" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1782189307" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -948,6 +948,32 @@
 <p><strong>Return value:</strong> This method does not return anything.</p>
 
 <p><strong>Description:</strong> Name a thread. This name will then be output by the kernel in all debugging output. Note that the max name length that can be passed to this function is limited by the number of chars that will fit in an IPC message (<code class="language-plaintext highlighter-rouge">seL4_MsgMaxLength</code> multiplied by the amount of chars that fit in a word). However the name is also truncated in order to fit into a TCB object. For some platforms you may need to increase <code class="language-plaintext highlighter-rouge">seL4_TCBBits</code> by 1 in a debug build in order to fit a long enough name.</p>
+
+<h3 id="get-thread-affinity">Get thread affinity</h3>
+<p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC seL4_Word seL4_DebugGetThreadAffinity</code></p>
+
+<p>Get the current affinity of a thread.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">seL4_CPtr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">tcb</code></td>
+      <td>A capability to the tcb object for the thread to query.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Return value:</strong> <em>TODO</em></p>
+
+<p><strong>Description:</strong> This gets the value of the kernel’s tcb_t-&gt;tcbAffinity field, which corresponds to the core (affinity) of the thread. If the thread is not running (e.g. blocked) this is the last core it ran on.</p>
 
 <h3 id="send-sgi-0-15">Send SGI 0-15</h3>
 <p><code class="language-plaintext highlighter-rouge">LIBSEL4_INLINE_FUNC void seL4_DebugSendIPI</code></p>
@@ -9773,6 +9799,7 @@ serviced.</p>
 <li class="toc-entry toc-h3"><a href="#snapshot">Snapshot</a></li>
 <li class="toc-entry toc-h3"><a href="#cap-identify">Cap Identify</a></li>
 <li class="toc-entry toc-h3"><a href="#name-thread">Name Thread</a></li>
+<li class="toc-entry toc-h3"><a href="#get-thread-affinity">Get thread affinity</a></li>
 <li class="toc-entry toc-h3"><a href="#send-sgi-0-15">Send SGI 0-15</a></li>
 <li class="toc-entry toc-h3"><a href="#run">Run</a></li>
 </ul>
