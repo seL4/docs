@@ -8,7 +8,6 @@ It is recommended to build the toolchain from source.
 ```sh
 git clone https://github.com/riscv/riscv-gnu-toolchain.git
 cd riscv-gnu-toolchain
-git submodule update --init --recursive
 export RISCV=/opt/riscv
 ./configure --prefix="${RISCV}" --enable-multilib
 make linux
