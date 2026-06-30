@@ -9,7 +9,7 @@ iommu: false
 soc: BCM2712
 cpu: Cortex-A76
 verification: [AARCH64]
-Contrib: '<a href="https://github.com/Ivan-Velickovic">Ivan Velickovic</a>'
+Contrib: Ivan Velickovic
 Maintained: seL4 Foundation
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
