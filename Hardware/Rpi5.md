@@ -13,7 +13,7 @@ Contrib: Ivan Velickovic
 Maintained: seL4 Foundation
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
-SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
+SPDX-FileCopyrightText: 2026 Benjamin O'Brien (iiPython)
 ---
 
 # Raspberry Pi 5 Model B
@@ -25,6 +25,10 @@ SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
 Serial TX and RX are located at GPIO pins 14 and 15 respectively.
 
 ## U-Boot
+
+It's been confirmed that U-Boot versions 2024.07 and 2026.07-rc5 both function on the Pi 5 without issue.
+
+Make sure when building that you use the `rpi_arm64_defconfig` target, as U-Boot does not currently have the Raspberry Pi 5's device trees (as of June 2026), so you need it to use the one provided by firmware.
 
 In order to build U-Boot for the Raspberry Pi 5B, run the following commands:
 ```bash
