@@ -1,40 +1,47 @@
 ---
 SPDX-License-Identifier: CC-BY-SA-4.0
-SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
+SPDX-FileCopyrightText: 2026 Proofcraft Pty Ltd
 ---
 
 # seL4 Manual
 
-
 * [Latest version of the seL4 Manual (PDF)](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)
 
+{%- assign sel4_releases = site.releases | where: "project", "sel4" -%}
 
-* Previous versions of the seL4 Manual:
-  * Version [13.0.0](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf)
-  * Version [12.1.0](https://sel4.systems/Info/Docs/seL4-manual-12.1.0.pdf)
-  * Version [12.0.0](https://sel4.systems/Info/Docs/seL4-manual-12.0.0.pdf)
-  * Version [11.0.0](https://sel4.systems/Info/Docs/seL4-manual-11.0.0.pdf)
-  * Version [10.1.1](https://sel4.systems/Info/Docs/seL4-manual-10.1.1.pdf)
-  * Version [10.1.1-mcs](https://sel4.systems/Info/Docs/seL4-manual-10.1.1-mcs.pdf)
-  * Version [10.1.0](https://sel4.systems/Info/Docs/seL4-manual-10.1.0.pdf)
-  * Version [10.0.0](https://sel4.systems/Info/Docs/seL4-manual-10.0.0.pdf)
-  * Version [9.0.1](https://sel4.systems/Info/Docs/seL4-manual-9.0.1.pdf)
-  * Version [9.0.0](https://sel4.systems/Info/Docs/seL4-manual-9.0.0.pdf)
-  * Version [9.0.0-mcs](https://sel4.systems/Info/Docs/seL4-manual-9.0.0-mcs.pdf)
-  * Version [8.0.0](https://sel4.systems/Info/Docs/seL4-manual-8.0.0.pdf)
-  * Version [7.0.0](https://sel4.systems/Info/Docs/seL4-manual-7.0.0.pdf)
-  * Version [6.0.0](https://sel4.systems/Info/Docs/seL4-manual-6.0.0.pdf)
-  * Version [5.2.0](https://sel4.systems/Info/Docs/seL4-manual-5.2.0.pdf)
-  * Version [5.2.0-mcs](https://sel4.systems/Info/Docs/seL4-manual-5.2.0-mcs.pdf)
-  * Version [5.1.0](https://sel4.systems/Info/Docs/seL4-manual-5.1.0.pdf)
-  * Version [5.0.0](https://sel4.systems/Info/Docs/seL4-manual-5.0.0.pdf)
-  * Version [4.0.0](https://sel4.systems/Info/Docs/seL4-manual-4.0.0.pdf)
-  * Version [3.2.0](https://sel4.systems/Info/Docs/seL4-manual-3.2.0.pdf)
-  * Version [3.1.0](https://sel4.systems/Info/Docs/seL4-manual-3.1.0.pdf)
-  * Version [3.0.1](https://sel4.systems/Info/Docs/seL4-manual-3.0.1.pdf)
-  * Version [3.0.0](https://sel4.systems/Info/Docs/seL4-manual-3.0.0.pdf)
-  * Version [2.1.0](https://sel4.systems/Info/Docs/seL4-manual-2.1.0.pdf)
-  * Version [2.0.0](https://sel4.systems/Info/Docs/seL4-manual-2.0.0.pdf)
-  * Version [1.0.4](https://sel4.systems/Info/Docs/seL4-manual-1.0.4.pdf)
-  * Version [1.0.0-rt-dev](https://sel4.systems/Info/Docs/seL4-manual-1.0.0-rt-dev.pdf)
-  * Version [0.0.1-rt-dev](https://sel4.systems/Info/Docs/seL4-manual-0.0.1-rt-dev.pdf)
+{%- comment -%}
+
+* liquid has no array literals, hence the split on the empty string to
+  get an empty array and the split in `one` to generate a one-element array.
+* explicitly leave out development versions
+* manually add version 1.0.4, which has an archived manual, but no release
+  page or change log available in the seL4 repo.
+
+{%- endcomment -%}
+{%- assign onedigit = "" | split: "," -%}
+{%- assign twodigit = "" | split: "," -%}
+{%- for r in sel4_releases -%}
+  {%- assign major = r.version | split: "." | first -%}
+  {%- assign suffix = r.version | split: "-" | last -%}
+  {%- assign one = r.version | split: "|" -%}
+  {%- if major.size == 1 -%}
+    {%- if suffix != "dev" -%}
+      {%- assign onedigit = onedigit | concat: one -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- assign twodigit = twodigit | concat: one -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign one = "1.0.4" | split: "|" -%}
+{%- assign onedigit = onedigit | concat: one -%}
+
+{%- assign twodigit = twodigit | sort | reverse -%}
+{%- assign onedigit = onedigit | sort | reverse -%}
+{%- assign sorted = twodigit | concat: onedigit %}
+
+* Available versions of the seL4 Manual:
+
+{%- for entry in sorted %}
+  * Version [{{ entry }}](https://sel4.systems/Info/Docs/seL4-manual-{{ entry }}.pdf)
+{%- endfor -%}
