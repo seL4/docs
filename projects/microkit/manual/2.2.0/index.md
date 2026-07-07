@@ -1159,6 +1159,11 @@ The currently supported platforms are:
 * rpi4b_2gb
 * rpi4b_4gb
 * rpi4b_8gb
+* rpi5b_1gb
+* rpi5b_2gb
+* rpi5b_4gb
+* rpi5b_8gb
+* rpi5b_16gb
 * serengeti
 * star64
 * tqma8xqp1gb
@@ -1394,6 +1399,31 @@ seL4, the Microkit board names differ for each model:
 
 For initial board setup, please see the instructions on the
 [seL4 website](https://docs.sel4.systems/Hardware/Rpi4.html).
+
+When getting into the U-Boot console you want to load the Microkit binary image to
+address 0x10000000 and then run `go 0x10000000`.
+
+For example, if you were to load the image via the MMC you would run the following
+U-Boot commands:
+
+     => fatload mmc 0 0x10000000 <SYSTEM IMAGE>
+     => go 0x10000000
+
+### Raspberry Pi 5B {#rpi5b_1gb}
+
+Support is available for the Raspberry Pi 5 Model B. There are multiple models of the
+Raspberry Pi 5B that have different amounts of RAM, we have support for the 1GB,
+2GB, 4GB, 8GB and 16GB models. Because the amount of RAM must be known statically by
+seL4, the Microkit board names differ for each model:
+
+* `rpi5b_1gb` for 1GB of RAM.
+* `rpi5b_2gb` for 2GB of RAM.
+* `rpi5b_4gb` for 4GB of RAM.
+* `rpi5b_8gb` for 8GB of RAM.
+* `rpi5b_16gb` for 16GB of RAM.
+
+For initial board setup, please see the instructions on the
+[seL4 website](https://docs.sel4.systems/Hardware/Rpi5.html).
 
 When getting into the U-Boot console you want to load the Microkit binary image to
 address 0x10000000 and then run `go 0x10000000`.
