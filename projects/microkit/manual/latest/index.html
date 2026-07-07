@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-07-06 04:39:18 +0000 -->
+<!-- Page last generated 2026-07-07 03:34:49 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Microkit User Manual (v2.2.0) | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/manual/latest/">
-    <link href="/assets/css/sel4.css?v=1783312758" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1783395289" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -1757,6 +1757,11 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
   <li>rpi4b_2gb</li>
   <li>rpi4b_4gb</li>
   <li>rpi4b_8gb</li>
+  <li>rpi5b_1gb</li>
+  <li>rpi5b_2gb</li>
+  <li>rpi5b_4gb</li>
+  <li>rpi5b_8gb</li>
+  <li>rpi5b_16gb</li>
   <li>serengeti</li>
   <li>star64</li>
   <li>tqma8xqp1gb</li>
@@ -2016,6 +2021,34 @@ seL4, the Microkit board names differ for each model:</p>
 
 <p>For initial board setup, please see the instructions on the
 <a href="https://docs.sel4.systems/Hardware/Rpi4.html">seL4 website</a>.</p>
+
+<p>When getting into the U-Boot console you want to load the Microkit binary image to
+address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
+
+<p>For example, if you were to load the image via the MMC you would run the following
+U-Boot commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> =&gt; fatload mmc 0 0x10000000 &lt;SYSTEM IMAGE&gt;
+ =&gt; go 0x10000000
+</code></pre></div></div>
+
+<h3 id="rpi5b_1gb">Raspberry Pi 5B</h3>
+
+<p>Support is available for the Raspberry Pi 5 Model B. There are multiple models of the
+Raspberry Pi 5B that have different amounts of RAM, we have support for the 1GB,
+2GB, 4GB, 8GB and 16GB models. Because the amount of RAM must be known statically by
+seL4, the Microkit board names differ for each model:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rpi5b_1gb</code> for 1GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi5b_2gb</code> for 2GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi5b_4gb</code> for 4GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi5b_8gb</code> for 8GB of RAM.</li>
+  <li><code class="language-plaintext highlighter-rouge">rpi5b_16gb</code> for 16GB of RAM.</li>
+</ul>
+
+<p>For initial board setup, please see the instructions on the
+<a href="https://docs.sel4.systems/Hardware/Rpi5.html">seL4 website</a>.</p>
 
 <p>When getting into the U-Boot console you want to load the Microkit binary image to
 address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
@@ -2652,6 +2685,7 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_aarch64">QEMU virt (AArch64)</a></li>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</a></li>
 <li class="toc-entry toc-h3"><a href="#rpi4b_1gb">Raspberry Pi 4B</a></li>
+<li class="toc-entry toc-h3"><a href="#rpi5b_1gb">Raspberry Pi 5B</a></li>
 <li class="toc-entry toc-h3"><a href="#rockpro64">Pine64 ROCKPro64</a></li>
 <li class="toc-entry toc-h3"><a href="#rock3b">Radxa ROCK 3B</a></li>
 <li class="toc-entry toc-h3"><a href="#star64">Pine64 Star64</a></li>

@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Banana Pi BPI-F3 | seL4 docs</title>
+    <title>Raspberry Pi 5 Model B | seL4 docs</title>
 
-    <link rel="canonical" href="https://docs.sel4.systems/Hardware/bananapi-f3.html">
+    <link rel="canonical" href="https://docs.sel4.systems/Hardware/Rpi5.html">
     <link href="/assets/css/sel4.css?v=1783395289" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -523,31 +523,29 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="banana-pi-bpi-f3">Banana Pi BPI-F3</h1>
-
-<p>The Banana Pi BPI-F3 is an industrial-grade RISC-V single-board computer
-from Banana Pi, based on SpacemiT K1 SoC. It has an octa-core RISC-V (8 × X60)
-CPU, with integrated 2.0 TOPs AI computing power.</p>
+  <h1 id="raspberry-pi-5-model-b">Raspberry Pi 5 Model B</h1>
 
 <table class="max-w-md">
 <tbody>
 <tr>
-<td>Platform</td> <td class="font-semibold">Banana Pi BPI-F3</td>
+<td>Platform</td> <td class="font-semibold">Raspberry Pi 5B</td>
 </tr>
 
 <tr>
-<td>Architecture</td> <td>RV64GCVB</td>
+<td>Architecture</td> <td>ARMv8A</td>
 </tr>
 <tr>
-<td>System-on-chip</td> <td>SpacemiT K1</td>
+<td>System-on-chip</td> <td>BCM2712</td>
 </tr>
 <tr>
-<td>CPU</td> <td>X60</td>
+<td>CPU</td> <td>Cortex-A76</td>
 </tr>
 <tr>
 <td>seL4 virtualisation support</td>
 <td>
-<span class="pl-0.5">&ndash;</span>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
 </td>
 </tr>
 <tr>
@@ -559,68 +557,135 @@ CPU, with integrated 2.0 TOPs AI computing power.</p>
 <tr>
 <td>Proofs</td>
 <td>
-        &ndash;
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="inline-icon stroke-3 text-f_green-500 dark:text-logogreen">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+</svg>
 </td>
 </tr>
 <tr>
 <td>Proof configs</td>
-<td>&ndash;</td>
+<td><a href="/projects/sel4/verified-configurations.html#AARCH64">AARCH64</a></td>
 </tr>
 <tr>
 <td>seL4 CMake platform name</td>
-<td><code>bananapi-f3</code></td>
+<td><code>rpi5</code></td>
 </tr>
 <tr>
-<td>Contributed by</td> <td>Community</td>
+<td>Contributed by</td> <td>Ivan Velickovic</td>
 </tr>
 
 <tr>
-<td>Maintained by</td> <td>10xEngineers</td>
+<td>Maintained by</td> <td>seL4 Foundation</td>
 </tr>
 
 </tbody>
 </table>
 
-<p>Details and links to manuals can be found on the <a href="https://docs.banana-pi.org/en/BPI-F3/BananaPi_BPI-F3">Banana Pi product
-page</a>.</p>
+<h2 id="serial-connection">Serial connection</h2>
 
-<p>The SoC technical reference manual can be found <a href="https://developer.spacemit.com/documentation?token=GAmMwCrRUiZAo5kXKUQcNNacnwb&amp;type=pdf">on
-SpacemiT website</a>.</p>
+<p>Serial TX and RX are located at GPIO pins 14 and 15 respectively.</p>
 
-<p>The Banana Pi BPI-F3 arrives with the following boot process:</p>
+<h2 id="u-boot">U-Boot</h2>
 
-<ol>
-  <li>Firmware starts</li>
-  <li>OpenSBI starts</li>
-  <li>U-Boot proper starts</li>
-</ol>
+<p>It’s been confirmed that U-Boot versions 2024.07 and 2026.07-rc5 both function on the Pi 5 without issue.</p>
 
-<p>From U-Boot proper you can then load and start an seL4 image, see below for details.</p>
+<p>Make sure when building that you use the <code class="language-plaintext highlighter-rouge">rpi_arm64_defconfig</code> target, as U-Boot does not currently have the Raspberry Pi 5’s device trees (as of June 2026), so you need it to use the one provided by firmware.</p>
 
-<h2 id="building-the-gcc-toolchain">Building the GCC toolchain</h2>
-
-<p>It is recommended to build the toolchain from source.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/riscv/riscv-gnu-toolchain.git
-<span class="nb">cd </span>riscv-gnu-toolchain
-<span class="nb">export </span><span class="nv">RISCV</span><span class="o">=</span>/opt/riscv
-./configure <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">RISCV</span><span class="k">}</span><span class="s2">"</span> <span class="nt">--enable-multilib</span>
-make linux
+<p>In order to build U-Boot for the Raspberry Pi 5B, run the following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/u-boot/u-boot.git u-boot
+<span class="nb">cd </span>u-boot
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu- rpi_arm64_defconfig
+make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-
 </code></pre></div></div>
 
-<p>After it is built, add the <code class="language-plaintext highlighter-rouge">$RISCV/bin</code> folder to your PATH. The built
-toolchain works for both 32-bit and 64-bit.</p>
+<p>In the <code class="language-plaintext highlighter-rouge">u-boot</code> directory you should now see the U-Boot image <code class="language-plaintext highlighter-rouge">u-boot.bin</code> indicating that U-Boot has successfully compiled.</p>
 
-<p>Alternatively, any pre-built toolchain with <code class="language-plaintext highlighter-rouge">multilib</code> enabled should work.</p>
+<p>More information regarding U-Boot support for the Raspberry Pi can be found <a href="https://u-boot.readthedocs.io/en/latest/board/broadcom/raspberrypi.html">here</a>.</p>
 
-<h2 id="building-sel4test">Building seL4test</h2>
+<h2 id="sd-card-setup">SD card setup</h2>
+
+<p>The RPi5 boots from the first FAT32 partition on the microSD card. Where files are specified,
+they should be located in the root directory of this partition.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Filename</th>
+      <th>Description</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FSBL</td>
+      <td>-</td>
+      <td>Mounts SD and loads SSBL</td>
+      <td>ROM</td>
+    </tr>
+    <tr>
+      <td>GPU firmware</td>
+      <td>start4.elf</td>
+      <td>Loads CPU bootloader and boots CPU</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf">https://github.com/raspberrypi/firmware/tree/master/boot/start4.elf</a></td>
+    </tr>
+    <tr>
+      <td>Additional GPU firmware</td>
+      <td>fixup4.dat</td>
+      <td>Fixes memory locations used in start4.elf</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/fixup4.dat">https://github.com/raspberrypi/firmware/tree/master/boot/fixup4.dat</a></td>
+    </tr>
+    <tr>
+      <td>Usually the Linux kernel, but could also be U-Boot</td>
+      <td>u-boot.bin</td>
+      <td>U-Boot binary</td>
+      <td>Compiled using the instructions above</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>config.txt</td>
+      <td>U-Boot parameters</td>
+      <td>Add <code class="language-plaintext highlighter-rouge">arm_64bit=1</code> and <code class="language-plaintext highlighter-rouge">kernel=u-boot.bin</code> to the bottom of <code class="language-plaintext highlighter-rouge">config.txt</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>uboot.env</td>
+      <td>U-Boot saved environment</td>
+      <td>Generated by U-Boot (default environment) bootcmd copied to bootcmd_orig bootcmd and bootdelay removed. This file will not exist when you first setup your SD card.</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>bcm2712-rpi-5-b.dtb</td>
+      <td>RPi5 device tree blob</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/bcm2712-rpi-5-b.dtb">https://github.com/raspberrypi/firmware/tree/master/boot/bcm2712-rpi-5-b.dtb</a></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>overlays/*</td>
+      <td>Device tree overlays</td>
+      <td><a href="https://github.com/raspberrypi/firmware/tree/master/boot/overlays">https://github.com/raspberrypi/firmware/tree/master/boot/overlays</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="getting-sel4-onto-your-raspberry-pi-5">Getting seL4 onto your Raspberry Pi 5</h2>
+
+<p>The final step to test that you have setup your RPi5 correctly is to build and run the
+seL4test project.</p>
+
+<p>You will see that the <code class="language-plaintext highlighter-rouge">init-build.sh</code> command contains the flag
+<code class="language-plaintext highlighter-rouge">-DRPI5_MEMORY</code>, this specifies how much RAM exists on the Raspberry Pi that will run
+the final seL4 image. Since seL4 needs to know the physical memory layout of the hardware
+at build time, and the RPi4 has multiple models with different amounts of RAM, we have to
+specify how much RAM the system will have when we build seL4. If <code class="language-plaintext highlighter-rouge">-DRPI5_MEMORY</code> is not supplied,
+seL4 defaults to expecting 2GB of memory.</p>
 
 <p>Checkout the sel4test project using repo as per <a href="/projects/sel4test/">seL4Test</a></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repo init <span class="nt">-u</span> https://github.com/seL4/sel4test-manifest.git
 repo <span class="nb">sync
 mkdir </span>cbuild
 <span class="nb">cd </span>cbuild
-../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>bananapi-f3 <span class="nt">-DRISCV64</span><span class="o">=</span>1
+../init-build.sh <span class="nt">-DPLATFORM</span><span class="o">=</span>rpi5 <span class="nt">-DAARCH64</span><span class="o">=</span>1 <span class="nt">-DRPI5_MEMORY</span><span class="o">=</span>&lt;1024,2048,4096,8192,16384&gt;
 <span class="c"># The default cmake wrapper sets up a default configuration for the target platform.</span>
 <span class="c"># To change individual settings, run `ccmake .` and change the configuration</span>
 <span class="c"># parameters to suit your needs.</span>
@@ -630,50 +695,28 @@ ninja
 
 <p>Generated binaries can be found in the <code class="language-plaintext highlighter-rouge">images/</code> directory.</p>
 
-<h2 id="booting">Booting</h2>
+<p>Now that we have a bootable image, we can run it on your RPi5. The following instructions describe
+how to use a microSD card to boot seL4, using the seL4test image as well as the files mentioned
+in the previous section.</p>
 
-<p>There are multiple ways to boot from U-Boot, documented below is booting via TFTP and from
-a microSD card.</p>
+<p>The first step is to copy the seL4 image onto the microSD card to the root directory. After
+removing the card from your computer and inserting into your RPi5, you can power on the RPi5.</p>
 
-<h3 id="dtb">Obtaining the DTB</h3>
-
-<p>Since we are using a <code class="language-plaintext highlighter-rouge">uImage</code> for the Banana Pi BPI-F3, U-Boot requires a Device Tree Blob (DTB) alongside
-the binary image to boot.</p>
-
-<p>The Device Tree Source (DTS) can be compiled from the seL4 tree with the Device Tree Compiler (<code class="language-plaintext highlighter-rouge">dtc</code>):</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dtc <span class="nt">-I</span> dts <span class="nt">-O</span> dtb sel4/tools/dts/bananapi-f3.dts <span class="o">&gt;</span> bananapi-f3.dtb
+<p>Once the RPi5 boots up, you will see something like the following text from U-Boot:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hit any key to stop autoboot:  2
 </code></pre></div></div>
 
-<h3 id="booting-via-microsd-card">Booting via microSD card</h3>
+<p>At this point you want to interrupt the U-Boot booting process by pressing any key.</p>
 
-<p>These instructions expect the microSD card to be paritioned with FAT.</p>
-
-<p>The microSD card slot registers as device <code class="language-plaintext highlighter-rouge">0</code> in U-Boot so to see if the device
-is recognised run:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mmc dev 0
-<span class="c"># Check that the card info is expected</span>
-mmc info
-<span class="c"># List partitions</span>
-mmc part
+<p>You will now be in the U-Boot command prompt, type the following command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatls mmc 0
 </code></pre></div></div>
 
-<p>To load and run the image:</p>
+<p>You should see the seL4test image you just placed on your microSD card.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0:&lt;PARTITION&gt; 0x200000 sel4test-driver-image-riscv-bananapi-f3
-fatload mmc 0:&lt;PARTITION&gt; 0x31000000 bananapi-f3.dtb
-bootm 0x200000 - 0x31000000
-</code></pre></div></div>
-
-<h3 id="booting-via-tftp">Booting via TFTP</h3>
-
-<p>If you have setup a TFTP server, enter the following commands on the U-Boot console
-to load an image via the network.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dhcp
-tftpboot 0x200000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:sel4test-driver-image-riscv-bananapi-f3
-tftpboot 0x31000000 &lt;YOUR_TFTP_SERVER_IP_ADDRESS&gt;:bananapi-f3.dtb
-bootm 0x200000 - 0x31000000
+<p>From here, you can load and boot the image using:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatload mmc 0 0x10000000 sel4test-driver-image-arm-bcm2712
+go 0x10000000
 </code></pre></div></div>
 
 </div>
@@ -688,7 +731,7 @@ bootm 0x200000 - 0x31000000
   <a href="/processes/test-status.html"
      class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
   <div class="flex-1"></div>
-<a href="https://github.com/seL4/docs/edit/master/Hardware/bananapi-f3.md" class="flex-none  hover:text-light hover:underline">Edit
+<a href="https://github.com/seL4/docs/edit/master/Hardware/Rpi5.md" class="flex-none  hover:text-light hover:underline">Edit
     page on GitHub</a>
 </footer>
 
