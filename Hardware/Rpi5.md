@@ -1,7 +1,7 @@
 ---
 arm_hardware: true
-cmake_plat: rpi5
-xcompiler_arg: -DAARCH64=1 -DRPI5_MEMORY=<1024,2048,4096,8192,16384>
+cmake_plat: bcm2712
+xcompiler_arg: -DAARCH64=1
 platform: Raspberry Pi 5B
 arch: ARMv8A
 virtualization: true
