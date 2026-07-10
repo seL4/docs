@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-07-09 04:31:11 +0000 -->
+<!-- Page last generated 2026-07-10 02:50:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Capabilities | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Tutorials/capabilities.html">
-    <link href="/assets/css/sel4.css?v=1783571471" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1783651841" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -588,8 +588,8 @@ ninja
 
 <h3 id="what-is-a-capability">What is a capability?</h3>
 
-<p>A <em>capability</em> is a unique, unforgeable token that gives the possessor
-permission to access an entity or object in system. One way to think of a
+<p>A <em>capability</em> is a unique, unforgeable token that constitutes a
+permission to access an entity or object in the system. One way to think of a
 capability is as a pointer with access rights. There are three kinds of
 capabilities in seL4:</p>
 
@@ -649,12 +649,15 @@ Each CSlot in a CNode can be in the following state:</p>
   <li>full: the slot contains a capability to a kernel resource.</li>
 </ul>
 
-<p>By convention the 0th CSlot is kept empty, for the same reasons as keeping NULL unmapped in
- process virtual address spaces: to avoid errors when uninitialised slots are used unintentionally.</p>
+<p>By convention, most libraries keep the CSlot at index 0 empty, so that using an
+uninitialised slot variable produces an explicit error. This is similar to
+leaving NULL unmapped in a process’s virtual address space.</p>
 
-<p>The field <code class="language-plaintext highlighter-rouge">info-&gt;CNodeSizeBits</code> gives a measure of the size of the initial
-CNode: it will have <code class="language-plaintext highlighter-rouge">1 &lt;&lt; CNodeSizeBits</code> CSlots. A CSlot has
-<code class="language-plaintext highlighter-rouge">1 &lt;&lt; seL4_SlotBits</code> bytes, so the size of a CNode in bytes is
+<p>The structure <code class="language-plaintext highlighter-rouge">info</code> of type <code class="language-plaintext highlighter-rouge">seL4_BootInfo</code> in the example code contains
+information the kernel provides to the initial task. The field
+<code class="language-plaintext highlighter-rouge">info-&gt;CNodeSizeBits</code> in this structure is the <em>size in bits</em> of the initial CNode:
+the initial CNode has <code class="language-plaintext highlighter-rouge">1 &lt;&lt; CNodeSizeBits</code> (i.e. 2<sup>CNodeSizeBits</sup>) CSlots.
+A CSlot has <code class="language-plaintext highlighter-rouge">1 &lt;&lt; seL4_SlotBits</code> bytes, so the size of this CNode in bytes is
 <code class="language-plaintext highlighter-rouge">1 &lt;&lt; (CNodeSizeBits + seL4_SlotBits)</code>.</p>
 
 <h3 id="cspaces">CSpaces</h3>

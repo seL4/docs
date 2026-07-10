@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-07-09 04:31:11 +0000 -->
+<!-- Page last generated 2026-07-10 02:50:41 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>Notifications | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/Tutorials/notifications.html">
-    <link href="/assets/css/sel4.css?v=1783571471" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1783651841" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -543,6 +543,7 @@
 <p>This tutorial covers notification objects.</p>
 
 <p>You will learn how to:</p>
+
 <ol>
   <li>Set up shared memory between tasks.</li>
   <li>Use notification objects for synchronisation between tasks.</li>
@@ -620,6 +621,7 @@ A notification object consists of a data word, which acts as an array of binary 
 TCBs waiting for notifications.</p>
 
 <p>Notification objects can be in three states:</p>
+
 <ul>
   <li>Waiting - there are TCBs queued on this notification waiting for it to be signalled.</li>
   <li>Active - TCBs have signalled data on this notification,</li>
@@ -629,6 +631,7 @@ TCBs waiting for notifications.</p>
 <h4 id="signalling">Signalling</h4>
 
 <p>When a task signals a notification object (using <code class="language-plaintext highlighter-rouge">seL4_Signal</code>), what occurs depends on the state of the object:</p>
+
 <ul>
   <li>Idle - the data word is set to the badge of the capability used to send the signal, and the object is converted
  to active.</li>
@@ -637,7 +640,7 @@ TCBs waiting for notifications.</p>
 object is transitioned to idle.</li>
 </ul>
 
-<p>In this way notification objects can be seen as a binary array of semaphores - if the signallers all use a
+<p>In this way notification objects can be seen as an array of binary semaphores – if the signallers all use a
 different bit in the badge, they can set different badge bits and waiters can observe which bits have been set.</p>
 
 <h4 id="waiting">Waiting</h4>
@@ -657,23 +660,25 @@ immediately regardless of the state.</p>
 
 <h2 id="interrupts-and-ipc">Interrupts and IPC</h2>
 
-<p>Notification objects can be used to receive signals of interrupt delivery, and can also be bound to TCBs
-such that signals and IPC can be received by the same thread. This is explained in more detail in the
-timer tutorial. <!--TODO link to timer tutorial --></p>
+<p>Notification objects can be used to receive signals of interrupt delivery. This is explained in more detail in the <a href="/Tutorials/interrupts.html">IRQ
+tutorial</a>. Notification objects can also be bound to TCBs such that
+a thread can wait for signals and IPC at the same time.</p>
 
 <h2 id="exercises">Exercises</h2>
 
-<p>These exercises guide you through a basic producer consumer set up using notifications and shared memory. The
-tutorial uses the capDL loader, and already has 2 producer processes (<code class="language-plaintext highlighter-rouge">producer_1.c</code> and <code class="language-plaintext highlighter-rouge">producer_2</code>) and 1 consumer
- process running (<code class="language-plaintext highlighter-rouge">consumer.c</code>). Each has access to a number of capabilities.</p>
+<p>These exercises guide you through a basic producer consumer set up using notifications and shared memory. The tutorial
+uses the capDL loader, and already has 2 producer processes (<code class="language-plaintext highlighter-rouge">producer_1.c</code> and <code class="language-plaintext highlighter-rouge">producer_2.c</code>) and 1 consumer process
+running (<code class="language-plaintext highlighter-rouge">consumer.c</code>). Each has access to a number of capabilities.</p>
 
 <p>Each producer shares a buffer with the consumer, and the consumer processes data from both producers when it is
 available.</p>
 
 <p>When you start the tutorial, the output will look something like this:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booting all finished, dropped to user space
 Waiting for producer
 </code></pre></div></div>
+
 <h3 id="set-up-shared-memory">Set up shared memory</h3>
 
 <p>Both producers start and block immediately, waiting for the consumer to send an IPC with the address of the shared
@@ -770,7 +775,37 @@ which of the producers (it may be both) has produced data.</p>
 </code></pre></div>  </div>
 </details>
 
-<p>At this point, you should see signals from both producers being processed, and the final <code class="language-plaintext highlighter-rouge">Success!</code> message printed.</p>
+<p>At this point, you should see signals from both producers being processed, and
+you should usually see the <code class="language-plaintext highlighter-rouge">Success!</code> message being printed.</p>
+
+<p>However, there is still a race condition: at the end of each loop body, both
+producers will be active in the sense that they are either running/printing or
+waiting on <code class="language-plaintext highlighter-rouge">empty</code>, but they have not been woken up from <code class="language-plaintext highlighter-rouge">empty</code>. Since they can
+both be printing, they can interleave their output with the <code class="language-plaintext highlighter-rouge">Success!</code> message.</p>
+
+<p><strong>Exercise</strong> Make the <code class="language-plaintext highlighter-rouge">Success!</code> printing robust by using <code class="language-plaintext highlighter-rouge">seL4_Wait</code> to wait
+for the producers to finish. Note that after waiting once, both producers may
+have signalled already. Use the badge value to determine whether you have to
+wait a second time.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// TODO, make the printf below race-free with the producers by waiting for</span>
+    <span class="c1">// the producer message. Note that both producers may have already signalled.</span>
+
+</code></pre></div></div>
+<details>
+  <summary><em>Quick solution</em></summary>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// wait for the producers to stop printing</span>
+    <span class="n">seL4_Wait</span><span class="p">(</span><span class="n">full</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">badge</span><span class="p">);</span>
+    <span class="c1">// unless we have received both signals, we need to wait for the second producer</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">badge</span> <span class="o">!=</span> <span class="mi">0</span><span class="n">b11</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">seL4_Wait</span><span class="p">(</span><span class="n">full</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">badge</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div>  </div>
+</details>
+
+<p>Now the final <code class="language-plaintext highlighter-rouge">Success!</code> message printing is robust against races from the
+producers.</p>
 
 <h3 id="further-exercises">Further exercises</h3>
 
