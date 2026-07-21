@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-07-20 04:26:46 +0000 -->
+<!-- Page last generated 2026-07-21 04:15:42 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>capDL Language Specification | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/capdl/lang-spec.html">
-    <link href="/assets/css/sel4.css?v=1784521606" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1784607342" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -690,7 +690,8 @@ in section <a href="#modules">Modules</a>.</p>
              | 'index_shift' ':' number
 
   sched_decl ::= 'schedule' ':' '[' sched_item (',' sched_item)* ','? ']'
-  sched_item ::= '(' number ',' number ')'
+  sched_unit ::= 'ticks' | 'us'
+  sched_item ::= '(' number ',' number sched_unit? ')'
 </code></pre></div></div>
 
 <h4 id="modules">Modules</h4>
@@ -1083,7 +1084,8 @@ ASIDControlCap is specified by <code class="language-plaintext highlighter-rouge
              | 'index_shift' ':' number
 
   sched_decl ::= 'schedule' ':' '[' sched_item (',' sched_item)* ','? ']'
-  sched_item ::= '(' number ',' number ')'
+  sched_unit ::= 'ticks' | 'us'
+  sched_item ::= '(' number ',' number sched_unit? ')'
 </code></pre></div></div>
 
 <p>The Domain schedule declaration is optional and only required for system
@@ -1093,6 +1095,17 @@ initialisation, not for reasoning about capability distribution.</p>
 the domain and the second component the duration. (0, 0) denotes a schedule
 end marker. At most one domain schedule declaration is accepted.
 See <a href="https://github.com/seL4/rfcs/blob/main/src/implemented/0200-domain-schedules.md">RFC-20</a> for detail on domain schedule semantics.</p>
+
+<p>The duration is specified either in units of ticks or microseconds (us).
+Without a unit specifier, it defaults to ticks. This means schedule items
+can appear as <code class="language-plaintext highlighter-rouge">(0, 5)</code> (domain 0, 5 ticks), <code class="language-plaintext highlighter-rouge">(1, 7 ticks)</code> (domain 1, 7 ticks),
+or <code class="language-plaintext highlighter-rouge">(2, 2000 us)</code> (domain 2, 2000 us). On non-MCS, tick values are multiples
+of the KernelTimerTickMS value specified in the kernel build configuration.
+When specifying durations in microseconds, the initialiser enforces the values
+are exact multiples of the period between ticks. In contrast, on MCS configs,
+tick values correspond to a platform-specific frequency. Thus, when specifying
+microseconds on MCS, we instead guarantee that the us-to-tick conversion
+is accurate to the nearest tick, or if not possible, it fails.</p>
 
 <p>The optional <code class="language-plaintext highlighter-rouge">domain_set_start</code> value (0 if left out) denotes which item of the
 provided domain schedule the initialiser will switch to when initialiser
