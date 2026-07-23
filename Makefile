@@ -394,8 +394,8 @@ IGNORE_URLS += https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluatio
 IGNORE_URLS += https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/zcu106.html
 # link checker complains about missing #target, but it exists and works
 IGNORE_URLS += https://releases.llvm.org/8.0.0/tools/clang/docs/CrossCompilation.html
-# link checker chrashes on #target reference for PPF in rust tutorial
-IGNORE_URLS += https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf
+# link checker crashes on #target references into the manual PDFs
+IGNORE_URLS += https://sel4.systems/Info/Docs/seL4-manual-.*\.pdf
 
 # GitHub links with dynamic internal targets such as #L12 fail in the target link check
 # The #target is interpreted as comment by "make", which is what we want -- the link checker has no option
