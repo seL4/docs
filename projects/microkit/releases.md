@@ -9,9 +9,14 @@ SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 This page documents tagged releases of the seL4 [Microkit](../projects/microkit/) and their
 corresponding SDK downloads and GPG signatures.
 
-The downloads are signed by Ivan Velickovic <i.velickovic@unsw.edu.au> with the
-key fingerprint `EFC6 142C FE61 C255 B4CD  E959 6FBD 87E8 4FA8 89BB`. The key
-is available from <https://keys.openpgp.org/>.
+The downloads are signed by Julia Vassiliki `<julia.vassiliki@unsw.edu.au>` with
+the key fingerprint `FE91 4864 43B0 F4EB 9ECC 3652 4D86 8A34 EDF3 FDCA`. [This
+key is available from
+https://keys.openpgp.org/](https://keys.openpgp.org/search?q=julia.vassiliki@unsw.edu.au).
+
+Releases 2.2.0 and before are signed by
+[Ivan Velickovic](https://keys.openpgp.org/search?q=i.velickovic@unsw.edu.au)
+`<i.velickovic@unsw.edu.au>` instead.
 
 {% assign coll = site['releases'] | where: "project", "microkit" %}
 {% comment %}
