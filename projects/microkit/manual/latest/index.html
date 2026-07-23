@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-07-22 04:16:21 +0000 -->
+<!-- Page last generated 2026-07-23 01:57:19 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Microkit User Manual (v2.2.0) | seL4 docs</title>
+    <title>Microkit User Manual (v2.3.0) | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/manual/latest/">
-    <link href="/assets/css/sel4.css?v=1784693781" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1784771839" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -534,7 +534,7 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="microkit-user-manual-v220">Microkit User Manual (v2.2.0)</h1>
+  <h1 id="microkit-user-manual-v230">Microkit User Manual (v2.3.0)</h1>
 
 <p>This is a web version of the manual, you can find a PDF <a href="/projects/microkit/manual/latest/microkit_user_manual.pdf">here</a> as well as in the
 SDK at <code class="language-plaintext highlighter-rouge">doc/microkit_user_manual.pdf</code>.</p>
@@ -621,6 +621,8 @@ This document attempts to clearly describe all of these terms, however as the co
   <li><a href="#irq">interrupt</a></li>
   <li><a href="#fault">fault</a></li>
   <li><a href="#ioport">ioport</a></li>
+  <li><a href="#io_address_space">IO address space</a></li>
+  <li><a href="#domains">domain scheduling</a></li>
 </ul>
 
 <h3 id="system">System</h3>
@@ -763,18 +765,40 @@ The mapping has a number of attributes, which include:</p>
   <li>permissions (read, write and execute)</li>
 </ul>
 
+<p><em>Note:</em> On x86 a memory region can also be <em>mapped</em> into one or more
+IO address spaces. This type of mapping is known as an <em>iomap</em>. It supports
+a number of attributes, which include:</p>
+
+<ul>
+  <li>the io virtual address at which the region is mapped in the IO address space</li>
+  <li>permissions (read, write)</li>
+</ul>
+
 <p><strong>Note:</strong> When a memory region is mapped into multiple protection
 domains, the attributes used for different mappings may vary.</p>
 
 <h4 id="prefilling">Prefilling</h4>
 
 <p>A <em>memory region</em> may be prefilled with data from a file at build time
-by specifying the file’s name in the [System Description File]{#sysdesc}.</p>
+by specifying the file’s name in the <a href="#sysdesc">System Description File</a>.</p>
 
 <p>In this case, specifying the memory region’s size become optional. If
 a size isn’t specified, the memory region will be sized by the length
 of the prefill file, rounded up to the smallest page size or the user
 specified page size.</p>
+
+<p>A <em>memory region</em> can also be prefilled with bootinfo by the capDL Initialiser
+via the parameter <code class="language-plaintext highlighter-rouge">prefill_bootinfo</code> in the <a href="#sysdesc">System Description File</a>.
+If a size isn’t specified, the memory region defaults to a single smallest page.
+The supported bootinfo types include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">x86_vbe</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x86_mbmap</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x86_acpi_rsdp</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x86_framebuffer</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x86_tsc_freq</code></li>
+</ul>
 
 <h3 id="channels">Channels</h3>
 
@@ -876,6 +900,46 @@ delivered to another PD, the fault being handled depends on when the parent PD i
 <h3 id="ioport">I/O Ports</h3>
 
 <p>I/O ports are x86 mechanisms to access certain physical devices (e.g. PC serial ports or PCI) using the <code class="language-plaintext highlighter-rouge">in</code> and <code class="language-plaintext highlighter-rouge">out</code> CPU instructions. The system description specifies if a protection domain have access to certain port address ranges. These accesses will be executed by seL4 and the result returned to protection domains.</p>
+
+<h3 id="io_address_space">IO Address Spaces</h3>
+
+<p>IO Address Spaces provide a way to isolate device memory accesses within a fixed virtual address space. The isolation provided by the address space is enforced by the underlying hardware IOMMU or SMMU.</p>
+
+<p>IO Address Spaces allow <em>memory regions</em> to be mapped to a provided base IO virtual address. These IO virtual addresses will be translated by the hardware IOMMU or SMMU to the underlying physical memory that backs the memory region.</p>
+
+<h3 id="domains">Domain Scheduling</h3>
+
+<p>seL4, and by extension, Microkit, supports a domain scheduler.
+Domains are used to isolate independent subsystems (sets of protection domains)
+and limit information flow between them.</p>
+
+<p>seL4 switches between the domains according to a cyclical schedule where each
+domain runs for a static duration. Protection domains belong to exactly one
+domain each, and only will run when that domain is active.</p>
+
+<p>The default system fault handler (aka the monitor) lives in domain 0.</p>
+
+<p>Below we describe the behaviour of the domain scheduler and its relevance to
+the Microkit system with reference to the <a href="#sdf-domains">SDF syntax for Domains</a>.</p>
+
+<p>The list of <code class="language-plaintext highlighter-rouge">&lt;schedule_entry&gt;</code> within the <code class="language-plaintext highlighter-rouge">&lt;domain_schedule&gt;</code> element defines
+the domain schedule. The kernel steps through each schedule entry, starting
+from the <code class="language-plaintext highlighter-rouge">start_index</code>, until reaching an <code class="language-plaintext highlighter-rouge">&lt;schedule_end_marker&gt;</code>. Upon reaching
+the “end marker”, it restarts at <code class="language-plaintext highlighter-rouge">start_index</code> once again. This allows one to
+use the domain schedule to setup multiple schedules that can be atomically
+switched between, though at this time Microkit does not expose this feature.</p>
+
+<p>The scheduler duration at the seL4 kernel level is specified in terms of
+platform-specific timer ticks. When specifying a duration in microseconds,
+the capDL initialiser must convert these to timer ticks. It guarantees that
+either it will be the nearest tick value, or that it will fail to boot. If you
+want platform-specific guarantees of certain tick values, you can still specify
+ticks.</p>
+
+<p>There is always an implicit <code class="language-plaintext highlighter-rouge">&lt;schedule_end_marker&gt;</code> at the end of the schedule.</p>
+
+<p>For more details on the domain schedule, please see <a href="https://sel4.github.io/rfcs/implemented/0200-domain-schedules.html">RFC-20: Runtime domain
+schedules</a>.</p>
 
 <h2 id="sdk">SDK</h2>
 
@@ -984,14 +1048,16 @@ The format of the system description is described in a subsequent chapter.</p>
 
 <p>Usage:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [-o OUTPUT] [-r REPORT]
-          [--capdl-json CAPDL_SPEC] [--image-type {binary,elf,uimage}]
-          --board [BOARD] --config CONFIG [--search-path [SEARCH_PATH ...]] system
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>microkit [-h] [OPTIONS] --board BOARD --config CONFIG \
+    [--search-path SEARCH_PATH ...] system
 </code></pre></div></div>
+
+<p>See <code class="language-plaintext highlighter-rouge">microkit --help</code> for a full list of options.</p>
 
 <p>The path to the system description file, board to build the system for, and configuration to build for must be provided.</p>
 
-<p>The search paths provided tell the tool where to find any program images specified in the system description file.</p>
+<p>The search paths provided tell the tool where to find any program images specified in the system description file.
+The current working directory is always included as a search path.</p>
 
 <p>In the case of errors, a diagnostic message shall be output to <code class="language-plaintext highlighter-rouge">stderr</code> and a non-zero code returned.</p>
 
@@ -1004,6 +1070,16 @@ The default output paths are <code class="language-plaintext highlighter-rouge">
 The report can be useful when debugging potential system problems.
 This report does not have a fixed format and may change between versions.
 It is not intended to be machine readable.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">--override-kernel</code> option will override the kernel ELF used for the system rather than from the SDK.
+It is important to note that this is largely just for debugging purposes and the Microkit is
+highly tied to a specific version and configuration of the kernel. When using this option the kernel
+should be the same version and compiled with the same configuration options.</p>
+
+<p>If the <code class="language-plaintext highlighter-rouge">--viper-output PREFIX</code> argument is set, then for each protection domain <code class="language-plaintext highlighter-rouge">name</code> specified in
+the system description file, a file <code class="language-plaintext highlighter-rouge">PREFIX/name.vpr</code> will be output, containing a description of the
+capability table of the given PD in the Viper verification language. These output files can be used
+for verification purposes, but the exact format may change in future versions of the tool.</p>
 
 <h3 id="image-format">Image format</h3>
 
@@ -1086,6 +1162,7 @@ void microkit_deferred_notify(microkit_channel ch);
 void microkit_deferred_irq_ack(microkit_channel ch);
 void microkit_pd_restart(microkit_child pd, seL4_Word entry_point);
 void microkit_pd_stop(microkit_child pd);
+void microkit_pd_resume(microkit_child pd);
 void microkit_mr_set(seL4_Uint8 mr, seL4_Word value);
 seL4_Word microkit_mr_get(seL4_Uint8 mr);
 void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point);
@@ -1163,7 +1240,10 @@ as to what fault occurred.</p>
 <p>The <code class="language-plaintext highlighter-rouge">reply_msginfo</code> argument is given by libmicrokit and can be used to reply to the fault.</p>
 
 <p>The returned <code class="language-plaintext highlighter-rouge">seL4_Bool</code> is whether or not to reply to the fault with the message <code class="language-plaintext highlighter-rouge">reply_msginfo</code>.
-Returning <code class="language-plaintext highlighter-rouge">seL4_True</code> will reply to the fault. Returning <code class="language-plaintext highlighter-rouge">seL4_False</code> will not reply to the fault.</p>
+Returning <code class="language-plaintext highlighter-rouge">seL4_True</code> will reply to the fault and resume the child PD or vCPU at the fault restart program counter.
+For more details, please see the “Faults” section of the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 Manual</a>.</p>
+
+<p>Returning <code class="language-plaintext highlighter-rouge">seL4_False</code> will not reply to the fault and causes the child PD or vCPU to no longer run.</p>
 
 <p>You can use <code class="language-plaintext highlighter-rouge">microkit_msginfo_get_label</code> on <code class="language-plaintext highlighter-rouge">msginfo</code> to deduce what kind of fault happened
 (for example, whether it was a user exception or a virtual memory fault).</p>
@@ -1174,6 +1254,47 @@ to handle it.</p>
 <p>To find the full list of possible faults that could occur and details regarding to replying to a particular
 kind of fault, please see the ‘Faults’ section of the
 <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf">seL4 reference manual</a>.</p>
+
+<h4 id="x86-vcpu-fault">x86 VCPU fault</h4>
+<p>Please see the ‘VMX BASIC EXIT REASONS’ section of the
+[Intel® 64 and IA-32 Architectures Software Developer’s Manual Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, and 4]
+(https://cdrdv2.intel.com/v1/dl/getContent/671200) for a list of possible VM Exit reasons.</p>
+
+<p>These message registers contain data relating to the VM Exit:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_CALL_EIP_MR</code>: Instruction Pointer,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_CALL_CONTROL_PPC_MR</code>: Primary Processor Based VM Execution Controls,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_CALL_INTERRUPT_INFO_MR</code>: VM Entry Interruption-Information,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_REASON_MR</code>: VM Exit reason,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_QUALIFICATION_MR</code>: VM Exit qualification,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_INSTRUCTION_LEN_MR</code>: Length of instruction that caused the VM Exit,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_GUEST_PHYSICAL_MR</code>: Guest Physical Address of the VM Exit,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_RFLAGS_MR</code>: Guest FLAGS register,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_GUEST_INT_MR</code>: Guest interruptability,</li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_CR3_MR</code>: Guest CR3.</li>
+</ul>
+
+<p>Some of these message registers may not contain valid data depending on the VM Exit reason,
+please consult the Intel SDM for more details.</p>
+
+<p>These message registers contain the guest general purpose registers at the time of VM Exit:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EAX</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EBX</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_ECX</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EDX</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_ESI</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EDI</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EBP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R8</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R9</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R10</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R11</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R12</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R13</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R14</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_R15</code></li>
+</ul>
 
 <h3 id="microkit_msginfo-microkit_ppcallmicrokit_channel-ch-microkit_msginfo-msginfo"><code class="language-plaintext highlighter-rouge">microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo)</code></h3>
 
@@ -1224,6 +1345,10 @@ This will set the program counter of the child protection domain to <code class=
 
 <p>Stop the execution of the child protection domain with ID <code class="language-plaintext highlighter-rouge">pd</code>.</p>
 
+<h3 id="void-microkit_pd_resumemicrokit_child-pd"><code class="language-plaintext highlighter-rouge">void microkit_pd_resume(microkit_child pd)</code></h3>
+
+<p>Resume the execution of the child protection domain with ID <code class="language-plaintext highlighter-rouge">pd</code> that is stopped.</p>
+
 <h3 id="microkit_msginfo-microkit_msginfo_newuint64_t-label-uint16_t-count"><code class="language-plaintext highlighter-rouge">microkit_msginfo microkit_msginfo_new(uint64_t label, uint16_t count)</code></h3>
 
 <p>Creates a new message structure.</p>
@@ -1255,9 +1380,7 @@ This will set the program counter of the vCPU to <code class="language-plaintext
 
 <p>Stop the execution of the VM’s virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>.</p>
 
-<h3 id="void-microkit_vcpu_arm_inject_irqmicrokit_child-vcpu-sel4_uint16-irq">`void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,</h3>
-<p>seL4_Uint8 priority, seL4_Uint8 group,
-seL4_Uint8 index)`</p>
+<h3 id="void-microkit_vcpu_arm_inject_irqmicrokit_child-vcpu-sel4_uint16-irq-sel4_uint8-priority-sel4_uint8-group-sel4_uint8-index"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq, seL4_Uint8 priority, seL4_Uint8 group, seL4_Uint8 index)</code></h3>
 
 <p>Inject a virtual ARM interrupt for a virtual CPU <code class="language-plaintext highlighter-rouge">vcpu</code> with IRQ number <code class="language-plaintext highlighter-rouge">irq</code>.
 The <code class="language-plaintext highlighter-rouge">priority</code> (0-31) determines what ARM GIC (generic interrupt controller)
@@ -1306,95 +1429,9 @@ pre-empt the Secure Monitor and therefore any kernel WCET properties are no long
 <p>Read a Virtual Machine Control Structure field specified by <code class="language-plaintext highlighter-rouge">field</code> for a given virtual CPU
 with ID <code class="language-plaintext highlighter-rouge">vcpu</code> using the <code class="language-plaintext highlighter-rouge">vmread</code> instruction.</p>
 
-<p>All the VMCS fields are listed in the seL4 source at <code class="language-plaintext highlighter-rouge">include/arch/x86/arch/object/vcpu.h</code>.</p>
-
-<p>The following fields can be read from:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RIP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RSP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DEBUGCTRL</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PAT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_EFER</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PERF_GLOBAL_CTRL</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE0</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE1</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE2</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE3</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_INTERRUPTABILITY</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ACTIVITY</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SMBASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_CS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PREEMPTION_TIMER_VALUE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DR7</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RFLAGS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PENDING_DEBUG_EXCEPTIONS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_ESP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_EIP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_MASK</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_MASK</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_READ_SHADOW</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_READ_SHADOW</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_INSTRUCTION_ERROR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INTERRUPT_INFO</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INTERRUPT_ERROR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IDT_VECTOR_INFO</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IDT_VECTOR_ERROR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INSTRUCTION_LENGTH</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_EXIT_INSTRUCTION_INFO</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_GUEST_PHYSICAL</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RCX</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RSI</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RDI</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_IO_RIP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_DATA_GUEST_LINEAR_ADDRESS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_INTERRUPTION_INFO</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PIN_EXECUTION_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PRIMARY_PROCESSOR_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_SECONDARY_PROCESSOR_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXCEPTION_BITMAP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXIT_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR0</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR3</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR4</code></li>
-</ul>
+<p>The seL4 kernel only allows certain VMCS fields to be read by userspace. For a full list of allowed
+fields, see <code class="language-plaintext highlighter-rouge">decodeReadVMCS()</code> in seL4 source:
+<a href="https://github.com/seL4/seL4/blob/master/src/arch/x86/object/vcpu.c">src/arch/x86/object/vcpu.c</a></p>
 
 <h3 id="void-microkit_vcpu_x86_write_vmcsmicrokit_child-vcpu-sel4_word-field-sel4_word-value"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_write_vmcs(microkit_child vcpu, seL4_Word field, seL4_Word value)</code></h3>
 
@@ -1403,107 +1440,27 @@ with ID <code class="language-plaintext highlighter-rouge">vcpu</code> using the
 that are fixed in the hardware are correct, and that any features required for kernel correctness
 are not disabled.</p>
 
-<p>All the VMCS fields are listed in the seL4 source at <code class="language-plaintext highlighter-rouge">include/arch/x86/arch/object/vcpu.h</code>.</p>
-
-<p>The following fields can be written to:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RIP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RSP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_SELECTOR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DEBUGCTRL</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PAT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_EFER</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PERF_GLOBAL_CTRL</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE0</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE1</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE2</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PDPTE3</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_LIMIT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_ACCESS_RIGHTS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_INTERRUPTABILITY</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ACTIVITY</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SMBASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_CS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PREEMPTION_TIMER_VALUE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_ES_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_FS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GS_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_LDTR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_TR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_GDTR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_IDTR_BASE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_DR7</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_RFLAGS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_PENDING_DEBUG_EXCEPTIONS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_ESP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_SYSENTER_EIP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_MASK</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_MASK</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR0_READ_SHADOW</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_CR4_READ_SHADOW</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXCEPTION_BITMAP</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_INTERRUPTION_INFO</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_EXCEPTION_ERROR_CODE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PIN_EXECUTION_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_PRIMARY_PROCESSOR_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_SECONDARY_PROCESSOR_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_ENTRY_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_CONTROL_EXIT_CONTROLS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR3</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR0</code></li>
-  <li><code class="language-plaintext highlighter-rouge">VMX_GUEST_CR4</code></li>
-</ul>
+<p>The seL4 kernel only allows certain VMCS fields to be written by userspace. For a full list of allowed
+fields, see <code class="language-plaintext highlighter-rouge">decodeWriteVMCS()</code> in seL4 source:
+<a href="https://github.com/seL4/seL4/blob/master/src/arch/x86/object/vcpu.c">src/arch/x86/object/vcpu.c</a></p>
 
 <h3 id="sel4_word-microkit_vcpu_x86_read_msrmicrokit_child-vcpu-sel4_word-field"><code class="language-plaintext highlighter-rouge">seL4_Word microkit_vcpu_x86_read_msr(microkit_child vcpu, seL4_Word field)</code></h3>
 
-<p>Read a 64-bit Model Specific Register of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> specified by
-<code class="language-plaintext highlighter-rouge">field</code> from hardware using the <code class="language-plaintext highlighter-rouge">rdmsr</code> instruction. The following registers can be written to:</p>
+<p>Read a 64-bit Model Specific Register (MSR) of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> specified by
+<code class="language-plaintext highlighter-rouge">field</code> from hardware using the <code class="language-plaintext highlighter-rouge">rdmsr</code> instruction.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">IA32_LSTAR_MSR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">IA32_STAR_MSR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">IA32_CSTAR_MSR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">IA32_FMASK_MSR</code></li>
-</ul>
+<p>The seL4 kernel only allows certain MSRs to be read by userspace. For a full list of allowed
+MSRs, see <code class="language-plaintext highlighter-rouge">decodeVCPUReadMSR()</code> in seL4 source:
+<a href="https://github.com/seL4/seL4/blob/master/src/arch/x86/object/vcpu.c">src/arch/x86/object/vcpu.c</a></p>
 
 <h3 id="void-microkit_vcpu_x86_write_msrmicrokit_child-vcpu-sel4_word-field-sel4_word-value"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_write_msr(microkit_child vcpu, seL4_Word field, seL4_Word value)</code></h3>
 
-<p>Write a 64-bit Model Specific Register of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> specified by
-<code class="language-plaintext highlighter-rouge">field</code> to hardware using the <code class="language-plaintext highlighter-rouge">wrmsr</code> instruction. The following registers can be read from:</p>
+<p>Write a 64-bit Model Specific Register (MSR) of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code> specified by
+<code class="language-plaintext highlighter-rouge">field</code> to hardware using the <code class="language-plaintext highlighter-rouge">wrmsr</code> instruction.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">IA32_LSTAR_MSR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">IA32_STAR_MSR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">IA32_CSTAR_MSR</code></li>
-  <li><code class="language-plaintext highlighter-rouge">IA32_FMASK_MSR</code></li>
-</ul>
+<p>The seL4 kernel only allows certain MSRs to be written by userspace. For a full list of allowed
+MSRs, see <code class="language-plaintext highlighter-rouge">decodeVCPUWriteMSR()</code> in seL4 source:
+<a href="https://github.com/seL4/seL4/blob/master/src/arch/x86/object/vcpu.c">src/arch/x86/object/vcpu.c</a></p>
 
 <h3 id="void-microkit_vcpu_x86_enable_ioportmicrokit_child-vcpu-microkit_ioport-ioport_id-sel4_word-port_addr-sel4_word-length"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word length)</code></h3>
 
@@ -1520,6 +1477,29 @@ virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</cod
 <p>Write the registers of a given virtual CPU with ID <code class="language-plaintext highlighter-rouge">vcpu</code>. The <code class="language-plaintext highlighter-rouge">regs</code> argument is the pointer to
 the struct of registers <code class="language-plaintext highlighter-rouge">seL4_VCPUContext</code> that are written from.</p>
 
+<h3 id="void-microkit_vcpu_x86_onvoid"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_on(void)</code></h3>
+
+<p>Start running the vCPU bound to this PD.</p>
+
+<p>The vCPU runs after every return from a Microkit entrypoint; it does not run concurrently with the native thread.</p>
+
+<p>The kernel performs minimal setup of the vCPU’s architectural state, configuring only the hardware-mandated
+fixed bits and setting VMCS fields required to safely context-switch between VMX root and non-root operations.
+The caller is responsible for initialising all other architectural state such as the instruction pointer using
+<code class="language-plaintext highlighter-rouge">microkit_vcpu_x86_write_vmcs()</code>, in accordance with the
+<a href="https://cdrdv2.intel.com/v1/dl/getContent/671200">Intel SDM</a>.</p>
+
+<h3 id="void-microkit_vcpu_x86_offvoid"><code class="language-plaintext highlighter-rouge">void microkit_vcpu_x86_off(void)</code></h3>
+
+<p>Stop the PD from switching to guest execution mode when a Microkit entrypoint returns.</p>
+
+<h3 id="libmicrokit_cspace_root_slot_to_cptr"><code class="language-plaintext highlighter-rouge">seL4_CPtr microkit_cspace_root_slot_to_cptr(seL4_Word slot)</code></h3>
+
+<p>Converts the slot identifier of the <code class="language-plaintext highlighter-rouge">&lt;cspace&gt;</code>’s capability element into an
+<code class="language-plaintext highlighter-rouge">seL4_CPtr</code> value to be used in <code class="language-plaintext highlighter-rouge">libsel4</code> calls by the PD.</p>
+
+<p>If the slot exceeds the valid range of inputs (<code class="language-plaintext highlighter-rouge">0 &lt;= slot &lt; MICROKIT_MAX_USER_CAPS</code>), it returns the value <code class="language-plaintext highlighter-rouge">seL4_CapNull</code>.</p>
+
 <h2 id="sysdesc">System Description File</h2>
 
 <p>This section describes the format of the System Description File (SDF).</p>
@@ -1535,6 +1515,7 @@ the struct of registers <code class="language-plaintext highlighter-rouge">seL4_
   <li><code class="language-plaintext highlighter-rouge">protection_domain</code></li>
   <li><code class="language-plaintext highlighter-rouge">memory_region</code></li>
   <li><code class="language-plaintext highlighter-rouge">channel</code></li>
+  <li><code class="language-plaintext highlighter-rouge">domains</code></li>
 </ul>
 
 <h3 id="protection_domain"><code class="language-plaintext highlighter-rouge">protection_domain</code></h3>
@@ -1553,6 +1534,9 @@ the struct of registers <code class="language-plaintext highlighter-rouge">seL4_
 Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">cpu</code>: (optional) set the physical CPU core this PD will run on. Defaults to zero.</li>
   <li><code class="language-plaintext highlighter-rouge">smc</code>: (optional, only on ARM) Allow the PD to give an SMC call for the kernel to perform.. Defaults to false.</li>
+  <li><code class="language-plaintext highlighter-rouge">fpu</code>: (optional) whether this PD can access the FPU. Defaults to true.</li>
+  <li><code class="language-plaintext highlighter-rouge">domain</code>: (conditionally required) the name of the domain that this PD belongs to.
+          If a domain schedule is specified, this is mandatory, else it is disallowed.</li>
 </ul>
 
 <p>Additionally, it supports the following child elements:</p>
@@ -1565,6 +1549,7 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">protection_domain</code>: (zero or more) Describes a child protection domain.</li>
   <li><code class="language-plaintext highlighter-rouge">virtual_machine</code>: (zero or one) Describes a child virtual machine.</li>
   <li><code class="language-plaintext highlighter-rouge">ioport</code>: (zero or more) Describes an I/O port, x86-64 only.</li>
+  <li><code class="language-plaintext highlighter-rouge">cspace</code>: (zero or one) Describes <a href="#sdf-cspace">“extra” capabilities</a> in the microkit-provided CSpace.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">program_image</code> element has the following attributes:</p>
@@ -1602,7 +1587,7 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
   <li><code class="language-plaintext highlighter-rouge">pin</code>: IOAPIC pin that generates the interrupt.</li>
-  <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to.</li>
+  <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to. Must be at least 0 and less than 108. A high vector equals to a high priority.</li>
   <li><code class="language-plaintext highlighter-rouge">ioapic</code>: (optional) Zero based index of the IOAPIC to get the interrupt from. Defaults to 0.</li>
   <li><code class="language-plaintext highlighter-rouge">trigger</code>: (optional) Whether the IRQ is edge triggered (“edge”) or level triggered (“level”). Defaults to “level”.</li>
   <li><code class="language-plaintext highlighter-rouge">polarity</code>: (optional) Whether the line polarity is high (“high”) or low (“low”). Defaults to “high”.</li>
@@ -1613,9 +1598,9 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The channel identifier. Must be at least 0 and less than 63.</li>
-  <li><code class="language-plaintext highlighter-rouge">pcidev</code>: The PCI device address of the device that will generate the interrupt, in BUS:DEV:FUNC notation (e.g. 01:1f:2).</li>
+  <li><code class="language-plaintext highlighter-rouge">pcidev</code>: The PCI device address of the device that will generate the interrupt in hexadecimal, in BUS:DEV.FUNC notation (e.g. 01:1f.2).</li>
   <li><code class="language-plaintext highlighter-rouge">handle</code>: Value of the handle programmed into the data portion of the MSI.</li>
-  <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to.</li>
+  <li><code class="language-plaintext highlighter-rouge">vector</code>: CPU vector to deliver the interrupt to. Must be at least 0 and less than 108. A high vector equals to a high priority.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier of the IRQ.</li>
 </ul>
 
@@ -1645,19 +1630,31 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the parent program image. This symbol will be rewritten with the ID of the child.</li>
 </ul>
 
-<p>The <code class="language-plaintext highlighter-rouge">virtual_machine</code> element has the following attributes:</p>
+<p>On x86-64, a PD with a VCPU cannot have child PDs.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">virtual_machine</code> element has the following attribute:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the virtual machine</li>
-  <li><code class="language-plaintext highlighter-rouge">priority</code>: The priority of the virtual machine (integer 0 to 254).</li>
+</ul>
+
+<p>On ARM, it supports the following additional attributes:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">priority</code>: (optional) The priority of the virtual machine (integer 0 to 254); defaults to 0.</li>
   <li><code class="language-plaintext highlighter-rouge">budget</code>: (optional) The VM’s budget in microseconds; defaults to 1,000.</li>
   <li><code class="language-plaintext highlighter-rouge">period</code>: (optional) The VM’s period in microseconds; must not be smaller than the budget; defaults to the budget.</li>
 </ul>
 
+<p>On x86-64, the VM shares its scheduling parameters with the parent PD.</p>
+
 <p>Additionally, it supports the following child elements:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">vcpu</code>: (one or more) Describes the virtual CPU that will be tied to the virtual machine.</li>
+  <li><code class="language-plaintext highlighter-rouge">vcpu</code>: (one or more) Describes the virtual CPU that will be tied to the virtual machine.
+    <ul>
+      <li>On x86-64, there is a limit of one VCPU per PD.</li>
+    </ul>
+  </li>
   <li><code class="language-plaintext highlighter-rouge">map</code>: (zero or more) Describes mapping of memory regions into the virtual machine.</li>
 </ul>
 
@@ -1665,6 +1662,8 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: The vCPU identifier. Must be at least 0 and less than 62.</li>
+  <li><code class="language-plaintext highlighter-rouge">cpu</code>: (optional) set the physical CPU core that the vCPU will run on. Defaults to the same CPU
+                  core of the PD that the virtual machine belongs to.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the vCPU identifier.</li>
 </ul>
 
@@ -1684,9 +1683,119 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">page_size</code>: (optional) Size of the pages used in the memory region; must be a supported page size if provided. Defaults to the largest page size for the target architecture that the memory region is aligned to.</li>
   <li><code class="language-plaintext highlighter-rouge">phys_addr</code>: (optional) The physical address for the start of the memory region (must be a multiple of the page size).</li>
   <li><code class="language-plaintext highlighter-rouge">prefill_path</code>: (optional) Path to a file containing data that the memory region will be filled with at initialisation.</li>
+  <li><code class="language-plaintext highlighter-rouge">prefill_bootinfo</code>: (optional) Bootinfo type that the memmory region will be filled with by the capDL initialiser.</li>
 </ul>
 
 <p>The <code class="language-plaintext highlighter-rouge">memory_region</code> element does not support any child elements.</p>
+
+<h3 id="sdf-cspace"><code class="language-plaintext highlighter-rouge">cspace</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">cspace</code> element represents the <em>Capability Space</em> of each protection domain.
+This is an advanced feature designed for users of Microkit who want more complex runtime behaviour than the system description file allows.
+For more details on how CSpaces and capabilities work, please see the <a href="https://sel4.systems/Info/Docs/seL4-manual-latest.pdf#chapter.3">‘Capability Spaces’ section of the seL4 reference manual</a>.</p>
+
+<p>It supports no attributes, but supports the following elements as children:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cap_tcb</code>: A capability to a protection domain’s Thread Control Block (TCB).</li>
+  <li><code class="language-plaintext highlighter-rouge">cap_sc</code>: A capability to a protection domain’s Scheduling Context (SC).
+If the protection domain is passive, this is a capability to the notification’s scheduling context.</li>
+  <li><code class="language-plaintext highlighter-rouge">cap_vspace</code>: A capability to a protection domain’s VSpace.</li>
+</ul>
+
+<p>All of the elements support the <code class="language-plaintext highlighter-rouge">slot</code> attribute, which is is an opaque identifier used to address the capability at runtime.
+To convert the <code class="language-plaintext highlighter-rouge">slot</code> to an <code class="language-plaintext highlighter-rouge">seL4_CPtr</code>, use the <a href="#libmicrokit_cspace_root_slot_to_cptr"><code class="language-plaintext highlighter-rouge">seL4_CPtr microkit_cspace_root_slot_to_cptr(seL4_Word slot)</code></a> function.</p>
+
+<p>See the ‘cap_sharing’ example packaged in your SDK or <a href="https://github.com/seL4/microkit/tree/main/example/cap_sharing">on GitHub</a>.</p>
+
+<p>All capability elements (currently) all support the <code class="language-plaintext highlighter-rouge">pd</code> attribute, the name of the protection domain that the capability is from.
+For instance, <code class="language-plaintext highlighter-rouge">&lt;cap_tcb slot="1" pd="alpha"&gt;</code> will place the TCB of PD ‘alpha’ in the CSpace of the current PD.</p>
+
+<h3 id="io_address_space"><code class="language-plaintext highlighter-rouge">io_address_space</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">io_address_space</code> element describes an address space used to isolate a given device.</p>
+
+<p>It supports the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the IO address space</li>
+  <li><code class="language-plaintext highlighter-rouge">peripheral_id</code>: A unique identifier. This must match the identifier used by the hardware IOMMU or SMMU to identify devices.</li>
+  <li><code class="language-plaintext highlighter-rouge">domain_id</code>: A unique domain identifier, synonymous with an ASID. This is not optional due to current
+              constraints with x86 only providing certain information at runtime.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">io_address_space</code> element supports the following elements as children:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">iomap</code>: This is used to map a <em>memory_region</em> into the IO address space.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">iomap</code> element supports the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mr</code>: Identifies the memory region to map.</li>
+  <li><code class="language-plaintext highlighter-rouge">iovaddr</code>: Identifies the io virtual address at which to map the memory region.</li>
+  <li><code class="language-plaintext highlighter-rouge">perms</code>: Identifies the permissions with which to map the memory region. Can be a combination of <code class="language-plaintext highlighter-rouge">r</code> (read), and <code class="language-plaintext highlighter-rouge">w</code> (write).
+         Defaults to read-write.</li>
+</ul>
+
+<h3 id="sdf-domains"><code class="language-plaintext highlighter-rouge">domains</code></h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">domains</code> element describes the (security) domains and their schedule within
+a Microkit system. seL4 only supports the domain scheduler on non-SMP (unicore)
+configurations. There is a fixed upper limit on the number of domains and the
+number of schedule entries, determined by the kernel configurations <code class="language-plaintext highlighter-rouge">KernelNumDomains</code>
+and <code class="language-plaintext highlighter-rouge">KernelNumDomainSchedules</code>. In the default SDK build, we support 16 domains and
+100 schedule entries.</p>
+
+<!-- If updating make sure to update build_sdk.py -->
+
+<p>The SDK includes a ‘Domains’ example which contains a basic example and commented
+example of a valid SDF containing a domain schedule.</p>
+
+<p>It supports no attributes, but supports the following elements as children:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">domain</code>: (one or more) Provides a human-readable name for a domain ID.</li>
+  <li><code class="language-plaintext highlighter-rouge">domain_schedule</code>: (exactly one) Contains the list of scheduler entries.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">domain</code> element has no children, but supports the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: A unique name for the domain.</li>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: (optional) The domain ID.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">domain_schedule</code> element specifies the domain schedule.
+Please see the <a href="#domains">Domains</a> reference for details on these.
+It has the following attributes:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">start_index</code> (optional, defaults to 0) defines the ‘start index’ of the schedule.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">index_shift</code> (optional, defaults to 0) the offset of the Microkit domain schedule
+              within the kernel’s domain schedule array. This is useful for
+              situations (not yet permitted by Microkit) where domain schedules
+              are changed or switched at run time.</p>
+  </li>
+</ul>
+
+<p>It supports two types of child element, the <code class="language-plaintext highlighter-rouge">&lt;schedule_entry&gt;</code> and the
+<code class="language-plaintext highlighter-rouge">&lt;schedule_end_marker&gt;</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;schedule_entry&gt;</code> requires the following attributes:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">domain</code>: The name of the domain to be scheduled.</li>
+  <li><code class="language-plaintext highlighter-rouge">duration</code>: The duration for which the domain should be active.
+            This contains a value and a unit, i.e. <code class="language-plaintext highlighter-rouge">1000 us</code>.
+            The unit can either be ‘us’ or ‘ticks’.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">&lt;schedule_end_marker&gt;</code> has no attributes or children.</p>
 
 <h4 id="page-sizes-by-architecture">Page sizes by architecture</h4>
 
@@ -1723,7 +1832,8 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
   <li><code class="language-plaintext highlighter-rouge">pd</code>: Name of the protection domain for this end.</li>
   <li><code class="language-plaintext highlighter-rouge">id</code>: Channel identifier in the context of the named protection domain. Must be at least 0 and less than 63.</li>
   <li><code class="language-plaintext highlighter-rouge">pp</code>: (optional) Indicates that the protection domain for this end can perform a protected procedure call to the other end; defaults to false.
-      Protected procedure calls can only be to PDs of strictly higher priority.</li>
+      Protected procedure calls can only be to PDs of strictly higher priority.
+      On x86-64, PDs with virtual machines cannot receive protected procedure calls.</li>
   <li><code class="language-plaintext highlighter-rouge">notify</code>: (optional) Indicates that the protection domain for this end can send a notification to the other end; defaults to true.</li>
   <li><code class="language-plaintext highlighter-rouge">setvar_id</code>: (optional) Specifies a symbol in the program image. This symbol will be rewritten with the channel identifier.</li>
 </ul>
@@ -1750,6 +1860,7 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
   <li>odroidc2</li>
   <li>odroidc4</li>
   <li>qemu_virt_aarch64</li>
+  <li>qemu_virt_aarch64_el1</li>
   <li>qemu_virt_riscv64</li>
   <li>rockpro64</li>
   <li>rock3b</li>
@@ -1757,13 +1868,9 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
   <li>rpi4b_2gb</li>
   <li>rpi4b_4gb</li>
   <li>rpi4b_8gb</li>
-  <li>rpi5b_1gb</li>
-  <li>rpi5b_2gb</li>
-  <li>rpi5b_4gb</li>
-  <li>rpi5b_8gb</li>
-  <li>rpi5b_16gb</li>
   <li>serengeti</li>
   <li>star64</li>
+  <li>stm32mp2</li>
   <li>tqma8xqp1gb</li>
   <li>ultra96v2</li>
   <li>x86_64_generic</li>
@@ -1953,9 +2060,9 @@ you can load the image and DTB at another address.</p>
 
 <h3 id="qemu_virt_aarch64">QEMU virt (AArch64)</h3>
 
-<p>Support is available for the virtual AArch64 QEMU platform. This is a platform that is not based
-on any specific SoC or hardware platform and is intended for simulating systems for
-development or testing.</p>
+<p>Support is available for the virtual AArch64 QEMU platform running in EL2. This is a
+platform that is not based on any specific SoC or hardware platform and is intended for simulating
+systems for development or testing.</p>
 
 <p>It should be noted that the platform support is configured with 2GB of main memory and the
 Cortex-A53 CPU. seL4 needs to know the memory layout and CPU at build-time so if
@@ -1966,6 +2073,31 @@ options for <code class="language-plaintext highlighter-rouge">qemu_virt_aarch64
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-system-aarch64 \
     -machine virt,virtualization=on \
+    -cpu cortex-a53 \
+    -nographic \
+    -serial mon:stdio \
+    -device loader,file=[SYSTEM IMAGE],addr=0x70000000,cpu-num=0 \
+    -m size=2G
+</code></pre></div></div>
+
+<p>When using the <a href="#multicore_config">SMP configurations</a> add the <code class="language-plaintext highlighter-rouge">-smp 4</code> argument to the QEMU command.</p>
+
+<h3 id="qemu_virt_aarch64_el1">QEMU virt (AArch64) in EL1</h3>
+
+<p>Support is available for the virtual AArch64 QEMU platform running in EL1. This is a platform that
+is not based on any specific SoC or hardware platform and is intended for simulating systems for
+development or testing. This platform differs from the standard QEMU virt platform in that seL4 runs
+in EL1, making it usable on KVM based virtual machines.</p>
+
+<p>It should be noted that the platform support is configured with 2GB of main memory and the
+Cortex-A53 CPU. seL4 needs to know the memory layout and CPU at build-time so if
+you want to change these parameters (e.g to allow more memory), you will have to change the kernel
+options for <code class="language-plaintext highlighter-rouge">qemu_virt_aarch64_el1</code> in <code class="language-plaintext highlighter-rouge">build_sdk.py</code>.</p>
+
+<p>You can use the following command to simulate a Microkit system:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-system-aarch64 \
+    -machine virt \
     -cpu cortex-a53 \
     -nographic \
     -serial mon:stdio \
@@ -2005,6 +2137,9 @@ you will have to change the kernel options for <code class="language-plaintext h
 <p>You can find more about the QEMU virt platform in the
 <a href="https://www.qemu.org/docs/master/system/target-riscv.html">QEMU documentation</a>.</p>
 
+<p><a id="rpi4b_2gb"></a>
+<a id="rpi4b_4gb"></a>
+<a id="rpi4b_8gb"></a></p>
 <h3 id="rpi4b_1gb">Raspberry Pi 4B</h3>
 
 <p>Support is available for the Raspberry Pi 4 Model B. There are multiple models of the
@@ -2021,34 +2156,6 @@ seL4, the Microkit board names differ for each model:</p>
 
 <p>For initial board setup, please see the instructions on the
 <a href="https://docs.sel4.systems/Hardware/Rpi4.html">seL4 website</a>.</p>
-
-<p>When getting into the U-Boot console you want to load the Microkit binary image to
-address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
-
-<p>For example, if you were to load the image via the MMC you would run the following
-U-Boot commands:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> =&gt; fatload mmc 0 0x10000000 &lt;SYSTEM IMAGE&gt;
- =&gt; go 0x10000000
-</code></pre></div></div>
-
-<h3 id="rpi5b_1gb">Raspberry Pi 5B</h3>
-
-<p>Support is available for the Raspberry Pi 5 Model B. There are multiple models of the
-Raspberry Pi 5B that have different amounts of RAM, we have support for the 1GB,
-2GB, 4GB, 8GB and 16GB models. Because the amount of RAM must be known statically by
-seL4, the Microkit board names differ for each model:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">rpi5b_1gb</code> for 1GB of RAM.</li>
-  <li><code class="language-plaintext highlighter-rouge">rpi5b_2gb</code> for 2GB of RAM.</li>
-  <li><code class="language-plaintext highlighter-rouge">rpi5b_4gb</code> for 4GB of RAM.</li>
-  <li><code class="language-plaintext highlighter-rouge">rpi5b_8gb</code> for 8GB of RAM.</li>
-  <li><code class="language-plaintext highlighter-rouge">rpi5b_16gb</code> for 16GB of RAM.</li>
-</ul>
-
-<p>For initial board setup, please see the instructions on the
-<a href="https://docs.sel4.systems/Hardware/Rpi5.html">seL4 website</a>.</p>
 
 <p>When getting into the U-Boot console you want to load the Microkit binary image to
 address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
@@ -2162,7 +2269,7 @@ For example:</p>
 <p>To use tftp you also need to set the file to load and the memory address to load it to:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=&gt; env set bootfile loader.img
-=&gt; env set loadaddr 0x80280000
+=&gt; env set loadaddr 0x90000000
 =&gt; env save
 </code></pre></div></div>
 
@@ -2194,6 +2301,32 @@ For example:</p>
 ...
 ZynqMP&gt; go 0x40000000
 </code></pre></div></div>
+
+<h3 id="stm32mp2">STM32MP2</h3>
+
+<p>A newly flashed card will autoboot to Linux. You will need to break (Ctrl+c) or disable autoboot. When entering the U-Boot console, load the Microkit binary image at address 0x88000000:</p>
+
+<p>For initial SD card file system flashing using the initial first-stage boot loader TF-A,
+please see the instructions on the
+<a href="https://docs.sel4.systems/Hardware/MP25EV1.html">seL4 website</a>.</p>
+
+<p>For example, to load the image via the current SD/MMC, identify the partition
+containing the image to be loaded. Assuming it is labelized “bootfs” on the partition 8:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STM32MP&gt; mmc part
+...
+8     0x00002242      0x00034241      "bootfs"
+...
+STM32MP&gt; ext2ls mmc 0:8
+...
+     2759776 loader.img
+...
+STM32MP&gt; ext2load mmc 0:8 0x88000000 loader.img
+STM32MP&gt; go 0x88000000
+</code></pre></div></div>
+
+<p>Note that there is a watchdog enabled by the firmware that will cause the board to reset
+after 30 seconds of runtime.</p>
 
 <h3 id="x86_64_generic">x86-64 generic</h3>
 
@@ -2237,6 +2370,47 @@ is configurable at run time with the <code class="language-plaintext highlighter
 <p>To obtain a bootable ISO image, a Multiboot 2-compliant bootloader must be used. Please refer to your
 bootloader’s documentations.</p>
 
+<h4 id="required-cpu-features">Required CPU features</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">x86_64_generic</code> platform’s kernel configuration requires these features from your CPU:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>cpuinfo feature flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Page Table Attribute (PAT)</td>
+      <td>pat</td>
+    </tr>
+    <tr>
+      <td>XSAVE</td>
+      <td>xsave</td>
+    </tr>
+    <tr>
+      <td>x87 state</td>
+      <td>fpu</td>
+    </tr>
+    <tr>
+      <td>SSE state</td>
+      <td>sse</td>
+    </tr>
+    <tr>
+      <td>Huge Page</td>
+      <td>pdpe1gb</td>
+    </tr>
+    <tr>
+      <td>fsgsbase</td>
+      <td>fsgsbase</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To check if your CPU supports a specific feature, boot into Linux and run a command like <code class="language-plaintext highlighter-rouge">grep pdpe1gb /proc/cpuinfo</code>.</p>
+
 <h3 id="x86_64_generic_vtx">x86-64 generic (with VT-x)</h3>
 
 <p>This board supports x86-64 platforms with generic microarchitecture and virtualisation.</p>
@@ -2256,6 +2430,115 @@ not emulate Intel VT-x.</p>
 </code></pre></div></div>
 <p>Consider using the non VT-x configuration: <a href="#x86_64_generic">x86-64 generic</a>, or switch to a x86 emulator that
 emulates Intel VT-x, such as <a href="https://bochs.sourceforge.io/">Bochs</a>.</p>
+
+<h4 id="required-cpu-features-1">Required CPU features</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">x86_64_generic_vtx</code> kernel configuration requires these features from your CPU in addition to
+<code class="language-plaintext highlighter-rouge">x86_64_generic</code>’s requirements:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>cpuinfo feature flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Virtual Machine Extensions (VMX)</td>
+      <td>vmx</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In addition to the CPU feature flags above, the kernel also requires these Intel VT-x features from your CPU:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Intel SDM section reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Enable VMX outside SMX operation</td>
+      <td>Table 7-1, Vol. 2D pg. 7-1</td>
+    </tr>
+    <tr>
+      <td>External-interrupt exiting</td>
+      <td>A.3.1, Vol. 3D pg. A-3</td>
+    </tr>
+    <tr>
+      <td>NMI Exiting</td>
+      <td>A.3.1, Vol. 3D pg. A-3</td>
+    </tr>
+    <tr>
+      <td>Virtual NMIs</td>
+      <td>A.3.1, Vol. 3D pg. A-3</td>
+    </tr>
+    <tr>
+      <td>Use I/O bitmaps</td>
+      <td>A.3.2, Vol. 3D pg. A-3</td>
+    </tr>
+    <tr>
+      <td>Use MSR bitmaps</td>
+      <td>A.3.2, Vol. 3D pg. A-3</td>
+    </tr>
+    <tr>
+      <td>Activate secondary controls</td>
+      <td>A.3.2, Vol. 3D pg. A-3</td>
+    </tr>
+    <tr>
+      <td>Enable Extended Page Table (EPT)</td>
+      <td>A.3.3, Vol. 3D pg. A-4</td>
+    </tr>
+    <tr>
+      <td>Save debug controls</td>
+      <td>A.4.1, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>Host address-space size</td>
+      <td>A.4.1, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>Save guest IA32_PAT on exit</td>
+      <td>A.4.1, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>Load host IA32_PAT on exit</td>
+      <td>A.4.1, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>Save guest IA32_EFER on exit</td>
+      <td>A.4.1, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>Load host IA32_EFER on exit</td>
+      <td>A.4.1, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>IA-32e mode guest</td>
+      <td>A.5, Vol. 3D pg. A-5</td>
+    </tr>
+    <tr>
+      <td>Write-back (WB) for EPT map</td>
+      <td>A.10, Vol. 3D pg. A-8</td>
+    </tr>
+    <tr>
+      <td>2-Mbyte page map for EPT</td>
+      <td>A.10, Vol. 3D pg. A-8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These VT-x features are not exposed via Linux’s <code class="language-plaintext highlighter-rouge">/proc/cpuinfo</code> and can only be checked by reading specific MSRs
+from the CPU. Please see “Appendix A VMX CAPABILITY REPORTING FACILITY” in the
+<a href="https://cdrdv2-public.intel.com/922475/325462-092-sdm-vol-1-2abcd-3abcd-4.pdf">Intel SDM June 2026</a> for more details.
+If your CPU does not support all of these features then the kernel will not boot.</p>
+
+<p>Note that if the “Enable VMX outside SMX operation” bit is not set then the kernel expects that the Lock bit
+(bit 0) of IA32_FEATURE_CONTROL to be unset.</p>
 
 <h3 id="zcu102">ZCU102</h3>
 
@@ -2472,6 +2755,7 @@ job is to initialises and starts the system in conformance with the capDL specif
 all kernel objects that needs to be created. Then for each kernel object, the spec
 describe what state they need to be in and what capabilities exist to that object
 (i.e. who has access to this kernel object). For example, the spec would specify the:</p>
+
 <ul>
   <li>starting Instruction Pointer (IP), Stack Pointer (SP) and IPC buffer pointer of a Thread Control Block (TCB),</li>
   <li>page table structure and mapping attributes of an address space (VSpace),</li>
@@ -2525,7 +2809,7 @@ enough memory to create all required kernel objects.</p>
 to obtain the list of free untyped objects that the kernel would give to the initial task.</p>
 
 <p>While this is non-trivial to do, it comes with the useful property that if the tool
-produces a valid image, there should be no errors upon initialising the system
+produces a valid image, there should be no errors upon initialising the system.
 If there are any errors with configuring the system (e.g running out of memory),
 they will be caught at build-time. This can only reasonably be done due to the
 static-architecture of Microkit systems.</p>
@@ -2584,6 +2868,8 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#irq">Interrupts</a></li>
 <li class="toc-entry toc-h3"><a href="#fault">Faults</a></li>
 <li class="toc-entry toc-h3"><a href="#ioport">I/O Ports</a></li>
+<li class="toc-entry toc-h3"><a href="#io_address_space">IO Address Spaces</a></li>
+<li class="toc-entry toc-h3"><a href="#domains">Domain Scheduling</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#sdk">SDK</a>
@@ -2620,7 +2906,11 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#void-initvoid">void init(void)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-notifiedmicrokit_channel-ch">void notified(microkit_channel ch)</a></li>
 <li class="toc-entry toc-h3"><a href="#microkit_msginfo-protectedmicrokit_channel-ch-microkit_msginfo-msginfo">microkit_msginfo protected(microkit_channel ch, microkit_msginfo msginfo)</a></li>
-<li class="toc-entry toc-h3"><a href="#sel4_bool-faultmicrokit_child-child-microkit_msginfo-msginfo-microkit_msginfo-reply_msginfo">seL4_Bool fault(microkit_child child, microkit_msginfo msginfo, microkit_msginfo *reply_msginfo)</a></li>
+<li class="toc-entry toc-h3"><a href="#sel4_bool-faultmicrokit_child-child-microkit_msginfo-msginfo-microkit_msginfo-reply_msginfo">seL4_Bool fault(microkit_child child, microkit_msginfo msginfo, microkit_msginfo *reply_msginfo)</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#x86-vcpu-fault">x86 VCPU fault</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#microkit_msginfo-microkit_ppcallmicrokit_channel-ch-microkit_msginfo-msginfo">microkit_msginfo microkit_ppcall(microkit_channel ch, microkit_msginfo msginfo)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_notifymicrokit_channel-ch">void microkit_notify(microkit_channel ch)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_irq_ackmicrokit_channel-ch">void microkit_irq_ack(microkit_channel ch)</a></li>
@@ -2628,6 +2918,7 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#void-microkit_deferred_irq_ackmicrokit_channel-ch">void microkit_deferred_irq_ack(microkit_channel ch)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_pd_restartmicrokit_child-pd-uintptr_t-entry_point">void microkit_pd_restart(microkit_child pd, uintptr_t entry_point)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_pd_stopmicrokit_child-pd">void microkit_pd_stop(microkit_child pd)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_pd_resumemicrokit_child-pd">void microkit_pd_resume(microkit_child pd)</a></li>
 <li class="toc-entry toc-h3"><a href="#microkit_msginfo-microkit_msginfo_newuint64_t-label-uint16_t-count">microkit_msginfo microkit_msginfo_new(uint64_t label, uint16_t count)</a></li>
 <li class="toc-entry toc-h3"><a href="#uint64_t-microkit_msginfo_get_labelmicrokit_msginfo-msginfo">uint64_t microkit_msginfo_get_label(microkit_msginfo msginfo)</a></li>
 <li class="toc-entry toc-h3"><a href="#uint64_t-microkit_msginfo_get_countmicrokit_msginfo-msginfo">uint64_t microkit_msginfo_get_count(microkit_msginfo msginfo)</a></li>
@@ -2635,7 +2926,7 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#void-microkit_mr_setuint8_t-mr-uint64_t-value">void microkit_mr_set(uint8_t mr, uint64_t value)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_restartmicrokit_child-vcpu-sel4_word-entry_point">void microkit_vcpu_restart(microkit_child vcpu, seL4_Word entry_point)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_stopmicrokit_child-vcpu">void microkit_vcpu_stop(microkit_child vcpu)</a></li>
-<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_inject_irqmicrokit_child-vcpu-sel4_uint16-irq">`void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq,</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_inject_irqmicrokit_child-vcpu-sel4_uint16-irq-sel4_uint8-priority-sel4_uint8-group-sel4_uint8-index">void microkit_vcpu_arm_inject_irq(microkit_child vcpu, seL4_Uint16 irq, seL4_Uint8 priority, seL4_Uint8 group, seL4_Uint8 index)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_ack_vppimicrokit_child-vcpu-sel4_word-irq">void microkit_vcpu_arm_ack_vppi(microkit_child vcpu, seL4_Word irq)</a></li>
 <li class="toc-entry toc-h3"><a href="#sel4_word-microkit_vcpu_arm_read_regmicrokit_child-vcpu-sel4_word-reg">seL4_Word microkit_vcpu_arm_read_reg(microkit_child vcpu, seL4_Word reg)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_arm_write_regmicrokit_child-vcpu-sel4_word-reg-sel4_word-value">void microkit_vcpu_arm_write_reg(microkit_child vcpu, seL4_Word reg, seL4_Word value)</a></li>
@@ -2649,12 +2940,18 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_enable_ioportmicrokit_child-vcpu-microkit_ioport-ioport_id-sel4_word-port_addr-sel4_word-length">void microkit_vcpu_x86_enable_ioport(microkit_child vcpu, microkit_ioport ioport_id, seL4_Word port_addr, seL4_Word length)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_disable_ioportmicrokit_child-vcpu-sel4_word-port_addr-sel4_word-length">void microkit_vcpu_x86_disable_ioport(microkit_child vcpu, seL4_Word port_addr, seL4_Word length)</a></li>
 <li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_write_regsmicrokit_child-vcpu-sel4_vcpucontext-regs">void microkit_vcpu_x86_write_regs(microkit_child vcpu, seL4_VCPUContext *regs)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_onvoid">void microkit_vcpu_x86_on(void)</a></li>
+<li class="toc-entry toc-h3"><a href="#void-microkit_vcpu_x86_offvoid">void microkit_vcpu_x86_off(void)</a></li>
+<li class="toc-entry toc-h3"><a href="#libmicrokit_cspace_root_slot_to_cptr">seL4_CPtr microkit_cspace_root_slot_to_cptr(seL4_Word slot)</a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#sysdesc">System Description File</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#protection_domain">protection_domain</a></li>
-<li class="toc-entry toc-h3"><a href="#memory_region">memory_region</a>
+<li class="toc-entry toc-h3"><a href="#memory_region">memory_region</a></li>
+<li class="toc-entry toc-h3"><a href="#sdf-cspace">cspace</a></li>
+<li class="toc-entry toc-h3"><a href="#io_address_space">io_address_space</a></li>
+<li class="toc-entry toc-h3"><a href="#sdf-domains">domains</a>
 <ul>
 <li class="toc-entry toc-h4"><a href="#page-sizes-by-architecture">Page sizes by architecture</a>
 <ul>
@@ -2683,16 +2980,25 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#serengeti">Serengeti</a></li>
 <li class="toc-entry toc-h3"><a href="#hifive_p550">SiFive Premier P550</a></li>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_aarch64">QEMU virt (AArch64)</a></li>
+<li class="toc-entry toc-h3"><a href="#qemu_virt_aarch64_el1">QEMU virt (AArch64) in EL1</a></li>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</a></li>
 <li class="toc-entry toc-h3"><a href="#rpi4b_1gb">Raspberry Pi 4B</a></li>
-<li class="toc-entry toc-h3"><a href="#rpi5b_1gb">Raspberry Pi 5B</a></li>
 <li class="toc-entry toc-h3"><a href="#rockpro64">Pine64 ROCKPro64</a></li>
 <li class="toc-entry toc-h3"><a href="#rock3b">Radxa ROCK 3B</a></li>
 <li class="toc-entry toc-h3"><a href="#star64">Pine64 Star64</a></li>
 <li class="toc-entry toc-h3"><a href="#tqma8xqp1gb">TQMa8XQP 1GB</a></li>
 <li class="toc-entry toc-h3"><a href="#ultra96v2">Ultra96V2</a></li>
-<li class="toc-entry toc-h3"><a href="#x86_64_generic">x86-64 generic</a></li>
-<li class="toc-entry toc-h3"><a href="#x86_64_generic_vtx">x86-64 generic (with VT-x)</a></li>
+<li class="toc-entry toc-h3"><a href="#stm32mp2">STM32MP2</a></li>
+<li class="toc-entry toc-h3"><a href="#x86_64_generic">x86-64 generic</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#required-cpu-features">Required CPU features</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#x86_64_generic_vtx">x86-64 generic (with VT-x)</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#required-cpu-features-1">Required CPU features</a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h3"><a href="#zcu102">ZCU102</a></li>
 <li class="toc-entry toc-h3"><a href="#adding-platform-support">Adding Platform Support</a>
 <ul>
