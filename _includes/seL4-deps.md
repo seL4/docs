@@ -36,22 +36,14 @@ If you discover any missing dependencies and packages we welcome new
 
 ### Base dependencies
 
-The basic build package on Ubuntu is the `build-essential` package. To install run:
+To install the base dependencies for building seL4 projects on Ubuntu run the following.
 
 ```sh
 sudo apt-get update
-sudo apt-get install build-essential
-```
-
-Additional base dependencies for building seL4 projects on Ubuntu include installing:
-
-```sh
-sudo apt-get install cmake ccache ninja-build cmake-curses-gui
-sudo apt-get install libxml2-utils ncurses-dev
-sudo apt-get install curl git doxygen device-tree-compiler xxd
-sudo apt-get install u-boot-tools
-sudo apt-get install python3-dev python3-pip python-is-python3
-sudo apt-get install protobuf-compiler python3-protobuf
+sudo apt-get install build-essential cmake ccache ninja-build cmake-curses-gui \
+                     libxml2-utils ncurses-dev curl git doxygen device-tree-compiler \
+                     xxd u-boot-tools protobuf-compiler python3-protobuf python3-dev \
+                     python3-pip python-is-python3
 ```
 
 ### Simulating with QEMU
