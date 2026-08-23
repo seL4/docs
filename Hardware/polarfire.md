@@ -7,7 +7,7 @@ arch: RV64IMAC, RV64GC
 virtualization: false
 iommu: false
 simulation_target: false
-verification: []
+verification: [RISCV64]
 Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
 Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 soc: PolarFire SoC FPGA

@@ -7,7 +7,7 @@ arch: RV64IMAC
 virtualization: false
 iommu: false
 simulation_target: false
-verification: []
+verification: [RISCV64]
 Contrib: "Data61"
 Maintained: "Hensoldt Cyber"
 cpu: Ariane (CVA6)

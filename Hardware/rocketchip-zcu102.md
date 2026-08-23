@@ -2,12 +2,12 @@
 riscv_hardware: true
 cmake_plat: rocketchip-zcu102
 xcompiler_arg: -DRISCV64=1
-platform: Rocketchip
+platform: Rocketchip (zcu102)
 arch: RV64IMAFDC
 virtualization: false
 iommu: false
 simulation_target: false
-verification: []
+verification: [RISCV64]
 Contrib: '<a href="https://dornerworks.com">DornerWorks</a>'
 Maintained: '<a href="https://dornerworks.com">DornerWorks</a>'
 cpu: Rocket

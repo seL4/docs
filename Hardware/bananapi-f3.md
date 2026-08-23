@@ -7,7 +7,7 @@ arch: RV64GCVB
 virtualization: false
 iommu: false
 simulation_target: false
-verification: []
+verification: [RISCV64]
 Contrib: "Community"
 Maintained: "10xEngineers"
 soc: SpacemiT K1

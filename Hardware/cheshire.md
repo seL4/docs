@@ -7,7 +7,7 @@ arch: RV64IMAFDC
 virtualization: false
 iommu: false
 simulation_target: false
-verification: []
+verification: [RISCV64]
 Contrib: "UNSW"
 Maintained: "UNSW"
 cpu: Cheshire
