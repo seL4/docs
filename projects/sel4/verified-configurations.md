@@ -160,6 +160,7 @@ The following properties are verified:
 
 - C-level functional correctness, including fast path
 - integrity and availability (access control)
+- confidentiality (information flow)
 
 Further properties are under development. See also the
 [roadmap](https://sel4.systems/roadmap.html) for status and schedule.
