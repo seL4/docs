@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-09-18 03:27:21 +0000 -->
+<!-- Page last generated 2026-09-18 08:38:23 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Microkit User Manual (v2.3.0) | seL4 docs</title>
+    <title>Microkit User Manual (v2.3.1) | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/microkit/manual/latest/">
-    <link href="/assets/css/sel4.css?v=1789702041" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1789720703" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -534,7 +534,7 @@
                         overflow-x-auto" id="page-top">
 
               <div class="theprose mx-auto  ext-links">
-  <h1 id="microkit-user-manual-v230">Microkit User Manual (v2.3.0)</h1>
+  <h1 id="microkit-user-manual-v231">Microkit User Manual (v2.3.1)</h1>
 
 <p>This is a web version of the manual, you can find a PDF <a href="/projects/microkit/manual/latest/microkit_user_manual.pdf">here</a> as well as in the
 SDK at <code class="language-plaintext highlighter-rouge">doc/microkit_user_manual.pdf</code>.</p>
@@ -1257,10 +1257,10 @@ kind of fault, please see the ‘Faults’ section of the
 
 <h4 id="x86-vcpu-fault">x86 VCPU fault</h4>
 <p>Please see the ‘VMX BASIC EXIT REASONS’ section of the
-[Intel® 64 and IA-32 Architectures Software Developer’s Manual Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, and 4]
-(https://cdrdv2.intel.com/v1/dl/getContent/671200) for a list of possible VM Exit reasons.</p>
+<a href="https://cdrdv2.intel.com/v1/dl/getContent/671200">Intel® 64 and IA-32 Architectures Software Developer’s Manual Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D, and 4</a> for a list of possible VM Exit reasons.</p>
 
 <p>These message registers contain data relating to the VM Exit:</p>
+
 <ul>
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_CALL_EIP_MR</code>: Instruction Pointer,</li>
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_CALL_CONTROL_PPC_MR</code>: Primary Processor Based VM Execution Controls,</li>
@@ -1278,6 +1278,7 @@ kind of fault, please see the ‘Faults’ section of the
 please consult the Intel SDM for more details.</p>
 
 <p>These message registers contain the guest general purpose registers at the time of VM Exit:</p>
+
 <ul>
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EAX</code></li>
   <li><code class="language-plaintext highlighter-rouge">SEL4_VMENTER_FAULT_EBX</code></li>
@@ -1639,6 +1640,7 @@ Must be be between 4KiB and 16MiB and be 4K page-aligned. Defaults to 8KiB.</li>
 </ul>
 
 <p>On ARM, it supports the following additional attributes:</p>
+
 <ul>
   <li><code class="language-plaintext highlighter-rouge">priority</code>: (optional) The priority of the virtual machine (integer 0 to 254); defaults to 0.</li>
   <li><code class="language-plaintext highlighter-rouge">budget</code>: (optional) The VM’s budget in microseconds; defaults to 1,000.</li>
@@ -1868,6 +1870,7 @@ The <code class="language-plaintext highlighter-rouge">id</code> should be passe
   <li>rpi4b_2gb</li>
   <li>rpi4b_4gb</li>
   <li>rpi4b_8gb</li>
+  <li>rpi5b_2gb</li>
   <li>serengeti</li>
   <li>star64</li>
   <li>stm32mp2</li>
@@ -2140,6 +2143,7 @@ you will have to change the kernel options for <code class="language-plaintext h
 <p><a id="rpi4b_2gb"></a>
 <a id="rpi4b_4gb"></a>
 <a id="rpi4b_8gb"></a></p>
+
 <h3 id="rpi4b_1gb">Raspberry Pi 4B</h3>
 
 <p>Support is available for the Raspberry Pi 4 Model B. There are multiple models of the
@@ -2156,6 +2160,27 @@ seL4, the Microkit board names differ for each model:</p>
 
 <p>For initial board setup, please see the instructions on the
 <a href="https://docs.sel4.systems/Hardware/Rpi4.html">seL4 website</a>.</p>
+
+<p>When getting into the U-Boot console you want to load the Microkit binary image to
+address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
+
+<p>For example, if you were to load the image via the MMC you would run the following
+U-Boot commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> =&gt; fatload mmc 0 0x10000000 &lt;SYSTEM IMAGE&gt;
+ =&gt; go 0x10000000
+</code></pre></div></div>
+
+<h3 id="rpi5b_2gb">Raspberry Pi 5B</h3>
+
+<p>Support is available for the Raspberry Pi 5 Model B. As of now, the build defaults
+to the 2GB model. This default is set to ensure memory safety across all the memory
+variants of the Pi 5 by limiting the possibility of kernel corruption. If you need
+access to 4GB, 8GB, or 16GB of RAM you will need to supply a custom Device Tree overlay
+via <code class="language-plaintext highlighter-rouge">KernelCustomDTSOverlay</code> that matches your hardware’s memory layout.</p>
+
+<p>For initial board setup, please see the instructions on the
+<a href="https://docs.sel4.systems/Hardware/Rpi5.html">seL4 website</a>.</p>
 
 <p>When getting into the U-Boot console you want to load the Microkit binary image to
 address 0x10000000 and then run <code class="language-plaintext highlighter-rouge">go 0x10000000</code>.</p>
@@ -2983,6 +3008,7 @@ static-architecture of Microkit systems.</p>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_aarch64_el1">QEMU virt (AArch64) in EL1</a></li>
 <li class="toc-entry toc-h3"><a href="#qemu_virt_riscv64">QEMU virt (RISC-V 64-bit)</a></li>
 <li class="toc-entry toc-h3"><a href="#rpi4b_1gb">Raspberry Pi 4B</a></li>
+<li class="toc-entry toc-h3"><a href="#rpi5b_2gb">Raspberry Pi 5B</a></li>
 <li class="toc-entry toc-h3"><a href="#rockpro64">Pine64 ROCKPro64</a></li>
 <li class="toc-entry toc-h3"><a href="#rock3b">Radxa ROCK 3B</a></li>
 <li class="toc-entry toc-h3"><a href="#star64">Pine64 Star64</a></li>
