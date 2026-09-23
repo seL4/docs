@@ -8,8 +8,8 @@ SPDX-FileCopyrightText: 2025 Proofcraft Pty Ltd
 The following platforms are supported by the seL4 Microkit. See also the section
 on [Board Support Packages](manual/latest/#bsps) in the Microkit manual.
 
-Microkit currently supports [Arm](#arm) AArch64 and [RISC-V](#risc-v) boards. x64
-support is on the [roadmap](roadmap.html).
+Microkit currently supports x86-64, [Arm](#arm) and [RISC-V](#risc-v) platforms.
+Only 64-bit platforms are supported currently.
 
 {%- assign platforms = site.data.microkit_platforms.platforms %}
 
