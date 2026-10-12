@@ -60,7 +60,7 @@ The doc site needs `node` version 20 or later at build time. The default
 `node` and `npm` of recent distribution should work fine:
 
 ```sh
-apt install node
+apt install nodejs
 ```
 
 or on Mac:
