@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-10-19 03:31:05 +0000 -->
+<!-- Page last generated 2026-10-20 03:28:06 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1792380665" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1792466886" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -7294,7 +7294,7 @@ and fault handler.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -7356,7 +7356,7 @@ The start and end offsets are relative to the page being serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -7463,7 +7463,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -7678,7 +7678,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range overlaps the kernel physical address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is not mapped in a VSpace. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -8731,7 +8731,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -8796,7 +8796,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -8861,7 +8861,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -8926,7 +8926,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">start</code>  or  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -9032,7 +9032,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -9097,7 +9097,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -9162,7 +9162,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
@@ -9227,7 +9227,7 @@ serviced.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a CPtr to a capability of the wrong type. Or,  <code class="language-plaintext highlighter-rouge">end</code>  is in the kernel virtual address range. Or, if hypervisor support is configured, the requested range is not entirely within the kernel physical memory window.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_InvalidArgument</code></td>
