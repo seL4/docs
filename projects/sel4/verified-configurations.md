@@ -29,28 +29,27 @@ Current verified configurations can be found in seL4 sources in the
 ```sh
 cd configs/
 ls *_verified.cmake
-# AARCH64_bcm2711_verified.cmake           ARM_hikey_verified.cmake
-# AARCH64_bcm2712_verified.cmake           ARM_HYP_exynos5_verified.cmake
-# AARCH64_hikey_verified.cmake             ARM_HYP_exynos5410_verified.cmake
-# AARCH64_imx8mm_verified.cmake            ARM_HYP_verified.cmake
-# AARCH64_imx8mq_verified.cmake            ARM_imx8mm_verified.cmake
-# AARCH64_imx93_verified.cmake             ARM_MCS_verified.cmake
-# AARCH64_maaxboard_verified.cmake         ARM_omap3_verified.cmake
-# AARCH64_MCS_verified.cmake               ARM_tk1_verified.cmake
-# AARCH64_odroidc2_verified.cmake          ARM_verified.cmake
-# AARCH64_odroidc4_verified.cmake          ARM_zynq7000_verified.cmake
-# AARCH64_rockpro64_verified.cmake         ARM_zynqmp_verified.cmake
-# AARCH64_stm32mp2_verified.cmake          RISCV64_ariane_verified.cmake
-# AARCH64_tqma_verified.cmake              RISCV64_bananapi-f3_verified.cmake
-# AARCH64_tx1_verified.cmake               RISCV64_cheshire_verified.cmake
-# AARCH64_ultra96v2_verified.cmake         RISCV64_hifive-p550_verified.cmake
-# AARCH64_verified.cmake                   RISCV64_MCS_verified.cmake
-# AARCH64_zynqmp_verified.cmake            RISCV64_polarfire_verified.cmake
-# ARM_am335x_verified.cmake                RISCV64_rocketchip_verified.cmake
-# ARM_bcm2837_verified.cmake               RISCV64_rocketchip-zcu102_verified.cmake
-# ARM_exynos4_verified.cmake               RISCV64_star64_verified.cmake
+# AARCH64_bcm2711_verified.cmake           ARM_HYP_exynos5410_verified.cmake
+# AARCH64_bcm2712_verified.cmake           ARM_HYP_verified.cmake
+# AARCH64_imx8mm_verified.cmake            ARM_imx8mm_verified.cmake
+# AARCH64_imx8mq_verified.cmake            ARM_MCS_verified.cmake
+# AARCH64_imx93_verified.cmake             ARM_omap3_verified.cmake
+# AARCH64_maaxboard_verified.cmake         ARM_tk1_verified.cmake
+# AARCH64_MCS_verified.cmake               ARM_verified.cmake
+# AARCH64_odroidc2_verified.cmake          ARM_zynq7000_verified.cmake
+# AARCH64_odroidc4_verified.cmake          ARM_zynqmp_verified.cmake
+# AARCH64_rockpro64_verified.cmake         RISCV64_ariane_verified.cmake
+# AARCH64_stm32mp2_verified.cmake          RISCV64_bananapi-f3_verified.cmake
+# AARCH64_tqma_verified.cmake              RISCV64_cheshire_verified.cmake
+# AARCH64_tx1_verified.cmake               RISCV64_hifive-p550_verified.cmake
+# AARCH64_ultra96v2_verified.cmake         RISCV64_MCS_verified.cmake
+# AARCH64_verified.cmake                   RISCV64_polarfire_verified.cmake
+# AARCH64_zynqmp_verified.cmake            RISCV64_rocketchip_verified.cmake
+# ARM_am335x_verified.cmake                RISCV64_rocketchip-zcu102_verified.cmake
+# ARM_bcm2837_verified.cmake               RISCV64_star64_verified.cmake
 # ARM_exynos5410_verified.cmake            RISCV64_verified.cmake
 # ARM_exynos5422_verified.cmake            X64_verified.cmake
+# ARM_HYP_exynos5_verified.cmake
 ```
 
 To obtain specific source code and build for a given configuration (e.g.

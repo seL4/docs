@@ -12,6 +12,7 @@ cpu: Cortex-A53
 verification: [AARCH64]
 Contrib: Data61
 Maintained: false
+last_release: 16.0.0
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.

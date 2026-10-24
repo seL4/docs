@@ -156,10 +156,9 @@ configurations:
   - name: KernelDebugDisablePrefetchers
     display_name: "KernelDebugDisablePrefetchers"
     description: "On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent \
-    cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher. On the cortex \
-    a53 this disables the L1 Data prefetcher."
+    cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher."
     maintainer: "seL4 Foundation"
-    status: "Available if KernelArchX86 OR KernelPlatformHikey is set. (Default: Off)"
+    status: "Available if KernelArchX86 is set. (Default: Off)"
     component_type: debug
 
 
@@ -220,7 +219,7 @@ configurations:
     description: "Adds a system call that allows users to specify code to be run in kernel mode. \
     Useful for profiling."
     maintainer: "seL4 Foundation"
-    status: "Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelPlatformHikey;NOT KernelSkimWindow. (Default: Off)"
+    status: "Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelSkimWindow. (Default: Off)"
     component_type: profiling
   - name: KernelStackBits
     display_name: "KernelStackBits"
@@ -841,7 +840,7 @@ components:
     display_name: "samsung,exynos4210-uart"
     description: "exynos4210 serial seL4 driver"
     maintainer: "seL4 Foundation"
-    status: "active, currently used by the exynos4 seL4 platform"
+    status: "active, currently used by the exynos5 seL4 platforms"
     component_type: kernel-driver-serial
   - name: amlogic,meson-gx-uart
     display_name: "amlogic,meson-gx-uart"
@@ -867,12 +866,6 @@ components:
     maintainer: "seL4 Foundation"
     status: "active, currently used by some imx* seL4 platforms"
     component_type: kernel-driver-serial
-  - name: qcom,msm-uartdm
-    display_name: "qcom,msm-uartdm"
-    description: "apq8064 serial seL4 driver"
-    maintainer: "seL4 Foundation"
-    status: "Inactive, currently used by the currently unmaintained apq8064 seL4 platform"
-    component_type: kernel-driver-serial
   - name: arm-misc
     display_name: "nvidia,tegra20-uart;ti,omap3-uart;snps,dw-apb-uart"
     description: "Simple Arm serial seL4 driver"
@@ -897,23 +890,11 @@ components:
     maintainer: "seL4 Foundation"
     status: "Active, currently used by the cortex-a9 platforms"
     component_type: kernel-driver-timer
-  - name: qcom,kpss-timer
-    display_name: "qcom,kpss-timer"
-    description: "apq8064 timer seL4 driver"
-    maintainer: "seL4 Foundation"
-    status: "Inactive, currently used by the currently unmaintained apq8064 seL4 platform"
-    component_type: kernel-driver-timer
   - name: ti,am335x-timer
     display_name: "ti,am335x-timer"
     description: "am335x timer seL4 driver"
     maintainer: "seL4 Foundation"
     status: "Active, currently used by the am335x seL4 platforms"
-    component_type: kernel-driver-timer
-  - name: samsung,exynos4412-mct
-    display_name: "samsung,exynos4412-mct"
-    description: "exynos4 timer seL4 driver"
-    maintainer: "seL4 Foundation"
-    status: "Active, currently used by the exynos4 seL4 platform"
     component_type: kernel-driver-timer
   - name: ti,omap3430-timer
     display_name: "ti,omap3430-timer"
@@ -976,18 +957,6 @@ components:
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
-  - name: exynos4.dts
-    display_name: exynos4.dts
-    description: "exynos4 platform device tree (dts) sourced from Linux kernel path: exynos4412-odroidx"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: kernel-device-tree
-  - name: exynos5250.dts
-    display_name: exynos5250.dts
-    description: "exynos5250 platform device tree (dts) sourced from Linux kernel path: exynos5250-arndale"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: kernel-device-tree
   - name: exynos5410.dts
     display_name: exynos5410.dts
     description: "exynos5410 platform device tree (dts) sourced from Linux kernel path: exynos5410-odroidxu"
@@ -1024,12 +993,6 @@ components:
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree
-  - name: apq8064.dts
-    display_name: apq8064.dts
-    description: "apq8064 platform device tree (dts) sourced from Linux kernel path: qcom-apq8064-ifc6410"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: kernel-device-tree
   - name: allwinnera20.dts
     display_name: allwinnera20.dts
     description: "allwinnera20 platform device tree (dts) sourced from Linux kernel path: sun7i-a20-cubietruck"
@@ -1051,12 +1014,6 @@ components:
   - name: odroidc2.dts
     display_name: odroidc2.dts
     description: "odroidc2 platform device tree (dts) sourced from Linux kernel path: amlogic/meson-gxbb-odroidc2"
-    maintainer: "seL4 Foundation"
-    status: "active"
-    component_type: kernel-device-tree
-  - name: hikey.dts
-    display_name: hikey.dts
-    description: "hikey platform device tree (dts) sourced from Linux kernel path: hisilicon/hi6220-hikey"
     maintainer: "seL4 Foundation"
     status: "active"
     component_type: kernel-device-tree

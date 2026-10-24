@@ -461,13 +461,13 @@ components:
     display_name: "plat/fvp/serial.c"
     description: "fvp arm,pl011 serial driver"
     maintainer: "seL4 Foundation"
-    status: "Derived from the pl011 driver for the hikey platform."
+    status: "Derived from the pl011 driver of the (removed) hikey platform."
     component_type: user-driver-serial
   - name: plat/fvp/sp804.c
     display_name: "plat/fvp/sp804.c"
     description: "fvp arm,sp804 timer driver"
     maintainer: "seL4 Foundation"
-    status: "Derived from the sp804 driver for the hikey platform."
+    status: "Derived from the sp804 driver of the (removed) hikey platform."
     component_type: user-driver-timer
   - name: plat/fvp/ltimer.c
     display_name: "plat/fvp/ltimer.c"
@@ -475,67 +475,12 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported on fvp platform."
     component_type: user-driver-ltimer
-  - name: plat/exynos4/clock.c
-    display_name: "plat/exynos4/clock.c"
-    description: "exynos4 clock subsystem driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on exynos4 platform."
-    component_type: user-driver-clock
-  - name: plat/exynos4/src.c
-    display_name: "plat/exynos4/src.c"
-    description: "exynos4 samsung,exynos4-sysreg system control driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on exynos4 platforms. Currently can only be used to enable power for USB PHYs."
-    component_type: user-driver-other
-  - name: plat/hikey/serial.c
-    display_name: "plat/hikey/serial.c"
-    description: "hikey arm,pl011 Serial driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on Hikey platform. Could likely be extended to other platforms."
-    component_type: user-driver-serial
-  - name: plat/hikey/ltimer.c
-    display_name: "plat/hikey/ltimer.c"
-    description: "hikey ltimer implementation using 2 sp804 timers"
-    maintainer: "seL4 Foundation"
-    status: "Supported on hikey platform."
-    component_type: user-driver-ltimer
-  - name: plat/hikey/rtc.c
-    display_name: "plat/hikey/rtc.c"
-    description: "hikey arm,pl031 RTC driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on Hikey platform. Could likely be extended to other platforms."
-    component_type: user-driver-timer
-  - name: plat/hikey/dmt.c
-    display_name: "plat/hikey/dmt.c"
-    description: "hikey arm,sp804 timer driver"
-    maintainer: "seL4 Foundation"
-    status: "Supported on Hikey platform. Could likely be extended to other platforms."
-    component_type: user-driver-timer
   - name: plat/qemu-arm-virt/serial.c
     display_name: "plat/qemu-arm-virt/serial.c"
     description: "qemu-arm-virt arm,pl011 serial driver"
     maintainer: "seL4 Foundation"
-    status: "Derived from the pl011 driver for the hikey platform."
+    status: "Derived from the pl011 driver of the (removed) hikey platform."
     component_type: user-driver-serial
-  # FIXME: commented out for now, should use a filter instead
-  # - name: plat/apq8064/timer.c
-  #   display_name: "plat/apq8064/timer.c"
-  #   description: "apq8064 timer driver"
-  #   maintainer: "seL4 Foundation"
-  #   status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
-  #   component_type: user-driver-timer
-  # - name: plat/apq8064/serial.c
-  #   display_name: "plat/apq8064/serial.c"
-  #   description: "apq8064 qcom,gsbi-v1.0.0 serial driver"
-  #   maintainer: "seL4 Foundation"
-  #   status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
-  #   component_type: user-driver-serial
-  # - name: plat/apq8064/clock.c
-  #   display_name: "plat/apq8064/clock.c"
-  #   description: "apq8064 qcom,gcc-apq8064 clock subsystem driver"
-  #   maintainer: "seL4 Foundation"
-  #   status: "Supported on apq8064 platform. (Platform is currently unmaintained)"
-  #   component_type: user-driver-clock
   - name: plat/hifive/pwm.c
     display_name: "plat/hifive/pwm.c"
     description: "hifive sifive,pwm0 timer driver"
@@ -753,12 +698,6 @@ components:
     maintainer: "seL4 Foundation"
     status: "Supported on the Exynos SoCs"
     component_type: user-driver-other
-  - name: mach/exynos4/mux.c
-    display_name: "mach/exnyos4/mux.c"
-    description: "Pinctrl configurations for the Exynos4xxx SoCs"
-    maintainer: "seL4 Foundation"
-    status: "Supported on the Exynos4xxx SoCs"
-    component_type: user-driver-pinmux
   - name: mach/exynos5/mux.c
     display_name: "mach/exynos5/mux.c"
     description: "Pinctrl configurations for the Exynos5xxx SoCs"
