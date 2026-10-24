@@ -44,7 +44,7 @@ Unless you change the load address, use these:
 
 | **Platform** | **Address** |
 | :------------ | :----------|
-| Arndale, Odroid-X, Odroid-XU | 0x48000000|
+| Odroid-XU | 0x48000000|
 | Sabre Lite |0x30000000|
 | Panda, Panda ES | 0x80000000|
 

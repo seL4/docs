@@ -12,6 +12,7 @@ cpu: Cortex-A9
 verification: [ARM]
 Contrib: Data61
 Maintained: False
+last_release: 16.0.0
 parent: /Hardware/
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2020 seL4 Project a Series of LF Projects, LLC.
