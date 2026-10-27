@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-10-27 03:30:13 +0000 -->
+<!-- Page last generated 2026-10-27 09:46:36 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 Configurations | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/configurations.html">
-    <link href="/assets/css/sel4.css?v=1793071813" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1793094396" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -878,10 +878,10 @@ can be used to test a baseline level of configuration correctness.</em></p>
         <tr>
             <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisablePrefetchers</code></pre></td>
             <td class="prose-p:m-0 prose-p:p-0">
-              <p>On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher. On the cortex a53 this disables the L1 Data prefetcher.</p>
+              <p>On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher.</p>
 
             </td>
-            <td>Available if KernelArchX86 OR KernelPlatformHikey is set. (Default: Off)</td>
+            <td>Available if KernelArchX86 is set. (Default: Off)</td>
         </tr></tbody>
 </table>
 
@@ -950,11 +950,11 @@ can be used to test a baseline level of configuration correctness.</em></p>
     <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelDebugDisablePrefetchers</code></pre></div>
   </div>
   <div class="prose-p:m-0 prose-p:p-0">
-    <p>On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher. On the cortex a53 this disables the L1 Data prefetcher.</p>
+    <p>On ia32 platforms, this option disables the L2 hardware prefetcher, the L2 adjacent cache line prefetcher, the DCU prefetcher and the DCU IP prefetcher.</p>
 
   </div>
   <div class="mt-2 text-lighter">
-      Available if KernelArchX86 OR KernelPlatformHikey is set. (Default: Off)
+      Available if KernelArchX86 is set. (Default: Off)
   </div></div>
 
 <h2 id="performance-analysis-and-profiling-configuration-options">Performance analysis and profiling configuration options</h2>
@@ -1022,7 +1022,7 @@ can be used to test a baseline level of configuration correctness.</em></p>
               <p>Adds a system call that allows users to specify code to be run in kernel mode. Useful for profiling.</p>
 
             </td>
-            <td>Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelPlatformHikey;NOT KernelSkimWindow. (Default: Off)</td>
+            <td>Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelSkimWindow. (Default: Off)</td>
         </tr>
         <tr>
             <td><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelStackBits</code></pre></td>
@@ -1103,7 +1103,7 @@ can be used to test a baseline level of configuration correctness.</em></p>
 
   </div>
   <div class="mt-2 text-lighter">
-      Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelPlatformHikey;NOT KernelSkimWindow. (Default: Off)
+      Can only be set if: NOT KernelARMHypervisorSupport;NOT KernelVerificationBuild;NOT KernelSkimWindow. (Default: Off)
   </div>
   <div class="mt-8 pb-2 mb-2 border-b-1 border-gray-200 dark:border-gray-700">
     <div class="font-semibold"><pre class="not-prose text-xs sm:text-tiny lg:text-xs"><code class="code-span">KernelStackBits</code></pre></div>
