@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!-- Page last generated 2026-10-30 08:40:09 +0000 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>17.0.0 | seL4 docs</title>
+
+    <link rel="canonical" href="https://docs.sel4.systems/releases/sel4/17.0.0.html">
+    <link href="/assets/css/sel4.css?v=1793349609" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <script defer src="/assets/js/menu.js"></script>
+    <script defer src="/assets/js/sidebar.js"></script><script defer data-domain="docs.sel4.systems"
+            src="https://analytics.sel4.systems/js/script.js"></script></head>
+  <body class="flex flex-row h-screen std-bg text-dark">
+    <div id="sidebar" class="hidden lg:flex flex-none w-(--sidebar-width) flex-row bg-f_neutral-50 dark:bg-gray-900">
+      <div class="flex-1 overflow-y-auto min-h-full">
+        <a href="/">
+  <svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="84.224365mm" height="32.530689mm" viewBox="0 0 84.224367 32.530689" version="1.1" id="svg5" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="sel4-docs.svg" inkscape:export-filename="C:\Users\Birgit Brecknell\Documents\seL4 Foundation\seL4 Summit 2022\sel4_summit_v02.png" inkscape:export-xdpi="96" inkscape:export-ydpi="96" class="px-4 w-50 h-20 mx-auto mt-4 mb-10">
+  <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" inkscape:zoom="1.8116734" inkscape:cx="193.19155" inkscape:cy="87.764163" inkscape:window-width="1392" inkscape:window-height="1099" inkscape:window-x="0" inkscape:window-y="25" inkscape:window-maximized="0" inkscape:current-layer="g18" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" showguides="true" inkscape:guide-bbox="true" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1"/>
+  <defs id="defs2">
+    <rect x="680.69342" y="102.26014" width="15.612235" height="115.53054" id="rect9649"/>
+    <style id="style824">.cls-1,.cls-2,.cls-3{fill:#96ca4f;}.cls-2,.cls-3{stroke:#96ca4f;stroke-miterlimit:8;}.cls-3{stroke-width:0.25px;}</style>
+    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath15">
+      <g inkscape:label="Clip" id="use15">
+        <path d="m 39.66384,47.73588 h 1.324364 q 0.447983,0 0.68299,0.06854 0.315791,0.09302 0.541007,0.330479 0.225215,0.237455 0.342719,0.582623 0.117503,0.342719 0.117503,0.847005 0,0.443087 -0.110159,0.763774 -0.13464,0.391679 -0.384335,0.63403 -0.188496,0.1836 -0.509183,0.286416 -0.239903,0.07589 -0.641374,0.07589 H 39.66384 Z m 0.724606,0.607103 v 2.377001 h 0.541006 q 0.303551,0 0.438191,-0.03427 0.176255,-0.04406 0.291311,-0.149327 0.117504,-0.105264 0.190944,-0.345168 0.07344,-0.242351 0.07344,-0.65851 0,-0.416159 -0.07344,-0.638926 -0.07344,-0.222767 -0.205632,-0.347615 -0.132192,-0.124848 -0.335375,-0.168912 -0.151776,-0.03427 -0.594862,-0.03427 z m 2.751544,1.209308 q 0,-0.54835 0.164016,-0.920445 0.122399,-0.274175 0.332927,-0.492047 0.212975,-0.217871 0.465118,-0.323135 0.335375,-0.141984 0.773566,-0.141984 0.79315,0 1.268061,0.492047 0.477358,0.492047 0.477358,1.368428 0,0.869038 -0.472462,1.361085 -0.472463,0.489598 -1.263165,0.489598 -0.800494,0 -1.272956,-0.48715 -0.472463,-0.489599 -0.472463,-1.346397 z m 0.746638,-0.02448 q 0,0.609551 0.281519,0.925342 0.281519,0.313343 0.714814,0.313343 0.433295,0 0.709918,-0.310895 0.279072,-0.313343 0.279072,-0.937582 0,-0.616894 -0.271728,-0.920445 -0.269279,-0.303551 -0.717262,-0.303551 -0.447983,0 -0.722158,0.308447 -0.274175,0.305999 -0.274175,0.925341 z m 5.596112,0.477359 0.702574,0.222767 q -0.161567,0.587519 -0.538558,0.873934 -0.374543,0.283967 -0.95227,0.283967 -0.714814,0 -1.175036,-0.48715 -0.460223,-0.489599 -0.460223,-1.336605 0,-0.895965 0.462671,-1.39046 0.46267,-0.496943 1.216652,-0.496943 0.658511,0 1.069773,0.389231 0.2448,0.230112 0.367199,0.660959 l -0.717262,0.171359 q -0.06365,-0.279071 -0.266831,-0.440639 -0.200735,-0.161567 -0.489599,-0.161567 -0.399022,0 -0.648718,0.286415 -0.247247,0.286415 -0.247247,0.927789 0,0.680542 0.244799,0.969406 0.2448,0.288863 0.636478,0.288863 0.288864,0 0.496943,-0.1836 0.20808,-0.183599 0.298655,-0.577726 z m 1.140766,0.151776 0.705022,-0.06854 q 0.06365,0.354959 0.257039,0.521422 0.19584,0.166464 0.526319,0.166464 0.350063,0 0.526318,-0.14688 0.178704,-0.149327 0.178704,-0.347615 0,-0.127295 -0.07589,-0.215423 -0.07344,-0.09058 -0.259487,-0.156672 -0.127296,-0.04406 -0.580175,-0.156671 -0.582622,-0.144432 -0.81763,-0.354959 -0.330479,-0.296208 -0.330479,-0.722158 0,-0.274176 0.154224,-0.511631 0.156671,-0.239903 0.447983,-0.364751 0.293759,-0.124848 0.70747,-0.124848 0.675646,0 1.015917,0.296208 0.342719,0.296207 0.359855,0.790701 l -0.724606,0.03182 q -0.04651,-0.276623 -0.200735,-0.396575 -0.151776,-0.122399 -0.457775,-0.122399 -0.315791,0 -0.494495,0.129743 -0.115056,0.08323 -0.115056,0.222768 0,0.127295 0.107712,0.217871 0.137088,0.115056 0.665854,0.239904 0.528767,0.124847 0.78091,0.259487 0.254591,0.132191 0.396575,0.364751 0.144432,0.230111 0.144432,0.570382 0,0.308447 -0.17136,0.577727 -0.171359,0.269279 -0.484703,0.401471 -0.313343,0.129743 -0.780909,0.129743 -0.680542,0 -1.045293,-0.313343 -0.364751,-0.315791 -0.435743,-0.917997 z" id="path16" style="font-weight:bold;font-stretch:condensed;font-size:5.01349px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;stroke-width:0.264583" transform="scale(1.0680757,0.9362632)" aria-label="DOCS"/>
+      </g>
+    </clipPath>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-11.065137,-18.670029)">
+    <g id="g18">
+      <text xml:space="preserve" transform="scale(0.26458333)" id="text9647" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9649);display:inline;fill:#000000;fill-opacity:1;stroke:none"/>
+      <g id="Layer_2" data-name="Layer 2" transform="matrix(0.5563179,0,0,0.5563179,-0.00218815,0)">
+        <path class="cls-1" d="M 169.29,64.52 V 41.46 h -11.1 l -19.38,23.1 h -5.43 v -28.5 h -10.85 v 28.5 h -5.6 c 0,-0.53 0.08,-1.14 0.08,-1.88 V 62 h -6.77 v 1.94 a 6.32,6.32 0 0 1 -0.37,2.63 1.68,1.68 0 0 1 -1.66,0.88 1.5,1.5 0 0 1 -1.42,-0.71 5,5 0 0 1 -0.32,-2.33 V 58.73 H 117 V 56 a 13,13 0 0 0 -0.85,-5.23 6.31,6.31 0 0 0 -2.92,-2.88 11.68,11.68 0 0 0 -5.43,-1.11 11.49,11.49 0 0 0 -4.76,0.93 5.75,5.75 0 0 0 -2.88,2.57 10.54,10.54 0 0 0 -0.89,4.76 v 7 a 20,20 0 0 0 0.13,2.5 h -3 c 0,-0.28 0,-0.56 0,-0.87 a 5.84,5.84 0 0 0 -1,-3.71 12.59,12.59 0 0 0 -4.47,-2.8 22,22 0 0 1 -3.6,-1.84 3,3 0 0 1 -1.22,-1.32 6,6 0 0 1 -0.19,-1.77 2.32,2.32 0 0 1 0.45,-1.52 1.7,1.7 0 0 1 1.39,-0.58 1.5,1.5 0 0 1 1.49,0.71 5.86,5.86 0 0 1 0.25,2.32 v 1.3 h 6.27 V 53 a 11.15,11.15 0 0 0 -0.2,-2.55 3.72,3.72 0 0 0 -1.08,-1.63 6.68,6.68 0 0 0 -2.67,-1.49 14.3,14.3 0 0 0 -4.38,-0.58 13.32,13.32 0 0 0 -4.54,0.71 5,5 0 0 0 -2.63,1.92 7.84,7.84 0 0 0 -0.78,4 6.85,6.85 0 0 0 0.73,3.28 c 0.47,0.89 1.88,1.93 4.17,3.09 3.84,1.92 4.6,2.43 4.85,2.66 a 3.55,3.55 0 0 1 0.59,2.49 3,3 0 0 1 -0.46,2 A 2,2 0 0 1 87.8,67.45 1.5,1.5 0 0 1 86.3,66.6 6.54,6.54 0 0 1 86,63.87 v -2 h -6.29 v 1.62 c 0,0.38 0,0.72 0,1.05 h -6 a 25.58,25.58 0 1 0 0,8.83 H 158 v 8.42 h 11.33 v -8.4 h 5 V 64.52 Z M 38.89,75.1 A 6.1,6.1 0 1 1 45,69 6.1,6.1 0 0 1 38.89,75.1 Z m 67.54,-20.86 a 7.57,7.57 0 0 1 0.24,-2.68 c 0.15,-0.34 0.53,-0.75 1.48,-0.75 a 1.36,1.36 0 0 1 1.35,0.84 7.39,7.39 0 0 1 0.25,2.59 v 2.23 h -3.32 z M 158,64.52 h -9.62 L 158,52.22 Z" transform="translate(-3.04,-2.5)" id="path858"/>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.61839px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="48.089367" y="45.416836" id="text16" transform="scale(0.93916555,1.064775)"><tspan sodipodi:role="line" id="tspan16" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="48.089367" y="45.416836">D</tspan></text>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.505292;stroke-opacity:1" x="54.558205" y="48.250385" id="text16-9"><tspan sodipodi:role="line" id="tspan16-1" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.505292" x="54.558205" y="48.250385">O</tspan></text>
+      <g id="g1" transform="matrix(1.1426343,0,0,1.1426343,24.136464,-10.044912)" style="stroke-width:1.67137">
+        <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:7.7611px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.442217;stroke-opacity:1" x="44.508698" y="51.014606" id="text16-5"><tspan sodipodi:role="line" id="tspan16-8" style="fill:#96ca4f;fill-opacity:1;stroke:none;stroke-width:0.442217" x="44.508698" y="51.014606">S</tspan></text>
+      </g>
+      <text xml:space="preserve" style="font-weight:bold;font-stretch:condensed;font-size:8.87389px;font-family:Arial;-inkscape-font-specification:'Arial, Bold Condensed';fill:#96ca4f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.505292;stroke-opacity:1" x="65.022789" y="48.250385" id="text17"><tspan sodipodi:role="line" id="tspan17" style="stroke-width:0.505292" x="65.022789" y="48.250385">C</tspan></text>
+    </g>
+  </g>
+</svg>
+</a>
+
+<ul class="px-4 my-10 ext-links">
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Getting Started</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/getting-started.html">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/">Tutorials</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/dockerfiles/">Setting up with Docker</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/repo-cheatsheet.html">Repo manifest cheat sheet</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">The seL4 Kernel</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/host-dependencies.html">Setting up</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/setting-up.html">Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/get-the-tutorials.html">Getting the tutorials</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-world.html">Hello world</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/capabilities.html">Capabilities</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/untyped.html">Untyped</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mapping.html">Mapping</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/threads.html">Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/ipc.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/notifications.html">Notifications</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/interrupts.html">Interrupts</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/fault-handlers.html">Fault handling</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/mcs.html">MCS</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/seL4-end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-seL4.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/api-doc.html">API docs</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Hardware/">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/verified-configurations.html">Verified configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/configurations.html">Configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/standalone.html">Standalone seL4 builds</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/bfgen.html">Bitfield generator</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Testing &amp; benchmarking</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4test/">seL4test</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-guide.html">Debugging guide</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/debugging-userspace.html">Debugging user space</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4bench/">sel4bench</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/sel4-tutorials/benchmarking-guide.html">Benchmarking guide</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/kernel-contribution.html">Contributing</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4/porting.html">Porting to a new platform</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/seL4.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/seL4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Microkit</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorial</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/welcome.html">Welcome</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part0.html">Part 0 - Setting up</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part1.html">Part 1 - Serial server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part2.html">Part 2 - Client</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part3.html">Part 3 - Wordle server</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/part4.html">Part 4 - Virtual machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/microkit/tutorial/end.html">End</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/manual/latest/">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/roadmap.html">Roadmap</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/microkit/platforms.html">Supported platforms</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/microkit.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/microkit">Sources</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">CAmkES</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/setting-up.html">Setting up your machine</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-0.html">Hello CAmkES</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-1.html">Introduction</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-2.html">Events</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/hello-camkes-timer.html">Timer</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-linux.html">Virtual Machines</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/camkes-vm-crossvm.html">Cross-VM connectors</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-CAmkES.html">How-to</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/manual.html">Manual</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/camkes/hardware.html">Supported platforms</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Virtualisation</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/camkes-vm/">CAmkES VM</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vm.html">VM library</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/projects/virtualization/docs/libsel4vmm.html">VMM library</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/camkes.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/camkes-tool/">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">C support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/sel4runtime/">C runtime</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/user_libs/">User-level libraries</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/buildsystem/">Build System</a>
+        </li>
+      <li class="pl-3 pb-1 border-l-1 bordercol">
+        <div class="text-sm  menu-title text-light hover:text-hi">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron h-4 w-4 mb-0.5 -ml-2 -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+          <span class="cursor-pointer">Tutorials</span>
+        </div>
+        <ul class="menu-content ml-3 ">
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-1.html">Init & Threads</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-2.html">IPC</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-3.html">ELF loading & Processes</a>
+            </li>
+            <li class="text-light bordercol pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+              <a href="/Tutorials/libraries-4.html">Timer</a>
+            </li>
+        </ul>
+      </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/Tutorials/how-to-libs.html">How-to</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Rust support</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/how-to-use.html">How to use</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/tutorial/introduction.html">Tutorial</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://sel4.github.io/rust-sel4/">API</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/supported-configurations.html">Supported configurations</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/rust/releases.html">Releases</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="https://github.com/seL4/rust-sel4">Sources</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">ELF loader</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/elfloader/">ELF loader for C</a>
+        </li>
+    </ul>
+  </li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">capDL</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/">Overview</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/lang-spec.html">Language Spec</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/projects/capdl/c-loader-app.html">capDL loader (C)</a>
+        </li>
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/releases/capDL.html">Releases</a>
+        </li>
+    </ul>
+  </li>
+<li class="-mt-2">&nbsp;</li>
+  <li class="mt-1">
+    <div class=" mb-1 menu-title hover:text-hi leading-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" class="menu-chevron p-0 h-4 w-4 mb-px -mr-0.5 inline cursor-pointer rotate-270">
+  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/>
+</svg>
+      <span class="cursor-pointer text-sm">Examples &amp; demos</span>
+    </div>
+    <ul class="menu-content ml-6 ">
+        <li class="text-light bordercol pb-1 pl-3 border-l-1 text-sm leading-5 hover:text-hi">
+          <a href="/examples.html">Overview</a>
+        </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <div id="sidebar-handle"
+           class="flex-none relative cursor-col-resize min-h-full
+                  bg-gray-200 dark:bg-gray-700 w-px">
+      </div>
+    </div>
+    <div class="flex-1">
+      
+<div class="w-full pb-px bg-gray-200 dark:bg-gray-700">
+  <header class="h-[2rem] sm:h-[2.5rem] lg:h-[3.5rem] w-full flex flex-row items-center gap-2 md:gap-4 md:py-2 std-bg">
+    <div id="burger">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="text-dark ml-3 mr-0 sm:mr-3 lg:mx-4 w-4 h-4 lg:w-6 lg:h-6 cursor-pointer">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+    </div>
+    <div class="flex-1"></div>
+    <a href="/releases.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Releases
+    </a>
+    <a href="https://sel4.systems/Contribute/"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contribute
+    </a>
+    <a href="https://sel4.systems/contact.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Contact
+    </a>
+    <a href="https://sel4.systems/support.html"
+      class="text-lighter hover:text-light hover:underline text-tiny sm:text-xs lg:text-sm font-semibold">
+      Support
+    </a>
+    <!-- main site button -->
+    <a href="https://sel4.systems"
+      class="flex-none button-outline ml-0 text-tiny px-2 py-0.5 sm:px-3 sm:py-1 h-4 sm:h-6 md:py-2 md:h-8 lg:h-9 md:text-xs lg:text-sm mr-0 md:mr-4">Main Site
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" data-slot="icon" class="hidden sm:inline-icon">
+<path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+</svg>
+    </a>
+    <!-- github button -->
+    <a href="https://github.com/seL4"
+      class="mr-2 lg:mr-6 px-0 sm:px-3 pt-2 sm:pt-1 pb-2 block text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-300">
+      <span class="sr-only">seL4 on GitHub</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+</svg>
+    </a>
+  </header>
+</div>
+
+      <div class="grid grid-cols-1  h-[calc(100%-3rem)]">
+        <div class="flex flex-col max-w-full overflow-y-auto">
+          <div id="main-div" class="flex-1 max-w-full">
+            <main class="mx-6 md:mx-10 xl:mx-12 my-12
+                        overflow-x-auto" id="page-top">
+
+              <div class="theprose mx-auto ext-links">
+<h1 id="sel4-version-1700-release">seL4 Version 17.0.0 Release</h1>
+
+<p>Announcing the release of <code class="language-plaintext highlighter-rouge">seL4 17.0.0</code> with the following changes:</p>
+
+<h2 id="1700-2026-10-30-breaking">17.0.0 2026-10-30: BREAKING</h2>
+
+<h3 id="security-relevant-changes">Security-relevant Changes</h3>
+
+<p>As in previous releases, some of these security relevant changes affect verified configurations. In all of these cases,
+the issue is outside the scope of what the proofs guarantee. See the list of <a href="https://sel4.systems/Verification/assumptions.html">verification assumptions</a> for what that
+scope includes. All issues we are currently aware of that affect verification assumptions have been fixed.</p>
+
+<ul>
+  <li>Fixed a kernel halt on Arm with hypervisor support that can be triggered by guest VMs, because EL1 debug registers
+were not trapped or context switched. All EL1 debug register accesses now trap.
+    <ul>
+      <li>Affected configurations: AArch64 and AArch32 with hypervisor support, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: any guest VM</li>
+      <li>Severity: Critical. This crashes the system.</li>
+    </ul>
+  </li>
+  <li>Fixed a kernel crash on x86 that can be triggered by any thread: the kernel kept running with user-controlled flags
+after kernel entry. With <code class="language-plaintext highlighter-rouge">NT</code> set before a system call, the system triple-faulted on return to user level. <code class="language-plaintext highlighter-rouge">DF</code> was
+not cleared on system call, interrupt and exception entry, although compiled kernel code assumes it is clear. The
+kernel now clears all user-controllable flags on entry.
+    <ul>
+      <li>Affected configurations: x86_64 and ia32, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: any thread, no capabilities required.</li>
+      <li>Severity: Critical. This crashes the system.</li>
+    </ul>
+  </li>
+  <li>Fixed VT-x on SMP and with multiple VMs per core: host GS/FS bases were not restored after VM exit, which crashed
+SMP kernels and corrupted guest FPU state; all cores shared one VMXON region, causing unpredictable behaviour.
+    <ul>
+      <li>Affected configurations: x86 with VT-x (unverified).</li>
+      <li>Affected versions: 16.0.0 (GS/FS bases); all previous versions (VMXON region)</li>
+      <li>Exploitability: triggered by normal VM operation.</li>
+      <li>Severity: High. Kernel crash on SMP, guest state corruption.</li>
+    </ul>
+  </li>
+  <li>Fixed missing trapping and context switching of system registers on AArch64 with hypervisor support, which formed
+storage channels and interference paths between VMs, native threads and the kernel: PMU (Performance Measurement
+Unit), <code class="language-plaintext highlighter-rouge">VDISR_EL2</code>, <code class="language-plaintext highlighter-rouge">CSSELR_EL1</code>, RAS error records, implementation-defined registers (<code class="language-plaintext highlighter-rouge">TIDCP</code>, and <code class="language-plaintext highlighter-rouge">ACTLR</code> with VCPU
+access removed), LORegion and ID group 5 registers, SVE, SME, trace and activity monitor registers (<code class="language-plaintext highlighter-rouge">CPTR_EL2</code> is now
+set at boot), GICv3 group 0 registers (<code class="language-plaintext highlighter-rouge">ICH_AP0R0_EL2</code> let a guest block interrupts for later VMs), and <code class="language-plaintext highlighter-rouge">TCR_EL1</code> for
+native threads.
+    <ul>
+      <li>Affected configurations: AArch64 with hypervisor support, including verified configurations. Some registers exist
+only on cores with the corresponding feature (RAS, SVE, GICv3).</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: guest VM, no capabilities required.</li>
+      <li>Severity: High, depending on threat model. Opens storage channels and guests can affect some system registers
+visible to other VMs and native threads.</li>
+    </ul>
+  </li>
+  <li>Fixed the same class of issues on AArch32 with hypervisor support: PMU, <code class="language-plaintext highlighter-rouge">CPACR</code> (a guest could disable the FPU for
+native threads), <code class="language-plaintext highlighter-rouge">FPEXC</code>, upper halves of <code class="language-plaintext highlighter-rouge">TTBR0</code>/<code class="language-plaintext highlighter-rouge">TTBR1</code> (LPAE), <code class="language-plaintext highlighter-rouge">CSSELR</code>, <code class="language-plaintext highlighter-rouge">VDISR</code>, implementation-defined (including
+<code class="language-plaintext highlighter-rouge">ACTLR</code>), RAS and set/way cache registers (<code class="language-plaintext highlighter-rouge">TIDCP</code>, <code class="language-plaintext highlighter-rouge">TACR</code>, <code class="language-plaintext highlighter-rouge">SWIO</code>, <code class="language-plaintext highlighter-rouge">TERR</code>, <code class="language-plaintext highlighter-rouge">TRVM</code>), and <code class="language-plaintext highlighter-rouge">HCPTR</code> is now set at boot.
+The kernel also restored only part of <code class="language-plaintext highlighter-rouge">SPSR</code> (GE, IT, E, A bits leaked between threads).
+    <ul>
+      <li>Affected configurations: AArch32 with hypervisor support, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: guest VM, no capabilities required; native thread for <code class="language-plaintext highlighter-rouge">SPSR</code>.</li>
+      <li>Severity: High, depending on threat model. Opens storage channels and guests can affect some system registers
+visible to other VMs and native threads.</li>
+    </ul>
+  </li>
+  <li>Fixed kernel halts from unsanitised register values: <code class="language-plaintext highlighter-rouge">TCB_SetTLSBase</code> accepted non-canonical addresses on x86_64, and
+<code class="language-plaintext highlighter-rouge">TCB_CopyRegisters</code> could copy VCPU-only register state to native threads on Arm hyp.
+    <ul>
+      <li>Affected configurations: x86_64 (<code class="language-plaintext highlighter-rouge">TCB_SetTLSBase</code>) and Arm with hypervisor support (<code class="language-plaintext highlighter-rouge">TCB_CopyRegisters</code>), including
+verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: a thread with a TCB capability for <code class="language-plaintext highlighter-rouge">TCB_SetTLSBase</code>; a thread with TCB capabilities to both a VCPU
+thread and a native thread for <code class="language-plaintext highlighter-rouge">TCB_CopyRegisters</code>. Standard Microkit systems do not provide these capabilities.</li>
+      <li>Severity: High. This crashes the system, but exploitability is constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed a storage channel on AArch32: the user-writable ThumbEE register <code class="language-plaintext highlighter-rouge">TEEHBR</code> was neither trapped nor
+context-switched.
+    <ul>
+      <li>Affected configurations: AArch32 on cores with ThumbEE (e.g. Cortex-A8, A9, A15), with and without hypervisor
+support, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: any thread, no capabilities required.</li>
+      <li>Severity: Medium depending on threat model. 32-bit storage channel between threads.</li>
+    </ul>
+  </li>
+  <li>Fixed a kernel data abort in VSpace cache maintenance on Arm hyp for frames outside the kernel’s physical memory
+window, and an incorrect corresponding check for page flushes on AArch32 hyp.
+    <ul>
+      <li>Affected configurations: AArch64 and AArch32 with hypervisor support, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: a thread with a VSpace capability and a mapped frame outside the kernel window. Standard Microkit
+and CAmkES systems do not provide these capabilities.</li>
+      <li>Severity: Medium. This crashes the system, but exploitability is strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed a NULL pointer write in the MCS fastpath, triggered by deleting an endpoint that a passive server waits on.
+    <ul>
+      <li>Affected configurations: MCS with fastpath (the fastpath is not verified for MCS).</li>
+      <li>Affected versions: 16.0.0</li>
+      <li>Exploitability: any thread that can delete such an endpoint. Microkit and CAmkES systems do not provide the ability
+to delete endpoints.</li>
+      <li>Severity: Medium. This crashes the system, but exploitability is strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed a core livelock on Arm hyp: dissociating or deleting the active VCPU left its virtual timer running, and the
+timer interrupt can then re-trigger on every return to user level.
+    <ul>
+      <li>Affected configurations: AArch64 and AArch32 with hypervisor support, including verified configurations.</li>
+      <li>Affected versions: since 12.0.0</li>
+      <li>Exploitability: a thread with VCPU and TCB capabilities. Microkit does not provide these capabilities. CAmkES VMMs
+do have these capabilities, but would need to be exploited first.</li>
+      <li>Severity: Medium. The core makes no further progress, but exploitability is strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed stale TLB entries after unmapping: on AArch32 hyp, TLB flushes always flushed the current VMID; on AArch64
+without hyp, hardware ASIDs were truncated to 8 bit, so flushes for seL4 ASIDs above 255 hit the wrong ASID.
+    <ul>
+      <li>Affected configurations: AArch32 with hypervisor support, including verified configurations; AArch64 without
+hypervisor support (unverified).</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: a thread whose frame is unmapped while its VSpace is not current (AArch32 hyp), or whose VSpace has
+an seL4 ASID above 255 (AArch64). The thread keeps access to the frame after it is reused. Unmapping a frame needs
+the Frame capability or the ability to revoke the Frame capability. Unmapping can also be achieved via overmapping
+with a new frame and new Frame capability, or via unmapping the page table that contains the original frame.
+Standard Microkit and CAmkES systems do not provide access to these capabilities.</li>
+      <li>Severity: Medium. Access to memory after it has been reallocated, but exploitability is strongly constrained by
+capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed VT-x memory isolation: EPT mappings of frames from capabilities without read rights were guest-readable,
+writable and executable; deleting a VCPU did not release its VPID, after which the kernel wrote to the freed VCPU
+memory.
+    <ul>
+      <li>Affected configurations: x86 with VT-x (unverified).</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: a VMM with an EPT and a frame capability with reduced rights; a thread that can create and delete
+VCPU objects. Standard Microkit and CAmkES systems cannot create and delete VCPU objects and cannot diminish their
+frame capabilities to non-read.</li>
+      <li>Severity: Medium. Write access to read-only memory, kernel memory corruption, but strongly constrained by
+capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed missing ASID validity check in the IPC fastpath on RISC-V and x86. The fastpath kept switching to a VSpace whose
+ASID had been revoked, where the slowpath switches to the empty VSpace. This can give access to other VSpaces and to
+unmapped frames through the TLB.
+    <ul>
+      <li>Affected configurations: RISC-V and x86 with fastpath enabled, but not verified configurations (the fastpath is not
+verified on RISC-V and x64).</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: requires authority to delete an ASID pool in use by a running thread and to create a new one.
+Usually only the system initialiser or allocator components have access to ASID pool capabilities. Microkit and
+CAmkES systems do not provide access to them.</li>
+      <li>Severity: Medium. Breaks address space isolation, but strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed stale IOMMU/SMMU state: VT-d unmap operations did not invalidate the IOMMU caches correctly, IO page table
+unmap on x86 and Arm did not require the IOPageTable capability to be final, and <code class="language-plaintext highlighter-rouge">deleteIOPageTable</code> on Arm could
+clear unowned slots. Devices could keep DMA access to unmapped and reallocated memory.
+    <ul>
+      <li>Affected configurations: x86 with <code class="language-plaintext highlighter-rouge">KernelIOMMU</code> and Arm with SMMU (unverified).</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: a thread with IOSpace or IO page table capabilities and a DMA-capable device. Microkit and CAmkES
+systems do not provide user-level access to these capabilities.</li>
+      <li>Severity: Medium. DMA access to reallocated memory, but strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed missing instruction cache flush on Arm and RISC-V. A new frame owner could potentially execute stale code on
+that frame from the previous owner.
+    <ul>
+      <li>Affected configurations: all Arm and RISC-V configurations, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: low. The new owner must execute from reused memory before writing it, and reuse of memory across
+security boundaries is usually already excluded. Standard Microkit and CAmkES systems do not provide
+the capabilities to do that.</li>
+      <li>Severity: Low. Information leakage of instruction contents, strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>Fixed the empty VSpace sharing a hardware ASID/VMID with user VSpaces: on AArch32 it ran under the current ASID, on
+AArch64 hyp VMID 0 was also allocated to user VSpaces.
+    <ul>
+      <li>Affected configurations: AArch32 (with and without hypervisor support) and AArch64 with hypervisor support,
+including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: low. A thread without a valid VSpace can hit stale TLB entries of the previously running VSpace and
+must force an empty VSpace to be scheduled at the correct time. Standard Microkit and CAmkES systems do not provide
+the capabilities to do that.</li>
+      <li>Severity: Low. Limited access to the mappings of another specific VSpace, strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+  <li>AArch64 now maps frames from capabilities without read rights as non-executable, because execution can reveal content.
+    <ul>
+      <li>Affected configurations: AArch64, including verified configurations.</li>
+      <li>Affected versions: all previous versions</li>
+      <li>Exploitability: a thread with a frame capability without read rights. Standard Microkit and CAmkES systems do not
+provide mechanisms to diminish frame rights.</li>
+      <li>Severity: Low and strongly constrained by capabilities.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="changes">Changes</h3>
+
+<ul>
+  <li>Improved debug printing in debug_dumpScheduler.</li>
+  <li>Improved docs for NUM_DOMAINS limit.</li>
+  <li>Improved docs for seL4 ASIDs and their reuse.</li>
+  <li>Improved caveats docs with more explicit explanation of what is the kernel’s responsibility and what is the system
+designer’s responsibility.</li>
+  <li>CMake: fix evaluation of GCC_COLORS to support user-supplied colours.</li>
+  <li>SMMU/IOMMU: add check for final capability in the Page unmap operation like in other Page unmap operations in the
+kernel. The corresponding capability first has to be revoked before it can be unmapped to not leave other capabilities
+inconsistent.</li>
+  <li>elfloader: statically check that the CPU count is &lt;= MaxNumNodes to turn boot failure into a compile-time failure.</li>
+  <li>Fix MCS fastpath dequeue case.</li>
+  <li>Change MCS idle thread to maximum period. Previously, the shorter idle thread period would mean a no-op timer IRQ
+every 5ms.</li>
+  <li>Always sanitise register content in TCBCopyRegisters as already done in TCBWriteRegisters to prevent state that is
+only legal in VCPU threads from arriving in native threads.</li>
+  <li>Debug API: check for and refuse writes to read-only IPC buffers.</li>
+  <li>Build: produce only relative source paths in generated bitfield files to keep DAWRF checksums constant.</li>
+  <li>Sanitise the TLS_BASE register in TCBSetTLSBase. Previously non-canonical values were accepted on x86_64.</li>
+  <li>Arm, RISC-V: reserve the full device tree region of kernel devices, not only the part the kernel maps. Previously the
+rest was provided to user level as device untyped.</li>
+</ul>
+
+<h3 id="platforms">Platforms</h3>
+
+<ul>
+  <li>stm32mp2: add missing timer to elfloader-devices.</li>
+</ul>
+
+<h4 id="x86">X86</h4>
+
+<ul>
+  <li>VT-x/EPT: map pages without Read rights (VMKernelOnly) as invalid entries. Previously these entries remained
+accessible to user space.</li>
+  <li>Allow linking the kernel with LLD.</li>
+  <li>VT-d: properly invalidate IOMMU caches in unmap operations.</li>
+  <li>VT-d: check and fail if Caching Mode is set, because this would require more aggressive cache invalidation.</li>
+  <li>IOAPIC: correctly initialise ioredtbl_state. Previously only IOAPIC 0 was correctly initialised.</li>
+  <li>Fix missing fastpath ASID validity check.</li>
+  <li>VT-x: clean up VPID in finalise operation. Previously vcpu_finalise() only cleaned up the VCPU/TCB association,
+but not the VPID/VCPU association.</li>
+  <li>ELF: remove redundant BSS clearing.</li>
+  <li>ELF: improved ELF validation before loading.</li>
+  <li>SMP: use correct alignment for SMP kernel state.</li>
+  <li>x64 VT-x SMP: fix issue where VMs are not starting on different cores.</li>
+  <li>x64 VT-x: fix size of null_ept_space to 4096 bytes.</li>
+  <li>x64 VT-x: fix broken VM exit under SMP and co-tenancy.</li>
+  <li>Clear user-controllable flags on kernel entry for SYSCALL AND SYSENTER. Clear DF on interrupt and exception entry.
+Previously NT and DF could remain set.</li>
+</ul>
+
+<h4 id="arm">ARM</h4>
+
+<ul>
+  <li>Invalidate the instruction cache on Untyped reset to prevent stale instructions from being
+visible to new memory owners.</li>
+  <li>Hyp: stop the virtual timer when a VCPU is deleted. Previously the VM timer could fire after the
+VCPU no longer existed, re-triggering an interrupt on every return to user level.</li>
+  <li>VCPU: remove unnecessary check in seL4_ARM_VCPU_InjectIRQ for target list register being marked in use.</li>
+  <li>AArch64 Hyp: trap further register access for VCPU threads, setting TIDCP, TLOR, TID5.</li>
+  <li>AArch32 Hyp: trap further register access for VCPU threads, setting SWIO (Arm-v7A) and TERR (Arm-v8A).</li>
+  <li>AArch32 Armv8-A: also trap reads to virtual memory registers, setting TRVM.</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">seL4_VCPUReg_ACTLR</code> and VCPU access to the implementation defined ACTLR in general. This means only seL4, or
+the boot chain before seL4, choose the value of this register and this value remains constant.</li>
+  <li>Hyp: remove the ArmHypEnableVCPUCP14SaveAndRestore config option. The implementation of this config option was
+unfinished and did not actually work.</li>
+  <li>CMake: KernelBenchmarks now depends on KernelArmExportPMUUser. No behaviour change, this models what C #defines did
+before, but it is now visible at the config level.</li>
+  <li>Always trap PMU (Performance Monitoring Unit) access, unless explicitly exported to user space. Previously VCPU
+threads could access the PMU.</li>
+  <li>AArch32 debug: halt the kernel on undefined instruction execution in kernel mode and print debug information.
+Previously this path went to user-level fault handlers. This is useful for debugging and kernel development.</li>
+  <li>AArch32 Hyp: flush correct VMID in the TLB. Previously, the TLB flush went to the current VMID instead of the target
+VMID.</li>
+  <li>AArch64 Hyp: set a defined value of CPTR_EL2 at boot. Previously seL4 was relying on reasonable values being set by
+the boot loader. The following bits are set at boot: TFP, TZ, TSM, TTA, TAM.</li>
+  <li>AArch32 Hyp: improve FPU switching scheme and prevent FPEXC leakage. Previously a VCPU thread could modify the
+FPU-enabled flag which stayed live for any native thread running directly after the VCPU thread.</li>
+  <li>AArch32 Hyp: set a default boot value for HCPTR. Previously seL4 was relying on reasonable values being set by the
+boot loader.</li>
+  <li>AArch32 Hyp: context-switch the CPACR register for VCPUs and make sure native threads see the seL4-default CPACR for
+correct FPU operation.</li>
+  <li>AArch32 Hyp: context-switch TTBR0 and TTBR1 as 64-bit registers for VCPUs. With LPAE enabled, these registers are
+wider than 32 bit.</li>
+  <li>Hyp/GICv3: trap group 0 register access from VMs. seL4 only uses group 1, and allowing group 0 access to VMs would
+constitute an information channel.</li>
+  <li>Hyp: constrain VSpace cache flushes to physical kernel window. Flushing outside the kernel window would produce a
+fault during kernel execution.</li>
+  <li>Hyp: trap EL1 debug register access for VCPU threads (TDA, TDOSA, TDRA).</li>
+  <li>AArch64 Hyp: reset TCR_EL1 for native threads and initialise it at boot.</li>
+  <li>AArch32 Hyp: restore full SPSR register on return to user. Use spsr_fsxc instead of spsr (which is spsr_all, which is
+spsr_fc instead of spsr_fsxc) to restore all currently known fields of SPSR.</li>
+  <li>AArch64: allow debug builds with KernelPrinting=OFF to compile.</li>
+  <li>AArch32: prevent TEEHBR access and Jazelle DBX. Neither is supported by seL4 and would constitute an information
+channel.</li>
+  <li>Config: set SErrorIgnore default to ON. This is a safer default for release kernels. For debugging kernel and user
+space it may be useful to set SErrorIgnore to OFF for making speculative execution or user code execution errors
+observable.</li>
+  <li>iospace: clear only valid, owned slots in deleteIOPageTable. The new check now mirrors the code in all other delete
+page table operations.</li>
+  <li>AArch64 Hyp: add context-switching for VDISR_EL2 and CSSELR_EL1 registers.</li>
+  <li>AArch32: reserve hardware ASID 0 for empty PD. Previously, the empty/global PD used the currently running ASID.</li>
+  <li>AArch64 Hyp: reserve VMID 0 for only the empty VSpace. Previously, VMID 0 was also used for other VSpaces.</li>
+  <li>AArch64: force XN for VMKernelOnly pages. When user-level pages are mapped without Read, make sure that XN is set, so
+they also cannot execute code, because executing code can be equivalent to Read.</li>
+  <li>AArch64: check for 16-bit hardware ASID support and abort non-hyp boot if not supported.</li>
+  <li>AArch64: make the hw_asid_t type 16 bit for AArch64 non-hyp (previously 8).</li>
+  <li>AArch64: avoid using invalid PT in TLB flushing.</li>
+  <li>AArch64: the kernel window is now mapped XN.</li>
+  <li>AArch64: the kernel image is now mapped at a constant virtual address and the physical load address is now aligned to
+2 MiB. On platforms whose RAM starts below a 2 MiB boundary (rpi3, rpi4, rpi5), up to 2 MiB at the start of RAM is now
+provided as device untyped instead of RAM untyped.</li>
+  <li>SMP: save the user TLS registers before acquiring the kernel lock. Previously a remote stall while waiting for the
+lock could produce stale TLS state.</li>
+</ul>
+
+<h4 id="risc-v">RISC-V</h4>
+
+<ul>
+  <li>Issue fence.i on Untyped reset to prevent stale instructions from being visible to new memory owners.</li>
+  <li>Fix missing fastpath ASID validity check.</li>
+  <li>Fix QEMU PLIC node name compatibility, use interrupt-controller@c000000 instead of the old plic@c000000.</li>
+  <li>Debug/printing: check that all accessed addresses are in the kernel window when printing a user-level stack trace.</li>
+  <li>Treat all S-mode exceptions as kernel faults and halt (with debug print in debug mode).</li>
+  <li>SMP: don’t lose reschedule IPIs. Previously a remote call IPI could overwrite a pending reschedule IPI.</li>
+</ul>
+
+<h3 id="platforms-1">Platforms</h3>
+
+<ul>
+  <li>Remove support for the Arndale (<code class="language-plaintext highlighter-rouge">exynos5250</code>) platform, deprecated since 2025, see also RFC-19.</li>
+  <li>Remove support for the Odroid-X (<code class="language-plaintext highlighter-rouge">exynos4</code>) platform, deprecated since 2025, see also RFC-19.</li>
+  <li>Remove support for the HiKey (<code class="language-plaintext highlighter-rouge">hikey</code>) platform, deprecated since 2025, see also RFC-19.</li>
+  <li>Remove support for the Inforce IFC6410 (<code class="language-plaintext highlighter-rouge">apq8064</code>) platform, deprecated since 2025, see also RFC-19.</li>
+  <li>Change default for exynos5 <code class="language-plaintext highlighter-rouge">KernelARMPlatform</code> from <code class="language-plaintext highlighter-rouge">exynos5250</code> to <code class="language-plaintext highlighter-rouge">exynos5422</code>.</li>
+</ul>
+
+<h3 id="upgrade-notes">Upgrade Notes</h3>
+
+<ul>
+  <li>ARM Hyp: seL4_ARM_VCPU_InjectIRQ no longer reports seL4_DeleteFirst for list registers that are in use. VMMs need to
+rely on their own bookkeeping for tracking the list register state.</li>
+  <li>ARM Hyp: VMs now trap on access to implementation-defined system registers and, on AArch64, LORegion and ID group 5
+registers. VMMs may need to ignore or emulate these accesses or inject an exception into the guest.</li>
+  <li>Several VCPU register enum values have changed. These changes are source compatible, but binary breaking.</li>
+  <li><code class="language-plaintext highlighter-rouge">seL4_VCPUReg_ACTLR</code> no longer exists and access to the ACTLR register by VMs is trapped. Modifying the value is no
+longer possible. If the real value of this register needs to be reported by a VMM to a VM, it can be determined
+statically by config from the seL4 source and/or the boot code that runs before it.</li>
+  <li>seL4 now traps access to the PMU for guests. Linux touches PMU registers during boot, so Virtual Machine Monitors have
+to emulate access. If no further PMU use is required, returning zero on read and ignoring writes is enough to run
+Linux.</li>
+  <li>seL4 now traps access to ThumbEE and Jazelle DBX registers. Linux touches these registers during boot, so Virtual
+Machine Monitors have to emulate access. Returning zero on read and ignoring writes is safe for running Linux, it only
+clears these registers the same way seL4 does.</li>
+</ul>
+
+<h2 id="full-changelog">Full changelog</h2>
+
+<p>Refer to the git log in
+<a href="https://github.com/seL4/seL4">https://github.com/seL4/seL4</a> using <code class="language-plaintext highlighter-rouge">git log 16.0.0..17.0.0</code></p>
+
+<h2 id="more-details">More details</h2>
+
+<p>See the
+<a href="http://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf">17.0.0 manual</a> included in the release or ask on the mailing list!</p>
+
+<h2>Other releases</h2>
+<p>
+  See the <a href="/releases/seL4.html">
+    full list of seL4 releases.</a>
+</p>
+</div>
+
+            </main>
+          </div>
+          
+<footer class="flex-none flex flex-row py-6 pl-8 pr-10 border-t-1 bordercol
+               text-xs lg:text-sm font-semibold text-lighter">
+  <a href="/sitemap.html"
+     class="flex-none hover:text-light hover:underline">Sitemap</a>
+  <a href="/processes/test-status.html"
+     class="mx-1 px-1 lg:mx-2 lg:px-2 bordercol border-l-2 flex-none hover:text-light hover:underline">Test status</a>
+  <div class="flex-1"></div>
+<a href="https://github.com/seL4/docs/edit/master/content_collections/_releases/sel4/17.0.0.md" class="flex-none  hover:text-light hover:underline">Edit
+    page on GitHub</a>
+</footer>
+
+        </div>
+        </div>
+    </div>
+  </body>
+</html>
