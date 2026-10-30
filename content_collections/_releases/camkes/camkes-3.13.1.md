@@ -2,6 +2,7 @@
 version: camkes-3.13.1
 version_digits: 2
 project: camkes
+seL4: 17.0.0
 SPDX-License-Identifier: CC-BY-SA-4.0
 SPDX-FileCopyrightText: 2026 seL4 International
 ---
