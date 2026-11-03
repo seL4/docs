@@ -68,3 +68,43 @@ jobs:
     - run: git config user.email ci@sel4.systems
     - run: git commit -m "auto-deployed"
     - run: git push
+
+  # Push platforms.json to the website repo if changed
+  platforms-push:
+    if: ${{ github.repository_owner == 'seL4' &&
+            (github.event_name == 'push' || github.event_name == 'schedule' ||
+            github.event_name == 'workflow_dispatch') }}
+    needs: build
+    name: 'Update platforms.json on website'
+    runs-on: ubuntu-24.04
+    steps:
+    # fetch only _data/ and top-level files, not the full repo and no large files
+    - name: Check out website repo
+      uses: actions/checkout@v6
+      with:
+        repository: seL4/website
+        path: website
+        token: ${{ secrets.PRIV_REPO_TOKEN }}
+        fetch-depth: 1
+        filter: blob:none
+        sparse-checkout: _data
+    - uses: actions/download-artifact@v8
+      with:
+        name: site
+    - name: Unpack site
+      run: tar -xvf site.tar _site/Hardware/platforms.json
+    - name: Validate json
+      run: jq empty _site/Hardware/platforms.json
+    - name: Push to website
+      run: |
+        cp _site/Hardware/platforms.json website/_data/platforms.json
+        cd website
+        git add _data/platforms.json
+        if git diff --cached --quiet; then
+          echo "platforms.json unchanged"
+          exit 0
+        fi
+        git config user.name "seL4 CI"
+        git config user.email "ci@sel4.systems"
+        git commit -s -m "CI: update platforms from docsite"
+        git push origin HEAD:master
