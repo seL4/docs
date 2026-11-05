@@ -184,7 +184,7 @@ make simulate
 <p>Here is its source:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/d4e9d976614bad4bd4a06f7bd0fedd0790b3d82a/workspaces/root-task/hello-world/src/main.rs#L7-L17">hello-world/src/main.rs:7:17</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/58a8349b36d414f91664b9a8bce937659dbb5e1e/workspaces/root-task/hello-world/src/main.rs#L7-L17">hello-world/src/main.rs:7:17</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">#![no_std]
@@ -223,23 +223,23 @@ where
 <p>(Rustdoc for <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.BootInfoPtr.html"><code>BootInfoPtr</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_root_task/trait.Termination.html"><code>Termination</code></a>)</p>
 <p>The root task has no way to exit, so, to terminate cleanly, it must suspend its own thread.
 <code>sel4::init_thread::suspend_self()</code> does exactly this.</p>
-<h2 id="step-2a-exercise"><a class="header" href="#step-2a-exercise">Step 2.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e89a2ec99563254d8bae83b6c9a16a8211c92cac')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e89a2ec99563254d8bae83b6c9a16a8211c92cac"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2a-exercise"><a class="header" href="#step-2a-exercise">Step 2.A (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4dbf4135c9839937b93c052703b9b99d28c23dbc')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4dbf4135c9839937b93c052703b9b99d28c23dbc"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Cause a panic.</p>
-<h2 id="step-2b-exercise"><a class="header" href="#step-2b-exercise">Step 2.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d61f03fb649f00d302113dca205b0f06cde52e3f')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d61f03fb649f00d302113dca205b0f06cde52e3f"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2b-exercise"><a class="header" href="#step-2b-exercise">Step 2.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('562b4d9354a9b0bcc6d6e050c322eb5a8060d205')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/562b4d9354a9b0bcc6d6e050c322eb5a8060d205"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Catch the panic using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_root_task/panicking/fn.catch_unwind.html"><code>sel4_root_task::panicking::catch_unwind()</code></a>.</p>
-<h2 id="step-2c-exercise"><a class="header" href="#step-2c-exercise">Step 2.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7ca5167d439f7af4d8e8cb12eb778500cac03cb6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7ca5167d439f7af4d8e8cb12eb778500cac03cb6"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2c-exercise"><a class="header" href="#step-2c-exercise">Step 2.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('e3f0ab0a31b7a13cade9a1e01fa11817515004b2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/e3f0ab0a31b7a13cade9a1e01fa11817515004b2"> <i class="fa fa-github"></i> </a></a></h2>
 <p>You can set a custom panic hook with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_root_task/panicking/type.PanicHook.html"><code>sel4_root_task::panicking::PanicHook</code></a>.
 The default hook just prints the panic's <code>ExternalPanicInfo</code>.</p>
 <p><strong>Exercise:</strong> Set a custom panic hook.</p>
-<h2 id="step-2d-exercise"><a class="header" href="#step-2d-exercise">Step 2.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('1ce89eaa8fe6fb3cf6dc253acf1a219c13c53423')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/1ce89eaa8fe6fb3cf6dc253acf1a219c13c53423"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2d-exercise"><a class="header" href="#step-2d-exercise">Step 2.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('2cfb8ed22be4e0bfae3be8a0be93f8b9e9b360aa')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/2cfb8ed22be4e0bfae3be8a0be93f8b9e9b360aa"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong> Cause a stack overflow.</p>
-<h2 id="step-2e-exercise"><a class="header" href="#step-2e-exercise">Step 2.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7bf7cdf5bbaba81c8e3ed53c89fdc9bebd102971')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7bf7cdf5bbaba81c8e3ed53c89fdc9bebd102971"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2e-exercise"><a class="header" href="#step-2e-exercise">Step 2.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('705b5322ec3f3c096839152a53d74c636727230c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/705b5322ec3f3c096839152a53d74c636727230c"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The <code>#[root_task]</code> attribute macro accepts a named <code>stack_size</code> parameter, which can be any expression of type <code>usize</code> and whose value is interpreted as the root task's initial thread's stack size, in bytes.
 For example:</p>
 <pre><code class="language-rust ignore">#[root_task(stack_size = 13 * 37)]</code></pre>
 <p>The default stack size is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_root_task/constant.DEFAULT_STACK_SIZE.html"><code>sel4_root_task::DEFAULT_STACK_SIZE</code></a>.</p>
 <p><strong>Exercise:</strong> Adjust the root task's initial thread's stack size to prevent the stack overflow you just caused.</p>
-<h2 id="step-2f-exercise"><a class="header" href="#step-2f-exercise">Step 2.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('0c803b00eb4b90986d745185285423dab4fe4e25')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/0c803b00eb4b90986d745185285423dab4fe4e25"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2f-exercise"><a class="header" href="#step-2f-exercise">Step 2.F (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('4a1960ece73642b70e2d2335baa7bfc601d77e50')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/4a1960ece73642b70e2d2335baa7bfc601d77e50"> <i class="fa fa-github"></i> </a></a></h2>
 <p>By default, the <code>sel4_root_task</code> runtime does not include a heap.
 Any attempt to use the <code>alloc</code> crate will result in a link-time failure.</p>
 <p>The <code>#[root_task]</code> attribute macro accepts a <code>heap_size</code> parameter, which can be any expression of type <code>usize</code> and whose value is interpreted as the root task's heap size, in bytes.
@@ -249,12 +249,12 @@ For example:</p>
 <p>or</p>
 <pre><code class="language-rust ignore">#[root_task(stack_size = 13 * 37, heap_size = 0xf00d)]</code></pre>
 <p><strong>Exercise:</strong> Add a heap and use it.</p>
-<h2 id="step-2g"><a class="header" href="#step-2g">Step 2.G   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('37bb0f295dcdaea222218866a6b86f5e69dfc706')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/37bb0f295dcdaea222218866a6b86f5e69dfc706"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-2g"><a class="header" href="#step-2g">Step 2.G   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('dfb2eb287036d11359488dab9c5d0d8059775c51')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/dfb2eb287036d11359488dab9c5d0d8059775c51"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The <code>sel4_logging</code> crate builds on top of the <a href="https://docs.rs/log/latest/log/">log</a> crate to add utilities for initializing simple loggers in minimal environments, such as a seL4 root task.
 This step demonstrates one way to initialize a logger using this crate:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37bb0f295dcdaea222218866a6b86f5e69dfc706/workspaces/root-task/hello-world/src/main.rs#L17-L20">hello-world/src/main.rs:17:20 after 2.G</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/dfb2eb287036d11359488dab9c5d0d8059775c51/workspaces/root-task/hello-world/src/main.rs#L17-L20">hello-world/src/main.rs:17:20 after 2.G</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">static LOGGER: Logger = LoggerBuilder::const_default()
@@ -266,7 +266,7 @@ This step demonstrates one way to initialize a logger using this crate:</p>
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/37bb0f295dcdaea222218866a6b86f5e69dfc706/workspaces/root-task/hello-world/src/main.rs#L41">hello-world/src/main.rs:41 after 2.G</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/dfb2eb287036d11359488dab9c5d0d8059775c51/workspaces/root-task/hello-world/src/main.rs#L41">hello-world/src/main.rs:41 after 2.G</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">    LOGGER.set().unwrap();

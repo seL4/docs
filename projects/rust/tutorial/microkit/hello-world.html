@@ -183,7 +183,7 @@ make simulate
 <p>Here is its source:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/859cba5c1dbb2fa30fdd1cd67b0e107f23cd2baf/workspaces/microkit/hello-world/pds/hello/src/main.rs#L7-L22">hello-world/pds/hello/src/main.rs:7:22</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/529c0688bd74b1e0aa9c8ba69d019491d8e15595/workspaces/microkit/hello-world/pds/hello/src/main.rs#L7-L22">hello-world/pds/hello/src/main.rs:7:22</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">#![no_std]
@@ -205,29 +205,29 @@ impl Handler for HandlerImpl {
 </code></pre>
 </div>
 </div>
-<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/index.html"><code>sel4_microkit</code> crate</a> implements a Rust language runtime for Microkit protection domains, and implements the Microkit API.
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/index.html"><code>sel4_microkit</code> crate</a> implements a Rust language runtime for Microkit protection domains, and implements the Microkit API.
 It is written in pure Rust, and does not link against <a href="https://github.com/seL4/microkit/blob/main/libmicrokit"><code>libmicrokit</code></a>.</p>
 <h3 id="the-event-handler"><a class="header" href="#the-event-handler">The Event Handler</a></h3>
-<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/attr.protection_domain.html"><code>#[protection_domain]</code></a> attribute macro declares a function to be the protection domain's initialization function.
+<p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/attr.protection_domain.html"><code>#[protection_domain]</code></a> attribute macro declares a function to be the protection domain's initialization function.
 The entrypoint function must have a signature of the form:</p>
 <pre><code class="language-rust ignore">fn() -&gt; T
 where
     T: sel4_microkit::Handler</code></pre>
-<p>An implementation of the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/trait.Handler.html"><code>Handler</code></a> trait is used by the runtime as the event handler for the protection domain's main loop.
+<p>An implementation of the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/trait.Handler.html"><code>Handler</code></a> trait is used by the runtime as the event handler for the protection domain's main loop.
 The
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/trait.Handler.html#method.notified"><code>notified</code></a>,
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/trait.Handler.html#method.protected"><code>protected</code></a>,
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/trait.Handler.html#method.notified"><code>notified</code></a>,
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/trait.Handler.html#method.protected"><code>protected</code></a>,
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/trait.Handler.html#method.fault"><code>fault</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/trait.Handler.html#method.fault"><code>fault</code></a>
 methods correspond to their equivalents in <a href="https://github.com/seL4/microkit/blob/main/libmicrokit/include/microkit.h"><code>&lt;microkit.h&gt;</code></a>.</p>
 <p>The default implementations of these methods just panic.
 Our event handler, which we've called <code>HandlerImpl</code>, is the simplest possible <code>Handler</code> implementation.</p>
 <h3 id="language-runtime"><a class="header" href="#language-runtime">Language Runtime</a></h3>
-<p>As detailed in its rustdoc, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/attr.protection_domain.html"><code>#[protection_domain]</code></a> attribute macro takes the same parameters as <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_root_task/attr.root_task.html"><code>#[root_task]</code></a>.
-Furthermore, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/index.html"><code>sel4_microkit</code></a> crate supports all of the same Rust language runtime elements that we explored in <a href="../root-task/hello-world.html">Chapter 2</a>, including
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/panicking/fn.catch_unwind.html"><code>sel4_microkit::panicking::catch_unwind()</code></a>
+<p>As detailed in its rustdoc, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/attr.protection_domain.html"><code>#[protection_domain]</code></a> attribute macro takes the same parameters as <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4_root_task/attr.root_task.html"><code>#[root_task]</code></a>.
+Furthermore, the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/index.html"><code>sel4_microkit</code></a> crate supports all of the same Rust language runtime elements that we explored in <a href="../root-task/hello-world.html">Chapter 2</a>, including
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/panicking/fn.catch_unwind.html"><code>sel4_microkit::panicking::catch_unwind()</code></a>
 and
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/panicking/fn.set_hook.html"><code>sel4_microkit::panicking::set_hook()</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/panicking/fn.set_hook.html"><code>sel4_microkit::panicking::set_hook()</code></a>
 .</p>
 
                     </main>

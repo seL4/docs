@@ -184,7 +184,7 @@ make simulate
 <p>The example system description specifies two protection domains which share two memory regions:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/84f4fa3ebe351168ffb8de7975299cae34b60a17/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9fd705e89ab31c87e16f65aa9d8f3c2b867ed4d6/workspaces/microkit/shared-memory/shared-memory.system#L7-L28">shared-memory.system:7:28</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-xml">&lt;system&gt;
@@ -216,18 +216,18 @@ make simulate
 <p>The Microkit tool will inject memory region virtual addresses into protection domain images according to the <code>setvar_vaddr</code> attribute values.
 For example, the virtual address of the mapping of <code>region_a</code> into the <code>client</code> protection domain will be injected into the <code>microkit-shared-memory-client.elf</code> image at the location specified by then <code>region_a_vaddr</code> symbol.</p>
 <p>In the case of Rust, declaring a symbol that the Microkit tool can patch requires a bit more intentionality than in the C case.
-The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/macro.var.html"><code>sel4_microkit::var!</code></a> macro is provided to declare such symbols.</p>
-<p>The <code>var!</code> macro's <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/src/sel4_microkit_base/symbols.rs.html#55-67">implementation</a> is just a few lines of code.
+The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/macro.var.html"><code>sel4_microkit::var!</code></a> macro is provided to declare such symbols.</p>
+<p>The <code>var!</code> macro's <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/src/sel4_microkit_base/symbols.rs.html#55-67">implementation</a> is just a few lines of code.
 We want to express this symbol as a global variable that does not change at runtime, but which cannot be assumed to have the value we assign it at compile time, and which must not be optimized away.
 The near-trivial
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_immutable_cell/struct.ImmutableCell.html"><code>sel4_immutable_cell::ImmutableCell</code></a> type encapsulates this pattern.
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_immutable_cell/struct.ImmutableCell.html"><code>sel4_immutable_cell::ImmutableCell</code></a> type encapsulates this pattern.
 The <code>#[no_mangle]</code> attribute instructs the compiler to use the name of the variable as the name of the symbol.
 This is the default in C, but not Rust.
 We direct the compiler to put this symbol in the <code>.data</code> section with <code>#[link_section = ".data"]</code> to ensure that space is allocated for it in the ELF file itself, not just the program image it describes.</p>
 <p>So far, the example protection domains just store pointers to the shared memory regions in their handler state:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/84f4fa3ebe351168ffb8de7975299cae34b60a17/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9fd705e89ab31c87e16f65aa9d8f3c2b867ed4d6/workspaces/microkit/shared-memory/pds/client/src/main.rs#L17-L31">pds/client/src/main.rs:17:31</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
@@ -250,7 +250,7 @@ We direct the compiler to put this symbol in the <code>.data</code> section with
 </div>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/84f4fa3ebe351168ffb8de7975299cae34b60a17/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/9fd705e89ab31c87e16f65aa9d8f3c2b867ed4d6/workspaces/microkit/shared-memory/pds/server/src/main.rs#L17-L46">pds/server/src/main.rs:17:46</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">fn init() -&gt; impl Handler {
@@ -286,12 +286,12 @@ impl Handler for HandlerImpl {
 </code></pre>
 </div>
 </div>
-<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('10a74bec2c840dbbe762fe68fbe6a65f4f599600')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/10a74bec2c840dbbe762fe68fbe6a65f4f599600"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-11a"><a class="header" href="#step-11a">Step 11.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ea48b8e7ab987a33ced98a08b74e6153d0a9ece9')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ea48b8e7ab987a33ced98a08b74e6153d0a9ece9"> <i class="fa fa-github"></i> </a></a></h2>
 <p>Let's assign types to these shared memory regions.
 We can define our types in a crate that both the client and server can use:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
-<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/10a74bec2c840dbbe762fe68fbe6a65f4f599600/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
+<pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/ea48b8e7ab987a33ced98a08b74e6153d0a9ece9/workspaces/microkit/shared-memory/pds/common/src/lib.rs#L9-L18">pds/common/src/lib.rs:9:18</a></code></pre>
 </div>
 <div class="fragment-with-gh-link-fragment">
 <pre><code class="language-rust ignore">use zerocopy::{FromBytes, IntoBytes};
@@ -309,18 +309,18 @@ pub struct RegionB {
 </div>
 <p>Suppose <code>region_a: [u8; REGION_A_SIZE]</code> and <code>region_b: RegionB</code>.
 You could just turn the virtual addresses we get in our <code>var!</code> symbols into pointers and start interacting with the shared memory regions with <code>unsafe</code> <code>ptr::*</code> operations, but we can leverage the Rust type system to come up with a solution that only requires <code>unsafe</code> at initialization time.</p>
-<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('aaf0c14e0d3f229a5b5b5fc77c2fe9ce97155259')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/aaf0c14e0d3f229a5b5b5fc77c2fe9ce97155259"> <i class="fa fa-github"></i> </a></a></h2>
+<h2 id="step-11b"><a class="header" href="#step-11b">Step 11.B   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ef9055bca7f951b925fc251e922db1202b71391c')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ef9055bca7f951b925fc251e922db1202b71391c"> <i class="fa fa-github"></i> </a></a></h2>
 <p>The
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
 crate provides a way for you to declare a memory region's type and bounds, along with the memory access operations that can safely be used on it, so that you can access it without <code>unsafe</code> code.
 That initial declaration is, however, <code>unsafe</code>.</p>
 <p>The
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_shared_memory/index.html"><code>sel4-shared-memory</code></a>
 is a thin wrapper around the
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_shared_memory/index.html"><code>sel4_abstract_ptr</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_shared_memory/index.html"><code>sel4_abstract_ptr</code></a>
 crate, instantiating its abstract pointer types with memory access operations suitable for memory that is shared with another protection domain.</p>
 <p>The
-<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-microkit-unwind/doc/sel4_microkit/macro.memory_region_symbol.html"><code>sel4_microkit::memory_region_symbol!</code></a>
+<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/microkit/aarch64-sel4-unwind/doc/sel4_microkit/macro.memory_region_symbol.html"><code>sel4_microkit::memory_region_symbol!</code></a>
 macro is like the <code>sel4_microkit::var!</code> macro, except specialized for shared memory region virtual address symbols.
 For one, the underlying symbol is always of type <code>usize</code> and the macro returns a value of type <code>NonNull&lt;_&gt;</code>.
 <code>memory_region_symbol!</code> has a few additional features.
