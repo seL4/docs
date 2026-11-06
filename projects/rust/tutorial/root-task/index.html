@@ -177,10 +177,10 @@
 -->
 <h1 id="the-root-task"><a class="header" href="#the-root-task">The Root Task</a></h1>
 <p>After initializing itself, the seL4 kernel passes control to a userspace program called the root task, whose image is provided to the kernel at boot-time.
-The root task's <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.3">capability space</a> contains capabilities for all memory and boot-time objects.
+The root task's <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.3">capability space</a> contains capabilities for all memory and boot-time objects.
 That is to say, the root task spawns with the maximum privilege that a userspace program can have.
-The kernel provides the root task with a map of its initial capability space in the form of the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>.
-You can read more about the root task's environment in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.1">seL4 Reference Manual § 9.1</a>.</p>
+The kernel provides the root task with a map of its initial capability space in the form of the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.9.2">BootInfo frame</a>.
+You can read more about the root task's environment in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.9.1">seL4 Reference Manual § 9.1</a>.</p>
 <p>Part I of this tutorial will focus on writing from-scratch root tasks in Rust.
 Some of the code in Part I will be quite low-level, interacting with the language runtime, the linker, and some of the finer details related to bootstrapping an seL4-based system.
 The only seL4-related crates we will be using are the language runtime and bindings for the seL4 API.

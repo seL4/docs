@@ -237,8 +237,8 @@ and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>inter_thread_ep.recv()</code></a>
 .</p>
 <!-- , as described in
-[seL4 Reference Manual § 4.2 (Endpoints)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2). -->
-<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
+[seL4 Reference Manual § 4.2 (Endpoints)](https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.4.2). -->
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
 <code>send()</code> and <code>recv()</code> block until the two sides of the object rendezvous, at which point a message is passed from the sender to the receiver.
 This message may contain data and capabilities.</p>
 <p>Each thread is associated with a special page of memory called an IPC buffer.
@@ -308,7 +308,7 @@ and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
 to send a message with some data.</p>
 <h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f464e488a632c63a3951d1a1030ee8774cd08f6f')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f464e488a632c63a3951d1a1030ee8774cd08f6f"> <i class="fa fa-github"></i> </a></a></h2>
-<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
+<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
 <p><strong>Exercise:</strong> Change the</p>
 <pre><code>inter_thread_ep.send()
 </code></pre>

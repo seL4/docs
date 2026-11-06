@@ -180,19 +180,19 @@
 <pre><code>cd workspaces/root-task/kernel-objects
 make simulate
 </code></pre>
-<p>Userspace operates the seL4 kernel by creating, managing, and accessing kernel objects via references called <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.1"><em>capabilites</em></a>.
-See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.3">seL4 Reference Manual § 2.3 (Kernel Objects)</a> for an outline of the core types of kernel objects.</p>
+<p>Userspace operates the seL4 kernel by creating, managing, and accessing kernel objects via references called <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.1"><em>capabilites</em></a>.
+See <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.3">seL4 Reference Manual § 2.3 (Kernel Objects)</a> for an outline of the core types of kernel objects.</p>
 <p>In the context of seL4, a capability is a granular, unforgeable token of authority that references a kernel object and carries access rights that limit what the user of a cabability can do with the referenced kernel object.
 In general, a system call in seL4 amounts to refering to a cabability and an action on the kernel object the cabability points to.
 This is called <em>invoking a capability</em>.</p>
-<!-- As elaborated in [seL4 Reference Manual § 2.3 (Kernel Objects)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.3), the core kernel object types are:
+<!-- As elaborated in [seL4 Reference Manual § 2.3 (Kernel Objects)](https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.3), the core kernel object types are:
 - CNode: a table containing capabilites, used to construct so-called capability spaces, which are assigned to threads. When making a syscall, a thread refers to capabilities in its capability space to in turn refer to kernel objects.
 - Thread control block: the state associated with a thread's execution context. Used to control a thread.
 - Scheduling context (only relevent to certain kernel configurations, not covered here): represents access to a CPU, used for scheduling.
 - Endpoint: synchronous IPC endpoint, for message-passing between threads.
 - Reply object (only relevent to certain kernel configurations, not covered here): tracks scheduling information accross IPC endpoint calls.
 - Notification object: asynchronous signalling mechanism. -->
-<p>Just as each thread is associated with a virtual address space which the hardware uses to translate virtual memory addresses into locations in physical memory, each seL4 thread is also assocated with a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.3">capability space</a> (<em>CSpace</em>) which the kernel uses to translate so-called <em>capability pointers</em> (<em>CPointers</em> or <em>CPtrs</em>) into locations (slots) in the kernel's capability tables called <em>CNodes</em>.</p>
+<p>Just as each thread is associated with a virtual address space which the hardware uses to translate virtual memory addresses into locations in physical memory, each seL4 thread is also assocated with a <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.3">capability space</a> (<em>CSpace</em>) which the kernel uses to translate so-called <em>capability pointers</em> (<em>CPointers</em> or <em>CPtrs</em>) into locations (slots) in the kernel's capability tables called <em>CNodes</em>.</p>
 <p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.CPtr.html"><code>sel4::CPtr</code></a> type is a wrapper around a machine word.
 The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html"><code>sel4::Cap&lt;T&gt;</code></a> type wraps a <code>CPtr</code> associated with the current thread's CSpace, and thus points to a particular capability slot within the kernel.
 It is paramterized by a capability type <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/trait.CapType.html"><code>T: sel4::CapType</code></a>, representing the type of capability in that slot.
@@ -201,10 +201,10 @@ It is up to the crate user to ensure that <code>Cap</code>'s are valid and well-
 <p>Depending on the <code>Cap</code>'s type <code>T</code>, a <code>Cap</code> has a number of methods available, which correspond to invocations for that capability type.
 For example, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html#method.tcb_resume"><code>sel4::Cap::tcb_resume()</code></a> is available when <code>T</code> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap_type/struct.Tcb.html"><code>sel4::cap_type::Tcb</code></a>.</p>
 <h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7fe69d3504c2463d1b783dcf5cf75a5a020e38a2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7fe69d3504c2463d1b783dcf5cf75a5a020e38a2"> <i class="fa fa-github"></i> </a></a></h2>
-<p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
+<p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
 <em>Untyped memory</em> is the name of the object type for free memory.
 At boot time, the root task is granted untyped memory capabilities for all of the system's memory, except for the memory used for the kernel and the root task's own resources.</p>
-<p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
+<p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
 <pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7fe69d3504c2463d1b783dcf5cf75a5a020e38a2/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
@@ -259,29 +259,29 @@ Device memory can only be used for creating frames, whereas kernel memory has no
 </div>
 <p>The expression <code>bootinfo.untyped().index(ut_ix).cap()</code> indexes into <code>bootinfo.untyped(): SlotRegion&lt;Untyped&gt;</code> to retrieve a <code>Slot&lt;Untyped&gt;</code>, which can be turned into a <code>Cap&lt;Untyped&gt; (= cap::Untyped)</code>.</p>
 <h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('6b622a5fb0aba17a021bdc07c5c6817b18c51ca6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/6b622a5fb0aba17a021bdc07c5c6817b18c51ca6"> <i class="fa fa-github"></i> </a></a></h2>
-<p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">Notification</a> object.</p>
+<p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.5">Notification</a> object.</p>
 <p>We already know how to refer to a capability in the current thread's CSpace: a CPtr.
 However, some capability invocations allow us to refer to a capability slot in any CSpace whose root CNode is present in the current thread's CSpace.
 In these cases, we must provide:</p>
 <ul>
 <li>A CPtr, interpreted in the context of the current thread's CSpace, which points to the target CSpace's root CNode</li>
 <li>A CPtr, interpreted in the context of the target CSpace, which points to the target capability slot</li>
-<li>A depth, which is the number of bits of the second CPtr to interpret. This allows for the second CPtr to point to a CNode. Why this is necessary is outside the scope of this tutorial, but you can read about it in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (CSpace Addressing)</a>.</li>
+<li>A depth, which is the number of bits of the second CPtr to interpret. This allows for the second CPtr to point to a CNode. Why this is necessary is outside the scope of this tutorial, but you can read about it in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (CSpace Addressing)</a>.</li>
 </ul>
-<p>Consider, for example, the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.1.4"><code>seL4_CNode_Mint</code></a> capability invocation.
+<p>Consider, for example, the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.1.4"><code>seL4_CNode_Mint</code></a> capability invocation.
 <code>dest_*</code> and <code>src_*</code> are both capability slots addressed in this way.</p>
 <p>This more flexible method of capability slot addressing is encapsulated in the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.AbsoluteCPtr.html"><code>sel4::AbsoluteCPtr</code></a> type.</p>
-<p>The <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.9.1"><code>seL4_Untyped_Retype</code></a> method is used for allocating new objects from an untyped object.
+<p>The <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.9.1"><code>seL4_Untyped_Retype</code></a> method is used for allocating new objects from an untyped object.
 The <code>_service</code> parameter is the address of the untyped object as a normal CPtr.
 <code>root</code>, <code>node_index</code>, and <code>node_depth</code> address, in the more flexible way outlined above, the destination CNode into which capabilities for the new objects will be inserted.
 <code>node_offset</code> and <code>num_objects</code> specify a range of slots within the selected CNode for the new capabilites (and, simultaneously, the number of new objects that will be created).</p>
 <p><code>type</code> and <code>size_bits</code> specify the shape of the new object(s)
-Note that <code>size_bits</code> is relevant for only certain object types (see <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.2.4.2">seL4 Reference Manual § 2.4.2 (Summary of Object Sizes)</a> for more information).
+Note that <code>size_bits</code> is relevant for only certain object types (see <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.2.4.2">seL4 Reference Manual § 2.4.2 (Summary of Object Sizes)</a> for more information).
 This shape information is encapsulated in the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/enum.ObjectBlueprint.html"><code>sel4::ObjectBlueprint</code></a> type.</p>
 <p>Multiple kernel objects can be allocated from a single unytped object.
 For each untyped object, the kernel maintains a watermark which tracks how much of the untyped object has been used up for object allocation.
 <code>seL4_Untyped_Retype</code> aligns the watermark to the desired object type's size, and then advances it according to the object type size and number of objects.
-This process is detailed in the fourth paragraph of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.2.4.1">seL4 Reference Manual § 2.4.1 (Reusing Memory)</a>.</p>
+This process is detailed in the fourth paragraph of <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.2.4.1">seL4 Reference Manual § 2.4.1 (Reusing Memory)</a>.</p>
 <p>Let us now work towards calling <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Untyped.html#method.untyped_retype"><code>sel4::cap::Untyped::untyped_retype()</code></a> on our previously acquired <code>largest_kernel_ut</code>.
 We wish to allocate one notification object and insert a capability for it into a free slot in the current thread's own CSpace.
 More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread's own CSpace's root CNode, and an index into that CNode for a free slot.</p>
@@ -344,7 +344,7 @@ Interestingly, there are two ways to do this, but the current implementation is 
 <h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d83550f8d3c452e104c6690adae83fb6230974c0')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d83550f8d3c452e104c6690adae83fb6230974c0"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>sel4::cap::Notification::signal()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>sel4::cap::Notification::wait()</code></a> to signal and then wait on the notification.</p>
 <h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5b45d77c39fc0b86d9288ddb0b766d9c5cfd434d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5b45d77c39fc0b86d9288ddb0b766d9c5cfd434d"> <i class="fa fa-github"></i> </a></a></h2>
-<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
 When that capability is used to signal the notification, the notification's word-sized state is bit-wise <code>or</code>ed with the capability's badge.
 A wait call on the notification returns and clears the notification's state, provided that a signal call has occurred since the last wait call.</p>
 <p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.AbsoluteCPtr.html#method.mint"><code>sel4::AbsoluteCPtr::mint()</code></a> mints a new capability from an existing capability, updatings its access rights and badge.</p>

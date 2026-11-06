@@ -176,7 +176,7 @@
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <h1 id="modifying-the-address-space"><a class="header" href="#modifying-the-address-space">Modifying the Address Space</a></h1>
-<p>This chapter will focus on using the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.7">seL4 virtual address space (VSpace) APIs</a> to manipulate the root task's own address space.
+<p>This chapter will focus on using the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.7">seL4 virtual address space (VSpace) APIs</a> to manipulate the root task's own address space.
 Start by navigating to and running this chapter's example, which, so far, is empty.</p>
 <pre><code>cd workspaces/root-task/address-space
 make simulate
@@ -190,7 +190,7 @@ That said, all architectures share two object types:</p>
 <li>The top-level paging structure, called a VSpace, which is used to represent a virtual address space.
 In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/index.html"><code>sel4</code> crate</a>, the corresponding <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/trait.CapType.html"><code>sel4::CapType</code></a> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap_type/struct.VSpace.html"><code>sel4::cap_type::VSpace</code></a> (note that, for some architectures, this is a type alias).</li>
 <li>Frames of physical memory. The set of possible frames sizes is architecture-dependant.
-See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.7.1.3">seL4 Reference Manual § 7.1.3 (Page)</a>.
+See <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.7.1.3">seL4 Reference Manual § 7.1.3 (Page)</a>.
 In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/index.html"><code>sel4</code> crate</a>, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap_type/struct.VSpace.html"><code>sel4::cap_type::Granule</code></a> is an alias for the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/trait.CapType.html"><code>sel4::CapType</code></a> corresponding to the smallest frame object type.</li>
 </ul>
 <p>The root task is provided with capabilites for the objects comprising its own virtual address space.
@@ -268,7 +268,7 @@ Try to access that region, and observe a page fault:</p>
 </div>
 </div>
 <h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('2c6ca0e75da17bbb2b28e5f53135b395bc6f20f5')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/2c6ca0e75da17bbb2b28e5f53135b395bc6f20f5"> <i class="fa fa-github"></i> </a></a></h2>
-<p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
+<p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
 <p>Here are some hints for the parameters of <code>.frame_map()</code>:</p>
 <ul>
 <li><code>vspace</code>: A capability for the root task's VSpace can be expressed using <code>sel4::init_thread::slot::VSPACE.cap()</code>.</li>

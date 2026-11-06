@@ -188,7 +188,7 @@
 <li>Custom rustc <a href="https://docs.rust-embedded.org/embedonomicon/custom-target.html">target specifications</a> for seL4 userspace</li>
 </ul>
 <p><a href="root-task/">Part I</a> covers the Rust bindings for the seL4 API and the runtime for root tasks.
-Familiarity with the seL4 API isn't necessarily assumed or required, but this text doesn't introduce its elements in as much detail as the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf">seL4 Manual</a>.</p>
+Familiarity with the seL4 API isn't necessarily assumed or required, but this text doesn't introduce its elements in as much detail as the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf">seL4 Manual</a>.</p>
 <p><a href="microkit/">Part II</a> is much shorter, and covers the Rust language runtime for seL4 Microkit protection domains and implementation of the Microkit API.
 This part does assume that the reader is familiar with the basics of the Microkit framework and API, or is using a companion resource to learn about the Microkit in parallel.</p>
 <div style="break-before: page; page-break-before: always;"></div><!--
@@ -263,10 +263,10 @@ Rustdoc does not generate an index page, but you can navigate across crates with
 -->
 <h1 id="the-root-task"><a class="header" href="#the-root-task">The Root Task</a></h1>
 <p>After initializing itself, the seL4 kernel passes control to a userspace program called the root task, whose image is provided to the kernel at boot-time.
-The root task's <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.3">capability space</a> contains capabilities for all memory and boot-time objects.
+The root task's <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.3">capability space</a> contains capabilities for all memory and boot-time objects.
 That is to say, the root task spawns with the maximum privilege that a userspace program can have.
-The kernel provides the root task with a map of its initial capability space in the form of the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>.
-You can read more about the root task's environment in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.1">seL4 Reference Manual § 9.1</a>.</p>
+The kernel provides the root task with a map of its initial capability space in the form of the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.9.2">BootInfo frame</a>.
+You can read more about the root task's environment in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.9.1">seL4 Reference Manual § 9.1</a>.</p>
 <p>Part I of this tutorial will focus on writing from-scratch root tasks in Rust.
 Some of the code in Part I will be quite low-level, interacting with the language runtime, the linker, and some of the finer details related to bootstrapping an seL4-based system.
 The only seL4-related crates we will be using are the language runtime and bindings for the seL4 API.
@@ -388,19 +388,19 @@ This step demonstrates one way to initialize a logger using this crate:</p>
 <pre><code>cd workspaces/root-task/kernel-objects
 make simulate
 </code></pre>
-<p>Userspace operates the seL4 kernel by creating, managing, and accessing kernel objects via references called <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.1"><em>capabilites</em></a>.
-See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.3">seL4 Reference Manual § 2.3 (Kernel Objects)</a> for an outline of the core types of kernel objects.</p>
+<p>Userspace operates the seL4 kernel by creating, managing, and accessing kernel objects via references called <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.1"><em>capabilites</em></a>.
+See <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.3">seL4 Reference Manual § 2.3 (Kernel Objects)</a> for an outline of the core types of kernel objects.</p>
 <p>In the context of seL4, a capability is a granular, unforgeable token of authority that references a kernel object and carries access rights that limit what the user of a cabability can do with the referenced kernel object.
 In general, a system call in seL4 amounts to refering to a cabability and an action on the kernel object the cabability points to.
 This is called <em>invoking a capability</em>.</p>
-<!-- As elaborated in [seL4 Reference Manual § 2.3 (Kernel Objects)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.3), the core kernel object types are:
+<!-- As elaborated in [seL4 Reference Manual § 2.3 (Kernel Objects)](https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.3), the core kernel object types are:
 - CNode: a table containing capabilites, used to construct so-called capability spaces, which are assigned to threads. When making a syscall, a thread refers to capabilities in its capability space to in turn refer to kernel objects.
 - Thread control block: the state associated with a thread's execution context. Used to control a thread.
 - Scheduling context (only relevent to certain kernel configurations, not covered here): represents access to a CPU, used for scheduling.
 - Endpoint: synchronous IPC endpoint, for message-passing between threads.
 - Reply object (only relevent to certain kernel configurations, not covered here): tracks scheduling information accross IPC endpoint calls.
 - Notification object: asynchronous signalling mechanism. -->
-<p>Just as each thread is associated with a virtual address space which the hardware uses to translate virtual memory addresses into locations in physical memory, each seL4 thread is also assocated with a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.3">capability space</a> (<em>CSpace</em>) which the kernel uses to translate so-called <em>capability pointers</em> (<em>CPointers</em> or <em>CPtrs</em>) into locations (slots) in the kernel's capability tables called <em>CNodes</em>.</p>
+<p>Just as each thread is associated with a virtual address space which the hardware uses to translate virtual memory addresses into locations in physical memory, each seL4 thread is also assocated with a <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.3">capability space</a> (<em>CSpace</em>) which the kernel uses to translate so-called <em>capability pointers</em> (<em>CPointers</em> or <em>CPtrs</em>) into locations (slots) in the kernel's capability tables called <em>CNodes</em>.</p>
 <p>The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.CPtr.html"><code>sel4::CPtr</code></a> type is a wrapper around a machine word.
 The <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html"><code>sel4::Cap&lt;T&gt;</code></a> type wraps a <code>CPtr</code> associated with the current thread's CSpace, and thus points to a particular capability slot within the kernel.
 It is paramterized by a capability type <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/trait.CapType.html"><code>T: sel4::CapType</code></a>, representing the type of capability in that slot.
@@ -409,10 +409,10 @@ It is up to the crate user to ensure that <code>Cap</code>'s are valid and well-
 <p>Depending on the <code>Cap</code>'s type <code>T</code>, a <code>Cap</code> has a number of methods available, which correspond to invocations for that capability type.
 For example, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html#method.tcb_resume"><code>sel4::Cap::tcb_resume()</code></a> is available when <code>T</code> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap_type/struct.Tcb.html"><code>sel4::cap_type::Tcb</code></a>.</p>
 <h2 id="step-3a"><a class="header" href="#step-3a">Step 3.A   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('7fe69d3504c2463d1b783dcf5cf75a5a020e38a2')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/7fe69d3504c2463d1b783dcf5cf75a5a020e38a2"> <i class="fa fa-github"></i> </a></a></h2>
-<p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
+<p>As elaborated in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a>, userspace is responsible for managing the memory associated with kernel objects.
 <em>Untyped memory</em> is the name of the object type for free memory.
 At boot time, the root task is granted untyped memory capabilities for all of the system's memory, except for the memory used for the kernel and the root task's own resources.</p>
-<p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
+<p>Print the untyped memory described by the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.9.2">BootInfo frame</a>:</p>
 <div class="fragment-with-gh-link">
 <div class="fragment-with-gh-link-link">
 <pre><code><a href="https://github.com/seL4/seL4-rust-tutorial-code/blob/7fe69d3504c2463d1b783dcf5cf75a5a020e38a2/workspaces/root-task/kernel-objects/src/main.rs#L14-L22">workspaces/root-task/kernel-objects/src/main.rs:14:22 after 3.A</a></code></pre>
@@ -467,29 +467,29 @@ Device memory can only be used for creating frames, whereas kernel memory has no
 </div>
 <p>The expression <code>bootinfo.untyped().index(ut_ix).cap()</code> indexes into <code>bootinfo.untyped(): SlotRegion&lt;Untyped&gt;</code> to retrieve a <code>Slot&lt;Untyped&gt;</code>, which can be turned into a <code>Cap&lt;Untyped&gt; (= cap::Untyped)</code>.</p>
 <h2 id="step-3c"><a class="header" href="#step-3c">Step 3.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('6b622a5fb0aba17a021bdc07c5c6817b18c51ca6')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/6b622a5fb0aba17a021bdc07c5c6817b18c51ca6"> <i class="fa fa-github"></i> </a></a></h2>
-<p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">Notification</a> object.</p>
+<p>In this step, we will allocate a <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.5">Notification</a> object.</p>
 <p>We already know how to refer to a capability in the current thread's CSpace: a CPtr.
 However, some capability invocations allow us to refer to a capability slot in any CSpace whose root CNode is present in the current thread's CSpace.
 In these cases, we must provide:</p>
 <ul>
 <li>A CPtr, interpreted in the context of the current thread's CSpace, which points to the target CSpace's root CNode</li>
 <li>A CPtr, interpreted in the context of the target CSpace, which points to the target capability slot</li>
-<li>A depth, which is the number of bits of the second CPtr to interpret. This allows for the second CPtr to point to a CNode. Why this is necessary is outside the scope of this tutorial, but you can read about it in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (CSpace Addressing)</a>.</li>
+<li>A depth, which is the number of bits of the second CPtr to interpret. This allows for the second CPtr to point to a CNode. Why this is necessary is outside the scope of this tutorial, but you can read about it in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (CSpace Addressing)</a>.</li>
 </ul>
-<p>Consider, for example, the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.1.4"><code>seL4_CNode_Mint</code></a> capability invocation.
+<p>Consider, for example, the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.1.4"><code>seL4_CNode_Mint</code></a> capability invocation.
 <code>dest_*</code> and <code>src_*</code> are both capability slots addressed in this way.</p>
 <p>This more flexible method of capability slot addressing is encapsulated in the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.AbsoluteCPtr.html"><code>sel4::AbsoluteCPtr</code></a> type.</p>
-<p>The <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.9.1"><code>seL4_Untyped_Retype</code></a> method is used for allocating new objects from an untyped object.
+<p>The <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.9.1"><code>seL4_Untyped_Retype</code></a> method is used for allocating new objects from an untyped object.
 The <code>_service</code> parameter is the address of the untyped object as a normal CPtr.
 <code>root</code>, <code>node_index</code>, and <code>node_depth</code> address, in the more flexible way outlined above, the destination CNode into which capabilities for the new objects will be inserted.
 <code>node_offset</code> and <code>num_objects</code> specify a range of slots within the selected CNode for the new capabilites (and, simultaneously, the number of new objects that will be created).</p>
 <p><code>type</code> and <code>size_bits</code> specify the shape of the new object(s)
-Note that <code>size_bits</code> is relevant for only certain object types (see <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.2.4.2">seL4 Reference Manual § 2.4.2 (Summary of Object Sizes)</a> for more information).
+Note that <code>size_bits</code> is relevant for only certain object types (see <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.2.4.2">seL4 Reference Manual § 2.4.2 (Summary of Object Sizes)</a> for more information).
 This shape information is encapsulated in the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/enum.ObjectBlueprint.html"><code>sel4::ObjectBlueprint</code></a> type.</p>
 <p>Multiple kernel objects can be allocated from a single unytped object.
 For each untyped object, the kernel maintains a watermark which tracks how much of the untyped object has been used up for object allocation.
 <code>seL4_Untyped_Retype</code> aligns the watermark to the desired object type's size, and then advances it according to the object type size and number of objects.
-This process is detailed in the fourth paragraph of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.2.4.1">seL4 Reference Manual § 2.4.1 (Reusing Memory)</a>.</p>
+This process is detailed in the fourth paragraph of <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.2.4.1">seL4 Reference Manual § 2.4.1 (Reusing Memory)</a>.</p>
 <p>Let us now work towards calling <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Untyped.html#method.untyped_retype"><code>sel4::cap::Untyped::untyped_retype()</code></a> on our previously acquired <code>largest_kernel_ut</code>.
 We wish to allocate one notification object and insert a capability for it into a free slot in the current thread's own CSpace.
 More precisely, we need a <code>sel4::AbsoluteCPtr</code> for the current thread's own CSpace's root CNode, and an index into that CNode for a free slot.</p>
@@ -552,7 +552,7 @@ Interestingly, there are two ways to do this, but the current implementation is 
 <h2 id="step-3d-exercise"><a class="header" href="#step-3d-exercise">Step 3.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('d83550f8d3c452e104c6690adae83fb6230974c0')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/d83550f8d3c452e104c6690adae83fb6230974c0"> <i class="fa fa-github"></i> </a></a></h2>
 <p><strong>Exercise:</strong>: Use <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Notification.html#method.signal"><code>sel4::cap::Notification::signal()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Notification.html#method.wait"><code>sel4::cap::Notification::wait()</code></a> to signal and then wait on the notification.</p>
 <h2 id="step-3e-exercise"><a class="header" href="#step-3e-exercise">Step 3.E (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('5b45d77c39fc0b86d9288ddb0b766d9c5cfd434d')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/5b45d77c39fc0b86d9288ddb0b766d9c5cfd434d"> <i class="fa fa-github"></i> </a></a></h2>
-<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.5">seL4 Reference Manual § 5 (Notifications)</a>, a notification capability can contain a word-sized mask called a badge.
 When that capability is used to signal the notification, the notification's word-sized state is bit-wise <code>or</code>ed with the capability's badge.
 A wait call on the notification returns and clears the notification's state, provided that a signal call has occurred since the last wait call.</p>
 <p><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.AbsoluteCPtr.html#method.mint"><code>sel4::AbsoluteCPtr::mint()</code></a> mints a new capability from an existing capability, updatings its access rights and badge.</p>
@@ -579,7 +579,7 @@ A wait call on the notification returns and clears the notification's state, pro
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <h1 id="modifying-the-address-space"><a class="header" href="#modifying-the-address-space">Modifying the Address Space</a></h1>
-<p>This chapter will focus on using the <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.7">seL4 virtual address space (VSpace) APIs</a> to manipulate the root task's own address space.
+<p>This chapter will focus on using the <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.7">seL4 virtual address space (VSpace) APIs</a> to manipulate the root task's own address space.
 Start by navigating to and running this chapter's example, which, so far, is empty.</p>
 <pre><code>cd workspaces/root-task/address-space
 make simulate
@@ -593,7 +593,7 @@ That said, all architectures share two object types:</p>
 <li>The top-level paging structure, called a VSpace, which is used to represent a virtual address space.
 In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/index.html"><code>sel4</code> crate</a>, the corresponding <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/trait.CapType.html"><code>sel4::CapType</code></a> is <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap_type/struct.VSpace.html"><code>sel4::cap_type::VSpace</code></a> (note that, for some architectures, this is a type alias).</li>
 <li>Frames of physical memory. The set of possible frames sizes is architecture-dependant.
-See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.7.1.3">seL4 Reference Manual § 7.1.3 (Page)</a>.
+See <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.7.1.3">seL4 Reference Manual § 7.1.3 (Page)</a>.
 In the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/index.html"><code>sel4</code> crate</a>, <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap_type/struct.VSpace.html"><code>sel4::cap_type::Granule</code></a> is an alias for the <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/trait.CapType.html"><code>sel4::CapType</code></a> corresponding to the smallest frame object type.</li>
 </ul>
 <p>The root task is provided with capabilites for the objects comprising its own virtual address space.
@@ -671,7 +671,7 @@ Try to access that region, and observe a page fault:</p>
 </div>
 </div>
 <h2 id="step-4d-exercise"><a class="header" href="#step-4d-exercise">Step 4.D (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('2c6ca0e75da17bbb2b28e5f53135b395bc6f20f5')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/2c6ca0e75da17bbb2b28e5f53135b395bc6f20f5"> <i class="fa fa-github"></i> </a></a></h2>
-<p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
+<p><strong>Exercise:</strong> Map <code>new_frame</code> at <code>page_a_addr</code> using <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/struct.Cap.html#method.frame_map"><code>new_frame.frame_map()</code></a>, which corresponds to <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.7.6.6">seL4_ARM_Page_Map</a>.</p>
 <p>Here are some hints for the parameters of <code>.frame_map()</code>:</p>
 <ul>
 <li><code>vspace</code>: A capability for the root task's VSpace can be expressed using <code>sel4::init_thread::slot::VSPACE.cap()</code>.</li>
@@ -749,7 +749,7 @@ make simulate
 <h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8f2daaae07b7eea81937b35840e32f89c9832c72')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8f2daaae07b7eea81937b35840e32f89c9832c72"> <i class="fa fa-github"></i> </a></a></h2>
 <p><code>largest_kernel_ut</code> will be useful for allocating kernel objects whose backing physical addresses don't matter to us, but we must allocate the frame which contains the serial device's MMIO registers at a particular physicall address (<code>SERIAL_DEVICE_MMIO_PADDR</code>).
 Furthermore, the seL4 API distinguishes between <em>general purpose untyped</em> and <em>device untyped</em>. General purpose untyped is backed by normal memory, and can be used to create any type of object. Device untyped is not backed by normal memory, and can only be used to create frames.
-See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
+See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
 So, we must allocate the serial device MMIO frame from the particular initial device untyped that contains <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p><strong>Exercice:</strong> Identify this initial untyped in the <code>bootinfo</code>. We will need a corresponding <code>sel4::cap::Untyped</code> along with the untyped's physical address (or <code>sel4::UntypedDesc</code>, which contains the physical address) for the next step.</p>
 <h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ae6bf54e2557b723810a5ab3295ee84988777a9e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ae6bf54e2557b723810a5ab3295ee84988777a9e"> <i class="fa fa-github"></i> </a></a></h2>
@@ -852,11 +852,11 @@ Try printing "Hello, World!" to the serial console with something like:</p>
 A <code>IRQHandler</code> capability represents the authority to manage a particular interrupt.
 Specifically, an <code>IRQHandler</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqHandler.html"><code>sel4::cap::IrqHandler</code></a>) has the following methods:</p>
 <ul>
-<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_SetNotification()</code></a>:
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_SetNotification()</code></a>:
 Associate the interrupt with the given notification. Userspace can call <code>seL4_Wait()</code> or <code>seL4_Poll()</code> on this notification to receive the interrupt.</li>
-<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Clear()</code></a>:
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Clear()</code></a>:
 Disassociate the notification associated with this interrupts.</li>
-<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Ack()</code></a>:
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Ack()</code></a>:
 Tell the kernel to pass on acknowledgement of this interrupt to the interrupt controller.</li>
 </ul>
 <p>The Rust bindings for these methods are:</p>
@@ -865,7 +865,7 @@ Tell the kernel to pass on acknowledgement of this interrupt to the interrupt co
 <li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_clear"><code>sel4::cap::IrqHandler::irq_handler_clear()</code></a></li>
 <li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_ack"><code>sel4::cap::IrqHandler::irq_handler_ack()</code></a></li>
 </ul>
-<p>The root task spawns with a special <code>IRQControl</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html"><code>sel4::cap::IrqControl</code></a>) which can be used to create <code>IRQHandler</code> capabilities with <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.3.1"><code>seL4_IRQControl_Get()</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html#method.irq_control_get"><code>sel4::cap::IrqControl::irq_control_get()</code></a>).</p>
+<p>The root task spawns with a special <code>IRQControl</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html"><code>sel4::cap::IrqControl</code></a>) which can be used to create <code>IRQHandler</code> capabilities with <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.3.1"><code>seL4_IRQControl_Get()</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html#method.irq_control_get"><code>sel4::cap::IrqControl::irq_control_get()</code></a>).</p>
 <p>The intent behind this API is that a highly-privileged component will hold an <code>IRQControl</code> capability, which it will use to distribute more finely-grained <code>IRQHandler</code> capabilities to less privileged components for the interrupts they will manage.</p>
 <p>The root task can access its <code>IRQControl</code> capability with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/init_thread/slot/constant.IRQ_CONTROL.html"><code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code></a></p>
 <p><strong>Exercise:</strong> Use <code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code> to create a <code>sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code>.</p>
@@ -944,8 +944,8 @@ and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>inter_thread_ep.recv()</code></a>
 .</p>
 <!-- , as described in
-[seL4 Reference Manual § 4.2 (Endpoints)](https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2). -->
-<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
+[seL4 Reference Manual § 4.2 (Endpoints)](https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.4.2). -->
+<p>As described in <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#chapter.4">seL4 Reference Manual § 4 (Message Passing (IPC))</a> and <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.4.2">seL4 Reference Manual § 4.2 (Endpoints)</a>, a capability for an Endpoint object can be invoked with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.send"><code>send()</code></a> and <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.recv"><code>recv()</code></a>.
 <code>send()</code> and <code>recv()</code> block until the two sides of the object rendezvous, at which point a message is passed from the sender to the receiver.
 This message may contain data and capabilities.</p>
 <p>Each thread is associated with a special page of memory called an IPC buffer.
@@ -1015,7 +1015,7 @@ and
 <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/fn.with_ipc_buffer_mut.html"><code>sel4::with_ipc_buffer_mut</code></a>
 to send a message with some data.</p>
 <h2 id="step-6c-exercise"><a class="header" href="#step-6c-exercise">Step 6.C (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('f464e488a632c63a3951d1a1030ee8774cd08f6f')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/f464e488a632c63a3951d1a1030ee8774cd08f6f"> <i class="fa fa-github"></i> </a></a></h2>
-<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
+<p>See <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsection.4.2.4">seL4 Reference Manual § 4.2.4 (Calling and Replying)</a> for a description of the <code>seL4_Call</code> syscall (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.Endpoint.html#method.call"><code>Endpoint::call()</code></a> in Rust).</p>
 <p><strong>Exercise:</strong> Change the</p>
 <pre><code>inter_thread_ep.send()
 </code></pre>

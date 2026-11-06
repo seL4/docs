@@ -241,7 +241,7 @@ make simulate
 <h2 id="step-5b-exercise"><a class="header" href="#step-5b-exercise">Step 5.B (exercise)   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('8f2daaae07b7eea81937b35840e32f89c9832c72')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/8f2daaae07b7eea81937b35840e32f89c9832c72"> <i class="fa fa-github"></i> </a></a></h2>
 <p><code>largest_kernel_ut</code> will be useful for allocating kernel objects whose backing physical addresses don't matter to us, but we must allocate the frame which contains the serial device's MMIO registers at a particular physicall address (<code>SERIAL_DEVICE_MMIO_PADDR</code>).
 Furthermore, the seL4 API distinguishes between <em>general purpose untyped</em> and <em>device untyped</em>. General purpose untyped is backed by normal memory, and can be used to create any type of object. Device untyped is not backed by normal memory, and can only be used to create frames.
-See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
+See the last two paragraphs of <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#section.2.4">seL4 Reference Manual § 2.4 (Kernel Memory Allocation)</a> for more information.
 So, we must allocate the serial device MMIO frame from the particular initial device untyped that contains <code>SERIAL_DEVICE_MMIO_PADDR</code>.</p>
 <p><strong>Exercice:</strong> Identify this initial untyped in the <code>bootinfo</code>. We will need a corresponding <code>sel4::cap::Untyped</code> along with the untyped's physical address (or <code>sel4::UntypedDesc</code>, which contains the physical address) for the next step.</p>
 <h2 id="step-5c"><a class="header" href="#step-5c">Step 5.C   <span class="step-heading-clickable" onclick="navigator.clipboard.writeText('ae6bf54e2557b723810a5ab3295ee84988777a9e')"> <i class="fa fa-copy"></i> </span><a class="step-heading-clickable" href="https://github.com/seL4/seL4-rust-tutorial-code/commit/ae6bf54e2557b723810a5ab3295ee84988777a9e"> <i class="fa fa-github"></i> </a></a></h2>
@@ -344,11 +344,11 @@ Try printing "Hello, World!" to the serial console with something like:</p>
 A <code>IRQHandler</code> capability represents the authority to manage a particular interrupt.
 Specifically, an <code>IRQHandler</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqHandler.html"><code>sel4::cap::IrqHandler</code></a>) has the following methods:</p>
 <ul>
-<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_SetNotification()</code></a>:
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_SetNotification()</code></a>:
 Associate the interrupt with the given notification. Userspace can call <code>seL4_Wait()</code> or <code>seL4_Poll()</code> on this notification to receive the interrupt.</li>
-<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Clear()</code></a>:
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Clear()</code></a>:
 Disassociate the notification associated with this interrupts.</li>
-<li><a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Ack()</code></a>:
+<li><a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.4.3"><code>seL4_IRQHandler_Ack()</code></a>:
 Tell the kernel to pass on acknowledgement of this interrupt to the interrupt controller.</li>
 </ul>
 <p>The Rust bindings for these methods are:</p>
@@ -357,7 +357,7 @@ Tell the kernel to pass on acknowledgement of this interrupt to the interrupt co
 <li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_clear"><code>sel4::cap::IrqHandler::irq_handler_clear()</code></a></li>
 <li><a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqHandler.html#method.irq_handler_ack"><code>sel4::cap::IrqHandler::irq_handler_ack()</code></a></li>
 </ul>
-<p>The root task spawns with a special <code>IRQControl</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html"><code>sel4::cap::IrqControl</code></a>) which can be used to create <code>IRQHandler</code> capabilities with <a href="https://sel4.systems/Info/Docs/seL4-manual-13.0.0.pdf#subsubsection.10.3.3.1"><code>seL4_IRQControl_Get()</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html#method.irq_control_get"><code>sel4::cap::IrqControl::irq_control_get()</code></a>).</p>
+<p>The root task spawns with a special <code>IRQControl</code> capability (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html"><code>sel4::cap::IrqControl</code></a>) which can be used to create <code>IRQHandler</code> capabilities with <a href="https://sel4.systems/Info/Docs/seL4-manual-17.0.0.pdf#subsubsection.10.3.3.1"><code>seL4_IRQControl_Get()</code></a> (<a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/cap/type.IrqControl.html#method.irq_control_get"><code>sel4::cap::IrqControl::irq_control_get()</code></a>).</p>
 <p>The intent behind this API is that a highly-privileged component will hold an <code>IRQControl</code> capability, which it will use to distribute more finely-grained <code>IRQHandler</code> capabilities to less privileged components for the interrupts they will manage.</p>
 <p>The root task can access its <code>IRQControl</code> capability with <a href="https://sel4.github.io/seL4-rust-tutorial/rustdoc/root-task/aarch64-sel4-roottask-unwind/doc/sel4/init_thread/slot/constant.IRQ_CONTROL.html"><code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code></a></p>
 <p><strong>Exercise:</strong> Use <code>sel4::init_thread::slot::IRQ_CONTROL.cap()</code> to create a <code>sel4::cap::IrqHandler</code> for <code>SERIAL_DEVICE_IRQ</code>.</p>
