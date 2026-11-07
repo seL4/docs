@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Page last generated 2026-11-06 03:18:40 +0000 -->
+<!-- Page last generated 2026-11-07 03:16:21 +0000 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>seL4 API Reference | seL4 docs</title>
 
     <link rel="canonical" href="https://docs.sel4.systems/projects/sel4/api-doc.html">
-    <link href="/assets/css/sel4.css?v=1793935120" rel="stylesheet">
+    <link href="/assets/css/sel4.css?v=1794021381" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -5762,7 +5762,7 @@ and fault handler.</p>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>A mapping already exists in  <code class="language-plaintext highlighter-rouge">vspace</code>  at  <code class="language-plaintext highlighter-rouge">vaddr</code>.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">_service</code>  is a large page and a page table is already mapped at  <code class="language-plaintext highlighter-rouge">vaddr</code>. Or,  <code class="language-plaintext highlighter-rouge">_service</code>  is a huge page and a page directory is already mapped.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_FailedLookup</code></td>
@@ -5783,7 +5783,7 @@ and fault handler.</p>
   </tbody>
 </table>
 
-<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="language-plaintext highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error.</p>
+<p><strong>Description:</strong> Takes a VSpace capability, as an argument and installs a reference to the given <code class="language-plaintext highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. If the required paging structures are not present this operation will fail, returning a seL4_FailedLookup error. Overmapping is allowed: if a different page of the same size is already mapped at this address, this mapping is replaced. The capability of the replaced page is not updated.</p>
 
 <h4 id="unmap-4">Unmap</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_X86_Page_Unmap</code></p>
@@ -7604,11 +7604,11 @@ not aligned, to clean out the bytes between the requested and the cache line bou
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_DeleteFirst</code></td>
-      <td>A mapping already exists in  <code class="language-plaintext highlighter-rouge">vspace</code>  at  <code class="language-plaintext highlighter-rouge">vaddr</code>.</td>
+      <td>On AArch32, a page of a different size is already mapped at the same paging level in  <code class="language-plaintext highlighter-rouge">vspace</code>  at  <code class="language-plaintext highlighter-rouge">vaddr</code>. Or, on AArch32,  <code class="language-plaintext highlighter-rouge">_service</code>  is a section or super section and a page table is already mapped in  <code class="language-plaintext highlighter-rouge">vspace</code>  at  <code class="language-plaintext highlighter-rouge">vaddr</code>.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_FailedLookup</code></td>
-      <td>The  <code class="language-plaintext highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at  <code class="language-plaintext highlighter-rouge">vaddr</code>. Or,  <code class="language-plaintext highlighter-rouge">vspace</code>  is not assigned to an ASID pool.</td>
+      <td>The  <code class="language-plaintext highlighter-rouge">vspace</code>  does not have a paging structure at the required level mapped at  <code class="language-plaintext highlighter-rouge">vaddr</code>. Or,  <code class="language-plaintext highlighter-rouge">vspace</code>  is not assigned to an ASID pool. Or, on AArch64, a page of a different size or a page table is already mapped at  <code class="language-plaintext highlighter-rouge">vaddr</code>.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">seL4_IllegalOperation</code></td>
@@ -7625,7 +7625,7 @@ not aligned, to clean out the bytes between the requested and the cache line bou
   </tbody>
 </table>
 
-<p><strong>Description:</strong> Takes a VSpace capability as an argument and installs a reference to the given <code class="language-plaintext highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability.</p>
+<p><strong>Description:</strong> Takes a VSpace capability as an argument and installs a reference to the given <code class="language-plaintext highlighter-rouge">Page</code> in the lowest-level unmapped paging structure corresponding to the given address, or updates the mapping attributes if the page is already mapped at this address. The page must not already be mapped through this capability in a different VSpace or at a different address; the page may be mapped in multiple VSpaces by copying the capability. Overmapping is allowed: if a different page of the same size is already mapped at this address, this mapping is replaced. The capability of the replaced page is not updated.</p>
 
 <h4 id="unify-instruction">Unify Instruction</h4>
 <p><code class="language-plaintext highlighter-rouge">static inline int seL4_ARM_Page_Unify_Instruction</code></p>
