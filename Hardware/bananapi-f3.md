@@ -44,6 +44,8 @@ From U-Boot proper you can then load and start an seL4 image, see below for deta
 {% include risc-v.md %}
 
 ## Building seL4test
+> **_NOTE:_** Banana Pi BPI-F3 has 4 RAM configurations (2GB, 4GB, 8GB, or 16GB). If your version is less
+> than 16GB - you need to correct the memory region in `kernel/src/plat/spacemit-k1/overlay-bananapi-f3.dts`
 
 {% include sel4test.md %}
 
@@ -53,6 +55,8 @@ There are multiple ways to boot from U-Boot, documented below is booting via TFT
 a microSD card.
 
 ### Obtaining the DTB {#dtb}
+> **_NOTE:_** Banana Pi BPI-F3 has 4 RAM configurations (2GB, 4GB, 8GB, or 16GB). If your version is less
+> than 16GB - you need to correct the memory region in `sel4/tools/dts/bananapi-f3.dts`
 
 Since we are using a `uImage` for the Banana Pi BPI-F3, U-Boot requires a Device Tree Blob (DTB) alongside
 the binary image to boot.
